@@ -1,0 +1,10 @@
+/tags/1.4.59/ was created (r1341) as a straight copy from /trunk/@r1340
+/releases/1.4/ was created (r1384) as a straight copy from /tags/1.4.59/
+
+Changes in this branch:
+- Release notes for post 1.4.59. (r1386)
+- Updated Getting Started Guide screenshots to remove beta images. (r1387)
+- Fixed benchmarks to record source code correctly. (r1388)
+- Fixed benchmark viewer to tolerate null source code. (r1389)
+- Removed html message from *.cache.html script frames. (r1390)
+- GWTShellServlet's getResource() emulation now correctly finds resources on the servlet's module's public path. (r1391)

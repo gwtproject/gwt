@@ -8,3 +8,4 @@ Changes in this branch:
 - Fixed benchmark viewer to tolerate null source code. (r1389)
 - Removed html message from *.cache.html script frames. (r1390)
 - GWTShellServlet's getResource() emulation now correctly finds resources on the servlet's module's public path. (r1391)
+- Force HTTPRequestImpl to always send an empty string rather than a null. (r1393)

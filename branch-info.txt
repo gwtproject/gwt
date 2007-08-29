@@ -1,5 +1,8 @@
 /tags/1.4.59/ was created (r1341) as a straight copy from /trunk/@r1340
-/releases/1.4/ was created (r1384) as a straight copy from /tags/1.4.59/
+/releases/1.4/ was created (r1384) as a straight copy from /tags/1.4.59/@r1383
+/tags/1.4.60/ was created (r1400) as a straight copy from /releases/1.4/@r1399
+
+/releases/1.4/@r1384:r1400 was merged (r1401) into /trunk/
 
 Changes in this branch:
 - Release notes for post 1.4.59. (r1386)
@@ -9,3 +12,4 @@ Changes in this branch:
 - Removed html message from *.cache.html script frames. (r1390)
 - GWTShellServlet's getResource() emulation now correctly finds resources on the servlet's module's public path. (r1391)
 - Force HTTPRequestImpl to always send an empty string rather than a null. (r1393)
+- This file. :)

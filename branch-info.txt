@@ -1,10 +1,13 @@
 /tags/1.4.59/ was created (r1341) as a straight copy from /trunk/@r1340
 /releases/1.4/ was created (r1384) as a straight copy from /tags/1.4.59/@r1383
 /tags/1.4.60/ was created (r1400) as a straight copy from /releases/1.4/@r1399
+/tags/1.4.61/ was created (r2013) as a straight copy from /releases/1.4/@r1504
 
 /releases/1.4/@r1384:r1400 was merged (r1401) into /trunk/
 
-Changes in this branch:
+Changes in this branch (excluding this file itself):
+
+1.4.60:
 - Release notes for post 1.4.59. (r1386)
 - Updated Getting Started Guide screenshots to remove beta images. (r1387)
 - Fixed benchmarks to record source code correctly. (r1388)
@@ -12,4 +15,13 @@ Changes in this branch:
 - Removed html message from *.cache.html script frames. (r1390)
 - GWTShellServlet's getResource() emulation now correctly finds resources on the servlet's module's public path. (r1391)
 - Force HTTPRequestImpl to always send an empty string rather than a null. (r1393)
-- This file. :)
+
+1.4.61:
+- Fixed operation aborted on IE startup (r1492)
+- Fixed potential XSS vulnerability in the module not found error message (r1498)
+- Release notes for 1.4.61. (r1504)
+
+1.4.62:
+- Fix for test breaking due to Daylight Savings Time (r1868)
+- Fixes for FF3 support (r1887)
+- Windows hosted mode was crashing in SwtOleGlue.extractStringFromOleCharPtr() {r2014)

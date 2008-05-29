@@ -1,0 +1,10 @@
+Copies:
+/releases/1.5/ was created (r2940) as a straight copy from /trunk/@r2939
+/tags/1.5.0 was created (r2959) as a straight copy from /releases/1.5/@r2941
+
+Merges:
+/releases/1.5/@r2940:r2941 was merged (r2942)) into /trunk/
+
+Changes in this branch (excluding changes to this file itself):
+- Fixed random JUnit timeouts occurring on module transition. (r2941)
+- Updated some machine-translated strings in Showcase with better ones. (r2958)

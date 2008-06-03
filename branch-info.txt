@@ -3,8 +3,21 @@ Copies:
 /tags/1.5.0 was created (r2959) as a straight copy from /releases/1.5/@r2941
 
 Merges:
-/releases/1.5/@r2940:r2941 was merged (r2942)) into /trunk/
+/releases/1.5/@r2940:r2941 was merged (r2942) into /trunk/
+/releases/1.5/@r2941:r2990 was merged (r2992) into /trunk/
+/trunk@r2985:2986 was merged (r2991) into this branch
+-> The next revision to merge into trunk will be r2992.
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
 - Updated some machine-translated strings in Showcase with better ones. (r2958)
+- TreeItem background color in Mail (r2968)
+- Expanded height/width of themed repeating border images to make IE7 run faster (r2969)
+- Animation speedups to PopupPanel & TreeItem (r2970)
+- Memory leak fix related to selection script typo (r2981)
+- Added a .gwt-Frame CSS style to the Frame widget (r2982)
+- Fixed typos in gwt-module.dtd (r2987)
+- Fixed an RPC bug with Vector (r2988)
+- Fixed an RPC error that would cause some types to be erroneously considered non-serializable (r2989)
+- Fix for nullField replacements causing an unexpected type change / invalid AST by allowing JFieldRefs to override the type of the referenced field (r2991)
+- Change to Pruner such that volatile fields are rescued when assigned to (r2991)

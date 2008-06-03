@@ -6,7 +6,8 @@ Merges:
 /releases/1.5/@r2940:r2941 was merged (r2942) into /trunk/
 /releases/1.5/@r2941:r2990 was merged (r2992) into /trunk/
 /trunk@r2985:2986 was merged (r2991) into this branch
--> The next revision to merge into trunk will be r2992.
+/releases/1.5/@r2992:r2994 was merged (r2998) into /trunk/
+-> The next merge into trunk will be r2994:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -21,3 +22,9 @@ Changes in this branch (excluding changes to this file itself):
 - Fixed an RPC error that would cause some types to be erroneously considered non-serializable (r2989)
 - Fix for nullField replacements causing an unexpected type change / invalid AST by allowing JFieldRefs to override the type of the referenced field (r2991)
 - Change to Pruner such that volatile fields are rescued when assigned to (r2991)
+- Fixes ResourceOracleImpl in cases where nested logical packages exist (r2994)
+- Showcase  layout tweak (r2995)
+- Showcase code cleanup (r2996)
+- Theme changes to PushButton/ToggleButton to visually show clicking with a 1px down/right shift (r2997)
+- Showcase fast-path on example clicks instead of waiting on history to fire (r2997)
+- Showcase detects stylesheet loads now to avoid jiggle when changing styles (r2997)

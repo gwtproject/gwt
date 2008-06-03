@@ -28,3 +28,5 @@ Changes in this branch (excluding changes to this file itself):
 - Theme changes to PushButton/ToggleButton to visually show clicking with a 1px down/right shift (r2997)
 - Showcase fast-path on example clicks instead of waiting on history to fire (r2997)
 - Showcase detects stylesheet loads now to avoid jiggle when changing styles (r2997)
+- Adding missing 'final' modifier to GWTTestCase.tearDown() (r3000)
+

@@ -112,6 +112,18 @@ public class PopupTest extends GWTTestCase {
   }
 
   /**
+   * Issue 2481: Try to set the contents of the popup while the popup is
+   * attached. When we hide the popup, this should not leave the popup in an
+   * invalid attach state.
+   */
+  public void testSetWidgetWhileAttached() {
+    PopupPanel popup = createPopupPanel();
+    popup.show();
+    popup.setWidget(new Label("test"));
+    popup.hide();
+  }
+
+  /**
    * Create a new PopupPanel.
    */
   protected PopupPanel createPopupPanel() {

@@ -29,5 +29,6 @@ Changes in this branch (excluding changes to this file itself):
 - Showcase fast-path on example clicks instead of waiting on history to fire (r2997)
 - Showcase detects stylesheet loads now to avoid jiggle when changing styles (r2997)
 - Adding missing 'final' modifier to GWTTestCase.tearDown() (r3000)
-- DecoratedPopupPanel correctly attaches its inner DecoratorPanel and children (r3013)
-
+- DecoratedPopupPanel correctly attaches its inner DecoratorPanel and children (r3014)
+- Removed unused "propertieschanges.txt" file from Showcase sample (r3016)
+- Fixed a bug in PopupImplIE that could cause the hidden iframe behind a popup to be larger than the popup (r3017)

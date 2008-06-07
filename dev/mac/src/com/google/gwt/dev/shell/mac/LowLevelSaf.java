@@ -56,6 +56,9 @@ public class LowLevelSaf {
    * Stores a map from DispatchObject/DispatchMethod to the live underlying
    * jsval. This is used to both preserve identity for the same Java Object and
    * also prevent GC.
+   * 
+   * Access must be synchronized because WebKit can finalize on a foreign
+   * thread.
    */
   static Map<Object, Integer> sObjectToJsval = new IdentityHashMap<Object, Integer>();
 
@@ -280,38 +283,43 @@ public class LowLevelSaf {
 
   public static int wrapDispatchMethod(int jsContext, String name,
       DispatchMethod dispatch) {
-    Integer cached = LowLevelSaf.sObjectToJsval.get(dispatch);
-    if (cached != null) {
-      /*
-       * Add another lock to the cached jsval, since it will not have any.
-       */
-      LowLevelSaf.gcProtect(LowLevelSaf.getCurrentJsContext(), cached);
-      return cached;
-    } else {
-      final int[] rval = new int[1];
-      if (!wrapDispatchMethodImpl(jsContext, name, dispatch, rval)) {
-        throw new RuntimeException("Failed to wrap DispatchMethod.");
+    synchronized (sObjectToJsval) {
+      Integer cached = LowLevelSaf.sObjectToJsval.get(dispatch);
+      if (cached != null) {
+        /*
+         * Add another lock to the cached jsval, since it will not have any.
+         */
+        LowLevelSaf.gcProtect(LowLevelSaf.getCurrentJsContext(), cached);
+        return cached;
+      } else {
+        final int[] rval = new int[1];
+        if (!wrapDispatchMethodImpl(jsContext, name, dispatch, rval)) {
+          throw new RuntimeException("Failed to wrap DispatchMethod.");
+        }
+        LowLevelSaf.sObjectToJsval.put(dispatch, rval[0]);
+        return rval[0];
       }
-      LowLevelSaf.sObjectToJsval.put(dispatch, rval[0]);
-      return rval[0];
     }
   }
 
   public static int wrapDispatchObject(int jsContext, DispatchObject dispatcher) {
-    Integer cached = LowLevelSaf.sObjectToJsval.get(dispatcher);
-    if (cached != null) {
-      /*
-       * Add another lock to the cached jsval, since it will not have any.
-       */
-      LowLevelSaf.gcProtect(LowLevelSaf.getCurrentJsContext(), cached);
-      return cached;
-    } else {
-      final int[] rval = new int[1];
-      if (!wrapDispatchObjectImpl(jsContext, dispatcher, rval)) {
-        throw new RuntimeException("Failed to wrap DispatchObject.");
+    synchronized (sObjectToJsval) {
+
+      Integer cached = LowLevelSaf.sObjectToJsval.get(dispatcher);
+      if (cached != null) {
+        /*
+         * Add another lock to the cached jsval, since it will not have any.
+         */
+        LowLevelSaf.gcProtect(LowLevelSaf.getCurrentJsContext(), cached);
+        return cached;
+      } else {
+        final int[] rval = new int[1];
+        if (!wrapDispatchObjectImpl(jsContext, dispatcher, rval)) {
+          throw new RuntimeException("Failed to wrap DispatchObject.");
+        }
+        LowLevelSaf.sObjectToJsval.put(dispatcher, rval[0]);
+        return rval[0];
       }
-      LowLevelSaf.sObjectToJsval.put(dispatcher, rval[0]);
-      return rval[0];
     }
   }
 
@@ -332,7 +340,9 @@ public class LowLevelSaf {
    * Native code accessor to remove the mapping upon GC.
    */
   static void releaseObject(Object o) {
-    sObjectToJsval.remove(o);
+    synchronized (sObjectToJsval) {
+      sObjectToJsval.remove(o);
+    }
   }
 
   private static native boolean executeScriptWithInfoImpl(int jsContext,

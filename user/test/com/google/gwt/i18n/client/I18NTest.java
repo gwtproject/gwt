@@ -45,6 +45,7 @@ import java.util.Set;
  * Tests Internationalization. Assumes locale is set to piglatin_UK
  */
 public class I18NTest extends GWTTestCase {
+  @Override
   public String getModuleName() {
     return "com.google.gwt.i18n.I18NTest";
   }
@@ -430,6 +431,10 @@ public class I18NTest extends GWTTestCase {
 
   public void testConstantsWithLookup() {
     TestConstantsWithLookup l = (TestConstantsWithLookup) GWT.create(TestConstantsWithLookup.class);
+    Map<String, String> map = l.getMap("mapABCD");
+    assertEquals("valueA", map.get("keyA"));
+    map = l.getMap("mapDCBA");
+    assertEquals("valueD", map.get("keyD"));
     assertEquals(l.mapABCD(), l.getMap("mapABCD"));
     assertEquals(l.mapDCBA(), l.getMap("mapDCBA"));
     assertEquals(l.mapBACD(), l.getMap("mapBACD"));

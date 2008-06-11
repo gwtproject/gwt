@@ -189,6 +189,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     while (iter.hasNext()) {
       E obj = iter.next();
       k = coeff * k + (obj == null ? 0 : obj.hashCode());
+      k = ~~k;
     }
     return k;
   }

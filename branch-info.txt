@@ -47,3 +47,5 @@ Changes in this branch (excluding changes to this file itself):
 - RPC bugfix related to implementing a parameterized interface (r3044)
 - MenuBar animation exception when page refreshed while menus open (r3045)
 - Showcase textual tweaks (r3046)
+- Add TabPanel.setAnimationEnabled method (r3054)
+- New Showcase locale icon (r3055)

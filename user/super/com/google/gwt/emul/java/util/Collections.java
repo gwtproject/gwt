@@ -578,10 +578,9 @@ public class Collections {
         return list.size();
       }
 
-      public List<T> subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException(
-            "unmodifiableList: subList not permitted");
-      }
+      // TODO(jat): implement
+//      public List<T> subList(int fromIndex, int toIndex) {
+//      }
 
       public Object[] toArray() {
         return list.toArray();

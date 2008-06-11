@@ -267,7 +267,7 @@ public class JavaToJavaScriptCompiler {
         Util.addAll(allEntryPoints, all);
       }
       allEntryPoints.addAll(JProgram.CODEGEN_TYPES_SET);
-      allEntryPoints.add("com.google.gwt.lang.Stats");
+      allEntryPoints.addAll(JProgram.INDEX_TYPES_SET);
       allEntryPoints.add("java.lang.Object");
       allEntryPoints.add("java.lang.String");
       allEntryPoints.add("java.lang.Iterable");

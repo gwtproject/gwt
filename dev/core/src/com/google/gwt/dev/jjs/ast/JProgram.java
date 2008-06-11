@@ -50,15 +50,15 @@ public class JProgram extends JNode {
           "com.google.gwt.lang.Exceptions", "com.google.gwt.lang.LongLib",
           "com.google.gwt.lang.Stats",}));
 
-  static final Map<String, Set<String>> traceMethods = new HashMap<String, Set<String>>();
-
-  private static final Set<String> INDEX_TYPES_SET = new HashSet<String>(
+  public static final Set<String> INDEX_TYPES_SET = new HashSet<String>(
       Arrays.asList(new String[] {
           "java.lang.Object", "java.lang.String", "java.lang.Class",
           "java.lang.CharSequence", "java.lang.Comparable", "java.lang.Enum",
           "java.lang.Iterable", "java.util.Iterator",
           "com.google.gwt.core.client.GWT",
           "com.google.gwt.core.client.JavaScriptObject"}));
+
+  static final Map<String, Set<String>> traceMethods = new HashMap<String, Set<String>>();
 
   private static final int IS_ARRAY = 2;
 

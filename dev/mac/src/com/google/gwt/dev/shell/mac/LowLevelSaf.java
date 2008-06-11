@@ -17,6 +17,7 @@ package com.google.gwt.dev.shell.mac;
 
 import com.google.gwt.dev.shell.LowLevel;
 
+import java.io.File;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -130,7 +131,17 @@ public class LowLevelSaf {
       return;
     }
 
-    LowLevel.init();
+    try {
+      LowLevel.init();
+    } catch (UnsatisfiedLinkError e) {
+      // Try to provide some additional context
+      System.err.println("On Mac OS X, ensure that you have Safari 3 installed.");
+      if (!(new File("/System/Library/Frameworks/JavaScriptCore.framework")).isDirectory()) {
+        System.err.println("Could not find JavaScriptCore in the expected location.");
+      }
+      throw e;
+    }
+
     if (!initImpl(DispatchObject.class, DispatchMethod.class, LowLevelSaf.class)) {
       throw new RuntimeException("Unable to initialize LowLevelSaf");
     }

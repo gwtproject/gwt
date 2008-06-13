@@ -111,96 +111,6 @@ public class AutoboxTest extends GWTTestCase {
   }
 
   /**
-   * Tests operations like += and *= where the left-hand side is a boxed type.
-   */
-  public void testCompoundAssignmentsWithByte() {
-    {
-      Long long1 = 10L;
-      Long long2 = long1;
-      long2 += 5;
-      assertEquals(10L, (long) long1);
-      assertEquals(15L, (long) long2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 += 1;
-      assertEquals(10, (byte) b);
-      assertEquals(11, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 -= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(9, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 *= 2;
-      assertEquals(10, (byte) b);
-      assertEquals(20, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 /= 2;
-      assertEquals(10, (byte) b);
-      assertEquals(5, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 %= 3;
-      assertEquals(10, (byte) b);
-      assertEquals(1, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 <<= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(20, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 >>= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(5, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 >>>= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(5, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 &= 8;
-      assertEquals(10, (byte) b);
-      assertEquals(8, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 |= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(11, (byte) b2);
-    }
-    {
-      Byte b = (byte) 10;
-      Byte b2 = b;
-      b2 ^= 1;
-      assertEquals(10, (byte) b);
-      assertEquals(11, (byte) b2);
-    }
-  }
-
-  /**
    * Test ++, --, and compound assignments like += when the left-hand side is a
    * boxed Integer. Use assertNotSame to ensure that a new Integer is created
    * instead of modifying the original integer in place. (Issue 2446).
@@ -352,6 +262,96 @@ public class AutoboxTest extends GWTTestCase {
           Integer.valueOf(0x7FFFFFFF), operand);
       assertEquals("[>>>=] n == operand.value, ", 0x7FFFFFFF,
           operand.intValue());
+    }
+  }
+
+  /**
+   * Tests operations like += and *= where the left-hand side is a boxed Long.
+   */
+  public void testCompoundAssignmentsWithLong() {
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 += 5;
+      assertEquals(10L, (long) long1);
+      assertEquals(15L, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 += 1;
+      assertEquals(10, (long) long1);
+      assertEquals(11, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 -= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(9, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 *= 2;
+      assertEquals(10, (long) long1);
+      assertEquals(20, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 /= 2;
+      assertEquals(10, (long) long1);
+      assertEquals(5, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 %= 3;
+      assertEquals(10, (long) long1);
+      assertEquals(1, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 <<= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(20, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 >>= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(5, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 >>>= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(5, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 &= 8;
+      assertEquals(10, (long) long1);
+      assertEquals(8, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 |= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(11, (long) long2);
+    }
+    {
+      Long long1 = 10L;
+      Long long2 = long1;
+      long2 ^= 1;
+      assertEquals(10, (long) long1);
+      assertEquals(11, (long) long2);
     }
   }
 

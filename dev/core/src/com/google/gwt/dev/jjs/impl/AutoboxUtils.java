@@ -65,6 +65,10 @@ public class AutoboxUtils {
     return box(toBox, primitiveType, wrapperType);
   }
 
+  /**
+   * Return the box class for a given primitive.  Note that this can return <code>null</code>
+   * if the source program does not actually need the requested box type.
+   */
   public JClassType boxClassForPrimitive(JPrimitiveType prim) {
     return (JClassType) program.getFromTypeMap(prim.getWrapperTypeName());
   }
@@ -145,11 +149,13 @@ public class AutoboxUtils {
   private void computeUnboxMethods() {
     unboxMethods = new LinkedHashSet<JMethod>();
     for (JReferenceType boxType : boxTypes) {
-      for (JMethod method : boxType.methods) {
-        if (!method.isStatic() && method.params.isEmpty()
-            && method.getName().endsWith("Value")
-            && (method.getType() instanceof JPrimitiveType)) {
-          unboxMethods.add(method);
+      if (boxType != null) {
+        for (JMethod method : boxType.methods) {
+          if (!method.isStatic() && method.params.isEmpty()
+              && method.getName().endsWith("Value")
+              && (method.getType() instanceof JPrimitiveType)) {
+            unboxMethods.add(method);
+          }
         }
       }
     }

@@ -163,7 +163,7 @@ public class I18NTest extends GWTTestCase {
         m.invertedArguments("first", "second")); // from default locale
     assertEquals("PL: Don't tell me I can't {quote things in braces}", m.quotedText());
     assertEquals("PL: This {0} would be an argument if not quoted", m.quotedArg());
-    assertEquals("PL: Total is $11,305.01", m.currencyFormat(11305.01));
+    assertEquals("PL: Total is US$11,305.01", m.currencyFormat(11305.01));
     assertEquals("PL: Default number format is 1,017.1", m.defaultNumberFormat(1017.1));
     assertEquals("PL: It is 12:01 PM on Saturday, December 1, 2007",
         m.getTimeDate(new Date(107, 11, 1, 12, 1, 2)));

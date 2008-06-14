@@ -8,7 +8,8 @@ Merges:
 /trunk@r2985:2986 was merged (r2991) into this branch
 /releases/1.5/@r2992:r2994 was merged (r2998) into /trunk/
 /releases/1.5/@r2994:r3048 was merged (r3050) into /trunk/
--> The next merge into trunk will be r3048:????
+/releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
+-> The next merge into trunk will be r3078:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -47,5 +48,28 @@ Changes in this branch (excluding changes to this file itself):
 - RPC bugfix related to implementing a parameterized interface (r3044)
 - MenuBar animation exception when page refreshed while menus open (r3045)
 - Showcase textual tweaks (r3046)
+- Reverted a change that was not meant to be commited with (r3047)
+- Provide better error messages when we can't initialize the native parts of hosted mode (r3048)
+- HashMap was failing to add keys that were not passing a JS hashCode == parseInt(hashCode) test (r3049)
+- Updating releases/1.5/branch-info.txt (3051)
+- Fixes potential compiler errors by making sure all indexed types are compiled (r3052)
 - Add TabPanel.setAnimationEnabled method (r3054)
 - New Showcase locale icon (r3055)
+- DeckPanel now calls setVisible(true) on the Widget that is currently being displayed (r3056)
+- JsToStringVisitor could fail to emit a required semi in obfuscated mode on an if-else chain ending with an empty else (r3058)
+- Remove unimplemented subList methods so failures will be at compile time rather than runtime, clean up other UnsupportedOperationException messages (3061)
+- our internal Object.typeMarker and Object.typeId fields prevented users from shadowing them correctly in web mode with the same identifiers in subclasses (r3062)
+- Fixes issue #1678 by passing the appropriate sender and insisting on sender type being FormPanel (r3063)
+- Removed spurious System.err print from test code (r3064)
+- Fix issue 2496 - the generator needed to be updated to properly support ConstantsWithLookup with generic types (r3065)
+- Use of EnumSet in some cases could cause a compiler ICE (r3067)
+- Removed redundant styles from css template (r3068)
+- When inserting a call to nullMethod(), the type of the call was previously always set to the null type (r3069)
+- Rearranged the UIObject.ensureDebugID methods so users can override the default implementation using a deferred binding (r3070)
+- Fixes a NPE in JSORestrictionsChecker that could be triggered by attempting to validate a unit with errors (3072)
+- Autoboxing was not handled correctly when a box type was used with ++, --, or a compound assignment such as += (r3073)
+- "gwt.nowarn.metadata" was doing the opposite of what it should. (r3074)
+- Add missing JRE pieces, fix long sort bug, add test for long sort (r3075)
+- Wrapper types that are not used in a program are not present, so don't rely on being able to look up all wrapper types (r3076)
+- Generate currency data at compile time rather than runtime (r3077)
+- Some Java compilers allow "aByte+= 1" where aByte is of type Byte.  Others do not. (r3078)

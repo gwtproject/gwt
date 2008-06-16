@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,6 +21,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 
 /**
  * Tests standard DOM operations in the {@link DOM} class.
@@ -46,6 +47,7 @@ public class DOMTest extends GWTTestCase {
     return (elem.childNodes.length);
   }-*/;
 
+  @Override
   public String getModuleName() {
     return "com.google.gwt.user.UserTest";
   }
@@ -130,6 +132,36 @@ public class DOMTest extends GWTTestCase {
   }
 
   /**
+   * Tests {@link DOM#getAbsoluteTop(Element)} and
+   * {@link DOM#getAbsoluteLeft(Element)} for consistency when the parent
+   * element has a border.
+   * 
+   */
+  public void testGetAbsolutePositionWithPixelBorders() {
+    final Element outer = DOM.createDiv();
+    final Element inner = DOM.createDiv();
+
+    outer.getStyle().setProperty("position", "relative");
+    outer.getStyle().setProperty("width", "200px");
+    outer.getStyle().setProperty("height", "200px");
+    outer.getStyle().setProperty("border", "2px solid blue");
+
+    inner.getStyle().setProperty("position", "absolute");
+    inner.getStyle().setProperty("top", "30px");
+    inner.getStyle().setProperty("left", "40px");
+    inner.setInnerText("inner");
+
+    outer.appendChild(inner);
+    RootPanel.getBodyElement().appendChild(outer);
+
+    // Clear the margin so that absolute position is predictable.
+    Window.setMargin("0px");
+
+    assertEquals(32, inner.getAbsoluteTop());
+    assertEquals(42, inner.getAbsoluteLeft());
+  }
+
+  /**
    * Tests the ability to do a parent-ward walk in the DOM.
    */
   public void testGetParent() {
@@ -167,18 +199,18 @@ public class DOMTest extends GWTTestCase {
   public void testIsOrHasChild() {
     Element div = DOM.createDiv();
     Element childDiv = DOM.createDiv();
-    
+
     assertFalse(DOM.isOrHasChild(div, childDiv));
     assertTrue(DOM.isOrHasChild(div, div));
-    
+
     DOM.appendChild(div, childDiv);
     assertTrue(DOM.isOrHasChild(div, childDiv));
     assertFalse(DOM.isOrHasChild(childDiv, div));
-    
+
     DOM.appendChild(RootPanel.getBodyElement(), div);
     assertTrue(DOM.isOrHasChild(div, childDiv));
     assertTrue(DOM.isOrHasChild(div, div));
-    assertFalse(DOM.isOrHasChild(childDiv, div));    
+    assertFalse(DOM.isOrHasChild(childDiv, div));
   }
 
   /**
@@ -234,6 +266,7 @@ public class DOMTest extends GWTTestCase {
     assertEndsWith("b0.gif", DOM.getImgSrc(image));
     delayTestFinish(2000);
     new Timer() {
+      @Override
       public void run() {
         assertEndsWith("b0.gif", DOM.getElementProperty(image, "src"));
         finishTest();
@@ -273,6 +306,7 @@ public class DOMTest extends GWTTestCase {
     assertEndsWith("a1.gif", DOM.getImgSrc(images[2]));
     delayTestFinish(2000);
     new Timer() {
+      @Override
       public void run() {
         assertEndsWith("a1.gif", DOM.getElementProperty(images[0], "src"));
         assertEndsWith("b1.gif", DOM.getElementProperty(images[1], "src"));
@@ -314,6 +348,7 @@ public class DOMTest extends GWTTestCase {
     assertEndsWith("a2.gif", DOM.getImgSrc(images[2]));
     delayTestFinish(2000);
     new Timer() {
+      @Override
       public void run() {
         assertEndsWith("b2.gif", DOM.getElementProperty(images[0], "src"));
         assertEndsWith("a2.gif", DOM.getElementProperty(images[1], "src"));
@@ -358,6 +393,7 @@ public class DOMTest extends GWTTestCase {
     assertEndsWith("b3.gif", DOM.getImgSrc(images[3]));
     delayTestFinish(2000);
     new Timer() {
+      @Override
       public void run() {
         assertEndsWith("b3.gif", DOM.getElementProperty(images[0], "src"));
         assertEndsWith("a3.gif", DOM.getElementProperty(images[1], "src"));
@@ -407,6 +443,7 @@ public class DOMTest extends GWTTestCase {
     assertEndsWith("b4.gif", DOM.getImgSrc(images[4]));
     delayTestFinish(2000);
     new Timer() {
+      @Override
       public void run() {
         assertEndsWith("a4.gif", DOM.getElementProperty(images[0], "src"));
         assertEndsWith("a4.gif", DOM.getElementProperty(images[1], "src"));

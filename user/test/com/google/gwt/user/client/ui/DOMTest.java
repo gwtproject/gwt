@@ -21,7 +21,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 
 /**
  * Tests standard DOM operations in the {@link DOM} class.
@@ -144,7 +143,6 @@ public class DOMTest extends GWTTestCase {
     outer.getStyle().setProperty("position", "relative");
     outer.getStyle().setProperty("width", "200px");
     outer.getStyle().setProperty("height", "200px");
-    outer.getStyle().setProperty("border", "2px solid blue");
 
     inner.getStyle().setProperty("position", "absolute");
     inner.getStyle().setProperty("top", "30px");
@@ -154,11 +152,14 @@ public class DOMTest extends GWTTestCase {
     outer.appendChild(inner);
     RootPanel.getBodyElement().appendChild(outer);
 
-    // Clear the margin so that absolute position is predictable.
-    Window.setMargin("0px");
+    // Get the position without a border
+    int absTop = inner.getAbsoluteTop();
+    int absLeft = inner.getAbsoluteLeft();
 
-    assertEquals(32, inner.getAbsoluteTop());
-    assertEquals(42, inner.getAbsoluteLeft());
+    // Get the position with a border
+    outer.getStyle().setProperty("border", "2px solid blue");
+    assertEquals(2, inner.getAbsoluteTop() - absTop);
+    assertEquals(2, inner.getAbsoluteLeft() - absLeft);
   }
 
   /**

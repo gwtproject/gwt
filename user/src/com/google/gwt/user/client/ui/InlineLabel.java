@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,60 +16,64 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
 /**
- * A text box that visually masks its input to prevent eavesdropping.
+ * A widget that contains arbitrary text, <i>not</i> interpreted as HTML.
  * 
- * <p>
- * <img class='gallery' src='PasswordTextBox.png'/>
- * </p>
+ * This widget uses a &lt;span&gt; element, causing it to be displayed with
+ * inline layout.
  * 
  * <h3>CSS Style Rules</h3>
  * <ul class='css'>
- * <li>.gwt-PasswordTextBox { primary style }</li>
- * <li>.gwt-PasswordTextBox-readonly { dependent style set when the password text box is read-only }</li>
+ * <li>.gwt-InlineLabel { }</li>
  * </ul>
- * 
- * <p>
- * <h3>Example</h3> {@example com.google.gwt.examples.TextBoxExample}
- * </p>
  */
-public class PasswordTextBox extends TextBox {
+public class InlineLabel extends Label {
 
   /**
-   * Creates a PasswordTextBox widget that wraps an existing &lt;input
-   * type='password'&gt; element.
+   * Creates a InlineLabel widget that wraps an existing &lt;div&gt; or
+   * &lt;span&gt; element.
    * 
    * This element must already be attached to the document.
    * 
    * @param element the element to be wrapped
    */
-  public static PasswordTextBox wrap(com.google.gwt.dom.client.Element element) {
+  public static InlineLabel wrap(com.google.gwt.dom.client.Element element) {
     // Assert that the element is of the correct type and is attached.
-    assert InputElement.as(element).getType().equalsIgnoreCase("password");
+    assert element.getTagName().equalsIgnoreCase("div")
+        || element.getTagName().equalsIgnoreCase("span");
     assert Document.get().getBody().isOrHasChild(element);
 
-    PasswordTextBox textBox = new PasswordTextBox((Element) element);
+    InlineLabel label = new InlineLabel((Element) element);
 
     // Mark it attached and remember it for cleanup.
-    textBox.onAttach();
-    RootPanel.detachOnWindowClose(textBox);
+    label.onAttach();
+    RootPanel.detachOnWindowClose(label);
 
-    return textBox;
+    return label;
   }
 
   /**
-   * Creates an empty password text box.
+   * Creates an empty label.
    */
-  public PasswordTextBox() {
-    super(DOM.createInputPassword());
-    setStyleName("gwt-PasswordTextBox");
+  public InlineLabel() {
+    super(DOM.createSpan());
+    setStyleName("gwt-InlineLabel");
   }
 
-  private PasswordTextBox(Element element) {
+  /**
+   * Creates a label with the specified text.
+   * 
+   * @param text the new label's text
+   */
+  public InlineLabel(String text) {
+    this();
+    setText(text);
+  }
+
+  private InlineLabel(Element element) {
     super(element);
   }
 }

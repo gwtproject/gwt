@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,7 +26,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * from, and can be accessed in JavaScript code as expected. This is typically
  * done by calling methods in the {@link com.google.gwt.user.client.DOM} class.
  */
-public final class Event extends JavaScriptObject {
+public class Event extends JavaScriptObject {
 
   /**
    * The left mouse button (used in {@link DOM#eventGetButton(Event)}).
@@ -133,6 +133,13 @@ public final class Event extends JavaScriptObject {
    * Fired when a scrollable element's scroll offset changes.
    */
   public static final int ONSCROLL = 0x04000;
+
+  /**
+   * Fired when the user requests an element's context menu (usually by right-clicking).
+   * 
+   * Note that not all browsers will fire this event (notably Opera, as of 9.5).
+   */
+  public static final int ONCONTEXTMENU = 0x40000;
 
   /**
    * A bit-mask covering both focus events (focus and blur).

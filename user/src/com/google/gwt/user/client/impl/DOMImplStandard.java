@@ -256,6 +256,8 @@ abstract class DOMImplStandard extends DOMImpl {
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     if (chMask & 0x20000) elem.onmousewheel  = (bits & 0x20000) ? 
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x40000) elem.oncontextmenu = (bits & 0x40000) ? 
+        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
   }-*/;
 
   private native void releaseCaptureImpl(Element elem) /*-{

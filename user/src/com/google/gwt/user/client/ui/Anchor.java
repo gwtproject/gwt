@@ -71,7 +71,7 @@ public class Anchor extends Widget implements SourcesClickEvents,
   }
 
   /**
-   * Creates an anchor with its text and target history token specified.
+   * Creates an anchor with its text and href (target URL) specified.
    * 
    * @param text the anchor's text
    * @param asHTML <code>true</code> to treat the specified text as html
@@ -88,7 +88,7 @@ public class Anchor extends Widget implements SourcesClickEvents,
   }
 
   /**
-   * Creates an anchor with its text and target history token specified.
+   * Creates an anchor with its text and href (target URL) specified.
    * 
    * @param text the anchor's text
    * @param href the url to which it will link

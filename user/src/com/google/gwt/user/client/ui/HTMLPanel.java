@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
@@ -92,8 +91,9 @@ public class HTMLPanel extends ComplexPanel {
   /**
    * Finds an {@link Element element} within this panel by its id.
    * 
-   * This method uses {@link Document#getElementById(String)}, so the id must
-   * still be unique within the document.
+   * This method uses
+   * {@link com.google.gwt.dom.client.Document#getElementById(String)}, so the
+   * id must still be unique within the document.
    * 
    * @param id the id of the element to be found
    * @return the element with the given id, or <code>null</code> if none is found

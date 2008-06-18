@@ -25,13 +25,39 @@ class DOMImplSafari extends DOMImplStandard {
   @Override
   public native int eventGetClientX(Event evt) /*-{
     // In Safari2: clientX is wrong and pageX is returned instead.
-    return evt.pageX - $doc.body.scrollLeft || -1;
+    if (evt.pageX) {
+      // $wnd.devicePixelRatio identifies Safari 3 from Safari 2
+      if ($wnd.devicePixelRatio) {
+        return evt.pageX - $doc.body.scrollLeft; 
+      } else {
+        // Subtract the margin and border of the HTML element in Safari 2 
+        // TODO: Remove this code when we drop Safari 2 support
+        var style = document.defaultView.getComputedStyle($doc.getElementsByTagName('html')[0], '');
+        return evt.pageX - $doc.body.scrollLeft
+            - parseInt(style.getPropertyValue('margin-left'))
+            - parseInt(style.getPropertyValue('border-left-width')); 
+      }
+    }
+    return -1;
   }-*/;
 
   @Override
   public native int eventGetClientY(Event evt) /*-{
     // In Safari2: clientY is wrong and pageY is returned instead.
-    return evt.pageY - $doc.body.scrollTop || -1;
+    if (evt.pageY) {
+      // $wnd.devicePixelRatio identifies Safari 3 from Safari 2
+      if ($wnd.devicePixelRatio) {
+        return evt.pageY - $doc.body.scrollTop; 
+      } else {
+        // Subtract the margin and border of the HTML element in Safari 2 
+        // TODO: Remove this code when we drop Safari 2 support
+        var style = document.defaultView.getComputedStyle($doc.getElementsByTagName('html')[0], '');
+        return evt.pageY - $doc.body.scrollTop
+            - parseInt(style.getPropertyValue('margin-top'))
+            - parseInt(style.getPropertyValue('border-top-width')); 
+      }
+    }
+    return -1;
   }-*/;
 
   @Override

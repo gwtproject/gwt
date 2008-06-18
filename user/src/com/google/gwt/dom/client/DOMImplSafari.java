@@ -45,7 +45,7 @@ class DOMImplSafari extends DOMImplStandard {
       // the borders of the parent manually.
       var parent = elem.offsetParent;
       if (parent && $wnd.devicePixelRatio) {
-        left += parseInt(getComputedStyle(parent, '').getPropertyValue('border-left-width'));
+        left += parseInt($doc.defaultView.getComputedStyle(parent, '').getPropertyValue('border-left-width'));
       }
 
       // Safari bug: a top-level absolutely positioned element includes the
@@ -85,7 +85,7 @@ class DOMImplSafari extends DOMImplStandard {
       // borders of the parent manually.
       var parent = elem.offsetParent;
       if (parent && $wnd.devicePixelRatio) {
-        top += parseInt(getComputedStyle(parent, '').getPropertyValue('border-top-width'));
+        top += parseInt($doc.defaultView.getComputedStyle(parent, '').getPropertyValue('border-top-width'));
       }
 
       // Safari bug: a top-level absolutely positioned element includes the

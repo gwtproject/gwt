@@ -118,13 +118,15 @@ public class TabBarTest extends GWTTestCase {
     bar.setTabText(1, "w00t");
     assertEquals("w00t", bar.getTabHTML(1));
 
+    // toLowerCase() is necessary in these assertions because IE capitalizes
+    // HTML tags read from innerHTML.
     bar.setTabHTML(1, "<i>w00t!</i>");
-    assertEquals("<i>w00t!</i>", bar.getTabHTML(1));
+    assertEquals("<i>w00t!</i>", bar.getTabHTML(1).toLowerCase());
 
     // Set the text knowing that we currently have an HTML.  This should replace
     // the HTML with a Label.
     bar.setTabText(1, "<b>w00t</b>");
-    assertEquals("<b>w00t</b>", bar.getTabHTML(1));
+    assertEquals("<b>w00t</b>", bar.getTabHTML(1).toLowerCase());
 
     // Set the text knowing that we currently have a Grid.  This should replace
     // the Grid with a Label.

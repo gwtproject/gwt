@@ -25,17 +25,17 @@ class DOMImplMozilla extends DOMImplStandard {
 
   @Override
   public native int eventGetClientX(Event evt) /*-{
-    return (evt.clientX) ? evt.clientX - $doc.getBoxObjectFor($doc.getElementsByTagName('html')[0]).x : -1;
+    return evt.clientX - $doc.getBoxObjectFor($doc.getElementsByTagName('html')[0]).x || 0;
   }-*/;
 
   @Override
   public native int eventGetClientY(Event evt) /*-{
-    return (evt.clientY) ? evt.clientY - $doc.getBoxObjectFor($doc.getElementsByTagName('html')[0]).y : -1;
+    return evt.clientY - $doc.getBoxObjectFor($doc.getElementsByTagName('html')[0]).y || 0;
   }-*/;
 
   @Override
   public native int eventGetMouseWheelVelocityY(Event evt) /*-{
-    return evt.detail || -1;
+    return evt.detail || 0;
   }-*/;
 
   @Override

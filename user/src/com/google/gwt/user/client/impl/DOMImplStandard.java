@@ -48,7 +48,7 @@ abstract class DOMImplStandard extends DOMImpl {
     } else if (button == 3) {
       return 2;
     }
-    return button || -1;
+    return button || 0;
   }-*/;
 
   @Override

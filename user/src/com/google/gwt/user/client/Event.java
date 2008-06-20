@@ -159,14 +159,27 @@ public class Event extends JavaScriptObject {
       | ONMOUSEOVER | ONMOUSEOUT;
 
   /**
-   * Error code returned by DOM.getEventXXX methods when the actual integer
-   * value is undefined. For example, DOM.getEventKeyCode returns UNDEFINED for
-   * some non-keyboard events.
+   * Value returned by DOM.getEventXXX methods when the actual integer value is
+   * undefined. For example, DOM.getEventKeyCode returns UNDEFINED for
+   * non-keyboard events.
    * 
-   * For some events, some browsers return undefined while others return data
-   * for certain events.
+   * If assertions are enabled in hosted mode (using the -ea or
+   * -enableassertion compiler flag), DOM.getEventXXX will throw assertion
+   * errors instead of returning UNDEFINED.  The assertions in each
+   * DOM.getEventXXX ensure that the attribute you are retrieving is defined for
+   * all supported browsers.
+   * 
+   * If you disable assertions, some events in some browsers will return
+   * UNDEFINED.  However, other browsers may return meaningless data instead of
+   * UNDEFINED if the attribute does not have meaning in the context of the
+   * Event.  In addition, some methods might return the value 0, which equals
+   * UNDEFINED, when in fact 0 is a valid return type (for example, clientX 
+   * could be 0). As a result, it is NOT safe to rely on the return type of
+   * DOM.getEventXXX methods when assertions are disabled, because the return
+   * values may not have meaning in the context of the event.
    */
-  public static final int UNDEFINED = -1;
+  @Deprecated
+  public static final int UNDEFINED = 0;
 
   /**
    * Gets the current event that is being fired. The current event is only

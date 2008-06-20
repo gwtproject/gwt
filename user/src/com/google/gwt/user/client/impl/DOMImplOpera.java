@@ -25,7 +25,7 @@ public class DOMImplOpera extends DOMImplStandard {
 
   @Override
   public native int eventGetMouseWheelVelocityY(Event evt) /*-{
-    return evt.detail * 4 || -1;
+    return evt.detail * 4 || 0;
   }-*/;
 
   /**

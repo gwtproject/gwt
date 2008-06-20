@@ -58,7 +58,7 @@ class DOMImplIE6 extends DOMImpl {
 
   @Override
   public native int eventGetMouseWheelVelocityY(Event evt) /*-{
-    return Math.round(-evt.wheelDelta / 40) || -1;
+    return Math.round(-evt.wheelDelta / 40) || 0;
   }-*/;
 
   @Override

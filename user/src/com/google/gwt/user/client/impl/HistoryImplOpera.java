@@ -15,7 +15,10 @@
  */
 package com.google.gwt.user.client.impl;
 
-public class HistoryImplOpera extends HistoryImplStandard {
+/**
+ * History implementation for Opera.
+ */
+class HistoryImplOpera extends HistoryImplStandard {
 
   @Override
   public native void newItem(String historyToken) /*-{

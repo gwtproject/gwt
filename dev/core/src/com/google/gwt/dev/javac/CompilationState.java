@@ -98,29 +98,27 @@ public class CompilationState {
   public void compile(TreeLogger logger) throws UnableToCompleteException {
     PerfLogger.start("CompilationState.compile");
     Set<CompilationUnit> units = getCompilationUnits();
-    if (!JdtCompiler.compile(units)) {
-      PerfLogger.end();
-      return;
+    if (JdtCompiler.compile(units)) {
+      Set<String> validBinaryTypeNames = getValidBinaryTypeNames(units);
+
+      // Dump all units with direct errors; we cannot safely check them.
+      boolean anyErrors = CompilationUnitInvalidator.invalidateUnitsWithErrors(
+          logger, units);
+
+      // Check all units using our custom checks.
+      CompilationUnitInvalidator.validateCompilationUnits(units,
+          validBinaryTypeNames);
+
+      // More units may have errors now.
+      anyErrors |= CompilationUnitInvalidator.invalidateUnitsWithErrors(logger,
+          units);
+
+      if (anyErrors) {
+        CompilationUnitInvalidator.invalidateUnitsWithInvalidRefs(logger, units);
+      }
+
+      JsniCollector.collectJsniMethods(logger, units, new JsProgram());
     }
-    Set<String> validBinaryTypeNames = getValidBinaryTypeNames(units);
-
-    // Dump all units with direct errors; we cannot safely check them.
-    boolean anyErrors = CompilationUnitInvalidator.invalidateUnitsWithErrors(
-        logger, units);
-
-    // Check all units using our custom checks.
-    CompilationUnitInvalidator.validateCompilationUnits(units,
-        validBinaryTypeNames);
-
-    // More units may have errors now.
-    anyErrors |= CompilationUnitInvalidator.invalidateUnitsWithErrors(logger,
-        units);
-
-    if (anyErrors) {
-      CompilationUnitInvalidator.invalidateUnitsWithInvalidRefs(logger, units);
-    }
-
-    JsniCollector.collectJsniMethods(logger, units, new JsProgram());
 
     mediator.refresh(logger, units);
 

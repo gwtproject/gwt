@@ -269,12 +269,14 @@ public class JdtCompiler {
         }
       }
     }
-    if (!icus.isEmpty()) {
-      PerfLogger.start("JdtCompiler.compile");
-      compiler.compile(icus.toArray(new ICompilationUnit[icus.size()]));
-      PerfLogger.end();
+    if (icus.isEmpty()) {
+      return false;
     }
-    return !icus.isEmpty();
+
+    PerfLogger.start("JdtCompiler.compile");
+    compiler.compile(icus.toArray(new ICompilationUnit[icus.size()]));
+    PerfLogger.end();
+    return true;
   }
 
 }

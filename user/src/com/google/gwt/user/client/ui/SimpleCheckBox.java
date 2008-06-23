@@ -16,9 +16,8 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.Event;
+import com.google.gwt.dom.client.InputElement;
 
 /**
  * A simple checkbox widget, with no label.
@@ -29,8 +28,7 @@ import com.google.gwt.user.client.Event;
  * <li>.gwt-SimpleCheckBox-disabled { Applied when checkbox is disabled }</li>
  * </ul>
  */
-public class SimpleCheckBox extends Widget implements HasName,
-    SourcesClickEvents, SourcesFocusEvents, HasFocus, SourcesKeyboardEvents {
+public class SimpleCheckBox extends FocusWidget implements HasName {
 
   /**
    * Creates a SimpleCheckBox widget that wraps an existing &lt;input
@@ -54,10 +52,6 @@ public class SimpleCheckBox extends Widget implements HasName,
     return checkBox;
   }
 
-  private ClickListenerCollection clickListeners;
-  private FocusListenerCollection focusListeners;
-  private KeyboardListenerCollection keyboardListeners;
-
   /**
    * Creates a new simple checkbox.
    */
@@ -70,36 +64,8 @@ public class SimpleCheckBox extends Widget implements HasName,
     setElement(element);
   }
 
-  public void addClickListener(ClickListener listener) {
-    if (clickListeners == null) {
-      clickListeners = new ClickListenerCollection();
-      sinkEvents(Event.ONCLICK);
-    }
-    clickListeners.add(listener);
-  }
-
-  public void addFocusListener(FocusListener listener) {
-    if (focusListeners == null) {
-      focusListeners = new FocusListenerCollection();
-      sinkEvents(Event.FOCUSEVENTS);
-    }
-    focusListeners.add(listener);
-  }
-
-  public void addKeyboardListener(KeyboardListener listener) {
-    if (keyboardListeners == null) {
-      keyboardListeners = new KeyboardListenerCollection();
-      sinkEvents(Event.KEYEVENTS);
-    }
-    keyboardListeners.add(listener);
-  }
-
   public String getName() {
     return getInputElement().getName();
-  }
-
-  public int getTabIndex() {
-    return getInputElement().getTabIndex();
   }
 
   /**
@@ -113,37 +79,6 @@ public class SimpleCheckBox extends Widget implements HasName,
   }
 
   /**
-   * Gets whether this widget is enabled.
-   * 
-   * @return <code>true</code> if the widget is enabled
-   */
-  public boolean isEnabled() {
-    return !getInputElement().isDisabled();
-  }
-
-  public void removeClickListener(ClickListener listener) {
-    if (clickListeners != null) {
-      clickListeners.remove(listener);
-    }
-  }
-
-  public void removeFocusListener(FocusListener listener) {
-    if (focusListeners != null) {
-      focusListeners.remove(listener);
-    }
-  }
-
-  public void removeKeyboardListener(KeyboardListener listener) {
-    if (keyboardListeners != null) {
-      keyboardListeners.remove(listener);
-    }
-  }
-
-  public void setAccessKey(char key) {
-    getInputElement().setAccessKey(Character.toString(key));
-  }
-
-  /**
    * Checks or unchecks this check box.
    * 
    * @param checked <code>true</code> to check the check box
@@ -153,14 +88,8 @@ public class SimpleCheckBox extends Widget implements HasName,
     getInputElement().setDefaultChecked(checked);
   }
 
-  /**
-   * Sets whether this widget is enabled.
-   * 
-   * @param enabled <code>true</code> to enable the widget, <code>false</code>
-   *          to disable it
-   */
   public void setEnabled(boolean enabled) {
-    getInputElement().setDisabled(!enabled);
+    super.setEnabled(enabled);
     if (enabled) {
       removeStyleDependentName("disabled");
     } else {
@@ -168,20 +97,8 @@ public class SimpleCheckBox extends Widget implements HasName,
     }
   }
 
-  public void setFocus(boolean focused) {
-    if (focused) {
-      getInputElement().focus();
-    } else {
-      getInputElement().blur();
-    }
-  }
-
   public void setName(String name) {
     getInputElement().setName(name);
-  }
-
-  public void setTabIndex(int index) {
-    getInputElement().setTabIndex(index);
   }
 
   /**

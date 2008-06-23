@@ -20,7 +20,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
-import com.google.gwt.user.client.Event;
 
 /**
  * A widget that represents a simple &lt;a&gt; element.
@@ -30,9 +29,8 @@ import com.google.gwt.user.client.Event;
  * <li>.gwt-Anchor { }</li>
  * </ul>
  */
-public class Anchor extends Widget implements SourcesClickEvents,
-    SourcesMouseEvents, HasHorizontalAlignment, HasText, HasHTML, HasWordWrap,
-    HasDirection, HasFocus {
+public class Anchor extends FocusWidget implements HasHorizontalAlignment,
+    HasName, HasText, HasHTML, HasWordWrap, HasDirection {
 
   /**
    * Creates an Anchor widget that wraps an existing &lt;div&gt; or &lt;span&gt;
@@ -56,11 +54,7 @@ public class Anchor extends Widget implements SourcesClickEvents,
     return anchor;
   }
 
-  private ClickListenerCollection clickListeners;
   private HorizontalAlignmentConstant horzAlign;
-  private MouseListenerCollection mouseListeners;
-  private FocusListenerCollection focusListeners;
-  private KeyboardListenerCollection keyboardListeners;
 
   /**
    * Creates an empty anchor.
@@ -68,6 +62,31 @@ public class Anchor extends Widget implements SourcesClickEvents,
   public Anchor() {
     setElement(Document.get().createAnchorElement());
     setStyleName("gwt-Anchor");
+  }
+
+  /**
+   * Creates an anchor for scripting.
+   * 
+   * The anchor's href is set to <code>javascript:</code>, based on the
+   * expectation that listeners will be added to the anchor.
+   * 
+   * @param text the anchor's text
+   */
+  public Anchor(String text) {
+    this(text, "javascript:");
+  }
+
+  /**
+   * Creates an anchor for scripting.
+   * 
+   * The anchor's href is set to <code>javascript:</code>, based on the
+   * expectation that listeners will be added to the anchor.
+   * 
+   * @param text the anchor's text
+   * @param asHtml <code>true</code> to treat the specified text as html
+   */
+  public Anchor(String text, boolean asHtml) {
+    this(text, asHtml, "javascript:");
   }
 
   /**
@@ -88,6 +107,23 @@ public class Anchor extends Widget implements SourcesClickEvents,
   }
 
   /**
+   * Creates a source anchor (link to URI).
+   * 
+   * That is, an anchor with an href attribute specifying the destination URI.
+   * 
+   * @param text the anchor's text
+   * @param asHtml asHTML <code>true</code> to treat the specified text as
+   *          html
+   * @param href the url to which it will link
+   * @param target the target frame (e.g. "_blank" to open the link in a new
+   *          window)
+   */
+  public Anchor(String text, boolean asHtml, String href, String target) {
+    this(text, asHtml, href);
+    setTarget(target);
+  }
+
+  /**
    * Creates an anchor with its text and href (target URL) specified.
    * 
    * @param text the anchor's text
@@ -99,40 +135,20 @@ public class Anchor extends Widget implements SourcesClickEvents,
     setHref(href);
   }
 
+  /**
+   * Creates a source anchor with a frame target.
+   * 
+   * @param text the anchor's text
+   * @param href the url to which it will link
+   * @param target the target frame (e.g. "_blank" to open the link in a new
+   *          window)
+   */
+  public Anchor(String text, String href, String target) {
+    this(text, false, href, target);
+  }
+
   private Anchor(Element element) {
     setElement(element);
-  }
-
-  public void addClickListener(ClickListener listener) {
-    if (clickListeners == null) {
-      clickListeners = new ClickListenerCollection();
-      sinkEvents(Event.ONCLICK);
-    }
-    clickListeners.add(listener);
-  }
-
-  public void addFocusListener(FocusListener listener) {
-    if (focusListeners == null) {
-      focusListeners = new FocusListenerCollection();
-      sinkEvents(Event.FOCUSEVENTS);
-    }
-    focusListeners.add(listener);
-  }
-
-  public void addKeyboardListener(KeyboardListener listener) {
-    if (keyboardListeners == null) {
-      keyboardListeners = new KeyboardListenerCollection();
-      sinkEvents(Event.KEYEVENTS);
-    }
-    keyboardListeners.add(listener);
-  }
-
-  public void addMouseListener(MouseListener listener) {
-    if (mouseListeners == null) {
-      mouseListeners = new MouseListenerCollection();
-      sinkEvents(Event.MOUSEEVENTS);
-    }
-    mouseListeners.add(listener);
   }
 
   public Direction getDirection() {
@@ -156,8 +172,22 @@ public class Anchor extends Widget implements SourcesClickEvents,
     return getElement().getInnerHTML();
   }
 
+  public String getName() {
+    return getAnchorElement().getName();
+  }
+
   public int getTabIndex() {
     return getAnchorElement().getTabIndex();
+  }
+
+  /**
+   * Gets the anchor's target frame (the frame in which navigation will occur
+   * when the link is selected).
+   * 
+   * @return the target frame
+   */
+  public String getTarget() {
+    return getAnchorElement().getTarget();
   }
 
   public String getText() {
@@ -166,66 +196,6 @@ public class Anchor extends Widget implements SourcesClickEvents,
 
   public boolean getWordWrap() {
     return !getElement().getStyle().getProperty("whiteSpace").equals("nowrap");
-  }
-
-  @Override
-  public void onBrowserEvent(Event event) {
-    switch (event.getTypeInt()) {
-      case Event.ONCLICK:
-        if (clickListeners != null) {
-          clickListeners.fireClick(this);
-        }
-        break;
-
-      case Event.ONMOUSEDOWN:
-      case Event.ONMOUSEUP:
-      case Event.ONMOUSEMOVE:
-      case Event.ONMOUSEOVER:
-      case Event.ONMOUSEOUT:
-        if (mouseListeners != null) {
-          mouseListeners.fireMouseEvent(this, event);
-        }
-        break;
-
-      case Event.ONBLUR:
-      case Event.ONFOCUS:
-        if (focusListeners != null) {
-          focusListeners.fireFocusEvent(this, event);
-        }
-        break;
-
-      case Event.ONKEYDOWN:
-      case Event.ONKEYUP:
-      case Event.ONKEYPRESS:
-        if (keyboardListeners != null) {
-          keyboardListeners.fireKeyboardEvent(this, event);
-        }
-        break;
-    }
-  }
-
-  public void removeClickListener(ClickListener listener) {
-    if (clickListeners != null) {
-      clickListeners.remove(listener);
-    }
-  }
-
-  public void removeFocusListener(FocusListener listener) {
-    if (focusListeners != null) {
-      focusListeners.remove(listener);
-    }
-  }
-
-  public void removeKeyboardListener(KeyboardListener listener) {
-    if (keyboardListeners != null) {
-      keyboardListeners.remove(listener);
-    }
-  }
-
-  public void removeMouseListener(MouseListener listener) {
-    if (mouseListeners != null) {
-      mouseListeners.remove(listener);
-    }
   }
 
   public void setAccessKey(char key) {
@@ -262,8 +232,22 @@ public class Anchor extends Widget implements SourcesClickEvents,
     getElement().setInnerHTML(html);
   }
 
+  public void setName(String name) {
+    getAnchorElement().setName(name);
+  }
+
   public void setTabIndex(int index) {
     getAnchorElement().setTabIndex(index);
+  }
+
+  /**
+   * Sets the anchor's target frame (the frame in which navigation will occur
+   * when the link is selected).
+   * 
+   * @param target the target frame
+   */
+  public void setTarget(String target) {
+    getAnchorElement().setTarget(target);
   }
 
   public void setText(String text) {

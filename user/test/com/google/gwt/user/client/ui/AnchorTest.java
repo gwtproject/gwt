@@ -87,7 +87,7 @@ public class AnchorTest extends GWTTestCase {
     assertEquals(0, DOM.getChildCount(anchor.getElement()));
 
     final String[] attrs = new String[] {
-        "href", "name", "id", "tabindex", "rel", "ref", "target"};
+        "href", "name", "id", "rel", "ref", "target"};
     for (String attribute : attrs) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
@@ -105,7 +105,7 @@ public class AnchorTest extends GWTTestCase {
     assertAttributeHasValue("javascript:", anchor.getElement(), "href");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref", "target"}) {
+        "name", "id", "rel", "ref", "target"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -122,7 +122,7 @@ public class AnchorTest extends GWTTestCase {
     assertAttributeHasValue("javascript:", anchor.getElement(), "href");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref", "target"}) {
+        "name", "id", "rel", "ref", "target"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -154,7 +154,7 @@ public class AnchorTest extends GWTTestCase {
     assertAttributeHasValue("http://nowhere.org/", anchor.getElement(), "href");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref", "target"}) {
+        "name", "id", "rel", "ref", "target"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -169,13 +169,13 @@ public class AnchorTest extends GWTTestCase {
     assertEquals(1, DOM.getChildCount(p.getElement()));
     assertEquals("A", DOM.getChild(p.getElement(), 0).getTagName());
     assertEquals("SPAN", DOM.getChild(anchor.getElement(), 0).getTagName());
-    assertEquals("<span>Foo</span>", anchor.getHTML());
+    assertTrue("<span>Foo</span>".equalsIgnoreCase(anchor.getHTML()));
 
     assertAttributeHasValue("http://still.nowhere.org/", anchor.getElement(),
         "href");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref", "target"}) {
+        "name", "id", "rel", "ref", "target"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -195,7 +195,7 @@ public class AnchorTest extends GWTTestCase {
     assertAttributeHasValue("popup", anchor.getElement(), "target");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref"}) {
+        "name", "id", "rel", "ref"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -210,13 +210,13 @@ public class AnchorTest extends GWTTestCase {
     assertEquals(1, DOM.getChildCount(p.getElement()));
     assertEquals("A", DOM.getChild(p.getElement(), 0).getTagName());
     assertEquals("SPAN", DOM.getChild(anchor.getElement(), 0).getTagName());
-    assertEquals("<span>Foo</span>", anchor.getHTML());
+    assertTrue("<span>Foo</span>".equalsIgnoreCase(anchor.getHTML()));
 
     assertAttributeHasValue("http://more.ads.com/", anchor.getElement(), "href");
     assertAttributeHasValue("_blank", anchor.getElement(), "target");
 
     for (String attribute : new String[] {
-        "name", "id", "tabindex", "rel", "ref"}) {
+        "name", "id", "rel", "ref"}) {
       assertAttributeNotPresent(attribute, anchor.getElement());
     }
   }
@@ -239,7 +239,7 @@ public class AnchorTest extends GWTTestCase {
     anchor.getElement().setAttribute("name", "Marty");
     assertEquals("Marty", anchor.getName());
 
-    anchor.getElement().setAttribute("tabindex", "23");
+    anchor.getElement().setAttribute("tabIndex", "23");
     assertEquals(23, anchor.getTabIndex());
   }
 
@@ -265,7 +265,7 @@ public class AnchorTest extends GWTTestCase {
     assertEquals("Hieronymous", anchor.getElement().getAttribute("name"));
 
     anchor.setTabIndex(42);
-    assertEquals("42", anchor.getElement().getAttribute("tabindex"));
+    assertEquals(42, Integer.parseInt(anchor.getElement().getAttribute("tabIndex")));
   }
 
   /**

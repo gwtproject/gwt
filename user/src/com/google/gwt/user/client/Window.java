@@ -488,7 +488,7 @@ public class Window {
   }-*/;
 
   private static void maybeInitializeHandlers() {
-    if (!handlersAreInitialized) {
+    if (GWT.isClient() && !handlersAreInitialized) {
       init();
       handlersAreInitialized = true;
     }

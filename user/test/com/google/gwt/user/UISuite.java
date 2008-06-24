@@ -143,6 +143,7 @@ public class UISuite {
     suite.addTestSuite(WidgetOnLoadTest.class);
     suite.addTestSuite(WindowTest.class);
     suite.addTestSuite(XMLTest.class);
+    suite.addTestSuite(ClassInitTest.class);
 
     return suite;
   }

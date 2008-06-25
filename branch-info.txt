@@ -9,7 +9,8 @@ Merges:
 /releases/1.5/@r2992:r2994 was merged (r2998) into /trunk/
 /releases/1.5/@r2994:r3048 was merged (r3050) into /trunk/
 /releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
--> The next merge into trunk will be r3078:????
+/releases/1.5/@r3090:r3125 was merged (r3126) into /trunk/
+-> The next merge into trunk will be r3127:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -73,3 +74,34 @@ Changes in this branch (excluding changes to this file itself):
 - Wrapper types that are not used in a program are not present, so don't rely on being able to look up all wrapper types (r3076)
 - Generate currency data at compile time rather than runtime (r3077)
 - Some Java compilers allow "aByte+= 1" where aByte is of type Byte.  Others do not. (r3078)
+- Fix a bug where Safari 3 does not correctly calculate the value of DOM.getAbsoluteLeft(elem). Issue 1711. (r3082)
+- Fix a broken test in DOMTest related to getAbsoluteTop and getAbsoluteLeft. (r3083)
+- Add support for wrapping existing DOM elements using wrap() methods. Also added InlineLable, InlineHTML, SimpleRadioButton, SimpleCheckbox widgets.Issues 1544, 2289, and 2291 (r3085)
+- Add support for the standard 'contextmenu' event to the DOM layer. (r3086)
+- Add the ability to set a tab's text and html after it has been created. Issue 661. (r3087)
+- Fix javadoc for Anchor to say "href" instead of "target history token". (r3088)
+- Patch for breaking TabBarTest.java. (r3089)
+- Modified DOM.eventGetClientX/Y to account for margins and borders on the HTML element in Safari 2 and Firefox. Issue 1932. (r3090)
+- Got rid of an unused import error in HTMLPanel. (r3091)
+- Fix issue 2543 by relaxing an overly strict assertion in LongEmulationNormalizer.(r3092)
+- Fixes issue 934 (History.newItem() broken on Opera), and issue 2550 (HistoryImplStandard uses function argument rather than string) (r3094)
+- JUnit issues fixed: NPEs when client module load fails, content type on loadError XHR not valid, BenchmarkStrategy threw CCE in some cases (r3097)
+- Added caching for allTypes (r3098)
+- Prune PerfLogger output to make it more readable. (r3099)
+- Run perflogger around all generators; removed specific perflogger calls from GWTRunnerGenerator. (r3100)
+- PerfLogger twiddling in CompilationState and JdtCompiler. (r3101)
+- Added javadoc and an assertion to CompilationUnit. (r3102)
+- Fixes a refresh bug introduced in r3100:r3103. (r3104)
+- Implements a lightweight set of JsArray classes for dealing with primitive arrays and JSON structures containing other JSOs. (r3106)
+- Remove checkstyle error on HistoryImplOpera and make package protected. (r3108)
+- Add assertions to all DOM.eventGetXXXmethods on the attribute being retrieved. issues 2556, 1667. (r3109)
+- Fixes clientHeight and clientWidth for Opera 9.5 standards mode. (r3115)
+- Protects a number of new global identifiers from being redefined by the compiler. Issue 2578. (r3117)
+- Exposes an immutable map of the query parameters to allow calling Window.Location.getParameterMap(). Issue 2211 (r3118)
+- Fixes an unguarded reference to window.external that's causing problems with certain IE plugins and hosting environments (e.g. SWT). (r3119)
+- Changes Anchor and SimpleCheckBox to extend FocusWidget. (r3120)
+- Opera 9 doesn't need to use FocusImplOld anymore. (r3121)
+- Improve long RPC serialization performance by transmitting the long as its internal representation of two doubles. (r3122)
+- Fixes for broken Anchor tests. (r3123)
+- Updated the algorithm used for computing the set of serializable types. (r3124)
+- Introduces a new public class, GWTMockUtilities, aimed at allowing developers to mock out GWT Widgets in JUnit tests. (r3125)

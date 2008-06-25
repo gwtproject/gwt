@@ -1,3 +1,7 @@
+branch-info.txt for GWT 1.5 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
 Copies:
 /releases/1.5/ was created (r2940) as a straight copy from /trunk/@r2939
 /tags/1.5.0 was created (r2959) as a straight copy from /releases/1.5/@r2941
@@ -9,8 +13,8 @@ Merges:
 /releases/1.5/@r2992:r2994 was merged (r2998) into /trunk/
 /releases/1.5/@r2994:r3048 was merged (r3050) into /trunk/
 /releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
-/releases/1.5/@r3090:r3125 was merged (r3126) into /trunk/
--> The next merge into trunk will be r3127:????
+/releases/1.5/@r3078:r3125 was merged (r3126) into /trunk/
+-> The next merge into trunk will be r3125:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)

@@ -138,7 +138,7 @@ public class WidgetSubclassingTest extends GWTTestCase {
 
   public static class BrokenButton extends Button {
     public BrokenButton() {
-      super(Document.get().createButtonElement());
+      super(Document.get().createBRElement());
     }
   }
 

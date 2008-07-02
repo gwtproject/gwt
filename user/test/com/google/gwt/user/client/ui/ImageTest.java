@@ -373,9 +373,10 @@ public class ImageTest extends GWTTestCase {
    * setUrlAndVisibleRect() on it.
    */
   public void testWrapThenSetUrlAndVisibleRect() {
-    HTML html = new HTML("<img id='foo' src='counting-backwards.png' width='16' height='16'>");
+    String uid = Document.get().createUniqueId();
+    HTML html = new HTML("<img id='" + uid + "' src='counting-backwards.png' width='16' height='16'>");
     RootPanel.get().add(html);
-    final Image image = Image.wrap(Document.get().getElementById("foo"));
+    final Image image = Image.wrap(Document.get().getElementById(uid));
 
     delayTestFinish(20000);
 

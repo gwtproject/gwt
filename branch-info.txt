@@ -14,7 +14,8 @@ Merges:
 /releases/1.5/@r2994:r3048 was merged (r3050) into /trunk/
 /releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
 /releases/1.5/@r3078:r3125 was merged (r3126) into /trunk/
--> The next merge into trunk will be r3125:????
+/releases/1.5/@r3125:r3170 was merged (r3173) into /trunk/
+-> The next merge into trunk will be r3170:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -109,3 +110,14 @@ Changes in this branch (excluding changes to this file itself):
 - Fixes for broken Anchor tests. (r3123)
 - Updated the algorithm used for computing the set of serializable types. (r3124)
 - Introduces a new public class, GWTMockUtilities, aimed at allowing developers to mock out GWT Widgets in JUnit tests. (r3125)
+- gwt-servlet.jar was failing to include benchmarks classes (r3135)
+- NPE in Arrays.hashCode(Object[]) when array contained a null (r3140)
+- Fix for how i18n searches for resources (r3142)
+- CustomButtom tripping invalid assertions on mouse events (r3149)
+- TreeMap can now be constructed with a null comparator (r3152)
+- Many widgets now have accessible protected constructors for subclassing that can take existing elements (r3158)
+- Fix for a startup bug that would affect certain apps in IE when using the Cross-site Linker (r3163)
+- Fix for an NPE in hosted mode when using a static entry point (r3165)
+- Fixes several potential compiler crashes related to invalid types on temporary locals (r3166)
+- Fixes a potential NPE in STOB logging (r3167)
+- Fixes a code generation bug for a switch statement when a final default case ends with a labelled break statement (r3168)

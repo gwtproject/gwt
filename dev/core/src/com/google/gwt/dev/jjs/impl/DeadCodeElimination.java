@@ -1102,6 +1102,23 @@ public class DeadCodeElimination {
       }
     }
 
+    /**
+     * If the effect of <code>statement</code> is to immediately do a break,
+     * then return the {@link JBreakStatement} corresponding to that break.
+     */
+    private JBreakStatement findUnconditionalBreak(JStatement statement) {
+      if (statement instanceof JBreakStatement) {
+        return (JBreakStatement) statement;
+      } else if (statement instanceof JBlock) {
+        JBlock block = (JBlock) statement;
+        List<JStatement> blockStmts = block.statements;
+        if (blockStmts.size() > 0 && isUnconditionalBreak(blockStmts.get(0))) {
+          return (JBreakStatement) blockStmts.get(0);
+        }
+      }
+      return null;
+    }
+
     private boolean hasNoDefaultCase(JSwitchStatement x) {
       JBlock body = x.getBody();
       boolean inDefault = false;
@@ -1111,7 +1128,7 @@ public class DeadCodeElimination {
           if (caseStmt.getExpr() == null) {
             inDefault = true;
           }
-        } else if (isUnconditionalBreak(statement)) {
+        } else if (isUnconditionalUnlabeledBreak(statement)) {
           inDefault = false;
         } else {
           // We have some code to execute other than a break.
@@ -1253,15 +1270,16 @@ public class DeadCodeElimination {
     }
 
     private boolean isUnconditionalBreak(JStatement statement) {
-      if (statement instanceof JBreakStatement) {
-        return true;
-      } else if (statement instanceof JBlock) {
-        JBlock block = (JBlock) statement;
-        List<JStatement> blockStmts = block.statements;
-        return blockStmts.size() > 0 && isUnconditionalBreak(blockStmts.get(0));
-      } else {
-        return false;
-      }
+      return findUnconditionalBreak(statement) != null;
+    }
+
+    private boolean isUnconditionalUnlabeledBreak(JStatement statement) {
+      JBreakStatement breakStat = findUnconditionalBreak(statement);
+      return (breakStat != null) && (breakStat.getLabel() == null);
+    }
+
+    private <T> T last(List<T> statements) {
+      return statements.get(statements.size() - 1);
     }
 
     private Class<?> mapType(JType type) {
@@ -1325,7 +1343,8 @@ public class DeadCodeElimination {
       }
 
       // Remove a trailing break statement from a case block
-      if (lastWasBreak && body.statements.size() > 0) {
+      if (body.statements.size() > 0
+          && isUnconditionalUnlabeledBreak(last(body.statements))) {
         body.statements.remove(body.statements.size() - 1);
         didChange = true;
       }

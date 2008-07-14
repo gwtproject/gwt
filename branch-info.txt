@@ -16,7 +16,8 @@ Merges:
 /releases/1.5/@r3078:r3125 was merged (r3126) into /trunk/
 /releases/1.5/@r3125:r3170 was merged (r3173) into /trunk/
 /releases/1.5/@r3170:r3188 was merged (r3202) into /trunk/
--> The next merge into trunk will be r3188:????
+/releases/1.5/@r3188:r3205 was merged (r3206) into /trunk/
+-> The next merge into trunk will be r3205:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -131,3 +132,7 @@ Changes in this branch (excluding changes to this file itself):
 - Fix for issue 2512. Widgets that inherit from CustomButton should only respond to left mousedown/up (r3186)
 - Fix excessive stack use while parsing consecutive comment lines (r3187)
 - Reverts DOM.getIntStyleAttribute() to its original js implementation (r3188)
+- Fixes occasional exception in IE popups (issue 2656) (r3200)
+- DOM.getIntStyleAttribute() should be static.  Fixes checkstyle errors too. (r3201)
+- Fixes for issues 2278 (Replacing calls to getBoxObjectFor() on FF3), 1556 (getAbsoluteLeft/Top() for Opera fails) (r3204)
+- Fix some more checkstyle errors in WidgetSubclassingTest (r3205)

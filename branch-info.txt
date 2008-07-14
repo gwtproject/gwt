@@ -15,7 +15,8 @@ Merges:
 /releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
 /releases/1.5/@r3078:r3125 was merged (r3126) into /trunk/
 /releases/1.5/@r3125:r3170 was merged (r3173) into /trunk/
--> The next merge into trunk will be r3170:????
+/releases/1.5/@r3170:r3188 was merged (r3202) into /trunk/
+-> The next merge into trunk will be r3188:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)
@@ -121,3 +122,12 @@ Changes in this branch (excluding changes to this file itself):
 - Fixes several potential compiler crashes related to invalid types on temporary locals (r3166)
 - Fixes a potential NPE in STOB logging (r3167)
 - Fixes a code generation bug for a switch statement when a final default case ends with a labelled break statement (r3168)
+- Fixes  missing javadoc for two methods; Adds setCapture() and releaseCapture()delegates to DOM (r3171)
+- Adds to FormPanel the ability to wrap an existing form, and still create a synthetic IFrame (r3178)
+- De-flakify ImageTest by removing most timers and loosening up the timing constraints (r3181).
+- Fix sort order of new method (r3183)
+- Opens up PopupPanel.hide(Z) (r3184)
+- Modify PushButton and ToggleButton styling for the "dark" style (r3185)
+- Fix for issue 2512. Widgets that inherit from CustomButton should only respond to left mousedown/up (r3186)
+- Fix excessive stack use while parsing consecutive comment lines (r3187)
+- Reverts DOM.getIntStyleAttribute() to its original js implementation (r3188)

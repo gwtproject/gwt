@@ -80,7 +80,7 @@ public class GWTTestCaseTest extends GWTTestCase {
   /**
    * Tracks whether this test has been setup and torn down.
    */
-  protected SetUpTearDownState setupTeardownFlag = INITIAL;;
+  protected SetUpTearDownState setupTeardownFlag = INITIAL;
 
   public String getModuleName() {
     return "com.google.gwt.junit.JUnit";
@@ -417,7 +417,9 @@ public class GWTTestCaseTest extends GWTTestCase {
       @Override
       public void run() {
         if (outOfBandError != null) {
-          fail(outOfBandError);
+          String msg = outOfBandError;
+          outOfBandError = null;
+          fail(msg);
         }
         finishTest();
       }

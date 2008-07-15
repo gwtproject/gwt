@@ -95,32 +95,32 @@ public class LongTest extends GWTTestCase {
     assertEquals(10L, Long.parseLong("010"));
     try {
       Long.parseLong("10L");
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
     try {
       Long.parseLong("");
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
     try {
       // Issue 2636
       new Long("");
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
     try {
       Long.parseLong("deadbeefbeef");
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
     try {
       Long.parseLong("123456789ab123456789ab123456789ab123456789ab", 12);
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
@@ -130,11 +130,11 @@ public class LongTest extends GWTTestCase {
     assertEquals(-73686780563L, Long.parseLong("-123456789ab", 12));
     try {
       Long.parseLong("c", 12);
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
-    
+
     assertEquals(0L, Long.parseLong("0", 16));
     assertEquals(-1L, Long.parseLong("-1", 16));
     assertEquals(1L, Long.parseLong("1", 16));
@@ -142,13 +142,13 @@ public class LongTest extends GWTTestCase {
     assertEquals(-0xdeadbeefdeadL, Long.parseLong("-deadbeefdead", 16));
     try {
       Long.parseLong("deadbeefdeadbeefdeadbeefdeadbeef", 16);
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }
     try {
       Long.parseLong("g", 16);
-      fail("expected NumericFormatException");
+      fail("expected NumberFormatException");
     } catch (NumberFormatException ex) {
       // expected
     }

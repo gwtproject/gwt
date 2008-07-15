@@ -20,8 +20,11 @@
  */
 package com.google.gwt.junit.client;
 
+import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.INITIAL;
+import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_SETUP;
+import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_TORNDOWN;
+
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 
 import junit.framework.AssertionFailedError;
 
@@ -30,6 +33,19 @@ import junit.framework.AssertionFailedError;
  * the behavior of TestCase that is necessary in GWT.
  */
 public class GWTTestCaseTest extends GWTTestCase {
+
+  /**
+   * Tracks whether or not setup and teardown have run.
+   */
+  protected enum SetUpTearDownState {
+    INITIAL, IS_SETUP, IS_TORNDOWN
+  }
+
+  /**
+   * If non-null, records an error related to setup/teardown that could not have
+   * been caught during normal test execution.
+   */
+  private static String outOfBandError = null;
 
   private static void assertNotEquals(double a, double b, double delta) {
     boolean failed = false;
@@ -61,7 +77,10 @@ public class GWTTestCaseTest extends GWTTestCase {
     }
   }
 
-  protected int setupTeardownFlag = 0;
+  /**
+   * Tracks whether this test has been setup and torn down.
+   */
+  protected SetUpTearDownState setupTeardownFlag = INITIAL;;
 
   public String getModuleName() {
     return "com.google.gwt.junit.JUnit";
@@ -339,44 +358,70 @@ public class GWTTestCaseTest extends GWTTestCase {
   }
 
   public void testSetUpTearDown() throws Exception {
-    assertEquals(1, setupTeardownFlag);
+    assertSame(IS_SETUP, setupTeardownFlag);
     tearDown();
-    assertEquals(2, setupTeardownFlag);
+    assertSame(IS_TORNDOWN, setupTeardownFlag);
     setUp();
-    assertEquals(1, setupTeardownFlag);
+    assertSame(IS_SETUP, setupTeardownFlag);
     gwtTearDown();
-    assertEquals(2, setupTeardownFlag);
+    assertSame(IS_TORNDOWN, setupTeardownFlag);
     gwtSetUp();
-    assertEquals(1, setupTeardownFlag);
+    assertSame(IS_SETUP, setupTeardownFlag);
   }
 
   public void testSetUpTearDownAsync() {
-    assertEquals(1, setupTeardownFlag);
+    assertSame(IS_SETUP, setupTeardownFlag);
     delayTestFinish(1000);
     new Timer() {
       @Override
       public void run() {
-        assertEquals(1, setupTeardownFlag);
+        assertSame(IS_SETUP, setupTeardownFlag);
         finishTest();
-        if (setupTeardownFlag != 2) {
-          // Must use window alert to grind the test to a halt in this failure.
-          Window.alert("Bad async success tearDown behavior not catchable by JUnit");
+        if (setupTeardownFlag != IS_TORNDOWN) {
+          recordOutofBandError("Bad async success tearDown behavior not catchable by JUnit");
         }
       }
     }.schedule(1);
   }
 
+  public void testSetUpTearDownAsyncHadNoOutOfBandErrors() {
+    assertNoOutOfBandErrorsAsync();
+  }
+
   @Override
   protected void gwtSetUp() throws Exception {
-    setupTeardownFlag = 1;
+    setupTeardownFlag = IS_SETUP;
   }
 
   @Override
   protected void gwtTearDown() throws Exception {
-    if (setupTeardownFlag != 1) {
+    if (setupTeardownFlag != IS_SETUP) {
       // Must use window alert to grind the test to a halt in this failure.
-      Window.alert("Bad tearDown behavior not catchable by JUnit");
+      recordOutofBandError("Bad tearDown behavior not catchable by JUnit");
     }
-    setupTeardownFlag = 2;
+    setupTeardownFlag = IS_TORNDOWN;
+  }
+
+  protected static void recordOutofBandError(String outOfBandError) {
+    GWTTestCaseTest.outOfBandError = outOfBandError;
+  }
+
+  /**
+   * Call this method to asynchronously check for out of band errors in the
+   * previous test.
+   */
+  protected void assertNoOutOfBandErrorsAsync() {
+    // Give things a chance to settle down.
+    delayTestFinish(10000);
+    new Timer() {
+      @Override
+      public void run() {
+        if (outOfBandError != null) {
+          fail(outOfBandError);
+        }
+        finishTest();
+      }
+
+    }.schedule(1000);
   }
 }

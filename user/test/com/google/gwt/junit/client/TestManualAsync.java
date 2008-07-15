@@ -15,8 +15,10 @@
  */
 package com.google.gwt.junit.client;
 
+import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_SETUP;
+import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_TORNDOWN;
+
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 
 /**
  * This test must be run manually to inspect for correct results. Many of these
@@ -102,7 +104,7 @@ public class TestManualAsync extends GWTTestCaseTest {
    * Fails async.
    */
   public void testSetUpTearDownFailAsync() {
-    assertEquals(1, setupTeardownFlag);
+    assertEquals(IS_SETUP, setupTeardownFlag);
     delayTestFinish(1000);
     new Timer() {
       @Override
@@ -117,19 +119,25 @@ public class TestManualAsync extends GWTTestCaseTest {
         /*
          * The failing test should have triggered tearDown.
          */
-        if (setupTeardownFlag != 2) {
-          // Must use window alert to grind the test to a halt in this failure.
-          Window.alert("Bad async failure tearDown behavior not catchable by JUnit");
+        if (setupTeardownFlag != IS_TORNDOWN) {
+          recordOutofBandError("Bad async failure tearDown behavior not catchable by JUnit");
         }
       }
     }.schedule(100);
   }
 
   /**
+   * Completes async.
+   */
+  public void testSetUpTearDownFailAsyncHadNoOutOfBandErrors() {
+    assertNoOutOfBandErrorsAsync();
+  }
+
+  /**
    * Times out async.
    */
   public void testSetUpTearDownTimeoutAsync() {
-    assertEquals(1, setupTeardownFlag);
+    assertSame(IS_SETUP, setupTeardownFlag);
     delayTestFinish(1);
     new Timer() {
       @Override
@@ -137,12 +145,18 @@ public class TestManualAsync extends GWTTestCaseTest {
         /*
          * The failing test should have triggered tearDown.
          */
-        if (setupTeardownFlag != 2) {
-          // Must use window alert to grind the test to a halt in this failure.
-          Window.alert("Bad async timeout tearDown behavior not catchable by JUnit");
+        if (setupTeardownFlag != IS_TORNDOWN) {
+          recordOutofBandError("Bad async timeout tearDown behavior not catchable by JUnit");
         }
       }
     }.schedule(100);
+  }
+
+  /**
+   * Completes async.
+   */
+  public void testSetUpTearDownTimeoutAsyncHadNoOutOfBandErrors() {
+    assertNoOutOfBandErrorsAsync();
   }
 
   /**
@@ -152,7 +166,7 @@ public class TestManualAsync extends GWTTestCaseTest {
     try {
       finishTest();
       fail("Unexpected failure");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalStateException e) {
     }
   }
 

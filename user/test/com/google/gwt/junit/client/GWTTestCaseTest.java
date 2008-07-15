@@ -20,6 +20,9 @@
  */
 package com.google.gwt.junit.client;
 
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+
 import junit.framework.AssertionFailedError;
 
 /**
@@ -57,6 +60,8 @@ public class GWTTestCaseTest extends GWTTestCase {
           + ")");
     }
   }
+
+  protected int setupTeardownFlag = 0;
 
   public String getModuleName() {
     return "com.google.gwt.junit.JUnit";
@@ -331,5 +336,47 @@ public class GWTTestCaseTest extends GWTTestCase {
     }
 
     fail("Unexpected exception during assertTrue(String, boolean) testing");
+  }
+
+  public void testSetUpTearDown() throws Exception {
+    assertEquals(1, setupTeardownFlag);
+    tearDown();
+    assertEquals(2, setupTeardownFlag);
+    setUp();
+    assertEquals(1, setupTeardownFlag);
+    gwtTearDown();
+    assertEquals(2, setupTeardownFlag);
+    gwtSetUp();
+    assertEquals(1, setupTeardownFlag);
+  }
+
+  public void testSetUpTearDownAsync() {
+    assertEquals(1, setupTeardownFlag);
+    delayTestFinish(1000);
+    new Timer() {
+      @Override
+      public void run() {
+        assertEquals(1, setupTeardownFlag);
+        finishTest();
+        if (setupTeardownFlag != 2) {
+          // Must use window alert to grind the test to a halt in this failure.
+          Window.alert("Bad async success tearDown behavior not catchable by JUnit");
+        }
+      }
+    }.schedule(1);
+  }
+
+  @Override
+  protected void gwtSetUp() throws Exception {
+    setupTeardownFlag = 1;
+  }
+
+  @Override
+  protected void gwtTearDown() throws Exception {
+    if (setupTeardownFlag != 1) {
+      // Must use window alert to grind the test to a halt in this failure.
+      Window.alert("Bad tearDown behavior not catchable by JUnit");
+    }
+    setupTeardownFlag = 2;
   }
 }

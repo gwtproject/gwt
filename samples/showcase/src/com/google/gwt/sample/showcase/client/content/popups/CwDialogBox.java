@@ -22,7 +22,6 @@ import com.google.gwt.sample.showcase.client.ShowcaseAnnotations.ShowcaseData;
 import com.google.gwt.sample.showcase.client.ShowcaseAnnotations.ShowcaseSource;
 import com.google.gwt.sample.showcase.client.ShowcaseAnnotations.ShowcaseStyle;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
@@ -143,10 +142,9 @@ public class CwDialogBox extends ContentWidget {
 
     // Create a table to layout the content
     VerticalPanel dialogContents = new VerticalPanel();
-    dialogContents.setWidth("100%");
     dialogContents.setSpacing(4);
     dialogBox.setWidget(dialogContents);
-
+    
     // Add some text to the top of the dialog
     HTML details = new HTML(constants.cwDialogBoxDetails());
     dialogContents.add(details);
@@ -158,22 +156,6 @@ public class CwDialogBox extends ContentWidget {
     dialogContents.add(image);
     dialogContents.setCellHorizontalAlignment(image,
         HasHorizontalAlignment.ALIGN_CENTER);
-
-    // Add option to make transparent
-    final CheckBox opacityOption = new CheckBox(
-        constants.cwDialogBoxMakeTransparent());
-    dialogContents.add(opacityOption);
-
-    // Listen for changes in opacity option
-    opacityOption.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
-        if (opacityOption.isChecked()) {
-          dialogBox.addStyleName("cw-DialogBox");
-        } else {
-          dialogBox.removeStyleName("cw-DialogBox");
-        }
-      }
-    });
 
     // Add a close button at the bottom of the dialog
     Button closeButton = new Button(constants.cwDialogBoxClose(),

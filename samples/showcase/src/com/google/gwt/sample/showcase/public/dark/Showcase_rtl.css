@@ -43,6 +43,7 @@
   width: 36px;
   height: 16px;
   margin: 3px 10px 0px 0px;
+  padding: 0px;
 }
 .Application-options .gwt-ToggleButton-down,
 .Application-options .gwt-ToggleButton-down-hovering {
@@ -116,11 +117,6 @@
 .cw-BasicPopup-thumb {
   cursor: pointer;
   cursor: hand;
-}
-
-.cw-DialogBox {
-  opacity: 0.8;
-  filter: alpha(opacity=80);
 }
 
 .cw-DictionaryExample-headerRow td {

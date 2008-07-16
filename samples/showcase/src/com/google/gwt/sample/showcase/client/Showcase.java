@@ -175,16 +175,6 @@ public class Showcase implements EntryPoint {
   private Application app;
 
   /**
-   * When the user selects a {@link TreeItem} from the main menu, we
-   * synchronously change the current example and add a history token for
-   * history support. However, adding the history token causes the history
-   * changed event to fire, which normally selects the associated menu item and
-   * displays the example. We don't want to repeat this twice, so we use a
-   * boolean to indicate that we want to ignore the history changed event.
-   */
-  private boolean ignoreNextHistoryEvent = false;
-
-  /**
    * A mapping of history tokens to their associated menu items.
    */
   private Map<String, TreeItem> itemTokens = new HashMap<String, TreeItem>();
@@ -224,12 +214,6 @@ public class Showcase implements EntryPoint {
     // Setup a history listener to reselect the associate menu item
     final HistoryListener historyListener = new HistoryListener() {
       public void onHistoryChanged(String historyToken) {
-        // Ignore the event if the user selected the content from the main menu
-        if (ignoreNextHistoryEvent) {
-          ignoreNextHistoryEvent = false;
-          return;
-        }
-
         TreeItem item = itemTokens.get(historyToken);
         if (item != null) {
           // Select the associated TreeItem
@@ -248,11 +232,6 @@ public class Showcase implements EntryPoint {
       public void onMenuItemSelected(TreeItem item) {
         ContentWidget content = itemWidgets.get(item);
         if (content != null && !content.equals(app.getContent())) {
-          // Show the new example
-          displayContentWidget(content);
-
-          // Update the history token, but ignore the next history event
-          ignoreNextHistoryEvent = true;
           History.newItem(getContentWidgetToken(content));
         }
       }

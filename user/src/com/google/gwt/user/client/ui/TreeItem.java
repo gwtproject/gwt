@@ -641,7 +641,6 @@ public class TreeItem extends UIObject implements HasHTML {
     childSpanElem = DOM.createDiv();
     DOM.appendChild(getElement(), childSpanElem);
     DOM.setStyleAttribute(childSpanElem, "whiteSpace", "nowrap");
-    DOM.setStyleAttribute(childSpanElem, "overflow", "hidden");
     children = new ArrayList<TreeItem>();
   }
 

@@ -436,7 +436,7 @@ html>body .gwt-MenuBarPopup .menuPopupBottomRight {
 }
 .gwt-DecoratedPopupPanel .popupMiddleCenter {
   padding: 3px;
-  background: white;
+  background: #d0e4f6;
 }
 .gwt-DecoratedPopupPanel .popupTopCenter {
   background: url(images/hborder.png) repeat-x;

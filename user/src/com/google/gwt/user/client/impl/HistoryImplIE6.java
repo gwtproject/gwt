@@ -45,7 +45,7 @@ class HistoryImplIE6 extends HistoryImplFrame {
   @SuppressWarnings("unused")
   private static native String getLocationHash() /*-{
     var href = $wnd.location.href;
-    var hashLoc = href.indexOf("#");
+    var hashLoc = href.lastIndexOf("#");
     return (hashLoc > 0) ? href.substring(hashLoc) : "";
   }-*/;
 

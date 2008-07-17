@@ -58,9 +58,9 @@ public class Window {
      * @return the string to the right of the URL's hash.
      */
 
-    public static native String getHash() /*-{
-      return $wnd.location.hash;
-    }-*/;
+    public static String getHash() {
+      return impl.getHash();
+    }
 
     /**
      * Gets the URL's host and port name.
@@ -148,9 +148,9 @@ public class Window {
      * 
      * @return the URL's query string
      */
-    public static native String getQueryString() /*-{
-      return $wnd.location.search;
-    }-*/;
+    public static String getQueryString() {
+      return impl.getQueryString();
+    }
 
     /**
      * Reloads the current browser window. All GWT state will be lost.

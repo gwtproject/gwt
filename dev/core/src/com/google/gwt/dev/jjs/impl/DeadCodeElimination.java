@@ -1725,7 +1725,20 @@ public class DeadCodeElimination {
 
     private JLiteral tryGetConstant(JVariableRef x) {
       if (!lvalues.contains(x)) {
-        return x.getTarget().getConstInitializer();
+        JLiteral lit = x.getTarget().getConstInitializer();
+        if (lit != null) {
+          /*
+           * Upcast the initializer so that the semantics of any arithmetic on
+           * this value is not changed.
+           */
+          // TODO(spoon): use simplifier.cast to shorten this
+          if ((x.getType() instanceof JPrimitiveType)
+              && (lit instanceof JValueLiteral)) {
+            JPrimitiveType xTypePrim = (JPrimitiveType) x.getType();
+            lit = xTypePrim.coerceLiteral((JValueLiteral) lit);
+          }
+          return lit;
+        }
       }
       return null;
     }

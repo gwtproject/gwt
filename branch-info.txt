@@ -9,19 +9,19 @@ Copies:
 Merges:
 /releases/1.5/@r2940:r2941 was merged (r2942) into /trunk/
 /releases/1.5/@r2941:r2990 was merged (r2992) into /trunk/
-/trunk@r2985:2986 was merged (r2991) into this branch
-/releases/1.5/@r2992:r2994 was merged (r2998) into /trunk/
+/trunk c2986 was merged (r2991) into this branch
+/releases/1.5/@r2991:r2994 was merged (r2998) into /trunk/
 /releases/1.5/@r2994:r3048 was merged (r3050) into /trunk/
 /releases/1.5/@r3048:r3078 was merged (r3079) into /trunk/
 /releases/1.5/@r3078:r3125 was merged (r3126) into /trunk/
 /releases/1.5/@r3125:r3170 was merged (r3173) into /trunk/
 /releases/1.5/@r3170:r3188 was merged (r3202) into /trunk/
 /releases/1.5/@r3188:r3205 was merged (r3206) into /trunk/
-/trunk@r3005,r3008,r3098,r3180 was merged (r3231) into this branch.
-/trunk@r2989:2990 was merged (r3240) into this branch
+/trunk c3005,c3008,c3098,c3180 were merged (r3231) into this branch.
+/trunk c2990 was merged (r3240) into this branch
 
-**** -> The next merge into trunk will be r3205:3230, then r3231:r3239,
-   then r3240:???? skipping r3230 and r3240
+---> The next merge into trunk will be r3205:3230, then r3231:r3239,
+    then r3240:???? skipping c3231 and c3240
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)

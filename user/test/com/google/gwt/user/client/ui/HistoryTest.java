@@ -19,8 +19,6 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-
 import java.util.ArrayList;
 
 /**
@@ -198,12 +196,10 @@ public class HistoryTest extends GWTTestCase {
 
       public void run() {
         if (count++ == 0) {
-          Window.alert("first timer");
           // verify that duplicates don't issue another event
           History.newItem("testHistoryChangedCount");
           timer.schedule(500);
         } else {
-          Window.alert("second timer");
           finishTest();
         }
       }

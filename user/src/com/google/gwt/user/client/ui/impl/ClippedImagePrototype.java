@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,9 +15,9 @@
  */
 package com.google.gwt.user.client.ui.impl;
 
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * Implementation of {@link AbstractImagePrototype} for a clipped image. This
@@ -28,11 +28,11 @@ public class ClippedImagePrototype extends AbstractImagePrototype {
 
   private static final ClippedImageImpl impl = GWT.create(ClippedImageImpl.class);
 
+  private int height = 0;
   private int left = 0;
   private int top = 0;
-  private int width = 0;
-  private int height = 0;
   private String url = null;
+  private int width = 0;
 
   public ClippedImagePrototype(String url, int left, int top, int width,
       int height) {
@@ -49,8 +49,18 @@ public class ClippedImagePrototype extends AbstractImagePrototype {
   }
 
   @Override
+  public void applyTo(ImagePrototypeElement imageElement) {
+    impl.adjust(imageElement, url, left, top, width, height);
+  }
+
+  @Override
   public Image createImage() {
     return new Image(url, left, top, width, height);
+  }
+
+  @Override
+  public ImagePrototypeElement createElement() {
+    return (ImagePrototypeElement) impl.createStructure(url, left, top, width, height);
   }
 
   @Override

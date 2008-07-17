@@ -17,7 +17,10 @@ Merges:
 /releases/1.5/@r3125:r3170 was merged (r3173) into /trunk/
 /releases/1.5/@r3170:r3188 was merged (r3202) into /trunk/
 /releases/1.5/@r3188:r3205 was merged (r3206) into /trunk/
--> The next merge into trunk will be r3205:????
+
+**** --> The next merge into trunk will be r3205:3230
+/trunk@r3005,r3008,r3098,r3180 was merged (r3231) into this branch.
+--> The next merge into trunk will be r3231:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)

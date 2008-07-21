@@ -54,13 +54,13 @@ public class ClippedImagePrototype extends AbstractImagePrototype {
   }
 
   @Override
-  public Image createImage() {
-    return new Image(url, left, top, width, height);
+  public ImagePrototypeElement createElement() {
+    return (ImagePrototypeElement) impl.createStructure(url, left, top, width, height);
   }
 
   @Override
-  public ImagePrototypeElement createElement() {
-    return (ImagePrototypeElement) impl.createStructure(url, left, top, width, height);
+  public Image createImage() {
+    return new Image(url, left, top, width, height);
   }
 
   @Override

@@ -172,7 +172,7 @@ public class Showcase implements EntryPoint {
   /**
    * The {@link Application}.
    */
-  private Application app;
+  private Application app = new Application();
 
   /**
    * A mapping of history tokens to their associated menu items.
@@ -194,22 +194,14 @@ public class Showcase implements EntryPoint {
     // Create the constants
     ShowcaseConstants constants = (ShowcaseConstants) GWT.create(ShowcaseConstants.class);
 
+    // Swap out the style sheets for the RTL versions if needed.
+    updateStyleSheets();
+
     // Create the application
-    app = new Application();
     setupTitlePanel(constants);
     setupMainLinks(constants);
     setupOptionsPanel();
     setupMainMenu(constants);
-
-    // Swap out the style sheets for the RTL versions if needed. We need to do
-    // this after the app is loaded because the app will setup the layout based
-    // on the width of the main menu, which is defined in the style sheet. If
-    // we swap the style sheets first, the app may load without any style sheet
-    // to define the main menu width, because the RTL version is still being
-    // loaded. Note that we are basing the layout on the width defined in the
-    // LTR version, so both versions should use the same width for the main nav
-    // menu.
-    updateStyleSheets();
 
     // Setup a history listener to reselect the associate menu item
     final HistoryListener historyListener = new HistoryListener() {
@@ -515,6 +507,7 @@ public class Showcase implements EntryPoint {
     }
 
     // Find existing style sheets that need to be removed
+    boolean styleSheetsFound = false;
     final HeadElement headElem = StyleSheetLoader.getHeadElement();
     final List<Element> toRemove = new ArrayList<Element>();
     NodeList<Node> children = headElem.getChildNodes();
@@ -524,6 +517,7 @@ public class Showcase implements EntryPoint {
         Element elem = Element.as(node);
         if (elem.getTagName().equalsIgnoreCase("link")
             && elem.getPropertyString("rel").equalsIgnoreCase("stylesheet")) {
+          styleSheetsFound = true;
           String href = elem.getPropertyString("href");
           // If the correct style sheets are already loaded, then we should have
           // nothing to remove.
@@ -536,7 +530,7 @@ public class Showcase implements EntryPoint {
     }
 
     // Return if we already have the correct style sheets
-    if (toRemove.size() == 0) {
+    if (styleSheetsFound && toRemove.size() == 0) {
       return;
     }
 

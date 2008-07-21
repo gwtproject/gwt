@@ -194,7 +194,7 @@ html>body .gwt-DialogBox .dialogBottomRight {
   cursor: hand;
 }
 .gwt-DisclosurePanel .content {
-  border-right: 3px solid #1e1e1e;
+  border-right: 3px solid #00CCFF;
   padding: 4px 8px 4px 0px;
   margin-right: 6px;
 }

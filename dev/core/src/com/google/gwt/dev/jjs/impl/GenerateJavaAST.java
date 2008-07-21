@@ -1028,6 +1028,10 @@ public class GenerateJavaAST {
       JExpression fieldRef = new JFieldRef(program, info, instance, field,
           currentClass);
 
+      /*
+       * Note, this may result in an invalid AST due to an LHS cast operation.
+       * We fix this up in FixAssignmentToUnbox.
+       */
       return maybeCast(type, fieldRef);
     }
 

@@ -1,6 +1,11 @@
 /**
  * Applied to the main layout of the page.
  */
+.Application-Reference-standard-rtl { 
+  height: 5px;
+  width: 5px;
+  zoom: 1;
+}
 .Application-top {
   width: 100%;
   margin-bottom: 10px;

@@ -305,6 +305,7 @@ html>body .gwt-DialogBox .dialogBottomRight {
 }
 .gwt-MenuBar-horizontal .gwt-MenuItemSeparator .menuSeparatorInner {
   width: 1px;
+  height: 1px;
   background: white; 
 }
 .gwt-MenuBar-vertical {

@@ -264,10 +264,11 @@ html>body .gwt-DialogBox .dialogBottomRight {
   margin: 0px;
   border: 0px;
   border-right: 1px solid #bec7cc;
-  background: white;
+  background: #000;
 }
 .gwt-MenuBar-horizontal .gwt-MenuItemSeparator .menuSeparatorInner {
   width: 1px;
+  height: 1px;
   background: #000; 
 }
 .gwt-MenuBar-vertical {

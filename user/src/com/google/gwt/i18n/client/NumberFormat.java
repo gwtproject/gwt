@@ -721,16 +721,18 @@ public class NumberFormat {
     return newIntPart.toString();
   }
   
-  
   /**
    * This method parses affix part of pattern.
    * 
    * @param pattern pattern string that need to be parsed
    * @param start start position to parse
    * @param affix store the parsed result
+   * @param inNegativePattern true if we are parsing the negative pattern and
+   *     therefore only care about the prefix and suffix 
    * @return how many characters parsed
    */
-  private int parseAffix(String pattern, int start, StringBuffer affix) {
+  private int parseAffix(String pattern, int start, StringBuffer affix,
+      boolean inNegativePattern) {
     affix.delete(0, affix.length());
     boolean inQuote = false;
     int len = pattern.length();
@@ -767,21 +769,25 @@ public class NumberFormat {
             }
             break;
           case PATTERN_PERCENT:
-            if (multiplier != 1) {
-              throw new IllegalArgumentException(
-                  "Too many percent/per mille characters in pattern \""
-                      + pattern + '"');
+            if (!inNegativePattern) {
+              if (multiplier != 1) {
+                throw new IllegalArgumentException(
+                    "Too many percent/per mille characters in pattern \""
+                    + pattern + '"');
+              }
+              multiplier = 100;
             }
-            multiplier = 100;
             affix.append(numberConstants.percent());
             break;
           case PATTERN_PER_MILLE:
-            if (multiplier != 1) {
-              throw new IllegalArgumentException(
-                  "Too many percent/per mille characters in pattern \""
-                      + pattern + '"');
+            if (!inNegativePattern) {
+              if (multiplier != 1) {
+                throw new IllegalArgumentException(
+                    "Too many percent/per mille characters in pattern \""
+                    + pattern + '"');
+              }
+              multiplier = 1000;
             }
-            multiplier = 1000;
             affix.append(numberConstants.perMill());
             break;
           case PATTERN_MINUS:
@@ -881,22 +887,23 @@ public class NumberFormat {
     int pos = 0;
     StringBuffer affix = new StringBuffer();
 
-    pos += parseAffix(pattern, pos, affix);
+    pos += parseAffix(pattern, pos, affix, false);
     positivePrefix = affix.toString();
-    int posPartLen = parseTrunk(pattern, pos);
-    pos += posPartLen;
-    pos += parseAffix(pattern, pos, affix);
+    pos += parseTrunk(pattern, pos, false);
+    pos += parseAffix(pattern, pos, affix, false);
     positiveSuffix = affix.toString();
 
     if (pos < pattern.length() && pattern.charAt(pos) == PATTERN_SEPARATOR) {
       ++pos;
-      pos += parseAffix(pattern, pos, affix);
+      pos += parseAffix(pattern, pos, affix, true);
       negativePrefix = affix.toString();
-      // The assumption made here is that negative part is identical to
-      // positive part. User must make sure pattern is correctly constructed.
-      pos += posPartLen;
-      pos += parseAffix(pattern, pos, affix);
+      // the negative pattern is only used for prefix/suffix
+      pos += parseTrunk(pattern, pos, true);
+      pos += parseAffix(pattern, pos, affix, true);
       negativeSuffix = affix.toString();
+    } else {
+      negativePrefix = numberConstants.minusSign() + positivePrefix;
+      negativeSuffix = positiveSuffix;
     }
   }
 
@@ -905,9 +912,11 @@ public class NumberFormat {
    * 
    * @param pattern pattern string that need to be parsed
    * @param start where parse started
+   * @param ignorePattern true if we are only parsing this for length
+   *     and correctness, such as in the negative portion of the pattern
    * @return how many characters parsed
    */
-  private int parseTrunk(String pattern, int start) {
+  private int parseTrunk(String pattern, int start, boolean ignorePattern) {
     int decimalPos = -1;
     int digitLeftCount = 0, zeroDigitCount = 0, digitRightCount = 0;
     byte groupingCount = -1;
@@ -949,23 +958,27 @@ public class NumberFormat {
           decimalPos = digitLeftCount + zeroDigitCount + digitRightCount;
           break;
         case PATTERN_EXPONENT:
-          if (useExponentialNotation) {
-            throw new IllegalArgumentException("Multiple exponential "
-                + "symbols in pattern \"" + pattern + '"');
+          if (!ignorePattern) {
+            if (useExponentialNotation) {
+              throw new IllegalArgumentException("Multiple exponential "
+                  + "symbols in pattern \"" + pattern + '"');
+            }
+            useExponentialNotation = true;
+            minExponentDigits = 0;
           }
-          useExponentialNotation = true;
-          minExponentDigits = 0;
 
           // Use lookahead to parse out the exponential part
           // of the pattern, then jump into phase 2.
           while ((pos + 1) < len
-              && pattern.charAt(pos + 1) == numberConstants.zeroDigit().charAt(
-                  0)) {
+              && pattern.charAt(pos + 1) == PATTERN_ZERO_DIGIT) {
             ++pos;
-            ++minExponentDigits;
+            if (!ignorePattern) {
+              ++minExponentDigits;
+            }
           }
 
-          if ((digitLeftCount + zeroDigitCount) < 1 || minExponentDigits < 1) {
+          if (!ignorePattern && (digitLeftCount + zeroDigitCount) < 1
+              || minExponentDigits < 1) {
             throw new IllegalArgumentException("Malformed exponential "
                 + "pattern \"" + pattern + '"');
           }
@@ -995,6 +1008,11 @@ public class NumberFormat {
         || groupingCount == 0) {
       throw new IllegalArgumentException("Malformed pattern \"" + pattern + '"');
     }
+
+    if (ignorePattern) {
+      return pos - start;
+    }
+
     int totalDigits = digitLeftCount + zeroDigitCount + digitRightCount;
 
     maximumFractionDigits = (decimalPos >= 0 ? (totalDigits - decimalPos) : 0);
@@ -1026,7 +1044,7 @@ public class NumberFormat {
 
     return pos - start;
   }
-
+  
   /**
    * This method formats a <code>double</code> in exponential format.
    * 

@@ -166,10 +166,3 @@
   font-weight: bold;
   font-size: 1.4em;
 }
-
-/**
- * Make all buttons the same size.
- */
-.gwt-Button {
-  width: 10em;
-}

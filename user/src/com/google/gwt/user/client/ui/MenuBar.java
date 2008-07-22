@@ -134,16 +134,6 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation {
   }
 
   /**
-   * Creates an empty horizontal menu bar that uses the specified image bundle
-   * for menu images.
-   *
-   * @param images a bundle that provides images for this menu
-   */
-  public MenuBar(MenuBarImages images) {
-    this(false, images);
-  }
-
-  /**
    * Creates an empty menu bar.
    *
    * @param vertical <code>true</code> to orient the menu bar vertically
@@ -166,6 +156,16 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation {
    */
   public MenuBar(boolean vertical, MenuBarImages images) {
     init(vertical, images);
+  }
+
+  /**
+   * Creates an empty horizontal menu bar that uses the specified image bundle
+   * for menu images.
+   *
+   * @param images a bundle that provides images for this menu
+   */
+  public MenuBar(MenuBarImages images) {
+    this(false, images);
   }
 
   /**
@@ -345,6 +345,7 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation {
             } else {
               moveToPrevItem();
             }
+            eatEvent(event);
             break;
           case KeyboardListener.KEY_RIGHT:
             if (LocaleInfo.getCurrentLocale().isRTL()) {
@@ -352,19 +353,24 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation {
             } else {
               moveToNextItem();
             }
+            eatEvent(event);
             break;
           case KeyboardListener.KEY_UP:
             moveUp();
+            eatEvent(event);
             break;
           case KeyboardListener.KEY_DOWN:
             moveDown();
+            eatEvent(event);
             break;
           case KeyboardListener.KEY_ESCAPE:
             closeAllParents();
+            eatEvent(event);
             break;
           case KeyboardListener.KEY_ENTER:
             if (!selectFirstItemIfNoneSelected()) {
               doItemAction(selectedItem, true);
+              eatEvent(event);
             }
             break;
         } // end switch(keyCode)
@@ -731,6 +737,11 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation {
     if (parentMenu != null) {
       parentMenu.popup.hide();
     }
+  }
+
+  private void eatEvent(Event event) {
+    DOM.eventCancelBubble(event, true);
+    DOM.eventPreventDefault(event);
   }
 
   private MenuItem findItem(Element hItem) {

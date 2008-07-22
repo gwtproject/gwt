@@ -207,14 +207,16 @@ public class Showcase implements EntryPoint {
     final HistoryListener historyListener = new HistoryListener() {
       public void onHistoryChanged(String historyToken) {
         TreeItem item = itemTokens.get(historyToken);
-        if (item != null) {
-          // Select the associated TreeItem
-          app.getMainMenu().setSelectedItem(item, false);
-          app.getMainMenu().ensureSelectedItemVisible();
-
-          // Show the associated ContentWidget
-          displayContentWidget(itemWidgets.get(item));
+        if (item == null) {
+          item = app.getMainMenu().getItem(0).getChild(0);
         }
+
+        // Select the associated TreeItem
+        app.getMainMenu().setSelectedItem(item, false);
+        app.getMainMenu().ensureSelectedItemVisible();
+
+        // Show the associated ContentWidget
+        displayContentWidget(itemWidgets.get(item));
       }
     };
     History.addHistoryListener(historyListener);
@@ -244,8 +246,9 @@ public class Showcase implements EntryPoint {
             } else {
               // Use the first token available
               TreeItem firstItem = app.getMainMenu().getItem(0).getChild(0);
-              app.getMainMenu().setSelectedItem(firstItem, true);
+              app.getMainMenu().setSelectedItem(firstItem, false);
               app.getMainMenu().ensureSelectedItemVisible();
+              displayContentWidget(itemWidgets.get(firstItem));
             }
           }
         });

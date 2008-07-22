@@ -417,6 +417,11 @@ public class Showcase implements EntryPoint {
   private void setupOptionsPanel() {
     VerticalPanel vPanel = new VerticalPanel();
     vPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+    if (LocaleInfo.getCurrentLocale().isRTL()) {
+      vPanel.getElement().setAttribute("align", "left");
+    } else {
+      vPanel.getElement().setAttribute("align", "right");
+    }
     app.setOptionsWidget(vPanel);
 
     // Add the option to change the locale

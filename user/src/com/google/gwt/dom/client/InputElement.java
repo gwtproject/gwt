@@ -51,7 +51,7 @@ public class InputElement extends Element {
    * the following values: "button", "checkbox", "radio", "reset", or "submit".
    */
   public final native void click() /*-{
-    this.click;
+    this.click();
   }-*/;
 
   /**

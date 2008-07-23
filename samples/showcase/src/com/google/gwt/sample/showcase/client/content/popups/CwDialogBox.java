@@ -16,6 +16,7 @@
 package com.google.gwt.sample.showcase.client.content.popups;
 
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.sample.showcase.client.ContentWidget;
 import com.google.gwt.sample.showcase.client.Showcase;
 import com.google.gwt.sample.showcase.client.ShowcaseAnnotations.ShowcaseData;
@@ -34,8 +35,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Example file.
  */
-@ShowcaseStyle({".gwt-DialogBox", "html>body .gwt-DialogBox", "* html .gwt-DialogBox",
-    ".cw-DialogBox"})
+@ShowcaseStyle({".gwt-DialogBox", "html>body .gwt-DialogBox",
+    "* html .gwt-DialogBox", ".cw-DialogBox"})
 public class CwDialogBox extends ContentWidget {
   /**
    * The constants used in this Content Widget.
@@ -144,7 +145,7 @@ public class CwDialogBox extends ContentWidget {
     VerticalPanel dialogContents = new VerticalPanel();
     dialogContents.setSpacing(4);
     dialogBox.setWidget(dialogContents);
-    
+
     // Add some text to the top of the dialog
     HTML details = new HTML(constants.cwDialogBoxDetails());
     dialogContents.add(details);
@@ -165,8 +166,14 @@ public class CwDialogBox extends ContentWidget {
           }
         });
     dialogContents.add(closeButton);
-    dialogContents.setCellHorizontalAlignment(closeButton,
-        HasHorizontalAlignment.ALIGN_RIGHT);
+    if (LocaleInfo.getCurrentLocale().isRTL()) {
+      dialogContents.setCellHorizontalAlignment(closeButton,
+          HasHorizontalAlignment.ALIGN_LEFT);
+
+    } else {
+      dialogContents.setCellHorizontalAlignment(closeButton,
+          HasHorizontalAlignment.ALIGN_RIGHT);
+    }
 
     // Return the dialog box
     return dialogBox;

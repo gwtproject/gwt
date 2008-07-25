@@ -589,49 +589,65 @@ public class NumberFormat {
    */
   public double parse(String text, int[] inOutPos) throws NumberFormatException {
     int start = inOutPos[0];
-    boolean gotPositive, gotNegative;
     double ret = 0.0;
 
-    gotPositive = (text.indexOf(positivePrefix, inOutPos[0]) == inOutPos[0]);
-    gotNegative = (text.indexOf(negativePrefix, inOutPos[0]) == inOutPos[0]);
+    boolean gotPositivePrefix = text.startsWith(positivePrefix, inOutPos[0]);
+    boolean gotNegativePrefix = text.startsWith(negativePrefix, inOutPos[0]);
+    boolean gotPositiveSuffix = text.endsWith(positiveSuffix); 
+    boolean gotNegativeSuffix = text.endsWith(negativeSuffix); 
+    boolean gotPositive = gotPositivePrefix && gotPositiveSuffix;
+    boolean gotNegative = gotNegativePrefix && gotNegativeSuffix;
 
+    // Handle conflicts where we get both patterns, which usually
+    // happens when one is a prefix of the other (such as the positive
+    // pattern having empty prefix/suffixes).
     if (gotPositive && gotNegative) {
       if (positivePrefix.length() > negativePrefix.length()) {
         gotNegative = false;
       } else if (positivePrefix.length() < negativePrefix.length()) {
         gotPositive = false;
+      } else if (positiveSuffix.length() > negativeSuffix.length()) {
+        gotNegative = false;
+      } else if (positiveSuffix.length() < negativeSuffix.length()) {
+        gotPositive = false;
+      } else {
+        // can't tell patterns apart, must be positive
+        gotNegative = false;
       }
+    } else if (!gotPositive && !gotNegative) {
+      throw new NumberFormatException(text
+          + " does not have either positive or negative affixes");
     }
 
+    // Contains just the value to parse, stripping any prefix or suffix
+    String valueOnly = null;
     if (gotPositive) {
       inOutPos[0] += positivePrefix.length();
-    } else if (gotNegative) {
+      valueOnly = text.substring(inOutPos[0],
+          text.length() - positiveSuffix.length());
+    } else {
       inOutPos[0] += negativePrefix.length();
+      valueOnly = text.substring(inOutPos[0],
+          text.length() - negativeSuffix.length());
     }
 
-    // Process digits or Inf, and find decimal position.
-    if (text.indexOf(numberConstants.infinity(), inOutPos[0]) == inOutPos[0]) {
+    // Process digits or special values, and find decimal position.
+    if (valueOnly.equals(numberConstants.infinity())) {
       inOutPos[0] += numberConstants.infinity().length();
       ret = Double.POSITIVE_INFINITY;
-    } else if (text.indexOf(numberConstants.notANumber(), inOutPos[0]) == inOutPos[0]) {
+    } else if (valueOnly.equals(numberConstants.notANumber())) {
       inOutPos[0] += numberConstants.notANumber().length();
       ret = Double.NaN;
     } else {
-      ret = parseNumber(text, inOutPos);
+      int[] tempPos = {0};
+      ret = parseNumber(valueOnly, tempPos);
+      inOutPos[0] += tempPos[0];
     }
 
     // Check for suffix.
     if (gotPositive) {
-      if (!(text.indexOf(positiveSuffix, inOutPos[0]) == inOutPos[0])) {
-        inOutPos[0] = start;
-        return 0.0;
-      }
       inOutPos[0] += positiveSuffix.length();
     } else if (gotNegative) {
-      if (!(text.indexOf(negativeSuffix, inOutPos[0]) == inOutPos[0])) {
-        inOutPos[0] = start;
-        return 0.0;
-      }
       inOutPos[0] += negativeSuffix.length();
     }
 
@@ -657,10 +673,14 @@ public class NumberFormat {
     }
 
     String exponentDigits = String.valueOf(exponent);
-    for (int i = exponentDigits.length(); i < minExponentDigits; ++i) {
+    int len = exponentDigits.length();
+    for (int i = len; i < minExponentDigits; ++i) {
       result.append(numberConstants.zeroDigit());
     }
-    result.append(exponentDigits);
+    int zeroDelta = numberConstants.zeroDigit().charAt(0) - '0';
+    for (int i = 0; i < len; ++i) {
+      result.append((char) (exponentDigits.charAt(i) + zeroDelta));
+    }
   }
 
   /**

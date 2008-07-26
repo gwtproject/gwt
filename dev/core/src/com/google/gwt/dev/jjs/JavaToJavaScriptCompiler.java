@@ -269,9 +269,6 @@ public class JavaToJavaScriptCompiler {
       }
       allEntryPoints.addAll(JProgram.CODEGEN_TYPES_SET);
       allEntryPoints.addAll(JProgram.INDEX_TYPES_SET);
-      allEntryPoints.add("java.lang.Object");
-      allEntryPoints.add("java.lang.String");
-      allEntryPoints.add("java.lang.Iterable");
       declEntryPts = allEntryPoints.toArray(new String[0]);
     }
 

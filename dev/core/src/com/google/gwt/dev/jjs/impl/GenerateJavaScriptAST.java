@@ -36,7 +36,6 @@ import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JContinueStatement;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDoStatement;
-import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
@@ -131,7 +130,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -465,13 +463,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JClassLiteral x, Context ctx) {
-      JsExpression classObjectAllocation = pop(); // classObjectAllocation
-
-      // My seed function name
-      String nameString = x.getRefType().getJavahSignatureName() + "_classlit";
-      JsName classLit = topScope.declareName(nameString);
-      classLits.put(x.getRefType(), classLit);
-      classObjects.put(classLit, classObjectAllocation);
+      JsName classLit = names.get(x.getField());
       push(classLit.makeRef());
     }
 
@@ -484,6 +476,11 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JClassType x, Context ctx) {
       if (alreadyRan.contains(x)) {
+        return;
+      }
+
+      if (program.getTypeClassLiteralHolder() == x) {
+        // Handled in generateClassLiterals.
         return;
       }
 
@@ -982,13 +979,10 @@ public class GenerateJavaScriptAST {
       vars.add(new JsVar(globalTemp));
       globalStmts.add(0, vars);
 
-      /*
-       * Long lits must got at the top, they can serve as constant field
-       * initializers.
-       */
+      // Long lits must go at the top, they can be constant field initializers.
       generateLongLiterals(vars);
 
-      // Generate class objects.
+      // Class objects; perhaps they could be constant field initializers also?
       vars = new JsVars();
       generateClassLiterals(vars);
       if (!vars.isEmpty()) {
@@ -1084,6 +1078,11 @@ public class GenerateJavaScriptAST {
     @Override
     public boolean visit(JClassType x, Context ctx) {
       if (alreadyRan.contains(x)) {
+        return false;
+      }
+
+      if (program.getTypeClassLiteralHolder() == x) {
+        // Handled in generateClassLiterals.
         return false;
       }
 
@@ -1193,18 +1192,6 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    /**
-     * Return whether the expression could possibly evaluate to a string.
-     */
-    private boolean couldBeString(JExpression x) {
-      JType type = x.getType();
-      if (type instanceof JReferenceType) {
-        return typeOracle.canTheoreticallyCast((JReferenceType) type,
-            program.getTypeJavaLangString());
-      }
-      return false;
-    }
-
     private JsExpression createAssignment(JsExpression lhs, JsExpression rhs) {
       return new JsBinaryOperation(JsBinaryOperator.ASG, lhs, rhs);
     }
@@ -1219,23 +1206,26 @@ public class GenerateJavaScriptAST {
       return new JsBinaryOperation(JsBinaryOperator.COMMA, lhs, rhs);
     }
 
-    private void generateClassLiteral(JType type, JsVars vars) {
-      JsName jsName = classLits.get(type);
-      JsExpression classObjectAlloc = classObjects.get(jsName);
+    private void generateClassLiteral(JDeclarationStatement decl, JsVars vars) {
+      JField field = (JField) decl.getVariableRef().getTarget();
+      JsName jsName = names.get(field);
+      this.accept(decl.getInitializer());
+      JsExpression classObjectAlloc = pop();
       JsVar var = new JsVar(jsName);
       var.setInitExpr(classObjectAlloc);
       vars.add(var);
     }
 
     private void generateClassLiterals(JsVars vars) {
-      // Object must go first; arrays depend on it.
-      JClassType objType = program.getTypeJavaLangObject();
-      if (classLits.containsKey(objType)) {
-        generateClassLiteral(objType, vars);
-      }
-      for (JType type : classLits.keySet()) {
-        if (type != objType) {
-          generateClassLiteral(type, vars);
+      /*
+       * Must execute in clinit statement order, NOT field order, so that back
+       * refs to super classes are preserved.
+       */
+      JMethodBody clinitBody = (JMethodBody) program.getTypeClassLiteralHolder().methods.get(
+          0).getBody();
+      for (JStatement stmt : clinitBody.getStatements()) {
+        if (stmt instanceof JDeclarationStatement) {
+          generateClassLiteral((JDeclarationStatement) stmt, vars);
         }
       }
     }
@@ -1636,12 +1626,6 @@ public class GenerateJavaScriptAST {
 
   private final Map<JBlock, JsCatch> catchMap = new IdentityHashMap<JBlock, JsCatch>();
 
-  /**
-   * Must preserve order so that superclass literals generate before subclasses.
-   */
-  private final Map<JType, JsName> classLits = new LinkedHashMap<JType, JsName>();
-
-  private final Map<JsName, JsExpression> classObjects = new IdentityHashMap<JsName, JsExpression>();
   private final Map<JClassType, JsScope> classScopes = new IdentityHashMap<JClassType, JsScope>();
 
   /**

@@ -14,7 +14,7 @@
  * so we need to use the AlphaImageLoader in IE6 only.
  */
 
-body, table td, select {
+body, table td, select, pre {
   font-family: Arial Unicode MS, Arial, sans-serif;
   font-size: small;
   color: #bec7cc;

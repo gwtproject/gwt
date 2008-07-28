@@ -227,6 +227,11 @@ public class JProgram extends JNode {
 
   private JMethod nullMethod;
 
+  /**
+   * Turned on once optimizations begin.
+   */
+  private boolean optimizationsStarted = false;
+
   private Map<JReferenceType, Integer> queryIds;
 
   private final RebindOracle rebindOracle;
@@ -288,6 +293,15 @@ public class JProgram extends JNode {
     if (!entryMethods.contains(entryPoint)) {
       entryMethods.add(entryPoint);
     }
+  }
+
+  /**
+   * Record the start of optimizations, which disables certain problematic
+   * constructions. In particular, new class literals cannot be created once
+   * optimization starts.
+   */
+  public void beginOptimizations() {
+    optimizationsStarted = true;
   }
 
   /**
@@ -534,6 +548,12 @@ public class JProgram extends JNode {
   public JClassLiteral getLiteralClass(JType type) {
     JClassLiteral classLiteral = classLiterals.get(type);
     if (classLiteral == null) {
+      if (optimizationsStarted) {
+        throw new InternalCompilerException(
+            "New class literals cannot be created once optimizations have started; type '"
+                + type + "'");
+      }
+
       SourceInfo info = typeSpecialClassLiteralHolder.getSourceInfo();
 
       // Create the allocation expression FIRST since this may be recursive on
@@ -558,6 +578,15 @@ public class JProgram extends JNode {
 
       classLiteral = new JClassLiteral(this, type, field);
       classLiterals.put(type, classLiteral);
+    } else {
+      // Make sure the field hasn't been pruned.
+      JField field = classLiteral.getField();
+      if (optimizationsStarted
+          && !field.getEnclosingType().fields.contains(field)) {
+        throw new InternalCompilerException(
+            "Getting a class literal whose field holder has already been pruned; type '"
+                + type + " '");
+      }
     }
     return classLiteral;
   }

@@ -64,9 +64,6 @@ public class JNewArray extends JExpression implements HasSettableType {
 
   /**
    * The list of class literals that will be needed to support this expression.
-   * It is computed at the last possible moment because <code>dims</code> and
-   * <code>initializers</code> are public and are filled in after
-   * construction.
    */
   private final List<JClassLiteral> classLiterals;
 

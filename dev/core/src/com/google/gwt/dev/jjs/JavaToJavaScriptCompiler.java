@@ -358,6 +358,13 @@ public class JavaToJavaScriptCompiler {
       // Replace references to JSO subtypes with JSO itself.
       JavaScriptObjectNormalizer.exec(jprogram);
 
+      /*
+       * Record the beginning of optimations; this turns on certain checks that
+       * guard against problematic late construction of things like class
+       * literals.
+       */
+      jprogram.beginOptimizations();
+
       // (4) Optimize the normalized Java AST
       boolean didChange;
       do {

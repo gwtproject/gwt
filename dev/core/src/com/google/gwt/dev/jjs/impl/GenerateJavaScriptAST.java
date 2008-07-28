@@ -982,11 +982,14 @@ public class GenerateJavaScriptAST {
       // Long lits must go at the top, they can be constant field initializers.
       generateLongLiterals(vars);
 
-      // Class objects; perhaps they could be constant field initializers also?
-      vars = new JsVars();
-      generateClassLiterals(vars);
-      if (!vars.isEmpty()) {
-        globalStmts.add(vars);
+      // Class objects, but only if there are any.
+      if (x.getDeclaredTypes().contains(x.getTypeClassLiteralHolder())) {
+        // TODO: perhaps they could be constant field initializers also?
+        vars = new JsVars();
+        generateClassLiterals(vars);
+        if (!vars.isEmpty()) {
+          globalStmts.add(vars);
+        }
       }
     }
 

@@ -161,7 +161,7 @@ public class AbsolutePanel extends ComplexPanel {
     }
   }
 
-  private void setWidgetPositionImpl(Widget w, int left, int top) {
+  protected void setWidgetPositionImpl(Widget w, int left, int top) {
     Element h = w.getElement();
     if ((left == -1) && (top == -1)) {
       changeToStaticPositioning(h);

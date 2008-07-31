@@ -154,13 +154,6 @@ public class AbsolutePanel extends ComplexPanel {
     setWidgetPositionImpl(w, left, top);
   }
 
-  private void checkWidgetParent(Widget w) {
-    if (w.getParent() != this) {
-      throw new IllegalArgumentException(
-          "Widget must be a child of this panel.");
-    }
-  }
-
   protected void setWidgetPositionImpl(Widget w, int left, int top) {
     Element h = w.getElement();
     if ((left == -1) && (top == -1)) {
@@ -169,6 +162,13 @@ public class AbsolutePanel extends ComplexPanel {
       DOM.setStyleAttribute(h, "position", "absolute");
       DOM.setStyleAttribute(h, "left", left + "px");
       DOM.setStyleAttribute(h, "top", top + "px");
+    }
+  }
+
+  private void checkWidgetParent(Widget w) {
+    if (w.getParent() != this) {
+      throw new IllegalArgumentException(
+          "Widget must be a child of this panel.");
     }
   }
 }

@@ -15,10 +15,8 @@
  */
 package com.google.gwt.user.client;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.core.client.JavaScriptObject;
-
-import java.util.ArrayList;
+import com.google.gwt.dom.client.Element;
 
 /**
  * <p>

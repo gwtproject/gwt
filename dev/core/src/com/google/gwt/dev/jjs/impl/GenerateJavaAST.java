@@ -453,29 +453,10 @@ public class GenerateJavaAST {
       // Check if we need to box the resulting expression.
       if (x != null) {
         if ((x.implicitConversion & TypeIds.BOXING) != 0) {
-          /*
-           * Beware! Passing in "primitiveTypeToBox" seems unnecessary, but it
-           * isn't. You cannot determine the true type to box directly by
-           * calling result.getType() in all cases because sometimes, such as
-           * when the expression is originally a int literal prefixed with a
-           * narrowing cast, the processExpression() calls returns JIntLiterals
-           * even when the actual type should be byte or short. So, unless you
-           * remember what the original expression type was, you'd incorrectly
-           * box a byte as an Integer.
-           */
-          JType primitiveTypeToBox = (JType) typeMap.get(x.resolvedType);
-
-          if (!(primitiveTypeToBox instanceof JPrimitiveType)) {
-            throw new InternalCompilerException(result,
-                "Attempt to box a non-primitive type: "
-                    + primitiveTypeToBox.getName(), null);
-          }
-
-          result = autoboxUtils.box(result,
-              ((JPrimitiveType) primitiveTypeToBox));
+          result = autoboxUtils.box(result, implicitConversionTargetType(x));
         } else if ((x.implicitConversion & TypeIds.UNBOXING) != 0) {
           // This code can actually leave an unbox operation in
-          // an lvalue position, for example ++x.intValue().
+          // an lvalue position, for example ++(x.intValue()).
           // Such trees are cleaned up in FixAssignmentToUnbox.
           JType typeToUnbox = (JType) typeMap.get(x.resolvedType);
           if (!(typeToUnbox instanceof JClassType)) {
@@ -1612,6 +1593,11 @@ public class GenerateJavaAST {
       // May need to box or unbox the element assignment.
       if (x.elementVariableImplicitWidening != -1) {
         if ((x.elementVariableImplicitWidening & TypeIds.BOXING) != 0) {
+          /*
+           * Boxing is necessary. In this special case of autoboxing, the boxed
+           * expression cannot be a constant, so the box type must be exactly
+           * that associated with the expression.
+           */
           elementDecl.initializer = autoboxUtils.box(elementDecl.initializer,
               ((JPrimitiveType) elementDecl.initializer.getType()));
         } else if ((x.elementVariableImplicitWidening & TypeIds.UNBOXING) != 0) {
@@ -2176,6 +2162,43 @@ public class GenerateJavaAST {
 
       statements.clear();
       statements.add(new JReturnStatement(program, info, returnValue));
+    }
+
+    /*
+     * Determine the destination type for an implicit conversion of the given
+     * expression. Beware that when autoboxing, the type of the expression is
+     * not necessarily the same as the type of the box to be created. The JDT
+     * figures out what the necessary conversion is, depending on the context
+     * the expression appears in, and stores it in <code>x.implicitConversion</code>,
+     * so extract it from there.
+     */
+    private JPrimitiveType implicitConversionTargetType(Expression x)
+        throws InternalCompilerException {
+      /*
+       * This algorithm for finding the target type is copied from
+       * org.eclipse.jdt.internal.compiler.codegen.CodeStream.generateReturnBytecode() .
+       */
+      switch ((x.implicitConversion & TypeIds.IMPLICIT_CONVERSION_MASK) >> 4) {
+        case TypeIds.T_boolean:
+          return program.getTypePrimitiveBoolean();
+        case TypeIds.T_byte:
+          return program.getTypePrimitiveByte();
+        case TypeIds.T_char:
+          return program.getTypePrimitiveChar();
+        case TypeIds.T_double:
+          return program.getTypePrimitiveDouble();
+        case TypeIds.T_float:
+          return program.getTypePrimitiveFloat();
+        case TypeIds.T_int:
+          return program.getTypePrimitiveInt();
+        case TypeIds.T_long:
+          return program.getTypePrimitiveLong();
+        case TypeIds.T_short:
+          return program.getTypePrimitiveShort();
+        default:
+          throw new InternalCompilerException(
+              "Could not determine the desired box type");
+      }
     }
 
     private SourceInfo makeSourceInfo(Statement x) {

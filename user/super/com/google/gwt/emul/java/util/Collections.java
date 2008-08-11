@@ -102,8 +102,16 @@ public class Collections {
       throw new UnsupportedOperationException();
     }
 
+    public boolean equals(Object o) {
+      return list.equals(o);
+    }
+
     public T get(int index) {
       return list.get(index);
+    }
+
+    public int hashCode() {
+      return list.hashCode();
     }
 
     public int indexOf(Object o) {

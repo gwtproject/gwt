@@ -531,6 +531,10 @@ public class JVisitor {
   }
 
   private InternalCompilerException translateException(JNode node, Throwable e) {
+    if (e instanceof OutOfMemoryError) {
+      // Always rethrow OOMs (might have no memory to load ICE class anyway).
+      throw (OutOfMemoryError) e;
+    }
     InternalCompilerException ice;
     if (e instanceof InternalCompilerException) {
       ice = (InternalCompilerException) e;

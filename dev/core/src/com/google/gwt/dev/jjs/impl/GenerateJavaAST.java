@@ -220,6 +220,10 @@ public class GenerateJavaAST {
 
     private static InternalCompilerException translateException(JNode node,
         Throwable e) {
+      if (e instanceof OutOfMemoryError) {
+        // Always rethrow OOMs (might have no memory to load ICE class anyway).
+        throw (OutOfMemoryError) e;
+      }
       InternalCompilerException ice;
       if (e instanceof InternalCompilerException) {
         ice = (InternalCompilerException) e;
@@ -2308,6 +2312,10 @@ public class GenerateJavaAST {
 
     private InternalCompilerException translateException(Object node,
         Throwable e) {
+      if (e instanceof OutOfMemoryError) {
+        // Always rethrow OOMs (might have no memory to load ICE class anyway).
+        throw (OutOfMemoryError) e;
+      }
       InternalCompilerException ice;
       if (e instanceof InternalCompilerException) {
         ice = (InternalCompilerException) e;

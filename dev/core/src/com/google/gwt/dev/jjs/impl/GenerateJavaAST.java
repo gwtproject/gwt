@@ -2638,7 +2638,8 @@ public class GenerateJavaAST {
 
       private void processMethod(JsNameRef nameRef, SourceInfo info,
           JMethod method, JsContext<JsExpression> ctx) {
-        if (method.getEnclosingType() != null) {
+        JReferenceType enclosingType = method.getEnclosingType();
+        if (enclosingType != null) {
           if (method.isStatic() && nameRef.getQualifier() != null) {
             reportJsniError(info, methodDecl,
                 "Cannot make a qualified reference to the static method "
@@ -2647,6 +2648,16 @@ public class GenerateJavaAST {
             reportJsniError(info, methodDecl,
                 "Cannot make an unqualified reference to the instance method "
                     + method.getName());
+          } else if (!method.isStatic()
+              && program.isJavaScriptObject(enclosingType)) {
+            reportJsniError(
+                info,
+                methodDecl,
+                "Illegal reference to instance method '"
+                    + method.getName()
+                    + "' in type '"
+                    + enclosingType.getName()
+                    + "', which is an overlay type; only static references to overlay types are allowed from JSNI");
           }
         }
         if (ctx.isLvalue()) {

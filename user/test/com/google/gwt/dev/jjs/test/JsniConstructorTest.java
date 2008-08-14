@@ -45,7 +45,7 @@ public class JsniConstructorTest extends GWTTestCase {
     } catch (Throwable t) {
       fail("Expecting a StaticObjectException, got a " + t.getClass().getName());
     }
-    
+
     try {
       staticArg(true);
       fail("Should have thrown a runtime exception");
@@ -55,7 +55,7 @@ public class JsniConstructorTest extends GWTTestCase {
       fail("Expecting a RuntimeException, got a " + t.getClass().getName());
     }
   }
-  
+
   public void testJsniConstructors() {
     StaticObject o = staticArg(1);
     assertEquals(1, o.foo());
@@ -83,43 +83,45 @@ public class JsniConstructorTest extends GWTTestCase {
   }
 
   private native InstanceObject instanceArg(StaticObject obj, int i) /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject;I)(obj,i);
+    return @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject;I)(obj,i);
   }-*/;
 
-  private native NestedInstanceObject nestedInstanceArg(InstanceObject obj, int i) /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject.NestedInstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject$InstanceObject;I)(obj,i);
+  private native NestedInstanceObject nestedInstanceArg(InstanceObject obj,
+      int i) /*-{
+    return @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject.NestedInstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject$InstanceObject;I)(obj,i);
   }-*/;
 
   private native NoArgObject noArg() /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject.NoArgObject::new()();
+    return @com.google.gwt.dev.jjs.test.StaticObject.NoArgObject::new()();
   }-*/;
 
   private native NoInitObject noInit() /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject.NoInitObject::new()();
+    return @com.google.gwt.dev.jjs.test.StaticObject.NoInitObject::new()();
   }-*/;
 
   private native InstanceObject passAndReturnInstance(StaticObject obj, int i) /*-{
-  var f = @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject;I);
-  return f.call(null, obj, i);
+    var f = @com.google.gwt.dev.jjs.test.StaticObject.InstanceObject::new(Lcom/google/gwt/dev/jjs/test/StaticObject;I);
+    return f.call(null, obj, i);
   }-*/;
 
   private native StaticObject passAndReturnStatic(int i) /*-{
-  var f = @com.google.gwt.dev.jjs.test.StaticObject::new(I);
-  return f(i);
+    var f = @com.google.gwt.dev.jjs.test.StaticObject::new(I);
+    return f(i);
   }-*/;
 
   /**
    * Calls a constructor that always throws an exception.
    */
-  private native StaticObject staticArg(boolean throwRuntime) throws StaticObjectException /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject::new(Z)(throwRuntime);
+  private native StaticObject staticArg(boolean throwRuntime)
+      throws StaticObjectException /*-{
+    return @com.google.gwt.dev.jjs.test.StaticObject::new(Z)(throwRuntime);
   }-*/;
-  
+
   private native StaticObject staticArg(int i) /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject::new(I)(i);
+    return @com.google.gwt.dev.jjs.test.StaticObject::new(I)(i);
   }-*/;
 
   private native StaticInnerObject staticInnerArg(int i) /*-{
-  return @com.google.gwt.dev.jjs.test.StaticObject.StaticInnerObject::new(I)(i);
+    return @com.google.gwt.dev.jjs.test.StaticObject.StaticInnerObject::new(I)(i);
   }-*/;
 }

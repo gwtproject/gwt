@@ -521,10 +521,16 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements SortedMap<K, V> 
       }
     };
     
+    /**
+     * @return true if this submap type uses a from-key.
+     */
     public boolean fromKeyValid() {
       return false;
     }
     
+    /**
+     * @return true if this submap type uses a to-key.
+     */
     public boolean toKeyValid() {
       return false;
     }

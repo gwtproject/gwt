@@ -40,7 +40,6 @@ import com.google.gwt.dev.javac.impl.SourceFileCompilationUnit;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.user.rebind.rpc.testcases.client.AbstractSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.ClassWithTypeParameterThatErasesToObject;
-import com.google.gwt.user.rebind.rpc.testcases.client.CovariantArrays;
 import com.google.gwt.user.rebind.rpc.testcases.client.ManualSerialization;
 import com.google.gwt.user.rebind.rpc.testcases.client.NoSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.NotAllSubtypesAreSerializable;
@@ -959,31 +958,60 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
    */
   public void testCovariantArrays() throws UnableToCompleteException,
       NotFoundException {
+    Set<CompilationUnit> units = new HashSet<CompilationUnit>();
+    addStandardClasses(units);
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("import java.io.Serializable;\n");
+      code.append("public class Sup implements Serializable {\n");
+      code.append("}\n");
+      units.add(createMockCompilationUnit("Sup", code));
+    }
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("import java.io.Serializable;\n");
+      code.append("public class Sub extends Sup {\n");
+      code.append("}\n");
+      units.add(createMockCompilationUnit("Sub", code));
+    }
+
     TreeLogger logger = createLogger();
+    TypeOracle to = TypeOracleTestingUtils.buildTypeOracle(logger, units);
+
+    JClassType sup = to.getType("Sup");
+    JClassType sub = to.getType("Sub");
+    JPrimitiveType primFloat = JPrimitiveType.FLOAT;
+
+    JArrayType subArray = to.getArrayType(sub);
+    JArrayType subArrayArray = to.getArrayType(subArray);
+    JArrayType supArray = to.getArrayType(sup);
+    JArrayType supArrayArray = to.getArrayType(supArray);
+    JArrayType primFloatArray = to.getArrayType(primFloat);
+    JArrayType primFloatArrayArray = to.getArrayType(primFloatArray);
 
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
-        logger, typeOracle);
-    JClassType rootType = typeOracle.getArrayType(typeOracle.getType(CovariantArrays.AA.class.getCanonicalName()));
-    stob.addRootType(logger, rootType);
+        logger, to);
+    // adding Sub first exercises an extra code path in STOB
+    stob.addRootType(logger, sub);
+    stob.addRootType(logger, supArrayArray);
+    stob.addRootType(logger, primFloatArrayArray);
     SerializableTypeOracle sto = stob.build(logger);
 
-    TypeInfo[] expected = new TypeInfo[] {
-        new TypeInfo(CovariantArrays.AA.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.BB.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.CC.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.DD.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.A.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.B.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.B.class.getName(), true),
-        new TypeInfo(CovariantArrays.C.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.D.class.getName() + "[]", true),
-        new TypeInfo(CovariantArrays.D.class.getName(), true),};
-    validateSTO(sto, expected);
+    assertSerializableTypes(sto, sup, sub, supArray, subArray, primFloatArray,
+        supArrayArray, subArrayArray, primFloatArrayArray);
+    assertInstantiable(sto, primFloatArrayArray);
+    assertInstantiable(sto, primFloatArray);
+    assertInstantiable(sto, subArrayArray);
+    assertInstantiable(sto, subArray);
+    assertInstantiable(sto, supArrayArray);
+    assertInstantiable(sto, supArray);
   }
 
   /**
    * If the query type extends a raw type, be sure to pick up the parameters of
-   * the raw supertype.
+   * the raw subertype.
    * 
    * @throws UnableToCompleteException
    * @throws NotFoundException

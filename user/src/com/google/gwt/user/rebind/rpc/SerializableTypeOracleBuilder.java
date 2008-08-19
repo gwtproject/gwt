@@ -921,34 +921,31 @@ public class SerializableTypeOracleBuilder {
         "Analyzing component type:", null);
     Set<JClassType> instantiableTypes = new HashSet<JClassType>();
 
-    boolean succeeded = checkTypeInstantiable(branch, array.getComponentType(),
-        isSpeculative, TypePaths.createArrayComponentPath(array, path),
-        instantiableTypes);
-    if (succeeded && leafClass != null) {
-      TreeLogger covariantArrayLogger = logger.branch(TreeLogger.DEBUG,
-          "Covariant array types");
+    boolean succeeded = checkTypeInstantiable(branch, leafType, isSpeculative,
+        TypePaths.createArrayComponentPath(array, path), instantiableTypes);
+    if (succeeded) {
+      if (leafClass == null) {
+        assert leafType.isPrimitive() != null;
+        markArrayTypesInstantiable(leafType, array.getRank(), path);
+      } else {
+        TreeLogger covariantArrayLogger = logger.branch(TreeLogger.DEBUG,
+            "Covariant array types");
 
-      /*
-       * Compute covariant arrays for arrays of reference types.
-       */
-      for (JClassType instantiableType : TypeHierarchyUtils.getAllTypesBetweenRootTypeAndLeaves(
-          leafClass, instantiableTypes)) {
-        if (!isAccessibleToSerializer(instantiableType)) {
-          // Skip types that are not accessible from a serializer
-          continue;
-        }
+        /*
+         * Compute covariant arrays for arrays of reference types.
+         */
+        for (JClassType instantiableType : TypeHierarchyUtils.getAllTypesBetweenRootTypeAndLeaves(
+            leafClass, instantiableTypes)) {
+          if (!isAccessibleToSerializer(instantiableType)) {
+            // Skip types that are not accessible from a serializer
+            continue;
+          }
 
-        covariantArrayLogger.branch(
-            TreeLogger.DEBUG,
-            getArrayType(typeOracle, array.getRank(), instantiableType).getParameterizedQualifiedSourceName());
+          covariantArrayLogger.branch(
+              TreeLogger.DEBUG,
+              getArrayType(typeOracle, array.getRank(), instantiableType).getParameterizedQualifiedSourceName());
 
-        for (int rank = 1; rank <= array.getRank(); ++rank) {
-          JArrayType covariantArray = getArrayType(typeOracle, rank,
-              instantiableType);
-
-          TypeInfoComputed covariantArrayTic = getTypeInfoComputed(
-              covariantArray, path);
-          covariantArrayTic.setInstantiable(true);
+          markArrayTypesInstantiable(instantiableType, array.getRank(), path);
         }
       }
     }
@@ -1116,10 +1113,14 @@ public class SerializableTypeOracleBuilder {
           originalType);
       TypeInfoComputed tic = getTypeInfoComputed(candidate, subtypePath);
       if (tic.isDone()) {
-        anySubtypes |= tic.isInstantiable();
+        if (tic.isInstantiable()) {
+          anySubtypes = true;
+          instSubtypes.add(candidate);
+        }
         continue;
       } else if (tic.isPendingInstantiable()) {
         anySubtypes = true;
+        instSubtypes.add(candidate);
         continue;
       }
       tic.setPendingInstantiable();
@@ -1371,6 +1372,21 @@ public class SerializableTypeOracleBuilder {
 
     if (printWriter != null) {
       printWriter.flush();
+    }
+  }
+
+  /**
+   * Mark arrays of <code>leafType</code> as instantiable, for arrays of
+   * dimension up to <code>maxRank</code>.
+   */
+  private void markArrayTypesInstantiable(JType leafType, int maxRank,
+      TypePath path) {
+    for (int rank = 1; rank <= maxRank; ++rank) {
+      JArrayType covariantArray = getArrayType(typeOracle, rank, leafType);
+
+      TypeInfoComputed covariantArrayTic = getTypeInfoComputed(covariantArray,
+          path);
+      covariantArrayTic.setInstantiable(true);
     }
   }
 

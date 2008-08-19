@@ -19,7 +19,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.linker.GeneratedResource;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPackage;
@@ -229,8 +228,9 @@ class ProxyCreator {
         serviceIntf.getQualifiedSourceName() + ".rpc.log");
     stob.setLogOutputStream(pathInfo);
     SerializableTypeOracle sto = stob.build(logger);
-    GeneratedResource rpcLog = context.commitResource(logger, pathInfo);
-    rpcLog.setPrivate(true);
+    if (pathInfo != null) {
+      context.commitResource(logger, pathInfo).setPrivate(true);
+    }
 
     TypeSerializerCreator tsc = new TypeSerializerCreator(logger, sto, context,
         serviceIntf);

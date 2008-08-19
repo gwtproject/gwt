@@ -212,7 +212,7 @@ class ProxyCreator {
 
     // Determine the set of serializable types
     SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
-        logger, typeOracle);
+        logger, context.getPropertyOracle(), typeOracle);
     try {
       addRequiredRoots(logger, typeOracle, stob);
 
@@ -346,7 +346,7 @@ class ProxyCreator {
     String requestIdName = nameFactory.createName("requestId");
     w.println("int " + requestIdName + " = getNextRequestId();");
 
-    String statsMethodExpr = getProxySimpleName() + "." + syncMethod.getName();        
+    String statsMethodExpr = getProxySimpleName() + "." + syncMethod.getName();
     String tossName = nameFactory.createName("toss");
     w.println("boolean " + tossName + " = isStatsAvailable() && stats("
         + "timeStat(\"" + statsMethodExpr + "\", getRequestId(), \"begin\"));");
@@ -411,8 +411,8 @@ class ProxyCreator {
     w.println("String " + payloadName + " = " + streamWriterName
         + ".toString();");
 
-    w.println(tossName + " = isStatsAvailable() && stats("
-        + "timeStat(\"" + statsMethodExpr + "\", getRequestId(), \"requestSerialized\"));");
+    w.println(tossName + " = isStatsAvailable() && stats(" + "timeStat(\""
+        + statsMethodExpr + "\", getRequestId(), \"requestSerialized\"));");
 
     /*
      * Depending on the return type for the async method, return a

@@ -30,6 +30,8 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.core.ext.typeinfo.JWildcardType.BoundType;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
+import com.google.gwt.dev.cfg.Property;
+import com.google.gwt.dev.cfg.StaticPropertyOracle;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.JavaSourceCodeBase;
 import com.google.gwt.dev.javac.MockCompilationUnit;
@@ -231,6 +233,14 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     return new MockCompilationUnit(qname, code.toString());
   }
 
+  private static SerializableTypeOracleBuilder createSerializableTypeOracleBuilder(
+      TreeLogger logger, TypeOracle to) throws UnableToCompleteException {
+    StaticPropertyOracle propertyOracle = new StaticPropertyOracle();
+    // PropertyOracle has no values.
+    propertyOracle.setPropertyValues(new Property[0], new String[0]);
+    return new SerializableTypeOracleBuilder(logger, propertyOracle, to);
+  }
+
   private static TypeInfo[] getActualTypeInfo(SerializableTypeOracle sto) {
     JType[] types = sto.getSerializableTypes();
     TypeInfo[] actual = new TypeInfo[types.length];
@@ -351,7 +361,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JParameterizedType listOfCantSerialize = to.getParameterizedType(list,
         makeArray(cantSerialize));
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, listOfCantSerialize);
     SerializableTypeOracle so = sob.build(logger);
@@ -402,7 +412,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType b = to.getType("B");
     JClassType c = to.getType("C");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, b);
     SerializableTypeOracle so = sob.build(logger);
@@ -458,7 +468,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType c = to.getType("java.C");
     JArrayType arrayOfC = to.getArrayType(c);
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, arrayOfA);
     SerializableTypeOracle so = sob.build(logger);
@@ -550,7 +560,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType ser2 = to.getType("Ser2");
     JClassType root = to.getType("Root");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, root);
 
@@ -631,7 +641,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType javaLangString = to.getType(String.class.getName());
     JParameterizedType cOfString = to.getParameterizedType(c,
         makeArray(javaLangString));
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, cOfString);
 
@@ -778,7 +788,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     TreeLogger logger = createLogger();
     TypeOracle to = TypeOracleTestingUtils.buildTypeOracle(logger, units);
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
 
     // Does not qualify because it is not declared to be auto or manually
@@ -853,7 +863,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
         ClassWithTypeParameterThatErasesToObject.class.getCanonicalName()).isGenericType().getRawType();
 
     // The raw form of the type should not be serializable.
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, rawType);
     try {
@@ -925,7 +935,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType dateHolder = to.getType("DateHolder");
     JClassType unrelatedClass = to.getType("UnrelatedClass");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, holder.getRawType());
     SerializableTypeOracle so = sob.build(logger);
@@ -951,7 +961,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       NotFoundException {
     TreeLogger logger = createLogger();
 
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     JClassType rootType = typeOracle.getArrayType(typeOracle.getType(CovariantArrays.AA.class.getCanonicalName()));
     stob.addRootType(logger, rootType);
@@ -1024,7 +1034,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType serClass = to.getType("SerClass");
     JClassType serClassSub = to.getType("SerClassSub");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, nameSet);
     SerializableTypeOracle so = sob.build(logger);
@@ -1110,7 +1120,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JParameterizedType hashSetOfString = to.getParameterizedType(hashSet,
         makeArray(string));
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, hashSetOfString);
     SerializableTypeOracle so = sob.build(logger);
@@ -1171,7 +1181,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JParameterizedType aOfString = to.getParameterizedType(a,
         makeArray(serializableArgument));
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, aOfString);
     SerializableTypeOracle so = sob.build(logger);
@@ -1226,7 +1236,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JParameterizedType aOfString = to.getParameterizedType(a,
         makeArray(unusedSerializableArgument));
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, aOfString);
     SerializableTypeOracle so = sob.build(logger);
@@ -1274,7 +1284,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType javaLangString = to.getType(String.class.getName());
     JParameterizedType aOfString = to.getParameterizedType(a,
         makeArray(javaLangString));
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, aOfString);
     SerializableTypeOracle so = sob.build(logger);
@@ -1322,7 +1332,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType javaLangString = to.getType(String.class.getName());
     JParameterizedType aOfString = to.getParameterizedType(a,
         makeArray(javaLangString));
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
 
     assertEquals(EXPOSURE_DIRECT, sob.getTypeParameterExposure(a, 0));
@@ -1348,7 +1358,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       UnableToCompleteException {
     TreeLogger logger = createLogger();
 
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     JClassType a = typeOracle.getType(ManualSerialization.A.class.getCanonicalName());
     JClassType b = typeOracle.getType(ManualSerialization.B.class.getCanonicalName());
@@ -1367,7 +1377,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     TreeLogger logger = createLogger();
 
     JClassType rawList = typeOracle.getType(List.class.getName());
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, rawList);
     SerializableTypeOracle sto = stob.build(logger);
@@ -1492,7 +1502,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JParameterizedType parameterizedListOfIntf1 = to.getParameterizedType(list,
         makeArray(intf1));
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, parameterizedListOfIntf1);
     SerializableTypeOracle so = sob.build(logger);
@@ -1511,7 +1521,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     TreeLogger logger = createLogger();
 
     JClassType a = typeOracle.getType(NoSerializableTypes.A.class.getCanonicalName());
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, a);
     try {
@@ -1532,7 +1542,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     TreeLogger logger = createLogger();
 
     JClassType a = typeOracle.getType(NotAllSubtypesAreSerializable.A.class.getCanonicalName());
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
@@ -1554,7 +1564,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     TreeLogger logger = createLogger();
 
     JArrayType objectArray = typeOracle.getArrayType(typeOracle.getJavaLangObject());
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, objectArray);
     try {
@@ -1571,7 +1581,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   public void testObjectNotInstantiable() throws UnableToCompleteException {
     TreeLogger logger = createLogger();
 
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(logger, typeOracle.getJavaLangObject());
     try {
@@ -1590,7 +1600,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       throws UnableToCompleteException, NotFoundException {
     TreeLogger logger = createLogger();
 
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, typeOracle);
     stob.addRootType(
         logger,
@@ -1655,7 +1665,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JGenericType linkedList = to.getType("LinkedList").isGenericType();
     JClassType randomClass = to.getType("RandomClass");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, list.getRawType());
     SerializableTypeOracle so = sob.build(logger);
@@ -1701,7 +1711,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JClassType serializableClass = to.getType("SerializableClass");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, rawA);
     SerializableTypeOracle so = sob.build(logger);
@@ -1738,7 +1748,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType rawA = a.getRawType();
     JTypeParameter ta = a.getTypeParameters()[0];
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, ta);
     SerializableTypeOracle so = sob.build(logger);
@@ -1801,7 +1811,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType javaLangString = to.getType(String.class.getName());
     JParameterizedType aOfString = to.getParameterizedType(a,
         makeArray(javaLangString));
-    SerializableTypeOracleBuilder stob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(
         logger, to);
     stob.addRootType(logger, aOfString);
 
@@ -1861,7 +1871,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JRawType rawB = to.getType("B").isGenericType().getRawType();
     JClassType c = to.getType("C");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, a);
     SerializableTypeOracle so = sob.build(logger);
@@ -1925,7 +1935,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
         new JClassType[] {to.getType(String.class.getName())});
     JClassType ser = to.getType("Ser");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, intfOfString);
     SerializableTypeOracle so = sob.build(logger);
@@ -1973,7 +1983,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JClassType a = to.getType("A");
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, a);
     SerializableTypeOracle so = sob.build(logger);
@@ -2150,7 +2160,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JParameterizedType parameterizedType = to.getParameterizedType(a,
         new JClassType[] {syntheticTypeParam});
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, parameterizedType);
     SerializableTypeOracle so = sob.build(logger);
@@ -2205,7 +2215,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JTypeParameter u = a.getTypeParameters()[0];
     JTypeParameter v = a.getMethod("getFoo", makeArray()).getReturnType().isTypeParameter();
 
-    SerializableTypeOracleBuilder sob = new SerializableTypeOracleBuilder(
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(
         logger, to);
     sob.addRootType(logger, u);
     sob.addRootType(logger, v);

@@ -28,6 +28,49 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class JsniConstructorTest extends GWTTestCase {
 
+  private interface A1 {
+    void a1();
+  }
+
+  private interface A2 extends A1 {
+    void a2();
+  }
+
+  private interface A3 {
+    void a3();
+  }
+
+  private static abstract class C1 implements A2 {
+    static void s1() {
+    }
+
+    public abstract void c1();
+  }
+
+  private static class C2 extends C1 implements A3 {
+    static void s2() {
+    }
+
+    public void a1() {
+    }
+
+    public void a2() {
+    }
+
+    public void a3() {
+    }
+
+    public void c1() {
+    }
+
+    public void c2() {
+    }
+
+    public String toString() {
+      return null;
+    }
+  }
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
@@ -55,6 +98,34 @@ public class JsniConstructorTest extends GWTTestCase {
       fail("Expecting a RuntimeException, got a " + t.getClass().getName());
     }
   }
+
+  public native void testInheritedMethodRef() /*-{
+    @com.google.gwt.dev.jjs.test.JsniConstructorTest.C1::s1()();
+    @com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::s1()();
+    @com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::s2()();
+
+    var o = @com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::new()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.A1::a1()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.A2::a1()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C1::a1()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::a1()();
+
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.A2::a2()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C1::a2()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::a2()();
+
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.A3::a3()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::a3()();
+
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C1::c1()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::c1()();
+
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::c2()();
+
+    o.@java.lang.Object::toString()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C1::toString()();
+    o.@com.google.gwt.dev.jjs.test.JsniConstructorTest.C2::toString()();
+  }-*/;
 
   public void testJsniConstructors() {
     StaticObject o = staticArg(1);

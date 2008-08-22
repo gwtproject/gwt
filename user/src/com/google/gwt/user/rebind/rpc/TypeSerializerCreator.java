@@ -54,8 +54,6 @@ public class TypeSerializerCreator {
 
   private final GeneratorContext context;
 
-  private final boolean enforceTypeVersioning;
-
   private final JClassType remoteService;
 
   private final JType[] serializableTypes;
@@ -73,9 +71,6 @@ public class TypeSerializerCreator {
     this.remoteService = remoteService;
     this.serializationOracle = serializationOracle;
     this.typeOracle = context.getTypeOracle();
-
-    enforceTypeVersioning = Shared.shouldEnforceTypeVersioning(logger,
-        context.getPropertyOracle());
 
     serializableTypes = serializationOracle.getSerializableTypes();
 
@@ -99,9 +94,7 @@ public class TypeSerializerCreator {
 
     writeCreateMethodMapMethod();
 
-    if (shouldEnforceTypeVersioning()) {
-      writeCreateSignatureMapMethod();
-    }
+    writeCreateSignatureMapMethod();
 
     writeRaiseSerializationException();
 
@@ -237,10 +230,6 @@ public class TypeSerializerCreator {
     return true;
   }
 
-  private boolean shouldEnforceTypeVersioning() {
-    return enforceTypeVersioning;
-  }
-
   private void writeCreateMethodMapMethod() {
     srcWriter.println("@SuppressWarnings(\"restriction\")");
     srcWriter.println("private static native JavaScriptObject createMethodMap() /*-" + '{');
@@ -261,11 +250,8 @@ public class TypeSerializerCreator {
           needComma = true;
         }
 
-        String typeString = serializationOracle.getSerializedTypeName(type);
-        if (shouldEnforceTypeVersioning()) {
-          typeString += "/"
-              + serializationOracle.getSerializationSignature(type);
-        }
+        String typeString = serializationOracle.getSerializedTypeName(type)
+            + "/" + serializationOracle.getSerializationSignature(type);
 
         srcWriter.print("\"" + typeString + "\":");
 
@@ -418,19 +404,13 @@ public class TypeSerializerCreator {
   }
 
   private void writeGetSerializationSignatureMethod() {
-    if (!shouldEnforceTypeVersioning()) {
-      srcWriter.println("public String getSerializationSignature(String typeName) {");
-      srcWriter.indentln("return null;");
-      srcWriter.println("};");
-    } else {
-      String serializerTypeName = serializationOracle.getTypeSerializerQualifiedName(getServiceInterface());
-      srcWriter.println("public native String getSerializationSignature(String typeName) /*-" + '{');
-      srcWriter.indent();
-      srcWriter.println("return @" + serializerTypeName
-          + "::signatureMap[typeName];");
-      srcWriter.outdent();
-      srcWriter.println("}-*/;");
-    }
+    String serializerTypeName = serializationOracle.getTypeSerializerQualifiedName(getServiceInterface());
+    srcWriter.println("public native String getSerializationSignature(String typeName) /*-" + '{');
+    srcWriter.indent();
+    srcWriter.println("return @" + serializerTypeName
+        + "::signatureMap[typeName];");
+    srcWriter.outdent();
+    srcWriter.println("}-*/;");
     srcWriter.println();
   }
 
@@ -481,9 +461,7 @@ public class TypeSerializerCreator {
 
   private void writeStaticFields() {
     srcWriter.println("private static final JavaScriptObject methodMap = createMethodMap();");
-    if (shouldEnforceTypeVersioning()) {
-      srcWriter.println("private static final JavaScriptObject signatureMap = createSignatureMap();");
-    }
+    srcWriter.println("private static final JavaScriptObject signatureMap = createSignatureMap();");
     srcWriter.println();
   }
 }

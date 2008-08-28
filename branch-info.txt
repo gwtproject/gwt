@@ -5,6 +5,8 @@ See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 Copies:
 /releases/1.5/ was created (r2940) as a straight copy from /trunk/@r2939
 /tags/1.5.0 was created (r2959) as a straight copy from /releases/1.5/@r2941
+/tags/1.5.1 was created (r3573) as a straight copy from /releases/1.5/@r3391
+/tags/1.5.2 was created (r3588) as a straight copy from /releases/1.5/@r3587
 
 Merges:
 /releases/1.5/@r2940:2941 was merged (r2942) into /trunk/
@@ -26,7 +28,9 @@ Merges:
 /releases/1.5/@r3372:3391 was merged (r3395) into /trunk/
 /releases/1.5/@r3391:3505 was merged (r3506) into /trunk/
 /trunk c2974 was merged (r3550) into this branch
----> The next merge into trunk will be 3505:3549 and 3550:????
+/releases/1.5/@r3505:3549 was merged (r3589,r3590) into /trunk/
+/releases/1.5/@r3550:3556 was merged (r3591) into /trunk/, skipping c3550
+---> The next merge into trunk will be 3556:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)

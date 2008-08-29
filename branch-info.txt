@@ -30,7 +30,8 @@ Merges:
 /trunk c2974 was merged (r3550) into this branch
 /releases/1.5/@r3505:3549 was merged (r3589,r3590) into /trunk/
 /releases/1.5/@r3550:3556 was merged (r3591) into /trunk/, skipping c3550
----> The next merge into trunk will be 3556:????
+/releases/1.5/@r3556:3587 was merged (r3593) into /trunk/
+---> The next merge into trunk will be 3587:????
 
 Changes in this branch (excluding changes to this file itself):
 - Fixed random JUnit timeouts occurring on module transition. (r2941)

@@ -26,7 +26,27 @@ import junit.framework.Assert;
 @SuppressWarnings("unused")
 public class CompilerTest extends GWTTestCase {
 
+  private abstract static class AbstractSuper {
+    public static String foo() {
+      if (FALSE) {
+        // prevent inlining
+        return foo();
+      }
+      return "AbstractSuper";
+    }
+  }
+
   private abstract static class Apple implements Fruit {
+  }
+
+  private static class ConcreteSub extends AbstractSuper {
+    public static String foo() {
+      if (FALSE) {
+        // prevent inlining
+        return foo();
+      }
+      return "ConcreteSub";
+    }
   }
 
   private static interface Fruit {
@@ -147,8 +167,8 @@ public class CompilerTest extends GWTTestCase {
 
   private static volatile boolean TRUE = true;
 
-  private static volatile int volatileInt;
   private static volatile boolean volatileBoolean;
+  private static volatile int volatileInt;
   private static volatile UninstantiableType volatileUninstantiableType;
 
   private static native void accessUninstantiableField(UninstantiableType u) /*-{
@@ -734,6 +754,11 @@ public class CompilerTest extends GWTTestCase {
     assertEquals(new Foo(0).i, 0);
     assertEquals(new Foo(1).i, 1);
     assertEquals(new Foo(2).i, 2);
+  }
+
+  public void testStaticMethodResolution() {
+    // Issue 2922
+    assertEquals("AbstractSuper", AbstractSuper.foo());
   }
 
   public void testStringOptimizations() {

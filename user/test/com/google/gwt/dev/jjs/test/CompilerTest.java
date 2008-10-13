@@ -193,6 +193,8 @@ public class CompilerTest extends GWTTestCase {
     return @com.google.gwt.dev.jjs.test.CompilerTest$SideEffectCauser5::causeClinitSideEffectOnRead;
   }-*/;
 
+  private Integer boxedInteger = 0;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
@@ -534,6 +536,16 @@ public class CompilerTest extends GWTTestCase {
     String test = ((((b = true) ? null : null) + " ") + b);
     assertTrue(b);
     assertEquals("null true", test);
+  }
+
+  /**
+   * Issue 2886: inlining should cope with local variables that do not have an
+   * explicit declaration node.
+   */
+  public void testInliningBoxedIncrement() {
+    // should not actually inline, because it has a temp variable
+    incrementBoxedInteger();
+    assertEquals((Integer) 1, boxedInteger);
   }
 
   public void testJavaScriptReservedWords() {
@@ -970,6 +982,11 @@ public class CompilerTest extends GWTTestCase {
       fail("Expected NullPointerException (7)");
     } catch (Exception expected) {
     }
+  }
+
+  private void incrementBoxedInteger() {
+    // the following will need a temporary variable created
+    boxedInteger++;
   }
 
   private boolean returnFalse() {

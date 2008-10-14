@@ -374,10 +374,29 @@ public final class ServerSerializationStreamReader extends
     stringTable = null;
 
     int idx = 0, nextIdx;
-    while (-1 != (nextIdx = encodedTokens.indexOf('\uffff', idx))) {
+    while (-1 != (nextIdx = encodedTokens.indexOf(RPC_SEPARATOR_CHAR, idx))) {
       String current = encodedTokens.substring(idx, nextIdx);
       tokenList.add(current);
       idx = nextIdx + 1;
+    }
+    if (idx == 0) {
+      // Didn't find any separator, assume an older version with different
+      // separators and get the version as the sequence of digits at the
+      // beginning of the encoded string.
+      while (idx < encodedTokens.length()
+          && Character.isDigit(encodedTokens.charAt(idx))) {
+        ++idx;
+      }
+      if (idx == 0) {
+        throw new IncompatibleRemoteServiceException(
+            "Malformed or old RPC message received - expecting version "
+            + SERIALIZATION_STREAM_VERSION);
+      } else {
+        int version = Integer.valueOf(encodedTokens.substring(0, idx));
+        throw new IncompatibleRemoteServiceException("Expecting version "
+            + SERIALIZATION_STREAM_VERSION + " from client, got " + version
+            + ".");
+      }
     }
 
     super.prepareToRead(encodedTokens);
@@ -587,7 +606,50 @@ public final class ServerSerializationStreamReader extends
     BoundedList<String> buffer = new BoundedList<String>(String.class,
         typeNameCount);
     for (int typeNameIndex = 0; typeNameIndex < typeNameCount; ++typeNameIndex) {
-      buffer.add(extract());
+      String str = extract();
+      // Change quoted characters back.
+      int idx = str.indexOf('\\');
+      if (idx >= 0) {
+        StringBuilder buf = new StringBuilder();
+        int pos = 0;
+        while (idx >= 0) {
+          buf.append(str.substring(pos, idx));
+          if (++idx == str.length()) {
+            throw new SerializationException("Unmatched backslash: \""
+                + str + "\"");
+          }
+          char ch = str.charAt(idx);
+          pos = idx + 1;
+          switch (ch) {
+            case '0':
+              buf.append('\u0000');
+              break;
+            case '!':
+              buf.append(RPC_SEPARATOR_CHAR);
+              break;
+            case '\\':
+              buf.append(ch);
+              break;
+            case 'u':
+              try {
+                ch = (char) Integer.parseInt(str.substring(idx + 1, idx + 5), 16);
+              } catch (NumberFormatException e) {
+                throw new SerializationException(
+                    "Invalid Unicode escape sequence in \"" + str + "\"");
+              }
+              buf.append(ch);
+              pos += 4;
+              break;
+            default:
+              throw new SerializationException("Unexpected escape character "
+                  + ch + " after backslash: \"" + str + "\"");
+          }
+          idx = str.indexOf('\\', pos);
+        }
+        buf.append(str.substring(pos));
+        str = buf.toString();
+      }
+      buffer.add(str);
     }
 
     if (buffer.size() != buffer.getExpectedSize()) {

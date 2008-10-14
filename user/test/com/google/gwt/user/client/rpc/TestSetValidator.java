@@ -446,6 +446,12 @@ public class TestSetValidator {
     return true;
   }
 
+  /**
+   * Wrap an exception in RuntimeException if necessary so it doesn't have to be listed in
+   * throws clauses.
+   * 
+   * @param caught exception to wrap
+   */
   public static void rethrowException(Throwable caught) {
     if (caught instanceof RuntimeException) {
       throw (RuntimeException) caught;
@@ -453,5 +459,4 @@ public class TestSetValidator {
       throw new RuntimeException(caught);
     }
   }
-
 }

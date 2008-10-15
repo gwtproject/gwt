@@ -90,7 +90,7 @@ public final class ClientSerializationStreamWriter extends
     var idx = 0;
     var out = "";
     var result;
-    while ((result = regex(str)) != null) {
+    while ((result = regex.exec(str)) != null) {
        out += str.substring(idx, result.index);
        idx = result.index + 1;
        var ch = result[0].charCodeAt(0);

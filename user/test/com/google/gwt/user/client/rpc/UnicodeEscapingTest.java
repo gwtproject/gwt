@@ -60,6 +60,28 @@ public class UnicodeEscapingTest extends GWTTestCase {
     return buf.toString();
   }
 
+  /*
+   * Copied from HistoryTest.
+   */
+  private static native boolean isSafari2() /*-{
+    var exp = / AppleWebKit\/([\d]+)/;
+    var result = exp.exec(navigator.userAgent);
+    if (result) {
+      // The standard history implementation works fine on WebKit >= 522
+      // (Safari 3 beta).
+      if (parseInt(result[1]) >= 522) {
+        return false;
+      }
+    }
+  
+    // The standard history implementation works just fine on the iPhone, which
+    // unfortunately reports itself as WebKit/420+.
+    if (navigator.userAgent.indexOf('iPhone') != -1) {
+      return false;
+    }
+  
+    return true;
+  }-*/;
   /**
    * Verifies that the supplied string includes the requested code points.
    * 
@@ -113,6 +135,10 @@ public class UnicodeEscapingTest extends GWTTestCase {
    * server for verification. This ensures that client->server string escaping
    * properly handles all BMP characters.
    * 
+   * Unpaired or improperly paired surrogates are not tested here, as some
+   * browsers refuse to accept them.  Properly paired surrogates are tested
+   * in the non-BMP test.
+   *  
    * Note that this does not test all possible combinations, which might be an
    * issue, particularly with combining marks, though they should be logically
    * equivalent in that case.
@@ -121,9 +147,19 @@ public class UnicodeEscapingTest extends GWTTestCase {
    */
   public void testClientToServerBMP() throws InvalidCharacterException {
     delayTestFinish(TEST_FINISH_DELAY_MS);
-    clientToServerVerifyRange(Character.MIN_CODE_POINT,
-        Character.MIN_SUPPLEMENTARY_CODE_POINT, CHARACTER_BLOCK_SIZE,
-        CHARACTER_BLOCK_SIZE);
+    if (isSafari2()) {
+      // Safari2 can't be fixed for many characters, including null
+      // We only guarantee that basic ISO-Latin characters are unmolested.
+      clientToServerVerifyRange(0x0001, 0x0300, CHARACTER_BLOCK_SIZE,
+          CHARACTER_BLOCK_SIZE);
+    } else {
+      clientToServerVerifyRange(Character.MIN_CODE_POINT,
+          Character.MIN_SURROGATE, CHARACTER_BLOCK_SIZE,
+          CHARACTER_BLOCK_SIZE);
+      clientToServerVerifyRange(Character.MAX_SURROGATE + 1,
+          Character.MIN_SUPPLEMENTARY_CODE_POINT, CHARACTER_BLOCK_SIZE,
+          CHARACTER_BLOCK_SIZE);
+    }
   }
 
   /**

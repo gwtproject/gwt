@@ -77,43 +77,50 @@ public final class ServerSerializationStreamReader extends
   private enum ValueReader {
     BOOLEAN {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readBoolean();
       }
     },
     BYTE {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readByte();
       }
     },
     CHAR {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readChar();
       }
     },
     DOUBLE {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readDouble();
       }
     },
     FLOAT {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readFloat();
       }
     },
     INT {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readInt();
       }
     },
     LONG {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readLong();
       }
     },
@@ -126,13 +133,15 @@ public final class ServerSerializationStreamReader extends
     },
     SHORT {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readShort();
       }
     },
     STRING {
       @Override
-      Object readValue(ServerSerializationStreamReader stream) {
+      Object readValue(ServerSerializationStreamReader stream)
+          throws SerializationException {
         return stream.readString();
       }
     };
@@ -323,6 +332,7 @@ public final class ServerSerializationStreamReader extends
   private final ArrayList<String> tokenList = new ArrayList<String>();
 
   private int tokenListIndex;
+
   {
     CLASS_TO_VECTOR_READER.put(boolean[].class, VectorReader.BOOLEAN_VECTOR);
     CLASS_TO_VECTOR_READER.put(byte[].class, VectorReader.BYTE_VECTOR);
@@ -426,42 +436,42 @@ public final class ServerSerializationStreamReader extends
     }
   }
 
-  public boolean readBoolean() {
+  public boolean readBoolean() throws SerializationException {
     return !extract().equals("0");
   }
 
-  public byte readByte() {
+  public byte readByte() throws SerializationException {
     return Byte.parseByte(extract());
   }
 
-  public char readChar() {
+  public char readChar() throws SerializationException {
     // just use an int, it's more foolproof
     return (char) Integer.parseInt(extract());
   }
 
-  public double readDouble() {
+  public double readDouble() throws SerializationException {
     return Double.parseDouble(extract());
   }
 
-  public float readFloat() {
+  public float readFloat() throws SerializationException {
     return (float) Double.parseDouble(extract());
   }
 
-  public int readInt() {
+  public int readInt() throws SerializationException {
     return Integer.parseInt(extract());
   }
 
-  public long readLong() {
+  public long readLong() throws SerializationException {
     // Keep synchronized with LongLib. The wire format are the two component
     // parts of the double in the client code.
     return (long) readDouble() + (long) readDouble();
   }
 
-  public short readShort() {
+  public short readShort() throws SerializationException {
     return Short.parseShort(extract());
   }
 
-  public String readString() {
+  public String readString() throws SerializationException {
     return getString(readInt());
   }
 
@@ -675,14 +685,18 @@ public final class ServerSerializationStreamReader extends
     throw new NoSuchMethodException("deserialize");
   }
 
-  private String extract() {
-    return tokenList.get(tokenListIndex++);
+  private String extract() throws SerializationException {
+    try {
+      return tokenList.get(tokenListIndex++);
+    } catch (IndexOutOfBoundsException e) {
+      throw new SerializationException("Too few tokens in RPC request", e);
+    }
   }
 
   private Object instantiate(Class<?> customSerializer, Class<?> instanceClass)
       throws InstantiationException, IllegalAccessException,
       IllegalArgumentException, InvocationTargetException,
-      NoSuchMethodException {
+      NoSuchMethodException, SerializationException {
     if (customSerializer != null) {
       for (Method method : customSerializer.getMethods()) {
         if ("instantiate".equals(method.getName())) {

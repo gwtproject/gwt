@@ -57,13 +57,24 @@ public final class ClientSerializationStreamWriter extends
   private static native JavaScriptObject getQuotingRegex() /*-{
     // "|" = AbstractSerializationStream.RPC_SEPARATOR_CHAR
     var ua = navigator.userAgent.toLowerCase();
+    var webkitregex = /webkit\/([\d]+)/;
+    var webkit = 0;
+    var result = webkitregex.exec(ua);
+    if (result) {
+      webkit = parseInt(result[1]);
+    }
     if (ua.indexOf("android") != -1) {
       // initial version of Android WebKit has a double-encoding bug for UTF8,
-      // so we have to encode every non-ASCII character.  Later builds can
-      // use \u0300 instead of \u0080, and hopefully by the time Android
-      // supports non-Latin input it will be fully fixed.
+      // so we have to encode every non-ASCII character.
       // TODO(jat): revisit when this bug is fixed in Android
       return /[\u0000\|\\\u0080-\uFFFF]/g;
+    } else if (webkit < 522) {
+      // Safari 2 doesn't handle \\uXXXX in regexes
+      // TODO(jat): should iPhone be treated specially?
+      return /[\x00\|\\]/g;
+    } else if (webkit > 0) {
+      // other WebKit-based browsers need some additional quoting
+      return /[\u0000\|\\\u0300-\u036F\u0590-\u05FF\uD800-\uFFFF]/g;
     } else {
       return /[\u0000\|\\\uD800-\uFFFF]/g;
     }

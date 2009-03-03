@@ -315,14 +315,13 @@ public final class WebAppCreator {
 
     // copy source files, replacing the content as needed
     for (FileCreator fileCreator : files) {
+      URL url = WebAppCreator.class.getResource(fileCreator.sourceName + "src");
+      if (url == null) {
+        throw new FileNotFoundException(fileCreator.sourceName + "src");
+      }
       File file = Utility.createNormalFile(fileCreator.destDir,
           fileCreator.destName, overwrite, ignore);
       if (file != null) {
-        URL url = WebAppCreator.class.getResource(fileCreator.sourceName
-            + "src");
-        if (url == null) {
-          throw new FileNotFoundException(fileCreator.sourceName + "src");
-        }
         String data = Util.readURLAsString(url);
         Utility.writeTemplateFile(file, data, replacements);
       }
@@ -330,10 +329,10 @@ public final class WebAppCreator {
 
     // copy libs directly
     for (FileCreator fileCreator : libs) {
+      FileInputStream is = new FileInputStream(fileCreator.sourceName);
       File file = Utility.createNormalFile(fileCreator.destDir,
           fileCreator.destName, overwrite, ignore);
       if (file != null) {
-        FileInputStream is = new FileInputStream(fileCreator.sourceName);
         FileOutputStream os = new FileOutputStream(file);
         Util.copy(is, os);
       }

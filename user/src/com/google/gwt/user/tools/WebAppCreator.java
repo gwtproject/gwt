@@ -302,6 +302,7 @@ public final class WebAppCreator {
       files.add(new FileCreator(serverDir, "GreetingServiceImpl" + ".java",
           "RpcServerTemplate.java"));
       files.add(new FileCreator(outDir, "build.xml", "project.ant.xml"));
+      files.add(new FileCreator(outDir, "README.txt", "README.txt"));
     }
     if (!noEclipse) {
       assert new File(gwtDevPath).isAbsolute();

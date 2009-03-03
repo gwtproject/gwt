@@ -16,6 +16,8 @@
 package com.google.gwt.i18n.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.constants.DateTimeConstants;
+import com.google.gwt.i18n.client.constants.NumberConstants;
 import com.google.gwt.i18n.client.impl.CldrImpl;
 import com.google.gwt.i18n.client.impl.LocaleInfoImpl;
 
@@ -109,12 +111,26 @@ public class LocaleInfo {
   }
 
   /**
+   * Return a DateTimeConstants interface suitable for this locale.
+   */
+  public final DateTimeConstants getDateTimeConstants() {
+    return GWT.create(DateTimeConstants.class);
+  }
+
+  /**
    * @return the name of this locale, such as "default, "en_US", etc
    */
   public String getLocaleName() {
     return infoImpl.getLocaleName();
   }
   
+  /**
+   * Return a NumberConstants interface suitable for this locale.
+   */
+  public final NumberConstants getNumberConstants() {
+    return GWT.create(NumberConstants.class);
+  }
+
   /**
    * @return true if this locale is right-to-left instead of left-to-right
    */

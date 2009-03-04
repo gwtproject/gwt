@@ -344,7 +344,8 @@ public class PermutationCompiler {
     /*
      * User-defined value caps.
      */
-    result = Math.min(result, Integer.getInteger("gwt.jjs.maxThreads", 1));
+    result = Math.min(result, Integer.getInteger(
+        ThreadedPermutationWorkerFactory.MAX_THREADS_PROPERTY, 1));
 
     return result;
   }

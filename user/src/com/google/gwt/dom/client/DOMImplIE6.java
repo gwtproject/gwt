@@ -160,6 +160,17 @@ class DOMImplIE6 extends DOMImpl {
     }
   }-*/;
 
+  /**
+   * IE returns a numeric type for some attributes that are really properties,
+   * such as offsetWidth.  We need to coerce these to strings to prevent a
+   * runtime JS exception.
+   */
+  @Override
+  public native String getAttribute(Element elem, String name) /*-{
+    var attr = elem.getAttribute(name);
+    return attr == null? '' : attr + '';
+  }-*/;
+
   @Override
   public native int getBodyOffsetLeft() /*-{
     return @com.google.gwt.user.client.impl.DocumentRootImpl::documentRoot.clientLeft;

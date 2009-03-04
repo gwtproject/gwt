@@ -160,6 +160,10 @@ abstract class DOMImpl {
     return top;
   }-*/;
 
+  public native String getAttribute(Element elem, String name) /*-{
+    return elem.getAttribute(name) || '';
+  }-*/;
+
   public native int getBodyOffsetLeft() /*-{
     return 0;
   }-*/;

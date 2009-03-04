@@ -45,5 +45,5 @@
  * &lt;/module>
  * </pre>
  */
+@com.google.gwt.util.PreventSpuriousRebuilds
 package com.google.gwt.debug.client;
-

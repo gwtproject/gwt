@@ -18,7 +18,7 @@ package com.google.gwt.debug.client;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Test Case for {@link DebugInfo}.
+ * Test Case for {@link DebugInfo} when <code>gwt.enableDebugId</code> is enabled.
  */
 public class DebugInfoTest extends GWTTestCase {
 

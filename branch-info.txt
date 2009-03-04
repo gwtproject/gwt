@@ -35,8 +35,11 @@ Merges:
 /releases/1.6/@r4658:4669 was merged (r4670) into trunk
 /trunk@c4873 was merged (r4878) into /releases/1.6
 /trunk revision c4889 was merged (r4892) into this branch
+/releases/1.6/@r4669:4694 was merged (r4919) into trunk
+/releases/1.6/@r4695:4874 was merged (r4919) into trunk, skipping c4695 (1.6-only change)
+/releases/1.6/@r4875:4877 was merged (r4919) into trunk, skipping c4875 (different trunk change)
+/releases/1.6/@r4878:4891 was merged (r4919) into trunk, skipping c4878 (cherry picked above)
+/releases/1.6/@r4892:4911 was merged (r4919) into trunk, skipping c4892 (cherry picked above)
 
 The next merge into trunk will be:
-svn merge -r4669:4694 https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
-svn merge -r4695:4877 https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
-svn merge -r4878:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
+svn merge -r4911:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .

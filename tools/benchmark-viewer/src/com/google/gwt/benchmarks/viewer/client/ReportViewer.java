@@ -65,6 +65,7 @@ import java.util.Map;
  * from by setting the system property named in
  * {@link com.google.gwt.benchmarks.client.Benchmark#REPORT_PATH}.
  */
+@SuppressWarnings("deprecation")
 public class ReportViewer implements EntryPoint, HistoryListener {
 
   private static class MutableBool {

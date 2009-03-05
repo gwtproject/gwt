@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.dev.util.InstalledHelpInfo;
 
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
@@ -29,6 +30,8 @@ import org.mortbay.log.Log;
 import org.mortbay.log.Logger;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * A launcher for an embedded Jetty server.
@@ -188,7 +191,6 @@ public class JettyLauncher extends ServletContainerLauncher {
       branch.log(TreeLogger.INFO, "Stopped successfully");
     }
   }
-
   /**
    * A {@link WebAppContext} tailored to GWT hosted mode. Features hot-reload
    * with a new {@link WebAppClassLoader} to pick up disk changes. The default
@@ -200,49 +202,178 @@ public class JettyLauncher extends ServletContainerLauncher {
    * hosting environment.
    */
   private final class WebAppContextWithReload extends WebAppContext {
+
     /**
-     * Ensures that only Jetty and other server classes can be loaded into the
-     * {@link WebAppClassLoader}. This forces the user to put any necessary
-     * dependencies into WEB-INF/lib.
+     * Specialized {@link WebAppClassLoader} that allows outside resources to be
+     * brought in dynamically from the system path. A warning is issued when
+     * this occurs.
      */
-    private final ClassLoader parentClassLoader = new ClassLoader(null) {
-      private final ClassLoader delegateTo = Thread.currentThread().getContextClassLoader();
+    private class WebAppClassLoaderExtension extends WebAppClassLoader {
+
+      public WebAppClassLoaderExtension() throws IOException {
+        super(bootStrapOnlyClassLoader, WebAppContextWithReload.this);
+      }
+
+      @Override
+      public URL findResource(String name) {
+        // Always check this ClassLoader first.
+        URL found = super.findResource(name);
+        if (found != null) {
+          return found;
+        }
+
+        // See if the outside world has it.
+        found = systemClassLoader.getResource(name);
+        if (found == null) {
+          return null;
+        }
+
+        // Specifically for META-INF/services/javax.xml.parsers.SAXParserFactory
+        String checkName = name;
+        if (checkName.startsWith("META-INF/services/")) {
+          checkName = checkName.substring("META-INF/services/".length());
+        }
+
+        // For system/server path, just return it quietly.
+        if (isServerPath(checkName) || isSystemPath(checkName)) {
+          return found;
+        }
+
+        // Warn, add containing URL to our own ClassLoader, and retry the call.
+        String warnMessage = "Server resource '"
+            + name
+            + "' could not be found in the web app, but was found on the system classpath.";
+        if (!addContainingClassPathEntry(warnMessage, found, name)) {
+          return null;
+        }
+        return super.findResource(name);
+      }
+
+      /**
+       * Override to additionally consider the most commonly available JSP and
+       * XML implementation as system resources. (In fact, Jasper is in gwt-dev
+       * via embedded Tomcat, so we always hit this case.)
+       */
+      @Override
+      public boolean isSystemPath(String name) {
+        name = name.replace('/', '.');
+        return super.isSystemPath(name)
+            || name.startsWith("org.apache.jasper.")
+            || name.startsWith("org.apache.xerces.");
+      }
 
       @Override
       protected Class<?> findClass(String name) throws ClassNotFoundException {
-        if (webAppClassLoader != null
-            && (webAppClassLoader.isServerPath(name) || webAppClassLoader.isSystemPath(name))) {
-          return delegateTo.loadClass(name);
+        try {
+          return super.findClass(name);
+        } catch (ClassNotFoundException e) {
         }
-        throw new ClassNotFoundException();
+
+        // For system/server path, just try the outside world quietly.
+        if (isServerPath(name) || isSystemPath(name)) {
+          return systemClassLoader.loadClass(name);
+        }
+
+        // See if the outside world has a URL for it.
+        String resourceName = name.replace('.', '/') + ".class";
+        URL found = systemClassLoader.getResource(resourceName);
+        if (found == null) {
+          return null;
+        }
+
+        // Warn, add containing URL to our own ClassLoader, and retry the call.
+        String warnMessage = "Server class '"
+            + name
+            + "' could not be found in the web app, but was found on the system classpath'";
+        if (!addContainingClassPathEntry(warnMessage, found, resourceName)) {
+          throw new ClassNotFoundException(name);
+        }
+        return super.findClass(name);
       }
 
+      private boolean addContainingClassPathEntry(String warnMessage,
+          URL resource, String resourceName) {
+        TreeLogger.Type logLevel = (System.getProperty(PROPERTY_NOWARN_WEBAPP_CLASSPATH) == null)
+            ? TreeLogger.WARN : TreeLogger.DEBUG;
+        TreeLogger branch = logger.branch(logLevel, warnMessage);
+        String classPathURL;
+        String foundStr = resource.toExternalForm();
+        if (resource.getProtocol().equals("file")) {
+          assert foundStr.endsWith(resourceName);
+          classPathURL = foundStr.substring(0, foundStr.length()
+              - resourceName.length());
+        } else if (resource.getProtocol().equals("jar")) {
+          assert foundStr.startsWith("jar:");
+          assert foundStr.endsWith("!/" + resourceName);
+          classPathURL = foundStr.substring(4, foundStr.length()
+              - (2 + resourceName.length()));
+        } else {
+          branch.log(TreeLogger.ERROR,
+              "Found resouce but unrecognized URL format: '" + foundStr + '\'');
+          return false;
+        }
+        branch = branch.branch(logLevel, "Adding classpath entry '"
+            + classPathURL + "' to the web app classpath for this session.",
+            null, new InstalledHelpInfo("webAppClassPath.html"));
+        try {
+          addClassPath(classPathURL);
+          return true;
+        } catch (IOException e) {
+          branch.log(TreeLogger.ERROR, "Failed add container URL: '"
+              + classPathURL + '\'', e);
+          return false;
+        }
+      }
+    }
+
+    /**
+     * Parent ClassLoader for the Jetty web app, which can only load JVM
+     * classes. We would just use <code>null</code> for the parent ClassLoader
+     * except this makes Jetty unhappy.
+     */
+    private final ClassLoader bootStrapOnlyClassLoader = new ClassLoader(null) {
     };
 
-    private WebAppClassLoader webAppClassLoader;
+    private final TreeLogger logger;
+
+    /**
+     * In the usual case of launching {@link com.google.gwt.dev.HostedMode},
+     * this will always by the system app ClassLoader.
+     */
+    private final ClassLoader systemClassLoader = Thread.currentThread().getContextClassLoader();
 
     @SuppressWarnings("unchecked")
-    private WebAppContextWithReload(String webApp, String contextPath) {
+    private WebAppContextWithReload(TreeLogger logger, String webApp,
+        String contextPath) {
       super(webApp, contextPath);
+      this.logger = logger;
+
       // Prevent file locking on Windows; pick up file changes.
       getInitParams().put(
           "org.mortbay.jetty.servlet.Default.useFileMappedBuffer", "false");
+
+      // Since the parent class loader is bootstrap-only, prefer it first.
+      setParentLoaderPriority(true);
     }
 
     @Override
     protected void doStart() throws Exception {
-      webAppClassLoader = new WebAppClassLoader(parentClassLoader, this);
-      setClassLoader(webAppClassLoader);
+      setClassLoader(new WebAppClassLoaderExtension());
       super.doStart();
     }
 
     @Override
     protected void doStop() throws Exception {
       super.doStop();
-      webAppClassLoader = null;
       setClassLoader(null);
     }
   }
+
+  /**
+   * System property to suppress warnings about loading web app classes from the
+   * system classpath.
+   */
+  private static final String PROPERTY_NOWARN_WEBAPP_CLASSPATH = "gwt.nowarn.webapp.classpath";
 
   public ServletContainer start(TreeLogger logger, int port, File appRootDir)
       throws Exception {
@@ -279,7 +410,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     server.addConnector(connector);
 
     // Create a new web app in the war directory.
-    WebAppContext wac = new WebAppContextWithReload(
+    WebAppContext wac = new WebAppContextWithReload(logger,
         appRootDir.getAbsolutePath(), "/");
 
     server.setHandler(wac);

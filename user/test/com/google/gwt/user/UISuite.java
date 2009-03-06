@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user;
 
+import junit.framework.Test;
+
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.user.client.CommandExecutorTest;
 import com.google.gwt.user.client.CookieTest;
@@ -22,7 +24,6 @@ import com.google.gwt.user.client.EventTest;
 import com.google.gwt.user.client.WindowTest;
 import com.google.gwt.user.client.ui.AbsolutePanelTest;
 import com.google.gwt.user.client.ui.AnchorTest;
-import com.google.gwt.user.client.ui.WidgetTest;
 import com.google.gwt.user.client.ui.ButtonTest;
 import com.google.gwt.user.client.ui.CaptionPanelTest;
 import com.google.gwt.user.client.ui.CheckBoxTest;
@@ -65,6 +66,7 @@ import com.google.gwt.user.client.ui.PopupTest;
 import com.google.gwt.user.client.ui.PrefixTreeTest;
 import com.google.gwt.user.client.ui.RadioButtonTest;
 import com.google.gwt.user.client.ui.RichTextAreaTest;
+import com.google.gwt.user.client.ui.RootPanelTest;
 import com.google.gwt.user.client.ui.ScrollPanelTest;
 import com.google.gwt.user.client.ui.SimpleCheckBoxTest;
 import com.google.gwt.user.client.ui.SimpleRadioButtonTest;
@@ -81,12 +83,11 @@ import com.google.gwt.user.client.ui.WidgetCollectionTest;
 import com.google.gwt.user.client.ui.WidgetIteratorsTest;
 import com.google.gwt.user.client.ui.WidgetOnLoadTest;
 import com.google.gwt.user.client.ui.WidgetSubclassingTest;
+import com.google.gwt.user.client.ui.WidgetTest;
 import com.google.gwt.user.client.ui.impl.ClippedImagePrototypeTest;
 import com.google.gwt.user.datepicker.client.DateChangeEventTest;
 import com.google.gwt.user.rebind.ui.ImageBundleGeneratorTest;
 import com.google.gwt.xml.client.XMLTest;
-
-import junit.framework.Test;
 
 /**
  * Tests of the ui package.
@@ -166,6 +167,7 @@ public class UISuite {
     suite.addTestSuite(DateChangeEventTest.class);
     suite.addTestSuite(CreateEventTest.class);
     suite.addTestSuite(WidgetTest.class);
+    suite.addTestSuite(RootPanelTest.class);
     return suite;
   }
 }

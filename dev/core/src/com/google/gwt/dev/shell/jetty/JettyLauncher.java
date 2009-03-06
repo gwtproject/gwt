@@ -242,7 +242,7 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Warn, add containing URL to our own ClassLoader, and retry the call.
         String warnMessage = "Server resource '"
             + name
-            + "' could not be found in the web app, but was found on the system classpath.";
+            + "' could not be found in the web app, but was found on the system classpath";
         if (!addContainingClassPathEntry(warnMessage, found, name)) {
           return null;
         }
@@ -284,7 +284,7 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Warn, add containing URL to our own ClassLoader, and retry the call.
         String warnMessage = "Server class '"
             + name
-            + "' could not be found in the web app, but was found on the system classpath'";
+            + "' could not be found in the web app, but was found on the system classpath";
         if (!addContainingClassPathEntry(warnMessage, found, resourceName)) {
           throw new ClassNotFoundException(name);
         }
@@ -313,7 +313,7 @@ public class JettyLauncher extends ServletContainerLauncher {
           return false;
         }
         branch = branch.branch(logLevel, "Adding classpath entry '"
-            + classPathURL + "' to the web app classpath for this session.",
+            + classPathURL + "' to the web app classpath for this session",
             null, new InstalledHelpInfo("webAppClassPath.html"));
         try {
           addClassPath(classPathURL);

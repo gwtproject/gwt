@@ -15,8 +15,6 @@
  */
 package com.google.gwt.user;
 
-import junit.framework.Test;
-
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.user.client.CommandExecutorTest;
 import com.google.gwt.user.client.CookieTest;
@@ -88,6 +86,8 @@ import com.google.gwt.user.client.ui.impl.ClippedImagePrototypeTest;
 import com.google.gwt.user.datepicker.client.DateChangeEventTest;
 import com.google.gwt.user.rebind.ui.ImageBundleGeneratorTest;
 import com.google.gwt.xml.client.XMLTest;
+
+import junit.framework.Test;
 
 /**
  * Tests of the ui package.

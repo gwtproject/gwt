@@ -17,14 +17,13 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.client.LocaleInfo;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
 
 import java.util.HashMap;

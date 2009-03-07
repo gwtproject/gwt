@@ -424,6 +424,17 @@ public class Event extends NativeEvent {
   }
 
   /**
+   * Gets the {@link EventListener} that will receive events for the given
+   * element. Only one such listener may exist for a single element.
+   * 
+   * @param elem the element whose listener is to be set
+   * @return the element's event listener
+   */
+  public static EventListener getEventListener(Element elem) {
+    return DOM.getEventListener((com.google.gwt.user.client.Element) elem);
+  }
+
+  /**
    * Gets the current set of events sunk by a given element.
    * 
    * @param elem the element whose events are to be retrieved
@@ -500,17 +511,6 @@ public class Event extends NativeEvent {
    */
   public static void setCapture(Element elem) {
     DOM.setCapture(elem.<com.google.gwt.user.client.Element> cast());
-  }
-
-  /**
-   * Gets the {@link EventListener} that will receive events for the given
-   * element. Only one such listener may exist for a single element.
-   * 
-   * @param elem the element whose listener is to be set
-   * @return the element's event listener
-   */
-  public static EventListener getEventListener(Element elem) {
-    return DOM.getEventListener((com.google.gwt.user.client.Element) elem);
   }
 
   /**

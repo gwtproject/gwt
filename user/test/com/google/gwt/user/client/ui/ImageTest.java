@@ -118,9 +118,8 @@ public class ImageTest extends GWTTestCase {
       }
     });
 
-    RootPanel.get().add(image);
-
     delayTestFinish(5000);
+    RootPanel.get().add(image);
   }
 
   /**
@@ -155,9 +154,8 @@ public class ImageTest extends GWTTestCase {
       }
     });
 
-    RootPanel.get().add(image);
-
     delayTestFinish(5000);
+    RootPanel.get().add(image);
   }
 
   /**
@@ -184,12 +182,11 @@ public class ImageTest extends GWTTestCase {
       }
     });
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     assertEquals(0, image.getOriginLeft());
     assertEquals(0, image.getOriginTop());
     assertEquals("unclipped", getCurrentImageStateName(image));
-
-    delayTestFinish(5000);
   }
 
   /**
@@ -218,9 +215,9 @@ public class ImageTest extends GWTTestCase {
       }
     });
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     image.setUrl("counting-backwards.png");
-    delayTestFinish(5000);
   }
 
   /**
@@ -256,9 +253,9 @@ public class ImageTest extends GWTTestCase {
       }
     });
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     assertEquals("unclipped", getCurrentImageStateName(image));
-    delayTestFinish(5000);
   }
 
   @Override
@@ -302,11 +299,11 @@ public class ImageTest extends GWTTestCase {
     });
     image.addErrorHandler(new TestErrorHandler(image));
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     assertEquals(16, image.getOriginLeft());
     assertEquals(16, image.getOriginTop());
     assertEquals("clipped", getCurrentImageStateName(image));
-    delayTestFinish(5000);
   }
 
   @SuppressWarnings("deprecation")
@@ -379,10 +376,10 @@ public class ImageTest extends GWTTestCase {
     });
     image.addErrorHandler(new TestErrorHandler(image));
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     assertEquals("clipped", getCurrentImageStateName(image));
     image.setUrlAndVisibleRect("counting-forwards.png", 0, 16, 16, 16);
-    delayTestFinish(5000);
   }
 
   /**
@@ -419,12 +416,12 @@ public class ImageTest extends GWTTestCase {
     });
     image.addErrorHandler(new TestErrorHandler(image));
 
+    delayTestFinish(5000);
     RootPanel.get().add(image);
     image.setVisibleRect(0, 0, 16, 16);
     image.setVisibleRect(0, 0, 16, 16);
     image.setVisibleRect(16, 0, 16, 16);
     image.setVisibleRect(16, 8, 8, 8);
-    delayTestFinish(5000);
   }
 
   /**

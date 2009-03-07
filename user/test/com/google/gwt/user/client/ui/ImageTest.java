@@ -78,95 +78,119 @@ public class ImageTest extends GWTTestCase {
    *         image is in the clipped state
    */
   public static native String getCurrentImageStateName(Image image) /*-{
-      var imgState = image.@com.google.gwt.user.client.ui.Image::state;
-      return imgState.@com.google.gwt.user.client.ui.Image.State::getStateName() ();
-    }-*/;
+    var imgState = image.@com.google.gwt.user.client.ui.Image::state;
+    return imgState.@com.google.gwt.user.client.ui.Image.State::getStateName() ();
+  }-*/;
 
   private int firedError;
 
-  /**
-   * Tests the transition from the unclipped state to the clipped state
-   */
-  /*
-   * This test is commented out because of issue #863 public void
-   * testChangeImageToClipped() { final Image image = new
-   * Image("counting-forwards.png"); assertEquals("unclipped",
-   * getCurrentImageStateName(image));
-   * 
-   * image.addLoadListener(new LoadListener() { private int onLoadEventCount =
-   * 0;
-   * 
-   * public void onError(Widget sender) { fail("The image " + ((Image)
-   * sender).getUrl() + " failed to load."); }
-   * 
-   * public void onLoad(Widget sender) { if
-   * (getCurrentImageStateName(image).equals("unclipped")) {
-   * image.setVisibleRect(12, 13, 8, 8); }
-   * 
-   * if (++onLoadEventCount == 2) { assertEquals(12, image.getOriginLeft());
-   * assertEquals(13, image.getOriginTop()); assertEquals(8, image.getWidth());
-   * assertEquals(8, image.getHeight()); assertEquals("clipped",
-   * getCurrentImageStateName(image)); finishTest(); } } });
-   * 
-   * RootPanel.get().add(image);
-   * 
-   * delayTestFinish(5000); }
-   */
+  private int firedLoad;
 
   /**
    * Tests the transition from the clipped state to the unclipped state.
+   * 
+   * Disabled because of issue #863 & #864. It fails intermittently in linux
+   * hosted mode tests.
    */
-  /*
-   * This test is commented out because of issue #863 & #864 It fails
-   * intermittently in linux hosted mode tests. public void
-   * testChangeClippedImageToUnclipped() { final Image image = new
-   * Image("counting-forwards.png", 12, 13, 8, 8); assertEquals("clipped",
-   * getCurrentImageStateName(image));
-   * 
-   * image.addLoadListener(new LoadListener() { private int onLoadEventCount =
-   * 0;
-   * 
-   * public void onError(Widget sender) { fail("The image " + ((Image)
-   * sender).getUrl() + " failed to load."); }
-   * 
-   * public void onLoad(Widget sender) { ++onLoadEventCount; if
-   * (onLoadEventCount == 1) { // Set the url after the first image loads
-   * image.setUrl("counting-forwards.png"); } else if (onLoadEventCount == 2) {
-   * assertEquals(0, image.getOriginLeft()); assertEquals(0,
-   * image.getOriginTop()); assertEquals(32, image.getWidth()); assertEquals(32,
-   * image.getHeight()); assertEquals("unclipped",
-   * getCurrentImageStateName(image)); finishTest(); } } });
-   * 
-   * RootPanel.get().add(image);
-   * 
-   * delayTestFinish(5000); }
-   */
+  public void disabledTestChangeClippedImageToUnclipped() {
+    final Image image = new Image("counting-forwards.png", 12, 13, 8, 8);
+    assertEquals("clipped", getCurrentImageStateName(image));
+
+    image.addLoadListener(new LoadListener() {
+      private int onLoadEventCount = 0;
+
+      public void onError(Widget sender) {
+        fail("The image " + ((Image) sender).getUrl() + " failed to load.");
+      }
+
+      public void onLoad(Widget sender) {
+        ++onLoadEventCount;
+        if (onLoadEventCount == 1) { // Set the url after the first image loads
+          image.setUrl("counting-forwards.png");
+        } else if (onLoadEventCount == 2) {
+          assertEquals(0, image.getOriginLeft());
+          assertEquals(0, image.getOriginTop());
+          assertEquals(32, image.getWidth());
+          assertEquals(32, image.getHeight());
+          assertEquals("unclipped", getCurrentImageStateName(image));
+          finishTest();
+        }
+      }
+    });
+
+    RootPanel.get().add(image);
+
+    delayTestFinish(5000);
+  }
 
   /**
-   * Tests the creation of an image in unclipped mode
+   * Tests the transition from the unclipped state to the clipped state.
+   * 
+   * Disabled because of issue #863.
    */
-  /*
-   * This test is commented out because of issue #864 and issue #863 public void
-   * testCreateImage() { final Image image = new Image("counting-forwards.png");
-   * 
-   * image.addLoadListener(new LoadListener() { private int onLoadEventCount =
-   * 0;
-   * 
-   * public void onError(Widget sender) { fail("The image " + ((Image)
-   * sender).getUrl() + " failed to load."); }
-   * 
-   * public void onLoad(Widget sender) { if (++onLoadEventCount == 1) {
-   * assertEquals(32, image.getWidth()); assertEquals(32, image.getHeight());
-   * finishTest(); } } });
-   * 
-   * RootPanel.get().add(image); assertEquals(0, image.getOriginLeft());
-   * assertEquals(0, image.getOriginTop()); assertEquals("unclipped",
-   * getCurrentImageStateName(image));
-   * 
-   * delayTestFinish(5000); }
-   */
+  public void disabledTestChangeImageToClipped() {
+    final Image image = new Image("counting-forwards.png");
+    assertEquals("unclipped", getCurrentImageStateName(image));
 
-  private int firedLoad;
+    image.addLoadListener(new LoadListener() {
+      private int onLoadEventCount = 0;
+
+      public void onError(Widget sender) {
+        fail("The image " + ((Image) sender).getUrl() + " failed to load.");
+      }
+
+      public void onLoad(Widget sender) {
+        if (getCurrentImageStateName(image).equals("unclipped")) {
+          image.setVisibleRect(12, 13, 8, 8);
+        }
+
+        if (++onLoadEventCount == 2) {
+          assertEquals(12, image.getOriginLeft());
+          assertEquals(13, image.getOriginTop());
+          assertEquals(8, image.getWidth());
+          assertEquals(8, image.getHeight());
+          assertEquals("clipped", getCurrentImageStateName(image));
+          finishTest();
+        }
+      }
+    });
+
+    RootPanel.get().add(image);
+
+    delayTestFinish(5000);
+  }
+
+  /**
+   * Tests the creation of an image in unclipped mode.
+   * 
+   * Disabled because of issue #863 & #864.
+   */
+  public void disabledTestCreateImage() {
+    final Image image = new Image("counting-forwards.png");
+
+    image.addLoadListener(new LoadListener() {
+      private int onLoadEventCount = 0;
+
+      public void onError(Widget sender) {
+        fail("The image " + ((Image) sender).getUrl() + " failed to load.");
+      }
+
+      public void onLoad(Widget sender) {
+        if (++onLoadEventCount == 1) {
+          assertEquals(32, image.getWidth());
+          assertEquals(32, image.getHeight());
+          finishTest();
+        }
+      }
+    });
+
+    RootPanel.get().add(image);
+    assertEquals(0, image.getOriginLeft());
+    assertEquals(0, image.getOriginTop());
+    assertEquals("unclipped", getCurrentImageStateName(image));
+
+    delayTestFinish(5000);
+  }
 
   /**
    * Tests the firing of onload events when

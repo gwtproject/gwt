@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ErrorEvent;
 import com.google.gwt.event.dom.client.ErrorHandler;
@@ -430,9 +431,10 @@ public class ImageTest extends GWTTestCase {
    */
   public void testWrapThenSetUrlAndVisibleRect() {
     String uid = Document.get().createUniqueId();
-    HTML html = new HTML("<img id='" + uid
+    DivElement div = Document.get().createDivElement();
+    div.setInnerHTML("<img id='" + uid
         + "' src='counting-backwards.png' width='16' height='16'>");
-    RootPanel.get().add(html);
+    Document.get().getBody().appendChild(div);
     final Image image = Image.wrap(Document.get().getElementById(uid));
 
     assertEquals(0, image.getOriginLeft());
@@ -448,5 +450,4 @@ public class ImageTest extends GWTTestCase {
     assertEquals(16, image.getHeight());
     assertEquals("clipped", getCurrentImageStateName(image));
   }
-
 }

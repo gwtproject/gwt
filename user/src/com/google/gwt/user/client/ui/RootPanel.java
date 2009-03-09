@@ -229,6 +229,12 @@ public class RootPanel extends AbsolutePanel {
     }
 
     widgetsToDetach.clear();
+
+    // Clear the RootPanel cache, since we've "detached" all RootPanels at this
+    // point. This would be pointless, since it only happens on unload, but it
+    // is very helpful for unit tests, because it allows RootPanel.get() to work
+    // properly even after a synthesized "unload".
+    rootPanels.clear();
   }
 
   /**

@@ -4,7 +4,7 @@ import @clientPackage.GreetingService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
- * The server side implementation of the Rpc service.
+ * The server side implementation of the RPC service.
  */
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {

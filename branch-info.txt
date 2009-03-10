@@ -23,17 +23,17 @@ Merges:
 /releases/1.6/@r4198:4268 was merged (r4367,r4368) into trunk
 /releases/1.6/@r4269:4297 was merged (r4367,r4368) into trunk, skipping c4269 (already merged, c4314)
 /releases/1.6/@r4299:4320 was merged (r4367,r4368) into trunk, skipping c4298, c4299 (already merged, c4314)
-/releases/1.6/@r4321:4366 was merged (r4367,r4368) into trunk, skipping c4321 (was a backmerge from trunk)
+/releases/1.6/@r4321:4366 was merged (r4367,r4368) into trunk, skipping c4321 (backmerge from trunk)
 /releases/1.6/@r4366:4385 was merged (r4386) into trunk
 /releases/1.6/@r4385:4459 was merged (r4488) into trunk
 /releases/1.6/@r4359:4490 was merged (r4491) into trunk
-/releases/1.6/@c4498 was merged (r4499) into trunk
+/releases/1.6/@c4498 was merged (r4499) into trunk (cherry pick)
 /releases/1.6/@r4490:4497,4498:4511 was merged (r4512) into trunk, skipping c4498 (cherry picked above)
-/trunk@c4603 was merged (r4605) into /releases/1.6
-/releases/1.6/@r4511:4604,4605:4657 was merged (r4659) into trunk, skipping c4605 (cherry picked above)
+/trunk revision c4603 was merged (r4605) into this branch
+/releases/1.6/@r4511:4604,4605:4657 was merged (r4659) into trunk, skipping c4605 (backmerge from trunk)
 /releases/1.6/@r4657:4658 was merged (r4662) into trunk
 /releases/1.6/@r4658:4669 was merged (r4670) into trunk
-/trunk@c4873 was merged (r4878) into /releases/1.6
+/trunk revision c4873 was merged (r4878) into this branch
 /trunk revision c4889 was merged (r4892) into this branch
 /releases/1.6/@r4669:4694 was merged (r4919) into trunk
 /releases/1.6/@r4695:4874 was merged (r4919) into trunk, skipping c4695 (1.6-only change)

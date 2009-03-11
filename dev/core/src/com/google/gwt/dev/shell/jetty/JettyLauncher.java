@@ -40,14 +40,14 @@ import java.net.URL;
 import java.util.Enumeration;
 
 /**
- * A launcher for an embedded Jetty server.
+ * A {@link ServletContainerLauncher} for an embedded Jetty server.
  */
 public class JettyLauncher extends ServletContainerLauncher {
 
   /**
    * Log jetty requests/responses to TreeLogger.
    */
-  public class JettyRequestLogger extends AbstractLifeCycle implements
+  public static class JettyRequestLogger extends AbstractLifeCycle implements
       RequestLog {
 
     private final TreeLogger logger;
@@ -109,7 +109,7 @@ public class JettyLauncher extends ServletContainerLauncher {
    * {@link Log}'s static initializer to prevent the initial log message from
    * going to stderr.
    */
-  public static final class JettyTreeLogger implements Logger {
+  public static class JettyTreeLogger implements Logger {
     private final TreeLogger logger;
 
     public JettyTreeLogger(TreeLogger logger) {
@@ -168,8 +168,10 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
   }
 
-  private static class JettyServletContainer extends ServletContainer {
-
+  /**
+   * The resulting {@link ServletContainer} this is launched.
+   */
+  protected static class JettyServletContainer extends ServletContainer {
     private final int actualPort;
     private final File appRootDir;
     private final TreeLogger logger;
@@ -234,7 +236,7 @@ public class JettyLauncher extends ServletContainerLauncher {
    * Also provides special class filtering to isolate the web app from the GWT
    * hosting environment.
    */
-  private final class WebAppContextWithReload extends WebAppContext {
+  protected final class WebAppContextWithReload extends WebAppContext {
 
     /**
      * Specialized {@link WebAppClassLoader} that allows outside resources to be

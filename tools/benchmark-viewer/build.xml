@@ -51,7 +51,7 @@
   <target name="gwtc" depends="javac" description="GWT compile to JavaScript">
     <outofdate>
       <sourcefiles>
-        <pathelement location="src"/>
+        <fileset dir="src"/>
         <path refid="project.class.path"/>
       </sourcefiles>
       <targetfiles path="${war}/reportViewer/reportViewer.nocache.js" />

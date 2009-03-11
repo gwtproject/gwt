@@ -101,7 +101,7 @@ public final class WebAppCreator {
 
     @Override
     public String getPurpose() {
-      return "The name of the module to create (fully-qualified Java class name)";
+      return "The name of the module to create (e.g. com.example.myapp.MyApp)";
     }
 
     @Override

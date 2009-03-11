@@ -74,7 +74,7 @@
     <zip destfile="${gwt.build.lib}/gwt-benchmark-viewer.war" basedir="${war}"/>
   </target>
 
-  <target name="build" depends="gwtc" description="Build this project" />
+  <target name="build" depends="war" description="Build this project" />
 
   <target name="clean" description="Cleans this project">
     <delete dir="${war}" failonerror="false" />

@@ -92,6 +92,26 @@ public class Element extends Node {
    }-*/;
 
   /**
+   * Returns the inner height of an element in pixels, including padding but not
+   * the horizontal scrollbar height, border, or margin.
+   * 
+   * @return the element's client height
+   */
+  public final native int getClientHeight() /*-{
+    return this.clientHeight;
+  }-*/;
+
+  /**
+   * Returns the inner width of an element in pixels, including padding but not
+   * the vertical scrollbar width, border, or margin.
+   * 
+   * @return the element's client width
+   */
+  public final native int getClientWidth() /*-{
+    return this.clientWidth;
+  }-*/;
+
+  /**
    * Specifies the base direction of directionally neutral text and the
    * directionality of tables.
    */
@@ -253,14 +273,14 @@ public class Element extends Node {
    }-*/;
 
   /**
-   * The number of pixels that an element's content is scrolled to the left.
+   * The number of pixels that an element's content is scrolled from the left.
    */
   public final native int getScrollLeft() /*-{
      return this.scrollLeft || 0;
    }-*/;
 
   /**
-   * The number of pixels that an element's content is scrolled to the top.
+   * The number of pixels that an element's content is scrolled from the top.
    */
   public final native int getScrollTop() /*-{
      return this.scrollTop || 0;

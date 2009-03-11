@@ -79,11 +79,13 @@ public class ReportViewer implements EntryPoint, HistoryListener {
   private class SummariesTableListener implements TableListener {
 
     public void onCellClicked(SourcesTableEvents sender, int row, int col) {
-      ReportSummary summary = summaries.get(row - 1);
-      String token = summary.getId();
-      // Short circuit the history loop.
-      selectReport(row, token);
-      History.newItem(token);
+      if (row > 0) {
+        ReportSummary summary = summaries.get(row - 1);
+        String token = summary.getId();
+        // Short circuit the history loop.
+        selectReport(row, token);
+        History.newItem(token);
+      }
     }
   }
 

@@ -16,6 +16,7 @@
 package com.google.gwt.benchmarks.viewer.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import java.util.List;
  * @see com.google.gwt.junit.viewer.server.ReportServerImpl
  * @see ReportViewer
  */
+@RemoteServiceRelativePath("test_reports")
 public interface ReportServer extends RemoteService {
 
   /**

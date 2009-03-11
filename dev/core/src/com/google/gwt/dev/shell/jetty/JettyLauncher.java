@@ -19,10 +19,15 @@ import com.google.gwt.core.ext.ServletContainer;
 import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 
+import org.mortbay.component.AbstractLifeCycle;
+import org.mortbay.jetty.AbstractConnector;
+import org.mortbay.jetty.Request;
+import org.mortbay.jetty.RequestLog;
+import org.mortbay.jetty.Response;
 import org.mortbay.jetty.Server;
+import org.mortbay.jetty.handler.RequestLogHandler;
 import org.mortbay.jetty.nio.SelectChannelConnector;
 import org.mortbay.jetty.webapp.WebAppClassLoader;
 import org.mortbay.jetty.webapp.WebAppContext;
@@ -32,11 +37,69 @@ import org.mortbay.log.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Enumeration;
 
 /**
  * A launcher for an embedded Jetty server.
  */
 public class JettyLauncher extends ServletContainerLauncher {
+
+  /**
+   * Log jetty requests/responses to TreeLogger.
+   */
+  public class JettyRequestLogger extends AbstractLifeCycle implements
+      RequestLog {
+
+    private final TreeLogger logger;
+
+    public JettyRequestLogger(TreeLogger logger) {
+      this.logger = logger;
+    }
+
+    /**
+     * Log an HTTP request/response to TreeLogger.
+     */
+    @SuppressWarnings("unchecked")
+    public void log(Request request, Response response) {
+      int status = response.getStatus();
+      if (status < 0) {
+        // Copied from NCSARequestLog
+        status = 404;
+      }
+      TreeLogger.Type logStatus, logHeaders;
+      if (status >= 500) {
+        logStatus = TreeLogger.ERROR;
+        logHeaders = TreeLogger.INFO;
+      } else if (status >= 400) {
+        logStatus = TreeLogger.WARN;
+        logHeaders = TreeLogger.INFO;
+      } else {
+        logStatus = TreeLogger.INFO;
+        logHeaders = TreeLogger.DEBUG;
+      }
+      String userString = request.getRemoteUser();
+      if (userString == null) {
+        userString = "";
+      } else {
+        userString += "@";
+      }
+      String bytesString = "";
+      if (response.getContentCount() > 0) {
+        bytesString = " " + response.getContentCount() + " bytes";
+      }
+      TreeLogger branch = logger.branch(logStatus, String.valueOf(status)
+          + " - " + request.getMethod() + ' ' + request.getUri() + " ("
+          + userString + request.getRemoteHost() + ')' + bytesString);
+      TreeLogger headers = branch.branch(logHeaders, "Request headers");
+      Enumeration<String> headerNames = request.getHeaderNames();
+      while (headerNames.hasMoreElements()) {
+        String hdr = headerNames.nextElement();
+        String hdrVal = request.getHeader(hdr);
+        headers.log(logHeaders, hdr + ": " + hdrVal);
+      }
+      // TODO(jat): add response headers
+    }
+  }
 
   /**
    * An adapter for the Jetty logging system to GWT's TreeLogger. This
@@ -47,56 +110,25 @@ public class JettyLauncher extends ServletContainerLauncher {
    * going to stderr.
    */
   public static final class JettyTreeLogger implements Logger {
-    private static Type nextBranchLevel;
-    private static TreeLogger nextLogger;
-
-    /**
-     * Returns true if the default constructor can be called.
-     */
-    public static boolean isDefaultConstructionReady() {
-      return nextLogger != null;
-    }
-
-    /**
-     * Call to set initial state for default construction; must be called again
-     * each time before a default instantiation occurs.
-     */
-    public static void setDefaultConstruction(TreeLogger logger,
-        Type branchLevel) {
-      if (logger == null || branchLevel == null) {
-        throw new NullPointerException();
-      }
-      nextLogger = logger;
-      nextBranchLevel = branchLevel;
-    }
-
-    private final Type branchLevel;
     private final TreeLogger logger;
 
-    public JettyTreeLogger() {
-      this(nextLogger, nextBranchLevel);
-      nextLogger = null;
-      nextBranchLevel = null;
-    }
-
-    public JettyTreeLogger(TreeLogger logger, Type branchLevel) {
-      if (logger == null || branchLevel == null) {
+    public JettyTreeLogger(TreeLogger logger) {
+      if (logger == null) {
         throw new NullPointerException();
       }
-      this.branchLevel = branchLevel;
       this.logger = logger;
     }
 
     public void debug(String msg, Object arg0, Object arg1) {
-      logger.log(TreeLogger.DEBUG, format(msg, arg0, arg1));
+      logger.log(TreeLogger.SPAM, format(msg, arg0, arg1));
     }
 
     public void debug(String msg, Throwable th) {
-      logger.log(TreeLogger.DEBUG, msg, th);
+      logger.log(TreeLogger.SPAM, msg, th);
     }
 
     public Logger getLogger(String name) {
-      return new JettyTreeLogger(logger.branch(branchLevel, name), branchLevel);
+      return this;
     }
 
     public void info(String msg, Object arg0, Object arg1) {
@@ -104,7 +136,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     public boolean isDebugEnabled() {
-      return logger.isLoggable(TreeLogger.DEBUG);
+      return logger.isLoggable(TreeLogger.SPAM);
     }
 
     public void setDebugEnabled(boolean enabled) {
@@ -191,6 +223,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       branch.log(TreeLogger.INFO, "Stopped successfully");
     }
   }
+
   /**
    * A {@link WebAppContext} tailored to GWT hosted mode. Features hot-reload
    * with a new {@link WebAppClassLoader} to pick up disk changes. The default
@@ -375,29 +408,23 @@ public class JettyLauncher extends ServletContainerLauncher {
    */
   private static final String PROPERTY_NOWARN_WEBAPP_CLASSPATH = "gwt.nowarn.webapp.classpath";
 
+  static {
+    // Suppress spammy Jetty log initialization.
+    System.setProperty("org.mortbay.log.class", JettyNullLogger.class.getName());
+    Log.getLog();
+  }
+
   public ServletContainer start(TreeLogger logger, int port, File appRootDir)
       throws Exception {
     checkStartParams(logger, port, appRootDir);
 
-    // The dance we do with Jetty's logging system -- disabled, log to console.
-    if (false) {
-      System.setProperty("VERBOSE", "true");
-      JettyTreeLogger.setDefaultConstruction(logger, TreeLogger.INFO);
-      System.setProperty("org.mortbay.log.class",
-          JettyTreeLogger.class.getName());
-      // Force initialization.
-      Log.isDebugEnabled();
-      if (JettyTreeLogger.isDefaultConstructionReady()) {
-        // The log system was already initialized and did not use our
-        // newly-constructed logger, set it explicitly now.
-        Log.setLog(new JettyTreeLogger());
-      }
-    }
+    // Setup our own logger.
+    Log.setLog(new JettyTreeLogger(logger));
 
     // Turn off XML validation.
     System.setProperty("org.mortbay.xml.XmlParser.Validating", "false");
 
-    SelectChannelConnector connector = new SelectChannelConnector();
+    AbstractConnector connector = getConnector();
     connector.setPort(port);
 
     // Don't share ports with an existing process.
@@ -413,12 +440,19 @@ public class JettyLauncher extends ServletContainerLauncher {
     WebAppContext wac = new WebAppContextWithReload(logger,
         appRootDir.getAbsolutePath(), "/");
 
-    server.setHandler(wac);
+    RequestLogHandler logHandler = new RequestLogHandler();
+    logHandler.setRequestLog(new JettyRequestLogger(logger));
+    logHandler.setHandler(wac);
+    server.setHandler(logHandler);
     server.start();
     server.setStopAtShutdown(true);
 
     return new JettyServletContainer(logger, server, wac,
         connector.getLocalPort(), appRootDir);
+  }
+
+  protected AbstractConnector getConnector() {
+    return new SelectChannelConnector();
   }
 
   private void checkStartParams(TreeLogger logger, int port, File appRootDir) {

@@ -143,6 +143,20 @@ class DOMImplSafari extends DOMImplStandard {
   }-*/;
 
   @Override
+  public int getScrollLeft(Document doc) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    return doc.getBody().getScrollLeft();
+  }
+
+  @Override
+  public int getScrollTop(Document doc) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    return doc.getBody().getScrollTop();
+  }
+
+  @Override
   public native boolean isOrHasChild(Element parent, Element child) /*-{
     while (child) {
       if (parent == child) {
@@ -185,20 +199,6 @@ class DOMImplSafari extends DOMImplStandard {
   public native void selectRemoveOption(SelectElement select, int index) /*-{
     select.removeChild(select.children[index]);
   }-*/;
-
-  @Override
-  public int getScrollLeft(Document doc) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    return doc.getBody().getScrollLeft();
-  }
-
-  @Override
-  public int getScrollTop(Document doc) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    return doc.getBody().getScrollTop();
-  }
 
   @Override
   public void setScrollLeft(Document doc, int left) {

@@ -148,26 +148,6 @@ class DOMImplIE6 extends DOMImpl {
         / getZoomMultiple(doc) + doc.getScrollTop());
   }
 
-  private native int getBoundingClientRectLeft(Element elem) /*-{
-    // getBoundingClientRect() throws a JS exception if the elem is not attached
-    // to the document, so we wrap it in a try/catch block
-    try {
-      return elem.getBoundingClientRect().left;
-    } catch (e) {
-      return 0;
-    }
-  }-*/;
-
-  private native int getBoundingClientRectTop(Element elem) /*-{
-    // getBoundingClientRect() throws a JS exception if the elem is not attached
-    // to the document, so we wrap it in a try/catch block
-    try {
-      return elem.getBoundingClientRect().top;
-    } catch (e) {
-      return 0;
-    }
-  }-*/;
-
   /**
    * IE returns a numeric type for some attributes that are really properties,
    * such as offsetWidth.  We need to coerce these to strings to prevent a
@@ -241,6 +221,26 @@ class DOMImplIE6 extends DOMImpl {
   @Override
   public native void setInnerText(Element elem, String text) /*-{
     elem.innerText = text || '';
+  }-*/;
+
+  private native int getBoundingClientRectLeft(Element elem) /*-{
+    // getBoundingClientRect() throws a JS exception if the elem is not attached
+    // to the document, so we wrap it in a try/catch block
+    try {
+      return elem.getBoundingClientRect().left;
+    } catch (e) {
+      return 0;
+    }
+  }-*/;
+
+  private native int getBoundingClientRectTop(Element elem) /*-{
+    // getBoundingClientRect() throws a JS exception if the elem is not attached
+    // to the document, so we wrap it in a try/catch block
+    try {
+      return elem.getBoundingClientRect().top;
+    } catch (e) {
+      return 0;
+    }
   }-*/;
 
   /**

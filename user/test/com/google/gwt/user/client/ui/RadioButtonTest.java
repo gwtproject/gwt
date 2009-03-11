@@ -32,6 +32,7 @@ public class RadioButtonTest extends GWTTestCase {
 
   private static class Changeable implements ValueChangeHandler<Boolean> {
     Boolean received;
+
     public void onValueChange(ValueChangeEvent<Boolean> event) {
       received = event.getValue();
     }
@@ -56,7 +57,7 @@ public class RadioButtonTest extends GWTTestCase {
     UIObjectTest.assertDebugId("myRadio-input", newInput);
     UIObjectTest.assertDebugIdContents("myRadio-label", "myLabel");
   }
-  
+
   /**
    * Test the name and grouping methods.
    */
@@ -89,7 +90,7 @@ public class RadioButtonTest extends GWTTestCase {
     assertFalse(r2.getValue());
     assertTrue(r3.getValue());
   }
-  
+
   /**
    * Test the name and grouping methods via deprecated calls.
    */
@@ -123,33 +124,33 @@ public class RadioButtonTest extends GWTTestCase {
     assertFalse(r2.isChecked());
     assertTrue(r3.isChecked());
   }
-  
+
   public void testValueChangeViaClick() {
     RadioButton r1 = new RadioButton("group1", "Radio 1");
     RadioButton r2 = new RadioButton("group1", "Radio 2");
     RootPanel.get().add(r1);
     RootPanel.get().add(r2);
     r1.setValue(true);
-    
+
     Changeable c1 = new Changeable();
     r1.addValueChangeHandler(c1);
-    
+
     Changeable c2 = new Changeable();
     r2.addValueChangeHandler(c2);
-    
+
     // Brittle, but there's no public access
     InputElement r1Radio = getRadioElement(r1);
     InputElement r2Radio = getRadioElement(r2);
-    
+
     doClick(r1Radio);
     assertEquals(null, c1.received);
     assertEquals(null, c2.received);
-    
+
     doClick(r2Radio);
     assertEquals(null, c1.received);
     assertEquals(Boolean.TRUE, c2.received);
     c2.received = null;
-    
+
     doClick(r1Radio);
     assertEquals(Boolean.TRUE, c1.received);
     assertEquals(null, c2.received);
@@ -161,70 +162,52 @@ public class RadioButtonTest extends GWTTestCase {
     RootPanel.get().add(r1);
     RootPanel.get().add(r2);
     r1.setValue(true);
-    
+
     Changeable c1 = new Changeable();
     r1.addValueChangeHandler(c1);
-    
+
     Changeable c2 = new Changeable();
     r2.addValueChangeHandler(c2);
-    
+
     LabelElement r1Label = getLabelElement(r1);
     LabelElement r2Label = getLabelElement(r2);
-    
+
     doClick(r1Label);
     assertEquals(null, c1.received);
     assertEquals(null, c2.received);
-    
+
     doClick(r2Label);
     assertEquals(null, c1.received);
     assertEquals(Boolean.TRUE, c2.received);
     c2.received = null;
-    
+
     doClick(r1Label);
     assertEquals(Boolean.TRUE, c1.received);
     assertEquals(null, c2.received);
   }
 
   private void doClick(Element elm) {
-    NativeEvent e =
-        Document.get().createMouseDownEvent(0, 25, 25, 25, 25, false, false,
-            false, false, NativeEvent.BUTTON_LEFT);
+    NativeEvent e = Document.get().createMouseDownEvent(0, 25, 25, 25, 25,
+        false, false, false, false, NativeEvent.BUTTON_LEFT);
     elm.dispatchEvent(e);
 
     e = Document.get().createMouseUpEvent(0, 25, 25, 25, 25, false, false,
-            false, false, NativeEvent.BUTTON_LEFT);
+        false, false, NativeEvent.BUTTON_LEFT);
     elm.dispatchEvent(e);
 
     e = Document.get().createClickEvent(0, 25, 25, 25, 25, false, false, false,
-            false);
-    elm.dispatchEvent(e);
-  }
-
-  private void doSpacebar(Element elm) {
-    NativeEvent e =
-        Document.get().createFocusEvent();
-    elm.dispatchEvent(e);
-
-    e = Document.get().createKeyDownEvent(false, false, false, false, 32, 32);
-    elm.dispatchEvent(e);
-
-    e = Document.get().createKeyPressEvent(false, false, false, false, 32, 32);
-    elm.dispatchEvent(e);
-
-    e = Document.get().createKeyUpEvent(false, false, false, false, 32, 32);
+        false);
     elm.dispatchEvent(e);
   }
 
   private LabelElement getLabelElement(RadioButton radioButton) {
-    LabelElement r1Label =
-        LabelElement.as(Element.as(getRadioElement(radioButton)
-          .getNextSiblingElement()));
+    LabelElement r1Label = LabelElement.as(Element.as(getRadioElement(
+        radioButton).getNextSiblingElement()));
     return r1Label;
   }
-  
+
   private InputElement getRadioElement(RadioButton radioButton) {
-    InputElement r1Radio =
-        InputElement.as(Element.as(radioButton.getElement().getFirstChild()));
+    InputElement r1Radio = InputElement.as(Element.as(radioButton.getElement().getFirstChild()));
     return r1Radio;
   }
 }

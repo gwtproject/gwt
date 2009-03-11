@@ -1216,20 +1216,6 @@ public class Document extends Node {
   }-*/;
 
   /**
-   * Gets the document's viewport element. This is the element that should be
-   * used to for scrolling and client-area measurement. In quirks-mode it is the
-   * &lt;body&gt; element, while in standards-mode it is the &lt;html&gt;
-   * element.
-   * 
-   * This is package-protected because the viewport is
-   * 
-   * @return the document's viewport element
-   */
-  final Element getViewportElement() {
-    return isCSS1Compat() ? getDocumentElement() : getBody();
-  }
-
-  /**
    * Imports a node from another document to this document.
    * 
    * The returned node has no parent; ({@link Node#getParentNode()} is null).
@@ -1293,4 +1279,18 @@ public class Document extends Node {
   public final native void setTitle(String title) /*-{
     this.title = title;
   }-*/;
+
+  /**
+   * Gets the document's viewport element. This is the element that should be
+   * used to for scrolling and client-area measurement. In quirks-mode it is the
+   * &lt;body&gt; element, while in standards-mode it is the &lt;html&gt;
+   * element.
+   * 
+   * This is package-protected because the viewport is
+   * 
+   * @return the document's viewport element
+   */
+  final Element getViewportElement() {
+    return isCSS1Compat() ? getDocumentElement() : getBody();
+  }
 }

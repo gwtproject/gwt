@@ -19,6 +19,7 @@ import com.google.gwt.animation.client.Animation;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -902,10 +903,12 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
       return false;
     }
 
-    Element target = event.getTarget();
-    for (Element elem : autoHidePartners) {
-      if (elem.isOrHasChild(target)) {
-        return true;
+    EventTarget target = event.getEventTarget();
+    if (Element.is(target)) {
+      for (Element elem : autoHidePartners) {
+        if (elem.isOrHasChild(Element.as(target))) {
+          return true;
+        }
       }
     }
     return false;
@@ -918,7 +921,11 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * @return true if the event targets the popup
    */
   private boolean eventTargetsPopup(NativeEvent event) {
-    return getElement().isOrHasChild(event.getTarget());
+    EventTarget target = event.getEventTarget();
+    if (Element.is(target)) {
+      return getElement().isOrHasChild(Element.as(target));
+    }
+    return false;
   }
 
   /**

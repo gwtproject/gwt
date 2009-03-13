@@ -16,6 +16,7 @@
 package com.google.gwt.event.dom.client;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 
@@ -102,21 +103,29 @@ public abstract class MouseEvent<H extends EventHandler> extends DomEvent<H> {
   }
 
   /**
-   * Gets the mouse x-position relative to the event's target element.
+   * Gets the mouse x-position relative to the event's current target element.
    * 
    * @return the relative x-position
    */
-  public int getTargetX() {
-    return getRelativeX(getNativeEvent().getTarget());
+  public int getX() {
+    EventTarget currentTarget = getNativeEvent().getCurrentEventTarget();
+    if (Element.is(currentTarget)) {
+      return getRelativeX(Element.as(currentTarget));
+    }
+    return getClientX();
   }
 
   /**
-   * Gets the mouse y-position relative to the event's target element.
+   * Gets the mouse y-position relative to the event's current target element.
    * 
    * @return the relative y-position
    */
-  public int getTargetY() {
-    return getRelativeY(getNativeEvent().getTarget());
+  public int getY() {
+    EventTarget currentTarget = getNativeEvent().getCurrentEventTarget();
+    if (Element.is(currentTarget)) {
+      return getRelativeY(Element.as(currentTarget));
+    }
+    return getClientY();
   }
 
   /**

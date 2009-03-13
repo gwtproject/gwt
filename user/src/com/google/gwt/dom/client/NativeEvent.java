@@ -91,6 +91,16 @@ public class NativeEvent extends JavaScriptObject {
   }
 
   /**
+   * Gets the current target element of this event. This is the element whose
+   * listener fired last, not the element which fired the event initially.
+   * 
+   * @return the event's current target element
+   */
+  public final EventTarget getCurrentEventTarget() {
+    return DOMImpl.impl.eventGetCurrentTarget(this);
+  }
+
+  /**
    * Gets the key code associated with this event.
    * 
    * <p>
@@ -138,7 +148,7 @@ public class NativeEvent extends JavaScriptObject {
    * 
    * @return the related target
    */
-  public final Element getRelatedTarget() {
+  public final EventTarget getRelatedEventTarget() {
     return DOMImpl.impl.eventGetRelatedTarget(this);
   }
 
@@ -186,7 +196,7 @@ public class NativeEvent extends JavaScriptObject {
    * 
    * @return the target element
    */
-  public final Element getTarget() {
+  public final EventTarget getEventTarget() {
     return DOMImpl.impl.eventGetTarget(this);
   }
 

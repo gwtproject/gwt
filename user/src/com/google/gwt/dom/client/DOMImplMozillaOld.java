@@ -25,7 +25,47 @@ package com.google.gwt.dom.client;
  class DOMImplMozillaOld extends DOMImplMozilla {
 
   @Override
-  public native int getAbsoluteLeft(Element elem) /*-{
+  public int getAbsoluteLeft(Element elem) {
+    return getAbsoluteLeftImpl(elem.getOwnerDocument().getViewportElement(),
+        elem);
+  }
+
+  @Override
+  public int getAbsoluteTop(Element elem) {
+    return getAbsoluteTopImpl(elem.getOwnerDocument().getViewportElement(),
+        elem);
+  }
+
+  @Override
+  public native String getInnerText(Element node) /*-{
+    // To mimic IE's 'innerText' property in the W3C DOM, we need to recursively
+    // concatenate all child text nodes (depth first).
+    var text = '', child = node.firstChild;
+    while (child) {
+      // 1 == Element node
+      if (child.nodeType == 1) {
+        text += this.@com.google.gwt.dom.client.DOMImpl::getInnerText(Lcom/google/gwt/dom/client/Element;)(child);
+      } else if (child.nodeValue) {
+        text += child.nodeValue;
+      }
+      child = child.nextSibling;
+    }
+    return text;
+  }-*/;
+
+  @Override
+  public native void setInnerText(Element elem, String text) /*-{
+    // Remove all children first.
+    while (elem.firstChild) {
+      elem.removeChild(elem.firstChild);
+    }
+    // Add a new text node.
+    if (text != null) {
+      elem.appendChild(elem.ownerDocument.createTextNode(text));
+    }
+  }-*/;
+  
+  private native int getAbsoluteLeftImpl(Element viewport, Element elem) /*-{
     var doc = elem.ownerDocument;
     var style = doc.defaultView.getComputedStyle(elem, null);
     var left = doc.getBoxObjectFor(elem).x - Math.round(
@@ -41,12 +81,10 @@ package com.google.gwt.dom.client;
       parent = parent.parentNode;
     }
 
-    return left +
-      @com.google.gwt.user.client.impl.DocumentRootImpl::documentRoot.scrollLeft;
+    return left + viewport.scrollLeft;
   }-*/;
-
-  @Override
-  public native int getAbsoluteTop(Element elem) /*-{
+  
+  private native int getAbsoluteTopImpl(Element viewport, Element elem) /*-{
     var doc = elem.ownerDocument;
     var style = doc.defaultView.getComputedStyle(elem, null);
     var top = doc.getBoxObjectFor(elem).y - Math.round(
@@ -64,34 +102,5 @@ package com.google.gwt.dom.client;
 
     return top +
       @com.google.gwt.user.client.impl.DocumentRootImpl::documentRoot.scrollTop;
-  }-*/;
-  
-  @Override
-  public native String getInnerText(Element node) /*-{
-    // To mimic IE's 'innerText' property in the W3C DOM, we need to recursively
-    // concatenate all child text nodes (depth first).
-    var text = '', child = node.firstChild;
-    while (child) {
-      // 1 == Element node
-      if (child.nodeType == 1) {
-        text += this.@com.google.gwt.dom.client.DOMImpl::getInnerText(Lcom/google/gwt/dom/client/Element;)(child);
-      } else if (child.nodeValue) {
-        text += child.nodeValue;
-      }
-      child = child.nextSibling;
-    }
-    return text;
-  }-*/;
-  
-  @Override
-  public native void setInnerText(Element elem, String text) /*-{
-    // Remove all children first.
-    while (elem.firstChild) {
-      elem.removeChild(elem.firstChild);
-    }
-    // Add a new text node.
-    if (text != null) {
-      elem.appendChild(elem.ownerDocument.createTextNode(text));
-    }
   }-*/;
 }

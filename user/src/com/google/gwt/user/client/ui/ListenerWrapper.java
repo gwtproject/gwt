@@ -463,18 +463,12 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
 
     public void onMouseDown(MouseDownEvent event) {
       Widget source = getSource(event);
-      Element elem = source.getElement();
-      getListener().onMouseDown(source,
-          Event.getRelativeX(event.getNativeEvent(), elem),
-          Event.getRelativeY(event.getNativeEvent(), elem));
+      getListener().onMouseDown(source, event.getX(), event.getY());
     }
 
     public void onMouseMove(MouseMoveEvent event) {
       Widget source = getSource(event);
-      Element elem = source.getElement();
-      getListener().onMouseMove(source,
-          Event.getRelativeX(event.getNativeEvent(), elem),
-          Event.getRelativeY(event.getNativeEvent(), elem));
+      getListener().onMouseMove(source, event.getX(), event.getY());
     }
 
     public void onMouseOut(MouseOutEvent event) {
@@ -487,10 +481,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
 
     public void onMouseUp(MouseUpEvent event) {
       Widget source = getSource(event);
-      Element elem = source.getElement();
-      getListener().onMouseUp(source,
-          Event.getRelativeX(event.getNativeEvent(), elem),
-          Event.getRelativeY(event.getNativeEvent(), elem));
+      getListener().onMouseUp(source, event.getX(), event.getY());
     }
   }
   /**

@@ -643,6 +643,9 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
   static class WrappedOldSuggestionHandler extends
       ListenerWrapper<SuggestionHandler> implements
       SelectionHandler<SuggestOracle.Suggestion> {
+    /**
+     * @deprecated will be removed in GWT 2.0 along with the listener classes
+     */
     @Deprecated
     public static void add(SuggestBox source, SuggestionHandler listener) {
       source.addSelectionHandler(new WrappedOldSuggestionHandler(listener));
@@ -687,6 +690,9 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
 
   static class WrappedTableListener extends ListenerWrapper<TableListener>
       implements ClickHandler {
+    /**
+     * @deprecated will be removed in GWT 2.0 along with the listener classes
+     */
     @Deprecated
     public static void add(HasClickHandlers source, TableListener listener) {
       source.addClickHandler(new WrappedTableListener(listener));
@@ -712,6 +718,9 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
 
   static class WrappedTabListener extends ListenerWrapper<TabListener>
       implements SelectionHandler<Integer>, BeforeSelectionHandler<Integer> {
+    /**
+     * @deprecated will be removed in GWT 2.0 along with the listener classes
+     */
     @Deprecated
     public static void add(TabBar source, TabListener listener) {
       WrappedTabListener t = new WrappedTabListener(listener);
@@ -750,6 +759,9 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
   static class WrappedTreeListener extends ListenerWrapper<TreeListener>
       implements SelectionHandler<TreeItem>, CloseHandler<TreeItem>,
       OpenHandler<TreeItem> {
+    /**
+     * @deprecated will be removed in GWT 2.0 along with the listener classes
+     */
     @Deprecated
     public static void add(com.google.gwt.user.client.ui.Tree tree,
         TreeListener listener) {

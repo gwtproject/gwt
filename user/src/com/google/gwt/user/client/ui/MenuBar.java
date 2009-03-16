@@ -501,7 +501,7 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
   /**
    * Closes the menu bar.
    * 
-   * @deprecated use {@link #addCloseHandler(CloseHandler)} instead.
+   * @deprecated Use {@link #addCloseHandler(CloseHandler)} instead
    */
   @Deprecated
   public void onPopupClosed(PopupPanel sender, boolean autoClosed) {

@@ -237,7 +237,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML, HasText,
   }
 
   /**
-   * @deprecated Use {@link #beginDragging} instead and {@link #getCaption}
+   * @deprecated Use {@link #beginDragging} and {@link #getCaption}
    *             instead
    */
   @Deprecated
@@ -248,10 +248,16 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML, HasText,
     dragStartY = y;
   }
 
+  /**
+   * @deprecated Use {@link Caption#addMouseOverHandler} instead
+   */
   @Deprecated
   public void onMouseEnter(Widget sender) {
   }
 
+  /**
+   * @deprecated Use {@link Caption#addMouseOutHandler} instead
+   */
   @Deprecated
   public void onMouseLeave(Widget sender) {
   }

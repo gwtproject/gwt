@@ -365,6 +365,9 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     return addHandler(handler, CloseEvent.getType());
   }
 
+  /**
+   * @deprecated Use {@link #addCloseHandler} instead
+   */
   @Deprecated
   public void addPopupListener(final PopupListener listener) {
     ListenerWrapper.WrappedPopupListener.add(this, listener);
@@ -531,7 +534,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   }
 
   /**
-   * @deprecated Use <code>onPreviewNativeEvent(NativePreviewEvent)</code>
+   * @deprecated Use {@link #onPreviewNativeEvent(NativePreviewEvent)}
    *             instead
    */
   @Deprecated
@@ -547,7 +550,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * @param modifiers keyboard modifiers, as specified in
    *          {@link com.google.gwt.event.dom.client.KeyCodes}.
    * @return <code>false</code> to suppress the event
-   * @deprecated Use <code>onPreviewNativeEvent(NativePreviewEvent)</code>
+   * @deprecated Use {@link #onPreviewNativeEvent(NativePreviewEvent)}
    *             instead
    */
   @Deprecated
@@ -563,7 +566,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * @param modifiers keyboard modifiers, as specified in
    *          {@link com.google.gwt.event.dom.client.KeyCodes}.
    * @return <code>false</code> to suppress the event
-   * @deprecated Use <code>onPreviewNativeEvent(NativePreviewEvent)</code>
+   * @deprecated Use {@link #onPreviewNativeEvent(NativePreviewEvent)}
    *             instead
    */
   @Deprecated
@@ -579,7 +582,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * @param modifiers keyboard modifiers, as specified in
    *          {@link com.google.gwt.event.dom.client.KeyCodes}.
    * @return <code>false</code> to suppress the event
-   * @deprecated Use <code>onPreviewNativeEvent(NativePreviewEvent)</code>
+   * @deprecated Use {@link #onPreviewNativeEvent(NativePreviewEvent)}
    *             instead
    */
   @Deprecated
@@ -599,6 +602,10 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     }
   }
 
+  /**
+   * @deprecated Use the {@link HandlerRegistration#removeHandler}
+   * method on the object returned by {@link #addCloseHandler} instead
+   */
   @Deprecated
   public void removePopupListener(PopupListener listener) {
     ListenerWrapper.WrappedPopupListener.remove(this, listener);

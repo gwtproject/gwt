@@ -20,8 +20,11 @@ import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.user.client.rpc.CollectionsTest;
 import com.google.gwt.user.client.rpc.CustomFieldSerializerTest;
 import com.google.gwt.user.client.rpc.EnumsTest;
+import com.google.gwt.user.client.rpc.FailedRequestTest;
+import com.google.gwt.user.client.rpc.FailingRequestBuilderTest;
 import com.google.gwt.user.client.rpc.InheritanceTest;
 import com.google.gwt.user.client.rpc.ObjectGraphTest;
+import com.google.gwt.user.client.rpc.RunTimeSerializationErrorsTest;
 import com.google.gwt.user.client.rpc.UnicodeEscapingTest;
 import com.google.gwt.user.client.rpc.ValueTypesTest;
 import com.google.gwt.user.rebind.rpc.SerializableTypeOracleBuilderTest;
@@ -70,6 +73,9 @@ public class RPCSuite {
     suite.addTestSuite(SerializationPolicyLoaderTest.class);
     suite.addTestSuite(RPCServletUtilsTest.class);
     suite.addTestSuite(RPCRequestTest.class);
+    suite.addTestSuite(FailedRequestTest.class);
+    suite.addTestSuite(FailingRequestBuilderTest.class);
+    suite.addTestSuite(RunTimeSerializationErrorsTest.class);
     return suite;
   }
 }

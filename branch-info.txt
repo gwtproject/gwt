@@ -42,6 +42,8 @@ Merges:
 /releases/1.6/@r4892:4911 was merged (r4919) into trunk, skipping c4892 (backmerge from trunk)
 /releases/1.6/@c4963 was merged (r4970 into trunk (cherry pick)
 /releases/1.6/@r4911:4992 was merged (r4993) into trunk, skipping c4963 (cherry picked above)
+/releases/1.6/@r5023 was merged (r5024) into trunk (cherry pick)
 
 The next merge into trunk will be:
-svn merge -r4992:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
+svn merge -r4992:5022 https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
+svn merge -r5023:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .

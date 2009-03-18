@@ -362,9 +362,7 @@ public class HostedMode extends SwtHostedModeBase {
   @Override
   protected int doStartUpServer() {
     try {
-      TreeLogger serverLogger = getTopLogger().branch(TreeLogger.INFO,
-          "Starting HTTP on port " + getPort(), null);
-      server = options.getServletContainerLauncher().start(serverLogger,
+      server = options.getServletContainerLauncher().start(getTopLogger(),
           getPort(), options.getWarDir());
       assert (server != null);
       return server.getPort();

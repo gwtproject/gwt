@@ -101,6 +101,15 @@ public class NativeEvent extends JavaScriptObject {
   }
 
   /**
+   * Returns the element that was the actual target of the given event.
+   * 
+   * @return the target element
+   */
+  public final EventTarget getEventTarget() {
+    return DOMImpl.impl.eventGetTarget(this);
+  }
+
+  /**
    * Gets the key code associated with this event.
    * 
    * <p>
@@ -189,15 +198,6 @@ public class NativeEvent extends JavaScriptObject {
    */
   public final String getString() {
     return DOMImpl.impl.eventToString(this);
-  }
-
-  /**
-   * Returns the element that was the actual target of the given event.
-   * 
-   * @return the target element
-   */
-  public final EventTarget getEventTarget() {
-    return DOMImpl.impl.eventGetTarget(this);
   }
 
   /**

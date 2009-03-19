@@ -69,7 +69,7 @@ public class HostedMode extends SwtHostedModeBase {
 
     @Override
     public String getPurpose() {
-      return "Specify a different embedded web server to run (must implement ServletContainerLauncher)";
+      return "Specifies a different embedded web server to run (must implement ServletContainerLauncher)";
     }
 
     @Override

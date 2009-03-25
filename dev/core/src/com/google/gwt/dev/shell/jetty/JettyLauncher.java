@@ -255,6 +255,17 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       @Override
       public URL findResource(String name) {
+        // Specifically for META-INF/services/javax.xml.parsers.SAXParserFactory
+        String checkName = name;
+        if (checkName.startsWith("META-INF/services/")) {
+          checkName = checkName.substring("META-INF/services/".length());
+        }
+
+        // For system/server path, just try the outside world quietly.
+        if (isSystemPath(checkName)) {
+          return systemClassLoader.getResource(name);
+        }
+
         // Always check this ClassLoader first.
         URL found = super.findResource(name);
         if (found != null) {
@@ -265,17 +276,6 @@ public class JettyLauncher extends ServletContainerLauncher {
         found = systemClassLoader.getResource(name);
         if (found == null) {
           return null;
-        }
-
-        // Specifically for META-INF/services/javax.xml.parsers.SAXParserFactory
-        String checkName = name;
-        if (checkName.startsWith("META-INF/services/")) {
-          checkName = checkName.substring("META-INF/services/".length());
-        }
-
-        // For system/server path, just return it quietly.
-        if (isServerPath(checkName) || isSystemPath(checkName)) {
-          return found;
         }
 
         // Warn, add containing URL to our own ClassLoader, and retry the call.
@@ -303,14 +303,17 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       @Override
       protected Class<?> findClass(String name) throws ClassNotFoundException {
+        // For system/server path, just try the outside world quietly.
+        if (isSystemPath(name)) {
+          return systemClassLoader.loadClass(name);
+        }
+
         try {
           return super.findClass(name);
         } catch (ClassNotFoundException e) {
-        }
-
-        // For system/server path, just try the outside world quietly.
-        if (isServerPath(name) || isSystemPath(name)) {
-          return systemClassLoader.loadClass(name);
+          if (isServerPath(name)) {
+            throw e;
+          }
         }
 
         // See if the outside world has a URL for it.

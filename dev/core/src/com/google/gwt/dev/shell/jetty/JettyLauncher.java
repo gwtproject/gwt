@@ -249,6 +249,8 @@ public class JettyLauncher extends ServletContainerLauncher {
      */
     private class WebAppClassLoaderExtension extends WebAppClassLoader {
 
+      private static final String META_INF_SERVICES = "META-INF/services/";
+
       public WebAppClassLoaderExtension() throws IOException {
         super(bootStrapOnlyClassLoader, WebAppContextWithReload.this);
       }
@@ -257,17 +259,21 @@ public class JettyLauncher extends ServletContainerLauncher {
       public URL findResource(String name) {
         // Specifically for META-INF/services/javax.xml.parsers.SAXParserFactory
         String checkName = name;
-        if (checkName.startsWith("META-INF/services/")) {
-          checkName = checkName.substring("META-INF/services/".length());
+        if (checkName.startsWith(META_INF_SERVICES)) {
+          checkName = checkName.substring(META_INF_SERVICES.length());
         }
 
-        // For system/server path, just try the outside world quietly.
+        // For a system path, load from the outside world.
+        URL found;
         if (isSystemPath(checkName)) {
-          return systemClassLoader.getResource(name);
+          found = systemClassLoader.getResource(name);
+          if (found != null) {
+            return found;
+          }
         }
 
         // Always check this ClassLoader first.
-        URL found = super.findResource(name);
+        found = super.findResource(name);
         if (found != null) {
           return found;
         }
@@ -303,14 +309,18 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       @Override
       protected Class<?> findClass(String name) throws ClassNotFoundException {
-        // For system/server path, just try the outside world quietly.
+        // For system path, always prefer the outside world.
         if (isSystemPath(name)) {
-          return systemClassLoader.loadClass(name);
+          try {
+            return systemClassLoader.loadClass(name);
+          } catch (ClassNotFoundException e) {
+          }
         }
 
         try {
           return super.findClass(name);
         } catch (ClassNotFoundException e) {
+          // Don't allow server classes to be loaded from the outside.
           if (isServerPath(name)) {
             throw e;
           }

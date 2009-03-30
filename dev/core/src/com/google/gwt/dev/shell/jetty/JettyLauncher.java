@@ -431,6 +431,15 @@ public class JettyLauncher extends ServletContainerLauncher {
     // Suppress spammy Jetty log initialization.
     System.setProperty("org.mortbay.log.class", JettyNullLogger.class.getName());
     Log.getLog();
+
+    /*
+     * Make JDT the default Ant compiler so that JSP compilation just works
+     * out-of-the-box. If we don't set this, it's very, very difficult to make
+     * JSP compilation work.
+     */
+    String antJavaC = System.getProperty("build.compiler",
+        "org.eclipse.jdt.core.JDTCompilerAdapter");
+    System.setProperty("build.compiler", antJavaC);
   }
 
   public ServletContainer start(TreeLogger logger, int port, File appRootDir)

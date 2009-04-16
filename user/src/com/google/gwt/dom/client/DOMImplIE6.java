@@ -282,8 +282,9 @@ class DOMImplIE6 extends DOMImpl {
     if (doc.getCompatMode().equals("CSS1Compat")) {
       return 1;
     } else {
-      return doc.getBody().getParentElement().getOffsetWidth() /
-        doc.getBody().getOffsetWidth();
+      int bodyOffset = doc.getBody().getOffsetWidth();
+      return bodyOffset == 0 ? 1
+          : doc.getBody().getParentElement().getOffsetWidth() / bodyOffset;
     }
   }
 }

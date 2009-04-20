@@ -17,6 +17,9 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +28,19 @@ import java.util.List;
  */
 public abstract class JReferenceType extends JType implements CanBeAbstract {
 
-  public List<JField> fields = new ArrayList<JField>();
-  public List<JMethod> methods = new ArrayList<JMethod>();
   public JClassType extnds;
+
+  /**
+   * Special serialization treatment.
+   */
+  public transient List<JField> fields = new ArrayList<JField>();
+
   public List<JInterfaceType> implments = new ArrayList<JInterfaceType>();
+
+  /**
+   * Special serialization treatment.
+   */
+  public transient List<JMethod> methods = new ArrayList<JMethod>();
 
   public JReferenceType(JProgram program, SourceInfo info, String name) {
     super(program, info, name, program.getLiteralNull());
@@ -53,4 +65,51 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     return name.substring(dotpos + 1);
   }
 
+  /**
+   * See {@link #writeMembers(ObjectOutputStream)}.
+   * 
+   * @see #writeMembers(ObjectOutputStream)
+   */
+  @SuppressWarnings("unchecked")
+  void readMembers(ObjectInputStream stream) throws IOException,
+      ClassNotFoundException {
+    fields = (List<JField>) stream.readObject();
+    methods = (List<JMethod>) stream.readObject();
+  }
+
+  /**
+   * See {@link #writeMethodBodies(ObjectOutputStream).
+   * 
+   * @see #writeMethodBodies(ObjectOutputStream)
+   */
+  void readMethodBodies(ObjectInputStream stream) throws IOException,
+      ClassNotFoundException {
+    for (JMethod method : methods) {
+      method.readBody(stream);
+    }
+  }
+
+  /**
+   * After all types are written to the stream without transient members, this
+   * method actually writes fields and methods to the stream, which establishes
+   * type identity for them.
+   * 
+   * @see JProgram#writeObject(ObjectOutputStream)
+   */
+  void writeMembers(ObjectOutputStream stream) throws IOException {
+    stream.writeObject(fields);
+    stream.writeObject(methods);
+  }
+
+  /**
+   * After all types, fields, and methods are written to the stream, this method
+   * writes method bodies to the stream.
+   * 
+   * @see JProgram#writeObject(ObjectOutputStream)
+   */
+  void writeMethodBodies(ObjectOutputStream stream) throws IOException {
+    for (JMethod method : methods) {
+      method.writeBody(stream);
+    }
+  }
 }

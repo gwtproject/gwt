@@ -22,6 +22,9 @@ import com.google.gwt.dev.jjs.ast.js.JClassSeed;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsonObject;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -161,7 +164,10 @@ public class JProgram extends JNode {
   private final Set<JArrayType> allArrayTypes = new TreeSet<JArrayType>(
       ARRAYTYPE_COMPARATOR);
 
-  private final List<JReferenceType> allTypes = new ArrayList<JReferenceType>();
+  /**
+   * Special serialization treatment.
+   */
+  private transient List<JReferenceType> allTypes = new ArrayList<JReferenceType>();
 
   private final Map<JType, JClassLiteral> classLiterals = new IdentityHashMap<JType, JClassLiteral>();
 
@@ -992,4 +998,59 @@ public class JProgram extends JNode {
     return count;
   }
 
+  /**
+   * See notes in {@link #writeObject(ObjectOutputStream)}.
+   * 
+   * @see #writeObject(ObjectOutputStream)
+   */
+  @SuppressWarnings("unchecked")
+  private void readObject(ObjectInputStream stream) throws IOException,
+      ClassNotFoundException {
+    allTypes = (List<JReferenceType>) stream.readObject();
+    for (JReferenceType type : allTypes) {
+      type.readMembers(stream);
+    }
+    for (JReferenceType type : allTypes) {
+      type.readMethodBodies(stream);
+    }
+    stream.defaultReadObject();
+    for (JMethod method : entryMethods) {
+      method.readBody(stream);
+    }
+  }
+
+  /**
+   * Serializing the Java AST is a multi-step process to avoid blowing out the
+   * stack.
+   * 
+   * <ol>
+   * <li>Write all declared types in a lightweight manner to establish object
+   * identity for types</li>
+   * <li>Write all fields; write all methods in a lightweight manner to
+   * establish object identity for methods</li>
+   * <li>Write all method bodies</li>
+   * <li>Write everything else, which will mostly refer to already-serialized
+   * objects.</li>
+   * <li>Write the bodies of the entry methods (unlike all other methods, these
+   * are not contained by any type.</li>
+   * </ol>
+   * 
+   * The goal of this process to to avoid "running away" with the stack. Without
+   * special logic here, lots of things would reference types, method body code
+   * would reference both types and other methods, and really, really long
+   * recursion chains would result.
+   */
+  private void writeObject(ObjectOutputStream stream) throws IOException {
+    stream.writeObject(allTypes);
+    for (JReferenceType type : allTypes) {
+      type.writeMembers(stream);
+    }
+    for (JReferenceType type : allTypes) {
+      type.writeMethodBodies(stream);
+    }
+    stream.defaultWriteObject();
+    for (JMethod method : entryMethods) {
+      method.writeBody(stream);
+    }
+  }
 }

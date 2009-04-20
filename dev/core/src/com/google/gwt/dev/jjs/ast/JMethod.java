@@ -18,6 +18,9 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +49,12 @@ public final class JMethod extends JNode implements HasEnclosingType, HasName,
 
   public final ArrayList<JParameter> params = new ArrayList<JParameter>();
   public final ArrayList<JClassType> thrownExceptions = new ArrayList<JClassType>();
-  private JAbstractMethodBody body = null;
+
+  /**
+   * Special serialization treatment.
+   */
+  private transient JAbstractMethodBody body = null;
+
   private final JReferenceType enclosingType;
   private final boolean isAbstract;
   private boolean isFinal;
@@ -75,13 +83,13 @@ public final class JMethod extends JNode implements HasEnclosingType, HasName,
   }
 
   public void freezeParamTypes() {
-    List<JType> paramTypes =  new ArrayList<JType>();
+    List<JType> paramTypes = new ArrayList<JType>();
     for (JParameter param : params) {
       paramTypes.add(param.getType());
     }
     setOriginalParamTypes(paramTypes);
   }
-  
+
   public JAbstractMethodBody getBody() {
     return body;
   }
@@ -150,7 +158,6 @@ public final class JMethod extends JNode implements HasEnclosingType, HasName,
       throw new InternalCompilerException("Param types already frozen");
     }
     originalParamTypes = paramTypes;
-    
 
     // Determine if we should trace this method.
     if (enclosingType != null) {
@@ -202,5 +209,25 @@ public final class JMethod extends JNode implements HasEnclosingType, HasName,
         trace(title, after);
       }
     }
+  }
+
+  /**
+   * See {@link #writeBody(ObjectOutputStream)}.
+   * 
+   * @see #writeBody(ObjectOutputStream)
+   */
+  void readBody(ObjectInputStream stream) throws IOException,
+      ClassNotFoundException {
+    body = (JAbstractMethodBody) stream.readObject();
+  }
+
+  /**
+   * After all types, fields, and methods are written to the stream, this method
+   * writes method bodies to the stream.
+   * 
+   * @see JProgram#writeObject(ObjectOutputStream)
+   */
+  void writeBody(ObjectOutputStream stream) throws IOException {
+    stream.writeObject(body);
   }
 }

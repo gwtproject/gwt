@@ -118,8 +118,8 @@ public class Compiler {
         public boolean run(TreeLogger logger) throws UnableToCompleteException {
           FutureTask<UpdateResult> updater = null;
           if (!options.isUpdateCheckDisabled()) {
-            updater = PlatformSpecific.checkForUpdatesInBackgroundThread(logger,
-                CheckForUpdates.ONE_DAY);
+            updater = PlatformSpecific.checkForUpdatesInBackgroundThread(
+                logger, CheckForUpdates.ONE_DAY);
           }
           boolean success = new Compiler(options).run(logger);
           if (success) {
@@ -164,10 +164,10 @@ public class Compiler {
           }
         } else {
           long compileStart = System.currentTimeMillis();
-          logger = logger.branch(TreeLogger.INFO, "Compiling module "
-              + moduleName);
+          TreeLogger branch = logger.branch(TreeLogger.INFO,
+              "Compiling module " + moduleName);
 
-          Precompilation precompilation = Precompile.precompile(logger,
+          Precompilation precompilation = Precompile.precompile(branch,
               options, module, options.getGenDir(), compilerWorkDir);
 
           if (precompilation == null) {
@@ -177,16 +177,16 @@ public class Compiler {
           Permutation[] allPerms = precompilation.getPermutations();
           File[] resultFiles = CompilePerms.makeResultFiles(compilerWorkDir,
               allPerms);
-          CompilePerms.compile(logger, precompilation, allPerms,
+          CompilePerms.compile(branch, precompilation, allPerms,
               options.getLocalWorkers(), resultFiles);
 
-          Link.link(logger.branch(TreeLogger.INFO, "Linking into "
+          Link.link(branch.branch(TreeLogger.INFO, "Linking into "
               + options.getWarDir().getPath()), module, precompilation,
               resultFiles, options.getWarDir(), options.getExtraDir());
 
           long compileDone = System.currentTimeMillis();
           long delta = compileDone - compileStart;
-          logger.log(TreeLogger.INFO, "Compilation succeeded -- "
+          branch.log(TreeLogger.INFO, "Compilation succeeded -- "
               + String.format("%.3f", delta / 1000d) + "s");
         }
       }

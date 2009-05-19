@@ -306,10 +306,15 @@ public class Element extends Node {
 
   /**
    * The number of pixels that an element's content is scrolled from the left.
+   * 
+   * <p>
+   * If the element is in RTL mode, this method will return a negative value of
+   * the number of pixels scrolled from the right.
+   * </p>
    */
-  public final native int getScrollLeft() /*-{
-     return this.scrollLeft || 0;
-   }-*/;
+  public final int getScrollLeft() {
+    return DOMImpl.impl.getScrollLeft(this);
+  }
 
   /**
    * The number of pixels that an element's content is scrolled from the top.
@@ -495,9 +500,9 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled to the left.
    */
-  public final native void setScrollLeft(int scrollLeft) /*-{
-     this.scrollLeft = scrollLeft;
-   }-*/;
+  public final void setScrollLeft(int scrollLeft) {
+    DOMImpl.impl.setScrollLeft(this, scrollLeft);
+  }
 
   /**
    * The number of pixels that an element's content is scrolled to the top.
@@ -514,4 +519,15 @@ public class Element extends Node {
      // on some browsers.
      this.title = title || '';
    }-*/;
+
+  /**
+   * Determines whether an element has an attribute with a given name.
+   * 
+   * @param name the name of the attribute
+   * @return whether this element has the specified attribute
+   */
+  public final boolean hasAttribute(String name) {
+    String value = this.getAttribute(name);
+    return value != null && value.length() > 0;
+  }
 }

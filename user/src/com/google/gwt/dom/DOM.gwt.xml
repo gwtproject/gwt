@@ -30,6 +30,11 @@
     <when-property-is name="user.agent" value="safari"/>
   </replace-with>
 
+  <replace-with class="com.google.gwt.dom.client.DOMImplIE8">
+    <when-type-is class="com.google.gwt.dom.client.DOMImpl"/>
+    <when-property-is name="user.agent" value="ie8"/>
+  </replace-with>
+
   <replace-with class="com.google.gwt.dom.client.DOMImplIE6">
     <when-type-is class="com.google.gwt.dom.client.DOMImpl"/>
     <when-property-is name="user.agent" value="ie6"/>

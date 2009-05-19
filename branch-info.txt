@@ -53,7 +53,7 @@ Merges:
 /trunk revision c5287 was merged (r5425) into this branch
 /trunk revision c5305 was merged (r5426) into this branch
 /trunk revision c5306 was merged (r5427) into this branch
-/trunk revision c5320 was merged (r5428) into this branch
+/trunk revision c5320 was merged (r5428) into this branch (this was a mistake, rolled back in r5434)
 /trunk revision c5333 was merged (r5429) into this branch
 /trunk revision c5398 was merged (r5430) into this branch
 /releases/1.6 [r5408:5410 r5411:5422 r5423:5424] was merged into trunk (no changes in these ranges)

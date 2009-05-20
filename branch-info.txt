@@ -59,6 +59,7 @@ Merges:
 /releases/1.6 [r5408:5410 r5411:5422 r5423:5424] was merged into trunk (no changes in these ranges)
 /trunk revision c4820 was merged (r5439) into this branch
 /trunk revision c5230 was merged (r5440) into this branch
+/trunk revision c5347 was merged (r5443) into this branch (removes broken test from c5333)
 
 The next merge into trunk will be:
 svn merge -r5430:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .

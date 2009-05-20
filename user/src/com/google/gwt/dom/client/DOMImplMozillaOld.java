@@ -64,7 +64,7 @@ package com.google.gwt.dom.client;
       elem.appendChild(elem.ownerDocument.createTextNode(text));
     }
   }-*/;
-  
+
   private native int getAbsoluteLeftImpl(Element viewport, Element elem) /*-{
     var doc = elem.ownerDocument;
     var style = doc.defaultView.getComputedStyle(elem, null);

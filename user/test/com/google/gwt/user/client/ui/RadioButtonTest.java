@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -210,4 +211,22 @@ public class RadioButtonTest extends GWTTestCase {
 //    InputElement r1Radio = InputElement.as(Element.as(radioButton.getElement().getFirstChild()));
 //    return r1Radio;
 //  }
+
+  /**
+   * Ensures that the element order doesn't get reversed when the radio's
+   * name is changed.
+   */
+  public void testOrderAfterSetName() {
+    RadioButton radio = new RadioButton("oldName");
+    assertEquals("oldName", radio.getName());
+
+    radio.setName("newName");
+    assertEquals("newName", radio.getName());
+
+    Element parent = radio.getElement();
+    Element firstChild = parent.getFirstChildElement().cast();
+    Element secondChild = firstChild.getNextSiblingElement().cast();
+    assertEquals("input", firstChild.getTagName().toLowerCase());
+    assertEquals("label", secondChild.getTagName().toLowerCase());
+  }
 }

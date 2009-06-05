@@ -19,6 +19,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 
+/**
+ * Base implementation of {@link com.google.gwt.user.client.impl.DOMImpl} shared
+ * by IE based browsers.
+ */
 public abstract class DOMImplTrident extends DOMImpl {
 
   @SuppressWarnings("unused")

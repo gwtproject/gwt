@@ -61,7 +61,8 @@ Merges:
 /trunk revision c5230 was merged (r5440) into this branch
 /trunk revision c5347 was merged (r5443) into this branch (removes broken test from c5333)
 /trunk revision c5460 was merged (r5461) into this branch (radio button fix)
-/trunk revision c5221 was merged (r????) into this branch (SerializabilityUtil race condition)
+/trunk revision c5221 was merged (r5520) into this branch (SerializabilityUtil race condition)
+/trunk revision c5601 was merged (r????) into this branch (misc JSNI code fixes)
 
 The next merge into trunk will be:
 svn merge -r5430:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .

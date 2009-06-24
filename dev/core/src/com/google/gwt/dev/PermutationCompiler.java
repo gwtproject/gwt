@@ -98,7 +98,7 @@ public class PermutationCompiler {
             + permNum);
         logProperties(branch, perm.getPropertyOracles());
         return JavaToJavaScriptCompiler.compilePermutation(branch, unifiedAst,
-            perm.getRebindAnswers());
+            perm.getRebindAnswers(), perm.getPropertyOracles());
       } finally {
         PerfLogger.end();
       }

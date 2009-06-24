@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs;
 
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
@@ -59,6 +60,7 @@ import com.google.gwt.dev.jjs.impl.ReplaceRebinds;
 import com.google.gwt.dev.jjs.impl.ResolveRebinds;
 import com.google.gwt.dev.jjs.impl.TypeMap;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
+import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
 import com.google.gwt.dev.js.JsIEBlockSizeVisitor;
 import com.google.gwt.dev.js.JsInliner;
 import com.google.gwt.dev.js.JsNormalizer;
@@ -102,12 +104,13 @@ public class JavaToJavaScriptCompiler {
    *          {@link #precompile(TreeLogger, WebModeCompilerFrontEnd, String[], JJSOptions, boolean)}
    * @param rebindAnswers the set of rebind answers to resolve all outstanding
    *          rebind decisions
+   * @param propertyOracles All property oracles corresponding to this permutation.
    * @return the output JavaScript
    * @throws UnableToCompleteException if an error other than
    *           {@link OutOfMemoryError} occurs
    */
   public static String compilePermutation(TreeLogger logger,
-      UnifiedAst unifiedAst, Map<String, String> rebindAnswers)
+      UnifiedAst unifiedAst, Map<String, String> rebindAnswers, PropertyOracle[] propertyOracles)
       throws UnableToCompleteException {
     try {
       if (JProgram.isTracingEnabled()) {
@@ -196,6 +199,8 @@ public class JavaToJavaScriptCompiler {
       // Work around an IE7 bug,
       // http://code.google.com/p/google-web-toolkit/issues/detail?id=1440
       JsIEBlockSizeVisitor.exec(jsProgram);
+
+      JsBreakUpLargeVarStatements.exec(logger, jsProgram, propertyOracles);
 
       // (12) Generate the final output text.
       DefaultTextOutput out = new DefaultTextOutput(

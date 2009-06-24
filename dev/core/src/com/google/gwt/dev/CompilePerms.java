@@ -179,7 +179,7 @@ public class CompilePerms {
       Permutation permutation, UnifiedAst unifiedAst)
       throws UnableToCompleteException {
     final String js = JavaToJavaScriptCompiler.compilePermutation(logger,
-        unifiedAst, permutation.getRebindAnswers());
+        unifiedAst, permutation.getRebindAnswers(), permutation.getPropertyOracles());
     return new PermutationResult() {
       public String getJs() {
         return js;

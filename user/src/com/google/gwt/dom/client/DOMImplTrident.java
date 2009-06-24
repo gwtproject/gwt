@@ -145,16 +145,6 @@ abstract class DOMImplTrident extends DOMImpl {
     return "[event" + evt.type + "]";
   }-*/;
 
-  @Override
-  public int getAbsoluteLeft(Element elem) {
-    return getBoundingClientRectLeft(elem);
-  }
-
-  @Override
-  public int getAbsoluteTop(Element elem) {
-    return getBoundingClientRectTop(elem);
-  }
-
   /**
    * IE returns a numeric type for some attributes that are really properties,
    * such as offsetWidth.  We need to coerce these to strings to prevent a
@@ -209,11 +199,7 @@ abstract class DOMImplTrident extends DOMImpl {
     elem.innerText = text || '';
   }-*/;
 
-  protected native boolean isRTL(Element elem) /*-{
-    return elem.currentStyle.direction == 'rtl';
-  }-*/;
-
-  private native int getBoundingClientRectLeft(Element elem) /*-{
+  protected native int getBoundingClientRectLeft(Element elem) /*-{
     // getBoundingClientRect() throws a JS exception if the elem is not attached
     // to the document, so we wrap it in a try/catch block
     try {
@@ -223,7 +209,7 @@ abstract class DOMImplTrident extends DOMImpl {
     }
   }-*/;
 
-  private native int getBoundingClientRectTop(Element elem) /*-{
+  protected native int getBoundingClientRectTop(Element elem) /*-{
     // getBoundingClientRect() throws a JS exception if the elem is not attached
     // to the document, so we wrap it in a try/catch block
     try {
@@ -231,6 +217,22 @@ abstract class DOMImplTrident extends DOMImpl {
     } catch (e) {
       return 0;
     }
+  }-*/;
+
+  protected native boolean isRTL(Element elem) /*-{
+    return elem.currentStyle.direction == 'rtl';
+  }-*/;
+
+  private native Element createElementInternal(Document doc, String tagName) /*-{
+    return doc.createElement(tagName);
+  }-*/;
+
+  // IE needs a container div *for each document* for use by createElement().
+  private native Element ensureContainer(Document doc) /*-{
+    if (!doc.__gwt_container) {
+      doc.__gwt_container = doc.createElement('div');
+    }
+    return doc.__gwt_container;
   }-*/;
 
   /**

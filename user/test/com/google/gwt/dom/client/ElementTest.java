@@ -91,9 +91,34 @@ public class ElementTest extends GWTTestCase {
   }
 
   /**
+   * scroll[Left|Top], getAbsolute[Left|Top].
+   */
+  public void testGetAbsolutePositionWhenBodyScrolled() {
+    Document doc = Document.get();
+    BodyElement body = doc.getBody();
+
+    DivElement div = doc.createDivElement();
+    body.appendChild(div);
+
+    div.setInnerText("foo");
+    div.getStyle().setProperty("position", "absolute");
+    div.getStyle().setPropertyPx("left", 1000);
+    div.getStyle().setPropertyPx("top", 1000);
+
+    int absLeft = div.getAbsoluteLeft();
+    int absTop = div.getAbsoluteTop();
+
+    body.setScrollLeft(10000);
+    body.setScrollTop(10000);
+
+    assertEquals(absLeft, div.getAbsoluteLeft());
+    assertEquals(absTop, div.getAbsoluteTop());
+  }
+
+  /**
    * scroll[Left|Top], scrollIntoView.
    */
-  public void testGetAbsolutePositionWhenScrolled() {
+  public void testScrollIntoView() {
     final DivElement outer = Document.get().createDivElement();
     final DivElement inner = Document.get().createDivElement();
 

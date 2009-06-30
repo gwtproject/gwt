@@ -67,6 +67,7 @@ Merges:
 /trunk revision c5485 was merged (r5623) into this branch (fix for IE8 getAbsoluteLeft/Top())
 /trunk revision c5492 was merged (r5624) into this branch (fix test failure related to getBoxObjectFor() bug)
 /trunk revision c5616 was merged (r5625) into this branch (issue 3731: sql.Date parsing problem)
+/trunk revision c5641 was merged (r5643) into this branch (Firefox 3.5 Event.relatedTarget bug)
 
 The next merge into trunk will be:
 svn merge -r5430:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .

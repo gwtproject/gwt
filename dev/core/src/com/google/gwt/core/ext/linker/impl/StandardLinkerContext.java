@@ -449,7 +449,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
       }
 
       if (!outFile.exists()
-          || (outFile.lastModified() <= artifact.getLastModified())) {
+          || (outFile.lastModified() < artifact.getLastModified())) {
         Util.copy(artifactLogger, artifact.getContents(artifactLogger), outFile);
         outFile.setLastModified(artifact.getLastModified());
       }

@@ -1,74 +1,11 @@
-branch-info.txt for GWT 1.6 release:
+branch-info.txt for GWT 1.7 release:
 Tracks interactions between this branch and other branches. 
 See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 
 Copies:
-/releases/1.6/ was created (r3732) as a straight copy from /trunk/@r3683
+/releases/1.7/ was created (r5660) as a straight copy from /releases/1.6@r5659, because adding ie8 was deemed a minor version bump.
 
 Merges:
-/trunk revisions c3688,c3703,c3700,c3704,c3707,c3715,c3717,c3724,c3725 were merged (r3739) into this branch
-/trunk revision c4859 was merged (r4870) into this branch
-/trunk revision c4867 was merged (r4871) into this branch
-/releases/1.5/@r3630:3863 was merged (r3864) into this branch
-/releases/1.6/@r3739:3876 was merged (r3877) into trunk
-/releases/1.6/@r3878:3944 was merged (r3945) into trunk, skipping c3878
-/releases/1.6/@r3944:4025 was merged (r4032) into trunk
-/branches/1_6_clean_events@3936:4088 was merged (r4092) into this branch
-/releases/1.5/@r3863:4093 was merged (r4134) into this branch
-/releases/1.6/@r4025:4130 was merged (r4142) into trunk, superceding trunk:c4118
-/releases/1.6/@r4130:4147 was merged (r4148) into trunk
-/releases/1.6/@r4147:4198 was merged (r4202) into trunk
-/releases/1.6/@c4269, c4298, and c4299 were merged (r4314) into trunk; note this is a cherrypick
-/trunk revision c4266 was merged (r4321) into this branch
-/releases/1.6/@r4198:4268 was merged (r4367,r4368) into trunk
-/releases/1.6/@r4269:4297 was merged (r4367,r4368) into trunk, skipping c4269 (already merged, c4314)
-/releases/1.6/@r4299:4320 was merged (r4367,r4368) into trunk, skipping c4298, c4299 (already merged, c4314)
-/releases/1.6/@r4321:4366 was merged (r4367,r4368) into trunk, skipping c4321 (backmerge from trunk)
-/releases/1.6/@r4366:4385 was merged (r4386) into trunk
-/releases/1.6/@r4385:4459 was merged (r4488) into trunk
-/releases/1.6/@r4359:4490 was merged (r4491) into trunk
-/releases/1.6/@c4498 was merged (r4499) into trunk (cherry pick)
-/releases/1.6/@r4490:4497,4498:4511 was merged (r4512) into trunk, skipping c4498 (cherry picked above)
-/trunk revision c4603 was merged (r4605) into this branch
-/releases/1.6/@r4511:4604,4605:4657 was merged (r4659) into trunk, skipping c4605 (backmerge from trunk)
-/releases/1.6/@r4657:4658 was merged (r4662) into trunk
-/releases/1.6/@r4658:4669 was merged (r4670) into trunk
-/trunk revision c4873 was merged (r4878) into this branch
-/trunk revision c4889 was merged (r4892) into this branch
-/releases/1.6/@r4669:4694 was merged (r4919) into trunk
-/releases/1.6/@r4695:4874 was merged (r4919) into trunk, skipping c4695 (1.6-only change)
-/releases/1.6/@r4875:4877 was merged (r4919) into trunk, skipping c4875 (different trunk change)
-/releases/1.6/@r4878:4891 was merged (r4919) into trunk, skipping c4878 (backmerge from trunk)
-/releases/1.6/@r4892:4911 was merged (r4919) into trunk, skipping c4892 (backmerge from trunk)
-/releases/1.6/@c4963 was merged (r4970 into trunk (cherry pick)
-/releases/1.6/@r4911:4992 was merged (r4993) into trunk, skipping c4963 (cherry picked above)
-/releases/1.6/@r5023 was merged (r5024) into trunk (cherry pick)
-/releases/1.6/@r4992:5022 was merged (r5065) into trunk
-/releases/1.6/@r5023:5064 was merged (r5065) into trunk
-/releases/1.6/@r5065:5406 was merged (r5421) into trunk
-/trunk revision c5072 was merged (r5407) into this branch
-/trunk revision c5194 was merged (r5411) into this branch
-/trunk revision c5216 was merged (r5423) into this branch
-/trunk revision c5292 was merged (r5423) into this branch
-/trunk revision c5287 was merged (r5425) into this branch
-/trunk revision c5305 was merged (r5426) into this branch
-/trunk revision c5306 was merged (r5427) into this branch
-/trunk revision c5320 was merged (r5428) into this branch (this was a mistake, rolled back in r5434)
-/trunk revision c5333 was merged (r5429) into this branch
-/trunk revision c5398 was merged (r5430) into this branch
-/releases/1.6 [r5408:5410 r5411:5422 r5423:5424] was merged into trunk (no changes in these ranges)
-/trunk revision c4820 was merged (r5439) into this branch
-/trunk revision c5230 was merged (r5440) into this branch
-/trunk revision c5347 was merged (r5443) into this branch (removes broken test from c5333)
-/trunk revision c5460 was merged (r5461) into this branch (radio button fix)
-/trunk revision c5221 was merged (r5520) into this branch (SerializabilityUtil race condition)
-/trunk revision c5601 was merged (r????) into this branch (misc JSNI code fixes)
-/trunk revision c5459 was merged (r5622) into this branch (issue 3455: Expressions too long for WebKit)
-/trunk revision c5485 was merged (r5623) into this branch (fix for IE8 getAbsoluteLeft/Top())
-/trunk revision c5492 was merged (r5624) into this branch (fix test failure related to getBoxObjectFor() bug)
-/trunk revision c5616 was merged (r5625) into this branch (issue 3731: sql.Date parsing problem)
-/trunk revision c5641 was merged (r5643) into this branch (Firefox 3.5 Event.relatedTarget bug)
-
 The next merge into trunk will be:
-svn merge -r5430:???? https://google-web-toolkit.googlecode.com/svn/releases/1.6 .
+svn merge -r5660:???? https://google-web-toolkit.googlecode.com/svn/releases/1.7 .
 

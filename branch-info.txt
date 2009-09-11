@@ -6,6 +6,8 @@ Copies:
 /releases/1.7/ was created (r5660) as a straight copy from /releases/1.6@r5659, because adding ie8 was deemed a minor version bump.
 
 Merges:
+/trunk/@6056:6057 was merged into this branch to fix XMLTest
+
 The next merge into trunk will be:
 svn merge -r5660:???? https://google-web-toolkit.googlecode.com/svn/releases/1.7 .
 

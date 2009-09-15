@@ -36,7 +36,12 @@ public class BootStrapPlatform {
    * it. If successful, store the loaded path in the property swt.mozilla.path
    * so SWT's Browser object can use it.
    */
-  public static void initHostedMode() {
+  public static void initHostedMode(boolean is32Bit) {
+    if (!is32Bit) {
+      System.err.println("You must use a 32-bit runtime to run GWT Hosted Mode.");
+      System.exit(1);
+    }
+
     String home = System.getenv("HOME");
     if (home == null || home.length() == 0) {
       System.err.println("The HOME environment variable must be defined.");

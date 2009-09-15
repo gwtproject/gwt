@@ -343,6 +343,13 @@ abstract class HostedModeBase implements BrowserWindowController {
     }
   }
 
+  /**
+   * Determine if we're using a 32 bit runtime.
+   */
+  private static boolean is32BitJvm() {
+    return "32".equals(System.getProperty("sun.arch.data.model"));
+  }
+
   protected final HostedModeBaseOptions options;
 
   /**
@@ -359,7 +366,7 @@ abstract class HostedModeBase implements BrowserWindowController {
 
   public HostedModeBase() {
     // Set any platform specific system properties.
-    BootStrapPlatform.initHostedMode();
+    BootStrapPlatform.initHostedMode(is32BitJvm());
     BootStrapPlatform.applyPlatformHacks();
     options = createOptions();
   }
@@ -473,11 +480,10 @@ abstract class HostedModeBase implements BrowserWindowController {
     // Initialize the logger.
     //
     initializeLogger();
-    
+
     // Check for updates
     final TreeLogger logger = getTopLogger();
-    final CheckForUpdates updateChecker
-        = PlatformSpecific.createUpdateChecker(logger);
+    final CheckForUpdates updateChecker = PlatformSpecific.createUpdateChecker(logger);
     if (updateChecker != null) {
       Thread checkerThread = new Thread("GWT Update Checker") {
         @Override

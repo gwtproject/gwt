@@ -64,13 +64,15 @@ public class BootStrapPlatform {
     Toolkit.getDefaultToolkit();
   }
 
-  public static void initHostedMode() {
+  public static void initHostedMode(boolean is32Bit) {
     /*
      * The following check must be made before attempting to initialize Safari,
      * or we'll fail with an less-than-helpful UnsatisfiedLinkError.
      */
-    if (!isJava5()) {
-      System.err.println("You must use a Java 1.5 runtime to use GWT Hosted Mode on Mac OS X.");
+    if (!is32Bit) {
+      System.err.println("You must use a 32-bit runtime to run GWT Hosted Mode.");
+      System.err.println("  Leopard: Use the Java 1.5 runtime.");
+      System.err.println("  Snow Leopard: Use the Java 1.6 runtime and add -d32");
       System.exit(-1);
     }
 
@@ -108,14 +110,6 @@ public class BootStrapPlatform {
       }
     }
     return false;
-  }
-
-  /**
-   * Determine if we're using the Java 1.5 runtime, since the 1.6 runtime is
-   * 64-bit.
-   */
-  private static boolean isJava5() {
-    return System.getProperty("java.version").startsWith("1.5");
   }
 
   /**

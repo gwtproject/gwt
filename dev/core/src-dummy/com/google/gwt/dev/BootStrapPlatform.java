@@ -29,7 +29,7 @@ public class BootStrapPlatform {
     // nothing to do
   }
 
-  public static void initHostedMode() {
+  public static void initHostedMode(boolean is32Bit) {
     // nothing to do.
   }
 }

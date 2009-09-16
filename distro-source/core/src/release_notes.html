@@ -29,6 +29,7 @@
       <h1>Google Web Toolkit Release Notes</h1>
       <ul>
         <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+        <li><a href="#Release_Notes_1_7_0">1.7.0</a></li>
         <li><a href="#Release_Notes_1_6_4">1.6.4</a></li>
         <li><a href="#Release_Notes_1_6_3">1.6.3</a></li>
         <li><a href="#Release_Notes_1_6_2">1.6.2</a></li>
@@ -52,9 +53,25 @@
       <a name="Release_Notes_Current"></a>
       <h2>Release Notes for @GWT_VERSION@</h2>
       <p>
+        This release adds support for Mac OS X version 10.6 (Snow Leopard) by allowing hosted mode to run with a 1.6 JRE in 32-bit
+        mode (using the -d32 flag).
+      </p>
+      <h3>Fixed Issues</h3>
+      <ul>
+        <li>
+          Allow hosted mode using a 1.6 JRE with the -d32 flag
+          (<a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=3843">#3843</a>, 
+          <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=3998">#3998</a>)
+        </li>
+      </ul>
+
+      <hr/>
+      <a name="Release_Notes_1_7_0"></a>
+      <h2>Release Notes for 1.7.0</h2>
+      <p>
         This release adds explicit support for Internet Explorer 8, Firefox 3.5, and Safari 4 as well as a few high-priority bug fixes.
         In all other respects, it is very similar to GWT 1.6.
-        Note, however, that this release is version 1.7 rather than version 1.6.5 to signify a potentially breaking change for libraries 
+        Note, however, that this release is version 1.7.0 rather than version 1.6.5 to signify a potentially breaking change for libraries 
         that use deferred binding to specialize code based on user agent (see the next section for technical details).
       </p>
       <h3>Potentially breaking changes and fixes</h3>

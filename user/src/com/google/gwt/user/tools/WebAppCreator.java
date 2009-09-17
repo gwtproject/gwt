@@ -259,8 +259,15 @@ public final class WebAppCreator {
     replacements.put("@shellClass", HostedMode.class.getName());
     replacements.put("@compileClass", Compiler.class.getName());
     replacements.put("@startupUrl", moduleShortName + ".html");
+    replacements.put("@antSetUp32BitVmarg", isMacOsX
+        ? "\n  <condition property=\"HostedMode32BitVmarg\" value=\"-d32\""
+            + " else=\"-Dgwt.dummy.arg\">\n"
+            + "    <equals arg1=\"${sun.arch.data.model}\" arg2=\"64\"/>\n"
+            + "  </condition>\n" : "");
+    replacements.put("@antUse32BitVmarg", isMacOsX
+        ? "\n      <jvmarg value=\"${HostedMode32BitVmarg}\"/>" : "");
     replacements.put("@antVmargs", isMacOsX
-        ? "\n<jvmarg value=\"-XstartOnFirstThread\"/>" : "");
+        ? "\n      <jvmarg value=\"-XstartOnFirstThread\"/>" : "");
     replacements.put("@vmargs", isMacOsX ? "&#10;-XstartOnFirstThread" : "");
     replacements.put("@renameTo", moduleShortName.toLowerCase());
 

@@ -43,14 +43,13 @@
     </java>
   </target>
 
-  <!-- Note: hosted mode requires a 32-bit JVM -->@antSetUp32BitVmarg
   <target name="hosted" depends="javac" description="Run hosted mode">
     <java failonerror="true" fork="true" classname="@shellClass">
       <classpath>
         <pathelement location="src"/>
         <path refid="project.class.path"/>
       </classpath>
-      <jvmarg value="-Xmx256M"/>@antUse32BitVmarg@antVmargs
+      <jvmarg value="-Xmx256M"/>@antVmargs
       <arg value="-startupUrl"/>
       <arg value="@startupUrl"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->

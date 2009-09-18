@@ -229,6 +229,7 @@ public final class WebAppCreator {
     // Figure out what platform we're on
     boolean isMacOsX = gwtDevPath.substring(gwtDevPath.lastIndexOf('/') + 1).indexOf(
         "mac") >= 0;
+    boolean is64BitVm = "64".equals(System.getProperty("sun.arch.data.model"));
 
     // Compute module package and name.
     int pos = moduleName.lastIndexOf('.');
@@ -259,16 +260,25 @@ public final class WebAppCreator {
     replacements.put("@shellClass", HostedMode.class.getName());
     replacements.put("@compileClass", Compiler.class.getName());
     replacements.put("@startupUrl", moduleShortName + ".html");
-    replacements.put("@antSetUp32BitVmarg", isMacOsX
-        ? "\n  <condition property=\"HostedMode32BitVmarg\" value=\"-d32\""
-            + " else=\"-Dgwt.dummy.arg\">\n"
-            + "    <equals arg1=\"${sun.arch.data.model}\" arg2=\"64\"/>\n"
-            + "  </condition>\n" : "");
-    replacements.put("@antUse32BitVmarg", isMacOsX
-        ? "\n      <jvmarg value=\"${HostedMode32BitVmarg}\"/>" : "");
-    replacements.put("@antVmargs", isMacOsX
-        ? "\n      <jvmarg value=\"-XstartOnFirstThread\"/>" : "");
-    replacements.put("@vmargs", isMacOsX ? "&#10;-XstartOnFirstThread" : "");
+
+    String antVmargs = "";
+    if (isMacOsX) {
+	antVmargs = "\n      <jvmarg value=\"-XstartOnFirstThread\"/>";
+	if (is64BitVm) {
+	    antVmargs += "\n      <jvmarg value=\"-d32\"/>";
+	}
+    }
+    replacements.put("@antVmargs", antVmargs);
+
+    String vmargs = "";
+    if (isMacOsX) {
+	vmargs = "&#10;-XstartOnFirstThread";
+	if (is64BitVm) {
+	    vmargs += "&#10;-d32";
+	}
+    }
+    replacements.put("@vmargs", vmargs);
+
     replacements.put("@renameTo", moduleShortName.toLowerCase());
 
     String antEclipseRule = "";

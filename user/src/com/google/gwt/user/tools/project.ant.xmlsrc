@@ -3,6 +3,20 @@
   <!-- Configure path to GWT SDK -->
   <property name="gwt.sdk" location="@gwtSdk" />
 
+  <!-- SWT on Mac requires the -XstartOFirstThreadFlag. -->
+  <condition property="XstartOnFirstThreadFlag" value="-XstartOnFirstThread"
+    else="-Dgwt.dummy.arg1=">
+    <os family="mac"/>
+  </condition>
+
+  <!-- SWT on Mac requires the -d32 flag if the VM is 64-bit. -->
+  <condition property="d32Flag" value="-d32" else="-Dgwt.dummy.arg2=">
+    <and>
+      <os family="mac"/>
+      <equals arg1="${sun.arch.data.model}" arg2="64"/>
+    </and>
+  </condition>
+
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
     <pathelement location="${gwt.sdk}/gwt-user.jar"/>
@@ -37,7 +51,9 @@
         <path refid="project.class.path"/>
       </classpath>
       <!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
-      <jvmarg value="-Xmx256M"/>@antVmargs
+      <jvmarg value="-Xmx256M"/>
+      <jvmarg value="${XstartOnFirstThreadFlag}"/>
+      <jvmarg value="${d32Flag}"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg value="@moduleName"/>
     </java>
@@ -49,7 +65,9 @@
         <pathelement location="src"/>
         <path refid="project.class.path"/>
       </classpath>
-      <jvmarg value="-Xmx256M"/>@antVmargs
+      <jvmarg value="-Xmx256M"/>
+      <jvmarg value="${XstartOnFirstThreadFlag}"/>
+      <jvmarg value="${d32Flag}"/>
       <arg value="-startupUrl"/>
       <arg value="@startupUrl"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->

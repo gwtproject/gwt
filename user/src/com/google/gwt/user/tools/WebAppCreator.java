@@ -229,7 +229,6 @@ public final class WebAppCreator {
     // Figure out what platform we're on
     boolean isMacOsX = gwtDevPath.substring(gwtDevPath.lastIndexOf('/') + 1).indexOf(
         "mac") >= 0;
-    boolean is64BitVm = "64".equals(System.getProperty("sun.arch.data.model"));
 
     // Compute module package and name.
     int pos = moduleName.lastIndexOf('.');
@@ -261,21 +260,18 @@ public final class WebAppCreator {
     replacements.put("@compileClass", Compiler.class.getName());
     replacements.put("@startupUrl", moduleShortName + ".html");
 
-    String antVmargs = "";
-    if (isMacOsX) {
-	antVmargs = "\n      <jvmarg value=\"-XstartOnFirstThread\"/>";
-	if (is64BitVm) {
-	    antVmargs += "\n      <jvmarg value=\"-d32\"/>";
-	}
-    }
-    replacements.put("@antVmargs", antVmargs);
-
     String vmargs = "";
     if (isMacOsX) {
-	vmargs = "&#10;-XstartOnFirstThread";
-	if (is64BitVm) {
-	    vmargs += "&#10;-d32";
-	}
+        vmargs = "&#10;-XstartOnFirstThread";
+        /*
+         * For Eclipse launch scripts, include the -d32 flag.  Note
+         * that some older Mac JVMs that supported only 64-bit mode
+         * may not understand this argument; however, since there is
+         * no way to make the argument conditional, we choose to fail
+         * on these older VMs in order to make newer VMs work without
+         * the need for additional configuration.
+         */
+        vmargs += "&#10;-d32";
     }
     replacements.put("@vmargs", vmargs);
 

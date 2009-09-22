@@ -343,13 +343,6 @@ abstract class HostedModeBase implements BrowserWindowController {
     }
   }
 
-  /**
-   * Determine if we're using a 32 bit runtime.
-   */
-  private static boolean is32BitJvm() {
-    return "32".equals(System.getProperty("sun.arch.data.model"));
-  }
-
   protected final HostedModeBaseOptions options;
 
   /**
@@ -366,7 +359,7 @@ abstract class HostedModeBase implements BrowserWindowController {
 
   public HostedModeBase() {
     // Set any platform specific system properties.
-    BootStrapPlatform.initHostedMode(is32BitJvm());
+    BootStrapPlatform.initHostedMode();
     BootStrapPlatform.applyPlatformHacks();
     options = createOptions();
   }

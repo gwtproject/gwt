@@ -73,13 +73,42 @@ abstract class SwtHostedModeBase extends HostedModeBase {
       }
     }
   }
-
+  
   static {
+    /*
+     * The following check must be made before attempting to start SWT, or we'll fail with a
+     * less-than-helpful UnsatisfiedLinkError.
+     */
+    if (!is32BitJvm()) {
+      System.err.println("You must use a 32-bit Java runtime to run GWT Hosted Mode.");
+      if (isMacOsX()) {
+        // Provide an extra hint for Mac users due to previous GWT incompatibiity with Snow Leopard
+        System.err.println("  Leopard: Use the Java 1.5 runtime.");
+        System.err.println("  Snow Leopard: Use the Java 1.6 runtime and add the -d32 flag.");
+      }
+      System.exit(1);
+    }
+    
     // Force ToolBase to clinit, which causes SWT stuff to happen.
     new ToolBase() {
     };
     // Correct menu on Mac OS X
     Display.setAppName("GWT");
+  }
+  
+  /**
+   * Determine if we're using a 32 bit runtime.
+   */
+  private static boolean is32BitJvm() {
+    return "32".equals(System.getProperty("sun.arch.data.model"));
+  }
+
+  /**
+   * Determine if we're using Mac OS X.
+   */
+  private static boolean isMacOsX() {
+    String osName = System.getProperty("os.name").toLowerCase();
+    return osName.startsWith("mac os x");
   }
 
   private BrowserWidgetHostImpl browserHost = new SwtBrowserWidgetHostImpl();

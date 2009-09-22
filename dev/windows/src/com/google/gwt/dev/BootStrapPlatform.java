@@ -28,10 +28,6 @@ public class BootStrapPlatform {
     // nothing to do
   }
 
-  public static void initHostedMode(boolean is32Bit) {
-    if (!is32Bit) {
-      System.err.println("You must use a 32-bit runtime to run GWT Hosted Mode.");
-      System.exit(1);
-    }
+  public static void initHostedMode() {
   }
 }

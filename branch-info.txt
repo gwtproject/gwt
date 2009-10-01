@@ -2,3 +2,8 @@ Created as a straight copy of branches/farewellSwt@6267
 ========================
 svn cp https://google-web-toolkit.googlecode.com/svn/branches/farewellSwt \
   https://google-web-toolkit.googlecode.com/svn/releases/2.0
+
+Merged from farewellSwt
+================
+svn merge https://google-web-toolkit.googlecode.com/svn/branches/farewellSwt \
+  --ignore-ancestry -r6267:6271 .

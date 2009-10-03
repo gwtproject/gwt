@@ -7,3 +7,6 @@ Merges to this branch
 ========================
 svn merge --ignore-ancestry \
   https://google-web-toolkit.googlecode.com/svn/branches/farewellSwt -c6276 .
+
+svn merge --ignore-ancestry \
+  https://google-web-toolkit.googlecode.com/svn/branches/farewellSwt -r6292:6294 . 

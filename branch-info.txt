@@ -1,0 +1,15 @@
+branch-info.txt for GWT 2.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/2.0/ was created (6420) as a straight copy from /trunk@r6417
+
+svn cp -r 6417 https://google-web-toolkit.googlecode.com/svn/trunk \
+  https://google-web-toolkit.googlecode.com/svn/releases/2.0
+
+Merges to this branch:
+
+
+The next merge into trunk will be:
+svn merge -r6420:???? https://google-web-toolkit.googlecode.com/svn/releases/2.0 .

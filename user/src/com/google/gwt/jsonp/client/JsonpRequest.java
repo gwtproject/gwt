@@ -191,7 +191,7 @@ public class JsonpRequest<T> {
     var self = this;
     var callback = new Object();
     callbacks[this.@com.google.gwt.jsonp.client.JsonpRequest::callbackId] = callback;
-    callback.onSuccess = function(data) {
+    callback.onSuccess = $entry(function(data) {
       // Box primitive types
       if (typeof data == 'boolean') {
         data = @java.lang.Boolean::new(Z)(data);
@@ -203,11 +203,11 @@ public class JsonpRequest<T> {
         }
       }
       self.@com.google.gwt.jsonp.client.JsonpRequest::onSuccess(Ljava/lang/Object;)(data);
-    };
+    });
     if (this.@com.google.gwt.jsonp.client.JsonpRequest::failureCallbackParam) {
-      callback.onFailure = function(message) {
+      callback.onFailure = $entry(function(message) {
         self.@com.google.gwt.jsonp.client.JsonpRequest::onFailure(Ljava/lang/String;)(message);
-      };
+      });
     }
   }-*/;
 
@@ -225,7 +225,10 @@ public class JsonpRequest<T> {
       public void execute() {
         unregisterCallbacks(CALLBACKS);
         Node script = Document.get().getElementById(callbackId);
-        getHeadElement().removeChild(script);
+        if (script != null) {
+          // The script may have already been deleted
+          getHeadElement().removeChild(script);
+        }
       }
     });
   }

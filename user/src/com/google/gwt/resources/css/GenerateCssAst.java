@@ -110,6 +110,14 @@ public class GenerateCssAst {
       this.parentLogger = parentLogger;
     }
 
+    public TreeLogger branch(TreeLogger.Type type, String message) {
+      return branch(type, message, null);
+    }
+
+    public TreeLogger branch(TreeLogger.Type type, String message, Throwable t) {
+      return logOrBranch(type, message, t, true);
+    }
+
     public void error(CSSParseException exception) throws CSSException {
       // TODO Since this indicates a loss of data, should this be a fatal error?
       log(TreeLogger.WARN, exception);
@@ -124,11 +132,7 @@ public class GenerateCssAst {
     }
 
     public void log(TreeLogger.Type type, String message, Throwable t) {
-      fatalErrorEncountered |= type == TreeLogger.Type.ERROR;
-      if (parentLogger.isLoggable(type)) {
-        maybeBranch();
-        logger.log(type, message, t);
-      }
+      logOrBranch(type, message, t, false);
     }
 
     public void warning(CSSParseException exception) throws CSSException {
@@ -138,6 +142,22 @@ public class GenerateCssAst {
     private void log(TreeLogger.Type type, CSSParseException e) {
       log(type, "Line " + e.getLineNumber() + " column " + e.getColumnNumber()
           + ": " + e.getMessage());
+    }
+
+    private TreeLogger logOrBranch(TreeLogger.Type type, String message,
+        Throwable t, boolean branch) {
+      fatalErrorEncountered |= type == TreeLogger.Type.ERROR;
+      if (parentLogger.isLoggable(type)) {
+        maybeBranch();
+        if (branch) {
+          return logger.branch(type, message, t);
+        } else {
+          logger.log(type, message, t);
+          return null;
+        }
+      } else {
+        return TreeLogger.NULL;
+      }
     }
 
     private void maybeBranch() {
@@ -225,11 +245,21 @@ public class GenerateCssAst {
       } catch (IllegalAccessException e) {
         errors.log(TreeLogger.ERROR, "Unable to invoke parse method ", e);
       } catch (InvocationTargetException e) {
-        if (e.getCause() instanceof CSSException) {
-          throw (CSSException) e.getCause();
-        }
+        Throwable cause = e.getCause();
 
-        errors.log(TreeLogger.ERROR, "Unable to invoke parse method ", e);
+        if (cause instanceof CSSException) {
+          // Unwind a CSSException normally
+          throw (CSSException) cause;
+        } else if (cause != null) {
+          // Otherwise, report the message nicely
+          TreeLogger details = errors.branch(TreeLogger.ERROR,
+              cause.getMessage());
+          details.log(TreeLogger.DEBUG, "Full stack trace", cause);
+        } else {
+          TreeLogger details = errors.branch(TreeLogger.ERROR,
+              "Unknown failure parsing " + ruleName);
+          details.log(TreeLogger.DEBUG, "Full stack trace", e);
+        }
       }
     }
 
@@ -614,9 +644,11 @@ public class GenerateCssAst {
   private static final String VALUE_FUNCTION_NAME = "value";
 
   /**
-   * Create a CssStylesheet from the contents of a URL.
+   * Create a CssStylesheet from the contents of one or more URLs. If multiple
+   * URLs are provided, the generated stylesheet will be created as though the
+   * contents of the URLs had been concatenated.
    */
-  public static CssStylesheet exec(TreeLogger logger, URL[] stylesheets)
+  public static CssStylesheet exec(TreeLogger logger, URL... stylesheets)
       throws UnableToCompleteException {
     Parser p = new Parser();
     Errors errors = new Errors(logger);
@@ -652,8 +684,8 @@ public class GenerateCssAst {
    * Expresses an rgb function as a hex expression.
    * 
    * @param colors a sequence of LexicalUnits, assumed to be
-   *          <code>(VAL COMMA VAL COMMA VAL)</code>
-   *     where VAL can be an INT or a PERCENT (which is then converted to INT)
+   *          <code>(VAL COMMA VAL COMMA VAL)</code> where VAL can be an INT or
+   *          a PERCENT (which is then converted to INT)
    * @return the minimal hex expression for the RGB color values
    */
   private static Value colorValue(LexicalUnit colors) {
@@ -745,11 +777,11 @@ public class GenerateCssAst {
   /**
    * Return an integer value from 0-255 for a component of an RGB color.
    * 
-   * @param color typed value from the CSS parser, which may be an INTEGER or
-   *     a PERCENTAGE
+   * @param color typed value from the CSS parser, which may be an INTEGER or a
+   *          PERCENTAGE
    * @return integer value from 0-255
    * @throws IllegalArgumentException if the color is not an INTEGER or
-   *     PERCENTAGE value
+   *           PERCENTAGE value
    */
   private static int getRgbComponentValue(LexicalUnit color) {
     switch (color.getLexicalUnitType()) {

@@ -16,14 +16,11 @@
     </delete>
   </target>
 
-  <target name="compile.tests" depends="build, compile.emma" description="Compiles the test code for this project">
+  <target name="compile.tests" depends="build, compile.emma.if.enabled" description="Compiles the test code for this project">
     <mkdir dir="${javac.junit.out}" />
     <gwt.javac srcdir="" destdir="${javac.junit.out}">
       <src path="core/src" />
       <src path="core/test" />
-      <src path="oophm/src" />
-      <src path="oophm/overlay" />
-      <src path="oophm/test" />
       <classpath>
         <pathelement location="${javac.out}" />
         <pathelement location="${alldeps.jar}" />
@@ -74,9 +71,9 @@
           <include name="apache/commons/commons-io-1.4.jar" />
           <include name="apache/commons/commons-lang-2.4.jar" />
           <include name="cssparser/cssparser-0.9.5.jar" />
-          <include name="htmlunit/htmlunit-2.5.jar" />
-          <include name="htmlunit/htmlunit-core-js-2.5.jar" />
-          <include name="nekohtml/nekohtml-1.9.12.jar" />
+          <include name="htmlunit/htmlunit-r5070.jar" />
+          <include name="htmlunit/htmlunit-core-js-r5070.jar" />
+          <include name="nekohtml/nekohtml-1.9.13.jar" />
           <include name="xalan/xalan-2.7.1.jar" />
           <include name="xerces/xerces-2_9_1/serializer.jar" />
           <include name="xerces/xerces-2_9_1/xercesImpl-NoMetaInf.jar" />
@@ -129,9 +126,9 @@
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-io-1.4.jar" />
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-lang-2.4.jar" />
           <zipfileset src="${gwt.tools.lib}/cssparser/cssparser-0.9.5.jar" />
-          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.5.jar" />
-          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-core-js-2.5.jar" />
-          <zipfileset src="${gwt.tools.lib}/nekohtml/nekohtml-1.9.12.jar" />
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-r5070.jar" />
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-core-js-r5070.jar" />
+          <zipfileset src="${gwt.tools.lib}/nekohtml/nekohtml-1.9.13.jar" />
           <zipfileset src="${gwt.tools.lib}/xalan/xalan-2.7.1.jar" />
           <zipfileset src="${gwt.tools.lib}/xerces/xerces-2_9_1/serializer.jar" />
           <zipfileset src="${gwt.tools.lib}/xerces/xerces-2_9_1/xercesImpl-NoMetaInf.jar" />
@@ -169,6 +166,7 @@
       <include name="com/google/gwt/dev/js/**"/>
       <include name="com/google/gwt/dev/resource/**"/>
       <include name="com/google/gwt/dev/util/**"/>
+      <include name="com/google/gwt/soyc/**"/>
       <include name="com/google/gwt/util/tools/**"/>
       <classpath>
           <pathelement location="${gwt.tools.lib}/apache/ant-1.6.5.jar" />
@@ -183,8 +181,6 @@
   <target name="compile" depends="compiler.standalone, build.alldeps.jar" description="Compiles this project">
     <gwt.javac srcdir="" excludes="${filter.pattern}">
       <src path="core/src" />
-      <src path="oophm/src" />
-      <src path="oophm/overlay" />
       <classpath>
         <pathelement location="${alldeps.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
@@ -216,9 +212,6 @@
         <filename name="org/eclipse/**/*.java" negate="yes" />
         <filename name="org/apache/**/*.java" negate="yes" />
       </fileset>
-      <fileset dir="oophm/src" />
-      <fileset dir="oophm/overlay" />
-      <fileset dir="oophm/test" />
     </gwt.checkstyle>
 
     <gwt.checkstyle>
@@ -234,14 +227,11 @@
         <pathelement location="${alldeps.jar}" />
         <!-- TODO: the following six items are needed because dev (alone) does
             not adhere to the .../{src,super,test} convention, having a split
-            between core, oophm, and (historically) the OS platforms.  When
+            between core and (historically) oophm and the OS platforms.  When
             that unifies, these should go away. -->
         <pathelement location="${gwt.root}/${project.tail}/core/src" />
         <pathelement location="${gwt.root}/${project.tail}/core/super" />
         <pathelement location="${gwt.root}/${project.tail}/core/test" />
-        <pathelement location="${gwt.root}/${project.tail}/oophm/src" />
-        <pathelement location="${gwt.root}/${project.tail}/oophm/overlay" />
-        <pathelement location="${gwt.root}/${project.tail}/oophm/test" />
         <!-- Pull in gwt-dev and gwt-user sources for .gwt.xml files -->
         <pathelement location="${gwt.root}/user/src/" />
         <pathelement location="${gwt.root}/user/super/" />
@@ -254,8 +244,6 @@
     <mkdir dir="${gwt.build.lib}" />
     <outofdate>
       <sourcefiles>
-        <fileset dir="oophm/src" excludes="**/package.html"/>
-        <fileset dir="oophm/overlay" excludes="**/package.html"/>
         <fileset dir="core/src">
           <exclude name="**/package.html"/>
           <exclude name="**/*.properties"/> <!-- copied and/or filtered into bin -->
@@ -272,8 +260,6 @@
       </targetfiles>
       <sequential>
         <gwt.jar>
-          <fileset dir="oophm/src" excludes="**/package.html"/>
-          <fileset dir="oophm/overlay" excludes="**/package.html"/>
           <fileset dir="core/src">
             <exclude name="**/package.html"/>
             <exclude name="**/*.properties"/> <!-- copied and/or filtered into bin -->

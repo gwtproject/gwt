@@ -25,6 +25,8 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.DataResource;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.CssResource.Shared;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
@@ -34,6 +36,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -55,7 +58,7 @@ public class WidgetBasedUi extends Composite {
   public interface Style extends CssResource {
     String menuBar();
   }
-
+  
   interface Binder extends UiBinder<Widget, WidgetBasedUi> {
   }
   private static final Binder binder = GWT.create(Binder.class);
@@ -113,6 +116,12 @@ public class WidgetBasedUi extends Composite {
   @UiField ParagraphElement privateStyleParagraph;
   @UiField ParagraphElement reallyPrivateStyleParagraph;
   @UiField SpanElement totallyPrivateStyleSpan;
+  @UiField ImageResource prettyImage;
+  @UiField ImageResource prettyTilingImage;
+  @UiField Image babyWidget;
+  @UiField ParagraphElement simpleSpriteParagraph;
+  @UiField DataResource heartCursorResource;
+  @UiField CssImportScopeSample cssImportScopeSample;
 
   public WidgetBasedUi() {
     this.bundledLabel = new Label();

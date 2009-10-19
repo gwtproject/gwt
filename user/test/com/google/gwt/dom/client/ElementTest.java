@@ -523,6 +523,8 @@ public class ElementTest extends GWTTestCase {
 
   /**
    * innerText.
+   *
+   * TODO(amitmanjhi): Remove DoNotRunWith after updating to HtmlUnit-2.7.
    */
   // TODO (amitmanjhi): Remove annotation after updating HtmlUnit. kprobst says
   // the issue has been fixed in htmlUnit trunk

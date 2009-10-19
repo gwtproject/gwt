@@ -16,7 +16,6 @@
 package com.google.gwt.user.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -30,6 +29,7 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.user.client.impl.WindowImpl;
 
 import java.util.ArrayList;
@@ -130,6 +130,39 @@ public class Window {
     public static native void assign(String newURL) /*-{
       $wnd.location.assign(newURL);
     }-*/;
+
+    /**
+     * Create a {@link UrlBuilder} based on this {@link Location}.
+     * 
+     * @return the new builder
+     */
+    public static UrlBuilder createUrlBuilder() {
+      UrlBuilder builder = new UrlBuilder();
+      builder.setProtocol(getProtocol());
+      builder.setHost(getHost());
+      String path = getPath();
+      if (path != null && path.length() > 0) {
+        builder.setPath(path);
+      }
+      String hash = getHash();
+      if (hash != null && hash.length() > 0) {
+        builder.setHash(hash);
+      }
+      String port = getPort();
+      if (port != null && port.length() > 0) {
+        builder.setPort(Integer.parseInt(port));
+      }
+
+      // Add query parameters.
+      Map<String, List<String>> params = getParameterMap();
+      for (Map.Entry<String, List<String>> entry : params.entrySet()) {
+        List<String> values = new ArrayList<String>(entry.getValue());
+        builder.setParameter(entry.getKey(),
+            values.toArray(new String[values.size()]));
+      }
+
+      return builder;
+    }
 
     /**
      * Gets the string to the right of the URL's hash.
@@ -400,7 +433,7 @@ public class Window {
   private static boolean resizeHandlersInitialized;
   private static int lastResizeWidth;
   private static int lastResizeHeight;
-  
+
   private static final WindowImpl impl = GWT.create(WindowImpl.class);
 
   /**
@@ -478,7 +511,8 @@ public class Window {
    * Adds a listener to receive window scroll events.
    * 
    * @param listener the listener to be informed when the window is scrolled
-   * @deprecated use {@link Window#addWindowScrollHandler(ScrollHandler)} instead
+   * @deprecated use {@link Window#addWindowScrollHandler(ScrollHandler)}
+   *             instead
    */
   @Deprecated
   public static void addWindowScrollListener(WindowScrollListener listener) {
@@ -670,38 +704,37 @@ public class Window {
   }-*/;
 
   static void onClosed() {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      fireClosedAndCatch(handler);
-    } else {
-      fireClosedImpl();
+    if (closeHandlersInitialized) {
+      CloseEvent.fire(getHandlers(), null);
     }
   }
 
   static String onClosing() {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      return fireClosingAndCatch(handler);
-    } else {
-      return fireClosingImpl();
+    if (closeHandlersInitialized) {
+      Window.ClosingEvent event = new Window.ClosingEvent();
+      fireEvent(event);
+      return event.getMessage();
     }
+    return null;
   }
 
   static void onResize() {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      fireResizedAndCatch(handler);
-    } else {
-      fireResizedImpl();
+    if (resizeHandlersInitialized) {
+      // On webkit and IE we sometimes get duplicate window resize events.
+      // Here, we manually filter them.
+      int width = getClientWidth();
+      int height = getClientHeight();
+      if (lastResizeWidth != width || lastResizeHeight != height) {
+        lastResizeWidth = width;
+        lastResizeHeight = height;
+        ResizeEvent.fire(getHandlers(), width, height);
+      }
     }
   }
 
   static void onScroll() {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      fireScrollAndCatch(handler);
-    } else {
-      fireScrollImpl();
+    if (scrollHandlersInitialized) {
+      fireEvent(new Window.ScrollEvent(getScrollLeft(), getScrollTop()));
     }
   }
 
@@ -718,38 +751,6 @@ public class Window {
     return getHandlers().addHandler(type, handler);
   }
 
-  private static void fireClosedAndCatch(UncaughtExceptionHandler handler) {
-    try {
-      fireClosedImpl();
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-    }
-  }
-
-  private static void fireClosedImpl() {
-    if (closeHandlersInitialized) {
-      CloseEvent.fire(getHandlers(), null);
-    }
-  }
-
-  private static String fireClosingAndCatch(UncaughtExceptionHandler handler) {
-    try {
-      return fireClosingImpl();
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-      return null;
-    }
-  }
-
-  private static String fireClosingImpl() {
-    if (closeHandlersInitialized) {
-      Window.ClosingEvent event = new Window.ClosingEvent();
-      fireEvent(event);
-      return event.getMessage();
-    }
-    return null;
-  }
-
   /**
    * Fires an event.
    * 
@@ -758,42 +759,6 @@ public class Window {
   private static void fireEvent(GwtEvent<?> event) {
     if (handlers != null) {
       handlers.fireEvent(event);
-    }
-  }
-
-  private static void fireResizedAndCatch(UncaughtExceptionHandler handler) {
-    try {
-      fireResizedImpl();
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-    }
-  }
-
-  private static void fireResizedImpl() {
-    if (resizeHandlersInitialized) {
-      // On webkit and IE we sometimes get duplicate window resize events.
-      // Here, we manually filter them.
-      int width = getClientWidth();
-      int height = getClientHeight();
-      if (lastResizeWidth != width || lastResizeHeight != height) {
-        lastResizeWidth = width;
-        lastResizeHeight = height;
-        ResizeEvent.fire(getHandlers(), width, height);
-      }
-    }
-  }
-
-  private static void fireScrollAndCatch(UncaughtExceptionHandler handler) {
-    try {
-      fireScrollImpl();
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-    }
-  }
-
-  private static void fireScrollImpl() {
-    if (scrollHandlersInitialized) {
-      fireEvent(new Window.ScrollEvent(getScrollLeft(), getScrollTop()));
     }
   }
 

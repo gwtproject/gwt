@@ -17,6 +17,7 @@ package com.google.gwt.junit.client.impl;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
@@ -27,10 +28,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The entry point class for GWTTestCases.
@@ -43,7 +41,7 @@ public abstract class GWTRunner implements EntryPoint {
 
   /**
    * The RPC callback object for {@link GWTRunner#junitHost}. When
-   * {@link #onSuccess(Object)} is called, it's time to run the next test case.
+   * {@link #onSuccess} is called, it's time to run the next test case.
    */
   private final class JUnitHostListener implements AsyncCallback<TestBlock> {
 
@@ -260,27 +258,11 @@ public abstract class GWTRunner implements EntryPoint {
        * We're being asked to run a test in a different module. We must navigate
        * the browser to a new URL which will run that other module.
        */
-      Map<String, List<String>> paramMap = new HashMap<String, List<String>>();
-      paramMap.putAll(Window.Location.getParameterMap());
-      paramMap.put(BLOCKINDEX_QUERY_PARAM, Arrays.asList(String.valueOf(
-          currentBlock.getIndex())));
-      paramMap.put(RETRYCOUNT_QUERY_PARAM, Arrays.asList(String.valueOf(
-          maxRetryCount)));
-      // TODO(jat): there really ought to be some library code for dealing
-      //    with URLs rather than having to do this.
-      String path = Window.Location.getPath().replace(currentModule, newModule);
-      StringBuilder query = new StringBuilder();
-      char prefix = '?';
-      for (Map.Entry<String, List<String>> entry : paramMap.entrySet()) {
-        for (String val : entry.getValue()) {
-          query.append(prefix).append(entry.getKey()).append('=').append(val);
-          prefix = '&';
-        }
-      }
-      String newUrl = Window.Location.getProtocol() + "//"
-          + Window.Location.getHost() + path + query
-          + Window.Location.getHash();
-      Window.Location.replace(newUrl);
+      UrlBuilder builder = Window.Location.createUrlBuilder();
+      builder.setParameter(BLOCKINDEX_QUERY_PARAM,
+          Integer.toString(currentBlock.getIndex())).setPath(
+          newModule + "/junit.html");
+      Window.Location.replace(builder.buildString());
       currentBlock = null;
       currentTestIndex = 0;
     }
@@ -311,8 +293,7 @@ public abstract class GWTRunner implements EntryPoint {
     }
     return defaultValue;
   }
-  
-  
+
   private void runTest() {
     // Dynamically create a new test case.
     TestInfo currentTest = getCurrentTest();

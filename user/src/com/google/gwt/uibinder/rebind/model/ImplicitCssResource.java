@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,12 +29,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Models a method returning a CssResource on a generated ClientBundle. At the
- * moment, they must be tied to an external .css file. That should improve in
- * the next day or so.
+ * Models a method returning a CssResource on a generated ClientBundle.
  */
 public class ImplicitCssResource {
   private final String packageName;
@@ -44,17 +44,19 @@ public class ImplicitCssResource {
   private final JClassType extendedInterface;
   private final String body;
   private final MortalLogger logger;
+  private final Set<JClassType> imports;
   private File generatedFile;
 
-  public ImplicitCssResource(String packageName, String className, String name,
+  ImplicitCssResource(String packageName, String className, String name,
       String source, JClassType extendedInterface, String body,
-      MortalLogger logger) {
+      MortalLogger logger, HashSet<JClassType> importTypes) {
     this.packageName = packageName;
     this.className = className;
     this.name = name;
     this.extendedInterface = extendedInterface;
     this.body = body;
     this.logger = logger;
+    this.imports = Collections.unmodifiableSet(importTypes);
 
     if (body.length() > 0) {
       assert "".equals(source); // Enforced for real by the parser
@@ -80,7 +82,7 @@ public class ImplicitCssResource {
 
   /**
    * @return the set of CSS classnames in the underlying .css files
-   *
+   * 
    * @throws UnableToCompleteException if the user has called for a .css file we
    *           can't find.
    */
@@ -91,14 +93,14 @@ public class ImplicitCssResource {
       urls = getExternalCss();
     } else {
       try {
-        urls = new URL[] {getGeneratedFile().toURL()};
+        urls = new URL[] {getGeneratedFile().toURI().toURL()};
       } catch (MalformedURLException e) {
         throw new RuntimeException(e);
       }
     }
 
     CssStylesheet sheet = GenerateCssAst.exec(logger.getTreeLogger(), urls);
-    return ExtractClassNamesVisitor.exec(sheet);
+    return ExtractClassNamesVisitor.exec(sheet, imports.toArray(new JClassType[imports.size()]));
   }
 
   /**
@@ -106,6 +108,10 @@ public class ImplicitCssResource {
    */
   public JClassType getExtendedInterface() {
     return extendedInterface;
+  }
+
+  public Set<JClassType> getImports() {
+    return imports;
   }
 
   /**

@@ -16,12 +16,14 @@
 package com.google.gwt.uibinder.rebind;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.uibinder.parsers.NullInterpreter;
 import com.google.gwt.uibinder.testing.UiBinderTesting;
 
 import junit.framework.TestCase;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -34,44 +36,100 @@ import javax.xml.parsers.ParserConfigurationException;
  * Tests XMLElement.
  */
 public class XMLElementTest extends TestCase {
-  private static final String dom =
-    "<doc><elm attr1=\"attr1Value\" attr2=\"attr2Value\"/></doc>";
+  private static final String STRING_WITH_DOUBLEQUOTE = "I have a \" quote in me";
   private Document doc;
   private Element item;
   private XMLElement elm;
-  
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    doc = UiBinderTesting.documentForString(dom);
-    item = (Element) doc.getDocumentElement().getElementsByTagName(
-        "elm").item(0);
-    elm = new XMLElement(item, null);
+    init("<doc><elm attr1=\"attr1Value\" attr2=\"attr2Value\"/></doc>");
   }
 
   public void testConsumeAttribute() {
     assertEquals("attr1Value", elm.consumeAttribute("attr1"));
     assertEquals("", elm.consumeAttribute("attr1"));
   }
-  
+
   public void testConsumeAttributeWithDefault() {
     assertEquals("attr1Value", elm.consumeAttribute("attr1", "default"));
     assertEquals("default", elm.consumeAttribute("attr1", "default"));
-    assertEquals("otherDefault", elm.consumeAttribute("unsetthing", "otherDefault"));
+    assertEquals("otherDefault", elm.consumeAttribute("unsetthing",
+        "otherDefault"));
   }
-  
+
   public void testConsumeRequired() throws UnableToCompleteException {
     assertEquals("attr1Value", elm.consumeRequiredAttribute("attr1"));
-
-    // TODO(rjrjr) Can't test this until die() is factored out of UiBinderWriter
-//    try {
-//      elm.consumeRequiredAttribute("unsetthing");
-//      fail("Should have thrown UnableToCompleteException");
-//    } catch (UnableToCompleteException e) {
-//       /* pass */
-//    }    
+    try {
+      elm.consumeRequiredAttribute("unsetthing");
+      fail("Should have thrown UnableToCompleteException");
+    } catch (UnableToCompleteException e) {
+      /* pass */
+    }
   }
-  
+
+  public void testConsumeInnerTextEscapedAsHtmlStringLiteral()
+      throws UnableToCompleteException {
+    appendText(STRING_WITH_DOUBLEQUOTE);
+    assertEquals(
+        UiBinderWriter.escapeTextForJavaStringLiteral(STRING_WITH_DOUBLEQUOTE),
+        elm.consumeInnerTextEscapedAsHtmlStringLiteral(new NullInterpreter<String>()));
+  }
+
+  public void testConsumeInnerTextEscapedAsHtmlStringLiteralEmpty()
+      throws UnableToCompleteException {
+    assertEquals(
+        "",
+        elm.consumeInnerTextEscapedAsHtmlStringLiteral(new NullInterpreter<String>()));
+  }
+
+  public void testConsumeSingleChildElementEmpty()
+      throws ParserConfigurationException, SAXException, IOException,
+      UnableToCompleteException {
+    try {
+      elm.consumeSingleChildElement();
+      fail("Should throw on single child element");
+    } catch (UnableToCompleteException e) {
+      /* pass */
+    }
+
+    init("<doc><elm><child>Hi.</child></elm></doc>");
+    assertEquals("Hi.",
+        elm.consumeSingleChildElement().consumeUnescapedInnerText());
+    
+    init("<doc><elm id='elm'><child>Hi.</child><child>Ho.</child></elm></doc>");
+    try {
+      elm.consumeSingleChildElement();
+      fail("Should throw on too many children");
+    } catch (UnableToCompleteException e) {
+      /* pass */
+    }
+ }
+
+  private void init(final String domString)
+      throws ParserConfigurationException, SAXException, IOException {
+    doc = UiBinderTesting.documentForString(domString);
+    item = (Element) doc.getDocumentElement().getElementsByTagName("elm").item(
+        0);
+    elm = new XMLElement(item, new UiBinderWriter());
+  }
+
+  private void appendText(final String text) {
+    Text t = doc.createTextNode(STRING_WITH_DOUBLEQUOTE);
+    item.appendChild(t);
+  }
+
+  public void testConsumeUnescapedInnerText() throws UnableToCompleteException {
+    appendText(STRING_WITH_DOUBLEQUOTE);
+    assertEquals(STRING_WITH_DOUBLEQUOTE, elm.consumeUnescapedInnerText());
+  }
+
+  public void testConsumeUnescapedInnerTextEmpty()
+      throws UnableToCompleteException {
+    assertEquals("", elm.consumeUnescapedInnerText());
+  }
+
   public void testEmptyStringOnMissingAttribute()
       throws ParserConfigurationException, SAXException, IOException {
     assertEquals("", elm.consumeAttribute("fnord"));

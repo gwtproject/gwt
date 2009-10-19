@@ -292,6 +292,8 @@ public class DOMTest extends GWTTestCase {
   /**
    * Tests that {@link DOM#setInnerText(Element, String)} works consistently
    * across browsers.
+   * 
+   * TODO(amitmanjhi): Remove DoNotRunWith after updating to HtmlUnit-2.7.
    */
   // TODO (amitmanjhi): Remove annotation after updating HtmlUnit. kprobst says
   // the issue has been fixed in htmlUnit trunk

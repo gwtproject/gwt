@@ -38,6 +38,7 @@
     <call-subproject subproject="dev" subtarget="build" />
     <call-subproject subproject="user" subtarget="build" />
     <call-subproject subproject="servlet" subtarget="build" />
+    <call-subproject subproject="jni" subtarget="build" />
   </target>
 
   <target name="dist" depends="build, doc" description="[action] Make all the distributions">
@@ -68,6 +69,10 @@
     <gwt.ant dir="servlet" />
   </target>
 
+  <target name="jni" description="[subdir] Builds (or runs ${target} if set) jni for all platforms">
+    <gwt.ant dir="jni" />
+  </target>
+
   <target name="doc" description="[subdir] Builds (or runs ${target} if set) the doc">
     <call-subproject subproject="user" subtarget="build" />
     <gwt.ant dir="doc" />
@@ -87,6 +92,7 @@
      <call-subproject subproject="user" subtarget="build"/>
      <call-subproject subproject="servlet" subtarget="build"/>
      <call-subproject subproject="tools" subtarget="build"/>
+     <call-subproject subproject="jni" subtarget="build"/>
      <call-subproject subproject="samples" subtarget="build"/>
   </target>
 
@@ -146,15 +152,11 @@
   </target>
 
   <target name ="presubmit" description="[action] Deprecated for test, which now does checkstyle and apicheck"
-          depends="test">		
+          depends="test">
   </target>
-	
+
   <target name="apicheck-nobuild" 
     description="[action] Checks API compatibility to prior GWT revision">
-    <copy tofile="${gwt.build.out}/userApi.conf" filtering="false"
-          file="${gwt.apicheck.config}"
-          overwrite="true">
-    </copy>
     <java failonerror="true" fork="true"
           classname="com.google.gwt.tools.apichecker.ApiCompatibilityChecker">
       <jvmarg line="-Xmx512m" />
@@ -167,13 +169,13 @@
       <arg value="-refJar"/>
       <arg path="${gwt.root}/tools/api-checker/reference/gwt-dev-modified.jar:${gwt.root}/tools/api-checker/reference/gwt-user-modified.jar"/>
       <arg value="-configFile"/>
-      <arg file="${gwt.build.out}/userApi.conf"/>
+      <arg file="${gwt.apicheck.config}"/>
       <arg value="-logLevel"/>
       <arg value="ERROR"/>
     </java>
   </target>
-  
+
   <target name="apicheck" depends="buildonly,tools,apicheck-nobuild" 
           description="[action] Builds GWT and checks API compatiblity to prior release"/>
- 
+
 </project>

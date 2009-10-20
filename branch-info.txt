@@ -10,6 +10,5 @@ svn cp -r 6417 https://google-web-toolkit.googlecode.com/svn/trunk \
 
 Merges to this branch:
 
-
-The next merge into trunk will be:
-svn merge -r6420:???? https://google-web-toolkit.googlecode.com/svn/releases/2.0 .
+trunk@6429 was merged into this branch, Bugfix when rewriting static calls with JMultiExpr qualifiers
+    svn merge --ignore_ancestry -c 6429 https://google-web-toolkit.googlecode.com/svn/trunk .

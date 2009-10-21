@@ -12,3 +12,7 @@ Merges to this branch:
 
 trunk@6429 was merged into this branch, Bugfix when rewriting static calls with JMultiExpr qualifiers
     svn merge --ignore_ancestry -c 6429 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6432 was merged into this branch, Merge branch 'remote-ui-communication' at r6431 into trunk.
+    svn merge --ignore_ancestry -c 6432 https://google-web-toolkit.googlecode.com/svn/trunk .
+

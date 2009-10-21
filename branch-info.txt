@@ -16,3 +16,6 @@ trunk@6429 was merged into this branch, Bugfix when rewriting static calls with 
 trunk@6432 was merged into this branch, Merge branch 'remote-ui-communication' at r6431 into trunk.
     svn merge --ignore_ancestry -c 6432 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6434 was merged into this branch, bugfix in HybridServiceServlet
+  . svn merge --ignore-ancestry -c 6434 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

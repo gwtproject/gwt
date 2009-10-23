@@ -21,3 +21,8 @@ trunk@6434 was merged into this branch, bugfix in HybridServiceServlet
 
 trunk@6437 was merged into this branch, Fixes a couple of build-breaking, checkstyle violations
     svn merge --ignore-ancestry -c 6437 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6451 was merged into this branch
+ Fixes b/2198041, @DefaultLocale("foo") when foo is not in the locale list
+    svn merge --ignore-ancestry -c6451 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

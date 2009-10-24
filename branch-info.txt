@@ -23,6 +23,13 @@ trunk@6437 was merged into this branch, Fixes a couple of build-breaking, checks
     svn merge --ignore-ancestry -c 6437 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
 trunk@6451 was merged into this branch
- Fixes b/2198041, @DefaultLocale("foo") when foo is not in the locale list
+ Fixes @DefaultLocale("foo") when foo is not in the locale list
     svn merge --ignore-ancestry -c6451 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6455:6459 was merged into this branch
+  Fixes a bug in CssProperty where is adds extra space in CSS expressions
+  Fixes JUnitShell to wait indefinitely for BrowserManagerServer to start test
+  Disables a couple of tests in HtmlUnit
+    svn merge --ignore-ancestry -r6455:6459 https://google-web-toolkit.googlecode.com/svn/trunk .
+

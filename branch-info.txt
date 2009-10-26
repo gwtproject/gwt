@@ -33,3 +33,7 @@ trunk@6455:6459 was merged into this branch
   Disables a couple of tests in HtmlUnit
     svn merge --ignore-ancestry -r6455:6459 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6462:6464 was merged into this branch
+  Adds basic test case for SOYC.
+    svn merge --ignore-ancestry -r6462:6464 https://google-web-toolkit.googlecode.com/svn/trunk .
+

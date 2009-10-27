@@ -40,3 +40,7 @@ trunk@6462:6464 was merged into this branch
 trunk@6470 was merged into this branch
   Fix for issue 3374, URL.encodeComponent replaces %20's with +'s
     svn merge --ignore-ancestry -c 6470 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6443 was merged into this branch
+  Updates to use the rebased protobuf library
+    svn merge --ignore-ancestry -c 6443 https://google-web-toolkit.googlecode.com/svn/trunk .

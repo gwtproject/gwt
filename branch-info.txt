@@ -52,3 +52,7 @@ trunk@6479 was merged into this branch
 trunk@6481 was merged into this branch
   Get rid of deprecated MenuItemHTML support
     svn merge --ignore-ancestry -c 6481 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6486 was merged into this branch
+  Trivial fix for issue 4067, UiBinderGenerator is not stable.
+    svn merge --ignore-ancestry -c 6486 https://google-web-toolkit.googlecode.com/svn/trunk .

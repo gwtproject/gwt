@@ -37,3 +37,6 @@ trunk@6462:6464 was merged into this branch
   Adds basic test case for SOYC.
     svn merge --ignore-ancestry -r6462:6464 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6470 was merged into this branch
+  Fix for issue 3374, URL.encodeComponent replaces %20's with +'s
+    svn merge --ignore-ancestry -c 6470 https://google-web-toolkit.googlecode.com/svn/trunk .

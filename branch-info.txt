@@ -44,3 +44,7 @@ trunk@6470 was merged into this branch
 trunk@6443 was merged into this branch
   Updates to use the rebased protobuf library
     svn merge --ignore-ancestry -c 6443 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6479 was merged into this branch
+  This allows multiple source files to be specified for a ui:style
+    svn merge --ignore-ancestry -c 6479 https://google-web-toolkit.googlecode.com/svn/trunk .

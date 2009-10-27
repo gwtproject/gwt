@@ -48,3 +48,7 @@ trunk@6443 was merged into this branch
 trunk@6479 was merged into this branch
   This allows multiple source files to be specified for a ui:style
     svn merge --ignore-ancestry -c 6479 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6481 was merged into this branch
+  Get rid of deprecated MenuItemHTML support
+    svn merge --ignore-ancestry -c 6481 https://google-web-toolkit.googlecode.com/svn/trunk .

@@ -85,3 +85,7 @@ trunk@6515 was merged into this branch
   Bugfix in JavaToJavaScriptCompiler where it assumes PropertyOracle#getSelectionProperty can return null
     svn merge --ignore-ancestry -c 6515 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6517 was merged into this branch
+  Ensure MhtmlClientBundleGenerator#createResourceContext generates unique strong names
+    svn merge --ignore-ancestry -c 6517 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

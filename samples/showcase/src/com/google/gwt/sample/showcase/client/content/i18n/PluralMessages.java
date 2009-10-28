@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2009 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,14 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.i18n.client;
+package com.google.gwt.sample.showcase.client.content.i18n;
 
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
 
 /**
- * Internationalized messages used by {@link MessagesExampleController}.
- * Used to demonstrate plural forms support.
+ * Internationalized messages used by {@link CwPluralFormsExample}. Used to
+ * demonstrate plural forms support.
  */
 @DefaultLocale("en")
 public interface PluralMessages extends Messages {

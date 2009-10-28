@@ -182,7 +182,10 @@ public abstract class CompileStrategy {
         "junit.moduleName", false);
     moduleNameProp.setValue(syntheticModuleName);
 
-    junitShell.maybeCompileForWebMode(syntheticModuleName);
+    strategy.processModule(moduleDef);
+
+    junitShell.maybeCompileForWebMode(syntheticModuleName,
+        JUnitShell.getRemoteUserAgents());
 
     return moduleDef;
   }

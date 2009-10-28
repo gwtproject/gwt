@@ -10,6 +10,12 @@ svn cp -r 6417 https://google-web-toolkit.googlecode.com/svn/trunk \
 
 Merges to this branch:
 
+trunk@6418 was merged into this branch, Add threadCount option in build file
+    svn merge --ignore_ancestry -c 6418 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6425 was merged into this branch, Add compile properties on test methods
+    svn merge --ignore_ancestry -c 6425 https://google-web-toolkit.googlecode.com/svn/trunk .
+
 trunk@6429 was merged into this branch, Bugfix when rewriting static calls with JMultiExpr qualifiers
     svn merge --ignore_ancestry -c 6429 https://google-web-toolkit.googlecode.com/svn/trunk .
 
@@ -22,10 +28,16 @@ trunk@6434 was merged into this branch, bugfix in HybridServiceServlet
 trunk@6437 was merged into this branch, Fixes a couple of build-breaking, checkstyle violations
     svn merge --ignore-ancestry -c 6437 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6445 was merged into this branch, Limit permutations based on user agents
+    svn merge --ignore-ancestry -c 6445 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
 trunk@6451 was merged into this branch
  Fixes @DefaultLocale("foo") when foo is not in the locale list
     svn merge --ignore-ancestry -c6451 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6452 was merged into this branch, Suppress spurious JSNI ref warnings
+    svn merge --ignore-ancestry -c 6452 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
 trunk@6455:6459 was merged into this branch
   Fixes a bug in CssProperty where is adds extra space in CSS expressions
@@ -60,6 +72,10 @@ trunk@6486 was merged into this branch
 trunk@6495 was merged into this branch
   Delete UiBinder's temporary files on exit
     svn merge --ignore-ancestry -c 6495 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6501:6503 was merged into this branch
+  Move Plural Forms example to Showcase and delete I18N sample.
+    svn merge --ignore-ancestry -r6501:6503 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@6504-6506 was merged into this branch
   Improve performance of ClientBundle code generation

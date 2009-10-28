@@ -81,3 +81,7 @@ trunk@6504-6506 was merged into this branch
   Improve performance of ClientBundle code generation
     svn merge --ignore-ancestry -c 6504,6505,6506 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6515 was merged into this branch
+  Bugfix in JavaToJavaScriptCompiler where it assumes PropertyOracle#getSelectionProperty can return null
+    svn merge --ignore-ancestry -c 6515 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

@@ -97,3 +97,6 @@ trunk@6519 was merged into this branch
   Flipping DisclosurePanel image in RTL
     svn merge --ignore-ancestry -c 6519 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6524 was merged into this branch
+  Deprecate panels that have LayoutPanel alternatives
+    svn merge --ignore-ancestry -c 6524 https://google-web-toolkit.googlecode.com/svn/trunk .

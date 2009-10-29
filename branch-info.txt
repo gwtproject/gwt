@@ -105,3 +105,12 @@ trunk@6532 was merged into this branch
   Fixes a very obscure bug in ControlFlowAnalyzer.
     svn merge --ignore-ancestry -c6532 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6472, @6476, @6523, @6536 were merged into this branch
+  Update the collection of tests that are ignored on HtmlUnit to reflect HtmlUnit update to 2.7-snapshot (6472)
+  Updated Htmlunit to HtmlUnit (uppercase U) (6475)
+  Adjust test timeout value based on Batching Strategy (6523)
+  Remove all enqueued JS jobs during a module transition -- HtmlUnit plugin (r6536)
+  svn merge --ignore-ancestry -c 6472 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+  svn merge --ignore-ancestry -c 6476 https://google-web-toolkit.googlecode.com/svn/trunk/ . 
+  svn merge --ignore-ancestry -c 6523 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+  svn merge --ignore-ancestry -c 6536 https://google-web-toolkit.googlecode.com/svn/trunk/ .

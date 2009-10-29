@@ -100,3 +100,8 @@ trunk@6519 was merged into this branch
 trunk@6524 was merged into this branch
   Deprecate panels that have LayoutPanel alternatives
     svn merge --ignore-ancestry -c 6524 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6532 was merged into this branch
+  Fixes a very obscure bug in ControlFlowAnalyzer.
+    svn merge --ignore-ancestry -c6532 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

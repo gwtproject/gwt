@@ -118,3 +118,7 @@ trunk@6472, @6476, @6523, @6536 were merged into this branch
 trunk@6543 was merged into this branch
   Fixes an NPE when a logged exception has a null stack trace as string.
   svn merge --ignore-ancestry -c 6543 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6547 was merged into this branch
+  Fix various error reporting issues
+  svn merge --ignore-ancestry -c 6547 https://google-web-toolkit.googlecode.com/svn/trunk .

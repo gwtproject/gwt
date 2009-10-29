@@ -122,3 +122,7 @@ trunk@6543 was merged into this branch
 trunk@6547 was merged into this branch
   Fix various error reporting issues
   svn merge --ignore-ancestry -c 6547 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6550, 6552 were merged into this branch
+  Move UiBinder test app into user/test
+  svn merge --ignore-ancestry -r 6549:6552 https://google-web-toolkit.googlecode.com/svn/trunk .

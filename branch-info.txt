@@ -131,3 +131,7 @@ trunk@6554, 6555, 6556 were merged into this branch
   uibinder.sample -> uibinder.test, run parser tests, fix XMLElementTestWarnings
   svn merge --ignore-ancestry -r 6552:6556 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6559 was merged into this branch
+  Modified the remote UI protocol to send an initialization message with the client id. 
+  svn merge --ignore-ancestry -c 6559 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

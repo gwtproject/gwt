@@ -126,3 +126,8 @@ trunk@6547 was merged into this branch
 trunk@6550, 6552 were merged into this branch
   Move UiBinder test app into user/test
   svn merge --ignore-ancestry -r 6549:6552 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6554, 6555, 6556 were merged into this branch
+  uibinder.sample -> uibinder.test, run parser tests, fix XMLElementTestWarnings
+  svn merge --ignore-ancestry -r 6552:6556 https://google-web-toolkit.googlecode.com/svn/trunk .
+

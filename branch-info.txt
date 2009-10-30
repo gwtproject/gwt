@@ -139,3 +139,7 @@ trunk@6564 was merged into this branch
   Fixed script permissions for *Creator and benchmarkViewer
   svn merge -c 6564 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6570 was merged into this branch
+  Revert r6456 because it was causing JUnitShell to wait indefinitely.
+  svn merge --ignore-ancestry -c 6570 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

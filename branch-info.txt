@@ -143,6 +143,10 @@ trunk@6570 was merged into this branch
   Revert r6456 because it was causing JUnitShell to wait indefinitely.
   svn merge --ignore-ancestry -c 6570 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
-trunk@6570 was merged into this branch
+trunk@6572 was merged into this branch
   Fixing the UiBinderTestApp
   svn merge --ignore-ancestry -c 6572 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6574 was merged into this branch
+  Added -web option to test.nometa.remote ant target.
+  svn merge --ignore-ancestry -c 6574 https://google-web-toolkit.googlecode.com/svn/trunk .

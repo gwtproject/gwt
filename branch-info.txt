@@ -150,3 +150,8 @@ trunk@6572 was merged into this branch
 trunk@6574 was merged into this branch
   Added -web option to test.nometa.remote ant target.
   svn merge --ignore-ancestry -c 6574 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6576 was merged into this branch
+  Allows test args to be specified per compile type.
+  svn merge --ignore-ancestry -c 6576 https://google-web-toolkit.googlecode.com/svn/trunk .
+

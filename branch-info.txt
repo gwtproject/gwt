@@ -160,3 +160,6 @@ trunk@6578 was merged into this branch with conflicts
   Minor conflicts in Horizontal- and VerticalSplitPanels
   svn merge --ignore-ancestry -c 6578  https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6566 was merged into this branch
+  Improve the error message for 'GWT.create(UiBInder.class)' (as opposed to a subclass of UiBinder).
+  svn merge --ignore-ancestry -c 6566 http://google-web-toolkit.googlecode.com/svn/trunk/ .

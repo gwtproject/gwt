@@ -176,3 +176,6 @@ trunk@6588 was merged into this branch
   Disabling some tests in ImageTest to work around synchronous onload in Chrome.
   svn merge --ignore-ancestry -c 6588 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6589 was merged into this branch
+  First step toward attribute parsers moving to XMLElement, to fix field ref in custom parsers.
+  svn merge --ignore-ancestry -c r6589   https://google-web-toolkit.googlecode.com/svn/trunk .

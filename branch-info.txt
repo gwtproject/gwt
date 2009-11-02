@@ -155,3 +155,8 @@ trunk@6576 was merged into this branch
   Allows test args to be specified per compile type.
   svn merge --ignore-ancestry -c 6576 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6578 was merged into this branch with conflicts
+  Deprecates ImageBundle and updates samples.
+  Minor conflicts in Horizontal- and VerticalSplitPanels
+  svn merge --ignore-ancestry -c 6578  https://google-web-toolkit.googlecode.com/svn/trunk .
+

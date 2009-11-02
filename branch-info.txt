@@ -171,3 +171,8 @@ trunk@6583 was merged into this branch
 trunk@6510 was merged into this branch
   Fixing svn props on many java files where this was missing.
   svn merge --ignore-ancestry -c 6510 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6588 was merged into this branch
+  Disabling some tests in ImageTest to work around synchronous onload in Chrome.
+  svn merge --ignore-ancestry -c 6588 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

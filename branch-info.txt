@@ -168,3 +168,6 @@ trunk@6583 was merged into this branch
   Setting overflow to auto when enabling scrolling.
   svn merge --ignore-ancestry -c 6583 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6510 was merged into this branch
+  Fixing svn props on many java files where this was missing.
+  svn merge --ignore-ancestry -c 6510 http://google-web-toolkit.googlecode.com/svn/trunk/ .

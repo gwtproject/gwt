@@ -233,3 +233,8 @@ trunk@6441 was merged into this branch
 trunk@6580 was merged into this branch
   Implement a -standardsMode flag for junit tests
   svn merge --ignore-ancestry -c 6580 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6625 was merged into this branch
+  Avoid Arrays.copyOf since that was added in JDK1.6.
+    svn merge --ignore-ancestry -c6625 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

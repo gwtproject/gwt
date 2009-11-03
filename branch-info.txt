@@ -213,3 +213,6 @@ trunk@6606 was merged into this branch
   Make ClientBundle and MhtmlResourceContext generators emit stable output.
   svn merge --ignore-ancestry -c 6606 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6611 was merged into this branch
+  Fix accidentally extended timeout in JUnitShell
+  svn merge --ignore-ancestry -c 6611 https://google-web-toolkit.googlecode.com/svn/trunk .

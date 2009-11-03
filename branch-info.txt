@@ -192,3 +192,7 @@ trunk@6592 was merged into this branch
 trunk@6596 was merged into this branch
   Fix DockLayoutPanelParser and StackLayoutPanelParser
   svn merge --ignore-ancestry -c 6596 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6596 was merged into this branch
+  Introduces EnumAttributeParser
+  svn merge --ignore-ancestry -c 6598 https://google-web-toolkit.googlecode.com/svn/trunk .

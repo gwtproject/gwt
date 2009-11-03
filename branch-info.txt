@@ -220,3 +220,8 @@ trunk@6611 was merged into this branch
 trunk@6613 was merged into this branch
   Fix checkstyle warnings
   svn merge --ignore-ancestry -c 6613 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6618 was merged into this branch
+  Support more structured GWT versions.
+    svn merge --ignore-ancestry -c6618 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

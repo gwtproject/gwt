@@ -200,3 +200,7 @@ trunk@6598 was merged into this branch
 trunk@6600 was merged into this branch
   Enable good old VerticalAlignmentConstantParser
   svn merge --ignore-ancestry -c 6600 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6446 was merged into this branch
+  Check for @GwtTransient annotation when checking for transient fields in the RPC subsystem.
+  svn merge --ignore-ancestry -c 6446 http://google-web-toolkit.googlecode.com/svn/trunk/ .

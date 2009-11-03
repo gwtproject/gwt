@@ -225,3 +225,7 @@ trunk@6618 was merged into this branch
   Support more structured GWT versions.
     svn merge --ignore-ancestry -c6618 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6441 was merged into this branch
+  Add a 'sessionId' field to GWT lightweight metrics events
+  svn merge --ignore-ancestry -c 6441 http://google-web-toolkit.googlecode.com/svn/trunk/ .

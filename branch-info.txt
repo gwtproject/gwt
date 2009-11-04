@@ -259,7 +259,11 @@ trunk@6609 was merged into this branch
   Avoid calling overridable methods from constructors to avoid subclassing glitches
   svn merge --ignore-ancestry -c 6609 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
-trunk@642 was merged into this branch
+trunk@6642 was merged into this branch
   Clean up argument handlers for DevMode et al.
   svn merge --ignore-ancestry -c 6642 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6646 was merged into this branch
+  Add names to test targets so we know which one failed.
+  svn merge --ignore-ancestry -c 6646 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 

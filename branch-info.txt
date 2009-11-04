@@ -289,3 +289,8 @@ trunk c6657-c6660 were merged into this branch
   Adds a Throwable unit to JavaResourceBase.
   Renames CompiledClass.getBinaryName() -> CompiledClass.getInternalName().
   svn merge --ignore-ancestry -r6656:6660 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6663 was merged into this branch
+  Fix an ordering problem in SwingTreeLogger.
+    svn merge --ignore-ancestry -c6663 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

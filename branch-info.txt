@@ -282,3 +282,10 @@ trunk@6653 was merged into this branch
 trunk@6655 was merged into this branch
   Introduces JUnitShell argument -testMethodTimeout
   svn merge --ignore-ancestry -c 6655 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk c6657-c6660 were merged into this branch
+  Extracts CompilationStateTestBase from CompilationStateTest to reuse.
+  Better failure messages for UnitTestTreeLogger on collections.
+  Adds a Throwable unit to JavaResourceBase.
+  Renames CompiledClass.getBinaryName() -> CompiledClass.getInternalName().
+  svn merge --ignore-ancestry -r6656:6660 https://google-web-toolkit.googlecode.com/svn/trunk .

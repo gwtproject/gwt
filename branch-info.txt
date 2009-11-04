@@ -311,3 +311,7 @@ trunk@6674 was merged into the branch
   Fix dates that fall into non-existent time ranges due to daylight savings
   svn merge --ignore-ancestry -c 6674 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6643, 6671 were merged into this branch
+  Better error handling in DockLayoutPanelParser, restore XMLElemTest
+  svn merge --ignore-ancestry -c 6643 https://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 6671 https://google-web-toolkit.googlecode.com/svn/trunk .

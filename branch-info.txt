@@ -283,6 +283,10 @@ trunk@6655 was merged into this branch
   Introduces JUnitShell argument -testMethodTimeout
   svn merge --ignore-ancestry -c 6655 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6656 was merged into this branch
+  Disabling another image test associated with issue 862.
+  svn merge --ignore-ancestry -c 6656 https://google-web-toolkit.googlecode.com/svn/trunk .
+
 trunk c6657-c6660 were merged into this branch
   Extracts CompilationStateTestBase from CompilationStateTest to reuse.
   Better failure messages for UnitTestTreeLogger on collections.
@@ -294,3 +298,8 @@ trunk@6663 was merged into this branch
   Fix an ordering problem in SwingTreeLogger.
     svn merge --ignore-ancestry -c6663 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6666 was merged into this branch
+  Increasing timeouts of RPC tests.
+  svn merge --ignore-ancestry -c 6666 https://google-web-toolkit.googlecode.com/svn/trunk .
+

@@ -271,6 +271,10 @@ trunk@6645 was merged into this branch
   Redundant HasText decls. confuse UiBinder
   svn merge --ignore-ancestry -c 6645 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6652 was merged into this branch
+  CompiledClasses now compute local class status from JDT.
+  svn merge --ignore-ancestry -c6652 https://google-web-toolkit.googlecode.com/svn/trunk .
+
 trunk@6653 was merged into this branch
   XMLElement owns parsing
   svn merge --ignore-ancestry -c 6653 https://google-web-toolkit.googlecode.com/svn/trunk .

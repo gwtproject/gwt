@@ -238,3 +238,7 @@ trunk@6625 was merged into this branch
   Avoid Arrays.copyOf since that was added in JDK1.6.
     svn merge --ignore-ancestry -c6625 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6612 was merged into this branch
+  Checkstyle fixes in UiBinder tests
+  svn merge --ignore-ancestry -c r6612 https://google-web-toolkit.googlecode.com/svn/trunk .

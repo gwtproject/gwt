@@ -254,3 +254,7 @@ trunk@6468 was merged into this branch
 trunk@6520 was merged into this branch
   Fix javadoc tag errors
   svn merge --ignore-ancestry -c 6520 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6609 was merged into this branch
+  Avoid calling overridable methods from constructors to avoid subclassing glitches
+  svn merge --ignore-ancestry -c 6609 http://google-web-toolkit.googlecode.com/svn/trunk/ .

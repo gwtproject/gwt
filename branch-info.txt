@@ -274,3 +274,7 @@ trunk@6645 was merged into this branch
 trunk@6653 was merged into this branch
   XMLElement owns parsing
   svn merge --ignore-ancestry -c 6653 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6655 was merged into this branch
+  Introduces JUnitShell argument -testMethodTimeout
+  svn merge --ignore-ancestry -c 6655 https://google-web-toolkit.googlecode.com/svn/trunk .

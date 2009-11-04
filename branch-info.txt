@@ -270,3 +270,7 @@ trunk@6646 was merged into this branch
 trunk@6645 was merged into this branch
   Redundant HasText decls. confuse UiBinder
   svn merge --ignore-ancestry -c 6645 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6653 was merged into this branch
+  XMLElement owns parsing
+  svn merge --ignore-ancestry -c 6653 https://google-web-toolkit.googlecode.com/svn/trunk .

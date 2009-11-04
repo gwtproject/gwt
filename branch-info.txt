@@ -303,3 +303,7 @@ trunk@6666 was merged into this branch
   Increasing timeouts of RPC tests.
   svn merge --ignore-ancestry -c 6666 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6669,6670 was merged into the branch
+  Hosted mode fixes for SingleJsoImpl
+  svn merge --ignore-ancestry -c6669,6670 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

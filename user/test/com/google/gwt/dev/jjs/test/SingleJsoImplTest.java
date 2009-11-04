@@ -19,6 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dev.jjs.test.SingleJsoImplTest.JsoHasInnerJsoType.InnerType;
 import com.google.gwt.dev.jjs.test.jsointfs.JsoInterfaceWithUnreferencedImpl;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.io.IOException;
 
@@ -311,6 +312,10 @@ public class SingleJsoImplTest extends GWTTestCase {
       return "a";
     }
 
+    public String a(boolean overload) {
+      return overload ? "Kaboom!" : "OK";
+    }
+
     public String ex() throws IOException {
       throw new IOException();
     }
@@ -374,6 +379,32 @@ public class SingleJsoImplTest extends GWTTestCase {
     }
   }
 
+  static class JsoUsesGeneric extends JavaScriptObject implements UsesGenerics {
+    public static native <T extends CharSequence> JsoUsesGeneric create() /*-{
+      return {suffix : "42"};
+    }-*/;
+
+    protected JsoUsesGeneric() {
+    }
+
+    public final native <T> String acceptsGeneric(T chars) /*-{
+      return chars + this.suffix;
+    }-*/;
+
+    public final native <T> void callback(AsyncCallback<T> callback, T chars) /*-{
+      callback.@com.google.gwt.user.client.rpc.AsyncCallback::onSuccess(Ljava/lang/Object;)(chars + this.suffix);
+    }-*/;
+
+    /**
+     * What you're seeing here is would be achieved by an unsafe (T) cast and
+     * would break with a ClassCastException if accessed via JsoIsGenericFinal
+     * in normal Java.
+     */
+    public final native <T> T returnsGeneric(String chars) /*-{
+      return chars + this.suffix;
+    }-*/;
+  }
+
   /**
    * Ensure that SingleJsoImpl interfaces can be extended and implemented by
    * regular Java types.
@@ -403,6 +434,8 @@ public class SingleJsoImplTest extends GWTTestCase {
   interface Simple {
     String a();
 
+    String a(boolean overload);
+
     String ex() throws IOException;
 
     String rte();
@@ -420,7 +453,6 @@ public class SingleJsoImplTest extends GWTTestCase {
   interface SimpleOnlyJavaInterface {
     String simpleOnlyJava();
   }
-
   interface Tag {
   }
 
@@ -451,6 +483,14 @@ public class SingleJsoImplTest extends GWTTestCase {
     String[][][] returnString3Array();
 
     String[] returnStringArray();
+  }
+
+  interface UsesGenerics {
+    <T extends Object> String acceptsGeneric(T chars);
+
+    <T> void callback(AsyncCallback<T> callback, T chars);
+
+    <T> T returnsGeneric(String chars);
   }
 
   private static native JsoAdder makeAdder(int offset) /*-{
@@ -582,6 +622,20 @@ public class SingleJsoImplTest extends GWTTestCase {
     assertNotSame(Adder.DIFFERENT_OBJECT, Adder.SAME_OBJECT);
   }
 
+  public void testGenerics() {
+    UsesGenerics j = JsoUsesGeneric.create();
+    assertEquals("Hello42", j.acceptsGeneric("Hello"));
+    assertEquals("Hello42", j.returnsGeneric("Hello"));
+    j.callback(new AsyncCallback<CharSequence>() {
+      public void onFailure(Throwable caught) {
+      }
+
+      public void onSuccess(CharSequence result) {
+        assertEquals("Hello42", result);
+      }
+    }, "Hello");
+  }
+
   @SuppressWarnings("cast")
   public void testSimpleCase() {
     {
@@ -589,6 +643,7 @@ public class SingleJsoImplTest extends GWTTestCase {
       assertTrue(asJso instanceof Object);
       assertTrue(asJso instanceof Simple);
       assertEquals("a", asJso.a());
+      assertEquals("OK", asJso.a(false));
       try {
         asJso.ex();
         fail("Should have thrown IOException");
@@ -609,7 +664,9 @@ public class SingleJsoImplTest extends GWTTestCase {
       assertTrue(asSimple instanceof JavaScriptObject);
       assertTrue(asSimple instanceof JsoSimple);
       assertEquals("a", asSimple.a());
+      assertEquals("OK", asSimple.a(false));
       assertEquals("a", ((JsoSimple) asSimple).a());
+      assertEquals("OK", ((JsoSimple) asSimple).a(false));
       try {
         asSimple.ex();
         fail("Should have thrown IOException");
@@ -635,6 +692,8 @@ public class SingleJsoImplTest extends GWTTestCase {
       assertTrue(asObject instanceof Simple);
       assertEquals("a", ((Simple) asObject).a());
       assertEquals("a", ((JsoSimple) asObject).a());
+      assertEquals("OK", ((Simple) asObject).a(false));
+      assertEquals("OK", ((JsoSimple) asObject).a(false));
 
       // Test a cross-cast that's normally not allowed by the type system
       assertTrue(asObject instanceof JsoRandom);

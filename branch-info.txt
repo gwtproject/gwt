@@ -267,3 +267,6 @@ trunk@6646 was merged into this branch
   Add names to test targets so we know which one failed.
   svn merge --ignore-ancestry -c 6646 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6645 was merged into this branch
+  Redundant HasText decls. confuse UiBinder
+  svn merge --ignore-ancestry -c 6645 https://google-web-toolkit.googlecode.com/svn/trunk .

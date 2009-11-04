@@ -236,6 +236,7 @@ public class HtmlUnitSessionHandler extends SessionHandler {
         result));
   }
 
+  @SuppressWarnings("unused")
   public ExceptionOrReturnValue invokeSpecial(BrowserChannel channel,
       SpecialDispatchId specialDispatchId, Value[] args) {
     throw new UnsupportedOperationException(

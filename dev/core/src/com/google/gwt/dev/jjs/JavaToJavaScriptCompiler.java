@@ -340,7 +340,7 @@ public class JavaToJavaScriptCompiler {
       }
       // if user agent is known or ie6, split overly large blocks
       boolean splitBlocks = userAgentProperty == null
-          || (userAgentProperty != null && "ie6".equals(userAgentProperty.getCurrentValue()));
+          || ("ie6".equals(userAgentProperty.getCurrentValue()));
 
       if (splitBlocks) {
         JsIEBlockSizeVisitor.exec(jsProgram);
@@ -694,7 +694,7 @@ public class JavaToJavaScriptCompiler {
   }
 
   private static MultipleDependencyGraphRecorder chooseDependencyRecorder(
-      boolean soycEnabled, OutputStream out) throws IOException {
+      boolean soycEnabled, OutputStream out) {
     MultipleDependencyGraphRecorder dependencyRecorder = CodeSplitter.NULL_RECORDER;
     if (soycEnabled) {
       dependencyRecorder = new DependencyRecorder(out);

@@ -274,10 +274,17 @@ public abstract class AbstractClientBundleGenerator extends Generator {
       TreeLogger logger, GeneratorContext context, JClassType resourceBundleType)
       throws UnableToCompleteException;
 
+  // FIXME - document params
   /**
    * Provides a hook for subtypes to add additional fields or requirements to
    * the bundle.
    * 
+   * @param logger
+   * @param contect
+   * @param context
+   * @param fields
+   * @param requirements
+   *
    * @throws UnableToCompleteException if an error occurs.
    */
   protected void doAddFieldsAndRequirements(TreeLogger logger,
@@ -433,7 +440,7 @@ public abstract class AbstractClientBundleGenerator extends Generator {
 
       try {
         Class<? extends ResourceGenerator> clazz = findResourceGenerator(
-            logger, typeOracle, m);
+            logger, m);
         List<JMethod> generatorMethods;
         if (toReturn.containsKey(clazz)) {
           generatorMethods = toReturn.get(clazz);
@@ -460,8 +467,7 @@ public abstract class AbstractClientBundleGenerator extends Generator {
    * provide an implementation of the method.
    */
   private Class<? extends ResourceGenerator> findResourceGenerator(
-      TreeLogger logger, TypeOracle typeOracle, JMethod method)
-      throws UnableToCompleteException {
+      TreeLogger logger, JMethod method) throws UnableToCompleteException {
     JClassType resourceType = method.getReturnType().isClassOrInterface();
     assert resourceType != null;
 
@@ -502,6 +508,8 @@ public abstract class AbstractClientBundleGenerator extends Generator {
   /**
    * Given a user-defined type name, determine the type name for the generated
    * class based on accumulated requirements.
+   * 
+   * @throws UnableToCompleteException if an error occurs.
    */
   private String generateSimpleSourceName(TreeLogger logger,
       ResourceContext context, RequirementsImpl requirements)
@@ -599,6 +607,15 @@ public abstract class AbstractClientBundleGenerator extends Generator {
     throw new UnableToCompleteException();
   }
 
+  // FIXME - document
+  /**
+   * @param logger
+   * @param createdClassName
+   * @param sw
+   * @param taskList
+   * 
+   * @throws UnableToCompleteException if an error occurs
+   */
   private void writeMapMethods(TreeLogger logger, String createdClassName,
       SourceWriter sw,
       Map<Class<? extends ResourceGenerator>, List<JMethod>> taskList)

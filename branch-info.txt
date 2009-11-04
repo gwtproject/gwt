@@ -246,3 +246,7 @@ trunk@6612 was merged into this branch
 trunk@6632, 6633 were merged into this branch
   Make the alignment parsers field ref friendly, Makes User depend upon UiBinder
   svn merge --ignore-ancestry -r 6631:6633 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6468 was merged into this branch
+  Fix warnings
+  svn merge --ignore-ancestry -c 6468 http://google-web-toolkit.googlecode.com/svn/trunk/ .

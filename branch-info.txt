@@ -250,3 +250,7 @@ trunk@6632, 6633 were merged into this branch
 trunk@6468 was merged into this branch
   Fix warnings
   svn merge --ignore-ancestry -c 6468 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6520 was merged into this branch
+  Fix javadoc tag errors
+  svn merge --ignore-ancestry -c 6520 http://google-web-toolkit.googlecode.com/svn/trunk/ .

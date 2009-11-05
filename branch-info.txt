@@ -319,3 +319,7 @@ trunk@6643, 6671 were merged into this branch
 trunk@6684 was merged into this branch
   Make UiBinderTest#testCustomButtonParser work on IE, fix build
   svn merge --ignore-ancestry -c r6684 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6687 was merged into this branch
+  Adds the infrastructure to re-run a test, if it failed. Useful for HtmlUnit which can be flaky sometimes. 
+  svn merge --ignore-ancestry -c r6687 https://google-web-toolkit.googlecode.com/svn/trunk .

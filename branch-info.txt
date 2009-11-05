@@ -363,7 +363,18 @@ trunk@6616 was merged into this branch
   Clarify JsniCollector.SourceCache comment
   svn merge --ignore-ancestry -c 6616 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+
 trunk@6707 was merged into this branch
   Show which browser failed when a browser dies a mysterious death.
   svn merge --ignore-ancestry -c r6707 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6696-6702 were merged into this branch
+  Give transient generated units a real source location & precompute hash while source is available
+  Slick trick with CompiledClass source location allows a much looser coupling of compilation unit validation code
+  Looser coupling for ArtificialRescueChecker
+  @Deprecate Resource.getURL() which isn't generally safe, and removes all overrides
+  Removing lots of old, unneeded code from DevMode hierarchy
+  TypeOracle.sort methods should be static
+  ModuleContext should not create a zillion TypeOracles
+  svn merge --ignore-ancestry -r6695:6702 https://google-web-toolkit.googlecode.com/svn/trunk .
 

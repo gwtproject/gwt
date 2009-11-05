@@ -335,3 +335,10 @@ trunk@6691 was merged into this branch
 
     svn merge --ignore-ancestry -c6691 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6693 was merged into this branch
+  Treat @DefaultLocale as equivalent to "default" when determining preference
+  order.
+
+    svn merge --ignore-ancestry -c6693 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

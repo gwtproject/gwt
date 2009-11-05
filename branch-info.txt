@@ -315,3 +315,7 @@ trunk@6643, 6671 were merged into this branch
   Better error handling in DockLayoutPanelParser, restore XMLElemTest
   svn merge --ignore-ancestry -c 6643 https://google-web-toolkit.googlecode.com/svn/trunk .
   svn merge --ignore-ancestry -c 6671 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6684 was merged into this branch
+  Make UiBinderTest#testCustomButtonParser work on IE, fix build
+  svn merge --ignore-ancestry -c r6684 https://google-web-toolkit.googlecode.com/svn/trunk .

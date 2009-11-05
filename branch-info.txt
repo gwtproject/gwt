@@ -358,3 +358,7 @@ trunk@6460 was merged into this branch
 trunk@6514 was merged into this branch
   Code cleanup forCompositeTreeLogger, AbstractTreeLogger
   svn merge --ignore-ancestry -c 6514 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6616 was merged into this branch
+  Clarify JsniCollector.SourceCache comment
+  svn merge --ignore-ancestry -c 6616 https://google-web-toolkit.googlecode.com/svn/trunk .

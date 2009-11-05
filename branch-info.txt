@@ -323,3 +323,8 @@ trunk@6684 was merged into this branch
 trunk@6687 was merged into this branch
   Adds the infrastructure to re-run a test, if it failed. Useful for HtmlUnit which can be flaky sometimes. 
   svn merge --ignore-ancestry -c r6687 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6689 was merged into this branch
+  Adds the remote browser id to JUnitShell output even if there is only one.
+  svn merge --ignore-ancestry -c r6689 https://google-web-toolkit.googlecode.com/svn/trunk .
+

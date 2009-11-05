@@ -380,3 +380,7 @@ trunk@6696-6702 were merged into this branch
 trunk@6513 was merged into this branch
   Remove two unused imports
   svn merge --ignore-ancestry -c 6513 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6714 was merged into this branch
+  Fix DockLayoutPanelParser bad code gen
+  svn merge --ignore-ancestry -c r6714 https://google-web-toolkit.googlecode.com/svn/trunk .

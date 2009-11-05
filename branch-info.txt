@@ -362,3 +362,8 @@ trunk@6514 was merged into this branch
 trunk@6616 was merged into this branch
   Clarify JsniCollector.SourceCache comment
   svn merge --ignore-ancestry -c 6616 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6707 was merged into this branch
+  Show which browser failed when a browser dies a mysterious death.
+  svn merge --ignore-ancestry -c r6707 https://google-web-toolkit.googlecode.com/svn/trunk .
+

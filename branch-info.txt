@@ -346,3 +346,7 @@ trunk@6693 was merged into this branch
 
     svn merge --ignore-ancestry -c6693 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6483 was merged into this branch
+  Use 'devMode' instead of 'hosted' in the ant files for the samples
+  svn merge --ignore-ancestry -c r6483 https://google-web-toolkit.googlecode.com/svn/trunk .

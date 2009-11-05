@@ -349,9 +349,12 @@ trunk@6693 was merged into this branch
 
 trunk@6483 was merged into this branch
   Use 'devMode' instead of 'hosted' in the ant files for the samples
-  svn merge --ignore-ancestry -c r6483 https://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 6483 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@6460 was merged into this branch
   Prevent parallel javac compiles when running tests in parallel.
   svn merge --ignore-ancestry -c r6460 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6514 was merged into this branch
+  Code cleanup forCompositeTreeLogger, AbstractTreeLogger
+  svn merge --ignore-ancestry -c 6514 https://google-web-toolkit.googlecode.com/svn/trunk .

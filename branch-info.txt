@@ -328,3 +328,10 @@ trunk@6689 was merged into this branch
   Adds the remote browser id to JUnitShell output even if there is only one.
   svn merge --ignore-ancestry -c r6689 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6691 was merged into this branch
+  Add various ways of launching a browser for HelpInfo links, add support for
+  changing the prefix for those links and better formatting of them, cleanup
+  comments.
+
+    svn merge --ignore-ancestry -c6691 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

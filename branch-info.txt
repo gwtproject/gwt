@@ -115,6 +115,10 @@ trunk@6472, @6476, @6523, @6536 were merged into this branch
   svn merge --ignore-ancestry -c 6523 https://google-web-toolkit.googlecode.com/svn/trunk/ .
   svn merge --ignore-ancestry -c 6536 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6450 was merged into this branch
+  Cleans up SOYC options
+  svn merge --ignore-ancestry -c 6450 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
 trunk@6543 was merged into this branch
   Fixes an NPE when a logged exception has a null stack trace as string.
   svn merge --ignore-ancestry -c 6543 http://google-web-toolkit.googlecode.com/svn/trunk/ .

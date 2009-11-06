@@ -388,3 +388,7 @@ trunk@6714 was merged into this branch
 trunk@6714 was merged into this branch
   Centralize a few standard MockJavaResources
   svn merge --ignore-ancestry -c r6716 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6718 was merged into this branch
+  Don't log UnableToCompleteException stack traces
+  svn merge --ignore-ancestry -c 6718 https://google-web-toolkit.googlecode.com/svn/trunk .

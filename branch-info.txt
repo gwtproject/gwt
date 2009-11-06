@@ -400,3 +400,7 @@ trunk@6720 was merged into this branch
 trunk@6722 was merged into this branch
   Send UiBinder's xml logging to the right place
   svn merge --ignore-ancestry -c 6722 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6546 was merged into this branch
+  Fixes an overly long filename in a compile report
+  svn merge --ignore-ancestry -c 6546 https://google-web-toolkit.googlecode.com/svn/trunk .

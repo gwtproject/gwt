@@ -417,3 +417,7 @@ trunk@6734 was merged into this branch
    Adds a -Xtries command line argument. 
    svn merge --ignore-ancestry -c 6734 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6721 was merged into this branch
+  Fix GenerateCssAst hosted-mode refresh behavior
+  svn merge --ignore-ancestry -c 6721 https://google-web-toolkit.googlecode.com/svn/trunk .
+

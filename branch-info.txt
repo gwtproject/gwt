@@ -392,3 +392,7 @@ trunk@6714 was merged into this branch
 trunk@6718 was merged into this branch
   Don't log UnableToCompleteException stack traces
   svn merge --ignore-ancestry -c 6718 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6718 was merged into this branch
+  Move xhtml.ent to its new home
+  svn merge --ignore-ancestry -c 6720 https://google-web-toolkit.googlecode.com/svn/trunk .

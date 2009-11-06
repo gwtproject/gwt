@@ -438,3 +438,7 @@ trunk@6746 was merged into this branch
 
     svn merge --ignore-ancestry -c6746 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6743 was merged into this branch
+  Reverts tweaks to retry logic due to broken tests.
+  svn merge --ignore-ancestry -c 6747 https://google-web-toolkit.googlecode.com/svn/trunk .

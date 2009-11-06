@@ -425,3 +425,7 @@ trunk@5569,6736 was merged into this branch
   Enhance JsStaticEval to handle addition/concatenation.
   svn merge --ignore-ancestry -c6569,6736 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6739 was merged into this branch
+  Do not attempt to re-run the test if an exception is of type/sub-type java.lang.Error 
+  svn merge --ignore-ancestry -c6739 https://google-web-toolkit.googlecode.com/svn/trunk .
+

@@ -408,3 +408,7 @@ trunk@6546 was merged into this branch
 trunk@6730 was merged into this branch
    Adds the needsAttention flag to the remote UI protocol.
    svn merge --ignore-ancestry -c 6730 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6732 was merged into this branch
+   Change JUnit -standardsMode flag to -XstandardsMode and mark it as experimental and undocumented.
+   svn merge --ignore-ancestry -c 6732 http://google-web-toolkit.googlecode.com/svn/trunk/ .

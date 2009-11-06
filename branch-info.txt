@@ -429,3 +429,7 @@ trunk@6739 was merged into this branch
   Do not attempt to re-run the test if an exception is of type/sub-type java.lang.Error 
   svn merge --ignore-ancestry -c6739 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6743 was merged into this branch
+  Fixed a breaking test. 
+  svn merge --ignore-ancestry -c6743 https://google-web-toolkit.googlecode.com/svn/trunk .
+

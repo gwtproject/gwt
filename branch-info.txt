@@ -404,3 +404,7 @@ trunk@6722 was merged into this branch
 trunk@6546 was merged into this branch
   Fixes an overly long filename in a compile report
   svn merge --ignore-ancestry -c 6546 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6730 was merged into this branch
+   Adds the needsAttention flag to the remote UI protocol.
+   svn merge --ignore-ancestry -c 6730 http://google-web-toolkit.googlecode.com/svn/trunk/ .

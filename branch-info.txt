@@ -450,3 +450,7 @@ trunk@6751 was merged into this branch
 trunk@6750 was merged into this branch
   Makes UiBinder able to deal with mixed content in ui:msg
   svn merge --ignore-ancestry -c 6750 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6753 was merged into this branch
+  finish isolating concrete AttributeParser implementations from the rest of the code base
+  svn merge --ignore-ancestry -c 6753 https://google-web-toolkit.googlecode.com/svn/trunk .

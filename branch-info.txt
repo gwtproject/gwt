@@ -446,3 +446,7 @@ trunk@6743 was merged into this branch
 trunk@6751 was merged into this branch
   Re-introduces 6743 and a small patch.
   svn merge --ignore-ancestry -c 6751 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6750 was merged into this branch
+  Makes UiBinder able to deal with mixed content in ui:msg
+  svn merge --ignore-ancestry -c 6750 https://google-web-toolkit.googlecode.com/svn/trunk .

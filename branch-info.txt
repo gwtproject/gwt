@@ -454,3 +454,8 @@ trunk@6750 was merged into this branch
 trunk@6753 was merged into this branch
   finish isolating concrete AttributeParser implementations from the rest of the code base
   svn merge --ignore-ancestry -c 6753 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6762 was merged into this branch
+   Changes to the Message wire format
+   svn merge --ignore-ancestry -c 6762 https://google-web-toolkit.googlecode.com/svn/trunk .
+

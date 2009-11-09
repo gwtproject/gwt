@@ -459,3 +459,7 @@ trunk@6762 was merged into this branch
    Changes to the Message wire format
    svn merge --ignore-ancestry -c 6762 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6767 was merged into this branch
+   Make Server and Main TreeLoggers log to Console when using RemoteUI 
+   svn merge --ignore-ancestry -c 6767 https://google-web-toolkit.googlecode.com/svn/trunk .
+

@@ -471,3 +471,6 @@ trunk@6772 was merged into this branch
    Remove an outdated reference to the compile/browse button
    svn merge --ignore-ancestry -c 6772 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6774 was merged into this branch
+   Hello DialogBoxParser, stricter parsing
+   svn merge --ignore-ancestry -c 6774 https://google-web-toolkit.googlecode.com/svn/trunk .

@@ -474,3 +474,7 @@ trunk@6772 was merged into this branch
 trunk@6774 was merged into this branch
    Hello DialogBoxParser, stricter parsing
    svn merge --ignore-ancestry -c 6774 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6774 was merged into this branch
+  Comment tweaks on xhtml.ent
+  svn merge --ignore-ancestry -c 6776 https://google-web-toolkit.googlecode.com/svn/trunk .

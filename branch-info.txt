@@ -504,3 +504,8 @@ use the context classloader, which contains all user data, because that's the
 same classloader that Generators run in.  There is also no need to resolve them
 since they may be binary-only.
   for i in 6782 6783 6784 6785 ; do svn merge --ignore-ancestry -c $i https://google-web-toolkit.googlecode.com/svn/trunk .; done
+
+trunk@6809 was merged into this branch
+ Fixes custom PluralRule classes that are nested
+    svn merge --ignore-ancestry -c6809 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

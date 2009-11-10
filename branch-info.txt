@@ -523,3 +523,9 @@ trunk@6814,6815 was merged into this branch
   Fix null.nullMethod() in DynaTable sample app due to null-tightened field
   svn merge --ignore-ancestry -c6814,6815  https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6810,6813 were merged into this branch
+  keep Ie7 users from paying the AlphaImageLoader penalty
+  proper behavior of g:header and g:customHeader in StackLayoutPanelparser
+  layout panel units default to PX (instead of NPE, ahem)
+  svn merge --ignore-ancestry -c 6810 https://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 6813 https://google-web-toolkit.googlecode.com/svn/trunk .

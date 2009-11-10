@@ -482,3 +482,7 @@ trunk@6774 was merged into this branch
 trunk@6793 was merged into this branch
   svn merge -c 6793 https://google-web-toolkit.googlecode.com/svn/trunk .
   
+trunk@6796 was merged into this branch
+  svn merge -c 6796 https://google-web-toolkit.googlecode.com/svn/trunk .
+  
+  

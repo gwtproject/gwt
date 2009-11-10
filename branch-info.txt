@@ -509,3 +509,12 @@ trunk@6809 was merged into this branch
  Fixes custom PluralRule classes that are nested
     svn merge --ignore-ancestry -c6809 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6789,6790,6791 were merged into this branch
+  -- Shuffles some test classes around; adds missing tests to
+JavaCompilationSuite convenience test suite.
+  -- Model Enum.valueOf and Enum.values in TypeOracle since they are an
+implicit part of the language.
+  -- Generators now exist per-StandardGeneratorContext to avoid concurrency
+issues.
+  for i in 6789 6790 6791 ; do svn merge --ignore-ancestry -c $i https://google-web-toolkit.googlecode.com/svn/trunk .; done

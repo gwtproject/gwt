@@ -2534,6 +2534,12 @@ public class GenerateJavaAST {
           }
 
           currentClass.addArtificialRescue((JNode) node);
+          if (node instanceof JField) {
+            JField field = (JField) node;
+            if (!field.isFinal()) {
+              field.setVolatile();
+            }
+          }
         }
       }
     }

@@ -518,3 +518,8 @@ implicit part of the language.
   -- Generators now exist per-StandardGeneratorContext to avoid concurrency
 issues.
   for i in 6789 6790 6791 ; do svn merge --ignore-ancestry -c $i https://google-web-toolkit.googlecode.com/svn/trunk .; done
+
+trunk@6814,6815 was merged into this branch
+  Fix null.nullMethod() in DynaTable sample app due to null-tightened field
+  svn merge --ignore-ancestry -c6814,6815  https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

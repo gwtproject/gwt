@@ -492,3 +492,15 @@ trunk@6804 was merged into this branch
    Fixes a problem where the DevMode server was hanging when the remote UI was shut down in an unclean fashion
    svn merge --ignore-ancestry -c 6804 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6782,6783,6784,6785 were merged into this branch
+  -- Format ApiCompatibilityChecker
+  -- Big refactoring of test code and api-checker to remove dependencies on
+CompilationUnit. This is in preparation for more refactoring, which will make
+CompilationUnit stateless outputs rather than stateful inputs/outputs.
+  -- TypeOracle now builds from bytecode instead of JDT structures (part of
+Instant Hosted Mode work).
+  -- Simplify resolution of annotations in TypeOracle. Annotaions must always
+use the context classloader, which contains all user data, because that's the
+same classloader that Generators run in.  There is also no need to resolve them
+since they may be binary-only.
+  for i in 6782 6783 6784 6785 ; do svn merge --ignore-ancestry -c $i https://google-web-toolkit.googlecode.com/svn/trunk .; done

@@ -540,4 +540,7 @@ trunk@6836 was merged into this branch
     svn merge --ignore-ancestry -c6836 \
       http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6839 was merged into this branch
+  Disable MHTML support for GWT 2.0, there are too many sharp edges.
+  svn merge --ignore-ancestry -c6839 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 

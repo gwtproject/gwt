@@ -559,3 +559,6 @@ trunk c6829-c6835 were merged into this branch
     svn merge --ignore-ancestry -r6828:6835 \
       https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6842 was merged into this branch
+  Fix external issue 4140: Javascript deserialization error on JPA-annotated classes
+  svn merge --ignore-ancestry -c6842 https://google-web-toolkit.googlecode.com/svn/trunk/ .

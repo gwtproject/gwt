@@ -562,3 +562,7 @@ trunk c6829-c6835 were merged into this branch
 trunk@6842 was merged into this branch
   Fix external issue 4140: Javascript deserialization error on JPA-annotated classes
   svn merge --ignore-ancestry -c6842 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6845 was merged into this branch
+  Fixes a bug where using GWT 2.0 tip, and GAE 1.2.6 blows up with a Bus error.  It is not entirely clear why this happens but the JVM shutsdown with no real feedback.
+  svn merge --ignore-ancestry -c6845 https://google-web-toolkit.googlecode.com/svn/trunk/ .

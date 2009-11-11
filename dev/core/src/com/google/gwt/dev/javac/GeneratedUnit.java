@@ -18,31 +18,14 @@ package com.google.gwt.dev.javac;
 /**
  * A generated Java compilation unit.
  */
-public class GeneratedUnit {
+public interface GeneratedUnit {
+  long creationTime();
 
-  public long creationTime() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  String getSource();
 
-  public String getSource() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  String getStrongHash();
 
-  public String getStrongHash() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  String getTypeName();
 
-  public String getTypeName() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public String optionalFileLocation() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
+  String optionalFileLocation();
 }

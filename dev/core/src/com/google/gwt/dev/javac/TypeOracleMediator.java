@@ -53,10 +53,9 @@ import com.google.gwt.dev.javac.asm.ResolveMethodSignature;
 import com.google.gwt.dev.javac.asm.ResolveTypeSignature;
 import com.google.gwt.dev.javac.asm.CollectAnnotationData.AnnotationData;
 import com.google.gwt.dev.javac.asm.CollectClassData.AnnotationEnum;
-import com.google.gwt.dev.javac.impl.Shared;
-import com.google.gwt.dev.javac.impl.SourceFileCompilationUnit;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Name;
+import com.google.gwt.dev.util.PerfLogger;
 import com.google.gwt.dev.util.Name.InternalName;
 
 import java.io.PrintWriter;
@@ -275,21 +274,14 @@ public class TypeOracleMediator {
    * Adds new units to an existing TypeOracle.
    */
   public void addNewUnits(TreeLogger logger, Collection<CompilationUnit> units) {
-    // First collect all class data and resurrect graveyard types.
+    PerfLogger.start("TypeOracleMediator.addNewUnits");
+    // First collect all class data.
     classMap = new HashMap<String, CollectClassData>();
     for (CompilationUnit unit : units) {
-      if (unit.getState() == CompilationUnit.State.GRAVEYARD) {
-        for (CompiledClass compiledClass : unit.getCompiledClasses()) {
-          JRealClassType type = compiledClass.getRealClassType();
-          if (type != null) {
-            type.resurrect();
-          }
-        }
-        continue;
-      } else if (!unit.isCompiled()) {
+      if (!unit.isCompiled()) {
         continue;
       }
-      Set<CompiledClass> compiledClasses = unit.getCompiledClasses();
+      Collection<CompiledClass> compiledClasses = unit.getCompiledClasses();
       for (CompiledClass compiledClass : compiledClasses) {
         CollectClassData cv = processClass(compiledClass);
         // skip any classes that can't be referenced by name outside of
@@ -307,7 +299,7 @@ public class TypeOracleMediator {
       if (!unit.isCompiled()) {
         continue;
       }
-      Set<CompiledClass> compiledClasses = unit.getCompiledClasses();
+      Collection<CompiledClass> compiledClasses = unit.getCompiledClasses();
       for (CompiledClass compiledClass : compiledClasses) {
         String internalName = compiledClass.getInternalName();
         CollectClassData cv = classMap.get(internalName);
@@ -315,13 +307,13 @@ public class TypeOracleMediator {
           // ignore classes that were skipped earlier
           continue;
         }
-        JRealClassType type = compiledClass.getRealClassType();
-        if (type == null) {
-          type = createType(compiledClass, unresolvedTypes);
-        } else {
-          resolved.add(type);
-        }
+        JRealClassType type = createType(compiledClass, unresolvedTypes);
         if (type != null) {
+          if (unit instanceof SourceFileCompilationUnit) {
+            SourceFileCompilationUnit sourceUnit = (SourceFileCompilationUnit) unit;
+            Resource sourceFile = sourceUnit.getSourceFile();
+            typeOracle.addSourceReference(type, sourceFile);
+          }
           binaryMapper.put(internalName, type);
           classMapType.put(type, cv);
         }
@@ -351,22 +343,10 @@ public class TypeOracleMediator {
 
     typeOracle.finish();
 
-    // save source references
-    for (CompilationUnit unit : units) {
-      if (unit.isCompiled() && unit instanceof SourceFileCompilationUnit) {
-        SourceFileCompilationUnit sourceUnit = (SourceFileCompilationUnit) unit;
-        Resource sourceFile = sourceUnit.getSourceFile();
-        Set<CompiledClass> compiledClasses = unit.getCompiledClasses();
-        for (CompiledClass compiledClass : compiledClasses) {
-          JRealClassType type = compiledClass.getRealClassType();
-          typeOracle.addSourceReference(type, sourceFile);
-        }
-      }
-    }
-
     // no longer needed
     classMap = null;
     classMapType = null;
+    PerfLogger.end();
   }
 
   public Map<String, JRealClassType> getBinaryMapper() {
@@ -375,16 +355,6 @@ public class TypeOracleMediator {
 
   public TypeOracle getTypeOracle() {
     return typeOracle;
-  }
-
-  /**
-   * Full refresh based on new units.
-   */
-  public void refresh(TreeLogger logger, Collection<CompilationUnit> units) {
-    binaryMapper.clear();
-    typeOracle.reset();
-    resolved.clear();
-    addNewUnits(logger, units);
   }
 
   private Annotation createAnnotation(TreeLogger logger,
@@ -467,22 +437,19 @@ public class TypeOracleMediator {
 
   private JRealClassType createType(CompiledClass compiledClass,
       Set<JRealClassType> unresolvedTypes) {
-    JRealClassType realClassType = compiledClass.getRealClassType();
-    if (realClassType == null) {
-      CollectClassData classData = classMap.get(compiledClass.getInternalName());
-      String outerClassName = classData.getOuterClass();
-      CollectClassData enclosingClassData = null;
-      if (outerClassName != null) {
-        enclosingClassData = classMap.get(outerClassName);
-        if (enclosingClassData == null) {
-          // if our enclosing class was skipped, skip this one too
-          return null;
-        }
+    CollectClassData classData = classMap.get(compiledClass.getInternalName());
+    String outerClassName = classData.getOuterClass();
+    CollectClassData enclosingClassData = null;
+    if (outerClassName != null) {
+      enclosingClassData = classMap.get(outerClassName);
+      if (enclosingClassData == null) {
+        // if our enclosing class was skipped, skip this one too
+        return null;
       }
-      realClassType = createType(compiledClass, classData, enclosingClassData);
-      unresolvedTypes.add(realClassType);
-      compiledClass.setRealClassType(realClassType);
     }
+    JRealClassType realClassType = createType(compiledClass, classData,
+        enclosingClassData);
+    unresolvedTypes.add(realClassType);
     return realClassType;
   }
 

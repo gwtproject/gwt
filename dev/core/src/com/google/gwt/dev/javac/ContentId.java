@@ -13,21 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.javac.impl;
+package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.javac.Shared;
+import com.google.gwt.dev.util.StringKey;
 
-public class StaticJavaResource extends MockResource {
+/**
+ * A key that encapsulates one revision of the source code content for a type.
+ */
+class ContentId extends StringKey {
 
-  private final CharSequence source;
-
-  public StaticJavaResource(String typeName, CharSequence source) {
-    super(Shared.toPath(typeName));
-    this.source = source;
+  public ContentId(String sourceTypeName, String strongHash) {
+    super(sourceTypeName + ':' + strongHash);
   }
 
-  @Override
-  protected CharSequence getContent() {
-    return source;
-  }
 }

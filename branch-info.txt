@@ -119,6 +119,10 @@ trunk@6450 was merged into this branch
   Cleans up SOYC options
   svn merge --ignore-ancestry -c 6450 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6511 was merged into this branch
+  IO improvements to DiskCache
+  svn merge --ignore-ancestry -c 6511 -r6828:6835 https://google-web-toolkit.googlecode.com/svn/trunk .
+
 trunk@6543 was merged into this branch
   Fixes an NPE when a logged exception has a null stack trace as string.
   svn merge --ignore-ancestry -c 6543 http://google-web-toolkit.googlecode.com/svn/trunk/ .
@@ -543,4 +547,15 @@ trunk@6836 was merged into this branch
 trunk@6839 was merged into this branch
   Disable MHTML support for GWT 2.0, there are too many sharp edges.
   svn merge --ignore-ancestry -c6839 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk c6829-c6835 were merged into this branch
+  Remove spammy logging from SoycTest.
+  Adding some useful PerfLogger messages.
+  Moving several files from com.google.gwt.dev.javac.impl -> com.google.gwt.dev.javac
+  Format GenerateJavaAST
+  Refactors JSNI parsing/error reporting from GenerateJavaAST to JsniCollector.
+  Major refactor of CompilationState and associated classes to fix concurrent refresh problems.
+  r6834 broke the -gen option since GeneratedUnitWithFile now requires the DiskCache to be available.
+    svn merge --ignore-ancestry -r6828:6835 \
+      https://google-web-toolkit.googlecode.com/svn/trunk .
 

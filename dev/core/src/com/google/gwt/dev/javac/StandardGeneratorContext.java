@@ -27,20 +27,19 @@ import com.google.gwt.core.ext.linker.impl.StandardGeneratedResource;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.cfg.ModuleDef;
-import com.google.gwt.dev.javac.impl.FileCompilationUnit;
-import com.google.gwt.dev.javac.impl.Shared;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
+import com.google.gwt.dev.util.PerfLogger;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
+import com.google.gwt.util.tools.Utility;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class StandardGeneratorContext implements GeneratorContext {
   /**
    * Extras added to {@link CompilationUnit}.
    */
-  public static interface Generated {
+  public static interface Generated extends GeneratedUnit {
     void abort();
 
     void commit();
@@ -77,13 +76,12 @@ public class StandardGeneratorContext implements GeneratorContext {
    * that source isn't requested until the generator has finished writing it.
    * This version is backed by {@link StandardGeneratorContext#diskCache}.
    */
-  private static class GeneratedUnit extends CompilationUnit implements
-      Generated {
+  private static class GeneratedUnitImpl implements Generated {
 
     /**
      * A token to retrieve this object's bytes from the disk cache.
      */
-    private long cacheToken;
+    protected long cacheToken;
 
     private long creationTime;
 
@@ -93,7 +91,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
     private final String typeName;
 
-    public GeneratedUnit(StringWriter sw, String typeName) {
+    public GeneratedUnitImpl(StringWriter sw, String typeName) {
       this.typeName = typeName;
       this.sw = sw;
     }
@@ -113,21 +111,10 @@ public class StandardGeneratorContext implements GeneratorContext {
       creationTime = System.currentTimeMillis();
     }
 
-    @Override
-    public String getDisplayLocation() {
-      if (strongHash != null) {
-        return "generated://" + strongHash + "/" + Shared.toPath(getTypeName());
-      } else {
-        return "generated://uncommitted/" + Shared.toPath(getTypeName());
-      }
-    }
-
-    @Override
-    public long getLastModified() {
+    public long creationTime() {
       return creationTime;
     }
 
-    @Override
     public String getSource() {
       if (sw != null) {
         throw new IllegalStateException("source not committed");
@@ -139,19 +126,12 @@ public class StandardGeneratorContext implements GeneratorContext {
       return strongHash;
     }
 
-    @Override
     public String getTypeName() {
       return typeName;
     }
 
-    @Override
-    public boolean isGenerated() {
-      return true;
-    }
-
-    @Override
-    public boolean isSuperSource() {
-      return false;
+    public String optionalFileLocation() {
+      return null;
     }
   }
 
@@ -161,54 +141,30 @@ public class StandardGeneratorContext implements GeneratorContext {
    * that source isn't requested until the generator has finished writing it.
    * This version is backed by an explicit generated file.
    */
-  private static class GeneratedUnitWithFile extends FileCompilationUnit
-      implements Generated {
+  private static class GeneratedUnitWithFile extends GeneratedUnitImpl {
+    private final File file;
 
-    private PrintWriter pw;
-    private String strongHash; // cache so that refreshes work correctly
-
-    public GeneratedUnitWithFile(File file, PrintWriter pw, String packageName) {
-      super(file, packageName);
-      this.pw = pw;
-    }
-
-    public void abort() {
-      pw.close();
-      pw = null;
+    public GeneratedUnitWithFile(File file, StringWriter pw, String typeName) {
+      super(pw, typeName);
+      this.file = file;
     }
 
     public void commit() {
-      pw.close();
-      pw = null;
-    }
-
-    @Override
-    public String getSource() {
-      if (pw != null) {
-        throw new IllegalStateException("source not committed");
+      super.commit();
+      FileOutputStream fos = null;
+      try {
+        fos = new FileOutputStream(file);
+        diskCache.transferToStream(cacheToken, fos);
+      } catch (IOException e) {
+        throw new RuntimeException("Error writing out generated unit at '"
+            + file.getAbsolutePath() + "'", e);
+      } finally {
+        Utility.close(fos);
       }
-      return super.getSource();
     }
 
-    /**
-     * The old source is not preserved across refreshes. We use a strongHash to
-     * avoid the memory overhead of storing the source.
-     */
-    public String getStrongHash() {
-      if (strongHash == null) {
-        strongHash = Util.computeStrongName(Util.getBytes(getSource()));
-      }
-      return strongHash;
-    }
-
-    @Override
-    public boolean isGenerated() {
-      return true;
-    }
-
-    @Override
-    public boolean isSuperSource() {
-      return false;
+    public String optionalFileLocation() {
+      return file.getAbsolutePath();
     }
   }
 
@@ -250,7 +206,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   private final ArtifactSet allGeneratedArtifacts;
 
-  private final Set<CompilationUnit> committedGeneratedCups = new HashSet<CompilationUnit>();
+  private final Set<GeneratedUnit> committedGeneratedCups = new HashSet<GeneratedUnit>();
 
   private final CompilationState compilationState;
 
@@ -259,6 +215,8 @@ public class StandardGeneratorContext implements GeneratorContext {
   private final File genDir;
 
   private final File generatorResourcesDir;
+
+  private final Map<Class<? extends Generator>, Generator> generators = new IdentityHashMap<Class<? extends Generator>, Generator>();
 
   private final ModuleDef module;
 
@@ -272,8 +230,6 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   private final Map<PrintWriter, Generated> uncommittedGeneratedCupsByPrintWriter = new IdentityHashMap<PrintWriter, Generated>();
 
-  private final Map<Class<? extends Generator>, Generator> generators = new IdentityHashMap<Class<? extends Generator>, Generator>();
-
   /**
    * Normally, the compiler host would be aware of the same types that are
    * available in the supplied type oracle although it isn't strictly required.
@@ -286,7 +242,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     this.genDir = genDir;
     this.generatorResourcesDir = generatorResourcesDir;
     this.allGeneratedArtifacts = allGeneratedArtifacts;
-    if (genDir == null && diskCache == null) {
+    if (diskCache == null) {
       diskCache = new DiskCache();
     }
   }
@@ -299,7 +255,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     if (gcup != null) {
       gcup.commit();
       uncommittedGeneratedCupsByPrintWriter.remove(pw);
-      committedGeneratedCups.add((CompilationUnit) gcup);
+      committedGeneratedCups.add(gcup);
     } else {
       logger.log(TreeLogger.WARN,
           "Generator attempted to commit an unknown PrintWriter", null);
@@ -376,11 +332,11 @@ public class StandardGeneratorContext implements GeneratorContext {
               "Generated source files...", null);
         }
 
-        for (CompilationUnit gcup : committedGeneratedCups) {
+        for (GeneratedUnit gcup : committedGeneratedCups) {
           String qualifiedTypeName = gcup.getTypeName();
           genTypeNames.add(qualifiedTypeName);
           if (subBranch != null) {
-            subBranch.log(TreeLogger.DEBUG, gcup.getDisplayLocation(), null);
+            subBranch.log(TreeLogger.DEBUG, qualifiedTypeName, null);
           }
         }
 
@@ -451,6 +407,8 @@ public class StandardGeneratorContext implements GeneratorContext {
     setCurrentGenerator(generatorClass);
 
     long before = System.currentTimeMillis();
+    PerfLogger.start("Generator '" + generator.getClass().getName()
+        + "' produced '" + typeName + "'");
     try {
       String className = generator.generate(logger, this, typeName);
       long after = System.currentTimeMillis();
@@ -466,6 +424,8 @@ public class StandardGeneratorContext implements GeneratorContext {
       logger.log(TreeLogger.ERROR, "Generator '" + generatorClass.getName()
           + "' threw threw an exception while rebinding '" + typeName + "'", e);
       throw new UnableToCompleteException();
+    } finally {
+      PerfLogger.end();
     }
   }
 
@@ -506,11 +466,10 @@ public class StandardGeneratorContext implements GeneratorContext {
     // The type isn't there, so we can let the caller create it. Remember that
     // it is pending so another attempt to create the same type will fail.
     Generated gcup;
-    PrintWriter pw;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw, true);
     if (this.genDir == null) {
-      StringWriter sw = new StringWriter();
-      pw = new PrintWriter(sw, true);
-      gcup = new GeneratedUnit(sw, typeName);
+      gcup = new GeneratedUnitImpl(sw, typeName);
     } else {
       File dir = new File(genDir, packageName.replace('.', File.separatorChar));
       // No need to check mkdirs result because an IOException will occur anyway
@@ -519,17 +478,7 @@ public class StandardGeneratorContext implements GeneratorContext {
       if (srcFile.exists()) {
         srcFile.delete();
       }
-      try {
-        FileOutputStream fos = new FileOutputStream(srcFile);
-        // Critical to set the encoding here, or UTF chars get whacked.
-        OutputStreamWriter osw = new OutputStreamWriter(fos,
-            Util.DEFAULT_ENCODING);
-        pw = new PrintWriter(osw);
-        gcup = new GeneratedUnitWithFile(srcFile, pw, packageName);
-      } catch (IOException e) {
-        throw new RuntimeException("Error writing out generated unit at '"
-            + srcFile.getAbsolutePath() + "'", e);
-      }
+      gcup = new GeneratedUnitWithFile(srcFile, sw, typeName);
     }
     uncommittedGeneratedCupsByPrintWriter.put(pw, gcup);
     newlyGeneratedTypeNames.add(typeName);

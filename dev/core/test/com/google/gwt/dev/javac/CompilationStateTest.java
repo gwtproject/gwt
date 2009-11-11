@@ -15,11 +15,9 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.javac.CompilationUnit.State;
 import com.google.gwt.dev.javac.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.impl.MockJavaResource;
 import com.google.gwt.dev.javac.impl.MockResourceOracle;
-import com.google.gwt.dev.javac.impl.Shared;
 import com.google.gwt.dev.javac.impl.TweakedMockJavaResource;
 
 import java.util.Collections;
@@ -60,7 +58,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     CompilationUnit badUnit = state.getCompilationUnitMap().get(
         Shared.getTypeName(JavaResourceBase.BAR));
-    assertSame(State.ERROR, badUnit.getState());
+    assertTrue(badUnit.isError());
 
     Set<CompilationUnit> goodUnits = new HashSet<CompilationUnit>(
         state.getCompilationUnits());
@@ -80,7 +78,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     CompilationUnit badUnit = state.getCompilationUnitMap().get(
         Shared.getTypeName(JavaResourceBase.BAR));
-    assertSame(State.ERROR, badUnit.getState());
+    assertTrue(badUnit.isError());
 
     Set<CompilationUnit> goodUnits = new HashSet<CompilationUnit>(
         state.getCompilationUnits());
@@ -104,10 +102,10 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     CompilationUnit badUnit = state.getCompilationUnitMap().get(
         Shared.getTypeName(badFoo));
-    assertSame(State.ERROR, badUnit.getState());
+    assertTrue(badUnit.isError());
     CompilationUnit invalidUnit = state.getCompilationUnitMap().get(
         Shared.getTypeName(JavaResourceBase.BAR));
-    assertSame(State.ERROR, invalidUnit.getState());
+    assertTrue(invalidUnit.isError());
 
     Set<CompilationUnit> goodUnits = new HashSet<CompilationUnit>(
         state.getCompilationUnits());
@@ -198,7 +196,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
   public void testSourceOracleEmpty() {
     oracle = new MockResourceOracle();
-    state = new CompilationState(createTreeLogger(), oracle);
+    rebuildCompilationState();
     validateCompilationState();
   }
 
@@ -206,7 +204,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
     validateCompilationState();
 
     int size = state.getCompilationUnits().size();
-    oracle.remove(JavaResourceBase.OBJECT.getPath());
+    oracle.remove(JavaResourceBase.MAP.getPath());
     rebuildCompilationState();
     assertEquals(size - 1, state.getCompilationUnits().size());
     validateCompilationState();

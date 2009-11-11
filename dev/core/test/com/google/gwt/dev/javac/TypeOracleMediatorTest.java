@@ -31,7 +31,6 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 import com.google.gwt.dev.javac.impl.MockJavaResource;
-import com.google.gwt.dev.javac.impl.Shared;
 import com.google.gwt.dev.javac.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
@@ -51,15 +50,9 @@ public class TypeOracleMediatorTest extends TestCase {
 
   private abstract class MutableJavaResource extends MockJavaResource {
     private String extraSource = "";
-    private long lastModified = System.currentTimeMillis();
 
     public MutableJavaResource(String qualifiedTypeName) {
       super(qualifiedTypeName);
-    }
-
-    @Override
-    public long getLastModified() {
-      return lastModified;
     }
 
     @Override
@@ -70,8 +63,8 @@ public class TypeOracleMediatorTest extends TestCase {
     public abstract String getSource();
 
     public void touch() {
+      super.touch();
       extraSource += '\n';
-      lastModified = System.currentTimeMillis();
     }
   }
 

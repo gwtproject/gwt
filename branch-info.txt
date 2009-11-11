@@ -570,3 +570,8 @@ trunk@6845 was merged into this branch
 trunk@6803 was merged into this branch
   Increases the timeout of HttpSuite tests to 15 seconds.
   svn merge --ignore-ancestry -c6803 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6851 was merged into this branch
+  Fixes some Scheduler bugs and adds a test case.
+  svn merge --ignore-ancestry -c6851 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

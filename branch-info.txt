@@ -534,3 +534,10 @@ trunk@6825 was merged into this branch
  Fixes an NPE when resolving a type signature with an unknown class.
     svn merge --ignore-ancestry -c6825 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6836 was merged into this branch
+ The UiBinder XSDs for the ui: prefix and g: prefix.  
+    svn merge --ignore-ancestry -c6836 \
+      http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+

@@ -600,3 +600,8 @@ trunk@6871 was merged into this branch
  Fix a problem getting real argument names from generic methods.
     svn merge --ignore-ancestry -c6871 \
       http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6872 was merged into this branch
+ Fix a problem with local classes.
+    svn merge --ignore-ancestry -c6872 \
+      http://google-web-toolkit.googlecode.com/svn/trunk/ .

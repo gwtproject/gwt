@@ -583,3 +583,8 @@ trunk c6854-c6857 were merged into this branch
     svn merge --ignore-ancestry -r6853:6857 \
       https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6859 was merged into this branch
+  Close the socket used by the MessageTransport class if we experience any errors.  Included Scott's assertion message improvements from http://gwt-code-
+reviews.appspot.com/100805.
+    svn merge --ignore-ancestry -c6859 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

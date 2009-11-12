@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public final class DownloadEntry extends JavaScriptObject {
 
   protected DownloadEntry() { }
-  
+
   public native String getHref()/*-{
     return this.url;
   }-*/;
@@ -31,9 +31,13 @@ public final class DownloadEntry extends JavaScriptObject {
   public native String getLinkContentHtml()/*-{
     return this.caption;
   }-*/;
-  
-  public native boolean isSupported() /*-{ 
+
+  public native String getPlatforms()/*-{
+    return this.platforms;
+  }-*/;
+
+  public native boolean isSupported() /*-{
     return this.supported;
   }-*/;
-  
+
 }

@@ -12,7 +12,7 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
-  <ui:style>
+  <ui:style type='com.google.gwt.missingplugin.client.AllDownloadsPane.MyStyle'>
     .pane {
     }
 
@@ -20,17 +20,22 @@
       margin: 10px 0 0 30px;
       font-size: 100%;
     }
-    
+
     .downloadBoxes {
     }
-    
+
     .inferredDownloadLink {
-      margin-top: 2px;    
+      margin-top: 2px;
       margin-right: 8px;
-      text-align: right; 
-      font-size: 80%; 
-      display: block; 
+      text-align: right;
+      font-size: 80%;
+      display: block;
       color: black;
+    }
+    
+    .platforms {
+      font-size: 80%;
+      font-style: italic;
     }
   </ui:style>
   <g:HTMLPanel styleName="{style.pane}">
@@ -49,4 +54,4 @@
     </table>
 
   </g:HTMLPanel>
-</ui:UiBinder> 
+</ui:UiBinder>

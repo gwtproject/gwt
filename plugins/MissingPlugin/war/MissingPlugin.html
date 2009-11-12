@@ -19,27 +19,27 @@
 
     <script>
       var troubleshootingUrl = "http://code.google.com/webtoolkit/doc/1.6/FAQ_Troubleshooting.html";
-      
+
       // The missing plugin module expects downloadInfo.inferredDownloadId to contain the key to use
       // in allDownloads field.
       var downloadInfo = {
         "inferredDownloadId" : null,
         "troubleshootingUrl" : troubleshootingUrl,
         "allDownloads" : {
-          "unknown" : 
+          "unknown" :
           {
             "caption" : "Regrettably, this browser is currently unsupported :-(",
             "url" : troubleshootingUrl,
             "supported" : false
           },
-          
-          "firefox-old" : 
+
+          "firefox-old" :
           {
             "caption" : "Sorry, the GWT Developer Plugin only supports Firefox 3.0 and 3.5 at present",
             "url" : "http://www.getfirefox.com",
             "supported" : false
           },
-          
+
           "opera" :
           {
             "caption" : "Sorry, there is currently no GWT Developer Plugin for Opera",
@@ -47,21 +47,21 @@
             "url" : "http://code.google.com/webtoolkit/makinggwtbetter.html#contributingcode",
             "supported" : false
           },
-          
+
           "safari-mac-sl" :
           {
             "caption" : "Sorry, at the moment, there is not yet a GWT Developer Plugin for Safari on Mac OS X 10.6",
             "url" : troubleshootingUrl,
             "supported" : false
           },
-          
+
           "safari-iphone" :
           {
             "caption" : "Sorry, there is currently no GWT Developer Plugin for mobile Safari",
             "url" : troubleshootingUrl,
             "supported" : false
           },
-          
+
           "webkit-android" :
           {
             "caption" : "Sorry, there is currently no GWT Developer Plugin for mobile WebKit",
@@ -83,14 +83,14 @@
             "supported" : false
           },
 
-          "chrome-win" : 
+          "chrome-win" :
           {
             "caption" : "The GWT Developer Plugin requires Chrome 4 or later,<br>so click here to learn about switching to the Chrome DevChannel to get early access",
             "url" : "http://dev.chromium.org/getting-involved/dev-channel",
             "supported" : false
           },
 
-          "safari-win" : 
+          "safari-win" :
           {
             "caption" : "Sorry, there is currently no GWT Developer Plugin for Safar on Windows",
             "url" : troubleshootingUrl,
@@ -98,9 +98,10 @@
           },
 
           "firefox" :
-          { 
+          {
             "caption" : "Download the GWT Developer Plugin<br>For Firefox",
             "url" : "https://dl-ssl.google.com/gwt/plugins/firefox/gwt-dev-plugin.xpi",
+            "platforms" : "Win x86, Linux x86/x86_64, Mac x86/PPC",
             "supported" : true
           },
 
@@ -108,20 +109,23 @@
           {
             "caption" : "Download the GWT Developer Plugin<br>For Internet Explorer",
             "url" : "http://google-web-toolkit.googlecode.com/svn/trunk/plugins/ie/prebuilt/GwtDevModeIePluginInstaller.msi",
+            "platforms" : "Win x86",
             "supported" : true
           },
-          
-          "chrome4-win" : 
+
+          "chrome4-win" :
           {
             "caption" : "Download the GWT Developer Plugin<br>For Chrome",
-            "url" : "http://google-web-toolkit.googlecode.com/svn/trunk/plugins/npapi/prebuilt/gwtdmp.crx",
+            "url" : "https://dl-ssl.google.com/gwt/plugins/chrome/gwt-dev-plugin.crx",
+            "platforms" : "Win x86",
             "supported" : true
           },
-          
-          "safari-mac" :  
+
+          "safari-mac" :
           {
             "caption" : "Download the GWT Developer Plugin<br>For Safari",
             "url" : "http://google-web-toolkit.googlecode.com/svn/trunk/plugins/webkit/prebuilt/oophm.dmg",
+            "platforms" : "Mac x86/PPC",
             "supported" : true
           }
         }
@@ -170,17 +174,17 @@
           id = 'firefox-old';
         }
       }
-      downloadInfo.inferredDownloadId = id;  
-    </script> 
-    
+      downloadInfo.inferredDownloadId = id;
+    </script>
+
     <script type="text/javascript" language="javascript" src="missingplugin/missingplugin.nocache.js"></script>
   </head>
 
   <noscript>
     <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-      The Google Web Toolkit Developer Plugin does not appear to be installed. 
-      However, you also don't seem to have a browser that is willing to run JavaScript. 
-      Please enable JavaScript or switch to a browser that supports JavaScript and try again. 
+      The Google Web Toolkit Developer Plugin does not appear to be installed.
+      However, you also don't seem to have a browser that is willing to run JavaScript.
+      Please enable JavaScript or switch to a browser that supports JavaScript and try again.
     </div>
   </noscript>
   </body>

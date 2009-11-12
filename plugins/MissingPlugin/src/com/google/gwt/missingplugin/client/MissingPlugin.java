@@ -33,7 +33,7 @@ public class MissingPlugin implements EntryPoint {
     DownloadInfo r = getAmbientLinkInfo0();
     assert r != null : "expecting $wnd.downloadInfo";
     return r;
-  };
+  }
   
   private native DownloadInfo getAmbientLinkInfo0() /*-{
     return $wnd.downloadInfo;

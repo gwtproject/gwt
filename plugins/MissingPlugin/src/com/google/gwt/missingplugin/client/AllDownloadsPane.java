@@ -18,6 +18,7 @@ package com.google.gwt.missingplugin.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -36,6 +37,13 @@ public class AllDownloadsPane extends Composite {
   interface DownloadListPaneBinder extends UiBinder<Widget, AllDownloadsPane> {
   }
 
+  interface MyStyle extends CssResource {
+    String platforms();
+  }
+  
+  @UiField
+  MyStyle style;
+  
   @UiField
   VerticalPanel downloadBoxes;
 
@@ -54,6 +62,11 @@ public class AllDownloadsPane extends Composite {
       if (link.isSupported()) {
         String linkContentHtml = link.getLinkContentHtml();
         String href = link.getHref();
+        String platforms = link.getPlatforms();
+        if (platforms != null) {
+          linkContentHtml += "<br><span class=\"" + style.platforms() + "\">"
+              + platforms + "</span>";
+        }
         DownloadBox box = new DownloadBox(linkContentHtml, href, true);
         downloadBoxes.add(box);
         downloadBoxes.setCellWidth(box, "100%");

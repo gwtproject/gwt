@@ -609,3 +609,8 @@ trunk@6872 was merged into this branch
 trunk@6876 was merged into this branch
  Synchronize ModuleDef#getResourceOracle() to fix an issue where multiple sessions clobber each other
     svn merge --ignore-ancestry -c6876 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6880 was merged into this branch
+ Adds a start() method to MessageTransport
+    svn merge --ignore-ancestry -c6880 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

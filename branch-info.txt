@@ -614,3 +614,6 @@ trunk@6880 was merged into this branch
  Adds a start() method to MessageTransport
     svn merge --ignore-ancestry -c6880 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6884 was merged into this branch
+ Synchronizing OophmSessionHandler#loadModule() to prevent multiple modules from loading at the same time.
+    svn merge --ignore-ancestry -c6884 http://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -575,3 +575,11 @@ trunk@6851 was merged into this branch
   Fixes some Scheduler bugs and adds a test case.
   svn merge --ignore-ancestry -c6851 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk c6854-c6857 were merged into this branch
+  Make AnnotationProxyFactory store an unmofiable minimal map.
+  FindJsniRefVisitor can no longer beSloppy().
+  Removes OptionCompilationStateRetained in favor of a new GC strategy.
+  Sandboxes AbstractCompiler so that the backreference can be detached from internal JDT types.
+    svn merge --ignore-ancestry -r6853:6857 \
+      https://google-web-toolkit.googlecode.com/svn/trunk .
+

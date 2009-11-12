@@ -421,9 +421,7 @@ public class JavaToJavaScriptCompiler {
         logger, allRootTypes.toArray(new String[allRootTypes.size()]), rpo);
 
     // Free up memory.
-    if (!options.isCompilationStateRetained()) {
-      module.clear();
-    }
+    rpo.clear();
     try {
       // HACK: Make i18n free its internal static state.
       Class<?> clazz = Class.forName(
@@ -432,6 +430,7 @@ public class JavaToJavaScriptCompiler {
       clazz.getDeclaredMethod("clear").invoke(null);
     } catch (Throwable e) {
     }
+    Memory.maybeDumpMemory("GoldenCudsBuilt");
 
     // Check for compilation problems. We don't log here because any problems
     // found here will have already been logged by AbstractCompiler.

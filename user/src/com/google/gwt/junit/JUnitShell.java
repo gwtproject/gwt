@@ -918,7 +918,6 @@ public class JUnitShell extends GWTShell {
       }
     }
     LegacyCompilerOptions newOptions = new GWTCompilerOptionsImpl(options);
-    newOptions.setCompilationStateRetained(true);
     if (!new GWTCompiler(newOptions).run(getTopLogger(), module)) {
       throw new UnableToCompleteException();
     }

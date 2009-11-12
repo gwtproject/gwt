@@ -617,3 +617,8 @@ trunk@6880 was merged into this branch
 trunk@6884 was merged into this branch
  Synchronizing OophmSessionHandler#loadModule() to prevent multiple modules from loading at the same time.
     svn merge --ignore-ancestry -c6884 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6883 was merged into this branch
+ Fixed stupid style error in Mail's stack panel headers.
+    svn merge --ignore-ancestry -c6883 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

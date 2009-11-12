@@ -588,3 +588,7 @@ trunk@6859 was merged into this branch
 reviews.appspot.com/100805.
     svn merge --ignore-ancestry -c6859 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6864 was merged into this branch
+  Fixes a unit testing break introduced by r6859.
+    svn merge --ignore-ancestry -c6864 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

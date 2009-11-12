@@ -605,3 +605,7 @@ trunk@6872 was merged into this branch
  Fix a problem with local classes.
     svn merge --ignore-ancestry -c6872 \
       http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6876 was merged into this branch
+ Synchronize ModuleDef#getResourceOracle() to fix an issue where multiple sessions clobber each other
+    svn merge --ignore-ancestry -c6876 http://google-web-toolkit.googlecode.com/svn/trunk/ .

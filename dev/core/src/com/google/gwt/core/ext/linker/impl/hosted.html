@@ -51,10 +51,12 @@ function getTopWindow() {
 }
 
 function loadIframe(url) {
-  var iframeHtml = "<iframe src='" + url + "' frameborder='0' style='border: 9px solid red; position: absolute; left: 0px; top: 0px; width: 100%'>";
-  var div = $doc.createElement("div");
-  $doc.body.insertBefore(div, $doc.body.firstChild);
-  div.innerHTML = iframeHtml;
+  var iframe = $doc.createElement('iframe');
+  iframe.src = url;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.borderWidth = "0px";
+  $doc.body.insertBefore(iframe, $doc.body.firstChild);
 }
 
 if ($legacyHosted) {
@@ -244,7 +246,7 @@ if ($legacyHosted) {
         } catch (e) {
         }
       }
-      loadIframe("http://gwt-dev-plugin-missing.appspot.com");
+      loadIframe("http://google-web-toolkit.googlecode.com/svn/trunk/plugins/MissingBrowserPlugin.html");
     } else {
       if (plugin.connect(url, topWin.__gwt_SessionID, $hosted, $moduleName,
           $hostedHtmlVersion)) {

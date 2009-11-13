@@ -638,3 +638,7 @@ trunk@6893 was merged into this branch
  Updated dev mode prompt URL to refer to "gwt.codesvr" instead of "gwt.hosted"
     svn merge --ignore-ancestry -c 6893 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6896 was merged into this branch
+ Update MissingPlugin app with license and new IE download URL
+    svn merge --ignore-ancestry -c6896 \
+      http://google-web-toolkit.googlecode.com/svn/trunk/ .

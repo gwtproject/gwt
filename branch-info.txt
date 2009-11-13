@@ -634,3 +634,7 @@ trunk@6891 was merged into this branch
  Made missing plugin iframe in hosted.html prettier
     svn merge -c 6891 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6893 was merged into this branch
+ Updated dev mode prompt URL to refer to "gwt.codesvr" instead of "gwt.hosted"
+    svn merge --ignore-ancestry -c 6893 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

@@ -630,3 +630,7 @@ trunk@6889 was merged into this branch
   Fix Issue 4045: cannot start in Turkish locale
     svn merge --ignore-ancestry -c6889 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6891 was merged into this branch
+ Made missing plugin iframe in hosted.html prettier
+    svn merge -c 6891 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

@@ -1,4 +1,4 @@
-branch-info.txt for GWT 2.0 release:
+1>branch-info.txt for GWT 2.0 release:
 Tracks interactions between this branch and other branches. 
 See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 
@@ -625,4 +625,8 @@ trunk@6883 was merged into this branch
 trunk@6852 was merged into this branch
  Make RunStyleSelenium more extensible.
     svn merge --ignore-ancestry -c6852 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6889 was merged into this branch
+  Fix Issue 4045: cannot start in Turkish locale
+    svn merge --ignore-ancestry -c6889 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 

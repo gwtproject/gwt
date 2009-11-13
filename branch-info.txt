@@ -622,3 +622,7 @@ trunk@6883 was merged into this branch
  Fixed stupid style error in Mail's stack panel headers.
     svn merge --ignore-ancestry -c6883 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6852 was merged into this branch
+ Make RunStyleSelenium more extensible.
+    svn merge --ignore-ancestry -c6852 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

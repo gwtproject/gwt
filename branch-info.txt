@@ -647,3 +647,8 @@ trunk@6898 was merged into this branch
  Serialize generator runs.
     svn merge --ignore-ancestry -c6898 \
       http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6900 was merged into this branch
+ Add missing files from MissingPlugin, improve build.xml integration
+    svn merge --ignore-ancestry -c6900 \
+      http://google-web-toolkit.googlecode.com/svn/trunk/ .

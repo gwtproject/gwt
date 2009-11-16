@@ -692,7 +692,7 @@ trunk@6923 were merged into this branch
   Allows path to executable in RunStyleSelenium.
   svn merge --ignore-ancestry -c6923 https://google-web-toolkit.googlecode.com/svn/trunk .
 
-trunk@6926 was merged into this branhc
+trunk@6926 was merged into this branch
  Fix thread safety issues in GwtLocaleFactoryImpl and LocaleUtils.
     svn merge --ignore-ancestry -c6926 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
@@ -700,3 +700,8 @@ trunk@6926 was merged into this branhc
 trunk@6930 was merged into this branch
   Update the generated README.txt, created when the webAppCreator script is used.
     svn merge --ignore-ancestry -c6930 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6933 was merged into this branch
+ Update MissingPlugin app and associated legacy HTML page.
+    svn merge --ignore-ancestry -c6933 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

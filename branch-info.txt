@@ -688,3 +688,7 @@ trunk@6921,6922 were merged into this branch
   Fixes a memory leak in XMLHttpRequest.
   svn merge --ignore-ancestry -c6921,6922 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6923 were merged into this branch
+  Allows path to executable in RunStyleSelenium.
+  svn merge --ignore-ancestry -c6923 https://google-web-toolkit.googlecode.com/svn/trunk .
+

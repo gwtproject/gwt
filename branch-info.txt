@@ -660,3 +660,7 @@ trunk@6903 was merged into this branch
 trunk@6895 was merged into this branch
   Updating the Gwt Developer Plugin for IE to use the latest terminology
         svn merge --ignore-ancestry -c6895 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6907 was merged into this branch
+  Add registry keys to IE plugin installer
+        svn merge --ignore-ancestry -c6907 http://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -656,3 +656,7 @@ trunk@6900 was merged into this branch
 trunk@6903 was merged into this branch
   Updates release notes for GWT 2.0 RC
         svn merge --ignore-ancestry -c6903 http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6895 was merged into this branch
+  Updating the Gwt Developer Plugin for IE to use the latest terminology
+        svn merge --ignore-ancestry -c6895 http://google-web-toolkit.googlecode.com/svn/trunk/ .

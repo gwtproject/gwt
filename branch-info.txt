@@ -652,3 +652,7 @@ trunk@6900 was merged into this branch
  Add missing files from MissingPlugin, improve build.xml integration
     svn merge --ignore-ancestry -c6900 \
       http://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6903 was merged into this branch
+  Updates release notes for GWT 2.0 RC
+        svn merge --ignore-ancestry -c6903 http://google-web-toolkit.googlecode.com/svn/trunk/ .

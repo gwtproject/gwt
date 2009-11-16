@@ -683,3 +683,8 @@ trunk c6917-c6919 were merged into this branch
   Remove unused method from ModuleSpace.
   Fixes workDir directory contention between multiple concurrent hosted mode sessions.
     svn merge --ignore-ancestry -r6916:6919 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6921,6922 were merged into this branch
+  Fixes a memory leak in XMLHttpRequest.
+  svn merge --ignore-ancestry -c6921,6922 https://google-web-toolkit.googlecode.com/svn/trunk .
+

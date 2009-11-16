@@ -692,3 +692,7 @@ trunk@6923 were merged into this branch
   Allows path to executable in RunStyleSelenium.
   svn merge --ignore-ancestry -c6923 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6926 was merged into this branhc
+ Fix thread safety issues in GwtLocaleFactoryImpl and LocaleUtils.
+    svn merge --ignore-ancestry -c6926 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

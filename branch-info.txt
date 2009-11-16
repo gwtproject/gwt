@@ -665,7 +665,7 @@ trunk@6907 was merged into this branch
   Add registry keys to IE plugin installer
     svn merge --ignore-ancestry -c6907 http://google-web-toolkit.googlecode.com/svn/trunk/ .
 
-trunk@6909 was merged into this branch
+trunk@6909 was merged into this branhc
  Fixes JSNI uses of JSOs as maps in Chrome DevMode.
     svn merge --ignore-ancestry -c6909 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
@@ -673,3 +673,7 @@ trunk@6909 was merged into this branch
 trunk@6911 was merged into this branch
   gwt-user should not reference the dev collections, this causes server failures.
     svn merge --ignore-ancestry -c6911 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6913 was merged into this branch
+  UiBinder attribute parsing was pretty much working by accident
+  svn merge --ignore-ancestry -c 6913 https://google-web-toolkit.googlecode.com/svn/trunk .

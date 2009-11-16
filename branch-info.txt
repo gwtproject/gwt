@@ -696,3 +696,7 @@ trunk@6926 was merged into this branhc
  Fix thread safety issues in GwtLocaleFactoryImpl and LocaleUtils.
     svn merge --ignore-ancestry -c6926 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6930 was merged into this branch
+  Update the generated README.txt, created when the webAppCreator script is used.
+    svn merge --ignore-ancestry -c6930 https://google-web-toolkit.googlecode.com/svn/trunk/ .

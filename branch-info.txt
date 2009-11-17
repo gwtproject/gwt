@@ -733,3 +733,7 @@ trunk@6965 was merged into this branch
  Increasing the timeout of DisclosurePanelTest#testCoreFunctionality()
     svn merge --ignore-ancestry -c6965 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6969 was merged into this branch
+ Fix font in bottom part of Swing tree logger.
+    svn merge --ignore-ancestry -c6969 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

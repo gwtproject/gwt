@@ -705,3 +705,8 @@ trunk@6933 was merged into this branch
  Update MissingPlugin app and associated legacy HTML page.
     svn merge --ignore-ancestry -c6933 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6935 was merged into this branch
+ Fix JSONObject with Chrome DevMode.
+    svn merge --ignore-ancestry -c6935 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

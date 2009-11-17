@@ -742,3 +742,7 @@ trunk@6970 was merged into this branch
  Now using CssResource's @if to provide 1-bit-alpha images on IE6.
     svn merge --ignore-ancestry -c6970 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6973 was merged into this branch
+ Add more icon sizes.
+    svn merge --ignore-ancestry -c6973 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

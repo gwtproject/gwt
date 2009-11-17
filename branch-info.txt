@@ -1,4 +1,4 @@
-1>branch-info.txt for GWT 2.0 release:
+branch-info.txt for GWT 2.0 release:
 Tracks interactions between this branch and other branches. 
 See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 
@@ -746,3 +746,7 @@ trunk@6973 was merged into this branch
  Add more icon sizes.
     svn merge --ignore-ancestry -c6973 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6932 was merged into this branch
+  Fixes bad code gen when css class names in a ui:style block have dashes in them
+  svn merge --ignore-ancestry -c 6932 https://google-web-toolkit.googlecode.com/svn/trunk .

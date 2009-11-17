@@ -710,3 +710,8 @@ trunk@6935 was merged into this branch
  Fix JSONObject with Chrome DevMode.
     svn merge --ignore-ancestry -c6935 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6937 was merged into this branch
+ Minor tweaks to MissingPlugin. Updates IE download plugin. Style tweaks.
+    svn merge -c6937 --ignore-ancestry http://google-web-toolkit.googlecode.com/svn/trunk/ .
+

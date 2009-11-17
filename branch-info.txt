@@ -714,3 +714,13 @@ trunk@6939 was merged into this branch
  Update MissingPlugin app version.
     svn merge --ignore-ancestry -c6939 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk c6943-c6949 were merged into this branch
+  Sort & format some junit files.
+  Cleanup of CompileStrategy which no longer cares about RunStyle at all.
+  RunStyleHtmlUnit was not setting the number of clients.
+  UnitShell should never refresh modules; it's not necesary and can lead to race conditions.
+  Cleanup of ModuleDef loading.
+  GWTShell now reuses dev mode linking code to populate its generated resources directory.
+    svn merge --ignore-ancestry -r6942:6949 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

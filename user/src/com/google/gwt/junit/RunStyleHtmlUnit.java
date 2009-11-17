@@ -54,10 +54,10 @@ public class RunStyleHtmlUnit extends RunStyle {
       IncorrectnessListener, OnbeforeunloadHandler {
 
     private final BrowserVersion browser;
+    private final boolean developmentMode;
+    private final TreeLogger treeLogger;
     private final String url;
     private Object waitForUnload = new Object();
-    private final TreeLogger treeLogger;
-    private final boolean developmentMode;
 
     public HtmlUnitThread(BrowserVersion browser, String url,
         TreeLogger treeLogger, boolean developmentMode) {
@@ -148,7 +148,7 @@ public class RunStyleHtmlUnit extends RunStyle {
   }
 
   private static final Map<String, BrowserVersion> BROWSER_MAP = createBrowserMap();
-  
+
   /*
    * as long as this number is greater than 1, GWTTestCaseTest::testRetry will
    * pass
@@ -181,8 +181,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   }
 
   private Set<BrowserVersion> browsers = new HashSet<BrowserVersion>();
-  private final List<Thread> threads = new ArrayList<Thread>();
   private boolean developmentMode;
+  private final List<Thread> threads = new ArrayList<Thread>();
 
   /**
    * Create a RunStyle instance with the passed-in browser targets.
@@ -192,12 +192,7 @@ public class RunStyleHtmlUnit extends RunStyle {
   }
 
   @Override
-  public int getTries() {
-    return tries;
-  }
-
-  @Override
-  public boolean initialize(String args) {
+  public int initialize(String args) {
     if (args == null || args.length() == 0) {
       // If no browsers specified, default to Firefox 3.
       args = "FF3";
@@ -206,17 +201,18 @@ public class RunStyleHtmlUnit extends RunStyle {
     for (String browserName : args.split(",")) {
       BrowserVersion browser = BROWSER_MAP.get(browserName);
       if (browser == null) {
-        getLogger().log(TreeLogger.ERROR, "RunStyleHtmlUnit: Unknown browser "
-            + "name " + browserName + ", expected browser name: one of "
-            + BROWSER_MAP.keySet());
-        return false;
+        getLogger().log(
+            TreeLogger.ERROR,
+            "RunStyleHtmlUnit: Unknown browser " + "name " + browserName
+                + ", expected browser name: one of " + BROWSER_MAP.keySet());
+        return -1;
       }
       browserSet.add(browser);
     }
     browsers = Collections.unmodifiableSet(browserSet);
-   
-    setTries(DEFAULT_TRIES); // set to the default value for this RunStyle 
-    return true;
+
+    setTries(DEFAULT_TRIES); // set to the default value for this RunStyle
+    return browsers.size();
   }
 
   @Override

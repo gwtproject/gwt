@@ -34,16 +34,73 @@ import java.util.List;
 public class CompileStrategyTest extends TestCase {
 
   /**
-   * A mock {@link RunStyle} used for testing.
+   * A mock {@link CompileStrategy} used for testing.
    */
-  private static class MockRunStyle extends RunStyle {
+  private static class MockCompileStrategy extends CompileStrategy {
 
-    public MockRunStyle() {
+    private MockJUnitMessageQueue messageQueue = new MockJUnitMessageQueue();
+
+    /**
+     * The number of modules to mock.
+     */
+    private int mockModuleCount;
+
+    /**
+     * Construct a new {@link MockCompileStrategy}.
+     * 
+     * @param mockModuleCount the number of modules
+     */
+    public MockCompileStrategy(int mockModuleCount) {
       super(null);
+      this.mockModuleCount = mockModuleCount;
     }
 
     @Override
-    public void launchModule(String moduleName) {
+    public ModuleDef maybeCompileModule(String moduleName,
+        String syntheticModuleName, Strategy strategy,
+        BatchingStrategy batchingStrategy, TreeLogger treeLogger) {
+      fail("This method should not be called.");
+      return null;
+    }
+
+    @Override
+    MockJUnitMessageQueue getMessageQueue() {
+      return messageQueue;
+    }
+
+    @Override
+    int getModuleCount() {
+      return mockModuleCount;
+    }
+
+    @Override
+    ModuleDef maybeCompileModuleImpl2(String moduleName,
+        String syntheticModuleName, Strategy strategy, TreeLogger treeLogger) {
+      return null;
+    }
+  }
+
+  /**
+   * A mock test case used for testing.
+   */
+  private static class MockGWTTestCase extends GWTTestCase {
+    @Override
+    public String getModuleName() {
+      return "com.google.gwt.junit.JUnit";
+    }
+
+    @Override
+    public String getName() {
+      return "testMethod1";
+    }
+
+    public void testMethod0() {
+    }
+
+    public void testMethod1() {
+    }
+
+    public void testMethod2() {
     }
   }
 
@@ -53,17 +110,17 @@ public class CompileStrategyTest extends TestCase {
   private static class MockJUnitMessageQueue extends JUnitMessageQueue {
 
     /**
-     * The test blocks added to the queue.
-     */
-    private List<TestInfo[]> testBlocks;
-
-    /**
      * Indicates that this is the last test block.
      */
     private boolean isLastBlock;
 
+    /**
+     * The test blocks added to the queue.
+     */
+    private List<TestInfo[]> testBlocks;
+
     public MockJUnitMessageQueue() {
-      super();
+      super(1);
     }
 
     @Override
@@ -95,76 +152,17 @@ public class CompileStrategyTest extends TestCase {
     }
   }
 
-  /**
-   * A mock {@link CompileStrategy} used for testing.
-   */
-  private static class MockCompileStrategy extends CompileStrategy {
+  public void testMaybeAddTestBlockForCurrentTestWithBatching() {
+    BatchingStrategy batchingStrategy = new ModuleBatchingStrategy();
+    assertFalse(batchingStrategy.isSingleTestOnly());
 
-    /**
-     * The number of modules to mock.
-     */
-    private int mockModuleCount;
+    // Maybe add the current test.
+    GWTTestCase testCase = new MockGWTTestCase();
+    MockCompileStrategy strategy = new MockCompileStrategy(-1);
+    strategy.maybeAddTestBlockForCurrentTest(testCase, batchingStrategy);
 
-    private MockJUnitMessageQueue messageQueue = new MockJUnitMessageQueue();
-
-    /**
-     * Construct a new {@link MockCompileStrategy}.
-     * 
-     * @param mockModuleCount the number of modules
-     */
-    public MockCompileStrategy(int mockModuleCount) {
-      super(null);
-      this.mockModuleCount = mockModuleCount;
-    }
-
-    @Override
-    public ModuleDef maybeCompileModule(String moduleName,
-        String syntheticModuleName, Strategy strategy, RunStyle runStyle,
-        BatchingStrategy batchingStrategy, TreeLogger treeLogger) {
-      fail("This method should not be called.");
-      return null;
-    }
-
-    @Override
-    MockJUnitMessageQueue getMessageQueue() {
-      return messageQueue;
-    }
-
-    @Override
-    int getModuleCount() {
-      return mockModuleCount;
-    }
-
-    @Override
-    ModuleDef maybeCompileModuleImpl2(String moduleName,
-        String syntheticModuleName, Strategy strategy, RunStyle runStyle,
-        TreeLogger treeLogger) {
-      return null;
-    }
-  }
-
-  /**
-   * A mock test case used for testing.
-   */
-  private static class MockGWTTestCase extends GWTTestCase {
-    @Override
-    public String getModuleName() {
-      return "com.google.gwt.junit.JUnit";
-    }
-
-    @Override
-    public String getName() {
-      return "testMethod1";
-    }
-
-    public void testMethod0() {
-    }
-
-    public void testMethod1() {
-    }
-
-    public void testMethod2() {
-    }
+    // Verify the test is not added to the queue.
+    strategy.getMessageQueue().assertTestBlocks(null);
   }
 
   public void testMaybeAddTestBlockForCurrentTestWithoutBatching() {
@@ -187,50 +185,16 @@ public class CompileStrategyTest extends TestCase {
     strategy.getMessageQueue().assertTestBlocks(testBlocks);
   }
 
-  public void testMaybeAddTestBlockForCurrentTestWithBatching() {
-    BatchingStrategy batchingStrategy = new ModuleBatchingStrategy();
-    assertFalse(batchingStrategy.isSingleTestOnly());
-
-    // Maybe add the current test.
-    GWTTestCase testCase = new MockGWTTestCase();
-    MockCompileStrategy strategy = new MockCompileStrategy(-1);
-    strategy.maybeAddTestBlockForCurrentTest(testCase, batchingStrategy);
-
-    // Verify the test is not added to the queue.
-    strategy.getMessageQueue().assertTestBlocks(null);
-  }
-
-  public void testMaybeCompileModuleImplWithoutBatching() {
-    BatchingStrategy batchingStrategy = new NoBatchingStrategy();
-    assertTrue(batchingStrategy.isSingleTestOnly());
-
-    // Maybe add the current test.
-    RunStyle runStyle = new MockRunStyle();
-    GWTTestCase testCase = new MockGWTTestCase();
-    MockCompileStrategy strategy = new MockCompileStrategy(-1);
-    try {
-      strategy.maybeCompileModuleImpl(testCase.getModuleName(),
-          testCase.getSyntheticModuleName(), testCase.getStrategy(), runStyle,
-          batchingStrategy, TreeLogger.NULL);
-    } catch (UnableToCompleteException e) {
-      fail("Unexpected UnableToCompleteException: " + e.getMessage());
-    }
-
-    // Verify the test block is not added to the queue.
-    strategy.getMessageQueue().assertTestBlocks(null);
-  }
-
   public void testMaybeCompileModuleImplWithBatchingLastModule() {
     BatchingStrategy batchingStrategy = new ModuleBatchingStrategy();
     assertFalse(batchingStrategy.isSingleTestOnly());
 
     // Maybe add the current test.
-    RunStyle runStyle = new MockRunStyle();
     GWTTestCase testCase = new MockGWTTestCase();
     MockCompileStrategy strategy = new MockCompileStrategy(-1);
     try {
       strategy.maybeCompileModuleImpl(testCase.getModuleName(),
-          testCase.getSyntheticModuleName(), testCase.getStrategy(), runStyle,
+          testCase.getSyntheticModuleName(), testCase.getStrategy(),
           batchingStrategy, TreeLogger.NULL);
     } catch (UnableToCompleteException e) {
       fail("Unexpected UnableToCompleteException: " + e.getMessage());
@@ -247,12 +211,11 @@ public class CompileStrategyTest extends TestCase {
     assertFalse(batchingStrategy.isSingleTestOnly());
 
     // Maybe add the current test.
-    RunStyle runStyle = new MockRunStyle();
     GWTTestCase testCase = new MockGWTTestCase();
     MockCompileStrategy strategy = new MockCompileStrategy(1000);
     try {
       strategy.maybeCompileModuleImpl(testCase.getModuleName(),
-          testCase.getSyntheticModuleName(), testCase.getStrategy(), runStyle,
+          testCase.getSyntheticModuleName(), testCase.getStrategy(),
           batchingStrategy, TreeLogger.NULL);
     } catch (UnableToCompleteException e) {
       fail("Unexpected UnableToCompleteException: " + e.getMessage());
@@ -262,5 +225,24 @@ public class CompileStrategyTest extends TestCase {
     strategy.getMessageQueue().assertIsLastBlock(false);
     strategy.getMessageQueue().assertTestBlocks(
         batchingStrategy.getTestBlocks(testCase.getSyntheticModuleName()));
+  }
+
+  public void testMaybeCompileModuleImplWithoutBatching() {
+    BatchingStrategy batchingStrategy = new NoBatchingStrategy();
+    assertTrue(batchingStrategy.isSingleTestOnly());
+
+    // Maybe add the current test.
+    GWTTestCase testCase = new MockGWTTestCase();
+    MockCompileStrategy strategy = new MockCompileStrategy(-1);
+    try {
+      strategy.maybeCompileModuleImpl(testCase.getModuleName(),
+          testCase.getSyntheticModuleName(), testCase.getStrategy(),
+          batchingStrategy, TreeLogger.NULL);
+    } catch (UnableToCompleteException e) {
+      fail("Unexpected UnableToCompleteException: " + e.getMessage());
+    }
+
+    // Verify the test block is not added to the queue.
+    strategy.getMessageQueue().assertTestBlocks(null);
   }
 }

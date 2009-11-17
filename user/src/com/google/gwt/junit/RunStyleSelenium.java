@@ -35,7 +35,9 @@ public class RunStyleSelenium extends RunStyle {
    */
   protected static interface SeleniumWrapper {
     void createSelenium(String domain);
+
     Selenium getSelenium();
+
     String getSpecifier();
   }
 
@@ -44,8 +46,7 @@ public class RunStyleSelenium extends RunStyle {
    */
   static class RCSelenium implements SeleniumWrapper {
 
-    private static final Pattern PATTERN =
-        Pattern.compile("([\\w\\.-]+):([\\d]+)/(.+)");
+    private static final Pattern PATTERN = Pattern.compile("([\\w\\.-]+):([\\d]+)/(.+)");
 
     /*
      * Visible for testing.
@@ -86,12 +87,12 @@ public class RunStyleSelenium extends RunStyle {
     }
   }
 
-  private SeleniumWrapper remotes[];
-
   /**
    * The list of hosts that were interrupted.
    */
   private Set<String> interruptedHosts;
+
+  private SeleniumWrapper remotes[];
 
   /**
    * A separate lock to control access to {@link #interruptedHosts}. This keeps
@@ -118,11 +119,11 @@ public class RunStyleSelenium extends RunStyle {
   }
 
   @Override
-  public boolean initialize(String args) {
+  public int initialize(String args) {
     if (args == null || args.length() == 0) {
       getLogger().log(TreeLogger.ERROR,
           "Selenium runstyle requires comma-separated Selenium-RC targets");
-      return false;
+      return -1;
     }
     String[] targetsIn = args.split(",");
     SeleniumWrapper targets[] = new SeleniumWrapper[targetsIn.length];
@@ -132,12 +133,11 @@ public class RunStyleSelenium extends RunStyle {
         targets[i] = createSeleniumWrapper(targetsIn[i]);
       } catch (IllegalArgumentException e) {
         getLogger().log(TreeLogger.ERROR, e.getMessage());
-        return false;
+        return -1;
       }
     }
 
     this.remotes = targets;
-    shell.setNumClients(targets.length);
 
     // Install a shutdown hook that will close all of our outstanding Selenium
     // sessions.
@@ -157,7 +157,7 @@ public class RunStyleSelenium extends RunStyle {
       }
     });
     start();
-    return true;
+    return targets.length;
   }
 
   @Override
@@ -186,7 +186,7 @@ public class RunStyleSelenium extends RunStyle {
 
   /**
    * Factory method for {@link SeleniumWrapper}.
-   *
+   * 
    * @param seleniumSpecifier Specifies the Selenium instance to create
    * @return an instance of {@link SeleniumWrapper}
    */

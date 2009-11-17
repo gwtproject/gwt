@@ -356,7 +356,7 @@ public class JUnitShell extends GWTShell {
           return true;
         }
       });
-      
+
       registerHandler(new ArgHandlerInt() {
         @Override
         public String getPurpose() {
@@ -372,12 +372,12 @@ public class JUnitShell extends GWTShell {
         public String[] getTagArgs() {
           return new String[] {"1"};
         }
-        
+
         @Override
         public boolean isRequired() {
           return false;
         }
-        
+
         @Override
         public boolean isUndocumented() {
           return false;
@@ -603,8 +603,6 @@ public class JUnitShell extends GWTShell {
       if (!argProcessor.processArgs(args)) {
         throw new JUnitFatalLaunchException("Error processing shell arguments");
       }
-      unitTestShell.messageQueue = new JUnitMessageQueue();
-
       if (!unitTestShell.startUp()) {
         throw new JUnitFatalLaunchException("Shell failed to start");
       }
@@ -616,27 +614,18 @@ public class JUnitShell extends GWTShell {
   }
 
   /**
-   * Determines how to batch up tests for execution.
-   */
-  private BatchingStrategy batchingStrategy = new NoBatchingStrategy();
-
-  /**
    * The amount of time to wait for all clients to complete a single test
-   * method, in milliseconds, measured from when the <i>last</i> client connects
-   * (and thus starts the test). Set by the -testMethodTimeout argument.
+   * method, in milliseconds, measured from when the <i>last</i> client
+   * connects (and thus starts the test). Set by the -testMethodTimeout
+   * argument.
    */
   private long baseTestMethodTimeoutMillis;
 
   /**
-   * Test method timeout as modified by the batching strategy.
+   * Determines how to batch up tests for execution.
    */
-  private long testBatchingMethodTimeoutMillis;
+  private BatchingStrategy batchingStrategy = new NoBatchingStrategy();
 
-  /**
-   * Max number of times a test method must be tried. 
-   */
-  private int tries;
-  
   /**
    * Determines how modules are compiled.
    */
@@ -644,14 +633,14 @@ public class JUnitShell extends GWTShell {
       JUnitShell.this);
 
   /**
-   * Name of the module containing the current/last module to run.
-   */
-  private ModuleDef currentModule;
-
-  /**
    * A type oracle for the current module, used to validate class existence.
    */
   private CompilationState currentCompilationState;
+
+  /**
+   * Name of the module containing the current/last module to run.
+   */
+  private ModuleDef currentModule;
 
   /**
    * The name of the current test case being run.
@@ -689,13 +678,6 @@ public class JUnitShell extends GWTShell {
   private JUnitMessageQueue messageQueue;
 
   /**
-   * The number of test clients executing in parallel. With -remoteweb, users
-   * can specify a number of parallel test clients, but by default we only have
-   * 1.
-   */
-  private int numClients = 1;
-
-  /**
    * An exception that should by fired the next time runTestImpl runs.
    */
   private UnableToCompleteException pendingException;
@@ -712,14 +694,19 @@ public class JUnitShell extends GWTShell {
   private RunStyle runStyle = null;
 
   /**
-   * The argument passed to -runStyle.  This is parsed later so we can pass in
-   * a logger.
+   * The argument passed to -runStyle. This is parsed later so we can pass in a
+   * logger.
    */
   private String runStyleName = "HtmlUnit";
 
   private boolean shouldAutoGenerateResources = true;
 
   private boolean standardsMode = false;
+
+  /**
+   * Test method timeout as modified by the batching strategy.
+   */
+  private long testBatchingMethodTimeoutMillis;
 
   /**
    * The time the test actually began.
@@ -739,6 +726,11 @@ public class JUnitShell extends GWTShell {
    * testBeginTimeout interval is done.
    */
   private long testMethodTimeout;
+
+  /**
+   * Max number of times a test method must be tried.
+   */
+  private int tries;
 
   /**
    * Enforce the singleton pattern. The call to {@link GWTShell}'s ctor forces
@@ -774,18 +766,22 @@ public class JUnitShell extends GWTShell {
     if (!super.doStartup()) {
       return false;
     }
-    if (!createRunStyle(runStyleName)) {
+    int numClients = createRunStyle(runStyleName);
+    if (numClients < 0) {
       // RunStyle already logged reasons for its failure
       return false;
     }
-    
+    messageQueue = new JUnitMessageQueue(numClients);
+
     if (tries >= 1) {
       runStyle.setTries(tries);
     }
-    
+
     if (!runStyle.setupMode(getTopLogger(), developmentMode)) {
-      getTopLogger().log(TreeLogger.ERROR, "Run style does not support "
-          + (developmentMode ? "development" : "production") + " mode");
+      getTopLogger().log(
+          TreeLogger.ERROR,
+          "Run style does not support "
+              + (developmentMode ? "development" : "production") + " mode");
       return false;
     }
     return true;
@@ -799,11 +795,19 @@ public class JUnitShell extends GWTShell {
     }
   }
 
+  @Override
+  protected ModuleDef loadModule(TreeLogger logger, String moduleName,
+      boolean refresh) throws UnableToCompleteException {
+    // Never refresh modules in JUnit.
+    return super.loadModule(logger, moduleName, false);
+  }
+
   /**
    * Checks to see if this test run is complete.
    */
   protected boolean notDone() {
     int activeClients = messageQueue.getNumClientsRetrievedTest(currentTestInfo);
+    int expectedClients = messageQueue.getNumClients();
     if (firstLaunch && runStyle instanceof RunStyleManual) {
       String[] newClients = messageQueue.getNewClients();
       int printIndex = activeClients - newClients.length + 1;
@@ -811,7 +815,7 @@ public class JUnitShell extends GWTShell {
         System.out.println(printIndex + " - " + newClient);
         ++printIndex;
       }
-      if (activeClients != this.numClients) {
+      if (activeClients != expectedClients) {
         // Wait forever for first contact; user-driven.
         return true;
       }
@@ -819,7 +823,7 @@ public class JUnitShell extends GWTShell {
 
     // Limit permutations after all clients have connected.
     if (remoteUserAgents == null
-        && messageQueue.getNumConnectedClients() == numClients) {
+        && messageQueue.getNumConnectedClients() == expectedClients) {
       remoteUserAgents = messageQueue.getUserAgents();
       String userAgentList = "";
       for (int i = 0; i < remoteUserAgents.length; i++) {
@@ -828,16 +832,19 @@ public class JUnitShell extends GWTShell {
         }
         userAgentList += remoteUserAgents[i];
       }
-      getTopLogger().log(TreeLogger.INFO,
+      getTopLogger().log(
+          TreeLogger.INFO,
           "All clients connected (Limiting future permutations to: "
-          + userAgentList + ")");
+              + userAgentList + ")");
     }
 
     long currentTimeMillis = System.currentTimeMillis();
-    if (activeClients >= numClients) {
-      if (activeClients > numClients) {
-        getTopLogger().log(TreeLogger.WARN, "Too many clients: expected "
-            + numClients + ", found " + activeClients);
+    if (activeClients >= expectedClients) {
+      if (activeClients > expectedClients) {
+        getTopLogger().log(
+            TreeLogger.WARN,
+            "Too many clients: expected " + expectedClients + ", found "
+                + activeClients);
       }
       firstLaunch = false;
 
@@ -927,7 +934,7 @@ public class JUnitShell extends GWTShell {
   /**
    * Accessor method to HostedModeBase.setHeadless -- without this, we get
    * IllegalAccessError from the -notHeadless arg handler. Compiler bug?
-   *
+   * 
    * @param headlessMode
    */
   void setHeadlessAccessor(boolean headlessMode) {
@@ -935,15 +942,12 @@ public class JUnitShell extends GWTShell {
   }
 
   /**
-   * Set the expected number of clients.
-   * 
-   * <p>Should only be called by RunStyle subtypes.
-   * 
-   * @param numClients
+   * @deprecated TODO(fabbott) delete me
    */
+  @Deprecated
+  @SuppressWarnings("unused")
   void setNumClients(int numClients) {
-    this.numClients = numClients;
-    messageQueue.setNumClients(numClients);
+    throw new UnsupportedOperationException("This method should be deleted.");
   }
 
   void setStandardsMode(boolean standardsMode) {
@@ -951,8 +955,10 @@ public class JUnitShell extends GWTShell {
   }
 
   private void checkArgs() {
-    if (runStyle.getTries() > 1 && !(batchingStrategy instanceof NoBatchingStrategy)) {
-      throw new JUnitFatalLaunchException("Batching does not work with tries > 1");
+    if (runStyle.getTries() > 1
+        && !(batchingStrategy instanceof NoBatchingStrategy)) {
+      throw new JUnitFatalLaunchException(
+          "Batching does not work with tries > 1");
     }
   }
 
@@ -960,9 +966,9 @@ public class JUnitShell extends GWTShell {
    * Create the specified (or default) runStyle.
    * 
    * @param runStyleName the argument passed to -runStyle
-   * @return true if the runStyle was successfully created/initialized
+   * @return the number of clients, or -1 if initialization was unsuccessful
    */
-  private boolean createRunStyle(String runStyleName) {
+  private int createRunStyle(String runStyleName) {
     String args = null;
     String name = runStyleName;
     int colon = name.indexOf(':');
@@ -1025,7 +1031,8 @@ public class JUnitShell extends GWTShell {
 
     Map<String, JUnitResult> results = messageQueue.getResults(currentTestInfo);
     assert results != null;
-    assert results.size() == numClients : results.size() + " != " + numClients;
+    assert results.size() == messageQueue.getNumClients() : results.size()
+        + " != " + messageQueue.getNumClients();
 
     for (Entry<String, JUnitResult> entry : results.entrySet()) {
       String clientId = entry.getKey();
@@ -1073,8 +1080,8 @@ public class JUnitShell extends GWTShell {
   /**
    * Runs a particular test case.
    */
-  private void runTestImpl(GWTTestCase testCase, TestResult testResult, int numTries)
-      throws UnableToCompleteException {
+  private void runTestImpl(GWTTestCase testCase, TestResult testResult,
+      int numTries) throws UnableToCompleteException {
 
     testBatchingMethodTimeoutMillis = batchingStrategy.getTimeoutMultiplier()
         * baseTestMethodTimeoutMillis;
@@ -1099,8 +1106,7 @@ public class JUnitShell extends GWTShell {
     // Get the module definition for the current test.
     if (!sameTest) {
       currentModule = compileStrategy.maybeCompileModule(moduleName,
-          syntheticModuleName, strategy, runStyle, batchingStrategy,
-          getTopLogger());
+          syntheticModuleName, strategy, batchingStrategy, getTopLogger());
       currentCompilationState = currentModule.getCompilationState(getTopLogger());
     }
     assert (currentModule != null);

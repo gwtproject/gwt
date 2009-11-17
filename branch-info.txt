@@ -724,3 +724,8 @@ trunk c6943-c6949 were merged into this branch
   GWTShell now reuses dev mode linking code to populate its generated resources directory.
     svn merge --ignore-ancestry -r6942:6949 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@6962 was merged into this branch
+ Updated patch for issue 3527 (getDisabled() -> isDisabled() on Select and OptGroup elements.
+    svn merge --ignore-ancestry -c6962 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

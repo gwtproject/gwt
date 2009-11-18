@@ -770,3 +770,7 @@ trunk@6982 was merged into this branch
   Get the XHR memory leak fixed correctly
   svn merge --ignore-ancestry -c6982 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6987 was merged into this branch
+  Make Development Mode UI integrate with OS X UI better.
+  svn merge --ignore-ancestry -c6987  https://google-web-toolkit.googlecode.com/svn/trunk .
+

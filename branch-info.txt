@@ -790,3 +790,7 @@ trunk@7001 was merged into this branch
   Revert "Renamed the portHosted option to codeServerPort and associated types."
   svn merge --ignore-ancestry -c 7001 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7003 was merged into this branch
+  Revert "Tweak log levels and don't launchURLs if we are using the RemoteUI."
+  svn merge --ignore-ancestry -c 7003 https://google-web-toolkit.googlecode.com/svn/trunk .
+

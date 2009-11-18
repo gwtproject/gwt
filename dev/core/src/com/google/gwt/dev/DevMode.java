@@ -318,10 +318,10 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       servletValidator = ServletValidator.create(getTopLogger(), webXml);
     }
 
-    TreeLogger branch = getTopLogger().branch(TreeLogger.INFO,
+    TreeLogger branch = getTopLogger().branch(TreeLogger.TRACE,
         "Loading modules");
     for (String moduleName : options.getModuleNames()) {
-      TreeLogger moduleBranch = branch.branch(TreeLogger.INFO, moduleName);
+      TreeLogger moduleBranch = branch.branch(TreeLogger.TRACE, moduleName);
       try {
         ModuleDef module = loadModule(moduleBranch, moduleName, false);
         Util.recursiveDelete(options.getShellBaseWorkDir(module), false);

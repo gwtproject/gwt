@@ -732,7 +732,7 @@ abstract class DevModeBase implements DoneCallback {
       // Eager AWT init for OS X to ensure safe coexistence with SWT.
       BootStrapPlatform.initGui();
 
-      if (startUp()) {
+      if (startUp() && !options.useRemoteUI()) {
         // The web server is running now, so launch browsers for startup urls.
         launchStartupUrls(getTopLogger());
       }
@@ -885,6 +885,7 @@ abstract class DevModeBase implements DoneCallback {
       getTopLogger().log(TreeLogger.ERROR, "Invalid URL " + url, e);
       throw new UnableToCompleteException();
     }
+    
     final URL helpInfoUrl = parsedUrl;
     getTopLogger().log(TreeLogger.INFO,
         "Waiting for browser connection to " + url, null, new HelpInfo() {
@@ -984,7 +985,7 @@ abstract class DevModeBase implements DoneCallback {
         return false;
       }
       options.setPort(resultPort);
-      getTopLogger().log(TreeLogger.INFO,
+      getTopLogger().log(TreeLogger.TRACE,
           "Started web server on port " + resultPort);
     }
 

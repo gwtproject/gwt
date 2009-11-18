@@ -774,3 +774,7 @@ trunk@6987 was merged into this branch
   Make Development Mode UI integrate with OS X UI better.
   svn merge --ignore-ancestry -c6987  https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6993 was merged into this branch
+  Remove the now unnecessary -XstartOnFirstThread argument.
+  svn merge --ignore-ancestry -c6993  https://google-web-toolkit.googlecode.com/svn/trunk .
+

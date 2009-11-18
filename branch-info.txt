@@ -794,3 +794,6 @@ trunk@7003 was merged into this branch
   Revert "Tweak log levels and don't launchURLs if we are using the RemoteUI."
   svn merge --ignore-ancestry -c 7003 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7009 was merged into this branch
+  Sorts set/getCodeServerPort properly  
+  svn merge --ignore-ancestry -c7009 https://google-web-toolkit.googlecode.com/svn/trunk .

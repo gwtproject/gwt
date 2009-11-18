@@ -765,3 +765,8 @@ trunk@6981,6984,6985 was merged into this branch
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
     svn merge --ignore-ancestry -r6983:6985 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@6982 was merged into this branch
+  Get the XHR memory leak fixed correctly
+  svn merge --ignore-ancestry -c6982 https://google-web-toolkit.googlecode.com/svn/trunk .
+

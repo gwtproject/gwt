@@ -778,3 +778,7 @@ trunk@6993 was merged into this branch
   Remove the now unnecessary -XstartOnFirstThread argument.
   svn merge --ignore-ancestry -c6993  https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6938,6995 was merged into this branch
+  Updates IE plugin installer to install for current user only.
+  svn merge --ignore-ancestry -c6938,6995  https://google-web-toolkit.googlecode.com/svn/trunk .
+

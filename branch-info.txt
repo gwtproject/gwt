@@ -754,3 +754,7 @@ trunk@6932 was merged into this branch
 trunk@6977 was merged into this branch
   Fix xhtml.ent url in mail/client/TopPanel.ui.xml
   svn merge --ignore-ancestry -c 6977 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6968 was merged into this branch
+  Accounting for time difference between host and client in CookieTest#testExpires
+  svn merge --ignore-ancestry -c 6968 https://google-web-toolkit.googlecode.com/svn/trunk .

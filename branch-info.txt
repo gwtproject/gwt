@@ -758,3 +758,10 @@ trunk@6977 was merged into this branch
 trunk@6968 was merged into this branch
   Accounting for time difference between host and client in CookieTest#testExpires
   svn merge --ignore-ancestry -c 6968 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6981,6984,6985 was merged into this branch
+ Cleanup logging, reduce visibility of SwingUI internals, fix JDK 1.5 breakage
+    svn merge --ignore-ancestry -c6981 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -r6983:6985 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

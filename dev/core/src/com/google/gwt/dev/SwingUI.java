@@ -27,11 +27,15 @@ import com.google.gwt.dev.ui.RestartServerCallback;
 import com.google.gwt.dev.ui.RestartServerEvent;
 import com.google.gwt.dev.util.collect.HashMap;
 
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.Icon;
@@ -48,11 +52,17 @@ public class SwingUI extends DevModeUI {
   /**
    * Module handle for Swing UI.
    */
-  public class SwingModuleHandle implements ModuleHandle {
+  protected class SwingModuleHandle implements ModuleHandle {
 
     private final TreeLogger logger;
     private final ModulePanel tab;
 
+    /**
+     * Create an immutable module handle.
+     * 
+     * @param logger logger to use for this module
+     * @param tab the module panel associated with this instance
+     */
     public SwingModuleHandle(TreeLogger logger, ModulePanel tab) {
       this.logger = logger;
       this.tab = tab;
@@ -62,6 +72,9 @@ public class SwingUI extends DevModeUI {
       return logger;
     }
     
+    /**
+     * @return the ModulePanel associated with this module instance.
+     */
     public ModulePanel getTab() {
       return tab;
     }
@@ -70,7 +83,7 @@ public class SwingUI extends DevModeUI {
   /**
    * Interface to group activities related to adding and deleting tabs.
    */
-  public interface TabPanelCollection {
+  protected interface TabPanelCollection {
     
     /**
      * Add a new tab containing a ModuleTabPanel.
@@ -208,9 +221,8 @@ public class SwingUI extends DevModeUI {
         }
       }
     });
-    frame.setIconImages(Arrays.asList(gwtIcon48.getImage(),
-        gwtIcon32.getImage(), gwtIcon64.getImage(), gwtIcon128.getImage(),
-        gwtIcon16.getImage()));
+    setIconImages(topLogger, gwtIcon48, gwtIcon32, gwtIcon64, gwtIcon128,
+        gwtIcon16);
     frame.setVisible(true);
   }
 
@@ -303,5 +315,47 @@ public class SwingUI extends DevModeUI {
           }, moduleName);
     }
     return moduleTabPanel;
+  }
+
+  /**
+   * Set the images for the frame.  On JDK 1.5, only the last icon supplied is
+   * used for all needs.
+   * 
+   * @param logger logger to use for warnings
+   * @param icons one or more icons 
+   */
+  private void setIconImages(TreeLogger logger, ImageIcon... icons) {
+    if (icons.length == 0) {
+      return;
+    }
+    Exception caught = null;
+    try {
+      // if this fails, we fall back to the JDK 1.5 method
+      Method method = frame.getClass().getMethod("setIconImages", List.class);
+      List<Image> imageList = new ArrayList<Image>();
+      for (ImageIcon icon : icons) {
+        Image image = icon.getImage();
+        if (image != null) {
+          imageList.add(image);
+        }
+      }
+      method.invoke(frame, imageList);
+      return;
+    } catch (SecurityException e) {
+      caught = e;
+    } catch (IllegalArgumentException e) {
+      caught = e;
+    } catch (NoSuchMethodException e) {
+      // ignore, expected on JDK 1.5
+    } catch (IllegalAccessException e) {
+      caught = e;
+    } catch (InvocationTargetException e) {
+      caught = e;
+    }
+    if (caught != null) {
+      logger.log(TreeLogger.WARN, "Unexpected exception setting icon images",
+          caught);
+    }
+    frame.setIconImage(icons[icons.length - 1].getImage());
   }
 }

@@ -782,3 +782,6 @@ trunk@6938,6995 was merged into this branch
   Updates IE plugin installer to install for current user only.
   svn merge --ignore-ancestry -c6938,6995  https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6998 was merged into this branch
+  Revert "Fix XHR memory leak one more time by re-using a static null function."
+  svn merge --ignore-ancestry -c 6998 https://google-web-toolkit.googlecode.com/svn/trunk .

@@ -797,3 +797,8 @@ trunk@7003 was merged into this branch
 trunk@7009 was merged into this branch
   Sorts set/getCodeServerPort properly  
   svn merge --ignore-ancestry -c7009 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7007,7008,7010 was merged into this branch
+  Adds Window.Navigator API
+  Removes hosted mode reference in DynaTable
+  svn merge --ignore-ancestry -c7007,7008,7010 https://google-web-toolkit.googlecode.com/svn/trunk .

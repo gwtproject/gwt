@@ -750,3 +750,7 @@ trunk@6973 was merged into this branch
 trunk@6932 was merged into this branch
   Fixes bad code gen when css class names in a ui:style block have dashes in them
   svn merge --ignore-ancestry -c 6932 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6977 was merged into this branch
+  Fix xhtml.ent url in mail/client/TopPanel.ui.xml
+  svn merge --ignore-ancestry -c 6977 https://google-web-toolkit.googlecode.com/svn/trunk .

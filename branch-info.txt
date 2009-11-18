@@ -785,3 +785,8 @@ trunk@6938,6995 was merged into this branch
 trunk@6998 was merged into this branch
   Revert "Fix XHR memory leak one more time by re-using a static null function."
   svn merge --ignore-ancestry -c 6998 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7001 was merged into this branch
+  Revert "Renamed the portHosted option to codeServerPort and associated types."
+  svn merge --ignore-ancestry -c 7001 https://google-web-toolkit.googlecode.com/svn/trunk .
+

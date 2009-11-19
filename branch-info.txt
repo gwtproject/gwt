@@ -850,3 +850,7 @@ trunk@7041 was merged into this branch
   Making CookieTest use client time to set cookie expiration.
   svn merge --ignore-ancestry -c 7041 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7046 was merged into this branch
+  Drop Request/Response Logging Levels down to TRACE when using the Remote UI.
+  svn merge --ignore-ancestry -c 7046 https://google-web-toolkit.googlecode.com/svn/trunk .
+

@@ -831,3 +831,8 @@ trunk@7026 was merged into this branch
 trunk@7030 was merged into this branch
   Adds parsers for LayoutPanel and Length attributes.
   svn merge --ignore-ancestry -c 7030 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7027 was merged into this branch
+ Module logging changes
+    svn merge --ignore-ancestry -c7027 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

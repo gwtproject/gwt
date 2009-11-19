@@ -818,3 +818,8 @@ trunk@7019, trunk@7020 was merged into this branch
 trunk@7022 was merged into this branch
   Removes the now unnecessary mac-specific scripts.
   svn merge --ignore-ancestry -c 7022 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7024 was merged into this branch
+ Hosted => code server changes
+    svn merge --ignore-ancestry -c7024 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

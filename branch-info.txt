@@ -802,3 +802,7 @@ trunk@7007,7008,7010 was merged into this branch
   Adds Window.Navigator API
   Removes hosted mode reference in DynaTable
   svn merge --ignore-ancestry -c7007,7008,7010 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7013 was merged into this branch
+  Fixes problem in CssNameConverter
+  svn merge --ignore-ancestry -c 7013 https://google-web-toolkit.googlecode.com/svn/trunk .

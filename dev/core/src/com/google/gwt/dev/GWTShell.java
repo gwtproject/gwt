@@ -199,7 +199,7 @@ public class GWTShell extends DevModeBase {
     TreeLogger logger = ui.getWebServerLogger("Tomcat", null);
     // TODO(bruce): make tomcat work in terms of the modular launcher
     String whyFailed = EmbeddedTomcatServer.start(isHeadless() ? getTopLogger()
-        : logger, getPort(), options);
+        : logger, getPort(), options, shouldAutoGenerateResources());
 
     if (whyFailed != null) {
       getTopLogger().log(TreeLogger.ERROR, "Starting Tomcat: " + whyFailed);
@@ -209,9 +209,21 @@ public class GWTShell extends DevModeBase {
   }
 
   protected synchronized void produceOutput(TreeLogger logger,
-      StandardLinkerContext linkerStack, ArtifactSet artifacts, ModuleDef module)
-      throws UnableToCompleteException {
-    File moduleOutDir = options.getShellPublicGenDir(module);
-    linkerStack.produceOutputDirectory(logger, artifacts, moduleOutDir);
+      StandardLinkerContext linkerStack, ArtifactSet artifacts,
+      ModuleDef module, boolean isRelink) throws UnableToCompleteException {
+    /*
+     * Legacy: in GWTShell we only copy generated artifacts into the public gen
+     * folder. Public files and "autogen" files have special handling (that
+     * needs to die).
+     */
+    if (isRelink) {
+      File outputDir = options.getShellPublicGenDir(module);
+      outputDir.mkdirs();
+      linkerStack.produceOutputDirectory(logger, artifacts, outputDir);
+    }
+  }
+
+  protected boolean shouldAutoGenerateResources() {
+    return true;
   }
 }

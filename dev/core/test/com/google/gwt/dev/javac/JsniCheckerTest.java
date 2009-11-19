@@ -62,6 +62,29 @@ public class JsniCheckerTest extends CheckerTestCase {
         + "JSNI references to anonymous classes are illegal");
   }
 
+  public void testArrayBadMember() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Buggy[][]::blah;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateError(
+        code,
+        3,
+        "Referencing member 'Buggy[][].blah': 'class' is the only legal reference for array types");
+  }
+
+  public void testArrayClass() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Buggy[][]::class;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+  }
+
   public void testCyclicReferences() {
     {
       StringBuffer buggy = new StringBuffer();
@@ -153,7 +176,28 @@ public class JsniCheckerTest extends CheckerTestCase {
     code.append("    @D::bar;\n");
     code.append("  }-*/;\n");
     code.append("}\n");
+    shouldGenerateNoWarning(code);
 
+    // Check inherited suppress warnings.
+    code = new StringBuffer();
+    code.append("@Deprecated class D {\n");
+    code.append("  int bar;\n");
+    code.append("}\n");
+    code.append("@SuppressWarnings(\"deprecation\")\n");
+    code.append("class Buggy {\n");
+    code.append("  @Deprecated void foo(){}\n");
+    code.append("  @Deprecated int bar;\n");
+    code.append("  native void jsniMethod1() /*-{\n");
+    code.append("    @Buggy::foo();\n");
+    code.append("    @Buggy::bar;\n");
+    code.append("    @D::bar;\n");
+    code.append("  }-*/;\n");
+    code.append("  native void jsniMethod2() /*-{\n");
+    code.append("    @Buggy::foo();\n");
+    code.append("    @Buggy::bar;\n");
+    code.append("    @D::bar;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
     shouldGenerateNoWarning(code);
   }
 
@@ -213,6 +257,47 @@ public class JsniCheckerTest extends CheckerTestCase {
         + "type 'long' is not safe to access in JSNI code");
   }
 
+  public void testInnerNew() {
+    StringBuffer code = new StringBuffer();
+    code.append("public class Buggy {\n");
+    code.append("  class Inner {\n");
+    code.append("    long x = 3;\n");
+    code.append("    Inner(boolean b) { };\n");
+    code.append("  }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(@Buggy.Inner::new(Z)(true).toString());\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+
+    // Cannot resolve, missing synthetic enclosing instance.
+    shouldGenerateWarning(code, 7, "Referencing method 'Buggy.Inner.new(Z)': "
+        + "unable to resolve method, expect subsequent failures");
+
+    code = new StringBuffer();
+    code.append("public class Buggy {\n");
+    code.append("  static class Inner {\n");
+    code.append("    long x = 3;\n");
+    code.append("    Inner(boolean b) { };\n");
+    code.append("  }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(@Buggy.Inner::new(Z)(this, true).toString());\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+
+    code = new StringBuffer();
+    code.append("public class Buggy {\n");
+    code.append("  class Inner {\n");
+    code.append("    long x = 3;\n");
+    code.append("    Inner(boolean b) { };\n");
+    code.append("  }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(@Buggy.Inner::new(LBuggy;Z)(this, true).toString());\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+  }
+
   /**
    * The proper behavior here is a close call. In hosted mode, Java arrays are
    * completely unusable in JavaScript, so the current reasoning is to allow
@@ -249,6 +334,16 @@ public class JsniCheckerTest extends CheckerTestCase {
         "Type 'long' may not be returned from a JSNI method");
   }
 
+  public void testMalformedJsniRef() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Buggy;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateError(code, 3, "Expected \":\" in JSNI reference");
+  }
+
   public void testMethodArgument() {
     StringBuffer code = new StringBuffer();
     code.append("class Buggy {\n");
@@ -274,6 +369,25 @@ public class JsniCheckerTest extends CheckerTestCase {
         code,
         4,
         "Referencing method 'Buggy.m': return type 'long' is not safe to access in JSNI code");
+  }
+
+  public void testNew() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  static native Object main() /*-{\n");
+    code.append("    return @Buggy::new()();\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+
+    code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  Buggy(boolean b) { }\n");
+    code.append("  static native Object main() /*-{\n");
+    code.append("    return @Buggy::new(Z)(true);\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
   }
 
   public void testNullField() {
@@ -325,6 +439,29 @@ public class JsniCheckerTest extends CheckerTestCase {
         "Referencing method 'Buggy.m': return type 'long' is not safe to access in JSNI code");
   }
 
+  public void testPrimitiveBadMember() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Z::blah;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateError(
+        code,
+        3,
+        "Referencing member 'Z.blah': 'class' is the only legal reference for primitive types");
+  }
+
+  public void testPrimitiveClass() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Z::class;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+  }
+
   public void testRefInString() {
     {
       StringBuffer code = new StringBuffer();
@@ -336,6 +473,43 @@ public class JsniCheckerTest extends CheckerTestCase {
 
       shouldGenerateNoError(code);
     }
+  }
+
+  public void testUnresolvedClass() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Foo::x;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateWarning(code, 3,
+        "Referencing class 'Foo': unable to resolve class, expect subsequent failures");
+  }
+
+  public void testUnresolvedField() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Buggy::x;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateWarning(
+        code,
+        3,
+        "Referencing field 'Buggy.x': unable to resolve field, expect subsequent failures");
+  }
+
+  public void testUnresolvedMethod() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    @Buggy::x(Ljava/lang/String);\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateWarning(
+        code,
+        3,
+        "Referencing method 'Buggy.x(Ljava/lang/String)': unable to resolve method, expect subsequent failures");
   }
 
   public void testUnsafeAnnotation() {

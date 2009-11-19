@@ -143,7 +143,7 @@ public class FieldSerializerCreator {
 
     ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(
         packageName, className);
-
+    composerFactory.addAnnotationDeclaration("@SuppressWarnings(\"deprecation\")");
     return composerFactory.createSourceWriter(ctx, printWriter);
   }
 

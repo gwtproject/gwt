@@ -823,3 +823,7 @@ trunk@7024 was merged into this branch
  Hosted => code server changes
     svn merge --ignore-ancestry -c7024 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7026 was merged into this branch
+  Fix for ScrollPanel in IE6/7-standards-mode.
+  svn merge --ignore-ancestry -c 7026 https://google-web-toolkit.googlecode.com/svn/trunk .

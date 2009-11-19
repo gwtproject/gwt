@@ -811,3 +811,6 @@ trunk@7006 was merged into this branch
   XHR memory leak fix that doesn't break HtmlUnit.
   svn merge --ignore-ancestry -c 7006 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7019, trunk@7020 was merged into this branch
+  Roll junitCreator into webAppCreator.
+  svn merge --ignore-ancestry -r7018:7020  https://google-web-toolkit.googlecode.com/svn/trunk .

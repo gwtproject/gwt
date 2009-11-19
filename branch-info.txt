@@ -827,3 +827,7 @@ trunk@7024 was merged into this branch
 trunk@7026 was merged into this branch
   Fix for ScrollPanel in IE6/7-standards-mode.
   svn merge --ignore-ancestry -c 7026 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7030 was merged into this branch
+  Adds parsers for LayoutPanel and Length attributes.
+  svn merge --ignore-ancestry -c 7030 https://google-web-toolkit.googlecode.com/svn/trunk .

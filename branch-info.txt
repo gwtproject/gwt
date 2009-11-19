@@ -806,3 +806,8 @@ trunk@7007,7008,7010 was merged into this branch
 trunk@7013 was merged into this branch
   Fixes problem in CssNameConverter
   svn merge --ignore-ancestry -c 7013 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7006 was merged into this branch
+  XHR memory leak fix that doesn't break HtmlUnit.
+  svn merge --ignore-ancestry -c 7006 https://google-web-toolkit.googlecode.com/svn/trunk .
+

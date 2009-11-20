@@ -933,3 +933,8 @@ trunk@7080 was merged into this branch
 trunk@7032 was merged into this branch
   Makes UiFactory work with parameterized return types
   svn merge --ignore-ancestry -c 7032 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7083 was merged into this branch
+  Update location of MissingPlugin app
+  svn merge --ignore-ancestry -c 7083 https://google-web-toolkit.googlecode.com/svn/trunk .
+

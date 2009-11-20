@@ -941,3 +941,7 @@ trunk@7083 was merged into this branch
 trunk@7085 was merged into this branch
   Remove the obsolete platform dirs and their contents. 
   svn merge --ignore-ancestry -c7085  https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7078 was merged into this branch
+  Fix consistency problem between camel case and normal field refs
+  svn merge --ignore-ancestry -c 7078 https://google-web-toolkit.googlecode.com/svn/trunk .

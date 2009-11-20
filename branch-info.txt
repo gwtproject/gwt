@@ -870,3 +870,7 @@ trunk@7066 was merged into this branch
   Update IE installer to run without admin privileges
   svn merge --ignore-ancestry -c7066 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7049,7065 were merged into this branch
+  Ensures correct handling of (unknown) RuntimeExceptions thrown from deRPC service methods.
+  svn merge --ignore-ancestry -c7049,7065 https://google-web-toolkit.googlecode.com/svn/trunk .
+

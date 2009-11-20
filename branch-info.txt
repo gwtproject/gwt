@@ -938,3 +938,6 @@ trunk@7083 was merged into this branch
   Update location of MissingPlugin app
   svn merge --ignore-ancestry -c 7083 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7085 was merged into this branch
+  Remove the obsolete platform dirs and their contents. 
+  svn merge --ignore-ancestry -c7085  https://google-web-toolkit.googlecode.com/svn/trunk .

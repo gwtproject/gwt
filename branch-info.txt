@@ -866,3 +866,7 @@ trunk@7053 was merged into this branch
   Fixes issue where unit measurement divs could create document-level scrollbars on a small window.
   svn merge --ignore-ancestry -c7053 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7066 was merged into this branch
+  Update IE installer to run without admin privileges
+  svn merge --ignore-ancestry -c7066 https://google-web-toolkit.googlecode.com/svn/trunk .
+

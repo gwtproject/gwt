@@ -854,3 +854,7 @@ trunk@7046 was merged into this branch
   Drop Request/Response Logging Levels down to TRACE when using the Remote UI.
   svn merge --ignore-ancestry -c 7046 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7050 was merged into this branch
+  Make -remoteUI flag to DevMode undocumented. Clean up other flag help text in the compiler.
+  svn merge --ignore-ancestry -c7050 https://google-web-toolkit.googlecode.com/svn/trunk .
+

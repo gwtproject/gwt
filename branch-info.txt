@@ -945,3 +945,8 @@ trunk@7085 was merged into this branch
 trunk@7078 was merged into this branch
   Fix consistency problem between camel case and normal field refs
   svn merge --ignore-ancestry -c 7078 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7089 was merged into this branch
+  Tweaks to get restart server up and running.
+  svn merge --ignore-ancestry -c 7089 https://google-web-toolkit.googlecode.com/svn/trunk .
+

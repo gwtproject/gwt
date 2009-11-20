@@ -858,3 +858,7 @@ trunk@7050 was merged into this branch
   Make -remoteUI flag to DevMode undocumented. Clean up other flag help text in the compiler.
   svn merge --ignore-ancestry -c7050 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7054 was merged into this branch
+  isCookieEnabled sets and retrieves a cookie instead of using navigator.cookieEnabled
+  svn merge --ignore-ancestry -c7054 https://google-web-toolkit.googlecode.com/svn/trunk .
+

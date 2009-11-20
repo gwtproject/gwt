@@ -49,7 +49,7 @@ public class ArtifactsOutputDirectory implements OutputDirectory {
         closed = true;
         SoycArtifact newArtifact = new SoycArtifact(OUTPUT_DIRECTORY_NAME + "/"
             + path, baos.toByteArray());
-        newArtifact.setPrivate(false);
+        newArtifact.setPrivate(true);
         artifacts.add(newArtifact);
         baos = null;
       }

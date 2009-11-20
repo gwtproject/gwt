@@ -874,3 +874,46 @@ trunk@7049,7065 were merged into this branch
   Ensures correct handling of (unknown) RuntimeExceptions thrown from deRPC service methods.
   svn merge --ignore-ancestry -c7049,7065 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@6929 was merged into this branch
+  Fix formatting of milliseconds in pre-1970 (i.e., negative) dates
+  svn merge --ignore-ancestry -c6929 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6983 was merged into this branch
+  Ensure server info from superclasses doesn't stomp on subclass info.
+  svn merge --ignore-ancestry -c6983 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@6996 was merged into this branch
+  Pin modules in DevMode/DevModeBase until they are actually invoked.
+  svn merge --ignore-ancestry -c6996 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7002 was merged into this branch
+  Improve NumberFormat.format to avoid weird rounding issues
+  svn merge --ignore-ancestry -c7002 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7043 was merged into this branch
+  Work around Firefox issue where hasOwnProperty(new String(key)) fails
+  svn merge --ignore-ancestry -c7043 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7044 was merged into this branch
+  Fix mentions of 'hosted mode' in comments
+  svn merge --ignore-ancestry -c7044 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7058 was merged into this branch
+  Reinstate the help string and comment changes from r7040.
+  svn merge --ignore-ancestry -c7058 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7059 was merged into this branch
+  Fix javadoc typo (external issue 4252).
+  svn merge --ignore-ancestry -c7059 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7060 was merged into this branch
+  Simplify FF workaround for 'hasOwnProperty' String keys
+  svn merge --ignore-ancestry -c7060 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7062 was merged into this branch
+  Unify DevMode's startupModules and alreadySeen modules to simplify code
+  svn merge --ignore-ancestry -c7062 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7063 was merged into this branch
+  Simplify FF workaround for 'hasOwnProperty' String keys
+  svn merge --ignore-ancestry -c7063 https://google-web-toolkit.googlecode.com/svn/trunk .

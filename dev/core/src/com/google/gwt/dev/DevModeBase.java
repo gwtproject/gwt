@@ -54,11 +54,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -573,8 +571,6 @@ abstract class DevModeBase implements DoneCallback {
     }
   }
 
-  protected static final Map<String, ModuleDef> startupModules = new HashMap<String, ModuleDef>();
-
   private static final Random RNG = new Random();
 
   private static final AtomicLong uniqueId = new AtomicLong();
@@ -653,14 +649,6 @@ abstract class DevModeBase implements DoneCallback {
 
   protected DevModeUI ui = null;
   protected TreeLogger.Type baseLogLevelForUI = null;
-
-  /**
-   * Cheat on the first load's refresh by assuming the module loaded by
-   * {@link com.google.gwt.dev.shell.GWTShellServlet} is still fresh. This
-   * prevents a double-refresh on startup. Subsequent refreshes will trigger a
-   * real refresh.
-   */
-  private Set<String> alreadySeenModules = new HashSet<String>();
 
   private final Semaphore blockUntilDone = new Semaphore(0);
 
@@ -901,10 +889,8 @@ abstract class DevModeBase implements DoneCallback {
    */
   protected ModuleDef loadModule(TreeLogger logger, String moduleName,
       boolean refresh) throws UnableToCompleteException {
-    refresh &= alreadySeenModules.contains(moduleName);
     ModuleDef moduleDef = ModuleDefLoader.loadFromClassPath(logger, moduleName,
         refresh);
-    alreadySeenModules.add(moduleName);
     assert (moduleDef != null) : "Required module state is absent";
     return moduleDef;
   }

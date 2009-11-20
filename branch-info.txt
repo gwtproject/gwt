@@ -917,3 +917,7 @@ trunk@7062 was merged into this branch
 trunk@7063 was merged into this branch
   Simplify FF workaround for 'hasOwnProperty' String keys
   svn merge --ignore-ancestry -c7063 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7072 was merged into this branch
+  Use gwt.codesvr instead of gwt.hosted in JUnitShell
+  svn merge --ignore-ancestry -c7072 https://google-web-toolkit.googlecode.com/svn/trunk .

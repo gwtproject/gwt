@@ -950,3 +950,7 @@ trunk@7089 was merged into this branch
   Tweaks to get restart server up and running.
   svn merge --ignore-ancestry -c 7089 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7092 was merged into this branch
+  Fired onload events for images that are cached.
+  svn merge --ignore-ancestry -c 7092 https://google-web-toolkit.googlecode.com/svn/trunk .
+

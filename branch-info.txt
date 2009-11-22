@@ -958,3 +958,11 @@ trunk@7094 was merged into this branch
  Handle onModuleLoad errors, misc devmode bug fixes and cleanups
     svn merge --ignore-ancestry -c7094 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk c6817 + c7096-c7102 were merged into this branch
+  Remove legacy support from hosted.html.
+  Adds a __gwt_disconnected function to hosted.html, which glasses the screen and puts up a disconnect message.
+  Reorders a swing operation to prevent a startup race condition that was causing the first log message to render huge and with no text.
+    svn merge --ignore-ancestry -c6817 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -r7095:7102 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

@@ -978,3 +978,7 @@ trunk@7112 was merged into this branch
   Improves error handling when there is a failure to connect to the remote UI.
   svn merge --ignore-ancestry -c 7112 http://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7117 was merged into this branch
+  Allows spaces in test targets in user/build.xml.
+  svn merge --ignore-ancestry -c 7117 http://google-web-toolkit.googlecode.com/svn/trunk .
+

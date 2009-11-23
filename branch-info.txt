@@ -974,3 +974,7 @@ trunk@7109 was merged into this branch
   Adds INFO mesage to indcate when a module has been loaded.
   svn merge --ignore-ancestry -c 7109 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7112 was merged into this branch
+  Improves error handling when there is a failure to connect to the remote UI.
+  svn merge --ignore-ancestry -c 7112 http://google-web-toolkit.googlecode.com/svn/trunk .
+

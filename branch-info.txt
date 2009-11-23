@@ -1000,3 +1000,7 @@ trunk@7122 was merged into this branch
 trunk@7132 was merged into this branch
   Fix PrefixTree implementation on Chrome
   svn merge --ignore-ancestry -c 7132 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7137 was merged into this branch
+  Use a css expression for hosted.html's disconnect screen in IE6 standards mode.
+  svn merge --ignore-ancestry -c7137 http://google-web-toolkit.googlecode.com/svn/trunk .

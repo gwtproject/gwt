@@ -1008,3 +1008,8 @@ trunk@7137 was merged into this branch
 trunk@7139 was merged into this branch
   Disconnected plugin glasspanel lightened to 75% opacity.
   svn merge --ignore-ancestry -c7139 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7141 was merged into this branch
+ Remove TODOs from hosted.html
+    svn merge --ignore-ancestry -c7141 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

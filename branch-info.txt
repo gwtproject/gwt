@@ -988,3 +988,7 @@ trunk@7119 was merged into this branch, then its reversion in r7125
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
     svn merge --ignore-ancestry -c7125 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7122 was merged into this branch
+  Replace JUnit's -web command-line flag with -prod (keeping -web as a deprecated synonym)
+  svn merge --ignore-ancestry -c 7122 http://google-web-toolkit.googlecode.com/svn/trunk .

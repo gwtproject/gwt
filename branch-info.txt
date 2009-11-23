@@ -976,11 +976,11 @@ trunk@7109 was merged into this branch
 
 trunk@7112 was merged into this branch
   Improves error handling when there is a failure to connect to the remote UI.
-  svn merge --ignore-ancestry -c 7112 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7112 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7117 was merged into this branch
   Allows spaces in test targets in user/build.xml.
-  svn merge --ignore-ancestry -c 7117 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7117 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7119 was merged into this branch, then its reversion in r7125
  Fix Arrays.equals(Object[], Object[]) for nulls.
@@ -991,16 +991,20 @@ trunk@7119 was merged into this branch, then its reversion in r7125
 
 trunk@7121 was merged into this branch
   Remove obsolete documentation.
-  svn merge --ignore-ancestry -c 7121 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7121 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7122 was merged into this branch
   Replace JUnit's -web command-line flag with -prod (keeping -web as a deprecated synonym)
-  svn merge --ignore-ancestry -c 7122 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7122 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7132 was merged into this branch
   Fix PrefixTree implementation on Chrome
-  svn merge --ignore-ancestry -c 7132 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7132 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7137 was merged into this branch
   Use a css expression for hosted.html's disconnect screen in IE6 standards mode.
-  svn merge --ignore-ancestry -c7137 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c7137 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7139 was merged into this branch
+  Disconnected plugin glasspanel lightened to 75% opacity.
+  svn merge --ignore-ancestry -c7139 https://google-web-toolkit.googlecode.com/svn/trunk .

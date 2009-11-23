@@ -996,3 +996,7 @@ trunk@7121 was merged into this branch
 trunk@7122 was merged into this branch
   Replace JUnit's -web command-line flag with -prod (keeping -web as a deprecated synonym)
   svn merge --ignore-ancestry -c 7122 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7132 was merged into this branch
+  Fix PrefixTree implementation on Chrome
+  svn merge --ignore-ancestry -c 7132 http://google-web-toolkit.googlecode.com/svn/trunk .

@@ -982,7 +982,9 @@ trunk@7117 was merged into this branch
   Allows spaces in test targets in user/build.xml.
   svn merge --ignore-ancestry -c 7117 http://google-web-toolkit.googlecode.com/svn/trunk .
 
-trunk@7119 was merged into this branch
+trunk@7119 was merged into this branch, then its reversion in r7125
  Fix Arrays.equals(Object[], Object[]) for nulls.
     svn merge --ignore-ancestry -c7119 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -c7125 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -966,3 +966,7 @@ trunk c6817 + c7096-c7102 were merged into this branch
     svn merge --ignore-ancestry -c6817 https://google-web-toolkit.googlecode.com/svn/trunk/ .
     svn merge --ignore-ancestry -r7095:7102 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7105 was merged into this branch
+  Update the gwt-user widgets XSD to support LayoutPanel.
+    svn merge --ignore-ancestry -c 7105 https://google-web-toolkit.googlecode.com/svn/trunk .
+

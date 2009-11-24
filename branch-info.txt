@@ -1023,3 +1023,7 @@ trunk@7150 was merged into this branch
   Got rid of port-guessing logic. We now use setStartupURLs as our init hook.
   svn merge --ignore-ancestry -c7150 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7153 was merged into this branch
+ Don't rely on user agent strings to identify JUnitShell clients
+    svn merge --ignore-ancestry -c7153 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

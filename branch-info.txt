@@ -1033,3 +1033,8 @@ trunk@7158 was merged into this branch
   A number of tweaks to the mail sample.
   Fix for the non-standard style names in SplitLayoutPanel.
     svn merge --ignore-ancestry -c7158 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7160 was merged into this branch
+  Cleans up javadoc in layout panels (TODOs will be captured as issues).
+  Fix for non-standard gwt-Tab style name.
+    svn merge --ignore-ancestry -c7160 https://google-web-toolkit.googlecode.com/svn/trunk/ .

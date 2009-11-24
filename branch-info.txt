@@ -1038,3 +1038,8 @@ trunk@7160 was merged into this branch
   Cleans up javadoc in layout panels (TODOs will be captured as issues).
   Fix for non-standard gwt-Tab style name.
     svn merge --ignore-ancestry -c7160 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7162 was merged into this branch
+ UI cleanups.
+    svn merge --ignore-ancestry -c7162 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

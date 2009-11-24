@@ -991,39 +991,40 @@ trunk@7119 was merged into this branch, then its reversion in r7125
 
 trunk@7121 was merged into this branch
   Remove obsolete documentation.
-  svn merge --ignore-ancestry -c 7121 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7121 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7122 was merged into this branch
   Replace JUnit's -web command-line flag with -prod (keeping -web as a deprecated synonym)
-  svn merge --ignore-ancestry -c 7122 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7122 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7132 was merged into this branch
   Fix PrefixTree implementation on Chrome
-  svn merge --ignore-ancestry -c 7132 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7132 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7137 was merged into this branch
   Use a css expression for hosted.html's disconnect screen in IE6 standards mode.
-  svn merge --ignore-ancestry -c7137 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7137 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7139 was merged into this branch
   Disconnected plugin glasspanel lightened to 75% opacity.
-  svn merge --ignore-ancestry -c7139 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7139 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7141 was merged into this branch
  Remove TODOs from hosted.html
-    svn merge --ignore-ancestry -c7141 \
-      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -c7141 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
 trunk@7148 was merged into this branch
  DevMode UI improvements
-    svn merge --ignore-ancestry -c7148 \
-      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -c7148 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
 trunk@7150 was merged into this branch
   Got rid of port-guessing logic. We now use setStartupURLs as our init hook.
-  svn merge --ignore-ancestry -c7150 https://google-web-toolkit.googlecode.com/svn/trunk .
+    svn merge --ignore-ancestry -c7150 https://google-web-toolkit.googlecode.com/svn/trunk .
 
 trunk@7153 was merged into this branch
  Don't rely on user agent strings to identify JUnitShell clients
-    svn merge --ignore-ancestry -c7153 \
-      https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -c7153 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7155 was merged into this branch
+  Fixes JUnit sessions to not use Cookies, which can be problematic.
+    svn merge --ignore-ancestry -c7155 https://google-web-toolkit.googlecode.com/svn/trunk/ .

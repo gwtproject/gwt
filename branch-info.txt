@@ -1028,3 +1028,8 @@ trunk@7153 was merged into this branch
 trunk@7155 was merged into this branch
   Fixes JUnit sessions to not use Cookies, which can be problematic.
     svn merge --ignore-ancestry -c7155 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7158 was merged into this branch
+  A number of tweaks to the mail sample.
+  Fix for the non-standard style names in SplitLayoutPanel.
+    svn merge --ignore-ancestry -c7158 https://google-web-toolkit.googlecode.com/svn/trunk/ .

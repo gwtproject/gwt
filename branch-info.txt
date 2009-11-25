@@ -1061,4 +1061,9 @@ trunk@7170 was merged into this branch
 
 trunk@7175 was merged into this branch
   Updating release notes for 2.0.0-rc2.
-    svn merge --ignore-ancestry -c7175 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+    svn merge --ignore-ancestry -c7175
+  https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk @7173 was merged into this branch
+  Changing mentions of SOYC to Compile Report (in comments,
+  documentation, and compiler output).

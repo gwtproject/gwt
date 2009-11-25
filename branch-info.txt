@@ -1075,3 +1075,8 @@ trunk @7178 was merged into this branch
 trunk @7179 was merged into this branch
   Minor TabLayoutPanel structural changes. Some doc cleanup.
   merge --ignore-ancestry -c7179 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk @7184 was merged into this branch
+  Prettifies the Compile Report dashboard by sorting permutation IDs in proper ascending order.
+  Review by: jlabanca (desk review)
+  merge --ignore-ancestry -c7184 https://google-web-toolkit.googlecode.com/svn/trunk .

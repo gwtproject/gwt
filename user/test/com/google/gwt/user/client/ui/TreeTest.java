@@ -15,8 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -39,7 +37,6 @@ public class TreeTest extends GWTTestCase {
     return "com.google.gwt.user.DebugTest";
   }
 
-  @DoNotRunWith({Platform.HtmlUnit})
   public void testAttachDetachOrder() {
     HasWidgetsTester.testAll(new Tree(), new Adder(), true);
   }

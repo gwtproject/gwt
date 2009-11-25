@@ -1084,3 +1084,6 @@ trunk @7184 was merged into this branch
 trunk @7183 was merged into this branch
   Fix external issue 4260: FieldSerializer problems with non-Latin class names
   svn merge --ignore-ancestry -c7183 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+releases/2.0 @7093 was reverted because it broke HtmlUnit tests that use images
+  svn merge --ignore-ancestry -r7093:7092 https://google-web-toolkit.googlecode.com/svn/releases/2.0 .

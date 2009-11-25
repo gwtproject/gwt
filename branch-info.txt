@@ -1087,3 +1087,8 @@ trunk @7183 was merged into this branch
 
 releases/2.0 @7093 was reverted because it broke HtmlUnit tests that use images
   svn merge --ignore-ancestry -r7093:7092 https://google-web-toolkit.googlecode.com/svn/releases/2.0 .
+
+trunk @7190 was merged into this branch
+  Removed index.html from distro-source because it is obsolete
+  svn merge --ignore-ancestry -c7190 https://google-web-toolkit.googlecode.com/svn/trunk .
+

@@ -1067,3 +1067,7 @@ trunk@7175 was merged into this branch
 trunk @7173 was merged into this branch
   Changing mentions of SOYC to Compile Report (in comments,
   documentation, and compiler output).
+
+trunk @7178 was merged into this branch
+  Fixes CustomButton's ability to have body text in UiBinder
+  merge --ignore-ancestry -c 7178 https://google-web-toolkit.googlecode.com/svn/trunk .

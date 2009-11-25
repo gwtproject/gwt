@@ -37,7 +37,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 
 /**
- * Converts SOYC report files into emitted private artifacts.
+ * Converts Compile Report files into emitted private artifacts.
  */
 @LinkerOrder(Order.POST)
 public class SoycReportLinker extends Linker {

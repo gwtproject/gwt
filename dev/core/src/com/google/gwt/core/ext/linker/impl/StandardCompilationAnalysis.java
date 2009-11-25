@@ -29,7 +29,7 @@ import java.util.List;
 public class StandardCompilationAnalysis extends CompilationAnalysis {
 
   /**
-   * A SOYC artifact. The existence of this class is an implementation detail.
+   * A Compile Report artifact. The existence of this class is an implementation detail.
    */
   public static class SoycArtifact extends SyntheticArtifact {
     public SoycArtifact(String partialPath, byte[] bytes) {

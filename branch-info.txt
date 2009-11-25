@@ -1053,3 +1053,8 @@ trunk@7168 was merged into this branch
  Fix Arrays.equals(Object[], Object[]) to handle nulls.
     svn merge --ignore-ancestry -c7168 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7170 was merged into this branch
+ Change launch method dropdown into discrete buttons
+    svn merge --ignore-ancestry -c7170 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -1080,3 +1080,7 @@ trunk @7184 was merged into this branch
   Prettifies the Compile Report dashboard by sorting permutation IDs in proper ascending order.
   Review by: jlabanca (desk review)
   merge --ignore-ancestry -c7184 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk @7183 was merged into this branch
+  Fix external issue 4260: FieldSerializer problems with non-Latin class names
+  svn merge --ignore-ancestry -c7183 https://google-web-toolkit.googlecode.com/svn/trunk .

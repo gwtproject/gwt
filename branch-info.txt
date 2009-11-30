@@ -1092,3 +1092,7 @@ trunk @7190 was merged into this branch
   Removed index.html from distro-source because it is obsolete
   svn merge --ignore-ancestry -c7190 https://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7194 was merged into this branch
+  Make RunStyle public, improve docs.
+    svn merge --ignore-ancestry -c7194 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -1102,3 +1102,8 @@ trunk@7195 was merged into this branch
  match expectations.
     svn merge --ignore-ancestry -c7195 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7198 was merged into this branch
+  Update location of missing plugin app
+  svn merge --ignore-ancestry -c7198 https://google-web-toolkit.googlecode.com/svn/trunk .
+

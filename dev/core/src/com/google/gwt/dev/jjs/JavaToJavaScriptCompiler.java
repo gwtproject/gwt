@@ -392,6 +392,8 @@ public class JavaToJavaScriptCompiler {
       String[] additionalRootTypes, JJSOptions options,
       boolean singlePermutation) throws UnableToCompleteException {
 
+    InternalCompilerException.preload();
+
     if (additionalRootTypes == null) {
       additionalRootTypes = Empty.STRINGS;
     }

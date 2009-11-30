@@ -1096,3 +1096,9 @@ trunk@7194 was merged into this branch
   Make RunStyle public, improve docs.
     svn merge --ignore-ancestry -c7194 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7195 was merged into this branch
+ Change keybindings for find-next and find-prev in the Swing UI to better
+ match expectations.
+    svn merge --ignore-ancestry -c7195 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

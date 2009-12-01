@@ -1125,3 +1125,7 @@ trunk@7219 was merged into this branch
  Javadoc fixes.
     svn merge --ignore-ancestry -c7219 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7222 was merged into this branch
+ Increase stack size of JUnit tests.
+    svn merge --ignore-ancestry -c7222 https://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -1116,3 +1116,7 @@ trunk@7212 was merged into this branch
  Fix standalone month/day-of-week handling.
     svn merge --ignore-ancestry -c7212 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk 7213:7216 merged into this branch
+  UiBinder javadoc for CellPanel, HasVerticalAlignment, UIObject, HasHorizontalAlignment.java
+  svn merge --ignore-ancestry -r 7213:7216 https://google-web-toolkit.googlecode.com/svn/trunk .

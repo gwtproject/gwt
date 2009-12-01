@@ -1120,3 +1120,8 @@ trunk@7212 was merged into this branch
 trunk 7213:7216 merged into this branch
   UiBinder javadoc for CellPanel, HasVerticalAlignment, UIObject, HasHorizontalAlignment.java
   svn merge --ignore-ancestry -r 7213:7216 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7219 was merged into this branch
+ Javadoc fixes.
+    svn merge --ignore-ancestry -c7219 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

@@ -1111,3 +1111,8 @@ trunk@7201,7202 was merged into this branch
   Don't validate servlet tags with -noserver.
   svn merge --ignore-ancestry -c7201 https://google-web-toolkit.googlecode.com/svn/trunk .
   svn merge --ignore-ancestry -c7202 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7212 was merged into this branch
+ Fix standalone month/day-of-week handling.
+    svn merge --ignore-ancestry -c7212 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

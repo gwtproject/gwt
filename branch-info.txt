@@ -1156,3 +1156,7 @@ trunk@7230 was merged into this branch
  Build file for IE plugin now requires a version parameter.
     svn merge --ignore-ancestry -c7230 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7232 was merged into this branch
+ Removing image.onload fix from release notes.
+    svn merge --ignore-ancestry -c7232 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

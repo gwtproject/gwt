@@ -1160,3 +1160,11 @@ trunk@7232 was merged into this branch
  Removing image.onload fix from release notes.
     svn merge --ignore-ancestry -c7232 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7236 was merged into this branch
+ Fixes pseudo-memory-leak caused by adding a new window resize handler every
+ time a popup is shown, but not removing it. This was causing particularly bad
+ behavior on IE, where a translucent glass element allocates a significant
+ amount of memory.
+    svn merge --ignore-ancestry -c7236 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+

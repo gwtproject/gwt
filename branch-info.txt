@@ -1129,3 +1129,22 @@ trunk@7219 was merged into this branch
 trunk@7222 was merged into this branch
  Increase stack size of JUnit tests.
     svn merge --ignore-ancestry -c7222 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7221 was merged into this branch
+  Fix for hosted.html missing plugin warning in IE7+ quirks mode.
+    svn merge --ignore-ancestry -c7221 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7223 was merged into this branch
+ Adding UiBinder doc for widgets that require it.
+    svn merge --ignore-ancestry -c7223 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7225 was merged into this branch
+ Removes the use of FinallyCommand in StackLayoutPanel. This works around
+ a Scheduler bug that's causing StackLayoutPanel to misbehave slightly.
+    svn merge --ignore-ancestry -c7225 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7226 was merged into this branch
+ Fixes issues 2907, 4277 and 4278.
+ Also fixes mail icon showing up in front of the about dialog.
+    svn merge --ignore-ancestry -c7226 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

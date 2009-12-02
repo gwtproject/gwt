@@ -15,8 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Event;
 
@@ -29,8 +27,8 @@ import java.util.NoSuchElementException;
  * with a header for each child which the user can click to display.
  * 
  * <p>
- * This widget will <em>only</em> work in standards mode, which requires
- * that the HTML page in which it is run have an explicit &lt;!DOCTYPE&gt;
+ * This widget will <em>only</em> work in standards mode, which requires that
+ * the HTML page in which it is run have an explicit &lt;!DOCTYPE&gt;
  * declaration.
  * </p>
  * 
@@ -38,6 +36,38 @@ import java.util.NoSuchElementException;
  * <h3>Example</h3>
  * {@example com.google.gwt.examples.StackLayoutPanelExample}
  * </p>
+ * 
+ * <h3>Use in UiBinder Templates</h3>
+ * <p>
+ * A StackLayoutPanel element in a
+ * {@link com.google.gwt.uibinder.client.UiBinder UiBinder} template may have a
+ * <code>unit</code> attribute with a
+ * {@link com.google.gwt.dom.client.Style.Unit Style.Unit} value (it defaults to
+ * PX).
+ * <p>
+ * The children of a StackLayoutPanel element are laid out in &lt;g:stack>
+ * elements. Each stack can have one widget child and one of two types of header
+ * elements. A &lt;g:header> element can hold html, or a &lt;g:customHeader>
+ * element can hold a widget. (Note that the tags of the header elements are not
+ * capitalized. This is meant to signal that the head is not a runtime object,
+ * and so cannot have a <code>ui:field</code> attribute.)
+ * <p>
+ * For example:
+ * 
+ * <pre>
+ * &lt;g:StackLayoutPanel unit='PX'>
+ *  &lt;g:stack>
+ *    &lt;g:header size='3'>&lt;b>HTML&lt;/b> header&lt;/g:header>
+ *    &lt;g:Label>able&lt;/g:Label>
+ *  &lt;/g:stack>
+ *  &lt;g:stack>
+ *    &lt;g:customHeader size='3'>
+ *      &lt;g:Label>Custom header&lt;/g:Label>
+ *    &lt;/g:customHeader>
+ *    &lt;g:Label>baker&lt;/g:Label>
+ *  &lt;/g:stack>
+ * &lt;/g:StackLayoutPanel>
+ * </pre>
  */
 public class StackLayoutPanel extends Composite implements HasWidgets,
     RequiresResize, ProvidesResize {
@@ -100,7 +130,7 @@ public class StackLayoutPanel extends Composite implements HasWidgets,
    * @param header the header widget
    * @param headerSize the size of the header widget
    */
-  public void add(Widget widget, Widget header, double headerSize) {
+  public void add(final Widget widget, Widget header, double headerSize) {
     ClickWrapper wrapper = new ClickWrapper(widget, header);
     layoutPanel.add(wrapper);
     layoutPanel.add(widget);
@@ -112,8 +142,9 @@ public class StackLayoutPanel extends Composite implements HasWidgets,
     layoutData.add(data);
 
     if (visibleWidget == null) {
-      // Don't animate the initial widget display.
-      showWidget(widget, 0);
+      // If there's no visible widget, display the first one. The layout will
+      // be updated onLoad().
+      visibleWidget = widget;
     }
   }
 
@@ -173,6 +204,12 @@ public class StackLayoutPanel extends Composite implements HasWidgets,
     showWidget(widget, ANIMATION_TIME);
   }
 
+  @Override
+  protected void onLoad() {
+    // When the widget becomes attached, update its layout.
+    animate(0);
+  }
+
   private void animate(int duration) {
     int top = 0, bottom = 0;
     int i = 0, visibleIndex = -1;
@@ -209,10 +246,6 @@ public class StackLayoutPanel extends Composite implements HasWidgets,
 
   private void showWidget(Widget widget, final int duration) {
     visibleWidget = widget;
-    Scheduler.get().scheduleFinally(new ScheduledCommand() {
-      public void execute() {
-        animate(duration);
-      }
-    });
+    animate(duration);
   }
 }

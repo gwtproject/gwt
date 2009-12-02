@@ -1152,3 +1152,7 @@ trunk@7228 was merged into this branch
  Fixing TabLayoutPanel tab stacking (float -> cssFloat).
     svn merge --ignore-ancestry -c7228 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7230 was merged into this branch
+ Build file for IE plugin now requires a version parameter.
+    svn merge --ignore-ancestry -c7230 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

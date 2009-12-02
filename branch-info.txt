@@ -1148,3 +1148,7 @@ trunk@7226 was merged into this branch
  Also fixes mail icon showing up in front of the about dialog.
     svn merge --ignore-ancestry -c7226 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7228 was merged into this branch
+ Fixing TabLayoutPanel tab stacking (float -> cssFloat).
+    svn merge --ignore-ancestry -c7228 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

@@ -1175,3 +1175,7 @@ trunk@7245 was merged into this branch
  Showcase sample tweaks.
     svn merge --ignore-ancestry -c7245 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7246 was merged into this branch
+ Adding src to classpath of generated test targets.
+    svn merge --ignore-ancestry -c7246 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

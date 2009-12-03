@@ -1167,4 +1167,7 @@ trunk@7236 was merged into this branch
  amount of memory.
     svn merge --ignore-ancestry -c7236 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7244 was merged into this branch
+ Resize MailList in Mail sample.
+    svn merge --ignore-ancestry -c7244 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 

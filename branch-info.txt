@@ -1179,3 +1179,11 @@ trunk@7246 was merged into this branch
  Adding src to classpath of generated test targets.
     svn merge --ignore-ancestry -c7246 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7242 was merged into this branch
+  Fix incorrect delimiter in Chinese Showcase translation.
+    svn merge --ignore-ancestry -c7242 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7250 was merged into this branch
+  A set of fixes for three layout issues: 4160, 4241, and 4243.
+    svn merge --ignore-ancestry -c7250 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

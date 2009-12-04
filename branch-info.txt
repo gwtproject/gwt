@@ -1192,3 +1192,7 @@ trunk@7252 was merged into this branch
     svn merge --ignore-ancestry -c7252 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7254 was merged into this branch
+  Updating release notes.
+    svn merge --ignore-ancestry -c7254 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

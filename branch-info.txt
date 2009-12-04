@@ -1196,3 +1196,7 @@ trunk@7254 was merged into this branch
   Updating release notes.
     svn merge --ignore-ancestry -c7254 https://google-web-toolkit.googlecode.com/svn/trunk/ .
 
+trunk@7258 was merged into this branch
+  Fixes a bug in recursive unit invalidation.
+    svn merge --ignore-ancestry -c7258 https://google-web-toolkit.googlecode.com/svn/trunk/ .
+

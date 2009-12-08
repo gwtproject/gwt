@@ -1204,3 +1204,8 @@ trunk@7264 was merged into this branch
   Javadoc fixes for deRPC.
     svn merge --ignore-ancestry -c7264 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7275 was merged into this branch
+  Javadoc fixes for JSONP.
+    svn merge --ignore-ancestry -c7275 \
+      https://google-web-toolkit.googlecode.com/svn/trunk/ .

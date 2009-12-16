@@ -1209,3 +1209,7 @@ trunk@7275 was merged into this branch
   Javadoc fixes for JSONP.
     svn merge --ignore-ancestry -c7275 \
       https://google-web-toolkit.googlecode.com/svn/trunk/ .
+
+trunk@7318 and 7319 were merged into this branch
+  IndexOutOfBounds fix for UiBinder, JavaDoc fixes for DisclosurePanel
+  svn merge --ignore-ancestry -r7317:7319 https://google-web-toolkit.googlecode.com/svn/trunk .

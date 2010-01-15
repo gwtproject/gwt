@@ -1217,3 +1217,7 @@ trunk@7318 and 7319 were merged into this branch
 trunk@7409 was merged into this branch
   Fixes issue 4435, Inconsistent behavior of setStyleName...in UiBinder
   svn merge --ignore-ancestry -c 7409 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7362 was merged into this branch
+  Add non-trivial tests to webAppCreator.
+  svn merge --ignore-ancestry -c 7362 http://google-web-toolkit.googlecode.com/svn/trunk .

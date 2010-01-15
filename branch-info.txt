@@ -1221,3 +1221,7 @@ trunk@7409 was merged into this branch
 trunk@7362 was merged into this branch
   Add non-trivial tests to webAppCreator.
   svn merge --ignore-ancestry -c 7362 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7371 was merged into this branch
+  Updates the deprecation javadoc for RichTextArea.BasicFormatter.
+  svn merge --ignore-ancestry -c 7371 http://google-web-toolkit.googlecode.com/svn/trunk .

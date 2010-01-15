@@ -1225,3 +1225,7 @@ trunk@7362 was merged into this branch
 trunk@7371 was merged into this branch
   Updates the deprecation javadoc for RichTextArea.BasicFormatter.
   svn merge --ignore-ancestry -c 7371 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7390 was merged into this branch
+  Refactor of FocusImpl.
+  svn merge --ignore-ancestry -c 7390 http://google-web-toolkit.googlecode.com/svn/trunk .

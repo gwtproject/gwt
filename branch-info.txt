@@ -1233,3 +1233,7 @@ trunk@7390 was merged into this branch
 trunk@7391 was merged into this branch
   Adds PopupPanel#setAutoHideOnHistoryEventsEnabled() to hide popup on history events
   svn merge --ignore-ancestry -c 7391 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7410 was merged into this branch
+  New apps created with webAppCreator default to standards mode
+  svn merge --ignore-ancestry -c 7410 http://google-web-toolkit.googlecode.com/svn/trunk .

@@ -1237,3 +1237,11 @@ trunk@7391 was merged into this branch
 trunk@7410 was merged into this branch
   New apps created with webAppCreator default to standards mode
   svn merge --ignore-ancestry -c 7410 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk @7185, @7361 and @7411 were merged into this branch
+  7185 allows UiBinder AttributeParsers to distinguish "" from null, required for 7411
+  7361 updates checkstyle for 2010 copyright
+  7411 fixes issue 4415, "uibinder Image class with resource attribute, removes styles on that image"
+  svn merge --ignore-ancestry -c 7411 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7185 http://google-web-toolkit.googlecode.com/svn/trunk .
+  svn merge --ignore-ancestry -c 7361 http://google-web-toolkit.googlecode.com/svn/trunk .

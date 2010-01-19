@@ -1254,3 +1254,7 @@ trunk@7316 was merged into this branch
   Fix issue 4304 where !important was ignored when merging CSS rules.
   svn merge -c 7316 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7317 was merged into this branch
+  Make @url and the gwt-image property accept dot-path values
+  svn merge -c 7317 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

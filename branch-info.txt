@@ -1249,3 +1249,8 @@ trunk @7185, @7361 and @7411 were merged into this branch
 trunk@7422 was merged into this branch
   Fixes issue 4431 UiBinder with Generic Types fails compilation with error
   svn merge --ignore-ancestry -c 7422 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7316 was merged into this branch
+  Fix issue 4304 where !important was ignored when merging CSS rules.
+  svn merge -c 7316 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

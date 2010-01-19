@@ -1262,3 +1262,8 @@ trunk@7413 was merged into this branch
   Allow CssResource to parse identifiers containing underscores or that have a leading hyphen.
   svn merge -c 7413 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7424 was merged into this branch
+  Prevent InlineResourceContext from creating too-long data: URLs. 
+  Disables composition of lossy source images.
+  svn merge -c 7424 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

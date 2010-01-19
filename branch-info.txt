@@ -1271,3 +1271,6 @@ trunk@7402 was merged into this branch
   Add @defs to interfaces created by the CssResource InterfaceGenerator utility class.
   svn merge -c 7402 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7432 was merged into this branch
+  IntPairAttributeParser now actually parses
+  svn merge --ignore-ancestry -c 7432 http://google-web-toolkit.googlecode.com/svn/trunk .

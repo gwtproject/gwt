@@ -1267,3 +1267,7 @@ trunk@7424 was merged into this branch
   Disables composition of lossy source images.
   svn merge -c 7424 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7402 was merged into this branch
+  Add @defs to interfaces created by the CssResource InterfaceGenerator utility class.
+  svn merge -c 7402 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

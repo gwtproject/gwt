@@ -1258,3 +1258,7 @@ trunk@7317 was merged into this branch
   Make @url and the gwt-image property accept dot-path values
   svn merge -c 7317 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7413 was merged into this branch
+  Allow CssResource to parse identifiers containing underscores or that have a leading hyphen.
+  svn merge -c 7413 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

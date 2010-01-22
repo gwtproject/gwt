@@ -1278,7 +1278,7 @@ trunk@7432 was merged into this branch
 trunk@7441 was merged into this branch with a minor conflict
   Add support to CssResource for unknown at-rules.
   svn merge -c 7441 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
-
+ 
 trunk@7438 was merged into this branch
   Added marker to Mail sample to prevent Eclipse from complaining.
   svn merge -c 7438 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
@@ -1286,4 +1286,9 @@ trunk@7438 was merged into this branch
 trunk@7443 was merged into this branch
   MenuBar no longer steals keyboard focus from SuggestBox on hover.
   svn merge -c 7443 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@7446 was merged into this branch
+  -bindAddress and SCL API changes
+  svn merge --ignore-ancestry -c 7446 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .
 

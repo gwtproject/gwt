@@ -1274,3 +1274,8 @@ trunk@7402 was merged into this branch
 trunk@7432 was merged into this branch
   IntPairAttributeParser now actually parses
   svn merge --ignore-ancestry -c 7432 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7441 was merged into this branch with a minor conflict
+  Add support to CssResource for unknown at-rules.
+  svn merge -c 7441 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

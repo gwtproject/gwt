@@ -1279,3 +1279,7 @@ trunk@7441 was merged into this branch with a minor conflict
   Add support to CssResource for unknown at-rules.
   svn merge -c 7441 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7438 was merged into this branch
+  MenuBar no longer steals keyboard focus from SuggestBox on hover.
+  svn merge -c 7438 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

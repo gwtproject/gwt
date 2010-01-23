@@ -1297,3 +1297,8 @@ trunk@7289 was merged into this branch
   svn merge --ignore-ancestry -c 7289 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7395 was merged into this branch
+  Give better errors for bad -runStyle args
+  svn merge --ignore-ancestry -c 7395 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .
+

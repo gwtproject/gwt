@@ -1312,3 +1312,7 @@ trunk@7454 was merged into this branch
   svn merge --ignore-ancestry -c 7454 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
 
+trunk@7457 was merged into this branch
+  Fix issue 4460 by using the right classloader in SerializabilityUtil
+  svn merge -c 7457 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

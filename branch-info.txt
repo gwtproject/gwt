@@ -1316,3 +1316,7 @@ trunk@7457 was merged into this branch
   Fix issue 4460 by using the right classloader in SerializabilityUtil
   svn merge -c 7457 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7459 was merged into this branch
+  Remove an RPC request's context path when computing module-relative paths.
+  svn merge -c 7459 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

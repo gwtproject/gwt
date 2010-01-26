@@ -1354,3 +1354,7 @@ trunk@7387:7389 was merged into this branch
   Fixes for issues 4344 and 4360.
   svn merge -r 7387:7389 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7480 was merged into this branch
+  Fix images in javadoc.
+  svn merge -c 7480 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

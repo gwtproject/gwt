@@ -1332,3 +1332,7 @@ trunk@7456 was merged into this branch
   Use IE style float deferred binding for IE8.
   svn merge -c 7456 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7461 was merged into this branch
+  Convert all tests to standards mode and fix standards mode tests in FF.
+  svn merge -c 7461 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

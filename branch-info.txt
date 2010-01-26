@@ -1350,3 +1350,7 @@ trunk@7473 was merged into this branch
   HTMLTable.Cell#getElement() no longer swaps the row and cell index.
   svn merge -c 7473 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7387:7389 was merged into this branch
+  Fixes for issues 4344 and 4360.
+  svn merge -r 7387:7389 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

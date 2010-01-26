@@ -1336,3 +1336,7 @@ trunk@7461 was merged into this branch
   Convert all tests to standards mode and fix standards mode tests in FF.
   svn merge -c 7461 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7469 was merged into this branch
+  Issue 4386
+  svn merge --ignore-ancestry -c 7469 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

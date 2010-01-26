@@ -1358,3 +1358,9 @@ trunk@7480 was merged into this branch
   Fix images in javadoc.
   svn merge -c 7480 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7477,7478,7483 were merged into this branch
+  Fix for issue 4374, better StackOverflowError reporting.
+  svn merge -c7477 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7478 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7483 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

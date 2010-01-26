@@ -212,6 +212,7 @@ public class JavaToJavaScriptCompiler {
       PropertyOracle[] propertyOracles, int permutationId)
       throws UnableToCompleteException {
 
+    InternalCompilerException.preload();
     logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
     long permStart = System.currentTimeMillis();
     try {
@@ -930,9 +931,9 @@ public class JavaToJavaScriptCompiler {
         }
       }
       return new UnableToCompleteException();
-    } else if (e instanceof OutOfMemoryError) {
-      // Rethrow the original exception so the caller can deal with it.
-      throw (OutOfMemoryError) e;
+    } else if (e instanceof VirtualMachineError) {
+      // Always rethrow VM errors (an attempt to wrap may fail).
+      throw (VirtualMachineError) e;
     } else {
       logger.log(TreeLogger.ERROR, "Unexpected internal compiler error", e);
       return new UnableToCompleteException();

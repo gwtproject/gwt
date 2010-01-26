@@ -1320,3 +1320,7 @@ trunk@7459 was merged into this branch
   Remove an RPC request's context path when computing module-relative paths.
   svn merge -c 7459 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7399 was merged into this branch
+  Add deferred binding for setting float style.
+  svn merge -c 7399 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

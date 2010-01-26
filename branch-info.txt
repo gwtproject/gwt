@@ -1324,3 +1324,7 @@ trunk@7399 was merged into this branch
   Add deferred binding for setting float style.
   svn merge -c 7399 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7443:7445 was merged into this branch
+  Fixes a bunch of layout panel issues.
+  svn merge -r 7443:7445 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

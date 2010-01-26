@@ -20,6 +20,8 @@ import com.google.gwt.event.logical.shared.BeforeSelectionEvent;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
@@ -31,7 +33,7 @@ public class TabLayoutPanelTest extends GWTTestCase {
 
   static class Adder implements HasWidgetsTester.WidgetAdder {
     public void addChild(HasWidgets container, Widget child) {
-      ((TabPanel) container).add(child, "foo");
+      ((TabLayoutPanel) container).add(child, "foo");
     }
   }
 
@@ -54,7 +56,7 @@ public class TabLayoutPanelTest extends GWTTestCase {
   }
 
   public void testAttachDetachOrder() {
-    HasWidgetsTester.testAll(new TabPanel(), new Adder(), true);
+    HasWidgetsTester.testAll(new TabLayoutPanel(1, Unit.EM), new Adder(), true);
   }
 
   public void testInsertMultipleTimes() {
@@ -174,8 +176,40 @@ public class TabLayoutPanelTest extends GWTTestCase {
   }
 
   /**
+   * Test that {@link TabLayoutPanel} calls widget.setVisible(true/false) on
+   * each widget, when it is shown/hidden.
+   */
+  public void testSetWidgetVisible() {
+    TabLayoutPanel p = new TabLayoutPanel(1, Unit.EM);
+    Label[] labels = new Label[3];
+    for (int i = 0; i < labels.length; i++) {
+      labels[i] = new Label("content" + i);
+      p.add(labels[i]);
+    }
+
+    // Initially, the first widget should be visible.
+    assertTrue(labels[0].isVisible());
+    assertFalse(labels[1].isVisible());
+    assertFalse(labels[2].isVisible());
+
+    // Show widget at index 1, make sure it becomes visible, and the one at
+    // index 0 is hidden.
+    p.selectTab(1);
+    assertFalse(labels[0].isVisible());
+    assertTrue(labels[1].isVisible());
+    assertFalse(labels[2].isVisible());
+
+    // Show widget at index 0, make sure it changed back to the initial state.
+    p.selectTab(0);
+    assertTrue(labels[0].isVisible());
+    assertFalse(labels[1].isVisible());
+    assertFalse(labels[2].isVisible());
+  }
+
+  /**
    * Tests that tabs actually line up properly (see issue 4447).
    */
+  @DoNotRunWith(Platform.HtmlUnit)
   public void testTabLayout() {
     TabLayoutPanel p = new TabLayoutPanel(2, Unit.EM);
     RootPanel.get().add(p);

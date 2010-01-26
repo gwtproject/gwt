@@ -1345,3 +1345,8 @@ trunk@7471 was merged into this branch
   DevMode NPE
   svn merge --ignore-ancestry -c 7471 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7473 was merged into this branch
+  HTMLTable.Cell#getElement() no longer swaps the row and cell index.
+  svn merge -c 7473 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

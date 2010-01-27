@@ -1412,3 +1412,8 @@ trunk@7378 was merged into this branch
   Fix problems getting parameter names in generated code.
   svn merge --ignore-ancestry -c 7378 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7243 was merged into this branch
+  JavaDoc fix.
+  svn merge -c7243 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

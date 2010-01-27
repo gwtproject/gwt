@@ -1407,3 +1407,8 @@ trunk@7294 was merged into this branch
   Make CurrencyData/CurrencyList a public API
   svn merge --ignore-ancestry -c 7294 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7378 was merged into this branch
+  Fix problems getting parameter names in generated code.
+  svn merge --ignore-ancestry -c 7378 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

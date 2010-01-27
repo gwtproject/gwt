@@ -1392,3 +1392,8 @@ trunk@7282 was merged into this branch
   TreeMap submap problems
   svn merge --ignore-ancestry -c 7282 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7286 was merged into this branch
+  Fix System.arrayCopy for interfaces
+  svn merge --ignore-ancestry -c 7286 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

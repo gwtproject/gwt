@@ -1430,3 +1430,7 @@ trunk@7295 was merged into this branch
   Fix API configs for NumberFormat changes.
   svn merge -c7295 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7498 was merged into this branch
+  Move hasAttribute impl from DOMImplIE6 to DOMImplTrident so it applies to IE8.
+  svn merge -c7498 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

@@ -1388,3 +1388,7 @@ trunk@7322 was merged into this branch
   Add automatic resymbolization of production-mode stack traces to JUnitShell.
   svn merge -c7322 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7282 was merged into this branch
+  TreeMap submap problems
+  svn merge --ignore-ancestry -c 7282 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

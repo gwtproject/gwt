@@ -1434,3 +1434,7 @@ trunk@7498 was merged into this branch
   Move hasAttribute impl from DOMImplIE6 to DOMImplTrident so it applies to IE8.
   svn merge -c7498 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7382 was merged into this branch
+  Merge piece missing from r7378.
+  svn merge --ignore-ancestry -c 7382 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

@@ -1397,3 +1397,8 @@ trunk@7286 was merged into this branch
   Fix System.arrayCopy for interfaces
   svn merge --ignore-ancestry -c 7286 \
       http://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7332 was merged into this branch
+  Fix Collections.unmodifiableMap toArray
+  svn merge --ignore-ancestry -c 7332 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

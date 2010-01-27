@@ -1421,3 +1421,7 @@ trunk@7283 was merged into this branch
   Adds DELETE, HEAD and PUT methods to RequestBuilder.
   svn merge -c7283 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7492 was merged into this branch
+  Fix warning about missing startup URLs
+  svn merge --ignore-ancestry -c 7492 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

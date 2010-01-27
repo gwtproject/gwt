@@ -1364,3 +1364,23 @@ trunk@7477,7478,7483 were merged into this branch
   svn merge -c7478 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
   svn merge -c7483 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7238,7326,7327,7344,7346,7348,7352,7353,7414 were merged into this branch
+  Make RPC failures due to bad numerical values clearer
+  DateTimeFormat rounds fractional seconds incorrectly
+  Overload GWT.log with a single String arg
+  Double.parseDouble treats whitespace differently in hosted mode
+  Use log(...) instead of log(..., (Throwable) null) for GWT.log and servlet logs
+  Ensure "".split(",") returns { "" }
+  Make java.sql.Timestamp emulation more lenient about the formatting of the nanoseconds field
+  Fixes a checkstyle error introduced in r7352
+  Implement java.util.Random based on Harmony and gwt-java-math
+  svn merge -c7238 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7326 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7327 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7344 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7346 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7348 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7352 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7353 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7414 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

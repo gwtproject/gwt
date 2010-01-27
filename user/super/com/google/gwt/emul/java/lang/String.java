@@ -653,11 +653,11 @@ public final class String implements Comparable<String>, CharSequence,
     // progress by intention
     var lastTrail = null;
     // We do the split manually to avoid Javascript incompatibility
-    while(true) {
+    while (true) {
       // None of the information in the match returned are useful as we have no 
       // subgroup handling
       var matchObj = compiled.exec(trail);
-      if( matchObj == null || trail == "" || 
+      if (matchObj == null || trail == "" || 
         (count == (maxMatch - 1) && maxMatch > 0)) {
         out[count] = trail;
         break;
@@ -675,8 +675,10 @@ public final class String implements Comparable<String>, CharSequence,
         count++;
       }
     }
-    // all blank delimiters at the end are supposed to disappear if maxMatch == 0
-    if (maxMatch == 0) {
+    // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
+    // however, if the input string is empty, the output should consist of a
+    // single empty string
+    if (maxMatch == 0 && this.length > 0) {
       var lastNonEmpty = out.length;
       while (lastNonEmpty > 0 && out[lastNonEmpty - 1] == "") {
         --lastNonEmpty;
@@ -737,7 +739,7 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   public native String trim() /*-{
-    if(this.length == 0 || (this[0] > '\u0020' && this[this.length-1] > '\u0020')) {
+    if (this.length == 0 || (this[0] > '\u0020' && this[this.length-1] > '\u0020')) {
       return this;
     }
     var r1 = this.replace(/^(\s*)/, '');

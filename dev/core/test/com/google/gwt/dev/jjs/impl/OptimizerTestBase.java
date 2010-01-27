@@ -65,21 +65,28 @@ public abstract class OptimizerTestBase extends TestCase {
   }
 
   public static JMethod findMainMethod(JProgram program) {
-    JDeclaredType mainType = program.getFromTypeMap("test.EntryPoint");
-    JMethod mainMethod = null;
-    for (JMethod method : mainType.getMethods()) {
-      if (method.getName().equals("onModuleLoad")) {
-        mainMethod = method;
-        break;
+    return findMethod(program, "onModuleLoad");
+  }
+
+  public static JMethod findMethod(JDeclaredType type, String methodName) {
+    for (JMethod method : type.getMethods()) {
+      if (method.getName().equals(methodName)) {
+        return method;
       }
     }
-    return mainMethod;
+
+    return null;
+  }
+
+  public static JMethod findMethod(JProgram program, String methodName) {
+    JDeclaredType mainType = program.getFromTypeMap("test.EntryPoint");
+    return findMethod(mainType, methodName);
   }
 
   /**
    * Finds a type by name. The type name may be short, e.g. <code>"Foo"</code>,
-   * or fully-qualified, e.g. <code>"com.google.example.Foo"</code>. If a
-   * short name is used, it must be unambiguous.
+   * or fully-qualified, e.g. <code>"com.google.example.Foo"</code>. If a short
+   * name is used, it must be unambiguous.
    */
   public static JDeclaredType findType(JProgram program, String typeName) {
     JDeclaredType type = program.getFromTypeMap(typeName);

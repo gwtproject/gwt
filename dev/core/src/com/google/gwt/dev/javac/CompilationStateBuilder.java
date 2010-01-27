@@ -186,11 +186,11 @@ public class CompilationStateBuilder {
     return instance;
   }
 
-  private static void invalidateUnitsWithInvalidRefs(
+  private static void invalidateUnitsWithInvalidRefs(TreeLogger logger,
       Map<String, CompilationUnit> resultUnits, Set<ContentId> set) {
     Set<CompilationUnit> validResultUnits = new HashSet<CompilationUnit>(
         resultUnits.values());
-    CompilationUnitInvalidator.retainValidUnits(validResultUnits, set);
+    CompilationUnitInvalidator.retainValidUnits(logger, validResultUnits, set);
     for (Entry<String, CompilationUnit> entry : resultUnits.entrySet()) {
       CompilationUnit unit = entry.getValue();
       if (unit.isCompiled() && !validResultUnits.contains(unit)) {
@@ -261,7 +261,8 @@ public class CompilationStateBuilder {
     }
 
     // Winnow the reusable set of units down to those still valid.
-    CompilationUnitInvalidator.retainValidUnits(resultUnits.values());
+    CompilationUnitInvalidator.retainValidUnits(TreeLogger.NULL,
+        resultUnits.values());
 
     // Compile everything else.
     CompileMoreLater compileMoreLater = new CompileMoreLater();
@@ -280,7 +281,7 @@ public class CompilationStateBuilder {
     compileMoreLater.compile(logger, builders, resultUnits);
 
     // Invalidate units with invalid refs.
-    invalidateUnitsWithInvalidRefs(resultUnits,
+    invalidateUnitsWithInvalidRefs(logger, resultUnits,
         Collections.<ContentId> emptySet());
     return new CompilationState(logger, resultUnits.values(), compileMoreLater);
   }
@@ -307,8 +308,8 @@ public class CompilationStateBuilder {
     }
 
     // Winnow the reusable set of units down to those still valid.
-    CompilationUnitInvalidator.retainValidUnits(resultUnits.values(),
-        compileMoreLater.getValidDependencies());
+    CompilationUnitInvalidator.retainValidUnits(TreeLogger.NULL,
+        resultUnits.values(), compileMoreLater.getValidDependencies());
     for (CompilationUnit validUnit : resultUnits.values()) {
       compileMoreLater.addValidUnit(validUnit);
       // Report any existing errors as if the unit were recompiled.
@@ -324,7 +325,7 @@ public class CompilationStateBuilder {
     }
 
     compileMoreLater.compile(logger, builders, resultUnits);
-    invalidateUnitsWithInvalidRefs(resultUnits,
+    invalidateUnitsWithInvalidRefs(logger, resultUnits,
         compileMoreLater.getValidDependencies());
     return resultUnits.values();
   }

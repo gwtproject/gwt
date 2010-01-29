@@ -1450,3 +1450,8 @@ trunk@7259,7284,7285,7310,7340 were merged into this branch
   svn merge -c7285 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
   svn merge -c7310 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
   svn merge -c7340 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@7505 was merged into this branch
+  Release notes for GWT 2.0.1.
+  svn merge -c7505 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

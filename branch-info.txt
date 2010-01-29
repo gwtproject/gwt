@@ -1455,3 +1455,7 @@ trunk@7505 was merged into this branch
   Release notes for GWT 2.0.1.
   svn merge -c7505 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7510 was merged into this branch
+  Add -Dgwt.args to ant build files, update release notes.
+  svn merge --ignore-ancestry -c 7510 \
+      http://google-web-toolkit.googlecode.com/svn/trunk .

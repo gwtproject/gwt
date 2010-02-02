@@ -1463,3 +1463,9 @@ trunk@7510 was merged into this branch
 trunk@7513 was merged into this branch
   Prevent MenuBar from losing focus when navigating to a new submenu.
   svn merge --ignore-ancestry -c 7513 http://google-web-toolkit.googlecode.com/svn/trunk .
+
+(out of order)
+trunk@7354 was merged into this branch
+  Fix cookie encoding problem
+  svn merge --ignore-ancestry -c 7354 \
+      https://google-web-toolkit.googlecode.com/svn/trunk .

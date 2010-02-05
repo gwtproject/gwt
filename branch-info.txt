@@ -1474,3 +1474,8 @@ trunk@7354 was merged into this branch
 trunk@7358 was merged into this branch
   Fix issue 4425: Invalid String.charAt(int) results when using escape string syntax
   svn merge --ignore-ancestry -c 7358 https://google-web-toolkit.googlecode.com/svn/trunk .
+
+trunk@7479 was merged into this branch
+  Fixes for issues 4335, 4429, 4453.
+  svn merge -c7479 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

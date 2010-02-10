@@ -1479,3 +1479,7 @@ trunk@7479 was merged into this branch
   Fixes for issues 4335, 4429, 4453.
   svn merge -c7479 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7542 was merged into this branch
+  Adding null checks to all History methods to ensure that History is enabled.
+  svn merge -c7542 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

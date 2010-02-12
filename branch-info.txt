@@ -1483,3 +1483,7 @@ trunk@7542 was merged into this branch
   Adding null checks to all History methods to ensure that History is enabled.
   svn merge -c7542 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7530,7559 was merged into this branch
+  Updates release notes for 2.0.2.
+  svn merge -c7530,7559 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

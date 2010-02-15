@@ -1487,3 +1487,7 @@ trunk@7530,7559 was merged into this branch
   Updates release notes for 2.0.2.
   svn merge -c7530,7559 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@7583,7584 was merged into this branch
+  PopupPanel NPE fix and updated release notes for 2.0.3.
+  svn merge -c7583,7584 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

@@ -1493,5 +1493,9 @@ trunk@7583,7584 was merged into this branch
 
 trunk@7553 was merged into this branch
   Trivial fix for issue 3956 ("REGRESSION: r5292 broke Opera support for History")
-  svn merge -c7583,7584 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+  svn merge -c7553 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@7590 was merged into this branch
+  Updated release notes for Opera History fix.
+  svn merge -c7590 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 

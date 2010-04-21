@@ -1499,3 +1499,6 @@ trunk@7590 was merged into this branch
   Updated release notes for Opera History fix.
   svn merge -c7590 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@r7958 was merged into this branch
+  Add missing flush when sending SwitchTransportMessage.
+  svn merge -c7958 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk

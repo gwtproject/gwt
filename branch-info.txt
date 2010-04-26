@@ -1502,3 +1502,11 @@ trunk@7590 was merged into this branch
 trunk@r7958 was merged into this branch
   Add missing flush when sending SwitchTransportMessage.
   svn merge -c7958 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@r7745 was merged into this branch
+  Fix for issue 4532.
+  svn merge -c7745 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@r7931 was merged into this branch
+  Fixes a couple of issues with the RemoteUI and GPE DevMode view interaction.
+  svn merge -c7931 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk

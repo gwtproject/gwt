@@ -1510,3 +1510,7 @@ trunk@r7745 was merged into this branch
 trunk@r7931 was merged into this branch
   Fixes a couple of issues with the RemoteUI and GPE DevMode view interaction.
   svn merge -c7931 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@r8300 was merged into this branch
+  Adds a workaround for a Safari 5 bug regarding right-shift operators.
+  svn merge -c8300 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk

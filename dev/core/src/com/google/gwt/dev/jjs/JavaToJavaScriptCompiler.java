@@ -89,6 +89,7 @@ import com.google.gwt.dev.jjs.impl.TypeTightener;
 import com.google.gwt.dev.jjs.impl.CodeSplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.js.EvalFunctionsAtTopScope;
 import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
+import com.google.gwt.dev.js.JsCoerceIntShift;
 import com.google.gwt.dev.js.JsIEBlockSizeVisitor;
 import com.google.gwt.dev.js.JsInliner;
 import com.google.gwt.dev.js.JsNormalizer;
@@ -289,6 +290,13 @@ public class JavaToJavaScriptCompiler {
        * Creates new variables, must run before code splitter and namer.
        */
       JsStackEmulator.exec(jsProgram, propertyOracles);
+
+      /*
+       * Work around Safari 5 bug by rewriting a >> b as ~~a >> b.
+       * 
+       * No shifts may be generated after this point.
+       */
+      JsCoerceIntShift.exec(jsProgram, logger, propertyOracles);
 
       // (10) Split up the program into fragments
       SoycArtifact dependencies = null;

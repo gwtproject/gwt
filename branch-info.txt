@@ -1519,3 +1519,8 @@ trunk@r8293 was merged into this branch
   Escaping HTML strings from the client as a good practice to avoid XSS vulnerabilities in apps
   the build off of the default app.
   svn merge -c8293 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+
+trunk@r8308 was merged into this branch
+  Fixes List.subList adds.
+  svn merge -c8308 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

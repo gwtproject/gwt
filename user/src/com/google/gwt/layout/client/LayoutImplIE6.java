@@ -38,30 +38,6 @@ import com.google.gwt.user.client.Window;
  */
 class LayoutImplIE6 extends LayoutImplIE8 {
 
-  private static boolean isIE6 = isIE6();
-
-  // Stolen and modified from UserAgent.gwt.xml.
-  // TODO(jgw): Get rid of this method, and switch to using soft permutations
-  // once they land in trunk.
-  private static native boolean isIE6() /*-{
-     function makeVersion(result) {
-       return (parseInt(result[1]) * 1000) + parseInt(result[2]);
-     }
-
-     var ua = navigator.userAgent.toLowerCase();
-     if (ua.indexOf("msie") != -1) {
-       var result = /msie ([0-9]+)\.([0-9]+)/.exec(ua);
-       if (result && result.length == 3) {
-         var v = makeVersion(result);
-         if (v < 7000) {
-           return true;
-         }
-       }
-     }
-
-     return false;
-   }-*/;
-
   private static Element createStyleRuler(Element parent) {
     DivElement styleRuler = Document.get().createDivElement();
     DivElement styleInner = Document.get().createDivElement();
@@ -139,10 +115,6 @@ class LayoutImplIE6 extends LayoutImplIE8 {
 
   @Override
   public Element attachChild(Element parent, Element child, Element before) {
-    if (!isIE6) {
-      return super.attachChild(parent, child, before);
-    }
-
     DivElement container = Document.get().createDivElement();
     container.appendChild(child);
 
@@ -165,21 +137,11 @@ class LayoutImplIE6 extends LayoutImplIE8 {
 
   @Override
   public void fillParent(Element elem) {
-    if (!isIE6) {
-      super.fillParent(elem);
-      return;
-    }
-
     fillParentImpl(elem);
   }
 
   @Override
   public void finalizeLayout(Element parent) {
-    if (!isIE6) {
-      super.finalizeLayout(parent);
-      return;
-    }
-
     resizeRelativeToParent(parent);
     resizeHandler(parent, true);
   }
@@ -187,39 +149,27 @@ class LayoutImplIE6 extends LayoutImplIE8 {
   @Override
   public void initParent(Element parent) {
     super.initParent(parent);
-
-    if (isIE6) {
-      setPropertyElement(parent, "__styleRuler", createStyleRuler(parent));
-    }
+    setPropertyElement(parent, "__styleRuler", createStyleRuler(parent));
   }
 
   public void layout(Layer layer) {
-    if (!isIE6) {
-      super.layout(layer);
-      return;
-    }
-
     Element elem = layer.getContainerElement();
     setLayer(elem, layer);
   }
 
   @Override
   public void onAttach(Element parent) {
-    if (isIE6) {
-      // No need to re-connect layer refs. This will be taken care of
-      // automatically in layout().
-      initResizeHandler(parent);
-      initUnitChangeHandler(parent, relativeRuler);
-    }
+    // No need to re-connect layer refs. This will be taken care of
+    // automatically in layout().
+    initResizeHandler(parent);
+    initUnitChangeHandler(parent, relativeRuler);
   }
 
   @Override
   public void onDetach(Element parent) {
-    if (isIE6) {
-      removeLayerRefs(parent);
-      removeResizeHandler(parent);
-      removeUnitChangeHandler(relativeRuler);
-    }
+    removeLayerRefs(parent);
+    removeResizeHandler(parent);
+    removeUnitChangeHandler(relativeRuler);
   }
 
   private native void fillParentImpl(Element elem) /*-{

@@ -1524,3 +1524,7 @@ trunk@r8308 was merged into this branch
   Fixes List.subList adds.
   svn merge -c8308 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
 
+trunk@r8339 was merged into this branch
+  Revert the IE7 layout implementation back to the IE6 implementation to work around some quirks.
+  svn merge -c8339 --ignore-ancestry https://google-web-toolkit.googlecode.com/svn/trunk
+

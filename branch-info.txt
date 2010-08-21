@@ -1,0 +1,9 @@
+branch-info.txt for GWT 2.1M2 build.
+
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/branches/2.1M3/ was created (r8601) as a straight copy from /trunk/@r8598
+
+Merge:

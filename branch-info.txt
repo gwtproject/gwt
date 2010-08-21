@@ -7,3 +7,10 @@ Copies:
 /branches/2.1M3/ was created (r8601) as a straight copy from /trunk/@r8598
 
 Merge:
+Cherry-picks
+  r8599 Get rid of yellow background during cell selection
+  r8603 Snip a stray logging line
+  r8607 Add more tests to check that relationships are persisted correctly
+  r8608 Ignoring __gwt_ObjectId in AbstractRequest#processRelated
+  r8609 Snip stray debugging println.
+commited as  

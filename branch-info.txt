@@ -14,4 +14,7 @@ Cherry-picks
   r8608 Ignoring __gwt_ObjectId in AbstractRequest#processRelated
   r8609 Snip stray debugging println.
 commited as r8611  
+  r8619 svn merge https://google-web-toolkit.googlecode.com/svn/trunk -r8618:8619 .
+commited as r8620
 r8613: Removed the expenses sample from samples
+

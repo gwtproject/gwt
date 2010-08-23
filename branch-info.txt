@@ -16,5 +16,6 @@ Cherry-picks
 commited as r8611  
   r8619 svn merge https://google-web-toolkit.googlecode.com/svn/trunk -r8618:8619 .
 commited as r8620
+  r8600 svn merge https://google-web-toolkit.googlecode.com/svn/trunk -r8599:8600 .
 r8613: Removed the expenses sample from samples
 

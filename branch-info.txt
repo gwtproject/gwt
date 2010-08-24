@@ -18,5 +18,7 @@ commited as r8611
 commited as r8620
   r8600 svn merge https://google-web-toolkit.googlecode.com/svn/trunk -r8599:8600 .
 commited as r8626
+  r8630, 8631, 8632, 8633 svn merge https://google-web-toolkit.googlecode.com/svn/trunk -r8629:8633 .
+commited as r8634
 r8613: Removed the expenses sample from samples
 

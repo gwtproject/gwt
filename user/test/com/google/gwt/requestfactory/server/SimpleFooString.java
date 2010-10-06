@@ -73,7 +73,7 @@ public class SimpleFooString {
       SimpleFooString value = (SimpleFooString) req.getSession().getAttribute(
           SimpleFooString.class.getCanonicalName());
       if (value == null) {
-        value = reset();
+        value = resetImpl();
       }
       return value;
     }
@@ -99,7 +99,11 @@ public class SimpleFooString {
     return get();
   }
 
-  public static synchronized SimpleFooString reset() {
+  public static void reset() {
+    resetImpl();
+  }
+
+  public static synchronized SimpleFooString resetImpl() {
     SimpleFooString instance = new SimpleFooString();
     HttpServletRequest req = RequestFactoryServlet.getThreadLocalRequest();
     if (req == null) {
@@ -185,6 +189,7 @@ public class SimpleFooString {
 
   public Long countSimpleFooWithUserNameSideEffect() {
     get().setUserName(userName);
+    version++;
     return 1L;
   }
 
@@ -322,6 +327,7 @@ public class SimpleFooString {
 
   public void persist() {
     setId(nextId++ + "x");
+    version++;
   }
 
   public SimpleFooString persistAndReturnSelf() {

@@ -62,13 +62,22 @@ import javax.validation.ValidatorFactory;
 public class JsonRequestProcessor implements RequestProcessor<String> {
 
   // TODO should we consume String, InputStream, or JSONObject?
-  private static class DvsData {
+  private class DvsData {
     private final JSONObject jsonObject;
     private final WriteOperation writeOperation;
+    // save version because it is deleted later.
+    private final Integer version;
 
-    DvsData(JSONObject jsonObject, WriteOperation writeOperation) {
+    DvsData(JSONObject jsonObject, WriteOperation writeOperation)
+        throws JSONException, SecurityException, IllegalAccessException,
+        InvocationTargetException, NoSuchMethodException,
+        InstantiationException {
       this.jsonObject = jsonObject;
       this.writeOperation = writeOperation;
+      this.version = (Integer) (jsonObject.has(Constants.ENCODED_VERSION_PROPERTY)
+          ? decodeParameterValue(Constants.ENTITY_VERSION_PROPERTY.getType(),
+              jsonObject.get(Constants.ENCODED_VERSION_PROPERTY).toString())
+          : null);
     }
   }
 
@@ -618,19 +627,15 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
       Class<? extends EntityProxy> entityKeyClass,
       RequestProperty propertyContext) throws JSONException,
       NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    JSONObject jsonObject = new JSONObject();
     if (entityElement == null
         || !EntityProxy.class.isAssignableFrom(entityKeyClass)) {
       // JSONObject.NULL isn't a JSONObject
       return JSONObject.NULL;
     }
+    JSONObject jsonObject = getJsonObjectWithIdAndVersion(
+        isEntityReference(entityElement, entityKeyClass), entityElement,
+        propertyContext);
 
-    jsonObject.put(Constants.ENCODED_ID_PROPERTY, isEntityReference(
-        entityElement, entityKeyClass));
-    jsonObject.put(Constants.ENCODED_VERSION_PROPERTY,
-        encodePropertyValueFromDataStore(entityElement,
-            Constants.ENTITY_VERSION_PROPERTY,
-            Constants.ENTITY_VERSION_PROPERTY.getName(), propertyContext));
     for (Property<?> p : allProperties(entityKeyClass)) {
       if (requestedProperty(p, propertyContext)) {
         String propertyName = p.getName();
@@ -1146,7 +1151,8 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
    * Decode deltaValueStore to populate involvedKeys and dvsDataMap.
    */
   private void decodeDVS(String content) throws SecurityException,
-      JSONException {
+      JSONException, IllegalAccessException, InvocationTargetException,
+      NoSuchMethodException, InstantiationException {
     JSONObject jsonObject = new JSONObject(content);
     for (WriteOperation writeOperation : WriteOperation.values()) {
       if (!jsonObject.has(writeOperation.name())) {
@@ -1176,26 +1182,6 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
         dvsDataMap.put(entityKey, new DvsData(recordObject, writeOperation));
       }
     }
-  }
-
-  private WriteOperation detectDeleteOrUpdate(EntityKey entityKey,
-      EntityData entityData) throws IllegalArgumentException,
-      SecurityException, IllegalAccessException, InvocationTargetException,
-      NoSuchMethodException, JSONException, InstantiationException {
-    if (entityData == null || entityData.entityInstance == null) {
-      return null;
-    }
-
-    Object entityInstance = getEntityInstance(entityKey);
-    if (entityInstance == null) {
-      return WriteOperation.DELETE;
-    }
-    SerializedEntity beforeEntity = beforeDataMap.get(entityKey);
-    if (beforeEntity != null && hasChanged(beforeEntity.serializedEntity,
-        serializeEntity(entityInstance, entityKey))) {
-      return WriteOperation.UPDATE;
-    }
-    return null;
   }
 
   private String encodeId(Object id) {
@@ -1235,10 +1221,6 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     assert originalEntityKey.isFuture;
     Object entityInstance = entityData.entityInstance;
     assert entityInstance != null;
-    JSONObject returnObject = new JSONObject();
-    returnObject.put(Constants.ENCODED_FUTUREID_PROPERTY,
-        originalEntityKey.encodedId + "");
-    // violations have already been taken care of.
     Object newId = getRawPropertyValueFromDatastore(entityInstance,
         Constants.ENTITY_ID_PROPERTY);
     if (newId == null) {
@@ -1248,12 +1230,12 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     }
 
     newId = encodeId(newId);
-    returnObject.put(Constants.ENCODED_ID_PROPERTY, getSchemaAndId(
-        originalEntityKey.proxyType, newId));
-    returnObject.put(Constants.ENCODED_VERSION_PROPERTY,
-        encodePropertyValueFromDataStore(entityInstance,
-            Constants.ENTITY_VERSION_PROPERTY,
-            Constants.ENTITY_VERSION_PROPERTY.getName(), propertyRefs));
+    JSONObject returnObject = getJsonObjectWithIdAndVersion(
+        getSchemaAndId(originalEntityKey.proxyType, newId), entityInstance,
+        propertyRefs);
+    // violations have already been taken care of.
+    returnObject.put(Constants.ENCODED_FUTUREID_PROPERTY,
+        originalEntityKey.encodedId + "");
     return returnObject;
   }
 
@@ -1277,29 +1259,17 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     return idMethod;
   }
 
-  private Object getPropertyValueFromRequestCached(JSONObject recordObject,
-      Map<String, Property<?>> propertiesInProxy, String key,
-      Property<?> dtoProperty) throws JSONException, IllegalAccessException,
-      InvocationTargetException, NoSuchMethodException, InstantiationException {
-    Object propertyValue;
-    if (!recordObject.isNull(key)
-        && EntityProxy.class.isAssignableFrom(dtoProperty.getType())) {
-      // if the property type is a Proxy, we expect an encoded Key string
-      EntityKey propKey = getEntityKey(recordObject.getString(key));
-      // check to see if we've already decoded this object from JSON
-      Object cacheValue = cachedEntityLookup.get(propKey);
-      // containsKey is used here because an entity lookup can return null
-      if (cachedEntityLookup.containsKey(propKey)) {
-        propertyValue = cacheValue;
-      } else {
-        propertyValue = getPropertyValueFromRequest(recordObject, key,
-            propertiesInProxy.get(key).getType());
-      }
-    } else {
-      propertyValue = getPropertyValueFromRequest(recordObject, key,
-          propertiesInProxy.get(key).getType());
-    }
-    return propertyValue;
+  private JSONObject getJsonObjectWithIdAndVersion(String encodedId,
+      Object entityElement, RequestProperty propertyContext)
+      throws JSONException, SecurityException, NoSuchMethodException,
+      IllegalAccessException, InvocationTargetException {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put(Constants.ENCODED_ID_PROPERTY, encodedId);
+    jsonObject.put(Constants.ENCODED_VERSION_PROPERTY,
+        encodePropertyValueFromDataStore(entityElement,
+            Constants.ENTITY_VERSION_PROPERTY,
+            Constants.ENTITY_VERSION_PROPERTY.getName(), propertyContext));
+    return jsonObject;
   }
 
   private Object getPropertyValueFromRequestCached(JSONArray recordArray,
@@ -1325,6 +1295,31 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
       }
     } else {
       propertyValue = getPropertyValueFromRequest(recordArray, index, leafType);
+    }
+    return propertyValue;
+  }
+
+  private Object getPropertyValueFromRequestCached(JSONObject recordObject,
+      Map<String, Property<?>> propertiesInProxy, String key,
+      Property<?> dtoProperty) throws JSONException, IllegalAccessException,
+      InvocationTargetException, NoSuchMethodException, InstantiationException {
+    Object propertyValue;
+    if (!recordObject.isNull(key)
+        && EntityProxy.class.isAssignableFrom(dtoProperty.getType())) {
+      // if the property type is a Proxy, we expect an encoded Key string
+      EntityKey propKey = getEntityKey(recordObject.getString(key));
+      // check to see if we've already decoded this object from JSON
+      Object cacheValue = cachedEntityLookup.get(propKey);
+      // containsKey is used here because an entity lookup can return null
+      if (cachedEntityLookup.containsKey(propKey)) {
+        propertyValue = cacheValue;
+      } else {
+        propertyValue = getPropertyValueFromRequest(recordObject, key,
+            propertiesInProxy.get(key).getType());
+      }
+    } else {
+      propertyValue = getPropertyValueFromRequest(recordObject, key,
+          propertiesInProxy.get(key).getType());
     }
     return propertyValue;
   }
@@ -1368,6 +1363,7 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
       if (entityData == null) {
         continue;
       }
+      // handle CREATE
       if (entityKey.isFuture) {
         JSONObject createRecord = getCreateReturnRecord(entityKey, entityData);
         if (createRecord != null) {
@@ -1375,19 +1371,35 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
         }
         continue;
       }
-      WriteOperation writeOperation = detectDeleteOrUpdate(entityKey,
-          entityData);
-      if (writeOperation == WriteOperation.DELETE) {
+      // handle DELETE
+      Object entityInstanceAfterOperation = getEntityInstance(entityKey);
+      if (null == entityInstanceAfterOperation) {
         JSONObject deleteRecord = new JSONObject();
-        deleteRecord.put(Constants.ENCODED_ID_PROPERTY, getSchemaAndId(
-            entityKey.proxyType, entityKey.encodedId));
+        deleteRecord.put(Constants.ENCODED_ID_PROPERTY,
+            getSchemaAndId(entityKey.proxyType, entityKey.encodedId));
         deleteArray.put(deleteRecord);
+        continue;
       }
-      if (writeOperation == WriteOperation.UPDATE) {
-        JSONObject updateRecord = new JSONObject();
-        updateRecord.put(Constants.ENCODED_ID_PROPERTY, getSchemaAndId(
-            entityKey.proxyType, entityKey.encodedId));
-        updateArray.put(updateRecord);
+      /*
+       * Send an UPDATE if the client is at a version different than that of the
+       * server or if the server version has changed after invoking the domain
+       * method.
+       */
+      boolean clientNeedsUpdating = false;
+      DvsData dvsData = dvsDataMap.get(entityKey);
+      if (dvsData != null && dvsData.version != null) {
+        Integer serverVersion = (Integer) getRawPropertyValueFromDatastore(
+            entityInstanceAfterOperation,
+            Constants.ENTITY_VERSION_PROPERTY.getName());
+        if (!dvsData.version.equals(serverVersion)) {
+          clientNeedsUpdating = true;
+        }
+      }
+      if (clientNeedsUpdating
+          || hasServerVersionChanged(entityKey, entityInstanceAfterOperation)) {
+        updateArray.put(getJsonObjectWithIdAndVersion(
+            getSchemaAndId(entityKey.proxyType, entityKey.encodedId),
+            entityInstanceAfterOperation, propertyRefs));
       }
     }
     if (createArray.length() > 0) {
@@ -1427,6 +1439,18 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
       }
     }
     return violations;
+  }
+
+  private boolean hasServerVersionChanged(EntityKey entityKey,
+      Object entityInstanceAfterOperation) throws IllegalArgumentException,
+      SecurityException, IllegalAccessException, InvocationTargetException,
+      NoSuchMethodException, JSONException, InstantiationException {
+    SerializedEntity beforeEntity = beforeDataMap.get(entityKey);
+    if (beforeEntity != null && hasChanged(beforeEntity.serializedEntity,
+        serializeEntity(entityInstanceAfterOperation, entityKey))) {
+      return true;
+    }
+    return false;
   }
 
   private String isEntityReference(Object entity, Class<?> proxyPropertyType)

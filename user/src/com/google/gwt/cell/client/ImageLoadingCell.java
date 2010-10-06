@@ -31,7 +31,7 @@ import com.google.gwt.text.shared.SafeHtmlRenderer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
- * A {@link AbstractCell} used to render an image. A loading indicator is used
+ * An {@link AbstractCell} used to render an image. A loading indicator is used
  * until the image is fully loaded. The String value is the url of the image.
  */
 public class ImageLoadingCell extends AbstractCell<String> {
@@ -45,7 +45,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      * Get the renderer used to render an error message when the image does not
      * load. By default, the broken image is rendered.
      *
-     * @return the {@link Renderer} used when the image doesn't load
+     * @return the {@link SafeHtmlRenderer} used when the image doesn't load
      */
     SafeHtmlRenderer<String> getErrorRenderer();
 
@@ -54,7 +54,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      * <code>img</code> element, which triggers the <code>load</code> or <code>
      * error</code> event that this cell handles.
      *
-     * @return the {@link Renderer} used to render the image
+     * @return the {@link SafeHtmlRenderer} used to render the image
      */
     SafeHtmlRenderer<String> getImageRenderer();
 
@@ -62,7 +62,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      * Get the renderer used to render a loading message. By default, an
      * animated loading icon is rendered.
      *
-     * @return the {@link Renderer} used to render the loading html
+     * @return the {@link SafeHtmlRenderer} used to render the loading html
      */
     SafeHtmlRenderer<String> getLoadingRenderer();
   }

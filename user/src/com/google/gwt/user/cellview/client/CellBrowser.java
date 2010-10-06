@@ -74,9 +74,9 @@ import java.util.List;
  * <h3>Example</h3>
  * <dl>
  * <dt>Trivial example</dt>
- * <dd>TODO example com.google.gwt.examples.cellview.CellBrowserExample</dd>
+ * <dd>{@example com.google.gwt.examples.cellview.CellBrowserExample}</dd>
  * <dt>Complex example</dt>
- * <dd>TODO example com.google.gwt.examples.cellview.CellBrowserExample2</dd>
+ * <dd>{@example com.google.gwt.examples.cellview.CellBrowserExample2}</dd>
  * </dl>
  */
 public class CellBrowser extends AbstractCellTree implements ProvidesResize,
@@ -467,14 +467,14 @@ public class CellBrowser extends AbstractCellTree implements ProvidesResize,
     }
 
     /**
-     * @return the key of the value that is focused in this node's display.
+     * Return the key of the value that is focused in this node's display.
      */
     Object getFocusedKey() {
       return display.focusedKey;
     }
 
     /**
-     * @return true if the focused value is open, false if not
+     * Return true if the focused value is open, false if not.
      */
     boolean isFocusedOpen() {
       return display.isFocusedOpen;

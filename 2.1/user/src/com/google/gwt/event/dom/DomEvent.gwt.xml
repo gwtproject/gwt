@@ -1,5 +1,0 @@
-<module>
-	<inherits name="com.google.gwt.event.EventBase" />
-	<inherits name="com.google.gwt.dom.DOM" />
-  <source path="client"/>
-</module>

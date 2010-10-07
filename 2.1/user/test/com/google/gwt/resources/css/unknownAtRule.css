@@ -1,8 +1,0 @@
-@simple;
-@complex {
-  with: arbitrary;
-  stuff: inside;
-}
-@-extended-ident {
-  /* This should be dropped */
-}

@@ -1,6 +1,0 @@
-<module>
-  <!-- note that it is deliberate including Toxic.java here is overridden by
-       the exclusion in module One -->
-  <source path="client" includes="Shared.java,Toxic.java"/>
-  <inherits name="com.google.gwt.dev.cfg.testdata.merging.One"/>
-</module>

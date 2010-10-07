@@ -28,6 +28,11 @@
     <pathelement location="${gwt.tools.lib}/appengine/datanucleus-appengine-1.0.7.final.jar"/>
   </path>
 
+  <!-- The libraries required by the server that will be copied into WEB-INF/lib. -->
+  <fileset id="sample.server.libs" dir="${gwt.tools.lib}">
+    <include name="" />
+  </fileset>
+
   <target name="source" description="Copy source to the output folder">
     <mkdir dir="${sample.build}/src" />
     <copy todir="${sample.build}/src">
@@ -57,14 +62,20 @@
     </if>
   </target>
 
+  <target name="serverlibs" description="Copy server libs to the output folder">
+    <mkdir dir="${sample.build}/war/WEB-INF/lib" />
+    <copy todir="${sample.build}/war/WEB-INF/lib/" flatten="true">
+      <fileset refid="sample.server.libs" />
+    </copy>
+  </target>
+
   <target name="compile" description="Compile all java files">
     <mkdir dir="${sample.build}/war/WEB-INF/classes" />
     <gwt.javac destdir="${sample.build}/war/WEB-INF/classes">
       <classpath>
         <pathelement location="${gwt.user.jar}" />
         <pathelement location="${gwt.dev.jar}" />
-        <pathelement location="${gwt.tools.lib}/jsr107cache/jsr107cache-1.1.jar"/>
-        <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+        <path refid="sample.extraclasspath" />
         <path refid="gae.extraclasspath" />
       </classpath>
     </gwt.javac>
@@ -77,15 +88,22 @@
         <fileset dir="${sample.build}/war/WEB-INF/classes" />
         <fileset file="${gwt.user.jar}" />
         <fileset file="${gwt.dev.jar}" />
+        <path refid="sample.extraclasspath" />
       </sourcefiles>
       <targetfiles path="${sample.build}/war/${sample.lower}/${sample.lower}.nocache.js" />
       <sequential>
         <mkdir dir="${sample.build}/war" />
         <gwt.timer name="${sample.upper} with ${gwt.samples.localworkers} localWorkers">
           <java dir="${sample.build}" classname="com.google.gwt.dev.Compiler"
-                classpath="${sample.path}:${sample.build}/war/WEB-INF/classes:${gwt.user.jar}:${gwt.dev.jar}:${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar:${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"
-		fork="yes" failonerror="true">
-            <jvmarg value="-Xmx256M"/>
+                		fork="yes" failonerror="true">
+            <classpath>
+              <pathelement path="${sample.path}" />
+              <path refid="sample.extraclasspath" />
+              <pathelement location="${sample.build}/war/WEB-INF/classes" />
+              <pathelement location="${gwt.user.jar}" />
+              <pathelement location="${gwt.dev.jar}" />
+            </classpath>
+            <jvmarg value="-Xmx256M" />
             <arg value="-localWorkers" />
             <arg value="${gwt.samples.localworkers}" />
             <arg value="-war" />
@@ -132,7 +150,7 @@
     <webAppCreator platform="mac" />
   </target>
 
-  <target name="build" depends="source, compile, gwtc, scripts" description="Build and package this project" />
+  <target name="build" depends="source, serverlibs, compile, gwtc, scripts" description="Build and package this project" />
 
   <target name="checkstyle" description="Static analysis of source">
     <gwt.checkstyle outputdirectory="${sample.build}">

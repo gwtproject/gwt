@@ -1,0 +1,5 @@
+<module>
+	<inherits name="com.google.gwt.event.EventBase" />
+	<inherits name="com.google.gwt.event.dom.DomEvent" />
+	<inherits name="com.google.gwt.event.logical.LogicalEvent" />
+</module>

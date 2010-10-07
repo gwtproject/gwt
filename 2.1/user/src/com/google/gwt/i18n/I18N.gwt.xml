@@ -1,0 +1,128 @@
+<!--                                                                        -->
+<!-- Copyright 2008 Google Inc.                                             -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
+<!-- may not use this file except in compliance with the License. You may   -->
+<!-- may obtain a copy of the License at                                    -->
+<!--                                                                        -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                             -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. License for the specific language governing permissions and   -->
+<!-- limitations under the License.                                         -->
+
+<!-- Internationalization support.                                          -->
+<!--                                                                        -->
+<module>
+  <inherits name="com.google.gwt.regexp.RegExp"/>
+  <inherits name="com.google.gwt.safehtml.SafeHtml"/>
+  <source path="" includes="client/,shared/" />
+
+  <!-- Browser-sensitive code should use the 'locale' client property. -->
+  <!-- 'default' is always defined.                                    -->
+  <define-property name="locale" values="default" />
+
+  <property-provider name="locale">
+    <![CDATA[
+      try {
+      var locale;
+      var defaultLocale = "/*-FALLBACK-*/" || 'default';
+
+      // Look for the locale as a url argument
+      if (locale == null) {
+        var args = location.search;
+        var startLang = args.indexOf("locale=");
+        if (startLang >= 0) {
+          var language = args.substring(startLang);
+          var begin = language.indexOf("=") + 1;
+          var end = language.indexOf("&");
+          if (end == -1) {
+            end = language.length;
+          }
+          locale = language.substring(begin, end);
+        }
+      }
+
+      if (locale == null) {
+        // Look for the locale on the web page
+        locale = __gwt_getMetaProperty("locale")
+      }
+
+      if (locale == null) {
+        // Look for an override computed by other means in the selection script
+        locale = $wnd['__gwt_Locale'];
+      } else {
+        $wnd['__gwt_Locale'] = locale || defaultLocale;
+      }
+
+      if (locale == null) {
+        return defaultLocale;
+      }
+
+      while (!__gwt_isKnownPropertyValue("locale",  locale)) {
+        var lastIndex = locale.lastIndexOf("_");
+        if (lastIndex == -1) {
+          locale = defaultLocale;
+          break;
+        } else {
+          locale = locale.substring(0,lastIndex);
+        }
+      }
+
+      return locale;
+    } catch(e){
+      alert("Unexpected exception in locale detection, using default: " + e);
+      return "default";
+    }
+  ]]>
+  </property-provider>
+
+  <generate-with class="com.google.gwt.i18n.rebind.LocalizableGenerator">
+    <when-type-assignable class="com.google.gwt.i18n.client.Localizable" />
+  </generate-with>
+  <generate-with class="com.google.gwt.i18n.rebind.LocaleInfoGenerator">
+    <when-type-is class="com.google.gwt.i18n.client.impl.LocaleInfoImpl" />
+  </generate-with>
+  <generate-with class="com.google.gwt.i18n.rebind.CurrencyListGenerator">
+    <when-type-is class="com.google.gwt.i18n.client.CurrencyList" />
+  </generate-with>
+  <generate-with class="com.google.gwt.i18n.rebind.CustomDateTimeFormatGenerator">
+    <when-type-assignable class="com.google.gwt.i18n.client.CustomDateTimeFormat" />
+  </generate-with>
+  
+  <!--
+      Set of locales to be selectable at runtime.  Only those which extend
+      the locale of the current permutation will actually be included.  Note
+      that currently only number/date format constants, locale names, and
+      currency data will support runtime locales - everything else will just
+      reference the compile-time locale set in the "locale" property.
+   -->
+  <define-configuration-property name="runtime.locales" is-multi-valued="true"/>
+  <set-configuration-property name="runtime.locales" value=""/>
+
+  <!--
+      A "real" locale to be served by default (i.e. if the browser either
+      doesn't have a requested locale, or it cannot be satisfied with any
+      of the available locales).  The non-internationalized value "default"
+      is actually deficient for any actual locale, so users should set this
+      when then either <extend-property> or <define-property> user.agents for
+      their available translations.  You should still have a locale named
+      "default" (because various tools expect that to be valid), but it will
+      be generated as the locale specified here.
+  -->
+  <set-property-fallback name="locale" value="default"/>
+
+  <!-- Force BiDi policy to be enabled -->
+  <define-property name="gwt.forceBidi" values="true, false"/>
+
+  <!-- Default to not forced -->
+  <set-property name="gwt.forceBidi" value="false"/>
+
+  <!-- Replace the BidiPolicyImpl -->
+  <replace-with class="com.google.gwt.i18n.client.BidiPolicy.BidiPolicyImplOn">
+    <when-type-is class="com.google.gwt.i18n.client.BidiPolicy.BidiPolicyImpl"/>
+    <when-property-is name="gwt.forceBidi" value="true"/>
+  </replace-with>
+</module>
+

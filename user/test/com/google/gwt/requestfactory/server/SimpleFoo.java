@@ -21,6 +21,7 @@ import com.google.gwt.requestfactory.shared.SimpleEnum;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,6 +60,16 @@ public class SimpleFoo {
     return simpleFoo;
   }
 
+  public static SimpleFoo fetchDoubleReference() {
+    SimpleFoo foo = new SimpleFoo();
+    SimpleFoo foo2 = new SimpleFoo();
+    foo.setFooField(foo2);
+    foo.setSelfOneToManyField(Arrays.asList(foo2));
+    foo.persist();
+    foo2.persist();
+    return foo;
+  }
+
   public static List<SimpleFoo> findAll() {
     return new ArrayList<SimpleFoo>(get().values());
   }
@@ -86,7 +97,7 @@ public class SimpleFoo {
       Map<Long, SimpleFoo> value = (Map<Long, SimpleFoo>) req.getSession().getAttribute(
           SimpleFoo.class.getCanonicalName());
       if (value == null) {
-        value = reset();
+        value = resetImpl();
       }
       return value;
     }
@@ -106,6 +117,36 @@ public class SimpleFoo {
     list.add(2);
     list.add(3);
     return list;
+  }
+
+  public static SimpleFoo getSimpleFooWithSubPropertyCollection() {
+    SimpleFoo foo = new SimpleFoo();
+    SimpleFoo subFoo = new SimpleFoo();
+    SimpleFoo subSubFoo = new SimpleFoo();
+    subFoo.setFooField(subSubFoo);
+    subSubFoo.setUserName("I'm here");
+    subSubFoo.persist();
+    subFoo.persist();
+    foo.persist();
+    foo.setSelfOneToManyField(Arrays.asList(subFoo));
+    return foo;
+  }
+
+  public static SimpleFoo getTripletReference() {
+    SimpleFoo foo1 = new SimpleFoo();
+    SimpleFoo foo2 = new SimpleFoo();
+    SimpleFoo foo3 = new SimpleFoo();
+    ArrayList<SimpleFoo> foos = new ArrayList<SimpleFoo>();
+    foos.add(foo2);
+    ArrayList<SimpleFoo> subFoos = new ArrayList<SimpleFoo>();
+    subFoos.add(foo3);
+    foo1.setSelfOneToManyField(foos);
+    foo2.setSelfOneToManyField(subFoos);
+    foo3.setFooField(foo2);
+    foo1.persist();
+    foo2.persist();
+    foo3.persist();
+    return foo1;
   }
 
   public static Boolean processBooleanList(List<Boolean> values) {
@@ -191,7 +232,11 @@ public class SimpleFoo {
     }
   }
 
-  public static synchronized Map<Long, SimpleFoo> reset() {
+  public static void reset() {
+    resetImpl();
+  }
+
+  public static synchronized Map<Long, SimpleFoo> resetImpl() {
     Map<Long, SimpleFoo> instance = new HashMap<Long, SimpleFoo>();
     // fixtures
     SimpleFoo s1 = new SimpleFoo();
@@ -275,6 +320,13 @@ public class SimpleFoo {
 
   private List<Integer> numberListField;
 
+  /*
+   * isChanged is just a quick-and-dirty way to get version-ing for now.
+   * Currently, only set by setUserName and setIntId. TODO for later: Use a
+   * cleaner solution to figure out when to increment version numbers.
+   */
+  boolean isChanged;
+
   public SimpleFoo() {
     intId = 42;
     version = 1;
@@ -297,10 +349,12 @@ public class SimpleFoo {
     nullField = null;
     barNullField = null;
     pleaseCrash = 0;
+    isChanged = false;
   }
 
   public Long countSimpleFooWithUserNameSideEffect() {
     findSimpleFoo(1L).setUserName(userName);
+    version++;
     return countSimpleFoo();
   }
 
@@ -449,6 +503,10 @@ public class SimpleFoo {
       isNew = false;
       get().put(getId(), this);
     }
+    if (isChanged) {
+      version++;
+      isChanged = false;
+    }
   }
 
   public SimpleFoo persistAndReturnSelf() {
@@ -547,7 +605,10 @@ public class SimpleFoo {
   }
 
   public void setIntId(Integer id) {
-    this.intId = id;
+    if (!this.intId.equals(id)) {
+      this.intId = id;
+      isChanged = true;
+    }
   }
 
   public void setLongField(Long longField) {
@@ -604,7 +665,10 @@ public class SimpleFoo {
   }
 
   public void setUserName(String userName) {
-    this.userName = userName;
+    if (!this.userName.equals(userName)) {
+      this.userName = userName;
+      isChanged = true;
+    }
   }
 
   public void setVersion(Integer version) {

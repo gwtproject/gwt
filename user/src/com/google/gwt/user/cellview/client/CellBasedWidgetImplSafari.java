@@ -13,24 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.activity.shared;
+package com.google.gwt.user.cellview.client;
 
-import com.google.gwt.place.shared.Place;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 /**
- * <p>
- * <span style="color:red">Experimental API: This class is still under rapid
- * development, and is very likely to be deleted. Use it at your own risk.
- * </span>
- * </p>
- * Finds the activity to run for a given {@link Place}, used to configure
- * an {@link ActivityManager}.
+ * Webkit specified Impl used by cell based widgets.
  */
-public interface ActivityMapper {
-  /**
-   * Returns the activity to run for the given {@link Place}, or null.
-   *
-   * @param place a Place object
-   */
-  Activity getActivity(Place place);
+public class CellBasedWidgetImplSafari extends CellBasedWidgetImplStandard {
+
+  @Override
+  public void resetFocus(ScheduledCommand command) {
+    // Webkit will not focus an element that was created in this event loop.
+    Scheduler.get().scheduleDeferred(command);
+  }
 }

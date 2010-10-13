@@ -456,16 +456,12 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
 
     SimpleBarRequest context = simpleBarRequest();
     final SimpleBarProxy foo = context.create(SimpleBarProxy.class);
-    Object futureId = foo.getId();
-    assertEquals(futureId, foo.getId());
     assertTrue(((SimpleEntityProxyId<?>) foo.stableId()).isEphemeral());
     Request<SimpleBarProxy> fooReq = context.persistAndReturnSelf().using(foo);
     fooReq.fire(new Receiver<SimpleBarProxy>() {
 
       @Override
       public void onSuccess(final SimpleBarProxy returned) {
-        Object futureId = foo.getId();
-        assertEquals(futureId, foo.getId());
         assertFalse(((SimpleEntityProxyId<?>) foo.stableId()).isEphemeral());
 
         checkStableIdEquals(foo, returned);
@@ -479,16 +475,12 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
 
     SimpleBarRequest context = simpleBarRequest();
     final SimpleBarProxy bar = context.create(SimpleBarProxy.class);
-    Object futureId = bar.getId();
-    assertEquals(futureId, bar.getId());
     assertTrue(((SimpleEntityProxyId<?>) bar.stableId()).isEphemeral());
     Request<SimpleBarProxy> fooReq = context.returnFirst(Collections.singletonList(bar));
     fooReq.fire(new Receiver<SimpleBarProxy>() {
 
       @Override
       public void onSuccess(final SimpleBarProxy returned) {
-        Object futureId = bar.getId();
-        assertEquals(futureId, bar.getId());
         assertFalse(((SimpleEntityProxyId<?>) bar.stableId()).isEphemeral());
         assertFalse(((SimpleEntityProxyId<?>) returned.stableId()).isEphemeral());
 
@@ -1770,6 +1762,10 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       @Override
       public void onSuccess(SimpleFooProxy response) {
         assertEquals(2, response.getOneToManyField().size());
+        
+        // Check lists of proxies returned from a mutable object are mutable
+        response = simpleFooRequest().edit(response);
+        response.getOneToManyField().get(0).setUserName("canMutate");
         finishTestAndReset();
       }
     });

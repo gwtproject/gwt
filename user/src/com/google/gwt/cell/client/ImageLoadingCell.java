@@ -81,7 +81,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
   private static Template template;
 
   /**
-   * The default {@link Renderers}.
+   * The default {@link SafeHtmlRenderer SafeHtmlRenderers}.
    */
   public static class DefaultRenderers implements Renderers {
 
@@ -149,7 +149,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
 
   /**
    * Construct an {@link ImageResourceCell} using the specified
-   * {@link Renderers}.
+   * {@link SafeHtmlRenderer SafeHtmlRenderers}.
    *
    */
   public ImageLoadingCell(Renderers renderers) {

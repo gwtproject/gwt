@@ -259,8 +259,8 @@ public class TabBar extends Composite implements SourcesTabEvents,
   }
 
   /**
-   * @deprecated Use {@link #addBeforeSelectionHandler} and {#link
-   *             #addSelectionHandler} instead
+   * @deprecated Use {@link #addBeforeSelectionHandler(BeforeSelectionHandler)} 
+   * and {@link #addSelectionHandler(SelectionHandler)} instead
    */
   @Deprecated
   public void addTabListener(TabListener listener) {
@@ -522,7 +522,7 @@ public class TabBar extends Composite implements SourcesTabEvents,
    * 
    * Use care when setting an object's HTML; it is an easy way to expose
    * script-based security problems. Consider using
-   * {@link #setTabText(int, String)} or {@link setTabHTML(int, SafeHtml)}
+   * {@link #setTabText(int, String)} or {@link #setTabHTML(int, SafeHtml)}
    * whenever possible.
    * 
    * @param index the index of the tab whose HTML is to be set

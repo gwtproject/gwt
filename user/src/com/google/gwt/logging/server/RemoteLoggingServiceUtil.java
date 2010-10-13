@@ -20,24 +20,26 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 /**
- * Utilities for classes that accept Remote Logging requests
+ * Utilities for classes that accept Remote Logging requests.
  */
 public class RemoteLoggingServiceUtil {
+
   /**
-   * Exceptions that occur during remote logging
+   * Exceptions that occur during remote logging.
    */
-  public static class RemoteLoggingException extends Exception { 
+  public static class RemoteLoggingException extends Exception {
     public RemoteLoggingException(String message) {
       super(message);
     }
-    
+
     public RemoteLoggingException(String message, Throwable t) {
       super(message, t);
     }
   }
 
   /**
-   * Logs a message on the server
+   * Logs a message on the server.
+   *
    * @param lr LogRecord to be logged
    * @param strongName Permutation name (used for deobfuscation and may be null,
    *        which will only cause deobfuscation to fail)
@@ -46,11 +48,9 @@ public class RemoteLoggingServiceUtil {
    * @param loggerNameOverride logger name for messages logged on server. May be
    *        null, in which case, messages will be logged to a logger
    *        corresponding to the client side logger which triggered them.
-   * 
-   * @return Empty string when successful, or an error string in case of failure.
    */
   public static void logOnServer(LogRecord lr, String strongName,
-      StackTraceDeobfuscator deobfuscator, String loggerNameOverride) throws 
+      StackTraceDeobfuscator deobfuscator, String loggerNameOverride) throws
       RemoteLoggingException {
     if (deobfuscator != null) {
       lr = deobfuscator.deobfuscateLogRecord(lr, strongName);
@@ -60,7 +60,7 @@ public class RemoteLoggingServiceUtil {
     Logger logger = Logger.getLogger(loggerName);
     logger.log(lr);
   }
-  
+
   public static void logOnServer(String serializedLogRecordJson,
       String strongName, StackTraceDeobfuscator deobfuscator,
       String loggerNameOverride) throws RemoteLoggingException {

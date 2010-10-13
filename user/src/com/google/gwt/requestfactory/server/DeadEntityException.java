@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,21 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.event.logical.shared;
-
-import com.google.gwt.event.shared.EventHandler;
+package com.google.gwt.requestfactory.server;
 
 /**
- * Handler interface for {@link ValueChangeEvent} events.
- * 
- * @param <T> the value about to be changed
+ * Indicates the user attempted to perform an operation on an irretrievable
+ * entity
  */
-public interface ValueChangeHandler<T> extends EventHandler {
+public class DeadEntityException extends RuntimeException {
+  public DeadEntityException() {
+  }
 
-  /**
-   * Called when {@link ValueChangeEvent} is fired.
-   * 
-   * @param event the {@link ValueChangeEvent} that was fired
-   */
-  void onValueChange(ValueChangeEvent<T> event);
+  public DeadEntityException(String message) {
+    super(message);
+  }
 }

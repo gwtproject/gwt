@@ -47,20 +47,27 @@ public abstract class Column<T, C> implements HasCell<T, C> {
 
   /**
    * Construct a new Column with a given {@link Cell}.
+   *
+   * @param cell the Cell used by this Column
    */
   public Column(Cell<C> cell) {
     this.cell = cell;
   }
 
   /**
-   * Return the {@link Cell} responsible for rendering items in the column.
+   * Returns the {@link Cell} responsible for rendering items in the column.
+   * 
+   * @return a Cell
    */
   public Cell<C> getCell() {
     return cell;
   }
 
   /**
-   * Return the {@link FieldUpdater} used for updating values in the column.
+   * Returns the {@link FieldUpdater} used for updating values in the column.
+   * 
+   * @return an instance of FieldUpdater<T, C>
+   * @see #setFieldUpdater(FieldUpdater)
    */
   public FieldUpdater<T, C> getFieldUpdater() {
     return fieldUpdater;
@@ -108,6 +115,9 @@ public abstract class Column<T, C> implements HasCell<T, C> {
 
   /**
    * Set the {@link FieldUpdater} used for updating values in the column.
+   *
+   * @param fieldUpdater the field updater
+   * @see #getFieldUpdater()
    */
   public void setFieldUpdater(FieldUpdater<T, C> fieldUpdater) {
     this.fieldUpdater = fieldUpdater;

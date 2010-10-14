@@ -15,6 +15,7 @@
  */
 package com.google.gwt.editor.rebind.model;
 
+import com.google.gwt.core.ext.typeinfo.JArrayType;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
@@ -53,7 +54,28 @@ public class ModelUtils {
     AUTOBOX_MAP = Collections.unmodifiableMap(autoBoxMap);
   }
 
-  
+  @SuppressWarnings("unchecked")
+  public static <T extends JType> T ensureBaseType(T maybeParameterized) {
+    if (maybeParameterized.isArray() != null) {
+      JArrayType array = maybeParameterized.isArray();
+      return (T) array.getOracle().getArrayType(
+          ensureBaseType(array.getComponentType()));
+    }
+    if (maybeParameterized.isTypeParameter() != null) {
+      return (T) maybeParameterized.isTypeParameter().getBaseType();
+    }
+    if (maybeParameterized.isParameterized() != null) {
+      return (T) maybeParameterized.isParameterized().getBaseType();
+    }
+    if (maybeParameterized.isRawType() != null) {
+      return (T) maybeParameterized.isRawType().getBaseType();
+    }
+    if (maybeParameterized.isWildcard() != null) {
+      return (T) maybeParameterized.isWildcard().getBaseType();
+    }
+    return maybeParameterized;
+  }
+
   public static JClassType[] findParameterizationOf(JClassType intfType,
       JClassType subType) {
     assert intfType.isAssignableFrom(subType) : subType.getParameterizedQualifiedSourceName()
@@ -70,6 +92,15 @@ public class ModelUtils {
       }
     }
     return null;
+  }
+
+  /**
+   * Given a JType, return the source name of the class that is most proximately
+   * assignable to the type. This method will resolve type parameters as well as
+   * wildcard types.
+   */
+  public static String getQualifiedBaseName(JType type) {
+    return ensureBaseType(type).getErasedType().getQualifiedSourceName();
   }
 
   public static boolean isValueType(TypeOracle oracle, JType type) {

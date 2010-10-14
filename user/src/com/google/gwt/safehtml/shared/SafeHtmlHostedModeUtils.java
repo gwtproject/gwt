@@ -16,7 +16,6 @@
 package com.google.gwt.safehtml.shared;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.streamhtmlparser.HtmlParser;
 import com.google.gwt.thirdparty.streamhtmlparser.HtmlParserFactory;
@@ -30,6 +29,9 @@ import com.google.gwt.thirdparty.streamhtmlparser.ParseException;
  */
 public class SafeHtmlHostedModeUtils {
 
+  /**
+   * If true, perform checks in server-side code.
+   */
   public static final String FORCE_CHECK_COMPLETE_HTML =
       "com.google.gwt.safehtml.ForceCheckCompleteHtml";
 
@@ -46,23 +48,23 @@ public class SafeHtmlHostedModeUtils {
    * <p>
    * This method parses the provided string as HTML and determines the HTML
    * context at the end of the string. If the context is not "inner HTML text",
-   * a {@link IllegalArgumentException} or {@link AssertionError} is thrown.
+   * an {@link IllegalArgumentException} or {@link AssertionError} is thrown.
    *
    * <p>
    * For example, this check will pass for the following strings:
    *
    * <pre>{@code
-   *   <foo>blah
-   *   baz<em>foo</em> <x a="b">hello
+   *   &lt;foo&gt;blah
+   *   baz&lt;em&gt;foo&lt;/em&gt; &lt;x a="b"&gt;hello
    * }</pre>
    *
    * <p>
    * The check will fail for the following strings:
    *
    * <pre>{@code
-   *   baz<em>foo</em> <x
-   *   baz<em>foo</em> <x a="b
-   *   baz<em>foo</em> <x a="b"
+   *   baz&lt;em&gt;foo&lt;/em&gt; &lt;x
+   *   baz&lt;em&gt;foo&lt;/em&gt; &lt;x a="b
+   *   baz&lt;em&gt;foo&lt;/em&gt; &lt;x a="b"
    * }</pre>
    *
    * <p>
@@ -105,12 +107,25 @@ public class SafeHtmlHostedModeUtils {
    * Sets a global flag that controls whether or not
    * {@link #maybeCheckCompleteHtml(String)} should perform its check in a
    * server-side environment.
+   *
+   * @param check if true, perform server-side checks.
    */
   public static void setForceCheckCompleteHtml(boolean check) {
     forceCheckCompleteHtml = check;
   }
 
-  @VisibleForTesting
+  /**
+   * Sets a global flag that controls whether or not
+   * {@link #maybeCheckCompleteHtml(String)} should perform its check in a
+   * server-side environment from the value of the {@value
+   * FORCE_CHECK_COMPLETE_HTML} property.
+   */
+  // The following annotation causes javadoc to crash on Mac OS X 10.5.8,
+  // using java 1.5.0_24.
+  //
+  // See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6442982
+  //
+  // @VisibleForTesting
   public static void setForceCheckCompleteHtmlFromProperty() {
     forceCheckCompleteHtml =
         System.getProperty(FORCE_CHECK_COMPLETE_HTML) != null;

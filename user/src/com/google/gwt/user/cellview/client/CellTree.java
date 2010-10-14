@@ -81,6 +81,9 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     @ImageOptions(flipRtl = true)
     ImageResource cellTreeOpenItem();
 
+    /**
+     * The styles used in this widget.
+     */
     @Source(BasicStyle.DEFAULT_CSS)
     BasicStyle cellTreeStyle();
   }
@@ -105,6 +108,8 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
 
     /**
      * Return the duration of the animation in milliseconds.
+     *
+     * @see #setDuration(int)
      */
     public int getDuration() {
       return duration;
@@ -112,6 +117,9 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
 
     /**
      * Set the duration of the animation in milliseconds.
+     * 
+     * @param duration the duration in milliseconds
+     * @see #getDuration()
      */
     public void setDuration(int duration) {
       this.duration = duration;
@@ -598,6 +606,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    *
    * @return the animation
    * @see #isAnimationEnabled()
+   * @see #setAnimation(NodeAnimation)
    */
   public NodeAnimation getAnimation() {
     return animation;
@@ -607,6 +616,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * Get the default maximum number of children to display under each tree node.
    *
    * @return the default node size
+   * @see #setDefaultNodeSize(int)
    */
   public int getDefaultNodeSize() {
     return defaultNodeSize;
@@ -717,6 +727,8 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * <p>
    * Setting the key to (int) 0 will disable the access key.
    * </p>
+   * 
+   * @see #getAccessKey()
    */
   public void setAccessKey(char key) {
     this.accessKey = key;
@@ -729,6 +741,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    *
    * @param animation a {@link NodeAnimation}
    * @see #setAnimationEnabled(boolean)
+   * @see #getAnimation()
    */
   public void setAnimation(NodeAnimation animation) {
     assert animation != null : "animation cannot be null";
@@ -749,6 +762,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * tree nodes that are already open.
    *
    * @param defaultNodeSize the max
+   * @see #getDefaultNodeSize()
    */
   public void setDefaultNodeSize(int defaultNodeSize) {
     this.defaultNodeSize = defaultNodeSize;
@@ -767,15 +781,22 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * Get the access key.
    *
    * @return the access key, or -1 if not set
+   * @see #setAccessKey(char)
    */
   protected char getAccessKey() {
     return accessKey;
   }
 
+  /**
+   * Called when the keyboard selected node loses focus.
+   */
   protected void onBlur() {
     keyboardSelectedNode.setKeyboardSelectedStyle(false);
   }
 
+  /**
+   * Called when the keyboard selected node gains focus.
+   */
   protected void onFocus() {
     keyboardSelectedNode.setKeyboardSelectedStyle(true);
   }

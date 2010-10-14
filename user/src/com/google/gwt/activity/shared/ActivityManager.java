@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,11 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * <p>
- * <span style="color:red">Experimental API: This class is still under rapid
- * development, and is very likely to be deleted. Use it at your own risk.
- * </span>
- * </p>
  * Manages {@link Activity} objects that should be kicked off in response to
  * {@link PlaceChangeEvent} events. Each activity can start itself
  * asynchronously, and provides a widget to be shown when it's ready to run.
@@ -79,7 +74,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler,
 
   /**
    * Create an ActivityManager. Next call {@link #setDisplay}.
-   * 
+   *
    * @param mapper finds the {@link Activity} for a given
    *          {@link com.google.gwt.place.shared.Place}
    * @param eventBus source of {@link PlaceChangeEvent} and
@@ -92,7 +87,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler,
   }
 
   /**
-   * Deactive the current activity, find the next one from our ActivityMapper,
+   * Deactivate the current activity, find the next one from our ActivityMapper,
    * and start it.
    * <p>
    * The current activity's widget will be hidden immediately, which can cause
@@ -101,7 +96,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler,
    * this by providing a widget immediately, with some kind of "loading"
    * treatment.
    * 
-   * @see PlaceChangeEvent.Handler#onPlaceChange(PlaceChangeEvent)
+   * @see com.google.gwt.place.shared.PlaceChangeEvent.Handler#onPlaceChange(PlaceChangeEvent)
    */
   public void onPlaceChange(PlaceChangeEvent event) {
     Activity nextActivity = getNextActivity(event);
@@ -182,7 +177,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler,
   /**
    * Reject the place change if the current activity is not willing to stop.
    * 
-   * @see PlaceChangeRequestEvent.Handler#onPlaceChangeRequest(PlaceChangeRequestEvent)
+   * @see com.google.gwt.place.shared.PlaceChangeRequestEvent.Handler#onPlaceChangeRequest(PlaceChangeRequestEvent)
    */
   public void onPlaceChangeRequest(PlaceChangeRequestEvent event) {
     if (!currentActivity.equals(NULL_ACTIVITY)) {

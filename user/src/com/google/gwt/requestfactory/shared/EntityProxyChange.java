@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,12 +21,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * <p>
- * <span style="color:red">Experimental API: This class is still under rapid
- * development, and is very likely to be deleted. Use it at your own risk.
- * </span>
- * </p>
- * Abstract base class for an event announcing changes to a {@link EntityProxy}.
+ * Abstract base class for an event announcing changes to an
+ * {@link EntityProxy}.
  * <p>
  * Note that this event includes an unpopulated copy of the changed proxy
  * &mdash; all properties are undefined except it's id. That is, the event
@@ -34,12 +30,12 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * themselves fresh copies of the proxy.
  * <p>
  * TODO: use ProxyId rather than an empty proxy
- * 
+ *
  * @param <P> the type of the proxy
  */
 public class EntityProxyChange<P extends EntityProxy> extends
     GwtEvent<EntityProxyChange.Handler<P>> {
-  
+
   /**
    * Implemented by methods that handle EntityProxyChange events.
    * @param <P> the proxy type
@@ -81,8 +77,8 @@ public class EntityProxyChange<P extends EntityProxy> extends
   }
 
   /**
-   * @return an unpopulated copy of the changed proxy &mdash; all properties are
-   *         undefined except its id
+   * Returns an unpopulated copy of the changed proxy &mdash; all properties are
+   * undefined except its id.
    */
   @SuppressWarnings("unchecked")
   public EntityProxyId<P> getProxyId() {

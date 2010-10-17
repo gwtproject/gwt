@@ -25,7 +25,8 @@ import com.google.gwt.user.client.History;
 import java.util.logging.Logger;
 
 /**
- * Monitors {@link PlaceChangeEvent}s and {@link com.google.gwt.user.client.History} events and keep them in sync.
+ * Monitors {@link PlaceChangeEvent}s and
+ * {@link com.google.gwt.user.client.History} events and keep them in sync.
  */
 public class PlaceHistoryHandler {
   private static final Logger log = Logger.getLogger(PlaceHistoryHandler.class.getName());
@@ -51,13 +52,29 @@ public class PlaceHistoryHandler {
   /**
    * Optional delegate in charge of History related events. Provides nice
    * isolation for unit testing, and allows pre- or post-processing of tokens.
+   * Methods correspond to the like named methods on {@link History}.
    */
   public interface Historian {
+    /**
+     * Adds a {@link com.google.gwt.event.logical.shared.ValueChangeEvent}
+     * handler to be informed of changes to the browser's history stack.
+     * 
+     * @param handler the handler
+     * @return the registration used to remove this value change handler
+     */
     HandlerRegistration addValueChangeHandler(
         ValueChangeHandler<String> valueChangeHandler);
 
+    /**
+     * @return the current history token.
+     */
     String getToken();
 
+    /**
+     * Adds a new browser history entry. Calling this method will cause
+     * {@link ValueChangeHandler#onValueChange(com.google.gwt.event.logical.shared.ValueChangeEvent)}
+     * to be called as well.
+     */
     void newItem(String token, boolean issueEvent);
   }
 
@@ -70,10 +87,12 @@ public class PlaceHistoryHandler {
   private Place defaultPlace = Place.NOWHERE;
 
   /**
-   * Create a new PlaceHistoryHandler with a {@link DefaultHistorian}.
-   * The DefaultHistorian is created via a call to GWT.create(), so an
-   * alternative default implementation can be provided through
-   * &lt;replace-with> rules in a gwt.xml file.
+   * Create a new PlaceHistoryHandler with a {@link DefaultHistorian}. The
+   * DefaultHistorian is created via a call to GWT.create(), so an alternative
+   * default implementation can be provided through &lt;replace-with&gt; rules
+   * in a {@code gwt.xml} file.
+   * 
+   * @param mapper a {@link PlaceHistoryMapper} instance
    */
   public PlaceHistoryHandler(PlaceHistoryMapper mapper) {
     this(mapper, (Historian) GWT.create(DefaultHistorian.class));
@@ -81,16 +100,28 @@ public class PlaceHistoryHandler {
 
   /**
    * Create a new PlaceHistoryHandler.
+   * 
+   * @param mapper a {@link PlaceHistoryMapper} instance
+   * @param historian a {@link Historian} instance
    */
   public PlaceHistoryHandler(PlaceHistoryMapper mapper, Historian historian) {
     this.mapper = mapper;
     this.historian = historian;
   }
 
+  /**
+   * Handle the current history token. Typically called at application start, to
+   * ensure bookmark launches work.
+   */
   public void handleCurrentHistory() {
     handleHistoryToken(historian.getToken());
   }
 
+  /**
+   * Initialize this place history handler.
+   * 
+   * @return a registration object to de-register the handler
+   */
   public HandlerRegistration register(PlaceController placeController,
       EventBus eventBus, Place defaultPlace) {
     this.placeController = placeController;

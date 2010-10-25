@@ -18,6 +18,7 @@ package com.google.gwt.requestfactory.server;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
+import com.google.gwt.requestfactory.shared.ProxyForName;
 import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.requestfactory.shared.WriteOperation;
 import com.google.gwt.requestfactory.shared.impl.CollectionProperty;
@@ -59,7 +60,7 @@ import javax.validation.ValidatorFactory;
 /**
  * An implementation of RequestProcessor for JSON encoded payloads.
  */
-public class JsonRequestProcessor implements RequestProcessor<String> {
+class JsonRequestProcessor implements RequestProcessor<String> {
 
   // TODO should we consume String, InputStream, or JSONObject?
   private class DvsData {
@@ -159,7 +160,12 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
 
   private static final Logger log = Logger.getLogger(JsonRequestProcessor.class.getName());
 
-  // Decodes a string encoded as web-safe base64
+  /**
+   * Decodes a String encoded as web-safe base64.
+   * 
+   * @param encoded the encoded String
+   * @return a decoded String
+   */
   public static String base64Decode(String encoded) {
     byte[] decodedBytes;
     try {
@@ -171,7 +177,12 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     return new String(decodedBytes);
   }
 
-  // Encodes a string with web-safe base64
+  /**
+   * Encodes a String as web-safe base64.
+   * 
+   * @param decoded the decoded String
+   * @return an encoded String
+   */
   public static String base64Encode(String decoded) {
     byte[] decodedBytes = decoded.getBytes();
     return Base64Utils.toBase64(decodedBytes);
@@ -218,7 +229,7 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
 
   private Map<EntityKey, EntityData> afterDvsDataMap = new HashMap<EntityKey, EntityData>();
 
-  @SuppressWarnings(value = {"unchecked", "rawtypes"})
+  // TODO - document
   public Collection<Property<?>> allProperties(
       Class<? extends EntityProxy> clazz) throws IllegalArgumentException {
     return getPropertiesFromRecordProxyType(clazz).values();
@@ -344,8 +355,9 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
        * 2. Merge the following and the object resolution code in getEntityKey.
        * 3. Update the involvedKeys set.
        */
-      ProxyFor service = parameterType.getAnnotation(ProxyFor.class);
-      if (service != null) {
+      ProxyFor proxyFor = parameterType.getAnnotation(ProxyFor.class);
+      ProxyForName proxyForName = parameterType.getAnnotation(ProxyForName.class);
+      if (proxyFor != null || proxyForName != null) {
         EntityKey entityKey = getEntityKey(parameterValue.toString());
 
         DvsData dvsData = dvsDataMap.get(entityKey);
@@ -361,8 +373,9 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     }
     if (EntityProxyId.class.isAssignableFrom(parameterType)) {
       EntityKey entityKey = getEntityKey(parameterValue.toString());
-      ProxyFor service = entityKey.proxyType.getAnnotation(ProxyFor.class);
-      if (service == null) {
+      ProxyFor proxyFor = entityKey.proxyType.getAnnotation(ProxyFor.class);
+      ProxyForName proxyForName = entityKey.proxyType.getAnnotation(ProxyForName.class);
+      if (proxyFor == null && proxyForName == null) {
         throw new IllegalArgumentException("Unknown service, unable to decode "
             + parameterValue);
       }
@@ -375,6 +388,9 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
 
   /*
    * Encode a property value to be sent across the wire.
+   * 
+   * @param value a value Object
+   * @return an encoded value Object
    */
   public Object encodePropertyValue(Object value) {
     if (value == null) {
@@ -568,6 +584,16 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     if (dtoAnn != null) {
       return (Class<Object>) dtoAnn.value();
     }
+    ProxyForName name = record.getAnnotation(ProxyForName.class);
+    if (name != null) {
+      try {
+        return (Class<Object>) Class.forName(name.value(), false,
+            Thread.currentThread().getContextClassLoader());
+      } catch (ClassNotFoundException e) {
+        throw new IllegalArgumentException("Could not find ProxyForName class",
+            e);
+      }
+    }
     throw new IllegalArgumentException("Proxy class " + record.getName()
         + " missing ProxyFor annotation");
   }
@@ -710,7 +736,6 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
   /**
    * Returns the property fields (name => type) for a record.
    */
-  @SuppressWarnings("unchecked")
   public Map<String, Property<?>> getPropertiesFromRecordProxyType(
       Class<? extends EntityProxy> record) throws SecurityException {
     if (!EntityProxy.class.isAssignableFrom(record)) {
@@ -722,7 +747,7 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     for (Method method : methods) {
       String methodName = method.getName();
       String propertyName = null;
-      Property newProperty = null;
+      Property<?> newProperty = null;
       if (methodName.startsWith("get")) {
         propertyName = Introspector.decapitalize(methodName.substring(3));
         if (propertyName.length() == 0) {
@@ -743,7 +768,7 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
       if (newProperty == null) {
         continue;
       }
-      Property existing = properties.put(propertyName, newProperty);
+      Property<?> existing = properties.put(propertyName, newProperty);
       if (existing != null && !existing.equals(newProperty)) {
         throw new IllegalStateException(String.format(
             "In %s, mismatched getter and setter types for property %s, "
@@ -754,8 +779,8 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     return properties;
   }
 
-  @SuppressWarnings("unchecked")
-  public Property getPropertyFromGenericType(String propertyName, Type type) {
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public Property<?> getPropertyFromGenericType(String propertyName, Type type) {
     if (type instanceof ParameterizedType) {
       ParameterizedType pType = (ParameterizedType) type;
       Class<?> rawType = (Class<Object>) pType.getRawType();
@@ -765,7 +790,7 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
           Type leafType = typeArgs[0];
           if (leafType instanceof Class) {
             return new CollectionProperty(propertyName, rawType,
-                (Class) leafType);
+                (Class<?>) leafType);
           }
         }
       }
@@ -830,6 +855,21 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
 
     operation = getOperation(operationName);
     Class<?> domainClass = Class.forName(operation.getDomainClassName());
+
+    /*
+     * The use of JRP's classloader mirrors the use of Class.forName elsewhere.
+     * It's wrong, but it's consistently wrong.
+     */
+    RequestFactoryInterfaceValidator validator = new RequestFactoryInterfaceValidator(
+        log, new RequestFactoryInterfaceValidator.ClassLoaderLoader(
+            JsonRequestProcessor.class.getClassLoader()));
+    validator.validateRequestContext(operationName.substring(0,
+        operationName.indexOf("::")));
+    if (validator.isPoisoned()) {
+      log.severe("Unable to validate RequestContext");
+      throw new RuntimeException();
+    }
+
     Method domainMethod = domainClass.getMethod(
         operation.getDomainMethod().getName(), operation.getParameterTypes());
     if (Modifier.isStatic(domainMethod.getModifiers()) == operation.isInstance()) {
@@ -1210,9 +1250,8 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
     Object newId = getRawPropertyValueFromDatastore(entityInstance,
         Constants.ENTITY_ID_PROPERTY);
     if (newId == null) {
-      log.warning("Record with futureId " + originalEntityKey.encodedId
-          + " not persisted");
-      return null; // no changeRecord for this CREATE.
+      // no changeRecord for this CREATE.
+      return null; 
     }
 
     newId = encodeId(newId);
@@ -1561,6 +1600,14 @@ public class JsonRequestProcessor implements RequestProcessor<String> {
           ProxyFor pFor = fieldType.getAnnotation(ProxyFor.class);
           if (pFor != null) {
             fieldType = pFor.value();
+          }
+          ProxyForName pFN = fieldType.getAnnotation(ProxyForName.class);
+          if (pFN != null) {
+            try {
+              fieldType = Class.forName(pFN.value(), false,
+                  Thread.currentThread().getContextClassLoader());
+            } catch (ClassNotFoundException ignored) {
+            }
           }
           // TODO: remove override declared method return type with field type
           if (!fieldType.equals(field.getType())) {

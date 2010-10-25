@@ -23,10 +23,11 @@ import java.lang.annotation.Target;
 /**
  * Annotation on Request classes specifying the server side implementations that
  * back them.
+ * 
+ * @see ServiceName
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Service {
-
   Class<?> value();
 }

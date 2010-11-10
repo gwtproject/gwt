@@ -459,29 +459,6 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   private int keyboardSelectedColumn = 0;
 
-  /**
-   * Indicates whether or not the scheduled redraw has been canceled.
-   */
-  private boolean redrawCancelled;
-
-  /**
-   * The command used to redraw the table after adding columns.
-   */
-  private final Scheduler.ScheduledCommand redrawCommand = new Scheduler.ScheduledCommand() {
-    public void execute() {
-      redrawScheduled = false;
-      if (redrawCancelled) {
-        redrawCancelled = false;
-        return;
-      }
-      redraw();
-    }
-  };
-
-  /**
-   * Indicates whether or not a redraw is scheduled.
-   */
-  private boolean redrawScheduled;
   private RowStyles<T> rowStyles;
   private final Style style;
   private final TableElement table;
@@ -653,7 +630,7 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
     CellBasedWidgetImpl.get().sinkEvents(this, consumedEvents);
 
-    scheduleRedraw();
+    redraw();
   }
 
   /**
@@ -701,7 +678,7 @@ public class CellTable<T> extends AbstractHasData<T> {
     addColumn(col, new SafeHtmlHeader(headerHtml), new SafeHtmlHeader(
         footerHtml));
   }
-  
+
   /**
    * Add a style name to the {@link TableColElement} at the specified index,
    * creating it if necessary.
@@ -743,6 +720,7 @@ public class CellTable<T> extends AbstractHasData<T> {
    *           current page
    */
   public TableRowElement getRowElement(int row) {
+    getPresenter().flush();
     checkRowBounds(row);
     NodeList<TableRowElement> rows = tbody.getRows();
     return rows.getLength() > row ? rows.getItem(row) : null;
@@ -805,7 +783,7 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
 
     // Redraw the table asynchronously.
-    scheduleRedraw();
+    redraw();
 
     // We don't unsink events because other handlers or user code may have sunk
     // them intentionally.
@@ -844,6 +822,22 @@ public class CellTable<T> extends AbstractHasData<T> {
     return dependsOnSelection;
   }
 
+  /**
+   * Called when a user action triggers selection.
+   *
+   * @param event the event that triggered selection
+   * @param value the value that was selected
+   * @param row the row index of the value on the page
+   * @param column the column index where the event occurred
+   */
+  protected void doSelection(Event event, T value, int row, int column) {
+    // TODO(jlabanca): Defer to a user provided SelectionManager.
+    SelectionModel<? super T> selectionModel = getSelectionModel();
+    if (selectionModel != null) {
+      selectionModel.setSelected(value, true);
+    }
+  }
+
   @Override
   protected Element getChildContainer() {
     return tbody;
@@ -851,9 +845,11 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   @Override
   protected Element getKeyboardSelectedElement() {
+    // Do not use getRowElement() because that will flush the presenter.
     int rowIndex = getKeyboardSelectedRow();
-    if (isRowWithinBounds(rowIndex) && columns.size() > 0) {
-      TableRowElement tr = getRowElement(rowIndex);
+    NodeList<TableRowElement> rows = tbody.getRows();
+    if (rowIndex < rows.getLength() && columns.size() > 0) {
+      TableRowElement tr = rows.getItem(rowIndex);
       TableCellElement td = tr.getCells().getItem(keyboardSelectedColumn);
       return getCellParent(td);
     }
@@ -884,7 +880,7 @@ public class CellTable<T> extends AbstractHasData<T> {
     if (!Element.is(eventTarget)) {
       return;
     }
-    Element target = event.getEventTarget().cast();
+    final Element target = event.getEventTarget().cast();
 
     // Ignore keydown events unless the cell is in edit mode
     String eventType = event.getType();
@@ -921,13 +917,11 @@ public class CellTable<T> extends AbstractHasData<T> {
     if (section == thead) {
       Header<?> header = headers.get(col);
       if (header != null && cellConsumesEventType(header.getCell(), eventType)) {
-
         header.onBrowserEvent(tableCell, event);
       }
     } else if (section == tfoot) {
       Header<?> footer = footers.get(col);
       if (footer != null && cellConsumesEventType(footer.getCell(), eventType)) {
-
         footer.onBrowserEvent(tableCell, event);
       }
     } else if (section == tbody) {
@@ -947,16 +941,15 @@ public class CellTable<T> extends AbstractHasData<T> {
         setRowStyleName(hoveringRow, style.cellTableHoveredRow(),
             style.cellTableHoveredRowCell(), false);
         hoveringRow = null;
-      } else if ("focus".equals(eventType) || isMouseDown) {
+      } else if (isMouseDown
+          && ((getPresenter().getKeyboardSelectedRowInView() != row)
+          || (keyboardSelectedColumn != col))) {
         // Move keyboard focus. Since the user clicked, allow focus to go to a
         // non-interactive column.
-        isFocused = true;
-        if (getPresenter().getKeyboardSelectedRow() != row
-            || keyboardSelectedColumn != col) {
-          deselectKeyboardRow(getKeyboardSelectedRow());
-          keyboardSelectedColumn = col;
-          getPresenter().setKeyboardSelectedRow(row, false);
-        }
+        boolean isFocusable = CellBasedWidgetImpl.get().isFocusable(target);
+        isFocused = isFocused || isFocusable;
+        keyboardSelectedColumn = col;
+        getPresenter().setKeyboardSelectedRow(row, !isFocusable);
       }
 
       // Update selection. Selection occurs before firing the event to the cell
@@ -967,10 +960,8 @@ public class CellTable<T> extends AbstractHasData<T> {
         return;
       }
       T value = getDisplayedItem(row);
-      SelectionModel<? super T> selectionModel = getSelectionModel();
-      if (selectionModel != null && "click".equals(eventType)
-          && !handlesSelection) {
-        selectionModel.setSelected(value, true);
+      if ("click".equals(eventType) && !handlesSelection) {
+        doSelection(event, value, row, col);
       }
 
       fireEventToCell(event, eventType, tableCell, value, row, columns.get(col));
@@ -986,25 +977,6 @@ public class CellTable<T> extends AbstractHasData<T> {
       td.addClassName(style.cellTableKeyboardSelectedCell());
       setRowStyleName(tr, style.cellTableKeyboardSelectedRow(),
           style.cellTableKeyboardSelectedRowCell(), true);
-    }
-  }
-
-  @Override
-  protected void onUpdateSelection() {
-    // Refresh headers.
-    for (Header<?> header : headers) {
-      if (header != null && header.getCell().dependsOnSelection()) {
-        createHeaders(false);
-        break;
-      }
-    }
-
-    // Refresh footers.
-    for (Header<?> footer : footers) {
-      if (footer != null && footer.getCell().dependsOnSelection()) {
-        createHeaders(true);
-        break;
-      }
     }
   }
 
@@ -1103,10 +1075,6 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   @Override
   protected void replaceAllChildren(List<T> values, SafeHtml html) {
-    // Cancel any pending redraw.
-    if (redrawScheduled) {
-      redrawCancelled = true;
-    }
     TABLE_IMPL.replaceAllRows(CellTable.this, tbody,
         CellBasedWidgetImpl.get().processHtml(html));
   }
@@ -1130,15 +1098,27 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
 
     TableRowElement tr = getRowElement(index);
-    TableCellElement td = tr.getCells().getItem(keyboardSelectedColumn);
-    final com.google.gwt.user.client.Element cellParent = getCellParent(td).cast();
-    if (!selected || isFocused || stealFocus) {
-      setRowStyleName(tr, style.cellTableKeyboardSelectedRow(),
-          style.cellTableKeyboardSelectedRowCell(), selected);
-      setStyleName(td, style.cellTableKeyboardSelectedCell(), selected);
+    String cellStyle = style.cellTableKeyboardSelectedCell();
+    boolean updatedSelection = !selected || isFocused || stealFocus;
+    setRowStyleName(tr, style.cellTableKeyboardSelectedRow(),
+        style.cellTableKeyboardSelectedRowCell(), selected);
+    NodeList<TableCellElement> cells = tr.getCells();
+    for (int i = 0; i < cells.getLength(); i++) {
+      TableCellElement td = cells.getItem(i);
+
+      // Update the selected style.
+      setStyleName(td, cellStyle, updatedSelection && selected
+          && i == keyboardSelectedColumn);
+
+      // Mark as focusable.
+      final com.google.gwt.user.client.Element cellParent = getCellParent(td).cast();
+      setFocusable(cellParent, selected && i == keyboardSelectedColumn);
     }
-    setFocusable(cellParent, selected);
+
+    // Move focus to the cell.
     if (selected && stealFocus) {
+      TableCellElement td = tr.getCells().getItem(keyboardSelectedColumn);
+      final com.google.gwt.user.client.Element cellParent = getCellParent(td).cast();
       CellBasedWidgetImpl.get().resetFocus(new Scheduler.ScheduledCommand() {
         public void execute() {
           cellParent.focus();
@@ -1147,7 +1127,13 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
   }
 
+  /**
+   * @deprecated this method is never called by AbstractHasData, render the
+   *             selected styles in
+   *             {@link #renderRowValues(SafeHtmlBuilder, List, int, SelectionModel)}
+   */
   @Override
+  @Deprecated
   protected void setSelected(Element elem, boolean selected) {
     TableRowElement tr = elem.cast();
     setRowStyleName(tr, style.cellTableSelectedRow(),
@@ -1233,10 +1219,6 @@ public class CellTable<T> extends AbstractHasData<T> {
   private void createHeadersAndFooters() {
     createHeaders(false);
     createHeaders(true);
-  }
-
-  private void deselectKeyboardRow(int row) {
-    setKeyboardSelected(row, false, false);
   }
 
   /**
@@ -1366,7 +1348,6 @@ public class CellTable<T> extends AbstractHasData<T> {
       if (nextColumn <= keyboardSelectedColumn) {
         // Wrap to the next row.
         if (presenter.hasKeyboardNext()) {
-          deselectKeyboardRow(oldRow);
           keyboardSelectedColumn = nextColumn;
           presenter.keyboardNext();
           event.preventDefault();
@@ -1374,9 +1355,8 @@ public class CellTable<T> extends AbstractHasData<T> {
         }
       } else {
         // Reselect the row to move the selected column.
-        deselectKeyboardRow(oldRow);
         keyboardSelectedColumn = nextColumn;
-        setKeyboardSelected(oldRow, true, true);
+        getPresenter().setKeyboardSelectedRow(oldRow, true);
         event.preventDefault();
         return true;
       }
@@ -1385,7 +1365,6 @@ public class CellTable<T> extends AbstractHasData<T> {
       if (prevColumn >= keyboardSelectedColumn) {
         // Wrap to the previous row.
         if (presenter.hasKeyboardPrev()) {
-          deselectKeyboardRow(oldRow);
           keyboardSelectedColumn = prevColumn;
           presenter.keyboardPrev();
           event.preventDefault();
@@ -1393,9 +1372,8 @@ public class CellTable<T> extends AbstractHasData<T> {
         }
       } else {
         // Reselect the row to move the selected column.
-        deselectKeyboardRow(oldRow);
         keyboardSelectedColumn = prevColumn;
-        setKeyboardSelected(oldRow, true, true);
+        getPresenter().setKeyboardSelectedRow(oldRow, true);
         event.preventDefault();
         return true;
       }
@@ -1419,17 +1397,6 @@ public class CellTable<T> extends AbstractHasData<T> {
     C cellValue = column.getValue(value);
     Cell<C> cell = column.getCell();
     return cell.resetFocus(parent, cellValue, key);
-  }
-
-  /**
-   * Schedule a redraw for the end of the event loop.
-   */
-  private void scheduleRedraw() {
-    redrawCancelled = false;
-    if (!redrawScheduled) {
-      redrawScheduled = true;
-      Scheduler.get().scheduleFinally(redrawCommand);
-    }
   }
 
   /**

@@ -1093,15 +1093,8 @@ public class UiBinderWriter implements Statements {
 
         // TODO why can this be null?
         if (fieldWriter != null) {
-          String initializer;
-          if (designTime.isDesignTime()) {
-            String typeName = ownerField.getType().getRawType().getQualifiedSourceName();
-            initializer = designTime.getProvidedField(typeName,
-                ownerField.getName());
-          } else {
-            initializer = formatCode("owner.%1$s", fieldName);
-          }
-          fieldManager.lookup(fieldName).setInitializer(initializer);
+          fieldManager.lookup(fieldName).setInitializer(
+              formatCode("owner.%1$s", fieldName));
         }
       }
     }
@@ -1215,4 +1208,3 @@ public class UiBinderWriter implements Statements {
     designTime.addDeclarations(w);
   }
 }
-

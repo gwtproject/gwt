@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -39,9 +39,13 @@ import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.cellview.client.HasDataPresenter.LoadingState;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
+import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionModel;
 
@@ -82,7 +86,7 @@ import java.util.Set;
  * <dd>{@example com.google.gwt.examples.view.KeyProviderExample}</dd>
  * </dl>
  * </p>
- *
+ * 
  * @param <T> the data type of each row
  */
 public class CellTable<T> extends AbstractHasData<T> {
@@ -268,21 +272,34 @@ public class CellTable<T> extends AbstractHasData<T> {
   }
 
   interface Template extends SafeHtmlTemplates {
+    @Template("<div style=\"outline:none;\">{0}</div>")
+    SafeHtml div(SafeHtml contents);
+
+    @Template("<div style=\"outline:none;\" tabindex=\"{0}\">{1}</div>")
+    SafeHtml divFocusable(int tabIndex, SafeHtml contents);
+
+    @Template("<div style=\"outline:none;\" tabindex=\"{0}\" accessKey=\"{1}\">{2}</div>")
+    SafeHtml divFocusableWithKey(int tabIndex, char accessKey, SafeHtml contents);
+
     @Template("<div class=\"{0}\"/>")
     SafeHtml loading(String loading);
 
     @Template("<table><tbody>{0}</tbody></table>")
     SafeHtml tbody(SafeHtml rowHtml);
 
-    @Template("<td class=\"{0}\"><div style=\"outline:none;\">{1}</div></td>")
+    @Template("<td class=\"{0}\">{1}</td>")
     SafeHtml td(String classes, SafeHtml contents);
 
-    @Template("<td class=\"{0}\"><div style=\"outline:none;\" tabindex=\"{1}\">{2}</div></td>")
-    SafeHtml tdFocusable(String classes, int tabIndex, SafeHtml contents);
+    @Template("<td class=\"{0}\" align=\"{1}\" valign=\"{2}\">{3}</td>")
+    SafeHtml tdBothAlign(String classes, String hAlign, String vAlign,
 
-    @Template("<td class=\"{0}\"><div style=\"outline:none;\" tabindex=\"{1}\" accessKey=\"{2}\">{3}</div></td>")
-    SafeHtml tdFocusableWithKey(String classes, int tabIndex, char accessKey,
         SafeHtml contents);
+
+    @Template("<td class=\"{0}\" align=\"{1}\">{2}</td>")
+    SafeHtml tdHorizontalAlign(String classes, String hAlign, SafeHtml contents);
+
+    @Template("<td class=\"{0}\" valign=\"{1}\">{2}</td>")
+    SafeHtml tdVerticalAlign(String classes, String vAlign, SafeHtml contents);
 
     @Template("<table><tfoot>{0}</tfoot></table>")
     SafeHtml tfoot(SafeHtml rowHtml);
@@ -306,7 +323,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
     /**
      * Convert the rowHtml into Elements wrapped by the specified table section.
-     *
+     * 
      * @param table the {@link CellTable}
      * @param sectionTag the table section tag
      * @param rowHtml the Html for the rows
@@ -352,7 +369,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
     /**
      * Render a table section in the table.
-     *
+     * 
      * @param table the {@link CellTable}
      * @param section the {@link TableSectionElement} to replace
      * @param html the html to render
@@ -478,7 +495,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Constructs a table with the given page size.
-   *
+   * 
    * @param pageSize the page size
    */
   public CellTable(final int pageSize) {
@@ -488,7 +505,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Constructs a table with a default page size of 15, and the given
    * {@link ProvidesKey key provider}.
-   *
+   * 
    * @param keyProvider an instance of ProvidesKey<T>, or null if the record
    *          object should act as its own key
    */
@@ -499,7 +516,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Constructs a table with the given page size with the specified
    * {@link Resources}.
-   *
+   * 
    * @param pageSize the page size
    * @param resources the resources to use for this widget
    */
@@ -510,7 +527,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Constructs a table with the given page size and the given
    * {@link ProvidesKey key provider}.
-   *
+   * 
    * @param pageSize the page size
    * @param keyProvider an instance of ProvidesKey<T>, or null if the record
    *          object should act as its own key
@@ -522,7 +539,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Constructs a table with the given page size, the specified
    * {@link Resources}, and the given key provider.
-   *
+   * 
    * @param pageSize the page size
    * @param resources the resources to use for this widget
    * @param keyProvider an instance of ProvidesKey<T>, or null if the record
@@ -545,7 +562,13 @@ public class CellTable<T> extends AbstractHasData<T> {
     colgroup = Document.get().createColGroupElement();
     table.appendChild(colgroup);
     thead = table.createTHead();
-    table.appendChild(tbody = Document.get().createTBodyElement());
+    // Some browsers create a tbody automatically, others do not.
+    if (table.getTBodies().getLength() > 0) {
+      tbody = table.getTBodies().getItem(0);
+    } else {
+      tbody = Document.get().createTBodyElement();
+      table.appendChild(tbody);
+    }
     table.appendChild(tbodyLoading = Document.get().createTBodyElement());
     tfoot = table.createTFoot();
     setStyleName(this.style.cellTableWidget());
@@ -570,7 +593,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Adds a column to the table.
-   *
+   * 
    * @param col the column to be added
    */
   public void addColumn(Column<T, ?> col) {
@@ -579,7 +602,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Adds a column to the table with an associated header.
-   *
+   * 
    * @param col the column to be added
    * @param header the associated {@link Header}
    */
@@ -589,7 +612,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Adds a column to the table with an associated header and footer.
-   *
+   * 
    * @param col the column to be added
    * @param header the associated {@link Header}
    * @param footer the associated footer (as a {@link Header} object)
@@ -634,7 +657,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Adds a column to the table with an associated String header.
-   *
+   * 
    * @param col the column to be added
    * @param headerString the associated header text, as a String
    */
@@ -654,7 +677,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Adds a column to the table with an associated String header and footer.
-   *
+   * 
    * @param col the column to be added
    * @param headerString the associated header text, as a String
    * @param footerString the associated footer text, as a String
@@ -681,7 +704,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Add a style name to the {@link TableColElement} at the specified index,
    * creating it if necessary.
-   *
+   * 
    * @param index the column index
    * @param styleName the style name to add
    */
@@ -691,7 +714,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Return the height of the table body.
-   *
+   * 
    * @return an int representing the body height
    */
   public int getBodyHeight() {
@@ -701,7 +724,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Return the height of the table header.
-   *
+   * 
    * @return an int representing the header height
    */
   public int getHeaderHeight() {
@@ -712,7 +735,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Get the {@link TableRowElement} for the specified row. If the row element
    * has not been created, null is returned.
-   *
+   * 
    * @param row the row index
    * @return the row element, or null if it doesn't exists
    * @throws IndexOutOfBoundsException if the row index is outside of the
@@ -741,7 +764,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Remove a column.
-   *
+   * 
    * @param col the column to remove
    */
   public void removeColumn(Column<T, ?> col) {
@@ -755,7 +778,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Remove a column.
-   *
+   * 
    * @param index the column index
    */
   public void removeColumn(int index) {
@@ -790,7 +813,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Remove a style from the {@link TableColElement} at the specified index.
-   *
+   * 
    * @param index the column index
    * @param styleName the style name to remove
    */
@@ -804,7 +827,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Sets the object used to determine how a row is styled; the change will take
    * effect the next time that the table is rendered.
-   *
+   * 
    * @param rowStyles a {@link RowStyles} object
    */
   public void setRowStyles(RowStyles<T> rowStyles) {
@@ -823,18 +846,17 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Called when a user action triggers selection.
-   *
+   * 
    * @param event the event that triggered selection
    * @param value the value that was selected
    * @param row the row index of the value on the page
    * @param column the column index where the event occurred
+   * @deprecated use
+   *             {@link #addCellPreviewHandler(com.google.gwt.view.client.CellPreviewEvent.Handler)}
+   *             instead
    */
+  @Deprecated
   protected void doSelection(Event event, T value, int row, int column) {
-    // TODO(jlabanca): Defer to a user provided SelectionManager.
-    SelectionModel<? super T> selectionModel = getSelectionModel();
-    if (selectionModel != null) {
-      selectionModel.setSelected(value, true);
-    }
   }
 
   @Override
@@ -872,6 +894,7 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void onBrowserEvent2(Event event) {
     // Get the event target.
@@ -942,7 +965,7 @@ public class CellTable<T> extends AbstractHasData<T> {
         hoveringRow = null;
       } else if (isClick
           && ((getPresenter().getKeyboardSelectedRowInView() != row)
-          || (keyboardSelectedColumn != col))) {
+              || (keyboardSelectedColumn != col))) {
         // Move keyboard focus. Since the user clicked, allow focus to go to a
         // non-interactive column.
         boolean isFocusable = CellBasedWidgetImpl.get().isFocusable(target);
@@ -958,12 +981,19 @@ public class CellTable<T> extends AbstractHasData<T> {
         // of bounds of the underlying data.
         return;
       }
-      T value = getDisplayedItem(row);
-      if (isClick && !handlesSelection) {
+      boolean isSelectionHandled = handlesSelection
+          || KeyboardSelectionPolicy.BOUND_TO_SELECTION == getKeyboardSelectionPolicy();
+      T value = getVisibleItem(row);
+      CellPreviewEvent<T> previewEvent = CellPreviewEvent.fire(this, event,
+          this, row, col, value, cellIsEditing, isSelectionHandled);
+      if (isClick && !cellIsEditing && !isSelectionHandled) {
         doSelection(event, value, row, col);
       }
 
-      fireEventToCell(event, eventType, tableCell, value, row, columns.get(col));
+      if (!previewEvent.isCanceled()) {
+        fireEventToCell(event, eventType, tableCell, value, row,
+            columns.get(col));
+      }
     }
   }
 
@@ -1048,6 +1078,8 @@ public class CellTable<T> extends AbstractHasData<T> {
           column.render(value, keyProvider, cellBuilder);
         }
 
+        // Build the contents.
+        SafeHtml contents = SafeHtmlUtils.EMPTY_SAFE_HTML;
         if (i == keyboardSelectedRow && curColumn == keyboardSelectedColumn) {
           // This is the focused cell.
           if (isFocused) {
@@ -1055,14 +1087,31 @@ public class CellTable<T> extends AbstractHasData<T> {
           }
           char accessKey = getAccessKey();
           if (accessKey != 0) {
-            trBuilder.append(template.tdFocusableWithKey(tdClasses,
-                getTabIndex(), accessKey, cellBuilder.toSafeHtml()));
+            contents = template.divFocusableWithKey(getTabIndex(), accessKey,
+                cellBuilder.toSafeHtml());
           } else {
-            trBuilder.append(template.tdFocusable(tdClasses, getTabIndex(),
-                cellBuilder.toSafeHtml()));
+            contents = template.divFocusable(getTabIndex(),
+                cellBuilder.toSafeHtml());
           }
         } else {
-          trBuilder.append(template.td(tdClasses, cellBuilder.toSafeHtml()));
+          contents = template.div(cellBuilder.toSafeHtml());
+        }
+
+        // Build the cell.
+        HorizontalAlignmentConstant hAlign = column.getHorizontalAlignment();
+        VerticalAlignmentConstant vAlign = column.getVerticalAlignment();
+        if (hAlign != null && vAlign != null) {
+          trBuilder.append(template.tdBothAlign(tdClasses,
+              hAlign.getTextAlignString(), vAlign.getVerticalAlignString(),
+              contents));
+        } else if (hAlign != null) {
+          trBuilder.append(template.tdHorizontalAlign(tdClasses,
+              hAlign.getTextAlignString(), contents));
+        } else if (vAlign != null) {
+          trBuilder.append(template.tdVerticalAlign(tdClasses,
+              vAlign.getVerticalAlignString(), contents));
+        } else {
+          trBuilder.append(template.td(tdClasses, contents));
         }
 
         curColumn++;
@@ -1223,7 +1272,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Get the {@link TableColElement} at the specified index, creating it if
    * necessary.
-   *
+   * 
    * @param index the column index
    * @return the {@link TableColElement}
    */
@@ -1239,7 +1288,7 @@ public class CellTable<T> extends AbstractHasData<T> {
    * Find and return the index of the next interactive column. If no column is
    * interactive, 0 is returned. If the start index is the only interactive
    * column, it is returned.
-   *
+   * 
    * @param start the start index, exclusive unless it is the only option
    * @param reverse true to do a reverse search
    * @return the interactive column index, or 0 if not interactive
@@ -1278,7 +1327,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Find the cell that contains the element. Note that the TD element is not
    * the parent. The parent is the div inside the TD cell.
-   *
+   * 
    * @param elem the element
    * @return the parent cell
    */
@@ -1323,7 +1372,7 @@ public class CellTable<T> extends AbstractHasData<T> {
   /**
    * Get the parent element that is passed to the {@link Cell} from the table
    * cell element.
-   *
+   * 
    * @param td the table cell
    * @return the parent of the {@link Cell}
    */
@@ -1391,7 +1440,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   private <C> boolean resetFocusOnCellImpl(int row, Column<T, C> column) {
     Element parent = getKeyboardSelectedElement();
-    T value = getDisplayedItem(row);
+    T value = getVisibleItem(row);
     Object key = getValueKey(value);
     C cellValue = column.getValue(value);
     Cell<C> cell = column.getCell();
@@ -1400,7 +1449,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Show or hide the loading icon.
-   *
+   * 
    * @param visible true to show, false to hide.
    */
   private void setLoadingIconVisible(boolean visible) {
@@ -1420,7 +1469,7 @@ public class CellTable<T> extends AbstractHasData<T> {
 
   /**
    * Apply a style to a row and all cells in the row.
-   *
+   * 
    * @param tr the row element
    * @param rowStyle the style to apply to the row
    * @param cellStyle the style to apply to the cells
@@ -1456,3 +1505,4 @@ public class CellTable<T> extends AbstractHasData<T> {
     }
   }
 }
+

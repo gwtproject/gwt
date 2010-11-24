@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,6 @@
 package com.google.gwt.requestfactory.server;
 
 import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.requestfactory.shared.Id;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Domain object for SimpleFooRequest.
  */
-public class SimpleBar {
+public class SimpleBar implements HasId {
   /**
    * DO NOT USE THIS UGLY HACK DIRECTLY! Call {@link #get} instead.
    */
@@ -90,11 +89,6 @@ public class SimpleBar {
     return findSimpleBar("1L");
   }
 
-  public static SimpleBar returnFirst(List<SimpleBar> list) {
-    SimpleBar toReturn = list.get(0);
-    return toReturn;
-  }
-
   public static void reset() {
     resetImpl();
   }
@@ -122,12 +116,17 @@ public class SimpleBar {
     return instance;
   }
 
+  public static SimpleBar returnFirst(List<SimpleBar> list) {
+    SimpleBar toReturn = list.get(0);
+    return toReturn;
+  }
+
   Integer version = 1;
 
-  @Id
   private String id = "999L";
   private boolean findFails;
   private boolean isNew = true;
+  private boolean unpersisted;
   private String userName;
 
   public SimpleBar() {
@@ -144,7 +143,11 @@ public class SimpleBar {
   }
 
   public String getId() {
-    return id;
+    return unpersisted ? null : id;
+  }
+
+  public Boolean getUnpersisted() {
+    return unpersisted;
   }
 
   public String getUserName() {
@@ -152,7 +155,7 @@ public class SimpleBar {
   }
 
   public Integer getVersion() {
-    return version;
+    return unpersisted ? null : version;
   }
 
   public void persist() {
@@ -175,6 +178,10 @@ public class SimpleBar {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public void setUnpersisted(Boolean unpersisted) {
+    this.unpersisted = unpersisted;
   }
 
   public void setUserName(String userName) {

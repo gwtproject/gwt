@@ -32,9 +32,6 @@ import com.google.gwt.requestfactory.shared.SimpleRequestFactory;
  */
 public abstract class RequestFactoryTestBase extends GWTTestCase {
 
-  protected SimpleRequestFactory req;
-  protected EventBus eventBus;
-
   /**
    * Class for counting events.
    */
@@ -63,42 +60,21 @@ public abstract class RequestFactoryTestBase extends GWTTestCase {
     }
   }
 
+  protected EventBus eventBus;
+  protected SimpleRequestFactory req;
+
   @Override
   public void gwtSetUp() {
-    eventBus = new SimpleEventBus();
-    req = GWT.create(SimpleRequestFactory.class);
-    req.initialize(eventBus);
+    req = createFactory();
+    eventBus = req.getEventBus();
   }
 
-  protected void finishTestAndReset() {
-    final boolean[] reallyDone = {false, false, false};
-    req.simpleFooRequest().reset().fire(new Receiver<Void>() {
-      @Override
-      public void onSuccess(Void response) {
-        reallyDone[0] = true;
-        if (reallyDone[0] && reallyDone[1] && reallyDone[2]) {
-          finishTest();
-        }
-      }
-    });
-    req.simpleFooStringRequest().reset().fire(new Receiver<Void>() {
-      @Override
-      public void onSuccess(Void response) {
-        reallyDone[1] = true;
-        if (reallyDone[0] && reallyDone[1] && reallyDone[2]) {
-          finishTest();
-        }
-      }
-    });
-    req.simpleBarRequest().reset().fire(new Receiver<Void>() {
-      @Override
-      public void onSuccess(Void response) {
-        reallyDone[2] = true;
-        if (reallyDone[0] && reallyDone[1] && reallyDone[2]) {
-          finishTest();
-        }
-      }
-    });
+  protected void checkEqualityAndHashcode(Object a, Object b) {
+    assertNotNull(a);
+    assertNotNull(b);
+    assertEquals(a.hashCode(), b.hashCode());
+    assertEquals(a, b);
+    assertEquals(b, a);
   }
 
   protected void checkStableIdEquals(EntityProxy expected, EntityProxy actual) {
@@ -109,5 +85,36 @@ public abstract class RequestFactoryTestBase extends GWTTestCase {
     // No assumptions about the proxy objects (being proxies and all)
     assertNotSame(expected, actual);
     assertFalse(expected.equals(actual));
+  }
+
+  /**
+   * Create and initialize a new {@link SimpleRequestFactory}.
+   */
+  protected SimpleRequestFactory createFactory() {
+    SimpleRequestFactory toReturn = GWT.create(SimpleRequestFactory.class);
+    toReturn.initialize(new SimpleEventBus());
+    return toReturn;
+  }
+
+  protected void finishTestAndReset() {
+    final boolean[] reallyDone = {false, false};
+    req.simpleFooRequest().reset().fire(new Receiver<Void>() {
+      @Override
+      public void onSuccess(Void response) {
+        reallyDone[0] = true;
+        if (reallyDone[0] && reallyDone[1]) {
+          finishTest();
+        }
+      }
+    });
+    req.simpleBarRequest().reset().fire(new Receiver<Void>() {
+      @Override
+      public void onSuccess(Void response) {
+        reallyDone[1] = true;
+        if (reallyDone[0] && reallyDone[1]) {
+          finishTest();
+        }
+      }
+    });
   }
 }

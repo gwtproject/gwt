@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,6 +24,7 @@ import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.editor.rebind.model.ModelUtils;
+import com.google.gwt.requestfactory.rebind.model.EntityProxyModel.Type;
 import com.google.gwt.requestfactory.rebind.model.RequestMethod.CollectionType;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.InstanceRequest;
@@ -34,6 +35,7 @@ import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.gwt.requestfactory.shared.Service;
 import com.google.gwt.requestfactory.shared.ServiceName;
+import com.google.gwt.requestfactory.shared.ValueProxy;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,13 +63,13 @@ public class RequestFactoryModel {
     return "Unable to create RequestFactoryModel model due to previous errors";
   }
 
-  private final TreeLogger logger;
   private final JClassType collectionInterface;
   private final List<ContextMethod> contextMethods = new ArrayList<ContextMethod>();
   private final JClassType entityProxyInterface;
   private final JClassType factoryType;
   private final JClassType instanceRequestInterface;
   private final JClassType listInterface;
+  private final TreeLogger logger;
   private final TypeOracle oracle;
   /**
    * This map prevents cyclic type dependencies from overflowing the stack.
@@ -82,6 +84,7 @@ public class RequestFactoryModel {
   private final JClassType requestContextInterface;
   private final JClassType requestFactoryInterface;
   private final JClassType requestInterface;
+  private final JClassType valueProxyInterface;
 
   public RequestFactoryModel(TreeLogger logger, JClassType factoryType)
       throws UnableToCompleteException {
@@ -96,6 +99,7 @@ public class RequestFactoryModel {
     requestContextInterface = oracle.findType(RequestContext.class.getCanonicalName());
     requestFactoryInterface = oracle.findType(RequestFactory.class.getCanonicalName());
     requestInterface = oracle.findType(Request.class.getCanonicalName());
+    valueProxyInterface = oracle.findType(ValueProxy.class.getCanonicalName());
 
     for (JMethod method : factoryType.getOverridableMethods()) {
       if (method.getEnclosingType().equals(requestFactoryInterface)) {
@@ -205,7 +209,19 @@ public class RequestFactoryModel {
       EntityProxyModel.Builder builder = new EntityProxyModel.Builder();
       peerBuilders.put(entityProxyType, builder);
 
-      builder.setQualifiedSourceName(ModelUtils.getQualifiedBaseName(entityProxyType));
+      builder.setQualifiedBinaryName(ModelUtils.getQualifiedBaseBinaryName(entityProxyType));
+      builder.setQualifiedSourceName(ModelUtils.getQualifiedBaseSourceName(entityProxyType));
+      if (entityProxyInterface.isAssignableFrom(entityProxyType)) {
+        builder.setType(Type.ENTITY);
+      } else if (valueProxyInterface.isAssignableFrom(entityProxyType)) {
+        builder.setType(Type.VALUE);
+      } else {
+        poison("The type %s is not assignable to either %s or %s",
+            entityProxyInterface.getQualifiedSourceName(),
+            valueProxyInterface.getQualifiedSourceName());
+        // Cannot continue, since knowing the behavior is crucial
+        die(poisonedMessage());
+      }
 
       // Get the server domain object type
       ProxyFor proxyFor = entityProxyType.getAnnotation(ProxyFor.class);
@@ -332,8 +348,9 @@ public class RequestFactoryModel {
     if (ModelUtils.isValueType(oracle, transportedClass)) {
       // Simple values, like Integer and String
       methodBuilder.setValueType(true);
-    } else if (entityProxyInterface.isAssignableFrom(transportedClass)) {
-      // EntityProxy return types
+    } else if (entityProxyInterface.isAssignableFrom(transportedClass)
+        || valueProxyInterface.isAssignableFrom(transportedClass)) {
+      // EntityProxy and ValueProxy return types
       methodBuilder.setEntityType(getEntityProxyType(transportedClass));
     } else if (collectionInterface.isAssignableFrom(transportedClass)) {
       // Only allow certain collections for now

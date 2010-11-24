@@ -21,29 +21,45 @@ import com.google.gwt.logging.server.RemoteLoggingServiceUtil.RemoteLoggingExcep
 import com.google.gwt.logging.server.StackTraceDeobfuscator;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Server side object that handles log messages sent by
  * {@link com.google.gwt.requestfactory.client.RequestFactoryLogHandler}.
  */
 public class Logging {
 
-  private static StackTraceDeobfuscator deobfuscator =
-    new StackTraceDeobfuscator("");
+  private static StackTraceDeobfuscator deobfuscator = new StackTraceDeobfuscator(
+      "");
 
-  public static void logMessage(String logRecordJson) throws
-  RemoteLoggingException {
-    // if the header does not exist, we pass null, which is handled gracefully
-    // by the deobfuscation code.
-    String strongName =
-      RequestFactoryServlet.getThreadLocalRequest().getHeader(
-          RpcRequestBuilder.STRONG_NAME_HEADER);
-    RemoteLoggingServiceUtil.logOnServer(logRecordJson,
-        strongName, deobfuscator, null);
+  /**
+   * Logs a message.
+   * 
+   * @param serializedLogRecordString a json serialized LogRecord, as provided by
+   * {@link com.google.gwt.logging.client.JsonLogRecordClientUtil.logRecordAsJsonObject(LogRecord)}
+   * @throws RemoteLoggingException if logging fails
+   */
+  public static void logMessage(String logRecordJson)
+      throws RemoteLoggingException {
+    /*
+     * if the header does not exist, we pass null, which is handled gracefully
+     * by the deobfuscation code.
+     */
+    HttpServletRequest threadLocalRequest = RequestFactoryServlet.getThreadLocalRequest();
+    String strongName = null;
+    if (threadLocalRequest != null) {
+      // can be null during tests
+      threadLocalRequest.getHeader(RpcRequestBuilder.STRONG_NAME_HEADER);
+    }
+    RemoteLoggingServiceUtil.logOnServer(logRecordJson, strongName,
+        deobfuscator, null);
   }
 
   /**
    * This function is only for server side use which is why it's not in the
    * LoggingRequest interface.
+   * 
+   * @param dir a directory, specified as a String
    */
   public static void setSymbolMapsDirectory(String dir) {
     deobfuscator.setSymbolMapsDirectory(dir);
@@ -53,18 +69,42 @@ public class Logging {
 
   private Integer version = 0;
 
+  /**
+   * Returns the id of this instance.
+   * 
+   * @return a String id
+   * @see #setId(String)
+   */
   public String getId() {
     return this.id;
   }
 
+  /**
+   * Returns the version of this instance.
+   * 
+   * @return an Integer version number
+   * @see #setVersion(Integer)
+   */
   public Integer getVersion() {
     return this.version;
   }
 
+  /**
+   * Sets the id on this instance.
+   * 
+   * @param id a String id
+   * @see #getId()
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * Sets the version of this instance.
+   * 
+   * @param version an Integer version number
+   * @see #getVersion()
+   */
   public void setVersion(Integer version) {
     this.version = version;
   }

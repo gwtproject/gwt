@@ -15,6 +15,10 @@
  */
 package com.google.gwt.requestfactory.rebind;
 
+import com.google.gwt.autobean.shared.AutoBean;
+import com.google.gwt.autobean.shared.AutoBeanFactory;
+import com.google.gwt.autobean.shared.AutoBeanFactory.Category;
+import com.google.gwt.autobean.shared.AutoBeanFactory.NoWrap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -25,37 +29,29 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JTypeParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.editor.client.AutoBean;
-import com.google.gwt.editor.client.AutoBeanFactory;
-import com.google.gwt.editor.client.AutoBeanFactory.Category;
-import com.google.gwt.editor.client.AutoBeanFactory.NoWrap;
 import com.google.gwt.editor.rebind.model.ModelUtils;
-import com.google.gwt.requestfactory.client.impl.AbstractRequest;
-import com.google.gwt.requestfactory.client.impl.AbstractRequestContext;
-import com.google.gwt.requestfactory.client.impl.AbstractRequestFactory;
-import com.google.gwt.requestfactory.client.impl.EntityProxyCategory;
-import com.google.gwt.requestfactory.client.impl.messages.RequestData;
+import com.google.gwt.requestfactory.client.impl.AbstractClientRequestFactory;
 import com.google.gwt.requestfactory.rebind.model.ContextMethod;
 import com.google.gwt.requestfactory.rebind.model.EntityProxyModel;
+import com.google.gwt.requestfactory.rebind.model.EntityProxyModel.Type;
 import com.google.gwt.requestfactory.rebind.model.RequestFactoryModel;
 import com.google.gwt.requestfactory.rebind.model.RequestMethod;
-import com.google.gwt.requestfactory.rebind.model.RequestMethod.CollectionType;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
-import com.google.gwt.requestfactory.shared.ValueCodex;
+import com.google.gwt.requestfactory.shared.impl.AbstractRequest;
+import com.google.gwt.requestfactory.shared.impl.AbstractRequestContext;
+import com.google.gwt.requestfactory.shared.impl.AbstractRequestFactory;
+import com.google.gwt.requestfactory.shared.impl.BaseProxyCategory;
+import com.google.gwt.requestfactory.shared.impl.EntityProxyCategory;
+import com.google.gwt.requestfactory.shared.impl.RequestData;
+import com.google.gwt.requestfactory.shared.impl.ValueProxyCategory;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * <p>
- * <span style="color:red">Experimental API: This class is still under rapid
- * development, and is very likely to be deleted. Use it at your own risk.
- * </span>
- * </p>
  * Generates implementations of
  * {@link com.google.gwt.requestfactory.shared.RequestFactory RequestFactory}
  * and its nested interfaces.
@@ -90,7 +86,7 @@ public class RequestFactoryGenerator extends Generator {
 
     ClassSourceFileComposerFactory factory = new ClassSourceFileComposerFactory(
         packageName, simpleSourceName);
-    factory.setSuperclass(AbstractRequestFactory.class.getCanonicalName());
+    factory.setSuperclass(AbstractClientRequestFactory.class.getCanonicalName());
     factory.addImplementedInterface(typeName);
     SourceWriter sw = factory.createSourceWriter(context, pw);
     writeAutoBeanFactory(sw);
@@ -104,8 +100,11 @@ public class RequestFactoryGenerator extends Generator {
 
   private void writeAutoBeanFactory(SourceWriter sw) {
     // Map in static implementations of EntityProxy methods
-    sw.println("@%s(%s.class)", Category.class.getCanonicalName(),
-        EntityProxyCategory.class.getCanonicalName());
+    sw.println("@%s({%s.class, %s.class, %s.class})",
+        Category.class.getCanonicalName(),
+        EntityProxyCategory.class.getCanonicalName(),
+        ValueProxyCategory.class.getCanonicalName(),
+        BaseProxyCategory.class.getCanonicalName());
     // Don't wrap our id type, because it makes code grungy
     sw.println("@%s(%s.class)", NoWrap.class.getCanonicalName(),
         EntityProxyId.class.getCanonicalName());
@@ -211,50 +210,20 @@ public class RequestFactoryGenerator extends Generator {
         // makeRequestData()
         sw.println("@Override protected %s makeRequestData() {",
             RequestData.class.getCanonicalName());
-        // return new RequestData("Foo::bar", new Object
-        sw.indentln("return new %s(\"%s\", new Object[] {%s}, propertyRefs);",
-            RequestData.class.getCanonicalName(), operation, parameterArray);
+        // return new RequestData("Foo::bar", {parameters}, propertyRefs,
+        // List.class, FooProxy.class);
+        String elementType = request.isCollectionType()
+            ? request.getCollectionElementType().getQualifiedSourceName()
+                + ".class" : "null";
+        String returnTypeBaseQualifiedName = ModelUtils.ensureBaseType(
+            request.getDataType()).getQualifiedSourceName();
+        sw.indentln(
+            "return new %s(\"%s\", new Object[] {%s}, propertyRefs, %s.class, %s);",
+            RequestData.class.getCanonicalName(), operation, parameterArray,
+            returnTypeBaseQualifiedName, elementType);
         sw.println("}");
 
-        // handleResponse(Object obj)
-        sw.println("@Override protected void handleResult(Object obj) {");
-        sw.indent();
-        sw.println("Object decoded;");
-        if (request.isCollectionType()) {
-          // Lists are ArrayLists, Sets are HashSets
-          Class<?> collectionType = request.getCollectionType().equals(
-              CollectionType.LIST) ? ArrayList.class : HashSet.class;
-
-          // decoded = new ArrayList<Foo>();
-          sw.println("decoded = new %s();", collectionType.getCanonicalName());
-
-          // decodeReturnObjectList(FooEntityProxy.class,obj, (List)decoded);
-          String decodeMethod = request.isValueType() ? "decodeReturnValueList"
-              : "decodeReturnObjectList";
-          sw.println(
-              "%s(%s.class, obj, (%s)decoded);",
-              decodeMethod,
-              ModelUtils.getQualifiedBaseName(request.getCollectionElementType()),
-              collectionType.getCanonicalName());
-        } else if (request.isValueType()) {
-          // decoded = ValueCodex.cFString(Integer.class, String.valueOf(obj));
-          sw.println(
-              "decoded = %s.convertFromString(%s.class, String.valueOf(obj));",
-              ValueCodex.class.getCanonicalName(),
-              ModelUtils.getQualifiedBaseName(request.getDataType()));
-        } else if (request.isEntityType()) {
-          // Implicitly erased
-          sw.println("decoded = decodeReturnObject(%s.class, obj);",
-              request.getEntityType().getQualifiedSourceName());
-        } else {
-          sw.println("throw new UnsupportedOperationException()");
-        }
-        // succeed((Integer) decoded);
-        sw.println("succeed((%s) decoded);",
-            request.getDataType().getParameterizedQualifiedSourceName());
-        sw.outdent();
-        sw.println("}");
-
+        // end class X{}
         sw.outdent();
         sw.println("}");
 
@@ -289,14 +258,24 @@ public class RequestFactoryGenerator extends Generator {
         + " = new %1$s<String, Class<?>>();", HashMap.class.getCanonicalName());
     sw.println("private static final %1$s<Class<?>, String> typesToTokens"
         + " = new %1$s<Class<?>, String>();", HashMap.class.getCanonicalName());
+    sw.println(
+        "private static final %1$s<Class<?>> entityProxyTypes = new %1$s<Class<?>>();",
+        HashSet.class.getCanonicalName());
+    sw.println(
+        "private static final %1$s<Class<?>> valueProxyTypes = new %1$s<Class<?>>();",
+        HashSet.class.getCanonicalName());
     sw.println("static {");
     sw.indent();
     for (EntityProxyModel type : model.getAllProxyModels()) {
       // tokensToTypes.put("Foo", Foo.class);
-      sw.println("tokensToTypes.put(\"%1$s\", %1$s.class);",
-          type.getQualifiedSourceName());
+      sw.println("tokensToTypes.put(\"%s\", %s.class);",
+          type.getQualifiedBinaryName(), type.getQualifiedSourceName());
       // typesToTokens.put(Foo.class, Foo);
-      sw.println("typesToTokens.put(%1$s.class, \"%1$s\");",
+      sw.println("typesToTokens.put(%s.class, \"%s\");",
+          type.getQualifiedSourceName(), type.getQualifiedBinaryName());
+      // fooProxyTypes.add(MyFooProxy.class);
+      sw.println("%s.add(%s.class);", type.getType().equals(Type.ENTITY)
+          ? "entityProxyTypes" : "valueProxyTypes",
           type.getQualifiedSourceName());
     }
     sw.outdent();
@@ -308,6 +287,12 @@ public class RequestFactoryGenerator extends Generator {
     sw.println("}");
     sw.println("@Override protected String getTypeToken(Class type) {");
     sw.indentln("return typesToTokens.get(type);");
+    sw.println("}");
+    sw.println("@Override public boolean isEntityType(Class<?> type) {");
+    sw.indentln("return entityProxyTypes.contains(type);");
+    sw.println("}");
+    sw.println("@Override public boolean isValueType(Class<?> type) {");
+    sw.indentln("return valueProxyTypes.contains(type);");
     sw.println("}");
   }
 }

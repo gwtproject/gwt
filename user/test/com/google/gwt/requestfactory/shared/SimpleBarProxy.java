@@ -23,6 +23,8 @@ package com.google.gwt.requestfactory.shared;
 public interface SimpleBarProxy extends EntityProxy {
   Boolean getFindFails();
 
+  Boolean getUnpersisted();
+
   /*
    * NB: The lack of a getId() here is intentional, to ensure that the system
    * does not assume that the id property is available to the client.
@@ -31,6 +33,8 @@ public interface SimpleBarProxy extends EntityProxy {
   String getUserName();
 
   void setFindFails(Boolean fails);
+
+  void setUnpersisted(Boolean b);
 
   void setUserName(String userName);
 

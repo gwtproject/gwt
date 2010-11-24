@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,7 +15,6 @@
  */
 package com.google.gwt.requestfactory.server;
 
-import com.google.gwt.requestfactory.shared.Id;
 import com.google.gwt.requestfactory.shared.SimpleEnum;
 
 import java.math.BigDecimal;
@@ -39,7 +38,7 @@ public class SimpleFoo {
   /**
    * DO NOT USE THIS UGLY HACK DIRECTLY! Call {@link #get} instead.
    */
-  private static Map<Long, SimpleFoo> jreTestSingleton = new HashMap<Long, SimpleFoo>();
+  private static Map<Long, SimpleFoo> jreTestSingleton;
 
   private static Long nextId = 1L;
 
@@ -87,6 +86,9 @@ public class SimpleFoo {
     HttpServletRequest req = RequestFactoryServlet.getThreadLocalRequest();
     if (req == null) {
       // May be in a JRE test case, use the singleton
+      if (jreTestSingleton == null) {
+        jreTestSingleton = resetImpl();
+      }
       return jreTestSingleton;
     } else {
       /*
@@ -147,6 +149,12 @@ public class SimpleFoo {
     foo2.persist();
     foo3.persist();
     return foo1;
+  }
+
+  public static SimpleFoo getUnpersistedInstance() {
+    SimpleFoo foo = new SimpleFoo();
+    foo.setUnpersisted(true);
+    return foo;
   }
 
   public static Boolean processBooleanList(List<Boolean> values) {
@@ -270,6 +278,19 @@ public class SimpleFoo {
   public static String returnNullString() {
     return null;
   }
+  
+  public static SimpleFoo returnSimpleFooSubclass() {
+    return new SimpleFoo() {
+    };
+  }
+
+  public static SimpleValue returnValueProxy() {
+    SimpleValue toReturn = new SimpleValue();
+    toReturn.setNumber(42);
+    toReturn.setString("Hello world!");
+    toReturn.setDate(new Date());
+    return toReturn;
+  }
 
   @SuppressWarnings("unused")
   private static Integer privateMethod() {
@@ -278,7 +299,6 @@ public class SimpleFoo {
 
   Integer version = 1;
 
-  @Id
   private Long id = 1L;
   private boolean isNew = true;
 
@@ -320,12 +340,16 @@ public class SimpleFoo {
 
   private List<Integer> numberListField;
 
+  private SimpleValue simpleValueField;
+
   /*
    * isChanged is just a quick-and-dirty way to get version-ing for now.
    * Currently, only set by setUserName and setIntId. TODO for later: Use a
    * cleaner solution to figure out when to increment version numbers.
    */
   boolean isChanged;
+
+  private boolean unpersisted;
 
   public SimpleFoo() {
     intId = 42;
@@ -432,7 +456,7 @@ public class SimpleFoo {
   }
 
   public Long getId() {
-    return id;
+    return unpersisted ? null : id;
   }
 
   public Integer getIntId() {
@@ -485,12 +509,24 @@ public class SimpleFoo {
     return shortField;
   }
 
+  public SimpleValue getSimpleValue() {
+    return simpleValueField;
+  }
+
+  public List<SimpleValue> getSimpleValues() {
+    return Arrays.asList(simpleValueField);
+  }
+
+  public boolean getUnpersisted() {
+    return unpersisted;
+  }
+
   public String getUserName() {
     return userName;
   }
 
   public Integer getVersion() {
-    return version;
+    return unpersisted ? null : version;
   }
 
   public String hello(SimpleBar bar) {
@@ -664,6 +700,18 @@ public class SimpleFoo {
     this.shortField = shortField;
   }
 
+  public void setSimpleValue(SimpleValue simpleValueField) {
+    this.simpleValueField = simpleValueField;
+  }
+
+  public void setSimpleValues(List<SimpleValue> simpleValueField) {
+    this.simpleValueField = simpleValueField.get(0);
+  }
+
+  public void setUnpersisted(Boolean unpersisted) {
+    this.unpersisted = unpersisted;
+  }
+
   public void setUserName(String userName) {
     if (!this.userName.equals(userName)) {
       this.userName = userName;
@@ -685,7 +733,7 @@ public class SimpleFoo {
 
   /**
    * Persist this entity and all child entities. This method can handle loops.
-   *
+   * 
    * @param processed the entities that have been processed
    */
   private void persistCascadingAndReturnSelfImpl(Set<SimpleFoo> processed) {

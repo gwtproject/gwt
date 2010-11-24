@@ -15,7 +15,6 @@
  */
 package com.google.gwt.requestfactory.client;
 
-import com.google.gwt.requestfactory.client.impl.SimpleEntityProxyId;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.EntityProxyChange;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
@@ -28,7 +27,10 @@ import com.google.gwt.requestfactory.shared.SimpleBarRequest;
 import com.google.gwt.requestfactory.shared.SimpleEnum;
 import com.google.gwt.requestfactory.shared.SimpleFooProxy;
 import com.google.gwt.requestfactory.shared.SimpleFooRequest;
+import com.google.gwt.requestfactory.shared.SimpleValueProxy;
+import com.google.gwt.requestfactory.shared.UserInformationProxy;
 import com.google.gwt.requestfactory.shared.Violation;
+import com.google.gwt.requestfactory.shared.impl.SimpleEntityProxyId;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,11 +64,11 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     @Override
     public void onFailure(ServerFailure error) {
       assertEquals(expectedException, error.getExceptionType());
-      if (expectedException.length() > 0) {
+      if (expectedException != null) {
         assertFalse(error.getStackTraceString().length() == 0);
         assertEquals("THIS EXCEPTION IS EXPECTED BY A TEST", error.getMessage());
       } else {
-        assertEquals("", error.getStackTraceString());
+        assertEquals(null, error.getStackTraceString());
         assertEquals("Server Error: THIS EXCEPTION IS EXPECTED BY A TEST",
             error.getMessage());
       }
@@ -170,13 +172,14 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
   private static final int DELAY_TEST_FINISH = 5000;
 
   public <T extends EntityProxy> void assertContains(Collection<T> col, T value) {
+    EntityProxyId<?> lookFor = value.stableId();
     for (T x : col) {
-      if (x.stableId().equals(value.stableId())) {
+      EntityProxyId<?> found = x.stableId();
+      if (found.equals(lookFor)) {
         return;
       }
     }
-    assertTrue(
-        ("Value " + value + " not found in collection ") + col.toString(),
+    assertTrue("Value " + value + " not found in collection " + col.toString(),
         false);
   }
 
@@ -185,48 +188,6 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     for (T x : col) {
       assertNotSame(x.stableId(), value.stableId());
     }
-  }
-
-  public void disabled_testEchoComplexFutures() {
-    // relate futures on the server. Check if the relationship is still present
-    // on the client.
-    delayTestFinish(DELAY_TEST_FINISH);
-    final SimpleFooEventHandler<SimpleFooProxy> handler = new SimpleFooEventHandler<SimpleFooProxy>();
-    EntityProxyChange.registerForProxyType(req.getEventBus(),
-        SimpleFooProxy.class, handler);
-    SimpleFooRequest context = req.simpleFooRequest();
-    final SimpleFooProxy simpleFoo = context.create(SimpleFooProxy.class);
-    final SimpleBarProxy simpleBar = context.create(SimpleBarProxy.class);
-    context.echoComplex(simpleFoo, simpleBar).fire(
-        new Receiver<SimpleFooProxy>() {
-          @Override
-          public void onSuccess(SimpleFooProxy response) {
-            assertEquals(0, handler.totalEventCount);
-            checkStableIdEquals(simpleFoo, response);
-            SimpleBarProxy responseBar = response.getBarField();
-            assertNotNull(responseBar);
-            checkStableIdEquals(simpleBar, responseBar);
-            finishTestAndReset();
-          }
-        });
-  }
-
-  public void disabled_testEchoSimpleFutures() {
-    // tests if futureIds can be echoed back.
-    delayTestFinish(DELAY_TEST_FINISH);
-    final SimpleFooEventHandler<SimpleFooProxy> handler = new SimpleFooEventHandler<SimpleFooProxy>();
-    EntityProxyChange.registerForProxyType(req.getEventBus(),
-        SimpleFooProxy.class, handler);
-    SimpleFooRequest context = req.simpleFooRequest();
-    final SimpleFooProxy simpleFoo = context.create(SimpleFooProxy.class);
-    context.echo(simpleFoo).fire(new Receiver<SimpleFooProxy>() {
-      @Override
-      public void onSuccess(SimpleFooProxy response) {
-        assertEquals(0, handler.totalEventCount);
-        checkStableIdEquals(simpleFoo, response);
-        finishTestAndReset();
-      }
-    });
   }
 
   /**
@@ -338,7 +299,8 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       public void onSuccess(SimpleFooProxy response) {
         assertFalse(((SimpleEntityProxyId<SimpleFooProxy>) response.stableId()).isEphemeral());
         assertEquals(2, handler.persistEventCount); // two bars persisted.
-        assertEquals(2, handler.totalEventCount);
+        assertEquals(2, handler.updateEventCount); // two bars persisted.
+        assertEquals(4, handler.totalEventCount);
         finishTestAndReset();
       }
     });
@@ -417,6 +379,18 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
             assertEquals(
                 "I'm here",
                 response.getSelfOneToManyField().get(0).getFooField().getUserName());
+            finishTestAndReset();
+          }
+        });
+  }
+
+  public void testDomainUpcast() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    simpleFooRequest().returnSimpleFooSubclass().fire(
+        new Receiver<SimpleFooProxy>() {
+          @Override
+          public void onSuccess(SimpleFooProxy response) {
+            assertEquals(42, response.getIntId().intValue());
             finishTestAndReset();
           }
         });
@@ -729,6 +703,26 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       }
     });
   }
+  
+  /**
+   * Make sure our stock RF logging service keeps receiving.
+   */
+  public void testLoggingService() {
+    String logRecordJson = new StringBuilder("{").append("\"level\": \"ALL\", ")
+      .append("\"loggerName\": \"logger\", ")
+      .append("\"msg\": \"Hi mom\", ")
+      .append("\"timestamp\": \"1234567890\",")
+      .append("\"thrown\": {}")
+      .append("}")
+      .toString();
+
+    req.loggingRequest().logMessage(logRecordJson).fire(new Receiver<Void>() {
+      @Override
+      public void onSuccess(Void response) {
+        finishTestAndReset();
+      }
+    });
+  }
 
   /*
    * tests that (a) any method can have a side effect that is handled correctly.
@@ -973,7 +967,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
         assertEquals("user name", f.getUserName());
         assertEquals(Byte.valueOf((byte) 100), f.getByteField());
         assertEquals(Short.valueOf((short) 12345), f.getShortField());
-        assertEquals(Float.valueOf(1234.56f), f.getFloatField());
+        assertEquals(0, (int) Math.rint(123456f - 100 * f.getFloatField()));
         assertEquals(Double.valueOf(1.2345), f.getDoubleField());
         assertEquals(Long.valueOf(1234L), f.getLongField());
         assertFalse(f.getBoolField());
@@ -984,11 +978,6 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       }
     });
   }
-
-  /*
-   * TODO: all these tests should check the final values. It will be easy when
-   * we have better persistence than the singleton pattern.
-   */
 
   public void testPersistExistingEntityExistingRelation() {
     delayTestFinish(DELAY_TEST_FINISH);
@@ -1120,6 +1109,11 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       }
     });
   }
+
+  /*
+   * TODO: all these tests should check the final values. It will be easy when
+   * we have better persistence than the singleton pattern.
+   */
 
   /*
    * Find Entity2 Create Entity, Persist Entity Relate Entity2 to Entity Persist
@@ -1267,11 +1261,6 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     });
   }
 
-  /*
-   * TODO: all these tests should check the final values. It will be easy when
-   * we have better persistence than the singleton pattern.
-   */
-
   public void testPersistRelation() {
     delayTestFinish(DELAY_TEST_FINISH);
 
@@ -1314,11 +1303,6 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
       }
     });
   }
-
-  /*
-   * TODO: all these tests should check the final values. It will be easy when
-   * we have better persistence than the singleton pattern.
-   */
 
   public void testPersistSelfOneToManyExistingEntityExistingRelation() {
     delayTestFinish(DELAY_TEST_FINISH);
@@ -1373,6 +1357,11 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
    * TODO: all these tests should check the final values. It will be easy when
    * we have better persistence than the singleton pattern.
    */
+
+  /*
+   * TODO: all these tests should check the final values. It will be easy when
+   * we have better persistence than the singleton pattern.
+   */
   public void testPersistValueListNull() {
     delayTestFinish(DELAY_TEST_FINISH);
     simpleFooRequest().findSimpleFooById(999L).fire(
@@ -1396,6 +1385,11 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
           }
         });
   }
+
+  /*
+   * TODO: all these tests should check the final values. It will be easy when
+   * we have better persistence than the singleton pattern.
+   */
 
   /*
    * TODO: all these tests should check the final values. It will be easy when
@@ -1616,7 +1610,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
                     Set<SimpleBarProxy> setField = fooProxy.getOneToManySetField();
                     final int listCount = setField.size();
                     assertContains(setField, barProxy);
-                    setField.remove(barProxy);
+                    setField.remove(context.edit(barProxy));
                     assertNotContains(setField, barProxy);
                     updReq.fire(new Receiver<SimpleFooProxy>() {
                       @Override
@@ -1821,7 +1815,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     final SimpleFooProxy mutableFoo = context.edit(newFoo);
     // 43 is the crash causing magic number for a checked exception
     mutableFoo.setPleaseCrash(43);
-    persistRequest.fire(new FooReciever(mutableFoo, persistRequest, ""));
+    persistRequest.fire(new FooReciever(mutableFoo, persistRequest, null));
   }
 
   public void testServerFailureRuntimeException() {
@@ -1833,7 +1827,7 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     final SimpleFooProxy mutableFoo = context.edit(newFoo);
     // 42 is the crash causing magic number for a runtime exception
     mutableFoo.setPleaseCrash(42);
-    persistRequest.fire(new FooReciever(mutableFoo, persistRequest, ""));
+    persistRequest.fire(new FooReciever(mutableFoo, persistRequest, null));
   }
 
   /**
@@ -1961,6 +1955,99 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
   }
 
   /**
+   * We provide a simple UserInformation class to give GAE developers a hand,
+   * and other developers a hint. Make sure RF doesn't break it (it relies on
+   * server side upcasting, and a somewhat sleazey reflective lookup mechanism
+   * in a static method on UserInformation). 
+   */
+  public void testUserInfo() {
+    req.userInformationRequest().getCurrentUserInformation("").fire(
+        new Receiver<UserInformationProxy>() {
+          @Override
+          public void onSuccess(UserInformationProxy getResponse) {
+            assertEquals("Dummy Email", getResponse.getEmail());
+            assertEquals("Dummy User", getResponse.getName());
+            assertEquals("", getResponse.getLoginUrl());
+            assertEquals("", getResponse.getLogoutUrl());
+          }
+        });
+  }
+
+  /**
+   * Check if a graph of unpersisted objects can be echoed.
+   */
+  public void testUnpersistedEchoComplexGraph() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    final SimpleFooEventHandler<SimpleFooProxy> handler = new SimpleFooEventHandler<SimpleFooProxy>();
+    EntityProxyChange.registerForProxyType(req.getEventBus(),
+        SimpleFooProxy.class, handler);
+    SimpleFooRequest context = req.simpleFooRequest();
+    final SimpleBarProxy simpleBar = context.create(SimpleBarProxy.class);
+    simpleBar.setUnpersisted(true);
+    final SimpleFooProxy simpleFoo = context.create(SimpleFooProxy.class);
+    simpleFoo.setUnpersisted(true);
+    simpleFoo.setBarField(simpleBar);
+    context.echoComplex(simpleFoo, simpleBar).with("barField").fire(
+        new Receiver<SimpleFooProxy>() {
+          @Override
+          public void onSuccess(SimpleFooProxy response) {
+            assertEquals(0, handler.totalEventCount);
+            checkStableIdEquals(simpleFoo, response);
+            SimpleBarProxy responseBar = response.getBarField();
+            assertNotNull(responseBar);
+            checkStableIdEquals(simpleBar, responseBar);
+            finishTestAndReset();
+          }
+        });
+  }
+
+  /**
+   * Check if an unpersisted object can be echoed.
+   */
+  public void testUnpersistedEchoObject() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    final SimpleFooEventHandler<SimpleFooProxy> handler = new SimpleFooEventHandler<SimpleFooProxy>();
+    EntityProxyChange.registerForProxyType(req.getEventBus(),
+        SimpleFooProxy.class, handler);
+    SimpleFooRequest context = req.simpleFooRequest();
+    final SimpleFooProxy simpleFoo = context.create(SimpleFooProxy.class);
+    simpleFoo.setUnpersisted(true);
+    context.echo(simpleFoo).fire(new Receiver<SimpleFooProxy>() {
+      @Override
+      public void onSuccess(SimpleFooProxy response) {
+        assertEquals(0, handler.totalEventCount);
+        checkStableIdEquals(simpleFoo, response);
+        finishTestAndReset();
+      }
+    });
+  }
+
+  /**
+   * Return an unpersisted object from a service method and echo it.
+   */
+  public void testUnpersistedObjectFetch() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    req.simpleFooRequest().getUnpersistedInstance().fire(
+        new Receiver<SimpleFooProxy>() {
+          @Override
+          public void onSuccess(final SimpleFooProxy created) {
+            assertNotNull(created);
+            assertTrue(created.getUnpersisted());
+            req.simpleFooRequest().echo(created).fire(
+                new Receiver<SimpleFooProxy>() {
+                  @Override
+                  public void onSuccess(SimpleFooProxy response) {
+                    assertNotNull(response);
+                    assertEquals(created.stableId(), response.stableId());
+                    assertTrue(response.getUnpersisted());
+                    finishTestAndReset();
+                  }
+                });
+          }
+        });
+  }
+
+  /**
    * This is analagous to FindServiceTest.testFetchDeletedEntity() only we're
    * trying to invoke a method on the deleted entity using a stale EntityProxy
    * reference on the client.
@@ -2014,6 +2101,228 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
                         });
                   }
                 });
+          }
+        });
+  }
+
+  public void testValueObjectCreateSetRetrieveUpdate() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    SimpleFooRequest req = simpleFooRequest();
+    req.findSimpleFooById(1L).fire(new Receiver<SimpleFooProxy>() {
+      @Override
+      public void onSuccess(SimpleFooProxy response) {
+        SimpleFooRequest req = simpleFooRequest();
+
+        // Create
+        final SimpleValueProxy created = req.create(SimpleValueProxy.class);
+        created.setNumber(42);
+        created.setString("Hello world!");
+        created.setSimpleFoo(response);
+        // Test cycles in value
+        created.setSimpleValue(Arrays.asList(created));
+
+        // Set
+        response = req.edit(response);
+        response.setSimpleValue(created);
+
+        // Retrieve
+        req.persistAndReturnSelf().using(response).with(
+            "simpleValue.simpleFoo", "simpleValue.simpleValue").to(
+            new Receiver<SimpleFooProxy>() {
+              @Override
+              public void onSuccess(SimpleFooProxy response) {
+                SimpleValueProxy value = response.getSimpleValue();
+                assertEquals(42, value.getNumber());
+                assertEquals("Hello world!", value.getString());
+                assertSame(response, value.getSimpleFoo());
+                assertSame(value, value.getSimpleValue().get(0));
+
+                try {
+                  // Require owning object to be editable
+                  response.getSimpleValue().setNumber(43);
+                  fail("Should have thrown exception");
+                } catch (IllegalStateException expected) {
+                }
+
+                // Update
+                SimpleFooRequest req = simpleFooRequest();
+                response = req.edit(response);
+                response.getSimpleValue().setNumber(43);
+                req.persistAndReturnSelf().using(response).with("simpleValue").to(
+                    new Receiver<SimpleFooProxy>() {
+                      @Override
+                      public void onSuccess(SimpleFooProxy response) {
+                        assertEquals(43, response.getSimpleValue().getNumber());
+                        finishTestAndReset();
+                      }
+                    }).fire();
+              }
+            }).fire();
+      }
+    });
+  }
+
+  public void testValueObjectCreateSetRetrieveUpdateViaList() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    SimpleFooRequest req = simpleFooRequest();
+    req.findSimpleFooById(1L).fire(new Receiver<SimpleFooProxy>() {
+      @Override
+      public void onSuccess(SimpleFooProxy response) {
+        SimpleFooRequest req = simpleFooRequest();
+
+        // Create
+        final SimpleValueProxy created = req.create(SimpleValueProxy.class);
+        created.setNumber(42);
+        created.setString("Hello world!");
+        created.setSimpleFoo(response);
+
+        // Set
+        response = req.edit(response);
+        response.setSimpleValues(Arrays.asList(created));
+
+        // Retrieve
+        req.persistAndReturnSelf().using(response).with("simpleValues").to(
+            new Receiver<SimpleFooProxy>() {
+              @Override
+              public void onSuccess(SimpleFooProxy response) {
+                SimpleValueProxy value = response.getSimpleValues().get(0);
+                assertEquals(42, value.getNumber());
+
+                try {
+                  // Require owning object to be editable
+                  response.getSimpleValues().get(0).setNumber(43);
+                  fail("Should have thrown exception");
+                } catch (IllegalStateException expected) {
+                }
+
+                // Update
+                SimpleFooRequest req = simpleFooRequest();
+                response = req.edit(response);
+                response.getSimpleValues().get(0).setNumber(43);
+                req.persistAndReturnSelf().using(response).with("simpleValues").to(
+                    new Receiver<SimpleFooProxy>() {
+                      @Override
+                      public void onSuccess(SimpleFooProxy response) {
+                        assertEquals(43,
+                            response.getSimpleValues().get(0).getNumber());
+                        finishTestAndReset();
+                      }
+                    }).fire();
+              }
+            }).fire();
+      }
+    });
+  }
+
+  public void testValueObjectEquality() {
+    SimpleFooRequest req = simpleFooRequest();
+    SimpleValueProxy a = req.create(SimpleValueProxy.class);
+    SimpleValueProxy b = req.create(SimpleValueProxy.class);
+    checkEqualityAndHashcode(a, b);
+
+    a.setString("Hello");
+    assertFalse(a.equals(b));
+    assertFalse(b.equals(a));
+
+    b.setString("Hello");
+    checkEqualityAndHashcode(a, b);
+  }
+
+  public void testValueObjectViolationsOnCreate() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    SimpleFooRequest req = simpleFooRequest();
+    final SimpleValueProxy value = req.create(SimpleValueProxy.class);
+    value.setShouldBeNull("Hello world");
+
+    SimpleFooProxy foo = req.create(SimpleFooProxy.class);
+    foo.setSimpleValue(value);
+    req.echo(foo).fire(new Receiver<SimpleFooProxy>() {
+      @Override
+      public void onSuccess(SimpleFooProxy response) {
+        fail();
+      }
+
+      @Override
+      public void onViolation(Set<Violation> errors) {
+        assertEquals(1, errors.size());
+        Violation v = errors.iterator().next();
+        assertEquals(value, v.getInvalidProxy());
+        assertNull(v.getOriginalProxy());
+        assertEquals("shouldBeNull", v.getPath());
+        assertNull(v.getProxyId());
+        finishTestAndReset();
+      }
+    });
+  }
+
+  public void testValueObjectViolationsOnEdit() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    simpleFooRequest().returnValueProxy().fire(
+        new Receiver<SimpleValueProxy>() {
+          @Override
+          public void onSuccess(final SimpleValueProxy response) {
+            SimpleFooRequest req = simpleFooRequest();
+            final SimpleValueProxy value = req.edit(response);
+            value.setShouldBeNull("Hello world");
+            SimpleFooProxy foo = req.create(SimpleFooProxy.class);
+            foo.setSimpleValue(value);
+            req.echo(foo).fire(new Receiver<SimpleFooProxy>() {
+              @Override
+              public void onSuccess(SimpleFooProxy response) {
+                fail();
+              }
+
+              @Override
+              public void onViolation(Set<Violation> errors) {
+                assertEquals(1, errors.size());
+                Violation v = errors.iterator().next();
+                assertEquals(value, v.getInvalidProxy());
+                assertEquals(response, v.getOriginalProxy());
+                assertEquals("shouldBeNull", v.getPath());
+                assertNull(v.getProxyId());
+                finishTestAndReset();
+              }
+            });
+          }
+        });
+  }
+
+  /**
+   * Since a ValueProxy cannot be passed into RequestContext edit, a proxy
+   * returned from a service method should be mutable by default.
+   */
+  public void testValueObjectReturnedFromRequestIsImmutable() {
+    delayTestFinish(DELAY_TEST_FINISH);
+    simpleFooRequest().returnValueProxy().fire(
+        new Receiver<SimpleValueProxy>() {
+          @Override
+          public void onSuccess(SimpleValueProxy a) {
+            try {
+              a.setNumber(77);
+              fail();
+            } catch (IllegalStateException expected) {
+            }
+            try {
+              // Ensure Dates comply with ValueProxy mutation behaviors
+              a.getDate().setTime(1);
+              fail();
+            } catch (IllegalStateException expected) {
+            }
+            SimpleFooRequest ctx = simpleFooRequest();
+            final SimpleValueProxy toCheck = ctx.edit(a);
+            toCheck.setNumber(77);
+            toCheck.getDate().setTime(1);
+            ctx.returnValueProxy().fire(new Receiver<SimpleValueProxy>() {
+              @Override
+              public void onSuccess(SimpleValueProxy b) {
+                b = simpleFooRequest().edit(b);
+                // Now check that same value is equal across contexts
+                b.setNumber(77);
+                b.setDate(new Date(1));
+                checkEqualityAndHashcode(toCheck, b);
+                finishTestAndReset();
+              }
+            });
           }
         });
   }

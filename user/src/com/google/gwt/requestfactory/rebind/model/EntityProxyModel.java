@@ -48,6 +48,10 @@ public class EntityProxyModel {
       toReturn.proxyFor = value;
     }
 
+    public void setQualifiedBinaryName(String qualifiedBinaryName) {
+      toReturn.qualifiedBinaryName = qualifiedBinaryName;
+    }
+
     public void setQualifiedSourceName(String name) {
       assert !name.contains(" ");
       toReturn.qualifiedSourceName = name;
@@ -56,17 +60,35 @@ public class EntityProxyModel {
     public void setRequestMethods(List<RequestMethod> requestMethods) {
       toReturn.requestMethods = requestMethods;
     }
+
+    public void setType(Type type) {
+      toReturn.type = type;
+    }
+  }
+
+  /**
+   * The kind of proxy. This is an enum in case more proxy types are defined in
+   * the future.
+   */
+  public enum Type {
+    ENTITY, VALUE
   }
 
   private Class<?> proxyFor;
+  private String qualifiedBinaryName;
   private String qualifiedSourceName;
   private List<RequestMethod> requestMethods;
+  private Type type;
 
   private EntityProxyModel() {
   }
 
   public Class<?> getProxyFor() {
     return proxyFor;
+  }
+
+  public String getQualifiedBinaryName() {
+    return qualifiedBinaryName;
   }
 
   public String getQualifiedSourceName() {
@@ -77,6 +99,10 @@ public class EntityProxyModel {
     return Collections.unmodifiableList(requestMethods);
   }
 
+  public Type getType() {
+    return type;
+  }
+
   /**
    * For debugging use only.
    */
@@ -84,5 +110,4 @@ public class EntityProxyModel {
   public String toString() {
     return qualifiedSourceName;
   }
-
 }

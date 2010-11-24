@@ -16,37 +16,12 @@
 package com.google.gwt.requestfactory.shared.impl;
 
 /**
- * Contains a variety of contstants shared between client and server code.
+ * Contains a variety of AutoBean tag constants to prevent typos.
  */
 public interface Constants {
-
-  String CONTENT_TOKEN = "contentData";
-  String OPERATION_TOKEN = "operation";
-  String PARAM_TOKEN = "param";
-  String PROPERTY_REF_TOKEN = "propertyRefs";
-  String RESULT_TOKEN = "result";
-  String RELATED_TOKEN = "related";
-  String SIDE_EFFECTS_TOKEN = "sideEffects";
-  String VIOLATIONS_TOKEN = "violations";
-  /**
-   * Property on a proxy JSO that holds its futureId.
-   */
-  String ENCODED_FUTUREID_PROPERTY = "!futureId";
-  /**
-   * Property on a proxy JSO that holds its encoded server side data store id.
-   */
-  String ENCODED_ID_PROPERTY = "!id";
-  /**
-   * Property on a proxy JSO that holds its server side version data.
-   */
-  String ENCODED_VERSION_PROPERTY = "!version";
-  /**
-   * Id property that server entity objects are required to define.
-   */
-  String ENTITY_ID_PROPERTY = "id";
-  /**
-   * Version property that server entity objects are required to define.
-   */
-  Property<Integer> ENTITY_VERSION_PROPERTY = new Property<Integer>("version",
-      Integer.class);
+  String DOMAIN_OBJECT = "domainObject";
+  String VERSION_PROPERTY_B64 = "version";
+  String IN_RESPONSE = "inResponse";
+  String REQUEST_CONTEXT = "requestContext";
+  String STABLE_ID = "stableId";
 }

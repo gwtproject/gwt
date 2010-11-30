@@ -42,10 +42,8 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
-import com.google.gwt.i18n.shared.BidiFormatter;
 import com.google.gwt.i18n.shared.DirectionEstimator;
 import com.google.gwt.i18n.shared.HasDirectionEstimator;
-import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
 import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
@@ -53,6 +51,14 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  *
  * This widget uses a &lt;div&gt; element, causing it to be displayed with block
  * layout.
+ *
+ * <p>
+ * <h3>Built-in Bidi Text Support</h3>
+ * This widget is capable of automatically adjusting its direction according to
+ * its content. This feature is controlled by {@link #setDirectionEstimator} or
+ * passing a DirectionEstimator parameter to the constructor, and is off by
+ * default.
+ * </p>
  *
  * <h3>CSS Style Rules</h3>
  * <ul class='css'>
@@ -69,6 +75,9 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
     HasDirection, HasClickHandlers, HasDoubleClickHandlers, SourcesClickEvents,
     SourcesMouseEvents, HasAllMouseHandlers, HasDirectionEstimator,
     HasAutoHorizontalAlignment, IsEditor<LeafValueEditor<String>> {
+
+  public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
+      DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;
 
   /**
    * Creates a Label widget that wraps an existing &lt;div&gt; or &lt;span&gt;
@@ -94,23 +103,15 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   }
 
   /**
+   * The widget's DirectionalTextHelper object.
+   */
+  final DirectionalTextHelper directionalTextHelper;
+
+  /**
    * The widget's auto horizontal alignment policy.
    * @see HasAutoHorizontalAlignment
    */
   private AutoHorizontalAlignmentConstant autoHorizontalAlignment;
-
-  /**
-   * The direction of the widget's content.
-   * Note: this may not match the direction of the widget's top DOM element
-   * ({@code getElement()}).
-   * See {@link #setTextOrHtml(String, Direction, boolean)} for details.
-   */
-  private Direction textDir;
-
-  /**
-   * The widget's DirectionEstimator object.
-   */
-  private DirectionEstimator directionEstimator;
 
   /**
    * The widget's horizontal alignment.
@@ -118,44 +119,12 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   private HorizontalAlignmentConstant horzAlign;
 
   /**
-   * The initial direction of the widget's element.
-   */
-  private Direction initialElementDir;
-
-  /**
-   * Whether the widget is inline (a &lt;span&gt; element).
-   * This is needed because direction is handled differently for inline elements
-   * and for non-inline elements.
-   * <p>
-   * In case Label supports types of elements other than span and div, this
-   * should get true for any element that is inline by default. Another approach
-   * could be calculating the element's display property, but this may have some
-   * overhead, and is problematic when the element is yet unattached.
-   */
-  private boolean isElementInline;
-
-  /**
-   * Whether the widget contains a nested &lt;span&gt; element used to
-   * indicate the content's direction.
-   * <p>
-   * The widget's top element is used for this purpose when it is a &lt;div&gt;,
-   * but doing so on an inline element often results in garbling what follows
-   * it. Thus, when the widget's top element is a &lt;span&gt;, a nested
-   * &lt;span&gt; must be used to carry the content's direction, with an LRM or
-   * RLM character afterwards to prevent the garbling.
-   */
-  private boolean isSpanWrapped;
-
-  /**
    * Creates an empty label.
    */
   public Label() {
     setElement(Document.get().createDivElement());
     setStyleName("gwt-Label");
-    isElementInline = false;
-    isSpanWrapped = false;
-    textDir = Direction.DEFAULT;
-    initialElementDir = Direction.DEFAULT;
+    directionalTextHelper = new DirectionalTextHelper(getElement(), false);
   }
 
   /**
@@ -173,11 +142,25 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    *
    * @param text the new label's text
    * @param dir the text's direction. Note that {@code DEFAULT} means direction
-   *        should be inherited from the widget's parent element.
+   *          should be inherited from the widget's parent element.
    */
   public Label(String text, Direction dir) {
     this();
     setText(text, dir);
+  }
+
+  /**
+   * Creates a label with the specified text and a default direction estimator.
+   *
+   * @param text the new label's text
+   * @param directionEstimator A DirectionEstimator object used for automatic
+   *          direction adjustment. For convenience,
+   *          {@link #DEFAULT_DIRECTION_ESTIMATOR} can be used.
+   */
+  public Label(String text, DirectionEstimator directionEstimator) {
+    this();
+    setDirectionEstimator(directionEstimator);
+    setText(text);
   }
 
   /**
@@ -200,11 +183,10 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   protected Label(Element element) {
     setElement(element);
     String tagName = element.getTagName();
-    isElementInline = tagName.equalsIgnoreCase("span");
+    boolean isElementInline = tagName.equalsIgnoreCase("span");
     assert isElementInline || tagName.equalsIgnoreCase("div");
-    isSpanWrapped = false;
-    initialElementDir = BidiUtils.getDirectionOnElement(element);
-    textDir = initialElementDir;
+    directionalTextHelper = new DirectionalTextHelper(getElement(),
+        isElementInline);
   }
 
   public HandlerRegistration addClickHandler(ClickHandler handler) {
@@ -286,7 +268,7 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   }
 
   public DirectionEstimator getDirectionEstimator() {
-    return directionEstimator;
+    return directionalTextHelper.getDirectionEstimator();
   }
 
   /**
@@ -297,11 +279,11 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   }
 
   public String getText() {
-    return getTextOrHtml(false);
+    return directionalTextHelper.getTextOrHtml(false);
   }
 
   public Direction getTextDirection() {
-    return textDir;
+    return directionalTextHelper.getTextDirection();
   }
 
   public boolean getWordWrap() {
@@ -351,14 +333,7 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    */
   @Deprecated
   public void setDirection(Direction direction) {
-    BidiUtils.setDirectionOnElement(getElement(), direction);
-    initialElementDir = direction;
-
-    // For backwards compatibility, assure there's no span wrap, and update the
-    // content direction.
-    setInnerTextOrHtml(getTextOrHtml(true), true);
-    isSpanWrapped = false;
-    textDir = initialElementDir;
+    directionalTextHelper.setDirection(direction);
     updateHorizontalAlignment();
   }
 
@@ -368,21 +343,22 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    * See note at {@link #setDirectionEstimator(DirectionEstimator)}.
    */
   public void setDirectionEstimator(boolean enabled) {
-    setDirectionEstimator(enabled ? WordCountDirectionEstimator.get() : null);
+    directionalTextHelper.setDirectionEstimator(enabled);
+    updateHorizontalAlignment();
   }
 
   /**
    * {@inheritDoc}
    * <p>
-   * Note: if the widget already has non-empty content, this will update
-   * its direction according to the new estimator's result. This may cause
-   * flicker, and thus should be avoided; DirectionEstimator should be set
-   * before the widget has any content.
+   * Note: DirectionEstimator should be set before the widget has any content;
+   * it's highly recommended to set it using a constructor. Reason: if the
+   * widget already has non-empty content, this will update its direction
+   * according to the new estimator's result. This may cause flicker, and thus
+   * should be avoided.
    */
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
-    this.directionEstimator = directionEstimator;
-    // Refresh appearance
-    setTextOrHtml(getTextOrHtml(true), true);
+    directionalTextHelper.setDirectionEstimator(directionEstimator);
+    updateHorizontalAlignment();
   }
 
   /**
@@ -405,13 +381,13 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    * Doesn't change the widget's direction or horizontal alignment if {@code
    * directionEstimator} is null. Otherwise, the widget's direction is set using
    * the estimator, and its alignment may therefore change as described in
-   * {@link #setText(String, com.google.gwt.i18n.client.HasDirection.Direction)
-   * setText(String, Direction)}.
-   * 
+   * {@link #setText(String, com.google.gwt.i18n.client.HasDirection.Direction) setText(String, Direction)}.
+   *
    * @param text the widget's new text
    */
   public void setText(String text) {
-    setTextOrHtml(text, false);
+    directionalTextHelper.setTextOrHtml(text, false);
+    updateHorizontalAlignment();
   }
 
   /**
@@ -435,7 +411,8 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    *        direction should be inherited from the widget's parent element.
    */
   public void setText(String text, Direction dir) {
-    setTextOrHtml(text, dir, false);
+    directionalTextHelper.setTextOrHtml(text, dir, false);
+    updateHorizontalAlignment();
   }
 
   public void setWordWrap(boolean wrap) {
@@ -444,9 +421,7 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
   }
 
   protected String getTextOrHtml(boolean isHtml) {
-    Element element = isSpanWrapped ? getElement().getFirstChildElement()
-        : getElement();
-    return isHtml ? element.getInnerHTML() : element.getInnerText();
+    return directionalTextHelper.getTextOrHtml(isHtml);
   }
 
   /**
@@ -481,22 +456,8 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    * @param isHtml whether the content is HTML
    */
   protected void setTextOrHtml(String content, boolean isHtml) {
-    if (directionEstimator == null) {
-      isSpanWrapped = false;
-      setInnerTextOrHtml(content, isHtml);
-
-      // Preserves the initial direction of the widget. This is different from
-      // passing the direction parameter explicitly as DEFAULT, which forces the
-      // widget to inherit the direction from its parent.
-      if (textDir != initialElementDir) {
-        textDir = initialElementDir;
-        BidiUtils.setDirectionOnElement(getElement(), initialElementDir);
-        updateHorizontalAlignment();
-      }
-    } else {
-      setTextOrHtml(content, directionEstimator.estimateDirection(content,
-          isHtml), isHtml);
-    }
+    directionalTextHelper.setTextOrHtml(content, isHtml);
+    updateHorizontalAlignment();
   }
 
   /**
@@ -523,36 +484,17 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
    * @param isHtml whether the content is HTML
    */
   protected void setTextOrHtml(String content, Direction dir, boolean isHtml) {
-    textDir = dir;
-
-    // Set the text and the direction.
-    if (isElementInline) {
-      isSpanWrapped = true;
-      getElement().setInnerHTML(BidiFormatter.getInstanceForCurrentLocale(
-          true /* alwaysSpan */).spanWrapWithKnownDir(dir, content, isHtml));
-    } else {
-      isSpanWrapped = false;
-      BidiUtils.setDirectionOnElement(getElement(), dir);
-      setInnerTextOrHtml(content, isHtml);
-    }
-
-    // Update the horizontal alignment if needed.
+    directionalTextHelper.setTextOrHtml(content, dir, isHtml);
     updateHorizontalAlignment();
-  }
-
-  private void setInnerTextOrHtml(String content, boolean isHtml) {
-    if (isHtml) {
-      getElement().setInnerHTML(content);
-    } else {
-      getElement().setInnerText(content);
-    }
   }
 
   /**
    * Sets the horizontal alignment of the widget according to the current
-   * AutoHorizontalAlignment setting.
+   * AutoHorizontalAlignment setting. Should be invoked whenever the horizontal
+   * alignment may be affected, i.e. on every modification of the content or its
+   * direction.
    */
-  private void updateHorizontalAlignment() {
+  protected void updateHorizontalAlignment() {
     HorizontalAlignmentConstant align;
     if (autoHorizontalAlignment == null) {
       align = null;
@@ -562,8 +504,8 @@ public class Label extends Widget implements HasDirectionalText, HasWordWrap,
       /* autoHorizontalAlignment is a truly automatic policy, i.e. either
       ALIGN_CONTENT_START or ALIGN_CONTENT_END */
       align = autoHorizontalAlignment == ALIGN_CONTENT_START ?
-          HorizontalAlignmentConstant.startOf(textDir) :
-          HorizontalAlignmentConstant.endOf(textDir);
+          HorizontalAlignmentConstant.startOf(getTextDirection()) :
+          HorizontalAlignmentConstant.endOf(getTextDirection());
     }
 
     if (align != horzAlign) {

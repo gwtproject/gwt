@@ -20,8 +20,12 @@ package com.google.gwt.requestfactory.shared;
  * UserInformation and Logging services.
  */
 public interface SimpleRequestFactory extends BasicRequestFactory {
+  
+  InstanceServiceRequest instanceServiceRequest();
 
   SimpleBarRequest simpleBarRequest();
 
   SimpleFooRequest simpleFooRequest();
+
+  UnicodeTestRequest unicodeTestRequest();
 }

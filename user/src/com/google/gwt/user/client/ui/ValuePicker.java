@@ -47,7 +47,7 @@ public class ValuePicker<T> extends Composite
     }
 
     @Override
-    public void render(T value, Object viewData, SafeHtmlBuilder sb) {
+    public void render(Context context, T value, SafeHtmlBuilder sb) {
       sb.appendEscaped(renderer.render(value));
     }
   }
@@ -56,6 +56,7 @@ public class ValuePicker<T> extends Composite
 
   private final CellList<T> cellList;
   private SingleSelectionModel<T> smodel = new SingleSelectionModel<T>();
+  private LeafValueEditor<T> editor;
 
   public ValuePicker(CellList<T> cellList) {
     this.cellList = cellList;
@@ -80,7 +81,10 @@ public class ValuePicker<T> extends Composite
    * Returns a {@link TakesValueEditor} backed by the ValuePicker.
    */
   public LeafValueEditor<T> asEditor() {
-    return TakesValueEditor.of(this);
+    if (editor == null) {
+      editor = TakesValueEditor.of(this);
+    }
+    return editor;
   }
 
   /**

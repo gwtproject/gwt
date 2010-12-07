@@ -82,14 +82,13 @@ public class LocatorTest extends GWTTestCase {
     static final Domain INSTANCE = new Domain();
   }
 
-  @ProxyFor(Domain.class)
-  @LocatorFor(DomainLocator.class)
+  @ProxyFor(value = Domain.class, locator = DomainLocator.class)
   interface DomainProxy extends EntityProxy {
     EntityProxyId<DomainProxy> stableId();
   };
 
   private static final String ID = "DomainId";
-  private static final int TEST_DELAY = 500;
+  private static final int TEST_DELAY = 5000;
 
   private Factory factory;
 

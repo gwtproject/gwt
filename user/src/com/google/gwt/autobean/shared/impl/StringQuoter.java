@@ -17,7 +17,8 @@ package com.google.gwt.autobean.shared.impl;
 
 import com.google.gwt.autobean.server.impl.JsonSplittable;
 import com.google.gwt.autobean.shared.Splittable;
-import com.google.gwt.user.server.rpc.impl.ServerSerializationStreamWriter;
+
+import org.json.JSONObject;
 
 /**
  * This class has a super-source version with a client-only implementation.
@@ -27,7 +28,7 @@ public class StringQuoter {
    * Create a quoted JSON string.
    */
   public static String quote(String raw) {
-    return ServerSerializationStreamWriter.escapeString(raw);
+    return JSONObject.quote(raw);
   }
 
   public static Splittable split(String payload) {

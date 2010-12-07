@@ -19,12 +19,13 @@ import com.google.gwt.requestfactory.server.RequestFactoryInterfaceValidator.Cla
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.InstanceRequest;
 import com.google.gwt.requestfactory.shared.Locator;
-import com.google.gwt.requestfactory.shared.LocatorFor;
 import com.google.gwt.requestfactory.shared.ProxyFor;
+import com.google.gwt.requestfactory.shared.ProxyForName;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.gwt.requestfactory.shared.Service;
+import com.google.gwt.requestfactory.shared.ServiceName;
 import com.google.gwt.requestfactory.shared.SimpleRequestFactory;
 import com.google.gwt.requestfactory.shared.ValueProxy;
 import com.google.gwt.requestfactory.shared.impl.FindRequest;
@@ -86,6 +87,10 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
     int foo(int a) {
       return 0;
     }
+
+    java.sql.Date getSqlDate() {
+      return null;
+    }
   }
 
   @ProxyFor(Domain.class)
@@ -110,9 +115,15 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
       return 0;
     }
   }
+
   @ProxyFor(DomainWithOverloads.class)
   interface DomainWithOverloadsProxy extends EntityProxy {
     void foo();
+  }
+
+  @ProxyFor(Domain.class)
+  interface DomainWithSqlDateProxy extends EntityProxy {
+    java.sql.Date getSqlDate();
   }
 
   class Foo {
@@ -180,8 +191,7 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
     }
   }
 
-  @ProxyFor(LocatorEntity.class)
-  @LocatorFor(LocatorEntityLocator.class)
+  @ProxyFor(value = LocatorEntity.class, locator = LocatorEntityLocator.class)
   interface LocatorEntityProxy extends EntityProxy {
   }
 
@@ -228,6 +238,13 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
     Request<Integer> doesNotExist(int a);
   }
 
+  @ProxyFor(Domain.class)
+  @ProxyForName("Domain")
+  @Service(Domain.class)
+  @ServiceName("Domain")
+  interface TooManyAnnotations extends RequestContext {
+  }
+
   static class UnexpectedIdAndVersionDomain {
     Random getId() {
       return null;
@@ -261,6 +278,14 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
     v.validateRequestContext(RequestContextMissingAnnotation.class.getName());
     assertTrue(v.isPoisoned());
   };
+
+  /**
+   * Test that subclasses of {@code java.util.Date} are not transportable.
+   */
+  public void testDateSubclass() {
+    v.validateEntityProxy(DomainWithSqlDateProxy.class.getName());
+    assertTrue(v.isPoisoned());
+  }
 
   /**
    * Test the {@link FindRequest} context used to implement find().
@@ -347,6 +372,11 @@ public class RequestFactoryInterfaceValidatorTest extends TestCase {
   public void testTestCodeFactories() {
     v.validateRequestFactory(SimpleRequestFactory.class.getName());
     assertFalse(v.isPoisoned());
+  }
+
+  public void testTooManyAnnotations() {
+    v.validateRequestContext(TooManyAnnotations.class.getName());
+    assertTrue(v.isPoisoned());
   }
 
   public void testUnexpectedIdAndVersion() {

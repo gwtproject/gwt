@@ -13,23 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.requestfactory.shared;
+package com.google.gwt.requestfactory.server;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.gwt.requestfactory.client.RequestFactoryUnicodeEscapingTest;
+import com.google.gwt.requestfactory.shared.SimpleRequestFactory;
 
 /**
- * Annotation on BaseProxy classes specifying the domain (server-side) object
- * {@link Locator}. This annotation can be used in place of {@link LocatorFor}
- * if the domain Locator is not available to the GWT compiler or DevMode
- * runtime.
- * 
- * @see LocatorFor
+ * A JRE implementation of {@link RequestFactoryUnicodeEscapingTest}.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface LocatorForName {
-  String value();
+public class RequestFactoryUnicodeEscapingJreTest extends
+    RequestFactoryUnicodeEscapingTest {
+  @Override
+  public String getModuleName() {
+    return null;
+  }
+
+  @Override
+  protected SimpleRequestFactory createFactory() {
+    return RequestFactoryJreTest.createInProcess(SimpleRequestFactory.class);
+  }
 }

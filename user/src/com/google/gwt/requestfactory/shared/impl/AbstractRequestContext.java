@@ -114,7 +114,10 @@ public class AbstractRequestContext implements RequestContext,
   }
 
   private static final String PARENT_OBJECT = "parentObject";
-
+  private static final WriteOperation[] PERSIST_AND_UPDATE = {
+      WriteOperation.PERSIST, WriteOperation.UPDATE};
+  private static final WriteOperation[] DELETE_ONLY = {WriteOperation.DELETE};
+  private static final WriteOperation[] UPDATE_ONLY = {WriteOperation.UPDATE};
   private final List<AbstractRequest<?>> invocations = new ArrayList<AbstractRequest<?>>();
   private boolean locked;
   private final AbstractRequestFactory requestFactory;
@@ -148,8 +151,8 @@ public class AbstractRequestContext implements RequestContext,
   public <T extends BaseProxy> T create(Class<T> clazz) {
     checkLocked();
 
-    AutoBean<T> created = requestFactory.createProxy(clazz,
-        requestFactory.allocateId(clazz));
+    SimpleProxyId<T> id = requestFactory.allocateId(clazz);
+    AutoBean<T> created = requestFactory.createProxy(clazz, id);
     return takeOwnership(created);
   }
 
@@ -601,16 +604,8 @@ public class AbstractRequestContext implements RequestContext,
 
     String payload = makePayload();
     requestFactory.getRequestTransport().send(payload, new TransportReceiver() {
-      public void onTransportFailure(String message) {
-        ServerFailure failure = new ServerFailure(message, null, null);
-        reuse();
-        for (AbstractRequest<?> request : new ArrayList<AbstractRequest<?>>(
-            invocations)) {
-          request.onFail(failure);
-        }
-        if (receiver != null) {
-          receiver.onFailure(failure);
-        }
+      public void onTransportFailure(ServerFailure failure) {
+        fail(receiver, failure);
       }
 
       public void onTransportSuccess(String payload) {
@@ -619,16 +614,10 @@ public class AbstractRequestContext implements RequestContext,
         if (response.getGeneralFailure() != null) {
           ServerFailureMessage failure = response.getGeneralFailure();
           ServerFailure fail = new ServerFailure(failure.getMessage(),
-              failure.getExceptionType(), failure.getStackTrace());
+              failure.getExceptionType(), failure.getStackTrace(),
+              failure.isFatal());
 
-          reuse();
-          for (AbstractRequest<?> invocation : new ArrayList<AbstractRequest<?>>(
-              invocations)) {
-            invocation.onFail(fail);
-          }
-          if (receiver != null) {
-            receiver.onFailure(fail);
-          }
+          fail(receiver, fail);
           return;
         }
 
@@ -663,7 +652,8 @@ public class AbstractRequestContext implements RequestContext,
                 response.getInvocationResults().get(i)).as();
             invocations.get(i).onFail(
                 new ServerFailure(failure.getMessage(),
-                    failure.getExceptionType(), failure.getStackTrace()));
+                    failure.getExceptionType(), failure.getStackTrace(),
+                    failure.isFatal()));
           }
         }
 
@@ -674,6 +664,17 @@ public class AbstractRequestContext implements RequestContext,
         editedProxies.clear();
         invocations.clear();
         returnedProxies.clear();
+      }
+
+      private void fail(Receiver<Void> receiver, ServerFailure failure) {
+        reuse();
+        for (AbstractRequest<?> request : new ArrayList<AbstractRequest<?>>(
+            invocations)) {
+          request.onFail(failure);
+        }
+        if (receiver != null) {
+          receiver.onFailure(failure);
+        }
       }
     });
   }
@@ -780,23 +781,36 @@ public class AbstractRequestContext implements RequestContext,
    * Process an array of OperationMessages.
    */
   private void processReturnOperations(ResponseMessage response) {
-    List<OperationMessage> records = response.getOperations();
+    List<OperationMessage> ops = response.getOperations();
 
     // If there are no observable effects, this will be null
-    if (records == null) {
+    if (ops == null) {
       return;
     }
 
-    for (OperationMessage op : records) {
+    for (OperationMessage op : ops) {
       SimpleProxyId<?> id = getId(op);
-      if (id.isEphemeral()) {
-        processReturnOperation(id, op);
-      } else if (id.wasEphemeral()) {
-        processReturnOperation(id, op, WriteOperation.PERSIST,
-            WriteOperation.UPDATE);
-      } else {
-        processReturnOperation(id, op, WriteOperation.UPDATE);
+      WriteOperation[] toPropagate = null;
+
+      // May be null if the server is returning an unpersisted object
+      WriteOperation effect = op.getOperation();
+      if (effect != null) {
+        switch (effect) {
+          case DELETE:
+            toPropagate = DELETE_ONLY;
+            break;
+          case PERSIST:
+            toPropagate = PERSIST_AND_UPDATE;
+            break;
+          case UPDATE:
+            toPropagate = UPDATE_ONLY;
+            break;
+          default:
+            // Should never reach here
+            throw new RuntimeException(effect.toString());
+        }
       }
+      processReturnOperation(id, op, toPropagate);
     }
   }
 

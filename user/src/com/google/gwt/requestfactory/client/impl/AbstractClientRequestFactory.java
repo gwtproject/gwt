@@ -26,6 +26,6 @@ public abstract class AbstractClientRequestFactory extends
     AbstractRequestFactory {
   @Override
   public void initialize(EventBus eventBus) {
-    initialize(eventBus, new DefaultRequestTransport(eventBus));
+    initialize(eventBus, new DefaultRequestTransport());
   }
 }

@@ -26,7 +26,7 @@ public class RequestFactoryExceptionHandlerServlet
     super(new ExceptionHandler() {
       public ServerFailure createServerFailure(Throwable throwable) {
         return new ServerFailure(throwable.getMessage(),
-            throwable.getClass().getName(), "my stack trace");
+            throwable.getClass().getName(), "my stack trace", true);
       }
     });
   }

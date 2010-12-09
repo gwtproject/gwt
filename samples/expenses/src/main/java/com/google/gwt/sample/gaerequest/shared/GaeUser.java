@@ -13,21 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.activity.shared;
+package com.google.gwt.sample.gaerequest.shared;
+
+import com.google.gwt.requestfactory.shared.ProxyForName;
+import com.google.gwt.requestfactory.shared.ValueProxy;
 
 /**
- * Simple Activity implementation that is always willing to stop,
- * and does nothing onStop and onCancel.
+ * Client visible proxy of Google AppEngine User class.
  */
-public abstract class AbstractActivity implements Activity {
-
-  public String mayStop() {
-    return null;
-  }
-
-  public void onCancel() {
-  }
-
-  public void onStop() {
-  }
+@ProxyForName("com.google.appengine.api.users.User")
+public interface GaeUser extends ValueProxy {
+  String getNickname();
+  String getEmail();
 }

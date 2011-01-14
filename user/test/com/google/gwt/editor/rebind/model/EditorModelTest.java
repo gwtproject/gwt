@@ -831,10 +831,12 @@ public class EditorModelTest extends TestCase {
         return code;
       }
     }, new MockJavaResource("t.CompositeAndLeafEditorDriver") {
-        // Tests that we descend into sub-editor of a CompositeEditor that also
-        // is
-        // a LeafValueEditor (this is the case for the
-        // c.g.g.editor.client.adapters.OptionalFieldEditor)
+      /*
+       * Tests that we descend into sub-editor of a CompositeEditor that also is
+       * a LeafValueEditor (this is the case for the
+       * c.g.g.editor.client.adapters.OptionalFieldEditor). Also test that any
+       * editor-like fields within the LeafValueEditor are ignored.
+       */
       @Override
       protected CharSequence getContent() {
         StringBuilder code = new StringBuilder();
@@ -856,6 +858,7 @@ public class EditorModelTest extends TestCase {
         code.append("    OptionalBEditor bEditor();");
         code.append("  }");
         code.append("  interface OptionalBEditor extends CompositeEditor<BProxy, BProxy, BEditor>, LeafValueEditor<BProxy> {");
+        code.append("    LeafValueEditor<String> ignored();");
         code.append("  }");
         code.append("  interface BEditor extends Editor<BProxy> {");
         code.append("    @Editor.Path(\"string\") SimpleEditor<String> coEditor();");

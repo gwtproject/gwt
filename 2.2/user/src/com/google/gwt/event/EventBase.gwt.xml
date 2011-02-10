@@ -1,5 +1,0 @@
-<module>
-	<inherits name="com.google.gwt.core.Core" />
-
-	<source path="shared" />
-</module>

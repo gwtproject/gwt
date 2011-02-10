@@ -1,0 +1,173 @@
+<project name="samples-common">
+  <property name="gwt.root" location="../.." />
+  <property name="project.tail" value="samples/${sample.root}" />
+  <import file="${gwt.root}/common.ant.xml" />
+
+  <!--
+    Number of localworkers for sample compilation.  This depends on your
+    hardware, so it's a good candidate to specify in local.ant.properties
+    if this default isn't good for you.  Ideally, it should approximate
+    the number of CPU cores in your machine.
+  -->
+  <property name="gwt.samples.localworkers" value="2" />
+
+  <property name="sample.lower" value="${sample.root}" />
+  <property name="sample.upper" value="${sample.module}" />
+
+  <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
+  <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
+
+  <!-- Mirror directory for scripts; makes building distro easier -->
+  <property name="samples.scripts" value="${gwt.build.out}/samples-scripts" />
+  <!-- Use the uppercase name rather than the lowercase name -->
+  <property name="sample.build" value="${gwt.build.out}/samples/${sample.upper}" />
+
+  <path id="gae.extraclasspath">
+    <pathelement location="${gwt.tools.lib}/appengine/appengine-api-1.0-sdk-1.3.4.jar"/>
+    <pathelement location="${gwt.tools.lib}/appengine/geronimo-jpa_3.0_spec-1.1.1.jar"/>
+    <pathelement location="${gwt.tools.lib}/appengine/datanucleus-appengine-1.0.7.final.jar"/>
+  </path>
+
+  <!-- The libraries required by the server that will be copied into WEB-INF/lib. -->
+  <fileset id="sample.server.libs" dir="${gwt.tools.lib}">
+    <include name="" />
+  </fileset>
+
+  <target name="source" description="Copy source to the output folder">
+    <mkdir dir="${sample.build}/src" />
+    <copy todir="${sample.build}/src">
+      <fileset dir="src" />
+    </copy>
+    <mkdir dir="${sample.build}/war" />
+    <copy todir="${sample.build}/war">
+      <fileset dir="war" excludes="WEB-INF/classes/**"/>
+    </copy>
+    <if>
+      <available file="pom.xml"/>
+      <then>
+        <copy tofile="${sample.build}/pom.xml" file="pom.xml"/>
+      </then>
+    </if>
+    <if>
+      <available file="README-MAVEN.txt"/>
+      <then>
+        <copy tofile="${sample.build}/README-MAVEN.txt" file="README-MAVEN.txt"/>
+      </then>
+    </if>
+    <if>
+      <available file="user-build.xml"/>
+      <then>
+        <copy tofile="${sample.build}/build.xml" file="user-build.xml"/>
+      </then>
+    </if>
+  </target>
+
+  <target name="serverlibs" description="Copy server libs to the output folder">
+    <mkdir dir="${sample.build}/war/WEB-INF/lib" />
+    <copy todir="${sample.build}/war/WEB-INF/lib/" flatten="true">
+      <fileset refid="sample.server.libs" />
+    </copy>
+  </target>
+
+  <target name="compile" description="Compile all java files">
+    <mkdir dir="${sample.build}/war/WEB-INF/classes" />
+    <gwt.javac destdir="${sample.build}/war/WEB-INF/classes"
+               excludes="**/super/**">
+      <classpath>
+        <pathelement location="${gwt.user.jar}" />
+        <pathelement location="${gwt.dev.jar}" />
+        <path refid="sample.extraclasspath" />
+        <path refid="gae.extraclasspath" />
+      </classpath>
+    </gwt.javac>
+  </target>
+
+  <target name="gwtc" description="Compile to JavaScript">
+    <outofdate>
+      <sourcefiles>
+        <fileset dir="${sample.path}" />
+        <fileset dir="${sample.build}/war/WEB-INF/classes" />
+        <fileset file="${gwt.user.jar}" />
+        <fileset file="${gwt.dev.jar}" />
+        <path refid="sample.extraclasspath" />
+      </sourcefiles>
+      <targetfiles path="${sample.build}/war/${sample.lower}/${sample.lower}.nocache.js" />
+      <sequential>
+        <mkdir dir="${sample.build}/war" />
+        <gwt.timer name="${sample.upper} with ${gwt.samples.localworkers} localWorkers">
+          <java dir="${sample.build}" classname="com.google.gwt.dev.Compiler"
+                		fork="yes" failonerror="true">
+            <classpath>
+              <pathelement path="${sample.path}" />
+              <path refid="sample.extraclasspath" />
+              <pathelement location="${sample.build}/war/WEB-INF/classes" />
+              <pathelement location="${gwt.user.jar}" />
+              <pathelement location="${gwt.dev.jar}" />
+            </classpath>
+            <jvmarg value="-Xmx256M" />
+            <arg value="-localWorkers" />
+            <arg value="${gwt.samples.localworkers}" />
+            <arg value="-war" />
+            <arg file="${sample.build}/war" />
+            <arg value="com.google.gwt.sample.${sample.lower}.${sample.upper}" />
+          </java>
+        </gwt.timer>
+        <length property="sample.size">
+          <fileset dir="${sample.build}/war/${sample.lower}" includes="*.cache.html,*.cache.js"/>
+        </length>
+        <echo message="output size for ${sample.upper} is ${sample.size} bytes"/>
+      </sequential>
+    </outofdate>
+  </target>
+
+  <macrodef name="webAppCreator">
+    <attribute name="platform" />
+    <attribute name="extension" default="" />
+    <sequential>
+      <outofdate>
+        <sourcefiles />
+        <targetfiles>
+          <pathelement location="${samples.scripts}/${sample.upper}/build.xml" />
+        </targetfiles>
+        <sequential>
+          <mkdir dir="${samples.scripts}/${sample.upper}" />
+          <java classname="com.google.gwt.user.tools.WebAppCreator" classpath="${gwt.user.jar}:${gwt.dev.jar}" failonerror="true">
+            <!-- Relative path is important! Paths will be relative in final distro -->
+            <sysproperty key="gwt.devjar" value="../../gwt-dev.jar" />
+            <arg value="-XnoEclipse" />
+            <arg value="-overwrite" />
+            <arg value="-out" />
+            <arg file="${samples.scripts}/${sample.upper}" />
+            <arg value="com.google.gwt.sample.${sample.lower}.${sample.upper}" />
+          </java>
+        </sequential>
+      </outofdate>
+    </sequential>
+  </macrodef>
+
+  <target name="scripts" description="Create launch scripts">
+    <webAppCreator platform="linux" />
+    <webAppCreator platform="windows" extension=".cmd" />
+    <webAppCreator platform="mac" />
+  </target>
+
+  <target name="build" depends="source, serverlibs, compile, gwtc, scripts" description="Build and package this project" />
+
+  <target name="checkstyle" description="Static analysis of source">
+    <gwt.checkstyle outputdirectory="${sample.build}">
+      <fileset dir="src" >
+        <exclude name="org/**/super/org/**/*.java"/>
+        <exclude name="com/google/gwt/sample/validation*/**/ValidationMessages.java" />
+      </fileset>
+    </gwt.checkstyle>
+  </target>
+
+  <target name="clean" description="Cleans this project's intermediate and output files">
+    <delete dir="${sample.build}" />
+    <delete includeemptydirs="true">
+      <fileset dir="${samples.scripts}">
+        <include name="*/${sample.upper}/**" />
+      </fileset>
+    </delete>
+  </target>
+</project>

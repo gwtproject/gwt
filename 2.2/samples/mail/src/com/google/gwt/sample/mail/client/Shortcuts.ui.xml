@@ -1,0 +1,97 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+
+  <!--
+      GIFs needed for ie6 work arounds. Can't use <ui:image>, it makes PNGs
+   -->
+  <ui:data field='mailboxesgroupIe6Data' src='mailboxesgroup_ie6.gif' />
+  <ui:data field='tasksgroupIe6Data' src='tasksgroup_ie6.gif' />
+  <ui:data field='contactsgroupIe6Data' src='contactsgroup_ie6.gif' />
+
+  <ui:style>
+  .shortcuts {
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+  }
+
+  @sprite .stackHeader {
+    gwt-image: 'gradient';
+    background-color: #b4b6bc;
+    cursor: pointer;
+
+    text-shadow: rgba(255, 255, 255, 1) 0 1px 1px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+    padding: .7em .5em 0 .6em;
+    border-top: 1px solid #888;
+  }
+
+  @if user.agent ie6 {
+    @url mailboxesgroupIe6 mailboxesgroupIe6Data;
+    @url tasksgroupIe6 tasksgroupIe6Data;
+    @url contactsgroupIe6 contactsgroupIe6Data;
+
+    .mailboxesIcon {
+      background-image: mailboxesgroupIe6;
+      width: 31px;
+      height: 22px;
+      float: left;
+    }
+
+    .tasksIcon {
+      background-image: tasksgroupIe6;
+      width: 31px;
+      height: 22px;
+      float: left;
+    }
+
+    .contactsIcon {
+      background-image: contactsgroupIe6;
+      width: 31px;
+      height: 22px;
+      float: left;
+    }
+  } @else {
+    @sprite .mailboxesIcon {
+      gwt-image: 'mailboxesgroup';
+      float: left;
+    }
+  
+    @sprite .tasksIcon {
+      gwt-image: 'tasksgroup';
+      float: left;
+    }
+  
+    @sprite .contactsIcon {
+      gwt-image: 'contactsgroup';
+      float: left;
+    }
+  }
+  </ui:style>
+
+  <ui:image field='mailboxesgroup' src='mailboxesgroup.png'/>
+  <ui:image field='contactsgroup' src='contactsgroup.png'/>
+  <ui:image field='tasksgroup' src='tasksgroup.png'/>
+  <ui:image field='gradient' src='gradient_bg_dark.png' repeatStyle='Horizontal'/>
+
+  <g:StackLayoutPanel styleName='{style.shortcuts}' unit='EM'>
+    <g:stack>
+      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.mailboxesIcon}'/> Mailboxes</div></g:header>
+      <mail:Mailboxes ui:field='mailboxes'/>
+    </g:stack>
+
+    <g:stack>
+      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.tasksIcon}'/> Tasks</div></g:header>
+      <mail:Tasks ui:field='tasks'/>
+    </g:stack>
+
+    <g:stack>
+      <g:header size='3'><div class='{style.stackHeader}'><div class='{style.contactsIcon}'/> Contacts</div></g:header>
+      <mail:Contacts ui:field='contacts'/>
+    </g:stack>
+  </g:StackLayoutPanel>
+</ui:UiBinder>

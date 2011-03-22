@@ -38,14 +38,6 @@
     <gwt.ant dir="showcase" />
   </target>
 
-  <target name="validation" description="Build validation">
-    <gwt.ant dir="validation" />
-  </target>
-
-  <target name="validationtck" description="Build validation TCK">
-    <gwt.ant dir="validationtck" />
-  </target>
-
   <target name="-do" description="Run all subprojects" >
     <antcall target="dynatable" />
     <antcall target="dynatablerf" />
@@ -55,8 +47,6 @@
     <antcall target="logexample" />
     <antcall target="mail" />
     <antcall target="showcase" />
-    <antcall target="validation" />
-    <!-- don't include validationtck, it is not really a sample -->
   </target>
 
   <target name="build" description="Builds GWT">

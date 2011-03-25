@@ -26,21 +26,17 @@ import com.google.gwt.junit.client.GWTTestCase;
 public class ServiceInheritanceTest extends GWTTestCase {
 
   /**
-   * Generic locator returns an instance of the class named in 
-   * the @{@link Service} annotation
+   * ServiceLocator that returns the base class or subclass implementation
+   * specified in the @{@link Service} annotation.
    */
-  public static class AnyServiceLocator implements ServiceLocator {
-
-    @Override
+  public static class SumServiceLocator implements ServiceLocator {
     public Object getInstance(Class<?> clazz) {
-      assertTrue(BaseImpl.class.isAssignableFrom(clazz));
-      try {
-        return clazz.newInstance();
-      } catch (InstantiationException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
+      if (BaseImpl.class.equals(clazz)) {
+        return new BaseImpl();
+      } else if (SubclassImpl.class.equals(clazz)) {
+        return new SubclassImpl();
       }
+      return null;
     }
   }
 
@@ -48,42 +44,63 @@ public class ServiceInheritanceTest extends GWTTestCase {
    * The factory under test.
    */
   protected interface Factory extends RequestFactory {
-    SumService sumContext();
-    SumServiceBase sumBaseContext();
+    SumServiceBase baseContext();
+    SumServiceSub subContext();
   }
 
   /**
-   * Specifies a service which extends a base class
+   * Specifies the base class implementation
    */
-  @Service(value = SubclassImpl.class, locator = AnyServiceLocator.class)
-  interface SumService extends RequestContext {
-    Request<Integer> add(int n);
-  }
-
-  /**
-   * Specifies a service which is a base class
-   */
-  @Service(value = BaseImpl.class, locator = AnyServiceLocator.class)
+  @Service(value = BaseImpl.class, locator = SumServiceLocator.class)
   interface SumServiceBase extends RequestContext {
     Request<Integer> add(int n);
+    Request<Integer> subtract(int n);
   }
 
+  /**
+   * Specifies the subclass implementation
+   */
+  @Service(value = SubclassImpl.class, locator = SumServiceLocator.class)
+  interface SumServiceSub extends RequestContext {
+    Request<Integer> add(int n);
+    Request<Integer> subtract(int n);
+  }
+
+  /**
+   * Base implementation of {@link SumServiceBase}
+   */
   static class BaseImpl {
-    protected int base;
+    protected int initialValue;
 
     public BaseImpl() {
-      base = 5;
+      initialValue = 5;
     }
 
     public Integer add(int n) {
-      return base + n;
+      return initialValue + n;
+    }
+    
+    public Integer subtract(int n) {
+      return initialValue - n;
     }
   }
 
+  /**
+   * Subclass implementation of {@link SumServiceSub}
+   * inherits the add() method
+   */
   static class SubclassImpl extends BaseImpl {
     public SubclassImpl() {
-      // Distinguish from base service
-      base = 8;
+      /*
+       * Init with a different value to distinguish between base & subclass
+       * implementations in the tests
+       */
+      initialValue = 8;
+    }
+    
+    @Override
+    public Integer subtract(int n) {
+      return 0;
     }
   }
 
@@ -97,12 +114,25 @@ public class ServiceInheritanceTest extends GWTTestCase {
   }
 
   /**
-   * Verify that the method can be invoked on the base class
-   * as well as the subclass
+   * Call a method inherited from a base class
+   */
+  public void testInvokeInheritedMethod() {
+    delayTestFinish(TEST_DELAY);
+    factory.subContext().add(13).fire(new Receiver<Integer>() {
+      @Override
+      public void onSuccess(Integer response) {
+        assertEquals((Integer) 21, response);
+        finishTest();
+      }
+    });
+  }
+
+  /**
+   * Call a method implemented in a base class
    */
   public void testInvokeMethodOnBaseClass() {
     delayTestFinish(TEST_DELAY);
-    factory.sumBaseContext().add(13).fire(new Receiver<Integer>() {
+    factory.baseContext().add(13).fire(new Receiver<Integer>() {
       @Override
       public void onSuccess(Integer response) {
         assertEquals((Integer) 18, response);
@@ -112,15 +142,14 @@ public class ServiceInheritanceTest extends GWTTestCase {
   }
 
   /**
-   * Verify that the method is invoked on the subclass,
-   * not the base class
+   * Call a method overridden in a subclass
    */
-  public void testInvokeMethodOnSubclass() {
+  public void testInvokeOverriddenMethod() {
     delayTestFinish(TEST_DELAY);
-    factory.sumContext().add(13).fire(new Receiver<Integer>() {
+    factory.subContext().subtract(3).fire(new Receiver<Integer>() {
       @Override
       public void onSuccess(Integer response) {
-        assertEquals((Integer) 21, response);
+        assertEquals((Integer) 0, response);
         finishTest();
       }
     });
@@ -133,7 +162,7 @@ public class ServiceInheritanceTest extends GWTTestCase {
   }
 
   @Override
-  protected void gwtSetUp() throws Exception {
+  protected void gwtSetUp() {
     factory = createFactory();
   }
 

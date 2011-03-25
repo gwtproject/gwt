@@ -119,7 +119,7 @@ final class ResolverServiceLayer extends ServiceLayerDecorator {
   public Method resolveDomainMethod(Method requestContextMethod) {
     Class<?> declaringClass = requestContextMethod.getDeclaringClass();
     Class<?> searchIn =
-        getTop().resolveServiceClass((Class<? extends RequestContext>) declaringClass);
+        getTop().resolveServiceClass(declaringClass.asSubclass(RequestContext.class));
     Class<?>[] parameterTypes = requestContextMethod.getParameterTypes();
     Class<?>[] domainArgs = new Class<?>[parameterTypes.length];
     for (int i = 0, j = domainArgs.length; i < j; i++) {

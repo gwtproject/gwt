@@ -56,7 +56,7 @@ final class LocatorServiceLayer extends ServiceLayerDecorator {
     // Enclosing class may be a parent class, so invoke on service class
     Class<?> declaringClass = contextMethod.getDeclaringClass();
     Class<?> serviceClass =
-        getTop().resolveServiceClass((Class<? extends RequestContext>) declaringClass);
+        getTop().resolveServiceClass(declaringClass.asSubclass(RequestContext.class));
     return locator.getInstance(serviceClass);
   }
 

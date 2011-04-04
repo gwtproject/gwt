@@ -281,7 +281,10 @@ class DOMImplStandardBase extends DOMImplStandard {
     doc.getBody().setScrollTop(top);
   }
 
-  @SuppressWarnings("unused")
+  protected native boolean isRTL(Element elem) /*-{
+    return elem.ownerDocument.defaultView.getComputedStyle(elem, '').direction == 'rtl';
+  }-*/;
+
   private native NativeEvent createKeyEvent(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey) /*-{
@@ -296,9 +299,6 @@ class DOMImplStandardBase extends DOMImplStandard {
     evt.metaKey = metaKey;
     return evt;
   }-*/;
-
-  private native boolean isRTL(Element elem) /*-{
-    return elem.ownerDocument.defaultView.getComputedStyle(elem, '').direction == 'rtl';
-  }-*/;
 }
+
 

@@ -115,6 +115,7 @@ public class CellWidgetTest extends GWTTestCase {
     cw.onBrowserEvent(event);
     cell.assertLastEventKey("test");
     cell.assertLastEventValue("test");
+    assertEquals("newValue", cw.getValue());
   }
 
   public void testOnBrowserEventWithKeyProvider() {
@@ -134,6 +135,7 @@ public class CellWidgetTest extends GWTTestCase {
     cw.onBrowserEvent(event);
     cell.assertLastEventKey("t");
     cell.assertLastEventValue("test");
+    assertEquals("newValue", cw.getValue());
   }
 
   public void testOnBrowserEventWithValueChangeHandler() {
@@ -151,6 +153,7 @@ public class CellWidgetTest extends GWTTestCase {
     cell.assertLastEventKey("test");
     cell.assertLastEventValue("test");
     handler.assertLastValue("newValue");
+    assertEquals("newValue", cw.getValue());
   }
 
   public void testRedraw() {

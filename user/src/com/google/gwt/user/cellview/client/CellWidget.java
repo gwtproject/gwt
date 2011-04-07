@@ -20,6 +20,10 @@ import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -36,8 +40,8 @@ import com.google.gwt.view.client.ProvidesKey;
  * 
  * @param <C> the type that the Cell represents
  */
-public class CellWidget<C> extends Widget implements HasKeyProvider<C>,
-    HasValue<C> {
+public class CellWidget<C> extends Widget implements HasKeyProvider<C>, HasValue<C>,
+    IsEditor<LeafValueEditor<C>> {
 
   /**
    * Create the default element used to wrap the Cell. The default element is a
@@ -57,6 +61,11 @@ public class CellWidget<C> extends Widget implements HasKeyProvider<C>,
   private final Cell<C> cell;
 
   /**
+   * For use with the editor framework.
+   */
+  private LeafValueEditor<C> editor;
+
+  /**
    * The key provider for the value.
    */
   private final ProvidesKey<C> keyProvider;
@@ -71,7 +80,8 @@ public class CellWidget<C> extends Widget implements HasKeyProvider<C>,
    */
   private final ValueUpdater<C> valueUpdater = new ValueUpdater<C>() {
     public void update(C value) {
-      ValueChangeEvent.fire(CellWidget.this, value);
+      // no need to redraw, the Cell took care of it
+      setValue(value, true, false);
     }
   };
 
@@ -139,6 +149,13 @@ public class CellWidget<C> extends Widget implements HasKeyProvider<C>,
 
   public HandlerRegistration addValueChangeHandler(ValueChangeHandler<C> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
+  }
+
+  public LeafValueEditor<C> asEditor() {
+    if (editor == null) {
+      editor = TakesValueEditor.of(this);
+    }
+    return editor;
   }
 
   /**

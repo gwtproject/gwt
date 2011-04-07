@@ -51,6 +51,8 @@ public class UiBinderGenerator extends Generator {
   private static final String ELEMENT_FACTORY_PROPERTY = "uibinder.html.elementfactory";
   
   private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
+
+  private static boolean xssWarningGiven = false;
   
   /**
    * Given a UiBinder interface, return the path to its ui.xml file, suitable
@@ -218,10 +220,12 @@ public class UiBinderGenerator extends Generator {
 
     Boolean rtn = Boolean.valueOf(value);
 
-    if (!rtn) {
+    if (!rtn && !xssWarningGiven) {
       logger.warn("Configuration property %s is false! UiBinder SafeHtml integration is off, "
-          + "leaving your users more vulnerable to cross-site scripting attacks.",
+          + "leaving your users more vulnerable to cross-site scripting attacks. This "
+          + "property will default to true in future releases of GWT.",
           XSS_SAFE_CONFIG_PROPERTY);
+      xssWarningGiven = true;
     }
     return rtn;
   }

@@ -307,6 +307,7 @@ public class SafeHtmlTemplatesImplMethodCreator extends AbstractMethodCreator {
         break;
 
       case CSS_ATTRIBUTE:
+      case CSS_ATTRIBUTE_START:
         /*
          * We already checked if the user tried to use SafeStyles in an invalid
          * (non-CSS_ATTRIBUTE) context, but now we check if the user could have

@@ -17,6 +17,9 @@
 package com.google.gwt.media;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
+import com.google.gwt.user.client.MediaEventsSinkTest;
+import com.google.gwt.media.client.AudioTest;
+import com.google.gwt.media.client.VideoTest;
 
 import junit.framework.Test;
 
@@ -27,12 +30,10 @@ public class MediaSuite {
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("Test suite for Media GWTTestCases");
     
-    /* 
-     * Tests disabled temporarily
-     * suite.addTestSuite(AudioTest.class);
-     * suite.addTestSuite(VideoTest.class);
-     */
-    
+    suite.addTestSuite(MediaEventsSinkTest.class);
+    suite.addTestSuite(AudioTest.class);
+    suite.addTestSuite(VideoTest.class);
+
     return suite;
   }
 

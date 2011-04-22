@@ -28,8 +28,19 @@ import java.util.Set;
 
 /**
  * Provides unified encoding and decoding of value objects.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class ValueCodex {
+  /**
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
+   */
+  @Deprecated
   enum Type {
     BIG_DECIMAL(BigDecimal.class) {
       @Override

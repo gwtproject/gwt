@@ -18,11 +18,21 @@ package com.google.gwt.autobean.shared.impl;
 /**
  * This interface is implemented by our generated AutoBeanFactory types to
  * convert enum values to strings.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public interface EnumMap {
   /**
    * Extra enums that should be included in the AutoBeanFactory.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public @interface ExtraEnums {
     Class<? extends Enum<?>>[] value();
   }

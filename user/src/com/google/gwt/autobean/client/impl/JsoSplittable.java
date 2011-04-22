@@ -25,11 +25,21 @@ import java.util.List;
 
 /**
  * Implements the EntityCodex.Splittable interface using a raw JavaScriptObject.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public final class JsoSplittable extends JavaScriptObject implements Splittable {
   /**
    * This type is used because we can't treat Strings as JSOs.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class StringSplittable implements Splittable {
     private final String value;
 

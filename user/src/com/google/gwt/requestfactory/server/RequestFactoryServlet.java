@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,8 +29,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Handles GWT RequestFactory JSON requests. 
+ * Handles GWT RequestFactory JSON requests.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 @SuppressWarnings("serial")
 public class RequestFactoryServlet extends HttpServlet {
 
@@ -48,7 +53,7 @@ public class RequestFactoryServlet extends HttpServlet {
 
   /**
    * Returns the thread-local {@link HttpServletRequest}.
-   * 
+   *
    * @return an {@link HttpServletRequest} instance
    */
   public static HttpServletRequest getThreadLocalRequest() {
@@ -57,7 +62,7 @@ public class RequestFactoryServlet extends HttpServlet {
 
   /**
    * Returns the thread-local {@link HttpServletResponse}.
-   * 
+   *
    * @return an {@link HttpServletResponse} instance
    */
   public static HttpServletResponse getThreadLocalResponse() {
@@ -77,7 +82,7 @@ public class RequestFactoryServlet extends HttpServlet {
   /**
    * Use this constructor in subclasses to provide a custom
    * {@link ExceptionHandler}.
-   * 
+   *
    * @param exceptionHandler an {@link ExceptionHandler} instance
    * @param serviceDecorators an array of ServiceLayerDecorators that change how
    *          the RequestFactory request processor interact with the domain
@@ -92,7 +97,7 @@ public class RequestFactoryServlet extends HttpServlet {
 
   /**
    * Processes a POST to the server.
-   * 
+   *
    * @param request an {@link HttpServletRequest} instance
    * @param response an {@link HttpServletResponse} instance
    * @throws IOException if an internal I/O error occurs

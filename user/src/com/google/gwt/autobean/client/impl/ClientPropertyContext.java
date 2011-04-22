@@ -27,13 +27,23 @@ import java.util.Set;
 
 /**
  * Provides base methods for generated implementations of PropertyContext.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public final class ClientPropertyContext implements PropertyContext,
     CollectionPropertyContext, MapPropertyContext {
 
   /**
    * A reference to an instance setter method.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static final class Setter extends JavaScriptObject {
     /**
      * Create a trivial Setter that calls {@link Map#put(Object, Object)}.

@@ -36,9 +36,14 @@ import java.util.WeakHashMap;
 
 /**
  * An implementation of an AutoBean that uses reflection.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the type of interface being wrapped
  */
+@Deprecated
 public class ProxyAutoBean<T> extends AbstractAutoBean<T> {
   private static class Data {
     final List<Method> getters = new ArrayList<Method>();

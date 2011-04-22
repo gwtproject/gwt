@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,7 +27,12 @@ import java.util.Map;
 /**
  * An in-memory ProxyStore store that can encode its state as a JSON object
  * literal.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class DefaultProxyStore implements ProxyStore {
   /**
    * Provide a little bit of future-proofing to at least detect an encoded
@@ -52,7 +57,7 @@ public class DefaultProxyStore implements ProxyStore {
   /**
    * Construct a DefaultProxyStore using the a value returned from
    * {@link #encode()}.
-   * 
+   *
    * @param payload a String previously returned from {@link #encode()}
    * @throws IllegalArgumentException if the payload cannot be parsed
    */

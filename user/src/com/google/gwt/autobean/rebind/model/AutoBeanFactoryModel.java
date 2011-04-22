@@ -44,8 +44,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanFactoryModel {
   private static final JType[] EMPTY_JTYPE = new JType[0];
 

@@ -22,7 +22,12 @@ import java.util.Map;
 /**
  * A property context that allows setters to be called on a simple peer,
  * regardless of whether or not the interface actually has a setter.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 class BeanPropertyContext extends MethodPropertyContext {
   private final String propertyName;
   private final Map<String, Object> map;

@@ -21,7 +21,12 @@ import java.util.List;
  * This interface provides an abstraction around the underlying data model
  * (JavaScriptObject, {@code org.json}, or XML) used to encode an AutoBeanCodex
  * payload.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public interface Splittable {
   /**
    * Returns a string representation of the data.

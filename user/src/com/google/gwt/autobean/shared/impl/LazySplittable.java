@@ -22,7 +22,12 @@ import java.util.List;
 /**
  * Holds a string payload with the expectation that the object will be used only
  * for creating a larger payload.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class LazySplittable implements Splittable {
   public static final Splittable NULL = new LazySplittable("null");
 

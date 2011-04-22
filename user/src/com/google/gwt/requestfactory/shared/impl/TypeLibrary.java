@@ -27,7 +27,12 @@ import java.util.Set;
 /**
  * Utility methods for querying, encoding, and decoding typed
  * payload data.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class TypeLibrary {
 
   public static final Collection<Class<?>> VALUE_TYPES;
@@ -60,5 +65,5 @@ public class TypeLibrary {
 
   public static boolean isValueType(Class<?> type) {
     return VALUE_TYPES.contains(type);
-  }  
+  }
 }

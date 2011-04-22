@@ -25,9 +25,14 @@ import java.lang.reflect.Proxy;
 /**
  * Implements an AutoBean's shim interface that intercepts calls to the backing
  * object.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the interface type of the AutoBean
  */
+@Deprecated
 class ShimHandler<T> implements InvocationHandler {
   private final ProxyAutoBean<T> bean;
   private final Method interceptor;

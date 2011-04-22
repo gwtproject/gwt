@@ -19,13 +19,17 @@
  * bean-like interfaces and a low-level serialization mechanism for those
  * interfaces. AutoBeans can be used in both client and server code to improve
  * code re-use.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see <a
  *      href="http://code.google.com/p/google-web-toolkit/wiki/AutoBean">AutoBean
  *      wiki page</a>
  * @see com.google.gwt.autobean.shared.AutoBeanFactory
  * @see com.google.gwt.autobean.server.AutoBeanFactoryMagic
  */
+@Deprecated
 @com.google.gwt.util.PreventSpuriousRebuilds
 package com.google.gwt.autobean.shared;
-

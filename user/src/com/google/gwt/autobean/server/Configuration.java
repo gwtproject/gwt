@@ -28,11 +28,21 @@ import java.util.Set;
  * Used by {@link AutoBeanFactoryMagic#createBean(Class, Configuration)}. This
  * type replicates the annotations that may be applied to an AutoBeanFactory
  * declaration.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class Configuration {
   /**
    * Builds {@link Configuration} objects.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class Builder {
     private Configuration toReturn = new Configuration();
 

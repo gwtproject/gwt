@@ -34,7 +34,12 @@ import java.util.Set;
 /**
  * Shared code for answering question about Class objects. This is a
  * server-compatible analog to ModelUtils.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class TypeUtils {
   static final Map<Class<?>, Class<?>> AUTOBOX_MAP;
   static final Map<Class<?>, Object> DEFAULT_PRIMITIVE_VALUES;

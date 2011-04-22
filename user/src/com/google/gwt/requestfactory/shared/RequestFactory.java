@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -39,9 +39,14 @@ import com.google.gwt.event.shared.EventBus;
  * effect, treating it as an instance of the supertype. Returning abstract
  * supertypes of value types is not supported (e.g. Object, Enum, Number).
  * </p>
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see com.google.gwt.requestfactory.server.testing.InProcessRequestTransport
  */
+@Deprecated
 public interface RequestFactory {
   /**
    * The JSON content type String.
@@ -50,7 +55,7 @@ public interface RequestFactory {
 
   /**
    * Return a request to find a fresh instance of the referenced proxy.
-   * 
+   *
    * @param proxyId an {@link EntityProxyId} instance of type P
    * @return a {@link Request} object
    */
@@ -59,7 +64,7 @@ public interface RequestFactory {
   /**
    * Returns the event bus this factory's events are posted on, which was set
    * via {@link #initialize}.
-   * 
+   *
    * @return the {@link EventBus} associated with this instance
    */
   EventBus getEventBus();
@@ -68,7 +73,7 @@ public interface RequestFactory {
    * Get a {@link com.google.gwt.user.client.History} compatible token that
    * represents the given class. It can be processed by
    * {@link #getProxyClass(String)}
-   * 
+   *
    * @param clazz a Class object for an {@link EntityProxy} subclass
    * @return a {@link com.google.gwt.user.client.History} compatible token
    */
@@ -87,7 +92,7 @@ public interface RequestFactory {
    * operation. In other words, the "future" history token returned for an
    * as-yet-unpersisted EntityProxy is only valid for the duration of the
    * RequestFactory's lifespan.
-   * 
+   *
    * @param proxy an {@link EntityProxyId} instance
    * @return a {@link com.google.gwt.user.client.History} compatible token
    */
@@ -98,7 +103,7 @@ public interface RequestFactory {
    * type of this token, via {@link RequestContext#create}. The token may
    * represent either a proxy instance (see {@link #getHistoryToken}) or a proxy
    * class (see {@link #getProxyClass}).
-   * 
+   *
    * @param historyToken a String token
    * @return a Class object for an {@link EntityProxy} subclass
    */
@@ -107,7 +112,7 @@ public interface RequestFactory {
   /**
    * Return the appropriate {@link EntityProxyId} using a string returned from
    * {@link #getHistoryToken(EntityProxyId)}.
-   * 
+   *
    * @param historyToken a String token
    * @return an {@link EntityProxyId}
    */
@@ -116,7 +121,7 @@ public interface RequestFactory {
   /**
    * Returns a ProxySerializer that can encode and decode the various
    * EntityProxy and ValueProxy types reachable from the RequestFactory.
-   * 
+   *
    * @param store a helper object for the ProxySerializer to provide low-level
    *          storage access
    * @return a new ProxySerializer
@@ -127,14 +132,14 @@ public interface RequestFactory {
   /**
    * Start this request factory with a
    * {@link com.google.gwt.requestfactory.client.DefaultRequestTransport}.
-   * 
+   *
    * @param eventBus an {@link EventBus}
    */
   void initialize(EventBus eventBus);
 
   /**
    * Start this request factory with a user-provided transport.
-   * 
+   *
    * @param eventBus an {@link EventBus}
    * @param transport a {@link RequestTransport} instance
    */

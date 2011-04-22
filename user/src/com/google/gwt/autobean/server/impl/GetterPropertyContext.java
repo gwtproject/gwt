@@ -21,7 +21,12 @@ import java.lang.reflect.Method;
 
 /**
  * Used by {@link ProxyAutoBean#traverseProperties()}.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 class GetterPropertyContext extends MethodPropertyContext {
   private final Method setter;
   private final Object shim;

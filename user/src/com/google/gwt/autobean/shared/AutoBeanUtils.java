@@ -29,7 +29,12 @@ import java.util.Map;
 
 /**
  * Utility methods for working with AutoBeans.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public final class AutoBeanUtils {
   /*
    * TODO(bobv): Make Comparison a real type that holds a map contain the diff

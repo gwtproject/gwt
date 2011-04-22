@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -64,7 +64,7 @@ import java.util.logging.Logger;
  * JVM.
  * <p>
  * This class is amenable to being used as a unit test:
- * 
+ *
  * <pre>
  * public void testRequestFactory() {
  *   Logger logger = Logger.getLogger("");
@@ -76,18 +76,28 @@ import java.util.logging.Logger;
  * </pre>
  * This class also has a {@code main} method and can be used as a build-time
  * tool:
- * 
+ *
  * <pre>
  * java -cp gwt-servlet.jar:your-code.jar \
  *   com.google.gwt.requestfactory.server.RequestFactoryInterfaceValidator \
  *   com.example.MyRequestFactory
  * </pre>
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class RequestFactoryInterfaceValidator {
   /**
    * An implementation of {@link Loader} that uses a {@link ClassLoader} to
    * retrieve the class files.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class ClassLoaderLoader implements Loader {
     private final ClassLoader loader;
 
@@ -106,13 +116,18 @@ public class RequestFactoryInterfaceValidator {
 
   /**
    * Abstracts the mechanism by which class files are loaded.
-   * 
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
+   *
    * @see ClassLoaderLoader
    */
+  @Deprecated
   public interface Loader {
     /**
      * Returns true if the specified resource can be loaded.
-     * 
+     *
      * @param resource a resource name (e.g. <code>com/example/Foo.class</code>)
      */
     boolean exists(String resource);
@@ -120,7 +135,7 @@ public class RequestFactoryInterfaceValidator {
     /**
      * Returns an InputStream to access the specified resource, or
      * <code>null</code> if no such resource exists.
-     * 
+     *
      * @param resource a resource name (e.g. <code>com/example/Foo.class</code>)
      */
     InputStream getResourceAsStream(String resource);
@@ -130,7 +145,12 @@ public class RequestFactoryInterfaceValidator {
    * Improves error messages by providing context for the user.
    * <p>
    * Visible for testing.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   static class ErrorContext {
     private final Logger logger;
     private final ErrorContext parent;
@@ -225,7 +245,12 @@ public class RequestFactoryInterfaceValidator {
   /**
    * Used internally as a placeholder for types that cannot be mapped to a
    * domain object.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   interface MissingDomainType {
   }
 
@@ -721,7 +746,7 @@ public class RequestFactoryInterfaceValidator {
    * equivalent domain method</li>
    * <li>All referenced proxy types are valid</li>
    * </ul>
-   * 
+   *
    * @param binaryName the binary name (e.g. {@link Class#getName()}) of the
    *          EntityProxy subtype
    */
@@ -733,7 +758,7 @@ public class RequestFactoryInterfaceValidator {
    * Determine if the specified type implements a proxy interface and apply the
    * appropriate validations. This can be used as a general-purpose entry method
    * when writing unit tests.
-   * 
+   *
    * @param binaryName the binary name (e.g. {@link Class#getName()}) of the
    *          EntityProxy or ValueProxy subtype
    */
@@ -772,7 +797,7 @@ public class RequestFactoryInterfaceValidator {
    * equivalent domain method</li>
    * <li>All referenced EntityProxy types are valid</li>
    * </ul>
-   * 
+   *
    * @param binaryName the binary name (e.g. {@link Class#getName()}) of the
    *          RequestContext subtype
    * @see #validateEntityProxy(String)
@@ -830,7 +855,7 @@ public class RequestFactoryInterfaceValidator {
    * <li> <code>binaryName</code> implements RequestFactory</li>
    * <li>All referenced RequestContext types are valid</li>
    * </ul>
-   * 
+   *
    * @param binaryName the binary name (e.g. {@link Class#getName()}) of the
    *          RequestContext subtype
    * @see #validateRequestContext(String)
@@ -880,7 +905,7 @@ public class RequestFactoryInterfaceValidator {
    * equivalent domain method</li>
    * <li>All referenced proxy types are valid</li>
    * </ul>
-   * 
+   *
    * @param binaryName the binary name (e.g. {@link Class#getName()}) of the
    *          EntityProxy subtype
    */
@@ -1521,7 +1546,7 @@ public class RequestFactoryInterfaceValidator {
   /**
    * Load the classfile for the given binary name and apply the provided
    * visitor.
-   * 
+   *
    * @return <code>true</code> if the visitor was successfully visited
    */
   private boolean visit(ErrorContext logger, String internalName,

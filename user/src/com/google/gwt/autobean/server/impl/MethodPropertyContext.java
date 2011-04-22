@@ -28,7 +28,12 @@ import java.util.WeakHashMap;
 /**
  * A base type to handle analyzing the return value of a getter method. The
  * accessor methods are implemented in subtypes.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 abstract class MethodPropertyContext implements CollectionPropertyContext,
     MapPropertyContext {
   private static class Data {

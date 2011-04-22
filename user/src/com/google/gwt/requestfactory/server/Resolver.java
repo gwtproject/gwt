@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -43,9 +43,14 @@ import java.util.TreeSet;
  * Responsible for converting between domain and client entities. This class has
  * a small amount of temporary state used to handle graph cycles and assignment
  * of synthetic ids.
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see RequestState#getResolver()
  */
+@Deprecated
 class Resolver {
   /**
    * A parameterized type with a single parameter.
@@ -183,7 +188,7 @@ class Resolver {
 
   /**
    * Given a domain object, return a value that can be encoded by the client.
-   * 
+   *
    * @param domainValue the domain object to be converted into a client-side
    *          value
    * @param assignableTo the type in the client to which the resolved value
@@ -199,7 +204,7 @@ class Resolver {
 
   /**
    * Convert a client-side value into a domain value.
-   * 
+   *
    * @param maybeEntityProxy the client object to resolve
    * @param detectDeadEntities if <code>true</code> this method will throw a
    *          ReportableException containing a {@link DeadEntityException} if an

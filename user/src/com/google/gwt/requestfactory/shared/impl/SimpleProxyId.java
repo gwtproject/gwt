@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,9 +23,14 @@ import com.google.gwt.requestfactory.shared.BaseProxy;
  * EntityProxy as far as metadata maintenance is concerned. There is a specific
  * subtype {@link SimpleEntityProxyId} which implements the requisite public
  * interface for EntityProxy types.
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <P> the type of BaseProxy object the id describes
  */
+@Deprecated
 public class SimpleProxyId<P extends BaseProxy> {
   /**
    * A placeholder value for {@link #clientId} to indicate the id was not

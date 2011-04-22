@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,16 +25,22 @@ package com.google.gwt.requestfactory.shared;
  * Locator subtypes must be default instantiable (i.e. public static types with
  * a no-arg constructor). Instances of Locators may be retained and reused by
  * the RequestFactory service layer.
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the type of domain object the Locator will operate on
  * @param <I> the type of object the Locator expects to use as an id for the
  *          domain object
+ *
  * @see ProxyFor#locator()
  */
+@Deprecated
 public abstract class Locator<T, I> {
   /**
    * Create a new instance of the requested type.
-   * 
+   *
    * @param clazz the type of object to create
    * @return the new instance of the domain type
    */
@@ -43,7 +49,7 @@ public abstract class Locator<T, I> {
   /**
    * Retrieve an object. May return {@code null} to indicate that the requested
    * object could not be found.
-   * 
+   *
    * @param clazz the type of object to retrieve
    * @param id an id previously returned from {@link #getId(Object)}
    * @return the requested object or {@code null} if it could not be found
@@ -59,7 +65,7 @@ public abstract class Locator<T, I> {
    * Returns a domain object to be used as the id for the given object. This
    * method may return {@code null} if the object has not been persisted or
    * should be treated as irretrievable.
-   * 
+   *
    * @param domainObject the object to obtain an id for
    * @return the object's id or {@code null}
    */
@@ -74,7 +80,7 @@ public abstract class Locator<T, I> {
    * Returns a domain object to be used as the version for the given object.
    * This method may return {@code null} if the object has not been persisted or
    * should be treated as irretrievable.
-   * 
+   *
    * @param domainObject the object to obtain an id for
    * @return the object's version or {@code null}
    */

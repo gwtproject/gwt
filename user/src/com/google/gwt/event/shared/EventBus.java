@@ -15,81 +15,71 @@
  */
 package com.google.gwt.event.shared;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.web.bindery.event.shared.Event;
 
 /**
- * Dispatches {@link GwtEvent}s to interested parties. Eases decoupling by
- * allowing objects to interact without having direct dependencies upon one
- * another, and without requiring event sources to deal with maintaining handler
- * lists. There will typically be one EventBus per application, broadcasting
- * events that may be of general interest.
- * 
- * @see SimpleEventBus
- * @see ResettableEventBus
- * @see com.google.gwt.event.shared.testing.CountingEventBus
+ * Extends {com.google.web.bindery.event.shared.EventBus} for legacy
+ * compatibility.
  */
-public abstract class EventBus implements HasHandlers {
+public abstract class EventBus extends com.google.web.bindery.event.shared.EventBus implements
+    HasHandlers {
 
-  /**
-   * Adds an unfiltered handler to receive events of this type from all sources.
-   * <p>
-   * It is rare to call this method directly. More typically a {@link GwtEvent}
-   * subclass will provide a static <code>register</code> method, or a widget
-   * will accept handlers directly.
-   * <p>
-   * A tip: to make a handler de-register itself, the following works:
-   * <code><pre>new MyHandler() {
-   *  HandlerRegistration reg = MyEvent.register(eventBus, this);
-   * 
-   *  public void onMyThing(MyEvent event) {
-   *    {@literal /}* do your thing *{@literal /}
-   *    reg.removeHandler();
-   *  }
-   * };
-   * </pre></code>
-   * 
-   * @param <H> The type of handler
-   * @param type the event type associated with this handler
-   * @param handler the handler
-   * @return the handler registration, can be stored in order to remove the
-   *         handler later
-   */
-  public abstract <H extends EventHandler> HandlerRegistration addHandler(
-      Type<H> type, H handler);
+  @Override
+  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandler(Event.Type<H> type, H handler) {
+    throw new UnsupportedOperationException("Subclass responsibility. "
+        + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
+        + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
+  }
+  
+  public abstract <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type, H handler);
 
-  /**
-   * Adds a handler to receive events of this type from the given source.
-   * <p>
-   * It is rare to call this method directly. More typically a {@link GwtEvent}
-   * subclass will provide a static <code>register</code> method, or a widget
-   * will accept handlers directly.
-   * 
-   * @param <H> The type of handler
-   * @param type the event type associated with this handler
-   * @param source the source associated with this handler
-   * @param handler the handler
-   * @return the handler registration, can be stored in order to remove the
-   *         handler later
-   */
-  public abstract <H extends EventHandler> HandlerRegistration addHandlerToSource(
-      Type<H> type, Object source, H handler);
+  @Override
+  public <H> com.google.web.bindery.event.shared.HandlerRegistration addHandlerToSource(Event.Type<H> type,
+      Object source, H handler) {
+    throw new UnsupportedOperationException("Subclass responsibility. "
+        + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
+        + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
+  }
 
-  /**
-   * Fires the event from no source. Only unfiltered handlers will receive it.
-   * 
-   * @param event the event to fire
-   */
+  public abstract <H extends EventHandler> HandlerRegistration addHandlerToSource(GwtEvent.Type<H> type,
+      Object source, H handler);
+
+  @Override
+  public void fireEvent(Event<?> event) {
+    throw new UnsupportedOperationException("Subclass responsibility. "
+        + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
+        + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
+  }
+
   public abstract void fireEvent(GwtEvent<?> event);
 
-  /**
-   * Fires the given event to the handlers listening to the event's type.
-   * <p>
-   * Any exceptions thrown by handlers will be bundled into a
-   * {@link UmbrellaException} and then re-thrown after all handlers have
-   * completed. An exception thrown by a handler will not prevent other handlers
-   * from executing.
-   * 
-   * @param event the event to fire
-   */
+
+  @Override
+  public void fireEventFromSource(Event<?> event, Object source) {
+    throw new UnsupportedOperationException("Subclass responsibility. "
+        + "This class is a legacy wrapper for com.google.web.bindery.event.shared.EventBus. "
+        + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
+  }
+
   public abstract void fireEventFromSource(GwtEvent<?> event, Object source);
+
+  protected void castFireEvent(GwtEvent<?> event) {
+    try {
+      fireEvent((Event<?>) event);
+    } catch (com.google.web.bindery.event.shared.UmbrellaException e) {
+      throw new UmbrellaException(e.getCauses());
+    }
+  }
+
+  protected void castFireEventFromSource(GwtEvent<?> event, Object source) {
+    try {
+      fireEventFromSource((Event<?>) event, source);
+    } catch (com.google.web.bindery.event.shared.UmbrellaException e) {
+      throw new UmbrellaException(e.getCauses());
+    }
+  }
+
+  protected HandlerRegistration wrap(com.google.web.bindery.event.shared.HandlerRegistration reg) {
+    return new LegacyHandlerWrapper(reg);
+  }
 }

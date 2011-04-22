@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,14 +22,19 @@ import com.google.gwt.autobean.shared.Splittable;
  * persistence mechanism. The ProxyStore does not need to be able to interpret
  * the data sent to it by the ProxySerializer; it is merely a wrapper around a
  * persistence mechanism.
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see DefaultProxyStore
  */
+@Deprecated
 public interface ProxyStore {
   /**
    * Called by {@link ProxySerializer} to retrieve a value previously provided
    * to {@link #put(String, Splittable)}.
-   * 
+   *
    * @param key the key
    * @return the associated value or {@code null} if {@code key} is unknown
    */
@@ -44,7 +49,7 @@ public interface ProxyStore {
 
   /**
    * Called by {@link ProxySerializer} to store a value.
-   * 
+   *
    * @param key a key value that will be passed to {@link #get(String)}
    * @param value the data to store
    * @see Splittable#getPayload()

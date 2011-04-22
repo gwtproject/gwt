@@ -1,19 +1,18 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.gwt.requestfactory.client;
 
 import com.google.gwt.logging.client.JsonLogRecordClientUtil;
@@ -27,12 +26,22 @@ import java.util.logging.LogRecord;
 
 /**
  * A Handler that does remote logging for applications using RequestFactory.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class RequestFactoryLogHandler extends RemoteLogHandlerBase {
-  
-  /** 
+
+  /**
    * Provides a logging request.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static interface LoggingRequestProvider {
     /**
      * Returns the logging request.
@@ -41,9 +50,9 @@ public class RequestFactoryLogHandler extends RemoteLogHandlerBase {
      */
     LoggingRequest getLoggingRequest();
   }
-  
+
   private LoggingRequestProvider requestProvider;
-  
+
   /**
    * Since records from this handler go accross the wire, it should only be
    * used for important messages, and it's Level will often be higher than the
@@ -52,7 +61,7 @@ public class RequestFactoryLogHandler extends RemoteLogHandlerBase {
    * name of the logger(s) which will be used to log acknowledgements of
    * activity going accross the wire. If we did not exclude these loggers, an
    * infinite loop would occur.
-   * 
+   *
    * @param requestProvider a {@link LoggingRequestProvider} instance
    * @param level a logging {@link Level}
    * @param ignoredLoggerNames a List of Strings

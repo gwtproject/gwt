@@ -34,13 +34,23 @@ import java.util.Stack;
  * Utility methods for encoding an AutoBean graph into a JSON-compatible string.
  * This codex intentionally does not preserve object identity, nor does it
  * encode cycles, but it will detect them.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanCodex {
 
   /**
    * Describes a means of encoding or decoding a particular type of data to or
    * from a wire format representation.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   interface Coder {
     Object decode(Splittable data);
 
@@ -148,7 +158,12 @@ public class AutoBeanCodex {
 
   /**
    * Used to stop processing.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   static class HaltException extends RuntimeException {
     public HaltException(RuntimeException cause) {
       super(cause);

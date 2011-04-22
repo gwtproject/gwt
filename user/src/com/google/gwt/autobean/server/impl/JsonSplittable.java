@@ -28,7 +28,12 @@ import java.util.List;
 
 /**
  * Uses the org.json packages to slice and dice request payloads.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class JsonSplittable implements Splittable {
   public static Splittable create(String payload) {
     try {

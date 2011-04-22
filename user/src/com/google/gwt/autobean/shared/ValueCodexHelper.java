@@ -20,7 +20,12 @@ import com.google.gwt.core.client.GWT;
 /**
  * Provides reflection-based operation for server (JVM) implementation. There is
  * a no-op super-source version for client (dev- and web-mode) code.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 class ValueCodexHelper {
   /**
    * Returns {@code true} if {@code clazz} is assignable to any of the value

@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -34,7 +34,12 @@ import java.util.logging.Logger;
 /**
  * An implementation of {@link RequestTransport} that uses a
  * {@link RequestBuilder}.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class DefaultRequestTransport implements RequestTransport {
   private static final String SERVER_ERROR = "Server Error";
 
@@ -57,7 +62,7 @@ public class DefaultRequestTransport implements RequestTransport {
 
   /**
    * Returns the current URL used by this transport.
-   * 
+   *
    * @return the URL as a String
    * @see #setRequestUrl(String)
    */
@@ -83,7 +88,7 @@ public class DefaultRequestTransport implements RequestTransport {
 
   /**
    * Override the default URL used by this transport.
-   * 
+   *
    * @param url a String URL
    * @see #getRequestUrl()
    */
@@ -93,7 +98,7 @@ public class DefaultRequestTransport implements RequestTransport {
 
   /**
    * Override to change the headers sent in the HTTP request.
-   * 
+   *
    * @param builder a {@link RequestBuilder} instance
    */
   protected void configureRequestBuilder(RequestBuilder builder) {
@@ -105,7 +110,7 @@ public class DefaultRequestTransport implements RequestTransport {
   /**
    * Constructs a {@link RequestBuilder} using the {@link RequestBuilder#POST}
    * method sent to the URL returned from {@link #getRequestUrl()}.
-   * 
+   *
    * @return a {@link RequestBuilder} instance
    */
   protected RequestBuilder createRequestBuilder() {
@@ -116,7 +121,7 @@ public class DefaultRequestTransport implements RequestTransport {
    * Creates a RequestCallback that maps the HTTP response onto the
    * {@link com.google.gwt.requestfactory.shared.RequestTransport.TransportReceiver
    * TransportReceiver} interface.
-   * 
+   *
    * @param receiver a {@link TransportReceiver}
    * @return a {@link RequestCallback} instance
    */

@@ -31,7 +31,14 @@ import com.google.gwt.autobean.shared.impl.EnumMap;
  * This implementation is written assuming that the AutoBeanFactory and
  * associated declarations will validate if compiled and used with the
  * AutoBeanFactoyModel.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
+ * @deprecated Replaced by {@link com.google.web.bindery.autobean.vm.AutoBeanFactorySource}
  */
+@Deprecated
 public class AutoBeanFactoryMagic {
   /*
    * NB: This implementation is excessively dynamic, however the inability to

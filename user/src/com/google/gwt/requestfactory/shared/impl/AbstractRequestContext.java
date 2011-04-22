@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -66,14 +66,24 @@ import java.util.Set;
 
 /**
  * Base implementations for RequestContext services.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public abstract class AbstractRequestContext implements RequestContext,
     EntityCodex.EntitySource {
   /**
    * Allows the payload dialect to be injected into the AbstractRequestContext
    * without the caller needing to be concerned with how the implementation
    * object is instantiated.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public enum Dialect {
     STANDARD {
       @Override
@@ -90,6 +100,12 @@ public abstract class AbstractRequestContext implements RequestContext,
     abstract DialectImpl create(AbstractRequestContext context);
   }
 
+  /*
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
+   */
+  @Deprecated
   interface DialectImpl {
 
     void addInvocation(AbstractRequest<?> request);
@@ -515,7 +531,7 @@ public abstract class AbstractRequestContext implements RequestContext,
   public boolean isChanged() {
     /*
      * NB: Don't use the presence of ephemeral objects for this test.
-     * 
+     *
      * Diff the objects until one is found to be different. It's not just a
      * simple flag-check because of the possibility of "unmaking" a change, per
      * the JavaDoc.
@@ -730,7 +746,7 @@ public abstract class AbstractRequestContext implements RequestContext,
 
   /**
    * Create a new EntityProxy from a snapshot in the return payload.
-   * 
+   *
    * @param id the EntityProxyId of the object
    * @param returnRecord the JSON map containing property/value pairs
    * @param operations the WriteOperation eventns to broadcast over the EventBus
@@ -808,7 +824,7 @@ public abstract class AbstractRequestContext implements RequestContext,
 
   /**
    * Get-or-create method for synthetic ids.
-   * 
+   *
    * @see #syntheticIds
    */
   private <Q extends BaseProxy> SimpleProxyId<Q> allocateSyntheticId(

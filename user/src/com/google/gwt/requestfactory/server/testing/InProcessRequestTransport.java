@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import com.google.gwt.requestfactory.shared.ServerFailure;
  * A RequesTransports that calls a {@link SimpleRequestProcessor}. This test can
  * be used for end-to-end tests of RequestFactory service methods in non-GWT
  * test suites.
- * 
+ *
  * <pre>
  * ServiceLayer serviceLayer = ServiceLayer.create();
  * SimpleRequestProcessor processor = new SimpleRequestProcessor(serviceLayer);
@@ -31,13 +31,18 @@ import com.google.gwt.requestfactory.shared.ServerFailure;
  * MyRequestFactory f = RequestFactoryMagic.create(MyRequestFactory.class);
  * f.initialize(eventBus, new InProcessRequestTransport(processor));
  * </pre>
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see RequestFactoryMagic
  * @see com.google.gwt.requestfactory.server.ServiceLayer#create(com.google.gwt.requestfactory.server.ServiceLayerDecorator...)
  *      ServiceLayer.create()
  * @see com.google.gwt.event.shared.SimpleEventBus SimpleEventBus
  * @see SimpleRequestProcessor
  */
+@Deprecated
 public class InProcessRequestTransport implements RequestTransport {
   private static final boolean DUMP_PAYLOAD = Boolean.getBoolean("gwt.rpc.dumpPayload");
   private final SimpleRequestProcessor processor;

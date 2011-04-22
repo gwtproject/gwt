@@ -24,9 +24,14 @@ import java.lang.reflect.Modifier;
 /**
  * Breakout of method types that an AutoBean shim interface can implement. The
  * order of the values of the enum is important.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see com.google.gwt.autobean.rebind.model.JBeanMethod
  */
+@Deprecated
 public enum BeanMethod {
   /**
    * Methods defined in Object.

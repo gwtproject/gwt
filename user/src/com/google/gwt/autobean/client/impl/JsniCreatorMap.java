@@ -22,7 +22,12 @@ import com.google.gwt.core.client.JsArray;
 /**
  * Used in prod-mode code to create instances of generated AutoBean subtypes via
  * JSNI references to their constructor methods.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public final class JsniCreatorMap extends JavaScriptObject {
   public static JsniCreatorMap createMap() {
     return JavaScriptObject.createObject().cast();

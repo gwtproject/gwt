@@ -20,9 +20,14 @@ import java.lang.reflect.Method;
 
 /**
  * Dynamic implementation of an AutoBean's simple peer object.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the type of interface the shim allows access to
  */
+@Deprecated
 class SimpleBeanHandler<T> implements InvocationHandler {
   private final ProxyAutoBean<T> bean;
 

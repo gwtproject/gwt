@@ -30,9 +30,14 @@ import java.beans.Introspector;
 /**
  * Common utility code for matching {@link JMethod} and against bean-style
  * accessor semantics.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see com.google.gwt.autobean.server.impl.BeanMethod
  */
+@Deprecated
 public enum JBeanMethod {
   GET {
     @Override

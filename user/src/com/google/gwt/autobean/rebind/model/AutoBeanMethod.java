@@ -30,11 +30,21 @@ import java.util.Map;
 
 /**
  * Describes a method implemented by an AutoBean.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanMethod {
   /**
    * Creates AutoBeanMethods.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class Builder {
     private AutoBeanMethod toReturn = new AutoBeanMethod();
 

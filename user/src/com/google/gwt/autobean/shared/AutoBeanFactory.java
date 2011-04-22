@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * Simple interfaces, consisting of only getters and setters, can be constructed
  * with a no-arg method. Non-simple interfaces must provide a delegate object to
  * implement a non-simple interface or use a {@link Category}.
- * 
+ *
  * <pre>
  * interface MyFactory extends AutoBeanFactory {
  *   // A factory method for a simple bean
@@ -37,11 +37,16 @@ import java.lang.annotation.Target;
  *   AutoBean&lt;ArbitraryInterface> wrapper(ArbitraryInterface delegate);
  * }
  * </pre>
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @see <a
  *      href="http://code.google.com/p/google-web-toolkit/wiki/AutoBean">AutoBean
  *      wiki page</a>
  */
+@Deprecated
 public interface AutoBeanFactory {
   /**
    * Allows non-property methods on simple bean implementations when applied.
@@ -73,7 +78,12 @@ public interface AutoBeanFactory {
    *   AutoBean&lt;HasMethod> hasMethod();
    * }
    * </pre>
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   @Documented
   @Retention(RetentionPolicy.RUNTIME)
   @Target(ElementType.TYPE)
@@ -84,7 +94,12 @@ public interface AutoBeanFactory {
   /**
    * The types specified by this annotation will not be wrapped by an AutoBean
    * when returned from an AutoBean-controlled method.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   @Retention(RetentionPolicy.RUNTIME)
   @Target(ElementType.TYPE)
   public @interface NoWrap {

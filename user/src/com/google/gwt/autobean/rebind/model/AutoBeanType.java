@@ -25,12 +25,22 @@ import java.util.List;
 
 /**
  * Describes an AutoBean.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanType {
 
   /**
    * Builder.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class Builder {
     private boolean affectedByCategories;
     private String beanSimpleSourceName;

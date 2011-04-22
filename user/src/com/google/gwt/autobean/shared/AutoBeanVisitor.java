@@ -20,12 +20,22 @@ import java.util.Map;
 
 /**
  * Allows traversal of an AutoBean object graph.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanVisitor {
   /**
    * A PropertyContext that describes the parameterization of the Collection
    * being visited.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public interface CollectionPropertyContext extends PropertyContext {
     /**
      * Returns the collection's element type.
@@ -37,14 +47,24 @@ public class AutoBeanVisitor {
 
   /**
    * Reserved for future expansion to avoid API breaks.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public interface Context {
   }
 
   /**
    * A PropertyContext that describes the parameterization of the Map being
    * visited.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public interface MapPropertyContext extends PropertyContext {
     /**
      * Returns the map's key type.
@@ -85,7 +105,12 @@ public class AutoBeanVisitor {
    *   endVisitParameter();
    * endVisitType(Map.class);
    * </pre>
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class ParameterizationVisitor {
     /**
      * Called when finished with a type parameter.
@@ -120,7 +145,12 @@ public class AutoBeanVisitor {
 
   /**
    * Allows properties to be reset.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public interface PropertyContext {
     /**
      * Allows deeper inspection of the declared parameterization of the

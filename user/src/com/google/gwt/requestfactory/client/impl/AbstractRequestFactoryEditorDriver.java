@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,16 +40,26 @@ import java.util.List;
 
 /**
  * Contains utility methods for top-level driver implementations.
- * 
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <R> the type being edited
  * @param <E> the type of Editor
  */
+@Deprecated
 public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
     extends BaseEditorDriver<R, E> implements RequestFactoryEditorDriver<R, E> {
 
   /**
    * Adapts a RequestFactory Violation object to the SimpleViolation interface.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   static class SimpleViolationAdapter extends SimpleViolation {
     private final Violation v;
 
@@ -79,7 +89,12 @@ public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
   /**
    * Provides a source of SimpleViolation objects based on RequestFactory's
    * simplified Violation interface.
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   static class ViolationIterable implements Iterable<SimpleViolation> {
 
     private final Iterable<Violation> violations;

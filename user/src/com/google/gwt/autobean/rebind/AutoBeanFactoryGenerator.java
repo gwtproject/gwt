@@ -58,7 +58,12 @@ import java.util.Map;
 
 /**
  * Generates implementations of AutoBeanFactory.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanFactoryGenerator extends Generator {
 
   private GeneratorContext context;

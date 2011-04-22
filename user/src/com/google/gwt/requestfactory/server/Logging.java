@@ -1,19 +1,18 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.gwt.requestfactory.server;
 
 import com.google.gwt.logging.server.RemoteLoggingServiceUtil;
@@ -26,7 +25,12 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Server side object that handles log messages sent by
  * {@link com.google.gwt.requestfactory.client.RequestFactoryLogHandler}.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class Logging {
 
   private static StackTraceDeobfuscator deobfuscator = new StackTraceDeobfuscator(
@@ -34,7 +38,7 @@ public class Logging {
 
   /**
    * Logs a message.
-   * 
+   *
    * @param serializedLogRecordString a json serialized LogRecord, as provided by
    * {@link com.google.gwt.logging.client.JsonLogRecordClientUtil.logRecordAsJsonObject(LogRecord)}
    * @throws RemoteLoggingException if logging fails
@@ -58,7 +62,7 @@ public class Logging {
   /**
    * This function is only for server side use which is why it's not in the
    * LoggingRequest interface.
-   * 
+   *
    * @param dir a directory, specified as a String
    */
   public static void setSymbolMapsDirectory(String dir) {
@@ -71,7 +75,7 @@ public class Logging {
 
   /**
    * Returns the id of this instance.
-   * 
+   *
    * @return a String id
    * @see #setId(String)
    */
@@ -81,7 +85,7 @@ public class Logging {
 
   /**
    * Returns the version of this instance.
-   * 
+   *
    * @return an Integer version number
    * @see #setVersion(Integer)
    */
@@ -91,7 +95,7 @@ public class Logging {
 
   /**
    * Sets the id on this instance.
-   * 
+   *
    * @param id a String id
    * @see #getId()
    */
@@ -101,7 +105,7 @@ public class Logging {
 
   /**
    * Sets the version of this instance.
-   * 
+   *
    * @param version an Integer version number
    * @see #getVersion()
    */

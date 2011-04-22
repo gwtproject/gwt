@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,7 +21,12 @@ package com.google.gwt.requestfactory.shared;
  * This error reporting mechanism is adequate at best. When RequestFactory is
  * extended to handle polymorphic types, this class will likely be replaced with
  * something more expressive.
+ *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class ServerFailure {
   private final String message;
   private final String stackTraceString;
@@ -44,7 +49,7 @@ public class ServerFailure {
 
   /**
    * Constructs a ServerFailure object.
-   * 
+   *
    * @param message a String containing the failure message
    * @param exceptionType a String containing the exception type
    * @param stackTraceString a String containing the stack trace
@@ -59,7 +64,7 @@ public class ServerFailure {
 
   /**
    * Return the exception type.
-   * 
+   *
    * @return the exception type as a String
    */
   public String getExceptionType() {
@@ -68,7 +73,7 @@ public class ServerFailure {
 
   /**
    * Return the failure message.
-   * 
+   *
    * @return the message as a String
    */
   public String getMessage() {
@@ -77,7 +82,7 @@ public class ServerFailure {
 
   /**
    * Return the failure stack trace.
-   * 
+   *
    * @return the stack trace as a String
    */
   public String getStackTraceString() {
@@ -87,7 +92,7 @@ public class ServerFailure {
   /**
    * Return true if this is a fatal error. The default implementation of
    * {@link Receiver#onFailure} throws a runtime exception for fatal failures.
-   * 
+   *
    * @return whether this is a fatal failure
    */
   public boolean isFatal() {

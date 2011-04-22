@@ -31,8 +31,13 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * <p>
  * TODO: use ProxyId rather than an empty proxy
  *
+ * <p><span style='color:red'>RequestFactory has moved to
+ * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <P> the type of the proxy
  */
+@Deprecated
 public class EntityProxyChange<P extends EntityProxy> extends
     GwtEvent<EntityProxyChange.Handler<P>> {
 
@@ -40,7 +45,12 @@ public class EntityProxyChange<P extends EntityProxy> extends
    * Implemented by methods that handle EntityProxyChange events.
    *
    * @param <P> the proxy type
+   *
+   * <p><span style='color:red'>RequestFactory has moved to
+   * <code>com.google.web.bindery.requestfactory</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public interface Handler<P extends EntityProxy> extends EventHandler {
     /**
      * Called when an {@link EntityProxyChange} event is fired.

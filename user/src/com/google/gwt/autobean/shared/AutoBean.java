@@ -24,9 +24,14 @@ import java.lang.annotation.Target;
 /**
  * A controller for an implementation of a bean interface. Instances of
  * AutoBeans are obtained from an {@link AutoBeanFactory}.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the type of interface that will be wrapped.
  */
+@Deprecated
 public interface AutoBean<T> {
   /**
    * An annotation that allows inferred property names to be overridden.
@@ -34,7 +39,12 @@ public interface AutoBean<T> {
    * This annotation is asymmetric, applying it to a getter will not affect the
    * setter. The asymmetry allows existing users of an interface to read old
    * {@link AutoBeanCodex} messages, but write new ones.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   @Documented
   @Retention(RetentionPolicy.RUNTIME)
   @Target(value = {ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})

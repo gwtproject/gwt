@@ -29,13 +29,23 @@ import java.util.Set;
 
 /**
  * Basic implementation.
- * 
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
+ *
  * @param <T> the wrapper type
  */
+@Deprecated
 public abstract class AbstractAutoBean<T> implements AutoBean<T> {
   /**
    * Used to avoid cycles when visiting.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class OneShotContext implements Context {
     private final Set<AbstractAutoBean<?>> seen = new HashSet<AbstractAutoBean<?>>();
 

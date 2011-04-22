@@ -20,11 +20,21 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 
 /**
  * Represents a single method in an AutoBeanFactory interface.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class AutoBeanFactoryMethod {
   /**
    * Builds AutoBeanFactoryMethods.
+   *
+   * <p><span style='color:red'>AutoBeans has moved to
+   * <code>com.google.web.bindery.autobeans</code>.  This package will be
+   * removed in a future version of GWT.</span></p>
    */
+  @Deprecated
   public static class Builder {
     private AutoBeanFactoryMethod toReturn = new AutoBeanFactoryMethod();
 

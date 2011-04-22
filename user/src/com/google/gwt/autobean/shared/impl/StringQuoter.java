@@ -28,7 +28,12 @@ import java.util.Locale;
 
 /**
  * This class has a super-source version with a client-only implementation.
+ *
+ * <p><span style='color:red'>AutoBeans has moved to
+ * <code>com.google.web.bindery.autobeans</code>.  This package will be
+ * removed in a future version of GWT.</span></p>
  */
+@Deprecated
 public class StringQuoter {
   private static final String ISO8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSz";
   private static final DateFormat ISO8601 = new SimpleDateFormat(

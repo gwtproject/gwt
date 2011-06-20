@@ -203,7 +203,7 @@
     </outofdate>
   </target>
 
-  <target name="build" depends="precompile.modules"
+  <target name="build" depends="compile"
       description="Build and package this project">
     <mkdir dir="${gwt.build.lib}" />
     <gwt.jar>

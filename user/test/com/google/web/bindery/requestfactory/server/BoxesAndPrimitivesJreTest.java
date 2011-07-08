@@ -24,6 +24,7 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.shared.SkipInterfaceValidation;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -32,6 +33,7 @@ import java.util.logging.Logger;
  * A JRE version of {@link BoxesAndPrimitivesTest} with additional validation
  * tests.
  */
+@SkipInterfaceValidation
 public class BoxesAndPrimitivesJreTest extends BoxesAndPrimitivesTest {
 
   @Service(ServiceImpl.class)

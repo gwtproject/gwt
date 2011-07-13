@@ -1,0 +1,11 @@
+<project name="mobilewebapp" default="source" basedir=".">
+  <property name="sample.root" value="mobilewebapp" />
+  <property name="sample.module" value="MobileWebApp" />
+  <property name="sample.path" value="src/main/java" />
+  <import file="../common.ant.xml" />
+  <!-- these are after the common.ant.xml so they have gwt.tools... -->
+  <path id="sample.extraclasspath">
+  </path>
+  <fileset id="sample.server.libs" dir="${gwt.tools.lib}">
+  </fileset>
+</project>

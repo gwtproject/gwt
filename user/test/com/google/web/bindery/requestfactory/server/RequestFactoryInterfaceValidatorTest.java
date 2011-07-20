@@ -42,6 +42,7 @@ import java.util.logging.Logger;
 /**
  * JRE tests for {@link RequestFactoryInterfaceValidator}.
  */
+@SkipInterfaceValidation
 public class RequestFactoryInterfaceValidatorTest extends TestCase {
   static class ClinitEntity {
     static ClinitEntity findClinitEntity(@SuppressWarnings("unused") String key) {

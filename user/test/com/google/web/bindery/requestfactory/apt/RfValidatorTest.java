@@ -154,6 +154,10 @@ public class RfValidatorTest extends TestCase {
    */
   private void testGeneratedMessages(boolean clientOnly, Class<?>... classes) throws IOException {
     JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    if (compiler == null) {
+      // This test is being run without a full JDK
+      return;
+    }
 
     // Don't spray files in random locations
     File tempFile = File.createTempFile(RfValidatorTest.class.getSimpleName(), ".jar");

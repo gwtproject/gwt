@@ -17,15 +17,9 @@ package com.google.gwt.aria.client;
 // This is auto-generated code.  Do not manually edit! //
 /////////////////////////////////////////////////////////
 
-
 /**
- * Defines additional attributes that are interpreted by readers. Such an attribute is
- * 'tabindex' which indicates the tab order position of the element.
+ * Interface that is and needs to be implemented by ALL non primitive attribute types
  */
-public final class ExtraAttribute {
-  public static final Attribute<Integer> TABINDEX =
-      new PrimitiveTypeAttribute<Integer>("tabIndex", "");
-
-  private ExtraAttribute() {
-  }
+public interface AriaAttributeType {
+  String getAriaValue();
 }

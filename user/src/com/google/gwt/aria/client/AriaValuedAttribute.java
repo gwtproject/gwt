@@ -17,15 +17,21 @@ package com.google.gwt.aria.client;
 // This is auto-generated code.  Do not manually edit! //
 /////////////////////////////////////////////////////////
 
-
 /**
- * Defines additional attributes that are interpreted by readers. Such an attribute is
- * 'tabindex' which indicates the tab order position of the element.
+ *  ARIA specific type attribute.
  */
-public final class ExtraAttribute {
-  public static final Attribute<Integer> TABINDEX =
-      new PrimitiveTypeAttribute<Integer>("tabIndex", "");
+class AriaValuedAttribute<T extends AriaAttributeType> extends Attribute<T> {
+  public AriaValuedAttribute(String name, String defaultValue) {
+    super(name, defaultValue);
+  }
 
-  private ExtraAttribute() {
+  public AriaValuedAttribute(String name) {
+    super(name);
+  }
+
+  @Override
+  // TODO (atincheva) : revert once we clean client code
+  protected String getSingleValue(Object value) {
+    return ((AriaAttributeType) value).getAriaValue();
   }
 }

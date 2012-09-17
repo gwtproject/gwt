@@ -52,9 +52,11 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -69,6 +71,7 @@ import javax.validation.Payload;
 import javax.validation.UnexpectedTypeException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import javax.validation.groups.Default;
 import javax.validation.metadata.BeanDescriptor;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
@@ -434,6 +437,10 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
           Class<?> valueType = valueMethod.getReturnType();
           if (valueType.isArray()
               && Annotation.class.isAssignableFrom(valueType.getComponentType())) {
+            if (Modifier.isAbstract(valueMethod.getModifiers())) {
+              // handle edge case where interface is marked "abstract"
+              valueMethod.setAccessible(true);
+            }
             Annotation[] valueAnnotions = (Annotation[]) valueMethod.invoke(annotation);
             for (Annotation annotation2 : valueAnnotions) {
               if (expectedAnnotation.equals(annotation2)) {
@@ -480,6 +487,28 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
 
   private boolean hasValid(PropertyDescriptor p, boolean useField) {
     return getAnnotation(p, useField, Valid.class) != null;
+  }
+
+  /**
+   * Handles returning an {@link ElementType} for a given property constraint.
+   * In the situation where a property has the same constraint type applied to it twice
+   * (once via a field and once via a method), then {@link ElementType#FIELD} is returned first
+   * and {@link ElementType#METHOD} is returned after. This should be safe because the bean
+   * introspection always returns field annotations before getter annotations.
+   */
+  private ElementType inferElementType(PropertyDescriptor propertyDescriptor,
+      boolean seenBefore) {
+    if (beanHelper.hasField(propertyDescriptor)) {
+      if (beanHelper.hasGetter(propertyDescriptor)) {
+        // this property should be validated twice
+        if (seenBefore) {
+          // the FIELD type has already been returned the first time
+          return ElementType.METHOD;
+        }
+      }
+      return ElementType.FIELD;
+    }
+    return ElementType.METHOD;
   }
 
   private boolean isPropertyConstrained(BeanHelper helper, PropertyDescriptor p) {
@@ -592,6 +621,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
 
   private void writeConstraintDescriptor(SourceWriter sw,
       ConstraintDescriptor<? extends Annotation> constraint,
+      ElementType elementType,
       String constraintDescripotorVar) throws UnableToCompleteException {
     Class<? extends Annotation> annotationType =
         constraint.getAnnotation().annotationType();
@@ -600,7 +630,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     int count = 0;
     for (ConstraintDescriptor<?> composingConstraint :
         constraint.getComposingConstraints()) {
-      writeConstraintDescriptor(sw, composingConstraint,
+      writeConstraintDescriptor(sw, composingConstraint, elementType,
           constraintDescripotorVar + "_" + count++);
     }
 
@@ -642,9 +672,15 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
         constraint.getAttributes().entrySet()) {
       // .put(key, value)
       sw.print(".put(");
-      sw.print(asLiteral(entry.getKey()));
+      String key = entry.getKey();
+      sw.print(asLiteral(key));
       sw.print(", ");
-      sw.print(asLiteral(entry.getValue()));
+      Object value = entry.getValue();
+      // Add the Default group if it is not already present
+      if ("groups".equals(key) && value instanceof Class[] && ((Class[])value).length == 0) {
+        value = new Class[] { Default.class };
+      }
+      sw.print(asLiteral(value));
       sw.println(")");
     }
 
@@ -682,6 +718,11 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     sw.print(".setReportAsSingleViolation(");
     sw.print(Boolean.valueOf(constraint.isReportAsSingleViolation())
         .toString());
+    sw.println(")");
+
+    // .setElementType(elementType)
+    sw.print(".setElementType(");
+    sw.print(asLiteral(elementType));
     sw.println(")");
 
     // .build();
@@ -732,9 +773,13 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     for (PropertyDescriptor p :
          beanHelper.getBeanDescriptor().getConstrainedProperties()) {
       int count = 0;
+      // Check if the same annotation is applied to the same property twice (getter and field)
+      Set<Object> seen = Sets.newHashSet();
       for (ConstraintDescriptor<?> constraint : p.getConstraintDescriptors()) {
         writeConstraintDescriptor(sw, constraint,
+            inferElementType(p, seen.contains(constraint.getAnnotation())),
             constraintDescriptorVar(p.getPropertyName(), count++));
+        seen.add(constraint.getAnnotation());
       }
       writePropertyDescriptor(sw, p);
       if (p.isCascaded()) {
@@ -748,7 +793,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     int count = 0;
     for (ConstraintDescriptor<?> constraint :
         beanHelper.getBeanDescriptor().getConstraintDescriptors()) {
-      writeConstraintDescriptor(sw, constraint,
+      writeConstraintDescriptor(sw, constraint, ElementType.TYPE,
           constraintDescriptorVar("this", count++));
     }
 
@@ -974,6 +1019,9 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     sw.println(beanHelper.getTypeCanonicalName() + " object,");
     sw.println("Class<?>... groups) {");
     sw.outdent();
+    
+    // groups = addDefaultGroupWhenEmpty(groups);
+    sw.println("groups = addDefaultGroupWhenEmpty(groups);");
 
     // try {
     sw.println("try {");
@@ -1531,6 +1579,9 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     sw.print(p.getPropertyName());
     sw.println("\");");
 
+    // groups = addDefaultGroupWhenEmpty(groups);
+    sw.println("groups = addDefaultGroupWhenEmpty(groups);");
+
     // TODO(nchalko) move this out of here to the Validate method
     if (p.isCascaded() && hasValid(p, useField)) {
 
@@ -1572,20 +1623,32 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     // It is possible for an annotation with the exact same values to be set on
     // both the field and the getter.
     // Keep track of the ones we have used to make sure we don't duplicate.
-    // It doesn't matter which one we use because they have exactly the same
-    // values.
     Set<Object> includedAnnotations = Sets.newHashSet();
     int count = 0;
     for (ConstraintDescriptor<?> constraint : p.getConstraintDescriptors()) {
       Object annotation = constraint.getAnnotation();
-      if (!includedAnnotations.contains(annotation)
-          && hasMatchingAnnotation(p, useField, constraint)) {
+      if (hasMatchingAnnotation(p, useField, constraint)) {
+        String constraintDescriptorVar = constraintDescriptorVar(p.getPropertyName(), count);
+        if (!includedAnnotations.contains(annotation)) {
+          if (useField) {
+            writeValidateConstraint(sw, p, elementClass, constraint, constraintDescriptorVar);
+          } else {
+            // The annotation hasn't been looked at twice (yet) and we are validating a getter
+            // Write the call if only the getter has this constraint applied to it
+            boolean hasField = beanHelper.hasField(p);
+            if (!hasField ||
+                (hasField && !hasMatchingAnnotation(p, true, constraint))) {
+              writeValidateConstraint(sw, p, elementClass, constraint, constraintDescriptorVar);
+            }
+          }
+        } else {
+          // The annotation has been looked at once already during this validate property call
+          // so we know the field and the getter are both annotated with the same constraint.
+          if (!useField) {
+            writeValidateConstraint(sw, p, elementClass, constraint, constraintDescriptorVar);
+          }
+        }
         includedAnnotations.add(annotation);
-        String constraintDescriptorVar = constraintDescriptorVar(
-            p.getPropertyName(), count);
-
-        writeValidateConstraint(sw, p, elementClass, constraint,
-            constraintDescriptorVar);
       }
       count++;
     }
@@ -1608,6 +1671,9 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     sw.println("Object value,");
     sw.println("Class<?>... groups) {");
     sw.outdent();
+
+    // groups = addDefaultGroupWhenEmpty(groups);
+    sw.println("groups = addDefaultGroupWhenEmpty(groups);");
 
     // try {
     sw.println("try {");

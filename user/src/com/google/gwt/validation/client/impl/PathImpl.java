@@ -23,9 +23,6 @@ import java.util.List;
 import javax.validation.Path;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * An immutable GWT safe implementation of {@link Path}.
  */
 public final class PathImpl implements Path, Serializable {
@@ -36,7 +33,7 @@ public final class PathImpl implements Path, Serializable {
 
   /**
    * Creates a new path containing only the root (<code>null</code>)
-   * {@link Node}.
+   * {@link javax.validation.Path.Node Node}.
    */
   public PathImpl() {
     nodes.add(NodeImpl.ROOT_NODE);
@@ -47,6 +44,10 @@ public final class PathImpl implements Path, Serializable {
       nodes.addAll(originalPath.nodes);
     }
     nodes.add(node);
+  }
+
+  private PathImpl(List<Node> nodes) {
+    this.nodes.addAll(nodes);
   }
 
   /**
@@ -65,7 +66,7 @@ public final class PathImpl implements Path, Serializable {
    * the existing path.
    *
    * @param name
-   * @param key
+   * @param index
    * @return The new path with appended node.
    */
   public PathImpl appendIndex(String name, int index) {
@@ -107,11 +108,26 @@ public final class PathImpl implements Path, Serializable {
     return this.nodes.equals(that.nodes);
   }
 
+  public Node getLeafNode() {
+    return nodes.get(nodes.size() - 1);
+  }
+
+  public PathImpl getPathWithoutLeafNode() {
+    List<Node> nodesCopy = new ArrayList<Node>(nodes);
+    PathImpl path = this;
+    if (!nodesCopy.isEmpty()) {
+      nodesCopy.remove(nodesCopy.size() - 1);
+      path = new PathImpl(nodesCopy);
+    }
+    return path;
+  }
+
   @Override
   public int hashCode() {
     return nodes.hashCode();
   }
 
+  @Override
   public Iterator<Node> iterator() {
     return nodes.iterator();
   }

@@ -51,7 +51,11 @@ public:
   static JSBool resolve(JSContext* ctx, JSObject* obj, jsval id);
   static JSBool convert(JSContext* cx, JSObject* obj, JSType type, jsval* vp);
   static JSBool enumerate(JSContext* ctx, JSObject* obj, JSIterateOp op, jsval* statep, jsid* idp);
+#if GECKO_VERSION >= 14000
+  static void finalize(JSFreeOp* fop, JSObject* obj);
+#else
   static void finalize(JSContext* ctx, JSObject* obj);
+#endif //GECKO_VERSION
   static JSBool toString(JSContext* ctx, JSObject* obj, uintN argc, jsval* argv, jsval* rval);
   static JSBool call(JSContext* ctx, JSObject* obj, uintN argc, jsval* argv, jsval* rval);
 
@@ -59,6 +63,11 @@ public:
   static JSBool toString20(JSContext* ctx, uintN argc, jsval* vp);
   static JSBool call20(JSContext* ctx, uintN argc, jsval* vp);
 #endif //GECKO_VERSION
+#if GECKO_VERSION >= 15000
+  static JSBool getPropertyWrapper(JSContext* ctx, JSHandleObject obj, JSHandleId id, jsval *vp);
+  static JSBool setPropertyWrapper(JSContext* ctx, JSHandleObject obj, JSHandleId id,
+      JSBool strict, jsval *vp);
+#endif
 
 private:
   static SessionData* getSessionData(JSContext* ctx, JSObject* obj);

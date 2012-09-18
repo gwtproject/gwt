@@ -15,7 +15,8 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
+import com.google.gwt.validation.client.impl.metadata.BeanMetadata;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -28,9 +29,6 @@ import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * Abstract BeanDescriptor for use by generated {@link GwtBeanDescriptor}.
  * <p>
  * Subclasses are expected to call setDescriptorMap from the constructor.
@@ -142,6 +140,7 @@ public final class GwtBeanDescriptorImpl<T> implements GwtBeanDescriptor<T> {
     return clazz;
   }
 
+  
   @Override
   public boolean hasConstraints() {
     return !constraints.isEmpty();

@@ -15,7 +15,8 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
+import com.google.gwt.validation.client.impl.metadata.BeanMetadata;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,9 +26,7 @@ import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
+ * Describes a constrained bean property.
  */
 public final class PropertyDescriptorImpl implements PropertyDescriptor {
 

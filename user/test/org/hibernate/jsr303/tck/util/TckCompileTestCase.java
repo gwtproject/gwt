@@ -14,22 +14,21 @@
  * the License.
  */package org.hibernate.jsr303.tck.util;
 
+import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createFailOnErrorLogger;
+import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createGeneratorContext;
+import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createTestLogger;
+import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.getFullyQualifiedModuleName;
+
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.validation.rebind.BeanHelper;
-import com.google.gwt.validation.rebind.GwtSpecificValidatorGenerator;
+import com.google.gwt.validation.rebind.BeanHelperCache;
 import com.google.gwt.validation.rebind.ValidatorGenerator;
 
 import junit.framework.Assert;
-
-import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createFailOnErrorLogger;
-import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createGeneratorContext;
-import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.createTestLogger;
-import static org.hibernate.jsr303.tck.util.TckGeneratorTestUtils.getFullyQualifiedModuleName;
+import junit.framework.TestCase;
 
 import javax.validation.ValidationException;
 import javax.validation.Validator;
@@ -37,31 +36,24 @@ import javax.validation.Validator;
 /**
  * Abstract TestCase for TCK tests that are expected to fail to compile.
  */
-public abstract class TckCompileTestCase extends GWTTestCase {
+public abstract class TckCompileTestCase extends TestCase {
 
+  private BeanHelperCache cache;
   private StandardGeneratorContext context;
   private TreeLogger failOnErrorLogger;
-
-  protected TckCompileTestCase() {
-    super();
-  }
-
-  @Override
-  public final String getModuleName() {
-    return null; // Run as JRE tests
-  }
+  private Class<?>[] validGroups;
 
   protected void assertBeanValidatorFailsToCompile(
       Class<? extends Validator> validatorClass, Class<?> beanType,
       Class<? extends ValidationException> expectedException,
       String expectedMessage) throws UnableToCompleteException {
-    ValidatorGenerator generator = new ValidatorGenerator();
+    ValidatorGenerator generator = new ValidatorGenerator(cache, validGroups);
     generator.generate(failOnErrorLogger, context,
         validatorClass.getCanonicalName());
     context.finish(failOnErrorLogger);
 
     // Now create the validator that is going to fail
-    GwtSpecificValidatorGenerator specificGenerator = new GwtSpecificValidatorGenerator();
+    ValidatorGenerator specificGenerator = new ValidatorGenerator(cache, validGroups);
     String beanHelperName = createBeanHelper(beanType);
     assertUnableToComplete(expectedException, expectedMessage,
         specificGenerator, beanHelperName);
@@ -71,23 +63,18 @@ public abstract class TckCompileTestCase extends GWTTestCase {
       Class<? extends Validator> validatorClass,
       Class<? extends ValidationException> expectedException,
       String expectedMessage) {
-    ValidatorGenerator generator = new ValidatorGenerator();
+    ValidatorGenerator generator = new ValidatorGenerator(cache, validGroups);
     assertUnableToComplete(expectedException, expectedMessage, generator,
         validatorClass.getCanonicalName());
   }
 
   @Override
-  protected void gwtSetUp() throws Exception {
-    super.gwtSetUp();
-    BeanHelper.clearBeanHelpersForTests();
+  protected void setUp() throws Exception {
+    super.setUp();
+    cache = new BeanHelperCache();
     failOnErrorLogger = createFailOnErrorLogger();
     context = createGeneratorContext(getTckTestModuleName(), failOnErrorLogger);
-  }
-
-  @Override
-  protected void gwtTearDown() throws Exception {
-    BeanHelper.clearBeanHelpersForTests();
-    super.gwtTearDown();
+    validGroups = new Class<?>[]{ };
   }
 
   private void assertUnableToComplete(
@@ -107,7 +94,7 @@ public abstract class TckCompileTestCase extends GWTTestCase {
 
   private String createBeanHelper(Class<?> beanType)
       throws UnableToCompleteException {
-    return BeanHelper.createBeanHelper(beanType, failOnErrorLogger, context)
+    return cache.createHelper(beanType, failOnErrorLogger, context)
         .getFullyQualifiedValidatorName();
   }
 

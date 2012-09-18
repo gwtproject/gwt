@@ -15,7 +15,7 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,9 +29,6 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * Base methods for implementing {@link Validator} in GWT.
  * <p>
  * All methods that do not need to be generated go here.
@@ -46,7 +43,7 @@ public abstract class AbstractGwtValidator implements Validator {
 
   /**
    * Creates a validator initialized with the default group inheritance map.
-   * @see #AbstractGwtValidator(ValidationGroups)
+   * @see #AbstractGwtValidator(ValidationGroupsMetadata)
    */
   public AbstractGwtValidator() {
     this(ValidationGroupsMetadata.builder().build());

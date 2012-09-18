@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN"
-  "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd">
 <!--
   Copyright 2010 Google Inc.
 
@@ -31,10 +29,6 @@
     class="com.google.gwt.validation.client.GwtMessageInterpolator">
     <when-type-is class="javax.validation.MessageInterpolator" />
   </replace-with>
-  <replace-with
-    class="com.google.gwt.validation.client.GwtTraversableResolver">
-    <when-type-is class="javax.validation.TraversableResolver" />
-  </replace-with>
 
   <replace-with
     class="com.google.gwt.validation.client.GwtValidationProviderResolver">
@@ -49,13 +43,12 @@
     <when-type-is class="javax.validation.spi.ValidationProvider" />
   </replace-with>
 
-  <!-- Generators -->
+  <!-- Generator -->
   <generate-with class="com.google.gwt.validation.rebind.ValidatorGenerator">
-    <when-type-assignable class="javax.validation.Validator" />
-  </generate-with>
-  <generate-with
-    class="com.google.gwt.validation.rebind.GwtSpecificValidatorGenerator">
-    <when-type-assignable
-      class="com.google.gwt.validation.client.impl.GwtSpecificValidator" />
+    <any>
+      <when-type-assignable class="javax.validation.Validator" />
+      <when-type-assignable
+        class="com.google.gwt.validation.client.impl.GwtSpecificValidator" />
+    </any>
   </generate-with>
 </module>

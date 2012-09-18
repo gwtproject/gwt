@@ -27,6 +27,7 @@ public class AttributeTest extends GWTTestCase {
   private Attribute<Boolean> attribute2;
   private Attribute<String> attribute3;
   private Attribute<RelevantValue> attribute4;
+  private Attribute<Id> attribute5;
 
   public void testSetGetRemove_booleanValue() {
     attribute2.setDefault(div);
@@ -58,6 +59,20 @@ public class AttributeTest extends GWTTestCase {
     assertEquals(RelevantValue.REMOVALS.getAriaValue(), attribute4.get(div));
   }
 
+  public void testSetGetRemove_idrefValue() {
+    attribute5.set(div, Id.of("1"), Id.of("2"));
+    assertEquals("1 2", attribute5.get(div));
+    attribute5.remove(div);
+    assertEquals("", attribute5.get(div));
+
+    Element ref1 = Document.get().createDivElement();
+    ref1.setId("ref1");
+    Element ref2 = Document.get().createDivElement();
+    ref2.setId("ref2");
+    attribute5.set(div, Id.of(ref1), Id.of(ref2));
+    assertEquals("ref1 ref2", attribute5.get(div));
+  }
+
   public void testSetDefaultValue_noSet() {
     try {
       attribute3.setDefault(div);
@@ -82,6 +97,7 @@ public class AttributeTest extends GWTTestCase {
     attribute2 = new PrimitiveValueAttribute<Boolean>("attr2", "true");
     attribute3 = new PrimitiveValueAttribute<String>("attr3");
     attribute4 = new AriaValueAttribute<RelevantValue>("attr4", "additions text");
+    attribute5 = new AriaValueAttribute<Id>("attr5", "");
   }
 
   @Override

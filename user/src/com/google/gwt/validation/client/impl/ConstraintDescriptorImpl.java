@@ -15,8 +15,6 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.ConstraintOrigin;
-
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.util.Arrays;
@@ -30,9 +28,6 @@ import javax.validation.Payload;
 import javax.validation.metadata.ConstraintDescriptor;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * A immutable GWT implementation of {@link ConstraintDescriptor}.
  * 
  * @param <T> the constraint annotation to describe.

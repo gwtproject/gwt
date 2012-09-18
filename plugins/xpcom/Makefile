@@ -24,7 +24,7 @@ ifeq ($(OS),mac)
 DEFAULT_FIREFOX_LIBS ?= /Applications/Firefox.app/Contents/MacOS
 RUN_PATH_FLAG = -executable_path
 DLL_SUFFIX = .dylib
-DLLFLAGS += -bundle $(ALLARCHCFLAGS) -mmacosx-version-min=10.5
+DLLFLAGS += -bundle $(ALLARCHCFLAGS) -mmacosx-version-min=10.5  -isysroot /Developer/SDKs/MacOSX10.5.sdk
 CFLAGS += $(ALLARCHCFLAGS)
 CXXFLAGS += $(ALLARCHCFLAGS)
 TARGET_PLATFORM = Darwin-gcc3
@@ -49,7 +49,7 @@ endif
 export FLAG32BIT
 
 ifeq ($(BROWSER),)
-$(warning Defaulting to FF3 build [set with BROWSER=ff3, ff3+, ff35, ff36, ff40, ff50, ff60, ff70, ff80, ff90, ff100, f110, ff120, ff130])
+$(warning Defaulting to FF3 build [set with BROWSER=ff3, ff3+, ff35, ff36, ff40, ff50, ff60, ff70, ff80, ff90, ff100, f110, ff120, ff130, ff140, ff150])
 BROWSER=ff3
 endif
 
@@ -166,7 +166,17 @@ ifeq ($(BROWSER),ff130)
 GECKO_VERSION   = 13.0.0
 CFLAGS += -DGECKO_VERSION=13000
 else
-$(error Unrecognized BROWSER of $(BROWSER) - options are ff3, ff3+, ff35, ff36, ff40, ff50, ff60, ff70, ff80, ff90, ff100, ff110, ff120, ff130)
+ifeq ($(BROWSER),ff140)
+GECKO_VERSION   = 14.0.0
+CFLAGS += -DGECKO_VERSION=14000
+else
+ifeq ($(BROWSER),ff150)
+GECKO_VERSION   = 15.0.0
+CFLAGS += -DGECKO_VERSION=15000
+else
+$(error Unrecognized BROWSER of $(BROWSER) - options are ff3, ff3+, ff35, ff36, ff40, ff50, ff60, ff70, ff80, ff90, ff100, ff110, ff120, ff130, ff140, ff150)
+endif
+endif
 endif
 endif
 endif
@@ -201,7 +211,8 @@ FF_DLL            = $(OBJ_OUTDIR)/libgwt_dev_$(BROWSER)$(DLL_SUFFIX)
 #FF_TYPELIB        = build/IOOPHM.xpt
 #FF_HEADER         = $(OBJ_OUTDIR)/IOOPHM.h
 FF_TYPELIB        = prebuilt/extension/components/IOOPHM.xpt
-FF_HEADER         = prebuilt/$(BROWSER)/include/IOOPHM.h
+FF_HEADERDIR      = prebuilt/$(BROWSER)/include
+FF_HEADER         = $(FF_HEADERDIR)/IOOPHM.h
 INSTALL_RDF       = $(EXTENSION_OUTDIR)/install.rdf
 
 SDK_PATH          = $(PLUGIN_SDKS)/gecko-sdks
@@ -268,6 +279,8 @@ linuxplatforms:
 	$(MAKE) lib BROWSER=ff110 ARCH=x86
 	$(MAKE) lib BROWSER=ff120 ARCH=x86
 	$(MAKE) lib BROWSER=ff130 ARCH=x86
+	$(MAKE) lib BROWSER=ff140 ARCH=x86
+	$(MAKE) lib BROWSER=ff150 ARCH=x86
 	$(MAKE) lib BROWSER=ff3 ARCH=x86_64
 	$(MAKE) lib BROWSER=ff3+ ARCH=x86_64
 	$(MAKE) lib BROWSER=ff35 ARCH=x86_64
@@ -282,6 +295,8 @@ linuxplatforms:
 	$(MAKE) lib BROWSER=ff110 ARCH=x86_64
 	$(MAKE) lib BROWSER=ff120 ARCH=x86_64
 	$(MAKE) lib BROWSER=ff130 ARCH=x86_64
+	$(MAKE) lib BROWSER=ff140 ARCH=x86_64
+	$(MAKE) lib BROWSER=ff150 ARCH=x86_64
 
 macplatforms:
 	$(MAKE) lib BROWSER=ff3
@@ -297,6 +312,7 @@ macplatforms:
 	$(MAKE) lib BROWSER=ff110
 	$(MAKE) lib BROWSER=ff120
 	$(MAKE) lib BROWSER=ff130
+	$(MAKE) lib BROWSER=ff140
 
 SRCS =	\
 		ExternalWrapper.cpp \
@@ -323,7 +339,10 @@ $(INSTALLER_XPI): $(FF_TYPELIB) $(EXTENSION_OUTDIR) generate-install $(shell fin
 $(FF_TYPELIB): IOOPHM.idl
 	[ ! -x $(XPIDL) -o \( -e $(FF_TYPELIB) -a ! -w $(FF_TYPELIB) \) ] || $(XPIDL_TYPELIBS) $(XPIDL_FLAGS) -o $@ $<
 
-$(FF_HEADER): IOOPHM.idl $(OBJ_OUTDIR)
+$(FF_HEADERDIR):
+	@mkdir -p $@
+
+$(FF_HEADER): IOOPHM.idl $(OBJ_OUTDIR) $(FF_HEADERDIR)
 	[ ! -x $(XPIDL) -o \( -e $(FF_HEADER) -a ! -w $(FF_HEADER) \) ] || $(XPIDL_HEADER) $(XPIDL_FLAGS) -o $@ $<
 
 $(FF_DLL): $(FF_OBJS) $(COMMON)

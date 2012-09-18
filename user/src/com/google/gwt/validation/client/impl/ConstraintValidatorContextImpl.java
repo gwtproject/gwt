@@ -15,6 +15,8 @@
  */
 package com.google.gwt.validation.client.impl;
 
+import com.google.gwt.validation.client.impl.metadata.MessageAndPath;
+
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,9 +29,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.metadata.ConstraintDescriptor;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * GWT safe immutable implementation of {@link ConstraintValidatorContext}
  * <p>
  * These objects are very short lived.
@@ -61,11 +60,13 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
       this.messageTemplate = messageTemplate;
     }
 
+    @Override
     public ConstraintValidatorContext addConstraintViolation() {
       messages.add(new MessageAndPath(context.basePath, messageTemplate));
       return context;
     }
 
+    @Override
     public NodeBuilderDefinedContext addNode(String name) {
       return new NodeBuilderDefinedContextImpl(this, messageTemplate,
           basePath.append(name));
@@ -81,11 +82,6 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
     private final ConstraintViolationBuilderImpl parent;
     private final PathImpl path;
 
-    /**
-     * @param parent
-     * @param messageTemplate
-     * @param append
-     */
     public NodeBuilderCustomizableContextImpl(
         ConstraintViolationBuilderImpl parent, String messageTemplate,
         PathImpl path) {
@@ -94,14 +90,17 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
       this.path = path;
     }
 
+    @Override
     public ConstraintValidatorContext addConstraintViolation() {
       return null;
     }
 
+    @Override
     public NodeBuilderCustomizableContext addNode(String name) {
       return this;
     }
 
+    @Override
     public NodeContextBuilder inIterable() {
       return new NodeContextBuilderImpl(path, messageTemplate, parent);
     }
@@ -117,11 +116,6 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
     private final ConstraintViolationBuilderImpl parent;
     private final PathImpl path;
 
-    /**
-     * @param constraintViolationBuilderImpl
-     * @param messageTemplate
-     * @param append
-     */
     public NodeBuilderDefinedContextImpl(ConstraintViolationBuilderImpl parent,
         String messageTemplate, PathImpl path) {
       this.parent = parent;
@@ -129,11 +123,13 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
       this.path = path;
     }
 
+    @Override
     public ConstraintValidatorContext addConstraintViolation() {
       messages.add(new MessageAndPath(path, messageTemplate));
       return parent.context;
     }
 
+    @Override
     public NodeBuilderCustomizableContext addNode(String name) {
       return new NodeBuilderCustomizableContextImpl(parent, messageTemplate,
           path.append(name));
@@ -158,20 +154,24 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
       this.parent = parent;
     }
 
+    @Override
     public ConstraintValidatorContext addConstraintViolation() {
       return null;
     }
 
+    @Override
     public NodeBuilderCustomizableContext addNode(String name) {
       return new NodeBuilderCustomizableContextImpl(parent, messageTemplate,
           path.append(name));
     }
 
+    @Override
     public NodeBuilderDefinedContext atIndex(Integer index) {
       return new NodeBuilderDefinedContextImpl(parent, messageTemplate,
           path.appendIndex(null, index.intValue()));
     }
 
+    @Override
     public NodeBuilderDefinedContext atKey(Object key) {
       return new NodeBuilderDefinedContextImpl(parent, messageTemplate,
           path.appendKey(null, key));
@@ -192,6 +192,7 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
     this.descriptor = descriptor;
   }
 
+  @Override
   public ConstraintViolationBuilder buildConstraintViolationWithTemplate(
       String messageTemplate) {
     ConstraintViolationBuilderImpl builder = new ConstraintViolationBuilderImpl(
@@ -199,10 +200,12 @@ public final class ConstraintValidatorContextImpl<A extends Annotation, T>
     return builder;
   }
 
+  @Override
   public void disableDefaultConstraintViolation() {
     disableDefault = true;
   }
 
+  @Override
   public String getDefaultConstraintMessageTemplate() {
     return (String) descriptor.getAttributes().get("message");
   }

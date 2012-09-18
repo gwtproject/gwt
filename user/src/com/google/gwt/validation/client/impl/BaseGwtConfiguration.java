@@ -16,6 +16,7 @@
 package com.google.gwt.validation.client.impl;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.validation.client.DefaultTraversableResolver;
 import com.google.gwt.validation.client.spi.GwtConfigurationState;
 import com.google.gwt.validation.client.spi.GwtValidationProvider;
 
@@ -30,9 +31,6 @@ import javax.validation.ValidatorFactory;
 import javax.validation.spi.BootstrapState;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * Base GWT {@link Configuration}.
  */
 public abstract class BaseGwtConfiguration implements
@@ -90,7 +88,7 @@ public abstract class BaseGwtConfiguration implements
 
   @Override
   public final TraversableResolver getDefaultTraversableResolver() {
-    return GWT.create(TraversableResolver.class);
+    return new DefaultTraversableResolver();
   }
 
   @Override

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.cellview.client;
 
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
@@ -40,6 +41,7 @@ import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.cellview.client.CellTree.CellTreeMessages;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.LoadingStateChangeEvent.LoadingState;
 import com.google.gwt.user.client.ui.UIObject;
@@ -54,6 +56,7 @@ import com.google.gwt.view.client.RowCountChangeEvent;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.TreeViewModel;
 import com.google.gwt.view.client.TreeViewModel.NodeInfo;
+import com.google.gwt.aria.client.ExpandedValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,10 +79,10 @@ class CellTreeNodeView<T> extends UIObject {
     SafeHtml innerDiv(SafeStyles cssString, String classes, SafeHtml image, String itemValueStyle,
         SafeHtml cellContents);
 
-    @Template("<div><div style=\"{0}\" class=\"{1}\">{2}</div></div>")
-    SafeHtml outerDiv(SafeStyles cssString, String classes, SafeHtml content);
+    @Template("<div aria-selected=\"{3}\">"
+        + "<div style=\"{0}\" class=\"{1}\">{2}</div></div>")
+    SafeHtml outerDiv(SafeStyles cssString, String classes, SafeHtml content, String ariaSelected);
   }
-
   /**
    * The {@link com.google.gwt.view.client.HasData} used to show children. This
    * class is intentionally static because we might move it to a new
@@ -152,7 +155,9 @@ class CellTreeNodeView<T> extends UIObject {
           if (isRootNode) {
             outerClasses.append(topStyle);
           }
-          if (selectionModel != null && selectionModel.isSelected(value)) {
+          boolean isSelected = (selectionModel != null && selectionModel.isSelected(value));
+          String ariaSelected = String.valueOf(isSelected);
+          if (isSelected) {
             outerClasses.append(selectedStyle);
           }
 
@@ -181,11 +186,11 @@ class CellTreeNodeView<T> extends UIObject {
           SafeHtml innerDiv =
               template.innerDiv(innerPadding, innerClasses.toString(), image, itemValueStyle,
                   cellBuilder.toSafeHtml());
-
           SafeStyles outerPadding =
               SafeStylesUtils.fromTrustedString("padding-" + paddingDirection + ": "
                   + paddingAmount + "px;");
-          sb.append(template.outerDiv(outerPadding, outerClasses.toString(), innerDiv));
+          sb.append(template.outerDiv(outerPadding, outerClasses.toString(), innerDiv,
+              ariaSelected));
         }
       }
 
@@ -281,6 +286,7 @@ class CellTreeNodeView<T> extends UIObject {
         int len = values.size();
         int end = start + len;
         int childCount = nodeView.getChildCount();
+        int setSize = (childCount > len) ? childCount : end;
         ProvidesKey<C> keyProvider = nodeInfo.getProvidesKey();
 
         Element container = nodeView.ensureChildContainer();
@@ -343,6 +349,7 @@ class CellTreeNodeView<T> extends UIObject {
           } else {
             nodeView.children.add(child);
           }
+          child.updateAriaAttributes(setSize);
           childElem = childElem.getNextSiblingElement();
         }
 
@@ -794,6 +801,11 @@ class CellTreeNodeView<T> extends UIObject {
   private boolean isDestroyed;
 
   /**
+   * Messages used for translation.
+   */
+  private final CellTreeMessages messages;
+
+  /**
    * The info about children of this node.
    */
   private NodeInfo<?> nodeInfo;
@@ -842,21 +854,25 @@ class CellTreeNodeView<T> extends UIObject {
 
   /**
    * Construct a {@link CellTreeNodeView}.
-   * 
+   *
    * @param tree the parent {@link CellTreeNodeView}
    * @param parent the parent {@link CellTreeNodeView}
    * @param parentNodeInfo the {@link NodeInfo} of the parent
    * @param elem the outer element of this {@link CellTreeNodeView}
    * @param value the value of this node
+   * @param messages tranlation messages
    */
   CellTreeNodeView(final CellTree tree, final CellTreeNodeView<?> parent,
-      NodeInfo<T> parentNodeInfo, Element elem, T value) {
+      NodeInfo<T> parentNodeInfo, Element elem, T value, CellTreeMessages messages) {
     this.tree = tree;
     this.parentNode = parent;
     this.parentNodeInfo = parentNodeInfo;
     this.depth = parentNode == null ? 0 : parentNode.depth + 1;
     this.value = value;
+    this.messages = messages;
     setElement(elem);
+
+    Roles.getTreeitemRole().set(getElement());
   }
 
   public int getChildCount() {
@@ -1024,7 +1040,7 @@ class CellTreeNodeView<T> extends UIObject {
    */
   protected <C> CellTreeNodeView<C> createTreeNodeView(NodeInfo<C> nodeInfo, Element childElem,
       C childValue, Object viewData) {
-    return new CellTreeNodeView<C>(tree, this, nodeInfo, childElem, childValue);
+    return new CellTreeNodeView<C>(tree, this, nodeInfo, childElem, childValue, messages);
   }
 
   /**
@@ -1161,16 +1177,15 @@ class CellTreeNodeView<T> extends UIObject {
       contentContainer = Document.get().createDivElement();
       ensureAnimationFrame().appendChild(contentContainer);
 
-      // TODO(jlabanca): I18N no data string.
       emptyMessageElem = Document.get().createDivElement();
-      emptyMessageElem.setInnerHTML("no data");
+      emptyMessageElem.setInnerHTML(messages.emptyTree());
       setStyleName(emptyMessageElem, tree.getStyle().cellTreeEmptyMessage(), true);
       showOrHide(emptyMessageElem, false);
       contentContainer.appendChild(emptyMessageElem);
 
       showMoreElem = Document.get().createAnchorElement();
       showMoreElem.setHref("javascript:;");
-      showMoreElem.setInnerText("Show more");
+      showMoreElem.setInnerText(messages.showMore());
       setStyleName(showMoreElem, tree.getStyle().cellTreeShowMoreButton(), true);
       showOrHide(showMoreElem, false);
       contentContainer.appendChild(showMoreElem);
@@ -1338,6 +1353,26 @@ class CellTreeNodeView<T> extends UIObject {
     listView.setVisibleRange(range.getStart(), pageSize);
   }
 
+  private void updateAriaAttributes(int setSize) {
+    // Early out if this is a root node.
+    if (isRootNode()) {
+      return;
+    }
+
+    Roles.getTreeitemRole().setAriaSetsizeProperty(getElement(), setSize);
+    int selectionIndex = parentNode.indexOf(this);
+    Roles.getTreeitemRole().setAriaPosinsetProperty(getElement(), selectionIndex + 1);
+    // Set 'aria-expanded' state
+    // don't set aria-expanded on the leaf nodes
+    if (isLeaf()) {
+      Roles.getTreeitemRole().removeAriaExpandedState(getElement());
+    } else {
+      Roles.getTreeitemRole().setAriaExpandedState(getElement(),
+          ExpandedValue.of(open));
+    }
+    Roles.getTreeitemRole().setAriaLevelProperty(getElement(), this.depth);
+  }
+
   /**
    * Update the image based on the current state.
    * 
@@ -1364,5 +1399,14 @@ class CellTreeNodeView<T> extends UIObject {
 
     Element oldImg = getImageElement();
     oldImg.getParentElement().replaceChild(imageElem, oldImg);
+
+    // Set 'aria-expanded' state
+    // don't set aria-expanded on the leaf nodes
+    if (isLeaf()) {
+      Roles.getTreeitemRole().removeAriaExpandedState(getElement());
+    } else {
+      Roles.getTreeitemRole().setAriaExpandedState(getElement(),
+          ExpandedValue.of(open));
+    }
   }
 }

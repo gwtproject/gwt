@@ -15,8 +15,8 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.Group;
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
+import com.google.gwt.validation.client.impl.metadata.BeanMetadata;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.util.Set;
 
@@ -24,9 +24,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
  * Defines GWT version of {@link javax.validation.Validator}. This used by
  * generate a specific Validator for a given class G.
  * 
@@ -53,6 +50,7 @@ public interface GwtSpecificValidator<G> {
    * perform validation of a bean using the specific group(s).
    * @param context GWT validation context.
    * @param object Object being validated.
+   * @param propertyName The name of the property being validated.
    * @param violations Set of violations to add to.
    * @param groups What group(s) to validate.
    */
@@ -67,7 +65,9 @@ public interface GwtSpecificValidator<G> {
    * Helper method used to first expand the Default group sequence and then 
    * perform validation of a bean using the specific group(s).
    * @param context GWT validation context.
-   * @param object Object being validated.
+   * @param beanType Class being validated.
+   * @param propertyName The name of the property being validated.
+   * @param value The value of the property to use.
    * @param violations Set of violations to add to.
    * @param groups What group(s) to validate.
    */

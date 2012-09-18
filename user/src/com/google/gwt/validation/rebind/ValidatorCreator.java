@@ -25,11 +25,11 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.validation.client.GwtValidation;
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
 import com.google.gwt.validation.client.impl.AbstractGwtValidator;
 import com.google.gwt.validation.client.impl.GwtBeanDescriptor;
 import com.google.gwt.validation.client.impl.GwtSpecificValidator;
 import com.google.gwt.validation.client.impl.GwtValidationContext;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,10 +43,7 @@ import javax.validation.groups.Default;
 import javax.validation.metadata.BeanDescriptor;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
- * Class that creates the validator for the given input class.
+ * Creates the validator for the given input class.
  */
 public final class ValidatorCreator extends AbstractCreator {
 
@@ -59,8 +56,9 @@ public final class ValidatorCreator extends AbstractCreator {
   public ValidatorCreator(JClassType validatorType, //
       GwtValidation gwtValidation, //
       TreeLogger logger, //
-      GeneratorContext context) throws UnableToCompleteException {
-    super(context, logger, validatorType);
+      GeneratorContext context,
+      BeanHelperCache cache) throws UnableToCompleteException {
+    super(context, logger, validatorType, cache);
     this.gwtValidation = gwtValidation;
 
     List<BeanHelper> temp = Lists.newArrayList();
@@ -141,6 +139,9 @@ public final class ValidatorCreator extends AbstractCreator {
 
     // getMessageInterpolator(),
     sw.println("getMessageInterpolator(), ");
+
+    // getTraversableResolver(),
+    sw.println("getTraversableResolver(), ");
 
     // this);
     sw.println("this);");
@@ -242,8 +243,7 @@ public final class ValidatorCreator extends AbstractCreator {
     sw.println("checkNotNull(groups, \"groups\");");
     sw.println("checkGroups(groups);");
 
-    for (BeanHelper bean : Util.sortMostSpecificFirst(
-        BeanHelper.getBeanHelpers().values(), BeanHelper.TO_CLAZZ)) {
+    for (BeanHelper bean : cache.getAllBeans()) {
       writeGwtValidate(sw, bean);
     }
 

@@ -15,11 +15,8 @@
  */
 package com.google.gwt.validation.client.impl;
 
-import com.google.gwt.validation.client.ConstraintOrigin;
-import com.google.gwt.validation.client.Group;
-import com.google.gwt.validation.client.GroupChain;
-import com.google.gwt.validation.client.GroupChainGenerator;
-import com.google.gwt.validation.client.ValidationGroupsMetadata;
+import com.google.gwt.validation.client.impl.metadata.BeanMetadata;
+import com.google.gwt.validation.client.impl.metadata.ValidationGroupsMetadata;
 
 import java.lang.annotation.ElementType;
 import java.util.ArrayList;
@@ -36,9 +33,7 @@ import javax.validation.metadata.Scope;
 import javax.validation.metadata.ElementDescriptor.ConstraintFinder;
 
 /**
- * <strong>EXPERIMENTAL</strong> and subject to change. Do not use this in
- * production code.
- * <p>
+ * Finds constraints declared on an element using specified criteria.
  */
 public final class ConstraintFinderImpl implements ConstraintFinder {
   private Set<ConstraintDescriptorImpl<?>> constraintDescriptors;

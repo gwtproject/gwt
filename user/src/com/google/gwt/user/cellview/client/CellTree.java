@@ -26,6 +26,8 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.i18n.client.LocaleInfo;
+import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
+import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.CssResource.ImportedWithPrefix;
@@ -43,6 +45,7 @@ import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasAnimation;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.view.client.TreeViewModel;
+import com.google.gwt.aria.client.Roles;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -89,6 +92,17 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
      */
     @Source(BasicStyle.DEFAULT_CSS)
     BasicStyle cellTreeStyle();
+  }
+
+  /**
+   * Constants for labeling the cell tree. Provides just English messages by default.
+   */
+  @DefaultLocale("en_US")
+  public interface CellTreeMessages extends Messages {
+    @DefaultMessage("Show more")
+    String showMore();
+    @DefaultMessage("Empty")
+    String emptyTree();
   }
 
   /**
@@ -555,7 +569,8 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
   }
 
   /**
-   * Construct a new {@link CellTree}.
+   * Construct a new {@link CellTree}. Uses default translations that means
+   * that messages will be always in English.
    *
    * @param <T> the type of data in the root node
    * @param viewModel the {@link TreeViewModel} that backs the tree
@@ -563,7 +578,44 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * @param resources the resources used to render the tree
    */
   public <T> CellTree(TreeViewModel viewModel, T rootValue, Resources resources) {
+    this(viewModel, rootValue, resources,
+        GWT.<CellTreeMessages>create(CellTreeMessages.class));
+  }
+
+  /**
+   * Construct a new {@link CellTree}.
+   *
+   * @param <T> the type of data in the root node
+   * @param viewModel the {@link TreeViewModel} that backs the tree
+   * @param rootValue the hidden root value of the tree
+   * @param resources the resources used to render the tree
+   * @param messages translation messages. Users should inherit an empty interface from
+   *                 {@link CellTreeMessages} and add annotations needed for their specific
+   *                 translation systems. Then create the new interface with GWT.create and pass
+   *                 as this argument.
+   */
+  public <T> CellTree(TreeViewModel viewModel, T rootValue, Resources resources,
+      CellTreeMessages messages) {
+    this(viewModel, rootValue, resources, messages, DEFAULT_LIST_SIZE);
+  }
+
+  /**
+   * Construct a new {@link CellTree}.
+   *
+   * @param <T> the type of data in the root node
+   * @param viewModel the {@link TreeViewModel} that backs the tree
+   * @param rootValue the hidden root value of the tree
+   * @param resources the resources used to render the tree
+   * @param messages translation messages. Users should inherit an empty interface from
+   *                 {@link CellTreeMessages} and add annotations needed for their specific
+   *                 translation systems. Then create the new interface with GWT.create and pass
+   *                 as this argument.
+   * @param defaultNodeSize default number of children to display beneath each child node
+   */
+  public <T> CellTree(TreeViewModel viewModel, T rootValue, Resources resources,
+      CellTreeMessages messages, int defaultNodeSize) {
     super(viewModel);
+    this.defaultNodeSize = defaultNodeSize;
     if (template == null) {
       template = GWT.create(Template.class);
     }
@@ -599,9 +651,11 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
 
     // Associate a view with the item.
     CellTreeNodeView<T> root = new CellTreeNodeView<T>(this, null, null,
-        getElement(), rootValue);
+        getElement(), rootValue, messages);
     keyboardSelectedNode = rootNode = root;
     root.setOpen(true, false);
+
+    Roles.getTreeRole().set(getElement());
   }
 
   /**
@@ -686,7 +740,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     if (nodeView != null) {
       if (isMouseDown) {
         Element showMoreElem = nodeView.getShowMoreElement();
-        if (nodeView.getImageElement().isOrHasChild(target)) {
+        if (!nodeView.isRootNode() && nodeView.getImageElement().isOrHasChild(target)) {
           // Open the node when the open image is clicked.
           nodeView.setOpen(!nodeView.isOpen(), true);
           return;
@@ -753,7 +807,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    * Set the default number of children to display beneath each child node. If
    * more nodes are available, a button will appear at the end of the list
    * allowing the user to show more items. Changing this value will not affect
-   * tree nodes that are already open.
+   * other tree nodes that are already open (including the hidden root node).
    *
    * @param defaultNodeSize the max
    * @see #getDefaultNodeSize()

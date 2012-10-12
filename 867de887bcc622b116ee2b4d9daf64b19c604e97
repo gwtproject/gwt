@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKLn///+c\u003d",
+        "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-10-12T22:06:29Z",
+      "side": 1,
+      "message": "(repost from https://gwt-code-reviews.appspot.com/1821804/diff/1/user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java#newcode28)\n\nNote: I didn\u0027t fix the issue, as I think (judging by the comments on the issue)\nthat the proper fix would be to update to Jasper 2, and there should probably be\na command-line flag to set the source compatibility (given that this is done\nfrom the ServletContainerLauncher, it would have to be an argument to the\nJettyLauncher, e.g. \"-server :source\u003d1.5).\nUpdating the dependency will be easier once we switch to Maven.",
+      "revId": "867de887bcc622b116ee2b4d9daf64b19c604e97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

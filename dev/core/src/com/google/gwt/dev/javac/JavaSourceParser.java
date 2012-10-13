@@ -178,7 +178,7 @@ public class JavaSourceParser {
    * @return a CompilationUnitDeclaration or null if parsing failed
    */
   private static CompilationUnitDeclaration parseJava(String javaSource) {
-    CodeSnippetParsingUtil parsingUtil = new CodeSnippetParsingUtil();
+    CodeSnippetParsingUtil parsingUtil = new CodeSnippetParsingUtil(true);
     CompilerOptions options = new CompilerOptions();
     options.complianceLevel = ClassFileConstants.JDK1_6;
     options.sourceLevel = ClassFileConstants.JDK1_6;

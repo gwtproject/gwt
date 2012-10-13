@@ -172,6 +172,10 @@ public class JdtBehaviorTest extends TestCase {
           Shared.getTypeName(sourceFile)).toCharArray());
     }
 
+    public boolean ignoreOptionalProblems() {
+      return false;
+    }
+
     @Override
     public String toString() {
       return sourceFile.toString();

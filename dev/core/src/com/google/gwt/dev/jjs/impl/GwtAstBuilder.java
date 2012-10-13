@@ -544,9 +544,9 @@ public class GwtAstBuilder {
         SourceInfo info = makeSourceInfo(x);
         JType type = typeMap.get(x.resolvedType);
         JExpression expression = pop(x.expression);
-        if (x.type instanceof NameReference) {
-          pop(x.type);
-        }
+//        if (x.type instanceof NameReference) {
+//          pop(x.type);
+//        }
         push(new JCastOperation(info, type, expression));
       } catch (Throwable e) {
         throw translateException(x, e);

@@ -217,6 +217,11 @@ public class JdtCompiler {
     }
 
     @Override
+    public boolean ignoreOptionalProblems() {
+      return false;
+    }
+
+    @Override
     public String toString() {
       return builder.toString();
     }
@@ -395,7 +400,11 @@ public class JdtCompiler {
   }
 
   public static CompilerOptions getCompilerOptions() {
-    CompilerOptions options = new CompilerOptions();
+    CompilerOptions options = new CompilerOptions() {
+      {
+        warningThreshold.clearAll();
+      }
+    };
     options.complianceLevel = options.sourceLevel = options.targetJDK = ClassFileConstants.JDK1_6;
 
     // Generate debug info for debugging the output.
@@ -410,7 +419,6 @@ public class JdtCompiler {
     // Turn off all warnings, saves some memory / speed.
     options.reportUnusedDeclaredThrownExceptionIncludeDocCommentReference = false;
     options.reportUnusedDeclaredThrownExceptionExemptExceptionAndThrowable = false;
-    options.warningThreshold = 0;
     options.inlineJsrBytecode = true;
     return options;
   }

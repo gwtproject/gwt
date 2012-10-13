@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKLn///9g\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefLoader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-10-13T20:27:04Z",
+      "side": 1,
+      "message": "This is not strictly equivalent to the previous ReferenceMap, because MapMaker-created maps with weak or soft keys use identity equality rather than Object.equals(Object) equality. They\u0027re more like ReferenceIdentityMap.\n\nThere are a couple other cases of ReferenceMap with weak keys (ResourceOracleImpl and CorrelationFactory), though I\u0027m almost sure the move to identity-equality doesn\u0027t break anything (keys are ClassLoader, ResourceLoader, JDeclaredType, JField and JMethod).",
+      "revId": "5f81bc3906c99fa3aa9eac2ca44d0d5965c7a50f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

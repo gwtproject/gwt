@@ -180,8 +180,8 @@ public class JavaSourceParser {
   private static CompilationUnitDeclaration parseJava(String javaSource) {
     CodeSnippetParsingUtil parsingUtil = new CodeSnippetParsingUtil();
     CompilerOptions options = new CompilerOptions();
-    options.complianceLevel = ClassFileConstants.JDK1_5;
-    options.sourceLevel = ClassFileConstants.JDK1_5;
+    options.complianceLevel = ClassFileConstants.JDK1_6;
+    options.sourceLevel = ClassFileConstants.JDK1_6;
     CompilationUnitDeclaration unit = parsingUtil.parseCompilationUnit(
         javaSource.toString().toCharArray(), options.getMap(), true);
     if (unit.compilationResult().hasProblems()) {

@@ -34,6 +34,24 @@
       "revId": "0b392e29f7d4af020c7385267878ef2a8bd3f3eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKMX///5c\u003d",
+        "filename": "dev/core/test/com/google/gwt/util/tools/shared/JavaScriptStringTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2012-10-13T22:43:15Z",
+      "side": 1,
+      "message": "Ah, cool, makes sense. I\u0027d forgotten about your gwt-contrib post. Thanks!",
+      "parentUuid": "AAAKLn///90\u003d",
+      "revId": "0b392e29f7d4af020c7385267878ef2a8bd3f3eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

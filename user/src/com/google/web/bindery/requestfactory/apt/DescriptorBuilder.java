@@ -16,7 +16,7 @@
 package com.google.web.bindery.requestfactory.apt;
 
 import com.google.gwt.core.ext.typeinfo.JniConstants;
-import com.google.gwt.dev.util.Name.BinaryName;
+import com.google.gwt.util.tools.shared.Name.BinaryName;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ArrayType;

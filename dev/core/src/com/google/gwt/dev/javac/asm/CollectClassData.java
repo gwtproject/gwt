@@ -20,8 +20,8 @@ import com.google.gwt.dev.asm.FieldVisitor;
 import com.google.gwt.dev.asm.MethodVisitor;
 import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.asm.commons.EmptyVisitor;
-import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.util.tools.shared.Name;
 
 import java.util.ArrayList;
 import java.util.List;

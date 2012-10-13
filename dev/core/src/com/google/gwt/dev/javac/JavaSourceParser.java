@@ -21,8 +21,8 @@ import com.google.gwt.dev.javac.typemodel.JClassType;
 import com.google.gwt.dev.javac.typemodel.JParameter;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.util.tools.shared.Name.BinaryName;
 
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;

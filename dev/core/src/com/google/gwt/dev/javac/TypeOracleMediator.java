@@ -48,11 +48,11 @@ import com.google.gwt.dev.javac.typemodel.JTypeParameter;
 import com.google.gwt.dev.javac.typemodel.JWildcardType;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.javac.typemodel.TypeOracleBuilder;
-import com.google.gwt.dev.util.Name;
-import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.util.tools.shared.Name;
+import com.google.gwt.util.tools.shared.Name.InternalName;
 
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;

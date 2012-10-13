@@ -18,6 +18,7 @@ package com.google.gwt.dev.util;
 import com.google.gwt.dev.Permutation;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.StaticPropertyOracle;
+import com.google.gwt.util.tools.shared.StringKey;
 
 import java.util.Arrays;
 import java.util.Set;

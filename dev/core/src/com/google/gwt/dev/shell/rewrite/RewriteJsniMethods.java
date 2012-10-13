@@ -23,7 +23,7 @@ import com.google.gwt.dev.asm.Type;
 import com.google.gwt.dev.asm.commons.GeneratorAdapter;
 import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.JavaScriptHost;
-import com.google.gwt.dev.util.Name.InternalName;
+import com.google.gwt.util.tools.shared.Name.InternalName;
 
 import java.lang.reflect.Modifier;
 import java.util.Locale;

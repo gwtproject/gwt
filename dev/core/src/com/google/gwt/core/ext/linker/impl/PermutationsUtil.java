@@ -21,9 +21,9 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.SelectionProperty;
-import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.util.tools.shared.StringKey;
 
 import java.util.List;
 import java.util.Map;

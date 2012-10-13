@@ -15,7 +15,7 @@
  */
 package com.google.web.bindery.requestfactory.apt;
 
-import com.google.gwt.dev.util.Name.BinaryName;
+import com.google.gwt.util.tools.shared.Name.BinaryName;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

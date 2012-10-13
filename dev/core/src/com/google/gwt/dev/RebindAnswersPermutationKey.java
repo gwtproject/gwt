@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.dev.util.StringKey;
+import com.google.gwt.util.tools.shared.StringKey;
 
 import java.util.Map;
 import java.util.SortedMap;

@@ -16,7 +16,6 @@
 package com.google.gwt.junit.server;
 
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.junit.JUnitFatalLaunchException;
 import com.google.gwt.junit.JUnitMessageQueue;
 import com.google.gwt.junit.JUnitShell;
@@ -27,6 +26,7 @@ import com.google.gwt.junit.client.impl.JUnitResult;
 import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.server.rpc.HybridServiceServlet;
 import com.google.gwt.user.server.rpc.RPCServletUtils;
+import com.google.gwt.util.tools.shared.StringKey;
 
 import java.io.BufferedReader;
 import java.io.IOException;

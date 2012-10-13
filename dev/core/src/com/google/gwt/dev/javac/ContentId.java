@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.util.StringKey;
+import com.google.gwt.util.tools.shared.StringKey;
 
 /**
  * A key that encapsulates one revision of the source code content for a type.

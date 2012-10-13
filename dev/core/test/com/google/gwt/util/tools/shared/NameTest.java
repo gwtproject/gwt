@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.util;
+package com.google.gwt.util.tools.shared;
 
-import com.google.gwt.dev.util.Name.BinaryName;
-import com.google.gwt.dev.util.Name.SourceOrBinaryName;
-import com.google.gwt.dev.util.Name.InternalName;
-import com.google.gwt.dev.util.Name.SourceName;
+import com.google.gwt.util.tools.shared.Name.BinaryName;
+import com.google.gwt.util.tools.shared.Name.InternalName;
+import com.google.gwt.util.tools.shared.Name.SourceName;
+import com.google.gwt.util.tools.shared.Name.SourceOrBinaryName;
 
 import junit.framework.TestCase;
 
@@ -72,17 +72,17 @@ public class NameTest extends TestCase {
   }
 
   public void testGetBinaryNameForClass() {
-    assertEquals("com.google.gwt.dev.util.NameTest$Inner",
+    assertEquals("com.google.gwt.util.tools.shared.NameTest$Inner",
         Name.getBinaryNameForClass(Inner.class));
   }
 
   public void testGetInternalNameForClass() {
-    assertEquals("com/google/gwt/dev/util/NameTest$Inner",
+    assertEquals("com/google/gwt/util/tools/shared/NameTest$Inner",
         Name.getInternalNameForClass(Inner.class));
   }
 
   public void testGetSourceNameForClass() {
-    assertEquals("com.google.gwt.dev.util.NameTest.Inner",
+    assertEquals("com.google.gwt.util.tools.shared.NameTest.Inner",
         Name.getSourceNameForClass(Inner.class));
   }
 

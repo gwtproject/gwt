@@ -29,7 +29,7 @@ import com.google.gwt.dev.javac.typemodel.JParameterizedType;
 import com.google.gwt.dev.javac.typemodel.JRealClassType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
 import com.google.gwt.dev.javac.typemodel.JWildcardType;
-import com.google.gwt.dev.util.Name;
+import com.google.gwt.util.tools.shared.Name;
 
 import java.util.ArrayList;
 import java.util.List;

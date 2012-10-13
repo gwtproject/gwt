@@ -16,7 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jdt.SafeASTVisitor;
-import com.google.gwt.dev.util.Name.InternalName;
+import com.google.gwt.util.tools.shared.Name.InternalName;
 
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;

@@ -72,11 +72,11 @@ import com.google.gwt.dev.js.ast.JsNestingScope;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.Name;
-import com.google.gwt.dev.util.Name.BinaryName;
-import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.util.tools.shared.Name;
+import com.google.gwt.util.tools.shared.Name.BinaryName;
+import com.google.gwt.util.tools.shared.Name.InternalName;
 
 import java.util.ArrayList;
 import java.util.Arrays;

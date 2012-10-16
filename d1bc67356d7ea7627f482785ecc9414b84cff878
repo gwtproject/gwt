@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKYX///Dc\u003d",
+        "filename": "eclipse/settings/code-style/gwt-checkstyle-tests.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-10-16T21:10:02Z",
+      "side": 1,
+      "message": "Hmm. Seems okay, but why should we start allowing trailing spaces? (Do we need: \"[ ]*$\".)",
+      "revId": "d1bc67356d7ea7627f482785ecc9414b84cff878",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKYX///CU\u003d",
+        "filename": "eclipse/settings/code-style/gwt-checkstyle-tests.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-10-16T21:10:02Z",
+      "side": 1,
+      "message": "I\u0027m not sure we need to forbid \"f[A-Z]\". Nobody\u0027s trying to use that style anyway.",
+      "revId": "d1bc67356d7ea7627f482785ecc9414b84cff878",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

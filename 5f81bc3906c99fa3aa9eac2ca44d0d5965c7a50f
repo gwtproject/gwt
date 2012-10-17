@@ -16,6 +16,40 @@
       "revId": "5f81bc3906c99fa3aa9eac2ca44d0d5965c7a50f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKd3///3Y\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/MemoryUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-10-17T19:03:35Z",
+      "side": 1,
+      "message": "Unused now according to UnusedImportsCheck.",
+      "revId": "5f81bc3906c99fa3aa9eac2ca44d0d5965c7a50f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKd3///3U\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/CorrelationFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-10-17T19:03:35Z",
+      "side": 1,
+      "message": "Unused now according to UnusedImportsCheck.",
+      "revId": "5f81bc3906c99fa3aa9eac2ca44d0d5965c7a50f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

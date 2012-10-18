@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKd3//+pI\u003d",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-10-18T19:43:32Z",
+      "side": 1,
+      "message": "\"fail\" seems safer. Why is this changed?",
+      "revId": "fb8c99387ce9b9204ddc6c5d54e0942f440c13d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "fb8c99387ce9b9204ddc6c5d54e0942f440c13d3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKbH///yw\u003d",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-10-19T15:26:49Z",
+      "side": 1,
+      "message": "FYI, jar.bydate didn\u0027t actually use that value, as its goal was to always pick the newest of each duplicate path.\n\nThe problem with \"fail\" is that there are a whole bunch of duplicates in the dependencies we bundle inside gwt-dev.jar (starting with org/apache/COPYING, META-INF/LICENSE and the like), and we also replace a couple of classes from Tomcat and Eclipse JDT with our own patched versions.\n\nI\u0027ve thus reverted to \"fail\" as the default, changed \u003cgwt.jar destfile\u003d\"${alldeps.jar}\"\u003e to use duplicates\u003d\"preserve\" (removing a few obvious duplicates as I was at it), and explicitly excluded those files that we replace with our own in the \u003cgwt.jar\u003e for gwt-dev.jar.",
+      "parentUuid": "AAAKd3//+pI\u003d",
+      "revId": "fb8c99387ce9b9204ddc6c5d54e0942f440c13d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

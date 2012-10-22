@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKoH////Q\u003d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-10-22T19:35:38Z",
+      "side": 1,
+      "message": "I think you need to use \"^(\" + regex + \")$\" for this to work.  Otherwise \"foobar\".matches(\"foo|bar\") now evaluates (incorrectly) to true.",
+      "revId": "7260a6ba53c049f802617341cc4a497cb2c586ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

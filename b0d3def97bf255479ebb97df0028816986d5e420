@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKpH///80\u003d",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-10-23T12:26:38Z",
+      "side": 1,
+      "message": "Any reason you re-introduced that comment? Seems to me like you fixed it with adding hideFromCompiler.",
+      "revId": "b0d3def97bf255479ebb97df0028816986d5e420",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

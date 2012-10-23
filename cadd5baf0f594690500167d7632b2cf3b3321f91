@@ -16,6 +16,24 @@
       "revId": "cadd5baf0f594690500167d7632b2cf3b3321f91",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAKpH///3Y\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/ModuleSpace.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-10-23T20:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAKoH///rU\u003d",
+      "revId": "cadd5baf0f594690500167d7632b2cf3b3321f91",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

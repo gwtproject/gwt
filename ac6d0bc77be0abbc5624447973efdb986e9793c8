@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALA3///z4\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-10-29T16:11:19Z",
+      "side": 1,
+      "message": "Just FYI, if you write this as just \"issue 7683\" or \"Issue 7683\" then Gerrit will automatically hyperlink back to the appropriate issue in the bug tracker.",
+      "revId": "ac6d0bc77be0abbc5624447973efdb986e9793c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "a74513108e8e18d431e1519d778ea190a337d59b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALTX///pw\u003d",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2012-11-08T13:05:52Z",
+      "side": 1,
+      "message": "Running checkstyles locally did not catch it for me. Should it? Anyway, submitted a new patch without the whitespaces.",
+      "parentUuid": "AAALTX///rk\u003d",
+      "revId": "a74513108e8e18d431e1519d778ea190a337d59b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

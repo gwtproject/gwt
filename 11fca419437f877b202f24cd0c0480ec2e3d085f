@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALR3//9do\u003d",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-08T23:25:31Z",
+      "side": 1,
+      "message": "Nit: Please use \"if (foo) {\" for spacing.",
+      "revId": "11fca419437f877b202f24cd0c0480ec2e3d085f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALR3//9dk\u003d",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-08T23:25:31Z",
+      "side": 1,
+      "message": "Nit: Indent just two spaces.",
+      "revId": "11fca419437f877b202f24cd0c0480ec2e3d085f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

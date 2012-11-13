@@ -687,7 +687,7 @@ public class GwtAstBuilder {
          */
         if (!hasExplicitThis) {
           // $init is always in position 1 (clinit is in 0)
-          JMethod initMethod = curClass.type.getMethods().get(1);
+          JMethod initMethod = curClass.type.getInitMethod();
           JMethodCall initCall = new JMethodCall(info, makeThisRef(info), initMethod);
           block.addStmt(initCall.makeStatement());
         }
@@ -1746,8 +1746,8 @@ public class GwtAstBuilder {
        * Call super class $clinit; $clinit is always in position 0.
        */
       if (type.getSuperClass() != null) {
-        JMethod myClinit = type.getMethods().get(0);
-        JMethod superClinit = type.getSuperClass().getMethods().get(0);
+        JMethod myClinit = type.getClinitMethod();
+        JMethod superClinit = type.getSuperClass().getClinitMethod();
         JMethodCall superClinitCall = new JMethodCall(myClinit.getSourceInfo(), null, superClinit);
         JMethodBody body = (JMethodBody) myClinit.getBody();
         body.getBlock().addStmt(0, superClinitCall.makeStatement());
@@ -2051,7 +2051,7 @@ public class GwtAstBuilder {
       JNewArray newExpr = JNewArray.createInitializers(info, enumArrayType, initializers);
       JFieldRef valuesRef = new JFieldRef(info, null, valuesField, type);
       JDeclarationStatement declStmt = new JDeclarationStatement(info, valuesRef, newExpr);
-      JBlock clinitBlock = ((JMethodBody) type.getMethods().get(0).getBody()).getBlock();
+      JBlock clinitBlock = ((JMethodBody) type.getClinitMethod().getBody()).getBlock();
 
       /*
        * HACKY: the $VALUES array must be initialized immediately after all of
@@ -2433,9 +2433,9 @@ public class GwtAstBuilder {
     private void pushInitializerMethodInfo(FieldDeclaration x, MethodScope scope) {
       JMethod initMeth;
       if (x.isStatic()) {
-        initMeth = curClass.type.getMethods().get(0);
+        initMeth = curClass.type.getClinitMethod();
       } else {
-        initMeth = curClass.type.getMethods().get(1);
+        initMeth = curClass.type.getInitMethod();
       }
       pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope));
     }
@@ -3199,6 +3199,10 @@ public class GwtAstBuilder {
     method.setSynthetic();
     method.setBody(new JMethodBody(info));
     enclosingType.addMethod(method);
+    assert !name.equals("$clinit") || enclosingType.getMethods().size() == 1 : "$clinit method "
+        + " add with index != 0";
+    assert !name.equals("$init") || enclosingType.getMethods().size() == 2 : "$init method "
+        + " add with index != 1";
     return method;
   }
 

@@ -140,6 +140,33 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   /**
+   * Returns the init method. Can only be called after making sure the class has a init method.
+   *
+   * @return The init method.
+   */
+  public JMethod getInitMethod() {
+    assert getMethods().size() > 1;
+    JMethod init = this.getMethods().get(1);
+
+    assert init != null;
+    assert init.getName().equals("$init");
+    return init;
+  }
+
+  /**
+   * Returns the clinit method. Can only be called after making sure the class has a clinit method.
+   *
+   * @return The clinit method.
+   */
+   public JMethod getClinitMethod() {
+     JMethod clinit = this.getMethods().get(0);
+
+     assert clinit != null;
+     assert clinit.getName().equals("$clinit");
+     return clinit;
+  }
+
+  /**
    * Returns the class that must be initialized to use this class. May be a
    * superclass, or <code>null</code> if this class has no static initializer.
    */
@@ -218,7 +245,7 @@ public abstract class JDeclaredType extends JReferenceType {
    * Removes the field at the specified index.
    */
   public void removeField(int i) {
-    assert !isExternal() : "External types can not be modiified.";
+    assert !isExternal() : "External types can not be modified.";
     fields = Lists.remove(fields, i);
   }
 
@@ -226,8 +253,17 @@ public abstract class JDeclaredType extends JReferenceType {
    * Removes the method at the specified index.
    */
   public void removeMethod(int i) {
-    assert !isExternal() : "External types can not be modiified.";
+    assert !isExternal() : "External types can not be modified.";
     methods = Lists.remove(methods, i);
+  }
+
+  /**
+   * Resets the clinitTarget. Some optimizations eliminate the clinit method and set clinitTarget
+   * to a superclass to indicate an implicit dependency.
+   */
+  public void resetClinitTarget() {
+    this.clinitTarget = this;
+    assert getClinitMethod() != null;
   }
 
   /**

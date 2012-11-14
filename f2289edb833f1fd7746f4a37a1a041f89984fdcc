@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALi3///do\u003d",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-14T03:11:01Z",
+      "side": 0,
+      "message": "This seems to cause precompile.modules to fail.",
+      "revId": "f2289edb833f1fd7746f4a37a1a041f89984fdcc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

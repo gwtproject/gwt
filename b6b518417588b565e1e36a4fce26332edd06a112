@@ -51,6 +51,24 @@
       "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALln///3g\u003d",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-14T23:13:10Z",
+      "side": 1,
+      "message": "Well, ideally, Scheduler would return a Cancellable (much like EventBus returns a HandlerRegistration).\n\nAn alternative to this change could be to create a Timer class in c.g.g.core (and have c.g.g.user.c.Timer extend the new c.g.g.core.c.Timer for backwards compatibility; elemental.util.Timer could also be deprecated in favor of that new Timer class, the only difference seems to be that user/Timer tracks the running timers and automatically cancels them on unload).",
+      "parentUuid": "AAALi3///Vw\u003d",
+      "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

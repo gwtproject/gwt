@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALin///mQ\u003d",
+        "filename": "dev/core/src/com/google/gwt/util/tools/shared/Name.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-14T03:06:16Z",
+      "side": 1,
+      "message": "The goal is good, but not wild about the name. I think we should avoid \"shared\" unless it\u0027s code that we intend to share between client and server. Also, it should be something that implies a bit more strongly that it\u0027s private to GWT. Some candidates:\n\n com.google.gwt.internal\n com.google.gwt.internal.common\n\nBut since this package already exists, we can deal with that some other time.",
+      "revId": "f416693895d3fbc4abe5eda4d2cb40e2cb1acd6c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

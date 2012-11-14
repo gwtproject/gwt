@@ -15,7 +15,7 @@
  */
 package com.google.gwt.http.client;
 
-import com.google.gwt.user.client.Timer;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -30,6 +30,36 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  * 
  */
 public class Request {
+
+  /**
+   * Scheduled command to cancel a request after a user-defined timeout.
+   * <p>
+   * Uses {@link Scheduler.RepeatingCommand} because {@link Scheduler} cannot
+   * schedule a {@link Scheduler.ScheduledCommand} after a fixed delay, and we
+   * do not want to use {@link com.google.gwt.user.client.Timer} as that would
+   * force us to inherit the {@code com.google.gwt.user.User} module.
+   */
+  private class CancelCommand implements Scheduler.RepeatingCommand {
+
+    private final RequestCallback callback;
+    private boolean cancelled;
+
+    public CancelCommand(RequestCallback callback) {
+      this.callback = callback;
+    }
+
+    @Override
+    public boolean execute() {
+      if (!cancelled) {
+        fireOnTimeout(callback);
+      }
+      return false;
+    }
+
+    public void cancel() {
+      cancelled = true;
+    }
+  }
 
   /**
    * Creates a {@link Response} instance for the given JavaScript XmlHttpRequest
@@ -135,10 +165,10 @@ public class Request {
   private final int timeoutMillis;
 
   /*
-   * Timer used to force HTTPRequest timeouts. If the user has not requested a
-   * timeout then this field is null.
+   * Scheduled command used to force HTTPRequest timeouts. If the user has not
+   * requested a timeout then this field is null.
    */
-  private final Timer timer;
+  private final CancelCommand cancelCommand;
 
   /*
    * JavaScript XmlHttpRequest object that this Java class wraps. This field is
@@ -154,7 +184,7 @@ public class Request {
   protected Request() {
     timeoutMillis = 0;
     xmlHttpRequest = null;
-    timer = null;
+    cancelCommand = null;
   }
 
   /**
@@ -186,18 +216,13 @@ public class Request {
     this.xmlHttpRequest = xmlHttpRequest;
 
     if (timeoutMillis > 0) {
-      // create and start a Timer
-      timer = new Timer() {
-        @Override
-        public void run() {
-          fireOnTimeout(callback);
-        }
-      };
+      // create and schedule a cancel command
+      cancelCommand = new CancelCommand(callback);
 
-      timer.schedule(timeoutMillis);
+      Scheduler.get().scheduleFixedDelay(cancelCommand, timeoutMillis);
     } else {
       // no Timer required
-      timer = null;
+      cancelCommand = null;
     }
   }
 
@@ -292,8 +317,8 @@ public class Request {
    * Stops the current HTTPRequest timer if there is one.
    */
   private void cancelTimer() {
-    if (timer != null) {
-      timer.cancel();
+    if (cancelCommand != null) {
+      cancelCommand.cancel();
     }
   }
 

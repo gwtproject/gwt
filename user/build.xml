@@ -185,6 +185,7 @@
             <!-- others should come later in the list.           -->
             <!-- All modules depend on Core                      -->
             <arg value="com.google.gwt.core.Core" />
+            <arg value="com.google.gwt.http.HTTP" />
             <arg value="com.google.gwt.json.JSON" />
             <arg value="com.google.gwt.regexp.RegExp" />
             <arg value="com.google.gwt.user.User" />

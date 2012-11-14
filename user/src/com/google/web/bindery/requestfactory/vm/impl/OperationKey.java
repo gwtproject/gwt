@@ -18,7 +18,7 @@ package com.google.web.bindery.requestfactory.vm.impl;
 import com.google.gwt.dev.asm.Type;
 import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.util.StringKey;
-import com.google.gwt.user.server.Base64Utils;
+import com.google.gwt.util.tools.shared.Base64Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

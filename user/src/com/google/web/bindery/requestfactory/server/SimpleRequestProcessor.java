@@ -15,7 +15,7 @@
  */
 package com.google.web.bindery.requestfactory.server;
 
-import com.google.gwt.user.server.Base64Utils;
+import com.google.gwt.util.tools.shared.Base64Utils;
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanUtils;

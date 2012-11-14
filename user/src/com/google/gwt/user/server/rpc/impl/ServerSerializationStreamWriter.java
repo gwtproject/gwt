@@ -18,8 +18,8 @@ package com.google.gwt.user.server.rpc.impl;
 import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
-import com.google.gwt.user.server.Base64Utils;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
+import com.google.gwt.util.tools.shared.Base64Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

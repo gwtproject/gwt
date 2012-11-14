@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALln////E\u003d",
+        "filename": "user/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-14T10:48:11Z",
+      "side": 1,
+      "message": "I guess this line is not strictly necessary, but I suppose it could help those who use RequestBuilder but not User.\n\nI actually have no idea why we don\u0027t compile each and every module (coarse grain), and/or what guided the making of this list. It\u0027d be interesting to know what you at Google are compiling to gwtar.",
+      "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

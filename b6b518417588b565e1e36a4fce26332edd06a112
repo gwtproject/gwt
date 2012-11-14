@@ -16,6 +16,41 @@
       "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALi3///RA\u003d",
+        "filename": "user/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-14T19:59:30Z",
+      "side": 1,
+      "message": "AFAIK, our internal builds don\u0027t compile anything in gwt-user.jar to gwtar, and only a handful of internal modules are whitelisted to be compiled with CompileModule.  Ray or Brian would know details behind why this is.",
+      "parentUuid": "AAALln////E\u003d",
+      "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALi3///Vw\u003d",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-14T19:59:30Z",
+      "side": 1,
+      "message": "So the only thing I don\u0027t like about this approach is the callback stays pending until fired, rather than being cancelled with window.clearTimeout() like how Timer handles cancels.  So potentially apps with a lot of requests and long timeouts will tie up more browser resources this way, I think?",
+      "revId": "b6b518417588b565e1e36a4fce26332edd06a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,23 @@
       "revId": "d31bd85e4cf384642a1d738e6ce35f6a750ab61c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALln////w\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2012-11-14T08:57:07Z",
+      "side": 1,
+      "message": "I think it could be better to \u0027assert getMethods().size() \u003e 0\u0027 before \u0027get(0)\u0027 to raise an assertion error instead of an IndexOutOfBoundException",
+      "revId": "d31bd85e4cf384642a1d738e6ce35f6a750ab61c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

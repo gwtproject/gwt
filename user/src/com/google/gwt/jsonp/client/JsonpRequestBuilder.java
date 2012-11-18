@@ -15,8 +15,8 @@
  */
 package com.google.gwt.jsonp.client;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Class to send cross domain requests to an http server. The server will receive a request
@@ -36,7 +36,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * <pre>&lt;failureCallback&gt;(&lt;error&gt;);</pre>
  *
  * where &lt;error&gt; is a string containing an error message. This will result on the client to
- * call the corresponding {@link AsyncCallback#onFailure(Throwable)} method. See
+ * call the corresponding {@link Callback#onFailure(Object)} method. See
  * {@link #setFailureCallbackParam(String)}.
  *
  * <p>
@@ -48,7 +48,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *     "?alt=json-in-script";
  * JsonpRequestBuilder jsonp = new JsonpRequestBuilder();
  * jsonp.requestObject(url,
- *     new AsyncCallback&lt;Feed&gt;() {
+ *     new Callback&lt;Feed, Throwable&gt;() {
  *       public void onFailure(Throwable throwable) {
  *         Log.severe("Error: " + throwable);
  *       }
@@ -129,15 +129,15 @@ public class JsonpRequestBuilder {
     return timeout;
   }
 
-  public JsonpRequest<Boolean> requestBoolean(String url, AsyncCallback<Boolean> callback) {
+  public JsonpRequest<Boolean> requestBoolean(String url, Callback<Boolean, Throwable> callback) {
     return send(url, callback, false);
   }
 
-  public JsonpRequest<Double> requestDouble(String url, AsyncCallback<Double> callback) {
+  public JsonpRequest<Double> requestDouble(String url, Callback<Double, Throwable> callback) {
     return send(url, callback, false);
   }
 
-  public JsonpRequest<Integer> requestInteger(String url, AsyncCallback<Integer> callback) {
+  public JsonpRequest<Integer> requestInteger(String url, Callback<Integer, Throwable> callback) {
     return send(url, callback, true);
   }
 
@@ -146,11 +146,11 @@ public class JsonpRequestBuilder {
    * {@link com.google.gwt.json.client.JSONObject} to parse it, or use a JavaScript overlay class.
    */
   public <T extends JavaScriptObject> JsonpRequest<T> requestObject(String url,
-      AsyncCallback<T> callback) {
+      Callback<T, Throwable> callback) {
     return send(url, callback, false);
   }
 
-  public JsonpRequest<String> requestString(String url, AsyncCallback<String> callback) {
+  public JsonpRequest<String> requestString(String url, Callback<String, Throwable> callback) {
     return send(url, callback, false);
   }
 
@@ -165,7 +165,7 @@ public class JsonpRequestBuilder {
    * Sends a JSONP request, does not expect any result, but still allows to be notified when the
    * request has been executed on the server.
    */
-  public JsonpRequest<Void> send(String url, AsyncCallback<Void> callback) {
+  public JsonpRequest<Void> send(String url, Callback<Void, Throwable> callback) {
     return send(url, callback, false);
   }
 
@@ -196,7 +196,8 @@ public class JsonpRequestBuilder {
     this.timeout = timeout;
   }
 
-  private <T> JsonpRequest<T> send(String url, AsyncCallback<T> callback, boolean expectInteger) {
+  private <T> JsonpRequest<T> send(String url, Callback<T, Throwable> callback,
+      boolean expectInteger) {
     JsonpRequest<T> request;
     if (predeterminedId != null) {
       request = new JsonpRequest<T>(callback, timeout, expectInteger, callbackParam,

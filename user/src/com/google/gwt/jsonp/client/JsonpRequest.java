@@ -15,6 +15,7 @@
  */
 package com.google.gwt.jsonp.client;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -22,7 +23,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * A JSONP request that is waiting for a response. The request can be canceled.
@@ -93,7 +93,7 @@ public class JsonpRequest<T> {
 
   private final int timeout;
 
-  private final AsyncCallback<T> callback;
+  private final Callback<T, Throwable> callback;
 
   /**
    * Whether the result is expected to be an integer or not.
@@ -124,7 +124,7 @@ public class JsonpRequest<T> {
    * @param failureCallbackParam Name of the url param containing the the
    *          failure callback function name, or null for no failure callback
    */
-  JsonpRequest(AsyncCallback<T> callback, int timeout, boolean expectInteger,
+  JsonpRequest(Callback<T, Throwable> callback, int timeout, boolean expectInteger,
       String callbackParam, String failureCallbackParam) {
     callbackId = nextCallbackId();
     this.callback = callback;
@@ -152,7 +152,7 @@ public class JsonpRequest<T> {
    *          failure callback function name, or null for no failure callback
    * @param id unique id for the resource that is being fetched
    */
-  JsonpRequest(AsyncCallback<T> callback, int timeout, boolean expectInteger,
+  JsonpRequest(Callback<T, Throwable> callback, int timeout, boolean expectInteger,
       String callbackParam, String failureCallbackParam, String id) {
     callbackId = getPredeterminedId(id);
     this.callback = callback;
@@ -173,7 +173,7 @@ public class JsonpRequest<T> {
     unload();
   }
 
-  public AsyncCallback<T> getCallback() {
+  public Callback<T, Throwable> getCallback() {
     return callback;
   }
 

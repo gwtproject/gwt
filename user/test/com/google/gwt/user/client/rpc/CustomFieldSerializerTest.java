@@ -43,7 +43,7 @@ public class CustomFieldSerializerTest extends RpcTestBase {
     delayTestFinishForRpc();
     service.echo(
         CustomFieldSerializerTestSetFactory.createUnserializableSubclass(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             assertTrue("Should be a SerializationException",
                 caught instanceof SerializationException);
@@ -66,7 +66,7 @@ public class CustomFieldSerializerTest extends RpcTestBase {
     delayTestFinishForRpc();
     service.echo(
         CustomFieldSerializerTestSetFactory.createUnserializableClass(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             AssertionFailedError er = new AssertionFailedError(
                 "Class UnserializableClass should be serializable because it has a custom field serializer");
@@ -94,7 +94,7 @@ public class CustomFieldSerializerTest extends RpcTestBase {
     delayTestFinishForRpc();
     service.echo(
         CustomFieldSerializerTestSetFactory.createSerializableImmutablesArray(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             AssertionFailedError er = new AssertionFailedError(
                 "Could not serialize/deserialize immutable classes");
@@ -119,7 +119,7 @@ public class CustomFieldSerializerTest extends RpcTestBase {
     delayTestFinishForRpc();
     service.echo(
         CustomFieldSerializerTestSetFactory.createSerializableSubclass(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             AssertionFailedError er = new AssertionFailedError(
                 "Class SerializableSubclass should be serializable automatically");

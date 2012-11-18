@@ -31,7 +31,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     delayTestFinishForRpc();
     service.echo_AcyclicGraph(TestSetFactory.createAcyclicGraph(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             TestSetValidator.rethrowException(caught);
           }
@@ -48,7 +48,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     delayTestFinishForRpc();
     service.echo_ComplexCyclicGraph(TestSetFactory.createComplexCyclicGraph(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             TestSetValidator.rethrowException(caught);
           }
@@ -83,7 +83,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     final SerializableDoublyLinkedNode node = TestSetFactory.createComplexCyclicGraph();
     delayTestFinishForRpc();
-    service.echo_ComplexCyclicGraph(node, node, new AsyncCallback() {
+    service.echo_ComplexCyclicGraph(node, node, new AsyncCallback<Object>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
@@ -100,7 +100,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     final SerializableWithTwoArrays node = TestSetFactory.createDoublyReferencedArray();
     delayTestFinishForRpc();
-    service.echo_SerializableWithTwoArrays(node, new AsyncCallback() {
+    service.echo_SerializableWithTwoArrays(node, new AsyncCallback<Object>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
@@ -134,7 +134,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     final SerializablePrivateNoArg node = TestSetFactory.createPrivateNoArg();
     delayTestFinishForRpc();
-    service.echo_PrivateNoArg(node, new AsyncCallback() {
+    service.echo_PrivateNoArg(node, new AsyncCallback<Object>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
@@ -151,7 +151,7 @@ public class ObjectGraphTest extends RpcTestBase {
     ObjectGraphTestServiceAsync service = getServiceAsync();
     delayTestFinishForRpc();
     service.echo_TrivialCyclicGraph(TestSetFactory.createTrivialCyclicGraph(),
-        new AsyncCallback() {
+        new AsyncCallback<Object>() {
           public void onFailure(Throwable caught) {
             TestSetValidator.rethrowException(caught);
           }

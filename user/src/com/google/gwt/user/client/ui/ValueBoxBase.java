@@ -46,7 +46,7 @@ import java.text.ParseException;
  * @param <T> the value type
  */
 public class ValueBoxBase<T> extends FocusWidget implements
-    HasChangeHandlers, HasName, HasDirectionEstimator,
+    HasChangeHandlers, HasName, HasDirectionEstimator, HasText,
     HasValue<T>, AutoDirectionHandler.Target, IsEditor<ValueBoxEditor<T>> {
 
   /**

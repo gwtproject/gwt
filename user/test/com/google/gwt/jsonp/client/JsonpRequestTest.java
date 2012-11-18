@@ -15,12 +15,12 @@
  */
 package com.google.gwt.jsonp.client;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Tests for {@link JsonpRequest}.
@@ -30,7 +30,7 @@ public class JsonpRequestTest extends GWTTestCase {
   /**
    * Checks that an error is received.
    */
-  private class AssertFailureCallback<T> implements AsyncCallback<T> {
+  private class AssertFailureCallback<T> implements Callback<T, Throwable> {
     private String expectedMessage;
     private int id;
 
@@ -56,7 +56,7 @@ public class JsonpRequestTest extends GWTTestCase {
   /**
    * Checks that the received value is as expected.
    */
-  private class AssertSuccessCallback<T> implements AsyncCallback<T> {
+  private class AssertSuccessCallback<T> implements Callback<T, Throwable> {
     private final T expectedValue;
     private final int id;
     private final Counter counter;
@@ -92,7 +92,7 @@ public class JsonpRequestTest extends GWTTestCase {
   /**
    * Checks that a timeout happens.
    */
-  private class AssertTimeoutExceptionCallback<T> implements AsyncCallback<T> {
+  private class AssertTimeoutExceptionCallback<T> implements Callback<T, Throwable> {
     public void onFailure(Throwable throwable) {
       assertTrue(throwable instanceof TimeoutException);
       finishTest();

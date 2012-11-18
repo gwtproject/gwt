@@ -36,12 +36,12 @@ public class ServletMappingTest extends GWTTestCase {
    * Should call the implementation that returns 1.
    */
   public void testServletMapping1() {
-    makeAsyncCall(GWT.getModuleBaseURL() + "test", new AsyncCallback() {
+    makeAsyncCall(GWT.getModuleBaseURL() + "test", new AsyncCallback<Integer>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
-      public void onSuccess(Object result) {
+      public void onSuccess(Integer result) {
         finishTest();
         assertEquals(new Integer(1), result);
       }
@@ -52,12 +52,12 @@ public class ServletMappingTest extends GWTTestCase {
    * Should call the implementation that returns 2.
    */
   public void testServletMapping2() {
-    makeAsyncCall(GWT.getModuleBaseURL() + "test/longer", new AsyncCallback() {
+    makeAsyncCall(GWT.getModuleBaseURL() + "test/longer", new AsyncCallback<Integer>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
-      public void onSuccess(Object result) {
+      public void onSuccess(Integer result) {
         finishTest();
         assertEquals(new Integer(2), result);
       }
@@ -68,12 +68,12 @@ public class ServletMappingTest extends GWTTestCase {
    * Should call the implementation that returns 3.
    */
   public void testServletMapping3() {
-    makeAsyncCall(GWT.getModuleBaseURL() + "test/long", new AsyncCallback() {
+    makeAsyncCall(GWT.getModuleBaseURL() + "test/long", new AsyncCallback<Integer>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
-      public void onSuccess(Object result) {
+      public void onSuccess(Integer result) {
         finishTest();
         assertEquals(new Integer(3), result);
       }
@@ -85,12 +85,12 @@ public class ServletMappingTest extends GWTTestCase {
    */
   public void testBadRequestWithExtraPath() {
     makeAsyncCall(GWT.getModuleBaseURL() + "test/bogus/extra/path",
-        new AsyncCallback() {
+        new AsyncCallback<Integer>() {
           public void onFailure(Throwable caught) {
             finishTest();
           }
 
-          public void onSuccess(Object result) {
+          public void onSuccess(Integer result) {
             finishTest();
             assertEquals(new Integer(1), result);
           }
@@ -102,12 +102,12 @@ public class ServletMappingTest extends GWTTestCase {
    */
   public void testBadRequestWithQueryString() {
     makeAsyncCall(GWT.getModuleBaseURL() + "test/bogus?a=b&c=d",
-        new AsyncCallback() {
+        new AsyncCallback<Integer>() {
           public void onFailure(Throwable caught) {
             finishTest();
           }
 
-          public void onSuccess(Object result) {
+          public void onSuccess(Integer result) {
             finishTest();
             assertEquals(new Integer(1), result);
           }
@@ -119,12 +119,12 @@ public class ServletMappingTest extends GWTTestCase {
    */
   public void testServletMapping3WithQueryString() {
     makeAsyncCall(GWT.getModuleBaseURL() + "test/long?a=b&c=d",
-        new AsyncCallback() {
+        new AsyncCallback<Integer>() {
           public void onFailure(Throwable caught) {
             TestSetValidator.rethrowException(caught);
           }
 
-          public void onSuccess(Object result) {
+          public void onSuccess(Integer result) {
             finishTest();
             assertEquals(new Integer(3), result);
           }
@@ -136,19 +136,19 @@ public class ServletMappingTest extends GWTTestCase {
    */
   public void testTotallyDifferentServletMapping3() {
     makeAsyncCall(GWT.getModuleBaseURL()
-        + "totally/different/but/valid?a=b&c=d", new AsyncCallback() {
+        + "totally/different/but/valid?a=b&c=d", new AsyncCallback<Integer>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
-      public void onSuccess(Object result) {
+      public void onSuccess(Integer result) {
         finishTest();
         assertEquals(new Integer(3), result);
       }
     });
   }
 
-  private void makeAsyncCall(String url, AsyncCallback callback) {
+  private void makeAsyncCall(String url, AsyncCallback<Integer> callback) {
     ServletMappingTestServiceAsync async = (ServletMappingTestServiceAsync) GWT.create(ServletMappingTestService.class);
     ServiceDefTarget target = (ServiceDefTarget) async;
     target.setServiceEntryPoint(url);

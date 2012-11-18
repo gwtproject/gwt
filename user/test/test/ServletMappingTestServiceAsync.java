@@ -22,6 +22,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface ServletMappingTestServiceAsync {
 
-  void which(AsyncCallback callback);
+  void which(AsyncCallback<Integer> callback);
   
 }

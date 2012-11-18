@@ -15,6 +15,7 @@
  */
 package com.google.gwt.resources.client.impl;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -27,7 +28,6 @@ import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.safehtml.shared.SafeUri;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Implements external resource fetching of TextResources.
@@ -37,7 +37,7 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
   /**
    * Maps the HTTP callback onto the ResourceCallback.
    */
-  private class ETRCallback implements RequestCallback, AsyncCallback<JavaScriptObject> {
+  private class ETRCallback implements RequestCallback, Callback<JavaScriptObject, Throwable> {
     final ResourceCallback<TextResource> callback;
 
     public ETRCallback(ResourceCallback<TextResource> callback) {

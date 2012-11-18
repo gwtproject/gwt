@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.client.rpc;
 
+import com.google.gwt.core.client.Callback;
+
 /**
  * The primary interface a caller must implement to receive a response from a
  * remote procedure call.
@@ -89,7 +91,7 @@ package com.google.gwt.user.client.rpc;
  *          <code>void</code> return type becomes a {@link Void} type
  *          argument, which is always <code>null</code>).
  */
-public interface AsyncCallback<T> {
+public interface AsyncCallback<T> extends Callback<T, Throwable> {
 
   /**
    * Called when an asynchronous call fails to complete normally.

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALxn///68\u003d",
+        "filename": "user/src/com/google/gwt/cell/Cell.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-20T22:09:28Z",
+      "side": 1,
+      "message": "Is this needed because you removed something from one of the others?",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALxn///64\u003d",
+        "filename": "user/src/com/google/gwt/editor/Editor.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-20T22:09:28Z",
+      "side": 1,
+      "message": "Why does this need UI now when it didn\u0027t before?",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALxn///6I\u003d",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-20T22:09:28Z",
+      "side": 1,
+      "message": "tabs (not your fault, just noticed)",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALxn///5o\u003d",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-20T22:09:28Z",
+      "side": 1,
+      "message": "tabs",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

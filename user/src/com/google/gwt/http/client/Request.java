@@ -15,7 +15,6 @@
  */
 package com.google.gwt.http.client;
 
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -30,6 +29,10 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  * 
  */
 public class Request {
+
+  private static native void cancelTimer(double timerId) /*-{
+    $wnd.clearTimeout(timerId);
+  }-*/;
 
   /**
    * Creates a {@link Response} instance for the given JavaScript XmlHttpRequest
@@ -135,10 +138,10 @@ public class Request {
   private final int timeoutMillis;
 
   /*
-   * Timer used to force HTTPRequest timeouts. If the user has not requested a
-   * timeout then this field is null.
+   * ID of the timer used to force HTTPRequest timeouts. If the user has not
+   * requested a timeout then this field is NaN.
    */
-  private final Timer timer;
+  private final double timerId;
 
   /*
    * JavaScript XmlHttpRequest object that this Java class wraps. This field is
@@ -154,7 +157,7 @@ public class Request {
   protected Request() {
     timeoutMillis = 0;
     xmlHttpRequest = null;
-    timer = null;
+    timerId = Double.NaN;
   }
 
   /**
@@ -186,18 +189,11 @@ public class Request {
     this.xmlHttpRequest = xmlHttpRequest;
 
     if (timeoutMillis > 0) {
-      // create and start a Timer
-      timer = new Timer() {
-        @Override
-        public void run() {
-          fireOnTimeout(callback);
-        }
-      };
-
-      timer.schedule(timeoutMillis);
+      // create and schedule a cancel command
+      timerId = scheduleTimer(callback, timeoutMillis);
     } else {
       // no Timer required
-      timer = null;
+      timerId = Double.NaN;
     }
   }
 
@@ -292,8 +288,8 @@ public class Request {
    * Stops the current HTTPRequest timer if there is one.
    */
   private void cancelTimer() {
-    if (timer != null) {
-      timer.cancel();
+    if (Double.isNaN(timerId)) {
+      cancelTimer(timerId);
     }
   }
 
@@ -346,5 +342,19 @@ public class Request {
              "https://bugzilla.mozilla.org/show_bug.cgi?id=238559 for more " +
              "details";
     }
+  }-*/;
+
+  /**
+   * We don't use a Timer to avoid a dependency on User, and we avoid Scheduler
+   * as there's no way to cancel scheduled commands. Timer tracks running
+   * timers and automatically cancels them on unload, but we don't need it as
+   * the underlying XHR will be aborted, and we cancel the timer in this case,
+   * so we don't leak.
+   */
+  private native double scheduleTimer(RequestCallback callback, int timeoutMillis) /*-{
+    var that = this;
+    return $wnd.setTimeout($entry(function() {
+      that.@com.google.gwt.http.client.Request::fireOnTimeout(Lcom/google/gwt/http/client/RequestCallback;)(callback);
+    }), timeoutMillis);
   }-*/;
 }

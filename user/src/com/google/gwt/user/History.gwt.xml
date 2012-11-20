@@ -17,8 +17,17 @@
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module>
-	<inherits name="com.google.gwt.core.Core"/>
-	<inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.useragent.UserAgent"/>
+  <inherits name="com.google.gwt.dom.DOM"/>
+  <inherits name="com.google.gwt.event.logical.LogicalEvent"/>
+  <inherits name="com.google.gwt.user.Timer"/>
+  <inherits name="com.google.gwt.user.Window"/>
+
+  <source path="client">
+    <include name="History*.java" />
+    <include name="impl/HistoryImpl*.java" />
+  </source>
 
   <!-- Mozilla has a slightly different history implementation than the     -->
   <!-- standard case.                                                       -->

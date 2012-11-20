@@ -17,12 +17,11 @@
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module>
-	<inherits name="com.google.gwt.core.Core"/>
-	<inherits name="com.google.gwt.user.UserAgent"/>
+  <source path="null" />
 
-	<!-- Opera fires change events on every character typed -->
-	<replace-with class="com.google.gwt.user.client.ui.FileUpload.FileUploadImplOpera">
-		<when-type-is class="com.google.gwt.user.client.ui.FileUpload.FileUploadImpl"/>
-		<when-property-is name="user.agent" value="opera"/>
-	</replace-with>
+  <!-- Opera fires change events on every character typed -->
+  <replace-with class="com.google.gwt.user.client.ui.FileUpload.FileUploadImplOpera">
+    <when-type-is class="com.google.gwt.user.client.ui.FileUpload.FileUploadImpl"/>
+    <when-property-is name="user.agent" value="opera"/>
+  </replace-with>
 </module>

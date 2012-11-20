@@ -18,10 +18,9 @@
 <!-- package must inherit this module.                                      -->
 <!--                                                                        -->
 <module>
-	<inherits name="com.google.gwt.core.Core"/>
-	<inherits name="com.google.gwt.xhr.XMLHttpRequest"/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.xhr.XMLHttpRequest"/>
 
-	<!-- Inheriting User module for Window and Timer. These should be factored
-	     out of User soon. -->
-	<inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.user.Timer"/>
+  <inherits name="com.google.gwt.user.Window"/>
 </module>

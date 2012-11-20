@@ -18,7 +18,9 @@
  -->
 <module>
   <inherits name="com.google.gwt.user.RemoteService" />
-  
+
+  <source path="null" />
+
   <!--
     Do not simply copy this. It is likely that the mechanism used to enable
     elision will change in the future, and it may be the case that elision

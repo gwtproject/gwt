@@ -14,7 +14,8 @@
 <!-- Editor framework support -->
 <module>
   <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.validation.Validation" />
+  <inherits name="com.google.gwt.user.UI" />
+  <inherits name="javax.validation.Validation" />
 
   <source path="client"/>
   <source path="shared"/>

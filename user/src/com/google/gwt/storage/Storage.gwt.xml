@@ -13,7 +13,9 @@
 <!-- limitations under the License.                                         -->
 
 <module>
-  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.core.Core" />
+  <inherits name='com.google.gwt.event.EventBase'/>
+  <inherits name='com.google.gwt.useragent.UserAgent'/>
 
   <!-- Define the storage support property -->
   <define-property name="storageSupport" values="maybe,no" />

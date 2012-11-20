@@ -57,7 +57,9 @@ function loadSelectionScript() {
   moduleName = moduleName.substr(0, pos);
   pos = moduleName.lastIndexOf('/');
   moduleName = moduleName.substr(pos + 1);
-  document.write("<script language='javascript' src='" + moduleName + ".nocache.js'></script>");
+  if (!/["&'<=>]/.test(moduleName)) {
+    document.write("<script language='javascript' src='" + encodeURIComponent(moduleName) + ".nocache.js'><\/script>");
+  }
 }
 loadSelectionScript();
 -->

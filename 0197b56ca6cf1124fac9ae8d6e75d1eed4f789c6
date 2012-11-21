@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAALx3///tc\u003d",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-21T10:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAALxn///6I\u003d",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALxn///5o\u003d",
         "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
         "patchSetId": 1
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "AAALx3///tY\u003d",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-21T10:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAALxn///5o\u003d",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALx3///uE\u003d",
         "filename": "user/src/com/google/gwt/user/UI.gwt.xml",
         "patchSetId": 1
@@ -117,6 +153,24 @@
       "writtenOn": "2012-11-21T10:05:08Z",
       "side": 1,
       "message": "Oops, forgot to inherit c.g.g.u.cellview.CellView: there\u0027s actually a circular dependency between UI and CellView, as ValueListBox uses CellList.",
+      "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALx3///tU\u003d",
+        "filename": "user/src/com/google/gwt/user/UI.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-21T10:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAALx3///uE\u003d",
       "revId": "0197b56ca6cf1124fac9ae8d6e75d1eed4f789c6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

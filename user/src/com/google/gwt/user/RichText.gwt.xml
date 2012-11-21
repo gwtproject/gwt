@@ -15,8 +15,7 @@
 <!-- Deferred binding rules for browser selection.                          -->
 <!--                                                                        -->
 <module>
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.user.UserAgent" />
+  <source path="null" />
 
   <!-- IE-specific implementation -->
   <replace-with

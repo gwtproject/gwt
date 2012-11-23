@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.event.EventBase"/>
+  <inherits name="com.google.gwt.user.History"/>
 
   <source path="shared"/>
   <source path="impl"/>
+
   <generate-with class="com.google.gwt.place.rebind.PlaceHistoryMapperGenerator">
     <when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryMapper"/>
   </generate-with>

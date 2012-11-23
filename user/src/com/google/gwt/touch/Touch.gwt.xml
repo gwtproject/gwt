@@ -12,6 +12,6 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 <module>
-  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.user.UI" />
   <source path="client"/>
 </module>

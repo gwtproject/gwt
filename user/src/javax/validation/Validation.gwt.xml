@@ -16,6 +16,10 @@
 -->
 <!-- Includes the javax.validation classes from the source jar  -->
 <module>
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  <inherits name="com.google.gwt.user.CustomFieldSerializer"/>
+  <inherits name="com.google.gwt.validation.ValidationBase"/>
+
   <source path="">
     <exclude name="super/"/>
   </source>

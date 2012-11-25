@@ -16,6 +16,24 @@
       "revId": "e528e8b4edcbf5d71aef382014d5620854856fa7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALx3///IU\u003d",
+        "filename": "user/src/com/google/gwt/user/AsyncCallback.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-25T17:14:26Z",
+      "side": 1,
+      "message": "It\u0027s \"duplicated\" in RemoteService. But I really don\u0027t think it\u0027s an issue in practice:\n\n- having debugged a bit in the PathPrefixSet et al. all those filters are \"merged\" in a trie and asked whether a given file (found from scanning the classpath) is \"allowed\" or not, so as long as they don\u0027t contradict that should be OK (this is probably why skips\u003d\"\" was added in addition to includes\u003d\"\" and excludes\u003d\"\", but it\u0027s unfortunately undocumented). What you have to be careful about is to use the same path\u003d\"\", i.e. do not use \u003csource path\u003d\"client/rpc\" includes\u003d\"AsyncCallback.java\"/\u003e here; *that* would cause issues (and not only in DevMode).\n\n- All modules from c.g.g.user (and other packages) \"duplicated\" files from each others anyway, as they all relied on the default \u003csource path\u003d\"client\"/\u003e.",
+      "parentUuid": "AAALwH///1g\u003d",
+      "revId": "e528e8b4edcbf5d71aef382014d5620854856fa7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

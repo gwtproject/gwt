@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALwH///1w\u003d",
+        "filename": "user/src/com/google/gwt/user/client/BaseListenerWrapper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2012-11-25T15:55:03Z",
+      "side": 1,
+      "message": "Should we just remove this class instead, since we promised we would remove it in 2.0?",
+      "revId": "d336335fa16a1242ea713a83e2d12d5c6b51115d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALwH///1s\u003d",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2012-11-25T15:55:03Z",
+      "side": 1,
+      "message": "Trailing space.",
+      "revId": "d336335fa16a1242ea713a83e2d12d5c6b51115d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALwH///1o\u003d",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2012-11-25T15:55:03Z",
+      "side": 1,
+      "message": "Trailing space.",
+      "revId": "d336335fa16a1242ea713a83e2d12d5c6b51115d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

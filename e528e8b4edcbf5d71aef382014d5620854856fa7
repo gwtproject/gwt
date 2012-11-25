@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALwH///1g\u003d",
+        "filename": "user/src/com/google/gwt/user/AsyncCallback.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2012-11-25T16:04:41Z",
+      "side": 1,
+      "message": "Does this get excluded from another module someplace, or will this source file be duplicated in multiple modules?",
+      "revId": "e528e8b4edcbf5d71aef382014d5620854856fa7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

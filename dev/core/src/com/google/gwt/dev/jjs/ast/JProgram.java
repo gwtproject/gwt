@@ -74,8 +74,8 @@ public class JProgram extends JNode {
    *
    * Classes are inserted into the JsAST in the order they appear in the Set.
    */
-  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
-      "com.google.gwt.lang.SeedUtil"));
+  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(
+      Arrays.asList("com.google.gwt.lang.SeedUtil"));
 
   public static final Set<String> INDEX_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
       "java.io.Serializable", "java.lang.Object", "java.lang.String", "java.lang.Class",
@@ -195,6 +195,27 @@ public class JProgram extends JNode {
 
     enclosingMethod.addParam(x);
     return x;
+  }
+
+  /**
+   * Determines whether a subclass of <code>type</code> in in the collection <code>types</code>.
+   *
+   * @param type a class.
+   * @param types a collections of classes.
+   * @return true if the collection <code>types</code> contains a subclass of <code>type</code>;
+   *         false otherwise.
+   */
+
+  public static boolean containsSubtype(JDeclaredType type, Collection<JDeclaredType> types) {
+    for (JDeclaredType tp : types) {
+      while (tp != null) {
+        if (tp == type) {
+          return true;
+        }
+        tp = tp.getSuperClass();
+      }
+    }
+    return false;
   }
 
   public static List<JDeclaredType> deserializeTypes(ObjectInputStream stream) throws IOException,
@@ -911,7 +932,8 @@ public class JProgram extends JNode {
     return JPrimitiveType.VOID;
   }
 
-  public void initTypeInfo(IdentityHashMap<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
+  public void initTypeInfo(IdentityHashMap<JReferenceType,
+      JsCastMap> instantiatedCastableTypesMap) {
     castMaps = instantiatedCastableTypesMap;
     if (castMaps == null) {
       castMaps = new IdentityHashMap<JReferenceType, JsCastMap>();

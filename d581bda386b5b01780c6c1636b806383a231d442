@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALu3//+qM\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-26T20:19:17Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me why this method belongs in JProgram. Maybe it should be an instance method in JDeclaredType instead?",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+qY\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-26T20:19:17Z",
+      "side": 1,
+      "message": "remove extra line",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+qU\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-26T20:19:17Z",
+      "side": 1,
+      "message": "Since you\u0027re only iterating over it, the type of \"types\" could be loosened to from Collection to Iterable.",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+po\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-26T20:19:17Z",
+      "side": 1,
+      "message": "Yes, please do this.",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+pQ\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-26T20:19:17Z",
+      "side": 1,
+      "message": "It seems like how much optimization this does depends on the order of the clinit calls in the JMultiExpression. If the most general supertype comes last then it will be removed, but if it comes first then it won\u0027t.\n\nIf we\u0027re assuming a particular order then it seems like we need a test to make sure we don\u0027t violate that invariant? Or perhaps better would be to sort based on a partial ordering?",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

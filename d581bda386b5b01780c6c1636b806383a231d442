@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "AAALu3//+o4\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "You are right. Will move to JDeclaredType.",
+      "parentUuid": "AAALu3//+qM\u003d",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+qs\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "s/in/is/",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALu3//+qY\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 1
@@ -30,6 +65,24 @@
       "writtenOn": "2012-11-26T20:19:17Z",
       "side": 1,
       "message": "remove extra line",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+ko\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAALu3//+qY\u003d",
       "revId": "d581bda386b5b01780c6c1636b806383a231d442",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "AAALu3//+ks\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAALu3//+qU\u003d",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALu3//+po\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 1
@@ -70,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "AAALu3//+kc\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "AAALu3//+po\u003d",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALu3//+pQ\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 1
@@ -81,6 +170,24 @@
       "writtenOn": "2012-11-26T20:19:17Z",
       "side": 1,
       "message": "It seems like how much optimization this does depends on the order of the clinit calls in the JMultiExpression. If the most general supertype comes last then it will be removed, but if it comes first then it won\u0027t.\n\nIf we\u0027re assuming a particular order then it seems like we need a test to make sure we don\u0027t violate that invariant? Or perhaps better would be to sort based on a partial ordering?",
+      "revId": "d581bda386b5b01780c6c1636b806383a231d442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+ms\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-27T00:38:41Z",
+      "side": 1,
+      "message": "It does depend on the order. clinit() calls initialize the class (static) variables and are inserted for example prior to access to a static field. clinit() s are also idempotent, so if there is a sequence of clinits only the first one would have an effect. \nSo the idea is just to remove the extra useless calls.\n\nOnce a class static initialization is performed, it can be safely assumed that its superclass static initialization was also done. In particular a clinit for a class will always call the clinit for the first parent class upwards in the hierarchy with a non empty clinit(). \n\nThis is a very simple optimization that, I believe, will take care of the most common cases. There are two (a bit more complex) improvements I have in mind:\n1) subclass clinit hoisting: if a clinit for a superclass is called before a clinit of the subclass in a JMultiExpression then one could replace the former by the latter.\n2) not limit to JMultiExpressions and do a domination style analysis.\n\nI don\u0027t know how profitable would be to implement 1 and 2, though...",
+      "parentUuid": "AAALu3//+pQ\u003d",
       "revId": "d581bda386b5b01780c6c1636b806383a231d442",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

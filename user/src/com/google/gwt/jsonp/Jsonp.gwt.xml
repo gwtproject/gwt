@@ -13,6 +13,10 @@
 <!-- limitations under the License.                                         -->
 
 <module>
-	<inherits name='com.google.gwt.user.User'/>
-	<source path="client"/>
+  <inherits name='com.google.gwt.core.Core'/>
+  <inherits name='com.google.gwt.dom.DOM'/>
+  <inherits name='com.google.gwt.user.AsyncCallback'/>
+  <inherits name='com.google.gwt.user.Timer'/>
+
+  <source path="client"/>
 </module>

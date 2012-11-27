@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALu3//+Xo\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-27T01:12:55Z",
+      "side": 1,
+      "message": "API nitpick: this method doesn\u0027t need to be static because the first argument can be \"this\". Also, perhaps we can change the return value to be more informative:\n\n/**\n * Searches a sequence of candidate types for the first one that\u0027s a\n * subtype. If no subtype was found, returns null.\n */\npublic JDeclaredType findSubtype(Iterable\u003cJDeclaredType\u003e candidates)\n\nThis is a bit easier to test or debug because we can verify that it found the right candidate.",
+      "revId": "aacc1c6542c324fc0b295876d28b0a47d4af2532",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+WI\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-27T01:12:55Z",
+      "side": 1,
+      "message": "Better to revert this file since we don\u0027t need to change it anymore. (Whitespace fixes can happen some other time.)",
+      "revId": "aacc1c6542c324fc0b295876d28b0a47d4af2532",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+Vw\u003d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/OptimizerTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-27T01:12:55Z",
+      "side": 1,
+      "message": "sp: snippets",
+      "revId": "aacc1c6542c324fc0b295876d28b0a47d4af2532",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALu3//+VM\u003d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/OptimizerTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-27T01:12:55Z",
+      "side": 1,
+      "message": "I don\u0027t understand. Could you explain why this happens?",
+      "revId": "aacc1c6542c324fc0b295876d28b0a47d4af2532",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

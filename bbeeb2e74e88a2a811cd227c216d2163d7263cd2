@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAL/n////g\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JLocal.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-27T22:59:31Z",
+      "side": 1,
+      "message": "You might want to look at TempLocalVisitor to see if it is possible to reuse it.",
+      "parentUuid": "AAAL/X///9s\u003d",
+      "revId": "bbeeb2e74e88a2a811cd227c216d2163d7263cd2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAL/X///+0\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-27T22:48:29Z",
       "side": 1,
       "message": "I agree.",
+      "revId": "bbeeb2e74e88a2a811cd227c216d2163d7263cd2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAL/n////Q\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-27T22:59:31Z",
+      "side": 1,
+      "message": "I\u0027m conflicted on this, JProgram is clearly a factory.  Every JNode used to have a reference to JProgram singleton, which is one reason they are here.",
+      "parentUuid": "AAAL/X///+0\u003d",
       "revId": "bbeeb2e74e88a2a811cd227c216d2163d7263cd2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

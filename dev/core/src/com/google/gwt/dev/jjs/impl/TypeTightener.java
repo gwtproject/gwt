@@ -873,7 +873,7 @@ public class TypeTightener {
 
       FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor();
       fixer.accept(program);
-    }
+git     }
     return stats;
   }
 }

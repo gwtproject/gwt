@@ -74,8 +74,8 @@ public class JProgram extends JNode {
    *
    * Classes are inserted into the JsAST in the order they appear in the Set.
    */
-  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
-      "com.google.gwt.lang.SeedUtil"));
+  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(
+      Arrays.asList("com.google.gwt.lang.SeedUtil"));
 
   public static final Set<String> INDEX_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
       "java.io.Serializable", "java.lang.Object", "java.lang.String", "java.lang.Class",
@@ -168,6 +168,10 @@ public class JProgram extends JNode {
   /**
    * Helper to create an assignment, used to initalize fields, etc.
    */
+  // TODO(rluble): shouldn't these helpers be on more appropriate places, e.g.
+  // createAssignmentStmt --> JAssigmentStmt.create
+  // createLocal --> JLocal.create
+  // createTempLocal --< JLocal.createTemp
   public static JExpressionStatement createAssignmentStmt(SourceInfo info, JExpression lhs,
       JExpression rhs) {
     JBinaryOperation assign =
@@ -177,12 +181,20 @@ public class JProgram extends JNode {
 
   public static JLocal createLocal(SourceInfo info, String name, JType type, boolean isFinal,
       JMethodBody enclosingMethodBody) {
-    assert (name != null);
     assert (type != null);
     assert (enclosingMethodBody != null);
     JLocal x = new JLocal(info, name, type, isFinal, enclosingMethodBody);
     enclosingMethodBody.addLocal(x);
     return x;
+  }
+
+  /**
+   * Creates a temporary local variable.
+   * Assumes that local variables
+   */
+  public static JLocal createTempLocal(SourceInfo info, JType type, boolean isFinal,
+      JMethodBody enclosingMethodBody) {
+    return createLocal(info, null, type, isFinal, enclosingMethodBody);
   }
 
   public static JParameter createParameter(SourceInfo info, String name, JType type,
@@ -911,7 +923,8 @@ public class JProgram extends JNode {
     return JPrimitiveType.VOID;
   }
 
-  public void initTypeInfo(IdentityHashMap<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
+  public void initTypeInfo(IdentityHashMap<JReferenceType,
+      JsCastMap> instantiatedCastableTypesMap) {
     castMaps = instantiatedCastableTypesMap;
     if (castMaps == null) {
       castMaps = new IdentityHashMap<JReferenceType, JsCastMap>();

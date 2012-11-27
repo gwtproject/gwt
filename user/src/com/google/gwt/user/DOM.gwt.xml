@@ -18,8 +18,17 @@
 <!--                                                                        -->
 <module>
   <inherits name="com.google.gwt.core.Core"/>
-    <inherits name="com.google.gwt.dom.DOM"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.dom.DOM"/>
+  <inherits name="com.google.gwt.event.EventBase"/>
+  <inherits name="com.google.gwt.useragent.UserAgent"/>
+  <inherits name="com.google.gwt.user.Window"/>
+
+  <source path="client">
+    <include name="DOM.java" />
+    <include name="Element.java" />
+    <include name="Event*.java" />
+    <include name="impl/DOMImpl*.java" />
+  </source>
 
   <replace-with class="com.google.gwt.user.client.impl.DOMImplOpera">
     <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
@@ -31,10 +40,10 @@
     <when-property-is name="user.agent" value="safari"/>
   </replace-with>
 
-    <replace-with class="com.google.gwt.user.client.impl.DOMImplIE9">
-        <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
-        <when-property-is name="user.agent" value="ie9"/>
-    </replace-with>
+  <replace-with class="com.google.gwt.user.client.impl.DOMImplIE9">
+    <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+    <when-property-is name="user.agent" value="ie9"/>
+  </replace-with>
 
   <replace-with class="com.google.gwt.user.client.impl.DOMImplIE8">
     <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>

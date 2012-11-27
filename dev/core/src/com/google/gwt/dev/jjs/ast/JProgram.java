@@ -74,8 +74,8 @@ public class JProgram extends JNode {
    *
    * Classes are inserted into the JsAST in the order they appear in the Set.
    */
-  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
-      "com.google.gwt.lang.SeedUtil"));
+  public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(
+      Arrays.asList("com.google.gwt.lang.SeedUtil"));
 
   public static final Set<String> INDEX_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
       "java.io.Serializable", "java.lang.Object", "java.lang.String", "java.lang.Class",
@@ -911,7 +911,8 @@ public class JProgram extends JNode {
     return JPrimitiveType.VOID;
   }
 
-  public void initTypeInfo(IdentityHashMap<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
+  public void initTypeInfo(IdentityHashMap<JReferenceType,
+      JsCastMap> instantiatedCastableTypesMap) {
     castMaps = instantiatedCastableTypesMap;
     if (castMaps == null) {
       castMaps = new IdentityHashMap<JReferenceType, JsCastMap>();

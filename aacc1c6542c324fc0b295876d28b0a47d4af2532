@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAALu3//+CY\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-27T19:06:12Z",
+      "side": 1,
+      "message": "Don\u0027t see it. Need to upload?",
+      "parentUuid": "AAALu3//+Tg\u003d",
+      "revId": "aacc1c6542c324fc0b295876d28b0a47d4af2532",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALu3//+WI\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 2

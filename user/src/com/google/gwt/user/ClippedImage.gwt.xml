@@ -24,14 +24,14 @@
 <!-- to all GWT applications.                                               -->
 
 <module>
-	<inherits name="com.google.gwt.core.Core" />
-	<inherits name="com.google.gwt.user.UserAgent" />
+  <!-- Assume ClippedImageImpl et al. are already imported -->
+  <source path="null"/>
 
-	<!-- IE6 needs a different implementation. IE8 does not. -->
-	<replace-with
-		class="com.google.gwt.user.client.ui.impl.ClippedImageImplIE6">
-		<when-type-is
-			class="com.google.gwt.user.client.ui.impl.ClippedImageImpl" />
-		<when-property-is name="user.agent" value="ie6" />
-	</replace-with>
+  <!-- IE6 needs a different implementation. IE8 does not. -->
+  <replace-with
+    class="com.google.gwt.user.client.ui.impl.ClippedImageImplIE6">
+    <when-type-is
+      class="com.google.gwt.user.client.ui.impl.ClippedImageImpl" />
+    <when-property-is name="user.agent" value="ie6" />
+  </replace-with>
 </module>

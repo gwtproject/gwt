@@ -18,9 +18,13 @@
 <!--                                                                       -->
 <module>
   <inherits name="com.google.gwt.regexp.RegExp"/>
+  <!-- Needed in UriUtils for c.g.g.http.client.URL -->
+  <inherits name="com.google.gwt.http.HTTP"/>
+
   <source path="client"/>
   <source path="shared"/>
   <super-source path="super"/>
+
   <generate-with class="com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator">
     <when-type-assignable class="com.google.gwt.safehtml.client.SafeHtmlTemplates"/>
   </generate-with>

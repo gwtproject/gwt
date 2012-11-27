@@ -17,8 +17,7 @@
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module>
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <source path="null" />
 
   <!-- Mozilla needs a different implementation due to issue #410 -->
   <replace-with class="com.google.gwt.user.client.ui.impl.PopupImplMozilla">

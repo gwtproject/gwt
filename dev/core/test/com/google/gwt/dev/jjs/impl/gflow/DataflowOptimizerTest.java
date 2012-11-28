@@ -376,7 +376,8 @@ public class DataflowOptimizerTest extends OptimizerTestBase {
               "return x;")
         // TODO: Allow the second line below to be transformed to just: "EntryPoint.x = n;"
         .intoString("Integer n = new Integer(1);",
-                    "((EntryPoint.x = n, true)) || EntryPoint.fail();",
+                    "EntryPoint.x = n;",
+                    "true;",
                     "return EntryPoint.x.intValue();");
     
   }

@@ -114,8 +114,29 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "} while (false);");
   }
 
+  public void testMultiExpressionOptimization() throws Exception {
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static int f1 = 4;",
+        "  static boolean m1() { return true; }",
+        "  static boolean m2() { if (4-f1 == 0) return true; else return false;}",
+        "}");
+
+    // TODO(rluble): Uncomment the code once the CL implementing
+    // multiexpression tests is submitted and the necessary modifications
+    // to OptimizerTestBase are performed (such as adding simple inlining)
+
+/*
+    optimizeExpressions(true, "void", "A.m1() || A.m2()")
+        .intoString("EntryPoint$A.$clinit(); true;\n");
+    optimizeExpressions(true, "void", "A.m1() && A.m2()")
+        .intoString("EntryPoint$A.$clinit(); A.m2();\n");
+*/
+  }
+
   public void testOptimizeStringCalls() throws Exception {
-    // Note: we're limited here by the methods declared in the mock String in JJSTestBase#addBuiltinClasses
+    // Note: we're limited here by the methods declared in the mock String in
+    // JJSTestBase#addBuiltinClasses
 
     // String.length
     optimize("int", "return \"abc\".length();").intoString("return 3;");

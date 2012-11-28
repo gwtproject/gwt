@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAL/n///tk\u003d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/DataflowOptimizerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-28T18:07:13Z",
+      "side": 1,
+      "message": "Except for the dangling true; which I am taking care of now.",
+      "parentUuid": "AAAL/n///uw\u003d",
+      "revId": "b22d37c6067f9a8fa03d43fd5831a385e856ee7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAL/n///us\u003d",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/DataflowOptimizerTest.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-28T16:56:25Z",
       "side": 1,
       "message": "Why doesn\u0027t \"true\" get optimized away here?",
+      "revId": "b22d37c6067f9a8fa03d43fd5831a385e856ee7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAL/n///rs\u003d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/DataflowOptimizerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-28T18:07:13Z",
+      "side": 1,
+      "message": "It would if DeadCodeElimination was performed in multiple passes. Will fix that.",
+      "parentUuid": "AAAL/n///us\u003d",
       "revId": "b22d37c6067f9a8fa03d43fd5831a385e856ee7f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

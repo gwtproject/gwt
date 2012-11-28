@@ -16,6 +16,24 @@
       "revId": "dbb37041df619c433c19ec0b68085e784d513e1c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAL/n///vY\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-28T14:56:48Z",
+      "side": 1,
+      "message": "In that case a and b would be removed in the next iteration of the optimization loop.\n\nFixed the comments on shortCircuit...",
+      "parentUuid": "AAAMBn///9c\u003d",
+      "revId": "dbb37041df619c433c19ec0b68085e784d513e1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

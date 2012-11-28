@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAL/n///tg\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModuleOptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-28T17:26:09Z",
+      "side": 1,
+      "message": "Hm, no copyright notice?",
+      "revId": "d8ba4798c60c149403857251952975b4d31a630d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

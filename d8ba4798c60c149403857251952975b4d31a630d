@@ -16,6 +16,24 @@
       "revId": "d8ba4798c60c149403857251952975b4d31a630d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAMBn///6Y\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModuleOptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-28T17:35:54Z",
+      "side": 1,
+      "message": "Oops!\n\nDone",
+      "parentUuid": "AAAL/n///tg\u003d",
+      "revId": "d8ba4798c60c149403857251952975b4d31a630d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

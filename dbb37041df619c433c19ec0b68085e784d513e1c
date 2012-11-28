@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAMBn///9c\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-28T11:46:31Z",
+      "side": 1,
+      "message": "What if \u0027a\u0027 and \u0027b\u0027 don\u0027t have side-effects and we\u0027re in a d\u003d\u003dfalse case?\nWithout that \"optimization\", all of a, b and c would be short-circuited; but now they\u0027ll be left in. If I read correctly, it means that (assuming none of a, b and c have side-effects) \"if ((a,b,c)\u0026\u0026false) { … }\" was optimized to \"if (false) { … }\" and then completely removed, but now will be changed to \"if (a,b,(c\u0026\u0026false) { … }\" which is then changed to \"a; b; if (c\u0026\u0026false) { … }\" and then optimized to \"a; b;\". I\u0027m not familiar with this code though, so maybe it\u0027s a non-issue, in that \"a; b;\" will be pruned too (I don\u0027t know how hasSideEffects influences later optimizations); in which case feel free to ignore my comment.\n\nAlso, I think you meant \u0027d\u0027 instead of \u0027e\u0027 in \u0027(c\u0026\u0026e)\u0027 (same below in shortCircuitOr)",
+      "revId": "dbb37041df619c433c19ec0b68085e784d513e1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

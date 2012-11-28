@@ -37,6 +37,8 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     addSnippetClassDecl("static volatile double d;");
     addSnippetClassDecl("static volatile String s;");
     addSnippetClassDecl("static volatile Object o;");
+
+    runMethodInliner = false;
   }
 
   public void testConditionalOptimizations() throws Exception {
@@ -97,6 +99,39 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "EntryPoint.b && (EntryPoint.i = 1);");
     optimize("void", "if (b) {i = 1;}").intoString(
         "EntryPoint.b && (EntryPoint.i = 1);");
+  }
+
+  public void testInstanceOfOptimization() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { "
+            + "static int f1;"
+            + "static A createA() { A.f1 = 1; if (A.f1 == 1) return new A(); return null; } "
+            + "static boolean m1() { return (createA() instanceof A); } "
+            + "static boolean inlineable() { m1(); return true;}"
+            + "}");
+
+    optimizeExpressions(false, "void", "A.inlineable()")
+        .into("A.createA();");
+  }
+
+  /**
+   * BUG: JInstance was marked as not having side effects whereas it all depends on the
+   * whether the expression on the left has side effects.
+   *
+   */
+    public void testInstanceOf_sideEffectsBugOptimization() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { "
+            + "static int f1;"
+            + "static A createA() { A.f1 = 1; if (A.f1 == 1) return new A(); return null; } "
+            + "static boolean m1() { return (createA() instanceof A); } "
+            + "static boolean inlineable() { m1(); return true;}"
+            + "}");
+
+    optimize("void", "if (A.inlineable()) A.f1 = 2; else A.f1 = 3;")
+        .into("A.createA(); A.f1 = 2;");
   }
 
   public void testDoOptimization() throws Exception {
@@ -173,10 +208,17 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         + "EntryPoint$B.m2();");
   }
 
+  private boolean runMethodInliner;
+
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
     // This is necessary for String calls optimizations
     MethodCallTightener.exec(program);
+
+    if (runMethodInliner) {
+      MethodInliner.exec(program);
+    }
+
     OptimizerStats result = DeadCodeElimination.exec(program, method);
     if (result.didChange()) {
       // Make sure we converge in one pass.

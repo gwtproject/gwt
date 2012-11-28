@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAL/X//+xg\u003d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-28T23:15:48Z",
+      "side": 1,
+      "message": "nit: indent",
+      "revId": "582e553d92488ab491f94738741301cbebd722af",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

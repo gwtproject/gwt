@@ -87,6 +87,16 @@ public class Simplifier {
 
   public JExpression cast(JExpression original, SourceInfo info, JType type, JExpression exp) {
     info = getBestSourceInfo(original, info, exp);
+    if (exp instanceof JMultiExpression) {
+      // (T)(a,b,c) -> a,b,(T) c
+      JMultiExpression expMulti = (JMultiExpression) exp;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(expMulti.exprs));
+      newMulti.exprs.add(cast(null, info, type, last(expMulti.exprs)));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (type == exp.getType()) {
       return exp;
     }
@@ -312,6 +322,16 @@ public class Simplifier {
   public JExpression shortCircuitAnd(JBinaryOperation original, SourceInfo info, JExpression lhs,
       JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)&&d -> a,b,(c&&d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitAnd(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {
@@ -349,6 +369,16 @@ public class Simplifier {
   public JExpression shortCircuitOr(JBinaryOperation original, SourceInfo info, JExpression lhs,
       JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)|| d -> a,b,(c||d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitOr(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {

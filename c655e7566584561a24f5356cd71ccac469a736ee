@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MJEFnFOA",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-29T18:21:35Z",
+      "side": 1,
+      "message": "Nit: Missing asterisk?",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MJKHimCI",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-29T18:21:35Z",
+      "side": 1,
+      "message": "Since I don\u0027t think these simplifications actually apply only to an if conditional context, does it make sense to remove the \"if (...)\" wrappers here?  E.g., just\n\n  true \u0026\u0026 isWhatever() -\u003e isWhatever()\n\n?\n\nOtherwise having some examples like \"if (X) -\u003e if (Y)\" and others like just \"A -\u003e B\" makes me think the \"if\" part is significant.",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

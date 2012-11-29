@@ -15,6 +15,8 @@
  */
 package com.google.gwt.junit.server;
 
+import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
+
 import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.junit.JUnitFatalLaunchException;
@@ -25,13 +27,15 @@ import com.google.gwt.junit.client.TimeoutException;
 import com.google.gwt.junit.client.impl.JUnitHost;
 import com.google.gwt.junit.client.impl.JUnitResult;
 import com.google.gwt.user.client.rpc.InvocationException;
-import com.google.gwt.user.server.rpc.HybridServiceServlet;
 import com.google.gwt.user.server.rpc.RPCServletUtils;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -45,7 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  * communication between the unit test code running in a browser and the real
  * test process.
  */
-public class JUnitHostImpl extends HybridServiceServlet implements JUnitHost {
+public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost {
 
   private static class StrongName extends StringKey {
     protected StrongName(String value) {
@@ -162,6 +166,31 @@ public class JUnitHostImpl extends HybridServiceServlet implements JUnitHost {
     String machine = request.getRemoteHost();
     String agent = request.getHeader("User-Agent");
     return machine + " / " + agent;
+  }
+
+  /**
+   * Extract the module's base path from the current request.
+   * 
+   * @return the module's base path, modulo protocol and host, as reported by
+   *         {@link com.google.gwt.core.client.GWT#getModuleBaseURL()} or
+   *         <code>null</code> if the request did not contain the
+   *         {@value com.google.gwt.user.client.rpc.RpcRequestBuilder#MODULE_BASE_HEADER} header
+   */
+  private String getRequestModuleBasePath() {
+    try {
+      String header = getThreadLocalRequest().getHeader(MODULE_BASE_HEADER);
+      if (header == null) {
+        return null;
+      }
+      String path = new URL(header).getPath();
+      String contextPath = getThreadLocalRequest().getContextPath();
+      if (!path.startsWith(contextPath)) {
+        return null;
+      }
+      return path.substring(contextPath.length());
+    } catch (MalformedURLException e) {
+      return null;
+    }
   }
 
   private void initResult(HttpServletRequest request, JUnitResult result) {

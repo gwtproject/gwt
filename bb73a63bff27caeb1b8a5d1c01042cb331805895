@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MPUU96uM",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-29T22:49:17Z",
+      "side": 1,
+      "message": "FYI: If we inline these three calls, all the references to JProgram are gone and these are all just static methods. Too much? I\u0027d better defer to people who know the compiler better.",
+      "revId": "bb73a63bff27caeb1b8a5d1c01042cb331805895",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPQVQUiw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-29T22:49:17Z",
+      "side": 1,
+      "message": "remove blank lines in javadoc",
+      "revId": "bb73a63bff27caeb1b8a5d1c01042cb331805895",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

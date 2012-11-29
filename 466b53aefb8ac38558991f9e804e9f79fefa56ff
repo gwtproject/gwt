@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MJN5pxeM",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-29T17:28:18Z",
+      "side": 1,
+      "message": "Since JUnitHostImpl no longer extends RpcServlet, should this comment be updated to \"A remote service servlet that ...\"?",
+      "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MJL5gefM",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-29T17:28:18Z",
+      "side": 1,
+      "message": "Would it make sense to move this into AbstractRemoteServiceServlet instead to avoid the code duplication?",
+      "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

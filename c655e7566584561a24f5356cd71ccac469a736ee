@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "MLzMNiJw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-29T19:59:59Z",
+      "side": 1,
+      "message": "Hmm. The usage of getSourceInfo() is pretty confusing.\n\nIt appears there are only two calls to this method, from DeadCodeElimination (simplifying an existing cast) and from the two-argument version of this method (synthesizing a new cast, so there is no original). Nobody really needs to pass in four arguments or explicitly specify the SourceInfo except in the recursive call, which is an implementation detail.\n\nTo simplify this API, I would make the 4-argument version private and rename it to castImpl, and add a one-argument version:\n\ncast(JCastExpression original)\n\nThen we don\u0027t have to make a complicated explanation in the javadoc.\n\n(But this is just a style issue for an internal API, so it certainly doesn\u0027t need to be done now.)",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ML3MTAMQ",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-29T19:59:59Z",
+      "side": 1,
+      "message": "javadoc: \"Generates a cast to the given type and immediately simplifies it. The sourceinfo will come from the original expression.\"",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MJKHimCI",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
         "patchSetId": 4

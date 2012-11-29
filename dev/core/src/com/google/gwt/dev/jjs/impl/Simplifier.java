@@ -85,8 +85,38 @@ public class Simplifier {
     this.program = program;
   }
 
+
+  /**
+   * Simplify cast operations.
+   *
+   * <pre>
+   * (int) 1 -> 1
+
+   * (A) (a,b) -> (a, (A) b)
+   * </pre>
+   *
+   * @param original the original expression to simplify. Can be <code>null</code>;
+   *                 meaning that it has the expression has already been simplified (used in the
+   *                 recursive call). Only used to get the SourceInfo and to return in case
+   *                 no simplification can be done.
+   * @param info the SourceInfo for the resulted expression. Can be <code>null</code>. If not
+   *             <code>null</code> this is the one that will be used forward.
+   * @param type the Type to cast the expression <code>exp</code> to.
+   * @param exp the current JExpression under the cast as it is being simplified.
+   * @return the simplified expression.
+   */
   public JExpression cast(JExpression original, SourceInfo info, JType type, JExpression exp) {
     info = getBestSourceInfo(original, info, exp);
+    if (exp instanceof JMultiExpression) {
+      // (T)(a,b,c) -> a,b,(T) c
+      JMultiExpression expMulti = (JMultiExpression) exp;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(expMulti.exprs));
+      newMulti.exprs.add(cast(null, info, type, last(expMulti.exprs)));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (type == exp.getType()) {
       return exp;
     }
@@ -307,11 +337,23 @@ public class Simplifier {
    * 
    * if (isWhatever() && true) -> if (isWhatever())
    * if (isWhatever() && false) -> if (false), unless side effects
+   *
+   * (a, b) && c -> (a, b && c)
    * </pre>
    */
   public JExpression shortCircuitAnd(JBinaryOperation original, SourceInfo info, JExpression lhs,
       JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)&&d -> a,b,(c&&d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitAnd(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {
@@ -344,11 +386,23 @@ public class Simplifier {
    * 
    * if (isWhatever() || false) -> if (isWhatever())
    * if (isWhatever() || true) -> if (true), unless side effects
+
+   * (a, b) || c -> (a, b || c)
    * </pre>
    */
   public JExpression shortCircuitOr(JBinaryOperation original, SourceInfo info, JExpression lhs,
       JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)|| d -> a,b,(c||d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitOr(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {
@@ -404,6 +458,14 @@ public class Simplifier {
     return stmt;
   }
 
+  /**
+   * Determine the best SourceInfo to use in a particular transformation.
+   *
+   * @param original the original node that is being transformed. Can be <code>null</code>.
+   * @param info an explicit SourceInfo that might be used, Can be <code>null</code>.
+   * @param defaultNode a node from where to obtain the SourceInfo.
+   * @return a SourceInfo chosen according to the following priority info>original>default.
+   */
   private SourceInfo getBestSourceInfo(JNode original, SourceInfo info, JNode defaultNode) {
     if (info == null) {
       if (original == null) {

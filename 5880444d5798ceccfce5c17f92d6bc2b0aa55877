@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAMBH///rg\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T17:52:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAL/X///Jw\u003d",
+      "revId": "5880444d5798ceccfce5c17f92d6bc2b0aa55877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAL/X///HY\u003d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-28T21:00:30Z",
       "side": 1,
       "message": "add multiexpression examples here?",
+      "revId": "5880444d5798ceccfce5c17f92d6bc2b0aa55877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAMBH///sA\u003d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T17:52:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAL/X///HY\u003d",
       "revId": "5880444d5798ceccfce5c17f92d6bc2b0aa55877",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

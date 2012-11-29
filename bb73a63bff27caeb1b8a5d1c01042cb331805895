@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "MP.aOYIY",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-29T23:29:00Z",
+      "side": 1,
+      "message": "I don\u0027t have an objection. I believe these are leftovers back from when JPrimitiveType itself needed a back reference to JProgram and could not be statically constructed as a constant.",
+      "parentUuid": "MPqRgYvM",
+      "revId": "bb73a63bff27caeb1b8a5d1c01042cb331805895",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MPQVQUiw",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
         "patchSetId": 7

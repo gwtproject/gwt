@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MJAFMrDw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T22:29:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "MJEFnFOA",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MLzMNiJw",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-29T19:59:59Z",
       "side": 1,
       "message": "Hmm. The usage of getSourceInfo() is pretty confusing.\n\nIt appears there are only two calls to this method, from DeadCodeElimination (simplifying an existing cast) and from the two-argument version of this method (synthesizing a new cast, so there is no original). Nobody really needs to pass in four arguments or explicitly specify the SourceInfo except in the recursive call, which is an implementation detail.\n\nTo simplify this API, I would make the 4-argument version private and rename it to castImpl, and add a one-argument version:\n\ncast(JCastExpression original)\n\nThen we don\u0027t have to make a complicated explanation in the javadoc.\n\n(But this is just a style issue for an internal API, so it certainly doesn\u0027t need to be done now.)",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPmQfymk",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T22:29:42Z",
+      "side": 1,
+      "message": "Done. \n\nI did that for all the simplifier cases and now the public interface is cleaner and better documented",
+      "parentUuid": "MLzMNiJw",
       "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "MPoToxnU",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T22:29:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ML3MTAMQ",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MJKHimCI",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2012-11-29T18:21:35Z",
       "side": 1,
       "message": "Since I don\u0027t think these simplifications actually apply only to an if conditional context, does it make sense to remove the \"if (...)\" wrappers here?  E.g., just\n\n  true \u0026\u0026 isWhatever() -\u003e isWhatever()\n\n?\n\nOtherwise having some examples like \"if (X) -\u003e if (Y)\" and others like just \"A -\u003e B\" makes me think the \"if\" part is significant.",
+      "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MJMFVZMI",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-29T22:29:42Z",
+      "side": 1,
+      "message": "Right. I\u0027ll strip the ifs that are not relevant here.",
+      "parentUuid": "MJKHimCI",
       "revId": "c655e7566584561a24f5356cd71ccac469a736ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

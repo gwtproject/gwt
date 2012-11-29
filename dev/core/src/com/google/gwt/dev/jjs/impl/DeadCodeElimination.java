@@ -145,10 +145,10 @@ public class DeadCodeElimination {
       }
       switch (op) {
         case AND:
-          maybeReplaceMe(x, simplifier.shortCircuitAnd(x, null, lhs, rhs), ctx);
+          maybeReplaceMe(x, simplifier.and(x), ctx);
           break;
         case OR:
-          maybeReplaceMe(x, simplifier.shortCircuitOr(x, null, lhs, rhs), ctx);
+          maybeReplaceMe(x, simplifier.or(x), ctx);
           break;
         case BIT_XOR:
           simplifyXor(lhs, rhs, ctx);
@@ -265,13 +265,12 @@ public class DeadCodeElimination {
 
     @Override
     public void endVisit(JCastOperation x, Context ctx) {
-      maybeReplaceMe(x, simplifier.cast(x, x.getSourceInfo(), x.getCastType(), x.getExpr()), ctx);
+      maybeReplaceMe(x, simplifier.cast(x), ctx);
     }
 
     @Override
     public void endVisit(JConditional x, Context ctx) {
-      maybeReplaceMe(x, simplifier.conditional(x, x.getSourceInfo(), x.getType(), x.getIfTest(), x
-          .getThenExpr(), x.getElseExpr()), ctx);
+      maybeReplaceMe(x, simplifier.conditional(x), ctx);
     }
 
     @Override
@@ -366,8 +365,7 @@ public class DeadCodeElimination {
      */
     @Override
     public void endVisit(JIfStatement x, Context ctx) {
-      maybeReplaceMe(x, simplifier.ifStatement(x, x.getSourceInfo(), x.getIfExpr(),
-          x.getThenStmt(), x.getElseStmt(), currentMethod), ctx);
+      maybeReplaceMe(x, simplifier.ifStatement(x, currentMethod), ctx);
     }
 
     /**
@@ -552,7 +550,7 @@ public class DeadCodeElimination {
         }
       }
       if (x.getOp() == JUnaryOperator.NOT) {
-        maybeReplaceMe(x, simplifier.not(x, x.getSourceInfo(), x.getArg()), ctx);
+        maybeReplaceMe(x, simplifier.not(x), ctx);
         return;
       } else if (x.getOp() == JUnaryOperator.NEG) {
         maybeReplaceMe(x, simplifyNegate(x, x.getArg()), ctx);

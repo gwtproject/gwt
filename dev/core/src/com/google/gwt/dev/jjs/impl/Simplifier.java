@@ -57,36 +57,18 @@ public class Simplifier {
     return (stmt instanceof JBlock && ((JBlock) stmt).getStatements().isEmpty());
   }
 
-  /**
-   * Negate the supplied expression if negating it makes the expression shorter.
-   * Otherwise, return null.
-   */
-  static JExpression maybeUnflipBoolean(JExpression expr) {
-    if (expr instanceof JUnaryOperation) {
-      JUnaryOperation unop = (JUnaryOperation) expr;
-      if (unop.getOp() == JUnaryOperator.NOT) {
-        return unop.getArg();
-      }
-    }
-    return null;
-  }
-
-  private static <T> List<T> allButLast(List<T> list) {
-    return list.subList(0, list.size() - 1);
-  }
-
-  private static <T> T last(List<T> list) {
-    return list.get(list.size() - 1);
-  }
-
-  private final JProgram program;
-
-  public Simplifier(JProgram program) {
-    this.program = program;
-  }
-
-  public JExpression cast(JExpression original, SourceInfo info, JType type, JExpression exp) {
+  private JExpression cast(JExpression original, SourceInfo info, JType type, JExpression exp) {
     info = getBestSourceInfo(original, info, exp);
+    if (exp instanceof JMultiExpression) {
+      // (T)(a,b,c) -> a,b,(T) c
+      JMultiExpression expMulti = (JMultiExpression) exp;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(expMulti.exprs));
+      newMulti.exprs.add(cast(null, info, type, last(expMulti.exprs)));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (type == exp.getType()) {
       return exp;
     }
@@ -120,12 +102,9 @@ public class Simplifier {
     return new JCastOperation(info, type, exp);
   }
 
-  public JExpression cast(JType type, JExpression exp) {
-    return cast(null, exp.getSourceInfo(), type, exp);
-  }
-
-  public JExpression conditional(JConditional original, SourceInfo info, JType type,
-      JExpression condExpr, JExpression thenExpr, JExpression elseExpr) {
+  private JExpression conditional(JConditional original, SourceInfo info, JType type,
+                                  JExpression condExpr, JExpression thenExpr,
+                                  JExpression elseExpr) {
     info = getBestSourceInfo(original, info, condExpr);
     if (condExpr instanceof JMultiExpression) {
       // (a,b,c)?d:e -> a,b,(c?d:e)
@@ -178,8 +157,22 @@ public class Simplifier {
     return new JConditional(info, type, condExpr, thenExpr, elseExpr);
   }
 
-  public JStatement ifStatement(JIfStatement original, SourceInfo info, JExpression condExpr,
-      JStatement thenStmt, JStatement elseStmt, JMethod currentMethod) {
+  /**
+   * Negate the supplied expression if negating it makes the expression shorter.
+   * Otherwise, return null.
+   */
+  private static JExpression maybeUnflipBoolean(JExpression expr) {
+    if (expr instanceof JUnaryOperation) {
+      JUnaryOperation unop = (JUnaryOperation) expr;
+      if (unop.getOp() == JUnaryOperator.NOT) {
+        return unop.getArg();
+      }
+    }
+    return null;
+  }
+
+  private JStatement ifStatement(JIfStatement original, SourceInfo info, JExpression condExpr,
+                                 JStatement thenStmt, JStatement elseStmt, JMethod currentMethod) {
     info = getBestSourceInfo(original, info, condExpr);
     if (condExpr instanceof JMultiExpression) {
       // if(a,b,c) d else e -> {a; b; if(c) d else e; }
@@ -238,7 +231,7 @@ public class Simplifier {
     return new JIfStatement(info, condExpr, thenStmt, elseStmt);
   }
 
-  public JExpression not(JPrefixOperation original, SourceInfo info, JExpression arg) {
+  private JExpression not(JPrefixOperation original, SourceInfo info, JExpression arg) {
     info = getBestSourceInfo(original, info, arg);
     if (arg instanceof JMultiExpression) {
       // !(a,b,c) -> (a,b,!c)
@@ -298,20 +291,19 @@ public class Simplifier {
     return new JPrefixOperation(info, JUnaryOperator.NOT, arg);
   }
 
-  /**
-   * Simplify short circuit AND expressions.
-   * 
-   * <pre>
-   * if (true && isWhatever()) -> if (isWhatever())
-   * if (false && isWhatever()) -> if (false)
-   * 
-   * if (isWhatever() && true) -> if (isWhatever())
-   * if (isWhatever() && false) -> if (false), unless side effects
-   * </pre>
-   */
-  public JExpression shortCircuitAnd(JBinaryOperation original, SourceInfo info, JExpression lhs,
-      JExpression rhs) {
+  private JExpression shortCircuitAnd(JBinaryOperation original, SourceInfo info, JExpression lhs,
+                                      JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)&&d -> a,b,(c&&d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitAnd(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {
@@ -335,20 +327,19 @@ public class Simplifier {
     return new JBinaryOperation(info, rhs.getType(), JBinaryOperator.AND, lhs, rhs);
   }
 
-  /**
-   * Simplify short circuit OR expressions.
-   * 
-   * <pre>
-   * if (true || isWhatever()) -> if (true)
-   * if (false || isWhatever()) -> if (isWhatever())
-   * 
-   * if (isWhatever() || false) -> if (isWhatever())
-   * if (isWhatever() || true) -> if (true), unless side effects
-   * </pre>
-   */
-  public JExpression shortCircuitOr(JBinaryOperation original, SourceInfo info, JExpression lhs,
-      JExpression rhs) {
+  private JExpression shortCircuitOr(JBinaryOperation original, SourceInfo info, JExpression lhs,
+                                     JExpression rhs) {
     info = getBestSourceInfo(original, info, lhs);
+    if (lhs instanceof JMultiExpression) {
+      // (a,b,c)|| d -> a,b,(c||d)
+      JMultiExpression lhsMulti = (JMultiExpression) lhs;
+      JMultiExpression newMulti = new JMultiExpression(info);
+      newMulti.exprs.addAll(allButLast(lhsMulti.exprs));
+      newMulti.exprs.add(shortCircuitOr(null, info, last(lhsMulti.exprs), rhs));
+      // TODO(rluble): immediately simplify the resulting multi.
+      // TODO(rluble): refactor common outward JMultiExpression movement.
+      return newMulti;
+    }
     if (lhs instanceof JBooleanLiteral) {
       JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
       if (booleanLiteral.getValue()) {
@@ -370,6 +361,160 @@ public class Simplifier {
       return original;
     }
     return new JBinaryOperation(info, rhs.getType(), JBinaryOperator.OR, lhs, rhs);
+  }
+
+  private static <T> List<T> allButLast(List<T> list) {
+    return list.subList(0, list.size() - 1);
+  }
+
+  private static <T> T last(List<T> list) {
+    return list.get(list.size() - 1);
+  }
+
+  private final JProgram program;
+
+  public Simplifier(JProgram program) {
+    this.program = program;
+  }
+
+  /**
+   * Simplify cast operations. Used when creating a cast in DeadCodeElimination. For simplifying
+   * casts that are actually in the AST, cast(JCastOperation) is used instead.
+   *
+   * <pre>
+   * (int) 1 -> 1
+
+   * (A) (a,b) -> (a, (A) b)
+   * </pre>
+   *
+
+   * @param type the Type to cast the expression <code>exp</code> to.
+   * @param exp the current JExpression under the cast as it is being simplified.
+   * @return the simplified expression.
+   */
+  public JExpression cast(JType type, JExpression exp) {
+    return cast(null, exp.getSourceInfo(), type, exp);
+  }
+
+  /**
+   * Simplify cast operations.
+   *
+   * <pre>
+   * (int) 1 -> 1
+
+   * (A) (a,b) -> (a, (A) b)
+   * </pre>
+   *
+
+   * @param exp a JCastOperation to be simplified.
+   * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
+   */
+  public JExpression cast(JCastOperation exp) {
+    return cast(exp, exp.getSourceInfo(), exp.getCastType(), exp.getExpr());
+  }
+
+  /**
+   * Simplify conditional expressions.
+   *
+   * <pre>
+   * (a,b,c)?d:e -> a,b,(c?d:e)
+   * true ? then : else -> then
+   * false ? then : else -> else
+   * cond ? true : else) -> cond || else
+   * cond ? false : else -> !cond && else
+   * cond ? then : true -> !cond || then
+   * cond ? then : false -> cond && then
+   * !cond ? then : else -> cond ? else : then
+   * </pre>
+   *
+   * @param exp a JCondintional to be simplified.
+   * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
+   */
+  public JExpression conditional(JConditional exp) {
+    return conditional(exp, exp.getSourceInfo(), exp.getType(), exp.getIfTest(),
+        exp.getThenExpr(), exp.getElseExpr());
+  }
+
+  /**
+   * Simplifies an ifthenelse statement.
+   *
+   * <pre>
+   * if(a,b,c) d [else e] -> {a; b; if(c) d [else e]; }
+   * if(true) a [else b] -> a
+   * if(false) a else b -> b
+   * if(not(c)) a else b -> if(c) b else a
+   * if(true) ; else b -> true
+   * if(false) a [else ;] -> false
+   * if(c) ; [else ;] -> c
+   *</pre>
+   *
+   * @param stmt the statement to simplify.
+   * @param currentMethod the method where the statement resides
+   * @return the simplified statement if a simplification could be done and <code>stmt</code>
+   *         otherwise.
+   */
+  public JStatement ifStatement(JIfStatement stmt,  JMethod currentMethod) {
+    return ifStatement(stmt, stmt.getSourceInfo(), stmt.getIfExpr(),
+        stmt.getThenStmt(), stmt.getElseStmt(), currentMethod);
+  }
+
+  /**
+   * Simplifies an negation expression.
+   *
+   * if(a,b,c) d else e -> {a; b; if(c) d else e; }
+   *
+   * @param expr the expression to simplify.
+   * @return the simplified expression if a simplification could be done and <code>expr</code>
+   *         otherwise.
+   */
+
+  public JExpression not(JPrefixOperation expr) {
+    return not(expr, expr.getSourceInfo(), expr.getArg());
+  }
+
+  /**
+   * Simplify short circuit AND expressions.
+   * 
+   * <pre>
+   * true && isWhatever() -> isWhatever()
+   * false && isWhatever() -> false
+   * 
+   * isWhatever() && true -> isWhatever()
+   * isWhatever() && false -> false, unless side effects
+   *
+   * (a, b) && c -> (a, b && c)
+   * </pre>
+   *
+   * @param exp an AND JBinaryExpression to be simplified.
+   * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
+   *
+   */
+
+  public JExpression and(JBinaryOperation exp) {
+    assert exp.getOp() == JBinaryOperator.AND : "Simplifier.and was called with " + exp;
+    return shortCircuitAnd(exp, null, exp.getLhs(), exp.getRhs());
+  }
+
+  /**
+   * Simplify short circuit OR expressions.
+   * 
+   * <pre>
+   * true || isWhatever() -> true
+   * false || isWhatever() -> isWhatever()
+   * 
+   * isWhatever() || false isWhatever()
+   * isWhatever() || true -> true, unless side effects
+   *
+   * (a, b) || c -> (a, b || c)
+   * </pre>
+   *
+   * @param exp an OR JBinaryExpression to be simplified.
+   * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
+   *
+   */
+  public JExpression or(JBinaryOperation exp) {
+    assert exp.getOp() == JBinaryOperator.OR : "Simplifier.and was called with " + exp;
+    return shortCircuitOr(exp, null, exp.getLhs(), exp.getRhs());
   }
 
   private JStatement ensureBlock(JStatement stmt) {
@@ -404,6 +549,14 @@ public class Simplifier {
     return stmt;
   }
 
+  /**
+   * Determine the best SourceInfo to use in a particular transformation.
+   *
+   * @param original the original node that is being transformed. Can be <code>null</code>.
+   * @param info an explicit SourceInfo that might be used, Can be <code>null</code>.
+   * @param defaultNode a node from where to obtain the SourceInfo.
+   * @return a SourceInfo chosen according to the following priority info>original>default.
+   */
   private SourceInfo getBestSourceInfo(JNode original, SourceInfo info, JNode defaultNode) {
     if (info == null) {
       if (original == null) {

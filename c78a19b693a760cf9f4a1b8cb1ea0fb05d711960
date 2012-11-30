@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MRry9Qbs",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-30T09:36:31Z",
+      "side": 1,
+      "message": "Could you provide a short one-line summary for better a \"git log --oneline\" experience? (also applies to Gerrit and probably the Gitiles repo browser)\n\nit might be enough to insert a blank line just before the \"In IE8, …\" sentence.",
+      "revId": "c78a19b693a760cf9f4a1b8cb1ea0fb05d711960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MRpy6Bb8",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installLocationIframe.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-30T09:36:31Z",
+      "side": 1,
+      "message": "Is the standards-mode doctype doing any harm if the parent page is in quirks mode? I wonder if we couldn\u0027t just hard-code the doctype, unconditionally.",
+      "revId": "c78a19b693a760cf9f4a1b8cb1ea0fb05d711960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

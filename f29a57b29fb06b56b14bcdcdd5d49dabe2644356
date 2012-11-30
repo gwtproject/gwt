@@ -16,6 +16,41 @@
       "revId": "f29a57b29fb06b56b14bcdcdd5d49dabe2644356",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPauxDUo",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-30T01:34:27Z",
+      "side": 1,
+      "message": "Sure. I have the impression that in the past IntelliJ would do the \"right\" autoindent. Will fix",
+      "parentUuid": "MPegeK8g",
+      "revId": "f29a57b29fb06b56b14bcdcdd5d49dabe2644356",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPUt.WWM",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-30T01:34:27Z",
+      "side": 1,
+      "message": "Will fix the indent here as well",
+      "revId": "f29a57b29fb06b56b14bcdcdd5d49dabe2644356",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

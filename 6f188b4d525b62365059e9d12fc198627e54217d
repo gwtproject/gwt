@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MPcuR6ag",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "To clarify:\n\"We now emit both \"// @sourceMappingUrl\" (with the full URL) and // @sourceURL (always set to \"0.js\", to provide a stable name).\"",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPUvzuTA",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "nit: maybe call this serverPrefix and pass in \"http://host:port\"",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPUgkH8Y",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "nit: let\u0027s keep the logger last?",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPWvLFXM",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "One issue is that this change will break support for multiple hostnames, for example \"localhost\" and \"127.0.0.1\" and your machine\u0027s actual hostname will currently work at the same time, but not after this change. I wonder if we should instead pass in a template variable here and substitute the current hostname on the fly when serving the file? We\u0027d have to pick a template variable that\u0027s never used, though, which might be tricky with string literals.\n\nIt might be safer to turn off the magic variables in the compiler and just append a suffix when serving the file?",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPYsncbQ",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "should use equalsIgnoreCase to match getBooleanConfigurationProperty (and below).",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPUsa2Xo",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "Need to clarify that we\u0027re emitting both magic variables intentionally.",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPYu0UTs",
+        "filename": "user/src/com/google/gwt/core/CrossSiteIframeLinker.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T02:08:45Z",
+      "side": 1,
+      "message": "Sourcemaps are kind of obscure, so maybe prefix this with some context:\n \"Determines whether the GWT compiler generates cache.js files\nthat end with a comment pointing to a sourcemap file, to support source-level debugging in browsers.\nSpecification: https://docs.google.com/a/google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit#heading\u003dh.lmz475t4mvbx\n\"",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

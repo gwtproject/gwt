@@ -36,6 +36,41 @@
     },
     {
       "key": {
+        "uuid": "MPS4CCxQ",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-30T04:55:37Z",
+      "side": 1,
+      "message": "Why it is called NCFA? In the compiler lit nCFA refers to a control flow analyzer that keeps track of a context of size n, isn\u0027t it? Here seems to refer to the fact that we compute n 0CFA.\n\nsp --\u003e splitPoint.",
+      "parentUuid": "MPavljZw",
+      "revId": "073790f08b08fa7d8b581d5153175483203bb116",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPY4Q31o",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-11-30T04:55:37Z",
+      "side": 1,
+      "message": "Is \u0027all\u0027 used at all?",
+      "revId": "073790f08b08fa7d8b581d5153175483203bb116",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MPYv-cSc",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
         "patchSetId": 1

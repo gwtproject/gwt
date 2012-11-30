@@ -69,6 +69,24 @@
       "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPQ5Qbyw",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-30T17:45:25Z",
+      "side": 1,
+      "message": "I see.  I think this is fine then.\n\nIt looks like we only have one internal user of HybridServiceServlet and one of RpcServlet.  I\u0027ll look into whether we can eliminate those.",
+      "parentUuid": "MRnykWaQ",
+      "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

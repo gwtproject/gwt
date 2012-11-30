@@ -590,7 +590,7 @@ public class CodeSplitter2 {
   }
 
   private static <T> void updateReverseMap(int entry, Map<T, Integer> map, Set<?> liveWithoutEntry,
-      Iterable<T> all) {
+                                           Iterable<T> all, Set<?> liveFromSplitPoint) {
     for (T each : all) {
       if (!liveWithoutEntry.contains(each)) {
         /*
@@ -600,7 +600,11 @@ public class CodeSplitter2 {
          * been reached. Thus, it can be downloaded along with either i's or j's
          * code.
          */
-        map.put(each, entry);
+        if (!liveFromSplitPoint.contains(each)) {
+          // complement says it should be live, but it is not actually live within the splitpoint
+        } else {
+          map.put(each, entry);
+        }
       }
     }
   }
@@ -714,6 +718,22 @@ public class CodeSplitter2 {
     }
     return cfa;
   }
+
+  private ControlFlowAnalyzer computeAllNCfas(
+       ControlFlowAnalyzer liveAfterInitialSequence, List<Integer> sp) {
+     List<ControlFlowAnalyzer> all = new ArrayList<ControlFlowAnalyzer>();
+     ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(liveAfterInitialSequence);
+     for (JRunAsync otherRunAsync : jprogram.getRunAsyncs()) {
+       if (isInitial(otherRunAsync.getSplitPoint())) {
+         continue;
+       }
+       if (!sp.contains(otherRunAsync.getSplitPoint())) {
+         continue;
+       }
+       cfa.traverseFromRunAsync(otherRunAsync);
+     }
+     return cfa;
+   }
 
   /**
    * Compute a CFA that covers the entire live code of the program.
@@ -848,14 +868,20 @@ public class CodeSplitter2 {
       }
 
       ControlFlowAnalyzer allButOne = computeAllButNCfas(liveAfterInitialSequence, splitPoints);
+      ControlFlowAnalyzer allFromSplitPoints = computeAllNCfas(liveAfterInitialSequence, splitPoints);
+
       Set<JNode> allLiveNodes =
           union(allButOne.getLiveFieldsAndMethods(), allButOne.getFieldsWritten());
-      updateReverseMap(i, fragmentMap.fields, allLiveNodes, allFields);
-      updateReverseMap(i, fragmentMap.methods, allButOne.getLiveFieldsAndMethods(), allMethods);
+      Set<JNode> allLiveFromSplitPoints = union(allFromSplitPoints.getLiveFieldsAndMethods(),
+          allFromSplitPoints.getFieldsWritten());
+      updateReverseMap(i, fragmentMap.fields, allLiveNodes, allFields, allLiveFromSplitPoints);
+      updateReverseMap(i, fragmentMap.methods, allButOne.getLiveFieldsAndMethods(), allMethods,
+          allFromSplitPoints.getLiveFieldsAndMethods());
       updateReverseMap(i, fragmentMap.strings, allButOne.getLiveStrings(), everything
-          .getLiveStrings());
+          .getLiveStrings(), allFromSplitPoints.getLiveStrings());
       updateReverseMap(i, fragmentMap.types, declaredTypesIn(allButOne.getInstantiatedTypes()),
-          declaredTypesIn(everything.getInstantiatedTypes()));
+          declaredTypesIn(everything.getInstantiatedTypes()),
+          declaredTypesIn(allFromSplitPoints.getInstantiatedTypes()));
 
       // This mean split point [i] has been merged with another split point, ignore it.
       if (splitPointToFragmentMap[i] != i) {

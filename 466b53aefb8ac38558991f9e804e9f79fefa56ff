@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MRhyvFYQ",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-30T09:25:20Z",
+      "side": 1,
+      "message": "Well, it\u0027s still about GWT-RPC so I don\u0027t think it needs to be changed.\n\nBTW, this comment predates the move to HybridServiceServlet: https://gwt.googlesource.com/gwt/+/dedc0d20fdeed7cd95eed9914cdae529472738a5%5E/user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+      "parentUuid": "MJN5pxeM",
+      "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MJL5gefM",
         "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-29T17:28:18Z",
       "side": 1,
       "message": "Would it make sense to move this into AbstractRemoteServiceServlet instead to avoid the code duplication?",
+      "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MRnykWaQ",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-11-30T09:25:20Z",
+      "side": 1,
+      "message": "It would, but we\u0027d then break anyone who would already have that method in their subclasses (with \u0027private\u0027 visibility).\n\nIf you think it\u0027s acceptable, then I\u0027ll do the change.\n\nOn the other hand, if we consider that deRPC will eventually be removed [1], there\u0027s no point in avoiding code duplication; so it\u0027s rather a matter of whether we think this method could be useful as a public API.\n\n\n[1] if you ask me, I\u0027d remove it as soon as Google no longer uses it, assuming there are still apps in Google that do; deRPC never exited \"experimental\" state with a clear \"do not use in production\" notice, and it\u0027s been discouraged in docs [2] since 2.4.0, a year ago, so I wouldn\u0027t really mind breaking people\u0027s code in the next release.\n\n[2] https://developers.google.com/web-toolkit/doc/2.4/DevGuideServerCommunication#DevGuideDeRPC",
+      "parentUuid": "MJL5gefM",
       "revId": "466b53aefb8ac38558991f9e804e9f79fefa56ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

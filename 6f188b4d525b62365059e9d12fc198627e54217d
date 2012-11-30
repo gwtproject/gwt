@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "MXqRP4ro",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-30T23:41:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "MPUvzuTA",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MPUgkH8Y",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2012-11-30T02:08:45Z",
       "side": 1,
       "message": "nit: let\u0027s keep the logger last?",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MXoRMZsc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-30T23:41:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "MPUgkH8Y",
       "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "MXsST-gM",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-30T23:41:45Z",
+      "side": 1,
+      "message": "The problem is, you can\u0027t just append the suffix, because the fragment can be wrapped depending on how the XSI linker is injecting it. For example, if you are not using direct-install. I know SDM forces direct-install at the moment, but there may be a time when we relax this restriction.\n\nThe real fix I think is for us to get the DevTools team to actually stop \"losing\" the network information when you rename the file so that canonicaliing relative URLs will work and we can then just use relative addressing.\n\nI\u0027m unsure of what you want to do. Currently, SDM is broken on latest Chrome, we two 3 options:\n1) land this as is as a short term fix and ask chrome team for help, inform people about the host name issue\n2) add in a magic variable hack (___SDM_HOST___) to do substitution while serving that will be removed later. This would require plumbing PageUtil to allow output filtering.",
+      "parentUuid": "MPWvLFXM",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MPYsncbQ",
         "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
         "patchSetId": 1
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "MXgTQdsU",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-30T23:41:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "MPYsncbQ",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MPUsa2Xo",
         "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
         "patchSetId": 1
@@ -98,6 +170,24 @@
       "writtenOn": "2012-11-30T02:08:45Z",
       "side": 1,
       "message": "Need to clarify that we\u0027re emitting both magic variables intentionally.",
+      "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MXmTV6rU",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2012-11-30T23:41:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "MPUsa2Xo",
       "revId": "6f188b4d525b62365059e9d12fc198627e54217d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

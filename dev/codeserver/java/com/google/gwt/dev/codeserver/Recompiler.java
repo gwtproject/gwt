@@ -51,6 +51,7 @@ class Recompiler {
   private final String originalModuleName;
   private final List<File> sourcePath;
   private final TreeLogger logger;
+  private String serverLocation;
   private int compilesDone = 0;
 
   // after renaming
@@ -61,11 +62,12 @@ class Recompiler {
       new AtomicReference<ResourceLoader>();
 
   Recompiler(AppSpace appSpace, String moduleName, List<File> sourcePath,
-      TreeLogger logger) {
+             TreeLogger logger, String serverLocation) {
     this.appSpace = appSpace;
     this.originalModuleName = moduleName;
     this.sourcePath = sourcePath;
     this.logger = logger;
+    this.serverLocation = serverLocation;
   }
 
   synchronized CompileDir compile(Map<String, String> bindingProperties)
@@ -209,6 +211,10 @@ class Recompiler {
     // override computeScriptBase.js to enable the "Compile" button
     overrideConfig(moduleDef, "computeScriptBaseJs",
         "com/google/gwt/dev/codeserver/computeScriptBase.js");
+    // Fix bug with SDM and Chrome 24+ where //@ sourceURL directives cause X-SourceMap header to be ignored
+    // Frustratingly, Chrome won't canonicalize a relative URL
+    overrideConfig(moduleDef, "includeSourceMapUrl", "http://" + serverLocation +
+        WebServer.sourceMapLocationForModule(moduleDef.getName()));
 
     // If present, set some config properties back to defaults.
     // (Needed for Google's server-side linker.)

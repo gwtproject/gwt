@@ -406,7 +406,15 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
         + "__gwtModuleFunction.__computePropValue);");
     out.newlineOpt();
     out.print("$sendStats('moduleStartup', 'end');");
-    out.print("\n//@ sourceURL=0.js\n");
+    String includeSourceMapUrl = getStringConfigurationProperty(context, "includeSourceMapUrl", "false");
+    if (!"false".equals(includeSourceMapUrl)) {
+      String sourceMapUrl = SymbolMapsLinker.SourceMapArtifact.sourceMapFilenameForFragment(0);
+      if (!"true".equals(includeSourceMapUrl)) {
+        sourceMapUrl = includeSourceMapUrl;
+      }
+      out.print("\n//@ sourceMappingURL=" + sourceMapUrl + " ");
+    }
+    out.print("\n//@ sourceURL=0.js \n");
     return out.toString();
   }
 

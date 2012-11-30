@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MPa7ie7k",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-30T16:56:15Z",
+      "side": 1,
+      "message": "Oops, I think it\u0027s actually because of the extra newline on line 7.  I\u0027ll fix that.",
+      "parentUuid": "MRry9Qbs",
+      "revId": "c78a19b693a760cf9f4a1b8cb1ea0fb05d711960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MRpy6Bb8",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installLocationIframe.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-30T09:36:31Z",
       "side": 1,
       "message": "Is the standards-mode doctype doing any harm if the parent page is in quirks mode? I wonder if we couldn\u0027t just hard-code the doctype, unconditionally.",
+      "revId": "c78a19b693a760cf9f4a1b8cb1ea0fb05d711960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPc7rN5o",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installLocationIframe.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-11-30T16:56:15Z",
+      "side": 1,
+      "message": "Setting it unconditionally would at least cause IE8 to handle the iframe child in standards mode even if the host page is in quirks mode.  We discourage quirks mode but haven\u0027t dropped support for it (and some legacy widgets still depend on it), so I\u0027d rather not introduce any regression for GWT apps still using quirks mode.",
+      "parentUuid": "MRpy6Bb8",
       "revId": "c78a19b693a760cf9f4a1b8cb1ea0fb05d711960",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

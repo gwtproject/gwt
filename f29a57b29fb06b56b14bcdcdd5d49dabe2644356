@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MPegeK8g",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-11-30T00:39:18Z",
+      "side": 1,
+      "message": "nit: we\u0027ve been using four-space indents when wrapping method parameters.",
+      "revId": "f29a57b29fb06b56b14bcdcdd5d49dabe2644356",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

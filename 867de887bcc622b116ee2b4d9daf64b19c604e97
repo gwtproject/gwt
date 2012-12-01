@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MXMwN40E",
+        "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-12-01T01:22:29Z",
+      "side": 1,
+      "message": "Here\u0027s the command-line output I get from Jetty trying to compile the JSP:\n\n----------\n1. WARNING in /tmp/Jetty_0_0_0_0_0_gwt-out____-bmrmvu/jsp/com/google/gwt/thirdparty/org/apache/jsp/com_google_gwt_dev_shell_jsp_JspTest_JUnit/test_jsp.java (at line 7)\n\tpublic final class test_jsp extends com.google.gwt.thirdparty.org.apache.jasper.runtime.HttpJspBase\n\t                   ^^^^^^^^\nThe serializable class test_jsp does not declare a static final serialVersionUID field of type long\n----------\n2. ERROR in /tmp/Jetty_0_0_0_0_0_gwt-out____-bmrmvu/jsp/com/google/gwt/thirdparty/org/apache/jsp/com_google_gwt_dev_shell_jsp_JspTest_JUnit/test_jsp.java (at line 8)\n\timplements org.apache.jasper.runtime.JspSourceDependent {\n\t           ^^^^^^^^^^^^^^^^^\norg.apache.jasper cannot be resolved to a type\n----------\n\nIt perhaps just affects our internal build, since I think we jarjar more third-party dependencies than the open source build does.  I\u0027ll look into this.",
+      "parentUuid": "MXOk6UeY",
+      "revId": "867de887bcc622b116ee2b4d9daf64b19c604e97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAKLn///+c\u003d",
         "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
         "patchSetId": 1

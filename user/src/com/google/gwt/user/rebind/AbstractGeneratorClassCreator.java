@@ -28,7 +28,6 @@ import com.google.gwt.i18n.shared.GwtLocale;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,37 +44,10 @@ public abstract class AbstractGeneratorClassCreator extends
    * @return interface methods.
    */
   public static JMethod[] getAllInterfaceMethods(JClassType type) {
-    Map<String, JMethod> methods = new LinkedHashMap<String, JMethod>();
-    getAllInterfaceMethodsAux(type, methods);
-    return methods.values().toArray(new JMethod[methods.size()]);
-  }
-
-  private static void getAllInterfaceMethodsAux(JClassType type,
-      Map<String, JMethod> m) {
-    if (type.isInterface() != null) {
-      JMethod[] methods = type.getMethods();
-      for (int i = 0; i < methods.length; i++) {
-        String s = uniqueMethodKey(methods[i]);
-        if (m.get(s) == null) {
-          m.put(s, methods[i]);
-        }
-      }
-      JClassType[] supers = type.getImplementedInterfaces();
-      for (int i = 0; i < supers.length; i++) {
-        getAllInterfaceMethodsAux(supers[i], m);
-      }
+    if (type.isInterface() == null) {
+      return new JMethod[0];
     }
-  }
-
-  private static String uniqueMethodKey(JMethod method) {
-    String name = method.getName();
-    name += "(";
-    JParameter[] m = method.getParameters();
-    for (int i = 0; i < m.length; i++) {
-      name += m[i].getType() + " ";
-    }
-    name += ")";
-    return name;
+    return type.getOverridableMethods();
   }
 
   /**
@@ -249,6 +221,8 @@ public abstract class AbstractGeneratorClassCreator extends
    */
   private void genMethod(TreeLogger logger, JMethod method, GwtLocale locale)
       throws UnableToCompleteException {
+    // XXX: this is the same as method.getReadableDeclaration(true, true, true, true, true)
+    // except for the parameter names.
     String name = method.getName();
     String returnType = method.getReturnType().getParameterizedQualifiedSourceName();
     getWriter().print("public " + returnType + " " + name + "(");

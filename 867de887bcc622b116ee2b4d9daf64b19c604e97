@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "MZZ2RQ6o",
+        "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-12-01T03:16:59Z",
+      "side": 1,
+      "message": "Actually, I too have an error when using Ant (though not the same, see below, and note how it uses my own antlib.xml rather than the one from the ant-1.6.5.jar that\u0027s in the classpath). It however works well in Eclipse (though arguably the build path is not the same as the classpath from the Ant files :-( this is one thing that Maven will definitely help with)\nMaybe not having the test in a suite is a good thing after all ;-)\n\nThe following error occurred while executing this line:\njar:file:/usr/share/java/ant-1.8.2.jar!/org/apache/tools/ant/antlib.xml:37: Could not create task or type of type: componentdef.\n\nAnt could not find the task or a class this task relies upon.\n\nThis is common and has a number of causes; the usual \nsolutions are to read the manual pages then download and\ninstall needed JAR files, or fix the build file: \n - You have misspelt \u0027componentdef\u0027.\n   Fix: check your spelling.\n - The task needs an external JAR file to execute\n     and this is not found at the right place in the classpath.\n   Fix: check the documentation for dependencies.\n   Fix: declare the task.\n - The task is an Ant optional task and the JAR file and/or libraries\n     implementing the functionality were not found at the time you\n     yourself built your installation of Ant from the Ant sources.\n   Fix: Look in the ANT_HOME/lib for the \u0027ant-\u0027 JAR corresponding to the\n     task and make sure it contains more than merely a META-INF/MANIFEST.MF.\n     If all it contains is the manifest, then rebuild Ant with the needed\n     libraries present in ${ant.home}/lib/optional/ , or alternatively,\n     download a pre-built release version from apache.org\n - The build file was written for a later version of Ant\n   Fix: upgrade to at least the latest release version of Ant\n - The task is not an Ant core or optional task \n     and needs to be declared using \u003ctaskdef\u003e.\n - You are attempting to use a task defined using \n    \u003cpresetdef\u003e or \u003cmacrodef\u003e but have spelt wrong or not \n   defined it at the point of use\n\nRemember that for JAR files to be visible to Ant tasks implemented\nin ANT_HOME/lib, the files must be in the same directory or on the\nclasspath\n\nPlease neither file bug reports on this problem, nor email the\nAnt mailing lists, until all of these causes have been explored,\nas this is not an Ant bug.\n        at org.apache.tools.ant.ProjectHelper.addLocationToBuildException(ProjectHelper.java:539)\n        at org.apache.tools.ant.taskdefs.Definer.loadAntlib(Definer.java:332)\n        at org.apache.tools.ant.taskdefs.Definer.execute(Definer.java:236)\n        at org.apache.tools.ant.ComponentHelper.checkNamespace(ComponentHelper.java:761)\n        at org.apache.tools.ant.ComponentHelper.getDefinition(ComponentHelper.java:221)\n        at org.apache.tools.ant.ComponentHelper.getComponentClass(ComponentHelper.java:211)\n        at org.apache.tools.ant.ComponentHelper.createNewTask(ComponentHelper.java:458)\n        at org.apache.tools.ant.ComponentHelper.createTask(ComponentHelper.java:430)\n        at org.apache.tools.ant.Project.createTask(Project.java:998)\n        at org.apache.jasper.compiler.Compiler.generateClass(Compiler.java:321)\n        at org.apache.jasper.compiler.Compiler.compile(Compiler.java:472)\n        at org.apache.jasper.compiler.Compiler.compile(Compiler.java:451)\n        at org.apache.jasper.compiler.Compiler.compile(Compiler.java:439)\n        at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:511)\n        at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:295)\n        at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:292)\n        at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:236)\n        at javax.servlet.http.HttpServlet.service(HttpServlet.java:717)",
+      "parentUuid": "MXMwN40E",
+      "revId": "867de887bcc622b116ee2b4d9daf64b19c604e97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAKLn///+c\u003d",
         "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
         "patchSetId": 1

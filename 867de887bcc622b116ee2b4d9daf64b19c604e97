@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "MXOk6UeY",
+        "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-12-01T01:08:05Z",
+      "side": 1,
+      "message": "This test fails for me with a 500 status code instead of 200, but then it fails for me even without the rest of your patch. :(\n\n(It\u0027s also not part of any test suites, so I\u0027ve locally created a ShellSuite for this test and EmmaClassLoadingTest and MultiModuleTest, since they don\u0027t appear to be covered either.)",
+      "revId": "867de887bcc622b116ee2b4d9daf64b19c604e97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAKLn///+c\u003d",
         "filename": "user/test/com/google/gwt/dev/shell/jsp/client/JspTest.java",
         "patchSetId": 1

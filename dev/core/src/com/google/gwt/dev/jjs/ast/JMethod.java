@@ -249,7 +249,9 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
         sb.append(type.getJsniSignatureName());
       }
       sb.append(')');
-      sb.append(getOriginalReturnType().getJsniSignatureName());
+      if (!isConstructor()) {
+        sb.append(getOriginalReturnType().getJsniSignatureName());
+      }
       signature = sb.toString();
     }
     return signature;
@@ -265,6 +267,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   public boolean isAbstract() {
     return isAbstract;
+  }
+
+  public boolean isConstructor() {
+    return false;
   }
 
   public boolean isDefault() {
@@ -450,7 +456,8 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     if (this == originalMethod) {
       return true;
     }
-    return originalMethod.isExternal() && originalMethod.getSignature().equals(this.getSignature())
+    return originalMethod.isExternal() && originalMethod.isConstructor() == isConstructor()
+        && originalMethod.getSignature().equals(this.getSignature())
         && this.getEnclosingType().replaces(originalMethod.getEnclosingType());
   }
 

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MZN6Mpdc",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2012-12-03T18:42:06Z",
+      "side": 1,
+      "message": "Julien, this breaks the HandlerEvaluatorTest since easymock expects the old class.",
+      "revId": "1ea65fa12e46f23a4e48a2029fd265786049e72a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

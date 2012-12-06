@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MsHW9wgY",
+        "filename": "user/src/com/google/gwt/editor/client/impl/ErrorCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2012-12-06T19:36:16Z",
+      "side": 1,
+      "message": "Yaojun originally proposed something similar but I asked him to do this way. \nWith your proposal, we are deferring 1 call to getAbsoluteLengh().length() in favor of a bad contract between two classes plus potentially calling it multiple times later. \nI don\u0027t think that will worth the optimization with the added confusion.",
+      "parentUuid": "Mtkw1n9Y",
+      "revId": "b738a1207c814baa35b8ec6cc62c29be52eb7f3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Mtgw-l7g",
         "filename": "user/src/com/google/gwt/editor/client/impl/ErrorCollector.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-12-06T10:07:46Z",
       "side": 1,
       "message": "Maybe we could add an assertion here, to be sure:\n\n   assert prefixLength \u003d\u003d 0 || error.getAbsolutePath().equals(ctx.getAbsolutePath());",
+      "revId": "b738a1207c814baa35b8ec6cc62c29be52eb7f3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MsBW6NhA",
+        "filename": "user/src/com/google/gwt/editor/client/impl/ErrorCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2012-12-06T19:36:16Z",
+      "side": 1,
+      "message": "+1 that\u0027s a good check.",
+      "parentUuid": "Mtgw-l7g",
       "revId": "b738a1207c814baa35b8ec6cc62c29be52eb7f3d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

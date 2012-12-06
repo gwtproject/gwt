@@ -54,6 +54,18 @@ public class EditorErrorTest extends GWTTestCase {
     }
   }
 
+  class AddressEditorReceivesErrors extends AddressEditor implements
+      HasEditorErrors<Address> {
+    List<EditorError> errors;
+
+    public void showErrors(List<EditorError> errors) {
+      this.errors = errors;
+      for (EditorError error : errors) {
+        error.setConsumed(true);
+      }
+    }
+  }
+
   class PersonEditorReceivesErrors extends PersonEditor implements
       HasEditorErrors<Person> {
     List<EditorError> errors;
@@ -333,6 +345,47 @@ public class EditorErrorTest extends GWTTestCase {
     assertSame(e7, error.getUserData());
     assertSame(null, error.getValue());
     assertSame(editor, error.getEditor());
+  }
+
+  /**
+   * Test for IndexOutOfBoundsException in getPath() when called on a leaf editor error display.
+   *  
+   * The external bug report:
+   *    http://code.google.com/p/google-web-toolkit/issues/detail?id=5589
+   */
+  public void testSamePathHasError() {
+    PersonEditorReceivesErrors editor = new PersonEditorReceivesErrors();
+    AddressEditorReceivesErrors addressEditor = new AddressEditorReceivesErrors();
+    editor.addressEditor = addressEditor;
+
+    Address a = new Address();
+    Person p = new Person();
+    p.address = a;
+
+    PersonEditorDriver driver = GWT.create(PersonEditorDriver.class);
+    driver.initialize(editor);
+    driver.edit(p);
+    driver.flush();
+
+    driver.setConstraintViolations(
+        Arrays.<ConstraintViolation<?>>asList(createViolation("samePathError", p, "address")));
+    assertEquals(0, driver.getErrors().size());
+    
+    assertEquals(0, editor.errors.size());
+    
+    
+    List<EditorError> list = addressEditor.errors;
+    assertNotNull(list);
+    assertEquals(1, list.size());
+    
+    EditorError error = list.get(0);
+    assertNotNull(error);
+    assertEquals("address", error.getAbsolutePath());
+    assertEquals("samePathError", error.getMessage());
+    assertEquals("", error.getPath());
+    assertNotNull(error.getUserData());
+    assertSame(a, error.getValue());
+    assertSame(addressEditor, error.getEditor());
   }
 
   private <T> ConstraintViolation<T> createViolation(

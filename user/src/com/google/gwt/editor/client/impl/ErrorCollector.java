@@ -57,10 +57,13 @@ class ErrorCollector extends EditorVisitor {
       // Get the enclosing error domain
       List<EditorError> tryConsume = errorStack.pop();
       int prefixLength = ctx.getAbsolutePath().length();
-      // Remove trailing dot in non-empty paths
-      prefixLength = prefixLength == 0 ? 0 : prefixLength + 1;
       for (EditorError error : tryConsume) {
-        ((SimpleError) error).setPathPrefixLength(prefixLength);
+        if ((prefixLength > 0) && (prefixLength < error.getAbsolutePath().length())) {
+          // Remove trailing dot
+          ((SimpleError) error).setPathPrefixLength(prefixLength + 1);
+        } else {
+          ((SimpleError) error).setPathPrefixLength(prefixLength);
+        }
       }
       /*
        * Pass collected errors to the editor. Must pass empty error collection

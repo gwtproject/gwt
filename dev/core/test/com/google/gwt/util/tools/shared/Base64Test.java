@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.user.server;
+package com.google.gwt.util.tools.shared;
 
 import junit.framework.TestCase;
 
 /**
- * Tests for the {@link com.google.gwt.user.server.Base64Utils Base64Utils} class.
+ * Tests for the {@link com.google.gwt.util.tools.shared.Base64Utils Base64Utils} class.
  */
 public class Base64Test extends TestCase {
 

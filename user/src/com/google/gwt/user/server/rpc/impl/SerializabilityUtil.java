@@ -231,10 +231,22 @@ public class SerializabilityUtil {
     // Look for things that TypeVariables are mapped to, but stop if mapped
     // to itself. We map a TypeVariable to itself when we wish to explicitly
     // mark it as unmapped.
-    while (result instanceof TypeVariable<?> &&
-        resolvedTypes.get((TypeVariable<?>) result) != result &&
-        resolvedTypes.get((TypeVariable<?>) result) != null) {
-      result = resolvedTypes.get((TypeVariable<?>) result);
+    while (result instanceof TypeVariable<?>) {
+      Type resolvedType = resolvedTypes.get((TypeVariable<?>) result);
+      // This type maps to itself and cannot be resolved at this time
+      if (resolvedType == null || resolvedType == result) {
+        return result;
+      }
+      // This type is an interface field which should map to our generic type
+      // but due to ParameterizedType failing == tests, we get a cyclic dependency.
+      // A better solution might be to resolve superinterface generic types to the same ParameterizedType
+      // as defined in the parent class, but for the sake of detect unresolvable types, this works fine.
+      if (resolvedType instanceof TypeVariable 
+        && result == resolvedTypes.get((TypeVariable<?>)resolvedType)) {
+        return result;
+      }
+      // continue searching
+      result = resolvedType;
     }
 
     return result;

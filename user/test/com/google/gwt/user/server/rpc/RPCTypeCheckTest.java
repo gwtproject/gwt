@@ -285,6 +285,9 @@ public class RPCTypeCheckTest extends TestCase {
     @SuppressWarnings({"unused", "rawtypes"})
     public static void testKClassRaw(KClass arg1) {
     }
+    @SuppressWarnings({"unused", "rawtypes"})
+    public static void testNClass(MInterface arg1) {
+    }
 
     @SuppressWarnings("unused")
     public void testWildcardBounds(T arg1) {
@@ -528,6 +531,21 @@ public class RPCTypeCheckTest extends TestCase {
    */
   public interface MInterface<X> {
     X echo(X arg);
+  }
+  /**
+   * Test class which shares a generic type with an implemented interface that is also a 
+   * field within the class (see issue 7779)
+   */
+  public static class NClass<X extends AClass> implements MInterface<X>, IsSerializable {
+    MInterface<X> field;
+    
+    public X echo(X arg) {
+      return arg;
+    }
+    
+    public void setField(NClass<X> field) {
+      this.field = field;
+    }
   }
 
   /**
@@ -2009,6 +2027,24 @@ public class RPCTypeCheckTest extends TestCase {
       return null;
     }
   }
+  
+  private static String generateNClassValid() {
+    try {
+      RPCTypeCheckFactory strFactory =
+        new RPCTypeCheckFactory(ClassesParamTestClass.class, "testNClass");
+      
+      NClass<AClass> arg = new NClass();
+      NClass field = new NClass();
+      arg.setField(field);
+      strFactory.write(arg);
+      
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+      
+      return null;
+    }
+  }
 
   private static String generateSingletonListSpoofingClass() {
     try {
@@ -2457,6 +2493,20 @@ public class RPCTypeCheckTest extends TestCase {
     }
   }
 
+  /**
+   * This checks that classes which contain a field matching a superinterface work correctly.
+   * 
+   * If {@link SerializabilityUtil#findActualType()} is reverted, this test will cause an infinite loop.
+   * 
+   */
+  public void testGenericSuperInterfaces() {
+    try {
+      RPC.decodeRequest(generateNClassValid());
+    } catch (Exception e) {
+      fail("Unexpected Exception from testGenericSuperInterfaces(0a): " + e.getMessage());
+    }
+  }
+  
   /**
    * This checks that HashMap correctly reports that it is an incorrect type.
    */

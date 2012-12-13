@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java cast expression.
  */
@@ -65,6 +69,23 @@ public class JCastOperation extends JExpression {
       expr = visitor.accept(expr);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JCastOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(castType);
+    out.writeObject(expr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    castType = (JType) in.readObject();
+    expr = (JExpression) in.readObject();
   }
 
 }

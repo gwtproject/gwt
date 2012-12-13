@@ -18,13 +18,18 @@ package com.google.gwt.dev.jjs.ast.js;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * JSNI reference to a Java class literal.
  */
 public class JsniClassLiteral extends JClassLiteral {
 
-  private final String ident;
+  private String ident;
 
   public JsniClassLiteral(SourceInfo info, String ident, JType type) {
     super(info, type);
@@ -34,5 +39,20 @@ public class JsniClassLiteral extends JClassLiteral {
 
   public String getIdent() {
     return ident;
+  }
+
+  public JsniClassLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(ident, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ident = Util.deserializeString(in);
   }
 }

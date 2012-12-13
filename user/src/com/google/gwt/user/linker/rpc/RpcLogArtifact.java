@@ -17,10 +17,11 @@ package com.google.gwt.user.linker.rpc;
 
 import com.google.gwt.core.ext.linker.Artifact;
 import com.google.gwt.dev.util.DiskCache;
+import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * This artifact holds a log of the reasoning for which types are considered
@@ -35,8 +36,8 @@ public class RpcLogArtifact extends Artifact<RpcLogArtifact> {
   private static DiskCache diskCache = DiskCache.INSTANCE;
 
   private long diskCacheToken;
-  private final String qualifiedSourceName;
-  private final String serializationPolicyStrongName;
+  private String qualifiedSourceName;
+  private String serializationPolicyStrongName;
 
   public RpcLogArtifact(String qualifiedSourceName,
       String serializationPolicyStrongName, String rpcLog) {
@@ -78,14 +79,25 @@ public class RpcLogArtifact extends Artifact<RpcLogArtifact> {
     return RpcLogArtifact.class;
   }
 
-  private void readObject(ObjectInputStream stream) throws IOException,
-      ClassNotFoundException {
-    stream.defaultReadObject();
-    diskCacheToken = diskCache.transferFromStream(stream);
+  /**
+   * Empty constructor for externalization.
+   */
+  public RpcLogArtifact() {
   }
 
-  private void writeObject(ObjectOutputStream stream) throws IOException {
-    stream.defaultWriteObject();
-    diskCache.transferToStream(diskCacheToken, stream);
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(qualifiedSourceName, out);
+    Util.serializeString(serializationPolicyStrongName, out);
+    diskCache.transferToObjectStream(diskCacheToken, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    qualifiedSourceName = Util.deserializeString(in);
+    serializationPolicyStrongName = Util.deserializeString(in);
+    diskCacheToken = diskCache.transferFromObjectStream(in);
   }
 }

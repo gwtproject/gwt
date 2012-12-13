@@ -17,6 +17,9 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -24,10 +27,10 @@ import java.util.List;
  */
 public class JTryStatement extends JStatement {
 
-  private final List<JLocalRef> catchArgs;
-  private final List<JBlock> catchBlocks;
-  private final JBlock finallyBlock;
-  private final JBlock tryBlock;
+  private List<JLocalRef> catchArgs;
+  private List<JBlock> catchBlocks;
+  private JBlock finallyBlock;
+  private JBlock tryBlock;
 
   public JTryStatement(SourceInfo info, JBlock tryBlock, List<JLocalRef> catchArgs,
       List<JBlock> catchBlocks, JBlock finallyBlock) {
@@ -67,4 +70,26 @@ public class JTryStatement extends JStatement {
     }
     visitor.endVisit(this, ctx);
   }
+  public JTryStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(catchArgs);
+    out.writeObject(catchBlocks);
+    out.writeObject(tryBlock);
+    out.writeObject(finallyBlock);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    catchArgs = (List<JLocalRef>) in.readObject();
+    catchBlocks = (List<JBlock>) in.readObject();
+
+    tryBlock = (JBlock) in.readObject();
+    finallyBlock = (JBlock) in.readObject();
+  }
+
 }

@@ -21,10 +21,12 @@ import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.Externalizable;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,10 +38,10 @@ import java.util.Set;
 public class JMethod extends JNode implements HasEnclosingType, HasName, HasType, CanBeAbstract,
     CanBeSetFinal, CanBeNative, CanBeStatic {
 
-  private static class ExternalSerializedForm implements Serializable {
+  private static class ExternalSerializedForm implements Externalizable {
 
-    private final JDeclaredType enclosingType;
-    private final String signature;
+    private JDeclaredType enclosingType;
+    private String signature;
 
     public ExternalSerializedForm(JMethod method) {
       enclosingType = method.getEnclosingType();
@@ -49,13 +51,41 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     private Object readResolve() {
       return new JMethod(signature, enclosingType);
     }
+
+    public ExternalSerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      out.writeObject(enclosingType);
+      com.google.gwt.dev.util.Util.serializeString(signature, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      enclosingType = (JDeclaredType) in.readObject();
+      signature = com.google.gwt.dev.util.Util.deserializeString(in);
+    }
   }
 
-  private static class ExternalSerializedNullMethod implements Serializable {
+  private static class ExternalSerializedNullMethod implements Externalizable {
     public static final ExternalSerializedNullMethod INSTANCE = new ExternalSerializedNullMethod();
 
     private Object readResolve() {
       return NULL_METHOD;
+    }
+
+    public ExternalSerializedNullMethod() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      // No need to save anything. Will be replaced by singleton on deserialization.
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      // Replaced by singleton on readResolve().
     }
   }
 
@@ -100,12 +130,12 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * Special serialization treatment.
    */
   private transient JAbstractMethodBody body = null;
-  private final JDeclaredType enclosingType;
+  private JDeclaredType enclosingType;
   private boolean isAbstract;
   private boolean isFinal;
-  private final boolean isStatic;
+  private boolean isStatic;
   private boolean isSynthetic = false;
-  private final String name;
+  private String name;
 
   private List<JType> originalParamTypes;
   private JType originalReturnType;
@@ -463,4 +493,21 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   void writeBody(ObjectOutputStream stream) throws IOException {
     stream.writeObject(body);
   }
+
+
+/*  public JMethod() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    assert false;
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    assert false;
+  }
+  */
 }

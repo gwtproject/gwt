@@ -15,37 +15,39 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.Externalizable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
  * This class represents a file that contains {@link CachedCompilationUnit}s
  * that make up a module.
- * 
+ *
  * Intended to work with other CompilationUnitArchives on the class path to
  * allow a project to be compiled incrementally. Therefore, one file may not
  * contain all dependent compilation units. To get all dependent compilation
  * units, the program will need to load all archives, plus any files not
  * contained in any archive.
  *
- * No mater how the archive is created, when serialized, the output file 
+ * No mater how the archive is created, when serialized, the output file
  * should be deterministic.
  */
-public class CompilationUnitArchive implements Serializable {
+public class CompilationUnitArchive implements Externalizable {
 
   public static CompilationUnitArchive createFromFile(File location) throws IOException,
       ClassNotFoundException {
@@ -65,13 +67,13 @@ public class CompilationUnitArchive implements Serializable {
     return createFromStream(location.openConnection().getInputStream());
   }
 
-  private final String topModuleName;
+  private String topModuleName;
   private transient Map<String, CachedCompilationUnit> units;
 
   /**
    * Create an archive object.  Note that data is retained in memory only until
    * the {@link #writeToFile(File)} method is invoked.
-   * 
+   *
    * @param topModuleName The name of the module used to compile this archive.
    *          That is, the original parameter passed to
    *          {@link com.google.gwt.dev.CompileModule}.
@@ -93,7 +95,7 @@ public class CompilationUnitArchive implements Serializable {
   }
 
   /**
-   * The name of the module used to compile this archive. 
+   * The name of the module used to compile this archive.
    */
   public String getTopModuleName() {
     return topModuleName;
@@ -108,7 +110,7 @@ public class CompilationUnitArchive implements Serializable {
 
   /**
    * Persists the units currently stored in the archive to the specified file.  The file
-   * is immediately closed. 
+   * is immediately closed.
    */
   public void writeToFile(File location) throws IOException {
     ObjectOutputStream oos =
@@ -130,9 +132,23 @@ public class CompilationUnitArchive implements Serializable {
   // CachedCompilationUnits are serialized as a sorted array in order to make sure the
   // output format is deterministic.
   private void writeObject(ObjectOutputStream stream) throws IOException {
-    stream.defaultWriteObject();
-    CachedCompilationUnit unitsOut[] = units.values().toArray(new CachedCompilationUnit[units.size()]);
-    Arrays.sort(unitsOut, CachedCompilationUnit.COMPARATOR);
-    stream.writeObject(unitsOut);
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public CompilationUnitArchive() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeString(topModuleName, out);
+    Util.serializeStringMap(units, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    topModuleName = Util.deserializeString(in);
+    units = Util.deserializeStringMap(in, TreeMap.class, CachedCompilationUnit.class);
   }
 }

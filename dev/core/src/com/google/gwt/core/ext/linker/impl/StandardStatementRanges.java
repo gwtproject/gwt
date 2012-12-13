@@ -17,13 +17,16 @@ package com.google.gwt.core.ext.linker.impl;
 
 import com.google.gwt.core.ext.linker.StatementRanges;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 
 /**
  * The standard implementation of {@link StatementRanges}.
  */
-public class StandardStatementRanges implements StatementRanges, Serializable {
+public class StandardStatementRanges implements StatementRanges, Externalizable {
   private static int[] toArray(ArrayList<Integer> list) {
     int[] ary = new int[list.size()];
     for (int i = 0; i < list.size(); i++) {
@@ -32,8 +35,8 @@ public class StandardStatementRanges implements StatementRanges, Serializable {
     return ary;
   }
 
-  private final int[] ends;
-  private final int[] starts;
+  private int[] ends;
+  private int[] starts;
 
   public StandardStatementRanges(ArrayList<Integer> starts, ArrayList<Integer> ends) {
     assert starts.size() == ends.size();
@@ -51,5 +54,32 @@ public class StandardStatementRanges implements StatementRanges, Serializable {
 
   public int start(int i) {
     return starts[i];
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public  StandardStatementRanges() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    assert starts.length == ends.length;
+    out.writeInt(starts.length);
+    for (int i = 0; i < starts.length; i++) {
+      out.writeInt(starts[i]);
+      out.writeInt(ends[i]);
+    }
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    int sz = in.readInt();
+    starts = new int[sz];
+    ends = new int[sz];
+    for (int i = 0; i < sz; i++) {
+      starts[i] = in.readInt();
+      ends[i] = in.readInt();
+    }
   }
 }

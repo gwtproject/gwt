@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java while statement.
  */
@@ -47,6 +51,22 @@ public class JWhileStatement extends JStatement {
       }
     }
     visitor.endVisit(this, ctx);
+  }
+  public JWhileStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(testExpr);
+    out.writeObject(body);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    testExpr = (JExpression) in.readObject();
+    body = (JStatement) in.readObject();
   }
 
 }

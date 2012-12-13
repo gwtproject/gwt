@@ -16,8 +16,12 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.List;
 
@@ -94,4 +98,20 @@ public class JBlock extends JStatement {
     }
     return false;
   }
+
+  public JBlock() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(statements, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    statements = Util.deserializeObjectList(in);
+  }
+
 }

@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * An AST node whose evaluation results in the seedId of its node.
  */
@@ -32,5 +36,16 @@ public class JSeedIdOf extends JNameOf {
     }
     visitor.endVisit(this, ctx);
   }
+  public JSeedIdOf() {
+  }
 
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+  }
 }

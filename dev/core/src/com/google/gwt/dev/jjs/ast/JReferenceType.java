@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Base class for any reference type.
  */
@@ -76,5 +80,17 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
   public boolean replaces(JType originalType) {
     return super.replaces(originalType)
         && canBeNull() == ((JReferenceType) originalType).canBeNull();
+  }
+  public JReferenceType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
   }
 }

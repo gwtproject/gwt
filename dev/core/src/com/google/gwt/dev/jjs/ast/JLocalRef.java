@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java local variable reference.
  */
@@ -25,7 +29,7 @@ public class JLocalRef extends JVariableRef {
   /**
    * The referenced local.
    */
-  private final JLocal local;
+  private JLocal local;
 
   public JLocalRef(SourceInfo info, JLocal local) {
     super(info, local);
@@ -45,5 +49,21 @@ public class JLocalRef extends JVariableRef {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JLocalRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(local);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    local = (JLocal) in.readObject();
+    assert local == target;
   }
 }

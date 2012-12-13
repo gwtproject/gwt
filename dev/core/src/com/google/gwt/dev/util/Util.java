@@ -18,6 +18,10 @@ package com.google.gwt.dev.util;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.jjs.InternalCompilerException;
+//import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -44,7 +48,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -65,11 +71,16 @@ import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -308,6 +319,170 @@ public final class Util {
         toDelete[i].delete();
       }
     }
+  }
+
+  /** Deserializes a byte array from an input Object stream
+   *
+   */
+  public static byte[] deserializeByteArray(ObjectInput in)
+      throws IOException {
+    int len = in.readInt();
+    if (len == -1) {
+      return null;
+    }
+    byte[] array = new byte[len];
+    int read = 0;
+    while (read < len) {
+      read += in.read(array, read, len - read);
+    }
+    assert read == len;
+    return array;
+  }
+
+  /** Deserialize an array from an input Object stream.
+   *
+   */
+  public static  <T> T[] deserializeObjectArray(ObjectInput in, Class<T> arrayElementClass)
+      throws IOException, ClassNotFoundException {
+    int sz = in.readInt();
+    if (sz == -1 ) {
+      return null;
+    }
+    T[] array = (T[]) Array.newInstance(arrayElementClass, sz);
+    for (int i = 0; i < sz; i++) {
+      array[i] =  (T) in.readObject();
+    }
+    return array;
+  }
+
+  /** Deserialize a list from an input Object stream.
+   *
+   */
+  public static <T> List<T> deserializeObjectList(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+//    List<T> list = Collections.emptyList();
+//    long sz = in.readLong();
+//    for (long i = 0; i < sz; i++) {
+//      list = Lists.add(list, (T) in.readObject());
+//    }
+//    return list;
+
+    int sz = in.readInt();
+    List<T> list = new ArrayList<T>((int)sz);
+    for (long i = 0; i < sz; i++) {
+      list.add((T) in.readObject());
+    }
+    return list;
+  }
+
+  /** Deserialize a set from an input Object stream.
+   *
+   */
+  public static <T> Set<T> deserializeObjectSet(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+//    Set<T> set = Collections.emptySet();
+//    long sz = in.readLong();
+//    for (long i = 0; i < sz; i++) {
+//      set = Sets.add(set, (T) in.readObject());
+//    }
+//    return set;
+    int sz = in.readInt();
+    Set<T> set = new HashSet<T>((int)sz);
+    for (int i = 0; i < sz; i++) {
+      set.add((T) in.readObject());
+    }
+    return set;
+  }
+
+  /** Deserialize a set from an input Object stream.
+   *
+   */
+  public static <T> Set<T> deserializeObjectSet(ObjectInput in, Class setClass,
+                                                Class<T> elementClass)
+      throws IOException, ClassNotFoundException {
+    Set<T> set;
+    try {
+      set = (Set<T>) setClass.newInstance();
+    } catch (Exception e) {
+      throw new InternalCompilerException("Could not deserialize Set", e);
+    }
+
+    int sz = in.readInt();
+    for (int i = 0; i < sz; i++) {
+      set.add((T) in.readObject());
+    }
+    if (set instanceof TreeSet) {
+      System.out.println();
+    }
+    return set;
+  }
+
+  /** Deserialize a string from an input Object stream.
+   *
+   */
+  public static String deserializeString(ObjectInput in)
+    throws IOException {
+      int sz = in.readInt();
+    if (sz == -1) {
+      return null;
+    } else if (sz == 0) {
+      return "";
+    } else {
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < sz; i++) {
+        sb.append(in.readChar());
+      }
+      return sb.toString();
+    }
+  }
+
+  /** Deserialize a string list from an input Object stream.
+   *
+   */
+  public static List<String> deserializeStringList(ObjectInput in)
+      throws IOException {
+    List<String> list = Collections.emptyList();
+    int sz = in.readInt();
+    for (int i = 0; i < sz; i++) {
+      list = Lists.add(list, in.readUTF());
+    }
+    return list;
+  }
+
+  /** Derializes a Map<String, T> to an output Object stream
+   *
+   */
+  public static <T> Map<String, T> deserializeStringMap(ObjectInput in, Class mapClass,
+    Class<T> elementClass)
+    throws IOException, ClassNotFoundException {
+
+    int sz = in.readInt();
+    Map<String,T> map = null;
+    try {
+      map = (Map<String,T>) mapClass.newInstance();
+    } catch (Exception e) {
+      throw new InternalCompilerException("Could not deserialize Map", e);
+    }
+    for (int i = 0; i < sz; i++) {
+      String key = in.readUTF();
+      T element = (T) in.readObject();
+      map.put(key, element);
+    }
+
+    return map;
+  }
+
+  /** Deserialize a string set from an input Object stream.
+   *
+   */
+  public static Set<String> deserializeStringSet(ObjectInput in)
+      throws IOException {
+    Set<String> set = Collections.emptySet();
+    int sz = in.readInt();
+    for (long i = 0; i < sz; i++) {
+      set = Sets.add(set, in.readUTF());
+    }
+    return set;
   }
 
   /**
@@ -617,6 +792,39 @@ public final class Util {
     return (f != null ? f.getPath() : null);
   }
 
+  public static void perfStat(String where, String details, double stat) {
+    System.out.format("\n!!! PERF [Where=%s] ", where);
+    if (!details.isEmpty()) {
+      System.out.format("[Details=%s] ", details);
+    }
+    System.out.format("[Val=%f] ", stat);
+    System.out.println();
+  }
+
+  public static void perfLog(String where, long time, long mod) {
+    perfLog(where, "", time, mod);
+  }
+
+  public static void perfLog(String where, long time) {
+    perfLog(where, "", time);
+  }
+
+  public static void perfLog(String where, String details, long time) {
+    perfLog(where, details, time, -1);
+  }
+
+  public static void perfLog(String where, String details, long time, long mods) {
+    System.out.format("\n!!! PERF [Where=%s] ", where);
+    if (!details.isEmpty()) {
+      System.out.format("[Details=%s] ", details);
+    }
+    System.out.format("[Time=%d] ", time);
+    if (mods != -1) {
+      System.out.format("[Mods=%d] ", mods);
+    }
+    System.out.println();
+  }
+
   public static byte[] readFileAsBytes(File file) {
     FileInputStream fileInputStream = null;
     try {
@@ -924,6 +1132,87 @@ public final class Util {
     return absolutePath;
   }
 
+  /** Serializes an array to an output Object stream
+   *
+   */
+  public static <T> void serializeArray(T[] array, ObjectOutput out)
+      throws IOException {
+    if (array == null) {
+      out.writeInt(-1);
+      return;
+    }
+    out.writeInt(array.length);
+    for (T element : array) {
+      out.writeObject(element);
+    }
+  }
+
+  /** Serializes a byte array to an output Object stream
+   *
+   */
+  public static void serializeByteArray(byte[] array, ObjectOutput out)
+      throws IOException {
+    if (array == null) {
+      out.writeInt(-1);
+      return;
+    }
+    out.writeInt(array.length);
+    out.write(array);
+  }
+
+  /** Serializes a collection to an output Object stream
+   *
+   */
+  public static <T> void serializeCollection(Collection<T> list, ObjectOutput out)
+      throws IOException {
+    out.writeInt(list.size());
+    for (T element : list) {
+      out.writeObject(element);
+    }
+  }
+
+  /** Deserialize a string from an input Object stream.
+   *
+   */
+  public static void serializeString(String string, ObjectOutput out)
+      throws IOException {
+    if (string == null) {
+      out.writeInt(-1);
+    } else {
+      out.writeInt(string.length());
+      for (int i = 0; i < string.length(); i++) {
+        out.writeChar(string.charAt(i));
+      }
+    }
+  }
+
+  /** Serializes a string collection to an output Object stream
+   *
+   */
+  public static void serializeStringCollection(Collection<String> list, ObjectOutput out)
+      throws IOException {
+    out.writeInt(list.size());
+    for (String element : list) {
+      out.writeUTF(element);
+    }
+  }
+
+  /** Serializes a Map<String, T> to an output Object stream
+   *
+   */
+  public static <T> void serializeStringMap(Map<String, T> stringMap, ObjectOutput out)
+      throws IOException {
+    out.writeInt(stringMap.size());
+    // Sort the keys so that the results are stable
+    Set<String> keyset = stringMap.keySet();
+    String[] keys = keyset.toArray(new String[keyset.size()]);
+    Arrays.sort(keys);
+    for (String key : keys) {
+      out.writeUTF(key);
+      out.writeObject(stringMap.get(key));
+    }
+  }
+
   /**
    * Get a large byte buffer local to this thread. Currently this is set to a
    * 16k buffer, which is small enough to fit into the L2 cache on modern
@@ -1172,6 +1461,7 @@ public final class Util {
       file.getParentFile().mkdirs();
       stream = new FileOutputStream(file);
       writeObjectToStream(stream, objects);
+      stream.flush();
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + file.getAbsolutePath(), e);

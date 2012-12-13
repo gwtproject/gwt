@@ -16,8 +16,12 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -82,5 +86,22 @@ public class JMethodBody extends JAbstractMethodBody {
       block = (JBlock) visitor.accept(block);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JMethodBody() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(block);
+    Util.serializeCollection(locals, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    block = (JBlock) in.readObject();
+    locals = Util.deserializeObjectList(in);
   }
 }

@@ -30,11 +30,14 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.core.ext.linker.Transferable;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.soyc.CompilerMetricsXmlFormatter;
 import com.google.gwt.soyc.SoycDashboard;
 import com.google.gwt.soyc.io.ArtifactsOutputDirectory;
 
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +106,26 @@ public class SoycReportLinker extends Linker {
     @Override
     protected Class<PermDescriptionArtifact> getComparableArtifactType() {
       return PermDescriptionArtifact.class;
+    }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public PermDescriptionArtifact() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      Util.serializeStringCollection(permDesc, out);
+      out.writeInt(permId);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      permDesc = Util.deserializeStringList(in);
+      permId = in.readInt();
     }
   }
 

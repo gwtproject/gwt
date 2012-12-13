@@ -247,7 +247,6 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       insertImplicitClinitCalls(method);
     }
 
-
     // Finally optimize.
     boolean madeChanges = optimizeMethod(program, method);
     if (madeChanges && runDeadCodeElimination) {

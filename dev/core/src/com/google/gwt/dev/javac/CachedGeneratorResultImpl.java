@@ -17,7 +17,12 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.CachedGeneratorResult;
 import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.dev.util.Util;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,12 +32,12 @@ import java.util.Map;
  * An implementation class to represent the cached results from a previous
  * generator invocation.
  */
-public class CachedGeneratorResultImpl implements CachedGeneratorResult, Serializable {
-  private final ArtifactSet artifacts;
-  private final Map<String, GeneratedUnit> generatedUnitMap;
-  private final String resultTypeName;
-  private final long timeGenerated;
-  private final Map<String, Serializable> clientDataMap;
+public class CachedGeneratorResultImpl implements CachedGeneratorResult, Externalizable {
+  private ArtifactSet artifacts;
+  private Map<String, GeneratedUnit> generatedUnitMap;
+  private String resultTypeName;
+  private long timeGenerated;
+  private Map<String, Serializable> clientDataMap;
 
   public CachedGeneratorResultImpl(String resultTypeName, ArtifactSet artifacts,
       Map<String, GeneratedUnit> generatedUnitMap, long timeGenerated,
@@ -84,5 +89,23 @@ public class CachedGeneratorResultImpl implements CachedGeneratorResult, Seriali
   @Override
   public boolean isTypeCached(String typeName) {
     return generatedUnitMap.containsKey(typeName);
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(artifacts);
+    out.writeUTF(resultTypeName);
+    out.writeLong(timeGenerated);
+    Util.serializeStringMap(generatedUnitMap, out);
+    Util.serializeStringMap(clientDataMap, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    artifacts = (ArtifactSet) in.readObject();
+    resultTypeName = in.readUTF();
+    timeGenerated = in.readLong();
+    generatedUnitMap = Util.deserializeStringMap(in, HashMap.class, GeneratedUnit.class);
+    clientDataMap = Util.deserializeStringMap(in, HashMap.class, Serializable.class);
   }
 }

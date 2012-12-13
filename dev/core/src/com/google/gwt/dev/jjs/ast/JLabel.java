@@ -18,12 +18,17 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.StringInterner;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Should we have a JLabelRef also?
  */
-public class JLabel extends JNode implements HasName {
+public class JLabel extends JNode implements HasName, Externalizable {
 
-  private final String name;
+  private String name;
 
   public JLabel(SourceInfo info, String name) {
     super(info);
@@ -40,4 +45,18 @@ public class JLabel extends JNode implements HasName {
     visitor.endVisit(this, ctx);
   }
 
+  public JLabel() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+    com.google.gwt.dev.util.Util.serializeString(name, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
+    name = com.google.gwt.dev.util.Util.deserializeString(in);
+  }
 }

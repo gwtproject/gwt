@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java do statement.
  */
@@ -47,6 +51,23 @@ public class JDoStatement extends JStatement {
       }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JDoStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(body);
+    out.writeObject(testExpr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    body = (JStatement) in.readObject();
+    testExpr = (JExpression) in.readObject();
   }
 
 }

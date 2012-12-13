@@ -116,4 +116,9 @@ public abstract class CompilationResult extends Artifact<CompilationResult> {
   protected final Class<CompilationResult> getComparableArtifactType() {
     return CompilationResult.class;
   }
+  /**
+   * Empty constructor for externalization.
+   */
+  public  CompilationResult() {
+  }
 }

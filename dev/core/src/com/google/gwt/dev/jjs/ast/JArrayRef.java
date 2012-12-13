@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java array reference expression.
  */
@@ -65,6 +69,23 @@ public class JArrayRef extends JExpression {
       indexExpr = visitor.accept(indexExpr);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JArrayRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(indexExpr);
+    out.writeObject(instance);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    indexExpr = (JExpression) in.readObject();
+    instance = (JExpression) in.readObject();
   }
 
 }

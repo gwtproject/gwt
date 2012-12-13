@@ -22,6 +22,8 @@ import com.google.gwt.core.ext.linker.BinaryEmittedArtifact;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -64,8 +66,8 @@ public class JarEntryEmittedArtifact extends BinaryEmittedArtifact {
     }
   }
 
-  private final JarEntry entry;
-  private final File file;
+  private JarEntry entry;
+  private File file;
 
   public JarEntryEmittedArtifact(String path, File jarFile, JarEntry entry) {
     super(path);
@@ -87,5 +89,25 @@ public class JarEntryEmittedArtifact extends BinaryEmittedArtifact {
   @Override
   public long getLastModified() {
     return entry.getTime();
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public JarEntryEmittedArtifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(entry);
+    out.writeObject(file);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    entry = (JarEntry) in.readObject();
+    file = (File) in.readObject();
   }
 }

@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java integer literal expression.
  */
@@ -29,7 +33,7 @@ public class JIntLiteral extends JValueLiteral {
     return (value == 0) ? ZERO : new JIntLiteral(SourceOrigin.UNKNOWN, value);
   }
 
-  private final int value;
+  private int value;
 
   public JIntLiteral(SourceInfo sourceInfo, int value) {
     super(sourceInfo);
@@ -70,5 +74,21 @@ public class JIntLiteral extends JValueLiteral {
 
   private Object readResolve() {
     return (value == 0) ? ZERO : this;
+  }
+
+
+  public JIntLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeInt(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = (int) in.readInt();
   }
 }

@@ -155,6 +155,8 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
@@ -178,11 +180,11 @@ import javax.xml.parsers.ParserConfigurationException;
 public class JavaToJavaScriptCompiler {
 
   private static class PermutationResultImpl implements PermutationResult {
-    private final ArtifactSet artifacts = new ArtifactSet();
-    private final byte[][] js;
-    private final Permutation permutation;
-    private final byte[] serializedSymbolMap;
-    private final StatementRanges[] statementRanges;
+    private ArtifactSet artifacts = new ArtifactSet();
+    private byte[][] js;
+    private Permutation permutation;
+    private byte[] serializedSymbolMap;
+    private StatementRanges[] statementRanges;
 
     public PermutationResultImpl(String[] js, Permutation permutation, SymbolData[] symbolMap,
         StatementRanges[] statementRanges) {
@@ -230,6 +232,30 @@ public class JavaToJavaScriptCompiler {
     @Override
     public StatementRanges[] getStatementRanges() {
       return statementRanges;
+    }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public PermutationResultImpl() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      out.writeObject(artifacts);
+      out.writeObject(permutation);
+      out.writeObject(js);
+      out.writeObject(serializedSymbolMap);
+      Util.serializeArray(statementRanges, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      artifacts = (ArtifactSet) in.readObject();
+      permutation = (Permutation) in.readObject();
+      js = (byte[][]) in.readObject();
+      serializedSymbolMap = (byte[]) in.readObject();
+      statementRanges = Util.deserializeObjectArray(in, StatementRanges.class);
     }
   }
 

@@ -17,6 +17,11 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A place order a numeric value in the AST.
@@ -27,7 +32,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
  */
 public final class JNumericEntry extends JExpression {
 
-  private final String key;
+  private String key;
   private int value;
 
   public JNumericEntry(SourceInfo info, String key, int value) {
@@ -64,5 +69,21 @@ public final class JNumericEntry extends JExpression {
     }
     visitor.endVisit(this, ctx);
   }
-  
+
+  public JNumericEntry() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(key, out);
+    out.writeInt(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    key = Util.deserializeString(in);
+    value = in.readInt();
+  }
 }

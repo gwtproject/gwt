@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A new instance expression.
  */
@@ -25,7 +29,7 @@ public class JNewInstance extends JMethodCall {
   /**
    * The enclosing type of this new operation, used to compute clinit.
    */
-  private final JDeclaredType enclosingType;
+  private JDeclaredType enclosingType;
 
   /**
    * Initialize a new instance operation equivalent to another one. The new
@@ -86,4 +90,18 @@ public class JNewInstance extends JMethodCall {
     visitor.endVisit(this, ctx);
   }
 
+  public JNewInstance() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(enclosingType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    enclosingType = (JDeclaredType) in.readObject();
+  }
 }

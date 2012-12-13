@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java local variable definition.
  */
 public class JLocal extends JVariable implements HasEnclosingMethod {
 
-  private final JMethodBody enclosingMethodBody;
+  private JMethodBody enclosingMethodBody;
 
   JLocal(SourceInfo info, String name, JType type, boolean isFinal, JMethodBody enclosingMethodBody) {
     super(info, name, type, isFinal);
@@ -42,6 +46,21 @@ public class JLocal extends JVariable implements HasEnclosingMethod {
       // Do not visit declStmt, it gets visited within its own code block.
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JLocal() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(enclosingMethodBody);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    enclosingMethodBody = (JMethodBody) in.readObject();
   }
 
 }

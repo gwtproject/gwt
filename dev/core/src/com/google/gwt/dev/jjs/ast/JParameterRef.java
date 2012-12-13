@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java method parameter reference expression.
  */
@@ -25,7 +29,7 @@ public class JParameterRef extends JVariableRef {
   /**
    * The referenced parameter.
    */
-  private final JParameter param;
+  private JParameter param;
 
   public JParameterRef(SourceInfo info, JParameter param) {
     super(info, param);
@@ -45,5 +49,21 @@ public class JParameterRef extends JVariableRef {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JParameterRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(param);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    param = (JParameter) in.readObject();
+    assert param == target;
   }
 }

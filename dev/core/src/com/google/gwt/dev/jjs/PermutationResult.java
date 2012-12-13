@@ -20,13 +20,13 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.dev.Permutation;
 
-import java.io.Serializable;
+import java.io.Externalizable;
 import java.util.Collection;
 
 /**
  * An extensible return type for the results of compiling a single permutation.
  */
-public interface PermutationResult extends Serializable {
+public interface PermutationResult extends Externalizable {
 
   /**
    * Adds additional artifacts to this permutation result.
@@ -58,4 +58,8 @@ public interface PermutationResult extends Serializable {
    * The statement ranges for the code returned by {@link #getJs()}.
    */
   StatementRanges[] getStatementRanges();
+
+  /**
+   * Empty constructor for externalization.
+   */
 }

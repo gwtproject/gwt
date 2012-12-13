@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java switch statement.
  */
 public class JSwitchStatement extends JStatement {
 
-  private final JBlock body;
+  private JBlock body;
   private JExpression expr;
 
   public JSwitchStatement(SourceInfo info, JExpression expr, JBlock body) {
@@ -45,6 +49,22 @@ public class JSwitchStatement extends JStatement {
       visitor.accept(body);
     }
     visitor.endVisit(this, ctx);
+  }
+  public JSwitchStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(expr);
+    out.writeObject(body);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    expr = (JExpression) in.readObject();
+    body = (JBlock) in.readObject();
   }
 
 }

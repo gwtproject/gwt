@@ -25,7 +25,9 @@ import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
-import java.io.Serializable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -42,7 +44,7 @@ import java.util.TreeSet;
 public class StandardCompilationResult extends CompilationResult {
 
   private static final class MapComparator implements
-      Comparator<SortedMap<SelectionProperty, String>>, Serializable {
+      Comparator<SortedMap<SelectionProperty, String>> {
     public int compare(SortedMap<SelectionProperty, String> arg0,
         SortedMap<SelectionProperty, String> arg1) {
       int diff = arg0.size() - arg1.size();
@@ -77,20 +79,20 @@ public class StandardCompilationResult extends CompilationResult {
 
   private static final DiskCache diskCache = DiskCache.INSTANCE;
 
-  private final long jsToken[];
+  private long[] jsToken;
 
-  private final SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<SortedMap<SelectionProperty, String>>(
+  private SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<SortedMap<SelectionProperty, String>>(
       MAP_COMPARATOR);
 
   private List<SoftPermutation> softPermutations = Lists.create();
 
-  private final StatementRanges[] statementRanges;
+  private StatementRanges[] statementRanges;
 
-  private final String strongName;
+  private String strongName;
 
-  private final long symbolToken;
+  private long symbolToken;
 
-  private final int permutationId;
+  private int permutationId;
 
   public StandardCompilationResult(PermutationResult permutationResult) {
     super(StandardLinkerContext.class);
@@ -159,5 +161,49 @@ public class StandardCompilationResult extends CompilationResult {
   @Override
   public SymbolData[] getSymbolMap() {
     return diskCache.readObject(symbolToken, SymbolData[].class);
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public  StandardCompilationResult() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeInt(jsToken.length);
+    for (long tok : jsToken) {
+      out.writeLong(tok);
+    }
+    Util.serializeCollection(propertyValues, out);
+    Util.serializeCollection(softPermutations, out);
+    out.writeInt(statementRanges.length);
+    for (StatementRanges rng : statementRanges) {
+      out.writeObject(rng);
+    }
+    Util.serializeString(strongName, out);
+    out.writeLong(symbolToken);
+    out.writeInt(permutationId);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    int sz = in.readInt();
+    jsToken = new long[sz];
+    for (int i = 0; i < sz; i++) {
+      jsToken[i] = in.readLong();
+    }
+    propertyValues = (SortedSet) Util.deserializeObjectSet(in, SortedMap.class, TreeSet.class);
+    softPermutations = Util.deserializeObjectList(in);
+    sz = in.readInt();
+    statementRanges = new StatementRanges[sz];
+    for (int i = 0; i < sz; i++) {
+      statementRanges[i] = (StatementRanges) in.readObject();
+    }
+    strongName = Util.deserializeString(in);
+    symbolToken = in.readLong();
+    permutationId = in.readInt();
   }
 }

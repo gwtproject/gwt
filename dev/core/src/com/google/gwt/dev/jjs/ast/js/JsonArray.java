@@ -20,7 +20,11 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +33,13 @@ import java.util.List;
  */
 public class JsonArray extends JExpression {
 
-  private final List<JExpression> exprs = new ArrayList<JExpression>();
+  private List<JExpression> exprs;
 
   private JClassType jsoType;
 
   public JsonArray(SourceInfo sourceInfo, JClassType jsoType) {
     super(sourceInfo);
+    this.exprs = new ArrayList<JExpression>();
     this.jsoType = jsoType;
   }
 
@@ -69,6 +74,24 @@ public class JsonArray extends JExpression {
       visitor.accept(exprs);
     }
     visitor.endVisit(this, ctx);
+  }
+
+
+  public JsonArray() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(exprs, out);
+    out.writeObject(jsoType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    exprs = Util.deserializeObjectList(in);
+    jsoType = (JClassType) in.readObject();
   }
 
 }

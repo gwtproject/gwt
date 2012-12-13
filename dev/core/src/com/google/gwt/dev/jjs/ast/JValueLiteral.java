@@ -26,6 +26,9 @@ public abstract class JValueLiteral extends JLiteral {
     super(sourceInfo);
   }
 
+  protected JValueLiteral() {
+  }
+
   public abstract Object getValueObj();
 
   protected abstract JValueLiteral cloneFrom(JValueLiteral value);

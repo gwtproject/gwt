@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java break statement.
  */
 public class JBreakStatement extends JStatement {
 
-  private final JLabel label;
+  private JLabel label;
 
   public JBreakStatement(SourceInfo info, JLabel label) {
     super(info);
@@ -48,4 +52,19 @@ public class JBreakStatement extends JStatement {
     // can label the break statement itself! We could handle this case.
     return label == null;
   }
+  public JBreakStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(label);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    label = (JLabel) in.readObject();
+  }
+
 }

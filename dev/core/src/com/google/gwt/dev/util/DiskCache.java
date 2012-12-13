@@ -20,6 +20,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.lang.ref.WeakReference;
@@ -156,6 +158,8 @@ public class DiskCache {
       // Transfer all the bytes.
       int length = 0;
       int bytesRead;
+      // TODO(rluble): Only work if it is the last thing read
+      // from the stream; as it read till the end. FIX.
       while ((bytesRead = in.read(buf)) != -1) {
         file.write(buf, 0, bytesRead);
         length += bytesRead;
@@ -186,6 +190,76 @@ public class DiskCache {
       atEnd = false;
       file.seek(token);
       int length = file.readInt();
+      int bufLen = buf.length;
+      while (length > bufLen) {
+        int read = file.read(buf, 0, bufLen);
+        length -= read;
+        out.write(buf, 0, read);
+      }
+      while (length > 0) {
+        int read = file.read(buf, 0, length);
+        length -= read;
+        out.write(buf, 0, read);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException("Unable to read from byte cache", e);
+    } finally {
+      Util.releaseThreadLocalBuf(buf);
+    }
+  }
+
+  /**
+   * Write the rest of the data in an input stream to disk. Note: this method
+   * does not close the InputStream.
+   *
+   * @param in open stream containing the data to write to the disk cache.
+   *
+   * @return a token to retrieve the data later
+   */
+  public synchronized long transferFromObjectStream(ObjectInput in) {
+    assert in != null;
+    byte[] buf = Util.takeThreadLocalBuf();
+    try {
+      long position = moveToEndPosition();
+
+      // Placeholder, we don't know the length yet.
+      file.writeInt(-1);
+
+      int bytesToRead = in.readInt();
+      // Transfer all the bytes.
+      int length = 0;
+      int bytesRead;
+      while ((bytesRead = in.read(buf,0, Math.min(buf.length, bytesToRead))) > 0) {
+        file.write(buf, 0, bytesRead);
+        length += bytesRead;
+        bytesToRead -= bytesRead;
+      }
+
+      // Now go back and fill in the length.
+      file.seek(position);
+      file.writeInt(length);
+      // Don't eagerly seek the end, the next operation might be a read.
+      atEnd = false;
+      return position;
+    } catch (IOException e) {
+      throw new RuntimeException("Unable to read from byte cache", e);
+    } finally {
+      Util.releaseThreadLocalBuf(buf);
+    }
+  }
+  /**
+   * Writes the underlying bytes into the specified ObjectOutput
+   *
+   * @param token a previously returned token
+   * @param out the stream to write into
+   */
+  public synchronized void transferToObjectStream(long token, ObjectOutput out) {
+    byte[] buf = Util.takeThreadLocalBuf();
+    try {
+      atEnd = false;
+      file.seek(token);
+      int length = file.readInt();
+      out.writeInt(length);
       int bufLen = buf.length;
       while (length > bufLen) {
         int read = file.read(buf, 0, bufLen);

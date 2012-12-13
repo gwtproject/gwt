@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java case statement.
  */
 public class JCaseStatement extends JStatement {
 
-  private final JLiteral expr;
+  private JLiteral expr;
 
   public JCaseStatement(SourceInfo info, JLiteral expr) {
     super(info);
@@ -40,6 +44,21 @@ public class JCaseStatement extends JStatement {
       }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JCaseStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(expr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    expr = (JLiteral) in.readObject();
   }
 
 }

@@ -27,7 +27,6 @@ import com.google.gwt.dev.util.collect.Lists;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,9 +44,9 @@ import java.util.Set;
 /**
  * Root for the AST representing an entire Java program.
  */
-public class JProgram extends JNode {
+public class JProgram extends JNode  {
 
-  private static final class ArrayTypeComparator implements Comparator<JArrayType>, Serializable {
+  private static final class ArrayTypeComparator implements Comparator<JArrayType> {
     public int compare(JArrayType o1, JArrayType o2) {
       int comp = o1.getDims() - o2.getDims();
       if (comp != 0) {

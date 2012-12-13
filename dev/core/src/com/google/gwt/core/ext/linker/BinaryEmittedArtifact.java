@@ -37,4 +37,11 @@ public abstract class BinaryEmittedArtifact extends EmittedArtifact {
    */
   @Override
   public abstract long getLastModified();
+
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public BinaryEmittedArtifact() {
+  }
 }

@@ -19,6 +19,10 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java null reference type.
  */
@@ -61,5 +65,18 @@ public class JNullType extends JReferenceType {
 
   private Object readResolve() {
     return INSTANCE;
+  }
+
+  public JNullType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    // Does not need to save anything. Will be replaced by singleton on read.
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    // Replaced by singleton on read.
   }
 }

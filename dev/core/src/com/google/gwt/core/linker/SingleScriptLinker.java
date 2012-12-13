@@ -29,7 +29,11 @@ import com.google.gwt.core.ext.linker.Transferable;
 import com.google.gwt.core.ext.linker.impl.SelectionScriptLinker;
 import com.google.gwt.dev.About;
 import com.google.gwt.dev.util.DefaultTextOutput;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -49,8 +53,8 @@ public class SingleScriptLinker extends SelectionScriptLinker {
 
   @Transferable
   private static class Script extends Artifact<Script> {
-    private final String javaScript;
-    private final String strongName;
+    private String javaScript;
+    private String strongName;
 
     public Script(String strongName, String javaScript) {
       super(SingleScriptLinker.class);
@@ -88,6 +92,26 @@ public class SingleScriptLinker extends SelectionScriptLinker {
     @Override
     public String toString() {
       return "Script " + strongName;
+    }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public Script() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      Util.serializeString(javaScript, out);
+      Util.serializeString(strongName, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      javaScript = Util.deserializeString(in);
+      strongName = Util.deserializeString(in);
     }
   }
 

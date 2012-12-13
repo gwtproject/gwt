@@ -16,14 +16,19 @@
 package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.Linker;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * An external stylesheet referenced in the module manifest. The index is
  * important because output order must match module declaration order.
  */
 public abstract class StylesheetReference extends Artifact<StylesheetReference> {
-  private final String src;
-  private final int index;
+  private String src;
+  private int index;
 
   protected StylesheetReference(Class<? extends Linker> linkerType, String src,
       int index) {
@@ -58,5 +63,25 @@ public abstract class StylesheetReference extends Artifact<StylesheetReference> 
   @Override
   protected Class<StylesheetReference> getComparableArtifactType() {
     return StylesheetReference.class;
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public StylesheetReference() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(src, out);
+    out.writeInt(index);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    src = Util.deserializeString(in);
+    index = in.readInt();
   }
 }

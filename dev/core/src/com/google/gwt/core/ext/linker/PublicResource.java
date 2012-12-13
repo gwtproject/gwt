@@ -17,6 +17,7 @@ package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.Linker;
 
+
 /**
  * A resource in the module's public path.
  */
@@ -24,5 +25,11 @@ public abstract class PublicResource extends EmittedArtifact {
   protected PublicResource(Class<? extends Linker> linkerType,
       String partialPath) {
     super(linkerType, partialPath);
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public PublicResource() {
   }
 }

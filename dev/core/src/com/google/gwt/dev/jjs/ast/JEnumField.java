@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A field that is an enum constant.
  */
 public class JEnumField extends JField {
 
-  private final int ordinal;
+  private int ordinal;
 
   public JEnumField(SourceInfo info, String name, int ordinal, JEnumType enclosingType,
       JClassType type) {
@@ -41,5 +45,21 @@ public class JEnumField extends JField {
   }
 
   // TODO: implement traverse?
+
+
+  public JEnumField() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeInt(ordinal);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ordinal =  in.readInt();
+  }
 
 }

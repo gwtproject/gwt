@@ -17,13 +17,17 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Binary operator expression.
  */
 public class JBinaryOperation extends JExpression {
 
   private JExpression lhs;
-  private final JBinaryOperator op;
+  private JBinaryOperator op;
   private JExpression rhs;
   private JType type;
 
@@ -83,4 +87,24 @@ public class JBinaryOperation extends JExpression {
     visitor.endVisit(this, ctx);
   }
 
+  public JBinaryOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(lhs);
+    out.writeObject(rhs);
+    out.writeObject(op);
+    out.writeObject(type);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    lhs = (JExpression) in.readObject();
+    rhs = (JExpression) in.readObject();
+    op = (JBinaryOperator) in.readObject();
+    type = (JType) in.readObject();
+  }
 }

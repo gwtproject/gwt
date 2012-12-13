@@ -27,4 +27,9 @@ public class StandardScriptReference extends ScriptReference {
   public StandardScriptReference(String src, int index) {
     super(StandardLinkerContext.class, src, index);
   }
+  /**
+   * Empty constructor for externalization.
+   */
+  public StandardScriptReference() {
+  }
 }

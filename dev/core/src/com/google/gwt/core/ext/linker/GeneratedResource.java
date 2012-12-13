@@ -17,6 +17,11 @@ package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.Linker;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A resource created by a {@link Generator} invoking
@@ -24,7 +29,7 @@ import com.google.gwt.core.ext.Linker;
  * during the compilation process.
  */
 public abstract class GeneratedResource extends EmittedArtifact {
-  private final String generatorTypeName;
+  private String generatorTypeName;
   private transient Class<? extends Generator> generatorType;
 
   protected GeneratedResource(Class<? extends Linker> linkerType,
@@ -50,5 +55,23 @@ public abstract class GeneratedResource extends EmittedArtifact {
       }
     }
     return generatorType;
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public GeneratedResource() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(generatorTypeName, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    generatorTypeName = Util.deserializeString(in);
   }
 }

@@ -18,6 +18,9 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -69,4 +72,24 @@ public class JForStatement extends JStatement {
     visitor.endVisit(this, ctx);
   }
 
+  public JForStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(body);
+    out.writeObject(testExpr);
+    out.writeObject(initializers);
+    out.writeObject(increments);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    body = (JStatement) in.readObject();
+    testExpr = (JExpression) in.readObject();
+    initializers = (List<JStatement>) in.readObject();
+    increments = (List<JExpressionStatement>) in.readObject();
+  }
 }

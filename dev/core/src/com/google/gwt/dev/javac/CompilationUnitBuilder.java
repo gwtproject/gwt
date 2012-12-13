@@ -24,6 +24,8 @@ import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.List;
 
@@ -162,7 +164,19 @@ public abstract class CompilationUnitBuilder {
   }
 
   static final class GeneratedCompilationUnit extends CompilationUnitImpl {
-    private final GeneratedUnit generatedUnit;
+    private GeneratedUnit generatedUnit;
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      out.writeObject(generatedUnit);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      generatedUnit = (GeneratedUnit) in.readObject();
+    }
 
     public GeneratedCompilationUnit(GeneratedUnit generatedUnit,
         List<CompiledClass> compiledClasses, List<JDeclaredType> types, Dependencies dependencies,

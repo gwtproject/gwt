@@ -17,10 +17,15 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java program statement.
  */
-public abstract class JStatement extends JNode {
+public abstract class JStatement extends JNode implements Externalizable {
 
   public JStatement(SourceInfo info) {
     super(info);
@@ -29,5 +34,19 @@ public abstract class JStatement extends JNode {
   public boolean unconditionalControlBreak() {
     return false;
   }
+
+  public JStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
+  }
+
 
 }

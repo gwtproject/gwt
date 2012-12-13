@@ -25,6 +25,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.io.Serializable;
 
@@ -37,8 +39,8 @@ public class StandardPublicResource extends PublicResource {
    * Serializes a public resource via a snapshot of the content.
    */
   private static final class SerializedPublicResource extends PublicResource {
-    private final byte[] data;
-    private final long lastModified;
+    private byte[] data;
+    private long lastModified;
 
     protected SerializedPublicResource(String partialPath, byte[] data,
         long lastModified) {
@@ -69,9 +71,29 @@ public class StandardPublicResource extends PublicResource {
         throw new UnableToCompleteException();
       }
     }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public SerializedPublicResource() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      out.writeLong(lastModified);
+      Util.serializeByteArray(data, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      lastModified = in.readLong();
+      data = Util.deserializeByteArray(in);
+    }
   }
 
-  private final Resource resource;
+  private Resource resource;
 
   public StandardPublicResource(String partialPath, Resource resource) {
     super(StandardLinkerContext.class, partialPath);
@@ -107,5 +129,27 @@ public class StandardPublicResource extends PublicResource {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public StandardPublicResource() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    // If resource is not Serializable then it will be replaced by
+    // writeReplace.
+    if (resource instanceof Serializable) {
+      super.writeExternal(out);
+      out.writeObject(resource);
+    }
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    resource = (Resource) in.readObject();
   }
 }

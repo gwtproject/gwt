@@ -28,9 +28,11 @@ import com.google.gwt.dev.util.collect.HashMap;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
 import java.io.ByteArrayInputStream;
+import java.io.Externalizable;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
+import java.io.ObjectOutput;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ import java.util.regex.Pattern;
  * module. State is accumulated throughout the life cycle of the containing
  * module and may be invalidated at certain times and recomputed.
  */
-public abstract class CompilationUnit implements Serializable {
+public abstract class CompilationUnit implements Externalizable {
 
   /**
    * Encapsulates the functionality to find all nested classes of this class
@@ -463,5 +465,19 @@ public abstract class CompilationUnit implements Serializable {
    */
   private boolean isAnonymousClass(CompiledClass cc) {
     return cc.isLocal() && isClassnameGenerated(cc.getInternalName());
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public CompilationUnit() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
   }
 }

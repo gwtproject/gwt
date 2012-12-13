@@ -20,6 +20,9 @@ import com.google.gwt.dev.util.Util;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,10 +33,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MockCompilationUnit extends CompilationUnit {
   private static final AtomicInteger nextTimestamp = new AtomicInteger(1);
 
-  private final ContentId contentId;
-  private final long lastModified;
-  private final String resourceLocation;
-  private final String typeName;
+  private ContentId contentId;
+  private long lastModified;
+  private String resourceLocation;
+  private String typeName;
 
   public MockCompilationUnit(String typeName, String source) {
     this(typeName, source, "/mock/" + Shared.toPath(typeName));
@@ -121,5 +124,29 @@ public class MockCompilationUnit extends CompilationUnit {
   @Override
   CategorizedProblem[] getProblems() {
     return new CategorizedProblem[0];
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public  MockCompilationUnit() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(contentId);
+    out.writeLong(lastModified);
+    Util.serializeString(resourceLocation, out);
+    Util.serializeString(typeName, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    contentId = (ContentId) in.readObject();
+    lastModified = in.readLong();
+    resourceLocation = Util.deserializeString(in);
+    typeName = Util.deserializeString(in);
   }
 }

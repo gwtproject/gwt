@@ -15,7 +15,12 @@
  */
 package com.google.gwt.core.ext;
 
-import java.io.Serializable;
+import com.google.gwt.dev.util.Util;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,10 +29,10 @@ import java.util.List;
  * A container for saving lists of deferred-binding and configuration properties
  * to be compared subsequently with a PropertyOracle.
  */
-public class CachedPropertyInformation implements Serializable {
+public class CachedPropertyInformation implements Externalizable {
   
-  private final List<SelectionProperty> selectionProperties;
-  private final List<ConfigurationProperty> configProperties;
+  private List<SelectionProperty> selectionProperties;
+  private List<ConfigurationProperty> configProperties;
 
   public CachedPropertyInformation(TreeLogger logger, PropertyOracle oracle, 
       Collection<String> selectionPropertyNames, 
@@ -108,5 +113,20 @@ public class CachedPropertyInformation implements Serializable {
     }
     
     return true;
-  } 
+  }
+
+  public CachedPropertyInformation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeCollection(selectionProperties, out);
+    Util.serializeCollection(configProperties, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    selectionProperties = Util.deserializeObjectList(in);
+    configProperties = Util.deserializeObjectList(in);
+  }
 }

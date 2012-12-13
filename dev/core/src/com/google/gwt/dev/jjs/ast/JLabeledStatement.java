@@ -17,13 +17,17 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java statement that has an associated label.
  */
 public class JLabeledStatement extends JStatement {
 
   private JStatement body;
-  private final JLabel label;
+  private JLabel label;
 
   public JLabeledStatement(SourceInfo info, JLabel label, JStatement body) {
     super(info);
@@ -46,4 +50,22 @@ public class JLabeledStatement extends JStatement {
     }
     visitor.endVisit(this, ctx);
   }
+
+  public JLabeledStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(body);
+    out.writeObject(label);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    body = (JStatement) in.readObject();
+    label = (JLabel) in.readObject();
+  }
+
 }

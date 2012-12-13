@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Conditional expression.
  */
@@ -68,6 +72,27 @@ public class JConditional extends JExpression {
       elseExpr = visitor.accept(elseExpr);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JConditional() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(type);
+    out.writeObject(ifTest);
+    out.writeObject(thenExpr);
+    out.writeObject(elseExpr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    type = (JType) in.readObject();
+    ifTest = (JExpression) in.readObject();
+    thenExpr = (JExpression) in.readObject();
+    elseExpr = (JExpression) in.readObject();
   }
 
 }

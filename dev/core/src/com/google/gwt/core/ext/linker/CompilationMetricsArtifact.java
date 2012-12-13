@@ -19,6 +19,11 @@ package com.google.gwt.core.ext.linker;
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.linker.SoycReportLinker;
 import com.google.gwt.dev.js.SizeBreakdown;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Captures some metrics from the compile permutations step of the build.
@@ -28,7 +33,7 @@ public class CompilationMetricsArtifact extends Artifact<CompilationMetricsArtif
 
   private long compileElapsedMilliseconds;
   private long elapsedMilliseconds;
-  private final int permutationId;
+  private int permutationId;
   private String permutationDescription;
   private int[] jsSize;
 
@@ -129,5 +134,35 @@ public class CompilationMetricsArtifact extends Artifact<CompilationMetricsArtif
 
   private String getName() {
     return "CompilationMetricsArtifact-" + permutationId;
+  }
+  /**
+   * Empty constructor for externalization.
+   */
+  public CompilationMetricsArtifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeLong(compileElapsedMilliseconds);
+    out.writeInt(permutationId);
+    Util.serializeString(permutationDescription, out);
+    out.writeInt(jsSize.length);
+    for (int sz : jsSize) {
+      out.writeInt(sz);
+    }
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    compileElapsedMilliseconds = in.readLong();
+    permutationId = in.readInt();
+    permutationDescription = Util.deserializeString(in);
+    int sz = in.readInt();
+    jsSize = new int[sz];
+    for (int i = 0; i < sz; i++) {
+      jsSize[i] = in.readInt();
+    }
   }
 }

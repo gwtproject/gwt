@@ -15,7 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.util.collect.Lists;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -31,9 +34,22 @@ public final class JsRootScope extends JsScope {
    * NOTE: the startup sequence for this class is a bit tricky.
    */
 
-  private static class SerializedForm implements Serializable {
+  private static class SerializedForm implements Externalizable {
     private Object readResolve() {
       return JsRootScope.INSTANCE;
+    }
+    /*
+    * Used for externalization only.
+    */
+    public SerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
     }
   }
 

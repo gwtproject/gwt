@@ -22,8 +22,9 @@ import com.google.gwt.dev.util.Util;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,21 +38,23 @@ public class CachedCompilationUnit extends CompilationUnit {
   private static final boolean normalizeTimestamps = Boolean.parseBoolean(
       System.getProperty("gwt.normalizeTimestamps", "false"));
 
-  private final DiskCacheToken astToken;
-  private final long astVersion;
+  private DiskCacheToken astToken;
+  private long astVersion;
   private transient Collection<CompiledClass> compiledClasses;
-  private final ContentId contentId;
-  private final Dependencies dependencies;
-  private final boolean isError;
-  private final boolean isGenerated;
-  private final boolean isSuperSource;
+  private ContentId contentId;
+  private Dependencies dependencies;
+  private boolean isError;
+  private boolean isGenerated;
+  private boolean isSuperSource;
   private transient List<JsniMethod> jsniMethods;
-  private final long lastModified;
-  private final MethodArgNamesLookup methodArgNamesLookup;
-  private final CategorizedProblem[] problems;
-  private final String resourceLocation;
-  private final String resourcePath;
-  private final String typeName;
+  private long lastModified;
+  private MethodArgNamesLookup methodArgNamesLookup;
+  private CategorizedProblem[] problems;
+  private String resourceLocation;
+  private String resourcePath;
+  private String typeName;
+
+  public CachedCompilationUnit() { }
 
   /**
    * Shallow copy of a CachedCompiliationUnit, replacing some parameters in the new copy.
@@ -217,20 +220,64 @@ public class CachedCompilationUnit extends CompilationUnit {
     Collections.sort(copy, comparator);
     return copy;
   }
-  
-  private void writeObject(ObjectOutputStream oos) throws IOException {
-    oos.defaultWriteObject();
-    oos.writeObject(sort(this.compiledClasses, new Comparator<CompiledClass>() {
-      @Override
-      public int compare(CompiledClass o1, CompiledClass o2) {
-        return o1.getSourceName().compareTo(o2.getSourceName());
-      }
-    }));
-    oos.writeObject(sort(this.jsniMethods, new Comparator<JsniMethod>() {
-      @Override
-      public int compare(JsniMethod o1, JsniMethod o2) {
-         return o1.name().compareTo(o2.name());
-      }
-    }));
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(astToken);
+    out.writeLong(astVersion);
+    out.writeObject(contentId);
+    out.writeObject(dependencies);
+    out.writeBoolean(isError);
+    out.writeBoolean(isGenerated);
+    out.writeBoolean(isSuperSource);
+    out.writeLong(lastModified);
+    out.writeObject(methodArgNamesLookup);
+    Util.serializeArray(problems, out);
+    Util.serializeString(resourceLocation, out);
+    Util.serializeString(resourcePath, out);
+    Util.serializeString(typeName,out);
+    out.writeBoolean(compiledClasses != null);
+    if (compiledClasses != null) {
+      Util.serializeCollection(sort(
+          this.compiledClasses, new Comparator<CompiledClass>() {
+        @Override
+        public int compare(CompiledClass o1, CompiledClass o2) {
+          return o1.getSourceName().compareTo(o2.getSourceName());
+        }
+      }), out);
+    }
+    out.writeBoolean(jsniMethods != null);
+    if (jsniMethods != null) {
+      Util.serializeCollection(sort(
+        this.jsniMethods, new Comparator<JsniMethod>() {
+          @Override
+          public int compare(JsniMethod o1, JsniMethod o2) {
+            return o1.name().compareTo(o2.name());
+          }
+        }), out);
+    }
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    astToken = (DiskCacheToken) in.readObject();
+    astVersion = in.readLong();
+    contentId = (ContentId) in.readObject();
+    dependencies = (Dependencies) in.readObject();
+    isError = in.readBoolean();
+    isGenerated = in.readBoolean();
+    isSuperSource = in.readBoolean();
+    lastModified = in.readLong();
+    methodArgNamesLookup = (MethodArgNamesLookup) in.readObject();
+    problems = (CategorizedProblem[]) Util.deserializeObjectArray(in, CategorizedProblem.class);
+    resourceLocation = Util.deserializeString(in);
+    resourcePath = Util.deserializeString(in);
+    typeName = Util.deserializeString(in);
+    if (in.readBoolean()) {
+      compiledClasses = Util.deserializeObjectList(in);
+    }
+    if (in.readBoolean()) {
+      jsniMethods = Util.deserializeObjectList(in);
+    }
   }
 }

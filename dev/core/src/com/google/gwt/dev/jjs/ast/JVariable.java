@@ -18,15 +18,20 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.StringInterner;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Base class for any storage location.
  */
 public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveInitializer,
-    HasName, HasType {
+    HasName, HasType, Externalizable {
 
   protected JDeclarationStatement declStmt = null;
   private boolean isFinal;
-  private final String name;
+  private String name;
   private JType type;
 
   JVariable(SourceInfo info, String name, JType type, boolean isFinal) {
@@ -80,5 +85,27 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
     assert newType != null;
     type = newType;
   }
+
+  public JVariable() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+    out.writeObject(declStmt);
+    out.writeBoolean(isFinal);
+    com.google.gwt.dev.util.Util.serializeString(name, out);
+    out.writeObject(type);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
+    declStmt = (JDeclarationStatement) in.readObject();
+    isFinal = in.readBoolean();
+    name = com.google.gwt.dev.util.Util.deserializeString(in);
+    type = (JType) in.readObject();
+  }
+
 
 }

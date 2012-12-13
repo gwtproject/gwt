@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +27,11 @@ import java.util.List;
  */
 public class JsBlock extends JsStatement {
 
-  private final List<JsStatement> stmts = new ArrayList<JsStatement>();
+  private List<JsStatement> stmts;
 
   public JsBlock(SourceInfo sourceInfo) {
     super(sourceInfo);
+    stmts = new ArrayList<JsStatement>();
   }
 
   @Override
@@ -58,5 +63,24 @@ public class JsBlock extends JsStatement {
       }
     }
     return false;
+  }
+
+  /**
+   * Empty constructor.
+   * Used for externalization only.
+   */
+  public JsBlock() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(stmts, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    stmts = Util.deserializeObjectList(in);
   }
 }

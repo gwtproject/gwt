@@ -17,13 +17,17 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Instances are shared.
  */
 public class JArrayType extends JReferenceType {
 
   private transient int dims = 0;
-  private final JType elementType;
+  private JType elementType;
   private transient JType leafType = null;
 
   public JArrayType(JType elementType) {
@@ -97,4 +101,18 @@ public class JArrayType extends JReferenceType {
     visitor.endVisit(this, ctx);
   }
 
+  public JArrayType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(elementType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    elementType = (JType) in.readObject();
+  }
 }

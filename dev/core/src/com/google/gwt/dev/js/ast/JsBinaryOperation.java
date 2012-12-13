@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript binary operation.
  */
@@ -24,7 +28,7 @@ public final class JsBinaryOperation extends JsExpression {
 
   private JsExpression arg2;
 
-  private final JsBinaryOperator op;
+  private JsBinaryOperator op;
 
   public JsBinaryOperation(SourceInfo sourceInfo, JsBinaryOperator op) {
     this(sourceInfo, op, null, null);
@@ -118,5 +122,27 @@ public final class JsBinaryOperation extends JsExpression {
       arg2 = v.accept(arg2);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsBinaryOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(arg1);
+    out.writeObject(arg2);
+    op.writeOperator(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    arg1 = (JsExpression) in.readObject();
+    arg2 = (JsExpression) in.readObject();
+    op = JsBinaryOperator.readOperator(in);
   }
 }

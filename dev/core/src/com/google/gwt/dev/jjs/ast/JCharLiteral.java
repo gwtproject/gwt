@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java character literal expression.
  */
@@ -29,7 +33,7 @@ public class JCharLiteral extends JValueLiteral {
     return (value == 0) ? NULL : new JCharLiteral(SourceOrigin.UNKNOWN, value);
   }
 
-  private final char value;
+  private char value;
 
   public JCharLiteral(SourceInfo sourceInfo, char value) {
     super(sourceInfo);
@@ -69,5 +73,21 @@ public class JCharLiteral extends JValueLiteral {
 
   private Object readResolve() {
     return (value == 0) ? NULL : this;
+  }
+
+
+  public JCharLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeChar(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = in.readChar();
   }
 }

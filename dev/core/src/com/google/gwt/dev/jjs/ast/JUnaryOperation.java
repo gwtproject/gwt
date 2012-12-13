@@ -17,13 +17,17 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java prefix or postfix operation expression.
  */
 public abstract class JUnaryOperation extends JExpression {
 
   private JExpression arg;
-  private final JUnaryOperator op;
+  private JUnaryOperator op;
 
   public JUnaryOperation(SourceInfo info, JUnaryOperator op, JExpression arg) {
     super(info);
@@ -55,5 +59,25 @@ public abstract class JUnaryOperation extends JExpression {
     } else {
       arg = visitor.accept(arg);
     }
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  protected JUnaryOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(arg);
+    op.writeOperator(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    arg = (JExpression) in.readObject();
+    op = JUnaryOperator.readOperator(in);
   }
 }

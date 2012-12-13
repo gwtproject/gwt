@@ -17,10 +17,14 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dev.util.collect.Lists;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,13 +34,13 @@ import java.util.Set;
  * Tracks dependencies from a {@link CompilationUnit} to {@link CompiledClass
  * CompiledClasses}.
  */
-class Dependencies implements Serializable {
+class Dependencies implements Externalizable {
   /**
    * Represents a {@link Ref} that has been previously persisted.
    */
-  static class Ref implements Serializable {
-    private final String internalName;
-    private final String hash;
+  static class Ref implements Externalizable {
+    private String internalName;
+    private String hash;
 
     private Ref(CompiledClass cc) {
       this(cc.getInternalName(), cc.getSignatureHash());
@@ -54,14 +58,32 @@ class Dependencies implements Serializable {
     public String getSignatureHash() {
       return hash;
     }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public Ref() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      Util.serializeString(internalName, out);
+      Util.serializeString(hash, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      internalName = Util.deserializeString(in);
+      hash = Util.deserializeString(in);
+    }
   }
 
   Map<String, Ref> qualified = new HashMap<String, Ref>(true);
   Map<String, Ref> simple = new HashMap<String, Ref>(true);
-  private final List<String> apiRefs;
-  private final String myPackage;
+  private List<String> apiRefs;
+  private String myPackage;
 
-  Dependencies() {
+  public Dependencies() {
     this.myPackage = "";
     this.apiRefs = Lists.create();
   }
@@ -184,5 +206,22 @@ class Dependencies implements Serializable {
       result = false;
     }
     return result;
+  }
+
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeStringMap(qualified, out);
+    Util.serializeStringMap(simple, out);
+    Util.serializeStringCollection(apiRefs, out);
+    Util.serializeString(myPackage, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    qualified = Util.deserializeStringMap(in, HashMap.class, Ref.class);
+    simple = Util.deserializeStringMap(in, HashMap.class, Ref.class);
+    apiRefs = Util.deserializeStringList(in);
+    myPackage = Util.deserializeString(in);
   }
 }

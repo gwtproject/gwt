@@ -18,6 +18,9 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -53,14 +56,14 @@ public class JNewArray extends JExpression {
     return new JNewArray(info, arrayType, null, initializers, classLiterals);
   }
 
-  public final List<JExpression> dims;
+  public List<JExpression> dims;
 
-  public final List<JExpression> initializers;
+  public List<JExpression> initializers;
 
   /**
    * The list of class literals that will be needed to support this expression.
    */
-  private final List<JClassLiteral> classLiterals;
+  private List<JClassLiteral> classLiterals;
 
   private JArrayType type;
 
@@ -139,5 +142,26 @@ public class JNewArray extends JExpression {
       visitor.accept(getClassLiterals());
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JNewArray() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(dims);
+    out.writeObject(initializers);
+    out.writeObject(classLiterals);
+    out.writeObject(type);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    dims = (List<JExpression>) in.readObject();
+    initializers = (List<JExpression>) in.readObject();
+    classLiterals = (List<JClassLiteral>) in.readObject();
+    type = (JArrayType) in.readObject();
   }
 }

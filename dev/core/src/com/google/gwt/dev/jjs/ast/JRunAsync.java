@@ -16,16 +16,21 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Represents a GWT.runAsync() call.
  */
 public class JRunAsync extends JExpression {
 
-  private final String name;
+  private String name;
   private JExpression onSuccessCall;
   private JExpression runAsyncCall;
-  private final int splitPoint;
+  private int splitPoint;
 
   public JRunAsync(SourceInfo info, int splitPoint, String name, JExpression runAsyncCall,
       JExpression onSuccessCall) {
@@ -99,5 +104,25 @@ public class JRunAsync extends JExpression {
    */
   public void traverseOnSuccess(JVisitor visitor) {
     onSuccessCall = visitor.accept(onSuccessCall);
+  }
+  public JRunAsync() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(name, out);
+    out.writeObject(onSuccessCall);
+    out.writeObject(runAsyncCall);
+    out.writeInt(splitPoint);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    name = Util.deserializeString(in);
+    onSuccessCall = (JExpression) in.readObject();
+    runAsyncCall = (JExpression) in.readObject();
+    splitPoint = in.readInt();
   }
 }

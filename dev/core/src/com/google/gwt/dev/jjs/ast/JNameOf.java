@@ -18,6 +18,9 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -96,5 +99,22 @@ public class JNameOf extends JExpression {
       // Intentionally not visiting referenced node
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JNameOf() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(node);
+    out.writeObject(stringType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    node = (HasName) in.readObject();
+    stringType = (JClassType) in.readObject();
   }
 }

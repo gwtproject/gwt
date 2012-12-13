@@ -34,4 +34,11 @@ public class JsDebugger extends JsStatement {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsDebugger() {
+  }
+
 }

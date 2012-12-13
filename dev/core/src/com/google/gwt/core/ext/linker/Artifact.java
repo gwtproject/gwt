@@ -16,8 +16,12 @@
 package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.Linker;
+import com.google.gwt.dev.util.Util;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A base type for all artifacts relating to the link process. In order to
@@ -29,9 +33,9 @@ import java.io.Serializable;
  *          to.
  */
 public abstract class Artifact<C extends Artifact<C>> implements
-    Comparable<Artifact<?>>, Serializable {
+    Comparable<Artifact<?>>, Externalizable {
   private transient Class<? extends Linker> linker;
-  private final String linkerName;
+  private String linkerName;
 
   /**
    * Constructor.
@@ -116,4 +120,20 @@ public abstract class Artifact<C extends Artifact<C>> implements
    * concrete implementations of this methods must be final.
    */
   protected abstract Class<C> getComparableArtifactType();
+
+  /**
+   * Empty constructor for externalization.
+   */
+  protected Artifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeString(linkerName, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    linkerName = Util.deserializeString(in);
+  }
 }

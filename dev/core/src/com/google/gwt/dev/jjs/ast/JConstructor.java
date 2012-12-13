@@ -18,7 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -26,10 +29,10 @@ import java.util.List;
  */
 public class JConstructor extends JMethod {
 
-  private static class ExternalSerializedForm implements Serializable {
+  private static class ExternalSerializedForm implements Externalizable {
 
-    private final JClassType enclosingType;
-    private final String signature;
+    private JClassType enclosingType;
+    private String signature;
 
     public ExternalSerializedForm(JConstructor ctor) {
       enclosingType = ctor.getEnclosingType();
@@ -40,6 +43,21 @@ public class JConstructor extends JMethod {
       JConstructor result = new JConstructor(SourceOrigin.UNKNOWN, enclosingType);
       result.signature = signature;
       return result;
+    }
+
+    public ExternalSerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      out.writeObject(enclosingType);
+      com.google.gwt.dev.util.Util.serializeString(signature, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      enclosingType = (JClassType) in.readObject();
+      signature = com.google.gwt.dev.util.Util.deserializeString(in);
     }
   }
 
@@ -136,4 +154,19 @@ public class JConstructor extends JMethod {
     }
   }
 
+  /*
+  public JConstructor() { }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isEmpty);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isEmpty = in.readBoolean();
+  }
+*/
 }

@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript catch clause.
  */
 public class JsCatch extends JsNode implements HasCondition {
 
-  protected final JsCatchScope scope;
+  protected JsCatchScope scope;
 
   private JsBlock body;
 
@@ -76,5 +80,29 @@ public class JsCatch extends JsNode implements HasCondition {
       body = v.accept(body);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsCatch() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(scope);
+    out.writeObject(body);
+    out.writeObject(condition);
+    out.writeObject(param);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    scope = (JsCatchScope) in.readObject();
+    body = (JsBlock) in.readObject();
+    condition = (JsExpression) in.readObject();
+    param = (JsParameter) in.readObject();
   }
 }

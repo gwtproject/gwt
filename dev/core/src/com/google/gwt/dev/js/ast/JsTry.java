@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +27,7 @@ import java.util.List;
  */
 public class JsTry extends JsStatement {
 
-  private final List<JsCatch> catches = new ArrayList<JsCatch>();
+  private List<JsCatch> catches;
 
   private JsBlock finallyBlock;
 
@@ -31,6 +35,7 @@ public class JsTry extends JsStatement {
 
   public JsTry(SourceInfo sourceInfo) {
     super(sourceInfo);
+    catches = new ArrayList<JsCatch>();
   }
 
   public List<JsCatch> getCatches() {
@@ -69,4 +74,27 @@ public class JsTry extends JsStatement {
     }
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsTry() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(catches, out);
+    out.writeObject(tryBlock);
+    out.writeObject(finallyBlock);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    catches = Util.deserializeObjectList(in);
+    tryBlock = (JsBlock) in.readObject();
+    finallyBlock = (JsBlock) in.readObject();
+  }
+
 }

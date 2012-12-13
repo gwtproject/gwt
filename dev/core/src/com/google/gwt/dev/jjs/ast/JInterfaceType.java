@@ -18,15 +18,18 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Java interface type definition.
  */
 public class JInterfaceType extends JDeclaredType {
 
-  private static class ExternalSerializedForm implements Serializable {
-    private final String name;
+  private static class ExternalSerializedForm implements Externalizable {
+    private String name;
 
     public ExternalSerializedForm(JInterfaceType interfaceType) {
       name = interfaceType.getName();
@@ -34,6 +37,19 @@ public class JInterfaceType extends JDeclaredType {
 
     private Object readResolve() {
       return new JInterfaceType(name);
+    }
+
+    public ExternalSerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      com.google.gwt.dev.util.Util.serializeString(name, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      name = com.google.gwt.dev.util.Util.deserializeString(in);
     }
   }
 
@@ -82,5 +98,18 @@ public class JInterfaceType extends JDeclaredType {
     } else {
       return this;
     }
+  }
+
+  public JInterfaceType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
   }
 }

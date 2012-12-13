@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript if statement.
  */
@@ -87,5 +91,27 @@ public final class JsIf extends JsStatement {
       return true;
     }
     return false;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsIf() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(ifExpr);
+    out.writeObject(thenStmt);
+    out.writeObject(elseStmt);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ifExpr = (JsExpression) in.readObject();
+    thenStmt = (JsStatement) in.readObject();
+    elseStmt = (JsStatement) in.readObject();
   }
 }

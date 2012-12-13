@@ -16,8 +16,12 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,7 +68,7 @@ public class JMethodCall extends JExpression {
   private List<JExpression> args = Collections.emptyList();
   private JExpression instance;
   private JMethod method;
-  private final JType overrideReturnType;
+  private JType overrideReturnType;
   private Polymorphism polymorphism = Polymorphism.NORMAL;
 
   /**
@@ -249,4 +253,28 @@ public class JMethodCall extends JExpression {
     }
     args = visitor.acceptImmutable(args);
   }
+
+  public JMethodCall() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(args, out);
+    out.writeObject(instance);
+    out.writeObject(method);
+    out.writeObject(overrideReturnType);
+    out.writeObject(polymorphism);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    args = Util.deserializeObjectList(in);
+    instance = (JExpression) in.readObject();
+    method = (JMethod) in.readObject();
+    overrideReturnType = (JType) in.readObject();
+    polymorphism = (Polymorphism) in.readObject();
+  }
+
 }

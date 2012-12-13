@@ -20,7 +20,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 /**
  * Base class for any Java literal expression.
  */
-public abstract class JLiteral extends JExpression {
+public abstract class JLiteral extends JExpression  {
 
   public JLiteral(SourceInfo sourceInfo) {
     super(sourceInfo);
@@ -31,4 +31,6 @@ public abstract class JLiteral extends JExpression {
     return false;
   }
 
+  public JLiteral() {
+  }
 }

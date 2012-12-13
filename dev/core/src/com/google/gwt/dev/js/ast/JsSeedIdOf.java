@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * An AST node whose evaluation results in the numeric seed id of its type.
  */
 public class JsSeedIdOf extends JsNameOf {
 
-  private final int seedId;
+  private int seedId;
 
   public JsSeedIdOf(SourceInfo info, JsName name, int seedId) {
     super(info, name);
@@ -42,4 +46,23 @@ public class JsSeedIdOf extends JsNameOf {
     }
     visitor.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsSeedIdOf() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeInt(seedId);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    seedId = in.readInt();
+  }
+
 }

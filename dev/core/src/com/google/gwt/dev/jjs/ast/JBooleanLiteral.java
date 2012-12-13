@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java boolean literal expression.
  */
@@ -31,7 +35,7 @@ public class JBooleanLiteral extends JValueLiteral {
     return value ? TRUE : FALSE;
   }
 
-  private final boolean value;
+  private boolean value;
 
   private JBooleanLiteral(SourceInfo sourceInfo, boolean value) {
     super(sourceInfo);
@@ -64,5 +68,22 @@ public class JBooleanLiteral extends JValueLiteral {
 
   private Object readResolve() {
     return get(value);
+  }
+
+
+  public JBooleanLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    // Does not need to save anything else as it will be replaced by
+    // singleton on read.
+    out.writeBoolean(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    // Will be replaced by singleton on read.
+    value = in.readBoolean();
   }
 }

@@ -15,16 +15,20 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
 import com.google.gwt.dev.js.JsToStringGenerationVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Base class for all JS AST elements.
  */
-public abstract class JsNode implements JsVisitable, HasSourceInfo, Serializable {
+public abstract class JsNode implements JsVisitable, HasSourceInfo, Externalizable {
 
   private SourceInfo sourceInfo;
 
@@ -73,5 +77,20 @@ public abstract class JsNode implements JsVisitable, HasSourceInfo, Serializable
     JsToStringGenerationVisitor v = new JsToStringGenerationVisitor(out);
     v.accept(this);
     return out.toString();
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  protected JsNode() {
+    sourceInfo = SourceOrigin.UNKNOWN;
+  }
+
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(sourceInfo);
+  }
+
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    sourceInfo = (SourceInfo) in.readObject();
   }
 }

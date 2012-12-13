@@ -17,10 +17,14 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.impl.SourceGenerationVisitor;
 import com.google.gwt.dev.jjs.impl.ToStringGenerationVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
 
 /**
@@ -28,7 +32,7 @@ import java.io.Serializable;
  */
 public abstract class JNode implements JVisitable, HasSourceInfo, Serializable {
 
-  private SourceInfo info;
+  protected SourceInfo info;
 
   protected JNode(SourceInfo info) {
     assert info != null : "SourceInfo must be provided for JNodes";
@@ -59,5 +63,17 @@ public abstract class JNode implements JVisitable, HasSourceInfo, Serializable {
     ToStringGenerationVisitor v = new ToStringGenerationVisitor(out);
     v.accept(this);
     return out.toString();
+  }
+
+  public JNode() { this.info = SourceOrigin.UNKNOWN; }
+
+//  @Override
+  public void writeExternalImpl(ObjectOutput out) throws IOException {
+    out.writeObject(info);
+  }
+
+//  @Override
+  public void readExternalImpl(ObjectInput in) throws IOException, ClassNotFoundException {
+    info = (SourceInfo) in.readObject();
   }
 }

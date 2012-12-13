@@ -33,6 +33,9 @@ import com.google.gwt.dev.jjs.PermutationResult;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -108,6 +111,16 @@ public class SelectionScriptLinkerUnitTest extends TestCase {
         ranges.add(new MockStatementRanges(js.length));
       }
       return ranges.toArray(new StatementRanges[0]);
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      assert false;
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      assert false;
     }
   }
 

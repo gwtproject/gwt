@@ -17,7 +17,11 @@ import com.google.gwt.dev.jjs.CorrelationFactory;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,17 +30,17 @@ import java.util.Map;
  */
 public final class JsProgram extends JsNode {
 
-  private final CorrelationFactory correlator;
+  private CorrelationFactory correlator;
 
   private JsProgramFragment[] fragments;
 
-  private final Map<String, JsName> indexedFields = new HashMap<String, JsName>();
+  private Map<String, JsName> indexedFields = new HashMap<String, JsName>();
 
-  private final Map<String, JsFunction> indexedFunctions = new HashMap<String, JsFunction>();
+  private Map<String, JsFunction> indexedFunctions = new HashMap<String, JsFunction>();
 
-  private final JsScope objectScope;
+  private JsScope objectScope;
 
-  private final JsScope topScope;
+  private JsScope topScope;
 
   public JsProgram() {
     this(DummyCorrelationFactory.INSTANCE);
@@ -141,5 +145,27 @@ public final class JsProgram extends JsNode {
       }
     }
     v.endVisit(this, ctx);
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(correlator);
+    Util.serializeArray(fragments, out);
+    Util.serializeStringMap(indexedFields, out);
+    Util.serializeStringMap(indexedFunctions, out);
+    out.writeObject(objectScope);
+    out.writeObject(topScope);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    correlator = (CorrelationFactory) in.readObject();
+    fragments = Util.deserializeObjectArray(in, JsProgramFragment.class);
+    indexedFields = Util.deserializeStringMap(in, HashMap.class, JsName.class);
+    indexedFunctions = Util.deserializeStringMap(in, HashMap.class, JsFunction.class);
+    objectScope = (JsScope) in.readObject();
+    topScope = (JsScope) in.readObject();
   }
 }

@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A <code>for</code> statement. If specified at all, the initializer part is either a declaration
  * of one or more variables, in which case {@link #getInitVars()} is used, or an expression, in
@@ -107,5 +111,31 @@ public class JsFor extends JsStatement {
       body = v.accept(body);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsFor() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(condition);
+    out.writeObject(body);
+    out.writeObject(incrExpr);
+    out.writeObject(initExpr);
+    out.writeObject(initVars);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    condition = (JsExpression) in.readObject();
+    body = (JsStatement) in.readObject();
+    incrExpr = (JsExpression) in.readObject();
+    initExpr = (JsExpression) in.readObject();
+    initVars = (JsVars) in.readObject();
   }
 }

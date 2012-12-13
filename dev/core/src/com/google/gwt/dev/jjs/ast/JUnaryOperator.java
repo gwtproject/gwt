@@ -15,6 +15,10 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * An enumeration of the available unary operators.
  */
@@ -39,5 +43,18 @@ public enum JUnaryOperator {
   @Override
   public String toString() {
     return new String(getSymbol());
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public void writeOperator(ObjectOutput out) throws IOException {
+    out.writeInt(ordinal());
+  }
+
+  public static JUnaryOperator readOperator(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+    int ordinal = in.readInt();
+    return values()[ordinal];
   }
 }

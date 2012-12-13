@@ -13,6 +13,9 @@
  */
 package com.google.gwt.dev.js.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -22,7 +25,7 @@ import java.util.Iterator;
  */
 public class JsCatchScope extends JsNestingScope {
 
-  private final JsName name;
+  private JsName name;
 
   public JsCatchScope(JsScope parent, String ident) {
     super(parent, "Catch scope");
@@ -49,4 +52,21 @@ public class JsCatchScope extends JsNestingScope {
     }
   }
 
+  /*
+  * Used for externalization only.
+  */
+  public JsCatchScope() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(name);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    name = (JsName) in.readObject();
+  }
 }

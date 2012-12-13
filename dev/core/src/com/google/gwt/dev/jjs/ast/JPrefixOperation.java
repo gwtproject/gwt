@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java prefix operation expression.
  */
@@ -32,5 +36,18 @@ public class JPrefixOperation extends JUnaryOperation {
       super.traverse(visitor, ctx);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JPrefixOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
   }
 }

@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java method this expression.
  */
 public class JThisRef extends JExpression {
 
-  private final JClassType type;
+  private JClassType type;
 
   public JThisRef(SourceInfo info, JClassType type) {
     super(info);
@@ -47,5 +51,18 @@ public class JThisRef extends JExpression {
     }
     visitor.endVisit(this, ctx);
   }
+  public JThisRef() {
+  }
 
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(type);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    type = (JClassType) in.readObject();
+  }
 }

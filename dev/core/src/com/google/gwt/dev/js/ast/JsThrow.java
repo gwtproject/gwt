@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript <code>throw</code> statement.
  */
@@ -56,4 +60,23 @@ public class JsThrow extends JsStatement {
   public boolean unconditionalControlBreak() {
     return true;
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsThrow() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(expr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    expr = (JsExpression) in.readObject();
+  }
+
 }

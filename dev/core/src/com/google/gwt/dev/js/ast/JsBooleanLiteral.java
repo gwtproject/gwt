@@ -16,6 +16,10 @@ package com.google.gwt.dev.js.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript literal boolean expression.
  */
@@ -29,7 +33,7 @@ public final class JsBooleanLiteral extends JsValueLiteral {
     return value ? TRUE : FALSE;
   }
 
-  private final boolean value;
+  private boolean value;
 
   private JsBooleanLiteral(SourceInfo sourceInfo, boolean value) {
     super(sourceInfo);
@@ -74,4 +78,23 @@ public final class JsBooleanLiteral extends JsValueLiteral {
   private Object readResolve() {
     return get(value);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsBooleanLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    // No need to save super data. Will be replaced by static in readResolve.
+    out.writeBoolean(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    // No need to read super data. Will be replaced by static in readResolve.
+    value = in.readBoolean();
+  }
+
 }

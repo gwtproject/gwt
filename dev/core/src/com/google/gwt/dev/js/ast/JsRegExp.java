@@ -14,6 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A JavaScript regular expression.
@@ -73,5 +78,25 @@ public final class JsRegExp extends JsValueLiteral {
   public void traverse(JsVisitor v, JsContext ctx) {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsRegExp() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(flags, out);
+    Util.serializeString(pattern, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    flags = Util.deserializeString(in);
+    pattern = Util.deserializeString(in);
   }
 }

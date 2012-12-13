@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +27,7 @@ import java.util.List;
  */
 public final class JsArrayLiteral extends JsLiteral {
 
-  private final List<JsExpression> exprs = new ArrayList<JsExpression>();
+  private List<JsExpression> exprs = new ArrayList<JsExpression>();
 
   public JsArrayLiteral(SourceInfo sourceInfo) {
     super(sourceInfo);
@@ -74,5 +78,23 @@ public final class JsArrayLiteral extends JsLiteral {
       v.acceptWithInsertRemove(exprs);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsArrayLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(exprs, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    exprs = Util.deserializeObjectList(in);
   }
 }

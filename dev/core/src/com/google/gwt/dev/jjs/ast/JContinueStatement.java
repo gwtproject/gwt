@@ -17,12 +17,16 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java continue statement.
  */
 public class JContinueStatement extends JStatement {
 
-  private final JLabel label;
+  private JLabel label;
 
   public JContinueStatement(SourceInfo info, JLabel label) {
     super(info);
@@ -46,4 +50,20 @@ public class JContinueStatement extends JStatement {
   public boolean unconditionalControlBreak() {
     return true;
   }
+
+  public JContinueStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(label);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    label = (JLabel) in.readObject();
+  }
+
 }

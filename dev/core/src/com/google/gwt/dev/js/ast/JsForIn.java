@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript for..in statement.
  */
@@ -25,7 +29,7 @@ public class JsForIn extends JsStatement {
   private JsExpression iterExpr;
 
   // Optional: the name of a new iterator variable to introduce
-  private final JsName iterVarName;
+  private JsName iterVarName;
 
   private JsExpression objExpr;
 
@@ -81,5 +85,29 @@ public class JsForIn extends JsStatement {
       body = v.accept(body);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsForIn() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(body);
+    out.writeObject(iterExpr);
+    out.writeObject(objExpr);
+    out.writeObject(iterVarName);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    body = (JsStatement) in.readObject();
+    iterExpr = (JsExpression) in.readObject();
+    objExpr = (JsExpression) in.readObject();
+    iterVarName = (JsName) in.readObject();
   }
 }

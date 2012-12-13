@@ -15,15 +15,19 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * An abstract base class for named JavaScript objects.
  */
-public class JsName implements Serializable {
-  private final JsScope enclosing;
-  private final String ident;
+public class JsName implements Externalizable {
+  private JsScope enclosing;
+  private String ident;
   private boolean isObfuscatable;
   private String shortIdent;
 
@@ -84,5 +88,29 @@ public class JsName implements Serializable {
   @Override
   public String toString() {
     return ident;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsName() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(enclosing);
+    Util.serializeString(ident, out);
+    out.writeBoolean(isObfuscatable);
+    Util.serializeString(shortIdent, out);
+    out.writeObject(staticRef);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    enclosing = (JsScope) in.readObject();
+    ident = Util.deserializeString(in);
+    isObfuscatable = in.readBoolean();
+    shortIdent = Util.deserializeString(in);
+    staticRef = (JsNode) in.readObject();
   }
 }

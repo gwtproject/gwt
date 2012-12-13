@@ -36,6 +36,9 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -158,6 +161,28 @@ public class SymbolMapsLinker extends AbstractLinker {
     protected Class<ScriptFragmentEditsArtifact> getComparableArtifactType() {
       return ScriptFragmentEditsArtifact.class;
     }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public ScriptFragmentEditsArtifact() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      Util.serializeCollection(editOperations, out);
+      Util.serializeString(strongName, out);
+      out.writeInt(fragment);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      editOperations = Util.deserializeObjectList(in);
+      strongName = Util.deserializeString(in);
+      fragment = in.readInt();
+    }
   }
 
   /**
@@ -186,6 +211,28 @@ public class SymbolMapsLinker extends AbstractLinker {
 
     public static String sourceMapFilenameForFragment(int fragment) {
              return "sourceMap" + fragment + ".json";
+    }
+
+    /**
+     * Empty constructor for externalization.
+     */
+    public SourceMapArtifact() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      out.writeInt(permutationId);
+      out.writeInt(fragment);
+      Util.serializeByteArray(js, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      permutationId = in.readInt();
+      fragment = in.readInt();
+      js = Util.deserializeByteArray(in);
     }
   }
 

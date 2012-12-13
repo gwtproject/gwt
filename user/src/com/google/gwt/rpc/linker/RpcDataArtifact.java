@@ -16,7 +16,11 @@
 package com.google.gwt.rpc.linker;
 
 import com.google.gwt.core.ext.linker.Artifact;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +31,8 @@ import java.util.Map;
  */
 public class RpcDataArtifact extends Artifact<RpcDataArtifact> {
 
-  private final String rpcServiceName;
-  private final Map<String, List<String>> fieldsByClassName = new HashMap<String, List<String>>();
+  private String rpcServiceName;
+  private Map<String, List<String>> fieldsByClassName = new HashMap<String, List<String>>();
 
   public RpcDataArtifact(String rpcServiceName) {
     super(ClientOracleLinker.class);
@@ -58,4 +62,23 @@ public class RpcDataArtifact extends Artifact<RpcDataArtifact> {
     return RpcDataArtifact.class;
   }
 
+  /**
+   * Empty constructor for externalization.
+   */
+  public RpcDataArtifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(rpcServiceName, out);
+    Util.serializeStringMap(fieldsByClassName, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    rpcServiceName = Util.deserializeString(in);
+    fieldsByClassName = (HashMap) Util.deserializeStringMap(in, HashMap.class, List.class);
+  }
 }

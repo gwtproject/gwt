@@ -15,6 +15,9 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -66,10 +69,23 @@ public abstract class JsNestingScope extends JsScope {
     children = Lists.add(children, child);
   }
 
-  protected Object readResolve() {
-    children = Lists.create();
-    parent.addChild(this);
-    return this;
+  /*
+  * Used for externalization only.
+  */
+  protected JsNestingScope() {
   }
 
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(parent);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    parent = (JsScope) in.readObject();
+    children = Lists.create();
+    parent.addChild(this);
+  }
 }

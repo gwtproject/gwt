@@ -15,6 +15,10 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * For precedence indices, see the Java Programming Language, 4th Edition, p.
  * 750, Table 2. I just numbered the table top to bottom as 0 through 14. Lower
@@ -24,13 +28,13 @@ public enum JBinaryOperator {
 
   // Don't renumber precs without checking implementation of isShiftOperator()
 
-  MUL("*", 3), DIV("/", 3), MOD("%", 3), ADD("+", 4), CONCAT("+", 4), SUB("-", 4), SHL("<<", 5), SHR(
-      ">>", 5), SHRU(">>>", 5), LT("<", 6), LTE("<=", 6), GT(">", 6), GTE(">=",
-      6), EQ("==", 7), NEQ("!=", 7), BIT_AND("&", 8), BIT_XOR("^", 9), BIT_OR(
-      "|", 10), AND("&&", 11), OR("||", 12), ASG("=", 14), ASG_ADD("+=", 14, ADD), ASG_CONCAT("+=", 14, CONCAT), ASG_SUB("-=", 14, SUB), ASG_MUL("*=", 14, MUL), ASG_DIV("/=", 14,
-      DIV), ASG_MOD("%=", 14, MOD), ASG_SHL("<<=", 14, SHL), ASG_SHR(">>=", 14,
-      SHR), ASG_SHRU(">>>=", 14, SHRU), ASG_BIT_AND("&=", 14, BIT_AND), ASG_BIT_OR(
-      "|=", 14, BIT_OR), ASG_BIT_XOR("^=", 14, BIT_XOR);
+  MUL("*", 3), DIV("/", 3), MOD("%", 3), ADD("+", 4), CONCAT("+", 4), SUB("-", 4), SHL("<<", 5),
+      SHR(">>", 5), SHRU(">>>", 5), LT("<", 6), LTE("<=", 6), GT(">", 6), GTE(">=", 6), EQ("==", 7),
+      NEQ("!=", 7), BIT_AND("&", 8), BIT_XOR("^", 9), BIT_OR("|", 10), AND("&&", 11), OR("||", 12),
+      ASG("=", 14), ASG_ADD("+=", 14, ADD), ASG_CONCAT("+=", 14, CONCAT), ASG_SUB("-=", 14, SUB),
+      ASG_MUL("*=", 14, MUL), ASG_DIV("/=", 14,DIV), ASG_MOD("%=", 14, MOD),
+      ASG_SHL("<<=", 14, SHL), ASG_SHR(">>=", 14, SHR), ASG_SHRU(">>>=", 14, SHRU),
+      ASG_BIT_AND("&=", 14, BIT_AND), ASG_BIT_OR("|=", 14, BIT_OR), ASG_BIT_XOR("^=", 14, BIT_XOR);
 
   private final JBinaryOperator nonAsg;
   private final int precedence;
@@ -72,4 +76,16 @@ public enum JBinaryOperator {
     return new String(getSymbol());
   }
 
+  /*
+  * Used for externalization only.
+  */
+  public void writeOperator(ObjectOutput out) throws IOException {
+    out.writeInt(ordinal());
+  }
+
+  public static JBinaryOperator readOperator(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+    int ordinal = in.readInt();
+    return values()[ordinal];
+  }
 }

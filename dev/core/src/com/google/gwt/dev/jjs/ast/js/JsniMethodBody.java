@@ -23,10 +23,14 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsVisitor;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.collect.Sets;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -124,5 +128,28 @@ public class JsniMethodBody extends JAbstractMethodBody {
       jsniMethodRefs = visitor.acceptImmutable(jsniMethodRefs);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JsniMethodBody() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(jsFunction);
+    Util.serializeCollection(jsniFieldRefs, out);
+    Util.serializeCollection(jsniMethodRefs, out);
+    Util.serializeCollection(classRefs, out);
+    Util.serializeStringCollection(stringLiterals, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    jsFunction = (JsFunction) in.readObject();
+    jsniFieldRefs = Util.deserializeObjectList(in);
+    jsniMethodRefs = Util.deserializeObjectList(in);
+    classRefs = Util.deserializeObjectList(in);
+    stringLiterals = Util.deserializeStringSet(in);
   }
 }

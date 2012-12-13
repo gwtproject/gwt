@@ -16,7 +16,11 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
@@ -26,9 +30,9 @@ import java.util.List;
  */
 public class JReboundEntryPoint extends JStatement {
 
-  private final List<JExpression> entryCalls;
-  private final List<String> resultTypes;
-  private final String sourceType;
+  private List<JExpression> entryCalls;
+  private List<String> resultTypes;
+  private String sourceType;
 
   public JReboundEntryPoint(SourceInfo info, JReferenceType sourceType,
       List<JClassType> resultTypes, List<JExpression> entryCalls) {
@@ -55,5 +59,23 @@ public class JReboundEntryPoint extends JStatement {
       visitor.accept(entryCalls);
     }
     visitor.endVisit(this, ctx);
+  }
+  public JReboundEntryPoint() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(entryCalls);
+    out.writeObject(resultTypes);
+    Util.serializeString(sourceType, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    entryCalls = (List<JExpression>) in.readObject();
+    resultTypes = (List<String>) in.readObject();
+    sourceType = Util.deserializeString(in);
   }
 }

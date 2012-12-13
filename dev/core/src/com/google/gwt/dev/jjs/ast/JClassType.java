@@ -18,15 +18,18 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Java class type reference expression.
  */
 public class JClassType extends JDeclaredType implements CanBeSetFinal {
 
-  private static class ExternalSerializedForm implements Serializable {
-    private final String name;
+  private static class ExternalSerializedForm implements Externalizable {
+    private String name;
 
     public ExternalSerializedForm(JClassType classType) {
       name = classType.getName();
@@ -35,9 +38,22 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
     private Object readResolve() {
       return new JClassType(name);
     }
+
+    public ExternalSerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      com.google.gwt.dev.util.Util.serializeString(name, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      name = com.google.gwt.dev.util.Util.deserializeString(in);
+    }
   }
 
-  private final boolean isAbstract;
+  private boolean isAbstract;
   private boolean isFinal;
   private JClassType superClass;
 
@@ -107,5 +123,24 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
     } else {
       return this;
     }
+  }
+
+  public JClassType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isAbstract);
+    out.writeBoolean(isFinal);
+    out.writeObject(superClass);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isAbstract = in.readBoolean();
+    isFinal = in.readBoolean();
+    superClass = (JClassType) in.readObject();
   }
 }

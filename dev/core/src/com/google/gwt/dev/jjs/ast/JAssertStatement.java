@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java assert statement.
  */
@@ -47,5 +51,22 @@ public class JAssertStatement extends JStatement {
       }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JAssertStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(arg);
+    out.writeObject(testExpr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    arg = (JExpression) in.readObject();
+    testExpr = (JExpression) in.readObject();
   }
 }

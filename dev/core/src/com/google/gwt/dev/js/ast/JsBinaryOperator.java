@@ -13,6 +13,10 @@
  */
 package com.google.gwt.dev.js.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents the operator in a JavaScript binary operation.
  */
@@ -121,5 +125,18 @@ public enum JsBinaryOperator implements JsOperator {
   @Override
   public String toString() {
     return symbol;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public void writeOperator(ObjectOutput out) throws IOException {
+    out.writeInt(ordinal());
+  }
+
+  public static JsBinaryOperator readOperator(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+    int ordinal = in.readInt();
+    return values()[ordinal];
   }
 }

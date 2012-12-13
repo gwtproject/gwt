@@ -17,6 +17,11 @@ package com.google.gwt.dev.jjs;
 
 import com.google.gwt.dev.jjs.Correlation.Axis;
 import com.google.gwt.dev.jjs.CorrelationFactory.RealCorrelationFactory;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Tracks file and line information for AST nodes.
@@ -30,12 +35,12 @@ public class SourceInfoCorrelation implements SourceInfo {
   /**
    * Holds the origin data for the SourceInfo.
    */
-  private final SourceOrigin origin;
+  private SourceOrigin origin;
 
   /**
    * My parent node, or <code>null</code> if I have no parent.
    */
-  private final SourceInfoCorrelation parent;
+  private SourceInfoCorrelation parent;
 
   /**
    * Records the first Correlation on any given Axis applied to the SourceInfo.
@@ -134,5 +139,25 @@ public class SourceInfoCorrelation implements SourceInfo {
   @Override
   public String toString() {
     return origin.toString();
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public SourceInfoCorrelation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(origin);
+    out.writeObject(parent);
+    Util.serializeArray(primaryCorrelations, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    origin = (SourceOrigin) in.readObject();
+    parent = (SourceInfoCorrelation) in.readObject();
+    primaryCorrelations = Util.deserializeObjectArray(in, Correlation.class);
   }
 }

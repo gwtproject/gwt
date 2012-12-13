@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +27,32 @@ import java.util.List;
  */
 public abstract class JsSwitchMember extends JsNode {
 
-  protected final List<JsStatement> stmts = new ArrayList<JsStatement>();
+  protected List<JsStatement> stmts;
 
   protected JsSwitchMember(SourceInfo sourceInfo) {
     super(sourceInfo);
+    stmts = new ArrayList<JsStatement>();
   }
 
   public List<JsStatement> getStmts() {
     return stmts;
   }
 
+  /*
+  * Used for externalization only.
+  */
+  protected JsSwitchMember() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(stmts, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    stmts = Util.deserializeObjectList(in);
+  }
 }

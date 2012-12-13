@@ -27,4 +27,10 @@ public class StandardStylesheetReference extends StylesheetReference {
   public StandardStylesheetReference(String src, int index) {
     super(StandardLinkerContext.class, src, index);
   }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public StandardStylesheetReference() {
+  }
 }

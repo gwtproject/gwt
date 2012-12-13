@@ -18,7 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Java field definition.
@@ -47,10 +50,10 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
     }
   }
 
-  private static class ExternalSerializedForm implements Serializable {
+  private static class ExternalSerializedForm implements Externalizable {
 
-    private final JDeclaredType enclosingType;
-    private final String signature;
+    private JDeclaredType enclosingType;
+    private String signature;
 
     public ExternalSerializedForm(JField field) {
       enclosingType = field.getEnclosingType();
@@ -65,23 +68,51 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
       result.signature = signature;
       return result;
     }
+
+    public ExternalSerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      out.writeObject(enclosingType);
+      com.google.gwt.dev.util.Util.serializeString(signature, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      enclosingType = (JDeclaredType) in.readObject();
+      signature = com.google.gwt.dev.util.Util.deserializeString(in);
+    }
   }
 
-  private static class ExternalSerializedNullField implements Serializable {
+  private static class ExternalSerializedNullField implements Externalizable {
     public static final ExternalSerializedNullField INSTANCE = new ExternalSerializedNullField();
 
     private Object readResolve() {
       return NULL_FIELD;
+    }
+
+    public ExternalSerializedNullField() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      // No need to save anything. Will be replaced by singleton on deserialization.
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      // Replaced by singleton on readResolve().
     }
   }
 
   public static final JField NULL_FIELD = new JField(SourceOrigin.UNKNOWN, "nullField", null,
       JNullType.INSTANCE, false, Disposition.FINAL);
 
-  private final JDeclaredType enclosingType;
-  private final boolean isCompileTimeConstant;
-  private final boolean isStatic;
-  private final boolean isThisRef;
+  private JDeclaredType enclosingType;
+  private boolean isCompileTimeConstant;
+  private boolean isStatic;
+  private boolean isThisRef;
   private boolean isVolatile;
   private transient String signature;
 
@@ -181,5 +212,28 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
     }
     return originalField.isExternal() && originalField.getSignature().equals(this.getSignature())
         && this.getEnclosingType().replaces(originalField.getEnclosingType());
+  }
+
+  public JField() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isCompileTimeConstant);
+    out.writeBoolean(isStatic);
+    out.writeBoolean(isThisRef);
+    out.writeBoolean(isVolatile);
+    out.writeObject(enclosingType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isCompileTimeConstant = in.readBoolean();
+    isStatic = in.readBoolean();
+    isThisRef = in.readBoolean();
+    isVolatile = in.readBoolean();
+    enclosingType = (JDeclaredType) in.readObject();
   }
 }

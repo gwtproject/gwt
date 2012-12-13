@@ -18,7 +18,12 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.util.Util;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -26,7 +31,7 @@ import java.util.Comparator;
  * Each SourceInfo may define one or more axes by which it can be correlated
  * with other SourceInfo objects. Correlation has set and map-key semantics.
  */
-public final class Correlation implements Serializable {
+public final class Correlation implements Externalizable {
   /*
    * NB: The Correlation type uses AST nodes in its factory methods to make it
    * easier to extract whatever information we want to include in the Compile
@@ -104,9 +109,9 @@ public final class Correlation implements Serializable {
   /**
    * This may contain a reference to either a Java or Js AST node.
    */
-  protected final Serializable astReference;
+  protected Serializable astReference;
 
-  protected final Axis axis;
+  protected Axis axis;
 
   /**
    * This should be a uniquely-identifying value within the Correlation's axis
@@ -114,7 +119,7 @@ public final class Correlation implements Serializable {
    * Correlations have different AST references, but the same calculated ident,
    * so this should not be relied upon for uniqueness.
    */
-  protected final String ident;
+  protected String ident;
 
   Correlation(Axis axis, String ident, Serializable astReference) {
     if (axis == null) {
@@ -208,4 +213,22 @@ public final class Correlation implements Serializable {
   public String toString() {
     return axis.toString() + ": " + ident;
   }
+
+  public Correlation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(astReference);
+    out.writeObject(axis);
+    Util.serializeString(ident, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    astReference = (Serializable) in.readObject();
+    axis = (Axis) in.readObject();
+    Util.deserializeString(in);
+  }
+
 }

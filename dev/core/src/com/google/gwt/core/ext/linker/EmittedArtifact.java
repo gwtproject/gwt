@@ -23,6 +23,8 @@ import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 
 /**
@@ -117,7 +119,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
     }
   }
 
-  private final String partialPath;
+  private String partialPath;
 
   /**
    * This is mutable because it has no effect on identity.
@@ -239,5 +241,25 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
   @Override
   protected final Class<EmittedArtifact> getComparableArtifactType() {
     return EmittedArtifact.class;
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public EmittedArtifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(partialPath, out);
+    out.writeObject(visibility);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    partialPath = Util.deserializeString(in);
+    visibility = (Visibility) in.readObject();
   }
 }

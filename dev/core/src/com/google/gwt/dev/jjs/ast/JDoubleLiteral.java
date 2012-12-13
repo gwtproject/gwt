@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java double literal expression.
  */
@@ -38,7 +42,7 @@ public class JDoubleLiteral extends JValueLiteral {
     return Double.doubleToRawLongBits(value) == 0L;
   }
 
-  private final double value;
+  private double value;
 
   public JDoubleLiteral(SourceInfo sourceInfo, double value) {
     super(sourceInfo);
@@ -80,4 +84,20 @@ public class JDoubleLiteral extends JValueLiteral {
   private Object readResolve() {
     return isZero(value) ? ZERO : this;
   }
+
+  public JDoubleLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeDouble(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = in.readDouble();
+  }
+
 }

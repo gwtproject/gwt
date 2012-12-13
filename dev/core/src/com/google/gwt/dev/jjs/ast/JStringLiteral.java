@@ -16,6 +16,11 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Java literal expression that evaluates to a string.
@@ -23,7 +28,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 public class JStringLiteral extends JValueLiteral {
 
   private JClassType stringType;
-  private final String value;
+  private String value;
 
   public JStringLiteral(SourceInfo sourceInfo, String value, JClassType stringType) {
     super(sourceInfo);
@@ -62,5 +67,22 @@ public class JStringLiteral extends JValueLiteral {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JStringLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(stringType);
+    Util.serializeString(value, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    stringType = (JClassType) in.readObject();
+    value = Util.deserializeString(in);
   }
 }

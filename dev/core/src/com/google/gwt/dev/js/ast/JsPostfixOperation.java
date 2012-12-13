@@ -50,4 +50,10 @@ public final class JsPostfixOperation extends JsUnaryOperation {
     }
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsPostfixOperation() {
+  }
 }

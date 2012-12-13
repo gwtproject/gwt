@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java instance of expression.
  */
@@ -61,6 +65,24 @@ public class JInstanceOf extends JExpression {
       expr = visitor.accept(expr);
     }
     visitor.endVisit(this, ctx);
+  }
+
+
+  public JInstanceOf() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(expr);
+    out.writeObject(testType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    expr = (JExpression) in.readObject();
+    testType = (JReferenceType) in.readObject();
   }
 
 }

@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java literal expression that evaluates to a Long.
  */
@@ -29,7 +33,7 @@ public class JLongLiteral extends JValueLiteral {
     return (value == 0) ? ZERO : new JLongLiteral(SourceOrigin.UNKNOWN, value);
   }
 
-  private final long value;
+  private long value;
 
   public JLongLiteral(SourceInfo sourceInfo, long value) {
     super(sourceInfo);
@@ -70,5 +74,20 @@ public class JLongLiteral extends JValueLiteral {
 
   private Object readResolve() {
     return (value == 0L) ? ZERO : this;
+  }
+
+  public JLongLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeLong(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = (long) in.readLong();
   }
 }

@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript literal decimal expression.
  */
 public final class JsNumberLiteral extends JsValueLiteral {
 
-  private final double value;
+  private double value;
 
   public JsNumberLiteral(SourceInfo sourceInfo, double value) {
     super(sourceInfo);
@@ -60,5 +64,23 @@ public final class JsNumberLiteral extends JsValueLiteral {
   public void traverse(JsVisitor v, JsContext ctx) {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNumberLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeDouble(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = in.readDouble();
   }
 }

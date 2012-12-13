@@ -17,6 +17,11 @@ package com.google.gwt.user.linker.rpc;
 
 import com.google.gwt.core.ext.linker.Artifact;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * This artifact provides information about which proxy classes resulted in
@@ -24,8 +29,8 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
  */
 public class RpcPolicyFileArtifact extends Artifact<RpcPolicyFileArtifact> {
 
-  private final String proxyClass;
-  private final EmittedArtifact artifact;
+  private String proxyClass;
+  private EmittedArtifact artifact;
 
   public RpcPolicyFileArtifact(String proxyClass, EmittedArtifact artifact) {
     super(RpcPolicyManifestLinker.class);
@@ -59,5 +64,25 @@ public class RpcPolicyFileArtifact extends Artifact<RpcPolicyFileArtifact> {
   @Override
   protected final Class<RpcPolicyFileArtifact> getComparableArtifactType() {
     return RpcPolicyFileArtifact.class;
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public RpcPolicyFileArtifact() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(proxyClass, out);
+    out.writeObject(artifact);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    proxyClass = Util.deserializeString(in);
+    artifact = (EmittedArtifact) in.readObject();
   }
 }

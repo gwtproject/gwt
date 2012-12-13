@@ -21,12 +21,16 @@ import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.DiskCacheToken;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +41,7 @@ import java.util.Map;
 /**
  * Encapsulates the state of a single compiled class file.
  */
-public final class CompiledClass implements Serializable {
+public final class CompiledClass implements Externalizable {
 
   private static final DiskCache diskCache = DiskCache.INSTANCE;
 
@@ -75,14 +79,14 @@ public final class CompiledClass implements Serializable {
    * A token to retrieve this object's bytes from the disk cache. byte code is
    * placed in the cache when the object is deserialized.
    */
-  private final DiskCacheToken classBytesToken;
+  private DiskCacheToken classBytesToken;
   private CompiledClass enclosingClass;
-  private final String internalName;
-  private final boolean isLocal;
+  private String internalName;
+  private boolean isLocal;
   private transient NameEnvironmentAnswer nameEnvironmentAnswer;
   private String signatureHash;
 
-  private final String sourceName;
+  private String sourceName;
   private transient TypeData typeData;
 
   private CompilationUnit unit;
@@ -201,5 +205,30 @@ public final class CompiledClass implements Serializable {
 
   void initUnit(CompilationUnit unit) {
     this.unit = unit;
+  }
+
+  public CompiledClass() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeObject(classBytesToken);
+    out.writeObject(enclosingClass);
+    Util.serializeString(internalName, out);
+    out.writeBoolean(isLocal);
+    Util.serializeString(signatureHash, out);
+    Util.serializeString(sourceName, out);
+    out.writeObject(unit);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    classBytesToken = (DiskCacheToken) in.readObject();
+    enclosingClass = (CompiledClass) in.readObject();
+    internalName = Util.deserializeString(in);
+    isLocal = in.readBoolean();
+    signatureHash = Util.deserializeString(in);
+    sourceName = Util.deserializeString(in);
+    unit = (CompilationUnit) in.readObject();
   }
 }

@@ -16,12 +16,17 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Represent an index that can be replacable by the compiler at compile time.
  */
 public final class JsNumericEntry extends JsExpression {
-  private final String key;
+  private String key;
   private int value;
   
   public JsNumericEntry(SourceInfo info, String key, int value) {
@@ -66,5 +71,25 @@ public final class JsNumericEntry extends JsExpression {
   public void traverse(JsVisitor v, JsContext ctx) {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNumericEntry() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(key, out);
+    out.writeInt(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    key = Util.deserializeString(in);
+    value = in.readInt();
   }
 }

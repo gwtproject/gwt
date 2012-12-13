@@ -15,6 +15,11 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Represents a JavaScript expression that references a name.
@@ -121,4 +126,27 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
     }
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNameRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(ident, out);
+    out.writeObject(name);
+    out.writeObject(qualifier);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ident = Util.deserializeString(in);
+    name = (JsName) in.readObject();
+    qualifier = (JsExpression) in.readObject();
+  }
+
 }

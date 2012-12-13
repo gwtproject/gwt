@@ -13,15 +13,20 @@
  */
 package com.google.gwt.dev.js.ast;
 
-import java.io.Serializable;
+import com.google.gwt.dev.util.Util;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A well-known name in the root scope.
  */
 public class JsRootName extends JsName {
 
-  private static class SerializedForm implements Serializable {
-    private final String ident;
+  private static class SerializedForm implements Externalizable {
+    private String ident;
 
     public SerializedForm(String ident) {
       this.ident = ident;
@@ -29,6 +34,22 @@ public class JsRootName extends JsName {
 
     private Object readResolve() {
       return JsRootScope.INSTANCE.findExistingName(ident);
+    }
+
+    /*
+    * Used for externalization only.
+    */
+    public SerializedForm() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      Util.serializeString(ident, out);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      ident = Util.deserializeString(in);
     }
   }
 
@@ -55,5 +76,4 @@ public class JsRootName extends JsName {
   private Object writeReplace() {
     return new SerializedForm(getIdent());
   }
-
 }

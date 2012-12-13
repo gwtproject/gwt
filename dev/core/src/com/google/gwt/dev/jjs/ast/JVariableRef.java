@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Base class for any reference to a <code>JVariable</code> derived class.
  */
@@ -35,6 +39,21 @@ public abstract class JVariableRef extends JExpression {
 
   public JType getType() {
     return target.getType();
+  }
+
+  public JVariableRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(target);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    target = (JVariable) in.readObject();
   }
 
 }

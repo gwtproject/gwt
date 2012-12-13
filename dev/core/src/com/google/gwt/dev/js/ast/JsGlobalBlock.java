@@ -28,5 +28,9 @@ public class JsGlobalBlock extends JsBlock {
   public boolean isGlobalBlock() {
     return true;
   }
-
+  /*
+  * Used for externalization only.
+  */
+  public JsGlobalBlock() {
+  }
 }

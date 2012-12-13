@@ -15,11 +15,15 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * One independently loadable fragment of a {@link JsProgram}.
  */
 public class JsProgramFragment extends JsNode {
-  private final JsGlobalBlock globalBlock;
+  private JsGlobalBlock globalBlock;
 
   public JsProgramFragment(SourceInfo sourceInfo) {
     super(sourceInfo);
@@ -41,5 +45,22 @@ public class JsProgramFragment extends JsNode {
       v.accept(globalBlock);
     }
     v.endVisit(this, ctx);
+  }
+  /*
+  * Used for externalization only.
+  */
+  public JsProgramFragment() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(globalBlock);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    globalBlock = (JsGlobalBlock) in.readObject();
   }
 }

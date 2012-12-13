@@ -30,4 +30,10 @@ public abstract class JsStatement extends JsNode {
   public boolean unconditionalControlBreak() {
     return false;
   }
+
+  /*
+  * Used for externalization only.
+  */
+  protected JsStatement() {
+  }
 }

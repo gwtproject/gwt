@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +27,13 @@ import java.util.List;
  */
 public class JsSwitch extends JsStatement {
 
-  private final List<JsSwitchMember> cases = new ArrayList<JsSwitchMember>();
+  private List<JsSwitchMember> cases;
 
   private JsExpression expr;
 
   public JsSwitch(SourceInfo sourceInfo) {
     super(sourceInfo);
+    cases = new ArrayList<JsSwitchMember>();
   }
 
   public List<JsSwitchMember> getCases() {
@@ -55,5 +60,25 @@ public class JsSwitch extends JsStatement {
       v.acceptWithInsertRemove(cases);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsSwitch() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(cases, out);
+    out.writeObject(expr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    cases = Util.deserializeObjectList(in);
+    expr = (JsExpression) in.readObject();
   }
 }

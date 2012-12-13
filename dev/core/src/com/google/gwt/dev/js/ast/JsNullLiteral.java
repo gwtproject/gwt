@@ -16,6 +16,10 @@ package com.google.gwt.dev.js.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript null literal.
  */
@@ -64,5 +68,21 @@ public final class JsNullLiteral extends JsValueLiteral {
    */
   private Object readResolve() {
     return INSTANCE;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNullLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    // No need to save super data. Will be replaced by static in readResolve.
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    // No need to read super data. Will be replaced by static in readResolve.
   }
 }

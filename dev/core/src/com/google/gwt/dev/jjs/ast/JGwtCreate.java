@@ -16,8 +16,12 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -78,11 +82,11 @@ public class JGwtCreate extends JExpression {
     return exprs;
   }
 
-  private final ArrayList<JExpression> instantiationExpressions;
+  private ArrayList<JExpression> instantiationExpressions;
 
-  private final List<String> resultTypes;
+  private List<String> resultTypes;
 
-  private final String sourceType;
+  private String sourceType;
 
   /*
    * Initially object; will be updated by type tightening.
@@ -146,4 +150,26 @@ public class JGwtCreate extends JExpression {
     }
     visitor.endVisit(this, ctx);
   }
+
+  public JGwtCreate() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(type);
+    Util.serializeString(sourceType, out);
+    out.writeObject(instantiationExpressions);
+    out.writeObject(resultTypes);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    type = (JType) in.readObject();
+    sourceType = Util.deserializeString(in);
+    instantiationExpressions = (ArrayList<JExpression>) in.readObject();
+    resultTypes = (List<String>) in.readObject();
+  }
+
 }

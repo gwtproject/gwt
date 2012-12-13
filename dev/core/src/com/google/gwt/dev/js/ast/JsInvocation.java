@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +27,7 @@ import java.util.List;
  */
 public final class JsInvocation extends JsExpression implements HasArguments {
 
-  private final List<JsExpression> args = new ArrayList<JsExpression>();
+  private List<JsExpression> args = new ArrayList<JsExpression>();
 
   private JsExpression qualifier;
 
@@ -71,5 +75,25 @@ public final class JsInvocation extends JsExpression implements HasArguments {
       v.acceptList(args);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsInvocation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(args, out);
+    out.writeObject(qualifier);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    args = Util.deserializeObjectList(in);
+    qualifier = (JsExpression) in.readObject();
   }
 }

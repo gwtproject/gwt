@@ -21,7 +21,11 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,11 +57,12 @@ public class JsonObject extends JExpression {
     }
   }
 
-  public final List<JsonPropInit> propInits = new ArrayList<JsonPropInit>();
+  public List<JsonPropInit> propInits;
   private JClassType jsoType;
 
   public JsonObject(SourceInfo sourceInfo, JClassType jsoType) {
     super(sourceInfo);
+    this.propInits = new ArrayList<JsonPropInit>();
     this.jsoType = jsoType;
   }
 
@@ -89,5 +94,24 @@ public class JsonObject extends JExpression {
     }
     visitor.endVisit(this, ctx);
   }
+
+
+  public JsonObject() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(propInits, out);
+    out.writeObject(jsoType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    propInits = Util.deserializeObjectList(in);
+    jsoType = (JClassType) in.readObject();
+  }
+
 
 }

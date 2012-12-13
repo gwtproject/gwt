@@ -15,13 +15,17 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A type including all the values in some other type except for
  * <code>null</code>.
  */
 public class JNonNullType extends JReferenceType {
 
-  private final JReferenceType ref;
+  private JReferenceType ref;
 
   JNonNullType(JReferenceType ref) {
     super(ref.getSourceInfo(), ref.getName());
@@ -68,5 +72,20 @@ public class JNonNullType extends JReferenceType {
 
   private Object readResolve() {
     return ref.getNonNull();
+  }
+
+  public JNonNullType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(ref);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ref = (JReferenceType) in.readObject();
   }
 }

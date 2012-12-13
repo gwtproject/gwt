@@ -15,7 +15,12 @@
  */
 package com.google.gwt.core.ext.linker;
 
-import java.io.Serializable;
+import com.google.gwt.dev.util.Util;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +31,7 @@ import java.util.TreeSet;
 /**
  * Provides stable ordering and de-duplication of artifacts.
  */
-public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
+public final class ArtifactSet implements SortedSet<Artifact<?>>, Externalizable {
 
   private SortedSet<Artifact<?>> treeSet = new TreeSet<Artifact<?>>();
 
@@ -177,5 +182,15 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
   @Override
   public String toString() {
     return treeSet.toString();
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeCollection(treeSet, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    treeSet = (SortedSet) Util.deserializeObjectSet(in, TreeSet.class, Artifact.class);
   }
 }

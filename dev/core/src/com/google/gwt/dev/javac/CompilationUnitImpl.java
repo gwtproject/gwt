@@ -17,12 +17,15 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.List;
@@ -34,12 +37,15 @@ abstract class CompilationUnitImpl extends CompilationUnit {
    */
   protected transient long astToken;
 
-  private final Dependencies dependencies;
-  private final List<CompiledClass> exposedCompiledClasses;
-  private final boolean hasErrors;
-  private final List<JsniMethod> jsniMethods;
-  private final MethodArgNamesLookup methodArgs;
-  private final CategorizedProblem[] problems;
+  private Dependencies dependencies;
+  private List<CompiledClass> exposedCompiledClasses;
+  private boolean hasErrors;
+  private List<JsniMethod> jsniMethods;
+  private MethodArgNamesLookup methodArgs;
+  private CategorizedProblem[] problems;
+
+  public CompilationUnitImpl() {
+  }
 
   public CompilationUnitImpl(List<CompiledClass> compiledClasses,
       List<JDeclaredType> types, Dependencies dependencies,
@@ -108,4 +114,27 @@ abstract class CompilationUnitImpl extends CompilationUnit {
   CategorizedProblem[] getProblems() {
     return problems;
   }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(dependencies);
+    Util.serializeCollection(exposedCompiledClasses, out);
+    out.writeBoolean(hasErrors);
+    Util.serializeCollection(jsniMethods, out);
+    out.writeObject(methodArgs);
+    Util.serializeArray(problems,out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    dependencies = (Dependencies) in.readObject();
+    exposedCompiledClasses = Util.deserializeObjectList(in);
+    hasErrors = in.readBoolean();
+    jsniMethods = Util.deserializeObjectList(in);
+    methodArgs = (MethodArgNamesLookup) in.readObject();
+    problems = (CategorizedProblem[]) Util.deserializeObjectArray(in, CategorizedProblem.class);
+  }
+
 }

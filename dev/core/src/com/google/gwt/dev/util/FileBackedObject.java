@@ -27,7 +27,7 @@ import java.io.Serializable;
  * 
  * @param <T> the type of object serialized into the file
  */
-public class FileBackedObject<T extends Serializable> implements Serializable {
+public class FileBackedObject<T extends Serializable> {
   private final File backingFile;
   private final Class<T> clazz;
 

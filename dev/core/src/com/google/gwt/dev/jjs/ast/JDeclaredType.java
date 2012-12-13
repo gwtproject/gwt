@@ -20,7 +20,9 @@ import com.google.gwt.dev.util.Preconditions;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -429,5 +431,26 @@ public abstract class JDeclaredType extends JReferenceType {
     for (JMethod method : methods) {
       method.writeBody(stream);
     }
+  }
+
+  public JDeclaredType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isExternal);
+    out.writeObject(clinitTarget);
+    out.writeObject(enclosingType);
+    com.google.gwt.dev.util.Util.serializeCollection(superInterfaces, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isExternal = in.readBoolean();
+    clinitTarget = (JDeclaredType) in.readObject();
+    enclosingType = (JDeclaredType) in.readObject();
+    superInterfaces =  com.google.gwt.dev.util.Util.deserializeObjectList(in);
   }
 }

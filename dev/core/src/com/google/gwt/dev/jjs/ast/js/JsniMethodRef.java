@@ -23,13 +23,18 @@ import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A call to a JSNI method.
  */
 public class JsniMethodRef extends JMethodCall {
 
-  private final String ident;
+  private String ident;
   private JClassType jsoType;
 
   public JsniMethodRef(SourceInfo info, String ident, JMethod method, JClassType jsoType) {
@@ -69,5 +74,22 @@ public class JsniMethodRef extends JMethodCall {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JsniMethodRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(jsoType);
+    Util.serializeString(ident, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    jsoType = (JClassType) in.readObject();
+    ident = Util.deserializeString(in);
   }
 }

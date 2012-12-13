@@ -17,10 +17,15 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a the body of a method. Can be Java or JSNI.
  */
-public abstract class JAbstractMethodBody extends JNode {
+public abstract class JAbstractMethodBody extends JNode implements Externalizable {
   protected JMethod method;
 
   protected JAbstractMethodBody(SourceInfo info) {
@@ -35,5 +40,20 @@ public abstract class JAbstractMethodBody extends JNode {
 
   public void setMethod(JMethod method) {
     this.method = method;
+  }
+
+  public JAbstractMethodBody() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+    out.writeObject(method);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
+    method = (JMethod) in.readObject();
   }
 }

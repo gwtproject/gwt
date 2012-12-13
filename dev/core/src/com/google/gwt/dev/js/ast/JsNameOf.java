@@ -15,11 +15,15 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * An AST node whose evaluation results in the string name of its node.
  */
 public class JsNameOf extends JsExpression {
-  private final JsName name;
+  private JsName name;
 
   public JsNameOf(SourceInfo info, HasName node) {
     this(info, node.getName());
@@ -60,5 +64,23 @@ public class JsNameOf extends JsExpression {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNameOf() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(name);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    name = (JsName) in.readObject();
   }
 }

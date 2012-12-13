@@ -20,6 +20,9 @@ import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,8 +40,8 @@ import java.util.Map.Entry;
 public class SourceOrigin implements SourceInfo {
 
   private static class SourceOriginPos extends SourceOrigin {
-    private final int endPos;
-    private final int startPos;
+    private int endPos;
+    private int startPos;
 
     private SourceOriginPos(String location, int startLine, int startPos, int endPos) {
       super(location, startLine);
@@ -56,15 +59,31 @@ public class SourceOrigin implements SourceInfo {
       return startPos;
     }
 
+    /**
+     * Empty constructor for externalization.
+     */
+    public SourceOriginPos() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      out.writeInt(startPos);
+      out.writeInt(endPos);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      startPos = in.readInt();
+      endPos = in.readInt();
+    }
     // super.equals and hashCode call getStartPos() and getEndPos(),
     // so there is no need to implement them in this subclass
   }
 
-  public static final SourceOrigin UNKNOWN = new SourceOrigin("Unknown", 0) {
-    private Object readResolve() {
-      return UNKNOWN;
-    }
-  };
+  public static final SourceOrigin UNKNOWN = new SourceOrigin("Unknown", 0);
+
 
   /**
    * Cache to reuse recently-created origins. This is very useful for JS nodes,
@@ -114,8 +133,8 @@ public class SourceOrigin implements SourceInfo {
   }
 
   // TODO: Add Module and Generator tracking
-  private final String fileName;
-  private final int startLine;
+  private String fileName;
+  private int startLine;
 
   private SourceOrigin(String location, int startLine) {
     this.fileName = StringInterner.get().intern(Util.stripJarPathPrefix(location));
@@ -184,4 +203,31 @@ public class SourceOrigin implements SourceInfo {
   public String toString() {
     return getFileName() + '(' + getStartLine() + ')';
   }
+  /**
+   * Empty constructor for externalization.
+   */
+  public SourceOrigin() {
+  }
+
+  private Object readResolve() {
+    if (fileName.equals(UNKNOWN.fileName) &&
+        startLine == UNKNOWN.startLine) {
+      return UNKNOWN;
+    } else {
+      return this;
+    }
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeString(fileName, out);
+    out.writeInt(startLine);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    fileName = Util.deserializeString(in);
+    startLine = in.readInt();
+  }
+
 }

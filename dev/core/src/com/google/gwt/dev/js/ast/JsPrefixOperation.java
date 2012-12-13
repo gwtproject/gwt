@@ -77,4 +77,10 @@ public final class JsPrefixOperation extends JsUnaryOperation implements CanBool
     }
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsPrefixOperation() {
+  }
 }

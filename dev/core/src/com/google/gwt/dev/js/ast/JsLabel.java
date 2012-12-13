@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents a JavaScript label statement.
  */
 public class JsLabel extends JsStatement implements HasName {
 
-  private final JsName label;
+  private JsName label;
 
   private JsStatement stmt;
 
@@ -53,5 +57,25 @@ public class JsLabel extends JsStatement implements HasName {
       stmt = v.accept(stmt);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsLabel() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(label);
+    out.writeObject(stmt);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    label = (JsName) in.readObject();
+    stmt = (JsStatement) in.readObject();
   }
 }

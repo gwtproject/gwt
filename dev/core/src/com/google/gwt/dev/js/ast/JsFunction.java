@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +35,8 @@ public final class JsFunction extends JsLiteral implements HasName {
   }
 
   protected JsBlock body;
-  protected final List<JsParameter> params = new ArrayList<JsParameter>();
-  protected final JsScope scope;
+  protected List<JsParameter> params = new ArrayList<JsParameter>();
+  protected JsScope scope;
   private boolean artificiallyRescued;
   private boolean executeOnce;
   private boolean fromJava;
@@ -191,5 +195,41 @@ public final class JsFunction extends JsLiteral implements HasName {
         trace(title, after);
       }
     }
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsFunction() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(body);
+    Util.serializeCollection(params, out);
+    out.writeObject(scope);
+    out.writeBoolean(artificiallyRescued);
+    out.writeBoolean(executeOnce);
+    out.writeBoolean(fromJava);
+    out.writeObject(impliedExecute);
+    out.writeObject(name);
+    out.writeBoolean(trace);
+    out.writeBoolean(traceFirst);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    body = (JsBlock) in.readObject();
+    params = Util.deserializeObjectList(in);
+    scope = (JsScope) in.readObject();
+    artificiallyRescued = in.readBoolean();
+    executeOnce = in.readBoolean();
+    fromJava = in.readBoolean();
+    impliedExecute = (JsFunction) in.readObject();
+    name = (JsName) in.readObject();
+    trace = in.readBoolean();
+    traceFirst = in.readBoolean();
   }
 }

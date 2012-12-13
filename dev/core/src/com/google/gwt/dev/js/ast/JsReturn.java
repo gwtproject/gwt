@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript return statement.
  */
@@ -57,5 +61,23 @@ public final class JsReturn extends JsStatement {
   @Override
   public boolean unconditionalControlBreak() {
     return true;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsReturn() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(expr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    expr = (JsExpression) in.readObject();
   }
 }

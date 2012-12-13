@@ -19,6 +19,9 @@ import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.HashMap;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Map;
 
 /**
@@ -124,5 +127,21 @@ public class JPrimitiveType extends JType {
    */
   private Object readResolve() {
     return Singletons.map.get(name);
+  }
+
+  public JPrimitiveType() {
+    this.defaultValue = null;
+    this.signatureName =  null;
+    this.wrapperTypeName =  null;
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
   }
 }

@@ -13,6 +13,10 @@
  */
 package com.google.gwt.dev.js.ast;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript unary operator.
  */
@@ -21,15 +25,15 @@ public enum JsUnaryOperator implements JsOperator {
    * Precedence indices from "JavaScript - The Definitive Guide" 4th Edition (page 57)
    */
 
-  BIT_NOT("~", 14, PREFIX), DEC("--", 14, POSTFIX | PREFIX), DELETE("delete", 14, PREFIX), INC(
-      "++", 14, POSTFIX | PREFIX), NEG("-", 14, PREFIX), POS("+", 14, PREFIX), NOT("!", 14, PREFIX), TYPEOF(
-      "typeof", 14, PREFIX), VOID("void", 14, PREFIX);
+  BIT_NOT("~", 14, PREFIX), DEC("--", 14, POSTFIX | PREFIX), DELETE("delete", 14, PREFIX),
+      INC("++", 14, POSTFIX | PREFIX), NEG("-", 14, PREFIX), POS("+", 14, PREFIX),
+      NOT("!", 14, PREFIX), TYPEOF("typeof", 14, PREFIX), VOID("void", 14, PREFIX);
 
-  private final int mask;
+  private int mask;
 
-  private final int precedence;
+  private int precedence;
 
-  private final String symbol;
+  private String symbol;
 
   private JsUnaryOperator(String symbol, int precedence, int mask) {
     this.symbol = symbol;
@@ -84,5 +88,18 @@ public enum JsUnaryOperator implements JsOperator {
   @Override
   public String toString() {
     return symbol;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public void writeOperator(ObjectOutput out) throws IOException {
+    out.writeInt(ordinal());
+  }
+
+  public static JsUnaryOperator readOperator(ObjectInput in)
+      throws IOException, ClassNotFoundException {
+    int ordinal = in.readInt();
+    return values()[ordinal];
   }
 }

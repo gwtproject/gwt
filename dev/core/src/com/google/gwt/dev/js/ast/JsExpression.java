@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * An abstract base class for all JavaScript expressions.
  */
@@ -52,4 +56,22 @@ public abstract class JsExpression extends JsNode {
   public JsExprStmt makeStmt() {
     return new JsExprStmt(getSourceInfo(), this);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  protected JsExpression() {
+  }
+
+  // TODO(rluble): Move this up in the hierarchy.
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+  }
+
 }

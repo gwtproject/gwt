@@ -14,8 +14,12 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Maps;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -62,5 +66,23 @@ public class JsNormalScope extends JsNestingScope {
   @Override
   protected JsName findExistingNameNoRecurse(String ident) {
     return names.get(ident);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsNormalScope() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeStringMap(names, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    names = Util.deserializeStringMapAsAbstractMap(in);
   }
 }

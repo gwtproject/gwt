@@ -22,6 +22,9 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 
 /**
@@ -60,6 +63,27 @@ public class JMultiExpression extends JExpression {
       visitor.acceptWithInsertRemove(exprs);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JMultiExpression() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeLong(exprs.size());
+    for (JExpression exp : exprs) {
+      out.writeObject(exp);
+    }
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    long sz = in.readLong();
+    for (long i = 0; i < sz; i++) {
+      exprs.add((JExpression) in.readObject());
+    }
   }
 
 }

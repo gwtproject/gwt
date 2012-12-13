@@ -17,10 +17,15 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Base class for all Java expressions.
  */
-public abstract class JExpression extends JNode implements HasType {
+public abstract class JExpression extends JNode implements HasType, Externalizable {
 
   public JExpression(SourceInfo info) {
     super(info);
@@ -30,5 +35,18 @@ public abstract class JExpression extends JNode implements HasType {
 
   public JExpressionStatement makeStatement() {
     return new JExpressionStatement(getSourceInfo(), this);
+  }
+
+  public JExpression() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
   }
 }

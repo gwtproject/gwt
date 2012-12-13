@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java method parameter definition.
  */
@@ -34,8 +38,8 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
     return x;
   }
 
-  private final JMethod enclosingMethod;
-  private final boolean isThis;
+  private JMethod enclosingMethod;
+  private boolean isThis;
 
   public JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isThis,
       JMethod enclosingMethod) {
@@ -64,5 +68,22 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
     if (visitor.visit(this, ctx)) {
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JParameter() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isThis);
+    out.writeObject(enclosingMethod);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isThis = in.readBoolean();
+    enclosingMethod = (JMethod) in.readObject();
   }
 }

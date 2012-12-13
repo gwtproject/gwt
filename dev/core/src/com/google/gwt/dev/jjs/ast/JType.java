@@ -18,12 +18,16 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.StringInterner;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.List;
 
 /**
  * Base class for any types entity.
  */
-public abstract class JType extends JNode implements HasName, CanBeFinal {
+public abstract class JType extends JNode implements HasName, CanBeFinal, Externalizable {
 
   static boolean replaces(List<? extends JType> newTypes, List<? extends JType> oldTypes) {
     if (newTypes.size() != oldTypes.size()) {
@@ -37,7 +41,7 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
     return true;
   }
 
-  protected final String name;
+  protected String name;
 
   /**
    * Base type for AST type definitions.
@@ -90,4 +94,18 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
     return originalType.isExternal() && originalType.getName().equals(this.getName());
   }
 
+  public JType() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternalImpl(out);
+    com.google.gwt.dev.util.Util.serializeString(name, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternalImpl(in);
+    name = com.google.gwt.dev.util.Util.deserializeString(in);
+  }
 }

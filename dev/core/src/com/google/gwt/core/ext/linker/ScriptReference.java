@@ -16,14 +16,19 @@
 package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.Linker;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * An external script file referenced in the module manifest. The index is
  * important because output order must match module declaration order.
  */
 public abstract class ScriptReference extends Artifact<ScriptReference> {
-  private final int index;
-  private final String src;
+  private int index;
+  private String src;
 
   protected ScriptReference(Class<? extends Linker> linkerType, String src,
       int index) {
@@ -58,5 +63,25 @@ public abstract class ScriptReference extends Artifact<ScriptReference> {
   @Override
   protected final Class<ScriptReference> getComparableArtifactType() {
     return ScriptReference.class;
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public ScriptReference() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeString(src, out);
+    out.writeInt(index);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    src = Util.deserializeString(in);
+    index = in.readInt();
   }
 }

@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript prefix or postfix operation.
  */
@@ -22,7 +26,7 @@ public abstract class JsUnaryOperation extends JsExpression {
 
   private JsExpression arg;
 
-  private final JsUnaryOperator op;
+  private JsUnaryOperator op;
 
   public JsUnaryOperation(SourceInfo sourceInfo, JsUnaryOperator op) {
     this(sourceInfo, op, null);
@@ -64,4 +68,23 @@ public abstract class JsUnaryOperation extends JsExpression {
     }
   }
 
+  /*
+  * Used for externalization only.
+  */
+  protected JsUnaryOperation() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(arg);
+    op.writeOperator(out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    arg = (JsExpression) in.readObject();
+    op = JsUnaryOperator.readOperator(in);
+  }
 }

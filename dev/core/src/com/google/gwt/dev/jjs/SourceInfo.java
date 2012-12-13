@@ -17,12 +17,12 @@ package com.google.gwt.dev.jjs;
 
 import com.google.gwt.dev.jjs.Correlation.Axis;
 
-import java.io.Serializable;
+import java.io.Externalizable;
 
 /**
  * Tracks file and line information for AST nodes.
  */
-public interface SourceInfo extends Serializable {
+public interface SourceInfo extends Externalizable {
 
   /**
    * Add a Correlation to the SourceInfo.

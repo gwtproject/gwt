@@ -20,6 +20,9 @@ import com.google.gwt.dev.resource.Resource;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,11 +31,14 @@ import java.util.List;
  */
 class SourceFileCompilationUnit extends CompilationUnitImpl {
 
-  private final Resource sourceFile;
+  private Resource sourceFile;
 
-  private final ContentId contentId;
+  private ContentId contentId;
 
-  private final long lastModified;
+  private long lastModified;
+
+  public SourceFileCompilationUnit() {
+  }
 
   public SourceFileCompilationUnit(Resource sourceFile, ContentId contentId,
       List<CompiledClass> compiledClasses, List<JDeclaredType> types, Dependencies dependencies,
@@ -86,5 +92,20 @@ class SourceFileCompilationUnit extends CompilationUnitImpl {
   @Override
   ContentId getContentId() {
     return contentId;
+  }
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(sourceFile);
+    out.writeObject(contentId);
+    out.writeLong(lastModified);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    sourceFile = (Resource) in.readObject();
+    contentId = (ContentId) in.readObject();
+    lastModified = in.readLong();
   }
 }

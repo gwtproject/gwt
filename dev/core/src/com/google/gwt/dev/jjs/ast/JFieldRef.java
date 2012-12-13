@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java field reference expression.
  */
@@ -25,7 +29,7 @@ public class JFieldRef extends JVariableRef implements HasEnclosingType {
   /**
    * The enclosing type of this reference.
    */
-  private final JDeclaredType enclosingType;
+  private JDeclaredType enclosingType;
 
   /**
    * This can only be null if the referenced field is static.
@@ -37,7 +41,7 @@ public class JFieldRef extends JVariableRef implements HasEnclosingType {
    * reference is the same as the type of the field itself. That default can be
    * overridden by setting this field.
    */
-  private final JType overriddenType;
+  private JType overriddenType;
 
   public JFieldRef(SourceInfo info, JExpression instance, JField field, JDeclaredType enclosingType) {
     this(info, instance, field, enclosingType, null);
@@ -112,5 +116,24 @@ public class JFieldRef extends JVariableRef implements HasEnclosingType {
       }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  public JFieldRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(enclosingType);
+    out.writeObject(instance);
+    out.writeObject(overriddenType);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    enclosingType = (JDeclaredType) in.readObject();
+    instance = (JExpression) in.readObject();
+    overriddenType = (JType) in.readObject();
   }
 }

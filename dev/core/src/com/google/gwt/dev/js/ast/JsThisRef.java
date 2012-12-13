@@ -58,4 +58,10 @@ public final class JsThisRef extends JsValueLiteral {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsThisRef() {
+  }
 }

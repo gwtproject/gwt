@@ -15,6 +15,10 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Used in object literals to specify property values by name.
  */
@@ -66,5 +70,25 @@ public class JsPropertyInitializer extends JsNode {
       valueExpr = v.accept(valueExpr);
     }
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsPropertyInitializer() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(labelExpr);
+    out.writeObject(valueExpr);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    labelExpr = (JsExpression) in.readObject();
+    valueExpr = (JsExpression) in.readObject();
   }
 }

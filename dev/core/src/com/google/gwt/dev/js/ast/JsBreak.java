@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents the JavaScript break statement.
  */
 public final class JsBreak extends JsStatement {
 
-  private final JsNameRef label;
+  private JsNameRef label;
 
   public JsBreak(SourceInfo sourceInfo) {
     this(sourceInfo, null);
@@ -53,5 +57,23 @@ public final class JsBreak extends JsStatement {
   @Override
   public boolean unconditionalControlBreak() {
     return label == null;
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsBreak() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(label);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    label = (JsNameRef) in.readObject();
   }
 }

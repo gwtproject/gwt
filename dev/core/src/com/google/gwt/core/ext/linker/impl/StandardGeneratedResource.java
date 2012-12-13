@@ -24,8 +24,8 @@ import com.google.gwt.dev.util.DiskCache;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 
 /**
@@ -34,7 +34,7 @@ import java.io.OutputStream;
 public class StandardGeneratedResource extends GeneratedResource {
   private static final DiskCache diskCache = DiskCache.INSTANCE;
 
-  private final long lastModified = System.currentTimeMillis();
+  private long lastModified = System.currentTimeMillis();
 
   private transient long token;
 
@@ -61,14 +61,24 @@ public class StandardGeneratedResource extends GeneratedResource {
     diskCache.transferToStream(token, out);
   }
 
-  private void readObject(ObjectInputStream stream) throws IOException,
-      ClassNotFoundException {
-    stream.defaultReadObject();
-    token = diskCache.transferFromStream(stream);
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public StandardGeneratedResource() {
   }
 
-  private void writeObject(ObjectOutputStream stream) throws IOException {
-    stream.defaultWriteObject();
-    diskCache.transferToStream(token, stream);
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    lastModified = in.readLong();
+    token = diskCache.transferFromObjectStream(in);
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeLong(lastModified);
+    diskCache.transferToObjectStream(token, out);
   }
 }

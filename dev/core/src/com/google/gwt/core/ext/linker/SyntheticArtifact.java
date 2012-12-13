@@ -23,8 +23,8 @@ import com.google.gwt.dev.util.DiskCache;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.OutputStream;
 
 /**
@@ -33,7 +33,7 @@ import java.io.OutputStream;
 public class SyntheticArtifact extends EmittedArtifact {
   private static final DiskCache diskCache = DiskCache.INSTANCE;
 
-  private final long lastModified;
+  private long lastModified;
   private transient long token;
 
   public SyntheticArtifact(Class<? extends Linker> linkerType,
@@ -66,14 +66,23 @@ public class SyntheticArtifact extends EmittedArtifact {
     diskCache.transferToStream(token, out);
   }
 
-  private void readObject(ObjectInputStream stream) throws IOException,
-      ClassNotFoundException {
-    stream.defaultReadObject();
-    token = diskCache.transferFromStream(stream);
+  /**
+   * Empty constructor for externalization.
+   */
+  public SyntheticArtifact() {
   }
 
-  private void writeObject(ObjectOutputStream stream) throws IOException {
-    stream.defaultWriteObject();
-    diskCache.transferToStream(token, stream);
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeLong(lastModified);
+    diskCache.transferToObjectStream(token, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    lastModified = in.readLong();
+    token = diskCache.transferFromObjectStream(in);
   }
 }

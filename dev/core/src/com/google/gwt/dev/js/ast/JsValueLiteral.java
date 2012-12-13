@@ -33,4 +33,10 @@ public abstract class JsValueLiteral extends JsLiteral {
   public final boolean isLeaf() {
     return true;
   }
+
+  /*
+  * Used for externalization only.
+  */
+  protected JsValueLiteral() {
+  }
 }

@@ -22,4 +22,11 @@ public abstract class JsLiteral extends JsExpression implements CanBooleanEval {
   protected JsLiteral(SourceInfo sourceInfo) {
     super(sourceInfo);
   }
+
+  /*
+   * Used for externalization only.
+   */
+  protected JsLiteral() {
+  }
+
 }

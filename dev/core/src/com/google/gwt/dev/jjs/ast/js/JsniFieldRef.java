@@ -22,14 +22,19 @@ import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.util.Util;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * JSNI reference to a Java field.
  */
 public class JsniFieldRef extends JFieldRef {
 
-  private final String ident;
-  private final boolean isLvalue;
+  private String ident;
+  private boolean isLvalue;
 
   public JsniFieldRef(SourceInfo info, String ident, JField field, JDeclaredType enclosingType,
       boolean isLvalue) {
@@ -53,4 +58,22 @@ public class JsniFieldRef extends JFieldRef {
     }
     visitor.endVisit(this, ctx);
   }
+
+  public JsniFieldRef() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeBoolean(isLvalue);
+    Util.serializeString(ident, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    isLvalue = in.readBoolean();
+    ident = Util.deserializeString(in);
+  }
+
 }

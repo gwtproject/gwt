@@ -20,14 +20,17 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.BinaryEmittedArtifact;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * A wrapper around an emitted artifact that only allows reading the artifact's
  * path and its binary contents.
  */
 public class BinaryOnlyArtifactWrapper extends BinaryEmittedArtifact {
-  private final EmittedArtifact underlyingArtifact;
+  private EmittedArtifact underlyingArtifact;
 
   public BinaryOnlyArtifactWrapper(String path, EmittedArtifact artifact) {
     super(path);
@@ -44,5 +47,23 @@ public class BinaryOnlyArtifactWrapper extends BinaryEmittedArtifact {
   @Override
   public long getLastModified() {
     return underlyingArtifact.getLastModified();
+  }
+
+  /**
+   * Empty constructor for externalization.
+   */
+  public BinaryOnlyArtifactWrapper() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(underlyingArtifact);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    underlyingArtifact = (EmittedArtifact) in.readObject();
   }
 }

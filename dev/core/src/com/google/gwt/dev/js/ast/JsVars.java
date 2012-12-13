@@ -14,7 +14,11 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.Util;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +35,7 @@ public class JsVars extends JsStatement implements Iterable<JsVars.JsVar> {
 
     private JsExpression initExpr;
 
-    private final JsName name;
+    private JsName name;
 
     public JsVar(SourceInfo sourceInfo, JsName name) {
       super(sourceInfo);
@@ -65,12 +69,33 @@ public class JsVars extends JsStatement implements Iterable<JsVars.JsVar> {
       }
       v.endVisit(this, ctx);
     }
+
+    /*
+    * Used for externalization only.
+    */
+    public JsVar() {
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+      super.writeExternal(out);
+      out.writeObject(name);
+      out.writeObject(initExpr);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+      super.readExternal(in);
+      name = (JsName) in.readObject();
+      initExpr = (JsExpression) in.readObject();
+    }
   }
 
-  private final List<JsVar> vars = new ArrayList<JsVar>();
+  private List<JsVar> vars;
 
   public JsVars(SourceInfo sourceInfo) {
     super(sourceInfo);
+    vars = new ArrayList<JsVar>();
   }
 
   public void add(JsVar var) {
@@ -103,4 +128,23 @@ public class JsVars extends JsStatement implements Iterable<JsVars.JsVar> {
     }
     v.endVisit(this, ctx);
   }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsVars() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    Util.serializeCollection(vars, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    vars = Util.deserializeObjectList(in);
+  }
+
 }

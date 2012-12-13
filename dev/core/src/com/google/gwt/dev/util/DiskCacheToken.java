@@ -15,15 +15,15 @@
  */
 package com.google.gwt.dev.util;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * Wrapper around a {@link DiskCache} token that allows easy serialization.
  */
-public class DiskCacheToken implements Serializable {
+public class DiskCacheToken implements Externalizable {
 
   private transient DiskCache diskCache;
   private transient long token;
@@ -73,21 +73,17 @@ public class DiskCacheToken implements Serializable {
     return diskCache.readString(token);
   }
 
-  /**
-   * Writes the underlying bytes into the specified output stream.
-   * 
-   * @param out the stream to write into
-   */
-  public synchronized void transferToStream(OutputStream out) {
-    diskCache.transferToStream(token, out);
-  }
-
-  private void readObject(ObjectInputStream inputStream) {
+  public DiskCacheToken() {
     diskCache = DiskCache.INSTANCE;
-    token = diskCache.transferFromStream(inputStream);
   }
 
-  private void writeObject(ObjectOutputStream outputStream) {
-    diskCache.transferToStream(token, outputStream);
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    diskCache.transferToObjectStream(token, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    token = diskCache.transferFromObjectStream(in);
   }
 }

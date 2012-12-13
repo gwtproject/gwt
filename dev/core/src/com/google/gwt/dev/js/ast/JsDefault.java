@@ -36,4 +36,9 @@ public final class JsDefault extends JsSwitchMember {
     }
     v.endVisit(this, ctx);
   }
+  /*
+  * Used for externalization only.
+  */
+  public JsDefault() {
+  }
 }

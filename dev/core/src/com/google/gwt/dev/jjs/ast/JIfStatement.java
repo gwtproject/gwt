@@ -17,6 +17,10 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java if statement.
  */
@@ -78,4 +82,24 @@ public class JIfStatement extends JStatement {
     }
     return false;
   }
+
+  public JIfStatement() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(ifExpr);
+    out.writeObject(thenStmt);
+    out.writeObject(elseStmt);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    ifExpr = (JExpression) in.readObject();
+    thenStmt = (JStatement) in.readObject();
+    elseStmt = (JStatement) in.readObject();
+  }
+
 }

@@ -15,8 +15,12 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.js.JsKeywords;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,7 +45,7 @@ import java.util.List;
  * for managing names that are always accessed with a qualifier and could therefore never be
  * confused with the global scope hierarchy.
  */
-public abstract class JsScope implements Serializable {
+public abstract class JsScope implements Externalizable {
 
   /**
    * Prevents the client from programmatically creating an illegal ident.
@@ -53,7 +57,7 @@ public abstract class JsScope implements Serializable {
     return StringInterner.get().intern(ident);
   }
 
-  private final String description;
+  private String description;
 
   protected JsScope(String description) {
     this.description = StringInterner.get().intern(description);
@@ -166,4 +170,20 @@ public abstract class JsScope implements Serializable {
    * @return <code>null</code> if the identifier has no associated name
    */
   protected abstract JsName findExistingNameNoRecurse(String ident);
+
+  /*
+  * Used for externalization only.
+  */
+  protected JsScope() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    Util.serializeString(description, out);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    description = Util.deserializeString(in);
+  }
 }

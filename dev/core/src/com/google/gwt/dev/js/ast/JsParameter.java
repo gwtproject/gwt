@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * A JavaScript parameter.
  */
 public final class JsParameter extends JsNode implements HasName {
 
-  private final JsName name;
+  private JsName name;
 
   public JsParameter(SourceInfo sourceInfo, JsName name) {
     super(sourceInfo);
@@ -42,5 +46,23 @@ public final class JsParameter extends JsNode implements HasName {
   public void traverse(JsVisitor v, JsContext ctx) {
     v.visit(this, ctx);
     v.endVisit(this, ctx);
+  }
+
+  /*
+  * Used for externalization only.
+  */
+  public JsParameter() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(name);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    name = (JsName) in.readObject();
   }
 }

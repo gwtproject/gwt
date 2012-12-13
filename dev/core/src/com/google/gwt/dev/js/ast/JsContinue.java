@@ -15,12 +15,16 @@ package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Represents the JavaScript continue statement.
  */
 public final class JsContinue extends JsStatement {
 
-  private final JsNameRef label;
+  private JsNameRef label;
 
   public JsContinue(SourceInfo sourceInfo) {
     this(sourceInfo, null);
@@ -54,4 +58,22 @@ public final class JsContinue extends JsStatement {
   public boolean unconditionalControlBreak() {
     return true;
   }
+  /*
+  * Used for externalization only.
+  */
+  public JsContinue() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeObject(label);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    label = (JsNameRef) in.readObject();
+  }
+
 }

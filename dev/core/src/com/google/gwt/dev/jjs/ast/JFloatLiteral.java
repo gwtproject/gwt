@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 /**
  * Java literal typed as a float.
  */
@@ -38,7 +42,7 @@ public class JFloatLiteral extends JValueLiteral {
     return Float.floatToRawIntBits(value) == 0;
   }
 
-  private final float value;
+  private float value;
 
   public JFloatLiteral(SourceInfo sourceInfo, float value) {
     super(sourceInfo);
@@ -80,4 +84,20 @@ public class JFloatLiteral extends JValueLiteral {
   private Object readResolve() {
     return isZero(value) ? ZERO : this;
   }
+
+  public JFloatLiteral() {
+  }
+
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+    super.writeExternal(out);
+    out.writeFloat(value);
+  }
+
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    super.readExternal(in);
+    value = in.readFloat();
+  }
+
 }

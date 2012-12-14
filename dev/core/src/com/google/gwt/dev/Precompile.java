@@ -40,6 +40,7 @@ import com.google.gwt.dev.util.CollapsedPropertyKey;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.dev.util.log.metrics.CompilerMetricsCollectorFactory;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -402,87 +403,95 @@ public class Precompile {
     // separately.
     options.setOptimizePrecompile(false);
 
-    for (String moduleName : options.getModuleNames()) {
-      File compilerWorkDir = options.getCompilerWorkDir(moduleName);
-      Util.recursiveDelete(compilerWorkDir, true);
-      // No need to check mkdirs result because an IOException will occur
-      // anyway.
-      compilerWorkDir.mkdirs();
+    long startTime = System.currentTimeMillis();
+    try {
+      for (String moduleName : options.getModuleNames()) {
+        File compilerWorkDir = options.getCompilerWorkDir(moduleName);
+        Util.recursiveDelete(compilerWorkDir, true);
+        // No need to check mkdirs result because an IOException will occur
+        // anyway.
+        compilerWorkDir.mkdirs();
 
-      File precompilationFile = new File(compilerWorkDir, PRECOMPILE_FILENAME);
+        File precompilationFile = new File(compilerWorkDir, PRECOMPILE_FILENAME);
 
-      ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
+        ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
 
-      StandardLinkerContext linkerContext =
-          new StandardLinkerContext(TreeLogger.NULL, module, options);
+        StandardLinkerContext linkerContext =
+            new StandardLinkerContext(TreeLogger.NULL, module, options);
 
-      boolean generateOnShards = true;
+        boolean generateOnShards = true;
 
-      if (!options.isEnabledGeneratingOnShards()) {
-        logger.log(TreeLogger.INFO, "Precompiling on the start node");
-        generateOnShards = false;
-      } else if (!linkerContext.allLinkersAreShardable()) {
-        TreeLogger legacyLinkersLogger =
-            logger.branch(TreeLogger.INFO,
-                "Precompiling on the start node, because some linkers are not updated");
-        if (legacyLinkersLogger.isLoggable(TreeLogger.INFO)) {
-          for (Linker linker : linkerContext.findUnshardableLinkers()) {
-            legacyLinkersLogger.log(TreeLogger.INFO, "Linker"
-                + linker.getClass().getCanonicalName() + " is not updated");
+        if (!options.isEnabledGeneratingOnShards()) {
+          logger.log(TreeLogger.INFO, "Precompiling on the start node");
+          generateOnShards = false;
+        } else if (!linkerContext.allLinkersAreShardable()) {
+          TreeLogger legacyLinkersLogger =
+              logger.branch(TreeLogger.INFO,
+                  "Precompiling on the start node, because some linkers are not updated");
+          if (legacyLinkersLogger.isLoggable(TreeLogger.INFO)) {
+            for (Linker linker : linkerContext.findUnshardableLinkers()) {
+              legacyLinkersLogger.log(TreeLogger.INFO, "Linker"
+                  + linker.getClass().getCanonicalName() + " is not updated");
+            }
           }
+          generateOnShards = false;
+        } else if (options.isValidateOnly()) {
+          // Don't bother running on shards for just a validation run
+          generateOnShards = false;
         }
-        generateOnShards = false;
-      } else if (options.isValidateOnly()) {
-        // Don't bother running on shards for just a validation run
-        generateOnShards = false;
-      }
 
-      if (generateOnShards) {
-        /*
-         * Pre-precompile. Count the permutations and plan to do a real
-         * precompile in the CompilePerms shards.
-         */
-        TreeLogger branch =
-            logger.branch(TreeLogger.INFO, "Precompiling (minimal) module " + module.getName());
-        Util.writeObjectAsFile(logger, precompilationFile, options);
-        int numPermutations =
-            new PropertyPermutations(module.getProperties(), module.getActiveLinkerNames())
-                .collapseProperties().size();
-        Util.writeStringAsFile(logger, new File(compilerWorkDir, PERM_COUNT_FILENAME), String
-            .valueOf(numPermutations));
-        if (branch.isLoggable(TreeLogger.INFO)) {
-          branch.log(TreeLogger.INFO,
-              "Precompilation (minimal) succeeded, number of permutations: " + numPermutations);
-        }
-      } else {
-        if (options.isValidateOnly()) {
+        if (generateOnShards) {
+          /*
+           * Pre-precompile. Count the permutations and plan to do a real
+           * precompile in the CompilePerms shards.
+           */
           TreeLogger branch =
-              logger.branch(TreeLogger.INFO, "Validating compilation " + module.getName());
-          if (!validate(branch, options, module, options.getGenDir())) {
-            branch.log(TreeLogger.ERROR, "Validation failed");
-            return false;
-          }
-          branch.log(TreeLogger.INFO, "Validation succeeded");
-        } else {
-          TreeLogger branch =
-              logger.branch(TreeLogger.INFO, "Precompiling module " + module.getName());
-
-          Precompilation precompilation = precompile(branch, options, module, options.getGenDir());
-          if (precompilation == null) {
-            branch.log(TreeLogger.ERROR, "Precompilation failed");
-            return false;
-          }
-          Util.writeObjectAsFile(logger, precompilationFile, precompilation);
-
-          int permsPrecompiled = precompilation.getPermutations().length;
+              logger.branch(TreeLogger.INFO, "Precompiling (minimal) module " + module.getName());
+          Util.writeObjectAsFile(logger, precompilationFile, options);
+          int numPermutations =
+              new PropertyPermutations(module.getProperties(), module.getActiveLinkerNames())
+                  .collapseProperties().size();
           Util.writeStringAsFile(logger, new File(compilerWorkDir, PERM_COUNT_FILENAME), String
-              .valueOf(permsPrecompiled));
+              .valueOf(numPermutations));
           if (branch.isLoggable(TreeLogger.INFO)) {
-            branch.log(TreeLogger.INFO, "Precompilation succeeded, number of permutations: "
-                + permsPrecompiled);
+            branch.log(TreeLogger.INFO,
+                "Precompilation (minimal) succeeded, number of permutations: " + numPermutations);
+          }
+        } else {
+          if (options.isValidateOnly()) {
+            TreeLogger branch =
+                logger.branch(TreeLogger.INFO, "Validating compilation " + module.getName());
+            if (!validate(branch, options, module, options.getGenDir())) {
+              branch.log(TreeLogger.ERROR, "Validation failed");
+              return false;
+            }
+            branch.log(TreeLogger.INFO, "Validation succeeded");
+          } else {
+            TreeLogger branch =
+                logger.branch(TreeLogger.INFO, "Precompiling module " + module.getName());
+
+            Precompilation precompilation =
+                precompile(branch, options, module, options.getGenDir());
+            if (precompilation == null) {
+              branch.log(TreeLogger.ERROR, "Precompilation failed");
+              return false;
+            }
+            Util.writeObjectAsFile(logger, precompilationFile, precompilation);
+
+            int permsPrecompiled = precompilation.getPermutations().length;
+            Util.writeStringAsFile(logger, new File(compilerWorkDir, PERM_COUNT_FILENAME), String
+                .valueOf(permsPrecompiled));
+            if (branch.isLoggable(TreeLogger.INFO)) {
+              branch.log(TreeLogger.INFO, "Precompilation succeeded, number of permutations: "
+                  + permsPrecompiled);
+            }
           }
         }
       }
+    } finally {
+      CompilerMetricsCollectorFactory.getCollector().logMetric("Precompile.time",
+          System.currentTimeMillis() - startTime);
+      CompilerMetricsCollectorFactory.getCollector().commit();
     }
     return true;
   }

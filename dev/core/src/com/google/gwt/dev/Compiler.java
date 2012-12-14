@@ -35,6 +35,8 @@ import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.log.metrics.CompilerMetricsCollector;
+import com.google.gwt.dev.util.log.metrics.CompilerMetricsCollectorFactory;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -200,6 +202,7 @@ public class Compiler {
 
   public boolean run(TreeLogger logger, ModuleDef... modules)
       throws UnableToCompleteException {
+    long startTime = System.currentTimeMillis();
     boolean tempWorkDir = false;
     try {
       if (options.getWorkDir() == null) {
@@ -281,6 +284,9 @@ public class Compiler {
       if (tempWorkDir) {
         Util.recursiveDelete(options.getWorkDir(), false);
       }
+      CompilerMetricsCollectorFactory.getCollector().logMetric("Compile.time",
+          System.currentTimeMillis() - startTime);
+      CompilerMetricsCollectorFactory.getCollector().commit();
     }
     return true;
   }

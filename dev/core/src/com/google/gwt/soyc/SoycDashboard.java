@@ -624,9 +624,8 @@ public class SoycDashboard {
             curSplitPointLocation = curSplitPointLocation.replaceAll("\\(L.*",
                 "");
 
-            globalInformation.getSplitPointToLocation().put(
+            globalInformation.addSplitPointDescription(
                 Integer.parseInt(curSplitPoint), curSplitPointLocation);
-            globalInformation.incrementSplitPoints();
           }
         }
       }

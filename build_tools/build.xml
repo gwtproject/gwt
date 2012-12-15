@@ -1,6 +1,6 @@
 <project name="buildtools" default="build" basedir=".">
   <property name="gwt.root" location=".." />
-  <property name="project.tail" value="build-tools" />
+  <property name="project.tail" value="build_tools" />
   <import file="${gwt.root}/common.ant.xml" />
 
   <!-- "build" is the default when subprojects are directly targetted -->

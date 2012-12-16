@@ -37,11 +37,11 @@ public class GlobalInformation {
       "Initially downloaded code", "initial");
   private SizeBreakdown leftoversBreakdown = new SizeBreakdown(
       "Leftovers code, code not in any other split point", "leftovers");
-  private int numSplitPoints = 0;
   private Map<String, TreeSet<String>> packageToClasses = new TreeMap<String, TreeSet<String>>();
   private final String permutationId;
   private ArrayList<Integer> splitPointInitialLoadSequence = new ArrayList<Integer>();
-  private HashMap<Integer, String> splitPointToLocation = new HashMap<Integer, String>();
+  private HashMap<Integer, List<String>> splitPointToLocation =
+      new HashMap<Integer, List<String>>();
   private SizeBreakdown totalCodeBreakdown = new SizeBreakdown("Total program",
       "total");
 
@@ -53,9 +53,9 @@ public class GlobalInformation {
     List<SizeBreakdown> breakdowns = new ArrayList<SizeBreakdown>();
     breakdowns.add(totalCodeBreakdown);
     breakdowns.add(initialCodeBreakdown);
-    if (numSplitPoints > 0) {
+    if (getNumSplitPoints() > 0) {
       breakdowns.add(leftoversBreakdown);
-      for (int sp = 1; sp <= numSplitPoints; sp++) {
+      for (int sp = 1; sp <= getNumSplitPoints(); sp++) {
         breakdowns.add(splitPointCodeBreakdown(sp));
       }
     }
@@ -119,10 +119,12 @@ public class GlobalInformation {
   /**
    * Gets the number of split points.
    * 
-   * @return numSplitPoints
+   * @return the number of fragments.
    */
+  // TODO(rluble): make the distinction between split point and fragment
+  // clear everywhere.
   public final int getNumSplitPoints() {
-    return numSplitPoints;
+    return splitPointToLocation.size();
   }
 
   /**
@@ -152,8 +154,43 @@ public class GlobalInformation {
    * 
    * @return splitPointToLocation
    */
-  public final HashMap<Integer, String> getSplitPointToLocation() {
+  public final HashMap<Integer, List<String>> getSplitPointToLocation() {
     return splitPointToLocation;
+  }
+
+  /**
+   * Adds split point descriptors to a fragment.
+   *
+   * @param sp the fragment number.
+   * @param desc a string describing a split point for fragment <code>sp</code>
+   *
+   */
+  public final void addSplitPointDescription(int sp, String desc) {
+    List<String> descriptions = splitPointToLocation.get(sp);
+    if (descriptions == null) {
+      descriptions = new ArrayList<String>();
+      splitPointToLocation.put(sp, descriptions);
+    }
+    descriptions.add(desc);
+  }
+
+  /**
+   * Gets the a (composite) descriptor for a fragment.
+   *
+   * @param sp the fragment number
+   * @param separator a separator string to use for combining multiple descriptors for fragment
+   *                  <code>sp</code>
+   * @return a potentially composite descriptor for fragment <code>sp</code>
+   */
+  public final String getSplitPointDescription(int sp, String separator) {
+    String curSeparator = "";
+    StringBuilder output = new StringBuilder();
+    for (String desc : splitPointToLocation.get(sp)) {
+      output.append(curSeparator);
+      output.append(desc);
+      curSeparator = separator;
+    }
+    return output.toString();
   }
 
   /**
@@ -166,20 +203,13 @@ public class GlobalInformation {
   }
 
   /**
-   * Increments the split point count.
-   */
-  public final void incrementSplitPoints() {
-    numSplitPoints++;
-  }
-
-  /**
    * Gets an exclusive code breakdown for a split point.
    * 
    * @param sp split point
    * @return exlusive code breakdown for sp
    */
   public SizeBreakdown splitPointCodeBreakdown(int sp) {
-    assert sp >= 1 && sp <= numSplitPoints;
+    assert sp >= 1 && sp <= getNumSplitPoints();
     if (!exclusiveCodeBreakdowns.containsKey(sp)) {
       exclusiveCodeBreakdowns.put(sp, new SizeBreakdown("split point " + sp
           + ": " + splitPointToLocation.get(sp), "sp" + sp));

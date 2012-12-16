@@ -262,7 +262,7 @@ public class MakeTopLevelHtmlForPerm {
       outFile.println("  var spl = [");
       for (int sp = 1; sp <= globalInformation.getNumSplitPoints(); sp++) {
         outFile.println("        '"
-            + globalInformation.getSplitPointToLocation().get(sp) + "',");
+            + globalInformation.getSplitPointDescription(sp, ", ") + "',");
       }
       outFile.println("  ];");
       
@@ -1283,16 +1283,15 @@ public class MakeTopLevelHtmlForPerm {
         }
 
         String drillDownFileName = shellFileName(breakdown, getPermutationId());
-        String splitPointDescription = globalInformation.getSplitPointToLocation().get(
-            i);
+        String splitPointDescription = globalInformation.getSplitPointDescription(i, "<BR>");
 
         int size = breakdown.sizeAllCode;
         float perc = (float) size / (float) maxSize;
 
         outFile.println("<tr>");
         outFile.println("<td>" + i + "</td>");
-        outFile.println("<td><a href=\"" + drillDownFileName + "\">"
-            + splitPointDescription + "</a></td>");
+        outFile.print("<td><a href=\"" + drillDownFileName + "\">" + splitPointDescription
+            + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
         // CHECKSTYLE_OFF

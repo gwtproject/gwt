@@ -25,8 +25,8 @@
 	     out of User soon. -->
 	<inherits name="com.google.gwt.user.User"/>
 
-	<replace-with class="com.google.gwt.http.client.RequestImplIE">
-		<when-type-is class="com.google.gwt.http.client.RequestImpl" />
+	<replace-with class="com.google.gwt.http.client.RequestBuilder.RequestImplIE6To9">
+		<when-type-is class="com.google.gwt.http.client.RequestBuilder.RequestImpl" />
 		<any>
 			<when-property-is name="user.agent" value="ie6" />
 			<when-property-is name="user.agent" value="ie8" />

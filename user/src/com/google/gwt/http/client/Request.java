@@ -16,6 +16,7 @@
 package com.google.gwt.http.client;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.http.client.RequestBuilder.RequestImpl;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
@@ -31,7 +32,7 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  * 
  */
 public class Request {
-  
+
   private static final RequestImpl impl = GWT.create(RequestImpl.class);
 
   /**

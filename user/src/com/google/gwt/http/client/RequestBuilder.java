@@ -48,6 +48,52 @@ public class RequestBuilder {
       return name;
     }
   }
+  
+  /**
+   * Native implementation associated with {@link Request}. User classes should not use this class
+   * directly.
+   */
+  static class RequestImpl {
+
+    /**
+     * Creates a {@link Response} instance for the given JavaScript XmlHttpRequest object.
+     * 
+     * @param xmlHttpRequest xmlHttpRequest object for which we need a response
+     * @return a {@link Response} object instance
+     */
+    Response createResponse(final XMLHttpRequest xmlHttpRequest) {
+      return new XMLHttpRequestResponse(xmlHttpRequest);
+    }
+
+  }
+
+  /**
+   * Special {@link RequestImpl} for IE6-9 to work around some IE specialities.
+   */
+  static class RequestImplIE6To9 extends RequestImpl {
+
+    @Override
+    Response createResponse(XMLHttpRequest xmlHttpRequest) {
+      return new XMLHttpRequestResponse(xmlHttpRequest) {
+
+        @Override
+        public int getStatusCode() {
+          /*
+           * http://code.google.com/p/google-web-toolkit/issues/detail?id=5031
+           * 
+           * The XMLHTTPRequest object in IE will return a status code of 1223 and drop some
+           * response headers if the server returns a HTTP/204.
+           * 
+           * This issue is fixed in IE10.
+           */
+          int statusCode = super.getStatusCode();
+          return (statusCode == 1223) ? SC_NO_CONTENT : statusCode;
+        }
+
+      };
+    }
+
+  }
 
   /**
    * Specifies that the HTTP DELETE method should be used.

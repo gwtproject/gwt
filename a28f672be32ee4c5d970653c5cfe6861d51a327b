@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "M1wpOBb4",
+        "filename": "dev/core/src/com/google/gwt/soyc/GlobalInformation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-12-17T18:39:00Z",
+      "side": 1,
+      "message": "fragmentDescriptors probably the most appropriate name here.",
+      "parentUuid": "M1P6NQtE",
+      "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M1P47guk",
         "filename": "dev/core/src/com/google/gwt/soyc/GlobalInformation.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-12-16T01:27:35Z",
       "side": 1,
       "message": "Could you explain the format of the string?",
+      "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1N0yAu8",
+        "filename": "dev/core/src/com/google/gwt/soyc/GlobalInformation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-12-17T18:39:00Z",
+      "side": 1,
+      "message": "Moved the format string out.",
+      "parentUuid": "M1P47guk",
       "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "M1P01Ptg",
+        "filename": "dev/core/src/com/google/gwt/soyc/GlobalInformation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-12-17T18:39:00Z",
+      "side": 1,
+      "message": "Are we already depending on Guava?\n\nI changed it to use Strings.join instead for now.",
+      "parentUuid": "M1ID4GA0",
+      "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M1EAPUDg",
         "filename": "dev/core/src/com/google/gwt/soyc/SoycDashboard.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2012-12-16T01:27:35Z",
       "side": 1,
       "message": "Could you explain what we are parsing? Maybe an example of what is in the Attributes?",
+      "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1H1.bmI",
+        "filename": "dev/core/src/com/google/gwt/soyc/SoycDashboard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2012-12-17T18:39:00Z",
+      "side": 1,
+      "message": "Added java doc. \n\nThis code uses a SAX parser to parse the XML files. The parser calls handler functions provided in this file to deal with XML nodes.",
+      "parentUuid": "M1EAPUDg",
       "revId": "a28f672be32ee4c5d970653c5cfe6861d51a327b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

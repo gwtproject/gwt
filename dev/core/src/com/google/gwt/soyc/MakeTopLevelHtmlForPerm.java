@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.linker.CompilationMetricsArtifact;
 import com.google.gwt.core.ext.linker.ModuleMetricsArtifact;
 import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
 import com.google.gwt.core.ext.soyc.impl.SizeMapRecorder;
+import com.google.gwt.dev.util.Strings;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.collect.Sets;
@@ -260,9 +261,11 @@ public class MakeTopLevelHtmlForPerm {
 
       // array of split point descriptions
       outFile.println("  var spl = [");
-      for (int sp = 1; sp <= globalInformation.getNumSplitPoints(); sp++) {
-        outFile.println("        '"
-            + globalInformation.getSplitPointToLocation().get(sp) + "',");
+      for (int sp = 1; sp <= globalInformation.getNumFragments(); sp++) {
+        List<String> fragmentDescriptors = globalInformation.getFragmentDescriptors(sp);
+        outFile.println("        '" + Strings.join(
+            (String[]) fragmentDescriptors.toArray(new String[fragmentDescriptors.size()]), ",")
+            + "',");
       }
       outFile.println("  ];");
       
@@ -364,7 +367,7 @@ public class MakeTopLevelHtmlForPerm {
       outFile.println("    document.write(\"<li><a href='\" + d1 + \"#\" + className + \"'>"
           + "See why it's live</a></li>\");");
       outFile.println("    for (var sp = 1; sp <= "
-          + globalInformation.getNumSplitPoints() + "; sp++) {");
+          + globalInformation.getNumFragments() + "; sp++) {");
       outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-" + getPermutationId() + ".html';");
       outFile.println("      document.write(\"<li><a href='\" + d2 + \"#\" + className +\"'>"
           + " See why it's not exclusive to s.p. #\" + sp + \" (\" + spl[sp - 1] + \")"
@@ -1265,34 +1268,35 @@ public class MakeTopLevelHtmlForPerm {
     percentFormatter.setMinimumFractionDigits(1);
     percentFormatter.setMaximumFractionDigits(1);
 
-    if (globalInformation.getSplitPointToLocation().size() >= 1) {
+    if (globalInformation.getNumFragments() >= 1) {
 
-      int numSplitPoints = globalInformation.getSplitPointToLocation().size();
+      int numFragments = globalInformation.getNumFragments();
       int maxSize = globalInformation.getTotalCodeBreakdown().sizeAllCode;
 
-      for (int i = FRAGMENT_NUMBER_TOTAL_PROGRAM; i <= numSplitPoints + 1; i++) {
+      for (int i = FRAGMENT_NUMBER_TOTAL_PROGRAM; i <= numFragments + 1; i++) {
         SizeBreakdown breakdown;
         if (i == FRAGMENT_NUMBER_TOTAL_PROGRAM) {
           continue;
-        } else if (i == numSplitPoints + 1) { // leftovers
+        } else if (i == numFragments + 1) { // leftovers
           continue;
         } else if (i == FRAGMENT_NUMBER_INITIAL_DOWNLOAD) {
           continue;
         } else {
-          breakdown = globalInformation.splitPointCodeBreakdown(i);
+          breakdown = globalInformation.fragmentCodeBreakdown(i);
         }
 
         String drillDownFileName = shellFileName(breakdown, getPermutationId());
-        String splitPointDescription = globalInformation.getSplitPointToLocation().get(
-            i);
+        List<String> fragmentDescriptors = globalInformation.getFragmentDescriptors(i);
+        String splitPointDescription = Strings.join(
+            (String[]) fragmentDescriptors.toArray(new String[fragmentDescriptors.size()]), "<BR>");
 
         int size = breakdown.sizeAllCode;
         float perc = (float) size / (float) maxSize;
 
         outFile.println("<tr>");
         outFile.println("<td>" + i + "</td>");
-        outFile.println("<td><a href=\"" + drillDownFileName + "\">"
-            + splitPointDescription + "</a></td>");
+        outFile.print("<td><a href=\"" + drillDownFileName + "\">" + splitPointDescription
+            + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
         // CHECKSTYLE_OFF
@@ -1412,7 +1416,7 @@ public class MakeTopLevelHtmlForPerm {
    * @returns true of the split point is initial, false otherwise
    */
   private boolean isInitialSplitPoint(int splitPoint) {
-    return globalInformation.getSplitPointInitialLoadSequence().contains(
+    return globalInformation.getInitialFragmentLoadSequence().contains(
         splitPoint);
   }
 
@@ -1824,8 +1828,8 @@ public class MakeTopLevelHtmlForPerm {
    */
   private Iterable<Integer> splitPointsWithClass(String className) {
     List<Integer> sps = new ArrayList<Integer>();
-    for (int sp = 1; sp <= globalInformation.getNumSplitPoints(); sp++) {
-      Map<String, Integer> classToSize = globalInformation.splitPointCodeBreakdown(sp).classToSize;
+    for (int sp = 1; sp <= globalInformation.getNumFragments(); sp++) {
+      Map<String, Integer> classToSize = globalInformation.fragmentCodeBreakdown(sp).classToSize;
       if (classToSize.containsKey(className)) {
         sps.add(sp);
       }

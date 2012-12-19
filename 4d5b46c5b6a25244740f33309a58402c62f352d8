@@ -16,6 +16,24 @@
       "revId": "4d5b46c5b6a25244740f33309a58402c62f352d8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NFo8C.b4",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/impl/GWTRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-12-19T19:48:38Z",
+      "side": 1,
+      "message": "The Window.Location.replace() call is preexisting and is there to load the next GWT module\u0027s test page when testing multiple independent modules.\n\nThe issue is that when GWTRunner transitions to the next test module (via page navigation), UrlBuilder.buildString() creates the next URL with a query string like \"?gwt.codesvr\u003dlocalhost%3A9997\" which confuses the buggy DevMode plugins.  With this patch applied, the next URL will instead be built with a query string like \"?gwt.codesvr\u003dlocalhost:9997\".\n\nThere\u0027s otherwise no change in behavior other than what the next URL tested is.  E.g., there\u0027s no extra page reloads or changes to the URL after the page has already been loaded.\n\nDoes that help clarify?",
+      "parentUuid": "NFs9KQSE",
+      "revId": "4d5b46c5b6a25244740f33309a58402c62f352d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,24 +16,44 @@
 package com.google.gwt.junit;
 
 import com.google.gwt.junit.client.DevModeOnCompiledScriptTest;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.junit.client.GWTTestCaseAsyncTest;
+import com.google.gwt.junit.client.GWTTestCaseSetupTearDownTest;
 import com.google.gwt.junit.client.GWTTestCaseTest;
 import com.google.gwt.junit.client.PropertyDefiningGWTTest;
+import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Set;
 
 /**
  * Tests of the junit package.
  */
 public class JUnitSuite {
   public static Test suite() {
-    GWTTestSuite suite = new GWTTestSuite(
-        "Test for suite for com.google.gwt.junit");
+    GWTTestSuite suite = new GWTTestSuite("Test suite for com.google.gwt.junit");
 
     // client
     // Suppressed due to flakiness on Linux
     // suite.addTestSuite(BenchmarkTest.class);
-    suite.addTestSuite(GWTTestCaseTest.class);
+
+    TestSuite gwtTestCaseSuite = new TestSuiteWithExpectedFailures("GWTTestCase tests");
+    gwtTestCaseSuite.addTestSuite(GWTTestCaseTest.class);
+    suite.addTest(gwtTestCaseSuite);
+
+    TestSuite orderedGwtTestCaseSuite =
+        new TestSuiteWithExpectedFailures("Ordered GWTTestCase tests");
+    orderedGwtTestCaseSuite.addTestSuite(GWTTestCaseAsyncTest.class);
+    orderedGwtTestCaseSuite.addTestSuite(GWTTestCaseSetupTearDownTest.class);
+    suite.addTest(orderedGwtTestCaseSuite);
+    sortTestsInModule("com.google.gwt.junit.OrderedJUnitTest");
+
     suite.addTestSuite(DevModeOnCompiledScriptTest.class);
 
     // Must run after a GWTTestCase so JUnitShell is initialized.
@@ -45,9 +65,8 @@ public class JUnitSuite {
     suite.addTestSuite(JUnitMessageQueueTest.class);
     suite.addTestSuite(GWTTestCaseNoClientTest.class);
 
-    // These two are intended only to be run manually. See class comments
+    // Intended only to be run manually. See class comments
     // suite.addTestSuite(ParallelRemoteTest.class);
-    // suite.addTestSuite(TestManualAsync.class);
 
     // remote
     // Run manually only, launches servers that die on port contention
@@ -57,5 +76,26 @@ public class JUnitSuite {
     suite.addTestSuite(PropertyDefiningGWTTest.class);
 
     return suite;
+  }
+
+  private static void sortTestsInModule(String moduleName) {
+    // TestModuleInfo in GWTTestCase#ALL_GWT_TESTS accidentally forces the test execution order
+    // that is derived from first time TestCase is instantiated. We need the change the order there
+    // to control the execution order.
+    String syntheticModuleName = moduleName + ".JUnit";
+    Set<TestInfo> testInfos = GWTTestCase.ALL_GWT_TESTS.get(syntheticModuleName).getTests();
+    ArrayList<TestInfo> sortedTestInfos = new ArrayList<TestInfo>(testInfos);
+    Collections.sort(sortedTestInfos, new Comparator<TestInfo>() {
+      @Override
+      public int compare(TestInfo a, TestInfo b) {
+        return getKey(a).compareTo(getKey(b));
+      }
+
+      private String getKey(TestInfo testInfo) {
+        return testInfo.getTestClass() + "." + testInfo.getTestMethod();
+      }
+    });
+    testInfos.clear();
+    testInfos.addAll(sortedTestInfos);
   }
 }

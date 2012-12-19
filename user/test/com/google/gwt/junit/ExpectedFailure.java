@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,15 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.ext.util;
+package com.google.gwt.junit;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class UtilSuite {
-  public static Test suite() {
-    TestSuite suite = new TestSuite("Test suite for Util");
-    suite.addTestSuite(UtilTest.class);
-    return suite;
-  }
+import junit.framework.AssertionFailedError;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+/**
+ * An annotation to mark test cases where the expected result is a failure.
+ */
+@Target(METHOD)
+@Retention(RUNTIME)
+public @interface ExpectedFailure {
+  String withMessage() default "";
+  Class<? extends Throwable> withType() default AssertionFailedError.class;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,22 +15,24 @@
  */
 package com.google.gwt.junit.client;
 
-import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_SETUP;
-import static com.google.gwt.junit.client.GWTTestCaseTest.SetUpTearDownState.IS_TORNDOWN;
-
 import com.google.gwt.dom.client.ButtonElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.junit.ExpectedFailure;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Timer;
 
 /**
- * This test must be run manually to inspect for correct results. Many of these
- * tests are designed to fail in specific ways, the rest should succeed. The
- * name of each test method indicates how it should behave.
+ * This class tests GwtTestCase in async mode.
+ *
+ * Note: This test requires some test methods to be executed in a specific order.
  */
-public class TestManualAsync extends GWTTestCaseTest {
+public class GWTTestCaseAsyncTest extends GWTTestCase {
+
+  public String getModuleName() {
+    return "com.google.gwt.junit.OrderedJUnitTest";
+  }
 
   // The following tests (all prefixed with test_) are intended to test the
   // interaction of synchronous failures (within event handlers) with various
@@ -44,63 +46,76 @@ public class TestManualAsync extends GWTTestCaseTest {
   // F => fail()
   // R => return;
 
+  @ExpectedFailure(withMessage = "test_dtf_sf")
   public void test_dtf_sf() {
     delayTestFinish();
     synchronousFailure("test_dtf_sf");
   }
 
+  @ExpectedFailure(withMessage = "test_dtf_sf_f")
   public void test_dtf_sf_f() {
     delayTestFinish();
     synchronousFailure("test_dtf_sf_f");
     failNow("test_dtf_sf_f");
   }
 
+  @ExpectedFailure(withMessage = "test_dtf_sf_ft")
   public void test_dtf_sf_ft() {
     delayTestFinish();
     synchronousFailure("test_dtf_sf_ft");
     finishTest();
   }
 
-  public void test_dtf_sf_r_f() {
+  // Issue: http://code.google.com/p/google-web-toolkit/issues/detail?id=7846
+  @ExpectedFailure(withMessage = "test_dtf_sf_r_f")
+  public void _suppressed_test_dtf_sf_r_f() {
     delayTestFinish();
     synchronousFailure("test_dtf_sf_r_f");
     failLater("test_dtf_sf_r_f");
   }
 
+  @ExpectedFailure(withMessage = "test_dtf_sf_r_ft")
   public void test_dtf_sf_r_ft() {
     delayTestFinish();
     synchronousFailure("test_dtf_sf_r_ft");
     finishTestLater();
   }
 
+  @ExpectedFailure(withMessage = "test_sf")
   public void test_sf() {
     synchronousFailure("test_sf");
   }
 
+  @ExpectedFailure(withMessage = "test_sf_dtf_f")
   public void test_sf_dtf_f() {
     synchronousFailure("test_sf_dtf_f");
     delayTestFinish();
     failNow("test_sf_dtf_f");
   }
 
+  @ExpectedFailure(withMessage = "test_sf_dtf_ft")
   public void test_sf_dtf_ft() {
     synchronousFailure("test_sf_dtf_ft");
     delayTestFinish();
     finishTest();
   }
 
-  public void test_sf_dtf_r_f() {
+  // Issue: http://code.google.com/p/google-web-toolkit/issues/detail?id=7846
+  @ExpectedFailure(withMessage = "test_sf_dtf_r_f")
+  public void _suppressed_test_sf_dtf_r_f() {
     synchronousFailure("test_sf_dtf_r_f");
     delayTestFinish();
     failLater("test_sf_dtf_r_f");
   }
 
+  @ExpectedFailure(withMessage = "test_sf_dtf_r_ft")
   public void test_sf_dtf_r_ft() {
     synchronousFailure("test_sf_dtf_r_ft");
-    delayTestFinish(5 * 60 * 1000);
+    delayTestFinish();
     finishTestLater();
   }
 
+  @ExpectedFailure(withMessage = "test_sf_f")
   public void test_sf_f() {
     synchronousFailure("test_sf_f");
     failNow("test_sf_f");
@@ -109,9 +124,10 @@ public class TestManualAsync extends GWTTestCaseTest {
   /**
    * Fails normally.
    */
+  @ExpectedFailure(withMessage = "testDelayFail")
   public void testDelayFail() {
     delayTestFinish(100);
-    fail("Expected failure");
+    fail("testDelayFail");
     finishTest();
   }
 
@@ -124,22 +140,12 @@ public class TestManualAsync extends GWTTestCaseTest {
   }
 
   /**
-   * Fails normally.
-   */
-  public void testFail() {
-    fail("Expected failure");
-  }
-
-  /**
    * Async fails.
    */
+  @ExpectedFailure(withMessage = "testFailAsync")
   public void testFailAsync() {
     delayTestFinish(1000);
-    new Timer() {
-      public void run() {
-        fail("Expected failure");
-      }
-    }.schedule(100);
+    failLater("testFailAsync");
   }
 
   /**
@@ -148,16 +154,9 @@ public class TestManualAsync extends GWTTestCaseTest {
    * 
    * This test should *not* fail, but the next one should.
    */
-  public void testLateFailPart1() {
+  public void testLateFail() {
     // Leave the test in synchronous mode, but crank up a timer to fail in 2.5s.
-    new Timer() {
-      @Override
-      public void run() {
-        // This fail should be called during the next test.
-        fail();
-      }
-    }.schedule(2500);
-
+    failLater("testLateFail", 2500);
     // We don't actually assert anything here. This test exists solely to make
     // the next one fail.
   }
@@ -165,34 +164,39 @@ public class TestManualAsync extends GWTTestCaseTest {
   /**
    * Second half of the previous test.
    */
-  public void testLateFailPart2() {
+  @ExpectedFailure(withMessage = "testLateFail")
+  public void testLateFail_assert() {
     // Go into async mode from 5s, finishing in 4. The timer from the previous
     // test will go off and call fail() before finishTest() is called.
     delayTestFinish(5000);
-    new Timer() {
-      @Override
-      public void run() {
-        finishTest();
-      }
-    }.schedule(4000);
   }
 
   /**
    * Completes normally.
    */
-  public void testNormal() {
+  public void testSpuriousFinishTest() {
+    try {
+      finishTest();
+      fail("finishTest should have failed");
+    } catch (IllegalStateException e) {
+    }
   }
 
+  /**
+   * Times out.
+   */
+  @ExpectedFailure(withType = TimeoutException.class)
+  public void testTimeoutAsync() {
+    delayTestFinish(100);
+    finishTestLater(200);
+  }
+  
   /**
    * Completes async.
    */
   public void testNormalAsync() {
     delayTestFinish(200);
-    new Timer() {
-      public void run() {
-        finishTest();
-      }
-    }.schedule(100);
+    finishTestLater(100);
   }
 
   /**
@@ -214,124 +218,47 @@ public class TestManualAsync extends GWTTestCaseTest {
     }.scheduleRepeating(100);
   }
 
-  /**
-   * Fails async.
-   */
-  public void testSetUpTearDownFailAsync() {
-    assertEquals(IS_SETUP, setupTeardownFlag);
-    delayTestFinish(1000);
-    new Timer() {
-      @Override
-      public void run() {
-        fail("Expected failure");
-      }
-    }.schedule(1);
-
-    new Timer() {
-      @Override
-      public void run() {
-        /*
-         * The failing test should have triggered tearDown.
-         */
-        if (setupTeardownFlag != IS_TORNDOWN) {
-          recordOutofBandError("Bad async failure tearDown behavior not catchable by JUnit");
-        }
-      }
-    }.schedule(100);
-  }
-
-  /**
-   * Completes async.
-   */
-  public void testSetUpTearDownFailAsyncHadNoOutOfBandErrors() {
-    assertNoOutOfBandErrorsAsync();
-  }
-
-  /**
-   * Times out async.
-   */
-  public void testSetUpTearDownTimeoutAsync() {
-    assertSame(IS_SETUP, setupTeardownFlag);
-    delayTestFinish(1);
-    new Timer() {
-      @Override
-      public void run() {
-        /*
-         * The failing test should have triggered tearDown.
-         */
-        if (setupTeardownFlag != IS_TORNDOWN) {
-          recordOutofBandError("Bad async timeout tearDown behavior not catchable by JUnit");
-        }
-      }
-    }.schedule(100);
-  }
-
-  /**
-   * Completes async.
-   */
-  public void testSetUpTearDownTimeoutAsyncHadNoOutOfBandErrors() {
-    assertNoOutOfBandErrorsAsync();
-  }
-
-  /**
-   * Completes normally.
-   */
-  public void testSpuriousFinishTest() {
-    try {
-      finishTest();
-      fail("Unexpected failure");
-    } catch (IllegalStateException e) {
-    }
-  }
-
-  /**
-   * Times out.
-   */
-  public void testTimeoutAsync() {
-    delayTestFinish(100);
-    new Timer() {
-      public void run() {
-        finishTest();
-      }
-    }.schedule(200);
-  }
-
   // Call delayTestFinish() with enough time so that failLater() will
   // definitely fail.
   private void delayTestFinish() {
     delayTestFinish(2500);
   }
 
-  // Fail asynchronously after a small amount of time.
   private void failLater(final String failMsg) {
+    failLater(failMsg, 100);
+  }
+
+  private void failLater(final String failMsg, int delay) {
     new Timer() {
       @Override
       public void run() {
         failNow(failMsg);
       }
-    }.schedule(100);
+    }.schedule(delay);
   }
 
-  // Fail synchronously with an "expected failure" message.
   private void failNow(String failMsg) {
     fail("Expected failure (" + failMsg + ")");
   }
 
-  // Finish the test asynchronously after a small amount of time.
   private void finishTestLater() {
+    finishTestLater(1);
+  }
+
+  private void finishTestLater(int delay) {
     new Timer() {
       @Override
       public void run() {
         finishTest();
       }
-    }.schedule(1);
+    }.schedule(delay);
   }
 
   // Trigger a test failure synchronously, but from within an event handler.
   // (The exception thrown from fail() will get caught by the GWT
   // UncaughtExceptionHandler).
   private void synchronousFailure(final String failMsg) {
-    ButtonElement btn = Document.get().createButtonElement();
+    ButtonElement btn = Document.get().createPushButtonElement();
     Document.get().getBody().appendChild(btn);
     Event.sinkEvents(btn, Event.ONCLICK);
 

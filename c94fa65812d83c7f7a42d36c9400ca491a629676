@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "M-kRWjvc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-12-19T02:38:14Z",
+      "side": 1,
+      "message": "The first line of the CL should be a summary. Maybe something like:\n\n\"Convert manual GWTTestCase tests into automatic tests.\"",
+      "revId": "c94fa65812d83c7f7a42d36c9400ca491a629676",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M.ii96wc",
+        "filename": "user/test/com/google/gwt/junit/ExpectedFailure.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-12-19T02:38:14Z",
+      "side": 1,
+      "message": "Trailing spaces in a lot of these files. (Not that it matters.)",
+      "revId": "c94fa65812d83c7f7a42d36c9400ca491a629676",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M-uQBOhA",
+        "filename": "user/test/com/google/gwt/junit/TestResultWithExpectedFailures.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-12-19T02:38:14Z",
+      "side": 1,
+      "message": "remove extra newline",
+      "revId": "c94fa65812d83c7f7a42d36c9400ca491a629676",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M-oRnpuE",
+        "filename": "user/test/com/google/gwt/junit/TestResultWithExpectedFailures.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2012-12-19T02:38:14Z",
+      "side": 1,
+      "message": "What is this for?",
+      "revId": "c94fa65812d83c7f7a42d36c9400ca491a629676",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

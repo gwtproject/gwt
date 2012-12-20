@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "NHShEIxg",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-12-20T12:31:22Z",
+      "side": 1,
+      "message": "Nit: Git wants us to use a short description of the commit in the first paragraph, for use in logs (git log --oneline, title of the review in Gerrit, or when browsing the repo in Gitiles), similar to javadocs.",
+      "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NHUhof4A",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-12-20T12:31:22Z",
+      "side": 1,
+      "message": "Nit: you can use \"issue 4056\" and Gerrit will create a link to the issue. Gitiles does not seem to do it though.",
+      "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NFAJROmA",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
         "patchSetId": 1
@@ -13,6 +47,41 @@
       "writtenOn": "2012-12-20T02:06:46Z",
       "side": 1,
       "message": "did you find any reference to a firefox bug? \nReference documentation for the second paramter says:\n\"Must be ommited (or null) for regular elements.\"\nIt also says, for firefox 4 and earlier, parameter is required even it is null.\nSo perhaps just passing null as the second param can solve the problem?",
+      "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NHSgS4xc",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-12-20T12:31:22Z",
+      "side": 1,
+      "message": "\"I feel lucky\" for \"getComputedStyle bugzilla\" gave me https://bugzilla.mozilla.org/show_bug.cgi?id\u003d548397 which seems to describe the bug we\u0027re seeing here.",
+      "parentUuid": "NFAJROmA",
+      "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NHQgXJwg",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2012-12-20T12:31:22Z",
+      "side": 1,
+      "message": "Nit: maybe write it as:\n\n    if (style \u003d\u003d null) { // Possible if the document is not currently displayed\n      return 0;\n    }\n    return parseInt(…)\n\nThat\u0027s a matter of style but I, for one, prefer it that way.\n\n\nBTW, that\u0027s an independent issue but we use parseInt() with a single argument here; we might want to use parseInt(x, 10) instead.",
       "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

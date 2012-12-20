@@ -142,13 +142,21 @@ class DOMImplMozilla extends DOMImplStandard {
   @Override
   public native int getBodyOffsetLeft(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, '');
-    return parseInt(style.marginLeft) + parseInt(style.borderLeftWidth);
+    if (style != null) {
+      return parseInt(style.marginLeft) + parseInt(style.borderLeftWidth);
+    } else { // Possible if the document is not currently displayed
+      return 0;
+    }
   }-*/;
 
   @Override
   public native int getBodyOffsetTop(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, '');
-    return parseInt(style.marginTop) + parseInt(style.borderTopWidth);
+    if (style != null) {
+      return parseInt(style.marginTop) + parseInt(style.borderTopWidth);
+    } else { // Possible if the document is not currently displayed
+      return 0;
+    }
   }-*/;
 
   @Override

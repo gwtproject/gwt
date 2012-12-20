@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "NFAJROmA",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2012-12-20T02:06:46Z",
+      "side": 1,
+      "message": "did you find any reference to a firefox bug? \nReference documentation for the second paramter says:\n\"Must be ommited (or null) for regular elements.\"\nIt also says, for firefox 4 and earlier, parameter is required even it is null.\nSo perhaps just passing null as the second param can solve the problem?",
+      "revId": "5d7d8121608fd9d74c90ed9d24e64c7829f61713",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

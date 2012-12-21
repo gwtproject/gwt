@@ -25,6 +25,7 @@ import java.util.Set;
 /**
  * TODO: document me.
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class HashSetTest extends TestSet {
 
   public HashSetTest() {

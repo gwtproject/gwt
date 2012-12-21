@@ -23,6 +23,7 @@ import java.util.Stack;
 /**
  * TODO: document me.
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class StackTest extends GWTTestCase {
 
   public static final int TEST_SEARCH_SIZE = 10;

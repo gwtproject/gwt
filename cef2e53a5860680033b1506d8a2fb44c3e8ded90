@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "NMfRZNic",
+        "filename": "user/test/com/google/gwt/user/client/rpc/RecursiveClassTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2012-12-22T03:23:35Z",
+      "side": 1,
+      "message": "I believe you should be able to avoid the @SuppressWarnings here by writing this method as:\n\n  \u003cT extends ResultNode\u003cT\u003e\u003e public void testRecursiveClass() {\n    ...\n    service.greetServer(\"Hello\", new AsyncCallback\u003cResultNode\u003cT\u003e\u003e() {\n      ...\n      public void onSuccess(ResultNode\u003cT\u003e result) {\n        ...\n      }\n    }\n  }",
+      "revId": "cef2e53a5860680033b1506d8a2fb44c3e8ded90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

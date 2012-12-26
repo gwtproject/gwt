@@ -15,8 +15,8 @@
  */
 package com.google.gwt.user.client.rpc;
 
-import com.google.gwt.user.client.rpc.RecursiveClassTestService.ResultNode;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RecursiveClassTestService.ResultNode;
 
 /**
  * Class used to test generics with wild cards and recursive references.
@@ -26,16 +26,16 @@ public class RecursiveClassTest extends RpcTestBase {
   /**
    * This method is used to test generics with wild cards and recursive references.
    */
-  public void testRecursiveClass() {
+  public <T extends ResultNode<T>> void testRecursiveClass() {
     RecursiveClassTestServiceAsync service = getServiceAsync();
     delayTestFinishForRpc();
    
-    service.greetServer("Hello", new AsyncCallback<ResultNode>() {
+    service.greetServer("Hello", new AsyncCallback<ResultNode<T>>() {
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
-      public void onSuccess(ResultNode result) {
+      public void onSuccess(ResultNode<T> result) {
         assertNotNull(result);
         assertTrue(TestSetValidator.isValidRecurisveClassObject(result));
         finishTest();

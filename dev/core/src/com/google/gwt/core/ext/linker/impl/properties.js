@@ -52,7 +52,7 @@
   __MODULE_FUNC__.__getPropMap = function() {
     var result = {};
     for (var key in values) {
-      if (values.hasOwnProperty(key)){
+      if (values.hasOwnProperty(key)) {
         result[key] = computePropValue(key);
       }
     }

@@ -32,11 +32,13 @@ public abstract class AbstractMessageInterface implements MessageInterface {
     this.factory = factory;
   }
 
+  @Override
   public void accept(MessageInterfaceVisitor cv)
       throws MessageProcessingException {
     accept(cv, factory.getDefault());
   }
 
+  @Override
   public void accept(MessageInterfaceVisitor cv, GwtLocale locale)
       throws MessageProcessingException {
     String defaultLocale = DefaultLocale.DEFAULT_LOCALE;
@@ -62,8 +64,10 @@ public abstract class AbstractMessageInterface implements MessageInterface {
     cv.endMessageInterface(this);
   }
 
+  @Override
   public abstract <A extends Annotation> A getAnnotation(Class<A> annotClass);
 
+  @Override
   public abstract String getClassName();
 
   /**
@@ -73,15 +77,16 @@ public abstract class AbstractMessageInterface implements MessageInterface {
    * @return an iteration of {@link Message} instances
    * @throws MessageProcessingException
    */
-  public abstract Iterable<Message> getMessages()
-      throws MessageProcessingException;
+  public abstract Iterable<Message> getMessages() throws MessageProcessingException;
 
+  @Override
   public abstract String getPackageName();
 
+  @Override
   public abstract String getQualifiedName();
 
-  public abstract boolean isAnnotationPresent(
-      Class<? extends Annotation> annotClass);
+  @Override
+  public abstract boolean isAnnotationPresent(Class<? extends Annotation> annotClass);
  
   @Override
   public String toString() {

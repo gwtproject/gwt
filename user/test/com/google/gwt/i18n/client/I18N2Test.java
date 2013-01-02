@@ -53,7 +53,7 @@ public class I18N2Test extends GWTTestCase {
         m.invertedArguments("first", "second"));
     assertEquals("Don't tell me I can't {quote things in braces}", m.quotedText());
     assertEquals("This {0} would be an argument if not quoted", m.quotedArg());
-    assertEquals("Total is US$11,305.01", m.currencyFormat(11305.01));
+    assertEquals("Total is €11,305.01", m.currencyFormat(11305.01));
     assertEquals("Default number format is 1,017.1", m.defaultNumberFormat(1017.1));
     assertEquals("It is 12:01 on Saturday, 2007 December 01",
         m.getTimeDate(new Date(107, 11, 1, 12, 1, 2)));
@@ -156,9 +156,9 @@ public class I18N2Test extends GWTTestCase {
     String str = timeZoneData.americaLosAngeles();
     TimeZoneInfo tzInfo = TimeZoneInfo.buildTimeZoneData(str);
     TimeZone tz = TimeZone.createTimeZone(tzInfo);
-    assertEquals("in timezone: 2/1/2010 7:04:05 PM", m.inTimezone(date, tz));
+    assertEquals("in timezone: 2/1/2010, 7:04:05 PM", m.inTimezone(date, tz));
 
-    assertEquals("in timezone: 2/1/2010 7:04:05 PM", m.inTimezoneAsSafeHtml(date, tz).asString());
+    assertEquals("in timezone: 2/1/2010, 7:04:05 PM", m.inTimezoneAsSafeHtml(date, tz).asString());
 }
 
   public void testListWithArray() {
@@ -513,9 +513,9 @@ public class I18N2Test extends GWTTestCase {
   public void testStaticTimeZone() {
     TestAnnotatedMessages m = GWT.create(TestAnnotatedMessages.class);
     Date date = new Date(Date.UTC(2010 - 1900, 1, 2, 3, 4, 5));
-    assertEquals("in GMT: 2/2/2010 3:04:05 AM", m.gmt(date));
+    assertEquals("in GMT: 2/2/2010, 3:04:05 AM", m.gmt(date));
 
-    assertEquals("in GMT: 2/2/2010 3:04:05 AM", m.gmtAsSafeHtml(date).asString(
+    assertEquals("in GMT: 2/2/2010, 3:04:05 AM", m.gmtAsSafeHtml(date).asString(
         ));
   }
 

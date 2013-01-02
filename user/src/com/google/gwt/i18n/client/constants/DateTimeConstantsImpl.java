@@ -23,47 +23,72 @@ import com.google.gwt.i18n.client.Constants;
  * GWT's Constants class. The actual symbol collections are defined in a set of
  * property files named like "DateTimeConstants_xx.properties". GWT will will
  * perform late binding to the property file that specific to user's locale.
+ * 
+ * @deprecated use {@link com.google.gwt.i18n.shared.DateTimeFormatInfo}
+ * instead.  This class will be removed in the second major release after 2.6.
  */
+@Deprecated
 public interface DateTimeConstantsImpl extends Constants, DateTimeConstants {
+  @Override
   String[] ampms();
 
+  @Override
   String[] dateFormats();
 
+  @Override
   String[] eraNames();
 
+  @Override
   String[] eras();
 
+  @Override
   String firstDayOfTheWeek();
 
+  @Override
   String[] months();
 
+  @Override
   String[] narrowMonths();
 
+  @Override
   String[] narrowWeekdays();
 
+  @Override
   String[] quarters();
 
+  @Override
   String[] shortMonths();
 
+  @Override
   String[] shortQuarters();
 
+  @Override
   String[] shortWeekdays();
 
+  @Override
   String[] standaloneMonths();
 
+  @Override
   String[] standaloneNarrowMonths();
 
+  @Override
   String[] standaloneNarrowWeekdays();
 
+  @Override
   String[] standaloneShortMonths();
 
+  @Override
   String[] standaloneShortWeekdays();
 
+  @Override
   String[] standaloneWeekdays();
 
+  @Override
   String[] timeFormats();
 
+  @Override
   String[] weekdays();
 
+  @Override
   String[] weekendRange();
 }

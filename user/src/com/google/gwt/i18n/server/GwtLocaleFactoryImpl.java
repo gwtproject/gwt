@@ -90,6 +90,7 @@ public class GwtLocaleFactoryImpl implements GwtLocaleFactory {
     }
   }
 
+  @Override
   public GwtLocale fromComponents(String language, String script,
       String region, String variant) {
     if (language != null && language.length() == 0) {
@@ -131,6 +132,7 @@ public class GwtLocaleFactoryImpl implements GwtLocaleFactory {
    * @throws IllegalArgumentException if the supplied locale does not match
    *     BCP47 structural requirements.
    */
+  @Override
   public GwtLocale fromString(String localeName) {
     String language = null;
     String script = null;
@@ -202,6 +204,7 @@ public class GwtLocaleFactoryImpl implements GwtLocaleFactory {
     return fromComponents(language, script, region, variant);
   }
 
+  @Override
   public GwtLocale getDefault() {
     return fromComponents(null, null, null, null);
   }

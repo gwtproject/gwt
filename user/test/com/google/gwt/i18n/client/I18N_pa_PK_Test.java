@@ -15,8 +15,6 @@
  */
 package com.google.gwt.i18n.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.impl.CldrImpl;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -29,8 +27,8 @@ public class I18N_pa_PK_Test extends GWTTestCase {
     return "com.google.gwt.i18n.I18NTest_pa_PK";
   }
 
-  public void testCldrImpl() {
-    CldrImpl cldr = GWT.create(CldrImpl.class);
-    assertTrue(cldr.isRTL());
+  public void testRTL() {
+    LocaleInfo locale = LocaleInfo.getCurrentLocale();
+    assertTrue(locale.isRTL());
   }
 }

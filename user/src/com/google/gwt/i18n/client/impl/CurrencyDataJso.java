@@ -17,6 +17,7 @@ package com.google.gwt.i18n.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.i18n.client.CurrencyData;
+import com.google.gwt.i18n.shared.impl.CurrencyDataHelper;
 
 /**
  * JSO Overlay type that wraps currency data.
@@ -52,7 +53,7 @@ public final class CurrencyDataJso extends JavaScriptObject implements CurrencyD
 
   @Override
   public int getDefaultFractionDigits() {
-    return CurrencyDataImpl.getDefaultFractionDigits(getFlagsAndPrecision());
+    return CurrencyDataHelper.getDefaultFractionDigits(getFlagsAndPrecision());
   }
 
   @Override
@@ -67,27 +68,27 @@ public final class CurrencyDataJso extends JavaScriptObject implements CurrencyD
 
   @Override
   public boolean isDeprecated() {
-    return CurrencyDataImpl.isDeprecated(getFlagsAndPrecision());
+    return CurrencyDataHelper.isDeprecated(getFlagsAndPrecision());
   }
 
   @Override
   public boolean isSpaceForced() {
-    return CurrencyDataImpl.isSpaceForced(getFlagsAndPrecision());
+    return CurrencyDataHelper.isSpaceForced(getFlagsAndPrecision());
   }
 
   @Override
   public boolean isSpacingFixed() {
-    return CurrencyDataImpl.isSpacingFixed(getFlagsAndPrecision());
+    return CurrencyDataHelper.isSpacingFixed(getFlagsAndPrecision());
   }
 
   @Override
   public boolean isSymbolPositionFixed() {
-    return CurrencyDataImpl.isSymbolPositionFixed(getFlagsAndPrecision());
+    return CurrencyDataHelper.isSymbolPositionFixed(getFlagsAndPrecision());
   }
 
   @Override
   public boolean isSymbolPrefix() {
-    return CurrencyDataImpl.isSymbolPrefix(getFlagsAndPrecision());
+    return CurrencyDataHelper.isSymbolPrefix(getFlagsAndPrecision());
   }
 
   private native int getFlagsAndPrecision() /*-{

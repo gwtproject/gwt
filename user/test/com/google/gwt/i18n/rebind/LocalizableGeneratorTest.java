@@ -179,31 +179,27 @@ public class LocalizableGeneratorTest extends TestCase {
     assertEquals("foo.Test_en_runtimeSelection", genClass);
     StringWriter buf = bufs.get("Test_en_runtimeSelection");
     String genText = buf.toString();
-    String ensureStartString = "void ensureInstance() {\n";
-    int ensurePos = genText.indexOf(ensureStartString);
-    assertTrue("Did not find ensureInstance", ensurePos >= 0);
-    ensurePos += ensureStartString.length();
-    String ensureEndString = "  }\n}\n";
-    int ensureEndPos = genText.length() - ensureEndString.length();
-    assertEquals(ensureEndString, genText.substring(ensureEndPos));
-    String ensureBody = genText.substring(ensurePos, ensureEndPos);
-    BufferedReader reader = new BufferedReader(new StringReader(ensureBody));
-    // skip past prolog
-    String line = reader.readLine();
-    while (!line.contains("getLocaleName()")) {
-      line = reader.readLine();
+    String methodStartString = "ensureInstance() {\n";
+    int methodPos = genText.indexOf(methodStartString);
+    assertTrue("Did not find ensureInstance", methodPos >= 0);
+    methodPos += methodStartString.length();
+    String methodEndString = "  }\n}\n";
+    int methodEndPos = genText.indexOf(methodEndString, methodPos);
+    String methodBody = genText.substring(methodPos, methodEndPos);
+    BufferedReader reader = new BufferedReader(new StringReader(methodBody));
+    for (int i = 0; i < 7; ++i) {
+      reader.readLine();
     }
-    assertEquals("if (\"en_GB\".equals(locale)) {", reader.readLine().trim());
-    assertEquals("instance = new foo.Test_en_GB();", reader.readLine().trim());
-    assertEquals("return;", reader.readLine().trim());
-    assertEquals("}", reader.readLine().trim());
-    assertEquals("if (\"en_US\".equals(locale)", reader.readLine().trim());
-    assertEquals("|| \"en_US_POSIX\".equals(locale)) {", reader.readLine().trim());
-    assertEquals("instance = new foo.Test_en_US();", reader.readLine().trim());
-    assertEquals("return;", reader.readLine().trim());
-    assertEquals("}", reader.readLine().trim());
-    assertEquals("instance = new foo.Test();", reader.readLine().trim());
-    assertNull(reader.readLine());
+    assertTrue(reader.readLine().contains("en_GB"));
+    assertTrue(reader.readLine().contains("en_GB("));
+    reader.readLine();
+    reader.readLine();
+    assertTrue(reader.readLine().contains("en_US"));
+    assertTrue(reader.readLine().contains("en_US_POSIX"));
+    assertTrue(reader.readLine().contains("en_US("));
+    reader.readLine();
+    reader.readLine();
+    assertTrue(reader.readLine().contains("Test("));
   }
 
   @Override
@@ -216,10 +212,12 @@ public class LocalizableGeneratorTest extends TestCase {
     testClass = typeOracle.getType("foo.TestClass");
     bufs = new HashMap<String, StringWriter>();
     ctx = new CodeGenContext() {
+      @Override
       public JavaSourceWriterBuilder addClass(String pkgName, String className) {
         return addClass(null, pkgName, className);
       }
       
+      @Override
       public JavaSourceWriterBuilder addClass(String superPath, String pkgName, String className) {
         StringWriter buf = new StringWriter();
         bufs.put(className, buf);
@@ -227,26 +225,32 @@ public class LocalizableGeneratorTest extends TestCase {
         return new JavaSourceWriterBuilder(apw, pkgName, className);
       }
       
+      @Override
       public void error(String msg) {
         fail(msg);
       }
       
+      @Override
       public void error(String msg, Throwable cause) {
         fail(msg);
       }
       
+      @Override
       public void error(Throwable cause) {
         fail(cause.getMessage());
       }
       
+      @Override
       public void warn(String msg) {
         System.out.println(msg);
       }
       
+      @Override
       public void warn(String msg, Throwable cause) {
         System.out.println(msg);
       }
       
+      @Override
       public void warn(Throwable cause) {
         System.out.println(cause.getMessage());
       }

@@ -96,6 +96,7 @@ public abstract class AbstractParameter implements Parameter {
     this.type = type;
   }
 
+  @Override
   public synchronized AlternateMessageSelector getAlternateMessageSelector() {
     if (altMsgSelector == null) {
       altMsgSelector = computeAlternateMessageSelector();
@@ -103,18 +104,23 @@ public abstract class AbstractParameter implements Parameter {
     return altMsgSelector;
   }
 
+  @Override
   public abstract <A extends Annotation> A getAnnotation(Class<A> annotClass);
 
+  @Override
   public int getIndex() {
     return index;
   }
 
+  @Override
   public abstract String getName();
 
+  @Override
   public Type getType() {
     return type;
   }
 
+  @Override
   public boolean isAnnotationPresent(Class<? extends Annotation> annotClass) {
     return getAnnotation(annotClass) != null;
   }
@@ -140,6 +146,7 @@ public abstract class AbstractParameter implements Parameter {
     if (selectAnnot != null) {
       final String[] validValues = type.getEnumValues();
       return new AlternateMessageSelector() {
+        @Override
         public boolean isFormAcceptable(String form) {
           if (validValues == null || AlternateMessageSelector.OTHER_FORM_NAME.equals(form)) {
             return true;

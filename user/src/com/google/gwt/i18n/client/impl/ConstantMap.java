@@ -55,10 +55,12 @@ public class ConstantMap extends AbstractMap<String, String> {
       return false;
     }
 
+    @Override
     public String getKey() {
       return key;
     }
 
+    @Override
     public String getValue() {
       return value;
     }
@@ -79,6 +81,7 @@ public class ConstantMap extends AbstractMap<String, String> {
       return keyHash ^ valueHash;
     }
 
+    @Override
     public String setValue(String value) {
       throw new UnsupportedOperationException();
     }
@@ -138,10 +141,12 @@ public class ConstantMap extends AbstractMap<String, String> {
         return new Iterator<Entry<String, String>>() {
           private int next = 0;
 
+          @Override
           public boolean hasNext() {
             return next < ConstantMap.this.size();
           }
 
+          @Override
           public Entry<String, String> next() {
             if (!hasNext()) {
               throw new NoSuchElementException();
@@ -150,6 +155,7 @@ public class ConstantMap extends AbstractMap<String, String> {
             return new EntryImpl(key, get(key));
           }
 
+          @Override
           public void remove() {
             throw new UnsupportedOperationException();
           }

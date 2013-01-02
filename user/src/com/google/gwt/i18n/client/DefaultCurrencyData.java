@@ -20,11 +20,7 @@ package com.google.gwt.i18n.client;
  * to the interface without breaking implementors if a reasonable default is
  * available.
  */
-public class DefaultCurrencyData implements CurrencyData {
-
-  private final String currencyCode;
-  private final String currencySymbol;
-  private final int fractionDigits;
+public class DefaultCurrencyData extends com.google.gwt.i18n.shared.DefaultCurrencyData implements CurrencyData {
 
   /**
    * Create a default default {@link CurrencyData} instance, returning {@code
@@ -35,7 +31,7 @@ public class DefaultCurrencyData implements CurrencyData {
    * @param currencySymbol symbol to use for this currency
    */
   public DefaultCurrencyData(String currencyCode, String currencySymbol) {
-    this(currencyCode, currencySymbol, 2);
+    super(currencyCode, currencySymbol);
   }
 
   /**
@@ -49,58 +45,6 @@ public class DefaultCurrencyData implements CurrencyData {
    */
   public DefaultCurrencyData(String currencyCode, String currencySymbol,
       int fractionDigits) {
-    this.currencyCode = currencyCode;
-    this.currencySymbol = currencySymbol;
-    this.fractionDigits = fractionDigits;
-  }
-
-  @Override
-  public String getCurrencyCode() {
-    return currencyCode;
-  }
-
-  @Override
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  @Override
-  public int getDefaultFractionDigits() {
-    return fractionDigits;
-  }
-
-  @Override
-  public String getPortableCurrencySymbol() {
-    return getCurrencySymbol();
-  }
-
-  @Override
-  public String getSimpleCurrencySymbol() {
-    return getCurrencySymbol();
-  }
-
-  @Override
-  public boolean isDeprecated() {
-    return false;
-  }
-
-  @Override
-  public boolean isSpaceForced() {
-    return false;
-  }
-
-  @Override
-  public boolean isSpacingFixed() {
-    return false;
-  }
-
-  @Override
-  public boolean isSymbolPositionFixed() {
-    return false;
-  }
-
-  @Override
-  public boolean isSymbolPrefix() {
-    return false;
+    super(currencyCode, currencySymbol, fractionDigits);
   }
 }

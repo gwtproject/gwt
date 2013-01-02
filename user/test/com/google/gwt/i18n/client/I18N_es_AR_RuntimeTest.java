@@ -89,7 +89,7 @@ public class I18N_es_AR_RuntimeTest extends GWTTestCase {
     MyMessages msg = GWT.create(MyMessages.class);
     assertEquals("es_419", msg.getSourceLocale());
     MyConstants cst = GWT.create(MyConstants.class);
-    // Since our copile-time locale is es_419 (Latin America), we do
+    // Since our compile-time locale is es_419 (Latin America), we do
     // not get es_019 (Central America) in the inheritance chain for
     // es_AR as only the compile-time locales are used for translation
     // inheritance.

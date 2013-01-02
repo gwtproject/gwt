@@ -20,6 +20,8 @@ import com.google.gwt.core.shared.GWTBridge;
 import com.google.gwt.i18n.server.GwtLocaleFactoryImpl;
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
+import com.google.gwt.i18n.shared.LocaleInfo;
+import com.google.gwt.i18n.shared.Locales;
 import com.google.gwt.i18n.shared.Localizable;
 
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class ServerGwtBridge extends GWTBridge {
      * @param clazz
      * @return class instance or null
      */
-    protected <T> T tryCreate(Class<T> clazz) {
+    protected static <T> T tryCreate(Class<T> clazz) {
       try {
         T obj = clazz.newInstance();
         return obj;
@@ -77,7 +79,7 @@ public class ServerGwtBridge extends GWTBridge {
      * @param className
      * @return class instance or null
      */
-    protected <T> T tryCreate(String className) {
+    protected static <T> T tryCreate(String className) {
       try {
         Class<?> clazz = Class.forName(className);
         @SuppressWarnings("unchecked")
@@ -86,6 +88,31 @@ public class ServerGwtBridge extends GWTBridge {
       } catch (ClassNotFoundException e) {
       }
       return null;
+    }
+  }
+
+  /**
+   * Base class for class instantiators that cache the results per locale.
+   */
+  public abstract static class CachingClassInstantiatorBase extends ClassInstantiatorBase {
+
+    private final Object cacheLock = new Object[0];
+    private final Map<GwtLocale, Object> cache = new HashMap<GwtLocale, Object>();
+
+    protected abstract <T> T createForLocale(Class<T> clazz, GwtLocale locale);
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T create(Class<?> clazz, Properties properties) {
+      GwtLocale locale = ServerGwtBridge.getLocale(properties);
+      synchronized (cacheLock) {
+        T obj = (T) cache.get(locale);
+        if (obj == null) {
+          obj = createForLocale((Class<T>) clazz, locale);
+          cache.put(locale, obj);
+        }
+        return obj;
+      }
     }
   }
 
@@ -103,6 +130,25 @@ public class ServerGwtBridge extends GWTBridge {
     String getProperty(String name);
   }
 
+  // @VisibleForTesting
+  static class PropertiesImpl implements Properties {
+    private final Object lock = new Object[0];
+    private final Map<String, String> map = new HashMap<String, String>();
+
+    @Override
+    public String getProperty(String name) {
+      synchronized (lock) {
+        return map.get(name);
+      }
+    }
+
+    public void setProperty(String name, String value) {
+      synchronized (lock) {
+        map.put(name, value);
+      }
+    }
+  }
+
   /**
    * A node in the tree of registered classes, keeping track of class
    * instantiators for each type.  {@link Object} is at the root of the
@@ -118,24 +164,6 @@ public class ServerGwtBridge extends GWTBridge {
       this.type = type;
       children = new ArrayList<Node>();
       instantiators = new ArrayList<ClassInstantiator>();
-    }
-  }
-
-  private static class PropertiesImpl implements Properties {
-    private final Object lock = new Object[0];
-    private final Map<String, String> map = new HashMap<String, String>();
-
-    @Override
-    public String getProperty(String name) {
-      synchronized (lock) {
-        return map.get(name);
-      }
-    }
-
-    public void setProperty(String name, String value) {
-      synchronized (lock) {
-        map.put(name, value);
-      }
     }
   }
 
@@ -188,6 +216,14 @@ public class ServerGwtBridge extends GWTBridge {
     return factory.fromString(propVal);
   }
 
+  public static GwtLocale getLocale(String localeName) {
+    return factory.fromString(localeName);
+  }
+
+  public static GwtLocaleFactory getLocaleFactory() {
+    return factory;
+  }
+
   /**
    * Root of the tree of registered classes and their instantiators.
    */
@@ -214,6 +250,8 @@ public class ServerGwtBridge extends GWTBridge {
     // register built-in instantiators
     register(Object.class, new ObjectNew());
     register(Localizable.class, new LocalizableInstantiator());
+    register(LocaleInfo.class, new LocaleInfoInstantiator());
+    register(Locales.class, new LocalesInstantiator());
   }
 
   @Override

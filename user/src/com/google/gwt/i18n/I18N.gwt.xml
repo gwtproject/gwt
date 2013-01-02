@@ -18,7 +18,9 @@
   <inherits name="com.google.gwt.core.Core" />
   <inherits name="com.google.gwt.regexp.RegExp"/>
   <inherits name="com.google.gwt.safehtml.SafeHtml"/>
-  <source path="" includes="client/,shared/" />
+  <source path="client"/>
+  <source path="shared"/>
+  <super-source path="super"/>
 
   <!-- Browser-sensitive code should use the 'locale' client property. -->
   <!-- 'default' is always defined.                                    -->
@@ -79,10 +81,7 @@
     <when-type-assignable class="com.google.gwt.i18n.shared.Localizable" />
   </generate-with>
   <generate-with class="com.google.gwt.i18n.rebind.LocaleInfoGenerator">
-    <when-type-is class="com.google.gwt.i18n.client.impl.LocaleInfoImpl" />
-  </generate-with>
-  <generate-with class="com.google.gwt.i18n.rebind.CurrencyListGenerator">
-    <when-type-is class="com.google.gwt.i18n.client.CurrencyList" />
+    <when-type-is class="com.google.gwt.i18n.shared.Locales" />
   </generate-with>
   <generate-with class="com.google.gwt.i18n.rebind.CustomDateTimeFormatGenerator">
     <when-type-assignable class="com.google.gwt.i18n.shared.CustomDateTimeFormat" />

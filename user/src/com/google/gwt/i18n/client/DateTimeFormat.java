@@ -16,7 +16,7 @@
 package com.google.gwt.i18n.client;
 
 import com.google.gwt.i18n.client.constants.DateTimeConstants;
-import com.google.gwt.i18n.client.impl.cldr.DateTimeFormatInfoImpl_en;
+import com.google.gwt.i18n.shared.cldr.DateTimeFormatInfoImpl_en;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -382,18 +382,19 @@ import java.util.Map;
  * 
  * <h3>Example</h3> {@example com.google.gwt.examples.DateTimeFormatExample}
  *
- * deprecated use {@link com.google.gwt.i18n.shared.DateTimeFormat} instead
+ * deprecated use {@link com.google.gwt.i18n.shared.DateTimeFormatImpl} instead
  */
 // Temporarily remove deprecation to keep from breaking teams that don't allow
 // deprecated references.
 // @Deprecated
-public class DateTimeFormat extends com.google.gwt.i18n.shared.DateTimeFormat {
+@SuppressWarnings("deprecation")
+public class DateTimeFormat extends com.google.gwt.i18n.shared.impl.DateTimeFormatImpl {
 
   /**
    * Predefined date/time formats -- see {@link CustomDateTimeFormat} if you
    * need some format that isn't supplied here.
    *
-   * deprecated use {@link com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat} instead
+   * deprecated use {@link com.google.gwt.i18n.shared.DateTimeFormatImpl.PredefinedFormat} instead
    */
    // Temporarily remove deprecation to keep from breaking teams that don't allow
    // deprecated references.
@@ -455,6 +456,13 @@ public class DateTimeFormat extends com.google.gwt.i18n.shared.DateTimeFormat {
     YEAR_QUARTER_ABBR,
   }
 
+  /**
+   * Adapter class to make the English implementation of DTFI implement the client-side interface
+   * required here. 
+   */
+  private static class EnglishDTFI extends DateTimeFormatInfoImpl_en implements DateTimeFormatInfo {    
+  }
+
   private static final Map<String, DateTimeFormat> cache;
 
   static {
@@ -475,15 +483,15 @@ public class DateTimeFormat extends com.google.gwt.i18n.shared.DateTimeFormat {
       String pattern;
       switch (predef) {
         case RFC_2822:
-          pattern = com.google.gwt.i18n.shared.DateTimeFormat.RFC2822_PATTERN;
+          pattern = com.google.gwt.i18n.shared.impl.DateTimeFormatImpl.RFC2822_PATTERN;
           break;
         case ISO_8601:
-          pattern = com.google.gwt.i18n.shared.DateTimeFormat.ISO8601_PATTERN;
+          pattern = com.google.gwt.i18n.shared.impl.DateTimeFormatImpl.ISO8601_PATTERN;
           break;
         default:
           throw new IllegalStateException("Unexpected predef type " + predef);
       }
-      return getFormat(pattern, new DateTimeFormatInfoImpl_en());
+      return getFormat(pattern, new EnglishDTFI());
     }
     DateTimeFormatInfo dtfi = getDefaultDateTimeFormatInfo();
     String pattern;

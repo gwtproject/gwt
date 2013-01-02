@@ -396,13 +396,23 @@ public class LocaleData {
 
   public void addEntries(String category, Factory cldrFactory, String prefix, String tag,
       String keyAttribute) {
+    addEntries(category, cldrFactory, prefix, tag, keyAttribute, "value");
+  }
+
+  public void addEntries(String category, Factory cldrFactory, String prefix, String tag,
+      String keyAttribute, String mapKey) {
     for (GwtLocale locale : allLocales.keySet()) {
-      addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute);
+      addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute, mapKey);
     }
   }
 
   public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
       String tag, String keyAttribute) {
+    addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute, "value");
+  }
+
+  public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
+      String tag, String keyAttribute, String mapKey) {
     Map<String, String> map = getMap(category, locale);
     CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
     XPathParts parts = new XPathParts();
@@ -424,7 +434,7 @@ public class LocaleData {
       }
       String value = cldr.getStringValue(path);
       boolean draft = parts.containsAttribute("draft");
-      String key = keyAttribute != null ? attr.get(keyAttribute) : "value";
+      String key = keyAttribute != null ? attr.get(keyAttribute) : mapKey;
       if (!draft || !map.containsKey(key)) {
         map.put(key, value);
       }
@@ -1116,5 +1126,9 @@ public class LocaleData {
       }
     });
     return keys;
+  }
+
+  public GwtLocaleFactory getLocaleFactory() {
+    return localeFactory;
   }
 }

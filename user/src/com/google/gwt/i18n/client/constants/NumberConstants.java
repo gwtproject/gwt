@@ -27,24 +27,5 @@ package com.google.gwt.i18n.client.constants;
  * If you previously were using GWT.create on this interface, you should
  * use LocaleInfo.getCurrentLocale().getNumberConstants() instead.
  */
-public interface NumberConstants {
-  String notANumber();
-  String currencyPattern();
-  String decimalPattern();
-  String decimalSeparator();
-  String defCurrencyCode();
-  String exponentialSymbol();
-  String globalCurrencyPattern();
-  String groupingSeparator();
-  String infinity();
-  String minusSign();
-  String monetaryGroupingSeparator();
-  String monetarySeparator();
-  String percent();
-  String percentPattern();
-  String perMill();
-  String plusSign();
-  String scientificPattern();
-  String simpleCurrencyPattern();
-  String zeroDigit();
+public interface NumberConstants extends com.google.gwt.i18n.shared.NumberConstants {
 }

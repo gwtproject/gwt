@@ -32,43 +32,52 @@ public abstract class SourceWriterBase implements SourceWriter {
 
   private int indent;
 
+  @Override
   public abstract void abort();
 
+  @Override
   public void beginJavaDocComment() {
     println("\n/**");
     inComment = true;
   }
 
+  @Override
   public void close() {
     outdent();
     println("}");
   }
 
+  @Override
   public void endJavaDocComment() {
     inComment = false;
     println("\n */");
   }
 
+  @Override
   public void indent() {
     indent++;
   }
 
+  @Override
   public void indentln(String string) {
     indent();
     println(string);
     outdent();
   }
 
+  @Override
   public void indentln(String format, Object... args) {
     indentln(String.format(format, args));
   }
 
+  @Override
   public void outdent() {
     if (indent > 0) {
       --indent;
     }
   }
 
+  @Override
   public void print(String s) {
     // If we just printed a newline, print an indent.
     //
@@ -98,20 +107,24 @@ public abstract class SourceWriterBase implements SourceWriter {
     }
   }
 
+  @Override
   public void print(String format, Object... args) {
     print(String.format(format, args));
   }
 
+  @Override
   public void println() {
     print("\n");
     atStart = true;
   }
 
+  @Override
   public void println(String string) {
     print(string);
     println();
   }
 
+  @Override
   public void println(String format, Object... args) {
     println(String.format(format, args));
   }

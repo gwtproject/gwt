@@ -25,7 +25,6 @@ import com.google.gwt.i18n.server.MessageFormatUtils.TemplateChunk;
 import com.google.gwt.i18n.server.MessageFormatUtils.VisitorAbortException;
 import com.google.gwt.i18n.shared.DateTimeFormatInfo;
 import com.google.gwt.i18n.shared.GwtLocale;
-import com.google.gwt.i18n.shared.impl.cldr.DateTimeFormatInfoImpl;
 
 import org.unicode.cldr.util.Factory;
 
@@ -112,8 +111,9 @@ public class DateTimeFormatInfoProcessor extends Processor {
 
   private final RegionLanguageData regionLanguageData;
 
-  public DateTimeFormatInfoProcessor(File outputDir, Factory cldrFactory, LocaleData localeData) {
-    super(outputDir, cldrFactory, localeData);
+  public DateTimeFormatInfoProcessor(File outputDir, Factory cldrFactory, LocaleData localeData,
+      LocaleData sharedLocaleData) {
+    super(outputDir, cldrFactory, localeData, sharedLocaleData);
     regionLanguageData = new RegionLanguageData(cldrFactory);
   }
 
@@ -417,38 +417,35 @@ public class DateTimeFormatInfoProcessor extends Processor {
    * Write an output file.
    * 
    * @param locale
-   * @param clientShared "client" or "shared", determines the package names
-   *     being written to
+   * @param isClient true if we are generating the client package files
    * @throws IOException
    * @throws FileNotFoundException
    */
-  protected void writeOneOutputFile(GwtLocale locale, String clientShared) throws IOException,
+  protected void writeOneOutputFile(GwtLocale locale, boolean isClient) throws IOException,
       FileNotFoundException {
     // TODO(jat): make uz_UZ inherit from uz_Cyrl rather than uz, for example
+    String clientShared = isClient ? "client" : "shared";
     String myClass;
     String pathSuffix;
-    if (locale.isDefault()) {
-      if ("client".equals(clientShared)) {
-        // The client default is hand-written code that extends the shared one.
-        return;
-      }
-      myClass = "DefaultDateTimeFormatInfo";
-      pathSuffix = "/";
-    } else {
-      myClass = "DateTimeFormatInfoImpl" + localeSuffix(locale);
-      pathSuffix = "/impl/cldr/";
+    sharedLocaleData.addEntry("genClasses", locale, "DateTimeFormatInfo",
+        "com.google.gwt.i18n.shared.cldr.DateTimeFormatInfoImpl" + localeSuffix(locale));
+    if (locale.isDefault() && isClient) {
+      // The client default is hand-written code that extends the shared one.
+      return;
     }
+    myClass = "DateTimeFormatInfoImpl" + localeSuffix(locale);
+    pathSuffix = isClient ? "/impl/cldr/" : "/cldr/";
     GwtLocale parent = localeData.inheritsFrom(locale);
     PrintWriter pw = createOutputFile(clientShared + pathSuffix + myClass + ".java");
     printHeader(pw);
-    pw.print("package com.google.gwt.i18n." + clientShared);
     // GWT now requires JDK 1.6, so we always generate @Overrides
     setOverrides(true);
-    if (!locale.isDefault()) {
-      pw.print(".impl.cldr");
-    }
-    pw.println(";");
+    pw.print("package com.google.gwt.i18n." + clientShared + ".cldr;");
     pw.println();
+    if (locale.isDefault()) {
+      pw.println("import com.google.gwt.i18n.shared.DateTimeFormatInfo;");
+      pw.println();
+    }
     pw.println("// DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA");
     Map<String, String> map = localeData.getEntries("version", locale);
     for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -476,12 +473,7 @@ public class DateTimeFormatInfoProcessor extends Processor {
     if (locale.isDefault()) {
       pw.print(" implements " + DateTimeFormatInfo.class.getSimpleName());
     } else {
-      pw.print(" extends ");
-      pw.print(DateTimeFormatInfoImpl.class.getSimpleName());
-      if (!parent.isDefault()) {
-        pw.print('_');
-        pw.print(parent.getAsString());
-      }
+      pw.print(" extends DateTimeFormatInfoImpl" + localeSuffix(parent));
     }
     pw.println(" {");
 
@@ -549,8 +541,8 @@ public class DateTimeFormatInfoProcessor extends Processor {
     System.out.println("Writing output for date/time formats");
     for (GwtLocale locale : localeData.getNonEmptyLocales()) {
       // TODO(jat): remove client when we no longer need it
-      writeOneOutputFile(locale, "client");
-      writeOneOutputFile(locale, "shared");
+      // writeOneOutputFile(locale, true);
+      writeOneOutputFile(locale, false);
     }
   }
 

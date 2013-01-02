@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "NfAYImuQ",
+        "filename": "user/src/com/google/gwt/core/server/LocalesInstantiator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "Too many blank lines.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfCYNlvU",
+        "filename": "user/src/com/google/gwt/i18n/I18N.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "This type name isn\u0027t accurate any more, as it actually produces implementations of the Locales type rather than LocaleInfo.\n\nHowever, I thought some people may have specifically referenced it.\n\nIf that isn\u0027t an concern, I will rename it to LocalesGenerator.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfIbXKk0",
+        "filename": "user/src/com/google/gwt/i18n/shared/DateTimeFormat.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "Oops, left out the file comment.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfCbS9lg",
+        "filename": "user/src/com/google/gwt/i18n/shared/DefaultLocalizedNamesBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "Hmm, this should probably move to shared.impl as it isn\u0027t a public API.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfEZEUhk",
+        "filename": "user/src/com/google/gwt/i18n/shared/NumberConstants.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "This should have been a char originally, since this can only be a single digit.  However, doing this would complicate backwards compatibility with the client-side APIs, requiring wrappers in each direction.  So, I didn\u0027t think it was worth it, but it does mean we are stuck with it essentially forever if we don\u0027t change it now.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfEZdMuU",
+        "filename": "user/src/com/google/gwt/i18n/shared/NumberFormat.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "Note that this is different from the existing client-side API, which mutates the existing formatter.  I tried to keep as many things as possible immutable in the shared API, so this returns a new formatter with the override.\n\nThis is a land-mine for people just changing the import from the client version to shared, since they may have code that expects this call to mutate the formatter.\n\nShould this method be renamed to make such breakage clear at compile time?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NfIZ2SmQ",
+        "filename": "user/test/com/google/gwt/i18n/I18NSuite.java.orig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-02T21:18:55Z",
+      "side": 1,
+      "message": "This file should be removed.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "NkpAAVA0",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/CurrencyDataProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "The CLDR import code was originally written before SourceWriter support was extracted out of rebind.  I looked at using it for these, but I kept running into little things that required more work than it seemed to be worth.",
+      "parentUuid": "NhB4mrbg",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NhL5J.WE",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2013-01-03T02:35:30Z",
       "side": 1,
       "message": "Can we remove this line along with the above TODO instead of commenting it?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NknAGECk",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "Yes, I will do that (and remove the unnecessary parameter).",
+      "parentUuid": "NhL5J.WE",
       "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +157,24 @@
     },
     {
       "key": {
+        "uuid": "NklADDBc",
+        "filename": "user/src/com/google/gwt/core/server/CldrInstantiator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "These are all going to be ones that are registered by default in ServerGwtBridge, so it seems like they should stay in core unless they are not automatically registered.\n\nThis is related to the discussion we had earlier about whether to consider i18n as core functionality or not.",
+      "parentUuid": "NhP5oobM",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NhJ5nXeA",
         "filename": "user/src/com/google/gwt/core/server/LocaleInfoInstantiator.java",
         "patchSetId": 2
@@ -132,6 +186,24 @@
       "writtenOn": "2013-01-03T02:35:30Z",
       "side": 1,
       "message": "locale.toString() is called twice, and the GwtLocale is not used here besides that toString() call; can\u0027t we factor the two calls to a single one and pass a String here in place of the GwtLocale?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NkjAQiFo",
+        "filename": "user/src/com/google/gwt/core/server/LocaleInfoInstantiator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NhJ5nXeA",
       "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -166,6 +238,24 @@
       "writtenOn": "2013-01-03T02:35:30Z",
       "side": 1,
       "message": "I think we should at least log.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NkhANhD4",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "To where?  We don\u0027t know if the app is using j.u logging, Log4J, or something else.\n\nI thought of throwing an exception and letting GWT.create propagate it, but then the question is do we want to block the app running if this file can\u0027t be read.  It wasn\u0027t clear to me that we do.",
+      "parentUuid": "NhB5Ubew",
       "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +313,24 @@
     },
     {
       "key": {
+        "uuid": "NkvAaAHg",
+        "filename": "user/src/com/google/gwt/i18n/client/DateTimeFormat.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NhH6qUdg",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NhF6nlQ4",
         "filename": "user/src/com/google/gwt/i18n/client/DateTimeFormat.java",
         "patchSetId": 2
@@ -251,6 +359,24 @@
       "writtenOn": "2013-01-03T02:35:30Z",
       "side": 1,
       "message": "Maybe remove the above comment then? (see also DateTimeFormat where the same original comment has been handled differently)",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NktAf-GU",
+        "filename": "user/src/com/google/gwt/i18n/client/DefaultDateTimeFormatInfo.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-03T03:07:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NhD60yTk",
       "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

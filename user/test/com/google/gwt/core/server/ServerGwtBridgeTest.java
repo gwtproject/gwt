@@ -18,6 +18,7 @@ package com.google.gwt.core.server;
 import com.google.gwt.core.server.ServerGwtBridge.ClassInstantiatorBase;
 import com.google.gwt.core.server.ServerGwtBridge.Properties;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.i18n.shared.LocaleInfo;
 import com.google.gwt.i18n.shared.Localizable;
 
 import junit.framework.TestCase;
@@ -100,6 +101,7 @@ public class ServerGwtBridgeTest extends TestCase {
   private final String de = "de";
   private final String defaultLocale = "default";
   private final String en = "en";
+  private final String en_DE = "en_DE";
   private final String en_GB = "en_GB";
   private final String en_US = "en_US";
   private final String en_US_POSIX = "en_US_POSIX";
@@ -261,5 +263,15 @@ public class ServerGwtBridgeTest extends TestCase {
       fail("expected exception");
     } catch (RuntimeException expected) {
     }
+  }
+
+  public void testLocaleInfo() {
+    // Verify a non-existent locale returns the proper name 
+    bridge.setGlobalProperty("locale", en_DE);
+    LocaleInfo localeInfo_en_DE = bridge.create(LocaleInfo.class);
+    assertEquals(en_DE, localeInfo_en_DE.getLocaleName());
+    bridge.setGlobalProperty("locale", en);
+    LocaleInfo localeInfo_en = bridge.create(LocaleInfo.class);
+    assertEquals(en, localeInfo_en.getLocaleName());
   }
 }

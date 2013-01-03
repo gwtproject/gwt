@@ -17,6 +17,7 @@ package com.google.gwt.i18n;
 
 import com.google.gwt.i18n.client.AnnotationsTest;
 import com.google.gwt.i18n.client.ArabicPluralsTest;
+import com.google.gwt.i18n.client.ConstantMapTest;
 import com.google.gwt.i18n.client.CurrencyTest;
 import com.google.gwt.i18n.client.CustomPluralsTest;
 import com.google.gwt.i18n.client.DateTimeFormat_de_Test;
@@ -50,9 +51,13 @@ import com.google.gwt.i18n.client.TimeZoneTest;
 import com.google.gwt.i18n.rebind.LocaleUtilsTest;
 import com.google.gwt.i18n.rebind.LocalizableGeneratorTest;
 import com.google.gwt.i18n.server.GwtLocaleTest;
+import com.google.gwt.i18n.server.JavaLocaleInfo_en_US_Test;
 import com.google.gwt.i18n.server.MessageFormatParserTest;
+import com.google.gwt.i18n.server.OrdinalRuleTest;
+import com.google.gwt.i18n.server.PluralRuleTest;
 import com.google.gwt.i18n.server.PropertyCatalogFactoryTest;
 import com.google.gwt.i18n.server.RegionInheritanceTest;
+import com.google.gwt.i18n.server.ServerNumberFormat_en_Test;
 import com.google.gwt.i18n.server.impl.ReflectionMessageInterfaceTest;
 import com.google.gwt.i18n.shared.AnyRtlDirectionEstimatorTest;
 import com.google.gwt.i18n.shared.BidiFormatterTest;
@@ -98,6 +103,7 @@ public class I18NSuite {
     suite.addTestSuite(I18N_es_MX_RuntimeTest.class);
     suite.addTestSuite(I18N_en_US_Test.class);
     suite.addTestSuite(I18N_nb_Test.class);
+    suite.addTestSuite(JavaLocaleInfo_en_US_Test.class);
     suite.addTestSuite(LocaleInfo_ar_Test.class);
     suite.addTestSuite(LocaleInfoTest.class);
     suite.addTestSuite(LocaleUtilsTest.class);
@@ -111,11 +117,14 @@ public class I18NSuite {
     suite.addTestSuite(NumberFormat_fr_Test.class);
     suite.addTestSuite(NumberParse_en_Test.class);
     suite.addTestSuite(NumberParse_fr_Test.class);
+    suite.addTestSuite(OrdinalRuleTest.class);
+    suite.addTestSuite(PluralRuleTest.class);
     suite.addTestSuite(PolishPluralsTest.class);
     suite.addTestSuite(PropertyCatalogFactoryTest.class);
     suite.addTestSuite(ReflectionMessageInterfaceTest.class);
     suite.addTestSuite(RegionInheritanceTest.class);
     suite.addTestSuite(RuntimeLocalesTest.class);
+    suite.addTestSuite(ServerNumberFormat_en_Test.class);
     suite.addTestSuite(TimeZoneInfoTest.class);
     suite.addTestSuite(TimeZoneTest.class);
     /*

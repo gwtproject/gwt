@@ -51,7 +51,8 @@ class LocalizableLinkageCreator extends AbstractSourceCreator {
         if (localeIndex != -1) {
           subTypeBaseName = name.substring(0, localeIndex);
         }
-        boolean matches = subTypeBaseName.equals(baseName);
+        boolean matches = subTypeBaseName.equals(baseName)
+            || subTypeBaseName.equals(baseName + "Impl");
         if (matches) {
           boolean isDefault = localeIndex == -1
               || localeIndex == name.length() - 1
@@ -89,7 +90,101 @@ class LocalizableLinkageCreator extends AbstractSourceCreator {
    * Map to cache linkages of implementation classes and interfaces.
    */
   // Change back to ReferenceMap once apache collections is in.
-  private final Map<String, String> implCache = new HashMap<String, String>();
+  private final Map<String, LocaleClass> implCache = new HashMap<String, LocaleClass>();
+
+  static class LocaleClass {
+    public final GwtLocale locale;
+    public final String className;
+    
+    public LocaleClass(GwtLocale locale, String className) {
+      this.locale = locale;
+      this.className = className;
+    }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((className == null) ? 0 : className.hashCode());
+      result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (obj == null || getClass() != obj.getClass()) {
+        return false;
+      }
+      LocaleClass other = (LocaleClass) obj;
+      if (className == null) {
+        if (other.className != null) {
+          return false;
+        }
+      } else if (!className.equals(other.className)) {
+        return false;
+      }
+      if (locale == null) {
+        if (other.locale != null) {
+          return false;
+        }
+      } else if (!locale.equals(other.locale)) {
+        return false;
+      }
+      return true;
+    }
+  }
+
+  /**
+   * * Finds associated implementation in the current locale. Here are the rules
+   * <p>
+   * </p>
+   * <p>
+   * If class name is X, and locale is z_y, look for X_z_y, then X_z, then X
+   * </p>
+   * 
+   * @param logger
+   * @param baseClass
+   * @param locale
+   * 
+   * @return class name and the matched locale
+   * @throws UnableToCompleteException
+   */
+  LocaleClass findBestLocale(TreeLogger logger, JClassType baseClass,
+      GwtLocale locale) throws UnableToCompleteException {
+    String baseName = baseClass.getQualifiedSourceName();
+    /**
+     * Try to find implementation class, as the current class is not a Constant
+     * or Message.
+     */
+    LocaleClass retval = implCache.get(baseName + locale.toString());
+    if (retval != null) {
+      return retval;
+    }
+
+    if (baseClass.getName().indexOf(ResourceFactory.LOCALE_SEPARATOR) != -1) {
+      throw error(logger, "Cannot have a " + ResourceFactory.LOCALE_SEPARATOR
+          + " in the base localizable class " + baseClass);
+    }
+    Map<String, JClassType> matchingClasses =
+      findDerivedClasses(logger, baseClass);
+    // Now that we have all matches, find best class
+    JClassType result = null;  
+    for (GwtLocale search : locale.getCompleteSearchList()) {
+      result = matchingClasses.get(search.toString());
+      if (result != null) {
+        String className = result.getQualifiedSourceName();
+        retval = new LocaleClass(search, className);
+        implCache.put(baseName + locale.toString(), retval);
+        return retval;
+      }
+    }
+    // No classes matched.
+    throw error(logger, "Cannot find a class to bind to argument type "
+            + baseClass.getQualifiedSourceName());
+  }
 
   /**
    * * Finds associated implementation in the current locale. Here are the rules
@@ -105,34 +200,7 @@ class LocalizableLinkageCreator extends AbstractSourceCreator {
    */
   String linkWithImplClass(TreeLogger logger, JClassType baseClass,
       GwtLocale locale) throws UnableToCompleteException {
-    String baseName = baseClass.getQualifiedSourceName();
-    /**
-     * Try to find implementation class, as the current class is not a Constant
-     * or Message.
-     */
-    String className = implCache.get(baseName + locale.toString());
-    if (className != null) {
-      return className;
-    }
-
-    if (baseClass.getName().indexOf(ResourceFactory.LOCALE_SEPARATOR) != -1) {
-      throw error(logger, "Cannot have a " + ResourceFactory.LOCALE_SEPARATOR
-          + " in the base localizable class " + baseClass);
-    }
-    Map<String, JClassType> matchingClasses =
-      findDerivedClasses(logger, baseClass);
-    // Now that we have all matches, find best class
-    JClassType result = null;  
-    for (GwtLocale search : locale.getCompleteSearchList()) {
-      result = matchingClasses.get(search.toString());
-      if (result != null) {
-        className = result.getQualifiedSourceName();
-        implCache.put(baseName + locale.toString(), className);
-        return className;
-      }
-    }
-    // No classes matched.
-    throw error(logger, "Cannot find a class to bind to argument type "
-            + baseClass.getQualifiedSourceName());
+    LocaleClass result = findBestLocale(logger, baseClass, locale);
+    return result.className;
   }
 }

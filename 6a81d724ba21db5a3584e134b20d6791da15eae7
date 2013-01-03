@@ -2,6 +2,176 @@
   "comments": [
     {
       "key": {
+        "uuid": "NhL4UWUs",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/CurrencyDataProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Nit: space",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhB4mrbg",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/CurrencyDataProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Any reason you\u0027re not using a SourceWriter?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhL5J.WE",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Can we remove this line along with the above TODO instead of commenting it?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhJ5OPWY",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/ListFormattingProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Nit: use spaces instead of tabs",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhH40kdw",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleInfoProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "2013?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhB47Tcs",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/PluralOrdinalProcessor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Nit: use spaces instead of tabs",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhP5oobM",
+        "filename": "user/src/com/google/gwt/core/server/CldrInstantiator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Should this be c.g.g.i18n.server instead?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhJ5nXeA",
+        "filename": "user/src/com/google/gwt/core/server/LocaleInfoInstantiator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "locale.toString() is called twice, and the GwtLocale is not used here besides that toString() call; can\u0027t we factor the two calls to a single one and pass a String here in place of the GwtLocale?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhD5XKfU",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Nit: spaces",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhB5Ubew",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "I think we should at least log.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NfAYImuQ",
         "filename": "user/src/com/google/gwt/core/server/LocalesInstantiator.java",
         "patchSetId": 2
@@ -30,6 +200,57 @@
       "writtenOn": "2013-01-02T21:18:55Z",
       "side": 1,
       "message": "This type name isn\u0027t accurate any more, as it actually produces implementations of the Locales type rather than LocaleInfo.\n\nHowever, I thought some people may have specifically referenced it.\n\nIf that isn\u0027t an concern, I will rename it to LocalesGenerator.",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhH6qUdg",
+        "filename": "user/src/com/google/gwt/i18n/client/DateTimeFormat.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Is the \"temporary non-deprecation\" still needed?",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhF6nlQ4",
+        "filename": "user/src/com/google/gwt/i18n/client/DateTimeFormat.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Nit: spaces",
+      "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NhD60yTk",
+        "filename": "user/src/com/google/gwt/i18n/client/DefaultDateTimeFormatInfo.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-03T02:35:30Z",
+      "side": 1,
+      "message": "Maybe remove the above comment then? (see also DateTimeFormat where the same original comment has been handled differently)",
       "revId": "6a81d724ba21db5a3584e134b20d6791da15eae7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

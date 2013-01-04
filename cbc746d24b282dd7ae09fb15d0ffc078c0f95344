@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "NoiBzX.I",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleInfoProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T17:54:35Z",
+      "side": 1,
+      "message": "Yes, or using another object to maintain the state sounds fine as well.",
+      "parentUuid": "NoQcNGvQ",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NoqYvkvc",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
         "patchSetId": 3

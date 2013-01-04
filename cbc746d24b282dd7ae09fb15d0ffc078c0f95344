@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Noadcbuo",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/GenerateGwtCldrData.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "I\u0027m not sure why they are different, as I have used the same Eclipse workspace for all of it -- I\u0027ll go through everything and check for this.",
+      "parentUuid": "NooYxLu4",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NouaVmqE",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/ListFormattingProcessor.java",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "NoYd0ylw",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/ListFormattingProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "There weren\u0027t actually any empty files already, since writeOutputFiles uses \"getNonEmptyLocales\".\n\nEventually this file will go away, as when I replace the message generation code it will use the pure Java implementation rather than fooling with property files.",
+      "parentUuid": "NosZ99mE",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Nogaxnv8",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleInfoProcessor.java",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "maybe extract a little method for the if (first) {....} pattern to make it a little more readable.",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoQcNGvQ",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleInfoProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "So something like:\n\nfirst \u003d printlnIfFirst(first);\n\nA lot of this will be much cleaner when using SourceWriter, which will take care of sorting and grouping the imports automatically.  After Thomas\u0027s comment, I\u0027m going to take a look at how much work it would be to do that.",
+      "parentUuid": "Nogaxnv8",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "NoWf8Jqw",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "I see more value being consistent with CLDR, since it is the data source.  I\u0027m not sure why ICU is different from CLDR.",
+      "parentUuid": "NoqYvkvc",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NosZbtoA",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
         "patchSetId": 3
@@ -98,6 +170,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "pw.println( above?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoecwNqc",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NosZbtoA",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "NoQc2eqA",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NoqbscoQ",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Noqah0k4",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
         "patchSetId": 3
@@ -132,6 +240,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "add a TODO explaining what this code when this code will be eventually used",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoacqLi8",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Actually, this should be removed - it is left over from a discarded approach.",
+      "parentUuid": "Noqah0k4",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -172,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "NoccvMj4",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/NumberConstantsProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NooaJLtc",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Nosa-NmA",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/PluralOrdinalProcessor.java",
         "patchSetId": 3
@@ -206,6 +350,41 @@
     },
     {
       "key": {
+        "uuid": "NoQfj2v8",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/PluralOrdinalProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "If we get an exception here, we are going to abort and the output isn\u0027t going to be used anyway, so I don\u0027t think we need to.",
+      "parentUuid": "NooZoTt4",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoUf54qc",
+        "filename": "tools/cldr-import/test/com/google/gwt/tools/cldr/PluralRuleParserTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Needs file comment.",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NorQqWC8",
         "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
         "patchSetId": 3
@@ -217,6 +396,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "introduce a method for the above code from localeNamesTemp to here",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoafA7k0",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NorQqWC8",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -240,6 +437,24 @@
     },
     {
       "key": {
+        "uuid": "NocfF8lw",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NotQv3D0",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NojQTqHE",
         "filename": "user/src/com/google/gwt/i18n/rebind/LocalizableGenerator.java",
         "patchSetId": 3
@@ -251,6 +466,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "indentln",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoUeAAgA",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LocalizableGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NojQTqHE",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -274,6 +507,24 @@
     },
     {
       "key": {
+        "uuid": "NoeeBFgQ",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LocalizableGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "NolQQrGE",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Noo904Vw",
         "filename": "user/src/com/google/gwt/i18n/shared/NumberConstants.java",
         "patchSetId": 3
@@ -285,6 +536,24 @@
       "writtenOn": "2013-01-04T01:01:59Z",
       "side": 1,
       "message": "any need for javadoc here?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoaeLDiA",
+        "filename": "user/src/com/google/gwt/i18n/shared/NumberConstants.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-04T06:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Noo904Vw",
       "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

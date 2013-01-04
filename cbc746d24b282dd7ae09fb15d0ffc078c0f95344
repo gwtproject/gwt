@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "NooYxLu4",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/GenerateGwtCldrData.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "inconsistent usage of hard tabs and spaces",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NouaVmqE",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/ListFormattingProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "hard tabs here as well",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NosZ99mE",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/ListFormattingProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "the existing version doesn\u0027t create the file if the map is empty, is there a reason to do so?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Nogaxnv8",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleInfoProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "maybe extract a little method for the if (first) {....} pattern to make it a little more readable.",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoqYvkvc",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "in LocaleData for ICU I see this as \"pattern\" instead of \"localePattern\" and \"separator\" instead of \"localeSeparator\".  do you see any value in being consistent with their key?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NosZbtoA",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "pw.println( above?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NoqbscoQ",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "nit: I think I would prefer either an else clause to assign the baseName, a ternary expression, or return within the if clause.",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Noqah0k4",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "add a TODO explaining what this code when this code will be eventually used",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NosamVmQ",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocalizedNamesProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "same here..",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NooaJLtc",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/NumberConstantsProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "extract a constant for magic string \"numbers\"",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Nosa-NmA",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/PluralOrdinalProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "hard tabs",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NooZoTt4",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/PluralOrdinalProcessor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "do you want try-finally here for this print writer?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NorQqWC8",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "introduce a method for the above code from localeNamesTemp to here",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NotQv3D0",
+        "filename": "user/src/com/google/gwt/core/server/LocalesImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "introduce a method for the above code from hasAnyRtlTemp to here",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NojQTqHE",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LocalizableGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "indentln",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "NolQQrGE",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LocalizableGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "indentln",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Noo904Vw",
+        "filename": "user/src/com/google/gwt/i18n/shared/NumberConstants.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-04T01:01:59Z",
+      "side": 1,
+      "message": "any need for javadoc here?",
+      "revId": "cbc746d24b282dd7ae09fb15d0ffc078c0f95344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

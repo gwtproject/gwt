@@ -15,9 +15,11 @@
  */
 package com.google.gwt.cell.client;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
-import com.google.gwt.i18n.client.TimeZone;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.i18n.shared.LocaleInfo;
+import com.google.gwt.i18n.shared.TimeZone;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.text.shared.SafeHtmlRenderer;
 import com.google.gwt.text.shared.SimpleSafeHtmlRenderer;
@@ -40,7 +42,7 @@ public class DateCell extends AbstractCell<Date> {
    * {@link PredefinedFormat#DATE_FULL} and a {@link SimpleSafeHtmlRenderer}.
    */
   public DateCell() {
-    this(DateTimeFormat.getFormat(PredefinedFormat.DATE_FULL),
+    this(GWT.<LocaleInfo>create(LocaleInfo.class).dateTimes().getFormat(PredefinedFormat.DATE_FULL),
         SimpleSafeHtmlRenderer.getInstance(), null);
   }
 
@@ -52,7 +54,8 @@ public class DateCell extends AbstractCell<Date> {
    *          formatted date as HTML
    */
   public DateCell(SafeHtmlRenderer<String> renderer) {
-    this(DateTimeFormat.getFormat(PredefinedFormat.DATE_FULL), renderer, null);
+    this(GWT.<LocaleInfo>create(LocaleInfo.class).dateTimes().getFormat(PredefinedFormat.DATE_FULL),
+        renderer, null);
   }
 
   /**

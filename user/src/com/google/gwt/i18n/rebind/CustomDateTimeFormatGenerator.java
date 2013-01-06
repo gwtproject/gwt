@@ -29,6 +29,7 @@ import com.google.gwt.i18n.shared.CustomDateTimeFormat;
 import com.google.gwt.i18n.shared.CustomDateTimeFormat.Pattern;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.i18n.shared.GwtLocale;
+import com.google.gwt.i18n.shared.LocaleInfo;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -106,7 +107,6 @@ public class CustomDateTimeFormatGenerator extends Generator {
       ClassSourceFileComposerFactory factory = new ClassSourceFileComposerFactory(
           packageName, className);
       factory.addImplementedInterface(targetClass.getQualifiedSourceName());
-      factory.addImport("com.google.gwt.i18n.client.DateTimeFormat");
       SourceWriter writer = factory.createSourceWriter(context, pw);
       writer.indent();
       for (JMethod method : targetClass.getMethods()) {
@@ -132,10 +132,20 @@ public class CustomDateTimeFormatGenerator extends Generator {
         }
         pattern = dtpg.getBestPattern(pattern); 
         writer.println();
-        String retTypeName = method.getReturnType().getQualifiedSourceName();
+        String retTypeName = returnType.getQualifiedSourceName();
         writer.println("public " + retTypeName + " " + method.getName() + "() {");
-        writer.println("  return " + retTypeName + ".getFormat(\"" + pattern
-            + "\");");
+        if (dateTimeFormat == returnType) {
+          // for shared DateTimeFormat, we use a factory method via LocaleInfo
+          String localeInfoClass = LocaleInfo.class.getCanonicalName();
+          writer.println("  return com.google.gwt.core.shared.GWT.<" + localeInfoClass + ">create("
+              + localeInfoClass + ".class).dateTimes().getFormat(\"" + pattern + "\");");
+        } else {
+          // for client-side DateTimeFormat, we use a static factory method
+          writer.println("  return " + retTypeName + ".getFormat(\"" + pattern
+              + "\");");
+        }
+        // MUSTFIX(jat): make this use DateTimeFormatFactory if the return type is
+        // the shared version
         writer.println("}");
       }
       writer.commit(logger);

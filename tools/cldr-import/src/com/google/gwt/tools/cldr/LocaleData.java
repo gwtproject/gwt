@@ -265,6 +265,98 @@ public class LocaleData {
     }
   }
 
+  public static final String WIDTH_ABBREV = "abbrev";
+
+  public static final String WIDTH_NARROW = "narrow";
+
+  public static final String WIDTH_WIDE = "wide";
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_ABBREV(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_ABBREV, false);
+  }
+
+  /**
+   * Generate the narrow category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_NARROW(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_NARROW, false);
+  }
+
+  /**
+   * Generate the stand-alone abbreviated category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_ABBREV(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_ABBREV, true);
+  }
+
+  /**
+   * Generate the stand-alone narrow category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_NARROW(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_NARROW, true);
+  }
+
+  /**
+   * Generate the stand-alone wide category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_WIDE(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_WIDE, true);
+  }
+
+  /**
+   * Generate the wide category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDE(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_WIDE, false);
+  }
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @param size
+   * @param standAlone
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDTH(String period, String size, boolean standAlone) {
+    return CATEGORY_PERIOD_WIDTH(period, size, standAlone, false);
+  }
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @param size
+   * @param standAlone
+   * @param redirect
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDTH(String period, String size, boolean standAlone,
+      boolean redirect) {
+    return period + (standAlone ? "-sa-" : "-") + size + (redirect ? "-redirect" : "");
+  }
+
   /**
    * Return the CLDR locale name for a GWT locale.
    * 
@@ -396,13 +488,23 @@ public class LocaleData {
 
   public void addEntries(String category, Factory cldrFactory, String prefix, String tag,
       String keyAttribute) {
+    addEntries(category, cldrFactory, prefix, tag, keyAttribute, "value");
+  }
+
+  public void addEntries(String category, Factory cldrFactory, String prefix, String tag,
+      String keyAttribute, String mapKey) {
     for (GwtLocale locale : allLocales.keySet()) {
-      addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute);
+      addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute, mapKey);
     }
   }
 
   public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
       String tag, String keyAttribute) {
+    addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute, "value");
+  }
+
+  public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
+      String tag, String keyAttribute, String mapKey) {
     Map<String, String> map = getMap(category, locale);
     CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
     XPathParts parts = new XPathParts();
@@ -424,7 +526,7 @@ public class LocaleData {
       }
       String value = cldr.getStringValue(path);
       boolean draft = parts.containsAttribute("draft");
-      String key = keyAttribute != null ? attr.get(keyAttribute) : "value";
+      String key = keyAttribute != null ? attr.get(keyAttribute) : mapKey;
       if (!draft || !map.containsKey(key)) {
         map.put(key, value);
       }
@@ -441,25 +543,25 @@ public class LocaleData {
    * @param cldrFactory
    */
   public void addNameEntries(String period, Factory cldrFactory) {
-    addEntries(period + "-abbrev", cldrFactory,
+    addEntries(CATEGORY_PERIOD_ABBREV(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"format\"]/" + period + "Width[@type=\"abbreviated\"]", period,
         "type");
-    addEntries(period + "-narrow", cldrFactory,
+    addEntries(CATEGORY_PERIOD_NARROW(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"format\"]/" + period + "Width[@type=\"narrow\"]", period, "type");
-    addEntries(period + "-wide", cldrFactory,
+    addEntries(CATEGORY_PERIOD_WIDE(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"format\"]/" + period + "Width[@type=\"wide\"]", period, "type");
-    addEntries(period + "-sa-abbrev", cldrFactory,
+    addEntries(CATEGORY_PERIOD_SA_ABBREV(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"stand-alone\"]/" + period + "Width[@type=\"abbreviated\"]", period,
         "type");
-    addEntries(period + "-sa-narrow", cldrFactory,
+    addEntries(CATEGORY_PERIOD_SA_NARROW(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"stand-alone\"]/" + period + "Width[@type=\"narrow\"]", period,
         "type");
-    addEntries(period + "-sa-wide", cldrFactory,
+    addEntries(CATEGORY_PERIOD_SA_WIDE(period), cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"stand-alone\"]/" + period + "Width[@type=\"wide\"]", period, "type");
   }
@@ -645,6 +747,10 @@ public class LocaleData {
       }
     }
     return null;
+  }
+
+  public GwtLocaleFactory getLocaleFactory() {
+    return localeFactory;
   }
 
   /**

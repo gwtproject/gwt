@@ -66,6 +66,7 @@ public class PropertyCatalogFactory implements MessageCatalogFactory {
       this.writer = writer;
     }
 
+    @Override
     public void close() throws IOException {
       writer.close();
     }
@@ -75,6 +76,7 @@ public class PropertyCatalogFactory implements MessageCatalogFactory {
       baseKey = null;
     }
 
+    @Override
     public MessageInterfaceVisitor visitClass() {
       return this;
     }
@@ -200,10 +202,12 @@ public class PropertyCatalogFactory implements MessageCatalogFactory {
     }
   }
 
+  @Override
   public String getExtension() {
     return ".properties";
   }
 
+  @Override
   public Writer getWriter(Context context,
       String fileName) {
     PrintWriter pw = context.createTextFile(fileName, "UTF-8");

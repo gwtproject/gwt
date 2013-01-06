@@ -15,6 +15,8 @@
  */
 package com.google.gwt.codegen.server;
 
+import com.google.gwt.codegen.server.JavaSourceWriterBuilder.CallbackHooks;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,20 +50,47 @@ public class JavaSourceWriter extends SourceWriterBase {
       Iterable<String> imports, boolean isClass, String classJavaDocComment,
       Iterable<String> annotationDeclarations, String targetClassShortName, String superClassName,
       Iterable<String> interfaceNames) {
+    this(printWriter, null, targetPackageName, imports, isClass, classJavaDocComment,
+        annotationDeclarations, targetClassShortName, superClassName, interfaceNames);
+  }
+
+  /**
+   * @param printWriter
+   * @param targetPackageName
+   * @param imports
+   * @param isClass
+   * @param classJavaDocComment
+   * @param annotationDeclarations
+   * @param targetClassShortName
+   * @param superClassName
+   * @param interfaceNames
+   */
+  public JavaSourceWriter(AbortablePrintWriter printWriter, CallbackHooks callbacks,
+      String targetPackageName, Iterable<String> imports, boolean isClass,
+      String classJavaDocComment, Iterable<String> annotationDeclarations,
+      String targetClassShortName, String superClassName, Iterable<String> interfaceNames) {
     this.printWriter = printWriter;
     if (targetPackageName == null) {
       throw new IllegalArgumentException("Cannot supply a null package name to"
           + targetClassShortName);
     }
-    // TODO: support a user-specified file header
+    if (callbacks != null) {
+      callbacks.beforeFileStart(printWriter);
+    }
     if (targetPackageName.length() > 0) {
       println("package " + targetPackageName + ";");
+    }
+    if (callbacks != null) {
+      callbacks.afterPackage(printWriter);
     }
 
     // Write imports, splitting into com.google, other, and java/javax groups
     writeImportGroup(imports, PKG_REGEX_GOOGLE, true);
     writeImportGroup(imports, PKG_REGEX_BOTH, false);
     writeImportGroup(imports, PKG_REGEX_JAVA, true);
+    if (callbacks != null) {
+      callbacks.afterImports(printWriter);
+    }
 
     // Write class header
     if (classJavaDocComment != null) {
@@ -82,6 +111,9 @@ public class JavaSourceWriter extends SourceWriterBase {
     }
     println(" {");
     indent();
+    if (callbacks != null) {
+      callbacks.afterClassStart(printWriter);
+    }
   }
 
   @Override

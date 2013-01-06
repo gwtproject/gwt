@@ -16,23 +16,29 @@
 package com.google.gwt.i18n.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.i18n.client.constants.TimeZoneConstants;
-import com.google.gwt.i18n.client.impl.cldr.DateTimeFormatInfoImpl_de;
 import com.google.gwt.i18n.shared.DateTimeFormatTestBase;
+import com.google.gwt.i18n.shared.cldr.DateTimeFormatInfoImpl_de;
 
 import java.util.Date;
 
 /**
- * Tests formatting functionality in {@link com.google.gwt.i18n.shared.DateTimeFormat} for the
- * English language.
+ * Tests formatting functionality in {@link DateTimeFormat} for the "en" locale.
  */
 @SuppressWarnings("deprecation")
 public class DateTimeFormat_en_Test extends DateTimeFormatTestBase {
 
   private static class GermanDTF extends DateTimeFormat {
+    /**
+     * Adapter class to make the German implementation of DTFI implement the client-side interface
+     * required here. 
+     */
+    private static class GermanDTFI extends DateTimeFormatInfoImpl_de implements DateTimeFormatInfo {    
+    }
 
     public static DateTimeFormat getFormat(String pattern) {
-      return DateTimeFormat.getFormat(pattern, new DateTimeFormatInfoImpl_de());
+      return DateTimeFormat.getFormat(pattern, new GermanDTFI());
     }
 
     protected GermanDTF(String pattern) {
@@ -571,5 +577,23 @@ public class DateTimeFormat_en_Test extends DateTimeFormatTestBase {
     fmt = DateTimeFormat.getFormat("dd.MM.yyyyy");
     str = fmt.format(new Date(2001 - 1900, 0, 1)); // 1 Jan 2001
     assertEquals("01.01.02001", str);
+  }
+
+  public void testIso8601() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601);
+    Date date = new Date(Date.UTC(2006 - 1900, 6, 27, 13, 10, 10));
+    String str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("2006-07-27T08:10:10.000-05:00", str);
+
+    date = dtf.parse("2006-07-27T13:10:10.000Z");
+    str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("2006-07-27T08:10:10.000-05:00", str);
+  }
+
+  public void testRfc2822() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.RFC_2822);
+    Date date = new Date(Date.UTC(2006 - 1900, 6, 27, 13, 10, 10));
+    String str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("Thu, 27 Jul 2006 08:10:10 -0500", str);
   }
 }

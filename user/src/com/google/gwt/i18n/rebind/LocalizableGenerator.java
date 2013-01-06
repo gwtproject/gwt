@@ -36,6 +36,7 @@ import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.i18n.client.Messages;
+import com.google.gwt.i18n.rebind.LocalizableLinkageCreator.LocaleClass;
 import com.google.gwt.i18n.shared.GwtLocale;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class LocalizableGenerator extends Generator {
    */
   public class JMethodComparator implements Comparator<JMethod> {
 
+    @Override
     public int compare(JMethod a, JMethod b) {
       if (a.isPublic() != b.isPublic()) {
         return a.isPublic() ? -1 : 1;
@@ -139,6 +141,7 @@ public class LocalizableGenerator extends Generator {
   public final String generate(TreeLogger logger, GeneratorContext context,
       String typeName, LocaleUtils localeUtils, GwtLocale locale) throws UnableToCompleteException {
     TypeOracle typeOracle = context.getTypeOracle();
+    CodeGenContext genCtx = new GwtCodeGenContext(logger, context);
     JClassType targetClass;
     try {
       targetClass = typeOracle.getType(typeName);
@@ -157,14 +160,14 @@ public class LocalizableGenerator extends Generator {
     // Now that we know it is a regular Localizable class, handle runtime
     // locales
     Set<GwtLocale> runtimeLocales = localeUtils.getRuntimeLocales();
-    String returnedClass = linkageCreator.linkWithImplClass(logger, targetClass, locale);
+    String returnedClass = chooseLocalizableImplementation(genCtx, logger, targetClass, locale);
     if (!runtimeLocales.isEmpty()) {
       Map<String, Set<GwtLocale>> localeMap = new TreeMap<String, Set<GwtLocale>>();
       Set<GwtLocale> localeSet = new TreeSet<GwtLocale>();
       localeSet.add(locale);
       localeMap.put(returnedClass, localeSet);
       for (GwtLocale rtLocale : runtimeLocales) {
-        String rtClass = linkageCreator.linkWithImplClass(logger, targetClass, rtLocale);
+        String rtClass = chooseLocalizableImplementation(genCtx, logger, targetClass, rtLocale);
         localeSet = localeMap.get(rtClass);
         if (localeSet == null) {
           localeSet = new TreeSet<GwtLocale>();
@@ -173,7 +176,6 @@ public class LocalizableGenerator extends Generator {
         localeSet.add(rtLocale);
       }
       if (localeMap.size() > 1) {
-        CodeGenContext genCtx = new GwtCodeGenContext(logger, context);
         returnedClass = generateRuntimeSelection(genCtx, targetClass, returnedClass, locale,
             localeMap);
       }
@@ -266,7 +268,10 @@ public class LocalizableGenerator extends Generator {
     writer.indentln("return;");
     writer.println("}");
     writer.println("String locale = " + LocaleInfo.class.getCanonicalName()
-        + ".getCurrentLocale().getLocaleName();");
+        + ".getRuntimeLocale();");
+    writer.println("if (locale == null) {");
+    writer.println("  locale = \"" + locale.toString() + "\";");
+    writer.println("}");
     String targetClassName = targetClass.getQualifiedSourceName() + '_' + locale.getAsString();
     for (Map.Entry<String, Set<GwtLocale>> entry : localeMap.entrySet()) {
       String implClassName = entry.getKey();
@@ -292,8 +297,39 @@ public class LocalizableGenerator extends Generator {
   }
 
   /**
+   * Choose which implementation to use for a {@link Localizable} class.
+   * <p>
+   * Note that {@link LocaleInfo} is special-cased -- we need to generate an override for whatever
+   * implementation is chosen that returns the actual name from {@link LocaleInfo#getLocaleName}. 
+   *
+   * @param ctx
+   * @param logger
    * @param targetClass
-   * @return a set of overrideable methods, in the order they should appear in
+   * @param locale
+   * @return
+   * @throws UnableToCompleteException
+   */
+  private String chooseLocalizableImplementation(CodeGenContext ctx, TreeLogger logger,
+      JClassType targetClass, GwtLocale locale) throws UnableToCompleteException {
+    LocaleClass localizableMatch = linkageCreator.findBestLocale(logger, targetClass, locale);
+    String matchedClass = localizableMatch.className;
+    if (locale != localizableMatch.locale) {
+      /*
+       * If the locale found wasn't an exact match, check to see if we need to make a custom
+       * implementation for this locale.  This is ugly, but until we have some other case it seems
+       * better to have a special-case here rather than to generalize this.
+       */
+      if (com.google.gwt.i18n.shared.LocaleInfo.class.getCanonicalName().equals(
+          targetClass.getQualifiedSourceName())) {
+        return generateLocaleInfoOverride(ctx, matchedClass, locale);
+      }
+    } 
+    return matchedClass;
+  }
+
+  /**
+   * @param targetClass
+   * @return a set of overridable methods, in the order they should appear in
    *     generated source 
    */
   private TreeSet<JMethod> collectOverridableMethods(JClassType targetClass) {
@@ -333,6 +369,36 @@ public class LocalizableGenerator extends Generator {
       }
     }
     return overrides;
+  }
+
+  /**
+   * Generate an implementation of {@link LocaleInfo} that returns the correct locale name, but
+   * otherwise defers to the best-match implementation.
+   * 
+   * @param ctx
+   * @param matchedClass
+   * @param locale
+   * @return generated class name
+   */
+  private String generateLocaleInfoOverride(CodeGenContext ctx, String matchedClass,
+      GwtLocale locale) {
+    String className = com.google.gwt.i18n.shared.LocaleInfo.class.getSimpleName() + '_'
+        + locale.getAsString();
+    String pkgName = com.google.gwt.i18n.shared.LocaleInfo.class.getPackage().getName();
+    JavaSourceWriterBuilder builder = ctx.addClass(pkgName, className);
+    if (builder != null) {
+      builder.setSuperclass(matchedClass);
+      SourceWriter writer = builder.createSourceWriter();
+      writer.println();
+      writer.println("@Override");
+      writer.println("public String getLocaleName() {");
+      writer.indent();
+      writer.println("return \"" + locale.toString() + "\";");
+      writer.outdent();
+      writer.println("}");
+      writer.close();
+    }
+    return pkgName + '.' + className;
   }
 
   /**

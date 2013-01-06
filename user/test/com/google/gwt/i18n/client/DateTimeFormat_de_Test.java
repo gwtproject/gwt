@@ -16,6 +16,7 @@
 package com.google.gwt.i18n.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.i18n.shared.DateTimeFormatTestBase;
 
 import java.util.Date;
@@ -228,5 +229,23 @@ public class DateTimeFormat_de_Test extends DateTimeFormatTestBase {
     MyMessages m = GWT.create(MyMessages.class);
     Date d = new Date(2010 - 1900, 1, 15, 12, 0, 0);
     assertEquals("Es ist 15. Feb 2010", m.getCustomizedDate(d));
+  }
+
+  public void testIso8601() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601);
+    Date date = new Date(Date.UTC(2006 - 1900, 6, 27, 13, 10, 10));
+    String str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("2006-07-27T08:10:10.000-05:00", str);
+
+    date = dtf.parse("2006-07-27T13:10:10.000Z");
+    str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("2006-07-27T08:10:10.000-05:00", str);
+  }
+
+  public void testRfc2822() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.RFC_2822);
+    Date date = new Date(Date.UTC(2006 - 1900, 6, 27, 13, 10, 10));
+    String str = dtf.format(date, TEST_TIMEZONE);
+    assertEquals("Thu, 27 Jul 2006 08:10:10 -0500", str);
   }
 }

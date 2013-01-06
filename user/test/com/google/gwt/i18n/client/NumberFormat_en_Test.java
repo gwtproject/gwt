@@ -23,6 +23,7 @@ import java.math.BigInteger;
 /**
  * Test {@link NumberFormat} in the {@code en} locale.
  */
+@SuppressWarnings("deprecation")
 public class NumberFormat_en_Test extends GWTTestCase {
 
   /**
@@ -505,19 +506,6 @@ public class NumberFormat_en_Test extends GWTTestCase {
     assertEquals("1E3", str);
   }
 
-  public void testToScaledString() {
-    StringBuilder buf = new StringBuilder();
-    int scale = NumberFormat.toScaledString(buf, .1);
-    String str = buf.toString();
-    assertStartsWith("100", str.substring(str.length() + scale));
-    assertAllZeros(str, str.length() + scale);
-    buf = new StringBuilder();
-    scale = NumberFormat.toScaledString(buf, 12345e38);
-    str = buf.toString();
-    assertStartsWith("12345", str);
-    assertEquals(43, scale + str.length());
-  }
-
   public void testZeros() {
     String str;
 
@@ -538,15 +526,6 @@ public class NumberFormat_en_Test extends GWTTestCase {
     assertEquals(".0", str);
     str = NumberFormat.getFormat("#").format(0);
     assertEquals("0", str);
-  }
-
-  private void assertAllZeros(String str, int prefixLen) {
-    if (prefixLen > str.length()) {
-      prefixLen = str.length();
-    }
-    for (int i = 0; i < prefixLen; ++i) {
-      assertEquals('0', str.charAt(i));
-    }
   }
 
   private void assertStartsWith(String prefix, String str) {

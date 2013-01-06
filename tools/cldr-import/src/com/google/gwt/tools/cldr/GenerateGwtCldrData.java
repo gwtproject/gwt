@@ -36,13 +36,15 @@ import java.util.Set;
  * Generate a country list for each locale, taking into account the literate
  * population of each country speaking the language.
  */
-@SuppressWarnings("unchecked")
 public class GenerateGwtCldrData {
 
   private static final GwtLocaleFactory factory = new GwtLocaleFactoryImpl();
 
-  private static final String DEFAULT_PROCESSORS = "CurrencyDataProcessor,"
-      + "DateTimeFormatInfoProcessor,ListFormattingProcessor,LocalizedNamesProcessor";
+  private static final String DEFAULT_PROCESSORS = "CurrencyDataProcessor"
+      + ",DateTimeFormatInfoProcessor,ListFormattingProcessor"
+      + ",LocalizedNamesProcessor,NumberConstantsProcessor,PluralOrdinalProcessor"
+      + ",LocaleInfoProcessor"  // must be last
+      ;
 
   public static void main(String[] args) throws IOException, SecurityException,
       NoSuchMethodException, IllegalArgumentException, InstantiationException,
@@ -97,10 +99,12 @@ public class GenerateGwtCldrData {
     System.out.println("Processing " + locales.size() + " locales");
     File outputDir = new File(targetDir);
     LocaleData localeData = new LocaleData(factory, locales);
+    LocaleData sharedLocaleData = new LocaleData(factory, locales);
     for (Class<? extends Processor> processorClass : processorClasses) {
-      Constructor<? extends Processor> ctor =
-          processorClass.getConstructor(File.class, Factory.class, LocaleData.class);
-      Processor processor = ctor.newInstance(outputDir, cldrFactory, localeData);
+      Constructor<? extends Processor> ctor = processorClass.getConstructor(File.class,
+          Factory.class, LocaleData.class, LocaleData.class);
+      Processor processor = ctor.newInstance(outputDir, cldrFactory, localeData,
+          sharedLocaleData);
       processor.run();
     }
     System.out.println("Finished.");

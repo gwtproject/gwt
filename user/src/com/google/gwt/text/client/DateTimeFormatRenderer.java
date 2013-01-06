@@ -15,15 +15,15 @@
  */
 package com.google.gwt.text.client;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
-import com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.i18n.shared.TimeZone;
 import com.google.gwt.text.shared.AbstractRenderer;
 
 import java.util.Date;
 
 /**
- * Renders {@link Date} objects with a {@link DateTimeFormat}.
+ * Renders {@link Date} objects with a {@link DateTimeFormatImpl}.
  */
 public class DateTimeFormatRenderer extends AbstractRenderer<Date> {
   private final DateTimeFormat format;
@@ -52,6 +52,7 @@ public class DateTimeFormatRenderer extends AbstractRenderer<Date> {
     this.timeZone = timeZone;
   }
 
+  @Override
   public String render(Date object) {
     if (object == null) {
       return "";

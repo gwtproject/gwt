@@ -16,7 +16,6 @@
 package com.google.gwt.i18n.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.impl.CldrImpl;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -45,15 +44,15 @@ public class I18N_iw_Test extends GWTTestCase {
     return "com.google.gwt.i18n.I18NTest_iw";
   }
 
-  public void testCldrImpl() {
-    CldrImpl cldr = GWT.create(CldrImpl.class);
-    assertTrue(cldr.isRTL());
-  }
-
   public void testIwAlias() {
     MyMessages msg = GWT.create(MyMessages.class);
     assertEquals("he", msg.getSourceLocale());
     MyConstants cst = GWT.create(MyConstants.class);
     assertEquals("he", cst.getSourceLocale());
+  }
+
+  public void testRTL() {
+    LocaleInfo locale = LocaleInfo.getCurrentLocale();
+    assertTrue(locale.isRTL());
   }
 }

@@ -27,35 +27,47 @@ import com.google.gwt.i18n.shared.GwtLocale;
  * pkg.impl.class_locale, and pkg.classImpl_locale, following the inheritance
  * chain for the requested locale.
  */
-class LocalizableInstantiator extends ClassInstantiatorBase implements ClassInstantiator {
+public class LocalizableInstantiator extends ClassInstantiatorBase implements ClassInstantiator {
 
-  @Override
-  public <T> T create(Class<?> clazz, Properties properties) {
+  LocalizableInstantiator() {
+    // prevent use of non-static methods outside this package
+  }
+
+  public static <T> T createLocalizedInstance(Class<?> clazz, GwtLocale locale) {
     String pkgName = clazz.getPackage().getName();
     Class<?> enclosingClass = clazz.getEnclosingClass();
     String className = clazz.getSimpleName();
-    GwtLocale locale = ServerGwtBridge.getLocale(properties);
     for (GwtLocale search : locale.getCompleteSearchList()) {
       String suffix = "_" + search.getAsString();
-      T obj = this.<T>tryCreate(pkgName + "." + className + suffix);
+      T obj = tryCreate(pkgName + "." + className + suffix);
       if (obj != null) {
         return obj;
       }
-      obj = this.<T>tryCreate(pkgName + ".impl." + className + suffix);
+      obj = tryCreate(pkgName + ".impl." + className + suffix);
       if (obj != null) {
         return obj;
       }
-      obj = this.<T>tryCreate(pkgName + "." + className + "Impl" + suffix);
+      obj = tryCreate(pkgName + "." + className + "Impl" + suffix);
       if (obj != null) {
         return obj;
       }
       if (enclosingClass != null) {
-        obj = this.<T>tryCreate(enclosingClass.getCanonicalName() + "$" + className + suffix);
+        obj = tryCreate(enclosingClass.getCanonicalName() + "$" + className + suffix);
         if (obj != null) {
           return obj;
         }
       }
     }
     return null;
+  }
+
+  static <T> T createLocalizedInstance(Class<?> clazz, String localeName) {
+    return createLocalizedInstance(clazz, ServerGwtBridge.getLocale(localeName));
+  }
+
+  @Override
+  public <T> T create(Class<?> clazz, Properties properties) {
+    GwtLocale locale = ServerGwtBridge.getLocale(properties);
+    return createLocalizedInstance(clazz, locale);
   }
 }

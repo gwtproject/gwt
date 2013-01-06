@@ -17,7 +17,9 @@ package com.google.gwt.tools.cldr;
 
 import com.google.gwt.codegen.server.AbortablePrintWriter;
 import com.google.gwt.codegen.server.JavaSourceWriterBuilder;
+import com.google.gwt.codegen.server.JavaSourceWriterBuilder.CallbackHooks;
 import com.google.gwt.codegen.server.LoggingCodeGenContext;
+import com.google.gwt.codegen.server.SourceWriter;
 import com.google.gwt.i18n.shared.GwtLocale;
 
 import org.unicode.cldr.util.Factory;
@@ -29,19 +31,53 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Base class for CLDR processors that generate GWT i18n resources.
  */
 public abstract class Processor {
 
+  protected static final String CATEGORY_LOCALE_NATIVE_DISPLAY_NAME = "localeNativeDisplayName";
+  protected static final String CATEGORY_GENCLASSES = "genClasses";
+
+  /**
+   * Callback implementation that prints the CLDR version information.
+   */
+  protected class PrintVersionCallback extends CallbackHooks {
+
+    private final GwtLocale locale;
+
+    protected PrintVersionCallback(GwtLocale locale) {
+      this.locale = locale;
+    }
+
+    @Override
+    public void afterImports(AbortablePrintWriter pw) {
+      pw.println();
+      printVersion(pw, locale, "// ");
+    }
+  }
+
   /**
    * A CodeGenContext implementation that logs to j.u.logging and creates
    * output files using {@link Processor#createOutputFile(String, String)}.
    */
   protected class ProcessorCodeGenContext extends LoggingCodeGenContext {
+
+    private final String pathPrefix;
+
+    public ProcessorCodeGenContext() {
+      this("");
+    }
+
+    public ProcessorCodeGenContext(String pathPrefix) {
+      this.pathPrefix = pathPrefix;
+    }
+
     @Override
     public JavaSourceWriterBuilder addClass(String superPkg, String pkgName, String className) {
       String pkgPath = superPkg == null ? pkgName : superPkg + '/' + pkgName;
@@ -51,7 +87,7 @@ public abstract class Processor {
       String classPath = className.replace('.', '_');
       String fileName = pkgPath + classPath + ".java";
       try {
-        PrintWriter pw = createOutputFile("", fileName);
+        PrintWriter pw = createOutputFile(pathPrefix, fileName);
         AbortablePrintWriter apw = new AbortablePrintWriter(pw);
         printHeader(apw);
         return new JavaSourceWriterBuilder(apw, pkgName, className);
@@ -96,7 +132,7 @@ public abstract class Processor {
 
   protected final File outputDir;
 
-  private boolean useOverride;
+  protected final LocaleData sharedLocaleData;
 
   /**
    * Initialize the shared portion of a Processor.
@@ -104,12 +140,14 @@ public abstract class Processor {
    * @param outputDir output directory for created files
    * @param cldrFactory CLDR factory used to create new CLDRFile instances
    * @param localeData LocaleData instance to collect data from CLDR files
+   * @param sharedLocaleData LocaleData instance persistent across processors
    */
-  protected Processor(File outputDir, Factory cldrFactory, LocaleData localeData) {
-    this.outputDir = outputDir;
+  protected Processor(File outputDir, Factory cldrFactory, LocaleData localeData,
+      LocaleData sharedLocaleData) {
+        this.outputDir = outputDir;
     this.cldrFactory = cldrFactory;
     this.localeData = localeData;
-    useOverride = true;
+    this.sharedLocaleData = sharedLocaleData;
   }
 
   /**
@@ -175,43 +213,32 @@ public abstract class Processor {
     return pw;
   }
 
-  protected void generateIntMethod(PrintWriter pw, String category, GwtLocale locale, String key,
+  protected void generateIntMethod(SourceWriter pw, String category, GwtLocale locale, String key,
       String method) {
     String value = localeData.getEntry(category, locale, key);
     if (value != null) {
       pw.println();
-      if (useOverride) {
-        pw.println("  @Override");
-      }
-      pw.println("  public int " + method + "() {");
-      pw.println("    return " + value + ";");
-      pw.println("  }");
+      pw.println("@Override");
+      pw.println("public int " + method + "() {");
+      pw.indentln("return " + value + ";");
+      pw.println("}");
     }
   }
 
-  protected void generateStringMethod(PrintWriter pw, String category, GwtLocale locale,
+  protected void generateStringMethod(SourceWriter pw, String category, GwtLocale locale,
       String key, String method) {
     String value = localeData.getEntry(category, locale, key);
     generateStringValue(pw, method, value);
   }
 
-  protected void generateStringValue(PrintWriter pw, String method, String value) {
+  protected void generateStringValue(SourceWriter pw, String method, String value) {
     if (value != null) {
       pw.println();
-      if (useOverride) {
-        pw.println("  @Override");
-      }
-      pw.println("  public String " + method + "() {");
-      pw.println("    return \"" + quote(value) + "\";");
-      pw.println("  }");
+      pw.println("@Override");
+      pw.println("public String " + method + "() {");
+      pw.indentln("return \"" + quote(value) + "\";");
+      pw.println("}");
     }
-  }
-
-  /**
-   * @return true if generated methods should use @Override.
-   */
-  protected boolean getOverrides() {
-    return useOverride;
   }
 
   /**
@@ -269,22 +296,38 @@ public abstract class Processor {
     pw.println("# the License.");
   }
 
-  protected void printVersion(PrintWriter pw, GwtLocale locale, String prefix) {
-    pw.println(prefix + "DO NOT EDIT - GENERATED FROM CLDR DATA:");
-    Map<String, String> map = localeData.getEntries("version", locale);
-    for (Map.Entry<String, String> entry : map.entrySet()) {
-      pw.println(prefix + " " + entry.getKey() + "=" + entry.getValue());
-    }
-    pw.println();
+  protected void printXmlHeader(PrintWriter pw) {
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    pw.println("<!--");
+    pw.println("   - Copyright " + year + " Google Inc.");
+    pw.println("   - ");
+    pw.println("   - Licensed under the Apache License, Version 2.0 (the "
+        + "\"License\"); you may not");
+    pw.println("   - use this file except in compliance with the License. You "
+        + "may obtain a copy of");
+    pw.println("   - the License at");
+    pw.println("   - ");
+    pw.println("   - http://www.apache.org/licenses/LICENSE-2.0");
+    pw.println("   - ");
+    pw.println("   - Unless required by applicable law or agreed to in writing, " + "software");
+    pw.println("   - distributed under the License is distributed on an \"AS "
+        + "IS\" BASIS, WITHOUT");
+    pw.println("   - WARRANTIES OR CONDITIONS OF ANY KIND, either express or " + "implied. See the");
+    pw.println("   - License for the specific language governing permissions and "
+        + "limitations under");
+    pw.println("   - the License.");
+    pw.println("-->");
   }
 
-  /**
-   * Set whether method definitions should use @Override.
-   * 
-   * @param useOverride
-   */
-  protected void setOverrides(boolean useOverride) {
-    this.useOverride = useOverride;
+  protected void printVersion(PrintWriter pw, GwtLocale locale, String prefix) {
+    pw.println(prefix + "DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA:");
+    Map<String, String> map = localeData.getEntries("version", locale);
+    Set<String> keySet = map.keySet();
+    String[] keys = keySet.toArray(new String[keySet.size()]);
+    Arrays.sort(keys);
+    for (String key : keys) {
+      pw.println(prefix + " " + key + "=" + map.get(key));
+    }
   }
 
   /**

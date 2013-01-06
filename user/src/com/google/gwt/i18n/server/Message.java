@@ -40,6 +40,7 @@ public interface Message extends Comparable<Message>, MessageTranslation {
       this.message = message;
     }
 
+    @Override
     public int compareTo(AlternateFormMapping o) {
       for (int i = 0; i < forms.size(); ++i) {
         if (i >= o.forms.size()) {
@@ -99,6 +100,7 @@ public interface Message extends Comparable<Message>, MessageTranslation {
    * @return -1 if this message is before {@code o}, 0 if they are equal, or
    *     1 if this is message is after {code o}
    */
+  @Override
   int compareTo(Message o);
 
   /**
@@ -109,6 +111,7 @@ public interface Message extends Comparable<Message>, MessageTranslation {
    * @return a list of all message forms, lexicographically sorted by the
    *    alternate forms for each message
    */
+  @Override
   Iterable<AlternateFormMapping> getAllMessageForms();
 
   /**
@@ -125,6 +128,7 @@ public interface Message extends Comparable<Message>, MessageTranslation {
    * 
    * @return default message or null if not provided
    */
+  @Override
   String getDefaultMessage();
 
   /**

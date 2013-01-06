@@ -56,6 +56,7 @@ public class LocalePropertyProviderGenerator implements PropertyProviderGenerato
         || "on".equalsIgnoreCase(value));
   }
 
+  @Override
   public String generate(TreeLogger logger, SortedSet<String> possibleValues,
       String fallback, SortedSet<ConfigurationProperty> configProperties)
       throws UnableToCompleteException {

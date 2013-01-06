@@ -21,6 +21,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 /**
  * Validate NumberFormat handles Arabic numbers properly.
  */
+@SuppressWarnings("deprecation")
 public class NumberFormat_ar_Test extends GWTTestCase {
 
   /**

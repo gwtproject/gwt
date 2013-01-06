@@ -15,15 +15,15 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
-import com.google.gwt.i18n.shared.TimeZone;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.TimeZone;
 import com.google.gwt.text.client.DateTimeFormatRenderer;
 
 import java.util.Date;
 
 /**
  * Extends {@link ValueLabel} for convenience when dealing with dates and
- * {@link DateTimeFormat}, especially in
+ * {@link DateTimeFormatImpl}, especially in
  * {@link com.google.gwt.uibinder.client.UiBinder UiBinder} templates. (Note
  * that this class does not accept renderers. To do so use {@link ValueLabel}
  * directly.)
@@ -33,9 +33,9 @@ import java.util.Date;
  * <p>
  * The format can be given with one of these attributes:
  * <dl>
- * <dt>format</dt><dd>a reference to a {@link DateTimeFormat} instance.</dd>
- * <dt>predefinedFormat</dt><dd>a {@link com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat DateTimeFormat.PredefinedFormat}.</dd>
- * <dt>customFormat</dt><dd>a date time pattern that can be passed to {@link DateTimeFormat#getFormat(String)}.</dd>
+ * <dt>format</dt><dd>a reference to a {@link DateTimeFormatImpl} instance.</dd>
+ * <dt>predefinedFormat</dt><dd>a {@link com.google.gwt.i18n.shared.DateTimeFormatImpl.PredefinedFormat DateTimeFormat.PredefinedFormat}.</dd>
+ * <dt>customFormat</dt><dd>a date time pattern that can be passed to {@link DateTimeFormatImpl#getFormat(String)}.</dd>
  * </dl>
  * <p>
  * The time zone can be specified with either of these attributes:

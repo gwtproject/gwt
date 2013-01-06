@@ -236,7 +236,6 @@ public final class GWT {
     com.google.gwt.core.shared.GWT.log(message, e);
   }
 
-
   /**
    * The same as {@link #runAsync(RunAsyncCallback)}, except with an extra
    * parameter to provide a name for the call. The name parameter should be

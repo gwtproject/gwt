@@ -178,6 +178,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getDaylightAdjustment(java.util.Date)
    */
+  @Override
   public int getDaylightAdjustment(Date date) {
     if (transitionPoints == null) {
       return 0;
@@ -194,6 +195,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getGMTString(java.util.Date)
    */
+  @Override
   public String getGMTString(Date date) {
     return composeGMTString(getOffset(date));
   }
@@ -201,6 +203,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getID()
    */
+  @Override
   public String getID() {
     return timezoneID;
   }
@@ -208,6 +211,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getISOTimeZoneString(java.util.Date)
    */
+  @Override
   public String getISOTimeZoneString(Date date) {
     int offset = -getOffset(date);
     char data[] = {'+', '0', '0', ':', '0', '0'};
@@ -225,6 +229,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getLongName(java.util.Date)
    */
+  @Override
   public String getLongName(Date date) {
     return tzNames[isDaylightTime(date) ? DLT_LONG_NAME : STD_LONG_NAME];
   }
@@ -232,6 +237,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getOffset(java.util.Date)
    */
+  @Override
   public int getOffset(Date date) {
     return standardOffset - getDaylightAdjustment(date);
   }
@@ -239,6 +245,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getRFCTimeZoneString(java.util.Date)
    */
+  @Override
   public String getRFCTimeZoneString(Date date) {
     int offset = -getOffset(date);
     char data[] = {'+', '0', '0', '0', '0'};
@@ -256,6 +263,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getShortName(java.util.Date)
    */
+  @Override
   public String getShortName(Date date) {
     return tzNames[isDaylightTime(date) ? DLT_SHORT_NAME : STD_SHORT_NAME];
   }
@@ -263,6 +271,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#getStandardOffset()
    */
+  @Override
   public int getStandardOffset() {
     return standardOffset;
   }
@@ -270,6 +279,7 @@ public class TimeZone implements com.google.gwt.i18n.shared.TimeZone {
   /* (non-Javadoc)
    * @see com.google.gwt.i18n.client.TimeZoneIntf#isDaylightTime(java.util.Date)
    */
+  @Override
   public boolean isDaylightTime(Date date) {
     return getDaylightAdjustment(date) > 0;
   }

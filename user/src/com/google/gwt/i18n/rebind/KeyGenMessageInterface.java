@@ -38,32 +38,39 @@ class KeyGenMessageInterface implements MessageInterface {
     this.type = type;
   }
 
+  @Override
   public void accept(MessageInterfaceVisitor cv)
       throws MessageProcessingException {
     throw new MessageProcessingException("unsupported");
   }
 
+  @Override
   public void accept(MessageInterfaceVisitor cv, GwtLocale locale)
       throws MessageProcessingException {
     throw new MessageProcessingException("unsupported");
   }
 
+  @Override
   public <A extends Annotation> A getAnnotation(Class<A> annotClass) {
     return type.findAnnotationInTypeHierarchy(annotClass);
   }
 
+  @Override
   public String getClassName() {
     return type.getName();
   }
 
+  @Override
   public String getPackageName() {
     return type.getPackage().getName();
   }
 
+  @Override
   public String getQualifiedName() {
     return type.getQualifiedSourceName();
   }
 
+  @Override
   public boolean isAnnotationPresent(Class<? extends Annotation> annotClass) {
     return type.findAnnotationInTypeHierarchy(annotClass) != null;
   }

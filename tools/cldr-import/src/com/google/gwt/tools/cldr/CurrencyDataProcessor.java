@@ -15,15 +15,21 @@
  */
 package com.google.gwt.tools.cldr;
 
+import com.google.gwt.codegen.server.JavaSourceWriterBuilder;
+import com.google.gwt.codegen.server.SourceWriter;
+import com.google.gwt.i18n.rebind.CurrencyInfo;
 import com.google.gwt.i18n.shared.GwtLocale;
 
+import org.apache.tapestry.util.text.LocalizedProperties;
 import org.unicode.cldr.util.CLDRFile;
 import org.unicode.cldr.util.Factory;
 import org.unicode.cldr.util.XPathParts;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,19 +42,25 @@ import java.util.Set;
  */
 public class CurrencyDataProcessor extends Processor {
 
+  private static final String CATEGORY_DEFAULT_CURRENCY = "defCurrency";
+  private static final String KEY_DEFAULT = "!default";
+  private static final String CATEGORY_CURRENCY = "currency";
   private Map<String, Integer> currencyFractions = new HashMap<String, Integer>();
   private int defaultCurrencyFraction;
   private Map<String, Integer> rounding = new HashMap<String, Integer>();
 
   private Set<String> stillInUse = new HashSet<String>();
+  private LocalizedProperties currencyExtra;
 
-  public CurrencyDataProcessor(File outputDir, Factory cldrFactory, LocaleData localeData) {
-    super(outputDir, cldrFactory, localeData);
+  public CurrencyDataProcessor(File outputDir, Factory cldrFactory, LocaleData localeData,
+      LocaleData sharedLocaleData) {
+    super(outputDir, cldrFactory, localeData, sharedLocaleData);
   }
 
   @Override
   protected void cleanupData() {
-    localeData.removeDuplicates("currency");
+    localeData.removeDuplicates(CATEGORY_CURRENCY);
+    localeData.removeDuplicates(CATEGORY_DEFAULT_CURRENCY);
   }
 
   @Override
@@ -56,13 +68,14 @@ public class CurrencyDataProcessor extends Processor {
     System.out.println("Loading data for currencies");
     localeData.addVersions(cldrFactory);
     loadLocaleIndependentCurrencyData();
-    localeData.addCurrencyEntries("currency", cldrFactory, currencyFractions,
+    localeData.addCurrencyEntries(CATEGORY_CURRENCY, cldrFactory, currencyFractions,
         defaultCurrencyFraction, stillInUse, rounding);
+    loadCurrencyExtra();
   }
 
   @Override
-  protected void printHeader(PrintWriter pw) {
-    printPropertiesHeader(pw);
+  protected void printPropertiesHeader(PrintWriter pw) {
+    super.printPropertiesHeader(pw);
     pw.println();
     pw.println("#");
     pw.println("# The key is an ISO4217 currency code, and the value is of the " + "form:");
@@ -79,29 +92,58 @@ public class CurrencyDataProcessor extends Processor {
   @Override
   protected void writeOutputFiles() throws IOException {
     for (GwtLocale locale : localeData.getNonEmptyLocales()) {
-      String path = "client/impl/cldr/CurrencyData";
-      PrintWriter pw = createOutputFile(path + Processor.localeSuffix(locale) + ".properties");
-      printHeader(pw);
-      printVersion(pw, locale, "# ");
-      Map<String, String> map = localeData.getEntries("currency", locale);
-      String[] keys = new String[map.size()];
-      map.keySet().toArray(keys);
-      Arrays.sort(keys);
-
-      for (String key : keys) {
-        pw.print(key);
-        pw.print(" = ");
-        pw.println(map.get(key));
+      String defCurrencyCode = localeData.getEntry(CATEGORY_CURRENCY, locale, KEY_DEFAULT);
+      Map<String, String> currencyMap = localeData.getEntries(CATEGORY_CURRENCY, locale);
+      Map<String, CurrencyInfo> currencies = new HashMap<String, CurrencyInfo>();
+      for (Map.Entry<String, String> entry : currencyMap.entrySet()) {
+        String currencyCode = entry.getKey();
+        String extra = currencyExtra.getProperty(currencyCode);
+        currencies.put(currencyCode, new CurrencyInfo(currencyCode, entry.getValue(), extra));
       }
-      pw.close();
+      CurrencyInfo defCurrency = currencies.get(defCurrencyCode);
+      if (defCurrency == null && defCurrencyCode != null) {
+        // Handle the case where the default currency is removed because it
+        // inherits from the parent locale, but is a different default.
+        defCurrency = new CurrencyInfo(defCurrencyCode, localeData.getInheritedEntry(CATEGORY_CURRENCY,
+            locale, defCurrencyCode), currencyExtra.getProperty(defCurrencyCode));        
+      }
+      if (defCurrency != null || !currencies.isEmpty()) {
+        GwtLocale parent = localeData.inheritsFrom(locale);
+        if (parent == null) {
+          parent = localeData.getGwtLocale("");
+        }
+        writeJavaOutputFile(locale, parent, currencies, defCurrency);
+        writeJsOutputFile(locale, parent, currencies, defCurrency);
+      }
     }
   }
+
+  private void loadCurrencyExtra() {
+    currencyExtra = new LocalizedProperties();
+    InputStream str = null;
+    try {
+      // Load CurrencyExtra from the system classpath, so gwt-user/core/src must be there
+      str = getClass().getClassLoader().getResourceAsStream(
+          "com/google/gwt/tools/cldr/CurrencyExtra.properties");
+      if (str != null) {
+        currencyExtra.load(str, "UTF-8");
+        return;
+      }
+    } catch (UnsupportedEncodingException notPossible) {
+      // UTF-8 should always be defined
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.err.println("Unable to load CurrencyExtra.properties, continuing");
+  }
+
 
   private void loadLocaleIndependentCurrencyData() {
     CLDRFile supp = cldrFactory.getSupplementalData();
 
     // load the table of default # of decimal places and rounding for each currency
     defaultCurrencyFraction = 0;
+    Map<String, String> regionCurrencies = new HashMap<String, String>();
     XPathParts parts = new XPathParts();
     Iterator<String> iterator = supp.iterator("//supplementalData/currencyData/fractions/info");
     while (iterator.hasNext()) {
@@ -130,7 +172,7 @@ public class CurrencyDataProcessor extends Processor {
     while (iterator.hasNext()) {
       String path = iterator.next();
       parts.set(supp.getFullXPath(path));
-      Map<String, String> attr = parts.findAttributes("currency");
+      Map<String, String> attr = parts.findAttributes(CATEGORY_CURRENCY);
       if (attr == null) {
         continue;
       }
@@ -144,7 +186,157 @@ public class CurrencyDataProcessor extends Processor {
       String to = attr.get("to");
       if (to == null) {
         stillInUse.add(curCode);
+        regionCurrencies.put(region, curCode);
       }
     }
+
+    localeData.summarizeTerritoryEntries(CATEGORY_CURRENCY, new RegionLanguageData(cldrFactory),
+        KEY_DEFAULT, regionCurrencies);
+    GwtLocale defaultLocale = localeData.getGwtLocale("");
+    if (localeData.getEntry(CATEGORY_CURRENCY, defaultLocale, KEY_DEFAULT) == null) {
+      // The Euro is the closest we have to a global currency, so use it as
+      // the ultimate default.
+      localeData.addEntry(CATEGORY_CURRENCY, defaultLocale, KEY_DEFAULT, "EUR");
+    }
+  }
+
+  private void writeJavaOutputFile(GwtLocale locale, GwtLocale parent,
+      Map<String, CurrencyInfo> currencies, CurrencyInfo defCurrency) {
+    String myClass = "CurrencyListImpl" + localeSuffix(locale);
+    String pkg = "com.google.gwt.i18n.shared.cldr";
+    ProcessorCodeGenContext codeGen = new ProcessorCodeGenContext("user/src/");
+    JavaSourceWriterBuilder jswb = codeGen.addClass("com.google.gwt.i18n.shared.cldr", myClass);
+    jswb.setCallbacks(new PrintVersionCallback(locale));
+    sharedLocaleData.addEntry(CATEGORY_GENCLASSES, locale, "CurrencyList", pkg + "." + myClass);
+    String superClass = "CurrencyListImpl" + (locale.isDefault() ? "Base" : localeSuffix(parent));
+    jswb.setSuperclass(superClass);
+    jswb.addImport("com.google.gwt.i18n.shared.CurrencyData");
+    jswb.addImport("com.google.gwt.i18n.shared.impl.CurrencyDataImpl");
+    if (locale.isDefault()) {
+      jswb.addImport("com.google.gwt.i18n.shared.impl.CurrencyListImplBase");
+    }
+    if (!currencies.isEmpty()) {
+      jswb.addImport("java.util.Map;");
+    }
+    jswb.setJavaDocCommentForClass(" * Pure Java implementation of CurrencyList for locale \""
+        + locale.toString() + "\".");
+    SourceWriter pw = jswb.createSourceWriter();
+    if (defCurrency != null) {
+      pw.println();
+      pw.println("@Override");
+      pw.println("public CurrencyData getDefault() {");
+      pw.indentln("return " + defCurrency.getJava() + ";");
+      pw.println("}");
+    }
+    if (!currencies.isEmpty()) {
+      String[] keys = currencies.keySet().toArray(new String[currencies.size()]);
+      Arrays.sort(keys);
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected Map<String, CurrencyData> loadCurrencies() {");
+      pw.indent();
+      pw.println("Map<String, CurrencyData> result = super.loadCurrencies();");
+      for (String curCode : keys) {
+        if (KEY_DEFAULT.equals(curCode)) {
+          continue;
+        }
+        pw.println("result.put(\"" + curCode + "\", " + currencies.get(curCode).getJava()
+            + ");");
+      }
+      pw.println("return result;");
+      pw.outdent();
+      pw.println("}");
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected Map<String, String> loadCurrencyNames() {");
+      pw.indent();
+      pw.println("Map<String, String> result = super.loadCurrencyNames();");
+      for (String curCode : keys) {
+        if (KEY_DEFAULT.equals(curCode)) {
+          continue;
+        }
+        pw.println("result.put(\"" + curCode + "\", \""
+            + quote(currencies.get(curCode).getDisplayName()) + "\");");
+      }
+      pw.println("return result;");
+      pw.outdent();
+      pw.println("}");
+    }
+    pw.close();
+  }
+
+  private void writeJsOutputFile(GwtLocale locale, GwtLocale parent,
+      Map<String, CurrencyInfo> currencies, CurrencyInfo defCurrency) {
+    String myClass = "CurrencyListImpl" + localeSuffix(locale);
+    String superClass = "CurrencyListImpl" + (locale.isDefault() ? "Base" : localeSuffix(parent));
+    ProcessorCodeGenContext codeGen = new ProcessorCodeGenContext("user/src/");
+    JavaSourceWriterBuilder jswb = codeGen.addClass("com.google.gwt.i18n.client.cldr", myClass);
+    jswb.setCallbacks(new PrintVersionCallback(locale));
+    jswb.setSuperclass(superClass);
+    if (!currencies.isEmpty()) {
+      jswb.addImport("com.google.gwt.core.client.JavaScriptObject");
+    }
+    if (defCurrency != null) {
+      jswb.addImport("com.google.gwt.i18n.shared.CurrencyData");
+    }
+    if (locale.isDefault()) {
+      jswb.addImport("com.google.gwt.i18n.client.impl.CurrencyListImplBase");
+    }
+    jswb.setJavaDocCommentForClass("JS implementation of CurrencyList for locale \""
+        + locale.toString() + "\".");
+    SourceWriter pw = jswb.createSourceWriter();
+    if (defCurrency != null) {
+      pw.println();
+      pw.println("@Override");
+      pw.println("public native CurrencyData getDefault() /*-{");
+      pw.indentln("return " + defCurrency.getJson() + ";");
+      pw.println("}-*/;");
+    }
+    if (!currencies.isEmpty()) {
+      String[] keys = currencies.keySet().toArray(new String[currencies.size()]);
+      Arrays.sort(keys);
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected JavaScriptObject loadCurrencies() {");
+      pw.indentln("return overrideMap(super.loadCurrencies(), loadCurrenciesOverride());");
+      pw.println("}");
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected JavaScriptObject loadCurrencyNames() {");
+      pw.indentln("return overrideMap(super.loadCurrencyNames(), loadCurrencyNamesOverride());");
+      pw.println("}");
+      pw.println();
+      pw.println("private native JavaScriptObject loadCurrenciesOverride() /*-{");
+      pw.indent();
+      pw.println("return {");
+      pw.indent();
+      for (String curCode : keys) {
+        if (KEY_DEFAULT.equals(curCode)) {
+          continue;
+        }
+        pw.println("\"" + curCode + "\": " + currencies.get(curCode).getJson() + ",");
+      }
+      pw.outdent();
+      pw.println("};");
+      pw.outdent();
+      pw.println("}-*/;");
+      pw.println();
+      pw.println("private native JavaScriptObject loadCurrencyNamesOverride() /*-{");
+      pw.indent();
+      pw.println("return {");
+      pw.indent();
+      for (String curCode : keys) {
+        if (KEY_DEFAULT.equals(curCode)) {
+          continue;
+        }
+        pw.println("\"" + curCode + "\": \"" + quote(currencies.get(curCode).getDisplayName())
+            + "\",");
+      }
+      pw.outdent();
+      pw.println("};");
+      pw.outdent();
+      pw.println("}-*/;");
+    }
+    pw.close();
   }
 }

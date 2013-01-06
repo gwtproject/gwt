@@ -74,15 +74,16 @@ public abstract class AbstractMessage implements Message {
     this.msgIntf = msgIntf;
   }
 
+  @Override
   public void accept(MessageVisitor mv) throws MessageProcessingException {
     accept(mv, null);
   }
 
+  @Override
   public void accept(MessageVisitor mv, GwtLocale locale)
       throws MessageProcessingException {
 
     ensureSelectorParams();
-    List<Parameter> params = getParameters();
     int numSelectors = selectorParams.length;
     String[] lastForm = new String[numSelectors];
 
@@ -116,16 +117,17 @@ public abstract class AbstractMessage implements Message {
     mv.endMessage(this, trans);
   }
 
+  @Override
   public int compareTo(Message o) {
     return getKey().compareTo(o.getKey());
   }
 
+  @Override
   public Iterable<AlternateFormMapping> getAllMessageForms() {
     if (overrideDefault != null) {
       return overrideDefault.getAllMessageForms();
     }
     List<AlternateFormMapping> mapping = new ArrayList<AlternateFormMapping>();
-    List<Parameter> params = getParameters();
     int[] selectorIndices = getSelectorParameterIndices();
     int numSelectors = selectorIndices.length;
 
@@ -159,8 +161,10 @@ public abstract class AbstractMessage implements Message {
     return mapping;
   }
 
+  @Override
   public abstract <A extends Annotation> A getAnnotation(Class<A> annotClass);
 
+  @Override
   public String getDefaultMessage() {
     if (overrideDefault != null) {
       return overrideDefault.getDefaultMessage();
@@ -168,6 +172,7 @@ public abstract class AbstractMessage implements Message {
     return defaultMessage;
   }
 
+  @Override
   public String getDescription() {
     Description descAnnot = getAnnotation(Description.class);
     if (descAnnot != null) {
@@ -176,6 +181,7 @@ public abstract class AbstractMessage implements Message {
     return null;
   }
 
+  @Override
   public String getKey() {
     KeyGeneratorException keyGenException = null;
     if (key == null) {
@@ -207,6 +213,7 @@ public abstract class AbstractMessage implements Message {
     return key;
   }
 
+  @Override
   public GwtLocale getMatchedLocale() {
     if (overrideDefault != null) {
       return overrideDefault.getMatchedLocale();
@@ -214,24 +221,31 @@ public abstract class AbstractMessage implements Message {
     return matchedLocale;
   }
 
+  @Override
   public String getMeaning() {
     return meaning;
   }
 
+  @Override
   public MessageInterface getMessageInterface() { 
     return msgIntf;
   }
 
+  @Override
   public MessageStyle getMessageStyle() {
     return messageStyle;
   }
 
+  @Override
   public abstract String getMethodName();
 
+  @Override
   public abstract List<Parameter> getParameters();
 
+  @Override
   public abstract Type getReturnType();
 
+  @Override
   public int[] getSelectorParameterIndices() {
     if (selectorParams == null) {
       ensureSelectorParams();
@@ -239,8 +253,10 @@ public abstract class AbstractMessage implements Message {
     return selectorParams;
   }
 
+  @Override
   public abstract MessageTranslation getTranslation(GwtLocale locale);
 
+  @Override
   public abstract boolean isAnnotationPresent(
       Class<? extends Annotation> annotClass);
 
@@ -348,6 +364,7 @@ public abstract class AbstractMessage implements Message {
       if (selIdx < 0) {
         // string map
         selectors[i] = new AlternateMessageSelector() {
+          @Override
           public boolean isFormAcceptable(String form) {
             return true;
           }

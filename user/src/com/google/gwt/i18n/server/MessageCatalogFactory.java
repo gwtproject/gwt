@@ -66,6 +66,7 @@ public interface MessageCatalogFactory {
      * 
      * @throws IOException
      */
+    @Override
     void close() throws IOException;
 
     /**

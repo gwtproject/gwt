@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "N77lnd7E",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseAsyncTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 0,
+      "message": "This test is not asynchronous so I moved it out to the new test class.",
+      "parentUuid": "NrJCQjKU",
+      "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NrDCN.Ic",
         "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseAsyncTest.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-04T20:24:07Z",
       "side": 0,
       "message": "why delete?",
+      "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N75liu6I",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseAsyncTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 0,
+      "message": "Same here.",
+      "parentUuid": "NrDCN.Ic",
       "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

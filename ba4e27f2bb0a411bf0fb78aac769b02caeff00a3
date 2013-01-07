@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "N73m4fxU",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 1,
+      "message": "I agree that we should report errors from gwtSetup, I missed that.\nHowever, we cannot assert if uncaught handler is null as it will potentially break projects that already have an uncaught handler intentionally or not. Unfortunately it is not always in the control of the developer as reported in the bug. On the other hand, some test cases may potentially depend on an error being reported by uncaught handler; especially in more integration style test cases.\n\nSo ideally, we should not put restrictions here and we should avoid any side effects. That is, we will be just \u0027spying\u0027 and test cases we will work exactly same with or without our handlers. That would require to have GWT#addUncaughtHandler instead of GWT#setUncaughtHandler but that is a much bigger change.\n\nGiving it a second thought, perhaps, we should not even touch anything if the developer has some handlers already set. Because with the original behavior, developers were being able to opt-out from \u0027test cases failing due to uncaught hander being called\u0027 by setting their own handler. I changed that and it doesn\u0027t look like a good idea to me now.\n\nFor now, we can do the best effort to have minimal side effect:\n{\n  ensureUncaughtHandler() // install our own uncaught handler that also calls the original\n  gwtSetup();\n}\n\nI think this is fairly good solution and improvement as\n - developer can still opt-out from our handlers\n - less side effects (original handler will not be lost )\n\nOptionally, we can expose ensureUncaughtHandler so that developers will have an option to add handlers back if a code out of their control has changed it or needs to change it.\n\nWhat do you think?",
+      "parentUuid": "NrBCbHNU",
+      "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NrFCxlEg",
         "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-04T20:24:07Z",
       "side": 1,
       "message": "Similarly, calling gwtTearDown() last seems problematic - we should report uncaught exceptions that happen there.",
+      "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N71bOMlU",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 1,
+      "message": "Actually exceptions thrown from teardown are already ignored per original implementation (see a couple of lines below). So this is consistent with that though we might want to change that behavior all together in a later CL.",
+      "parentUuid": "NrFCxlEg",
       "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "N7-kWTwk",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to log it so it will show up in test output. (Last time I tried, GWT.log didn\u0027t work but System.out worked in the hosted mode)",
+      "parentUuid": "NrPCVQKE",
+      "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NrFCK9HA",
         "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseAsyncTest.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-01-04T20:24:07Z",
       "side": 1,
       "message": "It seems like we should also test these various error conditions in gwtSetUp() and gwtTearDown()?",
+      "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N73lV38A",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseAsyncTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T20:45:08Z",
+      "side": 1,
+      "message": "I will take a look but that might be tricky.",
+      "parentUuid": "NrFCK9HA",
       "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

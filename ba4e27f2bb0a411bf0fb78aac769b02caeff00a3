@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "N7-yCvdM",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-07T23:06:26Z",
+      "side": 1,
+      "message": "\u003e\u003e\u003e If a test needs to then it can already turn off GWTTestCase\u0027s uncaught exception handling by \n\u003e overriding catchExceptions() so we already have an option for code that\u0027s using them \n\u003e deliberately. But I\u0027m guessing those cases are rare, and it\u0027s better to be more strict by default \n\u003e so that errors can more easily be found and fixed.\n\ncatchExceptions is just for debugging not for this purpose and will cause no exceptions to be caught, including regular exceptions (even assertions); it will not report failures so basically test case will be not really working.\nSo there is no opt-out.\n\n\u003e\u003e\u003e We were already clobbering any uncaught exception handler installed before setUp. We \n\u003e could either assert that it\u0027s null since that indicates a problem tearing down a previous test \n\u003e (which could more easily be found and fixed), or just remove it and log a warning. Calling a \n\u003e leftover handler during the test or restoring it after the test is over doesn\u0027t seem to accomplish \n\u003e anything; it just adds hard-to-diagnose order dependencies between tests.\n\nAgreed, I guess I didn\u0027t think it through; if a handler is found in #gwtSetup then it is more likely a leftover from a previous test case than a deliberately installed one.\n\n\u003e\u003e\u003e During gwtSetUp(), it\u0027s certainly possible that some code was inadvertently installing \n\u003e uncaught exception handlers via calls to production code, but it seems unlikely they were \n\u003e also relying on the handler actually being called. If we added an assert after gwtSetUp() \n\u003e returns then either the production code could be fixed, or the test could uninstall the \n\u003e handler at the end of the gwtSetUp() method (overriding the production code), and this \n\u003e would serve as documentation that something odd is happening.\n\nI know code that calls GWT.getUncaughtHandler() to report errors like RPC failures, and testing unhappy path in code can easily rely uncaught handlers to be called. \nSo this or for other reasons they might just not want their test case to be considered \"failed\"  when uncaught handler is called and we don\u0027t how many people out there relies on it.\nEven in the reported issue, the guy debugged hours to see why it wasn\u0027t not called; which basically means it was important in their code to be called so he spent hours looking why it didn\u0027t happen. \nAt the end, it is a big surprise for the developer when it happens, no matter if we document it or not.\n\nAn analogy would be Thread#setDefaultUncaughtExceptionHandler. If junit framework were replacing uncaught handler via setDefaultUncaughtExceptionHandler and would fail if you install your own handler, then it would be pretty painful.\n\n\u003e\u003e\u003e Alternately, if another handler is installed at the end of gwtSetUp() we could log a warning and replace it \n\u003e again. So the problem probably wouldn\u0027t be cleaned up, but at least it would make errors in the test itself \\\n\u003e easier to diagnose.\n\nI think that is a good idea to log it as a warning but for the previous reasons I mentioned above, I think we should not be replacing it.",
+      "parentUuid": "N3FWKlnA",
+      "revId": "ba4e27f2bb0a411bf0fb78aac769b02caeff00a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "NrFCxlEg",
         "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 1

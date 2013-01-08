@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N8fRnNt4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-01-08T21:18:15Z",
+      "side": 1,
+      "message": "whitespace?",
+      "revId": "6e2b9142ec9a9838dc0d8e399461c05f2d4bcbe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8XSKZnE",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-01-08T21:18:15Z",
+      "side": 1,
+      "message": "Is this logic correct? The allButN is dependencies which are alive NOT in this split point, but the allFromSplitPoints are ones wich are alive in this split point. \n\nThe final result is, a method is live if it has a dependency in AllNodes, but not in AllButN, and it is also in AllFromSplitPoint.",
+      "revId": "6e2b9142ec9a9838dc0d8e399461c05f2d4bcbe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8TSn-g8",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CodeSplitter2Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-01-08T21:18:15Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "6e2b9142ec9a9838dc0d8e399461c05f2d4bcbe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8RSq.tY",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CodeSplitter2Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-01-08T21:18:15Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "6e2b9142ec9a9838dc0d8e399461c05f2d4bcbe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

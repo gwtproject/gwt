@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "N8jNLkic",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-01-08T21:39:20Z",
+      "side": 1,
+      "message": "You are right, I misread updateReverseMap. computeAllLiveFromSplitpoints should not record the dependencies.\n\nBut then the report would be only partially correct. IIRC the only reason the soyc report gives for a certain atom not being in a certain fragment is that it has dependency on some other atom that is on some other fragment, right? \n\nI was thinking of getting a good enough report and leaving a full overhaul for when the new fragment merging strategy is implemented.\n\nWhat do you think?",
+      "parentUuid": "N8XSKZnE",
+      "revId": "6e2b9142ec9a9838dc0d8e399461c05f2d4bcbe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "N8TSn-g8",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CodeSplitter2Test.java",
         "patchSetId": 1

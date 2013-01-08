@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N7xLMvbU",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "Please move this into the \"import java.net...\" block below.",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N7zLBuX8",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "Please put this in its own block before the \"import com.google...\" block.",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N71K.NQQ",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "GWT style is to put spaces before opening punctuation marks.  E.g., \"try {\", \"for (\", \"catch (\".  Please fix here and below.",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N7xJJHS8",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "Bad indenting.  Please don\u0027t use tabs.",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N73K7MRM",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "Trailing white space.",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N79JnpbA",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "Auto generated comment?  Seems fine to just ignore if we were ignored JSONException before, though I\u0027d prefer if we could restructure things so that this catch clause can only catch exceptions from the HttpCookie.parse() call (as opposed to from cookies.put()).  E.g.,\n\n  List\u003cHttpCookie\u003e headerCookies;\n  try {\n    headerCookies \u003d HttpCookie.parse(header);\n  } catch (IllegalArgumentException ignored) {\n    continue;\n  }\n  for (HttpCookie cookie : headerCookies) {\n    ...\n  }",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N79IMBfs",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T17:26:50Z",
+      "side": 1,
+      "message": "How might a NullPointerException get thrown?  Do we need to catch it?",
+      "revId": "e26ad5d0c3775a625642bcb0a8d7c6e85ce9edbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

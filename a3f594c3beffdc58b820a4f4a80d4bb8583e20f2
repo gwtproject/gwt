@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N8pCUNE4",
+        "filename": "user/test/com/google/gwt/http/client/RequestTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T19:55:43Z",
+      "side": 1,
+      "message": "Because this is an asynchronous test, I believe you need to call delayTestFinishForRequest().  Otherwise JUnit will assume the test finished successfully as soon as it returns, and the callback assert will never run.",
+      "revId": "a3f594c3beffdc58b820a4f4a80d4bb8583e20f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8vC64Ng",
+        "filename": "user/test/com/google/gwt/http/client/RequestTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T19:55:43Z",
+      "side": 1,
+      "message": "And add finishTest() after this.",
+      "revId": "a3f594c3beffdc58b820a4f4a80d4bb8583e20f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8tCOvDc",
+        "filename": "user/test/com/google/gwt/http/server/RequestTestServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T19:55:43Z",
+      "side": 1,
+      "message": "Remove the blank line please.",
+      "revId": "a3f594c3beffdc58b820a4f4a80d4bb8583e20f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8vCTwGA",
+        "filename": "user/test/com/google/gwt/http/server/RequestTestServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-08T19:55:43Z",
+      "side": 1,
+      "message": "Here too.",
+      "revId": "a3f594c3beffdc58b820a4f4a80d4bb8583e20f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -91,23 +91,33 @@ public class Level implements Serializable {
 
   public static Level parse(String name) {
     return staticImpl.parse(name);
-  } 
+  }
 
-  protected Level() { }
+  private String name;
+  private int value;
+
+  protected Level() {
+    this("DUMMY", -1);
+  }
+
+  protected Level(String name, int value) {
+    this.name = name;
+    this.value = value;
+  }
   
   public String getName() {
-    return "DUMMY";
+    return name;
   }
   
   public int intValue() {
-    return -1;
+    return value;
   }
     
   @Override
   public String toString() {
     return getName();
   }
-  
+
   /* Not Implemented */
   // public boolean equals(Object ox) {} 
   // protected Level(String name, int value, String resourceBundleName) {} 

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N85iJtMU",
+        "filename": "user/src/com/google/web/bindery/event/shared/SimpleEventBus.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-09T19:58:14Z",
+      "side": 1,
+      "message": "I don\u0027t see any value in logging this as it is explicitly stated as a no-op in javadocs - it will end up being just a noise for a permitted operation.",
+      "revId": "d1e4c6c5457d544942a61c976c67458ba54a3688",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N87hWeCs",
+        "filename": "user/src/com/google/web/bindery/event/shared/SimpleEventBus.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-09T19:58:14Z",
+      "side": 1,
+      "message": "Can you update the test case? \n\npublic void testNoDoubleRemove() {\n  final SimpleEventBus eventBus \u003d new SimpleEventBus();\n  HandlerRegistration reg \u003d FooEvent.register(eventBus, fooHandler1);\n  reg.removeHandler();\n  reg.removeHandler(); // Should not throw\n}",
+      "revId": "d1e4c6c5457d544942a61c976c67458ba54a3688",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

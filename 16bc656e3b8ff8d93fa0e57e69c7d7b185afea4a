@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N8ZfArOA",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/NumberConstantsProcessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-09T00:40:50Z",
+      "side": 1,
+      "message": "extracted constant lost?",
+      "revId": "16bc656e3b8ff8d93fa0e57e69c7d7b185afea4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

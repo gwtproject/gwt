@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N-srsR4Y",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-09T19:19:57Z",
+      "side": 1,
+      "message": "Can you explain what it\u0027s about? (and only then says that it fixes some reported issue) I hate it when I browse the history and changes don\u0027t say why they\u0027re doing what they\u0027re doing.",
+      "revId": "a1d63eb89c1ffbe4cd7133a0c1d68be03c75b083",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N-goHP1w",
+        "filename": "user/src/com/google/web/bindery/event/shared/SimpleEventBus.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-09T19:19:57Z",
+      "side": 1,
+      "message": "Isn\u0027t GWT.log() supposed to be a no-op in prod mode anyway?",
+      "revId": "a1d63eb89c1ffbe4cd7133a0c1d68be03c75b083",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

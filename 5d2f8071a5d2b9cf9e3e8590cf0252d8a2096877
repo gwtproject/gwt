@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N-g0vWY8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-09T21:28:03Z",
+      "side": 1,
+      "message": "Nit: I\u0027d prefer this line to be the first (the one that appears in short logs such as Gerrit, Gitiles, gitk, git log --oneline, etc.). \"fixes issue 7423\" is not what matters, and would force you to ask more about the commit to know what it\u0027s about.\n\nSmall \"annoyance\" (you just have to get used to it), huge benefits.",
+      "revId": "5d2f8071a5d2b9cf9e3e8590cf0252d8a2096877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

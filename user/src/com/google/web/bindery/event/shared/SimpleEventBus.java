@@ -1,20 +1,19 @@
 /*
  * Copyright 2011 Google Inc.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.google.web.bindery.event.shared;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.Event.Type;
 
 import java.util.ArrayList;
@@ -54,14 +53,13 @@ public class SimpleEventBus extends EventBus {
   }
 
   /**
-   * Allows creation of an instance that fires its handlers in the reverse of
-   * the order in which they were added, although filtered handlers all fire
-   * before unfiltered handlers.
+   * Allows creation of an instance that fires its handlers in the reverse of the order in which
+   * they were added, although filtered handlers all fire before unfiltered handlers.
    * <p>
    * 
-   * @deprecated This is a legacy feature, required by GWT's old HandlerManager.
-   *             Reverse order is not honored for handlers tied to a specific
-   *             event source (via {@link #addHandlerToSource}.
+   * @deprecated This is a legacy feature, required by GWT's old HandlerManager. Reverse order is
+   *             not honored for handlers tied to a specific event source (via
+   *             {@link #addHandlerToSource}.
    */
   @Deprecated
   protected SimpleEventBus(boolean fireInReverseOrder) {
@@ -214,7 +212,10 @@ public class SimpleEventBus extends EventBus {
     List<H> l = getHandlerList(type, source);
 
     boolean removed = l.remove(handler);
-    assert removed : "redundant remove call";
+
+    if (!removed) {
+      GWT.log("redundant remove call");
+    }
     if (removed && l.isEmpty()) {
       prune(type, source);
     }

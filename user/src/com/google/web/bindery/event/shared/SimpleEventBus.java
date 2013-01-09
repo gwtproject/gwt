@@ -15,6 +15,7 @@
  */
 package com.google.web.bindery.event.shared;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.web.bindery.event.shared.Event.Type;
 
 import java.util.ArrayList;
@@ -214,7 +215,10 @@ public class SimpleEventBus extends EventBus {
     List<H> l = getHandlerList(type, source);
 
     boolean removed = l.remove(handler);
-    assert removed : "redundant remove call";
+    // log redundant calls in dev mode
+    if (!GWT.isProdMode() && !removed) {
+      GWT.log("redundant remove call");
+    }
     if (removed && l.isEmpty()) {
       prune(type, source);
     }

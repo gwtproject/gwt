@@ -654,7 +654,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    */
   public BigDecimal(char[] in, int offset, int len) {
     try {
-      initFrom(new String(in, offset, len));
+      initFrom(in, offset, len);
     } catch (StringIndexOutOfBoundsException e) {
       throw new NumberFormatException(e.getMessage());
     }
@@ -986,6 +986,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    *         {@code 0} if {@code this == val}.
    * @throws NullPointerException if {@code val == null}.
    */
+  @Override
   public int compareTo(BigDecimal val) {
     int thisSign = signum();
     int valueSign = val.signum();
@@ -2597,47 +2598,58 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   }
 
   private void initFrom(String val) {
-    int begin = 0; // first index to be copied
-    int offset = 0;
-    int last = val.length(); // one past the last index to be copied
+    initFrom(val.toCharArray(), 0, val.length());
+  }
+
+  private void initFrom(char[] val, int offset, int count) {
+    int origOffset = offset;
+    int begin = offset; // first index to be copied
+    int last = offset + count;
     String scaleString = null; // buffer for scale
     StringBuilder unscaledBuffer; // buffer for unscaled value
 
-    unscaledBuffer = new StringBuilder(val.length());
+    unscaledBuffer = new StringBuilder(last - offset);
     // To skip a possible '+' symbol
-    if ((offset < last) && (val.charAt(offset) == '+')) {
-      offset++;
+    if ((offset < last) && ((val[offset] == '+') || (val[offset] == '-'))) {
+      if (val[offset++] == '-') {
+        unscaledBuffer.append('-');
+      }
       begin++;
 
       // Fail if the next character is another sign.
       if ((offset < last)
-          && (val.charAt(offset) == '+' || val.charAt(offset) == '-')) {
-        throw new NumberFormatException("For input string: \"" + val + "\"");
+          && (val[offset] == '+' || val[offset] == '-')) {
+        throw new NumberFormatException("For input string: \"" + String.valueOf(val, origOffset,
+            count) + "\"");
       }
+    }
+    // skip leading zeros, but not the last one
+    while (offset < last - 1 && val[offset] == '0') {
+      ++offset;
     }
     int counter = 0;
     boolean wasNonZero = false;
     // Accumulating all digits until a possible decimal point
-    for (; (offset < last) && (val.charAt(offset) != '.')
-        && (val.charAt(offset) != 'e') && (val.charAt(offset) != 'E'); offset++) {
+    for (; (offset < last) && (val[offset] != '.') && (val[offset] != 'e') && (val[offset] != 'E'); offset++) {
+      unscaledBuffer.append(val[offset]);
       if (!wasNonZero) {
-        if (val.charAt(offset) == '0') {
+        if (val[offset] == '0') {
           counter++;
         } else {
           wasNonZero = true;
         }
       }
     }
-    unscaledBuffer.append(val, begin, offset);
     // A decimal point was found
-    if ((offset < last) && (val.charAt(offset) == '.')) {
+    if ((offset < last) && (val[offset] == '.')) {
       offset++;
       // Accumulating all digits until a possible exponent
       begin = offset;
-      for (; (offset < last) && (val.charAt(offset) != 'e')
-          && (val.charAt(offset) != 'E'); offset++) {
+      for (; (offset < last) && (val[offset] != 'e')
+          && (val[offset] != 'E'); offset++) {
+        unscaledBuffer.append(val[offset]);
         if (!wasNonZero) {
-          if (val.charAt(offset) == '0') {
+          if (val[offset] == '0') {
             counter++;
           } else {
             wasNonZero = true;
@@ -2645,24 +2657,23 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
         }
       }
       scale = offset - begin;
-      unscaledBuffer.append(val, begin, offset);
     } else {
       scale = 0;
     }
     // An exponent was found
     if ((offset < last)
-        && ((val.charAt(offset) == 'e') || (val.charAt(offset) == 'E'))) {
+        && ((val[offset] == 'e') || (val[offset] == 'E'))) {
       offset++;
       // Checking for a possible sign of scale
       begin = offset;
-      if ((offset < last) && (val.charAt(offset) == '+')) {
+      if ((offset < last) && (val[offset] == '+')) {
         offset++;
-        if ((offset < last) && (val.charAt(offset) != '-')) {
+        if ((offset < last) && (val[offset] != '-')) {
           begin++;
         }
       }
       // Accumulating all remaining digits
-      scaleString = val.substring(begin, last);
+      scaleString = String.valueOf(val, begin, last - begin);
       // Checking if the scale is defined
       scale = scale - Integer.parseInt(scaleString);
       if (scale != (int) scale) {
@@ -2675,19 +2686,14 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     if (unscaled.length() < 16) {
       smallValue = parseUnscaled(unscaled);
       if (Double.isNaN(smallValue)) {
-        throw new NumberFormatException("For input string: \"" + val + "\"");
+        throw new NumberFormatException("For input string: \"" + String.valueOf(val, offset, count) + "\"");
       }
       bitLength = bitLength(smallValue);
     } else {
       setUnscaledValue(new BigInteger(unscaled));
     }
     precision = unscaledBuffer.length() - counter;
-    // Don't count leading zeros in the precision
-    for (int i = 0; i < unscaledBuffer.length(); ++i) {
-      char ch = unscaledBuffer.charAt(i);
-      if (ch != '-' && ch != '0') {
-        break;
-      }
+    if (unscaledBuffer.charAt(0) == '-') {
       --precision;
     }
   }

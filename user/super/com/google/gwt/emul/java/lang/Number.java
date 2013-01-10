@@ -186,6 +186,15 @@ public abstract class Number implements Serializable {
   protected static double __parseAndValidateDouble(String s)
       throws NumberFormatException {
 
+    if ("NaN".equals(s) || "-NaN".equals(s)) {
+      return Double.NaN;
+    }
+    if ("Infinity".equals(s)) {
+      return Double.POSITIVE_INFINITY;
+    }
+    if ("-Infinity".equals(s)) {
+      return Double.NEGATIVE_INFINITY;
+    }
     double toReturn = __parseDouble(s);
 
     if (__isNaN(toReturn)) {

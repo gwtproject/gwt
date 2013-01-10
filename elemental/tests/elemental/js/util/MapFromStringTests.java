@@ -269,4 +269,52 @@ public class MapFromStringTests extends GWTTestCase {
     map.remove(keys[0]);
     assertFalse(map.hasKey(keys[0]));
   }
+
+  /**
+   * Tests {@link JsMapFromStringTo} in dev mode.
+   */
+  public void testMapsFromStringJsInDevMode() {
+    // This is our test subject. Make sure js types work in dev mode.
+    final MapFromStringTo<TestItem> map = JsMapFromStringTo.create();
+
+    // These are his keys.
+    final String[] keys = new String[] {"key-1", "key-2", "key-3"};
+
+    // These are the values for those keys.
+    final TestItem[] vals = new TestItem[] {new TestItem(0), new TestItem(1), new TestItem(2)};
+
+    // Let's put those values in.
+    for (int i = 0, n = keys.length; i < n; ++i) {
+      map.put(keys[i], vals[i]);
+    }
+
+    // Are they all in the right place?
+    for (int i = 0, n = keys.length; i < n; ++i) {
+      assertTrue(map.hasKey(keys[i]));
+      assertEquals(vals[i], map.get(keys[i]));
+    }
+
+    // These are some new values.
+    final TestItem[] newVals = new TestItem[] {new TestItem(3), new TestItem(4), new TestItem(5)};
+
+    // Let's update those keys, ok.
+    for (int i = 0, n = keys.length; i < n; ++i) {
+      map.put(keys[i], newVals[i]);
+    }
+
+    // Are they all in the right place?
+    for (int i = 0, n = keys.length; i < n; ++i) {
+      assertTrue(map.hasKey(keys[i]));
+      assertEquals(newVals[i], map.get(keys[i]));
+    }
+
+    assertSamelitude(keys, map.keys());
+    assertSamelitude(newVals, map.values());
+
+    // Let's remove a key, did it go away?
+    map.remove(keys[0]);
+    assertNull(map.get(keys[0]));
+    assertFalse(map.hasKey(keys[0]));
+  }
+
 }

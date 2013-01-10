@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "N-jNo8tw",
+        "filename": "elemental/src/elemental/js/util/JsMapFromStringTo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T15:10:33Z",
+      "side": 1,
+      "message": "I wonder: given that hasKey(), remove(), get() and put() don\u0027t use hasOwnProperty, and the map is supposed to be an Object.create(null), do we really need to test hasOwnProperty here at all? Couldn\u0027t we simply remove the test in both keys() and values()?",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "N-LWcyhs",
         "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
         "patchSetId": 1
@@ -13,6 +30,58 @@
       "writtenOn": "2013-01-10T06:12:49Z",
       "side": 1,
       "message": "This appears to be a call to an older version of Collections; I had to remove the supplied component class in order to run tests.",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N-vNK2nI",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T15:10:33Z",
+      "side": 1,
+      "message": "Please fix it. We\u0027ll have to do it anyway when we start running those tests \"for real\", so unless there are many other compile errors in tests (in which case they should be fixed all in one go in another change), better fix this test now.",
+      "parentUuid": "N-LWcyhs",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N-jMtUq0",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T15:10:33Z",
+      "side": 1,
+      "message": "How about extracting testMapsFromString into a private method taking the \u0027map\u0027 as argument and calling it in both testMapsFromString and testJsMapsFromString, instead of duplicating code? We agree they should work the same so the test harness can be shared, right?",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N-vMjuro",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T15:10:33Z",
+      "side": 1,
+      "message": "Please rename to testJsMapFromString, and in the javadoc explain that we want to specifically test JsMapFromStringTo in DevMode, where Collections.mapFromStringTo will return a JreMapFromStringTo; but the test will run in both dev and prod mode so calling the method \"test…InDevMode\" is misleading.\n\nEither that or add @DoNotRunWith(Platform.Prod); but in any case, explain that this is to test the Js* flavor when Collections will return the Jre* one and both are valid in the environment (dev mode)",
       "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

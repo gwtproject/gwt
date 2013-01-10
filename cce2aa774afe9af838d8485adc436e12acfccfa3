@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N-tMIfo4",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2601,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T13:54:33Z",
+      "side": 1,
+      "message": "I suspect much more people use strings than char arrays to initialize BigDecimals (and GWT-RPC uses String), and String.valueOf(char[],int,int) is much faster (uses Array.slice and String.fromCharCode) than String#toCharArray (loops of String.length and copies each char using String.charAt), so I wonder whether we shouldn\u0027t use the String-based version here (as before).\n\nOr replacing all the charAt with array indexing compensate the initial slow down?",
+      "revId": "cce2aa774afe9af838d8485adc436e12acfccfa3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N-vOC2tM",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2614,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T13:54:33Z",
+      "side": 1,
+      "message": "Should the offset++ be done in its own line to make it stand up? This code is complex and it\u0027s easy to miss this increment.",
+      "revId": "cce2aa774afe9af838d8485adc436e12acfccfa3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

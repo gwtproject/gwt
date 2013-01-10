@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N-LWcyhs",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-01-10T06:12:49Z",
+      "side": 1,
+      "message": "This appears to be a call to an older version of Collections; I had to remove the supplied component class in order to run tests.",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

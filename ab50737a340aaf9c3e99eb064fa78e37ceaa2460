@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N-pNWBiw",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-10T14:44:02Z",
+      "side": 1,
+      "message": "Given that the native JS parseFloat() already handle those cases, how about adding them to the floatRegex instead?\n\n   /^\\s*[+-]?(NaN|Infinity|((\\d+\\.?\\d*)|(\\.\\d+))([eE][+-]?\\d+)?[dD\nfF]?)\\s*$/\n\n(note: I added NaN and Infinity, and removed the \u0027i\u0027 flag which wasn\u0027t actually needed)\n\nAlso, you don\u0027t test +NaN and +Infinity, which are allowed (according to the JavaDoc of Double.parseDouble)",
+      "revId": "ab50737a340aaf9c3e99eb064fa78e37ceaa2460",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

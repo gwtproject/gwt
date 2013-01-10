@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -87,7 +87,7 @@ public abstract class GWTTestCase extends TestCase {
         }
       }
     }
-  };
+  }
 
   /**
    * Tracks whether the main test body has run (for asynchronous mode).
@@ -115,6 +115,7 @@ public abstract class GWTTestCase extends TestCase {
    */
   private TestCaseUncaughtExceptionHandler uncaughtHandler;
 
+
   // CHECKSTYLE_OFF
   /**
    * Actually run the user's test. Called from {@link GWTRunner}.
@@ -123,16 +124,12 @@ public abstract class GWTTestCase extends TestCase {
     Throwable caught = null;
 
     if (shouldCatchExceptions()) {
-      // Make sure no exceptions escape
-      GWT.setUncaughtExceptionHandler(uncaughtHandler = new TestCaseUncaughtExceptionHandler());
       try {
         runBare();
       } catch (Throwable e) {
         caught = e;
       }
     } else {
-      // Special; make sure all exceptions escape to the browser (for debugging)
-      GWT.setUncaughtExceptionHandler(null);
       runBareTestCaseAvoidingExceptionDecl();
     }
 
@@ -164,6 +161,10 @@ public abstract class GWTTestCase extends TestCase {
   }
 
   public boolean catchExceptions() {
+    return true;
+  }
+
+  public boolean catchUncaughtExceptions() {
     return true;
   }
 
@@ -252,7 +253,20 @@ public abstract class GWTTestCase extends TestCase {
 
   @Override
   protected final void setUp() throws Exception {
+    configureUncaughtHandler();
     gwtSetUp();
+    assertUncaughtExceptionHandler();
+  }
+
+  private void configureUncaughtHandler() {
+    if (shouldCatchExceptions()) {
+      if (catchUncaughtExceptions()) {
+        GWT.setUncaughtExceptionHandler(uncaughtHandler = new TestCaseUncaughtExceptionHandler());
+      }
+    } else {
+      // Special; make sure all exceptions escape to the browser (for debugging)
+      GWT.setUncaughtExceptionHandler(null);
+    }
   }
 
   protected boolean supportsAsync() {
@@ -261,13 +275,26 @@ public abstract class GWTTestCase extends TestCase {
 
   @Override
   protected final void tearDown() throws Exception {
+    // TODO(goktug): Fix so that exceptions thrown from tearDown will not be swallowed.
+    assertUncaughtExceptionHandler();
     gwtTearDown();
+    if (catchUncaughtExceptions()) {
+      GWT.setUncaughtExceptionHandler(uncaughtHandler = null);
+    }
+  }
+
+  private void assertUncaughtExceptionHandler() {
+    if (catchUncaughtExceptions() && GWT.getUncaughtExceptionHandler() != uncaughtHandler) {
+      throw new IllegalStateException("UncaughtExceptionHandler added by GWTTestCase is replaced. "
+          + "GWTTestCase will not be able catch errors reported to UncaughtExceptionHandler.\n"
+          + "(see GWTTestCase#catchUncaughtExceptions)");
+    }
   }
 
   /**
    * Cleans up any outstanding state, reports ex to the remote runner, and kicks
    * off the next test.
-   * 
+   *
    * @param ex The results of this test.
    */
   private void reportResultsAndRunNextMethod(Throwable ex) {
@@ -276,10 +303,6 @@ public abstract class GWTTestCase extends TestCase {
     } catch (Throwable e) {
       // ignore any exceptions thrown from tearDown
     }
-
-    // Remove the UncaughtExceptionHandler we may have installed in __doRunTest.
-    GWT.setUncaughtExceptionHandler(null);
-    uncaughtHandler = null;
 
     JUnitResult myResult = __getOrCreateTestResult();
     if (ex != null) {
@@ -314,7 +337,7 @@ public abstract class GWTTestCase extends TestCase {
    * A helper method to determine if we should catch exceptions. Wraps the call
    * into user code with a try/catch; if the user's code throws an exception, we
    * just ignore the exception and use the default behavior.
-   * 
+   *
    * @return <code>true</code> if exceptions should be handled normally,
    *         <code>false</code> if they should be allowed to escape.
    */

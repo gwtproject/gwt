@@ -17,10 +17,10 @@ package com.google.gwt.junit.client;
 
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.junit.JUnitShell;
-import com.google.gwt.junit.PropertyDefiningStrategy;
 import com.google.gwt.junit.JUnitShell.Strategy;
-import com.google.gwt.junit.client.impl.JUnitResult;
+import com.google.gwt.junit.PropertyDefiningStrategy;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
+import com.google.gwt.junit.client.impl.JUnitResult;
 
 import junit.framework.TestCase;
 import junit.framework.TestResult;
@@ -44,7 +44,7 @@ import java.util.Set;
  * translatable implementation.
  * </p>
  */
-@SuppressWarnings("unused") 
+@SuppressWarnings("unused")
 public abstract class GWTTestCase extends TestCase {
 
   /**
@@ -212,6 +212,16 @@ public abstract class GWTTestCase extends TestCase {
    *         to disable normal JUnit exception reporting
    */
   public boolean catchExceptions() {
+    return true;
+  }
+
+  /**
+   * Determines whether or not exceptions reported to
+   * {@code GWT#getUncaughtExceptionHandler()} will be caught by the test
+   * fixture and treated as an error. Override this method and return
+   * {@code false} to let this exceptions ignored.
+   */
+  public boolean catchUncaughtExceptions() {
     return true;
   }
 

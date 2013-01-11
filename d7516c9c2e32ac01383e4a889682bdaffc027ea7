@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ODPn.86I",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-11T19:49:20Z",
+      "side": 1,
+      "message": "Hi, thanks for putting the issue number, but the first line should actually be something like \"Clarify javadoc for Animation.onUpdate()\"",
+      "revId": "d7516c9c2e32ac01383e4a889682bdaffc027ea7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.rpc;
 
+
 /**
  * An interface implemented by client-side RPC proxy objects. Cast the object
  * returned from {@link com.google.gwt.core.client.GWT#create(Class)} on a
@@ -62,4 +63,18 @@ public interface ServiceDefTarget {
    * @param address a URL that designates the service implementation to call
    */
   void setServiceEntryPoint(String address);
+
+  /**
+   * Sets the module base url of the GWT RPC service.
+   *
+   * The moduleBaseUrl is by default {@link com.google.gwt.core.client.GWT#getModuleBaseURL()}. In
+   * case of a GWT application that is started from the file system this would be something like
+   * file://... This will lead to an exception server side to find the serialization policy file.
+   *
+   * To support GWT in such use cases an explicit set of the moduleBaseUrl is required. Note: You
+   * will need to set the {@link #setServiceEntryPoint(String)} as well!
+   *
+   * @param moduleBaseUrl - the module base url to use for GWT RPC calls.
+   */
+  void setModuleBaseUrl(String moduleBaseUrl);
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "N8rH5KKs",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-11T03:05:51Z",
+      "side": 1,
+      "message": "The fixed issue should be in the description but it shouldn\u0027t be the first line. It should be something short and descriptive. Perhaps:\n\n\"Fix compiler error for class extending an inner class\"\n\n(This is not the full story, but that can be explained later.)",
+      "revId": "198b62c6f2227c14da67b38d38488005c8aa2965",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8tGrDI0",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/InnerClassTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-11T03:05:51Z",
+      "side": 1,
+      "message": "In an assertEquals() the first argument is the expected value and the second is the actual value, so I think you have to reverse the arguments of all these asserts.\n\n(It makes the error messages better.)",
+      "revId": "198b62c6f2227c14da67b38d38488005c8aa2965",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

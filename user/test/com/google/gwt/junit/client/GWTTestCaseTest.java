@@ -34,7 +34,7 @@ import java.util.Collections;
  * This class tests our implementation of the GWTTestCase class which provides the behavior of
  * TestCase that is necessary in GWT.
  */
-public class GWTTestCaseTest extends GWTTestCase {
+public class GWTTestCaseTest extends GWTTestCaseTestBase {
 
   private static void assertNotEquals(double a, double b, double delta) {
     boolean failed = false;
@@ -63,14 +63,10 @@ public class GWTTestCaseTest extends GWTTestCase {
       fail("Expected failure for assertEquals(" + a + ", " + b + ", " + delta + ")");
     }
   }
-  
+
   private Object obj1 = Collections.nCopies(1, "data");
   private Object obj2 = Collections.nCopies(2, "data");
   private Object obj1Equal = Collections.nCopies(1, "data");
-
-  public String getModuleName() {
-    return "com.google.gwt.junit.JUnit";
-  }
 
   @ExpectedFailure(withMessage = "testFail")
   public void testFail() {

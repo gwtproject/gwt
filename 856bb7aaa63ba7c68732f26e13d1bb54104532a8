@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ODnfwqlk",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-11T20:59:04Z",
+      "side": 1,
+      "message": "Write this as \"Fixes issue 5031.\"",
+      "revId": "856bb7aaa63ba7c68732f26e13d1bb54104532a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ODtcAnkQ",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-11T20:59:04Z",
+      "side": 1,
+      "message": "This file failed checkstyle:\n\n\nCheckstyle errors:\nERROR (google3/tmp/google3/third_party/java_src/gwt/svn/trunk/user/src/com/google/gwt/http/client/Request.java:120) -- Line matches the illegal pattern \u0026apos;newline before }\u0026apos;. (com.puppycrawl.tools.checkstyle.checks.RegexpCheck)\nERROR (google3/tmp/google3/third_party/java_src/gwt/svn/trunk/user/src/com/google/gwt/http/client/Request.java:138) -- Line matches the illegal pattern \u0026apos;newline before }\u0026apos;. (com.puppycrawl.tools.checkstyle.checks.RegexpCheck)\nERROR (google3/tmp/google3/third_party/java_src/gwt/svn/trunk/user/src/com/google/gwt/http/client/Request.java:166) -- Line matches the illegal pattern \u0026apos;newline before }\u0026apos;. (com.puppycrawl.tools.checkstyle.checks.RegexpCheck)",
+      "revId": "856bb7aaa63ba7c68732f26e13d1bb54104532a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ODnebCiQ",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-11T20:59:04Z",
+      "side": 1,
+      "message": "Ugh, this caused FailedRequestTest to start failing:\n\n  java.lang.UnsupportedOperationException: ERROR: GWT.create() is only usable in client code!  It cannot be called, for example, from server code.  If you are running a unit test, check that your test case extends GWTTestCase and that GWT.create() is not called from within an initializer or constructor.\n\tat com.google.gwt.core.shared.GWT.create(GWT.java:51)\n\tat com.google.gwt.http.client.Request.\u003cclinit\u003e(Request.java:170)\n\tat com.google.gwt.user.client.rpc.FailedRequestTest.testBasics(FailedRequestTest.java:28)\n\nCan you please change FailedRequestTest to inherit from GWTTestCase instead of TestCase?",
+      "revId": "856bb7aaa63ba7c68732f26e13d1bb54104532a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

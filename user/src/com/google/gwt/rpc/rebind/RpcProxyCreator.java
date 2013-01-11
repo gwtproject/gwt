@@ -17,8 +17,8 @@ package com.google.gwt.rpc.rebind;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.ArtificialRescue;
-import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.core.client.impl.ArtificialRescue.Rescue;
+import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -84,10 +84,10 @@ public class RpcProxyCreator extends ProxyCreator {
   }
 
   @Override
-  protected void generateProxyContructor(SourceWriter srcWriter) {
+  protected void generateProxyContructor(SourceWriter srcWriter, String moduleBaseUrl) {
     srcWriter.println("public " + getProxySimpleName() + "() {");
     srcWriter.indent();
-    srcWriter.println("super(GWT.getModuleBaseURL(),");
+    srcWriter.println("super(" + moduleBaseUrl + ",");
     srcWriter.indent();
     srcWriter.println(getRemoteServiceRelativePath() + ",");
     srcWriter.println("OVERRIDES);");

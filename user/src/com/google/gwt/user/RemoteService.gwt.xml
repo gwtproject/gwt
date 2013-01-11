@@ -54,6 +54,9 @@
   -->
   <define-configuration-property name="rpc.enhancedClasses" is-multi-valued="true"/>
 
+  <define-configuration-property name="rpc.moduleBaseUrl" is-multi-valued="false"/>
+  <set-configuration-property name="rpc.moduleBaseUrl" value="GWT.getModuleBaseURL()" />
+
 	<generate-with class="com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator">
 		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService"/>
 	</generate-with>

@@ -18,8 +18,8 @@ package com.google.gwt.user.rebind.rpc;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.core.ext.BadPropertyValueException;
-import com.google.gwt.core.ext.CachedPropertyInformation;
 import com.google.gwt.core.ext.CachedGeneratorResult;
+import com.google.gwt.core.ext.CachedPropertyInformation;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.PropertyOracle;
@@ -360,7 +360,8 @@ public class ProxyCreator {
     generateProxyFields(srcWriter, typesSentFromBrowser, serializationPolicyStrongName,
         remoteServiceInterfaceName);
 
-    generateProxyContructor(srcWriter);
+    String moduleBaseUrl = getModuleBaseUrl(logger, context);
+    generateProxyContructor(srcWriter, moduleBaseUrl);
 
     generateProxyMethods(srcWriter, typesSentFromBrowser, typeOracle, syncMethToAsyncMethMap);
 
@@ -464,10 +465,10 @@ public class ProxyCreator {
    * using the default address for the
    * {@link com.google.gwt.user.client.rpc.RemoteService RemoteService}.
    */
-  protected void generateProxyContructor(SourceWriter srcWriter) {
+  protected void generateProxyContructor(SourceWriter srcWriter, String moduleBaseUrl) {
     srcWriter.println("public " + getProxySimpleName() + "() {");
     srcWriter.indent();
-    srcWriter.println("super(GWT.getModuleBaseURL(),");
+    srcWriter.println("super(" + moduleBaseUrl + ",");
     srcWriter.indent();
     srcWriter.println(getRemoteServiceRelativePath() + ", ");
     srcWriter.println("SERIALIZATION_POLICY, ");
@@ -707,6 +708,24 @@ public class ProxyCreator {
 
     customSerializersUsed = tsc.getCustomSerializersUsed();
     typesNotUsingCustomSerializers = tsc.getTypesNotUsingCustomSerializers();
+  }
+
+  protected String getModuleBaseUrl(TreeLogger logger, GeneratorContext context)
+      throws UnableToCompleteException {
+    try {
+      // get module base url config value
+      ConfigurationProperty property =
+          context.getPropertyOracle().getConfigurationProperty("rpc.moduleBaseUrl");
+      return property.getValues().get(0);
+    } catch (BadPropertyValueException e) {
+      // if we can`t find it die
+      logger
+          .log(TreeLogger.ERROR,
+              "Configuration property rpc.moduleBaseUrl is not defined. Is RemoteService.gwt.xml inherited?");
+
+
+      throw new UnableToCompleteException();
+    }
   }
 
   protected String getProxySimpleName() {

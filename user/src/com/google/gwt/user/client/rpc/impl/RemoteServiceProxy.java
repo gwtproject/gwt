@@ -201,7 +201,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * The module base URL as specified during construction.
    */
-  private final String moduleBaseURL;
+  private String moduleBaseURL;
 
   /**
    * URL of the {@link com.google.gwt.user.client.rpc.RemoteService
@@ -322,6 +322,13 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
    */
   public void setRpcTokenExceptionHandler(RpcTokenExceptionHandler handler) {
     this.rpcTokenExceptionHandler = handler;
+  }
+
+  /**
+   * @see com.google.gwt.user.client.rpc.ServiceDefTarget#setModuleBaseUrl(java.lang.String)
+   */
+  public void setModuleBaseUrl(String moduleBaseUrl) {
+    this.moduleBaseURL = moduleBaseUrl;
   }
 
   /**

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "N8UiqEXE",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "Done.\n(with a minor change on last sentence)",
+      "parentUuid": "N8gsgB6E",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "N8muqc9g",
         "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-10T23:03:54Z",
       "side": 1,
       "message": "Style nit: could you break this up into two lines?",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8WjENTc",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "N8muqc9g",
       "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "N8agdPcs",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "The user handler might be originated from a static class initializer or a singleton that might not be easy to install twice; and at the end they asked to handle it themselves so we should not interfere at all.",
+      "parentUuid": "N8suxn0s",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "N8suKf28",
         "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-01-10T23:03:54Z",
       "side": 1,
       "message": "I agree that we probably need to swallow exceptions from gwtTearDown() for now for backward compatibility (and it\u0027s an unrelated change).\n\nBut I don\u0027t think we need to do that for the new code. Instead, maybe move this check to reportResultsAndRunNextMethod() so that we can call myResult.setException() if the assertion failed.",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8cjlIZ0",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "N8suKf28",
       "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "N8ciTYQU",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "Done\n\nPlease take another look. I made changes to your suggestion as I have seen many many times, developers just doing what is instructed (e.g overriding and returning false) without actually reading the javadoc :)",
+      "parentUuid": "N8mvYs3w",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "N8gs2R6A",
         "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseUncaughtExceptionHandlerTest.java",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2013-01-10T23:03:54Z",
       "side": 1,
       "message": "I wonder if we should do something like this instead:\n\nvoid gwtSetUp() {\n  reportUncaughtExceptions(false);\n  GWT.setUncaughtExceptionHandler(...);\n}\n\nThe idea is that you can disable (or reenable) the automatic uncaught exception handling at any time during the test, instead of it being all or nothing. This would also make it easier for users to disable it for only one test method in a test class.",
+      "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "N8XOQqqQ",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseUncaughtExceptionHandlerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-11T00:31:08Z",
+      "side": 1,
+      "message": "Actually that is an interesting idea.\n\n pros\n + It becomes easier to make the choice per test \n + report can be disabled temporarily\n\n cons\n - more complex semantics as it opens room to switch anytime or multiple times per run\n - lose parallelism of the APIs (wrt #catchException)\n\nAlso, uncaught handler is a global thing for apps that will very unlikely to change per test and will be very likely be set in setup phase that will still make it difficult to configure per test. If they are not testing the app, they will very likely not need opting out anyway.\n\nSo I would prefer to keep it as it is which I think is simpler, unless we cannot come up with more compelling scenarios.",
+      "parentUuid": "N8gs2R6A",
       "revId": "82c77e741f45f40067eafda813402ea3c2e7701e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

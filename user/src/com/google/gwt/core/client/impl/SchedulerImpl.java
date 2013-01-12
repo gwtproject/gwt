@@ -165,8 +165,10 @@ public class SchedulerImpl extends Scheduler {
 
     boolean canceledSomeTasks = false;
     double start = Duration.currentTimeMillis();
+    boolean executedSomeTask = false;
 
     while (Duration.currentTimeMillis() - start < TIME_SLICE) {
+      executedSomeTask = false;
       for (int i = 0; i < length; i++) {
         assert tasks.length() == length : "Working array length changed "
             + tasks.length() + " != " + length;
@@ -174,6 +176,7 @@ public class SchedulerImpl extends Scheduler {
         if (t == null) {
           continue;
         }
+        executedSomeTask = true;
 
         assert t.isRepeating() : "Found a non-repeating Task";
 
@@ -181,6 +184,10 @@ public class SchedulerImpl extends Scheduler {
           tasks.set(i, null);
           canceledSomeTasks = true;
         }
+      }
+      if (!executedSomeTask) {
+        // no work left to do, break to avoid busy waiting until TIME_SLICE is reached
+        break;
       }
     }
 

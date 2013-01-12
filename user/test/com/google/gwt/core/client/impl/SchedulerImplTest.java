@@ -75,6 +75,26 @@ public class SchedulerImplTest extends GWTTestCase {
     void schedule(ScheduledCommand cmd);
   }
 
+  private static class RepeatingCommandImpl implements RepeatingCommand {
+
+    private boolean firstTime = true;
+    private boolean commandRanSecondTime = false;
+    private long timeCommandRan;
+
+    @Override
+    public boolean execute() {
+      if (firstTime) {
+        firstTime = false;
+        return true;
+      }
+      timeCommandRan = System.currentTimeMillis();
+      commandRanSecondTime = true;
+      return false;
+    }
+
+
+  }
+
   private static final int TEST_DELAY = 5000;
 
   @Override
@@ -100,6 +120,34 @@ public class SchedulerImplTest extends GWTTestCase {
         assertTrue(values[0]);
         assertNull(impl.deferredCommands);
         finishTest();
+      }
+    });
+
+    delayTestFinish(TEST_DELAY);
+  }
+
+
+
+  public void testEarlyBreakIfAllTaskAreFinished() {
+    final SchedulerImpl impl = new SchedulerImpl();
+
+    final RepeatingCommandImpl command = new RepeatingCommandImpl();
+
+    impl.scheduleIncremental(command);
+
+    impl.scheduleDeferred(new ScheduledCommand() {
+
+      @Override
+      public void execute() {
+
+        if (command.commandRanSecondTime) {
+          long delay = System.currentTimeMillis() - command.timeCommandRan;
+          assertTrue("repeating command did not break early", delay < 100);
+          finishTest();
+        } else {
+          impl.scheduleDeferred(this);
+        }
+
       }
     });
 

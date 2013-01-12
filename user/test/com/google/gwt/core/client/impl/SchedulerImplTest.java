@@ -15,6 +15,7 @@
  */
 package com.google.gwt.core.client.impl;
 
+import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -75,6 +76,24 @@ public class SchedulerImplTest extends GWTTestCase {
     void schedule(ScheduledCommand cmd);
   }
 
+  private static class RepeatingCommandImpl implements RepeatingCommand {
+
+    private boolean firstTime = true;
+    private boolean commandRanSecondTime = false;
+
+    @Override
+    public boolean execute() {
+      if (firstTime) {
+        firstTime = false;
+        return true;
+      }
+      commandRanSecondTime = true;
+      return false;
+    }
+
+
+  }
+
   private static final int TEST_DELAY = 5000;
 
   @Override
@@ -100,6 +119,43 @@ public class SchedulerImplTest extends GWTTestCase {
         assertTrue(values[0]);
         assertNull(impl.deferredCommands);
         finishTest();
+      }
+    });
+
+    delayTestFinish(TEST_DELAY);
+  }
+
+
+
+  public void testEarlyBreakIfAllTaskAreFinished() {
+    final SchedulerImpl impl = new SchedulerImpl() {
+      @Override
+      Duration createDuration() {
+        return new Duration() {
+          @Override
+          public int elapsedMillis() {
+            // never expire
+            return 0;
+          }
+        };
+      }
+    };
+
+    final RepeatingCommandImpl command = new RepeatingCommandImpl();
+
+    impl.scheduleIncremental(command);
+
+    impl.scheduleDeferred(new ScheduledCommand() {
+
+      @Override
+      public void execute() {
+
+        if (command.commandRanSecondTime) {
+          finishTest();
+        } else {
+          impl.scheduleDeferred(this);
+        }
+
       }
     });
 

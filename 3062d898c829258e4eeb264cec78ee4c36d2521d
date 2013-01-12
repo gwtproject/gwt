@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ODh2GN.o",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-12T00:18:54Z",
+      "side": 1,
+      "message": "Please change the description to:\n\nFix possible NPE in CellWidget.onBrowserEvent()\n\nFixes issue 7649.",
+      "revId": "3062d898c829258e4eeb264cec78ee4c36d2521d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

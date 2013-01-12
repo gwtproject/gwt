@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ODr0Tw2s",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-12T00:41:37Z",
+      "side": 1,
+      "message": "Fix assertion message\n\nFixes issue 4534.",
+      "revId": "73a913c44bfbd167c9a1f92fae356748e7bc4228",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

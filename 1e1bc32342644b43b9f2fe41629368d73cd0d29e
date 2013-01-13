@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OH2M5IqY",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:36:29Z",
+      "side": 1,
+      "message": "HttpCookie.domainMatches(cookie.getDomain(), url.getHost()) instead of the endsWith() would be more correct, but that can be done later.",
+      "revId": "1e1bc32342644b43b9f2fe41629368d73cd0d29e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OH0M.JpA",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/testing/UrlRequestTransport.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:36:29Z",
+      "side": 1,
+      "message": "It would be more correct to check with \u0027path\u0027 ending with a \u0027/\u0027, but it\u0027s outside the scope of this change and can wait.\n\n    String slashedPath \u003d (path \u003d\u003d null || path.endsWith(\"/\")) ? path : path + \"/\";\n    if (path \u003d\u003d null || url.getPath().equals(path) || url.getPath().startsWith(slashedPath)) {",
+      "revId": "1e1bc32342644b43b9f2fe41629368d73cd0d29e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

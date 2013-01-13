@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OHyNaCu4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:59:37Z",
+      "side": 1,
+      "message": "Nit: SchedulerImpl",
+      "revId": "dbe8956d03cb683b242abe66c89cfe482c03e7cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OH2NgApw",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:59:37Z",
+      "side": 1,
+      "message": "Nit: capitalization, full-stop at end of paragraph.\n\nNit: \"the code *was* not breaking\", because that\u0027s what you\u0027re fixing",
+      "revId": "dbe8956d03cb683b242abe66c89cfe482c03e7cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OH0NlBqo",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:59:37Z",
+      "side": 1,
+      "message": "Nit: detet → detect; though that sentence is not really needed actually.",
+      "revId": "dbe8956d03cb683b242abe66c89cfe482c03e7cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OH.NM8kI",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-13T09:40:30Z",
+      "side": 1,
+      "message": "Nit: why is this variable declared above rather than here?\n\nShould probably be named \"executedSomeTasks\" too (plural) but we need a native-English-speaker ;-)",
+      "revId": "b84b4368b2f788d9895698a2f4d6069ad1b28bf6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

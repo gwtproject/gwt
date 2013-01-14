@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OJB5xYmg",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-14T22:44:30Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "revId": "27ded25782d9a9c7022237c67baa4a7d77bb42d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OIlRILC0",
+        "filename": "user/test/com/google/gwt/core/client/impl/SchedulerImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-14T22:44:30Z",
+      "side": 1,
+      "message": "I\u0027m little bit lost here, perhaps I might be missing something. Why we have are keeping \"commandRanSecond\"? \n\nAn alternative approach would be:\n\n {\n   ...\n   RepeatingCommand command \u003d new RepeatingCommand() {\n     boolean execute() {\n       // scheduled  \"finishTest\" will never work if we are in an infinite loop.\n       finishTestDeferred(); \n       return false;\n     }\n   };\n   impl.scheduleIncremental(command);\n }\n\n private void finishTestDeferred() {\n   new SchedulerImpl().scheduleDeferred(new RepeatingCommand() {\n     void execute() {\n       finishTest();\n      }\n    });\n }",
+      "revId": "27ded25782d9a9c7022237c67baa4a7d77bb42d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

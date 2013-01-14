@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "OOYltOZE",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-14T22:55:17Z",
+      "side": 1,
+      "message": "No need to sort here like in SerializationUtils?",
+      "revId": "9f1d815e68946c49ae2030da7c10e452c408d935",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OKZgRDLs",
         "filename": "user/test/com/google/gwt/user/rebind/rpc/SerializationUtilsTest.java",
         "patchSetId": 2

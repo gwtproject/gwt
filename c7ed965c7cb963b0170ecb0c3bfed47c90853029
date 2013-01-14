@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OH6OsuqM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-14T10:15:56Z",
+      "side": 1,
+      "message": "We all expect code not to break ;-)\n\n\"the code was not breaking out of the loop\".\n\nAlternatively, you could just drop this paragraph and add \"if all tasks are finished\" to the summary-line.",
+      "revId": "c7ed965c7cb963b0170ecb0c3bfed47c90853029",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OH4OpvpM",
+        "filename": "user/test/com/google/gwt/core/client/impl/SchedulerImplTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-14T10:15:56Z",
+      "side": 1,
+      "message": "Can we reuse the TIME_SLICE constant from SchedulerImpl?\n\nI\u0027m worried this test can be flaky if the test server is overloaded: there\u0027s no guarantee the scheduleDeferred command is called less than 100ms after the incremental commands are run.\n\nI think the best way to test this would be to directly call runRepeatingTasks with an array of tasks and when the method returns, iff it returns with an empty array, then check how long it took. (if it returns a non-empty array, it just means we haven\u0027t been able to run the test accurately; the only way to accurately test it would be to \"mock\" the time and make sure the method is called exactly 3 times).\n\nIn the end, I\u0027m not sure it\u0027s worth the trouble testing this change, what matters is that we don\u0027t break anything.\n\nThat  being said, I\u0027m not the best person to talk about flaky tests, so let\u0027s wait for someone else to validate/reject my hypothesis.",
+      "revId": "c7ed965c7cb963b0170ecb0c3bfed47c90853029",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

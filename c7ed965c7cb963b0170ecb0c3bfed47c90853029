@@ -33,6 +33,24 @@
       "revId": "c7ed965c7cb963b0170ecb0c3bfed47c90853029",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OJBva1OI",
+        "filename": "user/test/com/google/gwt/core/client/impl/SchedulerImplTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-14T20:01:55Z",
+      "side": 1,
+      "message": "Yes, this is potentially flaky. We need to mock the duration to properly test this. \nAn easy way to do that is putting a package visible createDuration() method in SchedulerImpl, then you can override and return your mock Duration instance in the test. For this to work, you need to change the time checking in the loop to following (which is actually more readable):\n\n Duration duration \u003d createDuration();\n while ( duration.elapsedMillis() \u003c TIME_SLICE) {\n   ....\n }",
+      "parentUuid": "OH4OpvpM",
+      "revId": "c7ed965c7cb963b0170ecb0c3bfed47c90853029",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

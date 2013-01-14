@@ -18,6 +18,8 @@ package com.google.gwt.user.rebind.rpc;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JArrayType;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JEnumConstant;
+import com.google.gwt.core.ext.typeinfo.JEnumType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
@@ -27,6 +29,7 @@ import com.google.gwt.dev.util.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -268,6 +271,18 @@ public class SerializationUtils {
     } else if (type.isArray() != null) {
       JArrayType isArray = type.isArray();
       generateSerializationSignature(typeOracle, isArray.getComponentType(), crc);
+    } else if (type.isEnum() != null) {
+      List<JEnumConstant> constants = Arrays.asList(type.isEnum().getEnumConstants());
+      // Make sure the list is sorted; the getEnumConstants contract doesn't guarantees it.
+      Collections.sort(constants, new Comparator<JEnumConstant>() {
+        @Override
+        public int compare(JEnumConstant o1, JEnumConstant o2) {
+          return Integer.compare(o1.getOrdinal(), o2.getOrdinal());
+        }
+      });
+      for (JEnumConstant constant : constants) {
+        crc.update(constant.getName().getBytes(Util.DEFAULT_ENCODING));
+      }
     } else if (type.isClassOrInterface() != null) {
       JClassType isClassOrInterface = type.isClassOrInterface();
       JField[] fields = getSerializableFields(typeOracle, isClassOrInterface);

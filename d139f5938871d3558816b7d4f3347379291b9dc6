@@ -52,6 +52,24 @@
       "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OPIYOij4",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-15T02:19:23Z",
+      "side": 0,
+      "message": "Most likely an oversight.\n\nhttps://code.google.com/p/google-web-toolkit/source/detail?r\u003d7344 changes an \u0027e\u0027 to [eE] and the commit message talks about now accepting both \u0027e\u0027 and \u0027E\u0027 for the exponent, but that was already the case with /i, which was retained.\nI guess rice and fabbott just didn\u0027t see the flag back then (as well as everyone who later updated the regexp, including me)",
+      "parentUuid": "OONDa9HI",
+      "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

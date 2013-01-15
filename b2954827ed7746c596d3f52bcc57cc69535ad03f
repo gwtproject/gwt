@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OUBKBzFo",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-15T23:56:11Z",
+      "side": 1,
+      "message": "This is okay, but it seems like it would be clearer like this?\n\nif (options.isClosureCompilerEnabled()) {\n  ... log warnings based on options ...\n} else {\n  ... run reports based on options ...\n}",
+      "revId": "b2954827ed7746c596d3f52bcc57cc69535ad03f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

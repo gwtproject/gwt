@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OOJCJ3IA",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-15T01:49:04Z",
+      "side": 0,
+      "message": "Any idea why this used to be case-insensitive?",
+      "revId": "d139f5938871d3558816b7d4f3347379291b9dc6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

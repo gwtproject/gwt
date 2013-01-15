@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OQsA4HkE",
+        "filename": "eclipse/tools/cldr-import/.classpath",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5165
+      },
+      "writtenOn": "2013-01-15T18:17:51Z",
+      "side": 1,
+      "message": "John do you think that it is still required to have icu4j.jar and utilities.jar in the cldr/22.1 subdirectory or is it sufficient to keep it in icu4j only?",
+      "revId": "1a4a206bc254b57ec0e95654aff2d878a8b400b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -485,7 +485,13 @@ public class JavaToJavaScriptCompiler {
       PermutationResult toReturn =
           new PermutationResultImpl(js, permutation, makeSymbolMap(symbolTable, jsProgram), ranges);
       CompilationMetricsArtifact compilationMetrics = null;
+
       // TODO: enable this when ClosureCompiler is enabled
+      if (options.isClosureCompilerEnabled() && options.isCompilerMetricsEnabled()) {
+        logger.log(TreeLogger.WARN, "Incompatible options: -XenableClosureCompiler and "
+            + "-XcompilerMetric; ignoring -XcompilerMetric.");
+      }
+
       if (!options.isClosureCompilerEnabled() && options.isCompilerMetricsEnabled()) {
         compilationMetrics = new CompilationMetricsArtifact(permutation.getId());
         compilationMetrics.setCompileElapsedMilliseconds(System.currentTimeMillis()
@@ -499,6 +505,10 @@ public class JavaToJavaScriptCompiler {
       }
 
       // TODO: enable this when ClosureCompiler is enabled
+      if (options.isClosureCompilerEnabled() && options.isSoycEnabled()) {
+        logger.log(TreeLogger.WARN, "Incompatible options: -XenableClosureCompiler and "
+            + "-compileReport; ignoring -compileReport.");
+      }
       if (!options.isClosureCompilerEnabled()) {
         toReturn.addArtifacts(makeSoycArtifacts(logger, permutationId, jprogram, js, sizeBreakdowns,
             options.isSoycExtra() ? sourceInfoMaps : null, dependencies, jjsmap, obfuscateMap,

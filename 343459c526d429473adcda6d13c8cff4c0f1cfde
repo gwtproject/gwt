@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OneWUdqM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-19T01:50:31Z",
+      "side": 1,
+      "message": "also Firefox shares the same deferred binding in the xml, that means it will also pickup once it is unprefixed.",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OnUU0atg",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-19T01:50:31Z",
+      "side": 1,
+      "message": "why  is native not the default? If browser supports unprefixed requestAnimationFrame, I think we can safely use it; especially as we are not relying on any parameters or return values.",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OnQU.crg",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-19T01:50:31Z",
+      "side": 1,
+      "message": "Perhaps we can introduce a \"use-prefixed\" property (false by default) to be used in this kind of situations?",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

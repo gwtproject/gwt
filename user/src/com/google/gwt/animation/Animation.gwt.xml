@@ -29,14 +29,31 @@
   </replace-with>
 
   <!-- Implementation based on mozRequestAnimationFrame -->
+  <!-- Disabled by default because it uses a prefixed API. -->
+<!--
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplMozilla">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
     <when-property-is name="user.agent" value="gecko1_8"/>
   </replace-with>
+-->
 
   <!-- Implementation based on webkitRequestAnimationFrame -->
+  <!-- Disabled by default because it uses a prefixed API. -->
+<!--
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplWebkit">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
     <when-property-is name="user.agent" value="safari"/>
+  </replace-with>
+-->
+
+    <!--
+     Implementation based on requestAnimationFrame. Note: as of January 2013 this is
+     only available for Chrome 24 and above. Safari will fall back to the Timer-based
+     implementation, but this may change in a future Safari release.
+     -->
+  <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplNative">
+    <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
+      <when-property-is name="user.agent" value="gecko1_8"/>
+      <when-property-is name="user.agent" value="safari"/>
   </replace-with>
 </module>

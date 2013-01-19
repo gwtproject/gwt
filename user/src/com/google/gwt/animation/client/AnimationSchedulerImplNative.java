@@ -18,26 +18,28 @@ package com.google.gwt.animation.client;
 import com.google.gwt.dom.client.Element;
 
 /**
- * Implementation using <code>mozRequestAnimationFrame</code>. Not currently used by default.
+ * An implementation using the unprefixed <code>requestAnimationFrame</code>.
+ * Since browser support is in flux, assumes as little as possible about the
+ * JavaScript API. In particular, we only pass in the callback and don't look
+ * at the return value. Also, the callback doesn't look at any parameters.
+ *
+ * <p>(This API was unprefixed in Chrome 24, despite not being standardized yet.)
  * 
  * @see <a
- *      href="https://developer.mozilla.org/en/DOM/window.mozRequestAnimationFrame">
- *      Documentation on the MDN</a>
+ *      href="http://www.w3.org/TR/animation-timing/">Timing control for script-based animations</a>
  */
-class AnimationSchedulerImplMozilla extends AnimationSchedulerImpl {
+class AnimationSchedulerImplNative extends AnimationSchedulerImpl {
 
   /**
-   * Mozilla implementation of {@link AnimationScheduler.AnimationHandle}.
-   * Mozilla does not provide a request ID, so we mark a boolean in the handle
-   * and check it in the callback wrapper.
+   * A handle that remembers whether it was cancelled..
    */
   private class AnimationHandleImpl extends AnimationHandle {
     @SuppressWarnings("unused")
-    private boolean canceled;
+    private boolean cancelled;
 
     @Override
     public void cancel() {
-      canceled = true;
+      cancelled = true;
     }
   }
 
@@ -50,28 +52,27 @@ class AnimationSchedulerImplMozilla extends AnimationSchedulerImpl {
 
   @Override
   protected native boolean isNativelySupported() /*-{
-    return !!$wnd.mozRequestAnimationFrame;
+    return !!($wnd.requestAnimationFrame);
   }-*/;
 
   /**
-   * Request an animation frame. Firefox does not return a request ID, so we
-   * create a JavaScriptObject and add an expando named "canceled" to inidicate
-   * if the request was canceled. The callback wrapper checks the expando before
+   * Request an animation frame. To avoid depending on a request ID, we
+   * create a JavaScriptObject and add an expando named "cancelled" to indicate
+   * that the request was cancelled. The callback wrapper checks the expando before
    * executing the user callback.
-   * 
+   *
    * @param callback the user callback to execute
    * @param handle the handle object
    */
   private native void requestAnimationFrameImpl(AnimationCallback callback,
-      AnimationHandleImpl handle) /*-{
+                                                AnimationHandleImpl handle) /*-{
     var wrapper = $entry(function() {
-      if (!handle.@com.google.gwt.animation.client.AnimationSchedulerImplMozilla.AnimationHandleImpl::canceled) {
-        // Older versions of firefox pass the current timestamp, but the spec has changed to pass a
-        // high resolution timer instead, and newer versions of Firefox will eventually change.
+      if (!handle.@com.google.gwt.animation.client.AnimationSchedulerImplNative.AnimationHandleImpl::cancelled) {
+        // Ignore any time parameter that we were called with.
         var now = @com.google.gwt.core.client.Duration::currentTimeMillis()();
         callback.@com.google.gwt.animation.client.AnimationScheduler.AnimationCallback::execute(D)(now);
       }
     });
-    $wnd.mozRequestAnimationFrame(wrapper);
+    $wnd.requestAnimationFrame(wrapper);
   }-*/;
 }

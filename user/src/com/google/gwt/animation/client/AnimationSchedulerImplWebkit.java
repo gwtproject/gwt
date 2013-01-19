@@ -19,7 +19,7 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * Implementation using <code>webkitRequestAnimationFrame</code> and
- * <code>webkitCancelRequestAnimationFrame</code>.
+ * <code>webkitCancelRequestAnimationFrame</code>. Not currently used by default.
  * 
  * @see <a
  *      href="http://www.chromium.org/developers/web-platform-status#TOC-requestAnimationFrame">

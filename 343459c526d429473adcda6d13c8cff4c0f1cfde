@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "OoqBMWnM",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-21T00:30:15Z",
+      "side": 1,
+      "message": "According to \"Can I Use\" and the MSDN, it seems like IE10 has it unprefixed already (with the same behavior as Chrome 24, which is the one from the latest Editor\u0027s Draft).",
+      "parentUuid": "OnUU0atg",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OnQU.crg",
         "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
         "patchSetId": 1
@@ -47,6 +65,41 @@
       "writtenOn": "2013-01-19T01:50:31Z",
       "side": 1,
       "message": "Perhaps we can introduce a \"use-prefixed\" property (false by default) to be used in this kind of situations?",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OoqAUWgA",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-21T00:30:15Z",
+      "side": 1,
+      "message": "+1\n\nI proposed it on the G+ Community too: https://plus.google.com/114156500057804356924/posts/45D9ZfZkF28\n\nThe default value is controversial though. I\u0027d lean toward setting it to true by default and documenting it prominently in the developer guide (and possibly even emitting a warning at compile-time). Let\u0027s discuss it in GWT-Contrib though.\n\nIdeally, there should probably be a property per module, whose default value is controlled by a global property declared in c.g.g.core.Core. Something like:\n\n   \u003cdefine-property name\u003d\"animation.useExperimentalApis\" values\u003d\"true,false\" /\u003e\n   \u003cset-property name\u003d\"animation.useExperimentalApis\" value\u003d\"true\"\u003e\n      \u003cwhen-property-is name\u003d\"useExperimentalApis\" value\u003d\"true\" /\u003e\n   \u003c/set-property\u003e\n   \u003cset-property name\u003d\"animation.useExperimentalApis\" value\u003d\"false\"\u003e\n      \u003cwhen-property-is name\u003d\"useExperimentalApis\" value\u003d\"false\" /\u003e\n   \u003c/set-property\u003e",
+      "parentUuid": "OnQU.crg",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OosAZXjk",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-21T00:30:15Z",
+      "side": 1,
+      "message": "The Javadoc doesn\u0027t match the implementation. We should fix *ImplMozilla too.",
       "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

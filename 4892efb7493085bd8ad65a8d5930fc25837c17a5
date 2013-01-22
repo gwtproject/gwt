@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Oqsx672g",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-01-22T18:21:10Z",
+      "side": 1,
+      "message": "If seen were a Set\u003cType\u003e, we could call !seen.add() instead of .contains() followed by add() later.  If it\u0027s not contained, it\u0027s getting added anyway, so it likely costs less to do one extra add than many extra contains()",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Ony2benw",
         "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
         "patchSetId": 3
@@ -13,6 +30,58 @@
       "writtenOn": "2013-01-22T17:35:23Z",
       "side": 1,
       "message": "Does it matter that findActualType might return different Type for \"equivalent\" types depending on the which of the types in a cycle is hit first?",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OqmypY.Q",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-01-22T18:21:10Z",
+      "side": 1,
+      "message": "The optimal solution would detect when a type defined on the class is reused in interfaces or fields, so they would be the same instance, and always resolve correctly.\n\nAs it is, when the types represent the same erased type (which they must, at least in the setup from the original issue), they will be functionally equivalent (except in maps and \u003d\u003d checks, which is why this cycle detection was failing).\n\nWhen an interface generic references the class generic, they are two different Type variable instances, but the same actual type.\n\nPerhaps it could be solved with an equals() method that checks .getGenericDeclaration() or .getBounds() for equivalence.  I could test .getGenericDeclaration() to see if it maps to the source of the type we are trying to resolve...",
+      "parentUuid": "Ony2benw",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OqkywH0M",
+        "filename": "user/test/com/google/gwt/user/server/rpc/RPCTypeCheckTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2475,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-01-22T18:21:10Z",
+      "side": 1,
+      "message": "If this test reproduces the error correctly, mine actually didn\u0027t (despite being setup the same as the test case from the issue); as such, my test case should be deleted as this one makes it obsolete.",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OqoyN140",
+        "filename": "user/test/com/google/gwt/user/server/rpc/examples/TypeVariableCycle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-01-22T18:21:10Z",
+      "side": 1,
+      "message": "I wonder if we shouldn\u0027t also test with different bounds, like ? extends C or ? super C as well;",
       "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

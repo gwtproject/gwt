@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OvK8wuZ8",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-01-22T23:47:34Z",
+      "side": 1,
+      "message": "nit missing space after ,",
+      "revId": "7e4bcb13ad1c7e854d8d954adc0b85143f99d5d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

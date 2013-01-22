@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "OrOrcb0Q",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "For server-side code the performance difference is likely to be lost in the noise, but sure, done.",
+      "parentUuid": "Oqsx672g",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Ony2benw",
         "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "OrKrwt-A",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "I think it might matter (in particular,the bound could be different), but it will require a lot more changes to fix. Not going into an infinite loop is an improvement, so I\u0027m declaring it out of scope for this change.",
+      "parentUuid": "Ony2benw",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OqkywH0M",
         "filename": "user/test/com/google/gwt/user/server/rpc/RPCTypeCheckTest.java",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2013-01-22T18:21:10Z",
       "side": 1,
       "message": "If this test reproduces the error correctly, mine actually didn\u0027t (despite being setup the same as the test case from the issue); as such, my test case should be deleted as this one makes it obsolete.",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OrEqHo2k",
+        "filename": "user/test/com/google/gwt/user/server/rpc/RPCTypeCheckTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2475,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "Yep, already done. (Your test actually did reproduce it for a size 2 cycle and this test creates a size 3 cycle. I figure one test is enough to make sure we have cycle detection.)",
+      "parentUuid": "OqkywH0M",
       "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "OrKrmdww",
+        "filename": "user/test/com/google/gwt/user/server/rpc/RPCTypeCheckTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2477,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "OvIYUygA",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OvCYd1hc",
         "filename": "user/test/com/google/gwt/user/server/rpc/examples/TypeVariableCycle.java",
         "patchSetId": 3
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "OrAplK6o",
+        "filename": "user/test/com/google/gwt/user/server/rpc/examples/TypeVariableCycle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "renamed to \"testcases\" to match user.rebind.rpc.testcases\"",
+      "parentUuid": "OvCYd1hc",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OqoyN140",
         "filename": "user/test/com/google/gwt/user/server/rpc/examples/TypeVariableCycle.java",
         "patchSetId": 3
@@ -116,6 +206,24 @@
       "writtenOn": "2013-01-22T18:21:10Z",
       "side": 1,
       "message": "I wonder if we shouldn\u0027t also test with different bounds, like ? extends C or ? super C as well;",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OrArsSx4",
+        "filename": "user/test/com/google/gwt/user/server/rpc/examples/TypeVariableCycle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-22T22:50:37Z",
+      "side": 1,
+      "message": "Yes, I suspect there are more bugs in the type-checking code, but I\u0027m going to leave that for another time.",
+      "parentUuid": "OqoyN140",
       "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

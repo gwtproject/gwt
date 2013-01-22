@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Ony2benw",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-01-22T17:35:23Z",
+      "side": 1,
+      "message": "Does it matter that findActualType might return different Type for \"equivalent\" types depending on the which of the types in a cycle is hit first?",
+      "revId": "4892efb7493085bd8ad65a8d5930fc25837c17a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

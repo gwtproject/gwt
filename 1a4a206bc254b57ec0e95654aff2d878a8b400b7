@@ -16,6 +16,24 @@
       "revId": "1a4a206bc254b57ec0e95654aff2d878a8b400b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OpZKzqpk",
+        "filename": "eclipse/tools/cldr-import/.classpath",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-23T06:17:38Z",
+      "side": 1,
+      "message": "The only issue would be that the CLDR utilities might only work with the version of ICU4J they were built against.  I suppose we can just make sure to just update them at the same time.",
+      "parentUuid": "OQsA4HkE",
+      "revId": "1a4a206bc254b57ec0e95654aff2d878a8b400b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

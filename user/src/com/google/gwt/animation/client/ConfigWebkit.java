@@ -15,21 +15,8 @@
  */
 package com.google.gwt.animation.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * An implementation that optionally falls back on mozRequestAnimationFrame.
+ * A config that's intended for Webkit. (For passing to GWT.create.)
  */
-public class AnimationSchedulerImplWebkit extends AnimationSchedulerImplNative {
-
-  @Override
-  protected Config getConfig() {
-    return GWT.create(ConfigWebkit.class);
-  }
-
-  @Override
-  protected native JavaScriptObject getPrefixedFunction() /*-{
-    return $wnd.webkitRequestAnimationFrame;
-  }-*/;
+public interface ConfigWebkit extends Config {
 }

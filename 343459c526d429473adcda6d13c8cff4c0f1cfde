@@ -54,6 +54,42 @@
     },
     {
       "key": {
+        "uuid": "OrMBZT-o",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-24T01:33:46Z",
+      "side": 1,
+      "message": "I have Windows 7 so it\u0027s not so easy to test. Can someone try it on Windows 8? (And it seems like it\u0027s another patch.)",
+      "parentUuid": "OoqBMWnM",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OrABgp5o",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-24T01:33:46Z",
+      "side": 1,
+      "message": "I think we shouldn\u0027t use it without testing it?",
+      "parentUuid": "OnUU0atg",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OnQU.crg",
         "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
         "patchSetId": 1
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "OrEBun4w",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-24T01:33:46Z",
+      "side": 1,
+      "message": "See the new patch. Not sure about the defaults yet.",
+      "parentUuid": "OnQU.crg",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OosAZXjk",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
         "patchSetId": 1
@@ -100,6 +154,24 @@
       "writtenOn": "2013-01-21T00:30:15Z",
       "side": 1,
       "message": "The Javadoc doesn\u0027t match the implementation. We should fix *ImplMozilla too.",
+      "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OrOAwC6E",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-24T01:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "OosAZXjk",
       "revId": "343459c526d429473adcda6d13c8cff4c0f1cfde",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

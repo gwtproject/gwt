@@ -15,21 +15,17 @@
  */
 package com.google.gwt.animation.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * An implementation that optionally falls back on mozRequestAnimationFrame.
+ * A configuration that tries requestAnimationFrame followed by the prefixed API.
  */
-public class AnimationSchedulerImplWebkit extends AnimationSchedulerImplNative {
-
+public class ConfigFallback implements ConfigWebkit, ConfigMozilla {
   @Override
-  protected Config getConfig() {
-    return GWT.create(ConfigWebkit.class);
+  public boolean tryUnprefixedApi() {
+    return true;
   }
 
   @Override
-  protected native JavaScriptObject getPrefixedFunction() /*-{
-    return $wnd.webkitRequestAnimationFrame;
-  }-*/;
+  public boolean tryPrefixedApi() {
+    return true;
+  }
 }

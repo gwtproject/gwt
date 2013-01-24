@@ -23,20 +23,86 @@
   <!-- Include User module to inherit Timer -->
   <inherits name="com.google.gwt.user.User"/>
 
-  <!-- Fallback implementation, based on a timer -->
+  <!-- Flags for controlling the API's used for each permutation.
+       "fallback" means try unprefixed, then prefixed
+       "none" means just use a timer.
+  -->
+  <define-property name="requestAnimationFrameMozilla" values="prefixed,unprefixed,fallback,none"/>
+
+  <define-property name="requestAnimationFrameWebkit" values="prefixed,unprefixed,fallback,none"/>
+
+  <!-- Default implementation, based on a timer -->
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplTimer">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
   </replace-with>
 
-  <!-- Implementation based on mozRequestAnimationFrame -->
+  <!-- Implementation for Firefox.
+    As of January 2013, Firefox 18 used the prefixed version, but there were plans
+    to switch to unprefixed. See: https://bugzilla.mozilla.org/show_bug.cgi?id=753453
+  -->
+  <set-property name="requestAnimationFrameMozilla" value="fallback"/>
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplMozilla">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
     <when-property-is name="user.agent" value="gecko1_8"/>
+    <none>
+      <when-property-is name="requestAnimationFrameMozilla" value="none"/>
+    </none>
   </replace-with>
 
-  <!-- Implementation based on webkitRequestAnimationFrame -->
+  <!-- Implementation for Chrome and Safari.
+    As of January 2013, Chrome 24 used the unprefixed version and Safari 6 used
+    the prefixed version.
+  -->
+  <set-property name="requestAnimationFrameWebkit" value="fallback"/>
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplWebkit">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
     <when-property-is name="user.agent" value="safari"/>
+    <none>
+      <when-property-is name="requestAnimationFrameWebkit" value="none"/>
+    </none>
+  </replace-with>
+
+  <!-- unfortunate boilerplate for getting the settings to each permutation -->
+
+  <replace-with class="com.google.gwt.animation.client.ConfigFallback">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigMozilla"/>
+    </any>
+    <when-property-is name="requestAnimationFrameMozilla" value="fallback"/>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigPrefixed">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigMozilla"/>
+    </any>
+    <when-property-is name="requestAnimationFrameMozilla" value="prefixed"/>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigUnprefixed">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigMozilla"/>
+    </any>
+    <when-property-is name="requestAnimationFrameMozilla" value="unprefixed"/>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigFallback">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigWebkit"/>
+    </any>
+    <when-property-is name="requestAnimationFrameWebkit" value="fallback"/>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigPrefixed">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigWebkit"/>
+    </any>
+    <when-property-is name="requestAnimationFrameWebkit" value="prefixed"/>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigUnprefixed">
+    <any>
+      <when-type-is class="com.google.gwt.animation.client.ConfigWebkit"/>
+    </any>
+    <when-property-is name="requestAnimationFrameWebkit" value="unprefixed"/>
   </replace-with>
 </module>

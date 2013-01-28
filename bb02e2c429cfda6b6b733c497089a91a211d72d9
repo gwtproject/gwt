@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "O2Ce.wtU",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-28T23:46:12Z",
+      "side": 1,
+      "message": "Can this exception happen anymore?",
+      "revId": "bb02e2c429cfda6b6b733c497089a91a211d72d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "O2Kf70qA",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2612,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-28T23:46:12Z",
+      "side": 1,
+      "message": "update comment",
+      "revId": "bb02e2c429cfda6b6b733c497089a91a211d72d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "O2CfTYtI",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2613,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-28T23:46:12Z",
+      "side": 1,
+      "message": "This code seems overly complicated because after identifying special cases we\u0027re falling through, so the rest of the code still has to deal with them. It seems like it would be clearer to handle them separately and return early:\n\nif (offset \u003d\u003d last) {\n  // empty string. What should this do?\n  return ...\n}\n\nif (val[offset] \u003d\u003d \u0027+\u0027 || val[offset] \u003d\u003d \u0027-\u0027) {\n  if (val[offset] \u003d\u003d \u0027-\u0027) {\n    unscaledBuffer.append(\u0027-\u0027);\n  }\n  offset++;\n  if (offset\u003d\u003dlast) {\n    // ... just a + or -. Is this a number?\n    return or throw something\n  }\n  if (val[offset] \u003d\u003d \u0027+\u0027 || val[offset] \u003d\u003d \u0027-\u0027) {\n    // extra sign\n    throw ...\n  }\n}\n// skip leading zeros\nwhile (offset \u003c last \u0026\u0026 val[offset] \u003d\u003d \u00270\u0027) {\n  offset++;\n}\nif (offset \u003d\u003d last) {\n  // it\u0027s zero.\n  return ...\n}",
+      "revId": "bb02e2c429cfda6b6b733c497089a91a211d72d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

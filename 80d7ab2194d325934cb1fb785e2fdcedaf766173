@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PDhHvO6o",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-30T21:44:33Z",
+      "side": 1,
+      "message": "Should this be uncaughtExceptionHandlerForTest.onCaughtException(t)?",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PDlEH838",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-30T21:44:33Z",
+      "side": 1,
+      "message": "Intentionally \"if\" and not \"else if\"?\n\n\nAlso, can we re-throw the exception if no handler was registered?  I suppose that would change the interface.\n\nAlternatively, we could return a boolean indicating whether it was reported, then callers could write\n\n    if (!GWT.maybeReportUncaughtException(t))\n      throw t;\n\nif they want the exception to propagate.",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PDvHrn5k",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-01-30T21:44:33Z",
+      "side": 1,
+      "message": "Can we rename the variable to just \"handler\" to match setUncaughtExceptionHandler()?",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

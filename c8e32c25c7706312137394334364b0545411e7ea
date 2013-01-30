@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PDx8hhgQ",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "line too long",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD7-l8sc",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "Can we keep the reference to DOM.dispatchEvent as an example?",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD18u3v8",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "perhaps \"maybeReportUncaughtException\"?",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD79JcrY",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "It might be a bit more reliable to report it to the test framework first, in case there\u0027s an exception in the other uncaught exception handler.\n\nMaybe something like this:\n\ninterface TestExceptionHandler {\n  onUncaughtException(Throwable t, UncaughtExceptionHandler nextHandler);\n}\n\nif (testHandler !\u003d null) {\n  testHandler.onUncaughtException(t, uncaughtExceptionHandler);\n} else if (uncaughtExceptionHandler !\u003d null) {\n  ...\n}\n\nIn the test harness, we could call the original handler (if any) and catch the exception in the handler (if any) and report it.",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD38pmvU",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "Do we really want this to be a public API? We could make it private to GWTTestCase by making it default access here and putting a public method in a less used class, perhaps in Impl or a new GwtTestApi class.",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD9-.big",
+        "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:34:45Z",
+      "side": 1,
+      "message": "Could you avoid reformatting trailing whitespace in this CL? It makes the diffs smaller and you probably don\u0027t want your name to show up on those lines in \u0027annotate\u0027, or at least not yet.",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

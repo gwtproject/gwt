@@ -618,7 +618,7 @@ public class JavaToJavaScriptCompiler {
     try {
       // (2) Assemble the Java AST.
       UnifyAst unifyAst = new UnifyAst(jprogram, jsProgram, options, rpo);
-      unifyAst.addRootTypes(allRootTypes);
+      unifyAst.addRootTypes(logger, allRootTypes);
       // TODO: move this into UnifyAst?
       findEntryPoints(logger, rpo, declEntryPts, jprogram);
       unifyAst.exec(logger);

@@ -525,7 +525,9 @@ public class UnifyAst {
     this.classFileMapBySource = rpo.getCompilationState().getClassFileMapBySource();
   }
 
-  public void addRootTypes(Collection<String> sourceTypeNames) throws UnableToCompleteException {
+  public void addRootTypes(TreeLogger logger, Collection<String> sourceTypeNames)
+      throws UnableToCompleteException {
+    this.logger = logger;
     for (String sourceTypeName : sourceTypeNames) {
       searchForTypeBySource(sourceTypeName);
     }

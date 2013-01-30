@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "PD987Duc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PDx8hhgQ",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PD7-l8sc",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-30T20:34:45Z",
       "side": 1,
       "message": "Can we keep the reference to DOM.dispatchEvent as an example?",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PDz8mgs8",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "There was not longer uncaught exception handling in DOM.dispatch event so I\u0027m putting a reference to com.google.gwt.core.client.impl.Impl.",
+      "parentUuid": "PD7-l8sc",
       "revId": "c8e32c25c7706312137394334364b0545411e7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "PDzJRGQg",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "Done.\nHopefully, I will introduce the one that always report in the next patch, in that case we can use method name reportUncaughtException..",
+      "parentUuid": "PD18u3v8",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PD79JcrY",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-01-30T20:34:45Z",
       "side": 1,
       "message": "It might be a bit more reliable to report it to the test framework first, in case there\u0027s an exception in the other uncaught exception handler.\n\nMaybe something like this:\n\ninterface TestExceptionHandler {\n  onUncaughtException(Throwable t, UncaughtExceptionHandler nextHandler);\n}\n\nif (testHandler !\u003d null) {\n  testHandler.onUncaughtException(t, uncaughtExceptionHandler);\n} else if (uncaughtExceptionHandler !\u003d null) {\n  ...\n}\n\nIn the test harness, we could call the original handler (if any) and catch the exception in the handler (if any) and report it.",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD5JrTbA",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "Done.\n\nI changed the order. I\u0027m not sure the other one carries the weight of added complexity. \nAlso as now on, we will be in the control of exception reporting, we can do add similar changes later.",
+      "parentUuid": "PD79JcrY",
       "revId": "c8e32c25c7706312137394334364b0545411e7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "PD5J9jWQ",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "This is public in the sense as developers can set it to null to disable exception reporting to the test frameworks.",
+      "parentUuid": "PD38pmvU",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PD9-.big",
         "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-01-30T20:34:45Z",
       "side": 1,
       "message": "Could you avoid reformatting trailing whitespace in this CL? It makes the diffs smaller and you probably don\u0027t want your name to show up on those lines in \u0027annotate\u0027, or at least not yet.",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD9K8JQo",
+        "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T21:15:46Z",
+      "side": 1,
+      "message": "I can revert them. Are you referring to this specific CL or in general?\n\nEclipse doesn\u0027t give the option to remove trailing spaces just for edited lines. When that feature it is not enabled, it becomes pretty painful to do it manually. \n\nAlso this is usually fixes trailing spaces just in the comments so that was the reason I didn\u0027t mind much.",
+      "parentUuid": "PD9-.big",
       "revId": "c8e32c25c7706312137394334364b0545411e7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PD1Ke1cE",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T20:55:31Z",
+      "side": 1,
+      "message": "It seems like it would be cleaner to pass the logger to the constructor and make it a final field. (It is only constructed in two places and it will be the same logger.)",
+      "revId": "5a8f6973d0873f9df0e1133302345a558ad44e32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

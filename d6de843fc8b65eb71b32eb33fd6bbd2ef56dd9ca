@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PHKZV5sI",
+        "filename": "user/src/com/google/gwt/user/RemoteService.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-01-30T18:55:58Z",
+      "side": 1,
+      "message": "I really don\u0027t like putting code here. It should also probably be \"com.google.gwt.core.client.GWT.getModuleBaseURL()\"",
+      "revId": "d6de843fc8b65eb71b32eb33fd6bbd2ef56dd9ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

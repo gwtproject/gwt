@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,13 +23,13 @@ import java.util.List;
 
 /**
  * The base implementation for AsyncProxy instances.
- * 
+ *
  * @param <T> the type to be returned from the GWT.create call
  */
 public abstract class AsyncProxyBase<T> implements AsyncProxy<T> {
   /**
    * Simple parameterized command type.
-   * 
+   *
    * @param <T> as above
    */
   protected interface ParamCommand<T> {
@@ -111,7 +111,8 @@ public abstract class AsyncProxyBase<T> implements AsyncProxy<T> {
       if (getCallback0() != null) {
         getCallback0().onFailure(t);
       } else {
-        GWT.getUncaughtExceptionHandler().onUncaughtException(t);
+        // TODO(goktug): this is a no-op if handler is not set and exception will be swallowed.
+        GWT.reportUncaughtException(t);
       }
     }
   }

@@ -57,7 +57,7 @@ class StorageImpl {
         try {
           handler.onStorageChange(event);
         } catch (Throwable t) {
-          ueh.onUncaughtException(t);
+          GWT.reportUncaughtException(t);
         }
       } else {
         handler.onStorageChange(event);
@@ -199,12 +199,12 @@ class StorageImpl {
     @com.google.gwt.storage.client.StorageImpl::jsHandler = $entry(function(event) {
       @com.google.gwt.storage.client.StorageImpl::handleStorageEvent(Lcom/google/gwt/storage/client/StorageEvent;)(event);
     });
-    $wnd.addEventListener("storage", 
+    $wnd.addEventListener("storage",
       @com.google.gwt.storage.client.StorageImpl::jsHandler, false);
   }-*/;
 
   /**
-   * Returns the {@link List} of {@link StorageEvent.Handler}s 
+   * Returns the {@link List} of {@link StorageEvent.Handler}s
    * registered, which is never <code>null</code>.
    */
   protected List<StorageEvent.Handler> getStorageEventHandlers() {
@@ -216,7 +216,7 @@ class StorageImpl {
 
   /**
    * Returns the {@link Storage} object that was affected in the event.
-   * 
+   *
    * @return the {@link Storage} object that was affected in the event.
    */
   protected native Storage getStorageFromEvent(StorageEvent event) /*-{
@@ -228,7 +228,7 @@ class StorageImpl {
   }-*/;
 
   protected native void removeStorageEventHandler0() /*-{
-    $wnd.removeEventListener("storage", 
+    $wnd.removeEventListener("storage",
       @com.google.gwt.storage.client.StorageImpl::jsHandler, false);
   }-*/;
 }

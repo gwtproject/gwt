@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -31,37 +31,37 @@ import java.lang.annotation.Target;
  * <p>
  * Once method playback has finished, the proxy will continue to forward
  * invocations onto the instantiated object.
- * 
+ *
  * <p>
  * Example use:
- * 
+ *
  * <pre>
  * interface IFoo {
  *   void doSomething(int a, int b);
  *   void anotherMethad(Object o);
  * }
  * class FooImpl implements IFoo { .... }
- * 
+ *
  * {@literal @}ConcreteType(FooImpl.class)
  * interface FooProxy extends AsyncProxy&lt;IFoo&gt;, IFoo {}
- * 
+ *
  * class UserOfIFoo {
  *   private IFoo foo = GWT.create(FooProxy.class);
- *   
+ *
  *   void makeTrouble() {
  *     // This first call triggers a runAsync load
  *     foo.doSomething(1, 2);
- *     
+ *
  *     // and this second will replayed after the call to doSomething()
  *     foo.anotherMethod("A string");
  *   }
  * }
  * </pre>
- * 
+ *
  * For cases where dispatch speed is critical, a ProxyCallback can be installed
  * in order to reassign the field containing the AsyncProxy instance with the
  * backing object:
- * 
+ *
  * <pre>
  * class UserOfIFoo {
  *   private IFoo fooOrProxy = GWT.create(FooProxy.class);
@@ -74,17 +74,17 @@ import java.lang.annotation.Target;
  *       }
  *     });
  *   }
- *   
+ *
  *   void makeTrouble() {
  *     // This first call triggers a runAsync load
  *     fooOrProxy.doSomething(1, 2);
- *     
+ *
  *     // and this second will also be replayed before the above onComplete is called
  *     fooOrProxy.anotherMethod("A string");
  *   }
  * }
  * </pre>
- * 
+ *
  * @param <T> the type of interface that must be implemented by the derivative
  *          class.
  */
@@ -104,7 +104,7 @@ public interface AsyncProxy<T> {
    * annotation may cause surprising operation if the consuming code does not
    * expect this behavior; for example a call to a property setter followed by a
    * call to the getter could return null,
-   * 
+   *
    * @see DefaultValue
    */
   @Documented
@@ -125,12 +125,12 @@ public interface AsyncProxy<T> {
   /**
    * This annotation specifies the return value for primitive methods when the
    * {@link AllowNonVoid} annotation has been applied to an AsyncProxy.
-   * 
+   *
    * The annotation may be applied to the definition of the AsyncProxy type or
    * individual methods defined on the target interface. If the annotation is
    * applied to the AsyncProxy type, then it will apply to all methods
    * implemented by the proxy.
-   * 
+   *
    * The correct default value will be chosen from the value methods defined in
    * this type based on the return type of the method.
    */
@@ -163,14 +163,14 @@ public interface AsyncProxy<T> {
 
   /**
    * The callback used by {@link AsyncProxy#setProxyCallback(ProxyCallback)}.
-   * 
+   *
    * @param <T> the interface parameterization of AsyncProxy.
    */
   public abstract static class ProxyCallback<T> {
     /**
      * This method will be invoked by the AsyncProxy after method playback is
      * complete.
-     * 
+     *
      * @param instance the instance
      */
     public void onComplete(T instance) {
@@ -180,16 +180,15 @@ public interface AsyncProxy<T> {
      * Invokes the global uncaught exception handler.
      */
     public void onFailure(Throwable t) {
-      if (GWT.getUncaughtExceptionHandler() != null) {
-        GWT.getUncaughtExceptionHandler().onUncaughtException(t);
-      }
+      // TODO(goktug): this is a no-op if handler is not set and exception will be swallowed.
+      GWT.reportUncaughtException(t);
     }
 
     /**
      * This method will be called with the instance object before method replay
      * starts. This provides the developer with the opportunity to perform
      * secondary initialization of the backing object.
-     * 
+     *
      * @param instance the instance
      */
     public void onInit(T instance) {

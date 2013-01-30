@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -151,7 +151,7 @@ public class SchedulerImpl extends Scheduler {
 
   /**
    * Execute a list of Tasks that hold RepeatingCommands.
-   * 
+   *
    * @return A replacement array that is possibly a shorter copy of
    *         <code>tasks</code>
    */
@@ -205,7 +205,7 @@ public class SchedulerImpl extends Scheduler {
    * that want to repeat will be pushed onto the <code>rescheduled</code> queue.
    * The contents of <code>tasks</code> may not be altered while this method is
    * executing.
-   * 
+   *
    * @return <code>rescheduled</code> or a newly-allocated array if
    *         <code>rescheduled</code> is null.
    */
@@ -228,9 +228,8 @@ public class SchedulerImpl extends Scheduler {
           t.executeScheduled();
         }
       } catch (Throwable e) {
-        if (GWT.getUncaughtExceptionHandler() != null) {
-          GWT.getUncaughtExceptionHandler().onUncaughtException(e);
-        }
+        // TODO(goktug): this is a no-op if handler is not set and exception will be swallowed.
+        GWT.reportUncaughtException(e);
       }
     }
     return rescheduled;

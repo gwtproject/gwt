@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -57,7 +57,7 @@ public final class Impl {
    * The function passed to this method will be invoked via
    * <code>Function.apply()</code> with the current <code>this</code> value and
    * the invocation arguments passed to <code>$entry</code>.
-   * 
+   *
    * @param jsFunction a JS function to invoke, which is typically a JSNI
    *          reference to a static Java method
    * @return the value returned when <code>jsFunction</code> is invoked, or
@@ -133,7 +133,7 @@ public final class Impl {
    * Returns the obfuscated name of members in the compiled output. This is a
    * thin wrapper around JNameOf AST nodes and is therefore meaningless to
    * implement in Development Mode.
-   * 
+   *
    * @param jsniIdent a string literal specifying a type, field, or method. Raw
    *          type names may also be used to obtain the name of the type's seed
    *          function.
@@ -241,7 +241,7 @@ public final class Impl {
         try {
           return apply(jsFunction, thisObj, arguments);
         } catch (Throwable t) {
-          GWT.getUncaughtExceptionHandler().onUncaughtException(t);
+          GWT.reportUncaughtException(t);
           return undefined();
         }
       } else {

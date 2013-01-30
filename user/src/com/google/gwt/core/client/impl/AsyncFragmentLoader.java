@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,20 +24,20 @@ import com.google.gwt.core.client.RunAsyncCallback;
  * Low-level support to download an extra fragment of code. This should not be
  * invoked directly by user code.
  * </p>
- * 
+ *
  * <p>
  * The fragments are numbered as follows, assuming there are <em>m</em> split
  * points:
- * 
+ *
  * <ul>
  * <li>0 -- the <em>base</em> fragment, which is initially downloaded
  * <li>1..m -- fragments for each split point
  * <li>m+1 -- the <em>leftovers</em> fragment of code that goes nowhere else
  * </ul>
- * 
+ *
  * <p>
  * Since the precise way to load code depends on the linker, linkers should
- * specify a rebind of {@link LoadingStrategy}. 
+ * specify a rebind of {@link LoadingStrategy}.
  */
 public class AsyncFragmentLoader {
   /**
@@ -109,7 +109,7 @@ public class AsyncFragmentLoader {
     private native JavaScriptObject createStatsEvent(String eventGroup,
         String type, int fragment, int size) /*-{
       var evt = {
-       moduleName: @com.google.gwt.core.client.GWT::getModuleName()(), 
+       moduleName: @com.google.gwt.core.client.GWT::getModuleName()(),
         sessionId: $sessionId,
         subSystem: 'runAsync',
         evtGroup: eventGroup,
@@ -269,7 +269,7 @@ public class AsyncFragmentLoader {
 
   /**
    * Called by compiler-generated code when a fragment is loaded.
-   * 
+   *
    * @param fragment the fragment number
    */
   public static void onLoad(int fragment) {
@@ -278,7 +278,7 @@ public class AsyncFragmentLoader {
 
   /**
    * Called by the compiler to implement {@link GWT#runAsync}.
-   * 
+   *
    * @param fragment the fragment number
    * @param callback the callback to run
    */
@@ -288,7 +288,7 @@ public class AsyncFragmentLoader {
 
   /**
    * Creates the loader stored as {@link #BROWSER_LOADER}.
-   * 
+   *
    * @returns {@code null} if not in GWT client code, where
    *          {@link GWT#create(Class)} cannot be used, or a fragment loader for
    *          the user's application otherwise.
@@ -440,7 +440,7 @@ public class AsyncFragmentLoader {
    * the code will be installed, and the code is expected to invoke its own
    * on-success hooks, including a call to either
    * {@link #leftoversFragmentHasLoaded()} or {@link #fragmentHasLoaded(int)}.
-   * 
+   *
    * @param splitPoint the split point whose code needs to be loaded
    */
   void inject(int splitPoint, LoadTerminatedHandler loadErrorHandler) {
@@ -575,8 +575,8 @@ public class AsyncFragmentLoader {
         } else {
           try {
             ((RunAsyncCallback) callback).onSuccess();
-          } catch (Throwable e) {
-            handler.onUncaughtException(e);
+          } catch (Throwable t) {
+            GWT.reportUncaughtException(t);
           }
         }
       }

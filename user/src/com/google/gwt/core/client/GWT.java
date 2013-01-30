@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -61,18 +61,24 @@ public final class GWT {
    * Defaults to <code>null</code> in Production Mode and an instance of
    * {@link DefaultUncaughtExceptionHandler} in Development Mode.
    */
-  private static UncaughtExceptionHandler sUncaughtExceptionHandler = null;
+  private static UncaughtExceptionHandler uncaughtExceptionHandler = null;
+
+  /**
+   * UncaughtExceptionHandler that is used by unit tests to spy on uncaught
+   * exceptions.
+   */
+  private static UncaughtExceptionHandler uncaughtExceptionHandlerForTest;
 
   /**
    * Instantiates a class via deferred binding.
-   * 
+   *
    * <p>
    * The argument to {@link #create(Class)}&#160;<i>must</i> be a class literal
    * because the Production Mode compiler must be able to statically determine
    * the requested type at compile-time. This can be tricky because using a
    * {@link Class} variable may appear to work correctly in Development Mode.
    * </p>
-   * 
+   *
    * @param classLiteral a class literal specifying the base class to be
    *          instantiated
    * @return the new instance, which must be cast to the requested class
@@ -90,7 +96,7 @@ public final class GWT {
    * paths of resources which may be relative to the host page. Typically, you
    * should use {@link #getModuleBaseURL()} unless you have a specific reason to
    * load a resource relative to the host page.
-   * 
+   *
    * @return if non-empty, the base URL is guaranteed to end with a slash
    */
   public static String getHostPageBaseURL() {
@@ -157,18 +163,31 @@ public final class GWT {
   }
 
   /**
-   * Returns the currently active uncaughtExceptionHandler. "Top level" methods
-   * that dispatch events from the browser into user code must call this method
-   * on entry to get the active handler. If the active handler is null, the
-   * entry point must allow exceptions to escape into the browser. If the
-   * handler is non-null, exceptions must be caught and routed to the handler.
-   * See the source code for <code>DOM.dispatchEvent()</code> for an example
-   * of how to handle this correctly.
-   * 
+   * Returns the currently active uncaughtExceptionHandler.
+   *
    * @return the currently active handler, or null if no handler is active.
+   *
+   * @see #reportUncaughtException(Throwable)
    */
   public static UncaughtExceptionHandler getUncaughtExceptionHandler() {
-    return sUncaughtExceptionHandler;
+    return uncaughtExceptionHandler;
+  }
+
+  /**
+   * Reports an exception caught at the "top level" to a handler set via
+   * {@link #setUncaughtExceptionHandler(UncaughtExceptionHandler)}. This is
+   * used in places where the browser calls into user code such as event
+   * callbacks, timers, and RPC.
+   * <p>
+   * This method is a no-op if no handler is set.
+   */
+  public static void reportUncaughtException(Throwable t) {
+    if (uncaughtExceptionHandler != null) {
+      uncaughtExceptionHandler.onUncaughtException(t);
+    }
+    if (uncaughtExceptionHandlerForTest != null) {
+      uncaughtExceptionHandler.onUncaughtException(t);
+    }
   }
 
   /**
@@ -258,14 +277,28 @@ public final class GWT {
   /**
    * Sets a custom uncaught exception handler. See
    * {@link #getUncaughtExceptionHandler()} for details.
-   * 
-   * @param handler the handler that should be called when an exception is about
-   *          to escape to the browser, or <code>null</code> to clear the
-   *          handler and allow exceptions to escape.
+   *
+   * @param handler the handler that should be called when an exception is
+   *        about to escape to the browser, or <code>null</code> to clear the
+   *        handler and allow exceptions to escape.
    */
   public static void setUncaughtExceptionHandler(
       UncaughtExceptionHandler handler) {
-    sUncaughtExceptionHandler = handler;
+    uncaughtExceptionHandler = handler;
+  }
+
+  /**
+   * Set an uncaught exception handler to spy on uncaught exceptions in unit
+   * tests.
+   * <p>
+   * Setting this method will not interfere with any exception handling logic;
+   * i.e. {@link #getUncaughtExceptionHandler()} will still return null if a
+   * handler is not set via
+   * {@link #setUncaughtExceptionHandler(UncaughtExceptionHandler)}.
+   */
+  public static void setUncaughtExceptionHandlerForTest(
+      UncaughtExceptionHandler uncaughtHandler) {
+    uncaughtExceptionHandlerForTest = uncaughtHandler;
   }
 
   /**

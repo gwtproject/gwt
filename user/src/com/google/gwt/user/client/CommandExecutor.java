@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,7 +17,6 @@ package com.google.gwt.user.client;
 
 import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,16 +27,16 @@ import java.util.List;
  * all currently pending event handlers have completed. This class attempts to
  * protect against slow script warnings by running commands in small time
  * increments.
- * 
+ *
  * <p>
  * It is still possible that a poorly written command could cause a slow script
  * warning which a user may choose to cancel. In that event, a
  * {@link CommandCanceledException} or an
- * {@link IncrementalCommandCanceledException} is reported through the current
- * {@link UncaughtExceptionHandler} depending on the type of command which
+ * {@link IncrementalCommandCanceledException} is reported through
+ * {@link GWT#reportUncaughtException} depending on the type of command which
  * caused the warning. All other commands will continue to be executed.
  * </p>
- * 
+ *
  * TODO(mmendez): Can an SSW be detected without using a timer? Currently, if a
  * {@link Command} or an {@link IncrementalCommand} calls either
  * {@link Window#alert(String)} or the JavaScript <code>alert(String)</code>
@@ -69,7 +68,7 @@ class CommandExecutor {
 
     /**
      * Returns <code>true</code> if there are more commands in the queue.
-     * 
+     *
      * @return <code>true</code> if there are more commands in the queue.
      */
     public boolean hasNext() {
@@ -79,7 +78,7 @@ class CommandExecutor {
     /**
      * Returns the next command from the queue. When the end of the dispatch
      * region is reached it will wrap back to the start.
-     * 
+     *
      * @return next command from the queue.
      */
     public Object next() {
@@ -94,7 +93,7 @@ class CommandExecutor {
 
     /**
      * Removes the command which was previously returned by {@link #next()}.
-     * 
+     *
      */
     public void remove() {
       assert (last >= 0);
@@ -113,7 +112,7 @@ class CommandExecutor {
 
     /**
      * Returns the last element returned by {@link #next()}.
-     * 
+     *
      * @return last element returned by {@link #next()}
      */
     private Object getLast() {
@@ -152,7 +151,7 @@ class CommandExecutor {
 
   /**
    * Returns true the end time has been reached or exceeded.
-   * 
+   *
    * @param currentTimeMillis current time in milliseconds
    * @param startTimeMillis end time in milliseconds
    * @return true if the end time has been reached
@@ -220,7 +219,7 @@ class CommandExecutor {
 
   /**
    * Submits a {@link Command} for execution.
-   * 
+   *
    * @param command command to submit
    */
   public void submit(Command command) {
@@ -231,7 +230,7 @@ class CommandExecutor {
 
   /**
    * Submits an {@link IncrementalCommand} for execution.
-   * 
+   *
    * @param command command to submit
    */
   public void submit(IncrementalCommand command) {
@@ -250,18 +249,11 @@ class CommandExecutor {
     iterator.remove();
     assert (cmd != null);
 
-    RuntimeException ex = null;
     if (cmd instanceof Command) {
-      ex = new CommandCanceledException((Command) cmd);
+      GWT.reportUncaughtException(new CommandCanceledException((Command) cmd));
     } else if (cmd instanceof IncrementalCommand) {
-      ex = new IncrementalCommandCanceledException((IncrementalCommand) cmd);
-    }
-
-    if (ex != null) {
-      UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
-      if (ueh != null) {
-        ueh.onUncaughtException(ex);
-      }
+      GWT.reportUncaughtException(
+          new IncrementalCommandCanceledException((IncrementalCommand) cmd));
     }
 
     setExecuting(false);
@@ -281,7 +273,7 @@ class CommandExecutor {
    * <li>The command that it was processing was canceled due to a false
    * cancellation -- in this case we exit without updating any state</li>
    * </ul>
-   * 
+   *
    * @param startTimeMillis the time when this method started
    */
   protected void doExecuteCommands(double startTimeMillis) {
@@ -373,7 +365,7 @@ class CommandExecutor {
   /**
    * Returns <code>true</code> if this instance is currently dispatching
    * commands.
-   * 
+   *
    * @return <code>true</code> if this instance is currently dispatching
    *         commands
    */
@@ -384,7 +376,7 @@ class CommandExecutor {
   /**
    * Returns <code>true</code> if a the dispatch timer was scheduled but it
    * still has not fired.
-   * 
+   *
    * @return <code>true</code> if a the dispatch timer was scheduled but it
    *         still has not fired
    */

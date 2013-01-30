@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "PD7Vwc-w",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T23:49:49Z",
+      "side": 1,
+      "message": "Yes, good catch. There is actually a test would fail with this error but was not part of this patch :(",
+      "parentUuid": "PDhHvO6o",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PDlEH838",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "PD-Wzi5g",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T23:49:49Z",
+      "side": 1,
+      "message": "Intentionally \"if\" as I want to the same code flow for both unit tests and production.\n\nOriginally I tried writing a version of this method that was doing exactly what you are suggesting but I noticed that in a lot places that approach was causing a lot of complexity and refactoring to handle it properly as they are written in a way to swallow the exceptions.\n\nAlso code pieces that re-throw the exception is actually following a more complex logic right now; they are not actually catching the exception in the first place.\n\nMy plan is to turn this method into a reportUncaughtException which will make the exception to escape to browser in a deferred when there is no uncaught exception handler but hope will not break the code flow.",
+      "parentUuid": "PDlEH838",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PDvHrn5k",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-01-30T21:44:33Z",
       "side": 1,
       "message": "Can we rename the variable to just \"handler\" to match setUncaughtExceptionHandler()?",
+      "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PDzVUYx8",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-01-30T23:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PDvHrn5k",
       "revId": "80d7ab2194d325934cb1fb785e2fdcedaf766173",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

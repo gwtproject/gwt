@@ -241,7 +241,7 @@ public final class Impl {
         try {
           return apply(jsFunction, thisObj, arguments);
         } catch (Throwable t) {
-          GWT.getUncaughtExceptionHandler().onUncaughtException(t);
+          GWT.maybeReportUncaughtException(t);
           return undefined();
         }
       } else {

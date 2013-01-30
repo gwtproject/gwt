@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "PDxLvPao",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-01-30T21:45:41Z",
+      "side": 1,
+      "message": "That makes sense, but I don\u0027t think this is the right API for that use case.\n\nIn production code, the uncaughtExceptionHandlerForTest field should not be used at all so it will compile away. So I think this method doesn\u0027t belong in a non-testing public API, particularly a very visible one like \"GWT\".\n\nIn a test, if there\u0027s a reason to disable the test\u0027s exception handler (which should be rare), it seems like it\u0027s more readable if it happens in gwtSetUp() or the test method itself, so someone reading the test knows that there\u0027s something special going on.\n\nSo it seems like there should be a private API for GWTTestCase to use, and we should add a protected method to GWTTestCase itself to disable its default exception handling?",
+      "parentUuid": "PD5J9jWQ",
+      "revId": "c8e32c25c7706312137394334364b0545411e7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PD9-.big",
         "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
         "patchSetId": 1

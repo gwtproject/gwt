@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PDSy9MAQ",
+        "filename": "user/test/com/google/gwt/user/UiPart1Suite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-01-31T20:57:25Z",
+      "side": 1,
+      "message": "Couldn\u0027t we come up with better groupings than just alphabetical?  Ie, group them by types of widgets being tested, etc?",
+      "revId": "0cc07c78b9d1084d88417446cd64e3b63fe2f98c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

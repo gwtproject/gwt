@@ -48,7 +48,7 @@ abstract class AnimationSchedulerImpl extends AnimationScheduler {
 
   /**
    * Check if the implementation is natively supported.
-   * 
+   *
    * @return true if natively supported, false if not
    */
   protected abstract boolean isNativelySupported();

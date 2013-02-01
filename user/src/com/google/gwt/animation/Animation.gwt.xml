@@ -23,20 +23,87 @@
   <!-- Include User module to inherit Timer -->
   <inherits name="com.google.gwt.user.User"/>
 
-  <!-- Fallback implementation, based on a timer -->
+  <!-- Flags for controlling which native API to use for each permutation.
+       "prefixed" means to try the unstable, prefixed API, then fall back to a timer.
+       "unprefixed" means to try requestAnimationFrame, then fall back to a timer.
+       "fallback" means try unprefixed, then prefixed, then timer.
+       "none" means just use a timer.
+
+       As of January 2013:
+         Chrome 24 has both the unprefixed and prefixed API
+         Safari 6 has the prefixed API only.
+         Mozilla has the prefixed API. See: https://bugzilla.mozilla.org/show_bug.cgi?id=753453
+  -->
+  <define-property name="requestAnimationFrameMozilla" values="prefixed,unprefixed,fallback,none"/>
+  <set-property name="requestAnimationFrameMozilla" value="fallback"/>
+  <define-property name="requestAnimationFrameWebkit" values="prefixed,unprefixed,fallback,none"/>
+  <set-property name="requestAnimationFrameWebkit" value="fallback"/>
+
+  <!-- Default implementation, based on a timer -->
   <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplTimer">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
   </replace-with>
 
-  <!-- Implementation based on mozRequestAnimationFrame -->
-  <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplMozilla">
+  <!-- Configurable implementation that tries to use the native API. -->
+  <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplNative">
     <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
+    <any>
+      <when-property-is name="user.agent" value="gecko1_8"/>
+      <when-property-is name="requestAnimationFrameWebkit" value="none"/>
+    </any>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.BrowserFunctionsMozilla">
+    <when-type-is class="com.google.gwt.animation.client.BrowserFunctions"/>
     <when-property-is name="user.agent" value="gecko1_8"/>
   </replace-with>
 
-  <!-- Implementation based on webkitRequestAnimationFrame -->
-  <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplWebkit">
-    <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
+  <replace-with class="com.google.gwt.animation.client.BrowserFunctionsWebkit">
+    <when-type-is class="com.google.gwt.animation.client.BrowserFunctions"/>
     <when-property-is name="user.agent" value="safari"/>
+  </replace-with>
+
+  <!-- unfortunate boilerplate for getting the settings to each permutation -->
+
+  <replace-with class="com.google.gwt.animation.client.ConfigFallback">
+    <when-type-is class="com.google.gwt.animation.client.Config"/>
+    <any>
+      <all>
+        <when-property-is name="requestAnimationFrameMozilla" value="fallback"/>
+        <when-property-is name="user.agent" value="gecko1_8"/>
+      </all>
+      <all>
+        <when-property-is name="requestAnimationFrameWebkit" value="fallback"/>
+        <when-property-is name="user.agent" value="safari"/>
+      </all>
+    </any>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigPrefixed">
+    <when-type-is class="com.google.gwt.animation.client.Config"/>
+    <any>
+      <all>
+        <when-property-is name="requestAnimationFrameMozilla" value="prefixed"/>
+        <when-property-is name="user.agent" value="gecko1_8"/>
+      </all>
+      <all>
+        <when-property-is name="requestAnimationFrameWebkit" value="prefixed"/>
+        <when-property-is name="user.agent" value="safari"/>
+      </all>
+    </any>
+  </replace-with>
+
+  <replace-with class="com.google.gwt.animation.client.ConfigUnprefixed">
+    <when-type-is class="com.google.gwt.animation.client.Config"/>
+    <any>
+      <all>
+        <when-property-is name="requestAnimationFrameMozilla" value="unprefixed"/>
+        <when-property-is name="user.agent" value="gecko1_8"/>
+      </all>
+      <all>
+        <when-property-is name="requestAnimationFrameWebkit" value="unprefixed"/>
+        <when-property-is name="user.agent" value="safari"/>
+      </all>
+    </any>
   </replace-with>
 </module>

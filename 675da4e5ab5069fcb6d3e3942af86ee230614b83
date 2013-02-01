@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "PD8eftww",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-01T01:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Otw7.qyk",
+      "revId": "675da4e5ab5069fcb6d3e3942af86ee230614b83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OxH4mkbs",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-01-25T11:09:32Z",
       "side": 1,
       "message": "How about a GWT.create()d class with Webkit and Mozilla variants, similar to Config, instead of subclasses of AnimationSchedulerImplNative?",
+      "revId": "675da4e5ab5069fcb6d3e3942af86ee230614b83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD6eku18",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-01T01:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "OxH4mkbs",
       "revId": "675da4e5ab5069fcb6d3e3942af86ee230614b83",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

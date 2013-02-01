@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PHKad5mE",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-02-01T09:29:19Z",
+      "side": 1,
+      "message": "Those two lines probably need some documentation as I don\u0027t understand them. Either that or you got them wrong.\n\nIIUC, if rAFWebkit is none, then ASINative will be used whichever the value of user.agent; including user.agent\u003die6. ASINative will also be used for Firefox whichever the value of rAFMozilla.",
+      "revId": "6799782dce5498881f5aee734135d8750064fa3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PHIaa6mU",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplNative.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-02-01T09:29:19Z",
+      "side": 1,
+      "message": "Should we link to the Editor\u0027s Draft instead? (or in addition to the WD \"snapshot\")\n\nThe current snapshot is nearly one year old and matches the prefixed implementations (more or less); the Editor\u0027s Draft on the other hand matches the unprefixed implementation in Chrome 24+ and what Mozilla will do for it\u0027s unprefixed implementation too (uses high-res timestamps –what broke GWT 2.4 apps when Chrome changed its prefixed impl– and removes the optional \u0027element\u0027 second argument).\n\nI haven\u0027t yet checked how IE10 implements rAF (but that\u0027s for another patch anyway).",
+      "revId": "6799782dce5498881f5aee734135d8750064fa3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,6 +33,15 @@
     is-multi-valued="false" />
   <set-configuration-property name="user.agent.runtimeWarning" value="true"/>
 
+  <!--
+    If set to "enlightenment", GWT widgets will sometimes attempt to use new web API's that
+    aren't yet standardized (such as prefixed API's). The "resistance" setting turns this off.
+    If recompiling and redeploying your GWT app when someone reports a browser bug would be
+    a problem, you should choose "resistance".
+  -->
+  <define-property name="webApiUsage" values="resistance,enlightenment"/>
+  <set-property name="webApiUsage" value="enlightenment"/>
+
   <!-- Asserts that the compile time user.agent value matches the runtime -->
   <!-- user.agent value -->
   <entry-point class="com.google.gwt.useragent.client.UserAgentAsserter" />

@@ -103,6 +103,24 @@
       "revId": "eb742c8dada6a0a63c0d1cec9aea3c74218e9892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD8pIyn8",
+        "filename": "user/test/com/google/gwt/animation/AnimationApiUsage.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-02T00:17:40Z",
+      "side": 1,
+      "message": "I haven\u0027t used that before; what\u0027s the advantage?",
+      "parentUuid": "PD8oHqn4",
+      "revId": "eb742c8dada6a0a63c0d1cec9aea3c74218e9892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

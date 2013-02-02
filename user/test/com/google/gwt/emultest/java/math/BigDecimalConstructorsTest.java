@@ -691,7 +691,9 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    */
   public void testConstrStringWithLeadingZeros() {
     BigDecimal value = new BigDecimal("-000.1");
-    assertEquals("bad precision", 1, value.precision());
+    assertEquals("bad precision", 1, new BigDecimal("000.01").precision());
+    assertEquals("bad precision", 1, new BigDecimal("0").precision());
+    assertEquals("bad precision", 1, new BigDecimal("-0").precision());
   }
 
   /**

@@ -68,6 +68,41 @@
       "revId": "eb742c8dada6a0a63c0d1cec9aea3c74218e9892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD2rD9jA",
+        "filename": "user/src/com/google/gwt/useragent/UserAgent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-02-02T00:03:28Z",
+      "side": 1,
+      "message": "I recommended \u0027normal\u0027 (or \u0027default\u0027?) vs \u0027compatible\u0027 but it didn\u0027t show up here as I replied by email :)\nThey are boring names but it is kind of obvious what they meant.",
+      "parentUuid": "PG2oZ94A",
+      "revId": "eb742c8dada6a0a63c0d1cec9aea3c74218e9892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PD8oHqn4",
+        "filename": "user/test/com/google/gwt/animation/AnimationApiUsage.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-02-02T00:03:28Z",
+      "side": 1,
+      "message": "Use @Property instead?",
+      "revId": "eb742c8dada6a0a63c0d1cec9aea3c74218e9892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

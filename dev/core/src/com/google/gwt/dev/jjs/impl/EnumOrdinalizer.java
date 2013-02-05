@@ -667,9 +667,10 @@ public class EnumOrdinalizer {
 
       if (canBeOrdinal(x)) {
         /*
-         * Cleanup clinit method for ordinalizable enums.
+         * Cleanup clinit method for ordinalizable enums. Note, method 0 is
+         * always the clinit.
          */
-        updateClinit(x.getClinitMethod());
+        updateClinit(x.getMethods().get(0));
 
         /*
          * Remove any static impl mappings for any methods in an ordinal enum

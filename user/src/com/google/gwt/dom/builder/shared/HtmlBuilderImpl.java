@@ -654,7 +654,7 @@ class HtmlBuilderImpl extends ElementBuilderImpl {
   @Override
   protected Element doFinishImpl() {
     Element tmp = Document.get().createDivElement();
-    tmp.setInnerSafeHtml(asSafeHtml());
+    tmp.setInnerHTML(asSafeHtml().asString());
     return tmp.getFirstChildElement();
   }
 

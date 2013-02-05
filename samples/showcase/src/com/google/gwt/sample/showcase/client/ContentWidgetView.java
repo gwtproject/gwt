@@ -56,7 +56,7 @@ public class ContentWidgetView extends ResizeComposite {
   }
 
   public void setDescription(SafeHtml html) {
-    descElem.setInnerSafeHtml(html);
+    descElem.setInnerHTML(html.asString());
   }
 
   public void setExample(Widget widget) {

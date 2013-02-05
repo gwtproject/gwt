@@ -15,6 +15,8 @@
  */
 package com.google.web.bindery.requestfactory.vm.impl;
 
+import com.google.gwt.dev.asm.Type;
+import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.user.server.Base64Utils;
 
@@ -51,13 +53,9 @@ public class OperationKey extends StringKey {
     }
   }
 
-  static String stripReturnType(String descriptor) {
-    assert descriptor.contains(")") : descriptor + " does not look like a method descriptor";
-    return descriptor.substring(0, descriptor.lastIndexOf(')')) + ")V";
-  }
-
   private static String key(String requestContextBinaryName, String methodName, String descriptor) {
-    String raw = requestContextBinaryName + "::" + methodName + stripReturnType(descriptor);
+    Method m = new Method(methodName, Type.VOID_TYPE, Type.getArgumentTypes(descriptor));
+    String raw = requestContextBinaryName + "::" + methodName + m.getDescriptor();
     return raw.length() >= HASH_LENGTH ? hash(raw) : raw;
   }
 

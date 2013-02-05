@@ -2615,10 +2615,18 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
         throw new NumberFormatException("For input string: \"" + val + "\"");
       }
     }
+    int counter = 0;
+    boolean wasNonZero = false;
     // Accumulating all digits until a possible decimal point
-    while ((offset < last) && (val.charAt(offset) != '.')
-        && (val.charAt(offset) != 'e') && (val.charAt(offset) != 'E')) {
-      offset++;
+    for (; (offset < last) && (val.charAt(offset) != '.')
+        && (val.charAt(offset) != 'e') && (val.charAt(offset) != 'E'); offset++) {
+      if (!wasNonZero) {
+        if (val.charAt(offset) == '0') {
+          counter++;
+        } else {
+          wasNonZero = true;
+        }
+      }
     }
     unscaledBuffer.append(val, begin, offset);
     // A decimal point was found
@@ -2626,9 +2634,15 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       offset++;
       // Accumulating all digits until a possible exponent
       begin = offset;
-      while ((offset < last) && (val.charAt(offset) != 'e')
-          && (val.charAt(offset) != 'E')) {
-        offset++;
+      for (; (offset < last) && (val.charAt(offset) != 'e')
+          && (val.charAt(offset) != 'E'); offset++) {
+        if (!wasNonZero) {
+          if (val.charAt(offset) == '0') {
+            counter++;
+          } else {
+            wasNonZero = true;
+          }
+        }
       }
       scale = offset - begin;
       unscaledBuffer.append(val, begin, offset);
@@ -2667,7 +2681,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     } else {
       setUnscaledValue(new BigInteger(unscaled));
     }
-    precision = unscaledBuffer.length();
+    precision = unscaledBuffer.length() - counter;
     // Don't count leading zeros in the precision
     for (int i = 0; i < unscaledBuffer.length(); ++i) {
       char ch = unscaledBuffer.charAt(i);
@@ -2675,10 +2689,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
         break;
       }
       --precision;
-    }
-    // The precision of a zero value is 1
-    if (precision == 0) {
-      precision = 1;
     }
   }
 

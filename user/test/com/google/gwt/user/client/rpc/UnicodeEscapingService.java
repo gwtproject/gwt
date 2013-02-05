@@ -59,11 +59,6 @@ public interface UnicodeEscapingService extends RemoteService {
   }
 
   /**
-   * Returns the input string unmodified.
-   */
-  String echo(String str);
-
-  /**
    * Returns a string containing the characters from start to end.
    * 
    * Used to verify server->client escaping.

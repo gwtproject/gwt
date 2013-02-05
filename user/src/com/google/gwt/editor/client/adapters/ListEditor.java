@@ -66,7 +66,9 @@ public class ListEditor<T, E extends Editor<T>> implements
    * @return an {@link Editor} of type E
    */
   public E createEditorForTraversal() {
-    return editorSource.createEditorForTraversal();
+    E toReturn = editorSource.create(0);
+    editorSource.dispose(toReturn);
+    return toReturn;
   }
 
   public void flush() {

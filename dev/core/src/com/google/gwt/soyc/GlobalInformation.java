@@ -36,12 +36,12 @@ public class GlobalInformation {
   private SizeBreakdown initialCodeBreakdown = new SizeBreakdown(
       "Initially downloaded code", "initial");
   private SizeBreakdown leftoversBreakdown = new SizeBreakdown(
-      "Leftovers code, code not in any other fragment", "leftovers");
+      "Leftovers code, code not in any other split point", "leftovers");
+  private int numSplitPoints = 0;
   private Map<String, TreeSet<String>> packageToClasses = new TreeMap<String, TreeSet<String>>();
   private final String permutationId;
-  private ArrayList<Integer> initialFragmentLoadSequence = new ArrayList<Integer>();
-  private HashMap<Integer, List<String>> fragmentDescriptors =
-      new HashMap<Integer, List<String>>();
+  private ArrayList<Integer> splitPointInitialLoadSequence = new ArrayList<Integer>();
+  private HashMap<Integer, String> splitPointToLocation = new HashMap<Integer, String>();
   private SizeBreakdown totalCodeBreakdown = new SizeBreakdown("Total program",
       "total");
 
@@ -53,10 +53,10 @@ public class GlobalInformation {
     List<SizeBreakdown> breakdowns = new ArrayList<SizeBreakdown>();
     breakdowns.add(totalCodeBreakdown);
     breakdowns.add(initialCodeBreakdown);
-    if (getNumFragments() > 0) {
+    if (numSplitPoints > 0) {
       breakdowns.add(leftoversBreakdown);
-      for (int fragment = 1; fragment <= getNumFragments(); fragment++) {
-        breakdowns.add(fragmentCodeBreakdown(fragment));
+      for (int sp = 1; sp <= numSplitPoints; sp++) {
+        breakdowns.add(splitPointCodeBreakdown(sp));
       }
     }
     return breakdowns.toArray(EMPTY_SIZE_BREAKDOWN);
@@ -99,7 +99,7 @@ public class GlobalInformation {
   }
 
   /**
-   * Gets the initial fragment size breakdown.
+   * Gets the initial code breakdown.
    * 
    * @return initialCodeBreakdown
    */
@@ -108,7 +108,7 @@ public class GlobalInformation {
   }
 
   /**
-   * Gets the leftovers fragment size breakdown.
+   * Gets the leftovers code breakdown.
    * 
    * @return leftoversCodeBreakdown
    */
@@ -117,12 +117,12 @@ public class GlobalInformation {
   }
 
   /**
-   * Gets the number of fragments..
+   * Gets the number of split points.
    * 
-   * @return the number of fragments.
+   * @return numSplitPoints
    */
-  public final int getNumFragments() {
-    return fragmentDescriptors.size();
+  public final int getNumSplitPoints() {
+    return numSplitPoints;
   }
 
   /**
@@ -141,37 +141,19 @@ public class GlobalInformation {
   /**
    * Gets the initial load sequence.
    * 
-   * @return initialFragmentLoadSequence
+   * @return splitPointInitialLoadSequence
    */
-  public final ArrayList<Integer> getInitialFragmentLoadSequence() {
-    return initialFragmentLoadSequence;
+  public final ArrayList<Integer> getSplitPointInitialLoadSequence() {
+    return splitPointInitialLoadSequence;
   }
 
   /**
-   * Adds a descriptor (a split point) to a fragment.
-   *
-   * @param fragment the fragment number.
-   * @param desc a string describing a split point for fragment <code>fragment</code>
-   *
+   * Gets the mapping from split points to locations where they were set.
+   * 
+   * @return splitPointToLocation
    */
-  public final void addFragmentDescriptor(int fragment, String desc) {
-    List<String> descriptions = fragmentDescriptors.get(fragment);
-    if (descriptions == null) {
-      descriptions = new ArrayList<String>();
-      fragmentDescriptors.put(fragment, descriptions);
-    }
-    descriptions.add(desc);
-  }
-
-  /**
-   * Gets the the descriptors associated with a
-   * fragment.
-   *
-   * @param fragment the fragment number
-   * @return a list of descriptors (each representing a single split point.
-   */
-  public final List<String> getFragmentDescriptors(int fragment) {
-    return fragmentDescriptors.get(fragment);
+  public final HashMap<Integer, String> getSplitPointToLocation() {
+    return splitPointToLocation;
   }
 
   /**
@@ -184,18 +166,25 @@ public class GlobalInformation {
   }
 
   /**
-   * Gets an exclusive code breakdown for a fragment.
-   * 
-   * @param fragment the fragment id
-   * @return exlusive code breakdown for fragment
+   * Increments the split point count.
    */
-  public SizeBreakdown fragmentCodeBreakdown(int fragment) {
-    assert fragment >= 1 && fragment <= getNumFragments();
-    if (!exclusiveCodeBreakdowns.containsKey(fragment)) {
-      exclusiveCodeBreakdowns.put(fragment, new SizeBreakdown("split point " + fragment
-          + ": " + fragmentDescriptors.get(fragment), "fragment" + fragment));
+  public final void incrementSplitPoints() {
+    numSplitPoints++;
+  }
+
+  /**
+   * Gets an exclusive code breakdown for a split point.
+   * 
+   * @param sp split point
+   * @return exlusive code breakdown for sp
+   */
+  public SizeBreakdown splitPointCodeBreakdown(int sp) {
+    assert sp >= 1 && sp <= numSplitPoints;
+    if (!exclusiveCodeBreakdowns.containsKey(sp)) {
+      exclusiveCodeBreakdowns.put(sp, new SizeBreakdown("split point " + sp
+          + ": " + splitPointToLocation.get(sp), "sp" + sp));
     }
-    return exclusiveCodeBreakdowns.get(fragment);
+    return exclusiveCodeBreakdowns.get(sp);
   }
 
   /**

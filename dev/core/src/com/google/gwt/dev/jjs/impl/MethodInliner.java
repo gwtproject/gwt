@@ -110,7 +110,7 @@ public class MethodInliner {
         List<JStatement> stmts = body.getStatements();
 
         if (method.getEnclosingType() != null
-            && method.getEnclosingType().getClinitMethod() == method && !stmts.isEmpty()) {
+            && method.getEnclosingType().getMethods().get(0) == method && !stmts.isEmpty()) {
           // clinit() calls cannot be inlined unless they are empty
           possibleToInline = false;
         } else if (!body.getLocals().isEmpty()) {
@@ -177,7 +177,7 @@ public class MethodInliner {
         return null;
       }
 
-      JMethod clinit = targetType.getClinitMethod();
+      JMethod clinit = targetType.getMethods().get(0);
 
       // If the clinit is a non-native, empty body we can optimize it out here
       if (!clinit.isNative() && (((JMethodBody) clinit.getBody())).getStatements().size() == 0) {

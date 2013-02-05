@@ -331,7 +331,7 @@ public class SoycDashboard {
       makeTopLevelHtmlForPerm.makeDependenciesHtml();
     }
 
-    if (globalInformation.getNumFragments() > 0) {
+    if (globalInformation.getNumSplitPoints() > 0) {
       makeTopLevelHtmlForPerm.makeSplitStatusPages();
       makeTopLevelHtmlForPerm.makeLeftoverStatusPages();
     }
@@ -395,11 +395,11 @@ public class SoycDashboard {
     if (fragment == 0) {
       breakdowns.add(globalInformation.getInitialCodeBreakdown());
     }
-    if (fragment == (globalInformation.getNumFragments() + 1)) {
+    if (fragment == (globalInformation.getNumSplitPoints() + 1)) {
       breakdowns.add(globalInformation.getLeftoversBreakdown());
     }
-    if (fragment >= 1 && fragment <= globalInformation.getNumFragments()) {
-      breakdowns.add(globalInformation.fragmentCodeBreakdown(fragment));
+    if (fragment >= 1 && fragment <= globalInformation.getNumSplitPoints()) {
+      breakdowns.add(globalInformation.splitPointCodeBreakdown(fragment));
     }
     return breakdowns;
   }
@@ -411,7 +411,7 @@ public class SoycDashboard {
     }
 
     if (breakdown == globalInformation.getTotalCodeBreakdown()) {
-      if (globalInformation.getNumFragments() > 0) {
+      if (globalInformation.getNumSplitPoints() > 0) {
         return makeTopLevelHtmlForPerm.new DependencyLinkerForTotalBreakdown();
       } else {
         return makeTopLevelHtmlForPerm.new DependencyLinkerForInitialCode();
@@ -419,7 +419,7 @@ public class SoycDashboard {
     } else if (breakdown == globalInformation.getInitialCodeBreakdown()) {
       return makeTopLevelHtmlForPerm.new DependencyLinkerForInitialCode();
     } else if (breakdown == globalInformation.getLeftoversBreakdown()) {
-      assert globalInformation.getNumFragments() > 0;
+      assert globalInformation.getNumSplitPoints() > 0;
       return makeTopLevelHtmlForPerm.new DependencyLinkerForLeftoversFragment();
     } else {
       return new NullDependencyLinker();
@@ -607,17 +607,13 @@ public class SoycDashboard {
           inInitialLoadSequence = true;
         } else if (inInitialLoadSequence
             && strippedName.compareTo("splitpointref") == 0) {
-          globalInformation.getInitialFragmentLoadSequence().add(
+          globalInformation.getSplitPointInitialLoadSequence().add(
               parseSplitPointReference(attributes));
         }
       }
 
-      /**
-       * Parses a split point entry from a splitpoints XML soyc file.
-       * A split point node as in \<splitpoint id=N location=DESC/\>
-       *
-       * @param attributes the attributes of the splitpoint node (provided by the SAX parsing
-       *                   infrastructure)
+      /*
+       * parses the split points
        */
       private void parseSplitPoint(final Attributes attributes) {
         if (attributes.getValue("id") != null) {
@@ -628,8 +624,9 @@ public class SoycDashboard {
             curSplitPointLocation = curSplitPointLocation.replaceAll("\\(L.*",
                 "");
 
-            globalInformation.addFragmentDescriptor(
+            globalInformation.getSplitPointToLocation().put(
                 Integer.parseInt(curSplitPoint), curSplitPointLocation);
+            globalInformation.incrementSplitPoints();
           }
         }
       }

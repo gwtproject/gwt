@@ -170,7 +170,7 @@ public class SymbolMapsLinker extends AbstractLinker {
     private byte[] js;
 
     public SourceMapArtifact(int permutationId, int fragment, byte[] js) {
-      super(SymbolMapsLinker.class, permutationId + '/' + sourceMapFilenameForFragment(fragment), js);
+      super(SymbolMapsLinker.class, permutationId + "/sourceMap" + fragment + ".json", js);
       this.permutationId = permutationId;
       this.fragment = fragment;
       this.js = js;
@@ -182,10 +182,6 @@ public class SymbolMapsLinker extends AbstractLinker {
 
     public int getPermutationId() {
       return permutationId;
-    }
-
-    public static String sourceMapFilenameForFragment(int fragment) {
-             return "sourceMap" + fragment + ".json";
     }
   }
 

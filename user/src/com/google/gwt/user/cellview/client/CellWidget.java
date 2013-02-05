@@ -35,8 +35,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasKeyProvider;
 import com.google.gwt.view.client.ProvidesKey;
 
-import java.util.Set;
-
 /**
  * A {@link Widget} that wraps a {@link Cell}.
  * 
@@ -195,8 +193,7 @@ public class CellWidget<C> extends Widget implements HasKeyProvider<C>, HasValue
 
     // Forward the event to the cell.
     String eventType = event.getType();
-    Set<String> consumedEvents = cell.getConsumedEvents();
-    if (consumedEvents != null && consumedEvents.contains(eventType)) {
+    if (cell.getConsumedEvents().contains(eventType)) {
       cell.onBrowserEvent(createContext(), getElement(), value, event, valueUpdater);
     }
   }
@@ -207,7 +204,7 @@ public class CellWidget<C> extends Widget implements HasKeyProvider<C>, HasValue
   public void redraw() {
     SafeHtmlBuilder sb = new SafeHtmlBuilder();
     cell.render(createContext(), value, sb);
-    getElement().setInnerSafeHtml(sb.toSafeHtml());
+    getElement().setInnerHTML(sb.toSafeHtml().asString());
 
     /*
      * The rendered Cell should fill the root element so height and width styles

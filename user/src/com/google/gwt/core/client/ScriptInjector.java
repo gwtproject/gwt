@@ -119,7 +119,6 @@ public class ScriptInjector {
    */
   public static class FromUrl {
     private Callback<Void, Exception> callback;
-    private boolean removeTag = false;
     private final String scriptUrl;
     private JavaScriptObject window;
 
@@ -140,8 +139,8 @@ public class ScriptInjector {
       assert doc != null;
       JavaScriptObject scriptElement = nativeMakeScriptElement(doc);
       assert scriptElement != null;
-      if (callback != null || removeTag) {
-        attachListeners(scriptElement, callback, removeTag);
+      if (callback != null) {
+        attachListeners(scriptElement, callback);
       }
       nativeSetSrc(scriptElement, scriptUrl);
       nativeAttachToHead(doc, scriptElement);
@@ -172,19 +171,6 @@ public class ScriptInjector {
      */
     public FromUrl setCallback(Callback<Void, Exception> callback) {
       this.callback = callback;
-      return this;
-    }
-
-    /**
-     * @param removeTag If true, remove the tag after the script finishes
-     *          loading. This shrinks the DOM, possibly at the expense of
-     *          readability if you are debugging javaScript.
-     *
-     *          Default value is {@code false}, but this may change in a future
-     *          release.
-     */
-    public FromUrl setRemoveTag(boolean removeTag) {
-      this.removeTag = removeTag;
       return this;
     }
 
@@ -257,27 +243,20 @@ public class ScriptInjector {
    * @param callback callback that runs when the script is loaded and parsed.
    */
   private static native void attachListeners(JavaScriptObject scriptElement,
-      Callback<Void, Exception> callback, boolean removeTag) /*-{
+      Callback<Void, Exception> callback) /*-{
     function clearCallbacks() {
       scriptElement.onerror = scriptElement.onreadystatechange = scriptElement.onload = function() {
       };
-      if (removeTag) {
-        @com.google.gwt.core.client.ScriptInjector::nativeRemove(Lcom/google/gwt/core/client/JavaScriptObject;)(scriptElement);
-      }
     }
     scriptElement.onload = $entry(function() {
       clearCallbacks();
-      if (callback) {
-        callback.@com.google.gwt.core.client.Callback::onSuccess(Ljava/lang/Object;)(null);
-      }
+      callback.@com.google.gwt.core.client.Callback::onSuccess(Ljava/lang/Object;)(null);
     });
-    // or possibly more portable script_tag.addEventListener('error', function(){...}, true);
+    // or possibly more portable script_tag.addEventListener('error', function(){...}, true); 
     scriptElement.onerror = $entry(function() {
       clearCallbacks();
-      if (callback) {
-        var ex = @com.google.gwt.core.client.CodeDownloadException::new(Ljava/lang/String;)("onerror() called.");
-        callback.@com.google.gwt.core.client.Callback::onFailure(Ljava/lang/Object;)(ex);
-      }
+      var ex = @com.google.gwt.core.client.CodeDownloadException::new(Ljava/lang/String;)("onerror() called.");
+      callback.@com.google.gwt.core.client.Callback::onFailure(Ljava/lang/Object;)(ex)
     });
     scriptElement.onreadystatechange = $entry(function() {
       if (scriptElement.readyState == 'complete' || scriptElement.readyState == 'loaded') {

@@ -45,7 +45,7 @@ public class JInstanceOf extends JExpression {
 
   @Override
   public boolean hasSideEffects() {
-    return expr.hasSideEffects();
+    return false;
   }
 
   /**

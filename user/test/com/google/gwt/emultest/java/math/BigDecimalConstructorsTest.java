@@ -687,19 +687,11 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   }
 
   /**
-   * Test second failing example in gwt-java-math issue 4 and variations
-   * to validate that precision is calculated correctly when leading zeros
-   * and minus signs are present.
+   * Test second failing example in gwt-java-math issue 4.
    */
   public void testConstrStringWithLeadingZeros() {
-    assertEquals("bad precision", 1, new BigDecimal("-000.1").precision());
-    assertEquals("bad precision", 4, new BigDecimal("001234").precision());
-    assertEquals("bad precision", 4, new BigDecimal("-5555").precision());
-    assertEquals("bad precision", 1, new BigDecimal("0").precision());
-    assertEquals("bad precision", 1, new BigDecimal("-0").precision());
-    assertEquals("bad precision", 4, new BigDecimal("001234e3").precision());
-    assertEquals("bad precision", 5, new BigDecimal("00056789e+17").precision());
-    assertEquals("bad precision", 6, new BigDecimal("0900000e-42").precision());
+    BigDecimal value = new BigDecimal("-000.1");
+    assertEquals("bad precision", 1, value.precision());
   }
 
   /**

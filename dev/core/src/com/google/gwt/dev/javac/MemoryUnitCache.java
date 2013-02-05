@@ -16,8 +16,11 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 
+import org.apache.commons.collections.map.AbstractReferenceMap;
+import org.apache.commons.collections.map.ReferenceMap;
+
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -76,13 +79,17 @@ class MemoryUnitCache implements UnitCache {
    * 
    * The key is resource path.
    */
-  protected final Map<String, UnitCacheEntry> unitMap = new MapMaker().softValues().makeMap();
+  @SuppressWarnings("unchecked")
+  protected final Map<String, UnitCacheEntry> unitMap = Collections
+      .synchronizedMap(new ReferenceMap(AbstractReferenceMap.HARD, AbstractReferenceMap.SOFT));
 
   /**
    * References {@link CompilationUnit} objects by {@link ContentId}, which is
    * composed of the type name and a hash on the source code contents.
    */
-  protected final Map<ContentId, UnitCacheEntry> unitMapByContentId = new MapMaker().softValues().makeMap();
+  @SuppressWarnings("unchecked")
+  protected final Map<ContentId, UnitCacheEntry> unitMapByContentId = Collections
+      .synchronizedMap(new ReferenceMap(AbstractReferenceMap.HARD, AbstractReferenceMap.SOFT));
 
   /**
    * Adds a new entry into the cache.

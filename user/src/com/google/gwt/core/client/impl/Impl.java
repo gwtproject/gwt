@@ -184,11 +184,11 @@ public final class Impl {
   }-*/;
 
   private static native Object apply(Object jsFunction, Object thisObj,
-      Object args) /*-{
+      Object arguments) /*-{
     if (@com.google.gwt.core.client.GWT::isScript()()) {
-      return jsFunction.apply(thisObj, args);
+      return jsFunction.apply(thisObj, arguments);
     } else {
-      var _ = jsFunction.apply(thisObj, args);
+      var _ = jsFunction.apply(thisObj, arguments);
       if (_ != null) {
         // Wrap for Development Mode
         _ = Object(_);

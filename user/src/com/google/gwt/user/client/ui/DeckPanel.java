@@ -266,9 +266,9 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
   }
 
   /**
-   * Gets the index of the currently-visible widget, if any.
+   * Gets the index of the currently-visible widget.
    * 
-   * @return the visible widget's index, or -1 if there is no such widget
+   * @return the visible widget's index
    */
   public int getVisibleWidget() {
     return getWidgetIndex(visibleWidget);

@@ -335,7 +335,7 @@ public class AnnotationsResource extends AbstractResource {
     if (!isConstants) {
       if (constantsCount > 0) {
         throw new AnnotationsError(
-            "@Default*Value is not permitted on a Messages interface; see @DefaultMessage");
+            "@Default*Value is not permitted on a Messages interface; see @DefaultText");
       }
       if (defaultText != null) {
         return defaultText.value();
@@ -343,7 +343,7 @@ public class AnnotationsResource extends AbstractResource {
     } else {
       if (defaultText != null) {
         throw new AnnotationsError(
-            "@DefaultMessage is not permitted on a Constants interface; see @Default*Value");
+            "@DefaultText is not permitted on a Constants interface; see @Default*Value");
       }
       if (constantsCount > 1) {
         throw new AnnotationsError(

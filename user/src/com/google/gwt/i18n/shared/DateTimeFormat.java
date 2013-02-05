@@ -1473,7 +1473,7 @@ public class DateTimeFormat {
       if (part.count > 0) {
         if (abutPat < 0 && part.abutStart) {
           abutPat = i;
-          abutStart = parsePos[0];
+          abutStart = start;
           abutPass = 0;
         }
 

@@ -195,7 +195,8 @@ public class ImageLoadingCell extends AbstractCell<String> {
       imgWrapper.getStyle().setProperty("overflow", "auto");
     } else if (BrowserEvents.ERROR.equals(type) && eventOccurredOnImage(event, parent)) {
       // Replace the loading indicator with an error message.
-      parent.getFirstChildElement().setInnerSafeHtml(errorRenderer.render(value));
+      parent.getFirstChildElement().setInnerHTML(
+          errorRenderer.render(value).asString());
     }
   }
 

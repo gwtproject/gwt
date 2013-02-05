@@ -45,16 +45,11 @@ import com.google.gwt.user.rebind.rpc.testcases.client.ClassWithTypeParameterTha
 import com.google.gwt.user.rebind.rpc.testcases.client.ManualSerialization;
 import com.google.gwt.user.rebind.rpc.testcases.client.NoSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.NotAllSubtypesAreSerializable;
-import com.google.gwt.user.rebind.rpc.testcases.client.ParameterizedTypeInList;
-import com.google.gwt.user.rebind.rpc.testcases.client.RawTypeInList;
-import com.google.gwt.user.rebind.rpc.testcases.client.SubclassUsedInArray;
 
 import junit.framework.TestCase;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1930,44 +1925,6 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   }
 
   /**
-   * Tests a case where a subtype is visited and then later used to find covariant array types.
-   * (Reproduces a caching issue that depends on the order in which types are visited.)
-   */
-  public void testSubclassUsedInArray() throws NotFoundException, UnableToCompleteException {
-    JClassType expected = arrayType(SubclassUsedInArray.LeafType.class);
-    checkSerializable(expected,
-        eachJType(SubclassUsedInArray.Base.class, SubclassUsedInArray.HasArray.class));
-  }
-
-  /**
-   * Test the case where a root array type has a type parameter as its leaf.
-   */
-  public void testArrayOfTypeParameterExtendsSubclass() throws Exception {
-    JClassType expected = arrayType(SubclassUsedInArray.LeafType.class);
-
-    TypeOracle oracle = getTestTypeOracle();
-    JGenericType genericHasArray = oracle
-        .getType(SubclassUsedInArray.GenericHasArray.class.getCanonicalName()).isGenericType();
-    JTypeParameter typeParameter = genericHasArray.getTypeParameters()[0];
-
-    checkSerializable(expected,
-        oracle.getType(SubclassUsedInArray.Base.class.getCanonicalName()),
-        oracle.getArrayType(typeParameter));
-  }
-
-  public void testRawTypeInList() throws Exception {
-    JClassType expected = arrayType(RawTypeInList.Covariant.class);
-    checkSerializable(expected,
-        eachJType(RawTypeInList.Marker.class, RawTypeInList.HasList.class));
-  }
-
-  public void testParameterizedTypeInList() throws Exception {
-    JClassType expected = arrayType(ParameterizedTypeInList.Covariant.class);
-    checkSerializable(expected,
-        eachJType(ParameterizedTypeInList.Marker.class, ParameterizedTypeInList.HasList.class));
-  }
-
-  /**
    * Tests subtypes that introduce new instantiable type parameters.
    * 
    * @throws UnableToCompleteException
@@ -2070,7 +2027,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     JClassType foo = to.getType("Foo");
     JClassType bar = to.getType("Bar");
     JClassType intfOfString =
-        to.getParameterizedType(intf, new JClassType[]{to.getType(String.class.getName())});
+        to.getParameterizedType(intf, new JClassType[] {to.getType(String.class.getName())});
     JClassType ser = to.getType("Ser");
 
     SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(logger, to);
@@ -2344,7 +2301,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
 
     JTypeParameter typeParam = c.getTypeParameters()[0];
 
-    JParameterizedType parameterizedType = to.getParameterizedType(a, new JClassType[]{typeParam});
+    JParameterizedType parameterizedType = to.getParameterizedType(a, new JClassType[] {typeParam});
     SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(logger, to);
     sob.addRootType(logger, parameterizedType);
     SerializableTypeOracle so = sob.build(logger);
@@ -2407,78 +2364,6 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     assertInstantiable(so, b);
     assertInstantiable(so, c);
     assertNotInstantiableOrFieldSerializable(so, a.getRawType());
-  }
-
-  /**
-   * Checks that a type is serializable when searching from the given roots.
-   * Also, check that the root order doesn't matter.
-   */
-  private void checkSerializable(JClassType expected, JType... roots)
-      throws UnableToCompleteException {
-    roots = Arrays.copyOf(roots, roots.length);
-
-    // find serializable types in forward and reverse order
-    SerializableTypeOracle forwardResult = findSerializable(roots);
-    Collections.reverse(Arrays.asList(roots));
-    SerializableTypeOracle reverseResult = findSerializable(roots);
-
-    // check that the expected type is serializable
-    boolean forwardOk = forwardResult.isSerializable(expected);
-    boolean reverseOk = reverseResult.isSerializable(expected);
-    if (!forwardOk && !reverseOk) {
-      fail(expected + " is not serializable from " + join(", ", roots) + " in either order");
-    }
-    if (!forwardOk || !reverseOk) {
-      fail(expected + " is not serializable from " + join(", ", roots) + " in both orders");
-    }
-
-    // also check that other serializable types are stable
-    checkSameSerializables(forwardResult, reverseResult);
-  }
-
-  private SerializableTypeOracle findSerializable(JType... rootTypes)
-      throws UnableToCompleteException {
-    TreeLogger logger = createLogger();
-    TypeOracle oracle = getTestTypeOracle();
-    SerializableTypeOracleBuilder builder =
-        createSerializableTypeOracleBuilder(logger, oracle);
-    for (JType root : rootTypes) {
-      builder.addRootType(logger, root);
-    }
-    return builder.build(logger);
-  }
-
-  private JType[] eachJType(Class... classes) throws UnableToCompleteException {
-    TypeOracle oracle = getTestTypeOracle();
-    List<JType> result = new ArrayList<JType>();
-    for (Class aClass : classes) {
-      result.add(oracle.findType(aClass.getCanonicalName()));
-    }
-    return result.toArray(new JType[result.size()]);
-  }
-
-  private void checkSameSerializables(SerializableTypeOracle first, SerializableTypeOracle second) {
-    String firstTypes = join("\n", first.getSerializableTypes());
-    String secondTypes = join("\n", second.getSerializableTypes());
-    assertEquals("type oracles differ", firstTypes, secondTypes);
-  }
-
-  private JClassType arrayType(Class<?> itemType)
-      throws UnableToCompleteException, NotFoundException {
-    TypeOracle typeOracle = getTestTypeOracle();
-    JClassType leaf = typeOracle.getType(itemType.getCanonicalName());
-    return typeOracle.getArrayType(leaf);
-  }
-
-  private <T> String join(String delimiter, T... items) {
-    StringBuilder result = new StringBuilder();
-    for (int i = 0; i < items.length; i++) {
-      if (i > 0) {
-        result.append(delimiter);
-      }
-      result.append(items[i]);
-    }
-    return result.toString();
   }
 
   private JClassType[] makeArray(JClassType... elements) {

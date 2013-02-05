@@ -57,7 +57,7 @@ public class BigIntegerDivideTest extends EmulTestBase {
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     try {
-      aNumber = aNumber.divide(bNumber);
+      aNumber.divide(bNumber);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
       assertEquals("Improper exception message", "BigInteger divide by zero",
@@ -168,7 +168,7 @@ public class BigIntegerDivideTest extends EmulTestBase {
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     try {
-      aNumber = aNumber.remainder(bNumber);
+      aNumber.remainder(bNumber);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
       assertEquals("Improper exception message", "BigInteger divide by zero",
@@ -266,7 +266,7 @@ public class BigIntegerDivideTest extends EmulTestBase {
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = BigInteger.ZERO;
     try {
-      aNumber = aNumber.divide(bNumber);
+      aNumber.divide(bNumber);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
       assertEquals("Improper exception message", "BigInteger divide by zero",
@@ -336,7 +336,7 @@ public class BigIntegerDivideTest extends EmulTestBase {
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     try {
-      aNumber = aNumber.mod(bNumber);
+      aNumber.mod(bNumber);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
       assertEquals("Improper exception message",

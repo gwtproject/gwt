@@ -363,7 +363,7 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
     // cached images.
     DOM.setEventListener(tmpElem, widget);
 
-    tmpElem.setInnerSafeHtml(html);
+    tmpElem.setInnerHTML(html.asString());
 
     // Detach the event listener.
     DOM.setEventListener(tmpElem, null);
@@ -386,7 +386,7 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
     }
 
     // Render the HTML.
-    childContainer.setInnerSafeHtml(CellBasedWidgetImpl.get().processHtml(html));
+    childContainer.setInnerHTML(CellBasedWidgetImpl.get().processHtml(html).asString());
 
     // Detach the event listener.
     if (!widget.isAttached()) {

@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class FastStringMapProfile extends WidgetProfile {
 
-  Map<String, Integer> m;
+  Map m;
 
   public void testTiming() throws Exception {
     m = putTiming(32000);
@@ -46,8 +46,8 @@ public class FastStringMapProfile extends WidgetProfile {
     this.timing("get(" + size + ")");
   }
 
-  public FastStringMap<Integer> putTiming(int size) {
-    FastStringMap<Integer> m1 = new FastStringMap<Integer>();
+  public FastStringMap putTiming(int size) {
+    FastStringMap m1 = new FastStringMap();
     this.resetTimer();
     for (int i = 0; i < size; i++) {
       Integer iVal = new Integer(size);

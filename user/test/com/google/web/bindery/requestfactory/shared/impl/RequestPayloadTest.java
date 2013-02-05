@@ -119,7 +119,6 @@ public class RequestPayloadTest extends GWTTestCase {
                     for (OperationMessage operationMessage : requestMessage.getOperations()) {
                       if (fooTypeToken.equals(operationMessage.getTypeToken())) {
                         seenFoos++;
-                        @SuppressWarnings("unchecked")
                         SimpleProxyId<?> id = (SimpleProxyId<?>) foo.stableId();
                         assertEquals(id.getServerId(), operationMessage.getServerId());
                         assertEquals(2, operationMessage.getPropertyMap().size());

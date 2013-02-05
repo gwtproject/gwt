@@ -19,7 +19,6 @@ package com.google.gwt.i18n.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.core.client.JsonUtils;
 
 /**
  * A JavaScript Overlay type on top of the JSON data describing everything we
@@ -39,8 +38,12 @@ public class TimeZoneInfo extends JavaScriptObject {
    * @return a TimeZoneInfo object made from the supplied JSON.
    */
   public static TimeZoneInfo buildTimeZoneData(String json) {
-    return JsonUtils.safeEval(json);
+    return (TimeZoneInfo) eval(json);
   }
+  
+  private static native JavaScriptObject eval(String json) /*-{
+    return eval("(" + json + ")");
+  }-*/;
   
   protected TimeZoneInfo() { }
   

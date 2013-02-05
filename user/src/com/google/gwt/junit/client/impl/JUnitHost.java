@@ -146,20 +146,11 @@ public interface JUnitHost extends RemoteService {
     public boolean equals(Object o) {
       if (o instanceof TestInfo) {
         TestInfo other = (TestInfo) o;
-        return equals(testModule, other.testModule)
-            && equals(testClass, other.testClass)
-            && equals(testMethod, other.testMethod);
+        return getTestModule().equals(other.getTestModule())
+            && getTestClass().equals(other.getTestClass())
+            && getTestMethod().equals(other.getTestMethod());
       }
       return false;
-    }
-
-    /*
-     * Helper method for TestInfo.equals.
-     *
-     * TODO: Replace with Objects.equals() once we can rely on JDK7.
-     */
-    private static boolean equals(Object a, Object b) {
-      return a == null ? b == null : a.equals(b);
     }
 
     public String getTestClass() {

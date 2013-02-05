@@ -25,12 +25,12 @@ import java.util.List;
  * TODO: document me.
  */
 public class ComparatorTest extends TestComparator {
-  public Comparator<Object> makeComparator() {
+  public Comparator makeComparator() {
     return new DummyComparator();
   }
 
-  public List<Object> getComparableObjectsOrdered() {
-    List<Object> l = new ArrayList<Object>();
+  public List getComparableObjectsOrdered() {
+    List l = new ArrayList();
     l.add("x");
     l.add("y");
     l.add("z");
@@ -41,7 +41,7 @@ public class ComparatorTest extends TestComparator {
 /**
  * List comparator for testing.
  */
-class DummyComparator implements Comparator<Object> {
+class DummyComparator implements Comparator {
   /**
    * Compares returns reverse hash order.
    */

@@ -686,7 +686,8 @@ public class GwtAstBuilder {
          * explicit this constructor call, in which case the callee will.
          */
         if (!hasExplicitThis) {
-          JMethod initMethod = curClass.type.getInitMethod();
+          // $init is always in position 1 (clinit is in 0)
+          JMethod initMethod = curClass.type.getMethods().get(1);
           JMethodCall initCall = new JMethodCall(info, makeThisRef(info), initMethod);
           block.addStmt(initCall.makeStatement());
         }
@@ -1742,11 +1743,11 @@ public class GwtAstBuilder {
       JDeclaredType type = curClass.type;
       /*
        * Make clinits chain to super class (JDT doesn't write code to do this).
-       * Call super class $clinit;
+       * Call super class $clinit; $clinit is always in position 0.
        */
       if (type.getSuperClass() != null) {
-        JMethod myClinit = type.getClinitMethod();
-        JMethod superClinit = type.getSuperClass().getClinitMethod();
+        JMethod myClinit = type.getMethods().get(0);
+        JMethod superClinit = type.getSuperClass().getMethods().get(0);
         JMethodCall superClinitCall = new JMethodCall(myClinit.getSourceInfo(), null, superClinit);
         JMethodBody body = (JMethodBody) myClinit.getBody();
         body.getBlock().addStmt(0, superClinitCall.makeStatement());
@@ -2050,7 +2051,7 @@ public class GwtAstBuilder {
       JNewArray newExpr = JNewArray.createInitializers(info, enumArrayType, initializers);
       JFieldRef valuesRef = new JFieldRef(info, null, valuesField, type);
       JDeclarationStatement declStmt = new JDeclarationStatement(info, valuesRef, newExpr);
-      JBlock clinitBlock = ((JMethodBody) type.getClinitMethod().getBody()).getBlock();
+      JBlock clinitBlock = ((JMethodBody) type.getMethods().get(0).getBody()).getBlock();
 
       /*
        * HACKY: the $VALUES array must be initialized immediately after all of
@@ -2373,25 +2374,16 @@ public class GwtAstBuilder {
       }
     }
 
-    // Only called on nested instances constructors (explicitConstructorCalls) that are of the
-    // form: outer.super(...) or super(...)
-    //
-    // Will set outer (in the first case) or the implicit enclosing object reference to
-    // be the first parameter of super(...)
     private void processSuperCallThisArgs(ReferenceBinding superClass, JMethodCall call,
         JExpression qualifier, Expression qualification) {
-      // Explicit super calls can only happend inside constructors
-      assert curMethod.scope.isInsideConstructor();
       if (superClass.syntheticEnclosingInstanceTypes() != null) {
-        // there can only be ONE immediate enclosing instance.
-        assert superClass.syntheticEnclosingInstanceTypes().length == 1;
-        ReferenceBinding targetType = superClass.syntheticEnclosingInstanceTypes()[0];
-        if (qualification != null) {
-          // Outer object is the qualifier.
-          call.addArg(qualifier);
-        } else {
-          // Get implicit outer object.
-          call.addArg(makeThisReference(call.getSourceInfo(), targetType, false, curMethod.scope));
+        for (ReferenceBinding targetType : superClass.syntheticEnclosingInstanceTypes()) {
+          if (qualification != null && superClass.enclosingType() == targetType) {
+            assert qualification.resolvedType.erasure().isCompatibleWith(targetType);
+            call.addArg(qualifier);
+          } else {
+            call.addArg(makeThisReference(call.getSourceInfo(), targetType, false, curMethod.scope));
+          }
         }
       }
     }
@@ -2441,9 +2433,9 @@ public class GwtAstBuilder {
     private void pushInitializerMethodInfo(FieldDeclaration x, MethodScope scope) {
       JMethod initMeth;
       if (x.isStatic()) {
-        initMeth = curClass.type.getClinitMethod();
+        initMeth = curClass.type.getMethods().get(0);
       } else {
-        initMeth = curClass.type.getInitMethod();
+        initMeth = curClass.type.getMethods().get(1);
       }
       pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope));
     }

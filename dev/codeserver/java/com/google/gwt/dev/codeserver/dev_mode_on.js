@@ -60,18 +60,13 @@
     if (!params) {
       return null;
     }
-    try {
-      delete window.__gwt_bookmarklet_params;
-    } catch (e) {
-      // Delete window.x throws and exception in IE8.
-      window['__gwt_bookmarklet_params'] = null;
-    }
+    delete window.__gwt_bookmarklet_params;
     return params;
   }
 
   function makeOverlay() {
     var overlay = document.createElement('div');
-    overlay.style.zIndex = 1000000;
+    overlay.style.zIndex = 1000;
     overlay.style.position = 'absolute';
     overlay.style.top = 0;
     overlay.style.left = 0;
@@ -84,7 +79,7 @@
 
   function makeDialog() {
     var dialog = document.createElement('div');
-    dialog.style.zIndex = 1000001;
+    dialog.style.zIndex = 1001;
     dialog.style.position = 'fixed';
     dialog.style.top = '20pt';
     dialog.style.left = '20pt';
@@ -105,7 +100,7 @@
     result.style.borderBottom = '1px solid black';
     result.style.padding = '3pt';
     result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript));
-    setTextContent(result, name);
+    result.textContent = name;
     result.title = 'Tip: drag this button to the bookmark bar';
     return result;
   }
@@ -129,7 +124,8 @@
    *     a recompile will succeed.
    */
   function getCannotCompileError(module_name) {
-    if (!isModuleOnCodeServer(module_name)) {
+    var modules_on_codeserver = window.__gwt_codeserver_config.moduleNames;
+    if (modules_on_codeserver.indexOf(module_name) < 0) {
       return 'The code server isn\'t configured to compile this module';
     }
 
@@ -153,22 +149,6 @@
   }
 
   /**
-   * Determines if the code server is configured to run the given module.
-   * @param module_name {string}
-   * @return {boolean} true if the code server supports the given module.
-   */
-  function isModuleOnCodeServer(module_name) {
-    var modules_on_codeserver = window.__gwt_codeserver_config.moduleNames;
-    // Support browsers without indexOf() (e.g. IE8).
-    for (var i = 0; i < modules_on_codeserver.length; i++) {
-      if (modules_on_codeserver[i] == module_name) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Displays the "Choose module to compile" dialog.
    * @param codeserver_url {string} The URL of the code server that will
    *    compile the chosen module.
@@ -178,7 +158,7 @@
     function makeHeader() {
       var message = document.createElement('div');
       message.style.fontSize = '24pt';
-      setTextContent(message, 'Choose a module to recompile:');
+      message.textContent = 'Choose a module to recompile:';
       return message;
     }
 
@@ -265,7 +245,7 @@
 
     var message = document.createElement('div');
     message.style.fontSize = '24pt';
-    setTextContent(message, text);
+    message.textContent = text;
 
     dialog.appendChild(message);
 
@@ -286,14 +266,14 @@
       var error = document.createElement('a');
       error.setAttribute('href', log_url);
       error.setAttribute('target', 'gwt_dev_mode_log');
-      setTextContent(error, errorText);
+      error.innerText = errorText;
       error.style.color = 'red';
       error.style.textDecoration = 'underline';
       message.appendChild(error);
 
       var button = document.createElement('button');
       button.style.fontSize = '16pt';
-      setTextContent(button, 'Try Again');
+      button.textContent = 'Try Again';
       button.onclick = function() {
         body.removeChild(dialog);
         body.removeChild(overlay);
@@ -303,20 +283,6 @@
     };
 
     return result;
-  }
-
-  /**
-   * Updates the contents of the given element with the provided text.
-   * @param {Node} element The element to update.
-   * @param {String} text The text to display.
-   */
-  function setTextContent(element, text) {
-    if (typeof element.textContent === 'string') {
-      element.textContent = text;
-    } else {
-      // Use innerText when textContent is not supported (e.g. IE8).
-      element.innerText = text;
-    }
   }
 
   /**
@@ -409,7 +375,6 @@
     }
 
     function onCompileFinished(json) {
-      globals.compiling = false;
       if (json.status != 'ok') {
         var log_url = codeserver_url + 'log/' + module_name;
         dialog.showError(json.status, log_url, onClickTryAgain);
@@ -420,7 +385,6 @@
 
     var url_prefix = codeserver_url + 'recompile/' + module_name + '?' +
     getBindingParameters(module_name, get_prop_map);
-    globals.compiling = true;
     callJsonp(url_prefix, onCompileFinished);
   }
 
@@ -430,12 +394,6 @@
    * @param params {map} Parameters passed in by the bookmarklet.
    */
   function runBookmarklet(params) {
-    if (!!globals.compiling) {
-      // A module is already being compiled.
-      // We ignore the bookmarklet: the page will reload once the compilation
-      // ends.
-      return;
-    }
     if (!params || !params.server_url) {
       window.alert('Need to reinstall the bookmarklets.');
       return;

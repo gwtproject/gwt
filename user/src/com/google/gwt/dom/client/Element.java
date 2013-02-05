@@ -85,10 +85,9 @@ public class Element extends Node {
    * present, this method has no effect.
    * 
    * @param className the class name to be added
-   * @return <code>true</code> if this element did not already have the specified class name
    * @see #setClassName(String)
    */
-  public final boolean addClassName(String className) {
+  public final void addClassName(String className) {
     assert (className != null) : "Unexpectedly null class name";
 
     className = className.trim();
@@ -96,18 +95,28 @@ public class Element extends Node {
 
     // Get the current style string.
     String oldClassName = getClassName();
-    int idx = indexOfName(oldClassName, className);
+    int idx = oldClassName.indexOf(className);
+
+    // Calculate matching index.
+    while (idx != -1) {
+      if (idx == 0 || oldClassName.charAt(idx - 1) == ' ') {
+        int last = idx + className.length();
+        int lastPos = oldClassName.length();
+        if ((last == lastPos)
+            || ((last < lastPos) && (oldClassName.charAt(last) == ' '))) {
+          break;
+        }
+      }
+      idx = oldClassName.indexOf(className, idx + 1);
+    }
 
     // Only add the style if it's not already present.
     if (idx == -1) {
       if (oldClassName.length() > 0) {
-        setClassName(oldClassName + " " + className);
-      } else {
-        setClassName(className);
+        oldClassName += " ";
       }
-      return true;
+      setClassName(oldClassName + className);
     }
-    return false;
   }
 
   /**
@@ -519,11 +528,10 @@ public class Element extends Node {
    * Removes a name from this element's class property. If the name is not
    * present, this method has no effect.
    * 
-   * @param className the class name to be removed
-   * @return <code>true</code> if this element had the specified class name
+   * @param className the class name to be added
    * @see #setClassName(String)
    */
-  public final boolean removeClassName(String className) {
+  public final void removeClassName(String className) {
     assert (className != null) : "Unexpectedly null class name";
 
     className = className.trim();
@@ -531,7 +539,20 @@ public class Element extends Node {
 
     // Get the current style string.
     String oldStyle = getClassName();
-    int idx = indexOfName(oldStyle, className);
+    int idx = oldStyle.indexOf(className);
+
+    // Calculate matching index.
+    while (idx != -1) {
+      if (idx == 0 || oldStyle.charAt(idx - 1) == ' ') {
+        int last = idx + className.length();
+        int lastPos = oldStyle.length();
+        if ((last == lastPos)
+            || ((last < lastPos) && (oldStyle.charAt(last) == ' '))) {
+          break;
+        }
+      }
+      idx = oldStyle.indexOf(className, idx + 1);
+    }
 
     // Don't try to remove the style if it's not there.
     if (idx != -1) {
@@ -550,35 +571,7 @@ public class Element extends Node {
       }
 
       setClassName(newClassName);
-      return true;
     }
-    return false;
-  }
-
-  /**
-   * Returns the index of the first occurrence of name in a space-separated list of names,
-   * or -1 if not found.
-   *
-   * @param nameList list of space delimited names
-   * @param name a non-empty string.  Should be already trimmed.
-   */
-  static int indexOfName(String nameList, String name) {
-    int idx = nameList.indexOf(name);
-
-    // Calculate matching index.
-    while (idx != -1) {
-      if (idx == 0 || nameList.charAt(idx - 1) == ' ') {
-        int last = idx + name.length();
-        int lastPos = nameList.length();
-        if ((last == lastPos)
-            || ((last < lastPos) && (nameList.charAt(last) == ' '))) {
-          break;
-        }
-      }
-      idx = nameList.indexOf(name, idx + 1);
-    }
-
-    return idx;
   }
 
   /**

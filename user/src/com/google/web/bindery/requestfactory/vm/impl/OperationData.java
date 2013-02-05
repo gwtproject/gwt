@@ -15,6 +15,9 @@
  */
 package com.google.web.bindery.requestfactory.vm.impl;
 
+import com.google.gwt.dev.asm.Type;
+import com.google.gwt.dev.asm.commons.Method;
+
 /**
  * Describes operations that the client may ask the server to perform.
  */
@@ -29,14 +32,18 @@ public class OperationData {
       OperationData toReturn = d;
       d = null;
 
-      // Strip return types
       if (toReturn.clientMethodDescriptor != null) {
-        toReturn.clientMethodDescriptor =
-            OperationKey.stripReturnType(toReturn.clientMethodDescriptor);
+        // Strip return types
+        Method noReturn =
+            new Method(toReturn.methodName, Type.VOID_TYPE, Type
+                .getArgumentTypes(toReturn.clientMethodDescriptor));
+        toReturn.clientMethodDescriptor = noReturn.getDescriptor();
       }
       if (toReturn.domainMethodDescriptor != null) {
-        toReturn.domainMethodDescriptor =
-            OperationKey.stripReturnType(toReturn.domainMethodDescriptor);
+        Method noReturn =
+            new Method(toReturn.methodName, Type.VOID_TYPE, Type
+                .getArgumentTypes(toReturn.domainMethodDescriptor));
+        toReturn.domainMethodDescriptor = noReturn.getDescriptor();
       }
 
       return toReturn;

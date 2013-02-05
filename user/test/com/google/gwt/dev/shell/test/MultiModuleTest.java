@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -110,14 +111,14 @@ public class MultiModuleTest extends GWTTestCase {
    */
   public void testInnerModules() {
     String url = getURL();
-    Map<String, String> params = getURLParams(url);
+    Map params = getURLParams(url);
     if (!params.containsKey("gwt.junit.testfuncname")) {
       // if this test is being run as a normal JUnit test, return success
       return;
     }
 
     // we were invoked by testMultipleModules, get the frame to load
-    String frameName = params.get("frame");
+    String frameName = (String) params.get("frame");
     
     VerticalPanel panel = new VerticalPanel();
     RootPanel.get().add(panel);
@@ -166,7 +167,7 @@ public class MultiModuleTest extends GWTTestCase {
     
     // build new URL from current one
     String url = getURL();
-    Map<String, String> params = getURLParams(url);
+    Map params = getURLParams(url);
     params.put("frame", "top");
     params.put("gwt.junit.testclassname", MultiModuleTest.class.getName());
     params.put("gwt.junit.testfuncname", "testInnerModules");
@@ -206,7 +207,7 @@ public class MultiModuleTest extends GWTTestCase {
    * @param params a map of parameter names to values
    * @return the revised URL
    */
-  private String buildURL(String url, Map<String, String> params) {
+  private String buildURL(String url, Map params) {
 
     // strip off the query string if present
     int pos = url.indexOf("?");
@@ -224,8 +225,9 @@ public class MultiModuleTest extends GWTTestCase {
     }
 
     // now add the rest of the parameters, excluding gwt.hybrid
-    for (Map.Entry<String, String> entry : params.entrySet()) {
-      String param = entry.getKey();
+    for (Iterator it = params.entrySet().iterator(); it.hasNext();) {
+      Map.Entry entry = (Map.Entry) it.next();
+      String param = (String) entry.getKey();
 
       if (param.equals("gwt.hybrid")) {
         // we already included gwt.hybrid if it was present
@@ -242,7 +244,7 @@ public class MultiModuleTest extends GWTTestCase {
       url += param;
 
       // add the value if necessary
-      String value = entry.getValue();
+      String value = (String) entry.getValue();
       if (value != null) {
         url += "=" + value;
       }
@@ -266,7 +268,7 @@ public class MultiModuleTest extends GWTTestCase {
    */
   private void doneLoading() {
     String url = getURL();
-    Map<String, String> params = getURLParams(url);
+    Map params = getURLParams(url);
     mainPanel.add(new Label("done loading"));
     if (++state == 4) {
       // all tests complete, notify parent
@@ -304,8 +306,8 @@ public class MultiModuleTest extends GWTTestCase {
    * @param url the full or partial (ie, only location.search) URL to parse
    * @return the map of parameter names to values
    */
-  private Map<String, String> getURLParams(String url) {
-    HashMap<String, String> map = new HashMap<String, String>();
+  private Map getURLParams(String url) {
+    HashMap map = new HashMap();
     int pos = url.indexOf("?");
     
     // loop precondition: pos is the index of the next ? or & character in url
@@ -370,7 +372,7 @@ public class MultiModuleTest extends GWTTestCase {
    * 
    * @param frameNumber the number of the frame to replace, starting with 0
    */
-  private void toggleFrame(int frameNumber, String url, Map<String, String> params) {
+  private void toggleFrame(int frameNumber, String url, Map params) {
     params.put("frame", (frameNumber + 1) + (frameB[frameNumber] ? "a" : "b"));
     frame[frameNumber].setUrl(buildURL(url, params));
     frameB[frameNumber] = !frameB[frameNumber];

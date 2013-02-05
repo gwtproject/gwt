@@ -27,22 +27,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Base class for any declared type.
- *
- * Declared types have fields and methods. Two of the methods are treated specially: the class
- * initializer method (named <code>$clinit</code>) and the instance initializer method
- * (named <code>$init</code>).
- *
- * The class initializer method is responsible for initializing all class variables as well as
- * those of the superclasses (by calling the superclass class initializer method).
- *
- * The instance initializer is responsible for initializing all instance variables as well as those
- * of the superclasses (by calling the superclass instance initializer method).
- *
- * Optimizations may eliminate class initializers (<code>$clinit</code>) if no static variables need
- * initialization, and use the private variable <code>clinitTarget</code>to keep track which
- * initializer in the superclass chain needs to be called.
- *
+ * Base class for any reference type.
  */
 public abstract class JDeclaredType extends JReferenceType {
 
@@ -63,8 +48,8 @@ public abstract class JDeclaredType extends JReferenceType {
   protected transient List<JMethod> methods = Lists.create();
 
   /**
-   * Tracks the target static initialization for this class. Default to self (if it has a non
-   * empty initializer) or point to a superclass or be null.
+   * Tracks the target static initialization for this class. Default to self
+   * until removed or set to be a superclass.
    */
   private JDeclaredType clinitTarget = this;
 
@@ -88,26 +73,6 @@ public abstract class JDeclaredType extends JReferenceType {
    * This type's implemented interfaces.
    */
   private List<JInterfaceType> superInterfaces = Lists.create();
-
-  /**
-   * Determines whether a subclass of this type is in the collection <code>types</code>.
-   *
-   * @param types a collections of types.
-   * @return the first subtype found in the collection  if the collection <code>types</code>
-   *             contains a subtype of this type; null otherwise.
-   */
-  public JDeclaredType findSubtype(Iterable<JDeclaredType> types) {
-    for (JDeclaredType type : types) {
-      JDeclaredType tp = type;
-      while (tp != null) {
-        if (this == tp) {
-          return type;
-        }
-        tp = tp.getSuperClass();
-      }
-    }
-    return null;
-  }
 
   public JDeclaredType(SourceInfo info, String name) {
     super(info, name);
@@ -135,12 +100,8 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Adds a method to this type.
    */
-  public final void addMethod(JMethod method) {
+  public void addMethod(JMethod method) {
     assert method.getEnclosingType() == this;
-    assert !method.getName().equals("$clinit") || getMethods().size() == 0 : "Attempted adding "
-        + "$clinit method with index != 0";
-    assert !method.getName().equals("$init") || getMethods().size() == 1 : "Attempted adding $init "
-        + "method with index != 1";
     methods = Lists.add(methods, method);
   }
 
@@ -179,40 +140,10 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   /**
-   * Returns the instance initializer ($init) method.
-   * Can only be called after making sure the class has an instance initializer method.
-   *
-   * @return The instance initializer method.
-   */
-  public final JMethod getInitMethod() {
-    assert getMethods().size() > 1;
-    JMethod init = this.getMethods().get(1);
-
-    assert init != null;
-    assert init.getName().equals("$init");
-    return init;
-  }
-
-  /**
-   * Returns the class initializer method.
-   * Can only be called after making sure the class has a class initializer method.
-   *
-   * @return The class initializer method.
-   */
-   public final JMethod getClinitMethod() {
-     assert getMethods().size() != 0;
-     JMethod clinit = this.getMethods().get(0);
-
-     assert clinit != null;
-     assert clinit.getName().equals("$clinit");
-     return clinit;
-  }
-
-  /**
    * Returns the class that must be initialized to use this class. May be a
    * superclass, or <code>null</code> if this class has no static initializer.
    */
-  public final JDeclaredType getClinitTarget() {
+  public JDeclaredType getClinitTarget() {
     return clinitTarget;
   }
 
@@ -255,7 +186,7 @@ public abstract class JDeclaredType extends JReferenceType {
    * Returns this type's declared methods; does not include methods defined in a
    * super type unless they are overridden by this type.
    */
-  public final List<JMethod> getMethods() {
+  public List<JMethod> getMethods() {
     return methods;
   }
 
@@ -287,7 +218,7 @@ public abstract class JDeclaredType extends JReferenceType {
    * Removes the field at the specified index.
    */
   public void removeField(int i) {
-    assert !isExternal() : "External types can not be modified.";
+    assert !isExternal() : "External types can not be modiified.";
     fields = Lists.remove(fields, i);
   }
 
@@ -295,20 +226,8 @@ public abstract class JDeclaredType extends JReferenceType {
    * Removes the method at the specified index.
    */
   public void removeMethod(int i) {
-    assert !isExternal() : "External types can not be modified.";
+    assert !isExternal() : "External types can not be modiified.";
     methods = Lists.remove(methods, i);
-  }
-
-  /**
-   * Resets the clinitTarget to the current class. Used by optimizations that move initializers from
-   * superclasses down.
-   *
-   * Prerequisite: the $clinit method must exist and be non empty.
-   */
-  public void resetClinitTarget() {
-    assert !((JMethodBody) getClinitMethod().getBody()).getStatements().isEmpty() : "Attempted to "
-        + "reset the clinitTarget to an empty $clinit";
-    this.clinitTarget = this;
   }
 
   /**

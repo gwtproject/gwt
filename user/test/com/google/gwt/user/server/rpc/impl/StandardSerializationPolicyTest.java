@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Tests for the {@link StandardSerializationPolicy} class.
@@ -118,14 +117,14 @@ public class StandardSerializationPolicyTest extends TestCase {
   }
 
   StandardSerializationPolicy getStandardSerializationPolicy() {
-    Map<Class<?>, Boolean> map = new HashMap<Class<?>, Boolean>();
+    Map map = new HashMap();
     map.put(A.class, Boolean.TRUE);
     map.put(C.class, Boolean.FALSE);
     
-    Map<Class<?>, String> typeIds = new HashMap<Class<?>, String>();
+    Map typeIds = new HashMap();
     typeIds.put(A.class, "A");
     typeIds.put(B.class, "B");
 
-    return new StandardSerializationPolicy(map, map, typeIds, new HashMap<Class<?>, Set<String>>());
+    return new StandardSerializationPolicy(map, map, typeIds, new HashMap());
   }
 }

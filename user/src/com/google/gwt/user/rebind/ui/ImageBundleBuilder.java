@@ -389,7 +389,7 @@ class ImageBundleBuilder {
         // before this point.
         logger.log(TreeLogger.ERROR,
             "Resource not found on classpath (is the name specified as "
-                + "ClassLoader.getResource() would expect?)", null);
+                + "Class.getResource() would expect?)", null);
         throw new UnableToCompleteException();
       }
 

@@ -47,20 +47,20 @@ public class AuthorTest extends GWTTestCase {
     initValidAuthor();
     Set<ConstraintViolation<Author>> violations = validator.validate(author,
         ClientGroup.class);
-    assertContentsEmpty("valid author", violations);
+    assertContentsAnyOrder("valid author", violations);
   }
 
   public void testGroup_default() throws Exception {
     initValidAuthor();
     Set<ConstraintViolation<Author>> violations = validator.validate(author,
         Default.class);
-    assertContentsEmpty("valid author", violations);
+    assertContentsAnyOrder("valid author", violations);
   }
 
   public void testGroup_empty() throws Exception {
     initValidAuthor();
     Set<ConstraintViolation<Author>> violations = validator.validate(author);
-    assertContentsEmpty("valid author", violations);
+    assertContentsAnyOrder("valid author", violations);
   }
 
   public void testGroup_serverGroup() throws Exception {
@@ -93,7 +93,7 @@ public class AuthorTest extends GWTTestCase {
   public void testValidate_valid() {
     initValidAuthor();
     Set<ConstraintViolation<Author>> violations = validator.validate(author);
-    assertContentsEmpty("valid author", violations);
+    assertContentsAnyOrder("valid author", violations);
   }
 
   public void testValidateProperty_object() {
@@ -123,11 +123,6 @@ public class AuthorTest extends GWTTestCase {
     author.setFirstName("John");
     author.setLastName("Smith");
     author.setCompany("Google");
-  }
-
-  private <T> void assertContentsEmpty(String message,
-      Iterable<T> actual) {
-    assertFalse(message + "Expected empty but found " + actual, actual.iterator().hasNext());
   }
 
   private <T> void assertContentsAnyOrder(String message,

@@ -22,8 +22,8 @@
         <include name="**/*.java"/>
       </fileset>
     </copy>
-    <replace dir="${src}" token="com.google.gwt.thirdparty.org.mortbay."
-             value="org.mortbay."/>
+    <replace dir="${src}" token="com.google.gwt.thirdparty.org.mortbay.jetty"
+             value="org.mortbay.jetty"/>
   </target>
 
   <target name="compile" depends="preprocess">
@@ -41,7 +41,6 @@
       <fileset dir="${javac.out}"/>
       <fileset dir="java">
         <include name="**/*.html"/>
-        <include name="**/*.ico"/>
         <include name="**/*.js"/>
       </fileset>
 

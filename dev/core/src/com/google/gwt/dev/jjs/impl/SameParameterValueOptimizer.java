@@ -202,9 +202,11 @@ public class SameParameterValueOptimizer {
    * TODO: support polymorphic calls properly.
    */
   private final Set<JMethod> rescuedMethods = new HashSet<JMethod>();
+  private final Simplifier simplifier;
 
   private SameParameterValueOptimizer(JProgram program) {
     this.program = program;
+    simplifier = new Simplifier(program);
   }
 
   private OptimizerStats execImpl(JNode node) {
@@ -219,7 +221,7 @@ public class SameParameterValueOptimizer {
       JValueLiteral valueLiteral = parameterValues.get(parameter);
       if (valueLiteral != null) {
         SubstituteParameterVisitor substituteParameterVisitor =
-            new SubstituteParameterVisitor(parameter, Simplifier.cast(parameter.getType(),
+            new SubstituteParameterVisitor(parameter, simplifier.cast(parameter.getType(),
                 valueLiteral));
         substituteParameterVisitor.accept(parameter.getEnclosingMethod());
         stats.recordModified(substituteParameterVisitor.getNumMods());

@@ -589,19 +589,8 @@ public class CodeSplitter2 {
     return union;
   }
 
-  /**
-   * Performs set difference of <code>all - liveWithoutEntry</code> and confirms the result is in
-   * <code>liveFromSplitPoint</code>. Resulting program statements are recorded in a map
-   * that for each statement indicates it's fragment destination.
-   * @param splitPoint splitPoint number
-   * @param map map of statement to splitpoint number
-   * @param liveWithoutEntry everything live except that reachable from split point
-   * @param all everything reachable in the entire program
-   * @param liveFromSplitPoint everything live from the split point, including leftovers
-   * @param <T> the type of node (field, method, etc) in the map
-   */
-  private static <T> void updateReverseMap(int splitPoint, Map<T, Integer> map, Set<?> liveWithoutEntry,
-                                           Iterable<T> all, Set<?> liveFromSplitPoint) {
+  private static <T> void updateReverseMap(int entry, Map<T, Integer> map, Set<?> liveWithoutEntry,
+      Iterable<T> all) {
     for (T each : all) {
       if (!liveWithoutEntry.contains(each)) {
         /*
@@ -611,11 +600,7 @@ public class CodeSplitter2 {
          * been reached. Thus, it can be downloaded along with either i's or j's
          * code.
          */
-        if (!liveFromSplitPoint.contains(each)) {
-          // complement says it should be live, but it is not actually live within the splitpoint
-        } else {
-          map.put(each, splitPoint);
-        }
+        map.put(each, entry);
       }
     }
   }
@@ -657,7 +642,7 @@ public class CodeSplitter2 {
 
   /**
    * Maps a split-point number to a fragment number.
-   *
+   * 
    * splitPointToFragmmentMap[x] = y implies split point #x is in fragment #y.
    * 
    * TODO(acleung): We could use some better abstraction for this. I feel this
@@ -731,27 +716,6 @@ public class CodeSplitter2 {
   }
 
   /**
-   * Compute everything reachable from the set of input split points.
-   * @param liveAfterInitialSequence everything live in initial fragment
-   * @param splitPoints list of split points to start from
-   * @return
-   */
-  private ControlFlowAnalyzer computeAllLiveFromSplitPoints(
-      ControlFlowAnalyzer liveAfterInitialSequence, List<Integer> splitPoints) {
-     ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(liveAfterInitialSequence);
-     for (JRunAsync otherRunAsync : jprogram.getRunAsyncs()) {
-       if (isInitial(otherRunAsync.getSplitPoint())) {
-         continue;
-       }
-       if (!splitPoints.contains(otherRunAsync.getSplitPoint())) {
-         continue;
-       }
-       cfa.traverseFromRunAsync(otherRunAsync);
-     }
-     return cfa;
-   }
-
-  /**
    * Compute a CFA that covers the entire live code of the program.
    */
   private ControlFlowAnalyzer computeCompleteCfa() {
@@ -809,21 +773,7 @@ public class CodeSplitter2 {
     // Step #7: Replaces the splitpoint number with the new fragment number.
     replaceFragmentId();
   }
-
-  /**
-   * Given the set of code initially live, and a set of splitpoints grouped into fragments:
-   * The core algorithm to compute exclusive merged fragments is as follows:
-   * For each fragment (grouping of merged splitpoint numbers)
-   * 1) compute the set of live statements of every splitpoint EXCEPT those in the fragment
-   * 2) compute the set of live statements reachable from those in the fragment
-   * 3) calculate a set difference of everything live minus the results of step 1
-   * 4) filter results by checking for membership in the results of step 2
-   * 5) assign resulting live code to this fragment (recorded in a map)
-   *
-   * The results of these steps are then used to extract individual JavaScript chunks
-   * into blocks corresponding to fragments which are ultimately written to disk.
-   * @param initiallyLive the CFA of code live from the entry point (initial fragments)
-   */
+  
   private void extractStatements(ControlFlowAnalyzer initiallyLive) {
     Map<Integer, List<JsStatement>> fragmentStats = new LinkedHashMap<Integer, List<JsStatement>>();
     
@@ -898,20 +848,14 @@ public class CodeSplitter2 {
       }
 
       ControlFlowAnalyzer allButOne = computeAllButNCfas(liveAfterInitialSequence, splitPoints);
-      ControlFlowAnalyzer allFromSplitPoints = computeAllLiveFromSplitPoints(liveAfterInitialSequence, splitPoints);
-
       Set<JNode> allLiveNodes =
           union(allButOne.getLiveFieldsAndMethods(), allButOne.getFieldsWritten());
-      Set<JNode> allLiveFromSplitPoints = union(allFromSplitPoints.getLiveFieldsAndMethods(),
-          allFromSplitPoints.getFieldsWritten());
-      updateReverseMap(i, fragmentMap.fields, allLiveNodes, allFields, allLiveFromSplitPoints);
-      updateReverseMap(i, fragmentMap.methods, allButOne.getLiveFieldsAndMethods(), allMethods,
-          allFromSplitPoints.getLiveFieldsAndMethods());
+      updateReverseMap(i, fragmentMap.fields, allLiveNodes, allFields);
+      updateReverseMap(i, fragmentMap.methods, allButOne.getLiveFieldsAndMethods(), allMethods);
       updateReverseMap(i, fragmentMap.strings, allButOne.getLiveStrings(), everything
-          .getLiveStrings(), allFromSplitPoints.getLiveStrings());
+          .getLiveStrings());
       updateReverseMap(i, fragmentMap.types, declaredTypesIn(allButOne.getInstantiatedTypes()),
-          declaredTypesIn(everything.getInstantiatedTypes()),
-          declaredTypesIn(allFromSplitPoints.getInstantiatedTypes()));
+          declaredTypesIn(everything.getInstantiatedTypes()));
 
       // This mean split point [i] has been merged with another split point, ignore it.
       if (splitPointToFragmentMap[i] != i) {

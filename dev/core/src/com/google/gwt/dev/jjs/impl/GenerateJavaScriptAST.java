@@ -439,7 +439,6 @@ public class GenerateJavaScriptAST {
         JsParameter jsParam = jsCatch.getParameter();
         names.put(arg.getTarget(), jsParam.getName());
         catchMap.put(catchBlock, jsCatch);
-        catchParamIdentifiers.add(jsParam.getName());
 
         push(jsCatch.getScope());
         accept(catchBlock);
@@ -1147,9 +1146,7 @@ public class GenerateJavaScriptAST {
       for (int i = 0; i < locals.size(); ++i) {
         JsName name = names.get(x.getLocals().get(i));
         String ident = name.getIdent();
-        if (!alreadySeen.contains(ident)
-            // Catch block params don't need var declarations
-            && !catchParamIdentifiers.contains(name)) {
+        if (!alreadySeen.contains(ident)) {
           alreadySeen.add(ident);
           vars.add(new JsVar(x.getSourceInfo(), name));
         }
@@ -1190,7 +1187,7 @@ public class GenerateJavaScriptAST {
           return;
         } else if (type != clinitTarget) {
           // replace the method with its retargeted clinit
-          method = clinitTarget.getClinitMethod();
+          method = clinitTarget.getMethods().get(0);
         }
       }
 
@@ -1777,7 +1774,7 @@ public class GenerateJavaScriptAST {
        * refs to super classes are preserved.
        */
       JMethodBody clinitBody =
-          (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
+          (JMethodBody) program.getTypeClassLiteralHolder().getMethods().get(0).getBody();
       for (JStatement stmt : clinitBody.getStatements()) {
         if (stmt instanceof JDeclarationStatement) {
           generateClassLiteral((JDeclarationStatement) stmt, vars);
@@ -2160,7 +2157,7 @@ public class GenerateJavaScriptAST {
         return null;
       }
 
-      JMethod clinitMethod = targetType.getClinitMethod();
+      JMethod clinitMethod = targetType.getMethods().get(0);
       SourceInfo sourceInfo = x.getSourceInfo();
       JsInvocation jsInvocation = new JsInvocation(sourceInfo);
       jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
@@ -2183,7 +2180,7 @@ public class GenerateJavaScriptAST {
         return null;
       }
 
-      JMethod clinitMethod = enclosingType.getClinitTarget().getClinitMethod();
+      JMethod clinitMethod = enclosingType.getClinitTarget().getMethods().get(0);
       SourceInfo sourceInfo = x.getSourceInfo();
       JsInvocation jsInvocation = new JsInvocation(sourceInfo);
       jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
@@ -2339,8 +2336,6 @@ public class GenerateJavaScriptAST {
   private Map<String, JsExpression> castMapByString = new HashMap<String, JsExpression>();
 
   private final Map<JBlock, JsCatch> catchMap = new IdentityHashMap<JBlock, JsCatch>();
-
-  private final Set<JsName> catchParamIdentifiers = new HashSet<JsName>();
 
   private final Map<JClassType, JsScope> classScopes = new IdentityHashMap<JClassType, JsScope>();
 

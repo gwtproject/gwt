@@ -207,7 +207,6 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
       K k = entry.getKey();
       if (key == null ? k == null : key.equals(k)) {
         if (remove) {
-          entry = new MapEntryImpl<K, V>(entry.getKey(), entry.getValue());
           iter.remove();
         }
         return entry;

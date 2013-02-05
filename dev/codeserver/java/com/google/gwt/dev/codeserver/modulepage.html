@@ -18,8 +18,8 @@
   <script>
     function updatePage(config) {
       var title = config.moduleName + " (GWT Code Server)";
-      document.title = title;
-      setTextContent(document.getElementById("title"), title);
+      document.getElementsByTagName("title")[0].textContent = title;
+      document.getElementById("title").textContent = title;
 
       document.getElementById("logLink")
               .setAttribute("href", "../log/" + config.moduleName);
@@ -34,37 +34,17 @@
 
         var anchor = document.createElement("a");
         anchor.setAttribute("href", file.link);
-        setTextContent(anchor, file.name);
+        anchor.textContent = file.name;
 
         var listItem = document.createElement("li");
         listItem.appendChild(anchor);
         resultElement.appendChild(listItem);
       }
     }
-
-    function setTextContent(element, text) {
-      if (typeof element.textContent === 'string') {
-        element.textContent = text;
-      } else {
-        // Use innerText when textContent is not supported (e.g. IE8).
-        element.innerText = text;
-      }
-    }
-
-    function onPageLoad() {
-      updatePage(config);
-    }
-
-    if (window.addEventListener) {
-      window.addEventListener("load", onPageLoad, false);
-    }
-    else if (window.attachEvent) {
-      window.attachEvent("onload", onPageLoad);
-    }
   </script>
 
 </head>
-<body>
+<body onload="updatePage(config)">
 <h1 id="title">Loading...</h1>
 
 <p><a id="logLink">Messages</a> from the last time this module was compiled.</p>

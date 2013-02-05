@@ -335,8 +335,7 @@ public class FieldManager {
   public FieldWriter require(String fieldName) {
     FieldWriter fieldWriter = lookup(fieldName);
     if (fieldWriter == null) {
-      throw new RuntimeException(String.format("The required field \"%s\" doesn't exist.",
-          fieldName));
+      throw new RuntimeException("The required field %s doesn't exist.");
     }
     return fieldWriter;
   }

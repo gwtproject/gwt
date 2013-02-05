@@ -557,7 +557,7 @@ public class CustomScrollPanel extends ScrollPanel {
    * corner.
    * 
    * <p>
-   * In RTL, the vertical scrollbar appears on the left.
+   * In RTL, the vertical scrollbar appears on the right.
    */
   private void maybeUpdateScrollbars() {
     if (!isAttached()) {

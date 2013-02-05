@@ -260,7 +260,7 @@ public abstract class AbstractEditorDriverGenerator extends Generator {
           + editedSourceName + ">");
       SourceWriter sw = f.createSourceWriter(context, pw);
 
-      String parentSourceName = parent.getEditedType().getParameterizedQualifiedSourceName();
+      String parentSourceName = parent.getEditedType().getQualifiedSourceName();
       sw.println("private final %s parent;", parentSourceName);
 
       sw.println("public %s(%s parent, %s<%s> editor, String path) {",

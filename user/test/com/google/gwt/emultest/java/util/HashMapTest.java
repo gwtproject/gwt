@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * Tests <code>HashMap</code>.
  */
+@SuppressWarnings("unchecked")
 public class HashMapTest extends TestMap {
   private static final int CAPACITY_16 = 16;
   private static final int CAPACITY_NEG_ONE_HALF = -1;
@@ -88,7 +90,7 @@ public class HashMapTest extends TestMap {
   private static final String VALUE_TEST_REMOVE = KEY_TEST_REMOVE + " - value";
   private static final String VALUE_VAL = "value";
 
-  private static void assertEmptyIterator(Iterator<?> it) {
+  private static void assertEmptyIterator(Iterator it) {
     assertNotNull(it);
     assertFalse(it.hasNext());
     try {
@@ -103,7 +105,7 @@ public class HashMapTest extends TestMap {
    * 
    * @param hashMap
    */
-  private static void checkEmptyHashMapAssumptions(HashMap<?, ?> hashMap) {
+  private static void checkEmptyHashMapAssumptions(HashMap hashMap) {
     assertNotNull(hashMap);
     assertTrue(hashMap.isEmpty());
 
@@ -128,7 +130,7 @@ public class HashMapTest extends TestMap {
   }
 
   public void testAddEqualKeys() {
-    final HashMap<Number, Object> expected = new HashMap<Number, Object>();
+    final HashMap expected = new HashMap();
     assertEquals(expected.size(), 0);
     iterateThrough(expected);
     expected.put(new Long(45), new Object());
@@ -141,7 +143,7 @@ public class HashMapTest extends TestMap {
   }
 
   public void testAddWatch() {
-    HashMap<String, String> m = new HashMap<String, String>();
+    HashMap m = new HashMap();
     m.put("watch", "watch");
     assertEquals(m.get("watch"), "watch");
   }
@@ -150,7 +152,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.clear()'
    */
   public void testClear() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     hashMap.put("Hello", "Bye");
@@ -166,10 +168,11 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.clone()'
    */
   public void testClone() {
-    HashMap<String, String> srcMap = new HashMap<String, String>();
+    HashMap srcMap = new HashMap();
     checkEmptyHashMapAssumptions(srcMap);
 
-    HashMap<String, String> dstMap = cloneMap(srcMap);
+    // Check empty clone behavior
+    HashMap dstMap = (HashMap) srcMap.clone();
     assertNotNull(dstMap);
     assertEquals(dstMap.size(), srcMap.size());
     // assertTrue(dstMap.values().toArray().equals(srcMap.values().toArray()));
@@ -180,7 +183,7 @@ public class HashMapTest extends TestMap {
     srcMap.put(KEY_1, VALUE_1);
     srcMap.put(KEY_2, VALUE_2);
     srcMap.put(KEY_3, VALUE_3);
-    dstMap = cloneMap(srcMap);
+    dstMap = (HashMap) srcMap.clone();
     assertNotNull(dstMap);
     assertEquals(dstMap.size(), srcMap.size());
 
@@ -193,7 +196,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.containsKey(Object)'
    */
   public void testContainsKey() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertFalse(hashMap.containsKey(KEY_TEST_CONTAINS_KEY));
@@ -210,7 +213,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.containsValue(Object)'
    */
   public void testContainsValue() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertFalse("check contains of empty map",
@@ -230,18 +233,18 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.entrySet()'
    */
   public void testEntrySet() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
-    Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
+    Set entrySet = hashMap.entrySet();
     assertNotNull(entrySet);
 
     // Check that the entry set looks right
     hashMap.put(KEY_TEST_ENTRY_SET, VALUE_TEST_ENTRY_SET_1);
     entrySet = hashMap.entrySet();
     assertEquals(entrySet.size(), SIZE_ONE);
-    Iterator<Map.Entry<String, String>> itSet = entrySet.iterator();
-    Map.Entry<String, String> entry = itSet.next();
+    Iterator itSet = entrySet.iterator();
+    Map.Entry entry = (Map.Entry) itSet.next();
     assertEquals(entry.getKey(), KEY_TEST_ENTRY_SET);
     assertEquals(entry.getValue(), VALUE_TEST_ENTRY_SET_1);
     assertEmptyIterator(itSet);
@@ -251,7 +254,7 @@ public class HashMapTest extends TestMap {
     entrySet = hashMap.entrySet();
     assertEquals(entrySet.size(), SIZE_ONE);
     itSet = entrySet.iterator();
-    entry = itSet.next();
+    entry = (Map.Entry) itSet.next();
     assertEquals(entry.getKey(), KEY_TEST_ENTRY_SET);
     assertEquals(entry.getValue(), VALUE_TEST_ENTRY_SET_2);
     assertEmptyIterator(itSet);
@@ -265,16 +268,16 @@ public class HashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterNonString() {
-    HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+    HashMap hashMap = new HashMap();
     hashMap.put(1, 2);
-    Set<Map.Entry<Integer, Integer>> entrySet = hashMap.entrySet();
-    Map.Entry<Integer, Integer> entry = entrySet.iterator().next();
+    Set entrySet = hashMap.entrySet();
+    Entry entry = (Entry) entrySet.iterator().next();
 
     entry.setValue(3);
-    assertEquals(3, hashMap.get(1).intValue());
+    assertEquals(3, hashMap.get(1));
 
     hashMap.put(1, 4);
-    assertEquals(4, entry.getValue().intValue());
+    assertEquals(4, entry.getValue());
 
     assertEquals(1, hashMap.size());
   }
@@ -283,16 +286,16 @@ public class HashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterNull() {
-    HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    HashMap hashMap = new HashMap();
     hashMap.put(null, 2);
-    Set<Map.Entry<String, Integer>> entrySet = hashMap.entrySet();
-    Map.Entry<String, Integer> entry = entrySet.iterator().next();
+    Set entrySet = hashMap.entrySet();
+    Entry entry = (Entry) entrySet.iterator().next();
 
     entry.setValue(3);
-    assertEquals(3, hashMap.get(null).intValue());
+    assertEquals(3, hashMap.get(null));
 
     hashMap.put(null, 4);
-    assertEquals(4, entry.getValue().intValue());
+    assertEquals(4, entry.getValue());
 
     assertEquals(1, hashMap.size());
   }
@@ -301,10 +304,10 @@ public class HashMapTest extends TestMap {
    * Used to test the entrySet entry's set method.
    */
   public void testEntrySetEntrySetterString() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     hashMap.put("A", "B");
-    Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
-    Map.Entry<String, String> entry = entrySet.iterator().next();
+    Set entrySet = hashMap.entrySet();
+    Entry entry = (Entry) entrySet.iterator().next();
 
     entry.setValue("C");
     assertEquals("C", hashMap.get("A"));
@@ -319,12 +322,12 @@ public class HashMapTest extends TestMap {
    * Used to test the entrySet remove method.
    */
   public void testEntrySetRemove() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     hashMap.put("A", "B");
-    HashMap<String, String> dummy = new HashMap<String, String>();
+    HashMap dummy = new HashMap();
     dummy.put("A", "b");
-    Map.Entry<String, String> bogus = dummy.entrySet().iterator().next();
-    Set<Map.Entry<String, String>> entrySet = hashMap.entrySet();
+    Entry bogus = (Entry) dummy.entrySet().iterator().next();
+    Set entrySet = hashMap.entrySet();
     boolean removed = entrySet.remove(bogus);
     assertEquals(removed, false);
     assertEquals(hashMap.get("A"), "B");
@@ -334,21 +337,16 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.AbstractMap.equals(Object)'
    */
   public void testEquals() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     hashMap.put(KEY_KEY, VALUE_VAL);
 
-    HashMap<String, String> copyMap = cloneMap(hashMap);
+    HashMap copyMap = (HashMap) hashMap.clone();
 
     assertTrue(hashMap.equals(copyMap));
     hashMap.put(VALUE_VAL, KEY_KEY);
     assertFalse(hashMap.equals(copyMap));
-  }
-
-  @SuppressWarnings("unchecked")
-  private HashMap<String, String> cloneMap(HashMap<String, String> hashMap) {
-    return (HashMap<String, String>) hashMap.clone();
   }
 
   /*
@@ -362,7 +360,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.get(Object)'.
    */
   public void testGet() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.get(KEY_TEST_GET));
@@ -381,7 +379,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.AbstractMap.hashCode()'.
    */
   public void testHashCode() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     // Check that hashCode changes
@@ -396,7 +394,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.HashMap()'.
    */
   public void testHashMap() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
   }
 
@@ -404,13 +402,13 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.HashMap(int)'
    */
   public void testHashMapInt() {
-    HashMap<String, String> hashMap = new HashMap<String, String>(CAPACITY_16);
+    HashMap hashMap = new HashMap(CAPACITY_16);
     checkEmptyHashMapAssumptions(hashMap);
 
     // TODO(mmendez): how do we verify capacity?
     boolean failed = true;
     try {
-      new HashMap<String, String>(-SIZE_ONE);
+      new HashMap(-SIZE_ONE);
     } catch (Throwable ex) {
       if (ex instanceof IllegalArgumentException) {
         failed = false;
@@ -421,7 +419,7 @@ public class HashMapTest extends TestMap {
       fail("Failure testing new HashMap(-1)");
     }
 
-    HashMap<String, String> zeroSizedHashMap = new HashMap<String, String>(0);
+    HashMap zeroSizedHashMap = new HashMap(0);
     assertNotNull(zeroSizedHashMap);
   }
 
@@ -429,8 +427,8 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.HashMap(int, float)'
    */
   public void testHashMapIntFloat() {
-    HashMap<String, String> hashMap =
-        new HashMap<String, String>(CAPACITY_16, LOAD_FACTOR_ONE_HALF);
+
+    HashMap hashMap = new HashMap(CAPACITY_16, LOAD_FACTOR_ONE_HALF);
     checkEmptyHashMapAssumptions(hashMap);
 
     // TODO(mmendez): how do we verify capacity and load factor?
@@ -438,7 +436,7 @@ public class HashMapTest extends TestMap {
     // Test new HashMap(-1, 0.0F)
     boolean failed = true;
     try {
-      new HashMap<String, String>(CAPACITY_NEG_ONE_HALF, LOAD_FACTOR_ZERO);
+      new HashMap(CAPACITY_NEG_ONE_HALF, LOAD_FACTOR_ZERO);
     } catch (Throwable ex) {
       if (ex instanceof IllegalArgumentException) {
         failed = false;
@@ -452,7 +450,7 @@ public class HashMapTest extends TestMap {
     // Test new HashMap(0, -1.0F)
     failed = true;
     try {
-      new HashMap<String, String>(CAPACITY_ZERO, LOAD_FACTOR_NEG_ONE);
+      new HashMap(CAPACITY_ZERO, LOAD_FACTOR_NEG_ONE);
     } catch (Throwable ex) {
       if (ex instanceof IllegalArgumentException) {
         failed = false;
@@ -464,7 +462,7 @@ public class HashMapTest extends TestMap {
     }
 
     // Test new HashMap(0,0F);
-    hashMap = new HashMap<String, String>(CAPACITY_ZERO, LOAD_FACTOR_ONE_TENTH);
+    hashMap = new HashMap(CAPACITY_ZERO, LOAD_FACTOR_ONE_TENTH);
     assertNotNull(hashMap);
   }
 
@@ -472,7 +470,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.HashMap(Map)'
    */
   public void testHashMapMap() {
-    HashMap<Integer, Integer> srcMap = new HashMap<Integer, Integer>();
+    HashMap srcMap = new HashMap();
     assertNotNull(srcMap);
     checkEmptyHashMapAssumptions(srcMap);
 
@@ -480,16 +478,16 @@ public class HashMapTest extends TestMap {
     srcMap.put(INTEGER_2, INTEGER_22);
     srcMap.put(INTEGER_3, INTEGER_33);
 
-    HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>(srcMap);
+    HashMap hashMap = new HashMap(srcMap);
     assertFalse(hashMap.isEmpty());
     assertTrue(hashMap.size() == SIZE_THREE);
 
-    Collection<Integer> valColl = hashMap.values();
+    Collection valColl = hashMap.values();
     assertTrue(valColl.contains(INTEGER_11));
     assertTrue(valColl.contains(INTEGER_22));
     assertTrue(valColl.contains(INTEGER_33));
 
-    Collection<Integer> keyColl = hashMap.keySet();
+    Collection keyColl = hashMap.keySet();
     assertTrue(keyColl.contains(INTEGER_1));
     assertTrue(keyColl.contains(INTEGER_2));
     assertTrue(keyColl.contains(INTEGER_3));
@@ -499,10 +497,10 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.AbstractMap.isEmpty()'
    */
   public void testIsEmpty() {
-    HashMap<String, String> srcMap = new HashMap<String, String>();
+    HashMap srcMap = new HashMap();
     checkEmptyHashMapAssumptions(srcMap);
 
-    HashMap<String, String> dstMap = new HashMap<String, String>();
+    HashMap dstMap = new HashMap();
     checkEmptyHashMapAssumptions(dstMap);
 
     dstMap.putAll(srcMap);
@@ -517,7 +515,7 @@ public class HashMapTest extends TestMap {
   }
 
   public void testKeysConflict() {
-    HashMap<Object, String> hashMap = new HashMap<Object, String>();
+    HashMap hashMap = new HashMap();
 
     hashMap.put(STRING_ZERO_KEY, STRING_ZERO_VALUE);
     hashMap.put(INTEGER_ZERO_KEY, INTEGER_ZERO_VALUE);
@@ -544,10 +542,10 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.keySet()'
    */
   public void testKeySet() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
-    Set<String> keySet = hashMap.keySet();
+    Set keySet = hashMap.keySet();
     assertNotNull(keySet);
     assertTrue(keySet.isEmpty());
     assertTrue(keySet.size() == 0);
@@ -591,7 +589,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.put(Object, Object)'
    */
   public void testPut() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.put(KEY_TEST_PUT, VALUE_TEST_PUT_1));
@@ -604,7 +602,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.putAll(Map)'.
    */
   public void testPutAll() {
-    HashMap<String, String> srcMap = new HashMap<String, String>();
+    HashMap srcMap = new HashMap();
     checkEmptyHashMapAssumptions(srcMap);
 
     srcMap.put(KEY_1, VALUE_1);
@@ -612,7 +610,7 @@ public class HashMapTest extends TestMap {
     srcMap.put(KEY_3, VALUE_3);
 
     // Make sure that the data is copied correctly
-    HashMap<String, String> dstMap = new HashMap<String, String>();
+    HashMap dstMap = new HashMap();
     checkEmptyHashMapAssumptions(dstMap);
 
     dstMap.putAll(srcMap);
@@ -634,7 +632,7 @@ public class HashMapTest extends TestMap {
 
     // Check that an empty map does not blow away the contents of the
     // destination map
-    HashMap<String, String> emptyMap = new HashMap<String, String>();
+    HashMap emptyMap = new HashMap();
     checkEmptyHashMapAssumptions(emptyMap);
     dstMap.putAll(emptyMap);
     assertTrue(dstMap.size() == srcMap.size());
@@ -669,7 +667,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.remove(Object)'.
    */
   public void testRemove() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNull(hashMap.remove(null));
@@ -685,7 +683,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.HashMap.size()'.
    */
   public void testSize() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     // Test size behavior on put
@@ -709,7 +707,7 @@ public class HashMapTest extends TestMap {
     hashMap.put(KEY_1, VALUE_1);
     hashMap.put(KEY_2, VALUE_2);
     hashMap.put(KEY_3, VALUE_3);
-    HashMap<String, String> srcMap = new HashMap<String, String>(hashMap);
+    HashMap srcMap = new HashMap(hashMap);
     hashMap.putAll(srcMap);
     assertEquals(hashMap.size(), SIZE_THREE);
 
@@ -722,7 +720,7 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.AbstractMap.toString()'.
    */
   public void testToString() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
     hashMap.put(KEY_KEY, VALUE_VAL);
     String entryString = makeEntryString(KEY_KEY, VALUE_VAL);
@@ -733,33 +731,33 @@ public class HashMapTest extends TestMap {
    * Test method for 'java.util.AbstractMap.values()'.
    */
   public void testValues() {
-    HashMap<String, String> hashMap = new HashMap<String, String>();
+    HashMap hashMap = new HashMap();
     checkEmptyHashMapAssumptions(hashMap);
 
     assertNotNull(hashMap.values());
 
     hashMap.put(KEY_KEY, VALUE_VAL);
 
-    Collection<String> valColl = hashMap.values();
+    Collection valColl = hashMap.values();
     assertNotNull(valColl);
     assertEquals(valColl.size(), SIZE_ONE);
 
-    Iterator<String> itVal = valColl.iterator();
-    String val = itVal.next();
+    Iterator itVal = valColl.iterator();
+    String val = (String) itVal.next();
     assertEquals(val, VALUE_VAL);
   }
 
-  @SuppressWarnings("rawtypes")
   @Override
   protected Map makeEmptyMap() {
     return new HashMap();
   }
 
-  private void iterateThrough(final HashMap<?, ?> expected) {
-    Iterator<?> iter = expected.entrySet().iterator();
+  private Iterator iterateThrough(final HashMap expected) {
+    Iterator iter = expected.entrySet().iterator();
     for (int i = 0; i < expected.size(); i++) {
       iter.next();
     }
+    return iter;
   }
 
   private String makeEntryString(final String key, final String value) {

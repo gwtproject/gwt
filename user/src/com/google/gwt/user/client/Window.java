@@ -118,7 +118,7 @@ public class Window {
    * 
    */
   public static class Location {
-    private static String cachedQueryString = "";
+    private static Map<String, String> paramMap;
     private static Map<String, List<String>> listParamMap;
 
     /**
@@ -206,28 +206,24 @@ public class Window {
      * returned.
      * 
      * @param name the name of the URL's parameter
-     * @return the value of the URL's parameter, or null if missing
+     * @return the value of the URL's parameter
      */
     public static String getParameter(String name) {
-      ensureListParameterMap();
-      List<String> paramsForName = listParamMap.get(name);
-      if (paramsForName == null) {
-        return null;
-      } else {
-        return paramsForName.get(paramsForName.size() - 1);
-      }
+      ensureParameterMap();
+      return paramMap.get(name);
     }
 
     /**
-     * Returns an immutable Map of the URL query parameters for the host page
-     * at the time this method was called.
-     * Any changes to the window's location will be reflected in the result
-     * of subsequent calls.
+     * Returns a Map of the URL query parameters for the host page; since
+     * changing the map would not change the window's location, the map returned
+     * is immutable.
      * 
      * @return a map from URL query parameter names to a list of values
      */
     public static Map<String, List<String>> getParameterMap() {
-      ensureListParameterMap();
+      if (listParamMap == null) {
+        listParamMap = buildListParamMap(getQueryString());
+      }
       return listParamMap;
     }
 
@@ -320,12 +316,21 @@ public class Window {
       return out;
     }
 
-    private static void ensureListParameterMap() {
-      final String currentQueryString = getQueryString();
-      if (listParamMap == null ||
-          !cachedQueryString.equals(currentQueryString)) {
-        listParamMap = buildListParamMap(currentQueryString);
-        cachedQueryString = currentQueryString;
+    private static void ensureParameterMap() {
+      if (paramMap == null) {
+        paramMap = new HashMap<String, String>();
+        String queryString = getQueryString();
+        if (queryString != null && queryString.length() > 1) {
+          String qs = queryString.substring(1);
+          for (String kvPair : qs.split("&")) {
+            String[] kv = kvPair.split("=", 2);
+            if (kv.length > 1) {
+              paramMap.put(kv[0], URL.decodeQueryString(kv[1]));
+            } else {
+              paramMap.put(kv[0], "");
+            }
+          }
+        }
       }
     }
 
@@ -766,8 +771,8 @@ public class Window {
    * defined. The top left corner will not be moved (it stays in its original
    * coordinates).
    * <p>
-   * NOTE: In most modern browsers, this method only works with windows created
-   * by Window.open() with a supplied width and height.
+   * NOTE: In Chrome, this method only works with windows created by
+   * Window.open().
    * </p>
    *
    * @param width A positive or a negative number that specifies how many pixels
@@ -782,8 +787,8 @@ public class Window {
   /**
    * Resizes the window to the specified width and height.
    * <p>
-   * NOTE: In most modern browsers, this method only works with windows created
-   * by Window.open() with a supplied width and height.
+   * NOTE: In Chrome, this method only works with windows created by
+   * Window.open().
    * </p>
    *
    * @param width The width of the window, in pixels

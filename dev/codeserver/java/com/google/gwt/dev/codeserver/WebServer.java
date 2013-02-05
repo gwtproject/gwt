@@ -20,31 +20,23 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonObject;
-import com.google.gwt.thirdparty.org.mortbay.io.Buffer;
 import com.google.gwt.thirdparty.org.mortbay.jetty.HttpConnection;
-import com.google.gwt.thirdparty.org.mortbay.jetty.MimeTypes;
 import com.google.gwt.thirdparty.org.mortbay.jetty.Request;
 import com.google.gwt.thirdparty.org.mortbay.jetty.Server;
 import com.google.gwt.thirdparty.org.mortbay.jetty.handler.AbstractHandler;
 import com.google.gwt.thirdparty.org.mortbay.jetty.nio.SelectChannelConnector;
-import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.FilterHolder;
-import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.ServletHandler;
-import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.ServletHolder;
-import com.google.gwt.thirdparty.org.mortbay.servlet.GzipFilter;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -82,8 +74,6 @@ public class WebServer {
   private static final Pattern SAFE_CALLBACK =
       Pattern.compile("([a-zA-Z_][a-zA-Z0-9_]*\\.)*[a-zA-Z_][a-zA-Z0-9_]*");
 
-  private static final MimeTypes MIME_TYPES = new MimeTypes();
-
   private final SourceHandler handler;
 
   private final Modules modules;
@@ -112,18 +102,13 @@ public class WebServer {
 
     Server server = new Server();
     server.addConnector(connector);
-
-    ServletHandler servletHandler = new ServletHandler();
-    servletHandler.addServletWithMapping(new ServletHolder(new HttpServlet() {
+    server.addHandler(new AbstractHandler() {
       @Override
-      protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-        handleRequest(request.getPathInfo(), request, response);
+      public void handle(String target, HttpServletRequest request,
+          HttpServletResponse response, int port) throws IOException {
+        handleRequest(target, request, response);
       }
-    }), "/*");
-    servletHandler.addFilterWithMapping(new FilterHolder(GzipFilter.class),
-        "/*", AbstractHandler.DEFAULT);
-    server.addHandler(servletHandler);
+    });
     try {
       server.start();
     } catch (Exception e) {
@@ -211,13 +196,6 @@ public class WebServer {
     }
 
     if (target.equals("/favicon.ico")) {
-      InputStream faviconStream = getClass().getResourceAsStream("favicon.ico");
-      if (faviconStream != null) {
-        setHandled(request);
-        // IE8 will not load the favicon in an img tag with the default MIME type,
-        // so use "image/x-icon" instead.
-        PageUtil.sendStream("image/x-icon", faviconStream, response);
-      }
       return;
     }
 
@@ -270,14 +248,15 @@ public class WebServer {
         logger.log(TreeLogger.WARN, "client doesn't accept gzip; bailing");
         return;
       }
-      response.setHeader("Content-Encoding", "gzip");
+      response.addHeader("Content-Encoding", "gzip");
     }
 
-    if (target.endsWith(".cache.js")) {
-      response.setHeader("X-SourceMap", sourceMapLocationForModule(moduleName));
-    }
-    response.setHeader("Access-Control-Allow-Origin", "*");
     String mimeType = guessMimeType(target);
+    if (target.endsWith(".cache.js")) {
+      response.addHeader("X-SourceMap", SourceHandler.SOURCEMAP_PATH + moduleName +
+          "/gwtSourceMap.json");
+    }
+    response.addHeader("Access-Control-Allow-Origin", "*");
     PageUtil.sendFile(mimeType, file, response);
   }
 
@@ -376,10 +355,8 @@ public class WebServer {
     }
   }
 
-  /* visible for testing */
-  static String guessMimeType(String filename) {
-    Buffer mimeType = MIME_TYPES.getMimeByExtension(filename);
-    return mimeType != null ? mimeType.toString() : "";
+  private static String guessMimeType(String filename) {
+    return URLConnection.guessContentTypeFromName(filename);
   }
 
   /**
@@ -395,11 +372,6 @@ public class WebServer {
       }
     }
     return result;
-  }
-
-  public static String sourceMapLocationForModule(String moduleName) {
-     return SourceHandler.SOURCEMAP_PATH + moduleName +
-         "/gwtSourceMap.json";
   }
 
   private static void setHandled(HttpServletRequest request) {

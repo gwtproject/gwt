@@ -475,11 +475,11 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
        */
       sectionTag = sectionTag.toLowerCase();
       if ("tbody".equals(sectionTag)) {
-        tmpElem.setInnerSafeHtml(template.tbody(rowHtml));
+        tmpElem.setInnerHTML(template.tbody(rowHtml).asString());
       } else if ("thead".equals(sectionTag)) {
-        tmpElem.setInnerSafeHtml(template.thead(rowHtml));
+        tmpElem.setInnerHTML(template.thead(rowHtml).asString());
       } else if ("tfoot".equals(sectionTag)) {
-        tmpElem.setInnerSafeHtml(template.tfoot(rowHtml));
+        tmpElem.setInnerHTML(template.tfoot(rowHtml).asString());
       } else {
         throw new IllegalArgumentException("Invalid table section tag: " + sectionTag);
       }
@@ -633,7 +633,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
      */
     protected void replaceAllRowsImpl(AbstractCellTable<?> table, TableSectionElement section,
         SafeHtml html) {
-      section.setInnerSafeHtml(html);
+      section.setInnerHTML(html.asString());
     }
   }
 
@@ -1793,16 +1793,6 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
     {
       Element maybeTableCell = null;
       Element cur = target;
-
-      /*
-       * If an event happens in the TD element but outside the cell's div, we want 
-       * to handle it as if it happened within the table cell.
-       */
-      if (TableCellElement.TAG_TD.equalsIgnoreCase(cur.getTagName()) && 
-          tableBuilder.isColumn(cur.getFirstChildElement())) {
-        cur = cur.getFirstChildElement();
-      }
-      
       while (cur != null && targetTableSection == null) {
         /*
          * Found the table section. Return the most recent cell element that we

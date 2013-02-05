@@ -180,7 +180,7 @@ public class CssNodeCloner extends CssVisitor {
   @Override
   public boolean visit(CssMediaRule x, Context ctx) {
     CssMediaRule newRule = new CssMediaRule();
-    newRule.getMedias().addAll(x.getMedias());
+    newRule.getMedias().addAll(newRule.getMedias());
 
     pushNodes(newRule);
     return true;

@@ -243,8 +243,6 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
 
   private TreeItem root;
 
-  private boolean scrollOnSelectEnabled = true;
-  
   private boolean useLeafImages;
 
   /**
@@ -637,13 +635,6 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     return isAnimationEnabled;
   }
 
-  /**
-   * Determines whether selecting a tree item will scroll it into view.
-   */
-  public boolean isScrollOnSelectEnabled() {
-    return scrollOnSelectEnabled;
-  }
-  
   @Override
   public Iterator<Widget> iterator() {
     final Widget[] widgets = new Widget[childWidgets.size()];
@@ -861,14 +852,6 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     }
   }
 
-  /**
-   * Enable or disable scrolling a tree item into view when it is selected. Scrolling into view is
-   * enabled by default.
-   */
-  public void setScrollOnSelectEnabled(boolean enable) {
-    scrollOnSelectEnabled = enable;
-  }
-  
   /**
    * Selects a specified item.
    *
@@ -1238,39 +1221,35 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     Focusable focusableWidget = curSelection.getFocusable();
     if (focusableWidget != null) {
       focusableWidget.setFocus(true);
-      if (scrollOnSelectEnabled) {
-        DOM.scrollIntoView(((Widget) focusableWidget).getElement());
-      }
+      DOM.scrollIntoView(((Widget) focusableWidget).getElement());
     } else {
-      if (scrollOnSelectEnabled) {
-        // Get the location and size of the given item's content element relative
-        // to the tree.
-        Element selectedElem = curSelection.getContentElem();
-        int containerLeft = getAbsoluteLeft();
-        int containerTop = getAbsoluteTop();
-  
-        int left = DOM.getAbsoluteLeft(selectedElem) - containerLeft;
-        int top = DOM.getAbsoluteTop(selectedElem) - containerTop;
-        int width = DOM.getElementPropertyInt(selectedElem, "offsetWidth");
-        int height = DOM.getElementPropertyInt(selectedElem, "offsetHeight");
+      // Get the location and size of the given item's content element relative
+      // to the tree.
+      Element selectedElem = curSelection.getContentElem();
+      int containerLeft = getAbsoluteLeft();
+      int containerTop = getAbsoluteTop();
 
-        // If the item is not visible, quite here
-        if (width == 0 || height == 0) {
-          DOM.setIntStyleAttribute(focusable, "left", 0);
-          DOM.setIntStyleAttribute(focusable, "top", 0);
-          return;
-        }
-  
-        // Set the focusable element's position and size to exactly underlap the
-        // item's content element.
-        DOM.setStyleAttribute(focusable, "left", left + "px");
-        DOM.setStyleAttribute(focusable, "top", top + "px");
-        DOM.setStyleAttribute(focusable, "width", width + "px");
-        DOM.setStyleAttribute(focusable, "height", height + "px");
-  
-        // Scroll it into view.
-        DOM.scrollIntoView(focusable);
+      int left = DOM.getAbsoluteLeft(selectedElem) - containerLeft;
+      int top = DOM.getAbsoluteTop(selectedElem) - containerTop;
+      int width = DOM.getElementPropertyInt(selectedElem, "offsetWidth");
+      int height = DOM.getElementPropertyInt(selectedElem, "offsetHeight");
+
+      // If the item is not visible, quite here
+      if (width == 0 || height == 0) {
+        DOM.setIntStyleAttribute(focusable, "left", 0);
+        DOM.setIntStyleAttribute(focusable, "top", 0);
+        return;
       }
+
+      // Set the focusable element's position and size to exactly underlap the
+      // item's content element.
+      DOM.setStyleAttribute(focusable, "left", left + "px");
+      DOM.setStyleAttribute(focusable, "top", top + "px");
+      DOM.setStyleAttribute(focusable, "width", width + "px");
+      DOM.setStyleAttribute(focusable, "height", height + "px");
+
+      // Scroll it into view.
+      DOM.scrollIntoView(focusable);
 
       // Update ARIA attributes to reflect the information from the
       // newly-selected item.

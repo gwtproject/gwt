@@ -170,7 +170,7 @@ public class UiRendererEventsTest extends GWTTestCase {
     bazReceiver = new MockBazReceiver();
 
     uiParent = Document.get().createDivElement();
-    uiParent.setInnerSafeHtml(renderedUi);
+    uiParent.setInnerHTML(renderedUi.asString());
     Document.get().getBody().appendChild(uiParent);
 
     uiRoot = Element.as(uiParent.getChild(0));

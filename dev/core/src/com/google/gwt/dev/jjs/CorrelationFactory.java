@@ -21,9 +21,11 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+
+import org.apache.commons.collections.map.ReferenceMap;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -110,7 +112,9 @@ public abstract class CorrelationFactory implements Serializable {
     /**
      * This cuts down on the total number of Correlation objects allocated.
      */
-    private final Map<Object, Correlation> canonicalMap = new MapMaker().weakKeys().weakValues().makeMap();
+    @SuppressWarnings("unchecked")
+    private final Map<Object, Correlation> canonicalMap = Collections
+        .synchronizedMap(new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.WEAK));
 
     private RealCorrelationFactory() {
     }

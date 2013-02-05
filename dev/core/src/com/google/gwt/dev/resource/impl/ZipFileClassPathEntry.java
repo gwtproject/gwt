@@ -21,7 +21,10 @@ import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.IdentityMaps;
 import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.dev.util.msg.Message1String;
-import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+
+import org.apache.commons.collections.map.AbstractReferenceMap;
+import org.apache.commons.collections.map.ReferenceIdentityMap;
+import org.apache.commons.collections.map.ReferenceMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,7 +75,9 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
    * not referenced anywhere else, so we use hard reference, and soft reference on
    * {@link ZipFileClassPathEntry} allows its clearing in response to memory demand.
    */
-  private static final Map<String, ZipFileClassPathEntry> entryCache = new MapMaker().softValues().makeMap();
+  @SuppressWarnings("unchecked")
+  private static final Map<String, ZipFileClassPathEntry> entryCache = new ReferenceMap(
+      AbstractReferenceMap.HARD, AbstractReferenceMap.SOFT);
 
   public static void clearCache() {
     entryCache.clear();
@@ -100,7 +105,9 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
    * and {@link ZipFileSnapshot} is not referenced anywhere outside of {@link ZipFileClassPathEntry}
    * . When the module dies, the {@link ZipFileSnapshot} needs to die also.
    */
-  private final Map<PathPrefixSet, ZipFileSnapshot> cachedSnapshots = new MapMaker().weakKeys().makeMap();
+  @SuppressWarnings("unchecked")
+  private final Map<PathPrefixSet, ZipFileSnapshot> cachedSnapshots = new ReferenceIdentityMap(
+      AbstractReferenceMap.WEAK, AbstractReferenceMap.HARD, true);
 
   private final long lastModified;
   private final String location;

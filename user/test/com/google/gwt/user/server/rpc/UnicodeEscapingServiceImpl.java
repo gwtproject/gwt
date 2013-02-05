@@ -25,13 +25,6 @@ public class UnicodeEscapingServiceImpl extends HybridServiceServlet implements
     UnicodeEscapingService {
 
   /**
-   * @see UnicodeEscapingService#echo(String)
-   */
-  public String echo(String str) {
-    return str;
-  }
-
-  /**
    * @see UnicodeEscapingService#getStringContainingCharacterRange(int, int)
    */
   public String getStringContainingCharacterRange(int start, int end) {

@@ -1269,8 +1269,6 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       }
       processReturnOperation(id, op, toPropagate);
     }
-
-    assert state.returnedProxies.size() == ops.size();
   }
 
   /**

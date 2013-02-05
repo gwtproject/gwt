@@ -498,7 +498,7 @@ public class UnifyAst {
    */
   private final Set<JNode> liveFieldsAndMethods = new IdentityHashSet<JNode>();
 
-  private TreeLogger logger;
+  private final TreeLogger logger;
   private Set<JMethod> magicMethodCalls = new IdentityHashSet<JMethod>();
   private final Map<String, JMethod> methodMap = new HashMap<String, JMethod>();
   private final JJSOptions options;
@@ -515,8 +515,9 @@ public class UnifyAst {
   private final Map<String, List<JMethod>> virtualMethodsPending =
       new java.util.HashMap<String, List<JMethod>>();
 
-  public UnifyAst(JProgram program, JsProgram jsProgram, JJSOptions options,
+  public UnifyAst(TreeLogger logger, JProgram program, JsProgram jsProgram, JJSOptions options,
       RebindPermutationOracle rpo) {
+    this.logger = logger;
     this.program = program;
     this.jsProgram = jsProgram;
     this.options = options;
@@ -538,8 +539,7 @@ public class UnifyAst {
    * Special AST construction, useful for tests. Everything is resolved,
    * translated, and unified.
    */
-  public void buildEverything(TreeLogger logger) throws UnableToCompleteException {
-    this.logger = logger;
+  public void buildEverything() throws UnableToCompleteException {
     for (String internalName : classFileMap.keySet()) {
       String typeName = InternalName.toBinaryName(internalName);
       searchForTypeByBinary(typeName);
@@ -568,9 +568,7 @@ public class UnifyAst {
    * entry points. This reduces memory and improves compile speed. Any
    * unreachable elements are pruned.
    */
-  public void exec(TreeLogger logger) throws UnableToCompleteException {
-    this.logger = logger;
-
+  public void exec() throws UnableToCompleteException {
     // Trace execution from entry points.
     for (JMethod entryMethod : program.getEntryMethods()) {
       flowInto(entryMethod);
@@ -641,7 +639,7 @@ public class UnifyAst {
       }
 
       // Special clinit handling.
-      JMethod clinit = type.getMethods().get(0);
+      JMethod clinit = type.getClinitMethod();
       if (!liveFieldsAndMethods.contains(clinit)) {
         clinit.setBody(new JMethodBody(SourceOrigin.UNKNOWN));
       }
@@ -994,7 +992,7 @@ public class UnifyAst {
       assert errorsFound;
       return;
     }
-    JMethod clinit = type.getMethods().get(0);
+    JMethod clinit = type.getClinitMethod();
     if (!liveFieldsAndMethods.contains(clinit)) {
       flowInto(clinit);
       if (type.getSuperClass() != null) {

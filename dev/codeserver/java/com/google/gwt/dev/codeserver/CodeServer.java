@@ -23,7 +23,6 @@ import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 
 /**
  * <p>This class contains the {@link #main main method} that starts the code server for
@@ -84,8 +83,8 @@ public class CodeServer {
       AppSpace appSpace = AppSpace.create(new File(workDir, moduleName));
 
       Recompiler recompiler = new Recompiler(appSpace, moduleName,
-        options.getSourcePath(), logger);
-      modules.addModuleState(new ModuleState(recompiler, logger));
+          options.getSourcePath(), options.getPreferredHost() + ":" + options.getPort(), logger);
+      modules.addModuleState(new ModuleState(recompiler, logger, options.getNoPrecompile()));
     }
 
     SourceHandler sourceHandler = new SourceHandler(modules, logger);

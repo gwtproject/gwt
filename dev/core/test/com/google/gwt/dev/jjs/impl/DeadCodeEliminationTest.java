@@ -37,6 +37,8 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     addSnippetClassDecl("static volatile double d;");
     addSnippetClassDecl("static volatile String s;");
     addSnippetClassDecl("static volatile Object o;");
+
+    runMethodInliner = false;
   }
 
   public void testConditionalOptimizations() throws Exception {
@@ -99,6 +101,27 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "EntryPoint.b && (EntryPoint.i = 1);");
   }
 
+  /**
+   * BUG: JInstance was marked as not having side effects whereas it all depends on the
+   * whether the expression on the left has side effects.
+   *
+   * Reproduces Issue:7818.
+   */
+  public void testInstanceOfOptimization() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { "
+            + "static int f1;"
+            + "static A createA() { A.f1 = 1; return new A(); } "
+            + "static boolean instanceofMulti() { return (createA() instanceof A); } "
+            + "static boolean inlineable() { instanceofMulti(); return true;}"
+            + "}");
+
+    optimizeExpressions(false, "void", "A.inlineable()")
+        .into("A.f1 = 1; new A();");
+  }
+
+
   public void testDoOptimization() throws Exception {
     optimize("void", "do {} while (b);").intoString(
         "do {", 
@@ -114,8 +137,32 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "} while (false);");
   }
 
+  public void testMultiExpressionOptimization() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  static int f;",
+        "  static { if (4-f ==0) f=4; }",
+        "  static boolean t() { return true; }",
+        "  static boolean f() { return false; }",
+        "  static boolean notInlineable() { if (4-f == 0) return true;return false;}",
+        "}");
+
+    addSnippetClassDecl(
+        "static class B  { ",
+        "  static boolean inlineableOr() { return A.t() || A.notInlineable(); }",
+        "  static boolean inlineableAnd() { return A.t() && A.notInlineable(); }",
+        "}");
+
+    optimize("void", "B.inlineableAnd();")
+        .intoString("EntryPoint$A.$clinit();\nEntryPoint$A.notInlineable();");
+    optimize("void", "B.inlineableOr();")
+        .intoString("EntryPoint$A.$clinit();");
+  }
+
   public void testOptimizeStringCalls() throws Exception {
-    // Note: we're limited here by the methods declared in the mock String in JJSTestBase#addBuiltinClasses
+    // Note: we're limited here by the methods declared in the mock String in
+    // JJSTestBase#addBuiltinClasses
 
     // String.length
     optimize("int", "return \"abc\".length();").intoString("return 3;");
@@ -145,10 +192,42 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("double", "return 0.0 - d;").intoString("return 0.0 - EntryPoint.d;");
   }
 
+  public void testMultiExpression_RedundantClinitRemoval() throws Exception {
+    addSnippetClassDecl(
+        "static class A  { "
+            + "static int f1;"
+            + "static int f2;"
+            + "static { f1 = 1; }"
+            + "static void m1() { } "
+            + "}" +
+        "static class B extends A  { "
+            + "static int f3;"
+            + "static int f4;"
+            + "static { f3 = 1; }"
+            + "static void m2() { } "
+            + "}");
+
+    optimizeExpressions(true, "void", "A.m1()", "A.m1()").intoString("EntryPoint$A.$clinit();\n"
+        + "EntryPoint$A.m1();\n"
+        + "EntryPoint$A.m1();");
+    optimizeExpressions(true, "void", "B.m2()", "A.m1()").intoString("EntryPoint$B.$clinit();\n"
+        + "EntryPoint$B.m2();\n"
+        + "EntryPoint$A.m1();");
+    optimizeExpressions(true, "void", "A.m1()", "B.m2()").intoString("EntryPoint$A.$clinit();\n"
+        + "EntryPoint$A.m1();\n"
+        + "EntryPoint$B.$clinit();\n"
+        + "EntryPoint$B.m2();");
+  }
+
+  private boolean runMethodInliner;
+
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
-    // This is necessary for String calls optimizations
-    MethodCallTightener.exec(program);
+
+    if (runMethodInliner) {
+      MethodInliner.exec(program);
+    }
+
     OptimizerStats result = DeadCodeElimination.exec(program, method);
     if (result.didChange()) {
       // Make sure we converge in one pass.

@@ -294,19 +294,7 @@ public class SimpleEventBusTest extends EventBusTestBase {
     final SimpleEventBus eventBus = new SimpleEventBus();
     HandlerRegistration reg = FooEvent.register(eventBus, fooHandler1);
     reg.removeHandler();
-
-    boolean assertsOn = getClass().desiredAssertionStatus();
-
-    if (assertsOn) {
-      try {
-        reg.removeHandler();
-        fail("Should have thrown on remove");
-      } catch (AssertionError e) { /* pass */
-      }
-    } else {
-      reg.removeHandler();
-      // Succeed on no assert failure
-    }
+    reg.removeHandler(); // should not throw
   }
 
   public void testNoSource() {

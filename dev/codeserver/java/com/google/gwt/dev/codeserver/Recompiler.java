@@ -38,6 +38,7 @@ import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -50,6 +51,7 @@ class Recompiler {
   private final String originalModuleName;
   private final List<File> sourcePath;
   private final TreeLogger logger;
+  private String serverPrefix;
   private int compilesDone = 0;
 
   // after renaming
@@ -60,11 +62,12 @@ class Recompiler {
       new AtomicReference<ResourceLoader>();
 
   Recompiler(AppSpace appSpace, String moduleName, List<File> sourcePath,
-      TreeLogger logger) {
+             String serverPrefix, TreeLogger logger) {
     this.appSpace = appSpace;
     this.originalModuleName = moduleName;
     this.sourcePath = sourcePath;
     this.logger = logger;
+    this.serverPrefix = serverPrefix;
   }
 
   synchronized CompileDir compile(Map<String, String> bindingProperties)
@@ -95,6 +98,39 @@ class Recompiler {
 
     long elapsedTime = System.currentTimeMillis() - startTime;
     compileLogger.log(TreeLogger.Type.INFO, "Compile completed in " + elapsedTime + " ms");
+    return compileDir;
+  }
+
+  synchronized CompileDir noCompile() throws UnableToCompleteException {
+    long startTime = System.currentTimeMillis();
+    CompileDir compileDir = makeCompileDir(++compilesDone);
+    TreeLogger compileLogger = makeCompileLogger(compileDir);
+
+    ModuleDef module = loadModule(compileLogger, new HashMap<String, String>());
+    String newModuleName = module.getName();  // includes any rename.
+    moduleName.set(newModuleName);
+
+    lastBuild.set(compileDir);
+
+    try {
+      // Prepare directory.
+      File outputDir = new File(
+          compileDir.getWarDir().getCanonicalPath() + "/" + getModuleName());
+      if (!outputDir.exists()) {
+        outputDir.mkdir();
+      }
+
+      // Creates a "module_name.nocache.js" that just forces a recompile.
+      String moduleScript = PageUtil.loadResource(Recompiler.class, "nomodule.nocache.js");
+      moduleScript = moduleScript.replace("__MODULE_NAME__", getModuleName());
+      PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + getModuleName() + ".nocache.js",
+          moduleScript);
+
+    } catch (IOException e) {
+      compileLogger.log(TreeLogger.Type.ERROR, "Error creating uncompiled module.", e);
+    }
+    long elapsedTime = System.currentTimeMillis() - startTime;
+    compileLogger.log(TreeLogger.Type.INFO, "Module setup completed in " + elapsedTime + " ms");
     return compileDir;
   }
 
@@ -137,7 +173,7 @@ class Recompiler {
     ResourceLoader resources = ResourceLoaders.forClassLoader(Thread.currentThread());
     resources = ResourceLoaders.forPathAndFallback(sourcePath, resources);
     this.resourceLoader.set(resources);
-    
+
     ModuleDef moduleDef =
         ModuleDefLoader.loadFromResources(logger, originalModuleName, resources, true);
 
@@ -175,6 +211,10 @@ class Recompiler {
     // override computeScriptBase.js to enable the "Compile" button
     overrideConfig(moduleDef, "computeScriptBaseJs",
         "com/google/gwt/dev/codeserver/computeScriptBase.js");
+    // Fix bug with SDM and Chrome 24+ where //@ sourceURL directives cause X-SourceMap header to be ignored
+    // Frustratingly, Chrome won't canonicalize a relative URL
+    overrideConfig(moduleDef, "includeSourceMapUrl", "http://" + serverPrefix +
+        WebServer.sourceMapLocationForModule(moduleDef.getName()));
 
     // If present, set some config properties back to defaults.
     // (Needed for Google's server-side linker.)

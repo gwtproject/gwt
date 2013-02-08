@@ -156,23 +156,6 @@ public abstract class GWTRunner implements EntryPoint {
   }
 
   /**
-   * Convert unserializable exceptions (usually from dev mode) into generic
-   * serializable ones.
-   */
-  private static void ensureSerializable(ExceptionWrapper wrapper,
-      SerializationStreamWriter writer) {
-    if (wrapper == null) {
-      return;
-    }
-    ensureSerializable(wrapper.causeWrapper, writer);
-    try {
-      writer.writeObject(wrapper.exception);
-    } catch (SerializationException e) {
-      wrapper.exception = new Exception(wrapper.exception.toString());
-    }
-  }
-
-  /**
    * This client's info.
    */
   private ClientInfo clientInfo;
@@ -265,10 +248,8 @@ public abstract class GWTRunner implements EntryPoint {
     if (result != null && failureMessage != null) {
       RuntimeException ex = new RuntimeException(failureMessage);
       result.setException(ex);
-    } else if (!GWT.isProdMode() && result.exceptionWrapper != null) {
-      SerializationStreamFactory fac = (SerializationStreamFactory) junitHost;
-      SerializationStreamWriter writer = fac.createStreamWriter();
-      ensureSerializable(result.exceptionWrapper, writer);
+    } else if (result.exceptionWrapper != null) {
+      ensureSerializable(result.exceptionWrapper);
     }
     TestInfo currentTest = getCurrentTest();
     currentResults.put(currentTest, result);
@@ -282,6 +263,25 @@ public abstract class GWTRunner implements EntryPoint {
       });
     } else {
       syncToServer();
+    }
+  }
+
+  /**
+   * Convert unserializable exceptions into generic serializable ones.
+   */
+  private void ensureSerializable(ExceptionWrapper wrapper) {
+    if (wrapper == null) {
+      return;
+    }
+
+    ensureSerializable(wrapper.causeWrapper);
+    try {
+      SerializationStreamFactory fac = (SerializationStreamFactory) junitHost;
+      SerializationStreamWriter dummyWriter = fac.createStreamWriter();
+      dummyWriter.writeObject(wrapper.exception);
+    } catch (SerializationException e) {
+      wrapper.exception = new Exception(wrapper.exception.toString() +
+          " (unserializable exception)");
     }
   }
 

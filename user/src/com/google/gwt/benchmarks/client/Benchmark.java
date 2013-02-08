@@ -93,6 +93,7 @@ import junit.framework.TestCase;
  * 
  * {@example com.google.gwt.examples.benchmarks.ArrayListBenchmark}
  */
+@Deprecated
 public abstract class Benchmark extends GWTTestCase {
 
   /**

@@ -31,6 +31,7 @@ import java.util.Date;
  * 
  * @see JUnitShell
  */
+@Deprecated
 public class BenchmarkShell {
 
   /**

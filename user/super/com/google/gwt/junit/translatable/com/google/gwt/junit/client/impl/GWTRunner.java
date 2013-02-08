@@ -168,7 +168,7 @@ public abstract class GWTRunner implements EntryPoint {
     try {
       writer.writeObject(wrapper.exception);
     } catch (SerializationException e) {
-      wrapper.exception = new Exception(wrapper.exception.toString());
+      wrapper.exception = new Exception(wrapper.exception.toString() + " (wrapped exception)");
     }
   }
 
@@ -265,7 +265,7 @@ public abstract class GWTRunner implements EntryPoint {
     if (result != null && failureMessage != null) {
       RuntimeException ex = new RuntimeException(failureMessage);
       result.setException(ex);
-    } else if (!GWT.isProdMode() && result.exceptionWrapper != null) {
+    } else if (result.exceptionWrapper != null) {
       SerializationStreamFactory fac = (SerializationStreamFactory) junitHost;
       SerializationStreamWriter writer = fac.createStreamWriter();
       ensureSerializable(result.exceptionWrapper, writer);

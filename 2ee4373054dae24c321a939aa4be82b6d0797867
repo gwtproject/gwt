@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PpTdjqAU",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/TypeOracleMediator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-02-08T22:27:41Z",
+      "side": 1,
+      "message": "Why make this mutable?",
+      "revId": "2ee4373054dae24c321a939aa4be82b6d0797867",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

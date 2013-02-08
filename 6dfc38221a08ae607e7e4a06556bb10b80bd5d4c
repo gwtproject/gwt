@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Ppdf.BPM",
+        "filename": "user/src/com/google/gwt/junit/public/junit-standards.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-08T20:10:43Z",
+      "side": 1,
+      "message": "Maybe we should also log to window.console if it exists? This might be useful when running in manual mode.",
+      "revId": "6dfc38221a08ae607e7e4a06556bb10b80bd5d4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PpQwPf-A",
         "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "I initially tried that and it gets pretty complex from there (requires user agent, session id etc. to match with tests as it is in a different state than reportFatalLaunch scenario). I started changing parts that I\u0027m not very comfortable with so I gave up.\n\nOn the other hand, this code will work only if our communication mechanism with server is broken (ie. when plain HttpRequest works but GWT-RPC doesn\u0027t work). System.exit is not ideal but this is very unlikely to happen especially after fixing the serialization bug. \n\nGenerally speaking, unit tests run in separate JVMs due to potential interference over global state. So I think this would not behave a lot different outside of Blaze. \nIf you are strongly against it, I can remove the System.exit line and the test will eventually timeout but we will at least have some logging in place?",
       "parentUuid": "PpQwPf-A",
+      "revId": "6dfc38221a08ae607e7e4a06556bb10b80bd5d4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PpYwvD6c",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-08T20:10:43Z",
+      "side": 1,
+      "message": "I was thinking of the case when it\u0027s run inside a classloader. I don\u0027t know if anyone actually does that, though.\n\nOkay, let\u0027s keep it as-is for now and see if anyone complains.",
+      "parentUuid": "PpI0k7WQ",
       "revId": "6dfc38221a08ae607e7e4a06556bb10b80bd5d4c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

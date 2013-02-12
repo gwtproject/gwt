@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PzDbZ2EY",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/Annotations.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-02-12T00:32:06Z",
+      "side": 1,
+      "message": "It looks like it was an error before too, and you\u0027re just documenting this change?  Or is this a semantics change for users?",
+      "revId": "6290d63cb83a0c94f1a7c2f7dcd905f7d6f9fe79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

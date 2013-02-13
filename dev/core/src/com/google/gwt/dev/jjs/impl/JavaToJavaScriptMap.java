@@ -65,4 +65,4 @@ public interface JavaToJavaScriptMap {
    * return that method. Otherwise return null.
    */
   JMethod vtableInitToMethod(JsStatement stat);
-}
+ }

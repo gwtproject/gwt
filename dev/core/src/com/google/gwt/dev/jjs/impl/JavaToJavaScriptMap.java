@@ -66,3 +66,4 @@ public interface JavaToJavaScriptMap {
    */
   JMethod vtableInitToMethod(JsStatement stat);
 }
+

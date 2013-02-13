@@ -154,6 +154,7 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.DefaultTextOutput;
+import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
@@ -163,6 +164,7 @@ import com.google.gwt.dev.util.collect.Sets;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -1091,6 +1093,10 @@ public class GenerateJavaScriptAST {
       }
 
       JsFunction jsFunc = (JsFunction) pop(); // body
+      if (methodsForJsInlining.contains(x)) {
+        functionsForJsInliner.add(jsFunc);
+      }
+
       List<JsParameter> params = popList(x.getParams().size()); // params
 
       if (!x.isNative()) {
@@ -2254,6 +2260,10 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
+      if (x.isNative()) {
+        methodsForJsInlining.add(x);
+      }
+
       currentMethod = null;
     }
 
@@ -2283,6 +2293,9 @@ public class GenerateJavaScriptAST {
       if (x.getTarget() instanceof JConstructor) {
         liveCtors.add((JConstructor) x.getTarget());
       }
+      // Method contains jsni call
+      methodsForJsInlining.add(currentMethod);
+
       endVisit((JMethodCall) x, ctx);
     }
 
@@ -2294,7 +2307,7 @@ public class GenerateJavaScriptAST {
   }
 
   private static class SortVisitor extends JVisitor {
-
+    // TODO(rluble): this visitor seems to traverse statements innecessarily.
     private final HasNameSort hasNameSort = new HasNameSort();
 
     private final Comparator<JMethod> methodSort = new Comparator<JMethod>() {
@@ -2328,13 +2341,14 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  public static JavaToJavaScriptMap exec(JProgram program, JsProgram jsProgram,
-      JsOutputOption output, Map<StandardSymbolData, JsName> symbolTable,
+  public static  Pair<JavaToJavaScriptMap, Collection<JsNode>> exec(JProgram program,
+      JsProgram jsProgram, JsOutputOption output, Map<StandardSymbolData, JsName> symbolTable,
       PropertyOracle[] propertyOracles) {
     GenerateJavaScriptAST generateJavaScriptAST =
         new GenerateJavaScriptAST(program, jsProgram, output, symbolTable, propertyOracles);
     return generateJavaScriptAST.execImpl();
   }
+
 
   private Map<String, JsExpression> castMapByString = new HashMap<String, JsExpression>();
 
@@ -2343,6 +2357,10 @@ public class GenerateJavaScriptAST {
   private final Set<JsName> catchParamIdentifiers = new HashSet<JsName>();
 
   private final Map<JClassType, JsScope> classScopes = new IdentityHashMap<JClassType, JsScope>();
+
+  private Set<JMethod> methodsForJsInlining = new HashSet<JMethod>();
+
+  private final Set<JsFunction> functionsForJsInliner = new HashSet<JsFunction>();
 
   /**
    * A list of methods that are called from another class (ie might need to
@@ -2605,7 +2623,7 @@ public class GenerateJavaScriptAST {
     throw new InternalCompilerException("Unknown output mode");
   }
 
-  private JavaToJavaScriptMap execImpl() {
+  private Pair<JavaToJavaScriptMap, Collection<JsNode>> execImpl() {
     SortVisitor sorter = new SortVisitor();
     sorter.accept(program);
     RecordCrossClassCalls recorder = new RecordCrossClassCalls();
@@ -2614,6 +2632,7 @@ public class GenerateJavaScriptAST {
     creator.accept(program);
     GenerateJavaScriptVisitor generator = new GenerateJavaScriptVisitor();
     generator.accept(program);
+
     final Map<JsName, JMethod> nameToMethodMap = new HashMap<JsName, JMethod>();
     final HashMap<JsName, JField> nameToFieldMap = new HashMap<JsName, JField>();
     final HashMap<JsName, JClassType> constructorNameToTypeMap = new HashMap<JsName, JClassType>();
@@ -2643,34 +2662,41 @@ public class GenerateJavaScriptAST {
 
     // TODO(spoon): Instead of gathering the information here, get it via
     // SourceInfo
-    return new JavaToJavaScriptMap() {
+    return (Pair) Pair.create(new JavaToJavaScriptMap() {
+      @Override
       public JsName nameForMethod(JMethod method) {
         return names.get(method);
       }
 
+      @Override
       public JsName nameForType(JClassType type) {
         return names.get(type);
       }
 
+      @Override
       public JField nameToField(JsName name) {
         return nameToFieldMap.get(name);
       }
 
+      @Override
       public JMethod nameToMethod(JsName name) {
         return nameToMethodMap.get(name);
       }
 
+      @Override
       public JClassType nameToType(JsName name) {
         return constructorNameToTypeMap.get(name);
       }
 
+      @Override
       public JClassType typeForStatement(JsStatement stat) {
         return typeForStatMap.get(stat);
       }
 
+      @Override
       public JMethod vtableInitToMethod(JsStatement stat) {
         return vtableInitForMethodMap.get(stat);
       }
-    };
+    }, functionsForJsInliner);
   }
 }

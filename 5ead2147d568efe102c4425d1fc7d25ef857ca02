@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "P3yaiWLI",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-02-13T23:42:30Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be covered by the endVisit(JMethod) check? Is it possible for a JsniMethodRef to appear in the body of a function which is not a native method?",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3wa6vL0",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-02-13T23:42:30Z",
+      "side": 1,
+      "message": "A shame we can\u0027t run this on the reduced set. How expensive is this pass? In theory we could collect this information only once and then only re-run it for methods that are updated by JsStaticEval.",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P30aC9As",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-02-13T23:42:30Z",
+      "side": 1,
+      "message": "Why don\u0027t we run the recursion collector on the toInline set only?",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

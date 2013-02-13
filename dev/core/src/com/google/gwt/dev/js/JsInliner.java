@@ -66,6 +66,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -1696,13 +1697,21 @@ public class JsInliner {
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
       "gwt.jsinlinerRatio", "1.7"));
 
+
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
   public static OptimizerStats exec(JsProgram program) {
+    return exec(program, Arrays.asList(new JsNode[]{program}));
+  }
+
+  /**
+   * Static entry point used by JavaToJavaScriptCompiler.
+   */
+  public static OptimizerStats exec(JsProgram program, Collection<JsNode> toInline) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program);
+    OptimizerStats stats = execImpl(program, toInline);
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -1749,7 +1758,7 @@ public class JsInliner {
    * @param program
    * @return stats
    */
-  private static OptimizerStats execImpl(JsProgram program) {
+  private static OptimizerStats execImpl(JsProgram program, Collection<JsNode> toInline) {
     OptimizerStats stats = new OptimizerStats(NAME);
     RedefinedFunctionCollector d = new RedefinedFunctionCollector();
     d.accept(program);
@@ -1760,7 +1769,14 @@ public class JsInliner {
     InliningVisitor v = new InliningVisitor(program);
     v.blacklist(d.getRedefined());
     v.blacklist(rc.getRecursive());
-    v.accept(program);
+
+    Set<JsNode> inline =  new HashSet<JsNode>(toInline);
+    inline.removeAll(d.getRedefined());
+    inline.removeAll(rc.getRecursive());
+
+    for (JsNode fn : inline) {
+      v.accept(fn);
+    }
     if (v.didChange()) {
       stats.recordModified();
     }

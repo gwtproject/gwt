@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "P3keV0OY",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-14T00:34:30Z",
+      "side": 1,
+      "message": "Well, I did not know that. \n\nNow I notice that I am missing collecting the methods that whose target call is a native method. (I though I was collecting those here but now I see clearly that that would not be the case).",
+      "parentUuid": "P3yaiWLI",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P3wa6vL0",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "P3sfvAHg",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-14T00:34:30Z",
+      "side": 1,
+      "message": "I\u0027ll do some performance testing today and will be able to answer that tomorrow.",
+      "parentUuid": "P3wa6vL0",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P30aC9As",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-02-13T23:42:30Z",
       "side": 1,
       "message": "Why don\u0027t we run the recursion collector on the toInline set only?",
+      "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3ufq-Gk",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-14T00:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "P30aC9As",
       "revId": "5ead2147d568efe102c4425d1fc7d25ef857ca02",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

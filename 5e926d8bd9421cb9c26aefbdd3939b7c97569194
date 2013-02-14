@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "P3yIqO4A",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2348,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "Could you add javadoc for this method? (In particular, document the collection contains functions that were either originally JSNI or call a JSNI function.)",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3.XNzbU",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2630,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "Why isn\u0027t the second item a Set\u003cJsFunction\u003e? It seems like we would be getting a warning about generics here.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3yKf22o",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2637,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "The dataflow between RecordCrossClassCalls and GenerateJavaScriptVisitor is not that clear. It seems like we could move methodsForJsInlining to RecordCrossClassCalls and functionsForJsInliner to GenerateJavaScriptVisitor and then it would look like this:\n\nGenerateJavaScriptVisitor generator \u003d\n  new GenerateJavaScriptVisitor(recorder.methodsForJsInlining);\n\n...\n\nreturn Pair.create(..., generator.functionsForJsInliner);\n\nThis is just a style thing though. The rest of the class doesn\u0027t do that.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P38JBpz4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2669,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "style nit: perhaps introduce a local variable for the JavaToJavaScriptMap?",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P38LRp-w",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "still used, or can we delete this version?",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P30Xa4XM",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "Not for this CL, but I\u0027m curious about whether we can parallelize this loop or the next one. It seems like we could at least scan the JsFunctions in parallel.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P36UONfE",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-14T23:28:00Z",
+      "side": 1,
+      "message": "Could the order of inlining matter? If so then we should probably use collections that are either sorted or preserve order, or the output will be nondeterministic.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

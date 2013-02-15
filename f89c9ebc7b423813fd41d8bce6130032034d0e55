@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "P30nXk0o",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T22:49:20Z",
+      "side": 1,
+      "message": "typo: \"being native\", \"classes\" -\u003e \"calls\"\nBut perhaps say it this way:\n\"Methods where inlining hasn\u0027t happened yet because they are native or contain calls to native methods.\"\n\nSimilarly below.",
+      "revId": "f89c9ebc7b423813fd41d8bce6130032034d0e55",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3.nOP7M",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2367,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T22:49:20Z",
+      "side": 1,
+      "message": "\"while collecting\"",
+      "revId": "f89c9ebc7b423813fd41d8bce6130032034d0e55",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

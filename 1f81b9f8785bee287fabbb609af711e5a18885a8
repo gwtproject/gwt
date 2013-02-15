@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "P30lmcxU",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "Perhaps we should delete the benchmark code first; since it\u0027s deprecated in 2.5.1 is out it should be okay.",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3wleO28",
+        "filename": "user/src/com/google/gwt/junit/client/impl/GWTRunnerProxy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "Should this return GWTTestCase (for better slightly type checking)? Also the Object parameter of the next method.",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3.nw-1w",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "When is this necessary? Maybe we should we should just report an error?",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P32mOz.E",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "Should we just fail with an error?",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P36mx55I",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/impl/GWTRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "only called once; inline?",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3.lUfyQ",
+        "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/impl/GWTRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-15T23:21:17Z",
+      "side": 1,
+      "message": "Why not GWTTestCase?",
+      "revId": "1f81b9f8785bee287fabbb609af711e5a18885a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

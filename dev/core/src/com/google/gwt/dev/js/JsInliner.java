@@ -71,6 +71,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -1696,13 +1697,14 @@ public class JsInliner {
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
       "gwt.jsinlinerRatio", "1.7"));
 
+
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(JsProgram program, Collection<JsNode> toInline) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program);
+    OptimizerStats stats = execImpl(program, toInline);
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -1745,22 +1747,28 @@ public class JsInliner {
     return v.containsNestedFunctions();
   }
 
-  /**
-   * @param program
-   * @return stats
-   */
-  private static OptimizerStats execImpl(JsProgram program) {
+
+  private static OptimizerStats execImpl(JsProgram program, Collection<JsNode> toInline) {
     OptimizerStats stats = new OptimizerStats(NAME);
     RedefinedFunctionCollector d = new RedefinedFunctionCollector();
     d.accept(program);
 
     RecursionCollector rc = new RecursionCollector();
-    rc.accept(program);
+    for (JsNode fn : toInline) {
+      rc.accept(fn);
+    }
 
     InliningVisitor v = new InliningVisitor(program);
     v.blacklist(d.getRedefined());
     v.blacklist(rc.getRecursive());
-    v.accept(program);
+
+    Set<JsNode> inline =  new LinkedHashSet<JsNode>(toInline);
+    inline.removeAll(d.getRedefined());
+    inline.removeAll(rc.getRecursive());
+
+    for (JsNode fn : inline) {
+      v.accept(fn);
+    }
     if (v.didChange()) {
       stats.recordModified();
     }

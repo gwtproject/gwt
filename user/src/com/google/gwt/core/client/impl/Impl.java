@@ -223,7 +223,7 @@ public final class Impl {
    * Implements {@link #entry(JavaScriptObject)}.
    */
   private static Object entry0(Object jsFunction, Object thisObj,
-      Object arguments) throws Throwable {
+      Object args) throws Throwable {
     boolean initialEntry = enter();
 
     try {
@@ -239,14 +239,14 @@ public final class Impl {
          * doing something useful with it.
          */
         try {
-          return apply(jsFunction, thisObj, arguments);
+          return apply(jsFunction, thisObj, args);
         } catch (Throwable t) {
           GWT.getUncaughtExceptionHandler().onUncaughtException(t);
           return undefined();
         }
       } else {
         // Can't handle any exceptions, let them percolate normally
-        return apply(jsFunction, thisObj, arguments);
+        return apply(jsFunction, thisObj, args);
       }
 
       /*

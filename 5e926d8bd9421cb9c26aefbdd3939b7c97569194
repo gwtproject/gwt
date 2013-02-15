@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "P3fYjwBc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2348,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "P3yIqO4A",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P3.XNzbU",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-14T23:28:00Z",
       "side": 1,
       "message": "Why isn\u0027t the second item a Set\u003cJsFunction\u003e? It seems like we would be getting a warning about generics here.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3ZbmzNA",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2630,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "I am using Set\u003cJsNode\u003e instead now. (that is what the inliner expects).",
+      "parentUuid": "P3.XNzbU",
       "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "P3Tb1WHk",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2637,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "Much nicer. Thanks.",
+      "parentUuid": "P3yKf22o",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P38JBpz4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2013-02-14T23:28:00Z",
       "side": 1,
       "message": "style nit: perhaps introduce a local variable for the JavaToJavaScriptMap?",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3VbZ9Os",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2669,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "P38JBpz4",
       "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "P3YTpe6Q",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "Still used for the tests; it would make sense to rewrite the test but the exec calls in the OptimizerTestBase user reflection to call exec for each relevant pass.\n\nI\u0027ll create a proxy class in the Test that does that.",
+      "parentUuid": "P38LRp-w",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P30Xa4XM",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 5
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "P3eQy718",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "I am working on parallelizing JVisitors as Java optimization is more expensive but I agree that these should follow. \n\nInliner is parallelizable but needs to be done with care, as one thread might be examining a call while the other is modifying the called function.",
+      "parentUuid": "P30Xa4XM",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "P36UONfE",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 5
@@ -115,6 +223,24 @@
       "writtenOn": "2013-02-14T23:28:00Z",
       "side": 1,
       "message": "Could the order of inlining matter? If so then we should probably use collections that are either sorted or preserve order, or the output will be nondeterministic.",
+      "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "P3XZpkOM",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-02-15T22:18:54Z",
+      "side": 1,
+      "message": "True. I\u0027ll use a LinkedHashSet here and where the functions are initially collected, That would make the output of the inliner deterministic.",
+      "parentUuid": "P36UONfE",
       "revId": "5e926d8bd9421cb9c26aefbdd3939b7c97569194",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

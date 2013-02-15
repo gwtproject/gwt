@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "P3iT7Z7M",
+        "filename": "user/test/com/google/gwt/user/client/ui/WidgetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-02-15T00:21:44Z",
+      "side": 1,
+      "message": "Test cases share the dom so it is a good practice to clean up afterwards:\n button.removeFromParent();",
+      "revId": "746342ce1de4a2edb3e34ffd01aa37017a3c0da7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QRtylrfA",
+        "filename": "build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-22T20:14:02Z",
+      "side": 1,
+      "message": "The next release is more likely to be 2.6 than 3.0 (or at least, that\u0027s what we use in the issue tracker) so this should be 25_26.",
+      "revId": "ac758121a66c299bcfb0ecd2445c3b063c90677c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QRjxy0bA",
+        "filename": "tools/api-checker/config/gwt25_30userApi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-22T20:14:02Z",
+      "side": 1,
+      "message": "\"The last 2 entries\" is confusing. Maybe say \"The entries for javax and org\"? Similarly below.",
+      "revId": "ac758121a66c299bcfb0ecd2445c3b063c90677c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

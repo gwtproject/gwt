@@ -193,15 +193,6 @@ public abstract class GWTTestCase extends TestCase {
   }
 
   /**
-   * Does nothing.
-   *
-   * @deprecated implementation removed
-   */
-  @Deprecated
-  public final void addCheckpoint(String msg) {
-  }
-
-  /**
    * Determines whether or not exceptions will be caught by the test fixture.
    * Override this method and return <code>false</code> to let exceptions escape
    * to the browser. This will break the normal JUnit reporting functionality,
@@ -213,25 +204,6 @@ public abstract class GWTTestCase extends TestCase {
    */
   public boolean catchExceptions() {
     return true;
-  }
-
-  /**
-   * Does nothing.
-   *
-   * @deprecated implementation removed
-   */
-  @Deprecated
-  public final void clearCheckpoints() {
-  }
-
-  /**
-   * Returns a zero-length array.
-   *
-   * @deprecated implementation removed
-   */
-  @Deprecated
-  public final String[] getCheckpoints() {
-    return new String[0];
   }
 
   /**

@@ -57,7 +57,7 @@ public class StandardGeneratedResource extends GeneratedResource {
 
   @Override
   public void writeTo(TreeLogger logger, OutputStream out)
-      throws UnableToCompleteException {
+      throws IOException {
     diskCache.transferToStream(token, out);
   }
 

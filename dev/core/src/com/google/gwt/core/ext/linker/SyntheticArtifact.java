@@ -62,7 +62,7 @@ public class SyntheticArtifact extends EmittedArtifact {
 
   @Override
   public void writeTo(TreeLogger logger, OutputStream out)
-      throws UnableToCompleteException {
+      throws IOException {
     diskCache.transferToStream(token, out);
   }
 

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QXg2kGZg",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-02-28T18:08:50Z",
+      "side": 1,
+      "message": "Can you copy the javadoc too from JUnitTestCaseStubGenerator?",
+      "revId": "f85acc9eefb21498fe55020598089eac4f9719d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -40,7 +40,6 @@ public class ReflectionHelper {
    * constructor. The constructor may have any access modifier (for example,
    * private).
    */
-  @SuppressWarnings("unchecked")
   public static <T> T newInstance(Class<T> klass) {
     throw new RuntimeException("ReflectionHelper can't be used from web mode.");
   }
@@ -50,6 +49,10 @@ public class ReflectionHelper {
    */
   public static void setField(Class<?> klass, Object obj, String name,
       Object value) {
+    throw new RuntimeException("ReflectionHelper can't be used from web mode.");
+  }
+
+  public static Object invoke(Class<?> klass, Object obj, String name) {
     throw new RuntimeException("ReflectionHelper can't be used from web mode.");
   }
 }

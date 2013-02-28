@@ -212,7 +212,7 @@ public class GWTRunner implements EntryPoint {
   }
 
   public void onModuleLoad() {
-    GWTRunnerProxy proxy = GWT.create(GWTRunnerProxy.class);
+    GWTRunnerProxy proxy = createProxy();
     testAccessor = proxy.createTestAccessor();
 
     clientInfo = new ClientInfo(parseQueryParamInteger(
@@ -231,6 +231,14 @@ public class GWTRunner implements EntryPoint {
        * first method to run from the server.
        */
       syncToServer();
+    }
+  }
+
+  private GWTRunnerProxy createProxy() {
+    if (GWT.isScript()) {
+      return GWT.create(GWTRunnerProxy.class);
+    } else {
+      return new JreGWTRunnerProxy();
     }
   }
 

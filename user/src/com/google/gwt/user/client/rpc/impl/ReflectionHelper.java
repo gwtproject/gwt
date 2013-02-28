@@ -20,6 +20,8 @@ import com.google.gwt.dev.util.Pair;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 
 /**
@@ -125,5 +127,21 @@ public class ReflectionHelper {
     } catch (IllegalAccessException ex) {
       throw new RuntimeException("Unexpected failure", ex);
     }
-  }  
+  }
+
+  /**
+   * Invokes a method without parameters.
+   */
+  public static Object invoke(Class<?> klass, Object obj, String name)
+      throws Throwable {
+    Method m = klass.getMethod(name);
+    m.setAccessible(true);
+    try {
+      return m.invoke(obj);
+    } catch (InvocationTargetException e) {
+      throw e.getTargetException();
+    } catch (IllegalAccessException ex) {
+      throw new RuntimeException("Unexpected failure", ex);
+    }
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QaflBdxc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/EmittedArtifact.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-02-28T11:15:00Z",
+      "side": 1,
+      "message": "This is a breaking change. I personnally don\u0027t really care, but it might be different for JBoss or Sencha.",
+      "revId": "9fc89e524ac30f1cf532c1b6c68cacbc8ed144ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

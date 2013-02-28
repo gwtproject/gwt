@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QXkegsJI",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCacheToken.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-02-28T00:11:04Z",
+      "side": 0,
+      "message": "Removing readString() is intentional?",
+      "revId": "4768d9e579a93dce7fc33c8aa9c738e7aa756ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

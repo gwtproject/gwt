@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "QXu28HbE",
+        "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-02-28T18:14:28Z",
+      "side": 1,
+      "message": "Nit: Should we say \"browsers that support SourceMaps\" instead of \"Chrome browsers\"?  At the moment they\u0027re probably the same, but I think at least Firefox intends to support sourcemaps too, and hopefully other browsers will too.",
+      "revId": "c070de3d53558e9eaa9936f2b8afd9e1c683a315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QXdn.Q1Y",
         "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
         "patchSetId": 1

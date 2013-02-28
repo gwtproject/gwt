@@ -16,6 +16,24 @@
       "revId": "f85acc9eefb21498fe55020598089eac4f9719d7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QXo1L6dk",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-02-28T18:34:00Z",
+      "side": 1,
+      "message": "Sorry, I missed your comment before submitting. I\u0027ll try not to forget adding the comment in another patch.",
+      "parentUuid": "QXg2kGZg",
+      "revId": "f85acc9eefb21498fe55020598089eac4f9719d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

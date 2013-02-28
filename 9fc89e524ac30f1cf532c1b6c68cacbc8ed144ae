@@ -16,6 +16,24 @@
       "revId": "9fc89e524ac30f1cf532c1b6c68cacbc8ed144ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QXfkLP2c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/EmittedArtifact.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-02-28T19:42:47Z",
+      "side": 1,
+      "message": "Good point; reverted. I changed it so we log an error and throw UnableToComplete in the usual way, since that seems to makes the most sense for artifacts.",
+      "parentUuid": "QaflBdxc",
+      "revId": "9fc89e524ac30f1cf532c1b6c68cacbc8ed144ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

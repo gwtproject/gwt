@@ -21,8 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 /**
- * A Handler that prints logs to the window.console - this is used by things
- * like FirebugLite in IE, and Safari debug mode.
+ * A Handler that prints logs to the window.console.
+ * <p>
  * Note we are consciously using 'window' rather than '$wnd' to avoid issues
  * similar to http://code.google.com/p/fbug/issues/detail?id=2914
  */
@@ -49,18 +49,43 @@ public class ConsoleLogHandler extends Handler {
       return;
     }
     String msg = getFormatter().format(record);
-    log(msg);
+    int val = record.getLevel().intValue();
+    if (val <= Level.FINE.intValue()) {
+      debug(msg);
+    } else if (val < Level.WARNING.intValue()) {
+      info(msg);
+    } else if (val < Level.SEVERE.intValue()) {
+      warn(msg);
+    } else {
+      error(msg);
+    }
   }
 
-  private native boolean isSupported() /*-{
+  native boolean isSupported() /*-{
     return ((window.console != null) &&
+            // See note in FirebugLogHandler
             (window.console.firebug == null) && 
             (window.console.log != null) &&
-            (typeof(window.console.log) == 'function'));
+            // See https://code.google.com/p/google-web-toolkit/issues/detail?id=6916
+            (typeof(window.console.log) == 'undefined' ||
+             typeof(window.console.log) == 'object'));
   }-*/;
 
-  private native void log(String message) /*-{
+  native void debug(String message) /*-{
+    // Not all browsers (e.g. IE) support window.console.debug
+    // Furthermore, in Firefox, debug is an alias to log, deprecated since FF5
     window.console.log(message);
   }-*/;
 
+  native void error(String message) /*-{
+    window.console.error(message);
+  }-*/;
+
+  native void info(String message) /*-{
+    window.console.info(message);
+  }-*/;
+
+  native void warn(String message) /*-{
+    window.console.warn(message);
+  }-*/;
 }

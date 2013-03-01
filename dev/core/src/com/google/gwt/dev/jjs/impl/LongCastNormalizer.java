@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewArray;
@@ -45,7 +44,6 @@ public class LongCastNormalizer {
    */
   private class ImplicitCastVisitor extends JModVisitor {
 
-    private JMethod currentMethod;
     private final JPrimitiveType longType;
 
     public ImplicitCastVisitor(JPrimitiveType longType) {
@@ -131,11 +129,6 @@ public class LongCastNormalizer {
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
-    }
-
-    @Override
     public void endVisit(JMethodCall x, Context ctx) {
       List<JParameter> params = x.getTarget().getParams();
       for (int i = 0; i < params.size(); ++i) {
@@ -169,18 +162,12 @@ public class LongCastNormalizer {
     public void endVisit(JReturnStatement x, Context ctx) {
       JExpression expr = x.getExpr();
       if (expr != null) {
-        JExpression newExpr = checkAndReplace(expr, currentMethod.getType());
+        JExpression newExpr = checkAndReplace(expr, getCurrentMethod().getType());
         if (expr != newExpr) {
           JReturnStatement newStmt = new JReturnStatement(x.getSourceInfo(), newExpr);
           ctx.replaceMe(newStmt);
         }
       }
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
-      return true;
     }
 
     /**

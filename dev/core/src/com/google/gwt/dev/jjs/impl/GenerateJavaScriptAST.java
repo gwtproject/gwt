@@ -612,8 +612,6 @@ public class GenerateJavaScriptAST {
 
     private final Map<JClassType, JsFunction> clinitMap = new HashMap<JClassType, JsFunction>();
 
-    private JMethod currentMethod = null;
-
     /**
      * The JavaScript functions corresponding to the entry methods of the
      * program ({@link JProgram#getEntryMethods()}).
@@ -1118,7 +1116,6 @@ public class GenerateJavaScriptAST {
       if (entryIndex != null) {
         entryFunctions[entryIndex] = jsFunc;
       }
-      currentMethod = null;
     }
 
     @Override
@@ -1511,7 +1508,6 @@ public class GenerateJavaScriptAST {
       if (x.isAbstract()) {
         return false;
       }
-      currentMethod = x;
       return true;
     }
 
@@ -2154,7 +2150,7 @@ public class GenerateJavaScriptAST {
       }
 
       JDeclaredType targetType = x.getEnclosingType().getClinitTarget();
-      if (!currentMethod.getEnclosingType().checkClinitTo(targetType)) {
+      if (!getCurrentMethod().getEnclosingType().checkClinitTo(targetType)) {
         return null;
       } else if (targetType.equals(program.getTypeClassLiteralHolder())) {
         return null;
@@ -2250,16 +2246,10 @@ public class GenerateJavaScriptAST {
 
   private class RecordCrossClassCalls extends JVisitor {
 
-    private JMethod currentMethod;
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
-    }
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
-      JDeclaredType sourceType = currentMethod.getEnclosingType();
+      JDeclaredType sourceType = getCurrentMethod().getEnclosingType();
       JDeclaredType targetType = x.getTarget().getEnclosingType();
       if (sourceType.checkClinitTo(targetType)) {
         crossClassTargets.add(x.getTarget());
@@ -2284,12 +2274,6 @@ public class GenerateJavaScriptAST {
         liveCtors.add((JConstructor) x.getTarget());
       }
       endVisit((JMethodCall) x, ctx);
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
-      return true;
     }
   }
 

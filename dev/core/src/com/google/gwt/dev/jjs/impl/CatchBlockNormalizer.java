@@ -52,7 +52,6 @@ public class CatchBlockNormalizer {
     @Override
     public void endVisit(JMethodBody x, Context ctx) {
       clearLocals();
-      currentMethodBody = null;
     }
 
     // @Override
@@ -104,15 +103,12 @@ public class CatchBlockNormalizer {
       x.getCatchBlocks().add(newCatchBlock);
     }
 
-    // @Override
     @Override
     public boolean visit(JMethodBody x, Context ctx) {
-      currentMethodBody = x;
       clearLocals();
       return true;
     }
 
-    // @Override
     @Override
     public boolean visit(JTryStatement x, Context ctx) {
       if (!x.getCatchBlocks().isEmpty()) {
@@ -120,13 +116,34 @@ public class CatchBlockNormalizer {
       }
       return true;
     }
+
+    private JLocal popTempLocal() {
+      return tempLocals.get(--localIndex);
+    }
+
+    private void pushTempLocal(SourceInfo sourceInfo) {
+      if (localIndex == tempLocals.size()) {
+
+        assert getCurrentMethod().getBody() instanceof JMethodBody;
+        JMethodBody body = (JMethodBody) getCurrentMethod().getBody();
+
+        JLocal newTemp = JProgram.createLocal(sourceInfo, "$e" + localIndex,
+            program.getTypeJavaLangObject(), false, body);
+        tempLocals.add(newTemp);
+      }
+      ++localIndex;
+    }
+
+    private void clearLocals() {
+      tempLocals.clear();
+      localIndex = 0;
+    }
   }
 
   public static void exec(JProgram program) {
     new CatchBlockNormalizer(program).execImpl();
   }
 
-  private JMethodBody currentMethodBody;
   private int localIndex;
   private final JProgram program;
   private final List<JLocal> tempLocals = new ArrayList<JLocal>();
@@ -135,28 +152,8 @@ public class CatchBlockNormalizer {
     this.program = program;
   }
 
-  private void clearLocals() {
-    tempLocals.clear();
-    localIndex = 0;
-  }
-
   private void execImpl() {
     CollapseCatchBlocks collapser = new CollapseCatchBlocks();
     collapser.accept(program);
   }
-
-  private JLocal popTempLocal() {
-    return tempLocals.get(--localIndex);
-  }
-
-  private void pushTempLocal(SourceInfo sourceInfo) {
-    if (localIndex == tempLocals.size()) {
-      JLocal newTemp =
-          JProgram.createLocal(sourceInfo, "$e" + localIndex, program.getTypeJavaLangObject(),
-              false, currentMethodBody);
-      tempLocals.add(newTemp);
-    }
-    ++localIndex;
-  }
-
 }

@@ -195,8 +195,6 @@ public class TypeTightener {
    * visitor each time.
    */
   public class RecordVisitor extends JVisitor {
-    private JMethod currentMethod;
-
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
       if (x.isAssignment() && (x.getType() instanceof JReferenceType)) {
@@ -233,7 +231,6 @@ public class TypeTightener {
         // TODO: do I still need this?
         addAssignment(x, x.getLiteralInitializer());
       }
-      currentMethod = null;
     }
 
     @Override
@@ -243,7 +240,6 @@ public class TypeTightener {
           addOverrider(method, x);
         }
       }
-      currentMethod = null;
     }
 
     @Override
@@ -263,8 +259,8 @@ public class TypeTightener {
 
     @Override
     public void endVisit(JReturnStatement x, Context ctx) {
-      if (currentMethod.getType() instanceof JReferenceType) {
-        addReturn(currentMethod, x.getExpr());
+      if (getCurrentMethod().getType() instanceof JReferenceType) {
+        addReturn(getCurrentMethod(), x.getExpr());
       }
     }
 
@@ -302,8 +298,6 @@ public class TypeTightener {
      */
     @Override
     public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
-
       if (x.canBePolymorphic()) {
         /*
          * Add an assignment to each parameter from that same parameter in every

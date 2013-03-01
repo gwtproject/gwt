@@ -104,8 +104,6 @@ public class DeadCodeElimination {
    * that more simplifications can be made on a single pass through a tree.
    */
   public class DeadCodeVisitor extends JModVisitor {
-    private JMethod currentMethod = null;
-
     /**
      * Expressions whose result does not matter. A parent node should add any
      * children whose result does not matter to this set during the parent's
@@ -365,7 +363,7 @@ public class DeadCodeElimination {
      */
     @Override
     public void endVisit(JIfStatement x, Context ctx) {
-      maybeReplaceMe(x, Simplifier.ifStatement(x, currentMethod), ctx);
+      maybeReplaceMe(x, Simplifier.ifStatement(x, getCurrentMethod()), ctx);
     }
 
     /**
@@ -387,11 +385,6 @@ public class DeadCodeElimination {
         assert (!x.hasSideEffects());
         ctx.replaceMe(literal);
       }
-    }
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
     }
 
     /**
@@ -655,12 +648,6 @@ public class DeadCodeElimination {
     @Override
     public boolean visit(JExpressionStatement x, Context ctx) {
       ignoringExpressionOutput.add(x.getExpr());
-      return true;
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
       return true;
     }
 

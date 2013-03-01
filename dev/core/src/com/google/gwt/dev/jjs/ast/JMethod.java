@@ -399,10 +399,14 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   public void traverse(JVisitor visitor, Context ctx) {
     String before = null;
     before = traceBefore(visitor);
+    // Keep track of parent JMethod when visiting subtree.
+    // Assumes no nesting of JFields and JMethods.
+    visitor.setCurrentMethod(this);
     if (visitor.visit(this, ctx)) {
       visitChildren(visitor);
     }
     visitor.endVisit(this, ctx);
+    visitor.resetCurrentMethod();
     traceAfter(visitor, before);
   }
 

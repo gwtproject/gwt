@@ -839,4 +839,53 @@ public class JVisitor {
     return visit((JStatement) x, ctx);
   }
 
+  /**
+   * Keep track the JField when visiting nodes that sit below it.
+   * Assumes there is no nesting of JFields and JMethods
+   */
+  private JField currentField = null;
+
+  void setCurrentField(JField f) {
+    currentField = f;
+  }
+
+  void resetCurrentField() {
+    currentField = null;
+  }
+
+  /**
+   * Returns the JMethod node that sits above the node being visited.
+   *
+   * @return the JMethod node that is above the node being visited. {@code null} if the
+   *         the node being visited is not under a JMethod.
+   */
+  protected JField getCurrentField() {
+    return currentField;
+  }
+
+  /**
+   * Keep track the JMethod when visiting nodes that sit below it.
+   * Assumes there is no nesting of JFields and JMethods
+   */
+  private JMethod currentMethod = null;
+
+  void setCurrentMethod(JMethod m) {
+    currentMethod = m;
+  }
+
+  void resetCurrentMethod() {
+    currentMethod = null;
+  }
+
+  /**
+   * Returns the JField node that sits above the node being visited.
+   *
+   *
+   * @return the JField node that is above the node being visited. {@code null} if the
+   *         the node being visited is not under a JField.
+   */
+  protected JMethod getCurrentMethod() {
+    return currentMethod;
+  }
+
 }

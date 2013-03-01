@@ -53,16 +53,15 @@ import java.util.Map;
  */
 public class ReplaceRunAsyncs {
   private class AsyncCreateVisitor extends JModVisitor {
-    private JMethod currentMethod;
     private final JMethod runAsyncOnsuccess = program
         .getIndexedMethod("RunAsyncCallback.onSuccess");
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
-      if (method == runAsyncOnsuccess
-          && (currentMethod != null && currentMethod.getEnclosingType() == program
-              .getIndexedType("AsyncFragmentLoader"))) {
+      if (method == runAsyncOnsuccess &&
+          (getCurrentMethod() != null && getCurrentMethod().getEnclosingType() ==
+          program.getIndexedType("AsyncFragmentLoader"))) {
         /*
          * Note: The volatile marker on the method flags it so that we don't
          * optimize calls from AsyncFragmentLoader to implementations of
@@ -76,7 +75,7 @@ public class ReplaceRunAsyncs {
         String name;
         switch (x.getArgs().size()) {
           case 1:
-            name = getImplicitName(currentMethod);
+            name = getImplicitName(getCurrentMethod());
             asyncCallback = x.getArgs().get(0);
             break;
           case 2:
@@ -119,12 +118,6 @@ public class ReplaceRunAsyncs {
         runAsyncs.add(runAsyncNode);
         ctx.replaceMe(runAsyncNode);
       }
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
-      return true;
     }
 
     private boolean isRunAsyncMethod(JMethod method) {

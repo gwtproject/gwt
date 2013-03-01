@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QnMbzwio",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-01T23:34:05Z",
+      "side": 1,
+      "message": "Can you explain how we\u0027re going to preserve this constraint? It seems pretty easy to violate - all you have to do is visit the field\u0027s initializer or the method body, and it could have an anonymous inner class which has a nested JField or JMethod.\n\nPerhaps we should use a stack and have push/pop methods?",
+      "revId": "5051728161228845ad27af808a30d8c7ac42233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

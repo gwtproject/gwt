@@ -158,11 +158,17 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
     isVolatile = true;
   }
 
+  @Override
   public void traverse(JVisitor visitor, Context ctx) {
+    // Keep track of parent JField when visiting subtree.
+    // Assumes no nesting of JFields and JMethods.
+    visitor.setCurrentField(this);
+
     if (visitor.visit(this, ctx)) {
       // Do not visit declStmt, it gets visited within its own code block.
     }
     visitor.endVisit(this, ctx);
+    visitor.resetCurrentField();
   }
 
   protected Object writeReplace() {

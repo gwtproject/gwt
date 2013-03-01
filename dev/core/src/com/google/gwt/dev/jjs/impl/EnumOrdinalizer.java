@@ -442,10 +442,10 @@ public class EnumOrdinalizer {
          * $VALUES array (as well as the values() method) should not block
          * ordinalization. Instead, convert $VALUES to an array of int.
          */
-        if (x.getField().getName().equals("$VALUES")
-            && ((this.currentMethod.getEnclosingType() != x.getField().getEnclosingType()) ||
-                (!this.currentMethod.getName().equals("values") &&
-                 !this.currentMethod.getName().equals("$clinit")))) {
+        if (x.getField().getName().equals("$VALUES") &&
+            ((getCurrentMethod().getEnclosingType() != x.getField().getEnclosingType()) ||
+            (!getCurrentMethod().getName().equals("values") &&
+            !getCurrentMethod().getName().equals("$clinit")))) {
           blackListIfEnum(x.getField().getEnclosingType(), x.getSourceInfo());
         }
       }
@@ -528,7 +528,7 @@ public class EnumOrdinalizer {
          * need to exempt static methodCalls for an enum class if it occurs
          * within the enum class itself (such as in $clinit() or values())
          */
-        if (this.currentMethod.getEnclosingType() != x.getTarget().getEnclosingType()) {
+        if (getCurrentMethod().getEnclosingType() != x.getTarget().getEnclosingType()) {
           blackListIfEnum(x.getTarget().getEnclosingType(), x.getSourceInfo());
         }
       }

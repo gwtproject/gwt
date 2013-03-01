@@ -121,8 +121,6 @@ public class UnifyAst {
 
   private class UnifyVisitor extends JModVisitor {
 
-    private JMethod currentMethod;
-
     @Override
     public void endVisit(JArrayType x, Context ctx) {
       assert false : "Should not get here";
@@ -218,11 +216,6 @@ public class UnifyAst {
     @Override
     public void endVisit(JInterfaceType x, Context ctx) {
       assert false : "Should not get here";
-    }
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
     }
 
     @Override
@@ -323,12 +316,6 @@ public class UnifyAst {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
-      return true;
-    }
-
-    @Override
     public boolean visit(JMethodCall x, Context ctx) {
       JMethod target = translate(x.getTarget());
       x.resolve(target);
@@ -376,7 +363,7 @@ public class UnifyAst {
         }
         JExpression result =
             JGwtCreate.createInstantiationExpression(x.getSourceInfo(), (JClassType) answerType,
-                currentMethod.getEnclosingType());
+                getCurrentMethod().getEnclosingType());
         if (result == null) {
           error(x, "Rebind result '" + answer + "' has no default (zero argument) constructors");
           return null;

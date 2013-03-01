@@ -48,7 +48,6 @@ import java.util.List;
  */
 public class ImplicitUpcastAnalyzer extends JVisitor {
 
-  protected JMethod currentMethod;
   private final JType javaScriptObjectType;
   private final JType nullType;
   private final JType throwableType;
@@ -161,7 +160,7 @@ public class ImplicitUpcastAnalyzer extends JVisitor {
   public void endVisit(JReturnStatement x, Context ctx) {
     if (x.getExpr() != null) {
       // check against the current method return type
-      processIfTypesNotEqual(x.getExpr().getType(), currentMethod.getType(), x.getSourceInfo());
+      processIfTypesNotEqual(x.getExpr().getType(), getCurrentMethod().getType(), x.getSourceInfo());
     }
   }
 
@@ -187,13 +186,6 @@ public class ImplicitUpcastAnalyzer extends JVisitor {
       type = ((JReferenceType) type).getUnderlyingType();
     }
     processIfTypesNotEqual(type, throwableType, x.getSourceInfo());
-  }
-
-  @Override
-  public boolean visit(JMethod x, Context ctx) {
-    // save this, so can use it later for checking JReturnStatement
-    currentMethod = x;
-    return true;
   }
 
   /**

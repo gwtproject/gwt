@@ -86,15 +86,10 @@ public class MethodInliner {
     private JExpression ignoringReturnValueFor;
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
-    }
-
-    @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
 
-      if (currentMethod == method) {
+      if (getCurrentMethod() == method) {
         // Never try to inline a recursive call!
         return;
       }
@@ -144,7 +139,6 @@ public class MethodInliner {
 
     @Override
     public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
       if (program.getStaticImpl(x) != null) {
         /*
          * Never inline a static impl into the calling instance method. We used
@@ -164,7 +158,7 @@ public class MethodInliner {
 
     private JMethodCall createClinitCall(JMethodCall x) {
       JDeclaredType targetType = x.getTarget().getEnclosingType().getClinitTarget();
-      if (!currentMethod.getEnclosingType().checkClinitTo(targetType)) {
+      if (!getCurrentMethod().getEnclosingType().checkClinitTo(targetType)) {
         // Access from this class to the target class won't trigger a clinit
         return null;
       }
@@ -277,7 +271,7 @@ public class MethodInliner {
      */
     private void replaceWithMulti(Context ctx, JMultiExpression multi) {
       ctx.replaceMe(multi);
-      modifiedMethods.add(currentMethod);
+      modifiedMethods.add(getCurrentMethod());
     }
 
     /**
@@ -505,8 +499,6 @@ public class MethodInliner {
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
-
-  private JMethod currentMethod;
 
   private final JProgram program;
 

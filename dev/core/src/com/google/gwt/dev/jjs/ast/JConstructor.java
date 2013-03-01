@@ -125,10 +125,16 @@ public class JConstructor extends JMethod {
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     String before = traceBefore(visitor);
+    // Keep track of parent JField when visiting descendants.
+    // Assumes no nesting of JFields and JMethods.
+    visitor.setCurrentMethod(this);
+
     if (visitor.visit(this, ctx)) {
       visitChildren(visitor);
     }
     visitor.endVisit(this, ctx);
+    visitor.resetCurrentMethod();
+
     traceAfter(visitor, before);
   }
 

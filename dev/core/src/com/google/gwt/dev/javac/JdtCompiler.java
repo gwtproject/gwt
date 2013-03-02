@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jdt.TypeRefVisitor;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -60,6 +62,7 @@ import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding;
+import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 
 import java.io.IOException;
@@ -231,6 +234,15 @@ public class JdtCompiler {
     }
 
     @Override
+    protected void handleInternalException(AbortCompilation abortException,
+        CompilationUnitDeclaration unit) {
+      // Workaround: Eclipse doesn't rethrow this for some reason in Compiler.compile(),
+      // resulting in a random selection of CompilationUnits never getting processed.
+      // (And confusing errors later.)
+      throw abortException;
+    }
+
+    @Override
     public void process(CompilationUnitDeclaration cud, int i) {
       super.process(cud, i);
       ClassFile[] classFiles = cud.compilationResult().getClassFiles();
@@ -379,15 +391,18 @@ public class JdtCompiler {
 
   /**
    * Compiles the given set of units. The units will be internally modified to
-   * reflect the results of compilation.
+   * reflect the results of compilation. If the compiler aborts, logs an error
+   * and throws UnableToCompleteException.
    */
-  public static List<CompilationUnit> compile(Collection<CompilationUnitBuilder> builders) {
+  public static List<CompilationUnit> compile(TreeLogger logger,
+      Collection<CompilationUnitBuilder> builders)
+      throws UnableToCompleteException {
     Event jdtCompilerEvent = SpeedTracerLogger.start(CompilerEventType.JDT_COMPILER);
 
     try {
       DefaultUnitProcessor processor = new DefaultUnitProcessor();
       JdtCompiler compiler = new JdtCompiler(processor);
-      compiler.doCompile(builders);
+      compiler.doCompile(logger, builders);
       return processor.getResults();
     } finally {
       jdtCompilerEvent.end();
@@ -704,20 +719,34 @@ public class JdtCompiler {
     return result;
   }
 
-  public boolean doCompile(Collection<CompilationUnitBuilder> builders) {
+  /**
+   * Compiles source using the JDT. The {@link UnitProcessor#process} callback method will be called
+   * once for each compiled file. If the compiler aborts, logs a message and throws
+   * UnableToCompleteException.
+   */
+  public void doCompile(TreeLogger logger, Collection<CompilationUnitBuilder> builders)
+      throws UnableToCompleteException {
+    if (builders.isEmpty()) {
+      return;
+    }
     List<ICompilationUnit> icus = new ArrayList<ICompilationUnit>();
     for (CompilationUnitBuilder builder : builders) {
       addPackages(Shared.getPackageName(builder.getTypeName()).replace('.', '/'));
       icus.add(new Adapter(builder));
     }
-    if (icus.isEmpty()) {
-      return false;
-    }
 
     compilerImpl = new CompilerImpl();
-    compilerImpl.compile(icus.toArray(new ICompilationUnit[icus.size()]));
-    compilerImpl = null;
-    return true;
+    try {
+      compilerImpl.compile(icus.toArray(new ICompilationUnit[icus.size()]));
+    } catch (AbortCompilation e) {
+      String filename = new String(e.problem.getOriginatingFileName());
+      TreeLogger branch = logger.branch(TreeLogger.Type.ERROR,
+          "At " + filename + ": " + e.problem.getSourceLineNumber());
+      branch.log(TreeLogger.Type.ERROR, "JDT compiler aborted: " + e.problem.getMessage());
+      throw new UnableToCompleteException();
+    } finally {
+      compilerImpl = null;
+    }
   }
 
   public ReferenceBinding resolveType(String typeName) {

@@ -34,6 +34,58 @@
       "revId": "5051728161228845ad27af808a30d8c7ac42233a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QnuQVmkw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-02T00:29:13Z",
+      "side": 1,
+      "message": "Okay, makes sense. I think it\u0027s a good idea to explain it here.\n\nPerhaps we should have some asserts to make the lifecycle clear:\n\nvoid enterField(JField f) {\n  assert f !\u003d null;  \n  assert currentField \u003d\u003d null;\n  currentField \u003d f;\n}\n\nvoid exitField(JField f) {\n  assert f !\u003d null;\n  assert currentField \u003d\u003d f;\n  currentField \u003d null;\n}",
+      "parentUuid": "QoSEkzro",
+      "revId": "5051728161228845ad27af808a30d8c7ac42233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QnoQUpk0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/ast/JVisitorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-02T00:29:13Z",
+      "side": 1,
+      "message": "When testing callbacks it\u0027s usually a good idea to make sure they are called the expected number of times and in the right order. Otherwise the asserts might not be reached. So I would do something like this:\n\nList\u003cString\u003e log \u003d new ArrayList\u003cString\u003e();\n\n   beginVisit(JStatement...) {\n     log.append(\"statement entered\");\n     ...\n   }\n   endVisit(JStatement...) {\n     log.append(\"statement exited\");\n     ...\n   }\n\n  ...\n\n  MoreAsserts.assertContentsInOrder(log,\n     \"statement entered\",\n     \"statement exited\");\n\n(I\u0027m not sure if we can use MoreAsserts in GWT tests. If not, perhaps create an equivalent utility method somewhere.)",
+      "revId": "5051728161228845ad27af808a30d8c7ac42233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QnqQPojg",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/ast/JVisitorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-02T00:29:13Z",
+      "side": 1,
+      "message": "perhaps put an anonymous inner class here to demonstrate how it works?",
+      "revId": "5051728161228845ad27af808a30d8c7ac42233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

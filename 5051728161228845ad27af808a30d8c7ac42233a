@@ -16,6 +16,24 @@
       "revId": "5051728161228845ad27af808a30d8c7ac42233a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QoSEkzro",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-02T00:04:58Z",
+      "side": 1,
+      "message": "In our java AST, (anonymous) inner classes are represented as top level classes (with a pointer to the parent class). Visitable nodes bellow JMethod (i.e. JMethodBody, JStatemente, JExpression and descendants) do not include JType (or derived), JMethod or JField. Whenever something in the method body refers to a field, method or class it does so through a reference node. During visits reference nodes break the chain so to speak (visit stops at references) (look at JMethodCall.traverse() or JFieldRef.traverse()).\n\nSo that is an invariant of the AST (which I agree might change, but I can document in the AST).\n\nFields initializers are not traversed as descendant of JField but as part if the $clinit() method (look at JField.traverse()).\n\nThe same is not true for JavaScriptAST where functions can be nested....",
+      "parentUuid": "QnMbzwio",
+      "revId": "5051728161228845ad27af808a30d8c7ac42233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

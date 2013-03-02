@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qo9.eG0k",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-02T02:01:38Z",
+      "side": 1,
+      "message": "s/valid,/valid./",
+      "revId": "d149d5135f5cad16a7aca98b0494551ed9e9d9cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qo7.tV30",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-02T02:01:38Z",
+      "side": 1,
+      "message": "s/dropped,/dropped./",
+      "revId": "d149d5135f5cad16a7aca98b0494551ed9e9d9cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qo1-aCxM",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-02T02:01:38Z",
+      "side": 1,
+      "message": "Would it be more precise to say JDT here instead of Eclipse?  (Otherwise my initial interpretation reading this was an issue with the Eclipse IDE.)",
+      "revId": "d149d5135f5cad16a7aca98b0494551ed9e9d9cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

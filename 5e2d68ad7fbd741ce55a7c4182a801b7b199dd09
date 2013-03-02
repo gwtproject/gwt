@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Qpxs7O9k",
+        "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-02T22:07:16Z",
+      "side": 1,
+      "message": "Agreed. I actually just copied the code from FirebugLogHandler. Done.\n\nNote that the code you\u0027re proposing here is a semantic change compared to FirebugLogHandler: you\u0027ve replaced \u003e\u003d FINE with \u003e\u003d INFO. I\u0027m fine with that though, but I should probably revert the change in FirebugLogHandler (done).",
+      "parentUuid": "QkvP0SsU",
+      "revId": "5e2d68ad7fbd741ce55a7c4182a801b7b199dd09",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QiNrzpSo",
         "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "Qpzs4d9k",
+        "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-02T22:07:16Z",
+      "side": 1,
+      "message": "Oops! I temporarily changed to !\u003d\u003d\u0027undefined\u0027 to cope for the \"can be a function or an object\" case, then changed my mind and chose to use \u003d\u003d\u0027function\u0027 || \u003d\u003d\u0027object\u0027 but forgot to change the \u0027undefined\u0027 back to \u0027function\u0027.\n\nAs for checking only for the log function, I\u0027m not sure why we tested for it, it\u0027s probably no longer needed now that window.console is widespread. Not sure what\u0027s best here; removed the whole test.",
+      "parentUuid": "QknA18AI",
+      "revId": "5e2d68ad7fbd741ce55a7c4182a801b7b199dd09",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QknPpeuY",
         "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2013-03-01T19:31:15Z",
       "side": 1,
       "message": "I guess this will also be removed with FirebugHandler?",
+      "revId": "5e2d68ad7fbd741ce55a7c4182a801b7b199dd09",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qp9tjk-E",
+        "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-02T22:07:16Z",
+      "side": 1,
+      "message": "The comment was a \"justification\" for the method being called \u0027debug\u0027 while the function we call is console.log (not console.debug). If it\u0027s misleading, then I should probably remove it.\n\nI also renamed the method to log(), which works great now with the reordering you proposed above.",
+      "parentUuid": "QknPpeuY",
       "revId": "5e2d68ad7fbd741ce55a7c4182a801b7b199dd09",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1187,6 +1187,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     currentText = curSuggestion.getReplacementString();
     setText(currentText);
     display.hideSuggestions();
+    box.setFocus(true);
     fireSuggestionEvent(curSuggestion);
   }
 

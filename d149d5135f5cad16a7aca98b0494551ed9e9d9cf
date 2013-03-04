@@ -50,6 +50,23 @@
       "revId": "d149d5135f5cad16a7aca98b0494551ed9e9d9cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QoWcQpgg",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-04T16:37:42Z",
+      "side": 1,
+      "message": "Wouldn\u0027t an InternalCompilerException be a better choice.",
+      "revId": "d149d5135f5cad16a7aca98b0494551ed9e9d9cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

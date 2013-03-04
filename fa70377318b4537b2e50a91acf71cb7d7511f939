@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qo0i6U7Q",
+        "filename": "user/src/com/google/gwt/logging/client/LogConfiguration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-03-04T20:49:17Z",
+      "side": 1,
+      "message": "Alternatively, you could just use the shared GWT.create and teaching it what to instantiate on the server rather than testing GWT.isClient().",
+      "revId": "fa70377318b4537b2e50a91acf71cb7d7511f939",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

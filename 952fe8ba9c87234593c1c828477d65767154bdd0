@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qp7s1Z7Y",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-04T09:11:41Z",
+      "side": 1,
+      "message": "You don\u0027t want to set the focus back to the textbox when the suggestion is selected from tabbing *out* of the textbox (see line #1138). You actually only want it when selecting the suggestion with the mouse, so moving that line to the SuggestionCallback would be better.",
+      "revId": "952fe8ba9c87234593c1c828477d65767154bdd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

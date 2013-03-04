@@ -40,8 +40,7 @@ public class LogConfiguration implements EntryPoint {
   /**
    * Implementation which does nothing and compiles out if logging is disabled.
    */
-  private static class LogConfigurationImplNull
-  implements LogConfigurationImpl {
+  private static class LogConfigurationImplNull implements LogConfigurationImpl {
     public void configureClientSideLogging() { }
 
     public boolean loggingIsEnabled() {
@@ -56,8 +55,7 @@ public class LogConfiguration implements EntryPoint {
   /**
    * Implementation which is used when logging is enabled.
    */
-  private static class LogConfigurationImplRegular
-  implements LogConfigurationImpl {
+  private static class LogConfigurationImplRegular implements LogConfigurationImpl {
     // Keep a reference to the root logger after we configure it because
     // if we don't, the JRE implementation of LogManager (which is used in
     // Dev Mode) will sometimes garbage collect it, since they only keep
@@ -153,8 +151,7 @@ public class LogConfiguration implements EntryPoint {
   /**
    * Implementation which is used when logging.enabled is set to SEVERE.
    */
-  private static class LogConfigurationImplSevere
-  extends LogConfigurationImplRegular {
+  private static class LogConfigurationImplSevere extends LogConfigurationImplRegular {
     @Override
     public boolean loggingIsEnabled(Level level) {
       return level.intValue() >= 1000;
@@ -164,16 +161,16 @@ public class LogConfiguration implements EntryPoint {
   /**
    * Implementation which is used when logging.enabled is set to WARNING.
    */
-  private static class LogConfigurationImplWarning
-  extends LogConfigurationImplRegular {
+  private static class LogConfigurationImplWarning extends LogConfigurationImplRegular {
     @Override
     public boolean loggingIsEnabled(Level level) {
       return level.intValue() >= 900;
     }
   }
 
-  private static LogConfigurationImpl impl =
-    GWT.create(LogConfigurationImplNull.class);
+  private static LogConfigurationImpl impl = GWT.isClient()
+      ? GWT.<LogConfigurationImpl>create(LogConfigurationImplNull.class)
+      : new LogConfigurationImplNull();
 
   public static boolean loggingIsEnabled() {
     return impl.loggingIsEnabled();

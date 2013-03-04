@@ -16,6 +16,24 @@
       "revId": "952fe8ba9c87234593c1c828477d65767154bdd0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qq1fa7BI",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5310
+      },
+      "writtenOn": "2013-03-04T12:41:10Z",
+      "side": 1,
+      "message": "For me, this patch does not force to keep focus on the ValueBox when trying to tab out.\n\nEither way, patch set 2 moved setting focus to the suggestionCallback.",
+      "parentUuid": "Qp7s1Z7Y",
+      "revId": "952fe8ba9c87234593c1c828477d65767154bdd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

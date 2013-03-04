@@ -37,6 +37,9 @@ import com.google.gwt.user.client.Timer;
 public class ImageTest extends GWTTestCase {
   interface Bundle extends ClientBundle {
     ImageResource prettyPiccy();
+
+    @Source("prettyPiccy.png")
+    ImageResource prettyPiccyStandalone();
   }
 
   private static class TestErrorHandler implements ErrorHandler {
@@ -620,6 +623,23 @@ public class ImageTest extends GWTTestCase {
     Image image = new Image();
     image.setResource(b.prettyPiccy());
     assertResourceWorked(image, b.prettyPiccy());
+  }
+
+  public void testStandaloneResourceConstructor() {
+    Bundle b = GWT.create(Bundle.class);
+    assert b.prettyPiccyStandalone().isStandalone();
+    Image image = new Image(b.prettyPiccyStandalone());
+    assertResourceWorked(image, b.prettyPiccyStandalone());
+    assertEquals("unclipped", getCurrentImageStateName(image));
+  }
+
+  public void testStandaloneSetResource() {
+    Bundle b = GWT.create(Bundle.class);
+    assert b.prettyPiccyStandalone().isStandalone();
+    Image image = new Image();
+    image.setResource(b.prettyPiccyStandalone());
+    assertResourceWorked(image, b.prettyPiccyStandalone());
+    assertEquals("unclipped", getCurrentImageStateName(image));
   }
 
   /**

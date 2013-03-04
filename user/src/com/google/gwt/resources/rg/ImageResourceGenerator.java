@@ -66,6 +66,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
     private String rtlContentsUrlExpression;
 
     public BundledImage() {
+      super(false);
       builder = new ImageBundleBuilder();
       images = Maps.create();
       localizedByImageResource = Maps.create();
@@ -252,6 +253,15 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
   abstract static class DisplayedImage {
     protected String normalContentsFieldName;
     protected String rtlContentsFieldName;
+    private boolean standalone;
+
+    public DisplayedImage(boolean standalone) {
+      this.standalone = standalone;
+    }
+
+    public boolean isStandalone() {
+      return standalone;
+    }
 
     public abstract ImageRect getImageRect(ImageResourceDeclaration image);
 
@@ -290,6 +300,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
      * Create an unbundled image.
      */
     public ExternalImage(ImageResourceDeclaration image, LocalizedImage localized, ImageRect rect) {
+      super(true);
       this.image = image;
       this.localized = localized;
       this.rect = rect;
@@ -487,7 +498,8 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
           + urlExpressions[1] + " : " + urlExpressions[0] + "),");
     }
     sw.println(rect.getLeft() + ", " + rect.getTop() + ", " + rect.getWidth() + ", "
-        + rect.getHeight() + ", " + rect.isAnimated() + ", " + rect.isLossy());
+        + rect.getHeight() + ", " + rect.isAnimated() + ", " + rect.isLossy() + ", "
+        + bundle.isStandalone());
 
     sw.outdent();
     sw.print(")");

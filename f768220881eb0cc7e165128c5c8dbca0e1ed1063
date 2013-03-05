@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "QvCkKiS0",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-05T05:42:11Z",
+      "side": 1,
+      "message": "This follows the common toXXX naming convention and implementation style used in Guava. I need fix the documentation.",
+      "parentUuid": "Qo4iwW9Q",
+      "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Qo4jX..Y",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-04T21:20:06Z",
       "side": 1,
       "message": "need to write javadoc for the public methods",
+      "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QvMkV9Uw",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-05T05:42:11Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "Qo4jX..Y",
       "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "QvOkaMXw",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-05T05:42:11Z",
+      "side": 1,
+      "message": "I will document that this converts the cause to SerializableThrowable if not already.",
+      "parentUuid": "Qo2gId58",
+      "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Qo0joE6A",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-04T21:20:06Z",
       "side": 1,
       "message": "When is this called? Could we just throw a not-implemented exception?",
+      "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QvIkP-Tg",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-05T05:42:11Z",
+      "side": 1,
+      "message": "Throwable instance initialization:\n com/google/gwt/emul/java/lang/Throwable.java:46",
+      "parentUuid": "Qo0joE6A",
       "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "QvqTngjI",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-05T09:55:38Z",
+      "side": 1,
+      "message": "From memory, Guava has a bunch of fromXXX though (fromThrowable), or simply create().",
+      "parentUuid": "QvOlo8c8",
+      "revId": "f768220881eb0cc7e165128c5c8dbca0e1ed1063",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Qo4jX..Y",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 2

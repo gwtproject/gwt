@@ -115,20 +115,15 @@ public class Throwable implements Serializable {
   }
 
   public void printStackTrace(PrintStream out) {
-    StringBuffer msg = new StringBuffer();
-    Throwable currentCause = this;
-    while (currentCause != null) {
-      String causeMessage = currentCause.getMessage();
-      if (currentCause != this) {
-        msg.append("Caused by: ");
+    for (Throwable t = this; t != null; t = t.getCause()) {
+      if (t != this) {
+        out.print("Caused by: ");
       }
-      msg.append(currentCause.getClass().getName());
-      msg.append(": ");
-      msg.append(causeMessage == null ? "(No exception detail)" : causeMessage);
-      msg.append("\n");
-      currentCause = currentCause.getCause();
+      out.println(t.toString());
+      for (StackTraceElement element : t.getStackTrace()) {
+        out.println("\tat" + element);
+      }
     }
-    out.println(msg);
   }
 
   public void setStackTrace(StackTraceElement[] stackTrace) {

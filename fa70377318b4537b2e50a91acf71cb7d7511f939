@@ -16,6 +16,23 @@
       "revId": "fa70377318b4537b2e50a91acf71cb7d7511f939",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q4iADKhw",
+        "filename": "user/test/com/google/gwt/logging/LoggingSuiteNoBrowser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-05T19:59:17Z",
+      "side": 1,
+      "message": "XXXJreSuite (i.e. LoggingJreSuite) looks like the common naming convention.",
+      "revId": "fa70377318b4537b2e50a91acf71cb7d7511f939",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

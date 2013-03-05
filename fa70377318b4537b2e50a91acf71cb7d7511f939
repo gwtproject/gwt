@@ -33,6 +33,24 @@
       "revId": "fa70377318b4537b2e50a91acf71cb7d7511f939",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q5lwK3dY",
+        "filename": "user/test/com/google/gwt/logging/LoggingSuiteNoBrowser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-05T21:10:06Z",
+      "side": 1,
+      "message": "I agree that we should stick with one naming convention, unless there\u0027s actually an intended difference between XXXJreSuite and XXXSuiteNoBrowser.\n\nI\u0027ve created https://gwt-review.googlesource.com/#/c/2141/ to rename RpcSuiteNoBrowser to RpcJreSuite.",
+      "parentUuid": "Q4iADKhw",
+      "revId": "fa70377318b4537b2e50a91acf71cb7d7511f939",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-gefOKI",
+        "filename": "user/src/com/google/gwt/logging/client/LogConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T18:57:16Z",
+      "side": 1,
+      "message": "Can you add a comment so that reader understands why there is a null check?",
+      "revId": "c9e63ec48478c67fe9964736e3a94e4dbe3465d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

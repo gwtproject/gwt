@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RAuDmQqY",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-03-06T17:03:36Z",
+      "side": 1,
+      "message": "Debugging?",
+      "revId": "67edd53fe6ca7ba550d35583bb8498bf665f3957",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

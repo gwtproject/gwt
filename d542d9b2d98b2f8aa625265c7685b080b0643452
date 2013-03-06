@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-Uhc3-o",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-06T19:40:22Z",
+      "side": 1,
+      "message": "You should be able to omit the \"\u003d\u003d 0x10\" I think?",
+      "revId": "d542d9b2d98b2f8aa625265c7685b080b0643452",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

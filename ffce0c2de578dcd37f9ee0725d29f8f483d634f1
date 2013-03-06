@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-ocmyJA",
+        "filename": "user/src/com/google/gwt/resources/rg/ImageResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T20:05:53Z",
+      "side": 1,
+      "message": "Alternatively, you can put an abstract isStandolone here and override in subclasses. It is easier to follow compared to super(true/false).",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-kcCEH4",
+        "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T20:05:53Z",
+      "side": 1,
+      "message": "Sorry, I lost here. Not familiar with __gwtLastUnhandledEvent?",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-kdZMLI",
+        "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T20:05:53Z",
+      "side": 1,
+      "message": "Is this really required vs GWT.create every-time? \nI was expecting construction of the template class to be cheap.",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-kcKENc",
+        "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T20:05:53Z",
+      "side": 1,
+      "message": "Why assert vs assertTrue?",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-mctTP8",
+        "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-06T20:05:53Z",
+      "side": 1,
+      "message": "Is it possible to add a test case where isStandalone returns false? (Couldn\u0027t see any assertFalse(xxx.isStandalone()))",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -68,10 +68,12 @@ class DOMImplIE9 extends DOMImplStandardBase {
   }-*/;
 
   @Override
-  public boolean isOrHasChild(Node parent, Node child) {
-    // IE9 still behaves like IE6-8 for this method
-    return DOMImplTrident.isOrHasChildImpl(parent, child);
-  }
+  public native boolean isOrHasChild(Node parent, Node child) /*-{
+    window.console.log("parent: ", parent, ", child: ", child);
+    // IE9 in IE9 Standards Mode doesn't support contains() on non-HTMLElement nodes
+    // (e.g. Document or SVGElement) but supports compareDocumentPosition everywhere.
+    return (parent === child) || ((parent.compareDocumentPosition(child) & 0x10) == 0x10);
+  }-*/;
 
   @Override
   public native void selectRemoveOption(SelectElement select, int index) /*-{

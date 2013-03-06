@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-ejEqzQ",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "\"underlying\" implies that we wrap a Throwable but actually we copy the data (except for the stack traces).\n\nHow about: \"A serializable copy of a Throwable, including its causes and stack traces.\"",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-Qizx.E",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "s/Create/Creates/\n\nAdd: \"Also creates a SerializableThrowable for each Throwable in the cause chain.\"",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-Uhmn50",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "Perhaps call this \"create()\"? In context, it will be SerializableThrowable.create(t).",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-Wi6e7Q",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "This is necessary for GWT-RPC but should anyone else use it? Perhaps it doesn\u0027t need to be public if all callers will use the static method to create it.",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-ajKs0A",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "Does this need to be public?",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-cioz28",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "perhaps shorten these to setTypeName(), getTypeName(), and isExactTypeName()? Also, do they need to be public?",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-UjU3.E",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "Maybe remove the underscores?",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-Sjew-w",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/com/google/gwt/core/shared/SerializableThrowable_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "Maybe write some serialization tests?\n\n(Perhaps we have some already. Moving them here might help someone looking at this class.)",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-ajx05Q",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/com/google/gwt/core/shared/SerializableThrowable_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T23:37:28Z",
+      "side": 1,
+      "message": "Perhaps use local variables for these two fields so it\u0027s easier to see the order they\u0027re deserialized.",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

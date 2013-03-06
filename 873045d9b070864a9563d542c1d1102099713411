@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-Wi323E",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T21:59:27Z",
+      "side": 1,
+      "message": "I found a bug for this: \nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d2469",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-Wjye2M",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T21:59:27Z",
+      "side": 1,
+      "message": "Calling toString() seems like a big change since we weren\u0027t calling it before. If a GWT app overrode it in a subclass then we might get an exception and it will be difficult to diagnose the problem. I think we might want a try / catch?\n\nMaybe we should check what subtypes of Throwable do in google3.",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-etwJac",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T21:59:27Z",
+      "side": 1,
+      "message": "Do we have a way of detecting whether the stack trace is actually useful in this browser / configuration?",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-at2LaE",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T21:59:27Z",
+      "side": 1,
+      "message": "Maybe we should use a similar trick as in SerializableThrowable to get a basic class name for common exceptions when class metadata is turned off?\n\nOn the other hand, if they did turn off class metadata, they\u0027re probably more concerned about bloat than about diagnostics.",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

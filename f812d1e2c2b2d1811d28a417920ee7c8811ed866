@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q-ShhY0U",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-06T21:59:27Z",
+      "side": 0,
+      "message": "Hmm, this comment is obsolete since we do have stack traces. However, I believe the amount of emulation depends on the browser and on GWT module properties, so it sill makes sense to warn that the stack trace may be incomplete.\n\nThis document is old (it\u0027s from GWT 2.0) but it explains the issues. Perhaps the JavaDoc should link to it, or to a newer version?\nhttps://code.google.com/p/google-web-toolkit/wiki/WebModeExceptions",
+      "revId": "f812d1e2c2b2d1811d28a417920ee7c8811ed866",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Q-q0mRSc",
+        "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:38:52Z",
+      "side": 1,
+      "message": "Looks up-to-date to me. I already put a comment to other CL point to the related documentation.",
+      "parentUuid": "Q-c5dNyw",
+      "revId": "7f17d74439927b92118c9c939cd26433b222a995",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-W7UQzk",
         "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "RDzNGyGY",
+        "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:38:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Q-W7UQzk",
+      "revId": "7f17d74439927b92118c9c939cd26433b222a995",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-c5H9yY",
         "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-06T23:58:28Z",
       "side": 1,
       "message": "For the old version of this class, there are a large number of subclasses and the only reason they exist is to override this method and getSymbolMapInputStream. Perhaps instead, the constructor should take some kind of FileOpener interface that looks for the appropriate sourcemap file or symbolmap file?",
+      "revId": "7f17d74439927b92118c9c939cd26433b222a995",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-q2NZes",
+        "filename": "user/src/com/google/gwt/core/server/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:38:52Z",
+      "side": 1,
+      "message": "My guess was those subclasses are there because default implementation wasn\u0027t good enough for most cases. I was planning to improve that in another CL.",
+      "parentUuid": "Q-c5H9yY",
       "revId": "7f17d74439927b92118c9c939cd26433b222a995",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

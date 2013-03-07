@@ -195,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "RGCr4nwQ",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T04:57:57Z",
+      "side": 1,
+      "message": "Yes, it is used and it works. If we put it into same package then the \u0027core\u0027 would start depending on \u0027rpc\u0027.",
+      "parentUuid": "RDzZf1iQ",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-cioz28",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 1
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "Oops, I meant remove and use spaces instead :-)",
       "parentUuid": "RDxP7zHI",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RGqg5O98",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T04:57:57Z",
+      "side": 1,
+      "message": "Will fix tomorrow.",
+      "parentUuid": "RDxZk2vY",
       "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

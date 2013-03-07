@@ -16,6 +16,24 @@
       "revId": "c9e63ec48478c67fe9964736e3a94e4dbe3465d0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RLDbAGG8",
+        "filename": "user/src/com/google/gwt/logging/client/LogConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-07T11:11:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Q-gefOKI",
+      "revId": "c9e63ec48478c67fe9964736e3a94e4dbe3465d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

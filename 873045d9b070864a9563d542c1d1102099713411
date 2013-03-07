@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Q-q2PJXE",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:10:48Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "Q-Wi323E",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-Wjye2M",
         "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "Q-m3wzck",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:10:48Z",
+      "side": 1,
+      "message": "I don\u0027t think this should have high impact.\nI changed it to pass t instead t.toString so that with default PrintStream implementation, this will be a no-op in production mode. \nI couldn\u0027t find any PrintStream implementation in a \u0027client\u0027 package in google3 (but it doesn\u0027t mean there is none). \nI don\u0027t know of a practical way to check all subtypes of Throwable for checking \"toString\" in google3. However the general practice is to change or overidde \"getmessage\", not toString to customize exception messages.\nAlso note that toString is already called if an exception is wrapped by another exception and no message provided (see \u0027Throwable(Throwable cause)\u0027 constructor).\n\nI think at this point try/catch would be an overkill, at worst case this will cause a problem in error reporting. But I would be surprised if anybody relies on this other than logging mechanisms in production mode and gwt logging itself doesn\u0027t rely on it yet because it was not very useful before.",
+      "parentUuid": "Q-Wjye2M",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-etwJac",
         "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-06T21:59:27Z",
       "side": 1,
       "message": "Do we have a way of detecting whether the stack trace is actually useful in this browser / configuration?",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Q-i2CVfY",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:10:48Z",
+      "side": 1,
+      "message": "If you mean \"strip\" mode then there will be no stack traces, so we will print none.",
+      "parentUuid": "Q-etwJac",
       "revId": "873045d9b070864a9563d542c1d1102099713411",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

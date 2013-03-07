@@ -121,6 +121,24 @@
       "revId": "873045d9b070864a9563d542c1d1102099713411",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RD1NUpNc",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-07T00:54:28Z",
+      "side": 1,
+      "message": "That is true. Also in a SerializableThrowable we will have a deobfuscated stack trace after the exception is transferred to server which will give more idea what is going on. \nDevelopers should probably not rely on this method too much, if they need they need more diagnostics they can using logging APIs.",
+      "parentUuid": "Q-at2LaE",
+      "revId": "873045d9b070864a9563d542c1d1102099713411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

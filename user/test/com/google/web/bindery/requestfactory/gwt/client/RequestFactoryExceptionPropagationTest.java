@@ -101,18 +101,9 @@ public class RequestFactoryExceptionPropagationTest extends
 
   private static final int DELAY_TEST_FINISH = 10 * 1000;
 
-  GWT.UncaughtExceptionHandler defaultUncaughtExceptionHandler;
-
   @Override
   public String getModuleName() {
     return "com.google.web.bindery.requestfactory.gwt.RequestFactorySuite";
-  }
-
-  @Override
-  public void gwtSetUp() {
-    super.gwtSetUp();
-
-    defaultUncaughtExceptionHandler = GWT.getUncaughtExceptionHandler();
   }
 
   /**
@@ -146,7 +137,7 @@ public class RequestFactoryExceptionPropagationTest extends
 
               finishTestAndReset();
             } else {
-              defaultUncaughtExceptionHandler.onUncaughtException(e);
+              reportException(e);
             }
           }
         });
@@ -182,7 +173,7 @@ public class RequestFactoryExceptionPropagationTest extends
 
               finishTestAndReset();
             } else {
-              defaultUncaughtExceptionHandler.onUncaughtException(e);
+              reportException(e);
             }
           }
         });
@@ -223,7 +214,7 @@ public class RequestFactoryExceptionPropagationTest extends
 
               finishTestAndReset();
             } else {
-              defaultUncaughtExceptionHandler.onUncaughtException(e);
+              reportException(e);
             }
           }
         });
@@ -258,7 +249,7 @@ public class RequestFactoryExceptionPropagationTest extends
 
               finishTestAndReset();
             } else {
-              defaultUncaughtExceptionHandler.onUncaughtException(e);
+              reportException(e);
             }
           }
         });
@@ -296,7 +287,7 @@ public class RequestFactoryExceptionPropagationTest extends
 
               finishTestAndReset();
             } else {
-              defaultUncaughtExceptionHandler.onUncaughtException(e);
+              reportException(e);
             }
           }
         });
@@ -304,17 +295,12 @@ public class RequestFactoryExceptionPropagationTest extends
 
   protected void fireContextAndCatch(RequestContext context,
       Receiver<Void> receiver, GWT.UncaughtExceptionHandler exceptionHandler) {
-    GWT.setUncaughtExceptionHandler(exceptionHandler);
+    setUncaughtExceptionHandlerForTest(exceptionHandler);
 
     if (receiver == null) {
       context.fire();
     } else {
       context.fire(receiver);
     }
-  }
-
-  @Override
-  protected void gwtTearDown() {
-    GWT.setUncaughtExceptionHandler(defaultUncaughtExceptionHandler);
   }
 }

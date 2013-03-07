@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -94,7 +93,8 @@ public class DOMTest extends GWTTestCase {
 
     // Verify the exception is captured
     final List<String> ret = new ArrayList<String>();
-    GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+
+    setUncaughtExceptionHandlerForTest(new UncaughtExceptionHandler() {
       @Override
       public void onUncaughtException(Throwable e) {
         Event event = DOM.eventGetCurrentEvent();
@@ -116,7 +116,6 @@ public class DOMTest extends GWTTestCase {
     assertEquals(1, ret.size());
     assertEquals("Success", ret.get(0));
     RootPanel.get().remove(button);
-    GWT.setUncaughtExceptionHandler(null);
   }
 
   /**

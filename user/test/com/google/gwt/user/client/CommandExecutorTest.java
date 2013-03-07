@@ -16,7 +16,6 @@
 package com.google.gwt.user.client;
 
 import com.google.gwt.core.client.Duration;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -84,48 +83,29 @@ public class CommandExecutorTest extends GWTTestCase {
   public void testDoExecuteCommands_CancellationRecovery() {
     final CommandExecutor ce = new NonRestartingCommandExecutor();
 
-    final Command c1 = new Command() {
-      public void execute() {
-      }
-    };
+    final Command c1 = createNewEmptyCommand();
 
     ce.setExecuting(true);
     ce.submit(c1);
     ce.setLast(0);
 
-    final UncaughtExceptionHandler originalUEH = GWT.getUncaughtExceptionHandler();
-
-    UncaughtExceptionHandler ueh1 = new UncaughtExceptionHandler() {
+    setUncaughtExceptionHandlerForTest(new UncaughtExceptionHandler() {
       public void onUncaughtException(Throwable e) {
-        if (!(e instanceof CommandCanceledException)) {
-          originalUEH.onUncaughtException(e);
-          return;
-        }
-
-        CommandCanceledException cce = (CommandCanceledException) e;
-        if (cce.getCommand() != c1) {
-          fail("CommandCanceledException did not contain the correct failed command");
+        if (!(e instanceof CommandCanceledException)
+            || ((CommandCanceledException) e).getCommand() != c1) {
+          reportException(e);
         }
 
         // Submit some more work and do another dispatch
-        ce.submit(new IncrementalCommand() {
-          public boolean execute() {
-            return false;
-          }
-        });
+        ce.submit(createNewEmptyIncrementalCommand());
 
         delayTestFinish(TEST_FINISH_DELAY_MILLIS);
-        ce.submit(new Command() {
-          public void execute() {
-            finishTest();
-          }
-        });
+        ce.submit(createFinishTestCommand());
 
         ce.doExecuteCommands(Duration.currentTimeMillis());
       }
-    };
+    });
 
-    GWT.setUncaughtExceptionHandler(ueh1);
     ce.doCommandCanceled();
   }
 
@@ -138,33 +118,21 @@ public class CommandExecutorTest extends GWTTestCase {
   public void testDoExecuteCommands_CommandCancellation() {
     final CommandExecutor ce = new NonRestartingCommandExecutor();
 
-    final Command c1 = new Command() {
-      public void execute() {
-      }
-    };
+    final Command c1 = createNewEmptyCommand();
 
     // Setup the cancellation state
     ce.setExecuting(true);
     ce.submit(c1);
     ce.setLast(0);
 
-    final UncaughtExceptionHandler originalUEH = GWT.getUncaughtExceptionHandler();
-
-    UncaughtExceptionHandler ueh1 = new UncaughtExceptionHandler() {
+    setUncaughtExceptionHandlerForTest(new UncaughtExceptionHandler() {
       public void onUncaughtException(Throwable e) {
-        if (!(e instanceof CommandCanceledException)) {
-          originalUEH.onUncaughtException(e);
-          return;
-        }
-
-        CommandCanceledException cce = (CommandCanceledException) e;
-        if (cce.getCommand() != c1) {
-          fail("CommandCanceledException did not contain the correct failed command");
+        if (!(e instanceof CommandCanceledException)
+            || ((CommandCanceledException) e).getCommand() != c1) {
+          reportException(e);
         }
       }
-    };
-
-    GWT.setUncaughtExceptionHandler(ueh1);
+    });
     ce.doCommandCanceled();
   }
 
@@ -190,34 +158,21 @@ public class CommandExecutorTest extends GWTTestCase {
   public void testDoExecuteCommands_IncrementalCommandCancellation() {
     final CommandExecutor ce = new NonRestartingCommandExecutor();
 
-    final IncrementalCommand ic = new IncrementalCommand() {
-      public boolean execute() {
-        return false;
-      }
-    };
+    final IncrementalCommand ic = createNewEmptyIncrementalCommand();
 
     // setup the cancellation state
     ce.setExecuting(true);
     ce.submit(ic);
     ce.setLast(0);
 
-    final UncaughtExceptionHandler originalUEH = GWT.getUncaughtExceptionHandler();
-
-    UncaughtExceptionHandler ueh1 = new UncaughtExceptionHandler() {
+    setUncaughtExceptionHandlerForTest(new UncaughtExceptionHandler() {
       public void onUncaughtException(Throwable e) {
-        if (!(e instanceof IncrementalCommandCanceledException)) {
-          originalUEH.onUncaughtException(e);
-          return;
-        }
-
-        IncrementalCommandCanceledException icce = (IncrementalCommandCanceledException) e;
-        if (icce.getCommand() != ic) {
-          fail("IncrementalCommandCanceledException did not contain the correct failed command");
+        if (!(e instanceof IncrementalCommandCanceledException)
+            || ((IncrementalCommandCanceledException) e).getCommand() != ic) {
+          reportException(e);
         }
       }
-    };
-
-    GWT.setUncaughtExceptionHandler(ueh1);
+    });
     ce.doCommandCanceled();
   }
 
@@ -300,11 +255,7 @@ public class CommandExecutorTest extends GWTTestCase {
 
     delayTestFinish(TEST_FINISH_DELAY_MILLIS);
 
-    ce.submit(new Command() {
-      public void execute() {
-        finishTest();
-      }
-    });
+    ce.submit(createFinishTestCommand());
   }
 
   /**
@@ -339,5 +290,27 @@ public class CommandExecutorTest extends GWTTestCase {
         return executionCount < 10;
       }
     });
+  }
+
+  private Command createNewEmptyCommand() {
+    return new Command() {
+      public void execute() { /* EMPTY */ }
+    };
+  }
+
+  private IncrementalCommand createNewEmptyIncrementalCommand() {
+    return new IncrementalCommand() {
+      public boolean execute() {
+        return false;
+      }
+    };
+  }
+
+  private Command createFinishTestCommand() {
+    return new Command() {
+      public void execute() {
+        finishTest();
+      }
+    };
   }
 }

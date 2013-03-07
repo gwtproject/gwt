@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "RDzZf1iQ",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-07T03:23:13Z",
+      "side": 1,
+      "message": "Actually, I\u0027m not sure the custom field serializer is in the right place. Is it used? For classes outside java/lang or java/util, I think it belongs in the same package.\n\n(See SerializableTypeOracleBuilder line 384)",
+      "parentUuid": "RD-PakA8",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-cioz28",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 1
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "Q-UjU3.E",
+      "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RDxZk2vY",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-07T03:23:13Z",
+      "side": 1,
+      "message": "Oops, I meant remove and use spaces instead :-)",
+      "parentUuid": "RDxP7zHI",
       "revId": "43b80303a3c99ab7412251d6516252e6bdd29603",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

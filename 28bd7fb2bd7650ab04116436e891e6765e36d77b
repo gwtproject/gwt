@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RWS.eLUk",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "It seems like delayTestFinish() should be moved to top level (outside the callback) because otherwise, if the callback is never reached, the test won\u0027t fail. The test should only pass if the finishTestCommand is executed.\n(Also, perhaps count the number of times the handler is executed - see below.)",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RWe.7dbQ",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "It looks like we want the onUncaughtException handler to be called synchronously, but there\u0027s no check that this ever happened. It seems like we should add executionCount field (similar to below) that\u0027s incremented each time the handler is executed and assert that it\u0027s reached once at the end of this method.",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RWc-RUfM",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "needs to use a counter as well",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RWS8jzRw",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "should fail if reached",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RWQ8oifM",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "should fail if reached",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RWY8FmYg",
+        "filename": "user/test/com/google/gwt/user/client/CommandExecutorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-08T22:41:54Z",
+      "side": 1,
+      "message": "should fail if executionCount \u003e 1",
+      "revId": "28bd7fb2bd7650ab04116436e891e6765e36d77b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

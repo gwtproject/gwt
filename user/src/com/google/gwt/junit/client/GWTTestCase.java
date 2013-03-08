@@ -15,6 +15,7 @@
  */
 package com.google.gwt.junit.client;
 
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.JUnitShell.Strategy;
 import com.google.gwt.junit.PropertyDefiningStrategy;
@@ -341,6 +342,26 @@ public abstract class GWTTestCase extends TestCase {
    * @see #delayTestFinish(int)
    */
   protected final void finishTest() {
+    // implemented in the translatable version of this class
+  }
+
+  /**
+   * Sets the handler to be used by GWTTestCase to catch and report uncaught exceptions via
+   * #reportException}.
+   * <p>
+   * A default handler is already installed by GWTTestCase but this method can be used to change it
+   * or disable uncaught exception reporting by passing {@code null}.
+   */
+  protected void setUncaughtExceptionHandlerForTest(UncaughtExceptionHandler handler) {
+    // implemented in the translatable version of this class
+  }
+
+  /**
+   * Reports an exception that might have escaped to the browser. If the test case is in
+   * asynchronous mode and test case main body did return, this will cause test case to fail
+   * immediately, otherwise it will fail after the main body returns.
+   */
+  protected void reportException(Throwable ex) {
     // implemented in the translatable version of this class
   }
 

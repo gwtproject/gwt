@@ -82,9 +82,8 @@ public class GWTTestCaseUncaughtExceptionHandlerTest extends GWTTestCaseTestBase
     failViaUncaughtException("fail_uncaught");
   }
 
-  // Suppressed due to http://code.google.com/p/google-web-toolkit/issues/detail?id=5016
   @ExpectedFailure(withMessage = "fail_uncaught")
-  public void _suppressed_testFailViaUncaughtExceptionWithCustomHandler() {
+  public void testFailViaUncaughtExceptionWithCustomHandler() {
     // Set our own handler
     GWT.setUncaughtExceptionHandler(myHandler);
 
@@ -92,9 +91,8 @@ public class GWTTestCaseUncaughtExceptionHandlerTest extends GWTTestCaseTestBase
     failViaUncaughtException("fail_uncaught");
   }
 
-  // Suppressed due to http://code.google.com/p/google-web-toolkit/issues/detail?id=5016
   @ExpectedFailure(withMessage = "fail_uncaught")
-  public void _suppressed_testFailViaUncaughtException_addsCustomHandlerInGwtSetup() {
+  public void testFailViaUncaughtException_addsCustomHandlerInGwtSetup() {
     // Verify our own handler is still there
     assertSame(myHandler, GWT.getUncaughtExceptionHandler());
 
@@ -106,7 +104,7 @@ public class GWTTestCaseUncaughtExceptionHandlerTest extends GWTTestCaseTestBase
   // http://code.google.com/p/google-web-toolkit/issues/detail?id=8007
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testFailViaUncaughtExceptionOptout() {
-    GWT.setUncaughtExceptionHandler(null);
+    setUncaughtExceptionHandlerForTest(null);
     failViaUncaughtException("should not fail");
   }
 
@@ -127,9 +125,8 @@ public class GWTTestCaseUncaughtExceptionHandlerTest extends GWTTestCaseTestBase
     // gwtSetUp is configured to throw exception
   }
 
-  // Suppressed due to http://code.google.com/p/google-web-toolkit/issues/detail?id=5016
   @ExpectedFailure(withMessage = "fail_uncaught_setUp")
-  public void _suppressed_testFailViaUncaughtException_throwsInGwtSetUp_addsCustomHandlerInGwtSetup() {
+  public void testFailViaUncaughtException_throwsInGwtSetUp_addsCustomHandlerInGwtSetup() {
     // gwtSetUp is configured to throw exception
   }
 
@@ -141,6 +138,7 @@ public class GWTTestCaseUncaughtExceptionHandlerTest extends GWTTestCaseTestBase
 
   @ExpectedFailure(withMessage = "fail_uncaught")
   public void testFailWithGetUncaughtExceptionHandler() {
+    // For legacy behavior, this should still fail
     GWT.getUncaughtExceptionHandler()
         .onUncaughtException(new AssertionFailedError("fail_uncaught"));
   }

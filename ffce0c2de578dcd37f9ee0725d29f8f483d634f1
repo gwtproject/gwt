@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "RThRqVMU",
+        "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:49:54Z",
+      "side": 1,
+      "message": "OK, so I searched a bit, and it\u0027s only used for the Image widget, so it can synthesize a LoadEvent in case the image actually loaded before a _real_ handler could be attached.\n\nGiven that it also won\u0027t run (and possibly cause an error or warning) when a CSP is in use (as in Chrome extensions and apps, or Mozilla\u0027s OpenWeb Apps in their \"packaged app\" and \"privileged app\" flavors, or anyone using CSP on their web site, which is a good idea!), I removed it.\n(CSP would only be a problem when isStandalone is false, which by default is only the case for IE6 and IE7, which do not support CSP anyway; so we\u0027re making a step in the right direction! ;-) )",
+      "parentUuid": "Q-kcCEH4",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-kdZMLI",
         "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
         "patchSetId": 1

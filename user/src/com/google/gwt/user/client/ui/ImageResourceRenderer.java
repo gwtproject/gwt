@@ -15,16 +15,40 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.text.shared.AbstractSafeHtmlRenderer;
 
 /**
- * Given an {@link ImageResource}, renders a span element to show it.
+ * Given an {@link ImageResource}, renders an element to show it.
  */
 public class ImageResourceRenderer extends AbstractSafeHtmlRenderer<ImageResource> {
+
+  private static Template template;
+
+  interface Template extends SafeHtmlTemplates {
+    @SafeHtmlTemplates.Template("<img onload='this.__gwtLastUnhandledEvent=\"load\";' src='{0}' "
+        + "border='0' width='{1}' height='{2}'>")
+    SafeHtml image(SafeUri imageUri, int width, int height);
+  }
+
   @Override
   public SafeHtml render(ImageResource image) {
-    return AbstractImagePrototype.create(image).getSafeHtml();
+    if (image.isStandalone()) {
+      return getTemplate().image(image.getSafeUri(), image.getWidth(), image.getHeight());
+    } else {
+      return AbstractImagePrototype.create(image).getSafeHtml();
+    }
+  }
+
+  private Template getTemplate() {
+    // no need to synchronize, JavaScript in the browser is single-threaded
+    if (template == null) {
+      template = GWT.create(Template.class);
+    }
+    return template;
   }
 }

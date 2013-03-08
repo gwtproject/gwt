@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "RRP4WoWI",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RQx-MI1w",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RQ1-Gqz0",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-07T23:12:12Z",
       "side": 1,
       "message": "s/like as it is/as if it is/",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RRN4T5XA",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RQ1-Gqz0",
       "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "RREHu1EM",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RQ3-2D40",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RQ5-cswQ",
         "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-07T23:12:12Z",
       "side": 1,
       "message": "s/from provided/from a provided/",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RRGH90PQ",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RQ5-cswQ",
       "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "RRIER-GA",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done. \nI added the type name to constructor so that instance will be no longer partial - all other fields are optional.",
+      "parentUuid": "RQz-WR7o",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RQ-8CH3w",
         "filename": "user/src/com/google/gwt/user/client/rpc/core/com/google/gwt/core/shared/SerializableThrowable_CustomFieldSerializer.java",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-03-07T23:12:12Z",
       "side": 1,
       "message": "Do the static methods need to be public?",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RRIFGHGQ",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/com/google/gwt/core/shared/SerializableThrowable_CustomFieldSerializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Yes. And unfortunately they are also mandatory. Something we might want to fix..",
+      "parentUuid": "RQ-8CH3w",
       "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "RRMEvhJE",
+        "filename": "user/test/com/google/gwt/core/shared/SerializableThrowableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RQ58wMxU",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RQz9yx-k",
         "filename": "user/test/com/google/gwt/core/shared/SerializableThrowableTest.java",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2013-03-07T23:12:12Z",
       "side": 1,
       "message": "For assertSame() to work, we need to know that this string literal and the previous literal are the same. That\u0027s probably true, but maybe it\u0027s clearer to use a variable?",
+      "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RRKEs.J0",
+        "filename": "user/test/com/google/gwt/core/shared/SerializableThrowableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-08T00:25:54Z",
+      "side": 1,
+      "message": "Opps. This one wasn\u0027t intended. A copy-paste error. Fixing.",
+      "parentUuid": "RQz9yx-k",
       "revId": "eaeed385a9656e11307ec9cff88110babd4a1de7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

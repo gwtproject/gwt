@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "RMJKuvLs",
+        "filename": "user/src/com/google/gwt/resources/rg/ImageResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Q-ocmyJA",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-kcCEH4",
         "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-06T20:05:53Z",
       "side": 1,
       "message": "Sorry, I lost here. Not familiar with __gwtLastUnhandledEvent?",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RMNK0RBM",
+        "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:26:10Z",
+      "side": 1,
+      "message": "Neither am I.\n\nI copied this from ClippedImagePrototype, which is used by AbstractImagePrototype.",
+      "parentUuid": "Q-kcCEH4",
       "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "RMPKxSCA",
+        "filename": "user/src/com/google/gwt/user/client/ui/ImageResourceRenderer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:26:10Z",
+      "side": 1,
+      "message": "Again copied from ClippedImagePrototype. Could it possibly speed-up DevMode? (I\u0027d expect everything to be optimized out when compiled to JS, as the template method should be \"static-ified\").",
+      "parentUuid": "Q-kdZMLI",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-kcKENc",
         "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "RMJJSPBY",
+        "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:26:10Z",
+      "side": 1,
+      "message": "I actually wanted an \"assume\" but it\u0027s JUnit4. Changed to assertTrue.",
+      "parentUuid": "Q-kcKENc",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Q-mctTP8",
         "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2013-03-06T20:05:53Z",
       "side": 1,
       "message": "Is it possible to add a test case where isStandalone returns false? (Couldn\u0027t see any assertFalse(xxx.isStandalone()))",
+      "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RTtQ2HO4",
+        "filename": "user/test/com/google/gwt/user/client/ui/ImageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-08T13:26:10Z",
+      "side": 1,
+      "message": "Done\n\nAdded the following to testResourceConstructor and testSetResource:\n\n  @WithProperties({\n    @Property(name \u003d \"ClientBundle.enableInlining\", value \u003d \"false\")\n  })\n\nand added assertFalse(xxx.isStandalone()) and assertEquals(\"clipped\", xxx)\n\nClientBundle.enableInlining triggers the generator that uses sprited images (the one used by default for ie6). the xxxStandalone tests are identical except they make sure the image is standalone (using preventInlining\u003dtrue, which is different)\n\nIn the mean time, I noticed that I had forgotten the @ImageOptions on prettyPiccyStandalone so that it was only standalone as a side-effect of tests running as gecko1_8 by default in HtmlUnit, and would have failed in IE6.",
+      "parentUuid": "Q-mctTP8",
       "revId": "ffce0c2de578dcd37f9ee0725d29f8f483d634f1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

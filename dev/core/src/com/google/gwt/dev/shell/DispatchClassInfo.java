@@ -38,7 +38,9 @@ public class DispatchClassInfo {
 
   private final int clsId;
 
-  private ArrayList<Member> memberById;
+  private HashMap<Integer, Member> memberByMemberId;
+
+  private HashMap<Member, Integer> memberIdByMember;
 
   private HashMap<String, Integer> memberIdByName;
 
@@ -54,17 +56,15 @@ public class DispatchClassInfo {
   public Member getMember(int id) {
     lazyInitTargetMembers();
     id &= 0xffff;
-    return memberById.get(id);
+    return memberByMemberId.get(id);
   }
 
   public int getMemberId(String mangledMemberName) {
     lazyInitTargetMembers();
-
     Integer id = memberIdByName.get(mangledMemberName);
     if (id == null) {
       return -1;
     }
-
     return id.intValue();
   }
 
@@ -82,9 +82,14 @@ public class DispatchClassInfo {
 
   private void addMemberIfUnique(String name, List<Member> membersForName) {
     if (membersForName.size() == 1) {
-      memberById.add(membersForName.get(0));
-      memberIdByName.put(
-          StringInterner.get().intern(name), memberById.size() - 1);
+      int id = memberById.indexOf(m);
+      if (id == -1) {
+        id = memberById.size();
+        memberById.add(m);
+      }
+      memberIdByName.put(StringInterner.get().intern(name), id);
+      memberIdByMember.put(m, id);
+      memberByMemberId.put(id, m);
     }
   }
 
@@ -185,7 +190,7 @@ public class DispatchClassInfo {
     sb.append(")");
 
     String mangledName = StringInterner.get().intern(sb.toString());
-    
+
     return mangledName;
   }
 
@@ -228,18 +233,21 @@ public class DispatchClassInfo {
   }
 
   private void lazyInitTargetMembers() {
-    if (memberById == null) {
-      memberById = new ArrayList<Member>();
-      memberById.add(null); // 0 is reserved; it's magic on Win32
-      memberIdByName = new HashMap<String, Integer>();
+    if (memberIdByMember == null) {
+      // Start w/ capacity 2^15,
+      // as elemental Browser class loads many unused classes in dev mode
+      memberByMemberId = new HashMap<Integer, Member>(32767);
+      memberIdByMember = new HashMap<Member, Integer>(32767);
+      memberIdByName = new HashMap<String, Integer>(32767);
 
+      // We send cls != Class.class to findMostDerived,
+      // so jsni refs to methods on Class don't try to make Class constructor accessible
       LinkedHashMap<String, LinkedHashMap<String, Member>> members = findMostDerivedMembers(
-          cls, true);
+          cls, cls != Class.class);
       for (Entry<String, LinkedHashMap<String, Member>> entry : members.entrySet()) {
         String name = entry.getKey();
 
-        List<Member> membersForName = new ArrayList<Member>(
-            entry.getValue().values());
+        List<Member> membersForName = new ArrayList<Member>(entry.getValue().values());
         addMemberIfUnique(name, membersForName); // backward compatibility
         addMemberIfUnique(name, filterOutSyntheticMembers(membersForName));
       }

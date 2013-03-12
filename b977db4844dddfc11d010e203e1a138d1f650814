@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RfsQC-nw",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-03-12T15:53:14Z",
+      "side": 1,
+      "message": "This can probably be an ArrayList\u003cMember\u003e instead.",
+      "revId": "b977db4844dddfc11d010e203e1a138d1f650814",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

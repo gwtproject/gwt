@@ -339,6 +339,7 @@ public final class CompilingClassLoader extends ClassLoader implements
      * @return dispatch identifier for the given class and member ids
      */
     private int synthesizeDispId(int classId, int memberId) {
+      assert (memberId <= 0xffff);
       return (classId << 16) | memberId;
     }
   }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RfoTaxg4",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-03-12T14:50:32Z",
+      "side": 1,
+      "message": "The way the memberByMemberId map is used, it could probably just be an ArrayList, and reduce key object allocations / operations.",
+      "revId": "59fae768412efd144f1daa6fecc16c70256fa89b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

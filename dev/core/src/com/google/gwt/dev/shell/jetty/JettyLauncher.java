@@ -22,13 +22,15 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.Util;
 
+import org.apache.tools.ant.taskdefs.Javac;
+import org.eclipse.jdt.core.JDTCompilerAdapter;
 import org.mortbay.component.AbstractLifeCycle;
 import org.mortbay.jetty.AbstractConnector;
+import org.mortbay.jetty.HttpFields.Field;
 import org.mortbay.jetty.Request;
 import org.mortbay.jetty.RequestLog;
 import org.mortbay.jetty.Response;
 import org.mortbay.jetty.Server;
-import org.mortbay.jetty.HttpFields.Field;
 import org.mortbay.jetty.handler.RequestLogHandler;
 import org.mortbay.jetty.nio.SelectChannelConnector;
 import org.mortbay.jetty.security.SslSocketConnector;
@@ -55,6 +57,18 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class JettyLauncher extends ServletContainerLauncher {
 
+  public static final class JDTCompiler16 extends JDTCompilerAdapter {
+    @Override
+    public void setJavac(Javac attributes) {
+      if (attributes.getTarget() == null) {
+        attributes.setTarget("1.6");
+      }
+      if (attributes.getSource() == null) {
+        attributes.setSource("1.6");
+      }
+      super.setJavac(attributes);
+    }
+  }
   /**
    * Log jetty requests/responses to TreeLogger.
    */
@@ -506,8 +520,7 @@ public class JettyLauncher extends ServletContainerLauncher {
      * out-of-the-box. If we don't set this, it's very, very difficult to make
      * JSP compilation work.
      */
-    String antJavaC = System.getProperty("build.compiler",
-        "org.eclipse.jdt.core.JDTCompilerAdapter");
+    String antJavaC = System.getProperty("build.compiler", JDTCompiler16.class.getName());
     System.setProperty("build.compiler", antJavaC);
   }
 

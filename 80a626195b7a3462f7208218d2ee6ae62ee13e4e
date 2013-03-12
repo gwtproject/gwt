@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RjpQhhBI",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/HtmlWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-12T19:18:02Z",
+      "side": 1,
+      "message": "It\u0027s worth noting that adding href\u003d here now makes it possible to introduce XSS bugs via javascript: URLs.  That doesn\u0027t seem to be an issue with this CL though, since the generated \u003ca\u003e tags are pretty limited.",
+      "revId": "80a626195b7a3462f7208218d2ee6ae62ee13e4e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

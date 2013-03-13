@@ -71,6 +71,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -843,6 +844,7 @@ public class JsInliner {
    */
   private static class InliningVisitor extends JsModVisitor {
     private final Set<JsFunction> blacklist = new HashSet<JsFunction>();
+    private final Set<JsNode> whitelist;
     /**
      * This reflects the functions that are currently being inlined to prevent
      * infinite expansion.
@@ -866,8 +868,9 @@ public class JsInliner {
      */
     private JsFunction programFunction;
 
-    public InliningVisitor(JsProgram program) {
+    public InliningVisitor(JsProgram program, Set<JsNode> whitelist) {
       invocationCountingVisitor.accept(program);
+      this.whitelist = whitelist;
     }
 
     /**
@@ -978,6 +981,11 @@ public class JsInliner {
       }
       JsFunction callerFunction = functionStack.peek();
 
+      if (!whitelist.contains(callerFunction)) {
+        // Only look at functions that are in the white list
+        return;
+      }
+
       /*
        * We only want to look at invocations of things that we statically know
        * to be functions. Otherwise, we can't know what statements the
@@ -994,7 +1002,7 @@ public class JsInliner {
        * Don't inline huge functions into huge multi-expressions. Some JS
        * engines will blow up.
        */
-      if (invokedFunction.getBody().getStatements().size() > 50) {
+      if (invokedFunction.getBody().getStatements().size() > MAX_INLINE_FN_SIZE) {
         return;
       }
 
@@ -1340,6 +1348,66 @@ public class JsInliner {
           }
         }
         invocationCount.put(function, count);
+      }
+    }
+  }
+
+  /**
+   * Finds functions that are only invoked at a single invocation site.
+   */
+  private static class SingleInvocationVisitor extends JsVisitor {
+    // Keep track of functions that are invoked once.
+    // Invariant:  singleInvokations(fn) = null => calls to fn have not been seen
+    //             singleInvokations(fn) = fn =>  mutiple callsites  to fn have been seen
+    //             singleInvokations(fn) = caller =>  one callsite has been seen an occurs in caller.
+    private final Map<JsFunction, JsFunction> singleInvocations = new IdentityHashMap<JsFunction, JsFunction>();
+
+    private final Stack<JsFunction> functionStack = new Stack<JsFunction>();
+
+    @Override
+    public void endVisit(JsFunction x, JsContext ctx) {
+      if (!functionStack.pop().equals(x)) {
+        throw new InternalCompilerException("Unexpected function popped");
+      }
+    }
+
+    public Collection<JsNode> inliningCandidates() {
+      Collection<JsNode> set = new LinkedHashSet<JsNode>();
+      for (Map.Entry<JsFunction, JsFunction> entry : singleInvocations.entrySet()) {
+        if (entry.getKey() != entry.getValue()) {
+          set.add(entry.getValue());
+        }
+      }
+      return set;
+    }
+
+    @Override
+    public boolean visit(JsFunction x, JsContext ctx) {
+      functionStack.push(x);
+      return true;
+    }
+
+    @Override
+    public void endVisit(JsInvocation x, JsContext ctx) {
+      checkFunctionCall(x.getQualifier());
+    }
+
+    @Override
+    public void endVisit(JsNew x, JsContext ctx) {
+      checkFunctionCall(x.getConstructorExpression());
+    }
+
+    private void checkFunctionCall(JsExpression qualifier) {
+      JsFunction function = isFunction(qualifier);
+      if (function != null && !functionStack.isEmpty()) {
+        // Keep track if function is only invoked at a single callsite.
+        JsFunction invoker = singleInvocations.get(function);
+        if (invoker == null) {
+          // this is the first invocation, registrer it
+          singleInvocations.put(function, functionStack.peek());
+        } else {
+          singleInvocations.put(function, function);
+        }
       }
     }
   }
@@ -1694,15 +1762,24 @@ public class JsInliner {
    * code to be inlined, but at a cost of larger JS output.
    */
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
-      "gwt.jsinlinerRatio", "1.7"));
+      "gwt.jsinlinerRatio", "1.3"));
+
+  /**
+   * The maximum number of statements a function can have to be actually considered for inlining.
+   *
+   * TODO(rluble): Find the best size.
+   */
+  public static final int MAX_INLINE_FN_SIZE = Integer.parseInt(System.getProperty(
+      "gwt.jsinlinerMaxFnSize", "25"));;
+
 
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(JsProgram program, Collection<JsNode> toInline) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program);
+    OptimizerStats stats = execImpl(program, toInline);
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -1745,22 +1822,32 @@ public class JsInliner {
     return v.containsNestedFunctions();
   }
 
-  /**
-   * @param program
-   * @return stats
-   */
-  private static OptimizerStats execImpl(JsProgram program) {
+
+  private static OptimizerStats execImpl(JsProgram program, Collection<JsNode> toInline) {
     OptimizerStats stats = new OptimizerStats(NAME);
+
+    // We are not covering the whole AST, hence we will try to inline functions with a single call
+    // site as well as those produced by native methods and their callers.
+    SingleInvocationVisitor s = new SingleInvocationVisitor();
+    s.accept(program);
+    Set<JsNode> candidates = new LinkedHashSet<JsNode>(toInline);
+    candidates.addAll(s.inliningCandidates());
+
     RedefinedFunctionCollector d = new RedefinedFunctionCollector();
     d.accept(program);
 
     RecursionCollector rc = new RecursionCollector();
-    rc.accept(program);
+    for (JsNode fn : candidates) {
+      rc.accept(fn);
+    }
 
-    InliningVisitor v = new InliningVisitor(program);
+    InliningVisitor v = new InliningVisitor(program, candidates);
     v.blacklist(d.getRedefined());
     v.blacklist(rc.getRecursive());
+    // Do not accept among candidates as the list might get stale and contain nodes that are not
+    // reachable from the AST. Instead filter within InliningVisitor.
     v.accept(program);
+
     if (v.didChange()) {
       stats.recordModified();
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RvUhZ-zo",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-14T23:18:01Z",
+      "side": 1,
+      "message": "I think there\u0027s a slight bug: suppose the first call we see is self-recursive and then we visit a second call. Then only the second call will be recorded. So it will be included in the result, when in fact there\u0027s more than one call and the function is self-recursive.\n\nSo it seems like this should be a plain \"else\".",
+      "revId": "7dec15b8d14827ea1e87177126434bb0894c0fad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

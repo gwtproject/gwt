@@ -68,6 +68,15 @@ public final class JsFunction extends JsLiteral implements HasName {
     this.scope = new JsNormalScope(parent, scopeName);
   }
 
+  /**
+   * Creates a dummy JsFunction object to be used as a sentinel.
+   *
+   * @return a dummy JsFunction object.
+   */
+  public static JsFunction createSentinel() {
+    return new JsFunction(null, null, null);
+  }
+
   public JsBlock getBody() {
     return body;
   }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Rp1vBw9E",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1361,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-14T00:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RqXmBJ-E",
+      "revId": "b9caebe0c5ab6a29aa8216dfe10b293119082a22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RqVm-g7w",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "Rp5t7y9I",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-14T00:05:52Z",
+      "side": 1,
+      "message": "rewrote differently to take care of self recursive calls and to avoid unnecessary puts.",
+      "parentUuid": "RqVm-g7w",
+      "revId": "b9caebe0c5ab6a29aa8216dfe10b293119082a22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Rqfl9Ny8",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-13T22:44:44Z",
       "side": 1,
       "message": "Nit: public constants should go above private ones.\nNit: two semicolons.\n\nThe stack trace will be confusing if the system property is set to a non-int, but I suppose this isn\u0027t intended to be actually used.",
+      "revId": "b9caebe0c5ab6a29aa8216dfe10b293119082a22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Rp7uAB4E",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-14T00:05:52Z",
+      "side": 1,
+      "message": "Done.\nThese knobs are meant for us to run systematic experiments to determine \"optimal\" values.",
+      "parentUuid": "Rqfl9Ny8",
       "revId": "b9caebe0c5ab6a29aa8216dfe10b293119082a22",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

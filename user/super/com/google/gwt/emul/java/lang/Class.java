@@ -185,6 +185,7 @@ public final class Class<T> {
       int seedId) {
     if (clazz.isClassMetadataEnabled()) {
       clazz.typeName = packageName + className;
+      clazz.simpleName = className;
     } else {
       /*
        * The initial "" + in the below code is to prevent clazz.hashCode() from
@@ -193,6 +194,7 @@ public final class Class<T> {
        */
       clazz.typeName = "Class$"
           + (isInstantiableOrPrimitive(seedId) ? asString(seedId) : "" + clazz.hashCode());
+      clazz.simpleName = clazz.typeName;
     }
 
     if (isInstantiable(seedId)) {
@@ -213,6 +215,8 @@ public final class Class<T> {
 
   private Class<? super T> superclass;
 
+  private String simpleName;
+  
   private String typeName;
 
   private int seedId;
@@ -239,6 +243,10 @@ public final class Class<T> {
     return this.@java.lang.Class::enumConstantsFunc
         && (this.@java.lang.Class::enumConstantsFunc)();
   }-*/;
+  
+  public String getSimpleName() {
+    return simpleName;
+  }
 
   public String getName() {
     return typeName;

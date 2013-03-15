@@ -16,6 +16,24 @@
       "revId": "7dec15b8d14827ea1e87177126434bb0894c0fad",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RvQgxx14",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-15T06:14:53Z",
+      "side": 1,
+      "message": "I don\u0027t  think that removing \"if (recordedInvoker !\u003d MULTIPLE)\" makes any functional difference.\n\nIt is just an optimization that to me reads record as MULTIPLE if not already done so. \n\nIs there something I am not seen here?",
+      "parentUuid": "RvUhZ-zo",
+      "revId": "7dec15b8d14827ea1e87177126434bb0894c0fad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

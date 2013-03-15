@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RvQtdQfU",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-15T20:41:16Z",
+      "side": 1,
+      "message": "Suppose js.identifier.blacklist.suffixes has a trailing comma. I think that means we put the empty string in the blacklist and isAvailableIdent() always returns false. Seems like it might be confusing.",
+      "revId": "7b6df84dc33c0841d6390d22400ac1e2934778d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Rvev45bg",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-15T20:41:16Z",
+      "side": 1,
+      "message": "If a suffix contains any capital letters, it will never match.",
+      "revId": "7b6df84dc33c0841d6390d22400ac1e2934778d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

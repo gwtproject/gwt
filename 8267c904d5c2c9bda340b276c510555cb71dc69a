@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RybnBX1E",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5360
+      },
+      "writtenOn": "2013-03-16T21:26:11Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace.",
+      "revId": "8267c904d5c2c9bda340b276c510555cb71dc69a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "RyZnGG2U",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5360
+      },
+      "writtenOn": "2013-03-16T21:26:11Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace.",
+      "revId": "8267c904d5c2c9bda340b276c510555cb71dc69a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "RyZl3O6A",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-16T09:55:03Z",
+      "side": 1,
+      "message": "I\u0027d have put it next to the other isInfinite tests but I\u0027m a nit picker :-)",
+      "revId": "827796d96cc1d1418994e80b47f05975cf16f7e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

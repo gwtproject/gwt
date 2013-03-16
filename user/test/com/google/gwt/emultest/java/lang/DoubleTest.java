@@ -119,6 +119,7 @@ public class DoubleTest extends GWTTestCase {
     // Double.MAX_EXPONENT);
     // jdk1.6 assertEquals(Math.getExponent(Double.MIN_NORMAL),
     // Double.MIN_EXPONENT);
+    assertFalse(Double.isInfinite(Double.NaN));
   }
 
   public void testParse() {

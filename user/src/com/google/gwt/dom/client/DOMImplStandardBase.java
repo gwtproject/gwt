@@ -138,17 +138,6 @@ class DOMImplStandardBase extends DOMImplStandard {
     return element.getBoundingClientRect && element.getBoundingClientRect();
   }-*/;
 
-  /**
-   * The type property on a button element is read-only in safari, so we need to
-   * set it using setAttribute.
-   */
-  @Override
-  public native ButtonElement createButtonElement(Document doc, String type) /*-{
-    var e = doc.createElement("BUTTON");
-    e.setAttribute('type', type);
-    return e;
-  }-*/;
-
   @Override
   public native NativeEvent createKeyCodeEvent(Document doc, String type,
       boolean ctrlKey, boolean altKey, boolean shiftKey, boolean metaKey,
@@ -178,16 +167,6 @@ class DOMImplStandardBase extends DOMImplStandard {
     return evt;
   }-*/;
 
-  /**
-   * Safari 2 does not support {@link ScriptElement#setText(String)}.
-   */
-  @Override
-  public ScriptElement createScriptElement(Document doc, String source) {
-    ScriptElement elem = (ScriptElement) createElement(doc, "script");
-    elem.setInnerText(source);
-    return elem;
-  }
-
   @Override
   public native EventTarget eventGetCurrentTarget(NativeEvent event) /*-{
     return event.currentTarget || $wnd;
@@ -202,7 +181,7 @@ class DOMImplStandardBase extends DOMImplStandard {
   public int getAbsoluteLeft(Element elem) {
     ClientRect rect = getBoundingClientRect(elem);
     return rect != null ? rect.getLeft()
-        + elem.getOwnerDocument().getBody().getScrollLeft()
+        + getScrollLeft(elem.getOwnerDocument())
         : getAbsoluteLeftUsingOffsets(elem);
   }
 
@@ -210,15 +189,8 @@ class DOMImplStandardBase extends DOMImplStandard {
   public int getAbsoluteTop(Element elem) {
     ClientRect rect = getBoundingClientRect(elem);
     return rect != null ? rect.getTop()
-        + elem.getOwnerDocument().getBody().getScrollTop()
+        + getScrollTop(elem.getOwnerDocument())
         : getAbsoluteTopUsingOffsets(elem);
-  }
-
-  @Override
-  public int getScrollLeft(Document doc) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    return doc.getBody().getScrollLeft();
   }
 
   @Override
@@ -231,39 +203,11 @@ class DOMImplStandardBase extends DOMImplStandard {
   }
 
   @Override
-  public int getScrollTop(Document doc) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    return doc.getBody().getScrollTop();
-  }
-
-  @Override
-  public native int getTabIndex(Element elem) /*-{ 
-    // tabIndex is undefined for divs and other non-focusable elements prior to
-    // Safari 4.
-    return typeof elem.tabIndex != 'undefined' ? elem.tabIndex : -1;
-  }-*/;
-
-  @Override
-  public void setScrollLeft(Document doc, int left) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    doc.getBody().setScrollLeft(left);
-  }
-
-  @Override
   public void setScrollLeft(Element elem, int left) {
     if (isRTL(elem)) {
       left += elem.getScrollWidth() - elem.getClientWidth();
     }
     super.setScrollLeft(elem, left);
-  }
-
-  @Override
-  public void setScrollTop(Document doc, int top) {
-    // Safari always applies document scrolling to the body element, even in
-    // strict mode.
-    doc.getBody().setScrollTop(top);
   }
 
   protected native boolean isRTL(Element elem) /*-{

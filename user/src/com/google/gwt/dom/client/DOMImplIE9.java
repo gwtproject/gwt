@@ -22,7 +22,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
 
   @Override
   public int getAbsoluteLeft(Element elem) {
-    int left = getBoundingClientRectLeft(elem) + getDocumentScrollLeftImpl();
+    int left = getBoundingClientRectLeft(elem) + getScrollLeft(elem.getOwnerDocument());
     if (isRTL(elem)) { // in RTL, account for the scroll bar shift if present
       left += getParentOffsetDelta(elem);
     }
@@ -31,7 +31,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
 
   @Override
   public int getAbsoluteTop(Element elem) {
-    return getBoundingClientRectTop(elem) + getDocumentScrollTopImpl();
+    return getBoundingClientRectTop(elem) + getScrollTop(elem.getOwnerDocument());
   }
 
   /**
@@ -44,22 +44,12 @@ class DOMImplIE9 extends DOMImplStandardBase {
   }-*/;
 
   @Override
-  public int getScrollLeft(Document doc) {
-    return getDocumentScrollLeftImpl();
-  }
-
-  @Override
   public int getScrollLeft(Element elem) {
     int left = getScrollLeftImpl(elem);
     if (isRTL(elem)) {
       left = -left;
     }
     return left;
-  }
-
-  @Override
-  public int getScrollTop(Document doc) {
-    return getDocumentScrollTopImpl();
   }
 
   @Override
@@ -111,14 +101,6 @@ class DOMImplIE9 extends DOMImplStandardBase {
       // if not attached return 0
       return 0;
     }
-  }-*/;
-
-  private native int getDocumentScrollLeftImpl() /*-{
-    return $wnd.pageXOffset;
-  }-*/;
-
-  private native int getDocumentScrollTopImpl() /*-{
-    return $wnd.pageYOffset;
   }-*/;
 
   private native int getParentOffsetDelta(Element elem) /*-{

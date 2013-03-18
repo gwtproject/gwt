@@ -62,5 +62,61 @@ class DOMImplWebkit extends DOMImplStandardBase {
       elem.getStyle().clearProperty("webkitUserDrag");
     }
   }
+
+  /**
+   * The type property on a button element is read-only in safari, so we need to
+   * set it using setAttribute.
+   */
+  @Override
+  public native ButtonElement createButtonElement(Document doc, String type) /*-{
+    var e = doc.createElement("BUTTON");
+    e.setAttribute('type', type);
+    return e;
+  }-*/;
+
+  /**
+   * Safari 2 does not support {@link ScriptElement#setText(String)}.
+   */
+  @Override
+  public ScriptElement createScriptElement(Document doc, String source) {
+    ScriptElement elem = (ScriptElement) createElement(doc, "script");
+    elem.setInnerText(source);
+    return elem;
+  }
+
+  @Override
+  public int getScrollLeft(Document doc) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    return doc.getBody().getScrollLeft();
+  }
+
+  @Override
+  public int getScrollTop(Document doc) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    return doc.getBody().getScrollTop();
+  }
+
+  @Override
+  public native int getTabIndex(Element elem) /*-{ 
+    // tabIndex is undefined for divs and other non-focusable elements prior to
+    // Safari 4.
+    return typeof elem.tabIndex != 'undefined' ? elem.tabIndex : -1;
+  }-*/;
+
+  @Override
+  public void setScrollLeft(Document doc, int left) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    doc.getBody().setScrollLeft(left);
+  }
+
+  @Override
+  public void setScrollTop(Document doc, int top) {
+    // Safari always applies document scrolling to the body element, even in
+    // strict mode.
+    doc.getBody().setScrollTop(top);
+  }
 }
 

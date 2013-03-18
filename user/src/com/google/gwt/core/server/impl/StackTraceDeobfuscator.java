@@ -25,9 +25,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,7 +47,48 @@ import java.util.regex.Pattern;
  * directory is written. By default, the final <code>symbolMaps</code> directory is
  * <code>war/WEB-INF/deploy/<i>yourmodulename</i>/symbolMaps/</code>.
  */
-public class StackTraceDeobfuscator {
+public abstract class StackTraceDeobfuscator {
+
+  /**
+   * Creates a deobfuscator that loads symbol map files from the given resource path using
+   * {@link ClassLoader}.
+   */
+  public static StackTraceDeobfuscator fromResource(String symbolMapsPath) {
+    final String basePath = symbolMapsPath.endsWith("/") ? symbolMapsPath : symbolMapsPath + "/";
+    final ClassLoader classLoader = StackTraceDeobfuscator.class.getClassLoader();
+    return new StackTraceDeobfuscator() {
+      protected InputStream openInputStream(String fileName) throws IOException {
+        String filePath = basePath + fileName;
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
+        if (inputStream == null) {
+          throw new MissingResourceException("Missing resource: " + filePath, null, filePath);
+        }
+        return inputStream;
+      }
+    };
+  }
+
+  /**
+   * Creates a deobfuscator that loads symbol map files from the given file path.
+   */
+  public static StackTraceDeobfuscator fromFileSystem(final String symbolMapsDirectory) {
+    return new StackTraceDeobfuscator() {
+      protected InputStream openInputStream(String fileName) throws IOException {
+        return new FileInputStream(new File(symbolMapsDirectory, fileName));
+      }
+    };
+  }
+
+  /**
+   * Creates a deobfuscator that loads symbol map files from the given url path.
+   */
+  public static StackTraceDeobfuscator fromFileSystem(final URL urlPath) {
+    return new StackTraceDeobfuscator() {
+      protected InputStream openInputStream(String fileName) throws IOException {
+        return new URL(urlPath, fileName).openStream();
+      }
+    };
+  }
 
   /**
    * A cache that maps obfuscated symbols to arbitrary non-null string values. The cache can assume
@@ -105,36 +148,16 @@ public class StackTraceDeobfuscator {
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
-  private final boolean lazyLoad;
-  private final File symbolMapsDirectory;
   private final Map<String, SourceMapping> sourceMaps = new HashMap<String, SourceMapping>();
   private final SymbolCache symbolCache = new SymbolCache();
+  private boolean lazyLoad = false;
 
   /**
-   * Creates a deobfuscator that loads symbol map files from the given directory. Symbol maps are
-   * generated into the location specified by the GWT compiler <code>-deploy</code> command line
-   * argument.
-   *
-   * @param symbolMapsDirectory the <code>symbolMaps</code> directory, with or without trailing
-   *        directory separator character
+   * If set to {@code true}, only symbols requested to be deobfuscated are cached and the rest is
+   * discarded. This provides a large memory savings at the expense of occasional extra disk reads.
+   * Note that, this has no effect on permutations that the symbols have already been loaded for.
    */
-  public StackTraceDeobfuscator(String symbolMapsDirectory) {
-    this(symbolMapsDirectory, false);
-  }
-
-  /**
-   * Creates a deobfuscator that loads symbol map files from the given directory. Symbol maps are
-   * generated into the location specified by the GWT compiler <code>-deploy</code> command line
-   * argument.
-   *
-   * @param symbolMapsDirectory the <code>symbolMaps</code> directory, with or without trailing
-   *        directory separator character. Usually this directory will include files with .symbolmap
-            or .json extensions.
-   * @param lazyLoad if true, only symbols requested to be deobfuscated are cached. This provides a
-   *        large memory savings at the expense of occasional extra disk reads.
-   */
-  public StackTraceDeobfuscator(String symbolMapsDirectory, boolean lazyLoad) {
-    this.symbolMapsDirectory = new File(symbolMapsDirectory);
+  public void setLazyLoad(boolean lazyLoad) {
     this.lazyLoad = lazyLoad;
   }
 
@@ -293,25 +316,26 @@ public class StackTraceDeobfuscator {
 
   protected InputStream getSourceMapInputStream(String permutationStrongName, int fragmentNumber)
       throws IOException {
-    String filename = symbolMapsDirectory.getCanonicalPath()
-        + File.separatorChar + permutationStrongName + "_sourceMap" + fragmentNumber + ".json";
-    return new FileInputStream(filename);
+    return openInputStream(permutationStrongName + "_sourceMap" + fragmentNumber + ".json");
   }
 
   /**
    * Retrieves a new {@link InputStream} for the given permutation strong name. This implementation,
    * which subclasses may override, returns a {@link InputStream} for the <code>
-   * <i>permutation-strong-name</i>.symbolMap</code> file in the <code>symbolMaps</code> directory.
+   * <i>permutation-strong-name</i>.symbolMap</code> file.
    *
    * @param permutationStrongName the GWT permutation strong name
    * @return a new {@link InputStream}
    */
-  protected InputStream getSymbolMapInputStream(String permutationStrongName)
-      throws IOException {
-    String filename = symbolMapsDirectory.getCanonicalPath()
-        + File.separatorChar + permutationStrongName + ".symbolMap";
-    return new FileInputStream(filename);
+  protected InputStream getSymbolMapInputStream(String permutationStrongName) throws IOException {
+    return openInputStream(permutationStrongName + ".symbolMap");
   }
+
+  /**
+   * Retrieves a new {@link InputStream} for the given file name. Subclasses need to override this
+   * to provide different mechanisms for the retrieval of the files.
+   */
+  protected abstract InputStream openInputStream(String fileName) throws IOException;
 
   private SourceMapping loadSourceMap(String permutationStrongName, int fragmentId) {
     SourceMapping toReturn = sourceMaps.get(permutationStrongName + fragmentId);

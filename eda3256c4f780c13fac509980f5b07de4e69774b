@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "R3wOVjs8",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "R7pQ7ZNw",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7jQtMJk",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-18T21:52:25Z",
       "side": 1,
       "message": "Stack traces will be easier to read if you convert these anonymous classes into nested classes, so it\u0027s clearer which one is in use.",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R34PRfqo",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "I don\u0027t think this will be a real issue, as if somebody really needs to know which anonymous class it is, it will be easy to follow by the line number.",
+      "parentUuid": "R7jQtMJk",
       "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "R38PLdvI",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Done.\nAbout parameter type: As in most google3 scenarios, directory name is usually available as string, so this is more convenient for developer.",
+      "parentUuid": "R7nQiSLI",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7tRF3Fk",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-18T21:52:25Z",
       "side": 1,
       "message": "\"loads symbol and source map files from a URL beneath the given parent.\"\n\nThis seems rather dicy. We will end up doing two HTTP requests for each file (one for the symbol map and another for the source map). If the file doesn\u0027t exist, there\u0027s only one request, but still someone could use this API as a way to do a denial-of-service attack on whichever server we\u0027re loading the files from. Maybe leave out this constructor for now?",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R32O7ol8",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Done. (javadoc)\n\nURL doesn\u0027t mean HTTP protocol. A file or resource from a jar can all be identified via URL. All other fromXXX methods above could have written by calling this method instead of anonymous class (I am just doing a minor optimization by not using this).\n\nFor example; JunitHost will be using this one to get the files from the servlet context..",
+      "parentUuid": "R7tRF3Fk",
       "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "R3yPBqtM",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Opps. Thanks for catching that.",
+      "parentUuid": "R7lQlTLc",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7hQwNPQ",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-03-18T21:52:25Z",
       "side": 1,
       "message": "According to GWT\u0027s usual stye, nested classes go above static methods. However, I think it would be better to put the inner classes at the end.",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R3.N7EtE",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "I also like them at the end if they are private. Especially, in this case keeping the public static methods on the top helps with discoverability.\nGoogle java style guide is more helpful on this as it only asks for logical order. Anyway I am OK to change it if this is a strict rule or this class is going to be of the few exceptions..",
+      "parentUuid": "R7hQwNPQ",
       "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "R4EIxEhc",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Done.\nThere are 3 logical states here; loaded / partially loaded / not loaded. Applied that to your suggestion.",
+      "parentUuid": "R7vRK2GY",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7rRAYEs",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2013-03-18T21:52:25Z",
       "side": 1,
       "message": "\"This method will be called with a filename (not including a slash) for a symbol map or a source map file and the implementation should open the file in the appropriate directory, or throw an IOException if the file wasn\u0027t found. The returned InputStream doesn\u0027t need to be buffered.\"\n\nHowever, maybe we want to do a better job of logging unexpected errors? It seems like reporting a simple log message (not a full stack trace) for the first few missing files would make it easier to fix configuration errors, instead of dropping all IOExceptions silently like we do now. And if it\u0027s not just a missing file then I think it deserves a full stack trace.\n\nSo perhaps we should have a specific exception for a normal file not found error, so we can catch it separately?",
+      "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R4EIa8og",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T01:56:37Z",
+      "side": 1,
+      "message": "Added more description on the javadoc.\n\nCurrently this method is also called repeatedly which usually doesn\u0027t make sense if it is a \"not found\u0027 error.\nI like none of that, however I have other priorities right now. We can defer it as the problem was always there.",
+      "parentUuid": "R7rRAYEs",
       "revId": "eda3256c4f780c13fac509980f5b07de4e69774b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

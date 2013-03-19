@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "R7rR3gJ8",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-19T04:40:02Z",
+      "side": 1,
+      "message": "Should be FileNotFoundException, to agree with the javadoc.",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7vRx.Ko",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-19T04:40:02Z",
+      "side": 1,
+      "message": "Google style would be \"fromUrl\" instead of \"fromURL\". In GWT it seems to be inconsistent - there is UrlBuilder and UrlUtils but there is also GWT.getModuleBaseURL.",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7tRs-NE",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-19T04:40:02Z",
+      "side": 1,
+      "message": "I don\u0027t know if this will throw FileNotFoundException if there is a 404 (or equivalent for other protocols).",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

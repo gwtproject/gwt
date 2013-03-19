@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "R7VVnDJk",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-19T17:28:01Z",
+      "side": 1,
+      "message": "AFAICT, we\u0027ve been trying to move towards \u0027Url\u0027 lately; \u0027URL\u0027 are older APIs.",
+      "parentUuid": "R7vRx.Ko",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7tRs-NE",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 2
@@ -47,6 +65,41 @@
       "writtenOn": "2013-03-19T04:40:02Z",
       "side": 1,
       "message": "I don\u0027t know if this will throw FileNotFoundException if there is a 404 (or equivalent for other protocols).",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7XVkCJQ",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-19T17:28:01Z",
+      "side": 1,
+      "message": "If you ask me, we should just remove the FileNotFoundException from the javadoc, as it\u0027s depend on how you load the data (which is not necessarily a \"file\"); and keep the MissingResourceException from above (assuming we\u0027re using it correctly, the javadoc is a bit light…)",
+      "parentUuid": "R7tRs-NE",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7ZWdJE4",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-19T17:28:01Z",
+      "side": 1,
+      "message": "What does \"not including a slash\" means?",
       "revId": "f486d7087dabe55286d293111758f81e719d02a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

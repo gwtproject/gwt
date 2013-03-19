@@ -716,14 +716,6 @@ public class JavaToJavaScriptCompiler {
            * reducing the total permutation count.
            */
           optimize(options, jprogram);
-        } else {
-          /*
-           * Do only minimal early optimizations. This code path is used by the
-           * Precompile entry point. The external system might be able to
-           * perfectly parallelize the permutation compiles, so let's avoid
-           * doing potentially superlinear optimizations on the unified AST.
-           */
-          optimizeLoop("Early Optimization", jprogram, false);
         }
       }
 

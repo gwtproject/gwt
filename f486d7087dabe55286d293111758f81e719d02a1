@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "R-Si8A8Y",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T20:15:52Z",
+      "side": 1,
+      "message": "(Decided not to go with FileNotFoundException.)",
+      "parentUuid": "R7rR3gJ8",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7vRx.Ko",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "AFAICT, we\u0027ve been trying to move towards \u0027Url\u0027 lately; \u0027URL\u0027 are older APIs.",
       "parentUuid": "R7vRx.Ko",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R-Wi2..c",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T20:15:52Z",
+      "side": 1,
+      "message": "I remember \u0027Url\u0027 was the suggested one but URL class itself was all upper case so I was in between. I\u0027m changing it to fromUrl.",
+      "parentUuid": "R7VVnDJk",
       "revId": "f486d7087dabe55286d293111758f81e719d02a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "R-WiLWxA",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T20:15:52Z",
+      "side": 1,
+      "message": "Hmm, I thought MissingResourceException was an IOException. I will change that. \nI also agree the consistently throwing FileNotFoundException is going to be difficult. (Similarly, URL.openStream doesn\u0027t classify the IOException further.) Removing FileNotFoundException from javadoc.",
+      "parentUuid": "R7nTd6Cs",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7ZWdJE4",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 2
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "I meant that the filename doesn\u0027t include any directories (not a path).",
       "parentUuid": "R7ZWdJE4",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R-WhkO5Q",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-19T20:15:52Z",
+      "side": 1,
+      "message": "I was hesitated to add that. It looks like, it will just cause confusion. It is named as fileName instead of filePath anyway. Removing the extra info.",
+      "parentUuid": "R7jTTcCY",
       "revId": "f486d7087dabe55286d293111758f81e719d02a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

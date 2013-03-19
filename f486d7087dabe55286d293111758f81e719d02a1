@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "R7nTd6Cs",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-19T17:37:22Z",
+      "side": 1,
+      "message": "MissingResourceException is a RuntimeException, not an IOException. It shouldn\u0027t be used in openInputStream because it won\u0027t be caught at line 378 like the others.\n\nBut I think you\u0027re right, it seems too difficult to consistently throw FileNotFoundException. Maybe we should just wrap the call to openInputStream (by itself) and catch IOException.",
+      "parentUuid": "R7XVkCJQ",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "R7ZWdJE4",
         "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
         "patchSetId": 2
@@ -100,6 +118,24 @@
       "writtenOn": "2013-03-19T17:28:01Z",
       "side": 1,
       "message": "What does \"not including a slash\" means?",
+      "revId": "f486d7087dabe55286d293111758f81e719d02a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7jTTcCY",
+        "filename": "user/src/com/google/gwt/core/server/impl/StackTraceDeobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-19T17:37:22Z",
+      "side": 1,
+      "message": "I meant that the filename doesn\u0027t include any directories (not a path).",
+      "parentUuid": "R7ZWdJE4",
       "revId": "f486d7087dabe55286d293111758f81e719d02a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

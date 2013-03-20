@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "SGCqdP1k",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-20T21:04:04Z",
+      "side": 1,
+      "message": "I think we should not try specify how uncaught exception are generated here. I added a @see below for someone who needs to read more about it.",
+      "parentUuid": "SIeFtBn4",
+      "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SIUGs8oE",
         "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-20T20:26:08Z",
       "side": 1,
       "message": "...causes the test case to be reported as \u0027failed.\u0027 However, in...",
+      "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SGOqGBww",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-20T21:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SIUGs8oE",
       "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "SGGp6Fzk",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-20T21:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SIcFkgpc",
+      "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SIeGwptM",
         "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "SGEp-Uyc",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-20T21:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SIeGwptM",
+      "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SIaGQXjw",
         "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2013-03-20T20:26:08Z",
       "side": 1,
       "message": "Maybe replace \"the behavior is undefined\" with \"The reported exception is currently ignored, but this may change in a future version of GWT.\"\n\nMaybe add another paragraph.\n\n\"If reportUncaughtException() is called multiple times during a test method, only the first one will be reported. If it\u0027s called during a test method that also throws an exception, the reported  exception takes priority over the thrown exception.\"",
+      "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SGMrUY.M",
+        "filename": "user/src/com/google/gwt/junit/client/GWTTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-20T21:04:04Z",
+      "side": 1,
+      "message": "Done. \n\nAbout the additional paragraph: I put more info various places to cover more aspects, but I think we should not over specify as it makes it harder to read and ends up confusing the developer.",
+      "parentUuid": "SIaGQXjw",
       "revId": "33f0c76b309c11596450c17b1160a5e334ade266",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

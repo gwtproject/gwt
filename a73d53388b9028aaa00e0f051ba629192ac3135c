@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "R7RXb1BU",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "Add a blank line above to please Git (one-line-summary\\n\\nmultiline-description)",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7ZXrZKI",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplWebkit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "We no longer enforce it but can you please sort the methods by name?",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7fX62Gw",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplWebkit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "I don\u0027t think we still support Safari 2: we removed an old hack in DOMImplWebKit last June, and we removed support in History more than 3 years ago!\n\nhttp://gwt-code-reviews.appspot.com/29803 said \"I also ditched the no-longer-supported Safari 2 history implementation\" (note that it\u0027s specific to \"history\" though, as it never really worked); unfortunately Safari 2 is still mentioned in the javadoc despite the code its refererring to is long gone.",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7dX13H8",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplWebkit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "BTW is this true of Chrome too? I suppose it\u0027s more a WebKit thing independent of its various \"ports\", so it\u0027d be the appropriate time to s/Safari/WebKit/ in those comments.",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SIx9qw7c",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplWebkit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "As we\u0027re at it, we might want to revisit this, in light of issue 5836",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "R7bXwYJE",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplWebkit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-20T14:42:53Z",
+      "side": 1,
+      "message": "nit: trailing space",
+      "revId": "a73d53388b9028aaa00e0f051ba629192ac3135c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

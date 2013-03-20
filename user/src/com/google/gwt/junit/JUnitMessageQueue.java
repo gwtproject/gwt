@@ -15,11 +15,12 @@
  */
 package com.google.gwt.junit;
 
+import com.google.gwt.core.shared.SerializableThrowable;
 import com.google.gwt.junit.client.TimeoutException;
-import com.google.gwt.junit.client.impl.JUnitResult;
 import com.google.gwt.junit.client.impl.JUnitHost.ClientInfo;
 import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
+import com.google.gwt.junit.client.impl.JUnitResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +28,8 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * A message queue to pass data between {@link JUnitShell} and
@@ -463,12 +464,21 @@ public class JUnitMessageQueue {
       if (result == null) {
         return true;
       }
-      Throwable exception = result.getException();
-      if (exception != null && !isMember(exception, THROWABLES_NOT_RETRIED)) {
+
+      Class<?> thrown = getExceptionClass(result.getException());
+      if (thrown != null && !isMember(thrown, THROWABLES_NOT_RETRIED)) {
         return true;
       }
     }
     return false;
+  }
+
+  private Class<?> getExceptionClass(SerializableThrowable throwable) {
+    try {
+      return throwable == null ? null : Class.forName(throwable.getDesignatedType());
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   void removeResults(TestInfo testInfo) {
@@ -521,10 +531,10 @@ public class JUnitMessageQueue {
     return results;
   }
 
-  private boolean isMember(Throwable exception,
+  private boolean isMember(Class<?> throwableClass,
       Set<Class<? extends Throwable>> throwableSet) {
     for (Class<? extends Throwable> throwable : throwableSet) {
-      if (throwable.isInstance(exception)) {
+      if (throwable.isAssignableFrom(throwableClass)) {
         return true;
       }
     }

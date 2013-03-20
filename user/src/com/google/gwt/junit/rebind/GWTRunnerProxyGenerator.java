@@ -114,7 +114,7 @@ public class GWTRunnerProxyGenerator extends Generator {
     SourceWriter sourceWriter =
         getSourceWriter(logger, context, packageName, generatedBaseClass, null, null);
     if (sourceWriter != null) {
-      writeMethodCreateTestAccessor(logger, context, moduleName, sourceWriter);
+      writeMethodCreateTestAccessor(sourceWriter, getTestClasses(logger, context, moduleName));
       sourceWriter.commit(logger);
     }
 
@@ -156,9 +156,7 @@ public class GWTRunnerProxyGenerator extends Generator {
    * }-{@literal*}/;
    * </pre>
    */
-  private void writeMethodCreateTestAccessor(
-      TreeLogger logger, GeneratorContext context, String moduleName, SourceWriter sw) {
-    Set<JClassType> testClasses = getTestClasses(logger, context, moduleName);
+  private void writeMethodCreateTestAccessor(SourceWriter sw, Set<JClassType> testClasses) {
     sw.println("public native final %s createTestAccessor() /*-{", JSNI_TEST_ACCESSOR);
     sw.indent();
     sw.println("return {");
@@ -194,7 +192,8 @@ public class GWTRunnerProxyGenerator extends Generator {
   }
 
   private Set<JClassType> getTestClasses(
-      TreeLogger logger, GeneratorContext context, String moduleName) {
+      TreeLogger logger, GeneratorContext context, String moduleName)
+      throws UnableToCompleteException {
     // Check the global set of active tests for this module.
     TestModuleInfo moduleInfo = GWTTestCase.getTestsForModule(moduleName);
     Set<TestInfo> moduleTests = (moduleInfo == null) ? null : moduleInfo.getTests();
@@ -205,7 +204,12 @@ public class GWTRunnerProxyGenerator extends Generator {
     } else {
       Set<JClassType> testClasses = new LinkedHashSet<JClassType>();
       for (TestInfo testInfo : moduleTests) {
-        testClasses.add(context.getTypeOracle().findType(testInfo.getTestClass()));
+        try {
+          testClasses.add(context.getTypeOracle().getType(testInfo.getTestClass()));
+        } catch (NotFoundException e) {
+          logger.log(TreeLogger.ERROR, "Could not find test class", e);
+          throw new UnableToCompleteException();
+        }
       }
       return testClasses;
     }

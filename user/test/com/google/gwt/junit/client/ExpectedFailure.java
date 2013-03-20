@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.junit;
+package com.google.gwt.junit.client;
 
 import junit.framework.AssertionFailedError;
 
@@ -31,4 +31,8 @@ public @interface ExpectedFailure {
   String withMessage() default "";
 
   Class<? extends Throwable> withType() default AssertionFailedError.class;
+
+  // Default is DefaultExceptionAsserter but its source is not GWT compatible due to use of
+  // reflection so we will not directly refer it from here.
+  Class<? extends ExceptionAsserter> withAsserter() default ExceptionAsserter.class;
 }

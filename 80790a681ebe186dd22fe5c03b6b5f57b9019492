@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SNgy.N6I",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-21T21:13:47Z",
+      "side": 1,
+      "message": "Maybe you can use \u0027Double\u0027 and utilize null instead of NaN.",
+      "revId": "80790a681ebe186dd22fe5c03b6b5f57b9019492",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SNizD8y4",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-21T21:13:47Z",
+      "side": 1,
+      "message": "on unload -\u003e on module unload",
+      "revId": "80790a681ebe186dd22fe5c03b6b5f57b9019492",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SNgxSt0g",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-21T21:13:47Z",
+      "side": 1,
+      "message": "Perhaps we should keep it consistent and use c.g.g.core.Impl.setTimeout and remove the comment. I expect the overhead to be minimal even if module unload is enabled. If we try to optimize here then other people also might end up following it by thinking that might be something to avoid for performance. Instead it would be good to develop the habit of using tracked setTimeout every place.\n\nAlso I think that can be good idea to have a public native and non-native setTimeout/setInterval implementation in c.g.g.core that is \u0027module unload\" aware so we can publicly announce it as a best practice to avoid leaks.",
+      "revId": "80790a681ebe186dd22fe5c03b6b5f57b9019492",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

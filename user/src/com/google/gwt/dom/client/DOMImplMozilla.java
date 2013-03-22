@@ -140,6 +140,19 @@ class DOMImplMozilla extends DOMImplStandard {
   }
 
   @Override
+  public int eventGetButton(NativeEvent evt) {
+    if (evt.getType().equals((BrowserEvents.MOUSEMOVE))) {
+      /*
+       * Workaround for Mozilla issue https://bugzilla.mozilla.org/show_bug.cgi?id=129775 where
+       * mouse button is reported wrong on mouse move
+       */
+      return resolveButtonForMouseMove(evt);
+    } else {
+      return super.eventGetButton(evt);
+    }
+  }
+
+  @Override
   public native int getBodyOffsetLeft(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
     if (style == null) {
@@ -275,6 +288,19 @@ class DOMImplMozilla extends DOMImplStandard {
   private native boolean isRTL(Element elem) /*-{
     var style = elem.ownerDocument.defaultView.getComputedStyle(elem, null);
     return style.direction == 'rtl';
+  }-*/;
+  
+  private native int resolveButtonForMouseMove(NativeEvent evt)/*-{      
+    if(evt.buttons){
+      if (evt.buttons & 0x01){
+        return 1;                
+      } else if (evt.buttons & 0x02){
+        return 2;        
+      } else if (evt.buttons & 0x04){
+        return 4;
+      }  
+    }
+    return 1;
   }-*/;
 }
 

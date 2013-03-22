@@ -269,8 +269,9 @@ public class SpeedTracerLoggerTest extends TestCase {
     }
     return jsonReader;
   }
-  
-  public void testSpeedTracerWhenOnlyDashboardEnabled() {
+
+  // Disabled because of https://code.google.com/p/google-web-toolkit/issues/detail?id=8081
+  public void disabledTestSpeedTracerWhenOnlyDashboardEnabled() {
     // backup system properties before making changes to them
     Properties props = (Properties) System.getProperties().clone();
 

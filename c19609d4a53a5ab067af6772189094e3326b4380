@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ScDXgWh4",
+        "filename": "user/src/com/google/gwt/user/client/BaseListenerWrapper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T15:34:57Z",
+      "side": 1,
+      "message": "Done\n\nChanged to 2.7 so that:\n\n * if we can remove them before 2.6 (with Google rolling back the change in their \"fork\" until they can get rid of it), then the comment will be gone anyway. There\u0027s no point in changing the comment to 2.6 as that\u0027d mean either we ship 2.6 with a wrong deprecation notice, or it\u0027ll never be released anyway.\n * if we can\u0027t get them removed in 2.6, we should try hard to do that in the 2.7 timeframe anyway, so 2.6 will ship with the updated notice.",
+      "parentUuid": "Rz5NfHFM",
+      "revId": "c19609d4a53a5ab067af6772189094e3326b4380",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Rz-NUkDg",
         "filename": "user/src/com/google/gwt/user/client/DOM.java",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ScHU0orc",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T15:34:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Rz-NUkDg",
+      "revId": "c19609d4a53a5ab067af6772189094e3326b4380",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Rz9NZlG4",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ScJU4Jqw",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T15:34:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Rz9NZlG4",
+      "revId": "c19609d4a53a5ab067af6772189094e3326b4380",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "RzzNvKAQ",
         "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2013-03-17T16:20:14Z",
       "side": 1,
       "message": "Likewise.",
+      "revId": "c19609d4a53a5ab067af6772189094e3326b4380",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ScNVCrh0",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T15:34:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "RzzNvKAQ",
       "revId": "c19609d4a53a5ab067af6772189094e3326b4380",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

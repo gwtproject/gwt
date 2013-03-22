@@ -34,6 +34,7 @@ import org.eclipse.jdt.internal.compiler.Compiler;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.Block;
 import org.eclipse.jdt.internal.compiler.ast.Clinit;
@@ -62,8 +63,10 @@ import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding;
+import org.eclipse.jdt.internal.compiler.parser.Parser;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
+import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -225,6 +228,105 @@ public class JdtCompiler {
     }
   }
 
+  /**
+   * ParserImpl intercepts parsing of the source to get rid of methods and fields annotated with
+   * a *.GwtIncompatible annotation.
+   */
+  private class ParserImpl extends Parser {
+    public ParserImpl(ProblemReporter problemReporter, boolean optimizeStringLiterals) {
+      super(problemReporter, optimizeStringLiterals);
+    }
+
+    private boolean hasGwtIncompatibleAnnotation(Annotation[] annotations) {
+      if (annotations == null) {
+        return false;
+      }
+      for (Annotation ann : annotations) {
+        String typeName = new String(ann.type.getLastToken());
+        if (typeName.equals("GwtIncompatible")) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    private TypeDeclaration[] stripGwtIncompatibleTypes(TypeDeclaration[] types) {
+      List<TypeDeclaration> newTypeDecls = new ArrayList<TypeDeclaration>();
+      for (TypeDeclaration tyDecl : types) {
+        if (!hasGwtIncompatibleAnnotation(tyDecl.annotations)) {
+          newTypeDecls.add(tyDecl);
+          tyDecl.memberTypes = stripGwtIncompatibleElements(tyDecl.memberTypes);
+        }
+      }
+
+      if (newTypeDecls.size() != types.length) {
+        return newTypeDecls.toArray(new TypeDeclaration[newTypeDecls.size()]);
+      } else {
+        return types;
+      }
+    }
+
+    private void stripGwtIncompatibleMethods(TypeDeclaration[] types) {
+      for (TypeDeclaration tyDecl : types) {
+
+        if (tyDecl.methods == null) {
+          continue;
+        }
+
+        List<AbstractMethodDeclaration> newMethods = new ArrayList<AbstractMethodDeclaration>();
+        for (AbstractMethodDeclaration methodDecl : tyDecl.methods) {
+           if (!hasGwtIncompatibleAnnotation(methodDecl.annotations)) {
+            newMethods.add(methodDecl);
+          }
+        }
+
+        if (newMethods.size() != tyDecl.methods.length) {
+          tyDecl.methods = newMethods.toArray(new AbstractMethodDeclaration[newMethods.size()]);
+        }
+      }
+    }
+
+    private void stripGwtIncompatibleFields(TypeDeclaration[] types) {
+      for (TypeDeclaration tyDecl : types) {
+        if (tyDecl.fields == null) {
+          continue;
+        }
+
+        List<FieldDeclaration> newFields = new ArrayList<FieldDeclaration>();
+        for (FieldDeclaration fieldDecl : tyDecl.fields) {
+          if (!hasGwtIncompatibleAnnotation(fieldDecl.annotations)) {
+            newFields.add(fieldDecl);
+          }
+        }
+
+        if (newFields.size() != tyDecl.fields.length) {
+          tyDecl.fields = newFields.toArray(new FieldDeclaration[newFields.size()]);
+        }
+      }
+    }
+
+    private TypeDeclaration[] stripGwtIncompatibleElements(TypeDeclaration[] types) {
+      if (types == null) {
+        return types;
+      }
+
+      types = stripGwtIncompatibleTypes(types);
+      stripGwtIncompatibleMethods(types);
+      stripGwtIncompatibleFields(types);
+      return types;
+    }
+
+
+    @Override
+    public CompilationUnitDeclaration parse(ICompilationUnit sourceUnit,
+        CompilationResult compilationResult) {
+      CompilationUnitDeclaration decl = super.parse(sourceUnit, compilationResult);
+      decl.types = stripGwtIncompatibleElements(decl.types);
+      return decl;
+    }
+  }
+
+
   private class CompilerImpl extends Compiler {
     private TreeLogger logger;
     private int abortCount = 0;
@@ -248,6 +350,14 @@ public class JdtCompiler {
       // in confusing errors later if we don't catch and handle it.
       throw abortException;
     }
+
+
+    @Override
+    public void initializeParser() {
+      this.parser = new ParserImpl(this.problemReporter,
+          this.options.parseLiteralExpressionsAsConstants);
+    }
+
 
     @Override
     public void process(CompilationUnitDeclaration cud, int i) {

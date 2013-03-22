@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SbpewRtM",
+        "filename": "user/src/com/google/gwt/core/shared/GwtIncompatible.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-22T19:11:04Z",
+      "side": 1,
+      "message": "\"example\"",
+      "revId": "eac8f59c04c6efc4ca616c96dc95867672b8e784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

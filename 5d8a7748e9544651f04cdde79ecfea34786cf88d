@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ScFK8FPk",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T09:53:39Z",
+      "side": 1,
+      "message": "Could you reference issue 3769 in the commit message?\n\nI reopened it and assigned it to you.",
+      "revId": "5d8a7748e9544651f04cdde79ecfea34786cf88d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ScHI0uLc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T09:53:39Z",
+      "side": 1,
+      "message": "Maybe this should rather say \"any annotation named GwtIncompatible\"?\n\nI don\u0027t expect many people to read the commit history, but I originally thought you were adding a GwtIncompatible annotation, then saw it was only in dev/core/test and eventually only understood by looking at the other changes in the patch.",
+      "revId": "5d8a7748e9544651f04cdde79ecfea34786cf88d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SVytx.fE",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 2
@@ -115,6 +149,23 @@
       "writtenOn": "2013-03-22T03:09:52Z",
       "side": 1,
       "message": "We will need to explain how GwtIncompatible works somewhere that shows up in GWT\u0027s external javadoc, and it won\u0027t here because this is test code. So I think maybe we should put a copy of this class under com.google.gwt.core.shared in the user package.\n\nIn this class we can say:\n\nA GwtIncompatible annotation for use in a test.\n@see com.google.gwt.core.shared.GwtIncompatible",
+      "revId": "5d8a7748e9544651f04cdde79ecfea34786cf88d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ScLKyoB8",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/GwtIncompatible.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-22T09:53:39Z",
+      "side": 1,
+      "message": "Link should be developers.google.com, and as we\u0027re in the process of removing the \"Google\" word from GWT, maybe just make the link text \"GWT\" rather than \"Google Web Toolkit\" (we\u0027ll have to revisit all the code though, so no big deal)",
       "revId": "5d8a7748e9544651f04cdde79ecfea34786cf88d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

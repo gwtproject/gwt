@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ScLiZobs",
+        "filename": "dev/core/test/com/google/gwt/dev/util/log/speedtracer/SpeedTracerLoggerDashboardEnabledTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-23T09:13:33Z",
+      "side": 1,
+      "message": "Does it mean you are running each TestCase (or TestSuite?) in its own VM/ClassLoader? (this is to tune the settings of the Maven build)",
+      "revId": "a1d09ef4dfb3a8b6f0ffa8231ff9be75de09571a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "65c548f718b2de684b7199e8f59abf7337a4cba6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sjvc.eso",
+        "filename": "user/src/com/google/gwt/core/shared/GwtIncompatible.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-25T19:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SjncoKpU",
+      "revId": "65c548f718b2de684b7199e8f59abf7337a4cba6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

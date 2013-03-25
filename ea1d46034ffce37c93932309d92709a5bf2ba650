@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SjlQ0DAQ",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-25T22:47:08Z",
+      "side": 1,
+      "message": "Also check \u003c\u003d 65535?",
+      "revId": "ea1d46034ffce37c93932309d92709a5bf2ba650",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SjlQb7Io",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-25T22:47:08Z",
+      "side": 1,
+      "message": "Maybe \"expected integer between 0 and 65535 but got\"?",
+      "revId": "ea1d46034ffce37c93932309d92709a5bf2ba650",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

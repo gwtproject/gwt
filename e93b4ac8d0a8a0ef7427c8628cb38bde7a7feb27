@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SoCK2DuU",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-26T20:18:19Z",
+      "side": 1,
+      "message": "If you don\u0027t use constants for these numbers, then it will be difficult for reader to understand which number is for which one and also what are the units (e.g. is it seconds or milliseconds?).",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SoOKSZko",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-26T20:18:19Z",
+      "side": 1,
+      "message": "Can you document the unit for the timeouts? I think even renaming fields/parameters is ok (e.g. connectionTimeoutInMs).",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SoEKzEvQ",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-26T20:18:19Z",
+      "side": 1,
+      "message": "nit: perhaps you might want to keep the first letter upper case in log messages.",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

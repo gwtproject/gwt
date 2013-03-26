@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Sk9VqTMg",
+        "filename": "user/src/com/google/gwt/user/server/rpc/DefaultSerializationPolicyClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done (as a constant for the whole configuration)",
+      "parentUuid": "Sk3LV9gQ",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk5LPOno",
         "filename": "user/src/com/google/gwt/user/server/rpc/DefaultSerializationPolicyClient.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "You may want to document why we don\u0027t want to follow redirects.",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk7VfyCA",
+        "filename": "user/src/com/google/gwt/user/server/rpc/DefaultSerializationPolicyClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk5LPOno",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Sk5VkxPk",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk9L7grE",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk7IX3v8",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "You may want to add that the value is provided from \"gwt.codeserver.port\" system property.",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SkxVR9A4",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "The comments are getting a bit repetitive so I\u0027ll leave that as a usage search.",
+      "parentUuid": "Sk7IX3v8",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Sk3Wd4KU",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk-L2hsk",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk-KnprY",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "no policy is found -\u003e no policy is found or loading of the policy fails",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk7VpCMU",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk-KnprY",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "Sk5VuBMk",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SkzL1Lrg",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SkzK2TuU",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "It may be safer to fall through only if the serialization policy is not found (like you documented)\nor \nperhaps we should always be loading from code server client if the code server client URL is not null?",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk9Xf7Fg",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "If we attempt to use the code server and it\u0027s not running, there will be a delay until it times out. This shouldn\u0027t happen for normal requests, so it\u0027s better to check locally for a serialization policy first.\n\nI wouldn\u0027t mind falling back to the code server only when the policy isn\u0027t found, but that would require changing the API on the loadSerializationPolicy() method and I don\u0027t think I want to do that quite yet.",
+      "parentUuid": "SkzK2TuU",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "Sk7W7SAE",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk3LrtuI",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk5IF.tI",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "nit: {@code} is preferred style over \u0027\u003ctt\u003e\u0027 in javadoc.",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk3XPIKo",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk5IF.tI",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "Sk3W2ABg",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk1LosuM",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk-LAxk0",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -206,6 +404,24 @@
     },
     {
       "key": {
+        "uuid": "SkzWweBc",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "I wanted to make it possible to use a code server that\u0027s not on localhost without making it too easy (since there are security implications). Added javadoc.",
+      "parentUuid": "Sk-LAxk0",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk9LFwls",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2
@@ -217,6 +433,24 @@
       "writtenOn": "2013-03-26T04:06:41Z",
       "side": 1,
       "message": "Instead of introducing new public interfaces and this method we may be better off putting following \u0027protected\u0027 method that can be overridden for customization:\n\nprotected SerializationPolicy readPolicyFromCodeServer(String strongName) {\n  String url \u003d getCodeServerPolicyUrl(strongName));\n  return url \u003d\u003d null ? null : return new DefaultSerializationPolicyClient().loadPolicy(url);\n}\n\n(or something similar)\n\nWhat is the exact use case we are covering here by letting the client implementation to be replaced?\n\nIf use cases are not mature, it is better keep these private and then think about it again after it gets mature.",
+      "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SkxVXtNQ",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T19:26:07Z",
+      "side": 1,
+      "message": "Simplified. I was thinking of reusing the HTTP client for google3-specific code that doesn\u0027t use RemoteServiceServlet, but that can wait for another CL.",
+      "parentUuid": "Sk9LFwls",
       "revId": "2cdddc0a82676c70a5ea804cf4577e86c85a4005",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

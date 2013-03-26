@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Sk3UeAH0",
+        "filename": "user/src/com/google/gwt/logging/impl/StackTracePrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T22:03:37Z",
+      "side": 1,
+      "message": "This class is a bit confusing because it extends PrintStream but it\u0027s not a general-purpose PrintStream. It doesn\u0027t seem like a great API. Perhaps instead, we could stop calling Throwable.printStackTrace() and instead write a different utility method:\n\n  void appendStackTrace(Throwable t, StringBuilder out);\n\nThe implementation can use getStackTrace() and avoid using a PrintStream at all.",
+      "revId": "c0f0221434d45ca04e901a27426792dfc81fa7ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

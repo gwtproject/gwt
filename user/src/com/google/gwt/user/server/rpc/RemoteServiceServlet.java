@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,10 +39,12 @@ import javax.servlet.http.HttpServletResponse;
  * outgoing responses for client/server RPCs.
  */
 public class RemoteServiceServlet extends AbstractRemoteServiceServlet
-    implements SerializationPolicyProvider {
+    implements SerializationPolicyProvider, DefaultSerializationPolicyClient.Logger {
 
   /**
-   * Used by HybridServiceServlet.
+   * Loads a serialization policy stored as a servlet resource in the same
+   * ServletContext as this servlet. Returns null if not found.
+   * (Used by HybridServiceServlet.)
    */
   static SerializationPolicy loadSerializationPolicy(HttpServlet servlet,
       HttpServletRequest request, String moduleBaseURL, String strongName) {
@@ -128,6 +131,13 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   private final Object delegate;
 
   /**
+   * The HTTP port of a Super Dev Mode code server running on localhost where this servlet will
+   * download serialization policies. (If set to zero, this feature is disabled and no download
+   * will be attempted.)
+   */
+  private int codeServerPort = 0;
+
+  /**
    * The default constructor used by service implementations that
    * extend this class.  The servlet will delegate AJAX requests to
    * the appropriate method in the subclass.
@@ -143,6 +153,45 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    */
   public RemoteServiceServlet(Object delegate) {
     this.delegate = delegate;
+  }
+
+  /***
+   * Overridden to load the gwt.codeserver.port parameter.
+   */
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+    codeServerPort = getCodeServerPort(config);
+  }
+
+  /**
+   * Returns the port that will be used to connect to the Super Dev Mode code server, or
+   * zero if this feature is disabled. Called at servlet initialization.
+   *
+   * <p>By default, returns the value of the gwt.codeserver.port system property.</p>
+   *
+   * @throws ServletException if the configuration is invalid.
+   */
+  private int getCodeServerPort(ServletConfig config) throws ServletException {
+    String value = System.getProperty("gwt.codeserver.port");
+    if (value == null) {
+      return 0;
+    }
+
+    try {
+      int port = Integer.parseInt(value);
+      if (port >= 0 && port < 65536) {
+        return port;
+      }
+      // invalid because negative; fall through
+
+    } catch (NumberFormatException e) {
+      // fall through
+    }
+
+    // Fail loudly so that that a configuration error will be noticed.
+    throw new ServletException("Invalid value of gwt.codeserver.port system property;"
+        + " expected an integer in the range [1-65535] but got: " + value);
   }
 
   public final SerializationPolicy getSerializationPolicy(String moduleBaseURL,
@@ -275,22 +324,64 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   }
 
   /**
-   * Gets the {@link SerializationPolicy} for given module base URL and strong
-   * name if there is one.
+   * Loads the {@link SerializationPolicy} for given module base URL and strong name.
+   * Returns the policy if successful or null if not found. Due to caching, this method
+   * will only be called once for each combination of moduleBaseURL and strongName.</p>
+   *
+   * <p>The default implementation loads serialization policies stored as servlet resources
+   * in the same ServletContext as this servlet. If no policy is found, it then attempts to
+   * load the policy from the URL returned by {@link #getCodeServerPolicyUrl}.</p>
    * 
-   * Override this method to provide a {@link SerializationPolicy} using an
-   * alternative approach.
+   * <p>Override this method to load the {@link SerializationPolicy} using an
+   * alternative approach.</p>
    * 
    * @param request the HTTP request being serviced
    * @param moduleBaseURL as specified in the incoming payload
    * @param strongName a strong name that uniquely identifies a serialization
    *          policy file
-   * @return a {@link SerializationPolicy} for the given module base URL and
-   *         strong name, or <code>null</code> if there is none
    */
   protected SerializationPolicy doGetSerializationPolicy(
       HttpServletRequest request, String moduleBaseURL, String strongName) {
-    return loadSerializationPolicy(this, request, moduleBaseURL, strongName);
+
+    SerializationPolicy policy =
+        RemoteServiceServlet.loadSerializationPolicy(this, request, moduleBaseURL, strongName);
+    if (policy != null) {
+      return policy;
+    }
+
+    String url = getCodeServerPolicyUrl(strongName);
+    if (url != null) {
+      return getCodeServerClient().loadPolicy(url, this);
+    }
+
+    return null;
+  }
+
+  /**
+   * Returns the URL for fetching a serialization policy from a Super Dev Mode server.
+   *
+   * <p>By default, returns null. If the <i>gwt.codeserver.port</i> servlet parameter is set,
+   * returns a URL under <tt>http://localhost:{port}</tt>.</p>
+   *
+   * @param strongName the strong name from the GWT-RPC request (already validated).
+   * @return the policy, or null if not available.
+   */
+  protected String getCodeServerPolicyUrl(String strongName) {
+    if (codeServerPort <= 0) {
+      return null;
+    }
+    return "http://localhost:" + codeServerPort + "/policies/" + strongName + ".gwt.rpc";
+  }
+
+  /**
+   * Returns a client for downloading a serialization policy from a Super Dev Mode server.
+   * (Not used unless {@link #getCodeServerPolicyUrl} returns a URL.)
+   *
+   * <p>The default version is a naive implementation built on java.net.URL that does
+   * no authentication. It should only be used during development.</p>
+   */
+  protected SerializationPolicyClient getCodeServerClient() {
+    return new DefaultSerializationPolicyClient();
   }
 
   /**

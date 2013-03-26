@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Sk-WK8NQ",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T21:05:54Z",
+      "side": 1,
+      "message": "Documented the constructor. (I think it\u0027s not too bad since there are only two parameters.)",
+      "parentUuid": "SoCK2DuU",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SoOKSZko",
         "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "Sk5WZZC4",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T21:05:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SoOKSZko",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SoEKzEvQ",
         "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-26T20:18:19Z",
       "side": 1,
       "message": "nit: perhaps you might want to keep the first letter upper case in log messages.",
+      "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SkxWGlMk",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicyClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-26T21:05:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SoEKzEvQ",
       "revId": "e93b4ac8d0a8a0ef7427c8628cb38bde7a7feb27",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

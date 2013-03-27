@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Sk15XmQU",
+        "filename": "user/test/com/google/gwt/user/client/rpc/LoggingRPCTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T21:19:08Z",
+      "side": 1,
+      "message": "How about calling reportUncaughtException()? It will go there anyway but calling it directly means we don\u0027t have to wrap the exception. (Similarly below.)",
+      "revId": "d5abd3332caa5e510ceabee68a49f0e0ba125bea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

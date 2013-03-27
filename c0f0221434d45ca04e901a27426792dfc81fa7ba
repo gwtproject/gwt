@@ -16,6 +16,24 @@
       "revId": "c0f0221434d45ca04e901a27426792dfc81fa7ba",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sr9NltPg",
+        "filename": "user/src/com/google/gwt/logging/impl/StackTracePrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-27T04:41:21Z",
+      "side": 1,
+      "message": "Throwable#printStackTrace is already the established way of printing formatted stack traces in java and ideally we should not replicate that (on dev mode this provides even fancier printing by detecting duplicate stack trace items).\nAlso this approach works well with different formatting styles to handle new lines and tabs.\nAlso note that, this is not a public API so it didn\u0027t make sense to me to implement the full PrintStream API for internal use case and I put some tests in place that will fail if the contract changes.",
+      "parentUuid": "Sk3UeAH0",
+      "revId": "c0f0221434d45ca04e901a27426792dfc81fa7ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SkziRjUA",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T01:57:10Z",
+      "side": 1,
+      "message": "We\u0027re only checking for two exceptions, so it seems like this could be made simpler by adding some methods to JUnitResult:\n\nif (result.isAnyException() \u0026\u0026 !result.isException(JUnitFatalLaunchException.class) \u0026\u0026\n!result.isException(Error.class)) {\n  return true;\n}\n\n(The second method can be marked @GwtIncompatible)",
+      "revId": "0c2431735b2143d3c17bfebb3a6cd0503fa6c2b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Skxi4Cbc",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T01:57:10Z",
+      "side": 1,
+      "message": "Similarly this could be:\nAssertionFailedError error \u003d result.getAssertionFailedError();\nif (error !\u003d null) {\n  testResult.addFailure(testCase, error);\n}",
+      "revId": "0c2431735b2143d3c17bfebb3a6cd0503fa6c2b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk3jYNRc",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T01:57:10Z",
+      "side": 1,
+      "message": "\"deobfuscate\"",
+      "revId": "0c2431735b2143d3c17bfebb3a6cd0503fa6c2b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk7jHvek",
+        "filename": "user/test/com/google/gwt/junit/client/ExpectedFailure.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T01:57:10Z",
+      "side": 1,
+      "message": "I think we should explain this better because it\u0027s not obvious what\u0027s going on. The reason we don\u0027t just write a try...catch block in the test itself is because we want to check the exception in server-side code (after it\u0027s transmitted back to the JVM). I think that\u0027s a good test of exception serialization but we should say what we\u0027re doing.\n\nAlso, I wonder if @GwtIncompatible on DefaultExceptionAsserter would simplify this code at all?",
+      "revId": "0c2431735b2143d3c17bfebb3a6cd0503fa6c2b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk3jCddo",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseStackTraceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-27T01:57:10Z",
+      "side": 1,
+      "message": "Add comment:\n  // the next line should be LINE_NUMBER_1\n  throw new AssertionFailedError(...);",
+      "revId": "0c2431735b2143d3c17bfebb3a6cd0503fa6c2b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

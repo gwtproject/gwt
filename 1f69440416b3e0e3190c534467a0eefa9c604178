@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "SlHWzlyY",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SlwDEFDY",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk4TYFBg",
         "filename": "dev/build.xml",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2013-03-28T22:38:56Z",
       "side": 1,
       "message": "I don\u0027t think these \"extracted from\" comments add any value, so I\u0027d just omit it.  It would be more useful to mention them in the tools/eclipse/README file.",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SwaHfXlk",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk4TYFBg",
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "SwYHZenM",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "I am not sure. It is inside the jdt.core jar as a jar file. By having it extracted its contents will be included.",
+      "parentUuid": "Sl.DI6E0",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SkwTvhLI",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1
@@ -106,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "SwcFvAsg",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "Java 7 now has different signatures for inner classes when the outer class is generic. E.g. for\n\nclass Outer\u003cA\u003e {  \n  class Inner {\n  }\n}\n\nthe signature used to by L...Outer$Inner and now is L...Outer\u003cTA;\u003e.Inner\n\nMy mistake it does not apply to binary class names. Reverted.",
+      "parentUuid": "SkwTvhLI",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk8T4XHc",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1
@@ -117,6 +189,24 @@
       "writtenOn": "2013-03-28T22:38:56Z",
       "side": 1,
       "message": "I\u0027d break this into two assignments.",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SwaF0fpk",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sk8T4XHc",
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -188,6 +278,24 @@
       "side": 1,
       "message": "I agree with Thomas.  We should benchmark if it doesn\u0027t make a measurable difference, we should get rid of the customization if that\u0027s the only reason for us to have this file.\n\nI expect by now more time has been spent optimizing the JDK\u0027s HashMap than has been spent on com.google.gwt.dev.util.collect.HashMap. :)",
       "parentUuid": "Sk2QHcJA",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SwcHBwnk",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T23:42:32Z",
+      "side": 1,
+      "message": "I\u0027ll run some experiments and let you know the results.",
+      "parentUuid": "SkyQBaHk",
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

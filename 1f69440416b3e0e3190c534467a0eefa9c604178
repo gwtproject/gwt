@@ -120,6 +120,24 @@
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SkyQBaHk",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:41:17Z",
+      "side": 1,
+      "message": "I agree with Thomas.  We should benchmark if it doesn\u0027t make a measurable difference, we should get rid of the customization if that\u0027s the only reason for us to have this file.\n\nI expect by now more time has been spent optimizing the JDK\u0027s HashMap than has been spent on com.google.gwt.dev.util.collect.HashMap. :)",
+      "parentUuid": "Sk2QHcJA",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

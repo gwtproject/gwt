@@ -53,6 +53,18 @@ public class JavaSourceParser {
     return type;
   }
 
+  private static int separatorIdx(String str) {
+    int idxDollar = str.indexOf('$');
+    int idxDot = str.indexOf('.');
+    if (idxDollar < 0) {
+      return idxDot;
+    } else if (idxDot < 0) {
+      return idxDollar;
+    }
+
+    return Math.min(idxDot, idxDollar);
+  }
+
   /**
    * Spits a binary name into a series of char arrays, corresponding to
    * enclosing classes.
@@ -69,7 +81,7 @@ public class JavaSourceParser {
     ArrayList<char[]> result = new ArrayList<char[]>();
     String className = BinaryName.getClassName(binaryName);
     int idx;
-    while ((idx = className.indexOf('$')) >= 0) {
+    while ((idx = separatorIdx(className)) >= 0) {
       result.add(className.substring(0, idx).toCharArray());
       className = className.substring(idx + 1);
     }
@@ -178,10 +190,10 @@ public class JavaSourceParser {
    * @return a CompilationUnitDeclaration or null if parsing failed
    */
   private static CompilationUnitDeclaration parseJava(String javaSource) {
-    CodeSnippetParsingUtil parsingUtil = new CodeSnippetParsingUtil();
+    CodeSnippetParsingUtil parsingUtil = new CodeSnippetParsingUtil(true);
     CompilerOptions options = new CompilerOptions();
-    options.complianceLevel = ClassFileConstants.JDK1_5;
-    options.sourceLevel = ClassFileConstants.JDK1_5;
+    options.complianceLevel = ClassFileConstants.JDK1_6;
+    options.originalSourceLevel = options.sourceLevel = ClassFileConstants.JDK1_6;
     CompilationUnitDeclaration unit = parsingUtil.parseCompilationUnit(
         javaSource.toString().toCharArray(), options.getMap(), true);
     if (unit.compilationResult().hasProblems()) {

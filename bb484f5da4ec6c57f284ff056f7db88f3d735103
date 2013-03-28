@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Sl4DYBBg",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/RequestFactoryGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-28T23:38:48Z",
+      "side": 1,
+      "message": "Can we make this more readable with one argument per line (stick a \"//\" at the end of the lines to prevent auto-format from messing with it if you like)",
+      "revId": "bb484f5da4ec6c57f284ff056f7db88f3d735103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sl2DVGNw",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/AbstractRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-28T23:38:48Z",
+      "side": 1,
+      "message": "What do you think about introducing a new:\n\n  class AbstractInstanceRequest\u003cP extends BaseProxy, T\u003e extends AbstractRequest\u003cT\u003e implements InstanceRequest\u003cP, T\u003e\n\n?",
+      "revId": "bb484f5da4ec6c57f284ff056f7db88f3d735103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

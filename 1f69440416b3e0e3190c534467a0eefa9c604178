@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Sk8S9-KU",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-03-28T22:28:47Z",
+      "side": 1,
+      "message": "Is it worth to have a version of this file only to change the HashMap class used?",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

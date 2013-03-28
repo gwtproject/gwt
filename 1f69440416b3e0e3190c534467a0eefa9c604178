@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "Sk4QKVJg",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:38:56Z",
+      "side": 1,
+      "message": "Can you elaborate on what this issue is?  E.g., what\u0027s an example generated class and its type hierarchy that causes the error?\n\nAlso, is this something we could split into a separate commit, or does it need to happen simultaneously with the JDT bump?",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk4TYFBg",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:38:56Z",
+      "side": 1,
+      "message": "I don\u0027t think these \"extracted from\" comments add any value, so I\u0027d just omit it.  It would be more useful to mention them in the tools/eclipse/README file.",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SkwTvhLI",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:38:56Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this change?  Doesn\u0027t BinaryName.getClassName() already skip over all dots anyway, so the only separator characters left will be $?",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk8T4XHc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:38:56Z",
+      "side": 1,
+      "message": "I\u0027d break this into two assignments.",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk8S9-KU",
         "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.java",
         "patchSetId": 1
@@ -30,6 +98,24 @@
       "writtenOn": "2013-03-28T22:38:10Z",
       "side": 1,
       "message": "AFAICT, it used to be; c.g.g.dev.util.collect.HashMap being more memory-efficient thatn java.util.HashMap. But maybe this is no longer the case with newer JDKs…\n\nI suppose you can track memory utilization of the various Google builds and check whether it makes a significant difference?\n\n(it would be great if we could get rid of \"customizations\" on our dependencies)",
+      "parentUuid": "Sk8S9-KU",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sk2QHcJA",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T22:38:56Z",
+      "side": 1,
+      "message": "In my opinion, no. :)",
       "parentUuid": "Sk8S9-KU",
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

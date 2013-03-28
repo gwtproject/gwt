@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "SlyDPEFA",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-28T23:58:48Z",
+      "side": 1,
+      "message": "Oh, it\u0027s a JAR within a JAR? OK then.",
+      "parentUuid": "SwYHZenM",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SkwTvhLI",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1

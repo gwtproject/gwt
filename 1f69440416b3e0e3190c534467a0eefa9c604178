@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "SwSElDrs",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-03-28T23:03:07Z",
+      "side": 1,
+      "message": "I think I\u0027m getting lost in the generics, but it sounds like you understand and agree with the change. :)\n\nMy only concern then is whether this change could break user code somehow, but it sounds like it\u0027s technically wrong already.\n\nRoberto, can you split the RequestFactory changes into a separate CL/review that we land first?",
+      "parentUuid": "SlwDEFDY",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk4TYFBg",
         "filename": "dev/build.xml",
         "patchSetId": 1

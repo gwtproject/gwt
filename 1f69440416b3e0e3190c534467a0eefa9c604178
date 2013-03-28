@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "SlwDEFDY",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-28T22:57:10Z",
+      "side": 1,
+      "message": "\u003e Can you elaborate on what this issue is? E.g., what\u0027s an example generated class and its type hierarchy that causes the error?\n\nThe RequestFactoryGenerator can generate a class that\n\n  extends AbstractRequest\u003cFooProxy\u003e implements InstanceRequest\u003cBarProxy, FooProxy\u003e\n\nbut AbstractRequest\u003cX\u003e already `implements InstanceRequest\u003cBaseProxy, X\u003e` ; the type arguments of InstanceRequest are conflicting.\n\nThe change here is to add a type argument to AbstractRequest:\n\n   AbstractRequest\u003cP extends BaseProxy, X\u003e … implements InstanceRequest\u003cP, X\u003e\n\n\u003e Also, is this something we could split into a separate commit, or does it need to happen simultaneously with the JDT bump?\n\nIt can be split in its own change (and should, IMO)",
+      "parentUuid": "Sk4QKVJg",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sk4TYFBg",
         "filename": "dev/build.xml",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2013-03-28T22:38:56Z",
       "side": 1,
       "message": "I don\u0027t think these \"extracted from\" comments add any value, so I\u0027d just omit it.  It would be more useful to mention them in the tools/eclipse/README file.",
+      "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sl.DI6E0",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-03-28T22:57:10Z",
+      "side": 1,
+      "message": "Is this needed if the org.eclipse.jdt.core that jdtCompilerAdapter is extracted from is already in there? (the line above)",
       "revId": "1f69440416b3e0e3190c534467a0eefa9c604178",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

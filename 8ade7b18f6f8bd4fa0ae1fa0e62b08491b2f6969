@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "SxZ3fI1o",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "\"duplicate\"",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "SwYHSGvM",
         "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
         "patchSetId": 2
@@ -13,6 +30,125 @@
       "writtenOn": "2013-03-29T01:10:15Z",
       "side": 1,
       "message": "I named this isExceptionOf but can change it to isException if that reads better.",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxX2nt-o",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "At first I misread this as saying that the obfuscated stack trace follows, but actually it\u0027s the exception that we got while attempting to deobfuscate a stack trace.\n\nTo clear this up, how about:\n\"Unable to deobfuscate a stack trace due to an error:\"",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxV2ke-Q",
+        "filename": "user/test/com/google/gwt/junit/TestResultWithExpectedFailures.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "\"Actual exception\" seems clearer than \"Asserted exception\"\n\ns/cause by/caused by/",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxX1.l3Y",
+        "filename": "user/test/com/google/gwt/junit/client/DefaultExceptionAsserter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "s/throwable/actual/",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxV1724Q",
+        "filename": "user/test/com/google/gwt/junit/client/DefaultExceptionAsserter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "add a message:\n\"The test threw an exception without the expected message\"",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxT2ED0s",
+        "filename": "user/test/com/google/gwt/junit/client/ExceptionAsserter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "\"ExceptionChecker\" seems like a better name?",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SxR2BUzs",
+        "filename": "user/test/com/google/gwt/junit/client/ExceptionAsserter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "This could be called \"check\" and the first argument could be \"actual\":\n\nvoid check(Throwable actual, ExpectedFailure annotation);\n\nBut by analogy with assertEquals(), perhaps the expected part should come first and the actual part second:\n\nvoid check(ExpectedFailure annotation, Throwable actual);",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sxb3a32k",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-03-29T05:50:08Z",
+      "side": 1,
+      "message": "s/loose/lose/",
       "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

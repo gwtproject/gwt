@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "SwYHSGvM",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-29T01:10:15Z",
+      "side": 1,
+      "message": "I named this isExceptionOf but can change it to isException if that reads better.",
+      "revId": "8ade7b18f6f8bd4fa0ae1fa0e62b08491b2f6969",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

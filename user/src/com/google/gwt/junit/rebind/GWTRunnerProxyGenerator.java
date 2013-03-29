@@ -33,12 +33,12 @@ import com.google.gwt.junit.client.GWTTestCase.TestModuleInfo;
 import com.google.gwt.junit.client.impl.GWTRunnerProxy;
 import com.google.gwt.junit.client.impl.GWTRunnerProxy.JsniTestAccessor;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
+import com.google.gwt.junit.client.impl.MissingTestPlaceHolder;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,6 +54,7 @@ public class GWTRunnerProxyGenerator extends Generator {
 
   private static final String PROXY = GWTRunnerProxy.class.getCanonicalName();
   private static final String JSNI_TEST_ACCESSOR = JsniTestAccessor.class.getCanonicalName();
+  private static final String MISSING_TEST = MissingTestPlaceHolder.class.getCanonicalName();
 
   private static final JType[] NO_PARAMS = new JType[0];
 
@@ -113,7 +114,12 @@ public class GWTRunnerProxyGenerator extends Generator {
     SourceWriter sourceWriter =
         getSourceWriter(logger, context, packageName, generatedBaseClass, null, null);
     if (sourceWriter != null) {
-      writeMethodCreateTestAccessor(sourceWriter, getTestClasses(logger, context, moduleName));
+      TestModuleInfo moduleInfo = GWTTestCase.getTestsForModule(moduleName);
+      if (moduleInfo == null) {
+        logger.log(TreeLogger.ERROR, "No active tests found for module: " + moduleName);
+        throw new UnableToCompleteException();
+      }
+      writeMethodCreateTestAccessor(sourceWriter, context.getTypeOracle(), moduleInfo.getTests());
       sourceWriter.commit(logger);
     }
 
@@ -155,13 +161,15 @@ public class GWTRunnerProxyGenerator extends Generator {
    * }-{@literal*}/;
    * </pre>
    */
-  private void writeMethodCreateTestAccessor(SourceWriter sw, Set<JClassType> testClasses) {
+  private void writeMethodCreateTestAccessor(
+      SourceWriter sw, TypeOracle typeOracle, Set<TestInfo> tests) {
     sw.println("public native final %s createTestAccessor() /*-{", JSNI_TEST_ACCESSOR);
     sw.indent();
     sw.println("return {");
-    for (JClassType jClassType : testClasses) {
-      sw.println("'%s': {", jClassType.getQualifiedBinaryName());
-      writeFunctionMap(sw, jClassType);
+    for (TestInfo testInfo : tests) {
+      String testClass = testInfo.getTestClass();
+      sw.println("'%s': {", testClass);
+      writeFunctionMap(sw, getTestClass(typeOracle, testClass));
       sw.println("},");
     }
     sw.println("};");
@@ -190,31 +198,15 @@ public class GWTRunnerProxyGenerator extends Generator {
     sw.println("}");
   }
 
-  private Set<JClassType> getTestClasses(
-      TreeLogger logger, GeneratorContext context, String moduleName)
-      throws UnableToCompleteException {
-    // Check the global set of active tests for this module.
-    TestModuleInfo moduleInfo = GWTTestCase.getTestsForModule(moduleName);
-    Set<TestInfo> moduleTests = (moduleInfo == null) ? null : moduleInfo.getTests();
-    if (moduleTests == null || moduleTests.isEmpty()) {
-      logger.log(TreeLogger.ERROR, "No tests found in module: " + moduleName);
-      throw new UnableToCompleteException();
-    } else {
-      Set<JClassType> testClasses = new LinkedHashSet<JClassType>();
-      for (TestInfo testInfo : moduleTests) {
-        testClasses.add(context.getTypeOracle().findType(testInfo.getTestClass()));
-      }
-      return testClasses;
-    }
-  }
-
-  private JClassType[] getAllPossibleTestTypes(TypeOracle typeOracle) {
-    JClassType gwtTestType = typeOracle.findType(GWTTestCase.class.getName());
-    if (gwtTestType != null) {
-      return gwtTestType.getSubtypes();
-    } else {
-      return new JClassType[0];
-    }
+  /**
+   * Returns the test class. If the class is not found in {@link TypeOracle} a place holder is
+   * returned in order to continue code generation. If we don't continue code generation than we
+   * usually can't see the real cause of the compilation error in the logs. This also provides the
+   * benefit of continuing testing with rest of the test classes that still compile.
+   */
+  private JClassType getTestClass(TypeOracle typeOracle, String testClassName) {
+    JClassType type = typeOracle.findType(testClassName);
+    return type != null ? type : typeOracle.findType(MISSING_TEST);
   }
 
   private SourceWriter getSourceWriter(TreeLogger logger,

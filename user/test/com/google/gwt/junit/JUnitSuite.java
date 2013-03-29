@@ -17,6 +17,7 @@ package com.google.gwt.junit;
 
 import com.google.gwt.junit.client.DevModeOnCompiledScriptTest;
 import com.google.gwt.junit.client.GWTTestCaseAsyncTest;
+import com.google.gwt.junit.client.GWTTestCaseNotCompilingTest;
 import com.google.gwt.junit.client.GWTTestCaseSetupTearDownTest;
 import com.google.gwt.junit.client.GWTTestCaseStackTraceTest;
 import com.google.gwt.junit.client.GWTTestCaseTest;
@@ -49,6 +50,7 @@ public class JUnitSuite {
     suite.addTestSuite(GWTMockUtilitiesTest.class);
     suite.addTestSuite(JUnitMessageQueueTest.class);
     suite.addTestSuite(GWTTestCaseNoClientTest.class);
+    suite.addTestSuite(GWTTestCaseNotCompilingTest.class);
 
     // Intended only to be run manually. See class comments
     // suite.addTestSuite(ParallelRemoteTest.class);

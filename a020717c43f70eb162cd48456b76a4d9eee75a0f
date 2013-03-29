@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "SwUcBQhM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-29T20:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "SxT2dL6c",
+      "revId": "a020717c43f70eb162cd48456b76a4d9eee75a0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sxf2Sp5c",
         "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "SwWQVZFI",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-29T20:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Sxf2Sp5c",
+      "revId": "a020717c43f70eb162cd48456b76a4d9eee75a0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Sxd2X64U",
         "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-29T05:07:58Z",
       "side": 1,
       "message": "Is this okay to throw here? I thought generators were only supposed to throw UnableToCompleteException.",
+      "revId": "a020717c43f70eb162cd48456b76a4d9eee75a0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "SwQf3OhU",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-03-29T20:32:14Z",
+      "side": 1,
+      "message": "Yes, I should be throwing UnableToCompleteException. Too many context switches started to mass with my brain :)",
+      "parentUuid": "Sxd2X64U",
       "revId": "a020717c43f70eb162cd48456b76a4d9eee75a0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

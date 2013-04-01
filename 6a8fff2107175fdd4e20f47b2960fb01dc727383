@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "S145qO8c",
+        "filename": "user/src/com/google/gwt/junit/client/impl/MissingTestPlaceHolder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-01T19:40:01Z",
+      "side": 1,
+      "message": "Would it help to generate this code and include the name of the missing test class here? Or is the error message good enough already to figure it out?",
+      "revId": "6a8fff2107175fdd4e20f47b2960fb01dc727383",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

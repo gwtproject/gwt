@@ -16,6 +16,24 @@
       "revId": "6a8fff2107175fdd4e20f47b2960fb01dc727383",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "S146NG34",
+        "filename": "user/src/com/google/gwt/junit/client/impl/MissingTestPlaceHolder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-01T19:55:42Z",
+      "side": 1,
+      "message": "Throwing an exception here is same as throwing an exception in testXXX method. When this code is executed, it is executed for specific class/test method so the test system knows which one is failing. Also current test runner implementation already fails before reaching this code with a JUnitFatalException.",
+      "parentUuid": "S145qO8c",
+      "revId": "6a8fff2107175fdd4e20f47b2960fb01dc727383",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

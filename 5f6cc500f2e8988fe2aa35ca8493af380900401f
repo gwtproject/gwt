@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "S11FRFA4",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-01T22:34:28Z",
+      "side": 1,
+      "message": "No need for the extra parentheses around BrowserEvents.MOUSEMOVE.",
+      "revId": "5f6cc500f2e8988fe2aa35ca8493af380900401f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "S1zGESEs",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-01T22:34:28Z",
+      "side": 1,
+      "message": "Fix the spacing here (and below) please.  It should be \"if (evt.buttons) {\".",
+      "revId": "5f6cc500f2e8988fe2aa35ca8493af380900401f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

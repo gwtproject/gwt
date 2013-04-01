@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "S11GtlMA",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-01T22:43:04Z",
+      "side": 1,
+      "message": "In BaseListenerWrapper you said GWT 2.6.  Intentionally different, or typo?",
+      "revId": "c0ccd256aa4886c58332ba3b2ea8e9c22643083a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

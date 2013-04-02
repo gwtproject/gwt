@@ -16,8 +16,11 @@
 <!--                                                                        -->
 <module>
   <inherits name="com.google.gwt.core.Core" />
+  <inherits name="com.google.gwt.dom.DOM"/>
+  <inherits name="com.google.gwt.event.dom.DomEvent"/>
   <inherits name="com.google.gwt.regexp.RegExp"/>
   <inherits name="com.google.gwt.safehtml.SafeHtml"/>
+  <inherits name="com.google.gwt.user.HasText"/>
   <source path="" includes="client/,shared/" />
 
   <!-- Browser-sensitive code should use the 'locale' client property. -->

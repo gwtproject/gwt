@@ -1,5 +1,5 @@
 <!--                                                                        -->
-<!-- Copyright 2011 Google Inc.                                             -->
+<!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
 <!-- may not use this file except in compliance with the License. You may   -->
 <!-- may obtain a copy of the License at                                    -->
@@ -12,25 +12,11 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
+<!--                                                                        -->
+<!-- This module is typically inherited via com.google.gwt.editor.Editor    -->
+<!--                                                                        -->
 <module>
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.useragent.UserAgent" />
+  <inherits name="com.google.gwt.core.Core"/>
 
-  <!-- Define the Geolocation support property. -->
-  <define-property name="geolocationSupport" values="maybe,no" />
-
-  <!-- Set the property to maybe -->
-  <set-property name="geolocationSupport" value="maybe" />
-
-  <!-- Older browsers do not support Geolocation -->
-  <set-property name="geolocationSupport" value="no">
-    <any>
-      <when-property-is name="user.agent" value="ie6" />
-    </any>
-  </set-property>
-
-  <replace-with class="com.google.gwt.geolocation.client.Geolocation.GeolocationSupportDetectorNo">
-    <when-type-is class="com.google.gwt.geolocation.client.Geolocation.GeolocationSupportDetector" />
-    <when-property-is name="geolocationSupport" value="no" />
-  </replace-with>
+  <source path="client" includes="TakesValue.java"/>
 </module>

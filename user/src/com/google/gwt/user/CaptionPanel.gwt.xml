@@ -18,7 +18,9 @@
 <!--                                                                        -->
 <module>
   <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.useragent.UserAgent"/>
+
+  <source path="null"/>
 
   <!-- Mozilla has a different implementation to handle rendering issues -->
   <replace-with class="com.google.gwt.user.client.ui.CaptionPanel.CaptionPanelImplMozilla">

@@ -15,6 +15,7 @@
 <!-- GWT UI Binder support.                                                 -->
 <module>
   <inherits name="com.google.gwt.resources.Resources" />
+  <inherits name='com.google.gwt.user.UI'/>
 
   <source path="client"/>
   <source path="resources"/>

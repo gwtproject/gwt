@@ -16,6 +16,24 @@
       "revId": "c0ccd256aa4886c58332ba3b2ea8e9c22643083a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "S2sj9T2U",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListenerWrapper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-02T09:54:47Z",
+      "side": 1,
+      "message": "Initially used 2.6, then thought it\u0027d be useless (either we release 2.6 with the warning, which would thus be wrong, or we remove the class before 2.6 and nobody will ever see the warning –except people building from trunk|master but they don\u0027t care about GWT versions–), changed to 2.7, and forgot to \u0027git add\u0027 BaseListenerWrapper :-S\n\nI have a change to integrate to a downstream commit (split c.g.g.resources in 2 modules) so I was waiting for that before pushing the amended commit.",
+      "parentUuid": "S11GtlMA",
+      "revId": "c0ccd256aa4886c58332ba3b2ea8e9c22643083a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

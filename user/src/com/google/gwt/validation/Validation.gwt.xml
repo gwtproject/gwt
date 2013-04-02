@@ -15,7 +15,7 @@
   the License.
 -->
 <module>
-  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.i18n.I18N" />
   <inherits name="com.google.gwt.regexp.RegExp" />
   <inherits name="javax.validation.Validation" />
   <source path="client" />

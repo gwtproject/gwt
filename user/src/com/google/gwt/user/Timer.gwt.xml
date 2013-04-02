@@ -1,5 +1,5 @@
 <!--                                                                        -->
-<!-- Copyright 2008 Google Inc.                                             -->
+<!-- Copyright 2012 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
 <!-- may not use this file except in compliance with the License. You may   -->
 <!-- may obtain a copy of the License at                                    -->
@@ -18,30 +18,13 @@
 <!--                                                                        -->
 <module>
   <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.dom.DOM"/>
   <inherits name="com.google.gwt.event.logical.LogicalEvent"/>
-  <inherits name="com.google.gwt.http.HTTP"/>
-  <inherits name="com.google.gwt.useragent.UserAgent"/>
-  <inherits name="com.google.gwt.user.Cookies"/>
-  <!-- Needed by WindowImplIE -->
-  <inherits name="com.google.gwt.resources.ResourcesBase"/>
+  <inherits name="com.google.gwt.user.Window"/>
 
   <source path="client">
-    <include name="BaseListenerWrapper.java"/>
-    <include name="Window*.java"/>
-    <include name="impl/WindowImpl*.java"/>
+    <include name="Timer.java"/>
+    <include name="Command*.java"/>
+    <include name="DeferredCommand.java"/>
+    <include name="IncrementalCommand*.java"/>
   </source>
-
-  <replace-with class="com.google.gwt.user.client.impl.WindowImplMozilla">
-    <when-type-is class="com.google.gwt.user.client.impl.WindowImpl"/>
-    <when-property-is name="user.agent" value="gecko1_8"/>
-  </replace-with>
-  <replace-with class="com.google.gwt.user.client.impl.WindowImplIE">
-    <when-type-is class="com.google.gwt.user.client.impl.WindowImpl"/>
-    <any>
-      <when-property-is name="user.agent" value="ie6"/>
-      <when-property-is name="user.agent" value="ie8"/>
-      <when-property-is name="user.agent" value="ie9"/>
-    </any>
-  </replace-with>
 </module>

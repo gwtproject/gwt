@@ -15,4 +15,6 @@
 <!-- Adds debug ID support for UIObjects.                                   -->
 <module>
   <inherits name="com.google.gwt.debug.Debug"/>
+
+  <source path="null" />
 </module>

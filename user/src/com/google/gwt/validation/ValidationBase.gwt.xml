@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright 2011 Google Inc.
+  Copyright 2012 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +15,6 @@
   the License.
 -->
 <module>
-  <replace-with class="com.google.gwt.cell.client.TextButtonCell.DefaultAppearance">
-    <when-type-is class="com.google.gwt.cell.client.TextButtonCell.Appearance" />
-  </replace-with>
+  <!-- inherited by javax.validation.Validation, to implement javax.validation.Validation class -->
+  <source path="client" includes="impl/Validation.java" />
 </module>

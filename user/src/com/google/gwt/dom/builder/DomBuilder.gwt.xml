@@ -20,6 +20,7 @@
   <inherits name="com.google.gwt.core.Core"/>
   <inherits name="com.google.gwt.dom.DOM"/>
   <inherits name="com.google.gwt.safehtml.SafeHtml"/>
+  <inherits name="com.google.gwt.safecss.SafeCss"/>
 
   <!-- Default to string concatenation with inner HTML. -->
   <!-- TODO(jlabanca): Research performance using different methods.  -->

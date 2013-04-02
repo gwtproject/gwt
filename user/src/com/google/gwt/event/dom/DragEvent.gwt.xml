@@ -12,8 +12,6 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 <module>
-  <inherits name="com.google.gwt.user.User" />
-
   <!-- Define the support property -->
   <define-property name="dragEventSupport" values="maybe,no" />
 

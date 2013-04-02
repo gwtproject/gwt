@@ -15,11 +15,11 @@
 -->
 <module>
    <inherits name="com.google.gwt.aria.Aria"/>
-   <inherits name="com.google.gwt.user.User"/>
+   <inherits name="com.google.gwt.user.UI"/>
    <inherits name="com.google.gwt.cell.Cell"/>
    <inherits name="com.google.gwt.editor.Editor"/>
    <inherits name="com.google.gwt.view.View"/>
-   <inherits name="com.google.gwt.user.UserAgent"/>
+   <inherits name="com.google.gwt.useragent.UserAgent"/>
    <source path="client"/>
 
   <!-- Standard CellBasedWidgetImpl implementation. -->

@@ -12,11 +12,12 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<!-- Deferred binding rules for DocumentRootImpl implementation.            -->
 <!--                                                                        -->
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module>
-	<inherits name="com.google.gwt.core.Core"/>
-	<inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.user.DOM"/>
+
+  <source path="client" includes="impl/DocumentRootImpl.java" />
 </module>

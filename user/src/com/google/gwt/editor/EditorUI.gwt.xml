@@ -13,14 +13,9 @@
 
 <!-- Editor framework support -->
 <module>
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.event.EventBase" />
-  <inherits name="com.google.gwt.user.TakesValue" />
-  <inherits name="javax.validation.Validation" />
+  <inherits name="com.google.gwt.editor.Editor" />
+  <inherits name="com.google.gwt.editor.HasDataEditor" />
+  <inherits name="com.google.gwt.user.UI" />
 
-  <source path="client" skips="adapters/HasDataEditor.java"/>
-
-  <generate-with class="com.google.gwt.editor.rebind.SimpleBeanEditorDriverGenerator">
-    <when-type-assignable class="com.google.gwt.editor.client.SimpleBeanEditorDriver" />
-  </generate-with>
+  <source path="ui/client"/>
 </module>

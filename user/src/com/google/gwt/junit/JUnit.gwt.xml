@@ -17,7 +17,9 @@
 <!-- Do not inherit this module directly.  Running GWTTestCase under JUnit  -->
 <!-- will inherit this module automatically.                                -->
 <module>
-  <inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.user.Window"/>
+  <inherits name="com.google.gwt.user.Timer"/>
+  <inherits name="com.google.gwt.user.RemoteService"/>
   <inherits name="com.google.gwt.junit.JUnit3"/>
 
   <super-source path="translatable"/>

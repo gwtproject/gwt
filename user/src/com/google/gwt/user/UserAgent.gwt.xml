@@ -19,4 +19,6 @@
 <!--                                                                        -->
 <module>
   <inherits name="com.google.gwt.useragent.UserAgent"/>
+
+  <source path="null"/>
 </module>

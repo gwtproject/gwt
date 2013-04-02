@@ -19,7 +19,9 @@
 <module>
   <inherits name="com.google.gwt.core.Core"/>
   <inherits name="com.google.gwt.safehtml.SafeHtml"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.useragent.UserAgent"/>
+  <inherits name="com.google.gwt.canvas.dom.DOM"/>
+  <inherits name="com.google.gwt.media.dom.DOM"/>
 
   <replace-with class="com.google.gwt.dom.client.DOMImplOpera">
     <when-type-is class="com.google.gwt.dom.client.DOMImpl"/>

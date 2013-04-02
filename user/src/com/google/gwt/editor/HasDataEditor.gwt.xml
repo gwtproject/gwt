@@ -13,14 +13,8 @@
 
 <!-- Editor framework support -->
 <module>
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.event.EventBase" />
-  <inherits name="com.google.gwt.user.TakesValue" />
-  <inherits name="javax.validation.Validation" />
+  <inherits name="com.google.gwt.editor.Editor" />
+  <inherits name="com.google.gwt.view.View" />
 
-  <source path="client" skips="adapters/HasDataEditor.java"/>
-
-  <generate-with class="com.google.gwt.editor.rebind.SimpleBeanEditorDriverGenerator">
-    <when-type-assignable class="com.google.gwt.editor.client.SimpleBeanEditorDriver" />
-  </generate-with>
+  <source path="client" includes="adapters/HasDataEditor.java"/>
 </module>

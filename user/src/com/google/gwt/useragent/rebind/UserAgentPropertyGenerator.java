@@ -39,7 +39,7 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
    * class.
    */
   private static final List<String> VALID_VALUES = Arrays.asList(new String[]{
-      "ie6", "ie8", "gecko1_8", "safari", "opera", "ie9"});
+      "ie6", "ie8", "gecko1_8", "safari", "opera", "ie9", "ie10"});
 
   /**
    * List of predicates to identify user agent.
@@ -63,6 +63,12 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
         .println("return (ua.indexOf('webkit') != -1);")
       .returns("'safari'"),
 
+      // IE10
+      new UserAgentPropertyGeneratorPredicate("ie10")
+      .getPredicateBlock()
+        .println("return (ua.indexOf('msie') != -1 && ($doc.documentMode >= 10));")
+      .returns("'ie10'"),
+      
       // IE9
       new UserAgentPropertyGeneratorPredicate("ie9")
       .getPredicateBlock()

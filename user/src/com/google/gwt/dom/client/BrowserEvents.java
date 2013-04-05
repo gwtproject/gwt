@@ -58,6 +58,12 @@ public class BrowserEvents {
   public static final String TOUCHEND = "touchend";
   public static final String TOUCHMOVE = "touchmove";
   public static final String TOUCHSTART = "touchstart";
+  public static final String MSPOINTERDOWN = "MSPointerDown";
+  public static final String MSPOINTERMOVE = "MSPointerMove";
+  public static final String MSPOINTEROUT = "MSPointerOut";
+  public static final String MSPOINTEROVER = "MSPointerOver";
+  public static final String MSPOINTERUP = "MSPointerUp";
+  public static final String MSPOINTERCANCEL = "MSPointerCancel";
 
   // Prevents instantiation and subclassing.
   private BrowserEvents() {

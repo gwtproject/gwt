@@ -18,6 +18,7 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * TODO: document me.
@@ -96,5 +97,43 @@ public class WidgetCollectionTest extends GWTTestCase {
     assertEquals(it.next(), l1);
     assertEquals(it.next(), l2);
     assertFalse(it.hasNext());
+  }
+
+  public void testExceptionInInterator() {
+
+    Container c = new Container();
+    WidgetCollection wc = c.collection;
+
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+
+    Iterator<Widget> iter = wc.iterator();
+    iter.next();
+    iter.next();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
+
+    c = new Container();
+    wc = c.collection;
+
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+    wc.add(new Button("c"));
+    wc.add(new Button("d"));
+
+    iter = wc.iterator();
+    iter.next();
+    iter.next();
+    iter.next();
+    iter.next();
+    iter.remove();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
   }
 }

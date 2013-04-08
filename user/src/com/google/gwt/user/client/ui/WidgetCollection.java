@@ -42,7 +42,7 @@ public class WidgetCollection implements Iterable<Widget> {
     }
 
     public Widget next() {
-      if (index >= size) {
+      if (index + 1 >= size) {
         throw new NoSuchElementException();
       }
       return array[++index];

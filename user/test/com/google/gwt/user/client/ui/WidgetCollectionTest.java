@@ -1,16 +1,14 @@
 /*
  * Copyright 2007 Google Inc.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.google.gwt.user.client.ui;
@@ -18,6 +16,7 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * TODO: document me.
@@ -96,5 +95,43 @@ public class WidgetCollectionTest extends GWTTestCase {
     assertEquals(it.next(), l1);
     assertEquals(it.next(), l2);
     assertFalse(it.hasNext());
+  }
+
+  public void testExceptionInInterator() {
+
+    Container c = new Container();
+    WidgetCollection wc = c.collection;
+
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+
+    Iterator<Widget> iter = wc.iterator();
+    iter.next();
+    iter.next();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
+
+    c = new Container();
+    wc = c.collection;
+
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+    wc.add(new Button("c"));
+    wc.add(new Button("d"));
+
+    iter = wc.iterator();
+    iter.next();
+    iter.next();
+    iter.next();
+    iter.next();
+    iter.remove();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
   }
 }

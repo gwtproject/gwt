@@ -16,6 +16,24 @@
       "revId": "88cce3be2ba6b517d05b4d00f2b251e8e0b2d8c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "S.e-69TM",
+        "filename": "user/src/com/google/gwt/user/client/ui/WidgetCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-08T19:07:54Z",
+      "side": 1,
+      "message": "No, that would be off by two. Try it with size\u003d1 and index\u003d0. There should be no more elements.",
+      "parentUuid": "TAIyAyOw",
+      "revId": "88cce3be2ba6b517d05b4d00f2b251e8e0b2d8c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

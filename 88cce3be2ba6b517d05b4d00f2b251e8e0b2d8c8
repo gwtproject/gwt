@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TAIyAyOw",
+        "filename": "user/src/com/google/gwt/user/client/ui/WidgetCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-08T15:03:09Z",
+      "side": 1,
+      "message": "\u003e This actually needs to be +1, because of the\n\u003e array[++index]\n\nEr. isn\u0027t \"index + 1 \u003e\u003d size\" equivalent to \"index \u003e size\" ?",
+      "revId": "88cce3be2ba6b517d05b4d00f2b251e8e0b2d8c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

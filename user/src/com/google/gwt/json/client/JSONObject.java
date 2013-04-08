@@ -176,7 +176,7 @@ public class JSONObject extends JSONValue {
       if (first) {
         first = false;
       } else {
-        sb.append(", ");
+        sb.append(",");
       }
       sb.append(JsonUtils.escapeValue(key));
       sb.append(":");

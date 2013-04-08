@@ -204,20 +204,20 @@ public class JSONTest extends GWTTestCase {
     for (int i = 1; i < charsToEscape.length; i++) {
       o.put("c" + i, new JSONString(new Character(charsToEscape[i]).toString()));
     }
-    assertEquals("{\"c1\":\"\\u0001\", \"c2\":\"\\u0002\", "
-        + "\"c3\":\"\\u0003\", \"c4\":\"\\u0004\", \"c5\":\"\\u0005\", "
-        + "\"c6\":\"\\u0006\", \"c7\":\"\\u0007\", \"c8\":\"\\b\", "
-        + "\"c9\":\"\\t\", \"c10\":\"\\n\", \"c11\":\"\\u000B\", "
-        + "\"c12\":\"\\f\", \"c13\":\"\\r\", \"c14\":\"\\u000E\", "
-        + "\"c15\":\"\\u000F\", \"c16\":\"\\u0010\", \"c17\":\"\\u0011\", "
-        + "\"c18\":\"\\u0012\", \"c19\":\"\\u0013\", \"c20\":\"\\u0014\", "
-        + "\"c21\":\"\\u0015\", \"c22\":\"\\u0016\", \"c23\":\"\\u0017\", "
-        + "\"c24\":\"\\u0018\", \"c25\":\"\\u0019\", \"c26\":\"\\u001A\", "
-        + "\"c27\":\"\\u001B\", \"c28\":\"\\u001C\", \"c29\":\"\\u001D\", "
-        + "\"c30\":\"\\u001E\", \"c31\":\"\\u001F\", \"c32\":\"\\\"\", "
-        + "\"c33\":\"\\\\\", \"c34\":\"\\b\", \"c35\":\"\\f\", "
-        + "\"c36\":\"\\n\", \"c37\":\"\\r\", \"c38\":\"\\t\", "
-        + "\"c39\":\"/\", \"c40\":\"\\u2028\", \"c41\":\"\\u2029\"}", o.toString());
+    assertEquals("{\"c1\":\"\\u0001\",\"c2\":\"\\u0002\","
+        + "\"c3\":\"\\u0003\",\"c4\":\"\\u0004\",\"c5\":\"\\u0005\","
+        + "\"c6\":\"\\u0006\",\"c7\":\"\\u0007\",\"c8\":\"\\b\","
+        + "\"c9\":\"\\t\",\"c10\":\"\\n\",\"c11\":\"\\u000B\","
+        + "\"c12\":\"\\f\",\"c13\":\"\\r\",\"c14\":\"\\u000E\","
+        + "\"c15\":\"\\u000F\",\"c16\":\"\\u0010\",\"c17\":\"\\u0011\","
+        + "\"c18\":\"\\u0012\",\"c19\":\"\\u0013\",\"c20\":\"\\u0014\","
+        + "\"c21\":\"\\u0015\",\"c22\":\"\\u0016\",\"c23\":\"\\u0017\","
+        + "\"c24\":\"\\u0018\",\"c25\":\"\\u0019\",\"c26\":\"\\u001A\","
+        + "\"c27\":\"\\u001B\",\"c28\":\"\\u001C\",\"c29\":\"\\u001D\","
+        + "\"c30\":\"\\u001E\",\"c31\":\"\\u001F\",\"c32\":\"\\\"\","
+        + "\"c33\":\"\\\\\",\"c34\":\"\\b\",\"c35\":\"\\f\","
+        + "\"c36\":\"\\n\",\"c37\":\"\\r\",\"c38\":\"\\t\","
+        + "\"c39\":\"/\",\"c40\":\"\\u2028\",\"c41\":\"\\u2029\"}", o.toString());
   }
 
   public void testHashCode() {
@@ -284,41 +284,41 @@ public class JSONTest extends GWTTestCase {
     String s2 = parseStrictVsLenient(s1).toString();
     assertEquals(s1, s2);
     assertEquals(
-        "{\"string3\":\"s3\", \"Number3\":3.1, \"Boolean3\":false, "
-            + "\"Null3\":null, \"object3\":{\"string2\":\"s2\", \"Number2\":2.1, "
-            + "\"Boolean2\":true, \"Null2\":null, \"object2\":{\"string1\":\"s1\","
-            + " \"Number1\":1.1, \"Boolean1\":false, \"Null1\":null, \"object1\":{"
-            + "\"string0\":\"s0\", \"Number0\":0.1, \"Boolean0\":true, "
-            + "\"Null0\":null, \"object0\":{}, "
-            + "\"Array0\":[\"s0\",0.1,true,null,{}]}, "
-            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\", "
-            + "\"Number0\":0.1, \"Boolean0\":true, \"Null0\":null, \"object0\":{}, "
-            + "\"Array0\":[\"s0\",0.1,true,null,{}]}]}, "
-            + "\"Array2\":[\"s2\",2.1,true,null,{\"string1\":\"s1\", "
-            + "\"Number1\":1.1, \"Boolean1\":false, \"Null1\":null, "
-            + "\"object1\":{\"string0\":\"s0\", \"Number0\":0.1, "
-            + "\"Boolean0\":true, \"Null0\":null, \"object0\":{}, "
-            + "\"Array0\":[\"s0\",0.1,true,null,{}]}, "
-            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\", "
-            + "\"Number0\":0.1, \"Boolean0\":true, \"Null0\":null, "
-            + "\"object0\":{}, \"Array0\":[\"s0\",0.1,true,null,{}]}]}]}, "
-            + "\"Array3\":[\"s3\",3.1,false,null,{\"string2\":\"s2\", "
-            + "\"Number2\":2.1, \"Boolean2\":true, \"Null2\":null, "
-            + "\"object2\":{\"string1\":\"s1\", \"Number1\":1.1, "
-            + "\"Boolean1\":false, \"Null1\":null, \"object1\":{\"string0\":\"s0\","
-            + " \"Number0\":0.1, \"Boolean0\":true, \"Null0\":null, \"object0\":{}, "
-            + "\"Array0\":[\"s0\",0.1,true,null,{}]}, "
-            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\", "
-            + "\"Number0\":0.1, \"Boolean0\":true, \"Null0\":null, "
-            + "\"object0\":{}, \"Array0\":[\"s0\",0.1,true,null,{}]}]}, "
-            + "\"Array2\":[\"s2\",2.1,true,null,{\"string1\":\"s1\", "
-            + "\"Number1\":1.1, \"Boolean1\":false, \"Null1\":null, "
-            + "\"object1\":{\"string0\":\"s0\", \"Number0\":0.1, "
-            + "\"Boolean0\":true, \"Null0\":null, \"object0\":{}, "
-            + "\"Array0\":[\"s0\",0.1,true,null,{}]}, "
-            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\", "
-            + "\"Number0\":0.1, \"Boolean0\":true, \"Null0\":null, \"object0\":{},"
-            + " \"Array0\":[\"s0\",0.1,true,null,{}]}]}]}]}", obj.toString());
+        "{\"string3\":\"s3\",\"Number3\":3.1,\"Boolean3\":false,"
+            + "\"Null3\":null,\"object3\":{\"string2\":\"s2\",\"Number2\":2.1,"
+            + "\"Boolean2\":true,\"Null2\":null,\"object2\":{\"string1\":\"s1\","
+            + "\"Number1\":1.1,\"Boolean1\":false,\"Null1\":null,\"object1\":{"
+            + "\"string0\":\"s0\",\"Number0\":0.1,\"Boolean0\":true,"
+            + "\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]},"
+            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\","
+            + "\"Number0\":0.1,\"Boolean0\":true,\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]}]},"
+            + "\"Array2\":[\"s2\",2.1,true,null,{\"string1\":\"s1\","
+            + "\"Number1\":1.1,\"Boolean1\":false,\"Null1\":null,"
+            + "\"object1\":{\"string0\":\"s0\",\"Number0\":0.1,"
+            + "\"Boolean0\":true,\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]},"
+            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\","
+            + "\"Number0\":0.1,\"Boolean0\":true,\"Null0\":null,"
+            + "\"object0\":{},\"Array0\":[\"s0\",0.1,true,null,{}]}]}]},"
+            + "\"Array3\":[\"s3\",3.1,false,null,{\"string2\":\"s2\","
+            + "\"Number2\":2.1,\"Boolean2\":true,\"Null2\":null,"
+            + "\"object2\":{\"string1\":\"s1\",\"Number1\":1.1,"
+            + "\"Boolean1\":false,\"Null1\":null,\"object1\":{\"string0\":\"s0\","
+            + "\"Number0\":0.1,\"Boolean0\":true,\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]},"
+            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\","
+            + "\"Number0\":0.1,\"Boolean0\":true,\"Null0\":null,"
+            + "\"object0\":{},\"Array0\":[\"s0\",0.1,true,null,{}]}]},"
+            + "\"Array2\":[\"s2\",2.1,true,null,{\"string1\":\"s1\","
+            + "\"Number1\":1.1,\"Boolean1\":false,\"Null1\":null,"
+            + "\"object1\":{\"string0\":\"s0\",\"Number0\":0.1,"
+            + "\"Boolean0\":true,\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]},"
+            + "\"Array1\":[\"s1\",1.1,false,null,{\"string0\":\"s0\","
+            + "\"Number0\":0.1,\"Boolean0\":true,\"Null0\":null,\"object0\":{},"
+            + "\"Array0\":[\"s0\",0.1,true,null,{}]}]}]}]}",obj.toString());
   }
 
   public void testNumberBasics() {
@@ -422,7 +422,7 @@ public class JSONTest extends GWTTestCase {
     obj.put("\"", new JSONNumber(44));
 
     String toString = obj.toString();
-    assertEquals("{\"a\":42, \"\\\\\":43.5, \"\\\"\":44}", toString.trim());
+    assertEquals("{\"a\":42,\"\\\\\":43.5,\"\\\"\":44}", toString.trim());
     JSONValue parseResponse = parseStrictVsLenient(toString);
     JSONObject obj2 = parseResponse.isObject();
     assertJSONObjectEquals(obj, obj2);
@@ -444,7 +444,7 @@ public class JSONTest extends GWTTestCase {
     j3.put("j2", j2);
 
     assertEquals(
-        "{\"j1\":{\"test1\":\"\"}, \"j2\":{\"test1\":\"\", \"j22\":{\"test12\":\"\"}}}",
+        "{\"j1\":{\"test1\":\"\"},\"j2\":{\"test1\":\"\",\"j22\":{\"test12\":\"\"}}}",
         j3.toString());
   }
 

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TFU14mfw",
+        "filename": "user/src/com/google/gwt/core/client/impl/StringBufferImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-08T23:10:23Z",
+      "side": 1,
+      "message": "this doesn\u0027t mean they are a pair right? variable name is kind of misleading.",
+      "revId": "0f14daefdf6a2dcaf3c94a433e09c98ac3f11743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TFY2EQcM",
+        "filename": "user/src/com/google/gwt/core/client/impl/StringBufferImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-08T23:10:23Z",
+      "side": 1,
+      "message": "Can we simplify all these swaps in the loops with a swap(buffer, index1, index2) method?\nIt should be optimized away with compiler.",
+      "revId": "0f14daefdf6a2dcaf3c94a433e09c98ac3f11743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TFU11Od0",
+        "filename": "user/src/com/google/gwt/core/client/impl/StringBufferImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-08T23:10:23Z",
+      "side": 1,
+      "message": "Actually, this implementation is optimized for in place replacement but you are not doing a in-place replacement so you can simplify two passes into a simpler single pass:\n\nif(lenth \u003c\u003d 1)\n  return s;\n\nchar[] buffer \u003d new char[length];\n\nbuffer[0] \u003d s[length-1];\nfor(int i \u003d 1; i \u003c length; i++) {\n  buffer[i] \u003d s[length-i-1];\n  if(Character.isSurrogatePair(buffer[i-1],buffer[i])) {\n    swap(buffer, i-1, i);\n  }\n}\n\n(I might be missing some corner cases, but you get the idea)",
+      "revId": "0f14daefdf6a2dcaf3c94a433e09c98ac3f11743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TFa1gHUM",
+        "filename": "user/src/com/google/gwt/core/client/impl/StringBufferImplAppend.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-08T23:10:23Z",
+      "side": 1,
+      "message": "nit: pls remove extra spaces in the patch.",
+      "revId": "0f14daefdf6a2dcaf3c94a433e09c98ac3f11743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TFW32tc0",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringBufferTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-08T23:10:23Z",
+      "side": 1,
+      "message": "some other possible tests (please try to extend with other corner cases):\n\n{\n assertEqualsReverse(\"\", \"\");\n assertEqualsReverse(\" \", \" \");\n assertEqualsReverse(\"\\uD801\", \"\\uD801\");\n assertEqualsReverse(\"\\uDC00\", \"\\uDC00\");\n assertEqualsReverse(\"\\uD801\\uDC00\", \"\\uD801\\uDC00\");\n assertEqualsReverse(\"\\uDC00\\uD801\", \"\\uD801\\uDC00\");\n\n\n String expected \u003d \"abcde\";\n assertEquals(expected, new StringBuffer(expected).reverse().reverse().toString());\n}\n\n private static void assertEqualsReverse(String expected, String input) {\n   assertEquals(expected, new StringBuffer(input).reverse().toString());\n }",
+      "revId": "0f14daefdf6a2dcaf3c94a433e09c98ac3f11743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -230,6 +230,11 @@ public class StringBuffer implements CharSequence, Appendable {
     impl.replace(data, start, end, toInsert);
     return this;
   }
+  
+  public StringBuffer reverse() {
+    impl.reverse(data);
+    return this;
+  }
 
   /**
    * Warning! This method is <b>much</b> slower than the JRE implementation. If

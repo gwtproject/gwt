@@ -230,6 +230,11 @@ public class StringBuilder implements CharSequence, Appendable {
     impl.replace(data, start, end, toInsert);
     return this;
   }
+  
+  public StringBuilder reserve() {
+    impl.reverse(data);
+    return this;
+  }
 
   /**
    * Warning! This method is <b>much</b> slower than the JRE implementation. If

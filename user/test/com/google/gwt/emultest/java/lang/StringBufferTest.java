@@ -270,6 +270,12 @@ public class StringBufferTest extends GWTTestCase {
     assertEquals("xxYYxx", x.toString());
   }
 
+  public void testReverse() {
+    assertEquals("abcde", new StringBuffer("edcba").reverse().toString());
+    // surrogate pair test
+    assertEquals("\uD801\uDC00abce", new StringBuffer("ecba\uD801\uDC00").reverse().toString());
+  }
+
   /**
    * This method tests <code>setLength</code>.
    */

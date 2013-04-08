@@ -29,6 +29,46 @@ package com.google.gwt.core.client.impl;
  */
 public abstract class StringBufferImpl {
 
+  public static String reverseString(String s) {
+    boolean hasSurrogatePairs = false;
+
+    int length = s.length();
+    char[] buffer = s.toCharArray();
+
+    int upper = length - 1;
+    int lower = 0;
+
+    while (lower < upper) {
+      char firstChar = buffer[lower];
+      char secondChar = buffer[upper];
+
+      if (!hasSurrogatePairs) {
+        hasSurrogatePairs =
+            (firstChar >= Character.MIN_SURROGATE && firstChar <= Character.MAX_SURROGATE);
+        hasSurrogatePairs |=
+            (secondChar >= Character.MIN_SURROGATE && secondChar <= Character.MAX_SURROGATE);
+      }
+      buffer[lower] = secondChar;
+      buffer[upper] = firstChar;
+      lower++;
+      upper--;
+    }
+
+    if (hasSurrogatePairs) {
+      for (int i = 0; i < length - 1; i++) {
+        char c = buffer[i];
+        if (Character.isLowSurrogate(c)) {
+          char c2 = buffer[i + 1];
+          if (Character.isHighSurrogate(c2)) {
+            buffer[i++] = c2;
+            buffer[i] = c;
+          }
+        }
+      }
+    }
+    return new String(buffer);
+  }
+
   /**
    * Append for primitive; the value can be stored and only later converted to a
    * string.
@@ -84,6 +124,11 @@ public abstract class StringBufferImpl {
    * Replaces a segment of the string buffer.
    */
   public abstract void replace(Object data, int start, int end, String toInsert);
+
+  /**
+   * Reverses the whole StringBuffer/Builder
+   */
+  public abstract void reverse(Object data);
 
   /**
    * Returns the string buffer as a String.

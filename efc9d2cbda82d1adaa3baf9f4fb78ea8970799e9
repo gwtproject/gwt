@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TAMytsMI",
+        "filename": "user/src/com/google/gwt/user/client/ui/WidgetCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-08T14:20:37Z",
+      "side": 1,
+      "message": "Ah… autoformat…\n(sigh)",
+      "revId": "efc9d2cbda82d1adaa3baf9f4fb78ea8970799e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TAIwp6GQ",
+        "filename": "user/src/com/google/gwt/user/client/ui/WidgetCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-08T14:20:37Z",
+      "side": 1,
+      "message": "\"if (index \u003e size)\" would be more readable.",
+      "revId": "efc9d2cbda82d1adaa3baf9f4fb78ea8970799e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

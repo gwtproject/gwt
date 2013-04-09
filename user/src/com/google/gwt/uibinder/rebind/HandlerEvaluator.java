@@ -115,17 +115,12 @@ class HandlerEvaluator {
 
     // Iterate through all methods defined in the class.
     for (JMethod method : ownerClass.getUiHandlers()) {
-      // Evaluate the method.
-      String boundMethod = method.getName();
-      if (method.isPrivate()) {
-        logger.die("Method '%s' cannot be private.", boundMethod);
-      }
 
       // Retrieves both event and handler types.
       JParameter[] parameters = method.getParameters();
       if (parameters.length != 1) {
         logger.die("Method '%s' must have a single event parameter defined.",
-            boundMethod);
+           method.getName());
       }
       JClassType eventType = parameters[0].getType().isClass();
       if (eventType == null) {
@@ -141,7 +136,7 @@ class HandlerEvaluator {
       // Cool to add the handler in the output.
       String handlerVarName = HANDLER_BASE_NAME + (++varCounter);
       writeHandler(writer, uiOwner, handlerVarName, handlerType, eventType,
-          boundMethod);
+          method);
 
       // Adds the handler created above.
       UiHandler annotation = method.getAnnotation(UiHandler.class);
@@ -151,7 +146,7 @@ class HandlerEvaluator {
         if (fieldWriter == null) {
           logger.die(
               ("Method '%s' can not be bound. You probably missed ui:field='%s' "
-                  + "in the template."), boundMethod, objectName);
+                  + "in the template."), method.getName(), objectName);
         }
 
         // Retrieves the "add handler" method in the object.
@@ -181,7 +176,7 @@ class HandlerEvaluator {
    */
   protected void writeHandler(IndentedWriter writer, String uiOwner,
       String handlerVarName, JClassType handlerType, JClassType eventType,
-      String boundMethod) throws UnableToCompleteException {
+      JMethod boundMethod) throws UnableToCompleteException {
 
     // Retrieves the single method (usually 'onSomething') related to all
     // handlers. Ex: onClick in ClickHandler, onBlur in BlurHandler ...
@@ -206,9 +201,15 @@ class HandlerEvaluator {
     writer.write("public void %1$s(%2$s event) {", methods[0].getName(),
         eventType.getParameterizedQualifiedSourceName());
     writer.indent();
-    writer.write("%1$s.%2$s(event);", uiOwner, boundMethod);
+    writer.write("_%1$s__native(%2$s, event);", methods[0].getName(), uiOwner);
     writer.outdent();
     writer.write("}");
+    writer.write("private native void _%1$s__native(Object owner, %2$s event) /*-{",
+        methods[0].getName(), eventType.getParameterizedQualifiedSourceName());
+    writer.indent();
+    writer.write("owner.%1$s(event);", boundMethod.getJsniSignature());
+    writer.outdent();
+    writer.write("}-*/;");
     writer.outdent();
     writer.write("};");
   }

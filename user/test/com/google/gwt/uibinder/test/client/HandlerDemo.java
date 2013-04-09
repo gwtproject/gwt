@@ -65,8 +65,9 @@ public class HandlerDemo extends Composite {
     eventMessage(event);
   }
 
+  // private event handler should work.
   @UiHandler({"buttonClick", "labelClick"})
-  void doClick(ClickEvent event) {
+  private void doClick(ClickEvent event) {
     eventMessage(event);
   }
 

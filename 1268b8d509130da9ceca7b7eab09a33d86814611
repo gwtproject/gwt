@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TFbA-VuA",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-09T04:40:51Z",
+      "side": 1,
+      "message": "String nativeMethodName \u003d \"__\" + methods[0].getName() +\"_native\";\n\nthen you can do:\n\n writer.write(\"%1$s(%2$s, event);\", nativeMethodName, uiOwner);\n\nand\n\n writer.write(\"private native void %1$s(Object owner, %2$s event) /*-{\",\n        nativeMethodName, eventType.getParameterizedQualifiedSourceName());\n\nbelow to make it more readable \u0026 maintainable.",
+      "revId": "1268b8d509130da9ceca7b7eab09a33d86814611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TFVAwMg0",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-09T04:40:51Z",
+      "side": 1,
+      "message": "Can you add something like following to as a comment around here:\nUses a native method dispatcher to make UIHandler work with private methods.",
+      "revId": "1268b8d509130da9ceca7b7eab09a33d86814611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

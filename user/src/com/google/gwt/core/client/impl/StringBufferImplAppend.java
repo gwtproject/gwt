@@ -71,9 +71,15 @@ public class StringBufferImplAppend extends StringBufferImpl {
   public void replace(Object data, int start, int end, String toInsert) {
     string = string.substring(0, start) + toInsert + string.substring(end);
   }
+  
+  @Override
+  public void reverse(Object data) {
+    string = reverseString(string);
+  }
 
   @Override
   public String toString(Object data) {
     return string;
   }
+
 }

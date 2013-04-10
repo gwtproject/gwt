@@ -18,6 +18,7 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * TODO: document me.
@@ -96,5 +97,80 @@ public class WidgetCollectionTest extends GWTTestCase {
     assertEquals(it.next(), l1);
     assertEquals(it.next(), l2);
     assertFalse(it.hasNext());
+  }
+
+  public void testExceptionInInterator() {
+    // empty collection - next
+    try {
+      new Container().collection.iterator().next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
+
+    // empty collection - remove
+    try {
+      new Container().collection.iterator().remove();
+      fail("expected IllegalStateException");
+    } catch (IllegalStateException expected) {
+    }
+
+    WidgetCollection wc = new Container().collection;
+
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+
+    Iterator<Widget> iter = wc.iterator();
+    iter.next();
+    iter.next();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
+
+    // test next throws
+    wc = new Container().collection;
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+    wc.add(new Button("c"));
+    wc.add(new Button("d"));
+
+    iter = wc.iterator();
+    iter.next();
+    iter.next();
+    iter.next();
+    iter.next();
+    try {
+      iter.next();
+      fail("expected NoSuchElementException");
+    } catch (NoSuchElementException expected) {
+    }
+
+    // test remove before next
+    WidgetCollection wc1 = new Container().collection;
+    wc1.add(new Button("a"));
+    wc1.add(new Button("b"));
+
+    iter = wc.iterator();
+    try {
+      iter.remove();
+      fail("expected IllegalStateException");
+    } catch (IllegalStateException expected) {
+    }
+
+    // test remove two times
+    wc = new Container().collection;
+    wc.add(new Button("a"));
+    wc.add(new Button("b"));
+
+    iter = wc.iterator();
+    iter.next();
+    iter.remove();
+    try {
+      iter.remove();
+      fail("expected IllegalStateException");
+    } catch (IllegalStateException expected) {
+    }
+
   }
 }

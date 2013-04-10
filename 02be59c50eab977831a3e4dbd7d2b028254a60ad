@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TRcBLANs",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CompilingClassLoader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-10T23:20:22Z",
+      "side": 1,
+      "message": "How hard would it be to bump this to 17? That\u0027s the fundamental issue, right?",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TRaBIdN8",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-10T23:20:22Z",
+      "side": 1,
+      "message": "I don\u0027t see why you changed this to a HashMap. If we\u0027re looking things up by small non-negative integers allocated starting from zero, it seems like an ArrayList should work fine?",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TRUCKUNU",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-10T23:20:22Z",
+      "side": 1,
+      "message": "Should we instead assert that the name doesn\u0027t exist in the map? When is it okay to call this method with a name that we already added?\n\nAlso, not seeing \u0027m\u0027. Does this code compile?",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

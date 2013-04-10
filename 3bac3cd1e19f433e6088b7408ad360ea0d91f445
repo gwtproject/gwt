@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TN6t7SYI",
+        "filename": "user/test/com/google/gwt/user/client/ui/WidgetCollectionTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-10T15:32:26Z",
+      "side": 1,
+      "message": "Test cases look pretty good. \nUsually it is best to have separate tests for different cases so that you have better reporting from test failures. Also Google practice is using testMethod_testScenario as the test name (e.g. testIterator_doubleRemove) but I\u0027m not sure if GWT uses the same convention.",
+      "revId": "3bac3cd1e19f433e6088b7408ad360ea0d91f445",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

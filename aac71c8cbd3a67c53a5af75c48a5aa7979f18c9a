@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TRb2bf7E",
+        "filename": "user/src/com/google/gwt/core/client/impl/StringBufferImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-10T15:17:47Z",
+      "side": 1,
+      "message": "toCharArray copies the string using charAt behind the scenes. \nIf you use s.charAt(length-1-i) here, you can get rid of the extra copy.",
+      "revId": "aac71c8cbd3a67c53a5af75c48a5aa7979f18c9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

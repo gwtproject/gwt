@@ -16,6 +16,24 @@
       "revId": "ddce89b37c67066cc3f0e042feea9b688074f1ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TQmD90mI",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-11T16:03:22Z",
+      "side": 1,
+      "message": "Done.\n\nI decided to use write() since that\u0027s the more primitive method (at least in OpenJDK\u0027s implementation), so it might actually avoid a substring() call.  However, write()\u0027s second integer argument is a length field, not an end position like substring() and append(), so an extra subtraction is required.",
+      "parentUuid": "TOJBg-EM",
+      "revId": "ddce89b37c67066cc3f0e042feea9b688074f1ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TOBAuTGs",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-11T08:23:53Z",
+      "side": 1,
+      "message": "Could you add \"in ClassSourceFileComposer\"?",
+      "revId": "765d0ab8fcc18d3c7fe668357286072af0b0197d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TOJBB3Bw",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-11T08:23:53Z",
+      "side": 1,
+      "message": "Would indexOf(\u0027\\n\u0027) make any difference? (micro-optimization)",
+      "revId": "765d0ab8fcc18d3c7fe668357286072af0b0197d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TOBBHLC0",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-11T08:23:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t atStart be set to true if \"i \u003d\u003d s.length() - 1\"? (for the next call to print())\n\nAFAICT, that was also an \"issue\" with the previous code. How does the following behave in practice?\n\n  composer.print(\"foo\\n\");\n  composer.print(\"bar\");\n\nIs \u0027bar\u0027 correctly indented? (and commented if \"inComment\" is true) I see println() sets the atStart flag, which, to me, seems wrong.",
+      "revId": "765d0ab8fcc18d3c7fe668357286072af0b0197d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TOHBSKOw",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-11T08:23:53Z",
+      "side": 1,
+      "message": "Maybe use append(s, 0, i + 1) or write(s, 0, i + 1). Maybe even use a \u0027pos\u0027 marker instead of using \"s \u003d s.substring(i + 1)\"? (I have no idea if it\u0027d have a non-negligible impact on memory usage)\n\n  for (int start \u003d 0; start \u003c s.length(); ) {\n    …\n    int end \u003d s.indexOf(\u0027\\n\u0027, start);\n    if (end \u003c 0) {\n      end \u003d s.length() - 1;\n    } else {\n      // Fix the atStart from the above comment\n      // \u0027atStart \u003d true\u0027 can thus be removed from println()\n      atStart \u003d true;\n    }\n    printWriter.write(s, start, end + 1);\n    start \u003d end + 1;\n  }",
+      "revId": "765d0ab8fcc18d3c7fe668357286072af0b0197d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

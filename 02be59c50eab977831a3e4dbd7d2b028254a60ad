@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "TN.veMfk",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CompilingClassLoader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-04-11T05:55:44Z",
+      "side": 1,
+      "message": "Yes, this is the _actual_ issue; though JavaScriptObject$ is already up to 80,000 items, so it\u0027s conceivable that 17 won\u0027t be enough for any jsni-heavy libraries that take elemental as well.\n\nThere\u0027s a couple of places I\u0027ve seen already that use (id \u0026 0xffff) to differentiate between class and member id...\n\nSince this is dev mode, couldn\u0027t we just upgrade to long and give memberId and classId each 25 bits?  So long as we keep the value under 2^53 (max floating point in js), it should be safe to pass them into js as doubles, pull them out as long, and avoid overflow completely.",
+      "parentUuid": "TRcBLANs",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TRaBIdN8",
         "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "TN8vh9cE",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-04-11T05:55:44Z",
+      "side": 1,
+      "message": "Ya, ArrayList is preferable, this review was cobbled together from a different patch, and I screwed it up. :-/",
+      "parentUuid": "TRaBIdN8",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TRUCKUNU",
         "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2013-04-10T23:20:22Z",
       "side": 1,
       "message": "Should we instead assert that the name doesn\u0027t exist in the map? When is it okay to call this method with a name that we already added?\n\nAlso, not seeing \u0027m\u0027. Does this code compile?",
+      "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TNwv4XXI",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/DispatchClassInfo.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-04-11T05:55:44Z",
+      "side": 1,
+      "message": "This method is only called once per DispatchClassInfo object, during lazyInitTargetMembers(); we should, rightly so, make the check against the the name-\u003eto-\u003eint map (and use the array list as originally designed).\n\nAlso, embarassingly enough, this code in fact, does not compile.  I can upload a fixed copy that will pass DispatchClassInfoTest, but will still die as soon as Elemental is inherited.\n\nThe real problem isn\u0027t anything to do with the collections used here, but rather it is in the use of a single integer to contain both class id and member id; as soon as we pull in elemental, com.google.gwt.core.client.JavaScriptObject$ has 80,000+ members in it (all jso methods), so when we create a dispId of \n(clsId \u003c\u003c 16 | memberId), the memberId overflows into classId, causing indexOOB and indeterminism galore.\n\nThe class that blows up most regularly is PotentialElement, and its dispatch map is full of elemental methods.  It can be seen reliably by a) inheriting elemental.Elemental, then b) setting a breakpoint on line 177 of c.g.g.dev.shell.Jsni (at:\nmember \u003d dispatchInfo.getClassInfoByDispId(dispId).getMember(dispId);\n\n\nYou will have to continue about ten times before PotentialElement shows up, but when it does, you can trace through and see how packing two 16 bit integers together causes the overflow (expecting clsId\u003d10, getting 11).\n\nSince it\u0027s unlikely (I guess) that we can change the use of int dispId to long dispId, the only workable alternative is to make DispatchClassInfoOracle return classId and memberId separately, or to put in special workarounds for members of JavaScriptObject$ (as no other object should have more than 0xfff members).",
+      "parentUuid": "TRUCKUNU",
       "revId": "02be59c50eab977831a3e4dbd7d2b028254a60ad",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

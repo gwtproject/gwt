@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "TRaZ6TPc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/JParameterizedType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-11T21:48:17Z",
+      "side": 1,
+      "message": "You can use typeArgs instead of getTypeArgs() to avoid a copy.",
+      "revId": "2504d1ed9707a6e4d0d7fbcd4c530204dac84c0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TReYrtOs",
         "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
         "patchSetId": 1
@@ -64,6 +81,23 @@
       "writtenOn": "2013-04-11T21:37:21Z",
       "side": 1,
       "message": "Maybe we should have a test somewhere in GWT that anonymous handlers work?",
+      "revId": "2504d1ed9707a6e4d0d7fbcd4c530204dac84c0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TRSZ4-Ps",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-11T21:48:17Z",
+      "side": 1,
+      "message": "Can\u0027t we just use qualified source names always?",
       "revId": "2504d1ed9707a6e4d0d7fbcd4c530204dac84c0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

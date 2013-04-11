@@ -32,4 +32,11 @@ public interface JParameterizedType extends JClassType {
   JClassType getRawType();
 
   JClassType[] getTypeArgs();
+
+  /**
+   * Returns whether the parametrized type has any wildcards.
+   *
+   * @return {@code true} if wildcards are present, {@code false} otherwise.
+   */
+  boolean hasWildcards();
 }

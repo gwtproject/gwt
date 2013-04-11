@@ -199,12 +199,24 @@ class HandlerEvaluator {
           eventType.getName());
     }
 
+    // Avoid wildcards when creating anonymous classes as it does not compile under Java 7,
+    // use raw types when this happens.
+    String handlerSourceName =
+        handlerType.isParameterized() != null &&  handlerType.isParameterized().hasWildcards() ?
+        handlerType.getQualifiedSourceName() :
+        handlerType.getParameterizedQualifiedSourceName();
+
+    String eventSourceName =
+        eventType.isParameterized() != null && eventType.isParameterized().hasWildcards() ?
+        eventType.getQualifiedSourceName() :
+        eventType.getParameterizedQualifiedSourceName();
+
     writer.newline();
     writer.write("final %1$s %2$s = new %1$s() {",
-        handlerType.getParameterizedQualifiedSourceName(), handlerVarName);
+        handlerSourceName, handlerVarName);
     writer.indent();
     writer.write("public void %1$s(%2$s event) {", methods[0].getName(),
-        eventType.getParameterizedQualifiedSourceName());
+        eventSourceName);
     writer.indent();
     writer.write("%1$s.%2$s(event);", uiOwner, boundMethod);
     writer.outdent();

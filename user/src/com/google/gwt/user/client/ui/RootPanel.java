@@ -25,6 +25,7 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.client.LocaleInfo;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 
@@ -299,5 +300,22 @@ public class RootPanel extends AbsolutePanel {
   private RootPanel(Element elem) {
     super(elem.<com.google.gwt.user.client.Element> cast());
     onAttach();
+  }
+
+  /**
+   * clear the rootPanel, if eraseDom is true also remove any DOM elements that
+   * are not widgets
+   * @param eraseDom should the DOM elements be removed as well
+   */
+  public void clear(boolean eraseDom) {
+    clear();
+
+    if (eraseDom) {
+      com.google.gwt.user.client.Element containerElement = getElement();
+      com.google.gwt.user.client.Element child = null;
+      while ((child = DOM.getFirstChild(containerElement)) != null) {
+        DOM.removeChild(containerElement, child);
+      }
+    }
   }
 }

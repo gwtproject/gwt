@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TXqSDYow",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T23:37:40Z",
+      "side": 1,
+      "message": "What I meant before was the API is:\n\n addXXX(ValueChangeEvent\u003cList\u003c?\u003e\u003e)\n\nin this case the API is still:\n\n addXXX(ValueChangeEvent\u003c?\u003e)\n\nActually, it is interesting to me that this is working right now :)",
+      "revId": "013de142461f936ecf3cd12e97e6bfac5e4ea0ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXuS8OlY",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T23:37:40Z",
+      "side": 1,
+      "message": "Pls remove extra space added.",
+      "revId": "013de142461f936ecf3cd12e97e6bfac5e4ea0ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXsSK3pw",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WildcardValueChangeWidget.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T23:37:40Z",
+      "side": 1,
+      "message": "\u003cT\u003eq --\u003e \u003cT\u003e.",
+      "revId": "013de142461f936ecf3cd12e97e6bfac5e4ea0ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

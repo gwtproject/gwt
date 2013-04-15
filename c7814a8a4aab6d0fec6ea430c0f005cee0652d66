@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TUDimcVY",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-15T21:12:55Z",
+      "side": 1,
+      "message": "That only removes elements right? So\n\n  \u003cdiv id\u003drootpanel\u003eSome \u003ci\u003emixed\u003c/i\u003e content\u003c/div\u003e\n\nwouldn\u0027t be cleared correctly.\n\nAny reason this isn\u0027t using setInnerHTML(\"\") ?",
+      "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

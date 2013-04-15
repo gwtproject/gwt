@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TUJXkhqE",
+        "filename": "user/test/com/google/gwt/user/client/TimerCancelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-15T13:33:43Z",
+      "side": 1,
+      "message": "This field should live in the CountingTimer, which could thus become a static nested class, and removes the need for the gwtSetUp (which is probably not needed anyway, even in the current configuration).",
+      "revId": "61e1cc7cfe4f16a026bda25f3fade63bf8f02a88",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TUHX3Yk4",
+        "filename": "user/test/com/google/gwt/user/client/TimerCancelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-15T13:33:43Z",
+      "side": 1,
+      "message": "Is this really needed? If so, can you please add a comment somewhere explaining exactly the conditions the issue manifests itself?",
+      "revId": "61e1cc7cfe4f16a026bda25f3fade63bf8f02a88",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TUPUKMmU",
+        "filename": "user/test/com/google/gwt/user/client/TimerCancelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-15T13:33:43Z",
+      "side": 1,
+      "message": "Move at the top of the class.",
+      "revId": "61e1cc7cfe4f16a026bda25f3fade63bf8f02a88",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -330,6 +330,20 @@ public class JParameterizedType extends JMaybeParameterizedType implements
   }
 
   @Override
+  public boolean hasWildcards() {
+    for (JClassType parameter : typeArgs) {
+      if (parameter.isWildcard() != null) {
+        return true;
+      }
+      if (parameter.isParameterized() != null &&
+          parameter.isParameterized().hasWildcards()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
   public JGenericType isGenericType() {
     return null;
   }

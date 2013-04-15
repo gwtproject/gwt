@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TXuRaevs",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "I wonder if diamond operator would have helped with any of these issues?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXkTELjY",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/BadValueChangeWidget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "Is there any reason to need for HasName and HasChangeHandlers?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXkSrjmk",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/BadValueChangeWidget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "I\u0027m little bit lost in this class. If I\u0027m not missing anything, we can replace handler related stuff in this class with following:\n\n HandlerRegistration addValueChangeHandler(ValueChangeHandler\u003c?\u003e handler) {\n   return addHandler(handler, ValueChangeEvent.getType());\n }\n\n public void setValue(String value) {\n    String oldValue \u003d getValue();\n    myValue \u003d value;\n    fireEvent(new ValueChangeEvent\u003c?\u003e(value) { });\n  }",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXmS-qp0",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/BadValueChangeWidget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXmQuimw",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiHandlerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "; -\u003e :\n \u003d)",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXuRB2hs",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiHandlerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "nit: Any reasons to not import?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXgRSNuo",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "Perhaps\nBadValueChangeWidget -\u003e WildcardValueWidget\nmyBadValueChange -\u003e myWildcardValueWidget",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXkRMLk0",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "Perhaps valueChangeEvent and wildcardValueChangeEvent?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXqTYghY",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T22:03:48Z",
+      "side": 1,
+      "message": "I can\u0027t remember exactly but should we also have a test scenario like ValueChangeEvent\u003cK\u003c?\u003e\u003e?",
+      "revId": "2bcd6d751a04c8a2dbde43ec63f17b5501a7199c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

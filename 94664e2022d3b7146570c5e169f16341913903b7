@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "TTDzFuTU",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T18:57:08Z",
+      "side": 1,
+      "message": "According to history, converted from @wnd recently. I can\u0027t see any reason.",
+      "parentUuid": "TTPylAfQ",
+      "revId": "94664e2022d3b7146570c5e169f16341913903b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TWgh2x6I",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T18:57:08Z",
+      "side": 1,
+      "message": "Can you put a short description? Something like:\n// To workaround clearTimeout bug in IE: https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d8101",
+      "revId": "94664e2022d3b7146570c5e169f16341913903b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TTJyYTbY",
         "filename": "user/test/com/google/gwt/user/client/TimerCancelTest.java",
         "patchSetId": 3

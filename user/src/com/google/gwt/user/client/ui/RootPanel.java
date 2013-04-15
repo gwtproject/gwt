@@ -25,6 +25,7 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.client.LocaleInfo;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 
@@ -299,5 +300,26 @@ public class RootPanel extends AbsolutePanel {
   private RootPanel(Element elem) {
     super(elem.<com.google.gwt.user.client.Element> cast());
     onAttach();
+  }
+
+  /**
+   * Clear the rootPanel. If clearDom is true, then  also remove any DOM
+   * elements that are not widgets.
+   *
+   * By default {@link #clear()} will only remove children that are GWT widgets.
+   * This method also provides the option to remove all children including the
+   * non-widget DOM elements that are directly added (e.g. elements added via
+   * {@code getElement().appendChild(...)}.
+   *
+   * @param clearDom if {@code true} this method will also remove any DOM
+   *  elements that are not widgets.
+   */
+  public void clear(boolean clearDom) {
+    clear();
+
+    if (clearDom) {
+      com.google.gwt.user.client.Element containerElement = getElement();
+      containerElement.setInnerHTML("");
+    }
   }
 }

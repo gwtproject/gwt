@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TTPylAfQ",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-15T17:11:01Z",
+      "side": 1,
+      "message": "I know this is pre-existing, but why are these methods native?  Can we change them to be Java calls to Impl.clearInterval and Impl.clearTimeout?",
+      "revId": "94664e2022d3b7146570c5e169f16341913903b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TTJyYTbY",
+        "filename": "user/test/com/google/gwt/user/client/TimerCancelTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-15T17:11:01Z",
+      "side": 1,
+      "message": "You\u0027ll need to add this Test class to a test suite for it to run.  I\u0027d pick MiscSuite arbitrarily, since there doesn\u0027t seem to be a more appropriate one.",
+      "revId": "94664e2022d3b7146570c5e169f16341913903b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

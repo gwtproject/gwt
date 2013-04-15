@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "TXkTpzgc",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T20:21:23Z",
+      "side": 1,
+      "message": "Actually, I\u0027m little bit hesitant to add this change. \nIf the user is manipulating the DOM with elements, it is usually best to leave them the control including cleaning up handlers behind if needed. This API is coming from Panel class and a similar problem exists with any GWT Panel widget.\nOf course someone can argue that having a convenience method in RootPanel is a special case and will be helpful to developers.\n\nAnyway, if we end up going in this direction, I think it is better to have little bit more explanation:\n\n Clears the root panel. \n \u003cp\u003e By default {@link #clear()} will only remove children that are GWT widgets. This method also provides the option to remove all children including the non-widget DOM elements that are directly added (e.g. elements added via {@code getElement().appendChild(...)}.\n\n @param clearDom if {@code true} this method will also remove any DOM elements that are not widgets.",
+      "parentUuid": "TTJxXrQY",
+      "revId": "5bf92ab2015ec69ea25d41d6cac97e71e3ea3e56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TTByNXXs",
         "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2013-04-15T17:02:15Z",
       "side": 1,
       "message": "\"eraseDom\" seems like an odd variable name to me.  What about \"clearDom\" or \"removeChildren\"?",
+      "revId": "5bf92ab2015ec69ea25d41d6cac97e71e3ea3e56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXiTD8oI",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T20:21:23Z",
+      "side": 1,
+      "message": "Having Element#removeAllChildren() would be very useful in many cases including this one.",
       "revId": "5bf92ab2015ec69ea25d41d6cac97e71e3ea3e56",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

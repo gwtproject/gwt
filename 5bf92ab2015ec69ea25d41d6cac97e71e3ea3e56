@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TTJxXrQY",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-15T17:02:15Z",
+      "side": 1,
+      "message": "Proper grammar please:\n\n  Clear the root panel.  If eraseDom is true, then also remove any DOM elements that are not widgets.",
+      "revId": "5bf92ab2015ec69ea25d41d6cac97e71e3ea3e56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TTByNXXs",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-04-15T17:02:15Z",
+      "side": 1,
+      "message": "\"eraseDom\" seems like an odd variable name to me.  What about \"clearDom\" or \"removeChildren\"?",
+      "revId": "5bf92ab2015ec69ea25d41d6cac97e71e3ea3e56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

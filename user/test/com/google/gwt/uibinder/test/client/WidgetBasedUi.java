@@ -24,6 +24,7 @@ import com.google.gwt.dom.client.OListElement;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.TableElement;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.i18n.client.NumberFormat;
@@ -36,12 +37,14 @@ import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DateLabel;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -76,7 +79,7 @@ public class WidgetBasedUi extends Composite {
   public interface Style extends CssResource {
     String menuBar();
   }
-  
+
   interface Binder extends UiBinder<Widget, WidgetBasedUi> {
   }
   static class FakeBundle2 extends FakeBundle {
@@ -85,10 +88,10 @@ public class WidgetBasedUi extends Composite {
   static class FakeBundle3 extends FakeBundle {
   }
   private static final Binder binder = GWT.create(Binder.class);
-  
+
   @UiField(provided = true)
   final WidgetBasedUiExternalResources external = GWT.create(WidgetBasedUiExternalResources.class);
-  
+
   public static final DateTimeFormat MY_DATE_FORMAT = DateTimeFormat.getFormat(PredefinedFormat.DATE_FULL);
   public static final NumberFormat MY_NUMBER_FORMAT = NumberFormat.getDecimalFormat();
 
@@ -195,10 +198,25 @@ public class WidgetBasedUi extends Composite {
   @UiField(provided = true) @SuppressWarnings("rawtypes")
   Renderer doubleRenderer = DoubleRenderer.instance();
   @UiField ValueLabel<Double> myValueLabel;
+  @UiField DoubleBox myDoubleBox;
+  @UiField(provided = true) BadValueChangeWidget myBadValueChangeWidget =
+      new BadValueChangeWidget();
   @UiField ImageElement myImage;
   @UiField HTML htmlWithComputedSafeHtml;
   @UiField HTML htmlWithComputedText;
   @UiField Label labelWithComputedText;
+
+  public ValueChangeEvent<Double> event;
+  @UiHandler("myDoubleBox")
+  void onValueChange(ValueChangeEvent<Double> event) {
+    this.event = event;
+  }
+
+  public ValueChangeEvent<?> eventWildcard;
+  @UiHandler("myBadValueChangeWidget")
+  void onValueChangeWildware(ValueChangeEvent<?> event) {
+    this.eventWildcard = event;
+  }
 
   public WidgetBasedUi() {
     external.style().ensureInjected();

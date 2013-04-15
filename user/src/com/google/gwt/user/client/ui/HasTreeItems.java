@@ -69,15 +69,38 @@ public interface HasTreeItems {
   TreeItem addTextItem(String itemText);
 
   /**
-   * Removes an item.
+   * get the TreeItem at a specific index
    * 
+   * @param index of the TreeItem to get
+   * @return the TreeItem or null
+   */
+  TreeItem getItem(int index);
+
+  /**
+   * get the number of TreeItems
+   *
+   * @return the number of TreeItems
+   */
+  int getItemCount();
+
+  /**
+   * get the index of a TreeItem
+   *
+   * @param child to get the index for
+   * @return the index of the child element
+   */
+  int getItemIndex(TreeItem child);
+
+  /**
+   * Removes an item.
+   *
    * @param item the item to be removed
    */
   void removeItem(TreeItem item);
 
   /**
    * Removes an item.
-   * 
+   *
    * @param isItem the wrapper of item to be removed
    */
   void removeItem(IsTreeItem isItem);

@@ -465,6 +465,38 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
   }
 
   /**
+   * get the TreeItem at a specific index
+   *
+   * @param index of the TreeItem to get
+   * @return the TreeItem or null
+   */
+  @Override
+  public TreeItem getItem(int index) {
+    return getChild(index);
+  }
+
+  /**
+   * get the number of TreeItems
+   *
+   * @return the number of TreeItems
+   */
+  @Override
+  public int getItemCount() {
+    return getChildCount();
+  }
+
+  /**
+   * get the index of a TreeItem
+   *
+   * @param child to get the index for
+   * @return the index of the child element
+   */
+  @Override
+  public int getItemIndex(TreeItem child) {
+    return getChildIndex(child);
+  }
+
+  /**
    * Gets this item's parent.
    *
    * @return the parent item

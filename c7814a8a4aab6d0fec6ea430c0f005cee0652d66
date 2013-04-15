@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "TXgQk9nI",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T21:37:32Z",
+      "side": 1,
+      "message": "When describing a method it is better to use Clears vs Clear.\n\n\"then  also\" has double space.",
+      "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXuS2.uQ",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T21:37:32Z",
+      "side": 1,
+      "message": "\u003cp\u003e otherwise it will not be a new paragraph in generated javadoc.",
+      "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TUDimcVY",
         "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
         "patchSetId": 2
@@ -30,6 +64,24 @@
       "writtenOn": "2013-04-15T21:31:04Z",
       "side": 1,
       "message": "setInnerHTML of course...\n\nYou are the man, Thomas!",
+      "parentUuid": "TUDimcVY",
+      "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXuTzmtM",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T21:37:32Z",
+      "side": 1,
+      "message": "This will also remove text nodes. I was also wondering innerHTML but according to a jsperf comparison it is much slower:\nhttp://jsperf.com/innerhtml-vs-removechild",
       "parentUuid": "TUDimcVY",
       "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

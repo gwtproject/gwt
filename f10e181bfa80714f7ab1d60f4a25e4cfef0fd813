@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TTFwgdQ0",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "Gets the tree item at the specified index.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TTByPHeU",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "@param index the index of the tree item to get",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TTJx6Dfg",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "@return the item at the specified index or {@code null} if the index is out of range.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TTNyEhcQ",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "Gets the number of tree items.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXkT7jv8",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "You don\u0027t need a @return here as it is not adding anything new.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXsQGXio",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "Gets the index of the specified tree item.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXiQVsks",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "@param child the tree item to get the index for",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXgQaNnk",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "@return the item\u0027s index or {@code -1} if the item is not found.",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXsQffmI",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasTreeItems.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-15T19:30:06Z",
+      "side": 1,
+      "message": "Can you update the other files accordingly?",
+      "revId": "f10e181bfa80714f7ab1d60f4a25e4cfef0fd813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

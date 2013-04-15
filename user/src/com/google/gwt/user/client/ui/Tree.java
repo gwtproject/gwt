@@ -540,6 +540,7 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
    * @param index the index to be retrieved
    * @return the item at that index
    */
+  @Override
   public TreeItem getItem(int index) {
     return root.getChild(index);
   }
@@ -549,8 +550,20 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
    *
    * @return this tree's item count
    */
+  @Override
   public int getItemCount() {
     return root.getChildCount();
+  }
+
+  /**
+   * get the index of a TreeItem
+   *
+   * @param child to get the index for
+   * @return the index of the child element
+   */
+  @Override
+  public int getItemIndex(TreeItem child) {
+    return root.getItemIndex(child);
   }
 
   /**

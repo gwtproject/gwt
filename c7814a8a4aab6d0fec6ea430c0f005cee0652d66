@@ -86,6 +86,24 @@
       "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TUFjO1QY",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-15T21:56:21Z",
+      "side": 1,
+      "message": "Thanks for the link Goktug. This IMO aligns with Brian\u0027s proposal to move it within Element (though Node would be even better), where it could be done with JSNI, and possibly use deferred-binding if there\u0027s a need for some browser-specific implementation.\n\nBTW, the latest revision of this test, published 3 weeks ago, is at http://jsperf.com/innerhtml-vs-removechild/26",
+      "parentUuid": "TXuTzmtM",
+      "revId": "c7814a8a4aab6d0fec6ea430c0f005cee0652d66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

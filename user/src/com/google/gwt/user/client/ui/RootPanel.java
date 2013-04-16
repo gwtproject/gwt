@@ -20,6 +20,7 @@ import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
@@ -28,8 +29,10 @@ import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -299,5 +302,28 @@ public class RootPanel extends AbsolutePanel {
   private RootPanel(Element elem) {
     super(elem.<com.google.gwt.user.client.Element> cast());
     onAttach();
+  }
+
+  /**
+   * Clears the rootPanel. If clearDom is true, then also remove any DOM
+   * elements that are not widgets.
+   *
+   * <p>By default {@link #clear()} will only remove children that are GWT widgets.
+   * This method also provides the option to remove all children including the
+   * non-widget DOM elements that are directly added (e.g. elements added via
+   * {@code getElement().appendChild(...)}.
+   *
+   * @param clearDom if {@code true} this method will also remove any DOM
+   *  elements that are not widgets.
+   */
+  public void clear(boolean clearDom) {
+    clear();
+
+    if (clearDom) {
+      com.google.gwt.user.client.Element containerElement = getElement();
+      while(containerElement.hasChildNodes()) {
+        containerElement.removeChild(containerElement.getFirstChild());
+      }
+    }
   }
 }

@@ -59,9 +59,9 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -317,7 +317,7 @@ public class TypeTightener {
           JParameter param = x.getParams().get(j);
           Set<JParameter> set = paramUpRefs.get(param);
           if (set == null) {
-            set = new HashSet<JParameter>();
+            set = new LinkedHashSet<JParameter>();
             paramUpRefs.put(param, set);
           }
           for (JMethod baseMethod : overrides) {
@@ -796,7 +796,7 @@ public class TypeTightener {
   private static <T, V> void add(T target, V value, Map<T, Set<V>> map) {
     Set<V> set = map.get(target);
     if (set == null) {
-      set = new HashSet<V>();
+      set = new LinkedHashSet<V>();
       map.put(target, set);
     }
     set.add(value);

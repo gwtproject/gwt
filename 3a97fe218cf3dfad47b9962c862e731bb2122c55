@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TXid79Ds",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-16T02:41:46Z",
+      "side": 1,
+      "message": "Maybe add javadoc explaining what each of these variables contains?",
+      "revId": "3a97fe218cf3dfad47b9962c862e731bb2122c55",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

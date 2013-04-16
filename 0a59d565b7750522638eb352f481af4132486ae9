@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TeAqIm2o",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-16T23:52:44Z",
+      "side": 1,
+      "message": "\"tracks the\"",
+      "revId": "0a59d565b7750522638eb352f481af4132486ae9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TeGqXV4k",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-16T23:52:44Z",
+      "side": 1,
+      "message": "\"Assignments\"",
+      "revId": "0a59d565b7750522638eb352f481af4132486ae9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TeKqYb7U",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-16T23:52:44Z",
+      "side": 1,
+      "message": "\"method\"",
+      "revId": "0a59d565b7750522638eb352f481af4132486ae9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TeMqlo-Q",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-16T23:52:44Z",
+      "side": 1,
+      "message": "\"overridden\"",
+      "revId": "0a59d565b7750522638eb352f481af4132486ae9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

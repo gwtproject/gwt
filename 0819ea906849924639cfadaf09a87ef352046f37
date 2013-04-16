@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TXqcohJQ",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-04-16T00:26:02Z",
+      "side": 1,
+      "message": "Interesting, and somewhat scary. I wonder if we should impose some kind of sort order. I think in general, we\u0027d prefer O in this case, since a concrete implementor would be a tighter bounder than an interface I think, in terms of further optimizations?",
+      "revId": "0819ea906849924639cfadaf09a87ef352046f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

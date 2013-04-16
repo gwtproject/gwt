@@ -467,6 +467,23 @@ public class JProgram extends JNode {
   /**
    * Return the least upper bound of a set of types. That is, the smallest type
    * that is a supertype of all the input types.
+   *
+   * NOTE: This function depends on the collection order because the Java type
+   * hierarchy is not really a lattice. E.g.
+   *
+   *                I    O
+   *                |\ / \
+   *                | A  B
+   *                \   /
+   *                 \ /
+   *                  C
+   *
+   * where I is an interface an {O,A,B,C} are classes.
+   *
+   * generalizeTypes({A,C}) could either be I or O.
+   *
+   * In particular generalizeTypes({I,A,C}) = I and generalizeTypes({A,C,I}) = O.
+   *
    */
   public JReferenceType generalizeTypes(Collection<? extends JReferenceType> types) {
     assert (types != null);

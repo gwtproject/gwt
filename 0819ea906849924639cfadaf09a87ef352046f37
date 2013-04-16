@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "TXkdm8AM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-04-16T01:37:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "TXic.VMs",
+      "revId": "0819ea906849924639cfadaf09a87ef352046f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TXscfgGI",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-16T00:30:32Z",
       "side": 1,
       "message": "s/could flown/could flow/\ns/funcion/function/",
+      "revId": "0819ea906849924639cfadaf09a87ef352046f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXqdaRCw",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-04-16T01:37:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "TXscfgGI",
       "revId": "0819ea906849924639cfadaf09a87ef352046f37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "TXodXSAY",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-04-16T01:37:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "TXmcPrDs",
+      "revId": "0819ea906849924639cfadaf09a87ef352046f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TXqcohJQ",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-16T00:26:02Z",
       "side": 1,
       "message": "Interesting, and somewhat scary. I wonder if we should impose some kind of sort order. I think in general, we\u0027d prefer O in this case, since a concrete implementor would be a tighter bounder than an interface I think, in terms of further optimizations?",
+      "revId": "0819ea906849924639cfadaf09a87ef352046f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TXqebZLE",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-04-16T01:37:32Z",
+      "side": 1,
+      "message": "In general I think we might prefer the ones that are \"closer\" in some sense and at the same closeness prefer a class to an interface. This could be implemented by a careful traversal of the type hierarchy \"quasi\" lattice.\n\nClearly we would prefer an interface to j.l.Object, right?",
+      "parentUuid": "TXqcohJQ",
       "revId": "0819ea906849924639cfadaf09a87ef352046f37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

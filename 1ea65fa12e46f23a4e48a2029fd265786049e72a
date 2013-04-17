@@ -16,6 +16,41 @@
       "revId": "1ea65fa12e46f23a4e48a2029fd265786049e72a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TeHBYKGc",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5375
+      },
+      "writtenOn": "2013-04-17T22:59:27Z",
+      "side": 1,
+      "message": "Julien, can you upload a new patch with the appropriate changes to HandlerEvaluatorTest too?",
+      "parentUuid": "MZN6Mpdc",
+      "revId": "1ea65fa12e46f23a4e48a2029fd265786049e72a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TeLCA4IA",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5375
+      },
+      "writtenOn": "2013-04-17T22:59:27Z",
+      "side": 1,
+      "message": "One space after \u003d.",
+      "revId": "1ea65fa12e46f23a4e48a2029fd265786049e72a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

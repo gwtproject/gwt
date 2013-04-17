@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TiFomdck",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompileDir.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-04-17T09:50:30Z",
+      "side": 1,
+      "message": "YES!\n\nI will finally be able to delete my CompileDirAccessor :-)",
+      "revId": "2a87777a8a1cb858b3b690442646968d82595e0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

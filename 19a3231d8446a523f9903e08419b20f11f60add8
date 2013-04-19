@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "TqzcWWGE",
+        "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5415
+      },
+      "writtenOn": "2013-04-19T13:22:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Tq5fIhPs",
+      "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tq7fNiAo",
         "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-19T12:17:52Z",
       "side": 1,
       "message": "do not reformat irrelevant source lines",
+      "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TqDo-IZE",
+        "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5415
+      },
+      "writtenOn": "2013-04-19T13:22:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Tq7fNiAo",
       "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "TqNpM5VE",
+        "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 5415
+      },
+      "writtenOn": "2013-04-19T13:22:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Tq1fDzN0",
+      "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tq3fAUNA",
         "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "Tqphgteg",
+        "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 5415
+      },
+      "writtenOn": "2013-04-19T13:22:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Tq3fAUNA",
+      "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tqxe9VE8",
         "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2013-04-19T12:17:52Z",
       "side": 1,
       "message": "do not reformat irrelevant source lines",
+      "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Tq9rrgTM",
+        "filename": "user/src/com/google/gwt/i18n/client/NumberFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 5415
+      },
+      "writtenOn": "2013-04-19T13:22:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Tqxe9VE8",
       "revId": "19a3231d8446a523f9903e08419b20f11f60add8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

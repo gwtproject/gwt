@@ -451,7 +451,7 @@ public class NumberFormat {
   /**
    * Provides the global currency format for the current locale, using its
    * default currency.
-   * 
+   *
    * @return a <code>NumberFormat</code> capable of producing and consuming
    *         currency format for the current locale
    */
@@ -471,7 +471,7 @@ public class NumberFormat {
     return new NumberFormat(defaultNumberConstants.globalCurrencyPattern(),
         currencyData, false);
   }
-  
+
   /**
    * Provides the global currency format for the current locale, using a
    * specified currency.
@@ -546,7 +546,7 @@ public class NumberFormat {
    * Provides the simple currency format for the current locale using a
    * specified currency. Note that these formats may be ambiguous if the
    * currency isn't clear from other content on the page.
-   * 
+   *
    * @param currencyCode valid currency code, as defined in
    *        com.google.gwt.i18n.client
    *        .constants.CurrencyCodeMapConstants.properties
@@ -977,7 +977,7 @@ public class NumberFormat {
   /**
    * Change the number of fractional digits used for formatting with this
    * instance.
-   * 
+   *
    * @param digits the exact number of fractional digits for formatted
    *     values; must be >= 0
    * @return {@code this}, for chaining purposes
@@ -990,7 +990,7 @@ public class NumberFormat {
    * Change the number of fractional digits used for formatting with this
    * instance. Digits after {@code minDigits} that are zero will be omitted from
    * the formatted value.
-   * 
+   *
    * @param minDigits the minimum number of fractional digits for formatted
    *     values; must be >= 0
    * @param maxDigits the maximum number of fractional digits for formatted
@@ -1498,7 +1498,7 @@ public class NumberFormat {
             isCurrencyFormat = true;
             if ((pos + 1) < len && pattern.charAt(pos + 1) == CURRENCY_SIGN) {
               ++pos;
-              if (pos < len - 3 && pattern.charAt(pos + 1) == CURRENCY_SIGN
+              if (pos < len - 2 && pattern.charAt(pos + 1) == CURRENCY_SIGN
                   && pattern.charAt(pos + 2) == CURRENCY_SIGN) {
                 pos += 2;
                 affix.append(currencyData.getSimpleCurrencySymbol());

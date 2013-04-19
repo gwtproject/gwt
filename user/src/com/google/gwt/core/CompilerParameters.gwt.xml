@@ -56,10 +56,7 @@
 
   <!--
     The iframe linker chunks its output into multiple <script> tags. The default size is fine for
-    production use; it is overridable mainly for test cases. This size must be small enough that
-    block-size restrictions in IE are satisfied, because the script tag chunking undoes
-    JsIEBlockSizeVisitor.  If it's set to -1, then no chunking is performed and
-    JsIEBlockSizeVisitor has its usual effect.
+    production use; it is overridable mainly for test cases.
   -->
   <define-configuration-property name="iframe.linker.script.chunk.size"
     is-multi-valued="false" />

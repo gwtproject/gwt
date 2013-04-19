@@ -82,7 +82,6 @@ import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JsAbstractTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsFunctionClusterer;
-import com.google.gwt.dev.jjs.impl.JsIEBlockTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsoDevirtualizer;
 import com.google.gwt.dev.jjs.impl.LongCastNormalizer;
 import com.google.gwt.dev.jjs.impl.LongEmulationNormalizer;
@@ -111,7 +110,6 @@ import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
 import com.google.gwt.dev.js.JsCoerceIntShift;
 import com.google.gwt.dev.js.JsDuplicateCaseFolder;
 import com.google.gwt.dev.js.JsDuplicateFunctionRemover;
-import com.google.gwt.dev.js.JsIEBlockSizeVisitor;
 import com.google.gwt.dev.js.JsInliner;
 import com.google.gwt.dev.js.JsNormalizer;
 import com.google.gwt.dev.js.JsObfuscateNamer;
@@ -465,15 +463,6 @@ public class JavaToJavaScriptCompiler {
       
       // (11) Perform any post-obfuscation normalizations.
 
-      // Work around an IE7 bug,
-      // http://code.google.com/p/google-web-toolkit/issues/detail?id=1440
-      // note, JsIEBlockTextTransformer now handles restructuring top level
-      // blocks, this class now handles non-top level blocks only.
-      boolean splitBlocks = isIE6orUnknown;
-
-      if (splitBlocks) {
-        JsIEBlockSizeVisitor.exec(jsProgram);
-      }
       JsBreakUpLargeVarStatements.exec(jsProgram, propertyOracles);
 
       // (12) Generate the final output text.
@@ -484,7 +473,7 @@ public class JavaToJavaScriptCompiler {
               ? new SizeBreakdown[js.length] : null;
       List<Map<Range, SourceInfo>> sourceInfoMaps = new ArrayList<Map<Range, SourceInfo>>();
       generateJavaScriptCode(options, jprogram, jsProgram, jjsmap, js, ranges,
-          sizeBreakdowns, sourceInfoMaps, splitBlocks, isSourceMapsEnabled);
+          sizeBreakdowns, sourceInfoMaps, isSourceMapsEnabled);
 
       PermutationResult toReturn =
           new PermutationResultImpl(js, permutation, makeSymbolMap(symbolTable, jsProgram), ranges);
@@ -1061,15 +1050,13 @@ public class JavaToJavaScriptCompiler {
 *          JavaScript
    * @param sourceInfoMaps An array to hold the source info maps for that
 *          JavaScript
-   * @param splitBlocks true if current permutation is for IE6 or unknown
    * @param sourceMapsEnabled
    */
   private static void generateJavaScriptCode(JJSOptions options,
       JProgram jprogram, JsProgram jsProgram,
       JavaToJavaScriptMap jjsMap, String[] js, StatementRanges[] ranges,
       SizeBreakdown[] sizeBreakdowns,
-      List<Map<Range, SourceInfo>> sourceInfoMaps,
-      boolean splitBlocks, boolean sourceMapsEnabled) {
+      List<Map<Range, SourceInfo>> sourceInfoMaps, boolean sourceMapsEnabled) {
 
     boolean useClosureCompiler = options.isClosureCompilerEnabled();
     if (useClosureCompiler) {
@@ -1118,12 +1105,6 @@ public class JavaToJavaScriptCompiler {
         transformer.exec();
       }
       functionClusterEvent.end();
-
-      // rewrite top-level blocks to limit the number of statements
-      if (!sourceMapsEnabled && splitBlocks) {
-        transformer = new JsIEBlockTextTransformer(transformer);
-        transformer.exec();
-      }
 
       js[i] = transformer.getJs();
       ranges[i] = transformer.getStatementRanges();

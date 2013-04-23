@@ -252,15 +252,27 @@ public class JavaToJavaScriptCompiler {
   private static final String ENUM_NAME_OBFUSCATION_PROPERTY = "compiler.enum.obfuscate.names";
 
   /**
+   * Continuing to apply optimizations till the rate of change reaches this value causes the AST to
+   * reach a fixed point.
+   */
+  private static final int FIXED_POINT_CHANGE_RATE = 0;
+
+  /**
+   * Ending optimization passes when the rate of change has reached this value results in
+   * gaining nearly all of the impact while avoiding the long tail of costly but low-impact passes.
+   */
+  private static final float EFFICIENT_CHANGE_RATE = 0.01f;
+
+  /**
    * Compiles a particular permutation, based on a precompiled unified AST.
    *
    * @param logger the logger to use
-   * @param unifiedAst the result of a
-   *          {@link #precompile(TreeLogger, ModuleDef, RebindPermutationOracle, String[], String[], JJSOptions, boolean, PrecompilationMetricsArtifact)}
+   * @param unifiedAst the result of a {@link #precompile(TreeLogger, ModuleDef,
+   *          RebindPermutationOracle, String[], String[], JJSOptions, boolean,
+   *          PrecompilationMetricsArtifact)}
    * @param permutation the permutation to compile
    * @return the output JavaScript
-   * @throws UnableToCompleteException if an error other than
-   *           {@link OutOfMemoryError} occurs
+   * @throws UnableToCompleteException if an error other than {@link OutOfMemoryError} occurs
    */
   public static PermutationResult compilePermutation(TreeLogger logger, UnifiedAst unifiedAst,
       Permutation permutation) throws UnableToCompleteException {
@@ -768,11 +780,16 @@ public class JavaToJavaScriptCompiler {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE);
 
     List<OptimizerStats> allOptimizerStats = new ArrayList<OptimizerStats>();
-    int counter = 0;
-    int optimizationLevel = options.getOptimizationLevel();
+    int passCount = 0;
+    int nodeCount = getNodeCount(jprogram);
+    int lastNodeCount;
+
+    int passLimit = options.getOptimizationLevel();
+    float minimumChangeRate = passLimit < OptionOptimize.OPTIMIZE_LEVEL_MAX
+        ? EFFICIENT_CHANGE_RATE : FIXED_POINT_CHANGE_RATE;
     while (true) {
-      counter++;
-      if (optimizationLevel < OptionOptimize.OPTIMIZE_LEVEL_MAX && counter > optimizationLevel) {
+      passCount++;
+      if (passLimit < OptionOptimize.OPTIMIZE_LEVEL_MAX && passCount > passLimit) {
         break;
       }
       if (Thread.interrupted()) {
@@ -781,9 +798,14 @@ public class JavaToJavaScriptCompiler {
       }
       AstDumper.maybeDumpAST(jprogram);
       OptimizerStats stats =
-          optimizeLoop("Pass " + counter, jprogram, options.isAggressivelyOptimize());
+          optimizeLoop("Pass " + passCount, jprogram, options.isAggressivelyOptimize(), nodeCount);
       allOptimizerStats.add(stats);
-      if (!stats.didChange()) {
+      lastNodeCount = nodeCount;
+      nodeCount = getNodeCount(jprogram);
+
+      float nodeChangeRate = stats.getNumMods() / (float) lastNodeCount;
+      float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
+      if (nodeChangeRate <= minimumChangeRate && sizeChangeRate <= minimumChangeRate) {
         break;
       }
     }
@@ -849,15 +871,15 @@ public class JavaToJavaScriptCompiler {
 
   protected static OptimizerStats optimizeLoop(String passName, JProgram jprogram,
       boolean isAggressivelyOptimize) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "loop");
-
-    // Count the number of nodes in the AST so we can measure the efficiency of
-    // the optimizers.
-    Event countEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "countNodes");
     TreeStatistics treeStats = new TreeStatistics();
     treeStats.accept(jprogram);
-    int numNodes = treeStats.getNodeCount();
-    countEvent.end();
+    int nodeCount = treeStats.getNodeCount();
+    return optimizeLoop("Early Optimization", jprogram, false, nodeCount);
+  }
+
+  protected static OptimizerStats optimizeLoop(String passName, JProgram jprogram,
+      boolean isAggressivelyOptimize, int nodeCount) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "loop");
 
     // Recompute clinits each time, they can become empty.
     jprogram.typeOracle.recomputeAfterOptimizations();
@@ -866,13 +888,13 @@ public class JavaToJavaScriptCompiler {
     OptimizerStats stats = new OptimizerStats(passName);
 
     // Remove unreferenced types, fields, methods, [params, locals]
-    stats.add(Pruner.exec(jprogram, true).recordVisits(numNodes));
+    stats.add(Pruner.exec(jprogram, true).recordVisits(nodeCount));
 
     // finalize locals, params, fields, methods, classes
-    stats.add(Finalizer.exec(jprogram).recordVisits(numNodes));
+    stats.add(Finalizer.exec(jprogram).recordVisits(nodeCount));
 
     // rewrite non-polymorphic calls as static calls; update all call sites
-    stats.add(MakeCallsStatic.exec(jprogram).recordVisits(numNodes));
+    stats.add(MakeCallsStatic.exec(jprogram).recordVisits(nodeCount));
 
     // type flow tightening
     // - fields, locals based on assignment
@@ -880,20 +902,20 @@ public class JavaToJavaScriptCompiler {
     // - method bodies based on return statements
     // - polymorphic methods based on return types of all implementors
     // - optimize casts and instance of
-    stats.add(TypeTightener.exec(jprogram).recordVisits(numNodes));
+    stats.add(TypeTightener.exec(jprogram).recordVisits(nodeCount));
 
     // tighten method call bindings
-    stats.add(MethodCallTightener.exec(jprogram).recordVisits(numNodes));
+    stats.add(MethodCallTightener.exec(jprogram).recordVisits(nodeCount));
 
     // dead code removal??
-    stats.add(DeadCodeElimination.exec(jprogram).recordVisits(numNodes));
+    stats.add(DeadCodeElimination.exec(jprogram).recordVisits(nodeCount));
 
     // inlining
-    stats.add(MethodInliner.exec(jprogram).recordVisits(numNodes));
+    stats.add(MethodInliner.exec(jprogram).recordVisits(nodeCount));
 
     if (isAggressivelyOptimize) {
       // remove same parameters value
-      stats.add(SameParameterValueOptimizer.exec(jprogram).recordVisits(numNodes));
+      stats.add(SameParameterValueOptimizer.exec(jprogram).recordVisits(nodeCount));
 
       /*
        * Enum ordinalization.
@@ -901,7 +923,7 @@ public class JavaToJavaScriptCompiler {
        * TODO(jbrosenberg): graduate this out of the 'isAggressivelyOptimize'
        * block, over time.
        */
-      stats.add(EnumOrdinalizer.exec(jprogram).recordVisits(numNodes));
+      stats.add(EnumOrdinalizer.exec(jprogram).recordVisits(nodeCount));
     }
 
     // prove that any types that have been culled from the main tree are
@@ -909,6 +931,15 @@ public class JavaToJavaScriptCompiler {
 
     optimizeEvent.end();
     return stats;
+  }
+
+  private static int getNodeCount(JProgram jProgram) {
+    Event countEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "countNodes");
+    TreeStatistics treeStats = new TreeStatistics();
+    treeStats.accept(jProgram);
+    int nodeCount = treeStats.getNodeCount();
+    countEvent.end();
+    return nodeCount;
   }
 
   private static MultipleDependencyGraphRecorder chooseDependencyRecorder(boolean soycEnabled,

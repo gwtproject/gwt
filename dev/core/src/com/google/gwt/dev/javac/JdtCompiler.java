@@ -597,8 +597,8 @@ public class JdtCompiler {
     options.produceReferenceInfo = true;
 
     // Turn off all warnings, saves some memory / speed.
-    options.reportUnusedDeclaredThrownExceptionIncludeDocCommentReference = false;
-    options.reportUnusedDeclaredThrownExceptionExemptExceptionAndThrowable = false;
+//    options.reportUnusedDeclaredThrownExceptionIncludeDocCommentReference = false;
+//    options.reportUnusedDeclaredThrownExceptionExemptExceptionAndThrowable = false;
     options.warningThreshold = 0;
     options.inlineJsrBytecode = true;
     return options;

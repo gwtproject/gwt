@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "T9q8vFa4",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseInheritanceTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-24T22:32:23Z",
+      "side": 1,
+      "message": "\"failed on purpose\"",
+      "revId": "7c1dca53de36a00cf210317071b9ff56b24e43f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

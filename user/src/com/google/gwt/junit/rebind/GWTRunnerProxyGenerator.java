@@ -246,13 +246,11 @@ public class GWTRunnerProxyGenerator extends Generator {
     return composerFactory.createSourceWriter(ctx, printWriter);
   }
 
-  private static List<JMethod> getTestMethods(JClassType requestedClass) {
+  private static List<JMethod> getTestMethods(JClassType cls) {
     List<JMethod> list = new ArrayList<JMethod>();
-    for (JClassType cls = requestedClass; cls != null; cls = cls.getSuperclass()) {
-      for (JMethod declMethod : cls.getMethods()) {
-        if (isJUnitTestMethod(declMethod)) {
-          list.add(declMethod);
-        }
+    for (JMethod method : cls.getInheritableMethods()) {
+      if (isJUnitTestMethod(method)) {
+        list.add(method);
       }
     }
     return list;

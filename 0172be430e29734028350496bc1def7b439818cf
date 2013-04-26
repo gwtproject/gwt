@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "UF66Dd0M",
+        "filename": "user/src/com/google/gwt/user/client/ui/PanelComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-26T12:00:22Z",
+      "side": 1,
+      "message": "How about:\n\n   T widget \u003d getCheckedWidget();\n   if (widget instance of HasWidgets.ForIsWidget) {\n      widget.add(w);\n   } else {\n      this.add(getWidgetOrNull(w));\n   }\n\nin case the wrapped widget defers the call to asWidget(). If all HasWidgets used in the app are HasWidgets.ForIsWidget (or with a bit of luck, those used within a PanelComposite; I don\u0027t know how smart the compiler can be in this case), then the if() will be evaluated statically and simplified in the generated JS.\n\nAFAICT, all \"stock\" HasWidgets are HasWidgets.ForIsWidget.",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UF27dj2g",
+        "filename": "user/src/com/google/gwt/user/client/ui/ResizeComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-26T12:00:22Z",
+      "side": 1,
+      "message": "Should ResizeComposite be deprecated then?",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "T9hLqDN0",
         "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
         "patchSetId": 1
@@ -30,6 +64,24 @@
       "writtenOn": "2013-04-25T00:54:03Z",
       "side": 1,
       "message": "Is there somewhere else we can do this check so that it\u0027s only done once and we don\u0027t need this method? Could it be done in onAttach()?",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UFw7syxI",
+        "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-04-26T12:00:22Z",
+      "side": 1,
+      "message": "onAttach will fail already with an NPE.\n\nIMO, render() should check it when renderable\u003d\u003dnull (if renderable!\u003dnull, then widget should be !\u003dnull so there\u0027s no need to test, though we could add an \u0027assert\u0027)",
+      "parentUuid": "T9pIe-Bw",
       "revId": "0172be430e29734028350496bc1def7b439818cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

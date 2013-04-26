@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "UEFhE1dA",
+        "filename": "user/src/com/google/gwt/user/client/ui/PanelComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure what are we trying to solve with this alternative?",
+      "parentUuid": "UF66Dd0M",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UF27dj2g",
         "filename": "user/src/com/google/gwt/user/client/ui/ResizeComposite.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "UELhc4ac",
+        "filename": "user/src/com/google/gwt/user/client/ui/ResizeComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "Actually, this class exist for the same reason non-generic Composite exists. \nI didn\u0027t extend TypeComposite to keep it backward compatible but we can change that.",
+      "parentUuid": "UF27dj2g",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "T9hLqDN0",
         "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-04-25T00:54:03Z",
       "side": 1,
       "message": "Do we need to update CompositeExample?",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UEJhZHbg",
+        "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "Will take a look after we decide how to move forward.",
+      "parentUuid": "T9hLqDN0",
       "revId": "0172be430e29734028350496bc1def7b439818cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -88,6 +142,42 @@
     },
     {
       "key": {
+        "uuid": "UEJgw-VU",
+        "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "Actually I\u0027m totally lost in Renderable part. Wouldn\u0027t it also fail with with NPE when initializeClaimedElement called? Isn\u0027t that a better place to put the check?",
+      "parentUuid": "UFw7syxI",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UEFiSlRA",
+        "filename": "user/src/com/google/gwt/user/client/ui/TypedComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "Any of the public APIs of the widget can be called from outside without the widget attached to the dom. When that happens, if initwidget is not called yet, they will end up with NPE.\nAlthough I used getCheckedWidget in new ones, Composite class itself is still prone to this issue as it is not using getCheckedWidget itself:\nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d6997\n\nI can send another CL to fix that?",
+      "parentUuid": "T9pIe-Bw",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "T9rLE2GA",
         "filename": "user/src/com/google/gwt/user/client/ui/TypedResizeComposite.java",
         "patchSetId": 1
@@ -99,6 +189,24 @@
       "writtenOn": "2013-04-25T00:54:03Z",
       "side": 1,
       "message": "Perhaps ResizeComposite2 would actually be a better name? It might seem ugly at first, but it shows up next to ResizeComposite in an IDE and makes it very clear that it obsoletes ResizeComposite.\n\nSimilarly, perhaps TypedComposite should be Composite2?",
+      "revId": "0172be430e29734028350496bc1def7b439818cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UEHh3meU",
+        "filename": "user/src/com/google/gwt/user/client/ui/TypedResizeComposite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-26T22:44:58Z",
+      "side": 1,
+      "message": "I like the idea that it will show up next to Composite but I think that feels same as deprecating the old one. If we want everybody to use Composite2 then we can just change Composite itself to add generics - which is OK with me.",
+      "parentUuid": "T9rLE2GA",
       "revId": "0172be430e29734028350496bc1def7b439818cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

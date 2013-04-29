@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UQEgSc2k",
+        "filename": "user/test/com/google/gwt/junit/JUnitSuite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-29T22:36:22Z",
+      "side": 1,
+      "message": "Missing RunStyleSeleniumTest",
+      "revId": "a49c6008ff3ee7bfa1d18e897165d19f80e238ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UQMU4LPs",
+        "filename": "user/test/com/google/gwt/junit/JUnitSuite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-29T22:36:22Z",
+      "side": 1,
+      "message": "Missing FakeCssMakerTest",
+      "revId": "a49c6008ff3ee7bfa1d18e897165d19f80e238ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UQEUsHLc",
+        "filename": "user/test/com/google/gwt/junit/JUnitSuite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-04-29T22:36:22Z",
+      "side": 1,
+      "message": "Please move next Junitshelltest",
+      "revId": "a49c6008ff3ee7bfa1d18e897165d19f80e238ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

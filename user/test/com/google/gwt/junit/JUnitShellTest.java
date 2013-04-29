@@ -47,6 +47,11 @@ public class JUnitShellTest extends TestCase {
         shell.getModuleUrl("localhost", 1234, "example", 456));
   }
 
+
+  public void testArgOptimize() throws Exception {
+    parseGoodArgs("-optimize","8");
+  }
+
   private void parseGoodArgs(String... argsToUse) {
     JUnitShell.ArgProcessor processor = new JUnitShell.ArgProcessor(shell);
     assertTrue("didn't accept good args", processor.processArgs(argsToUse));

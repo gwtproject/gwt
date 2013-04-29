@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UQCVEeNA",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JJSOptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-04-29T21:43:50Z",
+      "side": 1,
+      "message": "I know you\u0027re just following convention, but I\u0027m not sure we need an interface and implementation for every flag. It seems like one interface and implementation for all the optimizer tweaking flags would be enough?",
+      "revId": "771c2b902ff1bfed3aa37034c6f5b1b9a666830d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

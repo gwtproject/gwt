@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UQ3Stjo8",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-06T21:39:19Z",
+      "side": 1,
+      "message": "I think there should be more tests, of both GoodJsni and BadJsni (spaces in type name, before and after the \u0027::\u0027, before and after the \u0027(\u0027, in between parameters, before the \u0027)\u0027)",
+      "revId": "1573842bac6e6ec04f10993c68d0df67b4ddd93f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

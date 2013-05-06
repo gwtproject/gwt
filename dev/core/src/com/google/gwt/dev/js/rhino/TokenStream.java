@@ -1407,6 +1407,10 @@ public class TokenStream {
 
     private boolean jsniMatchParamTypeSignature() throws IOException {
       int c = in.read();
+      // Allow whitespace in the type signature.
+      if (Character.isWhitespace(c)) {
+        return true;
+      }
       switch (c) {
         case 'Z':
         case 'B':

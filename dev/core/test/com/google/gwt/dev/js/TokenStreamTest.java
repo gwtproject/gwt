@@ -55,6 +55,7 @@ public class TokenStreamTest extends TestCase {
     assertGoodJsni("@org.group.Foo::bar(I)");
     assertGoodJsni("@org.group.Foo::bar(IJ)");
     assertGoodJsni("@org.group.Foo::bar(Lorg/group/Foo;)");
+    assertGoodJsni("@org.group.Foo::bar(Lorg/group/Foo;Lorg/group/Bar;)");
     assertGoodJsni("@org.group.Foo::bar([I)");
     // The following is currently tolerated
     // assertBadJsni("@org.group.Foo::bar(Lorg/group/Foo)");
@@ -64,6 +65,16 @@ public class TokenStreamTest extends TestCase {
     // Method refs with * as the parameter list
     assertGoodJsni("@org.group.Foo::bar(*)");
     assertBadJsni("@org.group.Foo::bar(*");
+
+    // Refs that span lines
+    assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;)");
+    assertGoodJsni("@org.group.Foo::bar(\n[I\n)");
+
+    // The following currently fail due to whitespace handling issue.
+    assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo;\nA)");
+    assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo;,\nA)");
+    assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo,\nA)");
+    assertBadJsni("@org.group.Foo::\nbar()");
 
     // bad references
     assertBadJsni("@");
@@ -85,6 +96,7 @@ public class TokenStreamTest extends TestCase {
   private void assertGoodJsni(String jsniRef) throws IOException {
     Token token = scanToken(jsniRef);
     assertEquals(TokenStream.NAME, token.type);
-    assertEquals(jsniRef, token.text);
+    // The token.text won't have any whitespace included.
+    assertEquals(jsniRef.replaceAll("\\s", ""), token.text);
   }
 }

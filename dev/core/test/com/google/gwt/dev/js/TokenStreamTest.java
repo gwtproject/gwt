@@ -65,6 +65,9 @@ public class TokenStreamTest extends TestCase {
     assertGoodJsni("@org.group.Foo::bar(*)");
     assertBadJsni("@org.group.Foo::bar(*");
 
+    // Refs that span lines
+    assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;)");
+
     // bad references
     assertBadJsni("@");
     assertBadJsni("@org.group.Foo.bar");
@@ -85,6 +88,7 @@ public class TokenStreamTest extends TestCase {
   private void assertGoodJsni(String jsniRef) throws IOException {
     Token token = scanToken(jsniRef);
     assertEquals(TokenStream.NAME, token.type);
-    assertEquals(jsniRef, token.text);
+    // The token.text won't have any whitespace included.
+    assertEquals(jsniRef.replaceAll("\\s", ""), token.text);
   }
 }

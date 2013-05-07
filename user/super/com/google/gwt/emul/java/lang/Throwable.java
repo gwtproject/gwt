@@ -19,6 +19,8 @@ import com.google.gwt.core.client.impl.StackTraceCreator;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * See <a
@@ -40,6 +42,7 @@ public class Throwable implements Serializable {
    */
   private transient Throwable cause;
   private String detailMessage;
+  private transient List<Throwable> suppressed;
   private transient StackTraceElement[] stackTrace;
 
   {
@@ -61,6 +64,13 @@ public class Throwable implements Serializable {
   public Throwable(Throwable cause) {
     this.detailMessage = (cause == null) ? null : cause.toString();
     this.cause = cause;
+  }
+
+  public final void addSuppressed(Throwable exception) {
+    if (suppressed == null) {
+      suppressed = new ArrayList<Throwable>(1);
+    }
+    suppressed.add(exception);
   }
 
   /**
@@ -95,6 +105,13 @@ public class Throwable implements Serializable {
       return new StackTraceElement[0];
     }
     return stackTrace;
+  }
+
+  public final Throwable[] getSuppressed() {
+    if (suppressed == null) {
+      suppressed = new ArrayList<Throwable>(1);
+    }
+    return suppressed.toArray(new Throwable[suppressed.size()]);
   }
 
   public Throwable initCause(Throwable cause) {

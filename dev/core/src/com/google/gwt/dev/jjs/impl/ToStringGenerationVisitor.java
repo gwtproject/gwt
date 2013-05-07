@@ -132,6 +132,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_NATIVE = "native ".toCharArray();
   protected static final char[] CHARS_NEW = "new ".toCharArray();
   protected static final char[] CHARS_NULL = "null".toCharArray();
+  protected static final char[] CHARS_PIPE = " | ".toCharArray();
   protected static final char[] CHARS_PRIVATE = "private ".toCharArray();
   protected static final char[] CHARS_PROTECTED = "protected ".toCharArray();
   protected static final char[] CHARS_PUBLIC = "public ".toCharArray();
@@ -890,8 +891,17 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     for (int i = 0, c = x.getCatchArgs().size(); i < c; ++i) {
       print(CHARS_CATCH);
       lparen();
+
+      Iterator<JType> it = x.getCatchTypes().get(i).iterator();
+      printTypeName(it.next());
+      while (it.hasNext()) {
+        print(CHARS_PIPE);
+        printTypeName(it.next());
+      }
+      space();
+
       JLocalRef localRef = x.getCatchArgs().get(i);
-      accept(localRef.getTarget());
+      printName(localRef.getTarget());
       rparen();
       space();
       JBlock block = x.getCatchBlocks().get(i);
@@ -1150,11 +1160,15 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   protected void visitCollectionWithCommas(Iterator<? extends JNode> iter) {
+    visitCollectionWith(CHARS_COMMA, iter);
+  }
+
+  protected void visitCollectionWith(char[] ch, Iterator<? extends JNode> iter) {
     if (iter.hasNext()) {
       accept(iter.next());
     }
     while (iter.hasNext()) {
-      print(CHARS_COMMA);
+      print(ch);
       accept(iter.next());
     }
   }

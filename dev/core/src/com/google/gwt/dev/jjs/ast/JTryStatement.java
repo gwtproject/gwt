@@ -24,19 +24,43 @@ import java.util.List;
  */
 public class JTryStatement extends JStatement {
 
+  private final List<List<JType>> catchTypes;
   private final List<JLocalRef> catchArgs;
   private final List<JBlock> catchBlocks;
   private final JBlock finallyBlock;
   private final JBlock tryBlock;
 
-  public JTryStatement(SourceInfo info, JBlock tryBlock, List<JLocalRef> catchArgs,
-      List<JBlock> catchBlocks, JBlock finallyBlock) {
+  /**
+   * Construct a Java try statement.
+   *
+   * Parameters catchTypes, catchArgs and catchBlocks must agree on size. Each element of each
+   * of these lists corresponds to a catch statement.
+   *
+   * @param info the source information.
+   * @param tryBlock the statement block inside the try construct.
+   * @param catchTypes  each element of this list contains the catch types the corresponding catch
+   *                    block has. (Each catch block might have multiple Exception types associated
+   *                    in Java 7).
+   * @param catchArgs each element of this list correspond to the exception variable declared in
+   *                  corresponding catch statement.
+   * @param catchBlocks each element of this list contains the statement block for the corresponding
+   *                    catch block.
+   * @param finallyBlock the statement block corresponding to the finally construct.
+   */
+  public JTryStatement(SourceInfo info, JBlock tryBlock, List<List<JType>> catchTypes,
+      List<JLocalRef> catchArgs, List<JBlock> catchBlocks, JBlock finallyBlock) {
     super(info);
     assert (catchArgs.size() == catchBlocks.size());
+    assert (catchArgs.size() == catchTypes.size());
     this.tryBlock = tryBlock;
     this.catchArgs = catchArgs;
+    this.catchTypes = catchTypes;
     this.catchBlocks = catchBlocks;
     this.finallyBlock = finallyBlock;
+  }
+
+  public List<List<JType>> getCatchTypes() {
+    return catchTypes;
   }
 
   public List<JLocalRef> getCatchArgs() {
@@ -53,6 +77,15 @@ public class JTryStatement extends JStatement {
 
   public JBlock getTryBlock() {
     return tryBlock;
+  }
+
+
+  /**
+   * Resolve an external reference during AST stitching.
+   */
+  public void resolve(int i, int j, JReferenceType newType) {
+    assert newType.replaces(catchTypes.get(i).get(j));
+    catchTypes.get(i).set(j, newType);
   }
 
   public void traverse(JVisitor visitor, Context ctx) {

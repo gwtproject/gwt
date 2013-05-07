@@ -16,6 +16,8 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.dev.util.arg.OptionSource;
+import com.google.gwt.dev.util.arg.OptionSource.SourceLevel;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   private final List<String> moduleNames = new ArrayList<String>();
   private boolean useGuiLogger;
   private File workDir;
+  private SourceLevel sourceLevel = OptionSource.SourceLevel._6;
 
   public CompileTaskOptionsImpl() {
   }
@@ -84,5 +87,15 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
 
   public void setWorkDir(File workDir) {
     this.workDir = workDir;
+  }
+
+  @Override
+  public SourceLevel getSourceLevel() {
+    return sourceLevel;
+  }
+
+  @Override
+  public void setSourceLevel(SourceLevel level) {
+    sourceLevel = level;
   }
 }

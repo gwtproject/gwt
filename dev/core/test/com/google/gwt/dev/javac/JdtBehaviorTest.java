@@ -60,7 +60,7 @@ public class JdtBehaviorTest extends TestCase {
     public CompilerImpl(INameEnvironment environment,
         ICompilerRequestor requestor) {
       super(environment, DefaultErrorHandlingPolicies.proceedWithAllProblems(),
-          JdtCompiler.getCompilerOptions(), requestor,
+          JdtCompiler.getStandardCompilerOptions(), requestor,
           new DefaultProblemFactory(Locale.getDefault()));
     }
   }
@@ -165,6 +165,10 @@ public class JdtBehaviorTest extends TestCase {
 
     public char[] getMainTypeName() {
       return Shared.getShortName(Shared.getTypeName(sourceFile)).toCharArray();
+    }
+
+    public boolean ignoreOptionalProblems() {
+      return false;
     }
 
     public char[][] getPackageName() {

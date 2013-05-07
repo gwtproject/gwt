@@ -581,13 +581,27 @@ public class DeadCodeElimination {
       // 1) Remove catch blocks whose exception type is not instantiable.
       List<JLocalRef> catchArgs = x.getCatchArgs();
       List<JBlock> catchBlocks = x.getCatchBlocks();
+      List<List<JType>> catchTypes = x.getCatchTypes();
+      Iterator<List<JType>> itClauses = catchTypes.iterator();
       Iterator<JLocalRef> itA = catchArgs.iterator();
       Iterator<JBlock> itB = catchBlocks.iterator();
-      while (itA.hasNext()) {
-        JLocalRef localRef = itA.next();
+      while (itClauses.hasNext()) {
+        List<JType> types = itClauses.next();
+        itA.next();
         itB.next();
-        JReferenceType type = (JReferenceType) localRef.getType();
-        if (!program.typeOracle.isInstantiatedType(type) || type == program.getTypeNull()) {
+        // Go over the types in the multiexception and remove the ones that are not instantiable.
+        Iterator<JType> itTypes = types.iterator();
+        while (itTypes.hasNext()) {
+          JReferenceType type = (JReferenceType) itTypes.next();
+          if (!program.typeOracle.isInstantiatedType(type) || type == program.getTypeNull()) {
+            itTypes.remove();
+            madeChanges();
+          }
+        }
+
+        // if all exception types are gone then remove whole clause.
+        if (types.isEmpty()) {
+          itClauses.remove();
           itA.remove();
           itB.remove();
           madeChanges();

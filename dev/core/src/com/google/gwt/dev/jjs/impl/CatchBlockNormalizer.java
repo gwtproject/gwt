@@ -17,6 +17,8 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JBinaryOperation;
+import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JExpression;
@@ -28,11 +30,13 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
+import com.google.gwt.dev.jjs.ast.JType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +81,8 @@ public class CatchBlockNormalizer {
 
       /*
        * Build up a series of if, else if statements to test the type of the
-       * exception object against the type of the user's catch block.
+       * exception object against the types of the user's catch block. Each catch block might have
+       * multiple types in Java 7.
        * 
        * Go backwards so we can nest the else statements in the correct order!
        */
@@ -86,10 +91,23 @@ public class CatchBlockNormalizer {
       for (int i = x.getCatchBlocks().size() - 1; i >= 0; --i) {
         JBlock block = x.getCatchBlocks().get(i);
         JLocalRef arg = x.getCatchArgs().get(i);
+        List<JType> exceptionsTypes = x.getCatchTypes().get(i);
         catchInfo = block.getSourceInfo();
-        JReferenceType argType = (JReferenceType) arg.getType();
-        // if ($e instanceof ArgType) { var userVar = $e; <user code> }
-        JExpression ifTest = new JInstanceOf(catchInfo, argType, new JLocalRef(catchInfo, exVar));
+
+        // if ($e instanceof ArgType1 or $e instanceof ArgType2 ...) {
+        //   var userVar = $e; <user code>
+        // }
+
+        // Handle the first Exception type.
+        JExpression ifTest = new JInstanceOf(catchInfo, (JReferenceType) exceptionsTypes.get(0),
+            new JLocalRef(catchInfo, exVar));
+        // Handle the rest of the Exception types if any.
+        for (int j = 1; j < exceptionsTypes.size(); j++) {
+          JExpression orExp = new JInstanceOf(catchInfo, (JReferenceType) exceptionsTypes.get(j),
+              new JLocalRef(catchInfo, exVar));
+          ifTest = new JBinaryOperation(catchInfo, JPrimitiveType.BOOLEAN, JBinaryOperator.OR,
+              ifTest, orExp);
+        }
         JDeclarationStatement declaration =
             new JDeclarationStatement(catchInfo, arg, new JLocalRef(catchInfo, exVar));
         block.addStmt(0, declaration);

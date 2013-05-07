@@ -17,6 +17,9 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.dev.ArgProcessorBase;
+import com.google.gwt.dev.util.arg.ArgHandlerSource;
+import com.google.gwt.dev.util.arg.OptionSource;
+import com.google.gwt.dev.util.arg.OptionSource.SourceLevel;
 import com.google.gwt.util.tools.ArgHandler;
 import com.google.gwt.util.tools.ArgHandlerDir;
 import com.google.gwt.util.tools.ArgHandlerExtra;
@@ -25,6 +28,7 @@ import com.google.gwt.util.tools.ArgHandlerInt;
 import com.google.gwt.util.tools.ArgHandlerString;
 
 import java.io.File;
+import java.lang.Override;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -46,6 +50,8 @@ public class Options {
   private String preferredHost = "localhost";
   private int port = 9876;
   private RecompileListener recompileListener = RecompileListener.NONE;
+  // Use the same default as the GWT compiler.
+  private SourceLevel sourceLevel = OptionSource.defaultSourceLevel;
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -105,6 +111,13 @@ public class Options {
   }
 
   /**
+   * Java source level compatibility,
+   */
+  SourceLevel getSourceLevel() {
+    return sourceLevel;
+  }
+
+  /**
    * If true, just compile the modules, then exit.
    */
   boolean isCompileTest() {
@@ -147,6 +160,17 @@ public class Options {
       registerHandler(new AllowMissingSourceDirFlag());
       registerHandler(new SourceFlag());
       registerHandler(new ModuleNameArgument());
+      registerHandler(new ArgHandlerSource(new OptionSource() {
+        @Override
+        public SourceLevel getSourceLevel() {
+          return sourceLevel;
+        }
+
+        @Override
+        public void setSourceLevel(SourceLevel sourceLevel) {
+          Options.this.sourceLevel = sourceLevel;
+        }
+      }));
     }
 
     @Override

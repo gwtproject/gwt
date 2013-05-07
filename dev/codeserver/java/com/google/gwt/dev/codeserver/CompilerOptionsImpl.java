@@ -19,8 +19,11 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.util.arg.OptionOptimize;
+import com.google.gwt.dev.util.arg.OptionSource;
+import com.google.gwt.dev.util.arg.OptionSource.SourceLevel;
 
 import java.io.File;
+import java.lang.Override;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,10 +34,12 @@ import java.util.List;
 class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   private final CompileDir compileDir;
   private final String moduleName;
+  private final SourceLevel sourceLevel;
 
-  CompilerOptionsImpl(CompileDir compileDir, String moduleName) {
+  CompilerOptionsImpl(CompileDir compileDir, String moduleName, SourceLevel sourceLevel) {
     this.compileDir = compileDir;
     this.moduleName = moduleName;
+    this.sourceLevel = sourceLevel;
   }
 
   @Override
@@ -98,6 +103,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public JsOutputOption getOutput() {
     return JsOutputOption.PRETTY;
+  }
+
+  @Override
+  public SourceLevel getSourceLevel() {
+    return sourceLevel;
   }
 
   @Override

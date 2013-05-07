@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2013 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,17 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev;
-
-import com.google.gwt.dev.util.arg.OptionGuiLogger;
-import com.google.gwt.dev.util.arg.OptionLogLevel;
-import com.google.gwt.dev.util.arg.OptionModuleName;
-import com.google.gwt.dev.util.arg.OptionSource;
-import com.google.gwt.dev.util.arg.OptionWorkDir;
+package java.lang;
 
 /**
- * A common set of options for all compile tasks.
+ * Indicates that a class implements <code>cose()</code> and can be used in the try-with-resources
+ * statetment.
  */
-public interface CompileTaskOptions extends OptionGuiLogger, OptionModuleName,
-    OptionLogLevel, OptionWorkDir, OptionSource {
+public interface AutoCloseable {
+
+  /**
+   * Closes this resource.
+   * @throws Exception
+   */
+  void close() throws Exception;
 }

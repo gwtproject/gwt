@@ -37,9 +37,13 @@ public class Throwable implements Serializable {
    * to ensure that only the detailMessage field is serialized. Changing the
    * field modifiers below may necessitate a change to the server's
    * SerializabilityUtil.fieldQualifiesForSerialization(Field) method.
+   *
+   * TODO(rluble): Add remaining functionality for suppressed Exceptions (e.g.
+   * printing). Also review the class for missing Java 7 compatibility.
    */
   private transient Throwable cause;
   private String detailMessage;
+  private transient Throwable[] suppressed;
   private transient StackTraceElement[] stackTrace;
 
   {
@@ -61,6 +65,25 @@ public class Throwable implements Serializable {
   public Throwable(Throwable cause) {
     this.detailMessage = (cause == null) ? null : cause.toString();
     this.cause = cause;
+  }
+
+  /**
+   * Call to add an exception that was suppressed. Used by try-with-resources.
+   */
+  public final void addSuppressed(Throwable exception) {
+    assert exception != null;
+    assert exception != this;
+
+    Throwable[] newSuppressed = new Throwable[suppressed.length + 1];
+
+    if (suppressed != null) {
+      for (int i = 0; i < suppressed.length; i++) {
+        newSuppressed[i] = suppressed[i];
+      }
+    }
+
+    newSuppressed[newSuppressed.length - 1] = exception;
+    suppressed = newSuppressed;
   }
 
   /**
@@ -95,6 +118,16 @@ public class Throwable implements Serializable {
       return new StackTraceElement[0];
     }
     return stackTrace;
+  }
+
+  /**
+   * Returns the array of Exception that this one suppressed.
+   */
+  public final Throwable[] getSuppressed() {
+    if (suppressed == null) {
+      suppressed = new Throwable[0];
+    }
+    return suppressed;
   }
 
   public Throwable initCause(Throwable cause) {

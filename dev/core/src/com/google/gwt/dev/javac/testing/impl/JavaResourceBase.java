@@ -398,7 +398,7 @@ public class JavaResourceBase {
       code.append("public class Throwable {\n");
       code.append("  public String getMessage() { return \"\"; }\n");
       code.append("  public Throwable getCause() { return null; }\n");
-      code.append("  void addSuppressed(Throwable ex) { } \n");
+      code.append("  public void addSuppressed(Throwable ex) { } \n");
       code.append("}\n");
       return code;
     }

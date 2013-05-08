@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.jjs.test;
 
-import com.google.gwt.dev.util.arg.OptionSource;
+import com.google.gwt.dev.util.arg.OptionSource.SourceLevel;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -35,7 +35,7 @@ public class Java7Test extends GWTTestCase {
   public void runTest() throws Throwable {
     // Only run these tests if -source 7 (or greated) is enabled.
     if (JUnitShell.getCompilerOptions().getSourceLevel()
-        .compareTo(OptionSource.SourceLevel._7) >= 0) {
+        .compareTo(SourceLevel._7) >= 0) {
       super.runTest();
     }
   }
@@ -44,9 +44,24 @@ public class Java7Test extends GWTTestCase {
     // Make sure we are using the right Java7Test if the source compatibility level is set to Java 7
     // or above.
     assertFalse((JUnitShell.getCompilerOptions().getSourceLevel()
-        .compareTo(OptionSource.SourceLevel._7) >= 0));
+        .compareTo(SourceLevel._7) >= 0));
   }
 
   public void testSwitchOnString() {
+  }
+
+  public void testResource() throws Exception {
+  }
+
+  public void test3Resources() throws Exception {
+  }
+
+  public void testResourcesWithExceptions() throws Exception {
+  }
+
+  public void testResourcesWithSuppressedExceptions() throws Exception {
+  }
+
+  public void testMultiExceptions() {
   }
 }

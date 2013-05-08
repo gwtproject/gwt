@@ -16,6 +16,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.impl.StackTraceCreator;
+import com.google.gwt.lang.Array;
 
 import java.io.PrintStream;
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class Throwable implements Serializable {
    */
   private transient Throwable cause;
   private String detailMessage;
+  private transient Throwable[] suppressed = new Throwable[0];
   private transient StackTraceElement[] stackTrace;
 
   {
@@ -61,6 +63,21 @@ public class Throwable implements Serializable {
   public Throwable(Throwable cause) {
     this.detailMessage = (cause == null) ? null : cause.toString();
     this.cause = cause;
+  }
+
+  /**
+   * Call to add an exception that was suppressed. Used by try-with-resources.
+   */
+  public final void addSuppressed(Throwable exception) {
+    assert exception != null;
+    assert exception != this;
+
+    Throwable[] newSuppressed = new Throwable[suppressed.length + 1];
+    for (int i = 0; i < suppressed.length; i++) {
+      newSuppressed[i] = suppressed[i];
+    }
+    newSuppressed[newSuppressed.length - 1] = exception;
+    suppressed = newSuppressed;
   }
 
   /**
@@ -95,6 +112,15 @@ public class Throwable implements Serializable {
       return new StackTraceElement[0];
     }
     return stackTrace;
+  }
+
+  /**
+   * Retruns the array of Exception that this one suppressed.
+   */
+  public final Throwable[] getSuppressed() {
+    assert suppressed != null;
+
+    return suppressed;
   }
 
   public Throwable initCause(Throwable cause) {

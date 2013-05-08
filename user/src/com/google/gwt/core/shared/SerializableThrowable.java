@@ -21,6 +21,7 @@ import com.google.gwt.core.client.JavaScriptException;
  * A serializable copy of a {@link Throwable}, including its causes and stack trace. It overrides
  * {@code #toString} to mimic original {@link Throwable#toString()} so that {@link #printStackTrace}
  * will work as if it is coming from the original exception.
+ *
  * <p>
  * This class is especially useful for logging and testing as the emulated Throwable class does not
  * serialize recursively and does not serialize the stack trace. This class, as an alternative, can
@@ -29,6 +30,8 @@ import com.google.gwt.core.client.JavaScriptException;
  * <p>
  * Please note that, to get more useful stack traces from client side, this class needs to be used
  * in conjunction with {@link com.google.gwt.core.server.StackTraceDeobfuscator}.
+ * <p>
+ * NOTE: Does not serialize suppressed exceptions to remain compatible with Java 6 and below.
  */
 public final class SerializableThrowable extends Throwable {
 
@@ -121,6 +124,7 @@ public final class SerializableThrowable extends Throwable {
     SerializableThrowable throwable = new SerializableThrowable(null, t.getMessage());
     throwable.setStackTrace(t.getStackTrace());
     throwable.initCause(t.getCause());
+
     if (isClassMetadataAvailable()) {
       throwable.setDesignatedType(t.getClass().getName(), true);
     } else {

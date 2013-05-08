@@ -36,5 +36,4 @@ public class Exception extends Throwable {
   public Exception(Throwable cause) {
     super(cause);
   }
-
 }

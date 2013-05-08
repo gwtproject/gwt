@@ -94,6 +94,21 @@ public class ThrowableTest extends GWTTestCase {
     assertEquals("TestClass.testCaller(fakefile2:97)", trace[1].toString());
   }
 
+  public void testAddSuppressed() {
+    Throwable throwable = new Throwable("primary");
+    assertNotNull(throwable.getSuppressed());
+    assertEquals(0, throwable.getSuppressed().length);
+    Throwable suppressed1 = new Throwable("suppressed1");
+    throwable.addSuppressed(suppressed1);
+    assertEquals(1, throwable.getSuppressed().length);
+    assertEquals(suppressed1, throwable.getSuppressed()[0]);
+    Throwable suppressed2 = new Throwable("suppressed1");
+    throwable.addSuppressed(suppressed2);
+    assertEquals(2, throwable.getSuppressed().length);
+    assertEquals(suppressed1, throwable.getSuppressed()[0]);
+    assertEquals(suppressed2, throwable.getSuppressed()[1]);
+  }
+
   // Returns true if stack trace is obfuscated.
   private boolean isObfuscated(StackTraceElement[] trace) {
     if (trace == null || trace.length == 0) {

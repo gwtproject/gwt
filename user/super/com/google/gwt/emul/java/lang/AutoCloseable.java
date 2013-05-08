@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2013 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,24 +16,14 @@
 package java.lang;
 
 /**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html">the
- * official Java API doc</a> for details.
+ * Indicates that a class implements <code>close()</code> and can be used in a try-with-resources
+ * statement.
  */
-public class Exception extends Throwable {
+public interface AutoCloseable {
 
-  public Exception() {
-  }
-
-  public Exception(String message) {
-    super(message);
-  }
-
-  public Exception(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  public Exception(Throwable cause) {
-    super(cause);
-  }
+  /**
+   * Closes this resource.
+   * @throws Exception
+   */
+  void close() throws Exception;
 }

@@ -34,7 +34,7 @@ public class Java7AstTest extends JJSTestBase {
   @Override
   public void setUp() {
     sourceLevel = OptionSource.SourceLevel._7;
-    addAll(LIST_T, ARRAYLIST_T);
+    addAll(LIST_T, ARRAYLIST_T, JAVA_LANG_AUTOCLOSEABLE, TEST_RESOURCE, EXCEPTION1, EXCEPTION2);
   }
 
   public void testCompileNewStyleLiterals() throws Exception {
@@ -64,6 +64,70 @@ public class Java7AstTest extends JJSTestBase {
     assertEqualBlock(
         "List l = new ArrayList();",
         "List<String> l = new ArrayList<>();");
+  }
+
+  public void testCompileTryWithResources() throws Exception {
+    addSnippetImport("java.lang.AutoCloseable");
+    addSnippetImport("com.google.gwt.TestResource");
+    // TODO(rluble): Temp variable numbering when building try-with-resource statements in
+    // GwtAstBuilder might make this test brittle.
+    assertEqualBlock(""
+        + "try { "
+        + "  final TestResource r1 = new TestResource(); "
+        + "  Throwable $primary_ex_2 = null; "
+        + "  try { "
+        + "  } catch (Throwable $caught_ex_3) { "
+        + "    $primary_ex_2 = $caught_ex_3;"
+        + "    throw $primary_ex_2;"
+        + "  } finally {"
+        + "    $primary_ex_2 = Exceptions.safeClose(r1, $primary_ex_2);"
+        + "    if ($primary_ex_2 != null)"
+        + "          throw $primary_ex_2;"
+        + "  }"
+        + "}",
+        "try (TestResource r1 = new TestResource(); ) { }");
+    assertEqualBlock(""
+        + "try { "
+        + "  final TestResource r1 = new TestResource(); "
+        + "  final TestResource r2 = new TestResource(); "
+        + "  Throwable $primary_ex_3 = null; "
+        + "  try { "
+        + "  } catch (Throwable $caught_ex_4) { "
+        + "    $primary_ex_3 = $caught_ex_4;"
+        + "    throw $primary_ex_3;"
+        + "  } finally {"
+        + "    $primary_ex_3 = Exceptions.safeClose(r2, $primary_ex_3);"
+        + "    $primary_ex_3 = Exceptions.safeClose(r1, $primary_ex_3);"
+        + "    if ($primary_ex_3 != null)"
+        + "          throw $primary_ex_3;"
+        + "  }"
+        + "}",
+        "try (TestResource r1 = new TestResource(); TestResource r2 = new TestResource();) { }");
+  }
+
+
+  public void testCompileMultiExceptions() throws Exception {
+    addSnippetImport("com.google.gwt.Exception1");
+    addSnippetImport("com.google.gwt.Exception2");
+    assertEqualBlock(""
+        + "int i = 0;"
+        + "try {"
+        + "  if (i == 0) {"
+        + "    throw new Exception1(); "
+        + "  } else {"
+        + "    throw new Exception2();"
+        + "  }"
+        + "} catch(Exception1 | Exception2 e) {"
+        + "}", ""
+        + "int i = 0;"
+        + "try {"
+        + "  if (i == 0) {"
+        + "    throw new Exception1(); "
+        + "  } else {"
+        + "    throw new Exception2();"
+        + "  }"
+        + "} catch(Exception1 | Exception2 e) {"
+        + "}");
   }
 
   public static final MockJavaResource INTEGERLITERALS = new MockJavaResource(
@@ -129,6 +193,58 @@ public class Java7AstTest extends JJSTestBase {
     }
   };
 
+  public static final MockJavaResource JAVA_LANG_AUTOCLOSEABLE = new MockJavaResource(
+      "java.lang.AutoCloseable") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package java.lang;\n");
+      code.append("import java.lang.Exception;\n");
+      code.append("public interface AutoCloseable {\n");
+      code.append("  void close() throws Exception; \n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+
+  public static final MockJavaResource TEST_RESOURCE = new MockJavaResource(
+      "com.google.gwt.TestResource") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("public class TestResource implements AutoCloseable {\n");
+      code.append("  public void close() { } \n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  public static final MockJavaResource EXCEPTION1 = new MockJavaResource(
+      "com.google.gwt.Exception1") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("public class Exception1 extends Exception {\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  public static final MockJavaResource EXCEPTION2 = new MockJavaResource(
+      "com.google.gwt.Exception2") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("public class Exception2 extends Exception {\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
   private void addAll(Resource... sourceFiles) {
     for (Resource sourceFile : sourceFiles) {
       sourceOracle.addOrReplace(sourceFile);
@@ -168,5 +284,4 @@ public class Java7AstTest extends JJSTestBase {
     JMethodBody body = (JMethodBody) mainMethod.getBody();
     return body.getBlock();
   }
-
 }

@@ -16,6 +16,24 @@
       "revId": "1573842bac6e6ec04f10993c68d0df67b4ddd93f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UdY2uYXI",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5430
+      },
+      "writtenOn": "2013-05-08T21:12:01Z",
+      "side": 1,
+      "message": "I added several more tests cases but didn\u0027t attempt to fix the problems they illustrate yet. The tests pass. There\u0027s just some that are BadJsni which we probably want to be GoodJsni",
+      "parentUuid": "UQ3Stjo8",
+      "revId": "1573842bac6e6ec04f10993c68d0df67b4ddd93f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Uad.K09A",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-09T01:23:27Z",
+      "side": 1,
+      "message": "Maybe\n\n    \"JDT exception: \" + filename + \": \" + e\n\nto mimic the AbortCompilation log message?",
+      "revId": "0a21b21b523b8a2f9429ae8107b1434b323d315d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

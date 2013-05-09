@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UaV8ggwc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-09T01:20:47Z",
+      "side": 1,
+      "message": "Typo: Maximum",
+      "revId": "551971a236c9dcb9e923394ea104e997c74b569c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaV.Xo-4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-09T01:20:47Z",
+      "side": 1,
+      "message": "Should we check for ABORT_COUNT_MAX here too?",
+      "revId": "551971a236c9dcb9e923394ea104e997c74b569c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

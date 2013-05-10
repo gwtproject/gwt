@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UaWgK654",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-10T18:41:51Z",
+      "side": 1,
+      "message": "is there no more specific exception to catch for this \"server-side class fails to compile\" situation than RuntimeException?",
+      "revId": "4747eaa0c02a22fe67e7fea87793bb4f0b8e8bfc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

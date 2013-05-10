@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "UaSjrkzA",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-05-10T13:50:30Z",
+      "side": 1,
+      "message": "It was -source but since we have also -src to specify the sources (or source path?) we changed to sourceLevel. \n\nI do prefer -source or maybe we could think of something better.",
+      "parentUuid": "UaS3Tpc0",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Uac3jCZA",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
         "patchSetId": 7
@@ -166,6 +184,24 @@
       "writtenOn": "2013-05-10T07:18:28Z",
       "side": 1,
       "message": "Out of curiosity, is there any precedent to using \"_6\" and \"_7\" as identifiers like this?  It seems a tad hackish to me, but I can\u0027t think of anything better off hand.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaUjwxxo",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-05-10T13:50:30Z",
+      "side": 1,
+      "message": "No precedent. I would have wanted SourceLevel.6 and SourceLevel.7 but well they are not identifiers.\n\nI welcome a better naming.",
+      "parentUuid": "Uae3wzVc",
       "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -72,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "Uaahno1U",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-10T19:37:06Z",
+      "side": 1,
+      "message": "Can you fix the typo in the javadoc before submitting?\nPersonally, I don\u0027t think you need any doc, developer (ideally) will not see this one in the ide.",
+      "revId": "3b0286500ad5bd4b8b541e5063de00290561b810",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Uaa27NVw",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
         "patchSetId": 5

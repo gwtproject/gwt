@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Ui1fizP4",
+        "filename": "user/src/com/google/gwt/dom/builder/client/DomAnchorBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-05-10T23:25:51Z",
+      "side": 1,
+      "message": "Possibly stupid question: would it be more efficient from a JS size perspective to piggy-back on the existing href() method, so the compiler can inline the call instead of generating two methods? e.g.:\n\nreturn href(href.asString());\n\nhoping the compiler will inline all calls to this method and asString().",
+      "revId": "acf628809e21371f429409270553c76db7fbcc52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

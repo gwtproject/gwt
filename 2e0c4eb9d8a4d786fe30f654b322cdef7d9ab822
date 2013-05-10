@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Uac1s6Xw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "s/AstCreation/GwtAstBuilder execution.",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae1prWk",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "isStatic isn\u0027t used, is it supposed to be passed to JMethod constructor?",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaS2bpV4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CatchBlockNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "Should we edit in place, or make a new JTryStatement? What did it do before?",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaU2g2YA",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "update doc to show how it looks with safeClose",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaW2lnY8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "? are you intending to call this with CHARS_PIPE above?",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae24zbg",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-10T02:16:36Z",
+      "side": 1,
+      "message": "Hmm, i thought we could actually generalizeTypes() on the exception types, but that would change semantics, e.g. catch(A|B) where A intersect B \u003d {} \u003d\u003e Object.\n\nIt seems like we could actually tighten types within the catch block if for example, an interface type had only a single implementor, or only a single subtype was instantiated. No matter, it probably won\u0027t have that big of an effect in most cases (although x.toString() would work better)",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

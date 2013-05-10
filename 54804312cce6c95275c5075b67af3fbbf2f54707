@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Uae39LVg",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "UaVxu0TY",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UaVwgkQc",
         "filename": "user/super/com/google/gwt/emul/java/lang/AutoCloseable.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-08T19:45:35Z",
       "side": 1,
       "message": "nit: spaces here",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uac0AaXs",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AutoCloseable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaVwgkQc",
       "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "UaY0PUaw",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AutoCloseable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "It is pretty inconsitent. Some have very short descriptions (like this one) others only point to the jdk doc (which is what I will do).\n\nBig TODO update all url pointers.",
+      "parentUuid": "Uabw2DVI",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UaXwlVRY",
         "filename": "user/super/com/google/gwt/emul/java/lang/AutoCloseable.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-05-08T19:45:35Z",
       "side": 1,
       "message": "remove empty @throws",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaa0DNYU",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AutoCloseable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaXwlVRY",
       "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "UaU0VOb4",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Exception.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UadwzwWA",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UaTxEvdA",
         "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-05-08T19:08:38Z",
       "side": 1,
       "message": "Unused import.",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaRwmGSc",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaTxEvdA",
       "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "UaVz0EUY",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaRx0WQc",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UaVyXsf4",
         "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2013-05-08T19:45:35Z",
       "side": 1,
       "message": "it is better to instantiate this lazily.",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaXz51Tw",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaVyXsf4",
       "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "UaQ3kIcY",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaRyNOe8",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UadyK4dA",
         "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
         "patchSetId": 1
@@ -166,6 +328,24 @@
       "writtenOn": "2013-05-08T19:45:35Z",
       "side": 1,
       "message": "you don\u0027t need the whole array copy. This will only run in script mode. just set the array. The whole method can look something like: \n\n public final void addSuppressed(Throwable exception) {\n   if (exception \u003d\u003d null) {\n     throw new NPE();\n   }\n\n   if (exception \u003d\u003d this) {\n     throw new IllegalArgumentException(\"Self-suppress not permitted\");\n   }\n\n   if (suppressed \u003d\u003d null ) {\n     suppressed \u003d new Throwable[] { exception };\n   } else {\n     suppressed[suppressed.length] \u003d exception;\n   }\n }",
+      "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaS0QBc8",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:34:02Z",
+      "side": 1,
+      "message": "I not used to thinking JavaScript. Done. But hey what about dev mode. This is not used there is it?",
+      "parentUuid": "UadyK4dA",
       "revId": "54804312cce6c95275c5075b67af3fbbf2f54707",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Uae3P7U8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Uac1s6Xw",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Uae1prWk",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-10T02:16:36Z",
       "side": 1,
       "message": "isStatic isn\u0027t used, is it supposed to be passed to JMethod constructor?",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaQ3NAVg",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "Yes.  Fixed.",
+      "parentUuid": "Uae1prWk",
       "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "UaW3z3ZY",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CatchBlockNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "It edited it in place. I think it is reasonable to do that.",
+      "parentUuid": "UaS2bpV4",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UaU2g2YA",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-05-10T02:16:36Z",
       "side": 1,
       "message": "update doc to show how it looks with safeClose",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaa3cFQo",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UaU2g2YA",
       "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Uac3ZSRk",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "I was originally, but it would have needed different implementation of visit(JClassType).  I can roll this part back.",
+      "parentUuid": "UaW2lnY8",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Uae24zbg",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-05-10T02:16:36Z",
       "side": 1,
       "message": "Hmm, i thought we could actually generalizeTypes() on the exception types, but that would change semantics, e.g. catch(A|B) where A intersect B \u003d {} \u003d\u003e Object.\n\nIt seems like we could actually tighten types within the catch block if for example, an interface type had only a single implementor, or only a single subtype was instantiated. No matter, it probably won\u0027t have that big of an effect in most cases (although x.toString() would work better)",
+      "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae3mDdA",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-10T03:33:55Z",
+      "side": 1,
+      "message": "The type of the arg is generalized by the JDT, we could do better and at this point that we have the whole program. Let\u0027s put it in the back burner. As you said we cant expect much to gain from that.",
+      "parentUuid": "Uae24zbg",
       "revId": "2e0c4eb9d8a4d786fe30f654b322cdef7d9ab822",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

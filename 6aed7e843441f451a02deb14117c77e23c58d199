@@ -1,0 +1,378 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UaS10hQc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Remove the extra space before CompilerOptions.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uac1k6VM",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nits: \"GWT compiler\" and \"Java source compatibility\".",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaa1ntVU",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "I\u0027d use Guava\u0027s ImmutableMap here (assuming we have it in our thirdparty package of it):\n\n  private static final Map\u003cSourceLevel, Long\u003e jdtLevelByGwtLevel \u003d\n      ImmutableMap.of(\n          OptionSource.SourceLevel._6, ClassFileConstants.JDK1_6,\n          OptionSource.SourceLevel._7, ClassFileConstants.JDK1_7);",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae1hrUA",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Extra space between } and \\n.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaY3i8Y0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: \"Java source\"",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaU3Y2ec",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Can/should this be static?",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaQ1fwYM",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Maybe \"Specifies Java source level\"?",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaS3Tpc0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Just curious, why \"-sourceLevel\" and not \"-source\" to match javac?",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uac3jCZA",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: \"Java source level\"",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae3wzVc",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Out of curiosity, is there any precedent to using \"_6\" and \"_7\" as identifiers like this?  It seems a tad hackish to me, but I can\u0027t think of anything better off hand.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaQ3u4Xg",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtJava7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Remove extra space indentation.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaU3-.SQ",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtJava7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Here and below there are a bunch of spaces before newlines.  A couple find-and-replace-alls should fix them. :)",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaS36xTU",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtJava7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "This indenting seems excessive? Also, missing trailing newlines?",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaW30vUY",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtJava7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: \"try (TestResource\"",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uae0H7V4",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtJava7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Remove extra space before List.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaQ0FAVc",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "This indentation seems inconsistent with the same(?) tests in JdtJava7Test?  Would it make sense to put these mock resources into a Java7MockResources.java class somewhere instead of duplicating them?",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaY2wMYI",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Extra space before comma.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaW2r3RU",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: Extra space.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaY35EUA",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nits: Blank line between methods.  No space before comma.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UaU2mGU8",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Hm, this test is kinda tricky.  Maybe it would be worth adding a\n\n    String normalizeBlock(String block) {\n        return block.replaceAll(...)....;\n    }\n\nmethod so that this test can be:\n\n    assertEquals(\n        normalizeBlock(\"{\" + expected + \"}\"),\n        normalizeBlock(testExpression.toSource()));\n\n?\n\nIt would be helpful to have some comments explaining what the regexps are doing too.",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaa2UFdk",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: \"GWT\" and \"Java\".",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uac2RSeg",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-10T07:18:28Z",
+      "side": 1,
+      "message": "If we do stick with \"-sourceLevel\" instead of \"-source\", this comment should be updated.  Also, \"greater\" not \"greated\".",
+      "revId": "6aed7e843441f451a02deb14117c77e23c58d199",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

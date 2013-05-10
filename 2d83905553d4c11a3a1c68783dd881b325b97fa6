@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UaY0r0Zs",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-05-10T13:27:24Z",
+      "side": 1,
+      "message": "I think these three can be handled in jsniMatchParamListSignature by adding\n\nwhile (Character.isWhitespace(c)) { c \u003d in.read(); } \n\nafter\n\nint c \u003d in.read(); (line 1366?)",
+      "revId": "2d83905553d4c11a3a1c68783dd881b325b97fa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaa0ftXw",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-05-10T13:27:24Z",
+      "side": 1,
+      "message": "I think this one can be handled in jsniMatchReference by adding \n\nwhile (Character.isWhitespace(c)) { c \u003d in.read(); }\nin.unread()\n\njust before calling jsniMatchMethodSignatureOrFieldName in line 1350.\n\nAlthough I am not sure if we want to be able to break it here, though.",
+      "revId": "2d83905553d4c11a3a1c68783dd881b325b97fa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

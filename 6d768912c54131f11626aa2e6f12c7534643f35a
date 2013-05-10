@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UaUgVJ74",
+        "filename": "user/src/com/google/gwt/dom/client/AreaElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-05-10T18:51:03Z",
+      "side": 1,
+      "message": "Should we rename to setHref(), for consistency with the other overloads?",
+      "revId": "6d768912c54131f11626aa2e6f12c7534643f35a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaej9G1g",
+        "filename": "user/src/com/google/gwt/dom/client/BaseElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-05-10T18:51:03Z",
+      "side": 1,
+      "message": "Can we use the overload trick here, or should we stick to 2 different method names?",
+      "revId": "6d768912c54131f11626aa2e6f12c7534643f35a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uaejm.88",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-05-10T18:51:03Z",
+      "side": 1,
+      "message": "Ordering consistency: SafeUri or String variant first?",
+      "revId": "6d768912c54131f11626aa2e6f12c7534643f35a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

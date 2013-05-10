@@ -17,6 +17,7 @@ package com.google.gwt.dom.builder.client;
 
 import com.google.gwt.dom.builder.shared.AreaBuilder;
 import com.google.gwt.dom.client.AreaElement;
+import com.google.gwt.safehtml.shared.SafeUri;
 
 /**
  * DOM-based implementation of {@link AreaBuilder}.
@@ -43,6 +44,12 @@ public class DomAreaBuilder extends DomElementBuilderBase<AreaBuilder, AreaEleme
   @Override
   public AreaBuilder coords(String coords) {
     assertCanAddAttribute().setCoords(coords);
+    return this;
+  }
+
+  @Override
+  public AreaBuilder href(SafeUri href) {
+    assertCanAddAttribute().setSafeHref(href);
     return this;
   }
 

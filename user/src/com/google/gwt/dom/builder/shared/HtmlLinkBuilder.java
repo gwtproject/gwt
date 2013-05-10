@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * HTML-based implementation of {@link LinkBuilder}.
  */
@@ -27,6 +29,11 @@ public class HtmlLinkBuilder extends HtmlElementBuilderBase<LinkBuilder> impleme
   @Override
   public LinkBuilder disabled() {
     return trustedAttribute("disabled", "disabled");
+  }
+
+  @Override
+  public LinkBuilder href(SafeUri href) {
+    return href(href.asString());
   }
 
   @Override

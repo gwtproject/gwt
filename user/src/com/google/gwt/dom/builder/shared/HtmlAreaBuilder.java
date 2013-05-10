@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * HTML-based implementation of {@link AreaBuilder}.
  */
@@ -37,6 +39,11 @@ public class HtmlAreaBuilder extends HtmlElementBuilderBase<AreaBuilder> impleme
   @Override
   public AreaBuilder coords(String coords) {
     return trustedAttribute("coords", coords);
+  }
+
+  @Override
+  public AreaBuilder href(SafeUri href) {
+    return href(href.asString());
   }
 
   @Override

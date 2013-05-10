@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * HTML-based implementation of {@link BaseBuilder}.
  */
@@ -22,6 +24,11 @@ public class HtmlBaseBuilder extends HtmlElementBuilderBase<BaseBuilder> impleme
 
   HtmlBaseBuilder(HtmlBuilderImpl delegate) {
     super(delegate, true);
+  }
+
+  @Override
+  public BaseBuilder href(SafeUri href) {
+    return href(href.asString());
   }
 
   @Override

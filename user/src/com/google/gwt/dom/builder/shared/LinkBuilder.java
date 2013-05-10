@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * Builds an link element.
  */
@@ -25,6 +27,15 @@ public interface LinkBuilder extends ElementBuilderBase<LinkBuilder> {
    * may be used to deactivate style sheets.
    */
   LinkBuilder disabled();
+
+  /**
+   * The URI of the linked resource.
+   * 
+   * @see <a
+   *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href">W3C
+   *      HTML Specification</a>
+   */
+  LinkBuilder href(SafeUri href);
 
   /**
    * The URI of the linked resource.

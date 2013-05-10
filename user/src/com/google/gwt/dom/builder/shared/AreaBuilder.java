@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * Builds an area element.
  */
@@ -48,6 +50,15 @@ public interface AreaBuilder extends ElementBuilderBase<AreaBuilder> {
    *      HTML Specification</a>
    */
   AreaBuilder coords(String coords);
+
+  /**
+   * The URI of the linked resource.
+   * 
+   * @see <a
+   *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href">W3C
+   *      HTML Specification</a>
+   */
+  AreaBuilder href(SafeUri href);
 
   /**
    * The URI of the linked resource.

@@ -17,6 +17,7 @@ package com.google.gwt.dom.builder.client;
 
 import com.google.gwt.dom.builder.shared.BaseBuilder;
 import com.google.gwt.dom.client.BaseElement;
+import com.google.gwt.safehtml.shared.SafeUri;
 
 /**
  * DOM-based implementation of {@link BaseBuilder}.
@@ -26,6 +27,12 @@ public class DomBaseBuilder extends DomElementBuilderBase<BaseBuilder, BaseEleme
 
   DomBaseBuilder(DomBuilderImpl delegate) {
     super(delegate, true);
+  }
+
+  @Override
+  public BaseBuilder href(SafeUri href) {
+    assertCanAddAttribute().setSafeHref(href);
+    return this;
   }
 
   @Override

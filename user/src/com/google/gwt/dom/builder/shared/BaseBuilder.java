@@ -15,10 +15,21 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * Builds an base element.
  */
 public interface BaseBuilder extends ElementBuilderBase<BaseBuilder> {
+
+  /**
+   * The base URI See the href attribute definition in HTML 4.01.
+   * 
+   * @see <a
+   *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href-BASE">W3C
+   *      HTML Specification</a>
+   */
+  BaseBuilder href(SafeUri href);
 
   /**
    * The base URI See the href attribute definition in HTML 4.01.

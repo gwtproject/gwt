@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.client;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 /**
  * Document base URI.
  * 
@@ -38,7 +40,7 @@ public class BaseElement extends Element {
   }
 
   /**
-   * The base URI See the href attribute definition in HTML
+   * The base URI. See the href attribute definition in HTML
    * 4.01.
    * 
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href-BASE">W3C HTML Specification</a>
@@ -57,7 +59,7 @@ public class BaseElement extends Element {
    }-*/;
 
   /**
-   * The base URI See the href attribute definition in HTML
+   * The base URI. See the href attribute definition in HTML
    * 4.01.
    * 
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href-BASE">W3C HTML Specification</a>
@@ -65,6 +67,16 @@ public class BaseElement extends Element {
   public final native void setHref(String href) /*-{
      this.href = href;
    }-*/;
+
+  /**
+   * The base URI. See the href attribute definition in HTML
+   * 4.01.
+   * 
+   * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href-BASE">W3C HTML Specification</a>
+   */
+  public final void setSafeHref(SafeUri href) {
+    setHref(href.asString());
+  }
 
   /**
    * The default target frame.

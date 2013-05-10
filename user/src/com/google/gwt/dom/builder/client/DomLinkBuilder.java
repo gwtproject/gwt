@@ -17,6 +17,7 @@ package com.google.gwt.dom.builder.client;
 
 import com.google.gwt.dom.builder.shared.LinkBuilder;
 import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.safehtml.shared.SafeUri;
 
 /**
  * DOM-based implementation of {@link LinkBuilder}.
@@ -31,6 +32,12 @@ public class DomLinkBuilder extends DomElementBuilderBase<LinkBuilder, LinkEleme
   @Override
   public LinkBuilder disabled() {
     assertCanAddAttribute().setDisabled(true);
+    return this;
+  }
+
+  @Override
+  public LinkBuilder href(SafeUri href) {
+    assertCanAddAttribute().setSafeHref(href);
     return this;
   }
 

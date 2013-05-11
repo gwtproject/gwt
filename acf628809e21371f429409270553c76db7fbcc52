@@ -16,6 +16,24 @@
       "revId": "acf628809e21371f429409270553c76db7fbcc52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui-cPoK0",
+        "filename": "user/src/com/google/gwt/dom/builder/client/DomAnchorBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-11T00:27:16Z",
+      "side": 1,
+      "message": "Hm, I see what you\u0027re saying.  That\u0027s possible, though I\u0027d expect it to only make a small difference in practice.\n\nI\u0027d certainly be interested if you try making that change and see if it affects your output .js files much.  If so, we can change it around.",
+      "parentUuid": "Ui1fizP4",
+      "revId": "acf628809e21371f429409270553c76db7fbcc52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

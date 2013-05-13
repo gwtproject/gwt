@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "UoQH2asc",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/ResolverServiceLayer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-13T09:51:11Z",
+      "side": 1,
+      "message": "Done. That\u0027d be an endsWith(\")V\") though, and note that these are only asserts: we don\u0027t actually \"reject\" anything, as the value is already validated against the Deobfuscator (if the Deobfuscator is wrong, either it\u0027s a bug in requestfactory-apt or you wrote your DeobfuscatorBuilder \"by hand\" and then blame yourself if it behaves oddly; it would probably fail later anyway).",
+      "parentUuid": "Ui5okCRw",
+      "revId": "f481ee4f71e343109bb5648a363eb14bb995535e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Ui3o6VTs",
         "filename": "user/src/com/google/web/bindery/requestfactory/vm/InProcessRequestContext.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-13T06:50:33Z",
       "side": 1,
       "message": "Seems like keeping a \"private String getDescriptor(Class\u003c?\u003e param)\" helper here would be worthwhile for readability.",
+      "revId": "f481ee4f71e343109bb5648a363eb14bb995535e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UocGpYm0",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/InProcessRequestContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-13T09:51:11Z",
+      "side": 1,
+      "message": "Done. Rather made an appendDescriptor(StringBuilder,Class):void though.",
+      "parentUuid": "Ui3o6VTs",
       "revId": "f481ee4f71e343109bb5648a363eb14bb995535e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

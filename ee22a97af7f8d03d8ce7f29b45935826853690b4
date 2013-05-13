@@ -33,6 +33,24 @@
       "revId": "ee22a97af7f8d03d8ce7f29b45935826853690b4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui7rzTV4",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-13T09:09:34Z",
+      "side": 1,
+      "message": "This code is guarded by GWT.isScript; never executed in server.",
+      "parentUuid": "Ui-r5xUE",
+      "revId": "ee22a97af7f8d03d8ce7f29b45935826853690b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

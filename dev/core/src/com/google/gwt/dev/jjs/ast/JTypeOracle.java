@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,10 @@ import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.IdentitySets;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,12 +42,12 @@ public class JTypeOracle implements Serializable {
 
   /**
    * Checks a clinit method to find out a few things.
-   * 
+   *
    * <ol>
    * <li>What other clinits it calls.</li>
    * <li>If it runs any code other than clinit calls.</li>
    * </ol>
-   * 
+   *
    * This is used to remove "dead clinit cycles" where self-referential cycles
    * of empty clinits can keep each other alive.
    */
@@ -56,7 +59,7 @@ public class JTypeOracle implements Serializable {
      * Tracks whether any live code is run in this clinit. This is only reliable
      * because we explicitly visit all AST structures that might contain
      * non-clinit-calling code.
-     * 
+     *
      * @see #mightBeDeadCode(JExpression)
      * @see #mightBeDeadCode(JStatement)
      */
@@ -297,6 +300,13 @@ public class JTypeOracle implements Serializable {
   private final Map<JClassType, Map<String, JMethod>> polyClassMethodMap =
       new IdentityHashMap<JClassType, Map<String, JMethod>>();
 
+
+  /**
+   * The number of declared types.
+   */
+  private int declaredTypesSize;
+
+
   public JTypeOracle(JProgram program) {
     this.program = program;
   }
@@ -481,6 +491,8 @@ public class JTypeOracle implements Serializable {
     jsoSingleImpls.clear();
     dualImpls.clear();
 
+    this.declaredTypesSize = program.getDeclaredTypes().size();
+
     for (JDeclaredType type : program.getDeclaredTypes()) {
       if (type instanceof JClassType) {
         recordSuperSubInfo((JClassType) type);
@@ -488,6 +500,11 @@ public class JTypeOracle implements Serializable {
         recordSuperSubInfo((JInterfaceType) type);
       }
     }
+
+    /*
+     * Compute efficient representation for hierarchy sub/supertype queries.
+     */
+    computeIds();
 
     /*
      * Now that the basic type hierarchy is computed, compute which JSOs
@@ -645,14 +662,14 @@ public class JTypeOracle implements Serializable {
    * Returns true if qType is a subclass of type, directly or indirectly.
    */
   public boolean isSubClass(JClassType type, JClassType qType) {
-    return get(subClassMap, type).contains(qType);
+    return isSubtype(qType, type);
   }
 
   /**
    * Returns true if qType is a superclass of type, directly or indirectly.
    */
   public boolean isSuperClass(JClassType type, JClassType qType) {
-    return get(superClassMap, type).contains(qType);
+    return isSubtype(type, qType);
   }
 
   /**
@@ -686,6 +703,8 @@ public class JTypeOracle implements Serializable {
       }
     }
   }
+
+
 
   public void setInstantiatedTypes(Set<JReferenceType> instantiatedTypes) {
     this.instantiatedTypes = instantiatedTypes;
@@ -1011,4 +1030,57 @@ public class JTypeOracle implements Serializable {
     }
   }
 
+  /*
+   * Make sure we recompute class ids when reloading serialized type oracles.
+   */
+  private void readObject(java.io.ObjectInputStream in) throws IOException,
+      ClassNotFoundException {
+    in.defaultReadObject();
+    // recompute class hierarchy query data structure;
+    computeIds();
+  }
+
+
+  /**
+   * Compute class ids for efficient lookups.
+   *
+   * A clever encoding of the class hierarchy reduces the cost of one of the hottest methods
+   * during optimize.
+   *
+   * NOTE: Only encodes the (single inheritance) class hierarchy.
+   *
+   * The encoding preserves the following invariant
+   * A is strict subclass of B <=>  id(A) < id(B) ^ id(B) =< max{C subclass A}(Id(C))
+   *
+   * An easy way to guaranteed this propery is to number sequentially while traversing the
+   * hierarchy tree in preorder.
+   */
+  private transient int lastClassId = -1;
+  private transient int[] maxDescendants = null;
+
+  boolean isSubtype(JClassType sub, JClassType sup) {
+    int supId = sup.getClassId();
+    int subId = sub.getClassId();
+    return supId < subId  &&
+        subId <= maxDescendants[supId];
+  }
+
+  private void computeIds() {
+    SpeedTracerLogger.Event computeHierarchyEvent =
+        SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "pass", "Compute Type Hierarchy");
+    lastClassId = -1;
+    maxDescendants = new int[declaredTypesSize];
+    computeIdTraversal(javaLangObject);
+    computeHierarchyEvent.end();
+  }
+
+  private void computeIdTraversal(JClassType type) {
+    type.setClassId(++lastClassId);
+    for (JClassType sub : get(subClassMap, type)) {
+      if (sub.getSuperClass() == type) {
+        computeIdTraversal(sub);
+      }
+    }
+    maxDescendants[type.getClassId()] = lastClassId;
+  }
 }

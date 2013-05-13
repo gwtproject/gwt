@@ -40,6 +40,7 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
   private final boolean isAbstract;
   private boolean isFinal;
   private JClassType superClass;
+  private int classId = -1;
 
   public JClassType(SourceInfo info, String name, boolean isAbstract, boolean isFinal) {
     super(info, name);
@@ -83,6 +84,23 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
 
   public void setFinal() {
     isFinal = true;
+  }
+
+
+  /**
+   * Returns a numeric id for the class. The id is only assigned in the global
+   * optimization phase and should not be used before the global ast is built.
+   */
+  public int getClassId() {
+    return classId;
+  }
+
+  /**
+   * Set a classid. Only to be used after the global AST is build at the beginning of the
+   * optimization phase.
+   */
+  public void setClassId(int classId) {
+    this.classId = classId;
   }
 
   /**

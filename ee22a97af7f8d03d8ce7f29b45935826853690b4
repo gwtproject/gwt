@@ -16,6 +16,23 @@
       "revId": "ee22a97af7f8d03d8ce7f29b45935826853690b4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui-r5xUE",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-05-13T08:59:37Z",
+      "side": 1,
+      "message": "This will definitely classload JavaScriptException.",
+      "revId": "ee22a97af7f8d03d8ce7f29b45935826853690b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

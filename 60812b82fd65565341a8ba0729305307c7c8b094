@@ -16,6 +16,24 @@
       "revId": "60812b82fd65565341a8ba0729305307c7c8b094",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui93XG7Y",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/TypeSerializerCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5455
+      },
+      "writtenOn": "2013-05-13T20:49:09Z",
+      "side": 1,
+      "message": "Added specification that this limit is from HotSpot",
+      "parentUuid": "Ui52sA5U",
+      "revId": "60812b82fd65565341a8ba0729305307c7c8b094",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

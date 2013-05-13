@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Ui52sA5U",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/TypeSerializerCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-13T18:57:45Z",
+      "side": 1,
+      "message": "Which \"JIT compiler\" are you referring to here (e.g., HotSpot, V8, ...)?  Can you update the comment to reflect that better since I assume specific implementations have differing limits?",
+      "revId": "60812b82fd65565341a8ba0729305307c7c8b094",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

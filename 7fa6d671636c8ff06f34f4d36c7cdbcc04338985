@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Ui4CJPCE",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-14T00:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Ui6DVYA4",
+      "revId": "7fa6d671636c8ff06f34f4d36c7cdbcc04338985",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Ui2DYaEQ",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-13T23:53:40Z",
       "side": 1,
       "message": "And an\n\n  assert this.classId \u003d\u003d -1;\n\nhere?",
+      "revId": "7fa6d671636c8ff06f34f4d36c7cdbcc04338985",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui2CGKA8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-14T00:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Ui2DYaEQ",
       "revId": "7fa6d671636c8ff06f34f4d36c7cdbcc04338985",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

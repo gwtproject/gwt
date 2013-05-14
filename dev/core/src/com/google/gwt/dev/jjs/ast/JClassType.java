@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,6 +40,7 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
   private final boolean isAbstract;
   private boolean isFinal;
   private JClassType superClass;
+  private int classId = -1;
 
   public JClassType(SourceInfo info, String name, boolean isAbstract, boolean isFinal) {
     super(info, name);
@@ -83,6 +84,25 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
 
   public void setFinal() {
     isFinal = true;
+  }
+
+
+  /**
+   * Returns a numeric id for the class. The id is only assigned in the global
+   * optimization phase and should not be used before the global ast is built.
+   */
+  public int getClassId() {
+    assert classId != -1;
+    return classId;
+  }
+
+  /**
+   * Set a classid. Only to be used after the global AST is build at the beginning of the
+   * optimization phase.
+   */
+  public void setClassId(int classId) {
+    assert classId != -1;
+    this.classId = classId;
   }
 
   /**

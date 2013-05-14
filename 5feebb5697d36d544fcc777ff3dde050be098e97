@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UoYcBKn8",
+        "filename": "user/src/com/google/gwt/json/client/JSONNull.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-14T10:00:36Z",
+      "side": 1,
+      "message": "Wow this is getting really strange: you\u0027re saying that isNull on JSONObject et al. returns a non-null value and you\u0027re modifying isNull of JSONNull to workaround it?!",
+      "revId": "5feebb5697d36d544fcc777ff3dde050be098e97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

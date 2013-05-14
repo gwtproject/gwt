@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Uiytf8YM",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "declaredTypesCount",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UiwvTDc4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "superflous multiple blank lines",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui6vhwYw",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "superflous blank line",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Uiyvu0Xg",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "\"for efficient subtype checking\"",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui6v4oTo",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "we already have seedIds, queryIds, and now classIds in the compiler.\n\nthe comments you have here are good but maybe we could make the classId name more specific as well to reduce ambiguity",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui8vz1V0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "can this be private?",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UiysFsVY",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "both the words \"descendants\" and \"subclasses\" are being used in this change. maybe only one or the other should be used",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ui2sLqW8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-05-14T18:10:39Z",
+      "side": 1,
+      "message": "s/computeIdTraversal/computeIdForClass",
+      "revId": "1c6b33950fe9dd04ad94300b6a56c0b13119354f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

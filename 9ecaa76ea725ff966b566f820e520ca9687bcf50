@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Ui.CA.O4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-14T00:20:41Z",
+      "side": 1,
+      "message": "I think \"assert this.classId \u003d\u003d -1\" to make sure you\u0027re not reassigning a class id?",
+      "revId": "9ecaa76ea725ff966b566f820e520ca9687bcf50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Ui8Ck1JU",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-14T00:30:50Z",
+      "side": 1,
+      "message": "Maybe rename this one ArgHandlerStartServerFlag, but as Matthew said does not have to be on this patch.",
+      "revId": "992219643314b474f109ae12e3ecabab935a286b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

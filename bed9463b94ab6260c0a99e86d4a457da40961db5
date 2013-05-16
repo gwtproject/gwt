@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "UuFDCBEw",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-16T19:51:19Z",
+      "side": 1,
+      "message": "He he, nobody in gwt-team knew about this document when I asked about it and created the file :) It could have saved me a lot of time.\n\nThanks for looking into this. When you do the change, it would be good to put the documentation link to the readme file in the script directory.",
+      "parentUuid": "UrnQ0yLI",
+      "revId": "bed9463b94ab6260c0a99e86d4a457da40961db5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UixHCHC8",
         "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderTest.java",
         "patchSetId": 5
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Here we\u0027re changing Image so that it\u0027ll use an UnclippedState when initialized with an ImageResource that isStandalone, whereas previously it would unconditionally use a ClippedState when initialized with an ImageResource (as opposed to a URL).\n\nPreviously, with the ClippedState, the image would be rendered using innerHTML and its dimensions set within style\u003d\"\" (from ClippedImageImpl); whereas the UnclippedState sets the ImageElement\u0027s width and height properties.\n\nI confirmed in a small test with ImageElement that getOffsetWidth returns 1256 there even though getWidth returns 56 (the value I had passed to setWidth). This is independent from the image being loaded. I also tried deferring the asserts with Scheduler#scheduleDeferred and it didn\u0027t change anything.\n\nUsing getStyle().setWidth(56, Unit.PX) fixes getOffsetWidth, but now getWidth returns 24 (a hard-coded value).\n\nSo, should we change UnclippedState to use getStyle().setWidth() or do we simply declare a bug in HTMLUnit and disable the tests? (i.e. what I\u0027ve done here, but maybe change it Platform.HtmlUnitBug))",
       "parentUuid": "UixHCHC8",
+      "revId": "bed9463b94ab6260c0a99e86d4a457da40961db5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuBC8jME",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-16T19:51:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure which is the best way to follow here. Feel free to go with what makes sense to you.",
+      "parentUuid": "UrhoaXYw",
       "revId": "bed9463b94ab6260c0a99e86d4a457da40961db5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

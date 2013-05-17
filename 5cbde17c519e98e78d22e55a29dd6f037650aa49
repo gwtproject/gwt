@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UuLN6ajE",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T01:06:51Z",
+      "side": 1,
+      "message": "This javadoc doesn\u0027t seem quite true anymore if widget !\u003d delegate.",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuFNwzk8",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T01:06:51Z",
+      "side": 1,
+      "message": "The way we\u0027re using T seems confusing.\n\n  Widget getWidget();\n  T getDelegate();\n  void setWidget(T);\n\nSo I\u0027m wondering whether T is supposed to be the type of the widget, or the delegate, or both? We should clarify that.",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

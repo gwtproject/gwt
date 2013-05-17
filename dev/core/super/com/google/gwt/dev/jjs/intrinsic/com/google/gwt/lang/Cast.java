@@ -26,7 +26,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 final class Cast {
 
   static native boolean canCast(Object src, int dstId) /*-{
-    return src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId];
+    // Check for castableTypeMap twice to work around iOS 6 JIT issue.
+    // See https://code.google.com/p/google-web-toolkit/issues/detail?id=8098
+    return (src.@java.lang.Object::castableTypeMap || src.@java.lang.Object::castableTypeMap)
+      && !!src.@java.lang.Object::castableTypeMap[dstId];
   }-*/;
 
   /**
@@ -34,7 +37,10 @@ final class Cast {
    * context.
    */
   static native boolean canCastUnsafe(Object src, int dstId) /*-{
-    return src.@java.lang.Object::castableTypeMap && src.@java.lang.Object::castableTypeMap[dstId];
+    // Check for castableTypeMap twice to work around iOS 6 JIT issue.
+    // See https://code.google.com/p/google-web-toolkit/issues/detail?id=8098
+    return (src.@java.lang.Object::castableTypeMap || src.@java.lang.Object::castableTypeMap)
+      && src.@java.lang.Object::castableTypeMap[dstId];
   }-*/;
 
   static native String charToString(char x) /*-{

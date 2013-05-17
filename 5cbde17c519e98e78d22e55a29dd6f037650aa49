@@ -33,6 +33,74 @@
       "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UxJ6Ave4",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-17T01:12:21Z",
+      "side": 1,
+      "message": "protected final instead of public. I dont think a composite wants to leak out \"T\".",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UxN56RTI",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-17T01:12:21Z",
+      "side": 1,
+      "message": "Maybe add an example to illustrate the purpose (for new GWT users).",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UriM39Oc",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-17T01:12:21Z",
+      "side": 1,
+      "message": "I am not a native speaker but \"the child widget that higher level API calls (if any) will be delegated (e.g. HasWidget#add) to\" sounds better to me.",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UroNRKBk",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-17T01:12:21Z",
+      "side": 1,
+      "message": "What about the remaining interfaces that FocusWidget implements? HasDoubleClickHandlers, HasAllDragAndDropHandlers?",
+      "revId": "5cbde17c519e98e78d22e55a29dd6f037650aa49",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

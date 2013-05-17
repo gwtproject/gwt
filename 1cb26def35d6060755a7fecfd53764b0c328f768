@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UuH7aeQ4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/Java7MockResources.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "Nit: INTEGER_LITERALS to match the use of underscores elsewhere in this file.\n\nMore nits: also, some of the constants match the class being created (INTEGER_LITERALS matches IntegerLiterals) but others don\u0027t. Some classes end with \"Test\" and others don\u0027t. It would be a bit cleaner to make them match.",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuP7tCbI",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/Java7MockResources.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "This sort of code could be made slightly more concise with a helper method:\n\n/**\n * Concatenate lines of text, adding a newline to the end of each string.\n */\nstatic String concat(String... lines);\n\nBut it\u0027s fine as-is.",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuB5dfaI",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "Maybe SourceLevel should be a top-level enum? It would make imports shorter by default.",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuB7.3VM",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "perhaps JAVA6 and JAVA7 instead of underscore?",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuP5Dycc",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSource.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "The javadoc here seems to be boilerplate. Better to give an example of what will be returned, and perhaps say when to use \"1.6\" and when to use \"6\"?",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuL4kcRs",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "Perhaps import SourceLevel directly.",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UuJ4fLc8",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-17T17:58:55Z",
+      "side": 1,
+      "message": "\"must exist\"",
+      "revId": "1cb26def35d6060755a7fecfd53764b0c328f768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "UuH7ief8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-17T16:09:29Z",
+      "side": 1,
+      "message": "Did you mean to remove this in patch set 4?",
+      "revId": "6483361cf3e56db8b9861dfd6035bd8e17f3f625",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UuG2Ikao",
         "filename": "build.xml",
         "patchSetId": 3

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U5CHnqJ8",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-20T22:54:47Z",
+      "side": 1,
+      "message": "Er (sorry for not catching it earlier), shouldn\u0027t these somehow use this.addXxxHandler and fireEvent? As coded here, the event passed to the handlers will have getDelegate() as its getSource(), instead of the FocusComposite. This unfortunately adds some overhead so I could udnerstand that you wouldn\u0027t want it, but then it should be clearly documented, as it\u0027s likely to surprise a lot of people (all those using the same handler for several widgets –e.g. through @UiHandler– and doing \"if te.getSource() \u003d\u003d someWidget)\" kind of tests)",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

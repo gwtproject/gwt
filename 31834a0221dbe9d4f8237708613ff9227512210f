@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U5KHS2MY",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-20T22:41:00Z",
+      "side": 1,
+      "message": "Is this needed, given that com.google.gwt.core.shared.impl is added to the excludedPackages below?\n\nMaybe only exclude ThrowableTypeResolver here? (if apicheck would otherwise fail)",
+      "revId": "31834a0221dbe9d4f8237708613ff9227512210f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

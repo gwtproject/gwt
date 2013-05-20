@@ -25,23 +25,23 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 
 /**
- * A type of widget that can wrap another widget, hiding the wrapped widget's
- * methods. When added to a panel, a composite behaves exactly as if the widget
- * it wraps had been added.
- *
+ * A type of widget that can wrap another widget, hiding the wrapped widget's methods. When added to
+ * a panel, a composite behaves exactly as if the widget it wraps had been added.
  * <p>
- * The composite is useful for creating a single widget out of an aggregate of
- * multiple other widgets contained in a single panel.
- * </p>
- *
+ * In addition to wrapping the widget, composites are also capable of delegating higher level API
+ * calls to the wrapped widget (e.g. HasWidgets APIs). Also, alternatively, subclasses can choose a
+ * different widget (e.g. one of its children) for the delegation via using
+ * {@link #initWidget(Widget, Widget)}.
  * <p>
- * <h3>Example</h3>
- * {@example com.google.gwt.examples.CompositeExample}
- * </p>
+ * <h3>Example</h3> {@example com.google.gwt.examples.CompositeExample}
+ *
+ * @param <T> type of the delegate widget
  */
-public abstract class Composite extends Widget implements IsRenderable {
+public abstract class Composite<T extends Widget> extends Widget implements IsRenderable {
 
   private Widget widget;
+
+  private T delegate;
 
   private IsRenderable renderable;
 
@@ -88,6 +88,8 @@ public abstract class Composite extends Widget implements IsRenderable {
     if (renderable != null) {
       return renderable.render(stamper);
     } else {
+      checkInit();
+
       HtmlSpanBuilder spanBuilder = HtmlBuilderFactory.get()
           .createSpanBuilder();
       stamper.stamp(spanBuilder).end();
@@ -105,27 +107,72 @@ public abstract class Composite extends Widget implements IsRenderable {
   }
 
   /**
+   * Check if the composite is initialized.
+   */
+  protected void checkInit() {
+    if (widget == null) {
+      throw new IllegalStateException("initWidget() is not called yet");
+    }
+  }
+
+  /**
    * Provides subclasses access to the topmost widget that defines this
    * composite.
-   * 
-   * @return the widget
    */
   protected Widget getWidget() {
     return widget;
   }
 
   /**
+   * Provides subclasses access to the widget that higher level APIs are
+   * delegated to.
+   */
+  protected T getDelegate() {
+    checkInit();
+
+    return delegate;
+  }
+
+  /**
    * Sets the widget to be wrapped by the composite. The wrapped widget must be
    * set before calling any {@link Widget} methods on this object, or adding it
-   * to a panel. This method may only be called once for a given composite.
-   * 
+   * to a panel. initWidget may only be called once for a given composite.
+   *
    * @param widget the widget to be wrapped
    */
-  protected void initWidget(Widget widget) {
+  protected void initWidget(T widget) {
+    initWidget(widget, widget);
+  }
+
+  /**
+   * Sets the widget to be wrapped by the composite. The wrapped widget must be
+   * set before calling any {@link Widget} methods on this object, or adding it
+   * to a panel. initWidget may only be called once for a given composite.
+   * <p>
+   * Compared to {@link #initWidget(Widget)}, this method also accepts a child
+   * widget where any higher level API calls (e.g. HasWidget#add) will be
+   * delegated to:
+   * <pre>
+   *   ...
+   *   initWidget(topLevelWidget, childContainerWidget);
+   * </pre>
+   *
+   * @param widget the widget to be wrapped
+   * @param delegate the child widget for delegation.
+   */
+  protected void initWidget(Widget widget, T delegate) {
     // Validate. Make sure the widget is not being set twice.
     if (this.widget != null) {
       throw new IllegalStateException("Composite.initWidget() may only be "
           + "called once.");
+    }
+
+    if (widget == null) {
+      throw new NullPointerException("widget cannot be null");
+    }
+
+    if (delegate == null) {
+      throw new NullPointerException("delegate cannot be null");
     }
 
     if (widget instanceof IsRenderable) {
@@ -150,10 +197,14 @@ public abstract class Composite extends Widget implements IsRenderable {
 
     // Adopt.
     widget.setParent(this);
+
+    this.delegate = delegate;
   }
 
   @Override
   protected void onAttach() {
+    checkInit();
+
     if (!isOrWasAttached()) {
       widget.sinkEvents(eventsToSink);
       eventsToSink = -1;
@@ -198,7 +249,7 @@ public abstract class Composite extends Widget implements IsRenderable {
    * @deprecated Use {@link #initWidget(Widget)} instead
    */
   @Deprecated
-  protected void setWidget(Widget widget) {
+  protected void setWidget(T widget) {
     initWidget(widget);
   }
 }

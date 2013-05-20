@@ -16,6 +16,24 @@
       "revId": "31834a0221dbe9d4f8237708613ff9227512210f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UyX.2h3M",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-20T23:02:18Z",
+      "side": 1,
+      "message": "IIRC, doesn\u0027t work due to some compilation issues. Will change to ThrowableTypeResolver to make it more scoped and see if it works or not.",
+      "parentUuid": "U5KHS2MY",
+      "revId": "31834a0221dbe9d4f8237708613ff9227512210f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

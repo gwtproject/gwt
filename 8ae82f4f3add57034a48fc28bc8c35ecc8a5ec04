@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UyU0EuY0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-21T19:23:46Z",
+      "side": 1,
+      "message": "I think you mean \"sourceLevel.javaLevel \u003e result.javaLevel\" for the second conditional?",
+      "revId": "8ae82f4f3add57034a48fc28bc8c35ecc8a5ec04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * For internal use only. Used for server call serialization. This class is
@@ -56,6 +57,7 @@ public final class ServerSerializationStreamWriter extends
     private int count = 0;
     private boolean needsComma = false;
     private int total = 0;
+    private boolean javascript = false;
 
     public LengthConstrainedArray() {
       buffer = new StringBuffer();
@@ -70,6 +72,7 @@ public final class ServerSerializationStreamWriter extends
       if (count++ == MAXIMUM_ARRAY_LENGTH) {
         if (total == MAXIMUM_ARRAY_LENGTH + 1) {
           buffer.append(PRELUDE);
+          javascript = true;
         } else {
           buffer.append("],[");
         }
@@ -83,11 +86,21 @@ public final class ServerSerializationStreamWriter extends
         needsComma = true;
       }
 
+      /*
+       * Check if the token is a concatenated string ("a"+"b"..) making the array output javascript
+       * rather than json.
+       */
+      javascript |= Pattern.compile("(\"[\\w]*\")(\\+)+").matcher(token).find();
+
       buffer.append(token);
     }
 
     public void addToken(int i) {
       addToken(String.valueOf(i));
+    }
+
+    public boolean isJavaScript() {
+      return javascript;
     }
 
     @Override
@@ -570,6 +583,11 @@ public final class ServerSerializationStreamWriter extends
     this.serializationPolicy = serializationPolicy;
   }
 
+  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version) {
+    this(serializationPolicy);
+    setVersion(version);
+  }
+
   @Override
   public void prepareToWrite() {
     super.prepareToWrite();
@@ -833,7 +851,12 @@ public final class ServerSerializationStreamWriter extends
    */
   private void writeHeader(LengthConstrainedArray stream) {
     stream.addToken(getFlags());
-    stream.addToken(getVersion());
+    if (stream.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {
+      // Ensure we are not using the JSON supported version if stream is Javascript instead of JSON
+      stream.addToken(SERIALIZATION_STREAM_JSON_VERSION - 1);
+    } else {
+      stream.addToken(getVersion());
+    }
   }
 
   private void writePayload(LengthConstrainedArray stream) {

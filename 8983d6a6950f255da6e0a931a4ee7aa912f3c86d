@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "U5MTGEkE",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-05-21T13:08:04Z",
+      "side": 1,
+      "message": "Yes 1e1000 should work for Infinity but the NaN case won\u0027t. Actually I think changing it to strings is a better idea since it also more readable.",
+      "parentUuid": "U5GStPtQ",
+      "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "U5KRfRig",
         "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2013-05-21T09:49:26Z",
       "side": 1,
       "message": "We have JsonUtils.safeEval() already.",
+      "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U5GQI3nE",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-05-21T13:08:04Z",
+      "side": 1,
+      "message": "Yes, didn\u0027t know about that. Should definitely use it instead.",
+      "parentUuid": "U5KRfRig",
       "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

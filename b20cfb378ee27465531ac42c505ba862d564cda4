@@ -16,6 +16,24 @@
       "revId": "b20cfb378ee27465531ac42c505ba862d564cda4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UyW3NPVc",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-21T19:04:58Z",
+      "side": 1,
+      "message": "Hashmaps: yes, at fist I was not storing the java version value in the enum, will remove the hashmap :)\n\nI was trying to make it future proof, i.e. if you are running under 1.8 gwt should choose 1.7 (the best match) and for that relying in the numerical ordering seemed appropriate. We could rely on the string ordering and avoid all parsing, although it is only done once.",
+      "parentUuid": "U0TTlXgY",
+      "revId": "b20cfb378ee27465531ac42c505ba862d564cda4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -17,7 +17,9 @@ package com.google.gwt.user.client.rpc.impl;
 
 import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.UnsafeNativeLong;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.SerializationException;
 
@@ -52,16 +54,22 @@ public final class ClientSerializationStreamReader extends
 
   @Override
   public void prepareToRead(String encoded) throws SerializationException {
-    results = eval(encoded);
+
+    /*
+     * Need to read the version from the string since version is later set in
+     * super.prepareToRead() from the evaluated payload but that is too late.
+     */
+    if(readVersion(encoded) < SERIALIZATION_STREAM_JSON_VERSION){
+      // Versions prior to 8 uses almost JSON with Javascript is special cases; e.g., using ].concat([,
+      // non-stringified NaN/Infinity or ''+'' concatenated strings.
+      results = eval(encoded);
+    } else {
+      results = JsonUtils.safeEval(encoded);
+    }
+
     index = getLength(results);
     super.prepareToRead(encoded);
 
-    if (getVersion() != SERIALIZATION_STREAM_VERSION) {
-      throw new IncompatibleRemoteServiceException("Expecting version "
-          + SERIALIZATION_STREAM_VERSION + " from server, got " + getVersion()
-          + ".");
-    }
-    
     if (!areFlagsValid()) {
       throw new IncompatibleRemoteServiceException("Got an unknown flag from "
           + "server: " + getFlags());
@@ -83,17 +91,17 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   public native double readDouble() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native float readFloat() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native int readInt() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
   }-*/;
-  
+
   @UnsafeNativeLong
   public native long readLong() /*-{
     var s = this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
@@ -127,5 +135,11 @@ public final class ClientSerializationStreamReader extends
   private native JavaScriptObject readJavaScriptObject() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
   }-*/;
+
+  private static int readVersion(String encodedString) {
+    String versionStr =
+        encodedString.substring(encodedString.lastIndexOf(",") + 1, encodedString.lastIndexOf("]"));
+    return Integer.parseInt(versionStr.trim());
+  }
 
 }

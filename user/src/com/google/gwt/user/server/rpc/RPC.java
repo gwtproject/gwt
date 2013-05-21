@@ -547,7 +547,8 @@ public final class RPC {
   }
 
   public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
-      SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+      SerializationPolicy serializationPolicy, int flags)
+      throws SerializationException {
     if (serviceMethod == null) {
       throw new NullPointerException("serviceMethod");
     }
@@ -596,8 +597,12 @@ public final class RPC {
   private static String encodeResponse(Class<?> responseClass, Object object, boolean wasThrown,
       int flags, SerializationPolicy serializationPolicy) throws SerializationException {
 
+    int version =
+        System.getProperty("gwt.rpc.version") != null ? Integer.getInteger("gwt.rpc.version")
+            : AbstractSerializationStream.SERIALIZATION_STREAM_VERSION;
+
     ServerSerializationStreamWriter stream =
-        new ServerSerializationStreamWriter(serializationPolicy);
+        new ServerSerializationStreamWriter(serializationPolicy, version);
     stream.setFlags(flags);
 
     stream.prepareToWrite();

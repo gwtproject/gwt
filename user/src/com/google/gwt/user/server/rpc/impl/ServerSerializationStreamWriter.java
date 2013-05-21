@@ -570,6 +570,11 @@ public final class ServerSerializationStreamWriter extends
     this.serializationPolicy = serializationPolicy;
   }
 
+  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version) {
+    this(serializationPolicy);
+    setVersion(version);
+  }
+
   @Override
   public void prepareToWrite() {
     super.prepareToWrite();

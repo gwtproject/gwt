@@ -324,12 +324,6 @@ public final class ClientSerializationStreamReader extends
 
     index = decoder.getValues().size();
     super.prepareToRead(encoded);
-
-    if (getVersion() != SERIALIZATION_STREAM_VERSION) {
-      throw new IncompatibleRemoteServiceException("Expecting version "
-          + SERIALIZATION_STREAM_VERSION + " from server, got " + getVersion()
-          + ".");
-    }
     
     if (!areFlagsValid()) {
       throw new IncompatibleRemoteServiceException("Got an unknown flag from "

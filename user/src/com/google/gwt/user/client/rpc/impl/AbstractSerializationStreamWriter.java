@@ -89,7 +89,15 @@ public abstract class AbstractSerializationStreamWriter extends
   }
 
   public void writeDouble(double fieldValue) {
-    append(String.valueOf(fieldValue));
+    if (fieldValue >= Double.POSITIVE_INFINITY) {
+      append("1e1000");
+    } else if (fieldValue <= Double.NEGATIVE_INFINITY) {
+      append("-1e1000");
+    } else if (Double.isNaN(fieldValue)) {
+      append("0");
+    } else {
+      append(String.valueOf(fieldValue));
+    }
   }
 
   public void writeFloat(float fieldValue) {

@@ -33,6 +33,10 @@ public final class ClientSerializationStreamReader extends
   private static native JavaScriptObject eval(String encoded) /*-{
     return eval(encoded);
   }-*/;
+  
+  private static native JavaScriptObject parse(String encoded) /*-{
+    return JSON.parse(encoded);
+  }-*/;
 
   private static native int getLength(JavaScriptObject array) /*-{
     return array.length;
@@ -51,8 +55,10 @@ public final class ClientSerializationStreamReader extends
   }
 
   @Override
-  public void prepareToRead(String encoded) throws SerializationException {
-    results = eval(encoded);
+  public void prepareToRead(String encoded) throws SerializationException {   
+    String versionStr = encoded.substring(encoded.lastIndexOf(",")+1, encoded.lastIndexOf("]"));
+    int version = Integer.parseInt(versionStr);     
+    results = version < 8 ? eval(encoded) : parse(encoded); 
     index = getLength(results);
     super.prepareToRead(encoded);
 

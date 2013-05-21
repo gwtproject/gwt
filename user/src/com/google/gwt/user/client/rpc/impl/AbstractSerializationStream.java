@@ -43,7 +43,7 @@ public abstract class AbstractSerializationStream {
    * The current RPC protocol version. This version differs from the previous
    * one in that it supports {@links RpcToken}s.
    */
-  public static final int SERIALIZATION_STREAM_VERSION = 7;
+  public static final int SERIALIZATION_STREAM_VERSION = 8;
   
   /**
    * The oldest supported RPC protocol version.

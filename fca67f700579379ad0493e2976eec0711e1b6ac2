@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U5Mcn9Ic",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-21T13:48:49Z",
+      "side": 1,
+      "message": "Not \u0027new Number(x)\u0027 (which will return a Number *object*), rather just \u0027Number(x)\u0027 (which will return a Number *value*)",
+      "revId": "fca67f700579379ad0493e2976eec0711e1b6ac2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "UyeKsvJU",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T03:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "UyR8LC3A",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "UyV8Fg1U",
         "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-20T23:03:22Z",
       "side": 1,
       "message": "Do we need to update the example?",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UycKUGD4",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T03:08:35Z",
+      "side": 1,
+      "message": "Yes. I\u0027ll send another patch that converts all trivial Composite usages to Composite\u003cWidget\u003e.",
+      "parentUuid": "UyV8Fg1U",
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "UyQKfMFg",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T03:08:35Z",
+      "side": 1,
+      "message": "I was keeping the wording similar with getWidget. Will update both.",
+      "parentUuid": "UyX.fp-M",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Uyd-Gs.4",
         "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-05-20T23:03:22Z",
       "side": 1,
       "message": "\"The same widget will be wrapped and used as a delegate. if you want to use a different delegate, call initWidget(Widget, T) instead.\"",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UyeKjHJo",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T03:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Uyd-Gs.4",
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +171,24 @@
       "side": 1,
       "message": "Oh good catch. \n\nI think the behavior of event.getSource() should stay the same in all cases. It should be easy to migrate to this new FocusComposite and the usage of FocusComposite should not break your app if you ever decide to switch from initWidget(Widget) to initWidget(Widget, T) because you want to add some decoration.\n\nSo I guess it should be this.addHandler(handler, \u003cevent type\u003e).",
       "parentUuid": "U5CHnqJ8",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UySJ.tOw",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T03:08:35Z",
+      "side": 1,
+      "message": "For this to work as expected (i.e. source \u003d\u003d composite and ideally with possible custom addXXXHandler impls at delegate), I will need to create anonymous class that changes the source for each handler type; I\u0027m not sure that is what we want.\n\nI will think little bit more on alternatives but I\u0027m not very optimistic about a good solution...",
+      "parentUuid": "U44WIhtk",
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

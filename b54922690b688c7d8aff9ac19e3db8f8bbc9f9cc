@@ -84,6 +84,24 @@
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U44WIhtk",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-21T00:08:29Z",
+      "side": 1,
+      "message": "Oh good catch. \n\nI think the behavior of event.getSource() should stay the same in all cases. It should be easy to migrate to this new FocusComposite and the usage of FocusComposite should not break your app if you ever decide to switch from initWidget(Widget) to initWidget(Widget, T) because you want to add some decoration.\n\nSo I guess it should be this.addHandler(handler, \u003cevent type\u003e).",
+      "parentUuid": "U5CHnqJ8",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

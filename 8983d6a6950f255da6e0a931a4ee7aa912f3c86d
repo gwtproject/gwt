@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "U0RQq2n4",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-05-21T12:30:54Z",
+      "side": 1,
+      "message": "Infinity does actually work round trip in my quick testing in this way, as 1e1000 or the like is a) legal json and b) outside the range of double, so will end up as +Infinity on the JS side after parsing, or when wrapped up in Double.parseDouble. However, 0 being used as NaN won\u0027t fly, you\u0027re right. One idea is to emit null, then read out the null as a special case - in my testing this behaved well in all browsers.\n\nSending the strings \"+Infinity\", \"NaN\" could also work, but then you need parse those as strings, not as numbers after reading it as json, i think in my first try at this I decided that was more trouble than it was worth.\n\nNo need to use \u003e\u003d or \u003c\u003d for infinity checks, \u003d\u003d should be sufficient.\n\nwriteFloat will also need similar treatment.",
+      "parentUuid": "U5GStPtQ",
+      "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "U5KRfRig",
         "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
         "patchSetId": 1

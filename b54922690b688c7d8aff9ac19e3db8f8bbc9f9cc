@@ -192,6 +192,24 @@
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U5EE2dAw",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-21T08:28:45Z",
+      "side": 1,
+      "message": "Yes, that\u0027d mean tracking, for each event, whether the handler was added to the delegate widget, something like:\n\n   private boolean dblClickHandlerRegistered;\n   …\n   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {\n     if (!dblClickHandlerRegistered) {\n       getDelegate().addDoubleClickHandler(new DoubleClickHandler() {\n         @Override\n         public void onDoubleClick(DoubleClickEvent event) {\n           fireEvent(event);\n         }\n       });\n       dbleClickHandlerRegistered \u003d true;\n     }\n     return addHandler(handler, DoubleClickEvent.getType());\n   }\n\nThat\u0027s a lot of boilerplate and a bit of runtime overhead; and it doesn\u0027t remove the anonymous handler from the delegate when all the handlers are removed from the composite; this would require tracking the number of handlers added –unfortunately I don\u0027t think we can use getHandlerCount here as it doesn\u0027t account for queued adds/removes, when adding/removing handlers from within an event handler–, storing the HandlerRegistration for the anonymous handler, and wrapping the HandlerRegistration returned from addHandler() to remove the anonymous handler when the handler count reaches 0.\n\nNote that instead of an anonymous class, we could have an inner class implementing all the event handlers; similar to SuggestBox. I have no idea what the compiler would optimize best.\n\nLast, but not least, it\u0027ll possibly fire the events twice when getWidget()\u003d\u003dgetDelegate(); see issue 3533.",
+      "parentUuid": "UySJ.tOw",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

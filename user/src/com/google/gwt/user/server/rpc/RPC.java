@@ -314,7 +314,7 @@ public final class RPC {
         }
 
         return new RPCRequest(method, parameterValues, rpcToken, serializationPolicy, streamReader
-            .getFlags());
+            .getFlags(), streamReader.getVersion());
       } catch (NoSuchMethodException e) {
         throw new IncompatibleRemoteServiceException(formatMethodNotFoundErrorMessage(serviceIntf,
             serviceMethodName, parameterTypes));
@@ -377,6 +377,13 @@ public final class RPC {
 
   public static String encodeResponseForFailure(Method serviceMethod, Throwable cause,
       SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+    return encodeResponseForFailure(serviceMethod, cause, serializationPolicy, flags,
+        AbstractSerializationStream.SERIALIZATION_STREAM_VERSION);
+  }
+
+  public static String encodeResponseForFailure(Method serviceMethod, Throwable cause,
+      SerializationPolicy serializationPolicy, int flags, int version)
+      throws SerializationException {
     if (cause == null) {
       throw new NullPointerException("cause cannot be null");
     }
@@ -390,7 +397,7 @@ public final class RPC {
           + "' threw an unexpected exception: " + cause.toString(), cause);
     }
 
-    return encodeResponse(cause.getClass(), cause, true, flags, serializationPolicy);
+    return encodeResponse(cause.getClass(), cause, true, flags, serializationPolicy, version);
   }
 
   /**
@@ -444,6 +451,13 @@ public final class RPC {
 
   public static String encodeResponseForSuccess(Method serviceMethod, Object object,
       SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+    return encodeResponseForSuccess(serviceMethod, object, serializationPolicy, flags,
+        AbstractSerializationStream.SERIALIZATION_STREAM_VERSION);
+  }
+
+  public static String encodeResponseForSuccess(Method serviceMethod, Object object,
+      SerializationPolicy serializationPolicy, int flags, int version)
+      throws SerializationException {
     if (serviceMethod == null) {
       throw new NullPointerException("serviceMethod cannot be null");
     }
@@ -468,7 +482,7 @@ public final class RPC {
       }
     }
 
-    return encodeResponse(methodReturnType, object, false, flags, serializationPolicy);
+    return encodeResponse(methodReturnType, object, false, flags, serializationPolicy, version);
   }
 
   /**
@@ -548,6 +562,13 @@ public final class RPC {
 
   public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
       SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+    return invokeAndEncodeResponse(target, serviceMethod, args, serializationPolicy, flags,
+        AbstractSerializationStream.SERIALIZATION_STREAM_VERSION);
+  }
+
+  public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
+      SerializationPolicy serializationPolicy, int flags, int version)
+      throws SerializationException {
     if (serviceMethod == null) {
       throw new NullPointerException("serviceMethod");
     }
@@ -560,7 +581,8 @@ public final class RPC {
     try {
       Object result = serviceMethod.invoke(target, args);
 
-      responsePayload = encodeResponseForSuccess(serviceMethod, result, serializationPolicy, flags);
+      responsePayload =
+          encodeResponseForSuccess(serviceMethod, result, serializationPolicy, flags, version);
     } catch (IllegalAccessException e) {
       SecurityException securityException =
           new SecurityException(formatIllegalAccessErrorMessage(target, serviceMethod));
@@ -576,7 +598,8 @@ public final class RPC {
       //
       Throwable cause = e.getCause();
 
-      responsePayload = encodeResponseForFailure(serviceMethod, cause, serializationPolicy, flags);
+      responsePayload =
+          encodeResponseForFailure(serviceMethod, cause, serializationPolicy, flags, version);
     }
 
     return responsePayload;
@@ -594,10 +617,11 @@ public final class RPC {
    * @throws SerializationException if the object cannot be serialized
    */
   private static String encodeResponse(Class<?> responseClass, Object object, boolean wasThrown,
-      int flags, SerializationPolicy serializationPolicy) throws SerializationException {
+      int flags, SerializationPolicy serializationPolicy, int version)
+      throws SerializationException {
 
     ServerSerializationStreamWriter stream =
-        new ServerSerializationStreamWriter(serializationPolicy);
+        new ServerSerializationStreamWriter(serializationPolicy, version);
     stream.setFlags(flags);
 
     stream.prepareToWrite();

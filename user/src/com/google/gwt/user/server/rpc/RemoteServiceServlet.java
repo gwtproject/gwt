@@ -264,7 +264,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
       onAfterRequestDeserialized(rpcRequest);
       return RPC.invokeAndEncodeResponse(delegate, rpcRequest.getMethod(),
           rpcRequest.getParameters(), rpcRequest.getSerializationPolicy(),
-          rpcRequest.getFlags());
+          rpcRequest.getFlags(), rpcRequest.getVersion());
     } catch (IncompatibleRemoteServiceException ex) {
       log(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",

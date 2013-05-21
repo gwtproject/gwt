@@ -570,6 +570,11 @@ public final class ServerSerializationStreamWriter extends
     this.serializationPolicy = serializationPolicy;
   }
 
+  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version) {
+    this(serializationPolicy);
+    setVersion(version);
+  }
+
   @Override
   public void prepareToWrite() {
     super.prepareToWrite();
@@ -623,6 +628,16 @@ public final class ServerSerializationStreamWriter extends
       sb.append(Base64Utils.toBase64(value));
       sb.append('\'');
       append(sb.toString());
+    }
+  }
+
+  @Override
+  public void writeDouble(double fieldValue) {
+    if (getVersion() < 8) {
+      // Versions prior to 8 did not stringify non-json values
+      append(String.valueOf(fieldValue));
+    } else {
+      super.writeDouble(fieldValue);
     }
   }
 

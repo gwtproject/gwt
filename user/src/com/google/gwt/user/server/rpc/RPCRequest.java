@@ -16,6 +16,7 @@
 package com.google.gwt.user.server.rpc;
 
 import com.google.gwt.user.client.rpc.RpcToken;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
 
 import java.lang.reflect.Method;
 
@@ -52,6 +53,11 @@ public final class RPCRequest {
   private final SerializationPolicy serializationPolicy;
 
   /**
+   * The RPC serialization version recieved from the client
+   */
+  private final int version;
+
+  /**
    * Construct an RPCRequest.
    */
   public RPCRequest(Method method, Object[] parameters,
@@ -64,15 +70,29 @@ public final class RPCRequest {
    */
   public RPCRequest(Method method, Object[] parameters,
       RpcToken rpcToken, SerializationPolicy serializationPolicy, int flags) {
+    this(method, parameters, rpcToken, serializationPolicy, flags,
+        AbstractSerializationStream.SERIALIZATION_STREAM_VERSION);
+  }
+
+  /**
+   * Construct an RPCRequest.
+   */
+  public RPCRequest(Method method, Object[] parameters, RpcToken rpcToken,
+      SerializationPolicy serializationPolicy, int flags, int version) {
     this.method = method;
     this.parameters = parameters;
     this.rpcToken = rpcToken;
     this.serializationPolicy = serializationPolicy;
     this.flags = flags;
+    this.version = version;
   }
 
   public int getFlags() {
     return flags;
+  }
+
+  public int getVersion() {
+    return version;
   }
 
   /**

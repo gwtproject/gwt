@@ -33,6 +33,10 @@ public final class ClientSerializationStreamWriter extends
   @SuppressWarnings("unused")  // referenced by quoteString
   private static JavaScriptObject regex = getQuotingRegex();
 
+  private static native boolean isJsonParseSupported() /*-{
+    return @com.google.gwt.core.client.JsonUtils::hasJsonParse;
+  }-*/;
+
   /**
    * Quote characters in a user-supplied string to make sure they are safe to
    * send to the server.
@@ -184,7 +188,8 @@ public final class ClientSerializationStreamWriter extends
   }
 
   private void writeHeader(StringBuffer buffer) {
-    append(buffer, String.valueOf(getVersion()));
+    int version = isJsonParseSupported() ? getVersion() : 7;
+    append(buffer, String.valueOf(version));
     append(buffer, String.valueOf(getFlags()));
   }
 

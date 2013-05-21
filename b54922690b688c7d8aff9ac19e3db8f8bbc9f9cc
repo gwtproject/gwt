@@ -210,6 +210,24 @@
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U0ZSZqnY",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-21T20:57:48Z",
+      "side": 1,
+      "message": "Actually, I was thinking of a simpler route but I still don\u0027t like the code bloat:\n\n public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {\n   return getDelegate().addDoubleClickHandler(new DoubleClickHandler() {\n     @Override\n     public void onDoubleClick(DoubleClickEvent event) {\n       Object oldSource \u003d event.getSource();\n       event.overrideSource(this);\n       try {\n         handler.onDoubleClickEvent(event);\n       } finally {\n         event.overrideSource(oldSource);\n       }\n     }\n   });\n }\n\nAre you sure, this will fire the events twice? I don\u0027t see a reason.\nIt looks like in the SuggestBox case,  the event is also delegated from the handler:\nhttp://gwt-code-reviews.appspot.com/1785803/",
+      "parentUuid": "U5EE2dAw",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

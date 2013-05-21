@@ -17,6 +17,7 @@ package com.google.gwt.user.client.rpc.impl;
 
 import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.UnsafeNativeLong;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -29,10 +30,6 @@ import com.google.gwt.user.client.rpc.SerializationException;
 @GwtScriptOnly
 public final class ClientSerializationStreamReader extends
     AbstractSerializationStreamReader {
-
-  private static native JavaScriptObject eval(String encoded) /*-{
-    return eval(encoded);
-  }-*/;
 
   private static native int getLength(JavaScriptObject array) /*-{
     return array.length;
@@ -52,7 +49,7 @@ public final class ClientSerializationStreamReader extends
 
   @Override
   public void prepareToRead(String encoded) throws SerializationException {
-    results = eval(encoded);
+    results = JsonUtils.safeEval(encoded);
     index = getLength(results);
     super.prepareToRead(encoded);
 
@@ -83,11 +80,11 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   public native double readDouble() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return new Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native float readFloat() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return new Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native int readInt() /*-{

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U5GStPtQ",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-21T09:49:26Z",
+      "side": 1,
+      "message": "That means that infinity and NaN don\u0027t roundtrip, which is a breaking change.\n\nCouldn\u0027t we emit \"+Infinity\", \"-Infinity\" and \"NaN\" as strings and modify ClientSerializationStreamReader to use Number(x) for parsing (will accept either one of number or string, and act accordingly, parsing \"+Infinity\" and \"-Infinity\" as positive and negative infinity, and failing to parse \"NaN\" as a number thus returning NaN; ServerSerializationStreamReader already does the right thing as it uses Double.parseDouble).\n\nClientSerializationStreamReader in DevMode could (should?) also use JSON parsing then.",
+      "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U5KRfRig",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-21T09:49:26Z",
+      "side": 1,
+      "message": "We have JsonUtils.safeEval() already.",
+      "revId": "8983d6a6950f255da6e0a931a4ee7aa912f3c86d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

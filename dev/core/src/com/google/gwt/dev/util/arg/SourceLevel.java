@@ -28,10 +28,12 @@ public enum SourceLevel {
 
   private final String stringValue;
   private final String altStringValue;
+  private final Double javaLevel;
 
   SourceLevel(String stringValue, String altStringValue) {
     this.stringValue = stringValue;
     this.altStringValue = altStringValue;
+    this.javaLevel = Double.parseDouble(stringValue);
   }
 
   /**
@@ -51,5 +53,24 @@ public enum SourceLevel {
   @Override
   public String toString() {
     return stringValue;
+  }
+
+  /**
+   * Provides a SourceLevel that best matches the runtime environment (to be used as a default).
+   *
+   * @return a SourceLevel that best matches the Java source level of the runtime environment.
+   */
+  static SourceLevel getDefaultSourceLevel() {
+    SourceLevel result = SourceLevel.JAVA6;
+    try {
+      double javaSpecLevel = Double.parseDouble(System.getProperty("java.specification.version"));
+      for (SourceLevel sourceLevel : SourceLevel.values()) {
+        if (javaSpecLevel >= sourceLevel.javaLevel && javaSpecLevel > result.javaLevel) {
+          result = sourceLevel;
+        }
+      }
+    } catch (NumberFormatException e) {
+    }
+    return result;
   }
 }

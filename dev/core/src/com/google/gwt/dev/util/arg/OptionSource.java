@@ -20,7 +20,10 @@ package com.google.gwt.dev.util.arg;
  */
 public interface OptionSource {
 
-  static final SourceLevel DEFAULT_SOURCE_LEVEL = SourceLevel.JAVA6;
+  /**
+   * The default GWT source level is the one that matches best that of the runtime environment.
+   */
+  static final SourceLevel DEFAULT_SOURCE_LEVEL = SourceLevel.getDefaultSourceLevel();
 
   SourceLevel getSourceLevel();
 

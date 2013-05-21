@@ -81,8 +81,8 @@ public enum SourceLevel {
     SourceLevel result = SourceLevel.JAVA6;
     try {
       double javaSpecLevel = Double.parseDouble(System.getProperty("java.specification.version"));
-      for (double javaLevel :  gwtLevelByJavaLevel.keySet() ) {
-        if (javaSpecLevel >= javaLevel && javaSpecLevel >result.javaLevel) {
+      for (double javaLevel : gwtLevelByJavaLevel.keySet()) {
+        if (javaSpecLevel >= javaLevel && javaSpecLevel > result.javaLevel) {
           result = gwtLevelByJavaLevel.get(javaLevel);
         }
       }

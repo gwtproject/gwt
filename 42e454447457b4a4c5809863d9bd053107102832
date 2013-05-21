@@ -16,6 +16,24 @@
       "revId": "42e454447457b4a4c5809863d9bd053107102832",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UyYIGoNI",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/GeneratorContextBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-05-21T00:54:55Z",
+      "side": 1,
+      "message": "Isn\u0027t this only used for testing purposes? There is no obvious way to thread the flag. \n\nIn any case we will be pushing the default to Java7 in a not too distant time in the future.",
+      "parentUuid": "UyaKT5KI",
+      "revId": "42e454447457b4a4c5809863d9bd053107102832",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -15,6 +15,10 @@
  */
 package com.google.gwt.dev.util.arg;
 
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+
+import java.util.Map;
+
 /**
  * Java source level compatibility constants.
  * Java versions range from 1.0 to 1.7.
@@ -28,10 +32,12 @@ public enum SourceLevel {
 
   private final String stringValue;
   private final String altStringValue;
+  private final Double javaLevel;
 
   SourceLevel(String stringValue, String altStringValue) {
     this.stringValue = stringValue;
     this.altStringValue = altStringValue;
+    this.javaLevel = Double.parseDouble(stringValue);
   }
 
   /**
@@ -51,5 +57,37 @@ public enum SourceLevel {
   @Override
   public String toString() {
     return stringValue;
+  }
+
+  /**
+   * Maps from Java source compatibility level to the GWT compiler Java source compatibility levels.
+   */
+  private static final Map<Double, SourceLevel> gwtLevelByJavaLevel;
+
+  static {
+    ImmutableMap.Builder<Double, SourceLevel> builder = ImmutableMap.<Double, SourceLevel>builder();
+    for (SourceLevel sourceLevel : SourceLevel.values()) {
+      builder.put(sourceLevel.javaLevel, sourceLevel);
+    }
+    gwtLevelByJavaLevel = builder.build();
+  }
+
+  /**
+   * Provides a SourceLevel that best matches the runtime environment (to be used as a default).
+   *
+   * @return a SourceLevel that best matches the Java source level of the runtime environment.
+   */
+  static SourceLevel getDefaultSourceLevel() {
+    SourceLevel result = SourceLevel.JAVA6;
+    try {
+      double javaSpecLevel = Double.parseDouble(System.getProperty("java.specification.version"));
+      for (double javaLevel :  gwtLevelByJavaLevel.keySet() ) {
+        if (javaSpecLevel >= javaLevel && javaSpecLevel >result.javaLevel) {
+          result = gwtLevelByJavaLevel.get(javaLevel);
+        }
+      }
+    } catch (NumberFormatException e) {
+    }
+    return result;
   }
 }

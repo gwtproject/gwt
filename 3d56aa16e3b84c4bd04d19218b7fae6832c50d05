@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UyQLnMDE",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-05-21T00:14:59Z",
+      "side": 1,
+      "message": "visitCollectionWithCommas(CHARS_PIPE, it) ?",
+      "revId": "3d56aa16e3b84c4bd04d19218b7fae6832c50d05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

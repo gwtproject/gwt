@@ -17,6 +17,7 @@ package com.google.gwt.user.client.rpc.impl;
 
 import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.UnsafeNativeLong;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -52,7 +53,27 @@ public final class ClientSerializationStreamReader extends
 
   @Override
   public void prepareToRead(String encoded) throws SerializationException {
-    results = eval(encoded);
+
+    if(!JsonUtils.hasJsonParse() || encoded.contains("].concat([")){
+      /*
+       * Browser does not support JSON.parse() or string has been split up into
+       * concatenated blocks to support evaluating large arrays (over 1<<15 array literals)
+       * in IE6/7. Not valid JSON so have to use eval.
+       */
+      results = eval(encoded);
+
+    } else {
+      /*
+       * Try using JSON.parse(). Fallback to eval if it fails.
+       */
+         try {
+           results = JsonUtils.safeEval(encoded);
+         } catch (IllegalArgumentException iae) {
+           // JSON was for some reason not valid, fallback to eval
+           results = eval(encoded);
+         }
+    }
+
     index = getLength(results);
     super.prepareToRead(encoded);
 
@@ -83,11 +104,11 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   public native double readDouble() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native float readFloat() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
   }-*/;
 
   public native int readInt() /*-{

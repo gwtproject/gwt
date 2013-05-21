@@ -126,7 +126,7 @@ public class JsonUtils {
   /**
    * Returns true if the JSON.parse function is present, false otherwise.
    */
-  private static native boolean hasJsonParse() /*-{
+  public static native boolean hasJsonParse() /*-{
     return typeof JSON == "object" && typeof JSON.parse == "function";
   }-*/;
 

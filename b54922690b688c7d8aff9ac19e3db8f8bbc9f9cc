@@ -246,6 +246,24 @@
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6H3k88Y",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-22T22:20:26Z",
+      "side": 1,
+      "message": "Hmm, I thought they were in the same package.\n\nYour suggestion is not keeping track of previous addHandler calls. So it will be causing dublicate events for each addXXX calls.\nAlso we don\u0027t need GwtEventForwardingHelper as calling fireEvent will do the trick. Am I missing anything?\n\n(Whatever we do, it would be great to encapsulate it as helper for composite to make it straightforward for other subclasses.)",
+      "parentUuid": "U.GrYt3I",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

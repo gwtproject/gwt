@@ -16,6 +16,24 @@
       "revId": "a411c9e29fd6715919e2f289397c165dd000fa5a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6AD6qvo",
+        "filename": "user/src/com/google/gwt/user/client/ui/ResizeComposite.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-22T21:32:13Z",
+      "side": 1,
+      "message": "I may have not understood your question correctly but a subclass looking for different semantics can extend from Composite directly and enforce its own semantics.",
+      "parentUuid": "U6L0wSww",
+      "revId": "a411c9e29fd6715919e2f289397c165dd000fa5a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U6L0wSww",
+        "filename": "user/src/com/google/gwt/user/client/ui/ResizeComposite.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-22T20:59:04Z",
+      "side": 1,
+      "message": "Looking at this example, the main advantages I see are that (a) you don\u0027t need to define a constructor in this class to enforce its constraints, and (b) we\u0027re restricting the type on the one-argument version of initWidget(), so subclassing is a bit less error-prone. But this will be an internal detail of the class that gets constructed.\n\nBut what if the subclass wants a delegate and RequiresResize at the same time? Then we\u0027re enforcing a constraint on the delegate, not the widget.",
+      "revId": "a411c9e29fd6715919e2f289397c165dd000fa5a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -228,6 +228,24 @@
       "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U.GrYt3I",
+        "filename": "user/src/com/google/gwt/user/client/ui/FocusComposite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-22T09:34:15Z",
+      "side": 1,
+      "message": "That\u0027d mean making overrideSource public, which I don\u0027t think is something we want to do.\n\nAn alternative would be to add some generic helper in com.google.gwt.event.shared that would internally do the overrideSource and GwtEvent#dispatch, and then use:\n\n private GwtEventForwardingHelper helper \u003d new GwtEventForwardingHelper(this);\n\n public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {\n   return getDelegate().addDoubleClickHandler(new DoubleClickHandler() {\n     @Override\n     public void onDoubleClick(DoubleClickEvent event) {\n       helper.dispatch(event, handler);\n     }\n   });\n }\n\nActually, it wouldn\u0027t even need to be in com.google.gwt.event and reusable: we could make a local/inner class extending EventBus so it could call setSourceOfEvent and dispatchEvent:\n\n // extends SimpleEventBus, all we want is accessing \u0027protected static\u0027 methods from EventBus\n private static class GwtEventForwardingHelper extends SimpleEventBus {\n   public static \u003cH\u003e void dispatch(Composite\u003c?\u003e source, GwtEvent\u003cH\u003e event, H handler) {\n     Object oldSource \u003d event.getSource();\n     setSourceOfEvent(event, source);\n     try {\n       dispatchEvent(event, handler);\n     } finally {\n       setSourceOfEvent(event, oldSource);\n     }\n   }\n }\n\n // helper method for Composite subclasses\n protected \u003cH\u003e void dispatchEvent(GwtEvent\u003cH\u003e event, H handler) {\n   GwtEventForwardingHelper.dispatch(this, event, handler);\n }\n\n public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {\n   return getDelegate().addDoubleClickHandler(new DoubleClickHandler() {\n     @Override\n     public void onDoubleClick(DoubleClickEvent event) {\n       dispatchEvent(event, handler);\n     }\n   });\n }",
+      "parentUuid": "U0ZSZqnY",
+      "revId": "b54922690b688c7d8aff9ac19e3db8f8bbc9f9cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

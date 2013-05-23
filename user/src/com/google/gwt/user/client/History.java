@@ -240,4 +240,14 @@ public class History {
       WrapHistory.remove(impl.getHandlers(), listener);
     }
   }
+
+  /**
+   * Gets the corresponding URL for the given history token.
+   *
+   * @param historyToken History token to generate the URL for.
+   */
+  public static String getUrl(String historyToken) {
+    return impl.getUrl(historyToken);
+  }
+
 }

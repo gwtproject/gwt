@@ -18,6 +18,7 @@ package com.google.gwt.user.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
+import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -240,4 +241,14 @@ public class History {
       WrapHistory.remove(impl.getHandlers(), listener);
     }
   }
+
+  /**
+   * Gets the corresponding URL for the given history token.
+   * 
+   * @param historyToken History token to generate the URL for.
+   */
+  public static String getUrl(String historyToken) {
+    return impl.getUrl(historyToken);
+  }
+
 }

@@ -16,12 +16,16 @@
 package com.google.gwt.user.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.History;
 
 /**
  * Native implementation associated with
@@ -147,6 +151,10 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
       nativeUpdateOnEvent(historyToken);
       fireHistoryChangedImpl(historyToken);
     }
+  }
+
+  public String getUrl(String historyToken) {
+    return "#" + History.encodeHistoryToken(historyToken);
   }
 
   protected native String decodeFragment(String encodedFragment) /*-{

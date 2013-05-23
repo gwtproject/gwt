@@ -22,6 +22,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.History;
 
 /**
  * Native implementation associated with
@@ -147,6 +148,10 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
       nativeUpdateOnEvent(historyToken);
       fireHistoryChangedImpl(historyToken);
     }
+  }
+
+  public String getUrl(String historyToken) {
+    return "#" + History.encodeHistoryToken(historyToken);
   }
 
   protected native String decodeFragment(String encodedFragment) /*-{

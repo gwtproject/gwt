@@ -37,6 +37,41 @@
     },
     {
       "key": {
+        "uuid": "U6GNY0As",
+        "filename": "user/src/com/google/gwt/core/client/JsonUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-23T17:58:35Z",
+      "side": 1,
+      "message": "I\u0027m neutral on this, but I\u0027ll point out that there\u0027s very little downside to keeping this method around forever.",
+      "parentUuid": "U.N4RZRM",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6KPwKM0",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-23T17:58:35Z",
+      "side": 1,
+      "message": "Call getVersion() here and do this only for the new version.",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "U6KBEnoI",
         "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
         "patchSetId": 3
@@ -66,6 +101,24 @@
       "side": 1,
       "message": "Hm, actually if we don\u0027t care about IE6/IE7 anymore anyway, why are we even worrying about whether JsonUtils.safeEval() is fast on IE6/IE7?  Can\u0027t we just do:\n\n    try {\n      results \u003d JsonUtils.safeEval(encoded);\n    } catch (IllegalArgumentException iae) {\n      // Input was invalid JSON; e.g., using ].concat([ or non-stringified NaN/Infinity.\n      results \u003d eval(encoded);\n    }",
       "parentUuid": "U6KBEnoI",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6MP1HLw",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-05-23T17:58:35Z",
+      "side": 1,
+      "message": "Please no content sniffing. We should check the version number.",
+      "parentUuid": "U6ANI9HI",
       "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -672,10 +672,13 @@ public abstract class CustomButton extends ButtonBase {
         break;
       case Event.ONMOUSEOUT:
         Element to = DOM.eventGetToElement(event);
-        if (DOM.isOrHasChild(getElement(), DOM.eventGetTarget(event))
-            && (to == null || !DOM.isOrHasChild(getElement(), to))) {
+        if ((to == null || !DOM.isOrHasChild(getElement(), to))) {
           if (isCapturing) {
-            onClickCancel();
+            if (DOM.isOrHasChild(getElement(), DOM.eventGetTarget(event))) {
+              onClickCancel();
+            }
+          } else {
+            DOM.releaseCapture(getElement());
           }
           setHovering(false);
         }
@@ -685,6 +688,8 @@ public abstract class CustomButton extends ButtonBase {
           setHovering(true);
           if (isCapturing) {
             onClickStart();
+          } else {
+            DOM.setCapture(getElement());
           }
         }
         break;

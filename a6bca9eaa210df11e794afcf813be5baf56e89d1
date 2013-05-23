@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U6KBEnoI",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-23T16:24:27Z",
+      "side": 1,
+      "message": "GWT style is: \"if (condition) {\".\n\nDoes the .contains() check really do anything for us here?  Won\u0027t that be handled by the IllegalArgumentException fallback below anyway?  We need to fallback if there are unstringified NaN or Infinity values too after all, right?",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6MBJkps",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-23T16:24:27Z",
+      "side": 1,
+      "message": "Indented too far here.",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VDFa0lN8",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerCancelEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "MsPointer",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDNbgpPc",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerDownEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "It seems this file has the same javadoc of MouseDownEvent.java, I think you should change those comments to say that this events are MS specific",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDJbqLNI",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerDownHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "change it by MsPointerDownEvent",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDHYZ0Do",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerDownHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "change them",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDBYYXDM",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "add MS",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDLYGSNQ",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerMoveEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "the same that I say in my other comments related with javadoc",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDJYDTMQ",
+        "filename": "user/src/com/google/gwt/event/dom/client/MsPointerUpEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "revise javadoc",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDDapGIQ",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "Maybe good time to change tabs by two spaces like we use in all gwt.xml ?",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDHZLEDs",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "is this \u0027\u003cnone\u003e\u0027 block necessary? I think the \u0027\u003cany\u003e\u0027 one is enough.",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDFZQFOc",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplIE10.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:19:57Z",
+      "side": 1,
+      "message": "It is better to remove all these spaces at the end of lines: #3, #7, #9, #39, #78, #84",
+      "revId": "b6fd942b61519a4183c1d8888b42a3fc4bdca558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

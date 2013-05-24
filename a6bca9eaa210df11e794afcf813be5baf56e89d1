@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "VDLar6L8",
+        "filename": "user/src/com/google/gwt/core/client/JsonUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-05-24T07:08:08Z",
+      "side": 1,
+      "message": "I am too neutral on this, if JSONParser is already using it though JSNI then the ClientSerializationStreamWriter could do it as well and there would be no need to open this up.",
+      "parentUuid": "U6GNY0As",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "U6KPwKM0",
         "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
         "patchSetId": 3
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Please no content sniffing. We should check the version number.",
       "parentUuid": "U6ANI9HI",
+      "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VCxcSlGY",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-05-24T07:08:08Z",
+      "side": 1,
+      "message": "Wouldn\u0027t passing everything though JSON.parse() yield an unnecessary performance hit in cases where we know .concat/NaN/Infity has been used and the JSON.parse() will throw the exception? \n\nThe version should be easily enough deducible from the encoded string and using that we could then simply do: \n\n     if(version \u003c 8){\n          eval() \n      } else { \n         try{\n            JSONUtils.safeEval() \n        } catch(IllegalArgumentException iae){\n            throw new IncompatibleRemoteServiceException(\"Expected valid JSON, got something else.\");\n        }\n      }",
+      "parentUuid": "U6MP1HLw",
       "revId": "a6bca9eaa210df11e794afcf813be5baf56e89d1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

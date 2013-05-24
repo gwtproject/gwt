@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "VDBajvJ0",
+        "filename": "dev/core/src/com/google/gwt/util/tools/shared/StringUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:30:00Z",
+      "side": 1,
+      "message": "It is a matter not related with this commit, but shouldn\u0027t be an optimization if we replace \u0027\\n\" with \";\" instead of \"\\\\n\" so as we save some bytes in final JS?\n\nWe should consider edge cases like  \u0027,\\n\u0027 in js objects, etc, though",
+      "revId": "0b392e29f7d4af020c7385267878ef2a8bd3f3eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDJa5DNM",
+        "filename": "dev/core/src/com/google/gwt/util/tools/shared/StringUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:30:00Z",
+      "side": 1,
+      "message": "I think code-style has been relaxed, but spaces at the end of the line should be removed, right?",
+      "revId": "0b392e29f7d4af020c7385267878ef2a8bd3f3eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAKMX///6U\u003d",
         "filename": "dev/core/test/com/google/gwt/util/tools/shared/JavaScriptStringTest.java",
         "patchSetId": 1

@@ -18,6 +18,7 @@ package com.google.web.bindery.requestfactory.gwt;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.web.bindery.requestfactory.gwt.client.FindServiceTest;
 import com.google.web.bindery.requestfactory.gwt.client.JsonRpcRequestFactoryTest;
+import com.google.web.bindery.requestfactory.gwt.client.ProxyForInterfacesTest;
 import com.google.web.bindery.requestfactory.gwt.client.RequestBatcherTest;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryChainedContextTest;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryExceptionHandlerTest;
@@ -60,6 +61,7 @@ public class RequestFactorySuite {
     suite.addTestSuite(RequestFactoryUnicodeEscapingTest.class);
     suite.addTestSuite(RequestPayloadTest.class);
     suite.addTestSuite(ServiceInheritanceTest.class);
+    suite.addTestSuite(ProxyForInterfacesTest.class);
     return suite;
   }
 }

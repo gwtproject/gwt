@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "VDJZY7LE",
+        "filename": "dev/core/src/com/google/gwt/util/tools/shared/StringUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-05-24T09:49:51Z",
+      "side": 1,
+      "message": "I think you can configure \u0027remove trailing spaces\u0027 on save, but anyway, I agree that it is not a big deal, maybe it is easy to remove this visual warning from Gerrit someway.",
+      "parentUuid": "VDDa9mKI",
+      "revId": "0b392e29f7d4af020c7385267878ef2a8bd3f3eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAKMX///6U\u003d",
         "filename": "dev/core/test/com/google/gwt/util/tools/shared/JavaScriptStringTest.java",
         "patchSetId": 1

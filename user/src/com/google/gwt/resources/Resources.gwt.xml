@@ -59,6 +59,7 @@
         <when-property-is name="user.agent" value="gecko1_8" />
         <when-property-is name="user.agent" value="ie8" />
         <when-property-is name="user.agent" value="ie9" />
+        <when-property-is name="user.agent" value="ie10" />
       </any>
     </all>
   </generate-with>

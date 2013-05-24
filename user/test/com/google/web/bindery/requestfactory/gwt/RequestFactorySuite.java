@@ -25,6 +25,7 @@ import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryExceptionP
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryPolymorphicTest;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryTest;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryUnicodeEscapingTest;
+import com.google.web.bindery.requestfactory.gwt.client.ProxyForInterfacesTest;
 import com.google.web.bindery.requestfactory.gwt.client.ui.EditorTest;
 import com.google.web.bindery.requestfactory.shared.BoxesAndPrimitivesTest;
 import com.google.web.bindery.requestfactory.shared.ComplexKeysTest;
@@ -60,6 +61,7 @@ public class RequestFactorySuite {
     suite.addTestSuite(RequestFactoryUnicodeEscapingTest.class);
     suite.addTestSuite(RequestPayloadTest.class);
     suite.addTestSuite(ServiceInheritanceTest.class);
+    suite.addTestSuite(ProxyForInterfacesTest.class);
     return suite;
   }
 }

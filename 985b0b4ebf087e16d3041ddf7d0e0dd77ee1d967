@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VDNnMV7c",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-24T11:06:33Z",
+      "side": 1,
+      "message": "Nit-pick: Trailing whitespace at end of line.",
+      "revId": "985b0b4ebf087e16d3041ddf7d0e0dd77ee1d967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDLmE.00",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-24T11:06:33Z",
+      "side": 1,
+      "message": "getRelativeUrl() is probably a bit more descriptive?",
+      "revId": "985b0b4ebf087e16d3041ddf7d0e0dd77ee1d967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

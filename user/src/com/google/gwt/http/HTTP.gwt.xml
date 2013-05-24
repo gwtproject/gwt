@@ -18,15 +18,20 @@
 <!-- package must inherit this module.                                      -->
 <!--                                                                        -->
 <module>
-	<inherits name="com.google.gwt.core.Core"/>
-	<inherits name="com.google.gwt.xhr.XMLHttpRequest"/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.xhr.XMLHttpRequest"/>
 
-	<replace-with class="com.google.gwt.http.client.Request.RequestImplIE6To9">
-		<when-type-is class="com.google.gwt.http.client.Request.RequestImpl" />
-		<any>
-			<when-property-is name="user.agent" value="ie6" />
-			<when-property-is name="user.agent" value="ie8" />
-			<when-property-is name="user.agent" value="ie9" />
-		</any>
-	</replace-with>
+  <replace-with class="com.google.gwt.http.client.Request.RequestImplIE6To9">
+    <when-type-is class="com.google.gwt.http.client.Request.RequestImpl" />
+    <all>
+      <none>
+        <when-property-is name="user.agent" value="ie10" />
+      </none>
+      <any>
+        <when-property-is name="user.agent" value="ie6" />
+        <when-property-is name="user.agent" value="ie8" />
+        <when-property-is name="user.agent" value="ie9" />
+      </any>
+    </all>
+  </replace-with>
 </module>

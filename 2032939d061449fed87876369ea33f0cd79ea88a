@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "U6DqGAQ4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-24T22:46:28Z",
+      "side": 1,
+      "message": "Nit: Blank line before the javadoc.",
+      "revId": "2032939d061449fed87876369ea33f0cd79ea88a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U6FqTtU4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-24T22:46:28Z",
+      "side": 1,
+      "message": "I like Util.versionCompare() a lot more than the double parsing from before. :)  [Edit: Renaming to Utility is fine by me too.]\n\nHowever, the \"last match wins\" strategy seems to assume that the SourceLevels will be in increasing order?  If so, I think that\u0027s worth adding as a quick comment like \"Static initializer for DEFAULT_SOURCE_LEVEL depends on these being in increasing order\" right before JAVA6 and JAVA7 above.",
+      "revId": "2032939d061449fed87876369ea33f0cd79ea88a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VAyUYujM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-24T23:18:43Z",
+      "side": 1,
+      "message": "I think the commit message could be a little more descriptive.\n\nAlso, could you please change it to something like:\n\n    Add support for the newer bindery HandlerRegistration\n\n    Bug: issue 7079\n    Change-Id: I80f23b094f55e40d2b2223e9f018c98c4e41a850\n\nThen Gerrit can autolink to issue 7079.",
+      "revId": "3a999e260fd9fa73ca6084e969c3257acd6c173a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

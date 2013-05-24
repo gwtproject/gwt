@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VDJazTII",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "if (getVersion() \u003e 7 \u0026\u0026 (Double.isNaN(fieldValue) || Double.isInfinite(fieldValue))\n\n(except with a the \u00277\u0027 replaced by a constant in AbstractSerializationStream)",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDHZfkFk",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamWriter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "Use a constant instead of \u00277\u0027 (see comment on AbstractSerializationStreamWriter too)",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDJY.rOA",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamWriter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "Depending on the version, this class should decide whether to use LengthConstrainedArray (the .concat hack) or not (or tweak its behavior to enable/disable the .concat hack)\n\nThat way, we can decide on the client-side whether to use eval() or JSON.parse and be sure that in the JSON.parse case (version 8) we should have valid JSON as input.",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDDZZGHI",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamWriter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "Should be done in AbstractSerializationStreamWriter (see comment there)",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDDYn2NM",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "Formatting (spaces):\n\n if•(version \u003c 8)•{\n\nand use a constant instead of a \"magic number\".",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDBYs3LE",
+        "filename": "user/super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-24T11:20:40Z",
+      "side": 1,
+      "message": "Versions prior to 8 use JavaScript, not JSON.",
+      "revId": "fe967ecc1771fa567354bd236a4cae4779fd0338",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -266,6 +266,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
       if (handlerRegistration != null) {
         handlerRegistration.removeHandler();
         handlerRegistration = null;
+        stopperedEventBus.removeHandlers();
       }
     }
   }

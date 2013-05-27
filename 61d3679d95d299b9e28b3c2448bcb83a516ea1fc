@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VDP86Uzc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-27T12:53:21Z",
+      "side": 1,
+      "message": "Ah, footer lines in Git must come as a single block/paragraph with no blank lines ;-)\n\n  Bug: issue 7079\n  Change-Id: I80f23b094f55e40d2b2223e9f018c98c4e41a850",
+      "revId": "61d3679d95d299b9e28b3c2448bcb83a516ea1fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

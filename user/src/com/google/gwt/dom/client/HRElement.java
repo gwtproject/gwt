@@ -30,8 +30,17 @@ public class HRElement extends Element {
    * automatically typecast it.
    */
   public static HRElement as(Element elem) {
-    assert elem.getTagName().equalsIgnoreCase(TAG);
+    assert is(elem);
     return (HRElement) elem;
+  }
+  
+  /**
+   * Determine whether the given {@link Element} can be cast to this class.
+   * A <code>null</code> node will cause this method to return
+   * <code>false</code>.
+   */
+  public static boolean is(Element elem) {
+    return elem.getTagName().equalsIgnoreCase(TAG);
   }
 
   protected HRElement() {

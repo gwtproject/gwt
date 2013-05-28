@@ -31,8 +31,17 @@ public class LinkElement extends Element {
    * automatically typecast it.
    */
   public static LinkElement as(Element elem) {
-    assert elem.getTagName().equalsIgnoreCase(TAG);
+    assert is(elem);
     return (LinkElement) elem;
+  }
+  
+  /**
+   * Determine whether the given {@link Element} can be cast to this class.
+   * A <code>null</code> node will cause this method to return
+   * <code>false</code>.
+   */
+  public static boolean is(Element elem) {
+    return elem.getTagName().equalsIgnoreCase(TAG);
   }
 
   protected LinkElement() {

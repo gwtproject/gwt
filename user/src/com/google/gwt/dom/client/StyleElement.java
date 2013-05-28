@@ -32,8 +32,18 @@ public class StyleElement extends Element {
    * automatically typecast it.
    */
   public static StyleElement as(Element elem) {
-    assert elem.getTagName().equalsIgnoreCase(TAG);
+    assert is(elem);
     return (StyleElement) elem;
+  }
+
+  
+  /**
+   * Determine whether the given {@link Element} can be cast to this class.
+   * A <code>null</code> node will cause this method to return
+   * <code>false</code>.
+   */
+  public static boolean is(Element elem) {
+    return elem.getTagName().equalsIgnoreCase(TAG);
   }
 
   protected StyleElement() {

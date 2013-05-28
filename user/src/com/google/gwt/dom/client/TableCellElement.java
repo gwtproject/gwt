@@ -31,9 +31,18 @@ public class TableCellElement extends Element {
    * automatically typecast it.
    */
   public static TableCellElement as(Element elem) {
-    assert elem.getTagName().equalsIgnoreCase(TAG_TD)
-      || elem.getTagName().equalsIgnoreCase(TAG_TH);  
+    assert is(elem); 
     return (TableCellElement) elem;
+  }
+  
+  /**
+   * Determine whether the given {@link Element} can be cast to this class.
+   * A <code>null</code> node will cause this method to return
+   * <code>false</code>.
+   */
+  public static boolean is(Element elem) {
+    return elem.getTagName().equalsIgnoreCase(TAG_TD)
+        || elem.getTagName().equalsIgnoreCase(TAG_TH); 
   }
 
   protected TableCellElement() {

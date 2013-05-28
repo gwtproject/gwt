@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VDMVY5As",
+        "filename": "user/src/com/google/gwt/user/client/ui/SimpleCheckBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-28T15:13:02Z",
+      "side": 1,
+      "message": "Can\u0027t we use ValueChangeEvent.fireIfNotEqual instead?",
+      "revId": "e73678c0e7815980909a38e62f4ff2c2083ee058",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VDIXwrM0",
+        "filename": "user/test/com/google/gwt/user/client/ui/SimpleCheckBoxTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-28T15:13:02Z",
+      "side": 1,
+      "message": "Which makes me think that we should move click() up to Element (or possibly add it to InputElement; I\u0027ve had to do the same cast to ButtonElement for a fileupload in an application)",
+      "revId": "e73678c0e7815980909a38e62f4ff2c2083ee058",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

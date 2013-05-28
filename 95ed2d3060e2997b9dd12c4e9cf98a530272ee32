@@ -16,6 +16,24 @@
       "revId": "95ed2d3060e2997b9dd12c4e9cf98a530272ee32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VElAALE0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-05-28T20:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "VA.6eL6c",
+      "revId": "95ed2d3060e2997b9dd12c4e9cf98a530272ee32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

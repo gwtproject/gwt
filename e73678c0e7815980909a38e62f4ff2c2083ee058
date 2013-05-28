@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "VEvB-IOc",
+        "filename": "user/src/com/google/gwt/user/client/ui/SimpleCheckBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-05-28T17:17:50Z",
+      "side": 1,
+      "message": "Yeah; this code is copy/pasted from CheckBox, and I had thought of using fireIfNotEqual, but went back and forth on keeping it like CheckBox or not; technically fireIfNotEqual does a few more operations (null checks) but it won\u0027t matter.\n\nI\u0027ll use fireIfNotEqual instead.",
+      "parentUuid": "VDMVY5As",
+      "revId": "e73678c0e7815980909a38e62f4ff2c2083ee058",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "VDIXwrM0",
         "filename": "user/test/com/google/gwt/user/client/ui/SimpleCheckBoxTest.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-28T15:13:02Z",
       "side": 1,
       "message": "Which makes me think that we should move click() up to Element (or possibly add it to InputElement; I\u0027ve had to do the same cast to ButtonElement for a fileupload in an application)",
+      "revId": "e73678c0e7815980909a38e62f4ff2c2083ee058",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "VEtB8HPU",
+        "filename": "user/test/com/google/gwt/user/client/ui/SimpleCheckBoxTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-05-28T17:17:50Z",
+      "side": 1,
+      "message": "Would be fine with me; I admittedly copy/pasted this from one of your Stackoverflow answers. :-)",
+      "parentUuid": "VDIXwrM0",
       "revId": "e73678c0e7815980909a38e62f4ff2c2083ee058",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

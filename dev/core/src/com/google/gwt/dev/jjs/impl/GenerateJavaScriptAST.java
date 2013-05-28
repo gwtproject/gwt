@@ -857,10 +857,13 @@ public class GenerateJavaScriptAST {
       JsNameRef localRef = (JsNameRef) pop(); // localRef
 
       JVariable target = x.getVariableRef().getTarget();
-      if (target instanceof JField && ((JField) target).getLiteralInitializer() != null) {
-        // Will initialize at top scope; no need to double-initialize.
-        push(null);
-        return;
+      if (target instanceof JField) {
+        JField field = (JField) target;
+        if (field.isFinal() && field.getLiteralInitializer() != null) {
+          // Will initialize at top scope; no need to double-initialize.
+          push(null);
+          return;
+        }
       }
 
       JsBinaryOperation binOp =
@@ -891,8 +894,13 @@ public class GenerateJavaScriptAST {
     public void endVisit(JField x, Context ctx) {
       // if we need an initial value, create an assignment
       if (x.getLiteralInitializer() != null) {
-        // setup the constant value
-        accept(x.getLiteralInitializer());
+        if (x.isFinal()) {
+          // setup the constant value
+          accept(x.getLiteralInitializer());
+        } else {
+          // setup the default value, see Issue 380
+          accept(x.getType().getDefaultValue());
+        }
       } else if (!x.hasInitializer() && x.getEnclosingType() != program.getTypeJavaLangObject()) {
         // setup a default value
         accept(x.getType().getDefaultValue());

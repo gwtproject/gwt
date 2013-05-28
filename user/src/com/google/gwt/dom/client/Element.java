@@ -505,7 +505,7 @@ public class Element extends Node {
    */
   public final boolean hasTagName(String tagName) {
     assert tagName != null : "tagName must not be null";
-    return tagName.equals(getTagName());
+    return tagName.equalsIgnoreCase(getTagName());
   }
 
   /**

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "VA.6eL6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-05-28T20:42:37Z",
+      "side": 1,
+      "message": "Can you change this to\n\n  Bug: issue 380\n\nand move it right above the Change-Id line, please?",
+      "revId": "95ed2d3060e2997b9dd12c4e9cf98a530272ee32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

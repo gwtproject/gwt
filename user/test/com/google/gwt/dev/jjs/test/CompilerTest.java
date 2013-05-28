@@ -787,6 +787,46 @@ public class CompilerTest extends GWTTestCase {
     assertEquals(1, x);
   }
 
+  /** Ensure that only final fields are initializers when cstrs run, see issue 380. */
+  public void testFieldInitializationOrder() {
+    final ArrayList<Integer> seenValues = new ArrayList<Integer>();
+    // a superclass that invokes a method in its cstr
+    class SuperFoo {
+      SuperFoo(int x) {
+        method(x);
+      }
+      void method(int x) {
+      }
+    }
+    // a subclass that overrides method to see what the values of
+    // its own fields are from within the superclass's cstr
+    class Foo extends SuperFoo {
+      private final int i1 = 1;
+      private int i2 = 1;
+      private Integer i3 = new Integer(1);
+      private Integer i4;
+      Foo() {
+        super(2); // superclass calls method()
+        seenValues.add(i1);
+        seenValues.add(i2);
+        seenValues.add(i3);
+        seenValues.add(i4);
+      }
+      void method(int x) {
+        seenValues.add(i1);
+        seenValues.add(i2);
+        seenValues.add(i3);
+        seenValues.add(i4);
+        // i1 = 1 isn't allowed
+        i2 = x;
+        i3 = new Integer(x);
+        i4 = new Integer(x);
+      }
+    }
+    new Foo();
+    assertEquals("[1, 0, null, null, 1, 1, 1, 2]", seenValues.toString());
+  }
+
   public void testForStatement() {
     {
       int i;

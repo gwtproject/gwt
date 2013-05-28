@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "VDOUywMc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-28T15:06:28Z",
+      "side": 1,
+      "message": "Can you change this to point to issue 5723 (and remove \"partially\"; I think you can remove \"partially\" from your other commit too)",
+      "revId": "024a26cef27d05fc794f8a5ab4cd23fb4c159744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "VDKoX92E",
         "filename": "user/src/com/google/gwt/dom/client/AnchorElement.java",
         "patchSetId": 1

@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "VDOVRoBg",
+        "filename": "user/src/com/google/gwt/dom/client/AnchorElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-28T14:37:15Z",
+      "side": 1,
+      "message": "Given that the various existing as() and is() methods all accept null, I\u0027d rather accept it and do as the javadoc says (i.e. fix the code rather than the doc).\n\nI also wonder if we should add a is(Node) and is(JavaScriptObject) like in Element (Element redefines a is(JavaScriptObject) and adds a is(Element); we could redefine both those methods and add the is(Element)):\n\n public static boolean is(JavaScriptObject o) {\n   if (Element.is(o)) {\n     return is((Element) o);\n   }\n   return false;\n }\n\n public static boolean is(Node node) {\n   if (Element.is(node)) {\n     return is((Element) node);\n   }\n   return false;\n }\n\nMaybe we could do that in a later patch if you don\u0027t feel like adding them now, let\u0027s see what others think.",
+      "parentUuid": "VDGU9kMo",
+      "revId": "024a26cef27d05fc794f8a5ab4cd23fb4c159744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "VDGXv0Do",
         "filename": "user/src/com/google/gwt/dom/client/AnchorElement.java",
         "patchSetId": 1

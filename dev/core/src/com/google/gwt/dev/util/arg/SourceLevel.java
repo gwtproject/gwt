@@ -62,6 +62,11 @@ public enum SourceLevel {
 
   static {
     SourceLevel result = SourceLevel.values()[0];
+    /* TODO(rluble): source level should be set automatically to match the java version
+     * but a JDT bug is preventing the change (some correct code does not compile
+     * under sourceLevel 7).
+     * Uncomment the following code use the JDT is fixed or patched.
+
     String javaSpecLevel = System.getProperty("java.specification.version");
     try {
       for (SourceLevel sourceLevel : SourceLevel.values()) {
@@ -71,7 +76,7 @@ public enum SourceLevel {
       }
     } catch (IllegalArgumentException e) {
     }
-
+    */
     DEFAULT_SOURCE_LEVEL = result;
   }
 

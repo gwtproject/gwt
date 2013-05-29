@@ -77,22 +77,52 @@ public class Element extends Node {
     return (node != null) && (node.getNodeType() == Node.ELEMENT_NODE);
   }
 
+  /**
+   * Returns the index of the first occurrence of name in a space-separated list of names,
+   * or -1 if not found.
+   *
+   * @param nameList list of space delimited names
+   * @param name a non-empty string.  Should be already trimmed.
+   */
+  static int indexOfName(String nameList, String name) {
+    int idx = nameList.indexOf(name);
+
+    // Calculate matching index.
+    while (idx != -1) {
+      if (idx == 0 || nameList.charAt(idx - 1) == ' ') {
+        int last = idx + name.length();
+        int lastPos = nameList.length();
+        if ((last == lastPos)
+            || ((last < lastPos) && (nameList.charAt(last) == ' '))) {
+          break;
+        }
+      }
+      idx = nameList.indexOf(name, idx + 1);
+    }
+
+    return idx;
+  }
+
+  private static String trimClassName(String className) {
+    assert (className != null) : "Unexpectedly null class name";
+    className = className.trim();
+    assert !className.isEmpty() : "Unexpectedly empty class name";
+    return className;
+  }
+
   protected Element() {
   }
 
   /**
    * Adds a name to this element's class property. If the name is already
    * present, this method has no effect.
-   * 
+   *
    * @param className the class name to be added
    * @return <code>true</code> if this element did not already have the specified class name
    * @see #setClassName(String)
    */
   public final boolean addClassName(String className) {
-    assert (className != null) : "Unexpectedly null class name";
-
-    className = className.trim();
-    assert (className.length() != 0) : "Unexpectedly empty class name";
+    className = trimClassName(className);
 
     // Get the current style string.
     String oldClassName = getClassName();
@@ -120,14 +150,14 @@ public class Element extends Node {
   /**
    * Dispatched the given event with this element as its target. The event will
    * go through all phases of the browser's normal event dispatch mechanism.
-   * 
+   *
    * Note: Because the browser's normal dispatch mechanism is used, exceptions
    * thrown from within handlers triggered by this method cannot be caught by
    * wrapping this method in a try/catch block. Such exceptions will be caught
    * by the
    * {@link com.google.gwt.core.client.GWT#setUncaughtExceptionHandler(com.google.gwt.core.client.GWT.UncaughtExceptionHandler) uncaught exception handler}
    * as usual.
-   * 
+   *
    * @param evt the event to be dispatched
    */
   public final void dispatchEvent(NativeEvent evt) {
@@ -178,7 +208,7 @@ public class Element extends Node {
    * inconsistent across various browsers.  Consider using the accessors in
    * {@link Element} and its specific subclasses to retrieve attributes and
    * properties.
-   * 
+   *
    * @param name The name of the attribute to retrieve
    * @return The Attr value as a string, or the empty string if that attribute
    *         does not have a specified or default value
@@ -190,7 +220,7 @@ public class Element extends Node {
   /**
    * The class attribute of the element. This attribute has been renamed due to
    * conflicts with the "class" keyword exposed by many languages.
-   * 
+   *
    * @see <a
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
    *      HTML Specification</a>
@@ -202,7 +232,7 @@ public class Element extends Node {
   /**
    * Returns the inner height of an element in pixels, including padding but not
    * the horizontal scrollbar height, border, or margin.
-   * 
+   *
    * @return the element's client height
    */
   public final native int getClientHeight() /*-{
@@ -212,7 +242,7 @@ public class Element extends Node {
   /**
    * Returns the inner width of an element in pixels, including padding but not
    * the vertical scrollbar width, border, or margin.
-   * 
+   *
    * @return the element's client width
    */
   public final native int getClientWidth() /*-{
@@ -229,7 +259,7 @@ public class Element extends Node {
 
   /**
    * Returns the draggable attribute of this element.
-   * 
+   *
    * @return one of {@link #DRAGGABLE_AUTO}, {@link #DRAGGABLE_FALSE}, or
    *         {@link #DRAGGABLE_TRUE}
    */
@@ -241,7 +271,7 @@ public class Element extends Node {
    * Returns a NodeList of all descendant Elements with a given tag name, in the
    * order in which they are encountered in a preorder traversal of this Element
    * tree.
-   * 
+   *
    * @param name The name of the tag to match on. The special value "*" matches
    *          all tags
    * @return A list of matching Element nodes
@@ -260,7 +290,7 @@ public class Element extends Node {
 
   /**
    * The element's identifier.
-   * 
+   *
    * @see <a
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
    *      HTML Specification</a>
@@ -346,7 +376,7 @@ public class Element extends Node {
 
   /**
    * Gets a boolean property from this element.
-   * 
+   *
    * @param name the name of the property to be retrieved
    * @return the property value
    */
@@ -356,7 +386,7 @@ public class Element extends Node {
 
   /**
    * Gets a double property from this element.
-   * 
+   *
    * @param name the name of the property to be retrieved
    * @return the property value
    */
@@ -366,7 +396,7 @@ public class Element extends Node {
 
   /**
    * Gets an integer property from this element.
-   * 
+   *
    * @param name the name of the property to be retrieved
    * @return the property value
    */
@@ -396,7 +426,7 @@ public class Element extends Node {
 
   /**
    * Gets a property from this element.
-   * 
+   *
    * @param name the name of the property to be retrieved
    * @return the property value
    */
@@ -413,7 +443,7 @@ public class Element extends Node {
 
   /**
    * The number of pixels that an element's content is scrolled from the left.
-   * 
+   *
    * <p>
    * If the element is in RTL mode, this method will return a negative value of
    * the number of pixels scrolled from the right.
@@ -439,10 +469,10 @@ public class Element extends Node {
 
   /**
    * Gets a string representation of this element (as outer HTML).
-   * 
+   *
    * We do not override {@link #toString()} because it is final in
    * {@link com.google.gwt.core.client.JavaScriptObject}.
-   * 
+   *
    * @return the string representation of this element
    */
   public final String getString() {
@@ -458,7 +488,7 @@ public class Element extends Node {
 
   /**
    * The index that represents the element's position in the tabbing order.
-   * 
+   *
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-tabindex">W3C HTML Specification</a>
    */
   public final int getTabIndex() {
@@ -468,7 +498,7 @@ public class Element extends Node {
   /**
    * Gets the element's full tag name, including the namespace-prefix if
    * present.
-   * 
+   *
    * @return the element's tag name
    */
   public final String getTagName() {
@@ -489,7 +519,7 @@ public class Element extends Node {
    * Note that IE, prior to version 8, will return false-positives for names
    * that collide with element properties (e.g., style, width, and so forth).
    * </p>
-   * 
+   *
    * @param name the name of the attribute
    * @return <code>true</code> if this element has the specified attribute
    */
@@ -498,8 +528,20 @@ public class Element extends Node {
   }
 
   /**
+   * Checks if this element's class property contains specified class name.
+   *
+   * @param className the class name to be added
+   * @return <code>true</code> if this element has the specified class name
+   */
+  public final boolean hasClassName(String className) {
+    className = trimClassName(className);
+    int idx = indexOfName(getClassName(), className);
+    return idx != -1;
+  }
+
+  /**
    * Determines whether this element has the given tag name.
-   * 
+   *
    * @param tagName the tag name, including namespace-prefix (if present)
    * @return <code>true</code> if the element has the given tag name
    */
@@ -518,16 +560,13 @@ public class Element extends Node {
   /**
    * Removes a name from this element's class property. If the name is not
    * present, this method has no effect.
-   * 
+   *
    * @param className the class name to be removed
    * @return <code>true</code> if this element had the specified class name
    * @see #setClassName(String)
    */
   public final boolean removeClassName(String className) {
-    assert (className != null) : "Unexpectedly null class name";
-
-    className = className.trim();
-    assert (className.length() != 0) : "Unexpectedly empty class name";
+    className = trimClassName(className);
 
     // Get the current style string.
     String oldStyle = getClassName();
@@ -556,32 +595,6 @@ public class Element extends Node {
   }
 
   /**
-   * Returns the index of the first occurrence of name in a space-separated list of names,
-   * or -1 if not found.
-   *
-   * @param nameList list of space delimited names
-   * @param name a non-empty string.  Should be already trimmed.
-   */
-  static int indexOfName(String nameList, String name) {
-    int idx = nameList.indexOf(name);
-
-    // Calculate matching index.
-    while (idx != -1) {
-      if (idx == 0 || nameList.charAt(idx - 1) == ' ') {
-        int last = idx + name.length();
-        int lastPos = nameList.length();
-        if ((last == lastPos)
-            || ((last < lastPos) && (nameList.charAt(last) == ' '))) {
-          break;
-        }
-      }
-      idx = nameList.indexOf(name, idx + 1);
-    }
-
-    return idx;
-  }
-
-  /**
    * Replace one class name with another.
    *
    * @param oldClassName the class name to be replaced
@@ -594,7 +607,7 @@ public class Element extends Node {
 
   /**
    * Scrolls this element into view.
-   * 
+   *
    * <p>
    * This method crawls up the DOM hierarchy, adjusting the scrollLeft and
    * scrollTop properties of each scrollable element to ensure that the
@@ -609,7 +622,7 @@ public class Element extends Node {
   /**
    * Adds a new attribute. If an attribute with that name is already present in
    * the element, its value is changed to be that of the value parameter.
-   * 
+   *
    * @param name The name of the attribute to create or alter
    * @param value Value to set in string form
    */
@@ -620,7 +633,7 @@ public class Element extends Node {
   /**
    * The class attribute of the element. This attribute has been renamed due to
    * conflicts with the "class" keyword exposed by many languages.
-   * 
+   *
    * @see <a
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
    *      HTML Specification</a>
@@ -640,7 +653,7 @@ public class Element extends Node {
   /**
    * Changes the draggable attribute to one of {@link #DRAGGABLE_AUTO},
    * {@link #DRAGGABLE_FALSE}, or {@link #DRAGGABLE_TRUE}.
-   * 
+   *
    * @param draggable a String constants
    */
   public final void setDraggable(String draggable) {
@@ -649,7 +662,7 @@ public class Element extends Node {
 
   /**
    * The element's identifier.
-   * 
+   *
    * @see <a
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
    *      HTML Specification</a>
@@ -688,7 +701,7 @@ public class Element extends Node {
 
   /**
    * Sets a boolean property on this element.
-   * 
+   *
    * @param name the name of the property to be set
    * @param value the new property value
    */
@@ -698,7 +711,7 @@ public class Element extends Node {
 
   /**
    * Sets a double property on this element.
-   * 
+   *
    * @param name the name of the property to be set
    * @param value the new property value
    */
@@ -708,7 +721,7 @@ public class Element extends Node {
 
   /**
    * Sets an integer property on this element.
-   * 
+   *
    * @param name the name of the property to be set
    * @param value the new property value
    */
@@ -738,7 +751,7 @@ public class Element extends Node {
 
   /**
    * Sets a property on this element.
-   * 
+   *
    * @param name the name of the property to be set
    * @param value the new property value
    */
@@ -762,7 +775,7 @@ public class Element extends Node {
 
   /**
    * The index that represents the element's position in the tabbing order.
-   * 
+   *
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-tabindex">W3C HTML Specification</a>
    */
   public final native void setTabIndex(int tabIndex) /*-{

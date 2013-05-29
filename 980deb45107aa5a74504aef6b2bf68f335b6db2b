@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d2f01b7_259f5849",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-29T16:15:28Z",
+      "side": 1,
+      "message": "Could you change the commit message to:\n\n Added missing lineStart and lineEnd in UiBinder xsd file\n\n Bug: issue 6596\n Change-Id: I9d73e13947746bcf92f5312d2913cebe6aea05d5",
+      "revId": "980deb45107aa5a74504aef6b2bf68f335b6db2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

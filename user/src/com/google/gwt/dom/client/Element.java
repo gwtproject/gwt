@@ -89,7 +89,7 @@ public class Element extends Node {
    * @see #setClassName(String)
    */
   public final boolean addClassName(String className) {
-    className = checkClassName(className);
+    className = trimClassName(className);
 
     // Get the current style string.
     String oldClassName = getClassName();
@@ -114,7 +114,7 @@ public class Element extends Node {
    * @return <code>true</code> if this element has the specified class name
    */
   public final boolean hasClassName(String className) {
-    className = checkClassName(className);
+    className = trimClassName(className);
     int idx = indexOfName(getClassName(), className);
     return idx != -1;
   }
@@ -533,7 +533,7 @@ public class Element extends Node {
    * @see #setClassName(String)
    */
   public final boolean removeClassName(String className) {
-    className = checkClassName(className);
+    className = trimClassName(className);
 
     // Get the current style string.
     String oldStyle = getClassName();
@@ -588,17 +588,15 @@ public class Element extends Node {
   }
 
   /**
-   * Checks if className is valid and trims it.
+   * Trim class name.
    *
    * @param className a non-empty string
    * @return trimmed class name string
    */
-  static String checkClassName(String className) {
+  private static String trimClassName(String className) {
     assert (className != null) : "Unexpectedly null class name";
-
     className = className.trim();
-    assert (className.length() != 0) : "Unexpectedly empty class name";
-
+    assert !className.isEmpty() : "Unexpectedly empty class name";
     return className;
   }
 

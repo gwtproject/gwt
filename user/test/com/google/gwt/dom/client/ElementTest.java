@@ -70,6 +70,7 @@ public class ElementTest extends GWTTestCase {
     assertTrue(div.hasClassName("foo"));
     div.removeClassName("foo");
     assertFalse(div.hasClassName("foo"));
+    assertTrue(div.hasClassName("bar"));
   }
 
   public void testIndexOfName() {

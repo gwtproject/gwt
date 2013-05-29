@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d4915a3_7e4e0da2",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-29T23:34:52Z",
+      "side": 1,
+      "message": "private static",
+      "revId": "29ae201caaf91685c1f73c818d5cb38fb1d7b3f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d4915a3_fe6cdd09",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-29T23:34:52Z",
+      "side": 1,
+      "message": "I think it is better to name this method trimClassName and update the javadoc accordingly.",
+      "revId": "29ae201caaf91685c1f73c818d5cb38fb1d7b3f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d4915a3_de6921f8",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-29T23:34:52Z",
+      "side": 1,
+      "message": "assert !className.isEmpty()",
+      "revId": "29ae201caaf91685c1f73c818d5cb38fb1d7b3f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d4915a3_1e49c998",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-29T23:34:52Z",
+      "side": 1,
+      "message": "nit: can you remove extra spaces in this method",
+      "revId": "29ae201caaf91685c1f73c818d5cb38fb1d7b3f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d4915a3_de3e41e1",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-29T23:34:52Z",
+      "side": 1,
+      "message": "Can you also add:\n\n assertTrue(div.hasClassName(\"bar\"));",
+      "revId": "29ae201caaf91685c1f73c818d5cb38fb1d7b3f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

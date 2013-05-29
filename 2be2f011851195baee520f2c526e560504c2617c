@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d2f01b7_e5673093",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-29T16:14:29Z",
+      "side": 1,
+      "message": "Can you add the following line above that one:\n\n Bug: issue 8106",
+      "revId": "2be2f011851195baee520f2c526e560504c2617c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

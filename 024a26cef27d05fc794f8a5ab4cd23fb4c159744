@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3d2f01b7_e28606cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5540
+      },
+      "writtenOn": "2013-05-29T11:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "VDOUywMc",
+      "revId": "024a26cef27d05fc794f8a5ab4cd23fb4c159744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "VDKoX92E",
         "filename": "user/src/com/google/gwt/dom/client/AnchorElement.java",
         "patchSetId": 1

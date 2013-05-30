@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d4915a3_61ff929a",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-30T01:19:42Z",
+      "side": 1,
+      "message": "Actually you can remove the javadoc as it doesn\u0027t add anything in this case.",
+      "revId": "a15749b080c07b7f931d265964e67cf53a113e71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

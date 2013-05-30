@@ -30,6 +30,7 @@ import com.google.web.bindery.requestfactory.gwt.rebind.model.EntityProxyModel.T
 import com.google.web.bindery.requestfactory.gwt.rebind.model.RequestMethod.CollectionType;
 import com.google.web.bindery.requestfactory.shared.BaseProxy;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
+import com.google.web.bindery.requestfactory.shared.EntityProxyId;
 import com.google.web.bindery.requestfactory.shared.ExtraTypes;
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.JsonRpcProxy;
@@ -503,6 +504,12 @@ public class RequestFactoryModel implements AcceptsModelVisitor, HasExtraTypes {
       methodBuilder.setMapValueType(valueType);
       validateTransportableType(methodBuilder, keyType, requireObject);
       validateTransportableType(methodBuilder, valueType, requireObject);
+    } else if (oracle.findType(EntityProxyId.class.getCanonicalName()).isAssignableFrom(transportedClass)) {
+      JParameterizedType parameterized = transportedClass.isParameterized();
+      if (parameterized == null) {
+        poison("EntityProxyId must be parameterized");
+        return false;
+      }
     } else {
       // Unknown type, fail
       poison("Invalid Request parameterization %s", transportedClass.getQualifiedSourceName());

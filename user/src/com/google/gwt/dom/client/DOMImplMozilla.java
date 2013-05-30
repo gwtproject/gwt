@@ -128,19 +128,19 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
+  public double getSubpixelAbsoluteLeft(Element elem) {
     return getAbsoluteLeftImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
   }
 
   @Override
-  public int getAbsoluteTop(Element elem) {
+  public double getSubpixelAbsoluteTop(Element elem) {
     return getAbsoluteTopImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
   }
 
   @Override
-  public native int getBodyOffsetLeft(Document doc) /*-{
+  public native double getSubpixelBodyOffsetLeft(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
     if (style == null) {
       // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -150,7 +150,7 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public native int getBodyOffsetTop(Document doc) /*-{
+  public native double getSubpixelBodyOffsetTop(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
     if (style == null) {
       // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -175,7 +175,7 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public int getScrollLeft(Element elem) {
+  public double getSubpixelScrollLeft(Element elem) {
     if (!isGecko19() && isRTL(elem)) {
       return super.getScrollLeft(elem)
           - (elem.getScrollWidth() - elem.getClientWidth());

@@ -21,8 +21,8 @@ package com.google.gwt.dom.client;
 class DOMImplIE9 extends DOMImplStandardBase {
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
-    int left = getBoundingClientRectLeft(elem) + getDocumentScrollLeftImpl();
+  public double getSubpixelAbsoluteLeft(Element elem) {
+    double left = getBoundingClientRectLeft(elem) + getDocumentScrollLeftImpl();
     if (isRTL(elem)) { // in RTL, account for the scroll bar shift if present
       left += getParentOffsetDelta(elem);
     }
@@ -30,7 +30,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
   }
 
   @Override
-  public int getAbsoluteTop(Element elem) {
+  public double getSubpixelAbsoluteTop(Element elem) {
     return getBoundingClientRectTop(elem) + getDocumentScrollTopImpl();
   }
 
@@ -44,13 +44,13 @@ class DOMImplIE9 extends DOMImplStandardBase {
   }-*/;
 
   @Override
-  public int getScrollLeft(Document doc) {
+  public double getSubpixelScrollLeft(Document doc) {
     return getDocumentScrollLeftImpl();
   }
 
   @Override
-  public int getScrollLeft(Element elem) {
-    int left = getScrollLeftImpl(elem);
+  public double getSubpixelScrollLeft(Element elem) {
+    double left = getScrollLeftImpl(elem);
     if (isRTL(elem)) {
       left = -left;
     }
@@ -58,7 +58,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
   }
 
   @Override
-  public int getScrollTop(Document doc) {
+  public double getSubpixelScrollTop(Document doc) {
     return getDocumentScrollTopImpl();
   }
 
@@ -95,7 +95,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
   // getBoundingClientRect() throws a JS exception if the elem is not attached
   // to the document, so we wrap it in a try/catch block
     try {
-      return elem.getBoundingClientRect().left;
+      return elem.getBoundingClientRect().left | 0;
     } catch (e) {
       // if not attached return 0
       return 0;
@@ -106,22 +106,22 @@ class DOMImplIE9 extends DOMImplStandardBase {
     // getBoundingClientRect() throws a JS exception if the elem is not attached
     // to the document, so we wrap it in a try/catch block
     try {
-      return elem.getBoundingClientRect().top;
+      return elem.getBoundingClientRect().top | 0;
     } catch (e) {
       // if not attached return 0
       return 0;
     }
   }-*/;
 
-  private native int getDocumentScrollLeftImpl() /*-{
+  private native double getDocumentScrollLeftImpl() /*-{
     return $wnd.pageXOffset;
   }-*/;
 
-  private native int getDocumentScrollTopImpl() /*-{
+  private native double getDocumentScrollTopImpl() /*-{
     return $wnd.pageYOffset;
   }-*/;
 
-  private native int getParentOffsetDelta(Element elem) /*-{
+  private native double getParentOffsetDelta(Element elem) /*-{
     var offsetParent = elem.offsetParent;
     if (offsetParent) {
       return offsetParent.offsetWidth - offsetParent.clientWidth;
@@ -129,11 +129,11 @@ class DOMImplIE9 extends DOMImplStandardBase {
     return 0;
   }-*/;
 
-  private native int getScrollLeftImpl(Element elem) /*-{
+  private native double getScrollLeftImpl(Element elem) /*-{
     return elem.scrollLeft || 0;
   }-*/; 
 
-  private native void setScrollLeftImpl(Element elem, int left) /*-{
+  private native double setScrollLeftImpl(Element elem, int left) /*-{
     elem.scrollLeft = left;
   }-*/; 
 }

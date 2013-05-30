@@ -71,21 +71,21 @@ class DOMImplIE6 extends DOMImplTrident {
   }-*/;
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
+  public double getSubpixelAbsoluteLeft(Element elem) {
     Document doc = elem.getOwnerDocument();
-    return (int) Math.floor(getBoundingClientRectLeft(elem)
+    return Math.floor(getBoundingClientRectLeft(elem)
         / getZoomMultiple(doc) + doc.getScrollLeft());
   }
 
   @Override
-  public int getAbsoluteTop(Element elem) {
+  public double getSubpixelAbsoluteTop(Element elem) {
     Document doc = elem.getOwnerDocument();
-    return (int) Math.floor(getBoundingClientRectTop(elem)
+    return Math.floor(getBoundingClientRectTop(elem)
         / getZoomMultiple(doc) + doc.getScrollTop());
   }
 
   @Override
-  public int getScrollLeft(Element elem) {
+  public double getSubpixelScrollLeft(Element elem) {
     if (isRTL(elem)) {
       return super.getScrollLeft(elem) - (elem.getScrollWidth() - elem.getClientWidth());
     }

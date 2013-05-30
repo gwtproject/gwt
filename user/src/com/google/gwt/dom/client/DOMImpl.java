@@ -68,8 +68,8 @@ abstract class DOMImpl {
       int charCode);
 
   public abstract NativeEvent createMouseEvent(Document doc, String type,
-      boolean canBubble, boolean cancelable, int detail, int screenX,
-      int screenY, int clientX, int clientY, boolean ctrlKey, boolean altKey,
+      boolean canBubble, boolean cancelable, int detail, double screenX,
+      double screenY, double clientX, double clientY, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int button, Element relatedTarget);
 
   public ScriptElement createScriptElement(Document doc, String source) {
@@ -110,13 +110,13 @@ abstract class DOMImpl {
 
   public abstract int eventGetCharCode(NativeEvent evt);
 
-  public native int eventGetClientX(NativeEvent evt) /*-{
-    return evt.clientX || 0;
-  }-*/;
+  public final int eventGetClientX(NativeEvent evt) {
+    return (int) eventGetSubpixelClientX(evt) | 0;
+  }
 
-  public native int eventGetClientY(NativeEvent evt) /*-{
-    return evt.clientY || 0;
-  }-*/;
+  public final int eventGetClientY(NativeEvent evt) {
+    return (int) eventGetSubpixelClientY(evt) | 0;
+  }
 
   public native boolean eventGetCtrlKey(NativeEvent evt) /*-{
     return !!evt.ctrlKey;
@@ -146,16 +146,32 @@ abstract class DOMImpl {
     return evt.scale;
   }-*/;
 
-  public native int eventGetScreenX(NativeEvent evt) /*-{
-    return evt.screenX || 0;
-  }-*/;
+  public final int eventGetScreenX(NativeEvent evt) {
+    return (int) eventGetSubpixelScreenX(evt) | 0;
+  }
 
-  public native int eventGetScreenY(NativeEvent evt) /*-{
-    return evt.screenY || 0;
-  }-*/;
+  public final int eventGetScreenY(NativeEvent evt) {
+    return (int) eventGetSubpixelScreenY(evt) | 0;
+  }
 
   public native boolean eventGetShiftKey(NativeEvent evt) /*-{
     return !!evt.shiftKey;
+  }-*/;
+
+  public native double eventGetSubpixelClientX(NativeEvent evt) /*-{
+    return evt.clientX || 0;
+  }-*/;
+
+  public native double eventGetSubpixelClientY(NativeEvent evt) /*-{
+    return evt.clientY || 0;
+  }-*/;
+
+  public native double eventGetSubpixelScreenX(NativeEvent evt) /*-{
+    return evt.screenX || 0;
+  }-*/;
+
+  public native double eventGetSubpixelScreenY(NativeEvent evt) /*-{
+    return evt.screenY || 0;
   }-*/;
 
   public abstract EventTarget eventGetTarget(NativeEvent evt);
@@ -176,47 +192,25 @@ abstract class DOMImpl {
 
   public abstract String eventToString(NativeEvent evt);
 
-  public native int getAbsoluteLeft(Element elem) /*-{
-    var left = 0;
-    var curr = elem;
-    // This intentionally excludes body which has a null offsetParent.    
-    while (curr.offsetParent) {
-      left -= curr.scrollLeft;
-      curr = curr.parentNode;
-    }
-    while (elem) {
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
-    }
-    return left;
-  }-*/;
+  public final int getAbsoluteLeft(Element elem) {
+    return (int) getSubpixelAbsoluteLeft(elem) | 0;
+  }
 
-  public native int getAbsoluteTop(Element elem) /*-{
-    var top = 0;
-    var curr = elem;
-    // This intentionally excludes body which has a null offsetParent.    
-    while (curr.offsetParent) {
-      top -= curr.scrollTop;
-      curr = curr.parentNode;
-    }
-    while (elem) {
-      top += elem.offsetTop;
-      elem = elem.offsetParent;
-    }
-    return top;
-  }-*/;
+  public final int getAbsoluteTop(Element elem) {
+    return (int) getSubpixelAbsoluteTop(elem) | 0;
+  }
 
   public native String getAttribute(Element elem, String name) /*-{
     return elem.getAttribute(name) || '';
   }-*/;
 
-  public native int getBodyOffsetLeft(Document doc) /*-{
-    return 0;
-  }-*/;
+  public final int getBodyOffsetLeft(Document doc) {
+    return (int) getSubpixelBodyOffsetLeft(doc) | 0;
+  }
 
-  public native int getBodyOffsetTop(Document doc) /*-{
-    return 0;
-  }-*/;
+  public final int getBodyOffsetTop(Document doc) {
+    return (int) getSubpixelBodyOffsetTop(doc) | 0;
+  }
 
   public native JsArray<Touch> getChangedTouches(NativeEvent evt) /*-{
     return evt.changedTouches;
@@ -283,21 +277,71 @@ abstract class DOMImpl {
     return sib;
   }-*/;
 
-  public int getScrollLeft(Document doc) {
-    return doc.getViewportElement().getScrollLeft();
+  public final int getScrollLeft(Document doc) {
+    return (int) getSubpixelScrollLeft(doc) | 0;
   }
 
-  public native int getScrollLeft(Element elem) /*-{
-    return elem.scrollLeft || 0;
-  }-*/;
+  public final int getScrollLeft(Element elem) {
+    return (int) getSubpixelScrollLeft(elem) | 0;
+  }
 
-  public int getScrollTop(Document doc) {
-    return doc.getViewportElement().getScrollTop();
+  public final int getScrollTop(Document doc) {
+    return (int) getSubpixelScrollTop(doc) | 0;
   }
 
   public native String getStyleProperty(Style style, String name) /*-{
     return style[name];
   }-*/;
+
+  public native double getSubpixelAbsoluteLeft(Element elem) /*-{
+    var left = 0;
+    var curr = elem;
+    // This intentionally excludes body which has a null offsetParent.
+    while (curr.offsetParent) {
+      left -= curr.scrollLeft;
+      curr = curr.parentNode;
+    }
+    while (elem) {
+      left += elem.offsetLeft;
+      elem = elem.offsetParent;
+    }
+    return left;
+  }-*/;
+
+  public native double getSubpixelAbsoluteTop(Element elem) /*-{
+    var top = 0;
+    var curr = elem;
+    // This intentionally excludes body which has a null offsetParent.
+    while (curr.offsetParent) {
+      top -= curr.scrollTop;
+      curr = curr.parentNode;
+    }
+    while (elem) {
+      top += elem.offsetTop;
+      elem = elem.offsetParent;
+    }
+    return top;
+  }-*/;
+
+  public native double getSubpixelBodyOffsetLeft(Document doc) /*-{
+    return 0;
+  }-*/;
+
+  public native double getSubpixelBodyOffsetTop(Document doc) /*-{
+    return 0;
+  }-*/;
+
+  public double getSubpixelScrollLeft(Document doc) {
+    return doc.getViewportElement().getSubpixelScrollLeft();
+  }
+
+  public native double getSubpixelScrollLeft(Element elem) /*-{
+    return elem.scrollLeft || 0;
+  }-*/;
+
+  public double getSubpixelScrollTop(Document doc) {
+    return doc.getViewportElement().getSubpixelScrollTop();
+  }
 
   public native int getTabIndex(Element elem) /*-{
     return elem.tabIndex;
@@ -417,31 +461,55 @@ abstract class DOMImpl {
     return elem.outerHTML;
   }-*/;
 
-  public native int touchGetClientX(Touch touch)/*-{
-    return touch.clientX;
-  }-*/;
+  public final int touchGetClientX(Touch touch) {
+    return (int) touchGetSubpixelClientX(touch) | 0;
+  }
 
-  public native int touchGetClientY(Touch touch)/*-{
-    return touch.clientY;
-  }-*/;
+  public final int touchGetClientY(Touch touch) {
+    return (int) touchGetSubpixelClientY(touch) | 0;
+  }
 
   public native int touchGetIdentifier(Touch touch)/*-{
     return touch.identifier;
   }-*/;
 
-  public native int touchGetPageX(Touch touch)/*-{
+  public final int touchGetPageX(Touch touch) {
+    return (int) touchGetSubpixelPageX(touch) | 0;
+  }
+
+  public final int touchGetPageY(Touch touch) {
+    return (int) touchGetSubpixelPageY(touch) | 0;
+  }
+
+  public final int touchGetScreenX(Touch touch) {
+    return (int) touchGetSubpixelScreenX(touch) | 0;
+  }
+
+  public final int touchGetScreenY(Touch touch) {
+    return (int) touchGetSubpixelScreenY(touch) | 0;
+  }
+
+  public native double touchGetSubpixelClientX(Touch touch)/*-{
+    return touch.clientX;
+  }-*/;
+
+  public native double touchGetSubpixelClientY(Touch touch)/*-{
+    return touch.clientY;
+  }-*/;
+
+  public native double touchGetSubpixelPageX(Touch touch)/*-{
     return touch.pageX;
   }-*/;
 
-  public native int touchGetPageY(Touch touch)/*-{
+  public native double touchGetSubpixelPageY(Touch touch)/*-{
     return touch.pageY;
   }-*/;
 
-  public native int touchGetScreenX(Touch touch)/*-{
+  public native double touchGetSubpixelScreenX(Touch touch)/*-{
     return touch.screenX;
   }-*/;
 
-  public native int touchGetScreenY(Touch touch)/*-{
+  public native double touchGetSubpixelScreenY(Touch touch)/*-{
     return touch.screenY;
   }-*/;
 

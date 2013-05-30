@@ -62,19 +62,19 @@ class DOMImplIE8 extends DOMImplTrident {
   }
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
+  public double getSubpixelAbsoluteLeft(Element elem) {
     Document doc = elem.getOwnerDocument();
     return getBoundingClientRectLeft(elem) + doc.getScrollLeft();
   }
 
   @Override
-  public int getAbsoluteTop(Element elem) {
+  public double getSubpixelAbsoluteTop(Element elem) {
     Document doc = elem.getOwnerDocument();
     return getBoundingClientRectTop(elem) + doc.getScrollTop();
   }
 
   @Override
-  public int getScrollLeft(Element elem) {
+  public double getSubpixelScrollLeft(Element elem) {
     if (isRTL(elem)) {
       // IE8 returns increasingly *positive* values as you scroll left in RTL.
       return -super.getScrollLeft(elem);

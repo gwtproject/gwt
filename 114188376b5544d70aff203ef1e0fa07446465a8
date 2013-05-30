@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5df75599_71aad011",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-05-30T16:31:03Z",
+      "side": 1,
+      "message": "Should we add something with a line-break in the middle of a L? e.g. \n\n assertBadJsni(\"@org.group.Foo::bar(Lorg/group/\\nFoo;)\");",
+      "revId": "114188376b5544d70aff203ef1e0fa07446465a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

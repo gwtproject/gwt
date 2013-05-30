@@ -16,6 +16,24 @@
       "revId": "5c580dd42817a6e6d2880dce5134c1fb09e6664b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdde9125_fe55e1d2",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-05-30T22:26:06Z",
+      "side": 1,
+      "message": "That rule is already broken in this class. I\u0027ll start a thread in gwt contrib for an update to the style guide.",
+      "parentUuid": "9ddb8d38_1d13736e",
+      "revId": "5c580dd42817a6e6d2880dce5134c1fb09e6664b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

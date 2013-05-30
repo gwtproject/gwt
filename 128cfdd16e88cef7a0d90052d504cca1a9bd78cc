@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdad6997_d8074d28",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-30T23:39:17Z",
+      "side": 1,
+      "message": "columnElement.setWidth(...) doesn\u0027t work here?",
+      "revId": "128cfdd16e88cef7a0d90052d504cca1a9bd78cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9dc46d62_b5faa0f5",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-05-30T23:39:17Z",
+      "side": 1,
+      "message": "You can use setVisible(columnElement, isColumnVisible) which does the same and also sets the aria-hidden attribute.",
+      "revId": "128cfdd16e88cef7a0d90052d504cca1a9bd78cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

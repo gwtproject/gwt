@@ -199,30 +199,14 @@ class DOMImplStandardBase extends DOMImplStandard {
   }-*/;
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
-    ClientRect rect = getBoundingClientRect(elem);
-    return rect != null ? rect.getLeft()
-        + elem.getOwnerDocument().getBody().getScrollLeft()
-        : getAbsoluteLeftUsingOffsets(elem);
-  }
-
-  @Override
-  public int getAbsoluteTop(Element elem) {
-    ClientRect rect = getBoundingClientRect(elem);
-    return rect != null ? rect.getTop()
-        + elem.getOwnerDocument().getBody().getScrollTop()
-        : getAbsoluteTopUsingOffsets(elem);
-  }
-
-  @Override
-  public int getScrollLeft(Document doc) {
+  public double getSubpixelScrollLeft(Document doc) {
     // Safari always applies document scrolling to the body element, even in
     // strict mode.
     return doc.getBody().getScrollLeft();
   }
 
   @Override
-  public int getScrollLeft(Element elem) {
+  public double getSubpixelScrollLeft(Element elem) {
     if (isRTL(elem)) {
       return super.getScrollLeft(elem)
           - (elem.getScrollWidth() - elem.getClientWidth());
@@ -231,10 +215,26 @@ class DOMImplStandardBase extends DOMImplStandard {
   }
 
   @Override
-  public int getScrollTop(Document doc) {
+  public double getSubpixelScrollTop(Document doc) {
     // Safari always applies document scrolling to the body element, even in
     // strict mode.
     return doc.getBody().getScrollTop();
+  }
+
+  @Override
+  public double getSubpixelAbsoluteLeft(Element elem) {
+    ClientRect rect = getBoundingClientRect(elem);
+    return rect != null ? rect.getLeft()
+        + elem.getOwnerDocument().getBody().getScrollLeft()
+        : getAbsoluteLeftUsingOffsets(elem);
+  }
+
+  @Override
+  public double getSubpixelAbsoluteTop(Element elem) {
+    ClientRect rect = getBoundingClientRect(elem);
+    return rect != null ? rect.getTop()
+        + elem.getOwnerDocument().getBody().getScrollTop()
+        : getAbsoluteTopUsingOffsets(elem);
   }
 
   @Override

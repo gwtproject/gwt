@@ -242,6 +242,42 @@ public class NativeEvent extends JavaScriptObject {
   }
 
   /**
+   * Gets the mouse x-position within the browser window's client area.
+   * 
+   * @return the mouse x-position
+   */
+  public final double getSubpixelClientX() {
+    return DOMImpl.impl.eventGetSubpixelClientX(this);
+  }
+
+  /**
+   * Gets the mouse y-position within the browser window's client area.
+   * 
+   * @return the mouse y-position
+   */
+  public final double getSubpixelClientY() {
+    return DOMImpl.impl.eventGetSubpixelClientY(this);
+  }
+
+  /**
+   * Gets the mouse x-position on the user's display.
+   * 
+   * @return the mouse x-position
+   */
+  public final double getSubpixelScreenX() {
+    return DOMImpl.impl.eventGetSubpixelScreenX(this);
+  }
+
+  /**
+   * Gets the mouse y-position on the user's display.
+   * 
+   * @return the mouse y-position
+   */
+  public final double getSubpixelScreenY() {
+    return DOMImpl.impl.eventGetSubpixelScreenY(this);
+  }
+
+  /**
    * Get an array of touches which have changed since the last touch event.
    * 
    * @return array of touches which have changed since the last touch event

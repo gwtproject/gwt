@@ -202,22 +202,22 @@ public class Element extends Node {
   /**
    * Returns the inner height of an element in pixels, including padding but not
    * the horizontal scrollbar height, border, or margin.
-   * 
+   *
    * @return the element's client height
    */
-  public final native int getClientHeight() /*-{
-    return this.clientHeight;
-  }-*/;
+  public final int getClientHeight() {
+    return (int) getSubpixelClientHeight() | 0;
+  }
 
   /**
    * Returns the inner width of an element in pixels, including padding but not
    * the vertical scrollbar width, border, or margin.
-   * 
+   *
    * @return the element's client width
    */
-  public final native int getClientWidth() /*-{
-    return this.clientWidth;
-  }-*/;
+  public final int getClientWidth() {
+    return (int) getSubpixelClientWidth() | 0;
+  }
 
   /**
    * Specifies the base direction of directionally neutral text and the
@@ -301,17 +301,17 @@ public class Element extends Node {
   /**
    * The height of an element relative to the layout.
    */
-  public final native int getOffsetHeight() /*-{
-     return this.offsetHeight || 0;
-   }-*/;
+  public final int getOffsetHeight() {
+    return (int) getSubpixelOffsetHeight() | 0;
+  }
 
   /**
    * The number of pixels that the upper left corner of the current element is
    * offset to the left within the offsetParent node.
    */
-  public final native int getOffsetLeft() /*-{
-     return this.offsetLeft || 0;
-   }-*/;
+  public final int getOffsetLeft() {
+    return (int) getSubpixelOffsetLeft() | 0;
+  }
 
   /**
    * Returns a reference to the object which is the closest (nearest in the
@@ -325,16 +325,16 @@ public class Element extends Node {
    * The number of pixels that the upper top corner of the current element is
    * offset to the top within the offsetParent node.
    */
-  public final native int getOffsetTop() /*-{
-     return this.offsetTop || 0;
-   }-*/;
+  public final int getOffsetTop() {
+    return (int) getSubpixelOffsetTop() | 0;
+  }
 
   /**
    * The width of an element relative to the layout.
    */
-  public final native int getOffsetWidth() /*-{
-     return this.offsetWidth || 0;
-   }-*/;
+  public final int getOffsetWidth() {
+    return (int) getSubpixelOffsetWidth() | 0;
+  }
 
   /**
    * The element immediately preceeding this element. If there is no such
@@ -407,16 +407,16 @@ public class Element extends Node {
   /**
    * The height of the scroll view of an element.
    */
-  public final native int getScrollHeight() /*-{
-     return this.scrollHeight || 0;
-   }-*/;
+  public final int getScrollHeight() {
+    return (int) getSubpixelScrollHeight() | 0;
+  }
 
   /**
    * The number of pixels that an element's content is scrolled from the left.
    * 
    * <p>
-   * If the element is in RTL mode, this method will return a negative value of
-   * the number of pixels scrolled from the right.
+   * If the element is in RTL mode, this method will return a negative value of the number of pixels
+   * scrolled from the right.
    * </p>
    */
   public final int getScrollLeft() {
@@ -426,16 +426,16 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled from the top.
    */
-  public final native int getScrollTop() /*-{
-     return this.scrollTop || 0;
-   }-*/;
+  public final int getScrollTop() {
+    return (int) getSubpixelScrollTop() | 0;
+  }
 
   /**
    * The width of the scroll view of an element.
    */
-  public final native int getScrollWidth() /*-{
-     return this.scrollWidth || 0;
-   }-*/;
+  public final int getScrollWidth() {
+    return (int) getSubpixelScrollWidth() | 0;
+  }
 
   /**
    * Gets a string representation of this element (as outer HTML).
@@ -455,6 +455,129 @@ public class Element extends Node {
   public final native Style getStyle() /*-{
      return this.style;
    }-*/;
+
+  /**
+   * Gets an element's absolute bottom coordinate in the document's coordinate
+   * system.
+   */
+  public final double getSubpixelAbsoluteBottom() {
+    return getSubpixelAbsoluteTop() + getSubpixelOffsetHeight();
+  }
+
+  /**
+   * Gets an element's absolute left coordinate in the document's coordinate
+   * system.
+   */
+  public final double getSubpixelAbsoluteLeft() {
+    return DOMImpl.impl.getSubpixelAbsoluteLeft(this);
+  }
+
+  /**
+   * Gets an element's absolute right coordinate in the document's coordinate
+   * system.
+   */
+  public final double getSubpixelAbsoluteRight() {
+    return getSubpixelAbsoluteLeft() + getSubpixelOffsetWidth();
+  }
+
+  /**
+   * Gets an element's absolute top coordinate in the document's coordinate
+   * system.
+   */
+  public final double getSubpixelAbsoluteTop() {
+    return DOMImpl.impl.getSubpixelAbsoluteTop(this);
+  }
+
+  /**
+   * Returns the inner height of an element in pixels, including padding but not
+   * the horizontal scrollbar height, border, or margin.
+   * 
+   * @return the element's client height
+   */
+  public final native double getSubpixelClientHeight() /*-{
+    return this.clientHeight;
+  }-*/;
+
+  /**
+   * Returns the inner width of an element in pixels, including padding but not the vertical
+   * scrollbar width, border, or margin.
+   * 
+   * @return the element's client width
+   */
+  public final native double getSubpixelClientWidth() /*-{
+    return this.clientWidth;
+  }-*/;
+
+  /**
+   * The height of an element relative to the layout.
+   */
+  public final native double getSubpixelOffsetHeight() /*-{
+    return this.offsetHeight || 0;
+  }-*/;
+
+  /**
+   * The number of pixels that the upper left corner of the current element is
+   * offset to the left within the offsetParent node.
+   */
+  public final native double getSubpixelOffsetLeft() /*-{
+    return this.offsetLeft || 0;
+  }-*/;
+
+  /**
+   * Returns a reference to the object which is the closest (nearest in the
+   * containment hierarchy) positioned containing element.
+   */
+  public final native Element getSubpixelOffsetParent() /*-{
+    return this.offsetParent;
+  }-*/;
+
+  /**
+   * The number of pixels that the upper top corner of the current element is
+   * offset to the top within the offsetParent node.
+   */
+  public final native double getSubpixelOffsetTop() /*-{
+    return this.offsetTop || 0;
+  }-*/;
+
+  /**
+   * The width of an element relative to the layout.
+   */
+  public final native double getSubpixelOffsetWidth() /*-{
+    return this.offsetWidth || 0;
+  }-*/;
+
+  /**
+   * The height of the scroll view of an element.
+   */
+  public final native double getSubpixelScrollHeight() /*-{
+    return this.scrollHeight || 0;
+  }-*/;
+
+  /**
+   * The number of pixels that an element's content is scrolled from the left.
+   * 
+   * <p>
+   * If the element is in RTL mode, this method will return a negative value of the number of pixels
+   * scrolled from the right.
+   * </p>
+   */
+  public final double getSubpixelScrollLeft() {
+    return DOMImpl.impl.getSubpixelScrollLeft(this);
+  }
+
+  /**
+   * The number of pixels that an element's content is scrolled from the top.
+   */
+  public final native double getSubpixelScrollTop() /*-{
+    return this.scrollTop || 0;
+  }-*/;
+
+  /**
+   * The width of the scroll view of an element.
+   */
+  public final native double getSubpixelScrollWidth() /*-{
+    return this.scrollWidth || 0;
+  }-*/;
 
   /**
    * The index that represents the element's position in the tabbing order.

@@ -128,19 +128,19 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public int getAbsoluteLeft(Element elem) {
+  public double getSubpixelAbsoluteLeft(Element elem) {
     return getAbsoluteLeftImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
   }
 
   @Override
-  public int getAbsoluteTop(Element elem) {
+  public double getSubpixelAbsoluteTop(Element elem) {
     return getAbsoluteTopImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
   }
 
   @Override
-  public native int getBodyOffsetLeft(Document doc) /*-{
+  public native double getSubpixelBodyOffsetLeft(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
     if (style == null) {
       // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -150,7 +150,7 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public native int getBodyOffsetTop(Document doc) /*-{
+  public native double getSubpixelBodyOffsetTop(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
     if (style == null) {
       // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -175,12 +175,12 @@ class DOMImplMozilla extends DOMImplStandard {
   }-*/;
 
   @Override
-  public int getScrollLeft(Element elem) {
+  public double getSubpixelScrollLeft(Element elem) {
     if (!isGecko19() && isRTL(elem)) {
-      return super.getScrollLeft(elem)
-          - (elem.getScrollWidth() - elem.getClientWidth());
+      return super.getSubpixelScrollLeft(elem)
+          - (elem.getSubpixelScrollWidth() - elem.getSubpixelClientWidth());
     }
-    return super.getScrollLeft(elem);
+    return super.getSubpixelScrollLeft(elem);
   }
 
   @Override
@@ -220,14 +220,13 @@ class DOMImplMozilla extends DOMImplStandard {
     return evt;
   }-*/;
 
-  private native int getAbsoluteLeftImpl(Element viewport, Element elem) /*-{
+  private native double getAbsoluteLeftImpl(Element viewport, Element elem) /*-{
     // Firefox 3 is actively throwing errors when getBoxObjectFor() is called,
     // so we use getBoundingClientRect() whenever possible (but it's not
     // supported on older versions). If changing this code, make sure to check
     // the museum entry for issue 1932.
-    // (x) | 0 is used to coerce the value to an integer
     if (Element.prototype.getBoundingClientRect) {
-      return (elem.getBoundingClientRect().left + viewport.scrollLeft) | 0;
+      return (elem.getBoundingClientRect().left + viewport.scrollLeft);
     } else {
       // We cannot use DOMImpl here because offsetLeft/Top return erroneous
       // values when overflow is not visible.  We have to difference screenX
@@ -242,14 +241,13 @@ class DOMImplMozilla extends DOMImplStandard {
     }
   }-*/;
 
-  private native int getAbsoluteTopImpl(Element viewport, Element elem) /*-{
+  private native double getAbsoluteTopImpl(Element viewport, Element elem) /*-{
     // Firefox 3 is actively throwing errors when getBoxObjectFor() is called,
     // so we use getBoundingClientRect() whenever possible (but it's not
     // supported on older versions). If changing this code, make sure to check
     // the museum entry for issue 1932.
-    // (x) | 0 is used to coerce the value to an integer
     if (Element.prototype.getBoundingClientRect) {
-      return (elem.getBoundingClientRect().top + viewport.scrollTop) | 0;
+      return (elem.getBoundingClientRect().top + viewport.scrollTop);
     } else {
       // We cannot use DOMImpl here because offsetLeft/Top return erroneous
       // values when overflow is not visible.  We have to difference screenX

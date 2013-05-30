@@ -60,7 +60,7 @@ class DOMImplOpera extends DOMImplStandard {
   }-*/;
 
   @Override
-  public native int getAbsoluteLeft(Element elem) /*-{
+  public native double getSubpixelAbsoluteLeft(Element elem) /*-{
     var left = 0;
 
     // This intentionally excludes body and its ancestors
@@ -83,7 +83,7 @@ class DOMImplOpera extends DOMImplStandard {
   }-*/;
 
   @Override
-  public native int getAbsoluteTop(Element elem) /*-{
+  public native double getSubpixelAbsoluteTop(Element elem) /*-{
     var top = 0;
 
     // This intentionally excludes body and its ancestors

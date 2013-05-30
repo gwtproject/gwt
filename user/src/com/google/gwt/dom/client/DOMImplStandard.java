@@ -42,8 +42,8 @@ abstract class DOMImplStandard extends DOMImpl {
 
   @Override
   public native NativeEvent createMouseEvent(Document doc, String type,
-      boolean canBubble, boolean cancelable, int detail, int screenX,
-      int screenY, int clientX, int clientY, boolean ctrlKey, boolean altKey,
+      boolean canBubble, boolean cancelable, int detail, double screenX,
+      double screenY, double clientX, double clientY, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int button, Element relatedTarget) /*-{
     // Because Event.getButton() returns bitfield values [1, 4, 2] for [left,
     // middle, right], we need to translate them to the standard [0, 1, 2]

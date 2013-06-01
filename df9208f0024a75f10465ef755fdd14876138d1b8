@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d9cfd82_6152b61e",
+        "filename": "user/test/com/google/gwt/user/client/ui/SuggestBoxTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-01T13:57:57Z",
+      "side": 1,
+      "message": "Should we add a link to the issue in a comment here? or we think \"git blame\" will be enough to find why we added these methods?\n\nHow about:\n\n /*\n  * We used to have a keydown events fired twice.\n  * See https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d3533\n  */",
+      "revId": "df9208f0024a75f10465ef755fdd14876138d1b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

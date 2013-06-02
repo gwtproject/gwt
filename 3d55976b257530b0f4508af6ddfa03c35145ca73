@@ -16,6 +16,24 @@
       "revId": "3d55976b257530b0f4508af6ddfa03c35145ca73",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_ac65eb4f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Objects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-06-02T21:16:46Z",
+      "side": 1,
+      "message": "We could write a JSNI function to do this properly for prod-mode, recursively calling deepEquals() for references, and using \u0027\u003d\u003d\u003d\u0027 for everything else except Strings.",
+      "parentUuid": "1dc5dd78_990f7bab",
+      "revId": "3d55976b257530b0f4508af6ddfa03c35145ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

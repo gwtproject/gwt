@@ -33,6 +33,10 @@ public final class Short extends Number implements Comparable<Short> {
     private static Short[] boxedValues = new Short[256];
   }
 
+  public static int compare(short x, short y) {
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
+  }
+
   public static Short decode(String s) throws NumberFormatException {
     return Short.valueOf((short) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }

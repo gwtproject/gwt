@@ -34,6 +34,16 @@ public final class Float extends Number implements Comparable<Float> {
   private static final long POWER_32_INT = 4294967296L;
 
   public static int compare(float x, float y) {
+    if (isNaN(x)) {
+      if (isNaN(y)) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } else if (isNaN(y)) {
+      return -1;
+    }
+    
     if (x < y) {
       return -1;
     } else if (x > y) {

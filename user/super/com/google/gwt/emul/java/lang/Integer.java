@@ -57,6 +57,10 @@ public final class Integer extends Number implements Comparable<Integer> {
     return x & 0x0000003f;
   }
 
+  public static int compare(int x, int y) {
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
+  }
+
   public static Integer decode(String s) throws NumberFormatException {
     return Integer.valueOf((int) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }

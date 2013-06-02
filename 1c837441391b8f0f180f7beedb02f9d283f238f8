@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dc5dd78_f9c5575f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-02T13:51:48Z",
+      "side": 1,
+      "message": "I don\u0027t understand what is intended -- shouldn\u0027t this be x \u003c y?  How about signum(x - y) instead?\n\nNeeds a test, and remove the trailing space.",
+      "revId": "1c837441391b8f0f180f7beedb02f9d283f238f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

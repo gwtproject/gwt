@@ -52,6 +52,12 @@ public class FloatTest extends GWTTestCase {
     }
   }
 
+  public void testCompare() {
+    assertTrue("Float.compare failed for 1 < 2", Float.compare(1f, 2f) < 0);
+    assertTrue("Float.compare failed for 2 > 1", Float.compare(2f, 1f) > 0);
+    assertTrue("Float.compare failed for 1 == 1", Float.compare(1f, 1f) == 0);
+  }
+
   public void testFloatConstants() {
     assertTrue(Float.isNaN(Float.NaN));
     assertTrue(Float.isInfinite(Float.NEGATIVE_INFINITY));

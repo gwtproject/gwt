@@ -58,6 +58,10 @@ public final class Long extends Number implements Comparable<Long> {
     return Integer.bitCount(high) + Integer.bitCount(low);
   }
 
+  public static int compare(long x, long y) {
+    return signum(x - y);
+  }
+
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
     return new Long(parseLong(decode.payload, decode.radix));

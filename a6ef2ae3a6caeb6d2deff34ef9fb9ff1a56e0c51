@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1dc5dd78_994c1bf8",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-02T22:46:17Z",
+      "side": 1,
+      "message": "The pyjamas issue linked doesn\u0027t exist, and I think many more things would be broken if |0 didn\u0027t work.  Math.ceil would be much slower and take up more space.\n\nIn some places, we also use ~~x to coerce to int.",
+      "parentUuid": "1dc5dd78_39ff4f50",
+      "revId": "a6ef2ae3a6caeb6d2deff34ef9fb9ff1a56e0c51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dc5dd78_59020384",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
         "patchSetId": 1

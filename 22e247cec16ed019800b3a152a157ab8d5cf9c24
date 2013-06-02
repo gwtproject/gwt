@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1d9cfd82_21b02e15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-02T10:01:52Z",
+      "side": 1,
+      "message": "Can you put \"issue\" in lowercase so Gerrit links it to the issue tracker?\n\nAlso, using a \"Bug: \" line in the footer (next to Change-Id, with no blank line between them) allows you to search for all reviews related to that bug with the \"tr:\" keyword; e.g. https://gwt-review.googlesource.com/#/q/tr:4847,n,z (we should document that in makinggwtbetter)",
+      "revId": "22e247cec16ed019800b3a152a157ab8d5cf9c24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dc5dd78_b9cfdf7b",
         "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
         "patchSetId": 2

@@ -399,66 +399,66 @@ public class Arrays {
     }
 
     for (int i = 0, n = a1.length; i < n; ++i) {
-
-      Object obj1 = a1[i];
-      Object obj2 = a2[i];
-      if (obj1 == obj2) {
-        continue;
-      }
-      if (obj1 == null || obj2 == null) {
+      if (!deepEquals0(a1[i], a2[i])) {
         return false;
       }
-      if (obj1.equals(obj2)) {
-        continue;
-      }
-      Class<?> class1 = obj1.getClass();
-      Class<?> class2 = obj2.getClass();
+    }
 
-      // We have to test and see if these are two arrays of the same type,
-      // then see what types of arrays they are and dispatch to the
-      // appropriate equals
+    return true;
+  }
 
-      if (!class1.isArray() || !class1.equals(class2)) {
-        return false;
-      }
+  /**
+   * Helper function for {@link Arrays#deepEquals(Object[], Object[])}
+   * and {@link Objects#deepEquals(Object, Object)}.
+   */
+  static boolean deepEquals0(Object obj1, Object obj2) {
+    if (obj1 == obj2) {
+      return true;
+    }
+    if (obj1 == null || obj2 == null) {
+      return false;
+    }
+    if (obj1.equals(obj2)) {
+      return true;
+    }
 
-      if (obj1 instanceof Object[]) {
-        if (!deepEquals((Object[]) obj1, (Object[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof boolean[]) {
-        if (!equals((boolean[]) obj1, (boolean[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof byte[]) {
-        if (!equals((byte[]) obj1, (byte[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof char[]) {
-        if (!equals((char[]) obj1, (char[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof short[]) {
-        if (!equals((short[]) obj1, (short[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof int[]) {
-        if (!equals((int[]) obj1, (int[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof long[]) {
-        if (!equals((long[]) obj1, (long[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof float[]) {
-        if (!equals((float[]) obj1, (float[]) obj2)) {
-          return false;
-        }
-      } else if (obj1 instanceof double[]) {
-        if (!equals((double[]) obj1, (double[]) obj2)) {
-          return false;
-        }
-      }
+    Class<?> class1 = obj1.getClass();
+    Class<?> class2 = obj2.getClass();
+
+    // We have to test and see if these are two arrays of the same type,
+    // then see what types of arrays they are and dispatch to the
+    // appropriate equals
+
+    if (!class1.isArray() || !class1.equals(class2)) {
+      return false;
+    }
+
+    if (obj1 instanceof Object[]) {
+      return deepEquals((Object[]) obj1, (Object[]) obj2);
+    }
+    if (obj1 instanceof boolean[]) {
+      return equals((boolean[]) obj1, (boolean[]) obj2);
+    }
+    if (obj1 instanceof byte[]) {
+      return equals((byte[]) obj1, (byte[]) obj2);
+    }
+    if (obj1 instanceof char[]) {
+      return equals((char[]) obj1, (char[]) obj2);
+    }
+    if (obj1 instanceof short[]) {
+      return equals((short[]) obj1, (short[]) obj2);
+    }
+    if (obj1 instanceof int[]) {
+      return equals((int[]) obj1, (int[]) obj2);
+    }
+    if (obj1 instanceof long[]) {
+      return equals((long[]) obj1, (long[]) obj2);
+    }
+    if (obj1 instanceof float[]) {
+      return equals((float[]) obj1, (float[]) obj2);
+    }
+    if (obj1 instanceof double[]) {
+      return equals((double[]) obj1, (double[]) obj2);
     }
 
     return true;

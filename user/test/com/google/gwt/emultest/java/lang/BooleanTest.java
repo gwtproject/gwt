@@ -59,6 +59,12 @@ public class BooleanTest extends GWTTestCase {
     assertFalse(Boolean.parseBoolean(false4));
   }
 
+  public void testCompare() {
+    assertTrue("Boolean.compare failed for false < true", Boolean.compare(false, true) < 0);
+    assertTrue("Boolean.compare failed for true > false", Boolean.compare(true, false) > 0);
+    assertEquals(0, Boolean.compare(true, true));
+  }
+
   public void testValueOf() {
     assertTrue(Boolean.valueOf(btrue));
     assertTrue(Boolean.valueOf(true1));

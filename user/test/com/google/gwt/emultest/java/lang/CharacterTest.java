@@ -233,7 +233,18 @@ public class CharacterTest extends GWTTestCase {
     assertEquals(0x10346, Character.codePointAt(nonBmpChar, 0));
     assertEquals(1, Character.codePointCount(nonBmpChar, 0, 2));
   }
-  
+
+  public void testCompare() {
+    Character a = Character.valueOf('A');
+    Character b = Character.valueOf('B');
+    Character c = Character.valueOf('C');
+    assertTrue("Character.compare failed for 'A' < 'B'", Character.compare(a, b) < 0);
+    assertTrue("Character.compare failed for 'B' > 'A'", Character.compare(b, a) > 0);
+    assertEquals(0, Character.compare(c, c));
+    assertTrue("Character.compare failed for '\uA001' > '\uA000'",
+        Character.compare(Character.valueOf('\uA001'), Character.valueOf('\uA000')) > 0);
+  }
+
   public void testCompareTo() {
     assertTrue(Character.valueOf('A').compareTo('B') < 0);
     assertTrue(Character.valueOf('B').compareTo('A') > 0);

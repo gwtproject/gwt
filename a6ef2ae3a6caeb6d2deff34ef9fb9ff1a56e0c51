@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dc5dd78_39ff4f50",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-02T22:09:05Z",
+      "side": 1,
+      "message": "Out of curiosity, this bug asserts that \"| 0\" was sometimes flaky in Mozilla and that something like Math.ceil (or round?) would be better:\n\nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d6991\n\nDo you have any thoughts on that?",
+      "revId": "a6ef2ae3a6caeb6d2deff34ef9fb9ff1a56e0c51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc5dd78_59020384",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-02T22:09:05Z",
+      "side": 1,
+      "message": "getAbsoluteLeftImpl returns an int and has a \"| 0\" that, per the comment, is related to coercion to an int--should that be changed to return a double?",
+      "revId": "a6ef2ae3a6caeb6d2deff34ef9fb9ff1a56e0c51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

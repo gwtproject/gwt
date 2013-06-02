@@ -16,6 +16,23 @@
       "revId": "7b1772eb1f0f29ff05b4b2f177453d4634fc6121",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc5dd78_b9f11f91",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/BooleanTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-02T17:50:10Z",
+      "side": 1,
+      "message": "Have we decided we don\u0027t care about method order any more?  I know it has been proposed, but I didn\u0027t think anything was agreed.",
+      "revId": "7b1772eb1f0f29ff05b4b2f177453d4634fc6121",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

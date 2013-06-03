@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_b232a6c6",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-03T21:55:04Z",
+      "side": 1,
+      "message": "Why Integer.signum? Nobody should rely on it but we should avoid causing inconsistent dev vs production behavior when possible.",
+      "revId": "79ced7599b1a5560035af3815c989815a96744aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

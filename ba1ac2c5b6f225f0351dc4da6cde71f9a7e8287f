@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_72c4ae88",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ObjectsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-03T21:49:11Z",
+      "side": 1,
+      "message": "can you add a test case for the recursive scenario of deepEquals?",
+      "revId": "ba1ac2c5b6f225f0351dc4da6cde71f9a7e8287f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

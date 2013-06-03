@@ -26,6 +26,7 @@ import com.google.gwt.editor.client.HasEditorErrors;
 import com.google.gwt.editor.client.adapters.EditorSource;
 import com.google.gwt.editor.client.adapters.ListEditor;
 import com.google.gwt.editor.client.adapters.SimpleEditor;
+import com.google.web.bindery.requestfactory.gwt.client.HasPaths;
 import com.google.web.bindery.requestfactory.gwt.client.HasRequestContext;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryTestBase;
@@ -52,9 +53,15 @@ public class EditorTest extends RequestFactoryTestBase {
    * DO NOT USE finishTest(). Instead, call finishTestAndReset();
    */
 
-  static class SimpleBarEditor implements Editor<SimpleBarProxy>, HasRequestContext<SimpleBarProxy> {
+  static class SimpleBarEditor implements HasPaths<SimpleBarProxy>,
+      HasRequestContext<SimpleBarProxy> {
     protected final SimpleEditor<String> userName = SimpleEditor.of();
     RequestContext ctx;
+
+    @Override
+    public String[] getPaths() {
+      return new String[] {"unpersisted"};
+    }
 
     public void setRequestContext(RequestContext ctx) {
       this.ctx = ctx;
@@ -78,7 +85,7 @@ public class EditorTest extends RequestFactoryTestBase {
   interface SimpleFooDriver extends RequestFactoryEditorDriver<SimpleFooProxy, SimpleFooEditor> {
   }
 
-  static class SimpleFooEditor implements HasEditorErrors<SimpleFooProxy> {
+  static class SimpleFooEditor implements HasEditorErrors<SimpleFooProxy>, HasPaths<SimpleFooProxy> {
     /**
      * Test field-based access.
      */
@@ -93,6 +100,11 @@ public class EditorTest extends RequestFactoryTestBase {
     private final SimpleBarEditor barEditor = new SimpleBarEditor();
 
     List<EditorError> errors;
+
+    @Override
+    public String[] getPaths() {
+      return new String[] {"fooField"};
+    }
 
     public void showErrors(List<EditorError> errors) {
       this.errors = errors;
@@ -147,7 +159,8 @@ public class EditorTest extends RequestFactoryTestBase {
     final SimpleFooDriver driver = GWT.create(SimpleFooDriver.class);
     driver.initialize(req, editor);
     final String[] paths = driver.getPaths();
-    assertEquals(Arrays.asList("barField"), Arrays.asList(paths));
+    assertEquals(Arrays.asList("fooField", "barField", "selfOneToManyField",
+        "selfOneToManyField.barField", "barField.unpersisted"), Arrays.asList(paths));
 
     req.simpleFooRequest().findSimpleFooById(1L).with(paths).fire(new Receiver<SimpleFooProxy>() {
       @Override
@@ -332,7 +345,8 @@ public class EditorTest extends RequestFactoryTestBase {
     driver.initialize(req, editor);
 
     String[] paths = driver.getPaths();
-    assertEquals(Arrays.asList("barField"), Arrays.asList(paths));
+    assertEquals(Arrays.asList("fooField", "barField", "selfOneToManyField",
+        "selfOneToManyField.barField", "barField.unpersisted"), Arrays.asList(paths));
 
     req.simpleFooRequest().findSimpleFooById(1L).with(paths).fire(new Receiver<SimpleFooProxy>() {
       @Override

@@ -15,9 +15,11 @@
  */
 package com.google.web.bindery.requestfactory.gwt.client.impl;
 
-import com.google.web.bindery.autobean.shared.ValueCodex;
+import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.EditorContext;
 import com.google.gwt.editor.client.EditorVisitor;
+import com.google.web.bindery.autobean.shared.ValueCodex;
+import com.google.web.bindery.requestfactory.gwt.client.HasPaths;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -55,6 +57,16 @@ class PathCollector extends EditorVisitor {
       } else {
         // Always collect @Path("foo.bar.baz") field, when baz isn't a value
         paths.add(path);
+      }
+    }
+    Editor<?> editor = ctx.getEditor();
+    if (editor instanceof HasPaths<?>) {
+      String[] subpaths = ((HasPaths<?>) editor).getPaths();
+      if (subpaths != null) {
+        String prefix = path.length() > 0 ? path + "." : "";
+        for (String subpath : subpaths) {
+          paths.add(prefix + subpath);
+        }
       }
     }
     if (ctx.asCompositeEditor() != null) {

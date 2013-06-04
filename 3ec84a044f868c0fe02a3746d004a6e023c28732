@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_8a5f0ff4",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-04T13:03:04Z",
+      "side": 1,
+      "message": "I don\u0027t think its a good idea, since with this we would have to do something like:\n\nif(!isNaN(x) \u0026\u0026 !isNaN(y)) {\n// do normal stuff\n}else{\n//test again\n}\n\nIf we want to change this, we should also change this in Double.compare (its implemented the same way)",
+      "parentUuid": "1d879d2a_321eb624",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d9cfd82_81713a57",
         "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
         "patchSetId": 9
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_aaad3390",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Short.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-04T13:03:04Z",
+      "side": 1,
+      "message": "I don\"t really understand what the difference would be between prod vs. dev if we do not use x-y. Correct me if I am wrong but one should never rely on the exact value returned from compare.",
+      "parentUuid": "1d879d2a_127d322c",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_92704252",
         "filename": "user/test/com/google/gwt/emultest/java/lang/FloatTest.java",
         "patchSetId": 9
@@ -123,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "7d6fb93b_07ea582a",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/FloatTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-04T13:03:04Z",
+      "side": 1,
+      "message": "In JavaScript something like this passes:\nassertEquals(0, Float.compare(0.0f, -0.0f));\n\nWhile it does not pass in Java. Do we want to make sure we cover this corner case (as well as others) and take the performance hit?\n\nNot sure here. Could we just cover this in the docs of the JRE Emulation?",
+      "parentUuid": "1d879d2a_92704252",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_d26aba5b",
         "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
         "patchSetId": 9
@@ -134,6 +188,24 @@
       "writtenOn": "2013-06-03T22:23:09Z",
       "side": 1,
       "message": "Can you add test for borders like John suggested?",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d6cb547_2343cacb",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-04T13:03:04Z",
+      "side": 1,
+      "message": "We actually look terrible at the Borders:\n\nThis will just fail:\nInteger.compare(Integer.MAX_VALUE,  Integer.MIN_VALUE) \u003e 0\n\nsince we do not got overflow for ints in javascript.\n\nI am not sure how to handle such corner cases, do we want to handle them, any input?",
+      "parentUuid": "1d879d2a_d26aba5b",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

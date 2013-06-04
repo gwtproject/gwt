@@ -25,8 +25,10 @@ import com.google.web.bindery.requestfactory.shared.EntityProxyId;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -115,6 +117,57 @@ public class EntityCodex {
   }
 
   /**
+   * Map decoding follows behaviour of AutoBeanCodexImpl.MapCoder
+   */
+  public static Object decode(EntitySource source,
+      Class<?> type, Class<?> keyType, Class<?> valueType, Splittable split) {
+    if (split == null || split == Splittable.NULL) {
+      return null;
+    }
+
+    if (!Map.class.equals(type)) {
+      throw new UnsupportedOperationException();
+    }
+
+    Map<Object,Object> map = new HashMap<Object,Object>();
+    if (ValueCodex.canDecode(keyType) || !split.isIndexed()) {
+      List<String> keys = split.getPropertyKeys();
+      for (String propertyKey : keys) {
+        Object key = ValueCodex.decode(keyType, StringQuoter.split(propertyKey));
+        if (split.isNull(propertyKey)) {
+          map.put(key, null);
+        } else {
+          Splittable valueSplit = split.get(propertyKey);
+          Object value = null;
+          if (ValueCodex.canDecode(valueType)) {
+            value = ValueCodex.decode(valueType, valueSplit);
+          } else {
+            value = decode(source, valueType, null, valueSplit);
+          }
+          map.put(key,value);
+        }
+      }
+    } else {
+       if (split.size() != 2) {
+         throw new UnsupportedOperationException();
+       }
+       @SuppressWarnings("unchecked")
+      List<Object> keys = (List<Object>) decode(source, List.class, keyType, split.get(0));
+       @SuppressWarnings("unchecked")
+       List<Object> values = (List<Object>) decode(source, List.class, valueType, split.get(1));
+       if (keys.size() != values.size()) {
+         throw new UnsupportedOperationException();
+       }
+
+       for (int i = 0, size = keys.size(); i < size; i++) {
+         map.put(keys.get(i), values.get(i));
+       }
+    }
+
+    return map;
+  }
+
+  /**
    * Create a wire-format representation of an object.
    */
   public static Splittable encode(EntitySource source, Object value) {
@@ -146,6 +199,55 @@ public class EntityCodex {
       return StringQuoter.split(toReturn.toString());
     }
 
+    // Map encoding follows behaviour of AutoBeanCodexImpl.MapCoder
+    if (value instanceof Map<?,?>) {
+      Map<?,?> map = (Map<?, ?>) value;
+      StringBuilder sb = new StringBuilder();
+      boolean isSimpleMap = (map.isEmpty() || ValueCodex.canDecode(map.keySet().iterator().next().getClass()));
+      if (isSimpleMap) {
+        boolean first = true;
+        sb.append("{");
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+          Object mapKey = entry.getKey();
+          if (mapKey == null) {
+            // A null key in a simple map is meaningless
+            continue;
+          }
+          Object mapValue = entry.getValue();
+
+          if (first) {
+            first = false;
+          } else {
+            sb.append(",");
+          }
+
+          sb.append(StringQuoter.quote(encode(source, mapKey).getPayload()));
+          sb.append(":");
+          if (mapValue == null) {
+            // Null values must be preserved
+            sb.append("null");
+          } else {
+            sb.append(encode(source, mapValue).getPayload());
+          }
+        }
+        sb.append("}");
+      } else {
+        List<Object> keys = new ArrayList<Object>(map.size());
+        List<Object> values = new ArrayList<Object>(map.size());
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+          keys.add(entry.getKey());
+          values.add(entry.getValue());
+        }
+        sb.append("[");
+        sb.append(encode(source, keys).getPayload());
+        sb.append(",");
+        sb.append(encode(source, values).getPayload());
+        sb.append("]");
+      }
+
+      return StringQuoter.split(sb.toString());
+    }
+
     if (value instanceof BaseProxy) {
       AutoBean<BaseProxy> autoBean = AutoBeanUtils.getAutoBean((BaseProxy) value);
       value = BaseProxyCategory.stableId(autoBean);
@@ -157,4 +259,5 @@ public class EntityCodex {
 
     return ValueCodex.encode(value);
   }
+
 }

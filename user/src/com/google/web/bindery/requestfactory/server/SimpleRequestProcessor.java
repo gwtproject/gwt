@@ -124,7 +124,7 @@ public class SimpleRequestProcessor {
 
   /**
    * Process a payload sent by a RequestFactory client.
-   * 
+   *
    * @param payload the payload sent by the client
    * @return a payload to return to the client
    */
@@ -527,15 +527,28 @@ public class SimpleRequestProcessor {
                 PropertyContext ctx) {
               // containsKey to distinguish null from unknown
               if (flatValueMap.containsKey(propertyName)) {
-                Class<?> elementType =
-                    ctx instanceof CollectionPropertyContext ? ((CollectionPropertyContext) ctx)
-                        .getElementType() : null;
-                Object newValue =
-                    EntityCodex.decode(state, ctx.getType(), elementType, flatValueMap
-                        .get(propertyName));
-                Object resolved = state.getResolver().resolveDomainValue(newValue, false);
+                Object resolved = null;
+                // The null check on getKeyType() is necessary as some of the given PropertyContext's 
+                // implement both MapPropertyContext and CollectionPropertyContext.
+                if (ctx instanceof MapPropertyContext && ((MapPropertyContext) ctx).getKeyType() != null) {
+                    MapPropertyContext mapCtx = (MapPropertyContext) ctx;
+                    Class<?> keyType = mapCtx.getKeyType();
+                    Class<?> valueType = mapCtx.getValueType();
+                    Object newValue =
+                        EntityCodex.decode(state, mapCtx.getType(), keyType,
+                            valueType, flatValueMap.get(propertyName));
+                    resolved = state.getResolver().resolveDomainValue(newValue, false);
+                } else {
+                  Class<?> elementType =
+                      ctx instanceof CollectionPropertyContext ? ((CollectionPropertyContext) ctx)
+                          .getElementType() : null;
+                  Object newValue =
+                      EntityCodex.decode(state, ctx.getType(), elementType, flatValueMap
+                          .get(propertyName));
+                  resolved = state.getResolver().resolveDomainValue(newValue, false);
+                }
                 service.setProperty(domain, propertyName,
-                    service.resolveDomainClass(ctx.getType()), resolved);
+                service.resolveDomainClass(ctx.getType()), resolved);
               }
               return false;
             }

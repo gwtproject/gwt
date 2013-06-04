@@ -699,7 +699,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
 
   /**
    * Creates a new proxy with an assigned ID.
-   * 
+   *
    * @param clazz The proxy type
    * @param id The id to be assigned to the new proxy
    * @param useAppendedContexts if {@code true} use the AutoBeanFactory types associated with any
@@ -911,7 +911,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
 
   /**
    * Create a new EntityProxy from a snapshot in the return payload.
-   * 
+   *
    * @param id the EntityProxyId of the object
    * @param returnRecord the JSON map containing property/value pairs
    * @param operations the WriteOperation eventns to broadcast over the EventBus
@@ -932,11 +932,21 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
           if (ctx.canSet()) {
             if (properties.containsKey(propertyName)) {
               Splittable raw = properties.get(propertyName);
-              Class<?> elementType =
-                  ctx instanceof CollectionPropertyContext ? ((CollectionPropertyContext) ctx)
-                      .getElementType() : null;
-              Object decoded =
-                  EntityCodex.decode(AbstractRequestContext.this, ctx.getType(), elementType, raw);
+              Object decoded = null;
+              if (ctx instanceof MapPropertyContext && ((MapPropertyContext) ctx).getKeyType() != null) {
+                MapPropertyContext mapCtx = (MapPropertyContext) ctx;
+                Class<?> keyType = mapCtx.getKeyType();
+                Class<?> valueType = mapCtx.getValueType();
+                decoded =
+                    EntityCodex.decode(AbstractRequestContext.this, mapCtx.getType(), keyType,
+                        valueType, raw);
+              } else {
+                Class<?> elementType =
+                    ctx instanceof CollectionPropertyContext ? ((CollectionPropertyContext) ctx)
+                        .getElementType() : null;
+                decoded =
+                    EntityCodex.decode(AbstractRequestContext.this, ctx.getType(), elementType, raw);
+              }
               ctx.set(decoded);
             }
           }
@@ -987,7 +997,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
 
   /**
    * Get-or-create method for synthetic ids.
-   * 
+   *
    * @see #syntheticIds
    */
   private <Q extends BaseProxy> SimpleProxyId<Q> allocateSyntheticId(String typeToken,

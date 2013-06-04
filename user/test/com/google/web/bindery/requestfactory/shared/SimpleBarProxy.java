@@ -21,6 +21,9 @@ package com.google.web.bindery.requestfactory.shared;
  */
 @ProxyForName("com.google.web.bindery.requestfactory.server.SimpleBar")
 public interface SimpleBarProxy extends EntityProxy {
+
+//  SimpleValueProxy getSimpleValue();
+
   Boolean getFindFails();
 
   Boolean getUnpersisted();
@@ -37,6 +40,8 @@ public interface SimpleBarProxy extends EntityProxy {
   void setUnpersisted(Boolean b);
 
   void setUserName(String userName);
+
+//  void setSimpleValue(SimpleValueProxy value);
 
   EntityProxyId<SimpleBarProxy> stableId();
 }

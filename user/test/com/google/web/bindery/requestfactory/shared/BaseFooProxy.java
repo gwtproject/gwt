@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -75,6 +76,14 @@ public interface BaseFooProxy extends EntityProxy {
 
   List<SimpleValueProxy> getSimpleValues();
 
+  Map<String,Integer> getValueMap();
+  
+  Map<Integer,SimpleBarProxy> getSimpleBarValueMap();
+
+  Map<SimpleBarProxy,Integer> getSimpleBarKeyMap();
+  
+  Map<MapKeyProxy,MapValueProxy> getEntityKeyAndValueMap();
+
   boolean getUnpersisted();
 
   String getUserName();
@@ -130,4 +139,13 @@ public interface BaseFooProxy extends EntityProxy {
   void setUnpersisted(boolean unpersisted);
 
   void setUserName(String userName);
+
+  void setValueMap(Map<String,Integer> map);
+
+  void setSimpleBarKeyMap(Map<SimpleBarProxy,Integer> map);
+  
+  void setSimpleBarValueMap(Map<Integer,SimpleBarProxy> map);
+  
+  void setEntityKeyAndValueMap(Map<MapKeyProxy,MapValueProxy> map);
+  
 }

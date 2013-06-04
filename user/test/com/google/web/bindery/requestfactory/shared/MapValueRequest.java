@@ -15,24 +15,15 @@
  */
 package com.google.web.bindery.requestfactory.shared;
 
+import java.util.List;
+import java.util.Set;
+
 /**
- * Simple RequestFactory interface with two domain objects, and our standard
- * UserInformation and Logging services.
+ * Do nothing test interface.
  */
-public interface SimpleRequestFactory extends BasicRequestFactory {
-  InstanceServiceRequest instanceServiceRequest();
+@ServiceName("com.google.web.bindery.requestfactory.server.MapValue")
+public interface MapValueRequest extends RequestContext {
 
-  InstanceServiceRequestByName instanceServiceRequestByName();
+  Request<MapValueProxy> findMapValueById(String id);
 
-  SimpleBarRequest simpleBarRequest();
-
-  SimpleFooRequest simpleFooRequest();
-
-  SimpleValueContext simpleValueContext();
-
-  UnicodeTestRequest unicodeTestRequest();
-  
-  MapKeyRequest mapKeyRequest();
-  
-  MapValueRequest mapValueRequest();
 }

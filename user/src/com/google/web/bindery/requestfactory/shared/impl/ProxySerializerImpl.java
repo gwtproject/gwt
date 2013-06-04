@@ -139,6 +139,22 @@ class ProxySerializerImpl extends AbstractRequestContext implements ProxySeriali
             }
           }
         }
+        
+        @Override
+        public void endVisitMapProperty(String propertyName, AutoBean<Map<?, ?>> value,
+            MapPropertyContext ctx) {
+           if (value == null) {
+            return;
+          }
+          for (Map.Entry<?,?> entry : value.as().entrySet()) {
+            if (isEntityType(ctx.getKeyType()) || isValueType(ctx.getKeyType())) {
+              serialize((BaseProxy) entry.getKey());
+            }
+            if (isEntityType(ctx.getValueType()) || isValueType(ctx.getValueType())) {
+              serialize((BaseProxy) entry.getValue());
+            }
+          }
+        }
       });
     }
 

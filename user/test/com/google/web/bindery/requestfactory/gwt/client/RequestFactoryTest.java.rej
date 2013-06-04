@@ -1,0 +1,98 @@
+--- test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java	(revision 10964)
++++ test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java	(working copy)
+@@ -715,7 +730,7 @@
+           }
+         });
+   }
+- 
++
+   public void testForwardReferenceWildcardDecode() {
+     delayTestFinish(DELAY_TEST_FINISH);
+     simpleFooRequest().getTripletReference().with("selfOneToManyField.*.fooField")
+@@ -1011,7 +1026,7 @@
+     delayTestFinish(DELAY_TEST_FINISH);
+     simpleFooRequest().returnNullSimpleFoo().fire(new NullReceiver());
+   }
+-  
++
+   public void testNullEntityFieldResult() {
+     delayTestFinish(DELAY_TEST_FINISH);
+     simpleFooRequest().getSimpleFooWithNullRelationship().with("fooField.fooField.fooField").fire(
+@@ -1129,7 +1144,7 @@
+       }
+     });
+   }
+-  
++
+   public void testNullValueInEntityListResponse() {
+     delayTestFinish(DELAY_TEST_FINISH);
+     final Request<SimpleFooProxy> fooReq =
+@@ -1139,11 +1154,11 @@
+       public void onSuccess(SimpleFooProxy v) {
+         List<SimpleFooProxy> manyFoos = v.getSelfOneToManyField();
+         assertEquals(3, manyFoos.size());
+-        
++
+         assertNotNull(manyFoos.get(0));
+         assertNull(manyFoos.get(1));
+         assertNotNull(manyFoos.get(2));
+-        
++
+         finishTestAndReset();
+       }
+     });
+@@ -1158,12 +1173,12 @@
+       public void onSuccess(SimpleFooProxy foo0) {
+         List<SimpleFooProxy> manyFoos = foo0.getSelfOneToManyField();
+         assertEquals(3, manyFoos.size());
+-        
++
+         assertSame(foo0, manyFoos.get(0).getSelfOneToManyField().get(0));
+         assertNull(manyFoos.get(1));
+         assertSame(foo0, manyFoos.get(2).getSelfOneToManyField().get(0));
+         assertSame(foo0, manyFoos.get(2).getFooField().getFooField());
+-        
++
+         finishTestAndReset();
+       }
+     });
+@@ -1177,11 +1192,11 @@
+       @Override
+       public void onSuccess(SimpleFooProxy v) {
+         assertEquals(3, v.getSelfOneToManyField().size());
+-        
++
+         assertNotNull(v.getSelfOneToManyField().get(0));
+         assertNull(v.getSelfOneToManyField().get(1));
+         assertNotNull(v.getSelfOneToManyField().get(2));
+-        
++
+         finishTestAndReset();
+       }
+     });
+@@ -2146,7 +2161,7 @@
+           }
+         });
+   }
+-  
++
+   public void testPropertyRefsOnWildcardChain() {
+     delayTestFinish(DELAY_TEST_FINISH);
+     final Request<SimpleFooProxy> fooReq =
+@@ -2155,13 +2170,13 @@
+       @Override
+       public void onSuccess(SimpleFooProxy foo0) {
+         assertNull(foo0.getSelfOneToManyField()); // didn't ask for it
+-        
++
+         SimpleFooProxy foo1 = foo0.getFooField(); // "fooField
+         SimpleFooProxy foo2 = foo1.getFooField(); //          .*
+         SimpleFooProxy foo3 = foo2.getFooField(); //            .*
+         SimpleFooProxy foo4 = foo3.getFooField(); //              .fooField"
+-        SimpleFooProxy foo5 = foo4.getFooField(); 
+-        
++        SimpleFooProxy foo5 = foo4.getFooField();
++
+         assertNotNull(foo1);
+         assertNotNull(foo2);
+         assertNotNull(foo3);

@@ -1,0 +1,11 @@
+--- src/com/google/web/bindery/requestfactory/shared/impl/AbstractRequestContext.java	(revision 10964)
++++ src/com/google/web/bindery/requestfactory/shared/impl/AbstractRequestContext.java	(working copy)
+@@ -636,7 +636,7 @@
+   public boolean isChanged() {
+     /*
+      * NB: Don't use the presence of ephemeral objects for this test.
+-     * 
++     *
+      * Diff the objects until one is found to be different. It's not just a simple flag-check
+      * because of the possibility of "unmaking" a change, per the JavaDoc.
+      */

@@ -17,6 +17,7 @@ package com.google.web.bindery.requestfactory.apt;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.lang.model.element.ElementKind;
@@ -76,6 +77,19 @@ class TransportableTypeVisitor extends TypeVisitorBase<Boolean> {
         return false;
       }
       return t.getTypeArguments().get(0).accept(this, state);
+    }
+    if (state.types.isAssignable(t, state.findType(Map.class))) {
+      if (!allowNestedParameterization) {
+        return false;
+      }
+      allowNestedParameterization = false;
+      DeclaredType asMap =
+          (DeclaredType) State.viewAs(state.findType(Map.class), t, state);
+      if (asMap.getTypeArguments().isEmpty()) {
+        return false;
+      }
+      return t.getTypeArguments().get(0).accept(this, state)
+          && t.getTypeArguments().get(1).accept(this, state);
     }
     return false;
   }

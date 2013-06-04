@@ -17,6 +17,7 @@ package com.google.web.bindery.requestfactory.apt;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.lang.model.element.ElementKind;
@@ -98,6 +99,12 @@ class ClientToDomainMapper extends TypeVisitorBase<TypeMirror> {
       // Convert Set,List<FooProxy> to Set,List<FooDomain>
       TypeMirror param = convertSingleParamType(x, state.findType(Collection.class), 0, state);
       return state.types.getDeclaredType((TypeElement) state.types.asElement(x), param);
+    }
+    if (state.types.isAssignable(x, state.findType(Map.class))) {
+      // Convert Map<String,FooProxy> to Map<String,FooDomain>
+      TypeMirror keyParam = convertSingleParamType(x, state.findType(Map.class), 0, state);
+      TypeMirror valueParam = convertSingleParamType(x, state.findType(Map.class), 1, state);
+      return state.types.getDeclaredType((TypeElement) state.types.asElement(x), keyParam, valueParam);
     }
     return defaultAction(x, state);
   }

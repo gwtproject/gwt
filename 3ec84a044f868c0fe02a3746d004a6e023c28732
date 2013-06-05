@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "1d879d2a_3e167dcd",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-05T18:23:02Z",
+      "side": 1,
+      "message": "You have to make sure those comparisons behave as desired when one or both operands are NaNs.",
+      "parentUuid": "1d879d2a_bd86f79c",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d9cfd82_81713a57",
         "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
         "patchSetId": 9
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "If we don\u0027t return 1 and -1 then it will be inconsistent across dev vs prod",
       "parentUuid": "1d9cfd82_81713a57",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_5e4891e3",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-05T18:23:02Z",
+      "side": 1,
+      "message": "The spec of the Javadoc doesn\u0027t care, so anyone that writes code that depends on implementation details, whether our own JRE emulation or different JVMs, deserves whatever pain they get.",
+      "parentUuid": "1d879d2a_d291da47",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -231,6 +267,24 @@
     },
     {
       "key": {
+        "uuid": "1d879d2a_9e3a0937",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/FloatTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-05T18:23:02Z",
+      "side": 1,
+      "message": "Floating point varies significantly across all browsers.  At least when I was working on it, Safari JSCore steals bits from floats for tag values, so there are some values that aren\u0027t representable there and you get different roundoff than other engines.\n\nI don\u0027t believe you can type \"-0\" in JS, but there are other ways to generate them.  I seem to recall code in Dan\u0027s float-to-int bytes tests that generated them.",
+      "parentUuid": "1d879d2a_5d597b70",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_d26aba5b",
         "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
         "patchSetId": 9
@@ -278,6 +332,24 @@
       "side": 1,
       "message": "I think we need to but we can create a bug and defer it to another time.\n\nJohn \u0026 Thomas, any input here?",
       "parentUuid": "5d6cb547_2343cacb",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_fe31455a",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-05T18:23:02Z",
+      "side": 1,
+      "message": "We already say in the JRE compatibility doc that we don\u0027t handle integer overflows.  However, people aren\u0027t going to think of a comparison as an integer overflow case, so if we can handle it cheaply we should.\n\nAfter MAX_VALUE - MIN_VALUE overflows, what happens after the result is coerced to an int?  If we can\u0027t deal with the overflow after the fact, we would need to check for overflow before doing the comparison.\n\nOr, maybe that is why we didn\u0027t use subtraction in the first place.",
+      "parentUuid": "1d879d2a_fd694ff7",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

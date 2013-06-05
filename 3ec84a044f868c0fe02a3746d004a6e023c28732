@@ -303,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_bb5d875e",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/FloatTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-05T22:57:55Z",
+      "side": 1,
+      "message": "\"-0\" is valid JS, and 1/0 is Infinity while 1/-0 is -Infinity (per spec and tested in Chrome and Firefox).\n\nThat said, we don\u0027t deal with that elsewhere. E.g. our Math.signum() emulations use \u003e0 and \u003c0 which won\u0027t distinguish +0 and -0. Math.signum(Double.NaN) is also broken BTW. This is fixable (with explicit isNaN and \u003d\u003d0 checks) but nobody complained so far.",
+      "parentUuid": "1d879d2a_9e3a0937",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_d26aba5b",
         "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
         "patchSetId": 9

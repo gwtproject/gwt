@@ -31,6 +31,13 @@ public class MouseWheelEvent extends MouseEvent<MouseWheelHandler> {
 
   static {
     /**
+     * Hidden type used to ensure wheel event gets registered in the type map.
+     * This is the standard event in DOM L3 which deprecates legacy mousewheel and DOMMouseScroll events.
+     * https://developer.mozilla.org/en-US/docs/Web/Reference/Events/wheel
+     */
+    new Type<MouseWheelHandler>("wheel", new MouseWheelEvent());
+
+    /**
      * Hidden type used to ensure DOMMouseScroll gets registered in the type map.
      * This is the special name used on Mozilla browsers for what everyone else
      * calls 'mousewheel'.

@@ -29,7 +29,8 @@ class DOMImplMozilla extends DOMImplStandard {
   }
 
   public native void disposeEventsMozilla(Element elem) /*-{
-    elem.removeEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+    var wheelEventName = 'onwheel' in $doc ? 'wheel' : 'DOMMouseScroll';
+    elem.removeEventListener(wheelEventName, @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
   }-*/;
 
   @Override
@@ -40,7 +41,8 @@ class DOMImplMozilla extends DOMImplStandard {
 
   public native void sinkEventsMozilla(Element elem, int bits) /*-{
     if (bits & 0x20000) {
-      elem.addEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+      var wheelEventName = 'onwheel' in $doc ? 'wheel' : 'DOMMouseScroll';
+      elem.addEventListener(wheelEventName, @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
     }
   }-*/;
 
@@ -83,7 +85,8 @@ class DOMImplMozilla extends DOMImplStandard {
       true
     );
 
-    $wnd.addEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent,
+    var wheelEventName = 'onwheel' in $doc ? 'wheel' : 'DOMMouseScroll';
+    $wnd.addEventListener(wheelEventName, @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent,
       true);
   }-*/;
 

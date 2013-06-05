@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.dom.client.TableRowElement;
@@ -27,9 +28,9 @@ import com.google.gwt.event.dom.client.DragEndHandler;
 import com.google.gwt.event.dom.client.DragEnterEvent;
 import com.google.gwt.event.dom.client.DragEnterHandler;
 import com.google.gwt.event.dom.client.DragEvent;
+import com.google.gwt.event.dom.client.DragHandler;
 import com.google.gwt.event.dom.client.DragLeaveEvent;
 import com.google.gwt.event.dom.client.DragLeaveHandler;
-import com.google.gwt.event.dom.client.DragHandler;
 import com.google.gwt.event.dom.client.DragOverEvent;
 import com.google.gwt.event.dom.client.DragOverHandler;
 import com.google.gwt.event.dom.client.DragStartEvent;
@@ -63,6 +64,92 @@ import java.util.NoSuchElementException;
 @SuppressWarnings("deprecation")
 public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     HasAllDragAndDropHandlers, HasClickHandlers, HasDoubleClickHandlers {
+
+  /**
+   * Interface to access  {@link HTMLTable}'s DOM.
+   */
+  public interface HTMLTableImpl {
+
+    public Element getRow(Element elem, int row);
+
+    public int getDOMCellCount(Element tableBody, int row);
+
+    public int getDOMRowCount(Element elem);
+
+    public void addCells(Element table, int row, int num);
+
+    public Element getCellElement(Element table, int row, int col);
+  }
+
+  /**
+   * Standard implementation for accessing the Table DOM.
+   */
+  public static class HTMLTableStandardImpl implements HTMLTableImpl {
+
+    @Override
+    public native Element getRow(Element elem, int row) /*-{
+      return elem.rows[row];
+    }-*/;
+
+    @Override
+    public native int getDOMCellCount(Element tableBody, int row) /*-{
+      return tableBody.rows[row].cells.length;
+    }-*/;
+
+    @Override
+    public native int getDOMRowCount(Element elem) /*-{
+      return elem.rows.length;
+    }-*/;
+
+    @Override
+    public native void addCells(Element table, int row, int num) /*-{
+      var rowElem = table.rows[row];
+      for(var i = 0; i < num; i++){
+        var cell = $doc.createElement("td");
+        rowElem.appendChild(cell);
+      }
+    }-*/;
+
+    @Override
+    public native Element getCellElement(Element table, int row, int col) /*-{
+      return table.rows[row].cells[col];
+    }-*/;
+  }
+
+  /**
+   * IE specific implementation for accessing the Table DOM.
+   */
+  public static class HTMLTableIEImpl implements HTMLTableImpl {
+
+      @Override
+      public native Element getRow(Element elem, int row) /*-{
+        return elem.children[row];
+      }-*/;
+
+      @Override
+      public native int getDOMCellCount(Element tableBody, int row) /*-{
+        return tableBody.children[row].children.length;
+      }-*/;
+
+      @Override
+      public native int getDOMRowCount(Element elem) /*-{
+        return elem.children.length;
+      }-*/;
+
+      @Override
+      public native void addCells(Element table, int row, int num) /*-{
+        var rowElem = table.children[row];
+        for(var i = 0; i < num; i++){
+          var cell = $doc.createElement("td");
+          rowElem.appendChild(cell);
+        }
+      }-*/;
+
+      @Override
+      public native Element getCellElement(Element table, int row, int col) /*-{
+        return table.children[row].children[col];
+      }-*/;
+  }
 
   /**
    * Return value for {@link HTMLTable#getCellForEvent}.
@@ -372,16 +459,16 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     }
 
     /**
-     * Native method to get a cell's element.
+     * Get a cell's element.
      * 
      * @param table the table element
      * @param row the row of the cell
      * @param col the column of the cell
      * @return the element
      */
-    private native Element getCellElement(Element table, int row, int col) /*-{
-      return table.rows[row].cells[col];
-    }-*/;
+    private Element getCellElement(Element table, int row, int col) {
+      return impl.getCellElement(table, row, col);
+    }
 
     /**
      * Gets the TD element representing the specified cell unsafely (meaning
@@ -681,9 +768,9 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
       return getRow(bodyElem, row);
     }
 
-    protected native Element getRow(Element elem, int row)/*-{
-      return elem.rows[row];
-    }-*/;
+    protected Element getRow(Element elem, int row) {
+      return impl.getRow(elem, row);
+    }
 
     /**
      * Convenience methods to set an attribute on a row.
@@ -699,6 +786,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     }
   }
 
+  protected final HTMLTableImpl impl = GWT.create(HTMLTableImpl.class);
   /**
    * Table's body.
    */
@@ -1167,6 +1255,10 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     this.setWidget(row, column, asWidgetOrNull(widget));
   }
 
+  protected void addCells(Element table, int row, int num) {
+    impl.addCells(table, row, num);
+  }
+
   /**
    * Bounds checks that the cell exists at the specified location.
    * 
@@ -1227,9 +1319,9 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @param row the row
    * @return number of columns in the row
    */
-  protected native int getDOMCellCount(Element tableBody, int row) /*-{
-    return tableBody.rows[row].cells.length;
-  }-*/;
+  protected int getDOMCellCount(Element tableBody, int row) {
+    return impl.getDOMCellCount(tableBody, row);
+  }
 
   /**
    * Directly ask the underlying DOM what the cell count on the given row is.
@@ -1250,9 +1342,9 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     return getDOMRowCount(bodyElem);
   }
 
-  protected native int getDOMRowCount(Element elem) /*-{
-    return elem.rows.length;
-  }-*/;
+  protected int getDOMRowCount(Element elem) {
+    return impl.getDOMRowCount(elem);
+  }
 
   /**
    * Determines the TD associated with the specified event.

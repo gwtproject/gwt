@@ -34,6 +34,24 @@
       "revId": "fad28a47deb28c91356984306d020f006d683d37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_d67022a5",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-05T23:37:32Z",
+      "side": 1,
+      "message": "\"existing code should work as before\" …for now!\nBut how about Chromium and WebKit when they\u0027ll add support for the \u0027wheel\u0027 event?",
+      "parentUuid": "1d9cfd82_36a98ec7",
+      "revId": "fad28a47deb28c91356984306d020f006d683d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

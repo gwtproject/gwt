@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d6fb93b_870e487d",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-05T23:22:36Z",
+      "side": 1,
+      "message": "According to the MDN, IE9 doesn\u0027t support onwheel (it only supports the \u0027wheel\u0027 event via addEventListener).\n\nAlso, wouldn\u0027t registering both elem.onwheel and elem.onmousewheel lead to firing the MouseWheelEvent twice when both are supported? (according to MDN, no browser supports both *yet*, but in Mozilla, this code would register both onwheel and DOMMouseScroll, so the issue remains; that wasn\u0027t the case in the first patch)",
+      "revId": "fad28a47deb28c91356984306d020f006d683d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

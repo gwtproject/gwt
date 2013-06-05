@@ -36,9 +36,10 @@ public class ButtonTest extends GWTTestCase {
     return "com.google.gwt.user.User";
   }
 
-  private static class H implements ClickHandler {
-    boolean clicked;
-    EventTarget target;
+  // protected because it is used in FileUploadTest
+  protected static class H implements ClickHandler {
+    protected boolean clicked;
+    protected EventTarget target;
 
     public void onClick(ClickEvent event) {
       target = event.getNativeEvent().getEventTarget();
@@ -110,20 +111,20 @@ public class ButtonTest extends GWTTestCase {
   public void testSetSafeHtml() {
     Button button = new Button("hello");
     button.setHTML(SafeHtmlUtils.fromSafeConstant(html));
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 
   public void testSafeHtmlConstructor() {
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html));
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 
   public void testSafeHtmlWithHandler() {
     H handler = new H();
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html), handler);
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 }

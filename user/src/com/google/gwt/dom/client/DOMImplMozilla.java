@@ -71,7 +71,21 @@ class DOMImplMozilla extends DOMImplStandard {
   }
 
   @Override
-  public native void buttonClick(ButtonElement button) /*-{
+  public void buttonClick(ButtonElement button) {
+    if (isGecko19()) {
+      super.buttonClick(button);
+    } else {
+      buttonClickImpl(button);
+    }
+  }
+
+  /**
+   * This workaround is for browsers which don't set up the event
+   * target properly for synthesized clicks.
+   * It is here since gwt-1.6 or before.
+   * Probably we could get rid of it.
+   */
+  private native void buttonClickImpl(ButtonElement button) /*-{
     var doc = button.ownerDocument;
     if (doc != null) {
       var evt = doc.createEvent('MouseEvents');
@@ -178,7 +192,7 @@ class DOMImplMozilla extends DOMImplStandard {
   public int getScrollLeft(Element elem) {
     if (!isGecko19() && isRTL(elem)) {
       return super.getScrollLeft(elem)
-          - (elem.getScrollWidth() - elem.getClientWidth());
+      - (elem.getScrollWidth() - elem.getClientWidth());
     }
     return super.getScrollLeft(elem);
   }

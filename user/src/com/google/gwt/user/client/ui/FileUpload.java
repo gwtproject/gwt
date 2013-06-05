@@ -34,8 +34,21 @@ import com.google.gwt.user.client.Event;
  * <h3>Example</h3>
  * {@example com.google.gwt.examples.FormPanelExample}
  * </p>
+ * 
+ * <h3>CSS Style Rules</h3>
+ * <dl>
+ * <dt>.gwt-FileUpload {} </dt>
+ * 
+ * <h3>NOTICE about styling</h3>
+ * <p>
+ * The developer should be aware that most browsers do not allow to style
+ * many properties of the rendered input-file element because of security restrictions.<br/>
+ * You can style certain properties like position, visibility, opacity, etc. But size,
+ * color, backgrounds etc. will not work either using css or calling widget methods like setSize().
+ * </>
+ * </dl>
  */
-public class FileUpload extends Widget implements HasName, HasChangeHandlers, HasEnabled {
+public class FileUpload extends FocusWidget implements HasName, HasChangeHandlers {
   /**
    * Implementation class for {@link FileUpload}.
    */
@@ -166,30 +179,11 @@ public class FileUpload extends Widget implements HasName, HasChangeHandlers, Ha
     return getInputElement().getName();
   }
 
-  /**
-   * Gets whether this widget is enabled.
-   * 
-   * @return <code>true</code> if the widget is enabled
-   */
-  public boolean isEnabled() {
-    return !getElement().getPropertyBoolean("disabled");
-  }
-
   @Override
   public void onBrowserEvent(Event event) {
     if (impl.onBrowserEvent(event)) {
       super.onBrowserEvent(event);
     }
-  }
-
-  /**
-   * Sets whether this widget is enabled.
-   * 
-   * @param enabled <code>true</code> to enable the widget, <code>false</code>
-   *          to disable it
-   */
-  public void setEnabled(boolean enabled) {
-    getElement().setPropertyBoolean("disabled", !enabled);
   }
 
   public void setName(String name) {
@@ -198,5 +192,12 @@ public class FileUpload extends Widget implements HasName, HasChangeHandlers, Ha
 
   private InputElement getInputElement() {
     return getElement().cast();
+  }
+
+  /**
+   * Programmatic equivalent of the user clicking the button.
+   */
+  public void click() {
+    getInputElement().click();
   }
 }

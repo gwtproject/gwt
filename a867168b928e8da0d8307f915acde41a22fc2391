@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_1e445982",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-05T19:49:16Z",
+      "side": 0,
+      "message": "I think instead of deleting this check, we need to check that it\u0027s a version that this client knows how to decode.",
+      "revId": "a867168b928e8da0d8307f915acde41a22fc2391",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -52,6 +52,24 @@
       "revId": "fad28a47deb28c91356984306d020f006d683d37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_76883661",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-06-05T23:43:08Z",
+      "side": 1,
+      "message": "You mean, there could be problem with firing two events instead of one?\nMaybe there should be a check to test if browser supports standard wheel event?",
+      "parentUuid": "1d9cfd82_d67022a5",
+      "revId": "fad28a47deb28c91356984306d020f006d683d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

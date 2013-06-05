@@ -16,6 +16,24 @@
       "revId": "df9208f0024a75f10465ef755fdd14876138d1b8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_635bfe3a",
+        "filename": "user/test/com/google/gwt/user/client/ui/SuggestBoxTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-05T00:13:38Z",
+      "side": 1,
+      "message": "Done. (added a reference to the issue)",
+      "parentUuid": "1d9cfd82_6152b61e",
+      "revId": "df9208f0024a75f10465ef755fdd14876138d1b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

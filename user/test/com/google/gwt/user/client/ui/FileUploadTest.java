@@ -16,6 +16,7 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.ui.ButtonTest.H;
 
 /**
  * Tests for {@link FileUpload}.
@@ -34,5 +35,18 @@ public class FileUploadTest extends GWTTestCase {
     assertFalse(fileUpload.isEnabled());
     fileUpload.setEnabled(true);
     assertTrue(fileUpload.isEnabled());
+  }
+
+  public void testClick() {
+    FileUpload fileUpload = new FileUpload();
+    RootPanel.get().add(fileUpload);
+
+    H h = new H();
+    fileUpload.addClickHandler(h);
+
+    fileUpload.click();
+    assertTrue(h.clicked);
+
+    assertEquals(fileUpload.getElement(), h.target);
   }
 }

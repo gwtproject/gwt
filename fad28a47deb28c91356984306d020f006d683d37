@@ -16,6 +16,24 @@
       "revId": "fad28a47deb28c91356984306d020f006d683d37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_36a98ec7",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-06-05T23:35:58Z",
+      "side": 1,
+      "message": "I think it\u0027s ok for Firefox because on MDN it is said if wheel event is consumed then DOMMouseScroll would not be fired.\nAs for Microsoft, existing code should work as before",
+      "parentUuid": "7d6fb93b_870e487d",
+      "revId": "fad28a47deb28c91356984306d020f006d683d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

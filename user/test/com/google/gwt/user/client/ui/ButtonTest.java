@@ -110,20 +110,20 @@ public class ButtonTest extends GWTTestCase {
   public void testSetSafeHtml() {
     Button button = new Button("hello");
     button.setHTML(SafeHtmlUtils.fromSafeConstant(html));
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 
   public void testSafeHtmlConstructor() {
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html));
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 
   public void testSafeHtmlWithHandler() {
     H handler = new H();
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html), handler);
-    
+
     assertEquals(html, button.getHTML().toLowerCase());
   }
 }

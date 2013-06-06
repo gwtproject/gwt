@@ -25,8 +25,7 @@ import com.google.gwt.user.client.Element;
  * <img class='gallery' src='doc-files/HorizontalPanel.png'/>
  * </p>
  */
-public class HorizontalPanel extends CellPanel implements HasAlignment,
-    InsertPanel.ForIsWidget {
+public class HorizontalPanel extends CellPanel implements IsHorizontalPanel {
 
   private HorizontalAlignmentConstant horzAlign = ALIGN_DEFAULT;
   private Element tableRow;

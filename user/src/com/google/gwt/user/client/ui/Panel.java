@@ -24,7 +24,7 @@ import java.util.Iterator;
  * Abstract base class for all panels, which are widgets that can contain other
  * widgets.
  */
-public abstract class Panel extends Widget implements HasWidgets.ForIsWidget {
+public abstract class Panel extends Widget implements IsPanel {
 
   /**
    * Adds a child widget.
@@ -108,8 +108,14 @@ public abstract class Panel extends Widget implements HasWidgets.ForIsWidget {
    */
   public abstract boolean remove(Widget child);
 
+  @Override
   public boolean remove(IsWidget child) {
     return remove(asWidgetOrNull(child));
+  }
+
+  @Override
+  public Iterator<IsWidget2> iteratorIsWidgets() {
+    return new IsWidgetIteratorAdaptor(iterator());
   }
 
   /**

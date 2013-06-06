@@ -31,6 +31,13 @@ public interface HasWidgets extends Iterable<Widget> {
 
     boolean remove(IsWidget w);
   }
+  
+  /**
+   * Extends this interface for iteration over {@link IsWidget}s. /
+   */
+  interface ForIsWidget2 extends ForIsWidget {
+    Iterator<IsWidget> iteratorIsWidgets();
+  }
 
   /**
    * Adds a child widget.

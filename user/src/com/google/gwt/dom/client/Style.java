@@ -28,7 +28,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * @see Element#getStyle()
  */
-public class Style extends JavaScriptObject {
+public class Style extends JavaScriptObject implements IsStyle {
 
   /**
    * Interface to be implemented by enumerated CSS values.

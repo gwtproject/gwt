@@ -30,7 +30,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * <dd>the outer element</dd>
  * </dl>
  */
-public class ResetButton extends Button {
+public class ResetButton extends Button implements IsResetButton {
 
   /**
    * Creates a ResetButton widget that wraps an existing &lt;button&gt; element.

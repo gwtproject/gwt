@@ -21,7 +21,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 
@@ -35,7 +34,7 @@ import com.google.gwt.user.client.Event;
  * {@example com.google.gwt.examples.FormPanelExample}
  * </p>
  */
-public class FileUpload extends Widget implements HasName, HasChangeHandlers, HasEnabled {
+public class FileUpload extends Widget implements IsFileUpload {
   /**
    * Implementation class for {@link FileUpload}.
    */

@@ -28,9 +28,7 @@ import com.google.gwt.user.client.Event;
 /**
  * A simple panel that wraps its contents in a scrollable area.
  */
-@SuppressWarnings("deprecation")
-public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
-    RequiresResize, ProvidesResize, HasScrolling {
+public class ScrollPanel extends SimplePanel implements IsScrollPanel {
 
   private final Element containerElem;
   private final Element scrollableElem;
@@ -337,7 +335,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
 
   private native void ensureVisibleImpl(Element scroll, Element e) /*-{
     if (!e)
-      return; 
+      return;
 
     var item = e;
     var realOffset = 0;

@@ -124,7 +124,7 @@ import com.google.gwt.user.client.DOM;
  * 
  * Style names can be space or comma separated.
  */
-public abstract class UIObject implements HasVisibility {
+public abstract class UIObject implements IsUIObject {
 
   /**
    * Stores a regular expression object to extract float values from the
@@ -376,7 +376,7 @@ public abstract class UIObject implements HasVisibility {
     var oldPrimaryStyleLen = oldPrimaryStyle.length;
 
     classes[0] = newPrimaryStyle;
-    for (var i = 1, n = classes.length; i < n; i++) {
+    for ( var i = 1, n = classes.length; i < n; i++) {
       var name = classes[i];
       if (name.length > oldPrimaryStyleLen
           && name.charAt(oldPrimaryStyleLen) == '-'
@@ -499,6 +499,7 @@ public abstract class UIObject implements HasVisibility {
    * @see UIObject
    * @see #removeStyleName(String)
    */
+  @Override
   public void addStyleName(String style) {
     setStyleName(style, true);
   }
@@ -522,6 +523,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @param id the ID to set on the main element
    */
+  @Override
   public final void ensureDebugId(String id) {
     debugIdImpl.ensureDebugId(this, id);
   }
@@ -532,6 +534,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's absolute left position
    */
+  @Override
   public int getAbsoluteLeft() {
     return DOM.getAbsoluteLeft(getElement());
   }
@@ -542,6 +545,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's absolute top position
    */
+  @Override
   public int getAbsoluteTop() {
     return DOM.getAbsoluteTop(getElement());
   }
@@ -557,6 +561,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's browser element
    */
+  @Override
   public com.google.gwt.user.client.Element getElement() {
     assert (element != null) : MISSING_ELEMENT_ERROR;
     return (com.google.gwt.user.client.Element) element;
@@ -568,6 +573,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's offset height
    */
+  @Override
   public int getOffsetHeight() {
     return DOM.getElementPropertyInt(getElement(), "offsetHeight");
   }
@@ -578,6 +584,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's offset width
    */
+  @Override
   public int getOffsetWidth() {
     return DOM.getElementPropertyInt(getElement(), "offsetWidth");
   }
@@ -590,8 +597,29 @@ public abstract class UIObject implements HasVisibility {
    * @return the objects's space-separated style names
    * @see #getStylePrimaryName()
    */
+  @Override
   public String getStyleName() {
     return getStyleName(getStyleElement());
+  }
+
+  /**
+   * Gets the title associated with this object. The title is the 'tool-tip'
+   * displayed to users when they hover over the object.
+   * 
+   * @return the object's title
+   */
+  @Override
+  public String getTitle() {
+    return DOM.getElementProperty(getElement(), "title");
+  }
+
+  /**
+   * Checks if this object's styles includes contains specified class name.
+   * 
+   */
+  @Override
+  public boolean hasStyleName(String style) {
+    return getStyleElement().hasClassName(style);
   }
 
   /**
@@ -604,16 +632,6 @@ public abstract class UIObject implements HasVisibility {
    */
   public String getStylePrimaryName() {
     return getStylePrimaryName(getStyleElement());
-  }
-
-  /**
-   * Gets the title associated with this object. The title is the 'tool-tip'
-   * displayed to users when they hover over the object.
-   * 
-   * @return the object's title
-   */
-  public String getTitle() {
-    return DOM.getElementProperty(getElement(), "title");
   }
 
   @Override
@@ -642,6 +660,7 @@ public abstract class UIObject implements HasVisibility {
    * @see #addStyleName(String)
    * @see #setStyleName(String, boolean)
    */
+  @Override
   public void removeStyleName(String style) {
     setStyleName(style, false);
   }
@@ -652,6 +671,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @param height the object's new height, in CSS units (e.g. "10px", "1em")
    */
+  @Override
   public void setHeight(String height) {
     // This exists to deal with an inconsistency in IE's implementation where
     // it won't accept negative numbers in length measurements
@@ -666,6 +686,7 @@ public abstract class UIObject implements HasVisibility {
    * @param width the object's new width, in pixels
    * @param height the object's new height, in pixels
    */
+  @Override
   public void setPixelSize(int width, int height) {
     if (width >= 0) {
       setWidth(width + "px");
@@ -682,6 +703,7 @@ public abstract class UIObject implements HasVisibility {
    * @param width the object's new width, in CSS units (e.g. "10px", "1em")
    * @param height the object's new height, in CSS units (e.g. "10px", "1em")
    */
+  @Override
   public void setSize(String width, String height) {
     setWidth(width);
     setHeight(height);
@@ -730,6 +752,7 @@ public abstract class UIObject implements HasVisibility {
    * @param style the new style name
    * @see #setStylePrimaryName(String)
    */
+  @Override
   public void setStyleName(String style) {
     setStyleName(getStyleElement(), style);
   }
@@ -751,6 +774,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @param title the object's new title
    */
+  @Override
   public void setTitle(String title) {
     if (title == null || title.length() == 0) {
       DOM.removeElementAttribute(getElement(), "title");
@@ -770,6 +794,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @param width the object's new width, in CSS units (e.g. "10px", "1em")
    */
+  @Override
   public void setWidth(String width) {
     // This exists to deal with an inconsistency in IE's implementation where
     // it won't accept negative numbers in length measurements
@@ -954,8 +979,7 @@ public abstract class UIObject implements HasVisibility {
       // portion.
       var numberRegex = @com.google.gwt.user.client.ui.UIObject::numberRegex;
       if (!numberRegex) {
-        numberRegex = @com.google.gwt.user.client.ui.UIObject::numberRegex =
-          /^(\s*[+-]?((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?)(.*)$/;
+        numberRegex = @com.google.gwt.user.client.ui.UIObject::numberRegex = /^(\s*[+-]?((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?)(.*)$/;
       }
 
       // Extract the leading numeric portion of s

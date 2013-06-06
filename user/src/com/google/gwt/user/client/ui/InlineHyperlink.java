@@ -39,7 +39,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * <li>.gwt-InlineHyperlink { }</li>
  * </ul>
  */
-public class InlineHyperlink extends Hyperlink {
+public class InlineHyperlink extends Hyperlink implements IsInlineHyperlink {
 
   /**
    * Creates an empty hyperlink.

@@ -16,7 +16,6 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.safehtml.client.HasSafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
@@ -24,8 +23,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * {@link com.google.gwt.user.client.ui.CheckBox},
  * {@link com.google.gwt.user.client.ui.RadioButton}.
  */
-public abstract class ButtonBase extends FocusWidget 
-    implements HasHTML, HasSafeHtml {
+public abstract class ButtonBase extends FocusWidget implements IsButtonBase {
 
   /**
    * Creates a new ButtonBase that wraps the given browser element.

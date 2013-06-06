@@ -38,9 +38,6 @@ import com.google.gwt.event.dom.client.DragStartEvent;
 import com.google.gwt.event.dom.client.DragStartHandler;
 import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.event.dom.client.DropHandler;
-import com.google.gwt.event.dom.client.HasAllDragAndDropHandlers;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.DOM;
@@ -62,9 +59,7 @@ import java.util.NoSuchElementException;
  * <img class='gallery' src='doc-files/Table.png'/>
  * </p>
  */
-@SuppressWarnings("deprecation")
-public abstract class HTMLTable extends Panel implements SourcesTableEvents,
-    HasAllDragAndDropHandlers, HasClickHandlers, HasDoubleClickHandlers {
+public abstract class HTMLTable extends Panel implements IsHTMLTable {
 
   /**
    * Interface to access {@link HTMLTable}'s DOM.
@@ -852,6 +847,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @param clearInnerHTML should the cell's inner html be cleared?
    */
+  @Override
   public void clear(boolean clearInnerHTML) {
     for (int row = 0; row < getRowCount(); ++row) {
       for (int col = 0; col < getCellCount(row); ++col) {
@@ -870,6 +866,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @return true if a widget was removed
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public boolean clearCell(int row, int column) {
     Element td = getCellFormatter().getElement(row, column);
     return internalClearCell(td, true);
@@ -917,6 +914,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @return the cell padding, in pixels
    */
+  @Override
   public int getCellPadding() {
     return DOM.getElementPropertyInt(tableElem, "cellPadding");
   }
@@ -926,6 +924,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @return the cell spacing, in pixels
    */
+  @Override
   public int getCellSpacing() {
     return DOM.getElementPropertyInt(tableElem, "cellSpacing");
   }
@@ -947,6 +946,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @return the cell's HTML contents
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public String getHTML(int row, int column) {
     return DOM.getInnerHTML(cellFormatter.getElement(row, column));
   }
@@ -975,6 +975,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @return the cell's text contents
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public String getText(int row, int column) {
     checkCellBounds(row, column);
     Element e = cellFormatter.getElement(row, column);
@@ -990,6 +991,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    *         present
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public Widget getWidget(int row, int column) {
     checkCellBounds(row, column);
     return getWidgetImpl(row, column);
@@ -1002,6 +1004,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @param column the cell's column
    * @return <code>true</code> if the specified cell exists
    */
+  @Override
   public boolean isCellPresent(int row, int column) {
     if ((row >= getRowCount()) || (row < 0)) {
       return false;
@@ -1018,6 +1021,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @return the iterator
    */
+  @Override
   public Iterator<Widget> iterator() {
     return new Iterator<Widget>() {
       final ArrayList<Widget> widgetList = widgetMap.getObjectList();
@@ -1107,6 +1111,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @param width the width of the border, in pixels
    */
+  @Override
   public void setBorderWidth(int width) {
     DOM.setElementProperty(tableElem, "border", "" + width);
   }
@@ -1116,6 +1121,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @param padding the cell padding, in pixels
    */
+  @Override
   public void setCellPadding(int padding) {
     DOM.setElementPropertyInt(tableElem, "cellPadding", padding);
   }
@@ -1125,6 +1131,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @param spacing the cell spacing, in pixels
    */
+  @Override
   public void setCellSpacing(int spacing) {
     DOM.setElementPropertyInt(tableElem, "cellSpacing", spacing);
   }
@@ -1137,6 +1144,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @param html the cell's HTML contents
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void setHTML(int row, int column, String html) {
     prepareCell(row, column);
     Element td = cleanCell(row, column, html == null);
@@ -1153,6 +1161,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @param html the cell's safe html contents
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void setHTML(int row, int column, SafeHtml html) {
     setHTML(row, column, html.asString());
   }
@@ -1165,6 +1174,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * @param text the cell's text contents
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void setText(int row, int column, String text) {
     prepareCell(row, column);
     Element td;
@@ -1215,6 +1225,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @see #setWidget(int,int,Widget)
    */
+  @Override
   public void setWidget(int row, int column, IsWidget widget) {
     this.setWidget(row, column, asWidgetOrNull(widget));
   }

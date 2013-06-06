@@ -136,7 +136,7 @@ import com.google.gwt.user.client.Event;
  * &lt;/g:PushButton>
  * </pre>
  */
-public abstract class CustomButton extends ButtonBase {
+public abstract class CustomButton extends ButtonBase implements IsCustomButtom {
   /**
    * Represents a button's face. Each face is associated with its own style
    * modifier and, optionally, its own contents html, text, or image.

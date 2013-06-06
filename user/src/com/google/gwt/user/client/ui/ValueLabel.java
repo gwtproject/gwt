@@ -17,13 +17,11 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.text.shared.Parser;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.uibinder.client.UiConstructor;
-import com.google.gwt.user.client.TakesValue;
 
 import java.text.ParseException;
 
@@ -32,8 +30,7 @@ import java.text.ParseException;
  * 
  * @param <T> the value type.
  */
-public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
-    IsEditor<LeafValueEditor<T>> {
+public class ValueLabel<T> extends LabelBase<T> implements IsValueLabel<T> {
 
   /**
    * Creates a ValueLabel widget that wraps an existing &lt;span&gt; element.
@@ -119,6 +116,7 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
     this.renderer = renderer;
   }
 
+  @Override
   public LeafValueEditor<T> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -126,10 +124,12 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
     return editor;
   }
 
+  @Override
   public T getValue() {
     return value;
   }
 
+  @Override
   public void setValue(T value) {
     this.value = value;
     directionalTextHelper.setTextOrHtml(renderer.render(value), false);

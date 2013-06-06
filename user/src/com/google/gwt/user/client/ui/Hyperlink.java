@@ -18,11 +18,9 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -71,8 +69,7 @@ import com.google.gwt.user.client.ui.impl.HyperlinkImpl;
  * @see Anchor
  */
 @SuppressWarnings("deprecation")
-public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
-    HasClickHandlers, HasDirectionEstimator, HasDirectionalSafeHtml {
+public class Hyperlink extends Widget implements IsHyperlink {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
       DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

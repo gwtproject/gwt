@@ -40,8 +40,7 @@ import com.google.gwt.layout.client.Layout.Layer;
  * cleared.
  * </p>
  */
-public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
-    RequiresResize, ProvidesResize, InsertPanel.ForIsWidget, AcceptsOneWidget {
+public class DeckLayoutPanel extends ComplexPanel implements IsDeckLayoutPanel {
 
   /**
    * {@link LayoutCommand} used by this widget.
@@ -123,6 +122,7 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    * 
    * @return the duration in milliseconds
    */
+  @Override
   public int getAnimationDuration() {
     return animationDuration;
   }
@@ -134,6 +134,11 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    */
   public Widget getVisibleWidget() {
     return visibleWidget;
+  }
+
+  @Override
+  public Widget getVisibleIsWidget() {
+    return getVisibleWidget();
   }
 
   /**
@@ -194,12 +199,18 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
     animate(0);
   }
 
+  @Override
+  public void insert(IsWidget widget, IsWidget before) {
+    insert(widget.asWidget(), before.asWidget());
+  }
+
   /**
    * Check whether or not transitions slide in vertically or horizontally.
    * Defaults to horizontally.
    * 
    * @return true for vertical transitions, false for horizontal
    */
+  @Override
   public boolean isAnimationVertical() {
     return isAnimationVertical;
   }
@@ -239,6 +250,7 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    * 
    * @param duration the duration in milliseconds.
    */
+  @Override
   public void setAnimationDuration(int duration) {
     this.animationDuration = duration;
   }
@@ -248,6 +260,7 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    * 
    * @param isVertical true for vertical transitions, false for horizontal
    */
+  @Override
   public void setAnimationVertical(boolean isVertical) {
     this.isAnimationVertical = isVertical;
   }
@@ -282,6 +295,7 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
    * 
    * @param index the index of the widget to be shown
    */
+  @Override
   public void showWidget(int index) {
     checkIndexBoundsForAccess(index);
     showWidget(getWidget(index));
@@ -301,6 +315,11 @@ public class DeckLayoutPanel extends ComplexPanel implements AnimatedLayout,
     assertIsChild(widget);
     visibleWidget = widget;
     animate((widget == null) ? 0 : animationDuration);
+  }
+
+  @Override
+  public void showWidget(IsWidget widget) {
+    showWidget(widget.asWidget());
   }
 
   @Override

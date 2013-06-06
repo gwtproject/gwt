@@ -19,7 +19,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 
 /**
  * Abstract base class for all text display widgets.
@@ -28,8 +27,7 @@ import com.google.gwt.i18n.shared.HasDirectionEstimator;
  * 
  * @param <T> the value type
  */
-public class LabelBase<T> extends Widget implements HasWordWrap,
-    HasDirectionEstimator, HasAutoHorizontalAlignment {
+public class LabelBase<T> extends Widget implements IsLabelBase<T> {
 
   /**
    * The widget's DirectionalTextHelper object.

@@ -49,14 +49,6 @@ import com.google.gwt.event.dom.client.GestureEndEvent;
 import com.google.gwt.event.dom.client.GestureEndHandler;
 import com.google.gwt.event.dom.client.GestureStartEvent;
 import com.google.gwt.event.dom.client.GestureStartHandler;
-import com.google.gwt.event.dom.client.HasAllDragAndDropHandlers;
-import com.google.gwt.event.dom.client.HasAllGestureHandlers;
-import com.google.gwt.event.dom.client.HasAllMouseHandlers;
-import com.google.gwt.event.dom.client.HasAllTouchHandlers;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
-import com.google.gwt.event.dom.client.HasErrorHandlers;
-import com.google.gwt.event.dom.client.HasLoadHandlers;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.dom.client.MouseDownEvent;
@@ -126,9 +118,7 @@ import java.util.HashMap;
  * </p>
  */
 @SuppressWarnings("deprecation")
-public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers, HasErrorHandlers,
-    SourcesClickEvents, HasClickHandlers, HasDoubleClickHandlers, HasAllDragAndDropHandlers,
-    HasAllGestureHandlers, HasAllMouseHandlers, HasAllTouchHandlers, SourcesMouseEvents {
+public class Image extends Widget implements IsImage {
 
   /**
    * The attribute that is set when an image fires a native load or error event

@@ -81,8 +81,7 @@ import com.google.gwt.layout.client.Layout.Layer;
  * &lt;/g:DockLayoutPanel>
  * </pre>
  */
-public class DockLayoutPanel extends ComplexPanel implements AnimatedLayout,
-    RequiresResize, ProvidesResize {
+public class DockLayoutPanel extends ComplexPanel implements IsDockLayoutPanel {
 
   /**
    * Used in {@link DockLayoutPanel#addEast(Widget, double)} et al to specify
@@ -609,5 +608,45 @@ public class DockLayoutPanel extends ComplexPanel implements AnimatedLayout,
 
     filledWidth = left + right;
     filledHeight = top + bottom;
+  }
+
+  @Override
+  public void addLineEnd(IsWidget widget, double size) {
+    addLineEnd(widget.asWidget(), size);
+  }
+
+  @Override
+  public void addLineStart(IsWidget widget, double size) {
+    addLineStart(widget.asWidget(), size);
+  }
+
+  @Override
+  public void insertEast(IsWidget widget, double size, IsWidget before) {
+    insertEast(widget.asWidget(), size, before.asWidget());
+  }
+
+  @Override
+  public void insertLineEnd(IsWidget widget, double size, IsWidget before) {
+    insertLineEnd(widget.asWidget(), size, before.asWidget());
+  }
+
+  @Override
+  public void insertLineStart(IsWidget widget, double size, IsWidget before) {
+    insertLineStart(widget.asWidget(), size, before.asWidget());
+  }
+
+  @Override
+  public void insertNorth(IsWidget widget, double size, IsWidget before) {
+    insertNorth(widget.asWidget(), size, before.asWidget());
+  }
+
+  @Override
+  public void insertSouth(IsWidget widget, double size, IsWidget before) {
+    insertSouth(widget.asWidget(), size, before.asWidget());
+  }
+
+  @Override
+  public void insertWest(IsWidget widget, double size, IsWidget before) {
+    insertWest(widget.asWidget(), size, before.asWidget());
   }
 }

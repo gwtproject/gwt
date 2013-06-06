@@ -44,14 +44,6 @@ import com.google.gwt.event.dom.client.GestureEndEvent;
 import com.google.gwt.event.dom.client.GestureEndHandler;
 import com.google.gwt.event.dom.client.GestureStartEvent;
 import com.google.gwt.event.dom.client.GestureStartHandler;
-import com.google.gwt.event.dom.client.HasAllDragAndDropHandlers;
-import com.google.gwt.event.dom.client.HasAllFocusHandlers;
-import com.google.gwt.event.dom.client.HasAllGestureHandlers;
-import com.google.gwt.event.dom.client.HasAllKeyHandlers;
-import com.google.gwt.event.dom.client.HasAllMouseHandlers;
-import com.google.gwt.event.dom.client.HasAllTouchHandlers;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -85,12 +77,7 @@ import com.google.gwt.user.client.ui.impl.FocusImpl;
 /**
  * Abstract base class for most widgets that can receive keyboard focus.
  */
-@SuppressWarnings("deprecation")
-public abstract class FocusWidget extends Widget implements SourcesClickEvents,
-    HasClickHandlers, HasDoubleClickHandlers, HasFocus, HasEnabled,
-    HasAllDragAndDropHandlers, HasAllFocusHandlers, HasAllGestureHandlers,
-    HasAllKeyHandlers, HasAllMouseHandlers, HasAllTouchHandlers,
-    SourcesMouseEvents {
+public abstract class FocusWidget extends Widget implements IsFocusWidget {
 
   private static final FocusImpl impl = FocusImpl.getFocusImplForWidget();
 

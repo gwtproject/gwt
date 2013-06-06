@@ -39,7 +39,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * {@example com.google.gwt.examples.ButtonExample}
  * </p>
  */
-public class Button extends ButtonBase {
+public class Button extends ButtonBase implements IsButton {
 
   /**
    * Creates a Button widget that wraps an existing &lt;button&gt; element.
@@ -138,6 +138,7 @@ public class Button extends ButtonBase {
   /**
    * Programmatic equivalent of the user clicking the button.
    */
+  @Override
   public void click() {
     getButtonElement().click();
   }

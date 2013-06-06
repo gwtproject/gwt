@@ -28,7 +28,7 @@ import com.google.gwt.dom.client.InputElement;
  * <li>.gwt-SimpleRadioButton-disabled { Applied when radio button is disabled }</li>
  * </ul>
  */
-public class SimpleRadioButton extends SimpleCheckBox {
+public class SimpleRadioButton extends SimpleCheckBox implements IsSimpleRadioButton {
 
   /**
    * Creates a SimpleRadioButton widget that wraps an existing &lt;input

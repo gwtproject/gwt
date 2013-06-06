@@ -24,7 +24,6 @@ import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.Visibility;
-import com.google.gwt.event.logical.shared.HasResizeHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -41,8 +40,7 @@ import com.google.gwt.user.client.ui.ResizeLayoutPanel.Impl.Delegate;
  * {@link RequiresResize}. Use this to embed layout panels in any location
  * within your application.
  */
-public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
-    HasResizeHandlers {
+public class ResizeLayoutPanel extends SimplePanel implements IsResizeLayoutPanel {
 
   /**
    * Implementation of resize event.

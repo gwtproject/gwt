@@ -21,7 +21,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 /**
  * All HTML element interfaces derive from this class.
  */
-public class Element extends Node {
+public class Element extends Node implements IsElement {
 
   /**
    * Constant returned from {@link #getDraggable()}.
@@ -88,6 +88,7 @@ public class Element extends Node {
    * @return <code>true</code> if this element did not already have the specified class name
    * @see #setClassName(String)
    */
+  @Override
   public final boolean addClassName(String className) {
     className = trimClassName(className);
 
@@ -110,6 +111,7 @@ public class Element extends Node {
   /**
    * Removes keyboard focus from this element.
    */
+  @Override
   public final native void blur() /*-{
     this.blur();
   }-*/;
@@ -134,6 +136,7 @@ public class Element extends Node {
   /**
    * Gives keyboard focus to this element.
    */
+  @Override
   public final native void focus() /*-{
     this.focus();
   }-*/;
@@ -142,6 +145,7 @@ public class Element extends Node {
    * Gets an element's absolute bottom coordinate in the document's coordinate
    * system.
    */
+  @Override
   public final int getAbsoluteBottom() {
     return getAbsoluteTop() + getOffsetHeight();
   }
@@ -150,6 +154,7 @@ public class Element extends Node {
    * Gets an element's absolute left coordinate in the document's coordinate
    * system.
    */
+  @Override
   public final int getAbsoluteLeft() {
     return DOMImpl.impl.getAbsoluteLeft(this);
   }
@@ -158,6 +163,7 @@ public class Element extends Node {
    * Gets an element's absolute right coordinate in the document's coordinate
    * system.
    */
+  @Override
   public final int getAbsoluteRight() {
     return getAbsoluteLeft() + getOffsetWidth();
   }
@@ -166,6 +172,7 @@ public class Element extends Node {
    * Gets an element's absolute top coordinate in the document's coordinate
    * system.
    */
+  @Override
   public final int getAbsoluteTop() {
     return DOMImpl.impl.getAbsoluteTop(this);
   }
@@ -180,6 +187,7 @@ public class Element extends Node {
    * @return The Attr value as a string, or the empty string if that attribute
    *         does not have a specified or default value
    */
+  @Override
   public final String getAttribute(String name) {
     return DOMImpl.impl.getAttribute(this, name);
   }
@@ -192,6 +200,7 @@ public class Element extends Node {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
    *      HTML Specification</a>
    */
+  @Override
   public final native String getClassName() /*-{
      return this.className;
    }-*/;
@@ -202,6 +211,7 @@ public class Element extends Node {
    * 
    * @return the element's client height
    */
+  @Override
   public final native int getClientHeight() /*-{
     return this.clientHeight;
   }-*/;
@@ -212,6 +222,7 @@ public class Element extends Node {
    * 
    * @return the element's client width
    */
+  @Override
   public final native int getClientWidth() /*-{
     return this.clientWidth;
   }-*/;
@@ -220,6 +231,7 @@ public class Element extends Node {
    * Specifies the base direction of directionally neutral text and the
    * directionality of tables.
    */
+  @Override
   public final native String getDir() /*-{
      return this.dir;
    }-*/;
@@ -230,6 +242,7 @@ public class Element extends Node {
    * @return one of {@link #DRAGGABLE_AUTO}, {@link #DRAGGABLE_FALSE}, or
    *         {@link #DRAGGABLE_TRUE}
    */
+  @Override
   public final native String getDraggable() /*-{
     return this.draggable || null;
   }-*/;
@@ -251,6 +264,7 @@ public class Element extends Node {
    * The first child of element this element. If there is no such element, this
    * returns null.
    */
+  @Override
   public final Element getFirstChildElement() {
     return DOMImpl.impl.getFirstChildElement(this);
   }
@@ -262,6 +276,7 @@ public class Element extends Node {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
    *      HTML Specification</a>
    */
+  @Override
   public final native String getId() /*-{
      return this.id;
    }-*/;
@@ -269,6 +284,7 @@ public class Element extends Node {
   /**
    * All of the markup and content within a given element.
    */
+  @Override
   public final String getInnerHTML() {
     return DOMImpl.impl.getInnerHTML(this);
   }
@@ -276,6 +292,7 @@ public class Element extends Node {
   /**
    * The text between the start and end tags of the object.
    */
+  @Override
   public final String getInnerText() {
     return DOMImpl.impl.getInnerText(this);
   }
@@ -283,6 +300,7 @@ public class Element extends Node {
   /**
    * Language code defined in RFC 1766.
    */
+  @Override
   public final native String getLang() /*-{
      return this.lang;
    }-*/;
@@ -291,6 +309,7 @@ public class Element extends Node {
    * The element immediately following this element. If there is no such
    * element, this returns null.
    */
+  @Override
   public final Element getNextSiblingElement() {
     return DOMImpl.impl.getNextSiblingElement(this);
   }
@@ -298,6 +317,7 @@ public class Element extends Node {
   /**
    * The height of an element relative to the layout.
    */
+  @Override
   public final native int getOffsetHeight() /*-{
      return this.offsetHeight || 0;
    }-*/;
@@ -306,6 +326,7 @@ public class Element extends Node {
    * The number of pixels that the upper left corner of the current element is
    * offset to the left within the offsetParent node.
    */
+  @Override
   public final native int getOffsetLeft() /*-{
      return this.offsetLeft || 0;
    }-*/;
@@ -314,6 +335,7 @@ public class Element extends Node {
    * Returns a reference to the object which is the closest (nearest in the
    * containment hierarchy) positioned containing element.
    */
+  @Override
   public final native Element getOffsetParent() /*-{
      return this.offsetParent;
    }-*/;
@@ -322,6 +344,7 @@ public class Element extends Node {
    * The number of pixels that the upper top corner of the current element is
    * offset to the top within the offsetParent node.
    */
+  @Override
   public final native int getOffsetTop() /*-{
      return this.offsetTop || 0;
    }-*/;
@@ -329,6 +352,7 @@ public class Element extends Node {
   /**
    * The width of an element relative to the layout.
    */
+  @Override
   public final native int getOffsetWidth() /*-{
      return this.offsetWidth || 0;
    }-*/;
@@ -337,6 +361,7 @@ public class Element extends Node {
    * The element immediately preceeding this element. If there is no such
    * element, this returns null.
    */
+  @Override
   public final Element getPreviousSiblingElement() {
     return DOMImpl.impl.getPreviousSiblingElement(this);
   }
@@ -347,6 +372,7 @@ public class Element extends Node {
    * @param name the name of the property to be retrieved
    * @return the property value
    */
+  @Override
   public final native boolean getPropertyBoolean(String name) /*-{
      return !!this[name];
    }-*/;
@@ -357,6 +383,7 @@ public class Element extends Node {
    * @param name the name of the property to be retrieved
    * @return the property value
    */
+  @Override
   public final native double getPropertyDouble(String name) /*-{
      return parseFloat(this[name]) || 0.0;
    }-*/;
@@ -367,6 +394,7 @@ public class Element extends Node {
    * @param name the name of the property to be retrieved
    * @return the property value
    */
+  @Override
   public final native int getPropertyInt(String name) /*-{
      return parseInt(this[name]) || 0;
    }-*/;
@@ -387,6 +415,7 @@ public class Element extends Node {
    * @param name the name of the property to be retrieved
    * @return the property value
    */
+  @Override
   public final native Object getPropertyObject(String name) /*-{
     return this[name] || null;
   }-*/;
@@ -397,6 +426,7 @@ public class Element extends Node {
    * @param name the name of the property to be retrieved
    * @return the property value
    */
+  @Override
   public final native String getPropertyString(String name) /*-{
      return (this[name] == null) ? null : String(this[name]);
    }-*/;
@@ -404,6 +434,7 @@ public class Element extends Node {
   /**
    * The height of the scroll view of an element.
    */
+  @Override
   public final native int getScrollHeight() /*-{
      return this.scrollHeight || 0;
    }-*/;
@@ -416,6 +447,7 @@ public class Element extends Node {
    * the number of pixels scrolled from the right.
    * </p>
    */
+  @Override
   public final int getScrollLeft() {
     return DOMImpl.impl.getScrollLeft(this);
   }
@@ -423,6 +455,7 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled from the top.
    */
+  @Override
   public final native int getScrollTop() /*-{
      return this.scrollTop || 0;
    }-*/;
@@ -430,6 +463,7 @@ public class Element extends Node {
   /**
    * The width of the scroll view of an element.
    */
+  @Override
   public final native int getScrollWidth() /*-{
      return this.scrollWidth || 0;
    }-*/;
@@ -442,6 +476,7 @@ public class Element extends Node {
    * 
    * @return the string representation of this element
    */
+  @Override
   public final String getString() {
     return DOMImpl.impl.toString(this);
   }
@@ -449,6 +484,7 @@ public class Element extends Node {
   /**
    * Gets this element's {@link Style} object.
    */
+  @Override
   public final native Style getStyle() /*-{
      return this.style;
    }-*/;
@@ -458,6 +494,7 @@ public class Element extends Node {
    * 
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-tabindex">W3C HTML Specification</a>
    */
+  @Override
   public final int getTabIndex() {
     return DOMImpl.impl.getTabIndex(this);
   }
@@ -468,6 +505,7 @@ public class Element extends Node {
    * 
    * @return the element's tag name
    */
+  @Override
   public final String getTagName() {
     return DOMImpl.impl.getTagName(this);
   }
@@ -475,6 +513,7 @@ public class Element extends Node {
   /**
    * The element's advisory title.
    */
+  @Override
   public final native String getTitle() /*-{
      return this.title;
    }-*/;
@@ -490,6 +529,7 @@ public class Element extends Node {
    * @param name the name of the attribute
    * @return <code>true</code> if this element has the specified attribute
    */
+  @Override
   public final boolean hasAttribute(String name) {
     return DOMImpl.impl.hasAttribute(this, name);
   }
@@ -500,6 +540,7 @@ public class Element extends Node {
    * @param className the class name to be added
    * @return <code>true</code> if this element has the specified class name
    */
+  @Override
   public final boolean hasClassName(String className) {
     className = trimClassName(className);
     int idx = indexOfName(getClassName(), className);
@@ -512,6 +553,7 @@ public class Element extends Node {
    * @param tagName the tag name, including namespace-prefix (if present)
    * @return <code>true</code> if the element has the given tag name
    */
+  @Override
   public final boolean hasTagName(String tagName) {
     assert tagName != null : "tagName must not be null";
     return tagName.equalsIgnoreCase(getTagName());
@@ -520,6 +562,7 @@ public class Element extends Node {
   /**
    * Removes an attribute by name.
    */
+  @Override
   public final native void removeAttribute(String name) /*-{
      this.removeAttribute(name);
    }-*/;
@@ -532,6 +575,7 @@ public class Element extends Node {
    * @return <code>true</code> if this element had the specified class name
    * @see #setClassName(String)
    */
+  @Override
   public final boolean removeClassName(String className) {
     className = trimClassName(className);
 
@@ -600,6 +644,7 @@ public class Element extends Node {
    * @param oldClassName the class name to be replaced
    * @param newClassName the class name to replace it
    */
+  @Override
   public final void replaceClassName(String oldClassName, String newClassName) {
     removeClassName(oldClassName);
     addClassName(newClassName);
@@ -615,6 +660,7 @@ public class Element extends Node {
    * the minimum amount necessary.
    * </p>
    */
+  @Override
   public final void scrollIntoView() {
     DOMImpl.impl.scrollIntoView(this);
   }
@@ -626,6 +672,7 @@ public class Element extends Node {
    * @param name The name of the attribute to create or alter
    * @param value Value to set in string form
    */
+  @Override
   public final native void setAttribute(String name, String value) /*-{
      this.setAttribute(name, value);
    }-*/;
@@ -638,6 +685,7 @@ public class Element extends Node {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
    *      HTML Specification</a>
    */
+  @Override
   public final native void setClassName(String className) /*-{
      this.className = className;
    }-*/;
@@ -646,6 +694,7 @@ public class Element extends Node {
    * Specifies the base direction of directionally neutral text and the
    * directionality of tables.
    */
+  @Override
   public final native void setDir(String dir) /*-{
      this.dir = dir;
    }-*/;
@@ -656,6 +705,7 @@ public class Element extends Node {
    * 
    * @param draggable a String constants
    */
+  @Override
   public final void setDraggable(String draggable) {
     DOMImpl.impl.setDraggable(this, draggable);
   }
@@ -667,6 +717,7 @@ public class Element extends Node {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
    *      HTML Specification</a>
    */
+  @Override
   public final native void setId(String id) /*-{
      this.id = id;
    }-*/;
@@ -674,6 +725,7 @@ public class Element extends Node {
   /**
    * All of the markup and content within a given element.
    */
+  @Override
   public final native void setInnerHTML(String html) /*-{
      this.innerHTML = html || '';
    }-*/;
@@ -681,6 +733,7 @@ public class Element extends Node {
   /**
    * All of the markup and content within a given element.
    */
+  @Override
   public final void setInnerSafeHtml(SafeHtml html) {
     setInnerHTML(html.asString());
   }
@@ -688,6 +741,7 @@ public class Element extends Node {
   /**
    * The text between the start and end tags of the object.
    */
+  @Override
   public final void setInnerText(String text) {
     DOMImpl.impl.setInnerText(this, text);
   }
@@ -695,6 +749,7 @@ public class Element extends Node {
   /**
    * Language code defined in RFC 1766.
    */
+  @Override
   public final native void setLang(String lang) /*-{
      this.lang = lang;
    }-*/;
@@ -705,6 +760,7 @@ public class Element extends Node {
    * @param name the name of the property to be set
    * @param value the new property value
    */
+  @Override
   public final native void setPropertyBoolean(String name, boolean value) /*-{
      this[name] = value;
    }-*/;
@@ -715,6 +771,7 @@ public class Element extends Node {
    * @param name the name of the property to be set
    * @param value the new property value
    */
+  @Override
   public final native void setPropertyDouble(String name, double value) /*-{
      this[name] = value;
    }-*/;
@@ -725,6 +782,7 @@ public class Element extends Node {
    * @param name the name of the property to be set
    * @param value the new property value
    */
+  @Override
   public final native void setPropertyInt(String name, int value) /*-{
      this[name] = value;
    }-*/;
@@ -745,6 +803,7 @@ public class Element extends Node {
    * @param name the name of the property to be set
    * @param value the new property value
    */
+  @Override
   public final native void setPropertyObject(String name, Object value) /*-{
     this[name] = value;
   }-*/;
@@ -755,6 +814,7 @@ public class Element extends Node {
    * @param name the name of the property to be set
    * @param value the new property value
    */
+  @Override
   public final native void setPropertyString(String name, String value) /*-{
      this[name] = value;
    }-*/;
@@ -762,6 +822,7 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled to the left.
    */
+  @Override
   public final void setScrollLeft(int scrollLeft) {
     DOMImpl.impl.setScrollLeft(this, scrollLeft);
   }
@@ -769,6 +830,7 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled to the top.
    */
+  @Override
   public final native void setScrollTop(int scrollTop) /*-{
      this.scrollTop = scrollTop;
    }-*/;
@@ -790,4 +852,20 @@ public class Element extends Node {
      // on some browsers.
      this.title = title || '';
    }-*/;
+
+  @Override
+  public final void appendChild(IsElement element) {
+    super.appendChild(element.asElement());
+  }
+  
+  // Needed to disambiguate appendChild(IsElement) and appendChild(Node)
+  public final void appendChild(Element element) {
+    super.appendChild(element.asElement());
+  }
+
+  @Override
+  public final Element asElement() {
+    return this;
+  }
+
 }

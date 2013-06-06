@@ -70,6 +70,24 @@
       "revId": "fad28a47deb28c91356984306d020f006d683d37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d6fb93b_c7084072",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-06T00:07:25Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I mean; let\u0027s try to be future-proof.\n\nBTW, a DOMMouseScroll will be fired in addition to a wheel event *unless* the wheel event is consumed using preventDefault(), so we should listen to either one of onwheel or DOMMouseScroll but not both.",
+      "parentUuid": "1d9cfd82_76883661",
+      "revId": "fad28a47deb28c91356984306d020f006d683d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

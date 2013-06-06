@@ -44,7 +44,7 @@ import java.util.Date;
  * <dt>timezoneOffset</dt><dd>the time zone offset in minutes.</dd>
  * </dl>
  */
-public class DateLabel extends ValueLabel<Date> {
+public class DateLabel extends ValueLabel<Date> implements IsDateLabel {
 
   public DateLabel() {
     super(new DateTimeFormatRenderer());

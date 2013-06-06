@@ -21,7 +21,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 /**
  * All HTML element interfaces derive from this class.
  */
-public class Element extends Node {
+public class Element extends Node implements IsElement {
 
   /**
    * Constant returned from {@link #getDraggable()}.
@@ -790,4 +790,50 @@ public class Element extends Node {
      // on some browsers.
      this.title = title || '';
    }-*/;
+
+  @Override
+  public final void appendChild(IsElement element) {
+    super.appendChild(element.asElement());
+  }
+  
+  // Needed to disambiguate appendChild(IsElement) and appendChild(Node)
+  public final void appendChild(Element element) {
+    super.appendChild(element.asElement());
+  }
+
+  @Override
+  public final Element asElement() {
+    return this;
+  }
+
+  @Override
+  public final void addStyleName(String styleName) {
+    addClassName(styleName);
+  }
+
+  @Override
+  public final boolean hasStyleName(String styleName) {
+    return hasClassName(styleName);
+  }
+
+  @Override
+  public final void removeStyleName(String styleName) {
+    removeClassName(styleName);
+  }
+
+  @Override
+  public final void setStyleName(String styleName) {
+    setClassName(styleName);
+  }
+
+  @Override
+  public final String getStyleName() {
+    return getClassName();
+  }
+
+  @Override
+  public final IsStyle getIsStyle() {
+    return getStyle();
+  }
+
 }

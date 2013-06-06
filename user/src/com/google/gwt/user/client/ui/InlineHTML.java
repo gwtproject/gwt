@@ -47,7 +47,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * <li>.gwt-InlineHTML { }</li>
  * </ul>
  */
-public class InlineHTML extends HTML {
+public class InlineHTML extends HTML implements IsInlineHTML {
 
   /**
    * Creates an InlineHTML widget that wraps an existing &lt;div&gt; or

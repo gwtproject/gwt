@@ -32,6 +32,10 @@ public interface HasWidgets extends Iterable<Widget> {
     boolean remove(IsWidget w);
   }
 
+  interface ForExtendedIsWidget extends ForIsWidget {
+    Iterator<IsWidget.Extended> iteratorIsWidgets();
+  }
+
   /**
    * Adds a child widget.
    * 

@@ -23,7 +23,7 @@ import java.util.Iterator;
 /**
  * Abstract base class for panels that can contain multiple child widgets.
  */
-public abstract class ComplexPanel extends Panel implements IndexedPanel.ForIsWidget {
+public abstract class ComplexPanel extends Panel implements IsComplexPanel {
 
   private WidgetCollection children = new WidgetCollection(this);
 
@@ -32,26 +32,37 @@ public abstract class ComplexPanel extends Panel implements IndexedPanel.ForIsWi
    */
   private AttachDetachException.Command orphanCommand;
 
+  @Override
   public Widget getWidget(int index) {
     return getChildren().get(index);
   }
 
+  @Override
+  public IsWidget.Extended getIsWidget(int index) {
+    return getWidget(index);
+  }
+
+  @Override
   public int getWidgetCount() {
     return getChildren().size();
   }
 
+  @Override
   public int getWidgetIndex(Widget child) {
     return getChildren().indexOf(child);
   }
   
+  @Override
   public int getWidgetIndex(IsWidget child) {
     return getWidgetIndex(asWidgetOrNull(child));
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return getChildren().iterator();
   }
 
+  @Override
   public boolean remove(int index) {
     return remove(getWidget(index));
   }

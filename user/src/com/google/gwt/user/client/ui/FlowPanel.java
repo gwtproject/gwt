@@ -26,7 +26,7 @@ import com.google.gwt.user.client.DOM;
  * <img class='gallery' src='doc-files/FlowPanel.png'/>
  * </p>
  */
-public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
+public class FlowPanel extends ComplexPanel implements IsFlowPanel {
   /**
    * Creates an empty flow panel.
    */
@@ -58,6 +58,7 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
     }
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
@@ -70,6 +71,7 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
    * @throws IndexOutOfBoundsException if <code>beforeIndex</code> is out of
    *           range
    */
+  @Override
   public void insert(Widget w, int beforeIndex) {
     insert(w, getElement(), beforeIndex, true);
   }

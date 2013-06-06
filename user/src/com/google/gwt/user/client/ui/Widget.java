@@ -19,22 +19,19 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
-import com.google.gwt.event.logical.shared.HasAttachHandlers;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
 
 /**
  * The base class for the majority of user-interface objects. Widget adds
  * support for receiving events from the browser and being added directly to
  * {@link com.google.gwt.user.client.ui.Panel panels}.
  */
-public class Widget extends UIObject implements EventListener, HasAttachHandlers,
-    IsWidget {
+public class Widget extends UIObject implements IsWidget.Extended {
 
   /**
    * This convenience method makes a null-safe call to
@@ -45,6 +42,7 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
   public static Widget asWidgetOrNull(IsWidget w) {
     return w == null ? null : w.asWidget();
   }
+
   /**
    * A bit-map of the events that should be sunk when the widget is attached to
    * the DOM. (We delay the sinking of events to improve startup performance.)
@@ -94,6 +92,7 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
    * @param handler the handler
    * @return {@link HandlerRegistration} used to remove the handler
    */
+  @Override
   public final <H extends EventHandler> HandlerRegistration addDomHandler(
       final H handler, DomEvent.Type<H> type) {
     assert handler != null : "handler must not be null";
@@ -120,10 +119,12 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
     return ensureHandlers().addHandler(type, handler);
   }
 
+  @Override
   public Widget asWidget() {
     return this;
   }
 
+  @Override
   public void fireEvent(GwtEvent<?> event) {
     if (handlerManager != null) {
       handlerManager.fireEvent(event);
@@ -252,7 +253,7 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
       eventsToSink &= ~eventBitsToRemove;
     }
   }
-
+  
   /**
    * Creates the {@link HandlerManager} used by this Widget. You can override
    * this method to create a custom {@link HandlerManager}.

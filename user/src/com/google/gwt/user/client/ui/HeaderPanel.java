@@ -33,7 +33,7 @@ import java.util.Iterator;
  * area. The header and footer areas resize naturally. The content area is
  * allocated all of the remaining space between the header and footer area.
  */
-public class HeaderPanel extends Panel implements RequiresResize {
+public class HeaderPanel extends Panel implements IsHeaderPanel {
 
   /**
    * The widget provider for this panel.
@@ -136,6 +136,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
    * 
    * @return the content {@link Widget}
    */
+  @Override
   public Widget getContentWidget() {
     return content;
   }
@@ -145,7 +146,8 @@ public class HeaderPanel extends Panel implements RequiresResize {
    * 
    * @return the footer {@link Widget}
    */
-  public Widget getFooterWidget() {
+  @Override
+  public IsWidget getFooterWidget() {
     return footer;
   }
 
@@ -154,10 +156,12 @@ public class HeaderPanel extends Panel implements RequiresResize {
    * 
    * @return the header {@link Widget}
    */
+  @Override
   public Widget getHeaderWidget() {
     return header;
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return new FiniteWidgetIterator(new WidgetProviderImpl(), 3);
   }
@@ -224,6 +228,11 @@ public class HeaderPanel extends Panel implements RequiresResize {
     scheduledLayout();
   }
 
+  @Override
+  public void setContentWidget(IsWidget w) {
+    setContentWidget(w.asWidget());
+  }
+
   /**
    * Set the widget in the footer portion at the bottom of the panel.
    * 
@@ -238,6 +247,11 @@ public class HeaderPanel extends Panel implements RequiresResize {
     scheduledLayout();
   }
 
+  @Override
+  public void setFooterWidget(IsWidget w) {
+    setFooterWidget(w.asWidget());
+  }
+
   /**
    * Set the widget in the header portion at the top of the panel.
    * 
@@ -250,6 +264,11 @@ public class HeaderPanel extends Panel implements RequiresResize {
     // Logical attach.
     header = w;
     scheduledLayout();
+  }
+
+  @Override
+  public void setHeaderWidget(IsWidget w) {
+    setHeaderWidget(w.asWidget());
   }
 
   /**

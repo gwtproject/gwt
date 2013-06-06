@@ -23,6 +23,14 @@ package com.google.gwt.user.client.ui;
 public interface HasOneWidget extends AcceptsOneWidget {
 
   /**
+   * Extends HasOneWidget with methods for {@IsWidget.Extended}.
+   */
+  public interface ForExtendedIsWidget extends HasOneWidget {
+    /** @return the panel's child {@link IsWidget.Extended} widget. */
+    IsWidget.Extended getIsWidget();
+  }
+
+  /**
    * Gets the panel's child widget.
    * 
    * @return the child widget, or <code>null</code> if none is present

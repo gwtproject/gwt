@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_2604afcb",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-06T21:27:53Z",
+      "side": 1,
+      "message": "Before, this code would throw for any version !\u003d7 and with this patch, we are accepting down to version 5. That doesn\u0027t seem necessary since Version 7 has been the standard for a long time. So maybe we should increase MIN_VERSION to 7?",
+      "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_66b4e7e0",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RPC.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-06T21:27:53Z",
+      "side": 1,
+      "message": "Probably should check that it\u0027s between min version and max version and throw a SerializationException if it isn\u0027t.\n\nAlso, getInteger() can throw.",
+      "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_06bdebbd",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamWriter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-06T21:27:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure how much we should worry about server-side performance here, but here are some ideas:\n\n- Pattern.compile() should be moved to a constant.\n- We should have another method that skips scanning the string and call that where possible. For example, addToken(int) should skip the scan. There is also a path from writeLong that should probably skip it.\nIdeally we should move the string concatenation generating code so we don\u0027t need to scan to figure out what we already did.",
+      "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

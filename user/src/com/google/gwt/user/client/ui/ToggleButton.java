@@ -16,7 +16,6 @@
 
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -43,7 +42,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * <h3>Example</h3> {@example com.google.gwt.examples.ToggleButtonExample}
  * </p>
  */
-public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsEditor<LeafValueEditor<Boolean>> {
+public class ToggleButton extends CustomButton implements IsToggleButton {
   private static String STYLENAME_DEFAULT = "gwt-ToggleButton";
 
   private LeafValueEditor<Boolean> editor;
@@ -187,6 +186,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
     return addHandler(handler, ValueChangeEvent.getType());
   }
 
+  @Override
   public LeafValueEditor<Boolean> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -200,6 +200,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @return <code>true</code> if the button is pressed, false otherwise. Will
    *         not return null
    */
+  @Override
   public Boolean getValue() {
     return isDown();
   }
@@ -226,6 +227,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @param value true to press the button, false otherwise; null value implies
    *          false
    */
+  @Override
   public void setValue(Boolean value) {
     setValue(value, false);
   }
@@ -239,6 +241,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @param fireEvents If true, and value has changed, fire a
    *          {@link ValueChangeEvent}
    */
+  @Override
   public void setValue(Boolean value, boolean fireEvents) {
     if (value == null) {
       value = Boolean.FALSE;

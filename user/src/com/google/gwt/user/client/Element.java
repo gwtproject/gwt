@@ -32,4 +32,5 @@ public class Element extends com.google.gwt.dom.client.Element {
    */
   protected Element() {
   }
+
 }

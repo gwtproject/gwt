@@ -17,7 +17,6 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.ui.client.adapters.HasTextEditor;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,9 +28,9 @@ import com.google.gwt.event.dom.client.DragEndHandler;
 import com.google.gwt.event.dom.client.DragEnterEvent;
 import com.google.gwt.event.dom.client.DragEnterHandler;
 import com.google.gwt.event.dom.client.DragEvent;
+import com.google.gwt.event.dom.client.DragHandler;
 import com.google.gwt.event.dom.client.DragLeaveEvent;
 import com.google.gwt.event.dom.client.DragLeaveHandler;
-import com.google.gwt.event.dom.client.DragHandler;
 import com.google.gwt.event.dom.client.DragOverEvent;
 import com.google.gwt.event.dom.client.DragOverHandler;
 import com.google.gwt.event.dom.client.DragStartEvent;
@@ -44,12 +43,6 @@ import com.google.gwt.event.dom.client.GestureEndEvent;
 import com.google.gwt.event.dom.client.GestureEndHandler;
 import com.google.gwt.event.dom.client.GestureStartEvent;
 import com.google.gwt.event.dom.client.GestureStartHandler;
-import com.google.gwt.event.dom.client.HasAllDragAndDropHandlers;
-import com.google.gwt.event.dom.client.HasAllGestureHandlers;
-import com.google.gwt.event.dom.client.HasAllMouseHandlers;
-import com.google.gwt.event.dom.client.HasAllTouchHandlers;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
@@ -72,7 +65,6 @@ import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.BidiUtils;
-import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.shared.DirectionEstimator;
 
 /**
@@ -99,12 +91,7 @@ import com.google.gwt.i18n.shared.DirectionEstimator;
  * {@example com.google.gwt.examples.HTMLExample}
  * </p>
  */
-@SuppressWarnings("deprecation")
-public class Label extends LabelBase<String> implements HasDirectionalText,
-    HasDirection, HasClickHandlers, HasDoubleClickHandlers, SourcesClickEvents,
-    SourcesMouseEvents, HasAllDragAndDropHandlers, HasAllGestureHandlers,
-    HasAllMouseHandlers, HasAllTouchHandlers,
-    IsEditor<LeafValueEditor<String>> {
+public class Label extends LabelBase<String> implements IsLabel {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
       DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

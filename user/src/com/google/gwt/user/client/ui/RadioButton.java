@@ -56,7 +56,7 @@ import com.google.gwt.user.client.Event;
  * <h3>Example</h3> {@example com.google.gwt.examples.RadioButtonExample}
  * </p>
  */
-public class RadioButton extends CheckBox {
+public class RadioButton extends CheckBox implements IsRadioButton {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
     DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

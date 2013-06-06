@@ -15,8 +15,8 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
 /**
  * Base class for panels that contain only one widget.
  */
-public class SimplePanel extends Panel implements HasOneWidget {
+public class SimplePanel extends Panel implements IsSimplePanel {
 
   Widget widget;
 
@@ -74,10 +74,22 @@ public class SimplePanel extends Panel implements HasOneWidget {
    * 
    * @return the child widget, or <code>null</code> if none is present
    */
+  @Override
   public Widget getWidget() {
     return widget;
   }
 
+  /**
+   * Gets the panel's child widget.
+   * 
+   * @return the child widget, or <code>null</code> if none is present
+   */
+  @Override
+  public IsWidget.Extended getIsWidget() {
+    return widget;
+  }
+
+  @Override
   public Iterator<Widget> iterator() {
     // Return a simple iterator that enumerates the 0 or 1 elements in this
     // panel.
@@ -125,6 +137,7 @@ public class SimplePanel extends Panel implements HasOneWidget {
     return true;
   }
   
+  @Override
   public void setWidget(IsWidget w) {
     setWidget(asWidgetOrNull(w));
   }
@@ -134,6 +147,7 @@ public class SimplePanel extends Panel implements HasOneWidget {
    * 
    * @param w the panel's new widget, or <code>null</code> to clear the panel
    */
+  @Override
   public void setWidget(Widget w) {
     // Validate
     if (w == widget) {

@@ -55,8 +55,7 @@ import com.google.gwt.user.client.Element;
  * &lt;/g:AbsolutePanel>
  * </pre>
  */
-public class AbsolutePanel extends ComplexPanel implements
-    InsertPanel.ForIsWidget {
+public class AbsolutePanel extends ComplexPanel implements IsAbsolutePanel {
 
   /**
    * Changes a DOM element's positioning to static.
@@ -292,5 +291,25 @@ public class AbsolutePanel extends ComplexPanel implements
         // Stack trace provides context for the developer
         new IllegalStateException(className
             + " is missing CSS 'position:{relative,absolute,fixed}'"));
+  }
+
+  @Override
+  public int getWidgetLeft(IsWidget w) {
+    return getWidgetLeft(w.asWidget());
+  }
+
+  @Override
+  public int getWidgetTop(IsWidget w) {
+    return getWidgetTop(w.asWidget());
+  }
+
+  @Override
+  public void insert(IsWidget w, int left, int top, int beforeIndex) {
+    insert(w.asWidget(), left, top, beforeIndex);
+  }
+
+  @Override
+  public void setWidgetPosition(IsWidget w, int left, int top) {
+    setWidgetPosition(w.asWidget(), left, top);
   }
 }

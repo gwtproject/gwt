@@ -19,7 +19,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.WhiteSpace;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +28,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -67,9 +65,7 @@ import com.google.gwt.user.client.EventListener;
  * {@example com.google.gwt.examples.CheckBoxExample}
  * </p>
  */
-public class CheckBox extends ButtonBase implements HasName, HasValue<Boolean>,
-    HasWordWrap, HasDirectionalSafeHtml, HasDirectionEstimator,
-    IsEditor<LeafValueEditor<Boolean>> {
+public class CheckBox extends ButtonBase implements IsCheckBox {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
     DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

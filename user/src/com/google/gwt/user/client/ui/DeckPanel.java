@@ -31,8 +31,7 @@ import com.google.gwt.user.client.Element;
  * cleared.
  * </p>
  */
-public class DeckPanel extends ComplexPanel implements HasAnimation,
-    InsertPanel.ForIsWidget {
+public class DeckPanel extends ComplexPanel implements IsDeckPanel {
   /**
    * An {@link Animation} used to slide in the new content.
    */
@@ -270,10 +269,12 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
    * 
    * @return the visible widget's index, or -1 if there is no such widget
    */
+  @Override
   public int getVisibleWidget() {
     return getWidgetIndex(visibleWidget);
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
@@ -287,6 +288,7 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
     finishWidgetInitialization(container, w);
   }
 
+  @Override
   public boolean isAnimationEnabled() {
     return isAnimationEnabled;
   }
@@ -306,6 +308,7 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
     return removed;
   }
 
+  @Override
   public void setAnimationEnabled(boolean enable) {
     isAnimationEnabled = enable;
   }
@@ -316,6 +319,7 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
    * 
    * @param index the index of the widget to be shown
    */
+  @Override
   public void showWidget(int index) {
     checkIndexBoundsForAccess(index);
     Widget oldWidget = visibleWidget;

@@ -35,8 +35,7 @@ import com.google.gwt.text.shared.testing.PassthroughRenderer;
  * &lt;g:TextBox textAlignment='right'/&gt;
  * </pre>
  */
-public class TextBoxBase extends ValueBoxBase<String> implements
-    SourcesChangeEvents {
+public class TextBoxBase extends ValueBoxBase<String> implements IsTextBoxBase {
 
   /**
    * Legacy wrapper for {@link ValueBoxBase.TextAlignment}, soon to be deprecated.

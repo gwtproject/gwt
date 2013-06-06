@@ -44,7 +44,7 @@ import com.google.gwt.dom.client.TextAreaElement;
  * <h3>Example</h3> {@example com.google.gwt.examples.TextBoxExample}
  * </p>
  */
-public class TextArea extends TextBoxBase {
+public class TextArea extends TextBoxBase implements IsTextArea {
 
   /**
    * Creates a TextArea widget that wraps an existing &lt;textarea&gt;

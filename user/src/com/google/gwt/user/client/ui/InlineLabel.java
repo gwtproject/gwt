@@ -39,7 +39,7 @@ import com.google.gwt.i18n.shared.DirectionEstimator;
  * <li>.gwt-InlineLabel { }</li>
  * </ul>
  */
-public class InlineLabel extends Label {
+public class InlineLabel extends Label implements IsInlineLabel {
 
   /**
    * Creates a InlineLabel widget that wraps an existing &lt;div&gt; or

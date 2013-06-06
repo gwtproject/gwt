@@ -34,7 +34,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * <h3>Example</h3> {@example com.google.gwt.examples.PushButtonExample}
  * </p>
  */
-public class PushButton extends CustomButton {
+public class PushButton extends CustomButton implements IsPushButton {
 
   private static final String STYLENAME_DEFAULT = "gwt-PushButton";
 

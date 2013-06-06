@@ -22,6 +22,10 @@ package com.google.gwt.user.client.ui;
  */
 public interface HasOneWidget extends AcceptsOneWidget {
 
+  public interface ForIsWidget2 extends HasOneWidget {
+    IsWidget2 getIsWidget();
+  }
+
   /**
    * Gets the panel's child widget.
    * 

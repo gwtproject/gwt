@@ -71,8 +71,7 @@ import com.google.gwt.user.client.ui.impl.HyperlinkImpl;
  * @see Anchor
  */
 @SuppressWarnings("deprecation")
-public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
-    HasClickHandlers, HasDirectionEstimator, HasDirectionalSafeHtml {
+public class Hyperlink extends Widget implements IsHyperlink {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
       DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

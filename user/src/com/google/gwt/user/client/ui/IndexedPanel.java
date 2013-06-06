@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.client.ui;
 
+import java.util.Iterator;
+
 /**
  * Implemented by panels that impose an explicit ordering on their children.
  * 
@@ -27,6 +29,13 @@ public interface IndexedPanel {
    */
   interface ForIsWidget extends IndexedPanel {
     int getWidgetIndex(IsWidget child);
+  }
+  
+  /**
+   * Extends this interface with convenience methods to handle {@link IsWidget}.
+   */
+  interface ForIsWidget2 extends ForIsWidget {
+    Iterator<IsWidget> iteratorIsWidgets();
   }
 
   /**

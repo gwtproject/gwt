@@ -21,12 +21,10 @@ import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.i18n.shared.BidiFormatter;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
 
 /**
@@ -83,9 +81,7 @@ import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
  * in Unicode bidi formatting characters. They can use the getOptionText and/or
  * setOptionText methods for this purpose instead.</b>
  */
-@SuppressWarnings("deprecation")
-public class ListBox extends FocusWidget implements SourcesChangeEvents,
-    HasChangeHandlers, HasName, HasDirectionEstimator {
+public class ListBox extends FocusWidget implements IsListBox {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
     WordCountDirectionEstimator.get();

@@ -101,11 +101,7 @@ import java.util.List;
  * @see ValueBoxBase
  */
 @SuppressWarnings("deprecation")
-public class SuggestBox extends Composite implements HasText, HasFocus,
-    HasAnimation, HasEnabled, SourcesClickEvents, SourcesChangeEvents,
-    SourcesKeyboardEvents, FiresSuggestionEvents, HasAllKeyHandlers,
-    HasValue<String>, HasSelectionHandlers<Suggestion>,
-    IsEditor<LeafValueEditor<String>> {
+public class SuggestBox extends Composite implements IsSuggestBox {
 
   /**
    * The callback used when a user selects a {@link Suggestion}.

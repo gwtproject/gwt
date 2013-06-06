@@ -16,25 +16,24 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.IsElement;
+import com.google.gwt.dom.client.IsStyle;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
-import com.google.gwt.event.logical.shared.HasAttachHandlers;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
 
 /**
  * The base class for the majority of user-interface objects. Widget adds
  * support for receiving events from the browser and being added directly to
  * {@link com.google.gwt.user.client.ui.Panel panels}.
  */
-public class Widget extends UIObject implements EventListener, HasAttachHandlers,
-    IsWidget {
+public class Widget extends UIObject implements IsWidget2 {
 
   /**
    * This convenience method makes a null-safe call to
@@ -253,6 +252,16 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
     }
   }
 
+  @Override
+  public IsStyle getIsStyle() {
+    return getElement().getStyle();
+  }
+  
+  @Override
+  public IsElement getIsElement() {
+    return getElement();
+  }
+  
   /**
    * Creates the {@link HandlerManager} used by this Widget. You can override
    * this method to create a custom {@link HandlerManager}.

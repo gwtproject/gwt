@@ -20,9 +20,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.i18n.client.BidiUtils;
-import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeUri;
 
@@ -49,9 +47,7 @@ import com.google.gwt.safehtml.shared.SafeUri;
  * 
  * @see Hyperlink
  */
-public class Anchor extends FocusWidget implements HasHorizontalAlignment,
-    HasName, HasHTML, HasWordWrap, HasDirection,
-    HasDirectionEstimator, HasDirectionalSafeHtml {
+public class Anchor extends FocusWidget implements IsAnchor {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
       DirectionalTextHelper.DEFAULT_DIRECTION_ESTIMATOR;

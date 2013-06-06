@@ -30,6 +30,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.IsDatePicker;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import java.util.Date;
@@ -83,9 +84,7 @@ import java.util.Map;
  * {@example com.google.gwt.examples.DatePickerExample}
  * </p>
  */
-public class DatePicker extends Composite implements
-    HasHighlightHandlers<Date>, HasShowRangeHandlers<Date>, HasValue<Date>,
-    IsEditor<LeafValueEditor<Date>> {
+public class DatePicker extends Composite implements IsDatePicker {
 
   /**
    * Convenience class to group css style names.

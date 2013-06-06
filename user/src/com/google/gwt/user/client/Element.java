@@ -15,6 +15,9 @@
  */
 package com.google.gwt.user.client;
 
+import com.google.gwt.dom.client.IsElement;
+import com.google.gwt.dom.client.IsStyle;
+
 /**
  * An opaque handle to a native DOM Element. An <code>Element</code> cannot be
  * created directly. Instead, use the <code>Element</code> type when returning
@@ -32,4 +35,5 @@ public class Element extends com.google.gwt.dom.client.Element {
    */
   protected Element() {
   }
+  
 }

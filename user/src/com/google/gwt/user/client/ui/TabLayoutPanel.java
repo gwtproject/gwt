@@ -22,8 +22,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.BeforeSelectionEvent;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;
-import com.google.gwt.event.logical.shared.HasBeforeSelectionHandlers;
-import com.google.gwt.event.logical.shared.HasSelectionHandlers;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -94,9 +92,7 @@ import java.util.Iterator;
  * &lt;/g:TabLayoutPanel>
  * </pre>
  */
-public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
-    ProvidesResize, IndexedPanel.ForIsWidget, AnimatedLayout,
-    HasBeforeSelectionHandlers<Integer>, HasSelectionHandlers<Integer> {
+public class TabLayoutPanel extends ResizeComposite implements IsTabLayoutPanel {
 
   private class Tab extends SimplePanel {
     private Element inner;
@@ -386,6 +382,18 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     checkIndex(index);
     return tabs.get(index).getWidget();
   }
+  
+  /**
+   * Gets the widget in the tab at the given index.
+   * 
+   * Convenience overload to allow {@link IsWidget} to be used directly.
+   *
+   * @param index the index of the tab to be retrieved
+   * @return the tab's widget
+   */
+  public IsWidget getTabIsWidget(int index) {
+    return (IsWidget) getTabWidget(index);
+  }
 
   /**
    * Convenience overload to allow {@link IsWidget} to be used directly.
@@ -403,6 +411,18 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
   public Widget getTabWidget(Widget child) {
     checkChild(child);
     return getTabWidget(getWidgetIndex(child));
+  }
+
+  /**
+   * Gets the widget in the tab associated with the given child widget.
+   *
+   * Convenience overload to allow {@link IsWidget} to be used directly.
+   * 
+   * @param child the child whose tab is to be retrieved
+   * @return the tab's widget
+   */
+  public IsWidget getTabIsWidget(IsWidget child) {
+    return (IsWidget) getTabWidget(child.asWidget());
   }
 
   /**
@@ -576,6 +596,10 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     }
 
     return remove(index);
+  }
+    
+  public boolean remove(IsWidget w) {
+    return remove(w.asWidget());
   }
 
   /**

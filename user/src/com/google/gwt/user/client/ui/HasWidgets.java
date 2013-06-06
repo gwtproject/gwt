@@ -31,7 +31,7 @@ public interface HasWidgets extends Iterable<Widget> {
 
     boolean remove(IsWidget w);
   }
-
+  
   /**
    * Adds a child widget.
    * 

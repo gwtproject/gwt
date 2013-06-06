@@ -29,7 +29,6 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.impl.FormPanelImpl;
-import com.google.gwt.user.client.ui.impl.FormPanelImplHost;
 
 /**
  * A panel that wraps its contents in an HTML &lt;FORM&gt; element.
@@ -61,8 +60,7 @@ import com.google.gwt.user.client.ui.impl.FormPanelImplHost;
  * {@example com.google.gwt.examples.FormPanelExample}
  * </p>
  */
-@SuppressWarnings("deprecation")
-public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanelImplHost {
+public class FormPanel extends SimplePanel implements IsFormPanel {
   /**
    * Fired when a form has been submitted successfully.
    */
@@ -437,6 +435,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    * @param handler the handler
    * @return the handler registration used to remove the handler
    */
+  @Override
   public HandlerRegistration addSubmitHandler(SubmitHandler handler) {
     return addHandler(handler, SubmitEvent.getType());
   }
@@ -447,6 +446,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return the form's action
    */
+  @Override
   public String getAction() {
     return getFormElement().getAction();
   }
@@ -457,6 +457,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return the form's encoding
    */
+  @Override
   public String getEncoding() {
     return impl.getEncoding(getElement());
   }
@@ -467,6 +468,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return the form's method
    */
+  @Override
   public String getMethod() {
     return getFormElement().getMethod();
   }
@@ -478,6 +480,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return the form's target.
    */
+  @Override
   public String getTarget() {
     return getFormElement().getTarget();
   }
@@ -487,10 +490,12 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return true if the form is submitted, false if canceled
    */
+  @Override
   public boolean onFormSubmit() {
     return onFormSubmitImpl();
   }
 
+  @Override
   public void onFrameLoad() {
     onFrameLoadImpl();
   }
@@ -507,6 +512,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
   /**
    * Resets the form, clearing all fields.
    */
+  @Override
   public void reset() {
     impl.reset(getElement());
   }
@@ -517,6 +523,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @param url the form's action
    */
+  @Override
   public void setAction(String url) {
     getFormElement().setAction(url);
   }
@@ -527,6 +534,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @param url the form's action
    */
+  @Override
   public void setAction(SafeUri url) {
     getFormElement().setAction(url);
   }
@@ -537,6 +545,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @param encodingType the form's encoding
    */
+  @Override
   public void setEncoding(String encodingType) {
     impl.setEncoding(getElement(), encodingType);
   }
@@ -547,6 +556,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @param method the form's method
    */
+  @Override
   public void setMethod(String method) {
     getFormElement().setMethod(method);
   }
@@ -560,6 +570,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    * complete. Otherwise, notification of submission will fail.
    * </p>
    */
+  @Override
   public void submit() {
     // Fire the onSubmit event, because javascript's form.submit() does not
     // fire the built-in onsubmit event.

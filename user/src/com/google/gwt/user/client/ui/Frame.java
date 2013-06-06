@@ -42,7 +42,7 @@ import com.google.gwt.safehtml.shared.SafeUri;
  * <h3>Example</h3> {@example com.google.gwt.examples.FrameExample}
  * </p>
  */
-public class Frame extends Widget implements HasLoadHandlers {
+public class Frame extends Widget implements IsFrame {
 
   static final String DEFAULT_STYLENAME = "gwt-Frame";
 

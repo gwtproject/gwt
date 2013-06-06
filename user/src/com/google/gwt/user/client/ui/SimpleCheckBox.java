@@ -18,7 +18,6 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -36,8 +35,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * <li>.gwt-SimpleCheckBox-disabled { Applied when checkbox is disabled }</li>
  * </ul>
  */
-public class SimpleCheckBox extends FocusWidget implements HasName,
-    HasValue<Boolean>, IsEditor<LeafValueEditor<Boolean>> {
+public class SimpleCheckBox extends FocusWidget implements IsSimpleCheckBox {
 
   /**
    * Creates a SimpleCheckBox widget that wraps an existing &lt;input
@@ -118,10 +116,12 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * Don't confuse this with {@link #getValue}, which returns true or false if
    * the widget is checked.
    */
+  @Override
   public String getFormValue() {
     return getInputElement().getValue();
   }
 
+  @Override
   public String getName() {
     return getInputElement().getName();
   }
@@ -136,6 +136,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * @return <code>true</code> if the check box is checked, false otherwise.
    *         Will not return null
    */
+  @Override
   public Boolean getValue() {
     String propName = isAttached() ? "checked" : "defaultChecked";
     return getInputElement().getPropertyBoolean(propName);
@@ -185,10 +186,12 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * 
    * @param value
    */
+  @Override
   public void setFormValue(String value) {
     getInputElement().setAttribute("value", value);
   }
 
+  @Override
   public void setName(String name) {
     getInputElement().setName(name);
   }
@@ -202,6 +205,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * 
    * @param value true to check, false to uncheck; null value implies false
    */
+  @Override
   public void setValue(Boolean value) {
     setValue(value, false);
   }

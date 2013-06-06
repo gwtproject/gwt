@@ -55,7 +55,7 @@ import com.google.gwt.user.client.Window;
  * {@example com.google.gwt.examples.SplitLayoutPanelExample}
  * </p>
  */
-public class SplitLayoutPanel extends DockLayoutPanel {
+public class SplitLayoutPanel extends DockLayoutPanel implements IsSplitLayoutPanel {
 
   class HSplitter extends Splitter {
     public HSplitter(Widget target, boolean reverse) {
@@ -348,6 +348,7 @@ public class SplitLayoutPanel extends DockLayoutPanel {
    *
    * @return the splitter size
    */
+  @Override
   public int getSplitterSize() {
     return splitterSize;
   }
@@ -432,6 +433,11 @@ public class SplitLayoutPanel extends DockLayoutPanel {
     }
   }
 
+  @Override
+  public void setWidgetMinSize(IsWidget child, int minSize) {
+    setWidgetMinSize(child.asWidget(), minSize);
+  }
+
   /**
    * Sets whether or not double-clicking on the splitter should toggle the
    * display of the widget.
@@ -446,6 +452,16 @@ public class SplitLayoutPanel extends DockLayoutPanel {
     if (splitter != null) {
       splitter.setToggleDisplayAllowed(allowed);
     }
+  }
+
+  @Override
+  public void setWidgetSnapClosedSize(IsWidget child, int snapClosedSize) {
+    setWidgetSnapClosedSize(child.asWidget(), snapClosedSize);
+  }
+
+  @Override
+  public void setWidgetToggleDisplayAllowed(IsWidget child, boolean allowed) {
+    setWidgetToggleDisplayAllowed(child.asWidget(), allowed);
   }
 
   private Splitter getAssociatedSplitter(Widget child) {

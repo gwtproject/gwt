@@ -33,6 +33,16 @@ public interface HasWidgets extends Iterable<Widget> {
   }
 
   /**
+   * Extends this interface for {@IsWidget.Extended}.
+   */
+  interface ForExtendedIsWidget extends ForIsWidget {
+    /**
+     * @return the panel's children {@link IsWidget.Extended} widgets.
+     */
+    Iterator<IsWidget.Extended> iteratorIsWidgets();
+  }
+
+  /**
    * Adds a child widget.
    * 
    * @param w the widget to be added

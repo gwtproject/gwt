@@ -18,10 +18,8 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
-import com.google.gwt.event.dom.client.HasAllKeyHandlers;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -29,7 +27,6 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.logical.shared.HasSelectionHandlers;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -101,11 +98,7 @@ import java.util.List;
  * @see ValueBoxBase
  */
 @SuppressWarnings("deprecation")
-public class SuggestBox extends Composite implements HasText, HasFocus,
-    HasAnimation, HasEnabled, SourcesClickEvents, SourcesChangeEvents,
-    SourcesKeyboardEvents, FiresSuggestionEvents, HasAllKeyHandlers,
-    HasValue<String>, HasSelectionHandlers<Suggestion>,
-    IsEditor<LeafValueEditor<String>> {
+public class SuggestBox extends Composite implements IsSuggestBox {
 
   /**
    * The callback used when a user selects a {@link Suggestion}.

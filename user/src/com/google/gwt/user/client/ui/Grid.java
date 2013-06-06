@@ -64,7 +64,7 @@ import com.google.gwt.user.client.Element;
  * &lt;/g:Grid>
  * </pre>
  */
-public class Grid extends HTMLTable {
+public class Grid extends HTMLTable implements IsGrid {
 
   /**
    * Native method to add rows into a table with a given number of columns.
@@ -148,6 +148,7 @@ public class Grid extends HTMLTable {
    * 
    * @return the number of columns
    */
+  @Override
   public int getColumnCount() {
     return numColumns;
   }
@@ -196,6 +197,7 @@ public class Grid extends HTMLTable {
    * @param columns the number of columns
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void resize(int rows, int columns) {
     resizeColumns(columns);
     resizeRows(rows);
@@ -207,6 +209,7 @@ public class Grid extends HTMLTable {
    * @param columns the number of columns
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void resizeColumns(int columns) {
     if (numColumns == columns) {
       return;
@@ -243,6 +246,7 @@ public class Grid extends HTMLTable {
    * @param rows the number of rows
    * @throws IndexOutOfBoundsException
    */
+  @Override
   public void resizeRows(int rows) {
     if (numRows == rows) {
       return;

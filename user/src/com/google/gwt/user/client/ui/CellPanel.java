@@ -65,7 +65,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConst
  * &lt;/g:HorizontalPanel>
  * </pre>
  */
-public abstract class CellPanel extends ComplexPanel {
+public abstract class CellPanel extends ComplexPanel implements IsCellPanel {
 
   private int spacing;
   private Element table, body;

@@ -66,7 +66,7 @@ import com.google.gwt.text.client.NumberFormatRenderer;
  * 
  * @param <T> The exact type of number
  */
-public class NumberLabel<T extends Number> extends ValueLabel<T> {
+public class NumberLabel<T extends Number> extends ValueLabel<T> implements IsNumberLabel<T> {
 
   public NumberLabel() {
     super(new NumberFormatRenderer());

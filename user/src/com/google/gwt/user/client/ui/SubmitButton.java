@@ -30,7 +30,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * <dd>the outer element</dd>
  * </dl>
  */
-public class SubmitButton extends Button {
+public class SubmitButton extends Button implements IsSubmitButton {
 
   /**
    * Creates a SubmitButton widget that wraps an existing &lt;button&gt;

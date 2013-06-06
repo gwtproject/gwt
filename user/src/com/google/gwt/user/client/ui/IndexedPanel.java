@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+
 /**
  * Implemented by panels that impose an explicit ordering on their children.
  * 
@@ -27,6 +28,13 @@ public interface IndexedPanel {
    */
   interface ForIsWidget extends IndexedPanel {
     int getWidgetIndex(IsWidget child);
+  }
+
+  /**
+   * Extends this interface with convenience methods to handle {@link IsWidget.Extended}.
+   */
+  interface ForExtendedIsWidget extends ForIsWidget {
+    IsWidget.Extended getIsWidget(int index);
   }
 
   /**

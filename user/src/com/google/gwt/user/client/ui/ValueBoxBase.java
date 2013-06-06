@@ -17,19 +17,17 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.ui.client.adapters.ValueBoxEditor;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.AutoDirectionHandler;
 import com.google.gwt.i18n.client.BidiPolicy;
 import com.google.gwt.i18n.client.BidiUtils;
+import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.shared.DirectionEstimator;
-import com.google.gwt.i18n.shared.HasDirectionEstimator;
 import com.google.gwt.text.shared.Parser;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.DOM;
@@ -45,9 +43,7 @@ import java.text.ParseException;
  * 
  * @param <T> the value type
  */
-public class ValueBoxBase<T> extends FocusWidget implements
-    HasChangeHandlers, HasName, HasDirectionEstimator,
-    HasValue<T>, AutoDirectionHandler.Target, IsEditor<ValueBoxEditor<T>> {
+public class ValueBoxBase<T> extends FocusWidget implements IsValueBoxBase<T> {
 
   /**
    * Alignment values for {@link ValueBoxBase#setAlignment}.
@@ -156,7 +152,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
     return impl.getCursorPos(getElement());
   }
 
-  public Direction getDirection() {
+  public HasDirection.Direction getDirection() {
     return BidiUtils.getDirectionOnElement(getElement());
   }
 

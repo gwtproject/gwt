@@ -18,6 +18,7 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.IsElement;
 import com.google.gwt.safehtml.shared.SafeHtml;
 
 import java.util.Iterator;
@@ -27,7 +28,7 @@ import java.util.NoSuchElementException;
  * A panel that contains HTML, and which can attach child widgets to identified
  * elements within that HTML.
  */
-public class HTMLPanel extends ComplexPanel {
+public class HTMLPanel extends ComplexPanel implements IsHTMLPanel {
 
   private static Element hiddenDiv;
 
@@ -179,6 +180,11 @@ public class HTMLPanel extends ComplexPanel {
     super.add(widget, clientElem);
   }
 
+  @Override
+  public void add(IsWidget widget, IsElement elem) {
+    add(widget.asWidget(), elem.asElement());
+  }
+
   /**
    * Adds a child widget to the panel, replacing the HTML element.
    *
@@ -188,6 +194,11 @@ public class HTMLPanel extends ComplexPanel {
   public final void addAndReplaceElement(Widget widget, Element toReplace) {
     com.google.gwt.user.client.Element clientElem = toReplace.cast();
     addAndReplaceElement(widget, clientElem);
+  }
+
+  @Override
+  public void addAndReplaceElement(IsWidget widget, IsElement elem) {
+    addAndReplaceElement(widget.asWidget(), elem.asElement());
   }
 
   /**
@@ -352,4 +363,5 @@ public class HTMLPanel extends ComplexPanel {
 
     return child;
   }
+
 }

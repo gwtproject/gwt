@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_01d155f6",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-07T01:15:34Z",
+      "side": 1,
+      "message": "Looks like we have to roll this back. Here\u0027s an internal comment:\n\nHi,\n\nIt appears that this change has broken our build, as well as the behavior of cell tables in general.\nWhen you set column to \"0\", it doesn\u0027t really hide the column.\n\nThe problem is described below.\n\nAccording to the CSS specificaton [1]\n\"table-column (In HTML: COL)\nSpecifies that an element describes a column of cells.\n...\nThe default style sheet for HTML4 in the appendix illustrates the use of these values for HTML4:\n ....\ncol      { display: table-column }\"\n\nSo here, when we call setVisible(columnElement, isColumnVisible) with isColumnVisible \u003d false, it makes changes CSS attribute \"display\" to \"none\", and the column element loses its \"table-column\" properties, and its \"width\" attributes do not propagate to the \u003cth\u003e and \u003ctd\u003e elements (because this element is not a table-column and does not describe a column of cells).\n\n[1] http://www.w3.org/TR/CSS21/tables.html#table-display",
+      "revId": "94c3f2c58bb96cd26d210eadaf5fec5c8e30468e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_a0278fbe",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamReader.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-06-07T07:55:03Z",
+      "side": 1,
+      "message": "There a a couple of places where the min version is explicitly used (ServerSerializationStreamWriter.writeLong() for instance). If we bump the min version then this code would then be obsolete and should either be removed or taken into consideration in version 7. I would rather do that in another changeset so those cases can be discussed separatly.",
+      "parentUuid": "1d879d2a_2604afcb",
+      "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_66b4e7e0",
         "filename": "user/src/com/google/gwt/user/server/rpc/RPC.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-06T21:27:53Z",
       "side": 1,
       "message": "Probably should check that it\u0027s between min version and max version and throw a SerializationException if it isn\u0027t.\n\nAlso, getInteger() can throw.",
+      "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_c0117363",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RPC.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2013-06-07T07:55:03Z",
+      "side": 1,
+      "message": "Yes, that would be a good idea. \n\nAFAIK Integer.getInteger() does not throw but returns null. At least according to the oracle docs http://docs.oracle.com/javase/6/docs/api/java/lang/Integer.html#getInteger%28java.lang.String%29",
+      "parentUuid": "1d879d2a_66b4e7e0",
       "revId": "654a2dd7c4bcb23ccffd508529fdd1509fd8f617",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_2077ff9e",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-07T08:16:24Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll update the javadoc to add a note with supported browsers.\n\nRelated with setVisible, isVisible, I have planned a different patch so as we can use a different implementation per browser so as user has not to worry about which hack use to hide the file input.",
+      "parentUuid": "1d9cfd82_809feba2",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d9cfd82_60ace7d7",
         "filename": "user/test/com/google/gwt/user/client/ui/ButtonTest.java",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2013-06-07T08:02:37Z",
       "side": 1,
       "message": "I think we should just duplicate it there.",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_e070f7a4",
+        "filename": "user/test/com/google/gwt/user/client/ui/ButtonTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-07T08:16:24Z",
+      "side": 1,
+      "message": "They are in the same package, and does the same so just a way to not duplicate code. I dont think a future change in the handler could break the product since they are tests and the second test would fail, but if you think it\u0027s better to duplicate, its ok.",
+      "parentUuid": "1d9cfd82_60ace7d7",
       "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

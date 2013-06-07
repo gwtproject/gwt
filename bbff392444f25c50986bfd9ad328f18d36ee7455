@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d9cfd82_404c437a",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-07T08:02:37Z",
+      "side": 1,
+      "message": "Maybe we can take this opportunity to rewrite isGecko19 as a static non-JSNI method like the other isGecko*OrBefore methods?\n\nBut I actually wonder what version(s) of Firefox we really do want to continue supporting. I\u0027d be in favor of only supporting the last ESR (or maybe the last two ESR) version and every version after that. We could then remove all those isGecko hacks.\n\nThat can be punt to another patch though.",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_809feba2",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-07T08:02:37Z",
+      "side": 1,
+      "message": "Should we add a note about browser support here? (similar to what you have in the commit message; maybe add something about click() not working when the widget is {@link #isVisible() hidden} in some browsers?)",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_60ace7d7",
+        "filename": "user/test/com/google/gwt/user/client/ui/ButtonTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-07T08:02:37Z",
+      "side": 1,
+      "message": "I think we should just duplicate it there.",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

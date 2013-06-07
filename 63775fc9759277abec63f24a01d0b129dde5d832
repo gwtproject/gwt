@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d9cfd82_4d6a3ced",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-07T03:04:06Z",
+      "side": 1,
+      "message": "nit: trailing spaces",
+      "revId": "63775fc9759277abec63f24a01d0b129dde5d832",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_2d449881",
+        "filename": "user/src/com/google/gwt/user/client/Element.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-07T03:04:06Z",
+      "side": 1,
+      "message": "nit: trailing spaces",
+      "revId": "63775fc9759277abec63f24a01d0b129dde5d832",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_0d49d498",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasWidgets.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-07T03:04:06Z",
+      "side": 1,
+      "message": "nit: trailing spaces",
+      "revId": "63775fc9759277abec63f24a01d0b129dde5d832",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9cfd82_ed4d90a4",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsWidget2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-07T03:04:06Z",
+      "side": 1,
+      "message": "nit: trailing space",
+      "revId": "63775fc9759277abec63f24a01d0b129dde5d832",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

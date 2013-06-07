@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1d9cfd82_be0d70f3",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-07T18:04:18Z",
+      "side": 1,
+      "message": "right, it seems that my IDE removed it when saving.",
+      "parentUuid": "1dc5dd78_8205c08c",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d9cfd82_809feba2",
         "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
         "patchSetId": 2

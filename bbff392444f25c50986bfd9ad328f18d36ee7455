@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "1dc5dd78_8205c08c",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-06-07T12:29:43Z",
+      "side": 1,
+      "message": "Having 4 spaces in front of this line was correct.  See the style guide.",
+      "revId": "bbff392444f25c50986bfd9ad328f18d36ee7455",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d9cfd82_809feba2",
         "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
         "patchSetId": 2

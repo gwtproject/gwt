@@ -154,7 +154,7 @@ public native final EventRemover addEventListener(String type, EventListener lis
   var handler = @elemental.js.dom.JsElementalMixinBase::getHandlerFor(Lelemental/events/EventListener;)(listener);
   this.addEventListener(type, handler);
   return @elemental.js.dom.JsElementalMixinBase.Remover::create(Lelemental/events/EventTarget;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;Z)
-      (this, type, handler, useCapture);
+      (this, type, handler, false);
 }-*/;
 
 @Deprecated

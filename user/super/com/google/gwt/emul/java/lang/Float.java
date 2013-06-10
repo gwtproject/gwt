@@ -41,6 +41,16 @@ public final class Float extends Number implements Comparable<Float> {
     } else {
       return 0;
     }
+
+    if (isNaN(x)) {
+      if (isNaN(y)) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } else if (isNaN(y)) {
+      return -1;
+    }
   }
 
   public static int floatToIntBits(float value) {
@@ -187,13 +197,7 @@ public final class Float extends Number implements Comparable<Float> {
   }
 
   public int compareTo(Float b) {
-    if (value < b.value) {
-      return -1;
-    } else if (value > b.value) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return compare(value, b.value);
   }
 
   @Override

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fd1569d0_7838413f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Byte.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d879d2a_329f9649",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_321eb624",
         "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
         "patchSetId": 9
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "You have to make sure those comparisons behave as desired when one or both operands are NaNs.",
       "parentUuid": "1d879d2a_bd86f79c",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d215d31_39608f3b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "changed order",
+      "parentUuid": "1d879d2a_3e167dcd",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -179,6 +215,24 @@
     },
     {
       "key": {
+        "uuid": "fd1569d0_18358546",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "see: https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d8185\u0026thanks\u003d8185",
+      "parentUuid": "1d879d2a_de9d61fb",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_127d322c",
         "filename": "user/super/com/google/gwt/emul/java/lang/Short.java",
         "patchSetId": 9
@@ -226,6 +280,24 @@
       "side": 1,
       "message": "One should never rely on it for sure, but if somehow they rely on it, it will work or fail consistently in both production and dev mode (i.e. less surprises).\nIn general, it is best to not diverge prod vs dev if there is no good reason to do so (like a big performance hit).",
       "parentUuid": "1d9cfd82_aaad3390",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d1c61fa_fac9a9a1",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Short.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d879d2a_dd93abdd",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -321,6 +393,24 @@
     },
     {
       "key": {
+        "uuid": "3d1c61fa_bac33180",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/FloatTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "see: https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d8185\u0026thanks\u003d8185",
+      "parentUuid": "1d9cfd82_bb5d875e",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d879d2a_d26aba5b",
         "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
         "patchSetId": 9
@@ -386,6 +476,24 @@
       "side": 1,
       "message": "We already say in the JRE compatibility doc that we don\u0027t handle integer overflows.  However, people aren\u0027t going to think of a comparison as an integer overflow case, so if we can handle it cheaply we should.\n\nAfter MAX_VALUE - MIN_VALUE overflows, what happens after the result is coerced to an int?  If we can\u0027t deal with the overflow after the fact, we would need to check for overflow before doing the comparison.\n\nOr, maybe that is why we didn\u0027t use subtraction in the first place.",
       "parentUuid": "1d879d2a_fd694ff7",
+      "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d1c61fa_9abe6ded",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/IntegerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-10T07:08:34Z",
+      "side": 1,
+      "message": "Let\u0027s deal with the corner cases in another CL: https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d8185",
+      "parentUuid": "1d879d2a_fe31455a",
       "revId": "3ec84a044f868c0fe02a3746d004a6e023c28732",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd1bf126_5933e7fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-11T00:24:53Z",
+      "side": 0,
+      "message": "Is this no longer valid or was just removed because we normally run the compiler with assertions disabled?  Assertions are enabled when running tests so if it still valid that extractStatements  is only called once then we should leave the assertion.",
+      "revId": "8f536b86d149b208d928592e60ae02e03319df69",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

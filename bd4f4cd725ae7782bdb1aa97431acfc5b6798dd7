@@ -16,6 +16,23 @@
       "revId": "bd4f4cd725ae7782bdb1aa97431acfc5b6798dd7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1bf126_d946d767",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-11T00:24:53Z",
+      "side": 1,
+      "message": "Remove \"the\" between constructor references?",
+      "revId": "bd4f4cd725ae7782bdb1aa97431acfc5b6798dd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

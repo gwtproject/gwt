@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dd62183_1387969b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T10:16:13Z",
+      "side": 1,
+      "message": "Could you move that line just next to the Change-Id one? (with no blank line between them, but with a blank line before them)\n\n Log excluded resources in DirectoryClassPathEntry the same way as ZipFileClassPathEntry\n\n Bug: issue 8188\n Change-Id: I7c25c0e486e02a3b5ed1a8804d5276cebc0877c6",
+      "revId": "03aa66d229d63b16c2662879478f5762d88400f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_739412c7",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T10:16:13Z",
+      "side": 1,
+      "message": "Trailing space.",
+      "revId": "03aa66d229d63b16c2662879478f5762d88400f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -38,7 +38,7 @@ public class ConditionTest extends TestCase {
 
   @Override
   public void setUp() {
-    ModuleDef module = new ModuleDef("fake");
+    ModuleDef module = new ModuleDef("fake", TreeLogger.NULL);
 
     ConfigurationProperty conf1 = module.getProperties().createConfiguration(
         "conf1", false);

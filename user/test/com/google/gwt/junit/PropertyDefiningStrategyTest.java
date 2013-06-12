@@ -15,6 +15,7 @@
  */
 package com.google.gwt.junit;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.junit.client.WithProperties;
@@ -60,19 +61,19 @@ public class PropertyDefiningStrategyTest extends TestCase {
   }
 
   public void testProcessModuleForTestCaseWithSingleProperty() {
-    ModuleDef module = new ModuleDef("myModule");
+    ModuleDef module = new ModuleDef("myModule", TreeLogger.NULL);
     getStrategyForSingleProperty().processModule(module);
     assertProperties(module, p("name", "value"));
   }
 
   public void testProcessModuleForTestCaseWithTwoProperties() {
-    ModuleDef module = new ModuleDef("myModule");
+    ModuleDef module = new ModuleDef("myModule", TreeLogger.NULL);
     getStrategyForTwoProperties().processModule(module);
     assertProperties(module, p("name1", "value1"), p("name2", "value2"));
   }
 
   public void testProcessModuleForTestCaseWithoutProperties() {
-    ModuleDef module = new ModuleDef("myModule");
+    ModuleDef module = new ModuleDef("myModule", TreeLogger.NULL);
     getStrategyForNoProperty().processModule(module);
     assertProperties(module);
   }

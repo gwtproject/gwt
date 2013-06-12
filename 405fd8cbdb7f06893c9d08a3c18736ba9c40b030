@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "7daa59ed_6c09db73",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsUIObject.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-12T22:05:27Z",
+      "side": 1,
+      "message": "Oh, right; I had to do that when these were my own interfaces, but that should work now...I\u0027ll try that. Thanks!",
+      "parentUuid": "3dd62183_1302f682",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7daa59ed_2c7353ef",
         "filename": "user/src/com/google/gwt/user/client/ui/IsWidget2.java",
         "patchSetId": 6

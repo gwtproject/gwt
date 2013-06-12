@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3dd62183_53062e65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5601
+      },
+      "writtenOn": "2013-06-12T09:46:34Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "3dd62183_53b58ebc",
+      "revId": "22331a68954f7b45b8092e888112ae00de865fa1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_13ab1663",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-12T08:44:22Z",
       "side": 1,
       "message": "If you use \"issue 8188\", Gerrit will \"linkify\" it. Even better, if you use:\n\n Bug: issue 8188\n\nas a footer line (next to Change-Id, no blank line between them, but blank line before the footer) the review will be searchable with \"tr:8188\" in Gerrit.",
+      "revId": "22331a68954f7b45b8092e888112ae00de865fa1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_330f3a7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5601
+      },
+      "writtenOn": "2013-06-12T09:46:34Z",
+      "side": 1,
+      "message": "OK.",
+      "parentUuid": "3dd62183_13ab1663",
       "revId": "22331a68954f7b45b8092e888112ae00de865fa1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

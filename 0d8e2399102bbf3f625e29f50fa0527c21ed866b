@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dd62183_def6a585",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T12:55:45Z",
+      "side": 1,
+      "message": "Any reason that one is still NULL? (I have no single idea what it is used for)",
+      "revId": "0d8e2399102bbf3f625e29f50fa0527c21ed866b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_7ee699d2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T12:55:45Z",
+      "side": 1,
+      "message": "No need for the concatenation (I suspect auto-format played with your code; auto-format is evil)",
+      "revId": "0d8e2399102bbf3f625e29f50fa0527c21ed866b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_9e154dc2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T12:55:45Z",
+      "side": 1,
+      "message": "Could you factor this into a getRefreshLogger method?",
+      "revId": "0d8e2399102bbf3f625e29f50fa0527c21ed866b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_1e02fd82",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefLoader.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-12T12:55:45Z",
+      "side": 1,
+      "message": "Please avoid reformats that are independent from the issue being fixed.\n\n(either disable auto-format or use an interactive \"git add\")",
+      "revId": "0d8e2399102bbf3f625e29f50fa0527c21ed866b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

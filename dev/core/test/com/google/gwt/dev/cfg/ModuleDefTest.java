@@ -87,7 +87,7 @@ public class ModuleDefTest extends TestCase {
   }
 
   public void testCollapsedProperties() {
-    ModuleDef def = new ModuleDef("fake");
+    ModuleDef def = new ModuleDef("fake", TreeLogger.NULL);
 
     Properties p = def.getProperties();
     BindingProperty b = p.createBinding("fake");
@@ -140,7 +140,7 @@ public class ModuleDefTest extends TestCase {
   }
 
   public void testLinkerOrder() throws UnableToCompleteException {
-    ModuleDef def = new ModuleDef("fake");
+    ModuleDef def = new ModuleDef("fake", TreeLogger.NULL);
 
     def.defineLinker(TreeLogger.NULL, "pre", FakeLinkerPre.class);
     def.defineLinker(TreeLogger.NULL, "pre2", FakeLinkerPre2.class);
@@ -164,7 +164,7 @@ public class ModuleDefTest extends TestCase {
   }
 
   public void testLinkerRedefinition() throws UnableToCompleteException {
-    ModuleDef def = new ModuleDef("fake");
+    ModuleDef def = new ModuleDef("fake", TreeLogger.NULL);
 
     def.defineLinker(TreeLogger.NULL, "pre", FakeLinkerPre.class);
     def.defineLinker(TreeLogger.NULL, "post", FakeLinkerPost.class);
@@ -188,7 +188,7 @@ public class ModuleDefTest extends TestCase {
   }
 
   public void testLinkerRedefinitionErrors() throws UnableToCompleteException {
-    ModuleDef def = new ModuleDef("fake");
+    ModuleDef def = new ModuleDef("fake", TreeLogger.NULL);
 
     def.defineLinker(TreeLogger.NULL, "pre", FakeLinkerPre.class);
     def.defineLinker(TreeLogger.NULL, "post", FakeLinkerPost.class);
@@ -218,7 +218,7 @@ public class ModuleDefTest extends TestCase {
   }
 
   public void testTwoPrimaries() throws UnableToCompleteException {
-    ModuleDef def = new ModuleDef("fake");
+    ModuleDef def = new ModuleDef("fake", TreeLogger.NULL);
 
     def.defineLinker(TreeLogger.NULL, "pre", FakeLinkerPre.class);
     def.defineLinker(TreeLogger.NULL, "post", FakeLinkerPost.class);

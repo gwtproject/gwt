@@ -1,16 +1,14 @@
 /*
  * Copyright 2008 Google Inc.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.google.gwt.dev.cfg;
@@ -18,6 +16,7 @@ package com.google.gwt.dev.cfg;
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -55,8 +54,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Represents a module specification. In principle, this could be built without
- * XML for unit tests.
+ * Represents a module specification. In principle, this could be built without XML for unit tests.
  */
 public class ModuleDef {
 
@@ -99,8 +97,8 @@ public class ModuleDef {
   private String activePrimaryLinker;
 
   /**
-   * A set of URLs for <module>.gwtar files found on the classpath that correspond
-   * to <module>.gwt.xml files loaded as a part of this module's nested load.
+   * A set of URLs for <module>.gwtar files found on the classpath that correspond to
+   * <module>.gwt.xml files loaded as a part of this module's nested load.
    * 
    * @see com.google.gwt.dev.CompileModule
    */
@@ -117,9 +115,9 @@ public class ModuleDef {
   private final Set<String> inheritedModules = new HashSet<String>();
 
   /**
-   * All resources found on the public path, specified by <public> directives in
-   * modules (or the implicit ./public directory). Marked 'lazy' because it does not
-   * start searching for resources until a query is made.
+   * All resources found on the public path, specified by <public> directives in modules (or the
+   * implicit ./public directory). Marked 'lazy' because it does not start searching for resources
+   * until a query is made.
    */
   private ResourceOracleImpl lazyPublicOracle;
 
@@ -129,10 +127,12 @@ public class ModuleDef {
   private ResourceOracleImpl lazyResourcesOracle;
 
   /**
-   * Contains all files from the source path, specified by <source> and <super>
-   * directives in modules (or the implicit ./client directory).
+   * Contains all files from the source path, specified by <source> and <super> directives in
+   * modules (or the implicit ./client directory).
    */
   private ResourceOracleImpl lazySourceOracle;
+
+  private final TreeLogger logger;
 
   private final Map<String, Class<? extends Linker>> linkerTypesByName =
       new LinkedHashMap<String, Class<? extends Linker>>();
@@ -143,8 +143,8 @@ public class ModuleDef {
   private final ResourceLoader resources;
 
   /**
-   * Must use a separate field to track override, because setNameOverride() will
-   * get called every time a module is inherited, but only the last one matters.
+   * Must use a separate field to track override, because setNameOverride() will get called every
+   * time a module is inherited, but only the last one matters.
    */
   private String nameOverride;
 
@@ -164,11 +164,12 @@ public class ModuleDef {
 
   private final Styles styles = new Styles();
 
-  public ModuleDef(String name) {
-    this(name, ResourceLoaders.forClassLoader(Thread.currentThread()));
+  public ModuleDef(String name, TreeLogger logger) {
+    this(name, ResourceLoaders.forClassLoader(Thread.currentThread()), logger);
   }
 
-  public ModuleDef(String name, ResourceLoader resources) {
+  public ModuleDef(String name, ResourceLoader resources, TreeLogger logger) {
+    this.logger = logger;
     this.name = name;
     this.resources = resources;
     defaultFilters = new DefaultFilters();
@@ -232,9 +233,8 @@ public class ModuleDef {
   }
 
   /**
-   * Free up memory no longer needed in later compile stages. After calling this
-   * method, the ResourceOracle will be empty and unusable. Calling
-   * {@link #refresh()} will restore them.
+   * Free up memory no longer needed in later compile stages. After calling this method, the
+   * ResourceOracle will be empty and unusable. Calling {@link #refresh()} will restore them.
    */
   public synchronized void clear() {
     if (lazySourceOracle != null) {
@@ -248,10 +248,9 @@ public class ModuleDef {
   }
 
   /**
-   * Associate a Linker class with a symbolic name. If the name had been
-   * previously assigned, this method will redefine the name. If the redefined
-   * linker had been previously added to the set of active linkers, the old
-   * active linker will be replaced with the new linker.
+   * Associate a Linker class with a symbolic name. If the name had been previously assigned, this
+   * method will redefine the name. If the redefined linker had been previously added to the set of
+   * active linkers, the old active linker will be replaced with the new linker.
    */
   public void defineLinker(TreeLogger logger, String name, Class<? extends Linker> linker)
       throws UnableToCompleteException {
@@ -291,8 +290,8 @@ public class ModuleDef {
     for (int i = 0, n = entries.length; i < n; ++i) {
       String mapping = entries[i].getKey();
       /*
-       * Ensure that URLs that match the servlet mapping, including those that
-       * have additional path_info, get routed to the correct servlet.
+       * Ensure that URLs that match the servlet mapping, including those that have additional
+       * path_info, get routed to the correct servlet.
        * 
        * See "Inside Servlets", Second Edition, pg. 208
        */
@@ -304,8 +303,7 @@ public class ModuleDef {
   }
 
   /**
-   * Returns the Resource for a source file if it is found; <code>null</code>
-   * otherwise.
+   * Returns the Resource for a source file if it is found; <code>null</code> otherwise.
    * 
    * @param partialPath the partial path of the source file
    * @return the resource for the requested source file
@@ -348,8 +346,8 @@ public class ModuleDef {
   }
 
   /**
-   * Strictly for statistics gathering. There is no guarantee that the source
-   * oracle has been initialized.
+   * Strictly for statistics gathering. There is no guarantee that the source oracle has been
+   * initialized.
    */
   public String[] getAllSourceFiles() {
     doRefresh();
@@ -357,8 +355,7 @@ public class ModuleDef {
   }
 
   /**
-   * Returns the physical name for the module by which it can be found in the
-   * classpath.
+   * Returns the physical name for the module by which it can be found in the classpath.
    */
   public String getCanonicalName() {
     return name;
@@ -369,8 +366,7 @@ public class ModuleDef {
   }
 
   public synchronized CompilationState getCompilationState(TreeLogger logger,
-      boolean suppressErrors, SourceLevel sourceLevel)
-      throws UnableToCompleteException {
+      boolean suppressErrors, SourceLevel sourceLevel) throws UnableToCompleteException {
     doRefresh();
     CompilationState compilationState =
         CompilationStateBuilder.buildFrom(logger, lazySourceOracle.getResources(), null,
@@ -407,9 +403,19 @@ public class ModuleDef {
     return properties;
   }
 
+  private TreeLogger getRefreshLogger() {
+    TreeLogger refreshLogger = TreeLogger.NULL;
+    if (logger != null) {
+      refreshLogger =
+          logger.branch(Type.DEBUG, "Computing available resources for resource oracle");
+    }
+    return refreshLogger;
+  }
+
   public synchronized ResourceOracle getResourcesOracle() {
     if (lazyResourcesOracle == null) {
-      lazyResourcesOracle = new ResourceOracleImpl(TreeLogger.NULL, resources);
+      TreeLogger logger = getRefreshLogger();
+      lazyResourcesOracle = new ResourceOracleImpl(logger, resources);
       PathPrefixSet pathPrefixes = lazySourceOracle.getPathPrefixes();
       PathPrefixSet newPathPrefixes = new PathPrefixSet();
       for (PathPrefix pathPrefix : pathPrefixes.values()) {
@@ -417,7 +423,7 @@ public class ModuleDef {
             .shouldReroot()));
       }
       lazyResourcesOracle.setPathPrefixes(newPathPrefixes);
-      ResourceOracleImpl.refresh(TreeLogger.NULL, lazyResourcesOracle);
+      ResourceOracleImpl.refresh(logger, lazyResourcesOracle);
     } else {
       doRefresh();
     }
@@ -468,9 +474,8 @@ public class ModuleDef {
   }
 
   /**
-   * For convenience in unit tests, servlets can be automatically loaded and
-   * mapped in the embedded web server. If a servlet is already mapped to the
-   * specified path, it is replaced.
+   * For convenience in unit tests, servlets can be automatically loaded and mapped in the embedded
+   * web server. If a servlet is already mapped to the specified path, it is replaced.
    * 
    * @param path the url path at which the servlet resides
    * @param servletClassName the name of the servlet to publish
@@ -507,9 +512,8 @@ public class ModuleDef {
   }
 
   /**
-   * The final method to call when everything is setup. Before calling this
-   * method, several of the getter methods may not be called. After calling this
-   * method, the add methods may not be called.
+   * The final method to call when everything is setup. Before calling this method, several of the
+   * getter methods may not be called. After calling this method, the add methods may not be called.
    * 
    * @param logger Logs the activity.
    */
@@ -529,8 +533,8 @@ public class ModuleDef {
         prop.normalizeCollapsedValues();
 
         /*
-         * Create a default property provider for any properties with more than
-         * one possible value and no existing provider.
+         * Create a default property provider for any properties with more than one possible value
+         * and no existing provider.
          */
         if (prop.getProvider() == null && prop.getConstrainedValue() == null) {
           String src = "{";
@@ -592,9 +596,9 @@ public class ModuleDef {
             getName());
     // Refresh resource oracles.
     if (lazyResourcesOracle == null) {
-      ResourceOracleImpl.refresh(TreeLogger.NULL, lazyPublicOracle, lazySourceOracle);
+      ResourceOracleImpl.refresh(getRefreshLogger(), lazyPublicOracle, lazySourceOracle);
     } else {
-      ResourceOracleImpl.refresh(TreeLogger.NULL, lazyPublicOracle, lazySourceOracle,
+      ResourceOracleImpl.refresh(getRefreshLogger(), lazyPublicOracle, lazySourceOracle,
           lazyResourcesOracle);
     }
     moduleDefEvent.end();

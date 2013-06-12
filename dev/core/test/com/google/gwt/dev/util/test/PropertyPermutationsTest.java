@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.util.test;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConditionAny;
 import com.google.gwt.dev.cfg.ConditionWhenPropertyIs;
@@ -39,7 +40,7 @@ public class PropertyPermutationsTest extends TestCase {
    */
   public void testCycle() {
     // This is what you'd get with a conditional <set-property value="false">
-    ModuleDef md = new ModuleDef("testCycle");
+    ModuleDef md = new ModuleDef("testCycle", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -67,7 +68,7 @@ public class PropertyPermutationsTest extends TestCase {
   }
 
   public void testOneDimensionPerm() {
-    ModuleDef md = new ModuleDef("testOneDimensionPerm");
+    ModuleDef md = new ModuleDef("testOneDimensionPerm", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -93,7 +94,7 @@ public class PropertyPermutationsTest extends TestCase {
   }
 
   public void testOneDimensionPermWithCollapse() {
-    ModuleDef md = new ModuleDef("testOneDimensionPerm");
+    ModuleDef md = new ModuleDef("testOneDimensionPerm", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -125,7 +126,7 @@ public class PropertyPermutationsTest extends TestCase {
   }
 
   public void testTwoDimensionPerm() {
-    ModuleDef md = new ModuleDef("testTwoDimensionPerm");
+    ModuleDef md = new ModuleDef("testTwoDimensionPerm", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -180,7 +181,7 @@ public class PropertyPermutationsTest extends TestCase {
   }
 
   public void testTwoDimensionPermWithCollapse() {
-    ModuleDef md = new ModuleDef("testTwoDimensionPerm");
+    ModuleDef md = new ModuleDef("testTwoDimensionPerm", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -219,7 +220,7 @@ public class PropertyPermutationsTest extends TestCase {
   }
 
   public void testTwoDimensionPermWithExpansion() {
-    ModuleDef md = new ModuleDef("testTwoDimensionsWithExpansion");
+    ModuleDef md = new ModuleDef("testTwoDimensionsWithExpansion", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -252,7 +253,7 @@ public class PropertyPermutationsTest extends TestCase {
 
   public void testTwoDimensionPermWithExtension() {
     // This is what you'd get with a conditional <extend-property>
-    ModuleDef md = new ModuleDef("testTwoDimensionsWithConditions");
+    ModuleDef md = new ModuleDef("testTwoDimensionsWithConditions", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {
@@ -279,7 +280,7 @@ public class PropertyPermutationsTest extends TestCase {
 
   public void testTwoDimensionPermWithRestriction() {
     // This is what you'd get with a conditional <set-property value="false">
-    ModuleDef md = new ModuleDef("testTwoDimensionsWithRestriction");
+    ModuleDef md = new ModuleDef("testTwoDimensionsWithRestriction", TreeLogger.NULL);
     Properties props = md.getProperties();
 
     {

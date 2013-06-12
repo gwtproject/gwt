@@ -186,7 +186,7 @@ public class ModuleDefLoader {
       String moduleName, ResourceLoader resources)
       throws UnableToCompleteException {
 
-    ModuleDef moduleDef = new ModuleDef(moduleName, resources);
+    ModuleDef moduleDef = new ModuleDef(moduleName, resources, logger);
     Event moduleLoadEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
         "phase", "strategy.load()");
     loader.load(logger, moduleName, moduleDef);

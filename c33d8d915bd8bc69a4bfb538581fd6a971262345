@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd1bf126_e5e0408a",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-12T20:55:09Z",
+      "side": 1,
+      "message": "it makes sense to do schedule(0) (i.e. do asap after this event loop) and there is already a lot of code using that.\nOn the other hand, a \u00270\u0027 interval is probably a bad idea but might be still a valid value; I\u0027m not sure.\n\nIf you feel strongly about it, please create a bug so that we can discuss/evaluate accepting \"0\" in setInterval there.",
+      "parentUuid": "fdb6494f_933c1ed0",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddbb4539_afe739d2",
         "filename": "user/src/com/google/gwt/user/client/Timer.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "bd1bf126_45bdb44e",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-12T20:55:09Z",
+      "side": 1,
+      "message": "This was intended and semantically correct; timer is fired out and not running any more.\n\nAlso in practice, if we don\u0027t do that user cannot schedule the timer again from the timer callback, which is pretty common.",
+      "parentUuid": "ddbb4539_afe739d2",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_fef44948",
         "filename": "user/test/com/google/gwt/user/client/TimerTest.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-06-12T13:49:49Z",
       "side": 1,
       "message": "I am not sure if this sufficiently tests fur bug 8101.\n\nTo me this reads like IE must have added the timer to the event loop already, so I think we actually need a busy wait here to test for that",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1bf126_6518b091",
+        "filename": "user/test/com/google/gwt/user/client/TimerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-12T20:55:09Z",
+      "side": 1,
+      "message": "Actually, previous code was not reproducing the problem.\nI removed the counter and the tests were still passing; just busy waiting doesn\u0027t seem like forcing them to be fired in the same event loop however if there are scheduled to be fired exactly at the same time, the problem gets reproduced.\nThat is the reason that I re-implemented the test case.\n(I have searched about it, and examples I\u0027ve seen were using a similar approach to reproduce the issue.)",
+      "parentUuid": "3dd62183_fef44948",
       "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

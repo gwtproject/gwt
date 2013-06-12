@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd1bf126_d06064e5",
+        "filename": "user/test/com/google/gwt/resources/client/test.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-12T20:59:26Z",
+      "side": 1,
+      "message": "typo throughout the file:\nIAMGE -\u003e IMAGE",
+      "revId": "98217005ae81e6e5f401a74911d6a3cd04fcf09f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

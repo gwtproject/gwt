@@ -18,6 +18,7 @@ package com.google.gwt.user.cellview.client;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.dom.client.TableElement;
@@ -283,7 +284,7 @@ public class CellTableTest extends AbstractCellTableTestBase<CellTable<String>> 
   }
 
   /**
-   * Test that removing a column sets its width to zero.
+   * Test that removing a column sets its width to zero and the display to none.
    */
   public void testRemoveColumnWithWidth() {
     CellTable<String> table = createAbstractHasData(new TextCell());
@@ -297,6 +298,8 @@ public class CellTableTest extends AbstractCellTableTestBase<CellTable<String>> 
     table.removeColumn(column1);
     table.getPresenter().flush();
     assertEquals("0px", col1.getStyle().getWidth());
+    assertEquals(Display.NONE.toString().toLowerCase(), 
+        col1.getStyle().getDisplay().toLowerCase());
   }
 
   @Override

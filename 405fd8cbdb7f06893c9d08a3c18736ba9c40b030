@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "7daa59ed_cc5d6f5e",
+        "filename": "user/src/com/google/gwt/dom/client/HasStyle.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-12T18:13:04Z",
+      "side": 1,
+      "message": "Might be worth adding hasStyleName, as this was recently added to Element - Goktug indicated in that review that a toggleStyleName is on the way as well. https://gwt-review.googlesource.com/#/c/3070/",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1bf126_ca43937a",
+        "filename": "user/src/com/google/gwt/dom/client/IsElement.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-12T18:13:04Z",
+      "side": 1,
+      "message": "This method seems out of place - it is the closest we get to dom manipulation - no removeChild(IsElement) nor IsElement getParentElement() or any getChild (which may not be). Is there a reason you picked this and removeFromParent, but not other dom methods? Variance issues almost explain it, but then I noticed that you needed to add new methods just to support this in Element itself.\n\nAnd since you already are needing to add new methods in Element to deal with IsElement vs Node, would it make sense then to add new methods for these?",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_73fff24e",
         "filename": "user/src/com/google/gwt/user/client/ui/IndexedPanel.java",
         "patchSetId": 6
@@ -47,6 +81,41 @@
       "writtenOn": "2013-06-12T09:24:46Z",
       "side": 1,
       "message": "Given that Element implements IsElement, and we already have getElement(), couldn\u0027t we just declare\n\n IsElement getElement();\n\nhere and take advantage of covariant return types in UIObject?",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7daa59ed_8c63671e",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsUIObject.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-12T18:13:04Z",
+      "side": 1,
+      "message": "My concern there would be that we\u0027d no longer have a way to get access to the element as a jso in the code that needs it. If I wanted the element so I could treat it as a InputElement, the JSO.cast() is no longer available to me, only the regular Java cast. Not a huge loss, but it definitely is a breaking change.\n\nSimple/ugly way around that might be to rename IsElement.asElement to IsElement.cast, with the JSO.cast generics. Returns null for stubs, and with a real element lets you cast as usual.",
+      "parentUuid": "3dd62183_1302f682",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7daa59ed_2c7353ef",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsWidget2.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-12T18:13:04Z",
+      "side": 1,
+      "message": "(Sorry if I missed this discussion elsewhere, but) What is the philosophical thinking on IsWidget vs IsWidget2? This is for mocking Widget, while IsWidget is for Composite-free composition? If that is the idea, what about another name than IsWidget2, which seems to suggest \u0027better isWidget\u0027 rather than \u0027mockable iswidget\u0027.",
       "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

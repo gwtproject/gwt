@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdb6494f_933c1ed0",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-12T13:49:49Z",
+      "side": 1,
+      "message": "can we unify the IllegalArgumentExceptions in schedule and scheduleRepeating as well?\n\n\u003c 0 vs. \u003c\u003d0",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddbb4539_afe739d2",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-12T13:49:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t timer.isRunning be true if the timer code is executing. How about we defer update until after run has been called?\n\nMaybe even add a test for this",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dd62183_fef44948",
+        "filename": "user/test/com/google/gwt/user/client/TimerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-12T13:49:49Z",
+      "side": 1,
+      "message": "I am not sure if this sufficiently tests fur bug 8101.\n\nTo me this reads like IE must have added the timer to the event loop already, so I think we actually need a busy wait here to test for that",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd1bf126_8a9ebbf4",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-12T16:21:37Z",
+      "side": 1,
+      "message": "Space between \"#\" and \"adding\".",
+      "revId": "664846bd2743ffd111e07518b106235e682bf392",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1bf126_6a9b5f06",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-12T16:21:37Z",
+      "side": 1,
+      "message": "Should list the UIObject method, not the Element one.",
+      "revId": "664846bd2743ffd111e07518b106235e682bf392",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

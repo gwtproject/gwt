@@ -1,16 +1,14 @@
 /*
  * Copyright 2008 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.google.gwt.dev.cfg;
@@ -44,16 +42,16 @@ public class ModuleDefLoader {
    * Filename suffix used for GWT Module XML files.
    */
   public static final String GWT_MODULE_XML_SUFFIX = ".gwt.xml";
-  
+
   /**
    * Filename suffix used for Precompiled GWT Module files.
    */
   public static final String COMPILATION_UNIT_ARCHIVE_SUFFIX = ".gwtar";
 
   /**
-   * Keep soft references to loaded modules so the VM can gc them when memory is
-   * tight. The current context class loader used as a key for modules cache.
-   * The module's physical name is used as a key inside the cache.
+   * Keep soft references to loaded modules so the VM can gc them when memory is tight. The current
+   * context class loader used as a key for modules cache. The module's physical name is used as a
+   * key inside the cache.
    */
   private static final Map<ClassLoader, Map<String, ModuleDef>> loadedModulesCaches =
       new MapMaker().weakKeys().makeMap();
@@ -62,16 +60,15 @@ public class ModuleDefLoader {
    * A mapping from effective to physical module names.
    */
   private static final Map<String, String> moduleEffectiveNameToPhysicalName =
-    new HashMap<String, String>();
+      new HashMap<String, String>();
 
   public static void clearModuleCache() {
     getModulesCache().clear();
   }
 
   /**
-   * Creates a module in memory that is not associated with a
-   * <code>.gwt.xml</code> file on disk.
-   *
+   * Creates a module in memory that is not associated with a <code>.gwt.xml</code> file on disk.
+   * 
    * @param logger logs the process
    * @param moduleName the synthetic module to create
    * @param inherits a set of modules to inherit from
@@ -79,9 +76,8 @@ public class ModuleDefLoader {
    * @return the loaded module
    * @throws UnableToCompleteException
    */
-  public static ModuleDef createSyntheticModule(TreeLogger logger,
-      String moduleName, final String[] inherits, boolean refresh)
-      throws UnableToCompleteException {
+  public static ModuleDef createSyntheticModule(TreeLogger logger, String moduleName,
+      final String[] inherits, boolean refresh) throws UnableToCompleteException {
     ModuleDef moduleDef = tryGetLoadedModule(moduleName, refresh);
     if (moduleDef != null) {
       return moduleDef;
@@ -102,18 +98,18 @@ public class ModuleDefLoader {
 
     ModuleDef module = doLoadModule(loader, logger, moduleName, resources);
     /*
-     * Must reset name override on synthetic modules. Otherwise they'll be
-     * incorrectly affected by the last inherits tag, because they have no XML
-     * which would reset the name at the end of parse.
+     * Must reset name override on synthetic modules. Otherwise they'll be incorrectly affected by
+     * the last inherits tag, because they have no XML which would reset the name at the end of
+     * parse.
      */
     module.setNameOverride(null);
     return module;
   }
 
   /**
-   * Loads a new module from the class path.  Equivalent to
+   * Loads a new module from the class path. Equivalent to
    * {@link #loadFromClassPath(TreeLogger, String, boolean)}.
-   *
+   * 
    * @param logger logs the process
    * @param moduleName the module to load
    * @return the loaded module
@@ -126,15 +122,15 @@ public class ModuleDefLoader {
 
   /**
    * Loads a new module from the class path.
-   *
+   * 
    * @param logger logs the process
    * @param moduleName the module to load
    * @param refresh whether to refresh the module
    * @return the loaded module
    * @throws UnableToCompleteException
    */
-  public static ModuleDef loadFromClassPath(TreeLogger logger,
-      String moduleName, boolean refresh) throws UnableToCompleteException {
+  public static ModuleDef loadFromClassPath(TreeLogger logger, String moduleName, boolean refresh)
+      throws UnableToCompleteException {
 
     ResourceLoader resources = ResourceLoaders.forClassLoader(Thread.currentThread());
 
@@ -143,6 +139,7 @@ public class ModuleDefLoader {
 
   /**
    * Loads a new module from the given ResourceLoader.
+   * 
    * @param moduleName the module to load
    * @param resources where to look for module.xml and module.gwtar files.
    * @param refresh whether to refresh the module
@@ -152,8 +149,9 @@ public class ModuleDefLoader {
   public static ModuleDef loadFromResources(TreeLogger logger, String moduleName,
       ResourceLoader resources, boolean refresh) throws UnableToCompleteException {
 
-    Event moduleDefLoadFromClassPathEvent = SpeedTracerLogger.start(
-        CompilerEventType.MODULE_DEF, "phase", "loadFromClassPath", "moduleName", moduleName);
+    Event moduleDefLoadFromClassPathEvent =
+        SpeedTracerLogger.start(CompilerEventType.MODULE_DEF, "phase", "loadFromClassPath",
+            "moduleName", moduleName);
     try {
       // Look up the module's physical name; if null, we are either encountering
       // the module for the first time, or else the name is already physical
@@ -174,7 +172,7 @@ public class ModuleDefLoader {
 
   /**
    * This method loads a module.
-   *
+   * 
    * @param loader the loader to use
    * @param logger used to log the loading process
    * @param moduleName the name of the module
@@ -183,19 +181,18 @@ public class ModuleDefLoader {
    * @throws UnableToCompleteException if module loading failed
    */
   private static ModuleDef doLoadModule(ModuleDefLoader loader, TreeLogger logger,
-      String moduleName, ResourceLoader resources)
-      throws UnableToCompleteException {
+      String moduleName, ResourceLoader resources) throws UnableToCompleteException {
 
-    ModuleDef moduleDef = new ModuleDef(moduleName, resources);
-    Event moduleLoadEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
-        "phase", "strategy.load()");
+    ModuleDef moduleDef = new ModuleDef(moduleName, resources, logger);
+    Event moduleLoadEvent =
+        SpeedTracerLogger.start(CompilerEventType.MODULE_DEF, "phase", "strategy.load()");
     loader.load(logger, moduleName, moduleDef);
     moduleLoadEvent.end();
 
     // Do any final setup.
     //
-    Event moduleNormalizeEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
-        "phase", "moduleDef.normalize()");
+    Event moduleNormalizeEvent =
+        SpeedTracerLogger.start(CompilerEventType.MODULE_DEF, "phase", "moduleDef.normalize()");
     moduleDef.normalize(logger);
     moduleNormalizeEvent.end();
 
@@ -216,7 +213,7 @@ public class ModuleDefLoader {
     }
     return cache;
   }
-  
+
   private static ModuleDef tryGetLoadedModule(String moduleName, boolean refresh) {
     ModuleDef moduleDef = getModulesCache().get(moduleName);
     if (moduleDef == null || moduleDef.isGwtXmlFileStale()) {
@@ -235,6 +232,7 @@ public class ModuleDefLoader {
 
   /**
    * Loads a module and all its included modules, recursively, into the given ModuleDef.
+   * 
    * @throws UnableToCompleteException
    */
   protected void load(TreeLogger logger, String nameOfModuleToLoad, ModuleDef dest)
@@ -243,9 +241,9 @@ public class ModuleDefLoader {
   }
 
   /**
-   * Loads a new module and its descendants into <code>moduleDef</code> as included modules.
-   * (If there are any descendants, this method will be called recursively.)
-   *
+   * Loads a new module and its descendants into <code>moduleDef</code> as included modules. (If
+   * there are any descendants, this method will be called recursively.)
+   * 
    * @param parentLogger Logs the process.
    * @param moduleName The module to load.
    * @param moduleDef The module to add the new module to.
@@ -259,12 +257,12 @@ public class ModuleDefLoader {
       return;
     }
 
-    TreeLogger logger = parentLogger.branch(TreeLogger.DEBUG, "Loading inherited module '" 
-        + moduleName + "'", null);
+    TreeLogger logger =
+        parentLogger
+            .branch(TreeLogger.DEBUG, "Loading inherited module '" + moduleName + "'", null);
 
     if (!ModuleDef.isValidModuleName(moduleName)) {
-      logger.log(TreeLogger.ERROR, "Invalid module name: '" + moduleName + "'",
-          null);
+      logger.log(TreeLogger.ERROR, "Invalid module name: '" + moduleName + "'", null);
       throw new UnableToCompleteException();
     }
     moduleDef.addInteritedModule(moduleName);
@@ -281,10 +279,8 @@ public class ModuleDefLoader {
         logger.log(TreeLogger.DEBUG, "Module location: " + externalForm, null);
       }
       try {
-        if ((!(externalForm.startsWith("jar:file")))
-            && (!(externalForm.startsWith("zip:file")))
-            && (!(externalForm.startsWith("http://")))
-            && (!(externalForm.startsWith("ftp://")))) {
+        if ((!(externalForm.startsWith("jar:file"))) && (!(externalForm.startsWith("zip:file")))
+            && (!(externalForm.startsWith("http://"))) && (!(externalForm.startsWith("ftp://")))) {
           File gwtXmlFile = new File(moduleURL.toURI());
           moduleDef.addGwtXmlFile(gwtXmlFile);
         }
@@ -292,14 +288,15 @@ public class ModuleDefLoader {
         logger.log(TreeLogger.ERROR, "Error parsing URI", e);
         throw new UnableToCompleteException();
       }
-      String compilationUnitArchiveName = slashedModuleName + ModuleDefLoader.COMPILATION_UNIT_ARCHIVE_SUFFIX;
+      String compilationUnitArchiveName =
+          slashedModuleName + ModuleDefLoader.COMPILATION_UNIT_ARCHIVE_SUFFIX;
       URL compiledModuleURL = resourceLoader.getResource(compilationUnitArchiveName);
       if (compiledModuleURL != null) {
         moduleDef.addCompilationUnitArchiveURL(compiledModuleURL);
       }
     }
     if (moduleURL == null) {
-      logger.log(TreeLogger.ERROR,"Unable to find '" + resName + "' on your classpath; "
+      logger.log(TreeLogger.ERROR, "Unable to find '" + resName + "' on your classpath; "
           + "could be a typo, or maybe you forgot to include a classpath entry for source?");
       throw new UnableToCompleteException();
     }
@@ -317,8 +314,8 @@ public class ModuleDefLoader {
     Reader r = null;
     try {
       r = Util.createReader(logger, moduleURL);
-      ModuleDefSchema schema = new ModuleDefSchema(logger, this, moduleName,
-          moduleURL, moduleDir, moduleDef);
+      ModuleDefSchema schema =
+          new ModuleDefSchema(logger, this, moduleName, moduleURL, moduleDir, moduleDef);
       ReflectiveParser.parse(logger, schema, r);
     } catch (Throwable e) {
       logger.log(TreeLogger.ERROR, "Unexpected error while processing XML", e);

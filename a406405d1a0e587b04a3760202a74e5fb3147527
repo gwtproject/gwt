@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d43d533_0b8bbd5f",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-13T09:39:02Z",
+      "side": 1,
+      "message": "Use\n\n !elem.hasTagName(BodyElement.TAG)\n\nWe should soon have BodyElement.is(elem) to make it even more readable: I14aa6163e52adb2f71cd1ca3557ff3514571a6a2",
+      "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

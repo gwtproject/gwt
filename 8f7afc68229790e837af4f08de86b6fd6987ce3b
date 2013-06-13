@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd8e91af_5ee495f8",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 5605
+      },
+      "writtenOn": "2013-06-13T21:58:16Z",
+      "side": 1,
+      "message": "You mean the issue in the datax.ui project? That was different. That was because they were setting a width of 0px on columns and wanting them to still be rendered. \n\nSo when we went in and did if width\u003d0 then display\u003dnone, that violated what they wanted. \n\nHere, we are only setting display\u003dnone on columns that have been hidden through the class. So the condition is now if column is hidden then set width\u003d0 and display\u003dnone. \n\nLMK if you were referring to something else.",
+      "parentUuid": "bd8e91af_7ed79142",
+      "revId": "8f7afc68229790e837af4f08de86b6fd6987ce3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd8e91af_be7bd986",
         "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3d32a1d3_2ae31f94",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5605
+      },
+      "writtenOn": "2013-06-13T21:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd8e91af_be7bd986",
+      "revId": "8f7afc68229790e837af4f08de86b6fd6987ce3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd8e91af_bec919a3",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-06-12T22:17:11Z",
       "side": 1,
       "message": "you can just change this to \"none\" if you like.",
+      "revId": "8f7afc68229790e837af4f08de86b6fd6987ce3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d32a1d3_4af05357",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5605
+      },
+      "writtenOn": "2013-06-13T21:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd8e91af_bec919a3",
       "revId": "8f7afc68229790e837af4f08de86b6fd6987ce3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

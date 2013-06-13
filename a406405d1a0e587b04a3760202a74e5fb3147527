@@ -52,6 +52,24 @@
       "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d43d533_aba46946",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-13T12:49:54Z",
+      "side": 1,
+      "message": "I\u0027ve just merged Ib24bee7fa494c0345a7bc97e1b5df1095a05d024 so you can now use hasTagName(BodyElement.TAG)",
+      "parentUuid": "5d43d533_ab90e908",
+      "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

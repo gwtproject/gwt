@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cafa992f_de66855b",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-13T20:03:07Z",
+      "side": 1,
+      "message": "How about calling this clearDom() and removing the boolean? If they don\u0027t want to clear the dom then they can call clear().\n\nRationale: clear(true) is less readable and memorable because you have to look up the method definition to see what \"true\" means. Hardly anyone would call this with any value other than a constant \"true\".",
+      "revId": "fbabc5a7293d5988f72798e0c7dad745b9e2f1a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

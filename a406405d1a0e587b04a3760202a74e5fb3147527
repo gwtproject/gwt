@@ -16,6 +16,24 @@
       "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d46d943_8cc4278c",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5295
+      },
+      "writtenOn": "2013-06-13T11:55:08Z",
+      "side": 1,
+      "message": "This does not work:\n\n BodyElement.TAG -\u003e \"body\"\n elem.getTagName() -\u003e \"BODY\"\n\n\nSee discussion:\nhttps://groups.google.com/forum/?fromgroups#!topic/google-web-toolkit/lKSourjgp04",
+      "parentUuid": "5d43d533_0b8bbd5f",
+      "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8a042103_5c339d15",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-13T23:30:45Z",
+      "side": 1,
+      "message": "I think javadoc looks good right now:\n\n \"Returns {@code true} if the timer is running. Timer is running if and only if it is scheduled\tbut it is not expired or cancelled.\"\n\nActually it is more clear than java.swing.Timer\u0027s description which has the same behavior \u003d) :\n\n \"Returns true if the Timer is running.\"\n\nIf you have something specific in your mind then we can change it. However, we should be careful when adding more data on the javadoc as developers start thinking about if there is a special behavior and if they should be doing something specific to handle that. In this case, they should not have any concerns.",
+      "parentUuid": "5d43d533_4b36a5ec",
+      "revId": "c33d8d915bd8bc69a4bfb538581fd6a971262345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_fef44948",
         "filename": "user/test/com/google/gwt/user/client/TimerTest.java",
         "patchSetId": 2

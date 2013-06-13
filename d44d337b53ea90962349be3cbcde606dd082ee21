@@ -16,6 +16,24 @@
       "revId": "d44d337b53ea90962349be3cbcde606dd082ee21",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d43d533_8bc40d8c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ObjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-13T09:44:39Z",
+      "side": 0,
+      "message": "This is not how Objects.equals is implemented in OpenJDK, contrary to what the javadoc says, so the test fails in dev mode.",
+      "parentUuid": "5d6e75b1_13712c55",
+      "revId": "d44d337b53ea90962349be3cbcde606dd082ee21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

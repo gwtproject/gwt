@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "5d6e75b1_135f6cf5",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-13T00:46:23Z",
+      "side": 1,
+      "message": "If you put IsStyle here, no one else can implement this interface - this is a restriction due to JSOs.",
+      "revId": "405fd8cbdb7f06893c9d08a3c18736ba9c40b030",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_73fff24e",
         "filename": "user/src/com/google/gwt/user/client/ui/IndexedPanel.java",
         "patchSetId": 6

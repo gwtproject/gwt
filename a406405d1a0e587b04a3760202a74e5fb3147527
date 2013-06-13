@@ -34,6 +34,24 @@
       "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d43d533_ab90e908",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-13T12:12:19Z",
+      "side": 1,
+      "message": "Ib24bee7fa494c0345a7bc97e1b5df1095a05d024 is only waiting for Verified+1 (for some reason, Jenkins doesn\u0027t verifies it). You can rebase your change on top of it (or I14aa6163e52adb2f71cd1ca3557ff3514571a6a2 for BodyElement.is(elem))",
+      "parentUuid": "7d46d943_8cc4278c",
+      "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

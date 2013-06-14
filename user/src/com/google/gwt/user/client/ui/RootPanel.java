@@ -15,11 +15,13 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
@@ -317,10 +319,27 @@ public class RootPanel extends AbsolutePanel {
     clear();
 
     if (clearDom) {
-      com.google.gwt.user.client.Element containerElement = getElement();
-      while (containerElement.hasChildNodes()) {
-        containerElement.removeChild(containerElement.getFirstChild());
+      Element containerElement = getElement();
+      Node child = containerElement.getFirstChild();
+      while (child != null) {
+        Node next = child.getNextSibling();
+        if (shouldNodeBeRemoved(child)) {
+          containerElement.removeChild(child);
+        }
+        child = next;
       }
     }
+  }
+
+  private boolean shouldNodeBeRemoved(Node child) {
+    if (Element.is(child)) {
+      Element childElement = (Element) child;
+      // do not remove GWT's iframe that is used for loading code
+      if ("iframe".equalsIgnoreCase(childElement.getTagName())
+          && GWT.getModuleName().equals(childElement.getId())) {
+        return false;
+      }
+    }
+    return true;
   }
 }

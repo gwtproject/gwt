@@ -15,11 +15,13 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
@@ -28,8 +30,10 @@ import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -317,10 +321,32 @@ public class RootPanel extends AbsolutePanel {
     clear();
 
     if (clearDom) {
-      com.google.gwt.user.client.Element containerElement = getElement();
+      List<Node> nodesToReAttach = new ArrayList<Node>();
+      Element containerElement = getElement();
       while (containerElement.hasChildNodes()) {
-        containerElement.removeChild(containerElement.getFirstChild());
+        Node child = containerElement.getFirstChild();
+
+        if (!shouldNodeBeRemoved(child)) {
+          nodesToReAttach.add(child);
+        }
+        containerElement.removeChild(child);
+      }
+
+      for (Node node : nodesToReAttach) {
+        containerElement.appendChild(node);
       }
     }
+  }
+
+  private boolean shouldNodeBeRemoved(Node child) {
+    if (Element.is(child)) {
+      Element childElement = (Element) child;
+      // do not remove GWT's iframe that is used for loading code
+      if ("iframe".equalsIgnoreCase(childElement.getTagName())
+          && GWT.getModuleName().equals(childElement.getId())) {
+        return false;
+      }
+    }
+    return true;
   }
 }

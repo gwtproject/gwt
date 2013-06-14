@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca51b91f_e6d3defc",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-14T10:25:44Z",
+      "side": 1,
+      "message": "Why are you maintaining a list with this nodes?, I think you just skip them instead of detaching reataching\nif (shouldNodeBeRemoved()) {\n  containerElement.removeChild()\n}",
+      "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca51b91f_46f07288",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-14T10:25:44Z",
+      "side": 1,
+      "message": "What about the __gwtHistoryFrame, it is still being used in IE6 History. I think if we remove it we will break History in this permutation. \nI know we are getting rid of IE6 in future releases though.",
+      "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

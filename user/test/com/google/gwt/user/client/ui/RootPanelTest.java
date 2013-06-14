@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -67,6 +68,26 @@ public class RootPanelTest extends GWTTestCase {
     // clean up
     rootPanel.clear(true);
     assertEquals(0, rootPanel.getElement().getChildCount());
+  }
+
+  public void testClearRootPanelWithGWTFrame() {
+
+    RootPanel rootPanel = createDOM("testClearRootPanel");
+
+    rootPanel.add(new Button("a"));
+    rootPanel.add(new Button("b"));
+
+    rootPanel.clear(true);
+    assertEquals(0, rootPanel.getElement().getChildCount());
+    
+    Element iFrame = DOM.createIFrame();
+    iFrame.setId(GWT.getModuleName());
+    rootPanel.getElement().appendChild(iFrame);
+
+    assertEquals(1, rootPanel.getElement().getChildCount());
+
+    rootPanel.clear(true);
+    assertEquals(1, rootPanel.getElement().getChildCount());
   }
 
   public void testClearRootPanelContainingTextNodes() {

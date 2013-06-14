@@ -16,6 +16,24 @@
       "revId": "5539daad102c0bdd31c5ec160110cbb0a2ec998c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa4e4580_c531fac1",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-14T14:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca51b91f_29a1c995",
+      "revId": "5539daad102c0bdd31c5ec160110cbb0a2ec998c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

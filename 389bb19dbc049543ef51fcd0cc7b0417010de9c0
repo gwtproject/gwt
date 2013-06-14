@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ca51b91f_c90a35dc",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-14T14:19:29Z",
+      "side": 1,
+      "message": "Deattaching/reattaching an iframe should result in reloading its page, and I don\u0027t think that\u0027s what we want:\n\n When an iframe element is inserted into a document, the user agent must create\n a nested browsing context, and then process the iframe attributes for the first\n time.\n\n When an iframe element is removed from a document, the user agent must\n discard the nested browsing context.\n\n This happens without any unload events firing (the nested browsing context and\n its Document are discarded, not unloaded).\n\n— Source: http://www.whatwg.org/specs/web-apps/current-work/multipage/the-iframe-element.html#the-iframe-element\n\nBecause it\u0027s only about one element (for now, but it should remain only a handful elements in the future at most), and it\u0027s inserted at the end of the body (well, OK, the module could then add other elements after that, but the original purpose of clearDom was to clear everything on load), how about skipping it in each iteration? Would it really slow down things?\n\n while (containerElement.hasChildNodes()) {\n   Node child \u003d containerElement.getFirstChild();\n   while (!shouldNodeBeRemoved(child)) {\n     child \u003d child.getNextSibling();\n   }\n   containerElement.removeChild(child);\n }\n\nAlso, is there really a big difference between hasChildNodes/getFirstChild and i\u003cgetChildCount()/getChild(i) ? (and one that matters here, because I don\u0027t expect clearDom to be used that much, and in 99% of the cases it\u0027ll be used to remove a \"loading\" message, so losing a few milliseconds wouldn\u0027t really matter as the \"loading\" message would still be visible in the interim)\n\nAnother alternative would be to search for the first node that we want to keep and remove everything before it, and repeat that process until we reached the last child node. Or even better, mix getFirstChild and getNextSibling to really walk the DOM, skipping the appropriate nodes:\n\n Node child \u003d containerElement.getFirstChild();\n while (child !\u003d null) {\n   Node next \u003d child.getNextSibling();\n   if (shouldNodeBeRemoved(child)) {\n     containerElement.removeChild(child);\n   }\n   child \u003d next;\n }",
+      "parentUuid": "ea5cbd37_e7b9a203",
+      "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca51b91f_46f07288",
         "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
         "patchSetId": 1

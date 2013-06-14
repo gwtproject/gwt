@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8a3261ef_cc580f0c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-14T20:30:02Z",
+      "side": 1,
+      "message": "Correct - the commit message documents this, but I\u0027ll stick a comment too.",
+      "parentUuid": "0a583140_4b83d9fb",
+      "revId": "8779f532cbb585ed608d12ec4b52014e7fec5e7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a583140_6b7e9d29",
         "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-14T19:49:25Z",
       "side": 1,
       "message": "What\u0027s the point of all these \u0027if\u0027 statements?  It looks like you should be able to eliminate them.\n\nIf they\u0027re necessary, can you please add a comment explaining why?",
+      "revId": "8779f532cbb585ed608d12ec4b52014e7fec5e7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a3261ef_ac55c3d1",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-14T20:30:02Z",
+      "side": 1,
+      "message": "Again, commit message touched on it. The bug only manifests in compiled code, and the compiler will inline this if it is too simple. I was going for the simplest code I could write that would not be optimized out (at least in draft mode) without using JSNI. Not that there is an issue with JSNI here, just that I wanted to keep the issue on track for following Java semantics. Once the method gets inlined, the bug goes away, since the outside code is accessing the field, and any static field access requires a clinit (which the compiler doesn\u0027t forget before this patch).",
+      "parentUuid": "0a583140_6b7e9d29",
       "revId": "8779f532cbb585ed608d12ec4b52014e7fec5e7e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ea5cbd37_e7b9a203",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-14T12:00:11Z",
+      "side": 1,
+      "message": "If I don\u0027t remove them we will see the same node in the next iteration and since iterating this way is the fastest way to do it. I am okay with reatttaching an element.",
+      "parentUuid": "ca51b91f_e6d3defc",
+      "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca51b91f_46f07288",
         "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-14T10:25:44Z",
       "side": 1,
       "message": "What about the __gwtHistoryFrame, it is still being used in IE6 History. I think if we remove it we will break History in this permutation. \nI know we are getting rid of IE6 in future releases though.",
+      "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa4e4580_65dfe660",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-06-14T12:00:11Z",
+      "side": 1,
+      "message": "You are right this will break IE6 History, but I am not willing to add extra complexity just to keep IE6 happy, since this will get released with GWT 2.6, its fine.",
+      "parentUuid": "ca51b91f_46f07288",
       "revId": "389bb19dbc049543ef51fcd0cc7b0417010de9c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

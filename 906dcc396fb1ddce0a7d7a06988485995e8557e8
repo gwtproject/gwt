@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a760dc7_d3fc54f5",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-15T09:21:23Z",
+      "side": 1,
+      "message": "- This code does not work with real browsers unless you change it to the code below, Because Element.hasTagName() is case-sensitive and compares the argument against getTagName() which always returns UPPERCASE (see: http://www.w3schools.com/jsref/prop_element_tagname.asp).\n\n      childElement.hasTagName(IFrameElement.TAG.toUpperCase())\n\nA simpler solution could be to get the iframe before the loop and compare it\n\n      moduleIframe \u003d DOM.getElementById(GWT.getModuleName()) ;\n      if (!childElement.equals(moduleIframe)) {} ...\n\n- NOTICE: I think  we must preserve the \u0027\u003cscript\u003e\u0027 with the \u0027moduleName.nocache.js\u0027 as well. Some times the user adds it to the body instead of to the head. I think that if we remove it,  XS linker would not load next fragments.\n\nOut of subject:  In these cases I miss css selectors in gwt, something like: \n\n nodesToRemove \u003d DOM.querySelectorAll(\"body \u003e :not(#moduleName)\");",
+      "revId": "906dcc396fb1ddce0a7d7a06988485995e8557e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

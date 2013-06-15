@@ -16,6 +16,24 @@
       "revId": "906dcc396fb1ddce0a7d7a06988485995e8557e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a760dc7_f32070a8",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-15T16:50:56Z",
+      "side": 1,
+      "message": "Forget the first part of my last comment, hasTagName was fixed in the patch https://gwt-review.googlesource.com/#/c/2975",
+      "parentUuid": "6a760dc7_d3fc54f5",
+      "revId": "906dcc396fb1ddce0a7d7a06988485995e8557e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

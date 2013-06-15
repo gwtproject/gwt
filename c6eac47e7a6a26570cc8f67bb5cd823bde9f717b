@@ -33,6 +33,24 @@
       "revId": "c6eac47e7a6a26570cc8f67bb5cd823bde9f717b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a760dc7_73eea042",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-15T05:54:14Z",
+      "side": 1,
+      "message": "click() is the name we use in other widgets (inputs, button, submit), so I think we should use the same to be coherent. \n\nI think developers know that click does a different thing in different elements, and the expected behavior in file-input is open the file dialog.",
+      "parentUuid": "0a583140_0ba601ae",
+      "revId": "c6eac47e7a6a26570cc8f67bb5cd823bde9f717b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

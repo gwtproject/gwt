@@ -15,10 +15,10 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.linker.CastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JsOutputOption;
@@ -859,7 +859,7 @@ public class GenerateJavaScriptAST {
       JVariable target = x.getVariableRef().getTarget();
       if (target instanceof JField) {
         JField field = (JField) target;
-        if (field.getLiteralInitializer() != null && (field.isStatic() || field.isFinal())) {
+        if (initializeAtTopScope(field)) {
           // Will initialize at top scope; no need to double-initialize.
           push(null);
           return;
@@ -893,7 +893,7 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JField x, Context ctx) {
       // if we need an initial value, create an assignment
-      if (x.getLiteralInitializer() != null && (x.isFinal() || x.isStatic())) {
+      if (initializeAtTopScope(x)) {
         // setup the constant value
         accept(x.getLiteralInitializer());
       } else if (x.getEnclosingType() == program.getTypeJavaLangObject()) {
@@ -2207,6 +2207,40 @@ public class GenerateJavaScriptAST {
       jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
       return jsInvocation;
     }
+
+    /**
+     * If a field is a literal, we can potentially treat it as immutable and assign it once on the
+     * prototype, to be reused by all instances of the class, instead of re-assigning the same
+     * literal in each constructor.
+     * 
+     * Technically, to match JVM semantics, we should only do this for final or static fields. For
+     * non-final/non-static fields, a super class's cstr, when it calls a polymorphic method that is
+     * overridden in the subclass, should actually see default values (not the literal initializer)
+     * before the subclass's cstr runs.
+     * 
+     * However, cstr's calling polymorphic methods is admittedly an uncommon case, so we apply some
+     * heuristics to see if we can initialize the field on the prototype anyway.
+     */
+    private boolean initializeAtTopScope(JField x) {
+      if (x.getLiteralInitializer() == null) {
+        return false;
+      }
+      if (x.isFinal() || x.isStatic()) {
+        // we can definitely initialize at top-scope, as JVM does so as well
+        return true;
+      } else {
+        // if the superclass can observe the field, we need to leave the default value
+        JDeclaredType current = x.getEnclosingType().getSuperClass();
+        while (current != null) {
+          if (canObserveSubclassFields.contains(current)) {
+            return false;
+          }
+          current = current.getSuperClass();
+        }
+        // should be safe to initialize at top-scope, as no one can observe the difference
+        return true;
+      }
+    }
   }
 
   private static class JavaToJsOperatorMap {
@@ -2266,6 +2300,80 @@ public class GenerateJavaScriptAST {
     }
   }
 
+  /**
+   * Determines which classes can potentially see uninitialized values of their subclasses' fields.
+   * 
+   * If a class can not observe subclass uninitialized fields then the initialization of those could
+   * be hoisted to the prototype.
+   */
+  private class CanObserveSubclassUninitializedFieldsVisitor extends JVisitor {
+    private JDeclaredType currentClass;
+
+    @Override
+    public boolean visit(JConstructor x, Context ctx) {
+      // Only look at constructor bodies.
+      assert currentClass == null;
+      currentClass = x.getEnclosingType();
+      return true;
+    }
+
+    @Override
+    public void endVisit(JConstructor x, Context ctx) {
+      currentClass = null;
+    }
+
+    @Override
+    public boolean visit(JMethod x, Context ctx) {
+      if (x.getName().equals("$$init")) {
+        assert currentClass == null;
+        currentClass = x.getEnclosingType();
+        return true;
+      }
+      // Do not traverse the method body if it is not a constructor.
+      return false;
+    }
+
+    @Override
+    public void endVisit(JMethod x, Context ctx) {
+      currentClass = null;
+    }
+
+    @Override
+    public void endVisit(JMethodCall x, Context ctx) {
+      // This is a method call inside a constructor.
+      assert currentClass != null;
+      // Calls to this/super constructors are okay, as they will also get examined
+      if (x.getTarget().isConstructor() && x.getInstance() instanceof JThisRef) {
+        return;
+      }
+      // Calls to the instance initializer are okay, as execution will not escape it
+      if (x.getTarget().getName().equals("$$init")) {
+        return;
+      }
+      // Calls to static methods or other-instance instance methods are okay as long
+      // as they don't leak 'this' as an argument. Instead of tracking 'this' through
+      // variables, we use the heuristic that if the type matches, then it might leak.
+      if (x.getTarget().isStatic() || !x.getTarget().getEnclosingType().replaces(currentClass)) {
+        boolean someArgCouldBeThisRef = false;
+        for (JType type : x.getTarget().getOriginalParamTypes()) {
+          if (currentClass.replaces(type)) {
+            someArgCouldBeThisRef = true;
+            break;
+          }
+        }
+        if (!someArgCouldBeThisRef) {
+          return;
+        }
+      }
+      // Technically we could also check whether our-instance instance methods led to
+      // any polymorphic dispatch (which might lead to subclasses observing their fields),
+      // but that would require more visiting, and the above heuristics seem pretty good.
+      //
+      // (For CompilerTest's FieldInitOrderBase test, only 3 classes passed the above
+      // heuristics: Throwable, http.client.Request, and FieldInitOrderBase itself.)
+      canObserveSubclassFields.add(currentClass);
+    }
+  }
 
   private class RecordCrossClassCallsAndJSInlinableMethods extends JVisitor {
 
@@ -2417,6 +2525,12 @@ public class GenerateJavaScriptAST {
   private final JsProgram jsProgram;
 
   private final Set<JConstructor> liveCtors = new IdentityHashSet<JConstructor>();
+
+  /**
+   * Classes that could potentially see uninitialized values for fields that are initialized in the
+   * declaration.
+   */
+  private final Set<JDeclaredType> canObserveSubclassFields = new HashSet<JDeclaredType>();
 
   /**
    * Sorted to avoid nondeterministic iteration.
@@ -2657,6 +2771,9 @@ public class GenerateJavaScriptAST {
   }
 
   private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {
+    CanObserveSubclassUninitializedFieldsVisitor canObserve =
+        new CanObserveSubclassUninitializedFieldsVisitor();
+    canObserve.accept(program);
     SortVisitor sorter = new SortVisitor();
     sorter.accept(program);
     RecordCrossClassCallsAndJSInlinableMethods recorder =

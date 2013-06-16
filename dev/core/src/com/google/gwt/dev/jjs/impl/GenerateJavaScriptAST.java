@@ -15,10 +15,10 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.linker.CastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JsOutputOption;
@@ -859,7 +859,7 @@ public class GenerateJavaScriptAST {
       JVariable target = x.getVariableRef().getTarget();
       if (target instanceof JField) {
         JField field = (JField) target;
-        if (field.getLiteralInitializer() != null && (field.isStatic() || field.isFinal())) {
+        if (initializeAtTopScope(field)) {
           // Will initialize at top scope; no need to double-initialize.
           push(null);
           return;
@@ -893,7 +893,7 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JField x, Context ctx) {
       // if we need an initial value, create an assignment
-      if (x.getLiteralInitializer() != null && (x.isFinal() || x.isStatic())) {
+      if (initializeAtTopScope(x)) {
         // setup the constant value
         accept(x.getLiteralInitializer());
       } else if (x.getEnclosingType() == program.getTypeJavaLangObject()) {
@@ -2206,6 +2206,36 @@ public class GenerateJavaScriptAST {
       JsInvocation jsInvocation = new JsInvocation(sourceInfo);
       jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
       return jsInvocation;
+    }
+
+    /**
+     * If a field is a literal, we can potentially treat it as immutable and assign it once on the
+     * prototype, to be reused by all instances of the class, instead of re-assigning the same
+     * literal in each constructor.
+     * 
+     * Technically, to match JVM semantics, we should only do this for final or static fields. For
+     * non-final/non-static fields, a super class's cstr should actually see default values (not the
+     * literal initializer) before the subclass's cstr runs.
+     * 
+     * However, this is slow for an admittedly uncommon case (a super class using a virtual method
+     * to read a subclass's field), so we apply some hueristics to see if we can do the fast thing
+     * (initialize at the top/prototype scope).
+     */
+    private boolean initializeAtTopScope(JField x) {
+      if (x.getLiteralInitializer() != null) {
+        if (x.isFinal() || x.isStatic()) {
+          // we can definitely initialize at top-scope, as that matches the JVM
+          return true;
+        } else if (x.getEnclosingType().getSuperClass() == program.getTypeJavaLangObject()) {
+          // the superclass is j.l.Object, which we know won't access any of a subclass's fields
+          return true;
+        } else {
+          // TODO Look at our superclass constructors to see if any of them call a virtual
+          // method. For now, assume that they might.
+          return false;
+        }
+      }
+      return false;
     }
   }
 

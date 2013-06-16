@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4aba299d_2a0f5f40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2234,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-16T20:40:32Z",
+      "side": 1,
+      "message": "Brian, do you have any hints about good places I could copy/paste a basic approach to do this sort of query?\n\nI can kinda/sorta read visitor implementations, but haven\u0027t actually written any from scratch, so don\u0027t know where to start yet.",
+      "revId": "d6a8b5ef662df0cc7d43f33c79028633bc677868",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

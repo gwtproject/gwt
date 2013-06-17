@@ -16,6 +16,24 @@
       "revId": "d6a8b5ef662df0cc7d43f33c79028633bc677868",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a583140_d1377604",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2234,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-17T16:29:53Z",
+      "side": 1,
+      "message": "I was think of a visitor like this one (incomplete) that only checks whether any of the class constructors have a dynamic call.  \n\n  /**\n   * Classes that could potentially see uninitialized values for fields that are ininitialized\n   * in the declaration.\n   */\n  final Set\u003cJClassType\u003e canObserveSubclassUninitializedFieldsSet \u003d new HashSet\u003cJClassType\u003e();\n\n  /**\n   * Determines which classes can potentially see uninitialized values for fields that\n   * are assigned literals in the declaration from subclasses.\n   *\n   * If a class can not observe subclass uninitialized fieds then the initialization of those\n   * could be hoisted to the prototype.\n   */\n  private class CanObserveSubclassUninitializedFieldsVisitor extends JVisitor {\n\n    private JClassType currentClass;\n    @Override\n    public boolean visit(JConstructor x, Context ctx) {\n      // Only look at constructor bodies.\n      assert currentClass \u003d\u003d null;\n      currentClass \u003d x.getEnclosingType();\n      return true;\n    }\n\n    @Override\n    public boolean visit(JMethod x, Context ctx) {\n      // Do not traverse the method body if it is not a constructor.\n      return false;\n    }\n\n    @Override\n    public void endVisit(JMethodCall x, Context ctx) {\n      // this is a method call inside a constructor.\n      assert currentClass !\u003d null;\n      // static dispatch can not observe subclass fields.\n      if (!x.isStaticDispatchOnly())\n        return;\n\n\n      if (x.canBePolymorphic()) {\n        // only potentially dynamic calls could observe uninitialized\n        // subclass fields.\n        canObserveSubclassUninitializedFieldsSet.add(currentClass);\n      }\n    }\n  }\n\nAfter you run this visitor (which should probably be the first thing in execImpl)  the information need to be propagated from classes to subclasses. That can be done in the visitor by querying the type oracle for subclasses or by another visitor pass, your choice.",
+      "parentUuid": "4aba299d_2a0f5f40",
+      "revId": "d6a8b5ef662df0cc7d43f33c79028633bc677868",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

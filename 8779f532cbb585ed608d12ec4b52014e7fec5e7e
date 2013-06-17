@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4aba299d_ca2ec395",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-06-17T19:51:46Z",
+      "side": 1,
+      "message": "The extra condition (both here and in GenerateJavaScriptAST) deals with the fact that MakeCallsStatic registers instance methods as static with JProgram, while JsoDevirtualizer does not. This seems reasonable at first, though since JSOs are *always* made static, there might be other implications. I suggested this in my first comment in this change request, but John seemed to think that this approach made more sense. That said, I haven\u0027t actually tried making that change, and seeing what else is affected (i.e. all other callsites of JProgram.isStaticImpl or .getStaticImpl).",
+      "parentUuid": "0a583140_6b2e9db3",
+      "revId": "8779f532cbb585ed608d12ec4b52014e7fec5e7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a583140_4b83d9fb",
         "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
         "patchSetId": 2

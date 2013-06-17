@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a583140_bca0592e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-17T20:58:04Z",
+      "side": 1,
+      "message": "I would just return true that means that other children will be visited to follow standard protocol.\n\nAlso add a comment before traverseOnSuccess mentioning that JRunAsync is treated different than other ones and some of its child nodes are not traversed normally and that it needs to be forced to traverse the onSuccess call.",
+      "revId": "8757890bf6737658cfac3f0f23ef3905297dc017",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

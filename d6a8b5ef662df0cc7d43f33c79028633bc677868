@@ -34,6 +34,24 @@
       "revId": "d6a8b5ef662df0cc7d43f33c79028633bc677868",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa3f25e7_5df87bff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2234,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-18T05:11:56Z",
+      "side": 1,
+      "message": "Hi Roberto,\n\nThanks for the draft visitor--that looks great; I\u0027ll take a shot at integrating this soon.",
+      "parentUuid": "0a583140_d1377604",
+      "revId": "d6a8b5ef662df0cc7d43f33c79028633bc677868",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

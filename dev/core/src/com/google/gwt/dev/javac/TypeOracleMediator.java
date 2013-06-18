@@ -176,6 +176,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
     public TypeOracleMediatorResolver(TypeOracleBuildContext context) {
       this.context = context;
     }
+
     public void addImplementedInterface(JRealClassType type, JClassType intf) {
       TypeOracleMediator.this.addImplementedInterface(type, intf);
     }
@@ -184,8 +185,8 @@ public class TypeOracleMediator extends TypeOracleBuilder {
       TypeOracleMediator.this.addThrows(method, exception);
     }
 
-    public Map<String, JRealClassType> getBinaryMapper() {
-      return TypeOracleMediator.this.binaryMapper;
+    public Map<String, JRealClassType> getInternalMapper() {
+      return TypeOracleMediator.this.internalMapper;
     }
 
     public TypeOracle getTypeOracle() {
@@ -355,7 +356,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
   }
 
   // map of internal names to classes
-  final Map<String, JRealClassType> binaryMapper = new HashMap<String, JRealClassType>();
+  final Map<String, JRealClassType> internalMapper = new HashMap<String, JRealClassType>();
 
   private final Set<JRealClassType> resolved = new HashSet<JRealClassType>();
 
@@ -409,7 +410,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
       }
       JRealClassType type = createType(typeData, unresolvedTypes, context);
       if (type != null) {
-        binaryMapper.put(typeData.internalName, type);
+        internalMapper.put(typeData.internalName, type);
         context.classMapType.put(type, cv);
       }
     }
@@ -457,8 +458,8 @@ public class TypeOracleMediator extends TypeOracleBuilder {
   /**
    * @return a map from binary class names to JRealClassType.
    */
-  public Map<String, JRealClassType> getBinaryMapper() {
-    return binaryMapper;
+  public Map<String, JRealClassType> getInternalMapper() {
+    return internalMapper;
   }
 
   /**
@@ -829,8 +830,8 @@ public class TypeOracleMediator extends TypeOracleBuilder {
     if (signature != null) {
       // If we have a signature, use it for superclass and interfaces
       SignatureReader reader = new SignatureReader(signature);
-      ResolveClassSignature classResolver = new ResolveClassSignature(context.resolver,
-          binaryMapper, logger, type, typeParamLookup);
+      ResolveClassSignature classResolver =
+          new ResolveClassSignature(context.resolver, internalMapper, logger, type, typeParamLookup);
       reader.accept(classResolver);
       classResolver.finish();
     } else {
@@ -838,7 +839,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
       if ((access & Opcodes.ACC_INTERFACE) == 0) {
         String superName = classData.getSuperName();
         if (superName != null) {
-          JClassType superType = binaryMapper.get(superName);
+          JClassType superType = internalMapper.get(superName);
           if (superType == null || !resolveClass(logger, superType, context)) {
             logger.log(TreeLogger.WARN, "Unable to resolve supertype "
                 + superName);
@@ -850,7 +851,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
 
       // Set interfaces
       for (String intfName : classData.getInterfaces()) {
-        JClassType intf = binaryMapper.get(intfName);
+        JClassType intf = internalMapper.get(intfName);
         if (intf == null || !resolveClass(logger, intf, context)) {
           logger.log(TreeLogger.WARN, "Unable to resolve interface " + intfName);
           return false;
@@ -943,7 +944,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
     String outerClass = classData.getOuterClass();
     JRealClassType enclosingType = null;
     if (outerClass != null) {
-      enclosingType = binaryMapper.get(outerClass);
+      enclosingType = internalMapper.get(outerClass);
       // Ensure enclosing classes are resolved
       if (enclosingType != null) {
         if (!resolveEnclosingClass(logger, enclosingType, context)) {
@@ -989,7 +990,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
     if (signature != null) {
       SignatureReader reader = new SignatureReader(signature);
       JType[] fieldTypeRef = new JType[1];
-      reader.acceptType(new ResolveTypeSignature(context.resolver, binaryMapper,
+      reader.acceptType(new ResolveTypeSignature(context.resolver, internalMapper,
           logger, fieldTypeRef, typeParamLookup, null));
       fieldType = fieldTypeRef[0];
 
@@ -1101,7 +1102,7 @@ public class TypeOracleMediator extends TypeOracleBuilder {
     assert type.getSort() == Type.OBJECT;
     String className = type.getInternalName();
     assert Name.isInternalName(className);
-    JRealClassType classType = binaryMapper.get(className);
+    JRealClassType classType = internalMapper.get(className);
     return classType;
   }
 

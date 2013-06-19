@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0aae7193_5e6ec5c8",
+        "filename": "user/src/com/google/gwt/dom/client/Node.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-06-19T16:31:40Z",
+      "side": 1,
+      "message": "You are right Daniel. \nI saw this as well http://jsperf.com/innerhtml-vs-removechild/50 and innerHTML is the worst option.",
+      "parentUuid": "2ab975d8_f9917743",
+      "revId": "6235efade41164a827968192cd798cd518d436f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ae8a1cc_7c61d9e3",
         "filename": "user/src/com/google/gwt/dom/client/Node.java",
         "patchSetId": 1

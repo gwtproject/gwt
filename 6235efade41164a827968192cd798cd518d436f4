@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0ad591ff_66786a39",
+        "filename": "user/src/com/google/gwt/dom/client/Node.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-19T18:46:48Z",
+      "side": 1,
+      "message": "This one is slightly (~10%) faster as I don\u0027t need an explicit null checks.\nI don\u0027t see any optimization opportunities missed for using JSNI. Am I missing something?",
+      "parentUuid": "0aae7193_f8edf1ee",
+      "revId": "6235efade41164a827968192cd798cd518d436f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ae8a1cc_9c55c504",
         "filename": "user/test/com/google/gwt/dom/client/NodeTest.java",
         "patchSetId": 1

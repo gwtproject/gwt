@@ -16,6 +16,24 @@
       "revId": "d5809befb28bac855411d2003b8c60a8781b623d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ad591ff_63a3fc8e",
+        "filename": "user/src/com/google/gwt/core/shared/SerializableThrowable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-19T00:11:35Z",
+      "side": 1,
+      "message": "The constructor was public (I can\u0027t remember why) so that was the reason I provided the setter but I can remove and wait until someone asks for it?",
+      "parentUuid": "0ad591ff_438358fb",
+      "revId": "d5809befb28bac855411d2003b8c60a8781b623d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,24 @@
       "revId": "8757890bf6737658cfac3f0f23ef3905297dc017",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ad591ff_6f5cbd31",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-20T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a583140_bca0592e",
+      "revId": "8757890bf6737658cfac3f0f23ef3905297dc017",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

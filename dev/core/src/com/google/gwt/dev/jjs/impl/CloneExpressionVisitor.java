@@ -227,11 +227,10 @@ public class CloneExpressionVisitor extends JVisitor {
 
   @Override
   public boolean visit(JRunAsync x, Context ctx) {
-    // Only the runAsync call itself needs cloning, the onSuccess can be shared.
     JExpression runAsyncCall = cloneExpression(x.getRunAsyncCall());
-    expression =
-        new JRunAsync(x.getSourceInfo(), x.getSplitPoint(), x.getName(), runAsyncCall, x
-            .getOnSuccessCall());
+    JExpression onSuccessCall = cloneExpression(x.getOnSuccessCall());
+    expression = new JRunAsync(
+        x.getSourceInfo(), x.getSplitPoint(), x.getName(), runAsyncCall, onSuccessCall);
     return false;
   }
 

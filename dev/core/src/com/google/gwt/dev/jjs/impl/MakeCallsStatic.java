@@ -30,6 +30,7 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
+import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -110,6 +111,13 @@ public class MakeCallsStatic {
       public RewriteMethodBody(JParameter thisParam, Map<JParameter, JParameter> varMap) {
         this.thisParam = thisParam;
         this.varMap = varMap;
+      }
+
+      @Override
+      public boolean visit(JRunAsync x, Context ctx) {
+        x.setRunAsyncCall(accept(x.getRunAsyncCall()));
+        x.setOnSuccessCall(accept(x.getOnSuccessCall()));
+        return false;
       }
 
       @Override

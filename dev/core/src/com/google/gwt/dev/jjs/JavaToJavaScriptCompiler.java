@@ -97,6 +97,7 @@ import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
 import com.google.gwt.dev.jjs.impl.ReplaceRunAsyncs;
 import com.google.gwt.dev.jjs.impl.ResolveRebinds;
+import com.google.gwt.dev.jjs.impl.RunAsyncsTightener;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
@@ -349,6 +350,8 @@ public class JavaToJavaScriptCompiler {
       Pruner.exec(jprogram, false);
       // prune all Object.getClass() overrides and replace with inline field ref
       ReplaceGetClassOverrides.exec(jprogram);
+
+      RunAsyncsTightener.exec(jprogram);
 
       // (7) Generate a JavaScript code DOM from the Java type declarations
       jprogram.typeOracle.recomputeAfterOptimizations();

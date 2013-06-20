@@ -32,6 +32,7 @@ import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
+import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -454,6 +455,13 @@ public class MethodInliner {
 
     public ParameterReplacer(JMethodCall methodCall) {
       this.methodCall = methodCall;
+    }
+
+    @Override
+    public boolean visit(JRunAsync x, Context ctx) {
+      x.setRunAsyncCall(accept(x.getRunAsyncCall()));
+      x.setOnSuccessCall(accept(x.getOnSuccessCall()));
+      return false;
     }
 
     @Override

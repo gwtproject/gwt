@@ -117,6 +117,13 @@ public class ReplaceRunAsyncs {
               + "be passed to runAsync().");
           return;
         }
+
+        // It's illegal for two nodes in the AST to refer to the same node and doing so will cause
+        // some visitors to run improperly. Duplicate asyncCallback before adding this second
+        // reference in onSuccessCall.
+        CloneExpressionVisitor cloner = new CloneExpressionVisitor();
+        asyncCallback = cloner.cloneExpression(asyncCallback);
+
         JMethodCall onSuccessCall = new JMethodCall(info, asyncCallback, callbackMethod);
 
         JRunAsync runAsyncNode = new JRunAsync(info, splitPoint, name, runAsyncCall, onSuccessCall);
@@ -139,6 +146,7 @@ public class ReplaceRunAsyncs {
           && method.getName().equals("runAsync");
     }
   }
+
   private class ReplaceRunAsyncResources extends JModVisitor {
     private final Map<String, List<JRunAsync>> replacementsByName;
     private final JMethod runAsyncCode;

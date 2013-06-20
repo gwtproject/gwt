@@ -82,6 +82,14 @@ public class JRunAsync extends JExpression {
     return true;
   }
 
+  public void setOnSuccessCall(JExpression onSuccessCall) {
+    this.onSuccessCall = onSuccessCall;
+  }
+
+  public void setRunAsyncCall(JExpression runAsyncCall) {
+    this.runAsyncCall = runAsyncCall;
+  }
+
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       /*

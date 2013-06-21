@@ -70,6 +70,24 @@
       "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ab975d8_5c6ed1c8",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5295
+      },
+      "writtenOn": "2013-06-21T07:42:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d43d533_aba46946",
+      "revId": "a406405d1a0e587b04a3760202a74e5fb3147527",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * @param <T> the type of the object
  */
-public final class Class<T> {
+public final class Class<T> extends java.lang.reflect.Type {
 
   private static final int PRIMITIVE = 0x00000001;
   private static final int INTERFACE = 0x00000002;

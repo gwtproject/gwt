@@ -15,6 +15,7 @@
  */
 package java.lang;
 
+import java.lang.reflect.Type;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -23,7 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * @param <T> the type of the object
  */
-public final class Class<T> {
+public final class Class<T> implements Type {
 
   private static final int PRIMITIVE = 0x00000001;
   private static final int INTERFACE = 0x00000002;

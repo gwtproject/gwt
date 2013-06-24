@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a298121_743288c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2336,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-24T18:04:57Z",
+      "side": 1,
+      "message": "Now that I think it though again to be safe we should not do the optimization if there is any function call in the constructor (except for init?)  and also check init.\n\nA dynamic call might happen in the static function called in the constructor. \n\nA more precise check should explore the call graph to a certain depth including all static functions that might access the \"this\" pointer through one of the parameters.\n\nSo checking that there are no calls here seems to be the simplest compromise.",
+      "revId": "62105b08d39b96da63e3abfdb4a67b9e1c989f79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "62105b08d39b96da63e3abfdb4a67b9e1c989f79",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea8f5d7a_ef78018c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2336,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-24T19:28:13Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve updated it so that any method call results in putting the class into the canObserveSubclassFields set.",
+      "parentUuid": "8a298121_743288c7",
+      "revId": "62105b08d39b96da63e3abfdb4a67b9e1c989f79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

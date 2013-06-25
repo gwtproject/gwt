@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8afc21ee_c23c2641",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-25T19:25:48Z",
+      "side": 1,
+      "message": "Thanks.  I\u0027d reformat this as:\n\n    Add FakeSafeHtmlTemplatesMaker\n    \n    Similar to FakeMessageMaker and FakeCssMaker, this class allows Java\n    tests to create instances of SafeHtmlTemplates without needing to call\n    GWT.create().\n    \n    Change-Id: Ic30bd738a9e931d1f207ee3a86eabe52cbee7161\n\nbecause Git wants the first paragraph of a commit message to be a single line less than about 70 characters, and for the rest of the commit message to be wrapped at about 80 characters.",
+      "revId": "b79bbaffe52af1174e317a1e9117dd088a0c1e78",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8afc21ee_02472ed7",
+        "filename": "user/test/com/google/gwt/junit/FakeSafeHtmlTemplatesMakerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-25T19:25:48Z",
+      "side": 1,
+      "message": "I think you\u0027ll need to hook this into JUnitSuite for it to actually run?",
+      "revId": "b79bbaffe52af1174e317a1e9117dd088a0c1e78",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

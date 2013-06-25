@@ -43,7 +43,7 @@ public class FakeSafeHtmlTemplatesMakerTest extends TestCase {
   public void testArgs() {
     MyTemplates templates = FakeSafeHtmlTemplatesMaker.create(MyTemplates.class);
     SafeHtml message = SafeHtmlUtils.fromString("message");
-    assertEquals("messageWithLink[message, url, linkText, style]",
+    assertEquals("messageWithLink[message, url, link, style]",
         templates.messageWithLink(message, "url", "link", "style").asString());
   }
 }

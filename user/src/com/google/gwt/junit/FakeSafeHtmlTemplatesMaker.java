@@ -16,6 +16,7 @@
 package com.google.gwt.junit;
 
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
 import java.lang.reflect.InvocationHandler;
@@ -57,8 +58,18 @@ public class FakeSafeHtmlTemplatesMaker implements InvocationHandler {
       throws Throwable {
     String name = method.getName();
 
-    String result = (args == null || args.length == 0) ? name : name
-        + Arrays.asList(args);
+    if (args == null || args.length == 0) {
+      return SafeHtmlUtils.fromString(name);
+    }
+
+    // SafeHtml does not implement toString(), so use asString() instead.
+    for (int i = 0; i < args.length; i++) {
+      if (args[i] instanceof SafeHtml) {
+        args[i] = ((SafeHtml) args[i]).asString();
+      }
+    }
+
+    String result = name + Arrays.asList(args);
     return SafeHtmlUtils.fromString(result);
   }
 }

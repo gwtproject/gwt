@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8afc21ee_a2259a84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-25T18:40:28Z",
+      "side": 1,
+      "message": "Can you elaborate your commit message some?  It\u0027s not clear what the purpose of this change is, since it looks like you just added two files without actually using them.",
+      "revId": "cd396e8db4c09030318622038dea871d27ab1b67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

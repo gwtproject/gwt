@@ -25,6 +25,8 @@ import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Timer;
 
+import java.util.Map.Entry;
+
 /**
  * Tests runAsync server/network failure handling.
  *
@@ -44,22 +46,23 @@ public class RunAsyncFailureTest extends GWTTestCase {
       this.expectedSuccessfulAttempt = expectedSuccessfulAttempt;
       token = sToken++;
     }
-    
+
     public int getToken() {
       return token;
     }
-    
-    public boolean onSuccessHelper(String test) {
+
+    public boolean onSuccessHelper(String testMessage) {
       int token = getToken();
       log("onSuccess: attempt = " + attempt + ", token = " + token);
+      assertNotInLeftOverFragment(testMessage);
       if (attempt == expectedSuccessfulAttempt) {
         return true;
       } else {
         // We don't really care about the test string, but we need to use it
         // somewhere so it doesn't get dead stripped out.  Each test passes
         // in a unique string so it ends up in it's fragment.
-        fail(test + " - Succeeded on attempt: " + attempt + 
-            " but should have succeeded on attempt: " + expectedSuccessfulAttempt);
+        fail(testMessage + " - Succeeded on attempt: " + attempt
+            + " but should have succeeded on attempt: " + expectedSuccessfulAttempt);
       }
       return false;
     }
@@ -90,7 +93,24 @@ public class RunAsyncFailureTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.RunAsyncFailure";
   }
-  
+
+  private static void assertNotInLeftOverFragment(String text) {
+    assertFalse(getLeftOverFragmentText().contains(text));
+  }
+
+  protected static String getLeftOverFragmentText() {
+    String leftOverFragmentText = "";
+    int highestFragmentIndex = -1;
+    for (Entry<Integer, String> entry :
+        LoggingXhrLoadingStrategy.sourceByFragmentIndex.entrySet()) {
+      if (entry.getKey() > highestFragmentIndex) {
+        highestFragmentIndex = entry.getKey();
+        leftOverFragmentText = entry.getValue();
+      }
+    }
+    return leftOverFragmentText;
+  }
+
   /**
    * Some subclasses of this test use linkers that do not support retries, in
    * which case the expected number of manual retries before success will always
@@ -105,24 +125,29 @@ public class RunAsyncFailureTest extends GWTTestCase {
   // always succeed on the first try.
   
   private void runAsync1(final int attempt, final int expectedSuccessfulAttempt) {
-    GWT.runAsync(new MyRunAsyncCallback(attempt, expectedSuccessfulAttempt) {
-      public void onFailure(Throwable caught) {
-        onFailureHelper(caught, new Timer() {
+    // Uses the alternative form of GWT.runAsync to broaden test coverage.
+    GWT.runAsync(
+        RunAsyncFailureTest.class, new MyRunAsyncCallback(attempt, expectedSuccessfulAttempt) {
           @Override
-          public void run() {
-            runAsync1(attempt + 1, expectedSuccessfulAttempt);
+          public void onFailure(Throwable caught) {
+            onFailureHelper(caught, new Timer() {
+                @Override
+              public void run() {
+                runAsync1(attempt + 1, expectedSuccessfulAttempt);
+              }
+            });
+          }
+
+          @Override
+          public void onSuccess() {
+            if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_1")) { finishTest(); }
           }
         });
-      }
-
-      public void onSuccess() {
-        if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_1")) { finishTest(); }
-      }
-    });
   }
   
   private void runAsync2(final int attempt, final int expectedSuccessfulAttempt) {
     GWT.runAsync(new MyRunAsyncCallback(attempt, expectedSuccessfulAttempt) {
+      @Override
       public void onFailure(Throwable caught) {
         onFailureHelper(caught, new Timer() {
           @Override
@@ -132,6 +157,7 @@ public class RunAsyncFailureTest extends GWTTestCase {
         });
       }
 
+      @Override
       public void onSuccess() {
         if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_2")) { finishTest(); }
       }
@@ -140,6 +166,7 @@ public class RunAsyncFailureTest extends GWTTestCase {
   
   private void runAsync3(final int attempt, final int expectedSuccessfulAttempt) {
     GWT.runAsync(new MyRunAsyncCallback(attempt, expectedSuccessfulAttempt) {
+      @Override
       public void onFailure(Throwable caught) {
         onFailureHelper(caught, new Timer() {
           @Override
@@ -149,6 +176,7 @@ public class RunAsyncFailureTest extends GWTTestCase {
         });
       }
 
+      @Override
       public void onSuccess() {
         if (onSuccessHelper("DOWNLOAD_FAILURE_TEST_3")) { finishTest(); }
       }
@@ -157,11 +185,15 @@ public class RunAsyncFailureTest extends GWTTestCase {
   
   private void runAsync4() {
     GWT.runAsync(new RunAsyncCallback() {
+      @Override
       public void onFailure(Throwable caught) {
         // This call should fail since no retries are done if the code downloads
         // successfully, but fails to install.
+        assertNotInLeftOverFragment("INSTALL_FAILURE_TEST");
         finishTest();
       }
+
+      @Override
       public void onSuccess() {
         // Use the string "INSTALL_FAILURE_TEST" so we can identify this
         // fragment on the server.  In the fail message is good enough.
@@ -172,9 +204,13 @@ public class RunAsyncFailureTest extends GWTTestCase {
 
   private void runAsync5() {
     GWT.runAsync(new RunAsyncCallback() {
+      @Override
       public void onFailure(Throwable caught) {
+        assertNotInLeftOverFragment("INSTALL_FAILURE_TEST_2");
         staticWrittenByAsync++;
       }
+
+      @Override
       public void onSuccess() {
         // Use the string "INSTALL_FAILURE_TEST" so we can identify this
         // fragment on the server.  In the fail message is good enough.
@@ -182,7 +218,7 @@ public class RunAsyncFailureTest extends GWTTestCase {
       }
     });
   }
-  
+
   /**
    * Test the basic functionality of retrying runAsync until is succeeds.
    * A Timer is used to avoid nesting GWT.runAsync calls.

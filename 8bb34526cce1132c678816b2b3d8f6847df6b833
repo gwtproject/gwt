@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "0a2cb179_ab9d554f",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T23:44:07Z",
+      "side": 1,
+      "message": "Feel free to do what you think is the best fit.\n\n(I personally avoid adding new spaces but if that is already the case for the rest I think you can choose keep it consistent with rest of the file.)",
+      "parentUuid": "0a2cb179_4babf9c3",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_4885b349",
         "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingXhrLoadingStrategy.java",
         "patchSetId": 5

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ea891da9_054c76f8",
+        "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T18:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_02ee2c0e",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_02738cac",
         "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-27T02:36:38Z",
       "side": 1,
       "message": "We can report the exception for failing faster:\n\n reportUncaughtException(caught);",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_e51dd2d5",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T18:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_02738cac",
       "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ea891da9_05239616",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T18:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_42859449",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_62829844",
         "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncFailureTest.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-27T02:36:38Z",
       "side": 1,
       "message": "I guess this wasn\u0027t intentional?",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_6532a25e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncFailureTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T18:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_62829844",
       "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea891da9_02ee2c0e",
+        "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T02:36:38Z",
+      "side": 1,
+      "message": "I think alternatively we can avoid changing any production code via creating our own loading strategy subclassing of XhrDownloadStrategy and RequestData.\n\nSomething like:\n\npublic class LoggingXhrLoadingStrategy extends LoadingStrategyBase {\n  public static Map\u003cInteger, String\u003e sourceByFragmentIndex \u003d new HashMap\u003cInteger, String\u003e();\n\n  public XhrLoadingStrategy() {\n     super(new XhrDownloadStrategy() {\n       @Override\n       public void tryDownload(final RequestData request) {\n         super.tryDownload(new RequestData(){\n            public void tryInstall(String code) {\n              super.tryInstall(code);\n              sourceByFragmentIndex.put(request.getFragment(), code);\n            }\n         });\n       }\n     });\n  }",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_02738cac",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T02:36:38Z",
+      "side": 1,
+      "message": "We can report the exception for failing faster:\n\n reportUncaughtException(caught);",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_42859449",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T02:36:38Z",
+      "side": 1,
+      "message": "(nit) you may consider naming methods like following:\n\n testUniqueContent\n testUniqueContentWithClassListeral",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_62829844",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncFailureTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T02:36:38Z",
+      "side": 1,
+      "message": "I guess this wasn\u0027t intentional?",
+      "revId": "ba7752e7bf88966e293089aed8a57e206d2649ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

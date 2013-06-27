@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "0a2cb179_eb466d30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T23:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_85196696",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_cb41a91b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T23:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea891da9_087d6b27",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_4853f31d",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 5
@@ -48,6 +84,24 @@
       "writtenOn": "2013-06-27T19:15:37Z",
       "side": 1,
       "message": "nit: spaces",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_4babf9c3",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T23:24:55Z",
+      "side": 1,
+      "message": "i\u0027m being consistent with the file.\n\ndo you want me to:\n1. reformat the whole file,\n2. be different from the rest of the file, or\n3. be consistent with the file?",
+      "parentUuid": "ea891da9_4853f31d",
       "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "0a2cb179_0b3581ad",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingXhrLoadingStrategy.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T23:24:55Z",
+      "side": 1,
+      "message": "it was conflicting with com.google.web.bindery.requestfactory.shared.impl.RequestData and something to do with the class hierarchy (before the most recent change you requested) was making the wrong one resolve first and organize import fail repeatedly\n\nseems to be working correctly now. i\u0027ve removed the FQN",
+      "parentUuid": "ea891da9_4885b349",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_c86623ff",
         "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
         "patchSetId": 5
@@ -82,6 +154,24 @@
       "writtenOn": "2013-06-27T19:05:19Z",
       "side": 1,
       "message": "I suppose that string interning will realize that the two strings are the same, but would it better be a final field (maybe static) in the class?",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_6b3c3d98",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-06-27T23:24:55Z",
+      "side": 1,
+      "message": "it can\u0027t be that, because then it ends up in the initial fragment (i tried it that way first). also i can\u0027t check for the existence of a class or field because the names are obfuscated randomly. i think we\u0027re kind of stuck with this shared interned String",
+      "parentUuid": "ea891da9_c86623ff",
       "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

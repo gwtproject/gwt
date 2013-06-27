@@ -174,8 +174,11 @@ public class LoadingStrategyBase implements LoadingStrategy {
     return __gwtStartLoadingFragment(fragment, $entry(loadFailed));
   }-*/;
   
-  private DownloadStrategy downloadStrategy;
+  protected DownloadStrategy downloadStrategy;
   private final FragmentReloadTracker manualRetryNumbers = FragmentReloadTracker.create();
+
+  public LoadingStrategyBase() {
+  }
 
   /**
    * Subclasses should create a DownloadStrategy and pass it into this constructor.

@@ -29,7 +29,7 @@ public class XhrLoadingStrategy extends LoadingStrategyBase {
   /**
    * Uses XHR's to download the code.
    */
-  protected static class XhrDownloadStrategy implements DownloadStrategy {
+  protected class XhrDownloadStrategy implements DownloadStrategy {
     @Override
     public void tryDownload(final RequestData request) {
       final XMLHttpRequest xhr = XMLHttpRequest.create();
@@ -37,13 +37,14 @@ public class XhrLoadingStrategy extends LoadingStrategyBase {
       xhr.open(HTTP_GET, request.getUrl());
 
       xhr.setOnReadyStateChange(new ReadyStateChangeHandler() {
+        @Override
         public void onReadyStateChange(XMLHttpRequest ignored) {
           if (xhr.getReadyState() == XMLHttpRequest.DONE) {
             xhr.clearOnReadyStateChange();
             if ((xhr.getStatus() == HTTP_STATUS_OK || xhr.getStatus() == HTTP_STATUS_NON_HTTP)
                 && xhr.getResponseText() != null
                 && xhr.getResponseText().length() != 0) {
-              request.tryInstall(xhr.getResponseText());
+              tryInstall(request, xhr.getResponseText());
             } else {
               // If the download fails
               request.onLoadError(
@@ -70,7 +71,10 @@ public class XhrLoadingStrategy extends LoadingStrategyBase {
   static final int HTTP_STATUS_OK = 200;
 
   public XhrLoadingStrategy() {
-    super(new XhrDownloadStrategy());
+    downloadStrategy = new XhrDownloadStrategy();
   }
 
+  protected void tryInstall(RequestData request, String responseText) {
+    request.tryInstall(responseText);
+  }
 }

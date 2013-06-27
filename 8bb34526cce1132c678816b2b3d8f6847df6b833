@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "ea891da9_85196696",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T19:15:37Z",
+      "side": 1,
+      "message": "Can you use a shorter first line if possible?\nIf you can\u0027t, then can you wrap the line?",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_4853f31d",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T19:15:37Z",
+      "side": 1,
+      "message": "nit: spaces",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_4885b349",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingXhrLoadingStrategy.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-06-27T19:15:37Z",
+      "side": 1,
+      "message": "I guess you don\u0027t need to use FQN.",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_c86623ff",
         "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
         "patchSetId": 5

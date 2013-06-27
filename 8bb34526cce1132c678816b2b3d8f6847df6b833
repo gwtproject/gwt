@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea891da9_c86623ff",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncContentTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-27T19:05:19Z",
+      "side": 1,
+      "message": "I suppose that string interning will realize that the two strings are the same, but would it better be a final field (maybe static) in the class?",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

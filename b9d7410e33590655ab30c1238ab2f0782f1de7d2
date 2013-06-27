@@ -16,6 +16,41 @@
       "revId": "b9d7410e33590655ab30c1238ab2f0782f1de7d2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_85424670",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-27T18:59:16Z",
+      "side": 1,
+      "message": "Parameterless static calls seem safe, but for constructors, it seems like we have to visit them to know whether they\u0027re safe?\n\nPerhaps we could construct a set of locally-safe constructors and a constructor call graph, which can be used to calculate the transitive closure. It should be linear for constructor calls.",
+      "parentUuid": "ea891da9_05e0f687",
+      "revId": "b9d7410e33590655ab30c1238ab2f0782f1de7d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea891da9_c8ed4345",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-06-27T18:59:16Z",
+      "side": 1,
+      "message": "sp: \"initialized\"",
+      "revId": "b9d7410e33590655ab30c1238ab2f0782f1de7d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

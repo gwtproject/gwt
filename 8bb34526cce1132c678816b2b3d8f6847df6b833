@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ea891da9_087d6b27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-27T20:19:38Z",
+      "side": 1,
+      "message": "I\u0027d recommend something like:\n\n    Add regression test for fragment splitting\n\n    This adds a test to verify that future changes don\u0027t accidentally\n    push *all* code into the leftover fragment.",
+      "parentUuid": "ea891da9_85196696",
+      "revId": "8bb34526cce1132c678816b2b3d8f6847df6b833",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea891da9_4853f31d",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 5

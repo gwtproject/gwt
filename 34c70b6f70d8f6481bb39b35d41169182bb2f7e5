@@ -86,6 +86,24 @@
       "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_1c38653e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-28T19:05:03Z",
+      "side": 1,
+      "message": "I think it is worth keeping in but still think there are some unsafe (incorrect) scenarios . You have to go very out of your way to reproduce those but I think we should be very careful still.\n\nSay for example that you store the \"this\" reference in a field (possibly static) and then call a static function that accesses it and does a dynamic call. Then the optimization in that case is incorrect.\n\nWe have three choices: \n(1) Leave it as it is now and assume that we are allowed our semantics to divert from java (as we do in some other limited circumstances). \n\n(2) Don\u0027t optimize those cases.\n\n(3) Add the necessary checks. i.e. that this is not leaked to a field. But we have to make sure that we cover all possible scenarios.",
+      "parentUuid": "070aec13_7820a174",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2cb179_31dc7205",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-28T17:54:39Z",
+      "side": 1,
+      "message": "Add \n\n// Check constructors and init method.\nif (x.getName().equals(\"$$init\") {\n  return true;\n}",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_515ba6ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-06-28T17:54:39Z",
+      "side": 1,
+      "message": "I think this is still not safe. If we don\u0027t optimize for this case do we leave out many opportunities?\n\nThe reason it is not safe is that the \"this\" reference might leak in many ways e.g.\nseeminglySafe(new UnrelatedClass(this)); \n\nTo be safe either we need to check every potentially called method (as Brian suggested); or allow methods that won\u0027t be able to observe this and this case is subtle.\n\nLet\u0027s leave this out for the moment, go ahead with the patch and see if we miss too many opportunities.",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

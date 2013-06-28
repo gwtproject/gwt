@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2cb179_71e0aae5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-28T17:25:53Z",
+      "side": 1,
+      "message": "Sounds like something we could add a test for?",
+      "revId": "badb2f2460c7b1036c3d16a58fd0e1464737cf24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_d1a5d6aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-28T17:25:53Z",
+      "side": 1,
+      "message": "Just as an aside, Go programming has made me accustomed to trying to restructure conditionals to minimize block nesting.  E.g.,\n\n    if (x.getLiteralInitializer() \u003d\u003d null) {\n      return false;\n    }\n    if (x.isFinal() || x.isStatic()) {\n      return true;\n    }\n    JDeclaredType current \u003d ...;\n    ...\n\nBut I\u0027ll leave it up to you/Roberto to decide whether that actually makes the code more readable or not.",
+      "revId": "badb2f2460c7b1036c3d16a58fd0e1464737cf24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

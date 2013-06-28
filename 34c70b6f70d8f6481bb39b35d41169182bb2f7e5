@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "070aec13_98b1351a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-28T18:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2cb179_31dc7205",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a2cb179_515ba6ad",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2013-06-28T17:54:39Z",
       "side": 1,
       "message": "I think this is still not safe. If we don\u0027t optimize for this case do we leave out many opportunities?\n\nThe reason it is not safe is that the \"this\" reference might leak in many ways e.g.\nseeminglySafe(new UnrelatedClass(this)); \n\nTo be safe either we need to check every potentially called method (as Brian suggested); or allow methods that won\u0027t be able to observe this and this case is subtle.\n\nLet\u0027s leave this out for the moment, go ahead with the patch and see if we miss too many opportunities.",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "070aec13_7820a174",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-28T18:08:54Z",
+      "side": 1,
+      "message": "I believe it\u0027s okay because the \"new UnrelatedClass(this)\" call is itself a JMethodCall to the cstr, which would have leaked \"this\", and so caused the current class to be marked (I actually saw this happen when debugging; I forget which class it was for).\n\nSo--the current logic is \"if you call any method on yourself, use the slow way\" or \"if you call any static/other method that could pass you, also use the slow way\".\n\nIf I leave this check out, running CompilerTest, it goes from ~3 classes using the slow way (Throwable, http.client.Request, and FieldInitOrderBase) to ~20-25 classes using the slow way (including ArrayList due to the c.toArray() method call).\n\nSo, I think this is worth keeping in?",
+      "parentUuid": "0a2cb179_515ba6ad",
       "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2cb179_f101fac9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ReverseSourceMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-28T17:13:20Z",
+      "side": 1,
+      "message": "Copyright?\n\n(I wonder why Jenkins didn\u0027t complain about this.  Maybe the copyright check doesn\u0027t descend into dev/codeserver?)",
+      "revId": "b2c117f10e96e78872fe1459ae4e9dddeb2cf368",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

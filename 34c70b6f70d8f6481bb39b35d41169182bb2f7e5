@@ -104,6 +104,24 @@
       "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "070aec13_7849c142",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-06-28T19:31:45Z",
+      "side": 1,
+      "message": "You are right, fields are tricky.\n\nAt this point, I\u0027m in favor of 1)--if/when we do miss a complex scenario, the worst case is that the semantics (fields being assigned too soon) will be GWT\u0027s current behavior.",
+      "parentUuid": "0a2cb179_1c38653e",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

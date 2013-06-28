@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2cb179_b714d251",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ReverseSourceMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-06-28T20:05:22Z",
+      "side": 1,
+      "message": "Nit: \"logs a warning\", not \"an warning\".",
+      "revId": "8c1c38d7b40e92b891464e591251fccc6fe6bd60",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

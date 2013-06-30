@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e70eb827_fa2265c0",
+        "filename": "user/src/com/google/gwt/user/client/ui/DialogBox.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-30T14:42:57Z",
+      "side": 1,
+      "message": "super.hide() calls hide(false), so the hide() override can safely be removed (and we can either make it clear in the hide() javadoc that it\u0027s equivalent to hide(false), and/or add tests that resizeHandlerRegistration is null after calls to both hide() and hide(boolean).",
+      "revId": "5ff9283f530debe9a40f97040e3d5e91af30f7f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

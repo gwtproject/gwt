@@ -65,6 +65,14 @@ public class ValueListBoxTest extends GWTTestCase {
     return "com.google.gwt.user.User";
   }
 
+  public void testEnabled() {
+    subject.setEnabled(true);
+    assertEquals(true, subject.isEnabled());
+
+    subject.setEnabled(false);
+    assertEquals(false, subject.isEnabled());
+  }
+
   public void xx_testExtraValueSet() {  // TODO(rjrjr) Strange failures on firefox
     Foo[] values = new Foo[] {new Foo("able"), new Foo("baker")};
     Foo baz = new Foo("baz");

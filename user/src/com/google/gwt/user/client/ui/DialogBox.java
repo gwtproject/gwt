@@ -301,6 +301,15 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
   }
 
   @Override
+  public void hide(boolean autoClosed) {
+    if (resizeHandlerRegistration != null) {
+      resizeHandlerRegistration.removeHandler();
+      resizeHandlerRegistration = null;
+    }
+    super.hide(autoClosed);
+  }
+  
+  @Override
   public void onBrowserEvent(Event event) {
     // If we're not yet dragging, only trigger mouse events if the event occurs
     // in the caption wrapper

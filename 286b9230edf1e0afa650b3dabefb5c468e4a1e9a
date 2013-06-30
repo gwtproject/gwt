@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "070aec13_38a2298c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Object.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-06-30T18:26:27Z",
+      "side": 1,
+      "message": "If we are saying clone is never supported, should this be final?  If it is intended that some classes could implement clone themselves, then the message should reflect that.\n\nIt would be theoretically possible to support clone when compiled to JS, but it would be highly GWT and class-specific.",
+      "revId": "286b9230edf1e0afa650b3dabefb5c468e4a1e9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

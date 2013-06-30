@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e70eb827_1df75312",
+        "filename": "user/src/com/google/gwt/canvas/client/Canvas.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-30T15:34:13Z",
+      "side": 1,
+      "message": "The problem with this approach is that it unconditionally creates a canvas element, even if isSupportedCompileTime is \u0027false\u0027, and I don\u0027t the compiler will optimize this code out (it\u0027s JSNI, so it can have side-effects)\n\nThat\u0027s why I proposed copying the code instead.",
+      "revId": "72940c7fee03b99702edce3c81a31ec89729f472",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

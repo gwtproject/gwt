@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.PartialSupport;
 import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * A widget representing a &lt;canvas&gt; element.
@@ -49,6 +50,19 @@ public class Canvas extends FocusWidget {
       return null;
     }
     return new Canvas(element);
+  }
+
+  public Canvas wrap(CanvasElement element) {
+    if (!isSupported()) {
+      return null;
+    }
+    Canvas canvas = new Canvas(element);
+
+    // Mark it attached and remember it for cleanup.
+    canvas.onAttach();
+    RootPanel.detachOnWindowClose(canvas);
+
+    return canvas;
   }
 
   /**

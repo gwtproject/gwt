@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e70eb827_1d10735a",
+        "filename": "user/src/com/google/gwt/i18n/tools/I18NCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-06-30T21:05:30Z",
+      "side": 1,
+      "message": "Always pass Locale.ROOT or Locale.ENGLISH to toLowerCase if you don\u0027t want to deal with angry Turkish users later ;-)\n\nYou can also use contains() instead of indexOf()\u003e\u003d0",
+      "revId": "977d70f5b4a1407276a2bb5c32fed58624c094a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

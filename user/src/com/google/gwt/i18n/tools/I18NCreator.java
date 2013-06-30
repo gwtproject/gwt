@@ -137,8 +137,7 @@ public final class I18NCreator extends ToolBase {
 
     // Figure out what platform we're on
     // 
-    boolean isWindows = gwtDevPath.substring(gwtDevPath.lastIndexOf('/') + 1).indexOf(
-        "windows") >= 0;
+    boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") >= 0;
 
     // If the path from here to the install directory is relative, we need to
     // set specific "base" directory tags; this is for sample creation during

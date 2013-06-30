@@ -83,6 +83,12 @@ public class Object {
     return getClass().getName() + '@' + Integer.toHexString(hashCode());
   }
 
+  protected Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException("GWT does not implement " +
+      "Object.clone() in general, subtypes of Object may " +
+      "provide their own implementation.");
+  }
+
   /**
    * Never called; here for JRE compatibility.
    * 

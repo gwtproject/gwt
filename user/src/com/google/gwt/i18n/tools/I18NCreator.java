@@ -30,6 +30,7 @@ import com.google.gwt.util.tools.Utility;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -137,7 +138,8 @@ public final class I18NCreator extends ToolBase {
 
     // Figure out what platform we're on
     // 
-    boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") >= 0;
+    boolean isWindows =System.getProperty("os.name").toLowerCase(Locale.ENGLISH).
+	contains("windows");
 
     // If the path from here to the install directory is relative, we need to
     // set specific "base" directory tags; this is for sample creation during

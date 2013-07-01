@@ -16,6 +16,24 @@
       "revId": "977d70f5b4a1407276a2bb5c32fed58624c094a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_8feed6e8",
+        "filename": "user/src/com/google/gwt/i18n/tools/I18NCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-01T16:32:06Z",
+      "side": 1,
+      "message": "For what it\u0027s worth, it looks like Apache Commons just checks that os.name starts with \"Windows\", case-sensitively.",
+      "parentUuid": "e70eb827_1d10735a",
+      "revId": "977d70f5b4a1407276a2bb5c32fed58624c094a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

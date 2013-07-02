@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2cb179_39fd30ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CatchBlockNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-07-02T17:27:00Z",
+      "side": 1,
+      "message": "Change the variable name as well to wrapMethod.",
+      "revId": "5640737c9d9d96da40e64a579064d938d4d7060d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2cb179_190f8c3f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CatchBlockNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-07-02T17:27:00Z",
+      "side": 1,
+      "message": "Make unwrapMethod a field like jseType?",
+      "revId": "5640737c9d9d96da40e64a579064d938d4d7060d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

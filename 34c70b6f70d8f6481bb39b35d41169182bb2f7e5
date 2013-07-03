@@ -122,6 +122,24 @@
       "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_1f0bab33",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-07-03T01:40:06Z",
+      "side": 1,
+      "message": "I am not too comfortable with (1). I prefer the overly conservative (2) and see if it is still a performance problem for us. If it is a performance problem we should go with (3).\n\nSo my suggestion is to go for (2) optimizing only those that have no calls other than constructors/ superconstructors/ init and parameterless static calls.",
+      "parentUuid": "070aec13_7849c142",
+      "revId": "34c70b6f70d8f6481bb39b35d41169182bb2f7e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

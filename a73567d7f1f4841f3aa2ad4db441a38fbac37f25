@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e76a38d8_0f804b38",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-07-04T10:38:42Z",
+      "side": 1,
+      "message": "Do we have still to support old version of firefox ? This branch is there to support version of firefox before Firefox 3 (released in 2008) or the current version is 22 now.",
+      "revId": "a73567d7f1f4841f3aa2ad4db441a38fbac37f25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e76a38d8_aff27fd1",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-07-04T10:38:42Z",
+      "side": 1,
+      "message": "IMHO, if we introduce this method in FileUpload, we should introduce this method for all Clickable widgets in order to be consistent,",
+      "revId": "a73567d7f1f4841f3aa2ad4db441a38fbac37f25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

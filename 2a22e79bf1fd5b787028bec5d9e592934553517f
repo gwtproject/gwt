@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7df98f0_afecb9f1",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractNavigableMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Javadoc for what implementing classes are expected to provide for these abstract methods.",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_6f20115c",
+        "filename": "user/super/com/google/gwt/emul/java/util/NavigableMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "2013",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_4f1bcd32",
+        "filename": "user/super/com/google/gwt/emul/java/util/NavigableMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Javadoc for methods",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_0f15c5fc",
+        "filename": "user/super/com/google/gwt/emul/java/util/NavigableSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "2013",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_2f1a092c",
+        "filename": "user/super/com/google/gwt/emul/java/util/NavigableSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Javadoc for methods",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_cf0eddf0",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "The line break seems weird here and elsewhere -- is this formatted with the standard GWT formatter?",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_ef0ba1dd",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Maybe compare \u003e 0 || (toInclusive \u0026\u0026 compare \u003d\u003d 0) would save a comparison in most cases?\n\nLikewise below.",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_8f08d5e2",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Is null the proper return here?  Previously we were throwing NSE.  Either way, there should probably be a test that verifies the correct result.",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7df98f0_af0599cb",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-05T19:37:30Z",
+      "side": 1,
+      "message": "Likewise here.",
+      "revId": "2a22e79bf1fd5b787028bec5d9e592934553517f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -17,6 +17,7 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -299,6 +300,17 @@ public class RootPanel extends AbsolutePanel {
   private RootPanel(Element elem) {
     super(elem.<com.google.gwt.user.client.Element> cast());
     onAttach();
+  }
+
+  @Override
+  public void add(Widget w) {
+    // warn about misuse of RootLayoutPanel vs. RootPanels
+    if (!GWT.isProdMode()) {
+      if (w instanceof LayoutPanel) {
+        GWT.log("Adding a LayoutPanel to RootPanel, did you mean RootLayoutPanel instead?");
+      }
+    }
+    super.add(w);
   }
 
   /**

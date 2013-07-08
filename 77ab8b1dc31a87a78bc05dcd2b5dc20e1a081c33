@@ -33,6 +33,24 @@
       "revId": "77ab8b1dc31a87a78bc05dcd2b5dc20e1a081c33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27bff08d_f2537e1c",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T16:32:15Z",
+      "side": 1,
+      "message": "Well, I like how straightforward it is to just:\n\n  switch (fixupThisRtlMadnessForTheLazyMe(keycode, currentLocale.isRtl())) {\n  case KEY_LEFT:\n    // line start\n    break;\n  case KEY_RIGHT:\n    // line end\n    break;\n  }\n\nCompared to:\n\n  // Fixup this RTL madness; gosh I\u0027m lazy I wish it\u0027d be a one-liner\n  if (currentLocale.isRtl()) {\n    keycode \u003d rtl2ltr(keycode);\n  }\n  // now we\u0027re normalized to LTR\n  switch (keycode) {\n  case KEY_LEFT:\n    // line start\n    break;\n  case KEY_RIGHT:\n    // line end\n    break;\n  }\n\nIn the widgets changed to use this method, I wouldn\u0027t have used an intermediate isRtl variable (having isRtl as the last argument makes it more readable with the inlined isRtl(), see above)",
+      "parentUuid": "2771b0c7_265c085e",
+      "revId": "77ab8b1dc31a87a78bc05dcd2b5dc20e1a081c33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

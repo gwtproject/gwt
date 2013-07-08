@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "27bff08d_efe07589",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:33:12Z",
+      "side": 1,
+      "message": "RequiresResize would yield false positive (e.g. ScrollPanel)",
+      "parentUuid": "c7ad346a_a68e26b4",
+      "revId": "b257fbbe8beb84b9734368e6b133266da6e6b004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7ad346a_8691aad6",
         "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2013-07-07T14:23:51Z",
       "side": 1,
       "message": "Should there be a flag to  turn the message off, using deferred binding?",
+      "revId": "b257fbbe8beb84b9734368e6b133266da6e6b004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27bff08d_8fed3980",
+        "filename": "user/src/com/google/gwt/user/client/ui/RootPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:33:12Z",
+      "side": 1,
+      "message": "I can\u0027t think of a valid case of adding LayoutPanels to a RootPanel instead of RootLayoutPanel, so I do not think there is  a need to turn the warning off.",
+      "parentUuid": "c7ad346a_8691aad6",
       "revId": "b257fbbe8beb84b9734368e6b133266da6e6b004",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

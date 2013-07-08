@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27bff08d_32f7d612",
+        "filename": "user/src/com/google/gwt/user/client/ui/Tree.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T15:55:47Z",
+      "side": 0,
+      "message": "+1 to removing those old compat workarounds.",
+      "revId": "7017162c27623fa3870fc31f8d17e31499ae021c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

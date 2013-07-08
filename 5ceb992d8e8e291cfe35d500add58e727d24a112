@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2771b0c7_511538bd",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-08T17:03:43Z",
+      "side": 1,
+      "message": "This function name feels clunky to me, but I don\u0027t really have any better suggestions.  Maybe shorten \"BasedOnLocale\" to just \"ForRtl\"?",
+      "revId": "5ceb992d8e8e291cfe35d500add58e727d24a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

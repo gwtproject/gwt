@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7ad346a_699d614c",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T16:23:29Z",
+      "side": 1,
+      "message": "I\u0027d have put isRtl as the second argument, but that also works ;-)\n\nNot a big fan of that method name either, but I can\u0027t come up with something much better.",
+      "revId": "77ab8b1dc31a87a78bc05dcd2b5dc20e1a081c33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

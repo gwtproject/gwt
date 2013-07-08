@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a73f60e7_a0099478",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T22:18:38Z",
+      "side": 1,
+      "message": "Unused: line below uses event.getKeyCode() (which should be preferred to DOM.eventGetKeyCode(event) anyway)",
+      "revId": "325477d3dc88b0fcae8f54fd6e2a2ea31d5e7575",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7ad346a_2976890d",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T22:18:38Z",
+      "side": 1,
+      "message": "As I said earlier, I\u0027d merge the 2 above lines:\n\n int keyCode \u003d KeyCodes.maybeSwapArrowKeysForRtl(event.getKeyCode(),\n     LocaleInfo.getCurrentLocale().isRTL());",
+      "revId": "325477d3dc88b0fcae8f54fd6e2a2ea31d5e7575",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27bff08d_12a09291",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T22:18:38Z",
+      "side": 1,
+      "message": "Hint about \"start of line\" for \"left\" and \"end of line\" for \"right\" in those comments?",
+      "revId": "325477d3dc88b0fcae8f54fd6e2a2ea31d5e7575",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

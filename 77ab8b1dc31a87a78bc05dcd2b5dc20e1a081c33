@@ -16,6 +16,23 @@
       "revId": "77ab8b1dc31a87a78bc05dcd2b5dc20e1a081c33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_265c085e",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-08T16:24:34Z",
+      "side": 1,
+      "message": "Seems like it would be conceptually easier to just change this method signature to something like:\n\n    int swapArrowKeysForRtl(int code)\n\nand make the caller responsible for only calling it in RTL locales?\n\n(Otherwise if we keep it as is, I agree with Thomas: I\u0027d alse have put the isRTL as the second argument.)",
+      "revId": "77ab8b1dc31a87a78bc05dcd2b5dc20e1a081c33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

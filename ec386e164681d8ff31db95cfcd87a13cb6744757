@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "a73f60e7_006de875",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T16:18:20Z",
+      "side": 1,
+      "message": "Sure it\u0027s more readable, but how about:\n\n HandlerRegistrationCollection hrc \u003d new HandlerRegistrationCollection();\n …\n hrc.add(foo.addXxxHandler(…));\n …\n hrc.add(bar.addYyyHandler(…));\n\nor:\n\n HandlerRegistrationCollection hrc \u003d new HandlerRegistrationCollection();\n …\n HandlerRegistration hr1 \u003d …\n hrc.add(hr1);\n …\n HandlerRegistration hr2 \u003d …\n hrc.add(hr2);\n\nI.e. accumulate HandlerRegistration instances right into the HRC (which can be a field of your class) rather than into local variables that you then pass as a whole to the factory method.\n\nIf you want varargs, you could add an addAll() method:\n\n HandlerRegistrationCollection hrc \u003d new HandlerRegistrationCollection();\n hrc.addAll(hr1, hr2);\n\nor with a Collection or Iterable as argument:\n\n HandlerRegistrationCollection hrc \u003d new HandlerRegistrationCollection();\n hrc.addAll(Arrays.asList(hr1, hr2));\n\nNote that Sencha has not felt the need to add such collection/varargs to their GroupingHandlerRegistration: http://docs.sencha.com/gxt/3/com/sencha/gxt/core/shared/event/GroupingHandlerRegistration.html\n\nSimilar for GWT-P\u0027s registerHandler on their PresenterWidget base class: http://arcbees.github.io/GWTP/javadoc/apidocs/com/gwtplatform/mvp/client/HandlerContainerImpl.html#registerHandler(com.google.web.bindery.event.shared.HandlerRegistration)",
+      "parentUuid": "a73f60e7_20e3c429",
+      "revId": "ec386e164681d8ff31db95cfcd87a13cb6744757",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a73f60e7_c09f80a1",
         "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
         "patchSetId": 1

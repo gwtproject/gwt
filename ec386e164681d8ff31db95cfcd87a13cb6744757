@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a73f60e7_e07f1c6a",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a73f60e7_a09cf4ad",
+      "revId": "ec386e164681d8ff31db95cfcd87a13cb6744757",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27bff08d_af2fddf4",
         "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a73f60e7_20e3c429",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:20:26Z",
+      "side": 1,
+      "message": "It allows for readable code:\nHandlerRegistration hr1 \u003d ...\nHandlerRegistration hr2 \u003d ...\nreturn HandlerRegistrationCollection.create(hr1, hr2);\n\ninstead of:\nHandlerRegistration hr1 \u003d ...\nHandlerRegistration hr2 \u003d ...\nHRC hrc \u003d new HandlerRegistrationCollection();\nhrc.add(hr1);\nhrc.add(hr2)\nreturn hrc;\n\nWe could go for a var args constructor, but I don\u0027t like those.",
+      "parentUuid": "27bff08d_af2fddf4",
+      "revId": "ec386e164681d8ff31db95cfcd87a13cb6744757",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a73f60e7_c09f80a1",
         "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-07-08T13:01:51Z",
       "side": 1,
       "message": "AFAICT LinkedList is almost always a bad choice (JVM, Android, GWT).\n\nFWIW, ResettableEventBus uses a HashSet.",
+      "revId": "ec386e164681d8ff31db95cfcd87a13cb6744757",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a73f60e7_40ded063",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a73f60e7_c09f80a1",
       "revId": "ec386e164681d8ff31db95cfcd87a13cb6744757",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

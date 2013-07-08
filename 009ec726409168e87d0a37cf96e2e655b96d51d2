@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27bff08d_cf9571d4",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-07-08T14:28:09Z",
+      "side": 1,
+      "message": "What about something like:\n\nHandlerRegistration hr \u003d HandlerRegistrations.wrapAll(hr1, hr2); instead? \n\nwrapAll() would then create a new HandlerRegistration instance whose removeHandler() method iterates through the var args array and delegates the removeHandler() call to each element of the array.\n\nI think this would work well if you know all handlers at compile time. This approach would also not introduce LinkedList to the code base (which adds quite a bit of JS in the final app) if you don\u0027t really need the collection.add() API style of this HandlerRegistrationCollection.\n\nThe developer can still add this wrapper HandlerRegistration to this HandlerRegistrationCollection if the code also contains dynamically created HandlerRegistration instances.",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

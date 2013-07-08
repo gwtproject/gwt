@@ -34,6 +34,24 @@
       "revId": "5ceb992d8e8e291cfe35d500add58e727d24a112",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27bff08d_b23ae699",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-08T19:09:55Z",
+      "side": 1,
+      "message": "How about adding an \"EXPERIMENTAL\" note on the javadoc to allow us to possibly change the name if we find a better one?",
+      "parentUuid": "2771b0c7_511538bd",
+      "revId": "5ceb992d8e8e291cfe35d500add58e727d24a112",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

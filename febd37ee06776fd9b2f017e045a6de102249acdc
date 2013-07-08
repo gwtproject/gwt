@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2771b0c7_72edda41",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:26:06Z",
+      "side": 1,
+      "message": "nit: space before @param?",
+      "revId": "febd37ee06776fd9b2f017e045a6de102249acdc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_971e607b",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:26:06Z",
+      "side": 1,
+      "message": "{@code true}\n\nBTW, perhaps you should remove @param\u0027s here. It doesn\u0027t add much and also you are not being consistent by not adding to those to maybeSwap...",
+      "revId": "febd37ee06776fd9b2f017e045a6de102249acdc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_d2fdc6ee",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:26:06Z",
+      "side": 1,
+      "message": "It might be a good idea to put a short code snippet here to show intended usage.",
+      "revId": "febd37ee06776fd9b2f017e045a6de102249acdc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

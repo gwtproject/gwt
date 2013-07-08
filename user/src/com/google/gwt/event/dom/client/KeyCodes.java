@@ -16,6 +16,7 @@
 
 package com.google.gwt.event.dom.client;
 
+
 /**
  * Contains the native key codes previously defined in
  * {@link com.google.gwt.user.client.ui.KeyboardListener}. When converting
@@ -435,6 +436,37 @@ public class KeyCodes {
    * Key code for IME.
    */
   public static final int KEY_WIN_IME = 229;
+
+  /**
+   * Determines if a key code is an arrow key.
+   * @param code the keycode to check
+   * @return true if the keycode matches an arrow key
+   */
+  public static boolean isArrowKey(int code) {
+    switch (code) {
+      case KEY_DOWN:
+      case KEY_RIGHT:
+      case KEY_UP:
+      case KEY_LEFT:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Update arrow keys for left and right based on current locale.
+   */
+  public static int maybeSwapArrowKeysBasedOnLocale(boolean isRtl, int code) {
+    if (isRtl) {
+      if (code == KEY_RIGHT) {
+        code = KEY_LEFT;
+      } else if (code == KEY_LEFT) {
+        code = KEY_RIGHT;
+      }
+    }
+    return code;
+  }
 
   // This class should never be instantiated
   private KeyCodes() {

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7ad346a_49e8a533",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Name.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2013-07-08T09:21:23Z",
+      "side": 0,
+      "message": "Have you considered if these deletions could break anything?. They dont break anyhing in gwt, but since they are public stuff, maybe 3party libraries could be using them.",
+      "revId": "8326705307bf6cc0b9c4b86d222036689285c712",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

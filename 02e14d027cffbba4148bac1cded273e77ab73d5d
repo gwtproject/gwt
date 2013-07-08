@@ -16,6 +16,24 @@
       "revId": "02e14d027cffbba4148bac1cded273e77ab73d5d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27bff08d_8f645954",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-08T13:20:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27bff08d_6f932513",
+      "revId": "02e14d027cffbba4148bac1cded273e77ab73d5d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,58 @@
       "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_d73a9835",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:08:46Z",
+      "side": 1,
+      "message": "HandleRegistrations looks like a better approach here. We can call the method compose. In that case we don\u0027t even need this class to be exposed. We can just write a simple anonymous implementation:\n\n public static HandlerRegistration compose(HandlerRegistration... handlers) {\n   return new HandlerRegistration() {\n     @Override\n     public void removeHandler() {\n       for (HandlerRegistration hr : handlers) {\n         hr.removeHandler();\n       }\n     }\n }\n\nThis pattern is pretty common in Guava. The main advantage is, you are quite flexible in changing implementations as the exposed API is very simple.",
+      "parentUuid": "27bff08d_cf9571d4",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_57d208c8",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:08:46Z",
+      "side": 1,
+      "message": "Any reason to go with Set instead of the simpler ArrayList?",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_d7adb878",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-08T19:08:46Z",
+      "side": 1,
+      "message": "If we end up going this way, just calling it \"add\" should be enough and more compact.\n\nWe can accompany it with addAll that takes vararg and forward the create call here.",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

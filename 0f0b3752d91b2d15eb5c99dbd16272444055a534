@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8796dc56_4c439f23",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-09T19:58:05Z",
+      "side": 1,
+      "message": "It is usually just \u003cpre\u003e (i.e. no \u003ccode\u003e) but no big deal, you can keep it.",
+      "revId": "0f0b3752d91b2d15eb5c99dbd16272444055a534",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

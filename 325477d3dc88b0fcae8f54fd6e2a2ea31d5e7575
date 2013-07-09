@@ -104,6 +104,24 @@
       "revId": "325477d3dc88b0fcae8f54fd6e2a2ea31d5e7575",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7dbe037_e36c667c",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-09T09:22:19Z",
+      "side": 1,
+      "message": "When you swap a KEY_RIGHT for a KEY_LEFT in RTL, that\u0027s because you\u0027re interested in the \"start of the line\" (which is on the left in LTR) rather than the left vs. right; so in the \"case KEY_LEFT\", the comment could say \"start of the line, no special RTL handling\".",
+      "parentUuid": "c7de1427_9e24ddbe",
+      "revId": "325477d3dc88b0fcae8f54fd6e2a2ea31d5e7575",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

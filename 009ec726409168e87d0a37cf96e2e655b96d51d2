@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a7dbe037_83a7229a",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-09T09:29:46Z",
+      "side": 1,
+      "message": "I think this is a good idea, only we need a slightly better implementation to avoid potential mem leaks when someone forgets to null out the reference.\n\nUpdated my implementation to use the API, but account for the mem situation.",
+      "parentUuid": "2771b0c7_d73a9835",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2771b0c7_57d208c8",
         "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "c7de1427_fe1b2179",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-09T09:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2771b0c7_57d208c8",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2771b0c7_d7adb878",
         "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2013-07-08T19:08:46Z",
       "side": 1,
       "message": "If we end up going this way, just calling it \"add\" should be enough and more compact.\n\nWe can accompany it with addAll that takes vararg and forward the create call here.",
+      "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07d58cff_2063aaf2",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrationCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-07-09T09:29:46Z",
+      "side": 1,
+      "message": "trying with a static version for now",
+      "parentUuid": "2771b0c7_d7adb878",
       "revId": "009ec726409168e87d0a37cf96e2e655b96d51d2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

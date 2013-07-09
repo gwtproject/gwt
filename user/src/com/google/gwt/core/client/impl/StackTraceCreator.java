@@ -35,14 +35,14 @@ public class StackTraceCreator {
   /**
    * Replacement for function names that cannot be extracted from a stack.
    */
-  private static final String ANONYMOUS = "anonymous";
+  public static final String ANONYMOUS = "anonymous";
 
   /**
    * This class acts as a deferred-binding hook point to allow more optimal
    * versions to be substituted. This base version simply crawls
    * <code>arguments.callee.caller</code>.
    */
-  static class Collector {
+  public static class Collector {
     public native JsArrayString collect() /*-{
       var seen = {};
       var toReturn = [];
@@ -226,7 +226,7 @@ public class StackTraceCreator {
   /**
    * Mozilla provides a <code>stack</code> property in thrown objects.
    */
-  static class CollectorMoz extends Collector {
+  public static class CollectorMoz extends Collector {
     /**
      * This implementation doesn't suffer from the limitations of crawling
      * <code>caller</code> since Mozilla provides proper activation records.
@@ -269,7 +269,7 @@ public class StackTraceCreator {
    * at Type.functionName [as methodName] (file.js:1:2)
    * </pre>
    */
-  static class CollectorChrome extends CollectorMoz {
+  public static class CollectorChrome extends CollectorMoz {
 
     static {
       increaseChromeStackTraceLimit();
@@ -414,12 +414,13 @@ public class StackTraceCreator {
    */
   static class CollectorChromeNoSourceMap extends CollectorChrome {
     protected int replaceIfNoSourceMap(int line) {
-      return -1;
+      return LINE_NUMBER_UNKNOWN;
     }
   }
 
-  private static native int parseInt(String number) /*-{
-    return parseInt(number) || -1;
+  public static native int parseInt(String number) /*-{
+    return parseInt(number)
+        || @com.google.gwt.core.client.impl.StackTraceCreator::LINE_NUMBER_UNKNOWN;
   }-*/;
 
   /**

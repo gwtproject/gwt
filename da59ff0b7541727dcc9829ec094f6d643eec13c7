@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7dbe037_c3da0a09",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-09T09:39:58Z",
+      "side": 1,
+      "message": "Ha, KEY_RIGHT should then have an \"end of the line\" ;-)",
+      "revId": "da59ff0b7541727dcc9829ec094f6d643eec13c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

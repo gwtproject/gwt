@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8796dc56_0c96f743",
+        "filename": "user/test/com/google/gwt/view/client/SingleSelectionModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-09T20:46:07Z",
+      "side": 1,
+      "message": "nit: spaces",
+      "revId": "83bb6bdffab0271882050acf46cbe1374351702c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8796dc56_8cc02746",
+        "filename": "user/test/com/google/gwt/view/client/SingleSelectionModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-09T20:46:07Z",
+      "side": 1,
+      "message": "Is there any reason to introduce this class instead of using just java.lang.Object, String or similar?",
+      "revId": "83bb6bdffab0271882050acf46cbe1374351702c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

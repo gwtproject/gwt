@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7dbe037_03ccf25b",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-09T09:38:58Z",
+      "side": 1,
+      "message": "Given the class is now called HandlerRegistrations, I think we should use {@link HandlerRegistration handler registrations} instead (here and below)",
+      "revId": "4b0c4f4e52b9f4b281bb9f36ba6d5d85ab00ec25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7dbe037_a3d41ee8",
+        "filename": "user/src/com/google/web/bindery/event/shared/HandlerRegistrations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-09T09:38:58Z",
+      "side": 1,
+      "message": "s/HandlerRegistrationCollection/HandlerRegistrations/",
+      "revId": "4b0c4f4e52b9f4b281bb9f36ba6d5d85ab00ec25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -105,6 +105,13 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
     assertFalse(model.isSelected("test1"));
     assertFalse(model.isSelected("test0"));
     assertEquals(0, model.getSelectedSet().size());
+    
+    SingleSelectionModel<TestClass> objectSelectionModel =
+        new SingleSelectionModel<TestClass>(null);
+    TestClass testObject = new TestClass(10022, "test0");
+    objectSelectionModel.setSelected(testObject, true);
+    assertEquals(1, objectSelectionModel.getSelectedSet().size());
+    assertEquals(testObject, objectSelectionModel.getSelectedSet().iterator().next());
   }
 
   public void testSetSelectedNull() {
@@ -147,5 +154,14 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
   @Override
   protected SingleSelectionModel<String> createSelectionModel(ProvidesKey<String> keyProvider) {
     return new SingleSelectionModel<String>(keyProvider);
+  }
+  
+  private class TestClass {
+    int i;
+    String str;
+    public TestClass(int i, String str) {
+      this.i = i;
+      this.str = str;
+    }
   }
 }

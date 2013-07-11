@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0764ac98_d77ee625",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-11T19:03:34Z",
+      "side": 1,
+      "message": "Hm, that bug suggests doing the workaround at the .substring() callsite.  Why do it here instead?\n\nAlso, how do you trigger this bug?  I\u0027m wondering why we haven\u0027t already heard of it from internal users, unless it only affects old JDKs?",
+      "revId": "343517f464e127eb72a8ee434ce57c277dd5fac6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -158,7 +158,9 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
     STRING {
       @Override
       Object readValue(ServerSerializationStreamReader stream) throws SerializationException {
-        return stream.readString();
+        String result = stream.readString();
+        // work around for Java bug 4513622 - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4513622
+        return result != null ? new String(result) : null;
       }
     };
 

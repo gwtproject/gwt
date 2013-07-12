@@ -275,6 +275,7 @@ abstract class DOMImplStandard extends DOMImpl {
       case "canplaythrough":
       case "ended":
       case "progress":
+      case "loadedmetadata":
         // First call removeEventListener, so as not to add the same event listener more than once
         elem.removeEventListener(eventTypeName, @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
         elem.addEventListener(eventTypeName, @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);

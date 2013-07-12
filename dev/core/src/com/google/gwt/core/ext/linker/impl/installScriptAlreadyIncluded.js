@@ -21,7 +21,7 @@ function installScript(filename) {
     var doc = getInstallLocationDoc();
     var script;
     // for sourcemaps, we inject textNodes into the script element on Chrome
-    if (navigator.userAgent.indexOf("Chrome") > -1 && window.JSON) {
+    if (navigator.userAgent.indexOf("Chrome") > -1 && window.JSON && window.JSON.stringify) {
       var scriptFrag = doc.createDocumentFragment()
       // surround code with eval until crbug #90707 
       scriptFrag.appendChild(doc.createTextNode("eval(\""));

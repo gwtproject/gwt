@@ -58,6 +58,7 @@ public class BrowserEvents {
   public static final String TOUCHEND = "touchend";
   public static final String TOUCHMOVE = "touchmove";
   public static final String TOUCHSTART = "touchstart";
+  public static final String LOADEDMETADATA = "loadedmetadata";
 
   // Prevents instantiation and subclassing.
   private BrowserEvents() {

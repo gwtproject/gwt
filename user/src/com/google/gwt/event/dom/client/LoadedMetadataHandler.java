@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.gwt.event.dom.client;
 
+import com.google.gwt.event.shared.EventHandler;
+
 /**
- * This is a convenience interface that includes all media handlers defined by
- * the core GWT system.
+ * Handler interface for {@link LoadedMetadataEvent} events.
  * 
  * <p>
  * <span style="color:red">Experimental API: This API is still under development
@@ -26,6 +26,12 @@ package com.google.gwt.event.dom.client;
  * </span>
  * </p>
  */
-public interface HasAllMediaHandlers extends HasEndedHandlers,
-					     HasProgressHandlers, HasCanPlayThroughHandlers, HasLoadedMetadataHandlers {
+public interface LoadedMetadataHandler extends EventHandler {
+
+  /**
+   * Called when LoadedMetadataEvent is fired.
+   *
+   * @param event the {@link LoadedMetadataEvent} that was fired
+   */
+  void onLoadedMetadata(LoadedMetadataEvent event);
 }

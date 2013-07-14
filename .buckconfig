@@ -1,0 +1,9 @@
+[build]
+  build_dependencies = TRANSITIVE
+[java]
+   src_roots = src, super, test
+[buckd]
+   ignore = \
+     .git, \
+     build
+

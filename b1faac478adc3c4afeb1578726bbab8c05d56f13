@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47d6a483_53046e5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-15T10:27:03Z",
+      "side": 1,
+      "message": "Could you add an Issue line just above that line?\n\n Issue: issue 8259\n\nIt\u0027ll help searching the commit history for changes related to that issue (and using the \"Issue\" footer also makes it possible to search for the reviews in Gerrit using \"tr:8259\" in the search box)",
+      "revId": "b1faac478adc3c4afeb1578726bbab8c05d56f13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47d6a483_b3a16a3b",
+        "filename": "user/src/com/google/gwt/dom/client/BrowserEvents.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-15T10:27:03Z",
+      "side": 1,
+      "message": "I think all the constants here are alphabetically sorted. Would you mind moving that line up between LOAD and LOSECAPTURE?",
+      "revId": "b1faac478adc3c4afeb1578726bbab8c05d56f13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

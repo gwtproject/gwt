@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47d6a483_9361c61a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-15T11:03:45Z",
+      "side": 1,
+      "message": "FYI, Gerrit\u0027s search won\u0027t work if \"Issue\" is not in the footer (i.e. if there\u0027s a blank line between \"Issue\" and \"Change-Id\")",
+      "revId": "daea7acc4a108ee30daad39bf93bf6f0c0337c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

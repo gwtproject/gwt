@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c777f47c_f9549331",
+        "filename": "user/src/com/google/gwt/event/dom/client/LoadedMetadataEvent.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-16T19:35:32Z",
+      "side": 1,
+      "message": "you need to indent 4 spaces after wrap. You can just copy paste following:\n\n  private static final Type\u003cLoadedMetadataHandler\u003e TYPE \u003d\n      new Type\u003cLoadedMetadataHandler\u003e(BrowserEvents.LOADEDMETADATA, new LoadedMetadataEvent());",
+      "revId": "be382abe39cb983ccba209ab14a1a3321c940bca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c777f47c_39d52b0a",
+        "filename": "user/src/com/google/gwt/event/dom/client/LoadedMetadataEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-16T08:38:18Z",
+      "side": 1,
+      "message": "It looks like some javadocs are left overs from copy paste. Please update.",
+      "revId": "bf629d955a0b5284f95c7980cb6c9c08ac14e059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c777f47c_59e2e7f0",
+        "filename": "user/src/com/google/gwt/event/dom/client/LoadedMetadataEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-16T08:38:18Z",
+      "side": 1,
+      "message": "please do line wrapping over 100",
+      "revId": "bf629d955a0b5284f95c7980cb6c9c08ac14e059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

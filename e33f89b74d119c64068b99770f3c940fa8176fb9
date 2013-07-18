@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33665713_7b1f5bd5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnusedImportsRemover.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-18T06:25:27Z",
+      "side": 1,
+      "message": "Nit: Should be indented one more column.",
+      "revId": "e33f89b74d119c64068b99770f3c940fa8176fb9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1325d3ee_878bc6a9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-07-20T01:24:45Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand what \"refs that point at refs\" means here.",
+      "revId": "b9163b2efdcf57371b3222c837ec55639587d7be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_a73c0afa",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-07-20T01:24:45Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. If compiledClass is non-null and doesn\u0027t have any errors, it seems like its dependencies could still have errors, so it might still turn out to be invalid. But in that case, we don\u0027t add it to depsNeeded, so if it does turn out to be invalid, we will miss some edges needed to invalidate classes that depend on it. Unless I\u0027m missing something...",
+      "revId": "b9163b2efdcf57371b3222c837ec55639587d7be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -249,7 +249,15 @@ class PersistentUnitCache extends MemoryUnitCache {
   PersistentUnitCache(final TreeLogger logger, File cacheDir) throws UnableToCompleteException {
     assert cacheDir != null;
     this.logger = logger;
-    this.cacheDirectory = new File(cacheDir, UNIT_CACHE_PREFIX);
+
+    try {
+      this.cacheDirectory = new File(cacheDir.getCanonicalFile(), UNIT_CACHE_PREFIX);
+    } catch(IOException ex) {
+      logger.log(TreeLogger.WARN, "Unable to create canonical file of "
+          + cacheDir.getAbsolutePath() + ".", ex);
+      throw new UnableToCompleteException();
+    }
+
     if (logger.isLoggable(TreeLogger.TRACE)) {
       logger.log(TreeLogger.TRACE, "Persistent unit cache dir set to: "
           + this.cacheDirectory.getAbsolutePath());

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3c75f62_96968c93",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-22T23:58:05Z",
+      "side": 1,
+      "message": "Hm, okay, I see now.  I think this whole comment could be simplified to something like:\n\n    We must canonicalize the path here, otherwise we might set cacheDirectory to\n    something like \"/path/to/nonexistent/../gwt-unitCache\".  If this were to happen, the\n    mkdirs() call below would only create \"/path/to/gwt-unitCache\" and further accesses\n    via the uncanonicalized path would fail.\n    \n    Fixes issue 6443.\n\nDo you think that still accurately conveys the bug/fix?",
+      "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

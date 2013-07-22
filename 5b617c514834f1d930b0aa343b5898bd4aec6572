@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1325d3ee_0d9c1557",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "I think providing just\n\n Element[] getRows(Element table) \n Element[] getCells(Element row) \n\nwould be enough to defer bind difference between two implementations and we can do the rest with pure java, right?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_2d991979",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_0d9ed560",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "public modifiers are redundant in interfaces.",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_6da311a9",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "getCellCount?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_4da8cd83",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "getRowCount?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_ed96e141",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "Can be name all elements that refers table as \u0027table\u0027 to be consistent? It is easier to read the code when you know they are the same thing.",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_cd931d50",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_8da765a1",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "private",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_adaa2969",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1325d3ee_6da1518f",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-22T20:28:35Z",
+      "side": 1,
+      "message": "package visible?",
+      "revId": "5b617c514834f1d930b0aa343b5898bd4aec6572",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

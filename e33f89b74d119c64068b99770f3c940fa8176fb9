@@ -16,6 +16,24 @@
       "revId": "e33f89b74d119c64068b99770f3c940fa8176fb9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f37f5f95_5f2fe76f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnusedImportsRemover.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-07-22T16:57:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33665713_7b1f5bd5",
+      "revId": "e33f89b74d119c64068b99770f3c940fa8176fb9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

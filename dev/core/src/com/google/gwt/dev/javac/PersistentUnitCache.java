@@ -249,7 +249,28 @@ class PersistentUnitCache extends MemoryUnitCache {
   PersistentUnitCache(final TreeLogger logger, File cacheDir) throws UnableToCompleteException {
     assert cacheDir != null;
     this.logger = logger;
-    this.cacheDirectory = new File(cacheDir, UNIT_CACHE_PREFIX);
+
+    /*
+     * Fixes issue 6448
+     * The cacheDirectory is created using File.mkdirs() which works with abstract
+     * path names like '/path/to/war/../gwt-unitCache' [1] because File.mkdirs() uses
+     * a canonical representation internally. In this case the created path will
+     * be '/path/to/gwt-unitCache'.
+     * To create an actual cache file File.createNewFile() is used in createCacheFile()
+     * which fails if we provide the same abstract path [1] because it can not find the
+     * sub folder 'war' in the file system.
+     * 
+     * We correct that by using the canonical path of cacheDir so that createCacheFile()
+     * never has to deal with abstract paths.
+     */
+    try {
+      this.cacheDirectory = new File(cacheDir.getCanonicalFile(), UNIT_CACHE_PREFIX);
+    } catch (IOException ex) {
+      logger.log(TreeLogger.WARN, "Unable to create canonical file of "
+          + cacheDir.getAbsolutePath() + ".", ex);
+      throw new UnableToCompleteException();
+    }
+
     if (logger.isLoggable(TreeLogger.TRACE)) {
       logger.log(TreeLogger.TRACE, "Persistent unit cache dir set to: "
           + this.cacheDirectory.getAbsolutePath());

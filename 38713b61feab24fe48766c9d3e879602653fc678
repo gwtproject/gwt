@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9349c3a6_847f471e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-22T22:03:50Z",
+      "side": 1,
+      "message": "Should we add a comment about why we need to use getCanonicalFile here?\n\n(if cacheDir is path/to/war/.. and \u0027war\u0027 doesn\u0027t exist in path/to, createCacheFile will later fail, despite cacheDirectory.mkdirs() returning \u0027true\u0027; this is because mkdirs internally uses an equivalent to getCanonicalFile, and createNewFile fails when \u0027war\u0027 doesn\u0027t exists; calling getCanonicalFile resolves to path/to and createNewFile thus no longer looks at the non-existent \u0027war\u0027 and thus won\u0027t fail)",
+      "revId": "38713b61feab24fe48766c9d3e879602653fc678",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9349c3a6_9a531c3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2013-07-23T16:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9349c3a6_a7cec5fb",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9349c3a6_e7c72ddd",
         "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9349c3a6_faf6a074",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2013-07-23T16:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9349c3a6_e7c72ddd",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9349c3a6_27c2b5cc",
         "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-07-23T13:28:38Z",
       "side": 1,
       "message": "I find it strange that \u0027parameterized\u0027 it not used and methodBuilder is not updated. It might be the expected usage, but it feels weird…",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9349c3a6_fa6ce005",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2013-07-23T16:55:50Z",
+      "side": 1,
+      "message": "I can see what you mean but seems to work without and I can\u0027t see anything obvious in methodBuilder to fiddle with.",
+      "parentUuid": "9349c3a6_27c2b5cc",
       "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3c75f62_b63f089c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-23T00:31:03Z",
+      "side": 1,
+      "message": "My comment from draft 4 still stands (repeating here in case you missed it, and because Gerrit\u0027s interface is kinda awkward):\n\nCan you add at least two more test cases like:\n    bad4 depends on bad2 (transitively bad)\n    bad5 depends on good0, bad0 (still bad although depends on a good unit)",
+      "revId": "5ccc63a8918bb0d401618b74ad36bea84a16ef36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

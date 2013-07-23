@@ -17,16 +17,7 @@
 package com.google.gwt.event.dom.client;
 
 /**
- * Contains the native key codes previously defined in
- * {@link com.google.gwt.user.client.ui.KeyboardListener}. When converting
- * keyboard listener instances, developers can use the following static import
- * to access these constants:
- * 
- * <pre> import static com.google.gwt.event.dom.client.KeyCodes.*; </pre>
- * 
- * These constants are defined with an int data type in order to be compatible
- * with the constants defined in
- * {@link com.google.gwt.user.client.ui.KeyboardListener}.
+ * Contains some native key code constants.
  */
 public class KeyCodes {
 

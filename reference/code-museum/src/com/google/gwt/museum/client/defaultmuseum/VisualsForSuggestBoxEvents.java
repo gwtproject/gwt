@@ -101,34 +101,8 @@ public class VisualsForSuggestBoxEvents extends AbstractIssue {
 
     };
 
-    handler.new CheckBoxListener("ChangeListener", p) {
-
-      @Override
-      public void addListener() {
-        b.addChangeListener(handler);
-      }
-
-      @Override
-      public void removeListener() {
-        b.removeChangeListener(handler);
-      }
-    };
-    handler.new CheckBoxListener("Suggestion listener", p) {
-
-      @Override
-      public void addListener() {
-        b.addEventHandler(handler);
-      }
-
-      @Override
-      public void removeListener() {
-        b.removeEventHandler(handler);
-      }
-    };
-
     b.addKeyUpHandler(handler);
     b.addKeyPressHandler(handler);
-    b.addFocusListener(handler);
     b.addSelectionHandler(handler);
     b.addValueChangeHandler(handler);
     return b;

@@ -327,40 +327,4 @@ public class WindowTest extends GWTTestCase {
     // Cleanup the window
     RootPanel.get().remove(largeDOM);
   }
-
-  @SuppressWarnings("deprecation")
-  static class ListenerTester implements WindowResizeListener {
-    static int resize = 0;
-
-    public void onWindowResized(int width, int height) {
-      ++resize;
-    }
-
-    public static void fire() {
-      resize = 0;
-      ResizeEvent.fire(Window.handlers, 0, 0);
-    }
-  }
-
-  @SuppressWarnings("deprecation")
-  public void testListenerRemoval() {
-
-    WindowResizeListener r1 = new ListenerTester();
-    WindowResizeListener r2 = new ListenerTester();
-
-    Window.addWindowResizeListener(r1);
-    Window.addWindowResizeListener(r2);
-
-    ListenerTester.fire();
-    assertEquals(ListenerTester.resize, 2);
-
-    Window.removeWindowResizeListener(r1);
-    ListenerTester.fire();
-    assertEquals(ListenerTester.resize, 1);
-
-    Window.removeWindowResizeListener(r2);
-    ListenerTester.fire();
-    assertEquals(ListenerTester.resize, 0);
-  }
-
 }

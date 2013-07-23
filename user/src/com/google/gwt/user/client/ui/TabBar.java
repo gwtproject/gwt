@@ -60,10 +60,8 @@ import com.google.gwt.user.client.Event;
  * {@example com.google.gwt.examples.TabBarExample}
  * </p>
  */
-@SuppressWarnings("deprecation")
-public class TabBar extends Composite implements SourcesTabEvents,
-    HasBeforeSelectionHandlers<Integer>, HasSelectionHandlers<Integer>,
-    ClickListener, KeyboardListener {
+public class TabBar extends Composite implements
+    HasBeforeSelectionHandlers<Integer>, HasSelectionHandlers<Integer> {
 
   /**
    * Set of characteristic interfaces supported by {@link TabBar} tabs.
@@ -157,15 +155,12 @@ public class TabBar extends Composite implements SourcesTabEvents,
       switch (DOM.eventGetType(event)) {
         case Event.ONCLICK:
           TabBar.this.selectTabByTabWidget(this);
-          TabBar.this.onClick(this);
           break;
 
         case Event.ONKEYDOWN:
           if (((char) DOM.eventGetKeyCode(event)) == KeyCodes.KEY_ENTER) {
             TabBar.this.selectTabByTabWidget(this);
           }
-          TabBar.this.onKeyDown(this, (char) event.getKeyCode(),
-              KeyboardListenerCollection.getKeyboardModifiers(event));
           break;
       }
       super.onBrowserEvent(event);
@@ -264,16 +259,6 @@ public class TabBar extends Composite implements SourcesTabEvents,
    */
   public void addTab(Widget widget) {
     insertTab(widget, getTabCount());
-  }
-
-  /**
-   * @deprecated Use {@link #addBeforeSelectionHandler(BeforeSelectionHandler)}
-   * and {@link #addSelectionHandler(SelectionHandler)} instead
-   */
-  @Override
-  @Deprecated
-  public void addTabListener(TabListener listener) {
-    ListenerWrapper.WrappedTabListener.add(this, listener);
   }
 
   /**
@@ -403,46 +388,6 @@ public class TabBar extends Composite implements SourcesTabEvents,
   }
 
   /**
-   * @deprecated add a {@link BeforeSelectionHandler} instead. Alternatively, if
-   * you need to access to the individual tabs, add a click handler to each
-   * {@link Tab} element instead.
-   */
-  @Override
-  @Deprecated
-  public void onClick(Widget sender) {
-  }
-
-  /**
-   * @deprecated add a key down handler to the individual {@link Tab} objects
-   *  instead.
-   */
-  @Override
-  @Deprecated
-  public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-  }
-
-  /**
-   * @deprecated this method has been doing nothing for the entire last release,
-   * if what you wanted to do was to listen to key press events on tabs, add the
-   * key press handler to the individual tab wrappers instead.
-   */
-  @Override
-  @Deprecated
-  public void onKeyPress(Widget sender, char keyCode, int modifiers) {
-  }
-
-  /**
-   * @deprecated this method has been doing nothing for the entire last release,
-   * if what you wanted to do was to listen to key up events on tabs, add the
-   * key up handler to the individual tab wrappers instead.
-   *
-   */
-  @Override
-  @Deprecated
-  public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-  }
-
-  /**
    * Removes the tab at the specified index.
    *
    * @param index the index of the tab to be removed
@@ -456,16 +401,6 @@ public class TabBar extends Composite implements SourcesTabEvents,
       selectedTab = null;
     }
     panel.remove(toRemove);
-  }
-
-  /**
-   * @deprecated Instead use the {@link HandlerRegistration#removeHandler}
-   * call on the object returned by an add*Handler method
-   */
-  @Override
-  @Deprecated
-  public void removeTabListener(TabListener listener) {
-    ListenerWrapper.WrappedTabListener.remove(this, listener);
   }
 
   /**

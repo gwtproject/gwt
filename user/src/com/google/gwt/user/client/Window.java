@@ -528,18 +528,6 @@ public class Window {
   }
 
   /**
-   * Adds a listener to receive window closing events.
-   *
-   * @param listener the listener to be informed when the window is closing
-   * @deprecated use {@link Window#addWindowClosingHandler(ClosingHandler)} and
-   *             {@link Window#addCloseHandler(CloseHandler)} instead
-   */
-  @Deprecated
-  public static void addWindowCloseListener(WindowCloseListener listener) {
-    BaseListenerWrapper.WrapWindowClose.add(listener);
-  }
-
-  /**
    * Adds a {@link Window.ClosingEvent} handler.
    *
    * @param handler the handler
@@ -549,17 +537,6 @@ public class Window {
       ClosingHandler handler) {
     maybeInitializeCloseHandlers();
     return addHandler(Window.ClosingEvent.getType(), handler);
-  }
-
-  /**
-   * Adds a listener to receive window resize events.
-   *
-   * @param listener the listener to be informed when the window is resized
-   * @deprecated use {@link Window#addResizeHandler(ResizeHandler)} instead
-   */
-  @Deprecated
-  public static void addWindowResizeListener(WindowResizeListener listener) {
-    BaseListenerWrapper.WrapWindowResize.add(listener);
   }
 
   /**
@@ -573,18 +550,6 @@ public class Window {
     maybeInitializeCloseHandlers();
     maybeInitializeScrollHandlers();
     return addHandler(Window.ScrollEvent.getType(), handler);
-  }
-
-  /**
-   * Adds a listener to receive window scroll events.
-   *
-   * @param listener the listener to be informed when the window is scrolled
-   * @deprecated use {@link Window#addWindowScrollHandler(ScrollHandler)}
-   *             instead
-   */
-  @Deprecated
-  public static void addWindowScrollListener(WindowScrollListener listener) {
-    BaseListenerWrapper.WrapWindowScroll.add(listener);
   }
 
   /**
@@ -730,36 +695,6 @@ public class Window {
   public static native String prompt(String msg, String initialValue) /*-{
     return $wnd.prompt(msg, initialValue);
   }-*/;
-
-  /**
-   * Removes a window closing listener.
-   *
-   * @param listener the listener to be removed
-   */
-  @Deprecated
-  public static void removeWindowCloseListener(WindowCloseListener listener) {
-    BaseListenerWrapper.WrapWindowClose.remove(handlers, listener);
-  }
-
-  /**
-   * Removes a window resize listener.
-   *
-   * @param listener the listener to be removed
-   */
-  @Deprecated
-  public static void removeWindowResizeListener(WindowResizeListener listener) {
-    BaseListenerWrapper.WrapWindowResize.remove(handlers, listener);
-  }
-
-  /**
-   * Removes a window scroll listener.
-   *
-   * @param listener the listener to be removed
-   */
-  @Deprecated
-  public static void removeWindowScrollListener(WindowScrollListener listener) {
-    BaseListenerWrapper.WrapWindowScroll.remove(handlers, listener);
-  }
 
   /**
    * Resizes the window by the specified width and height. This method moves the

@@ -33,7 +33,6 @@ import com.google.gwt.user.client.ui.Widget;
 public class VisualsForCheckBoxAndRadioButtonEvents extends AbstractIssue {
   private VerticalPanel p = new VerticalPanel();
 
-  @SuppressWarnings("deprecation")
   @Override
   public Widget createIssue() {
     p.setWidth("500px");
@@ -49,11 +48,9 @@ public class VisualsForCheckBoxAndRadioButtonEvents extends AbstractIssue {
         b.setValue(false, true);
       }
     }));
-    b.addKeyboardListener(handler);
     HandlesAllKeyEvents.addHandlers(b, handler);
     b.addFocusHandler(handler);
     b.addBlurHandler(handler);
-    b.addFocusListener(handler);
     b.addValueChangeHandler(handler);
 
     // Rich text box:
@@ -64,13 +61,11 @@ public class VisualsForCheckBoxAndRadioButtonEvents extends AbstractIssue {
     b.setTitle("Radio Button");
     p.add(radio);
     handler = new EventReporter<Boolean, Object>(p);
-    radio.addKeyboardListener(handler);
 
     HandlesAllKeyEvents.addHandlers(radio, handler);
     radio.addBlurHandler(handler);
     radio.addFocusHandler(handler);
     radio.addClickHandler(handler);
-    radio.addClickListener(handler);
     radio.addValueChangeHandler(handler);
     p.add(new Button("change value with event", new ClickHandler() {
       public void onClick(ClickEvent event) {

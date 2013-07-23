@@ -70,19 +70,6 @@ public class PushButton extends CustomButton {
   }
 
   /**
-   * Constructor for <code>PushButton</code>. The supplied image is used to
-   * construct the default face of the button.
-   * 
-   * @param upImage image for the default (up) face of the button
-   * @param listener the click listener
-   * @deprecated Use {@link #PushButton(Image, ClickHandler)} instead
-   */
-  @Deprecated
-  public PushButton(Image upImage, ClickListener listener) {
-    super(upImage, listener);
-  }
-
-  /**
    * Constructor for <code>PushButton</code>.
    * 
    * @param upImage image for the default(up) face of the button
@@ -101,19 +88,6 @@ public class PushButton extends CustomButton {
    */
   public PushButton(Image upImage, Image downImage, ClickHandler handler) {
     super(upImage, downImage, handler);
-  }
-
-  /**
-   * Constructor for <code>PushButton</code>.
-   * 
-   * @param upImage image for the default(up) face of the button
-   * @param downImage image for the down face of the button
-   * @param listener clickListener
-   * @deprecated Use {@link #PushButton(Image, Image, ClickHandler)} instead
-   */
-  @Deprecated
-  public PushButton(Image upImage, Image downImage, ClickListener listener) {
-    super(upImage, downImage, listener);
   }
 
   /**
@@ -138,19 +112,6 @@ public class PushButton extends CustomButton {
   }
 
   /**
-   * Constructor for <code>PushButton</code>. The supplied text is used to
-   * construct the default face of the button.
-   * 
-   * @param upText the text for the default (up) face of the button
-   * @param listener the click listener
-   * @deprecated Use {@link #PushButton(String, ClickHandler)} instead
-   */
-  @Deprecated
-  public PushButton(String upText, ClickListener listener) {
-    super(upText, listener);
-  }
-
-  /**
    * Constructor for <code>PushButton</code>.
    * 
    * @param upText the text for the default (up) face of the button
@@ -169,19 +130,6 @@ public class PushButton extends CustomButton {
    */
   public PushButton(String upText, String downText, ClickHandler handler) {
     super(upText, downText, handler);
-  }
-
-  /**
-   * Constructor for <code>PushButton</code>.
-   * 
-   * @param upText the text for the default (up) face of the button
-   * @param downText the text for down face of the button
-   * @param listener the click listener
-   * @deprecated Use {@link #PushButton(String, String, ClickHandler)} instead
-   */
-  @Deprecated
-  public PushButton(String upText, String downText, ClickListener listener) {
-    super(upText, downText, listener);
   }
 
   @Override

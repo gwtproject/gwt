@@ -23,10 +23,6 @@ import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutEvent;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -128,9 +124,8 @@ import com.google.gwt.user.client.Window;
  * </pre>
  * 
  */
-@SuppressWarnings("deprecation")
 public class DialogBox extends DecoratedPopupPanel implements HasHTML,
-    HasSafeHtml, MouseListener {
+    HasSafeHtml {
   /**
    * Set of characteristic interfaces supported by the {@link DialogBox}
    * caption.
@@ -153,7 +148,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
   }
 
   private class MouseHandler implements MouseDownHandler, MouseUpHandler,
-      MouseOutHandler, MouseOverHandler, MouseMoveHandler {
+      MouseMoveHandler {
 
     public void onMouseDown(MouseDownEvent event) {
       beginDragging(event);
@@ -161,14 +156,6 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
 
     public void onMouseMove(MouseMoveEvent event) {
       continueDragging(event);
-    }
-
-    public void onMouseOut(MouseOutEvent event) {
-      DialogBox.this.onMouseLeave(caption.asWidget());
-    }
-
-    public void onMouseOver(MouseOverEvent event) {
-      DialogBox.this.onMouseEnter(caption.asWidget());
     }
 
     public void onMouseUp(MouseUpEvent event) {
@@ -270,8 +257,6 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
     addDomHandler(mouseHandler, MouseDownEvent.getType());
     addDomHandler(mouseHandler, MouseUpEvent.getType());
     addDomHandler(mouseHandler, MouseMoveEvent.getType());
-    addDomHandler(mouseHandler, MouseOverEvent.getType());
-    addDomHandler(mouseHandler, MouseOutEvent.getType());
   }
 
   /**
@@ -316,68 +301,6 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
     }
 
     super.onBrowserEvent(event);
-  }
-
-  /**
-   * @deprecated Use {@link #beginDragging} and {@link #getCaption} instead
-   */
-  @Deprecated
-  public void onMouseDown(Widget sender, int x, int y) {
-    if (DOM.getCaptureElement() == null) {
-      /*
-       * Need to check to make sure that we aren't already capturing an element
-       * otherwise events will not fire as expected. If this check isn't here,
-       * any class which extends custom button will not fire its click event for
-       * example.
-       */
-      dragging = true;
-      DOM.setCapture(getElement());
-      dragStartX = x;
-      dragStartY = y;
-    }
-  }
-
-  /**
-   * @deprecated Use {@link Caption#addMouseOverHandler} instead
-   */
-  @Deprecated
-  public void onMouseEnter(Widget sender) {
-  }
-
-  /**
-   * @deprecated Use {@link Caption#addMouseOutHandler} instead
-   */
-  @Deprecated
-  public void onMouseLeave(Widget sender) {
-  }
-
-  /**
-   * @deprecated Use {@link #continueDragging} and {@link #getCaption} instead
-   */
-  @Deprecated
-  public void onMouseMove(Widget sender, int x, int y) {
-    if (dragging) {
-      int absX = x + getAbsoluteLeft();
-      int absY = y + getAbsoluteTop();
-
-      // if the mouse is off the screen to the left, right, or top, don't
-      // move the dialog box. This would let users lose dialog boxes, which
-      // would be bad for modal popups.
-      if (absX < clientLeft || absX >= windowWidth || absY < clientTop) {
-        return;
-      }
-
-      setPopupPosition(absX - dragStartX, absY - dragStartY);
-    }
-  }
-
-  /**
-   * @deprecated Use {@link #endDragging} and {@link #getCaption} instead
-   */
-  @Deprecated
-  public void onMouseUp(Widget sender, int x, int y) {
-    dragging = false;
-    DOM.releaseCapture(getElement());
   }
 
   /**
@@ -441,7 +364,18 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    * @param event the mouse down event that triggered dragging
    */
   protected void beginDragging(MouseDownEvent event) {
-    onMouseDown(caption.asWidget(), event.getX(), event.getY());
+    if (DOM.getCaptureElement() == null) {
+      /*
+       * Need to check to make sure that we aren't already capturing an element
+       * otherwise events will not fire as expected. If this check isn't here,
+       * any class which extends custom button will not fire its click event for
+       * example.
+       */
+      dragging = true;
+      DOM.setCapture(getElement());
+      dragStartX = event.getX();
+      dragStartY = event.getY();
+    }
   }
 
   /**
@@ -453,7 +387,19 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    * @param event the mouse move event that continues dragging
    */
   protected void continueDragging(MouseMoveEvent event) {
-    onMouseMove(caption.asWidget(), event.getX(), event.getY());
+    if (dragging) {
+      int absX = event.getX() + getAbsoluteLeft();
+      int absY = event.getY() + getAbsoluteTop();
+
+      // if the mouse is off the screen to the left, right, or top, don't
+      // move the dialog box. This would let users lose dialog boxes, which
+      // would be bad for modal popups.
+      if (absX < clientLeft || absX >= windowWidth || absY < clientTop) {
+        return;
+      }
+
+      setPopupPosition(absX - dragStartX, absY - dragStartY);
+    }
   }
 
   @Override
@@ -492,7 +438,8 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    * @see #endDragging
    */
   protected void endDragging(MouseUpEvent event) {
-    onMouseUp(caption.asWidget(), event.getX(), event.getY());
+    dragging = false;
+    DOM.releaseCapture(getElement());
   }
 
   /**

@@ -60,8 +60,7 @@ import java.util.NoSuchElementException;
  * <img class='gallery' src='doc-files/Table.png'/>
  * </p>
  */
-@SuppressWarnings("deprecation")
-public abstract class HTMLTable extends Panel implements SourcesTableEvents,
+public abstract class HTMLTable extends Panel implements
     HasAllDragAndDropHandlers, HasClickHandlers, HasDoubleClickHandlers {
 
   /**
@@ -773,19 +772,6 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
   }
 
   /**
-   * Adds a listener to the current table.
-   * 
-   * @param listener listener to add
-   * @deprecated add a click handler instead and use
-   *             {@link HTMLTable#getCellForEvent(ClickEvent)} to get the cell
-   *             information (remember to check for a null return value)
-   */
-  @Deprecated
-  public void addTableListener(TableListener listener) {
-    ListenerWrapper.WrappedTableListener.add(this, listener);
-  }
-
-  /**
    * Removes all widgets from this table, but does not remove other HTML or text
    * contents of cells.
    */
@@ -1034,19 +1020,6 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
       widgetMap.removeByElement(elem);
     }
     return true;
-  }
-
-  /**
-   * Removes the specified table listener.
-   * 
-   * @param listener listener to remove
-   *
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by an add*Handler method instead
-   */
-  @Deprecated
-  public void removeTableListener(TableListener listener) {
-    ListenerWrapper.WrappedTableListener.remove(this, listener);
   }
 
   /**

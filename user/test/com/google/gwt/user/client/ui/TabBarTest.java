@@ -125,21 +125,21 @@ public class TabBarTest extends GWTTestCase {
     assertEquals(2, bar.getSelectedTab());
     bar.selectTab(-1);
     assertEquals(-1, bar.getSelectedTab());
-    TabListener listener = new TabListener() {
-      public boolean onBeforeTabSelected(SourcesTabEvents sender, int tabIndex) {
-        beforeSelection = tabIndex;
-        if (tabIndex == 1) {
-          return false;
-        } else {
-          return true;
+    bar.addBeforeSelectionHandler(new BeforeSelectionHandler<Integer>() {
+      @Override
+      public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
+        beforeSelection = event.getItem();
+        if (beforeSelection == 1) {
+          event.cancel();
         }
       }
-
-      public void onTabSelected(SourcesTabEvents sender, int tabIndex) {
-        selected = tabIndex;
+    });
+    bar.addSelectionHandler(new SelectionHandler<Integer>() {
+      @Override
+      public void onSelection(SelectionEvent<Integer> event) {
+        selected = event.getSelectedItem();
       }
-    };
-    bar.addTabListener(listener);
+    });
     boolean result = bar.selectTab(-1);
     assertEquals(-1, beforeSelection);
     assertEquals(0, selected);

@@ -144,11 +144,7 @@ import java.util.List;
  * &lt;/g:MenuBar>
  * </pre>
  */
-// Nothing we can do about MenuBar implementing PopupListener until next
-// release.
-@SuppressWarnings("deprecation")
-public class MenuBar extends Widget implements PopupListener, HasAnimation,
-    HasCloseHandlers<PopupPanel> {
+public class MenuBar extends Widget implements HasAnimation, HasCloseHandlers<PopupPanel> {
 
   /**
    * An {@link ImageBundle} that provides images for {@link MenuBar}.
@@ -664,30 +660,6 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
       } // end case Event.ONKEYDOWN
     } // end switch (DOM.eventGetType(event))
     super.onBrowserEvent(event);
-  }
-
-  /**
-   * Closes the menu bar.
-   *
-   * @deprecated Use {@link #addCloseHandler(CloseHandler)} instead
-   */
-  @Override
-  @Deprecated
-  public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
-    // If the menu popup was auto-closed, close all of its parents as well.
-    if (autoClosed) {
-      closeAllParents();
-    }
-
-    // When the menu popup closes, remember that no item is
-    // currently showing a popup menu.
-    onHide(!autoClosed);
-    CloseEvent.fire(MenuBar.this, sender);
-    shownChildMenu = null;
-    popup = null;
-    if (parentMenu != null && parentMenu.popup != null) {
-      parentMenu.popup.setPreviewingAllNativeEvents(true);
-    }
   }
 
   /**
@@ -1226,7 +1198,26 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
     if (!STYLENAME_DEFAULT.equals(primaryStyleName)) {
       popup.addStyleName(primaryStyleName + "Popup");
     }
-    popup.addPopupListener(this);
+    popup.addCloseHandler(new CloseHandler<PopupPanel>() {
+      
+      @Override
+      public void onClose(CloseEvent<PopupPanel> event) {
+        // If the menu popup was auto-closed, close all of its parents as well.
+        if (event.isAutoClosed()) {
+          closeAllParents();
+        }
+
+        // When the menu popup closes, remember that no item is
+        // currently showing a popup menu.
+        onHide(!event.isAutoClosed());
+        CloseEvent.fire(MenuBar.this, event.getTarget());
+        shownChildMenu = null;
+        popup = null;
+        if (parentMenu != null && parentMenu.popup != null) {
+          parentMenu.popup.setPreviewingAllNativeEvents(true);
+        }
+      }
+    });
 
     shownChildMenu = item.getSubMenu();
     item.getSubMenu().parentMenu = this;

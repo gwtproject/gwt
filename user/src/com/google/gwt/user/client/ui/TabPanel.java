@@ -63,12 +63,24 @@ import java.util.Iterator;
  * @see TabLayoutPanel
  */
 
-// Cannot do anything about tab panel implementing TabListener until next
-// release
-@SuppressWarnings("deprecation")
-public class TabPanel extends Composite implements TabListener,
-    SourcesTabEvents, HasWidgets, HasAnimation, IndexedPanel.ForIsWidget,
+public class TabPanel extends Composite implements
+    HasWidgets, HasAnimation, IndexedPanel.ForIsWidget,
     HasBeforeSelectionHandlers<Integer>, HasSelectionHandlers<Integer> {
+
+  private class TabBarHandlers implements BeforeSelectionHandler<Integer>, SelectionHandler<Integer> {
+
+    @Override
+    public void onSelection(SelectionEvent<Integer> event) {
+      deck.showWidget(event.getSelectedItem());
+      fireEvent(event);
+    }
+
+    @Override
+    public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
+      fireEvent(event);
+    }
+  }
+
   /**
    * This extension of DeckPanel overrides the public mutator methods to prevent
    * external callers from adding to the state of the DeckPanel.
@@ -212,7 +224,10 @@ public class TabPanel extends Composite implements TabListener,
     panel.setCellHeight(deck, "100%");
     tabBar.setWidth("100%");
 
-    tabBar.addTabListener(this);
+    TabBarHandlers handlers = new TabBarHandlers();
+    tabBar.addBeforeSelectionHandler(handlers);
+    tabBar.addSelectionHandler(handlers);
+
     initWidget(panel);
     setStyleName("gwt-TabPanel");
     deck.setStyleName("gwt-TabPanelBottom");
@@ -291,16 +306,6 @@ public class TabPanel extends Composite implements TabListener,
   public HandlerRegistration addSelectionHandler(
       SelectionHandler<Integer> handler) {
     return addHandler(handler, SelectionEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addBeforeSelectionHandler} and {@link
-   * #addSelectionHandler} instead
-   */
-  @Override
-  @Deprecated
-  public void addTabListener(TabListener listener) {
-    ListenerWrapper.WrappedTabListener.add(this, listener);
   }
 
   @Override
@@ -428,26 +433,6 @@ public class TabPanel extends Composite implements TabListener,
     return deck.iterator();
   }
 
-  /**
-   * @deprecated Use {@link BeforeSelectionHandler#onBeforeSelection} instead
-   */
-  @Override
-  @Deprecated
-  public boolean onBeforeTabSelected(SourcesTabEvents sender, int tabIndex) {
-    BeforeSelectionEvent<Integer> event = BeforeSelectionEvent.fire(this, tabIndex);
-    return event == null || !event.isCanceled();
-  }
-
-  /**
-   * @deprecated Use {@link SelectionHandler#onSelection} instead
-   */
-  @Override
-  @Deprecated
-  public void onTabSelected(SourcesTabEvents sender, int tabIndex) {
-    deck.showWidget(tabIndex);
-    SelectionEvent.fire(this, tabIndex);
-  }
-
   @Override
   public boolean remove(int index) {
     // Delegate updates to the TabBar to our DeckPanel implementation
@@ -463,16 +448,6 @@ public class TabPanel extends Composite implements TabListener,
   public boolean remove(Widget widget) {
     // Delegate updates to the TabBar to our DeckPanel implementation
     return deck.remove(widget);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by and add*Handler method instead
-   */
-  @Override
-  @Deprecated
-  public void removeTabListener(TabListener listener) {
-    ListenerWrapper.WrappedTabListener.remove(this, listener);
   }
 
   /**

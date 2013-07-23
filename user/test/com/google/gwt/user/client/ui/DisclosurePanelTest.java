@@ -18,9 +18,11 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.OpenEvent;
+import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
  * Tests core functionality of {@link DisclosurePanel}.
@@ -129,35 +131,35 @@ public class DisclosurePanelTest extends GWTTestCase {
     final boolean[] bDidFire = new boolean[2];
     final DisclosurePanel panel = createTestPanel();
 
-    DisclosureHandler handleA = new DisclosureHandler() {
-      public void onClose(DisclosureEvent event) {
-        aDidFire[CLOSE] = true;
-      }
-
-      public void onOpen(DisclosureEvent event) {
+    panel.addOpenHandler(new OpenHandler<DisclosurePanel>() {
+      
+      @Override
+      public void onOpen(OpenEvent<DisclosurePanel> event) {
         aDidFire[OPEN] = true;
       }
-    };
-
-    DisclosureHandler handleB = new DisclosureHandler() {
-      public void onClose(DisclosureEvent event) {
-        assertEquals(event.getSource(), panel);
-        bDidFire[CLOSE] = true;
+    });
+    panel.addCloseHandler(new CloseHandler<DisclosurePanel>() {
+      
+      @Override
+      public void onClose(CloseEvent<DisclosurePanel> event) {
+        aDidFire[CLOSE] = true;
       }
+    });
 
-      public void onOpen(DisclosureEvent event) {
-        assertEquals(event.getSource(), panel);
+    HandlerRegistration openHandlerB = panel.addOpenHandler(new OpenHandler<DisclosurePanel>() {
+      
+      @Override
+      public void onOpen(OpenEvent<DisclosurePanel> event) {
         bDidFire[OPEN] = true;
       }
-    };
-
-    panel.addEventHandler(handleA);
-    panel.addEventHandler(handleB);
-    // There is one to begin with.
-    assertEquals(3,
-        panel.getHandlerManager().getHandlerCount(CloseEvent.getType()));
-    assertEquals(3,
-        panel.getHandlerManager().getHandlerCount(OpenEvent.getType()));
+    });
+    HandlerRegistration closeHandlerB = panel.addCloseHandler(new CloseHandler<DisclosurePanel>() {
+      
+      @Override
+      public void onClose(CloseEvent<DisclosurePanel> event) {
+        bDidFire[CLOSE] = true;
+      }
+    });
 
     panel.setOpen(true);
     // We expect onOpen to fire and onClose to not fire.
@@ -173,11 +175,8 @@ public class DisclosurePanelTest extends GWTTestCase {
 
     aDidFire[OPEN] = bDidFire[CLOSE] = false;
 
-    panel.removeEventHandler(handleB);
-    assertEquals(2,
-        panel.getHandlerManager().getHandlerCount(OpenEvent.getType()));
-    assertEquals(2,
-        panel.getHandlerManager().getHandlerCount(CloseEvent.getType()));
+    openHandlerB.removeHandler();
+    closeHandlerB.removeHandler();
 
     panel.setOpen(true);
     panel.setOpen(false);

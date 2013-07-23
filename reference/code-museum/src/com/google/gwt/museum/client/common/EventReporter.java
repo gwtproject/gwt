@@ -31,6 +31,18 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.dom.client.MouseWheelEvent;
+import com.google.gwt.event.dom.client.MouseWheelHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -38,20 +50,12 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.SuggestionEvent;
-import com.google.gwt.user.client.ui.SuggestionHandler;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
+import com.google.gwt.user.client.ui.UIObject;
 
 /**
  * Helper class to create visual tests.
@@ -59,13 +63,12 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
  * @param <V> value type
  * @param <T> target type
  */
-@SuppressWarnings("deprecation")
 public class EventReporter<V, T> extends SimpleLogger implements
-    ChangeListener, FocusListener, ValueChangeHandler<V>,
-    SelectionHandler<Suggestion>, SuggestionHandler, KeyboardListener,
-    ChangeHandler, BlurHandler, FocusHandler, ClickHandler, ClickListener,
-    CloseHandler<T>, MouseListener, KeyDownHandler, KeyUpHandler,
-    KeyPressHandler {
+    ValueChangeHandler<V>, SelectionHandler<Suggestion>,
+    ChangeHandler, BlurHandler, FocusHandler, ClickHandler,
+    CloseHandler<T>, KeyDownHandler, KeyUpHandler, KeyPressHandler,
+    MouseDownHandler, MouseUpHandler, MouseOutHandler, MouseOverHandler,
+    MouseMoveHandler, MouseWheelHandler {
 
   /**
    * Add/remove handlers via check box.
@@ -101,37 +104,6 @@ public class EventReporter<V, T> extends SimpleLogger implements
       registration.removeHandler();
       registration = null;
     }
-  }
-
-  /**
-   * Add/remove handlers via check box.
-   * 
-   */
-  public abstract class CheckBoxListener extends CheckBox implements
-      ValueChangeHandler<Boolean> {
-    String name;
-
-    public CheckBoxListener(String name, HasWidgets p) {
-      this.name = name;
-      this.setText(name);
-      p.add(this);
-      this.addValueChangeHandler(this);
-      this.setValue(true, true);
-    }
-
-    public abstract void addListener();
-
-    public void onValueChange(ValueChangeEvent<Boolean> event) {
-      if (event.getValue().booleanValue()) {
-        report("add " + name);
-        addListener();
-      } else {
-        report("remove " + name);
-        removeListener();
-      }
-    }
-
-    public abstract void removeListener();
   }
 
   public EventReporter() {
@@ -178,16 +150,8 @@ public class EventReporter<V, T> extends SimpleLogger implements
     report(event);
   }
 
-  public void onChange(Widget sender) {
-    report("change on " + getInfo(sender));
-  }
-
   public void onClick(ClickEvent event) {
     report(event);
-  }
-
-  public void onClick(Widget sender) {
-    report("click: " + getInfo(sender));
   }
 
   public void onClose(CloseEvent<T> event) {
@@ -198,67 +162,50 @@ public class EventReporter<V, T> extends SimpleLogger implements
     report(event);
   }
 
-  public void onFocus(Widget sender) {
-    report("focus: " + getInfo(sender));
-  }
-
   public void onKeyDown(KeyDownEvent event) {
     report(event);
-  }
-
-  public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-    report(getInfo(sender) + "key down code: " + keyCode + " modifiers: "
-        + modifiers);
   }
 
   public void onKeyPress(KeyPressEvent event) {
     report(event);
   }
 
-  public void onKeyPress(Widget sender, char keyCode, int modifiers) {
-    report(getInfo(sender) + "key press code: " + keyCode + " modifiers: "
-        + modifiers);
-  }
-
   public void onKeyUp(KeyUpEvent event) {
     report(event);
   }
 
-  public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-    report(getInfo(sender) + "key  up code: " + keyCode + " modifiers: "
-        + modifiers);
+  @Override
+  public void onMouseDown(MouseDownEvent event) {
+    report(event);
   }
 
-  public void onLostFocus(Widget sender) {
-    report("blur: " + sender.getClass());
+  @Override
+  public void onMouseMove(MouseMoveEvent event) {
+    report(event);
   }
 
-  public void onMouseDown(Widget sender, int x, int y) {
-    report(getInfo(sender) + "mouse down");
+  @Override
+  public void onMouseOut(MouseOutEvent event) {
+    report(event);
   }
 
-  public void onMouseEnter(Widget sender) {
-    report(getInfo(sender) + "mouse enter");
+  @Override
+  public void onMouseOver(MouseOverEvent event) {
+    report(event);
   }
 
-  public void onMouseLeave(Widget sender) {
-    report(getInfo(sender) + "mouse leave");
+  @Override
+  public void onMouseUp(MouseUpEvent event) {
+    report(event);
   }
 
-  public void onMouseMove(Widget sender, int x, int y) {
-    report(getInfo(sender) + "mouse move");
-  }
-
-  public void onMouseUp(Widget sender, int x, int y) {
-    report(getInfo(sender) + "mouse up");
+  @Override
+  public void onMouseWheel(MouseWheelEvent event) {
+    report(event);
   }
 
   public void onSelection(SelectionEvent<Suggestion> event) {
     report(event);
-  }
-
-  public void onSuggestionSelected(SuggestionEvent event) {
-    report("suggestion: " + event.getSelectedSuggestion());
   }
 
   public void onValueChange(ValueChangeEvent<V> event) {

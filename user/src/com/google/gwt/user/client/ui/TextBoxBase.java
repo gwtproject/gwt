@@ -35,8 +35,7 @@ import com.google.gwt.text.shared.testing.PassthroughRenderer;
  * &lt;g:TextBox textAlignment='right'/&gt;
  * </pre>
  */
-public class TextBoxBase extends ValueBoxBase<String> implements
-    SourcesChangeEvents {
+public class TextBoxBase extends ValueBoxBase<String> {
 
   /**
    * Legacy wrapper for {@link ValueBoxBase.TextAlignment}, soon to be deprecated.
@@ -87,14 +86,6 @@ public class TextBoxBase extends ValueBoxBase<String> implements
    */
   protected TextBoxBase(Element elem) {
     super(elem, PassthroughRenderer.instance(), PassthroughParser.instance());
-  }
-
-  /**
-   * @deprecated Use {@link #addChangeHandler} instead
-   */
-  @Deprecated
-  public void addChangeListener(ChangeListener listener) {
-    addChangeHandler(new ListenerWrapper.WrappedChangeListener(listener));
   }
 
   /**

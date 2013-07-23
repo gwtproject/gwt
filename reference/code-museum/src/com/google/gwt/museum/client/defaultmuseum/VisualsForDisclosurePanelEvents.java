@@ -23,8 +23,6 @@ import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.museum.client.common.AbstractIssue;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.DisclosureEvent;
-import com.google.gwt.user.client.ui.DisclosureHandler;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -35,7 +33,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Testing disclosure events.
  */
-@SuppressWarnings("deprecation")
 public class VisualsForDisclosurePanelEvents extends AbstractIssue {
 
   VerticalPanel report = new VerticalPanel();
@@ -71,19 +68,11 @@ public class VisualsForDisclosurePanelEvents extends AbstractIssue {
     widget.setContent(new HTML("content for " + name));
     widget.setTitle(name);
     widget.setHeader(new CheckBox(name));
-    class MyHandler implements DisclosureHandler, OpenHandler<DisclosurePanel>,
+    class MyHandler implements OpenHandler<DisclosurePanel>,
         CloseHandler<DisclosurePanel> {
 
       public void onClose(CloseEvent<DisclosurePanel> event) {
         report(event);
-      }
-
-      public void onClose(DisclosureEvent event) {
-        report(name + "close");
-      }
-
-      public void onOpen(DisclosureEvent event) {
-        report(name + "open");
       }
 
       public void onOpen(OpenEvent<DisclosurePanel> event) {
@@ -93,7 +82,6 @@ public class VisualsForDisclosurePanelEvents extends AbstractIssue {
     MyHandler handler = new MyHandler();
     widget.addCloseHandler(handler);
     widget.addOpenHandler(handler);
-    widget.addEventHandler(handler);
     return widget;
   }
 

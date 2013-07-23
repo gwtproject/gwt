@@ -36,12 +36,11 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventPreview;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Event.NativePreviewEvent;
-import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.impl.PopupImpl;
 
 import java.util.ArrayList;
@@ -88,8 +87,8 @@ import java.util.List;
  * </dl>
  */
 @SuppressWarnings("deprecation")
-public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
-    EventPreview, HasAnimation, HasCloseHandlers<PopupPanel> {
+public class PopupPanel extends SimplePanel implements HasAnimation,
+    HasCloseHandlers<PopupPanel> {
 
   /**
    * A callback that is used to set the position of a {@link PopupPanel} right
@@ -502,14 +501,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   }
 
   /**
-   * @deprecated Use {@link #addCloseHandler} instead
-   */
-  @Deprecated
-  public void addPopupListener(final PopupListener listener) {
-    ListenerWrapper.WrappedPopupListener.add(this, listener);
-  }
-
-  /**
    * Centers the popup in the browser window and shows it. If the popup was
    * already showing, then the popup is centered.
    */
@@ -710,59 +701,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   }
 
   /**
-   * @deprecated Use {@link #onPreviewNativeEvent} instead
-   */
-  @Deprecated
-  public boolean onEventPreview(Event event) {
-    return true;
-  }
-
-  /**
-   * Popups get an opportunity to preview keyboard events before they are passed
-   * to a widget contained by the Popup.
-   *
-   * @param key the key code of the depressed key
-   * @param modifiers keyboard modifiers, as specified in
-   *          {@link com.google.gwt.event.dom.client.KeyCodes}.
-   * @return <code>false</code> to suppress the event
-   * @deprecated Use {@link #onPreviewNativeEvent} instead
-   */
-  @Deprecated
-  public boolean onKeyDownPreview(char key, int modifiers) {
-    return true;
-  }
-
-  /**
-   * Popups get an opportunity to preview keyboard events before they are passed
-   * to a widget contained by the Popup.
-   *
-   * @param key the unicode character pressed
-   * @param modifiers keyboard modifiers, as specified in
-   *          {@link com.google.gwt.event.dom.client.KeyCodes}.
-   * @return <code>false</code> to suppress the event
-   * @deprecated Use {@link #onPreviewNativeEvent} instead
-   */
-  @Deprecated
-  public boolean onKeyPressPreview(char key, int modifiers) {
-    return true;
-  }
-
-  /**
-   * Popups get an opportunity to preview keyboard events before they are passed
-   * to a widget contained by the Popup.
-   *
-   * @param key the key code of the released key
-   * @param modifiers keyboard modifiers, as specified in
-   *          {@link com.google.gwt.event.dom.client.KeyCodes}.
-   * @return <code>false</code> to suppress the event
-   * @deprecated Use {@link #onPreviewNativeEvent} instead
-   */
-  @Deprecated
-  public boolean onKeyUpPreview(char key, int modifiers) {
-    return true;
-  }
-
-  /**
    * Remove an autoHide partner.
    *
    * @param partner the auto hide partner to remove
@@ -772,15 +710,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     if (autoHidePartners != null) {
       autoHidePartners.remove(partner);
     }
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on the
-   *             object returned by {@link #addCloseHandler} instead
-   */
-  @Deprecated
-  public void removePopupListener(PopupListener listener) {
-    ListenerWrapper.WrappedPopupListener.remove(this, listener);
   }
 
   public void setAnimationEnabled(boolean enable) {
@@ -1057,12 +986,16 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     return impl.getStyleElement(getPopupImplElement()).cast();
   }
 
+  /**
+   * Hook to preview native events (and possibly cancel them) before they are
+   * processed by the PopupPanel.
+   * <p>
+   * The default implementation is a no-op.
+   * 
+   * @param event  the previewed event
+   */
   protected void onPreviewNativeEvent(NativePreviewEvent event) {
-    // Cancel the event based on the deprecated onEventPreview() method
-    if (event.isFirstHandler()
-        && !onEventPreview(Event.as(event.getNativeEvent()))) {
-      event.cancel();
-    }
+    // no-op
   }
 
   @Override
@@ -1352,27 +1285,10 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     // Switch on the event type
     int type = nativeEvent.getTypeInt();
     switch (type) {
-      case Event.ONKEYDOWN: {
-        if (!onKeyDownPreview((char) nativeEvent.getKeyCode(),
-            KeyboardListenerCollection.getKeyboardModifiers(nativeEvent))) {
-          event.cancel();
-        }
+      case Event.ONKEYDOWN:
+      case Event.ONKEYUP:
+      case Event.ONKEYPRESS:
         return;
-      }
-      case Event.ONKEYUP: {
-        if (!onKeyUpPreview((char) nativeEvent.getKeyCode(),
-            KeyboardListenerCollection.getKeyboardModifiers(nativeEvent))) {
-          event.cancel();
-        }
-        return;
-      }
-      case Event.ONKEYPRESS: {
-        if (!onKeyPressPreview((char) nativeEvent.getKeyCode(),
-            KeyboardListenerCollection.getKeyboardModifiers(nativeEvent))) {
-          event.cancel();
-        }
-        return;
-      }
 
       case Event.ONMOUSEDOWN:
       case Event.ONTOUCHSTART:

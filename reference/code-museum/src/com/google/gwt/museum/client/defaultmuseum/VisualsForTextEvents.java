@@ -19,6 +19,7 @@ package com.google.gwt.museum.client.defaultmuseum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HandlesAllKeyEvents;
+import com.google.gwt.event.dom.client.HandlesAllMouseEvents;
 import com.google.gwt.museum.client.common.AbstractIssue;
 import com.google.gwt.museum.client.common.EventReporter;
 import com.google.gwt.user.client.ui.Button;
@@ -33,7 +34,6 @@ import com.google.gwt.user.client.ui.Widget;
 public class VisualsForTextEvents extends AbstractIssue {
   private VerticalPanel p = new VerticalPanel();
 
-  @SuppressWarnings("deprecation")
   @Override
   public Widget createIssue() {
     p.setWidth("500px");
@@ -48,26 +48,21 @@ public class VisualsForTextEvents extends AbstractIssue {
         b.setValue("emily", true);
       }
     }));
-    b.addKeyboardListener(handler);
     HandlesAllKeyEvents.addHandlers(b, handler);
-    b.addChangeListener(handler);
     b.addFocusHandler(handler);
     b.addBlurHandler(handler);
-    b.addFocusListener(handler);
     b.addValueChangeHandler(handler);
-    b.addMouseListener(handler);
+    HandlesAllMouseEvents.handle(b, handler);
     // Rich text box:
     RichTextArea rich = new RichTextArea();
     rich.setTitle("rich text box");
     p.add(rich);
     handler = new EventReporter<String, Object>(p);
-    rich.addKeyboardListener(handler);
     HandlesAllKeyEvents.addHandlers(rich,handler);
 
     rich.addBlurHandler(handler);
     rich.addFocusHandler(handler);
     rich.addClickHandler(handler);
-    rich.addClickListener(handler);
 
     return p;
   }

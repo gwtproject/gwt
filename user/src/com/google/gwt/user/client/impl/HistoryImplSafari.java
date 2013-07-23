@@ -18,9 +18,6 @@ package com.google.gwt.user.client.impl;
 /**
  * Safari implementation of
  * {@link com.google.gwt.user.client.impl.HistoryImplTimer}.
- * 
- * This implementation works on both Safari 2 and 3, by detecting the version
- * and reverting to a stub implementation for Safari 2.
  */
 class HistoryImplSafari extends HistoryImplTimer {
 

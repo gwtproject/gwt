@@ -83,8 +83,7 @@ import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
  * in Unicode bidi formatting characters. They can use the getOptionText and/or
  * setOptionText methods for this purpose instead.</b>
  */
-@SuppressWarnings("deprecation")
-public class ListBox extends FocusWidget implements SourcesChangeEvents,
+public class ListBox extends FocusWidget implements
     HasChangeHandlers, HasName, HasDirectionEstimator {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
@@ -151,14 +150,6 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   public HandlerRegistration addChangeHandler(ChangeHandler handler) {
     return addDomHandler(handler, ChangeEvent.getType());
   }
-
-  /**
-   * @deprecated Use {@link #addChangeHandler} instead
-   */
-  @Deprecated
-  public void addChangeListener(ChangeListener listener) {
-    ListenerWrapper.WrappedChangeListener.add(this, listener);
-   }
 
   /**
    * Adds an item to the list box. This method has the same effect as
@@ -379,15 +370,6 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   public boolean isMultipleSelect() {
     return getSelectElement().isMultiple();
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by {@link #addChangeHandler} instead
-   */
-  @Deprecated
-  public void removeChangeListener(ChangeListener listener) {
-    ListenerWrapper.WrappedChangeListener.remove(this, listener);
   }
 
   /**

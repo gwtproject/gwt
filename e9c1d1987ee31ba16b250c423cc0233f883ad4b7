@@ -52,6 +52,24 @@
       "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73828f1a_eacb478e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-07-23T19:23:11Z",
+      "side": 1,
+      "message": "I think I would like to put it a tiny bit more explicit:\n\nWe must canonicalize the path here, otherwise we might set cacheDirectory to something like \"/path/to/x/../gwt-unitCache\". If this were to happen, the mkdirs() call below would create \"/path/to/gwt-unitCache\" but not \"/path/to/x\". Further accesses via the uncanonicalized path will fail, if \"/path/to/x\" had not been created by other means.\n\nFixes issue 6443.",
+      "parentUuid": "f3c75f62_f6a260d6",
+      "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -70,6 +70,24 @@
       "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "337c97f0_4839bfb9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-23T19:29:12Z",
+      "side": 1,
+      "message": "That wording sounds good to me.",
+      "parentUuid": "73828f1a_eacb478e",
+      "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -71,6 +71,7 @@ class DeobfuscatorBuilder extends ScannerBase<Void> {
         String requestContextBinaryName =
             state.elements.getBinaryName(requestContextElement).toString();
         String clientMethodDescriptor = x.asType().accept(new DescriptorBuilder(), state);
+        String domainMethodDescriptor = null;
         ExecutableElement domainElement = (ExecutableElement) state.getClientToDomainMap().get(x);
         if (domainElement == null) {
           /*
@@ -79,13 +80,12 @@ class DeobfuscatorBuilder extends ScannerBase<Void> {
            * the server by running ValidationTool.
            */
           if (state.mustResolveAllAnnotations()) {
-            state.poison(requestContextElement, Messages
+            state.poison(x, Messages
                 .deobfuscatorMissingContext(requestContextElement.getSimpleName()));
           }
-          return super.visitExecutable(x, state);
+        } else {
+          domainMethodDescriptor = domainElement.asType().accept(new DescriptorBuilder(), state);
         }
-        String domainMethodDescriptor =
-            domainElement.asType().accept(new DescriptorBuilder(), state);
         String methodName = x.getSimpleName().toString();
 
         OperationKey key =
@@ -93,7 +93,9 @@ class DeobfuscatorBuilder extends ScannerBase<Void> {
         println("withOperation(new OperationKey(\"%s\"),", key.get());
         println("  new OperationData.Builder()");
         println("  .withClientMethodDescriptor(\"%s\")", clientMethodDescriptor);
-        println("  .withDomainMethodDescriptor(\"%s\")", domainMethodDescriptor);
+        if (domainMethodDescriptor != null) {
+          println("  .withDomainMethodDescriptor(\"%s\")", domainMethodDescriptor);
+        }
         println("  .withMethodName(\"%s\")", methodName);
         println("  .withRequestContext(\"%s\")", requestContextBinaryName);
         println("  .build());");

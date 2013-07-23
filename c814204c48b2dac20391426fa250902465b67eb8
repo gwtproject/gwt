@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "337c97f0_c8e84fcb",
+        "filename": "user/src/com/google/gwt/editor/client/CompositeEditor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-23T20:00:31Z",
+      "side": 1,
+      "message": "Without looking at this specific context;\nFrom my own experience it is best to make methods accept \u003c? super T\u003e instead of making types to use \u003c? super T\u003e.\nIt may or may not be applicable for your case but it is a cheap comment without going deeper into your patch :)",
+      "revId": "c814204c48b2dac20391426fa250902465b67eb8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9349c3a6_a7cec5fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-23T13:28:38Z",
+      "side": 1,
+      "message": "Could you change that line to:\n\n Bug: issue 5525\n\nand remove the blank line below (so the two lines \"Bug\" and \"Change-Id\" are both in the same paragraph)",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9349c3a6_e7c72ddd",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-23T13:28:38Z",
+      "side": 1,
+      "message": "Only \"findType\" once in the constructor and store the JClassType in an \u0027entityProxyIdInterface\u0027 field.\n\nI think this \"else if\" block should also be moved next to \"entityProxyInterface.isAssignableFrom(transportedClass)\" above, so we have (in order):\n\n * value types and splittable\n * entity proxy or value proxy\n * entity proxy ID\n * collection\n * map",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9349c3a6_27c2b5cc",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-23T13:28:38Z",
+      "side": 1,
+      "message": "I find it strange that \u0027parameterized\u0027 it not used and methodBuilder is not updated. It might be the expected usage, but it feels weird…",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

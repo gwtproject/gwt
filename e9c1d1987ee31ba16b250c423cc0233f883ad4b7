@@ -34,6 +34,24 @@
       "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3c75f62_f6a260d6",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-23T00:28:40Z",
+      "side": 1,
+      "message": "Well, I do somewhat think if I call File.mkdirs() on a path like \"a/../b\" that it should create both \"a\" and \"b\" so the path provided can refer to the created directory.  This is the behavior I get with \"mkdir -p a/../b\" on Ubuntu at least.  But I\u0027ll accept that\u0027s not the behavior provided by File.mkdirs(). :)\n\nSo I don\u0027t think saying \"only\" implies \"incorrectly\" here: I just wanted to concisely emphasize that it won\u0027t also create \"/path/to/nonexistent\".  (And I also don\u0027t quite like \"correctly\" as explained in the above paragraph. ;))\n\nI think \"would fail\" is fine if we presuppose that the directory never exists (which is what I tried to imply by using the \"nonexistent\" directory name, rather than \"war\").  But \"could fail\" is more apt if we want to consider that the directory is somehow created another way in the mean time.  I\u0027m indifferent here, and can go either way.",
+      "parentUuid": "9349c3a6_a4a1a391",
+      "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

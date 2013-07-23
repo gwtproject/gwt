@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "732fefb5_c5230ccd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-07-23T18:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1325d3ee_8d70054c",
+      "revId": "edf5d4d87a649c2808c7885b7903c149de885c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1325d3ee_0d29b551",
         "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-22T19:14:51Z",
       "side": 1,
       "message": "Can you add at least two more test cases like:\n    bad4 depends on bad2 (transitively bad)\n    bad5 depends on good0, bad0 (still bad although depends on a good unit)",
+      "revId": "edf5d4d87a649c2808c7885b7903c149de885c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "732fefb5_e82f0797",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-07-23T18:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1325d3ee_0d29b551",
       "revId": "edf5d4d87a649c2808c7885b7903c149de885c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -16,6 +16,24 @@
       "revId": "5ccc63a8918bb0d401618b74ad36bea84a16ef36",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "732fefb5_08334b07",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-07-23T18:00:28Z",
+      "side": 1,
+      "message": "Missed the earlier comment. Done now.",
+      "parentUuid": "f3c75f62_b63f089c",
+      "revId": "5ccc63a8918bb0d401618b74ad36bea84a16ef36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

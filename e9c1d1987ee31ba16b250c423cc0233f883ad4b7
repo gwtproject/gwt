@@ -16,6 +16,24 @@
       "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9349c3a6_a4a1a391",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-23T00:08:21Z",
+      "side": 1,
+      "message": "Note that \"would only create \u0027/path/to/gwt-unitCache\u0027\" is the expected behavior (or would you expect it to create nonexistent too?) I\u0027d rather say it \"would correctly create \u0027/path/to/gwt-unitCache\u0027 but further accesses via the uncanonicalized path could fail\" (note: only→correctly, and→but, would→could)\n\nOtherwise agree with the proposal.",
+      "parentUuid": "f3c75f62_96968c93",
+      "revId": "e9c1d1987ee31ba16b250c423cc0233f883ad4b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

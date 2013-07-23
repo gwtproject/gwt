@@ -31,16 +31,6 @@ public class HistoryDisabledTest extends GWTTestCase {
     return "com.google.gwt.user.HistoryDisabledTest";
   }
 
-  @SuppressWarnings("deprecation")
-  public void testAddHistoryListener() {
-    HistoryListener listener = new HistoryListener() {
-      public void onHistoryChanged(String historyToken) {
-      }
-    };
-    History.addHistoryListener(listener);
-    History.removeHistoryListener(listener);
-  }
-
   public void testAddValueChangeHandler() {
     HandlerRegistration reg = History.addValueChangeHandler(new ValueChangeHandler<String>() {
       public void onValueChange(ValueChangeEvent<String> event) {

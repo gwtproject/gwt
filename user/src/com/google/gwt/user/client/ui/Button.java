@@ -92,19 +92,6 @@ public class Button extends ButtonBase {
 
   /**
    * Creates a button with the given HTML caption and click listener.
-   * 
-   * @param html the HTML caption
-   * @param listener the click listener
-   * @deprecated Use {@link Button#Button(String, ClickHandler)} instead
-   */
-  @Deprecated
-  public Button(String html, ClickListener listener) {
-    this(html);
-    addClickListener(listener);
-  }
-
-  /**
-   * Creates a button with the given HTML caption and click listener.
    *
    * @param html the html caption
    * @param handler the click handler

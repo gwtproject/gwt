@@ -16,6 +16,7 @@
 
 package com.google.gwt.museum.client.defaultmuseum;
 
+import com.google.gwt.event.dom.client.HandlesAllMouseEvents;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.OpenEvent;
@@ -42,8 +43,12 @@ public class VisualsForTreeEvents extends AbstractIssue {
     p.add(t);
     EventReporter<Object, TreeItem> handler = new EventReporter<Object, TreeItem>(
         p);
-    t.addKeyboardListener(handler);
-    t.addMouseListener(handler);
+    // Could someone tell me why HandlesAllKeyEvents.handle() doesn't compile here?
+    t.addKeyDownHandler(handler);
+    t.addKeyPressHandler(handler);
+    t.addKeyUpHandler(handler);
+//    HandlesAllKeyEvents.handle(t, handler);
+    HandlesAllMouseEvents.handle(t, handler);
 
     t.addSelectionHandler(new SelectionHandler<TreeItem>() {
       public void onSelection(SelectionEvent<TreeItem> event) {

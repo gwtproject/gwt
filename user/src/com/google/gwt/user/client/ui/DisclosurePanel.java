@@ -81,7 +81,7 @@ import java.util.Iterator;
  */
 @SuppressWarnings("deprecation")
 public final class DisclosurePanel extends Composite implements
-    FiresDisclosureEvents, HasWidgets.ForIsWidget, HasAnimation,
+    HasWidgets.ForIsWidget, HasAnimation,
     HasOpenHandlers<DisclosurePanel>, HasCloseHandlers<DisclosurePanel> {
   interface DefaultImages extends ClientBundle {
     @ImageOptions(flipRtl = true)
@@ -472,19 +472,6 @@ public final class DisclosurePanel extends Composite implements
     return addHandler(handler, CloseEvent.getType());
   }
 
-  /**
-   * Attaches an event handler to the panel to receive {@link DisclosureEvent}
-   * notification.
-   * 
-   * @param handler the handler to be added (should not be null)
-   * @deprecated Use {@link DisclosurePanel#addOpenHandler(OpenHandler)} and
-   *             {@link DisclosurePanel#addCloseHandler(CloseHandler)} instead
-   */
-  @Deprecated
-  public void addEventHandler(final DisclosureHandler handler) {
-    ListenerWrapper.WrappedOldDisclosureHandler.add(this, handler);
-  }
-
   public HandlerRegistration addOpenHandler(OpenHandler<DisclosurePanel> handler) {
     return addHandler(handler, OpenEvent.getType());
   }
@@ -556,18 +543,6 @@ public final class DisclosurePanel extends Composite implements
    */
   public boolean remove(IsWidget w) {
     return this.remove(asWidgetOrNull(w));
-  }
-
-  /**
-   * Removes an event handler from the panel.
-   * 
-   * @param handler the handler to be removed
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on the
-   *             object returned by an add*Handler method instead
-   */
-  @Deprecated
-  public void removeEventHandler(DisclosureHandler handler) {
-    ListenerWrapper.WrappedOldDisclosureHandler.remove(this, handler);
   }
 
   public void setAnimationEnabled(boolean enable) {

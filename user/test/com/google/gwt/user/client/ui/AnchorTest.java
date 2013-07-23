@@ -79,25 +79,6 @@ public class AnchorTest extends GWTTestCase {
     assertEquals(42, anchor.getTabIndex());
   }
 
-  @Deprecated
-  private static final class TestClickListener implements ClickListener {
-    private int clicks = 0;
-    private Widget lastSender;
-
-    public void onClick(Widget sender) {
-      clicks++;
-      lastSender = sender;
-    }
-
-    public int getClicks() {
-      return clicks;
-    }
-
-    public Widget getLastSender() {
-      return lastSender;
-    }
-  }
-
   public void testNoAttributes() {
     Anchor anchor = new Anchor();
 
@@ -175,18 +156,12 @@ public class AnchorTest extends GWTTestCase {
     Panel p = getTestPanel();
     p.add(anchor);
 
-    TestClickListener testListener = new TestClickListener();
-    anchor.addClickListener(testListener);
-
     TestClickHandler handler = new TestClickHandler();
     anchor.addClickHandler(handler);
 
-    assertEquals(0, testListener.getClicks());
     assertEquals(0, handler.getClicks());
     triggerEvent(anchor.getElement(), "click", false, "MouseEvents");
-    assertEquals(1, testListener.getClicks());
     assertEquals(1, handler.getClicks());
-    assertEquals(anchor, testListener.getLastSender());
     assertEquals(anchor, handler.getLastSender());
   }
 

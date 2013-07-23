@@ -81,19 +81,6 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
   }
 
   /**
-   * Constructor for <code>ToggleButton</code>. The supplied image is used to
-   * construct the default face of the button.
-   * 
-   * @param upImage image for the default (up) face of the button
-   * @param listener the click listener
-   * @deprecated Use {@link #ToggleButton(Image, ClickHandler)} instead
-   */
-  @Deprecated
-  public ToggleButton(Image upImage, ClickListener listener) {
-    super(upImage, listener);
-  }
-
-  /**
    * Constructor for <code>ToggleButton</code>.
    * 
    * @param upImage image for the default(up) face of the button
@@ -115,19 +102,6 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
   }
 
   /**
-   * Constructor for <code>ToggleButton</code>.
-   * 
-   * @param upImage image for the default(up) face of the button
-   * @param downImage image for the down face of the button
-   * @param listener clickListener
-   * @deprecated Use {@link #ToggleButton(Image, Image, ClickHandler)} instead
-   */
-  @Deprecated
-  public ToggleButton(Image upImage, Image downImage, ClickListener listener) {
-    super(upImage, downImage, listener);
-  }
-
-  /**
    * Constructor for <code>ToggleButton</code>. The supplied text is used to
    * construct the default face of the button.
    * 
@@ -146,19 +120,6 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    */
   public ToggleButton(String upText, ClickHandler handler) {
     super(upText, handler);
-  }
-
-  /**
-   * Constructor for <code>ToggleButton</code>. The supplied text is used to
-   * construct the default face of the button.
-   * 
-   * @param upText the text for the default (up) face of the button
-   * @param listener the click listener
-   * @deprecated Use {@link #ToggleButton(String, ClickHandler)} instead
-   */
-  @Deprecated
-  public ToggleButton(String upText, ClickListener listener) {
-    super(upText, listener);
   }
 
   /**

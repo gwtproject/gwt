@@ -22,7 +22,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
@@ -32,22 +31,6 @@ import com.google.gwt.user.client.Element;
  * Tests the CheckBox Widget.
  */
 public class CheckBoxTest extends GWTTestCase {
-  @SuppressWarnings("deprecation")  
-  static class ListenerTester implements ClickListener {
-    static int fired = 0;
-    static HandlerManager manager;
-
-    public static void fire() {
-      fired = 0;
-      manager.fireEvent(new ClickEvent() {
-      });
-    }
-
-    public void onClick(Widget sender) {
-      ++fired;
-    }
-  }
-  
   private static class Handler implements ValueChangeHandler<Boolean> {
     Boolean received = null;
 
@@ -152,26 +135,6 @@ public class CheckBoxTest extends GWTTestCase {
 
     elm.setValue("invaluable");
     assertEquals("invaluable", cb.getFormValue());
-  }
-
-  @SuppressWarnings("deprecation")
-  public void testListenerRemoval() {
-    ClickListener r1 = new ListenerTester();
-    ClickListener r2 = new ListenerTester();
-    ListenerTester.manager = cb.ensureHandlers();
-    cb.addClickListener(r1);
-    cb.addClickListener(r2);
-
-    ListenerTester.fire();
-    assertEquals(ListenerTester.fired, 2);
-
-    cb.removeClickListener(r1);
-    ListenerTester.fire();
-    assertEquals(ListenerTester.fired, 1);
-
-    cb.removeClickListener(r2);
-    ListenerTester.fire();
-    assertEquals(ListenerTester.fired, 0);
   }
 
   public void testCheckboxClick() {

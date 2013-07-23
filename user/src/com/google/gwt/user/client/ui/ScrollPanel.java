@@ -28,8 +28,7 @@ import com.google.gwt.user.client.Event;
 /**
  * A simple panel that wraps its contents in a scrollable area.
  */
-@SuppressWarnings("deprecation")
-public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
+public class ScrollPanel extends SimplePanel implements
     RequiresResize, ProvidesResize, HasScrolling {
 
   private final Element containerElem;
@@ -83,14 +82,6 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
      */
     Event.sinkEvents(getScrollableElement(), Event.ONSCROLL);
     return addHandler(handler, ScrollEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addScrollHandler} instead
-   */
-  @Deprecated
-  public void addScrollListener(ScrollListener listener) {
-    ListenerWrapper.WrappedScrollListener.add(this, listener);
   }
 
   /**
@@ -160,15 +151,6 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     if ((child != null) && (child instanceof RequiresResize)) {
       ((RequiresResize) child).onResize();
     }
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by {@link #addScrollHandler} instead
-   */
-  @Deprecated
-  public void removeScrollListener(ScrollListener listener) {
-    ListenerWrapper.WrappedScrollListener.remove(this, listener);
   }
 
   /**

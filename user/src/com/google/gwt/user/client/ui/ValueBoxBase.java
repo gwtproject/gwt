@@ -254,15 +254,6 @@ public class ValueBoxBase<T> extends FocusWidget implements
   }
 
   /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on the
-   *             object returned by {@link #addChangeHandler} instead
-   */
-  @Deprecated
-  public void removeChangeListener(ChangeListener listener) {
-    ListenerWrapper.WrappedChangeListener.remove(this, listener);
-  }
-
-  /**
    * Selects all of the text in the box.
    * 
    * This will only work when the widget is attached to the document and not

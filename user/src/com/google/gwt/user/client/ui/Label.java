@@ -99,10 +99,9 @@ import com.google.gwt.i18n.shared.DirectionEstimator;
  * {@example com.google.gwt.examples.HTMLExample}
  * </p>
  */
-@SuppressWarnings("deprecation")
 public class Label extends LabelBase<String> implements HasDirectionalText,
-    HasDirection, HasClickHandlers, HasDoubleClickHandlers, SourcesClickEvents,
-    SourcesMouseEvents, HasAllDragAndDropHandlers, HasAllGestureHandlers,
+    HasDirection, HasClickHandlers, HasDoubleClickHandlers,
+    HasAllDragAndDropHandlers, HasAllGestureHandlers,
     HasAllMouseHandlers, HasAllTouchHandlers,
     IsEditor<LeafValueEditor<String>> {
 
@@ -203,14 +202,6 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     return addDomHandler(handler, ClickEvent.getType());
   }
 
-  /**
-   * @deprecated Use {@link #addClickHandler} instead
-   */
-  @Deprecated
-  public void addClickListener(ClickListener listener) {
-    ListenerWrapper.WrappedClickListener.add(this, listener);
-  }
-
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
     return addDomHandler(handler, DoubleClickEvent.getType());
   }
@@ -259,16 +250,6 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     return addDomHandler(handler, MouseDownEvent.getType());
   }
 
-  /**
-   * @deprecated Use {@link #addMouseOverHandler},
-   * {@link #addMouseMoveHandler}, {@link #addMouseDownHandler},
-   * {@link #addMouseUpHandler} and {@link #addMouseOutHandler} instead
-   */
-  @Deprecated
-  public void addMouseListener(MouseListener listener) {
-    ListenerWrapper.WrappedMouseListener.add(this, listener);
-  }
-
   public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
     return addDomHandler(handler, MouseMoveEvent.getType());
   }
@@ -287,14 +268,6 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
 
   public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
     return addDomHandler(handler, MouseWheelEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addMouseWheelHandler} instead
-   */
-  @Deprecated
-  public void addMouseWheelListener(MouseWheelListener listener) {
-    ListenerWrapper.WrappedMouseWheelListener.add(this, listener);
   }
 
   public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
@@ -335,33 +308,6 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
 
   public Direction getTextDirection() {
     return directionalTextHelper.getTextDirection();
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on
-   * the object returned by {@link #addClickHandler} instead
-   */
-  @Deprecated
-  public void removeClickListener(ClickListener listener) {
-    ListenerWrapper.WrappedClickListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by an add*Handler method instead
-   */
-  @Deprecated
-  public void removeMouseListener(MouseListener listener) {
-    ListenerWrapper.WrappedMouseListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by {@link #addMouseWheelHandler} instead
-   */
-  @Deprecated
-  public void removeMouseWheelListener(MouseWheelListener listener) {
-    ListenerWrapper.WrappedMouseWheelListener.remove(this, listener);
   }
 
   /**

@@ -15,15 +15,15 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
 
 /**
@@ -40,27 +40,14 @@ public class CompositeTest extends GWTTestCase {
 
   private static class EventTestComposite extends Composite {
     TextBox tb = new TextBox();
-    boolean widgetFocusFired;
-    boolean widgetLostFocusFired;
     boolean widgetFocusHandlerFired;
     boolean widgetBlurHandlerFired;
     boolean domFocusFired;
     boolean domBlurFired;
 
-    @SuppressWarnings("deprecation")
     public EventTestComposite() {
       initWidget(tb);
       sinkEvents(Event.FOCUSEVENTS);
-
-      tb.addFocusListener(new FocusListener() {
-        public void onLostFocus(Widget sender) {
-          widgetLostFocusFired = true;
-        }
-
-        public void onFocus(Widget sender) {
-          widgetFocusFired = true;
-        }
-      });
 
       tb.addFocusHandler(new FocusHandler() {
         public void onFocus(FocusEvent event) {
@@ -103,19 +90,17 @@ public class CompositeTest extends GWTTestCase {
     // Focus, then blur, the composite's text box. This has to be done in
     // deferred commands, because focus events usually require the event loop
     // to be pumped in order to fire.
-    DeferredCommand.addCommand(new Command() {
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       public void execute() {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
           public void execute() {
             // Ensure all events fired as expected.
             assertTrue(c.domFocusFired);
             assertTrue(c.domBlurFired);
-            assertTrue(c.widgetLostFocusFired);
             assertTrue(c.widgetBlurHandlerFired);
 
             // Ensure that the widget's focus event was eaten by the
             // composite's implementation of onBrowserEvent().
-            assertFalse(c.widgetFocusFired);
             assertFalse(c.widgetFocusHandlerFired);
             finishTest();
           }

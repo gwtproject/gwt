@@ -416,22 +416,6 @@ public class Event extends NativeEvent {
   static HandlerManager handlers;
 
   /**
-   * Adds an event preview to the preview stack. As long as this preview remains
-   * on the top of the stack, it will receive all events before they are fired
-   * to their listeners. Note that the event preview will receive <u>all </u>
-   * events, including those received due to bubbling, whereas normal event
-   * handlers only receive explicitly sunk events.
-   * 
-   * @param preview the event preview to be added to the stack.
-   * @deprecated replaced by
-   *             {@link #addNativePreviewHandler(NativePreviewHandler)}
-   */
-  @Deprecated
-  public static void addEventPreview(EventPreview preview) {
-    DOM.addEventPreview(preview);
-  }
-
-  /**
    * <p>
    * Adds a {@link NativePreviewHandler} that will receive all events before
    * they are fired to their handlers. Note that the handler will receive
@@ -544,19 +528,6 @@ public class Event extends NativeEvent {
    */
   public static void releaseCapture(Element elem) {
     DOM.releaseCapture(elem.<com.google.gwt.user.client.Element> cast());
-  }
-
-  /**
-   * Removes an element from the preview stack. This element will no longer
-   * capture events, though any preview underneath it will begin to do so.
-   * 
-   * @param preview the event preview to be removed from the stack
-   * @deprecated use {@link HandlerRegistration} returned from
-   *             {@link Event#addNativePreviewHandler(NativePreviewHandler)}
-   */
-  @Deprecated
-  public static void removeEventPreview(EventPreview preview) {
-    DOM.removeEventPreview(preview);
   }
 
   /**

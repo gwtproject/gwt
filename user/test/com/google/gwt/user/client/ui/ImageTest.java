@@ -95,34 +95,6 @@ public class ImageTest extends GWTTestCase {
     }
   }
 
-  @Deprecated
-  private abstract static class TestLoadListener implements LoadListener {
-    private boolean finished = false;
-    private Image image;
-
-    public TestLoadListener(Image image) {
-      this.image = image;
-    }
-
-    /**
-     * Mark the test as finished.
-     */
-    public void finish() {
-      finished = true;
-    }
-
-    /**
-     * Returns true if the test has finished.
-     */
-    public boolean isFinished() {
-      return finished;
-    }
-
-    public void onError(Widget sender) {
-      fail("The image " + image.getUrl() + " failed to load.");
-    }
-  }
-
   /**
    * The default timeout of asynchronous tests. This should be larger than
    * LOAD_EVENT_TIMEOUT and SYNTHETIC_LOAD_EVENT_TIMEOUT.
@@ -437,23 +409,10 @@ public class ImageTest extends GWTTestCase {
   /**
    * Tests the creation of an image in clipped mode.
    */
-  @SuppressWarnings("deprecation")
   public void testCreateClippedImage() {
     final Image image = new Image("counting-forwards.png", 16, 16, 16, 16);
 
     delayTestFinish(DEFAULT_TEST_TIMEOUT);
-    final TestLoadListener listener = new TestLoadListener(image) {
-      private int onLoadEventCount = 0;
-
-      public void onLoad(Widget sender) {
-        if (++onLoadEventCount == 1) {
-          assertEquals(16, image.getWidth());
-          assertEquals(16, image.getHeight());
-          finish();
-        }
-      }
-    };
-    image.addLoadListener(listener);
 
     image.addLoadHandler(new LoadHandler() {
       private int onLoadEventCount = 0;
@@ -462,11 +421,7 @@ public class ImageTest extends GWTTestCase {
         if (++onLoadEventCount == 1) {
           assertEquals(16, image.getWidth());
           assertEquals(16, image.getHeight());
-          if (listener.isFinished()) {
-            finishTest();
-          } else {
-            fail("Listener did not fire first");
-          }
+          finishTest();
         }
       }
     });
@@ -476,32 +431,6 @@ public class ImageTest extends GWTTestCase {
     assertEquals(16, image.getOriginLeft());
     assertEquals(16, image.getOriginTop());
     assertEquals("clipped", getCurrentImageStateName(image));
-  }
-
-  @SuppressWarnings("deprecation")
-  public void testLoadListenerWiring() {
-    Image im = new Image();
-
-    im.addLoadListener(new LoadListener() {
-
-      public void onError(Widget sender) {
-        ++firedError;
-      }
-
-      public void onLoad(Widget sender) {
-        ++firedLoad;
-      }
-    });
-    im.fireEvent(new LoadEvent() {
-      // Replaced by Joel's event firing when possible.
-    });
-    assertEquals(1, firedLoad);
-    assertEquals(0, firedError);
-    im.fireEvent(new ErrorEvent() {
-      // Replaced by Joel's event firing when possible.
-    });
-    assertEquals(1, firedLoad);
-    assertEquals(1, firedError);
   }
 
   /**
@@ -665,36 +594,20 @@ public class ImageTest extends GWTTestCase {
    * {@link com.google.gwt.user.client.ui.Image#setUrlAndVisibleRect(String,int,int,int,int)}
    * on a clipped image.
    */
-  @SuppressWarnings("deprecation")
   public void testSetUrlAndVisibleRectOnClippedImage() {
     final Image image = new Image("counting-backwards.png", 12, 12, 12, 12);
-
-    final TestLoadListener listener = new TestLoadListener(image) {
-      public void onLoad(Widget sender) {
-        if (isFinished()) {
-          fail("LoadListener fired twice. Expected it to fire only once.");
-        }
-
-        assertEquals(0, image.getOriginLeft());
-        assertEquals(16, image.getOriginTop());
-        assertEquals(16, image.getWidth());
-        assertEquals(16, image.getHeight());
-        assertEquals("clipped", getCurrentImageStateName(image));
-        finish();
-      }
-    };
-    image.addLoadListener(listener);
 
     final TestLoadHandler loadHandler = new TestLoadHandler() {
       public void onLoad(LoadEvent event) {
         if (isFinished()) {
           fail("LoadHandler fired twice. Expected it to fire only once.");
         }
-        if (listener.isFinished()) {
-          finish();
-        } else {
-          fail("Listener did not fire first");
-        }
+        assertEquals(0, image.getOriginLeft());
+        assertEquals(16, image.getOriginTop());
+        assertEquals(16, image.getWidth());
+        assertEquals(16, image.getHeight());
+        assertEquals("clipped", getCurrentImageStateName(image));
+        finish();
       }
     };
     image.addLoadHandler(loadHandler);
@@ -725,30 +638,15 @@ public class ImageTest extends GWTTestCase {
    * {@link com.google.gwt.user.client.ui.Image#setVisibleRect(int,int,int,int)}
    * on a clipped image.
    */
-  @SuppressWarnings("deprecation")
   public void testSetVisibleRectAndLoadEventsOnClippedImage() {
     final Image image = new Image("counting-backwards.png", 16, 16, 16, 16);
-
-    final TestLoadListener listener = new TestLoadListener(image) {
-      public void onLoad(Widget sender) {
-        if (isFinished()) {
-          fail("LoadListener fired twice. Expected it to fire only once.");
-        }
-        finish();
-      }
-    };
-    image.addLoadListener(listener);
 
     final TestLoadHandler loadHandler = new TestLoadHandler() {
       public void onLoad(LoadEvent event) {
         if (isFinished()) {
           fail("LoadHandler fired twice. Expected it to fire only once.");
         }
-        if (listener.isFinished()) {
-          finish();
-        } else {
-          fail("Listener did not fire first");
-        }
+        finish();
       }
     };
     image.addLoadHandler(loadHandler);

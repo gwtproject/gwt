@@ -84,9 +84,7 @@ import com.google.gwt.user.client.ui.impl.FocusImpl;
  * A simple panel that makes its contents focusable, and adds the ability to
  * catch mouse and keyboard events.
  */
-@SuppressWarnings("deprecation")
-public class FocusPanel extends SimplePanel implements HasFocus,
-    SourcesClickEvents, SourcesMouseEvents, SourcesMouseWheelEvents,
+public class FocusPanel extends SimplePanel implements Focusable,
     HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
     HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
     HasAllGestureHandlers, HasAllTouchHandlers {
@@ -108,14 +106,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
 
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addDomHandler(handler, ClickEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addClickHandler} instead
-   */
-  @Deprecated
-  public void addClickListener(ClickListener listener) {
-    ListenerWrapper.WrappedClickListener.add(this, listener);
   }
 
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
@@ -154,14 +144,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     return addDomHandler(handler, FocusEvent.getType());
   }
 
-  /**
-   * @deprecated Use {@link #addFocusHandler} instead
-   */
-  @Deprecated
-  public void addFocusListener(FocusListener listener) {
-    ListenerWrapper.WrappedFocusListener.add(this, listener);
-  }
-
   public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
     return addDomHandler(handler, GestureChangeEvent.getType());
   }
@@ -172,15 +154,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
 
   public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
     return addDomHandler(handler, GestureStartEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addKeyDownHandler}, {@link
-   * #addKeyUpHandler} and {@link #addKeyPressHandler} instead
-   */
-  @Deprecated
-  public void addKeyboardListener(KeyboardListener listener) {
-    ListenerWrapper.WrappedKeyboardListener.add(this, listener);
   }
 
   public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
@@ -197,16 +170,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
 
   public HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
     return addDomHandler(handler, MouseDownEvent.getType());
-  }
-
-  /**
-   * @deprecated Use {@link #addMouseOverHandler}, {@link
-   * #addMouseMoveHandler}, {@link #addMouseDownHandler}, {@link
-   * #addMouseUpHandler} and {@link #addMouseOutHandler} instead
-   */
-  @Deprecated
-  public void addMouseListener(MouseListener listener) {
-    ListenerWrapper.WrappedMouseListener.add(this, listener);
   }
 
   public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
@@ -229,14 +192,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     return addDomHandler(handler, MouseWheelEvent.getType());
   }
 
-  /**
-   * @deprecated Use {@link #addMouseWheelHandler} instead
-   */
-  @Deprecated
-  public void addMouseWheelListener(MouseWheelListener listener) {
-    ListenerWrapper.WrappedMouseWheelListener.add(this, listener);
-  }
-
   public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
     return addDomHandler(handler, TouchCancelEvent.getType());
   }
@@ -255,51 +210,6 @@ public class FocusPanel extends SimplePanel implements HasFocus,
 
   public int getTabIndex() {
     return impl.getTabIndex(getElement());
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on 
-   * the object returned by {@link #addClickHandler} instead
-   */
-  @Deprecated
-  public void removeClickListener(ClickListener listener) {
-    ListenerWrapper.WrappedClickListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method on 
-   * the object returned by {@link #addFocusHandler} instead
-   */
-  @Deprecated
-  public void removeFocusListener(FocusListener listener) {
-    ListenerWrapper.WrappedFocusListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by an add*Handler method instead
-   */
-  @Deprecated
-  public void removeKeyboardListener(KeyboardListener listener) {
-    ListenerWrapper.WrappedKeyboardListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by an add*Handler method instead
-   */
-  @Deprecated
-  public void removeMouseListener(MouseListener listener) {
-    ListenerWrapper.WrappedMouseListener.remove(this, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler}
-   * method on the object returned by {@link #addMouseWheelHandler} instead
-   */
-  @Deprecated
-  public void removeMouseWheelListener(MouseWheelListener listener) {
-    ListenerWrapper.WrappedMouseWheelListener.remove(this, listener);
   }
 
   public void setAccessKey(char key) {

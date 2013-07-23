@@ -20,7 +20,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
-import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.impl.DOMImpl;
 import com.google.gwt.user.client.ui.PotentialElement;
 
@@ -31,53 +30,10 @@ import com.google.gwt.user.client.ui.PotentialElement;
  * {@link com.google.gwt.user.client.Event events}.
  */
 public class DOM {
-
-  private static class NativePreview extends BaseListenerWrapper<EventPreview>
-      implements Event.NativePreviewHandler {
-    @Deprecated
-    public static void add(EventPreview listener) {
-      Event.addNativePreviewHandler(new NativePreview(listener));
-    }
-
-    public static void remove(EventPreview listener) {
-      baseRemove(Event.handlers, listener, NativePreviewEvent.getType());
-    }
-
-    private NativePreview(EventPreview listener) {
-      super(listener);
-    }
-
-    public void onPreviewNativeEvent(NativePreviewEvent event) {
-      // The legacy EventHandler should only fire if it is on the top of the
-      // stack (ie. the last one added).
-      if (event.isFirstHandler()) {
-        if (!listener.onEventPreview(Event.as(event.getNativeEvent()))) {
-          event.cancel();
-        }
-      }
-    }
-  }
-
   // The current event being fired
   private static Event currentEvent = null;
   static final DOMImpl impl = GWT.create(DOMImpl.class);
   private static Element sCaptureElem;
-
-  /**
-   * Adds an event preview to the preview stack. As long as this preview remains
-   * on the top of the stack, it will receive all events before they are fired
-   * to their listeners. Note that the event preview will receive <u>all </u>
-   * events, including those received due to bubbling, whereas normal event
-   * handlers only receive explicitly sunk events.
-   * 
-   * @param preview the event preview to be added to the stack.
-   * @deprecated replaced by
-   *             {@link Event#addNativePreviewHandler(Event.NativePreviewHandler)}
-   */
-  @Deprecated
-  public static void addEventPreview(EventPreview preview) {
-    NativePreview.add(preview);
-  }
 
   /**
    * Appends one element to another's list of children.
@@ -521,7 +477,7 @@ public class DOM {
    * 
    * @param evt the event to be tested
    * @return the Unicode character or key code.
-   * @see com.google.gwt.user.client.ui.KeyboardListener
+   * @see com.google.gwt.event.dom.client.KeyCodes
    */
   public static int eventGetKeyCode(Event evt) {
     return evt.getKeyCode();
@@ -1059,20 +1015,6 @@ public class DOM {
    */
   public static void removeElementAttribute(Element elem, String attr) {
     elem.removeAttribute(attr);
-  }
-
-  /**
-   * Removes an element from the preview stack. This element will no longer
-   * capture events, though any preview underneath it will begin to do so.
-   * 
-   * @param preview the event preview to be removed from the stack
-   * @deprecated use {@link com.google.gwt.event.shared.HandlerRegistration}
-   *             returned from
-   *             {@link Event#addNativePreviewHandler(Event.NativePreviewHandler)}
-   */
-  @Deprecated
-  public static void removeEventPreview(EventPreview preview) {
-    NativePreview.remove(preview);
   }
 
   /**

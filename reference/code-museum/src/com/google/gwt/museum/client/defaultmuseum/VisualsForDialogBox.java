@@ -21,6 +21,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.museum.client.common.AbstractIssue;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
@@ -28,6 +34,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -96,43 +103,37 @@ public class VisualsForDialogBox extends AbstractIssue {
       }
       maybeClose = false;
       super.onBrowserEvent(event);
+
+      getCaption().addMouseOverHandler(new MouseOverHandler() {
+        @Override
+        public void onMouseOver(MouseOverEvent event) {
+          ((UIObject) event.getSource()).getElement().getStyle().setBackgroundColor("yellow");
+        }
+      });
+      getCaption().addMouseOutHandler(new MouseOutHandler() {
+        @Override
+        public void onMouseOut(MouseOutEvent event) {
+          ((UIObject) event.getSource()).getElement().getStyle().clearBackgroundColor();
+        }
+      });
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onMouseDown(Widget sender, int x, int y) {
+    protected void beginDragging(MouseDownEvent event) {
       pass(VisibleEvents.mouseDown);
-      super.onMouseDown(sender, x, y);
+      super.beginDragging(event);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onMouseEnter(Widget sender) {
-      pass(VisibleEvents.mouseEnter);
-      sender.getElement().getStyle().setProperty("background", "yellow");
-      super.onMouseEnter(sender);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onMouseLeave(Widget sender) {
-      pass(VisibleEvents.mouseLeave);
-      sender.getElement().getStyle().setProperty("background", "");
-      super.onMouseLeave(sender);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onMouseMove(Widget sender, int x, int y) {
+    protected void continueDragging(MouseMoveEvent event) {
       pass(VisibleEvents.mouseMove);
-      super.onMouseMove(sender, x, y);
+      super.continueDragging(event);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onMouseUp(Widget sender, int x, int y) {
+    protected void endDragging(MouseUpEvent event) {
       pass(VisibleEvents.mouseUp);
-      super.onMouseUp(sender, x, y);
+      super.endDragging(event);
     }
 
     public void pass(VisibleEvents event) {
@@ -150,7 +151,7 @@ public class VisualsForDialogBox extends AbstractIssue {
 
     private boolean isCloseBoxEvent(Event event) {
       return Document.get().getElementById("vis-closebox").isOrHasChild(
-          event.getTarget());
+          event.getEventTarget().<Element>cast());
     }
   }
 

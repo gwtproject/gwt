@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "732fefb5_224e2e97",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-07-23T18:00:00Z",
+      "side": 1,
+      "message": "Removed some words. Is it clearer?",
+      "parentUuid": "1325d3ee_878bc6a9",
+      "revId": "b9163b2efdcf57371b3222c837ec55639587d7be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1325d3ee_a73c0afa",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-20T01:24:45Z",
       "side": 1,
       "message": "I don\u0027t understand this. If compiledClass is non-null and doesn\u0027t have any errors, it seems like its dependencies could still have errors, so it might still turn out to be invalid. But in that case, we don\u0027t add it to depsNeeded, so if it does turn out to be invalid, we will miss some edges needed to invalidate classes that depend on it. Unless I\u0027m missing something...",
+      "revId": "b9163b2efdcf57371b3222c837ec55639587d7be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "732fefb5_e26c4606",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-07-23T18:00:00Z",
+      "side": 1,
+      "message": "This bit roughly corresponds to lines 50-54 of the original. The original does shallow inspection of the units that arrive via validClasses, and dependencies of validClasses\u0027 units are not inspected or resolved.\n\nThe units from `units` are examined more deeply; they are the new ones being assimilated.\n\nI *suspect* that all the units from validClasses have passed through this method as `units` on a previous call and have been examined more deeply. If so, the call to isError is unnecessary and always false on this line. Not having proven this to myself, I retained the check.\n\nAlso, the units from validClasses aren\u0027t members of `units`.",
+      "parentUuid": "1325d3ee_a73c0afa",
       "revId": "b9163b2efdcf57371b3222c837ec55639587d7be",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "337c97f0_c8776f91",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-07-23T18:44:13Z",
+      "side": 1,
+      "message": "I wonder if this test also passes with the old code? (Perhaps temporarily revert the change and try it?)\n\nI worry that none of us understand the context this code runs in and we\u0027ve missed something. But I\u0027m basically okay with the change.",
+      "revId": "39073e51fa4b03b047485db33cf781987b63b0ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -191,7 +191,9 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
 
    protected String getDeferredFragmentSuffix(TreeLogger logger, LinkerContext context,
       int fragment) {
-    return "\n//@ sourceURL=" + context.getModuleName() + "-" + fragment + ".js\n";
+    // TODO: remove //@ syntax once //# is widespread
+    return "\n//# sourceURL=" + context.getModuleName() + "-" + fragment + ".js\n"
+        + "//@ sourceURL=" + context.getModuleName() + "-" + fragment + ".js\n";
   }
 
   @Override
@@ -435,12 +437,16 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       }
       // The sourceURL magic comment can cause browsers to ignore the X-SourceMap header
       // This magic comment ensures that they can still locate them in that case
+      out.print("\n//# sourceMappingURL=" + sourceMapUrl + " ");
+      // TODO: remove //@ syntax once //# is widespread
       out.print("\n//@ sourceMappingURL=" + sourceMapUrl + " ");
     }
     // Magic comment serves several purposes:
     // 1. renames strongName to a stable name in browser debugger
     // 2. provides name to scripts installed via eval()
-    out.print("\n//@ sourceURL=" + context.getModuleName() + "-0.js\n");
+    out.print("\n//# sourceURL=" + context.getModuleName() + "-0.js\n");
+    // TODO: remove //@ syntax once //# is widespread
+    out.print("//@ sourceURL=" + context.getModuleName() + "-0.js\n");
     return out.toString();
   }
 

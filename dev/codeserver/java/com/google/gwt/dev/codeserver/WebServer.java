@@ -286,6 +286,8 @@ public class WebServer {
     }
 
     if (target.endsWith(".cache.js")) {
+      response.setHeader("SourceMap", sourceMapLocationForModule(moduleName));
+      // TODO: remove X-SourceMap once SourceMap support is widespread
       response.setHeader("X-SourceMap", sourceMapLocationForModule(moduleName));
     } else if (target.endsWith(".nocache.js")) {
       response.setHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");

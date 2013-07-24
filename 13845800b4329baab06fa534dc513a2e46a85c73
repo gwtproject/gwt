@@ -122,6 +122,24 @@
       "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b35087a5_3f9623d2",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2013-07-24T16:25:18Z",
+      "side": 1,
+      "message": "Would calling getEntityProxyType be better? We already know it is an EntityProxyType?\n\nI\u0027ll look for unit tests that check for validation error handling. I was so excited that I\u0027d got it to work I didn\u0027t think about nice errors. If you know of a canonical example of validation unit tests a pointer might be handy.",
+      "parentUuid": "b35087a5_5f1a0fc3",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

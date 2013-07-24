@@ -16,6 +16,24 @@
       "revId": "c3b4a1be636401c2539508a82153949686d6e5b7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b35087a5_420f96ec",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-24T23:18:12Z",
+      "side": 1,
+      "message": "Where would that \"somewhere\" be? CrossSiteIframeLinker? Should we add a system property to control it?\n\nBTW, we still need to enable source maps in other browsers than Chrome.",
+      "parentUuid": "934d4312_0f6f75bf",
+      "revId": "c3b4a1be636401c2539508a82153949686d6e5b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

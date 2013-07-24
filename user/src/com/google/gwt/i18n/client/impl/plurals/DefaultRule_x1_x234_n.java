@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2013 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -36,11 +36,16 @@ public class DefaultRule_x1_x234_n {
         new PluralForm("other", "Default plural form"),
         new PluralForm("one", "Count ends in 1 but not 11"),
         new PluralForm("few", "Count ends in 2-4 but not 12-14"),
+        new PluralForm("many", "Count ends in 0 or 5-9 or 11-15"),
     };
   }
 
+  /*
+   * Returns 1, 2, or 3 ("one", "few", or "many").
+   * Will never return 0 because "other" is the fractional plural form.
+   */
   public static int select(int n) {
     return n % 10 == 1 && n % 100 != 11 ? 1 : n % 10 >= 2 && n % 10 <= 4
-        && (n % 100 < 10 || n % 100 >= 20) ? 2 : 0;
+        && (n % 100 < 10 || n % 100 >= 20) ? 2 : 3;
   }
 }

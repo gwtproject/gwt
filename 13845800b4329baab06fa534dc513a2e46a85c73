@@ -140,6 +140,24 @@
       "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b35087a5_82c35e41",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5522
+      },
+      "writtenOn": "2013-07-25T08:13:03Z",
+      "side": 1,
+      "message": "Even worse than that. As patch stand you might need to use ExtraTypes if only mentioned in the EntityProxyId... Grrr. Will try and write unit test.",
+      "parentUuid": "b35087a5_3f9623d2",
+      "revId": "13845800b4329baab06fa534dc513a2e46a85c73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "338bb771_938abed8",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/plurals/DefaultRule_x1_x234_n.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-07-25T02:49:44Z",
+      "side": 1,
+      "message": "Does this change apply to all uses of this rule?\n\nI suggest making this plural form optional so people can transition to using it over time rather than flooding them with warnings.",
+      "revId": "71a920727442f6e5785946f23354daa438918df1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

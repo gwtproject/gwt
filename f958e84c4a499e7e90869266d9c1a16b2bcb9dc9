@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "3302d7bb_382429d5",
+        "filename": "user/src/com/google/gwt/core/client/impl/LogToConsoleEnabled.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "rename to JsConsoleLogger?",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b315e7f5_74334807",
+        "filename": "user/src/com/google/gwt/core/client/impl/LogToConsoleEnabled.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "We can do easily do it with StackTracePrintStream but we might want to move it to this to avoid adding dependency.",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b35087a5_abb755cd",
         "filename": "user/src/com/google/gwt/core/shared/GWT.java",
         "patchSetId": 1
@@ -13,6 +47,24 @@
       "writtenOn": "2013-07-26T10:09:35Z",
       "side": 1,
       "message": "Couldn\u0027t we (also) make isProdMode different from isScript? I see no reason to have those two properties as exact synonyms; Super Dev Mode should IMO be isScript but !isProdMode:\n\n                isClient isScript isProdMode\n plain JVM         -        -         -\n Dev Mode          Y        -         -\n Super Dev Mode    Y        Y         -\n prod mode         Y        Y         Y\n\nSee also issue 7634.\n\nIf that change is eventually made, then this test should become:\n\n if (isScript() \u0026\u0026 !isProdMode())\n\nAnd then the \"calls are optimized out in production mode\" comments below would be accurate.\n\nWe could even have the value of isProdMode dependent on a configuration-property or command-line switch; that SuperDevMode would always override. That way, one could compile and deploy a \"dev\" version of his application, that logs GWT.log to the console, and enables a few other things dependent on isProdMode in the code.",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "130793cc_fa5585fa",
+        "filename": "user/src/com/google/gwt/core/shared/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "Yes, I agree current behavior is not obvious and your table makes more sense.\n\nThere are some issues though;\n\n1. Changing the behavior of previous method is problematic.\n\n2. Thinking of plain-jvm always as non-production mode doesn\u0027t sound right to me.\n\nThe special mode here is being in \"dev mode or not\" instead of \"prod or not\" so we can introduce is isDevMode and then what it will return will be obvious all modes. Moving forward will be easy by deprecating isProdMode:\n\n                isClient isScript isDevMode\n plain JVM         -        -         -\n Dev Mode          Y        -         Y\n Super Dev Mode    Y        Y         Y\n prod mode         Y        Y         -",
+      "parentUuid": "b35087a5_abb755cd",
       "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -36,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "530d8be8_d957f327",
+        "filename": "user/src/com/google/gwt/core/shared/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "Perhaps we can say \"calls are optimized out by default in Production Mode.\"",
+      "parentUuid": "b35087a5_0b852900",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b35087a5_0b9c4956",
         "filename": "user/src/com/google/gwt/core/shared/GWT.java",
         "patchSetId": 1
@@ -47,6 +117,40 @@
       "writtenOn": "2013-07-26T10:09:35Z",
       "side": 1,
       "message": "Shouldn\u0027t this rather be \"if (logger !\u003d null)\" ?",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b315e7f5_b45b2031",
+        "filename": "user/src/com/google/gwt/core/shared/impl/JsLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "It might be also replaced by production mode if logging is enabled right?",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b315e7f5_f45598fa",
+        "filename": "user/src/com/google/gwt/core/shared/impl/JsLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-07-26T19:35:20Z",
+      "side": 1,
+      "message": "Isn\u0027t that better to have an interface bound to NullJsLogger instead of having an empty method here?",
       "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

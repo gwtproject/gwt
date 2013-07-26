@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "53dbcbac_89eb592a",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-26T23:21:18Z",
+      "side": 1,
+      "message": "FYI, window.console is (was?) being standardized at the W3C (added to the charter of Browser Testing and Tools WG in early 2011, long overdue)\n\n* http://sideshowbarker.github.io/console-spec/\n* http://www.w3.org/2011/08/browser-testing-charter.html\n\nKnown as the Console API there, not sure that really helps here.\n\nHow about \"browser developer console\" or \"browser debugging console\" (both wordings are used in the HTML5 spec AFAICT)",
+      "parentUuid": "b315e7f5_1d1f9771",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3302d7bb_382429d5",
         "filename": "user/src/com/google/gwt/core/client/impl/LogToConsoleEnabled.java",
         "patchSetId": 1

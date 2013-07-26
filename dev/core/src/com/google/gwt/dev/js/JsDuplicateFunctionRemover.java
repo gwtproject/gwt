@@ -166,47 +166,75 @@ public class JsDuplicateFunctionRemover {
     }
   }
 
-  // Needed for OptimizerTestBase
-  public static boolean exec(JsProgram program) {
-    return new JsDuplicateFunctionRemover(program).execImpl(program.getFragmentBlock(0));
-  }
-
-  public static boolean exec(JsProgram program, JsBlock fragment) {
-    return new JsDuplicateFunctionRemover(program).execImpl(fragment);
+  /**
+   * Entry point for the removal of duplicate functions optimizations.
+   *
+   * This optimization will collapse function whose JavaScript (output) code is identical. After
+   * collapsing duplicate functions it will functions that become unreferenced.
+   *
+   * This pass is safe only for JavaScript functions generated from Java where references to
+   * local function variables can not be extruded by returning a function.
+   *
+   * IMPORTANT NOTE: It is not safe to rename JsNames after this pass is performed.
+   *
+   * @param program the program to optimize
+   * @param namer a namer to assign fresh names to deduped functions that are lifted to the
+   *              global scope
+   * @return {@code true} if it made any changes; {@code false} otherwise.
+   */
+  public static boolean exec(JsProgram program, JsFreshNameGenerator namer) {
+    return new JsDuplicateFunctionRemover(program, namer).execImpl();
   }
 
   private final JsProgram program;
 
-  public JsDuplicateFunctionRemover(JsProgram program) {
+  /**
+   *   A JsObfuscateNamer instance to obtain new names.
+   */
+  JsFreshNameGenerator namer;
+
+
+  public JsDuplicateFunctionRemover(JsProgram program, JsFreshNameGenerator namer) {
     this.program = program;
+    this.namer = namer;
   }
 
-  private boolean execImpl(JsBlock fragment) {
-    DuplicateFunctionBodyRecorder dfbr = new DuplicateFunctionBodyRecorder();
-    dfbr.accept(fragment);
-    int count = 0;
-    Map<JsFunction, JsName> hoistMap = new HashMap<JsFunction, JsName>();
-    // Hoist all anonymous versions
-    Map<JsFunction, JsFunction> dupMethodMap = dfbr.getDuplicateMethodMap();
-    for (JsFunction x : dupMethodMap.values()) {
-      if (!hoistMap.containsKey(x)) {
-        // move function to top scope and re-declaring it with a unique name
-        JsName newName = program.getScope().declareName("_DUP" + count++);
-        JsFunction newFunc = new JsFunction(x.getSourceInfo(),
-            program.getScope(), newName, x.isFromJava());
-        // we're not using the old function anymore, we can use reuse the body instead of cloning it
-        newFunc.setBody(x.getBody());
-        // also copy the parameters from the old function
-        newFunc.getParameters().addAll(x.getParameters());
-        // add the new function to the top level list of statements
-        fragment.getStatements().add(newFunc.makeStmt());
-        hoistMap.put(x, newName);
+  private boolean execImpl() {
+    boolean change = false;
+    for (int i = 0; i < program.getFragmentCount(); i++) {
+      JsBlock fragment = program.getFragmentBlock(i);
+
+      DuplicateFunctionBodyRecorder dfbr = new DuplicateFunctionBodyRecorder();
+      dfbr.accept(fragment);
+      Map<JsFunction, JsName> hoistMap = new HashMap<JsFunction, JsName>();
+      // Hoist all anonymous versions
+      Map<JsFunction, JsFunction> dupMethodMap = dfbr.getDuplicateMethodMap();
+      for (JsFunction x : dupMethodMap.values()) {
+        if (!hoistMap.containsKey(x)) {
+          // move function to top scope and re-declaring it with a unique name
+          JsName newName = program.getScope().declareName(namer.getFreshName());
+          JsFunction newFunc = new JsFunction(x.getSourceInfo(),
+              program.getScope(), newName, x.isFromJava());
+          // we're not using the old function anymore, we can use reuse the body
+          // instead of cloning it
+          newFunc.setBody(x.getBody());
+          // also copy the parameters from the old function
+          newFunc.getParameters().addAll(x.getParameters());
+          // add the new function to the top level list of statements
+          fragment.getStatements().add(newFunc.makeStmt());
+          hoistMap.put(x, newName);
+        }
       }
+
+      ReplaceDuplicateInvocationNameRefs rdup = new ReplaceDuplicateInvocationNameRefs(
+          dfbr.getDuplicateMap(), dfbr.getBlacklist(), dupMethodMap, hoistMap);
+      rdup.accept(fragment);
+      change = change || rdup.didChange();
     }
 
-    ReplaceDuplicateInvocationNameRefs rdup = new ReplaceDuplicateInvocationNameRefs(
-        dfbr.getDuplicateMap(), dfbr.getBlacklist(), dupMethodMap, hoistMap);
-    rdup.accept(fragment);
-    return rdup.didChange();
+    if (change) {
+      JsUnusedFunctionRemover.exec(program);
+    }
+    return change;
   }
 }

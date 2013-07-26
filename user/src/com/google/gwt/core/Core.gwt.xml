@@ -44,6 +44,16 @@
       <when-type-is class="com.google.gwt.core.client.impl.UnloadSupport"/>
   </replace-with>
 
+  <!-- Controls the destination of GWT.log() in production (JavaScript). -->
+  <!-- Super Dev Mode changes this property. -->
+  <define-property name="gwt.log.js" values="off, console"/>
+  <set-property name="gwt.log.js" value="off"/>
+
+  <replace-with class="com.google.gwt.core.client.impl.LogToConsoleEnabled">
+      <when-property-is name="gwt.log.js" value="console"/>
+      <when-type-is class="com.google.gwt.core.shared.impl.JsLogger"/>
+  </replace-with>
+
   <define-linker name="soycReport" class="com.google.gwt.core.linker.SoycReportLinker" />
   <define-linker name="symbolMaps" class="com.google.gwt.core.linker.SymbolMapsLinker" />
 

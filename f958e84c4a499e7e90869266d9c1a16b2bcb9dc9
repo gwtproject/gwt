@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b315e7f5_1d1f9771",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-26T23:08:30Z",
+      "side": 1,
+      "message": "Seems worth clarifying \"browser console\" or something.  But it looks like window.console isn\u0027t actually standardized, so there\u0027s no standard name for this either.",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3302d7bb_382429d5",
         "filename": "user/src/com/google/gwt/core/client/impl/LogToConsoleEnabled.java",
         "patchSetId": 1
@@ -84,6 +101,23 @@
       "side": 1,
       "message": "The stack trace also needs to be deobfuscated, so I\u0027m thinking of doing RPC to the Super Dev Mode code server and logging a link to it in the console. Not in this CL though.",
       "parentUuid": "b315e7f5_74334807",
+      "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b315e7f5_9d33a7db",
+        "filename": "user/src/com/google/gwt/core/shared/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-26T23:08:30Z",
+      "side": 1,
+      "message": "If you want, it looks like you could just do:\n\n    private static final JsLogger logger \u003d isProdMode() ? create(JsLogger.class) : null;\n\nThis would eliminate the static block, and allow making the variable final.",
       "revId": "f958e84c4a499e7e90869266d9c1a16b2bcb9dc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

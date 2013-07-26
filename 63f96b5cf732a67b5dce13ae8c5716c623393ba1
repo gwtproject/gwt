@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b315e7f5_17d656db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-07-26T21:20:34Z",
+      "side": 1,
+      "message": "You have two review links now (at the top and bottom). Usually we have it at the bottom since that\u0027s where gerrit-export automatically adds it.\n\nSince this is change 3860, I suggest fixing this one and removing the other one.",
+      "revId": "63f96b5cf732a67b5dce13ae8c5716c623393ba1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

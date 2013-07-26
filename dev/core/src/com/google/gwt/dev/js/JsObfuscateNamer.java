@@ -26,7 +26,8 @@ import java.util.Iterator;
  * A namer that uses short, unrecognizable idents to minimize generated code
  * size.
  */
-public class JsObfuscateNamer extends JsNamer {
+public class JsObfuscateNamer extends JsNamer implements JsFreshNameGenerator {
+
 
   /**
    * A lookup table of base-64 chars we use to encode idents.
@@ -38,12 +39,29 @@ public class JsObfuscateNamer extends JsNamer {
       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '$', '_', '0', '1',
       '2', '3', '4', '5', '6', '7', '8', '9'};
 
-  public static void exec(JsProgram program) {
-    new JsObfuscateNamer(program, null).execImpl();
+  public static JsObfuscateNamer exec(JsProgram program) {
+    return exec(program, null);
   }
 
-  public static void exec(JsProgram program, PropertyOracle[] propertyOracles) {
-    new JsObfuscateNamer(program, propertyOracles).execImpl();
+  public static JsObfuscateNamer exec(JsProgram program, PropertyOracle[] propertyOracles) {
+    JsObfuscateNamer namer = new JsObfuscateNamer(program, propertyOracles);
+    namer.execImpl();
+    return namer;
+  }
+
+  /**
+   * Returns a valid unused obfuscated top scope name.
+   */
+  public String getFreshName() {
+    String newIdent;
+    while (true) {
+      // Get the next possible obfuscated name
+      newIdent = makeObfuscatedIdent(maxId++);
+      if (isLegal(program.getScope(), newIdent)) {
+        break;
+      }
+    }
+    return newIdent;
   }
 
   /**
@@ -51,6 +69,11 @@ public class JsObfuscateNamer extends JsNamer {
    */
   private int maxChildId = 0;
 
+  /**
+   * Remember the maximum ChildIdAssigned so that new names can safely be obtained without
+   * running the global renaming again.
+   */
+  private int maxId = -1;
   /**
    * A temp buffer big enough to hold at least 32 bits worth of base-64 chars.
    */
@@ -103,10 +126,18 @@ public class JsObfuscateNamer extends JsNamer {
           break;
         }
       }
+      if (!name.getShortIdent().equals(name.getIdent()) &&
+          !name.getShortIdent().equals(newIdent)) {
+        System.err.println("!!!! changing ident " + name.getShortIdent() + " to " + newIdent);
+      }
+      if (name.getIdent().startsWith("_DUP")) {
+        System.err.println("!!!! changing " +  name.getIdent()  + " shortident " + name.getShortIdent() + " to " + newIdent);
+      }
       name.setShortIdent(newIdent);
     }
 
     maxChildId = Math.max(mySiblingsMaxId, curId);
+    maxId = Math.max(maxId, maxChildId);
   }
 
   private boolean isLegal(JsScope scope, String newIdent) {

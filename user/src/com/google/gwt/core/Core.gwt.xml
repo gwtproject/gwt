@@ -44,6 +44,18 @@
       <when-type-is class="com.google.gwt.core.client.impl.UnloadSupport"/>
   </replace-with>
 
+  <!--
+  The gwt.log.js property controls the destination of GWT.log() calls when a GWT app is
+  compiled to JavaScript. It should aways be "off" a production build so that GWT developers
+  can safely assume that GWT.log() calls compile to nothing. Super Dev Mode overrides this property.
+  -->
+  <define-property name="gwt.log.js" values="off, console"/>
+  <set-property name="gwt.log.js" value="off"/>
+  <replace-with class="com.google.gwt.core.client.impl.ConsoleLogger">
+      <when-property-is name="gwt.log.js" value="console"/>
+      <when-type-is class="com.google.gwt.core.shared.impl.JsLogger"/>
+  </replace-with>
+
   <define-linker name="soycReport" class="com.google.gwt.core.linker.SoycReportLinker" />
   <define-linker name="symbolMaps" class="com.google.gwt.core.linker.SymbolMapsLinker" />
 

@@ -1,0 +1,986 @@
+# legacy
+java_library(
+  name = 'user',
+  srcs = glob(
+    [
+      'src/com/google/gwt/junit/remote/**/*.java',
+      'src/com/google/gwt/user/client/impl/DocumentRootImpl.java',
+    ],
+  ),
+  resources = [
+    'src/com/google/gwt/user/User.gwt.xml',
+    'src/com/google/gwt/user/DocumentRoot.gwt.xml',
+  ],
+  deps = [
+    ':browsermanager',
+    ':codegen',
+    ':core-shared',
+    ':core-client',
+    ':core-server',
+    ':dom',
+    ':event-shared',
+    ':event-client',
+    ':event-logical-shared',
+    ':event-logical-client',
+    ':history',
+    ':http',
+    ':i18n-shared',
+    ':i18n-client',
+    ':i18n-server',
+    ':jsonp',
+    ':junit',
+    ':logging-shared',
+#    ':logging-client',
+    ':logging-server',
+    ':mockutilities',
+    ':regexp-server',
+    ':regexp-client',
+    ':resources-core',
+    ':resources',
+    ':rpc-api',
+    ':rpc-shared',
+    ':rpc-client',
+    ':rpc-server',
+    ':safecss-server',
+    ':safecss-client',
+    ':safehtml-server',
+    ':safehtml-client',
+    ':timer',
+    ':window',
+    ':xml',
+  ],
+)
+
+java_library(
+  name = 'codegen',
+  srcs = glob(
+    ['src/com/google/gwt/codegen/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':safehtml-server',
+    '//:gwt-dev',
+  ],
+)
+
+java_test(
+  name = 'codegen_test',
+  srcs = glob(['test/com/google/gwt/codegen/**/*.java']),
+  source_under_test = [':codegen'],
+  deps = [
+    ':codegen',
+    ':safehtml-server',
+    ':junit',
+  ],
+)
+
+CORE_SHARED_SRCS = [
+  'src/com/google/gwt/core/client/impl/SerializableThrowable.java',
+  'src/com/google/gwt/core/client/impl/WeakMapping.java',
+  'src/com/google/gwt/core/shared/**/*.java',
+  'src/com/google/gwt/dom/client/PartialSupport.java',
+  'src/com/google/gwt/typedarrays/shared/**/*.java',
+  'src/com/google/gwt/typedarrays/server/**/*.java',
+  'src/com/google/gwt/user/client/rpc/AsyncCallback.java',
+  'src/com/google/gwt/util/regexfilter/**/*.java',
+]
+java_library(
+  name = 'core-shared',
+  srcs = glob(
+    CORE_SHARED_SRCS,
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    '//:gwt-dev'
+  ],
+)
+
+java_library(
+  name = 'core-server',
+  srcs = glob(
+    [
+      'src/com/google/gwt/core/server/**/*.java',
+    ],
+    excludes = ['**/package-info.java']
+  ),
+  deps = [
+    '//:gwt-dev',
+    ':core-shared',
+    ':i18n-server',
+  ],
+)
+
+java_library(
+  name = 'core-client',
+  srcs = glob(
+    [
+      'src/com/google/gwt/core/client/**/*.java',
+      'src/com/google/gwt/typedarrays/client/**/*.java',
+      'src/com/google/gwt/logging/impl/**/*.java',
+      'src/com/google/gwt/user/client/AsyncProxy.java',
+      'src/com/google/gwt/user/client/Cookies.java',
+      'src/com/google/gwt/user/client/impl/AsyncProxyBase.java',
+      'src/com/google/gwt/user/rebind/AbstractSourceCreator.java',
+      'src/com/google/gwt/user/rebind/AsyncProxyGenerator.java',
+      'src/com/google/gwt/user/rebind/ClassSourceFileComposer.java',
+      'src/com/google/gwt/user/rebind/ClassSourceFileComposerFactory.java',
+      'src/com/google/gwt/user/rebind/Enum.java',
+      'src/com/google/gwt/user/rebind/SourceWriter.java',
+      'src/com/google/gwt/user/rebind/StringSourceWriter.java',
+      'src/com/google/gwt/useragent/client/UserAgentAsserter.java',
+      'src/com/google/gwt/useragent/rebind/UserAgentGenerator.java',
+      'src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java',
+      'src/com/google/gwt/useragent/rebind/UserAgentPropertyGeneratorPredicate.java',
+      'src/com/google/gwt/xhr/**/*.java',
+    ],
+    excludes = ['**/package-info.java'] + CORE_SHARED_SRCS,
+  ),
+  resources = glob(
+    CORE_SHARED_SRCS +
+    [
+      'src/com/google/gwt/core/**/*',
+      'src/com/google/gwt/typedarrays/**/*',
+      'src/com/google/gwt/logging/LogImpl.gwt.xml',
+      'src/com/google/gwt/logging/impl/**/*',
+      'src/com/google/gwt/user/AsyncCallback.gwt.xml',
+      'src/com/google/gwt/user/AsyncProxy.gwt.xml',
+      'src/com/google/gwt/user/Cookies.gwt.xml',
+      'src/com/google/gwt/useragent/**/*',
+      'src/com/google/gwt/xhr/**/*',
+      'super/com/google/gwt/core/**/*',
+      'super/com/google/gwt/typedarrays/**/*',
+      'super/com/google/gwt/emul/**/*',
+    ],
+    excludes = [
+      'src/com/google/gwt/core/server/**/*',
+    ],
+  ),
+  deps = [
+    ':core-shared',
+    '//:gwt-dev',
+  ],
+)
+
+I18N_SHARED_SRCS = [
+  'src/com/google/gwt/i18n/shared/AlternateMessageSelector.java',
+  'src/com/google/gwt/i18n/shared/GwtLocale.java',
+  'src/com/google/gwt/i18n/shared/GwtLocaleFactory.java',
+  'src/com/google/gwt/i18n/shared/Localizable.java',
+  'src/com/google/gwt/i18n/shared/TimeZone.java',
+  'src/com/google/gwt/i18n/client/Constants.java',
+  'src/com/google/gwt/i18n/client/ConstantsWithLookup.java',
+  'src/com/google/gwt/i18n/client/Localizable.java',
+  'src/com/google/gwt/i18n/client/LocalizableResource.java',
+  'src/com/google/gwt/i18n/client/Messages.java',
+  'src/com/google/gwt/i18n/client/PluralRule.java',
+  'src/com/google/gwt/i18n/client/impl/plurals/**/*.java',
+  'src/com/google/gwt/i18n/rebind/keygen/**/*.java',
+]
+java_library(
+  name = 'i18n-shared',
+  srcs = glob(
+    I18N_SHARED_SRCS,
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    '//:gwt-dev',
+  ],
+)
+
+java_library(
+  name = 'i18n-server',
+  srcs = glob(
+    ['src/com/google/gwt/i18n/server/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    '//:gwt-dev',
+    ':i18n-shared',
+    ':safehtml-server',
+  ],
+)
+
+java_test(
+  name = 'i18n-server_test',
+  srcs = glob(['test/com/google/gwt/i18n/server/**/*.java']),
+  source_under_test = [':i18n-server'],
+  deps = [
+    ':i18n-server',
+    '//:junit',
+  ],
+)
+
+java_library(
+  name = 'i18n-client',
+  srcs = glob(
+    [
+      'src/com/google/gwt/i18n/client/**/*.java',
+      'src/com/google/gwt/i18n/shared/**/*.java',
+      'src/com/google/gwt/i18n/rebind/**/*.java',
+      'src/com/google/gwt/user/rebind/AbstractGeneratorClassCreator.java',
+      'src/com/google/gwt/user/rebind/AbstractMethodCreator.java',
+    ],
+    excludes = I18N_SHARED_SRCS + ['src/com/google/gwt/i18n/client/AutoDirectionHandler.java'],
+  ),
+  resources = glob(['src/com/google/gwt/i18n/**/*']),
+  deps = [
+    '//:gwt-dev',
+    ':dom',
+    ':i18n-shared',
+    ':i18n-server',
+    ':codegen',
+    ':safehtml-server',
+  ],
+)
+
+java_library(
+  name = 'safehtml-server',
+  srcs = glob(
+    [
+      'src/com/google/gwt/safecss/shared/SafeStyles.java',
+      'src/com/google/gwt/safehtml/shared/**/*.java',
+      'src/com/google/gwt/safehtml/server/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    '//:gwt-dev',
+    ':core-shared',
+    ':regexp-server',
+    ':http',
+    '//:streamhtmlparser',
+  ],
+)
+
+java_library(
+  name = 'safehtml-client',
+  srcs = glob(
+    [
+      'src/com/google/gwt/safehtml/client/**/*.java',
+      'src/com/google/gwt/safehtml/rebind/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob(
+    [
+      'src/com/google/gwt/safehtml/**/*',
+      'super/com/google/gwt/safehtml/**/*',
+    ],
+  ),
+  deps = [
+    ':safehtml-server',
+    ':regexp-client',
+    ':core-client',
+    '//:gwt-dev',
+    ':core-shared',
+    ':regexp-server',
+    ':http',
+    '//:streamhtmlparser',
+  ],
+)
+
+java_library(
+  name = 'safecss-client',
+  resources = glob(
+    [
+      'src/com/google/gwt/safecss/SafeCss.gwt.xml',
+      'super/com/google/gwt/safecss/**/*',
+    ]
+  ),
+  deps = [
+    ':safecss-server',
+    ':regexp-client',
+    ':http',
+  ],
+)
+
+java_library(
+  name = 'safecss-server',
+  srcs = glob(['src/com/google/gwt/safecss/**/*.java']),
+  deps = [
+    ':dom', # FIXME: split gwt-dom with server-only classes
+    ':safehtml-server',
+    '//:gwt-dev',
+  ],
+)
+
+java_library(
+  name = 'regexp-server',
+  srcs = glob(
+    ['src/com/google/gwt/regexp/shared/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    '//:gwt-dev',
+  ],
+)
+
+java_library(
+  name = 'regexp-client',
+  srcs = glob(
+    ['src/com/google/gwt/regexp/shared/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob(
+    [
+      'src/com/google/gwt/regexp/**/*',
+      'super/com/google/gwt/regexp/**/*',
+    ],
+  ),
+  deps = [
+    '//:gwt-dev',
+    ':core-client',
+    ':regexp-server',
+  ],
+)
+
+java_library(
+  name = 'history',
+  srcs = glob(
+    [
+      'src/com/google/gwt/user/client/History*.java',
+      'src/com/google/gwt/user/client/impl/HistoryImpl*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob([
+    'src/com/google/gwt/user/History.gwt.xml',
+    'src/com/google/gwt/user/client/History*.java',
+    'src/com/google/gwt/user/client/impl/HistoryImpl*.java',
+  ]),
+  deps = [
+    ':core-client',
+    ':timer',
+    ':window',
+    ':dom',
+    ':event-logical-client',
+  ],
+)
+
+java_test(
+  name = 'history_test',
+  srcs = glob([
+    'test/com/google/gwt/user/client/History*.java',
+    'test/com/google/gwt/user/client/impl/History*.java',
+  ]),
+  resources = glob([
+    'test/com/google/gwt/user/History*.gwt.xml',
+    'test/com/google/gwt/user/client/History*.java',
+    'test/com/google/gwt/user/client/impl/History*.java',
+  ]),
+  source_under_test = [':history'],
+  deps = [
+    ':history',
+    ':junit',
+  ],
+)
+java_library(
+  name = 'http',
+  srcs = glob(
+    ['src/com/google/gwt/http/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob(['src/com/google/gwt/http/**/*']),
+  deps = [
+    ':core-client',
+  ],
+)
+
+java_library(
+  name = 'browsermanager',
+  srcs = glob(['src/com/google/gwt/junit/remote/**/*.java']),
+  deps = [
+    '//:gwt-dev',
+  ],
+)
+
+java_test(
+  name = 'browsermanager_test',
+  srcs = glob(['test/com/google/gwt/junit/remote/**/*.java']),
+  source_under_test = [':browsermanager'],
+  labels = ['manual'],
+  deps = [
+    ':browsermanager',
+    '//:gwt-dev',
+    '//:junit',
+  ],
+)
+
+java_library(
+  name = 'dom',
+  srcs = glob(
+    [
+      'src/com/google/gwt/canvas/dom/client/**/*.java',
+      'src/com/google/gwt/dom/client/**/*.java',
+      'src/com/google/gwt/media/dom/client/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob(
+    [
+      'src/com/google/gwt/canvas/dom/**/*',
+      'src/com/google/gwt/dom/**/*',
+      'src/com/google/gwt/media/dom/**/*',
+    ],
+  ),
+  deps = [
+    ':event-logical-client',
+    ':safehtml-client',
+  ],
+)
+
+java_library(
+  name = 'event-client',
+  resources = glob(
+    ['src/com/google/gwt/event/**/*'],
+    excludes = ['src/com/google/gwt/event/logical/**/*'],
+  ),
+  deps = [
+    ':event-shared',
+    ':bindery-event-gwt',
+  ],
+)
+
+java_library(
+  name = 'event-logical-client',
+  resources = glob(['src/com/google/gwt/event/logical/**/*']),
+  deps = [
+    ':event-logical-shared',
+    ':event-client',
+  ],
+)
+
+java_library(
+  name = 'event-logical-shared',
+  srcs = glob(
+    ['src/com/google/gwt/event/logical/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':event-shared',
+  ],
+)
+
+java_library(
+  name = 'event-shared',
+  srcs = glob(
+    ['src/com/google/gwt/event/shared/**/*.java'],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':core-shared',
+    ':bindery-event',
+  ],
+)
+
+java_test(
+  name = 'event-shared_test',
+  srcs = glob(['test/com/google/gwt/event/shared/**/*.java']),
+  deps = [
+    ':event-shared',
+    ':core-shared',
+    ':bindery-event',
+    ':junit',
+  ],
+)
+
+java_library(
+  name = 'jsonp',
+  srcs = glob(['src/com/google/gwt/jsonp/**/*.java']),
+  resources = glob(['src/com/google/gwt/jsonp/**/*']),
+  deps = [
+    ':dom',
+    ':timer',
+  ],
+)
+
+MOCKUTILITIES_SRCS = [
+  'src/com/google/gwt/junit/FakeCssMaker.java',
+  'src/com/google/gwt/junit/FakeMessagesMaker.java',
+  'src/com/google/gwt/junit/GWTDummyBridge.java',
+  'src/com/google/gwt/junit/GWTMockUtilities.java',
+]
+MOCKUTILITIES_TEST = [
+  'test/com/google/gwt/junit/FakeCssMakerTest.java',
+  'test/com/google/gwt/junit/FakeMessagesMakerTest.java',
+  'test/com/google/gwt/junit/GWTMockUtilitiesTest.java',
+]
+java_library(
+  name = 'junit',
+  srcs = glob(
+    [
+      'src/com/google/gwt/junit/**/*.java',
+    ],
+    excludes = MOCKUTILITIES_SRCS + [
+      'src/com/google/gwt/junit/remote/**/*',
+      'src/com/google/gwt/junit/tools/**/*',
+    ],
+  ),
+  resources = glob(
+    [
+      'src/com/google/gwt/junit/**/*',
+      'super/com/google/gwt/junit/**/*',
+    ],
+  ),
+  deps = [
+    ':browsermanager',
+    ':window',
+    ':timer',
+    ':http',
+    ':rpc-client',
+    ':rpc-server',
+    '//:junit',
+    '//:gwt-dev',
+    '//:selenium-java-client-driver',
+  ],
+)
+
+java_library(
+  name = 'mockutilities',
+  srcs = MOCKUTILITIES_SRCS,
+  deps = [
+    ':core-client',
+    ':safehtml-server',
+    ':i18n-shared',
+    ':resources',
+  ],
+)
+java_test(
+  name = 'mockutilities_test',
+  srcs = MOCKUTILITIES_TEST,
+  source_under_test = [':mockutilities'],
+  deps = [
+    ':mockutilities',
+    '//:junit',
+  ],
+)
+
+TIMER_SRCS = [
+  'src/com/google/gwt/user/client/Command.java',
+  'src/com/google/gwt/user/client/CommandCanceledException.java',
+  'src/com/google/gwt/user/client/CommandExecutor.java',
+  'src/com/google/gwt/user/client/DeferredCommand.java',
+  'src/com/google/gwt/user/client/IncrementalCommand.java',
+  'src/com/google/gwt/user/client/IncrementalCommandCanceledException.java',
+  'src/com/google/gwt/user/client/Timer.java',
+]
+java_library(
+  name = 'timer',
+  srcs = TIMER_SRCS,
+  resources = TIMER_SRCS + ['src/com/google/gwt/user/Timer.gwt.xml'],
+  deps = [
+    ':window',
+  ],
+)
+
+WINDOW_SRCS = [
+  'src/com/google/gwt/user/client/BaseListenerWrapper.java',
+  'src/com/google/gwt/user/client/Window.java',
+  'src/com/google/gwt/user/client/WindowCloseListener.java',
+  'src/com/google/gwt/user/client/WindowResizeListener.java',
+  'src/com/google/gwt/user/client/WindowScrollListener.java',
+  'src/com/google/gwt/user/client/impl/WindowImpl.java',
+  'src/com/google/gwt/user/client/impl/WindowImplIE.java',
+  'src/com/google/gwt/user/client/impl/WindowImplMozilla.java',
+]
+java_library(
+  name = 'window',
+  srcs = WINDOW_SRCS,
+  resources = WINDOW_SRCS + [
+    'src/com/google/gwt/user/Window.gwt.xml',
+    'src/com/google/gwt/user/client/impl/initWindowCloseHandler.js',
+    'src/com/google/gwt/user/client/impl/initWindowResizeHandler.js',
+    'src/com/google/gwt/user/client/impl/initWindowScrollHandler.js',
+  ],
+  deps = [
+    ':dom',
+    ':resources-core',
+  ],
+)
+
+RESOURCES_CORE_SRCS = [
+  'src/com/google/gwt/resources/client/ClientBundle.java',
+  'src/com/google/gwt/resources/client/ClientBundleWithLookup.java',
+  'src/com/google/gwt/resources/client/DataResource.java',
+  'src/com/google/gwt/resources/client/GwtCreateResource.java',
+  'src/com/google/gwt/resources/client/ResourceCallback.java',
+  'src/com/google/gwt/resources/client/ResourceException.java',
+  'src/com/google/gwt/resources/client/ResourcePrototype.java',
+  'src/com/google/gwt/resources/client/TextResource.java',
+  'src/com/google/gwt/resources/client/impl/DataResourcePrototype.java',
+  'src/com/google/gwt/resources/client/package-info.java',
+  'src/com/google/gwt/resources/ext/**/*.java',
+  'src/com/google/gwt/resources/rebind/**/*.java',
+  'src/com/google/gwt/resources/rg/BundleResourceGenerator.java',
+  'src/com/google/gwt/resources/rg/DataResourceGenerator.java',
+  'src/com/google/gwt/resources/rg/GwtCreateResourceGenerator.java',
+  'src/com/google/gwt/resources/rg/TextResourceGenerator.java',
+]
+java_library(
+  name = 'resources-core',
+  srcs = glob(RESOURCES_CORE_SRCS),
+  resources = glob(RESOURCES_CORE_SRCS
+    + ['src/com/google/gwt/resources/ResourcesBase.gwt.xml'],
+  ),
+  deps = [
+    ':safehtml-client',
+    '//:gwt-dev',
+  ],
+)
+
+java_library(
+  name = 'resources',
+  srcs = glob(
+    ['src/com/google/gwt/resources/**/*.java'],
+    excludes = RESOURCES_CORE_SRCS + [
+      'src/com/google/gwt/resources/css/InterfaceGenerator.java',
+      'src/com/google/gwt/resources/css/Minify.java'
+    ],
+  ),
+  resources = glob(
+    ['src/com/google/gwt/resources/**/*'],
+    excludes = RESOURCES_CORE_SRCS + [
+      'src/com/google/gwt/resources/css/InterfaceGenerator.java',
+      'src/com/google/gwt/resources/css/Minify.java'
+    ],
+  ),
+  deps = [
+    ':resources-core',
+    ':safehtml-client',
+    ':i18n-client',
+    ':jsonp',
+    '//:gwt-dev',
+    '//:flute',
+    '//:sac',
+  ],
+)
+
+RPC_SHARED_SRCS = [
+  'src/com/google/gwt/user/client/rpc/CustomFieldSerializer.java',
+  'src/com/google/gwt/user/client/rpc/GwtTransient.java',
+  'src/com/google/gwt/user/client/rpc/IncompatibleRemoteServiceException.java',
+  'src/com/google/gwt/user/client/rpc/IsSerializable.java',
+  'src/com/google/gwt/user/client/rpc/RemoteService.java',
+  'src/com/google/gwt/user/client/rpc/RemoteServiceRelativePath.java',
+  'src/com/google/gwt/user/client/rpc/RpcToken.java',
+  'src/com/google/gwt/user/client/rpc/RpcTokenException.java',
+  'src/com/google/gwt/user/client/rpc/SerializableException.java',
+  'src/com/google/gwt/user/client/rpc/SerializationException.java',
+  'src/com/google/gwt/user/client/rpc/SerializationStreamFactory.java',
+  'src/com/google/gwt/user/client/rpc/SerializationStreamReader.java',
+  'src/com/google/gwt/user/client/rpc/SerializationStreamWriter.java',
+  'src/com/google/gwt/user/client/rpc/SerializedTypeViolationException.java',
+  'src/com/google/gwt/user/client/rpc/XsrfProtectedService.java',
+  'src/com/google/gwt/user/client/rpc/XsrfProtectedServiceAsync.java',
+  'src/com/google/gwt/user/client/rpc/XsrfToken.java',
+  'src/com/google/gwt/user/client/rpc/XsrfTokenService.java',
+  'src/com/google/gwt/user/client/rpc/XsrfTokenServiceAsync.java',
+  'src/com/google/gwt/user/client/rpc/core/**/*.java',
+  'src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStream.java',
+  'src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamReader.java',
+  'src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java',
+  'src/com/google/gwt/user/server/rpc/NoXsrfProtect.java',
+  'src/com/google/gwt/user/server/rpc/SerializationPolicy.java',
+  'src/com/google/gwt/user/server/rpc/SerializationPolicyLoader.java',
+  'src/com/google/gwt/user/server/rpc/XsrfProtect.java',
+  'src/com/google/gwt/user/server/rpc/impl/StandardSerializationPolicy.java',
+  'src/com/google/gwt/user/server/rpc/impl/TypeNameObfuscator.java',
+]
+java_library(
+  name = 'rpc-api',
+  resources = glob(
+    RPC_SHARED_SRCS
+    + ['src/com/google/gwt/user/RemoteServiceApi.gwt.xml'],
+  ),
+  deps = [
+    ':rpc-shared',
+  ],
+)
+
+java_library(
+  name = 'rpc-client',
+  srcs = glob(
+    [
+      'src/com/google/gwt/user/client/rpc/**/*.java',
+      'src/com/google/gwt/user/linker/rpc/**/*.java',
+      'src/com/google/gwt/user/rebind/rpc/**/*.java',
+    ],
+    excludes = RPC_SHARED_SRCS
+  ),
+  resources = glob(
+    [
+      'src/com/google/gwt/user/RemoteService*.gwt.xml',
+      'src/com/google/gwt/user/client/rpc/**/*',
+      'src/com/google/gwt/user/linker/rpc/**/*.java',
+      'src/com/google/gwt/user/rebind/rpc/**/*',
+      'super/com/google/gwt/user/translatable/com/google/gwt/user/client/rpc/**/*',
+    ],
+    excludes = RPC_SHARED_SRCS
+      + ['src/com/google/gwt/user/RemoteServiceApi.gwt.xml'],
+  ),
+  deps = [
+    ':rpc-shared',
+    ':rpc-api',
+    ':http',
+    '//:gwt-dev',
+  ],
+)
+
+java_library(
+  name = 'rpc-shared',
+  srcs = glob(RPC_SHARED_SRCS),
+  deps = [
+    ':core-shared',
+  ],
+)
+
+java_library(
+  name = 'rpc-server',
+  srcs = glob(
+    [
+      'src/com/google/gwt/user/server/Util.java',
+      'src/com/google/gwt/user/server/rpc/**/*.java',
+    ],
+    excludes = RPC_SHARED_SRCS + ['src/com/google/gwt/user/server/rpc/HybridServiceServlet.java'],
+  ),
+  deps = [
+    ':rpc-shared',
+    ':core-server',
+    '//:servlet-api',
+    ':rpc-client', # FIXME: needed for a constant in RpcRequestBuilder
+    ':base64utils',
+  ],
+)
+
+java_library(
+  name = 'logging-shared',
+  srcs = glob(['src/com/google/gwt/logging/shared/**/*.java']),
+  deps = [
+    ':rpc-api',
+  ],
+)
+
+java_library(
+  name = 'logging-server',
+  srcs = glob(['src/com/google/gwt/logging/server/**/*.java']),
+  deps = [
+    ':logging-shared',
+    ':rpc-server',
+    '//:json',
+  ],
+)
+
+# TODO: needs widgets
+#java_library(
+#  name = 'logging-client',
+#  srcs = glob(['src/com/google/gwt/logging/client/**/*.java']),
+#  resources = glob(
+#    ['src/com/google/gwt/logging/**/*'],
+#    excludes = [
+#      # Included in core-client
+#      'src/com/google/gwt/logging/LogImpl.gwt.xml',
+#      'src/com/google/gwt/logging/impl/**/*',
+#    ],
+#  ),
+#  deps = [
+#    ':logging-shared',
+#    ':core-client',
+#  ],
+#)
+
+java_library(
+  name = 'xml',
+  srcs = glob(['src/com/google/gwt/xml/**/*.java']),
+  resources = glob(['src/com/google/gwt/xml/**/*']),
+  deps = [
+    ':core-client',
+  ],
+)
+
+java_test(
+  name = 'xml_test',
+  srcs = glob(['test/com/google/gwt/xml/**/*.java']),
+  resources = glob(['test/com/google/gwt/xml/**/*']),
+  deps = [
+    ':xml',
+    ':window', # FIXME: refactor test to remove that dependency
+    ':junit',
+  ],
+)
+
+###########################"
+#
+# bindery
+
+java_library(
+  name = 'bindery-event',
+  srcs = glob(
+    ['src/com/google/web/bindery/event/**/*.java'],
+    excludes = ['**/package-info.java']),
+)
+
+java_library(
+  name = 'bindery-event-gwt',
+  resources = glob(['src/com/google/web/bindery/event/**/*']),
+  deps = [
+    ':bindery-event',
+  ],
+)
+
+java_test(
+  name = 'bindery-event_test',
+  srcs = glob(['test/com/google/web/bindery/event/**/*.java']),
+  resources = glob(['test/com/google/web/bindery/event/**/*']),
+  source_under_test = [':bindery-event'],
+  deps = [
+    ':bindery-event',
+    ':junit',
+  ],
+)
+
+java_library(
+  name = 'autobean-shared',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/autobean/shared/**/*.java',
+      'src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':core-shared',
+    '//:json',
+  ],
+)
+
+java_library(
+  name = 'autobean-gwt',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/autobean/gwt/**/*.java',
+      'src/com/google/gwt/editor/rebind/model/ModelUtils.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  resources = glob(
+    [
+      'src/com/google/web/bindery/autobean/**/*',
+      'super/com/google/web/bindery/autobean/**/*',
+    ]
+  ),
+  deps = [
+    '//:gwt-dev',
+    ':autobean-shared',
+    ':autobean-vm',
+    ':core-client',
+  ],
+)
+
+java_library(
+  name = 'autobean-vm',
+  srcs = glob(
+    ['src/com/google/web/bindery/autobean/vm/**/*.java'],
+    excludes = [
+      '**/package-info.java',
+      'src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java',
+    ],
+  ),
+  deps = [
+    ':autobean-shared',
+  ],
+)
+
+java_test(
+  name = 'autobean_test',
+  srcs = glob(['test/com/google/gwt/autobean/**/*.java']),
+  deps = [
+    ':autobean-gwt',
+    '//:junit',
+  ],
+)
+
+java_library(
+  name = 'requestfactory-shared',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/requestfactory/shared/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':autobean-vm',
+    ':bindery-event',
+    '//:validation-api',
+  ],
+)
+
+java_library(
+  name = 'requestfactory-client',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/requestfactory/vm/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':requestfactory-shared',
+    ':base64utils',
+  ],
+)
+
+java_library(
+  name = 'requestfactory-server',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/requestfactory/server/**/*.java',
+      'src/com/google/gwt/rpc/server/Pair.java', # FIXME
+    ],
+    excludes = [
+      '**/package-info.java',
+      'src/com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor.java',
+    ],
+  ),
+  deps = [
+    ':requestfactory-client',
+    ':core-server',
+    ':rpc-server', # FIXME: extract RPCServletUtils into its own JAR
+    ':rpc-client', # FIXME: needed only for a constant declared in RpcRequestBuilder
+    ':logging-server',
+  ],
+)
+
+# TODO: not yet ready: needs editor (RFED needs to be split out)
+#java_library(
+#  name = 'requestfactory-gwt',
+#  srcs = glob(
+#    [
+#      'src/com/google/web/bindery/requestfactory/gwt/**/*.java',
+#    ],
+#    excludes = ['**/package-info.java'],
+#  ),
+#  resources = glob(['src/com/google/web/bindery/requestfactory/**/*']),
+#  deps = [
+#    ':requestfactory-client',
+#    ':autobean-gwt',
+#    ':http',
+#  ],
+#)
+
+java_library(
+  name = 'requestfactory-apt',
+  srcs = glob(
+    [
+      'src/com/google/web/bindery/requestfactory/apt/**/*.java',
+    ],
+    excludes = ['**/package-info.java'],
+  ),
+  deps = [
+    ':requestfactory-client',
+  ],
+)
+
+# FIXME
+java_library(
+  name = 'base64utils',
+  srcs = ['src/com/google/gwt/user/server/Base64Utils.java'],
+)

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53dbcbac_a95bbd30",
+        "filename": "user/src/com/google/web/bindery/requestfactory/gwt/rebind/model/RequestFactoryModel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-28T17:40:03Z",
+      "side": 1,
+      "message": "I really think we should setEntityType.\n\nMaybe we should go farther and add an isEntityProxyId on RequestMethod (and setter on RequestMethod.Builder). This is not required here at all, as the validateTransportableType is always called with a new RequestContext.Builder for parameters, and we don\u0027t support EntityProxyId as a return type yet.\n\nIf you\u0027re not keen on making these changes, then maybe add a TODO here, for when we\u0027ll add support for EntityProxyId as a return type.",
+      "revId": "97c588abfae7cdff4a0804f0e02694fea48eff89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

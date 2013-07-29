@@ -16,6 +16,24 @@
       "revId": "551eb13e8a8c404bcf9bc401f536f512a523fa74",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53dbcbac_2c7ebb71",
+        "filename": "dev/core/src/com/google/gwt/dev/util/editdistance/ModifiedBerghelRoachEditDistance.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-29T18:09:26Z",
+      "side": 1,
+      "message": "Ha ha, I did my homework and checked on Google/Wikipedia… but messed it up!\n\nDone.",
+      "parentUuid": "b315e7f5_4943111b",
+      "revId": "551eb13e8a8c404bcf9bc401f536f512a523fa74",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

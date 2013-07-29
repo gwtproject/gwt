@@ -16,13 +16,11 @@
 
 package com.google.web.bindery.requestfactory.shared;
 
-import com.google.web.bindery.requestfactory.server.Logging;
-
 /**
  * "API Generated" request selector interface implemented by objects that give
  * client access to the methods of {@link Logging}.
  */
-@Service(Logging.class)
+@ServiceName("com.google.web.bindery.requestfactory.server.Logging")
 public interface LoggingRequest extends RequestContext {
 
   // TODO(unnurg): Pass a SerializableLogRecord here rather than it's

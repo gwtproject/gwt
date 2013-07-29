@@ -385,7 +385,7 @@ public class JsInliner {
      */
 
     /**
-     * Retains the the functions that we know have been called.
+     * Retains the functions that we know have been called.
      */
     private final Set<JsFunction> called;
     private final JsProgram program;

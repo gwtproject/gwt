@@ -16,17 +16,16 @@
 
 package com.google.web.bindery.requestfactory.shared.impl;
 
-import com.google.web.bindery.requestfactory.server.impl.FindService;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.EntityProxyId;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
-import com.google.web.bindery.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.shared.ServiceName;
 
 /**
  * Request selector interface for implementing a find method.
  */
-@Service(FindService.class)
+@ServiceName("com.google.web.bindery.requestfactory.server.impl.FindService")
 public interface FindRequest extends RequestContext {
   /**
    * Use the implicit lookup in passing EntityProxy types to service methods.

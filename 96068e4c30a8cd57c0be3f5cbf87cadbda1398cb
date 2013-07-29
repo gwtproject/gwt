@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b35087a5_cb666157",
+        "filename": "user/src/com/google/gwt/safehtml/rebind/SafeHtmlTemplatesGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-29T00:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c777f47c_d9a6f7b6",
+      "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c777f47c_b9b13bf0",
         "filename": "user/src/com/google/gwt/safehtml/rebind/SafeHtmlTemplatesGenerator.java",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "b35087a5_2b56e562",
+        "filename": "user/src/com/google/gwt/safehtml/rebind/SafeHtmlTemplatesGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-29T00:54:21Z",
+      "side": 1,
+      "message": "I think if we document some parameters we should document them all (even if the documentation is empty)",
+      "parentUuid": "c777f47c_b9b13bf0",
+      "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c777f47c_f9abb37b",
         "filename": "user/src/com/google/gwt/user/rebind/AbstractGeneratorClassCreator.java",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2013-07-16T19:48:20Z",
       "side": 1,
       "message": "nit: although behavior should be no different here, getInheritableMethods looks like a better match for getAllInterfaceMethods (getOverridable is a subset of getInheritable).",
+      "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b35087a5_cbed017d",
+        "filename": "user/src/com/google/gwt/user/rebind/AbstractGeneratorClassCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-29T00:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c777f47c_f9abb37b",
       "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -117,6 +171,24 @@
       "side": 1,
       "message": "Any idea why the class isn\u0027t abstract?",
       "parentUuid": "47d6a483_d3f7be46",
+      "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b35087a5_6bf38d61",
+        "filename": "user/src/com/google/gwt/user/rebind/AbstractSourceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-07-29T00:54:21Z",
+      "side": 1,
+      "message": "No idea, done.",
+      "parentUuid": "87aa5cea_6c571bda",
       "revId": "96068e4c30a8cd57c0be3f5cbf87cadbda1398cb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

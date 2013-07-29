@@ -18,6 +18,7 @@ package com.google.gwt.canvas.client;
 import com.google.gwt.canvas.dom.client.Context;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.PartialSupport;
@@ -94,6 +95,17 @@ public class Canvas extends FocusWidget {
    */
   public Context getContext(String contextId) {
     return getCanvasElement().getContext(contextId);
+  }
+
+  /**
+   * Gets the rendering context that may be used to draw on this canvas.
+   * 
+   * @param contextId the context id as a String
+   * @param contextParameter an additional parameter to configure the rendering context
+   * @return the canvas rendering context
+   */
+  public Context getContext(String contextId, JavaScriptObject contextParameter) {
+    return getCanvasElement().getContext(contextId, contextParameter);
   }
 
   /**

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dom.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.canvas.dom.client.Context;
 import com.google.gwt.canvas.dom.client.Context2d;
 
@@ -42,6 +43,17 @@ public class CanvasElement extends Element {
    */
   public final native Context getContext(String contextId) /*-{
     return this.getContext(contextId);
+  }-*/;
+
+  /**
+   * Gets the rendering context that may be used to draw on this canvas.
+   *
+   * @param contextId the context id as a String
+   * @param contextParameter an additional parameter to configure the rendering context
+   * @return the canvas rendering context
+   */
+  public final native Context getContext(String contextId, JavaScriptObject contextParameter) /*-{
+    return this.getContext(contextId, contextParameter);
   }-*/;
 
   /**

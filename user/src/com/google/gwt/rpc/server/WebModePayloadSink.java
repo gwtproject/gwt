@@ -629,14 +629,16 @@ public class WebModePayloadSink extends CommandSink {
         String fieldIdent = clientOracle.getFieldId(setter.getFieldDeclClass(),
             setter.getField());
 
-        // _0.foo = bar;
-        spaceOpt();
-        push(idents[0]);
-        dot();
-        push(fieldIdent);
-        eq();
-        push(idents[i]);
-        semi();
+        if (fieldIdent != null) {
+          // _0.foo = bar;
+          spaceOpt();
+          push(idents[0]);
+          dot();
+          push(fieldIdent);
+          eq();
+          push(idents[i]);
+          semi();
+        }
       }
       spaceOpt();
       _return();

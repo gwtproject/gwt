@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b7374e_50c90c3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-07-30T01:37:38Z",
+      "side": 1,
+      "message": "Nit: whehter -\u003e whether",
+      "revId": "c872ba3eebe5ffea10623c63079ea2e2c2612707",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

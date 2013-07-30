@@ -13,11 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.test.gwtincompatible;
 
-/**
- * A simple class with one GwtIncompatible method to be used in a static import.
- */
-public class ClassWithGwtIncompatibleMethod {
-  public static void gwtIncompatibleMethod() { }
-}
+// CHECKSTYLE_OFF
+
+package com.google.gwt.dev.jjs.test.unusedimports;
+
+import javax.annotation.ParametersAreNonnullByDefault;

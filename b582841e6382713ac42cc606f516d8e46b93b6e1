@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b7374e_b38042bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "garbled",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_f38acad8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "garbled",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_d38fc6e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "s/accross/across",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_13d66edb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "ugh. i don\u0027t like this pattern of JsObfuscateNamer.exec() returning a JsFreshNameGenerator. it seems really arbitrary and surprising. but since we have this bad pattern of static FooVisitor.exec() calls, i\u0027m not sure there\u0027s a better way",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_73e37abd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "s/nameGenerator/freshNameGenerator",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_b30b22a7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "there are a couple of broken sentences (missing words) in these paragraphs",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_93109ed4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "please briefly mention why",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_3300d27d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "s/hoistMap/newNamesByHoistedFunction",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_13fdce53",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "\"Hoist all anonymous duplicate functions\"",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_73fa5a5d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "s/x/dupMethod",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_b3320277",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "you could reduce nesting by:\nif (hoistMap.containsKey(x)) {\n  continue;\n}",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_d3f34690",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsFreshNameGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "please add to the comment something along the lines of \"why\" this interface is needed/wanted.\n\nwhy isn\u0027t a regular JsNamer good enough in some situations",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_9337fe66",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsFreshNameGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "i think \"JsIncrementalNameGenerator\" captures the idea better",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_d34186b4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsFreshNameGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "in the spirit of \"Incremental\", maybe call this \"getNextName\" ?",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_1344aebf",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsObfuscateNamer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "probably important to mention that its output continues from where previous namer passes left off",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_7351ba81",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "-optimizer",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_b31962f3",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "probably call this \"Fake\" or \"Mock\" instead of \"Local\"",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_534e36e1",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "private comes before static",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_931eded6",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "unusual spacing",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_f313eacc",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "dunno what\u0027s usual for referring to issue #\u0027s in code, consider removing and just leaving your description of the issue itself",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_d31866ec",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "\"testCodeSplittingError\" too general",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_132b0ef8",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "would read nicer and help shorten this long function if written as: \nMap\u003cString, JsName\u003e assignments \u003d AssignmentGatherer.exec(program);",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_5325961d",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsDuplicateFunctionRemoverTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-07-30T20:21:21Z",
+      "side": 1,
+      "message": "when i saw this function called, i thought it was doing something else till i went and read it\u0027s source",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

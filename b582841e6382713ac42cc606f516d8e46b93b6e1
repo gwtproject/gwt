@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "33b7374e_f3612a41",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-07-30T20:45:08Z",
+      "side": 1,
+      "message": "There\u0027s other visitors that return stuff, like GenerateJavaScriptAST.",
+      "parentUuid": "33b7374e_13d66edb",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33b7374e_73e37abd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 7
@@ -217,6 +235,24 @@
       "writtenOn": "2013-07-30T20:21:21Z",
       "side": 1,
       "message": "i think \"JsIncrementalNameGenerator\" captures the idea better",
+      "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_d366a656",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsFreshNameGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-07-30T20:45:08Z",
+      "side": 1,
+      "message": "Or just call it name generator and make the function called \"getNextAvailableName()\" or some such.\n\nOr you could make JsObfuscatedNamer take a JsNameGenerator in it\u0027s constructor and delegate to it somehow.",
+      "parentUuid": "33b7374e_9337fe66",
       "revId": "b582841e6382713ac42cc606f516d8e46b93b6e1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

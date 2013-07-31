@@ -16,6 +16,24 @@
       "revId": "97a1d2dd580dc0472916412a09cd2d64fc77c67a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33b7374e_3950b307",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/ClassWithGwtIncompatibleMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-07-31T19:37:09Z",
+      "side": 0,
+      "message": "By mistake. Fixed.",
+      "parentUuid": "53dbcbac_ef4f7537",
+      "revId": "97a1d2dd580dc0472916412a09cd2d64fc77c67a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

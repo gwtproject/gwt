@@ -16,6 +16,24 @@
       "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "737b6f60_28006f7d",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5777
+      },
+      "writtenOn": "2013-07-31T16:28:48Z",
+      "side": 1,
+      "message": "I made it this way, because it\u0027s done the same way for lastPage in line 412 and fastForward in line 425.\nShould I change them too or should I leave firstPage this way?",
+      "parentUuid": "53dbcbac_6f6425bc",
+      "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

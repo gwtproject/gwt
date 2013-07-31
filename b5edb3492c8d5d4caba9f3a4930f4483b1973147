@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "93c0e3c0_a60da84c",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5777
+      },
+      "writtenOn": "2013-07-31T19:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73644fc8_912600c4",
+      "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73644fc8_d1a318da",
         "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2013-07-31T19:33:50Z",
       "side": 1,
       "message": "nit: can you also clean-up this extra spaces?",
+      "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "136313c5_f7b66020",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5777
+      },
+      "writtenOn": "2013-07-31T19:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73644fc8_d1a318da",
       "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

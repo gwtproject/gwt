@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53dbcbac_ef4f7537",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/ClassWithGwtIncompatibleMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-07-31T09:54:32Z",
+      "side": 0,
+      "message": "out of curiosity : why do you remove this annotation ? I don\u0027t see the link with this change",
+      "revId": "97a1d2dd580dc0472916412a09cd2d64fc77c67a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

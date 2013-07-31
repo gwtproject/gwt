@@ -57,6 +57,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+import java.util.logging.Logger;
 
 /**
  * A CommandSink that will generate a web-mode payload.
@@ -629,14 +630,21 @@ public class WebModePayloadSink extends CommandSink {
         String fieldIdent = clientOracle.getFieldId(setter.getFieldDeclClass(),
             setter.getField());
 
-        // _0.foo = bar;
-        spaceOpt();
-        push(idents[0]);
-        dot();
-        push(fieldIdent);
-        eq();
-        push(idents[i]);
-        semi();
+        if (fieldIdent != null) {
+          // _0.foo = bar;
+          spaceOpt();
+          push(idents[0]);
+          dot();
+          push(fieldIdent);
+          eq();
+          push(idents[i]);
+          semi();
+        } else {
+          log.warning("Field id to found for "
+              + setter.getFieldDeclClass().getName() + "." + setter.getField()
+              + ". This field is not used in the client and probably should be "
+              + "turned into transient or just removed.");
+        }
       }
       spaceOpt();
       _return();
@@ -821,6 +829,8 @@ public class WebModePayloadSink extends CommandSink {
       push(ZERO_BYTES);
     }
   }
+
+  private static final Logger log = Logger.getLogger(WebModePayloadSink.class.getName());
 
   /*
    * Instead of converting these commonly-used strings to bytes every time we

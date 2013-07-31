@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53dbcbac_6f6425bc",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-07-31T10:10:39Z",
+      "side": 1,
+      "message": "The else clause is redundant as firstPage is by default initialized to null",
+      "revId": "b5edb3492c8d5d4caba9f3a4930f4483b1973147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

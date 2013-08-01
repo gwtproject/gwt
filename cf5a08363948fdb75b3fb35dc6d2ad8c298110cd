@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3741b7d_7bb237e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-01T02:36:59Z",
+      "side": 1,
+      "message": "There is no need to delegate to super. Normally when extending JVisitor or JModVisitor you can always assume that super.endVisit is noop.",
+      "revId": "cf5a08363948fdb75b3fb35dc6d2ad8c298110cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "936e23af_f90c8f4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-01T02:36:59Z",
+      "side": 1,
+      "message": "Maybe what you want to do here is to handle it all in visit(JExpressionStatement).\n\nI would move from  endVisit  to visit so that you get\n\npublic boolean visit(JExpressionStatement, Context ctx) {\n{\n  if (x.getExpr() instanceof JMethodCall) {\n        JMethodCall call \u003d (JMethodCall) x.getExpr();\t\n        if (call.getTarget() \u003d\u003d gwtDebuggerMethod) {\n          // We should see all calls here because GWT.debugger() returns void. \t\n          ctx.replaceMe(new JDebuggerStatement(x.getSourceInfo()));\t\n          return false; \n      }\n    return true;\n}\n\nIn this way you don\u0027t need to specificly trap it and ignore it in endVisit(JMethodCall...)",
+      "revId": "cf5a08363948fdb75b3fb35dc6d2ad8c298110cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

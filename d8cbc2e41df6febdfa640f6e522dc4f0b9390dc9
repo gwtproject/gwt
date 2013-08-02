@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8f7d845_5d395be9",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitInvalidatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2013-08-02T19:45:34Z",
+      "side": 1,
+      "message": "Here\u0027s the test for the overlap issue. I noticed a typo, which I fixed with the most recent version of this file.\n\nwrong: bad0.getCompiledClasses().iterator().next()\n\ncorrected: bad1.getCompiledClasses().iterator().next()",
+      "revId": "d8cbc2e41df6febdfa640f6e522dc4f0b9390dc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

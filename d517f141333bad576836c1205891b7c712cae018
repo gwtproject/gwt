@@ -1,0 +1,531 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78d18ce1_52e61465",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "This will be the commit message in the project\u0027s commit history; would you mind rewording it?\n\nMaybe something like:\n\n Add Map support to RequestFactory\n\n Keys and values sub-properties can be loaded in with() using the special \"properties\" \n \u0027keys\u0027 and \u0027values\u0027, e.g. .with(\"someMap.keys.property\") or .with(\"someMap.values.property\")\n\n Bug: issue 5524\n Change-Id: I6dd3c8a9862473954a72ccee96212c20d9198b22",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_72eb182a",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/ClientToDomainMapper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Because the keys can be proxies too, maybe that comment should be:\n\n // Convert Map\u003cFooProxy,BarProxy\u003e to Map\u003cFooDomain,BarDomain\u003e",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_12f08c15",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/ClientToDomainMapper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Maybe put the result of state.findType(Map.class) in a local var? (maybe even before the \u0027if\u0027 and used in isAssignable and convertSingleParamType)",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8965c05_7e143158",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/TransportableTypeVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Same here, save state.findType(Map.class) result in a local var?",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_32f59006",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "rawType should only ever be Map.class, so I don\u0027t think we need that parameter and field. It\u0027s in CollectionType because it can be either a List or a Set, but we don\u0027t need it here.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_d2f9a400",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Should that comment be updated? (the \"list of values\" part)\n\n …or if the property is a list or set of values, or a map whose both keys and values are value types.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_f2f62810",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Should we change the \u0027elementType\u0027 above to follow the same \"declaration \u003d null; if (instanceof) { set value }\" approach for consistency?",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_92031c21",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "I\u0027d add valueType !\u003d null; it shouldn\u0027t happen but we never test for it AFAICT.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_b200a014",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "\u0026\u0026 valueType !\u003d null",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_520ff442",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "nit: trailing space\n\nIt would be more readable too if it were indented that way:\n\n accumulator.put(\n     resolveDomainValue(entry.getKey(), detectDeadEntities),\n     resolveDomainValue(entry.getValue(), detectDeadEntities));",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_72147858",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "I think we always process maps after collections, maybe we should stick to that order everywhere.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_12096c3b",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Should we also treat \"someMap.property\" as a shortend to \"someMap.keys.property\",\"someMap.values.property\"?\n\n(somewhat rhetorical question; we can easily add it later)",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_320ef044",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Format with one \"resolveClientValue\" per line (and spaces after commas) for better readability.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_d22204bb",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/SimpleRequestProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Nit: trailing space",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_f21f086e",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/SimpleRequestProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "How about ctx.getType() \u003d\u003d Map.class instead? Would be much less of a hack",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_921c7c7b",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/AbstractRequestContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Idem: getType()\u003d\u003dMap.class instead of getKeyType()!\u003dnull",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_5234d4f4",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Given that the other decode() supports both collections and \"discrete\" values, how about factoring everything (collections, maps and discrete values) here too? If valueType is not null, then keyType should be non-null too and type should be Map; otherwise is valueType is null and keyType is not null, then type should be List or Set; otherwise (both keyType and valueType are null) it\u0027s a discrete value.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_b219808a",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "I would have used an IllegalArgumentException but UOE is what the existing decode() uses already so…",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_7239d8e9",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "I think we should special-case strings so they\u0027re not double-quoted.\n\n  Object key \u003d (keyType \u003d\u003d String.class) ? propertyKey : ValueCodex…;",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_123e4cd3",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "What if the first key is \u0027null\u0027? (might be enough for now, but worth a comment that it could be an issue)",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_3243504e",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "That means isSimpleMap should be computed with \u0026\u0026 !map.containsKey(null), but then the test in decode() would fail for \"simple values\" (a \u0027null\u0027 String or Double key) as decode() would expect a \"simple map\".\n\nMaybe we don\u0027t want to support null keys at all?\n(if the \"domain map\" cannot contain null keys, containsKey(null) would throw an NPE)\nIn that case, we should throw.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_d22764c2",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "Don\u0027t forget to special-case String keys if we special-case them in decode()",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_f224e8bf",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "nit: spurious blank line",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_9231dc00",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/ProxySerializerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_b22e609a",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/ProxySerializerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "nit: bad indent",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_525db422",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FindServiceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "nit: trailing space",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_726238e8",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FindServiceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_d250c40a",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "We should test sending maps as service method arguments, and getting maps as Request\u003cMap\u003c…\u003e\u003e",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_12572c05",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_325cb024",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "each \u0027persist\u0027 is expected to also fire an \u0027update\u0027, did we just break something with the Map?",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d18ce1_f24dc86d",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/MapKey.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-04T13:54:22Z",
+      "side": 1,
+      "message": "I might have missed it but when is reset() called?\n\nIMO, all reset() methods should be called from SimpleFoo.reset(), which is called from the client at the end of each test.",
+      "revId": "d517f141333bad576836c1205891b7c712cae018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

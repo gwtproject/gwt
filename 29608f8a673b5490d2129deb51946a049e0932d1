@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5863e8f1_badf1951",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-05T18:14:14Z",
+      "side": 1,
+      "message": "Why do you need handleGwtCreateThis?  Shouldn\u0027t it be possible to just extract the JDeclaredType or something, and then jump down a few lines and use the existing handleGwtCreate() logic without needing to create a magic this$create method?",
+      "revId": "29608f8a673b5490d2129deb51946a049e0932d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

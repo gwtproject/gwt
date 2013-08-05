@@ -26,6 +26,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -370,6 +371,20 @@ public class UnifyAst {
     private JExpression handleGwtCreate(JMethodCall x) {
       assert (x.getArgs().size() == 1);
       JExpression arg = x.getArgs().get(0);
+      if (arg instanceof JMethodCall) {
+        JMethodCall methodCall = ((JMethodCall) arg);
+        JExpression instance = methodCall.getInstance();
+        if (!(instance instanceof JThisRef)) {
+          error(x, "Only references to this may be used as arguments to GWT.create()");
+          return null;
+        }
+        JMethod target = methodCall.getTarget();
+        if (!target.getName().equals("getClass") || !target.getParams().isEmpty()) {
+          error(x, "Only references to getClass() may be used as arguments to GWT.create()");
+          return null;
+        }
+        return handleGwtCreateThis((JThisRef) instance);
+      }
       if (!(arg instanceof JClassLiteral)) {
         error(x, "Only class literals may be used as arguments to GWT.create()");
         return null;
@@ -421,6 +436,14 @@ public class UnifyAst {
         return new JGwtCreate(x.getSourceInfo(), reqType, answers, program.getTypeJavaLangObject(),
             instantiationExpressions);
       }
+    }
+
+    private JExpression handleGwtCreateThis(JThisRef x) {
+      JMethod gwtCreateThis = findGwtCreateThis(x.getClassType());
+      if (gwtCreateThis == null) {
+        gwtCreateThis = addGwtCreateThis(x.getClassType());
+      }
+      return new JMethodCall(x.getSourceInfo(), x, gwtCreateThis, program.getTypeJavaLangObject());
     }
 
     private JExpression handleImplNameOf(final JMethodCall x) {
@@ -478,6 +501,8 @@ public class UnifyAst {
   private static final String GWT_CREATE =
       "com.google.gwt.core.shared.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
 
+  private static final String GWT_CREATE_THIS = "this$create";
+
   private static final String GWT_DEBUGGER = "com.google.gwt.core.shared.GWT.debugger()V";
 
   private static final String GWT_IS_CLIENT = "com.google.gwt.core.shared.GWT.isClient()Z";
@@ -516,6 +541,8 @@ public class UnifyAst {
   private boolean errorsFound = false;
   private final Set<CompilationUnit> failedUnits = new IdentityHashSet<CompilationUnit>();
   private final Map<String, JField> fieldMap = new HashMap<String, JField>();
+  private final Map<JDeclaredType, JMethod> gwtCreateThisMethods =
+      new HashMap<JDeclaredType, JMethod>();
 
   /**
    * The set of types currently known to be instantiable. Like
@@ -692,6 +719,33 @@ public class UnifyAst {
     }
   }
 
+  private JMethod addGwtCreateThis(JDeclaredType thisType) {
+    SourceInfo info = thisType.getSourceInfo();
+    JClassType returnType = program.getTypeJavaLangObject();
+
+    JMethod gwtCreateThis =
+        new JMethod(info, GWT_CREATE_THIS, thisType, returnType, thisType.isAbstract(), false,
+            false, AccessModifier.PROTECTED);
+
+    if (!thisType.isAbstract()) {
+      JMethod gwtCreate = program.getIndexedMethod("GWT.create");
+      assert gwtCreate != null;
+      JMethodBody body = new JMethodBody(info);
+      JMethodCall gwtThisCreateCall = new JMethodCall(info, null, gwtCreate);
+      gwtThisCreateCall.addArg(new JClassLiteral(info, thisType));
+      body.getBlock().addStmt(new JReturnStatement(info, gwtThisCreateCall));
+      gwtCreateThis.setBody(body);
+    }
+
+    gwtCreateThis.freezeParamTypes();
+
+    gwtCreateThis.setSynthetic();
+    thisType.addMethod(gwtCreateThis);
+    gwtCreateThisMethods.put(thisType, gwtCreateThis);
+    flowInto(gwtCreateThis);
+    return gwtCreateThis;
+  }
+
   private void assimilateUnit(CompilationUnit unit) {
     if (unit.isError()) {
       if (failedUnits.add(unit)) {
@@ -826,6 +880,10 @@ public class UnifyAst {
     }
   }
 
+  private JMethod findGwtCreateThis(JDeclaredType type) {
+    return gwtCreateThisMethods.get(type);
+  }
+
   private void flowInto(JMethod method) {
     if (method.isExternal()) {
       assert errorsFound;
@@ -895,6 +953,10 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
+
+      if (type.getSuperClass() != null && findGwtCreateThis(type.getSuperClass()) != null) {
+        addGwtCreateThis(type);
+      }
 
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {

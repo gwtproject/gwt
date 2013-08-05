@@ -16,6 +16,24 @@
       "revId": "29608f8a673b5490d2129deb51946a049e0932d1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "987640c4_73878063",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2013-08-05T21:14:12Z",
+      "side": 1,
+      "message": "If anyone is interested, I do have a class literal search algorithm that can make it possible to navigate the ast to find class literal references that are effectively constant.\n\nIt can search through final fields and variables, and methods that return classes (provided there is only one return statement).\n\nhttps://github.com/WeTheInternet/xapi/blob/master/gwt/gwt-reflect/src/main/java/com/google/gwt/reflect/rebind/ReflectionUtilAst.java",
+      "parentUuid": "5863e8f1_badf1951",
+      "revId": "29608f8a673b5490d2129deb51946a049e0932d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

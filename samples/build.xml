@@ -18,6 +18,10 @@
     <gwt.ant dir="hello" />
   </target>
 
+  <target name="helloselfgen" description="Build helloselfgen">
+    <gwt.ant dir="helloselfgen" />
+  </target>
+
   <target name="json" description="Build json">
     <gwt.ant dir="json" />
   </target>
@@ -50,6 +54,7 @@
     <antcall target="dynatable" />
     <antcall target="dynatablerf" />
     <antcall target="hello" />
+    <antcall target="helloselfgen" />
     <antcall target="json" />
     <antcall target="logexample" />
     <antcall target="mail" />

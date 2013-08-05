@@ -1,0 +1,9 @@
+<ui:UiBinder
+  xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:selfgen='urn:import:com.google.gwt.sample.hello.client'>
+
+  <g:HTMLPanel>
+  	<g:Button ui:field="sayHello">Click me</g:Button>
+  </g:HTMLPanel>
+</ui:UiBinder>

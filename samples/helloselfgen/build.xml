@@ -1,0 +1,9 @@
+<project name="hello" default="build" basedir=".">
+  <property name="sample.root" value="helloselfgen" />
+  <property name="sample.module" value="HelloSelfgen" />
+  <property name="sample.path" value="src" />
+  <import file="../common.ant.xml" />
+  <!-- these are after the common.ant.xml so they have gwt.tools... -->
+  <path id="sample.extraclasspath">
+  </path>
+</project>

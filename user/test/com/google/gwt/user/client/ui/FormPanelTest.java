@@ -19,9 +19,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.FormPanel.ResetEvent;
+import com.google.gwt.user.client.ui.FormPanel.ResetHandler;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
@@ -206,6 +209,63 @@ public class FormPanelTest extends SimplePanelTestBase<FormPanel> {
     RootPanel.get().remove(form);
   }
 
+  public void testResetNative() {
+    FormPanel form = new FormPanel();
+    RootPanel.get().add(form);
+    TextBox textBox = new TextBox();
+    textBox.setText("Hello World");
+    form.setWidget(textBox);
+    assertEquals("Hello World", textBox.getText());
+    nativeFormReset(form.getElement());
+    assertEquals("", textBox.getText());
+    RootPanel.get().remove(form);
+  }
+
+  public void testResetEvent() {
+
+    // The form reset event handler is tested by by changing a boolean
+
+    FormPanel form = new FormPanel();
+    RootPanel.get().add(form);
+
+    // this boolean should be changed by the reset handler
+    final boolean[] resetInvoked = new boolean[1];
+
+    // to this end a ResetHandler is added to to FormPanel which is called on a ResetEvent
+    HandlerRegistration handlerRegistration = form.addResetHandler(new ResetHandler() {
+
+      @Override
+      public void onReset(ResetEvent event) {
+        resetInvoked[0] = true;
+      }
+    });
+
+    // check preconditions
+    assertFalse(resetInvoked[0]);
+    form.reset(); // does not trigger the reset event from the test case,
+    // thus calling the event handler manually:
+    invokeNativeFormResetHandler(form.getElement());
+    // check postconditions
+    assertTrue(resetInvoked[0]);
+
+    /*
+     * after removing the ResetHandler from the FormPanel,
+     * resetInvoked[0] should not be affected
+     */
+
+    handlerRegistration.removeHandler();
+    // init preconditions
+    resetInvoked[0] = false;
+    // check preconditions
+    assertFalse(resetInvoked[0]);
+    form.reset();
+    invokeNativeFormResetHandler(form.getElement());
+    // check postconditions
+    assertFalse(resetInvoked[0]);
+
+    RootPanel.get().remove(form);
+  }
+
   public void testSubmitAndHideDialog() {
     final FormPanel form = new FormPanel();
     form.setMethod(FormPanel.METHOD_GET);
@@ -354,4 +414,13 @@ public class FormPanelTest extends SimplePanelTestBase<FormPanel> {
   private native boolean isHappyDivPresent(Element iframe) /*-{
     return !!iframe.contentWindow.document.getElementById(':)');
   }-*/;
+
+  private static native void nativeFormReset(Element form) /*-{
+    form.reset();
+  }-*/;
+
+  private static native void invokeNativeFormResetHandler(Element form) /*-{
+    form.onreset();
+  }-*/;
+
 }

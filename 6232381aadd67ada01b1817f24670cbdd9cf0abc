@@ -36,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "5863e8f1_9db20afd",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-06T18:36:54Z",
+      "side": 1,
+      "message": "this is a one-liner. I don\u0027t think you need a separate method.\n\n  fireEvent(new ResetEvent());",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_1dbe1ac6",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-06T18:36:54Z",
+      "side": 1,
+      "message": "you should also call this from reset method otherwise the event will not be fired when \u0027reset\u0027 is programmatically called.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_9d0b2aeb",
         "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
         "patchSetId": 1

@@ -22,6 +22,11 @@ package com.google.gwt.user.client.ui.impl;
 public interface FormPanelImplHost {
 
   /**
+   * Called when the form is reseted.
+   */
+  void onFormReset();
+  
+  /**
    * Called when the form is submitted.
    * 
    * @return <code>false</code> to cancel the submit

@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5863e8f1_dd01a2ce",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Nit: You added a lot of trailing whitespace.  Please remove it.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_fdfc66a5",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "\"Fired when the form is reset.\"",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_9d0b2aeb",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Nit: More trailing white space.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_bd06eee3",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "You need to wrap this with $entry() like the onsubmit handler.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_7df076c4",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImplHost.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "\"Called when the form is reset.\"",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_fd258677",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "\"still be reset.\"",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_dd2ac244",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Nit: No need to indent this comment two spaces instead of one.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_9d244a79",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Is there any reason to use a CheckBox here instead of just a 1-element boolean array or something?  E.g.,\n\n    final boolean[] resetInvoked \u003d new boolean[1];\n    ...\n      public void onReset(ResetEvent event) {\n        resetInvoked[0] \u003d true;\n      }\n    ...\n    assertTrue(resetInvoked[0]);\n\nIf you do want a test to make sure that resetting a form doesn\u0027t affect fields that aren\u0027t part of that form, I think that should be a separate test method.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_bd1f0e22",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "After replacing checkBox with a boolean[], it seems like you can get rid of step #1.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_7d19963a",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Is there no way to trigger the reset so that the browser invokes the onreset handler itself?  E.g., by dispatching a click event or something?",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_5dedb2e7",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Nit: Space before /*-{.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5863e8f1_3dfafea2",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-06T15:03:33Z",
+      "side": 1,
+      "message": "Nit: Space before /*-{.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

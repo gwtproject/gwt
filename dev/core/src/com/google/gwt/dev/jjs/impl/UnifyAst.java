@@ -633,7 +633,7 @@ public class UnifyAst {
     // EnumNameObfuscator
     flowInto(program.getIndexedMethod("Enum.obfuscatedName"));
 
-    // FixAssignmentToUnbox
+    // FixAssignmentsToUnboxOrCast
     AutoboxUtils autoboxUtils = new AutoboxUtils(program);
     for (JMethod method : autoboxUtils.getBoxMethods()) {
       flowInto(method);

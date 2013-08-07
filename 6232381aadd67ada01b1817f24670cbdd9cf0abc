@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9862c022_365dd624",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_dd01a2ce",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_fdfc66a5",
         "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "\"Fired when the form is reset.\"",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b865c42b_d4e45cf6",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_fdfc66a5",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "78d18ce1_92979ccf",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "You\u0027re right, I just took it from onFormSubmit()",
+      "parentUuid": "5863e8f1_9db20afd",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_1dbe1ac6",
         "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-06T18:36:54Z",
       "side": 1,
       "message": "you should also call this from reset method otherwise the event will not be fired when \u0027reset\u0027 is programmatically called.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b865c42b_74ad889b",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Why do think the event will not be fired? \nProgrammatically calling reset() should also trigger the native event. The call hierarchy goes like this: \nFormPanel#reset() -\u003e FormPanelImpl#reset() triggers onreset -\u003e FormPanel#onFormReset() -\u003e fires Event",
+      "parentUuid": "5863e8f1_1dbe1ac6",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "b865c42b_54b20cff",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_9d0b2aeb",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_bd06eee3",
         "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "You need to wrap this with $entry() like the onsubmit handler.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9862c022_f64a3e53",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_bd06eee3",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "9862c022_d647424b",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImplHost.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_7df076c4",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_fd258677",
         "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "\"still be reset.\"",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b865c42b_b4c60052",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_fd258677",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "f8f01ca0_ee4a5f53",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_dd2ac244",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_9d244a79",
         "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
         "patchSetId": 1
@@ -166,6 +328,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "Is there any reason to use a CheckBox here instead of just a 1-element boolean array or something?  E.g.,\n\n    final boolean[] resetInvoked \u003d new boolean[1];\n    ...\n      public void onReset(ResetEvent event) {\n        resetInvoked[0] \u003d true;\n      }\n    ...\n    assertTrue(resetInvoked[0]);\n\nIf you do want a test to make sure that resetting a form doesn\u0027t affect fields that aren\u0027t part of that form, I think that should be a separate test method.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8f01ca0_ce47a34b",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_9d244a79",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "f8f01ca0_2e82a753",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_bd1f0e22",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_7d19963a",
         "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
         "patchSetId": 1
@@ -200,6 +398,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "Is there no way to trigger the reset so that the browser invokes the onreset handler itself?  E.g., by dispatching a click event or something?",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b865c42b_d4929c4d",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "A real browser triggers the event, but unfortunately not the mock browser used by the test case.\n\nI tried form.reset(), native form.reset(), adding a ResetButton to the form and clicking it via GWT and natively. No luck. \nWhen FormPanel#reset() method is called, the unit test goes down and even calls form.reset() natively, but it does not fire the native form.onreset, although I tested that it is actually there. \n\nI dug around days to find the problem, but I had no luck so far. I suspected that it might be a bug in HtmlUnit, but I\u0027m not even sure if HtmlUnit is used in GWT\u0027s SimplePanelTestBase. \n\nI can only tell that the current HtmlUnit 2.12 works fine with firing the form.onreset event handler when calling form.reset(), I checked out the HtmlUnit code and modified their test cases. The problem though is that I can\u0027t replace HtmlUnit 2.9 in GWT tools with 2.12 because 2.12 relies on libraries that GWT cannot compile.",
+      "parentUuid": "5863e8f1_7d19963a",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "b865c42b_94c30442",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_5dedb2e7",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_3dfafea2",
         "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
         "patchSetId": 1
@@ -234,6 +468,24 @@
       "writtenOn": "2013-08-06T15:03:33Z",
       "side": 1,
       "message": "Nit: Space before /*-{.",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b865c42b_f4c07836",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5645
+      },
+      "writtenOn": "2013-08-07T15:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863e8f1_3dfafea2",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

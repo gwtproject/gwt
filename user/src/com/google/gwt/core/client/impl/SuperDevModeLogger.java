@@ -23,22 +23,57 @@ import com.google.gwt.core.shared.impl.JsLogger;
 public class SuperDevModeLogger extends JsLogger {
 
   @Override
-  public void log(String message, Throwable e) {
-    if (!consoleEnabled()) {
+  public void log(String message, Throwable t) {
+    if (!consoleLogEnabled()) {
       return;
     }
     log(message);
-    if (e != null) {
-      // TODO: figure out how to log stack traces.
-      log(e.toString());
+
+    if (t != null) {
+      String out = makeSimpleStackTrace(t);
+      if (consoleErrorEnabled()) {
+        error(out); // also prints the native stack trace leading to GWT.log().
+      } else {
+        log(out);
+      }
     }
   }
 
-  private native boolean consoleEnabled() /*-{
-    return !!$wnd.console;
+  /**
+   * Builds a simple stack trace (including chained exceptions) with just the method names.
+   */
+  private String makeSimpleStackTrace(Throwable first) {
+    // TODO: figure out how we can log the original JavaScript exception?
+
+    StringBuilder out = new StringBuilder();
+    Throwable t = first;
+    while (t != null) {
+      if (t != first) {
+        out.append("Caused by: " + t.toString() + "\n");
+      } else {
+        out.append(t.toString() + "\n");
+      }
+      for (StackTraceElement element : t.getStackTrace()) {
+        out.append("  at " + element.getMethodName() + "\n"); // only the method name is meaningful.
+      }
+      t = t.getCause();
+    }
+    return out.toString();
+  }
+
+  private native boolean consoleLogEnabled() /*-{
+    return !!($wnd.console && $wnd.console.log);
+  }-*/;
+
+  private native boolean consoleErrorEnabled() /*-{
+      return !!($wnd.console && $wnd.console.error);
   }-*/;
 
   private native void log(String message) /*-{
     $wnd.console.log(message);
+  }-*/;
+
+  private native void error(String message) /*-{
+      $wnd.console.error(message);
   }-*/;
 }

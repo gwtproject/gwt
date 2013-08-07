@@ -210,6 +210,24 @@
       "revId": "8f45b90225d745ea4f097bf0eba470efe1a3198a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d84ef881_a84a5352",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/rebind/RequestFactoryGeneratorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5730
+      },
+      "writtenOn": "2013-08-07T00:54:17Z",
+      "side": 1,
+      "message": "That wouldn\u0027t work.\nThe error only occurs for @JsonRpcService services (that felt super, ultra redundant...).\nAnd our test code currently does not support it (it uses RequestFactoryServlet/SimpleProcessor, which expects a payload that\u0027s not being passed with JsonRpc).\n\nI think the small UnitTest is valuable, but I added a small-ish integration test (which does not have a backend).\nI made it sure it error\u0027ed and then passed after the fix.",
+      "parentUuid": "9349c3a6_1b88bb70",
+      "revId": "8f45b90225d745ea4f097bf0eba470efe1a3198a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

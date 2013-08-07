@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d868b804_750628e7",
+        "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-07T23:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_c5bdbaca",
+      "revId": "9dbdc42e4f1f8ff37b10169032204da7c0081de9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_65a206a7",
         "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d868b804_550b2ceb",
+        "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-07T23:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_65a206a7",
+      "revId": "9dbdc42e4f1f8ff37b10169032204da7c0081de9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_a5c6be51",
         "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-08-07T23:01:21Z",
       "side": 1,
       "message": "Nit: Indented too far.",
+      "revId": "9dbdc42e4f1f8ff37b10169032204da7c0081de9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d868b804_b5ef20e2",
+        "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-07T23:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_a5c6be51",
       "revId": "9dbdc42e4f1f8ff37b10169032204da7c0081de9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

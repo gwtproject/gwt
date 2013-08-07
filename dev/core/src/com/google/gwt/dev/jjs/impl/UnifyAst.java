@@ -15,12 +15,19 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.core.rebind.GwtCreatableGenerator;
+import com.google.gwt.core.shared.GwtCreate;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.CompiledClass;
 import com.google.gwt.dev.javac.Shared;
+import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
@@ -367,9 +374,54 @@ public class UnifyAst {
       return !magicMethodCalls.contains(target);
     }
 
+    private JExpression handleGwtCreatable(JMethodCall x) {
+      assert (x.getArgs().size() == 1);
+      JExpression arg = x.getArgs().get(0);
+      arg = ClassLiteralFinder.extractClassLiteral(logger, arg);
+      if (!(arg instanceof JClassLiteral)) {
+        error(x, "Only class literals may be used as arguments to GwtCreatable.create()");
+        return null;
+      }
+      JClassLiteral classLiteral = (JClassLiteral) arg;
+      if (!(classLiteral.getRefType() instanceof JDeclaredType)) {
+        error(x, "Only classes and interfaces may be used as arguments to GwtCreatable.create()");
+        return null;
+      }
+      JDeclaredType type = (JDeclaredType) classLiteral.getRefType();
+      String reqType = JGwtCreate.nameOf(type);
+      StandardGeneratorContext ctx = rpo.getGeneratorContext();
+      GwtCreate gwtc =
+          GwtCreatableGenerator.findGwtCreate(logger, currentMethod, ctx.getTypeOracle());
+
+      String answer;
+      try {
+        answer = GwtCreatableGenerator.exec(logger, ctx, reqType, gwtc);
+        ctx.finish(logger);
+      } catch (UnableToCompleteException e1) {
+        logger.log(Type.ERROR, "Unable to generate GwtCreatable for " + reqType);
+        return null;
+      }
+
+      JDeclaredType answerType = searchForTypeBySource(answer);
+      if (answerType == null) {
+        error(x, "GwtCreatable result '" + answer + "' could not be found");
+        return null;
+      }
+      assert answerType instanceof JClassType;// Not really necessary; we control this generator
+      assert !answerType.isAbstract();
+
+      JExpression result =
+          JGwtCreate.createInstantiationExpression(x.getSourceInfo(), (JClassType) answerType,
+              currentMethod.getEnclosingType());
+      assert result != null;
+
+      return result.makeStatement().getExpr();
+    }
+    
     private JExpression handleGwtCreate(JMethodCall x) {
       assert (x.getArgs().size() == 1);
       JExpression arg = x.getArgs().get(0);
+      arg = ClassLiteralFinder.extractClassLiteral(logger, arg);
       if (!(arg instanceof JClassLiteral)) {
         error(x, "Only class literals may be used as arguments to GWT.create()");
         return null;
@@ -464,6 +516,8 @@ public class UnifyAst {
         return handleGwtCreate(x);
       } else if (IMPL_GET_NAME_OF.equals(sig)) {
         return handleImplNameOf(x);
+      } else if (GWT_CREATABLE.equals(sig)) {
+        return handleGwtCreatable(x);
       }
       throw new InternalCompilerException("Unknown magic method");
     }
@@ -478,6 +532,9 @@ public class UnifyAst {
   private static final String GWT_CREATE =
       "com.google.gwt.core.shared.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
 
+  private static final String GWT_CREATABLE =
+      "com.google.gwt.core.shared.GwtCreatable.create(Ljava/lang/Class;)Lcom/google/gwt/core/shared/GwtCreatable;";
+  
   private static final String GWT_DEBUGGER = "com.google.gwt.core.shared.GWT.debugger()V";
 
   private static final String GWT_IS_CLIENT = "com.google.gwt.core.shared.GWT.isClient()Z";
@@ -502,7 +559,7 @@ public class UnifyAst {
    * Methods for which the call site must be replaced with magic AST nodes.
    */
   private static final Set<String> MAGIC_METHOD_CALLS = new LinkedHashSet<String>(Arrays.asList(
-      GWT_CREATE, GWT_DEBUGGER, OLD_GWT_CREATE, IMPL_GET_NAME_OF));
+      GWT_CREATE, GWT_CREATABLE, GWT_DEBUGGER, OLD_GWT_CREATE, IMPL_GET_NAME_OF));
 
   /**
    * Methods with magic implementations that the compiler must insert.
@@ -949,6 +1006,7 @@ public class UnifyAst {
         if (GWT_DEBUGGER.equals(sig)) {
           gwtDebuggerMethod = method;
         }
+
       }
       if (MAGIC_METHOD_IMPLS.contains(sig)) {
         if (sig.startsWith("com.google.gwt.core.client.GWT.")

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_056232e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_653e86d4",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_851f426f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "s/Class to represent the/Represents the",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_255dae24",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_851f426f",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_6557a604",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_e503961f",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_c5001a16",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "make all this stuff private unless there\u0027s some reason not too",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_455c2a25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_c5001a16",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_a5507e09",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Changed to getInnermostEnclosingScope.",
+      "parentUuid": "d816f88e_c5193a8a",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_25348ef4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "this is just a stylistic thing, you might not agree, but i like to follow a pattern in this situation of naming the two parameters:\n\n\"thisScope\", and \"thatScope\"",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_854d826f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "That sounds good. I did not like it how it was.....",
+      "parentUuid": "d816f88e_25348ef4",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_e54a7653",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d816f88e_e51c367c",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_6509663b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "Sets.newHashSet()",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_2582ce53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "guava.Sets collides with gwt.dev.util.collect.Sets our internal gwt collection classes. Our set classes are kind of strange in the sense that they dont really have a a real collection interface. E.g. to add an element to one of our sets one needs to do set \u003d Set.add(set, element) because the set object might be represented by different classes depending whether it is empty, a singleton or else.\n\nWe should standarize and get rid of the craziness, but meantime...",
+      "parentUuid": "d816f88e_6509663b",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_0587d263",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "d816f88e_0514f256",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_053992ea",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "// The name of variable \"a\" must be unique within scope 1.1 and variable \"b\" must be unique in scope 1.",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_256beeb3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "Rephrased the whole confusing thing.",
+      "parentUuid": "d816f88e_053992ea",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_a5951e8b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "I think it is a good practice that they be null when not inside a JMethodBody. Suppose there where JLocalRefs visited outside method bodies (almost 100% sure it is not the case).",
+      "parentUuid": "d816f88e_250f6e44",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_65f04617",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -200,6 +398,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "comment is redundant with class name",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_8592a29e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2915,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "d816f88e_65f04617",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "d816f88e_a57ebe6e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "I wish I could take the credit for it, but it take from the bug report :)",
+      "parentUuid": "d816f88e_45438a4c",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816f88e_a527dec2",
         "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
         "patchSetId": 2
@@ -234,6 +468,24 @@
       "writtenOn": "2013-08-07T19:34:55Z",
       "side": 1,
       "message": "are these \"final\" keywords intended to make the test behavior more explicit? if not please remove, they\u0027re not necessary",
+      "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d816f88e_0570729e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-07T20:26:50Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "d816f88e_a527dec2",
       "revId": "874ce5333b80cf31c3f905d6d7c070f16139856a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

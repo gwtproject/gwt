@@ -165,9 +165,12 @@ import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -187,6 +190,144 @@ import java.util.TreeMap;
  * Creates a JavaScript AST from a <code>JProgram</code> node.
  */
 public class GenerateJavaScriptAST {
+
+  /**
+   * Class to represent the scope tree defined by nested statement blocks. It is a temporary
+   * structure used to fix up variable names.
+   */
+  private static class Scope {
+    Scope parent;
+    /**
+     * The depth at which this scope is in the tree.
+     */
+    int level;
+
+    Scope() {
+      this.parent = null;
+      this.level = 0;
+    }
+
+    Scope(Scope parent) {
+      this.parent = parent;
+      this.level = parent.level + 1;
+    }
+
+    static Scope leastCommonAncestor(Scope scope, Scope otherScope) {
+      if (scope == null) {
+        return otherScope;
+      }
+
+      if (otherScope == null) {
+        return scope;
+      }
+
+      if (scope.level > otherScope.level) {
+        return leastCommonAncestor(otherScope, scope);
+      }
+
+      if (scope == otherScope) {
+        return scope;
+      }
+
+      if (scope.level == otherScope.level) {
+        return leastCommonAncestor(scope.parent, otherScope.parent);
+      }
+      return leastCommonAncestor(scope, otherScope.parent);
+    }
+  }
+
+  /**
+   * The GWT Java AST might contain different local variables with the same name in the same
+   * scope. This fixup pass renames variables in the case they clash in a scope.
+   */
+  private class FixNameClashesVisitor extends JVisitor {
+
+    Scope currentScope;
+    Set<String> namesUsedInMethod = null;
+    Map<JLocal, Scope> scopesByLocal = null;
+    Multimap<String, JLocal> localsByName = null;
+
+    public boolean visit(JMethodBody x, Context ctx) {
+      // Start constructing the scope tree.
+      currentScope = new Scope();
+      namesUsedInMethod = new HashSet<String>();
+      scopesByLocal = new HashMap<JLocal,Scope>();
+      localsByName = HashMultimap.create();
+      return true;
+    }
+
+    public boolean visit(JBlock x, Context ctx) {
+      // Fix clashing variables here.
+      currentScope = new Scope(currentScope);
+      return true;
+    }
+
+    public void endVisit(JBlock x, Context ctx) {
+      // Fix clashing variables here.
+      currentScope = currentScope.parent;
+    }
+
+    public void endVisit(JLocalRef x, Context ctx) {
+      // Keep track the outer scope in which a variable belongs. E.g. assume the following code.
+      // { // scope 1
+      //   { // scope 1.1
+      //     ... a... b...
+      //     { // scope 1.1.1
+      //        ... a ...
+      //     }
+      //   }
+      //   { // scope 1.2
+      //    ... b...
+      //   }
+      // }
+      // Variable a logically belongs to scope 1.1. and variable b to scope 1.
+      JLocal local = x.getLocal();
+      Scope oldVariableScope = scopesByLocal.get(local);
+      Scope newVariableScope =  Scope.leastCommonAncestor(oldVariableScope, currentScope);
+      if (newVariableScope != oldVariableScope) {
+        scopesByLocal.put(local, newVariableScope);
+      }
+      localsByName.put(local.getName(), local);
+      namesUsedInMethod.add(local.getName());
+    }
+
+    public void endVisit(JMethodBody x, Context ctx) {
+      // Fix clashing variables here. Two locals are clashing if they have the same name and their
+      // computed scopes are nested.
+
+      for (String name : localsByName.keySet()) {
+        Collection<JLocal> localSet = localsByName.get(name);
+        if (localSet.size() == 1) {
+          continue;
+        }
+
+        JLocal[] locals = localSet.toArray(new JLocal[localSet.size()]);
+        for (int i = 0; i < locals.length; i++ ) {
+          // See if local i conflicts with any local j > i
+          for (int j = i + 1; j < locals.length; j++ ) {
+            Scope iLocalScope = scopesByLocal.get(locals[i]);
+            Scope jLocalScope = scopesByLocal.get(locals[j]);
+            Scope commonAncestor = Scope.leastCommonAncestor(iLocalScope, jLocalScope );
+            if (commonAncestor != iLocalScope && commonAncestor != jLocalScope) {
+              // no conflict
+              continue;
+            }
+            // conflicting locals rename local i;
+            do {
+              locals[i].setName(locals[i].getName() + "_");
+            } while (namesUsedInMethod.contains(locals[i].getName()));
+            namesUsedInMethod.add(locals[i].getName());
+            break;
+          }
+        }
+      }
+
+      currentScope = null;
+      namesUsedInMethod = null;
+      scopesByLocal = null;
+      localsByName = null;
+    }
+  }
 
   private class CreateNamesAndScopesVisitor extends JVisitor {
 
@@ -2771,6 +2912,10 @@ public class GenerateJavaScriptAST {
   }
 
   private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {
+    // Fix name clashes.
+    new FixNameClashesVisitor().accept(program);
+
+
     CanObserveSubclassUninitializedFieldsVisitor canObserve =
         new CanObserveSubclassUninitializedFieldsVisitor();
     canObserve.accept(program);

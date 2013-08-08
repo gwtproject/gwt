@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98e560f5_7b5c7f25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FixAssignmentsToUnboxOrCast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-08-08T18:32:13Z",
+      "side": 1,
+      "message": "both fixLhsCast() and undoBoxIfNeed() implementations start with a condition, but only one of them mentions this fact in their name\n\nmaybe they should be consistent\n\npersonally i\u0027m a fan of this naming pattern:\n\nmaybeFixLhsCast() and maybeUndoBox()",
+      "revId": "1a48857220ee9090e648845d3e254a176bd5b55e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98e560f5_fb47af4a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FixAssignmentsToUnboxOrCast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-08-08T18:32:13Z",
+      "side": 1,
+      "message": "did you mean to call fixLhsCast() twice?",
+      "revId": "1a48857220ee9090e648845d3e254a176bd5b55e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

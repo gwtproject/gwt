@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "98e560f5_3bebd72a",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-08T00:31:22Z",
+      "side": 1,
+      "message": "onSubmit event is not call if you call form.submit.\nSo this is why I assumed onreset will not be called with form.reset. But it looks like that is not the case.",
+      "parentUuid": "b865c42b_74ad889b",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_9d0b2aeb",
         "filename": "user/src/com/google/gwt/user/client/ui/impl/FormPanelImpl.java",
         "patchSetId": 1

@@ -27,7 +27,7 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   static native JsonValue box(JsonValue value) /*-{
     // box for DevMode, not ProdMode
-    return @com.google.gwt.core.client.GWT::isScript()() ? value : Object(value);
+    return @com.google.gwt.core.client.GWT::isScript()() ? value : (value != null ? Object(value) : null);
   }-*/;
 
   static native JsonValue debox(JsonValue value) /*-{
@@ -54,23 +54,20 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   @Override
   final public native boolean asBoolean() /*-{
-     return @com.google.gwt.core.client.GWT::isScript()() ?
-        !!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
-        (!!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
+     return !!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
   }-*/;
 
   @Override
   final public native double asNumber() /*-{
-    return @com.google.gwt.core.client.GWT::isScript()() ?
-        +@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
-        (+@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
-
+      var value = @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+      return value == null ? Number.NaN : +value;
   }-*/;
 
   @Override
   // avoid casts, as compiler will throw CCE trying to cast a raw JS String to an interface
   final public native String asString() /*-{
-    return "" + @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+      var value = @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+      return value == null ? null : "" + value;
   }-*/;
 
   final public JsonType getType() {
@@ -103,11 +100,11 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
   final public native String toJson() /*-{
     // skip hashCode field
     return $wnd.JSON.stringify(this, function(keyName, value) {
-        if (keyName == "$H") {
-          return undefined; // skip hashCode property
+        if (keyName != "$H") {
+          return value;
         }
-        return value;
-      }, 0);
+        // skip hashCode property and return undefined
+      });
   }-*/;
 
   final public native Object toNative() /*-{

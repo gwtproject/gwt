@@ -15,14 +15,12 @@
  */
 package elemental.js.json;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonValue;
 
 /**
@@ -31,84 +29,102 @@ import elemental.json.JsonValue;
 final public class JsJsonObject extends JsJsonValue
     implements JsonObject {
 
-  public static JsJsonObject create() {
-    return JavaScriptObject.createObject().cast();
+  public static JsonObject create() {
+    return (JsonObject) JavaScriptObject.createObject();
   }
+
+  private static native String[] reinterpretCast(JsArrayString arrayString) /*-{
+    return arrayString;
+  }-*/;
 
   protected JsJsonObject() {
   }
 
+  @Override
+  @SuppressWarnings({"unchecked"})
   public final native JsonValue get(String key) /*-{
-    return @com.google.gwt.core.client.GWT::isScript()() ?
-            @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(this[key]) :
-            this[key] != null ? Object(this[key]) : null;
+    var value = this[key];
+    return @com.google.gwt.core.client.GWT::isScript()() || value == null ?
+      value : Object(value);
   }-*/;
 
+  @Override
   public JsonArray getArray(String key) {
     return (JsonArray) get(key);
   }
 
-  public boolean getBoolean(String key) {
-    return ((JsonBoolean) get(key)).getBoolean();
-  }
+  @Override
+  public native boolean getBoolean(String key) /*-{
+    return this[key];
+  }-*/;
 
+  @Override
+  public native double getNumber(String key) /*-{
+    return this[key];
+  }-*/;
 
-  public double getNumber(String key) {
-    return ((JsonNumber) get(key)).getNumber();
-  }
-
+  @Override
   public JsonObject getObject(String key) {
     return (JsonObject) get(key);
   }
 
-  public String getString(String key) {
-    return ((JsonString) get(key)).getString();
-  }
+  @Override
+  public native String getString(String key) /*-{
+    return this[key];
+  }-*/;
 
+  @Override
   public native boolean hasKey(String key) /*-{
     return key in this;
   }-*/;
 
+  @Override
   public String[] keys() {
-    JsArrayString str = keys0();
-    return reinterpretCast(str);
+    JsArrayString keys = keys0();
+    if (GWT.isScript()) {
+      return reinterpretCast(keys);
+    }
+    String[] dest = new String[keys.length()];
+    for (int i = 0; i < keys.length(); i++) {
+      dest[i] = keys.get(i);
+    }
+    return dest;
   }
 
-  public native JsArrayString keys0() /*-{
-    var keys = [];
-    for(var key in this) {
+  @Override
+  public native void put(String key, JsonValue value) /*-{
+    this[key] = @com.google.gwt.core.client.GWT::isScript()() || value == null ?
+      value : value.valueOf();
+  }-*/;
+
+  @Override
+  public native void put(String key, String value)  /*-{
+    this[key] = value;
+  }-*/;
+
+  @Override
+  public native void put(String key, double value) /*-{
+    this[key] = value;
+  }-*/;
+
+  @Override
+  public native void put(String key, boolean value) /*-{
+    this[key] = value;
+  }-*/;
+
+  @Override
+  public native void remove(String key) /*-{
+    delete this[key];
+  }-*/;
+
+  private native JsArrayString keys0() /*-{
+    var keys = [],
+      key;
+    for(key in this) {
       if (this.hasOwnProperty(key) && key != '$H') {
         keys.push(key);
       }
     }
     return keys;
-  }-*/;
-
-  public void put(String key, JsonValue value) {
-    put0(key, value);
-  }
-
-  public native void put(String key, String value)  /*-{
-    this[key] = value;
-  }-*/;
-
-  public native void put(String key, double value) /*-{
-    this[key] = Object(value);
-  }-*/;
-
-  public native void put(String key, boolean value) /*-{
-    this[key] = Object(value);
-  }-*/;
-
-  public native void put0(String key, JsonValue value)  /*-{
-    this[key] = value;
-  }-*/;
-
-  public native void remove(String key) /*-{
-    delete this[key];
-  }-*/;
-
-  private native String[] reinterpretCast(JsArrayString arrayString) /*-{
-    return arrayString;
   }-*/;
 }

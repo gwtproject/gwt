@@ -16,15 +16,10 @@
 package elemental.js.json;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayNumber;
-import com.google.gwt.core.client.JsArrayString;
 
 import elemental.js.util.JsArrayOf;
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonValue;
 
 /**
@@ -34,35 +29,44 @@ final public class JsJsonArray extends JsJsonValue
     implements JsonArray {
 
   public static JsonArray create() {
-    return (JsJsonArray) JavaScriptObject.createArray();
+    return (JsonArray) JavaScriptObject.createArray();
   }
 
   protected JsJsonArray() {
   }
 
+  @Override
+  @SuppressWarnings({"unchecked"})
   public final native JsonValue get(int index) /*-{
-    return this[index];
+    var value = this[index];
+    return @com.google.gwt.core.client.GWT::isScript()() || value == null ?
+      value : Object(value);
   }-*/;
 
+  @Override
   public JsonArray getArray(int index) {
     return (JsonArray) get(index);
   }
 
-  public boolean getBoolean(int index) {
-    return ((JsonBoolean) get(index)).getBoolean();
-  }
+  @Override
+  public native boolean getBoolean(int index) /*-{
+    return this[index];
+  }-*/;
 
-  public double getNumber(int index) {
-    return ((JsonNumber) get(index)).getNumber();
-  }
+  @Override
+  public native double getNumber(int index) /*-{
+    return this[index];
+  }-*/;
 
+  @Override
   public JsonObject getObject(int index) {
     return (JsonObject) get(index);
   }
 
-  public String getString(int index) {
-    return ((JsonString) get(index)).getString();
-  }
+  @Override
+  public native String getString(int index) /*-{
+    return this[index];
+  }-*/;
 
   @Override
   public native int length() /*-{
@@ -74,23 +78,24 @@ final public class JsJsonArray extends JsJsonValue
     this.<JsArrayOf>cast().removeByIndex(index);
   }
 
+  @Override
   public native void set(int index, JsonValue value) /*-{
-       this[index] = value;
+    this[index] = @com.google.gwt.core.client.GWT::isScript()() || value == null ?
+      value : value.valueOf();
   }-*/;
-  
-  public void set(int index, String string) {
-    asJsStringArray().set(index, string);
-  }
 
+  @Override
+  public native void set(int index, String string) /*-{
+    this[index] = string;
+  }-*/;
+
+  @Override
   public native void set(int index, double number) /*-{
-    this[index] = Object(number);
+    this[index] = number;
   }-*/;
 
+  @Override
   public native void set(int index, boolean bool) /*-{
-    this[index] = Object(bool);
+    this[index] = bool;
   }-*/;
-
-  private JsArrayString asJsStringArray() {
-    return this.cast();
-  }
 }

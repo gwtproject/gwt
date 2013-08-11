@@ -25,23 +25,13 @@ import elemental.json.JsonValue;
  */
 public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
-  static native JsonValue box(JsonValue value) /*-{
-    // box for DevMode, not ProdMode
-    return @com.google.gwt.core.client.GWT::isScript()() ? value : Object(value);
-  }-*/;
-
-  static native JsonValue debox(JsonValue value) /*-{
-    // we don't debox (currently), because ProdMode is now unboxed, and DevMode should stay boxed
-    return value;
-  }-*/;
-
   static native String getJsType(Object obj) /*-{
-    return typeof @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(obj);
+    return typeof obj;
   }-*/;
 
   static native boolean isArray(Object obj) /*-{
-     // ensure that array detection works cross-frame
-    return Object.prototype.toString.apply(@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(obj)) === '[object Array]';
+    // ensure that array detection works cross-frame
+    return Object.prototype.toString.call(obj) == '[object Array]';
   }-*/;
 
   private static native boolean isNull(JsJsonValue jsJsonValue) /*-{
@@ -54,25 +44,25 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   @Override
   final public native boolean asBoolean() /*-{
-     return @com.google.gwt.core.client.GWT::isScript()() ?
-        !!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
-        (!!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
+    var value = @com.google.gwt.core.client.GWT::isScript()() || this == null ?
+      this : this.valueOf();
+    return !!value;
   }-*/;
 
   @Override
   final public native double asNumber() /*-{
-    return @com.google.gwt.core.client.GWT::isScript()() ?
-        +@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
-        (+@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
-
+    var value = @com.google.gwt.core.client.GWT::isScript()() || this == null ?
+      this : this.valueOf();
+    return value == null ? 0 : +value;
   }-*/;
 
   @Override
   // avoid casts, as compiler will throw CCE trying to cast a raw JS String to an interface
   final public native String asString() /*-{
-    return "" + @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+    return this == null ? null : "" + this;
   }-*/;
 
+  @Override
   final public JsonType getType() {
     if (isNull(this)) {
       return JsonType.NULL;
@@ -81,13 +71,13 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
     if ("string".equals(jsType)) {
       return JsonType.STRING;
     }
-    else if ("number".equals(jsType)) {
+    if ("number".equals(jsType)) {
       return JsonType.NUMBER;
     }
-    else if ("boolean".equals(jsType)) {
+    if ("boolean".equals(jsType)) {
       return JsonType.BOOLEAN;
     }
-    else if ("object".equals(jsType)) {
+    if ("object".equals(jsType)) {
       return isArray(this) ? JsonType.ARRAY : JsonType.OBJECT;
     }
     assert false : "Unknown Json Type";
@@ -96,21 +86,22 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   @Override
   final public native boolean jsEquals(JsonValue value) /*-{
-    return @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)
-    === @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(value);
+    return this === value;
   }-*/;
 
+  @Override
   final public native String toJson() /*-{
     // skip hashCode field
     return $wnd.JSON.stringify(this, function(keyName, value) {
-        if (keyName == "$H") {
-          return undefined; // skip hashCode property
-        }
+      if (keyName != "$H") {
         return value;
-      }, 0);
+      }
+      // skip hashCode property and return undefined
+    });
   }-*/;
 
+  @Override
   final public native Object toNative() /*-{
-    return @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+    return this;
   }-*/;
 }

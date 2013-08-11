@@ -276,7 +276,7 @@ public final class String implements Comparable<String>, CharSequence,
   static native String __valueOf(char x[], int start, int end) /*-{
     // Trick: fromCharCode is a vararg method, so we can use apply() to pass the
     // entire input in one shot.
-    x = x.slice(start, end);
+    x = Array.prototype.slice.call(x, start, end);
     return String.fromCharCode.apply(null, x);
   }-*/;
 

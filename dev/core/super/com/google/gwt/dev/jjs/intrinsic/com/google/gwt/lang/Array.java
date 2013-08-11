@@ -16,6 +16,10 @@
 package com.google.gwt.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayInteger;
+import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.typedarrays.client.JsUtils;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * This is a magic class the compiler uses as a base class for injected array
@@ -135,10 +139,37 @@ public final class Array {
    */
   public static Array initDim(Class<?> arrayClass, 
         JavaScriptObject castableTypeMap, int queryId, int length, int seedType) {
+    if (TypedArrays.isSupported()) {
+      //have to keep this as Object since dynamicCast will notice that the class hasn't been set yet
+      Object result = null;
+      if (arrayClass == int[].class) {
+        result = TypedArrays.createInt32Array(length);
+      } else if (arrayClass == double[].class) {
+        result = TypedArrays.createFloat64Array(length);
+      } else if (arrayClass == float[].class) {
+        result = TypedArrays.createFloat32Array(length);
+      } else if (arrayClass == short[].class) {
+        result = TypedArrays.createInt16Array(length);
+      } else if (arrayClass == byte[].class) {
+        result = TypedArrays.createInt8Array(length);
+      } else if (arrayClass == char[].class) {
+        result = TypedArrays.createUint16Array(length);
+      }
+      if (result != null) {
+        ExpandoWrapper.wrapArray(getProto(result));
+        setClass(getProto(result), arrayClass);
+        Util.setCastableTypeMap(getProto(result), castableTypeMap);
+        getProto(result).queryId = queryId;
+        return (Array) result;
+      }
+    }
     Array result = createFromSeed(seedType, length);
     initValues(arrayClass, castableTypeMap, queryId, result);
     return result;
   }
+  static native Array getProto(Object obj) /*-{
+    return obj.__proto__;
+  }-*/;
 
   /**
    * Creates an array like "new T[a][b][c][][]" by passing in a native JSON
@@ -172,6 +203,30 @@ public final class Array {
    */
   public static Array initValues(Class<?> arrayClass,
       JavaScriptObject castableTypeMap, int queryId, Array array) {
+    if (TypedArrays.isSupported()) {
+      //have to keep this as Object since dynamicCast will notice that the class hasn't been set yet
+      Object result = null;
+      if (arrayClass == int[].class) {
+        result = JsUtils.createInt32Array((JsArrayInteger)((Object)array));
+      } else if (arrayClass == double[].class) {
+        result = JsUtils.createFloat64Array((JsArrayNumber)((Object)array));
+      } else if (arrayClass == float[].class) {
+        result = JsUtils.createFloat32Array((JsArrayNumber)((Object)array));
+      } else if (arrayClass == short[].class) {
+        result = JsUtils.createInt16Array((JsArrayInteger)((Object)array));
+      } else if (arrayClass == byte[].class) {
+        result = JsUtils.createInt8Array((JsArrayInteger)((Object)array));
+      } else if (arrayClass == char[].class) {
+        result = JsUtils.createUint16Array((JsArrayInteger)((Object)array));
+      }
+      if (result != null) {
+        ExpandoWrapper.wrapArray(getProto(result));
+        setClass(getProto(result), arrayClass);
+        Util.setCastableTypeMap(getProto(result), castableTypeMap);
+        getProto(result).queryId = queryId;
+        return (Array) result;
+      }
+    }
     ExpandoWrapper.wrapArray(array);
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);

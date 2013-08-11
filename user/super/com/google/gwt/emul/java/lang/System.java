@@ -153,7 +153,7 @@ public final class System {
    */
   private static native void nativeArraycopy(Object src, int srcOfs, Object dest, int destOfs,
       int len) /*-{
-    Array.prototype.splice.apply(dest, [destOfs, len].concat(src.slice(srcOfs, srcOfs + len)));
+    Array.prototype.splice.apply(dest, [destOfs, len].concat(Array.prototype.slice.call(src, srcOfs, srcOfs + len)));
   }-*/;
 
 }

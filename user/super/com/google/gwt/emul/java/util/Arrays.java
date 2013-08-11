@@ -19,6 +19,7 @@ package java.util;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.UnsafeNativeLong;
 import com.google.gwt.lang.Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import java.io.Serializable;
 
@@ -857,7 +858,7 @@ public class Arrays {
 
   public static void sort(byte[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static void sort(char[] array) {
@@ -866,7 +867,7 @@ public class Arrays {
 
   public static void sort(char[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static void sort(double[] array) {
@@ -875,7 +876,7 @@ public class Arrays {
 
   public static void sort(double[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static void sort(float[] array) {
@@ -884,7 +885,7 @@ public class Arrays {
 
   public static void sort(float[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static void sort(int[] array) {
@@ -893,7 +894,7 @@ public class Arrays {
 
   public static void sort(int[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static void sort(long[] array) {
@@ -929,7 +930,7 @@ public class Arrays {
 
   public static void sort(short[] array, int fromIndex, int toIndex) {
     verifySortIndices(fromIndex, toIndex, array.length);
-    nativeNumberSort(array, fromIndex, toIndex);
+    numberSort(array, fromIndex, toIndex);
   }
 
   public static <T> void sort(T[] x, Comparator<? super T> c) {
@@ -1309,17 +1310,38 @@ public class Arrays {
    * Sort an entire array of number primitives.
    */
   private static native void nativeNumberSort(Object array) /*-{
-    array.sort(function(a, b) {
+    Array.prototype.sort.call(array, function(a, b) {
       return a - b;
     });
   }-*/;
 
   /**
-   * Sort a subset of an array of number primitives.
+   * Sort a subset of an array of number primitives
+   */
+  private static void numberSort(Object array, int fromIndex, int toIndex) {
+    if (TypedArrays.isSupported()) {
+      nativeTypedArraySort(array, fromIndex, toIndex);
+    } else {
+      nativeNumberSort(array, fromIndex, toIndex);
+    }
+  }
+
+  /**
+   * Sort a subset of a typed array.
+   */
+  private static native void nativeTypedArraySort(Object array, int fromIndex,
+      int toIndex) /*-{
+    Array.prototype.sort.call(array.subarray(fromIndex, toIndex), function(a, b) {
+      return a - b;
+    });
+  }-*/;
+
+  /**
+   * Sort a subset of an array of numbers.
    */
   private static native void nativeNumberSort(Object array, int fromIndex,
       int toIndex) /*-{
-    var temp = array.slice(fromIndex, toIndex);
+    var temp = Array.prototype.splice.call(array, fromIndex, toIndex);
     temp.sort(function(a, b) {
       return a - b;
     });

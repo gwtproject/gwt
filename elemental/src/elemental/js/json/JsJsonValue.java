@@ -27,7 +27,7 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   static native JsonValue box(JsonValue value) /*-{
     // box for DevMode, not ProdMode
-    return @com.google.gwt.core.client.GWT::isScript()() ? value : Object(value);
+    return @com.google.gwt.core.client.GWT::isScript()() ? value : (value != null ? Object(value) : null);
   }-*/;
 
   static native JsonValue debox(JsonValue value) /*-{
@@ -64,7 +64,6 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
     return @com.google.gwt.core.client.GWT::isScript()() ?
         +@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
         (+@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
-
   }-*/;
 
   @Override
@@ -103,11 +102,11 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
   final public native String toJson() /*-{
     // skip hashCode field
     return $wnd.JSON.stringify(this, function(keyName, value) {
-        if (keyName == "$H") {
-          return undefined; // skip hashCode property
+        if (keyName != "$H") {
+          return value;
         }
-        return value;
-      }, 0);
+        // skip hashCode property and return undefined
+      });
   }-*/;
 
   final public native Object toNative() /*-{

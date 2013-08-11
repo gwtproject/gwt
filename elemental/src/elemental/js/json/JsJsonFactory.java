@@ -15,6 +15,7 @@
  */
 package elemental.js.json;
 
+import com.google.gwt.core.client.GWT;
 import elemental.json.JsonException;
 import elemental.json.JsonFactory;
 import elemental.json.JsonNull;
@@ -27,6 +28,20 @@ import elemental.json.JsonValue;
  * JSNI based implementation of JsonFactory.
  */
 public class JsJsonFactory implements JsonFactory {
+
+  private static native JsonValue parseDevMode(String jsonString) /*-{
+    // assume Chrome, safe and non-broken JSON.parse impl
+    return $wnd.JSON.parse(jsonString, function(key, value) {
+        if (typeof value === 'object') {
+            return value;
+        }
+        return Object(value);
+    });
+  }-*/;
+
+  private static native JsonValue parseProdMode(String jsonString) /*-{
+    return $wnd.JSON.parse(jsonString);
+  }-*/;
 
   public JsonString create(String string) {
     return JsJsonString.create(string);
@@ -53,21 +68,11 @@ public class JsJsonFactory implements JsonFactory {
   }-*/;
 
   @SuppressWarnings({"unchecked"})
-  public <T extends JsonValue> T parse(String jsonString) throws JsonException {
+  public JsonValue parse(String jsonString) throws JsonException {
     try {
-      return parse0(jsonString);
+      return GWT.isScript() ? parseProdMode(jsonString) : parseDevMode(jsonString);
     } catch (Exception e) {
       throw new JsonException("Can't parse " + jsonString);
     }
   }
-
-  private native <T extends JsonValue> T parse0(String jsonString) /*-{
-    // assume Chrome, safe and non-broken JSON.parse impl
-    return $wnd.JSON.parse(jsonString, function(key, value) {
-      if (typeof value === 'object') {
-        return value;
-      }
-      return Object(value);
-    });
-  }-*/;
 }

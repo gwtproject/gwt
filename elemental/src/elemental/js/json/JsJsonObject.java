@@ -35,13 +35,16 @@ final public class JsJsonObject extends JsJsonValue
     return JavaScriptObject.createObject().cast();
   }
 
+  private static native String[] reinterpretCast(JsArrayString arrayString) /*-{
+    return arrayString;
+  }-*/;
+
   protected JsJsonObject() {
   }
 
+  @SuppressWarnings({"unchecked"})
   public final native JsonValue get(String key) /*-{
-    return @com.google.gwt.core.client.GWT::isScript()() ?
-            @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(this[key]) :
-            this[key] != null ? Object(this[key]) : null;
+    return @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(this[key]);
   }-*/;
 
   public JsonArray getArray(String key) {
@@ -51,7 +54,6 @@ final public class JsJsonObject extends JsJsonValue
   public boolean getBoolean(String key) {
     return ((JsonBoolean) get(key)).getBoolean();
   }
-
 
   public double getNumber(String key) {
     return ((JsonNumber) get(key)).getNumber();
@@ -84,31 +86,23 @@ final public class JsJsonObject extends JsJsonValue
     return keys;
   }-*/;
 
-  public void put(String key, JsonValue value) {
-    put0(key, value);
-  }
+  public native void put(String key, JsonValue value) /*-{
+    this[key] = value;
+  }-*/;
 
   public native void put(String key, String value)  /*-{
     this[key] = value;
   }-*/;
 
   public native void put(String key, double value) /*-{
-    this[key] = Object(value);
+    this[key] = @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(value);
   }-*/;
 
   public native void put(String key, boolean value) /*-{
-    this[key] = Object(value);
-  }-*/;
-
-  public native void put0(String key, JsonValue value)  /*-{
-    this[key] = value;
+    this[key] = @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(value);
   }-*/;
 
   public native void remove(String key) /*-{
     delete this[key];
-  }-*/;
-
-  private native String[] reinterpretCast(JsArrayString arrayString) /*-{
-    return arrayString;
   }-*/;
 }

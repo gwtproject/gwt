@@ -32,17 +32,18 @@ final public class JsJsonNumber extends JsJsonValue
    * MAGIC: primitive number cast to object interface.
    */
   private static native JsJsonNumber createProd(double number) /*-{
-    return @elemental.js.json.JsJsonString::box(Lelemental/json/JsonValue;)(number);
+    return @com.google.gwt.core.client.GWT::isScript()() ? number : Object(number);
   }-*/;
 
   protected JsJsonNumber() {
   }
 
+  @Override
   public double getNumber() {
     return valueProd();
   }
 
   private native double valueProd() /*-{
-    return @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);
+    return @com.google.gwt.core.client.GWT::isScript()() ? this : this.valueOf();
   }-*/;
 }

@@ -15,6 +15,8 @@
  */
 package elemental.js.json;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonBoolean;
 import elemental.json.JsonException;
 import elemental.json.JsonFactory;
 import elemental.json.JsonNull;
@@ -28,46 +30,49 @@ import elemental.json.JsonValue;
  */
 public class JsJsonFactory implements JsonFactory {
 
+  private static native JsonValue parse0(String jsonString) /*-{
+    // assume Chrome, safe and non-broken JSON.parse impl
+    var value = $wnd.JSON.parse(jsonString);
+    return @com.google.gwt.core.client.GWT::isScript()() || value == null ? value : Object(value)
+  }-*/;
+
+  @Override
   public JsonString create(String string) {
     return JsJsonString.create(string);
   }
 
+  @Override
   public JsonNumber create(double number) {
     return JsJsonNumber.create(number);
   }
 
-  public elemental.json.JsonBoolean create(boolean bool) {
+  @Override
+  public JsonBoolean create(boolean bool) {
     return JsJsonBoolean.create(bool);
   }
 
-  public elemental.json.JsonArray createArray() {
+  @Override
+  public JsonArray createArray() {
     return JsJsonArray.create();
   }
 
+  @Override
   public JsonNull createNull() {
     return JsJsonNull.create();
   }
 
-  public native JsonObject createObject() /*-{
-    return Object.create(null);
-  }-*/;
+  @Override
+  public JsonObject createObject() {
+    return JsJsonObject.create();
+  }
 
+  @Override
   @SuppressWarnings({"unchecked"})
-  public <T extends JsonValue> T parse(String jsonString) throws JsonException {
+  public JsonValue parse(String jsonString) throws JsonException {
     try {
       return parse0(jsonString);
     } catch (Exception e) {
       throw new JsonException("Can't parse " + jsonString);
     }
   }
-
-  private native <T extends JsonValue> T parse0(String jsonString) /*-{
-    // assume Chrome, safe and non-broken JSON.parse impl
-    return $wnd.JSON.parse(jsonString, function(key, value) {
-      if (typeof value === 'object') {
-        return value;
-      }
-      return Object(value);
-    });
-  }-*/;
 }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,6 +42,8 @@ public class CalendarModel {
 
   private static String[] dayOfMonthNames = new String[32];
 
+  private final String[] monthNames = new String[12];
+
   private final Date currentMonth;
 
   /**
@@ -67,20 +69,47 @@ public class CalendarModel {
       date.setDate(i);
       dayOfMonthNames[i] = getDayOfMonthFormatter().format(date);
     }
+
+    // finding month names
+    date.setDate(1);
+
+    for (int i = 0; i < 12; ++i) {
+      date.setMonth(i);
+
+      monthNames[i] = getMonthFormatter().format(date);
+    }
   }
 
   /**
    * Formats the current specified month. For example "Sep".
-   * 
+   *
    * @return the formatted month
    */
   public String formatCurrentMonth() {
-    return getMonthAndYearFormatter().format(currentMonth);
+    return getMonthFormatter().format(getCurrentMonth());
+  }
+
+  /**
+   * Formats the current specified date. For example "Sep 2013".
+   *
+   * @return the formatted month
+   */
+  public String formatCurrentMonthAndYear() {
+    return getMonthAndYearFormatter().format(getCurrentMonth());
+  }
+
+  /**
+   * Formats the current specified year. For example "2012".
+   *
+   * @return the formatted year
+   */
+  public String formatCurrentYear() {
+    return getYearFormatter().format(getCurrentMonth());
   }
 
   /**
    * Formats a date's day of month. For example "1".
-   * 
+   *
    * @param date the date
    * @return the formated day of month
    */
@@ -90,7 +119,7 @@ public class CalendarModel {
 
   /**
    * Format a day in the week. So, for example "Monday".
-   * 
+   *
    * @param dayInWeek the day in week to format
    * @return the formatted day in week
    */
@@ -99,8 +128,18 @@ public class CalendarModel {
   }
 
   /**
+   * Format a month in the year. So, for example "January".
+   *
+   * @param month the month to format
+   * @return the formatted month
+   */
+  public String formatMonth(int month) {
+    return monthNames[month];
+  }
+
+  /**
    * Gets the first day of the first week in the currently specified month.
-   * 
+   *
    * @return the first day
    */
   public Date getCurrentFirstDayOfFirstWeek() {
@@ -122,7 +161,7 @@ public class CalendarModel {
   /**
    * Gets the date representation of the currently specified month. Used to
    * access both the month and year information.
-   * 
+   *
    * @return the month and year
    */
   public Date getCurrentMonth() {
@@ -131,7 +170,7 @@ public class CalendarModel {
 
   /**
    * Is a date in the currently specified month?
-   * 
+   *
    * @param date the date
    * @return date
    */
@@ -141,7 +180,7 @@ public class CalendarModel {
 
   /**
    * Sets the currently specified date.
-   * 
+   *
    * @param currentDate the currently specified date
    */
   public void setCurrentMonth(Date currentDate) {
@@ -152,7 +191,7 @@ public class CalendarModel {
   /**
    * Shifts the currently specified date by the given number of months. The day
    * of the month will be pinned to the original value as far as possible.
-   * 
+   *
    * @param deltaMonths - number of months to be added to the current date
    */
   public void shiftCurrentMonth(int deltaMonths) {
@@ -162,7 +201,7 @@ public class CalendarModel {
 
   /**
    * Gets the date of month formatter.
-   * 
+   *
    * @return the day of month formatter
    */
   protected DateTimeFormat getDayOfMonthFormatter() {
@@ -171,7 +210,7 @@ public class CalendarModel {
 
   /**
    * Gets the day of week formatter.
-   * 
+   *
    * @return the day of week formatter
    */
   protected DateTimeFormat getDayOfWeekFormatter() {
@@ -180,7 +219,7 @@ public class CalendarModel {
 
   /**
    * Gets the month and year formatter.
-   * 
+   *
    * @return the month and year formatter
    */
   protected DateTimeFormat getMonthAndYearFormatter() {
@@ -188,9 +227,46 @@ public class CalendarModel {
   }
 
   /**
+   * Gets the month formatter.
+   *
+   * @return the month formatter
+   */
+  protected DateTimeFormat getMonthFormatter() {
+    return DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.MONTH_ABBR);
+  }
+
+  /**
+   * Gets the year formatter.
+   *
+   * @return the year formatter
+   */
+  protected DateTimeFormat getYearFormatter() {
+    return DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.YEAR);
+  }
+
+  /**
+   * Depending of the locale, the month can be put to the right or the left of the year
+   * @return
+   */
+  protected boolean isMonthBeforeYear() {
+    String monthAndYearPattern = getMonthAndYearFormatter().getPattern();
+
+    for (int i = 0; i < monthAndYearPattern.length(); ++i) {
+      switch (monthAndYearPattern.charAt(i)) {
+        case 'y':
+          return false;
+        case 'M':
+        case 'L':
+          return true;
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * Refresh the current model as needed.
    */
   protected void refresh() {
   }
-
 }

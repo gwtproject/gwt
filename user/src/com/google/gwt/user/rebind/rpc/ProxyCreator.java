@@ -302,8 +302,10 @@ public class ProxyCreator {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
 
-        typesSentFromBrowserBuilder.setLogOutputWriter(writer);
-        typesSentToBrowserBuilder.setLogOutputWriter(writer);
+        if (logger.isLoggable(TreeLogger.Type.DEBUG)) {
+          typesSentFromBrowserBuilder.setLogOutputWriter(writer);
+          typesSentToBrowserBuilder.setLogOutputWriter(writer);
+        }
 
         writer.write("====================================\n");
         writer.write("Types potentially sent from browser:\n");

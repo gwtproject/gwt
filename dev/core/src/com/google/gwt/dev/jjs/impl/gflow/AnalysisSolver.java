@@ -369,7 +369,9 @@ public class AnalysisSolver<N, E, T, G extends Graph<N, E, T>,
           Preconditions.checkArgument(start == node || end == node);
 
           if (!AssumptionUtil.equals(getEdgeAssumption(graph, edge), assumption)) {
-            setEdgeAssumption(graph, edge, assumption);
+            // The current assumption is joined with the result so far accumulated to guarantee
+            // analysis termination and correctness. See comment on {@link DataflowOptimizer}
+            setEdgeAssumption(graph, edge, assumption.join(getEdgeAssumption(graph, edge)));
 
             if (start == node) {
               if (end != null) {

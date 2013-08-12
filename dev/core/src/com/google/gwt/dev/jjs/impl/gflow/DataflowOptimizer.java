@@ -39,6 +39,17 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 /**
+ * This dataflow optimizer implements the algorithm described in "Composing Dataflow Analysis and
+ * Transformations" by Lerner et. all (POPL 2002).
+ *
+ * One key difference from the regular lattice based dataflow analysis, is that in order to
+ * take advantage of partially computed results from different analyses the flow functions might
+ * be applied to modified versions of the graphs rendering the actual flow functions non monotonic.
+ *
+ * In order to guarantee termination (and hence also correctness, see section 4.3 in the POPL paper)
+ * the results of the flow functions are always joined with the value computed on the previous
+ * round.
+ * See {@link AnalysisSolver#solveImpl(Graph, Analysis)}
  */
 public class DataflowOptimizer {
   public static String NAME = DataflowOptimizer.class.getSimpleName();

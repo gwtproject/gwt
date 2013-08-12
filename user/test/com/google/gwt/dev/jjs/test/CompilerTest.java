@@ -23,6 +23,7 @@ import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.LinkedList;
 
 /**
  * Miscellaneous tests of the Java to JavaScript compiler.
@@ -497,6 +498,33 @@ public class CompilerTest extends GWTTestCase {
     assertEquals(7, sideEffectChecker);
     String checkRescued = NonSideEffectCauser.NOT_A_COMPILE_TIME_CONSTANT;
     assertEquals(null, checkRescued);
+  }
+
+  /**
+   * Test for issue 7857.
+   */
+  public void testCompilerLoopDie() {
+    final int[] values = new int[10];
+
+    new LinkedList();
+    for (int i = 0; i < 6; ++i) {
+    }
+
+    final ArrayList pendingValues = new ArrayList();
+    final boolean greater = values[0] < values[1];
+
+    boolean more = false;
+    if (!greater) {
+      final int sum = pendingValues.size();
+      more = sum > 15;
+    }
+
+    if (greater || more) {
+    }
+    else {
+      for (int j = 0; pendingValues.size() > 6; ++j) {
+      }
+    }
   }
 
   public void testConditionals() {

@@ -36,6 +36,9 @@ import java.util.Map;
  * 
  * Empty ConstantsAssumption is a top of the lattice, and is not equals to 
  * null assumption (which is the bottom of every lattice).
+ *
+ * Encoding quirks: Only in the BOTTOM (null) ConstantsAssumption is a ConstantValue value BOTTOM.
+ * In every non BOTTOM ConstantsAssumption null and absent ConstantValues are TOP.
  */
 public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
   /**
@@ -66,7 +69,8 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
     }
 
     public ConstantsAssumption unwrap() {
-      if (assumption != null && assumption.isEmpty()) {
+      if (assumption != null && assumption.isTop()) {
+        // Return canonical TOP to speed up comparisons.
         return TOP;
       }
       return assumption;
@@ -81,19 +85,21 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
   }
   
   /**
-   * A wrapper around JValueLiteral to give it equals() method.
+   * A wrapper around JValueLiteral to represent a value in the analysis.
    */
-  private static class LiteralWrapper {
+  private static class ConstantValue {
     private final JValueLiteral literal;
+
+    private static final ConstantValue TOP = null;
     
-    LiteralWrapper(JValueLiteral literal) {
+    ConstantValue(JValueLiteral literal) {
       Preconditions.checkNotNull(literal);
       this.literal = literal;
     }
 
     @Override
     public boolean equals(Object obj) {
-      if (obj == null) {
+      if (obj == TOP) {
         return false;
       }
       
@@ -101,7 +107,7 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
         return true;
       }
       
-      LiteralWrapper other = (LiteralWrapper) obj;
+      ConstantValue other = (ConstantValue) obj;
       return equal(this.literal, other.literal);
     }
 
@@ -168,13 +174,22 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
     return value1;
   }
   
-  private static JValueLiteral join(LiteralWrapper wrapper1, 
-      LiteralWrapper wrapper2) {
-    if (wrapper1 == null || wrapper2 == null) {
-      return null;
+  private static ConstantValue join(ConstantValue thisValue,
+      ConstantValue thatValue) {
+    if (thisValue == ConstantValue.TOP || thatValue == ConstantValue.TOP) {
+      return ConstantValue.TOP;
     }
-    
-    return join(wrapper1.literal, wrapper2.literal);
+
+    if (thisValue == thatValue) {
+      return thisValue;
+    }
+
+    JValueLiteral valueLiteral = join(thisValue.literal, thatValue.literal);
+    if (valueLiteral == null) {
+      return ConstantValue.TOP;
+    }
+
+    return new ConstantValue(valueLiteral);
   }
 
   /**
@@ -182,17 +197,17 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
    * map, then variable assumption is _|_ (bottom), if variable's value is
    * null, then variable assumption is T - variable has non-constant value.
    */
-  private final Map<JVariable, LiteralWrapper> values;
+  private final Map<JVariable, ConstantValue> values;
 
   public ConstantsAssumption() {
-    values = new HashMap<JVariable, LiteralWrapper>();
+    values = new HashMap<JVariable, ConstantValue>();
   }
 
   public ConstantsAssumption(ConstantsAssumption a) {
     if (a != null) {
-      values = new HashMap<JVariable, LiteralWrapper>(a.values);
+      values = new HashMap<JVariable, ConstantValue>(a.values);
     } else {
-      values = new HashMap<JVariable, LiteralWrapper>();
+      values = new HashMap<JVariable, ConstantValue>();
     }
   }
 
@@ -213,8 +228,8 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
    * assumption for this variable. 
    */
   public JValueLiteral get(JVariable variable) {
-    LiteralWrapper wrapper = values.get(variable);
-    return wrapper != null ? wrapper.literal : null;
+    ConstantValue value = values.get(variable);
+    return value != ConstantValue.TOP ? value.literal : null;
   }
 
   /**
@@ -230,8 +245,8 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
     return values.hashCode();
   }
   
-  public boolean isEmpty() {
-    return values.isEmpty();
+  public boolean isTop() {
+    return this == TOP || values.isEmpty();
   }
 
   public ConstantsAssumption join(ConstantsAssumption other) {
@@ -239,7 +254,7 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
       return this;
     }
     
-    if (other == TOP || this == TOP || isEmpty() || other.isEmpty()) {
+    if (isTop() || other.isTop()) {
       return TOP;
     }
     
@@ -248,14 +263,15 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
     for (JVariable var : other.values.keySet()) {
       if (values.containsKey(var)) {
         // Var is present in both assumptions. Join their values.
-        JValueLiteral value = join(values.get(var), other.values.get(var));
-        if (value != null) {
-          result.values.put(var, new LiteralWrapper(value));
+        ConstantValue value = join(values.get(var), other.values.get(var));
+        if (value != ConstantValue.TOP) {
+          result.values.put(var, value);
         }
       } 
     }
     
-    if (result.isEmpty()) {
+    if (result.values.isEmpty()) {
+      // replace with the canonical TOP to speed comparisons.
       return TOP;
     }
     
@@ -263,7 +279,7 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
   }
 
   public String toDebugString() {
-    if (this == TOP || isEmpty()) {
+    if (isTop()) {
       return "T";
     }
     StringBuffer result = new StringBuffer();
@@ -277,7 +293,7 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
       }
       result.append(variable.getName());
       result.append(" = ");
-      if (values.get(variable) == null) {
+      if (values.get(variable) == ConstantValue.TOP) {
         result.append("T");
       } else {
         result.append(values.get(variable));
@@ -295,7 +311,7 @@ public class ConstantsAssumption implements Assumption<ConstantsAssumption> {
   
   void set(JVariable variable, JValueLiteral literal) {
     if (literal != null) {
-      values.put(variable, new LiteralWrapper(literal));
+      values.put(variable, new ConstantValue(literal));
     } else {
       values.remove(variable);
     }

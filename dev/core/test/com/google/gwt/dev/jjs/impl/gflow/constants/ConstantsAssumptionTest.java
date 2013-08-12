@@ -49,6 +49,24 @@ public class ConstantsAssumptionTest extends TestCase {
     a.set(i, null);
     assertEquals("{j = 1}", a.toString());
   }
+
+  /**
+   * Test algebraic properties of the join (\/) operator.
+   */
+  public void testJoin_Commutativity() {
+    ConstantsAssumption a1 = new ConstantsAssumption();
+    a1.set(i, zero);
+
+    ConstantsAssumption a2 = new ConstantsAssumption();
+    a2.set(j, zero);
+    assertEquals(a1.join(a2), a2.join(a1));
+
+    a2.set(i, zero);
+    assertEquals(a1.join(a2), a2.join(a1));
+
+    a1.set(i, one);
+    assertEquals(a1.join(a2), a2.join(a1));
+  }
   
   public void testJoin_SameValues() {
     ConstantsAssumption a1 = new ConstantsAssumption();

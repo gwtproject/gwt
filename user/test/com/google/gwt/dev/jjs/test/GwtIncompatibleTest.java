@@ -17,6 +17,8 @@ package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatible;
 import static com.google.gwt.dev.jjs.test.gwtincompatible.ClassWithGwtIncompatibleMethod.gwtIncompatibleMethod;
+
+import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatibleClass;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -76,6 +78,11 @@ public class GwtIncompatibleTest extends GWTTestCase {
         return -1; // new Foo().getNbrConstructors();
       }
      };
+  }
+
+  public void testExtendsGwtIncompatibleClass() {
+    // Have a reference to a GwtIncompatibleClass
+    GwtIncompatibleClass instance = (GwtIncompatibleClass) null;
   }
 
   public String getModuleName() {

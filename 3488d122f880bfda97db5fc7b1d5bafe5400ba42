@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "b85784b3_4e6ca472",
+        "filename": "samples/showcase/src/com/google/gwt/sample/showcase/client/content/widgets/CwDatePicker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T12:13:57Z",
+      "side": 1,
+      "message": "that would actually be a style violation :)",
+      "parentUuid": "987ba036_ce0c23c0",
+      "revId": "3488d122f880bfda97db5fc7b1d5bafe5400ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78dfcc7f_c556ecd8",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T12:13:57Z",
+      "side": 1,
+      "message": "this should read year",
+      "revId": "3488d122f880bfda97db5fc7b1d5bafe5400ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "987ba036_ee11dfd8",
         "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
         "patchSetId": 2

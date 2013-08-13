@@ -57,8 +57,36 @@ public class GwtIncompatibleJdtTest extends TestCase {
     addAll(builders, JavaResourceBase.getStandardResources());
     addAll(builders, GWTINCOMPATIBLE_ANNOTATION, GWTINCOMPATIBLE_METHOD,
         GWTINCOMPATIBLE_FIELD, GWTINCOMPATIBLE_INNERCLASS, GWTINCOMPATIBLE_ANONYMOUS_INNERCLASS);
-    Collection<CompilationUnit> units = JdtCompiler.compile(TreeLogger.NULL, builders);
+    List<CompilationUnit> units = JdtCompiler.compile(TreeLogger.NULL, builders);
     assertUnitsCompiled(units);
+  }
+
+  public void testCompileGwtIncompatibleTopLevelClass() throws Exception {
+    List<CompilationUnitBuilder> builders = new ArrayList<CompilationUnitBuilder>();
+    addAll(builders, JavaResourceBase.getStandardResources());
+    addAll(builders, GWTINCOMPATIBLE_ANNOTATION, GWTINCOMPATIBLE_TOPCLASS);
+    List<CompilationUnit> units = JdtCompiler.compile(TreeLogger.NULL, builders);
+    assertUnitsCompiled(units);
+  }
+
+  public void testCompileExtendsGwtIncompatibleTopLevelClass() throws Exception {
+    List<CompilationUnitBuilder> builders = new ArrayList<CompilationUnitBuilder>();
+    addAll(builders, JavaResourceBase.getStandardResources());
+    addAll(builders, GWTINCOMPATIBLE_ANNOTATION, GWTINCOMPATIBLE_TOPCLASS,
+        EXTENDS_GWTINCOMPATIBLE_TOPCLASS);
+    List<CompilationUnit> units = JdtCompiler.compile(TreeLogger.NULL, builders);
+    assertUnitsCompiled(units.subList(0, units.size() - 1));
+    assertUnitHasErrors(units.get(units.size() - 1), 1);
+  }
+
+  public void testCompileInstanciateGwtIncompatibleTopLevelClass() throws Exception {
+    List<CompilationUnitBuilder> builders = new ArrayList<CompilationUnitBuilder>();
+    addAll(builders, JavaResourceBase.getStandardResources());
+    addAll(builders, GWTINCOMPATIBLE_ANNOTATION, GWTINCOMPATIBLE_TOPCLASS,
+        INSTANCIATE_GWTINCOMPATIBLE_TOPCLASS);
+    List<CompilationUnit> units = JdtCompiler.compile(TreeLogger.NULL, builders);
+    assertUnitsCompiled(units.subList(0, units.size() - 1));
+    assertUnitHasErrors(units.get(units.size() - 1), 1);
   }
 
   public static final MockJavaResource GWTINCOMPATIBLE_ANNOTATION = new MockJavaResource(
@@ -132,6 +160,46 @@ public class GwtIncompatibleJdtTest extends TestCase {
       code.append("    int test() { return methodDoesNotExist(); }  \n");
       code.append("  }\n");
       code.append("  int test() { return 31; }  \n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  public static final MockJavaResource GWTINCOMPATIBLE_TOPCLASS = new MockJavaResource(
+      "com.google.gwt.GwtIncompatibleTopLevelClass") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("import com.google.gwt.GwtIncompatible;\n");
+      code.append("@GwtIncompatible(\" not compatible \") \n");
+      code.append("public class GwtIncompatibleTopLevelClass {\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  public static final MockJavaResource EXTENDS_GWTINCOMPATIBLE_TOPCLASS = new MockJavaResource(
+      "com.google.gwt.ExtendsGwtIncompatibleTopLevelClass") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("public class ExtendsGwtIncompatibleTopLevelClass\n");
+      code.append("   extends GwtIncompatibleTopLevelClass {\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  public static final MockJavaResource INSTANCIATE_GWTINCOMPATIBLE_TOPCLASS = new MockJavaResource(
+      "com.google.gwt.InstanciatesGwtIncompatibleTopLevelClass") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt;\n");
+      code.append("public class InstanciatesGwtIncompatibleTopLevelClass {\n");
+      code.append("    int test() { return new GwtIncompatibleTopLevelClass() ; }  \n");
       code.append("}\n");
       return code;
     }

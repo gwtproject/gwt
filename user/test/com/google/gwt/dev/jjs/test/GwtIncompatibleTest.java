@@ -17,6 +17,8 @@ package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatible;
 import static com.google.gwt.dev.jjs.test.gwtincompatible.ClassWithGwtIncompatibleMethod.gwtIncompatibleMethod;
+
+import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatibleClass;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -76,6 +78,37 @@ public class GwtIncompatibleTest extends GWTTestCase {
         return -1; // new Foo().getNbrConstructors();
       }
      };
+  }
+
+  private static class ExtendsGwtIncompatibleClass extends GwtIncompatibleClass {
+
+    @GwtIncompatible("incompatible because of call to super.size()")
+    public int size() {
+      return super.size() + 1;
+    }
+  }
+
+  public void testGwtIncompatibleReference() {
+    // Have a reference to a GwtIncompatibleClass
+    GwtIncompatibleClass instance = (GwtIncompatibleClass) null;
+
+    assertNull(instance);
+  }
+
+  public void testExtendsGwtIncompatibleClass() {
+    GwtIncompatibleClass instance = new GwtIncompatibleClass();
+
+    GwtIncompatibleClass subclass = new ExtendsGwtIncompatibleClass();
+
+    assertTrue("subclass should be instanceof GwtIcompatibleClass",
+        subclass instanceof GwtIncompatibleClass);
+
+    Class<GwtIncompatibleClass> gwtIncompatibleClassClass = GwtIncompatibleClass.class;
+
+    Class<ExtendsGwtIncompatibleClass> extendsGwtIncompatibleClassClass =
+        ExtendsGwtIncompatibleClass.class;
+
+    assertEquals(gwtIncompatibleClassClass, extendsGwtIncompatibleClassClass.getSuperclass());
   }
 
   public String getModuleName() {

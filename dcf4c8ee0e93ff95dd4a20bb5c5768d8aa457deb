@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "58e4c850_81133a1b",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T13:22:46Z",
+      "side": 1,
+      "message": "we should not rebind to RequestImplIE6To9 since the bug has been fixed that required us to rebind in the first place.",
+      "revId": "dcf4c8ee0e93ff95dd4a20bb5c5768d8aa457deb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58b2085d_f13da8d6",
+        "filename": "user/src/com/google/gwt/layout/Layout.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T13:22:46Z",
+      "side": 1,
+      "message": "we should test to rebind to LayoutImpl instead",
+      "revId": "dcf4c8ee0e93ff95dd4a20bb5c5768d8aa457deb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dd62183_0d7015df",
         "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
         "patchSetId": 5
@@ -54,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "58b2085d_3128d091",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T13:22:46Z",
+      "side": 1,
+      "message": "we need to create an issue for that at least, since IE10 supports typed arrays.",
+      "revId": "dcf4c8ee0e93ff95dd4a20bb5c5768d8aa457deb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b85784b3_4e26e42d",
         "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
         "patchSetId": 5
@@ -82,6 +133,23 @@
       "writtenOn": "2013-08-13T13:04:31Z",
       "side": 1,
       "message": "do we still need the IE6 specific version for TreeItem in IE10",
+      "revId": "dcf4c8ee0e93ff95dd4a20bb5c5768d8aa457deb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58b2085d_114e6c69",
+        "filename": "user/src/com/google/gwt/xml/XML.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-08-13T13:22:46Z",
+      "side": 1,
+      "message": "since IE10 introcuded the standard DOMParser object we should be using the standard implementation as well.",
       "revId": "dcf4c8ee0e93ff95dd4a20bb5c5768d8aa457deb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

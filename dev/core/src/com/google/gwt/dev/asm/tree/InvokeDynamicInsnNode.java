@@ -29,84 +29,72 @@
  */
 package com.google.gwt.dev.asm.tree;
 
+import java.util.Map;
+
+import com.google.gwt.dev.asm.Handle;
 import com.google.gwt.dev.asm.MethodVisitor;
+import com.google.gwt.dev.asm.Opcodes;
 
 /**
- * A node that represents a local variable declaration.
+ * A node that represents an invokedynamic instruction.
  * 
- * @author Eric Bruneton
+ * @author Remi Forax
  */
-public class LocalVariableNode {
+public class InvokeDynamicInsnNode extends AbstractInsnNode {
 
     /**
-     * The name of a local variable.
+     * Invokedynamic name.
      */
     public String name;
 
     /**
-     * The type descriptor of this local variable.
+     * Invokedynamic descriptor.
      */
     public String desc;
 
     /**
-     * The signature of this local variable. May be <tt>null</tt>.
+     * Bootstrap method
      */
-    public String signature;
+    public Handle bsm;
 
     /**
-     * The first instruction corresponding to the scope of this local variable
-     * (inclusive).
+     * Bootstrap constant arguments
      */
-    public LabelNode start;
+    public Object[] bsmArgs;
 
     /**
-     * The last instruction corresponding to the scope of this local variable
-     * (exclusive).
-     */
-    public LabelNode end;
-
-    /**
-     * The local variable's index.
-     */
-    public int index;
-
-    /**
-     * Constructs a new {@link LocalVariableNode}.
+     * Constructs a new {@link InvokeDynamicInsnNode}.
      * 
      * @param name
-     *            the name of a local variable.
+     *            invokedynamic name.
      * @param desc
-     *            the type descriptor of this local variable.
-     * @param signature
-     *            the signature of this local variable. May be <tt>null</tt>.
-     * @param start
-     *            the first instruction corresponding to the scope of this local
-     *            variable (inclusive).
-     * @param end
-     *            the last instruction corresponding to the scope of this local
-     *            variable (exclusive).
-     * @param index
-     *            the local variable's index.
+     *            invokedynamic descriptor (see {@link com.google.gwt.dev.asm.Type}).
+     * @param bsm
+     *            the bootstrap method.
+     * @param bsmArgs
+     *            the boostrap constant arguments.
      */
-    public LocalVariableNode(final String name, final String desc,
-            final String signature, final LabelNode start, final LabelNode end,
-            final int index) {
+    public InvokeDynamicInsnNode(final String name, final String desc,
+            final Handle bsm, final Object... bsmArgs) {
+        super(Opcodes.INVOKEDYNAMIC);
         this.name = name;
         this.desc = desc;
-        this.signature = signature;
-        this.start = start;
-        this.end = end;
-        this.index = index;
+        this.bsm = bsm;
+        this.bsmArgs = bsmArgs;
     }
 
-    /**
-     * Makes the given visitor visit this local variable declaration.
-     * 
-     * @param mv
-     *            a method visitor.
-     */
+    @Override
+    public int getType() {
+        return INVOKE_DYNAMIC_INSN;
+    }
+
+    @Override
     public void accept(final MethodVisitor mv) {
-        mv.visitLocalVariable(name, desc, signature, start.getLabel(),
-                end.getLabel(), index);
+        mv.visitInvokeDynamicInsn(name, desc, bsm, bsmArgs);
+    }
+
+    @Override
+    public AbstractInsnNode clone(final Map<LabelNode, LabelNode> labels) {
+        return new InvokeDynamicInsnNode(name, desc, bsm, bsmArgs);
     }
 }

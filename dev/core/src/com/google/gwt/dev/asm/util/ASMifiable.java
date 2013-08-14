@@ -1,4 +1,4 @@
-/***
+/**
  * ASM: a very small and fast Java bytecode manipulation framework
  * Copyright (c) 2000-2011 INRIA, France Telecom
  * All rights reserved.
@@ -29,48 +29,28 @@
  */
 package com.google.gwt.dev.asm.util;
 
-import com.google.gwt.dev.asm.AnnotationVisitor;
-import com.google.gwt.dev.asm.Attribute;
-import com.google.gwt.dev.asm.FieldVisitor;
-import com.google.gwt.dev.asm.Opcodes;
+import java.util.Map;
+
+import com.google.gwt.dev.asm.Label;
 
 /**
- * A {@link FieldVisitor} that prints the fields it visits with a
- * {@link Printer}.
+ * An {@link com.google.gwt.dev.asm.Attribute Attribute} that can print the ASM code
+ * to create an equivalent attribute.
  * 
- * @author Eric Bruneton
+ * @author Eugene Kuleshov
  */
-public final class TraceFieldVisitor extends FieldVisitor {
+public interface ASMifiable {
 
-    public final Printer p;
-
-    public TraceFieldVisitor(final Printer p) {
-        this(null, p);
-    }
-
-    public TraceFieldVisitor(final FieldVisitor fv, final Printer p) {
-        super(Opcodes.ASM4, fv);
-        this.p = p;
-    }
-
-    @Override
-    public AnnotationVisitor visitAnnotation(final String desc,
-            final boolean visible) {
-        Printer p = this.p.visitFieldAnnotation(desc, visible);
-        AnnotationVisitor av = fv == null ? null : fv.visitAnnotation(desc,
-                visible);
-        return new TraceAnnotationVisitor(av, p);
-    }
-
-    @Override
-    public void visitAttribute(final Attribute attr) {
-        p.visitFieldAttribute(attr);
-        super.visitAttribute(attr);
-    }
-
-    @Override
-    public void visitEnd() {
-        p.visitFieldEnd();
-        super.visitEnd();
-    }
+    /**
+     * Prints the ASM code to create an attribute equal to this attribute.
+     * 
+     * @param buf
+     *            a buffer used for printing Java code.
+     * @param varName
+     *            name of the variable in a printed code used to store attribute
+     *            instance.
+     * @param labelNames
+     *            map of label instances to their names.
+     */
+    void asmify(StringBuffer buf, String varName, Map<Label, String> labelNames);
 }

@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98c000c1_a933b90c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "Your other strip methods are working in-place and this has a return type and one of the callers is not looking at the return type.\nIt is confusing and difficult to track when the method behaves it is inconsistent w.r.t the verb used in its name.\n\nI would change this method to be in-place.",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_491a057f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "instantiated",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_49016517",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "can you extract a method for this assertion pattern to prevent any typos. Like:\n\n  assertOnlyLastUnitHasError(units);",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_e908113a",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "Just EXTENDS_GWTINCOMPATIBLE ?",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_89135d70",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "Just INSTANTIATE_GWTINCOMPATIBLE",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_c90d5548",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "typo in \u0027instantiate\u0027 all over the class :)",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_89387de8",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/GwtIncompatibleTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "test the behavior for anonymous and non-anonymous inner classes?",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_292349c1",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/GwtIncompatibleClass.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-14T23:10:55Z",
+      "side": 1,
+      "message": "I didn\u0027t understand the javadoc.",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

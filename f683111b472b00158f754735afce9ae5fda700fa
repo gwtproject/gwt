@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98c000c1_09f76d0d",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/TypeTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-14T22:42:10Z",
+      "side": 1,
+      "message": "Add here the test suggested by Daniel\n\nassertTrue(Object.class instanceof Type);",
+      "revId": "f683111b472b00158f754735afce9ae5fda700fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_29fa29f5",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/TypeTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-14T22:42:10Z",
+      "side": 1,
+      "message": "Make this class private so that checkstyle does not complain about the java doc.",
+      "revId": "f683111b472b00158f754735afce9ae5fda700fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

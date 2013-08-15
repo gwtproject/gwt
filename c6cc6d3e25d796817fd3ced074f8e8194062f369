@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "98c000c1_29286991",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Fix typos.",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98c000c1_a933b90c",
         "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
         "patchSetId": 4
@@ -13,6 +30,24 @@
       "writtenOn": "2013-08-14T23:10:55Z",
       "side": 1,
       "message": "Your other strip methods are working in-place and this has a return type and one of the callers is not looking at the return type.\nIt is confusing and difficult to track when the method behaves it is inconsistent w.r.t the verb used in its name.\n\nI would change this method to be in-place.",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_a95c5928",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_a933b90c",
       "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "98c000c1_c990b59c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_491a057f",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98c000c1_49016517",
         "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
         "patchSetId": 4
@@ -47,6 +100,24 @@
       "writtenOn": "2013-08-14T23:10:55Z",
       "side": 1,
       "message": "can you extract a method for this assertion pattern to prevent any typos. Like:\n\n  assertOnlyLastUnitHasError(units);",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_2996a995",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_49016517",
       "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "98c000c1_69a0a1e9",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_e908113a",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98c000c1_89135d70",
         "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
         "patchSetId": 4
@@ -81,6 +170,24 @@
       "writtenOn": "2013-08-14T23:10:55Z",
       "side": 1,
       "message": "Just INSTANTIATE_GWTINCOMPATIBLE",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_499de5ab",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_89135d70",
       "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "98c000c1_a96a99ac",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c000c1_c90d5548",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98c000c1_89387de8",
         "filename": "user/test/com/google/gwt/dev/jjs/test/GwtIncompatibleTest.java",
         "patchSetId": 4
@@ -121,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "98c000c1_a9b8d910",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/GwtIncompatibleTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "That is done. Foo was a non anonymous inner class.",
+      "parentUuid": "98c000c1_89387de8",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98c000c1_292349c1",
         "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/GwtIncompatibleClass.java",
         "patchSetId": 4
@@ -132,6 +275,24 @@
       "writtenOn": "2013-08-14T23:10:55Z",
       "side": 1,
       "message": "I didn\u0027t understand the javadoc.",
+      "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_c9b7151d",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/gwtincompatible/GwtIncompatibleClass.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-15T01:04:11Z",
+      "side": 1,
+      "message": "Clarified, I think.",
+      "parentUuid": "98c000c1_292349c1",
       "revId": "c6cc6d3e25d796817fd3ced074f8e8194062f369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

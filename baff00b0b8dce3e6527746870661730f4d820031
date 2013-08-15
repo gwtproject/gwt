@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98c000c1_694b8159",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/TypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-15T00:35:00Z",
+      "side": 1,
+      "message": "remove extra spaces",
+      "revId": "baff00b0b8dce3e6527746870661730f4d820031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c000c1_094e4d69",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/TypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-15T00:35:00Z",
+      "side": 1,
+      "message": "You only need assertTrue(Object.class instanceof Type);\n\nThe rest will break GWT test for the cases where there is no metadata available.",
+      "revId": "baff00b0b8dce3e6527746870661730f4d820031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -86,7 +86,17 @@ public abstract class TempLocalVisitor extends JModVisitor {
       if (target instanceof JLocal) {
         String name = target.getName();
         if (name.startsWith(PREFIX)) {
-          curScope.recordTempAllocated(Integer.parseInt(name.substring(PREFIX.length()), 10));
+          try {
+            curScope.recordTempAllocated(Integer.parseInt(name.substring(PREFIX.length()), 10));
+          } catch (NumberFormatException e) {
+            // Skip user variables that start with PREFIX.
+            // TODO(rluble): User variables that are named $tNNN might pose a problem because
+            // this visitor assumes that the lifetime of a variable is contained by the block
+            // scope that has its declaration.
+            // Although it seems a safe assumption, user variables might have been extruded from
+            // their declaration scope by for example the copy propagation performed in
+            // DataflowOptimizer.
+          }
         }
       }
     }

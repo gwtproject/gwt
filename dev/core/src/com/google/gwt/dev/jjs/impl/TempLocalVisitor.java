@@ -86,7 +86,11 @@ public abstract class TempLocalVisitor extends JModVisitor {
       if (target instanceof JLocal) {
         String name = target.getName();
         if (name.startsWith(PREFIX)) {
-          curScope.recordTempAllocated(Integer.parseInt(name.substring(PREFIX.length()), 10));
+          try {
+            curScope.recordTempAllocated(Integer.parseInt(name.substring(PREFIX.length()), 10));
+          } catch (NumberFormatException e) {
+            // Check skip user variables that start with PREFIX.
+          }
         }
       }
     }

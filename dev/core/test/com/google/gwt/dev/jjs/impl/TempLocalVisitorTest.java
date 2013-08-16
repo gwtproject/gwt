@@ -20,13 +20,18 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
+import com.google.gwt.dev.jjs.ast.JBlock;
+import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodBody;
+import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JVisitor;
 
 /**
  * Test for {@link TempLocalVisitor}.
@@ -118,6 +123,23 @@ public class TempLocalVisitorTest extends JJSTestBase {
      * TODO(scottb): technically we could reuse $t1 here as a minor improvement.
      */
     expected.append("int $t3; int j = $t3 = 4;");
+
+    assertTransform(original.toString()).into(expected.toString());
+  }
+
+  /**
+   * Test for issue 8304.
+   */
+  public void testNamingConflict() throws Exception {
+    StringBuilder original = new StringBuilder();
+    original.append("boolean $type = false;");
+    original.append("for (int i = 3; $type; );");
+
+    StringBuilder expected = new StringBuilder();
+    expected.append("boolean $t0;");
+    expected.append("boolean $type = $t0 = false;");
+    expected.append("boolean $t2;");
+    expected.append("for (int $t1, i = $t1 = 3; $t2 = $type; );");
 
     assertTransform(original.toString()).into(expected.toString());
   }

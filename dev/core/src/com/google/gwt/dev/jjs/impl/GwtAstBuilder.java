@@ -53,6 +53,7 @@ import com.google.gwt.dev.jjs.ast.JField.Disposition;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JFloatLiteral;
 import com.google.gwt.dev.jjs.ast.JForStatement;
+import com.google.gwt.dev.jjs.ast.JGwtCreateParameter;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JIntLiteral;
@@ -109,6 +110,7 @@ import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AllocationExpression;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
@@ -3254,6 +3256,14 @@ public class GwtAstBuilder {
       throw ice;
     }
   }
+ 
+  private void createGwtCreateParameter(SourceInfo info, LocalVariableBinding binding,
+      JMethod method) {
+    JGwtCreateParameter param =
+        new JGwtCreateParameter(info, intern(binding.name), typeMap.get(binding.type), binding
+            .isFinal(), false, method);
+    method.addParam(param);
+  }
 
   private void createMethod(AbstractMethodDeclaration x) {
     if (x instanceof Clinit) {
@@ -3344,7 +3354,11 @@ public class GwtAstBuilder {
       for (Argument argument : x.arguments) {
         SourceInfo info = makeSourceInfo(argument);
         LocalVariableBinding binding = argument.binding;
-        createParameter(info, binding, method);
+        if (isGwtCreateParameter(argument)) {
+          createGwtCreateParameter(info, binding, method);
+        } else {
+          createParameter(info, binding, method);
+        }
       }
     }
     method.freezeParamTypes();
@@ -3418,6 +3432,21 @@ public class GwtAstBuilder {
       JClassType type = (JClassType) typeMap.get(thrownBinding);
       method.addThrownException(type);
     }
+  }
+  
+  private boolean isGwtCreateParameter(LocalDeclaration x) {
+    if (x.annotations == null) {
+      return false;
+    }
+    for (Annotation a : x.annotations) {
+      // ReferenceBinding binding = a.getAnnotationType();
+      ReferenceBinding binding = (ReferenceBinding) a.resolvedType;
+      String name = CharOperation.toString(binding.compoundName);
+      if (name.equals("com.google.gwt.core.shared.GwtCreate")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private void resolveTypeRefs(TypeDeclaration x) {

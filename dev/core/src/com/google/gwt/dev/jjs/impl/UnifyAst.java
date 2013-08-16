@@ -26,6 +26,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -44,6 +45,7 @@ import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JGwtCreate;
+import com.google.gwt.dev.jjs.ast.JGwtCreateParameter;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -56,6 +58,8 @@ import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
+import com.google.gwt.dev.jjs.ast.JParameter;
+import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -264,6 +268,9 @@ public class UnifyAst {
         // Should not have an overridden type at this point.
         assert x.getType() == target.getType();
       }
+      if (!bindGwtCreateFactoryArgs(x)) {
+        return;
+      }
       flowInto(target);
     }
 
@@ -356,6 +363,33 @@ public class UnifyAst {
     @Override
     public boolean visit(JMethod x, Context ctx) {
       currentMethod = x;
+
+      JDeclaredType factoryType = program.getIndexedType("GwtCreateFactory");
+      int len = x.getParams().size();
+      boolean isGwtCreateMethod = false;
+
+      for (int i = 0; i < len; i++) {
+        JParameter p = x.getParams().get(i);
+        if (p instanceof JGwtCreateParameter) {
+          if (!x.isAbstract() && !p.isFinal()) {
+            error(x, "@GwtCreate params must be final in non abstract methods");
+            return false;
+          }
+          if (!p.getType().getName().equals("java.lang.Class")) {
+            error(x, "@GwtCreate params must be of type java.lang.Class");
+            return false;
+          }
+          SourceInfo info = p.getSourceInfo();
+          JParameter fp =
+              new JParameter(info, p.getName() + "$factory", factoryType, true, false, x);
+          x.addParam(fp);
+          ((JGwtCreateParameter) p).setFactoryParam(fp);
+          isGwtCreateMethod = true;
+        }
+      }
+      if (isGwtCreateMethod) {
+        gwtCreateMethods.add(x);
+      }
       return true;
     }
 
@@ -367,9 +401,56 @@ public class UnifyAst {
       return !magicMethodCalls.contains(target);
     }
 
+    private boolean bindGwtCreateFactoryArgs(JMethodCall x) {
+      List<JParameter> param = x.getTarget().getParams();
+      int len = x.getArgs().size();
+      for (int i = 0; i < len; i++) {
+        JExpression arg = x.getArgs().get(i);
+        JParameter p = param.get(i);
+        if (p instanceof JGwtCreateParameter) {
+          JExpression exp;
+          if (arg instanceof JClassLiteral) {
+            JClassLiteral classLiteral = (JClassLiteral) arg;
+            if (!(classLiteral.getRefType() instanceof JDeclaredType)) {
+              error(x, "Only classes and interfaces may be used as literal arguments to @GwtCreate");
+              return false;
+            }
+            exp = newGwtCreateFactoryExpression((JDeclaredType) classLiteral.getRefType());
+          } else if (arg instanceof JParameterRef) {
+            JParameterRef ref = (JParameterRef) arg;
+            if (!(ref.getParameter() instanceof JGwtCreateParameter)) {
+              error(x,
+                  "Only @GwtCreate parameters may be used as identifier arguments to @GwtCreate");
+              return false;
+            }
+            JGwtCreateParameter createParam = (JGwtCreateParameter) ref.getParameter();
+            exp = new JParameterRef(x.getSourceInfo(), createParam.getFactoryParam());
+          } else {
+            error(x,
+                "Only @GwtCreate parameters or class literals may be used as arguments to @GwtCreate");
+            return false;
+          }
+          x.addArg(exp);
+        }
+      }
+      return true;
+    }
+
     private JExpression handleGwtCreate(JMethodCall x) {
       assert (x.getArgs().size() == 1);
       JExpression arg = x.getArgs().get(0);
+      if (arg instanceof JParameterRef) {
+        JParameter param = ((JParameterRef) arg).getParameter();
+        if (!(param instanceof JGwtCreateParameter)) {
+          error(x, "Only params annotated with @GwtCreate may be used as arguments to GWT.create()");
+          return null;
+        }
+        SourceInfo info = x.getSourceInfo();
+        JParameter factory = ((JGwtCreateParameter) param).getFactoryParam();
+        JParameterRef factoryRef = new JParameterRef(info, factory);
+        JMethod create = program.getIndexedMethod("GwtCreateFactory.create");
+        return new JMethodCall(info, factoryRef, create);
+      }
       if (!(arg instanceof JClassLiteral)) {
         error(x, "Only class literals may be used as arguments to GWT.create()");
         return null;
@@ -467,7 +548,59 @@ public class UnifyAst {
       }
       throw new InternalCompilerException("Unknown magic method");
     }
-  }
+    
+    private JNewInstance newGwtCreateFactoryExpression(JDeclaredType target) {
+
+      // Stored constructor
+      JConstructor ctor = gwtCreateFactoryConstructors.get(target.getName());
+
+      if (ctor == null) {
+
+        SourceInfo info = target.getSourceInfo();
+
+        String name = target.getName() + "$GwtCreateFactory";
+        JDeclaredType factoryType = program.getIndexedType("GwtCreateFactory");
+        JClassType factoryImpl = new JClassType(info, name, false, true);
+        factoryImpl.addImplements((JInterfaceType) factoryType);
+        factoryImpl.setSuperClass(program.getTypeJavaLangObject());
+
+        // clinit
+        JMethod clinit =
+            new JMethod(info, "$clinit", factoryImpl, JPrimitiveType.VOID, false, true, true,
+                AccessModifier.PRIVATE);
+        clinit.setBody(new JMethodBody(info));
+        clinit.freezeParamTypes();
+        clinit.setSynthetic();
+        factoryImpl.addMethod(clinit);
+
+        // Constructor
+        ctor = new JConstructor(info, factoryImpl);
+        ctor.setBody(new JMethodBody(info));
+        factoryImpl.addMethod(ctor);
+
+        // create()
+        JMethod createMethod =
+            new JMethod(info, "create", factoryImpl, program.getTypeJavaLangObject(), false, false,
+                true, AccessModifier.PUBLIC);
+        createMethod.addOverride(program.getIndexedMethod("GwtCreateFactory.create"));
+        JMethod gwtCreate = program.getIndexedMethod("GWT.create");
+        JMethodBody body = new JMethodBody(info);
+        JMethodCall gwtCreateCall = new JMethodCall(info, null, gwtCreate);
+        gwtCreateCall.addArg(new JClassLiteral(info, target));
+        body.getBlock().addStmt(new JReturnStatement(info, gwtCreateCall));
+        createMethod.setBody(body);
+        createMethod.freezeParamTypes();
+        factoryImpl.addMethod(createMethod);
+
+        // add this new class
+        program.addType(factoryImpl);
+        instantiate(factoryImpl);
+
+        gwtCreateFactoryConstructors.put(target.getName(), ctor);
+      }
+      return new JNewInstance(target.getSourceInfo(), ctor, ctor.getEnclosingType());
+    }
+}
 
   private static final String CLASS_DESIRED_ASSERTION_STATUS =
       "java.lang.Class.desiredAssertionStatus()Z";
@@ -519,6 +652,9 @@ public class UnifyAst {
   private boolean errorsFound = false;
   private final Set<CompilationUnit> failedUnits = new IdentityHashSet<CompilationUnit>();
   private final Map<String, JField> fieldMap = new HashMap<String, JField>();
+  private final Map<String, JConstructor> gwtCreateFactoryConstructors =
+      new HashMap<String, JConstructor>();
+  private final Set<JMethod> gwtCreateMethods = new IdentityHashSet<JMethod>();
 
   /**
    * The set of types currently known to be instantiable. Like
@@ -736,6 +872,35 @@ public class UnifyAst {
     return true;
   }
 
+  private boolean checkGwtCreateOverride(JMethod method, JMethod upref) {
+    if (gwtCreateMethods.contains(method) || gwtCreateMethods.contains(upref)) {
+      int len = method.getParams().size();
+      for (int i = 0; i < len; i++) {
+        JParameter param = method.getParams().get(i);
+
+        // We check only Class parameters
+        if (param.getType().getName().equals("java.lang.Class")) {
+
+          JParameter urParam = upref.getParams().get(i);
+
+          boolean isCreateParam = param instanceof JGwtCreateParameter;
+          boolean isUrCreateParam = urParam instanceof JGwtCreateParameter;
+
+          if (isCreateParam && !isUrCreateParam) {
+            error(param, "@GwtCreate annotation is not present in overriden methods");
+            return false;
+          }
+
+          if (!isCreateParam && isUrCreateParam) {
+            error(param, "@GwtCreate annotation is not present in overriding method");
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+  
   private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
     if (type == null) {
       return;
@@ -774,6 +939,9 @@ public class UnifyAst {
         if (method.canBePolymorphic()) {
           for (JMethod upref : collected.get(method.getSignature())) {
             if (canAccessSuperMethod(type, upref)) {
+              if (!checkGwtCreateOverride(method, upref)) {
+                return;
+              }
               method.addOverride(upref);
             }
           }

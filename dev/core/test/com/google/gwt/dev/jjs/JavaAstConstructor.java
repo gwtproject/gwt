@@ -154,7 +154,20 @@ public class JavaAstConstructor {
           code.append("}\n");
           return code;
         }
-      };
+      };      
+
+  public static final MockJavaResource GWT_CREATE_FACTORY = new MockJavaResource(
+      "com.google.gwt.lang.GwtCreateFactory") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.google.gwt.lang;\n");
+      code.append("public interface GwtCreateFactory {\n");
+      code.append("  <T> T create();\n");
+      code.append("}\n");
+      return code;
+    }
+  };
 
   public static final MockJavaResource GWT_SHARED =
       new MockJavaResource("com.google.gwt.core.shared.GWT") {
@@ -239,7 +252,7 @@ public class JavaAstConstructor {
     result.remove(JavaResourceBase.CLASS);
     result.remove(JavaResourceBase.ENUM);
     Collections.addAll(result, ASYNCFRAGMENTLOADER, ARRAY, CAST, CLASS, CLASSLITERALHOLDER, ENUM,
-        GWT, GWT_SHARED, RUNASYNCCALLBACK, RUNASYNCCODE);
+        GWT, GWT_CREATE_FACTORY, GWT_SHARED, RUNASYNCCALLBACK, RUNASYNCCODE);
     return result.toArray(new MockJavaResource[result.size()]);
   }
 }

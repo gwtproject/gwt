@@ -16,6 +16,24 @@
       "revId": "fad916f375af467965dc683df3cba3ff1017856c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d3fd4b6_501dccd8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TempLocalVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-17T20:16:11Z",
+      "side": 1,
+      "message": "That would not work across different passes and still there will be the need to check against potential user variables with the same name as a temporary.\n\nI think a solution would be to give all temps the same name and let the pass at the end (the one that is not yet committed) fix duplicates",
+      "parentUuid": "4d3a48c6_11f4ec05",
+      "revId": "fad916f375af467965dc683df3cba3ff1017856c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d3a48c6_11f4ec05",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TempLocalVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-08-17T00:31:35Z",
+      "side": 1,
+      "message": "i don\u0027t like relying on the NumberFormatException as the backoff mechanism. we should be able to know the name is a tempLocal without having to parse (or fail to parse) its name\n\nwe could add a Set\u003cJLocal\u003e tempLocals; to the class and populate the set in createTempLocal().\n\nthen here in endVisit() we could do\nif (tempLocals.contains(target)), instead of this if (name.startsWIth(PREFIX)) {, check",
+      "revId": "fad916f375af467965dc683df3cba3ff1017856c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

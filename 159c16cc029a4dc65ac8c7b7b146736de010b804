@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d838cc5_c2f9e2ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Could you please explain here what \"incorrect behaviour\" is being fixed by this change? I don\u0027t want to have to jump to the issue tracker to understand what was wrong when I\u0027ll read the history and/or bisect in a few months from now.\n\nThat line should also be the first one of the commit message to make reading the history easier (\"Fix issue  Issue 8306\" doesn\u0027t tell me it\u0027s about Elemental\u0027s JSON)\n\nAnd as you\u0027re at it, instead of \"Fix issue Issue 8306\", put a \"Bug:\" line in the footer:\n\n Bug: issue 8306\n Change-Id: I36f19147a7235c5cfb7e38d366ce8a2c694b079c\n\nThat\u0027ll make it easy to search for reviews around that bug in Gerrit with \"tr:8306\"",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_023eea9e",
+        "filename": "elemental/src/elemental/js/json/JsJsonArray.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Do we really need to \"box\" doubles and booleans given that we\u0027ll \"box\" them in get(int) anyway?",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_625496ce",
+        "filename": "elemental/src/elemental/js/json/JsJsonFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Given that Object(value) returns value as-is if it\u0027s of type Object, the typeof check above is not needed except for excluding \u0027null\u0027, so how about using the same approach as in JsJsonValue.box?\n\n  return value \u003d\u003d null ? null : Object(value)\n\nOr maybe just call box() (it\u0027ll make a call to GWT.isScript each time, which could severely impact performances, but in DevMode, most of the time, I\u0027d expect people to use a JreJsonFactory rather than a JsJsonFactory)\n\nBTW, is this actually necessary with the other change to JsJsonArray that now box() all values on getting? Couldn\u0027t we just defer to JsonUtils.safeEval() like the super-source\u0027d JreJsonValue.toNative() does? (for other reasons)",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_a2613eaf",
+        "filename": "elemental/src/elemental/js/json/JsJsonString.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Side-note: that won\u0027t work in DevMode right?",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_e240a611",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Would it be more readable with:\n\n // box for DevMode, not ProdMode; unless value is null.\n return @com.google.gwt.core.client.GWT::isScript()() || value \u003d\u003d null ? value : Object(value);\n\n?",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_a2137e17",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Isn\u0027t it buggy as well?\n\nEverything\u0027s always \"boxed\" in DevMode, so we have a Boolean object (rather than a Boolean value). \"!!\" will thus always be \"true\" regardless of the value of the Boolean.\n\nI think we need the .valueOf() call to be inside the parens. Note that it\u0027d then fail for \u0027null\u0027, so we\u0027d need to special-case it.",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d838cc5_62c9f66f",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-19T09:35:33Z",
+      "side": 1,
+      "message": "Side-note: I don\u0027t think this .valueOf() is actually necessary: the \"+\" unary operator will coerce the object to a Number value, we\u0027re sure to never have a Number object there (unless the JS engine is buggy, but Elemental isn\u0027t targeted at these buggy engines anyway). This is similar to how asString below just uses the \"\"+ trick without special-casing DevMode vs. prod mode.",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

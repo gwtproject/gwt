@@ -22,8 +22,8 @@ import com.google.gwt.text.shared.SafeHtmlRenderer;
 import java.util.Set;
 
 /**
- * A superclass for {@link Cell}s that render or escape a String argument as
- * HTML.
+ * A superclass for {@link Cell Cells} that render or escape a String argument
+ * as HTML.
  *
  * @param <C> the type that this Cell represents
  */

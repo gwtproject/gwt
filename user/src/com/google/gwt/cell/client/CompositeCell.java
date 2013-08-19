@@ -28,7 +28,7 @@ import java.util.Set;
 
 /**
  * <p>
- * A {@link Cell} that is composed of other {@link Cell}s.
+ * A {@link Cell} that is composed of other {@link Cell Cells}.
  * </p>
  * 
  * <p>

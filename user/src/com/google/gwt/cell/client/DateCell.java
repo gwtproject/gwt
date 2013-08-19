@@ -25,7 +25,7 @@ import com.google.gwt.text.shared.SimpleSafeHtmlRenderer;
 import java.util.Date;
 
 /**
- * A {@link Cell} used to render {@link Date}s.
+ * A {@link Cell} used to render {@link Date Dates}.
  */
 public class DateCell extends AbstractCell<Date> {
 

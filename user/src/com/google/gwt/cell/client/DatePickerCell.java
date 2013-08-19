@@ -38,9 +38,9 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import java.util.Date;
 
 /**
- * A {@link Cell} used to render and edit {@link Date}s. When a cell is selected
- * by clicking on it, a {@link DatePicker} is popped up. When a date is selected
- * using the {@link DatePicker}, the new date is passed to the
+ * A {@link Cell} used to render and edit {@link Date Dates}. When a cell is
+ * selected by clicking on it, a {@link DatePicker} is popped up. When a date
+ * is selected using the {@link DatePicker}, the new date is passed to the
  * {@link ValueUpdater#update update} method of the {@link ValueUpdater} that
  * was passed to {@link #onBrowserEvent} for the click event. Note that this
  * means that the call to {@link ValueUpdater#update} will occur after {@link

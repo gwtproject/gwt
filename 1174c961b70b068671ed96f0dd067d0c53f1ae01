@@ -34,6 +34,24 @@
       "revId": "1174c961b70b068671ed96f0dd067d0c53f1ae01",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed513c1f_5a13a5dd",
+        "filename": "user/src/com/google/gwt/user/client/ui/RadioButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5615
+      },
+      "writtenOn": "2013-08-19T19:12:45Z",
+      "side": 1,
+      "message": "this will render as \u003ca href\u003d\"link to code\"\u003eClickEvents\u003c/a\u003e",
+      "parentUuid": "2d3fd4b6_f676f80d",
+      "revId": "1174c961b70b068671ed96f0dd067d0c53f1ae01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

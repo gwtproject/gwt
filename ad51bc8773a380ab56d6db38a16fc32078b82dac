@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d3fd4b6_73dd7aca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-19T17:38:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t \u0027n\u0027 get mutated somewhere?",
+      "revId": "ad51bc8773a380ab56d6db38a16fc32078b82dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

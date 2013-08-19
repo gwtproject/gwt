@@ -16,6 +16,24 @@
       "revId": "ad51bc8773a380ab56d6db38a16fc32078b82dac",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d3fd4b6_d39f86f5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-19T17:44:00Z",
+      "side": 1,
+      "message": "Facepalm... and it was caught by the tests :)",
+      "parentUuid": "2d3fd4b6_73dd7aca",
+      "revId": "ad51bc8773a380ab56d6db38a16fc32078b82dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

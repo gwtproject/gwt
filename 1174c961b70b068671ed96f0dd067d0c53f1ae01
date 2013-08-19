@@ -16,6 +16,24 @@
       "revId": "1174c961b70b068671ed96f0dd067d0c53f1ae01",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad32e4ee_8ca9e727",
+        "filename": "user/src/com/google/gwt/user/client/ui/RadioButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5696
+      },
+      "writtenOn": "2013-08-19T19:11:53Z",
+      "side": 1,
+      "message": "Eclipse ignores the inner @code",
+      "parentUuid": "2d3fd4b6_f676f80d",
+      "revId": "1174c961b70b068671ed96f0dd067d0c53f1ae01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -313,9 +313,11 @@ public class GenerateJavaScriptAST {
               // no conflict
               continue;
             }
-            // conflicting locals rename local i;
+            // conflicting locals => rename local i;
+            int n = 0;
+            String baseName = locals[i].getName();
             do {
-              locals[i].setName(locals[i].getName() + "_");
+              locals[i].setName(baseName + n);
             } while (namesUsedInMethod.contains(locals[i].getName()));
             namesUsedInMethod.add(locals[i].getName());
             break;

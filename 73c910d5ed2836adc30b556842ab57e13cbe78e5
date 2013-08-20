@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dcb603c_0e7ceb27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-20T16:08:44Z",
+      "side": 1,
+      "message": "Could you hard-wrap the lines as you\u0027re updating your commit?",
+      "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dcb603c_ee8b9f1a",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/JsonRpcRequestFactoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-20T16:08:44Z",
+      "side": 1,
+      "message": "Maybe we should run it in \"JRE\" mode too, just to make sure that everything works as intended in both modes.",
+      "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dcb603c_6e87af0c",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/JsonRpcRequestFactoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-20T16:08:44Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

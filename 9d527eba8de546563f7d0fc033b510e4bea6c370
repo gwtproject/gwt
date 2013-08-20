@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d49a0a6_3be777d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-20T19:23:53Z",
+      "side": 1,
+      "message": "Maybe a more descriptive message for the ValidatorTool change?",
+      "revId": "9d527eba8de546563f7d0fc033b510e4bea6c370",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

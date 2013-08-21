@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_a5c34843",
+        "filename": "elemental/src/elemental/js/json/JsJsonFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T18:20:48Z",
+      "side": 1,
+      "message": "Yes, I agree with you that I should reduce usage of boxing/deboxing in json classes. I need time for that and the only problem is I can\u0027t run tests to check my changes in dev mode (i wrote a comment about it).",
+      "parentUuid": "6dcb8c66_4236f26a",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_a2613eaf",
         "filename": "elemental/src/elemental/js/json/JsJsonString.java",
         "patchSetId": 2
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "The compiler should be able to inline things the exact same way with my proposed code: if isScript() is known to be \u0027true\u0027, then \"true || value \u003d\u003d null\" is simplified to \"value \u003d\u003d null\" and it gives you the exact same \"value \u003d\u003d null ? value : Object(value)\" that you have in your version (except for the reversed logic)",
       "parentUuid": "6dcb8c66_e2b2a6df",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcb8c66_05e4f4f3",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T18:20:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dcb8c66_623bf651",
       "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

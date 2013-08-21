@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dcb8c66_825f1a48",
+        "filename": "user/src/com/google/gwt/dom/builder/client/DomBuilderImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-21T15:02:50Z",
+      "side": 1,
+      "message": "You removed the startCol method, which was the only place where TableColElement was used in this class; our policy is to have no unused import.",
+      "revId": "eee87475342ab66a99ce3f09a4cb55a190d6c475",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

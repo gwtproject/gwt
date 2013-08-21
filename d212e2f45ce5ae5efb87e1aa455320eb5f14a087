@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd89d83b_ed6c4578",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T22:47:12Z",
+      "side": 1,
+      "message": "I know it is annoying but could you fix the whispaces?",
+      "revId": "d212e2f45ce5ae5efb87e1aa455320eb5f14a087",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_adc07d37",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T22:47:12Z",
+      "side": 1,
+      "message": "I think it would be clearer if it is written as\nwhile (true) {\n...\n   ValueEntry newEntry \u003d new ValueEntry(original, vHead);\n   if (localTable.compareAndSet(index, head, newEntry)) {\n     break;\n    }\n   // Keep track of values that have already been examined and only examine\n   // new entries inserted by contending threads.\n   lastHead \u003d vHead;\n}\n\nAlso lastHead \u003d\u003e runUntil like in rehash.",
+      "revId": "d212e2f45ce5ae5efb87e1aa455320eb5f14a087",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

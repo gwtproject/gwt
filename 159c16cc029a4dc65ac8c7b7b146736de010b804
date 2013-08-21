@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_82a47aa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d838cc5_c2f9e2ac",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_023eea9e",
         "filename": "elemental/src/elemental/js/json/JsJsonArray.java",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_a2a89e75",
+        "filename": "elemental/src/elemental/js/json/JsJsonFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d838cc5_625496ce",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_a2613eaf",
         "filename": "elemental/src/elemental/js/json/JsJsonString.java",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2013-08-19T09:35:33Z",
       "side": 1,
       "message": "Side-note: that won\u0027t work in DevMode right?",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcb8c66_c2a5a29c",
+        "filename": "elemental/src/elemental/js/json/JsJsonString.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "It should, this code was not changed by me. I should add tests.",
+      "parentUuid": "6d838cc5_a2613eaf",
       "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_e2b2a6df",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "I\u0027d like to leave it as is so compiler could strip this method and inline value in prod mode.",
+      "parentUuid": "6d838cc5_e240a611",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_a2137e17",
         "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
         "patchSetId": 2
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_02b06ad5",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d838cc5_a2137e17",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_62c9f66f",
         "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
         "patchSetId": 2
@@ -115,6 +205,24 @@
       "writtenOn": "2013-08-19T09:35:33Z",
       "side": 1,
       "message": "Side-note: I don\u0027t think this .valueOf() is actually necessary: the \"+\" unary operator will coerce the object to a Number value, we\u0027re sure to never have a Number object there (unless the JS engine is buggy, but Elemental isn\u0027t targeted at these buggy engines anyway). This is similar to how asString below just uses the \"\"+ trick without special-casing DevMode vs. prod mode.",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcb8c66_22bc8eb2",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2013-08-21T11:44:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d838cc5_62c9f66f",
       "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

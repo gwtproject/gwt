@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6dcb8c66_c2fe824e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-21T13:07:01Z",
+      "side": 1,
+      "message": "Please change it to (this is about \"formatting\", not the content):\n\n Fix for error when Elemental\u0027s JSON boxes null/undefined values.\n\n Remove boxing entirely for prod mode.\n\n Bug: issue 8306\n Change-Id: I36f19147a7235c5cfb7e38d366ce8a2c694b079c\n\n(pattern is: one-line summary\\n\\ndescription (optional, possibly on several paragraphs)\\n\\nfooter lines)",
+      "parentUuid": "6dcb8c66_82a47aa2",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d838cc5_023eea9e",
         "filename": "elemental/src/elemental/js/json/JsJsonArray.java",
         "patchSetId": 2
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "6d838cc5_625496ce",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcb8c66_4236f26a",
+        "filename": "elemental/src/elemental/js/json/JsJsonFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-21T13:07:01Z",
+      "side": 1,
+      "message": "What do you think about my last paragraph? Do you think it\u0027s really needed to have a parseDevMode and parseProdMode methods?",
+      "parentUuid": "6dcb8c66_a2a89e75",
       "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "I\u0027d like to leave it as is so compiler could strip this method and inline value in prod mode.",
       "parentUuid": "6d838cc5_e240a611",
+      "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcb8c66_623bf651",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-21T13:07:01Z",
+      "side": 1,
+      "message": "The compiler should be able to inline things the exact same way with my proposed code: if isScript() is known to be \u0027true\u0027, then \"true || value \u003d\u003d null\" is simplified to \"value \u003d\u003d null\" and it gives you the exact same \"value \u003d\u003d null ? value : Object(value)\" that you have in your version (except for the reversed logic)",
+      "parentUuid": "6dcb8c66_e2b2a6df",
       "revId": "159c16cc029a4dc65ac8c7b7b146736de010b804",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -34,6 +34,24 @@
       "revId": "9a20337ff37adb92964d6622e5c060904ab0322e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_4d3b9951",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-21T23:01:51Z",
+      "side": 1,
+      "message": "Yep, created https://gwt-review.googlesource.com/#/c/4200/ which passes Guava\u0027s LongsTest and addresses Integer.compare() too.",
+      "parentUuid": "cd89d83b_cdfb095c",
+      "revId": "9a20337ff37adb92964d6622e5c060904ab0322e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

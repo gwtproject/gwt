@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd89d83b_cdc309d1",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T23:47:35Z",
+      "side": 1,
+      "message": "Rename localTable to currentTable.",
+      "revId": "80f569059d32dbd60ea92eab6d271fdce7124c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_8dc901f7",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T23:47:35Z",
+      "side": 1,
+      "message": "Index can be declared here with its assignment.",
+      "revId": "80f569059d32dbd60ea92eab6d271fdce7124c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_6dd5b586",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T23:47:35Z",
+      "side": 1,
+      "message": "Head can be declared here with its assignment.",
+      "revId": "80f569059d32dbd60ea92eab6d271fdce7124c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_adc6bde1",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T23:47:35Z",
+      "side": 1,
+      "message": "new Entry not needed here anymore.",
+      "revId": "80f569059d32dbd60ea92eab6d271fdce7124c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd89d83b_4dd0f997",
+        "filename": "dev/core/src/com/google/gwt/dev/util/StringInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-21T23:47:35Z",
+      "side": 1,
+      "message": "newEntry can be declared here.",
+      "revId": "80f569059d32dbd60ea92eab6d271fdce7124c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

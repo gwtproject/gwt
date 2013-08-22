@@ -16,6 +16,24 @@
       "revId": "805efe3e661975b5a59472f2fc5f6f82733112d4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adb4a4fc_7c7499cd",
+        "filename": "elemental/src/elemental/Elemental.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-22T15:42:30Z",
+      "side": 1,
+      "message": "I started to add those initially but it\u0027s tedious and error-prone, so unless we have a need for it I\u0027d rather keep it like that :-)\n\nThat would make something like (totally untested):\n\n \u003csource path\u003d\"js\" skips\u003d\"json/**/*,util/JsIndexable.java,util/JsArray*,util/JsMap*,util/JsElementalBase.java\"/\u003e\n \u003csource path\u003d\"util\" includes\u003d\"Timer.java\"/\u003e\n\n(of course, using \u003cskip\u003e and \u003cinclude\u003e child elements would make it more legible)\n\nWhich makes me think… I used an excludes\u003d\"\" instead of skips\u003d\"\" in Collections.gwt.xml!",
+      "parentUuid": "cd89d83b_f3cd08a7",
+      "revId": "805efe3e661975b5a59472f2fc5f6f82733112d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

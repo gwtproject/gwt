@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adb4a4fc_bca90195",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-22T10:45:07Z",
+      "side": 1,
+      "message": "As I said in patch-set 2, I think it\u0027ll break in DevMode.\n\nIt should IMO be:\n\n var value \u003d @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this);\n return @com.google.gwt.core.client.GWT::isScript()() || value \u003d\u003d null ? !!value : !!value.valueOf();\n\n(note: I think that isScript is not needed here and calling valueOf() in prod mode would actually be a good thing; i.e. don\u0027t assume that values are always \"unboxed\" in prod mode –or always assume they could be either boxed or unboxed, whichever prod or dev mode–, no one knows what kind of thing we might have and just because we don\u0027t produce them ourselves doesn\u0027t mean there would never be boxed values in prod mode and unboxed values in dev mode)",
+      "revId": "be6926e22cdc386b469ab72aa53a7d80eb3ed349",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

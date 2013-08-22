@@ -3192,6 +3192,20 @@ public class RequestFactoryTest extends RequestFactoryTestBase {
     });
   }
 
+  public void testEnumsUsedAsTypeParameter() {
+    delayTestFinish(DELAY_TEST_FINISH);
+
+    List<SimpleEnum> list =
+        Arrays.asList(new SimpleEnum[] {SimpleEnum.FOO, SimpleEnum.BAR});
+    final Request<Void> fooReq = simpleFooRequest().enumsUsedAsTypeParameter(list);
+    fooReq.fire(new Receiver<Void>() {
+      @Override
+      public void onSuccess(Void v) {
+        finishTestAndReset();
+      }
+    });
+  }
+
   protected SimpleBarRequest simpleBarRequest() {
     return req.simpleBarRequest();
   }

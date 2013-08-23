@@ -237,8 +237,10 @@ void checkForNameClash(MethodBinding currentMethod, MethodBinding inheritedMetho
 
 	if (inheritedMethod.isStatic() || currentMethod.isStatic()) {
 		MethodBinding original = inheritedMethod.original(); // can be the same as inherited
-		if (this.type.scope.compilerOptions().complianceLevel >= ClassFileConstants.JDK1_7 && currentMethod.areParameterErasuresEqual(original)) {
-			problemReporter(currentMethod).methodNameClashHidden(currentMethod, inheritedMethod.declaringClass.isRawType() ? inheritedMethod : original);
+    		if (this.type.scope.compilerOptions().complianceLevel >= ClassFileConstants.JDK1_7 && 
+			currentMethod.areParameterErasuresEqual(original)) {
+			// TODO(rluble): HACK. Relax this check to workaround JDT bug 397462. Give a warning instead of an error.
+			problemReporter(currentMethod).methodNameClashHiddenWarn(currentMethod, inheritedMethod.declaringClass.isRawType() ? inheritedMethod : original);
 		}
 		return; // no chance of bridge method's clashing
 	}
@@ -1032,7 +1034,13 @@ boolean isSubstituteParameterSubsignature(MethodBinding method, MethodBinding su
 	}
 
 	// if method has its own variables, then substituteMethod failed bounds check in computeSubstituteMethod()
-	return method.typeVariables == Binding.NO_TYPE_VARIABLES;
+	// TODO(rluble): Partial Work around to JDT bug 397462.
+	// Static method that have type parameters but whose parameters do not depend on type bindings
+	// are not ParametrizedGenericMethodBinding. This fixes the most common case of factory methods
+	// with parametrized return.
+	// The real fix is to only consider the type parameters used in actual parameters and ignore the
+	// the rest, but that seems to be agains JLS 8.4.2.
+	return !(substituteMethod instanceof ParameterizedGenericMethodBinding);
 }
 boolean isUnsafeReturnTypeOverride(MethodBinding currentMethod, MethodBinding inheritedMethod) {
 	// called when currentMethod's return type is NOT compatible with inheritedMethod's return type

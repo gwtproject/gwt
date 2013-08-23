@@ -15,6 +15,7 @@ import org.eclipse.jdt.internal.compiler.ast.*;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
+import org.eclipse.jdt.internal.compiler.problem.ProblemSeverities;
 import org.eclipse.jdt.internal.compiler.util.HashtableOfObject;
 import org.eclipse.jdt.internal.compiler.util.SimpleSet;
 
@@ -153,9 +154,12 @@ void checkAgainstInheritedMethods(MethodBinding currentMethod, MethodBinding[] m
 				currentMethod.modifiers |= ExtraCompilerModifiers.AccOverriding;
 			}
 
+			// TODO(rluble): HACK. turn this into a warning if the method is static. Workaround JDT bug 397462
 			if (!areReturnTypesCompatible(currentMethod, inheritedMethod)
 					&& (currentMethod.returnType.tagBits & TagBits.HasMissingType) == 0) {
-				if (reportIncompatibleReturnTypeError(currentMethod, inheritedMethod))
+				int severty = (currentMethod.isStatic() && inheritedMethod.isStatic()) ?
+					ProblemSeverities.Warning : ProblemSeverities.Error;
+				if (reportIncompatibleReturnTypeProblem(currentMethod, inheritedMethod, severty))
 					continue nextMethod;
 			}
 			reportRawReferences(currentMethod, inheritedMethod); // if they were deferred, emit them now.
@@ -927,8 +931,22 @@ ProblemReporter problemReporter(MethodBinding currentMethod) {
  *         inheritedMethod's
  */
 boolean reportIncompatibleReturnTypeError(MethodBinding currentMethod, MethodBinding inheritedMethod) {
-	problemReporter(currentMethod).incompatibleReturnType(currentMethod, inheritedMethod);
-	return true;
+	return reportIncompatibleReturnTypeProblem(currentMethod, inheritedMethod, ProblemSeverities.Error);
+}
+
+/**
+ * Return true and report an incompatibleReturnType error if currentMethod's
+ * return type is strictly incompatible with inheritedMethod's or the requested
+ * severity is Warning, else return false and report an unchecked conversion warning.
+ * Do not call when areReturnTypesCompatible(currentMethod, inheritedMethod) returns true.
+ * @param currentMethod the (potentially) inheriting method
+ * @param inheritedMethod the inherited method
+ * @return true if currentMethod's return type is strictly incompatible with
+ *         inheritedMethod's
+ */
+boolean reportIncompatibleReturnTypeProblem(MethodBinding currentMethod, MethodBinding inheritedMethod, int severity) {
+	problemReporter(currentMethod).incompatibleReturnType(currentMethod, inheritedMethod, severity);
+  	return severity != ProblemSeverities.Warning;
 }
 
 ReferenceBinding[] resolvedExceptionTypesFor(MethodBinding method) {

@@ -15,6 +15,7 @@ import org.eclipse.jdt.internal.compiler.ast.*;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
+import org.eclipse.jdt.internal.compiler.problem.ProblemSeverities;
 import org.eclipse.jdt.internal.compiler.util.HashtableOfObject;
 import org.eclipse.jdt.internal.compiler.util.SimpleSet;
 
@@ -153,9 +154,11 @@ void checkAgainstInheritedMethods(MethodBinding currentMethod, MethodBinding[] m
 				currentMethod.modifiers |= ExtraCompilerModifiers.AccOverriding;
 			}
 
+      // TODO(rluble): HACK. turn this into a warning if the method is static. Workaround JDT bug 397462
 			if (!areReturnTypesCompatible(currentMethod, inheritedMethod)
 					&& (currentMethod.returnType.tagBits & TagBits.HasMissingType) == 0) {
-				if (reportIncompatibleReturnTypeError(currentMethod, inheritedMethod))
+				if (reportIncompatibleReturnType(currentMethod, inheritedMethod,
+            (currentMethod.isStatic() && inheritedMethod.isStatic()) ? ProblemSeverities.Warning : ProblemSeverities.Error ))
 					continue nextMethod;
 			}
 			reportRawReferences(currentMethod, inheritedMethod); // if they were deferred, emit them now.
@@ -929,6 +932,11 @@ ProblemReporter problemReporter(MethodBinding currentMethod) {
 boolean reportIncompatibleReturnTypeError(MethodBinding currentMethod, MethodBinding inheritedMethod) {
 	problemReporter(currentMethod).incompatibleReturnType(currentMethod, inheritedMethod);
 	return true;
+}
+
+boolean reportIncompatibleReturnType(MethodBinding currentMethod, MethodBinding inheritedMethod, int severity) {
+  problemReporter(currentMethod).incompatibleReturnType(currentMethod, inheritedMethod, severity);
+  return severity != ProblemSeverities.Warning;
 }
 
 ReferenceBinding[] resolvedExceptionTypesFor(MethodBinding method) {

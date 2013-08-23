@@ -104,6 +104,11 @@ AugmentedJar(
     ],
     constraints = [],
     dojarjar = 1,
+    exclude = [
+        "org/eclipse/jdt/internal/compiler/lookup/MethodVerifier.class",  # replaced in GWT
+        "org/eclipse/jdt/internal/compiler/lookup/MethodVerifier15.class",  # replaced in GWT
+        "org/eclipse/jdt/internal/compiler/problem/ProblemReporter.class",  # replaced in GWT
+    ],
     wrap_javalibrary = 0,
 )
 

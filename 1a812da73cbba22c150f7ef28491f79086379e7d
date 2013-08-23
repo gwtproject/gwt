@@ -16,6 +16,24 @@
       "revId": "1a812da73cbba22c150f7ef28491f79086379e7d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edd85c6d_8e3b9bb0",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/RequestFactoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3199,
+      "author": {
+        "id": 5730
+      },
+      "writtenOn": "2013-08-23T02:56:01Z",
+      "side": 1,
+      "message": "Nice. Thanks",
+      "parentUuid": "adb4a4fc_3c9731ce",
+      "revId": "1a812da73cbba22c150f7ef28491f79086379e7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

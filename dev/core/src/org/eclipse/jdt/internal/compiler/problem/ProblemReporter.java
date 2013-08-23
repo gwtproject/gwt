@@ -2800,7 +2800,17 @@ public void incompatibleExceptionInThrowsClause(SourceTypeBinding type, MethodBi
 			type.sourceStart(),
 			type.sourceEnd());
 }
+<<<<<<< HEAD
 public void incompatibleReturnType(MethodBinding currentMethod, MethodBinding inheritedMethod) {
+=======
+
+public void incompatibleReturnType(MethodBinding currentMethod, MethodBinding inheritedMethod) {
+  incompatibleReturnType(currentMethod, inheritedMethod, ProblemSeverities.Error);
+}
+
+
+public void incompatibleReturnType(MethodBinding currentMethod, MethodBinding inheritedMethod, int severity) {
+>>>>>>> fc0ab4b... Workaround JDT bug 397462 which causes a compile error when there is none.
 	StringBuffer methodSignature = new StringBuffer();
 	methodSignature
 		.append(inheritedMethod.declaringClass.readableName())
@@ -2855,6 +2865,10 @@ public void incompatibleReturnType(MethodBinding currentMethod, MethodBinding in
 		id,
 		new String[] {methodSignature.toString()},
 		new String[] {shortSignature.toString()},
+<<<<<<< HEAD
+=======
+    severity,
+>>>>>>> fc0ab4b... Workaround JDT bug 397462 which causes a compile error when there is none.
 		sourceStart,
 		sourceEnd);
 }
@@ -5275,6 +5289,31 @@ public void methodNameClashHidden(MethodBinding currentMethod, MethodBinding inh
 		 },
 		currentMethod.sourceStart(),
 		currentMethod.sourceEnd());
+<<<<<<< HEAD
+=======
+  }
+
+public void methodNameClashHiddenWarn(MethodBinding currentMethod, MethodBinding inheritedMethod) {
+  this.handle(
+      IProblem.MethodNameClashHidden,
+      new String[] {
+          new String(currentMethod.selector),
+          typesAsString(currentMethod, currentMethod.parameters, false),
+          new String(currentMethod.declaringClass.readableName()),
+          typesAsString(inheritedMethod, inheritedMethod.parameters, false),
+          new String(inheritedMethod.declaringClass.readableName()),
+      },
+      new String[] {
+          new String(currentMethod.selector),
+          typesAsString(currentMethod, currentMethod.parameters, true),
+          new String(currentMethod.declaringClass.shortReadableName()),
+          typesAsString(inheritedMethod, inheritedMethod.parameters, true),
+          new String(inheritedMethod.declaringClass.shortReadableName()),
+      },
+      ProblemSeverities.Warning,
+      currentMethod.sourceStart(),
+      currentMethod.sourceEnd());
+>>>>>>> fc0ab4b... Workaround JDT bug 397462 which causes a compile error when there is none.
 }
 
 public void methodNeedBody(AbstractMethodDeclaration methodDecl) {

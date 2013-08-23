@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdd55834_16fa22a1",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-23T20:55:34Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "3efa4f382ac9c1643acc57ff517b05d545a62b79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdd55834_b6a46eb2",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-23T20:55:34Z",
+      "side": 1,
+      "message": "I realize you\u0027re just following existing style but it\u0027s possible to do better:\n\n\"Returns the name of a month in the current locale. For example, \"January\" in English.\"",
+      "revId": "3efa4f382ac9c1643acc57ff517b05d545a62b79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdd55834_f6af9697",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-23T20:55:34Z",
+      "side": 1,
+      "message": "\"A number from 0 (for January) to 11 (for December) identifying the month wanted.\"",
+      "revId": "3efa4f382ac9c1643acc57ff517b05d545a62b79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdd55834_b69eae4b",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-23T20:55:34Z",
+      "side": 1,
+      "message": "Could you wrap these better - we try to remain within 100 columns.",
+      "revId": "3efa4f382ac9c1643acc57ff517b05d545a62b79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdd55834_f60d56bd",
+        "filename": "user/test/com/google/gwt/user/client/ui/DatePickerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-08-23T20:55:34Z",
+      "side": 1,
+      "message": "Formatting: lines in this file are over 100 columns.",
+      "revId": "3efa4f382ac9c1643acc57ff517b05d545a62b79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

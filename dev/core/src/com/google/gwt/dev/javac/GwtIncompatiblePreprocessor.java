@@ -16,6 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import org.eclipse.jdt.internal.compiler.ASTVisitor;
+import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
@@ -25,6 +26,7 @@ import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeReference;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
+import org.eclipse.jdt.internal.compiler.lookup.ExtraCompilerModifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,18 +146,30 @@ public class GwtIncompatiblePreprocessor {
    * Removes all members of a class to leave it as an empty stub.
    */
   private static void stripAllMembers(TypeDeclaration tyDecl) {
+
     tyDecl.superclass = null;
     tyDecl.superInterfaces = new TypeReference[0];
     tyDecl.annotations = new Annotation[0];
     tyDecl.methods = new AbstractMethodDeclaration[0];
     tyDecl.memberTypes = new TypeDeclaration[0];
     tyDecl.fields = new FieldDeclaration[0];
-    // Create a default constructor so that the class is proper.
-    tyDecl.createDefaultConstructor(true, true);
-    // Mark only constructor as private so that it can not be instantiated.
-    tyDecl.methods[0].modifiers = ClassFileConstants.AccPrivate;
-    // Mark the class as final so that it can not be extended.
-    tyDecl.modifiers |= ClassFileConstants.AccFinal;
+    if (TypeDeclaration.kind(tyDecl.modifiers) != TypeDeclaration.INTERFACE_DECL) {
+      // Create a default constructor so that the class is proper.
+      tyDecl.createDefaultConstructor(true, true);
+      // Mark only constructor as private so that it can not be instantiated.
+      for (AbstractMethodDeclaration method : tyDecl.methods) {
+        if (method.isConstructor()) {
+          //tyDecl.methods[0].modifiers = ClassFileConstants.AccPrivate;
+          tyDecl.methods[0].modifiers = ClassFileConstants.AccPrivate;
+          tyDecl.methods[0].bits &= ~ExtraCompilerModifiers.AccIsDefaultConstructor &
+              // Clear another default constructor annotation to let the compiler
+              // this constructor is really private!.
+              ~ASTNode.Bit8;
+        }
+      }
+      // Mark the class as final so that it can not be extended.
+      tyDecl.modifiers |= ClassFileConstants.AccFinal;
+    }
   }
 
   /**

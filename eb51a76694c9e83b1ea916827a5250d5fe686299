@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8df8c0d3_437106dc",
+        "filename": "user/test/com/google/gwt/user/client/ui/DatePickerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-23T15:38:37Z",
+      "side": 1,
+      "message": "The test is not in the same package that the DatePicker, so I don\u0027t have access to the protected method.",
+      "revId": "eb51a76694c9e83b1ea916827a5250d5fe686299",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

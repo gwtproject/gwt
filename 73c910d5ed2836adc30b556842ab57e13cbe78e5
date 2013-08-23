@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ed193cc0_66620ed8",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/JsonRpcRequestFactoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5730
+      },
+      "writtenOn": "2013-08-23T02:55:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dcb603c_ee8b9f1a",
+      "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dcb603c_6e87af0c",
         "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/JsonRpcRequestFactoryTest.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-08-20T16:08:44Z",
       "side": 1,
       "message": "nit: trailing whitespace",
+      "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed193cc0_066d1ac8",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/JsonRpcRequestFactoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5730
+      },
+      "writtenOn": "2013-08-23T02:55:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dcb603c_6e87af0c",
       "revId": "73c910d5ed2836adc30b556842ab57e13cbe78e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8df8c0d3_e6fec09a",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-25T17:52:34Z",
+      "side": 1,
+      "message": "\"by by\"",
+      "revId": "a19f067e0459826103819d99589f0386e9edcff3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df8c0d3_c603c4d6",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-25T17:52:34Z",
+      "side": 1,
+      "message": "Note: it might be more readable with a local class and a field in that class:\n\n class TestHandler implements ResetHandler {\n   boolean invoked;\n\n   @Override\n   public void onReset(ResetEvent event) {\n     invoked \u003d true;\n   }\n }\n\n TestHandler handler \u003d new TestHandler();\n\n HandlerRegistration handlerRegistration \u003d form.addResetHandler(handler);\n\n…\n\n assertTrue(handler.invoked);",
+      "revId": "a19f067e0459826103819d99589f0386e9edcff3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

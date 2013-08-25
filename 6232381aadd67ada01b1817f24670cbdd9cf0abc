@@ -72,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "8df8c0d3_466594b9",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-25T17:52:24Z",
+      "side": 1,
+      "message": "The reset event is cancelable, so we might want to add a cancel() method to ResetEvent. Or maybe add a setCanceled/isCanceled pair of accessors for a cancel field, and actually cancel the event (NativeEvent#preventDefault) when we\u0027re back from the dispatch and the field is true (similar to how SubmitEvent works; return onFormReset from the JSNI might be enough).\n\nhttp://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#concept-form-reset",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5863e8f1_9db20afd",
         "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
         "patchSetId": 1
@@ -101,6 +118,24 @@
       "side": 1,
       "message": "You\u0027re right, I just took it from onFormSubmit()",
       "parentUuid": "5863e8f1_9db20afd",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df8c0d3_065f9ce5",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-25T17:52:24Z",
+      "side": 1,
+      "message": "…and (FYI) onFormSubmit \"needs\" it because the native form.submit() doesn\u0027t fire the submit event so we need a fireSubmitEvent to call from our submit() method.",
+      "parentUuid": "78d18ce1_92979ccf",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -434,6 +469,24 @@
       "side": 1,
       "message": "A real browser triggers the event, but unfortunately not the mock browser used by the test case.\n\nI tried form.reset(), native form.reset(), adding a ResetButton to the form and clicking it via GWT and natively. No luck. \nWhen FormPanel#reset() method is called, the unit test goes down and even calls form.reset() natively, but it does not fire the native form.onreset, although I tested that it is actually there. \n\nI dug around days to find the problem, but I had no luck so far. I suspected that it might be a bug in HtmlUnit, but I\u0027m not even sure if HtmlUnit is used in GWT\u0027s SimplePanelTestBase. \n\nI can only tell that the current HtmlUnit 2.12 works fine with firing the form.onreset event handler when calling form.reset(), I checked out the HtmlUnit code and modified their test cases. The problem though is that I can\u0027t replace HtmlUnit 2.9 in GWT tools with 2.12 because 2.12 relies on libraries that GWT cannot compile.",
       "parentUuid": "5863e8f1_7d19963a",
+      "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df8c0d3_266298b3",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-25T17:52:24Z",
+      "side": 1,
+      "message": "If there\u0027s a bug in HtmlUnit, then annotate the test with @DoNotRunWith(Platform.HtmlUnitBug) (if you can find a bug in their tracker, otherwise maybe use HtmlUnitUnknown, I think that\u0027s our unwritten rule), and run the test in real browsers (use -runStyle Manual:1). The idea is that when we update HtmlUnit we revisit all these tests and possibly remove the annotation.",
+      "parentUuid": "b865c42b_d4929c4d",
       "revId": "6232381aadd67ada01b1817f24670cbdd9cf0abc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

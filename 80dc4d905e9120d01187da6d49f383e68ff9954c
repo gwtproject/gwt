@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8df9a000_3b76d746",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/MethodVerifier.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-26T23:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df9a000_5bce43a3",
+      "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8df9a000_5b9c83af",
         "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/MethodVerifier.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-26T23:30:08Z",
       "side": 1,
       "message": "dunno what\u0027s normal in JDT, but maybe\n\ns/reportIncompatibleReturnType/reportIncompatibleReturnTypeWarning\n\nto be consistent with the other function\n\nalso, add a function comment like the previous function has",
+      "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df9a000_db8093f3",
+        "filename": "dev/core/src/org/eclipse/jdt/internal/compiler/lookup/MethodVerifier.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-26T23:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df9a000_5b9c83af",
       "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8df9a000_dbba53b4",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-26T23:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df9a000_1b65dbba",
+      "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8df9a000_db24137b",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8df9a000_7bca1f39",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-26T23:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df9a000_db24137b",
+      "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8df9a000_1b179b06",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2013-08-26T23:30:08Z",
       "side": 1,
       "message": "Lists.newArrayList()",
+      "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df9a000_bbe667d2",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-26T23:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df9a000_1b179b06",
       "revId": "80dc4d905e9120d01187da6d49f383e68ff9954c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

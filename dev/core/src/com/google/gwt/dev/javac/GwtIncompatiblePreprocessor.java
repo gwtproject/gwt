@@ -16,6 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import org.eclipse.jdt.internal.compiler.ASTVisitor;
+import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
@@ -25,6 +26,7 @@ import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeReference;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
+import org.eclipse.jdt.internal.compiler.lookup.ExtraCompilerModifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,12 +152,20 @@ public class GwtIncompatiblePreprocessor {
     tyDecl.methods = new AbstractMethodDeclaration[0];
     tyDecl.memberTypes = new TypeDeclaration[0];
     tyDecl.fields = new FieldDeclaration[0];
-    // Create a default constructor so that the class is proper.
-    tyDecl.createDefaultConstructor(true, true);
-    // Mark only constructor as private so that it can not be instantiated.
-    tyDecl.methods[0].modifiers = ClassFileConstants.AccPrivate;
-    // Mark the class as final so that it can not be extended.
-    tyDecl.modifiers |= ClassFileConstants.AccFinal;
+    if (TypeDeclaration.kind(tyDecl.modifiers) != TypeDeclaration.INTERFACE_DECL) {
+      // Create a default constructor so that the class is proper.
+      tyDecl.createDefaultConstructor(true, true);
+      // Mark all constructors (should be only one) as private so that it can not be instantiated.
+      for (AbstractMethodDeclaration method : tyDecl.methods) {
+        if (method.isConstructor()) {
+          method.modifiers = ClassFileConstants.AccPrivate;
+          // Clear two bits that are used for marking the constructor as default.
+          method.bits &= ~(ExtraCompilerModifiers.AccIsDefaultConstructor | ASTNode.Bit8);
+        }
+      }
+      // Mark the class as final so that it can not be extended.
+      tyDecl.modifiers |= ClassFileConstants.AccFinal;
+    }
   }
 
   /**

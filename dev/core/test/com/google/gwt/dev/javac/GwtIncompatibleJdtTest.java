@@ -59,7 +59,10 @@ public class GwtIncompatibleJdtTest extends JdtCompilerTestBase {
   public void testCompileGwtIncompatibleClassWithInnerClassTest() throws Exception {
     List<CompilationUnit> units = compile(GWTINCOMPATIBLE_ANNOTATION,
         GWTINCOMPATIBLE_WITH_INNERCLASS, GWTINCOMPATIBLE_WITH_INNERCLASS_TEST);
-    assertOnlyLastUnitHasErrors(units);
+    // We expect two compiler errors here, namely:
+    //   - The constructor GwtIncompatibleWithInnerClass is not visible.
+    //   - GwtIncompatibleWithInnerClass.Child cannot be resolved to a type.
+    assertOnlyLastUnitHasErrors(units, 2);
   }
 
   public void testCompileGwtIncompatibleClassWithStaticInnerClass() throws Exception {
@@ -256,7 +259,7 @@ public class GwtIncompatibleJdtTest extends JdtCompilerTestBase {
       code.append("package com.google.gwt;\n");
       code.append("public class GwtIncompatibleWithStaticInnerClassTest {\n");
       code.append("  void test() {\n");
-      code.append("    (new GwtIncompatibleWithStaticInnerClass()).new Child();\n");
+      code.append("    new GwtIncompatibleWithStaticInnerClass.Child();\n");
       code.append("  }\n");
       code.append("}\n");
       return code;

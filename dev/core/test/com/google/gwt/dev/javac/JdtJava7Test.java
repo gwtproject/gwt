@@ -55,4 +55,138 @@ public class JdtJava7Test extends JdtCompilerTestBase {
     assertResourcesCompileSuccessfully(Java7MockResources.EXCEPTION1, Java7MockResources.EXCEPTION2,
         Java7MockResources.MULTI_EXCEPTION_TEST);
   }
+
+  /**
+   * Test cases for JDT bug 397462.
+   */
+  public void testJdtBugNameClash_1() throws Exception {
+    assertResourcesCompileSuccessfully(ECLIPSE_397462_BUG_1);
+  }
+
+  public void testJdtBugNameClash_2() throws Exception {
+    assertResourcesCompileSuccessfully(ECLIPSE_397462_BUG_2);
+  }
+
+  public void testJdtBugNameClash_3() throws Exception {
+    List<CompilationUnit> units = compile(Java7MockResources.LIST_T, ACTUAL_NAME_CLASH);
+    assertOnlyLastUnitHasErrors(units);
+  }
+
+  public void testJdtBugNameClash_4() throws Exception {
+    assertResourcesCompileSuccessfully(Java7MockResources.LIST_T, ECLIPSE_397462_BUG_4);
+  }
+
+  public void testJdtBugNameClash_5() throws Exception {
+    assertResourcesCompileSuccessfully(Java7MockResources.LIST_T, ECLIPSE_397462_BUG_5);
+  }
+
+  public void testJdtBugNameClash_6() throws Exception {
+    assertResourcesCompileSuccessfully(Java7MockResources.LIST_T, ECLIPSE_397462_BUG_6);
+  }
+
+  public static final MockJavaResource ECLIPSE_397462_BUG_1 =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "public class X {",
+          "  public static class Base {",
+          "    static Base factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "  public static class Child<S> extends Base {",
+          "    static <T> Child<T> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+  public static final MockJavaResource ECLIPSE_397462_BUG_2 =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "public class X {",
+          "  public static class Base<S> {",
+          "    static <T> Base<T> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+            "public static class Child<P,Q> extends Base<P> {",
+            "  static <R,S> Child<R,S> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+  public static final MockJavaResource ACTUAL_NAME_CLASH =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "import com.google.gwt.List;",
+          "public class X {",
+          "  public static class Base<R> {",
+          "    static <R> Base<R> factoryMethod(List<R> x) {",
+          "      return null;",
+          "    }",
+          "  }",
+          "  public static class Child<R> extends Base<R> {",
+          "    static <P,Q> Child<P> factoryMethod(List<P> x) {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+  public static final MockJavaResource ECLIPSE_397462_BUG_4 =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "import com.google.gwt.List;",
+          "public class X {",
+          "  public static class Base<R> {",
+          "    static  <R> Base<R> factoryMethod(List<R> x) {",
+          "      return null;",
+          "    }",
+          "  }",
+          "  public static class Child<R> extends Base<R> {",
+          "    static <Q> Child<Q> factoryMethod(List<Q> x) {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+  public static final MockJavaResource ECLIPSE_397462_BUG_5 =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "public class X {",
+          "  public static class Base<S> {",
+          "    static <T> Object factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "  public static class Child<P,Q> extends Base<P> {",
+          "    static <R,S> Child<R,S> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+  public static final MockJavaResource ECLIPSE_397462_BUG_6 =
+      JavaResourceBase.createMockJavaResource("eclipse.X",
+          "package eclipse;",
+          "import com.google.gwt.List;",
+          "public class X {",
+          "  public static class Base {",
+          "    <T extends Base> List<T> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "  public static class Child extends Base {",
+          "    @Override",
+          "    List<Child> factoryMethod() {",
+          "      return null;",
+          "    }",
+          "  }",
+          "}");
+
+
+  protected List<CompilationUnit> compileImpl(Collection<CompilationUnitBuilder> builders)
+      throws UnableToCompleteException {
+    return doCompile(builders, SourceLevel.JAVA7);
+  }
 }

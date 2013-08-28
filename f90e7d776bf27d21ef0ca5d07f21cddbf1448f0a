@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed3cdca4_d74dd643",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T05:11:02Z",
+      "side": 1,
+      "message": "\"Mark the constructor as private so that the class cannot be instantiated.\"",
+      "revId": "f90e7d776bf27d21ef0ca5d07f21cddbf1448f0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_4f31a5d0",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T23:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2511d1f_af4c9972",
+      "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2511d1f_6f80e14c",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-28T22:52:16Z",
       "side": 1,
       "message": "Pls add \u003cp\u003e if you want start a new line in javadoc.",
+      "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2511d1f_6f5581ca",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T23:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2511d1f_6f80e14c",
       "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_4f5ac5fa",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T23:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2511d1f_2f8ae96a",
+      "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2511d1f_0f8f2d7b",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 7
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_2f4f893c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T23:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2511d1f_0f8f2d7b",
+      "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2511d1f_cf90f597",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 7
@@ -81,6 +153,24 @@
       "writtenOn": "2013-08-28T22:52:16Z",
       "side": 1,
       "message": "formatting problems here.",
+      "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2511d1f_6fb101fa",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T23:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2511d1f_cf90f597",
       "revId": "89193844bb9e6b93af46eadef06e3313b613f6b6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

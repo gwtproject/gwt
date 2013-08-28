@@ -1,0 +1,497 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd74787d_7511680e",
+        "filename": "samples/showcase/src/com/google/gwt/sample/showcase/client/content/widgets/CwDatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "Line is longer than 100 characters",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_ee591f5d",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "monthOfYearNames?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_0e8d8bc0",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "MAX_DAYS_IN_MONTH",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_2e8a47a9",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "MONTHS_IN_YEAR",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_6e6b6fef",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "Is this javadoc correct?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_0e74abcc",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "month and year?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd74787d_35c1b03b",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "\"Returns {@code true} if the month is before year in the date formatter.\"",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_4ec4f3d9",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "Perhaps this method should be provided via DateTimeFormat instead?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd74787d_b5994068",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: add an empty line space before variable.",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_91e43e5d",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "monthAndYearSelector?\n\nand perhaps also add a javadoc to MonthSelector to indicate that is actually month and year selector but just name like this for legacy reasons?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_2eab27ba",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "What about set/getMinYear set/getMaxYear and enforce it everywhere?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd74787d_d59ebc4c",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: remove space before punctuation and add empty line before @return.\n(same below)",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd74787d_95bb64bb",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "The second sentence doesn\u0027t look like adding much value and actually little bit confusing because it may give the wrong idea of not having an upper bound (i.e. not-fixed?) if the set is not called.\n(same below)",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd74787d_d5b5dcc4",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: extra space here (and below).",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_4e6233b4",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: end javadocs with punctuation. (here and below)",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_ee52ffde",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "remove undocument @params. (here and below)",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_511ad67e",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "setYearArrowsVisible?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_f10ae231",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "The name is misleading because conceptually the year is always selectable by user. Perhaps setQuickYearSelectorVisible setMonthSelectorVisible?\n\nAlso it looks like it doesn\u0027t really make sense to switch year and month individually to dropdown. Some other alternatives:\nsetQuickSelectorVisible, setYearAndMonthQuickSelectorVisible or setYearAndMonthDropdownVisible.\n\nThe last one looks the best. What do you think?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_d1eec63a",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "DefaultMonthAndYearSelector?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_2e732757",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: pls keep it consistent with the rest and make the create method return the widget.",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_cea9c394",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nbrOfMonth -\u003e noOfMonths\n\ncssClass -\u003e styleName",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_2ecde74f",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "Himm. How come getYearsBeforeCurrentInDropdown can be negative?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_4eb313e5",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "nit: Extract constant for magic number 12 or use the one in CalanderModel?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_6ec7ef2d",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "isDatePickerConfigChanged",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_2eda472f",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "over 100",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_0e458bbf",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "extract a method getMonthColumn?\n\nPerhaps we should just record it with setup grid to avoid any bugs?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_ee0cbfbf",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "Non of the above computation is related to this case. You can take an early shortcut for this scenario and it will be obvious to the reader you are doing this calculation for the rest.",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_0e5e6b7b",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "See my comments in similar method setMonth that applies here. Also it would good to keep these two method closer for readability.",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed3cdca4_8edc1bd0",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-28T00:14:59Z",
+      "side": 1,
+      "message": "d -\u003e newDate ?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

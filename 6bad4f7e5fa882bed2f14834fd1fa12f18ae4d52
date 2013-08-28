@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_e652be0e",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GwtIncompatibleJdtTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ed3cdca4_17683e94",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_97feee99",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-28T05:28:37Z",
       "side": 1,
       "message": "javadoc",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2511d1f_eca17f41",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed3cdca4_97feee99",
       "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_e9c4d14e",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "None. Gone.",
+      "parentUuid": "ed3cdca4_b703ead6",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_f70d7202",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-28T05:28:37Z",
       "side": 1,
       "message": "static?",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2511d1f_c9c1153d",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "Subclasses can override the compileImpl method to provide additional options/flags.",
+      "parentUuid": "ed3cdca4_f70d7202",
       "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_a9bed9c2",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "same as previous",
+      "parentUuid": "ed3cdca4_17f3decf",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_775fc2e4",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 4
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "f2511d1f_acb147de",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "This is the method that is up for override, and is the only one that actually does the JDT compile. I am not sure of the naming although using the same name as the others seems confusing. Maybe invokeJdtCompiler?",
+      "parentUuid": "ed3cdca4_775fc2e4",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_57fd6697",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 4
@@ -115,6 +223,24 @@
       "writtenOn": "2013-08-28T05:28:37Z",
       "side": 1,
       "message": "It looks like this class only exists for utility method and doesn\u0027t have any state. As alternative, you can define this methods inside CompilerTestUtil and do static import when you need them if you like.",
+      "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2511d1f_6cbd8fad",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-08-28T22:23:15Z",
+      "side": 1,
+      "message": "To provide utility methods and a way to override the compileImpl (now invokeJdtCompiler).",
+      "parentUuid": "ed3cdca4_57fd6697",
       "revId": "6bad4f7e5fa882bed2f14834fd1fa12f18ae4d52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

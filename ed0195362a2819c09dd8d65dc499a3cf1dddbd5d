@@ -16,6 +16,24 @@
       "revId": "ed0195362a2819c09dd8d65dc499a3cf1dddbd5d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "929d4128_7b3bdfe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-08-28T21:39:42Z",
+      "side": 1,
+      "message": "Thanks for that - I had noticed that the precompile tasks did not fail when running the unit tests, but assumed that it was a module inter-dependency issue, or I failed to set up the run correctly. In the interest of *future* clean dependencies, I\u0027d still be interested in factoring this out, but we\u0027d need to decide if it was worth the mess of re-declaring an Array supersource in another module.",
+      "parentUuid": "f2967d05_fe904197",
+      "revId": "ed0195362a2819c09dd8d65dc499a3cf1dddbd5d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

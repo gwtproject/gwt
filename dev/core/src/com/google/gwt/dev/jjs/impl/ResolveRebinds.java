@@ -100,8 +100,8 @@ public class ResolveRebinds {
     }
   }
 
-  public static boolean exec(JProgram program, Map<String, String>[] orderedRebindAnswers) {
-    return new ResolveRebinds(program, orderedRebindAnswers).execImpl();
+  public static boolean exec(CompilerState compilerState, Map<String, String>[] orderedRebindAnswers) {
+    return new ResolveRebinds(compilerState.getjProgram(), orderedRebindAnswers).execImpl();
   }
 
   /**

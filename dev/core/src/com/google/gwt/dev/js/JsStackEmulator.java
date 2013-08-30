@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.impl.CompilerState;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
@@ -815,11 +816,9 @@ public class JsStackEmulator {
     STRIP, NATIVE, EMULATED;
   }
 
-  public static void exec(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
+  public static void exec(CompilerState compilerState, PropertyOracle[] propertyOracles) {
     if (getStackMode(propertyOracles) == StackMode.EMULATED) {
-      (new JsStackEmulator(jprogram, jsProgram, propertyOracles, jjsmap)).execImpl();
+      (new JsStackEmulator(compilerState, propertyOracles)).execImpl();
     }
   }
 
@@ -862,12 +861,10 @@ public class JsStackEmulator {
   private JsName stack;
   private JsName stackDepth;
 
-  private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
-    this.jprogram = jprogram;
-    this.jsProgram = jsProgram;
-    this.jjsmap = jjsmap;
+  private JsStackEmulator(CompilerState compilerState, PropertyOracle[] propertyOracles) {
+    this.jprogram = compilerState.getjProgram();
+    this.jsProgram = compilerState.getJsProgram();
+    this.jjsmap = compilerState.getJavaToJavaScriptMap();
 
     assert propertyOracles.length > 0;
     PropertyOracle oracle = propertyOracles[0];

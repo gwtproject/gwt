@@ -287,14 +287,10 @@ public class FragmentExtractor {
 
   private StatementLogger statementLogger = new NullStatementLogger();
 
-  public FragmentExtractor(JavaAndJavaScript javaAndJavaScript) {
-    this(javaAndJavaScript.jprogram, javaAndJavaScript.jsprogram, javaAndJavaScript.map);
-  }
-
-  public FragmentExtractor(JProgram jprogram, JsProgram jsprogram, JavaToJavaScriptMap map) {
-    this.jprogram = jprogram;
-    this.jsprogram = jsprogram;
-    this.map = map;
+  public FragmentExtractor(CompilerState compilerState) {
+    this.jprogram = compilerState.getjProgram();
+    this.jsprogram = compilerState.getJsProgram();
+    this.map = compilerState.getJavaToJavaScriptMap();
   }
 
   /**

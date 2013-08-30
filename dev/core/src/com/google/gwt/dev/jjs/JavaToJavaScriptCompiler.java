@@ -70,6 +70,7 @@ import com.google.gwt.dev.jjs.impl.CatchBlockNormalizer;
 import com.google.gwt.dev.jjs.impl.CodeSplitter;
 import com.google.gwt.dev.jjs.impl.CodeSplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.jjs.impl.CodeSplitter2;
+import com.google.gwt.dev.jjs.impl.CompilerState;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.DeadCodeElimination;
 import com.google.gwt.dev.jjs.impl.EnumOrdinalizer;
@@ -82,7 +83,6 @@ import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JsAbstractTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsFunctionClusterer;
-import com.google.gwt.dev.jjs.impl.JsIEBlockTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsoDevirtualizer;
 import com.google.gwt.dev.jjs.impl.LongCastNormalizer;
 import com.google.gwt.dev.jjs.impl.LongEmulationNormalizer;
@@ -112,7 +112,6 @@ import com.google.gwt.dev.js.JsCoerceIntShift;
 import com.google.gwt.dev.js.JsDuplicateCaseFolder;
 import com.google.gwt.dev.js.JsDuplicateFunctionRemover;
 import com.google.gwt.dev.js.FreshNameGenerator;
-import com.google.gwt.dev.js.JsIEBlockSizeVisitor;
 import com.google.gwt.dev.js.JsInliner;
 import com.google.gwt.dev.js.JsNormalizer;
 import com.google.gwt.dev.js.JsObfuscateNamer;
@@ -141,7 +140,6 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Empty;
 import com.google.gwt.dev.util.Memory;
-import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.collect.Lists;
@@ -167,7 +165,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 
@@ -304,14 +301,12 @@ public class JavaToJavaScriptCompiler {
         System.out.println("Properties: " + permutation.prettyPrint());
       }
 
+
       AST ast = unifiedAst.getFreshAst();
-      JProgram jprogram = ast.getJProgram();
-      JsProgram jsProgram = ast.getJsProgram();
 
-      Map<StandardSymbolData, JsName> symbolTable =
-          new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
+      CompilerState compilerState = new CompilerState(ast);
 
-      ResolveRebinds.exec(jprogram, permutation.getOrderedRebindAnswers());
+      ResolveRebinds.exec(compilerState, permutation.getOrderedRebindAnswers());
 
       // Traverse the AST to figure out which lines are instrumentable for
       // coverage. This has to happen before optimizations because functions might
@@ -319,114 +314,112 @@ public class JavaToJavaScriptCompiler {
       // instrumentable".
       Multimap<String, Integer> instrumentableLines = null;
       if (System.getProperty("gwt.coverage") != null) {
-        instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
+        instrumentableLines = BaselineCoverageGatherer.exec(compilerState);
       }
 
       // (4) Optimize the normalized Java AST for each permutation.
       int optimizationLevel = options.getOptimizationLevel();
       if (optimizationLevel == OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
-        draftOptimize(jprogram);
+        draftOptimize(compilerState.getjProgram());
       } else {
-        optimize(options, jprogram);
+        optimize(options, compilerState.getjProgram());
       }
 
-      RemoveEmptySuperCalls.exec(jprogram);
+      RemoveEmptySuperCalls.exec(compilerState.getjProgram());
 
       // (5) "Normalize" the high-level Java tree into a lower-level tree more
       // suited for JavaScript code generation. Don't go reordering these
       // willy-nilly because there are some subtle interdependencies.
-      JsoDevirtualizer.exec(jprogram);
-      CatchBlockNormalizer.exec(jprogram);
-      PostOptimizationCompoundAssignmentNormalizer.exec(jprogram);
-      LongCastNormalizer.exec(jprogram);
-      LongEmulationNormalizer.exec(jprogram);
-      CastNormalizer.exec(jprogram, options.isCastCheckingDisabled());
-      ArrayNormalizer.exec(jprogram);
-      EqualityNormalizer.exec(jprogram);
+      JsoDevirtualizer.exec(compilerState.getjProgram());
+      CatchBlockNormalizer.exec(compilerState.getjProgram());
+      PostOptimizationCompoundAssignmentNormalizer.exec(compilerState.getjProgram());
+      LongCastNormalizer.exec(compilerState.getjProgram());
+      LongEmulationNormalizer.exec(compilerState.getjProgram());
+      CastNormalizer.exec(compilerState.getjProgram(), options.isCastCheckingDisabled());
+      ArrayNormalizer.exec(compilerState.getjProgram());
+      EqualityNormalizer.exec(compilerState.getjProgram());
 
       // (6) Perform further post-normalization optimizations
       // Prune everything
-      Pruner.exec(jprogram, false);
+      Pruner.exec(compilerState.getjProgram(), false);
       // prune all Object.getClass() overrides and replace with inline field ref
-      ReplaceGetClassOverrides.exec(jprogram);
+      ReplaceGetClassOverrides.exec(compilerState.getjProgram());
 
       // (7) Generate a JavaScript code DOM from the Java type declarations
-      jprogram.typeOracle.recomputeAfterOptimizations();
-      Pair<? extends JavaToJavaScriptMap, Set<JsNode>> genAstResult =
-          GenerateJavaScriptAST.exec(jprogram, jsProgram, options.getOutput(), symbolTable,
-              propertyOracles);
+      compilerState.getjProgram().typeOracle.recomputeAfterOptimizations();
+      GenerateJavaScriptAST.exec(compilerState, options.getOutput(), propertyOracles);
 
-      JavaToJavaScriptMap jjsmap = genAstResult.getLeft();
+//      JavaToJavaScriptMap jjsmap = compilerState.getJavaToJavaScriptMap();
 
       // (8) Normalize the JS AST.
       // Fix invalid constructs created during JS AST gen.
-      JsNormalizer.exec(jsProgram);
+      JsNormalizer.exec(compilerState.getJsProgram());
 
       /*
        * If coverage is enabled, instrument the AST to record location info.
        */
       if (instrumentableLines != null) {
-        CoverageInstrumentor.exec(jsProgram, instrumentableLines);
+        CoverageInstrumentor.exec(compilerState.getJsProgram(), instrumentableLines);
       }
 
       // Resolve all unresolved JsNameRefs.
-      JsSymbolResolver.exec(jsProgram);
+      JsSymbolResolver.exec(compilerState.getJsProgram());
       // Move all function definitions to a top-level scope, to reduce weirdness
-      EvalFunctionsAtTopScope.exec(jsProgram, jjsmap);
+      EvalFunctionsAtTopScope.exec(compilerState);
 
       // (9) Optimize the JS AST.
       if (optimizationLevel > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
-        optimizeJs(options, jsProgram, genAstResult.getRight());
+        optimizeJs(options, compilerState.getJsProgram(), compilerState.getFunctionsForJsInlining());
 
         /*
          * Coalesce redundant labels in switch statements.
          */
-        JsDuplicateCaseFolder.exec(jsProgram);
+        JsDuplicateCaseFolder.exec(compilerState.getJsProgram());
       }
 
       /*
        * Creates new variables, must run before code splitter and namer.
        */
-      JsStackEmulator.exec(jprogram, jsProgram, propertyOracles, jjsmap);
+      JsStackEmulator.exec(compilerState, propertyOracles);
 
       /*
        * Work around Safari 5 bug by rewriting a >> b as ~~a >> b.
        *
        * No shifts may be generated after this point.
        */
-      JsCoerceIntShift.exec(jsProgram, logger, propertyOracles);
+      JsCoerceIntShift.exec(compilerState.getJsProgram(), logger, propertyOracles);
 
       // (10) Split up the program into fragments
       SyntheticArtifact dependencies = null;
-    
+
       if (options.isRunAsyncEnabled()) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
+
         int fragmentsMerge = 0;
-        
+
         int expectedFragmentCount = options.getFragmentCount();
         if (expectedFragmentCount > 0) {
           // + 1 for left over, + 1 for initial gave us the total number
           // of fragments without splitting.
-          fragmentsMerge = jprogram.getRunAsyncs().size() + 2 - expectedFragmentCount;
+          fragmentsMerge = compilerState.getjProgram().getRunAsyncs().size() + 2 - expectedFragmentCount;
         } else {
           fragmentsMerge = options.getFragmentsMerge();
         }
-        
+
         // Pick and choose which code splitter to use. Only use the experimental
         // one when the user explicitly decides the project needs fragment
         // merging.
         if (fragmentsMerge > 0) {
-          CodeSplitter2.exec(logger, jprogram, jsProgram, jjsmap, fragmentsMerge,
+          CodeSplitter2.exec(logger, compilerState, fragmentsMerge,
               chooseDependencyRecorder(options.isSoycEnabled(), baos),
               findIntegerConfigurationProperty(propertyOracles, logger,
                   CodeSplitter2.LEFTOVERMERGE_SIZE, 0));
         } else {
-          CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, chooseDependencyRecorder(options
+          CodeSplitter.exec(logger, compilerState, chooseDependencyRecorder(options
               .isSoycEnabled(), baos));
         }
         if (baos.size() == 0 && options.isSoycEnabled()) {
-          recordNonSplitDependencies(jprogram, baos);
+          recordNonSplitDependencies(compilerState.getjProgram(), baos);
         }
         if (baos.size() > 0) {
           dependencies =
@@ -445,20 +438,21 @@ public class JavaToJavaScriptCompiler {
       Map<JsName, String> obfuscateMap = Maps.create();
       switch (options.getOutput()) {
         case OBFUSCATED:
-          obfuscateMap = JsStringInterner.exec(jprogram, jsProgram, isIE6orUnknown);
-          FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram, propertyOracles);
+          obfuscateMap = JsStringInterner.exec(compilerState);
+          FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(
+              compilerState.getJsProgram(), propertyOracles);
           if (options.shouldRemoveDuplicateFunctions() &&
               JsStackEmulator.getStackMode(propertyOracles) == JsStackEmulator.StackMode.STRIP) {
-            JsDuplicateFunctionRemover.exec(jsProgram, freshNameGenerator);
+            JsDuplicateFunctionRemover.exec(compilerState.getJsProgram(), freshNameGenerator);
           }
           break;
         case PRETTY:
           // We don't intern strings in pretty mode to improve readability
-          JsPrettyNamer.exec(jsProgram, propertyOracles);
+          JsPrettyNamer.exec(compilerState.getJsProgram(), propertyOracles);
           break;
         case DETAILED:
-          obfuscateMap = JsStringInterner.exec(jprogram, jsProgram, isIE6orUnknown);
-          JsVerboseNamer.exec(jsProgram, propertyOracles);
+          obfuscateMap = JsStringInterner.exec(compilerState);
+          JsVerboseNamer.exec(compilerState.getJsProgram(), propertyOracles);
           break;
         default:
           throw new InternalCompilerException("Unknown output mode");
@@ -467,37 +461,28 @@ public class JavaToJavaScriptCompiler {
       // (10.8) Handle cross-island references.
       // No new JsNames or references to JSNames can be introduced after this
       // point.
-      HandleCrossFragmentReferences.exec(logger, jsProgram, propertyOracles);
+      HandleCrossFragmentReferences.exec(logger, compilerState.getJsProgram(), propertyOracles);
 
-      
+
       // Verify that SymbolMap is somewhat close to being complete.
-      VerifySymbolMap.exec(jsProgram, jjsmap, symbolTable);
-      
+      VerifySymbolMap.exec(compilerState);
+
       // (11) Perform any post-obfuscation normalizations.
 
-      // Work around an IE7 bug,
-      // http://code.google.com/p/google-web-toolkit/issues/detail?id=1440
-      // note, JsIEBlockTextTransformer now handles restructuring top level
-      // blocks, this class now handles non-top level blocks only.
-      boolean splitBlocks = isIE6orUnknown;
-
-      if (splitBlocks) {
-        JsIEBlockSizeVisitor.exec(jsProgram);
-      }
-      JsBreakUpLargeVarStatements.exec(jsProgram, propertyOracles);
+      JsBreakUpLargeVarStatements.exec(compilerState.getJsProgram(), propertyOracles);
 
       // (12) Generate the final output text.
-      String[] js = new String[jsProgram.getFragmentCount()];
+      String[] js = new String[compilerState.getJsProgram().getFragmentCount()];
       StatementRanges[] ranges = new StatementRanges[js.length];
       SizeBreakdown[] sizeBreakdowns =
           options.isSoycEnabled() || options.isCompilerMetricsEnabled()
               ? new SizeBreakdown[js.length] : null;
       List<Map<Range, SourceInfo>> sourceInfoMaps = new ArrayList<Map<Range, SourceInfo>>();
-      generateJavaScriptCode(options, jprogram, jsProgram, jjsmap, js, ranges,
-          sizeBreakdowns, sourceInfoMaps, splitBlocks, isSourceMapsEnabled);
+      generateJavaScriptCode(options, compilerState, js, ranges,
+          sizeBreakdowns, sourceInfoMaps, isSourceMapsEnabled);
 
       PermutationResult toReturn =
-          new PermutationResultImpl(js, permutation, makeSymbolMap(symbolTable, jsProgram), ranges);
+          new PermutationResultImpl(js, permutation, makeSymbolMap(compilerState), ranges);
       CompilationMetricsArtifact compilationMetrics = null;
 
       // TODO: enable this when ClosureCompiler is enabled
@@ -525,10 +510,10 @@ public class JavaToJavaScriptCompiler {
               + "-compileReport; ignoring -compileReport.");
         }
       } else {
-        toReturn.addArtifacts(makeSoycArtifacts(logger, permutationId, jprogram, js, sizeBreakdowns,
-            options.isSoycExtra() ? sourceInfoMaps : null, dependencies, jjsmap, obfuscateMap,
-            unifiedAst.getModuleMetrics(), unifiedAst.getPrecompilationMetrics(), compilationMetrics,
-            options.isSoycHtmlDisabled()));
+        toReturn.addArtifacts(makeSoycArtifacts(logger, permutationId, compilerState, js,
+            sizeBreakdowns, options.isSoycExtra() ? sourceInfoMaps : null, dependencies,
+            obfuscateMap, unifiedAst.getModuleMetrics(), unifiedAst.getPrecompilationMetrics(),
+            compilationMetrics, options.isSoycHtmlDisabled()));
       }
 
       // TODO: enable this when ClosureCompiler is enabled
@@ -1095,29 +1080,28 @@ public class JavaToJavaScriptCompiler {
    * transformation.
    * 
    * @param options The options this compiler instance is running with
-   * @param jprogram The original Java program AST
-   * @param jsProgram The AST to convert to source code
-   * @param jjsMap A map between the JavaScript AST and the Java AST it came from
+   * @param compilerState the compiler state containing the Java AST, JavaScript AST, etc.
    * @param js An array to hold the output JavaScript
    * @param ranges An array to hold the statement ranges for that JavaScript
    * @param sizeBreakdowns An array to hold the size breakdowns for that JavaScript
    * @param sourceInfoMaps An array to hold the source info maps for that JavaScript
-   * @param splitBlocks true if current permutation is for IE6 or unknown
    * @param sourceMapsEnabled
    */
   private static void generateJavaScriptCode(JJSOptions options,
-      JProgram jprogram, JsProgram jsProgram,
-      JavaToJavaScriptMap jjsMap, String[] js, StatementRanges[] ranges,
+      CompilerState compilerState, String[] js, StatementRanges[] ranges,
       SizeBreakdown[] sizeBreakdowns,
       List<Map<Range, SourceInfo>> sourceInfoMaps,
-      boolean splitBlocks, boolean sourceMapsEnabled) {
+      boolean sourceMapsEnabled) {
 
     boolean useClosureCompiler = options.isClosureCompilerEnabled();
     if (useClosureCompiler) {
       ClosureJsRunner runner = new ClosureJsRunner();
-      runner.compile(jprogram, jsProgram, js, options.getOutput());
+      runner.compile(compilerState, js, options.getOutput());
       return;
     }
+
+    JavaToJavaScriptMap jjsMap = compilerState.getJavaToJavaScriptMap();
+    JsProgram jsProgram = compilerState.getJsProgram();
 
     for (int i = 0; i < js.length; i++) {
       DefaultTextOutput out = new DefaultTextOutput(options.getOutput().shouldMinimize());
@@ -1159,12 +1143,6 @@ public class JavaToJavaScriptCompiler {
         transformer.exec();
       }
       functionClusterEvent.end();
-
-      // rewrite top-level blocks to limit the number of statements
-      if (!sourceMapsEnabled && splitBlocks) {
-        transformer = new JsIEBlockTextTransformer(transformer);
-        transformer.exec();
-      }
 
       js[i] = transformer.getJs();
       ranges[i] = transformer.getStatementRanges();
@@ -1211,10 +1189,9 @@ public class JavaToJavaScriptCompiler {
   }
 
   private static Collection<? extends Artifact<?>> makeSoycArtifacts(TreeLogger logger,
-      int permutationId, JProgram jprogram, String[] js, SizeBreakdown[] sizeBreakdowns,
+      int permutationId, CompilerState compilerState, String[] js, SizeBreakdown[] sizeBreakdowns,
       List<Map<Range, SourceInfo>> sourceInfoMaps, SyntheticArtifact dependencies,
-      JavaToJavaScriptMap jjsmap, Map<JsName, String> obfuscateMap,
-      ModuleMetricsArtifact moduleMetricsArtifact,
+      Map<JsName, String> obfuscateMap, ModuleMetricsArtifact moduleMetricsArtifact,
       PrecompilationMetricsArtifact precompilationMetricsArtifact,
       CompilationMetricsArtifact compilationMetrics, boolean htmlReportsDisabled)
       throws IOException, UnableToCompleteException {
@@ -1228,7 +1205,7 @@ public class JavaToJavaScriptCompiler {
     Event recordSplitPoints =
         SpeedTracerLogger
             .start(CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "recordSplitPoints");
-    SplitPointRecorder.recordSplitPoints(jprogram, baos, logger);
+    SplitPointRecorder.recordSplitPoints(compilerState.getjProgram(), baos, logger);
     SyntheticArtifact splitPoints =
         new SyntheticArtifact(SoycReportLinker.class, "splitPoints" + permutationId + ".xml.gz",
             baos.toByteArray());
@@ -1240,7 +1217,8 @@ public class JavaToJavaScriptCompiler {
       Event recordSizeMap =
           SpeedTracerLogger.start(CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "recordSizeMap");
       baos.reset();
-      SizeMapRecorder.recordMap(logger, baos, sizeBreakdowns, jjsmap, obfuscateMap);
+      SizeMapRecorder.recordMap(logger, baos, sizeBreakdowns,
+          compilerState.getJavaToJavaScriptMap(), obfuscateMap);
       sizeMaps =
           new SyntheticArtifact(SoycReportLinker.class, "stories" + permutationId + ".xml.gz", baos
               .toByteArray());
@@ -1328,8 +1306,9 @@ public class JavaToJavaScriptCompiler {
     return amp.makeStatement();
   }
 
-  private static SymbolData[] makeSymbolMap(Map<StandardSymbolData, JsName> symbolTable,
-      JsProgram jsProgram) {
+  private static SymbolData[] makeSymbolMap(CompilerState compilerState) {
+    Map<StandardSymbolData, JsName> symbolTable = compilerState.getSymbolTable();
+    JsProgram jsProgram = compilerState.getJsProgram();
 
 
     // Keep tracks of a list of referenced name. If it is not used, don't
@@ -1347,7 +1326,7 @@ public class JavaToJavaScriptCompiler {
               nameUsed.add(x.getName().getIdent());
             }
         }
-        
+
         @Override
         public void endVisit(JsNameRef x, JsContext ctx) {
           // Obviously this isn't even that accurate. Some of them are
@@ -1358,14 +1337,14 @@ public class JavaToJavaScriptCompiler {
             nameUsed.add(x.getName().getIdent());
           }
         }
-        
+
         @Override
         public void endVisit(JsNameOf x, JsContext ctx) {
           if (x.getName() != null) {
             nameUsed.add(x.getName().getIdent());
           }
         }
-        
+
         @Override
         public void endVisit(JsForIn x, JsContext ctx) {
           if (x.getIterVarName() != null) {

@@ -15,6 +15,9 @@
  */
 package com.google.gwt.dev.js;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.DefaultSelectionProperty;
@@ -22,6 +25,7 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
@@ -158,7 +162,12 @@ public class JsCoerceIntShiftTest extends TestCase {
 
     program.getGlobalBlock().getStatements().addAll(expected);
 
-    JsCoerceIntShift.exec(program, logger, oracles);
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJsProgram()).thenReturn(program);
+    when(contextMock.getPropertyOracles()).thenReturn(oracles);
+    when(contextMock.getLogger()).thenReturn(logger);
+
+    JsCoerceIntShift.exec(contextMock);
 
     TextOutput text = new DefaultTextOutput(true);
     JsVisitor generator = new JsSourceGenerationVisitor(text);

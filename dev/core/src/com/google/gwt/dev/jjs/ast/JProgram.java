@@ -22,7 +22,8 @@ import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
 import com.google.gwt.dev.jjs.impl.CodeSplitter;
 import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -376,9 +377,9 @@ public class JProgram extends JNode {
   /**
    * Filled in by ReplaceRunAsync, once the numbers are known.
    */
-  private List<JRunAsync> runAsyncs = Lists.create();
+  private List<JRunAsync> runAsyncs = Lists.newArrayList();
 
-  private List<Integer> splitPointInitialSequence = Lists.create();
+  private List<Integer> splitPointInitialSequence = Lists.newArrayList();;
 
   private final Map<JMethod, JMethod> staticToInstanceMap = new IdentityHashMap<JMethod, JMethod>();
 
@@ -1002,7 +1003,7 @@ public class JProgram extends JNode {
   }
 
   public void setRunAsyncs(List<JRunAsync> runAsyncs) {
-    this.runAsyncs = Lists.normalizeUnmodifiable(runAsyncs);
+    this.runAsyncs = ImmutableList.copyOf(runAsyncs);
   }
 
   public void setSplitPointInitialSequence(List<Integer> list) {

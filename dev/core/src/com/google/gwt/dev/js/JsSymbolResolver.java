@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
@@ -52,8 +53,8 @@ public class JsSymbolResolver {
     }
   }
 
-  public static void exec(JsProgram program) {
-    new JsSymbolResolver(program).execImpl();
+  public static void exec(CompilerContext compilerContext) {
+    new JsSymbolResolver(compilerContext.getJsProgram()).execImpl();
   }
 
   private final JsProgram program;

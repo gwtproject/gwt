@@ -45,7 +45,7 @@ import java.util.Map;
  * rewritten to force static dispatch. This transform may NOT be run multiple
  * times; it will create ever-expanding replacement expressions.
  */
-public class JsoDevirtualizer {
+public class JsoDevirtualizer extends CompilerPass {
 
   /**
    * Rewrite any virtual dispatches to Object or JavaScriptObject such that
@@ -135,10 +135,6 @@ public class JsoDevirtualizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new JsoDevirtualizer(program).execImpl();
-  }
-
   /**
    * Maps each Object instance methods (ie, {@link Object#equals(Object)}) onto
    * its corresponding devirtualizing method.
@@ -167,21 +163,22 @@ public class JsoDevirtualizer {
 
   private final CreateStaticImplsVisitor staticImplCreator;
 
-  private JsoDevirtualizer(JProgram program) {
-    this.program = program;
+  public JsoDevirtualizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
     this.isJavaObjectMethod = program.getIndexedMethod("Cast.isJavaObject");
     staticImplCreator = new CreateStaticImplsVisitor(program);
   }
 
-  private void execImpl() {
+  protected boolean run() {
     JClassType jsoType = program.getJavaScriptObject();
     if (jsoType == null) {
-      return;
+      return false;
     }
 
     RewriteVirtualDispatches rewriter = new RewriteVirtualDispatches();
     rewriter.accept(program);
     assert (rewriter.didChange());
+    return true;
   }
 
   /**

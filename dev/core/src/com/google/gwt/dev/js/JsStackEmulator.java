@@ -24,6 +24,8 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
+import com.google.gwt.dev.jjs.impl.CompilerPass;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
@@ -75,7 +77,7 @@ import java.util.Set;
  * 
  * @see com.google.gwt.core.client.impl.StackTraceCreator
  */
-public class JsStackEmulator {
+public class JsStackEmulator extends CompilerPass {
 
   private static final String PROPERTY_NAME = "compiler.stackMode";
 
@@ -815,14 +817,6 @@ public class JsStackEmulator {
     STRIP, NATIVE, EMULATED;
   }
 
-  public static void exec(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
-    if (getStackMode(propertyOracles) == StackMode.EMULATED) {
-      (new JsStackEmulator(jprogram, jsProgram, propertyOracles, jjsmap)).execImpl();
-    }
-  }
-
   public static StackMode getStackMode(PropertyOracle[] propertyOracles) {
     SelectionProperty property;
     try {
@@ -846,7 +840,8 @@ public class JsStackEmulator {
         } catch (BadPropertyValueException e) {
           // OK!
         }
-        assert value.equals(property.getCurrentValue()) : "compiler.stackMode property has multiple values.";
+        assert value.equals(property.getCurrentValue()) :
+            "compiler.stackMode property has multiple values.";
       }
     }
     return stackMode;
@@ -862,12 +857,11 @@ public class JsStackEmulator {
   private JsName stack;
   private JsName stackDepth;
 
-  private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
-    this.jprogram = jprogram;
-    this.jsProgram = jsProgram;
-    this.jjsmap = jjsmap;
+  public JsStackEmulator(CompilerContext compilerContext) {
+    this.jprogram = compilerContext.getJProgram();
+    this.jsProgram = compilerContext.getJsProgram();
+    this.jjsmap = compilerContext.getJavaToJavaScriptMap();
+    PropertyOracle[] propertyOracles = compilerContext.getPropertyOracles();
 
     assert propertyOracles.length > 0;
     PropertyOracle oracle = propertyOracles[0];
@@ -885,16 +879,22 @@ public class JsStackEmulator {
     }
   }
 
-  private void execImpl() {
+  @Override
+  public boolean run() {
+    if (getStackMode(getCompilerContext().getPropertyOracles()) != StackMode.EMULATED) {
+      return false;
+    }
     wrapFunction = jsProgram.getIndexedFunction("Exceptions.wrap");
     if (wrapFunction == null) {
       // No exceptions caught? Weird, but possible.
-      return;
+      return false;
     }
     initNames();
     makeVars();
     (new ReplaceUnobfuscatableNames()).accept(jsProgram);
     (new InstrumentAllFunctions()).accept(jsProgram);
+
+    return true;
   }
 
   private void initNames() {

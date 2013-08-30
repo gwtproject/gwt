@@ -15,7 +15,11 @@
  */
 package com.google.gwt.dev.js;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
@@ -48,9 +52,11 @@ public abstract class OptimizerTestBase extends TestCase {
 
     program.getGlobalBlock().getStatements().addAll(expected);
 
+    CompilerContext compilerContext = mock(CompilerContext.class);
+    when(compilerContext.getJsProgram()).thenReturn(program);
     for (Class<?> clazz : toExec) {
-      Method m = clazz.getMethod("exec", JsProgram.class);
-      m.invoke(null, program);
+      Method m = clazz.getMethod("exec", CompilerContext.class);
+      m.invoke(null, compilerContext);
     }
 
     TextOutput text = new DefaultTextOutput(true);

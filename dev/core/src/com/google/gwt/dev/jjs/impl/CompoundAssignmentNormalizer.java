@@ -62,7 +62,7 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
  * use for other purposes.
  * </p>
  */
-public abstract class CompoundAssignmentNormalizer {
+public abstract class CompoundAssignmentNormalizer extends CompilerPass {
   /**
    * Breaks apart certain complex assignments.
    */

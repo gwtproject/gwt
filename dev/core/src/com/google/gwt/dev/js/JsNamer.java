@@ -18,6 +18,7 @@ package com.google.gwt.dev.js;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -102,11 +103,12 @@ public abstract class JsNamer {
 
   protected final List<String> blacklistedSuffixes;
 
-  public JsNamer(JsProgram program, PropertyOracle[] propertyOracles) {
-    this.program = program;
+  public JsNamer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJsProgram();
     referenced = collectReferencedNames(program);
     Set<String> blacklist = new HashSet<String>();
     List<String> blacklistSuffixes = new ArrayList<String>();
+    PropertyOracle[] propertyOracles = compilerContext.getPropertyOracles();
     if (propertyOracles != null) {
       for (PropertyOracle propOracle : propertyOracles) {
         maybeAddToBlacklist(BLACKLIST, blacklist, propOracle);

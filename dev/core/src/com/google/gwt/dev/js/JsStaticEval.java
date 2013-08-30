@@ -17,6 +17,7 @@ package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.CanBooleanEval;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
@@ -877,10 +878,10 @@ public class JsStaticEval {
     return result;
   }
 
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(CompilerContext compilerContext) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsStaticEval(program).execImpl();
+    OptimizerStats stats = new JsStaticEval(compilerContext.getJsProgram()).execImpl();
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }

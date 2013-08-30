@@ -59,7 +59,7 @@ import com.google.gwt.dev.jjs.ast.JType;
  * be <code>null</code> and the other to be <code>undefined</code>.
  * </p>
  */
-public class EqualityNormalizer {
+public class EqualityNormalizer extends CompilerPass {
 
   /**
    * Breaks apart certain complex assignments.
@@ -201,23 +201,19 @@ public class EqualityNormalizer {
    */
   private static final int STRAT_TRIPLE = 1;
 
-  public static void exec(JProgram program) {
-    new EqualityNormalizer(program).execImpl();
-  }
-
   private static boolean canBeNull(JExpression x) {
     return ((JReferenceType) x.getType()).canBeNull();
   }
 
   private final JProgram program;
 
-  private EqualityNormalizer(JProgram program) {
-    this.program = program;
+  public EqualityNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
   }
 
-  private void execImpl() {
+  public boolean run() {
     BreakupAssignOpsVisitor breaker = new BreakupAssignOpsVisitor();
     breaker.accept(program);
+    return breaker.didChange();
   }
-
 }

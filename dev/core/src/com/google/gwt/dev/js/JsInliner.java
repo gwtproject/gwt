@@ -18,6 +18,7 @@ package com.google.gwt.dev.js;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
@@ -1781,10 +1782,11 @@ public class JsInliner {
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
-  public static OptimizerStats exec(JsProgram program, Collection<JsNode> toInline) {
+  public static OptimizerStats exec(CompilerContext compilerContext) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program, toInline);
+    OptimizerStats stats = execImpl(compilerContext.getJsProgram(),
+        compilerContext.getFunctionsForJsInlining());
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }

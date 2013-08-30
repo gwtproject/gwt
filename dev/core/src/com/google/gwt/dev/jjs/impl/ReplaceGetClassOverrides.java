@@ -28,9 +28,12 @@ import com.google.gwt.dev.jjs.ast.JProgram;
  * (to permit getClass() devirtualization in JsoDevirtualizer to continue to work).
  * Also Inline all method calls to Object.getClass() as Object.clazz.
  */
-public class ReplaceGetClassOverrides {
-  public static void exec(JProgram program) {
-    new GetClassInlinerRemover(program).accept(program);
+public class ReplaceGetClassOverrides extends CompilerPass {
+
+  public boolean run() {
+    GetClassInlinerRemover remover = new GetClassInlinerRemover(getCompilerContext());
+    remover.accept(getCompilerContext().getJProgram());
+    return remover.didChange();
   }
 
   private static class GetClassInlinerRemover extends JModVisitor {
@@ -39,8 +42,8 @@ public class ReplaceGetClassOverrides {
     private JMethod getClassMethod;
     private JField clazzField;
 
-    public GetClassInlinerRemover(JProgram program) {
-      this.program = program;
+    private GetClassInlinerRemover(CompilerContext compilerContext) {
+      this.program = compilerContext.getJProgram();
       getClassMethod = program.getIndexedMethod("Object.getClass");
       clazzField = program.getIndexedField("Object.___clazz");
     }

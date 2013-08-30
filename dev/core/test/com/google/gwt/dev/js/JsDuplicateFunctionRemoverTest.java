@@ -15,8 +15,12 @@
  */
 package com.google.gwt.dev.js;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -54,8 +58,9 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
 
   // JsDuplicateFunctionRemover does not have a one parameter exec function.
   private static class JsDuplicateFunctionRemoverProxy {
-    static public void exec(JsProgram program) {
-      JsDuplicateFunctionRemover.exec(program, new MockNameGenerator());
+    static public void exec(CompilerContext compilerContext) {
+
+      JsDuplicateFunctionRemover.exec(compilerContext, new MockNameGenerator());
     }
   }
 
@@ -88,7 +93,8 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     String firstName = new MockNameGenerator().getFreshName();
     assertEquals("_.method1=" + firstName + ";_.method2=" + firstName +
         ";_.method1();_.method2();function " + firstName + "(){}\n",
-		    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class));
+		    optimize(mockCompilerContext(program), JsSymbolResolver.class,
+            JsDuplicateFunctionRemoverProxy.class));
   }
 
 
@@ -117,7 +123,8 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     // Mark all functions as if they were translated from Java sources.
     setAllFromJava(program);
 
-    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class);
+    optimize(mockCompilerContext(program), JsSymbolResolver.class,
+        JsDuplicateFunctionRemoverProxy.class);
 
     // There should be two distinct dedupped functions here.
     MockNameGenerator tempFreshNameGenerator = new MockNameGenerator();
@@ -183,7 +190,8 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
 
     assertTrue(topScope_a != f2_a);
 
-    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class);
+    optimize(mockCompilerContext(program), JsSymbolResolver.class,
+        JsDuplicateFunctionRemoverProxy.class);
 
     // collect values assigned to some identifiers.
     final Map<String, JsName> assignments = AssignmentGatherer.exec(program);
@@ -213,22 +221,28 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
   /**
    * Optimize a JS program.
    * 
-   * @param program the source program
+   * @param compilerContext the compiler context containing the JavaScript program to optimize.
    * @param toExec a list of classes that implement
    *          <code>static void exec(JsProgram)</code>
    * @return optimized JS
    */
-  protected String optimize(JsProgram program, Class<?>... toExec) throws Exception {
+  protected String optimize(CompilerContext compilerContext, Class<?>... toExec) throws Exception {
  
     for (Class<?> clazz : toExec) {
-      Method m = clazz.getMethod("exec", JsProgram.class);
-      m.invoke(null, program);
+      Method m = clazz.getMethod("exec", CompilerContext.class);
+      m.invoke(null, compilerContext);
     }
 
     TextOutput text = new DefaultTextOutput(true);
     JsVisitor generator = new JsSourceGenerationVisitor(text);
 
-    generator.accept(program);
+    generator.accept(compilerContext.getJsProgram());
     return text.toString();
+  }
+
+  private CompilerContext mockCompilerContext(JsProgram program) {
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJsProgram()).thenReturn(program);
+    return contextMock;
   }
 }

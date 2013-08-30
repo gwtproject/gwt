@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12da3133_dffbbba2",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-30T23:30:50Z",
+      "side": 1,
+      "message": "I meant replace all javadoc. \n\n\"Returns {@code true} if the month is before year in the date formatter in current locale.\"",
+      "revId": "ec3a1f02d8be0052c412dc984428cd3416983260",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32a3b5b4_d04c7c74",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-30T23:30:50Z",
+      "side": 1,
+      "message": "Can you update the javadoc for MonthSelector and DefaultMonthSelector to indicate that they are for selecting both month and year but the names doesn\u0027t reflect that for backward compatibility?",
+      "revId": "ec3a1f02d8be0052c412dc984428cd3416983260",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7299ad82_f29a68b2",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-30T23:30:50Z",
+      "side": 1,
+      "message": "Perhaps we can collapse setMonth and setYear and call it setDate. Currently both method changes behavior depending on isMonthDdVisible and isYearDdVisible and it is hard to track the flow.\n\nWe can still keep the method simple by extracting the code that re-populates \"yearSelect\" into a method.",
+      "revId": "ec3a1f02d8be0052c412dc984428cd3416983260",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

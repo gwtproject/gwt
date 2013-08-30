@@ -16,7 +16,11 @@
 
 package com.google.gwt.dev.js;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExprStmt;
@@ -78,9 +82,13 @@ public class CoverageInstrumentorTest extends TestCase {
 
   private String instrument(String code) throws Exception {
     functionBody.getStatements().clear();
-    CoverageInstrumentor.exec(program, parse(code));
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJsProgram()).thenReturn(program);
+    when(contextMock.getInstrumentableLines()).thenReturn(parse(code));
+    CoverageInstrumentor.exec(contextMock);
     return functionBody.toSource().trim().replaceAll("\\s+", " ");
   }
+
 
   private Multimap<String, Integer> parse(String code) throws Exception {
     Iterable<String> lines = Splitter.on('\n').split(code);

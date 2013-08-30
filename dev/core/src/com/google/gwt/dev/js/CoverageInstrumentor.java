@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -67,8 +68,11 @@ public class CoverageInstrumentor {
     }
   }
 
-  public static void exec(JsProgram jsProgram, Multimap<String, Integer> instrumentableLines) {
-    new CoverageInstrumentor(jsProgram, instrumentableLines).execImpl();
+  public static void exec(CompilerContext compilerContext) {
+    if (compilerContext.getInstrumentableLines() != null) {
+      new CoverageInstrumentor(compilerContext.getJsProgram(),
+          compilerContext.getInstrumentableLines()).execImpl();
+    }
   }
 
   /**

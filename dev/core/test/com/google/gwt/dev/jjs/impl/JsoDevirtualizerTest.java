@@ -21,6 +21,9 @@ import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 /**
  * Tests for the {@link JsoDevirtualizer} visitor.
  */
@@ -89,7 +92,10 @@ public class JsoDevirtualizerTest extends OptimizerTestBase {
 
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
-    JsoDevirtualizer.exec(program);
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJProgram()).thenReturn(program);
+    CompilerPass.exec(contextMock,
+        JsoDevirtualizer.class);
     return true;
   }
 }

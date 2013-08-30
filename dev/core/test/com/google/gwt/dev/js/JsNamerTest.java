@@ -15,6 +15,9 @@
  */
 package com.google.gwt.dev.js;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.DefaultConfigurationProperty;
@@ -22,6 +25,7 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
@@ -63,55 +67,63 @@ public class JsNamerTest extends OptimizerTestBase {
     return rename(js, true);
   }
 
-  private String rename(String js, final boolean useFilter) throws Exception {
+  private String rename(String js, boolean useFilter) throws Exception {
     JsProgram program = new JsProgram();
     List<JsStatement> expected = JsParser.parse(SourceOrigin.UNKNOWN,
         program.getScope(), new StringReader(js));
-
     program.getGlobalBlock().getStatements().addAll(expected);
-    JsSymbolResolver.exec(program);
-    JsPrettyNamer.exec(program, new PropertyOracle[]{
-        new PropertyOracle() {
-          @Override
-          public ConfigurationProperty getConfigurationProperty(
-              String propertyName) throws BadPropertyValueException {
-            if (useFilter) {
-              if (JsNamer.BLACKLIST.equals(propertyName)) {
-                return new DefaultConfigurationProperty(JsNamer.BLACKLIST,
-                    Arrays.asList("foo, bar", "baz"));
-              } else if (JsNamer.BLACKLIST_SUFFIXES.equals(propertyName)) {
-                return new DefaultConfigurationProperty(
-                    JsNamer.BLACKLIST_SUFFIXES, Arrays.asList("logger"));
-              }
-            }
-            throw new BadPropertyValueException("No property value for "
-                + propertyName);
-          }
 
-          @Override
-          public String getPropertyValue(TreeLogger logger,
-              String propertyName) throws BadPropertyValueException {
-            return null;
-          }
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJsProgram()).thenReturn(program);
+    when(contextMock.getPropertyOracles())
+        .thenReturn(new PropertyOracle[] { mockPropertyOracle(useFilter)});
 
-          @Override
-          public String[] getPropertyValueSet(TreeLogger logger,
-              String propertyName) throws BadPropertyValueException {
-            return new String[0];
-          }
+    JsSymbolResolver.exec(contextMock);
+    JsPrettyNamer.exec(contextMock);
 
-          @Override
-          public SelectionProperty getSelectionProperty(TreeLogger logger,
-              String propertyName) throws BadPropertyValueException {
-            return null;
-          }
-        }
-    });
     TextOutput text = new DefaultTextOutput(true);
     JsVisitor generator = new JsSourceGenerationVisitor(text);
 
     generator.accept(program);
     return text.toString();
+  }
+
+  private PropertyOracle mockPropertyOracle(final boolean useFilter) {
+    return new PropertyOracle() {
+      @Override
+      public ConfigurationProperty getConfigurationProperty(
+          String propertyName) throws BadPropertyValueException {
+        if (useFilter) {
+          if (JsNamer.BLACKLIST.equals(propertyName)) {
+            return new DefaultConfigurationProperty(JsNamer.BLACKLIST,
+                Arrays.asList("foo, bar", "baz"));
+          } else if (JsNamer.BLACKLIST_SUFFIXES.equals(propertyName)) {
+            return new DefaultConfigurationProperty(
+                JsNamer.BLACKLIST_SUFFIXES, Arrays.asList("logger"));
+          }
+        }
+        throw new BadPropertyValueException("No property value for "
+            + propertyName);
+      }
+
+      @Override
+      public String getPropertyValue(TreeLogger logger,
+          String propertyName) throws BadPropertyValueException {
+        return null;
+      }
+
+      @Override
+      public String[] getPropertyValueSet(TreeLogger logger,
+          String propertyName) throws BadPropertyValueException {
+        return new String[0];
+      }
+
+      @Override
+      public SelectionProperty getSelectionProperty(TreeLogger logger,
+          String propertyName) throws BadPropertyValueException {
+        return null;
+      }
+    };
   }
 }
 

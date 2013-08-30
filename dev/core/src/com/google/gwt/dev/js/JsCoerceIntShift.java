@@ -20,13 +20,13 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsPrefixOperation;
-import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsUnaryOperator;
 
 /**
@@ -63,16 +63,14 @@ public class JsCoerceIntShift {
 
   /**
    * If this permutation may be executed on WebKit, rewrite a >> b as ~~a >> b.
-   * 
-   * @param program
+   *
    * @param logger
-   * @param propertyOracles
+   * @param compilerContext
    * @return true if any changes were made
    */
-  public static boolean exec(JsProgram program, TreeLogger logger,
-      PropertyOracle[] propertyOracles) {
+  public static boolean exec(TreeLogger logger, CompilerContext compilerContext) {
     boolean seenWebKit = false;
-    for (PropertyOracle oracle : propertyOracles) {
+    for (PropertyOracle oracle : compilerContext.getPropertyOracles()) {
       try {
         SelectionProperty prop = oracle.getSelectionProperty(logger,
             "user.agent");
@@ -91,7 +89,7 @@ public class JsCoerceIntShift {
       return false;
     }
     MyVisitor v = new MyVisitor();
-    v.accept(program);
+    v.accept(compilerContext.getJsProgram());
     return v.didChange();
   }
 }

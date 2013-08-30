@@ -89,6 +89,11 @@ public class FixAssignmentsToUnboxOrCast extends JModVisitor {
     private boolean isUnboxOrCastExpression(JExpression x) {
       return (autoboxUtils.undoUnbox(x) != null) || x instanceof JCastOperation;
     }
+
+    @Override
+    protected boolean run() {
+      throw new UnsupportedOperationException();
+    }
   }
 
   public static void exec(JProgram program) {

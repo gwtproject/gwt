@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,9 +26,9 @@ import com.google.gwt.dev.cfg.StaticPropertyOracle;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
+import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.JsOutputOption;
-import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.CodeSplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.js.ast.JsBlock;
@@ -38,35 +38,20 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Unit test for {@link CodeSplitter2}.
  */
 public class CodeSplitter2Test extends JJSTestBase {
-
-  /**
-   * A {@link MultipleDependencyGraphRecorder} that does nothing.
-   */
-  private static final MultipleDependencyGraphRecorder NULL_RECORDER =
-      new MultipleDependencyGraphRecorder() {
-        public void close() {
-        }
-
-        public void endDependencyGraph() {
-        }
-
-        public void methodIsLiveBecause(JMethod liveMethod, ArrayList<JMethod> dependencyChain) {
-        }
-
-        public void open() {
-        }
-
-        public void startDependencyGraph(String name, String extnds) {
-        }
-      };
 
   // These will be the functions that are shared between fragments. This unit test will
   // be based for finding these function in the proper fragments.
@@ -84,11 +69,22 @@ public class CodeSplitter2Test extends JJSTestBase {
   private JProgram jProgram = null;
   private JsProgram jsProgram = null;
 
+  @Mock
+  private JJSOptions optionsMock;
+
+  @Mock
+  private MultipleDependencyGraphRecorder recorderMock;
+
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
     jsProgram = new JsProgram();
+    MockitoAnnotations.initMocks(this);
+    when(optionsMock.isCastCheckingDisabled()).thenReturn(false);
+    when(optionsMock.getOutput()).thenReturn(JsOutputOption.PRETTY);
+
   }
 
   public void testSimple() throws UnableToCompleteException {
@@ -231,20 +227,19 @@ public class CodeSplitter2Test extends JJSTestBase {
     // Fragment #3
     code.append(createRunAsync("functionA();"));
     code.append("  }\n");
-    code.append("}\n");    
+    code.append("}\n");
     compileSnippet(code.toString());
-    
+
     // init + 3 fragments + leftover.
     assertFragmentCount(5);
   }
-  
   public void testDoubleMerge() throws UnableToCompleteException {
     StringBuffer code = new StringBuffer();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
     code.append("public class EntryPoint {\n");
-    code.append(functionA); 
+    code.append(functionA);
     code.append(functionB);
     code.append(functionC);
     code.append("  public static void onModuleLoad() {\n");
@@ -257,25 +252,25 @@ public class CodeSplitter2Test extends JJSTestBase {
     // Fragment #2
     code.append(createRunAsync("functionB(); functionC();"));
     code.append("  }\n");
-    code.append("}\n");    
+    code.append("}\n");
     compileSnippet(code.toString());
-    
+
     // init + 2 fragments + leftover.
     assertFragmentCount(4);
     assertInFragment("functionA", 1);
     assertInFragment("functionB", 2);
     assertInFragment("functionC", 3);
   }
-  
+
   private void assertFragmentCount(int num) {
     assertEquals(num, jsProgram.getFragmentCount());
   }
-  
+
   private void assertInFragment(String functionName, int fragmentNum) {
     JsBlock fragment = jsProgram.getFragmentBlock(fragmentNum);
     assertTrue(findFunctionIn(functionName, fragment));
   }
-  
+
   private void assertNotInFragment(String functionName, int fragmentNum) {
     JsBlock fragment = jsProgram.getFragmentBlock(fragmentNum);
     assertFalse(findFunctionIn(functionName, fragment));
@@ -319,16 +314,16 @@ public class CodeSplitter2Test extends JJSTestBase {
         JavaAstConstructor.construct(logger, state, "test.EntryPoint",
             "com.google.gwt.lang.Exceptions");
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
-    CastNormalizer.exec(jProgram, false);
-    ArrayNormalizer.exec(jProgram);
+    CompilerContext mockedContext =mockCompilerContext(jProgram, jsProgram);
+
+    CompilerPass.exec(mockedContext,
+        CastNormalizer.class,
+        ArrayNormalizer.class);
     TypeTightener.exec(jProgram);
     MethodCallTightener.exec(jProgram);
-    Map<StandardSymbolData, JsName> symbolTable =
-      new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
-    JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-            new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER, 0);
+    CompilerPass.exec(mockedContext,
+        GenerateJavaScriptAST.class);
+    CodeSplitter2.exec(logger, mockedContext, 4, recorderMock, 0);
   }
 
   /**
@@ -352,15 +347,14 @@ public class CodeSplitter2Test extends JJSTestBase {
         JavaAstConstructor.construct(logger, state, "test.EntryPoint",
             "com.google.gwt.lang.Exceptions");
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
-    CastNormalizer.exec(jProgram, false);
-    ArrayNormalizer.exec(jProgram);
-    Map<StandardSymbolData, JsName> symbolTable =
-        new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
-    JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER,
-        mergeLimit);
+
+    CompilerContext mockedContext = mockCompilerContext(jProgram, jsProgram);
+    CompilerPass.exec(mockedContext,
+        CastNormalizer.class,
+        ArrayNormalizer.class,
+        GenerateJavaScriptAST.class);
+
+    CodeSplitter2.exec(logger, mockedContext, 4, recorderMock, mergeLimit);
   }
 
   private static String createRunAsync(String cast, String body) {
@@ -470,5 +464,19 @@ public class CodeSplitter2Test extends JJSTestBase {
         		"public void onSuccess() {}}";
       }      
     });
+  }
+
+  private CompilerContext mockCompilerContext(JProgram jProgram, JsProgram jsProgram) {
+    CompilerContext mockedContext = mock(CompilerContext.class);
+    when(mockedContext.getJProgram()).thenReturn(jProgram);
+    when(mockedContext.getJsProgram()).thenReturn(jsProgram);
+    when(mockedContext.getOptions()).thenReturn(optionsMock);
+    when(mockedContext.getPropertyOracles()).thenReturn(new PropertyOracle[]{
+        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)});
+    when(mockedContext.getSymbolTable())
+        .thenReturn(new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator()));
+    doCallRealMethod().when(mockedContext).setJavaToJavaScriptMap(any(JavaToJavaScriptMap.class));
+    when(mockedContext.getJavaToJavaScriptMap()).thenCallRealMethod();
+    return mockedContext;
   }
 }

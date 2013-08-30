@@ -38,7 +38,7 @@ import java.util.List;
  * cast would have been implicit. The explicit casts serve as markers for
  * {@link CastNormalizer}.
  */
-public class LongCastNormalizer {
+public class LongCastNormalizer extends CompilerPass {
 
   /**
    * Synthesize casts to longs and from long to trigger conversions.
@@ -197,18 +197,16 @@ public class LongCastNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new LongCastNormalizer(program).execImpl();
-  }
-
   private final JProgram program;
 
-  private LongCastNormalizer(JProgram program) {
-    this.program = program;
+  public LongCastNormalizer(CompilerContext context) {
+    this.program = context.getJProgram();
   }
 
-  private void execImpl() {
+  @Override
+  protected boolean run() {
     ImplicitCastVisitor visitor = new ImplicitCastVisitor(program.getTypePrimitiveLong());
     visitor.accept(program);
+    return visitor.didChange();
   }
 }

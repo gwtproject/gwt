@@ -22,7 +22,6 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
-import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 
 /**
@@ -30,11 +29,11 @@ import com.google.gwt.dev.jjs.ast.JType;
  * and operations on longs need to be broken up.
  */
 public class PostOptimizationCompoundAssignmentNormalizer extends CompoundAssignmentNormalizer {
-  public static void exec(JProgram program) {
-    new PostOptimizationCompoundAssignmentNormalizer().accept(program);
-  }
 
-  protected PostOptimizationCompoundAssignmentNormalizer() {
+  @Override
+  protected boolean run() {
+    accept(getCompilerContext().getJProgram());
+    return true;
   }
 
   @Override

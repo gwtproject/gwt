@@ -298,8 +298,10 @@ AugmentedJar(
     export_deps = [
         ":dev",  # for the post-jarjar names
     ],
+    testonly=1,
     deps = [
         "//third_party/java/junit",
+        "//third_party/java/mockito",
     ],
 )
 

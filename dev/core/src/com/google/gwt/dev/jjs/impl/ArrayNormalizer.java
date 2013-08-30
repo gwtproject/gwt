@@ -44,7 +44,7 @@ import com.google.gwt.dev.util.collect.Lists;
  * Depends on {@link CompoundAssignmentNormalizer} and {@link CastNormalizer}
  * having already run.
  */
-public class ArrayNormalizer {
+public class ArrayNormalizer extends CompilerPass {
 
   private class ArrayVisitor extends JModVisitor {
 
@@ -210,27 +210,23 @@ public class ArrayNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new ArrayNormalizer(program).execImpl();
-  }
-
   private final JMethod initDim;
   private final JMethod initDims;
   private final JMethod initValues;
   private final JProgram program;
   private final JMethod setCheckMethod;
 
-  private ArrayNormalizer(JProgram program) {
-    this.program = program;
+  public ArrayNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
     setCheckMethod = program.getIndexedMethod("Array.setCheck");
     initDim = program.getIndexedMethod("Array.initDim");
     initDims = program.getIndexedMethod("Array.initDims");
     initValues = program.getIndexedMethod("Array.initValues");
   }
 
-  private void execImpl() {
+  public boolean run() {
     ArrayVisitor visitor = new ArrayVisitor();
     visitor.accept(program);
+    return visitor.didChange();
   }
-
 }

@@ -46,7 +46,7 @@ import java.util.Map;
  * Replaces any "GWT.create()" calls with a new expression for the actual result
  * of the deferred binding decision.
  */
-public class ResolveRebinds {
+public class ResolveRebinds extends CompilerPass {
 
   private class RebindVisitor extends JModVisitor {
     @Override
@@ -100,10 +100,6 @@ public class ResolveRebinds {
     }
   }
 
-  public static boolean exec(JProgram program, Map<String, String>[] orderedRebindAnswers) {
-    return new ResolveRebinds(program, orderedRebindAnswers).execImpl();
-  }
-
   /**
    * Returns the rebind answers that do not vary across various maps of rebind
    * answers.
@@ -130,9 +126,9 @@ public class ResolveRebinds {
   private final JProgram program;
   private final Map<String, JMethod> rebindMethods = new HashMap<String, JMethod>();
 
-  private ResolveRebinds(JProgram program, Map<String, String>[] orderedRebindAnswers) {
-    this.program = program;
-    this.orderedRebindAnswers = orderedRebindAnswers;
+  public ResolveRebinds(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
+    this.orderedRebindAnswers = compilerContext.getPermutation().getOrderedRebindAnswers();
 
     this.hardRebindAnswers = getHardRebindAnswers(orderedRebindAnswers);
     this.holderType = (JClassType) program.getIndexedType("CollapsedPropertyHolder");
@@ -152,7 +148,8 @@ public class ResolveRebinds {
     return reboundClassName;
   }
 
-  private boolean execImpl() {
+  @Override
+  protected boolean run() {
     RebindVisitor rebinder = new RebindVisitor();
     rebinder.accept(program);
     return rebinder.didChange();

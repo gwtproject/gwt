@@ -296,20 +296,16 @@ public class CodeSplitter2 {
     return cfa;
   }
 
-  public static void exec(TreeLogger logger, JProgram jprogram,
-      JsProgram jsprogram,
-      JavaToJavaScriptMap map, int fragmentsToMerge,
-      MultipleDependencyGraphRecorder dependencyRecorder,
-      int leftOverMergeLimit) {
-    if (jprogram.getRunAsyncs().size() == 0) {
+  public static void exec(TreeLogger logger, CompilerContext compilerContext, int fragmentsToMerge,
+      MultipleDependencyGraphRecorder dependencyRecorder, int leftOverMergeLimit) {
+    if (compilerContext.getJProgram().getRunAsyncs().size() == 0) {
       // Don't do anything if there is no call to runAsync
       return;
     }
     Event codeSplitterEvent = SpeedTracerLogger.start(CompilerEventType.CODE_SPLITTER);
     dependencyRecorder.open();
-    new CodeSplitter2(
-        logger, jprogram, jsprogram, map, fragmentsToMerge,
-        dependencyRecorder, leftOverMergeLimit).execImpl();
+    new CodeSplitter2(logger, compilerContext, fragmentsToMerge, dependencyRecorder,
+        leftOverMergeLimit).execImpl();
     dependencyRecorder.close();
     codeSplitterEvent.end();
   }
@@ -674,17 +670,15 @@ public class CodeSplitter2 {
    */
   private final int[] splitPointToFragmentMap;
 
-  private CodeSplitter2(TreeLogger logger, JProgram jprogram,
-      JsProgram jsprogram,
-      JavaToJavaScriptMap map, int splitPointsMerge,
+  private CodeSplitter2(TreeLogger logger, CompilerContext compilerContext, int splitPointsMerge,
       MultipleDependencyGraphRecorder dependencyRecorder,
       int leftOverMergeLimit) {
-    this.jprogram = jprogram;
-    this.jsprogram = jsprogram;
+    this.jprogram = compilerContext.getJProgram();
+    this.jsprogram = compilerContext.getJsProgram();
     this.splitPointsMerge = splitPointsMerge;
     this.leftOverMergeLimit = leftOverMergeLimit;
     this.dependencyRecorder = dependencyRecorder;
-    this.fragmentExtractor = new FragmentExtractor(jprogram, jsprogram, map);
+    this.fragmentExtractor = new FragmentExtractor(compilerContext);
     this.initialLoadSequence = new LinkedHashSet<Integer>(jprogram.getSplitPointInitialSequence());
     
     // Start out to assume split gets it's own fragment. We'll merge them later.
@@ -701,7 +695,7 @@ public class CodeSplitter2 {
     // TODO(acleung): I don't full understand this. This is mostly from the old
     // algorithm which patches up certain dependency after the control flow analysis.
     fieldToLiteralOfClass = buildFieldToClassLiteralMap(jprogram);
-    fragmentExtractor = new FragmentExtractor(jprogram, jsprogram, map);
+    fragmentExtractor = new FragmentExtractor(compilerContext);
  
     methodsInJavaScript = fragmentExtractor.findAllMethodsInJavaScript();
   }

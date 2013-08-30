@@ -15,6 +15,9 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -56,8 +59,11 @@ public class PostOptimizationCompoundAssignmentNormalizerTest
   }
   
   protected boolean optimizeMethod(JProgram program, JMethod method) {
-    PostOptimizationCompoundAssignmentNormalizer.exec(program);
-    LongCastNormalizer.exec(program);
+    CompilerContext contextMock = mock(CompilerContext.class);
+    when(contextMock.getJProgram()).thenReturn(program);
+    CompilerPass.exec(contextMock,
+        PostOptimizationCompoundAssignmentNormalizer.class,
+        LongCastNormalizer.class);
     return true;
   }
 }

@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
@@ -815,11 +816,10 @@ public class JsStackEmulator {
     STRIP, NATIVE, EMULATED;
   }
 
-  public static void exec(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
+  public static void exec(CompilerContext compilerContext) {
+    PropertyOracle[] propertyOracles = compilerContext.getPropertyOracles();
     if (getStackMode(propertyOracles) == StackMode.EMULATED) {
-      (new JsStackEmulator(jprogram, jsProgram, propertyOracles, jjsmap)).execImpl();
+      (new JsStackEmulator(compilerContext, propertyOracles)).execImpl();
     }
   }
 
@@ -846,7 +846,8 @@ public class JsStackEmulator {
         } catch (BadPropertyValueException e) {
           // OK!
         }
-        assert value.equals(property.getCurrentValue()) : "compiler.stackMode property has multiple values.";
+        assert value.equals(property.getCurrentValue()) :
+            "compiler.stackMode property has multiple values.";
       }
     }
     return stackMode;
@@ -862,12 +863,10 @@ public class JsStackEmulator {
   private JsName stack;
   private JsName stackDepth;
 
-  private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
-    this.jprogram = jprogram;
-    this.jsProgram = jsProgram;
-    this.jjsmap = jjsmap;
+  private JsStackEmulator(CompilerContext compilerContext, PropertyOracle[] propertyOracles) {
+    this.jprogram = compilerContext.getJProgram();
+    this.jsProgram = compilerContext.getJsProgram();
+    this.jjsmap = compilerContext.getJavaToJavaScriptMap();
 
     assert propertyOracles.length > 0;
     PropertyOracle oracle = propertyOracles[0];

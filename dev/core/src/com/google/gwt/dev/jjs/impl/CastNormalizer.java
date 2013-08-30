@@ -70,7 +70,7 @@ import java.util.TreeSet;
  * JavaScriptObject[].
  * </p>
  */
-public class CastNormalizer {
+public class CastNormalizer extends CompilerPass {
   private class AssignTypeCastabilityVisitor extends JVisitor {
 
     private final Set<JReferenceType> alreadyRan = new HashSet<JReferenceType>();
@@ -601,29 +601,29 @@ public class CastNormalizer {
     }
   };
 
-  public static void exec(JProgram program, boolean disableCastChecking) {
-    new CastNormalizer(program, disableCastChecking).execImpl();
-  }
-
   private final boolean disableCastChecking;
 
   private final JProgram program;
 
   private Map<JReferenceType, Integer> queryIdsByType;
 
-  private CastNormalizer(JProgram program, boolean disableCastChecking) {
-    this.program = program;
-    this.disableCastChecking = disableCastChecking;
+  public CastNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
+    this.disableCastChecking = compilerContext.getOptions().isCastCheckingDisabled();
   }
 
-  private void execImpl() {
+  @Override
+  protected boolean run() {
+    boolean didChange = false;
     {
       ConcatVisitor visitor = new ConcatVisitor();
       visitor.accept(program);
+      didChange |= visitor.didChange();
     }
     {
       DivVisitor visitor = new DivVisitor();
       visitor.accept(program);
+      didChange |= visitor.didChange();
     }
     {
       AssignTypeCastabilityVisitor assigner = new AssignTypeCastabilityVisitor();
@@ -633,6 +633,8 @@ public class CastNormalizer {
     {
       ReplaceTypeChecksVisitor replacer = new ReplaceTypeChecksVisitor();
       replacer.accept(program);
+      didChange |= replacer.didChange();
     }
+    return didChange;
   }
 }

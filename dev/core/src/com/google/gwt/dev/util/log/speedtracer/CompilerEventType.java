@@ -21,9 +21,11 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
  * Represents a type of event whose performance is tracked while running the
  * {@link com.google.gwt.dev.Compiler}
  */
-public enum CompilerEventType implements EventType {
+public enum
+    CompilerEventType implements EventType {
   CODE_SPLITTER("CodeSplitter", "Yellow"), //
   COMPILE("Compiler", "DarkBlue"), //
+  COMPILER_PASS("Compiler Pass" , "Navy"), //
   COMPILE_PERMUTATIONS("CompilePermutations", "BurlyWood"), //
   JJS_COMPILE_PERMUTATION("JjsCompilePermutation", "Moccasin"), //
   DRAFT_OPTIMIZE("DraftOptimizer", "Blue"), //

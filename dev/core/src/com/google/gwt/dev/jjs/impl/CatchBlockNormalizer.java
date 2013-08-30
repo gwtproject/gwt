@@ -47,7 +47,7 @@ import java.util.List;
  * Merge multi-catch blocks into a single catch block that uses instanceof tests
  * to determine which user block to run.
  */
-public class CatchBlockNormalizer {
+public class CatchBlockNormalizer extends CompilerPass {
 
   /**
    * Collapses all multi-catch blocks into a single catch block.
@@ -178,17 +178,13 @@ public class CatchBlockNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new CatchBlockNormalizer(program).execImpl();
-  }
-
   private JMethodBody currentMethodBody;
   private int localIndex;
   private final JProgram program;
   private final List<JLocal> tempLocals = new ArrayList<JLocal>();
 
-  private CatchBlockNormalizer(JProgram program) {
-    this.program = program;
+  public CatchBlockNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
   }
 
   private void clearLocals() {
@@ -196,11 +192,13 @@ public class CatchBlockNormalizer {
     localIndex = 0;
   }
 
-  private void execImpl() {
+  @Override
+  protected boolean run() {
     CollapseCatchBlocks collapser = new CollapseCatchBlocks();
     collapser.accept(program);
     UnwrapJavaScriptExceptionVisitor unwrapper = new UnwrapJavaScriptExceptionVisitor();
     unwrapper.accept(program);
+    return collapser.didChange() || unwrapper.didChange();
   }
 
   private JLocal popTempLocal() {

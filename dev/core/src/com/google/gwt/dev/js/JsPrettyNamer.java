@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
@@ -30,8 +31,13 @@ import java.util.Set;
  */
 public class JsPrettyNamer extends JsNamer {
 
-  public static void exec(JsProgram program, PropertyOracle[] propertyOracles) {
-    new JsPrettyNamer(program, propertyOracles).execImpl();
+
+  public static void exec(JsProgram jsProgram) {
+    new JsPrettyNamer(jsProgram, null).execImpl();
+  }
+
+  public static void exec(CompilerContext compilerContext) {
+    new JsPrettyNamer(compilerContext.getJsProgram(), compilerContext.getPropertyOracles()).execImpl();
   }
 
   /**

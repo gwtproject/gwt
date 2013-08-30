@@ -19,9 +19,9 @@ import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsModVisitor;
-import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 
@@ -36,8 +36,9 @@ import java.util.List;
 public class JsBreakUpLargeVarStatements extends JsModVisitor {
   private static final String CONFIG_PROP_MAX_VARS = "compiler.max.vars.per.var";
 
-  public static void exec(JsProgram program, PropertyOracle[] propertyOracles) {
-    (new JsBreakUpLargeVarStatements(propertyOracles)).accept(program);
+  public static void exec(CompilerContext compilerContext) {
+    (new JsBreakUpLargeVarStatements(compilerContext.getPropertyOracles()))
+        .accept(compilerContext.getJsProgram());
   }
 
   private static JsVars last(List<JsVars> list) {

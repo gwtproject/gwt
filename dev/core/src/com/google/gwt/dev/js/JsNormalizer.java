@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
+import com.google.gwt.dev.jjs.impl.CompilerPass;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -34,7 +36,7 @@ import com.google.gwt.dev.js.ast.JsUnaryOperator;
  * operation must be moved inside the comma expression to the last argument.</li>
  * </ul>
  */
-public class JsNormalizer {
+public class JsNormalizer extends CompilerPass {
 
   /**
    * Resolves any unresolved JsNameRefs.
@@ -106,18 +108,17 @@ public class JsNormalizer {
     }
   }
 
-  public static void exec(JsProgram program) {
-    new JsNormalizer(program).execImpl();
-  }
 
   private final JsProgram program;
 
-  private JsNormalizer(JsProgram program) {
-    this.program = program;
+  public JsNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJsProgram();
   }
 
-  private void execImpl() {
+  @Override
+  protected boolean run() {
     JsNormalizing normalizer = new JsNormalizing();
     normalizer.accept(program);
+    return normalizer.didChange();
   }
 }

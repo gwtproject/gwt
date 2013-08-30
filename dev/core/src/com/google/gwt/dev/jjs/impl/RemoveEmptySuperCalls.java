@@ -27,7 +27,20 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 /**
  * Removes calls to no-op super constructors.
  */
-public class RemoveEmptySuperCalls {
+public class RemoveEmptySuperCalls extends CompilerPass {
+
+  private final JProgram program;
+
+  public RemoveEmptySuperCalls(CompilerContext compilerContext) {
+    program = compilerContext.getJProgram();
+  }
+
+  @Override
+  protected boolean run() {
+    EmptySuperCallVisitor v = new EmptySuperCallVisitor();
+    v.accept(program);
+    return v.didChange();
+  }
 
   /**
    * Removes calls to no-op super constructors.
@@ -54,11 +67,5 @@ public class RemoveEmptySuperCalls {
         }
       }
     }
-  }
-
-  public static boolean exec(JProgram program) {
-    EmptySuperCallVisitor v = new EmptySuperCallVisitor();
-    v.accept(program);
-    return v.didChange();
   }
 }

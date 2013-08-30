@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -39,9 +40,10 @@ import java.util.Stack;
  */
 public class EvalFunctionsAtTopScope extends JsModVisitor {
 
-  public static void exec(JsProgram jsProgram, JavaToJavaScriptMap map) {
-    EvalFunctionsAtTopScope fev = new EvalFunctionsAtTopScope(map);
-    fev.accept(jsProgram);
+  public static void exec(CompilerContext compilerContext) {
+    EvalFunctionsAtTopScope fev =
+        new EvalFunctionsAtTopScope(compilerContext.getJavaToJavaScriptMap());
+    fev.accept(compilerContext.getJsProgram());
   }
 
   private JsStatement currentStatement;

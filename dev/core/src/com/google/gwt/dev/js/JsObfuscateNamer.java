@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
@@ -38,12 +39,14 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '$', '_', '0', '1',
       '2', '3', '4', '5', '6', '7', '8', '9'};
 
-  public static FreshNameGenerator exec(JsProgram program) {
-    return exec(program, null);
+
+  public static void exec(JsProgram jsProgram) {
+    (new JsObfuscateNamer(jsProgram, null)).execImpl();
   }
 
-  public static FreshNameGenerator exec(JsProgram program, PropertyOracle[] propertyOracles) {
-    JsObfuscateNamer namer = new JsObfuscateNamer(program, propertyOracles);
+  public static FreshNameGenerator exec(CompilerContext compilerContext) {
+    JsObfuscateNamer namer = new JsObfuscateNamer(compilerContext.getJsProgram(),
+        compilerContext.getPropertyOracles());
     namer.execImpl();
     return namer;
   }

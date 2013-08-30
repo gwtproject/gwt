@@ -34,6 +34,7 @@ import com.google.gwt.dev.cfg.Script;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.JsObfuscateNamer;
 import com.google.gwt.dev.js.JsParser;
 import com.google.gwt.dev.js.JsParserException;
@@ -435,8 +436,10 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
       throw new UnableToCompleteException();
     }
 
-    JsSymbolResolver.exec(jsProgram);
-    JsUnusedFunctionRemover.exec(jsProgram);
+    CompilerContext compilerContext = new CompilerContext(jsProgram);
+
+    JsSymbolResolver.exec(compilerContext);
+    JsUnusedFunctionRemover.exec(compilerContext);
 
     switch (jjsOptions.getOutput()) {
       case OBFUSCATED:
@@ -449,16 +452,16 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
          * function within the program.
          */
         TopFunctionStringInterner.exec(jsProgram);
-        JsObfuscateNamer.exec(jsProgram, null);
+        JsObfuscateNamer.exec(compilerContext);
         break;
       case PRETTY:
         // We don't intern strings in pretty mode to improve readability
-        JsPrettyNamer.exec(jsProgram, null);
+        JsPrettyNamer.exec(compilerContext);
         break;
       case DETAILED:
         // As above with OBFUSCATED
         TopFunctionStringInterner.exec(jsProgram);
-        JsVerboseNamer.exec(jsProgram, null);
+        JsVerboseNamer.exec(compilerContext);
         break;
       default:
         throw new InternalCompilerException("Unknown output mode");

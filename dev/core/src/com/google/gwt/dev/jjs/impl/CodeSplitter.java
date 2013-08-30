@@ -248,15 +248,15 @@ public class CodeSplitter {
     return computeInitiallyLive(jprogram, NULL_RECORDER);
   }
 
-  public static void exec(TreeLogger logger, JProgram jprogram, JsProgram jsprogram,
-      JavaToJavaScriptMap map, MultipleDependencyGraphRecorder dependencyRecorder) {
-    if (jprogram.getRunAsyncs().size() == 0) {
+  public static void exec(TreeLogger logger, CompilerContext compilerContext,
+      MultipleDependencyGraphRecorder dependencyRecorder) {
+    if (compilerContext.getJProgram().getRunAsyncs().size() == 0) {
       // Don't do anything if there is no call to runAsync
       return;
     }
     Event codeSplitterEvent = SpeedTracerLogger.start(CompilerEventType.CODE_SPLITTER);
     dependencyRecorder.open();
-    new CodeSplitter(logger, jprogram, jsprogram, map, dependencyRecorder).execImpl();
+    new CodeSplitter(logger, compilerContext, dependencyRecorder).execImpl();
     dependencyRecorder.close();
     codeSplitterEvent.end();
   }
@@ -642,19 +642,19 @@ public class CodeSplitter {
   private final Set<JMethod> methodsInJavaScript;
   private final int numEntries;
 
-  private CodeSplitter(TreeLogger logger, JProgram jprogram, JsProgram jsprogram,
-      JavaToJavaScriptMap map, MultipleDependencyGraphRecorder dependencyRecorder) {
+  private CodeSplitter(TreeLogger logger,CompilerContext compilerContext,
+      MultipleDependencyGraphRecorder dependencyRecorder) {
     this.logger = logger.branch(TreeLogger.TRACE, "Splitting JavaScript for incremental download");
-    this.jprogram = jprogram;
-    this.jsprogram = jsprogram;
-    this.map = map;
+    this.jprogram = compilerContext.getJProgram();
+    this.jsprogram = compilerContext.getJsProgram();
+    this.map = compilerContext.getJavaToJavaScriptMap();
     this.dependencyRecorder = dependencyRecorder;
     this.initialLoadSequence = new LinkedHashSet<Integer>(jprogram.getSplitPointInitialSequence());
 
     numEntries = jprogram.getRunAsyncs().size() + 1;
     logging = Boolean.getBoolean(PROP_LOG_FRAGMENT_MAP);
     fieldToLiteralOfClass = buildFieldToClassLiteralMap(jprogram);
-    fragmentExtractor = new FragmentExtractor(jprogram, jsprogram, map);
+    fragmentExtractor = new FragmentExtractor(compilerContext);
 
     initiallyLive = computeInitiallyLive(jprogram, dependencyRecorder);
 

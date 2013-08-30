@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.linker.CastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
@@ -158,7 +157,6 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.DefaultTextOutput;
-import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
@@ -186,7 +184,7 @@ import java.util.TreeMap;
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
  */
-public class GenerateJavaScriptAST {
+public class GenerateJavaScriptAST extends CompilerPass {
 
   private class CreateNamesAndScopesVisitor extends JVisitor {
 
@@ -2472,29 +2470,6 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  /**
-   * This is the main entry point for the translation from Java to JavaScript. Starts from a
-   * Java AST and constructs a JavaScript AST while collecting other useful information that
-   * is used in subsequent passes.
-   *
-   * @param program           a Java AST
-   * @param jsProgram         an (empty) JavaScript AST
-   * @param outputOption      options that affect this transformation for this transformation
-   *                          e.g. OBFUSCATED, etc.
-   * @param symbolTable       an (empty) symbol table that will be populated here
-   * @param propertyOracles   property oracles that correspond to the permutation being compiled.
-   * @return A pair containing a JavaToJavaScriptMap and a Set of JsFunctions that need to be
-   *         considered for inlining.
-   */
-  public static Pair<JavaToJavaScriptMap, Set<JsNode>> exec(JProgram program,
-      JsProgram jsProgram, JsOutputOption outputOption, Map<StandardSymbolData, JsName> symbolTable,
-      PropertyOracle[] propertyOracles) {
-    GenerateJavaScriptAST generateJavaScriptAST =
-        new GenerateJavaScriptAST(program, jsProgram, outputOption, symbolTable, propertyOracles);
-    return generateJavaScriptAST.execImpl();
-  }
-
-
   private Map<String, JsExpression> castMapByString = new HashMap<String, JsExpression>();
 
   private final Map<JBlock, JsCatch> catchMap = new IdentityHashMap<JBlock, JsCatch>();
@@ -2556,7 +2531,7 @@ public class GenerateJavaScriptAST {
   private final Set<JsFunction> polymorphicJsFunctions = new IdentityHashSet<JsFunction>();
   private final Map<JMethod, JsName> polymorphicNames = new IdentityHashMap<JMethod, JsName>();
   private final JProgram program;
-
+  private final CompilerContext compilerContext;
   /**
    * Map of class type to allocated seed id.
    */
@@ -2596,19 +2571,19 @@ public class GenerateJavaScriptAST {
   private final Map<JsStatement, JMethod> vtableInitForMethodMap =
       new HashMap<JsStatement, JMethod>();
 
-  private GenerateJavaScriptAST(JProgram program, JsProgram jsProgram, JsOutputOption output,
-      Map<StandardSymbolData, JsName> symbolTable, PropertyOracle[] propertyOracles) {
-    this.program = program;
+  public  GenerateJavaScriptAST(CompilerContext compilerContext) {
+    this.compilerContext = compilerContext;
+    this.program = compilerContext.getJProgram();
     typeOracle = program.typeOracle;
-    this.jsProgram = jsProgram;
+    this.jsProgram = compilerContext.getJsProgram();
     topScope = jsProgram.getScope();
     objectScope = jsProgram.getObjectScope();
     interfaceScope = new JsNormalScope(objectScope, "Interfaces");
-    this.output = output;
-    this.symbolTable = symbolTable;
+    this.output = compilerContext.getOptions().getOutput();
+    this.symbolTable = compilerContext.getSymbolTable();
 
-    this.stripStack =
-        JsStackEmulator.getStackMode(propertyOracles) == JsStackEmulator.StackMode.STRIP;
+    this.stripStack = JsStackEmulator.getStackMode(compilerContext.getPropertyOracles()) ==
+        JsStackEmulator.StackMode.STRIP;
 
     /*
      * Because we modify the JavaScript String prototype, all fields and
@@ -2770,7 +2745,8 @@ public class GenerateJavaScriptAST {
     throw new InternalCompilerException("Unknown output mode");
   }
 
-  private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {
+  @Override
+  protected boolean run() {
     CanObserveSubclassUninitializedFieldsVisitor canObserve =
         new CanObserveSubclassUninitializedFieldsVisitor();
     canObserve.accept(program);
@@ -2814,43 +2790,67 @@ public class GenerateJavaScriptAST {
 
     // TODO(spoon): Instead of gathering the information here, get it via
     // SourceInfo
-    JavaToJavaScriptMap jjsMap = new JavaToJavaScriptMap() {
-      @Override
-      public JsName nameForMethod(JMethod method) {
-        return names.get(method);
-      }
+    JavaToJavaScriptMap jjsMap = new JavaToJSMap(nameToFieldMap, nameToMethodMap,
+        constructorNameToTypeMap, names, typeForStatMap, vtableInitForMethodMap);
 
-      @Override
-      public JsName nameForType(JClassType type) {
-        return names.get(type);
-      }
+    compilerContext.setJavaToJavaScriptMap(jjsMap);
+    compilerContext.setFunctionsForJsInlining(generator.functionsForJsInlining);
+    return true;
+  }
 
-      @Override
-      public JField nameToField(JsName name) {
-        return nameToFieldMap.get(name);
-      }
+  private static class JavaToJSMap implements JavaToJavaScriptMap {
+    private final Map<JsName, JField> nameToFieldMap;
+    private final Map<JsName, JMethod> nameToMethodMap;
+    private final Map<JsName, JClassType> constructorNameToTypeMap;
+    private final Map<HasName, JsName> names;
+    private final Map<JsStatement, JClassType> typeForStatMap;
+    private final Map<JsStatement, JMethod> vtableInitForMethodMap;
 
-      @Override
-      public JMethod nameToMethod(JsName name) {
-        return nameToMethodMap.get(name);
-      }
+    public JavaToJSMap(Map<JsName, JField> nameToFieldMap, Map<JsName, JMethod> nameToMethodMap,
+        Map<JsName, JClassType> constructorNameToTypeMap,
+        Map<HasName, JsName> names, Map<JsStatement, JClassType> typeForStatMap,
+        Map<JsStatement, JMethod> vtableInitForMethodMap) {
+      this.nameToFieldMap = nameToFieldMap;
+      this.nameToMethodMap = nameToMethodMap;
+      this.constructorNameToTypeMap = constructorNameToTypeMap;
+      this.names = names;
+      this.typeForStatMap = typeForStatMap;
+      this.vtableInitForMethodMap = vtableInitForMethodMap;
+    }
 
-      @Override
-      public JClassType nameToType(JsName name) {
-        return constructorNameToTypeMap.get(name);
-      }
+    @Override
+    public JsName nameForMethod(JMethod method) {
+      return names.get(method);
+    }
 
-      @Override
-      public JClassType typeForStatement(JsStatement stat) {
-        return typeForStatMap.get(stat);
-      }
+    @Override
+    public JsName nameForType(JClassType type) {
+      return names.get(type);
+    }
 
-      @Override
-      public JMethod vtableInitToMethod(JsStatement stat) {
-        return vtableInitForMethodMap.get(stat);
-      }
-    };
+    @Override
+    public JField nameToField(JsName name) {
+      return nameToFieldMap.get(name);
+    }
 
-    return Pair.create(jjsMap, generator.functionsForJsInlining);
+    @Override
+    public JMethod nameToMethod(JsName name) {
+      return nameToMethodMap.get(name);
+    }
+
+    @Override
+    public JClassType nameToType(JsName name) {
+      return constructorNameToTypeMap.get(name);
+    }
+
+    @Override
+    public JClassType typeForStatement(JsStatement stat) {
+      return typeForStatMap.get(stat);
+    }
+
+    @Override
+    public JMethod vtableInitToMethod(JsStatement stat) {
+      return vtableInitForMethodMap.get(stat);
+    }
   }
 }

@@ -34,7 +34,7 @@ import com.google.gwt.dev.jjs.ast.JUnaryOperator;
  * {@link LongCastNormalizer} and {@link CompoundAssignmentNormalizer} having
  * been run.
  */
-public class LongEmulationNormalizer {
+public class LongEmulationNormalizer extends CompilerPass {
 
   /**
    * Replace all long math with calls into the long emulation library.
@@ -186,19 +186,17 @@ public class LongEmulationNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new LongEmulationNormalizer(program).execImpl();
-  }
-
   private final JProgram program;
 
-  private LongEmulationNormalizer(JProgram program) {
-    this.program = program;
+  public LongEmulationNormalizer(CompilerContext compilerContext) {
+    this.program = compilerContext.getJProgram();
   }
 
-  private void execImpl() {
+  @Override
+  protected boolean run() {
     LongOpVisitor visitor = new LongOpVisitor(program.getTypePrimitiveLong());
     visitor.accept(program);
+    return visitor.didChange();
   }
 
 }

@@ -28,6 +28,7 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JValueLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
@@ -46,8 +47,9 @@ import java.util.Set;
  * coverage reports.
  */
 public class BaselineCoverageGatherer {
-  public static Multimap<String, Integer> exec(JProgram jProgram) {
-    return new BaselineCoverageGatherer(jProgram, getCoveredSourceFiles()).execImpl();
+  public static Multimap<String, Integer> exec(CompilerContext compilerContext) {
+    return new BaselineCoverageGatherer(compilerContext.getJProgram(), getCoveredSourceFiles())
+        .execImpl();
   }
 
   private static Set<String> getCoveredSourceFiles() {

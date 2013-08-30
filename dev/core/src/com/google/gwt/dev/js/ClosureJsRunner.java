@@ -17,6 +17,7 @@ package com.google.gwt.dev.js;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsProgramFragment;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
@@ -172,7 +173,7 @@ public class ClosureJsRunner {
   public ClosureJsRunner() {
   }
 
-  public void compile(JProgram jprogram, JsProgram program, String[] js, JsOutputOption jsOutputOption) {
+  public void compile(CompilerContext compilerContext, String[] js, JsOutputOption jsOutputOption) {
     CompilerOptions options = getClosureCompilerOptions(jsOutputOption);
     // Turn off Closure Compiler logging
     Logger.getLogger("com.google.gwt.thirdparty.javascript.jscomp").setLevel(Level.OFF);
@@ -180,8 +181,9 @@ public class ClosureJsRunner {
     // Create a fresh compiler instance.
     compiler = new Compiler();
 
+    JsProgram program = compilerContext.getJsProgram();
     // Translate the ASTs and build the modules
-    computeFragmentMap(jprogram, program);
+    computeFragmentMap(compilerContext);
     List<JSModule> modules = createClosureModules(program);
 
     // Build the externs based on what we discovered building the modules.
@@ -212,10 +214,12 @@ public class ClosureJsRunner {
     }
   }
 
-  private void computeFragmentMap(JProgram jprogram, JsProgram jsProgram) {
+  private void computeFragmentMap(CompilerContext compilerContext) {
+    JProgram jProgram = compilerContext.getJProgram();
+    JsProgram jsProgram = compilerContext.getJsProgram();
     int fragments = jsProgram.getFragmentCount();
-    List<Integer> initSeq = jprogram.getSplitPointInitialSequence();
-    FragmentPartitioningResult partitionResult = jprogram.getFragmentPartitioningResult();
+    List<Integer> initSeq = jProgram.getSplitPointInitialSequence();
+    FragmentPartitioningResult partitionResult = jProgram.getFragmentPartitioningResult();
 
     //
     // The fragments are expected in a specific order:

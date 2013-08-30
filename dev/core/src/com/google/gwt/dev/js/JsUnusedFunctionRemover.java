@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExprStmt;
@@ -75,10 +76,10 @@ public class JsUnusedFunctionRemover {
 
   public static final String NAME = JsUnusedFunctionRemover.class.getSimpleName();
 
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(CompilerContext compilerContext) {
     Event optimizeJsEvent =
         SpeedTracerLogger.start(CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsUnusedFunctionRemover(program).execImpl();
+    OptimizerStats stats = new JsUnusedFunctionRemover(compilerContext.getJsProgram()).execImpl();
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }

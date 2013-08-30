@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -36,8 +37,8 @@ public class JsInlinerTest extends OptimizerTestBase {
      * Called reflectively.
      */
     @SuppressWarnings("unused")
-    public static void exec(JsProgram program) {
-      (new FixStaticRefsVisitor()).accept(program);
+    public static void exec(CompilerContext compilerContext) {
+      (new FixStaticRefsVisitor()).accept(compilerContext.getJsProgram());
     }
 
     @Override
@@ -275,28 +276,15 @@ public class JsInlinerTest extends OptimizerTestBase {
 
   private void verifyOptimized(String expected, String input) throws Exception {
     String actual = optimize(input, JsSymbolResolver.class, FixStaticRefsVisitor.class,
-        JsInlinerProxy.class, JsUnusedFunctionRemover.class);
+        JsInliner.class, JsUnusedFunctionRemover.class);
     String expectedAfterParse = optimize(expected);
     assertEquals(expectedAfterParse, actual);
   }
 
   private void verifyOptimizedObfuscated(String expected, String input) throws Exception {
     String actual = optimize(input, JsSymbolResolver.class, FixStaticRefsVisitor.class,
-        JsInlinerProxy.class, JsUnusedFunctionRemover.class, JsObfuscateNamer.class);
+        JsInliner.class, JsUnusedFunctionRemover.class, JsObfuscateNamer.class);
     String expectedAfterParse = optimize(expected);
     assertEquals(expectedAfterParse, actual);
   }
-
-  /**
-   * A Proxy class to call JsInlner, due to its lack of a single parameter exec method.
-   */
-  private static class JsInlinerProxy {
-    /**
-     * Static entry point used by JavaToJavaScriptCompiler.
-     */
-    public static OptimizerStats exec(JsProgram program) {
-      return JsInliner.exec(program, Arrays.asList(new JsNode[]{program}));
-    }
-  }
-
 }

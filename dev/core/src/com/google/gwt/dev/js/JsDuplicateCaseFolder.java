@@ -15,10 +15,10 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsModVisitor;
-import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsSwitch;
 import com.google.gwt.dev.js.ast.JsSwitchMember;
@@ -159,8 +159,8 @@ public class JsDuplicateCaseFolder {
   }
 
   // Needed for OptimizerTestBase
-  public static boolean exec(JsProgram program) {
-    return new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
+  public static boolean exec(CompilerContext compilerContext) {
+    return new JsDuplicateCaseFolder().execImpl(compilerContext.getJsProgram().getFragmentBlock(0));
   }
 
   public JsDuplicateCaseFolder() {

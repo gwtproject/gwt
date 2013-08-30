@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.CompilerContext;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -159,7 +160,7 @@ public class JsDuplicateFunctionRemover {
     public void endVisit(JsNameRef x, JsContext ctx) {
       JsName orig = duplicateMap.get(x.getName());
       if (orig != null && x.getName() != null
-          && x.getName().getEnclosing() == program.getScope()
+          && x.getName().getEnclosing() == compilerContext.getJsProgram().getScope()
           && !blacklist.contains(x.getName()) && !blacklist.contains(orig)) {
         ctx.replaceMe(orig.makeRef(x.getSourceInfo()));
       }
@@ -215,17 +216,16 @@ public class JsDuplicateFunctionRemover {
    * the same the removal was correct. However if A.a gets renamed then A.m1() and B.m2() would
    * no longer have been identical hence the dedup that is already done is incorrect.
    *
-   * @param program the program to optimize
+   * @param compilerContext the compiler context containing the javascript program to optimize
    * @param nameGenerator a freshNameGenerator to assign fresh names to deduped functions that are
    *                      lifted to the global scope
    * @return {@code true} if it made any changes; {@code false} otherwise.
    */
-  public static boolean exec(JsProgram program, FreshNameGenerator nameGenerator) {
-    return new JsDuplicateFunctionRemover(program, nameGenerator).execImpl();
+  public static boolean exec(CompilerContext compilerContext, FreshNameGenerator nameGenerator) {
+    return new JsDuplicateFunctionRemover(compilerContext, nameGenerator).execImpl();
   }
 
-  private final JsProgram program;
-
+  private final CompilerContext compilerContext;
   /**
    * A FreshNameGenerator instance to obtain fresh top scope names consistent with the
    * naming strategy used.
@@ -233,13 +233,15 @@ public class JsDuplicateFunctionRemover {
   private FreshNameGenerator freshNameGenerator;
 
 
-  public JsDuplicateFunctionRemover(JsProgram program, FreshNameGenerator freshNameGenerator) {
-    this.program = program;
+  public JsDuplicateFunctionRemover(CompilerContext compilerContext,
+      FreshNameGenerator freshNameGenerator) {
+    this.compilerContext = compilerContext;
     this.freshNameGenerator = freshNameGenerator;
   }
 
   private boolean execImpl() {
     boolean changed = false;
+    JsProgram program = compilerContext.getJsProgram();
     for (int i = 0; i < program.getFragmentCount(); i++) {
       JsBlock fragment = program.getFragmentBlock(i);
 
@@ -273,7 +275,7 @@ public class JsDuplicateFunctionRemover {
     }
 
     if (changed) {
-      JsUnusedFunctionRemover.exec(program);
+      JsUnusedFunctionRemover.exec(compilerContext);
     }
     return changed;
   }

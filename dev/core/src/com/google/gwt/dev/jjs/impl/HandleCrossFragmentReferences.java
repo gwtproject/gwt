@@ -197,8 +197,9 @@ public class HandleCrossFragmentReferences {
 
   public static String PROP_PREDECLARE_VARS = "compiler.predeclare.cross.fragment.references";
 
-  public static void exec(TreeLogger logger, JsProgram jsProgram, PropertyOracle[] propertyOracles) {
-    new HandleCrossFragmentReferences(logger, jsProgram, propertyOracles).execImpl();
+  public static void exec(TreeLogger logger, CompilerState compilerState) {
+    new HandleCrossFragmentReferences(logger, compilerState.getJsProgram(),
+        compilerState.getPropertyOracles()).execImpl();
   }
 
   private static boolean containsOtherThan(Set<Integer> set, int allowed) {

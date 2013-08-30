@@ -21,10 +21,12 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsStatement;
 
+import java.io.Serializable;
+
 /**
  * A map between chunks of JavaScript to chunks of Java.
  */
-public interface JavaToJavaScriptMap {
+public interface JavaToJavaScriptMap extends Serializable {
   /**
    * Return the JavaScript name corresponding to a Java method.
    */

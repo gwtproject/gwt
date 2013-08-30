@@ -17,6 +17,7 @@ package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.impl.CompilerState;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -299,20 +300,17 @@ public class JsStringInterner {
    * symbol declarations will be added as the first statement in the program's
    * global block.
    * 
-   * @param jprogram the JProgram that has fragment dependency data for
-   *          <code>program</code>
-   * @param program the JsProgram
-   * @param alwaysIntern true for browsers like IE which must always intern literals
+   * @param compilerState the compiler state
    * @return a map describing the interning that occurred
    */
-  public static Map<JsName, String> exec(JProgram jprogram, JsProgram program,
-      boolean alwaysIntern) {
-    StringVisitor v = new StringVisitor(jprogram, program.getScope(), alwaysIntern ? null :
-      getOccurenceMap(program));
-    v.accept(program);
+  public static Map<JsName, String> exec(CompilerState compilerState) {
+    JProgram jProgram = compilerState.getjProgram();
+    JsProgram jsProgram = compilerState.getJsProgram();
+    StringVisitor v = new StringVisitor(jProgram, jsProgram.getScope(), getOccurenceMap(jsProgram));
+    v.accept(jsProgram);
 
     Map<Integer, SortedSet<JsStringLiteral>> bins = new HashMap<Integer, SortedSet<JsStringLiteral>>();
-    for (int i = 0, j = program.getFragmentCount(); i < j; i++) {
+    for (int i = 0, j = jsProgram.getFragmentCount(); i < j; i++) {
       bins.put(i, new TreeSet<JsStringLiteral>(LITERAL_COMPARATOR));
     }
     for (Map.Entry<JsStringLiteral, Integer> entry : v.fragmentAssignment.entrySet()) {
@@ -322,7 +320,7 @@ public class JsStringInterner {
     }
 
     for (Map.Entry<Integer, SortedSet<JsStringLiteral>> entry : bins.entrySet()) {
-      createVars(program, program.getFragmentBlock(entry.getKey()),
+      createVars(jsProgram, jsProgram.getFragmentBlock(entry.getKey()),
           entry.getValue(), v.toCreate);
     }
 

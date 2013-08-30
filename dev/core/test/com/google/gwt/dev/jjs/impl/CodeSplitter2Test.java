@@ -323,12 +323,10 @@ public class CodeSplitter2Test extends JJSTestBase {
     ArrayNormalizer.exec(jProgram);
     TypeTightener.exec(jProgram);
     MethodCallTightener.exec(jProgram);
-    Map<StandardSymbolData, JsName> symbolTable =
-      new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
-    JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-            new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER, 0);
+    CompilerState compilerState = new CompilerState(jProgram, jsProgram, null);
+    GenerateJavaScriptAST.exec(compilerState, JsOutputOption.PRETTY, new PropertyOracle[]{
+        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)});
+    CodeSplitter2.exec(logger, compilerState, 4, NULL_RECORDER, 0);
   }
 
   /**
@@ -356,11 +354,10 @@ public class CodeSplitter2Test extends JJSTestBase {
     ArrayNormalizer.exec(jProgram);
     Map<StandardSymbolData, JsName> symbolTable =
         new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
-    JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER,
-        mergeLimit);
+    CompilerState compilerState = new CompilerState(jProgram, jsProgram, null);
+    GenerateJavaScriptAST.exec(compilerState, JsOutputOption.PRETTY, new PropertyOracle[]{
+        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)});
+    CodeSplitter2.exec(logger, compilerState, 4, NULL_RECORDER, mergeLimit);
   }
 
   private static String createRunAsync(String cast, String body) {

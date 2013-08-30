@@ -17,6 +17,8 @@
 
 // ---------------- D8 GLOBALS ----------------
 window = {};
+// Alias self as well since it is a magic var sometimes provided
+// by the webworker linker.
 self = window;
 document = {};
 window.document = document;

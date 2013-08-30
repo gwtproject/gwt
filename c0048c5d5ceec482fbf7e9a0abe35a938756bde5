@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "f2967d05_1e596d33",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "Indeed the following javadoc should be better :\n /**\n   * Formats the current month and year in the current locale. For example, \"Jan 2013\" in English.\n   *\n   * @return the formatted month and year\n   */",
+      "parentUuid": "ed3cdca4_6e6b6fef",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_0e74abcc",
         "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
         "patchSetId": 6
@@ -138,6 +156,24 @@
     },
     {
       "key": {
+        "uuid": "f2967d05_049fdaf6",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "I don\u0027t think so. This method seems to be linked to the DatePicker as we use the Format used by the date picker to format the year and month in order to determine where is the month is before the year",
+      "parentUuid": "ed3cdca4_4ec4f3d9",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd74787d_b5994068",
         "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
         "patchSetId": 6
@@ -183,6 +219,24 @@
       "writtenOn": "2013-08-28T00:14:59Z",
       "side": 1,
       "message": "What about set/getMinYear set/getMaxYear and enforce it everywhere?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2967d05_a4ab861d",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "The idea here is to reduce the number of years to display in the dropdown.\nSo for example if yearsBeforeCurrentInDropdow and yearsAfterCurrentInDropdow  is set to 10 and the current year is 2013, the dropdown will display a set of years ranging from 2003 to 2023. If the user select the year 2003, the dropdown will contain  now a set of years ranging from 1993 to 2013 and so on.",
+      "parentUuid": "ed3cdca4_2eab27ba",
       "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -308,6 +362,24 @@
     },
     {
       "key": {
+        "uuid": "72fd2d72_b27c4077",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "ok to rename this function to setYearDropdownVisible\n\nIn fact I was thinking to add a shorcut method like setYearAndMonthDropdownVisible to enable/disable the two dropdown together. This is what you mean ?",
+      "parentUuid": "ed3cdca4_f10ae231",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3cdca4_d1eec63a",
         "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
         "patchSetId": 6
@@ -319,6 +391,24 @@
       "writtenOn": "2013-08-28T00:14:59Z",
       "side": 1,
       "message": "DefaultMonthAndYearSelector?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92f70199_2be4595c",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "Don\u0027t we risk to break some code ?",
+      "parentUuid": "ed3cdca4_d1eec63a",
       "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -370,6 +460,24 @@
       "writtenOn": "2013-08-28T00:14:59Z",
       "side": 1,
       "message": "Himm. How come getYearsBeforeCurrentInDropdown can be negative?",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92f70199_6bee613c",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-08-30T16:39:20Z",
+      "side": 1,
+      "message": "if the developer set a negative number via setYearsBeforeCurrentInDropdown()",
+      "parentUuid": "ed3cdca4_2ecde74f",
       "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -212,7 +212,8 @@ public class FragmentExtractorTest extends JJSTestBase {
           return null;
         }
       };
-      fragmentExtractor = new FragmentExtractor(null, jsProgram, map);
+
+      fragmentExtractor = new FragmentExtractor(new CompilerState(null, jsProgram, map));
       constructorLivePredicate = new MockLivenessPredicate() {
           @Override
         public boolean isLive(JDeclaredType type) {

@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
 
 import java.util.HashSet;
@@ -37,9 +36,9 @@ import java.util.Set;
  */
 public class VerifySymbolMap extends JsVisitor {
 
-  public static void exec(JsProgram jsProgram, JavaToJavaScriptMap jjsmap,
-      Map<StandardSymbolData, JsName> symbolTable ) {
-    new VerifySymbolMap(jjsmap, symbolTable).accept(jsProgram);
+  public static void exec(CompilerState compilerState) {
+    new VerifySymbolMap(compilerState.getJavaToJavaScriptMap(), compilerState.getSymbolTable())
+        .accept(compilerState.getJsProgram());
   }
   
   private final JavaToJavaScriptMap jjsmap;

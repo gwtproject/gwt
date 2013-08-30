@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.CompilerState;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -63,16 +64,14 @@ public class JsCoerceIntShift {
 
   /**
    * If this permutation may be executed on WebKit, rewrite a >> b as ~~a >> b.
-   * 
-   * @param program
+   *
    * @param logger
-   * @param propertyOracles
+   * @param compilerState
    * @return true if any changes were made
    */
-  public static boolean exec(JsProgram program, TreeLogger logger,
-      PropertyOracle[] propertyOracles) {
+  public static boolean exec(TreeLogger logger, CompilerState compilerState) {
     boolean seenWebKit = false;
-    for (PropertyOracle oracle : propertyOracles) {
+    for (PropertyOracle oracle : compilerState.getPropertyOracles()) {
       try {
         SelectionProperty prop = oracle.getSelectionProperty(logger,
             "user.agent");
@@ -91,7 +90,7 @@ public class JsCoerceIntShift {
       return false;
     }
     MyVisitor v = new MyVisitor();
-    v.accept(program);
+    v.accept(compilerState.getJsProgram());
     return v.didChange();
   }
 }

@@ -34,6 +34,24 @@
       "revId": "47f0a72b977f4b9bfd11cde0b17d2fee3d24d58c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_e4737aa2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/EmittedArtifact.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T22:36:28Z",
+      "side": 1,
+      "message": "I have no strong preference, but see no real reason to postpone it. If we\u0027re worried that it could break some people, then just @Deprecate it, and we\u0027ll remove it later (which brings to memory we still don\u0027t have a policy about deprecation: how long after something\u0027s been marked deprecated should users expect it to be deleted?)",
+      "parentUuid": "32a3b5b4_f23a444b",
+      "revId": "47f0a72b977f4b9bfd11cde0b17d2fee3d24d58c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

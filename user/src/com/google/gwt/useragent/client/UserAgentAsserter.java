@@ -32,7 +32,7 @@ public class UserAgentAsserter implements EntryPoint {
    * Interface to provide both the compile time and runtime
    * <code>user.agent</code> selection property value.
    */
-  interface UserAgentProperty {
+  public interface UserAgentProperty {
     String getCompileTimeValue();
 
     String getRuntimeValue();

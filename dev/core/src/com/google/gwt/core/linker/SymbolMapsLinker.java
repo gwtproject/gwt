@@ -323,8 +323,7 @@ public class SymbolMapsLinker extends AbstractLinker {
       throws UnableToCompleteException {
     EmittedArtifact symbolMapArtifact = emitBytes(logger, out.toByteArray(),
         result.getStrongName() + STRONG_NAME_SUFFIX);
-    // TODO: change to Deploy when possible
-    symbolMapArtifact.setVisibility(Visibility.LegacyDeploy);
+    symbolMapArtifact.setVisibility(Visibility.Deploy);
     artifacts.add(symbolMapArtifact);
   }
 
@@ -392,7 +391,7 @@ public class SymbolMapsLinker extends AbstractLinker {
   protected SyntheticArtifact emitSourceMapString(TreeLogger logger, String contents,
       String partialPath) throws UnableToCompleteException {
     SyntheticArtifact emArt = emitString(logger, contents, partialPath);
-    emArt.setVisibility(Visibility.LegacyDeploy);
+    emArt.setVisibility(Visibility.Deploy);
     return emArt;
   }
 }

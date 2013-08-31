@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32a3b5b4_93f75e0b",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-08-31T00:52:35Z",
+      "side": 1,
+      "message": "Didn\u0027t change the name to keep review easier. Will rename to GWTTestMetadataGenerator.",
+      "revId": "6b98feac9d968f112a4af474d37c0be319ddc62c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

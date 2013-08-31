@@ -334,7 +334,7 @@ public abstract class BrowserChannel {
         type = ValueType.JAVA_OBJECT;
       } else {
         throw new RuntimeException(
-            "Unexpected Java type in convertFromJavaValue: " + obj);
+            "Unexpected Java type in convertFromJavaValue: " + obj.getClass());
       }
       value = obj;
     }
@@ -1712,7 +1712,7 @@ public abstract class BrowserChannel {
     } else if (value.isString()) {
       writeTaggedString(stream, value.getString());
     } else {
-      assert false;
+      throw new IllegalArgumentException("Unexpected type: " + value);
     }
   }
 }

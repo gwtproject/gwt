@@ -52,6 +52,24 @@
       "revId": "47f0a72b977f4b9bfd11cde0b17d2fee3d24d58c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32a3b5b4_55f5ba00",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/EmittedArtifact.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-08-31T22:43:07Z",
+      "side": 1,
+      "message": "Hm, I actually just assumed there\u0027d be more uses of it than there are, so I was just going to remove it in a separate patch to keep things easier to read.  But it seems there\u0027s only one caller, so might as well do it now.\n\nDone.",
+      "parentUuid": "b26fa53a_e4737aa2",
+      "revId": "47f0a72b977f4b9bfd11cde0b17d2fee3d24d58c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

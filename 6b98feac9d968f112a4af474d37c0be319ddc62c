@@ -36,6 +36,41 @@
     },
     {
       "key": {
+        "uuid": "b26fa53a_0480964b",
+        "filename": "user/src/com/google/gwt/junit/rebind/GWTRunnerProxyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T14:45:50Z",
+      "side": 1,
+      "message": "I think Gerrit is smart enough to detect the move and show a diff.\n\nSee https://gwt-review.googlesource.com/1040 for an example",
+      "parentUuid": "32a3b5b4_93f75e0b",
+      "revId": "6b98feac9d968f112a4af474d37c0be319ddc62c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_2485925c",
+        "filename": "user/src/com/google/gwt/useragent/client/UserAgentAsserter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T14:45:50Z",
+      "side": 1,
+      "message": "Maybe move it to a top-level interface?",
+      "revId": "6b98feac9d968f112a4af474d37c0be319ddc62c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32a3b5b4_93d03ee8",
         "filename": "user/super/com/google/gwt/junit/translatable/com/google/gwt/junit/client/impl/GWTTestMetadata.java",
         "patchSetId": 1

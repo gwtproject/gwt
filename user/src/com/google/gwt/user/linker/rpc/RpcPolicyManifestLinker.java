@@ -73,7 +73,7 @@ public class RpcPolicyManifestLinker extends AbstractLinker {
       ArtifactSet toReturn = new ArtifactSet(artifacts);
       SyntheticArtifact manifestArt = emitString(logger,
           generateManifest(context), MANIFEST_TXT);
-      manifestArt.setVisibility(Visibility.LegacyDeploy);
+      manifestArt.setVisibility(Visibility.Deploy);
       toReturn.add(manifestArt);
       return toReturn;
     }

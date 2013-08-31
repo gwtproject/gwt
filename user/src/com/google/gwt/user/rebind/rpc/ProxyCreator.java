@@ -897,8 +897,7 @@ public class ProxyCreator {
       os.write(manifestBytes);
 
       GeneratedResource resource = context.commitResource(logger, os);
-      // TODO: change to Deploy when possible
-      resource.setVisibility(Visibility.LegacyDeploy);
+      resource.setVisibility(Visibility.Deploy);
     } catch (UnsupportedEncodingException e) {
       logger.log(TreeLogger.ERROR, SerializationPolicyLoader.SERIALIZATION_POLICY_FILE_ENCODING
           + " is not supported", e);

@@ -490,7 +490,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
       TreeLogger artifactLogger = logger.branch(TreeLogger.DEBUG,
           "Emitting resource " + artifact.getPartialPath(), null);
 
-      if (!artifact.getVisibility().matches(visibility)) {
+      if (!artifact.getVisibility() == visibility) {
         continue;
       }
 

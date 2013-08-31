@@ -51,63 +51,16 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
      * A private artifact is something that is only used during the build
      * process.
      */
-    Private {
-      @Override
-      public boolean matches(Visibility visibility) {
-        switch (visibility) {
-          case LegacyDeploy:
-          case Private:
-            return true;
-          default:
-            return false;
-        }
-      }
-    },
+    Private,
     
     /**
      * A deploy artifact is deployed to the server but is never served to the
      * client.
      */
-    Deploy {
-      @Override
-      public boolean matches(Visibility visibility) {
-        switch (visibility) {
-          case Deploy:
-          case LegacyDeploy:
-            return true;
-          default:
-            return false;
-        }
-      }
-    },
-    
+    Deploy;
+
     /**
-     * For legacy use only - used for artifacts that were previously marked as
-     * private because they should not be delivered to the client, but actually
-     * should be visible to the server.  These artifacts will now be treated as
-     * both Private and Deploy, so that existing build tools that expect to find
-     * them in the output directory for Private artifacts will find them.
-     * 
-     * New code should use Deploy instead.
-     */
-    LegacyDeploy {
-      @Override
-      public boolean matches(Visibility visibility) {
-        switch (visibility) {
-          case Deploy:
-          case LegacyDeploy:
-          case Private:
-            return true;
-          default:
-            return false;
-        }
-      }
-    };
-    
-    /**
-     * Returns true if this visibility matches the requested visibility level,
-     * dealing with the fact that {@link #LegacyDeploy} matches both
-     * {@link #Private} and {@link #Deploy}.
+     * Returns true if this visibility matches the requested visibility level.
      * 
      * @param visibility
      * @return true if this visibility matches the requested level

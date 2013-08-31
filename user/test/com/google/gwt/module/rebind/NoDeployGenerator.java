@@ -39,7 +39,6 @@ public class NoDeployGenerator extends Generator {
       createFile(logger, context, "publicFile.txt", Visibility.Public);
       createFile(logger, context, "deployFile.txt", Visibility.Deploy);
       createFile(logger, context, "privateFile.txt", Visibility.Private);
-      createFile(logger, context, "legacyFile.txt", Visibility.LegacyDeploy);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to create test file", e);
       throw new UnableToCompleteException();

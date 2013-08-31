@@ -61,14 +61,6 @@ public class NoDeployTest extends GWTTestCase {
     assertFileIsDeployed("deployFile.txt");
   }
 
-  public void testVisibilityLegacyDeployHttp() throws RequestException {
-    assertFileIsNotPublic("", "legacyFile.txt");
-  }
-
-  public void testVisibilityLegacyDeployServer() throws RequestException {
-    assertFileIsDeployed("legacyFile.txt");
-  }
-
   public void testVisibilityPrivateHttp() throws RequestException {
       assertFileIsNotPublic("", "privateFile.txt");
   }

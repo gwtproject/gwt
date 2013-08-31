@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b26fa53a_c41afe7b",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Can\u0027t we take the servlet-api-3.0 from javax.servlet directly?\nhttp://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22javax.servlet%22%20AND%20a%3A%22javax.servlet-api%22\n\n(either 3.0.1 or 3.1.0)\n\nIs this NoMetaInf version from Tomcat or from ourselves? If the latter, what\u0027s the issue with the META-INF?",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_e417fa52",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Does HtmlUnit still depends on Xerces directly? Cannot it use javax.xml from the JRE?",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_0436d6fb",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserChannel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Maybe we should make these changes independently from upgrading the dependencies? (in case we have to revert the upgrade, we\u0027d still have them)",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_243bd2e2",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Why has this method been moved around?",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_4440ce42",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Side note: this dependency is missing a\n\n \u003cscope\u003eprovided\u003c/scope\u003e\n\nThis change probably isn\u0027t the best time to add it though.",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_6445ca51",
+        "filename": "servlet-api-3.0.jar",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Same remark as Matthew, I suppose it was a mistake from your side as it\u0027s not referenced anywhere.",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_8429e699",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-08-31T11:47:54Z",
+      "side": 1,
+      "message": "Yay!",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

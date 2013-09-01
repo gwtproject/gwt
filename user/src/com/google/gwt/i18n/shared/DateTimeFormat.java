@@ -1835,6 +1835,8 @@ public class DateTimeFormat {
       }
     }
 
+    int hourAtMidnight = 0;
+
     switch (ch) {
       case 'G': // era
         value = matchString(text, start, dateTimeFormatInfo.erasFull(), pos);
@@ -1869,19 +1871,20 @@ public class DateTimeFormat {
         if (value == 12) {
           value = 0;
         }
+        hourAtMidnight = 12;
         // fall through
       case 'K': // hour (0..11)
       case 'H': // hour (0..23)
         if (value < 0) {
           return false;
         }
-        cal.setHours(value);
+        cal.setHours(value, hourAtMidnight);
         return true;
       case 'k': // hour (1..24)
         if (value < 0) {
           return false;
         }
-        cal.setHours(value);
+        cal.setHours(value, 24);
         return true;
       case 'm': // minute
         if (value < 0) {

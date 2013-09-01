@@ -261,6 +261,24 @@
     },
     {
       "key": {
+        "uuid": "b26fa53a_245af2f9",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-09-01T18:56:54Z",
+      "side": 1,
+      "message": "Yep maybe the term \"current\" is confusing but I used it because in the datepicker the notion of current date represents the selected date. But let\u0027s use \"selected\" to avoid confusion.\n\nI\u0027m pretty sure it\u0027s relevant to allow the developper to set lower and upper bound separately. Two examples : \n- using the datepicker to enter a birthday : you don\u0027t need to propose years in the future\n- using the datepicker to specify the date for booking a room : you don\u0027t need to propose years in the past.\n\nConcerning the min and max dates, I think it\u0027s a good feature to add and should be part of a new change request.",
+      "parentUuid": "12da3133_5f8c0bf6",
+      "revId": "c0048c5d5ceec482fbf7e9a0abe35a938756bde5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd74787d_d59ebc4c",
         "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
         "patchSetId": 6

@@ -751,14 +751,14 @@ public final class CompilingClassLoader extends ClassLoader implements
 
   static {
     primitiveTypes.put(boolean.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(byte.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(char.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(double.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(float.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(int.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(long.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(short.class.getSimpleName(), boolean.class);
-    primitiveTypes.put(void.class.getSimpleName(), boolean.class);
+    primitiveTypes.put(byte.class.getSimpleName(), byte.class);
+    primitiveTypes.put(char.class.getSimpleName(), char.class);
+    primitiveTypes.put(double.class.getSimpleName(), double.class);
+    primitiveTypes.put(float.class.getSimpleName(), float.class);
+    primitiveTypes.put(int.class.getSimpleName(), int.class);
+    primitiveTypes.put(long.class.getSimpleName(), long.class);
+    primitiveTypes.put(short.class.getSimpleName(), short.class);
+    primitiveTypes.put(void.class.getSimpleName(), void.class);
   }
 
   static {

@@ -47,6 +47,7 @@ public class DateRecord extends Date {
   private int dayOfMonth;
   private int ampm;
   private int hours;
+  private int hourAtMidnight;
   private int minutes;
   private int seconds;
   private int milliseconds;
@@ -67,6 +68,7 @@ public class DateRecord extends Date {
     dayOfMonth = -1;
     ampm = -1;
     hours = -1;
+    hourAtMidnight = 0;
     minutes = -1;
     seconds = -1;
     milliseconds = -1;
@@ -137,7 +139,7 @@ public class DateRecord extends Date {
         this.hours += 12;
       }
     }
-    date.setHours(this.hours);
+    date.setHours(this.hours == 24 && this.hourAtMidnight == 24 ? 0 : this.hours);
 
     if (this.minutes >= 0) {
       date.setMinutes(this.minutes);
@@ -169,7 +171,13 @@ public class DateRecord extends Date {
         return false;
       }
       // Times have well defined maximums
-      if (this.hours >= 24) {
+      if (this.hours == 24 && this.hourAtMidnight == 24) {
+        if (this.ampm > 0) {
+          return false;
+        }
+      } else if (this.hours >= 24) {
+        return false;
+      } else if (this.hours == 0 && this.hourAtMidnight == 24) {
         return false;
       }
       if (this.minutes >= 60) {
@@ -283,7 +291,18 @@ public class DateRecord extends Date {
    */
   @Override
   public void setHours(int hours) {
+    setHours(hours, 0);
+  }
+
+  /**
+   * Set hour field.
+   *
+   * @param hours hour value.
+   * @param hourAtMidnight hour value at midnight (0, 12, or 24).
+   */
+  public void setHours(int hours, int hourAtMidnight) {
     this.hours = hours;
+    this.hourAtMidnight = hourAtMidnight;
   }
 
   /**

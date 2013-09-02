@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12a8718f_6f8771a3",
+        "filename": "user/test/com/google/gwt/i18n/client/DateTimeParse_en_Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-09-02T01:59:30Z",
+      "side": 1,
+      "message": "This loses the exception - would it be better to just let it propagate or to include the exception in the failure message?",
+      "revId": "87bb368af923e7cd027d7e64e9594f034af4ad62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

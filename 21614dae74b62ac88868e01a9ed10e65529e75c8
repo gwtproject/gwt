@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "120cf176_24d7683c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_d5f8cca8",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "120cf176_75f00085",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-30T18:27:35Z",
       "side": 1,
       "message": "it is usually quite risky to move mutable maps and other similar objects around which provides uncontrolled modification. You cannot do any precondition checks for state and/or arguments. It is also very difficult track their references. All of these makes it difficult to avoid and track bugs.\n\nIt is usually much better to provide mutation methods on custom objects and return immutable view of the map for iteration and other similar needs. \n\nOn the other hand, I understand that some minimal change is better as an intermediary step. \n\nWhat do you think?",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "120cf176_844f343a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "I agree. Let me do a first pass to standardize all compiler passes and then think about this. I would for the passes to be generic as possible to that then can be declared as data...\n\nI envision that the context might have a collection of named artifacts, and passes need to declare which ones they require and which ones they produce.",
+      "parentUuid": "120cf176_75f00085",
       "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "120cf176_6454d0cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_95d80436",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "120cf176_7807552c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-30T18:27:35Z",
       "side": 1,
       "message": "getJavaProgram\n\n(or getJProgram if you want to keep the name.)",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "120cf176_c4681c96",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerState.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_7807552c",
       "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "32a3b5b4_33672e59",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FragmentExtractor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done in CompilerContext.",
+      "parentUuid": "120cf176_b5aee8c6",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "120cf176_753640cb",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-08-30T18:27:35Z",
       "side": 1,
       "message": "propertyOracles already available in CompilerState?",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32a3b5b4_d3f6e24b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2593,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_753640cb",
       "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "32a3b5b4_b94bff30",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_15e1b48b",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "120cf176_d50f2c7c",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsStringInterner.java",
         "patchSetId": 3
@@ -149,6 +275,24 @@
       "writtenOn": "2013-08-30T18:27:35Z",
       "side": 1,
       "message": "I usually avoid @param if it doesn\u0027t add any value to documentation.",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32a3b5b4_d994433a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStringInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120cf176_d50f2c7c",
       "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "32a3b5b4_b9993f71",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStringInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "It was only used for IE6 (and there where a few lines for that that I removed in the refactor)\n\nMaybe a separate CL?",
+      "parentUuid": "120cf176_150a5473",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "120cf176_1566d42c",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsVerboseNamer.java",
         "patchSetId": 3
@@ -183,6 +345,24 @@
       "writtenOn": "2013-08-30T18:27:35Z",
       "side": 1,
       "message": "It is better to avoid null as it is hard to track its implications. Can\u0027t we use an empty array instead?\n\nAlso don\u0027t know why we have 2 different code paths here?",
+      "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32a3b5b4_9929db00",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsVerboseNamer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-02T22:59:47Z",
+      "side": 1,
+      "message": "They are used in the StandardLinkerContext, where it parses the javascript program into a JsProgram but does not have anything else. Will refactor.",
+      "parentUuid": "120cf176_1566d42c",
       "revId": "21614dae74b62ac88868e01a9ed10e65529e75c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

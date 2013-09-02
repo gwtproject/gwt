@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "12a8718f_726836b5",
+        "filename": "user/src/com/google/gwt/i18n/shared/impl/DateRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-09-02T23:17:00Z",
+      "side": 1,
+      "message": "Note that this is an impl class, which is why I wasn\u0027t very picky about the API.  I would be fine with your suggestion as well.",
+      "parentUuid": "32a3b5b4_2de8b16c",
+      "revId": "87bb368af923e7cd027d7e64e9594f034af4ad62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12a8718f_6f8771a3",
         "filename": "user/test/com/google/gwt/i18n/client/DateTimeParse_en_Test.java",
         "patchSetId": 1

@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b26fa53a_c71200a5",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be easier to simply exclude *.impl.* from this API-compatibility-check? I don\u0027t think we ever gave any guarantee about forward compatibility or *.impl.* classes.",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_e70ffc7b",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/WidgetInterpreter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Unrelated to this change but I think this Element should use a FQCN.",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_07aed834",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "We could also use a wildcard as the method is not overloaded:\n\n @com.google.gwt.user.client.DOM::dispatchEvent(*)(evt, elem, listener);",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_27b3d49b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplTrident.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Same here (wildcard). Might be wise to move it as protected or package-private in CellBasedWidgetImpl?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_87a1e842",
+        "filename": "user/src/com/google/gwt/user/client/Element.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "\\o/",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_a79ee4f7",
+        "filename": "user/src/com/google/gwt/user/client/ui/DecoratorPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Is this cast() necessary? Doesn\u0027t DOM.getFirstChild already return a user…Element?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_c7abe01c",
+        "filename": "user/src/com/google/gwt/user/client/ui/Grid.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Because \u0027td\u0027 comes from super.createCell, we could also just make it a user…Element and avoid the cast()",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_a7c7c4df",
+        "filename": "user/src/com/google/gwt/user/client/ui/UIObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "How about going one step further and use elem.getClassName() ?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_277d94bd",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Unrelated to this change, but that should probably be getModuleBaseForStaticFiles here",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_47829094",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "You\u0027ve just deprecated that method in favor of Element#isOrHasChild. I never tried it but I suppose the following should work:\n\n if (!doc.body.@com.google.gwt.dom.client.Element::isOrHasChild(Lcom/google/gwt/dom/client/Element;)(tr.parentElement())) {",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_e7929cdb",
+        "filename": "user/test/com/google/gwt/user/client/ui/HTMLPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T08:29:45Z",
+      "side": 1,
+      "message": "Can\u0027t we instead change placeholder to be a dom…Element rather than a user…Element?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

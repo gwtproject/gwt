@@ -50,9 +50,9 @@ public class Request {
   }
 
   /**
-   * Special {@link RequestImpl} for IE6-9 to work around some IE specialities.
+   * Special {@link RequestImpl} for IE8-9 to work around some IE specialities.
    */
-  static class RequestImplIE6To9 extends RequestImpl {
+  static class RequestImplIE8To9 extends RequestImpl {
 
     @Override
     Response createResponse(XMLHttpRequest xmlHttpRequest) {

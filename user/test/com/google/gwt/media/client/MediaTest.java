@@ -48,10 +48,6 @@ public abstract class MediaTest extends GWTTestCase {
     return @com.google.gwt.dom.client.DOMImplMozilla::isGecko2OrBefore()();
   }-*/;
 
-  static native boolean isIE6() /*-{
-    return @com.google.gwt.dom.client.DOMImplIE6::isIE6()();
-  }-*/;
-
   static native boolean isOldFirefox() /*-{
     return @com.google.gwt.dom.client.DOMImplMozilla::isGecko191OrBefore()();
   }-*/;
@@ -367,10 +363,6 @@ public abstract class MediaTest extends GWTTestCase {
 
   public void testSupported() {
     // test the isxxxSupported() call if running known sup or not sup browsers.
-    if (isIE6()) {
-      assertFalse(Audio.isSupported());
-      assertFalse(Video.isSupported());
-    }
     if (isFirefox35OrLater()) {
       assertTrue(Audio.isSupported());
       assertTrue(Video.isSupported());

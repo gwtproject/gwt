@@ -63,15 +63,8 @@ public class WindowImpl {
       } finally {
         oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
       }
-      // Avoid returning null as IE6 will coerce it into a string.
-      // Ensure that "" gets returned properly.
-      if (ret != null) {
-        return ret;
-      }
-      if (oldRet != null) {
-        return oldRet;
-      }
-      // returns undefined.
+
+      return ret || oldRet;
     };
     
     $wnd.onunload = $entry(function(evt) {

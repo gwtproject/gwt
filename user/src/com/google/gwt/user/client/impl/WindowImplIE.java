@@ -52,37 +52,11 @@ public class WindowImplIE extends WindowImpl {
     TextResource initWindowScrollHandler();
   }
 
-  /**
-   * For IE6, reading from $wnd.location.hash drops part of the fragment if the
-   * fragment contains a '?'. To avoid this bug, we use location.href instead.
-   */
-  @Override
-  public native String getHash() /*-{
-    var href = $wnd.location.href;
-    var hashLoc = href.indexOf("#");
-    return (hashLoc > 0) ? href.substring(hashLoc) : "";
-  }-*/;
-
-  /**
-   * For IE6, reading from $wnd.location.search gets confused if hash contains
-   * a '?'. To avoid this bug, we use location.href instead.
-   */
-  @Override
-  public native String getQueryString() /*-{
-    var href = $wnd.location.href;
-    var hashLoc = href.indexOf("#");
-    if (hashLoc >= 0) {
-      // strip off any hash first
-      href = href.substring(0, hashLoc);
-    }
-    var questionLoc = href.indexOf("?");
-    return (questionLoc > 0) ? href.substring(questionLoc) : "";
-  }-*/;
-
   @Override
   public void initWindowCloseHandler() {
     initHandler(Resources.INSTANCE.initWindowCloseHandler().getText(),
         new ScheduledCommand() {
+          @Override
           public void execute() {
             initWindowCloseHandlerImpl();
           }
@@ -93,6 +67,7 @@ public class WindowImplIE extends WindowImpl {
   public void initWindowResizeHandler() {
     initHandler(Resources.INSTANCE.initWindowResizeHandler().getText(),
         new ScheduledCommand() {
+          @Override
           public void execute() {
             initWindowResizeHandlerImpl();
           }
@@ -103,6 +78,7 @@ public class WindowImplIE extends WindowImpl {
   public void initWindowScrollHandler() {
     initHandler(Resources.INSTANCE.initWindowScrollHandler().getText(),
         new ScheduledCommand() {
+          @Override
           public void execute() {
             initWindowScrollHandlerImpl();
           }

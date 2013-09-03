@@ -129,7 +129,7 @@ public class JUnitMessageQueue {
   private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<TestInfo, Map<ClientStatus, JUnitResult>>();
 
   /**
-   * A set of the GWT user agents (eg. ie6, gecko1_8) that have connected.
+   * A set of the GWT user agents (eg. safari, gecko1_8) that have connected.
    */
   private final Set<String> userAgents = new HashSet<String>();
 
@@ -486,7 +486,7 @@ public class JUnitMessageQueue {
   /**
    * Ensure that a {@link ClientStatus} for the clientId exists.
    * 
-   * @param clientId the id of the client
+   * @param clientInfo the id of the client
    * @return the {@link ClientStatus} for the client
    */
   private ClientStatus ensureClientStatus(ClientInfoExt clientInfo) {

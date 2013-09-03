@@ -130,7 +130,7 @@ public class RequestTest extends RequestTestBase {
 
   /*
    * Checks that the status code is correct when receiving a 204-No-Content. This needs special
-   * handling in IE6-9. See http://code.google.com/p/google-web-toolkit/issues/detail?id=5031
+   * handling in IE8-9. See http://code.google.com/p/google-web-toolkit/issues/detail?id=5031
    */
   public void test204NoContent() {
     delayTestFinishForRequest();

@@ -19,8 +19,7 @@
 <module>
 
   <!-- Browser-sensitive code should use the 'user.agent' property -->
-  <define-property name="user.agent" values="ie6" />
-  <extend-property name="user.agent" values="ie8" />
+  <define-property name="user.agent" values="ie8" />
   <extend-property name="user.agent" values="gecko1_8" />
   <extend-property name="user.agent" values="safari" />
   <extend-property name="user.agent" values="opera" />

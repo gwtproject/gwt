@@ -29,6 +29,7 @@ import com.google.gwt.dev.shell.FailErrorLogger;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
 
+
 import junit.framework.TestCase;
 
 import java.io.StringReader;

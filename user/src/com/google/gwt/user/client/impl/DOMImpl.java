@@ -21,7 +21,7 @@ import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NodeList;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 

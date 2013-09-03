@@ -20,6 +20,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.HashSet;
@@ -34,6 +35,13 @@ abstract class CellBasedWidgetImpl {
    * The singleton impl instance.
    */
   private static CellBasedWidgetImpl impl;
+
+  /**
+   * Dispatch an event through the normal GWT mechanism.
+   */
+  protected static native void dispatchEvent(Event evt, Element elem, EventListener listener) /*-{
+    @com.google.gwt.user.client.DOM::dispatchEvent(*)(evt, elem, listener);
+  }-*/;
 
   /**
    * Get the singleton instance.

@@ -38,13 +38,6 @@ class CellBasedWidgetImplStandard extends CellBasedWidgetImpl {
   private static JavaScriptObject dispatchNonBubblingEvent;
 
   /**
-   * Dispatch an event through the normal GWT mechanism.
-   */
-  private static native void dispatchEvent(Event evt, Element elem, EventListener listener) /*-{
-    @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, listener);
-  }-*/;
-
-  /**
    * Handle an event from a cell. Used by {@link #initEventSystem()}.
    *
    * @param event the event to handle.
@@ -55,7 +48,7 @@ class CellBasedWidgetImplStandard extends CellBasedWidgetImpl {
     if (!Element.is(eventTarget)) {
       return;
     }
-    com.google.gwt.user.client.Element target = eventTarget.cast();
+    Element target = eventTarget.cast();
 
     // Get the event listener, which is the first widget that handles the
     // specified event type.

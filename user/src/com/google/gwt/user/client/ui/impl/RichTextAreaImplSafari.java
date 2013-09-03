@@ -40,7 +40,7 @@ public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
     elem.__gwt_handler = function(evt) {
       if (elem.__listener) {
         if (@com.google.gwt.user.client.impl.DOMImpl::isMyListener(Ljava/lang/Object;)(elem.__listener)) {
-          @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
+          @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/dom/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
         }
       }
     };
@@ -61,13 +61,13 @@ public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
     // there interferes with focus.
     wnd.onfocus = function(evt) {
       if (elem.__listener) {
-        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
+        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/dom/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
       }
     };
 
     wnd.onblur = function(evt) {
       if (elem.__listener) {
-        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
+        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/dom/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
       }
     };
   }-*/;

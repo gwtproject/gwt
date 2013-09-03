@@ -83,7 +83,7 @@ public class MhtmlResourceContext extends StaticResourceContext {
         forceExternal);
 
     /*
-     * ie6 doesn't treat XHRs to mhtml as cross-site, but ie8 does, so we'll
+     * IE8  treats XHRs to mhtml as cross-site, so we'll
      * play it safe here.
      */
     if (forceExternal || data.length > MAX_INLINE_SIZE) {

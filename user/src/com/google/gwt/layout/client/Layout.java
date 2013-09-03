@@ -55,8 +55,7 @@ import java.util.List;
  * </p>
  * 
  * <p>
- * On most browsers, this is implemented using absolute positioning. It also
- * contains extra logic to make IE6 work properly.
+ * On most browsers, this is implemented using absolute positioning.
  * </p>
  * 
  * <p>

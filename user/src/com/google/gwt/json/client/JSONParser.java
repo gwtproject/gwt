@@ -73,7 +73,7 @@ public class JSONParser {
   /**
    * Evaluates a JSON string and returns its JSONValue representation. Where
    * possible, the browser's {@code JSON.parse function} is used. For older
-   * browsers including IE6 and IE7 that lack a {@code JSON.parse} function, the
+   * browsers that lack a {@code JSON.parse} function, the
    * input is validated as described in RFC 4627 for safety and passed to
    * {@code eval()}.
    * 

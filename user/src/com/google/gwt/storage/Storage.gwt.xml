@@ -21,13 +21,6 @@
   <!-- Set the default to maybe -->
   <set-property name="storageSupport" value="maybe" />
 
-  <!-- Older browsers do not support Storage -->
-  <set-property name="storageSupport" value="no">
-    <any>
-      <when-property-is name="user.agent" value="ie6" />
-    </any>
-  </set-property>
-
   <replace-with class="com.google.gwt.storage.client.Storage.StorageSupportDetectorNo">
     <when-type-is class="com.google.gwt.storage.client.Storage.StorageSupportDetector" />
     <when-property-is name="storageSupport" value="no" />

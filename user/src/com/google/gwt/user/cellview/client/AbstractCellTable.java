@@ -816,7 +816,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
   private Widget emptyTableWidget;
   private FooterBuilder<T> footerBuilder;
   private boolean footerRefreshDisabled;
-  private final List<Header<?>> footers = new ArrayList<Header<?>>();
+  private final List<Header<?>> footers = new ArrayList<>();
 
   /**
    * Indicates that at least one column handles selection.
@@ -825,7 +825,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
 
   private HeaderBuilder<T> headerBuilder;
   private boolean headerRefreshDisabled;
-  private final List<Header<?>> headers = new ArrayList<Header<?>>();
+  private final List<Header<?>> headers = new ArrayList<>();
 
   /**
    * Indicates that either the headers or footers are dirty, and both should be
@@ -1261,7 +1261,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
     }
 
     // Sink events used by the new column.
-    Set<String> consumedEvents = new HashSet<String>();
+    Set<String> consumedEvents = new HashSet<>();
     {
       Set<String> cellEvents = col.getCell().getConsumedEvents();
       if (cellEvents != null) {
@@ -1661,7 +1661,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * Sets the skipRowHoverStyleUpdate flag. If set, the CellTable will not update
    * the row's style on row-level hover events (MOUSEOVER and MOUSEOUT).
    *
-   * @param skipRowHoverCheck the new flag value
+   * @param skipRowHoverStyleUpdate the new flag value
    */
   public void setSkipRowHoverStyleUpdate(boolean skipRowHoverStyleUpdate) {
     this.skipRowHoverStyleUpdate = skipRowHoverStyleUpdate;
@@ -2532,18 +2532,18 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
     }
 
     // Sink events.
-    Set<String> eventTypes = new HashSet<String>();
+    Set<String> eventTypes = new HashSet<>();
     eventTypes.add(BrowserEvents.MOUSEOVER);
     eventTypes.add(BrowserEvents.MOUSEOUT);
     CellBasedWidgetImpl.get().sinkEvents(this, eventTypes);
 
     // Set the table builder.
-    tableBuilder = new DefaultCellTableBuilder<T>(this);
-    headerBuilder = new DefaultHeaderOrFooterBuilder<T>(this, false);
-    footerBuilder = new DefaultHeaderOrFooterBuilder<T>(this, true);
+    tableBuilder = new DefaultCellTableBuilder<>(this);
+    headerBuilder = new DefaultHeaderOrFooterBuilder<>(this, false);
+    footerBuilder = new DefaultHeaderOrFooterBuilder<>(this, true);
 
     // Set the keyboard handler.
-    setKeyboardSelectionHandler(new CellTableKeyboardSelectionHandler<T>(this));
+    setKeyboardSelectionHandler(new CellTableKeyboardSelectionHandler<>(this));
   }
 
   /**

@@ -21,7 +21,7 @@ import com.google.gwt.user.client.Element;
  * Implementation of {@link com.google.gwt.user.client.ui.impl.FocusImpl}
  * for IE that traps invalid focus attempts to match other browsers.
  */
-public class FocusImplIE6 extends FocusImpl {
+public class FocusImplIE8To9 extends FocusImpl {
 
   @Override
   public native void focus(Element elem) /*-{

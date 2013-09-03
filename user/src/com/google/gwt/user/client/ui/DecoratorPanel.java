@@ -35,9 +35,6 @@ import com.google.gwt.user.client.Element;
  * within the {@link DecoratorPanel} to resize without disrupting the look of
  * the border. In addition, rounded corners can generally be combined into a
  * single image file, which reduces the number of downloaded files at startup.
- * This class also simplifies the process of using AlphaImageLoaders to support
- * 8-bit transparencies (anti-aliasing and shadows) in ie6, which does not
- * support them normally.
  * </p>
  * <h3>Setting the Size:</h3>
  * <p>

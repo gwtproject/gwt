@@ -292,27 +292,6 @@ public class HistoryTest extends GWTTestCase {
     History.newItem(shouldNotChange);
   }
 
-  /*
-   * Test against issue #2500. IE6 has a bug that causes it to not report any
-   * part of the current fragment after a '?' when read from location.hash; make
-   * sure that on affected browsers, we're not relying on this.
-   */
-  public void testTokenWithQuestionmark() {
-    delayTestFinish(5000);
-    final String token = "foo?bar";
-
-    addHistoryListenerImpl(new HistoryListener() {
-      public void onHistoryChanged(String historyToken) {
-        if (historyToken == null) {
-          fail("historyToken should not be null");
-        }
-        assertEquals(token, historyToken);
-        finishTest();
-      }
-    });
-    History.newItem(token);
-  }
-
   /**
    * Test that using an empty history token works properly. There have been
    * problems (see issue 2905) with this in the past on Safari.

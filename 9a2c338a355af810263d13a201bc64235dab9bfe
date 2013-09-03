@@ -104,6 +104,24 @@
       "revId": "9a2c338a355af810263d13a201bc64235dab9bfe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_0705f864",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-03T07:33:55Z",
+      "side": 1,
+      "message": "Ah, yes, getRelatedEventTarget for mouseover and getEventTarget for mouseout. Let\u0027s deprecate it later.\n\nBTW, the Trident implementation looks broken for synthesized events; fortunately it\u0027s not used that much (and always in cases where it could easily be unambiguously replaced by either getEventTarget or getRelatedEventTarget)",
+      "parentUuid": "32a3b5b4_61655dbb",
+      "revId": "9a2c338a355af810263d13a201bc64235dab9bfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

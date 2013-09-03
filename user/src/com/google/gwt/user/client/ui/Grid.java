@@ -15,8 +15,8 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 
 /**
  * A rectangular grid that can contain text, html, or a child
@@ -266,13 +266,13 @@ public class Grid extends HTMLTable {
    * Creates a new, empty cell.
    */
   @Override
-  protected Element createCell() {
+  protected com.google.gwt.user.client.Element createCell() {
     Element td = super.createCell();
 
     // Add a non-breaking space to the TD. This ensures that the cell is
     // displayed.
     DOM.setInnerHTML(td, "&nbsp;");
-    return td;
+    return td.cast();
   }
 
   /**

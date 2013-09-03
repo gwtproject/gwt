@@ -60,13 +60,13 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * <p>
@@ -132,27 +132,30 @@ public class CodeSplitter {
    */
   private class EchoStatementLogger implements StatementLogger {
     public void logStatement(JsStatement stat, boolean isIncluded) {
-      if (isIncluded) {
-        if (stat instanceof JsExprStmt) {
-          JsExpression expr = ((JsExprStmt) stat).getExpression();
-          if (expr instanceof JsFunction) {
-            JsFunction func = (JsFunction) expr;
-            if (func.getName() != null) {
-              JMethod method = map.nameToMethod(func.getName());
-              if (method != null) {
-                System.out.println(fullNameString(method));
-              }
-            }
-          }
+      if (!isIncluded) {
+        return;
+      }
+      if (stat instanceof JsExprStmt) {
+        JsExpression expr = ((JsExprStmt) stat).getExpression();
+        if (!(expr instanceof JsFunction)) {
+          return;
         }
+        JsFunction func = (JsFunction) expr;
+        if (func.getName() == null) {
+          return;
+        }
+        JMethod method = map.nameToMethod(func.getName());
+        if (method == null) {
+          return;
+        }
+        System.out.println(fullNameString(method));
 
-        if (stat instanceof JsVars) {
-          JsVars vars = (JsVars) stat;
-          for (JsVar var : vars) {
-            JField field = map.nameToField(var.getName());
-            if (field != null) {
-              System.out.println(fullNameString(field));
-            }
+      } else if (stat instanceof JsVars) {
+        JsVars vars = (JsVars) stat;
+        for (JsVar var : vars) {
+          JField field = map.nameToField(var.getName());
+          if (field != null) {
+            System.out.println(fullNameString(field));
           }
         }
       }
@@ -166,11 +169,255 @@ public class CodeSplitter {
    * not included has not been proven to be exclusive. Also, note that the
    * initial load sequence is assumed to already be loaded.
    */
-  private static class ExclusivityMap {
-    public Map<JField, Integer> fields = new HashMap<JField, Integer>();
-    public Map<JMethod, Integer> methods = new HashMap<JMethod, Integer>();
-    public Map<String, Integer> strings = new HashMap<String, Integer>();
-    public Map<JDeclaredType, Integer> types = new HashMap<JDeclaredType, Integer>();
+  static class ExclusivityMap {
+
+    public boolean check(int fragment, JField field) {
+      return checkMap(fields,  fragment, field);
+    }
+
+    public boolean check(int fragment, JMethod method) {
+      return checkMap(methods,  fragment, method);
+    }
+
+    public boolean check(int fragment, String string) {
+      return checkMap(strings,  fragment, string);
+    }
+    public boolean check(int fragment, JDeclaredType type) {
+      return checkMap(types,  fragment, type);
+    }
+
+    public void updateFields(int fragment, Set<?> liveWithoutEntry, Iterable<JField> all) {
+      updateMap(fragment, fields, liveWithoutEntry, all);
+    }
+
+
+    public void updateMethods(int fragment, Set<?> liveWithoutEntry, Iterable<JMethod> all) {
+      updateMap(fragment, methods, liveWithoutEntry, all);
+    }
+
+    public void updateStrings(int fragment, Set<?> liveWithoutEntry, Iterable<String> all) {
+      updateMap(fragment, strings, liveWithoutEntry, all);
+    }
+
+    public void updateTypes(int fragment, Set<?> liveWithoutEntry, Iterable<JDeclaredType> all) {
+      updateMap(fragment, types, liveWithoutEntry, all);
+    }
+
+    private <T> void updateMap(int fragment, Map<T, Integer>  map,
+        Set<?> liveWithoutEntry, Iterable<T> all) {
+      for (T each : all) {
+        if (!liveWithoutEntry.contains(each)) {
+          /*
+          * Note that it is fine to overwrite a preexisting entry in the map. If
+          * an atom is dead until split point i has been reached, and is also
+          * dead until entry j has been reached, then it is dead until both have
+          * been reached. Thus, it can be downloaded along with either i's or j's
+          * code.
+          */
+         map.put(each, fragment);
+        }
+      }
+    }
+    /**
+     * <p>
+     * Patch up the fragment map to satisfy load-order dependencies, as described
+     * in the comment of {@link LivenessPredicate}. Load-order dependencies can be
+     * violated when an atom is mapped to 0 as a leftover, but it has some
+     * load-order dependency on an atom that was put in an exclusive fragment.
+     * </p>
+     *
+     * <p>
+     * In general, it might be possible to split things better by considering load
+     * order dependencies when building the fragment map. However, fixing them
+     * after the fact makes CodeSplitter simpler. In practice, for programs tried
+     * so far, there are very few load order dependency fixups that actually
+     * happen, so it seems better to keep the compiler simpler.
+     * </p>
+     */
+    public void fixUpLoadOrderDependencies(TreeLogger logger, JProgram jprogram,
+        Set<JMethod> methodsInJavaScript) {
+      fixUpLoadOrderDependenciesForMethods(logger, jprogram, methodsInJavaScript);
+      fixUpLoadOrderDependenciesForTypes(logger, jprogram);
+      fixUpLoadOrderDependenciesForClassLiterals(logger, jprogram);
+      fixUpLoadOrderDependenciesForFieldsInitializedToStrings(logger, jprogram);
+    }
+
+    private void fixUpLoadOrderDependenciesForClassLiterals(TreeLogger logger, JProgram jprogram) {
+      int numClassLitStrings = 0;
+      int numFixups = 0;
+      int numClassLiteralFixups = 0;
+      /**
+       * Consider all static fields of ClassLiteralHolder; the majority if not all its static
+       * fields are class literal fields. It is safe to fix up extra fields.
+       */
+      Queue<JField> potentialClassLiteralFields = new ArrayDeque<JField>(
+          jprogram.getTypeClassLiteralHolder().getFields());
+      int numClassLiterals = potentialClassLiteralFields.size();
+
+      while (!potentialClassLiteralFields.isEmpty()) {
+        JField field = potentialClassLiteralFields.remove();
+        if (!field.isStatic()) {
+          continue;
+        }
+
+        int classLiteralFragment = getOrZero(fields, field);
+        JExpression initializer = field.getInitializer();
+
+        // Fixup the string literals.
+        for (String string : stringsIn(initializer)) {
+          numClassLitStrings++;
+          int stringFrag = getOrZero(strings, string);
+          if (stringFrag != classLiteralFragment && stringFrag != 0) {
+            numFixups++;
+            strings.put(string, 0);
+          }
+        }
+        for (JClassLiteral superclassClassLiteral : classLiteralsIn(initializer)) {
+          JField superclassClassLiteralField = superclassClassLiteral.getField();
+          // Fix the super class literal and add it to the reexamined.
+          int superclassClassLiteralFragment = getOrZero(fields, superclassClassLiteralField);
+          if (superclassClassLiteralFragment != classLiteralFragment
+              && superclassClassLiteralFragment != 0) {
+            numClassLiteralFixups++;
+            fields.put(superclassClassLiteralField, 0);
+            // Add the field back so that its superclass classliteral gets fixed if necessary.
+            potentialClassLiteralFields.add(superclassClassLiteralField);
+          }
+        }
+      }
+      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups
+          + " strings in class literal constructors to fragment 0, out of " + numClassLitStrings);
+      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " +
+          numClassLiteralFixups + " fields in class literal constructors to fragment 0, out of " +
+          numClassLiterals);
+    }
+
+    private void fixUpLoadOrderDependenciesForFieldsInitializedToStrings(TreeLogger logger,
+        JProgram jprogram) {
+      final int[] numFixups = new int[1];
+      final int[] numFieldStrings = new int[1];
+
+      (new JVisitor() {
+        @Override
+        public void endVisit(JField field, Context ctx) {
+          if (field.getInitializer() instanceof JStringLiteral) {
+            numFieldStrings[0]++;
+
+            String string = ((JStringLiteral) field.getInitializer()).getValue();
+            int fieldFrag = getOrZero(fields, field);
+            int stringFrag = getOrZero(strings, string);
+            if (fieldFrag != stringFrag && stringFrag != 0) {
+              numFixups[0]++;
+              strings.put(string, 0);
+            }
+          }
+        }
+      }).accept(jprogram);
+
+
+      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups[0]
+          + " strings used to initialize fields to fragment 0, out of " + numFieldStrings[0]);
+    }
+
+    private void fixUpLoadOrderDependenciesForMethods(TreeLogger logger, JProgram jprogram,
+        Set<JMethod> methodsInJavaScript) {
+      int numFixups = 0;
+
+      for (JDeclaredType type : jprogram.getDeclaredTypes()) {
+        int typeFrag = getOrZero(types, type);
+        if (typeFrag == 0) {
+          continue;
+        }
+        /*
+        * If the type is in an exclusive fragment, all its instance methods
+        * must be in the same one.
+        */
+        for (JMethod method : type.getMethods()) {
+          if (method.needsVtable() && methodsInJavaScript.contains(method)
+              && typeFrag != getOrZero(methods, method)) {
+            types.put(type, 0);
+            numFixups++;
+            break;
+          }
+        }
+      }
+
+      logger.log(TreeLogger.DEBUG,
+          "Fixed up load-order dependencies for instance methods by moving " + numFixups
+              + " types to fragment 0, out of " + jprogram.getDeclaredTypes().size());
+    }
+
+    private void fixUpLoadOrderDependenciesForTypes(TreeLogger logger, JProgram jprogram) {
+      int numFixups = 0;
+      Queue<JDeclaredType> typesToCheck =
+          new ArrayDeque<JDeclaredType>(jprogram.getDeclaredTypes().size());
+      typesToCheck.addAll(jprogram.getDeclaredTypes());
+
+      while (!typesToCheck.isEmpty()) {
+        JDeclaredType type = typesToCheck.remove();
+        if (type.getSuperClass() != null) {
+          int typeFrag = getOrZero(types, type);
+          int supertypeFrag = getOrZero(types, type.getSuperClass());
+          if (typeFrag != supertypeFrag && supertypeFrag != 0) {
+            numFixups++;
+            types.put(type.getSuperClass(), 0);
+            typesToCheck.add(type.getSuperClass());
+          }
+        }
+      }
+
+      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies on supertypes by moving "
+          + numFixups + " types to fragment 0, out of " + jprogram.getDeclaredTypes().size());
+    }
+
+    /**
+     * Traverse <code>exp</code> and find all string literals within it.
+     */
+    private static Set<String> stringsIn(JExpression exp) {
+      final Set<String> strings = new HashSet<String>();
+      class StringFinder extends JVisitor {
+        @Override
+        public void endVisit(JStringLiteral stringLiteral, Context ctx) {
+          strings.add(stringLiteral.getValue());
+        }
+      }
+      (new StringFinder()).accept(exp);
+      return strings;
+    }
+
+    /**
+     * Traverse <code>exp</code> and find all referenced JFields.
+     */
+    private static Set<JClassLiteral> classLiteralsIn(JExpression exp) {
+      final Set<JClassLiteral> literals = new HashSet<JClassLiteral>();
+      class ClassLiteralFinder extends JVisitor {
+        @Override
+        public void endVisit(JClassLiteral classLiteral, Context ctx) {
+          literals.add(classLiteral);
+        }
+      }
+      (new ClassLiteralFinder()).accept(exp);
+      return literals;
+    }
+    private Map<JField, Integer> fields = new HashMap<JField, Integer>();
+    private Map<JMethod, Integer> methods = new HashMap<JMethod, Integer>();
+    private Map<String, Integer> strings = new HashMap<String, Integer>();
+    private Map<JDeclaredType, Integer> types = new HashMap<JDeclaredType, Integer>();
+
+    private static <T> int getOrZero(Map<T, Integer> map, T key) {
+      Integer value = map.get(key);
+      return (value == null) ? 0 : value;
+    }
+
+    private <T> boolean checkMap(Map<T, Integer> map, int fragment, T x) {
+      Integer entryForX = map.get(x);
+      if (entryForX == null) {
+        // unrecognized items are always live
+        return true;
+      } else {
+        return (fragment == entryForX) || (entryForX == 0);
+      }
+    }
   }
 
   /**
@@ -186,33 +433,23 @@ public class CodeSplitter {
     }
 
     public boolean isLive(JDeclaredType type) {
-      return checkMap(fragmentMap.types, type);
+      return fragmentMap.check(fragment, type);
     }
 
     public boolean isLive(JField field) {
-      return checkMap(fragmentMap.fields, field);
+      return fragmentMap.check(fragment, field);
     }
 
     public boolean isLive(JMethod method) {
-      return checkMap(fragmentMap.methods, method);
+      return fragmentMap.check(fragment, method);
     }
 
     public boolean isLive(String literal) {
-      return checkMap(fragmentMap.strings, literal);
+      return fragmentMap.check(fragment, literal);
     }
 
     public boolean miscellaneousStatementsAreLive() {
       return true;
-    }
-
-    private <T> boolean checkMap(Map<T, Integer> map, T x) {
-      Integer entryForX = map.get(x);
-      if (entryForX == null) {
-        // unrecognized items are always live
-        return true;
-      } else {
-        return (fragment == entryForX) || (entryForX == 0);
-      }
     }
   }
 
@@ -431,18 +668,6 @@ public class CodeSplitter {
     return maxTotalSize;
   }
 
-  private static Map<JField, JClassLiteral> buildFieldToClassLiteralMap(JProgram jprogram) {
-    final Map<JField, JClassLiteral> map = new HashMap<JField, JClassLiteral>();
-    class BuildFieldToLiteralVisitor extends JVisitor {
-      @Override
-      public void endVisit(JClassLiteral lit, Context ctx) {
-        map.put(lit.getField(), lit);
-      }
-    }
-    (new BuildFieldToLiteralVisitor()).accept(jprogram);
-    return map;
-  }
-
   /**
    * Compute the set of initially live code for this program. Such code must be
    * included in the initial download of the program.
@@ -479,11 +704,6 @@ public class CodeSplitter {
 
   private static String fullNameString(JMethod method) {
     return method.getEnclosingType().getName() + "." + JProgram.getJsniSig(method);
-  }
-
-  private static <T> int getOrZero(Map<T, Integer> map, T key) {
-    Integer value = map.get(key);
-    return (value == null) ? 0 : value;
   }
 
   /**
@@ -603,24 +823,7 @@ public class CodeSplitter {
     return union;
   }
 
-  private static <T> void updateMap(int entry, Map<T, Integer> map, Set<?> liveWithoutEntry,
-      Iterable<T> all) {
-    for (T each : all) {
-      if (!liveWithoutEntry.contains(each)) {
-        /*
-         * Note that it is fine to overwrite a preexisting entry in the map. If
-         * an atom is dead until split point i has been reached, and is also
-         * dead until entry j has been reached, then it is dead until both have
-         * been reached. Thus, it can be downloaded along with either i's or j's
-         * code.
-         */
-        map.put(each, entry);
-      }
-    }
-  }
-
   private final MultipleDependencyGraphRecorder dependencyRecorder;
-  private final Map<JField, JClassLiteral> fieldToLiteralOfClass;
   private final FragmentExtractor fragmentExtractor;
   private final LinkedHashSet<Integer> initialLoadSequence;
 
@@ -653,7 +856,6 @@ public class CodeSplitter {
 
     numEntries = jprogram.getRunAsyncs().size() + 1;
     logging = Boolean.getBoolean(PROP_LOG_FRAGMENT_MAP);
-    fieldToLiteralOfClass = buildFieldToClassLiteralMap(jprogram);
     fragmentExtractor = new FragmentExtractor(jprogram, jsprogram, map);
 
     initiallyLive = computeInitiallyLive(jprogram, dependencyRecorder);
@@ -755,7 +957,7 @@ public class CodeSplitter {
     ExclusivityMap fragmentMap = new ExclusivityMap();
 
     mapExclusiveAtoms(fragmentMap);
-    fixUpLoadOrderDependencies(fragmentMap);
+    fragmentMap.fixUpLoadOrderDependencies(logger, jprogram, methodsInJavaScript);
 
     return fragmentMap;
   }
@@ -837,131 +1039,6 @@ public class CodeSplitter {
     }
   }
 
-  /**
-   * <p>
-   * Patch up the fragment map to satisfy load-order dependencies, as described
-   * in the comment of {@link LivenessPredicate}. Load-order dependencies can be
-   * violated when an atom is mapped to 0 as a leftover, but it has some
-   * load-order dependency on an atom that was put in an exclusive fragment.
-   * </p>
-   * 
-   * <p>
-   * In general, it might be possible to split things better by considering load
-   * order dependencies when building the fragment map. However, fixing them
-   * after the fact makes CodeSplitter simpler. In practice, for programs tried
-   * so far, there are very few load order dependency fixups that actually
-   * happen, so it seems better to keep the compiler simpler.
-   * </p>
-   */
-  private void fixUpLoadOrderDependencies(ExclusivityMap fragmentMap) {
-    fixUpLoadOrderDependenciesForMethods(fragmentMap);
-    fixUpLoadOrderDependenciesForTypes(fragmentMap);
-    fixUpLoadOrderDependenciesForClassLiterals(fragmentMap);
-    fixUpLoadOrderDependenciesForFieldsInitializedToStrings(fragmentMap);
-  }
-
-  private void fixUpLoadOrderDependenciesForClassLiterals(ExclusivityMap fragmentMap) {
-    int numClassLitStrings = 0;
-    int numFixups = 0;
-    for (JField field : fragmentMap.fields.keySet()) {
-      JClassLiteral classLit = fieldToLiteralOfClass.get(field);
-      if (classLit != null) {
-        int classLitFrag = fragmentMap.fields.get(field);
-        for (String string : stringsIn(field.getInitializer())) {
-          numClassLitStrings++;
-          int stringFrag = getOrZero(fragmentMap.strings, string);
-          if (stringFrag != classLitFrag && stringFrag != 0) {
-            numFixups++;
-            fragmentMap.strings.put(string, 0);
-          }
-        }
-      }
-    }
-    if (logger.isLoggable(TreeLogger.DEBUG)) {
-      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups
-          + " strings in class literal constructors to fragment 0, out of " + numClassLitStrings);
-    }
-  }
-
-  private void fixUpLoadOrderDependenciesForFieldsInitializedToStrings(ExclusivityMap fragmentMap) {
-    int numFixups = 0;
-    int numFieldStrings = 0;
-
-    for (JField field : fragmentMap.fields.keySet()) {
-      if (field.getInitializer() instanceof JStringLiteral) {
-        numFieldStrings++;
-
-        String string = ((JStringLiteral) field.getInitializer()).getValue();
-        int fieldFrag = getOrZero(fragmentMap.fields, field);
-        int stringFrag = getOrZero(fragmentMap.strings, string);
-        if (fieldFrag != stringFrag && stringFrag != 0) {
-          numFixups++;
-          fragmentMap.strings.put(string, 0);
-        }
-      }
-    }
-
-    if (logger.isLoggable(TreeLogger.DEBUG)) {
-      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups
-          + " strings used to initialize fields to fragment 0, out of " + +numFieldStrings);
-    }
-  }
-
-  private void fixUpLoadOrderDependenciesForMethods(ExclusivityMap fragmentMap) {
-    int numFixups = 0;
-
-    for (JDeclaredType type : jprogram.getDeclaredTypes()) {
-      int typeFrag = getOrZero(fragmentMap.types, type);
-
-      if (typeFrag != 0) {
-        /*
-         * If the type is in an exclusive fragment, all its instance methods
-         * must be in the same one.
-         */
-        for (JMethod method : type.getMethods()) {
-          if (method.needsVtable() && methodsInJavaScript.contains(method)) {
-            int methodFrag = getOrZero(fragmentMap.methods, method);
-            if (methodFrag != typeFrag) {
-              fragmentMap.types.put(type, 0);
-              numFixups++;
-              break;
-            }
-          }
-        }
-      }
-    }
-
-    if (logger.isLoggable(TreeLogger.DEBUG)) {
-      logger.log(TreeLogger.DEBUG,
-          "Fixed up load-order dependencies for instance methods by moving " + numFixups
-              + " types to fragment 0, out of " + jprogram.getDeclaredTypes().size());
-    }
-  }
-
-  private void fixUpLoadOrderDependenciesForTypes(ExclusivityMap fragmentMap) {
-    int numFixups = 0;
-    Queue<JDeclaredType> typesToCheck =
-        new ArrayBlockingQueue<JDeclaredType>(jprogram.getDeclaredTypes().size());
-    typesToCheck.addAll(jprogram.getDeclaredTypes());
-
-    while (!typesToCheck.isEmpty()) {
-      JDeclaredType type = typesToCheck.remove();
-      if (type.getSuperClass() != null) {
-        int typeFrag = getOrZero(fragmentMap.types, type);
-        int supertypeFrag = getOrZero(fragmentMap.types, type.getSuperClass());
-        if (typeFrag != supertypeFrag && supertypeFrag != 0) {
-          numFixups++;
-          fragmentMap.types.put(type.getSuperClass(), 0);
-          typesToCheck.add(type.getSuperClass());
-        }
-      }
-    }
-
-    if (logger.isLoggable(TreeLogger.DEBUG)) {
-      logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies on supertypes by moving "
-          + numFixups + " types to fragment 0, out of " + jprogram.getDeclaredTypes().size());
-    }
-  }
 
   private boolean isInitial(int entry) {
     return initialLoadSequence.contains(entry);
@@ -998,27 +1075,12 @@ public class CodeSplitter {
       ControlFlowAnalyzer allButOne = allButOnes.get(splitPoint - 1);
       Set<JNode> allLiveNodes =
           union(allButOne.getLiveFieldsAndMethods(), allButOne.getFieldsWritten());
-      updateMap(splitPoint, fragmentMap.fields, allLiveNodes, allFields);
-      updateMap(splitPoint, fragmentMap.methods, allButOne.getLiveFieldsAndMethods(), allMethods);
-      updateMap(splitPoint, fragmentMap.strings, allButOne.getLiveStrings(), everything
+      fragmentMap.updateFields(splitPoint, allLiveNodes, allFields);
+      fragmentMap.updateMethods(splitPoint, allButOne.getLiveFieldsAndMethods(), allMethods);
+      fragmentMap.updateStrings(splitPoint, allButOne.getLiveStrings(), everything
           .getLiveStrings());
-      updateMap(splitPoint, fragmentMap.types, declaredTypesIn(allButOne.getInstantiatedTypes()),
+      fragmentMap.updateTypes(splitPoint, declaredTypesIn(allButOne.getInstantiatedTypes()),
           declaredTypesIn(everything.getInstantiatedTypes()));
     }
-  }
-
-  /**
-   * Traverse <code>exp</code> and find all string literals within it.
-   */
-  private Set<String> stringsIn(JExpression exp) {
-    final Set<String> strings = new HashSet<String>();
-    class StringFinder extends JVisitor {
-      @Override
-      public void endVisit(JStringLiteral stringLiteral, Context ctx) {
-        strings.add(stringLiteral.getValue());
-      }
-    }
-    (new StringFinder()).accept(exp);
-    return strings;
   }
 }

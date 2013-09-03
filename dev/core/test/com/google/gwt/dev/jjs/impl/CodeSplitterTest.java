@@ -22,6 +22,8 @@ import com.google.gwt.dev.jjs.ast.JProgram;
  * Tests class {@link CodeSplitter}.
  */
 public class CodeSplitterTest extends JJSTestBase {
+  // TODO(rluble): Refactor code splitter to be able to add significant unit tests for its parts.
+
   /**
    * Tests that everything in the magic Array class is considered initially
    * live.

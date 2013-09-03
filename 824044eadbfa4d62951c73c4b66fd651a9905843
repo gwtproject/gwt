@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2e24519_0c31f7fb",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 0,
+      "message": "Hm, the wording of this comment makes me think we can eliminate this catch block if we eliminate IE6/7 support.  I\u0027d rather you left this mention of IE6/7 (so we know to revisit/evaluate in further detail later) unless you\u0027ve already confirmed that the second sentence still applies to newer JS engines.",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_ac06632d",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 0,
+      "message": "Why remove this comment?",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

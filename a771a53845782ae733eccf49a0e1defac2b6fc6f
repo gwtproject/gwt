@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12f4f1cf_cfe87d31",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "This patch set is going to be large enough already just removing IE6 related code.  I\u0027d prefer if you made unrelated changes like this in a separate patch set.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2d83d6d_0effabe0",
+        "filename": "user/src/com/google/gwt/user/client/impl/WindowImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Do we not care about returning oldRet if ret is null anymore?  Should this be \"return ret || oldRet;\"?",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_cce88f31",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/unusedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Don\u0027t comment this out; this test case is checking that the compiler correctly handles files like this.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_6cf87bfa",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Don\u0027t comment this out.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_aced433f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Don\u0027t comment this out.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_2c027320",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Eliminate this blank line.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e24519_0cffb7e0",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:43:56Z",
+      "side": 1,
+      "message": "Eliminate blank line.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

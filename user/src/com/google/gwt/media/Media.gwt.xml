@@ -27,14 +27,12 @@
 
   <set-property name="videoElementSupport" value="no">
     <any>
-      <when-property-is name="user.agent" value="ie6" />
       <when-property-is name="user.agent" value="ie8" />
     </any>
   </set-property>
   
   <set-property name="audioElementSupport" value="no">
     <any>
-      <when-property-is name="user.agent" value="ie6" />
       <when-property-is name="user.agent" value="ie8" />
     </any>
   </set-property>

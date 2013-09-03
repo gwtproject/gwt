@@ -67,8 +67,7 @@ abstract class SplitPanel extends Panel {
 
   /**
    * Sizes and element to consume the full area of its parent using the CSS
-   * properties left, right, top, and bottom. This method is used for all
-   * browsers except IE6/7.
+   * properties left, right, top, and bottom.
    * 
    * @param elem the element
    */
@@ -80,24 +79,6 @@ abstract class SplitPanel extends Panel {
     setRight(elem, zeroSize);
     setTop(elem, zeroSize);
     setBottom(elem, zeroSize);
-  }
-
-  /**
-   * Sizes an element to consume the full areas of its parent using 100% width
-   * and height. This method is used on IE6/7 where CSS offsets don't work
-   * reliably.
-   * 
-   * @param elem the element
-   */
-  static final void expandToFitParentUsingPercentages(Element elem) {
-    final String zeroSize = "0px";
-    final String fullSize = "100%";
-
-    addAbsolutePositoning(elem);
-    setTop(elem, zeroSize);
-    setLeft(elem, zeroSize);
-    setWidth(elem, fullSize);
-    setHeight(elem, fullSize);
   }
 
   /**

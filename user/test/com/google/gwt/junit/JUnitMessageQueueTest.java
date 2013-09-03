@@ -44,7 +44,7 @@ public class JUnitMessageQueueTest extends TestCase {
   public void testAddTestBlocks() {
     JUnitMessageQueue queue = new JUnitMessageQueue(10);
     assertEquals(0, queue.getTestBlocks().size());
-    List<TestInfo[]> expectedBlocks = new ArrayList<TestInfo[]>();
+    List<TestInfo[]> expectedBlocks = new ArrayList<>();
 
     // Add some blocks.
     {
@@ -94,7 +94,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Add some clients in a few ways.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
       assertEquals(3, queue.getNumConnectedClients());
@@ -102,15 +102,15 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Add duplicate clients.
     {
-      queue.getTestBlock(createClientInfo(3, "ie6"), 0, timeout);
-      queue.reportFatalLaunch(createClientInfo(3, "ie6"), null);
+      queue.getTestBlock(createClientInfo(3, "ie8"), 0, timeout);
+      queue.reportFatalLaunch(createClientInfo(3, "ie8"), null);
       queue.reportResults(createClientInfo(4, "safari"), createTestResults(0));
       assertEquals(5, queue.getNumConnectedClients());
     }
 
     // Add existing clients.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
       assertEquals(5, queue.getNumConnectedClients());
@@ -137,7 +137,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // First client retrieves the first test block.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       assertEquals(1, queue.getNumClientsRetrievedTest(test0_0));
       assertEquals(1, queue.getNumClientsRetrievedTest(test0_1));
       assertEquals(1, queue.getNumClientsRetrievedTest(test0_2));
@@ -148,7 +148,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Second client retrieves the first test block.
     {
-      queue.getTestBlock(createClientInfo(1, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(1, "ie8"), 0, timeout);
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_0));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_1));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_2));
@@ -159,7 +159,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // First client retrieves the second test block.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 1, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 1, timeout);
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_0));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_1));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_2));
@@ -170,7 +170,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // First client retrieves the second test block again.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 1, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 1, timeout);
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_0));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_1));
       assertEquals(2, queue.getNumClientsRetrievedTest(test0_2));
@@ -195,23 +195,23 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Client 0 reports results for first test case.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, result0);
-      queue.reportResults(createClientInfo(0, "ie6"), results);
+      queue.reportResults(createClientInfo(0, "ie8"), results);
     }
 
     // Client 1 reports results for first test case.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, result1);
-      queue.reportResults(createClientInfo(1, "ie6"), results);
+      queue.reportResults(createClientInfo(1, "ie8"), results);
     }
 
     // Client 2 reports results for first test case.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, result2);
-      queue.reportResults(createClientInfo(2, "ie6"), results);
+      queue.reportResults(createClientInfo(2, "ie8"), results);
     }
 
     // Get the results
@@ -245,7 +245,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Get the first test block.
     {
-      TestBlock block = queue.getTestBlock(createClientInfo(0, "ie6"), 0,
+      TestBlock block = queue.getTestBlock(createClientInfo(0, "ie8"), 0,
           timeout);
       assertEquals(testBlock0, block.getTests());
       assertEquals(0, block.getIndex());
@@ -253,7 +253,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Get the second test block.
     {
-      TestBlock block = queue.getTestBlock(createClientInfo(0, "ie6"), 1,
+      TestBlock block = queue.getTestBlock(createClientInfo(0, "ie8"), 1,
           timeout);
       assertEquals(testBlock1, block.getTests());
       assertEquals(1, block.getIndex());
@@ -261,7 +261,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Get the third test block.
     {
-      assertNull(queue.getTestBlock(createClientInfo(0, "ie6"), 2, timeout));
+      assertNull(queue.getTestBlock(createClientInfo(0, "ie8"), 2, timeout));
     }
   }
 
@@ -272,10 +272,10 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Add some clients in a few ways.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
-      assertSimilar(new String[] {"ie6", "gecko1_8", "safari"},
+      assertSimilar(new String[] {"ie8", "gecko1_8", "safari"},
           queue.getUserAgents());
     }
 
@@ -285,16 +285,16 @@ public class JUnitMessageQueueTest extends TestCase {
       queue.reportFatalLaunch(createClientInfo(3, "ie7"), null);
       queue.reportResults(createClientInfo(4, "gecko1_8"), createTestResults(0));
       queue.getTestBlock(createClientInfo(3, "ie7"), 0, timeout);
-      assertSimilar(new String[] {"ie6", "ie7", "gecko1_8", "safari"},
+      assertSimilar(new String[] {"ie8", "ie7", "gecko1_8", "safari"},
           queue.getUserAgents());
     }
 
     // Add existing clients.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
-      assertSimilar(new String[] {"ie6", "ie7", "gecko1_8", "safari"},
+      assertSimilar(new String[] {"ie8", "ie7", "gecko1_8", "safari"},
           queue.getUserAgents());
     }
   }
@@ -318,9 +318,9 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // First client reports results for the first test.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, new JUnitResult());
-      queue.reportResults(createClientInfo(0, "ie6"), results);
+      queue.reportResults(createClientInfo(0, "ie8"), results);
       assertFalse(queue.hasResults(test0_0));
       assertFalse(queue.hasResults(test0_1));
       assertFalse(queue.hasResults(test0_2));
@@ -331,9 +331,9 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Second client reports results for the first test.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, new JUnitResult());
-      queue.reportResults(createClientInfo(1, "ie6"), results);
+      queue.reportResults(createClientInfo(1, "ie8"), results);
       assertFalse(queue.hasResults(test0_0));
       assertFalse(queue.hasResults(test0_1));
       assertFalse(queue.hasResults(test0_2));
@@ -344,9 +344,9 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // First client reports results for the second test.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_1, new JUnitResult());
-      queue.reportResults(createClientInfo(0, "ie6"), results);
+      queue.reportResults(createClientInfo(0, "ie8"), results);
       assertFalse(queue.hasResults(test0_0));
       assertFalse(queue.hasResults(test0_1));
       assertFalse(queue.hasResults(test0_2));
@@ -357,9 +357,9 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Third client reports results for the first test.
     {
-      Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+      Map<TestInfo, JUnitResult> results = new HashMap<>();
       results.put(test0_0, new JUnitResult());
-      queue.reportResults(createClientInfo(2, "ie6"), results);
+      queue.reportResults(createClientInfo(2, "ie8"), results);
       assertTrue(queue.hasResults(test0_0));
       assertFalse(queue.hasResults(test0_1));
       assertFalse(queue.hasResults(test0_2));
@@ -374,12 +374,12 @@ public class JUnitMessageQueueTest extends TestCase {
         ONE_TEST_PER_BLOCK);
     // an exception
     TestInfo testInfo = queue.getTestBlocks().get(0)[0];
-    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+    Map<TestInfo, JUnitResult> results = new HashMap<>();
     JUnitResult junitResult = new JUnitResult();
     junitResult.setException(new UnableToCompleteException());
     results.put(testInfo, junitResult);
-    queue.reportResults(createClientInfo(0, "ie6"), results);
-    results = new HashMap<TestInfo, JUnitResult>();
+    queue.reportResults(createClientInfo(0, "ie8"), results);
+    results = new HashMap<>();
     junitResult = new JUnitResult();
     junitResult.setException(new JUnitFatalLaunchException());
     results.put(testInfo, junitResult);
@@ -389,11 +389,11 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // an exception but exception in launch module
     queue.removeResults(testInfo);
-    results = new HashMap<TestInfo, JUnitResult>();
+    results = new HashMap<>();
     junitResult = new JUnitResult();
     junitResult.setException(new JUnitFatalLaunchException());
     results.put(testInfo, junitResult);
-    queue.reportResults(createClientInfo(0, "ie6"), results);
+    queue.reportResults(createClientInfo(0, "ie8"), results);
     queue.reportResults(createClientInfo(1, "ff3"),
         createTestResults(ONE_TEST_PER_BLOCK));
     assertFalse(queue.needsRerunning(testInfo));
@@ -421,7 +421,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Add some clients in a few ways.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
       assertSimilar(new String[] {"desc0", "desc1", "desc2"},
@@ -431,17 +431,17 @@ public class JUnitMessageQueueTest extends TestCase {
 
     // Add duplicate clients.
     {
-      queue.getTestBlock(createClientInfo(3, "ie6"), 0, timeout);
-      queue.reportFatalLaunch(createClientInfo(3, "ie6"), null);
+      queue.getTestBlock(createClientInfo(3, "ie8"), 0, timeout);
+      queue.reportFatalLaunch(createClientInfo(3, "ie8"), null);
       queue.reportResults(createClientInfo(4, "safari"), createTestResults(0));
-      queue.getTestBlock(createClientInfo(3, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(3, "ie8"), 0, timeout);
       assertSimilar(new String[] {"desc3", "desc4"}, queue.getNewClients());
       assertEquals(0, queue.getNewClients().length);
     }
 
     // Add existing clients.
     {
-      queue.getTestBlock(createClientInfo(0, "ie6"), 0, timeout);
+      queue.getTestBlock(createClientInfo(0, "ie8"), 0, timeout);
       queue.reportFatalLaunch(createClientInfo(1, "gecko1_8"), null);
       queue.reportResults(createClientInfo(2, "safari"), createTestResults(0));
       assertEquals(0, queue.getNewClients().length);
@@ -454,7 +454,7 @@ public class JUnitMessageQueueTest extends TestCase {
     TestInfo testInfo = queue.getTestBlocks().get(0)[0];
     assertFalse(queue.hasResults(testInfo));
 
-    queue.reportResults(createClientInfo(0, "ie6"),
+    queue.reportResults(createClientInfo(0, "ie8"),
         createTestResults(ONE_TEST_PER_BLOCK));
     assertFalse(queue.hasResults(testInfo));
     queue.reportResults(createClientInfo(1, "ff3"),
@@ -469,7 +469,7 @@ public class JUnitMessageQueueTest extends TestCase {
     JUnitMessageQueue queue = createQueue(TWO_CLIENTS, ONE_BLOCK,
         ONE_TEST_PER_BLOCK);
     TestInfo testInfo = queue.getTestBlocks().get(0)[0];
-    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+    Map<TestInfo, JUnitResult> results = new HashMap<>();
     JUnitResult junitResult = new JUnitResult();
     junitResult.setException(new AssertionError());
     results.put(testInfo, junitResult);
@@ -485,7 +485,7 @@ public class JUnitMessageQueueTest extends TestCase {
 
     queue.reportResults(createClientInfo(0, "ff3"),
         createTestResults(ONE_TEST_PER_BLOCK));
-    queue.reportResults(createClientInfo(1, "ie6"),
+    queue.reportResults(createClientInfo(1, "ie8"),
         createTestResults(ONE_TEST_PER_BLOCK));
     assertFalse(queue.needsRerunning(testInfo));
     // check that the updated result appears now.
@@ -504,8 +504,8 @@ public class JUnitMessageQueueTest extends TestCase {
    * @param actual the actual array
    */
   private void assertSimilar(String[] expected, String[] actual) {
-    assertEquals(new HashSet<String>(Arrays.asList(expected)),
-        new HashSet<String>(Arrays.asList(actual)));
+    assertEquals(new HashSet<>(Arrays.asList(expected)),
+        new HashSet<>(Arrays.asList(actual)));
   }
 
   private ClientInfoExt createClientInfo(int sessionId, String userAgent) {
@@ -535,7 +535,7 @@ public class JUnitMessageQueueTest extends TestCase {
    * @return the test blocks
    */
   private List<TestInfo[]> createTestBlocks(int numBlocks, int testsPerBlock) {
-    List<TestInfo[]> testBlocks = new ArrayList<TestInfo[]>();
+    List<TestInfo[]> testBlocks = new ArrayList<>();
     for (int i = 0; i < numBlocks; i++) {
       TestInfo[] testBlock = new TestInfo[testsPerBlock];
       for (int test = 0; test < testsPerBlock; test++) {
@@ -554,7 +554,7 @@ public class JUnitMessageQueueTest extends TestCase {
    * @return the test results
    */
   private Map<TestInfo, JUnitResult> createTestResults(int numTests) {
-    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+    Map<TestInfo, JUnitResult> results = new HashMap<>();
     for (int i = 0; i < numTests; i++) {
       TestInfo testInfo = new TestInfo("testModule0", "testClass", "testMethod"
           + i);

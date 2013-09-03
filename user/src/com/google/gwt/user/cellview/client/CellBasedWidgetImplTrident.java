@@ -242,7 +242,7 @@ class CellBasedWidgetImplTrident extends CellBasedWidgetImpl {
     }
 
     // Initialize the change event triggers.
-    changeEventTriggers = new HashSet<String>();
+    changeEventTriggers = new HashSet<>();
     changeEventTriggers.add(BrowserEvents.MOUSEUP);
     changeEventTriggers.add(BrowserEvents.MOUSEWHEEL);
   }
@@ -279,6 +279,7 @@ class CellBasedWidgetImplTrident extends CellBasedWidgetImpl {
       // Defer the change event because the change does not occur until after
       // the events specified above.
       Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
         public void execute() {
           maybeFireChangeEvent(widget);
         }

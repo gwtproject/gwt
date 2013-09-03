@@ -279,17 +279,9 @@ public class ElementTest extends GWTTestCase {
         assertEquals(absLeft, elem.getAbsoluteLeft());
         assertEquals(absTop, elem.getAbsoluteTop());
 
-        if (isIE6or7() && !doc.isCSS1Compat()) {
-          // In IE/quirk, the interior decorations are considered part of the
-          // width/height, so there's no need to account for them here.
-          assertEquals(absLeft + width, elem.getAbsoluteRight());
-          assertEquals(absTop + height, elem.getAbsoluteBottom());
-        } else {
-          assertEquals(absLeft + width + interiorDecorations,
-              elem.getAbsoluteRight());
-          assertEquals(absTop + height + interiorDecorations,
-              elem.getAbsoluteBottom());
-        }
+        assertEquals(absLeft + width + interiorDecorations, elem.getAbsoluteRight());
+        assertEquals(absTop + height + interiorDecorations, elem.getAbsoluteBottom());
+        
       }
     });
   }
@@ -333,14 +325,9 @@ public class ElementTest extends GWTTestCase {
     assertTrue(Math.abs(absLeft - div.getAbsoluteLeft()) <= 1);
     assertTrue(Math.abs(absTop - div.getAbsoluteTop()) <= 1);
 
-    // Ensure that the 'position:fixed' div's absolute position includes the
-    // body's scroll position.
-    //
-    // Don't do this on IE6/7, which doesn't support position:fixed.
-    if (!isIE6or7()) {
-      assertTrue(fixedDiv.getAbsoluteLeft() >= body.getScrollLeft());
-      assertTrue(fixedDiv.getAbsoluteTop() >= body.getScrollTop());
-    }
+    assertTrue(fixedDiv.getAbsoluteLeft() >= body.getScrollLeft());
+    assertTrue(fixedDiv.getAbsoluteTop() >= body.getScrollTop());
+    
   }
 
   /**
@@ -516,7 +503,7 @@ public class ElementTest extends GWTTestCase {
     div.setPropertyObject("baz", obj);
     assertEquals(obj, div.getPropertyObject("baz"));
 
-    JavaScriptObject jso = createTrivialJSO();
+    JavaScriptObject jso = JavaScriptObject.createObject();
     div.setPropertyJSO("tintin", jso);
     assertEquals(jso, div.getPropertyJSO("tintin"));
   }
@@ -728,20 +715,4 @@ public class ElementTest extends GWTTestCase {
       }
     }
   }
-
-  private native JavaScriptObject createTrivialJSO() /*-{
-    return {};
-  }-*/;
-
-  // Stolen from UserAgentPropertyGenerator
-  private native boolean isIE6or7() /*-{
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf("msie") != -1) {
-      if ($doc.documentMode >= 8) {
-        return false;
-      }
-      return true;
-    }
-    return false;
-  }-*/;
 }

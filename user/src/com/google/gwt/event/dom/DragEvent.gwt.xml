@@ -26,7 +26,6 @@
   <!-- Older browsers do not support drag events. -->
   <set-property name="dragEventSupport" value="no">
     <any>
-      <when-property-is name="user.agent" value="ie6" />
       <when-property-is name="user.agent" value="ie8" />
     </any>
   </set-property>

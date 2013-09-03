@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-@ParametersAreNonnullByDefault
+//@ParametersAreNonnullByDefault
 package com.google.gwt.dev.jjs.test.usedimports;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+//import javax.annotation.ParametersAreNonnullByDefault;

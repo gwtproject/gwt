@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "32bad5ee_382189c7",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Hm, yep.  Done.",
+      "parentUuid": "b26fa53a_c71200a5",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e70ffc7b",
         "filename": "user/src/com/google/gwt/uibinder/elementparsers/WidgetInterpreter.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-03T08:29:45Z",
       "side": 1,
       "message": "Unrelated to this change but I think this Element should use a FQCN.",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bad5ee_fb0c2b51",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/WidgetInterpreter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Actually, it looks like dom.Element is always imported by default.  See UiBinderWriter.writeImports().\n\n(Accordingly, I\u0027ve changed dom.Element above to just Element.)",
+      "parentUuid": "b26fa53a_e70ffc7b",
       "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "32bad5ee_9b0bef35",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Didn\u0027t know about that.  Done.",
+      "parentUuid": "b26fa53a_07aed834",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_27b3d49b",
         "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplTrident.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-03T08:29:45Z",
       "side": 1,
       "message": "Same here (wildcard). Might be wise to move it as protected or package-private in CellBasedWidgetImpl?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bad5ee_fb354bef",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplTrident.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b26fa53a_27b3d49b",
       "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "32bad5ee_3b34e3eb",
+        "filename": "user/src/com/google/gwt/user/client/ui/DecoratorPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "It\u0027s not necessary, but I just want to set a good precedent that code shouldn\u0027t be relying on other methods to return a user.Element.  So I just uniformly included a .cast() call whenever the return type is user.Element.",
+      "parentUuid": "b26fa53a_a79ee4f7",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_c7abe01c",
         "filename": "user/src/com/google/gwt/user/client/ui/Grid.java",
         "patchSetId": 1
@@ -115,6 +205,24 @@
       "writtenOn": "2013-09-03T08:29:45Z",
       "side": 1,
       "message": "Because \u0027td\u0027 comes from super.createCell, we could also just make it a user…Element and avoid the cast()",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bad5ee_db84c761",
+        "filename": "user/src/com/google/gwt/user/client/ui/Grid.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Could, but then we\u0027d have to change the local variable to user.Element, and I wanted that after this patch set that user.Element is only used in return value types.  (Not necessary, but again to set a good example for users.)",
+      "parentUuid": "b26fa53a_c7abe01c",
       "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "32bad5ee_1b9b5fb9",
+        "filename": "user/src/com/google/gwt/user/client/ui/UIObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b26fa53a_a7c7c4df",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_277d94bd",
         "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImplIE6.java",
         "patchSetId": 1
@@ -149,6 +275,24 @@
       "writtenOn": "2013-09-03T08:29:45Z",
       "side": 1,
       "message": "Unrelated to this change, but that should probably be getModuleBaseForStaticFiles here",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bad5ee_fb68abb9",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Probably, but I don\u0027t want to touch that as part of this patch set for risk of breaking something inadvertently.",
+      "parentUuid": "b26fa53a_277d94bd",
       "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "32bad5ee_5b7af77a",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Looks like it\u0027s actually Node::isOrHasChild(Node), but if I try that I get a compiler error: \"Referencing method \u0027com.google.gwt.dom.client.Node.isOrHasChild(Lcom/google/gwt/dom/client/Node;)\u0027: references to instance methods in overlay types are illegal\".  So I\u0027m going to punt on this for now, since I think IE6 support will be gone before we remove DOM.isOrHasChild() anyway.\n\nAnd tangentially, I wonder if JSNI invocations like this could/should use normal Java resolution instead of requiring an exact match.",
+      "parentUuid": "b26fa53a_47829094",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e7929cdb",
         "filename": "user/test/com/google/gwt/user/client/ui/HTMLPanelTest.java",
         "patchSetId": 1
@@ -183,6 +345,24 @@
       "writtenOn": "2013-09-03T08:29:45Z",
       "side": 1,
       "message": "Can\u0027t we instead change placeholder to be a dom…Element rather than a user…Element?",
+      "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bad5ee_1b60ffa8",
+        "filename": "user/test/com/google/gwt/user/client/ui/HTMLPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-03T19:09:48Z",
+      "side": 1,
+      "message": "Hm, yes.  I saw the \"Ensures that overloaded version\" in the next test\u0027s javadoc and the mention of user.Element specifically, and for some reason I assumed that they really meant to test user.Element here.  But it does seem that using dom.Element would be appropriate.",
+      "parentUuid": "b26fa53a_e7929cdb",
       "revId": "85f718ba88f2bd22d7cf802880c62fc79d12570a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

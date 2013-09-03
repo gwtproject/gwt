@@ -19,9 +19,9 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
 /**
- * IE6-specific implementation of rich-text editing.
+ * IE8-specific implementation of rich-text editing.
  */
-public class RichTextAreaImplIE6 extends RichTextAreaImplStandard {
+public class RichTextAreaImplIE8 extends RichTextAreaImplStandard {
 
   @Override
   public Element createElement() {

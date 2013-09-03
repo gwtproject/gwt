@@ -98,7 +98,7 @@ public class JUnitMessageQueue {
   /**
    * Records results for each client; must lock before accessing.
    */
-  private final Map<Integer, ClientStatus> clientStatuses = new HashMap<Integer, ClientStatus>();
+  private final Map<Integer, ClientStatus> clientStatuses = new HashMap<>();
 
   /**
    * The lock used to synchronize access to clientStatuses.
@@ -119,19 +119,19 @@ public class JUnitMessageQueue {
   /**
    * The list of test blocks to run.
    */
-  private final List<TestInfo[]> testBlocks = new ArrayList<TestInfo[]>();
+  private final List<TestInfo[]> testBlocks = new ArrayList<>();
 
   /**
    * Maps the TestInfo to the results from each clientId. If JUnitResult is
    * null, it means that the client requested the test but did not report the
    * results yet.
    */
-  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<TestInfo, Map<ClientStatus, JUnitResult>>();
+  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<>();
 
   /**
-   * A set of the GWT user agents (eg. ie6, gecko1_8) that have connected.
+   * A set of the GWT user agents (eg. safari, gecko1_8) that have connected.
    */
-  private final Set<String> userAgents = new HashSet<String>();
+  private final Set<String> userAgents = new HashSet<>();
 
   /**
    * Only instantiable within this package.
@@ -204,7 +204,7 @@ public class JUnitMessageQueue {
   public void reportFatalLaunch(ClientInfoExt clientInfo, JUnitResult result) {
     // Fatal launch error, cause this client to fail the whole block.
     ClientStatus clientStatus = ensureClientStatus(clientInfo);
-    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+    Map<TestInfo, JUnitResult> results = new HashMap<>();
     for (TestInfo testInfo : testBlocks.get(clientStatus.blockIndex)) {
       results.put(testInfo, result);
     }
@@ -266,7 +266,7 @@ public class JUnitMessageQueue {
    */
   String[] getNewClients() {
     synchronized (clientStatusesLock) {
-      List<String> results = new ArrayList<String>();
+      List<String> results = new ArrayList<>();
       for (ClientStatus clientStatus : clientStatuses.values()) {
         if (clientStatus.isNew) {
           results.add(clientStatus.getDesc());
@@ -486,7 +486,7 @@ public class JUnitMessageQueue {
   /**
    * Ensure that a {@link ClientStatus} for the clientId exists.
    * 
-   * @param clientId the id of the client
+   * @param clientInfo the id of the client
    * @return the {@link ClientStatus} for the client
    */
   private ClientStatus ensureClientStatus(ClientInfoExt clientInfo) {
@@ -512,7 +512,7 @@ public class JUnitMessageQueue {
   private Map<ClientStatus, JUnitResult> ensureResults(TestInfo testInfo) {
     Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
     if (results == null) {
-      results = new IdentityHashMap<ClientStatus, JUnitResult>();
+      results = new IdentityHashMap<>();
       testResults.put(testInfo, results);
     }
     return results;

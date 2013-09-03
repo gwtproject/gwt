@@ -22,13 +22,6 @@
   <!-- Set the property to maybe -->
   <set-property name="geolocationSupport" value="maybe" />
 
-  <!-- Older browsers do not support Geolocation -->
-  <set-property name="geolocationSupport" value="no">
-    <any>
-      <when-property-is name="user.agent" value="ie6" />
-    </any>
-  </set-property>
-
   <replace-with class="com.google.gwt.geolocation.client.Geolocation.GeolocationSupportDetectorNo">
     <when-type-is class="com.google.gwt.geolocation.client.Geolocation.GeolocationSupportDetector" />
     <when-property-is name="geolocationSupport" value="no" />

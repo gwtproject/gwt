@@ -55,8 +55,7 @@ import java.util.List;
  * </p>
  * 
  * <p>
- * On most browsers, this is implemented using absolute positioning. It also
- * contains extra logic to make IE6 work properly.
+ * On most browsers, this is implemented using absolute positioning.
  * </p>
  * 
  * <p>
@@ -329,7 +328,7 @@ public class Layout {
 
   private LayoutImpl impl = GWT.create(LayoutImpl.class);
 
-  private List<Layer> layers = new ArrayList<Layer>();
+  private List<Layer> layers = new ArrayList<>();
   private final Element parentElem;
   private Animation animation;
 

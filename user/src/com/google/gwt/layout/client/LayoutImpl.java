@@ -32,7 +32,7 @@ import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.layout.client.Layout.Layer;
 
 /**
- * Default implementation, which works with all browsers except for IE6. It uses
+ * Default implementation, which works with all browsers. It uses
  * only the "top", "left", "bottom", "right", "width", and "height" CSS
  * properties.
  * 

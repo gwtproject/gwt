@@ -37,7 +37,7 @@ public interface JUnitHost extends RemoteService {
     private int sessionId;
 
     /**
-     * The GWT user.agent property of this client, e.g. "ie6", "safari", etc.
+     * The GWT user.agent property of this client, e.g. "gecko1_8", "safari", etc.
      */
     private String userAgent;
 

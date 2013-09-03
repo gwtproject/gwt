@@ -57,7 +57,7 @@ import java.lang.annotation.Target;
  * <li><code>{@literal @if} [!]property list of values {ruleBlock}</code> Include or
  * exclude CSS rules based on the value of a deferred-binding property. Also
  * {@code @elif} and {@code @else} follow the same pattern.<br/>
- * This might look like {@code @if user.agent ie6 safari ...}.</li>
+ * This might look like {@code @if user.agent ie8 safari ...}.</li>
  * <li><code>{@literal @if} (Java-expression) {ruleBlock}</code> Include or exclude
  * CSS rules based on a boolean Java expression.</li>
  * <li><code>{@literal @noflip} { rules }</code> will suppress the automatic

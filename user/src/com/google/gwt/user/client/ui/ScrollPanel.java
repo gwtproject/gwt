@@ -359,11 +359,6 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     scrollableElem.getStyle().setPosition(Position.RELATIVE);
     containerElem.getStyle().setPosition(Position.RELATIVE);
 
-    // Hack to account for the IE6/7 scrolling bug described here:
-    //   http://stackoverflow.com/questions/139000/div-with-overflowauto-and-a-100-wide-table-problem
-    scrollableElem.getStyle().setProperty("zoom", "1");
-    containerElem.getStyle().setProperty("zoom", "1");
-
     // Enable touch scrolling.
     setTouchScrollingDisabled(false);
 

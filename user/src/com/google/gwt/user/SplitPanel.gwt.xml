@@ -20,10 +20,9 @@
     <when-type-is class="com.google.gwt.user.client.ui.HorizontalSplitPanel.Impl"/>
   </replace-with>
 
-  <replace-with class="com.google.gwt.user.client.ui.HorizontalSplitPanel.ImplIE6">
+  <replace-with class="com.google.gwt.user.client.ui.HorizontalSplitPanel.ImplIE8">
     <when-type-is class="com.google.gwt.user.client.ui.HorizontalSplitPanel.Impl"/>
     <any>
-	    <when-property-is name="user.agent" value="ie6"/>
 	    <when-property-is name="user.agent" value="ie8"/>
 	  </any>
   </replace-with>
@@ -37,10 +36,9 @@
     <when-type-is class="com.google.gwt.user.client.ui.VerticalSplitPanel.Impl"/>
   </replace-with>
 
-  <replace-with class="com.google.gwt.user.client.ui.VerticalSplitPanel.ImplIE6">
+  <replace-with class="com.google.gwt.user.client.ui.VerticalSplitPanel.ImplIE8">
     <when-type-is class="com.google.gwt.user.client.ui.VerticalSplitPanel.Impl"/>
     <any>
-	    <when-property-is name="user.agent" value="ie6"/>
 	    <when-property-is name="user.agent" value="ie8"/>
     </any>
   </replace-with>

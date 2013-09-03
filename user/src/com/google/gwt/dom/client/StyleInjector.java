@@ -86,9 +86,7 @@ public class StyleInjector {
   }
 
   /**
-   * IE doesn't allow manipulation of a style element through DOM methods. There
-   * is also a hard-coded limit on the number of times that createStyleSheet can
-   * be called before IE6 starts throwing exceptions.
+   * IE doesn't allow manipulation of a style element through DOM methods.
    */
   public static class StyleInjectorImplIE extends StyleInjectorImpl {
 
@@ -203,6 +201,7 @@ public class StyleInjector {
   private static final JsArrayString toInjectAtStart = JavaScriptObject.createArray().cast();
 
   private static ScheduledCommand flusher = new ScheduledCommand() {
+    @Override
     public void execute() {
       if (needsInjection) {
         flush(null);

@@ -160,8 +160,8 @@ class BrowserManagerServerLauncher extends ToolBase {
       + "Pass in an even number of args, at least 2. The first argument\n"
       + "is a short registration name, and the second argument is the\n"
       + "executable to run when that name is used; for example,\n" + "\n"
-      + "\tie6 \"C:\\Program Files\\Internet Explorer\\IEXPLORE.EXE\"\n" + "\n"
-      + "would register Internet Explorer to \"rmi://localhost/ie6\".\n"
+      + "\tie8 \"C:\\Program Files\\Internet Explorer\\IEXPLORE.EXE\"\n" + "\n"
+      + "would register Internet Explorer to \"rmi://localhost/ie8\".\n"
       + "The third and fourth arguments make another pair, and so on.\n";
 
   private List<BMSEntry> bmsList = new ArrayList<BMSEntry>();

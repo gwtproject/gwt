@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2e24519_6fc50d48",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStringInterner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-03T21:57:39Z",
+      "side": 1,
+      "message": "I think you are missing a call to the interner from StandardLinkerContext  that passes true as always intern.",
+      "revId": "ffccd734e53e87d474fba503e166b17938b1d261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

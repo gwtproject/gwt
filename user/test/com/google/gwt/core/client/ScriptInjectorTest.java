@@ -31,9 +31,9 @@ public class ScriptInjectorTest extends GWTTestCase {
   private static final int TEST_DELAY = 10000;
 
   /**
-   * Check if the browser is IE6,7,8,9.
+   * Check if the browser is IE8,9.
    * 
-   * @return <code>true</code> if the browser is IE6, IE7, IE8, IE9
+   * @return <code>true</code> if the browser is IE8, IE9
    *         <code>false</code> any other browser
    */
   static boolean isIE() {

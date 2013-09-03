@@ -153,6 +153,7 @@ public class AbsolutePanel extends ComplexPanel implements
         - DOM.getAbsoluteTop(getElement());
   }
 
+  @Override
   public void insert(Widget w, int beforeIndex) {
     insert(w, getElement(), beforeIndex, true);
   }
@@ -160,6 +161,7 @@ public class AbsolutePanel extends ComplexPanel implements
   /**
    * Convenience overload to allow {@link IsWidget} to be used directly.
    */
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
@@ -270,10 +272,7 @@ public class AbsolutePanel extends ComplexPanel implements
     /*
      * When this AbsolutePanel is the document BODY, e.g. RootPanel.get(), then
      * no explicit position:relative is needed as children are already
-     * positioned relative to their parent. For simplicity we test against
-     * parent, not offsetParent, since in IE6+IE7 (but not IE8+) standards mode,
-     * the offsetParent, for elements whose parent is the document BODY, is the
-     * HTML element, not the BODY element.
+     * positioned relative to their parent.
      */
     if ("body".equals(getElement().getNodeName().toLowerCase())) {
       return;

@@ -153,11 +153,11 @@ public final class VerticalSplitPanel extends SplitPanel {
   }
 
   /**
-   * Provides an implementation for IE6/7 that relies on 100% length in CSS.
+   * Provides an implementation for IE8 that relies on 100% length in CSS.
    */
   @SuppressWarnings("unused")
-  // will be used by IE6 permutation
-  private static class ImplIE6 extends Impl {
+  // will be used by IE8 permutation
+  private static class ImplIE8 extends Impl {
 
     private static void expandToFitParentHorizontally(Element elem) {
       addAbsolutePositoning(elem);
@@ -189,7 +189,7 @@ public final class VerticalSplitPanel extends SplitPanel {
       expandToFitParentHorizontally(bottomElem);
       expandToFitParentHorizontally(panel.getSplitElement());
 
-      expandToFitParentUsingPercentages(panel.container);
+      expandToFitParentUsingCssOffsets(panel.container);
     }
 
     @Override
@@ -224,41 +224,10 @@ public final class VerticalSplitPanel extends SplitPanel {
       splitPosition = px;
     }
 
-    @Override
-    protected void updateElements(Element topElem, Element splitElem,
-        Element bottomElem, int topHeight, int bottomTop, int bottomHeight) {
-      /*
-       * IE6/7 has a quirk where a zero height element with non-zero height
-       * children will expand larger than 100%. To prevent this, the width is
-       * explicitly set to zero when height is zero.
-       */
-      if (topHeight == 0) {
-        setWidth(topElem, "0px");
-        isTopHidden = true;
-      } else if (isTopHidden) {
-        setWidth(topElem, "100%");
-        isTopHidden = false;
-      }
-
-      if (bottomHeight == 0) {
-        setWidth(bottomElem, "0px");
-        isBottomHidden = true;
-      } else if (isBottomHidden) {
-        setWidth(bottomElem, "100%");
-        isBottomHidden = false;
-      }
-
-      super.updateElements(topElem, splitElem, bottomElem, topHeight,
-          bottomTop, bottomHeight);
-
-      // IE6/7 cannot update properly with CSS alone.
-      setHeight(bottomElem, bottomHeight + "px");
-    }
-
     private native void addResizeListener(Element container) /*-{
       var self = this;
       container.onresize = $entry(function() {
-        self.@com.google.gwt.user.client.ui.VerticalSplitPanel$ImplIE6::onResize()();
+        self.@com.google.gwt.user.client.ui.VerticalSplitPanel$ImplIE8::onResize()();
       });
     }-*/;
 

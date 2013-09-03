@@ -279,6 +279,7 @@ class CellBasedWidgetImplTrident extends CellBasedWidgetImpl {
       // Defer the change event because the change does not occur until after
       // the events specified above.
       Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
         public void execute() {
           maybeFireChangeEvent(widget);
         }

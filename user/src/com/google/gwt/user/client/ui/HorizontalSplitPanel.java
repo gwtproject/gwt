@@ -185,11 +185,11 @@ public final class HorizontalSplitPanel extends SplitPanel {
   }
 
   /**
-   * The IE6 implementation for horizontal split panels.
+   * The IE8 implementation for horizontal split panels.
    */
   @SuppressWarnings("unused")
-  // will be used by IE6 permutation
-  private static class ImplIE6 extends Impl {
+  // will be used by IE8 permutation
+  private static class ImplIE8 extends Impl {
 
     private boolean isResizeInProgress = false;
 
@@ -222,7 +222,7 @@ public final class HorizontalSplitPanel extends SplitPanel {
       addAbsolutePositoning(panel.getElement(RIGHT));
       addAbsolutePositoning(panel.getSplitElement());
 
-      expandToFitParentUsingPercentages(panel.container);
+      expandToFitParentUsingCssOffsets(panel.container);
 
       if (LocaleInfo.getCurrentLocale().isRTL()) {
         // Snap the left pane to the left edge of the container. We
@@ -324,7 +324,7 @@ public final class HorizontalSplitPanel extends SplitPanel {
     private native void addResizeListener(Element container) /*-{
       var self = this;
       container.onresize = $entry(function() {
-        self.@com.google.gwt.user.client.ui.HorizontalSplitPanel$ImplIE6::onResize()();
+        self.@com.google.gwt.user.client.ui.HorizontalSplitPanel$ImplIE8::onResize()();
       });
     }-*/;
 

@@ -1,15 +1,5 @@
 /**
  * The file contains styles for GWT widgets in the Clean theme.
- *
- * In order to maintain cross-browser compatibility, the following syntax is
- * used to create IE6 specific style rules:
- *    .gwt-Widget {
- *      property: rule applies to all browsers
- *      -property: rule applies only to IE6 (overrides previous rule)
- *    }
- *    * html .gwt-Widget {
- *      property: rule applies to all versions of IE
- *    }
  */
 
 body, table td, select, button {
@@ -127,22 +117,18 @@ select {
 .gwt-DecoratorPanel .topLeft {
   line-height: 0px;
   background: url(images/circles.png) no-repeat 0px -6px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -6px;
 }
 .gwt-DecoratorPanel .topRight {
   line-height: 0px;
   background: url(images/circles.png) no-repeat -5px -6px;
-  -background: url(images/circles_ie6.png) no-repeat -5px -6px;
 }
 .gwt-DecoratorPanel .bottomLeft {
   line-height: 0px;
   background: url(images/circles.png) no-repeat 0px -11px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -11px;
 }
 .gwt-DecoratorPanel .bottomRight {
   line-height: 0px;
   background: url(images/circles.png) no-repeat -5px -11px;
-  -background: url(images/circles_ie6.png) no-repeat -5px -11px;
 }
 * html .gwt-DecoratorPanel .topLeftInner,
 * html .gwt-DecoratorPanel .topRightInner,
@@ -170,14 +156,12 @@ select {
 }
 .gwt-DialogBox .dialogBottomCenter {
   background: url(images/hborder.png) repeat-x 0px -2945px;
-  -background: url(images/hborder_ie6.png) repeat-x 0px -2144px;
 }
 .gwt-DialogBox .dialogMiddleLeft {
   background: url(images/vborder.png) repeat-y -31px 0px;
 }
 .gwt-DialogBox .dialogMiddleRight {
   background: url(images/vborder.png) repeat-y -32px 0px;
-  -background: url(images/vborder_ie6.png) repeat-y -32px 0px;
 }
 .gwt-DialogBox .dialogTopLeftInner {
   width: 10px;
@@ -200,19 +184,15 @@ select {
 }
 .gwt-DialogBox .dialogTopLeft {
   background: url(images/circles.png) no-repeat -20px 0px;
-  -background: url(images/circles_ie6.png) no-repeat -20px 0px;
 }
 .gwt-DialogBox .dialogTopRight {
   background: url(images/circles.png) no-repeat -28px 0px;
-  -background: url(images/circles_ie6.png) no-repeat -28px 0px;
 }
 .gwt-DialogBox .dialogBottomLeft {
   background: url(images/circles.png) no-repeat 0px -36px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -36px;
 }
 .gwt-DialogBox .dialogBottomRight {
   background: url(images/circles.png) no-repeat -8px -36px;
-  -background: url(images/circles_ie6.png) no-repeat -8px -36px;
 }
 * html .gwt-DialogBox .dialogTopLeftInner {
   width: 10px;
@@ -365,15 +345,12 @@ select {
 }
 .gwt-MenuBarPopup .menuPopupBottomCenter {
   background: url(images/hborder.png) 0px -13px repeat-x;
-  -background: url(images/hborder_ie6.png) 0px -13px repeat-x;
 }
 .gwt-MenuBarPopup .menuPopupMiddleLeft {
   background: url(images/vborder.png) -12px 0px repeat-y;
-  -background: url(images/vborder_ie6.png) -12px 0px repeat-y;
 }
 .gwt-MenuBarPopup .menuPopupMiddleRight {
   background: url(images/vborder.png) -13px 0px repeat-y;
-  -background: url(images/vborder_ie6.png) -13px 0px repeat-y;
 }
 .gwt-MenuBarPopup .menuPopupTopLeftInner {
   width: 5px;
@@ -397,19 +374,15 @@ select {
 }
 .gwt-MenuBarPopup .menuPopupTopLeft {
   background: url(images/corner.png) no-repeat 0px -36px;
-  -background: url(images/corner_ie6.png) no-repeat 0px -36px;
 }
 .gwt-MenuBarPopup .menuPopupTopRight {
   background: url(images/corner.png) no-repeat -5px -36px;
-  -background: url(images/corner_ie6.png) no-repeat -5px -36px;
 }
 .gwt-MenuBarPopup .menuPopupBottomLeft {
   background: url(images/corner.png) no-repeat 0px -41px;
-  -background: url(images/corner_ie6.png) no-repeat 0px -41px;
 }
 .gwt-MenuBarPopup .menuPopupBottomRight {
   background: url(images/corner.png) no-repeat -5px -41px;
-  -background: url(images/corner_ie6.png) no-repeat -5px -41px;
 }
 * html .gwt-MenuBarPopup .menuPopupTopLeftInner {
   width: 5px;
@@ -459,14 +432,12 @@ select {
 }
 .gwt-DecoratedPopupPanel .popupBottomCenter {
   background:  url(images/hborder.png) repeat-x 0px -2938px;
-  -background: url(images/hborder_ie6.png) repeat-x 0px -2138px;
 }
 .gwt-DecoratedPopupPanel .popupMiddleLeft {
   background: url(images/vborder.png) -21px 0px repeat-y;
 }
 .gwt-DecoratedPopupPanel .popupMiddleRight {
   background: url(images/vborder.png) repeat-y -24px 0px;
-  -background: url(images/vborder_ie6.png) repeat-y -24px 0px;
 }
 .gwt-DecoratedPopupPanel .popupTopLeftInner {
   width: 6px;
@@ -490,19 +461,15 @@ select {
 }
 .gwt-DecoratedPopupPanel .popupTopLeft {
   background: url(images/circles.png) no-repeat 0px -16px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -16px;
 }
 .gwt-DecoratedPopupPanel .popupTopRight {
   background: url(images/circles.png) no-repeat -6px -16px;
-  -background: url(images/circles_ie6.png) no-repeat -6px -16px;
 }
 .gwt-DecoratedPopupPanel .popupBottomLeft {
   background: url(images/circles.png) no-repeat 0px -21px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -21px;
 }
 .gwt-DecoratedPopupPanel .popupBottomRight {
   background: url(images/circles.png) no-repeat -6px -21px;
-  -background: url(images/circles_ie6.png) no-repeat -6px -21px;
 }
 * html .gwt-DecoratedPopupPanel .popupTopLeftInner {
   width: 6px;
@@ -701,12 +668,10 @@ select {
 .gwt-DecoratedStackPanel .stackItemTopLeft {
   border-left: 1px solid #bbbbbb;
   background: #d3def6 url(images/corner.png) no-repeat 0px -49px;
-  -background: #d3def6 url(images/corner_ie6.png) no-repeat 0px -49px;
 }
 .gwt-DecoratedStackPanel .stackItemTopRight {
   border-right: 1px solid #bbbbbb;
   background: #d3def6 url(images/corner.png) no-repeat -6px -49px;
-  -background: #d3def6 url(images/corner_ie6.png) no-repeat -6px -49px;
 }
 .gwt-DecoratedStackPanel .stackItemTopLeftInner,
 .gwt-DecoratedStackPanel .stackItemTopRightInner {
@@ -817,25 +782,21 @@ select {
 }
 .gwt-SuggestBoxPopup .suggestPopupTopLeft {
   background: url(images/circles.png) no-repeat 0px -6px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -6px;
   width:5px;
   height:5px;
 }
 .gwt-SuggestBoxPopup .suggestPopupTopRight {
   background: url(images/circles.png) no-repeat -5px -6px;
-  -background: url(images/circles_ie6.png) no-repeat -5px -6px;
   width:5px;
   height:5px;
 }
 .gwt-SuggestBoxPopup .suggestPopupBottomLeft {
   background: url(images/circles.png) no-repeat 0px -11px;
-  -background: url(images/circles_ie6.png) no-repeat 0px -11px;
   width:5px;
   height:5px;
 }
 .gwt-SuggestBoxPopup .suggestPopupBottomRight {
   background: url(images/circles.png) no-repeat -5px -11px;
-  -background: url(images/circles_ie6.png) no-repeat -5px -11px;
   width:5px;
   height:5px;
 }
@@ -929,11 +890,9 @@ select {
 }
 .gwt-DecoratedTabBar .tabTopLeft {
   background: url(images/circles.png) no-repeat 0px 0px;
-  -background: url(images/circles_ie6.png) no-repeat 0px 0px;
 }
 .gwt-DecoratedTabBar .tabTopRight {
   background: url(images/circles.png) no-repeat -3px 0px;
-  -background: url(images/circles_ie6.png) no-repeat -3px 0px;
 }
 * html .gwt-DecoratedTabBar .tabTopLeftInner,
 * html .gwt-DecoratedTabBar .tabTopRightInner {
@@ -966,11 +925,9 @@ select {
 }
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabTopLeft {
   background: url(images/circles.png) no-repeat -6px 0px;
-  -background: url(images/circles_ie6.png) no-repeat -6px 0px;
 }
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabTopRight {
   background: url(images/circles.png) no-repeat -9px 0px;
-  -background: url(images/circles_ie6.png) no-repeat -9px 0px;
 }
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleLeft,
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleRight {

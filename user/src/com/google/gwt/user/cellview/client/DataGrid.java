@@ -730,10 +730,6 @@ public class DataGrid<T> extends AbstractCellTable<T> implements RequiresResize 
    * narrower than the minimum width, a horizontal scrollbar will appear so the
    * user can scroll horizontally.
    * 
-   * <p>
-   * Note that this method is not supported in IE6 and earlier versions of IE.
-   * </p>
-   * 
    * @param value the width
    * @param unit the unit of the width
    * @see #setTableWidth(double, Unit)

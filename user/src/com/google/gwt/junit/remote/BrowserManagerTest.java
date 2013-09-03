@@ -30,7 +30,7 @@ public class BrowserManagerTest {
    * for 5 seconds, then close it.
    * 
    * @param args the url to the remote BrowserManagerServer; e.g.
-   *          "rmi://localhost/ie6"
+   *          "rmi://localhost/ie8"
    * @throws Exception
    */
   public static void main(String[] args) throws Exception {

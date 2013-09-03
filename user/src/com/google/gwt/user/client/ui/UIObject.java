@@ -276,8 +276,7 @@ public abstract class UIObject implements HasVisibility {
    * @return the objects's space-separated style names
    */
   protected static String getStyleName(Element elem) {
-    return DOM.getElementProperty(
-        elem.<com.google.gwt.user.client.Element> cast(), "className");
+    return elem.getClassName();
   }
 
   /**
@@ -306,8 +305,7 @@ public abstract class UIObject implements HasVisibility {
    * @param styleName the new style name
    */
   protected static void setStyleName(Element elem, String styleName) {
-    DOM.setElementProperty(elem.<com.google.gwt.user.client.Element> cast(),
-        "className", styleName);
+    elem.setClassName(styleName);
   }
 
   /**
@@ -552,14 +550,13 @@ public abstract class UIObject implements HasVisibility {
    * This method should not be overridden. It is non-final solely to support
    * legacy code that depends upon overriding it. If it is overridden, the
    * subclass implementation must not return a different element than was
-   * previously set using
-   * {@link #setElement(com.google.gwt.user.client.Element)}.
+   * previously set using {@link #setElement(Element)}.
    * 
    * @return the object's browser element
    */
   public com.google.gwt.user.client.Element getElement() {
     assert (element != null) : MISSING_ELEMENT_ERROR;
-    return (com.google.gwt.user.client.Element) element;
+    return element.cast();
   }
 
   /**
@@ -902,7 +899,7 @@ public abstract class UIObject implements HasVisibility {
    * @param elem the object's element
    */
   protected final void setElement(Element elem) {
-    setElement((com.google.gwt.user.client.Element) elem);
+    setElement(elem.<com.google.gwt.user.client.Element>cast());
   }
 
   /**
@@ -914,7 +911,9 @@ public abstract class UIObject implements HasVisibility {
    * 1.5, {@link #setElement(Element)} is the preferred method.
    * 
    * @param elem the object's element
+   * @deprecated Use and override {@link #setElement(Element)} instead.
    */
+  @Deprecated
   protected void setElement(com.google.gwt.user.client.Element elem) {
     assert (element == null || PotentialElement.isPotential(element)) : SETELEMENT_TWICE_ERROR;
     this.element = elem;

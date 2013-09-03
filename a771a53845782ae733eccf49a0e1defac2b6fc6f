@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b26fa53a_4db8f173",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12f4f1cf_cfe87d31",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2d83d6d_0effabe0",
         "filename": "user/src/com/google/gwt/user/client/impl/WindowImpl.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-03T19:43:56Z",
       "side": 1,
       "message": "Do we not care about returning oldRet if ret is null anymore?  Should this be \"return ret || oldRet;\"?",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26fa53a_6dbdad62",
+        "filename": "user/src/com/google/gwt/user/client/impl/WindowImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "oops, fixed!",
+      "parentUuid": "f2d83d6d_0effabe0",
       "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f2011d89_e6e35e54",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/unusedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "should not be in this patch..",
+      "parentUuid": "b2e24519_cce88f31",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2e24519_6cf87bfa",
         "filename": "user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-03T19:43:56Z",
       "side": 1,
       "message": "Don\u0027t comment this out.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_c6e86231",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e24519_6cf87bfa",
       "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f2011d89_a6ed663f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e24519_aced433f",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2e24519_2c027320",
         "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
         "patchSetId": 1
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "320815ab_e8e33354",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e24519_2c027320",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2e24519_0cffb7e0",
         "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
         "patchSetId": 1
@@ -115,6 +223,24 @@
       "writtenOn": "2013-09-03T19:43:56Z",
       "side": 1,
       "message": "Eliminate blank line.",
+      "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52c58977_a23a04aa",
+        "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-03T20:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e24519_0cffb7e0",
       "revId": "a771a53845782ae733eccf49a0e1defac2b6fc6f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

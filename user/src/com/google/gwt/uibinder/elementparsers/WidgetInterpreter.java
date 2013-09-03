@@ -88,8 +88,8 @@ class WidgetInterpreter implements XMLElement.Interpreter<String> {
     FieldWriter childFieldWriter = uiWriter.parseElementToField(elem);
     String elementPointer = idHolder + "Element";
     uiWriter.addInitStatement(
-        "com.google.gwt.user.client.Element %s = " +
-        "com.google.gwt.dom.client.Document.get().getElementById(%s).cast();",
+        "com.google.gwt.dom.client.Element %s = " +
+        "com.google.gwt.dom.client.Document.get().getElementById(%s);",
         elementPointer, idHolder);
 
     if (uiWriter.useLazyWidgetBuilders()) {

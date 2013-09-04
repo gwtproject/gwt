@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -49,7 +48,7 @@ public class FlexTable extends HTMLTable {
      * @throws IndexOutOfBoundsException
      */
     public int getColSpan(int row, int column) {
-      return DOM.getElementPropertyInt(getElement(row, column), "colSpan");
+      return getElement(row, column).getPropertyInt("colSpan");
     }
 
     /**
@@ -62,7 +61,7 @@ public class FlexTable extends HTMLTable {
      * @throws IndexOutOfBoundsException
      */
     public int getRowSpan(int row, int column) {
-      return DOM.getElementPropertyInt(getElement(row, column), "rowSpan");
+      return getElement(row, column).getPropertyInt("rowSpan");
     }
 
     /**
@@ -75,7 +74,7 @@ public class FlexTable extends HTMLTable {
      * @throws IndexOutOfBoundsException
      */
     public void setColSpan(int row, int column, int colSpan) {
-      DOM.setElementPropertyInt(ensureElement(row, column), "colSpan", colSpan);
+      ensureElement(row, column).setPropertyInt("colSpan", colSpan);
     }
 
     /**
@@ -88,7 +87,7 @@ public class FlexTable extends HTMLTable {
      * @throws IndexOutOfBoundsException
      */
     public void setRowSpan(int row, int column, int rowSpan) {
-      DOM.setElementPropertyInt(ensureElement(row, column), "rowSpan", rowSpan);
+      ensureElement(row, column).setPropertyInt("rowSpan", rowSpan);
     }
   }
 

@@ -42,8 +42,10 @@ public class DisclosurePanelTest extends GWTTestCase {
    */
   public void testCoreFunctionality() {
     final DisclosurePanel panel = createTestPanel();
-    assertTrue(DOM.getStyleAttribute(
-        DOM.getParent(panel.getContent().getElement()), "display").equalsIgnoreCase(
+    assertTrue(DOM
+        .getParent(panel.getContent().getElement())
+        .getStyle()
+        .getProperty("display").equalsIgnoreCase(
         "none"));
 
     panel.setOpen(true);
@@ -53,8 +55,10 @@ public class DisclosurePanelTest extends GWTTestCase {
     Timer t = new Timer() {
       @Override
       public void run() {
-        assertTrue(DOM.getStyleAttribute(
-            DOM.getParent(panel.getContent().getElement()), "display").trim().equals(
+        assertTrue(DOM
+              .getParent(panel.getContent().getElement())
+              .getStyle()
+              .getProperty("display").trim().equals(
             ""));
         finishTest();
       }

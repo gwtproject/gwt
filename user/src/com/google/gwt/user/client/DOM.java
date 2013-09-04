@@ -1428,8 +1428,8 @@ public class DOM {
     // If the preview cancels the event, stop it from bubbling and performing
     // its default action. Check for a null evt to allow unit tests to run.
     if (!ret && evt != null) {
-      eventCancelBubble(evt, true);
-      eventPreventDefault(evt);
+      evt.stopPropagation();
+      evt.preventDefault();
     }
 
     return ret;

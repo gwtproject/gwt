@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9226214e_363176fc",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "I have created the NoMetaInf version(readme file on how it is generated will be included).\nSignature files in metainf was causing rmic to fail with weird errors. Similar update was also required for the JDT upgrade so I just followed that: https://code.google.com/p/google-web-toolkit/source/browse/tools/lib/eclipse/README.jdt-upgrade\n\nI guess I can use 3.0.1 or 3.1.0. Is there any reason to choose to one over another?",
+      "parentUuid": "b26fa53a_c41afe7b",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e417fa52",
         "filename": "dev/build.xml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-08-31T11:47:54Z",
       "side": 1,
       "message": "Does HtmlUnit still depends on Xerces directly? Cannot it use javax.xml from the JRE?",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9226214e_364ad656",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "xerses was from the htmlunit release itself so I assume the answer is yes.",
+      "parentUuid": "b26fa53a_e417fa52",
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9226214e_96588a31",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserChannel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "I am thinking the same. I kept them here as I am still investigating the TypedArray problem. Will create a separate patch when I finalize this.",
+      "parentUuid": "b26fa53a_0436d6fb",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_243bd2e2",
         "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-08-31T11:47:54Z",
       "side": 1,
       "message": "Why has this method been moved around?",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9226214e_164d5a6d",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "There is no isSystemClass/Path anymore in WebAppClassLoader to override. Original implementation was based on querying the context for system classes. In the new version context provides this method instead so I have overridden there.\n\n(I was mostly following John\u0027s patch as the starting point for this class: http://gwt-code-reviews.appspot.com/306803/patch/1/2)",
+      "parentUuid": "b26fa53a_243bd2e2",
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "9226214e_d67fe274",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "b26fa53a_4440ce42",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_6445ca51",
         "filename": "servlet-api-3.0.jar",
         "patchSetId": 1
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "9226214e_f6845e61",
+        "filename": "servlet-api-3.0.jar",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "I meant to include it next to servlet-api-3.0.jar as the original file but it somehow ended up here :)",
+      "parentUuid": "b26fa53a_6445ca51",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_8429e699",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 1
@@ -115,6 +223,24 @@
       "writtenOn": "2013-08-31T11:47:54Z",
       "side": 1,
       "message": "Yay!",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9226214e_96896a78",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 1,
+      "message": "I had no other options :)",
+      "parentUuid": "b26fa53a_8429e699",
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

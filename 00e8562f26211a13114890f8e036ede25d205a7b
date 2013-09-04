@@ -16,6 +16,24 @@
       "revId": "00e8562f26211a13114890f8e036ede25d205a7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9226214e_b68ee67b",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/RequestFactoryTestServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-04T08:06:53Z",
+      "side": 0,
+      "message": "I wasn\u0027t sure what this class was good for and nothing references it. I don\u0027t even know if it was working before or will still work after my changes so I didn\u0027t bother.\n\nAny reasons to keep it?",
+      "parentUuid": "b26fa53a_a426e2c6",
+      "revId": "00e8562f26211a13114890f8e036ede25d205a7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

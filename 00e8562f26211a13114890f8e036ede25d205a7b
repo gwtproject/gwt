@@ -34,6 +34,24 @@
       "revId": "00e8562f26211a13114890f8e036ede25d205a7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_4666b2c9",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/RequestFactoryTestServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-04T10:19:56Z",
+      "side": 0,
+      "message": "It\u0027s used for \"simple load-testing\", see https://code.google.com/p/google-web-toolkit/source/detail?r\u003d10343",
+      "parentUuid": "9226214e_b68ee67b",
+      "revId": "00e8562f26211a13114890f8e036ede25d205a7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

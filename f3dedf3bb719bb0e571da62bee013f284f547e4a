@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f2011d89_a63566be",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-04T10:19:56Z",
+      "side": 1,
+      "message": "We should use the version that Jetty supports (3.0 in the version of Jetty we use, in this patch). That means we should probably use the JARs from Jetty rather than Tomcat.\n\nThe Servlet API is used for 2 things in GWT:\n\n* we need to compile our server code against the API\n* we need it at runtime in DevMode, in the embedded Jetty\n\nThe constraint is thus that the version used at compile-time should be lower/older than the one used at runtime; or at least that our server code doesn\u0027t use APIs that won\u0027t be supported at runtime.\n\n…but given how our build is currently organized, those two use-cases rely on the very same JAR (that we bundle in the ${alldeps.jar}), so I think we should pick the exact version that Jetty uses, which is http://search.maven.org/#artifactdetails%7Corg.eclipse.jetty.orbit%7Cjavax.servlet%7C3.0.0.v201112011016%7Corbit\n\nNote: I haven\u0027t checked the JAR form Jetty, but javax.servlet:javax.servlet-api:3.0.1 doesn\u0027t contain signature files.\n\nThat said, as the Ant build is going to be replaced in the coming months (hopefully), we can change that at that time (we\u0027ll be able to compile against the \"original\" javax.servlet and run with Jetty\u0027s version). And we should no longer need the NoMetaInf versions either as \u0027rmic\u0027 will be given just what\u0027s needed, which doesn\u0027t include javax.servlet or JDT.",
+      "parentUuid": "9226214e_363176fc",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e417fa52",
         "filename": "dev/build.xml",
         "patchSetId": 1
@@ -142,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "f2011d89_66408e11",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-04T10:19:56Z",
+      "side": 1,
+      "message": "Ah OK, thanks.",
+      "parentUuid": "9226214e_164d5a6d",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_4440ce42",
         "filename": "samples/dynatablerf/pom.xml",
         "patchSetId": 1
@@ -171,6 +207,24 @@
       "side": 1,
       "message": "Ack.",
       "parentUuid": "b26fa53a_4440ce42",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_264a962f",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-04T10:19:56Z",
+      "side": 1,
+      "message": "Hmm, there\u0027s no version 3.0 of javax.servlet:servlet-api.\n\nThe correct dependency would be:\n\n \u003cdependency\u003e\n   \u003cgroupId\u003ejavax.servlet\u003c/groupId\u003e\n   \u003cartifactId\u003ejavax.servlet-api\u003c/artifactId\u003e\n   \u003cversion\u003e3.0.1\u003c/version\u003e\n   \u003cscope\u003eprovided\u003c/scope\u003e\n \u003c/dependency\u003e\n\nBut actually, I think keeping the 2.5 version here should Just Work™, so let\u0027s revrt that change and we\u0027ll fix it later (along with adding the provided scope), when we\u0027ll start thinking about releasing a new version.",
+      "parentUuid": "9226214e_d67fe274",
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

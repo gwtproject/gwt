@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52b2e95c_11d78cd7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "Perhaps CompilerState would be a better name? I also think it requires some explanation:\n\n\"CompilerState holds all data passed between two CompilerPasses. By serializing a CompilerState we can suspend execution of the compiler and resume it later.\n\n\"Each field represents a dependency and will be null until a compiler pass generates it and may be set back to null once no further passes require it. If compiler passes run out of order, a runtime check in the getter will detect the bad dependency.\"",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "526909a1_19f86bf9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "Perhaps we should make TreeLogger available to all compiler passes? I\u0027m not sure why this isn\u0027t the case now.",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b2e95c_51c8f43c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "Since this isn\u0027t client-side code or a tight loop, I\u0027m not sure an assert is a good idea for argument-checking since it can be disabled.\n\nMaybe something like this, using Guava\u0027s preconditions class:\n\nreturn Preconditions.checkNotNull(jsProgram, \"compiler pass requires JsProgram\");",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b2e95c_f1ef68a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "The data flow is confusing here. It seems we expect the compiler pass to modify the symbol table directly, and this might be used to pass data between passes. If so, shouldn\u0027t the symbol table be externalized?",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b2e95c_f1a3e8a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompilerPass.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "We require every CompilerPass to have a one-argument constructor, which seems unfortunate at first because it might lead to extra data being passed in using static variables. A more Guice-like approach would be to use a factory.\n\nHowever, I\u0027m not sure if we need the extra verbosity. In particular, it\u0027s intentional that a CompilerPass doesn\u0027t have any input other than a CompilerContext because we want the option of serializing the data to disk between passes. Any new input has to be put into the CompilerContext.\n\nSo, perhaps a one-arg constructor would be fine as long as it doesn\u0027t save a reference to the CompilerContext, but instead immediately extracts the data it needs to explicit parameters. Perhaps something like this:\n\nMyCompilerPass(CompilerContext in) {\n  this(in.getDep1(), in.getDep2(), in.getDep3());\n}\n\nMyCompilerPass(Dep1 dep1, Dep2 dep2, Dep3 dep3) {\n  ...\n}\n\nThat way a runtime check will happen in the constructor if the passes are run out of order and a dependency isn\u0027t found. We can discover the dependencies by reading the one-arg constructors. Also, a test can call the second constructor directly and doesn\u0027t need to create a CompileContext at all.\n\nAnother issue is that some passes create a dependency and currently they call methods on CompilerContext at the end of the pass. In that case I think we would could extract an object less powerful than a full CompilerContext.\n\nMyCompilerPass(CompilerContext in) {\n  this(in.getJsProgramOutput());\n}\n\ninterface Output\u003cT\u003e {\n  void set(T value);\n}\n\nOutput\u003cJsProgram\u003e getJsProgramOutput() {\n  Precondition.checkState(jsProgram \u003d\u003d null, \"a previous pass already created jsProgram\");\n  output \u003d Output\u003cJsProgram\u003e() {\n     void set(..) {\n       // check again in case of leak; maybe also check that the compiler pass isn\u0027t already over. \n       Precondition.checkState(jsProgram \u003d\u003d null, \"a previous pass already created jsProgram\");\n     \n     }\n  }\n}\n\nThis works for pure input and outputs. However, there are other dependencies that are modified in place. Reading the one-arg constructor tells only that the compiler pass uses a dependency in some way; it doesn\u0027t tell us whether it\u0027s read-only or an update. It might be nice to have different types for these cases. In CompilerContext there could be methods:\n\n  ReadOnlyDep1 getDep1();\n  WritableDep1 getDep1ForUpdate();\n\nIf we did all that, reading the constructors will tell us inputs and outputs for a compiler pass and a usage search will tell us which passes create or modify a dependency. That seems like more than one CL, though.",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "526909a1_f9f2d71b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2578,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-05T21:13:00Z",
+      "side": 1,
+      "message": "This pass creates the JsProgram, but it seems that instead it expects an empty JsProgram to already exist. It seems like it would be clearer to call a context.setJsProgram() method and have the JsProgram be null until this pass is reached?",
+      "revId": "51d6b0b37f58131084c3c8a20da19e1e11bbb5fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

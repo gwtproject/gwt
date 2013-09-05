@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "f2011d89_29cb893c",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-05T08:38:38Z",
+      "side": 1,
+      "message": "Given the current state of affairs then yes, let\u0027s keep it. Could you put it into the jetty/ folder though? (we really did get the previous ones from Tomcat, as we actually still bundled Tomcat until quite recently – last December IIRC)",
+      "parentUuid": "f25d9dd3_4f1b4533",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e417fa52",
         "filename": "dev/build.xml",
         "patchSetId": 1

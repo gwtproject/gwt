@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2011d89_4c181335",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-05T14:44:05Z",
+      "side": 1,
+      "message": "option (singular)",
+      "revId": "edb5a1dc1c6e9f72a3e2e821068ab5351dfa57ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_ac20a767",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-05T14:44:05Z",
+      "side": 1,
+      "message": "word-wrap\n\nAlso:\n\n* \"automatically add\"\n* \"when they launch\"\n* GWTTestCase (2 occurrences; W and T are in upper case)\n* \"exception\"\n* change \"Without this patch\" to: \"…an unknown argument, making it impossible…\"\n* a GWTTestCase (rather than \"an\")\n* \"with these tools\" rather than \"with IntelliJ\" (there\u0027s a workaround in the GPE, but still)",
+      "revId": "edb5a1dc1c6e9f72a3e2e821068ab5351dfa57ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_6c1bcf33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-05T14:44:05Z",
+      "side": 1,
+      "message": "Use the permalink, or just include the Change-Id: If5e341b9e968a89a9438d059a0d9ab136572431f\n\nGerrit automatically \"linkifies\" it, and it\u0027s easy to search too (copy/paste the change-ID to the search box in Gerrit)\n\nMaybe change the message to:\n\n -out was deprecated in favor of -war a long time ago, but without issuing a warning,\n and was removed as part of a cleanup in If5e341b9e968a89a9438d059a0d9ab136572431f",
+      "revId": "edb5a1dc1c6e9f72a3e2e821068ab5351dfa57ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_acd1c716",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-05T14:44:05Z",
+      "side": 1,
+      "message": "Change to an ArgHandlerDir and make it work like -war, otherwise you\u0027re not really fixing the issue, only making it silent (well, OK, we\u0027d now use the default value for -war, but it\u0027ll still break people and/or break the UI of the IDEs: we want them to update to -war, but let\u0027s not break users\u0027 expectations, filling the \"out dir\" field in the UI should continue to work IMO, just with an added warning; we\u0027ll break everyone later, and then we could say \"you\u0027d been warned\").\n\nMaybe something similar to the ArgHandlerOutDirDeprecated that we just deleted, but based on ArgHandlerWarDir:\n\n registerHandler(new ArgHandlerWarDir(shell) {\n   @Override\n   public String getTag() {\n     return \"-out\";\n   }\n\n   @Override\n   public String[] getDefaultArgs() {\n     // don\u0027t clober -war if set, so no default\n     return null;\n   }\n\n   @Override\n   public String getPurpose() {\n     return \"Deprecated, use -war instead.\";\n   }\n\n   @Override\n   public void setDir(File dir) {\n     System.err.println(\"-out is deprecated and will be removed in a future version, use -war instead.\");\n     super.setDir(dir);\n   }\n\n   @Override\n   public boolean isUndocumented() {\n     return true;\n   }\n }\n\nAlternatively, just revert the changes from If5e341b9e968a89a9438d059a0d9ab136572431f in JUnitShell and ArgHandlerOutDirDeprecated, and make JUnitShell implement OptionOutDir.",
+      "revId": "edb5a1dc1c6e9f72a3e2e821068ab5351dfa57ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

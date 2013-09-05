@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2011d89_29e4a9c5",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-09-05T10:00:44Z",
+      "side": 1,
+      "message": "nit : over 100",
+      "revId": "5a8b19f33b5f9375f88980b9cf22dc4c7a12761a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_294ee9e2",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-09-05T10:00:44Z",
+      "side": 1,
+      "message": "grid.clear() doesn\u0027t remove the rows. So each time the setup method is called a new row is added.\n\nI think the best is :\n\n  grid.removeAllRows();\n  grid.insertRow(0);",
+      "revId": "5a8b19f33b5f9375f88980b9cf22dc4c7a12761a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2011d89_09fa0d58",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-09-05T10:00:44Z",
+      "side": 1,
+      "message": "if (className !\u003d null) {\n  grid.getCellFormatter().setStyleName(0, cell, className);\n}",
+      "revId": "5a8b19f33b5f9375f88980b9cf22dc4c7a12761a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

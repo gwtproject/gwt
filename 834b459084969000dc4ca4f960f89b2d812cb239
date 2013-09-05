@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_8e6fdb2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_ef11d166",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_4c2d930a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "s/fragmentMap/exclusivityMap",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_6e4d4f6d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_4c2d930a",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_ae99f777",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Yes. Was already there :)",
+      "parentUuid": "f25d9dd3_6c73af1f",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_0c80fbb5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "private",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_4e4a1357",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_0c80fbb5",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_0e912b9a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_8c8b8bde",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_8c64eb53",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "remove second blank line",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_6e9eefa9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_8c64eb53",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_4e9b33b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_6c5c0f81",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_0c59db8f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -132,6 +258,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "missing blank line",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_ae68d7b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_0c59db8f",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_ee62dfd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_2cf7f749",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_ecb23f96",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -166,6 +328,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "maybe this logger statement should be right after the for loop whose work it is referring to (back about 15 lines)",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_2e7d0772",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "There is an outer loop enclosing the two steps.",
+      "parentUuid": "f25d9dd3_ecb23f96",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_0e8beb1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "I dug deeper into this and actually this pass fixes initialization to literals that are actually decided by GenerateJavaScriptAST (like, as you mentioned, defineSeeds).\n\nSo I will leave the full fixup and add a nice clarifying comment. \n\nI am NOT positive that we handle all such cases.",
+      "parentUuid": "f25d9dd3_2c1e1780",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_6ff5e100",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -200,6 +398,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "you said you would likely revert this change as it\u0027s probably unnecessary now, this is just a reminder",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_ee7c9f29",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Reverted my stance see previous comment.",
+      "parentUuid": "f25d9dd3_6ff5e100",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_ce81e3f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_0f022d20",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_cce503ca",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -234,6 +468,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "blank line",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_2e77c744",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_cce503ca",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_0e748b3c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Yes. it seems. Will reorder as the last review before submitting..",
+      "parentUuid": "f25d9dd3_ecea3f97",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_acea0764",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -268,6 +538,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "s/fields/fragmentsByField\n\ns/methods/fragmentsByMethod\n\ns/strings/fragmentsByString\n\ns/types/fragmentsByType",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_8e987b62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_acea0764",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_8e86bbd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_4cda7300",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_8c086bab",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -302,6 +608,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "s/entryForX/actualFragment\n\nint actualFragment \u003d getOrZero(map, key);\n\nthen delete this first if statement",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_cebba3b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_8c086bab",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_6ecb8f3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "I\u0027ll define to 0 for now (will check the implications to changing it to -1 later).\n\nLooking back at the history, originally there was not left overs so 0 meant initial....\n\nand it evolved organically..",
+      "parentUuid": "f25d9dd3_0cfd5b4f",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_cf0c1552",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CodeSplitterTest.java",
         "patchSetId": 5
@@ -336,6 +678,24 @@
       "writtenOn": "2013-09-05T01:25:20Z",
       "side": 1,
       "message": "probably makes more sense to put this at the top of CodeSplitter.java",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_ae81f7c2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CodeSplitterTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T17:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_cf0c1552",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

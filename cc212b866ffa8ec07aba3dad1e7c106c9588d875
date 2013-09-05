@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2a03d0a_4ee173b5",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-05T17:32:51Z",
+      "side": 0,
+      "message": "Please keep these blank lines.  (For better or worse, that\u0027s Google/GWT style.)",
+      "revId": "cc212b866ffa8ec07aba3dad1e7c106c9588d875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

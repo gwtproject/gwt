@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2a03d0a_ee393f59",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-05T17:32:51Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure you\u0027ll need to override this instance\u0027s getDefaultArgs() too, otherwise the default -war value will still clobber any explicit -out flag.",
+      "revId": "ccec7850cfbd13d8da883f44bd7ac9bdd59d79b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_ae2f370f",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-05T17:32:51Z",
+      "side": 1,
+      "message": "Nit: \"clobber\"",
+      "revId": "ccec7850cfbd13d8da883f44bd7ac9bdd59d79b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

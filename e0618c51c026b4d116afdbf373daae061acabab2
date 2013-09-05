@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f25d9dd3_4f77c543",
+        "filename": "user/src/com/google/gwt/user/client/ui/AbsolutePanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-09-05T04:18:05Z",
+      "side": 1,
+      "message": "Why not use setPosition(Position.RELATIVE)?",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

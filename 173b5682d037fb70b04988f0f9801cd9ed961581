@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "727b6d60_82fa3a56",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-05T19:25:17Z",
+      "side": 1,
+      "message": "Nit: No space after the open parenthesis.",
+      "revId": "173b5682d037fb70b04988f0f9801cd9ed961581",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "727b6d60_023f0a3c",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-05T19:25:17Z",
+      "side": 1,
+      "message": "Nit: Please move the space before \"option\" before the line wrap to be consistent with the first line.  If that pushes it over the column limit, move \"-war \" to this line.",
+      "revId": "173b5682d037fb70b04988f0f9801cd9ed961581",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

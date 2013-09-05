@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f25d9dd3_4f1b4533",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T02:58:25Z",
+      "side": 1,
+      "message": "I actually get servlet-api-3.0.jar from Jetty distribution (jetty-distribution-8.1.9.v20130131) not from Tomcat. I put it there because the older versions were already there.\n\nSo are you proposing to keep it?",
+      "parentUuid": "f2011d89_a63566be",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b26fa53a_e417fa52",
         "filename": "dev/build.xml",
         "patchSetId": 1
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "Hmm, there\u0027s no version 3.0 of javax.servlet:servlet-api.\n\nThe correct dependency would be:\n\n \u003cdependency\u003e\n   \u003cgroupId\u003ejavax.servlet\u003c/groupId\u003e\n   \u003cartifactId\u003ejavax.servlet-api\u003c/artifactId\u003e\n   \u003cversion\u003e3.0.1\u003c/version\u003e\n   \u003cscope\u003eprovided\u003c/scope\u003e\n \u003c/dependency\u003e\n\nBut actually, I think keeping the 2.5 version here should Just Work™, so let\u0027s revrt that change and we\u0027ll fix it later (along with adding the provided scope), when we\u0027ll start thinking about releasing a new version.",
       "parentUuid": "9226214e_d67fe274",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_af0bd934",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T02:58:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2011d89_264a962f",
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

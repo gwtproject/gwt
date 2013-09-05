@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f25d9dd3_c693a246",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarModel.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "nit: javadocs should always end with punctuation.",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_a6bb06b7",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "DEFAULT_VISIBLE_YEAR_COUNT",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_e61d7ed9",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "nit: missing punctuation",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_a61786b7",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "nit: punctuation",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_2624f624",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DatePicker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "Assert only works if assertions are enabled. It is better to have a real precondition check and throw IllegalArgumentException.",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_e6e01e8a",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "\".. but the name is not changed for backward compatibility...\"",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_86fe0a1f",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "nit: inline beforeYear?",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_0ccb1b3c",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "delta -\u003e deltaYear",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_669f4ef6",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "nit: you can inline month, not used elsewhere.",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_492d850a",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "I think following reads better, esp. because beforeYear, afterYear are very ambiguous variable names:\n\n  int startYear \u003d year - getNoOfYearsToDisplayBefore();\n  int endYear \u003d year + getNoOfYearsToDisplayAfter();\n  for (int i \u003d startYear; i \u003c\u003d endYear; i++) {\n    newDate.setYear(i);\n    yearSelect.addItem(...);\n  }\n  yearSelect.setSelectedIndex(year - startYear);",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_89aa9d85",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "getNumberOfYearsToDisplayBefore",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_49a82574",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "getNumberOfYearsToDisplayAfter",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_091b0d82",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "It looks like CellFormatter should be fine, no cast needed?",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_89d13d17",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DefaultMonthSelector.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "There is recurring pattern here. You can extract helper method: \n\n  int addCell(Widget widget, String width, String className)  {\n    int cell \u003d getCellCount(row);\n    grid.setWidget(0, cell, widget);\n    grid.getCellFormatter().setWidth(0, cell, width);\n    grid.getCellFormatter().setStyleName(0, cell, className);\n    return cell;\n  }",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_a9bc3967",
+        "filename": "user/test/com/google/gwt/user/client/ui/DatePickerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-05T03:30:50Z",
+      "side": 1,
+      "message": "it is better to set the date on picker to a specific year and write the tests according to that. (same below)",
+      "revId": "1eea2ce5d26675e389dffeb7263f1ee9e5bbe87a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

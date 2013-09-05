@@ -457,6 +457,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_2e1987ca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-05T17:56:01Z",
+      "side": 1,
+      "message": "formatting still looks wrong, also now wrong on the new comment",
+      "parentUuid": "f2a03d0a_ce81e3f7",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_cce503ca",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -562,6 +580,24 @@
     },
     {
       "key": {
+        "uuid": "f2a03d0a_6e138faa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-05T17:56:01Z",
+      "side": 1,
+      "message": "thanks for changing the names but they\u0027re backwards now, for example field is the key and fragment is the value\n\nso it should be fragmentsByField",
+      "parentUuid": "f2a03d0a_8e987b62",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_4cda7300",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
         "patchSetId": 5
@@ -591,6 +627,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f25d9dd3_4cda7300",
+      "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a03d0a_aead7739",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-05T17:56:01Z",
+      "side": 1,
+      "message": "doesn\u0027t look done",
+      "parentUuid": "f2a03d0a_8e86bbd6",
       "revId": "834b459084969000dc4ca4f960f89b2d812cb239",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

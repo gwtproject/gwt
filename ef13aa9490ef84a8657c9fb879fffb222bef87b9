@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2a03d0a_4ef7b348",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CodeSplitter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-05T17:56:11Z",
+      "side": 1,
+      "message": "s/NOTEXCLUSIVE/NOT_EXCLUSIVE",
+      "revId": "ef13aa9490ef84a8657c9fb879fffb222bef87b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

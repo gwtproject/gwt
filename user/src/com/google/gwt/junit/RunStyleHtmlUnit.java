@@ -236,8 +236,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static Map<String, BrowserVersion> createBrowserMap() {
     Map<String, BrowserVersion> browserMap = new HashMap<String, BrowserVersion>();
     for (BrowserVersion browser : new BrowserVersion[] {
-        BrowserVersion.FIREFOX_3, BrowserVersion.FIREFOX_3_6, BrowserVersion.INTERNET_EXPLORER_6,
-        BrowserVersion.INTERNET_EXPLORER_7}) {
+        BrowserVersion.FIREFOX_17, BrowserVersion.INTERNET_EXPLORER_8,
+        BrowserVersion.INTERNET_EXPLORER_9, BrowserVersion.CHROME}) {
       browserMap.put(browser.getNickname(), browser);
     }
     return Collections.unmodifiableMap(browserMap);
@@ -263,7 +263,7 @@ public class RunStyleHtmlUnit extends RunStyle {
   public int initialize(String args) {
     if (args == null || args.length() == 0) {
       // If no browsers specified, default to Firefox 3.
-      args = "FF3";
+      args = "FF17";
     }
     Set<BrowserVersion> browserSet = new HashSet<BrowserVersion>();
     for (String browserName : args.split(",")) {

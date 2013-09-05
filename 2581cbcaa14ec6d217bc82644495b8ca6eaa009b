@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f25d9dd3_cc32e31f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T01:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_cc60a313",
+      "revId": "2581cbcaa14ec6d217bc82644495b8ca6eaa009b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_ec655f20",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-05T00:58:51Z",
       "side": 1,
       "message": "Nit: Remove extra space.",
+      "revId": "2581cbcaa14ec6d217bc82644495b8ca6eaa009b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_ec379f0c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-05T01:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25d9dd3_ec655f20",
       "revId": "2581cbcaa14ec6d217bc82644495b8ca6eaa009b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

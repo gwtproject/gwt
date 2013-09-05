@@ -34,6 +34,57 @@
       "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_6fa5e19a",
+        "filename": "user/src/com/google/gwt/user/client/ui/ComplexPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-09-05T04:41:03Z",
+      "side": 1,
+      "message": "elem.getParentElement().removeChild(elem)?",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25d9dd3_0fb22de2",
+        "filename": "user/src/com/google/gwt/user/client/ui/CustomButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-09-05T04:41:03Z",
+      "side": 1,
+      "message": "Document.get().createDivElement()",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12695174_1b026b20",
+        "filename": "user/src/com/google/gwt/user/client/ui/CustomButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-09-05T04:41:03Z",
+      "side": 1,
+      "message": "getElement().appendChild(curFaceElement)?",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -388,6 +388,24 @@
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "070f5125_ba2e2d98",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-06T22:34:58Z",
+      "side": 1,
+      "message": "The JARs I have added actually have 2_12 in their name. Where are you looking at?",
+      "parentUuid": "27f1b550_806e56be",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

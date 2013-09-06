@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.impl;
+package com.google.gwt.dev.jjs.impl.codesplitter;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -39,11 +39,15 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer.DependencyRecorder;
+import com.google.gwt.dev.jjs.impl.FragmentExtractor;
 import com.google.gwt.dev.jjs.impl.FragmentExtractor.CfaLivenessPredicate;
 import com.google.gwt.dev.jjs.impl.FragmentExtractor.LivenessPredicate;
 import com.google.gwt.dev.jjs.impl.FragmentExtractor.NothingAlivePredicate;
 import com.google.gwt.dev.jjs.impl.FragmentExtractor.StatementLogger;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
+import com.google.gwt.dev.jjs.impl.JsniRefLookup;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
@@ -161,39 +165,6 @@ public class CodeSplitter {
           }
         }
       }
-    }
-  }
-
-  /**
-   * A liveness predicate that is based on an exclusivity map.
-   */
-  private static class ExclusivityMapLivenessPredicate implements LivenessPredicate {
-    private final int fragment;
-    private final ExclusivityMap fragmentMap;
-
-    public ExclusivityMapLivenessPredicate(ExclusivityMap fragmentMap, int fragment) {
-      this.fragmentMap = fragmentMap;
-      this.fragment = fragment;
-    }
-
-    public boolean isLive(JDeclaredType type) {
-      return fragmentMap.isLiveInFragment(fragment, type);
-    }
-
-    public boolean isLive(JField field) {
-      return fragmentMap.isLiveInFragment(fragment, field);
-    }
-
-    public boolean isLive(JMethod method) {
-      return fragmentMap.isLiveInFragment(fragment, method);
-    }
-
-    public boolean isLive(String literal) {
-      return fragmentMap.isLiveInFragment(fragment, literal);
-    }
-
-    public boolean miscellaneousStatementsAreLive() {
-      return true;
     }
   }
 
@@ -698,9 +669,7 @@ public class CodeSplitter {
    * based on this assumption.
    */
   private ExclusivityMap determineExclusivity() {
-    ExclusivityMap exclusivityMap = new ExclusivityMap();
-
-    mapExclusiveAtoms(exclusivityMap);
+    ExclusivityMap exclusivityMap =  mapExclusiveAtoms();
     exclusivityMap.fixUpLoadOrderDependencies(logger, jprogram, methodsInJavaScript);
 
     return exclusivityMap;
@@ -747,7 +716,7 @@ public class CodeSplitter {
       liveAfterInitialSequence = liveAfterSp;
     }
 
-    ExclusivityMap fragmentMap = determineExclusivity();
+    ExclusivityMap exclusivityMap = determineExclusivity();
 
     /*
      * Compute the exclusively live fragments. Each includes everything
@@ -758,9 +727,9 @@ public class CodeSplitter {
       if (isInitial(i)) {
         continue;
       }
-      LivenessPredicate alreadyLoaded = new ExclusivityMapLivenessPredicate(fragmentMap,
+      LivenessPredicate alreadyLoaded = exclusivityMap.getLivenessPredicate(
           ExclusivityMap.NOT_EXCLUSIVE);
-      LivenessPredicate liveNow = new ExclusivityMapLivenessPredicate(fragmentMap, i);
+      LivenessPredicate liveNow = exclusivityMap.getLivenessPredicate(i);
       List<JsStatement> statsToAppend = fragmentExtractor.createOnLoadedCall(i);
       addFragment(i, alreadyLoaded, liveNow, statsToAppend, fragmentStats);
     }
@@ -770,7 +739,7 @@ public class CodeSplitter {
      */
     {
       LivenessPredicate alreadyLoaded = new CfaLivenessPredicate(liveAfterInitialSequence);
-      LivenessPredicate liveNow = new ExclusivityMapLivenessPredicate(fragmentMap, 0);
+      LivenessPredicate liveNow = exclusivityMap.getLivenessPredicate(ExclusivityMap.NOT_EXCLUSIVE);
       List<JsStatement> statsToAppend = fragmentExtractor.createOnLoadedCall(numEntries);
       addFragment(numEntries, alreadyLoaded, liveNow, statsToAppend, fragmentStats);
     }
@@ -792,9 +761,47 @@ public class CodeSplitter {
    * initial load sequence is assumed to already be loaded.
    */
   private static class ExclusivityMap {
+    /**
+     * A liveness predicate that is based on an exclusivity map.
+     */
+    private class ExclusivityMapLivenessPredicate implements LivenessPredicate {
+      private final int fragment;
+
+      public ExclusivityMapLivenessPredicate(int fragment) {
+        this.fragment = fragment;
+      }
+
+      public boolean isLive(JDeclaredType type) {
+        return isLiveInFragment(fragment, type);
+      }
+
+      public boolean isLive(JField field) {
+        return isLiveInFragment(fragment, field);
+      }
+
+      public boolean isLive(JMethod method) {
+        return isLiveInFragment(fragment, method);
+      }
+
+      public boolean isLive(String literal) {
+        return isLiveInFragment(fragment, literal);
+      }
+
+      public boolean miscellaneousStatementsAreLive() {
+        return true;
+      }
+    }
+
 
     public static final int NOT_EXCLUSIVE = 0;
 
+    /**
+     * Gets the liveness predicate for fragment.
+     */
+
+    LivenessPredicate getLivenessPredicate(int fragment) {
+      return new ExclusivityMapLivenessPredicate(fragment);
+    }
     /**
      * Determine whether a field is live in a fragment.
      */
@@ -903,7 +910,7 @@ public class CodeSplitter {
      * Furthermore, in some cases actual dependencies <i>differ</i> between Java AST and the
      * final JavaScript output. For example whether a field initialization is done at declaration
      * or during instance creation decided by
-     * {@link GenerateJavaScriptAST.GenerateJavaScriptVisitor#initializeAtTopScope}. Mismatches
+     * {@link com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST.GenerateJavaScriptVisitor#initializeAtTopScope}. Mismatches
      * like these are handled explicitly by these fixup passes.
      * </p>
      */
@@ -1120,7 +1127,9 @@ public class CodeSplitter {
    * are only needed by a single split point. Such code can be moved to the
    * exclusively live fragment associated with that split point.
    */
-  private void mapExclusiveAtoms(ExclusivityMap fragmentMap) {
+  private ExclusivityMap mapExclusiveAtoms() {
+
+    ExclusivityMap exclusivityMap = new ExclusivityMap();
     List<ControlFlowAnalyzer> allButOnes = computeAllButOneCfas();
 
     ControlFlowAnalyzer everything = computeCompleteCfa();
@@ -1146,12 +1155,13 @@ public class CodeSplitter {
       ControlFlowAnalyzer allButOne = allButOnes.get(splitPoint - 1);
       Set<JNode> allLiveNodes =
           union(allButOne.getLiveFieldsAndMethods(), allButOne.getFieldsWritten());
-      fragmentMap.updateFields(splitPoint, allLiveNodes, allFields);
-      fragmentMap.updateMethods(splitPoint, allButOne.getLiveFieldsAndMethods(), allMethods);
-      fragmentMap.updateStrings(splitPoint, allButOne.getLiveStrings(), everything
+      exclusivityMap.updateFields(splitPoint, allLiveNodes, allFields);
+      exclusivityMap.updateMethods(splitPoint, allButOne.getLiveFieldsAndMethods(), allMethods);
+      exclusivityMap.updateStrings(splitPoint, allButOne.getLiveStrings(), everything
           .getLiveStrings());
-      fragmentMap.updateTypes(splitPoint, declaredTypesIn(allButOne.getInstantiatedTypes()),
+      exclusivityMap.updateTypes(splitPoint, declaredTypesIn(allButOne.getInstantiatedTypes()),
           declaredTypesIn(everything.getInstantiatedTypes()));
     }
+    return exclusivityMap;
   }
 }

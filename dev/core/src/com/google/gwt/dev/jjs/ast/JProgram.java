@@ -20,8 +20,8 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
-import com.google.gwt.dev.jjs.impl.CodeSplitter;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter2.FragmentPartitioningResult;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.IOException;

@@ -20,8 +20,8 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
-import com.google.gwt.dev.jjs.impl.CodeSplitter;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
+import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.IOException;
@@ -46,6 +46,16 @@ import java.util.Set;
  * Root for the AST representing an entire Java program.
  */
 public class JProgram extends JNode {
+
+  private List<Integer> initialFragmentNumberSequence;
+
+  public List<Integer> getInitialFragmentNumberSequence() {
+    return initialFragmentNumberSequence;
+  }
+
+  public void setInitialFragmentNumberSequence(List<Integer> initialFragmentNumberSequence) {
+    this.initialFragmentNumberSequence = initialFragmentNumberSequence;
+  }
 
   private static final class ArrayTypeComparator implements Comparator<JArrayType>, Serializable {
     public int compare(JArrayType o1, JArrayType o2) {
@@ -312,8 +322,8 @@ public class JProgram extends JNode {
 
     // If there were some fragment merging.
     if (result != null) {
-      sp1 = result.getSplitPointFromFragment(sp1);
-      sp2 = result.getSplitPointFromFragment(sp2);
+      sp1 = result.getRunAsyncIdForFragment(sp1);
+      sp2 = result.getRunAsyncIdForFragment(sp2);
     }
     
     int initPos1 = initialSeq.indexOf(sp1);
@@ -338,11 +348,9 @@ public class JProgram extends JNode {
     assert (initPos1 < 0 && initPos2 < 0);
     assert (frag1 != frag2);
 
-    if (result != null) {
-      return result.getLeftoverFragmentIndex();
-    } else {
-      return CodeSplitter.getLeftoversFragmentNumber(numSps);
-    }
+    assert result != null;
+
+    return result.getLeftoverFragmentIndex();
   }
 
   public final List<JClassType> codeGenTypes = new ArrayList<JClassType>();
@@ -378,7 +386,7 @@ public class JProgram extends JNode {
    */
   private List<JRunAsync> runAsyncs = Lists.create();
 
-  private List<Integer> splitPointInitialSequence = Lists.create();
+  private LinkedHashSet<JRunAsync> initialAsyncSequence;
 
   private final Map<JMethod, JMethod> staticToInstanceMap = new IdentityHashMap<JMethod, JMethod>();
 
@@ -404,14 +412,6 @@ public class JProgram extends JNode {
   
   private FragmentPartitioningResult fragmentPartitioninResult;
 
-  /**
-   * Constructor.
-   * 
-   * @param correlator Controls whether or not SourceInfo nodes created via the
-   *          JProgram will record descendant information. Enabling this feature
-   *          will collect extra data during the compilation cycle, but at a
-   *          cost of memory and object allocations.
-   */
   public JProgram() {
     super(SourceOrigin.UNKNOWN);
   }
@@ -817,8 +817,8 @@ public class JProgram extends JNode {
     return runAsyncs;
   }
 
-  public List<Integer> getSplitPointInitialSequence() {
-    return splitPointInitialSequence;
+  public LinkedHashSet<JRunAsync> getInitialAsyncSequence() {
+    return initialAsyncSequence;
   }
 
   public JMethod getStaticImpl(JMethod method) {
@@ -962,7 +962,7 @@ public class JProgram extends JNode {
    * supplied fragments, or it might be a common predecessor.
    */
   public int lastFragmentLoadingBefore(int firstFragment, int... restFragments) {
-    return lastFragmentLoadingBefore(splitPointInitialSequence, fragmentPartitioninResult,
+    return lastFragmentLoadingBefore(initialFragmentNumberSequence, fragmentPartitioninResult,
         runAsyncs.size(), firstFragment, restFragments);
   }
 
@@ -1005,9 +1005,9 @@ public class JProgram extends JNode {
     this.runAsyncs = Lists.normalizeUnmodifiable(runAsyncs);
   }
 
-  public void setSplitPointInitialSequence(List<Integer> list) {
-    assert splitPointInitialSequence.isEmpty();
-    splitPointInitialSequence = new ArrayList<Integer>(list);
+  public void setInitialAsyncSequence(LinkedHashSet<JRunAsync> list) {
+    assert initialAsyncSequence == null;
+    initialAsyncSequence = list;
   }
 
   /**

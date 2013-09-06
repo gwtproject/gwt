@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2259d90_7edce029",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "please make it a little more specific",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_3e4fc83b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "s/i/splitPoint",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_9eefdce2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "seems like you could extract this class as well during this refactor?",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_de6074ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_fefd309e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "formatting",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_3e08a8f1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "s/mapExclusiveAtoms/computeExclusivityMap",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2259d90_3ed2681a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/ReplaceRunAsyncsErrorMessagesTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-06T18:54:59Z",
+      "side": 1,
+      "message": "formatting",
+      "revId": "d8563d4c87e0d6eb95ad188aa53007428b2ee779",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.impl;
+package com.google.gwt.dev.jjs.impl.codesplitter;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
@@ -188,7 +189,7 @@ public class ReplaceRunAsyncs {
           }
           return;
         }
-        int splitPoint = matches.get(0).getSplitPoint();
+        int splitPoint = matches.get(0).getRunAsyncId();
         JMethodCall newCall =
             new JMethodCall(info, null, program
                 .getIndexedMethod("RunAsyncCode.forSplitPointNumber"));
@@ -198,7 +199,8 @@ public class ReplaceRunAsyncs {
     }
   }
 
-  public static void exec(TreeLogger logger, JProgram program) throws UnableToCompleteException {
+  public static void exec(TreeLogger logger, JProgram program)
+      throws UnableToCompleteException {
     Event codeSplitterEvent =
         SpeedTracerLogger.start(CompilerEventType.CODE_SPLITTER, "phase", "ReplaceRunAsyncs");
     TreeLogger branch =

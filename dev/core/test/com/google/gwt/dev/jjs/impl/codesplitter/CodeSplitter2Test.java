@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.impl;
+package com.google.gwt.dev.jjs.impl.codesplitter;
 
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -30,7 +30,14 @@ import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.impl.CodeSplitter.MultipleDependencyGraphRecorder;
+import com.google.gwt.dev.jjs.impl.ArrayNormalizer;
+import com.google.gwt.dev.jjs.impl.CastNormalizer;
+import com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST;
+import com.google.gwt.dev.jjs.impl.JJSTestBase;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
+import com.google.gwt.dev.jjs.impl.MethodCallTightener;
+import com.google.gwt.dev.jjs.impl.TypeTightener;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -43,7 +50,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Unit test for {@link CodeSplitter2}.
+ * Unit test for {@link com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter}.
  */
 public class CodeSplitter2Test extends JJSTestBase {
 
@@ -327,8 +334,8 @@ public class CodeSplitter2Test extends JJSTestBase {
       new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
     JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
         jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-            new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER, 0);
+        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
+    CodeSplitter.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER/*, 0*/);
   }
 
   /**
@@ -359,8 +366,8 @@ public class CodeSplitter2Test extends JJSTestBase {
     JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
         jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
         new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
-    CodeSplitter2.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER,
-        mergeLimit);
+    CodeSplitter.exec(logger, jProgram, jsProgram, map, 4, NULL_RECORDER
+        /*,mergeLimit*/);
   }
 
   private static String createRunAsync(String cast, String body) {

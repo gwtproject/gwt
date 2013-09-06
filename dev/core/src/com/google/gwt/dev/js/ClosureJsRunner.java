@@ -16,7 +16,7 @@ package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter2.FragmentPartitioningResult;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsProgramFragment;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;

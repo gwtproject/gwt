@@ -13,13 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.impl;
+package com.google.gwt.dev.jjs.impl.codesplitter;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
+import com.google.gwt.dev.jjs.impl.JJSTestBase;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
 
 /**
- * Tests class {@link CodeSplitter}.
+ * Tests class {@link com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter}.
  */
 public class CodeSplitterTest extends JJSTestBase {
   /**

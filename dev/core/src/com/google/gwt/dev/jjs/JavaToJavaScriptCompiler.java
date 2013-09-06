@@ -67,9 +67,8 @@ import com.google.gwt.dev.jjs.impl.AssertionRemover;
 import com.google.gwt.dev.jjs.impl.AstDumper;
 import com.google.gwt.dev.jjs.impl.CastNormalizer;
 import com.google.gwt.dev.jjs.impl.CatchBlockNormalizer;
-import com.google.gwt.dev.jjs.impl.CodeSplitter;
-import com.google.gwt.dev.jjs.impl.CodeSplitter.MultipleDependencyGraphRecorder;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.DeadCodeElimination;
 import com.google.gwt.dev.jjs.impl.EnumOrdinalizer;
@@ -95,7 +94,7 @@ import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
-import com.google.gwt.dev.jjs.impl.ReplaceRunAsyncs;
+import com.google.gwt.dev.jjs.impl.codesplitter.ReplaceRunAsyncs;
 import com.google.gwt.dev.jjs.impl.ResolveRebinds;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
@@ -402,29 +401,24 @@ public class JavaToJavaScriptCompiler {
       if (options.isRunAsyncEnabled()) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         
-        int fragmentsMerge = 0;
-        
         int expectedFragmentCount = options.getFragmentCount();
-        if (expectedFragmentCount > 0) {
-          // + 1 for left over, + 1 for initial gave us the total number
-          // of fragments without splitting.
-          fragmentsMerge = jprogram.getRunAsyncs().size() + 2 - expectedFragmentCount;
-        } else {
-          fragmentsMerge = options.getFragmentsMerge();
+        if (expectedFragmentCount == 0) {
+          int numberoOfMerges =  options.getFragmentsMerge();
+          if (numberoOfMerges > 0) {
+            // + 1 for left over, + 1 for initial gave us the total number
+            // of fragments without splitting.
+            // Fragemnt count not set check fragment merge.
+            expectedFragmentCount = Math.max(0,
+                jprogram.getRunAsyncs().size() + 2 - numberoOfMerges);
+          }
         }
+
+        int leftOverSizeMerge = findIntegerConfigurationProperty(propertyOracles, logger,
+            com.google.gwt.dev.jjs.impl.codesplitter.Util.LEFTOVERMERGE_SIZE, 0);
         
-        // Pick and choose which code splitter to use. Only use the experimental
-        // one when the user explicitly decides the project needs fragment
-        // merging.
-        if (fragmentsMerge > 0) {
-          CodeSplitter2.exec(logger, jprogram, jsProgram, jjsmap, fragmentsMerge,
-              chooseDependencyRecorder(options.isSoycEnabled(), baos),
-              findIntegerConfigurationProperty(propertyOracles, logger,
-                  CodeSplitter2.LEFTOVERMERGE_SIZE, 0));
-        } else {
-          CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, chooseDependencyRecorder(options
-              .isSoycEnabled(), baos));
-        }
+        CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, expectedFragmentCount,
+            leftOverSizeMerge, chooseDependencyRecorder(options.isSoycEnabled(), baos));
+
         if (baos.size() == 0 && options.isSoycEnabled()) {
           recordNonSplitDependencies(jprogram, baos);
         }
@@ -722,7 +716,8 @@ public class JavaToJavaScriptCompiler {
       // Fix up GWT.runAsync()
       if (module != null && options.isRunAsyncEnabled()) {
         ReplaceRunAsyncs.exec(logger, jprogram);
-        CodeSplitter2.pickInitialLoadSequence(logger, jprogram, module.getProperties());
+        com.google.gwt.dev.jjs.impl.codesplitter.Util.pickInitialLoadSequence(logger, jprogram,
+            module.getProperties());
       }
 
       ImplementClassLiteralsAsFields.exec(jprogram);

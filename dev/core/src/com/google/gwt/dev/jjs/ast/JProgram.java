@@ -15,13 +15,14 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
-import com.google.gwt.dev.jjs.impl.CodeSplitter;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.IOException;
@@ -42,10 +43,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 /**
  * Root for the AST representing an entire Java program.
  */
 public class JProgram extends JNode {
+
+  private List<Integer> initialFragmentNumberSequence = Lists.create();
+
+  public List<Integer> getInitialFragmentNumberSequence() {
+    return initialFragmentNumberSequence;
+  }
+
+  public void setInitialFragmentNumberSequence(List<Integer> initialFragmentNumberSequence) {
+    this.initialFragmentNumberSequence = initialFragmentNumberSequence;
+  }
 
   private static final class ArrayTypeComparator implements Comparator<JArrayType>, Serializable {
     public int compare(JArrayType o1, JArrayType o2) {
@@ -262,14 +275,11 @@ public class JProgram extends JNode {
     }
     return latest;
   }
-  
+
   public static int lastFragmentLoadingBefore(List<Integer> initialSeq,
       int numSps, int firstFragment, int... restFragments) {
-    int latest = firstFragment;
-    for (int frag : restFragments) {
-      latest = pairwiseLastFragmentLoadingBefore(initialSeq, null, numSps, latest, frag);
-    }
-    return latest;
+
+    return lastFragmentLoadingBefore(initialSeq, null, numSps, firstFragment, restFragments);
   }
 
 
@@ -312,8 +322,8 @@ public class JProgram extends JNode {
 
     // If there were some fragment merging.
     if (result != null) {
-      sp1 = result.getSplitPointFromFragment(sp1);
-      sp2 = result.getSplitPointFromFragment(sp2);
+      sp1 = result.getRunAsyncIdForFragment(sp1);
+      sp2 = result.getRunAsyncIdForFragment(sp2);
     }
     
     int initPos1 = initialSeq.indexOf(sp1);
@@ -338,11 +348,14 @@ public class JProgram extends JNode {
     assert (initPos1 < 0 && initPos2 < 0);
     assert (frag1 != frag2);
 
-    if (result != null) {
-      return result.getLeftoverFragmentIndex();
-    } else {
-      return CodeSplitter.getLeftoversFragmentNumber(numSps);
+    // TODO(rluble): there should always be a fragmentPartitionResult; temporary hack.
+    // assert result != null;
+
+    if (result == null) {
+      return numSps + 1;
     }
+
+    return result.getLeftoverFragmentIndex();
   }
 
   public final List<JClassType> codeGenTypes = new ArrayList<JClassType>();
@@ -378,7 +391,7 @@ public class JProgram extends JNode {
    */
   private List<JRunAsync> runAsyncs = Lists.create();
 
-  private List<Integer> splitPointInitialSequence = Lists.create();
+  private LinkedHashSet<JRunAsync> initialAsyncSequence = new LinkedHashSet<JRunAsync>();
 
   private final Map<JMethod, JMethod> staticToInstanceMap = new IdentityHashMap<JMethod, JMethod>();
 
@@ -404,14 +417,6 @@ public class JProgram extends JNode {
   
   private FragmentPartitioningResult fragmentPartitioninResult;
 
-  /**
-   * Constructor.
-   * 
-   * @param correlator Controls whether or not SourceInfo nodes created via the
-   *          JProgram will record descendant information. Enabling this feature
-   *          will collect extra data during the compilation cycle, but at a
-   *          cost of memory and object allocations.
-   */
   public JProgram() {
     super(SourceOrigin.UNKNOWN);
   }
@@ -817,8 +822,8 @@ public class JProgram extends JNode {
     return runAsyncs;
   }
 
-  public List<Integer> getSplitPointInitialSequence() {
-    return splitPointInitialSequence;
+  public LinkedHashSet<JRunAsync> getInitialAsyncSequence() {
+    return initialAsyncSequence;
   }
 
   public JMethod getStaticImpl(JMethod method) {
@@ -962,7 +967,7 @@ public class JProgram extends JNode {
    * supplied fragments, or it might be a common predecessor.
    */
   public int lastFragmentLoadingBefore(int firstFragment, int... restFragments) {
-    return lastFragmentLoadingBefore(splitPointInitialSequence, fragmentPartitioninResult,
+    return lastFragmentLoadingBefore(initialFragmentNumberSequence, fragmentPartitioninResult,
         runAsyncs.size(), firstFragment, restFragments);
   }
 
@@ -1005,9 +1010,18 @@ public class JProgram extends JNode {
     this.runAsyncs = Lists.normalizeUnmodifiable(runAsyncs);
   }
 
-  public void setSplitPointInitialSequence(List<Integer> list) {
-    assert splitPointInitialSequence.isEmpty();
-    splitPointInitialSequence = new ArrayList<Integer>(list);
+  public void setInitialAsyncSequence(LinkedHashSet<JRunAsync> list) {
+    assert initialAsyncSequence.isEmpty();
+    initialFragmentNumberSequence = new ArrayList<Integer>();
+    // TODO(rluble): hack for now the initial fragments correspond to the initial runAsyncIds.
+    initialFragmentNumberSequence.addAll((Collection) Collections2.transform(list,
+        new Function<JRunAsync, Object>() {
+          @Override
+          public Object apply(@Nullable JRunAsync jRunAsync) {
+            return jRunAsync.getRunAsyncId();
+          }
+    }));
+    initialAsyncSequence = list;
   }
 
   /**

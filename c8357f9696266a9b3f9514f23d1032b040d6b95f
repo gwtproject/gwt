@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d28b39a1_803158fe",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "I think it\u0027s safe to remove that try/catch entirely. At least according to the original comment and commit-log for that change (https://code.google.com/p/google-web-toolkit/source/detail?r\u003d7315)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_20532415",
+        "filename": "user/src/com/google/gwt/json/client/JSONParser.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "So, do we support any such \"older browser that lack a JSON.parse function\" after the removal of IE6/7 support?",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_40503006",
+        "filename": "user/src/com/google/gwt/layout/Layout.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "Remove that line if no longer needed.",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_604d2c6d",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/MhtmlResourceContext.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "Reformat as a single line?",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_e0893c77",
+        "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "Are we sure it won\u0027t be needed for IE10? The few cases where we used a 6To8 naming was to explicitly mention an upper bound. If we don\u0027t have an upper bound (and here we don\u0027t have a lower bound either, as it\u0027s the same as the lowest supported IE version), then just use IE or Trident as the suffix.",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_c0844062",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "The ie9 permutation will fallback to the ie8 one, so it really is \"IE8To9\", but until we\u0027re sure IE10 won\u0027t also use it I\u0027d just go with FormPanelImplIE or FormPanelImplTrident for the name.",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_008f087a",
+        "filename": "user/src/com/google/gwt/user/RichText.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident, not IE8.",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_2094048a",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident, not IE8 (ie9 falls back to ie8 in absence of specific rule)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_40911099",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_609e0caa",
+        "filename": "user/src/com/google/gwt/user/TextBox.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_a06814b9",
+        "filename": "user/src/com/google/gwt/user/Tree.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident unless we know for sure IE10 won\u0027t need it.",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_c06d20c8",
+        "filename": "user/src/com/google/gwt/user/cellview/CellView.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "That one should be called IE8 (I suppose it was created before we added support for ie9)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_e0621cd7",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "We should probably move it to its own commit (along with another similar fix I saw earlier)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_0068e8b3",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBasedWidgetImplTrident.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "Should probably be moved to its own commit (I suspect there are many other missing @Override annotations)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_207de471",
+        "filename": "user/src/com/google/gwt/user/client/ui/HorizontalSplitPanel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "(and IE9, see earlier comment)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_a0d1f448",
+        "filename": "user/src/com/google/gwt/xml/XML.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "IE or Trident",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_c0d6003e",
+        "filename": "user/test/com/google/gwt/core/client/ScriptInjectorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 1,
+      "message": "Maybe just change to \"is IE\". We\u0027ll change it back to IE8,9 if needed when we introduce formal support for IE10 (and IE11?)",
+      "revId": "c8357f9696266a9b3f9514f23d1032b040d6b95f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

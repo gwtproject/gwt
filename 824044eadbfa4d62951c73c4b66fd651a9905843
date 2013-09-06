@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "d28b39a1_202164b9",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsCoerceIntShiftTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "Change to ie8 or ie9 instead of removing?",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_601b6c81",
+        "filename": "user/src/com/google/gwt/canvas/Canvas.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "Should we add ie9 to no longer depend on the fallback mechanism?",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2e24519_0c31f7fb",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 1
@@ -37,6 +71,57 @@
     },
     {
       "key": {
+        "uuid": "d28b39a1_c06360eb",
+        "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "Please keep this comment; just replace \"IE6\" with \"IE\" or \"IE8-9\": http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/internet-explorer-stylesheet-rule-selector-import-sheet-limit-maximum.aspx",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_c011a067",
+        "filename": "user/src/com/google/gwt/user/Popup.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "Note: the PopupImplMozilla is probably no longer needed either (only needed for FF2 or earlier on Mac), so maybe it\u0027s time to refactor PopupPanel to no longer use PopupImpl (or maybe at least deprecate PopupImpl).",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_8074f88c",
+        "filename": "user/src/com/google/gwt/user/theme/chrome/public/gwt/chrome/chrome.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "The \"star html hack\" only works in IE6, or in IE7 when in quirks mode, so we should remove those lines too.\n\nSource: http://www.dynamicsitesolutions.com/css/filters/star-html/",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2e24519_ac06632d",
         "filename": "user/test/com/google/gwt/dom/client/ElementTest.java",
         "patchSetId": 1
@@ -66,6 +151,23 @@
       "side": 0,
       "message": "put back in",
       "parentUuid": "b2e24519_ac06632d",
+      "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d28b39a1_20c6c48d",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-06T15:14:32Z",
+      "side": 0,
+      "message": "I know this test was specifically targeted at IE6, but I don\u0027t think we should remove it: this is a behavior that we expect in all browsers.",
       "revId": "824044eadbfa4d62951c73c4b66fd651a9905843",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -18,7 +18,7 @@ package com.google.gwt.core.ext.soyc.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
-import com.google.gwt.dev.jjs.impl.CodeSplitter2.FragmentPartitioningResult;
+import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter2.FragmentPartitioningResult;
 import com.google.gwt.dev.util.HtmlTextOutput;
 import com.google.gwt.util.tools.Utility;
 
@@ -82,13 +82,13 @@ public class SplitPointRecorder {
         htmlOut.newline();
       }
 
-      if (!jprogram.getSplitPointInitialSequence().isEmpty()) {
+/*      if (!jprogram.getInitialFragmentNumberSequence().isEmpty()) {
         curLine = "<initialseq>";
         htmlOut.printRaw(curLine);
         htmlOut.newline();
         htmlOut.indentIn();
 
-        for (int sp : jprogram.getSplitPointInitialSequence()) {
+        for (int sp : jprogram.getInitialFragmentNumberSequence()) {
           if (partitionResult != null) {
             sp = partitionResult.getFragmentFromSplitPoint(sp);
           }
@@ -102,7 +102,7 @@ public class SplitPointRecorder {
         htmlOut.printRaw(curLine);
         htmlOut.newline();
       }
-
+*/
       htmlOut.indentOut();
       htmlOut.indentOut();
       curLine = "</soyc>";

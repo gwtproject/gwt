@@ -24,6 +24,7 @@ import com.google.gwt.core.client.UnsafeNativeLong;
  */
 class LongLibBase {
   static final class LongEmul {
+    
     public static LongEmul getInstance() {
       return new LongEmul();
     }
@@ -321,8 +322,12 @@ class LongLibBase {
   }
 
   private static native LongEmul create0(int l, int m, int h) /*-{
-    return (_ = @com.google.gwt.lang.LongLibBase$LongEmul::getInstance()(),
-        _.l = l, _.m = m, _.h = h, _);
+    var a = {l:l,m:m,h:h};
+    // I don't think we actually need the prototype, since we do not have it
+    // on long literals and its huring the hidden classes in v8
+    // roberto?
+    // a.prototype = @com.google.gwt.lang.LongLibBase::instance;
+    return a;
   }-*/;
 
   private static LongEmul divModByMinValue(LongEmul a, boolean computeRemainder) {

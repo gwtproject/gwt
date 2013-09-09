@@ -131,6 +131,10 @@ public class EditTextCell extends
     private boolean equalsOrBothNull(Object o1, Object o2) {
       return (o1 == null) ? o2 == null : o1.equals(o2);
     }
+
+    private boolean isCurrentEqualsToOriginal() {
+      return equalsOrBothNull(original, text);
+    }
   }
 
   private static Template template;
@@ -296,7 +300,7 @@ public class EditTextCell extends
     String value = updateViewData(parent, viewData, false);
     clearInput(getInputElement(parent));
     setValue(context, parent, viewData.getOriginal());
-    if (valueUpdater != null) {
+    if (valueUpdater != null && !viewData.isCurrentEqualsToOriginal()) {
       valueUpdater.update(value);
     }
   }

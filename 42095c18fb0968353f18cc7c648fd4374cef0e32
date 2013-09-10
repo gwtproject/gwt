@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7a76589_aac02b37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-10T10:22:02Z",
+      "side": 1,
+      "message": "Could you shorten this?\n\nMaybe:\n\n EditTextCell no longer triggers its ValueUpdater when the value hasn\u0027t changed\n\nAlso, has this been reported in the issue tracker? If so, please reference the issue here (use a \"Bug: issue NNNN\" line next to the Change-Id line)",
+      "revId": "42095c18fb0968353f18cc7c648fd4374cef0e32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_cac9e767",
+        "filename": "user/src/com/google/gwt/cell/client/EditTextCell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-10T10:22:02Z",
+      "side": 1,
+      "message": "How about an hasChanged() that\u0027d return the opposite value?",
+      "revId": "42095c18fb0968353f18cc7c648fd4374cef0e32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

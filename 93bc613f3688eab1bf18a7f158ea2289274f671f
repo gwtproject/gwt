@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_a4fdc2e7",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_3d3a3bab",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_fd3b63aa",
         "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-09T22:41:36Z",
       "side": 1,
       "message": "I\u0027d probably line break between ValueCodex.canDecode(keyType) and the valueType check to make the pattern more obvious.",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_440ace38",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_fd3b63aa",
       "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_640fca47",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_dd3e9f9d",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_9d48273a",
         "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-09T22:41:36Z",
       "side": 1,
       "message": "Nit: Space after comma: Map\u003c?, ?\u003e",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_0404d626",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_9d48273a",
       "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_2409d23f",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Completely agree that the font makes it look like there\u0027s a space but, looking at the source just now, it turns out there isn\u0027t.",
+      "parentUuid": "676c8df1_bd45eb20",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_7d5753d8",
         "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-09-09T22:41:36Z",
       "side": 1,
       "message": "Could you avoid the @SuppressWarnings by using List\u003c?\u003e here?\n\nAlso, nit: Should be indented one more space.",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_a414e255",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_7d5753d8",
       "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_44316efe",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "no space in the source, font issue",
+      "parentUuid": "676c8df1_bd5c0bf7",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_ddec5fed",
         "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2013-09-09T22:41:36Z",
       "side": 1,
       "message": "Is this ValueCodex.canDecode() check really valid?  It seems like you\u0027re assuming all key objects will have the same dynamic type, which isn\u0027t necessarily true, is it?  E.g., if I have a Map\u003cObject, Object\u003e, I can use both Strings and MyComplexObject as a key.",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_4ab657f2",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Totally agree in principle and I\u0027m in favour of replacing it with a better check if one is available. That said, I believe this check should be safe due to the limited set of transportable types in RF http://www.gwtproject.org/doc/latest/DevGuideRequestFactory.html#transportable \n\nMaybe Thomas knows of a safer way to get the key type from RF metadata?",
+      "parentUuid": "676c8df1_ddec5fed",
       "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_c41d5e7e",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/ProxySerializerImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "again, looks like a space here but isn\u0027t one in the source",
+      "parentUuid": "676c8df1_9df6e7b9",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_7d251370",
         "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FindServiceTest.java",
         "patchSetId": 4
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "a7a76589_8417665a",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FindServiceTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_7d251370",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676c8df1_dd13ff1e",
         "filename": "user/test/com/google/web/bindery/requestfactory/server/MapKey.java",
         "patchSetId": 4
@@ -183,6 +363,24 @@
       "writtenOn": "2013-09-09T22:41:36Z",
       "side": 1,
       "message": "Nit: Fix indenting.",
+      "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7a76589_e41ada83",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/MapKey.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-09-10T10:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676c8df1_dd13ff1e",
       "revId": "93bc613f3688eab1bf18a7f158ea2289274f671f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

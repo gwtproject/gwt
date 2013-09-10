@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7a76589_046856af",
+        "filename": "user/src/com/google/gwt/core/client/JavaScriptObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-10T08:22:11Z",
+      "side": 1,
+      "message": "Why $wnd.Array? Why not just Array()?\n\n$wnd.Array has much more changes of being replaced by XSS than Array; and createArray() creates an array in the current \u0027window\u0027 (not $wnd) so createArray(int) would return an Array with the same prototype and constructor.",
+      "revId": "e489503619d585131aabd386501f50e22a30304c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

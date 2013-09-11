@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87bee1c4_3325c871",
+        "filename": "dev/core/super/com/google/gwt/lang/LongLibBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-09-11T21:34:30Z",
+      "side": 1,
+      "message": "Will this break the RUN_IN_JVM tests? Let\u0027s either abolish the run-in-jvm tests and make LongEmul a JSO Overlay Type, or make sure when RUN_IN_JVM runs, it never touches any of the JSNI paths (wihich should already be true)\n\nI don\u0027t understand the rationale of the original author for making a JVM class, and then stashing JSO expando properties on it, in effect, making it both a JVM and JSO class.  Since they are already special casing the paths, they could have used an interface and hid the JRE and JSO impls behind it.",
+      "revId": "768514b61ed1d565fe3ed33b1a878c78422a4bea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

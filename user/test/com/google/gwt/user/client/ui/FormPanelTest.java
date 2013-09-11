@@ -309,13 +309,14 @@ public class FormPanelTest extends SimplePanelTestBase<FormPanel> {
       final Element container = Document.get().createDivElement();
       container.setInnerHTML("<form target='foo'></form>");
       Document.get().getBody().appendChild(container);
-
+      final String failureMsg =
+;
       try {
         // Attempt to wrap it, requesting that an iframe be created.
         FormPanel.wrap(container.getFirstChildElement(), true);
         fail("Assertion expected wrapping a form with the target set");
-      } catch (Throwable e) {
-        // ok.
+      } catch (AssertionError e) {
+        assertTrue(e.getMessage().contains("target is already set"));
       }
     }
   }

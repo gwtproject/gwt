@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87f7c198_4bbba506",
+        "filename": "user/src/com/google/gwt/useragent/UserAgent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-11T09:12:01Z",
+      "side": 1,
+      "message": "nit: I would prefer some braces for the if condition",
+      "revId": "264c510e8a4522c6ad13b30637f8c251128392a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7ed39cb_4df2991a",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-11T09:12:01Z",
+      "side": 1,
+      "message": "nit: two whitespaces",
+      "revId": "264c510e8a4522c6ad13b30637f8c251128392a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

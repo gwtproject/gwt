@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7f07da0_3f0e45f6",
+        "filename": "user/src/com/google/gwt/core/client/JavaScriptObject.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-11T12:28:20Z",
+      "side": 1,
+      "message": "Just a note, I have no idea what effect it could have on runtime perf, if any, but we can save a few bytes here by calling the constructor as a function (i.e. removing the \u0027new\u0027 keyword):\n\n return Array(size);\n\nSee http://www.ecma-international.org/ecma-262/5.1/#sec-15.4.1\n\nNo idea about cross-browser compatibility either (works in Chrome 30, Firefox 23 and Opera 12, at least)",
+      "revId": "48f05bfdaf98aa6a83e8500b09219bd70bae1515",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7f07da0_1f0b89e5",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptObjectTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-11T12:28:20Z",
+      "side": 1,
+      "message": "No need to import Assert and qualify assertEquals, as GWTTestCase extends Assert already (through TestCase).\n\n assertEquals(20, array.length());",
+      "revId": "48f05bfdaf98aa6a83e8500b09219bd70bae1515",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

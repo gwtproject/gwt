@@ -28,6 +28,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.google.gwt.useragent.rebind.UserAgentSelectorWriter.ConfigPropertyAccessor;
 
 import java.io.PrintWriter;
 
@@ -35,7 +36,7 @@ import java.io.PrintWriter;
  * Generator for {@link com.google.gwt.useragent.client.UserAgent}.
  */
 public class UserAgentGenerator extends Generator {
-  static final String PROPERTY_USER_AGENT = "user.agent";
+  private static final String PROPERTY_USER_AGENT = "user.agent";
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext context, String typeName)
@@ -58,7 +59,7 @@ public class UserAgentGenerator extends Generator {
       throw new UnableToCompleteException();
     }
 
-    PropertyOracle propertyOracle = context.getPropertyOracle();
+    final PropertyOracle propertyOracle = context.getPropertyOracle();
 
     String userAgentValue;
     SelectionProperty selectionProperty;
@@ -83,19 +84,31 @@ public class UserAgentGenerator extends Generator {
       SourceWriter sw = composerFactory.createSourceWriter(context, pw);
 
       sw.println();
-      sw.println("public native String getRuntimeValue() /*-{");
+      sw.println("private static native String getRuntimeValueImpl() /*-{");
       sw.indent();
-      UserAgentPropertyGenerator.writeUserAgentPropertyJavaScript(sw,
-          selectionProperty.getPossibleValues());
+      new UserAgentSelectorWriter(logger, new ConfigPropertyAccessor() {
+        @Override
+        public String getValue(String name) throws BadPropertyValueException {
+          return propertyOracle.getConfigurationProperty(name).getValues().get(0);
+        }
+      }).write(sw, selectionProperty.getPossibleValues());
       sw.outdent();
       sw.println("}-*/;");
       sw.println();
 
       sw.println();
+      sw.println("private static String runtimeValue;");
+      sw.println();
+      sw.println("public String getRuntimeValue() {");
+      sw.println("  if(runtimeValue == null) {");
+      sw.println("    runtimeValue = getRuntimeValueImpl();");
+      sw.println("  }");
+      sw.println("  return runtimeValue;");
+      sw.println("}");
+
+      sw.println();
       sw.println("public String getCompileTimeValue() {");
-      sw.indent();
-      sw.println("return \"" + userAgentValue.trim() + "\";");
-      sw.outdent();
+      sw.println(" return \"" + userAgentValue.trim() + "\";");
       sw.println("}");
 
       sw.commit(logger);

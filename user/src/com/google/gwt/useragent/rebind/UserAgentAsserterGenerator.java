@@ -31,8 +31,7 @@ import com.google.gwt.useragent.client.UserAgentAsserter.UserAgentAsserterDisabl
  */
 public class UserAgentAsserterGenerator extends Generator {
 
-  static final String PROPERTY_USER_AGENT_RUNTIME_WARNING = "user.agent.runtimeWarning";
-
+  private static final String PROPERTY_USER_AGENT_RUNTIME_WARNING = "user.agent.runtimeWarning";
   private static final String USER_AGENT_ASSERTER = UserAgentAsserter.class.getCanonicalName();
   private static final String USER_AGENT_ASSERTER_DISABLED =
       UserAgentAsserterDisabled.class.getCanonicalName();

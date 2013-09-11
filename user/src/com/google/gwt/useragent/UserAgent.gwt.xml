@@ -25,7 +25,38 @@
   <extend-property name="user.agent" values="safari" />
   <extend-property name="user.agent" values="opera" />
   <extend-property name="user.agent" values="ie9" fallback-value="ie8" />
-  <property-provider name="user.agent" generator="com.google.gwt.useragent.rebind.UserAgentPropertyGenerator"/>
+
+  <define-configuration-property name="user.agent.ie6.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.ie6.predicate"
+    value="var makeVersion = function(result) {
+             return (parseInt(result[1]) * 1000) + parseInt(result[2]);
+           };
+           var result = /msie ([0-9]+)\\.([0-9]+)/.exec(ua);
+           if (result &amp;&amp; result.length == 3)
+             return (makeVersion(result) >= 6000);" />
+
+  <define-configuration-property name="user.agent.ie8.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.ie8.predicate"
+    value="return (ua.indexOf('msie') != -1 &amp;&amp; ($doc.documentMode >= 8));" />
+
+  <define-configuration-property name="user.agent.ie9.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.ie9.predicate"
+    value="return (ua.indexOf('msie') != -1 &amp;&amp; ($doc.documentMode >= 9));" />
+
+  <define-configuration-property name="user.agent.safari.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.safari.predicate"
+    value="return (ua.indexOf('webkit') != -1);" />
+
+  <define-configuration-property name="user.agent.gecko1_8.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.gecko1_8.predicate"
+    value="return (ua.indexOf('gecko') != -1);" />
+
+  <define-configuration-property name="user.agent.opera.predicate" is-multi-valued="false" />
+  <set-configuration-property name="user.agent.opera.predicate"
+    value="return (ua.indexOf('opera') != -1);" />
+
+  <property-provider name="user.agent"
+    generator="com.google.gwt.useragent.rebind.UserAgentPropertyGenerator"/>
 
   <!-- Set to false to avoid runtime warnings for mismatched runtime and -->
   <!-- compile time user.agent values -->

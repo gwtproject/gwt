@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_b31ab882",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/StaticPropertyOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-11T19:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_811f1a26",
+      "revId": "230fd05afcbd39c47b572fe3c35592478ef49571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_a1133e1f",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/StaticPropertyOracle.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-11T04:08:17Z",
       "side": 1,
       "message": "s/config/configurationProperty",
+      "revId": "230fd05afcbd39c47b572fe3c35592478ef49571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_f3143057",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/StaticPropertyOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-11T19:52:51Z",
+      "side": 1,
+      "message": "Replaced with configProperty. It is shorter and also consistent with this field name.",
+      "parentUuid": "47d0690f_a1133e1f",
       "revId": "230fd05afcbd39c47b572fe3c35592478ef49571",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

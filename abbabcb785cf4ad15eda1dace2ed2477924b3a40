@@ -50,6 +50,24 @@
       "revId": "abbabcb785cf4ad15eda1dace2ed2477924b3a40",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_534c0449",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserChannel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-11T21:11:04Z",
+      "side": 1,
+      "message": "Hm, actually, I think there\u0027s a bug in that code:\n\n    data \u003d (static_cast\u003cint64_t\u003e(d[0]) \u003c\u003c 32) | ntohl(d[1]);\n\nwe\u0027re calling ntohl() on only one of the integers here, and readInt() already applies ntohl().  So on non-big-endian systems (i.e., probably all of the ones we\u0027re using devmode on), we\u0027re mangling the bottom 32-bits of the long. :(",
+      "parentUuid": "87bee1c4_5335e4b8",
+      "revId": "abbabcb785cf4ad15eda1dace2ed2477924b3a40",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

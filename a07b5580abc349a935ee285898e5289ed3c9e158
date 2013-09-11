@@ -2505,6 +2505,24 @@
     },
     {
       "key": {
+        "uuid": "c7c45963_152b5460",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_a1817e47",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_c17e826c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2516,6 +2534,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "s/prop/configurationProperty",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7c45963_7551e8df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "to configurationPropertyInitialSequence",
+      "parentUuid": "47d0690f_c17e826c",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -2539,6 +2575,24 @@
     },
     {
       "key": {
+        "uuid": "a7c12554_74f2c81a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_e17b8679",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_01794a81",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2550,6 +2604,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "s/refString/runAsyncReference",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7c12554_b4f3801a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_01794a81",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -2573,6 +2645,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_13e36c4f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_21d56e38",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_c1c5a282",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2584,6 +2674,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "lotta blank lines",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_53ede437",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_c1c5a282",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -2607,6 +2715,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_f342703e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_e1d2a649",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_01d06a3f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2618,6 +2744,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "s/newArray/initializerArray",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_d3ec94db",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_01d06a3f",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -2641,6 +2785,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_f3e990c8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_41da7269",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_61df7658",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2652,6 +2814,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "Multimap\u003cString, JRunAsync\u003e runAsyncsByName \u003d LinkedHashMultimap.create();",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_13b60cf1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_61df7658",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -2675,6 +2855,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_73aca094",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_81e47a24",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_a1c89e9b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
         "patchSetId": 8
@@ -2692,6 +2890,24 @@
     },
     {
       "key": {
+        "uuid": "87bee1c4_93905c4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Util.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_a1c89e9b",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d0690f_41c1926f",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
         "patchSetId": 8
@@ -2703,6 +2919,24 @@
       "writtenOn": "2013-09-11T19:17:26Z",
       "side": 1,
       "message": "several whitespaces in this file",
+      "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_934a1cd2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-11T22:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d0690f_41c1926f",
       "revId": "a07b5580abc349a935ee285898e5289ed3c9e158",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

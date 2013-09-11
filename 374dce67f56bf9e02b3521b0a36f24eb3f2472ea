@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07b3d1fa_77573006",
+        "filename": "user/test/com/google/gwt/user/client/ui/FormPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-11T19:03:29Z",
+      "side": 1,
+      "message": "Unneeded?",
+      "revId": "374dce67f56bf9e02b3521b0a36f24eb3f2472ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

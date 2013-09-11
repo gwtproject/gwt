@@ -33,6 +33,23 @@
       "revId": "abbabcb785cf4ad15eda1dace2ed2477924b3a40",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_5335e4b8",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserChannel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-11T21:07:07Z",
+      "side": 1,
+      "message": "For reference, the C++ code is here:\nhttps://gwt.googlesource.com/gwt-plugins/+/master/common/HostChannel.cpp\n\nIt looks like it handles longs okay. However, I think the fact that this case was missing means we have never sent longs over the wire up until now. I\u0027m not sure when GWT devmode would send longs to a devmode plugin but we should probably figure out what the consequences are.",
+      "revId": "abbabcb785cf4ad15eda1dace2ed2477924b3a40",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

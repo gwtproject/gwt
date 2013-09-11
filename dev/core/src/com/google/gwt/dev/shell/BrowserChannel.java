@@ -334,7 +334,7 @@ public abstract class BrowserChannel {
         type = ValueType.JAVA_OBJECT;
       } else {
         throw new RuntimeException(
-            "Unexpected Java type in convertFromJavaValue: " + obj);
+            "Unexpected Java type in convertFromJavaValue: " + obj.getClass());
       }
       value = obj;
     }
@@ -573,7 +573,7 @@ public abstract class BrowserChannel {
     }
 
     public void setLong(long val) {
-      type = ValueType.BOOLEAN;
+      type = ValueType.LONG;
       value = Long.valueOf(val);
     }
 
@@ -1535,6 +1535,12 @@ public abstract class BrowserChannel {
     stream.writeInt(value);
   }
 
+  protected static void writeTaggedLong(DataOutputStream stream, long value)
+      throws IOException {
+    stream.writeByte(ValueType.LONG.getTag());
+    stream.writeLong(value);
+  }
+
   protected static void writeTaggedShort(DataOutputStream stream, short value)
       throws IOException {
     stream.writeByte(ValueType.SHORT.getTag());
@@ -1709,10 +1715,12 @@ public abstract class BrowserChannel {
       writeTaggedFloat(stream, value.getFloat());
     } else if (value.isInt()) {
       writeTaggedInt(stream, value.getInt());
+    } else if (value.isLong()) {
+      writeTaggedLong(stream, value.getLong());
     } else if (value.isString()) {
       writeTaggedString(stream, value.getString());
     } else {
-      assert false;
+      throw new IllegalArgumentException("Unexpected type: " + value);
     }
   }
 }

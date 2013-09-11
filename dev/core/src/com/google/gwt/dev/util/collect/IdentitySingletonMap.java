@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+@Deprecated
 class IdentitySingletonMap<K, V> implements Map<K, V>, Serializable {
 
   private class IdentityEntry implements Entry<K, V> {

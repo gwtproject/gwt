@@ -28,6 +28,7 @@ import java.util.Set;
  * size 0 or 1 are assumed to be immutable. All sets of size greater than 1 are
  * assumed to be mutable.
  */
+@Deprecated
 public class IdentitySets {
 
   private static class IdentitySingletonSet<E> extends AbstractSet<E> implements

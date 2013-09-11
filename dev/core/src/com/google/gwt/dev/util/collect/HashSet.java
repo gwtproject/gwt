@@ -31,6 +31,7 @@ import java.util.NoSuchElementException;
  * 
  * @param <E> the element type
  */
+@Deprecated
 public class HashSet<E> extends AbstractSet<E> implements Serializable {
 
   private class SetIterator implements Iterator<E> {

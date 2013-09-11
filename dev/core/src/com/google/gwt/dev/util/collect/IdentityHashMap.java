@@ -26,6 +26,7 @@ import java.util.Map;
  * @param <K> the key type
  * @param <V> the value type
  */
+@Deprecated
 public class IdentityHashMap<K, V> extends HashMap<K, V> {
 
   public IdentityHashMap() {

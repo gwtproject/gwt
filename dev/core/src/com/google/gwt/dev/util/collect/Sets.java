@@ -24,6 +24,7 @@ import java.util.Set;
  * 1 are assumed to be immutable. All sets of size greater than 1 are assumed to
  * be mutable.
  */
+@Deprecated
 public class Sets {
 
   private static final Class<?> MULTI_SET_CLASS = HashSet.class;

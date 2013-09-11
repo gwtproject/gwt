@@ -23,6 +23,7 @@ import java.util.Map;
  * 1 are assumed to be immutable. All maps of size greater than 1 are assumed to
  * be mutable.
  */
+@Deprecated
 public class IdentityMaps {
 
   private static final Class<?> MULTI_MAP_CLASS = IdentityHashMap.class;

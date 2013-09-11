@@ -25,6 +25,7 @@ import java.util.Collection;
  * 
  * @param <E> the element type
  */
+@Deprecated
 public class IdentityHashSet<E> extends HashSet<E> {
   public IdentityHashSet() {
   }

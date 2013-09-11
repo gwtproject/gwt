@@ -36,6 +36,7 @@ import java.util.Set;
  * @param <K> the key type
  * @param <V> the value type
  */
+@Deprecated
 public class HashMap<K, V> implements Map<K, V>, Serializable {
 
   /**

@@ -27,6 +27,7 @@ import java.util.List;
  * or 1 are assumed to be immutable. All lists of size greater than 1 are
  * assumed to be mutable.
  */
+@Deprecated
 public class Lists {
 
   private static final Class<?> MULTI_LIST_CLASS = ArrayList.class;

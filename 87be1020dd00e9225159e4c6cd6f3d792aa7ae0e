@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "87bee1c4_53b404c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-11T22:13:25Z",
+      "side": 1,
+      "message": "Can you fix the formatting and add punctuation?",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_d3b014d8",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-11T22:13:25Z",
+      "side": 1,
+      "message": "IIRC, com.google.gwt.dom.client.Element[] should work fine. Am I missing anything?",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_13ba8cb5",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-11T22:13:25Z",
+      "side": 1,
+      "message": "Can you add a reference to bug here?",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27f1b550_e0c52282",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7

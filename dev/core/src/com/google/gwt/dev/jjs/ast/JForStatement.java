@@ -37,8 +37,13 @@ public class JForStatement extends JStatement {
   public JForStatement(SourceInfo info, List<JStatement> initializers, JExpression condition,
       JExpression increments, JStatement body) {
     super(info);
+<<<<<<< HEAD
     this.initializers = Lists.newArrayList(initializers);
     this.condition = condition;
+=======
+    this.initializers = initializers;
+    this.testExpr = testExpr;
+>>>>>>> e80de80... CLEANUP: Replace c.g.g.dev.util.colllect by Guava collections.
     this.increments = increments;
     this.body = body;
   }

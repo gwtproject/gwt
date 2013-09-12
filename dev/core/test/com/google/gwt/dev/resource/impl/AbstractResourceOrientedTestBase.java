@@ -18,6 +18,7 @@ package com.google.gwt.dev.resource.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import junit.framework.TestCase;
 
@@ -69,7 +70,7 @@ public abstract class AbstractResourceOrientedTestBase extends TestCase {
     @Override
     public Map<AbstractResource, PathPrefix> findApplicableResources(
         TreeLogger logger, PathPrefixSet pathPrefixSet) {
-      Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
+      Map<AbstractResource, PathPrefix> results = Maps.newIdentityHashMap();
       Map<AbstractResource, PathPrefix> rs = cpe.findApplicableResources(
           logger, pathPrefixSet);
       for (Map.Entry<AbstractResource, PathPrefix> entry : rs.entrySet()) {

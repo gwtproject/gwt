@@ -23,7 +23,7 @@ import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -82,7 +82,7 @@ public class StandardCompilationResult extends CompilationResult {
   private final SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<SortedMap<SelectionProperty, String>>(
       MAP_COMPARATOR);
 
-  private List<SoftPermutation> softPermutations = Lists.create();
+  private List<SoftPermutation> softPermutations = Lists.newArrayList();
 
   private final StatementRanges[] statementRanges;
 
@@ -118,7 +118,7 @@ public class StandardCompilationResult extends CompilationResult {
   }
 
   public void addSoftPermutation(Map<SelectionProperty, String> propertyMap) {
-    softPermutations = Lists.add(softPermutations, new StandardSoftPermutation(
+    softPermutations.add(new StandardSoftPermutation(
         softPermutations.size(), propertyMap));
   }
 

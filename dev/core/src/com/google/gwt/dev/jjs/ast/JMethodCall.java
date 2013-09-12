@@ -16,9 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,7 +60,7 @@ public class JMethodCall extends JExpression {
     }
   }
 
-  private List<JExpression> args = Collections.emptyList();
+  private List<JExpression> args = Lists.newArrayList();
   private JExpression instance;
   private JMethod method;
   private final JType overrideReturnType;
@@ -115,28 +114,30 @@ public class JMethodCall extends JExpression {
    * Inserts an argument at the specified index.
    */
   public void addArg(int index, JExpression toAdd) {
-    args = Lists.add(args, index, toAdd);
+    args.add(index, toAdd);
   }
 
   /**
    * Adds an argument to this method.
    */
   public void addArg(JExpression toAdd) {
-    args = Lists.add(args, toAdd);
+    args.add(toAdd);
   }
 
   /**
    * Adds an argument to this method.
    */
   public void addArgs(JExpression... toAdd) {
-    args = Lists.addAll(args, toAdd);
+    for (JExpression exp : toAdd) {
+      args.add(exp);
+    }
   }
 
   /**
    * Adds arguments to this method.
    */
   public void addArgs(List<JExpression> toAdd) {
-    args = Lists.addAll(args, toAdd);
+    args.addAll(toAdd);
   }
 
   /**
@@ -195,7 +196,7 @@ public class JMethodCall extends JExpression {
    * Removes the argument at the specified index.
    */
   public void removeArg(int index) {
-    args = Lists.remove(args, index);
+    args.remove(index);
   }
 
   /**
@@ -210,7 +211,7 @@ public class JMethodCall extends JExpression {
    * Sets the argument at the specified index.
    */
   public void setArg(int index, JExpression arg) {
-    args = Lists.set(args, index, arg);
+    args.set(index, arg);
   }
 
   /**

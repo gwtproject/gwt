@@ -211,7 +211,12 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.IdentityHashMap;
+=======
+import java.util.HashMap;
+import java.util.HashSet;
+>>>>>>> e80de80... CLEANUP: Replace c.g.g.dev.util.colllect by Guava collections.
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -2884,7 +2889,7 @@ public class GwtAstBuilder {
     public final JClassType classType;
     public final ClassScope scope;
     public final Map<SyntheticArgumentBinding, JField> syntheticFields =
-        new IdentityHashMap<SyntheticArgumentBinding, JField>();
+        Maps.newIdentityHashMap();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
 
@@ -2912,7 +2917,7 @@ public class GwtAstBuilder {
     public final JMethodBody body;
     public final Map<String, JLabel> labels = Maps.newHashMap();
     public final Map<LocalVariableBinding, JVariable> locals =
-        new IdentityHashMap<LocalVariableBinding, JVariable>();
+        Maps.newIdentityHashMap();
     public final JMethod method;
     public final MethodScope scope;
 

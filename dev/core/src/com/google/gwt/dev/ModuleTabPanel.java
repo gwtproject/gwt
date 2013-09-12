@@ -19,6 +19,8 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.dev.SwingUI.TabPanelCollection;
 import com.google.gwt.dev.shell.WrapLayout;
 import com.google.gwt.dev.util.BrowserInfo;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -88,7 +90,7 @@ public class ModuleTabPanel extends JPanel {
       this.sessionKey = sessionKey;
       createTimestamp = System.currentTimeMillis();
       displayNameToModule = new HashMap<String, ModulePanel>();
-      moduleSessionMap = new IdentityHashMap<ModulePanel, SessionModule>();
+      moduleSessionMap = Maps.newIdentityHashMap();
       modules = new ArrayList<SessionModule>();
       moduleCounts = new HashMap<String, Integer>();
     }

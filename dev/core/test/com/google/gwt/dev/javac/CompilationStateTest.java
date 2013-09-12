@@ -29,7 +29,7 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -512,7 +512,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     // Compiled classes
     List<CompiledClass> compiledClasses =
-        Lists.create(unit.getCompiledClasses());
+        Lists.newArrayList(unit.getCompiledClasses());
     assertEquals(1, compiledClasses.size());
     CompiledClass compiledClass = compiledClasses.get(0);
     byte[] byteCode = compiledClass.getBytes();

@@ -17,7 +17,7 @@ package com.google.gwt.dev;
 
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.StaticPropertyOracle;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,8 +32,8 @@ public final class Permutation implements Serializable {
 
   private final int id;
 
-  private List<StaticPropertyOracle> orderedPropertyOracles = Lists.create();
-  private List<SortedMap<String, String>> orderedRebindAnswers = Lists.create();
+  private List<StaticPropertyOracle> orderedPropertyOracles = Lists.newArrayList();
+  private List<SortedMap<String, String>> orderedRebindAnswers = Lists.newArrayList();
 
   /**
    * Clones an existing permutation, but with a new id.
@@ -43,15 +43,14 @@ public final class Permutation implements Serializable {
    */
   public Permutation(int id, Permutation other) {
     this.id = id;
-    orderedPropertyOracles = Lists.create(other.orderedPropertyOracles);
-    orderedRebindAnswers = Lists.create(other.orderedRebindAnswers);
+    orderedPropertyOracles = Lists.newArrayList(other.orderedPropertyOracles);
+    orderedRebindAnswers = Lists.newArrayList(other.orderedRebindAnswers);
   }
 
   public Permutation(int id, StaticPropertyOracle propertyOracle) {
     this.id = id;
-    orderedPropertyOracles = Lists.add(orderedPropertyOracles, propertyOracle);
-    orderedRebindAnswers = Lists.add(orderedRebindAnswers,
-        new TreeMap<String, String>());
+    orderedPropertyOracles.add(propertyOracle);
+    orderedRebindAnswers.add(new TreeMap<String, String>());
   }
 
   public int getId() {
@@ -96,10 +95,8 @@ public final class Permutation implements Serializable {
    */
   public void mergeRebindsFromCollapsed(Permutation other) {
     assert other.orderedPropertyOracles.size() == other.orderedRebindAnswers.size();
-    orderedPropertyOracles = Lists.addAll(orderedPropertyOracles,
-        other.orderedPropertyOracles);
-    orderedRebindAnswers = Lists.addAll(orderedRebindAnswers,
-        other.orderedRebindAnswers);
+    orderedPropertyOracles.addAll(other.orderedPropertyOracles);
+    orderedRebindAnswers.addAll(other.orderedRebindAnswers);
     other.destroy();
   }
 
@@ -135,7 +132,7 @@ public final class Permutation implements Serializable {
    * in {@link #mergeFrom}.
    */
   private void destroy() {
-    orderedPropertyOracles = Lists.create();
-    orderedRebindAnswers = Lists.create();
+    orderedPropertyOracles = Lists.newArrayList();
+    orderedRebindAnswers = Lists.newArrayList();
   }
 }

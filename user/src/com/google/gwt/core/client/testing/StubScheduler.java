@@ -21,25 +21,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A no-op implementation of Scheduler that simply records its arguments.
+ * A fake scheduler that executes its scheduled commands only when specifically asked to.
+ *
+ * <p>Typical usage:
+ * <pre>
+ *   scheduleCommands(scheduler);
+ *   while (scheduler.getRepeatingCommands() || scheduler.executeScheduledCommands())
+ *     ;
+ * </pre>
  */
 public class StubScheduler extends Scheduler {
-  private final List<RepeatingCommand> repeatingCommands = new ArrayList<RepeatingCommand>();
 
+  private final List<RepeatingCommand> repeatingCommands = new ArrayList<RepeatingCommand>();
   private final List<ScheduledCommand> scheduledCommands = new ArrayList<ScheduledCommand>();
 
   /**
-   * Returns the RepeatingCommands that have been passed into the MockScheduler.
+   * Returns the currently scheduled {@link RepeatingCommand}s that would be executed
+   * by {@link #executeRepeatingCommands()}.
    */
   public List<RepeatingCommand> getRepeatingCommands() {
     return repeatingCommands;
   }
 
   /**
-   * Returns the ScheduledCommands that have been passed into the MockScheduler.
+   * Executes all scheduled {@link RepeatingCommand}s once. Does not execute the commands
+   * newly scheduled by the initial commands. Removes the commands that returned {@code false}.
+   *
+   * <p>After this method completes, {@link #getRepeatingCommands()} returns only the commands
+   * that are still scheduled.
+   *
+   * @return whether some commands are still scheduled
+   */
+  public boolean executeRepeatingCommands() {
+    List<RepeatingCommand> commands = new ArrayList<RepeatingCommand>(repeatingCommands);
+    repeatingCommands.clear();
+    for (RepeatingCommand command : commands) {
+      if (command.execute()) {
+        repeatingCommands.add(command);
+      }
+    }
+    return !repeatingCommands.isEmpty();
+  }
+
+  /**
+   * Returns the currently scheduled {@link ScheduledCommand}s that would be executed
+   * by {@link executeScheduledCommands()}.
    */
   public List<ScheduledCommand> getScheduledCommands() {
     return scheduledCommands;
+  }
+
+  /**
+   * Executes all scheduled {@link ScheduledCommand}s that have been passed to this scheduler,
+   * then removes all commands.
+   *
+   * <p>After this method completes, {@link getScheduledCommands()} returns only the commands
+   * that have been scheduled by the initial commands.
+   *
+   * @return whether some commands are still scheduled
+   */
+  public boolean executeScheduledCommands() {
+    List<ScheduledCommand> commands = new ArrayList<ScheduledCommand>(scheduledCommands);
+    scheduledCommands.clear();
+    for (ScheduledCommand command : commands) {
+      command.execute();
+    }
+    return !scheduledCommands.isEmpty();
   }
 
   @Override

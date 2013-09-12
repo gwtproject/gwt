@@ -19,14 +19,13 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -115,11 +114,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * EXHAUSTIVE list, that is, if C overrides B overrides A, then C's overrides
    * list will contain both A and B.
    */
-  private List<JMethod> overrides = Collections.emptyList();
+  private List<JMethod> overrides = Lists.newArrayList();
 
-  private List<JParameter> params = Collections.emptyList();
+  private List<JParameter> params = Lists.newArrayList();
   private JType returnType;
-  private List<JClassType> thrownExceptions = Collections.emptyList();
+  private List<JClassType> thrownExceptions = Lists.newArrayList();
 
   private boolean trace = false;
 
@@ -173,7 +172,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    */
   public void addOverride(JMethod toAdd) {
     assert canBePolymorphic();
-    overrides = Lists.add(overrides, toAdd);
+    overrides.add(toAdd);
   }
 
   /**
@@ -181,22 +180,22 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    */
   public void addOverrides(List<JMethod> toAdd) {
     assert canBePolymorphic();
-    overrides = Lists.addAll(overrides, toAdd);
+    overrides.addAll(toAdd);
   }
 
   /**
    * Adds a parameter to this method.
    */
   public void addParam(JParameter x) {
-    params = Lists.add(params, x);
+    params.add(x);
   }
 
   public void addThrownException(JClassType exceptionType) {
-    thrownExceptions = Lists.add(thrownExceptions, exceptionType);
+    thrownExceptions.add(exceptionType);
   }
 
   public void addThrownExceptions(List<JClassType> exceptionTypes) {
-    thrownExceptions = Lists.addAll(thrownExceptions, exceptionTypes);
+    thrownExceptions.addAll(exceptionTypes);
   }
 
   /**
@@ -338,7 +337,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * Removes the parameter at the specified index.
    */
   public void removeParam(int index) {
-    params = Lists.remove(params, index);
+    params.remove(index);
   }
 
   /**
@@ -353,9 +352,9 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
       assert JType.replaces(thrownExceptions, this.thrownExceptions);
     }
     this.originalReturnType = originalReturnType;
-    this.originalParamTypes = Lists.normalize(originalParamTypes);
+    this.originalParamTypes = originalParamTypes;
     this.returnType = returnType;
-    this.thrownExceptions = Lists.normalize(thrownExceptions);
+    this.thrownExceptions = thrownExceptions;
   }
 
   public void setAbstract(boolean isAbstract) {
@@ -378,7 +377,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
       throw new InternalCompilerException("Param types already frozen");
     }
     originalReturnType = returnType;
-    originalParamTypes = Lists.normalize(paramTypes);
+    originalParamTypes = paramTypes;
 
     // Determine if we should trace this method.
     if (enclosingType != null) {

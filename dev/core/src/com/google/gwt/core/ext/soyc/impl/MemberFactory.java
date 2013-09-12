@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,10 +19,10 @@ import com.google.gwt.core.ext.soyc.Member;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
@@ -31,7 +31,7 @@ import java.util.Map;
  * by MemberFactory use hard, identity-based references.
  */
 public class MemberFactory {
-  private final Map<Class<?>, Map<?, ?>> map = new IdentityHashMap<Class<?>, Map<?, ?>>();
+  private final Map<Class<?>, Map<?, ?>> map = Maps.newIdentityHashMap();
 
   public StandardClassMember get(JDeclaredType type) {
     return getOrCreate(type, StandardClassMember.class, JDeclaredType.class);
@@ -49,7 +49,7 @@ public class MemberFactory {
   private <K, V extends Member> Map<K, V> getElementMap(Class<V> clazz) {
     Map<K, V> elementMap = (Map<K, V>) map.get(clazz);
     if (elementMap == null) {
-      elementMap = new IdentityHashMap<K, V>();
+      elementMap = Maps.newIdentityHashMap();
       map.put(clazz, elementMap);
     }
     return elementMap;
@@ -58,7 +58,7 @@ public class MemberFactory {
   /**
    * Assumes that the implementation of Member has a two-arg constructor that
    * accepts a MemberFactory and the key.
-   * 
+   *
    * @param <K> the type of key used to canonicalize the mapping
    * @param <V> the type of Member implementation to use
    * @param key the key by which the value should be canonicalized

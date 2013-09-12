@@ -17,7 +17,7 @@ package com.google.gwt.dev.jjs.impl.gflow.liveness;
 
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.impl.gflow.Assumption;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,7 +72,7 @@ public class LivenessAssumption implements Assumption<LivenessAssumption> {
   /**
    * Set of all live variables.
    */
-  private final Set<JVariable> liveVariables = new IdentityHashSet<JVariable>();
+  private final Set<JVariable> liveVariables = Sets.newIdentityHashSet();
   
   public LivenessAssumption() {
     super();

@@ -17,8 +17,8 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.Serializable;
 import java.util.List;
@@ -56,14 +56,15 @@ class Dependencies implements Serializable {
     }
   }
 
-  Map<String, Ref> qualified = new HashMap<String, Ref>(true);
-  Map<String, Ref> simple = new HashMap<String, Ref>(true);
+  // The following maps were marked stable for serializations
+  Map<String, Ref> qualified = Maps.newTreeMap();
+  Map<String, Ref> simple = Maps.newTreeMap();
   private final List<String> apiRefs;
   private final String myPackage;
 
   Dependencies() {
     this.myPackage = "";
-    this.apiRefs = Lists.create();
+    this.apiRefs = Lists.newArrayList();
   }
 
   /**
@@ -94,10 +95,10 @@ class Dependencies implements Serializable {
    * Returns the list of deps that cannot be resolved at all.
    */
   List<String> findMissingApiRefs(Set<String> allValidClasses) {
-    List<String> result = Lists.create();
+    List<String> result = Lists.newArrayList();
     for (String apiRef : apiRefs) {
       if (!allValidClasses.contains(apiRef)) {
-        result = Lists.add(result, apiRef);
+        result.add(apiRef);
       }
     }
     return result;

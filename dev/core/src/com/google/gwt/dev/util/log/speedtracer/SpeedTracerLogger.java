@@ -18,7 +18,7 @@ package com.google.gwt.dev.util.log.speedtracer;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonObject;
 import com.google.gwt.dev.shell.DevModeSession;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.dev.util.log.dashboard.DashboardNotifierFactory;
 
 import java.io.BufferedWriter;
@@ -121,8 +121,8 @@ public final class SpeedTracerLogger {
           threadCpuTimeKeeper.resetTimeBase();
         }
         recordStartTime();
-        this.data = Lists.create();
-        this.children = Lists.create();
+        this.data = Lists.newArrayList();
+        this.children = Lists.newArrayList();
       } else {
         this.processCpuStartTimeNanos = 0L;
         this.threadCpuStartTimeNanos = 0L;
@@ -136,13 +136,13 @@ public final class SpeedTracerLogger {
     Event(DevModeSession session, Event parent, EventType type, String... data) {
 
       if (parent != null) {
-        parent.children = Lists.add(parent.children, this);
+        parent.children.add(this);
       }
       this.type = type;
       assert (data.length % 2 == 0);
       recordStartTime();
-      this.data = Lists.create(data);
-      this.children = Lists.create();
+      this.data = Lists.newArrayList(data);
+      this.children = Lists.newArrayList();
       this.devModeSession = session;
     }
 
@@ -150,9 +150,12 @@ public final class SpeedTracerLogger {
      * @param data key/value pairs to add to JSON object.
      */
     public void addData(String... data) {
-      if (data != null) {
-        assert (data.length % 2 == 0);
-        this.data = Lists.addAll(this.data, data);
+      if (data == null) {
+        return;
+      }
+      assert (data.length % 2 == 0);
+      for (String datum : data) {
+        this.data.add(datum);
       }
     }
     
@@ -549,7 +552,7 @@ public final class SpeedTracerLogger {
     public MarkTimelineEvent(Event parent) {
       super();
       if (parent != null) {
-        parent.children = Lists.add(parent.children, this);
+        parent.children.add(this);
       }
     }
 

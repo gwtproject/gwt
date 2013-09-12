@@ -29,8 +29,7 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
-import com.google.gwt.dev.util.collect.IdentityMaps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
@@ -170,9 +169,9 @@ public class JsniCollector {
       CompilationUnitDeclaration cud, String sourceMapPath,
       String source, JsScope scope,
       CorrelationFactory correlator) {
-    Map<MethodDeclaration, JsniMethod> jsniMethods = new IdentityHashMap<MethodDeclaration, JsniMethod>();
+    Map<MethodDeclaration, JsniMethod> jsniMethods = Maps.newIdentityHashMap();
     new Visitor(source, scope, correlator, jsniMethods).collect(cud, sourceMapPath);
-    return IdentityMaps.normalizeUnmodifiable(jsniMethods);
+    return jsniMethods;
   }
 
   public static JsFunction parseJsniFunction(AbstractMethodDeclaration method,

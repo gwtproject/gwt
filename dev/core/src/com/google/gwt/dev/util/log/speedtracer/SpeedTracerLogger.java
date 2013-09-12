@@ -18,8 +18,8 @@ package com.google.gwt.dev.util.log.speedtracer;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonObject;
 import com.google.gwt.dev.shell.DevModeSession;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.dashboard.DashboardNotifierFactory;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -30,6 +30,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -121,8 +122,8 @@ public final class SpeedTracerLogger {
           threadCpuTimeKeeper.resetTimeBase();
         }
         recordStartTime();
-        this.data = Lists.create();
-        this.children = Lists.create();
+        this.data = Lists.newArrayList();
+        this.children = Lists.newArrayList();
       } else {
         this.processCpuStartTimeNanos = 0L;
         this.threadCpuStartTimeNanos = 0L;
@@ -136,13 +137,13 @@ public final class SpeedTracerLogger {
     Event(DevModeSession session, Event parent, EventType type, String... data) {
 
       if (parent != null) {
-        parent.children = Lists.add(parent.children, this);
+        parent.children.add(this);
       }
       this.type = type;
       assert (data.length % 2 == 0);
       recordStartTime();
-      this.data = Lists.create(data);
-      this.children = Lists.create();
+      this.data = Lists.newArrayList(data);
+      this.children = Lists.newArrayList();
       this.devModeSession = session;
     }
 
@@ -152,7 +153,7 @@ public final class SpeedTracerLogger {
     public void addData(String... data) {
       if (data != null) {
         assert (data.length % 2 == 0);
-        this.data = Lists.addAll(this.data, data);
+        this.data.addAll(Arrays.asList(data));
       }
     }
 
@@ -549,7 +550,7 @@ public final class SpeedTracerLogger {
     public MarkTimelineEvent(Event parent) {
       super();
       if (parent != null) {
-        parent.children = Lists.add(parent.children, this);
+        parent.children.add(this);
       }
     }
 

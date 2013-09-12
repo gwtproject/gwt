@@ -60,6 +60,7 @@ import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -626,7 +627,7 @@ public class JsInliner {
      * A map containing the next integer to try as an identifier suffix for a
      * given JsScope.
      */
-    private IdentityHashMap<JsScope, HashMap<String, Integer>> startIdentForScope = new IdentityHashMap<JsScope, HashMap<String, Integer>>();
+    private IdentityHashMap<JsScope, HashMap<String, Integer>> startIdentForScope = Maps.newIdentityHashMap();
 
     /**
      * Not a stack because program fragments aren't nested.
@@ -1079,7 +1080,7 @@ public class JsInliner {
    */
   private static class InvocationCountingVisitor extends JsVisitor {
     private boolean removingCounts = false;
-    private final Map<JsFunction, Integer> invocationCount = new IdentityHashMap<JsFunction, Integer>();
+    private final Map<JsFunction, Integer> invocationCount = Maps.newIdentityHashMap();
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
@@ -1133,7 +1134,7 @@ public class JsInliner {
     //            singleInvokations(fn) = MULTIPLE =>  mutiple callsites to fn have been seen.
     //            singleInvokations(fn) = caller =>  one callsite has been seen an occurs in caller.
     private final Map<JsFunction, JsFunction> singleInvocations =
-        new IdentityHashMap<JsFunction, JsFunction>();
+        Maps.newIdentityHashMap();
 
     // Indicates multiple invocations were found (only identity is used).
     private static final JsFunction MULTIPLE = JsFunction.createSentinel();
@@ -1196,13 +1197,13 @@ public class JsInliner {
     /**
      * Set up a map to record name replacements to perform.
      */
-    final Map<JsName, JsName> nameReplacements = new IdentityHashMap<JsName, JsName>();
+    final Map<JsName, JsName> nameReplacements = Maps.newIdentityHashMap();
 
     /**
      * Set up a map of parameter names back to the expressions that will be
      * passed in from the outer call site.
      */
-    final Map<JsName, JsExpression> paramsToArgsMap = new IdentityHashMap<JsName, JsExpression>();
+    final Map<JsName, JsExpression> paramsToArgsMap = Maps.newIdentityHashMap();
 
     /**
      * A replacement expression for this references.
@@ -1401,7 +1402,7 @@ public class JsInliner {
    * the lifetime of the program.
    */
   private static class RedefinedFunctionCollector extends JsVisitor {
-    private final Map<JsName, JsFunction> nameMap = new IdentityHashMap<JsName, JsFunction>();
+    private final Map<JsName, JsFunction> nameMap = Maps.newIdentityHashMap();
     private final Set<JsFunction> redefined = new HashSet<JsFunction>();
 
     /**

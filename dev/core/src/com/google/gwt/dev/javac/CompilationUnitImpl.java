@@ -17,7 +17,8 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
@@ -35,7 +36,7 @@ abstract class CompilationUnitImpl extends CompilationUnit {
   protected transient long astToken;
 
   private final Dependencies dependencies;
-  private final List<CompiledClass> exposedCompiledClasses;
+  private final ImmutableList<CompiledClass> exposedCompiledClasses;
   private final boolean hasErrors;
   private final List<JsniMethod> jsniMethods;
   private final MethodArgNamesLookup methodArgs;
@@ -45,9 +46,9 @@ abstract class CompilationUnitImpl extends CompilationUnit {
       List<JDeclaredType> types, Dependencies dependencies,
       Collection<? extends JsniMethod> jsniMethods,
       MethodArgNamesLookup methodArgs, CategorizedProblem[] problems) {
-    this.exposedCompiledClasses = Lists.normalizeUnmodifiable(compiledClasses);
+    this.exposedCompiledClasses = ImmutableList.copyOf(compiledClasses);
     this.dependencies = dependencies;
-    this.jsniMethods = Lists.create(jsniMethods.toArray(new JsniMethod[jsniMethods.size()]));
+    this.jsniMethods = Lists.newArrayList(jsniMethods.toArray(new JsniMethod[jsniMethods.size()]));
     this.methodArgs = methodArgs;
     this.problems = problems;
     boolean hasAnyErrors = false;
@@ -74,6 +75,7 @@ abstract class CompilationUnitImpl extends CompilationUnit {
     }
   }
 
+  // TODO(rluble): The return should be declared as an immutable collection (ImmutableList perhaps?)
   @Override
   public Collection<CompiledClass> getCompiledClasses() {
     return exposedCompiledClasses;

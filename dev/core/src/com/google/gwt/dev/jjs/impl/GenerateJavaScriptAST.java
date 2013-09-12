@@ -180,7 +180,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -720,7 +719,7 @@ public class GenerateJavaScriptAST {
 
     private final Set<JClassType> alreadyRan = Sets.newLinkedHashSet();
 
-    private final List<JsStatement> exportStmts = new ArrayList<JsStatement>();
+    private final List<JsStatement> exportStmts = Lists.newArrayList();
     private final JsName arrayLength = objectScope.declareName("length");
 
     private final Map<JClassType, JsFunction> clinitMap = Maps.newHashMap();

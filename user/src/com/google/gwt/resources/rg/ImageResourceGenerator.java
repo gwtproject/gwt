@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,8 +22,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Maps;
-import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 import com.google.gwt.resources.client.impl.ImageResourcePrototype;
@@ -36,6 +34,8 @@ import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.resources.rg.ImageBundleBuilder.Arranger;
 import com.google.gwt.resources.rg.ImageBundleBuilder.ImageRect;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
@@ -60,15 +60,15 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
     private final ImageBundleBuilder builder;
     private boolean dirty = false;
     private Map<LocalizedImage, ImageRect> images;
-    private Set<LocalizedImage> rtlImages = Sets.create();
+    private Set<LocalizedImage> rtlImages = Sets.newHashSet();
     private Map<ImageResourceDeclaration, LocalizedImage> localizedByImageResource;
     private String normalContentsUrlExpression;
     private String rtlContentsUrlExpression;
 
     public BundledImage() {
       builder = new ImageBundleBuilder();
-      images = Maps.create();
-      localizedByImageResource = Maps.create();
+      images = Maps.newHashMap();
+      localizedByImageResource = Maps.newHashMap();
     }
 
     @Override
@@ -81,7 +81,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
         CannotBundleImageException {
 
       LocalizedImage localized = LocalizedImage.create(logger, context, image);
-      localizedByImageResource = Maps.put(localizedByImageResource, image, localized);
+      localizedByImageResource.put(image, localized);
       if (images.containsKey(localized)) {
         return localized;
       }
@@ -95,7 +95,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
           builder.removeMapping(image.get());
           throw new CannotBundleImageException(localized, rect);
         }
-        images = Maps.put(images, localized, rect);
+        images.put(localized, rect);
       } catch (UnsuitableForStripException e) {
         rect = e.getImageRect();
         throw new CannotBundleImageException(localized, rect);
@@ -184,7 +184,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
 
     @Override
     public void setRtlImage(LocalizedImage image) {
-      rtlImages = Sets.add(rtlImages, image);
+      rtlImages.add(image);
     }
   }
 
@@ -390,7 +390,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
     public boolean isFlipRtl() {
       return options == null ? false : options.flipRtl();
     }
-    
+
     public boolean isPreventInlining() {
       return options == null ? false : options.preventInlining();
     }

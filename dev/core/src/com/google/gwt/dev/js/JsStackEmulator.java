@@ -59,8 +59,8 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.js.ast.JsWhile;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
 import java.util.HashSet;
@@ -221,7 +221,7 @@ public class JsStackEmulator {
      * a single value because a finally block might be nested in another exit
      * block.
      */
-    private Map<JsBlock, JsName> finallyBlocksToExitVariables = Maps.create();
+    private final Map<JsBlock, JsName> finallyBlocksToExitVariables = Maps.newHashMap();
 
     /**
      * This variable will indicate the finally block that contains the last
@@ -239,7 +239,7 @@ public class JsStackEmulator {
     /**
      * Final cleanup for any new local variables that need to be created.
      */
-    private List<JsVar> varsToAdd = Lists.create();
+    private final List<JsVar> varsToAdd = Lists.newArrayList();
 
     public EntryExitVisitor(JsFunction currentFunction) {
       this.currentFunction = currentFunction;
@@ -362,8 +362,7 @@ public class JsStackEmulator {
         addPopAtEndOfBlock(finallyBlock, true);
 
         // Clean up entry after adding pop instruction
-        finallyBlocksToExitVariables = Maps.remove(
-            finallyBlocksToExitVariables, finallyBlock);
+        finallyBlocksToExitVariables.remove(finallyBlock);
         return false;
       }
 
@@ -381,7 +380,7 @@ public class JsStackEmulator {
             "JsStackEmulator_stackIndex", "stackIndex");
 
         JsVar var = new JsVar(info, stackIndex);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return stackIndex.makeRef(info);
     }
@@ -438,10 +437,9 @@ public class JsStackEmulator {
             "JsStackEmulator_exitingEarly"
                 + finallyBlocksToExitVariables.size(), "exitingEarly");
 
-        finallyBlocksToExitVariables = Maps.put(finallyBlocksToExitVariables,
-            x, earlyExitName);
+        finallyBlocksToExitVariables.put(x, earlyExitName);
         JsVar var = new JsVar(x.getSourceInfo(), earlyExitName);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return earlyExitName.makeRef(x.getSourceInfo());
     }
@@ -552,7 +550,7 @@ public class JsStackEmulator {
             "JsStackEmulator_returnTemp", "returnTemp");
 
         JsVar var = new JsVar(info, returnTemp);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return returnTemp.makeRef(info);
     }

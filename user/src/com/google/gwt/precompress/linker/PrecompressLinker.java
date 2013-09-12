@@ -26,7 +26,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
-import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.util.regexfilter.RegexFilter;
 
 import java.io.ByteArrayOutputStream;
@@ -121,7 +121,7 @@ public class PrecompressLinker extends AbstractLinker {
         context.getConfigurationProperties(), PROP_PATH_REGEXES).getValues());
 
     // Record the list of all paths for later lookup
-    Set<String> allPaths = new HashSet<String>();
+    Set<String> allPaths = Sets.newHashSet();
     for (EmittedArtifact art : artifacts.find(EmittedArtifact.class)) {
       allPaths.add(art.getPartialPath());
     }

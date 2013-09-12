@@ -17,7 +17,7 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.Name.BinaryName;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,11 +53,11 @@ public class JGwtCreate extends JExpression {
   }
 
   static List<String> nameOf(Collection<? extends JType> types) {
-    List<String> result = Lists.create();
+    List<String> result = Lists.newArrayList();
     for (JType type : types) {
-      result = Lists.add(result, BinaryName.toSourceName(type.getName()));
+      result.add(BinaryName.toSourceName(type.getName()));
     }
-    return Lists.normalizeUnmodifiable(result);
+    return result;
   }
 
   private static ArrayList<JExpression> createInstantiationExpressions(SourceInfo info,

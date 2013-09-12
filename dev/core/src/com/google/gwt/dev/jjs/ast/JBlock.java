@@ -16,8 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class JBlock extends JStatement {
 
-  private final List<JStatement> statements = new ArrayList<JStatement>();
+  private final List<JStatement> statements = Lists.newArrayList();
 
   public JBlock(SourceInfo info) {
     super(info);

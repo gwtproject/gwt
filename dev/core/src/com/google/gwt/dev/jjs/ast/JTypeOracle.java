@@ -18,21 +18,17 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.util.arg.JsInteropMode;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.IdentitySets;
-import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -57,17 +53,17 @@ public class JTypeOracle implements Serializable {
     /**
      * A mapping from a class name to its immediate super class' name.
      */
-    private Map<String, String> superClassesByClass = new HashMap<String, String>();
+    private Map<String, String> superClassesByClass = Maps.newHashMap();
 
     /**
      * A mapping from an interface name to its super interface's name.
      */
-    private Map<String, Set<String>> superIntfsByIntf = new HashMap<String, Set<String>>();
+    private Map<String, Set<String>> superIntfsByIntf = Maps.newHashMap();
 
     /**
      * A mapping from a class name to its directly implemented interfaces' names.
      */
-    private Map<String, Set<String>> implementedIntfsByClass = new HashMap<String, Set<String>>();
+    private Map<String, Set<String>> implementedIntfsByClass = Maps.newHashMap();
 
     @VisibleForTesting
     public Map<String, String> getSuperClassesByClass() {
@@ -107,10 +103,10 @@ public class JTypeOracle implements Serializable {
     private String nullType;
   }
 
-  private LinkedHashSet<JMethod> exportedMethods = new LinkedHashSet<JMethod>();
-  private LinkedHashSet<JField> exportedFields = new LinkedHashSet<JField>();
+  private LinkedHashSet<JMethod> exportedMethods = Sets.newLinkedHashSet();
+  private LinkedHashSet<JField> exportedFields = Sets.newLinkedHashSet();
 
-  private Set<JReferenceType> instantiatedJsoTypesViaCast = new HashSet<JReferenceType>();
+  private Set<JReferenceType> instantiatedJsoTypesViaCast = Sets.newHashSet();
   private JsInteropMode jsInteropMode;
 
   public LinkedHashSet<JMethod> getExportedMethods() {
@@ -258,7 +254,7 @@ public class JTypeOracle implements Serializable {
    */
   private static final class CheckClinitVisitor extends JVisitor {
 
-    private final Set<JDeclaredType> clinitTargets = new IdentityHashSet<JDeclaredType>();
+    private final Set<JDeclaredType> clinitTargets = Sets.newIdentityHashSet();
 
     /**
      * Tracks whether any live code is run in this clinit. This is only reliable
@@ -401,33 +397,31 @@ public class JTypeOracle implements Serializable {
   /**
    * A set of all classes in the current program.
    */
-  private Set<String> allClasses = new HashSet<String>();
+  private Set<String> allClasses = Sets.newHashSet();
 
   /**
    * A map of all interfaces to the set of classes that could theoretically
    * implement them.
    */
-  private final Map<String, Set<String>> couldBeImplementedMap =
-      new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> couldBeImplementedMap = Maps.newHashMap();
 
   /**
    * A map of all classes to the set of interfaces that they could theoretically
    * implement.
    */
-  private final Map<String, Set<String>> couldImplementMap =
-      new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> couldImplementMap = Maps.newHashMap();
 
   /**
    * The set of all interfaces that are initially implemented by both a Java and
    * Overlay type.
    */
-  private final Set<String> dualImpls = new HashSet<String>();
+  private final Set<String> dualImpls = Sets.newHashSet();
 
   /**
    * A map of all classes to the set of interfaces they directly implement,
    * possibly through inheritance.
    */
-  private final Map<String, Set<String>> implementsMap = new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> implementsMap = Maps.newHashMap();
 
   /**
    * The types in the program that are instantiable. All types in this set
@@ -440,48 +434,46 @@ public class JTypeOracle implements Serializable {
    * A map of all interfaces to the set of classes that directly implement them,
    * possibly through inheritance.
    */
-  private final Map<String, Set<String>> isImplementedMap =
-      new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> isImplementedMap = Maps.newHashMap();
 
   /**
    * A map of all interfaces that are implemented by overlay types to the
    * overlay type that initially implements it.
    */
-  private final Map<String, String> jsoSingleImpls = new HashMap<String, String>();
+  private final Map<String, String> jsoSingleImpls = Maps.newHashMap();
 
   /**
    * A set of all JsTypes.
    */
-  private final Set<JInterfaceType> jsInterfaces = new IdentityHashSet<JInterfaceType>();
+  private final Set<JInterfaceType> jsInterfaces = Sets.newIdentityHashSet();
 
   /**
    * A mapping from the type name to the actual type instance.
    */
-  private Map<String, JReferenceType> referenceTypesByName = new HashMap<String, JReferenceType>();
+  private Map<String, JReferenceType> referenceTypesByName = Maps.newHashMap();
 
   /**
    * A map of all classes to the set of classes that extend them, directly or
    * indirectly.
    */
-  private final Map<String, Set<String>> subClassMap = new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> subClassMap = Maps.newHashMap();
 
   /**
    * A map of all interfaces to the set of interfaces that extend them, directly or indirectly.
    */
-  private final Map<String, Set<String>> subInterfacesByInterface =
-      new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> subInterfacesByInterface = Maps.newHashMap();
 
   /**
    * A map of all classes to the set of classes they extend, directly or
    * indirectly.
    */
-  private final Map<String, Set<String>> superClassMap = new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> superClassMap = Maps.newHashMap();
 
   /**
    * A map of all interfaces to the set of interfaces they extend, directly or
    * indirectly.
    */
-  private final Map<String, Set<String>> superInterfaceMap = new HashMap<String, Set<String>>();
+  private final Map<String, Set<String>> superInterfaceMap = Maps.newHashMap();
   /**
    * A map of all methods with virtual overrides, onto the collection of
    * overridden methods. Each key method's collections is a map of the set of
@@ -490,13 +482,13 @@ public class JTypeOracle implements Serializable {
    * override, see {@link #getAllVirtualOverrides(JMethod)}.
    */
   private final Map<JMethod, Map<JClassType, Set<JMethod>>> virtualUpRefMap =
-      new IdentityHashMap<JMethod, Map<JClassType, Set<JMethod>>>();
+      Maps.newIdentityHashMap();
 
   /**
    * An index of all polymorphic methods for each class.
    */
   private final Map<JClassType, Map<String, JMethod>> methodsBySignatureForType =
-      new IdentityHashMap<JClassType, Map<String, JMethod>>();
+      Maps.newIdentityHashMap();
 
   private final boolean hasWholeWorldKnowledge;
   private boolean optimize = true;
@@ -1122,7 +1114,7 @@ public class JTypeOracle implements Serializable {
    * associated JProgram.
    */
   public void recomputeAfterOptimizations(Collection<JDeclaredType> declaredTypes) {
-    Set<JDeclaredType> computed = new IdentityHashSet<JDeclaredType>();
+    Set<JDeclaredType> computed = Sets.newIdentityHashSet();
 
     if (hasWholeWorldKnowledge) {
       if (optimize) {
@@ -1195,7 +1187,7 @@ public class JTypeOracle implements Serializable {
         List<JInterfaceType> list = jClassType.getImplements();
         // Record immediately implemented interfaces.
         if (!list.isEmpty()) {
-          Set<String> hashSet = new HashSet<String>();
+          Set<String> hashSet = Sets.newHashSet();
           for (JInterfaceType jInterfaceType : list) {
             hashSet.add(jInterfaceType.getName());
           }
@@ -1208,7 +1200,7 @@ public class JTypeOracle implements Serializable {
 
         // Record immediate super interfaces.
         if (!intfImplements.isEmpty()) {
-          Set<String> hashSet = new HashSet<String>();
+          Set<String> hashSet = Sets.newHashSet();
           for (JInterfaceType jInterfaceType : intfImplements) {
             hashSet.add(jInterfaceType.getName());
           }
@@ -1254,7 +1246,7 @@ public class JTypeOracle implements Serializable {
     couldImplementMap.clear();
 
     for (String currentClass : allClasses) {
-      Set<String> couldImplementSet = new HashSet<String>();
+      Set<String> couldImplementSet = Sets.newHashSet();
       // All of my direct implements are trivially true
       couldImplementSet.addAll(get(implementsMap, currentClass));
 
@@ -1293,8 +1285,8 @@ public class JTypeOracle implements Serializable {
     implementsMap.clear();
 
     for (String currentClass : allClasses) {
-      Set<String> allImplementedInterfaces = new HashSet<String>();
-      Set<String> localInterfaces = new HashSet<String>();
+      Set<String> allImplementedInterfaces =  Sets.newHashSet();
+      Set<String> localInterfaces =  Sets.newHashSet();
 
       // Get interfaces implemented by the current class
       localInterfaces.addAll(get(immediateTypeRelations.implementedIntfsByClass, currentClass));
@@ -1359,7 +1351,7 @@ public class JTypeOracle implements Serializable {
     }
 
     for (String parent : interfaces) {
-      Set<String> allSubInterfaces = new HashSet<String>();
+      Set<String> allSubInterfaces =  Sets.newHashSet();
       computeTransitiveSubClasses(immediateChildInterfaces, allSubInterfaces, parent);
       subInterfacesByInterface.put(parent, allSubInterfaces);
     }
@@ -1377,7 +1369,7 @@ public class JTypeOracle implements Serializable {
     }
 
     for (String parent : allClasses) {
-      Set<String> allSubClasses = new HashSet<String>();
+      Set<String> allSubClasses =  Sets.newHashSet();
       computeTransitiveSubClasses(immediateChildClasses, allSubClasses, parent);
       subClassMap.put(parent, allSubClasses);
     }
@@ -1388,7 +1380,7 @@ public class JTypeOracle implements Serializable {
     Set<String> allExtendingClasses = immediateTypeRelations.superClassesByClass.keySet();
 
     for (String typeName : allExtendingClasses) {
-      Set<String> allSuperTypesSet = new HashSet<String>();
+      Set<String> allSuperTypesSet =  Sets.newHashSet();
       String superClass = immediateTypeRelations.superClassesByClass.get(typeName);
       while (superClass != null) {
         allSuperTypesSet.add(superClass);
@@ -1402,10 +1394,10 @@ public class JTypeOracle implements Serializable {
     superInterfaceMap.clear();
     Set<String> allInterfaces = immediateTypeRelations.superIntfsByIntf.keySet();
     for (String interfaceName : allInterfaces) {
-      Set<String> allParentInterfaces = new HashSet<String>();
+      Set<String> allParentInterfaces =  Sets.newHashSet();
       computeSuperIntf(interfaceName, allParentInterfaces);
       if (!allParentInterfaces.isEmpty()) {
-        superInterfaceMap.put(interfaceName, IdentitySets.normalize(allParentInterfaces));
+        superInterfaceMap.put(interfaceName, allParentInterfaces);
       }
     }
   }
@@ -1432,7 +1424,7 @@ public class JTypeOracle implements Serializable {
     } else {
       // I still have a real clinit, actually compute.
       JDeclaredType target =
-          computeClinitTargetRecursive(type, computed, new IdentityHashSet<JDeclaredType>());
+          computeClinitTargetRecursive(type, computed, Sets.<JDeclaredType>newIdentityHashSet());
       type.setClinitTarget(target);
     }
     computed.add(type);
@@ -1596,7 +1588,7 @@ public class JTypeOracle implements Serializable {
   private Set<JReferenceType> getTypes(Map<String, Set<String>> typeNamesByTypeName,
       String typeName) {
     Set<String> typeNames = get(typeNamesByTypeName, typeName);
-    IdentityHashSet<JReferenceType> types = new IdentityHashSet<JReferenceType>();
+    Set<JReferenceType> types = Sets.newIdentityHashSet();
 
     for (String localTypeName : typeNames) {
       JReferenceType referenceType = referenceTypesByName.get(localTypeName);
@@ -1610,7 +1602,7 @@ public class JTypeOracle implements Serializable {
   private <K, V> Set<V> getOrCreate(Map<K, Set<V>> map, K key) {
     Set<V> set = map.get(key);
     if (set == null) {
-      set = new HashSet<V>();
+      set = Sets.newHashSet();
       map.put(key, set);
     }
     return set;
@@ -1619,7 +1611,7 @@ public class JTypeOracle implements Serializable {
   private <K, K2, V> Map<K2, V> getOrCreateMap(Map<K, Map<K2, V>> map, K key) {
     Map<K2, V> map2 = map.get(key);
     if (map2 == null) {
-      map2 = new HashMap<K2, V>();
+      map2 = Maps.newHashMap();
       map.put(key, map2);
     }
     return map2;
@@ -1641,7 +1633,6 @@ public class JTypeOracle implements Serializable {
           methodsBySignature.put(method.getSignature(), method);
         }
       }
-      methodsBySignature = Maps.normalize(methodsBySignature);
       methodsBySignatureForType.put(type, methodsBySignature);
     }
     return methodsBySignature;

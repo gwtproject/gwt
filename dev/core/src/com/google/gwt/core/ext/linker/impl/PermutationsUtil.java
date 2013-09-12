@@ -22,9 +22,9 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.dev.util.StringKey;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -177,13 +177,12 @@ public class PermutationsUtil {
       TreeMap<String, String> entries = selInfo.getPropMap();
       PermutationId permutationId = new PermutationId(selInfo.getStrongName(),
           selInfo.getSoftPermutationId());
-      if (!propMapsByPermutation.containsKey(permutationId)) {
-        propMapsByPermutation.put(permutationId,
-            Lists.<Map<String, String>> create(entries));
-      } else {
-        propMapsByPermutation.put(permutationId, Lists.add(
-            propMapsByPermutation.get(permutationId), entries));
+      List<Map<String,String>> propMaps = propMapsByPermutation.get(permutationId);
+      if (propMaps == null) {
+        propMaps = Lists.newArrayList();
       }
+      propMaps.add(entries);
+      propMapsByPermutation.put(permutationId, propMaps);
     }
   }
 }

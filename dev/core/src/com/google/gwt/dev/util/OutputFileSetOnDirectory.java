@@ -16,12 +16,12 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.dev.util.NullOutputFileSet.NullOutputStream;
-import com.google.gwt.dev.util.collect.HashSet;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashSet;
 import java.util.Set;
 
 /**

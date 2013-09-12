@@ -37,11 +37,10 @@ import com.google.gwt.dev.cfg.RuleGenerateWith;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +53,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -283,7 +283,7 @@ public class StandardGeneratorContext implements GeneratorContext {
   private final File genDir;
 
   private final Map<Class<? extends Generator>, Generator> generators =
-      new IdentityHashMap<Class<? extends Generator>, Generator>();
+      Maps.newIdentityHashMap();
 
   private ArtifactSet newlyGeneratedArtifacts = new ArtifactSet();
 
@@ -297,7 +297,7 @@ public class StandardGeneratorContext implements GeneratorContext {
   private RebindRuleResolver rebindRuleResolver;
 
   private final Map<PrintWriter, Generated> uncommittedGeneratedCupsByPrintWriter =
-      new IdentityHashMap<PrintWriter, Generated>();
+      Maps.newIdentityHashMap();
 
   private CachedGeneratorResultImpl cachedRebindResult = null;
 

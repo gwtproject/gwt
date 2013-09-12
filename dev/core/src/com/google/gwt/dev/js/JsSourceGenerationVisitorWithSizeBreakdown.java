@@ -25,7 +25,7 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitable;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class JsSourceGenerationVisitorWithSizeBreakdown extends
   private JavaToJavaScriptMap map;
   private JsName billedAncestor; // non-null when an ancestor is also being billed
   private TextOutput out;
-  private final Map<JsName, Integer> sizeMap = new HashMap<JsName, Integer>();
+  private final Map<JsName, Integer> sizeMap = Maps.newHashMap();
 
   public JsSourceGenerationVisitorWithSizeBreakdown(TextOutput out,
       JavaToJavaScriptMap javaToJavaScriptMap) {

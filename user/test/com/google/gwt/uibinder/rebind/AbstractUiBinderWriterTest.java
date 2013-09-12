@@ -24,8 +24,8 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.uibinder.attributeparsers.AttributeParsers;
 import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
 import com.google.gwt.uibinder.test.UiJavaResources;
@@ -138,7 +138,7 @@ public abstract class AbstractUiBinderWriterTest extends TestCase {
   protected FieldManager fieldManager;
   protected Element item;
   protected MockMortalLogger logger;
-  protected Set<Resource> resources = new HashSet<Resource>();
+  protected Set<Resource> resources = Sets.newHashSet();
   protected TypeOracle types;
 
   public AbstractUiBinderWriterTest() {

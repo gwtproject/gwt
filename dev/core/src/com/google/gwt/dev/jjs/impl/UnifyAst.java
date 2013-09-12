@@ -80,22 +80,22 @@ import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.Name.InternalName;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -460,7 +460,7 @@ public class UnifyAst {
       String reqType = BinaryName.toSourceName(type.getName());
       List<String> answers;
       try {
-        answers = Lists.create(rpo.getAllPossibleRebindAnswers(logger, reqType));
+        answers = Lists.newArrayList(rpo.getAllPossibleRebindAnswers(logger, reqType));
         if (compilePerFile) {
           // Accumulate generated artifacts so that they can be output on recompiles even if no
           // generators are run.
@@ -585,21 +585,21 @@ public class UnifyAst {
   /**
    * Methods for which the call site must be replaced with magic AST nodes.
    */
-  private static final Set<String> GWT_DEBUGGER_METHOD_CALLS =
-      new LinkedHashSet<String>(Arrays.asList(GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT));
+  private static final ImmutableSet<String> GWT_DEBUGGER_METHOD_CALLS =
+      ImmutableSet.of(GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT);
 
   /**
    * Methods for which the call site must be replaced with magic AST nodes.
    */
-  private static final Set<String> MAGIC_METHOD_CALLS = new LinkedHashSet<String>(Arrays.asList(
-      GWT_CREATE, GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT, OLD_GWT_CREATE, IMPL_GET_NAME_OF));
+  private static final ImmutableSet<String> MAGIC_METHOD_CALLS = ImmutableSet.of(
+      GWT_CREATE, GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT, OLD_GWT_CREATE, IMPL_GET_NAME_OF);
 
   /**
    * Methods with magic implementations that the compiler must insert.
    */
-  private static final Set<String> MAGIC_METHOD_IMPLS = new LinkedHashSet<String>(Arrays.asList(
+  private static final ImmutableSet<String> MAGIC_METHOD_IMPLS = ImmutableSet.of(
       GWT_IS_CLIENT, OLD_GWT_IS_CLIENT, GWT_IS_PROD_MODE, OLD_GWT_IS_PROD_MODE, GWT_IS_SCRIPT,
-      OLD_GWT_IS_SCRIPT, CLASS_DESIRED_ASSERTION_STATUS, CLASS_IS_CLASS_METADATA_ENABLED));
+      OLD_GWT_IS_SCRIPT, CLASS_DESIRED_ASSERTION_STATUS, CLASS_IS_CLASS_METADATA_ENABLED);
 
   private final CompilationState compilationState;
   private final Map<String, CompiledClass> compiledClassesByInternalName;
@@ -612,14 +612,14 @@ public class UnifyAst {
    * to an UnableToCompleteException at the UnifyAst public function boundaries
    */
   private boolean errorsFound = false;
-  private final Set<CompilationUnit> failedUnits = new IdentityHashSet<CompilationUnit>();
-  private final Map<String, JField> fieldMap = new HashMap<String, JField>();
+  private final Set<CompilationUnit> failedUnits = Sets.newIdentityHashSet();
+  private final Map<String, JField> fieldMap = Maps.newHashMap();
 
   /**
    * The set of types currently known to be instantiable. Like
    * {@link ControlFlowAnalyzer#instantiatedTypes}.
    */
-  private final Set<JDeclaredType> instantiatedTypes = new IdentityHashSet<JDeclaredType>();
+  private final Set<JDeclaredType> instantiatedTypes = Sets.newIdentityHashSet();
 
   private final JsProgram jsProgram;
 
@@ -627,7 +627,7 @@ public class UnifyAst {
    * Fields and methods that are referenceable. Like
    * {@link ControlFlowAnalyzer#liveFieldsAndMethods}.
    */
-  private final Set<JNode> liveFieldsAndMethods = new IdentityHashSet<JNode>();
+  private final Set<JNode> liveFieldsAndMethods = Sets.newIdentityHashSet();
 
   /**
    * Types which have had all of their fields and methods resolved (as opposed to the default
@@ -638,7 +638,7 @@ public class UnifyAst {
 
   private final TreeLogger logger;
   private final CompilerContext compilerContext;
-  private final Map<String, JMethod> methodMap = new HashMap<String, JMethod>();
+  private final Map<String, JMethod> methodMap = Maps.newHashMap();
   private final JProgram program;
   private final RebindPermutationOracle rpo;
 
@@ -652,11 +652,10 @@ public class UnifyAst {
    * A work queue of methods whose bodies we need to traverse. Prevents
    * excessive stack use.
    */
-  private final Queue<JMethod> todo = new LinkedList<JMethod>();
+  private final Queue<JMethod> todo = Lists.newLinkedList();
 
-  private final Set<String> virtualMethodsLive = new HashSet<String>();
-  private final Map<String, List<JMethod>> virtualMethodsPending =
-      new java.util.HashMap<String, List<JMethod>>();
+  private final Set<String> virtualMethodsLive = Sets.newHashSet();
+  private final Multimap<String, JMethod> virtualMethodsPending = ArrayListMultimap.create();
 
   private NameBasedTypeLocator sourceNameBasedTypeLocator;
   private NameBasedTypeLocator binaryNameBasedTypeLocator;
@@ -914,7 +913,8 @@ public class UnifyAst {
     }
 
     compilerContext.getUnitCache().add(referencedCompilationUnit);
-    compilationState.addReferencedCompilationUnits(logger, Lists.create(referencedCompilationUnit));
+    compilationState.addReferencedCompilationUnits(logger,
+        Lists.newArrayList(referencedCompilationUnit));
     // Record the types in the JProgram but do *not* flow into them and resolve their internal
     // references. There's no need since they're not part of this library. It's important to call
     // getTypes() only ONCE since each call returns a new copy.
@@ -1172,12 +1172,9 @@ public class UnifyAst {
         String signature = method.getSignature();
         if (!virtualMethodsLive.contains(signature)) {
           virtualMethodsLive.add(signature);
-          List<JMethod> pending = virtualMethodsPending.remove(signature);
-          if (pending != null) {
-            for (JMethod p : pending) {
-              assert instantiatedTypes.contains(p.getEnclosingType());
-              flowInto(p);
-            }
+          for (JMethod p : virtualMethodsPending.removeAll(signature)) {
+            assert instantiatedTypes.contains(p.getEnclosingType());
+            flowInto(p);
           }
         }
       }
@@ -1361,13 +1358,7 @@ public class UnifyAst {
             assert !virtualMethodsPending.containsKey(signature);
             flowInto(method);
           } else {
-            List<JMethod> pending = virtualMethodsPending.get(signature);
-            if (pending == null) {
-              pending = Lists.create(method);
-            } else {
-              pending = Lists.add(pending, method);
-            }
-            virtualMethodsPending.put(signature, pending);
+            virtualMethodsPending.get(signature).add(method);
             if (isJsType) {
               // Fake a call into the method to keep it around
               flowInto(method);

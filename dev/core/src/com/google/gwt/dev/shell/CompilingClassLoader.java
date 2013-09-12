@@ -41,11 +41,12 @@ import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 import com.google.gwt.thirdparty.guava.common.primitives.Primitives;
 import com.google.gwt.util.tools.Utility;
@@ -518,10 +519,14 @@ public final class CompilingClassLoader extends ClassLoader implements
    */
   private class MySingleJsoImplData implements SingleJsoImplData {
     private final SortedSet<String> mangledNames = new TreeSet<String>();
-    private final Map<String, List<com.google.gwt.dev.asm.commons.Method>> mangledNamesToDeclarations = new HashMap<String, List<com.google.gwt.dev.asm.commons.Method>>();
-    private final Map<String, List<com.google.gwt.dev.asm.commons.Method>> mangledNamesToImplementations = new HashMap<String, List<com.google.gwt.dev.asm.commons.Method>>();
-    private final Set<String> unmodifiableIntfNames = Collections.unmodifiableSet(singleJsoImplTypes);
-    private final SortedSet<String> unmodifiableNames = Collections.unmodifiableSortedSet(mangledNames);
+    private final ListMultimap<String, com.google.gwt.dev.asm.commons.Method>
+        mangledNamesToDeclarations = ArrayListMultimap.create();
+    private final ListMultimap<String, com.google.gwt.dev.asm.commons.Method>
+        mangledNamesToImplementations =  ArrayListMultimap.create();
+    private final Set<String> unmodifiableIntfNames =
+        Collections.unmodifiableSet(singleJsoImplTypes);
+    private final SortedSet<String> unmodifiableNames =
+        Collections.unmodifiableSortedSet(mangledNames);
 
     public MySingleJsoImplData() {
       // Loop over all interfaces with JSO implementations
@@ -614,7 +619,7 @@ public final class CompilingClassLoader extends ClassLoader implements
             decl += ")";
 
             com.google.gwt.dev.asm.commons.Method declaration = com.google.gwt.dev.asm.commons.Method.getMethod(decl);
-            addToMap(mangledNamesToDeclarations, mangledName, declaration);
+            mangledNamesToDeclarations.put(mangledName, declaration);
           }
 
           /*
@@ -638,7 +643,7 @@ public final class CompilingClassLoader extends ClassLoader implements
             decl += ")";
 
             com.google.gwt.dev.asm.commons.Method toImplement = com.google.gwt.dev.asm.commons.Method.getMethod(decl);
-            addToMap(mangledNamesToImplementations, mangledName, toImplement);
+            mangledNamesToImplementations.put(mangledName, toImplement);
           }
         }
       }
@@ -646,8 +651,8 @@ public final class CompilingClassLoader extends ClassLoader implements
       if (logger.isLoggable(TreeLogger.SPAM)) {
         TreeLogger dumpLogger = logger.branch(TreeLogger.SPAM,
             "SingleJsoImpl method mappings");
-        for (Map.Entry<String, List<com.google.gwt.dev.asm.commons.Method>> entry : mangledNamesToImplementations.entrySet()) {
-          dumpLogger.log(TreeLogger.SPAM, entry.getKey() + " -> " + entry.getValue());
+        for (String key : mangledNamesToImplementations.keySet()) {
+          dumpLogger.log(TreeLogger.SPAM, key + " -> " + mangledNamesToImplementations.get(key));
         }
       }
     }
@@ -675,21 +680,6 @@ public final class CompilingClassLoader extends ClassLoader implements
     @Override
     public Set<String> getSingleJsoIntfTypes() {
       return unmodifiableIntfNames;
-    }
-
-    /**
-     * Assumes that the usual case is a 1:1 mapping.
-     */
-    private <K, V> void addToMap(Map<K, List<V>> map, K key, V value) {
-      List<V> list = map.get(key);
-      if (list == null) {
-        map.put(key, Lists.create(value));
-      } else {
-        List<V> maybeOther = Lists.add(list, value);
-        if (maybeOther != list) {
-          map.put(key, maybeOther);
-        }
-      }
     }
 
     /**

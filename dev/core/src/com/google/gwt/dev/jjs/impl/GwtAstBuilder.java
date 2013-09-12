@@ -218,7 +218,6 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -2899,7 +2898,7 @@ public class GwtAstBuilder {
     public final JClassType classType;
     public final ClassScope scope;
     public final Map<SyntheticArgumentBinding, JField> syntheticFields =
-        new IdentityHashMap<SyntheticArgumentBinding, JField>();
+        Maps.newIdentityHashMap();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
 
@@ -2925,7 +2924,7 @@ public class GwtAstBuilder {
     public final JMethodBody body;
     public final Map<String, JLabel> labels = Maps.newHashMap();
     public final Map<LocalVariableBinding, JVariable> locals =
-        new IdentityHashMap<LocalVariableBinding, JVariable>();
+        Maps.newIdentityHashMap();
     public final JMethod method;
     public final MethodScope scope;
 

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,7 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -41,9 +41,9 @@ import java.util.Set;
  * network request.
  */
 class GwtResourceEntityResolver implements EntityResolver {
-  private static final Set<String> EXTERNAL_PREFIXES = Collections.unmodifiableSet(Sets.create(new String[] {
-      "http://google-web-toolkit.googlecode.com/files/",
-      "http://dl.google.com/gwt/DTD/", "https://dl-ssl.google.com/gwt/DTD/"}));
+  private static final Set<String> EXTERNAL_PREFIXES = Collections.unmodifiableSet(
+      Sets.newHashSet("http://google-web-toolkit.googlecode.com/files/",
+          "http://dl.google.com/gwt/DTD/", "https://dl-ssl.google.com/gwt/DTD/"));
 
   private static final String RESOURCES = "com/google/gwt/uibinder/resources/";
 
@@ -51,7 +51,7 @@ class GwtResourceEntityResolver implements EntityResolver {
 
   private final ResourceOracle resourceOracle;
   private final TreeLogger logger;
-  
+
   public GwtResourceEntityResolver(TreeLogger logger, ResourceOracle resourceOracle,
       String pathBase) {
     this.logger = logger;

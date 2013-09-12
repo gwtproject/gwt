@@ -17,8 +17,8 @@ package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.dev.resource.impl.PathPrefix.Judgement;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class PathPrefixSet {
 
   private class TrieNode {
     // TODO(amitmanjhi): Consider the memory-speed tradeoff here
-    private Map<String, TrieNode> children = Maps.create();
+    private Map<String, TrieNode> children = Maps.newHashMap();
     private final String part;
     private List<PathPrefix> prefixes = Lists.newArrayList();
     private boolean hasPrefixes = false;
@@ -52,7 +52,7 @@ public class PathPrefixSet {
       part = StringInterner.get().intern(part);
       TrieNode newChild = new TrieNode(part);
       assert !children.containsKey(part);
-      children = Maps.put(children, part, newChild);
+      children.put(part, newChild);
       return newChild;
     }
 

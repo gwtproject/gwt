@@ -22,6 +22,7 @@ import com.google.gwt.dev.shell.BrowserChannel.Value;
 import com.google.gwt.dev.shell.BrowserChannel.Value.ValueType;
 import com.google.gwt.dev.shell.BrowserChannelClient.SessionHandlerClient;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -119,7 +120,7 @@ public class HtmlUnitSessionHandler extends SessionHandlerClient {
           + htmlPage);
     }
 
-    jsObjectToRef = new IdentityHashMap<Scriptable, Integer>();
+    jsObjectToRef = Maps.newIdentityHashMap();
     nextRefId = 1;
     refToJsObject = new HashMap<Integer, Scriptable>();
 

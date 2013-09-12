@@ -15,8 +15,8 @@
  */
 package com.google.gwt.dev.cfg;
 
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -27,13 +27,13 @@ import java.util.List;
  */
 public class Conditions implements Iterable<Condition>, Serializable {
 
-  private List<Condition> list = Lists.create();
+  private List<Condition> list = Lists.newArrayList();
 
   /**
    * Appends a condition.
    */
   public void add(Condition condition) {
-    list = Lists.add(list, condition);
+    list.add(condition);
   }
 
   @Override

@@ -26,9 +26,8 @@ import com.google.gwt.dev.javac.JavaSourceParser;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Name;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.lang.annotation.Annotation;
@@ -37,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -303,7 +303,7 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
    * Maps SingleJsoImpl interfaces to the implementing JSO subtype.
    */
   private final Map<JClassType, JClassType> jsoSingleImpls =
-      new IdentityHashMap<JClassType, JClassType>();
+      Maps.newIdentityHashMap();
 
   /**
    * Collects DualJsoImpl interfaces.

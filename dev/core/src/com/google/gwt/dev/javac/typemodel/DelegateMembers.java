@@ -16,11 +16,11 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,22 +108,22 @@ class DelegateMembers extends AbstractMembers {
        */
       return lazyConstructors;
     }
-    lazyConstructors = new ArrayList<JConstructor>();
-
     JConstructor[] baseCtors = baseType.getConstructors();
+    lazyConstructors = Lists.newArrayListWithCapacity(baseCtors.length);
+
     for (JConstructor baseCtor : baseCtors) {
       JConstructor newCtor = new JConstructor(getParentType(), baseCtor);
       initializeParams(baseCtor, newCtor);
       lazyConstructors.add(newCtor);
     }
 
-    return lazyConstructors = Lists.normalize(lazyConstructors);
+    return lazyConstructors;
   }
 
   @Override
   protected Map<String, JClassType> doGetNestedTypes() {
     // TODO: is this correct?
-    return Maps.create();
+    return Maps.newHashMap();
   }
 
   private void initFields() {
@@ -140,7 +140,6 @@ class DelegateMembers extends AbstractMembers {
       fields[i] = newField;
       fieldMap.put(newField.getName(), newField);
     }
-    fieldMap = Maps.normalize(fieldMap);
   }
 
   private void initializeExceptions(JAbstractMethod srcMethod,
@@ -199,7 +198,6 @@ class DelegateMembers extends AbstractMembers {
         methodMap.put(methodName, list.toArray(TypeOracle.NO_JMETHODS));
       }
     }
-    methodMap = Maps.normalize(methodMap);
   }
 
   private JType substitute(JType type) {

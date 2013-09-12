@@ -30,9 +30,8 @@ import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayDeque;
@@ -200,10 +199,10 @@ class ExclusivityMap {
     updateMap(fragment, fragmentForType, notExclusiveAtoms, types);
   }
 
-  private Map<JField, Fragment> fragmentForField = new HashMap<JField, Fragment>();
-  private Map<JMethod, Fragment> fragmentForMethod = new HashMap<JMethod, Fragment>();
-  private Map<String, Fragment> fragmentForString = new HashMap<String, Fragment>();
-  private Map<JDeclaredType, Fragment> fragmentForType = new HashMap<JDeclaredType, Fragment>();
+  private Map<JField, Fragment> fragmentForField = Maps.newHashMap();
+  private Map<JMethod, Fragment> fragmentForMethod = Maps.newHashMap();
+  private Map<String, Fragment> fragmentForString = Maps.newHashMap();
+  private Map<JDeclaredType, Fragment> fragmentForType = Maps.newHashMap();
 
   private Set<JField> allFields = Sets.newHashSet();
   private Set<JMethod> allMethods = Sets.newHashSet();
@@ -213,7 +212,7 @@ class ExclusivityMap {
    * Traverse {@code exp} and find all referenced JFields.
    */
   private static Set<JClassLiteral> classLiteralsIn(JExpression exp) {
-    final Set<JClassLiteral> literals = new HashSet<JClassLiteral>();
+    final Set<JClassLiteral> literals = Sets.newHashSet();
     class ClassLiteralFinder extends JVisitor {
       @Override
       public void endVisit(JClassLiteral classLiteral, Context ctx) {
@@ -492,7 +491,7 @@ class ExclusivityMap {
    * Traverse {@code exp} and find all string literals within it.
    */
   private static Set<String> stringsIn(JExpression exp) {
-    final Set<String> strings = new HashSet<String>();
+    final Set<String> strings = Sets.newHashSet();
     class StringFinder extends JVisitor {
       @Override
       public void endVisit(JStringLiteral stringLiteral, Context ctx) {

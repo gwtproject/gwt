@@ -20,12 +20,12 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.junit.JUnitShell.Strategy;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.impl.GWTRunner;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.logging.client.LogConfiguration;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public abstract class CompileStrategy {
    * The list of modules that have already been compiled. We use this to avoid
    * adding test batches that have already been added.
    */
-  private Set<String> compiledModuleNames = new HashSet<String>();
+  private Set<String> compiledModuleNames = Sets.newHashSet();
 
   private final JUnitShell junitShell;
 

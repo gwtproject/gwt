@@ -16,8 +16,7 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -38,10 +37,10 @@ class ImmutableAnnotations implements HasAnnotations {
     }
   };
 
-  private final Map<Class<? extends Annotation>, Annotation> members;
+  private final ImmutableMap<Class<? extends Annotation>, Annotation> members;
 
   private ImmutableAnnotations() {
-    this.members = Maps.create();
+    this.members = ImmutableMap.of();
   }
 
   private ImmutableAnnotations(ImmutableAnnotations base,
@@ -82,17 +81,17 @@ class ImmutableAnnotations implements HasAnnotations {
     return getAnnotation(annotationClass) != null;
   }
 
-  private static Map<Class<? extends Annotation>, Annotation> copyOfAnnotations(
+  private static ImmutableMap<Class<? extends Annotation>, Annotation> copyOfAnnotations(
       ImmutableAnnotations base, Map<Class<? extends Annotation>, Annotation> additions) {
-    Map<Class<? extends Annotation>, Annotation> result =
-        new HashMap<Class<? extends Annotation>, Annotation>();
-    result.putAll(base.members);
+
+    ImmutableMap.Builder<Class<? extends Annotation>, Annotation> builder =
+        ImmutableMap.builder();
+    builder.putAll(base.members);
     for (Annotation addition : additions.values()) {
       Class<? extends Annotation> type = addition.annotationType();
       assert (type != null);
-      assert (!result.containsKey(type));
-      result.put(type, addition);
+      builder.put(type, addition);
     }
-    return Maps.normalize(result);
+    return builder.build();
   }
 }

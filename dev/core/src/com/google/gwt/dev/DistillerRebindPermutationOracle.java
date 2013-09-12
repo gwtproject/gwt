@@ -30,11 +30,11 @@ import com.google.gwt.dev.jdt.RebindOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.shell.StandardRebindOracle;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**

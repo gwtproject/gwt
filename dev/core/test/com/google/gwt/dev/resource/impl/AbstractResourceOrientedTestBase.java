@@ -18,6 +18,7 @@ package com.google.gwt.dev.resource.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import junit.framework.TestCase;
 
@@ -25,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -69,10 +69,9 @@ public abstract class AbstractResourceOrientedTestBase extends TestCase {
     @Override
     public Map<AbstractResource, ResourceResolution> findApplicableResources(TreeLogger logger,
         PathPrefixSet pathPrefixSet) {
-      Map<AbstractResource, ResourceResolution> results =
-          new IdentityHashMap<AbstractResource, ResourceResolution>();
-      Map<AbstractResource, ResourceResolution> rs = cpe.findApplicableResources(
-          logger, pathPrefixSet);
+      Map<AbstractResource, ResourceResolution> results = Maps.newIdentityHashMap();
+      Map<AbstractResource, ResourceResolution> rs =
+          cpe.findApplicableResources(logger, pathPrefixSet);
       for (Map.Entry<AbstractResource, ResourceResolution> entry : rs.entrySet()) {
         AbstractResource r = entry.getKey();
         if (r.getPath().indexOf(".svn/") < 0) {

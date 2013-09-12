@@ -17,8 +17,8 @@ package com.google.gwt.dev.shell.remoteui;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.util.Callback;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -75,7 +75,7 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
 
   private volatile int logHandle = -1;
 
-  private List<Pending> pending = Lists.create();
+  private List<Pending> pending = Lists.newArrayList();
 
   private final ViewerServiceClient viewerServiceClient;
 
@@ -108,8 +108,7 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
       sendBranch(child, type, msg, caught, helpInfo);
     } else {
       // Queue the child branch until I'm committed.
-      pending = Lists.add(pending, new PendingBranch(child, type, msg, caught,
-          helpInfo));
+      pending.add(new PendingBranch(child, type, msg, caught, helpInfo));
     }
   }
 
@@ -122,8 +121,7 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
       sendEntry(indexOfLogEntry, type, msg, caught, helpInfo);
     } else {
       // Queue the log entry until I'm committed.
-      pending = Lists.add(pending, new PendingLog(indexOfLogEntry, type, msg,
-          caught, helpInfo));
+      pending.add(new PendingLog(indexOfLogEntry, type, msg, caught, helpInfo));
     }
   }
 

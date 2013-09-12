@@ -18,10 +18,9 @@ package com.google.gwt.uibinder.test;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -782,8 +781,7 @@ public class UiJavaResources {
    * {@link JavaResourceBase#getStandardResources}.
    */
   public static Set<Resource> getUiResources() {
-    Set<Resource> rtn = new HashSet<Resource>(
-        Arrays.asList(JavaResourceBase.getStandardResources()));
+    Set<Resource> rtn = Sets.<Resource>newHashSet(JavaResourceBase.getStandardResources());
     rtn.add(ABSOLUTE_PANEL);
     rtn.add(BUTTON);
     rtn.add(CLICK_EVENT);

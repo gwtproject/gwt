@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.javac.typemodel;
 
-import com.google.gwt.dev.util.collect.IdentityHashMap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import junit.framework.TestCase;
 
@@ -68,7 +68,7 @@ public class AnnotationsTest extends TestCase {
       Class<?> annotatedClass, Annotations parent) {
     Annotation[] jAnnotations = annotatedClass.getDeclaredAnnotations();
 
-    Map<Class<? extends Annotation>, Annotation> map = new IdentityHashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> map = Maps.newIdentityHashMap();
     for (Annotation annotation : jAnnotations) {
       map.put(annotation.annotationType(), annotation);
     }

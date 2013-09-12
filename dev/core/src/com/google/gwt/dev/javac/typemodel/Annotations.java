@@ -16,14 +16,14 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -51,7 +51,7 @@ class Annotations implements HasAnnotations {
   /**
    * All annotations declared on the annotated element.
    */
-  private Map<Class<? extends Annotation>, Annotation> declaredAnnotations;
+  private final Map<Class<? extends Annotation>, Annotation> declaredAnnotations;
 
   /**
    * Lazily initialized collection of annotations declared on or inherited by
@@ -65,11 +65,11 @@ class Annotations implements HasAnnotations {
   private Annotations parent;
 
   Annotations() {
-    this.declaredAnnotations = Maps.create();
+    this.declaredAnnotations = Maps.newHashMap();
   }
 
   Annotations(Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
-    this.declaredAnnotations = Maps.normalize(declaredAnnotations);
+    this.declaredAnnotations = declaredAnnotations;
   }
 
   /**
@@ -82,7 +82,7 @@ class Annotations implements HasAnnotations {
     assert lazyAnnotations == null;
     if (additions != null) {
       assert (!additions.containsValue(null));
-      declaredAnnotations = Maps.putAll(declaredAnnotations, additions);
+      declaredAnnotations.putAll(additions);
     }
   }
 
@@ -139,7 +139,6 @@ class Annotations implements HasAnnotations {
       }
 
       lazyAnnotations.putAll(declaredAnnotations);
-      lazyAnnotations = Maps.normalize(lazyAnnotations);
     } else {
       lazyAnnotations = declaredAnnotations;
     }

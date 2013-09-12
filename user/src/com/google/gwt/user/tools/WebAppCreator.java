@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,7 +22,7 @@ import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.DevMode;
 import com.google.gwt.dev.GwtVersion;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.user.tools.util.ArgHandlerIgnore;
 import com.google.gwt.user.tools.util.ArgHandlerOverwrite;
 import com.google.gwt.user.tools.util.CreatorUtilities;
@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -358,7 +359,7 @@ public final class WebAppCreator {
       }
       return true;
     }
-    
+
     @Override
     public boolean isExperimental() {
       return true;
@@ -469,7 +470,7 @@ public final class WebAppCreator {
   }
 
   private static String getTemplateBasePath(String template) {
-    return "/" + WebAppCreator.class.getPackage().getName().replace('.', '/') + "/templates/" 
+    return "/" + WebAppCreator.class.getPackage().getName().replace('.', '/') + "/templates/"
         + template + "/";
   }
 
@@ -500,7 +501,7 @@ public final class WebAppCreator {
   private File outDir;
   private boolean overwrite = false;
 
-  private HashSet<String> templates = new HashSet<String>();
+  private HashSet<String> templates = Sets.newHashSet();
 
   public List<FileCreator> getFiles(Map<String, String> replacements)
       throws IOException, WebAppCreatorException {
@@ -517,11 +518,11 @@ public final class WebAppCreator {
         files.addAll(getTemplateFiles(replacements, templateRoot, outDir,
             getTemplateBasePath(template)));
       } else {
-        throw new WebAppCreatorException("Cannot handle template '" + template + "' protocol: " 
+        throw new WebAppCreatorException("Cannot handle template '" + template + "' protocol: "
             + templateUrl.getProtocol());
       }
     }
-    
+
     return files;
   }
 
@@ -664,7 +665,7 @@ public final class WebAppCreator {
 
   /**
    * Create the sample app.
-   * 
+   *
    * @throws IOException if any disk write fails
    * @throws WebAppCreatorException if any tag expansion of template processing fails
    * @deprecated as of GWT 2.1, replaced by {@link #doRun(String)}
@@ -676,7 +677,7 @@ public final class WebAppCreator {
 
   /**
    * Create the sample app.
-   * 
+   *
    * @param installPath directory containing GWT libraries
    * @throws IOException if any disk write fails
    * @throws WebAppCreatorException  if any tag expansion of template processing fails
@@ -693,7 +694,7 @@ public final class WebAppCreator {
       if (templates.contains("eclipse")) {
         System.err.println("'maven' template is being generated removing 'eclipse'"
             + " template from generated output.");
-        templates.remove("eclipse");            
+        templates.remove("eclipse");
       }
       if (templates.contains("ant")) {
         System.err.println("'maven' template is being generated removing 'ant'"
@@ -716,7 +717,7 @@ public final class WebAppCreator {
 
     System.out.println("Generating from templates: " + templates);
 
-    // Generate string replacements 
+    // Generate string replacements
     Map<String, String> replacements = getReplacements(installPath, moduleName);
 
     // Create a list with the files to create
@@ -760,12 +761,12 @@ public final class WebAppCreator {
       Map<String, String> replacements, File srcDirectory, File destDirectory,
       String templateClassRoot) throws IOException {
     List<FileCreator> files = new ArrayList<FileCreator>();
-    
+
     File[] filesInDir = srcDirectory.listFiles();
 
     for (File srcFile : filesInDir) {
       String replacedName = replaceFileName(replacements, srcFile.getName());
-      
+
       if (srcFile.isDirectory()) {
         File newDirectory = Utility.getDirectory(destDirectory, replacedName, true);
         files.addAll(getTemplateFiles(replacements, srcFile, newDirectory, templateClassRoot
@@ -780,7 +781,7 @@ public final class WebAppCreator {
         files.add(new FileCreator(destDirectory, destName, srcFilename, true));
       } // else ... ignore everything not a directory, "*src" nor "*bin"
     }
-    
+
     return files;
   }
 
@@ -807,7 +808,7 @@ public final class WebAppCreator {
 
     Enumeration<? extends ZipEntry> allZipEntries = zipFile.entries();
 
-    ArrayList<FileCreator> templateEntries = new ArrayList<FileCreator>(); 
+    ArrayList<FileCreator> templateEntries = new ArrayList<FileCreator>();
 
     while (allZipEntries.hasMoreElements()) {
       ZipEntry entry = allZipEntries.nextElement();
@@ -818,7 +819,7 @@ public final class WebAppCreator {
         if (entry.isDirectory()) {
           Utility.getDirectory(destDirectory, replacedName, true);
         } else if (fullName.endsWith("src")) {
-          // remove the src suffix 
+          // remove the src suffix
           String destName = replacedName.substring(0, replacedName.length() - 3);
           templateEntries.add(new FileCreator(destDirectory, destName, "/" + fullName, false));
         } else if (fullName.endsWith("bin")) {

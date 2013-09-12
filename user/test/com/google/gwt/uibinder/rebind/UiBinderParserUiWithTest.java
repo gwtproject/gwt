@@ -23,8 +23,8 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.uibinder.attributeparsers.AttributeParsers;
 import com.google.gwt.uibinder.test.UiJavaResources;
 
@@ -136,7 +136,7 @@ public class UiBinderParserUiWithTest extends TestCase {
 
   private MockMortalLogger logger;
 
-  private Set<Resource> resources = new HashSet<Resource>();
+  private Set<Resource> resources = Sets.newHashSet();
 
   private TypeOracle types;
 

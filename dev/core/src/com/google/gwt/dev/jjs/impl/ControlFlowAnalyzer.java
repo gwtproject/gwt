@@ -56,7 +56,7 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -713,10 +713,10 @@ public class ControlFlowAnalyzer {
         }
         List<JExpression> list = argsToRescueIfParameterRead.get(param);
         if (list == null) {
-          argsToRescueIfParameterRead.put(param, Lists.create(arg));
-        } else {
-          argsToRescueIfParameterRead.put(param, Lists.add(list, arg));
+          list = Lists.newArrayList();
+          argsToRescueIfParameterRead.put(param, list);
         }
+        list.add(arg);
       }
       // Visit any "extra" arguments that exceed the param list.
       for (int c = args.size(); i < c; ++i) {

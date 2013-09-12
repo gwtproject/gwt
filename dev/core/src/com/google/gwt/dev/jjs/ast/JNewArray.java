@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList.Builder;
 
 import java.util.List;
 
@@ -35,21 +36,21 @@ public class JNewArray extends JExpression {
       ++realDims;
     }
 
-    List<JClassLiteral> classLiterals = Lists.create();
+    Builder<JClassLiteral> classLiteralsBuilder = ImmutableList.builder();
     JType cur = arrayType;
     for (int i = 0; i < realDims; ++i) {
       // Walk down each type from most dims to least.
       JClassLiteral classLit = new JClassLiteral(info.makeChild(), cur);
-      classLiterals = Lists.add(classLiterals, classLit);
+      classLiteralsBuilder.add(classLit);
       cur = ((JArrayType) cur).getElementType();
     }
-    return new JNewArray(info, arrayType, dims, null, classLiterals);
+    return new JNewArray(info, arrayType, dims, null, classLiteralsBuilder.build());
   }
 
   public static JNewArray createInitializers(SourceInfo info, JArrayType arrayType,
       List<JExpression> initializers) {
-    List<JClassLiteral> classLiterals =
-        Lists.create(new JClassLiteral(info.makeChild(), arrayType));
+    ImmutableList<JClassLiteral> classLiterals =
+        ImmutableList.of(new JClassLiteral(info.makeChild(), arrayType));
     return new JNewArray(info, arrayType, null, initializers, classLiterals);
   }
 
@@ -60,12 +61,12 @@ public class JNewArray extends JExpression {
   /**
    * The list of class literals that will be needed to support this expression.
    */
-  private final List<JClassLiteral> classLiterals;
+  private final ImmutableList<JClassLiteral> classLiterals;
 
   private JArrayType type;
 
   public JNewArray(SourceInfo info, JArrayType type, List<JExpression> dims,
-      List<JExpression> initializers, List<JClassLiteral> classLits) {
+      List<JExpression> initializers, ImmutableList<JClassLiteral> classLits) {
     super(info);
     this.type = type;
     this.dims = dims;
@@ -91,7 +92,7 @@ public class JNewArray extends JExpression {
    * then the literals will be the array type, followed by the array's component
    * type, followed by array's component type's component type, etc.
    */
-  public List<JClassLiteral> getClassLiterals() {
+  public ImmutableList<JClassLiteral> getClassLiterals() {
     return classLiterals;
   }
 
@@ -136,7 +137,7 @@ public class JNewArray extends JExpression {
       }
 
       // Visit all the class literals that will eventually get generated.
-      visitor.accept(getClassLiterals());
+      visitor.accept(classLiterals);
     }
     visitor.endVisit(this, ctx);
   }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,6 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.List;
 
@@ -113,7 +112,7 @@ public class JModVisitor extends JVisitor {
   @SuppressWarnings("unchecked")
   private class ListContextImmutable<T extends JNode> implements Context {
     int index;
-    List<T> list;
+    final List<T> list;
     boolean removed;
     boolean replaced;
 
@@ -131,13 +130,13 @@ public class JModVisitor extends JVisitor {
 
     public void insertAfter(JNode node) {
       checkRemoved();
-      list = Lists.add(list, index + 1, (T) node);
+      list.add(index + 1, (T) node);
       ++numVisitorChanges;
     }
 
     public void insertBefore(JNode node) {
       checkRemoved();
-      list = Lists.add(list, index++, (T) node);
+      list.add(index++, (T) node);
       ++numVisitorChanges;
     }
 
@@ -147,7 +146,7 @@ public class JModVisitor extends JVisitor {
 
     public void removeMe() {
       checkState();
-      list = Lists.remove(list, index--);
+      list.remove(index--);
       removed = true;
       ++numVisitorChanges;
     }
@@ -155,7 +154,7 @@ public class JModVisitor extends JVisitor {
     public void replaceMe(JNode node) {
       checkState();
       checkReplacement(list.get(index), node);
-      list = Lists.set(list, index, (T) node);
+      list.set(index, (T) node);
       replaced = true;
       ++numVisitorChanges;
     }
@@ -304,7 +303,7 @@ public class JModVisitor extends JVisitor {
         ctx.node = list.get(i);
         traverse(ctx.node, ctx);
         if (ctx.replaced) {
-          list = Lists.set(list, i, (T) ctx.node);
+          list.set(i, (T) ctx.node);
           ctx.replaced = false;
         }
       }

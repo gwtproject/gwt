@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,9 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,7 +60,7 @@ public class JMethodCall extends JExpression {
     }
   }
 
-  private List<JExpression> args = Collections.emptyList();
+  private List<JExpression> args = Lists.newArrayList();
   private JExpression instance;
   private JMethod method;
   private final JType overrideReturnType;
@@ -94,7 +93,7 @@ public class JMethodCall extends JExpression {
    * ignoring the return type of the target method. This constructor is used
    * during normalizing transformations to preserve type semantics when calling
    * externally-defined compiler implementation methods.
-   * 
+   *
    * For example, Cast.dynamicCast() returns Object but that method is used to
    * implement the cast operation. Using a stronger type on the call expression
    * allows us to preserve type information during the latter phases of
@@ -115,28 +114,30 @@ public class JMethodCall extends JExpression {
    * Inserts an argument at the specified index.
    */
   public void addArg(int index, JExpression toAdd) {
-    args = Lists.add(args, index, toAdd);
+    args.add(index, toAdd);
   }
 
   /**
    * Adds an argument to this method.
    */
   public void addArg(JExpression toAdd) {
-    args = Lists.add(args, toAdd);
+    args.add(toAdd);
   }
 
   /**
    * Adds an argument to this method.
    */
   public void addArgs(JExpression... toAdd) {
-    args = Lists.addAll(args, toAdd);
+    for (JExpression exp : toAdd) {
+      args.add(exp);
+    }
   }
 
   /**
    * Adds arguments to this method.
    */
   public void addArgs(List<JExpression> toAdd) {
-    args = Lists.addAll(args, toAdd);
+    args.addAll(toAdd);
   }
 
   /**
@@ -195,7 +196,7 @@ public class JMethodCall extends JExpression {
    * Removes the argument at the specified index.
    */
   public void removeArg(int index) {
-    args = Lists.remove(args, index);
+    args.remove(index);
   }
 
   /**
@@ -210,7 +211,7 @@ public class JMethodCall extends JExpression {
    * Sets the argument at the specified index.
    */
   public void setArg(int index, JExpression arg) {
-    args = Lists.set(args, index, arg);
+    args.set(index, arg);
   }
 
   /**

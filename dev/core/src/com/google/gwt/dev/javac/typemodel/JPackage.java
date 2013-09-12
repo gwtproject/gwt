@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,7 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class JPackage implements com.google.gwt.core.ext.typeinfo.JPackage {
 
   private final String name;
 
-  private Map<String, JRealClassType> types = Maps.create();
+  private final Map<String, JRealClassType> types = Maps.newHashMap();
 
   JPackage(String name) {
     this.name = name;
@@ -91,7 +91,7 @@ public class JPackage implements com.google.gwt.core.ext.typeinfo.JPackage {
   }
 
   void addType(JRealClassType type) {
-    types = Maps.put(types, type.getSimpleSourceName(), type);
+    types.put(type.getSimpleSourceName(), type);
   }
 
   JClassType findTypeImpl(String[] typeName, int index) {

@@ -57,10 +57,10 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -845,28 +845,28 @@ public class TypeTightener {
    *
    */
   private final Map<JVariable, Collection<JExpression>> assignments =
-      new IdentityHashMap<JVariable, Collection<JExpression>>();
+      Maps.newIdentityHashMap();
   /**
    * For each type tracks all classes the extend or implement it.
    */
   private final Map<JReferenceType, Collection<JClassType>> implementors =
-      new IdentityHashMap<JReferenceType, Collection<JClassType>>();
+      Maps.newIdentityHashMap();
   /**
    * For each method tracks of all the methods that override it.
    */
   private final Map<JMethod, Collection<JMethod>> overriders =
-      new IdentityHashMap<JMethod, Collection<JMethod>>();
+      Maps.newIdentityHashMap();
   /**
    * For each parameter P (in method M) tracks the set of parameters that share its position in all
    * the methods that are overridden by M.
    */
   private final Map<JParameter, Collection<JParameter>> paramUpRefs =
-      new IdentityHashMap<JParameter, Collection<JParameter>>();
+      Maps.newIdentityHashMap();
   /**
    * For each method tracks the set of all expressions that are returned.
    */
   private final Map<JMethod, Collection<JExpression>> returns =
-      new IdentityHashMap<JMethod, Collection<JExpression>>();
+      Maps.newIdentityHashMap();
 
   private final JProgram program;
   private final JNullType typeNull;

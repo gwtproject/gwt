@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,12 +16,11 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.msg.Message1String;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,7 @@ public class DirectoryClassPathEntry extends ClassPathEntry {
 
     static final Message1String INCLUDING_FILE = new Message1String(
         TreeLogger.DEBUG, "Including file: $0");
-    
+
     static final Message1String EXCLUDING_FILE = new Message1String(
         TreeLogger.DEBUG, "Excluding file: $0");
   }
@@ -60,10 +59,10 @@ public class DirectoryClassPathEntry extends ClassPathEntry {
   @Override
   public List<Map<AbstractResource, PathPrefix>> findApplicableResources(
       TreeLogger logger, List<PathPrefixSet> pathPrefixSets) {
-    List<Map<AbstractResource, PathPrefix>> results = new ArrayList<Map<AbstractResource, PathPrefix>>(
+    List<Map<AbstractResource, PathPrefix>> results = Lists.newArrayListWithCapacity(
         pathPrefixSets.size());
     for (int i = 0, c = pathPrefixSets.size(); i < c; ++i) {
-      results.add(new IdentityHashMap<AbstractResource, PathPrefix>());
+      results.add(Maps.<AbstractResource, PathPrefix>newIdentityHashMap());
     }
     descendToFindResources(logger, pathPrefixSets, results, dir, "");
     return results;
@@ -72,9 +71,9 @@ public class DirectoryClassPathEntry extends ClassPathEntry {
   @Override
   public Map<AbstractResource, PathPrefix> findApplicableResources(
       TreeLogger logger, PathPrefixSet pathPrefixSet) {
-    Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
-    descendToFindResources(logger, Lists.create(pathPrefixSet),
-        Lists.create(results), dir, "");
+    Map<AbstractResource, PathPrefix> results = Maps.newIdentityHashMap();
+    descendToFindResources(logger, Lists.newArrayList(pathPrefixSet),
+        Lists.newArrayList(results), dir, "");
     return results;
   }
 

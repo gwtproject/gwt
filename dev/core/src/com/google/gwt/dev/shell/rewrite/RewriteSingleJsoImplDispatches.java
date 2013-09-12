@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,12 +23,12 @@ import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.asm.Type;
 import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.SingleJsoImplData;
-import com.google.gwt.dev.util.collect.Maps;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -74,13 +74,13 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
         } else {
           /*
            * Might be referring to a subtype of a SingleJso interface:
-           * 
+           *
            * interface IA { void foo() }
-           * 
+           *
            * interface JA extends JSO implements IA;
-           * 
+           *
            * interface IB extends IA {}
-           * 
+           *
            * void bar() { ((IB) object).foo(); }
            */
           outer : for (String intf : computeAllInterfaces(owner)) {
@@ -126,7 +126,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
   private String currentTypeName;
   private final Set<String> implementedMethods = new HashSet<String>();
   private boolean inSingleJsoImplInterfaceType;
-  private Map<String, Set<String>> intfNamesToAllInterfaces = Maps.create();
+  private final Map<String, Set<String>> intfNamesToAllInterfaces = Maps.newHashMap();
   private final SingleJsoImplData jsoData;
   private final TypeOracle typeOracle;
 
@@ -216,11 +216,11 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
       return toReturn;
     }
 
-    toReturn = Sets.create();
-    List<JClassType> q = new LinkedList<JClassType>();
+    toReturn = Sets.newHashSet();
+    List<JClassType> q = Lists.newLinkedList();
     JClassType intf = typeOracle.findType(intfName.replace('/', '.').replace(
         '$', '.'));
-    
+
     /*
      * If the interface's compilation unit wasn't retained due to an error, then
      * it won't be available in the typeOracle for us to rewrite
@@ -233,13 +233,12 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
       intf = q.remove(0);
       String resourceName = getResourceName(intf);
       if (!toReturn.contains(resourceName)) {
-        toReturn = Sets.add(toReturn, resourceName);
+        toReturn.add(resourceName);
         Collections.addAll(q, intf.getImplementedInterfaces());
       }
     }
 
-    intfNamesToAllInterfaces = Maps.put(intfNamesToAllInterfaces, intfName,
-        toReturn);
+    intfNamesToAllInterfaces.put(intfName, toReturn);
     return toReturn;
   }
 
@@ -275,7 +274,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
     }
     return toReturn;
   }
-  
+
   private void writeEmptyMethod(String mangledMethodName, Method declMethod) {
     MethodVisitor mv = super.visitMethod(Opcodes.ACC_PUBLIC
         | Opcodes.ACC_ABSTRACT, mangledMethodName, declMethod.getDescriptor(),
@@ -310,7 +309,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
            * It just so happens that the stack and local variable sizes are the
            * same, but they're kept distinct to aid in clarity should the
            * dispatch logic change.
-           * 
+           *
            * These start at 1 because we need to load "this" onto the stack
            */
           int var = 1;

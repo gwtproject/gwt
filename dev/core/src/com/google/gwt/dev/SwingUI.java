@@ -25,7 +25,6 @@ import com.google.gwt.dev.ui.DoneCallback;
 import com.google.gwt.dev.ui.DoneEvent;
 import com.google.gwt.dev.ui.RestartServerCallback;
 import com.google.gwt.dev.ui.RestartServerEvent;
-import com.google.gwt.dev.util.collect.HashMap;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -36,6 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;

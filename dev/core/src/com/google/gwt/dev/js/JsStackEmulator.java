@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -60,8 +60,8 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.js.ast.JsWhile;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
 import java.util.HashSet;
@@ -72,7 +72,7 @@ import java.util.Set;
 /**
  * Emulates the JS stack in order to provide useful stack traces on browers that
  * do not provide useful stack information.
- * 
+ *
  * @see com.google.gwt.core.client.impl.StackTraceCreator
  */
 public class JsStackEmulator {
@@ -143,14 +143,14 @@ public class JsStackEmulator {
    * the function.
    * <p>
    * General stack depth entry/exit code:
-   * 
+   *
    * <pre>
    * function foo() {
    *   var stackIndex;
    *   $stack[stackIndex = ++$stackDepth] = foo;
-   *   
+   *
    *   ... do stuff ..
-   *   
+   *
    *   $stackDepth = stackIndex - 1;
    * }
    * </pre>
@@ -159,7 +159,7 @@ public class JsStackEmulator {
    * blocks with as associated finally block, it is necessary to introduce a
    * local variable to indicate if control flow is expected to terminate
    * normally at the end of the finally block:
-   * 
+   *
    * <pre>
    * var exitingEarly;
    * try {
@@ -181,7 +181,7 @@ public class JsStackEmulator {
    * reset to the local stack index value. This allows browser-native exceptions
    * to be created with the correct stack trace before the finally code is
    * executed with a correct stack depth.
-   * 
+   *
    * <pre>
    * try {
    *   foo();
@@ -189,9 +189,9 @@ public class JsStackEmulator {
    *   bar();
    * }
    * </pre>
-   * 
+   *
    * becomes
-   * 
+   *
    * <pre>
    * try {
    *   foo();
@@ -223,7 +223,7 @@ public class JsStackEmulator {
      * a single value because a finally block might be nested in another exit
      * block.
      */
-    private Map<JsBlock, JsName> finallyBlocksToExitVariables = Maps.create();
+    private final Map<JsBlock, JsName> finallyBlocksToExitVariables = Maps.newHashMap();
 
     /**
      * This variable will indicate the finally block that contains the last
@@ -241,7 +241,7 @@ public class JsStackEmulator {
     /**
      * Final cleanup for any new local variables that need to be created.
      */
-    private List<JsVar> varsToAdd = Lists.create();
+    private final List<JsVar> varsToAdd = Lists.newArrayList();
 
     public EntryExitVisitor(JsFunction currentFunction) {
       this.currentFunction = currentFunction;
@@ -364,8 +364,7 @@ public class JsStackEmulator {
         addPopAtEndOfBlock(finallyBlock, true);
 
         // Clean up entry after adding pop instruction
-        finallyBlocksToExitVariables = Maps.remove(
-            finallyBlocksToExitVariables, finallyBlock);
+        finallyBlocksToExitVariables.remove(finallyBlock);
         return false;
       }
 
@@ -383,7 +382,7 @@ public class JsStackEmulator {
             "JsStackEmulator_stackIndex", "stackIndex");
 
         JsVar var = new JsVar(info, stackIndex);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return stackIndex.makeRef(info);
     }
@@ -393,7 +392,7 @@ public class JsStackEmulator {
      * block. A no-op if the last statement is a <code>throw</code> or
      * <code>return</code> statement, since it will have already caused a pop
      * statement to have been added.
-     * 
+     *
      * @param checkEarlyExit if <code>true</code>, generates
      *          <code>earlyExit && pop()</code>
      */
@@ -440,10 +439,9 @@ public class JsStackEmulator {
             "JsStackEmulator_exitingEarly"
                 + finallyBlocksToExitVariables.size(), "exitingEarly");
 
-        finallyBlocksToExitVariables = Maps.put(finallyBlocksToExitVariables,
-            x, earlyExitName);
+        finallyBlocksToExitVariables.put(x, earlyExitName);
         JsVar var = new JsVar(x.getSourceInfo(), earlyExitName);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return earlyExitName.makeRef(x.getSourceInfo());
     }
@@ -478,7 +476,7 @@ public class JsStackEmulator {
 
     /**
      * Pops the stack frame.
-     * 
+     *
      * @param x the statement that will cause the pop
      * @param ctx the visitor context
      */
@@ -555,7 +553,7 @@ public class JsStackEmulator {
             "JsStackEmulator_returnTemp", "returnTemp");
 
         JsVar var = new JsVar(info, returnTemp);
-        varsToAdd = Lists.add(varsToAdd, var);
+        varsToAdd.add(var);
       }
       return returnTemp.makeRef(info);
     }
@@ -594,11 +592,11 @@ public class JsStackEmulator {
    * <p>
    * This simply generates code to set entries in the <code>$location</code>
    * stack, parallel to <code>$stack</code>:
-   * 
+   *
    * <pre>
    * ($location[stackIndex] = 'Foo.java:' + 42, expr);
    * </pre>
-   * 
+   *
    * Inclusion of file names is dependent on the value of the
    * {@link JsStackEmulator#recordFileNames} field.
    */

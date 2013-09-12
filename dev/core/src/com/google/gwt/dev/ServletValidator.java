@@ -16,7 +16,6 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.collect.HashSet;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -26,6 +25,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;

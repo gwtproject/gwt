@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,11 +30,11 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.rpc.client.impl.CommandToStringWriter;
 import com.google.gwt.rpc.client.impl.RpcServiceProxy;
 import com.google.gwt.rpc.client.impl.TypeOverrides;
 import com.google.gwt.rpc.linker.RpcDataArtifact;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 import com.google.gwt.user.client.rpc.impl.RemoteServiceProxy;
 import com.google.gwt.user.linker.rpc.RpcLogArtifact;
@@ -286,9 +286,9 @@ public class RpcProxyCreator extends ProxyCreator {
       JField[] serializableFields = SerializationUtils.getSerializableFields(
           ctx.getTypeOracle(), (JClassType) type);
 
-      List<String> names = Lists.create();
+      List<String> names = Lists.newArrayList();
       for (int i = 0, j = serializableFields.length; i < j; i++) {
-        names = Lists.add(names, serializableFields[i].getName());
+        names.add(serializableFields[i].getName());
       }
 
       data.setFields(SerializationUtils.getRpcTypeName(type), names);

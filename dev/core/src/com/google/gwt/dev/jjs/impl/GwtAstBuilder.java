@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -106,8 +106,8 @@ import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -211,7 +211,6 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -230,7 +229,7 @@ public class GwtAstBuilder {
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
    * produced AST should contain every piece of information we'll ever need
    * about the code. The JDT nodes should never again be referenced after this.
-   * 
+   *
    * NOTE ON JDT FORCED OPTIMIZATIONS - If JDT statically determines that a
    * section of code in unreachable, it won't fully resolve that section of
    * code. This invalid-state code causes us major problems. As a result, we
@@ -2080,7 +2079,7 @@ public class GwtAstBuilder {
      * inherits that implements an interface method but that has a different
      * erased signature from the interface method.
      * </p>
-     * 
+     *
      * <p>
      * The need for these bridges was pointed out in issue 3064. The goal is
      * that virtual method calls through an interface type are translated to
@@ -2095,7 +2094,7 @@ public class GwtAstBuilder {
      * case, a bridge method should be added that overrides the interface method
      * and then calls the implementation method.
      * </p>
-     * 
+     *
      * <p>
      * This method should only be called once all regular, non-bridge methods
      * have been installed on the GWT types.
@@ -2697,7 +2696,7 @@ public class GwtAstBuilder {
          * primitive with a modified prototype. This requires funky handling of
          * constructor calls. We find a method named _String() whose signature
          * matches the requested constructor
-         * 
+         *
          * TODO(scottb): consider moving this to a later pass.
          */
         MethodBinding staticBinding =
@@ -2825,7 +2824,7 @@ public class GwtAstBuilder {
         /*
          * Make an inner class to hold a lazy-init name-value map. We use a
          * class to take advantage of its clinit.
-         * 
+         *
          * class Map { $MAP = Enum.createValueOfMap($VALUES); }
          */
         SourceInfo info = type.getSourceInfo();
@@ -2884,7 +2883,7 @@ public class GwtAstBuilder {
     public final JClassType classType;
     public final ClassScope scope;
     public final Map<SyntheticArgumentBinding, JField> syntheticFields =
-        new IdentityHashMap<SyntheticArgumentBinding, JField>();
+        Maps.newIdentityHashMap();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
 
@@ -2912,7 +2911,7 @@ public class GwtAstBuilder {
     public final JMethodBody body;
     public final Map<String, JLabel> labels = Maps.newHashMap();
     public final Map<LocalVariableBinding, JVariable> locals =
-        new IdentityHashMap<LocalVariableBinding, JVariable>();
+        Maps.newIdentityHashMap();
     public final JMethod method;
     public final MethodScope scope;
 
@@ -2925,7 +2924,7 @@ public class GwtAstBuilder {
 
   /**
    * Manually tracked version count.
-   * 
+   *
    * TODO(zundel): something much more awesome?
    */
   private static final long AST_VERSION = 3;

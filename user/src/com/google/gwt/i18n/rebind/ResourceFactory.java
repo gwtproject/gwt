@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,12 +22,12 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.StringKey;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
 import com.google.gwt.i18n.rebind.AbstractResource.ResourceList;
 import com.google.gwt.i18n.rebind.AnnotationsResource.AnnotationsError;
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,7 +72,7 @@ public abstract class ResourceFactory {
   }
 
   /**
-   * 
+   *
    * @param logger
    * @param topClass
    * @param bundleLocale
@@ -88,7 +88,7 @@ public abstract class ResourceFactory {
       Map<String, Resource> resourceMap, GeneratorContext genCtx) {
     List<GwtLocale> locales = bundleLocale.getCompleteSearchList();
     List<JClassType> classes = new ArrayList<JClassType>();
-    Set<JClassType> seenClasses = new IdentityHashSet<JClassType>();
+    Set<JClassType> seenClasses = Sets.newIdentityHashSet();
     Map<ClassLocale, AnnotationsResource> annotations = new HashMap<ClassLocale, AnnotationsResource>();
     GwtLocaleFactory factory = LocaleUtils.getLocaleFactory();
     GwtLocale defaultLocale = factory.getDefault();

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -80,7 +80,7 @@ class AnnotationProxyFactory {
      * Maps method names onto values. Note that methods on annotation types
      * cannot be overloaded because they have zero arguments.
      */
-    private final Map<String, Object> identifierToValue;
+    private final ImmutableMap<String, Object> identifierToValue;
 
     /**
      * A reference to the enclosing proxy object.
@@ -90,7 +90,7 @@ class AnnotationProxyFactory {
     public AnnotationProxyInvocationHandler(
         Map<String, Object> identifierToValue,
         Class<? extends Annotation> annotationClass) {
-      this.identifierToValue = Maps.normalizeUnmodifiable(identifierToValue);
+      this.identifierToValue = ImmutableMap.copyOf(identifierToValue);
       this.annotationClass = annotationClass;
     }
 
@@ -213,7 +213,7 @@ class AnnotationProxyFactory {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object,
      *      java.lang.reflect.Method, java.lang.Object[])
      */

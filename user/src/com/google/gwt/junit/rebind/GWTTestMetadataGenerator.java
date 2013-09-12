@@ -28,11 +28,11 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.GWTTestCase.TestModuleInfo;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.junit.client.impl.MissingTestPlaceHolder;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -201,7 +201,7 @@ public class GWTTestMetadataGenerator extends Generator {
 
   // This is compatible with how junit3 identifies test methods
   private static Iterable<JMethod> getTestMethods(JClassType requestedClass) {
-    Map<String, JMethod> methodMap = new HashMap<String, JMethod>();
+    Map<String, JMethod> methodMap = Maps.newHashMap();
     for (JClassType cls = requestedClass; cls != null; cls = cls.getSuperclass()) {
       for (JMethod declMethod : cls.getMethods()) {
         if (isJUnitTestMethod(declMethod)) {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,9 +24,9 @@ import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.linker.LinkerOrder;
-import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
-import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.core.ext.linker.Shardable;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.util.regexfilter.RegexFilter;
 
 import java.io.ByteArrayOutputStream;
@@ -41,14 +41,14 @@ import java.util.zip.GZIPOutputStream;
  * A linker that precompresses the public artifacts that it sees. That way, a
  * web server that uses gzip transfer encoding can use the precompressed files
  * instead of having to compress them on the fly.
- * 
+ *
  * <p>
  * To use this linker, add the following to your module definition:
- * 
+ *
  * <pre>
  *   &lt;inherits name="com.google.gwt.precompress.Precompress"/>
  * </pre>
- * 
+ *
  * <p>
  * The files to precompress are specified by the configuration property
  * <code>precompress.path.regexes</code>. By default, the uncompressed artifacts
@@ -120,7 +120,7 @@ public class PrecompressLinker extends AbstractLinker {
         context.getConfigurationProperties(), PROP_PATH_REGEXES).getValues());
 
     // Record the list of all paths for later lookup
-    Set<String> allPaths = new HashSet<String>();
+    Set<String> allPaths = Sets.newHashSet();
     for (EmittedArtifact art : artifacts.find(EmittedArtifact.class)) {
       allPaths.add(art.getPartialPath());
     }

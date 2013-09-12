@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,8 +17,8 @@ package com.google.gwt.dev.shell.remoteui;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.util.Callback;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -75,13 +75,13 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
 
   private volatile int logHandle = -1;
 
-  private List<Pending> pending = Lists.create();
+  private List<Pending> pending = Lists.newArrayList();
 
   private final ViewerServiceClient viewerServiceClient;
 
   /**
    * Creates a new instance with the given Viewer Service requestor.
-   * 
+   *
    * @param viewerServiceClient An object that can be used to make requests to a
    *          viewer service server.
    */
@@ -108,8 +108,7 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
       sendBranch(child, type, msg, caught, helpInfo);
     } else {
       // Queue the child branch until I'm committed.
-      pending = Lists.add(pending, new PendingBranch(child, type, msg, caught,
-          helpInfo));
+      pending.add(new PendingBranch(child, type, msg, caught, helpInfo));
     }
   }
 
@@ -122,8 +121,7 @@ public final class ViewerServiceTreeLogger extends AbstractTreeLogger {
       sendEntry(indexOfLogEntry, type, msg, caught, helpInfo);
     } else {
       // Queue the log entry until I'm committed.
-      pending = Lists.add(pending, new PendingLog(indexOfLogEntry, type, msg,
-          caught, helpInfo));
+      pending.add(new PendingLog(indexOfLogEntry, type, msg, caught, helpInfo));
     }
   }
 

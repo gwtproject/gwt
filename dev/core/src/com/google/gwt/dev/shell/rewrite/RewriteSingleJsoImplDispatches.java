@@ -23,12 +23,12 @@ import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.asm.Type;
 import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.SingleJsoImplData;
-import com.google.gwt.dev.util.collect.Maps;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -126,7 +126,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
   private String currentTypeName;
   private final Set<String> implementedMethods = new HashSet<String>();
   private boolean inSingleJsoImplInterfaceType;
-  private Map<String, Set<String>> intfNamesToAllInterfaces = Maps.create();
+  private Map<String, Set<String>> intfNamesToAllInterfaces = Maps.newHashMap();
   private final SingleJsoImplData jsoData;
   private final TypeOracle typeOracle;
 
@@ -216,8 +216,8 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
       return toReturn;
     }
 
-    toReturn = Sets.create();
-    List<JClassType> q = new LinkedList<JClassType>();
+    toReturn = Sets.newHashSet();
+    List<JClassType> q = Lists.newLinkedList();
     JClassType intf = typeOracle.findType(intfName.replace('/', '.').replace(
         '$', '.'));
     
@@ -233,13 +233,12 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
       intf = q.remove(0);
       String resourceName = getResourceName(intf);
       if (!toReturn.contains(resourceName)) {
-        toReturn = Sets.add(toReturn, resourceName);
+        toReturn.add(resourceName);
         Collections.addAll(q, intf.getImplementedInterfaces());
       }
     }
 
-    intfNamesToAllInterfaces = Maps.put(intfNamesToAllInterfaces, intfName,
-        toReturn);
+    intfNamesToAllInterfaces.put(intfName, toReturn);
     return toReturn;
   }
 

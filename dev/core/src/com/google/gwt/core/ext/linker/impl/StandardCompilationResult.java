@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
@@ -82,7 +82,7 @@ public class StandardCompilationResult extends CompilationResult {
   private final SortedSet<SortedMap<SelectionProperty, String>> propertyValues = new TreeSet<SortedMap<SelectionProperty, String>>(
       MAP_COMPARATOR);
 
-  private List<SoftPermutation> softPermutations = Lists.create();
+  private List<SoftPermutation> softPermutations = Lists.newArrayList();
 
   private final StatementRanges[] applicationStatementRanges;
 
@@ -141,7 +141,7 @@ public class StandardCompilationResult extends CompilationResult {
   }
 
   public void addSoftPermutation(Map<SelectionProperty, String> propertyMap) {
-    softPermutations = Lists.add(softPermutations, new StandardSoftPermutation(
+    softPermutations.add(new StandardSoftPermutation(
         softPermutations.size(), propertyMap));
   }
 

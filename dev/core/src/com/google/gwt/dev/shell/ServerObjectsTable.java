@@ -15,7 +15,8 @@
  */
 package com.google.gwt.dev.shell;
 
-import java.util.IdentityHashMap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -40,7 +41,7 @@ public class ServerObjectsTable {
   private int nextFree = -1;
   private int nextId = 0;
   private final Map<Integer, Object> objects = new TreeMap<Integer, Object>();
-  private final Map<Object, Integer> refMap = new IdentityHashMap<Object, Integer>();
+  private final Map<Object, Integer> refMap = Maps.newIdentityHashMap();
 
   public int add(Object obj) {
     int id = find(obj);

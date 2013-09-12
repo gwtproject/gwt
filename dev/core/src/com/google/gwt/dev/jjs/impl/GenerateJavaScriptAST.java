@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -162,12 +162,11 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
-import com.google.gwt.dev.util.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -177,7 +176,6 @@ import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -282,7 +280,7 @@ public class GenerateJavaScriptAST {
       // Start constructing the scope tree.
       currentScope = new Scope();
       scopesByLocal = new HashMap<JLocal, Scope>();
-      localsByName = HashMultimap.create();
+      localsByName = ArrayListMultimap.create();
       return true;
     }
 
@@ -605,8 +603,7 @@ public class GenerateJavaScriptAST {
       push(jsFunction.getScope());
 
       if (program.getIndexedMethods().contains(x)) {
-        indexedFunctions =
-            Maps.put(indexedFunctions, x.getEnclosingType().getShortName() + "." + x.getName(),
+        indexedFunctions.put(x.getEnclosingType().getShortName() + "." + x.getName(),
                 jsFunction);
       }
 
@@ -716,7 +713,7 @@ public class GenerateJavaScriptAST {
        * might see HashSet::$add() and HashSet::add(). Logically, these methods
        * should be treated equally, however they will be implemented with
        * separate global functions and must be recorded independently.
-       * 
+       *
        * Automated systems that process the symbol information can easily map
        * the statically-dispatched function by looking for method names that
        * begin with a dollar-sign and whose first parameter is the enclosing
@@ -794,7 +791,7 @@ public class GenerateJavaScriptAST {
     public GenerateJavaScriptVisitor(Set<JMethod> methodsForJsInlining) {
       this.methodsForJsInlining = methodsForJsInlining;
     }
-    
+
     @Override
     public void endVisit(JAbsentArrayDimension x, Context ctx) {
       throw new InternalCompilerException("Should not get here.");
@@ -963,7 +960,7 @@ public class GenerateJavaScriptAST {
           }
         }
       }
-      
+
       // TODO(zundel): Check that each unique method has a unique
       // name / poly name.
     }
@@ -1061,8 +1058,7 @@ public class GenerateJavaScriptAST {
       JsName name = names.get(x);
 
       if (program.getIndexedFields().contains(x)) {
-        indexedFields =
-            Maps.put(indexedFields, x.getEnclosingType().getShortName() + "." + x.getName(), name);
+        indexedFields.put(x.getEnclosingType().getShortName() + "." + x.getName(), name);
       }
 
       if (x.isStatic()) {
@@ -1302,7 +1298,7 @@ public class GenerateJavaScriptAST {
        * as Java, so it's okay to just predeclare all local vars at the top of
        * the function, which saves us having to use the "var" keyword over and
        * over.
-       * 
+       *
        * Note: it's fine to use the same JS ident to represent two different
        * Java locals of the same name since they could never conflict with each
        * other in Java. We use the alreadySeen set to make sure we don't declare
@@ -1424,12 +1420,12 @@ public class GenerateJavaScriptAST {
       popList(newOp.getArguments(), x.getArgs().size()); // args
       push(newOp);
     }
-    
+
     @Override
     public void endVisit(JNumericEntry x, Context ctx) {
       push(new JsNumericEntry(x.getSourceInfo(), x.getKey(), x.getValue()));
     }
-    
+
     @Override
     public void endVisit(JParameter x, Context ctx) {
       push(new JsParameter(x.getSourceInfo(), names.get(x)));
@@ -1461,7 +1457,7 @@ public class GenerateJavaScriptAST {
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
 
       // Generate entry methods
-      generateGwtOnLoad(Lists.create(entryFunctions), globalStmts);
+      generateGwtOnLoad(Lists.newArrayList(entryFunctions), globalStmts);
 
       // Add a few things onto the beginning.
 
@@ -1474,7 +1470,7 @@ public class GenerateJavaScriptAST {
       generateLongLiterals(vars);
       generateImmortalTypes(vars);
       generateInternedCastMapLiterals(vars);
-     
+
       // Class objects, but only if there are any.
       if (x.getDeclaredTypes().contains(x.getTypeClassLiteralHolder())) {
         // TODO: perhaps they could be constant field initializers also?
@@ -1643,7 +1639,7 @@ public class GenerateJavaScriptAST {
       if (x.getSuperClass() != null && !alreadyRan.contains(x)) {
         accept(x.getSuperClass());
       }
-      
+
       return super.visit(x, ctx);
     }
 
@@ -1670,7 +1666,7 @@ public class GenerateJavaScriptAST {
        */
       List<JMethod> entryMethods = x.getEntryMethods();
       entryFunctions = new JsFunction[entryMethods.size()];
-      entryMethodToIndex = new IdentityHashMap<JMethod, Integer>();
+      entryMethodToIndex = Maps.newIdentityHashMap();
       for (int i = 0; i < entryMethods.size(); i++) {
         entryMethodToIndex.put(entryMethods.get(i), i);
       }
@@ -1860,14 +1856,14 @@ public class GenerateJavaScriptAST {
     private void checkForDupMethods(JDeclaredType x) {
       // Sanity check to see that all methods are uniquely named.
       List<JMethod> methods = x.getMethods();
-      Set<String> methodSignatures = Sets.create();
+      Set<String> methodSignatures = Sets.newHashSet();
       for (JMethod method : methods) {
         String sig = method.getSignature();
         if (methodSignatures.contains(sig)) {
           throw new InternalCompilerException("Signature collision in Type " + x.getName()
               + " for method " + sig);
         }
-        methodSignatures = Sets.add(methodSignatures, sig);
+        methodSignatures.add(sig);
       }
     }
 
@@ -2238,7 +2234,7 @@ public class GenerateJavaScriptAST {
             superSeed));
         JsExpression castMap = generateCastableTypeMap(x);
         defineSeed.getArguments().add(castMap);
-       
+
         // Chain assign the same prototype to every live constructor.
         for (JMethod method : x.getMethods()) {
           if (liveCtors.contains(method)) {
@@ -2413,12 +2409,12 @@ public class GenerateJavaScriptAST {
      * If a field is a literal, we can potentially treat it as immutable and assign it once on the
      * prototype, to be reused by all instances of the class, instead of re-assigning the same
      * literal in each constructor.
-     * 
+     *
      * Technically, to match JVM semantics, we should only do this for final or static fields. For
      * non-final/non-static fields, a super class's cstr, when it calls a polymorphic method that is
      * overridden in the subclass, should actually see default values (not the literal initializer)
      * before the subclass's cstr runs.
-     * 
+     *
      * However, cstr's calling polymorphic methods is admittedly an uncommon case, so we apply some
      * heuristics to see if we can initialize the field on the prototype anyway.
      */
@@ -2502,7 +2498,7 @@ public class GenerateJavaScriptAST {
 
   /**
    * Determines which classes can potentially see uninitialized values of their subclasses' fields.
-   * 
+   *
    * If a class can not observe subclass uninitialized fields then the initialization of those could
    * be hoisted to the prototype.
    */
@@ -2686,11 +2682,11 @@ public class GenerateJavaScriptAST {
 
   private Map<String, JsExpression> castMapByString = new HashMap<String, JsExpression>();
 
-  private final Map<JBlock, JsCatch> catchMap = new IdentityHashMap<JBlock, JsCatch>();
+  private final Map<JBlock, JsCatch> catchMap = Maps.newIdentityHashMap();
 
   private final Set<JsName> catchParamIdentifiers = new HashSet<JsName>();
 
-  private final Map<JClassType, JsScope> classScopes = new IdentityHashMap<JClassType, JsScope>();
+  private final Map<JClassType, JsScope> classScopes = Maps.newIdentityHashMap();
 
   /**
    * A list of methods that are called from another class (ie might need to
@@ -2698,9 +2694,9 @@ public class GenerateJavaScriptAST {
    */
   private final Set<JMethod> crossClassTargets = new HashSet<JMethod>();
 
-  private Map<String, JsFunction> indexedFunctions = Maps.create();
+  private final Map<String, JsFunction> indexedFunctions = Maps.newHashMap();
 
-  private Map<String, JsName> indexedFields = Maps.create();
+  private Map<String, JsName> indexedFields = Maps.newHashMap();
 
   /**
    * Contains JsNames for all interface methods. A special scope is needed so
@@ -2713,7 +2709,7 @@ public class GenerateJavaScriptAST {
 
   private final JsProgram jsProgram;
 
-  private final Set<JConstructor> liveCtors = new IdentityHashSet<JConstructor>();
+  private final Set<JConstructor> liveCtors = Sets.newIdentityHashSet();
 
   /**
    * Classes that could potentially see uninitialized values for fields that are initialized in the
@@ -2726,11 +2722,11 @@ public class GenerateJavaScriptAST {
    */
   private final Map<Long, JsName> longLits = new TreeMap<Long, JsName>();
 
-  private final Map<JsName, JsExpression> longObjects = new IdentityHashMap<JsName, JsExpression>();
+  private final Map<JsName, JsExpression> longObjects = Maps.newIdentityHashMap();
   private JsFunction makeMapFunction;
   private final Map<JAbstractMethodBody, JsFunction> methodBodyMap =
-      new IdentityHashMap<JAbstractMethodBody, JsFunction>();
-  private final Map<HasName, JsName> names = new IdentityHashMap<HasName, JsName>();
+      Maps.newIdentityHashMap();
+  private final Map<HasName, JsName> names = Maps.newIdentityHashMap();
   private int nextSeedId = 1;
   private Map<String, JsName> namesByCastMap = new HashMap<String, JsName>();
   private JsFunction nullFunc;
@@ -2741,8 +2737,8 @@ public class GenerateJavaScriptAST {
    */
   private final JsScope objectScope;
   private final JsOutputOption output;
-  private final Set<JsFunction> polymorphicJsFunctions = new IdentityHashSet<JsFunction>();
-  private final Map<JMethod, JsName> polymorphicNames = new IdentityHashMap<JMethod, JsName>();
+  private final Set<JsFunction> polymorphicJsFunctions = Sets.newIdentityHashSet();
+  private final Map<JMethod, JsName> polymorphicNames = Maps.newIdentityHashMap();
   private final JProgram program;
 
   /**

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,10 +25,10 @@ import com.google.gwt.dev.js.ast.JsNameOf;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -42,12 +42,12 @@ public class JsDuplicateFunctionRemover {
 
   private class DuplicateFunctionBodyRecorder extends JsVisitor {
 
-    private final Set<JsName> dontReplace = new IdentityHashSet<JsName>();
+    private final Set<JsName> dontReplace = Sets.newIdentityHashSet();
 
-    private final Map<JsName, JsName> duplicateOriginalMap = new IdentityHashMap<JsName, JsName>();
+    private final Map<JsName, JsName> duplicateOriginalMap = Maps.newIdentityHashMap();
 
-    private final Map<JsFunction, JsFunction> duplicateMethodOriginalMap = new IdentityHashMap<JsFunction, JsFunction>();
-
+    private final Map<JsFunction, JsFunction> duplicateMethodOriginalMap =
+        Maps.newIdentityHashMap();
 
     private final Stack<JsNameRef> invocationQualifiers = new Stack<JsNameRef>();
 

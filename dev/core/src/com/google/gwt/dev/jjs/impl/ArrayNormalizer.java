@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -37,7 +37,7 @@ import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 /**
  * Replace array accesses and instantiations with calls to the Array class.
@@ -111,7 +111,7 @@ public class ArrayNormalizer {
            * castability checking
            */
           elementRefType = program.getJavaScriptObject();
-        }  
+        }
         elementQueryId = program.getQueryId(elementRefType);
         if (program.typeOracle.isDualJsoInterface(elementRefType)) {
           /*
@@ -127,7 +127,8 @@ public class ArrayNormalizer {
     private JExpression getOrCreateCastMap(SourceInfo sourceInfo, JArrayType arrayType) {
       JsCastMap castableTypeMap = program.getCastMap(arrayType);
       if (castableTypeMap == null || castableTypeMap.getExprs().size() == 0) {
-        return new JsCastMap(sourceInfo, Lists.<JsQueryType>create(), program.getJavaScriptObject());
+        return new JsCastMap(sourceInfo, Lists.<JsQueryType>newArrayList(),
+            program.getJavaScriptObject());
       }
       return castableTypeMap;
     }

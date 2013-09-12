@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,7 +17,8 @@ package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -37,19 +38,20 @@ public abstract class JAbstractMethod implements
 
   private final String name;
 
-  private List<JParameter> params = Lists.create();
+  private final List<JParameter> params = Lists.newArrayList();
 
   private String[] realParameterNames = null;
 
-  private List<JClassType> thrownTypes = Lists.create();
+  private final List<JClassType> thrownTypes = Lists.newArrayList();
 
-  private List<JTypeParameter> typeParams = Lists.create();
+  private final ImmutableList<JTypeParameter> typeParams;
 
   JAbstractMethod(JAbstractMethod srcMethod) {
     this.annotations = srcMethod.annotations;
     this.isVarArgs = srcMethod.isVarArgs;
     this.modifierBits = srcMethod.modifierBits;
     this.name = srcMethod.name;
+    this.typeParams = srcMethod.typeParams;
   }
 
   // Only the builder can construct
@@ -60,7 +62,9 @@ public abstract class JAbstractMethod implements
     annotations = ImmutableAnnotations.EMPTY.plus(declaredAnnotations);
 
     if (jtypeParameters != null) {
-      typeParams = Lists.create(jtypeParameters);
+      typeParams = ImmutableList.copyOf(jtypeParameters);
+    } else {
+      typeParams = ImmutableList.of();
     }
   }
 
@@ -100,7 +104,7 @@ public abstract class JAbstractMethod implements
 
   /**
    * Returns a string contating a JSNI reference to the method.
-   * 
+   *
    * @return <code>@package.Class::method(Lpackage/Param;...)</code>
    */
   public abstract String getJsniSignature();
@@ -234,11 +238,11 @@ public abstract class JAbstractMethod implements
   }
 
   void addParameter(JParameter param) {
-    params = Lists.add(params, param);
+    params.add(param);
   }
 
   void addThrows(JClassType type) {
-    thrownTypes = Lists.add(thrownTypes, type);
+    thrownTypes.add(type);
   }
 
   // Called only by a JParameter, passing itself as a reference for lookup.

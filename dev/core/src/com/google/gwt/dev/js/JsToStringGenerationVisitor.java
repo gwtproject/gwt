@@ -72,10 +72,10 @@ import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -147,7 +147,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   /**
    * Generate the output string using short or long identifiers.
-   * 
+   *
    * @param useLongIdents if true, emit all identifiers in long form
    */
   JsToStringGenerationVisitor(TextOutput out, boolean useLongIdents) {
@@ -651,7 +651,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     }
     return false;
   }
-  
+
   @Override
   public boolean visit(JsNumericEntry x, JsContext ctx) {
     p.print(Integer.toString(x.getValue()));

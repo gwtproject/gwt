@@ -19,7 +19,8 @@ import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.impl.gflow.Assumption;
 import com.google.gwt.dev.util.Preconditions;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -108,14 +109,14 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
   private final Map<JVariable, JVariable> copyToOriginal;
   
   public CopyAssumption() {
-    copyToOriginal = new IdentityHashMap<JVariable, JVariable>();
+    copyToOriginal = Maps.newIdentityHashMap();
   }
 
   public CopyAssumption(CopyAssumption result) {
     if (result != null) {
       copyToOriginal = new IdentityHashMap<JVariable, JVariable>(result.copyToOriginal);
     } else {
-      copyToOriginal = new IdentityHashMap<JVariable, JVariable>();
+      copyToOriginal = Maps.newIdentityHashMap();
     }
   }
 
@@ -207,7 +208,7 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
   private void kill(JVariable variable) {
     copyToOriginal.put(variable, null);
     
-    for (JVariable v : Lists.create(copyToOriginal.keySet())) {
+    for (JVariable v : Lists.newArrayList(copyToOriginal.keySet())) {
       JVariable original = copyToOriginal.get(v);
       if (original == variable) {
         copyToOriginal.put(v, null);

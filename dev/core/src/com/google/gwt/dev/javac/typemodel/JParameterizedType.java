@@ -18,9 +18,8 @@ package com.google.gwt.dev.javac.typemodel;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.JWildcardType.BoundType;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,7 +100,7 @@ public class JParameterizedType extends JMaybeParameterizedType implements
       }
     });
 
-    this.typeArgs = Lists.create(typeArgs);
+    this.typeArgs = Lists.newArrayList(typeArgs);
     assert (this.typeArgs.indexOf(null) == -1) : "Unresolved typeArg creating JParameterizedType from "
         + baseType;
 
@@ -163,7 +162,6 @@ public class JParameterizedType extends JMaybeParameterizedType implements
         JClassType newIntf = intf.getSubstitutedType(this);
         interfaces.add(newIntf);
       }
-      interfaces = Lists.normalize(interfaces);
     }
     return interfaces.toArray(TypeOracle.NO_JCLASSES);
   }
@@ -442,7 +440,7 @@ public class JParameterizedType extends JMaybeParameterizedType implements
     if (lazySubstitutionMap != null) {
       return;
     }
-    lazySubstitutionMap = new IdentityHashMap<JTypeParameter, JClassType>();
+    lazySubstitutionMap = Maps.newIdentityHashMap();
 
     JParameterizedType currentParameterizedType = this;
 
@@ -467,7 +465,6 @@ public class JParameterizedType extends JMaybeParameterizedType implements
       }
       currentParameterizedType = maybeParameterizedType.isParameterized();
     }
-    lazySubstitutionMap = Maps.normalize(lazySubstitutionMap);
   }
 
   void setTypeArguments(JClassType[] typeArgs) {
@@ -481,7 +478,7 @@ public class JParameterizedType extends JMaybeParameterizedType implements
    */
   private Map<JTypeParameter, JClassType> findSubtypeSubstitution(
       JClassType subtype) {
-    Map<JTypeParameter, JClassType> substitutions = new IdentityHashMap<JTypeParameter, JClassType>();
+    Map<JTypeParameter, JClassType> substitutions = Maps.newIdentityHashMap();
 
     // Get the supertype hierarchy. If this JParameterizedType exists
     // exactly in this set we are done.

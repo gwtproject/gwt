@@ -15,8 +15,8 @@
  */
 package com.google.gwt.dev.javac.typemodel;
 
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,12 @@ class Members extends AbstractMembers {
    * real classes.
    */
 
-  private List<JConstructor> constructors = Lists.create();
-  private Map<String, JField> fieldMap = Maps.create();
-  private List<JField> fields = Lists.create();
-  private Map<String, Object> methodMap = Maps.create();
-  private List<String> methodOrder = Lists.create();
-  private Map<String, JClassType> nestedTypes = Maps.create();
+  private List<JConstructor> constructors = Lists.newArrayList();
+  private Map<String, JField> fieldMap = Maps.newHashMap();
+  private List<JField> fields = Lists.newArrayList();
+  private Map<String, Object> methodMap = Maps.newHashMap();
+  private List<String> methodOrder = Lists.newArrayList();
+  private Map<String, JClassType> nestedTypes = Maps.newHashMap();
 
   public Members(JClassType classType) {
     super(classType);
@@ -85,14 +85,14 @@ class Members extends AbstractMembers {
   @Override
   protected void addConstructor(JConstructor ctor) {
     assert (!constructors.contains(ctor));
-    constructors = Lists.add(constructors, ctor);
+    constructors.add(ctor);
   }
 
   @Override
   protected void addField(JField field) {
     assert !fieldMap.containsKey(field.getName());
-    fieldMap = Maps.put(fieldMap, field.getName(), field);
-    fields = Lists.add(fields, field);
+    fieldMap.put(field.getName(), field);
+    fields.add(field);
   }
 
   @SuppressWarnings("unchecked")
@@ -101,13 +101,13 @@ class Members extends AbstractMembers {
     String methodName = method.getName();
     Object object = methodMap.get(methodName);
     if (object == null) {
-      methodMap = Maps.put(methodMap, methodName, method);
-      methodOrder = Lists.add(methodOrder, methodName);
+      methodMap.put(methodName, method);
+      methodOrder.add(methodName);
     } else if (object instanceof JMethod) {
       List<JMethod> overloads = new ArrayList<JMethod>(2);
       overloads.add((JMethod) object);
       overloads.add(method);
-      methodMap = Maps.put(methodMap, methodName, overloads);
+      methodMap.put(methodName, overloads);
     } else {
       List<JMethod> overloads = (List<JMethod>) object;
       overloads.add(method);
@@ -125,7 +125,7 @@ class Members extends AbstractMembers {
   }
 
   void addNestedType(JClassType type) {
-    nestedTypes = Maps.put(nestedTypes, type.getSimpleSourceName(), type);
+    nestedTypes.put(type.getSimpleSourceName(), type);
   }
 
 }

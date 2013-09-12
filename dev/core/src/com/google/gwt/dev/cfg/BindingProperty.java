@@ -16,11 +16,9 @@
 package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.linker.PropertyProviderGenerator;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +45,7 @@ public class BindingProperty extends Property {
   public static final String GLOB_STAR = "*";
   private static final String EMPTY = "";
 
-  private List<SortedSet<String>> collapsedValues = Lists.create();
+  private List<SortedSet<String>> collapsedValues = Lists.newArrayList();
   private final Map<Condition, SortedSet<String>> conditionalValues = new LinkedHashMap<Condition, SortedSet<String>>();
   private final SortedSet<String> definedValues = new TreeSet<String>();
   private PropertyProvider provider;
@@ -84,7 +82,7 @@ public class BindingProperty extends Property {
 
     // We want a mutable set, because it simplifies normalizeCollapsedValues
     SortedSet<String> temp = new TreeSet<String>(Arrays.asList(values));
-    collapsedValues = Lists.add(collapsedValues, temp);
+    collapsedValues.add(temp);
   }
 
   public void addDefinedValue(Condition condition, String newValue) {
@@ -211,9 +209,9 @@ public class BindingProperty extends Property {
   }
 
   public Set<String> getRequiredProperties() {
-    Set<String> toReturn = Sets.create();
+    Set<String> toReturn = Sets.newHashSet();
     for (Condition cond : conditionalValues.keySet()) {
-      toReturn = Sets.addAll(toReturn, cond.getRequiredProperties());
+      toReturn.addAll(cond.getRequiredProperties());
     }
     return toReturn;
   }
@@ -366,12 +364,14 @@ public class BindingProperty extends Property {
       }
     }
 
+    // Keep unique values.
+    Set<SortedSet<String>> values = Sets.newIdentityHashSet();
+    values.addAll(map.values());
     // The values of the maps will now contain the minimal number of sets
-    collapsedValues = new ArrayList<SortedSet<String>>(
-        new IdentityHashSet<SortedSet<String>>(map.values()));
+    collapsedValues = Lists.newArrayList(values);
 
     // Sort the list
-    Lists.sort(collapsedValues, new Comparator<SortedSet<String>>() {
+    Collections.sort(collapsedValues, new Comparator<SortedSet<String>>() {
       public int compare(SortedSet<String> o1, SortedSet<String> o2) {
         String s1 = o1.toString();
         String s2 = o2.toString();

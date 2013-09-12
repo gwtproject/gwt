@@ -31,6 +31,7 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
@@ -46,7 +47,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -465,7 +465,7 @@ public class CompilationStateBuilder {
 
     // Units we don't want to rebuild unless we have to.
     Map<CompilationUnitBuilder, CompilationUnit> cachedUnits =
-        new IdentityHashMap<CompilationUnitBuilder, CompilationUnit>();
+        Maps.newIdentityHashMap();
 
     CompileMoreLater compileMoreLater = new CompileMoreLater(compilerDelegate, suppressErrors,
         sourceLevel);
@@ -529,7 +529,7 @@ public class CompilationStateBuilder {
 
     // Units we don't want to rebuild unless we have to.
     Map<CompilationUnitBuilder, CompilationUnit> cachedUnits =
-        new IdentityHashMap<CompilationUnitBuilder, CompilationUnit>();
+        Maps.newIdentityHashMap();
 
     // For each incoming generated Java source file...
     for (GeneratedUnit generatedUnit : generatedUnits) {

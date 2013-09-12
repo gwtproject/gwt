@@ -16,12 +16,10 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.collect.IdentityHashMap;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.IdentityMaps;
-import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.dev.util.msg.Message1String;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.File;
 import java.io.IOException;
@@ -152,7 +150,7 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
   private Set<ZipFileResource> buildIndex(TreeLogger logger) {
     logger = Messages.BUILDING_INDEX.branch(logger, zipFile.getName(), null);
 
-    Set<ZipFileResource> results = new IdentityHashSet<ZipFileResource>();
+    Set<ZipFileResource> results = Sets.newIdentityHashSet();
     Enumeration<? extends ZipEntry> e = zipFile.entries();
     while (e.hasMoreElements()) {
       ZipEntry zipEntry = e.nextElement();
@@ -169,7 +167,7 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
       results.add(zipResource);
       Messages.READ_ZIP_ENTRY.log(logger, zipEntry.getName(), null);
     }
-    return Sets.normalize(results);
+    return results;
   }
 
   private Map<AbstractResource, PathPrefix> computeApplicableResources(
@@ -177,7 +175,7 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
     logger = Messages.FINDING_INCLUDED_RESOURCES.branch(logger,
         zipFile.getName(), null);
 
-    Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
+    Map<AbstractResource, PathPrefix> results = Maps.newIdentityHashMap();
     for (ZipFileResource r : allZipFileResources) {
       String path = r.getPath();
       String[] pathParts = r.getPathParts();
@@ -189,6 +187,6 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
         Messages.EXCLUDING_RESOURCE.log(logger, path, null);
       }
     }
-    return IdentityMaps.normalize(results);
+    return results;
   }
 }

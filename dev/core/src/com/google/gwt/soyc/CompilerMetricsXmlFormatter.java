@@ -20,8 +20,8 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.CompilationMetricsArtifact;
 import com.google.gwt.core.ext.linker.ModuleMetricsArtifact;
 import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -209,8 +209,8 @@ public class CompilerMetricsXmlFormatter {
       String[] finalTypeOracleTypes = metrics.getFinalTypeOracleTypes();
       if (finalTypeOracleTypes != null) {
         assert finalTypeOracleTypes.length > 0;
-        List<String> initialTypes = Lists.create(moduleMetrics.getInitialTypes());
-        Set<String> generatedTypesList = Sets.create(finalTypeOracleTypes);
+        List<String> initialTypes = Lists.newArrayList(moduleMetrics.getInitialTypes());
+        Set<String> generatedTypesList = Sets.newHashSet(finalTypeOracleTypes);
         generatedTypesList.removeAll(initialTypes);
         String[] generatedTypes = generatedTypesList.toArray(new String[generatedTypesList.size()]);
         Arrays.sort(generatedTypes);

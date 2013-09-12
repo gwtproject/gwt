@@ -22,11 +22,11 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.arg.SourceLevel;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.util.tools.Utility;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
@@ -127,7 +127,7 @@ public class JdtCompiler {
     }
 
     public List<CompilationUnit> getResults() {
-      return Lists.normalizeUnmodifiable(results);
+      return ImmutableList.copyOf(results);
     }
 
     public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,

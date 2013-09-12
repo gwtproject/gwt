@@ -43,8 +43,8 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
@@ -104,7 +104,7 @@ public class ImplementClassLiteralsAsFields {
     return fullName.substring(0, pos + 1);
   }
 
-  private final Map<JType, JField> classLiteralFields = new IdentityHashMap<JType, JField>();
+  private final Map<JType, JField> classLiteralFields = Maps.newIdentityHashMap();
   private final JMethodBody classLiteralHolderClinitBody;
   private final JProgram program;
   private final JClassType typeClassLiteralHolder;

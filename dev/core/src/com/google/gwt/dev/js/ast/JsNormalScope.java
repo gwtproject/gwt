@@ -14,9 +14,8 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ import java.util.Map;
  */
 public class JsNormalScope extends JsNestingScope {
 
-  private Map<String, JsName> names = Collections.emptyMap();
+  private Map<String, JsName> names = Maps.newLinkedHashMap();
 
   /**
    * Create a scope with parent.
@@ -50,7 +49,7 @@ public class JsNormalScope extends JsNestingScope {
     ident = StringInterner.get().intern(ident);
     shortIdent = StringInterner.get().intern(shortIdent);
     JsName name = new JsName(this, ident, shortIdent);
-    names = Maps.putOrdered(names, ident, name);
+    names.put(ident, name);
     return name;
   }
 

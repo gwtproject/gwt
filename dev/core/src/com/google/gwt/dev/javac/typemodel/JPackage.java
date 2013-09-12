@@ -16,7 +16,7 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class JPackage implements com.google.gwt.core.ext.typeinfo.JPackage {
 
   private final String name;
 
-  private Map<String, JRealClassType> types = Maps.create();
+  private Map<String, JRealClassType> types = Maps.newHashMap();
 
   JPackage(String name) {
     this.name = name;
@@ -91,7 +91,7 @@ public class JPackage implements com.google.gwt.core.ext.typeinfo.JPackage {
   }
 
   void addType(JRealClassType type) {
-    types = Maps.put(types, type.getSimpleSourceName(), type);
+    types.put(type.getSimpleSourceName(), type);
   }
 
   JClassType findTypeImpl(String[] typeName, int index) {

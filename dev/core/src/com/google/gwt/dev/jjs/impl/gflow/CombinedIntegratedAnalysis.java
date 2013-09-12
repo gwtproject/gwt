@@ -17,9 +17,9 @@ package com.google.gwt.dev.jjs.impl.gflow;
 
 import com.google.gwt.dev.jjs.impl.gflow.TransformationFunction.Transformation;
 import com.google.gwt.dev.util.Preconditions;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -195,7 +195,7 @@ public class CombinedIntegratedAnalysis<N, E, T, G extends Graph<N, E, T>>
     public Transformation interpretOrReplace(final N node, final G graph,
         final AssumptionMap<E, CombinedAssumption> assumptionMap) {
       
-      final Map<E, CombinedAssumption.CopyOnWrite> newAssumptions = new IdentityHashMap<E, CombinedAssumption.CopyOnWrite>();
+      final Map<E, CombinedAssumption.CopyOnWrite> newAssumptions = Maps.newIdentityHashMap();
       
       final int size = functions.size();
       for (int i = 0; i < size; ++i) {

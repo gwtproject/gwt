@@ -25,7 +25,7 @@ import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
@@ -569,7 +569,7 @@ public class JsniChecker {
               Expression valueExpr = pair.value;
               if (valueExpr instanceof StringLiteral) {
                 // @SuppressWarnings("Foo")
-                return Sets.create(((StringLiteral) valueExpr).constant.stringValue().toLowerCase(
+                return Sets.newHashSet(((StringLiteral) valueExpr).constant.stringValue().toLowerCase(
                     Locale.ENGLISH));
               } else if (valueExpr instanceof ArrayInitializer) {
                 // @SuppressWarnings({ "Foo", "Bar"})
@@ -585,7 +585,7 @@ public class JsniChecker {
                             ai.expressions[i].toString() + " not a string constant.");
                   }
                 }
-                return Sets.create(values);
+                return Sets.newHashSet(values);
               } else {
                 suppressionAnnotationWarning(a, "Unable to analyze SuppressWarnings annotation, " +
                     valueExpr.toString() + " not a string constant.");
@@ -595,7 +595,7 @@ public class JsniChecker {
         }
       }
     }
-    return Sets.create();
+    return Sets.newHashSet();
   }
 
   private final CheckerState checkerState;

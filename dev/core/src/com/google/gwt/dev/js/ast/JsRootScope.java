@@ -13,7 +13,7 @@
  */
 package com.google.gwt.dev.js.ast;
 
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -364,7 +364,7 @@ public final class JsRootScope extends JsScope {
 
   @Override
   public List<JsScope> getChildren() {
-    return Lists.create();
+    return Lists.newArrayList();
   }
 
   @Override

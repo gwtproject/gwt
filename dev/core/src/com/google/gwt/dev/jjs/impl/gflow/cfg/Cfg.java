@@ -18,7 +18,6 @@ package com.google.gwt.dev.jjs.impl.gflow.cfg;
 import com.google.gwt.dev.jjs.impl.gflow.Assumption;
 import com.google.gwt.dev.jjs.impl.gflow.Graph;
 import com.google.gwt.dev.util.Preconditions;
-import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,7 @@ public class Cfg implements Graph<CfgNode<?>, CfgEdge, CfgTransformer> {
     Preconditions.checkNotNull(edge, "Null edge: %s", edge);
     Preconditions.checkArgument(edge.end == null, 
         "Edge is already bound: %s", edge);
-    node.in = Lists.add(node.in, edge);
+    node.in.add(edge);
     edge.end = node;
   }
 
@@ -81,7 +80,7 @@ public class Cfg implements Graph<CfgNode<?>, CfgEdge, CfgTransformer> {
     if (edge.start != null) {
       throw new IllegalArgumentException();
     }
-    node.out = Lists.add(node.out, edge);
+    node.out.add(edge);
     edge.start = node;
   }
 

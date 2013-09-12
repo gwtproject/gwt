@@ -17,12 +17,13 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.Preconditions;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,17 +51,17 @@ public abstract class JDeclaredType extends JReferenceType {
    * The other nodes that this node should implicitly rescue. Special
    * serialization treatment.
    */
-  protected transient List<JNode> artificialRescues = Lists.create();
+  protected transient List<JNode> artificialRescues = Lists.newArrayList();
 
   /**
    * This type's fields. Special serialization treatment.
    */
-  protected transient List<JField> fields = Lists.create();
+  protected transient List<JField> fields = Lists.newArrayList();
 
   /**
    * This type's methods. Special serialization treatment.
    */
-  protected transient List<JMethod> methods = Lists.create();
+  protected transient List<JMethod> methods = Lists.newArrayList();
 
   /**
    * Tracks the target static initialization for this class. Default to self (if it has a non
@@ -87,7 +88,7 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * This type's implemented interfaces.
    */
-  private List<JInterfaceType> superInterfaces = Lists.create();
+  private List<JInterfaceType> superInterfaces = Lists.newArrayList();
 
   /**
    * Determines whether a subclass of this type is in the collection <code>types</code>.
@@ -114,7 +115,7 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   public void addArtificialRescue(JNode node) {
-    artificialRescues = Lists.add(artificialRescues, node);
+    artificialRescues.add(node);
   }
 
   /**
@@ -122,14 +123,14 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   public void addField(JField field) {
     assert field.getEnclosingType() == this;
-    fields = Lists.add(fields, field);
+    fields.add(field);
   }
 
   /**
    * Adds an implemented interface to this type.
    */
   public void addImplements(JInterfaceType superInterface) {
-    superInterfaces = Lists.add(superInterfaces, superInterface);
+    superInterfaces.add(superInterface);
   }
 
   /**
@@ -141,7 +142,7 @@ public abstract class JDeclaredType extends JReferenceType {
         + "$clinit method with index != 0";
     assert !method.getName().equals("$init") || getMethods().size() == 1 : "Attempted adding $init "
         + "method with index != 1";
-    methods = Lists.add(methods, method);
+    methods.add(method);
   }
 
   /**
@@ -288,7 +289,7 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   public void removeField(int i) {
     assert !isExternal() : "External types can not be modified.";
-    fields = Lists.remove(fields, i);
+    fields.remove(i);
   }
 
   /**
@@ -296,7 +297,7 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   public void removeMethod(int i) {
     assert !isExternal() : "External types can not be modified.";
-    methods = Lists.remove(methods, i);
+    methods.remove(i);
   }
 
   /**
@@ -316,9 +317,9 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   public void resolve(List<JInterfaceType> resolvedInterfaces, List<JNode> resolvedRescues) {
     assert JType.replaces(resolvedInterfaces, superInterfaces);
-    superInterfaces = Lists.normalize(resolvedInterfaces);
+    superInterfaces = resolvedInterfaces;
     assert JNameOf.replacesNamedElements(resolvedRescues, artificialRescues);
-    artificialRescues = Lists.normalize(resolvedRescues);
+    artificialRescues = resolvedRescues;
   }
 
   /**
@@ -338,7 +339,7 @@ public abstract class JDeclaredType extends JReferenceType {
    * Sorts this type's fields according to the specified sort.
    */
   public void sortFields(Comparator<? super JField> sort) {
-    fields = Lists.sort(fields, sort);
+    Collections.sort(fields, sort);
   }
 
   /**
@@ -348,7 +349,7 @@ public abstract class JDeclaredType extends JReferenceType {
     // Sort the methods manually to avoid sorting clinit out of place!
     JMethod a[] = methods.toArray(new JMethod[methods.size()]);
     Arrays.sort(a, 1, a.length, sort);
-    methods = Lists.create(a);
+    methods = Lists.newArrayList(a);
   }
 
   /**
@@ -361,7 +362,7 @@ public abstract class JDeclaredType extends JReferenceType {
    * Clears all existing implemented interfaces.
    */
   void clearImplements() {
-    superInterfaces = Lists.create();
+    superInterfaces = Lists.newArrayList();
   }
 
   /**

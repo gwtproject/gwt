@@ -144,8 +144,8 @@ import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -442,7 +442,7 @@ public class JavaToJavaScriptCompiler {
       boolean isSourceMapsEnabled = findBooleanProperty(propertyOracles, logger,
           "compiler.useSourceMaps", "true", true, false, false);
       // (10.5) Obfuscate
-      Map<JsName, String> obfuscateMap = Maps.create();
+      Map<JsName, String> obfuscateMap = Maps.newHashMap();
       switch (options.getOutput()) {
         case OBFUSCATED:
           obfuscateMap = JsStringInterner.exec(jprogram, jsProgram, isIE6orUnknown);
@@ -513,7 +513,7 @@ public class JavaToJavaScriptCompiler {
               - ManagementFactory.getRuntimeMXBean().getStartTime());
           compilationMetrics.setJsSize(sizeBreakdowns);
           compilationMetrics.setPermutationDescription(permutation.prettyPrint());
-          toReturn.addArtifacts(Lists.create(unifiedAst.getModuleMetrics(), unifiedAst
+          toReturn.addArtifacts(Lists.newArrayList(unifiedAst.getModuleMetrics(), unifiedAst
               .getPrecompilationMetrics(), compilationMetrics));
         }
       }
@@ -672,11 +672,10 @@ public class JavaToJavaScriptCompiler {
       findEntryPoints(logger, rpo, declEntryPts, jprogram);
       unifyAst.exec();
 
-      List<String> finalTypeOracleTypes = Lists.create();
+      List<String> finalTypeOracleTypes = Lists.newArrayList();
       if (precompilationMetrics != null) {
         for (com.google.gwt.core.ext.typeinfo.JClassType type : typeOracle.getTypes()) {
-          finalTypeOracleTypes =
-              Lists.add(finalTypeOracleTypes, type.getPackage().getName() + "." + type.getName());
+          finalTypeOracleTypes.add(type.getPackage().getName() + "." + type.getName());
         }
         precompilationMetrics.setFinalTypeOracleTypes(finalTypeOracleTypes);
       }

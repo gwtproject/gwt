@@ -16,7 +16,7 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.JWildcardType.BoundType;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class JGenericType extends JRealClassType implements
 
   private JRawType lazyRawType = null;
 
-  private List<JTypeParameter> typeParams = Lists.create();
+  private List<JTypeParameter> typeParams = Lists.newArrayList();
 
   public JGenericType(TypeOracle oracle, JPackage declaringPackage,
       String enclosingTypeName, String name, boolean isInterface,
@@ -109,7 +109,7 @@ public class JGenericType extends JRealClassType implements
   }
 
   private void addTypeParameter(JTypeParameter typeParameter) {
-    typeParams = Lists.add(typeParams, typeParameter);
+    typeParams.add(typeParameter);
     typeParameter.setDeclaringClass(this);
   }
 }

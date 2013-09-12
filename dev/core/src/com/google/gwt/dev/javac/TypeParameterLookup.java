@@ -18,8 +18,7 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.dev.javac.typemodel.JClassType;
 import com.google.gwt.dev.javac.typemodel.JGenericType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -62,17 +61,10 @@ public class TypeParameterLookup {
   }
 
   private Map<String, JTypeParameter> buildScope(JTypeParameter[] typeParams) {
-    switch (typeParams.length) {
-      case 0:
-        return Maps.create();
-      case 1:
-        return Maps.create(typeParams[0].getName(), typeParams[0]);
-      default:
-        Map<String, JTypeParameter> scope = new HashMap<String, JTypeParameter>();
-        for (JTypeParameter typeParam : typeParams) {
-          scope.put(typeParam.getName(), typeParam);
-        }
-        return scope;
+    Map<String, JTypeParameter> scope = Maps.newHashMap();
+    for (JTypeParameter typeParam : typeParams) {
+      scope.put(typeParam.getName(), typeParam);
     }
+    return scope;
   }
 }

@@ -15,7 +15,8 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -90,7 +91,7 @@ class AnnotationProxyFactory {
     public AnnotationProxyInvocationHandler(
         Map<String, Object> identifierToValue,
         Class<? extends Annotation> annotationClass) {
-      this.identifierToValue = Maps.normalizeUnmodifiable(identifierToValue);
+      this.identifierToValue = ImmutableMap.copyOf(identifierToValue);
       this.annotationClass = annotationClass;
     }
 

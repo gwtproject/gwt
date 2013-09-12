@@ -16,9 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ import java.util.List;
  */
 public class JBlock extends JStatement {
 
-  private List<JStatement> statements = Collections.emptyList();
+  private List<JStatement> statements = Lists.newArrayList();
 
   public JBlock(SourceInfo info) {
     super(info);
@@ -36,32 +35,32 @@ public class JBlock extends JStatement {
    * Insert a statement into this block.
    */
   public void addStmt(int index, JStatement toAdd) {
-    statements = Lists.add(statements, index, toAdd);
+    statements.add(index, toAdd);
   }
 
   /**
    * Add a statement to the end of this block.
    */
   public void addStmt(JStatement toAdd) {
-    statements = Lists.add(statements, toAdd);
+    statements.add(toAdd);
   }
 
   /**
    * Insert a statements into this block.
    */
   public void addStmts(int index, List<JStatement> toAdd) {
-    statements = Lists.addAll(statements, index, toAdd);
+    statements.addAll(index, toAdd);
   }
 
   /**
    * Add statements to the end of this block.
    */
   public void addStmts(List<JStatement> toAdd) {
-    statements = Lists.addAll(statements, toAdd);
+    statements.addAll(toAdd);
   }
 
   public void clear() {
-    statements = Collections.emptyList();
+    statements.clear();
   }
 
   /**
@@ -75,7 +74,7 @@ public class JBlock extends JStatement {
    * Removes the statement from this block at the specified index.
    */
   public void removeStmt(int index) {
-    statements = Lists.remove(statements, index);
+    statements.remove(index);
   }
 
   public void traverse(JVisitor visitor, Context ctx) {

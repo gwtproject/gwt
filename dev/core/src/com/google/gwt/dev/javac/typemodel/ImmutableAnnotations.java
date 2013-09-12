@@ -16,12 +16,12 @@
 package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ class ImmutableAnnotations implements HasAnnotations {
   private final Map<Class<? extends Annotation>, Annotation> members;
 
   private ImmutableAnnotations() {
-    this.members = Maps.create();
+    this.members = Maps.newHashMap();
   }
 
   private ImmutableAnnotations(ImmutableAnnotations base,
@@ -89,6 +89,6 @@ class ImmutableAnnotations implements HasAnnotations {
       assert (!result.containsKey(type));
       result.put(type, addition);
     }
-    return Maps.normalize(result);
+    return result;
   }
 }

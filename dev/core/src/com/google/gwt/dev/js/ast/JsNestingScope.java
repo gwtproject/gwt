@@ -13,7 +13,7 @@
  */
 package com.google.gwt.dev.js.ast;
 
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public abstract class JsNestingScope extends JsScope {
   /**
    * Transient because children will add themselves to the parent after deserialization.
    */
-  private transient List<JsScope> children = Lists.create();
+  private transient List<JsScope> children = Lists.newArrayList();
 
   private JsScope parent;
 
@@ -63,11 +63,11 @@ public abstract class JsNestingScope extends JsScope {
 
   @Override
   protected final void addChild(JsScope child) {
-    children = Lists.add(children, child);
+    children.add(child);
   }
 
   protected Object readResolve() {
-    children = Lists.create();
+    children = Lists.newArrayList();
     parent.addChild(this);
     return this;
   }

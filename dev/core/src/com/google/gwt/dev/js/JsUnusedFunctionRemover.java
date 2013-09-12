@@ -25,10 +25,10 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Set;
 
@@ -84,7 +84,7 @@ public class JsUnusedFunctionRemover {
   }
 
   private final JsProgram program;
-  private final Set<JsName> seen = new IdentityHashSet<JsName>();
+  private final Set<JsName> seen = Sets.newIdentityHashSet();
 
   public JsUnusedFunctionRemover(JsProgram program) {
     this.program = program;

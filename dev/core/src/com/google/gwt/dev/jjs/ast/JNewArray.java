@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -35,12 +35,12 @@ public class JNewArray extends JExpression {
       ++realDims;
     }
 
-    List<JClassLiteral> classLiterals = Lists.create();
+    List<JClassLiteral> classLiterals = Lists.newArrayList();
     JType cur = arrayType;
     for (int i = 0; i < realDims; ++i) {
       // Walk down each type from most dims to least.
       JClassLiteral classLit = new JClassLiteral(info.makeChild(), cur);
-      classLiterals = Lists.add(classLiterals, classLit);
+      classLiterals.add(classLit);
       cur = ((JArrayType) cur).getElementType();
     }
     return new JNewArray(info, arrayType, dims, null, classLiterals);
@@ -49,7 +49,7 @@ public class JNewArray extends JExpression {
   public static JNewArray createInitializers(SourceInfo info, JArrayType arrayType,
       List<JExpression> initializers) {
     List<JClassLiteral> classLiterals =
-        Lists.create(new JClassLiteral(info.makeChild(), arrayType));
+        Lists.newArrayList(new JClassLiteral(info.makeChild(), arrayType));
     return new JNewArray(info, arrayType, null, initializers, classLiterals);
   }
 

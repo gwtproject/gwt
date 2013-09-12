@@ -23,9 +23,8 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,10 +35,10 @@ import java.util.Set;
  */
 public class JsniMethodBody extends JAbstractMethodBody {
 
-  private List<JsniClassLiteral> classRefs = Collections.emptyList();
+  private List<JsniClassLiteral> classRefs = Lists.newArrayList();
   private JsFunction jsFunction = null;
-  private List<JsniFieldRef> jsniFieldRefs = Collections.emptyList();
-  private List<JsniMethodRef> jsniMethodRefs = Collections.emptyList();
+  private List<JsniFieldRef> jsniFieldRefs = Lists.newArrayList();
+  private List<JsniMethodRef> jsniMethodRefs = Lists.newArrayList();
 
   private Set<String> stringLiterals = Collections.emptySet();
 
@@ -51,21 +50,21 @@ public class JsniMethodBody extends JAbstractMethodBody {
    * Adds a reference from this method to a Java class literal.
    */
   public void addClassRef(JsniClassLiteral ref) {
-    classRefs = Lists.add(classRefs, ref);
+    classRefs.add(ref);
   }
 
   /**
    * Adds a reference from this method to a Java field.
    */
   public void addJsniRef(JsniFieldRef ref) {
-    jsniFieldRefs = Lists.add(jsniFieldRefs, ref);
+    jsniFieldRefs.add(ref);
   }
 
   /**
    * Adds a reference from this method to a Java method.
    */
   public void addJsniRef(JsniMethodRef ref) {
-    jsniMethodRefs = Lists.add(jsniMethodRefs, ref);
+    jsniMethodRefs.add(ref);
   }
 
   /**
@@ -106,15 +105,14 @@ public class JsniMethodBody extends JAbstractMethodBody {
   public void setFunc(JsFunction jsFunction) {
     assert (this.jsFunction == null);
     this.jsFunction = jsFunction;
-    final Set<String> result = new HashSet<String>();
+    stringLiterals = Sets.newHashSet();
     class RecordStrings extends JsVisitor {
       @Override
       public void endVisit(JsStringLiteral lit, JsContext ctx) {
-        result.add(lit.getValue());
+        stringLiterals.add(lit.getValue());
       }
     }
     (new RecordStrings()).accept(jsFunction);
-    stringLiterals = Sets.normalize(result);
   }
 
   public void traverse(JVisitor visitor, Context ctx) {

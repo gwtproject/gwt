@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import junit.framework.TestCase;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class JProgramLastFragmentLoadingBeforeTest extends TestCase {
 
   public void testBasics() {
-    List<Integer> initialSeq = Lists.create(4, 3, 2);
+    List<Integer> initialSeq = Lists.newArrayList(4, 3, 2);
     int numSps = 10;
 
     // Very simple
@@ -78,7 +78,7 @@ public class JProgramLastFragmentLoadingBeforeTest extends TestCase {
   }
 
   public void testWithEmptyInitial() {
-    List<Integer> initialSeq = Lists.create();
+    List<Integer> initialSeq = Lists.newArrayList();
     int numSps = 10;
 
     // Simple case
@@ -116,7 +116,7 @@ public class JProgramLastFragmentLoadingBeforeTest extends TestCase {
   }
 
   public void testWithNoSplitPoints() {
-    List<Integer> initialSeq = Lists.create();
+    List<Integer> initialSeq = Lists.newArrayList();
     int numSps = 0;
 
     assertEquals(0,

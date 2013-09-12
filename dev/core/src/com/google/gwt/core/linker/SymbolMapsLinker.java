@@ -33,12 +33,12 @@ import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.HashMap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

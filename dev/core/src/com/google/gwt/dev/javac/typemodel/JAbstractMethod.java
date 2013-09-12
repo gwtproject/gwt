@@ -17,7 +17,7 @@ package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -37,13 +37,13 @@ public abstract class JAbstractMethod implements
 
   private final String name;
 
-  private List<JParameter> params = Lists.create();
+  private List<JParameter> params = Lists.newArrayList();
 
   private String[] realParameterNames = null;
 
-  private List<JClassType> thrownTypes = Lists.create();
+  private List<JClassType> thrownTypes = Lists.newArrayList();
 
-  private List<JTypeParameter> typeParams = Lists.create();
+  private List<JTypeParameter> typeParams = Lists.newArrayList();
 
   JAbstractMethod(JAbstractMethod srcMethod) {
     this.annotations = srcMethod.annotations;
@@ -60,7 +60,7 @@ public abstract class JAbstractMethod implements
     annotations = ImmutableAnnotations.EMPTY.plus(declaredAnnotations);
 
     if (jtypeParameters != null) {
-      typeParams = Lists.create(jtypeParameters);
+      typeParams = Lists.newArrayList(jtypeParameters);
     }
   }
 
@@ -234,11 +234,11 @@ public abstract class JAbstractMethod implements
   }
 
   void addParameter(JParameter param) {
-    params = Lists.add(params, param);
+    params.add(param);
   }
 
   void addThrows(JClassType type) {
-    thrownTypes = Lists.add(thrownTypes, type);
+    thrownTypes.add(type);
   }
 
   // Called only by a JParameter, passing itself as a reference for lookup.

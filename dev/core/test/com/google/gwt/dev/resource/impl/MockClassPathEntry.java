@@ -17,11 +17,11 @@ package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import junit.framework.Assert;
 
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 public class MockClassPathEntry extends ClassPathEntry {
@@ -48,7 +48,7 @@ public class MockClassPathEntry extends ClassPathEntry {
   public Map<AbstractResource, PathPrefix> findApplicableResources(
       TreeLogger logger, PathPrefixSet pathPrefixes) {
     // Only include resources that have the prefix and pass its filter.
-    Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
+    Map<AbstractResource, PathPrefix> results = Maps.newIdentityHashMap();
     for (Map.Entry<String, MockAbstractResource> entry : resourceMap.entrySet()) {
       String path = entry.getKey();
       PathPrefix prefix = null;

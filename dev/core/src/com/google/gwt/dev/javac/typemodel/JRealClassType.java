@@ -19,8 +19,8 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.IdentitySets;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.Set;
 public class JRealClassType extends JClassType implements
     com.google.gwt.core.ext.typeinfo.JRealClassType {
 
-  private Set<JClassType> allSubtypes = IdentitySets.create();
+  private Set<JClassType> allSubtypes = Sets.newIdentityHashSet();
 
   private final Annotations annotations = new Annotations();
 
@@ -44,7 +44,7 @@ public class JRealClassType extends JClassType implements
    */
   private JClassType enclosingType;
 
-  private List<JClassType> interfaces = Lists.create();
+  private List<JClassType> interfaces = Lists.newArrayList();
 
   private final boolean isInterface;
 
@@ -423,7 +423,7 @@ public class JRealClassType extends JClassType implements
 
   @Override
   protected void acceptSubtype(JClassType me) {
-    allSubtypes = IdentitySets.add(allSubtypes, me);
+    allSubtypes.add(me);
     notifySuperTypesOf(me);
   }
 
@@ -494,7 +494,7 @@ public class JRealClassType extends JClassType implements
 
   @Override
   protected void removeSubtype(JClassType me) {
-    allSubtypes = IdentitySets.remove(allSubtypes, me);
+    allSubtypes.remove(me);
 
     if (superclass != null) {
       superclass.removeSubtype(me);
@@ -514,7 +514,7 @@ public class JRealClassType extends JClassType implements
   @Override
   void addImplementedInterface(JClassType intf) {
     assert (intf != null);
-    interfaces = Lists.add(interfaces, intf);
+    interfaces.add(intf);
   }
 
   @Override

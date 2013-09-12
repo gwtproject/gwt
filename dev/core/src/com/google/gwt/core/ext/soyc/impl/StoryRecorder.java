@@ -27,12 +27,12 @@ import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -89,14 +89,14 @@ public class StoryRecorder {
    * of the constructor.
    */
   private transient Map<Correlation, Member> membersByCorrelation =
-      new IdentityHashMap<Correlation, Member>();
+      Maps.newIdentityHashMap();
 
   /**
    * This is a class field for convenience, but it should be deleted at the end
    * of the constructor.
    */
   private transient Map<SourceInfo, StoryImpl> storyCache =
-      new IdentityHashMap<SourceInfo, StoryImpl>();
+      Maps.newIdentityHashMap();
 
   private StoryRecorder() {
   }

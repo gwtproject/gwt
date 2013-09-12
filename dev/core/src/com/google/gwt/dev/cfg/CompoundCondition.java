@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.cfg;
 
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -34,9 +34,9 @@ public abstract class CompoundCondition extends Condition {
 
   @Override
   public Set<String> getRequiredProperties() {
-    Set<String> toReturn = Sets.create();
+    Set<String> toReturn = Sets.newHashSet();
     for (Iterator<Condition> it = conditions.iterator(); it.hasNext();) {
-      toReturn = Sets.addAll(toReturn, it.next().getRequiredProperties());
+      toReturn.addAll(it.next().getRequiredProperties());
     }
     return toReturn;
   }

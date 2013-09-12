@@ -22,8 +22,8 @@ import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
 import com.google.gwt.core.ext.soyc.impl.SizeMapRecorder;
 import com.google.gwt.dev.util.Strings;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.soyc.io.OutputDirectory;
 
 import java.io.IOException;
@@ -1366,8 +1366,8 @@ public class MakeTopLevelHtmlForPerm {
 
   private String[] getGeneratedTypes(ModuleMetricsArtifact moduleMetrics,
       PrecompilationMetricsArtifact precompilationMetrics) {
-    List<String> initialTypes = Lists.create(moduleMetrics.getInitialTypes());
-    Set<String> generatedTypes = Sets.create(precompilationMetrics.getFinalTypeOracleTypes());
+    List<String> initialTypes = Lists.newArrayList(moduleMetrics.getInitialTypes());
+    Set<String> generatedTypes = Sets.newHashSet(precompilationMetrics.getFinalTypeOracleTypes());
     generatedTypes.removeAll(initialTypes);
     String[] results = generatedTypes.toArray(new String[generatedTypes.size()]);
     Arrays.sort(results);
@@ -1391,8 +1391,8 @@ public class MakeTopLevelHtmlForPerm {
 
   private String[] getUnreferencedTypes(
       PrecompilationMetricsArtifact precompilationMetrics) {
-    List<String> astTypes = Lists.create(precompilationMetrics.getAstTypes());
-    Set<String> unreferencedTypes = Sets.create(precompilationMetrics.getFinalTypeOracleTypes());
+    List<String> astTypes = Lists.newArrayList(precompilationMetrics.getAstTypes());
+    Set<String> unreferencedTypes = Sets.newHashSet(precompilationMetrics.getFinalTypeOracleTypes());
     unreferencedTypes.removeAll(astTypes);
     String[] results = unreferencedTypes.toArray(new String[unreferencedTypes.size()]);
     Arrays.sort(results);

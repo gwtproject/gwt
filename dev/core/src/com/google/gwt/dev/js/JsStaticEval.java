@@ -52,11 +52,12 @@ import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -160,7 +161,7 @@ public class JsStaticEval {
     /**
      * This is used by {@link #additionCoercesToString}.
      */
-    private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<JsExpression, Boolean>();
+    private Map<JsExpression, Boolean> coercesToStringMap = Maps.newIdentityHashMap();
 
     @Override
     public void endVisit(JsBinaryOperation x, JsContext ctx) {

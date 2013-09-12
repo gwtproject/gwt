@@ -17,7 +17,8 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
@@ -45,9 +46,9 @@ abstract class CompilationUnitImpl extends CompilationUnit {
       List<JDeclaredType> types, Dependencies dependencies,
       Collection<? extends JsniMethod> jsniMethods,
       MethodArgNamesLookup methodArgs, CategorizedProblem[] problems) {
-    this.exposedCompiledClasses = Lists.normalizeUnmodifiable(compiledClasses);
+    this.exposedCompiledClasses = ImmutableList.copyOf(compiledClasses);
     this.dependencies = dependencies;
-    this.jsniMethods = Lists.create(jsniMethods.toArray(new JsniMethod[jsniMethods.size()]));
+    this.jsniMethods = Lists.newArrayList(jsniMethods.toArray(new JsniMethod[jsniMethods.size()]));
     this.methodArgs = methodArgs;
     this.problems = problems;
     boolean hasAnyErrors = false;

@@ -25,11 +25,11 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.arg.SourceLevel;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**

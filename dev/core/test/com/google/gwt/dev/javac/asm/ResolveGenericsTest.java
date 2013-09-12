@@ -34,12 +34,13 @@ import com.google.gwt.dev.javac.typemodel.JPackage;
 import com.google.gwt.dev.javac.typemodel.JRealClassType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -157,7 +158,7 @@ public class ResolveGenericsTest extends AsmTestCase {
 
   private final TypeOracle oracle;
 
-  private final Map<JMethod, Method> reflectionMethods = new IdentityHashMap<JMethod, Method>();
+  private final Map<JMethod, Method> reflectionMethods = Maps.newIdentityHashMap();
 
   private final MockResolver resolver;
 

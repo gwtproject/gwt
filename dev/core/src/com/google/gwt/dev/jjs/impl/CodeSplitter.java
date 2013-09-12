@@ -53,15 +53,15 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -474,8 +474,8 @@ public class CodeSplitter {
       initializers.add(JIntLiteral.get(sp));
     }
     JNewArray newArray =
-        JNewArray.createInitializers(arg1.getSourceInfo(), arrayType, Lists
-            .normalizeUnmodifiable(initializers));
+        JNewArray.createInitializers(arg1.getSourceInfo(), arrayType,
+            ImmutableList.copyOf(initializers));
     call.setArg(1, newArray);
   }
 

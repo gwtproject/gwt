@@ -161,10 +161,9 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -173,7 +172,6 @@ import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -424,8 +422,7 @@ public class GenerateJavaScriptAST {
       push(jsFunction.getScope());
 
       if (program.getIndexedMethods().contains(x)) {
-        indexedFunctions =
-            Maps.put(indexedFunctions, x.getEnclosingType().getShortName() + "." + x.getName(),
+        indexedFunctions.put(x.getEnclosingType().getShortName() + "." + x.getName(),
                 jsFunction);
       }
 
@@ -919,8 +916,7 @@ public class GenerateJavaScriptAST {
       JsName name = names.get(x);
 
       if (program.getIndexedFields().contains(x)) {
-        indexedFields =
-            Maps.put(indexedFields, x.getEnclosingType().getShortName() + "." + x.getName(), name);
+        indexedFields.put(x.getEnclosingType().getShortName() + "." + x.getName(), name);
       }
 
       if (x.isStatic()) {
@@ -1325,7 +1321,7 @@ public class GenerateJavaScriptAST {
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
 
       // Generate entry methods
-      generateGwtOnLoad(Lists.create(entryFunctions), globalStmts);
+      generateGwtOnLoad(Lists.newArrayList(entryFunctions), globalStmts);
 
       // Add a few things onto the beginning.
 
@@ -1553,7 +1549,7 @@ public class GenerateJavaScriptAST {
        */
       List<JMethod> entryMethods = x.getEntryMethods();
       entryFunctions = new JsFunction[entryMethods.size()];
-      entryMethodToIndex = new IdentityHashMap<JMethod, Integer>();
+      entryMethodToIndex = Maps.newIdentityHashMap();
       for (int i = 0; i < entryMethods.size(); i++) {
         entryMethodToIndex.put(entryMethods.get(i), i);
       }
@@ -1743,14 +1739,14 @@ public class GenerateJavaScriptAST {
     private void checkForDupMethods(JDeclaredType x) {
       // Sanity check to see that all methods are uniquely named.
       List<JMethod> methods = x.getMethods();
-      Set<String> methodSignatures = Sets.create();
+      Set<String> methodSignatures = Sets.newHashSet();
       for (JMethod method : methods) {
         String sig = method.getSignature();
         if (methodSignatures.contains(sig)) {
           throw new InternalCompilerException("Signature collision in Type " + x.getName()
               + " for method " + sig);
         }
-        methodSignatures = Sets.add(methodSignatures, sig);
+        methodSignatures.add(sig);
       }
     }
 
@@ -2497,11 +2493,11 @@ public class GenerateJavaScriptAST {
 
   private Map<String, JsExpression> castMapByString = new HashMap<String, JsExpression>();
 
-  private final Map<JBlock, JsCatch> catchMap = new IdentityHashMap<JBlock, JsCatch>();
+  private final Map<JBlock, JsCatch> catchMap = Maps.newIdentityHashMap();
 
   private final Set<JsName> catchParamIdentifiers = new HashSet<JsName>();
 
-  private final Map<JClassType, JsScope> classScopes = new IdentityHashMap<JClassType, JsScope>();
+  private final Map<JClassType, JsScope> classScopes = Maps.newIdentityHashMap();
 
   /**
    * A list of methods that are called from another class (ie might need to
@@ -2509,9 +2505,9 @@ public class GenerateJavaScriptAST {
    */
   private final Set<JMethod> crossClassTargets = new HashSet<JMethod>();
 
-  private Map<String, JsFunction> indexedFunctions = Maps.create();
+  private Map<String, JsFunction> indexedFunctions = Maps.newHashMap();
 
-  private Map<String, JsName> indexedFields = Maps.create();
+  private Map<String, JsName> indexedFields = Maps.newHashMap();
 
   /**
    * Contains JsNames for all interface methods. A special scope is needed so
@@ -2524,7 +2520,7 @@ public class GenerateJavaScriptAST {
 
   private final JsProgram jsProgram;
 
-  private final Set<JConstructor> liveCtors = new IdentityHashSet<JConstructor>();
+  private final Set<JConstructor> liveCtors = Sets.newIdentityHashSet();
 
   /**
    * Classes that could potentially see uninitialized values for fields that are initialized in the
@@ -2537,11 +2533,11 @@ public class GenerateJavaScriptAST {
    */
   private final Map<Long, JsName> longLits = new TreeMap<Long, JsName>();
 
-  private final Map<JsName, JsExpression> longObjects = new IdentityHashMap<JsName, JsExpression>();
+  private final Map<JsName, JsExpression> longObjects = Maps.newIdentityHashMap();
   private JsFunction makeMapFunction;
   private final Map<JAbstractMethodBody, JsFunction> methodBodyMap =
-      new IdentityHashMap<JAbstractMethodBody, JsFunction>();
-  private final Map<HasName, JsName> names = new IdentityHashMap<HasName, JsName>();
+      Maps.newIdentityHashMap();
+  private final Map<HasName, JsName> names = Maps.newIdentityHashMap();
   private int nextSeedId = 1;
   private List<JsName> namesByQueryId;
   private Map<String, JsName> namesByCastMap = new HashMap<String, JsName>();
@@ -2553,8 +2549,8 @@ public class GenerateJavaScriptAST {
    */
   private final JsScope objectScope;
   private final JsOutputOption output;
-  private final Set<JsFunction> polymorphicJsFunctions = new IdentityHashSet<JsFunction>();
-  private final Map<JMethod, JsName> polymorphicNames = new IdentityHashMap<JMethod, JsName>();
+  private final Set<JsFunction> polymorphicJsFunctions = Sets.newIdentityHashSet();
+  private final Map<JMethod, JsName> polymorphicNames = Maps.newIdentityHashMap();
   private final JProgram program;
 
   /**

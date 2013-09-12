@@ -32,8 +32,8 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitable;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.collect.HashMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

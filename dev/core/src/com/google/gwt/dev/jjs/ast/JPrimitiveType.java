@@ -17,8 +17,8 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.HashMap;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**

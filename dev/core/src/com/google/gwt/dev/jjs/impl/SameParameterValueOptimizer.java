@@ -35,9 +35,9 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -192,7 +192,7 @@ public class SameParameterValueOptimizer {
    * all calls.
    */
   private final Map<JParameter, JValueLiteral> parameterValues =
-      new IdentityHashMap<JParameter, JValueLiteral>();
+      Maps.newIdentityHashMap();
   private final JProgram program;
 
   /**

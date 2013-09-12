@@ -19,7 +19,6 @@ import com.google.gwt.core.client.impl.ArtificialRescue;
 import com.google.gwt.dev.jdt.SafeASTVisitor;
 import com.google.gwt.dev.util.Empty;
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
@@ -362,7 +361,7 @@ public abstract class ArtificialRescueChecker {
   public static List<String> collectReferencedTypes(CompilationUnitDeclaration cud) {
     ArrayList<String> result = new ArrayList<String>();
     new Collector(cud, result).exec();
-    return Lists.normalize(result);
+    return result;
   }
 
   static String badMethodSignature(String method) {

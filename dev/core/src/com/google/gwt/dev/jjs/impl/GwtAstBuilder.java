@@ -104,7 +104,7 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
-
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
@@ -209,7 +209,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -2869,7 +2868,7 @@ public class GwtAstBuilder {
     public final JClassType classType;
     public final ClassScope scope;
     public final Map<SyntheticArgumentBinding, JField> syntheticFields =
-        new IdentityHashMap<SyntheticArgumentBinding, JField>();
+        Maps.newIdentityHashMap();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
 
@@ -2897,7 +2896,7 @@ public class GwtAstBuilder {
     public final JMethodBody body;
     public final Map<String, JLabel> labels = new HashMap<String, JLabel>();
     public final Map<LocalVariableBinding, JVariable> locals =
-        new IdentityHashMap<LocalVariableBinding, JVariable>();
+        Maps.newIdentityHashMap();
     public final JMethod method;
     public final MethodScope scope;
 

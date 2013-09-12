@@ -25,6 +25,8 @@ import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -286,7 +288,7 @@ public class JProgram extends JNode {
 
   private final Map<String, JDeclaredType> indexedTypes = new HashMap<String, JDeclaredType>();
 
-  private final Map<JMethod, JMethod> instanceToStaticMap = new IdentityHashMap<JMethod, JMethod>();
+  private final Map<JMethod, JMethod> instanceToStaticMap = Maps.newIdentityHashMap();
 
   private Map<JReferenceType, Integer> queryIdsByType;
 
@@ -295,11 +297,11 @@ public class JProgram extends JNode {
    */
   private List<JRunAsync> runAsyncs = Lists.newArrayList();
 
-  private LinkedHashSet<JRunAsync> initialAsyncSequence = new LinkedHashSet<JRunAsync>();
+  private LinkedHashSet<JRunAsync> initialAsyncSequence = Sets.newLinkedHashSet();
 
   private List<Integer> initialFragmentIdSequence = Lists.newArrayList();
 
-  private final Map<JMethod, JMethod> staticToInstanceMap = new IdentityHashMap<JMethod, JMethod>();
+  private final Map<JMethod, JMethod> staticToInstanceMap = Maps.newIdentityHashMap();
 
   private JClassType typeClass;
 
@@ -852,7 +854,7 @@ public class JProgram extends JNode {
   public void initTypeInfo(IdentityHashMap<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
     castMaps = instantiatedCastableTypesMap;
     if (castMaps == null) {
-      castMaps = new IdentityHashMap<JReferenceType, JsCastMap>();
+      castMaps = Maps.newIdentityHashMap();
     }
   }
 

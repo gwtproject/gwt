@@ -46,10 +46,10 @@ import com.google.gwt.dev.js.ast.JsThisRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -164,7 +164,7 @@ public class MakeCallsStatic {
       JParameter thisParam =
           JParameter.create(sourceInfo, "this$static", enclosingType.getNonNull(), true, true,
               newMethod);
-      Map<JParameter, JParameter> varMap = new IdentityHashMap<JParameter, JParameter>();
+      Map<JParameter, JParameter> varMap = Maps.newIdentityHashMap();
       for (int i = 0; i < x.getParams().size(); ++i) {
         JParameter oldVar = x.getParams().get(i);
         JParameter newVar =

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -18,8 +18,9 @@ package com.google.gwt.dev.jjs.impl.gflow.copy;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.impl.gflow.Assumption;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -34,20 +35,20 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
    * Top value for copy analysis. Means nothing is the copy of anything.
    */
   public static final CopyAssumption TOP = new CopyAssumption();
-  
+
   /**
    * Updates the assumption by copying it on first write.
    */
   public static class Updater {
     private CopyAssumption assumption;
     private boolean copied = false;
-    
+
     public Updater(CopyAssumption assumption) {
       this.assumption = assumption;
     }
 
     public void addCopy(JVariable original, JVariable targetVariable) {
-      Preconditions.checkArgument(original != targetVariable, 
+      Preconditions.checkArgument(original != targetVariable,
           "Variable is a copy of itself: %s", original);
       copyIfNeeded();
       assumption.addCopy(original, targetVariable);
@@ -59,10 +60,10 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
         if (original == null) {
           return variable;
         }
-        
+
         variable = original;
       }
-      // We shouldn't have cycle if we always call getMostOriginal() before 
+      // We shouldn't have cycle if we always call getMostOriginal() before
       // invoking addCopy.
       // This is a rudimentary cycle detection :)
       throw new IllegalStateException("Possible cycle detected for: variable");
@@ -72,7 +73,7 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
       if (assumption == null || assumption == TOP) {
         return null;
       }
-      
+
       return assumption.getOriginal(variable);
     }
 
@@ -101,21 +102,21 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
       }
     }
   }
-    
+
   /**
    * Map from copies to original values.
    */
   private final Map<JVariable, JVariable> copyToOriginal;
-  
+
   public CopyAssumption() {
-    copyToOriginal = new IdentityHashMap<JVariable, JVariable>();
+    copyToOriginal = Maps.newIdentityHashMap();
   }
 
   public CopyAssumption(CopyAssumption result) {
     if (result != null) {
       copyToOriginal = new IdentityHashMap<JVariable, JVariable>(result.copyToOriginal);
     } else {
-      copyToOriginal = new IdentityHashMap<JVariable, JVariable>();
+      copyToOriginal = Maps.newIdentityHashMap();
     }
   }
 
@@ -147,17 +148,17 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
     if (value == null) {
       return this;
     }
-    
+
     if (this == TOP || value == TOP) {
       return TOP;
     }
-    
+
     if (value.copyToOriginal.isEmpty() || copyToOriginal.isEmpty()) {
       return null;
     }
-    
+
     CopyAssumption result = new CopyAssumption();
-    
+
     for (JVariable v : copyToOriginal.keySet()) {
       JVariable original = copyToOriginal.get(v);
       if (original == value.copyToOriginal.get(v)) {
@@ -195,8 +196,8 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
       }
     }
     result.append("}");
-    
-    return result.toString();  
+
+    return result.toString();
   }
 
   private void addCopy(JVariable original, JVariable copy) {
@@ -206,8 +207,8 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
 
   private void kill(JVariable variable) {
     copyToOriginal.put(variable, null);
-    
-    for (JVariable v : Lists.create(copyToOriginal.keySet())) {
+
+    for (JVariable v : Lists.newArrayList(copyToOriginal.keySet())) {
       JVariable original = copyToOriginal.get(v);
       if (original == variable) {
         copyToOriginal.put(v, null);

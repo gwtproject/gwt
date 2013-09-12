@@ -33,6 +33,7 @@ import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
+import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -40,6 +41,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 

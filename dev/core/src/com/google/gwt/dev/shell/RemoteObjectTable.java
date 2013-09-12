@@ -16,13 +16,13 @@
 package com.google.gwt.dev.shell;
 
 import com.google.gwt.dev.shell.BrowserChannel.RemoteObjectRef;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -60,7 +60,7 @@ public class RemoteObjectTable<T extends RemoteObjectRef> {
   public RemoteObjectTable() {
     refQueue = new ReferenceQueue<T>();
     remoteObjectFromId = new HashMap<Integer, Reference<T>>();
-    idFromRemoteObject = new IdentityHashMap<Reference<T>, Integer>();
+    idFromRemoteObject = Maps.newIdentityHashMap();
   }
 
   /**

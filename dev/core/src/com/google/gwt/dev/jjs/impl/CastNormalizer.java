@@ -40,7 +40,8 @@ import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,10 +76,10 @@ public class CastNormalizer {
 
     private final Set<JReferenceType> alreadyRan = new HashSet<JReferenceType>();
     private final IdentityHashMap<JReferenceType, JsCastMap> castableTypesMap =
-        new IdentityHashMap<JReferenceType, JsCastMap>();
+        Maps.newIdentityHashMap();
     private final List<JArrayType> instantiatedArrayTypes = new ArrayList<JArrayType>();
     private final Map<JReferenceType, Set<JReferenceType>> queriedTypes =
-        new IdentityHashMap<JReferenceType, Set<JReferenceType>>();
+        Maps.newIdentityHashMap();
 
     {
       JTypeOracle typeOracle = program.typeOracle;
@@ -187,7 +188,7 @@ public class CastNormalizer {
     }
 
     private Map<JReferenceType, Integer> assignQueryIds(List<JReferenceType> sortedQueryTypes) {
-      Map<JReferenceType, Integer> result = new IdentityHashMap<JReferenceType, Integer>();
+      Map<JReferenceType, Integer> result = Maps.newIdentityHashMap();
       int queryId = 0;
       for (JReferenceType queryType : sortedQueryTypes) {
         result.put(queryType, queryId++);
@@ -275,7 +276,7 @@ public class CastNormalizer {
       }
 
       // add an entry for me
-      castableTypesMap.put(type, new JsCastMap(SourceOrigin.UNKNOWN, Lists.create(castableTypes),
+      castableTypesMap.put(type, new JsCastMap(SourceOrigin.UNKNOWN, Lists.newArrayList(castableTypes),
           program.getJavaScriptObject()));
     }
 

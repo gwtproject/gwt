@@ -16,7 +16,6 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.List;
 
@@ -33,9 +32,9 @@ public class JForStatement extends JStatement {
   public JForStatement(SourceInfo info, List<JStatement> initializers, JExpression testExpr,
       List<JExpressionStatement> increments, JStatement body) {
     super(info);
-    this.initializers = Lists.normalize(initializers);
+    this.initializers = initializers;
     this.testExpr = testExpr;
-    this.increments = Lists.normalize(increments);
+    this.increments = increments;
     this.body = body;
   }
 

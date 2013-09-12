@@ -21,7 +21,7 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.List;
 import java.util.Set;
@@ -43,7 +43,7 @@ public class ConditionWhenPropertyIs extends Condition {
 
   @Override
   public Set<String> getRequiredProperties() {
-    return Sets.create(propName);
+    return Sets.newHashSet(propName);
   }
 
   @Override

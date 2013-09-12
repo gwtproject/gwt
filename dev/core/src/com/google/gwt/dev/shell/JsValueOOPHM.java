@@ -16,10 +16,10 @@
 package com.google.gwt.dev.shell;
 
 import com.google.gwt.dev.shell.BrowserChannel.JsObjectRef;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
@@ -361,7 +361,7 @@ public class JsValueOOPHM extends JsValue {
     } else {
       Map<Object, DispatchObject> cache = dispatchObjectCache.get();
       if (cache == null) {
-        cache = new IdentityHashMap<Object, DispatchObject>();
+        cache = Maps.newIdentityHashMap();
         dispatchObjectCache.set(cache);
       }
       DispatchObject dispObj = cache.get(val);

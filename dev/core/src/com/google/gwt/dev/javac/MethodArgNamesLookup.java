@@ -18,7 +18,7 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.typeinfo.JAbstractMethod;
 import com.google.gwt.dev.javac.asm.CollectMethodData;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 
@@ -45,7 +45,7 @@ public class MethodArgNamesLookup implements Serializable {
    * this method is called.
    */
   public void freeze() {
-    methodArgs = Maps.normalizeUnmodifiable(methodArgs);
+    methodArgs = ImmutableMap.copyOf(methodArgs);
   }
 
   /**

@@ -67,11 +67,11 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -1803,7 +1803,7 @@ public class DeadCodeElimination {
 
   private final JProgram program;
 
-  private final Map<JType, Class<?>> typeClassMap = new IdentityHashMap<JType, Class<?>>();
+  private final Map<JType, Class<?>> typeClassMap = Maps.newIdentityHashMap();
 
   public DeadCodeElimination(JProgram program) {
     this.program = program;

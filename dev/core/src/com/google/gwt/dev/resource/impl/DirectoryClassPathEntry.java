@@ -16,12 +16,12 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.msg.Message1String;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +63,7 @@ public class DirectoryClassPathEntry extends ClassPathEntry {
     List<Map<AbstractResource, PathPrefix>> results = new ArrayList<Map<AbstractResource, PathPrefix>>(
         pathPrefixSets.size());
     for (int i = 0, c = pathPrefixSets.size(); i < c; ++i) {
-      results.add(new IdentityHashMap<AbstractResource, PathPrefix>());
+      results.add((Map)Maps.newIdentityHashMap());
     }
     descendToFindResources(logger, pathPrefixSets, results, dir, "");
     return results;
@@ -72,9 +72,9 @@ public class DirectoryClassPathEntry extends ClassPathEntry {
   @Override
   public Map<AbstractResource, PathPrefix> findApplicableResources(
       TreeLogger logger, PathPrefixSet pathPrefixSet) {
-    Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
-    descendToFindResources(logger, Lists.create(pathPrefixSet),
-        Lists.create(results), dir, "");
+    Map<AbstractResource, PathPrefix> results = Maps.newIdentityHashMap();
+    descendToFindResources(logger, Lists.newArrayList(pathPrefixSet),
+        Lists.newArrayList(results), dir, "");
     return results;
   }
 

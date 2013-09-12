@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.impl.gflow.cfg;
 
 import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ import java.util.List;
  * @param <JNodeType> node's corresponding JNode type.
  */
 public abstract class CfgNode<JNodeType extends JNode> {
-  List<CfgEdge> in = Lists.create();
-  List<CfgEdge> out = Lists.create();
+  List<CfgEdge> in = Lists.newArrayList();
+  List<CfgEdge> out = Lists.newArrayList();
   private final JNodeType node;
   private final CfgNode<?> parent;
 

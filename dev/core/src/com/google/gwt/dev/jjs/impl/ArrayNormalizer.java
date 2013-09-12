@@ -37,7 +37,9 @@ import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * Replace array accesses and instantiations with calls to the Array class.
@@ -127,7 +129,8 @@ public class ArrayNormalizer {
     private JExpression getOrCreateCastMap(SourceInfo sourceInfo, JArrayType arrayType) {
       JsCastMap castableTypeMap = program.getCastMap(arrayType);
       if (castableTypeMap == null || castableTypeMap.getExprs().size() == 0) {
-        return new JsCastMap(sourceInfo, Lists.<JsQueryType>create(), program.getJavaScriptObject());
+        return new JsCastMap(sourceInfo, (List) Lists.newArrayList(),
+            program.getJavaScriptObject());
       }
       return castableTypeMap;
     }

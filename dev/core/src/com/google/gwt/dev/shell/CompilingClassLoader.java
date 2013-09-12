@@ -41,7 +41,7 @@ import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -678,12 +678,9 @@ public final class CompilingClassLoader extends ClassLoader implements
     private <K, V> void addToMap(Map<K, List<V>> map, K key, V value) {
       List<V> list = map.get(key);
       if (list == null) {
-        map.put(key, Lists.create(value));
+        map.put(key, Lists.newArrayList(value));
       } else {
-        List<V> maybeOther = Lists.add(list, value);
-        if (maybeOther != list) {
-          map.put(key, maybeOther);
-        }
+        list.add(value);
       }
     }
 

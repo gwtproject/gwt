@@ -78,8 +78,8 @@ import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.Name.InternalName;
-import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -383,7 +383,7 @@ public class UnifyAst {
       String reqType = JGwtCreate.nameOf(type);
       List<String> answers;
       try {
-        answers = Lists.create(rpo.getAllPossibleRebindAnswers(logger, reqType));
+        answers = Lists.newArrayList(rpo.getAllPossibleRebindAnswers(logger, reqType));
         rpo.getGeneratorContext().finish(logger);
       } catch (UnableToCompleteException e) {
         error(x, "Failed to resolve '" + reqType + "' via deferred binding");
@@ -517,14 +517,14 @@ public class UnifyAst {
   private final Map<String, CompiledClass> classFileMap;
   private final Map<String, CompiledClass> classFileMapBySource;
   private boolean errorsFound = false;
-  private final Set<CompilationUnit> failedUnits = new IdentityHashSet<CompilationUnit>();
+  private final Set<CompilationUnit> failedUnits = Sets.newIdentityHashSet();
   private final Map<String, JField> fieldMap = new HashMap<String, JField>();
 
   /**
    * The set of types currently known to be instantiable. Like
    * {@link ControlFlowAnalyzer#instantiatedTypes}.
    */
-  private final Set<JDeclaredType> instantiatedTypes = new IdentityHashSet<JDeclaredType>();
+  private final Set<JDeclaredType> instantiatedTypes = Sets.newIdentityHashSet();
 
   private final JsProgram jsProgram;
 
@@ -532,11 +532,11 @@ public class UnifyAst {
    * Fields and methods that are referenceable. Like
    * {@link ControlFlowAnalyzer#liveFieldsAndMethods}.
    */
-  private final Set<JNode> liveFieldsAndMethods = new IdentityHashSet<JNode>();
+  private final Set<JNode> liveFieldsAndMethods = Sets.newIdentityHashSet();
 
   private final TreeLogger logger;
-  private final Set<JMethod> magicMethodCalls = new IdentityHashSet<JMethod>();
-  private final Set<JMethod> gwtDebuggerMethods = new IdentityHashSet<JMethod>();
+  private final Set<JMethod> magicMethodCalls = Sets.newIdentityHashSet();
+  private final Set<JMethod> gwtDebuggerMethods = Sets.newIdentityHashSet();
   private final Map<String, JMethod> methodMap = new HashMap<String, JMethod>();
   private final JJSOptions options;
   private final JProgram program;
@@ -909,11 +909,10 @@ public class UnifyAst {
           } else {
             List<JMethod> pending = virtualMethodsPending.get(signature);
             if (pending == null) {
-              pending = Lists.create(method);
-            } else {
-              pending = Lists.add(pending, method);
+              pending = Lists.newArrayList(method);
+              virtualMethodsPending.put(signature, pending);
             }
-            virtualMethodsPending.put(signature, pending);
+            pending.add( method);
           }
         }
       }

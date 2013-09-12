@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class JEnumType extends JClassType {
    * TODO: implement traverse?
    */
 
-  private List<JEnumField> enumList = Lists.create();
+  private List<JEnumField> enumList = Lists.newArrayList();
   private boolean isOrdinalized = false;
 
   public static final String VALUES_ARRAY_NAME = "$VALUES";
@@ -43,9 +43,9 @@ public class JEnumType extends JClassType {
       JEnumField enumField = (JEnumField) field;
       int ordinal = enumField.ordinal();
       while (ordinal >= enumList.size()) {
-        enumList = Lists.add(enumList, null);
+        enumList.add(null);
       }
-      enumList = Lists.set(enumList, ordinal, enumField);
+      enumList.set(ordinal, enumField);
     }
     super.addField(field);
   }

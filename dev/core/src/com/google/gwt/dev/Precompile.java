@@ -39,7 +39,7 @@ import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
 import com.google.gwt.dev.util.CollapsedPropertyKey;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -362,11 +362,11 @@ public class Precompile {
 
       List<Permutation> equivalenceSet = mergedByCollapsedProperties.get(key);
       if (equivalenceSet == null) {
-        equivalenceSet = Lists.create();
+        equivalenceSet = Lists.newArrayList();
       } else {
         // Mutate list
         it.remove();
-        equivalenceSet = Lists.add(equivalenceSet, entry);
+        equivalenceSet.add(entry);
       }
       mergedByCollapsedProperties.put(key, equivalenceSet);
     }

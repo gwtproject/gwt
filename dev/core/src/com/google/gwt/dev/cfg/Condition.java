@@ -17,7 +17,7 @@ package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -31,7 +31,7 @@ public abstract class Condition implements Serializable {
    * be evaluated.
    */
   public Set<String> getRequiredProperties() {
-    return Sets.create();
+    return Sets.newHashSet();
   }
 
   /**

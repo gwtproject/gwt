@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67972d5f_85c944a1",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-12T19:10:35Z",
+      "side": 1,
+      "message": "What about following?\n\nA testing scheduler that records scheduled commands and  can execute them when asked to.",
+      "revId": "ab25081db6fe8380cecf67d0d92e44a5f5407885",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67972d5f_25795882",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-12T19:10:35Z",
+      "side": 1,
+      "message": "Let\u0027s remove the typical usage. In most cases developers just need one iteration; and otherwise it may go into infinite loop.",
+      "revId": "ab25081db6fe8380cecf67d0d92e44a5f5407885",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67972d5f_659880c4",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-12T19:10:35Z",
+      "side": 1,
+      "message": "{@link #executeScheduledCommands}",
+      "revId": "ab25081db6fe8380cecf67d0d92e44a5f5407885",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67972d5f_e58b7071",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-12T19:10:35Z",
+      "side": 1,
+      "message": "@return {@code true} if there are newly scheduled commands after the execution",
+      "revId": "ab25081db6fe8380cecf67d0d92e44a5f5407885",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07b3d1fa_f778a07f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "seems like the responsibilities of this class have expanded beyond what is described in the comment",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_731f4027",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "private",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_73de602c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "private, also might as well inline it",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07b3d1fa_77e49023",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "dead function",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07b3d1fa_37da1869",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "is it count or is it size?\n\nalso, it looks like it is only safe to call pickBestNPairs() and mergeSmallFragmentsTogether() after countAtoms().\n\nbut you\u0027re relying on external callers to know this and call countAtoms() for you.\n\ncountAtoms() should be private and LiveAtomsByRunAsyncSets should be responsible for knowing when/whether to call it",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_d30d74fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "public",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_f30a70df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "private",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87bee1c4_73b580e0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "dead function",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07b3d1fa_57df8c57",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "dead function",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07b3d1fa_b7c54883",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/MergeBySimilarityFragmentPartitionStrategy.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-12T00:06:55Z",
+      "side": 1,
+      "message": "line too long",
+      "revId": "89ec37981473283d39ade186dd7e147867b397c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c74379e0_dd570b07",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-13T08:46:12Z",
+      "side": 1,
+      "message": "It\u0027ll only work in prod mode, not in devmode.",
+      "parentUuid": "87bee1c4_d3b014d8",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87bee1c4_13ba8cb5",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7

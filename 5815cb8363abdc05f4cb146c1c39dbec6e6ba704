@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c74379e0_fd3527eb",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-13T08:44:54Z",
+      "side": 1,
+      "message": "Did you mean *execute*RepeatingCommands? If that\u0027s the case, then why didn\u0027t you use executeCommands?",
+      "revId": "5815cb8363abdc05f4cb146c1c39dbec6e6ba704",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c74379e0_9d3ae3da",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-13T08:44:54Z",
+      "side": 1,
+      "message": "SchedulerImpl catches exceptions and swallows them (or pass them to the GWT.UncaughtExceptionHandler if set), so the entire set of commands executes. We probably want a similar behavior here. Maybe we could throw an UmbrellaException though (which once again raises the concern that we don\u0027t have such exception in c.g.g.core).\n\nNow that we support Java 7, maybe we could add support for suppressed exception to the Java runtime emulation, and just throw a RuntimeException at the end: http://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#addSuppressed(java.lang.Throwable)\n\n…or we could change the return type to a List\u003cThrowable\u003e. The \u0027boolean\u0027 value duplicates the functionality of getRepeatingCommands().isEmpty() so it\u0027s not that useful.",
+      "revId": "5815cb8363abdc05f4cb146c1c39dbec6e6ba704",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e75dddd3_e93551eb",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-09-13T21:02:38Z",
+      "side": 1,
+      "message": "Oops, you\u0027re right; fixed.",
+      "parentUuid": "c74379e0_fd3527eb",
+      "revId": "5815cb8363abdc05f4cb146c1c39dbec6e6ba704",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c74379e0_9d3ae3da",
         "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-13T08:44:54Z",
       "side": 1,
       "message": "SchedulerImpl catches exceptions and swallows them (or pass them to the GWT.UncaughtExceptionHandler if set), so the entire set of commands executes. We probably want a similar behavior here. Maybe we could throw an UmbrellaException though (which once again raises the concern that we don\u0027t have such exception in c.g.g.core).\n\nNow that we support Java 7, maybe we could add support for suppressed exception to the Java runtime emulation, and just throw a RuntimeException at the end: http://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#addSuppressed(java.lang.Throwable)\n\n…or we could change the return type to a List\u003cThrowable\u003e. The \u0027boolean\u0027 value duplicates the functionality of getRepeatingCommands().isEmpty() so it\u0027s not that useful.",
+      "revId": "5815cb8363abdc05f4cb146c1c39dbec6e6ba704",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87f98100_dbf1b316",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-09-13T21:02:38Z",
+      "side": 1,
+      "message": "Good point, I didn\u0027t consider exceptions. Fortunately the stub can easily apply the same behavior as production: pass the exceptions to GWT.maybeReportUncaughtException(), failing GWTTestCase by default.",
+      "parentUuid": "c74379e0_9d3ae3da",
       "revId": "5815cb8363abdc05f4cb146c1c39dbec6e6ba704",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

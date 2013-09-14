@@ -406,6 +406,24 @@
       "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27f1b550_60da326a",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-09-14T10:51:43Z",
+      "side": 1,
+      "message": "Nevermind, I was looking at Xerces JARs (for some reason they stand out when you look at the diffs) #facepalm",
+      "parentUuid": "070f5125_ba2e2d98",
+      "revId": "f3dedf3bb719bb0e571da62bee013f284f547e4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

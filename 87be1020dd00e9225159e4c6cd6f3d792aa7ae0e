@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "67d64d84_4d296df7",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-16T19:27:26Z",
+      "side": 1,
+      "message": "I haven\u0027t tried but I would expect it to work. There is a runtime trampoline for java.lang.Object methods, so object doesn\u0027t need to be a \u0027real\u0027 java object for those methods to work; otherwise you can\u0027t assign a JSO to an Object.",
+      "parentUuid": "879501bf_bbd92776",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87bee1c4_13ba8cb5",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7

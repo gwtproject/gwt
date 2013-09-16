@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7c95dea_26ced64f",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-16T17:29:22Z",
+      "side": 1,
+      "message": "I think that this override of getRows() should be removed because accessing table.rows does not cause the leak, and table.children would incorrectly include any TBODY, THEAD, and TFOOT elements, right?\n\nIf you run the 2_noids_nocellref_leak.txt test case attached to the MS bug report (http://connect.microsoft.com/IE/feedback/details/790340/memory-leak-in-ie9-ie10-tables#details), the memory leak issue disappears after commenting out line 26 (that accesses row.cells) even though line 33 accesses tbl.rows.",
+      "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

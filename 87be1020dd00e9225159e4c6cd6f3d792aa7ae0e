@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a79845f6_dc342dc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-16T09:27:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87bee1c4_53b404c6",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87bee1c4_d3b014d8",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "879501bf_bbd92776",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-16T09:27:20Z",
+      "side": 1,
+      "message": "There would actually be problems in prod as well since the array is not a java object it would actually miss certain methods (toString, equals, hashcode)",
+      "parentUuid": "e75dddd3_29436945",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87bee1c4_13ba8cb5",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "879501bf_7ba79fe3",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-16T09:27:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87bee1c4_13ba8cb5",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27f1b550_e0c52282",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 7
@@ -100,6 +154,24 @@
       "writtenOn": "2013-09-07T00:09:29Z",
       "side": 1,
       "message": "nit: add blank line after?",
+      "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a79845f6_bc2f6169",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-16T09:27:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f1b550_e0c52282",
       "revId": "87be1020dd00e9225159e4c6cd6f3d792aa7ae0e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

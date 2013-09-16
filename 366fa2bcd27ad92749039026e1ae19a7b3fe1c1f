@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6732cdd4_aad38f22",
+        "filename": "user/test/com/google/gwt/i18n/I18NSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-09-16T23:15:50Z",
+      "side": 0,
+      "message": "This is in the shared package -- shouldn\u0027t it be in the JRE test suite?",
+      "revId": "366fa2bcd27ad92749039026e1ae19a7b3fe1c1f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

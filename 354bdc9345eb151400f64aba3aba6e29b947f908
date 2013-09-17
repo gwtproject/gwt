@@ -34,6 +34,24 @@
       "revId": "354bdc9345eb151400f64aba3aba6e29b947f908",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_ed5be158",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-17T21:51:03Z",
+      "side": 1,
+      "message": "That is fair. Can you add a feature request for that?",
+      "parentUuid": "6732cdd4_cd5ffd4d",
+      "revId": "354bdc9345eb151400f64aba3aba6e29b947f908",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

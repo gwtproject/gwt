@@ -16,6 +16,24 @@
       "revId": "354bdc9345eb151400f64aba3aba6e29b947f908",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_cd5ffd4d",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T21:46:44Z",
+      "side": 1,
+      "message": "I actually think the correct long-term fix here is the compiler should be extended to allow invoking JSO instance methods from JSNI.\n\nFWIW, I don\u0027t see any uses of DOM.isOrHasChild() from JSNI within Google or anywhere else in GWT.",
+      "parentUuid": "6732cdd4_cdc9bdfa",
+      "revId": "354bdc9345eb151400f64aba3aba6e29b947f908",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

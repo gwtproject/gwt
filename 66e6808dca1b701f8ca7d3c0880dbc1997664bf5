@@ -16,6 +16,24 @@
       "revId": "66e6808dca1b701f8ca7d3c0880dbc1997664bf5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_8da8a524",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T21:24:43Z",
+      "side": 1,
+      "message": "Well, theoretically it should work: this is the syntax for invoking a Java instance method from JSNI (http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html#methods-fields).\n\nBut this code in particular seems to fail because Node is a JSO type, so I\u0027m going to need to create a local helper method. \u003d/  Working on a new patch right now.",
+      "parentUuid": "6732cdd4_4d5a2d8d",
+      "revId": "66e6808dca1b701f8ca7d3c0880dbc1997664bf5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

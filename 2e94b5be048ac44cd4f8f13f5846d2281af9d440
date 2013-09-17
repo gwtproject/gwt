@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6732cdd4_2d9099da",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T21:42:01Z",
+      "side": 1,
+      "message": "Hm, true, though UnloadModule support is disabled by default still.\n\nOkay, I\u0027m reasonably satisfied modifying Array.prototype like this should be okay.",
+      "parentUuid": "44ece779_210aee33",
+      "revId": "2e94b5be048ac44cd4f8f13f5846d2281af9d440",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "474ea957_f16ae817",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 2

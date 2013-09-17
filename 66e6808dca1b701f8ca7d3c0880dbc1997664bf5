@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6732cdd4_4d5a2d8d",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/RichTextAreaImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-17T21:17:45Z",
+      "side": 1,
+      "message": "Himm, I didn\u0027t see this style before. According to my previous assumptions on JSNI this wouldn\u0027t have worked. Did you verify it?",
+      "revId": "66e6808dca1b701f8ca7d3c0880dbc1997664bf5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

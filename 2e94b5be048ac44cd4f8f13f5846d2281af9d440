@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "44ece779_210aee33",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-09-17T21:31:55Z",
+      "side": 1,
+      "message": "If this is a problem, then com.google.gwt.core.client.impl.UnloadSupportEnabled.exportUnloadModule() is also a problem:\n\n    String.prototype.@java.lang.Object::___clazz \u003d null;\n\nLikewise, whatever sets that ___clazz will be an issue too (I think this is GenerateJavaScriptAST.generateSeedFuncAndPrototype).",
+      "parentUuid": "6732cdd4_6d153150",
+      "revId": "2e94b5be048ac44cd4f8f13f5846d2281af9d440",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "474ea957_f16ae817",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 2

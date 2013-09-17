@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "474ea957_74434644",
+        "filename": "user/src/com/google/gwt/user/HTMLTable.gwt.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T19:12:04Z",
+      "side": 1,
+      "message": "Nit: \"if\"",
+      "revId": "cdc6fa72b3e33ff870ee405500538469a06a729e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_9486ea68",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T19:12:04Z",
+      "side": 1,
+      "message": "Nit: The above 3 lines are indented an extra space.",
+      "revId": "cdc6fa72b3e33ff870ee405500538469a06a729e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_b48bee71",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T19:12:04Z",
+      "side": 1,
+      "message": "table -\u003e tbody since the parameter was renamed.",
+      "revId": "cdc6fa72b3e33ff870ee405500538469a06a729e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

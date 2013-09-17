@@ -16,6 +16,24 @@
       "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4f7f745_5dc27b77",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-17T09:09:35Z",
+      "side": 1,
+      "message": "This still leaks since we are not calling table.rows we are actually calling tbody.rows. My testcase clearly shows a leak if we do not change this.\n\nI changed the name of table to tbody to make it more clear that we do not call this on table but on the table body all the time.",
+      "parentUuid": "e7c95dea_26ced64f",
+      "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

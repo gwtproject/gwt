@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6732cdd4_6a9a77fc",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T17:03:02Z",
+      "side": 1,
+      "message": "Nit: Please remove the extra space after \"maybeEntityProxy\".",
+      "revId": "a61239e44faf61ca17861cb46a115c8963441560",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_8a65eb1b",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/Resolver.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T17:03:02Z",
+      "side": 1,
+      "message": "Nit: Please remove the extra space after \"domainValue\".",
+      "revId": "a61239e44faf61ca17861cb46a115c8963441560",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_8a332b20",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T17:03:02Z",
+      "side": 1,
+      "message": "I\u0027m still skeptical about this simple map encoding.  Is it really necessary?  It seems like it only saves 4 bytes per encoded map, unless I\u0027m missing some other benefit to it.\n\nI think the code would be cleaner if we always encoded maps the same way, rather than had two different encodings.",
+      "revId": "a61239e44faf61ca17861cb46a115c8963441560",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_8de26549",
+        "filename": "user/src/com/google/web/bindery/requestfactory/shared/impl/EntityCodex.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T17:03:02Z",
+      "side": 1,
+      "message": "Out of curiosity, did you put any consideration into whether to encode this as\n\n    [[k1,k2,k3,...],[v1,v2,v3,...]]\n\nvs\n\n    [[k1,v1],[k2,v2],[k3,v3],...]\n\n?  I can see benefits to either way and I\u0027m not strongly opinionated, so I\u0027m just curious why you chose this way.",
+      "revId": "a61239e44faf61ca17861cb46a115c8963441560",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

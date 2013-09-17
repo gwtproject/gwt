@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6732cdd4_ad3ba94f",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HtmlUnitSessionHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T20:18:52Z",
+      "side": 1,
+      "message": "Nit: Please sort alphabetically (Byte, Integer, Short).",
+      "revId": "d3ba489444472c73b4a5dca59140fbc226737d4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

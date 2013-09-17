@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "474ea957_91843cd3",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "Nit: indentation",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_b18940ec",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "Nit: indentation",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_f193c817",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "Rename table to tbody?",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_d18ec4f0",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "Rename elem to tbody?",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_3176300c",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "elem -\u003e tbody?",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_11792cfd",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:39:04Z",
+      "side": 1,
+      "message": "table -\u003e tbody?",
+      "revId": "785265e4ec82c21da5cdf3d4b74a9da4c95f8ad5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

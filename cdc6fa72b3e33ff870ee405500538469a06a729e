@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6732cdd4_8d8425d3",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-17T21:05:21Z",
+      "side": 1,
+      "message": "I don\u0027t know if there are anything specific in the style that is banning it but there are already hundreds of such cases for the @SuppressWarnings in GWT-SDK (see GWT.runAsync as an example).\n\nAt the end it is more helpful for the reader to keep it next to annotation; if there is any ban, I think we can change that rule.",
+      "parentUuid": "c4f7f745_1d93d31b",
+      "revId": "cdc6fa72b3e33ff870ee405500538469a06a729e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "474ea957_9486ea68",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 11

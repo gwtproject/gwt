@@ -16,6 +16,24 @@
       "revId": "d3ba489444472c73b4a5dca59140fbc226737d4f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6732cdd4_2d76d90b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HtmlUnitSessionHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-17T21:11:54Z",
+      "side": 1,
+      "message": "Changed the order to follow the size.",
+      "parentUuid": "6732cdd4_ad3ba94f",
+      "revId": "d3ba489444472c73b4a5dca59140fbc226737d4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

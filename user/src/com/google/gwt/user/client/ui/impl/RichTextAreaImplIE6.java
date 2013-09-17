@@ -70,7 +70,7 @@ public class RichTextAreaImplIE6 extends RichTextAreaImplStandard {
       if (tr == null) {
         return;
       }
-      if (!@com.google.gwt.user.client.DOM::isOrHasChild(Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/Element;)(doc.body, tr.parentElement())) {
+      if (!doc.body.@com.google.gwt.dom.client.Node::isOrHasChild(Lcom/google/gwt/dom/client/Node;)(tr.parentElement())) {
         return;
       }
       tr.pasteHTML(html);

@@ -34,6 +34,24 @@
       "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "474ea957_512c9408",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5876
+      },
+      "writtenOn": "2013-09-17T11:33:39Z",
+      "side": 1,
+      "message": "Oh, okay.  Thank you for looking into this.  I like the rename to tbody to make the method more clear.",
+      "parentUuid": "c4f7f745_5dc27b77",
+      "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

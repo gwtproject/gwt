@@ -52,6 +52,24 @@
       "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4f7f745_7dce577c",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-17T11:35:29Z",
+      "side": 1,
+      "message": "Thanks for taking a look at this! This improved the code base an is really appreciated!",
+      "parentUuid": "474ea957_512c9408",
+      "revId": "8e05e2d74a50bfeecb9cdc3ca9536f273f997f4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

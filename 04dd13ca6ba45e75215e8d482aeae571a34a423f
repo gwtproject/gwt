@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6732cdd4_2d2259ae",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-17T17:32:51Z",
+      "side": 1,
+      "message": "Why not static?",
+      "revId": "04dd13ca6ba45e75215e8d482aeae571a34a423f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "6732cdd4_2da41998",
+        "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-17T19:30:25Z",
+      "side": 1,
+      "message": "Can you also move these comments next to @SuppressWarning annotation?",
+      "revId": "cdc6fa72b3e33ff870ee405500538469a06a729e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "474ea957_9486ea68",
         "filename": "user/src/com/google/gwt/user/client/ui/HTMLTable.java",
         "patchSetId": 11

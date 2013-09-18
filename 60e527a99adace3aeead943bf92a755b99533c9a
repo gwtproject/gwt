@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c42537aa_f36608c3",
+        "filename": "user/src/com/google/gwt/junit/FakeCssMaker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-18T21:22:41Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "revId": "60e527a99adace3aeead943bf92a755b99533c9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

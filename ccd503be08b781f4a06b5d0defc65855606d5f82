@@ -16,6 +16,24 @@
       "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4287b83_ce1b6386",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-09-18T20:11:31Z",
+      "side": 1,
+      "message": "IIRC this can vary based on what the compiler decided to stick on j.l.Object (and so will be needed on any array type). Will start with the set in the GenerateJavaScriptAST ctor (not actually listed for this purpose, but put there for the same basic reason), off the top of my head I\u0027m not sure what else it could add (if anything):\n\n    // Object polymorphic\n    Map\u003cString, String\u003e namesToIdents \u003d new HashMap\u003cString, String\u003e();\n    namesToIdents.put(\"getClass\", \"gC\");\n    namesToIdents.put(\"hashCode\", \"hC\");\n    namesToIdents.put(\"equals\", \"eQ\");\n    namesToIdents.put(\"toString\", \"tS\");\n    namesToIdents.put(\"finalize\", \"fZ\");\n\nLikely ends up being a subset of this list, depending on the pruner at the Object level (probably) removing finalized, versus (probably not) removing getClass.",
+      "parentUuid": "c42537aa_b0475629",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

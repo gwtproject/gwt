@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c42537aa_5374bc8f",
+        "filename": "user/src/com/google/gwt/junit/FakeCssMaker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-18T21:12:43Z",
+      "side": 1,
+      "message": "Can you also check the argument count?",
+      "revId": "678a5dfbeef1dcead60a8bdb634b9cd3dc8c3249",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

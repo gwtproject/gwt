@@ -86,7 +86,7 @@ public class ButtonTest extends GWTTestCase {
    */
   public void testPushButton() {
     FormPanel f = new FormPanel();
-    f.setAction("javascript:''");
+    f.setAction("about:blank");
     RootPanel.get().add(f);
 
     Button b = new Button();

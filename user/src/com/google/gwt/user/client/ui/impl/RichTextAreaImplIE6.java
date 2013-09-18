@@ -35,7 +35,7 @@ public class RichTextAreaImplIE6 extends RichTextAreaImplStandard {
   @Override
   public Element createElement() {
     Element elem = super.createElement();
-    DOM.setElementProperty(elem, "src", "javascript:''");
+    DOM.setElementProperty(elem, "src", "about:blank");
     return elem;
   }
 

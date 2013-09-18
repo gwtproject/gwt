@@ -124,7 +124,7 @@ public class XMLHttpRequest extends JavaScriptObject {
   public static native XMLHttpRequest create() /*-{
     // Don't check window.XMLHttpRequest, because it can
     // cause cross-site problems on IE8 if window's URL
-    // is javascript:'' .
+    // is about:blank .
     var xhr;
     if ($wnd.XMLHttpRequest) {
       xhr = new $wnd.XMLHttpRequest();

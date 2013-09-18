@@ -30,7 +30,7 @@ function setupInstallLocation() {
   // Create the script frame, making sure it's invisible, but not
   // "display:none", which keeps some browsers from running code in it.
   var scriptFrame = $doc.createElement('iframe');
-  scriptFrame.src = 'javascript:""';
+  scriptFrame.src = 'about:blank';
   scriptFrame.id = '__MODULE_NAME__';
   scriptFrame.style.cssText = 'position:absolute; width:0; height:0; border:none; left: -1000px;'
     + ' top: -1000px;';

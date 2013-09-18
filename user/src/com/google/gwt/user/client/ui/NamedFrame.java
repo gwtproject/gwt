@@ -40,7 +40,7 @@ public class NamedFrame extends Frame {
 
     // Setting a src prevents mixed-content warnings.
     // http://weblogs.asp.net/bleroy/archive/2005/08/09/how-to-put-a-div-over-a-select-in-ie.aspx
-    @Template("<iframe src=\"javascript:''\" name='{0}'>")
+    @Template("<iframe src=\"about:blank\" name='{0}'>")
     SafeHtml get(String name);
   }
 

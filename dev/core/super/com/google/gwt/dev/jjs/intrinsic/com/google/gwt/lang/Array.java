@@ -180,6 +180,13 @@ public final class Array {
   }
 
   /**
+   * Sets a value in the array.
+   */
+  public static native Object set(Array array, int index, Object value) /*-{
+    return array[index] = value;
+  }-*/;
+
+  /**
    * Performs an array assignment, after validating the type of the value being
    * stored. The form of the type check depends on the value of queryId, as
    * follows:
@@ -292,13 +299,6 @@ public final class Array {
     }
     return result;
   }
-
-  /**
-   * Sets a value in the array.
-   */
-  private static native Object set(Array array, int index, Object value) /*-{
-    return array[index] = value;
-  }-*/;
 
   // violator pattern so that the field remains private
   private static native void setClass(Object o, Class<?> clazz) /*-{

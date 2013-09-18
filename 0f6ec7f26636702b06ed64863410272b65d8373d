@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c42537aa_36d8fe3c",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-18T22:44:26Z",
+      "side": 1,
+      "message": "Hm, I think this comment is probably still true, but not certain.",
+      "revId": "0f6ec7f26636702b06ed64863410272b65d8373d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

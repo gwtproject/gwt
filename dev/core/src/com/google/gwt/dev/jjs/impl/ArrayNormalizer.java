@@ -210,8 +210,8 @@ public class ArrayNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new ArrayNormalizer(program).execImpl();
+  public static void exec(JProgram program, boolean disableCastChecking) {
+    new ArrayNormalizer(program, disableCastChecking).execImpl();
   }
 
   private final JMethod initDim;
@@ -220,9 +220,14 @@ public class ArrayNormalizer {
   private final JProgram program;
   private final JMethod setCheckMethod;
 
-  private ArrayNormalizer(JProgram program) {
+  private ArrayNormalizer(JProgram program, boolean disableCastChecking) {
     this.program = program;
-    setCheckMethod = program.getIndexedMethod("Array.setCheck");
+    if (disableCastChecking) {
+      setCheckMethod = program.getIndexedMethod("Array.set");
+    } else {
+      setCheckMethod = program.getIndexedMethod("Array.setCheck");
+    }
+
     initDim = program.getIndexedMethod("Array.initDim");
     initDims = program.getIndexedMethod("Array.initDims");
     initValues = program.getIndexedMethod("Array.initValues");

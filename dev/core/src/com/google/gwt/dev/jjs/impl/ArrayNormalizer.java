@@ -66,8 +66,14 @@ public class ArrayNormalizer {
           if (!((JReferenceType) elementType).isFinal()
               || !program.typeOracle.canTriviallyCast((JReferenceType) x.getRhs().getType(),
                   (JReferenceType) elementType)) {
-            // replace this assignment with a call to setCheck()
-            JMethodCall call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
+            JMethodCall call = null;
+            if (disableCastChecking) {
+              // if cast checking is disabled just use the direct set
+              call = new JMethodCall(x.getSourceInfo(), null, setMethod);
+            } else {
+              // replace this assignment with a call to setCheck()
+              call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
+            }
             call.addArgs(arrayRef.getInstance(), arrayRef.getIndexExpr(), x.getRhs());
             ctx.replaceMe(call);
           }
@@ -210,19 +216,25 @@ public class ArrayNormalizer {
     }
   }
 
-  public static void exec(JProgram program) {
-    new ArrayNormalizer(program).execImpl();
+  public static void exec(JProgram program, boolean disableCastChecking) {
+    new ArrayNormalizer(program, disableCastChecking).execImpl();
   }
 
+  private final boolean disableCastChecking;
   private final JMethod initDim;
   private final JMethod initDims;
   private final JMethod initValues;
   private final JProgram program;
   private final JMethod setCheckMethod;
+  private final JMethod setMethod;
 
-  private ArrayNormalizer(JProgram program) {
+  private ArrayNormalizer(JProgram program, boolean disableCastChecking) {
     this.program = program;
+    this.disableCastChecking = disableCastChecking;
+
+    setMethod = program.getIndexedMethod("Array.set");
     setCheckMethod = program.getIndexedMethod("Array.setCheck");
+
     initDim = program.getIndexedMethod("Array.initDim");
     initDims = program.getIndexedMethod("Array.initDims");
     initValues = program.getIndexedMethod("Array.initValues");

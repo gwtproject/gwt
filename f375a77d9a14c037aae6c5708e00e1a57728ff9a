@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a43203ef_2f53051d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-19T13:56:20Z",
+      "side": 1,
+      "message": "It seems that the previous logic assumed a normal set would be done under certain conditions and the replacement was only done in some cases.\n\nI think if you keep the old code but add !disableCastChecking to the top condition would suffice. Did you try that?\n\nBecause I presume the replacement of a[i] \u003d b into a.set(i,b) happens somewhere else (maybe in GenerateJAvaScriptAst) and it would be better if that logic is only in one place. \n\nOne could argue that the better place is ArrayNormalizer but lets leave that for a different CL at some other moment.",
+      "revId": "f375a77d9a14c037aae6c5708e00e1a57728ff9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

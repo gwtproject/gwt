@@ -34,6 +34,24 @@
       "revId": "09436ca9284fb66e0b1ceb70df01b622fd11d76a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04574f42_203590ec",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-23T19:54:42Z",
+      "side": 1,
+      "message": "Thanks Daniel. It looks like using both are practically same so it is a nit but the reader might end up distracted by the difference in pattern and lose some time to understand the reasoning. So it is best to keep any pattern used in the same file.",
+      "parentUuid": "e4423b7c_04ecdad6",
+      "revId": "09436ca9284fb66e0b1ceb70df01b622fd11d76a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

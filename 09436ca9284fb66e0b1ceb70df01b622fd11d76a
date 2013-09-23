@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04574f42_80ec5c3d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-23T19:44:59Z",
+      "side": 1,
+      "message": "Any reason not to use String.valueOf instead of \"new String\" like the rest of the class?",
+      "revId": "09436ca9284fb66e0b1ceb70df01b622fd11d76a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

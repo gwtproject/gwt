@@ -16,6 +16,24 @@
       "revId": "2a03fe85c383c5313e2e71bcf87790afd2a4b398",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04258fee_c7a01ee6",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-23T21:36:38Z",
+      "side": 1,
+      "message": "I thought it can be useful to have a common utility that helps to reset the time consistently for different implementations and also for testing (actually my second patch uses it for tests).",
+      "parentUuid": "e4423b7c_a48c0636",
+      "revId": "2a03fe85c383c5313e2e71bcf87790afd2a4b398",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4423b7c_a48c0636",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-09-23T20:21:27Z",
+      "side": 1,
+      "message": "Why does this need to be public?",
+      "revId": "2a03fe85c383c5313e2e71bcf87790afd2a4b398",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -70,6 +70,24 @@
       "revId": "09436ca9284fb66e0b1ceb70df01b622fd11d76a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04574f42_a0cb603c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-23T21:00:15Z",
+      "side": 1,
+      "message": "Oh, just create a new patch.  My bad. :)",
+      "parentUuid": "e4423b7c_c4caf259",
+      "revId": "09436ca9284fb66e0b1ceb70df01b622fd11d76a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

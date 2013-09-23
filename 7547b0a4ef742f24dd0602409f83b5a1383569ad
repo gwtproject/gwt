@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04574f42_e0f43844",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DateBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-23T21:19:21Z",
+      "side": 1,
+      "message": "There was a typo here - default is DATE_TIME_MEDIUM instead of DATE_MEDIUM.",
+      "revId": "7547b0a4ef742f24dd0602409f83b5a1383569ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04574f42_40036463",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/DateBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-23T21:19:21Z",
+      "side": 1,
+      "message": "Older code was deprecated.",
+      "revId": "7547b0a4ef742f24dd0602409f83b5a1383569ad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

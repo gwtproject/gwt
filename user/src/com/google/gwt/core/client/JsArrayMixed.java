@@ -40,20 +40,20 @@ public class JsArrayMixed extends JavaScriptObject {
    * Gets the boolean at a given index.
    * 
    * @param index the index to be retrieved
-   * @return the object at the given index, or <code>null</code> if none exists
+   * @return the object at the given index coerced to boolean.
    */
   public final native boolean getBoolean(int index) /*-{
-    return Boolean(this[index]);
+    return !!this[index];
   }-*/;
 
   /**
    * Gets the double at a given index.
    * 
    * @param index the index to be retrieved
-   * @return the object at the given index, or <code>null</code> if none exists
+   * @return the object at the given index coerced to number.
    */
   public final native double getNumber(int index) /*-{
-    return Number(this[index]);
+    return +this[index];
   }-*/;
 
   /**
@@ -200,7 +200,7 @@ public class JsArrayMixed extends JavaScriptObject {
    * @return the shifted boolean
    */
   public final native boolean shiftBoolean() /*-{
-    return Boolean(this.shift());
+    return !!this.shift();
   }-*/;
 
   /**
@@ -209,7 +209,7 @@ public class JsArrayMixed extends JavaScriptObject {
    * @return the shifted double
    */
   public final native double shiftNumber() /*-{
-    return Number(this.shift());
+    return +this.shift();
   }-*/;
 
   /**

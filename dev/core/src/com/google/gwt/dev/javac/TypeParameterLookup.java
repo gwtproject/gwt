@@ -18,7 +18,8 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.dev.javac.typemodel.JClassType;
 import com.google.gwt.dev.javac.typemodel.JGenericType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -28,7 +29,7 @@ import java.util.Map;
  */
 public class TypeParameterLookup {
 
-  private LinkedList<Map<String, JTypeParameter>> scopeStack = new LinkedList<Map<String, JTypeParameter>>();
+  private final LinkedList<Map<String, JTypeParameter>> scopeStack = Lists.newLinkedList();
 
   public JTypeParameter lookup(String name) {
     for (Map<String, JTypeParameter> scope : scopeStack) {
@@ -61,10 +62,10 @@ public class TypeParameterLookup {
   }
 
   private Map<String, JTypeParameter> buildScope(JTypeParameter[] typeParams) {
-    Map<String, JTypeParameter> scope = Maps.newHashMap();
+    ImmutableMap.Builder<String, JTypeParameter> scope = new ImmutableMap.Builder();
     for (JTypeParameter typeParam : typeParams) {
       scope.put(typeParam.getName(), typeParam);
     }
-    return scope;
+    return scope.build();
   }
 }

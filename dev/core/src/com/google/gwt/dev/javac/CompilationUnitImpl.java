@@ -36,7 +36,7 @@ abstract class CompilationUnitImpl extends CompilationUnit {
   protected transient long astToken;
 
   private final Dependencies dependencies;
-  private final List<CompiledClass> exposedCompiledClasses;
+  private final ImmutableList<CompiledClass> exposedCompiledClasses;
   private final boolean hasErrors;
   private final List<JsniMethod> jsniMethods;
   private final MethodArgNamesLookup methodArgs;
@@ -75,6 +75,7 @@ abstract class CompilationUnitImpl extends CompilationUnit {
     }
   }
 
+  // TODO(rluble): The return should be declared as an immutable collection (ImmutableList perhaps?)
   @Override
   public Collection<CompiledClass> getCompiledClasses() {
     return exposedCompiledClasses;

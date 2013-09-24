@@ -43,8 +43,8 @@ public final class Permutation implements Serializable {
    */
   public Permutation(int id, Permutation other) {
     this.id = id;
-    orderedPropertyOracles = Lists.newArrayList(other.orderedPropertyOracles);
-    orderedRebindAnswers = Lists.newArrayList(other.orderedRebindAnswers);
+    orderedPropertyOracles.addAll(other.orderedPropertyOracles);
+    orderedRebindAnswers.addAll(other.orderedRebindAnswers);
   }
 
   public Permutation(int id, StaticPropertyOracle propertyOracle) {

@@ -81,7 +81,7 @@ class AnnotationProxyFactory {
      * Maps method names onto values. Note that methods on annotation types
      * cannot be overloaded because they have zero arguments.
      */
-    private final Map<String, Object> identifierToValue;
+    private final ImmutableMap<String, Object> identifierToValue;
 
     /**
      * A reference to the enclosing proxy object.

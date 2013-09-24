@@ -127,7 +127,7 @@ public class JdtCompiler {
     public DefaultUnitProcessor() {
     }
 
-    public List<CompilationUnit> getResults() {
+    public ImmutableList<CompilationUnit> getResults() {
       return ImmutableList.copyOf(results);
     }
 

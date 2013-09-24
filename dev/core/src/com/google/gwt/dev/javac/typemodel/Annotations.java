@@ -50,7 +50,7 @@ class Annotations implements HasAnnotations {
   /**
    * All annotations declared on the annotated element.
    */
-  private Map<Class<? extends Annotation>, Annotation> declaredAnnotations;
+  private final Map<Class<? extends Annotation>, Annotation> declaredAnnotations;
 
   /**
    * Lazily initialized collection of annotations declared on or inherited by

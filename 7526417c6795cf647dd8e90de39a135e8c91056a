@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e48cfb4a_0e0b4b3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-25T00:47:31Z",
+      "side": 1,
+      "message": "garbled",
+      "revId": "7526417c6795cf647dd8e90de39a135e8c91056a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48cfb4a_4e055324",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsKeywordsAndIllegalNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-25T00:47:31Z",
+      "side": 1,
+      "message": "comment is stale",
+      "revId": "7526417c6795cf647dd8e90de39a135e8c91056a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c416178f_9a1b1987",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsKeywordsAndIllegalNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-25T00:47:31Z",
+      "side": 1,
+      "message": "how about \"JsProtectedNames\" instead",
+      "revId": "7526417c6795cf647dd8e90de39a135e8c91056a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48cfb4a_8ef57b03",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsKeywordsAndIllegalNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-25T00:47:31Z",
+      "side": 1,
+      "message": "can this be more like (but with comments):\n\njavaScriptKeywords \u003d Sets.newHashSet(\"asdf\", \"asdf\", \"asdf\");\nillegalNames \u003d Sets.newHashSet(\"asdf\", \"asdf\", \"asdf\");\n\nillegalNames.addAll(javaScriptKeywords);",
+      "revId": "7526417c6795cf647dd8e90de39a135e8c91056a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48cfb4a_aef23716",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsKeywordsAndIllegalNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-25T00:47:31Z",
+      "side": 1,
+      "message": "unnecessary trailing blank line",
+      "revId": "7526417c6795cf647dd8e90de39a135e8c91056a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

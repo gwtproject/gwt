@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e48cfb4a_a2d326f0",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/ProxyCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-25T22:02:19Z",
+      "side": 1,
+      "message": "Could move this comment since it only applies to one branch (see below).",
+      "revId": "34214c902e6072153b3952074c398b42fb1286ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48cfb4a_22bbb6b9",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/ProxyCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-25T22:02:19Z",
+      "side": 1,
+      "message": "This will work but it seems a bit confusing to execute what\u0027s essentially dead code when we\u0027re not logging.\n\nCould you put the if around everything except the actual calls to build()? Or maybe something like this:\n\nif (...isLoggable...) {\n  .... do it the verbose way ...\n} else {\n  ... two build calls...\n  rpclog \u003d null;\n}",
+      "revId": "34214c902e6072153b3952074c398b42fb1286ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48cfb4a_22e016b2",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/ProxyCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-25T22:02:19Z",
+      "side": 1,
+      "message": "This could become:\nif (rpclog !\u003d null) {\n  ... generate artifact ...\n}",
+      "revId": "34214c902e6072153b3952074c398b42fb1286ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

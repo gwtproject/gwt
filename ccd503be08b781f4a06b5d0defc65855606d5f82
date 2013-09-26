@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "a4b4c3fc_3f6163a9",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-26T20:07:22Z",
+      "side": 1,
+      "message": "Since Array will return true for CompilerMagic.isJavaObject, we need this!",
+      "parentUuid": "e48cfb4a_d8eae25c",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47923b7_5484acd2",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 4

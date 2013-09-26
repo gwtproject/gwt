@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "a4b4c3fc_ff52dbe8",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-26T19:21:01Z",
+      "side": 1,
+      "message": "I will create some updated page (maybe something on gwtproject?) to document this.\n\nI moved the actual call to patchArrayProto into the compiler so we get around the clinit issue.",
+      "parentUuid": "c42537aa_d0754239",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47923b7_5484acd2",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "e4aa3b99_c17e241e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-26T19:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47923b7_5484acd2",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47923b7_d4775c08",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 4
@@ -83,6 +119,24 @@
       "writtenOn": "2013-09-20T15:54:50Z",
       "side": 1,
       "message": "Is this necessary just to ensure ExpandoWrappers clinit is called? I think we should go the path Ray suggested to have this initialized directly in JS.",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4aa3b99_a1831800",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-26T19:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47923b7_d4775c08",
       "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

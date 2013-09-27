@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_dbe14b48",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-27T19:49:01Z",
+      "side": 1,
+      "message": "ah.\n\nthen i think you can do immediateAncestors.addAll(Arrays.asList(ancestorFragments));",
+      "parentUuid": "c42c5730_1854a975",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_f6d22020",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
         "patchSetId": 3
@@ -387,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_7bf3571d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-27T19:49:01Z",
+      "side": 1,
+      "message": "yeah that\u0027s kind of an annoying issue.\n\ni don\u0027t have a great idea, but maybe call one lastInitialFragmentIdSoFar, and the other lastInitialFragmentID",
+      "parentUuid": "c42c5730_b8925515",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_7876fd45",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 3
@@ -486,6 +522,24 @@
       "side": 1,
       "message": "While the initial runAsyncs might not be sequentially ordered the fragments are. Code splitter guarantees that. \n\nThis will not hold in the future, but then the FragmentPartitioningResult will have to know about the fragment partial ordering which it does not.\n\nThere is a check in the constructor but that is not enough. I\u0027ll add a check for the assumptions so we know when we break them .",
       "parentUuid": "c42c5730_f8968d3b",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_db586b3a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-27T19:49:01Z",
+      "side": 1,
+      "message": "ah, ok. nice to know that you\u0027ve improved that part of codesplitter and introduced that guarrantee",
+      "parentUuid": "c42c5730_78eb5d62",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

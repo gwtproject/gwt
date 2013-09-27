@@ -232,6 +232,9 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   protected void removeRange(int fromIndex, int endIndex) {
+    if (fromIndex == endIndex && fromIndex == 0) {
+      return;
+    }
     checkIndex(fromIndex, size);
     if (endIndex < fromIndex || endIndex > size) {
       indexOutOfBounds(endIndex, size);

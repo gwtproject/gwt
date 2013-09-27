@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4438675c_015e6a23",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "@roberto I am unsure about the sourceinfo here, what should I use here?",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84dfbf55_4b800542",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 7
@@ -13,6 +30,24 @@
       "writtenOn": "2013-09-26T21:32:04Z",
       "side": 1,
       "message": "s/patchArrayPrototype0/patchArrayPrototypeFrom/",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8426df4d_734aa05b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dfbf55_4b800542",
       "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4438675c_412b1288",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dfbf55_ab6889b0",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84dfbf55_2ba499f7",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 7
@@ -47,6 +100,24 @@
       "writtenOn": "2013-09-26T21:32:04Z",
       "side": 1,
       "message": "i does not seem to be used anymore.",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4438675c_612416bb",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dfbf55_2ba499f7",
       "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8426df4d_534d2470",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "removed a completely since we only use it in one location anyway",
+      "parentUuid": "84dfbf55_0ba1dde7",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84dfbf55_cbc19573",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 7
@@ -81,6 +170,24 @@
       "writtenOn": "2013-09-26T21:32:04Z",
       "side": 1,
       "message": "Can you set eclipse to remove trailing spaces on save? \n\nThe preference is in Save Actions somewhere.",
+      "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8426df4d_1347ac52",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T08:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dfbf55_cbc19573",
       "revId": "209619354f6605d827b84ac7799c3739fcdb31e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8426df4d_93a5fcaa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-09-27T12:46:49Z",
+      "side": 1,
+      "message": "Commit message should read something like:\n\nAdding IE10 permutation\n\n- Adding MSPointerEvents\n- Mostly rebinding to older IE implementations\n\nfixes issue 8063",
+      "revId": "35a2a05dc9bd3a7d37fb41eb49c02a356f936523",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

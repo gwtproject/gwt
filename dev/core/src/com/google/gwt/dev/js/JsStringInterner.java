@@ -263,12 +263,12 @@ public class JsStringInterner {
         assert program != null : "JsStringInterner cannot be used with "
             + "fragmented JsProgram without an accompanying JProgram";
 
-        int newAssignment = program.lastFragmentLoadingBefore(currentFragment,
-            currentAssignment);
-        if (newAssignment != currentAssignment) {
-          // Assign the JsName to the common ancestor
-          fragmentAssignment.put(x, newAssignment);
-        }
+        // TODO(rluble): assumes only one leftovers. Needs to change to accommodate multiple
+        // leftovers.
+        int newAssignment = program.getSafeSharedFragment(currentAssignment, currentFragment);
+        System.out.println("Moved " + x.getValue() + "from  " + currentAssignment + " to " +
+            newAssignment);
+        fragmentAssignment.put(x, newAssignment);
       }
 
       ctx.replaceMe(name.makeRef(x.getSourceInfo().makeChild()));
@@ -287,11 +287,12 @@ public class JsStringInterner {
 
   public static final String PREFIX = "$intern_";
 
-  private static final Comparator<JsStringLiteral> LITERAL_COMPARATOR = new Comparator<JsStringLiteral>() {
-    public int compare(JsStringLiteral o1, JsStringLiteral o2) {
-      return o1.getValue().compareTo(o2.getValue());
-    }
-  };
+  private static final Comparator<JsStringLiteral> LITERAL_COMPARATOR =
+      new Comparator<JsStringLiteral>() {
+        public int compare(JsStringLiteral o1, JsStringLiteral o2) {
+          return o1.getValue().compareTo(o2.getValue());
+        }
+      };
 
   /**
    * Apply interning of String literals to a JsProgram. The symbol names for the

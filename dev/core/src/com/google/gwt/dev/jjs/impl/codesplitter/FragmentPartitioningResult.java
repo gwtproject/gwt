@@ -15,37 +15,36 @@
  */
 package com.google.gwt.dev.jjs.impl.codesplitter;
 
-import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.util.Collection;
 
 /**
  * A read-only class that holds some information about the result of the
  * partition process.
- *
- * Unlike the original code splitter where information about the fragments and
- * be deduced from the JProgram, certain compiler passes needs to know what
- * happened here in order to do their job correctly.
  */
 public class FragmentPartitioningResult {
-  private final int[] fragmentToRunAsyncId;
   private final int[] runAsyncIdToFragment;
+  private final int numFragments;
+  private final int lastInitialFragment;
 
-  FragmentPartitioningResult(Collection<Fragment> fragments, JProgram jprogram) {
-    this.runAsyncIdToFragment = new int[jprogram.getRunAsyncs().size() + 1];
-    fragmentToRunAsyncId = new int[fragments.size()];
-
+  FragmentPartitioningResult(Collection<Fragment> fragments, int numberOfRunAsyncs) {
+    numFragments = fragments.size();
+    // runAsync ids start from 1.
+    this.runAsyncIdToFragment = new int[numberOfRunAsyncs + 1];
+    int lastInitial = -1;
     for (Fragment fragment : fragments) {
+      // Fragments are assumed ordered by increasing ids.
+      if (fragment.getType() == Fragment.Type.INITIAL) {
+        Preconditions.checkState(lastInitial < fragment.getFragmentId());
+        lastInitial = fragment.getFragmentId();
+      }
       for (JRunAsync runAsync : fragment.getRunAsyncs()) {
         runAsyncIdToFragment[runAsync.getRunAsyncId()] = fragment.getFragmentId();
-        // If the fragment contains more than one runAsync, it will be set to -1 next.
-        fragmentToRunAsyncId[fragment.getFragmentId()] = runAsync.getRunAsyncId();
-      }
-      if (fragment.getRunAsyncs().size() > 1) {
-        fragmentToRunAsyncId[fragment.getFragmentId()] = -1;
       }
     }
+    this.lastInitialFragment = lastInitial;
   }
 
   /**
@@ -56,9 +55,26 @@ public class FragmentPartitioningResult {
   }
 
   /**
+   * @return a fragment that is guaranteed to be loaded before thisFragmen and thatFragment
+   */
+  public int getSafeSharedFragment(int thisFragment, int thatFragment) {
+    if (thisFragment == thatFragment) {
+      return thisFragment;
+    }
+
+    // If none of the fragments is initial, move to leftovers
+    if (thisFragment > lastInitialFragment && thatFragment > lastInitialFragment) {
+      return getLeftoverFragmentId();
+    }
+    // Return the one that occurs first in the initial load sequence.
+    return thisFragment < thatFragment ? thisFragment : thatFragment;
+  }
+
+
+  /**
    * @return Fragment number of the left over fragment.
    */
-  public int getLeftoverFragmentIndex() {
+  public int getLeftoverFragmentId() {
     return getNumFragments() - 1;
   }
 
@@ -66,14 +82,6 @@ public class FragmentPartitioningResult {
    * @return Total number of code fragments in the compilation (initial + exclusives + leftovers).
    */
   public int getNumFragments() {
-    return fragmentToRunAsyncId.length;
-  }
-
-  /**
-   * @return One of the split point number in a given fragment. If there
-   *     are more than one splitpoints in the a fragment, -1 is returned.
-   */
-  public int getRunAsyncIdForFragment(int fragment) {
-    return fragmentToRunAsyncId[fragment];
+    return numFragments;
   }
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_38996505",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_78ccbd54",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_38c64535",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "s/accross/across",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_d8663127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_38c64535",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_b807b59b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_961acc35",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_160f9cf1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "consider switching all \"predecessor\" verbiage to \"ancestor\", just cuz it\u0027s slightly shorter",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_18f7c970",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_160f9cf1",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_f83a0d4b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_56151403",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_360c18fa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "immediatePredecessors.addAll(predecessors);",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_1854a975",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "addAll expects Collection\u003c\u003e and is a type error to pass an array :(\n\nIs there another short way to do that here?",
+      "parentUuid": "e42f9b1f_360c18fa",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_5833016e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_f6d22020",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_96d72c0f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "s/fragment/fragmentId",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_382ac5ec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_96d72c0f",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_d88391ca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_56e2f4e8",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_76dff023",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "s/numFragments/fragmentCount",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_f888cde6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42f9b1f_76dff023",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_b8925515",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done. \n\nI would like the final field to be named lastInitialFragmentId, how would you call the temp var that is used to compute it?  I would like to be the same but that is against codestyle (or at least checkstyle).",
+      "parentUuid": "e42f9b1f_16ec7cd6",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_7876fd45",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 3
@@ -200,6 +398,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "s/thisFragmen/thisFragment",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_188269c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_7876fd45",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_387f25df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_18734955",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_f8968d3b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 3
@@ -234,6 +468,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "it doesn\u0027t look like this if statement is doing what the comment describes. shouldn\u0027t this instead be doing something like: !initialFragmentIds.contains(thisFragmentId) ?\n\ni don\u0027t believe there is a guarrantee that initial fragment ids are sequential, which i think makes this \u003e check unsafe",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_78eb5d62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "While the initial runAsyncs might not be sequentially ordered the fragments are. Code splitter guarantees that. \n\nThis will not hold in the future, but then the FragmentPartitioningResult will have to know about the fragment partial ordering which it does not.\n\nThere is a check in the constructor but that is not enough. I\u0027ll add a check for the assumptions so we know when we break them .",
+      "parentUuid": "c42c5730_f8968d3b",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_18f82935",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_78a35d93",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_58cf814a",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResultTest.java",
         "patchSetId": 3
@@ -274,6 +544,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_788fddb9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResultTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "For now they are guaranteed by CodeSplitter to be and that is an assumption that percolates to FragmentPartitioningResult. \n\nNext iteration (v3)  will lift the assumption.",
+      "parentUuid": "c42c5730_58cf814a",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_f8bf6da1",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResultTest.java",
         "patchSetId": 3
@@ -285,6 +573,24 @@
       "writtenOn": "2013-09-27T18:38:55Z",
       "side": 1,
       "message": "s/NUM_RUNASYCS/NUM_RUNASYNCS",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_189ca9f4",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResultTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T19:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_f8bf6da1",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

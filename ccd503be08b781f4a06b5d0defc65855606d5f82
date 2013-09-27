@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_58f6a10e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-09-27T17:35:23Z",
+      "side": 1,
+      "message": "We will already have the trampoline if it cannot be proved in either way. The other advantage is less customization and will make it easy to work with typedarrays as well.\n\nBut sure, we can land this change no matter what. Please give it a try and start another discussion in gwt-contrib.",
+      "parentUuid": "6481eb4b_b23ee0cb",
+      "revId": "ccd503be08b781f4a06b5d0defc65855606d5f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47923b7_5484acd2",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 4

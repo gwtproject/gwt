@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_5b78dbf7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:58:01Z",
+      "side": 1,
+      "message": "dumb :) fixed.",
+      "parentUuid": "c42c5730_b833351e",
+      "revId": "d0c63831623721c7808e72725f5429e7b830a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_fb5d2727",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-09-27T19:48:44Z",
       "side": 1,
       "message": "assumptions",
+      "revId": "d0c63831623721c7808e72725f5429e7b830a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_9bb19391",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:58:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_fb5d2727",
       "revId": "d0c63831623721c7808e72725f5429e7b830a409",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_bbb6cf84",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:58:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_bb57af05",
+      "revId": "d0c63831623721c7808e72725f5429e7b830a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_1b47c352",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2013-09-27T19:48:44Z",
       "side": 1,
       "message": "s/com.google.gwt.dev.util.Preconditions.checkState/Preconditions.checkState",
+      "revId": "d0c63831623721c7808e72725f5429e7b830a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_5b9c5b07",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:58:01Z",
+      "side": 1,
+      "message": "Done. Intellij refuses to accept the guava version....",
+      "parentUuid": "c42c5730_1b47c352",
       "revId": "d0c63831623721c7808e72725f5429e7b830a409",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

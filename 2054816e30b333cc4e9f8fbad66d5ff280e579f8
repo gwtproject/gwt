@@ -230,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_5b61bb39",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:57:51Z",
+      "side": 1,
+      "message": "That would imply creating a temp list and iteration over again; not sure if I like that....",
+      "parentUuid": "c42c5730_dbe14b48",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e42f9b1f_f6d22020",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/Fragment.java",
         "patchSetId": 3
@@ -423,6 +441,24 @@
     },
     {
       "key": {
+        "uuid": "c42c5730_1b5b4390",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:57:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_7bf3571d",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42c5730_7876fd45",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
         "patchSetId": 3
@@ -540,6 +576,24 @@
       "side": 1,
       "message": "ah, ok. nice to know that you\u0027ve improved that part of codesplitter and introduced that guarrantee",
       "parentUuid": "c42c5730_78eb5d62",
+      "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c42c5730_1bf82335",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentPartitioningResult.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-09-27T20:57:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c5730_db586b3a",
       "revId": "2054816e30b333cc4e9f8fbad66d5ff280e579f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.util;
 
+import com.google.gwt.thirdparty.guava.common.collect.Interner;
+
 import junit.framework.TestCase;
 
 /**
@@ -23,7 +25,7 @@ import junit.framework.TestCase;
  * @author skybrian@google.com (Brian Slesinsky)
  */
 public class StringInternerTest extends TestCase {
-  private StringInterner interner;
+  private Interner<String> interner;
 
   protected void setUp() throws Exception {
     super.setUp();

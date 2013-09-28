@@ -16,7 +16,7 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.Strings;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +34,8 @@ public class ZipFileResource extends AbstractResource {
   public ZipFileResource(ZipFileClassPathEntry classPathEntry, String path) {
     this.classPathEntry = classPathEntry;
     this.path = StringInterner.get().intern(path);
-    this.pathParts = Strings.splitPath(path);
+    this.pathParts = path.split("/");
+    Preconditions.checkState(pathParts.length > 0 &&  !pathParts[pathParts.length - 1].isEmpty());
   }
 
   @Override

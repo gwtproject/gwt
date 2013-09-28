@@ -34,8 +34,8 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
-import com.google.gwt.dev.util.Preconditions;
 import com.google.gwt.dev.util.Strings;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.util.regex.Pattern;
 

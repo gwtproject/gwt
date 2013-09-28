@@ -17,7 +17,7 @@ package com.google.gwt.dev.jjs.impl.gflow.cfg;
 
 import com.google.gwt.dev.jjs.impl.gflow.Assumption;
 import com.google.gwt.dev.jjs.impl.gflow.Graph;
-import com.google.gwt.dev.util.Preconditions;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.ArrayList;

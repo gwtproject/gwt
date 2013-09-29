@@ -173,14 +173,12 @@ public class CodeSplitters {
 
   /**
    * Returns the number of exclusive fragments from the expected number of fragments. The
-   * result is expectedFragmentCount - 1 (for initial) - 1 (for leftovers).
+   * result is expectedFragmentCount - (initials + 1) - 1 (for leftovers).
    *
-   * TODO(rluble): like much of the code spitting code, there seems to be a widespread assumption
-   * that the initial download sequence only contains 1 fragment.
    */
   public static int getNumberOfExclusiveFragmentFromExpectedFragmentCount(
-      int expectedFragmentCount) {
-    return expectedFragmentCount - 2;
+      int numberOfInitialAsyncs, int expectedFragmentCount) {
+    return Math.max(1, expectedFragmentCount - (numberOfInitialAsyncs + 1) - 1);
   }
 
   public static final String PROP_INITIAL_SEQUENCE = "compiler.splitpoint.initial.sequence";
@@ -197,7 +195,6 @@ public class CodeSplitters {
     if (initialLoadSequence.isEmpty()) {
       message.append("(none)");
     } else {
-      boolean first = true;
       Collection<Integer> runAsyncIds = Collections2.transform(initialLoadSequence,
           new Function<JRunAsync, Integer>() {
             @Override

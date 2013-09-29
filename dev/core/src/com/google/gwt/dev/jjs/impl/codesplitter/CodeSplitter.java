@@ -88,7 +88,7 @@ import javax.annotation.Nullable;
  * Whenever this second stage is changed  <code>AsyncFragmentLoader</code> must be updated
  * in tandem.
  * </p>
- * 
+ *
  * <p>
  * The fragment for a runAsync point contains different things depending on whether
  * it is in the initial load sequence or not. If it's in the initial load
@@ -256,7 +256,7 @@ public class CodeSplitter {
     partitionStrategy = expectedFragmentCount > 0 ?
         new MergeBySimilarityFragmentPartitionStrategy(
             CodeSplitters.getNumberOfExclusiveFragmentFromExpectedFragmentCount(
-                expectedFragmentCount), minFragmentSize) :
+                initialLoadSequence.size(), expectedFragmentCount), minFragmentSize) :
         new OneToOneFragmentPartitionStrategy();
   }
 

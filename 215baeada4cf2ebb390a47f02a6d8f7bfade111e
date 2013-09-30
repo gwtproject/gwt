@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c42c5730_a1c53983",
+        "filename": "dev/core/test/com/google/gwt/dev/util/StringInternerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-30T19:45:42Z",
+      "side": 1,
+      "message": "I think we can delete this test class; it\u0027s basically just testing the Guava interner now and we can assume they have much better tests.",
+      "revId": "215baeada4cf2ebb390a47f02a6d8f7bfade111e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

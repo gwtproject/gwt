@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6481eb4b_38a171e8",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-09-30T22:54:08Z",
+      "side": 1,
+      "message": "@Goktug: Thanks for the link.\n\nIt\u0027s indeed interesting behavior. I also just looked at the JavaDoc of AbstratList.removeRange() which states that formIndex \u003d\u003d toIndex should not have an effect. Then I have looked at JavaDoc of ArrayList.removeRange() which clearly states:\n\nIndexOutOfBoundsException - if fromIndex or toIndex is out of range ( fromIndex \u003c 0 || fromIndex \u003e\u003d size() || toIndex \u003e size() || toIndex \u003c fromIndex)\n\nThis condition would be true for fromIndex \u003d\u003d toIndex \u003d\u003d size() \u003d\u003d n (n can be anything) but the ArrayList implementation does not throw the exception in these cases and will not have any other effects.\n\nSo in case of ArrayList either the JavaDoc or the implementation is incorrect.\n\nThe current state in Oracle Java 7 is:\n\nMyArrayList l \u003d new MyArrayList();\nl.removeRange(0,0); // does nothing\nl.removeRange(1,1); // throws IOBE\nl.removeRange(-1,-1) // throws IOBE\nl.add(1);\nl.removeRange(0,0) // does nothing\nl.removeRange(1,1) // does nothing \u003c-- ATTENTION, no IOBE!\nl.removeRange(-1,-1) // throws IOBE\nl.removeRange(2,2) // throws IOBE\n\nWith the restriction to zero in this CL, the GWT emulated ArrayList would throw an IOBE if fromIndex \u003d\u003d toIndex \u003d\u003d size() because of checkIndex(fromIndex, size).\n\nThats not the same behavior as in Oracle Java 7 or am I missing something obvious? (already a bit late here)",
+      "parentUuid": "c42c5730_414a2582",
+      "revId": "c0c0ae7be25954fc762ca2411b1ba9f121cfccad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24e9b32b_204a2a5a",
         "filename": "user/test/com/google/gwt/emultest/java/util/ArrayListTest.java",
         "patchSetId": 3

@@ -42,6 +42,9 @@ public class StrictModeTest extends TestCase {
 
   private JJSOptions options = new CompilerOptionsImpl();
 
+  private CompilerContext compilerContext =
+      new CompilerContext.Builder().options(new PrecompileTaskOptionsImpl(options)).build();
+
   /**
    * A normal compile with a bad file should still succeed.
    */
@@ -107,7 +110,7 @@ public class StrictModeTest extends TestCase {
   }
 
   private void precompile(String moduleName) throws UnableToCompleteException {
-    ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
+    ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
     if (Precompile.precompile(logger, options, module, null) == null) {
       throw new UnableToCompleteException();
     }
@@ -116,7 +119,7 @@ public class StrictModeTest extends TestCase {
   private boolean validate(String moduleName) {
     ModuleDef module;
     try {
-      module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
+      module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
     } catch (UnableToCompleteException e) {
       fail("Failed to load the module definition");
       return false;

@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.core.shared.SerializableThrowable;
 import com.google.gwt.dev.ArgProcessorBase;
 import com.google.gwt.dev.Compiler;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.CompilerOptions;
 import com.google.gwt.dev.DevMode;
 import com.google.gwt.dev.cfg.BindingProperty;
@@ -130,104 +131,6 @@ public class JUnitShell extends DevMode {
     String getSyntheticModuleExtension();
 
     void processModule(ModuleDef module);
-  }
-
-  private static class ArgHandlerRunCompiledJavascript extends ArgHandlerFlag {
-
-    private JUnitShell shell;
-
-    public ArgHandlerRunCompiledJavascript(JUnitShell shell) {
-      this.shell = shell;
-
-      addTagValue("-web", false);
-      addTagValue("-prod", false);
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Runs tests in Development Mode, using the Java virtual machine.";
-    }
-
-    @Override
-    public String getLabel() {
-      return "devMode";
-    }
-
-    @Override
-    public boolean setFlag(boolean enabled) {
-      shell.developmentMode = enabled;
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return shell.developmentMode;
-    }
-  }
-
-  private static class ArgHandlerShowWindows extends ArgHandlerFlag {
-
-    private JUnitShell shell;
-
-    public ArgHandlerShowWindows(JUnitShell shell) {
-      this.shell = shell;
-
-      addTagValue("-notHeadless", true);
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Causes the log window and browser windows to be displayed; useful for debugging.";
-    }
-
-    @Override
-    public String getLabel() {
-      return "showUi";
-    }
-
-    @Override
-    public boolean setFlag(boolean enabled) {
-      shell.setHeadless(!enabled);
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return !shell.isHeadless();
-    }
-  }
-
-  private static class ArgHandlerRunInStandardsMode extends ArgHandlerFlag {
-
-    private JUnitShell shell;
-
-    public ArgHandlerRunInStandardsMode(JUnitShell shell) {
-      this.shell = shell;
-
-      addTagValue("-standardsMode", true);
-      addTagValue("-quirksMode", false);
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Run each test using an HTML document in standards mode (rather than quirks mode).";
-    }
-
-    @Override
-    public String getLabel() {
-      return "runStandardsMode";
-    }
-
-    @Override
-    public boolean setFlag(boolean enabled) {
-      shell.setStandardsMode(enabled);
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return shell.standardsMode;
-    }
   }
 
   static class ArgProcessor extends ArgProcessorBase {
@@ -521,6 +424,11 @@ public class JUnitShell extends DevMode {
         }
 
         @Override
+        public boolean isExperimental() {
+          return true;
+        }
+
+        @Override
         public boolean isRequired() {
           return false;
         }
@@ -533,11 +441,6 @@ public class JUnitShell extends DevMode {
         @Override
         public void setInt(int value) {
           shell.tries = value;
-        }
-
-        @Override
-        public boolean isExperimental() {
-          return true;
         }
       });
 
@@ -573,6 +476,104 @@ public class JUnitShell extends DevMode {
     @Override
     protected String getName() {
       return JUnitShell.class.getName();
+    }
+  }
+
+  private static class ArgHandlerRunCompiledJavascript extends ArgHandlerFlag {
+
+    private JUnitShell shell;
+
+    public ArgHandlerRunCompiledJavascript(JUnitShell shell) {
+      this.shell = shell;
+
+      addTagValue("-web", false);
+      addTagValue("-prod", false);
+    }
+
+    @Override
+    public boolean getDefaultValue() {
+      return shell.developmentMode;
+    }
+
+    @Override
+    public String getLabel() {
+      return "devMode";
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Runs tests in Development Mode, using the Java virtual machine.";
+    }
+
+    @Override
+    public boolean setFlag(boolean enabled) {
+      shell.developmentMode = enabled;
+      return true;
+    }
+  }
+
+  private static class ArgHandlerRunInStandardsMode extends ArgHandlerFlag {
+
+    private JUnitShell shell;
+
+    public ArgHandlerRunInStandardsMode(JUnitShell shell) {
+      this.shell = shell;
+
+      addTagValue("-standardsMode", true);
+      addTagValue("-quirksMode", false);
+    }
+
+    @Override
+    public boolean getDefaultValue() {
+      return shell.standardsMode;
+    }
+
+    @Override
+    public String getLabel() {
+      return "runStandardsMode";
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Run each test using an HTML document in standards mode (rather than quirks mode).";
+    }
+
+    @Override
+    public boolean setFlag(boolean enabled) {
+      shell.setStandardsMode(enabled);
+      return true;
+    }
+  }
+
+  private static class ArgHandlerShowWindows extends ArgHandlerFlag {
+
+    private JUnitShell shell;
+
+    public ArgHandlerShowWindows(JUnitShell shell) {
+      this.shell = shell;
+
+      addTagValue("-notHeadless", true);
+    }
+
+    @Override
+    public boolean getDefaultValue() {
+      return !shell.isHeadless();
+    }
+
+    @Override
+    public String getLabel() {
+      return "showUi";
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Causes the log window and browser windows to be displayed; useful for debugging.";
+    }
+
+    @Override
+    public boolean setFlag(boolean enabled) {
+      shell.setHeadless(!enabled);
+      return true;
     }
   }
 
@@ -631,6 +632,18 @@ public class JUnitShell extends DevMode {
   private static JUnitShell unitTestShell;
 
   /**
+   * Get the compiler options
+   *
+   * @return the compiler options that have been set.
+   */
+  public static CompilerOptions getCompilerOptions() {
+    if (unitTestShell == null) {
+      return null;
+    }
+    return unitTestShell.options;
+  }
+
+  /**
    * Called by {@link com.google.gwt.junit.server.JUnitHostImpl} to get an
    * interface into the test process.
    *
@@ -656,18 +669,6 @@ public class JUnitShell extends DevMode {
       return null;
     }
     return unitTestShell.remoteUserAgents;
-  }
-
-  /**
-   * Get the compiler options
-   *
-   * @return the compiler options that have been set.
-   */
-  public static CompilerOptions getCompilerOptions() {
-    if (unitTestShell == null) {
-      return null;
-    }
-    return unitTestShell.options;
   }
 
   /**
@@ -844,16 +845,6 @@ public class JUnitShell extends DevMode {
   private boolean developmentMode = true;
 
   /**
-   * Used to make sure we don't start the runStyle more than once.
-   */
-  private boolean runStyleStarted;
-
-  /**
-   * If true, we haven't started all the clients yet. (Used for manual mode.)
-   */
-  private boolean waitingForClients = true;
-
-  /**
    * If true, the last attempt to launch failed.
    */
   private boolean lastLaunchFailed;
@@ -901,6 +892,11 @@ public class JUnitShell extends DevMode {
    */
   private String runStyleName = "HtmlUnit";
 
+  /**
+   * Used to make sure we don't start the runStyle more than once.
+   */
+  private boolean runStyleStarted;
+
   private boolean standardsMode = true;
 
   /**
@@ -933,11 +929,20 @@ public class JUnitShell extends DevMode {
   private int tries;
 
   /**
+   * If true, we haven't started all the clients yet. (Used for manual mode.)
+   */
+  private boolean waitingForClients = true;
+
+  /**
    * Visible for testing only. (See {@link #getUnitTestShell}.)
    */
   JUnitShell() {
     setRunTomcat(true);
     setHeadless(true);
+  }
+
+  public CompilerContext getCompilerContext() {
+    return compilerContext;
   }
 
   public String getModuleUrl(String moduleName) {
@@ -1121,7 +1126,7 @@ public class JUnitShell extends DevMode {
     }
     // TODO(scottb): prepopulate currentCompilationState somehow?
   }
-
+  
   String getModuleUrl(String hostName, int port, String moduleName, int codeServerPort) {
     String url = "http://" + hostName + ":" + port + "/" + moduleName
         + (standardsMode ? "/junit-standards.html" : "/junit.html");
@@ -1293,15 +1298,6 @@ public class JUnitShell extends DevMode {
     }
   }
 
-  private AssertionFailedError toAssertionFailedError(SerializableThrowable thrown) {
-    AssertionFailedError error = new AssertionFailedError(thrown.getMessage());
-    error.setStackTrace(thrown.getStackTrace());
-    if (thrown.getCause() != null) {
-      error.initCause(thrown.getCause());
-    }
-    return error;
-  }
-
   private void runTestImpl(GWTTestCase testCase, TestResult testResult)
       throws UnableToCompleteException {
     runTestImpl(testCase, testResult, 0);
@@ -1436,5 +1432,14 @@ public class JUnitShell extends DevMode {
     }
 
     return argList.toArray(new String[argList.size()]);
+  }
+
+  private AssertionFailedError toAssertionFailedError(SerializableThrowable thrown) {
+    AssertionFailedError error = new AssertionFailedError(thrown.getMessage());
+    error.setStackTrace(thrown.getStackTrace());
+    if (thrown.getCause() != null) {
+      error.initCause(thrown.getCause());
+    }
+    return error;
   }
 }

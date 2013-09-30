@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.typeinfo.JTypeParameter;
 import com.google.gwt.core.ext.typeinfo.JWildcardType.BoundType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
@@ -240,7 +241,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
           ModuleDefLoader.createSyntheticModule(logger,
               "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases.JUnit", new String[] {
                   "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases",
-                  "com.google.gwt.junit.JUnit"}, true);
+                  "com.google.gwt.junit.JUnit"}, new CompilerContext(), true);
       sTypeOracle = moduleDef.getCompilationState(logger).getTypeOracle();
     }
     return sTypeOracle;

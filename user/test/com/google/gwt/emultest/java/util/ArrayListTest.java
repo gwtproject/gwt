@@ -64,6 +64,29 @@ public class ArrayListTest extends ListTestBase {
       Integer elem = (Integer) l.get(i);
       assertEquals(i + 2, elem.intValue());
     }
+    l.removeRange(0, 8);
+    assertEquals(0, l.size());
+    l.removeRange(0, 0);
+    try {
+      l.removeRange(1, 1);
+      fail();
+    } catch (IndexOutOfBoundsException expected) {
+    }
+    try {
+      l.removeRange(0, 1);
+      fail();
+    } catch (IndexOutOfBoundsException expected) {
+    }
+    l.add(new Integer(1));
+    assertEquals(1, l.size());
+    l.removeRange(0, 0);
+    try {
+      l.removeRange(1, 1);
+      fail();
+    } catch (IndexOutOfBoundsException expected) {
+    }
+    l.removeRange(0, 1);
+    assertEquals(0, l.size());
   }
 
   @Override

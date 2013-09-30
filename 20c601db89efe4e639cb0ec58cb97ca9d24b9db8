@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a415a3f5_b46e80bc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-09-30T22:08:34Z",
+      "side": 1,
+      "message": "Hm, it\u0027s somewhat confusing that this class extends UnmodifiableCompilerOptions, but you\u0027re making it mutable.  I don\u0027t want to hold up this patch set to fix this, so can you at least add a TODO with what you think the long-term fix is?",
+      "revId": "20c601db89efe4e639cb0ec58cb97ca9d24b9db8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

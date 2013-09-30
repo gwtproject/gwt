@@ -1428,16 +1428,18 @@ public class ModuleDefSchema extends Schema {
   }
 
   protected void __module_end(NullableName renameTo) {
-    // Maybe infer source and public.
-    //
-    if (!foundExplicitSourceOrSuperSource) {
-      bodySchema.addSourcePackage(modulePackageAsPath, "client", Empty.STRINGS,
-          Empty.STRINGS, Empty.STRINGS, true, true, false);
-    }
-
-    if (!foundAnyPublic) {
-      bodySchema.addPublicPackage(modulePackageAsPath, "public", Empty.STRINGS,
-          Empty.STRINGS, Empty.STRINGS, true, true);
+    if (!loader.enforceStrictResources()) {
+      // If we're not being strict about resources and no dependencies have been added, go ahead and
+      // implicitly add "client" and "public" resource dependencies.
+      if (!foundExplicitSourceOrSuperSource) {
+        bodySchema.addSourcePackage(modulePackageAsPath, "client", Empty.STRINGS,
+            Empty.STRINGS, Empty.STRINGS, true, true, false);
+      }
+  
+      if (!foundAnyPublic) {
+        bodySchema.addPublicPackage(modulePackageAsPath, "public", Empty.STRINGS,
+            Empty.STRINGS, Empty.STRINGS, true, true);
+      }
     }
 
     // We do this in __module_end so this value is never inherited

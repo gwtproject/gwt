@@ -17,6 +17,7 @@ package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 
@@ -35,8 +36,8 @@ class ModuleContext {
     synchronized (typeOracleMap) {
       oracle = typeOracleMap.get(moduleName);
       if (oracle == null) {
-        ModuleDef moduleDef = ModuleDefLoader.loadFromClassPath(logger,
-            moduleName);
+        ModuleDef moduleDef =
+            ModuleDefLoader.loadFromClassPath(logger, moduleName, new CompilerContext());
         oracle = moduleDef.getCompilationState(logger).getTypeOracle();
         typeOracleMap.put(moduleName, oracle);
       }

@@ -38,10 +38,9 @@ import java.util.List;
  *
  * <p>These flags are EXPERIMENTAL and subject to change.</p>
  */
-public class Options {
+public class Options extends CompilerOptionsImpl {
   private boolean noPrecompile = false;
   private boolean isCompileTest = false;
-  private File workDir;
   private List<String> moduleNames = new ArrayList<String>();
   private boolean allowMissingSourceDir = false;
   private final List<File> sourcePath = new ArrayList<File>();
@@ -50,7 +49,6 @@ public class Options {
   private int port = 9876;
   private RecompileListener recompileListener = RecompileListener.NONE;
   // Use the same default as the GWT compiler.
-  private SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -89,16 +87,10 @@ public class Options {
   }
 
   /**
-   * The top level of the directory tree where the code server keeps compiler output.
-   */
-  File getWorkDir() {
-    return workDir;
-  }
-
-  /**
    * The names of the module that will be compiled (along with all its dependencies).
    */
-  List<String> getModuleNames() {
+  @Override
+  public List<String> getModuleNames() {
     return moduleNames;
   }
 
@@ -114,13 +106,6 @@ public class Options {
    */
   boolean getNoPrecompile() {
     return noPrecompile;
-  }
-
-  /**
-   * Java source level compatibility,
-   */
-  SourceLevel getSourceLevel() {
-    return sourceLevel;
   }
 
   /**
@@ -169,12 +154,12 @@ public class Options {
       registerHandler(new ArgHandlerSource(new OptionSource() {
         @Override
         public SourceLevel getSourceLevel() {
-          return sourceLevel;
+          return Options.this.getSourceLevel();
         }
 
         @Override
         public void setSourceLevel(SourceLevel sourceLevel) {
-          Options.this.sourceLevel = sourceLevel;
+          Options.this.setSourceLevel(sourceLevel);
         }
       }));
     }
@@ -310,8 +295,8 @@ public class Options {
     }
 
     @Override
-    public void setDir(File newValue) {
-      workDir = newValue;
+    public void setDir(File workDir) {
+      setWorkDir(workDir);
     }
   }
 

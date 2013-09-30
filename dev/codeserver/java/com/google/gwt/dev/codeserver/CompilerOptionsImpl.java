@@ -30,14 +30,22 @@ import java.util.List;
  * GWT apps. For now, these settings are hard-coded to reasonable defaults.
  */
 class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
-  private final CompileDir compileDir;
-  private final String moduleName;
-  private final SourceLevel sourceLevel;
+  private CompileDir compileDir;
+  private String moduleName;
+  private SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
+  private boolean strictResources;
 
-  CompilerOptionsImpl(CompileDir compileDir, String moduleName, SourceLevel sourceLevel) {
+  CompilerOptionsImpl() {
+  }
+
+  CompilerOptionsImpl(CompileDir compileDir, SourceLevel sourceLevel) {
     this.compileDir = compileDir;
-    this.moduleName = moduleName;
     this.sourceLevel = sourceLevel;
+  }
+
+  @Override
+  public boolean enforceStrictResources() {
+    return strictResources;
   }
 
   @Override
@@ -187,6 +195,15 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean isValidateOnly() {
     return false;
+  }
+
+  @Override
+  public void setEnforceStrictResources(boolean strictResources) {
+    this.strictResources = strictResources;
+  }
+
+  public void setModuleName(String moduleName) {
+    this.moduleName = moduleName;
   }
 
   @Override

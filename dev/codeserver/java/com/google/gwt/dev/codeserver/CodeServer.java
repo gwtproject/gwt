@@ -18,6 +18,7 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.util.tools.Utility;
 
@@ -116,9 +117,9 @@ public class CodeServer {
     for (String moduleName : options.getModuleNames()) {
       AppSpace appSpace = AppSpace.create(new File(workDir, moduleName));
 
-      Recompiler recompiler = new Recompiler(appSpace, moduleName, options.getSourcePath(),
-          options.getPreferredHost() + ":" + options.getPort(), options.getRecompileListener(),
-          options.isCompileTest(), options.getSourceLevel(), logger);
+      CompilerContext compilerContext = new CompilerContext.Builder().options(options).build();
+      Recompiler recompiler =
+          new Recompiler(appSpace, moduleName, compilerContext, options, logger);
       modules.addModuleState(new ModuleState(recompiler, logger, options.getNoPrecompile()));
     }
     return modules;

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c42c5730_feb670f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T17:47:34Z",
+      "side": 1,
+      "message": "since this has been wrong once now, let\u0027s add a test verifying and locking down the behavior",
+      "revId": "7fe04e25aa0b3e7c47bc1f76215328a32f3c5f92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

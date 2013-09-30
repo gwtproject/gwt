@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "446f8776_ac09ab40",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-09-30T17:12:47Z",
+      "side": 1,
+      "message": "Why is this check restricted to zero? JavaDoc states this method should have no effect for all fromIndex \u003d\u003d endIndex.\n\nAlso the original Java implementation in ArrayList always throws IOBE if positions are out of range, even if fromIndex \u003d\u003d endIndex.",
+      "revId": "c0c0ae7be25954fc762ca2411b1ba9f121cfccad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

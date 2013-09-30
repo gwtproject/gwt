@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a415a3f5_7447c851",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "very nice test",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_f43918e7",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_742ea899",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "indent the generated code so it looks like it\u0027s part of the function",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_344d5072",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "s/6/expectedFragmentCount",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_948a646c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_b485e060",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-09-30T21:58:02Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "1593f5f017a3d945b7bba9ec893474491d2ba156",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

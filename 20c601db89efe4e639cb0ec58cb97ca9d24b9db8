@@ -16,6 +16,57 @@
       "revId": "20c601db89efe4e639cb0ec58cb97ca9d24b9db8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_d4bb3c04",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-30T22:22:16Z",
+      "side": 1,
+      "message": "This options class is supposed to be immutable. Assuming we want to expose strictResources as a Super Dev Mode flag (not sure yet), the value of strictResources should be passed in to the constructor. Otherwise it can be hard-coded.\n\n(This setter method should be defined in UnmodifiableCompilerOptions to throw an exception, just like the others.)",
+      "revId": "20c601db89efe4e639cb0ec58cb97ca9d24b9db8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_74486838",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-30T22:22:16Z",
+      "side": 1,
+      "message": "Actually, the reason I wasn\u0027t extending anything here is because I don\u0027t want Super Dev Mode to automatically inherit flags from elsewhere; the idea is to make a decision for each flag about whether it makes sense for this entry point.",
+      "revId": "20c601db89efe4e639cb0ec58cb97ca9d24b9db8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a415a3f5_54e9ecc5",
+        "filename": "user/src/com/google/gwt/animation/Animation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-30T22:22:16Z",
+      "side": 1,
+      "message": "Maybe fix all the .gwt.xml files in a separate CL? We can land that first.",
+      "revId": "20c601db89efe4e639cb0ec58cb97ca9d24b9db8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

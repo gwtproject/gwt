@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a415a3f5_34e270e8",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-09-30T22:22:16Z",
+      "side": 0,
+      "message": "Looks like this is just reformatting? Let\u0027s handle that separately.",
+      "revId": "f2f6ee5794d9212f2eaecdbdeaa5d1c2030ee23a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

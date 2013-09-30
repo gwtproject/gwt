@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "84f97f00_fbdd8f5e",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5970
+      },
+      "writtenOn": "2013-09-30T23:05:42Z",
+      "side": 1,
+      "message": "I have updated the change description to include a program to run. Jens, could you try to run it on your java? I\u0027m on OpenJDK 1.7.0 and the output for me is:\n\n$ java a\n0,0 success\nException in thread \"main\" java.lang.ArrayIndexOutOfBoundsException\n\tat java.lang.System.arraycopy(Native Method)\n\tat java.util.ArrayList.removeRange(ArrayList.java:587)\n\tat a$Stack.r(a.java:5)\n\tat a.main(a.java:10)\n\n\nHave OpenJDK and Oracle Java diverged in this corner?",
+      "parentUuid": "6481eb4b_38a171e8",
+      "revId": "c0c0ae7be25954fc762ca2411b1ba9f121cfccad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24e9b32b_204a2a5a",
         "filename": "user/test/com/google/gwt/emultest/java/util/ArrayListTest.java",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "writtenOn": "2013-09-30T21:28:34Z",
       "side": 1,
       "message": "nit: Can you use some empty lines to group the test snippets like the rest? It is hard to follow right now. (I\u0027ll put my suggestions below)",
+      "revId": "c0c0ae7be25954fc762ca2411b1ba9f121cfccad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84f97f00_dbe25318",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayListTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5970
+      },
+      "writtenOn": "2013-09-30T23:05:42Z",
+      "side": 1,
+      "message": "I have newlined and commented. I did it a little differently than you suggested for maximum clarity; let me know if you disagree with any.",
+      "parentUuid": "24e9b32b_204a2a5a",
       "revId": "c0c0ae7be25954fc762ca2411b1ba9f121cfccad",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

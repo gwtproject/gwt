@@ -16,6 +16,24 @@
       "revId": "d27f11a6647e0b3a21e6a7f9abfd8c41099a4d8f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24d0d387_ebb48dc8",
+        "filename": "user/src/com/google/gwt/editor/Editor.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-01T01:43:42Z",
+      "side": 0,
+      "message": "it\u0027s a dead reference\n\nthere is no \"shared\" directory in the depot\n\nand an internal and internet search confirms that there is no committed code that is secretly depending on that directory path being silently registered by the standard library during compilation (https://www.google.com/search?q\u003dcom.google.gwt.editor.shared\u0026oq\u003dcom.google.gwt.editor.shared\u0026aqs\u003dchrome.0.69i57j69i61j69i60.9434j0\u0026sourceid\u003dchrome\u0026ie\u003dUTF-8#q\u003d%22com.google.gwt.editor.shared%22) though there is a 2 year old stale review that references it (http://gwt-code-reviews.appspot.com/991802/show)",
+      "parentUuid": "24d0d387_28cb4b60",
+      "revId": "d27f11a6647e0b3a21e6a7f9abfd8c41099a4d8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

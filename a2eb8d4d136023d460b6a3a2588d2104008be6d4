@@ -16,6 +16,24 @@
       "revId": "a2eb8d4d136023d460b6a3a2588d2104008be6d4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24d0d387_ebb00df5",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ZipFileResource.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-01T01:27:15Z",
+      "side": 1,
+      "message": "It is actually unnecessary. I added in response to a comment by Thomas. Initially it seemed that Strings.splitPath() and String.split() might have behaved differently with paths ending in  \"/\" and  the precondition was checking that it was never called with paths ending in \"/\" indirectly. \n\nThat is not the case. I will remove the precondition.",
+      "parentUuid": "24d0d387_eb012dd2",
+      "revId": "a2eb8d4d136023d460b6a3a2588d2104008be6d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

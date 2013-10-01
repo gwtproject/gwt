@@ -16,6 +16,24 @@
       "revId": "6da871450863559bf19c970e9df9ff32b82a8282",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24d0d387_88399701",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-01T00:42:06Z",
+      "side": 1,
+      "message": "Opps, good catch. I was going to double check if I missed any static imports but then I forgot about it...",
+      "parentUuid": "24d0d387_c88c2fc9",
+      "revId": "6da871450863559bf19c970e9df9ff32b82a8282",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

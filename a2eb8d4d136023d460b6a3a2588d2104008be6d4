@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d0d387_eb012dd2",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ZipFileResource.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-01T01:17:16Z",
+      "side": 1,
+      "message": "Nit: Extra space.\n\nAlso, what is this precondition logically checking for?  In particular, I\u0027m wondering why you only care that the last part needs to be non-empty, but don\u0027t care about earlier parts.",
+      "revId": "a2eb8d4d136023d460b6a3a2588d2104008be6d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

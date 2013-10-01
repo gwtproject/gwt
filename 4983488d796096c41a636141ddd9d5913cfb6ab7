@@ -52,6 +52,24 @@
       "revId": "4983488d796096c41a636141ddd9d5913cfb6ab7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e425db90_c9d7f50d",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-01T16:29:36Z",
+      "side": 1,
+      "message": "Yep. I was thinking of the \"insert spaces for tabs\"  in General/Editors/Text Editor.  But you surely have it set and it does not affect the tabs that are already there.... Sorry.",
+      "parentUuid": "e4c95bea_e9ddb15e",
+      "revId": "4983488d796096c41a636141ddd9d5913cfb6ab7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

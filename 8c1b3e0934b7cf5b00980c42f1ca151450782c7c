@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d0d387_eb7e4d1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-01T06:42:54Z",
+      "side": 1,
+      "message": "Can you please add space before?\n\nAlso we don\u0027t need put a full class; just a simple snippet is enough. e.g.:\n\n    ArrayList list \u003d new ArrayList();\n    list.add(\"item\");\n\n    list.removeRange(0,0); // Success\n    list.removeRange(1,1); // Success\n    list.removeRange(2,2); // Fail: throws IOBE",
+      "revId": "8c1b3e0934b7cf5b00980c42f1ca151450782c7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

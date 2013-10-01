@@ -34,6 +34,24 @@
       "revId": "4983488d796096c41a636141ddd9d5913cfb6ab7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4c95bea_e9ddb15e",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-01T01:51:23Z",
+      "side": 1,
+      "message": "now i\u0027m interpretting your question differently.\n\ni checked on it and no, eclipse doesn\u0027t have a \"tabs to spaces\" save action.\n\ni can run a reformat on xml files, but that wouldn\u0027t be an automatic passive process",
+      "parentUuid": "24d0d387_abdf35f7",
+      "revId": "4983488d796096c41a636141ddd9d5913cfb6ab7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

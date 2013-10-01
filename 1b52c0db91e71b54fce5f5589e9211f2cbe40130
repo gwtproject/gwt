@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0144a155_355eb852",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceLineNumbersTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-01T23:42:20Z",
+      "side": 1,
+      "message": "Isn\u0027t this kind of iteration pretty common?  Also we would probably want to translate for (O o : array) to simple for (o in array).\n\nSomehow I think we better not patch the Array prototype. After all it is done only to respond that it is a GWT java object and to implement EQ? Maybe handle in the places where used.",
+      "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

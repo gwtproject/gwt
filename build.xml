@@ -35,6 +35,13 @@
   <property name="gwt.apicheck.referencelibs"
     value="${gwt.tools}/api-checker-reference/2.5.1/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.5.1/gwt-user-modified.jar"/>
 
+  <target name="commit-id">
+     <exec executable="git" output="${gwt.build.dist}/commit-id">
+       <arg value="rev-parse" />
+       <arg value="HEAD" />
+     </exec>
+   </target>
+
   <target name="buildonly"
           description="[action] Minimal one-platform devel build, without distro packaging">
     <call-subproject subproject="dev" subtarget="build" />
@@ -45,7 +52,7 @@
     <call-subproject subproject="jni" subtarget="build" />
   </target>
 
-  <target name="dist" depends="build, doc" description="[action] Make all the distributions">
+  <target name="dist" depends="commit-id, build, doc" description="[action] Make all the distributions">
     <gwt.ant dir="distro-source" />
   </target>
 

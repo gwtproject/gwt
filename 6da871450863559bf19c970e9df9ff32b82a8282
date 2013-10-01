@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d0d387_c88c2fc9",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-01T00:36:58Z",
+      "side": 1,
+      "message": "Seems odd that you imported this statically only for one call, and the rest are qualified by class name.  I\u0027d make them consistent.",
+      "revId": "6da871450863559bf19c970e9df9ff32b82a8282",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

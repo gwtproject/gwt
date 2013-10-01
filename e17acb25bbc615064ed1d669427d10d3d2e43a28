@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "24d0d387_284a2bd3",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-01T00:26:09Z",
+      "side": 1,
+      "message": "as the separate compilation branch  gets unwound CompilerContext will expand to include more of the globally accessible read-only state:\n* public/source/build resource oracles\n* read only input library access\n* the output library builder object\n* the global module definition\n* the global compilation unit cache",
+      "parentUuid": "24d0d387_88fcf79f",
+      "revId": "e17acb25bbc615064ed1d669427d10d3d2e43a28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24d0d387_68f6e3bc",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefLoader.java",
         "patchSetId": 2
@@ -98,6 +116,24 @@
       "writtenOn": "2013-10-01T00:07:52Z",
       "side": 1,
       "message": "Can you set eclipse to remove trailing blanks?",
+      "revId": "e17acb25bbc615064ed1d669427d10d3d2e43a28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24d0d387_c81d4fde",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefLoader.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-01T00:26:09Z",
+      "side": 1,
+      "message": "yeah, just configured eclipse that way and will run over these files to clean up any hanging chad",
+      "parentUuid": "24d0d387_68f6e3bc",
       "revId": "e17acb25bbc615064ed1d669427d10d3d2e43a28",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

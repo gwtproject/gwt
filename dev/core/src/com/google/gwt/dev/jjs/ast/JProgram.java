@@ -79,7 +79,7 @@ public class JProgram extends JNode {
    * Classes are inserted into the JsAST in the order they appear in the Set.
    */
   public static final Set<String> IMMORTAL_CODEGEN_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
-      "com.google.gwt.lang.SeedUtil"));
+      "com.google.gwt.lang.SeedUtil", "com.google.gwt.lang.Instrumentation"));
 
   public static final Set<String> INDEX_TYPES_SET = new LinkedHashSet<String>(Arrays.asList(
       "java.io.Serializable", "java.lang.Object", "java.lang.String", "java.lang.Class",

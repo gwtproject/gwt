@@ -15,7 +15,11 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.core.ext.BadPropertyValueException;
+import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.core.ext.SelectionProperty;
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.linker.CastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
@@ -147,6 +151,7 @@ import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsSeedIdOf;
 import com.google.gwt.dev.js.ast.JsStatement;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsSwitch;
 import com.google.gwt.dev.js.ast.JsSwitchMember;
 import com.google.gwt.dev.js.ast.JsThisRef;
@@ -187,6 +192,9 @@ import java.util.TreeMap;
  * Creates a JavaScript AST from a <code>JProgram</code> node.
  */
 public class GenerateJavaScriptAST {
+
+  private static final String INSTRUMENT_PROPERTY_NAME = "compiler.instrument";
+  private static final String INSTRUMENT_PACKAGE_PROPERTY_NAME = "compiler.instrument.packagePrefix";
 
   private class CreateNamesAndScopesVisitor extends JVisitor {
 
@@ -633,6 +641,7 @@ public class GenerateJavaScriptAST {
     private final JsName globalTemp = topScope.declareName("_");
 
     private final JsName prototype = objectScope.declareName("prototype");
+    private JsVars immortalJsVars;
 
     // Methods where inlining hasn't happened yet because they are native or
     // contain calls to native methods.
@@ -780,13 +789,67 @@ public class GenerateJavaScriptAST {
 
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
 
+      boolean instrument = isInstrumentationEnabled();
+
+      Map<JsName, String> javaNames = new HashMap<JsName, String>();
+      for (JMethod method : x.getMethods()) {
+        javaNames.put(names.get(method),
+            method.getEnclosingType().getJsniSignatureName() + "::" + method.getSignature());
+      }
+
       // declare all methods into the global scope
       for (int i = 0; i < jsFuncs.size(); ++i) {
         JsFunction func = jsFuncs.get(i);
 
         // don't add polymorphic JsFuncs, inline decl into vtable assignment
         if (func != null && !polymorphicJsFunctions.contains(func)) {
-          globalStmts.add(func.makeStmt());
+          if (instrument && shouldInstrumentClass(x.getName())) {
+            /*
+             * Rewrite static function as:
+             *   staticFunc(args) {
+             *     return profileFunction(originalMethod, name).apply(args);
+             *   }
+             */
+            SourceInfo sourceInfo = func.getSourceInfo();
+            // first construct profileFunction(originalMethod, name)
+            JsNameRef profileFunc =
+                indexedFunctions.get("Instrumentation.profileFunction").getName()
+                    .makeRef(sourceInfo);
+            JsFunction origFunc = new JsFunction(sourceInfo, func.getScope(), null);
+            origFunc.setBody(func.getBody());
+            JsInvocation profileInvoke = new JsInvocation(sourceInfo);
+            profileInvoke.setQualifier(profileFunc);
+            profileInvoke.getArguments().add(origFunc);
+            String funcName = javaNames.get(func.getName());
+            if (funcName == null) {
+              funcName = func.getName().getIdent();
+            }
+
+            profileInvoke.getArguments().add(new JsStringLiteral(sourceInfo, funcName));
+
+            // Create ref to profileInvoke.apply()
+            JsName callName = objectScope.declareName("apply");
+            callName.setObfuscatable(false);
+            JsNameRef applyRef = callName.makeRef(sourceInfo);
+            applyRef.setQualifier(profileInvoke);
+
+            // Invoke apply(this, arguments)
+            JsInvocation applyCall = new JsInvocation(sourceInfo);
+            applyCall.setQualifier(applyRef);
+            applyCall.getArguments().add(new JsThisRef(sourceInfo));
+            applyCall.getArguments().add(
+                JsRootScope.INSTANCE.findExistingUnobfuscatableName("arguments")
+                    .makeRef(sourceInfo));
+            JsFunction newFunc =
+                new JsFunction(sourceInfo, func.getScope(), func.getName(), func.isFromJava());
+            newFunc.getParameters().addAll(func.getParameters());
+            JsBlock block = new JsBlock(sourceInfo);
+            block.getStatements().add(new JsReturn(sourceInfo, applyCall));
+            newFunc.setBody(block);
+            globalStmts.add(newFunc.makeStmt());
+          } else {
+            globalStmts.add(func.makeStmt());
+          }
         }
       }
 
@@ -1336,10 +1399,13 @@ public class GenerateJavaScriptAST {
 
       // Long lits must go at the top, they can be constant field initializers.
       generateLongLiterals(vars);
-      generateImmortalTypes(vars);
+      Iterator<JsVar> varIt = immortalJsVars.iterator();
+      while (varIt.hasNext()) {
+        vars.add(varIt.next());
+      }
       generateQueryIdConstants(vars);
       generateInternedCastMapLiterals(vars);
-     
+
       // Class objects, but only if there are any.
       if (x.getDeclaredTypes().contains(x.getTypeClassLiteralHolder())) {
         // TODO: perhaps they could be constant field initializers also?
@@ -1563,6 +1629,9 @@ public class GenerateJavaScriptAST {
           internCastMap(program.getCastMap(type));
         }
       }
+
+      immortalJsVars = new JsVars(x.getSourceInfo());
+      generateImmortalTypes(immortalJsVars);
       return true;
     }
 
@@ -2134,6 +2203,8 @@ public class GenerateJavaScriptAST {
       boolean isString = (x == program.getTypeJavaLangString());
       for (JMethod method : x.getMethods()) {
         SourceInfo sourceInfo = method.getSourceInfo();
+        boolean instrument = isInstrumentationEnabled();
+
         if (method.needsVtable() && !method.isAbstract()) {
           JsNameRef lhs = polymorphicNames.get(method).makeRef(sourceInfo);
           lhs.setQualifier(globalTemp.makeRef(sourceInfo));
@@ -2149,12 +2220,82 @@ public class GenerateJavaScriptAST {
              */
             rhs = methodBodyMap.get(method.getBody());
           }
+
+          if (instrument && shouldInstrumentClass(method.getClass().getName())) {
+            // _.method = profileFunction(method, name);
+            JsNameRef profileFunc =
+                indexedFunctions.get("Instrumentation.profileFunction").getName()
+                    .makeRef(sourceInfo);
+            JsInvocation profileInvoke = new JsInvocation(sourceInfo);
+            profileInvoke.setQualifier(profileFunc);
+            profileInvoke.getArguments().add(rhs);
+            profileInvoke.getArguments().add(
+                new JsStringLiteral(sourceInfo, method.getEnclosingType().getJsniSignatureName()
+                    + "::" + method.getSignature()));
+            rhs = profileInvoke;
+          }
+
           JsExpression asg = createAssignment(lhs, rhs);
           JsExprStmt asgStat = new JsExprStmt(x.getSourceInfo(), asg);
           globalStmts.add(asgStat);
           vtableInitForMethodMap.put(asgStat, method);
         }
       }
+    }
+
+    private boolean isInstrumentationEnabled() {
+      SelectionProperty property;
+      try {
+        property =
+            propertyOracles[0].getSelectionProperty(TreeLogger.NULL, INSTRUMENT_PROPERTY_NAME);
+      } catch (BadPropertyValueException e) {
+        // Should be inherited via Core.gwt.xml
+        throw new InternalCompilerException(
+            "Expected property " + INSTRUMENT_PROPERTY_NAME + " not defined", e);
+      }
+
+      String value = property.getCurrentValue();
+      assert value != null : property.getName() + " did not have a value";
+      boolean instrument = value.toUpperCase().equals("PROFILE");
+      // Check for multiply defined properties
+      if (propertyOracles.length > 1) {
+        for (int i = 1; i < propertyOracles.length; ++i) {
+          try {
+            property =
+                propertyOracles[i].getSelectionProperty(TreeLogger.NULL, INSTRUMENT_PROPERTY_NAME);
+          } catch (BadPropertyValueException e) {
+            // OK!
+          }
+          assert value.equals(property.getCurrentValue()) :
+              INSTRUMENT_PROPERTY_NAME + " property has multiple values.";
+        }
+      }
+      return instrument;
+    }
+
+    private boolean shouldInstrumentClass(String className) {
+      String prefix = getInstrumentationPrefix();
+      return prefix == null || className.startsWith(prefix);
+    }
+
+    private String getInstrumentationPrefix() {
+      String prefix = null;
+      for (int i = 0; i < propertyOracles.length; ++i) {
+        try {
+          ConfigurationProperty property =
+              propertyOracles[0].getConfigurationProperty(INSTRUMENT_PACKAGE_PROPERTY_NAME);
+          List<String> values = property.getValues();
+          if (prefix != null && values != null && values.size() > 0) {
+            throw new InternalCompilerException("Property " + INSTRUMENT_PACKAGE_PROPERTY_NAME
+                + " had multiple values");
+          } else if (values != null & values.size() > 0) {
+            prefix = values.get(0);
+          }
+        } catch (BadPropertyValueException e) {
+          // OK!
+        }
+      }
+      return prefix;
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {
@@ -2557,6 +2698,8 @@ public class GenerateJavaScriptAST {
   private final Map<JMethod, JsName> polymorphicNames = new IdentityHashMap<JMethod, JsName>();
   private final JProgram program;
 
+  private PropertyOracle[] propertyOracles;
+
   /**
    * Map of class type to allocated seed id.
    */
@@ -2606,6 +2749,7 @@ public class GenerateJavaScriptAST {
     interfaceScope = new JsNormalScope(objectScope, "Interfaces");
     this.output = output;
     this.symbolTable = symbolTable;
+    this.propertyOracles = propertyOracles;
 
     this.stripStack =
         JsStackEmulator.getStackMode(propertyOracles) == JsStackEmulator.StackMode.STRIP;

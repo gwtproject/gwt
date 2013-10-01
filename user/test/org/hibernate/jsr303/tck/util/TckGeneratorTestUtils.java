@@ -18,6 +18,7 @@ package org.hibernate.jsr303.tck.util;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
@@ -46,7 +47,7 @@ public class TckGeneratorTestUtils {
 
   static StandardGeneratorContext createGeneratorContext(String moduleName,
       TreeLogger logger) throws UnableToCompleteException {
-    ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
+    ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName, new CompilerContext());
     File genDir = new File(System.getProperty("java.io.tmpdir"));
 
     ArtifactSet allGenreatedArtifacts = new ArtifactSet();

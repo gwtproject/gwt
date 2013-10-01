@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d0d387_08c80760",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-01T00:12:15Z",
+      "side": 1,
+      "message": "Can you turn save tabs as spaces on for Java Sources?",
+      "revId": "4983488d796096c41a636141ddd9d5913cfb6ab7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

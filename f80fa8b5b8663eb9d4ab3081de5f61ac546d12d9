@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24d0d387_28cfcb4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-01T00:25:27Z",
+      "side": 1,
+      "message": "I usually try to explain a bit more: if someone suspects this CL broke them, what would they want to know?\n\n\"Previously, GWT would automatically add the \u0027client\u0027 and \u0027public\u0027 directories to any GWT module that doesn\u0027t explicitly declare any directories. This patch adds a new -XstrictResources flag, that, when true, will remove this behavior. However, the default is false so it shouldn\u0027t have any immediate effect.\"",
+      "revId": "f80fa8b5b8663eb9d4ab3081de5f61ac546d12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

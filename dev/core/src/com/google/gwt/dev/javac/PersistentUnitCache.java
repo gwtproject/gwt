@@ -23,6 +23,8 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -31,8 +33,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -64,34 +70,34 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * number of files in the directory is reached
  * {@link PersistentUnitCache#CACHE_FILE_THRESHOLD} , the cache files are
  * consolidated back into a single file.
- * 
+ *
  * <p>
  * System Properties (see {@link UnitCacheFactory}).
- * 
+ *
  * <ul>
  * <li>gwt.persistentunitcache : enables the persistent cache (eventually will
  * be default)</li>
  * <li>gwt.persistentunitcachedir=<dir>: sets or overrides the cache directory</li>
  * </ul>
- * 
+ *
  * <p>
  * Known Issues:
- * 
+ *
  * <ul>
  * <li>This design uses an eager cache to load every unit in the cache on the
  * first reference to find() or add(). When the cache is large (10000 units), it
  * uses lots of heap and takes 5-10 seconds. Once the PersistentUnitCache is
  * created, it starts eagerly loading the cache in a background thread).</li>
- * 
+ *
  * <li>Although units logged to disk with the same resource path are eventually
  * cleaned up, the most recently compiled unit stays in the cache forever. This
  * means that stale units that are no longer referenced will never be purged,
  * unless by some external action (e.g. ant clean).</li>
- * 
+ *
  * <li>Unless ant builds are made aware of the cache directory, the cache will
  * persist if a user does an ant clean.</li>
  * </ul>
- * 
+ *
  */
 class PersistentUnitCache extends MemoryUnitCache {
 
@@ -100,13 +106,19 @@ class PersistentUnitCache extends MemoryUnitCache {
    * files.
    */
   static final int CACHE_FILE_THRESHOLD = 40;
-  
+
   /**
    * Common prefix for creating directories and cache files.
    */
   static final String UNIT_CACHE_PREFIX = "gwt-unitCache";
   static final String CACHE_FILE_PREFIX = UNIT_CACHE_PREFIX + "-";
+  static final String CURRENT_VERSION_CACHE_FILE_PREFIX;
+  private static String versionHash = "NOVERSION";
 
+  static {
+    initVersionHash();
+    CURRENT_VERSION_CACHE_FILE_PREFIX = UNIT_CACHE_PREFIX + "-" + versionHash;
+  }
   /**
    * Creates a new file with a name based on the current system time.
    */
@@ -116,7 +128,8 @@ class PersistentUnitCache extends MemoryUnitCache {
     long timestamp = System.currentTimeMillis();
     try {
       do {
-        newFile = new File(cacheDirectory, CACHE_FILE_PREFIX + String.format("%016X", timestamp++));
+        newFile = new File(cacheDirectory, CURRENT_VERSION_CACHE_FILE_PREFIX +
+            String.format("%016X", timestamp++));
       } while (!newFile.createNewFile());
     } catch (IOException ex) {
       logger.log(TreeLogger.WARN, "Unable to create new cache log file "
@@ -135,16 +148,17 @@ class PersistentUnitCache extends MemoryUnitCache {
 
   /**
    * Finds all files matching a pattern in the cache directory.
-   * 
+   *
    * @return an array of sorted filenames. The file name pattern is such that
    *         sorting them alphabetically also sorts the files by age.
    */
-  private static File[] getCacheFiles(File cacheDirectory) {
+  private static File[] getCacheFiles(File cacheDirectory, boolean currentVersion) {
     if (cacheDirectory.isDirectory()) {
       File[] files = cacheDirectory.listFiles();
       List<File> cacheFiles = new ArrayList<File>();
       for (File file : files) {
-        if (file.getName().startsWith(CACHE_FILE_PREFIX)) {
+        if (file.getName().startsWith(currentVersion ? CURRENT_VERSION_CACHE_FILE_PREFIX :
+            CACHE_FILE_PREFIX)) {
           cacheFiles.add(file);
         }
       }
@@ -161,7 +175,7 @@ class PersistentUnitCache extends MemoryUnitCache {
    */
   private Future<Boolean> purgeTaskStatus;
   private AtomicBoolean purgeInProgress = new AtomicBoolean(false);
-  
+
   private final Runnable purgeOldCacheFilesTask = new Runnable() {
     @Override
     public void run() {
@@ -169,7 +183,7 @@ class PersistentUnitCache extends MemoryUnitCache {
         // Delete all cache files in the directory except for the currently open
         // file.
         SpeedTracerLogger.Event deleteEvent = SpeedTracerLogger.start(DevModeEventType.DELETE_CACHE);
-        File[] filesToDelete = getCacheFiles(cacheDirectory);
+        File[] filesToDelete = getCacheFiles(cacheDirectory, false);
         logger.log(TreeLogger.TRACE, "Purging cache files from " + cacheDirectory);
         for (File toDelete : filesToDelete) {
           if (!currentCacheFile.equals(toDelete)) {
@@ -179,14 +193,14 @@ class PersistentUnitCache extends MemoryUnitCache {
           }
         }
         deleteEvent.end();
-        
+
         rotateCurrentCacheFile();
       } catch (UnableToCompleteException e) {
         backgroundService.shutdownNow();
       } finally {
         purgeInProgress.set(false);
       }
-    }      
+    }
   };
 
   private final Runnable rotateCacheFilesTask = new Runnable() {
@@ -215,7 +229,7 @@ class PersistentUnitCache extends MemoryUnitCache {
    * Saved to be able to wait for UNIT_MAP_LOAD_TASK to complete.
    */
   private Future<Boolean> unitMapLoadStatus;
-  
+
   private final Runnable unitMapLoadTask = new Runnable() {
     @Override
     public void run() {
@@ -227,7 +241,7 @@ class PersistentUnitCache extends MemoryUnitCache {
    * Used to execute the above Runnables in a background thread.
    */
   private final ExecutorService backgroundService;
-  
+
   private int unitsWritten = 0;
 
   private int addedSinceLastCleanup = 0;
@@ -302,7 +316,7 @@ class PersistentUnitCache extends MemoryUnitCache {
         }
       }
     });
-    
+
     /**
      * Load up cached units from the persistent store in the background. The
      * {@link #add(CompilationUnit)} and {@link #find(String)} methods block if
@@ -340,7 +354,7 @@ class PersistentUnitCache extends MemoryUnitCache {
   /**
    * Cleans up old cache files in the directory, migrating everything previously
    * loaded in them to the current cache file.
-   * 
+   *
    * Normally, only newly compiled units are written to the current log, but
    * when it is time to cleanup, valid units from older log files need to be
    * re-written.
@@ -356,7 +370,7 @@ class PersistentUnitCache extends MemoryUnitCache {
     logger.log(TreeLogger.TRACE, "Added " + addedSinceLastCleanup + " units to cache since last cleanup.");
     addedSinceLastCleanup = 0;
     try {
-      File[] cacheFiles = getCacheFiles(cacheDirectory);
+      File[] cacheFiles = getCacheFiles(cacheDirectory, true);
       if (cacheFiles.length < CACHE_FILE_THRESHOLD) {
         if (shouldRotate) {
           backgroundService.execute(rotateCacheFilesTask);
@@ -376,11 +390,11 @@ class PersistentUnitCache extends MemoryUnitCache {
           return;
         }
       }
-      
+
       /*
-       * Resend all units read in from the in-memory cache to the background
-       * thread. They will be re-written out and the old cache files removed.
-       */
+      * Resend all units read in from the in-memory cache to the background
+      * thread. They will be re-written out and the old cache files removed.
+      */
       synchronized (unitMap) {
         for (UnitCacheEntry unitCacheEntry : unitMap.values()) {
           if (unitCacheEntry.getOrigin() == UnitOrigin.PERSISTENT) {
@@ -438,7 +452,7 @@ class PersistentUnitCache extends MemoryUnitCache {
 
   /**
    * For Unit testing - shutdown the persistent cache.
-   * 
+   *
    * @throws ExecutionException
    * @throws InterruptedException
    */
@@ -449,6 +463,42 @@ class PersistentUnitCache extends MemoryUnitCache {
       future.get();
     } catch (RejectedExecutionException ex) {
       // background thread is not running - ignore
+    }
+  }
+
+  private static void initVersionHash() {
+    try {
+
+      String classPath = System.getProperty("java.class.path");
+      String[] pathElements = classPath.split(System.getProperty("path.separator"));
+      String gwtdevJar = null;
+      for (String jarFile : pathElements) {
+        if (jarFile.contains("gwt-dev.jar")) {
+          gwtdevJar = jarFile;
+          break;
+        }
+      }
+      if (gwtdevJar == null) {
+        return;
+      }
+      InputStream stream =
+          Files.newInputStream(Paths.get(gwtdevJar), StandardOpenOption.READ);
+      if (stream == null) {
+        return;
+      }
+      try {
+        Hasher hasher = Hashing.sha1().newHasher();
+        final int BUFFERSIZE = 10 * 1024;
+        byte[] bytes = new byte[BUFFERSIZE];
+        int read;
+        while ( (read = stream.read(bytes)) != -1 ) {
+          hasher.putBytes(bytes, 0, read);
+        }
+        versionHash = hasher.hash().toString();
+      } finally {
+        stream.close();
+      }
+    } catch (IOException e) {
     }
   }
 
@@ -514,7 +564,7 @@ class PersistentUnitCache extends MemoryUnitCache {
     }
     try {
       if (cacheDirectory.isDirectory() && cacheDirectory.canRead()) {
-        File[] files = getCacheFiles(cacheDirectory);
+        File[] files = getCacheFiles(cacheDirectory, true);
         for (File cacheFile : files) {
           FileInputStream fis = null;
           BufferedInputStream bis = null;

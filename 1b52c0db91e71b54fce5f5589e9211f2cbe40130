@@ -52,6 +52,24 @@
       "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_0119108d",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceLineNumbersTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-02T19:27:43Z",
+      "side": 1,
+      "message": "I agree and already said that it is not the ideal way.\n\nHowever, this doesn\u0027t only affect GWT itself but may affect other js code that lives in the page together with GWT. We can\u0027t break those apps without a warning especially if we have an option not to do so.",
+      "parentUuid": "01e021ae_52913240",
+      "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

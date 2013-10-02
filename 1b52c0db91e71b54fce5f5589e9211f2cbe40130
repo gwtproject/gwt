@@ -34,6 +34,24 @@
       "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01e021ae_52913240",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceLineNumbersTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-02T18:46:33Z",
+      "side": 1,
+      "message": "For arrays you should NOT use for each iteration. Its really slow and will go up the prototype chain.\n\nI\u0027ll look into the trampoline routine later on, but for now I think this CL is the first step.",
+      "parentUuid": "0144a155_d8768141",
+      "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

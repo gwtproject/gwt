@@ -16,6 +16,24 @@
       "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144a155_d8768141",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceLineNumbersTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-02T00:23:45Z",
+      "side": 1,
+      "message": "Although it is not the best way to do iterations,  we might be more likely see this kind of usage in arrays. So I would prefer to not break any existing (or future) javascript code by this change.\n\nIn the previous patch I suggested arrays to work like JSOs for the purpose of method dispatch and Daniel said he is going to look into that. Perhaps we should do it before submitting this patch?\n\nRoberto: defineProperty is not supported in ie8",
+      "parentUuid": "0144a155_355eb852",
+      "revId": "1b52c0db91e71b54fce5f5589e9211f2cbe40130",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

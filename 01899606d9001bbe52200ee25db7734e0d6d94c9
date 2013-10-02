@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21660513_475e384a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-02T23:41:07Z",
+      "side": 1,
+      "message": "Hm, so I think for our internal users that we actually want gwt-dev-classes.jar.  Is it possible for you to verify that the selected jarFile actually contains the GWT compiler?  (E.g., check that \"com/google/gwt/dev/javac/PersistentUnitCache.class\" exists in the jar file.)\n\nOtherwise it\u0027s likely this could break if we refactor our BUILD files, or even if we restructure the open source build.",
+      "revId": "01899606d9001bbe52200ee25db7734e0d6d94c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

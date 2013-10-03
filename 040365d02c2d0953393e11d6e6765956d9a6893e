@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21660513_98d7ca95",
+        "filename": "dev/core/src/com/google/gwt/dev/util/BrowserLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-03T21:24:59Z",
+      "side": 1,
+      "message": "Should gvfs-open be added to the list too?  It seems that\u0027s now preferred over gnome-open, but I couldn\u0027t quickly find an authoritative source.  (I always just use xdg-open myself.)",
+      "revId": "040365d02c2d0953393e11d6e6765956d9a6893e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

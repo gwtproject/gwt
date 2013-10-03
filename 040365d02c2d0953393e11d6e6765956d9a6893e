@@ -16,6 +16,24 @@
       "revId": "040365d02c2d0953393e11d6e6765956d9a6893e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_b8716ed9",
+        "filename": "dev/core/src/com/google/gwt/dev/util/BrowserLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 6080
+      },
+      "writtenOn": "2013-10-03T21:34:20Z",
+      "side": 1,
+      "message": "Sure, didn\u0027t know about it.\nhttp://askubuntu.com/questions/101965/what-is-the-replacement-for-gnome-open-in-gnome\naskubuntu is somewhat authoritative.",
+      "parentUuid": "21660513_98d7ca95",
+      "revId": "040365d02c2d0953393e11d6e6765956d9a6893e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

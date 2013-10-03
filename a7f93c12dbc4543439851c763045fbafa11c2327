@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_5f6d9c30",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-03T17:14:06Z",
+      "side": 1,
+      "message": "Much better. Done.",
+      "parentUuid": "c1c1a91a_30858605",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1c1a91a_f0761e41",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_1f5f247c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-03T17:14:06Z",
+      "side": 1,
+      "message": "Matthew pointed to a simpler way also  using the classloader.",
+      "parentUuid": "c1c1a91a_f0761e41",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1c1a91a_90731a50",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-10-03T08:44:36Z",
       "side": 1,
       "message": "Don\u0027t we need to close() the ZipFile? (it has a close() method, so I suppose not calling it would possibly leak resources)",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_9fded4c9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-03T17:14:06Z",
+      "side": 1,
+      "message": "Doh...\nWell this went away..",
+      "parentUuid": "c1c1a91a_90731a50",
       "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

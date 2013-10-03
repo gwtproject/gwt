@@ -106,6 +106,16 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
     return JsOutputOption.PRETTY;
   }
 
+  /**
+   * Super Dev Mode doesn't need a source jar because it reads source files from its classpath
+   * and generated files from a temp directory.
+   * @see ModuleState#openSourceFile
+   */
+  @Override
+  public File getDebugDir() {
+    return null;
+  }
+
   @Override
   public SourceLevel getSourceLevel() {
     return sourceLevel;

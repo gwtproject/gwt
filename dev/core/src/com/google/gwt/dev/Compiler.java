@@ -190,7 +190,8 @@ public class Compiler {
           }
           Link.link(logger.branch(TreeLogger.TRACE, logMessage), module,
               generatedArtifacts, allPerms, resultFiles, options.getWarDir(),
-              options.getDeployDir(), options.getExtraDir(), precompileOptions);
+              options.getDeployDir(), options.getExtraDir(), options.getDebugDir(),
+              precompileOptions);
 
           linkEvent.end();
           long compileDone = System.currentTimeMillis();

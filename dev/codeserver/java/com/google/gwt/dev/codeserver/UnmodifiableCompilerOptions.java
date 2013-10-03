@@ -173,6 +173,11 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
+  public void setDebugDir(File dest) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public final void setSourceLevel(SourceLevel sourceLevel) {
     throw new UnsupportedOperationException();
   }

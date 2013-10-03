@@ -31,6 +31,8 @@ import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyPermutations;
+import com.google.gwt.dev.cfg.ResourceLoader;
+import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.cfg.StaticPropertyOracle;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.PermutationResult;
@@ -41,15 +43,18 @@ import com.google.gwt.dev.util.OutputFileSet;
 import com.google.gwt.dev.util.OutputFileSetOnDirectory;
 import com.google.gwt.dev.util.OutputFileSetOnJar;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.arg.ArgHandlerDebugDir;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
+import com.google.gwt.dev.util.arg.OptionDebugDir;
 import com.google.gwt.dev.util.arg.OptionDeployDir;
 import com.google.gwt.dev.util.arg.OptionExtraDir;
 import com.google.gwt.dev.util.arg.OptionWarDir;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -74,7 +79,7 @@ public class Link {
    * Options for Link.
    */
   public interface LinkOptions extends OptionExtraDir,
-      OptionWarDir, OptionDeployDir, CompileTaskOptions {
+      OptionWarDir, OptionDeployDir, OptionDebugDir, CompileTaskOptions {
   }
 
   static class ArgProcessor extends CompileArgProcessor {
@@ -83,6 +88,7 @@ public class Link {
       registerHandler(new ArgHandlerExtraDir(options));
       registerHandler(new ArgHandlerWarDir(options));
       registerHandler(new ArgHandlerDeployDir(options));
+      registerHandler(new ArgHandlerDebugDir(options));
     }
 
     @Override
@@ -100,6 +106,7 @@ public class Link {
     private File deployDir;
     private File extraDir;
     private File warDir;
+    private File debugSourceDir;
 
     public LinkOptionsImpl() {
     }
@@ -112,6 +119,7 @@ public class Link {
       super.copyFrom(other);
       setDeployDir(other.getDeployDir());
       setExtraDir(other.getExtraDir());
+      setDebugDir(other.getDebugDir());
       setWarDir(other.getWarDir());
     }
 
@@ -124,6 +132,11 @@ public class Link {
     @Override
     public File getExtraDir() {
       return extraDir;
+    }
+
+    @Override
+    public File getDebugDir() {
+      return debugSourceDir;
     }
 
     @Override
@@ -142,6 +155,11 @@ public class Link {
     }
 
     @Override
+    public void setDebugDir(File dest) {
+      this.debugSourceDir = dest;
+    }
+
+    @Override
     public void setWarDir(File warDir) {
       this.warDir = warDir;
     }
@@ -150,23 +168,16 @@ public class Link {
   public static void link(TreeLogger logger, ModuleDef module,
       ArtifactSet generatedArtifacts, Permutation[] permutations,
       List<FileBackedObject<PermutationResult>> resultFiles, File outDir,
-      File deployDir, File extrasDir, JJSOptions precompileOptions)
+      File deployDir, File extrasDir, File debugDir, JJSOptions precompileOptions)
       throws UnableToCompleteException, IOException {
+
     StandardLinkerContext linkerContext = new StandardLinkerContext(logger,
         module, precompileOptions);
     ArtifactSet artifacts = doSimulatedShardingLink(logger, module,
         linkerContext, generatedArtifacts, permutations, resultFiles);
-    OutputFileSet extrasFileSet = chooseOutputFileSet(extrasDir,
-        module.getName() + "/");
-    // allow -deploy and -extra to point to the same directory/jar
-    OutputFileSet deployFileSet;
-    if (deployDir.equals(extrasDir)) {
-      deployFileSet = extrasFileSet;
-    } else {
-      deployFileSet = chooseOutputFileSet(deployDir, module.getName() + "/");
-    }
-    doProduceOutput(logger, artifacts, linkerContext, chooseOutputFileSet(
-        outDir, module.getName() + "/"), deployFileSet, extrasFileSet);
+
+    doProduceOutput(logger, artifacts, linkerContext, module, outDir, deployDir, extrasDir,
+        debugDir);
   }
 
   /**
@@ -377,9 +388,33 @@ public class Link {
    * Emit final output.
    */
   private static void doProduceOutput(TreeLogger logger, ArtifactSet artifacts,
-      StandardLinkerContext linkerContext, OutputFileSet outFileSet,
-      OutputFileSet deployFileSet, OutputFileSet extraFileSet)
-      throws UnableToCompleteException, IOException {
+      StandardLinkerContext linkerContext, ModuleDef module,
+      File outDir, File deployDir, File extraDir,
+      File debugSourceDir) throws IOException, UnableToCompleteException {
+
+    // == create output filesets ==
+
+    String destPrefix = module.getName() + "/";
+
+    OutputFileSet outFileSet = chooseOutputFileSet(outDir, destPrefix);
+    OutputFileSet extraFileSet = chooseOutputFileSet(extraDir, destPrefix);
+
+    // allow -deploy and -extra to point to the same directory/jar
+    OutputFileSet deployFileSet;
+    if (deployDir.equals(extraDir)) {
+      deployFileSet = extraFileSet;
+    } else {
+      deployFileSet = chooseOutputFileSet(deployDir, destPrefix);
+    }
+
+    OutputFileSet debugFileSet;
+    if (debugSourceDir != null && debugSourceDir.equals(extraDir)) {
+      debugFileSet = extraFileSet;
+    } else {
+      debugFileSet = chooseOutputFileSet(debugSourceDir, destPrefix);
+    }
+
+    // == write the output ==
 
     linkerContext.produceOutput(logger, artifacts, Visibility.Public,
         outFileSet);
@@ -388,9 +423,17 @@ public class Link {
     linkerContext.produceOutput(logger, artifacts, Visibility.Private,
         extraFileSet);
 
+    if (!(debugFileSet instanceof NullOutputFileSet)) {
+      // Assume that all source code is available in the compiler's classpath.
+      // (This will have to be adjusted to work with Super Dev Mode.)
+      ResourceLoader loader = ResourceLoaders.forClassLoader(Thread.currentThread());
+      DebugSourceCopier.copySources(logger, artifacts, loader, debugFileSet, "src/");
+    }
+
     outFileSet.close();
     deployFileSet.close();
     extraFileSet.close();
+    debugFileSet.close();
 
     logger.log(TreeLogger.INFO, "Link succeeded");
   }
@@ -635,7 +678,8 @@ public class Link {
         try {
           link(branch, module, precomp.getGeneratedArtifacts(), perms,
               resultFiles, options.getWarDir(), options.getDeployDir(),
-              options.getExtraDir(), precomp.getUnifiedAst().getOptions());
+              options.getExtraDir(), options.getDebugDir(),
+              precomp.getUnifiedAst().getOptions());
         } catch (IOException e) {
           logger.log(TreeLogger.ERROR,
               "Unexpected exception while producing output", e);
@@ -648,7 +692,7 @@ public class Link {
 
   /**
    * Do a final link, assuming the precompiles were done on the CompilePerms
-   * shards.
+   * shards. Returns true if successful.
    */
   private boolean doLinkFinal(TreeLogger logger, File compilerWorkDir,
       ModuleDef module, JJSOptions precompileOptions)
@@ -672,25 +716,13 @@ public class Link {
         module, precompileOptions);
 
     try {
-      OutputFileSet outFileSet = chooseOutputFileSet(options.getWarDir(),
-          module.getName() + "/");
-      OutputFileSet extraFileSet = chooseOutputFileSet(options.getExtraDir(),
-          module.getName() + "/");
-      // allow -deploy and -extra to point to the same directory/jar
-      OutputFileSet deployFileSet;
-      if (options.getDeployDir().equals(options.getExtraDir())) {
-        deployFileSet = extraFileSet;
-      } else {
-        deployFileSet = chooseOutputFileSet(options.getDeployDir(),
-            module.getName() + "/");
-      }
-
       ArtifactSet artifacts = scanCompilePermResults(logger, resultFiles);
       artifacts.addAll(linkerContext.getArtifactsForPublicResources(logger,
           module));
       artifacts = linkerContext.invokeFinalLink(logger, artifacts);
-      doProduceOutput(logger, artifacts, linkerContext, outFileSet,
-          deployFileSet, extraFileSet);
+
+      doProduceOutput(logger, artifacts, linkerContext, module, options.getWarDir(),
+          options.getDeployDir(), options.getExtraDir(), options.getDebugDir());
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Exception during final linking", e);
       throw new UnableToCompleteException();

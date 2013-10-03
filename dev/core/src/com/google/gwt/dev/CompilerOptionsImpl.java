@@ -56,6 +56,11 @@ public class CompilerOptionsImpl extends PrecompileTaskOptionsImpl implements Co
   }
 
   @Override
+  public File getDebugDir() {
+    return linkOptions.getDebugDir();
+  }
+
+  @Override
   public File getWarDir() {
     return linkOptions.getWarDir();
   }
@@ -73,6 +78,11 @@ public class CompilerOptionsImpl extends PrecompileTaskOptionsImpl implements Co
   @Override
   public void setLocalWorkers(int localWorkers) {
     this.localWorkers = localWorkers;
+  }
+
+  @Override
+  public void setDebugDir(File dest) {
+    linkOptions.setDebugDir(dest);
   }
 
   @Override

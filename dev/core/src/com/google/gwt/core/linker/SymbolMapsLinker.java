@@ -185,7 +185,8 @@ public class SymbolMapsLinker extends AbstractLinker {
     }
 
     public static String sourceMapFilenameForFragment(int fragment) {
-             return "sourceMap" + fragment + ".json";
+      // If this changes, update DebugSourceCopier.isSourceMap.
+      return "sourceMap" + fragment + ".json";
     }
   }
 

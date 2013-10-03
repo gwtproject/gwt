@@ -246,6 +246,13 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       return sclArgs;
     }
 
+    @Override
+    public File getDebugDir() {
+      // Writing the debugger sources in devmode isn't needed because the IDE won't be
+      // looking at them.
+      return null;
+    }
+
     public File getWarDir() {
       return warDir;
     }
@@ -278,6 +285,11 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
 
     public void setServletContainerLauncherArgs(String args) {
       sclArgs = args;
+    }
+
+    @Override
+    public void setDebugDir(File dest) {
+      throw new UnsupportedOperationException();
     }
 
     public void setWarDir(File warDir) {

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1c1a91a_30858605",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-03T08:44:36Z",
+      "side": 1,
+      "message": "Absence of \u0027final\u0027 makes me nervous. Better compute the value in a local variable and then assign it once to that field (e.g. replace initPersistentCacheFilenamePrefix with a computePersistentCacheFilenamePrefix that returns the value, and then:\n\n static final CURRENT_VERSION_CACHE_FILE_PREFIX \u003d computePersistentCacheFilenamePrefix();",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1c1a91a_f0761e41",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-03T08:44:36Z",
+      "side": 1,
+      "message": "That won\u0027t work if the Compiler is loaded in a \"child\" classloader (I experimented with this in https://github.com/tbroyer/gwt-maven-plugin)\n\nHow about something like:\n\n if (PersistentUnitCache.class.getClassLoader() instanceof URLClassLoader) {\n   URLClassLoader cl \u003d (URLClassLoader) PersistentUnitCache.class.getClassLoader();\n   for (String url : cl.getURLs()) {\n     if (url.getProtocol().equals(\"file\") \u0026\u0026\n         url.getFile().contains(COMPILE_JAR_FILENAME_CONTAINS) \u0026\u0026\n         url.getFile().endsWith(JAR_SUFFIX)) {\n       File jarFile \u003d new File(url.toURI());\n       ZipFile jarZipFile \u003d new ZipFile(jarFile);\n       …\n     }\n   }\n }",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1c1a91a_90731a50",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-03T08:44:36Z",
+      "side": 1,
+      "message": "Don\u0027t we need to close() the ZipFile? (it has a close() method, so I suppose not calling it would possibly leak resources)",
+      "revId": "a7f93c12dbc4543439851c763045fbafa11c2327",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

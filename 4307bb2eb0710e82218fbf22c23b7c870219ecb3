@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c13fe9e6_80b8d809",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-04T05:50:08Z",
+      "side": 1,
+      "message": "\"By default *the* files will *be* saved\"",
+      "revId": "4307bb2eb0710e82218fbf22c23b7c870219ecb3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_a0aeb4c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-04T05:50:08Z",
+      "side": 1,
+      "message": "Not to bike shed, but I think \"-saveSourceDir\" would be slightly better (parallels -workDir, clearer that it\u0027s a directory not a jar or something, and a few chars shorter).  Your call.",
+      "revId": "4307bb2eb0710e82218fbf22c23b7c870219ecb3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_e0a8bcb7",
+        "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-04T05:50:08Z",
+      "side": 1,
+      "message": "I think this should be in a \u0027finally\u0027 clause?  At least copySources() can throw an exception.\n\nAlso, I don\u0027t think we want to close() it here when \"out \u003d\u003d extraFileSet\"?",
+      "revId": "4307bb2eb0710e82218fbf22c23b7c870219ecb3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_a03994b3",
+        "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-04T05:50:08Z",
+      "side": 1,
+      "message": "I wonder if we should limit how many files we print here?",
+      "revId": "4307bb2eb0710e82218fbf22c23b7c870219ecb3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_8033b8d3",
+        "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-04T05:50:08Z",
+      "side": 1,
+      "message": "Do we need to close any of these objects?",
+      "revId": "4307bb2eb0710e82218fbf22c23b7c870219ecb3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

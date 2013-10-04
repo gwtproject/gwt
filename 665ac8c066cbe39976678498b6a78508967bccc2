@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a14cb5b3_7c80d9f5",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-10-04T15:15:19Z",
+      "side": 1,
+      "message": "The comment indicates that ie10 does support typed arrays.  Is the comment wrong or the property location?",
+      "revId": "665ac8c066cbe39976678498b6a78508967bccc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

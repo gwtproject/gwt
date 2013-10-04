@@ -16,6 +16,41 @@
       "revId": "0ef15d248f4d78b1e86d645ff7d07428132363e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_dd700b45",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-10-04T00:41:08Z",
+      "side": 1,
+      "message": "ACCUMULATING vs FROZEN?",
+      "parentUuid": "c13fe9e6_7da9f785",
+      "revId": "0ef15d248f4d78b1e86d645ff7d07428132363e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_3d864f15",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-10-04T00:41:08Z",
+      "side": 1,
+      "message": "To remain compatible with existing code, should we allow type to be optional and default it?",
+      "revId": "0ef15d248f4d78b1e86d645ff7d07428132363e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

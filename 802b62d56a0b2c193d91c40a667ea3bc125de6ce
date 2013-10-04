@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_f5792f33",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Yep. It would also fix https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d7615\nBut that\u0027s a separate CL.",
+      "parentUuid": "21660513_e2f41769",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_a23a9f48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/UnmodifiableCompilerOptions.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/dest/debugDir",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_f5a4cf9d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/UnmodifiableCompilerOptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done.\n\n(But I\u0027m not a bid fan of standardizing on redundant idioms. I think in compiler visitor methods we standardized on \u0027x\u0027 and that seems more sane. For an unused method parameter, maybe we should use \u0027_\u0027 like Go and Dart?)",
+      "parentUuid": "21660513_a23a9f48",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_55b7bbc7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/EmittedArtifact.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_624487c9",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_027b4bf4",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardGeneratedResource.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "wrong indentation",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_f5cb6f3f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardGeneratedResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_027b4bf4",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_55f25b88",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Makes sense. Moved it to SourceMapArtifact.",
+      "parentUuid": "21660513_0264abba",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_62ffa719",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "\"in at least\"",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61babd9d_2aae7f8f",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_62ffa719",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_f5d60fde",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_e20ad771",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_42b5c376",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/src/resourceLoader",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_15d4e3d3",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "I think it\u0027s okay, but went with \"loader\" as a compromise.",
+      "parentUuid": "21660513_42b5c376",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_35048799",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Putting the type into the variable name seems redundant? It\u0027s a short method so not hard to remember.",
+      "parentUuid": "21660513_62ba476a",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_e29737ce",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -166,6 +328,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "this process seems a little misleading.\n\nthe function getSourcePaths() is claiming to return a set of paths to source files, but then immediately after we\u0027re doing some filtering to make sure they\u0027re source files?\n\nseems like that check should be inside getSourcePaths() or else getSourcePaths() should be renamed to reflect the fact that it is actually only returning a set of candidate source paths\n\nalso, s/wantedFiles/sourcePaths\n\nalso, since it\u0027s having to do some computation to figure the return values, it should probably be called findSourcePaths()",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_353fa73b",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Renamed the variables and added a comment to make this clearer.",
+      "parentUuid": "21660513_e29737ce",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_f5484fde",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Went with \"remainingFiles\".",
+      "parentUuid": "21660513_827d1bbd",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_c271d3d8",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -200,6 +398,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/candidate/emittedArtifact",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_3516c7c1",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Seems redundant.",
+      "parentUuid": "21660513_c271d3d8",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_f52fefff",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "It\u0027s only used two lines later; nobody\u0027s going to forget the type.",
+      "parentUuid": "21660513_9571d39e",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_22ea0f61",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -234,6 +468,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "you could avoid this filename parsing if you subclassed EmittedArtifact specifically for sourcemaps and then filtered directly for them",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_3591e70f",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "I originally tried that but it doesn\u0027t work. Artifact subclasses are not preserved when artifacts are written to a jar file and then read back again. Everything comes back as a JarEntryEmittedArtifact.",
+      "parentUuid": "21660513_22ea0f61",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -274,6 +526,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_f57a8fee",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Disagree on \"log\" but changed it anyway for consistency. Went with \"sourceMap\" for \"map\".",
+      "parentUuid": "21660513_75851f5f",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_c24c73a1",
         "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
         "patchSetId": 1
@@ -285,6 +555,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/loader/resourceLoader",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_756e7f33",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Disgree.",
+      "parentUuid": "21660513_c24c73a1",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -308,6 +596,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_155f037c",
+        "filename": "dev/core/src/com/google/gwt/dev/DebugSourceCopier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "I was able to get rid of one finally clause but OutputFileSet only has a way to get an OutputStream. (The underlying issue is that an OutputFileSet can be either a file or jar and the code assumes each output file can only be written once.)",
+      "parentUuid": "21660513_755aff30",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_95dc7363",
         "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
         "patchSetId": 1
@@ -319,6 +625,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/dest/debugDir",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_55e81b69",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_95dc7363",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -342,6 +666,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_15eaa360",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "21660513_35e1e715",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_15c8639a",
         "filename": "dev/core/src/com/google/gwt/dev/Link.java",
         "patchSetId": 1
@@ -353,6 +695,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "s/dest/debugSourceDir",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21660513_d5f3cb55",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Not really seeing it; only used once.",
+      "parentUuid": "21660513_15c8639a",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -376,6 +736,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_d50aeb71",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Yes it\u0027s a bit weird bit I\u0027d like to avoid affecting performance. Added a comment.",
+      "parentUuid": "21660513_35b80708",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_7550bfdd",
         "filename": "dev/core/src/com/google/gwt/dev/Link.java",
         "patchSetId": 1
@@ -393,6 +771,24 @@
     },
     {
       "key": {
+        "uuid": "21660513_55ba5b69",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Or maybe introduce a LinkerOutput class. I didn\u0027t want to get into that quite yet.",
+      "parentUuid": "21660513_7550bfdd",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_f5ee0fe5",
         "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
         "patchSetId": 1
@@ -404,6 +800,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "it\u0027d be a real hassle to wire the options object all the way into here\n\nthe best option i can think of right now is:\n\nthe StandardGeneratorContext is instantiated in the constructor of DistillerRebindPermutationOracle.\n\nDistillerRebindPermutationOracle is instantiated in Precompile.precompile(), and a JJSOptions instance is in scope at that time. you could pull the debugSource option out and pass it into the constructor. (though right now i don\u0027t think that option is part of JJSOptions, but i guess it should be?)",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_007a0875",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "Decided to filter it out later (for now).",
+      "parentUuid": "21660513_f5ee0fe5",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -438,6 +852,24 @@
       "writtenOn": "2013-10-03T18:23:59Z",
       "side": 1,
       "message": "the user wants the feature and likely doesn\u0027t care about what directory it\u0027s written to.\n\ni think this should be an ArgHandlerFlag (boolean) and we should automatically calculate a temp directory",
+      "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13fe9e6_a07cf472",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerDebugDir.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-04T04:59:24Z",
+      "side": 1,
+      "message": "I changed it to default to putting the source code under \"extras\". This has the advantage that it requires no Blaze changes to start using.\n\nStill keeping the flag (renamed) because I want to make it a separate output file in Blaze.",
+      "parentUuid": "21660513_1513831e",
       "revId": "802b62d56a0b2c193d91c40a667ea3bc125de6ce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1194dc0_66ccce0b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-04T19:19:47Z",
+      "side": 1,
+      "message": "GWT source seems pretty inconsistent on the point, but in Java the standard when naming functions that return a boolean is usually:\n\nisFoo()\nshouldFoo(), etc\n\nso normally this function would be named shouldSaveSource()",
+      "revId": "45284555beb73ce111c1a472cd6394af46b0f1b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1194dc0_06823a97",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionSaveSource.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-04T19:19:47Z",
+      "side": 1,
+      "message": "update copyright",
+      "revId": "45284555beb73ce111c1a472cd6394af46b0f1b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

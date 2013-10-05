@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1194dc0_7a91010f",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-05T01:50:19Z",
+      "side": 1,
+      "message": "Does this work fine when deployFileSet \u003d \u003d extraFileSet.?",
+      "revId": "e636a9bea4f2a01bbc4a22ef97f33e41fc38453d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1194dc0_ba7a59ed",
+        "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-05T01:50:19Z",
+      "side": 1,
+      "message": "Shouldnt this out.close() be in a finally clause as well?",
+      "revId": "e636a9bea4f2a01bbc4a22ef97f33e41fc38453d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

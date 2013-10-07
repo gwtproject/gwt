@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a1967556_4c30ff0f",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-07T20:23:39Z",
+      "side": 1,
+      "message": "It happens to work. For jars, additional close() calls are ignored and for a directory, close() is a no-op. Fixed it anyway.",
+      "parentUuid": "e1194dc0_7a91010f",
+      "revId": "e636a9bea4f2a01bbc4a22ef97f33e41fc38453d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1194dc0_ba7a59ed",
         "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-05T01:50:19Z",
       "side": 1,
       "message": "Shouldnt this out.close() be in a finally clause as well?",
+      "revId": "e636a9bea4f2a01bbc4a22ef97f33e41fc38453d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1967556_ec20cbbe",
+        "filename": "dev/core/src/com/google/gwt/dev/SourceSaver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-07T20:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_ba7a59ed",
       "revId": "e636a9bea4f2a01bbc4a22ef97f33e41fc38453d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

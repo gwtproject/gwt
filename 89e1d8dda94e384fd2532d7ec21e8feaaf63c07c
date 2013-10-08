@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1d30d45_45a334f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T21:27:25Z",
+      "side": 1,
+      "message": "I\u0027d word as \"Prevent setValue from accessing unneeded values\"",
+      "revId": "89e1d8dda94e384fd2532d7ec21e8feaaf63c07c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_85994cc9",
+        "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T21:27:25Z",
+      "side": 1,
+      "message": "Nit: Trailing white space.",
+      "revId": "89e1d8dda94e384fd2532d7ec21e8feaaf63c07c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

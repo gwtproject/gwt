@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "01bf41df_37c078c9",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-08T05:23:10Z",
+      "side": 1,
+      "message": "Outside of DOM infra, this is used for complex behavior (e.g. RichTextBox, CellWidget) and perhaps can be used for testing as well. For the complex scenarios there are no alternatives that I\u0027m aware of.\n\nI was also in between, but not but didn\u0027t see any immediate issues with that. Also other upcoming changes utilize this being public and avoid more JSNI code.",
+      "parentUuid": "e1d30d45_fc07812e",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1d30d45_1cfc7de6",
         "filename": "user/src/com/google/gwt/user/client/DOM.java",
         "patchSetId": 1
@@ -104,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "01bf41df_f77c40c0",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-08T05:23:10Z",
+      "side": 1,
+      "message": "this was just for improving the readability of the code. It is used in 2 places so why it was outside of the internal functions.\n\nI\u0027ll replace this code with non-JSNI version in an upcoming patch but I think you are right, it is potentially better for the JSVM so I will move the declaration inside.",
+      "parentUuid": "e1d30d45_7c27f1c0",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1d30d45_3c16195d",
         "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
         "patchSetId": 1
@@ -115,6 +151,24 @@
       "writtenOn": "2013-10-08T04:58:17Z",
       "side": 1,
       "message": "Hm, this changes the behavior slightly.  E.g., suppose the DOM looks like:\n\n  \u003cmodule1.Widget1\u003e\n    \u003cmodule2.Widget2\u003e\n      \u003cdiv id\u003d\"target\"\u003e\n\nand module1 tries to dispatch an event to \u0027target\u0027.  Previously, the event would be dropped (we\u0027d find an event listener on Widget2 and terminate the loop, but then discover it\u0027s not ours), whereas now we\u0027ll loop until we find our listener on Widget1.\n\nNot convinced this is a *bad* thing, but just wanted to point it out.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01bf41df_17bd7453",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-08T05:23:10Z",
+      "side": 1,
+      "message": "Yeah, this is why I said most applications will not see any behavior change :)\n\nI think this behavior is slightly more correct than the older one but at the end I can\u0027t really think of a use case this might break. But at the end it is true that it can change the behavior in an unlikely event that somebody relies on it.",
+      "parentUuid": "e1d30d45_3c16195d",
       "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -243,7 +243,12 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
     if (value == null) {
       value = Boolean.FALSE;
     }
-    boolean oldValue = isDown();
+
+    boolean oldValue = false;
+    if (fireEvents) {
+      oldValue = isDown();
+    }
+
     setDown(value);
     if (fireEvents) {
       ValueChangeEvent.fireIfNotEqual(this, oldValue, value);

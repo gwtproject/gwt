@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e1d30d45_a509e8fb",
+        "filename": "user/src/com/google/gwt/user/client/ui/SimpleCheckBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T21:44:16Z",
+      "side": 1,
+      "message": "(I actually somewhat prefer the \u0027if\u0027 statements for consistency with the fireIfNotEqual() statement, but I don\u0027t feel strongly about it.)",
+      "parentUuid": "e1d30d45_85b26c25",
+      "revId": "89e1d8dda94e384fd2532d7ec21e8feaaf63c07c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1d30d45_85994cc9",
         "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
         "patchSetId": 1

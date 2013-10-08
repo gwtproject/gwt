@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "4113f9db_2924add0",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-08T14:58:10Z",
+      "side": 1,
+      "message": "Also, \"will always *be* executed\"",
+      "parentUuid": "e1d30d45_7c1c917e",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1d30d45_7c27f1c0",
         "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
         "patchSetId": 1

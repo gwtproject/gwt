@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "e1d30d45_85b26c25",
+        "filename": "user/src/com/google/gwt/user/client/ui/SimpleCheckBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-08T21:36:27Z",
+      "side": 1,
+      "message": "nit:\n\n  Boolean oldValue \u003d fireEvent ? getValue() : null;\n\n(Same throughout the patch.)",
+      "revId": "89e1d8dda94e384fd2532d7ec21e8feaaf63c07c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1d30d45_85994cc9",
         "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
         "patchSetId": 1

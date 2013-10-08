@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1d30d45_999f7f4c",
+        "filename": "user/src/com/google/gwt/core/CrossSiteIframeLinker.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-08T02:01:57Z",
+      "side": 1,
+      "message": "If this defaulted to match localhost then I\u0027d feel comfortable enabling the hook by default in our stable release, which would be nice for \"out of the box\" usage.\n\nAlso I wonder if we should have a way to disable the devmode hook.",
+      "revId": "b3efb1e54dce89812f0cb159f1e3767e7d9620bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

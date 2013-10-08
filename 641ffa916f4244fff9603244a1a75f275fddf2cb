@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1d30d45_fc07812e",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Any ideas why this might not have been public originally?  Obviously no immediate consequences to making it public, just wondering if we should try to discourage people from using it if there are alternatives.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_1cfc7de6",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Nit: if the event *was* dispatched",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_bc01091c",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Nit: Capitalize \"E.g.\", or change the period to a semicolon.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_9c064d30",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Nit: Space after if.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_7c1c917e",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Nit: \"because *the* compiler proves that *the* *instanceof* checks ...\"",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_7c27f1c0",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Out of curiosity, why do this?  And if you have a reason, did you intend to put the var definition outside of the function(){} bodies?\n\nMy intuition is that it\u0027s better to at least move the variables inside the function(){} expressions.  Otherwise a naive JSVM might think it needs to create a function closure environment to store getEventListener.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_3c16195d",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-08T04:58:17Z",
+      "side": 1,
+      "message": "Hm, this changes the behavior slightly.  E.g., suppose the DOM looks like:\n\n  \u003cmodule1.Widget1\u003e\n    \u003cmodule2.Widget2\u003e\n      \u003cdiv id\u003d\"target\"\u003e\n\nand module1 tries to dispatch an event to \u0027target\u0027.  Previously, the event would be dropped (we\u0027d find an event listener on Widget2 and terminate the loop, but then discover it\u0027s not ours), whereas now we\u0027ll loop until we find our listener on Widget1.\n\nNot convinced this is a *bad* thing, but just wanted to point it out.",
+      "revId": "641ffa916f4244fff9603244a1a75f275fddf2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

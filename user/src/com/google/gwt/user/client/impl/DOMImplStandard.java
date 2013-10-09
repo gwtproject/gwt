@@ -130,13 +130,15 @@ abstract class DOMImplStandard extends DOMImpl {
   @Override
   public void releaseCapture(Element elem) {
     maybeInitializeEventSystem();
-    releaseCaptureImpl(elem);
+    if (captureElem == elem) {
+      captureElem = null;
+    }
   }
 
   @Override
   public void setCapture(Element elem) {
     maybeInitializeEventSystem();
-    setCaptureImpl(elem);
+    captureElem = elem;
   }
 
   @Override
@@ -188,17 +190,17 @@ abstract class DOMImplStandard extends DOMImpl {
     });
 
     @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent = $entry(function(evt) {
+      var getEventListener = @com.google.gwt.user.client.impl.DOMImpl::getEventListener(*);
+
       var listener, curElem = this;
-      while (curElem && !(listener = curElem.__listener)) {
+      while (curElem && !(listener = getEventListener(curElem))) {
         curElem = curElem.parentNode;
       }
       if (curElem && curElem.nodeType != 1) {
         curElem = null;
       }
       if (listener) {
-        if (@com.google.gwt.user.client.impl.DOMImpl::isMyListener(Ljava/lang/Object;)(listener)) {
-          @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, curElem, listener);
-        }
+        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, curElem, listener);
       }
     });
 
@@ -217,9 +219,10 @@ abstract class DOMImplStandard extends DOMImpl {
       var dispatchCapturedEventFn = @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedEvent;
       if (dispatchCapturedEventFn(evt)) {
         var cap = @com.google.gwt.user.client.impl.DOMImplStandard::captureElem;
-        if (cap && cap.__listener) {
-          if (@com.google.gwt.user.client.impl.DOMImpl::isMyListener(Ljava/lang/Object;)(cap.__listener)) {
-            @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, cap, cap.__listener);
+        if (cap) {
+          var listener = @com.google.gwt.user.client.impl.DOMImpl::getEventListener(*)(cap);
+          if (listener) {
+            @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, cap, listener);
             evt.stopPropagation();
           }
         }
@@ -345,15 +348,5 @@ abstract class DOMImplStandard extends DOMImpl {
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     if (chMask & 0x4000000) elem.ongestureend    = (bits & 0x4000000) ?
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-  }-*/;
-
-  private native void releaseCaptureImpl(Element elem) /*-{
-    if (elem === @com.google.gwt.user.client.impl.DOMImplStandard::captureElem) {
-      @com.google.gwt.user.client.impl.DOMImplStandard::captureElem = null;
-    }
-  }-*/;
-
-  private native void setCaptureImpl(Element elem) /*-{
-    @com.google.gwt.user.client.impl.DOMImplStandard::captureElem = elem;
   }-*/;
 }

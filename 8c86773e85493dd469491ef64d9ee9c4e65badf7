@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41869966_b409eefb",
+        "filename": "samples/mail/src/com/google/gwt/sample/mail/client/Mailboxes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T16:54:01Z",
+      "side": 1,
+      "message": "This is not a constant string.  Please change the getHTML() call to getSafeHtml() and use SafeHtmlBuilder to concatenate the strings.",
+      "revId": "8c86773e85493dd469491ef64d9ee9c4e65badf7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1d30d45_ab3779be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T00:55:10Z",
+      "side": 1,
+      "message": "typo: dispatchDragEvent",
+      "revId": "2289f2b8124480478436561226c17e2dca54e02f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1d30d45_8b939d56",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T00:55:10Z",
+      "side": 1,
+      "message": "Is it guaranteed that this will be the same as \u0027this\u0027 from before?",
+      "revId": "2289f2b8124480478436561226c17e2dca54e02f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

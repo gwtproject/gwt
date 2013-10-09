@@ -18,6 +18,9 @@ package com.google.gwt.sample.mail.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Tree;
@@ -95,7 +98,11 @@ public class Mailboxes extends Composite {
    * @param title the title of the item
    * @return the resultant HTML
    */
-  private String imageItemHTML(ImageResource imageProto, String title) {
-    return AbstractImagePrototype.create(imageProto).getHTML() + " " + title;
+  private SafeHtml imageItemHTML(ImageResource imageProto, String title) {
+    SafeHtmlBuilder builder = new SafeHtmlBuilder();
+    builder.append(AbstractImagePrototype.create(imageProto).getSafeHtml());
+    builder.append(SafeHtmlUtils.fromString(" "));
+    builder.append(SafeHtmlUtils.fromString(title));
+    return builder.toSafeHtml();
   }
 }

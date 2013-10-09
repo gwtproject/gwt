@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41869966_858ef2be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T20:58:30Z",
+      "side": 1,
+      "message": "I think this commit message got mangled at some point?  The \"Added ie10 permutation\" text can probably be removed.",
+      "revId": "a5c7c8da05fb2dd67203a9eb5e82fb9d5415f168",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41869966_c534fa04",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T20:58:30Z",
+      "side": 1,
+      "message": "Can you please add a comment explaining why this is necessary?  E.g., something like \"This is needed because ie10 has a fallback to ie9, so it matches the ie9 check below.\"?",
+      "revId": "a5c7c8da05fb2dd67203a9eb5e82fb9d5415f168",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

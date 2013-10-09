@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8112510c_33cc4858",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-09T21:55:23Z",
+      "side": 1,
+      "message": "Typo: instantiated",
+      "revId": "e3d1fa7b4fe38f77c8809187aa79f9e8b07bd871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

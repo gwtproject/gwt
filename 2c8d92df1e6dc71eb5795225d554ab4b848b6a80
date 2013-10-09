@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_fd348704",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_86c2aad1",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1194dc0_6687aea7",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-04T19:14:52Z",
       "side": 1,
       "message": "if (inModularCompilationReferenceLoadingPhase()) ? (bad name also)...\n\nMaybe add a comment\n// Don\u0027t include entry points from external libraries in modular compilation.",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_1d2a13a2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_6687aea7",
       "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_5d249bd1",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_868d8ac6",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1194dc0_e69a7ef8",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-04T19:14:52Z",
       "side": 1,
       "message": "ditto w.r.t. naming and comment",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_7d2157c0",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_e69a7ef8",
       "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_c0e52054",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1194dc0_e671ded8",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1194dc0_863f4ae6",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
         "patchSetId": 3
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_4019108d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "everything in this file is called reflectively. it seems weird to add that comment on just one of the function definitions",
+      "parentUuid": "e1194dc0_863f4ae6",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1194dc0_e64c3ea1",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
         "patchSetId": 3
@@ -115,6 +223,24 @@
       "writtenOn": "2013-10-04T19:14:52Z",
       "side": 1,
       "message": "ditto?",
+      "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_a032d400",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-09T23:24:13Z",
+      "side": 1,
+      "message": "same argument",
+      "parentUuid": "e1194dc0_e64c3ea1",
       "revId": "2c8d92df1e6dc71eb5795225d554ab4b848b6a80",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -442,7 +442,11 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
   }
 
   @Override
-  protected String getModuleSuffix(TreeLogger logger, LinkerContext context) {
+  protected String getModuleSuffixWithStrongName(TreeLogger logger, LinkerContext context,
+      String strongName) {
+
+    // Note: this method won't be called if getModuleSuffix() is overridden and returns non-null.
+
     DefaultTextOutput out = new DefaultTextOutput(context.isOutputCompact());
 
     out.print("$sendStats('moduleStartup', 'moduleEvalEnd');");
@@ -456,7 +460,8 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     if (!"false".equalsIgnoreCase(includeSourceMapUrl)) {
       String sourceMapUrl = SymbolMapsLinker.SourceMapArtifact.sourceMapFilenameForFragment(0);
       if (!"true".equalsIgnoreCase(includeSourceMapUrl)) {
-        sourceMapUrl = includeSourceMapUrl;
+        sourceMapUrl = includeSourceMapUrl.replaceAll("\\$hash\\$", strongName)
+            .replaceAll("\\$module\\$", context.getModuleName());
       }
       // The sourceURL magic comment can cause browsers to ignore the X-SourceMap header
       // This magic comment ensures that they can still locate them in that case

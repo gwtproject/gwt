@@ -17,6 +17,7 @@ package com.google.gwt.core.ext.linker.impl;
 
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.AbstractLinker;
 import com.google.gwt.core.ext.linker.Artifact;
@@ -394,7 +395,17 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     artifacts.add(editsArtifact);
     b.append(modulePrefix);
     b.append(js);
-    b.append(getModuleSuffix(logger, context));
+    String suffix = getModuleSuffix(logger, context);
+    if (suffix == null) {
+      suffix = getModuleSuffixWithStrongName(logger, context, strongName);
+      if (suffix == null) {
+        logger.log(Type.ERROR,
+            "Neither getModuleSuffix nor getModuleSuffixWithStrongName were overridden in "
+                + "linker: " + getClass().getName());
+        throw new UnableToCompleteException();
+      }
+    }
+    b.append(suffix);
     return wrapPrimaryFragment(logger, context, b.toString(), artifacts, result);
   }
 
@@ -476,8 +487,24 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     return getModulePrefix(logger, context, strongName);
   }
 
-  protected abstract String getModuleSuffix(TreeLogger logger,
-      LinkerContext context) throws UnableToCompleteException;
+  /**
+   * Returns the suffix for the initial JavaScript fragment. If null is returned,
+   * @{link #getModuleSuffixWithStrongName} will be called instead.
+   */
+  protected String getModuleSuffix(TreeLogger logger,
+      LinkerContext context) throws UnableToCompleteException {
+    return null;
+  }
+
+  /**
+   * Returns the suffix for the initial JavaScript fragment. Only called if
+   * {@link #getModuleSuffix} returns null. Either this method or getModuleSuffix
+   * must be overridden.
+   */
+  protected String getModuleSuffixWithStrongName(TreeLogger logger,
+      LinkerContext context, String strongName) throws UnableToCompleteException {
+    return null;
+  }
 
   /**
    * Some subclasses support "chunking" of the primary fragment. If chunking will be supported, this

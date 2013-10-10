@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_632456d2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-10-10T04:30:46Z",
+      "side": 1,
+      "message": "There are subclasses that override getModuleSuffix() and expected to get called by generatePrimaryFragmentString(), so that would break unless generateModuleSuffix(l, ctx, name) called the 2-arg version (as I see you proposed in the other file). Another option is to refactor the Google linkers that override it.\n\nThese overrides were specifically added so that sourcemaps could be adjusted by knowing what the linker was pre-pending to the module. Chances are not many external users override it.",
+      "parentUuid": "c18b69a1_a36d7e36",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c18b69a1_a3d81ee0",
         "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-10T02:32:43Z",
       "side": 1,
       "message": "It would seem more consistent with our existing template replacements to make this __HASH__ and __MODULE__.  Any particular reason to be different?",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_e6ea3423",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-10-10T04:30:46Z",
+      "side": 1,
+      "message": "I guess you could argue that those substitutions happen when it is a template file being substituted, whereas these come from .gwt.xml configuration properties. It would probably be best if we adopted {{foo}}, ${foo}, $foo$, or __FOO__ consistentally across GWT.  __FOO__ has the benefit that it is less likely accidentally come up than something like {{foo}} which I could see coming out of an optimization pass.",
+      "parentUuid": "c18b69a1_23624e41",
       "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "215365fe_700b5077",
+        "filename": "dev/core/src/com/google/gwt/dev/Link.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-10T16:29:49Z",
+      "side": 1,
+      "message": "I guess that the subsequent patch is the one that changes this list into List\u003cPersistenceBackedObject\u003cBlah\u003e\u003e...",
+      "revId": "ddd905f2a1ef44eaf4e3285c4cb825a476619781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c18b69a1_c3e52a54",
         "filename": "dev/core/src/com/google/gwt/dev/util/ZipEntryBackedObject.java",
         "patchSetId": 1
@@ -13,6 +30,23 @@
       "writtenOn": "2013-10-10T00:45:01Z",
       "side": 1,
       "message": "It might make sense to change getPath()\u0027s return type from String to URL, but it looks like the only use case is in a debugging message in Link, so probably doesn\u0027t really matter.",
+      "revId": "ddd905f2a1ef44eaf4e3285c4cb825a476619781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "215365fe_f0fe601b",
+        "filename": "dev/core/src/com/google/gwt/dev/util/ZipEntryBackedObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-10T16:29:49Z",
+      "side": 1,
+      "message": "What is the effect of multiple calls to set? Does it overwrite the entry or create a new one? It seems that the behaviour in FileBackedObject is to append.\n\nProbably not meant for multiple set calls on one object,  maybe add a precondition check.",
       "revId": "ddd905f2a1ef44eaf4e3285c4cb825a476619781",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

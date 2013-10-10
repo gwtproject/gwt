@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_a6074c2f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-10T04:36:11Z",
+      "side": 1,
+      "message": "Yeah, thinking about it more, it\u0027s probably cleanest for transition that generatePrimaryFragmentString() continues calling both methods, rather than making the implementations cross call.  I still think it makes sense to @Deprecate the 2-arg form and recommend everyone implement the 3-arg form though.",
+      "parentUuid": "c18b69a1_632456d2",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c18b69a1_a3d81ee0",
         "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
         "patchSetId": 1

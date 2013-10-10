@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c18b69a1_a36d7e36",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-10T02:32:43Z",
+      "side": 1,
+      "message": "How about:\n\n1. Rename this function to just getModuleSuffix() and change it to default to calling getModuleSuffix(logger, context).\n\n2. Change generatePrimaryFragmentString() to only call getModuleSuffix(logger, context, strongName).\n\n3. Mark getModuleSuffix(Logger, LinkerContext) as @Deprecated and to instruct users to override this method instead.",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_a3d81ee0",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-10T02:32:43Z",
+      "side": 1,
+      "message": "We could change this to:\n\n    // Backwards compatibility for users that subclassed CrossSiteIframeLinker\n    // and override {@link #getModuleSuffix(TreeLogger, LinkerContext)}\n    // but not this method.\n    String suffix \u003d getModuleSuffix(logger, context);\n    if (suffix !\u003d null) {\n      return suffix;\n    }",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18b69a1_23624e41",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-10T02:32:43Z",
+      "side": 1,
+      "message": "It would seem more consistent with our existing template replacements to make this __HASH__ and __MODULE__.  Any particular reason to be different?",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

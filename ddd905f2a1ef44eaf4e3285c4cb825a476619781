@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c18b69a1_c3e52a54",
+        "filename": "dev/core/src/com/google/gwt/dev/util/ZipEntryBackedObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-10T00:45:01Z",
+      "side": 1,
+      "message": "It might make sense to change getPath()\u0027s return type from String to URL, but it looks like the only use case is in a debugging message in Link, so probably doesn\u0027t really matter.",
+      "revId": "ddd905f2a1ef44eaf4e3285c4cb825a476619781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

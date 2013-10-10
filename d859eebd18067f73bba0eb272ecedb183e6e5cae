@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "c18b69a1_83f40240",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-10T21:59:14Z",
+      "side": 1,
+      "message": "Renamed to getModuleSuffix2 and deprecated the old one. The usual practice is to make it the same name but I find that hard to talk about (for example in the javadoc). The version number makes it lot clearer and this is a messy API anyway so I think we can live with it.",
+      "parentUuid": "c18b69a1_a36d7e36",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c18b69a1_a3d81ee0",
         "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2013-10-10T02:32:43Z",
       "side": 1,
       "message": "We could change this to:\n\n    // Backwards compatibility for users that subclassed CrossSiteIframeLinker\n    // and override {@link #getModuleSuffix(TreeLogger, LinkerContext)}\n    // but not this method.\n    String suffix \u003d getModuleSuffix(logger, context);\n    if (suffix !\u003d null) {\n      return suffix;\n    }",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "215365fe_b63a10f1",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-10T21:59:14Z",
+      "side": 1,
+      "message": "Yeah, I started with that but decided that putting the dispatch code in the parent class is cleaner so it only needs to be done once.",
+      "parentUuid": "c18b69a1_a3d81ee0",
       "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "I guess you could argue that those substitutions happen when it is a template file being substituted, whereas these come from .gwt.xml configuration properties. It would probably be best if we adopted {{foo}}, ${foo}, $foo$, or __FOO__ consistentally across GWT.  __FOO__ has the benefit that it is less likely accidentally come up than something like {{foo}} which I could see coming out of an optimization pass.",
       "parentUuid": "c18b69a1_23624e41",
+      "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "215365fe_564d6499",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-10T21:59:14Z",
+      "side": 1,
+      "message": "Went with double underscores.",
+      "parentUuid": "c18b69a1_e6ea3423",
       "revId": "d859eebd18067f73bba0eb272ecedb183e6e5cae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

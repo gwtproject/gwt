@@ -27,16 +27,24 @@ class DOMImplStandardBase extends DOMImplStandard {
     protected ClientRect() {
     }
 
-    public final native int getLeft() /*-{
+    public final int getLeft() {
+      return fastRound(getSubPixelLeft());
+    }
+
+    public final int getTop() {
+      return fastRound(getSubPixelTop());
+    }
+
+    private final native double getSubPixelLeft() /*-{
       return this.left;
     }-*/;
 
-    public final native int getTop() /*-{
+    private final native double getSubPixelTop() /*-{
       return this.top;
     }-*/;
   }
 
-  private static native int getAbsoluteLeftUsingOffsets(Element elem) /*-{
+  private static native double getAbsoluteLeftUsingOffsets(Element elem) /*-{
     // Unattached elements and elements (or their ancestors) with style
     // 'display: none' have no offsetLeft.
     if (elem.offsetLeft == null) {
@@ -131,7 +139,7 @@ class DOMImplStandardBase extends DOMImplStandard {
 
       elem = parent;
     }
-    return top;
+    return (top | 0);
   }-*/;
 
   private static native ClientRect getBoundingClientRect(Element element) /*-{
@@ -203,7 +211,7 @@ class DOMImplStandardBase extends DOMImplStandard {
     ClientRect rect = getBoundingClientRect(elem);
     return rect != null ? rect.getLeft()
         + elem.getOwnerDocument().getBody().getScrollLeft()
-        : getAbsoluteLeftUsingOffsets(elem);
+        : fastRound(getAbsoluteLeftUsingOffsets(elem));
   }
 
   @Override

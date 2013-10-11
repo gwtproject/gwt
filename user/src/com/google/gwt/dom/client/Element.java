@@ -24,6 +24,17 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 public class Element extends Node {
 
   /**
+   * Fast rounding small double values to int
+   *
+   * <p>Note: you should be aware that this uses JavaScript rounding and thus
+   * does NOT provide the same semantics as <code>int b = (int) someDouble;</code>.
+   * Only use this if you understand the implications!
+   */
+  private static native int fastRound(double val) /*-{
+    return val | 0;
+  }-*/;
+
+  /**
    * Constant returned from {@link #getDraggable()}.
    */
   public static final String DRAGGABLE_AUTO = "auto";
@@ -202,9 +213,9 @@ public class Element extends Node {
    * 
    * @return the element's client height
    */
-  public final native int getClientHeight() /*-{
-    return this.clientHeight;
-  }-*/;
+  public final int getClientHeight() {
+    return fastRound(getSubPixelClientHeight());
+  }
 
   /**
    * Returns the inner width of an element in pixels, including padding but not
@@ -212,9 +223,9 @@ public class Element extends Node {
    * 
    * @return the element's client width
    */
-  public final native int getClientWidth() /*-{
-    return this.clientWidth;
-  }-*/;
+  public final int getClientWidth() {
+    return fastRound(getSubPixelClientWidth());
+  }
 
   /**
    * Specifies the base direction of directionally neutral text and the
@@ -298,17 +309,17 @@ public class Element extends Node {
   /**
    * The height of an element relative to the layout.
    */
-  public final native int getOffsetHeight() /*-{
-     return this.offsetHeight || 0;
-   }-*/;
+  public final int getOffsetHeight() {
+    return fastRound(getSubPixelOffsetHeight());
+  }
 
   /**
    * The number of pixels that the upper left corner of the current element is
    * offset to the left within the offsetParent node.
    */
-  public final native int getOffsetLeft() /*-{
-     return this.offsetLeft || 0;
-   }-*/;
+  public final int getOffsetLeft() {
+    return fastRound(getSubPixelOffsetLeft());
+  }
 
   /**
    * Returns a reference to the object which is the closest (nearest in the
@@ -322,16 +333,16 @@ public class Element extends Node {
    * The number of pixels that the upper top corner of the current element is
    * offset to the top within the offsetParent node.
    */
-  public final native int getOffsetTop() /*-{
-     return this.offsetTop || 0;
-   }-*/;
+  public final int getOffsetTop() {
+    return fastRound(getSubPixelOffsetTop());
+  }
 
   /**
    * The width of an element relative to the layout.
    */
-  public final native int getOffsetWidth() /*-{
-     return this.offsetWidth || 0;
-   }-*/;
+  public final int getOffsetWidth() {
+    return fastRound(getSubPixelOffsetWidth());
+  }
 
   /**
    * The element immediately preceeding this element. If there is no such
@@ -368,7 +379,7 @@ public class Element extends Node {
    * @return the property value
    */
   public final native int getPropertyInt(String name) /*-{
-     return parseInt(this[name]) || 0;
+     return parseInt(this[name]) | 0;
    }-*/;
 
   /**
@@ -404,9 +415,9 @@ public class Element extends Node {
   /**
    * The height of the scroll view of an element.
    */
-  public final native int getScrollHeight() /*-{
-     return this.scrollHeight || 0;
-   }-*/;
+  public final int getScrollHeight() {
+    return fastRound(getSubPixelScrollHeight());
+  }
 
   /**
    * The number of pixels that an element's content is scrolled from the left.
@@ -423,16 +434,16 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled from the top.
    */
-  public final native int getScrollTop() /*-{
-     return this.scrollTop || 0;
-   }-*/;
+  public final int getScrollTop() {
+    return fastRound(getSubPixelScrollTop());
+  }
 
   /**
    * The width of the scroll view of an element.
    */
-  public final native int getScrollWidth() /*-{
-     return this.scrollWidth || 0;
-   }-*/;
+  public final int getScrollWidth() {
+    return fastRound(getSubPixelScrollWidth());
+  }
 
   /**
    * Gets a string representation of this element (as outer HTML).
@@ -802,4 +813,40 @@ public class Element extends Node {
      // on some browsers.
      this.title = title || '';
    }-*/;
+
+  private final native double getSubPixelClientHeight() /*-{
+    return this.clientHeight;
+  }-*/;
+
+  private final native double getSubPixelClientWidth() /*-{
+    return this.clientWidth;
+  }-*/;
+
+  private final native double getSubPixelOffsetHeight() /*-{
+     return this.offsetHeight || 0;
+   }-*/;
+
+  private final native double getSubPixelOffsetLeft() /*-{
+     return this.offsetLeft || 0;
+  }-*/;
+
+  private final native double getSubPixelOffsetTop() /*-{
+    return this.offsetTop || 0;
+  }-*/;
+
+  private final native double getSubPixelOffsetWidth() /*-{
+    return this.offsetWidth || 0;
+  }-*/;
+
+  private final native double getSubPixelScrollHeight() /*-{
+    return this.scrollHeight || 0;
+  }-*/;
+
+  public final native double getSubPixelScrollTop() /*-{
+    return this.scrollTop || 0;
+  }-*/;
+
+  public final native double getSubPixelScrollWidth() /*-{
+    return this.scrollWidth || 0;
+  }-*/;
 }

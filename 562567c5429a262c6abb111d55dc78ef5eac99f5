@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "de23489b_7c289163",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T17:46:00Z",
+      "side": 1,
+      "message": "roberto had a good suggestion: instead of having a structured way of reading default values when reading missing properties from libraries constructed by old versions.\n\nwe should use the library version number to know it is an old format and either throw an error or throw out the library and continue (depending on flag)",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_79878312",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
         "patchSetId": 2

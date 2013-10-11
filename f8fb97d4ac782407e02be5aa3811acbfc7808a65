@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "215365fe_8abddf55",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ZipFileResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T01:39:26Z",
+      "side": 1,
+      "message": "ZipFileReource don\u0027t need ZipFileClassPathEntry anymore? I assume  that ZipClassPathEntry is used elsewhere.",
+      "revId": "f8fb97d4ac782407e02be5aa3811acbfc7808a65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,17 @@ abstract class DOMImpl {
 
   static final DOMImpl impl = GWT.create(DOMImpl.class);
 
+  /**
+   * Fast rounding small double values to int
+   *
+   * <p>Note: you should be aware that this uses JavaScript rounding and thus
+   * does NOT provide the same semantics as <code>int b = (int) someDouble;</code>.
+   * Only use this if you understand the implications!
+   */
+  protected static native int fastRound(double val) /*-{
+    return val | 0;
+  }-*/;
+
   public native void buttonClick(ButtonElement button) /*-{
     button.click();
   }-*/;
@@ -105,18 +116,18 @@ abstract class DOMImpl {
   }-*/;
 
   public native int eventGetButton(NativeEvent evt) /*-{
-    return evt.button || 0;
+    return evt.button | 0;
   }-*/;
 
   public abstract int eventGetCharCode(NativeEvent evt);
 
-  public native int eventGetClientX(NativeEvent evt) /*-{
-    return evt.clientX || 0;
-  }-*/;
+  public int eventGetClientX(NativeEvent evt) {
+    return fastRound(eventGetSubPixelClientX(evt));
+  }
 
-  public native int eventGetClientY(NativeEvent evt) /*-{
-    return evt.clientY || 0;
-  }-*/;
+  public int eventGetClientY(NativeEvent evt) {
+    return fastRound(eventGetSubPixelClientY(evt));
+  }
 
   public native boolean eventGetCtrlKey(NativeEvent evt) /*-{
     return !!evt.ctrlKey;
@@ -127,7 +138,7 @@ abstract class DOMImpl {
   }-*/;
 
   public final native int eventGetKeyCode(NativeEvent evt) /*-{
-    return evt.keyCode || 0;
+    return evt.keyCode | 0;
   }-*/;
 
   public native boolean eventGetMetaKey(NativeEvent evt) /*-{
@@ -146,13 +157,13 @@ abstract class DOMImpl {
     return evt.scale;
   }-*/;
 
-  public native int eventGetScreenX(NativeEvent evt) /*-{
-    return evt.screenX || 0;
-  }-*/;
+  public int eventGetScreenX(NativeEvent evt) {
+    return fastRound(eventGetSubPixelScreenX(evt));
+  }
 
-  public native int eventGetScreenY(NativeEvent evt) /*-{
-    return evt.screenY || 0;
-  }-*/;
+  public int eventGetScreenY(NativeEvent evt) {
+    return fastRound(eventGetSubPixelScreenY(evt));
+  }
 
   public native boolean eventGetShiftKey(NativeEvent evt) /*-{
     return !!evt.shiftKey;
@@ -176,35 +187,13 @@ abstract class DOMImpl {
 
   public abstract String eventToString(NativeEvent evt);
 
-  public native int getAbsoluteLeft(Element elem) /*-{
-    var left = 0;
-    var curr = elem;
-    // This intentionally excludes body which has a null offsetParent.    
-    while (curr.offsetParent) {
-      left -= curr.scrollLeft;
-      curr = curr.parentNode;
-    }
-    while (elem) {
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
-    }
-    return left;
-  }-*/;
+  public int getAbsoluteLeft(Element elem) {
+    return fastRound(getSubPixelAbsoluteLeft(elem));
+  }
 
-  public native int getAbsoluteTop(Element elem) /*-{
-    var top = 0;
-    var curr = elem;
-    // This intentionally excludes body which has a null offsetParent.    
-    while (curr.offsetParent) {
-      top -= curr.scrollTop;
-      curr = curr.parentNode;
-    }
-    while (elem) {
-      top += elem.offsetTop;
-      elem = elem.offsetParent;
-    }
-    return top;
-  }-*/;
+  public int getAbsoluteTop(Element elem) {
+    return fastRound(getSubPixelAbsoluteTop(elem));
+  }
 
   public native String getAttribute(Element elem, String name) /*-{
     return elem.getAttribute(name) || '';
@@ -287,9 +276,9 @@ abstract class DOMImpl {
     return doc.getViewportElement().getScrollLeft();
   }
 
-  public native int getScrollLeft(Element elem) /*-{
-    return elem.scrollLeft || 0;
-  }-*/;
+  public int getScrollLeft(Element elem) {
+    return fastRound(getSubPixelScrollLeft(elem));
+  }
 
   public int getScrollTop(Document doc) {
     return doc.getViewportElement().getScrollTop();
@@ -417,35 +406,109 @@ abstract class DOMImpl {
     return elem.outerHTML;
   }-*/;
 
-  public native int touchGetClientX(Touch touch)/*-{
-    return touch.clientX;
-  }-*/;
+  public int touchGetClientX(Touch touch) {
+    return fastRound(touchGetSubPixelClientX(touch));
+  }
 
-  public native int touchGetClientY(Touch touch)/*-{
-    return touch.clientY;
-  }-*/;
+  public int touchGetClientY(Touch touch) {
+    return fastRound(touchGetSubPixelClientY(touch));
+  }
 
   public native int touchGetIdentifier(Touch touch)/*-{
     return touch.identifier;
   }-*/;
 
-  public native int touchGetPageX(Touch touch)/*-{
-    return touch.pageX;
-  }-*/;
+  public int touchGetPageX(Touch touch) {
+    return fastRound(touchGetSubPixelPageX(touch));
+  }
 
-  public native int touchGetPageY(Touch touch)/*-{
-    return touch.pageY;
-  }-*/;
+  public int touchGetPageY(Touch touch) {
+    return fastRound(touchGetSubPixelPageY(touch));
+  }
 
-  public native int touchGetScreenX(Touch touch)/*-{
-    return touch.screenX;
-  }-*/;
+  public int touchGetScreenX(Touch touch) {
+    return fastRound(touchGetSubPixelScreenX(touch));
+  }
 
-  public native int touchGetScreenY(Touch touch)/*-{
-    return touch.screenY;
-  }-*/;
+  public int touchGetScreenY(Touch touch) {
+    return fastRound(touchGetSubPixelScreenY(touch));
+  }
 
   public native EventTarget touchGetTarget(Touch touch)/*-{
     return touch.target;
+  }-*/;
+
+  private native int getSubPixelAbsoluteLeft(Element elem) /*-{
+    var left = 0;
+    var curr = elem;
+    // This intentionally excludes body which has a null offsetParent.
+    while (curr.offsetParent) {
+      left -= curr.scrollLeft;
+      curr = curr.parentNode;
+    }
+    while (elem) {
+      left += elem.offsetLeft;
+      elem = elem.offsetParent;
+    }
+    return left;
+  }-*/;
+
+  private native double getSubPixelAbsoluteTop(Element elem) /*-{
+    var top = 0;
+    var curr = elem;
+    // This intentionally excludes body which has a null offsetParent.
+    while (curr.offsetParent) {
+      top -= curr.scrollTop;
+      curr = curr.parentNode;
+    }
+    while (elem) {
+      top += elem.offsetTop;
+      elem = elem.offsetParent;
+    }
+    return top;
+  }-*/;
+
+  private native double eventGetSubPixelScreenX(NativeEvent evt) /*-{
+    return evt.screenX || 0;
+  }-*/;
+
+  private native double eventGetSubPixelScreenY(NativeEvent evt) /*-{
+    return evt.screenY || 0;
+  }-*/;
+
+  private native double getSubPixelScrollLeft(Element elem) /*-{
+    return elem.scrollLeft || 0;
+  }-*/;
+
+  private native double touchGetSubPixelClientX(Touch touch)/*-{
+    return touch.clientX || 0;
+  }-*/;
+
+  private native int touchGetSubPixelClientY(Touch touch)/*-{
+    return touch.clientY || 0;
+  }-*/;
+
+  private native int touchGetSubPixelPageX(Touch touch)/*-{
+    return touch.pageX || 0;
+  }-*/;
+
+  private native int touchGetSubPixelPageY(Touch touch)/*-{
+    return touch.pageY || 0;
+  }-*/;
+
+  private native int touchGetSubPixelScreenX(Touch touch)/*-{
+    return touch.screenX || 0;
+  }-*/;
+
+  private native int touchGetSubPixelScreenY(Touch touch)/*-{
+    return touch.screenY || 0;
+  }-*/;
+
+  private native double eventGetSubPixelClientX(NativeEvent evt) /*-{
+    return evt.clientX || 0;
+  }-*/;
+
+  private native double eventGetSubPixelClientY(NativeEvent evt) /*-{
+    return evt.clientY || 0;
   }-*/;
 }

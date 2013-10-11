@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "de23489b_fc2a619f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_f9627340",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_7c289163",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-11T17:46:00Z",
       "side": 1,
       "message": "roberto had a good suggestion: instead of having a structured way of reading default values when reading missing properties from libraries constructed by old versions.\n\nwe should use the library version number to know it is an old format and either throw an error or throw out the library and continue (depending on flag)",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4b9073_a4104211",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_7c289163",
       "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "de23489b_7fe08344",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "added a TODO for this in Library.java",
+      "parentUuid": "de23489b_79878312",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_7990a33e",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-11T17:02:43Z",
       "side": 1,
       "message": "Isn\u0027t it better to return null here so that callers know it is an error situation?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_dff0b70f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "you\u0027re right. i had originally done this to ease backwards compatible library parsing but after discussion it became clear that you\u0027re right and we should instead throw out old libraries based on version number and we should not actually have any need to try to parse them\n\ni\u0027ve removed this and 2 other places where zipEntry \u003d\u003d null was being handled. i\u0027m instead letting it continue and turn into a failed read",
+      "parentUuid": "de23489b_7990a33e",
       "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "9e4b9073_04db9638",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "yes a failure to write will already trigger a CompilerIoException in the write methods, but i guess it\u0027s maybe nicer to discover it earlier.\n\ndone",
+      "parentUuid": "de23489b_79e2e3be",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_99593f95",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2013-10-11T17:02:43Z",
       "side": 1,
       "message": "may writeBuildResources and writePublicResources can be refactored as they have mostly the same code (a lambda to compute the names would be so useful here :)",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4b9073_e4df5a21",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_99593f95",
       "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "9e4b9073_c48e9e2f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "it didn\u0027t, but does now",
+      "parentUuid": "de23489b_b9519b86",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_b92abbec",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2013-10-11T17:02:43Z",
       "side": 1,
       "message": "Strings in stringSet probably need to be escaped to ensure they do not contain LINE_SEPARATOR",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4b9073_a49ba26b",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "now handled with a precondition check",
+      "parentUuid": "de23489b_b92abbec",
       "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "9e4b9073_c477be3d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "it\u0027s coming back to me now.... this is actually safe because ResourceOracleImpl has already removed any duplicate source before it\u0027s compiled. but you\u0027re right that we should probably be double checking it.\n\nadded a precondition check as you requested offlien",
+      "parentUuid": "de23489b_d976970a",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_796f832d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/CompilerIoException.java",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2013-10-11T17:02:43Z",
       "side": 1,
       "message": "Shouldn\u0027t it be a subclass of InternalCompilerExceptions so that when it is not caught it ends up there?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4b9073_8471c649",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/CompilerIoException.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T22:09:35Z",
+      "side": 1,
+      "message": "sounds like a good idea\n\ndone.",
+      "parentUuid": "de23489b_796f832d",
       "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

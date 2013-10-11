@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de23489b_567494fd",
+        "filename": "samples/mail/src/com/google/gwt/sample/mail/client/Mailboxes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T14:55:13Z",
+      "side": 1,
+      "message": "Oops, I meant builder.appendHtmlConstant(\" \");\n\n(Also, since \" \" is a safe HTML string literal, you\u0027d want to use SafeHtmlUtils.fromSafeConstant instead; SafeHtmlUtils.fromTrustedString is for values that can\u0027t be statically verified to be safe.)",
+      "revId": "b94329a601636753d741c2f19eb140f8e00ab6d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

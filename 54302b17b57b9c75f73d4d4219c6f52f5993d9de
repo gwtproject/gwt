@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de23489b_b62ac8ec",
+        "filename": "samples/mail/src/com/google/gwt/sample/mail/client/Mailboxes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T14:34:54Z",
+      "side": 1,
+      "message": "builder.appendSafeConstant(\" \");",
+      "revId": "54302b17b57b9c75f73d4d4219c6f52f5993d9de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_9627cc26",
+        "filename": "samples/mail/src/com/google/gwt/sample/mail/client/Mailboxes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T14:34:54Z",
+      "side": 1,
+      "message": "builder.appendEscaped(title);",
+      "revId": "54302b17b57b9c75f73d4d4219c6f52f5993d9de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

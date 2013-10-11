@@ -33,6 +33,24 @@
       "revId": "f8fb97d4ac782407e02be5aa3811acbfc7808a65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_9c5b6dfb",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ZipFileResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-11T17:51:59Z",
+      "side": 1,
+      "message": "yeah i had a similar idea, but i looked into it and actually ZipClassPathEntry is still in use in other places because it is part of how the general ClassPathEntry system finds and indexes resources available on the class path.\n\nso it\u0027s not safe to remove.",
+      "parentUuid": "215365fe_8abddf55",
+      "revId": "f8fb97d4ac782407e02be5aa3811acbfc7808a65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

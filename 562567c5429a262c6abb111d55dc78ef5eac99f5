@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de23489b_f9627340",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Can you start sentences in Upper case?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_79878312",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Maybe the blahBackedObject name can be replaced by ObjectHandle? Some later cl Iguess.",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_7990a33e",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Isn\u0027t it better to return null here so that callers know it is an error situation?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_79e2e3be",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t  zipFile.canWrite also be checked if it exists? I guess it will be caught in ensureFileReady when attempting to open the FOS.",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_99593f95",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "may writeBuildResources and writePublicResources can be refactored as they have mostly the same code (a lambda to compute the names would be so useful here :)",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_b9519b86",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Does value.getBytes guarantee that SEPARATORS do not appear in the written value?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_b92abbec",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Strings in stringSet probably need to be escaped to ensure they do not contain LINE_SEPARATOR",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_d976970a",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Are type names unique? It seems to me that the same type can appear as supersource or as regular source. If so the map would only contain the last one that was added.",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_796f832d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/CompilerIoException.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T17:02:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be a subclass of InternalCompilerExceptions so that when it is not caught it ends up there?",
+      "revId": "562567c5429a262c6abb111d55dc78ef5eac99f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

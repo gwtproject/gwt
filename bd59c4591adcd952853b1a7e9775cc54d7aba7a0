@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de23489b_d62d4408",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "\"Fast helper method to convert small double values to 32-bit int.\"",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_d65f8478",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "I\u0027d change this last sentence to explicitly detail the difference.  E.g., \"In particular, if x is outside the range [-2^31,2^31), then fastRound(x) would return a value equivalent to x module 2^32, whereas (int) x would evaluate to either MIN_INT or MAX_INT.\"",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_b683e8c6",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "For what it\u0027s worth, this is basically the \"ToInt32()\" function described by the ECMAScript standard, so I\u0027d name it \"toInt32()\" instead of \"fastRound()\".",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_f6304060",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "Nit: Add a space between \")\" and \"/*-{\".  Below too.",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_761d50dd",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "getParentOffsetDelta() returns a double.  Seems like this function should be:\n\n  double left \u003d ...;\n  if (isRTL(elem)) { left +\u003d ...; }\n  return fastRound(left);\n\nSame thing in getScrollLeft.",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_3617d8bf",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "Why change this to private, but leave getBoundingClientRectTop() as protected?",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_161cdcdd",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-11T15:00:32Z",
+      "side": 1,
+      "message": "Seems like there\u0027s imprecision here too.  E.g., shouldn\u0027t it be fastRound(rect.getSubLeft() + [...].getSubScrollLeft())?",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

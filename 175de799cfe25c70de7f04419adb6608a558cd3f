@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de23489b_dca0c589",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "Capitalize?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_1c375dc2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "that does it mean \"unprocessedLibrary\"?  I guess it is a library where the generator was not run. Maybe a better name libraryPendingGeneratorRun?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_fcedc1e8",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "s/libraryImpl/library/ ?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_bcf749b5",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "Can you explain it clearer? to me?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_5cd15518",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "This is just a topological sort starting from leafnodes right?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_bc9bc96b",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "buildRByP \u003d Collections.ummodifiableMap(buildRByP)?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_9c980d70",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_3c81f9fa",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "collections.ummodifiable...",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_1c863d13",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de23489b_5c95d52c",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/LibraryGroupTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-11T18:09:11Z",
+      "side": 1,
+      "message": "Nice test!",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "fe5c8c37_aa45af24",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-14T22:55:29Z",
+      "side": 1,
+      "message": "I think you misunderstand. Let me try to rephrase:\nAFAIK, any native method returning int (i.e. int return type method signature) suppose to do a bitwise-or with 0 to round; otherwise GWT can not maintain correct semantics for integers in java.\nSo returning int and then doing a bitwise-or with 0 should be a no-op. Am I missing something?",
+      "parentUuid": "3e88e4e1_c316bd5d",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e88e4e1_764e969e",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
         "patchSetId": 3

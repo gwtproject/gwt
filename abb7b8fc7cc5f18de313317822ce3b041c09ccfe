@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "fe5c8c37_8a42eb18",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-14T23:25:00Z",
+      "side": 1,
+      "message": "Hmm, I guess it only rounds up in between arithmetic operations - not returns from native methods.\nBut, anyhow, I don\u0027t think that is wise to leave it to the developer if there is no really good reason to do so :)\n\nAdding rluble as a reviewer, so he can chime in.",
+      "parentUuid": "3e88e4e1_232e8904",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e88e4e1_764e969e",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
         "patchSetId": 3

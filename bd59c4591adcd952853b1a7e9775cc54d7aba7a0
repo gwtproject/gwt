@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "de51881f_06227a6a",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_d65f8478",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_b683e8c6",
         "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-11T15:00:32Z",
       "side": 1,
       "message": "For what it\u0027s worth, this is basically the \"ToInt32()\" function described by the ECMAScript standard, so I\u0027d name it \"toInt32()\" instead of \"fastRound()\".",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e588040_28af8b94",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_b683e8c6",
       "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "de51881f_e6163e0f",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_f6304060",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_761d50dd",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2013-10-11T15:00:32Z",
       "side": 1,
       "message": "getParentOffsetDelta() returns a double.  Seems like this function should be:\n\n  double left \u003d ...;\n  if (isRTL(elem)) { left +\u003d ...; }\n  return fastRound(left);\n\nSame thing in getScrollLeft.",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe5c8c37_875b06fb",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_761d50dd",
       "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "1e588040_e8c85365",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE9.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "both private now",
+      "parentUuid": "de23489b_3617d8bf",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_161cdcdd",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
         "patchSetId": 2
@@ -115,6 +205,24 @@
       "writtenOn": "2013-10-11T15:00:32Z",
       "side": 1,
       "message": "Seems like there\u0027s imprecision here too.  E.g., shouldn\u0027t it be fastRound(rect.getSubLeft() + [...].getSubScrollLeft())?",
+      "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de51881f_a6104611",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-14T08:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_161cdcdd",
       "revId": "bd59c4591adcd952853b1a7e9775cc54d7aba7a0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

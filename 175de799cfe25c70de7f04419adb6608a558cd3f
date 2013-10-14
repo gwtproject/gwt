@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e88e4e1_0d17f40c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_dca0c589",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_1c375dc2",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-11T18:09:11Z",
       "side": 1,
       "message": "that does it mean \"unprocessedLibrary\"?  I guess it is a library where the generator was not run. Maybe a better name libraryPendingGeneratorRun?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_eadf1b21",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_1c375dc2",
       "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3e88e4e1_cd458c24",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "i did some refactoring and missed changing this name. thanks for catching it",
+      "parentUuid": "de23489b_fcedc1e8",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_bcf749b5",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-11T18:09:11Z",
       "side": 1,
       "message": "Can you explain it clearer? to me?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_4ab407e4",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "the offending build system situation should probably be corrected in the build system and here treated as an error.\n\ni\u0027ll switch to that and then if we have to (for instance if the build system situation can\u0027t be changed), we can revisit this later when/if that becomes clear",
+      "parentUuid": "de23489b_bcf749b5",
       "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "3e88e4e1_0ac6ff58",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "yes (though i didn\u0027t know that term till looking it up just now)",
+      "parentUuid": "de23489b_5cd15518",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_bc9bc96b",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-10-11T18:09:11Z",
       "side": 1,
       "message": "buildRByP \u003d Collections.ummodifiableMap(buildRByP)?",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_4d4bbc32",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_bc9bc96b",
       "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "3e88e4e1_6d5000dc",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_9c980d70",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_3c81f9fa",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2013-10-11T18:09:11Z",
       "side": 1,
       "message": "collections.ummodifiable...",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_2d62f8b0",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_3c81f9fa",
       "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "3e88e4e1_cd5eecec",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de23489b_1c863d13",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de23489b_5c95d52c",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/LibraryGroupTest.java",
         "patchSetId": 1
@@ -166,6 +328,24 @@
       "writtenOn": "2013-10-11T18:09:11Z",
       "side": 1,
       "message": "Nice test!",
+      "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_6d22406c",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/LibraryGroupTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-14T18:35:11Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "de23489b_5c95d52c",
       "revId": "175de799cfe25c70de7f04419adb6608a558cd3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

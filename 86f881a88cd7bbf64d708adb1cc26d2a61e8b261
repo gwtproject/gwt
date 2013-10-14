@@ -16,6 +16,24 @@
       "revId": "86f881a88cd7bbf64d708adb1cc26d2a61e8b261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e588040_eb4e0d70",
+        "filename": "user/test/com/google/gwt/user/client/EventTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2013-10-14T14:36:04Z",
+      "side": 1,
+      "message": "We could, but it does not matter as IE11 don\u0027t even have that \"msie\" in its UA string.",
+      "parentUuid": "9e4b9073_8ad0af40",
+      "revId": "86f881a88cd7bbf64d708adb1cc26d2a61e8b261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

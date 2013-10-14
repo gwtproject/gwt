@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e588040_ebc96da0",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2013-10-14T15:34:07Z",
+      "side": 1,
+      "message": "Instead of having duplicate method here, it would be better to use the one from DOMImpl (or move that to some utility class). It could be package private.\n\nAlso the javadoc should say it floors the double to int, now it says it is rounding.",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

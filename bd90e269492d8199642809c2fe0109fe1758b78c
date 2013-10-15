@@ -16,6 +16,24 @@
       "revId": "bd90e269492d8199642809c2fe0109fe1758b78c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e88e4e1_59ecdead",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-15T14:39:50Z",
+      "side": 1,
+      "message": "(Oops, disregard that.)",
+      "parentUuid": "3e88e4e1_23ebe9d4",
+      "revId": "bd90e269492d8199642809c2fe0109fe1758b78c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

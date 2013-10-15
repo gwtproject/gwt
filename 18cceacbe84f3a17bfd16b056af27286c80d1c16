@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ea7108a_842f6696",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryGroupUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-15T23:01:55Z",
+      "side": 1,
+      "message": "make \".java\" a constant JAVA_SUFFIX?",
+      "revId": "18cceacbe84f3a17bfd16b056af27286c80d1c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ea7108a_c44ebe70",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryGroupUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-15T23:01:55Z",
+      "side": 1,
+      "message": "So this library cache is a cache with a library fallback so to speak?",
+      "revId": "18cceacbe84f3a17bfd16b056af27286c80d1c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

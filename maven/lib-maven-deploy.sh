@@ -21,35 +21,39 @@ function maven-deploy-file() {
   shift
   local pomFile=$1
   shift
-  local classifier=$1
+  local javadoc=$1
+  shift
+  local sources=$1
   shift
 
   if [[ "$curFile" == "" ]]; then
     echo "ERROR: Unable to deploy $artifactId in repo! Cannot find corresponding file!"
     return 1
-  fi  
-  
+  fi
+
   local cmd="";
   if [[ "$gpgPassphrase" != "" ]]; then
     cmd="$MAVEN_BIN \
-           gpg:sign-and-deploy-file \
+           org.apache.maven.plugins:maven-gpg-plugin:1.4:sign-and-deploy-file \
             -Dfile=$curFile \
             -Durl=$mavenRepoUrl \
             -DrepositoryId=$mavenRepoId \
             -DpomFile=$pomFile \
-            -Dclassifier=$classifier \
             -DuniqueVersion=false \
+            $javadoc \
+            $sources \
             -Dgpg.passphrase=\"$gpgPassphrase\""
   else
     echo "GPG passphrase not specified; will attempt to deploy files without signing"
     cmd="$MAVEN_BIN \
-           deploy:deploy-file \
+           org.apache.maven.plugins:maven-deploy-plugin:2.7:deploy-file \
             -Dfile=$curFile \
             -Durl=$mavenRepoUrl \
             -DrepositoryId=$mavenRepoId \
             -DpomFile=$pomFile \
-            -Dclassifier=$classifier \
-            -DuniqueVersion=false"
+            -DuniqueVersion=false \
+            $javadoc \
+            $sources"
   fi
   echo $cmd
   eval $cmd

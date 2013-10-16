@@ -38,8 +38,10 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,8 +49,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.annotation.Nullable;
 
 /**
  * <p>
@@ -335,6 +335,25 @@ public class CodeSplitter {
   }
 
   /**
+   * Group run asyncs that have the same class literal as the first parameter in the two parameter
+   * GWT.runAsync call.
+   */
+  private Collection<Collection<JRunAsync>> groupAsyncsByName(Collection<JRunAsync> runAsyncs) {
+    Collection<Collection<JRunAsync>> result = Lists.newArrayList();
+    Multimap<String, JRunAsync> asyncsGroupedByName =
+        CodeSplitters.computeRunAsyncsByName(runAsyncs, true);
+    result.addAll(asyncsGroupedByName.asMap().values());
+    result.addAll(CodeSplitters.getListOfLists(Collections2.filter(runAsyncs,
+        new Predicate<JRunAsync>() {
+          @Override
+          public boolean apply(JRunAsync runAsync) {
+            return !runAsync.hasExplictName();
+          }
+        })));
+    return result;
+  }
+
+  /**
    * Map each program atom as exclusive to some split point, whenever possible.
    * Also fixes up load order problems that could result from splitting code
    * based on this assumption.
@@ -431,15 +450,20 @@ public class CodeSplitter {
     // Set the initial fragment sequence.
     jprogram.setInitialFragmentIdSequence(initialFragmentNumberSequence);
 
-    // Decide exclusive fragments according to the preselected partitionStrategy.
-    List<Fragment>  exclusiveFragments =
-        partitionStrategy.partitionIntoFragments(logger, initialSequenceCfa,
-            Collections2.filter(jprogram.getRunAsyncs(), new Predicate<JRunAsync>() {
+    Collection<Collection<JRunAsync>> groupedNonInitialRunAsyncs =
+        groupAsyncsByName(Collections2.filter(jprogram.getRunAsyncs(),
+            new Predicate<JRunAsync>() {
               @Override
-              public boolean apply(@Nullable JRunAsync jRunAsync) {
+              public boolean apply(JRunAsync jRunAsync) {
                 return !isInitial(jRunAsync);
               }
-            }));
+            }
+        ));
+        
+    // Decide exclusive fragments according to the preselected partitionStrategy.
+    Collection<Fragment>  exclusiveFragments =
+        partitionStrategy.partitionIntoFragments(logger, initialSequenceCfa,
+            groupedNonInitialRunAsyncs);
 
     Fragment leftOverFragment =
         new Fragment(Fragment.Type.NOT_EXCLUSIVE, lastInitialFragment);

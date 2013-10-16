@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,6 +27,12 @@ final class Cast {
 
   static native boolean canCast(Object src, int dstId) /*-{
     return src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId];
+  }-*/;
+
+  static native boolean canCastSeed(int srcId, int dstId) /*-{
+    var srcSeed = @com.google.gwt.lang.SeedUtil::seedTable[srcId];
+    return (srcSeed.prototype.@java.lang.Object::castableTypeMap &&
+            !!srcSeed.prototype.@java.lang.Object::castableTypeMap[dstId]);
   }-*/;
 
   /**
@@ -58,7 +64,7 @@ final class Cast {
     }
     return src;
   }
-  
+
   /**
    * Allow a cast to JSO only if there's no type ID.
    */
@@ -205,24 +211,24 @@ final class Cast {
 
   /**
    * Returns whether the Object is a Java String.
-   * 
+   *
    * Depends on the requirement that queryId = 1 is reserved for String,
    * and that the trivial cast String to String is explicitly added to the
    * castableTypeMap for String, and String cannot be the target of a cast from
-   * anything else (except for the trivial cast from Object), since 
-   * java.lang.String is a final class. 
+   * anything else (except for the trivial cast from Object), since
+   * java.lang.String is a final class.
    * (See the constructor for the CastNormalizer.AssignTypeCastabilityVisitor).
-   * 
+   *
    * Since java Strings are translated as JavaScript strings, Strings need to be
    * interchangeable between GWT modules, unlike other Java Objects.
    */
   private static boolean isJavaString(Object src) {
     return canCast(src, 1);
   }
-  
+
   /**
    * Returns whether the Object is a Java Object but not a String.
-   * 
+   *
    * Depends on all Java Objects (except for String) having the typeMarker field
    * generated, and set to the nullMethod for the current GWT module.  Note this
    * test essentially tests whether an Object is a java object for the current

@@ -174,7 +174,7 @@ public class SplitLayoutPanel extends DockLayoutPanel {
             int size;
             if (reverse) {
               size = getTargetPosition() + getTargetSize()
-                  - getEventPosition(event) - offset;
+                  - getEventPosition(event) + offset;
             } else {
               size = getEventPosition(event) - getTargetPosition() - offset;
             }

@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e346406_95693428",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "\"the same class literal\"",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_d5629c40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JRunAsync.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "s/hasExplictName/explicitClassLiteral",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_b55f1879",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JRunAsync.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_f5f24053",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "static and resort function\n\nalso since we\u0027re really grouping runAsyncs by class literal, and we just happen to turn that class literal into a name, and there is no way to assign a real String name, maybe this should actually be called groupAsyncsByClassLiteral",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_15c1a4ce",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "it took me a bit to figure out that this first result.addAll() is adding just run asyncs that had a class literal, and the second result.addAll() call is adding just run asyncs that didn\u0027t have a class literal.\n\nmaybe comment on each line, otherwise it naively looks like you might be adding duplicates",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_755d904a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "white space",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_f5bd2054",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_758bd0b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "this is doing (Foo || Bar \u0026\u0026 Baz)\n\nmaybe it\u0027s my fault but the order of operations for this isn\u0027t immediately obvious.\n\ni think it would be better to have (Foo || (Bar \u0026\u0026 Baz))\n\nfeel free to ignore if you think i\u0027m off base",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_356ae8eb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "// Premptively add them to the output.",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_955f744c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LiveAtomsByRunAsyncSets.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "// And mark them as used.",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_b57558c8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/ReplaceRunAsyncs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "don\u0027t miss this name change as well",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_157364e2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_f56fe0f3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T01:15:34Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "60c9e184301552e53df03acd6597ddaebd2171db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

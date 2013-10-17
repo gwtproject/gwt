@@ -95,6 +95,10 @@ public class ControlFlowAnalyzer {
     public boolean visit(JArrayType type, Context ctx) {
       assert (referencedTypes.contains(type));
       boolean isInstantiated = instantiatedTypes.contains(type);
+      if (isInstantiated) {
+        // if any array type is intantiated => rescue array class.
+        rescue(baseArrayType, true, true);
+      }
 
       JType leafType = type.getLeafType();
       int dims = type.getDims();
@@ -118,10 +122,6 @@ public class ControlFlowAnalyzer {
           // anything[][] -> Object[]
           rescue(program.getTypeArray(program.getTypeJavaLangObject(), dims - 1), true,
               isInstantiated);
-        } else {
-          // anything[] -> Object
-          // But instead of Object, rescue the base Array implementation type.
-          rescue(baseArrayType, true, isInstantiated);
         }
       }
 
@@ -902,8 +902,6 @@ public class ControlFlowAnalyzer {
     baseArrayType = program.getIndexedType("Array");
     getClassField = program.getIndexedField("Object.___clazz");
     getClassMethod = program.getIndexedMethod("Object.getClass");
-    // always rescue the Array types
-    instantiatedTypes.add(baseArrayType);
     buildMethodsOverriding();
   }
 

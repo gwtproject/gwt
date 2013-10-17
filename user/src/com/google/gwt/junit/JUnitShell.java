@@ -569,6 +569,35 @@ public class JUnitShell extends DevMode {
           return true;
         }
       });
+
+      registerHandler(new ArgHandlerString() {
+
+        @Override
+        public String getPurpose() {
+          return "Specify the port to be used for the webserver";
+        }
+
+        @Override
+        public String getTag() {
+          return "-port";
+        }
+
+        @Override
+        public String[] getTagArgs() {
+          return new String[] {"port"};
+        }
+
+        @Override
+        public boolean setString(String str) {
+          try {
+            int port = Integer.parseInt(str);
+            options.setPort(port);
+            return true;
+          } catch (NumberFormatException e) {
+            return false;
+          }
+        }
+      });
     }
 
     @Override

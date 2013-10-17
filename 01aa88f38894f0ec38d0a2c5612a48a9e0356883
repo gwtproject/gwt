@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_4e08d33c",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-17T16:18:38Z",
+      "side": 1,
+      "message": "Isn\u0027t it already registering to accept -port in line 243.",
+      "revId": "01aa88f38894f0ec38d0a2c5612a48a9e0356883",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_7458005c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_f48350c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "missing blank line",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_945f6c79",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "i think logically this if statement should be the third in the function. it\u0027ll work either way but i think it\u0027ll flow better with the move",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_b4eb8863",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "is this function used?",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_94e80c68",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "private x3",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_3401585d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "all these visits are missing @Override",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_97f00e0f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "this renaming procedure is n^2 on the number of conflicting  locals. it shouldn\u0027t be a problem as we expect the number of conflicts to be low. but we should probably mark add a comment to that effect.\n\nit\u0027s remotely possible that the action of the compound assignment normalizer could create so many conflicts that it starts affecting performance.",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_f4c070cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "// conflicting locals \u003d\u003e find a new unique name and rename local i to it",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_14537c43",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "// The active namer will clean up these potentially long names.",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_745f604d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "s/has/as",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_344e789d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "// Only valid for the duration of one method body visit/endVisit pair.",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_d713b66a",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T22:09:42Z",
+      "side": 1,
+      "message": "\"if no optimization introduces the a local variable reference\"\n\nthere is an extra word in there somewhere",
+      "revId": "265f0924d50384c79ea59a317077ca36bc92c566",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

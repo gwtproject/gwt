@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e346406_35a308aa",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryGroupUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T00:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ea7108a_842f6696",
+      "revId": "18cceacbe84f3a17bfd16b056af27286c80d1c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ea7108a_c44ebe70",
         "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryGroupUnitCache.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-15T23:01:55Z",
       "side": 1,
       "message": "So this library cache is a cache with a library fallback so to speak?",
+      "revId": "18cceacbe84f3a17bfd16b056af27286c80d1c16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e346406_d591fc4f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryGroupUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-17T00:11:06Z",
+      "side": 1,
+      "message": "yeah pretty much. that\u0027s also what PersistentUnitCache is doing\n\nwould be nicer to do something like:\nunitCache \u003d new MemoryUnitCache(new LibraryGroupUnitCache());",
+      "parentUuid": "9ea7108a_c44ebe70",
       "revId": "18cceacbe84f3a17bfd16b056af27286c80d1c16",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

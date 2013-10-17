@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e1390a0_44938ea8",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FindServiceTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-10-17T20:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "def0a8a0_8ec91b49",
+      "revId": "eaef6c10febc6235b2e60572e078665c30dd5ce1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "def0a8a0_0ee7ebcd",
         "filename": "user/test/com/google/web/bindery/requestfactory/server/SimpleFoo.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-17T17:37:13Z",
       "side": 1,
       "message": "I think stylecheck doesn\u0027t want blank lines before close braces.",
+      "revId": "eaef6c10febc6235b2e60572e078665c30dd5ce1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_a497e292",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/SimpleFoo.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-10-17T20:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "def0a8a0_0ee7ebcd",
       "revId": "eaef6c10febc6235b2e60572e078665c30dd5ce1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -335,6 +335,24 @@
       "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e5d4460_7cd61513",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2013-10-17T16:02:55Z",
+      "side": 1,
+      "message": "DRY. You should use DOMImpl.toInt32(int) in this class and avoid having the exactly same method in two different places. In DOMImpl it is currently protected, but if you wish to make it less public you should probably use package private and still use it from this class.\n\nThat way you don\u0027t have to fix javadocs in two places. In Patch set 4 it discusses about JavaScript rounding although it is a floor operation it actually does.",
+      "parentUuid": "3e5d4460_9c4b295f",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

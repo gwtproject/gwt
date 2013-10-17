@@ -25,6 +25,7 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.MenuBar;
 
 import java.util.List;
 
@@ -166,6 +167,68 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(separator1.getParentMenu());
     assertNull(separator2.getParentMenu());
     assertNull(separator3.getParentMenu());
+  }
+
+  public void testAutoClose() {
+    // Create a menu bar with children.
+    MenuBar rootMenuBar = new MenuBar();
+    rootMenuBar.setAutoOpen(true);
+    MenuBar parentMenuBar = new MenuBar();
+    MenuBar nestedMenuBar0 = new MenuBar();
+    MenuBar nestedMenuBar1 = new MenuBar();
+    MenuItem rootItem = rootMenuBar.addItem("parent", parentMenuBar);
+    MenuItem parentItem1 = parentMenuBar.addItem("nested0", nestedMenuBar0);
+    MenuItem parentItem2 = parentMenuBar.addItem("2", BLANK_COMMAND);
+    MenuItem parentItem3 = parentMenuBar.addItem("nested1", nestedMenuBar1);
+    MenuItem nestedItem0 = nestedMenuBar0.addItem("0", BLANK_COMMAND);
+    MenuItem nestedItem1 = nestedMenuBar1.addItem("1", BLANK_COMMAND);
+    RootPanel.get().add(rootMenuBar);
+
+    // Open nestedMenuBar0
+    rootMenuBar.itemOver(rootItem, true);
+    parentMenuBar.itemOver(parentItem1, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar0, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem1, parentMenuBar.getSelectedItem());
+
+    // Hover over parentItem2
+    parentMenuBar.itemOver(parentItem2, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar0, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem2, parentMenuBar.getSelectedItem());
+
+    // Open nestedMenuBar1
+    parentMenuBar.itemOver(parentItem3, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar1, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem3, parentMenuBar.getSelectedItem());
+
+    // Set auto close and repeat selections.
+    parentMenuBar.setAutoClose(true);
+
+    // Open nestedMenuBar0
+    parentMenuBar.itemOver(parentItem1, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar0, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem1, parentMenuBar.getSelectedItem());
+
+    // Hover over parentItem2
+    parentMenuBar.itemOver(parentItem2, true);
+    assertNull(parentMenuBar.getPopup());
+    assertEquals(parentItem2, parentMenuBar.getSelectedItem());
+
+    // Open nestedMenuBar1
+    parentMenuBar.itemOver(parentItem3, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar1, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem3, parentMenuBar.getSelectedItem());
+
+    // Hover over nested item
+    nestedMenuBar1.itemOver(nestedItem1, true);
+    assertTrue(parentMenuBar.getPopup().isShowing());
+    assertEquals(nestedMenuBar1, parentMenuBar.getPopup().getWidget());
+    assertEquals(parentItem3, parentMenuBar.getSelectedItem());
+    assertEquals(nestedItem1, nestedMenuBar1.getSelectedItem());
   }
 
   public void testAutoHideChildMenuPopup() {

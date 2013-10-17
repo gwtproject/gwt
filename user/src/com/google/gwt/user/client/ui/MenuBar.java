@@ -196,7 +196,7 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
   private PopupPanel popup;
   private MenuItem selectedItem;
   private MenuBar shownChildMenu;
-  private boolean vertical, autoOpen;
+  private boolean vertical, autoOpen, autoClose;
   private boolean focusOnHover = true;
 
   /**
@@ -436,6 +436,16 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
    */
   public boolean getAutoOpen() {
     return autoOpen;
+  }
+
+  /**
+   * Gets whether this menu bar's child menus will close when another menu item in this
+   * menu bar is selected.
+   *
+   * @return <code>true</code> if child menus will auto-close
+   */
+  public boolean getAutoClose() {
+    return autoClose;
   }
 
   /**
@@ -741,6 +751,12 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
           setStyleName(td, "subMenuIcon-selected", false);
         }
       }
+
+      if (autoClose && shownChildMenu != null && selectedItem.getSubMenu() == shownChildMenu) {
+        shownChildMenu.onHide(false);
+        popup.hide();
+        shownChildMenu = null;
+      }
     }
 
     if (item != null) {
@@ -775,6 +791,16 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
    */
   public void setAutoOpen(boolean autoOpen) {
     this.autoOpen = autoOpen;
+  }
+
+  /**
+   * Sets whether this menu bar's child menus will close when another menu item in this
+   * menu bar is selected.
+   *
+   * @param autoClose <code>true</code> to cause child menus to auto-close
+   */
+  public void setAutoClose(boolean autoClose) {
+    this.autoClose = autoClose;
   }
 
   /**

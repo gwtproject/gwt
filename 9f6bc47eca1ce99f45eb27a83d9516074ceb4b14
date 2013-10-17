@@ -16,6 +16,24 @@
       "revId": "9f6bc47eca1ce99f45eb27a83d9516074ceb4b14",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_c49e5eab",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/SimpleFoo.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 5225
+      },
+      "writtenOn": "2013-10-17T20:24:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "def0a8a0_54418448",
+      "revId": "9f6bc47eca1ce99f45eb27a83d9516074ceb4b14",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -222,4 +222,29 @@
   <target name="apicheck" depends="buildonly,tools,apicheck-nobuild" 
           description="[action] Builds GWT and checks API compatiblity to prior release"/>
 
+  <target name="fastcheckstyle" description="[action] Fast style check">
+    <gwt.checkstyle>
+      <fileset dir="dev/core/src">
+        <exclude name="com/google/gwt/dev/shell/remoteui/RemoteMessageProto.java"/>
+        <exclude name="com/google/gwt/dev/asm/**/*.java"/>
+        <exclude name="com/google/gwt/dev/js/rhino/**/*.java"/>
+        <exclude name="org/eclipse/**/*.java"/>
+        <exclude name="org/apache/**/*.java"/>
+      </fileset>
+      <fileset dir="dev/core/super/com/google/gwt/dev/jjs/intrinsic"/>
+      <fileset dir="user/src">
+        <exclude name="javax/validation/**/*.java"/>
+        <exclude name="org/hibernate/validator/**/*.java"/>
+      </fileset>
+      <fileset dir="user/super/com/google/gwt/emul"/>
+      <fileset dir="user/super/com/google/gwt/junit/translatable"/>
+    </gwt.checkstyle>
+
+    <gwt.checkstyle.tests>
+      <fileset dir="user/test">
+        <include name="com/google/**/*.java"/>
+        <include name="test/**"/>
+      </fileset>
+    </gwt.checkstyle.tests>
+  </target>
 </project>

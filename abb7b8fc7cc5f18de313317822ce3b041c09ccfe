@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "de1988c0_a66406be",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T10:37:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure why you think this would be referenced by a lot of people? There are only references to this class from whole google3.\n\nThis is not a public API and there are no guarantees for it. Our decision should be more about if we would like to utilize subpixel precision in the internals of SDK or not.",
+      "parentUuid": "5e58386f_1a39dd54",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de51881f_a99b796b",
         "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
         "patchSetId": 3

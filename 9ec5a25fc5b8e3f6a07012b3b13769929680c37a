@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_4801e35b",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-18T18:01:55Z",
+      "side": 1,
+      "message": "Still needs a trailing period.",
+      "revId": "9ec5a25fc5b8e3f6a07012b3b13769929680c37a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

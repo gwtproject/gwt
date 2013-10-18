@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "9e1390a0_47db9037",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T15:09:51Z",
+      "side": 1,
+      "message": "ok this is fair as an intermediate step and can be cleaned up later if we start using the subpixel values or add coercing fix to the compiler.",
+      "parentUuid": "de1988c0_268656de",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de51881f_a99b796b",
         "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
         "patchSetId": 3

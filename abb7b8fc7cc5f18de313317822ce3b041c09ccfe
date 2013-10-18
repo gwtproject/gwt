@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "de1988c0_268656de",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-18T14:33:59Z",
+      "side": 1,
+      "message": "I would still think that we actually need to do this at some point. This patch is more about just making it work in IE10 on per pixel basis without tackling the whole sub pixel problem throughout the SDK first",
+      "parentUuid": "de1988c0_a66406be",
+      "revId": "abb7b8fc7cc5f18de313317822ce3b041c09ccfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de51881f_a99b796b",
         "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
         "patchSetId": 3

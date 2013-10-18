@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de1988c0_c6c30225",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/EntryMethodHolderGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T13:16:09Z",
+      "side": 1,
+      "message": "nit: you are replicating this constant in 3 places, might be a good idea to extract a constant.",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_276db4c4",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T13:16:09Z",
+      "side": 1,
+      "message": "4 spaces -\u003e 2 spaces (other places as well)",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1988c0_06e7dacd",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T13:16:09Z",
+      "side": 1,
+      "message": "Actually, can you use \u0027out.indent\u0027 instead for non-trivial spacing?",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1988c0_26e2d6bd",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T13:16:09Z",
+      "side": 1,
+      "message": "nit: better to not end with punctuation in exception messages. (in other places as well)",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

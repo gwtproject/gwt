@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_a3a06888",
+        "filename": "user/src/com/google/gwt/dom/client/Element.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-18T19:05:15Z",
+      "side": 1,
+      "message": "Here too.",
+      "revId": "cef330be3ef129299857fa24476319d9df04f9a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

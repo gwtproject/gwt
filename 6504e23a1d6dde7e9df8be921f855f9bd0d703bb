@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "def0a8a0_c814b399",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/EntryMethodHolderGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-18T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1988c0_c6c30225",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e1390a0_276db4c4",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-18T13:16:09Z",
       "side": 1,
       "message": "4 spaces -\u003e 2 spaces (other places as well)",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_2881f793",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-18T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e1390a0_276db4c4",
       "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "def0a8a0_089a3bf8",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-18T18:19:55Z",
+      "side": 1,
+      "message": "i think it\u0027s a lot more readable like this. i\u0027ll not do it unless you insist.",
+      "parentUuid": "de1988c0_06e7dacd",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1988c0_26e2d6bd",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-18T13:16:09Z",
       "side": 1,
       "message": "nit: better to not end with punctuation in exception messages. (in other places as well)",
+      "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_4865631c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-18T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1988c0_26e2d6bd",
       "revId": "6504e23a1d6dde7e9df8be921f855f9bd0d703bb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

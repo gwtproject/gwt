@@ -34,6 +34,24 @@
       "revId": "dd346395f25aaf4564aeabf9283afaa7bb5bd5e9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_27cc9483",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T15:01:25Z",
+      "side": 1,
+      "message": "This problem is in many places, not only here.",
+      "parentUuid": "5ecbd865_e272a6dc",
+      "revId": "dd346395f25aaf4564aeabf9283afaa7bb5bd5e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

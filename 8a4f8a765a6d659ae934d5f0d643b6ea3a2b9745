@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_fd5cd385",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ArrayPrototypePatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-18T14:47:20Z",
+      "side": 1,
+      "message": "Nit: Add space before open brace.",
+      "revId": "8a4f8a765a6d659ae934d5f0d643b6ea3a2b9745",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

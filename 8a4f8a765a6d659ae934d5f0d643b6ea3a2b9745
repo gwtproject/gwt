@@ -34,6 +34,24 @@
       "revId": "8a4f8a765a6d659ae934d5f0d643b6ea3a2b9745",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_07e7d8cd",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ArrayPrototypePatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-18T16:12:51Z",
+      "side": 1,
+      "message": "The problem for me is that @com.google.gwt.lang.Array will not be defined above the patcher. So at runtime this would throw an error.\n\nHow about:\n\ntry{\n  @com.google.gwt.lang.Array::new()();\n}catch{\n}",
+      "parentUuid": "def0a8a0_1ddd5fcd",
+      "revId": "8a4f8a765a6d659ae934d5f0d643b6ea3a2b9745",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

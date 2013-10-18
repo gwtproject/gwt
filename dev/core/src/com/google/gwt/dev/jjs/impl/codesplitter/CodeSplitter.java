@@ -101,7 +101,6 @@ import java.util.Set;
  * </p>
  */
 public class CodeSplitter {
-  // TODO(rluble): This class needs a serious refactor to be able to add significant unit tests.
 
   public static ControlFlowAnalyzer computeInitiallyLive(JProgram jprogram) {
     return computeInitiallyLive(jprogram, MultipleDependencyGraphRecorder.NULL_RECORDER);
@@ -167,6 +166,43 @@ public class CodeSplitter {
   }
 
   /**
+   * Any immortal codegen types must be part of the initial download.
+   */
+  private static void computeLivenessFromCodeGenTypes(JProgram jprogram,
+      ControlFlowAnalyzer cfa) {
+    for (JClassType type : jprogram.immortalCodeGenTypes) {
+      cfa.traverseFromInstantiationOf(type);
+      for (JMethod method : type.getMethods()) {
+        if (!method.needsVtable()) {
+          cfa.traverseFrom(method);
+        }
+      }
+    }
+  }
+
+  /**
+   * Group run asyncs that have the same class literal as the first parameter in the two parameter
+   * GWT.runAsync call.
+   */
+  private static Collection<Collection<JRunAsync>> groupAsyncsByClassLiteral(
+      Collection<JRunAsync> runAsyncs) {
+    Collection<Collection<JRunAsync>> result = Lists.newArrayList();
+    Multimap<String, JRunAsync> asyncsGroupedByName =
+        CodeSplitters.computeRunAsyncsByName(runAsyncs, true);
+    // Add runAsyncs that have class literals in groups.
+    result.addAll(asyncsGroupedByName.asMap().values());
+    // Add all the rest.
+    result.addAll(CodeSplitters.getListOfLists(Collections2.filter(runAsyncs,
+        new Predicate<JRunAsync>() {
+          @Override
+          public boolean apply(JRunAsync runAsync) {
+            return !runAsync.hasExplicitClassLiteral();
+          }
+        })));
+    return result;
+  }
+
+  /**
    * Any instance method in the magic Array class must be in the initial
    * download. The methods of that class are copied to a separate object the
    * first time class Array is touched, and any methods added later won't be
@@ -183,21 +219,6 @@ public class CodeSplitter {
     for (JMethod method : arrayType.getMethods()) {
       if (method.needsVtable()) {
         cfa.traverseFrom(method);
-      }
-    }
-  }
-
-  /**
-   * Any immortal codegen types must be part of the initial download.
-   */
-  private static void computeLivenessFromCodeGenTypes(JProgram jprogram,
-      ControlFlowAnalyzer cfa) {
-    for (JClassType type : jprogram.immortalCodeGenTypes) {
-      cfa.traverseFromInstantiationOf(type);
-      for (JMethod method : type.getMethods()) {
-        if (!method.needsVtable()) {
-          cfa.traverseFrom(method);
-        }
       }
     }
   }
@@ -332,28 +353,6 @@ public class CodeSplitter {
     } else {
       return "sp" + Iterables.getLast(initialLoadSequence).getRunAsyncId();
     }
-  }
-
-  /**
-   * Group run asyncs that have the same class literal as the first parameter in the two parameter
-   * GWT.runAsync call.
-   */
-  private Collection<Collection<JRunAsync>> groupAsyncsByClassLiteral(
-      Collection<JRunAsync> runAsyncs) {
-    Collection<Collection<JRunAsync>> result = Lists.newArrayList();
-    Multimap<String, JRunAsync> asyncsGroupedByName =
-        CodeSplitters.computeRunAsyncsByName(runAsyncs, true);
-    // Add runAsyncs that have class literals in groups.
-    result.addAll(asyncsGroupedByName.asMap().values());
-    // Add all the rest.
-    result.addAll(CodeSplitters.getListOfLists(Collections2.filter(runAsyncs,
-        new Predicate<JRunAsync>() {
-          @Override
-          public boolean apply(JRunAsync runAsync) {
-            return !runAsync.hasExplicitClassLiteral();
-          }
-        })));
-    return result;
   }
 
   /**
@@ -564,4 +563,5 @@ public class CodeSplitter {
       }
     }).accept(jsprogram);
   }
+
 }

@@ -54,5 +54,10 @@ public class ArrayPrototypePatcher {
         Array.prototype[name] = value;
       }
     }
+
+    // make sure Array is rescued
+    setTimeout(function(){
+      @com.google.gwt.lang.Array::new()();
+    }, 1);
   }-*/;
 }

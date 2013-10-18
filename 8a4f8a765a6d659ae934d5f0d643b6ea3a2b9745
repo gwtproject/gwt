@@ -16,6 +16,24 @@
       "revId": "8a4f8a765a6d659ae934d5f0d643b6ea3a2b9745",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_1ddd5fcd",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ArrayPrototypePatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-10-18T14:52:42Z",
+      "side": 1,
+      "message": "Maybe better only @com.google.gwt.lang.Array::new()()\n\nJs optimization is done way after, so that would count as an instantiation as far as cfa is concerned.",
+      "parentUuid": "def0a8a0_fd5cd385",
+      "revId": "8a4f8a765a6d659ae934d5f0d643b6ea3a2b9745",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

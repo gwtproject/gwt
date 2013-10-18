@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de1988c0_c60dc2fa",
+        "filename": "user/src/com/google/gwt/user/Scroll.gwt.xml",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T11:02:56Z",
+      "side": 1,
+      "message": "Pls don\u0027t work around, use \u003cnone\u003e like other places.",
+      "revId": "e6ae6134ef68ff52ab8dfdc64d28fa91ce65d1f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1390a0_24aad21c",
+        "filename": "user/test/com/google/gwt/typedarrays/client/ClientSupportTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-18T11:02:56Z",
+      "side": 1,
+      "message": "\"\u003c 10\"",
+      "revId": "e6ae6134ef68ff52ab8dfdc64d28fa91ce65d1f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

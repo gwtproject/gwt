@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ee8f0cc_ff423b19",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-19T18:47:12Z",
+      "side": 1,
+      "message": "My change here originally used \"gwt.version \u003d git describe\" (so might be \"2.5.0\" if the release was tagged on this commit), and \"git.gitsha \u003d git rev-parse\" (always a SHA).\n\nThis seems to match the current behavior of gwt.version \u003d\u003d release version, while gwt.svnrev was just a commit id.\n\nSo, I\u0027d kind of like to keep gwt.gitsha to always be a SHA, and if anything use \"git describe\" for the gwt.version output.\n\nThat said, right now gwt.version must be passed in as an environment variable, else it\u0027s set to 0.0.0, so I was going to leave that alone for now, and potentially use \"git describe\" for it in a separate CL.\n\nDoes that sound okay? Should I change gwt.version over to use git describe in this CL? Should be easy enough.",
+      "parentUuid": "def0a8a0_4e37280c",
+      "revId": "f5e2fb8b17c343c3ab209f5bf16a6c7a542abd8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "def0a8a0_2e3c5cec",
         "filename": "dev/core/src/com/google/gwt/dev/About.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-19T18:28:45Z",
       "side": 1,
       "message": "I think we should update the javadoc to reflect that this doesn\u0027t return a subversion revision number anymore.  Just something like \"Deprecated alias for getGwtGitSha().  GWT is now maintained in a Git repository instead of a Subversion repository.\"",
+      "revId": "f5e2fb8b17c343c3ab209f5bf16a6c7a542abd8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee8f0cc_1f51a7e2",
+        "filename": "dev/core/src/com/google/gwt/dev/About.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-19T18:47:12Z",
+      "side": 1,
+      "message": "True, I\u0027ll change that.",
+      "parentUuid": "def0a8a0_2e3c5cec",
       "revId": "f5e2fb8b17c343c3ab209f5bf16a6c7a542abd8c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

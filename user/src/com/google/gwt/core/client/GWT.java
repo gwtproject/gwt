@@ -325,4 +325,10 @@ public final class GWT {
   private static void unloadModule() {
     Impl.unloadModule();
   }
+
+  public static void IntentionalLintErrors()
+  {
+      int BAD_CODE=
+44;
+    }
 }

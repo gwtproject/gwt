@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9efab080_0046962f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[warning] Subject line should be 50 characters or fewer.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_e0426a19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_4051bee1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_205632db",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[error] Name \u0027IntentionalLintErrors\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_804ba631",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should be on the previous line.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_60503adc",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[error] Name \u0027BAD_CODE\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efab080_c0648ebf",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-20T23:00:38Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "64b88c665cb313a314268654857964ab30c43db0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

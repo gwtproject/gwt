@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "def0a8a0_64bfa3f3",
+        "filename": "user/src/com/google/gwt/useragent/UserAgent.gwt.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-21T16:37:29Z",
+      "side": 1,
+      "message": "Just discussed this with Daniel: I\u0027d like this line to be commented out for now, and uncommenting it be done in a followup patch set.  I.e., this patch set is just \"add support for ie10 permutation\" and the followup 1-line patch set will be \"enable ie10 permutation\".\n\nThat will make it easier to temporarily rollback ie10 support if necessary, without needing to rollback all of the other changes.",
+      "revId": "5fd4cc16565afeddb9724bd437ae20415588b2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "def0a8a0_e4b27326",
+        "filename": "user/test/com/google/gwt/typedarrays/client/ClientSupportTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-21T16:37:29Z",
+      "side": 1,
+      "message": "Should this be \u003c\u003d 9?",
+      "revId": "5fd4cc16565afeddb9724bd437ae20415588b2cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

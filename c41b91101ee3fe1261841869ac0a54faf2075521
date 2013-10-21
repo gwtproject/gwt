@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee8f0cc_dfdf3fef",
+        "filename": "user/src/com/google/gwt/user/Scroll.gwt.xml",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-21T15:36:38Z",
+      "side": 1,
+      "message": "Please address Goktug\u0027s comment from patch set 16.",
+      "revId": "c41b91101ee3fe1261841869ac0a54faf2075521",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

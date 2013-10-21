@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee8f0cc_ffbddb53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-21T19:24:06Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "06d44ec3310aa86997975f8d516448c48f633008",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee8f0cc_3f810394",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/LivenessPredicate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-21T19:24:06Z",
+      "side": 1,
+      "message": "public interface functions need a comment (so that overriding implementations in classes don\u0027t have to be commented)",
+      "revId": "06d44ec3310aa86997975f8d516448c48f633008",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee8f0cc_5f86cfac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/NothingAlivePredicate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-21T19:24:06Z",
+      "side": 1,
+      "message": "formatting is jacked up",
+      "revId": "06d44ec3310aa86997975f8d516448c48f633008",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

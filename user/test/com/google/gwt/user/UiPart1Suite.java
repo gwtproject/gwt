@@ -53,6 +53,7 @@ import com.google.gwt.user.client.ui.FocusPanelTest;
 import com.google.gwt.user.client.ui.FormPanelTest;
 import com.google.gwt.user.client.ui.GridTest;
 import com.google.gwt.user.client.ui.impl.ClippedImagePrototypeTest;
+import com.google.gwt.user.client.ui.impl.FocusImplTest;
 
 import junit.framework.Test;
 
@@ -100,6 +101,7 @@ public class UiPart1Suite {
     suite.addTestSuite(FlexTableTest.class);
     suite.addTestSuite(FlowPanelTest.class);
     suite.addTestSuite(FocusPanelTest.class);
+    suite.addTestSuite(FocusImplTest.class);
     suite.addTestSuite(FormPanelTest.class);
     suite.addTestSuite(GridTest.class);
 

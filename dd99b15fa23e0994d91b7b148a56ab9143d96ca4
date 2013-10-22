@@ -16,6 +16,125 @@
       "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_2384a264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "Fix CompoundAssignmentNormalizer to create locals with declarations.\n\nA previous patch removed the creation of declaration statement nodes\nin the AST during temp local creation. The current JavaScript generation\napproach does not rely on the existence of these declaration statement\nnodes since it uses the function scope locals list, but the nodes might be\nneeded in the future.\n\nSo this patch is restoring them.",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_786e552f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "wasn\u0027t sure what banlist was for or what it contained, and whether it was about compound normalization or declaration insertion.\n\ni think this should be named something like:\ns/banList/declarationRestrictedLocations ?",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_18d8e9dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "format comment like the other class member comment",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_b85fdd78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "blank line",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_78e7359b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "s/init/initStatement",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_2332e203",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "s/declarationInsertionStack/declarationLocationStack",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_039f9ea8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T23:52:10Z",
+      "side": 1,
+      "message": "when this was being done in TempLocalVisitor, was it under test? if so we should probably be testing it as well.",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

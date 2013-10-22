@@ -16,6 +16,24 @@
       "revId": "44e5a506b2a0a0d86f02929352731813be2a5743",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_55679ce3",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5446
+      },
+      "writtenOn": "2013-10-22T20:33:21Z",
+      "side": 1,
+      "message": "Interleaving the calls like the real implementation would require a new implementation of this class, since its current behavior is to treat repeating and scheduled commands separately. I don\u0027t know why this behavior was chosen, but we have to deal with it...\n\nIn practice I guess that the few classes which mix up commands and rely on the specific behavior should test with a real Scheduler.\n\nDocumented the odd behavior regarding RepeatingCommand scheduling another ScheduledCommand.",
+      "parentUuid": "fea72cbd_b27d3e6f",
+      "revId": "44e5a506b2a0a0d86f02929352731813be2a5743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

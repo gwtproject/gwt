@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fea72cbd_b27d3e6f",
+        "filename": "user/src/com/google/gwt/core/client/testing/StubScheduler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-22T18:45:34Z",
+      "side": 1,
+      "message": "It seems like we\u0027d want to interleave the repeating and scheduled commands in the same order they were queued.  Is there any reason not to do that?  As is, it seems like if a RepeatingCommand where to schedule another ScheduledCommand, it would end up getting run still, contrary to the docs.\n\nAlso, are there scenarios where you only want to execute repeating or scheduled commands, but not both?",
+      "revId": "44e5a506b2a0a0d86f02929352731813be2a5743",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

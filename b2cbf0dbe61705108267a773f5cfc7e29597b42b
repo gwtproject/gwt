@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fea72cbd_f2d0a641",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-22T18:49:30Z",
+      "side": 1,
+      "message": "typo.\n\nmaybe add one more paragraph about why it\u0027s good to give subclasses the option of overriding the create temp local implementation",
+      "revId": "b2cbf0dbe61705108267a773f5cfc7e29597b42b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

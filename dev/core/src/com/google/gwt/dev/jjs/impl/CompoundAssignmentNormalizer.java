@@ -21,8 +21,10 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
+import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
+import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
@@ -35,10 +37,15 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
+
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * <p>
@@ -251,6 +258,17 @@ public abstract class CompoundAssignmentNormalizer {
       ctx.replaceMe(accept(asg));
     }
 
+    @Override
+    public final void endVisit(JStatement x, Context ctx) {
+      if (ctx.canInsert()) {
+        if (!banList.remove(x)) {
+          Context popped = declarationInsertionStack.pop();
+          assert popped == ctx;
+        }
+      }
+      super.endVisit(x, ctx);
+    }
+
     private JBinaryOperation createAsgOpFromUnary(JExpression arg, JUnaryOperator op) {
       JBinaryOperator newOp;
       if (op == JUnaryOperator.INC) {
@@ -285,11 +303,37 @@ public abstract class CompoundAssignmentNormalizer {
       return true;
     }
 
+    @Override
+    public final boolean visit(JStatement x, Context ctx) {
+      if (ctx.canInsert() && !banList.contains(x)) {
+        declarationInsertionStack.push(ctx);
+      }
+      if (x instanceof JForStatement) {
+        // Cannot add decl statements to a for statement increments list.
+        JForStatement forStmt = (JForStatement) x;
+        banList.addAll(forStmt.getIncrements());
+      }
+      return super.visit(x, ctx);
+    }
+
     private JMethodBody currentMethodBody = null;
+    // Stack to keep track where to insert the new variable declaration.
+    private final Stack<Context> declarationInsertionStack = new Stack<Context>();
+     /**
+     * A set of statements we cannot insert declaration statements into. Currently
+     * this is just the "increments" list of a JForStatement.
+     */
+    private final Set<JStatement> banList = Sets.newHashSet();
 
     private JLocal createTempLocal(SourceInfo info, JType type) {
       assert currentMethodBody != null;
-      return CompoundAssignmentNormalizer.this.createTempLocal(info, type, currentMethodBody);
+      String temporaryLocalName =
+          CompoundAssignmentNormalizer.this.newTemporaryLocalName(info, type, currentMethodBody);
+      JLocal local = JProgram.createLocal(info, temporaryLocalName, type, false, currentMethodBody);
+      JDeclarationStatement init =
+          new JDeclarationStatement(info, new JLocalRef(info, local), null);
+      declarationInsertionStack.peek().insertBefore(init);
+      return local;
     }
   }
 
@@ -308,13 +352,14 @@ public abstract class CompoundAssignmentNormalizer {
   private static final String TEMP_LOCAL_NAME = "$tmp";
 
   /**
-   * Create a temporary local variable in {@code methodBody}. Locals might have duplicate names as they are always
-   * referred to by reference; {@link GenerateJavaScriptAST} will attempt coalesce variables of same name.
+   * Gets a new temporary local variable name in {@code methodBody}. Locals might have duplicate
+   * names as they are always referred to by reference.
+   * {@link GenerateJavaScriptAST} will attempt coalesce variables of same name.
    *
-   * <p> Subclasses might decide on different approaches to creating local temporaries.
+   * <p> Subclasses might decide on different approaches to naming local temporaries.
    */
-  protected JLocal createTempLocal(SourceInfo info, JType type, JMethodBody methodBody) {
-    return JProgram.createLocal(info, TEMP_LOCAL_NAME, type, false, methodBody);
+  protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
+    return TEMP_LOCAL_NAME;
   }
 
   /**

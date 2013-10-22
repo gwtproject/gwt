@@ -16,6 +16,23 @@
       "revId": "aa98461492fd497505bbe5e93e0502d4a1a223a2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_cf105d13",
+        "filename": "user/src/com/google/gwt/layout/Layout.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-22T17:31:59Z",
+      "side": 1,
+      "message": "Also, won\u0027t ie9 still match this because of fallback to ie8?  I think you need\n\n  \u003call\u003e\n    \u003cwhen-property-is name\u003d\"user.agent\" value\u003d\"ie8\"/\u003e\n    \u003cnone\u003e\n      \u003cwhen-property-is name\u003d\"user.agent\" value\u003d\"ie9\"/\u003e\n    \u003c/none\u003e\n  \u003c/all\u003e",
+      "revId": "aa98461492fd497505bbe5e93e0502d4a1a223a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

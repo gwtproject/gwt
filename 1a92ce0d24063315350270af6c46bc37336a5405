@@ -33,6 +33,24 @@
       "revId": "1a92ce0d24063315350270af6c46bc37336a5405",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7eb17c0c_1b2d9b9c",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DataGrid.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-23T02:21:16Z",
+      "side": 1,
+      "message": "Ah, thanks, you caught me copy/pasting the javadoc from ScrollPanel.\n\nHuh. I just now saw that really spiffy Jenkins warning...I must have missed the email for that.",
+      "parentUuid": "7eca5c92_13d10c44",
+      "revId": "1a92ce0d24063315350270af6c46bc37336a5405",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

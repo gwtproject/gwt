@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ef89cd2_66c9b067",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-23T21:54:25Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b22c4b0d9dd962525078d3c9e8f94067c28a2ed6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

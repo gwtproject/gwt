@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_252b7af4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JForStatement.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe41ecd7_623c18a2",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_a24a202d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-23T19:27:23Z",
       "side": 1,
       "message": "nice comment",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_4528fef4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "fe41ecd7_a24a202d",
       "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_e58592d1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done. The ij refactor sometimes does too much :)",
+      "parentUuid": "fe41ecd7_425c74f2",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_02ff4c92",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-10-23T19:27:23Z",
       "side": 1,
       "message": "this is nicely more readable",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_2584dacd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "fe41ecd7_02ff4c92",
       "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_4581debc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe41ecd7_a5a78ab2",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_6592e255",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-10-23T19:27:23Z",
       "side": 1,
       "message": "// Format the list as a single expression using JMultiExpression if necessary.",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_25c13acf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done.  Extracted as a function.",
+      "parentUuid": "fe41ecd7_6592e255",
       "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_05819693",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe41ecd7_65c98267",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_259cda62",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2013-10-23T19:27:23Z",
       "side": 1,
       "message": "should probably be multi.addExpression(...);",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_c8218367",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe41ecd7_259cda62",
       "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_e8cb276b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe41ecd7_4599de71",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_a580eaf7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
         "patchSetId": 4
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "fe41ecd7_e80a47a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "The old code explicitly asks to output statements separated with commas.  Emits a multi expression which is a list of expressions separated by commas but it might be adding extra parenthesis (which is invalid java, but then again multiexpressions are invalid yet printed here).\n\nLet me know if you think is better to fix.",
+      "parentUuid": "fe41ecd7_a580eaf7",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe41ecd7_a5b22ad8",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/cfg/CfgBuilderTest.java",
         "patchSetId": 4
@@ -183,6 +363,24 @@
       "writtenOn": "2013-10-23T19:27:23Z",
       "side": 1,
       "message": "can you explain this change to me",
+      "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_a83d1f41",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/cfg/CfgBuilderTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T22:06:03Z",
+      "side": 1,
+      "message": "The way the CFG is represented is a bit contrived.\n\nOld code:\nThere was a labeled flowing to the next block (label: Stmt -\u003e [*] ), in this CFG all ast nodes are represented so a statement that has an assignment is represented by a statement node that flows into the assignment. There is a flow into the increments (to label 3), so statement is labeled. \n\nNew code.\nThe statement node is gone so now all the flows have go to the first expression in the multiexpression. Because there is a labeled flow (labelled as 3) to the multiexpression, the first expression gets the label.",
+      "parentUuid": "fe41ecd7_a5b22ad8",
       "revId": "e34017b267bbb4b9ccc80b111e4aae7ab05cc225",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

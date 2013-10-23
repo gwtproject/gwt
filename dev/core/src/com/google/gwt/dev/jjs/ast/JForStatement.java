@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
 
@@ -26,16 +26,16 @@ import java.util.List;
 public class JForStatement extends JStatement {
 
   private JStatement body;
-  private List<JExpressionStatement> increments;
   private List<JStatement> initializers;
   private JExpression testExpr;
+  private JExpression increments;
 
   public JForStatement(SourceInfo info, List<JStatement> initializers, JExpression testExpr,
-      List<JExpressionStatement> increments, JStatement body) {
+      JExpression increments, JStatement body) {
     super(info);
-    this.initializers = Lists.normalize(initializers);
+    this.initializers = Lists.newArrayList(initializers);
     this.testExpr = testExpr;
-    this.increments = Lists.normalize(increments);
+    this.increments = increments;
     this.body = body;
   }
 
@@ -43,7 +43,7 @@ public class JForStatement extends JStatement {
     return body;
   }
 
-  public List<JExpressionStatement> getIncrements() {
+  public JExpression getIncrements() {
     return increments;
   }
 
@@ -61,12 +61,13 @@ public class JForStatement extends JStatement {
       if (testExpr != null) {
         testExpr = visitor.accept(testExpr);
       }
-      increments = visitor.acceptWithInsertRemoveImmutable(increments);
+      if (increments != null) {
+        increments = visitor.accept(increments);
+      }
       if (body != null) {
         body = visitor.accept(body);
       }
     }
     visitor.endVisit(this, ctx);
   }
-
 }

@@ -21,33 +21,34 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents multiple ordered expressions as a single compound expression.
  */
 public class JMultiExpression extends JExpression {
 
-  public ArrayList<JExpression> exprs = new ArrayList<JExpression>();
+  private List<JExpression> expressions = Lists.newArrayList();
 
   public JMultiExpression(SourceInfo info) {
     super(info);
   }
 
   public JType getType() {
-    int c = exprs.size();
+    int c = getExpressions().size();
     if (c == 0) {
       return JPrimitiveType.VOID;
     } else {
-      return exprs.get(c - 1).getType();
+      return getExpressions().get(c - 1).getType();
     }
   }
 
   @Override
   public boolean hasSideEffects() {
-    for (int i = 0; i < exprs.size(); ++i) {
-      JExpression expr = exprs.get(i);
+    for (int i = 0; i < getExpressions().size(); ++i) {
+      JExpression expr = getExpressions().get(i);
       if (expr.hasSideEffects()) {
         return true;
       }
@@ -57,9 +58,12 @@ public class JMultiExpression extends JExpression {
 
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      visitor.acceptWithInsertRemove(exprs);
+      visitor.acceptWithInsertRemove(getExpressions());
     }
     visitor.endVisit(this, ctx);
   }
 
+  public List<JExpression> getExpressions() {
+    return expressions;
+  }
 }

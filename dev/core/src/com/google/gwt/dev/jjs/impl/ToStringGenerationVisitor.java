@@ -496,7 +496,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
     semi();
     space();
-    visitCollectionWithCommas(x.getIncrements().iterator());
+    if (x.getIncrements() != null) {
+      accept(x.getIncrements());
+    }
     rparen();
 
     if (x.getBody() != null) {
@@ -679,7 +681,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JMultiExpression x, Context ctx) {
     lparen();
-    visitCollectionWithCommas(x.exprs.iterator());
+    visitCollectionWithCommas(x.getExpressions().iterator());
     rparen();
     return false;
   }

@@ -16,6 +16,40 @@
       "revId": "8715fbac5ace439c8e93d54082db998d7354aee7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e7c00f0_883bb7a9",
+        "filename": "samples/common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-23T00:15:06Z",
+      "side": 1,
+      "message": "Intentional?",
+      "revId": "8715fbac5ace439c8e93d54082db998d7354aee7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e7c00f0_c845af24",
+        "filename": "user/src/com/google/gwt/user/tools/templates/readme/README.txtsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-23T00:15:06Z",
+      "side": 1,
+      "message": "\"ant devmode\" is just for the HTTP server?  I suppose ideally there\u0027d be a \"ant serve\" command that just launched Jetty, but oh well.",
+      "revId": "8715fbac5ace439c8e93d54082db998d7354aee7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

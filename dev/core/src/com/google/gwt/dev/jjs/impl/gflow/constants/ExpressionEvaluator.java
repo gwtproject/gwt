@@ -79,7 +79,7 @@ public class ExpressionEvaluator {
 
     @Override
     public boolean visit(JMultiExpression x, Context ctx) {
-      accept(x.exprs.get(x.exprs.size() - 1));
+      accept(x.getExpressions().get(x.getExpressions().size() - 1));
       return false;
     }
 

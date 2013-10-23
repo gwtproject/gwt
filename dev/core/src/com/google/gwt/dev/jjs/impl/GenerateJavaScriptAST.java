@@ -1171,14 +1171,8 @@ public class GenerateJavaScriptAST {
       }
 
       // increments
-      {
-        JsExpression incrExpr = null;
-        List<JsExprStmt> exprStmts = popList(x.getIncrements().size());
-        for (int i = 0; i < exprStmts.size(); ++i) {
-          JsExprStmt exprStmt = exprStmts.get(i);
-          incrExpr = createCommaExpression(incrExpr, exprStmt.getExpression());
-        }
-        jsFor.setIncrExpr(incrExpr);
+      if (x.getIncrements() != null) {
+        jsFor.setIncrExpr((JsExpression) pop());
       }
 
       // condition
@@ -1441,7 +1435,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JMultiExpression x, Context ctx) {
-      List<JsExpression> exprs = popList(x.exprs.size());
+      List<JsExpression> exprs = popList(x.getExpressions().size());
       JsExpression cur = null;
       for (int i = 0; i < exprs.size(); ++i) {
         JsExpression next = exprs.get(i);

@@ -268,8 +268,9 @@ public class JsoDevirtualizer {
     JMultiExpression multi = new JMultiExpression(sourceInfo);
 
     // (maybeJsoInvocation = this$static, )
-    multi.exprs.add(JProgram.createAssignmentStmt(sourceInfo, new JLocalRef(sourceInfo, temp),
-        new JParameterRef(sourceInfo, thisParam)).getExpr());
+    multi.getExpressions()
+        .add(JProgram.createAssignmentStmt(sourceInfo, new JLocalRef(sourceInfo, temp),
+            new JParameterRef(sourceInfo, thisParam)).getExpr());
 
     // Build from bottom up.
     // isJavaObject(temp)
@@ -298,7 +299,7 @@ public class JsoDevirtualizer {
     JConditional conditional =
         new JConditional(sourceInfo, polyMethod.getType(), condition, thenValue, elseValue);
 
-    multi.exprs.add(conditional);
+    multi.getExpressions().add(conditional);
 
     JReturnStatement returnStatement = new JReturnStatement(sourceInfo, multi);
     ((JMethodBody) newMethod.getBody()).getBlock().addStmt(returnStatement);

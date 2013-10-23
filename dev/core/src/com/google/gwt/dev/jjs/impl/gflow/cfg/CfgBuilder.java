@@ -535,7 +535,9 @@ public class CfgBuilder {
         accept(x.getBody());
       }
       int incrementsPos = nodes.size();
-      accept(x.getIncrements());
+      if (x.getIncrements() != null) {
+        accept(x.getIncrements());
+      }
 
       List<Exit> thenExits = removeNormalExits();
       for (Exit e : thenExits) {

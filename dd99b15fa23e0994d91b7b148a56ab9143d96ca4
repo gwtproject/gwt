@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "9efc70ee_7cea19c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea72cbd_2384a264",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fea72cbd_786e552f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-22T23:52:10Z",
       "side": 1,
       "message": "wasn\u0027t sure what banlist was for or what it contained, and whether it was about compound normalization or declaration insertion.\n\ni think this should be named something like:\ns/banList/declarationRestrictedLocations ?",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea72cbd_c3c67690",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "gone with the wind after the JForStatement refactor.",
+      "parentUuid": "fea72cbd_786e552f",
       "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "de5d08d4_c65ac22e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea72cbd_18d8e9dc",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fea72cbd_b85fdd78",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2013-10-22T23:52:10Z",
       "side": 1,
       "message": "blank line",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de5d08d4_a69226a3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea72cbd_b85fdd78",
       "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "de5d08d4_e65fbe1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "declarationStatement better?",
+      "parentUuid": "fea72cbd_78e7359b",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fea72cbd_2332e203",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
         "patchSetId": 1
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "de5d08d4_464fb26c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "currentDeclarationInsertionPoint?",
+      "parentUuid": "fea72cbd_2332e203",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fea72cbd_039f9ea8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
         "patchSetId": 1
@@ -132,6 +240,24 @@
       "writtenOn": "2013-10-22T23:52:10Z",
       "side": 1,
       "message": "when this was being done in TempLocalVisitor, was it under test? if so we should probably be testing it as well.",
+      "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efc70ee_1cddd528",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompoundAssignmentNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-23T23:29:38Z",
+      "side": 1,
+      "message": "Refactored the declaration part and restored the tests.",
+      "parentUuid": "fea72cbd_039f9ea8",
       "revId": "dd99b15fa23e0994d91b7b148a56ab9143d96ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

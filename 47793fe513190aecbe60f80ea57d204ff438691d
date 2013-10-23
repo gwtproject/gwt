@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe41ecd7_5fa44b9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-23T11:52:44Z",
+      "side": 1,
+      "message": "Is this a real CL or a test?  Please use \"git commit --amend\" to fix the commit message if real.",
+      "revId": "47793fe513190aecbe60f80ea57d204ff438691d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_7fa10f8b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-23T11:52:44Z",
+      "side": 1,
+      "message": "I think you can get rid of this comment if you\u0027re going to change the method to protected.",
+      "revId": "47793fe513190aecbe60f80ea57d204ff438691d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

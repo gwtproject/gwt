@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe41ecd7_e87b27c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-23T22:14:03Z",
+      "side": 1,
+      "message": "there\u0027s an extra }",
+      "revId": "0456ac33d9bc4cad2cfa2a5692b1e69333e137e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ef89cd2_06143c52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-23T19:38:15Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "35563146ab3fb146bbc3ec342a1d8732a5e8f9e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ef89cd2_e6312000",
+        "filename": "user/src/com/google/gwt/resources/rg/AbstractCssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-23T19:38:15Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "35563146ab3fb146bbc3ec342a1d8732a5e8f9e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

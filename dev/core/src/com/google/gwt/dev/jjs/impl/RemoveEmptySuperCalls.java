@@ -47,7 +47,7 @@ public class RemoveEmptySuperCalls {
               ctx.replaceMe(call.getArgs().get(0).makeStatement());
             } else {
               JMultiExpression multi = new JMultiExpression(call.getSourceInfo());
-              multi.exprs.addAll(call.getArgs());
+              multi.getExpressions().addAll(call.getArgs());
               ctx.replaceMe(multi.makeStatement());
             }
           }

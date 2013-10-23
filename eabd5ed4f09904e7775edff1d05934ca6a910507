@@ -16,6 +16,24 @@
       "revId": "eabd5ed4f09904e7775edff1d05934ca6a910507",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe41ecd7_e5b832bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-23T19:30:07Z",
+      "side": 1,
+      "message": "Hmm. Interesting idea.\n\nIn Google\u0027s build system, the classpath consists entirely of jar files created outside GWT, so edits wouldn\u0027t show up after a SuperDevMode recompile. That\u0027s why I added the -src flag to SuperDevMode, and in general I think of the classpath as immutable. But in this case it would work.\n\nMy plan was to add a \"seeSource\" module attribute that makes \".java\" files show up in the ResourceOracle. That way we\u0027re a bit more explicit about the Showcase module\u0027s requirements and it\u0027s probably more compatible with modular compilation. And more generally I\u0027d like to see generators move away from directly using the ClassLoader to get compiler input, which bypasses the generator API.",
+      "parentUuid": "fe1acc01_7a9b550e",
+      "revId": "eabd5ed4f09904e7775edff1d05934ca6a910507",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

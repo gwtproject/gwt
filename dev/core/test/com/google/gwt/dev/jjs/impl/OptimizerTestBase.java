@@ -140,7 +140,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
           // Any instance expression goes first (this can happen even with statics).
           if (instance != null) {
 
-            multi.exprs.add(instance);
+            multi.getExpressions().add(instance);
             JLocal var = JProgram.createLocal(instance.getSourceInfo(), "$t", instance.getType(),
                 false, body);
 
@@ -155,9 +155,9 @@ public abstract class OptimizerTestBase extends JJSTestBase {
         }
         // If we need a clinit call, add it first
         if (clinit != null) {
-          multi.exprs.add(clinit);
+          multi.getExpressions().add(clinit);
         }
-        multi.exprs.add(x);
+        multi.getExpressions().add(x);
         return multi;
       }
 
@@ -219,12 +219,12 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       if (stmt instanceof JExpressionStatement) {
         JExpressionStatement exprStmt = (JExpressionStatement) stmt;
         JExpression expr = exprStmt.getExpr();
-        multi.exprs.add(expr);
+        multi.getExpressions().add(expr);
       } else if (stmt instanceof JReturnStatement) {
         JReturnStatement returnStatement = (JReturnStatement) stmt;
         JExpression expr = returnStatement.getExpr();
         if (expr != null) {
-            multi.exprs.add(expr);
+            multi.getExpressions().add(expr);
         }
       } else {
         assert false : "Not a valid multiexpression";

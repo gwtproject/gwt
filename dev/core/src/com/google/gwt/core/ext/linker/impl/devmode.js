@@ -174,13 +174,6 @@ function fireOnModuleLoadStart(className) {
 /******************************************************************************
  * Helper functions for the Development Mode startup code. Listed alphabetically
  *****************************************************************************/
-function disconnectPlugin() {
-  try {
-    // wrap in try/catch since plugins are not required to supply this
-    plugin.disconnect();
-  } catch (e) {
-  }
-}
 
 function doBrowserSpecificFixes() {
   var ua = navigator.userAgent.toLowerCase();
@@ -390,7 +383,17 @@ function gwtOnLoad(errFn, moduleName, moduleBase, softPermutationId, computeProp
   var plugin = tryConnectingToPlugin(topWin.__gwt_SessionID, topWin.location.href);
   if (plugin == null) {
     loadIframe("http://www.gwtproject.org/missing-plugin/");
-  } else {
-    window.onUnload = disconnectPlugin();
+    return;
+  }
+  if (plugin.disconnect) {
+    window.onunload = function() {
+      try {
+        plugin.disconnect();
+      } catch (e) {
+        if (console && console.log) {
+          console.log("GWT plugin.disconnect", e);
+        }
+      }
+    };
   }
 }

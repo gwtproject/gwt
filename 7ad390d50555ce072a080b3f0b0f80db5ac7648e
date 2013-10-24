@@ -34,6 +34,24 @@
       "revId": "7ad390d50555ce072a080b3f0b0f80db5ac7648e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e640099_28fb6bf1",
+        "filename": "user/src/com/google/gwt/user/tools/templates/sample/_srcFolder_/_moduleFolder_/_moduleShortName_.gwt.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-24T01:36:37Z",
+      "side": 1,
+      "message": "+1\n\nAnd in GWT 3 we could make xsiframe the default linker; this is a breaking change as it doesn\u0027t support \u003cscript\u003e in gwt.xml, but we could add warnings to the std linker in 2.6 to tell people to migrate to ScriptInjector or putting the \u003cscript\u003e in their host page. What do you think?",
+      "parentUuid": "9efc70ee_ff161bc0",
+      "revId": "7ad390d50555ce072a080b3f0b0f80db5ac7648e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

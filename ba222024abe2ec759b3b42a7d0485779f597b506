@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e7b3c37_cb36550f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/devmode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-10-24T21:36:48Z",
+      "side": 1,
+      "message": "IIRC this is too late to modify onunload - we\u0027ve already kicked off the plugin, onModuleLoad has run, and someone might\u0027ve poked Window, causing it to attach its own onunload. That said, all of my testing was with hosted.html instead of this file.\n\nIn hosted.html, I modified the inexplicable window.onunload \u003d function() {} to try to call the onUnload method if it exists. This file also has that, see line 378. We could move that to just after var plugin and stuck the disconnectPlugin code in there, though with a plugin  \u003d\u003d null check.",
+      "revId": "ba222024abe2ec759b3b42a7d0485779f597b506",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

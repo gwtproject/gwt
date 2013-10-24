@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e640099_48f49f02",
+        "filename": "user/src/com/google/gwt/user/tools/templates/sample/_srcFolder_/_moduleFolder_/_moduleShortName_.gwt.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-24T00:42:20Z",
+      "side": 1,
+      "message": "So, is it safe to use it in production? Or should we add a warning that it should be disabled before putting your app in prod?\n\nIf it\u0027s safe to use it in production, how about enabling it by default? Or do we push it to GWT 3.0?",
+      "revId": "7ad390d50555ce072a080b3f0b0f80db5ac7648e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

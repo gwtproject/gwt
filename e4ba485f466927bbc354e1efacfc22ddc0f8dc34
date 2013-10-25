@@ -16,6 +16,23 @@
       "revId": "e4ba485f466927bbc354e1efacfc22ddc0f8dc34",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_8b218d1a",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-10-25T18:17:24Z",
+      "side": 1,
+      "message": "This seems like it will be slower in some cases, and I know Toby benchmarked it when he first wrote it -- do you have particular cases where this faster?  How much worse is then in cases where it is slower, and how many of each do we expect?",
+      "revId": "e4ba485f466927bbc354e1efacfc22ddc0f8dc34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

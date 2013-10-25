@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "fe62ccbe_fa0805f7",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "Maybe remove the redundant access to options here?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ea7bc23_2bcdf953",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 1
@@ -13,6 +30,244 @@
       "writtenOn": "2013-10-25T17:31:29Z",
       "side": 1,
       "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_bab92ddf",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "s/f/permutationFile/ ?\ns/makePermFilename/makePermutationResultFilename/ ?\n\nNot really necessary and there are tons of names we would change in this old code.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_5a9c9163",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "The cast here looks odd. Is precompileResults an implementor of PrecompileTaskOptions? What is the actual object that is serialized there? \n\nThis should probably be redesigned to be clearer but it is not needed now.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_7a72354e",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "compilerWorkDir seems to be available from the context.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_ba94cd32",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_5aae517b",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePermsServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "s/p/permutation/",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_fab725c6",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "Should link also receive a compiler context?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_7af6b571",
+        "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "s/rpo/rebindPermutationOracle/?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_da3d0141",
+        "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_9a1c69e3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "use sourceLevel from compilerContext?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_fa1ba5e5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_5a0f3182",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "compile should use the source level out of the context.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_fab80571",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_fad1e5a0",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/GeneratorContextBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "another instance source level.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_fa8ac5ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "is JJSOptions still in precompile()?",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -47,6 +302,91 @@
       "writtenOn": "2013-10-25T17:31:29Z",
       "side": 1,
       "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_1a7939c2",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationStateTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "another occurrence of source level.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_5a73b1e1",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "another one.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_ba520d3d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "another source level.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_da57c12b",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "sourceLevel again.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_7a49558c",
+        "filename": "user/test/com/google/gwt/place/rebind/PlaceHistoryGeneratorContextTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T18:47:12Z",
+      "side": 1,
+      "message": "rtn? What do they mean by it?",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

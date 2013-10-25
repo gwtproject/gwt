@@ -97,11 +97,9 @@ public class LoadingStrategyBase implements LoadingStrategy {
     private int maxRetryCount;
     private String originalUrl;
     private int retryCount;
-    private String url;
     
     public RequestData(String url, LoadTerminatedHandler errorHandler,
         int fragment, DownloadStrategy downloadStrategy, int maxRetryCount) {
-      this.url = url;
       this.originalUrl = url;
       this.errorHandler = errorHandler;
       this.maxRetryCount = maxRetryCount;
@@ -109,21 +107,33 @@ public class LoadingStrategyBase implements LoadingStrategy {
       this.fragment = fragment;
       this.downloadStrategy = downloadStrategy;
     }
-    
+ 
     public LoadTerminatedHandler getErrorHandler() { return errorHandler; }
-    
+
     public int getFragment() { return fragment; }
-    
+ 
     public int getRetryCount() { return retryCount; }
-    
-    public String getUrl() { return url; }
-    
+ 
+    public void setRetryCount(int retryCount) {
+      this.retryCount = retryCount;
+    }
+
+    public DownloadStrategy getDownloadStrategy() { return downloadStrategy; }
+
+    public String getUrl() {
+      char connector = originalUrl.contains("?") ? '&' : '?';
+      String url = originalUrl + connector + "autoRetry=" + retryCount;
+      return url;
+    }
+
+    public String getOriginalUrl() { return originalUrl; }
+
+    public int getMaxRetryCount() { return maxRetryCount; }
+ 
     public void onLoadError(Throwable e, boolean mayRetry) {
       if (mayRetry) {
         retryCount++;
         if (retryCount <= maxRetryCount) {
-          char connector = originalUrl.contains("?") ? '&' : '?';
-          url = originalUrl + connector + "autoRetry=" + retryCount;
           downloadStrategy.tryDownload(this);
           return;
         }
@@ -143,7 +153,7 @@ public class LoadingStrategyBase implements LoadingStrategy {
         if (textIntro != null && textIntro.length() > MAX_LOG_LENGTH) {
           textIntro = textIntro.substring(0, MAX_LOG_LENGTH) + "...";
         }
-        onLoadError(new HttpInstallFailure(url, textIntro, e), false);
+        onLoadError(new HttpInstallFailure(getUrl(), textIntro, e), false);
       }
     }
   }
@@ -180,6 +190,14 @@ public class LoadingStrategyBase implements LoadingStrategy {
   
   private DownloadStrategy downloadStrategy;
   private final FragmentReloadTracker manualRetryNumbers = FragmentReloadTracker.create();
+
+  public DownloadStrategy getDownloadStrategy() {
+    return downloadStrategy;
+  }
+
+  public FragmentReloadTracker getManualRetryNumbers() {
+    return manualRetryNumbers;
+  }
 
   /**
    * Subclasses should create a DownloadStrategy and pass it into this constructor.

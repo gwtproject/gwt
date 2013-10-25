@@ -16,6 +16,23 @@
       "revId": "afad8b023af8a8314d36f46a5fb247dc9b98c898",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_c8da6f33",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-10-25T21:01:19Z",
+      "side": 1,
+      "message": "It looks like this change means that the first time the load is attempted, it will already have an autoRetry appended to it. Deliberate?\n\nEach subsequent getUrl() call will increment, instead of just on failure. At a glance, it looks like ScriptTagLoadingStrategy#cleanup and others will hit this to throw exceptions, and those will contain inaccurate urls.",
+      "revId": "afad8b023af8a8314d36f46a5fb247dc9b98c898",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_4b4fa5e1",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-25T18:16:48Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b7333fe80426faec2219cea64d563d3a92a71523",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

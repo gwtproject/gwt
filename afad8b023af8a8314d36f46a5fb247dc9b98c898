@@ -33,6 +33,24 @@
       "revId": "afad8b023af8a8314d36f46a5fb247dc9b98c898",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_60c36848",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-25T21:25:46Z",
+      "side": 1,
+      "message": "Good catch.  Agreed, I think it should not append ?autoRetry\u003d0 for the first attempt.\n\nThe default getUrl() implementation should probably also make use of getOriginalUrl() if we\u0027re going to add that method.",
+      "parentUuid": "bec694d7_c8da6f33",
+      "revId": "afad8b023af8a8314d36f46a5fb247dc9b98c898",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

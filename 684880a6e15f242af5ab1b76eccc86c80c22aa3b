@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "bec694d7_48d15f43",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "I wouldn\u0027t rename \u0027f\u0027 because its scope is only two lines. When reading this code, its definition is right in front of you.",
+      "parentUuid": "fe62ccbe_bab92ddf",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_5a9c9163",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "The cast here looks odd. Is precompileResults an implementor of PrecompileTaskOptions? What is the actual object that is serialized there? \n\nThis should probably be redesigned to be clearer but it is not needed now.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_283ce3a0",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "Yes it\u0027s very weird but seems to be documented in the PrecompilationResult javadoc. Looks like PrecompilationResult is basically a union type between a Precompilation and some flags to run the precompile later, either of which could be saved to the file. (See below where there\u0027s an instanceof check.) So I think we need to make the CompilerContext later in each branch.\n\nI think that sort of union is better represented as a class with two fields, but this doesn\u0027t seem like a good time to fix it.",
+      "parentUuid": "fe62ccbe_5a9c9163",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -138,6 +174,91 @@
     },
     {
       "key": {
+        "uuid": "bec694d7_c8854f07",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "Javadoc needs updating?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_4872ff4d",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "It\u0027s not hooked up yet but I think this needs a bit of explanation. What do \"new\" and \"old\" mean in this context?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_e8800bf9",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "I\u0027d go with \"result\" but there\u0027s apparently no consensus on this sort of thing.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_25424e6e",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "Do you think all of these setters will be needed? If not, maybe we could remove the ones that aren\u0027t used and make those fields final. You can always add them back on first usage.\n\nAlso consider that top-level code could hang onto a Builder and create the CompilerContext when they call something that needs one, to avoid needing a setter.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_48f5dfaa",
+        "filename": "dev/core/src/com/google/gwt/dev/GetJreEmulation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "It\u0027s surprising that an empty context works.\nApparently it\u0027s because the context isn\u0027t quite empty; it contains an instance of PrecompileTaskOptionsImpl, and that\u0027s all that\u0027s needed to load a module.\n\n(This is the sort of thing that gives context objects a bad name, but I think it\u0027s an unavoidable intermediate state.)",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_7af6b571",
         "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
         "patchSetId": 1
@@ -149,6 +270,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "s/rpo/rebindPermutationOracle/?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_2817c30c",
+        "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-10-25T21:41:59Z",
+      "side": 1,
+      "message": "Or perhaps \"rebinds\"",
+      "parentUuid": "fe62ccbe_7af6b571",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

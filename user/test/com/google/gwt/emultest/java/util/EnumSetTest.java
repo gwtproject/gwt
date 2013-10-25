@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -87,6 +88,24 @@ public class EnumSetTest extends GWTTestCase {
 
   public void testNumbers() {
     enumTest(Numbers.class);
+  }
+
+  public void testRemoveByIterator() {
+    EnumSet<Numbers> set = EnumSet.allOf(Numbers.class);
+    try {
+      set.iterator().remove();
+      fail("Should not be able to remove an element before iteration has started.");
+    } catch (IllegalStateException expected) {
+    }
+    Iterator iterator = set.iterator();
+    assertEquals(Numbers.Zero, iterator.next());
+    iterator.remove();
+    assertFalse(set.contains(Numbers.Zero));
+    try {
+      iterator.remove();
+      fail("Should not be able to remove the same element twice.");
+    } catch (IllegalStateException expected) {
+    }
   }
 
   private <E extends Enum<E>> void enumTest(Class<E> e) {

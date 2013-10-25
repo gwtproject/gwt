@@ -74,7 +74,7 @@ public class JsArrayMixed extends JavaScriptObject {
    * @return the object at the given index, or <code>null</code> if none exists
    */
   public final native String getString(int index) /*-{
-    return String(this[index]);
+    return typeof this[index] == 'undefined' ? null : String(this[index]);
   }-*/;
 
   /**

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_6bf9c15f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-25T18:06:41Z",
+      "side": 1,
+      "message": "[warning] Subject line should be 50 characters or fewer.",
+      "revId": "e4ba485f466927bbc354e1efacfc22ddc0f8dc34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

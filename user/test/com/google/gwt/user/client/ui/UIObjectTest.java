@@ -241,19 +241,16 @@ public class UIObjectTest extends GWTTestCase {
     // Initial state: visible
     Element elem = DOM.createDiv();
     assertTrue(UIObject.isVisible(elem));
-    assertFalse(Boolean.valueOf(State.HIDDEN.get(elem)));
 
     // Hide
     UIObject.setVisible(elem, false);
     assertFalse(UIObject.isVisible(elem));
     assertEquals(Style.Display.NONE.getCssName(), elem.getStyle().getDisplay());
-    assertTrue(Boolean.valueOf(State.HIDDEN.get(elem)));
 
     // Show again
     UIObject.setVisible(elem, true);
     assertTrue(UIObject.isVisible(elem));
     assertEquals("", elem.getStyle().getDisplay());
-    assertFalse(Boolean.valueOf(State.HIDDEN.get(elem)));
   }
 
   public void testNormal() {

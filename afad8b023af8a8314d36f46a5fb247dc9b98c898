@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe62ccbe_ddcc1b0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-25T20:32:06Z",
+      "side": 1,
+      "message": "Can you  add a more descriptive message that makes clear the reason for this patch?",
+      "revId": "afad8b023af8a8314d36f46a5fb247dc9b98c898",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

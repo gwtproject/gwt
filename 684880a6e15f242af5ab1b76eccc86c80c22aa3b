@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_2bcdf953",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-25T17:31:29Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_0bcabd3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-25T17:31:29Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_6bc70134",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-25T17:31:29Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

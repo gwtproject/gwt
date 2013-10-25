@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,6 +28,7 @@ import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
 import com.google.gwt.dev.util.arg.OptionLocalWorkers;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.util.tools.ArgHandlerString;
 
 import java.io.File;
@@ -186,26 +187,25 @@ public class CompilePerms {
 
   /**
    * Compile a single permutation.
-   * 
+   *
    * @throws UnableToCompleteException if the permutation compile fails
    */
-  public static PermutationResult compile(TreeLogger logger,
-      Permutation permutation, UnifiedAst unifiedAst)
-      throws UnableToCompleteException {
-    return unifiedAst.compilePermutation(logger, permutation);
+  public static PermutationResult compile(TreeLogger logger, CompilerContext compilerContext,
+      Permutation permutation, UnifiedAst unifiedAst) throws UnableToCompleteException {
+    return unifiedAst.compilePermutation(logger, compilerContext, permutation);
   }
 
   /**
    * Compile multiple permutations.
    */
-  public static void compile(TreeLogger logger, Precompilation precompilation,
-      Permutation[] perms, int localWorkers,
+  public static void compile(TreeLogger logger, CompilerContext compilerContext,
+      Precompilation precompilation, Permutation[] perms,
       List<FileBackedObject<PermutationResult>> resultFiles)
       throws UnableToCompleteException {
-    final TreeLogger branch = logger.branch(TreeLogger.INFO, "Compiling "
-        + perms.length + " permutation" + (perms.length > 1 ? "s" : ""));
-    PermutationWorkerFactory.compilePermutations(branch, precompilation, perms,
-        localWorkers, resultFiles);
+    final TreeLogger branch = logger.branch(TreeLogger.INFO,
+        "Compiling " + perms.length + " permutation" + (perms.length > 1 ? "s" : ""));
+    PermutationWorkerFactory.compilePermutations(
+        branch, compilerContext, precompilation, perms, resultFiles);
     logger.log(TreeLogger.INFO, "Compile of permutations succeeded");
   }
 
@@ -236,12 +236,10 @@ public class CompilePerms {
 
   public static List<FileBackedObject<PermutationResult>> makeResultFiles(
       File compilerWorkDir, Permutation[] perms) {
-    List<FileBackedObject<PermutationResult>> toReturn = new ArrayList<FileBackedObject<PermutationResult>>(
-        perms.length);
+    List<FileBackedObject<PermutationResult>> toReturn = Lists.newArrayList();
     for (int i = 0; i < perms.length; ++i) {
       File f = makePermFilename(compilerWorkDir, perms[i].getId());
-      toReturn.add(new FileBackedObject<PermutationResult>(
-          PermutationResult.class, f));
+      toReturn.add(new FileBackedObject<PermutationResult>(PermutationResult.class, f));
     }
     return toReturn;
   }
@@ -308,13 +306,15 @@ public class CompilePerms {
       File precompilationFile = new File(compilerWorkDir,
           Precompile.PRECOMPILE_FILENAME);
 
-      PrecompilationResult precompileResults = readPrecompilationFile(logger, 
+      PrecompilationResult precompileResults = readPrecompilationFile(logger,
           precompilationFile);
+      CompilerContext compilerContext = new CompilerContext.Builder().options(
+          (PrecompileTaskOptions) precompileResults).build();
+      ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
+      compilerContext.setModule(module);
 
       if (precompileResults instanceof PrecompileTaskOptions) {
-        PrecompileTaskOptions precompilationOptions = (PrecompileTaskOptions) precompileResults;
-        if (!precompileAndCompile(logger, moduleName, compilerWorkDir,
-            precompilationOptions)) {
+        if (!precompileAndCompile(logger, compilerContext, compilerWorkDir)) {
           return false;
         }
       } else {
@@ -323,10 +323,9 @@ public class CompilePerms {
         Permutation[] subPerms = selectPermutationsForPrecompilation(
             permsToRun, precompilation);
 
-        List<FileBackedObject<PermutationResult>> resultFiles = makeResultFiles(
-            compilerWorkDir, subPerms);
-        compile(logger, precompilation, subPerms, options.getLocalWorkers(),
-            resultFiles);
+        List<FileBackedObject<PermutationResult>> resultFiles =
+            makeResultFiles(null, subPerms);
+        compile(logger, compilerContext, precompilation, subPerms, resultFiles);
       }
     }
 
@@ -336,17 +335,15 @@ public class CompilePerms {
   /**
    * Run both a precompile and a compile with the given precompilation options.
    */
-  private boolean precompileAndCompile(TreeLogger logger, String moduleName,
-      File compilerWorkDir, PrecompileTaskOptions precompilationOptions)
+  private boolean precompileAndCompile(
+      TreeLogger logger, CompilerContext compilerContext, File compilerWorkDir)
       throws UnableToCompleteException {
-    precompilationOptions.setOptimizePrecompile(false);
-    precompilationOptions.setGenDir(null);
-    CompilerContext compilerContext =
-        new CompilerContext.Builder().options(precompilationOptions).build();
+    compilerContext.getOptions().setOptimizePrecompile(false);
+    compilerContext.getOptions().setGenDir(null);
 
-    ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
     PropertyPermutations allPermutations = new PropertyPermutations(
-        module.getProperties(), module.getActiveLinkerNames());
+        compilerContext.getModule().getProperties(),
+        compilerContext.getModule().getActiveLinkerNames());
     List<PropertyPermutations> collapsedPermutations = allPermutations.collapseProperties();
     int[] perms = options.getPermsToCompile();
     if (perms == null) {
@@ -366,9 +363,8 @@ public class CompilePerms {
        */
       PropertyPermutations onePerm = collapsedPermutations.get(permId);
 
-      Precompilation precompilation = Precompile.precompile(logger,
-          precompilationOptions, module, permId, onePerm,
-          precompilationOptions.getGenDir());
+      Precompilation precompilation =
+          Precompile.precompile(logger, compilerContext, permId, onePerm);
       if (precompilation == null) {
         return false;
       }
@@ -382,11 +378,11 @@ public class CompilePerms {
           new int[]{permId}, precompilation);
       assert subPerms.length == 1;
 
-      PermutationResult permResult = compile(logger, subPerms[0],
-          precompilation.getUnifiedAst());
-      Link.linkOnePermutationToJar(logger, module,
-          precompilation.getGeneratedArtifacts(), permResult, makePermFilename(
-              compilerWorkDir, permId), precompilationOptions);
+      PermutationResult permResult =
+          compile(logger, compilerContext, subPerms[0], precompilation.getUnifiedAst());
+      Link.linkOnePermutationToJar(logger, compilerContext.getModule(),
+          precompilation.getGeneratedArtifacts(), permResult,
+          makePermFilename(compilerWorkDir, permId), compilerContext.getOptions());
     }
 
     logger.log(TreeLogger.INFO, "Compile of permutations succeeded");

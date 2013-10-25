@@ -43,13 +43,13 @@ import com.google.gwt.dev.util.OutputFileSet;
 import com.google.gwt.dev.util.OutputFileSetOnDirectory;
 import com.google.gwt.dev.util.OutputFileSetOnJar;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
+import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
-import com.google.gwt.dev.util.arg.OptionSaveSourceOutput;
 import com.google.gwt.dev.util.arg.OptionDeployDir;
 import com.google.gwt.dev.util.arg.OptionExtraDir;
+import com.google.gwt.dev.util.arg.OptionSaveSourceOutput;
 import com.google.gwt.dev.util.arg.OptionWarDir;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -648,8 +648,8 @@ public class Link {
          */
         Precompilation precomp = (Precompilation) precompileResults;
         Permutation[] perms = precomp.getPermutations();
-        List<FileBackedObject<PermutationResult>> resultFiles = CompilePerms.makeResultFiles(
-            compilerWorkDir, perms);
+        List<FileBackedObject<PermutationResult>> resultFiles =
+            CompilePerms.makeResultFiles(compilerWorkDir, perms);
 
         // Check that all files are present
         for (FileBackedObject<PermutationResult> file : resultFiles) {

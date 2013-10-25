@@ -42,8 +42,7 @@ public class StrictModeTest extends TestCase {
 
   private JJSOptions options = new CompilerOptionsImpl();
 
-  private CompilerContext compilerContext =
-      new CompilerContext.Builder().options(new PrecompileTaskOptionsImpl(options)).build();
+  private CompilerContext compilerContext = new CompilerContext();
 
   /**
    * A normal compile with a bad file should still succeed.
@@ -57,6 +56,7 @@ public class StrictModeTest extends TestCase {
    */
   public void testBadCompileStrict() {
     options.setStrict(true);
+    compilerContext.setOptions(new PrecompileTaskOptionsImpl(options));
     try {
       precompile(BAD);
       fail("Should have failed");
@@ -76,6 +76,7 @@ public class StrictModeTest extends TestCase {
    */
   public void testBadValidateStrict() {
     options.setStrict(true);
+    compilerContext.setOptions(new PrecompileTaskOptionsImpl(options));
     assertFalse(validate(BAD));
   }
 
@@ -91,6 +92,7 @@ public class StrictModeTest extends TestCase {
    */
   public void testGoodCompileStrict() throws UnableToCompleteException {
     options.setStrict(true);
+    compilerContext.setOptions(new PrecompileTaskOptionsImpl(options));
     precompile(GOOD);
   }
 
@@ -106,12 +108,14 @@ public class StrictModeTest extends TestCase {
    */
   public void testGoodValidateStrict() {
     options.setStrict(true);
+    compilerContext.setOptions(new PrecompileTaskOptionsImpl(options));
     assertTrue(validate(GOOD));
   }
 
   private void precompile(String moduleName) throws UnableToCompleteException {
     ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
-    if (Precompile.precompile(logger, options, module, null) == null) {
+    compilerContext.setModule(module);
+    if (Precompile.precompile(logger, compilerContext) == null) {
       throw new UnableToCompleteException();
     }
   }
@@ -120,10 +124,11 @@ public class StrictModeTest extends TestCase {
     ModuleDef module;
     try {
       module = ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
+      compilerContext.setModule(module);
     } catch (UnableToCompleteException e) {
       fail("Failed to load the module definition");
       return false;
     }
-    return Precompile.validate(logger, options, module, null);
+    return Precompile.validate(logger, compilerContext);
   }
 }

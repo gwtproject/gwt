@@ -38,9 +38,11 @@ public class TypeOracleMessageTest extends MessageInterfaceTestBase {
     JClassType classType;
     TreeLogger logger = new FailErrorLogger();
     try {
+      CompilerContext compilerContext = new CompilerContext();
       ModuleDef module = ModuleDefLoader.loadFromClassPath(logger,
-          Child.class.getPackage().getName() + ".Testing", new CompilerContext());
-      CompilationState compilationState = module.getCompilationState(logger);
+          Child.class.getPackage().getName() + ".Testing", compilerContext);
+      compilerContext.setModule(module);
+      CompilationState compilationState = module.getCompilationState(logger, compilerContext);
       TypeOracle typeOracle = compilationState.getTypeOracle();
       classType = typeOracle.findType(TEST_CLASS.getCanonicalName());
     } catch (UnableToCompleteException e) {

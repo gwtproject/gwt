@@ -237,12 +237,13 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   private static TypeOracle getTestTypeOracle() throws UnableToCompleteException {
     if (sTypeOracle == null) {
       TreeLogger logger = createLogger();
-      ModuleDef moduleDef =
-          ModuleDefLoader.createSyntheticModule(logger,
-              "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases.JUnit", new String[] {
-                  "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases",
-                  "com.google.gwt.junit.JUnit"}, new CompilerContext(), true);
-      sTypeOracle = moduleDef.getCompilationState(logger).getTypeOracle();
+      CompilerContext compilerContext = new CompilerContext();
+      ModuleDef moduleDef = ModuleDefLoader.createSyntheticModule(logger,
+          "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases.JUnit", new String[] {
+              "com.google.gwt.user.rebind.rpc.testcases.RebindRPCTestCases",
+              "com.google.gwt.junit.JUnit"}, compilerContext, true);
+      compilerContext.setModule(moduleDef);
+      sTypeOracle = moduleDef.getCompilationState(logger, compilerContext).getTypeOracle();
     }
     return sTypeOracle;
   }

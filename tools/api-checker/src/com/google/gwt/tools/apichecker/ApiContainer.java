@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JConstructor;
 import com.google.gwt.core.ext.typeinfo.JPackage;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.CompilationUnitBuilder;
@@ -204,7 +205,8 @@ public final class ApiContainer {
       CompilationUnitBuilder builder = CompilationUnitBuilder.create(resource);
       builders.add(builder);
     }
-    List<CompilationUnit> units = JdtCompiler.compile(logger, builders, sourceLevel);
+    List<CompilationUnit> units = JdtCompiler.compile(
+        logger, new CompilerContext(), builders, sourceLevel);
     boolean anyError = false;
     TreeLogger branch = logger.branch(TreeLogger.TRACE, "Checking for compile errors");
     for (CompilationUnit unit : units) {

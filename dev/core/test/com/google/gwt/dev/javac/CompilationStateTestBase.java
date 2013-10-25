@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,6 +17,7 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockResource;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
@@ -83,7 +84,7 @@ public abstract class CompilationStateTestBase extends TestCase {
         public String getTypeName() {
           return Shared.getTypeName(sourceFile);
         }
-        
+
         public String optionalFileLocation() {
           return sourceFile.getLocation();
         }
@@ -99,6 +100,8 @@ public abstract class CompilationStateTestBase extends TestCase {
     }
   }
 
+  protected CompilerContext compilerContext;
+
   /**
    * Ensure a clean cache at the beginning of every test run!
    */
@@ -110,6 +113,7 @@ public abstract class CompilationStateTestBase extends TestCase {
 
   protected CompilationStateTestBase() {
     oracle = new MockResourceOracle(JavaResourceBase.getStandardResources());
+    compilerContext = new CompilerContext();
     rebuildCompilationState();
   }
 
@@ -124,7 +128,8 @@ public abstract class CompilationStateTestBase extends TestCase {
 
   protected void rebuildCompilationState() {
     try {
-      state = isolatedBuilder.doBuildFrom(createTreeLogger(), oracle.getResources(), false,
+      state = isolatedBuilder.doBuildFrom(
+          createTreeLogger(), compilerContext, oracle.getResources(), false,
           SourceLevel.DEFAULT_SOURCE_LEVEL);
     } catch (UnableToCompleteException e) {
       throw new RuntimeException(e);

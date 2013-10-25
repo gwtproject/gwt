@@ -36,9 +36,11 @@ class ModuleContext {
     synchronized (typeOracleMap) {
       oracle = typeOracleMap.get(moduleName);
       if (oracle == null) {
+        CompilerContext compilerContext = new CompilerContext();
         ModuleDef moduleDef =
-            ModuleDefLoader.loadFromClassPath(logger, moduleName, new CompilerContext());
-        oracle = moduleDef.getCompilationState(logger).getTypeOracle();
+            ModuleDefLoader.loadFromClassPath(logger, moduleName, compilerContext);
+        compilerContext.setModule(moduleDef);
+        oracle = moduleDef.getCompilationState(logger, compilerContext).getTypeOracle();
         typeOracleMap.put(moduleName, oracle);
       }
     }

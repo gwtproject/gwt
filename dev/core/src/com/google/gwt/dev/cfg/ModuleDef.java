@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
@@ -91,7 +92,7 @@ public class ModuleDef {
    * of target module" times.
    */
   private enum AttributeSource {
-    TARGET_LIBRARY, EXTERNAL_LIBRARY
+    EXTERNAL_LIBRARY, TARGET_LIBRARY
   }
 
   private static final ResourceFilter NON_JAVA_RESOURCES = new ResourceFilter() {
@@ -479,17 +480,19 @@ public class ModuleDef {
     return name;
   }
 
-  public CompilationState getCompilationState(TreeLogger logger) throws UnableToCompleteException {
-    return getCompilationState(logger, false, SourceLevel.DEFAULT_SOURCE_LEVEL);
+  public CompilationState getCompilationState(TreeLogger logger, CompilerContext compilerContext)
+      throws UnableToCompleteException {
+    return getCompilationState(logger, compilerContext, !compilerContext.getOptions().isStrict(),
+        compilerContext.getOptions().getSourceLevel());
   }
 
   public synchronized CompilationState getCompilationState(TreeLogger logger,
-      boolean suppressErrors, SourceLevel sourceLevel)
+      CompilerContext compilerContext, boolean suppressErrors, SourceLevel sourceLevel)
       throws UnableToCompleteException {
     doRefresh();
-    CompilationState compilationState =
-        CompilationStateBuilder.buildFrom(logger, lazySourceOracle.getResources(), null,
-            suppressErrors, sourceLevel);
+    CompilationState compilationState = CompilationStateBuilder.buildFrom(
+        logger, compilerContext, lazySourceOracle.getResources(), null, suppressErrors,
+        sourceLevel);
     checkForSeedTypes(logger, compilationState);
     return compilationState;
   }

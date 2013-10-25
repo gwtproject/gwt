@@ -17,6 +17,7 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationStateBuilder.CompileMoreLater;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
@@ -87,8 +88,8 @@ public class CompilationState {
   private final CompilationUnitTypeOracleUpdater typeOracleUpdater =
       new CompilationUnitTypeOracleUpdater(typeOracle);
 
-  CompilationState(TreeLogger logger, Collection<CompilationUnit> units,
-      CompileMoreLater compileMoreLater) {
+  CompilationState(TreeLogger logger, CompilerContext compilerContext,
+      Collection<CompilationUnit> units, CompileMoreLater compileMoreLater) {
     this.compileMoreLater = compileMoreLater;
     assimilateUnits(logger, units);
   }

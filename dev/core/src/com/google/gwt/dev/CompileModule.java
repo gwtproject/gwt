@@ -230,6 +230,7 @@ public class CompileModule {
       Set<String> currentModuleArchivedUnits = new HashSet<String>();
       try {
         module = ModuleDefLoader.loadFromClassPath(logger, moduleToCompile, compilerContext);
+        compilerContext.setModule(module);
       } catch (Throwable e) {
         CompilationProblemReporter.logAndTranslateException(logger, e);
         return false;
@@ -294,8 +295,8 @@ public class CompileModule {
 
       CompilationState compilationState;
       try {
-        compilationState = module.getCompilationState(logger, !options.isStrict(),
-            options.getSourceLevel());
+        compilationState = module.getCompilationState(
+            logger, compilerContext, !options.isStrict(), options.getSourceLevel());
       } catch (Throwable e) {
         CompilationProblemReporter.logAndTranslateException(logger, e);
         return false;

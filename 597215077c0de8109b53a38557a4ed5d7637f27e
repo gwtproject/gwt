@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_aee1f7ba",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-26T00:09:48Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_8ee6bbce",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-26T00:09:48Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_eeebff94",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-26T00:09:48Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_cef0c382",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-26T00:09:48Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

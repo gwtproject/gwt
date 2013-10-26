@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_9db8e3bb",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_fa0805f7",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ea7bc23_2bcdf953",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_c088b479",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "i agree but i\u0027ve already renamed some of this in the prototype branch. will honor your suggestion when those changes come under review.",
+      "parentUuid": "fe62ccbe_bab92ddf",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_5a9c9163",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 1
@@ -106,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_eb8039f9",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "ack.\n\nadded refactor TODO",
+      "parentUuid": "bec694d7_283ce3a0",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_7a72354e",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 1
@@ -117,6 +171,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "compilerWorkDir seems to be available from the context.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_80787c7c",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "it\u0027s calculated here from the moduleName and so varies on each loop iteration.\n\nit can\u0027t be calculated later further into the call tree",
+      "parentUuid": "fe62ccbe_7a72354e",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -140,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_c0da7465",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "same as previous",
+      "parentUuid": "fe62ccbe_ba94cd32",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_5aae517b",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePermsServer.java",
         "patchSetId": 1
@@ -151,6 +241,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "s/p/permutation/",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_00e54c21",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePermsServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_5aae517b",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -174,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_20ca5095",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "so far in the prototype the answer is no, but that may change later.",
+      "parentUuid": "fe62ccbe_fab725c6",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bec694d7_c8854f07",
         "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
         "patchSetId": 1
@@ -191,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_4b78452d",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec694d7_c8854f07",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bec694d7_4872ff4d",
         "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
         "patchSetId": 1
@@ -202,6 +346,24 @@
       "writtenOn": "2013-10-25T21:41:59Z",
       "side": 1,
       "message": "It\u0027s not hooked up yet but I think this needs a bit of explanation. What do \"new\" and \"old\" mean in this context?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_abb801bb",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec694d7_4872ff4d",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -236,6 +398,24 @@
       "writtenOn": "2013-10-25T21:41:59Z",
       "side": 1,
       "message": "Do you think all of these setters will be needed? If not, maybe we could remove the ones that aren\u0027t used and make those fields final. You can always add them back on first usage.\n\nAlso consider that top-level code could hang onto a Builder and create the CompilerContext when they call something that needs one, to avoid needing a setter.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_8e8b5b1b",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "that\u0027s a good idea.\n\ndone",
+      "parentUuid": "bec694d7_25424e6e",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -294,6 +474,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_40b0241e",
+        "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "this is existing code and \"rpo\" is used in lots of places in the compiler.\n\ni agree it should be renamed but i\u0027d prefer to make this change in a separate cleanup patch",
+      "parentUuid": "fe62ccbe_7af6b571",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_da3d0141",
         "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
         "patchSetId": 1
@@ -305,6 +503,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_60ad28c5",
+        "filename": "dev/core/src/com/google/gwt/dev/Precompile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "same as previous",
+      "parentUuid": "fe62ccbe_da3d0141",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -328,6 +544,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_2065f0b8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_9a1c69e3",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_fa1ba5e5",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
         "patchSetId": 1
@@ -339,6 +573,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_4062e4b1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_fa1ba5e5",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -362,6 +614,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_c0fef494",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_5a0f3182",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_fab80571",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 1
@@ -373,6 +643,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_e003f8d9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_fab80571",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -396,6 +684,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_20eed0e4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/GeneratorContextBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_fad1e5a0",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_fa8ac5ac",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 1
@@ -407,6 +713,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "is JJSOptions still in precompile()?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_e01cd831",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_fa8ac5ac",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -464,6 +788,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_2017b00c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationStateTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_1a7939c2",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_5a73b1e1",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
         "patchSetId": 1
@@ -475,6 +817,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "another one.",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_4014a405",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_5a73b1e1",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -498,6 +858,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_6011a814",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_ba520d3d",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_da57c12b",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
         "patchSetId": 1
@@ -515,6 +893,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_a0cbc06b",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_da57c12b",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_7a49558c",
         "filename": "user/test/com/google/gwt/place/rebind/PlaceHistoryGeneratorContextTest.java",
         "patchSetId": 1
@@ -526,6 +922,24 @@
       "writtenOn": "2013-10-25T18:47:12Z",
       "side": 1,
       "message": "rtn? What do they mean by it?",
+      "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_20e090e0",
+        "filename": "user/test/com/google/gwt/place/rebind/PlaceHistoryGeneratorContextTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-26T00:09:06Z",
+      "side": 1,
+      "message": "i can\u0027t think of any way that abbreviation makes sense. renamed to something better",
+      "parentUuid": "fe62ccbe_7a49558c",
       "revId": "684880a6e15f242af5ab1b76eccc86c80c22aa3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

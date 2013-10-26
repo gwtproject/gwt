@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_2617c80c",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-26T01:12:47Z",
+      "side": 1,
+      "message": "As Brian notes bellow,  the above code (from the precompilation result) belong the the true branch bellow when the PrecompilationResult is a PrecompileTaskOptions, and some similar code should probably lie in the else branch, i.e. when the object read is a Precompilation. \n\nThis seems to be how we support -XdisableGeneretingOnShard; seems that when not generating on shards the precompilation result is serialized and when we are just the options are.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bec694d7_08600737",
         "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
         "patchSetId": 2
@@ -81,6 +98,40 @@
       "writtenOn": "2013-10-26T00:09:48Z",
       "side": 1,
       "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_66eaa0c0",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-26T01:12:47Z",
+      "side": 1,
+      "message": "Build the compiler context with the options that have the source level set to getSourceLevel(). \n\nThis is used so that the test can specify to run under a specific source level.",
+      "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_46c67c59",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-26T01:12:47Z",
+      "side": 1,
+      "message": "Here the compile context should have an options object with the source level as indicated by the sourceLevel member. \n\nThis is done (I think) to allow the test case to specify source level.",
       "revId": "597215077c0de8109b53a38557a4ed5d7637f27e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -19,6 +19,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.arg.SourceLevel;
@@ -49,7 +50,7 @@ public abstract class JdtCompilerTestBase extends TestCase {
 
   protected List<CompilationUnit> compile(Collection<CompilationUnitBuilder> builders)
       throws UnableToCompleteException {
-    return  JdtCompiler.compile(TreeLogger.NULL, builders, getSourceLevel());
+    return JdtCompiler.compile(TreeLogger.NULL, new CompilerContext(), builders);
   }
 
   /**

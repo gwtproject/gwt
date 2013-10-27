@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ec09cbf_c6854407",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-27T14:36:10Z",
+      "side": 1,
+      "message": "I believe Checkstyle will choke on those trailing whitespace; be prepared to fix them.",
+      "revId": "7fee4083de4fe8dda51d502c908f36f8dc1d6be9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,6 +33,24 @@
       "revId": "e4ba485f466927bbc354e1efacfc22ddc0f8dc34",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_6e0f0f83",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6225
+      },
+      "writtenOn": "2013-10-27T02:23:18Z",
+      "side": 1,
+      "message": "Are you talking about the iterator specifically or the EnumSet in general?\n\nFor the iterator, I wrote benchmarks that did the following 100 times: instantiated a sparse EnumSet (with 2 values) and a full EnumSet (using EnumSet.allOf) and iterated over the values.\n\nI found that for the original implementation, instantiating and iterating over the EnumSet 100 times took on average 17.979871 seconds (over 1000 runs) whereas this implementation took on average 17.970745 seconds. For the sparse EnumSet, the original implementation took 0.087013 seconds on average while the new implementation took 0.085325 seconds.\n\nSo it seems the new implementation is marginally faster for both full and sparse sets. (Note there were 33 total enum values).\n\nNote that the main performance improvements of this implementation should be in the bulk operations (e.g. containsAll/addAll). I haven\u0027t written benchmarks for those functions but I can say that I tried replacing EnumSet with this implementation in another application and found (using Chrome\u0027s profiler) that this implementation appeared to offer substantial performance gains for those bulk operations.",
+      "parentUuid": "7ea7bc23_8b218d1a",
+      "revId": "e4ba485f466927bbc354e1efacfc22ddc0f8dc34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

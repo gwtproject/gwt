@@ -589,7 +589,6 @@ public class DataGrid<T> extends AbstractCellTable<T> implements RequiresResize 
     // Inject the stylesheet.
     this.style = resources.dataGridStyle();
     this.style.ensureInjected();
-    setStyleName(resources.dataGridStyle().dataGridWidget());
 
     // Create the header and footer widgets..
     tableHeader = new TableWidget();

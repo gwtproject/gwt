@@ -16,6 +16,74 @@
       "revId": "ab2aaa3e2dd5f06a02dd81c5432f3850468f7cc2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de5d08d4_e62c9e78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JModVisitorWithTemporaryVariableCreation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-28T17:19:08Z",
+      "side": 1,
+      "message": "A JModVisitor capable of creating temporary local variables and placing their declarations in the appropriate preceding place.",
+      "revId": "ab2aaa3e2dd5f06a02dd81c5432f3850468f7cc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de5d08d4_86312acf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JModVisitorWithTemporaryVariableCreation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-28T17:19:08Z",
+      "side": 1,
+      "message": "\"of where\"",
+      "revId": "ab2aaa3e2dd5f06a02dd81c5432f3850468f7cc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de5d08d4_06ad3ac5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JModVisitorWithTemporaryVariableCreationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-28T17:19:08Z",
+      "side": 1,
+      "message": "2013",
+      "revId": "ab2aaa3e2dd5f06a02dd81c5432f3850468f7cc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_ccdc6bd3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JModVisitorWithTemporaryVariableCreationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-10-28T17:19:08Z",
+      "side": 1,
+      "message": "i\u0027ve got my editor set to remove extra whitespace at the end of lines. if we both do this then it\u0027ll cut down on some unnecessary diffs",
+      "revId": "ab2aaa3e2dd5f06a02dd81c5432f3850468f7cc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

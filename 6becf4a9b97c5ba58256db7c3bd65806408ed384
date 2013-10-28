@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ec09cbf_4649548c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-28T13:08:52Z",
+      "side": 1,
+      "message": "Please revert to the first commit message, and add \"in JsArrayMixed#getString\"",
+      "revId": "6becf4a9b97c5ba58256db7c3bd65806408ed384",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

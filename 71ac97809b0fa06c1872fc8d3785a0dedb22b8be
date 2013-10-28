@@ -16,6 +16,40 @@
       "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_76116914",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-28T21:29:01Z",
+      "side": 1,
+      "message": "Would it make sense to delete this line and the next three, and just use $@ or $* below?  Then theoretically you wouldn\u0027t need \"\" \"\" in lib-gwt.sh?",
+      "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_8bbd11ab",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-10-28T21:29:01Z",
+      "side": 1,
+      "message": "Should -Dgpg.passphrase go before $javadoc and $sources?",
+      "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

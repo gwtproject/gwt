@@ -97,11 +97,9 @@ public class LoadingStrategyBase implements LoadingStrategy {
     private int maxRetryCount;
     private String originalUrl;
     private int retryCount;
-    private String url;
     
     public RequestData(String url, LoadTerminatedHandler errorHandler,
         int fragment, DownloadStrategy downloadStrategy, int maxRetryCount) {
-      this.url = url;
       this.originalUrl = url;
       this.errorHandler = errorHandler;
       this.maxRetryCount = maxRetryCount;
@@ -109,32 +107,48 @@ public class LoadingStrategyBase implements LoadingStrategy {
       this.fragment = fragment;
       this.downloadStrategy = downloadStrategy;
     }
-    
+
     public LoadTerminatedHandler getErrorHandler() { return errorHandler; }
-    
+
     public int getFragment() { return fragment; }
-    
+
     public int getRetryCount() { return retryCount; }
-    
-    public String getUrl() { return url; }
-    
+
+    public void setRetryCount(int retryCount) {
+      this.retryCount = retryCount;
+    }
+
+    public DownloadStrategy getDownloadStrategy() { return downloadStrategy; }
+
+    public String getUrl() {
+      if (retryCount > 0) {
+        char connector = originalUrl.contains("?") ? '&' : '?';
+        String url = originalUrl + connector + "autoRetry=" + retryCount;
+        return url;
+      } else {
+        return originalUrl;
+      }
+    }
+
+    public String getOriginalUrl() { return originalUrl; }
+
+    public int getMaxRetryCount() { return maxRetryCount; }
+
     public void onLoadError(Throwable e, boolean mayRetry) {
       if (mayRetry) {
         retryCount++;
         if (retryCount <= maxRetryCount) {
-          char connector = originalUrl.contains("?") ? '&' : '?';
-          url = originalUrl + connector + "autoRetry=" + retryCount;
           downloadStrategy.tryDownload(this);
           return;
         }
       }
-      errorHandler.loadTerminated(e); 
+      errorHandler.loadTerminated(e);
     }
-    
+
     public void tryDownload() {
       downloadStrategy.tryDownload(this);
     }
-    
+
     public void tryInstall(String code) {
       try {
         gwtInstallCode(code);
@@ -143,11 +157,11 @@ public class LoadingStrategyBase implements LoadingStrategy {
         if (textIntro != null && textIntro.length() > MAX_LOG_LENGTH) {
           textIntro = textIntro.substring(0, MAX_LOG_LENGTH) + "...";
         }
-        onLoadError(new HttpInstallFailure(url, textIntro, e), false);
+        onLoadError(new HttpInstallFailure(getUrl(), textIntro, e), false);
       }
     }
   }
-  
+
   /**
    * The number of times that we will retry a download. Note that if the install
    * fails, we do not retry, since there's no reason to expect a different result.
@@ -180,6 +194,14 @@ public class LoadingStrategyBase implements LoadingStrategy {
   
   private DownloadStrategy downloadStrategy;
   private final FragmentReloadTracker manualRetryNumbers = FragmentReloadTracker.create();
+
+  public DownloadStrategy getDownloadStrategy() {
+    return downloadStrategy;
+  }
+
+  public FragmentReloadTracker getManualRetryNumbers() {
+    return manualRetryNumbers;
+  }
 
   /**
    * Subclasses should create a DownloadStrategy and pass it into this constructor.

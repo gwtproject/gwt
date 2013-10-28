@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ec09cbf_0612bcaa",
+        "filename": "user/src/com/google/gwt/core/client/JsArrayMixed.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-10-28T10:53:51Z",
+      "side": 1,
+      "message": "WOuldn\u0027t this be better:\n\n return this[index] \u003d\u003d null ? null : String(this[index]);\n\nI wonder if we shouldn\u0027t extract this[index] into a local variable too:\n\n var s \u003d this[index];\n return s \u003d\u003d null ? null : String(s);",
+      "revId": "d57939d3e7cb1e7ef4b4744f33fc33b6e04c4519",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,7 +33,7 @@ import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
 import com.google.gwt.core.ext.soyc.Range;
 import com.google.gwt.core.ext.soyc.SourceMapRecorder;
-import com.google.gwt.core.ext.soyc.impl.DependencyRecorder;
+import com.google.gwt.core.ext.soyc.coderef.DependencyGraphRecorder;
 import com.google.gwt.core.ext.soyc.impl.SizeMapRecorder;
 import com.google.gwt.core.ext.soyc.impl.SplitPointRecorder;
 import com.google.gwt.core.ext.soyc.impl.StoryRecorder;
@@ -399,6 +399,10 @@ public class JavaToJavaScriptCompiler {
       // (10) Split up the program into fragments
       SyntheticArtifact dependencies = null;
 
+      boolean isSourceMapsEnabled = findBooleanProperty(propertyOracles, logger,
+          "compiler.useSourceMaps", "true", true, false, false);
+
+      MultipleDependencyGraphRecorder depRecorder = null;
       if (options.isRunAsyncEnabled()) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -418,21 +422,25 @@ public class JavaToJavaScriptCompiler {
         int minFragmentSize = findIntegerConfigurationProperty(propertyOracles, logger,
             CodeSplitters.MIN_FRAGMENT_SIZE, 0);
 
+        depRecorder = chooseDependencyRecorder(options.isSoycEnabled() || isSourceMapsEnabled
+            ,jprogram, baos);
         CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, expectedFragmentCount,
-            minFragmentSize, chooseDependencyRecorder(options.isSoycEnabled(), baos));
+            minFragmentSize, depRecorder);
 
         if (baos.size() == 0 && options.isSoycEnabled()) {
-          recordNonSplitDependencies(jprogram, baos);
+          depRecorder = recordNonSplitDependencies(jprogram, baos);
         }
         if (baos.size() > 0) {
           dependencies =
               new SyntheticArtifact(SoycReportLinker.class, "dependencies" + permutationId
                   + ".xml.gz", baos.toByteArray());
         }
+      }else{
+        if (depRecorder == null || isSourceMapsEnabled) {
+          depRecorder = recordNonSplitDependencies(jprogram, new ByteArrayOutputStream());
+        }
       }
 
-      boolean isSourceMapsEnabled = findBooleanProperty(propertyOracles, logger,
-          "compiler.useSourceMaps", "true", true, false, false);
       // (10.5) Obfuscate
       Map<JsName, String> obfuscateMap = Maps.create();
       switch (options.getOutput()) {
@@ -473,7 +481,7 @@ public class JavaToJavaScriptCompiler {
       String[] js = new String[jsProgram.getFragmentCount()];
       StatementRanges[] ranges = new StatementRanges[js.length];
       SizeBreakdown[] sizeBreakdowns =
-          options.isSoycEnabled() || options.isCompilerMetricsEnabled()
+          isSourceMapsEnabled || options.isSoycEnabled() || options.isCompilerMetricsEnabled()
               ? new SizeBreakdown[js.length] : null;
       List<Map<Range, SourceInfo>> sourceInfoMaps = new ArrayList<Map<Range, SourceInfo>>();
       generateJavaScriptCode(compilerContext, jprogram, jsProgram, jjsmap, js, ranges,
@@ -521,8 +529,9 @@ public class JavaToJavaScriptCompiler {
               + "compiler.useSourceMaps=true; ignoring compiler.useSourceMaps=true.");
         } else {
           logger.log(TreeLogger.INFO, "Source Maps Enabled");
-          toReturn.addArtifacts(SourceMapRecorder.makeSourceMapArtifacts(sourceInfoMaps,
-              permutationId));
+          toReturn.addArtifacts(SourceMapRecorder.makeSourceMapArtifacts(permutationId,
+              sourceInfoMaps, jjsmap, sizeBreakdowns,
+              ((DependencyGraphRecorder)depRecorder), jprogram));
         }
       }
 
@@ -668,6 +677,7 @@ public class JavaToJavaScriptCompiler {
       // Free up memory.
       rpo.clear();
 
+      //TODO: (ocallau) Sourcemaps needs SourceInfoCorrelation
       if (options.isSoycEnabled()) {
         SourceInfoCorrelator.exec(jprogram);
       }
@@ -941,10 +951,10 @@ public class JavaToJavaScriptCompiler {
   }
 
   private static MultipleDependencyGraphRecorder chooseDependencyRecorder(boolean soycEnabled,
-      OutputStream out) {
+      JProgram jprogram, OutputStream out) {
     MultipleDependencyGraphRecorder dependencyRecorder = MultipleDependencyGraphRecorder.NULL_RECORDER;
     if (soycEnabled) {
-      dependencyRecorder = new DependencyRecorder(out);
+      dependencyRecorder = new DependencyGraphRecorder(out, jprogram);
     }
     return dependencyRecorder;
   }
@@ -1403,8 +1413,9 @@ public class JavaToJavaScriptCompiler {
    * then this method can be used instead to record a single dependency graph
    * for the whole program.
    */
-  private static void recordNonSplitDependencies(JProgram program, OutputStream out) {
-    DependencyRecorder deps = new DependencyRecorder(out);
+  private static DependencyGraphRecorder recordNonSplitDependencies(
+      JProgram program, OutputStream out) {
+    DependencyGraphRecorder deps = new DependencyGraphRecorder(out, program);
     deps.open();
     deps.startDependencyGraph("initial", null);
 
@@ -1413,5 +1424,6 @@ public class JavaToJavaScriptCompiler {
     cfa.traverseEntryMethods();
     deps.endDependencyGraph();
     deps.close();
+    return deps;
   }
 }

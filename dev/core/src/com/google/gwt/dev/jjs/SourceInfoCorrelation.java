@@ -115,6 +115,50 @@ public class SourceInfoCorrelation implements SourceInfo {
     return origin;
   }
 
+  /**
+   * Usually (always?) there is only one primary correlation. It is the link to the original kind
+   * of node. Getting this value will provide a way to name each source info (node) in the source
+   * map.
+   *
+   * @return the original correlation added when created
+   */
+  public Correlation getPrimaryCorrelation() {
+    if (primaryCorrelations == null) {
+      if (parent != null) {
+        return this.parent.getPrimaryCorrelation();
+      } else {
+        return null;
+      }
+    }
+    if (primaryCorrelations[Axis.LITERAL.ordinal()] != null) {
+      if (primaryCorrelations[Axis.LITERAL.ordinal()].getIdent().equals("class") &&
+          parent != null) {
+        return this.parent.getPrimaryCorrelation();
+      }
+    }
+    int[] order = new int[]{
+        Axis.FIELD.ordinal(),
+        Axis.METHOD.ordinal(),
+        Axis.CLASS.ordinal()};
+    for (int idx : order) {
+      if (primaryCorrelations[idx] != null) {
+        return primaryCorrelations[idx];
+      }
+    }
+    /*for (int i = 0; i < NUM_AXES; i++) {
+      if (primaryCorrelations[i] != null) {
+        if (primaryCorrelations[i].getAxis() == Axis.LITERAL) {
+          if (primaryCorrelations[i].getIdent().contains("class") && parent != null) {
+            return this.parent.getPrimaryCorrelation();
+          }
+        } else {
+          return primaryCorrelations[i];
+        }
+      }
+    }*/
+    return null;
+  }
+
   public int getStartLine() {
     return getOrigin().getStartLine();
   }

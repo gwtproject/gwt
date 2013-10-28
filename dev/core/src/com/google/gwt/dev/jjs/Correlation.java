@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.js.ast.JsName;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -64,7 +65,12 @@ public final class Correlation implements Serializable {
     /**
      * A Java method.
      */
-    METHOD;
+    METHOD,
+
+    /**
+     * A jsName associated
+     */
+    JSNAME;
   }
 
   /**
@@ -153,6 +159,13 @@ public final class Correlation implements Serializable {
     } else {
       return null;
     }
+  }
+
+  public JsName getJsName() {
+    if (axis == Axis.JSNAME) {
+      return (JsName) astReference;
+    }
+    return null;
   }
 
   /**

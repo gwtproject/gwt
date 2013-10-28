@@ -115,6 +115,26 @@ public class SourceInfoCorrelation implements SourceInfo {
     return origin;
   }
 
+  /**
+   * Usually (always?) there is only one primary correlation. It is the link to the original kind
+   * of node. Getting this value will provide a way to name each source info (node) in the source
+   * map.
+   *
+   * @return the original correlation added when created
+   */
+  public Correlation getPrimaryCorrelation() {
+    if (primaryCorrelations == null) {
+      return null;
+    }
+
+    for (int i = 0; i < NUM_AXES; i++) {
+      if (primaryCorrelations[i] != null) {
+        return primaryCorrelations[i];
+      }
+    }
+    return null;
+  }
+
   public int getStartLine() {
     return getOrigin().getStartLine();
   }

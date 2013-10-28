@@ -16,8 +16,10 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.core.ext.soyc.Range;
+import com.google.gwt.dev.jjs.CorrelationFactory.RealCorrelationFactory;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.SourceInfoCorrelation;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsVisitable;
@@ -61,6 +63,15 @@ public class JsReportGenerationVisitor extends
         beforeLine, beforeColumn, out.getLine(), out.getColumn());
 
     SourceInfo target = ((HasSourceInfo) node).getSourceInfo();
+    if (nameToBillTo != null) {
+      if (target instanceof SourceInfoCorrelation) {
+        if (((SourceInfoCorrelation) target).getPrimaryCorrelation() == null) {
+          target.addCorrelation(RealCorrelationFactory.INSTANCE.by(nameToBillTo));
+        }
+      } else {
+        target.addCorrelation(RealCorrelationFactory.INSTANCE.by(nameToBillTo));
+      }
+    }
     sourceInfoMap.put(javaScriptRange, target);
 
     return toReturn;

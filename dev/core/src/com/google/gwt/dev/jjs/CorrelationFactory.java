@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 
 import java.io.Serializable;
@@ -53,6 +54,11 @@ public abstract class CorrelationFactory implements Serializable {
 
     @Override
     public Correlation by(JMethod method) {
+      return null;
+    }
+
+    @Override
+    public Correlation by(JsName jsName) {
       return null;
     }
 
@@ -95,7 +101,7 @@ public abstract class CorrelationFactory implements Serializable {
       }
     }
 
-    private static String getMethodIdent(JMethod method) {
+    public static String getMethodIdent(JMethod method) {
       StringBuilder sb = new StringBuilder();
       sb.append(method.getEnclosingType().getName()).append("::");
       sb.append(method.getName()).append("(");
@@ -149,6 +155,11 @@ public abstract class CorrelationFactory implements Serializable {
     }
 
     @Override
+    public Correlation by(JsName jsName) {
+       return new Correlation(Axis.JSNAME, jsName.getIdent(), jsName);
+    }
+
+    @Override
     public Correlation by(Literal type) {
       assert LITERAL_CORRELATIONS.containsKey(type);
       return LITERAL_CORRELATIONS.get(type);
@@ -165,6 +176,8 @@ public abstract class CorrelationFactory implements Serializable {
   public abstract Correlation by(JField field);
 
   public abstract Correlation by(JMethod method);
+
+  public abstract Correlation by(JsName jsName);
 
   public abstract Correlation by(Literal type);
 

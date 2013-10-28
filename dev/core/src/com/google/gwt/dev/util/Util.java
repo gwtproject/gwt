@@ -430,6 +430,18 @@ public final class Util {
   }
 
   /**
+   * @param qualifiedName A fully-qualified class name whose name you want.
+   * @return The package name for the specified class.
+   */
+  public static String getPackageName(String qualifiedName) {
+    int idx = qualifiedName.lastIndexOf('.');
+    if (idx > 0) {
+      return qualifiedName.substring(0, idx);
+    }
+    return "";
+  }
+
+  /**
    * Gets the contents of a file.
    *
    * @param relativePath relative path within the install directory

@@ -275,7 +275,7 @@ public class JsoDevirtualizer {
     }
 
     JClassType jsoType = program.getJavaScriptObject();
-    SourceInfo sourceInfo = jsoType.getSourceInfo().makeChild(SourceOrigin.UNKNOWN);
+    SourceInfo sourceInfo = method.getSourceInfo().makeChild();
 
     // Create the new method.
     String prefix;

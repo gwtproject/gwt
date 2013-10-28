@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "bec694d7_cbb709c7",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-10-28T23:01:52Z",
+      "side": 1,
+      "message": "Sure, my bash-fu is exceedingly weak, so I stuck with repeating the pattern I already saw. The single case of \"\" \"\" is because only one artifact gets deployed without sources or javadocs, because it is just a text file - no other artifact will be deployed like that.",
+      "parentUuid": "fe62ccbe_76116914",
+      "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bec694d7_8bbd11ab",
         "filename": "maven/lib-maven-deploy.sh",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-28T21:29:01Z",
       "side": 1,
       "message": "Should -Dgpg.passphrase go before $javadoc and $sources?",
+      "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_2bcdfd53",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-10-28T23:01:52Z",
+      "side": 1,
+      "message": "These all end up as system properties, key/value pairs, so order doesn\u0027t matter. I think my motivation here was to leave the last line alone (like I failed to do in the deploy:deploy-file below.",
+      "parentUuid": "bec694d7_8bbd11ab",
       "revId": "71ac97809b0fa06c1872fc8d3785a0dedb22b8be",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

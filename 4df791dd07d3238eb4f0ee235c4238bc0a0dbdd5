@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_76fec9e1",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_235095db",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_43b3c92b",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-28T19:31:56Z",
       "side": 1,
       "message": "It seems like it isn\u0027t strictly necessary to expose each variable when they don\u0027t change.  Instead, the subclass can save a reference in its constructor:\n\nMyRequestData(... LoadTerminatedHandler errorHandler ...) {\n  super(... errorHandler ...);\n  this.errorHandler \u003d errorHandler; \n}\n\nSo perhaps we only need to fix getUrl()? I\u0027d like to avoid making the interface between superclass and subclasses too complicated.",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_96fb5def",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "This method is being called by LoggingXhrLoadingStrategy.java",
+      "parentUuid": "fe62ccbe_43b3c92b",
       "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_b6086141",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_436589b7",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_63628db2",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 4
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_d60dd54f",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_63628db2",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_e3fe9d94",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2013-10-28T19:34:58Z",
       "side": 1,
       "message": "This function seems duplicated in line 194.",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_16410d4a",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "One is for LoadingStratgyBase class and other is for static class RequestData.",
+      "parentUuid": "fe62ccbe_e3fe9d94",
       "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "fe62ccbe_035f114d",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "I think the code is getting complicated unnecessarily. How about I stick to original code and have url variable instead of generating it on the fly from originalUrl.",
+      "parentUuid": "bec694d7_2be05de0",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe62ccbe_c3f999af",
         "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
         "patchSetId": 4
@@ -150,6 +258,24 @@
       "writtenOn": "2013-10-28T19:34:58Z",
       "side": 1,
       "message": "Nit: remove trailing space.",
+      "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_362611c6",
+        "filename": "user/src/com/google/gwt/core/client/impl/LoadingStrategyBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 6215
+      },
+      "writtenOn": "2013-10-28T21:06:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_c3f999af",
       "revId": "4df791dd07d3238eb4f0ee235c4238bc0a0dbdd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

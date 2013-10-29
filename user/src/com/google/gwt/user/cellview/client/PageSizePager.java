@@ -15,8 +15,11 @@
  */
 package com.google.gwt.user.cellview.client;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.Messages;
+import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -29,6 +32,17 @@ import com.google.gwt.view.client.Range;
 public class PageSizePager extends AbstractPager {
 
   /**
+   * Constants for labeling the pager. Provides just English messages by default.
+   */
+  @DefaultLocale("en_US")
+  public interface PageSizePagerMessages extends Messages {
+    @DefaultMessage("Show more")
+    String showMore();
+    @DefaultMessage("Show Less")
+    String showLess();
+  }
+
+  /**
    * The increment by which to grow or shrink the page size.
    */
   private final int increment;
@@ -38,23 +52,38 @@ public class PageSizePager extends AbstractPager {
    */
   private final FlexTable layout = new FlexTable();
 
-  // TODO(jlabanca): I18N button text.
-  private final Anchor showMoreButton = new Anchor("Show More");
-  private final Anchor showLessButton = new Anchor("Show Less");
+  private Anchor showMoreButton;
+  private Anchor showLessButton;
+
+  /**
+   * Construct a PageSizePager with a given increment. Uses default translations that means
+   * that messages will be always in English.
+   * 
+   * @param increment the amount by which to increase the page size
+   */
+  @UiConstructor
+  public PageSizePager(int increment) {
+    this(increment, GWT.<PageSizePagerMessages>create(PageSizePagerMessages.class));
+  }
 
   /**
    * Construct a PageSizePager with a given increment.
    * 
    * @param increment the amount by which to increase the page size
+   * @param messages translation messages. Users should inherit an empty interface from
+   *                 {@link PageSizePagerMessages} and add annotations needed for their specific
+   *                 translation systems. Then create the new interface with GWT.create and pass
+   *                 as this argument.
    */
   @UiConstructor
-  public PageSizePager(final int increment) {
+  public PageSizePager(final int increment, PageSizePagerMessages messages) {
     this.increment = increment;
     initWidget(layout);
     layout.setCellPadding(0);
     layout.setCellSpacing(0);
 
     // Show more button.
+    showMoreButton = new Anchor(messages.showMore());
     showMoreButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         // Display should be non-null, but we check defensively.
@@ -68,6 +97,8 @@ public class PageSizePager extends AbstractPager {
         }
       }
     });
+
+    showLessButton = new Anchor(messages.showLess());
     showLessButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         // Display should be non-null, but we check defensively.

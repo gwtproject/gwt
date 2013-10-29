@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_1a78412c",
+        "filename": "user/src/com/google/gwt/user/cellview/client/PageSizePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-10-29T21:23:32Z",
+      "side": 1,
+      "message": "We should include a properties file with appropriate translations for as many of the supported languages as we can.",
+      "revId": "88d30206781c6d4ce61f3c7616ff7928cd47fd5f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea7bc23_7a750534",
+        "filename": "user/src/com/google/gwt/user/cellview/client/PageSizePager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-10-29T21:23:32Z",
+      "side": 1,
+      "message": "That isn\u0027t actually true, as you can supply your own properties file on the classpath.  However, I think we should include support for most locales out of the box.",
+      "revId": "88d30206781c6d4ce61f3c7616ff7928cd47fd5f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

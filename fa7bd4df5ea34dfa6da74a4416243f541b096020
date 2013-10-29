@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ec09cbf_cc1ba3e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-29T14:28:58Z",
+      "side": 1,
+      "message": "Please add more description. Something like:\n\nFallback is removed because we don\u0027t want the old workarounds intended for legacy IE versions to be not used for IE10.",
+      "revId": "fa7bd4df5ea34dfa6da74a4416243f541b096020",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -358,8 +358,8 @@ public final class JsRootScope extends JsScope {
   }
 
   @Override
-  public Iterator<JsName> getAllNames() {
-    return Collections.unmodifiableCollection(names.values()).iterator();
+  public Iterable<JsName> getAllNames() {
+    return Collections.unmodifiableCollection(names.values());
   }
 
   @Override

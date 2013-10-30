@@ -121,6 +121,24 @@
       "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de8ee8b0_f28d9086",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-30T20:05:31Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not sure if the curly suppose to go to next line.",
+      "parentUuid": "bec694d7_b99dc767",
+      "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

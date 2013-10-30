@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "bec694d7_79c34f48",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-30T20:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ec09cbf_b2d2fea5",
+      "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de8ee8b0_324ff86d",
         "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "bec694d7_59c0133a",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-30T20:02:56Z",
+      "side": 1,
+      "message": "No, sorry, I originally copy/pasted LinkedHashMap_CustomFieldSerializer and missed updating/removing that last part of the javadoc. Done.",
+      "parentUuid": "de8ee8b0_324ff86d",
+      "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec09cbf_92d70296",
         "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2013-10-30T19:56:31Z",
       "side": 1,
       "message": "nit: 4 spaces",
+      "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_b99dc767",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-30T20:02:56Z",
+      "side": 1,
+      "message": "Done (the formatter condensed the declaration to 1 line now).",
+      "parentUuid": "7ec09cbf_92d70296",
       "revId": "fc16068fe2655be61b9f31f8b36685150bfced27",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

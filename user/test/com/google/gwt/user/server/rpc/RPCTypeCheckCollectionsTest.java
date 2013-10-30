@@ -124,7 +124,7 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
    * 
    * Also necessary because LinkedHashSet is not serializable alone.
    */
-  public static class TestHashSet<T> extends LinkedHashSet<T> implements IsSerializable {
+  public static class TestHashSet<T> extends TestLinkedHashSet<T> implements IsSerializable {
     // Does nothing different.
   }
 
@@ -458,7 +458,7 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
       treeSet.add(67890);
       strFactory.write(treeSet);
 
-      LinkedHashSet linkedHashSet = RPCTypeCheckFactory.generateTestLinkedHashSet();
+      TestLinkedHashSet linkedHashSet = RPCTypeCheckFactory.generateTestLinkedHashSet();
       strFactory.write(linkedHashSet);
 
       return strFactory.toString();

@@ -203,7 +203,7 @@ public class RPCTypeCheckArraysTest extends TestCase {
           new RPCTypeCheckFactory(ArraysParamTestClass.class, methodName);
       
       LinkedList[] arg1 = new LinkedList[1];
-      LinkedList<LinkedHashSet> list = new LinkedList<LinkedHashSet>();
+      LinkedList<TestLinkedHashSet> list = new LinkedList<TestLinkedHashSet>();
       list.add(RPCTypeCheckFactory.generateTestLinkedHashSet());
       arg1[0] = list;
       strFactory.write(arg1);

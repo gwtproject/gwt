@@ -17,6 +17,8 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.text.shared.testing.PassthroughRenderer;
@@ -27,6 +29,28 @@ import java.text.ParseException;
  * Testing ValueBoxBase.
  */
 public class ValueBoxBaseTest extends GWTTestCase {
+  
+  /**
+   * Helper to check if the event is fired.
+   * @param <T>
+   */
+  protected class EventCounter<T> implements ValueChangeHandler<T> {
+    protected int counter = 0;
+
+    public int getCounter() {
+      return counter;
+    }
+
+    @Override
+    public void onValueChange(ValueChangeEvent<T> event) {
+      counter++;      
+    }    
+  }
+  
+  @Override
+  public String getModuleName() {
+    return "com.google.gwt.user.User";
+  }
   
   // Test that parser exceptions are correctly thrown with an empty string
   public void testParserExceptionWithEmptyString() {
@@ -91,9 +115,68 @@ public class ValueBoxBaseTest extends GWTTestCase {
       fail("Parser was not run");
     }
   }
+  
+  // Test that ValueChangeEvent is fired when a new value is set with fire events flag true
+  public void testValueChangeEventFired() {
+    Element elm = Document.get().createTextInputElement();
+    Renderer<String> renderer = PassthroughRenderer.instance();
+    MockParser parser = new MockParser();
+    
+    ValueBoxBase<String> valueBoxBase = 
+      new ValueBoxBase<String>(elm, renderer, parser) {
+    };
+    valueBoxBase.setText("myvalue");
+    
+    EventCounter<String> handler = new EventCounter<String>();
+    
+    valueBoxBase.addValueChangeHandler(handler);
+    
+    valueBoxBase.setValue("aNewValue", true);
+    
+    assertEquals(1, handler.getCounter());
+  }
+  
+  // Test that ValueChangeEvent is not fired when a new value is set with fire events flag false
+  public void testValueChangeEventNotFired() {
+    Element elm = Document.get().createTextInputElement();
+    Renderer<String> renderer = PassthroughRenderer.instance();
+    MockParser parser = new MockParser();
+    
+    ValueBoxBase<String> valueBoxBase = 
+      new ValueBoxBase<String>(elm, renderer, parser) {
+    };
+    valueBoxBase.setText("myvalue");
+    
+    valueBoxBase.addValueChangeHandler(new ValueChangeHandler<String>() {
+      
+      @Override
+      public void onValueChange(ValueChangeEvent<String> event) {
+        fail("Event should not have been fired");
+      }
+    });
+  
+    valueBoxBase.setValue("aNewValue", false);
+  }
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.user.User";
+  // Test that ValueChangeEvent is not fired when an empty value is set 
+  public void testValueChangeEventWithEmptyString() {
+    Element elm = Document.get().createTextInputElement();
+    Renderer<String> renderer = PassthroughRenderer.instance();
+    MockParser parser = new MockParser();
+    
+    ValueBoxBase<String> valueBoxBase = 
+      new ValueBoxBase<String>(elm, renderer, parser) {
+    };
+    valueBoxBase.setText("");
+    
+    valueBoxBase.addValueChangeHandler(new ValueChangeHandler<String>() {
+      
+      @Override
+      public void onValueChange(ValueChangeEvent<String> event) {
+        fail("Event should not have been fired");
+      }
+    });
+  
+    valueBoxBase.setValue("", true);
   }
 }

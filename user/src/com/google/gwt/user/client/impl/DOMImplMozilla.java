@@ -22,14 +22,13 @@ import com.google.gwt.user.client.Element;
  */
 class DOMImplMozilla extends DOMImplStandard {
 
-  @Override
-  public void disposeEvents(Element elem) {
-    super.disposeEvents(elem);
-    disposeEventsMozilla(elem);
+  static {
+    addMozillaCaptureEventDispatchers();
   }
 
-  public native void disposeEventsMozilla(Element elem) /*-{
-    elem.removeEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+  private static native void addMozillaCaptureEventDispatchers() /*-{
+    @com.google.gwt.user.client.impl.DOMImplStandard::captureEventDispatchers['DOMMouseScroll'] =
+      @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*);
   }-*/;
 
   @Override
@@ -72,8 +71,5 @@ class DOMImplMozilla extends DOMImplStandard {
       }),
       true
     );
-
-    $wnd.addEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent,
-      true);
   }-*/;
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea7bc23_65228ac8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-10-30T17:47:49Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027typeName\u0027.",
+      "revId": "08c8506a58afa60539ab6050551bc037dd518f64",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

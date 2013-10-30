@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ec09cbf_f23d9640",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-30T17:23:27Z",
+      "side": 0,
+      "message": "According to MDN, the assumption here is incorrect:\n\nhttps://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener#Multiple_identical_event_listeners",
+      "revId": "5ea07df990c032f0f73b21cfc18207648521560f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

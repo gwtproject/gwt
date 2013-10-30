@@ -16,6 +16,23 @@
       "revId": "444b7a7109737ed161d85d51b39f3aa69e2ff56a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_b2331e77",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-30T17:23:27Z",
+      "side": 1,
+      "message": "Although this patch doesn\u0027t depend on https://gwt-review.googlesource.com/#/c/5221/, please keep in mind the logic here is kept conforming to that change..",
+      "revId": "444b7a7109737ed161d85d51b39f3aa69e2ff56a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

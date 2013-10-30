@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe62ccbe_9228c0a8",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-10-30T16:47:12Z",
+      "side": 1,
+      "message": "Nit: line wrap.",
+      "revId": "67bda6c64facf0e74fcfa52280693b1eaae73152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

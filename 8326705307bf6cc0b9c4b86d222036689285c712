@@ -16,6 +16,24 @@
       "revId": "8326705307bf6cc0b9c4b86d222036689285c712",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec694d7_992c4b78",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Name.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-10-30T18:18:14Z",
+      "side": 0,
+      "message": "True, they are public, but the \"dev.util\" package seems like people should know not to use it, IMO.\n\nI know this came up recently on another review, about public classes in the gwt.dev packages, and I forget if there was a decision made or not.\n\nI know historically the answer would have been \"yes, they\u0027re public so they are public\", but I believe we\u0027re being a bit more aggressive now.",
+      "parentUuid": "c7ad346a_49e8a533",
+      "revId": "8326705307bf6cc0b9c4b86d222036689285c712",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

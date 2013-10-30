@@ -338,6 +338,10 @@ public class GenerateCssAst {
         r.getSelectors().add(new CssSelector(valueOf(selectors.item(i))));
       }
     }
+    
+    void parseCharset(String atRule) {
+      //@charset "utf8"; ignore it
+    }
 
     void parseDef(String atRule) {
       String value = atRule.substring(4, atRule.length()).trim();

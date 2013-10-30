@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de8ee8b0_12083c3c",
+        "filename": "distro-source/core/src/about.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-10-30T18:50:21Z",
+      "side": 1,
+      "message": "(Git revision @GWT_GITREV@)",
+      "revId": "e1fb429a7eeb17052ce7c36b1402a598aebd32a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

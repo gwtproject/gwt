@@ -28,6 +28,10 @@ import com.google.gwt.dev.jjs.test.overrides.package3.SomePackageConfusedParent;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Tests Miscelaneous fixes.
  */
@@ -70,6 +74,66 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
 
   private void throwE(String message) {
     throw new RuntimeException(message);
+  }
+
+  private static final int ELEMENTS = 1000000;
+
+  /**
+   * Test for issue 8243.
+   */
+  public void testAddAllLargeNumberOfElements() {
+
+    List<String> original = new ArrayList<String>();
+    for (int i = 0; i < ELEMENTS; i++) {
+      original.add("foo");
+    }
+    List<String> toAdd = new ArrayList<String>();
+    for (int i = 0; i < ELEMENTS; i++) {
+      toAdd.add("bar");
+    }
+
+    original.addAll(toAdd);
+    assertEquals(ELEMENTS + ELEMENTS, original.size());
+
+    for (int i = 0; i < 2 * ELEMENTS; i += 1000) {
+      if (i < ELEMENTS) {
+        assertEquals("foo", original.get(i));
+      } else {
+        assertEquals("bar", original.get(i));
+      }
+    }
+  }
+
+  public void testSortArrayLargeNumberOfElement_int() {
+    int[] numbers = new int[ELEMENTS];
+
+    for (int i = 0; i < ELEMENTS; i++) {
+      numbers[i] = ELEMENTS - i;
+    }
+
+    Arrays.sort(numbers, 0, numbers.length);
+
+    assertEquals(ELEMENTS, numbers.length);
+
+    for (int i = 0; i < ELEMENTS; i += 1000) {
+     assertEquals(i + 1, numbers[i]);
+    }
+  }
+
+  public void testSortArrayLargeNumberOfElement_long() {
+    long[] numbers = new long[ELEMENTS];
+
+    for (int i = 0; i < ELEMENTS; i++) {
+      numbers[i] = ELEMENTS - i;
+    }
+
+    Arrays.sort(numbers, 0, numbers.length);
+
+    assertEquals(ELEMENTS, numbers.length);
+
+    for (int i = 0; i < ELEMENTS; i += 1000) {
+      assertEquals(i + 1, numbers[i]);
+    }
   }
 
   /**

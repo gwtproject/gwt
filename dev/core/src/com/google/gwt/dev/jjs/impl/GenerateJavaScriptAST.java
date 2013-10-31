@@ -19,144 +19,17 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.linker.CastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
-import com.google.gwt.dev.jjs.HasSourceInfo;
-import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.jjs.JsOutputOption;
-import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.HasEnclosingType;
+import com.google.gwt.dev.jjs.*;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.jjs.ast.HasName;
-import com.google.gwt.dev.jjs.ast.JAbsentArrayDimension;
-import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
-import com.google.gwt.dev.jjs.ast.JArrayLength;
-import com.google.gwt.dev.jjs.ast.JArrayRef;
-import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JAssertStatement;
-import com.google.gwt.dev.jjs.ast.JBinaryOperation;
-import com.google.gwt.dev.jjs.ast.JBinaryOperator;
-import com.google.gwt.dev.jjs.ast.JBlock;
-import com.google.gwt.dev.jjs.ast.JBreakStatement;
-import com.google.gwt.dev.jjs.ast.JCaseStatement;
-import com.google.gwt.dev.jjs.ast.JCastOperation;
-import com.google.gwt.dev.jjs.ast.JClassLiteral;
-import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JConditional;
-import com.google.gwt.dev.jjs.ast.JConstructor;
-import com.google.gwt.dev.jjs.ast.JContinueStatement;
-import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JDoStatement;
-import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JExpressionStatement;
-import com.google.gwt.dev.jjs.ast.JField;
-import com.google.gwt.dev.jjs.ast.JFieldRef;
-import com.google.gwt.dev.jjs.ast.JForStatement;
-import com.google.gwt.dev.jjs.ast.JGwtCreate;
-import com.google.gwt.dev.jjs.ast.JIfStatement;
-import com.google.gwt.dev.jjs.ast.JInstanceOf;
-import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JLabel;
-import com.google.gwt.dev.jjs.ast.JLabeledStatement;
-import com.google.gwt.dev.jjs.ast.JLocal;
-import com.google.gwt.dev.jjs.ast.JLocalRef;
-import com.google.gwt.dev.jjs.ast.JLongLiteral;
-import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JNameOf;
-import com.google.gwt.dev.jjs.ast.JNewArray;
-import com.google.gwt.dev.jjs.ast.JNewInstance;
-import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JNumericEntry;
-import com.google.gwt.dev.jjs.ast.JParameter;
-import com.google.gwt.dev.jjs.ast.JParameterRef;
-import com.google.gwt.dev.jjs.ast.JPostfixOperation;
-import com.google.gwt.dev.jjs.ast.JPrefixOperation;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
-import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JSeedIdOf;
-import com.google.gwt.dev.jjs.ast.JStatement;
-import com.google.gwt.dev.jjs.ast.JSwitchStatement;
-import com.google.gwt.dev.jjs.ast.JThisRef;
-import com.google.gwt.dev.jjs.ast.JThrowStatement;
-import com.google.gwt.dev.jjs.ast.JTryStatement;
-import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.jjs.ast.JTypeOracle;
-import com.google.gwt.dev.jjs.ast.JUnaryOperator;
-import com.google.gwt.dev.jjs.ast.JVariable;
-import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.dev.jjs.ast.JWhileStatement;
-import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
-import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap;
+import com.google.gwt.dev.jjs.ast.js.*;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
-import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
-import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
-import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
-import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.jjs.ast.js.JsonObject;
 import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
 import com.google.gwt.dev.js.JsInliner;
 import com.google.gwt.dev.js.JsParser;
 import com.google.gwt.dev.js.JsStackEmulator;
-import com.google.gwt.dev.js.ast.JsArrayAccess;
-import com.google.gwt.dev.js.ast.JsArrayLiteral;
-import com.google.gwt.dev.js.ast.JsBinaryOperation;
-import com.google.gwt.dev.js.ast.JsBinaryOperator;
-import com.google.gwt.dev.js.ast.JsBlock;
-import com.google.gwt.dev.js.ast.JsBreak;
-import com.google.gwt.dev.js.ast.JsCase;
-import com.google.gwt.dev.js.ast.JsCatch;
-import com.google.gwt.dev.js.ast.JsConditional;
-import com.google.gwt.dev.js.ast.JsContext;
-import com.google.gwt.dev.js.ast.JsContinue;
-import com.google.gwt.dev.js.ast.JsDebugger;
-import com.google.gwt.dev.js.ast.JsDefault;
-import com.google.gwt.dev.js.ast.JsDoWhile;
-import com.google.gwt.dev.js.ast.JsEmpty;
-import com.google.gwt.dev.js.ast.JsExprStmt;
-import com.google.gwt.dev.js.ast.JsExpression;
-import com.google.gwt.dev.js.ast.JsFor;
-import com.google.gwt.dev.js.ast.JsFunction;
-import com.google.gwt.dev.js.ast.JsIf;
-import com.google.gwt.dev.js.ast.JsInvocation;
-import com.google.gwt.dev.js.ast.JsLabel;
-import com.google.gwt.dev.js.ast.JsModVisitor;
-import com.google.gwt.dev.js.ast.JsName;
-import com.google.gwt.dev.js.ast.JsNameOf;
-import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.js.ast.JsNew;
-import com.google.gwt.dev.js.ast.JsNode;
-import com.google.gwt.dev.js.ast.JsNormalScope;
-import com.google.gwt.dev.js.ast.JsNullLiteral;
-import com.google.gwt.dev.js.ast.JsNumberLiteral;
-import com.google.gwt.dev.js.ast.JsNumericEntry;
-import com.google.gwt.dev.js.ast.JsObjectLiteral;
-import com.google.gwt.dev.js.ast.JsParameter;
-import com.google.gwt.dev.js.ast.JsPostfixOperation;
-import com.google.gwt.dev.js.ast.JsPrefixOperation;
-import com.google.gwt.dev.js.ast.JsProgram;
-import com.google.gwt.dev.js.ast.JsPropertyInitializer;
-import com.google.gwt.dev.js.ast.JsReturn;
-import com.google.gwt.dev.js.ast.JsRootScope;
-import com.google.gwt.dev.js.ast.JsScope;
-import com.google.gwt.dev.js.ast.JsSeedIdOf;
-import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.js.ast.JsSwitch;
-import com.google.gwt.dev.js.ast.JsSwitchMember;
-import com.google.gwt.dev.js.ast.JsThisRef;
-import com.google.gwt.dev.js.ast.JsThrow;
-import com.google.gwt.dev.js.ast.JsTry;
-import com.google.gwt.dev.js.ast.JsUnaryOperation;
-import com.google.gwt.dev.js.ast.JsUnaryOperator;
-import com.google.gwt.dev.js.ast.JsVars;
+import com.google.gwt.dev.js.ast.*;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
-import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
@@ -182,9 +55,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
@@ -2240,28 +2110,6 @@ public class GenerateJavaScriptAST {
         JsStatement tmpAsgStmt = defineSeed.makeStmt();
         globalStmts.add(tmpAsgStmt);
         typeForStatMap.put(tmpAsgStmt, x);
-      } else {
-        /*
-         * MAGIC: java.lang.String is implemented as a JavaScript String
-         * primitive with a modified prototype.
-         */
-        JsNameRef rhs = prototype.makeRef(sourceInfo);
-        rhs.setQualifier(JsRootScope.INSTANCE.findExistingUnobfuscatableName("String").makeRef(
-            sourceInfo));
-        JsExpression tmpAsg = createAssignment(globalTemp.makeRef(sourceInfo), rhs);
-        JsExprStmt tmpAsgStmt = tmpAsg.makeStmt();
-        globalStmts.add(tmpAsgStmt);
-        typeForStatMap.put(tmpAsgStmt, x);
-        JField castableTypeMapField = program.getIndexedField("Object.castableTypeMap");
-        JsName castableTypeMapName = names.get(castableTypeMapField);
-        JsNameRef ctmRef = castableTypeMapName.makeRef(sourceInfo);
-        ctmRef.setQualifier(globalTemp.makeRef(sourceInfo));
-        JsExpression castMapLit = generateCastableTypeMap(x);
-        JsExpression ctmAsg = createAssignment(ctmRef,
-            castMapLit);
-        JsExprStmt ctmAsgStmt = ctmAsg.makeStmt();
-        globalStmts.add(ctmAsgStmt);
-        typeForStatMap.put(ctmAsgStmt, x);
       }
     }
 
@@ -2311,6 +2159,9 @@ public class GenerateJavaScriptAST {
 
     private void generateVTables(JClassType x, List<JsStatement> globalStmts) {
       boolean isString = (x == program.getTypeJavaLangString());
+      if (isString) {
+        return; // We do not patch String.prototype anymore
+      }
       for (JMethod method : x.getMethods()) {
         SourceInfo sourceInfo = method.getSourceInfo();
         if (method.needsVtable() && !method.isAbstract()) {
@@ -2318,16 +2169,11 @@ public class GenerateJavaScriptAST {
           lhs.setQualifier(globalTemp.makeRef(sourceInfo));
 
           JsExpression rhs;
-          if (isString && "toString".equals(method.getName()))  {
-            // special-case String.toString: alias to the native JS toString()
-            rhs = createNativeToStringRef(globalTemp.makeRef(sourceInfo));
-          } else {
-            /*
-             * Inline JsFunction rather than reference, e.g. _.vtableName =
-             * function functionName() { ... }
-             */
-            rhs = methodBodyMap.get(method.getBody());
-          }
+          /*
+           * Inline JsFunction rather than reference, e.g. _.vtableName =
+           * function functionName() { ... }
+           */
+          rhs = methodBodyMap.get(method.getBody());
           JsExpression asg = createAssignment(lhs, rhs);
           JsExprStmt asgStat = new JsExprStmt(x.getSourceInfo(), asg);
           globalStmts.add(asgStat);

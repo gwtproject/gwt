@@ -26,7 +26,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 final class Cast {
 
   static native boolean canCast(Object src, int dstId) /*-{
-    return src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId];
+    return src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId]
+        // Note, String is always queryid = 1
+        || dstId == 1 && typeof(src.valueOf()) == 'string';
   }-*/;
 
   // Not functional yet. Works under the assumption that queryId is seedId. This will become true
@@ -43,7 +45,9 @@ final class Cast {
    * context.
    */
   static native boolean canCastUnsafe(Object src, int dstId) /*-{
-    return src.@java.lang.Object::castableTypeMap && src.@java.lang.Object::castableTypeMap[dstId];
+    return src.@java.lang.Object::castableTypeMap && src.@java.lang.Object::castableTypeMap[dstId]
+        // Note, String is always queryid = 1
+        || dstId == 1 && typeof(src.valueOf()) == 'string';
   }-*/;
 
   static native String charToString(char x) /*-{
@@ -225,7 +229,7 @@ final class Cast {
    * Since java Strings are translated as JavaScript strings, Strings need to be
    * interchangeable between GWT modules, unlike other Java Objects.
    */
-  private static boolean isJavaString(Object src) {
+  static boolean isJavaString(Object src) {
     return canCast(src, 1);
   }
 
@@ -238,9 +242,26 @@ final class Cast {
    * GWT module.  Java Objects from external GWT modules are not recognizable as
    * Java Objects in this context.
    */
-  private static boolean isNonStringJavaObject(Object src) {
+  static boolean isNonStringJavaObject(Object src) {
     return Util.getTypeMarker(src) == getNullMethod();
   }
+
+  /**
+   * Returns whether the Object is a Java Object but not a String.
+   *
+   * Depends on all Java Objects (except for String) having the typeMarker field
+   * generated, and set to the nullMethod for the current GWT module.  Note this
+   * test essentially tests whether an Object is a java object for the current
+   * GWT module.  Java Objects from external GWT modules are not recognizable as
+   * Java Objects in this context.
+   */
+  static boolean isNonStringJavaObjectNotArray(Object src) {
+    return Util.getTypeMarker(src) == getNullMethod() && !instanceofArray(src);
+  }
+
+  static native boolean instanceofArray(Object src) /*-{
+    return src instanceof Array;
+  }-*/;
 }
 
 // CHECKSTYLE_NAMING_ON

@@ -152,7 +152,7 @@ public final class Class<T> implements Type {
     clazz.@java.lang.Class::seedId = seedId;
     // String is the exception to the usual vtable setup logic
     if (seedId == 2) {
-      proto = String.prototype
+      // do nothing, we no longer patch the String prototype
     } else {
       if (seedId > 0) {
         // Guarantees virtual method won't be pruned by using a JSNI ref
@@ -172,8 +172,8 @@ public final class Class<T> implements Type {
       } else {
         return;
       }
+      proto.@java.lang.Object::___clazz = clazz;
     }
-    proto.@java.lang.Object::___clazz = clazz;
   }-*/;
 
   /**

@@ -23,58 +23,11 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public final class Array {
 
-  private static final class ExpandoWrapper {
-    /**
-     * A JS array containing the names of any expandos we need to add to arrays
-     * (such as "hashCode", "equals", "toString").
-     */
-    private static final Object expandoNames = makeEmptyJsArray();
-
-    /**
-     * A JS array containing the values of any expandos we need to add to arrays
-     * (such as hashCode(), equals(), toString()).
-     */
-    private static final Object expandoValues = makeEmptyJsArray();
-
-    static {
-      initExpandos(new Array(), expandoNames, expandoValues);
-    }
-
-    public static void wrapArray(Array array) {
-      wrapArray(array, expandoNames, expandoValues);
-    }
-
-    private static native void initExpandos(Array protoType,
-        Object expandoNames, Object expandoValues) /*-{
-      var i = 0, value;
-      for ( var name in protoType) {
-        // Only copy non-null values over; this generally means only functions
-        // will get copied over, and not fields, which is good because we will
-        // setup the fields manually and it's best if length doesn't get blown
-        // away.
-        if (value = protoType[name]) {
-          expandoNames[i] = name;
-          expandoValues[i] = value;
-          ++i;
-        }
-      }
-    }-*/;
-
-    private static native Object makeEmptyJsArray() /*-{
-      return [];
-    }-*/;
-
-    private static native void wrapArray(Array array, Object expandoNames,
-        Object expandoValues) /*-{
-      for ( var i = 0, c = expandoNames.length; i < c; ++i) {
-        array[expandoNames[i]] = expandoValues[i];
-      }
-    }-*/;
-  }
-
   /*
    * TODO: static init instead of lazy init when we can elide the clinit calls.
    */
+
+  static Object typeMarkerObject = new Object();
 
   static final int FALSE_SEED_TYPE = 2;
 
@@ -172,9 +125,9 @@ public final class Array {
    */
   public static Array initValues(Class<?> arrayClass,
       JavaScriptObject castableTypeMap, int queryId, Array array) {
-    ExpandoWrapper.wrapArray(array);
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);
+    Util.setTypeMarker(array, Util.getTypeMarker(typeMarkerObject));
     array.queryId = queryId;
     return array;
   }

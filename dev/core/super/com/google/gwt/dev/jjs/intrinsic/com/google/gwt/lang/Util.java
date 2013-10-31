@@ -30,7 +30,11 @@ final class Util {
   static native JavaScriptObject getTypeMarker(Object o) /*-{
     return o.@java.lang.Object::typeMarker;
   }-*/;
- 
+
+  static native void setTypeMarker(Object o, JavaScriptObject object) /*-{
+      return o.@java.lang.Object::typeMarker = object;
+  }-*/;
+
   static native void setCastableTypeMap(Object o, JavaScriptObject castableTypeMap) /*-{
     o.@java.lang.Object::castableTypeMap = castableTypeMap;
   }-*/;

@@ -605,7 +605,7 @@ public class ClosureJsAstTranslator {
   private Node transform(JsNumericEntry x) {
     return IR.number(x.getValue());
   }
-  
+
   private Node transform(JsNumberLiteral x) {
     return IR.number(x.getValue());
   }
@@ -620,13 +620,13 @@ public class ClosureJsAstTranslator {
         key = transformNumberAsString((JsNumberLiteral) propInit.getLabelExpr());
         key.putBooleanProp(Node.QUOTED_PROP, true);
       } else if (propInit.getLabelExpr().getKind() == NodeKind.NAME_REF) {
-        key =
-            transformNameAsString(((JsNameRef) propInit.getLabelExpr()).getShortIdent(), propInit
-                .getLabelExpr());
+        key = transformNameAsString(((JsNameRef) propInit.getLabelExpr()).getShortIdent(),
+            propInit.getLabelExpr());
       } else {
         key = transform(propInit.getLabelExpr());
       }
       Preconditions.checkState(key.isString(), key);
+      key.setType(Token.STRING_KEY);
       n.addChildToBack(IR.propdef(key, transform(propInit.getValueExpr())));
     }
     return applySourceInfo(n, x);

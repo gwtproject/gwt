@@ -34,6 +34,24 @@
       "revId": "bfba4ed6b142767c2b3a52ba6b9dcc020d5a2594",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_55cd2d04",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsAstTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-10-31T04:00:58Z",
+      "side": 1,
+      "message": "got it",
+      "parentUuid": "fe62ccbe_959ee5fc",
+      "revId": "bfba4ed6b142767c2b3a52ba6b9dcc020d5a2594",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

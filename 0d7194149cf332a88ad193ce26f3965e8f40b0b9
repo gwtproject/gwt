@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "de8ee8b0_d2941434",
+        "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 6240
+      },
+      "writtenOn": "2013-10-31T12:19:41Z",
+      "side": 1,
+      "message": "setText don\u0027t fire value change events, I think you mean setValue.\n\nsetValue with no flag call setValue with flag set to false.",
+      "parentUuid": "7ec09cbf_3db37f2d",
+      "revId": "0d7194149cf332a88ad193ce26f3965e8f40b0b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec09cbf_7dadf7c4",
         "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
         "patchSetId": 1

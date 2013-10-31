@@ -605,7 +605,7 @@ public class ClosureJsAstTranslator {
   private Node transform(JsNumericEntry x) {
     return IR.number(x.getValue());
   }
-  
+
   private Node transform(JsNumberLiteral x) {
     return IR.number(x.getValue());
   }
@@ -620,13 +620,17 @@ public class ClosureJsAstTranslator {
         key = transformNumberAsString((JsNumberLiteral) propInit.getLabelExpr());
         key.putBooleanProp(Node.QUOTED_PROP, true);
       } else if (propInit.getLabelExpr().getKind() == NodeKind.NAME_REF) {
-        key =
-            transformNameAsString(((JsNameRef) propInit.getLabelExpr()).getShortIdent(), propInit
-                .getLabelExpr());
+        key = transformNameAsString(((JsNameRef) propInit.getLabelExpr()).getShortIdent(),
+            propInit.getLabelExpr());
       } else {
         key = transform(propInit.getLabelExpr());
       }
       Preconditions.checkState(key.isString(), key);
+      key.setType(Token.STRING_KEY);
+      // Set as quoted as the rhino version we use does not distinguish one from the other.  Closure
+      // assumes unquoted property names are obfuscatable.
+      // TODO(rluble): Make sure this is handled correctly once rhino is upgraded.
+      key.putBooleanProp(Node.QUOTED_PROP, true);
       n.addChildToBack(IR.propdef(key, transform(propInit.getValueExpr())));
     }
     return applySourceInfo(n, x);

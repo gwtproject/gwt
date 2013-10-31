@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe62ccbe_d59cdd65",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsAstTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2013-10-31T02:05:28Z",
+      "side": 1,
+      "message": "Why does this appear to assert the precondition prior to setting the value? Presumably key.isString() returns whether the type is Token.STRING_KEY?",
+      "revId": "bfba4ed6b142767c2b3a52ba6b9dcc020d5a2594",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

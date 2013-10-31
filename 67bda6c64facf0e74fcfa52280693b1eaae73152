@@ -16,6 +16,24 @@
       "revId": "67bda6c64facf0e74fcfa52280693b1eaae73152",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_bd276f94",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-10-31T09:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe62ccbe_9228c0a8",
+      "revId": "67bda6c64facf0e74fcfa52280693b1eaae73152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

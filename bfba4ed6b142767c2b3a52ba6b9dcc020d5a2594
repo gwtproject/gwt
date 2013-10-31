@@ -16,6 +16,24 @@
       "revId": "bfba4ed6b142767c2b3a52ba6b9dcc020d5a2594",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe62ccbe_959ee5fc",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsAstTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-10-31T03:54:25Z",
+      "side": 1,
+      "message": "Basically closure r1649 did not distinguish between strings and stringkeys, but the current version does. Stringkeys, if I understand correctly, are the property identifiers in an object literal. It seems to me that these StringKeys are exactly like strings but with different token type.\n\nSo basically the previous construction would guarantee that those identifiers where of type string, and therefore this patch  turns them into stringkey types after the check. Maybe a better way would be to have transformNameAsStringKey and transformNumberAsStringKey and construct those nodes properly.",
+      "parentUuid": "fe62ccbe_d59cdd65",
+      "revId": "bfba4ed6b142767c2b3a52ba6b9dcc020d5a2594",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

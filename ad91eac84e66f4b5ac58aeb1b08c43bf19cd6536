@@ -16,6 +16,24 @@
       "revId": "ad91eac84e66f4b5ac58aeb1b08c43bf19cd6536",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_f803b5d9",
+        "filename": "user/src/com/google/gwt/xml/XML.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-10-31T15:18:00Z",
+      "side": 1,
+      "message": "we removed the fallback for IE10, so this works fine now",
+      "parentUuid": "fea72cbd_6f22116c",
+      "revId": "ad91eac84e66f4b5ac58aeb1b08c43bf19cd6536",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

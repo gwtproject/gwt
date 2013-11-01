@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e15fd2d_39322f27",
+        "filename": "user/src/com/google/gwt/user/client/rpc/StatusCodeException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T15:18:00Z",
+      "side": 1,
+      "message": "For backward compatibility, please keep the old constructor and add a new one for the new parameter.",
+      "revId": "4fb71c56f863c8e35e614d1bad4bbb74270670ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

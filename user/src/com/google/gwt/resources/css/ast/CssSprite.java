@@ -214,11 +214,14 @@ public class CssSprite extends CssRule implements CssSubstitution {
       List<Value> values = listValue.getValues();
       if (values.size() == 1) {
         setImageProperty(values.get(0));
+      } else {
+        throw new IllegalArgumentException("The " + IMAGE_PROPERTY_NAME
+            + " property of @sprite must have exactly one value");
       }
 
     } else {
       throw new IllegalArgumentException("The " + IMAGE_PROPERTY_NAME
-          + " property of @sprite must have exactly one value");
+          + " property of @sprite should be specified as an image resource name between quotes");
     }
   }
 }

@@ -16,6 +16,24 @@
       "revId": "9176fc75bcf220ddd4ec7bcf2b7c9e45dfa831c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_19d52bd1",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplMozilla.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T11:25:26Z",
+      "side": 1,
+      "message": "Thanks for pointing. This code will be replaced in the next patch.",
+      "parentUuid": "1e2c007a_ee075b2c",
+      "revId": "9176fc75bcf220ddd4ec7bcf2b7c9e45dfa831c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

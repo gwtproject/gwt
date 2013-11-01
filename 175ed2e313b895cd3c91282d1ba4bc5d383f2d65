@@ -33,6 +33,24 @@
       "revId": "175ed2e313b895cd3c91282d1ba4bc5d383f2d65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_d7aea695",
+        "filename": "user/src/com/google/gwt/i18n/rebind/CustomDateTimeFormatGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-01T21:16:32Z",
+      "side": 1,
+      "message": "i haven\u0027t thought of a better way.\n\ni considered automatically detecting them each time with the DynamicPropertyOracle, but you need to know this list *before* generators are run. you could do something to cache the list between runs but it\u0027s probably not a good idea to introduce another stateful dependency with a different lifecycle.\n\ni can think of a way to change the Generator system so that implementations will only work if they always declare their full and accurate relevant property names list, but it would be a backward incompatible change.",
+      "parentUuid": "9e3551d4_923c5c47",
+      "revId": "175ed2e313b895cd3c91282d1ba4bc5d383f2d65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

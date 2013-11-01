@@ -37,6 +37,57 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_f7ac8a96",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-01T22:02:41Z",
+      "side": 1,
+      "message": "How about:\n\n  Set\u003cString\u003e getAccessedProperties()?\n\nTo enforce this, GeneratorContext.getPropertyOracle() could return an oracle that throws an exception if the caller asks for a property that wasn\u0027t declared here. (If this method returns null then there are no restrictions.)",
+      "revId": "175ed2e313b895cd3c91282d1ba4bc5d383f2d65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_978fce1f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-01T22:02:41Z",
+      "side": 1,
+      "message": "Suggested rename:\n\n boolean contentDependsOnProperties()\n\nCan\u0027t think of a cheap check.",
+      "revId": "175ed2e313b895cd3c91282d1ba4bc5d383f2d65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_d7b226d9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-01T22:02:41Z",
+      "side": 1,
+      "message": "Another possibility would be to have:\n\n  boolean accessesSubtypes()\n\nIf false, then we disable the JClassType.getSubtypes() method. It seems like that would be cheaper to enforce.",
+      "revId": "175ed2e313b895cd3c91282d1ba4bc5d383f2d65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e3551d4_923c5c47",
         "filename": "user/src/com/google/gwt/i18n/rebind/CustomDateTimeFormatGenerator.java",
         "patchSetId": 1

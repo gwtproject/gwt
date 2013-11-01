@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee71194_852d44b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-01T20:01:12Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "3a02a054011205351dca8fed6d772db2ec6aa994",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_65324011",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsProtectedNames.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-01T20:01:12Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Collection.",
+      "revId": "3a02a054011205351dca8fed6d772db2ec6aa994",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

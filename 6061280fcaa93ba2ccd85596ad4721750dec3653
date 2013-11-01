@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e15fd2d_3900ef16",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T06:40:04Z",
+      "side": 1,
+      "message": "nit: don\u0027t need explicit return as fail throws exception. Actually I would not even bother with try catch and let it fail with class case exception. (same below and in other test)",
+      "revId": "6061280fcaa93ba2ccd85596ad4721750dec3653",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_19052b27",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedHashSetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T06:40:04Z",
+      "side": 1,
+      "message": "2013",
+      "revId": "6061280fcaa93ba2ccd85596ad4721750dec3653",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_f9195795",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedHashSetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T06:40:04Z",
+      "side": 1,
+      "message": "nit: move constructor after static\u0027s",
+      "revId": "6061280fcaa93ba2ccd85596ad4721750dec3653",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

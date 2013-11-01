@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e15fd2d_1caf59ae",
+        "filename": "user/src/com/google/gwt/resources/css/ast/CssSprite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 6240
+      },
+      "writtenOn": "2013-11-01T20:57:48Z",
+      "side": 1,
+      "message": "Anyone as a better exception message?",
+      "revId": "10ba0b5b4310e5bf02f6d9a30d938c4b3571d5f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

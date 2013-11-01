@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.ImageBundle.Resource;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
@@ -32,6 +33,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Generates an implementation of a user-defined interface <code>T</code> that
@@ -107,6 +109,8 @@ public class ImageBundleGenerator extends Generator {
 
   private static final String IMAGEBUNDLE_QNAME = "com.google.gwt.user.client.ui.ImageBundle";
 
+  private static Set<String> relevantPropertyNames = ImmutableSet.of();
+
   /* private */static String msgCannotFindImageFromMetaData(String imgResName) {
     return "Unable to find image resource '" + imgResName + "'";
   }
@@ -149,6 +153,21 @@ public class ImageBundleGenerator extends Generator {
 
     // Return the complete name of the generated class.
     return resultName;
+  }
+
+  @Override
+  public Set<String> getRelevantPropertyNames() {
+    return relevantPropertyNames;
+  }
+
+  @Override
+  public boolean isUnstableOnPropertyValues() {
+    return false;
+  }
+
+  @Override
+  public boolean isUnstableOnTypes() {
+    return false;
   }
 
   /**

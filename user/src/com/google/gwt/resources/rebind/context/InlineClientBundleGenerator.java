@@ -18,6 +18,9 @@ package com.google.gwt.resources.rebind.context;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+
+import java.util.Set;
 
 /**
  * This is a refinement that will use data urls for browsers that support them.
@@ -29,7 +32,21 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 public final class InlineClientBundleGenerator extends
     AbstractClientBundleGenerator {
 
+  private static Set<String> relevantPropertyNames = ImmutableSet.of(
+      "CssResource.obfuscationPrefix", "user.agent", "CssResource.mergeEnabled",
+      "ClientBundle.enableInlining", "locale", "CssResource.style");
+
   private final ClientBundleContext clientBundleCtx = new ClientBundleContext();
+
+  @Override
+  public Set<String> getRelevantPropertyNames() {
+    return relevantPropertyNames;
+  }
+
+  @Override
+  public boolean isUnstableOnTypes() {
+    return false;
+  }
 
   @Override
   protected AbstractResourceContext createResourceContext(TreeLogger logger,

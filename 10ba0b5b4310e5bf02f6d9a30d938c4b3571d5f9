@@ -34,6 +34,24 @@
       "revId": "10ba0b5b4310e5bf02f6d9a30d938c4b3571d5f9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_9c9a4985",
+        "filename": "user/src/com/google/gwt/resources/css/ast/CssSprite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 6240
+      },
+      "writtenOn": "2013-11-01T21:29:42Z",
+      "side": 1,
+      "message": "The case is \"gwt-image: imageName;\" an image resource name specified as IdValue and not as StringValue. In this case the old version was throwing the \"exactly one\" exception.\n\nI\u0027ve maintained the restriction on StringValue type, and wrote the exception message respecting the restriction.\n\nI can be compliant with the comment and then make the code accept also an IdValue and then modify the exception message accordingly. \n\nWhat you think is better?",
+      "parentUuid": "9e3551d4_92933cf9",
+      "revId": "10ba0b5b4310e5bf02f6d9a30d938c4b3571d5f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

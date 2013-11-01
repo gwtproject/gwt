@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e2c007a_77beda50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-01T22:41:00Z",
+      "side": 1,
+      "message": "I think you meant \"even *if* the event\"?  Also, it\u0027s a little more natural sounding to say \"it will still be dispatched\" and \"most events don\u0027t need custom dispatching\".",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_57c1d6cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-01T22:41:00Z",
+      "side": 1,
+      "message": "Missing a close parenthesis.",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_b7805291",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplMozilla.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-01T22:41:00Z",
+      "side": 1,
+      "message": "Nit: Indent two more spaces.",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_7797bad0",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-01T22:41:00Z",
+      "side": 1,
+      "message": "So is the \u0027official\u0027 way to extend the event system to write a static initializer that extends these objects before initEventSystem() is called?  Seems like we should document somewhere whatever the recommended solution is (can be a later commit).",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_37fc6250",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-01T22:41:00Z",
+      "side": 1,
+      "message": "Please indent two more spaces for line wrapping; here and below.",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

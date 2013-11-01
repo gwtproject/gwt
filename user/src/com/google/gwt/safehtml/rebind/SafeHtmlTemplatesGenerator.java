@@ -22,16 +22,20 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import java.io.PrintWriter;
+import java.util.Set;
 
 /**
  * Generator for implementations of
  * {@link com.google.gwt.safehtml.client.SafeHtmlTemplates}.
  */
 public class SafeHtmlTemplatesGenerator extends Generator {
+
+  private static Set<String> relevantPropertyNames = ImmutableSet.of();
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext genCtx,
@@ -65,5 +69,20 @@ public class SafeHtmlTemplatesGenerator extends Generator {
       genCtx.commit(logger, printWriter);
     }
     return packageName + "." + implName;
+  }
+
+  @Override
+  public Set<String> getRelevantPropertyNames() {
+    return relevantPropertyNames;
+  }
+
+  @Override
+  public boolean isUnstableOnPropertyValues() {
+    return false;
+  }
+
+  @Override
+  public boolean isUnstableOnTypes() {
+    return false;
   }
 }

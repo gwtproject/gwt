@@ -27,6 +27,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
 import com.google.gwt.uibinder.rebind.model.ImplicitClientBundle;
@@ -37,6 +38,7 @@ import org.xml.sax.SAXParseException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Generator for implementations of
@@ -46,13 +48,13 @@ public class UiBinderGenerator extends Generator {
 
   private static final String BINDER_URI = "urn:ui:com.google.gwt.uibinder";
 
-  private static final String TEMPLATE_SUFFIX = ".ui.xml";
+  private static boolean gaveLazyBuildersWarning;
 
-  private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
+  private static boolean gaveSafeHtmlWarning;
   private static final String LAZY_WIDGET_BUILDERS_PROPERTY = "UiBinder.useLazyWidgetBuilders";
   
-  private static boolean gaveSafeHtmlWarning;
-  private static boolean gaveLazyBuildersWarning;
+  private static final String TEMPLATE_SUFFIX = ".ui.xml";
+  private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
 
   /**
    * Given a UiBinder interface, return the path to its ui.xml file, suitable
@@ -95,6 +97,9 @@ public class UiBinderGenerator extends Generator {
     return s.replace(".", "/").replace("$", ".");
   }
 
+  private static Set<String> relevantPropertyNames =
+      ImmutableSet.of("UiBinder.useSafeHtmlTemplates", "UiBinder.useLazyWidgetBuilders");
+
   private final UiBinderContext uiBinderCtx = new UiBinderContext();
 
   @Override
@@ -130,6 +135,16 @@ public class UiBinderGenerator extends Generator {
           resourceOracle, genCtx.getPropertyOracle(), writers, designTime);
     }
     return packageName + "." + implName;
+  }
+
+  @Override
+  public Set<String> getRelevantPropertyNames() {
+    return relevantPropertyNames;
+  }
+
+  @Override
+  public boolean isUnstableOnTypes() {
+    return false;
   }
 
   private Boolean extractConfigProperty(MortalLogger logger,

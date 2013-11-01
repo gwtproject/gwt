@@ -26,17 +26,22 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.user.client.DocumentModeAsserter;
 import com.google.gwt.user.client.DocumentModeAsserter.Severity;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Generator for {@link com.google.gwt.user.client.DocumentModeAsserter}.
  */
 public class DocumentModeGenerator extends Generator {
+
+  private static Set<String> relevantPropertyNames =
+      ImmutableSet.of("document.compatMode", "document.compatMode.severity");
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext context, String typeName)
@@ -125,5 +130,15 @@ public class DocumentModeGenerator extends Generator {
       sw.commit(logger);
     }
     return composerFactory.getCreatedClassName();
+  }
+
+  @Override
+  public Set<String> getRelevantPropertyNames() {
+    return relevantPropertyNames;
+  }
+
+  @Override
+  public boolean isUnstableOnTypes() {
+    return false;
   }
 }

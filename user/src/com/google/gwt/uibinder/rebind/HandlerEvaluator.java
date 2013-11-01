@@ -22,10 +22,12 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.rebind.model.OwnerClass;
 import com.google.gwt.uibinder.rebind.model.OwnerField;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
@@ -83,6 +85,8 @@ class HandlerEvaluator {
 
   private final JClassType handlerRegistrationJClass;
   private final JClassType eventHandlerJClass;
+  private final JClassType widgetJClass;
+  private final JClassType domEventJClass;
   private final OwnerClass ownerClass;
   private final boolean useLazyWidgetBuilders;
 
@@ -101,6 +105,8 @@ class HandlerEvaluator {
 
     handlerRegistrationJClass = oracle.findType(HandlerRegistration.class.getName());
     eventHandlerJClass = oracle.findType(EventHandler.class.getName());
+    widgetJClass = oracle.findType(Widget.class.getName());
+    domEventJClass = oracle.findType(DomEvent.class.getCanonicalName());
   }
 
   /**
@@ -161,14 +167,21 @@ class HandlerEvaluator {
 
         // Retrieves the "add handler" method in the object.
         JMethod addHandlerMethodType = getAddHandlerMethodForObject(objectType, handlerType);
-        if (addHandlerMethodType == null) {
-          logger.die("Field '%s' does not have an 'add%s' method associated.",
-              objectName, handlerType.getName());
-        }
+        if (addHandlerMethodType != null) {
+          // Cool to tie the handler into the object.
+          writeAddHandler(writer, fieldManager, handlerVarName,
+              addHandlerMethodType.getName(), objectName);
 
-        // Cool to tie the handler into the object.
-        writeAddHandler(writer, fieldManager, handlerVarName,
-            addHandlerMethodType.getName(), objectName);
+        } else {
+
+          if (widgetJClass.isAssignableFrom(objectType) && !domEventJClass.isAssignableFrom(eventType)) {
+            writeAddHandler(writer, fieldManager, handlerVarName, eventType.getQualifiedSourceName(),
+                "addHandler", objectName);
+          } else {
+            logger.die("Field '%s' does not have an 'add%s' method associated neither extends Widget.",
+                objectName, handlerType.getName());
+          }
+        }
       }
     }
   }
@@ -258,6 +271,27 @@ class HandlerEvaluator {
     } else {
       writer.write("%1$s.%2$s(%3$s);", objectName, addHandlerMethodName,
           handlerVarName);
+    }
+  }
+
+  /**
+   * Adds the created handler to the given object (field).
+   *
+   * @param writer the writer used to output the results
+   * @param handlerVarName the name of the handler variable
+   * @param eventTypeName the event type name
+   * @param addHandlerMethodName the "add handler" method name associated with
+   *          the object
+   * @param objectName the name of the object we want to tie the handler
+   */
+  void writeAddHandler(IndentedWriter writer, FieldManager fieldManager,
+      String handlerVarName, String eventTypeName, String addHandlerMethodName, String objectName) {
+    if (useLazyWidgetBuilders) {
+      fieldManager.require(objectName).addStatement("%1$s.%2$s(%3$s,%4$s.getType());",
+          objectName, addHandlerMethodName, handlerVarName, eventTypeName);
+    } else {
+      writer.write("%1$s.%2$s(%3$s,%4$s.getType());", objectName, addHandlerMethodName,
+          handlerVarName, eventTypeName);
     }
   }
 

@@ -16,6 +16,24 @@
       "revId": "10ba0b5b4310e5bf02f6d9a30d938c4b3571d5f9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e3551d4_92933cf9",
+        "filename": "user/src/com/google/gwt/resources/css/ast/CssSprite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-11-01T21:15:21Z",
+      "side": 1,
+      "message": "What\u0027s the case where this is going off? One where the line is left just \"gwt-image: ;\"? ListValue means a space separated set of Values, and we recursively  call setImageProperty if we see a list, otherwise we expect a StringValue, a quoted string literal. So the only other choices here are functions, numbers, java expressions, tokens, or unquoted dot-path expressions. \n\nUnless I\u0027m misunderstanding either StringValue or the comment earlier  in this function \"Allow the user to use both raw idents and quoted strings\", they seem to be incompatible. Since we require a StringValue, which \"Represents one or more *quoted* string literals.\", the startsWith block seems meaningless, as does the remark about allowing raw idents.\n\nIf that is the case, then the only detail I\u0027d add to your exception is that it should be an ImageResource named in the same ClientBundle that this css is listed in. Might also need a caveat for ui:style tags in uiBinder, I\u0027m not entirely clear on how gwt-image works there.\n\nOn the other hand if the comment about raw idents is accurate, then we don\u0027t need \u0027between quotes\u0027, except perhaps with \u0027optionally\u0027 in front of it.",
+      "parentUuid": "7e15fd2d_1caf59ae",
+      "revId": "10ba0b5b4310e5bf02f6d9a30d938c4b3571d5f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

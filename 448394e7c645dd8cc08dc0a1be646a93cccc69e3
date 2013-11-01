@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "7e15fd2d_1c3d19a6",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-01T22:46:06Z",
+      "side": 1,
+      "message": "Actually, I have another patch that adds static functions for simplifying this part with error checking.",
+      "parentUuid": "1e2c007a_7797bad0",
+      "revId": "448394e7c645dd8cc08dc0a1be646a93cccc69e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_37fc6250",
         "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
         "patchSetId": 2

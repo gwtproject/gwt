@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee71194_25db18b8",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasOneWidget.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:37:11Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "7dc131596453b90f3ef71cdcf6a16c457790f85e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_05d0148e",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasWidgets.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:37:11Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "7dc131596453b90f3ef71cdcf6a16c457790f85e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

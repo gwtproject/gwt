@@ -15,6 +15,8 @@
  */
 package com.google.gwt.core.ext;
 
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+
 /**
  * Provides deferred binding property values.
  */
@@ -47,4 +49,14 @@ public interface PropertyOracle {
    */
   SelectionProperty getSelectionProperty(TreeLogger logger, String propertyName)
       throws BadPropertyValueException;
+
+  /**
+   * Sets the list of names of properties for which access is allowed. A null indicates that all
+   * properties are accessible.<br />
+   *
+   * Making allowed property access explicit makes it possible to close the loop and know that
+   * generators that optionally declare their list of accessed properties are doing so accurately.
+   * Having this list makes it possible to optimize generator execution during separate compilation.
+   */
+  void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames);
 }

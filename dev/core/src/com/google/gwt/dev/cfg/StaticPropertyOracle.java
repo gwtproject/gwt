@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.DefaultSelectionProperty;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.Serializable;
@@ -33,6 +34,17 @@ import java.util.TreeSet;
  * rather than computing them.
  */
 public class StaticPropertyOracle implements PropertyOracle, Serializable {
+
+  private static Function<ConfigurationProperty, String> getConfigNameExtractor() {
+    return new Function<ConfigurationProperty, String>() {
+      @Override
+      public String apply(ConfigurationProperty config) {
+        return config.getName();
+      }
+    };
+  }
+
+  private ImmutableSet<String> accessiblePropertyNames;
 
   private final Map<String, ConfigurationProperty> configPropertiesByName;
 
@@ -69,6 +81,8 @@ public class StaticPropertyOracle implements PropertyOracle, Serializable {
   @Override
   public com.google.gwt.core.ext.ConfigurationProperty getConfigurationProperty(String propertyName)
       throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     ConfigurationProperty config = configPropertiesByName.get(propertyName);
     if (config == null) {
       throw new BadPropertyValueException(propertyName);
@@ -90,9 +104,11 @@ public class StaticPropertyOracle implements PropertyOracle, Serializable {
     return orderedPropValues;
   }
 
+  @Override
   public com.google.gwt.core.ext.SelectionProperty getSelectionProperty(
-      TreeLogger logger, String propertyName)
-      throws BadPropertyValueException {
+      TreeLogger logger, String propertyName) throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     // In practice there will probably be so few properties that a linear
     // search is at least as fast as a map lookup by name would be.
     // If that turns out not to be the case, the ctor could build a
@@ -114,7 +130,12 @@ public class StaticPropertyOracle implements PropertyOracle, Serializable {
 
     throw new BadPropertyValueException(propertyName);
   }
-  
+
+  @Override
+  public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+    this.accessiblePropertyNames = accessiblePropertyNames;
+  }
+
   /**
    * Dumps the binding property key/value pairs; For debugging use only.
    */
@@ -126,14 +147,5 @@ public class StaticPropertyOracle implements PropertyOracle, Serializable {
           orderedPropValues[i]).append(" ");
     }
     return sb.toString();
-  }
-
-  private static Function<ConfigurationProperty, String> getConfigNameExtractor() {
-    return new Function<ConfigurationProperty, String>() {
-      @Override
-      public String apply(ConfigurationProperty config) {
-        return config.getName();
-      }
-    };
   }
 }

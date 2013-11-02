@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.shell.FailErrorLogger;
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -92,7 +93,12 @@ public class LocaleUtilsTest extends TestCase {
 
     public void setProperty(SelectionProperty prop) {
       selectionProperties.put(prop.getName(), prop);
-    }    
+    }
+
+    @Override
+    public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+      // Unrelated.
+    }
   }
 
   /**

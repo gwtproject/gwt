@@ -650,6 +650,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
     try {
       RebindResult result;
+      propOracle.setAccessiblePropertyNames(generator.getAccessedPropertyNames());
       if (generator instanceof IncrementalGenerator) {
         IncrementalGenerator incGenerator = (IncrementalGenerator) generator;
 
@@ -694,6 +695,7 @@ public class StandardGeneratorContext implements GeneratorContext {
           + "' threw an exception while rebinding '" + typeName + "'", e);
       throw new UnableToCompleteException();
     } finally {
+      propOracle.setAccessiblePropertyNames(null);
       generatorEvent.end();
     }
   }

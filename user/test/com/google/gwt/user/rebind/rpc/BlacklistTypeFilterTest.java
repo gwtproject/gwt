@@ -29,6 +29,7 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -75,6 +76,11 @@ public class BlacklistTypeFilterTest extends TestCase {
     public SelectionProperty getSelectionProperty(TreeLogger logger,
         String propertyName) throws BadPropertyValueException {
       throw new BadPropertyValueException("No property named " + propertyName);
+    }
+
+    @Override
+    public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+      // Unrelated.
     }
   }
 

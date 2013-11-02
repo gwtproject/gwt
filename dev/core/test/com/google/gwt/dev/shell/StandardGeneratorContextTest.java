@@ -31,6 +31,7 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -66,6 +67,11 @@ public class StandardGeneratorContextTest extends TestCase {
     @Override
     public SelectionProperty getSelectionProperty(TreeLogger logger, String name) {
       return null;
+    }
+
+    @Override
+    public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+      // Unrelated.
     }
   }
 

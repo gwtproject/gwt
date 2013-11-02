@@ -14,6 +14,7 @@
 package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -74,5 +75,41 @@ public class DynamicPropertyOracleTest extends TestCase {
         "webkit", dynamicPropertyOracle.getSelectionProperty(null, "user.agent").getCurrentValue());
     assertFalse(dynamicPropertyOracle.haveAccessedPropertiesChanged());
     assertEquals(2, dynamicPropertyOracle.getAccessedProperties().size());
+  }
+
+  public void testRejectsIllegalPropertyAccesses() throws BadPropertyValueException {
+    String propertyName = "user.agent";
+    String expectedPropertyValue = "ie6";
+
+    // Setups up a property oracle that knows about user.agent.
+    Properties properties = new Properties();
+    properties.createBinding(propertyName);
+    DynamicPropertyOracle dynamicPropertyOracle = new DynamicPropertyOracle(properties);
+    dynamicPropertyOracle.prescribePropertyValue(propertyName, expectedPropertyValue);
+
+    // Makes it specifically legal to access user.agent
+    dynamicPropertyOracle.setAccessiblePropertyNames(ImmutableSet.of(propertyName));
+
+    // Shows a successful access.
+    assertEquals(expectedPropertyValue,
+        dynamicPropertyOracle.getSelectionProperty(null, propertyName).getCurrentValue());
+
+    // Makes it illegal to access user.agent
+    dynamicPropertyOracle.setAccessiblePropertyNames(ImmutableSet.of("something else"));
+
+    // Shows access now fails as expected.
+    try {
+      dynamicPropertyOracle.getSelectionProperty(null, propertyName);
+      fail("user.agent property access should have failed");
+    } catch (IllegalStateException e) {
+      // expected behavior
+    }
+
+    // Makes it legal to access anything
+    dynamicPropertyOracle.setAccessiblePropertyNames(null);
+
+    // Shows a successful access.
+    assertEquals(expectedPropertyValue,
+        dynamicPropertyOracle.getSelectionProperty(null, propertyName).getCurrentValue());
   }
 }

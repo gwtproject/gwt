@@ -27,6 +27,7 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -145,6 +146,11 @@ public class JsNamerTest extends TestCase {
     public SelectionProperty getSelectionProperty(TreeLogger logger,
         String propertyName) throws BadPropertyValueException {
       return null;
+    }
+
+    @Override
+    public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+      // Unrelated.
     }
   }
 }

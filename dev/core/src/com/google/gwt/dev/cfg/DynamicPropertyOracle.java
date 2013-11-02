@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.DefaultSelectionProperty;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -50,15 +51,12 @@ public class DynamicPropertyOracle implements PropertyOracle {
 
   private final Set<BindingProperty> accessedProperties = Sets.newHashSet();
   private boolean accessedPropertiesChanged;
+  private ImmutableSet<String> accessiblePropertyNames;
   private final Map<String, String> prescribedPropertyValuesByName = Maps.newHashMap();
   private final Properties properties;
 
   public DynamicPropertyOracle(Properties properties) {
     this.properties = properties;
-  }
-
-  public boolean haveAccessedPropertiesChanged() {
-    return accessedPropertiesChanged;
   }
 
   public Set<BindingProperty> getAccessedProperties() {
@@ -68,6 +66,8 @@ public class DynamicPropertyOracle implements PropertyOracle {
   @Override
   public ConfigurationProperty getConfigurationProperty(String propertyName)
       throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     Property property = properties.find(propertyName);
     if (property instanceof ConfigurationProperty) {
       ConfigurationProperty configurationProperty = (ConfigurationProperty) property;
@@ -88,12 +88,18 @@ public class DynamicPropertyOracle implements PropertyOracle {
   @Override
   public SelectionProperty getSelectionProperty(TreeLogger logger, String propertyName)
       throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     BindingProperty bindingProperty = getBindingProperty(propertyName);
     accessedPropertiesChanged |= accessedProperties.add(bindingProperty);
 
     String propertyValue = prescribedPropertyValuesByName.isEmpty()
         ? bindingProperty.getFirstLegalValue() : prescribedPropertyValuesByName.get(propertyName);
     return createSelectionProperty(propertyValue, bindingProperty);
+  }
+
+  public boolean haveAccessedPropertiesChanged() {
+    return accessedPropertiesChanged;
   }
 
   public void prescribePropertyValue(String propertyName, String propertyValue) {
@@ -107,6 +113,11 @@ public class DynamicPropertyOracle implements PropertyOracle {
   public void reset() {
     accessedPropertiesChanged = false;
     prescribedPropertyValuesByName.clear();
+  }
+
+  @Override
+  public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+    this.accessiblePropertyNames = accessiblePropertyNames;
   }
 
   private BindingProperty getBindingProperty(String propertyName) throws BadPropertyValueException {

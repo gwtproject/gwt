@@ -28,6 +28,7 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.shell.FailErrorLogger;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import junit.framework.TestCase;
 
@@ -80,6 +81,11 @@ public class JsCoerceIntShiftTest extends TestCase {
         return userAgent;
       }
       throw new BadPropertyValueException("no property " + propertyName);
+    }
+
+    @Override
+    public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+      // Unrelated.
     }
   }
 

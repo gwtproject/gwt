@@ -28,6 +28,8 @@ import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.DeferredBindingQuery;
 import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.cfg.Property;
+import com.google.gwt.dev.cfg.PropertyOracles;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,6 +44,8 @@ import java.util.TreeSet;
  * it possible to execute property providers.
  */
 public class ModuleSpacePropertyOracle implements PropertyOracle {
+
+  private ImmutableSet<String> accessiblePropertyNames;
 
   private final Set<String> activeLinkerNames;
 
@@ -64,6 +68,8 @@ public class ModuleSpacePropertyOracle implements PropertyOracle {
   @Override
   public com.google.gwt.core.ext.ConfigurationProperty getConfigurationProperty(
       String propertyName) throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     Property prop = getProperty(propertyName);
     if (prop instanceof ConfigurationProperty) {
       final ConfigurationProperty cprop = (ConfigurationProperty) prop;
@@ -78,6 +84,8 @@ public class ModuleSpacePropertyOracle implements PropertyOracle {
   @Override
   public SelectionProperty getSelectionProperty(TreeLogger logger,
       String propertyName) throws BadPropertyValueException {
+    PropertyOracles.checkPropertyAccess(accessiblePropertyNames, propertyName);
+
     Property prop = getProperty(propertyName);
     if (prop instanceof BindingProperty) {
       final BindingProperty cprop = (BindingProperty) prop;
@@ -99,6 +107,11 @@ public class ModuleSpacePropertyOracle implements PropertyOracle {
     } else {
       throw new BadPropertyValueException(propertyName);
     }
+  }
+
+  @Override
+  public void setAccessiblePropertyNames(ImmutableSet<String> accessiblePropertyNames) {
+    this.accessiblePropertyNames = accessiblePropertyNames;
   }
 
   private Condition computeActiveCondition(TreeLogger logger,

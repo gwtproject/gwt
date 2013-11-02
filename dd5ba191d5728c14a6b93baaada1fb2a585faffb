@@ -16,6 +16,40 @@
       "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_bd27537b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/PropertyOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-02T02:05:10Z",
+      "side": 1,
+      "message": "Seems like this shouldn\u0027t go here since this is a public API accessible to generators and they\u0027re not allowed to call this method.\n\nOne way would be introduce a new interface:\n\ninterface InternalPropertyOracle extends PropertyOracle {\n  setAccessiblePropertyNames(...);\n}\n\nThen change the type of the field in StandardGeneratorContext and the setter.\n\nAn alternative would be to have them all extend a base class: PropertyOracleBase",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_dda7a7b1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-02T02:05:10Z",
+      "side": 1,
+      "message": "maybe change the type of this field?",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

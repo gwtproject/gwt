@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee71194_05225402",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasOneWidget.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_e51e50bc",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasWidgets.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_c51b4cca",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsAnchor.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_a51848ce",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsDialogBox.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_85b5446a",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsFlexTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_65ba405a",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsHTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_45bf3c48",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsHTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_25c438da",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsHTMLTable.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_05a9340e",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsLabelBase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_e5a53032",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsNumberLabel.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_c5b22c7a",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsValueBoxBase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_a5af2810",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsValueLabel.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_85dc24b2",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsValueListBox.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee71194_65e12068",
+        "filename": "user/src/com/google/gwt/user/client/ui/IsWidget.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-02T05:04:06Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "8cdde888266563793f12ff3bd32ca972376f1a46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

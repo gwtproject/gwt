@@ -16,6 +16,24 @@
       "revId": "ec601413c9ab22acc58b5522f8d8a9e7fd8616bc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_eaa3a7c4",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T23:41:53Z",
+      "side": 1,
+      "message": "Nice catch, done.  (Reviewed all imports a second time, and fixed misordering in RichTextAreaImplIE6.java too.)",
+      "parentUuid": "7e15fd2d_dfa55332",
+      "revId": "ec601413c9ab22acc58b5522f8d8a9e7fd8616bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

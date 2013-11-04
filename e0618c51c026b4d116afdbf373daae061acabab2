@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_45959d88",
+        "filename": "user/src/com/google/gwt/logging/client/LoggingPopup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T19:49:41Z",
+      "side": 1,
+      "message": "Acknowledged.",
+      "parentUuid": "f2011d89_692d010b",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25d9dd3_4f77c543",
         "filename": "user/src/com/google/gwt/user/client/ui/AbsolutePanel.java",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "What if this was transformed to:\n\n    ((Element) elem.getParentElement()).removeChild(elem)\n\ninstead? I believe there are tools that could point out the unnecessary casts (oh, and it would avoid the potential NPEs in some cases)",
       "parentUuid": "f25d9dd3_4fd105ea",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72ad2dfc_d53a0eab",
+        "filename": "user/src/com/google/gwt/user/client/ui/ComplexPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T19:49:41Z",
+      "side": 1,
+      "message": "I\u0027ll look into that.",
+      "parentUuid": "f2011d89_89695d2b",
       "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -195,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "32b7354e_903a54dc",
+        "filename": "user/src/com/google/gwt/user/client/ui/CustomButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T19:49:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure to be honest.  I took a quick look the other day and still saw some PotentialElement usage internally, but it didn\u0027t seem very significant, so I was going to revisit later to see whether it could be removed.",
+      "parentUuid": "f2011d89_89903d09",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2011d89_298029b6",
         "filename": "user/src/com/google/gwt/user/client/ui/TabBar.java",
         "patchSetId": 1
@@ -212,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "12bcf130_ef06612e",
+        "filename": "user/src/com/google/gwt/user/client/ui/TabBar.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T19:49:41Z",
+      "side": 1,
+      "message": "I\u0027ll check.  I think the refactoring tool I\u0027m using could at least detect things like\n\n    ((char) intExpr1) \u003d\u003d intExpr2\n\nand then I can hand review them.",
+      "parentUuid": "f2011d89_298029b6",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2011d89_e96a1120",
         "filename": "user/test/com/google/gwt/user/client/ui/DOMTest.java",
         "patchSetId": 1
@@ -223,6 +295,24 @@
       "writtenOn": "2013-09-05T09:52:13Z",
       "side": 1,
       "message": "I think many/most of these are tested in com.google.gwt.dom.client.ElementTest.\n\nWe should probably leave this file as-is so it continues to test the c.g.g.u.c.DOM methods.",
+      "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_859f95a6",
+        "filename": "user/test/com/google/gwt/user/client/ui/DOMTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-04T19:49:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2011d89_e96a1120",
       "revId": "e0618c51c026b4d116afdbf373daae061acabab2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee71194_2b0be9ed",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionLink.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-04T21:57:34Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b26bfa3a0d6a3819d3c1441d9e9583b98b9df7bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

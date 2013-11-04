@@ -58,21 +58,21 @@ public class URLTest extends GWTTestCase {
   @SuppressWarnings("deprecation")
   public void testDecodeComponent() {
     try {
-      URL.decodeComponent(null);
+      URL.decodeQueryString(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException ex) {
       // expected exception was thrown
     }
 
-    assertEquals("", URL.decodeComponent(""));
-    assertEquals(" ", URL.decodeComponent(" "));
-    assertEquals(" ", URL.decodeComponent("+"));
-    assertEquals(" ", URL.decodeComponent("%20"));
+    assertEquals("", URL.decodeQueryString(""));
+    assertEquals(" ", URL.decodeQueryString(" "));
+    assertEquals(" ", URL.decodeQueryString("+"));
+    assertEquals(" ", URL.decodeQueryString("%20"));
 
-    String actualURLComponent = URL.decodeComponent(ENCODED_URL_COMPONENT);
+    String actualURLComponent = URL.decodeQueryString(ENCODED_URL_COMPONENT);
     assertEquals(DECODED_URL_COMPONENT, actualURLComponent);
 
-    actualURLComponent = URL.decodeComponent(ENCODED_URL_COMPONENT_QS);
+    actualURLComponent = URL.decodeQueryString(ENCODED_URL_COMPONENT_QS);
     assertEquals(DECODED_URL_COMPONENT, actualURLComponent);
   }
 
@@ -83,25 +83,25 @@ public class URLTest extends GWTTestCase {
   @SuppressWarnings("deprecation")
   public void testDecodeComponent2() {
     try {
-      URL.decodeComponent(null);
+      URL.decodeQueryString(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException ex) {
       // expected exception was thrown
     }
 
-    assertEquals("", URL.decodeComponent("", false));
-    assertEquals("", URL.decodeComponent("", true));
-    assertEquals(" ", URL.decodeComponent(" ", false));
-    assertEquals(" ", URL.decodeComponent(" ", true));
-    assertEquals("+", URL.decodeComponent("+", false));
-    assertEquals(" ", URL.decodeComponent("+", true));
-    assertEquals(" ", URL.decodeComponent("%20", false));
-    assertEquals(" ", URL.decodeComponent("%20", true));
+    assertEquals("", URL.decodePathSegment(""));
+    assertEquals("", URL.decodeQueryString(""));
+    assertEquals(" ", URL.decodePathSegment(" "));
+    assertEquals(" ", URL.decodeQueryString(" "));
+    assertEquals("+", URL.decodePathSegment("+"));
+    assertEquals(" ", URL.decodeQueryString("+"));
+    assertEquals(" ", URL.decodePathSegment("%20"));
+    assertEquals(" ", URL.decodeQueryString("%20"));
 
-    String actualURLComponent = URL.decodeComponent(ENCODED_URL_COMPONENT, false);
+    String actualURLComponent = URL.decodePathSegment(ENCODED_URL_COMPONENT);
     assertEquals(DECODED_URL_COMPONENT, actualURLComponent);
 
-    actualURLComponent = URL.decodeComponent(ENCODED_URL_COMPONENT_QS, true);
+    actualURLComponent = URL.decodeQueryString(ENCODED_URL_COMPONENT_QS);
     assertEquals(DECODED_URL_COMPONENT, actualURLComponent);
   }
 
@@ -176,16 +176,16 @@ public class URLTest extends GWTTestCase {
   @SuppressWarnings("deprecation")
   public void testEncodeComponent() {
     try {
-      URL.encodeComponent(null);
+      URL.encodeQueryString(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException ex) {
       // expected exception was thrown
     }
 
-    assertEquals("", URL.encodeComponent(""));
-    assertEquals("+", URL.encodeComponent(" "));
+    assertEquals("", URL.encodeQueryString(""));
+    assertEquals("+", URL.encodeQueryString(" "));
 
-    String actualURLComponent = URL.encodeComponent(DECODED_URL_COMPONENT);
+    String actualURLComponent = URL.encodeQueryString(DECODED_URL_COMPONENT);
     assertEquals(ENCODED_URL_COMPONENT_QS, actualURLComponent);
   }
 
@@ -196,28 +196,28 @@ public class URLTest extends GWTTestCase {
   @SuppressWarnings("deprecation")
   public void testEncodeComponent2() {
     try {
-      URL.encodeComponent(null, false);
+      URL.encodePathSegment(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException ex) {
       // expected exception was thrown
     }
 
     try {
-      URL.encodeComponent(null, true);
+      URL.encodeQueryString(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException ex) {
       // expected exception was thrown
     }
 
-    assertEquals("", URL.encodeComponent("", false));
-    assertEquals("", URL.encodeComponent("", true));
-    assertEquals("%20", URL.encodeComponent(" ", false));
-    assertEquals("+", URL.encodeComponent(" ", true));
+    assertEquals("", URL.encodePathSegment(""));
+    assertEquals("", URL.encodeQueryString(""));
+    assertEquals("%20", URL.encodePathSegment(" "));
+    assertEquals("+", URL.encodeQueryString(" "));
 
-    String actualURLComponent = URL.encodeComponent(DECODED_URL_COMPONENT, false);
+    String actualURLComponent = URL.encodePathSegment(DECODED_URL_COMPONENT);
     assertEquals(ENCODED_URL_COMPONENT, actualURLComponent);
 
-    actualURLComponent = URL.encodeComponent(DECODED_URL_COMPONENT, true);
+    actualURLComponent = URL.encodeQueryString(DECODED_URL_COMPONENT);
     assertEquals(ENCODED_URL_COMPONENT_QS, actualURLComponent);
   }
 

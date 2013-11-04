@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "7e15fd2d_9cc6c9d6",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T09:54:10Z",
+      "side": 1,
+      "message": "Can you remove the extra spaces?",
+      "revId": "7fee4083de4fe8dda51d502c908f36f8dc1d6be9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec09cbf_c6854407",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 3

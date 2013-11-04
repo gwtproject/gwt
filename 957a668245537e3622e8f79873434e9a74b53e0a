@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e2c007a_e5df7152",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-04T20:19:00Z",
+      "side": 1,
+      "message": "It\u0027s a bit unclear from this comment what the author of a generator should actually do and why. How about:\n\n\"Well-behaved generators can speed up the compile by overriding @{link #getAccessedPropertyNames}, @{link #contentDependsOnProperties}, and @{contentDependsOnTypes}\". The compiler will use this information to run generators less often and cache their outputs.\"",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_45b03d1e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-04T20:19:00Z",
+      "side": 1,
+      "message": "Seems like we can simplify this: \"Generators that don\u0027t need access to every property can override this method to speed up the compile.\"",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_256509b9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-04T20:19:00Z",
+      "side": 1,
+      "message": "\"Generators that qualify can override this method to speed up the compile.\" Similarly below.",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_c527cd7a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/LimitablePropertyOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-04T20:19:00Z",
+      "side": 1,
+      "message": "Could be changed to:\n\nvoid setPropertyChecker(PropertyChecker);\n\n(See my other comment.)",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_25eee9e4",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyOracles.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-04T20:19:00Z",
+      "side": 1,
+      "message": "We could improve this error message by reporting the name of the bad generator so that users who see this error know exactly which generator class to look at.\n\nOne possibility would be to turn this static method into a class:\n\nclass PropertyChecker {\n  \n  PropertyChecker(String generatorName, ImmutableSet\u003cString\u003e allowedProperties) { ... }\n\n void checkPropertyAccess(propertyName) { ... }\n}\n\nThis should simplify the code in the property oracles since they can just have a PropertyChecker field and don\u0027t need to worry about storing any other arguments. It looks like the PropertyChecker would always be created in one place.",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

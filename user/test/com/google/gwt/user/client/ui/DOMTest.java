@@ -70,11 +70,11 @@ public class DOMTest extends GWTTestCase {
    */
   public void testElementAttribute() {
     Element div = DOM.createDiv();
-    DOM.setElementAttribute(div, "class", "testClass");
-    String cssClass = DOM.getElementAttribute(div, "class");
+    div.setAttribute("class", "testClass");
+    String cssClass = div.getAttribute("class");
     assertEquals("testClass", cssClass);
-    DOM.removeElementAttribute(div, "class");
-    cssClass = DOM.getElementAttribute(div, "class");
+    div.removeAttribute("class");
+    cssClass = div.getAttribute("class");
     assertEquals("", cssClass);
   }
 
@@ -140,21 +140,21 @@ public class DOMTest extends GWTTestCase {
     final Element elem = DOM.createDiv();
     DOM.appendChild(RootPanel.getBodyElement(), elem);
 
-    DOM.setStyleAttribute(elem, "position", "absolute");
-    DOM.setStyleAttribute(elem, "border", border + "px solid #000");
-    DOM.setStyleAttribute(elem, "padding", padding + "px");
-    DOM.setStyleAttribute(elem, "margin", margin + "px");
+    elem.getStyle().setProperty("position", "absolute");
+    elem.getStyle().setProperty("border", border + "px solid #000");
+    elem.getStyle().setProperty("padding", padding + "px");
+    elem.getStyle().setProperty("margin", margin + "px");
 
     Document doc = Document.get();
-    DOM.setStyleAttribute(elem, "top", (top - doc.getBodyOffsetLeft()) + "px");
-    DOM.setStyleAttribute(elem, "left", (left - doc.getBodyOffsetTop()) + "px");
+    elem.getStyle().setProperty("top", (top - doc.getBodyOffsetLeft()) + "px");
+    elem.getStyle().setProperty("left", (left - doc.getBodyOffsetTop()) + "px");
 
     delayTestFinish(1000);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
         @Override
       public void execute() {
-          assertEquals(top + margin, DOM.getAbsoluteTop(elem));
-          assertEquals(left + margin, DOM.getAbsoluteLeft(elem));
+          assertEquals(top + margin, elem.getAbsoluteTop());
+          assertEquals(left + margin, elem.getAbsoluteLeft());
           finishTest();
       }
     });
@@ -171,28 +171,28 @@ public class DOMTest extends GWTTestCase {
     final Element outer = DOM.createDiv();
     final Element inner = DOM.createDiv();
 
-    DOM.setStyleAttribute(outer, "position", "absolute");
-    DOM.setStyleAttribute(outer, "top", "0px");
-    DOM.setStyleAttribute(outer, "left", "0px");
-    DOM.setStyleAttribute(outer, "overflow", "auto");
-    DOM.setStyleAttribute(outer, "width", "200px");
-    DOM.setStyleAttribute(outer, "height", "200px");
+    outer.getStyle().setProperty("position", "absolute");
+    outer.getStyle().setProperty("top", "0px");
+    outer.getStyle().setProperty("left", "0px");
+    outer.getStyle().setProperty("overflow", "auto");
+    outer.getStyle().setProperty("width", "200px");
+    outer.getStyle().setProperty("height", "200px");
 
-    DOM.setStyleAttribute(inner, "marginTop", "800px");
-    DOM.setStyleAttribute(inner, "marginLeft", "800px");
+    inner.getStyle().setProperty("marginTop", "800px");
+    inner.getStyle().setProperty("marginLeft", "800px");
 
     DOM.appendChild(outer, inner);
     DOM.appendChild(RootPanel.getBodyElement(), outer);
-    DOM.setInnerText(inner, ":-)");
-    DOM.scrollIntoView(inner);
+    inner.setInnerText(":-)");
+    inner.scrollIntoView();
 
     // Ensure that we are scrolled.
-    assertTrue(DOM.getElementPropertyInt(outer, "scrollTop") > 0);
-    assertTrue(DOM.getElementPropertyInt(outer, "scrollLeft") > 0);
+    assertTrue(outer.getPropertyInt("scrollTop") > 0);
+    assertTrue(outer.getPropertyInt("scrollLeft") > 0);
 
     Document doc = Document.get();
-    assertEquals(doc.getBodyOffsetLeft(), DOM.getAbsoluteLeft(outer));
-    assertEquals(doc.getBodyOffsetTop(), DOM.getAbsoluteTop(outer));
+    assertEquals(doc.getBodyOffsetLeft(), outer.getAbsoluteLeft());
+    assertEquals(doc.getBodyOffsetTop(), outer.getAbsoluteTop());
   }
 
   /**
@@ -330,11 +330,11 @@ public class DOMTest extends GWTTestCase {
     Element trElem = DOM.createTR();
 
     Element tdElem = DOM.createTD();
-    DOM.setInnerText(tdElem, "Some Table Heading Data");
+    tdElem.setInnerText("Some Table Heading Data");
 
     // Add a <em> element as a child to the td element
     Element emElem = DOM.createElement("em");
-    DOM.setInnerText(emElem, "Some emphasized text");
+    emElem.setInnerText("Some emphasized text");
     DOM.appendChild(tdElem, emElem);
 
     DOM.appendChild(trElem, tdElem);
@@ -343,7 +343,7 @@ public class DOMTest extends GWTTestCase {
 
     DOM.appendChild(RootPanel.getBodyElement(), tableElem);
 
-    DOM.setInnerText(tdElem, null);
+    tdElem.setInnerText(null);
 
     // Once we set the inner text on an element to null, all of the element's
     // child nodes
@@ -375,7 +375,7 @@ public class DOMTest extends GWTTestCase {
     new Timer() {
       @Override
       public void run() {
-        assertEndsWith("b0.gif", DOM.getElementProperty(image, "src"));
+        assertEndsWith("b0.gif", image.getPropertyString("src"));
         finishTest();
       }
     }.schedule(1000);
@@ -415,9 +415,9 @@ public class DOMTest extends GWTTestCase {
     new Timer() {
       @Override
       public void run() {
-        assertEndsWith("a1.gif", DOM.getElementProperty(images[0], "src"));
-        assertEndsWith("b1.gif", DOM.getElementProperty(images[1], "src"));
-        assertEndsWith("a1.gif", DOM.getElementProperty(images[2], "src"));
+        assertEndsWith("a1.gif", images[0].getPropertyString("src"));
+        assertEndsWith("b1.gif", images[1].getPropertyString("src"));
+        assertEndsWith("a1.gif", images[2].getPropertyString("src"));
         finishTest();
       }
     }.schedule(1000);
@@ -457,9 +457,9 @@ public class DOMTest extends GWTTestCase {
     new Timer() {
       @Override
       public void run() {
-        assertEndsWith("b2.gif", DOM.getElementProperty(images[0], "src"));
-        assertEndsWith("a2.gif", DOM.getElementProperty(images[1], "src"));
-        assertEndsWith("a2.gif", DOM.getElementProperty(images[2], "src"));
+        assertEndsWith("b2.gif", images[0].getPropertyString("src"));
+        assertEndsWith("a2.gif", images[1].getPropertyString("src"));
+        assertEndsWith("a2.gif", images[2].getPropertyString("src"));
         finishTest();
       }
     }.schedule(2000);
@@ -502,10 +502,10 @@ public class DOMTest extends GWTTestCase {
     new Timer() {
       @Override
       public void run() {
-        assertEndsWith("b3.gif", DOM.getElementProperty(images[0], "src"));
-        assertEndsWith("a3.gif", DOM.getElementProperty(images[1], "src"));
-        assertEndsWith("a3.gif", DOM.getElementProperty(images[2], "src"));
-        assertEndsWith("b3.gif", DOM.getElementProperty(images[3], "src"));
+        assertEndsWith("b3.gif", images[0].getPropertyString("src"));
+        assertEndsWith("a3.gif", images[1].getPropertyString("src"));
+        assertEndsWith("a3.gif", images[2].getPropertyString("src"));
+        assertEndsWith("b3.gif", images[3].getPropertyString("src"));
         finishTest();
       }
     }.schedule(1000);
@@ -552,11 +552,11 @@ public class DOMTest extends GWTTestCase {
     new Timer() {
       @Override
       public void run() {
-        assertEndsWith("a4.gif", DOM.getElementProperty(images[0], "src"));
-        assertEndsWith("a4.gif", DOM.getElementProperty(images[1], "src"));
-        assertEndsWith("b4.gif", DOM.getElementProperty(images[2], "src"));
-        assertEndsWith("b4.gif", DOM.getElementProperty(images[3], "src"));
-        assertEndsWith("b4.gif", DOM.getElementProperty(images[4], "src"));
+        assertEndsWith("a4.gif", images[0].getPropertyString("src"));
+        assertEndsWith("a4.gif", images[1].getPropertyString("src"));
+        assertEndsWith("b4.gif", images[2].getPropertyString("src"));
+        assertEndsWith("b4.gif", images[3].getPropertyString("src"));
+        assertEndsWith("b4.gif", images[4].getPropertyString("src"));
         finishTest();
       }
     }.schedule(1000);
@@ -574,14 +574,14 @@ public class DOMTest extends GWTTestCase {
     Element image = DOM.createImg();
     String imageUrl = "http://www.google.com/images/logo.gif";
     DOM.setImgSrc(image, imageUrl);
-    String imageToString = DOM.toString(image).trim().toLowerCase();
+    String imageToString = image.getString().trim().toLowerCase();
     assertTrue(imageToString.startsWith("<img"));
     assertTrue(imageToString.indexOf(imageUrl) != -1);
 
     // Test <input name="flinks" />
     Element input = DOM.createInputText();
-    DOM.setElementProperty(input, "name", "flinks");
-    final String inputToString = DOM.toString(input).trim().toLowerCase();
+    input.setPropertyString("name", "flinks");
+    final String inputToString = input.getString().trim().toLowerCase();
     assertTrue(inputToString.startsWith("<input"));
 
     // Test <select><option>....</select>
@@ -589,9 +589,9 @@ public class DOMTest extends GWTTestCase {
     for (int i = 0; i < 10; i++) {
       final Element option = DOM.createElement("option");
       DOM.appendChild(select, option);
-      DOM.setInnerText(option, "item #" + i);
+      option.setInnerText("item #" + i);
     }
-    String selectToString = DOM.toString(select).trim().toLowerCase();
+    String selectToString = select.getString().trim().toLowerCase();
     assertTrue(selectToString.startsWith("<select"));
     for (int i = 0; i < 10; i++) {
       assertTrue(selectToString.indexOf("item #" + i) != -1);
@@ -599,8 +599,8 @@ public class DOMTest extends GWTTestCase {
 
     // Test <meta name="robots" />
     Element meta = DOM.createElement("meta");
-    DOM.setElementProperty(meta, "name", "robots");
-    String metaToString = DOM.toString(meta).trim().toLowerCase();
+    meta.setPropertyString("name", "robots");
+    String metaToString = meta.getString().trim().toLowerCase();
     assertTrue(metaToString.startsWith("<meta"));
   }
 }

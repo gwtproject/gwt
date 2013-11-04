@@ -98,7 +98,7 @@ public class WidgetOnLoadTest extends GWTTestCase {
   static int orderIndex;
 
   static boolean isElementAttached(Element elem) {
-    return DOM.isOrHasChild(RootPanel.getBodyElement(), elem);
+    return RootPanel.getBodyElement().isOrHasChild(elem);
   }
 
   @Override

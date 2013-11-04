@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e15fd2d_7f0e4791",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-11-04T21:46:53Z",
+      "side": 1,
+      "message": "line too long",
+      "revId": "55c3c5d26f1e363cb609b71038a66de2ed8191a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

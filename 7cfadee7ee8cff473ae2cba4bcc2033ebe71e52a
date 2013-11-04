@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e5e312a_aa6fefd0",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsPrettyNamer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T23:43:23Z",
+      "side": 1,
+      "message": "the Java String API is a little unclear, but replace() does do a replace all.\n\nthe difference with replaceAll() is that it takes a regex as a first parameter",
+      "parentUuid": "9e5e312a_0a3cbbe0",
+      "revId": "7cfadee7ee8cff473ae2cba4bcc2033ebe71e52a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e5e312a_ea2047b3",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsVerboseNamer.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-04T23:31:58Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "7cfadee7ee8cff473ae2cba4bcc2033ebe71e52a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_8a6c2bdd",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsVerboseNamer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T23:43:23Z",
+      "side": 1,
+      "message": "the Java String API is a little unclear, but replace() does do a replace all.\n\nthe difference with replaceAll() is that it takes a regex as a first parameter",
+      "parentUuid": "9e5e312a_ea2047b3",
       "revId": "7cfadee7ee8cff473ae2cba4bcc2033ebe71e52a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

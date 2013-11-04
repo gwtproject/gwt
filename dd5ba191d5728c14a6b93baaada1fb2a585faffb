@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_b2f93db0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-04T18:44:11Z",
+      "side": 1,
+      "message": "i am not a fan of having these two functions use different naming conventions.",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_bd27537b",
         "filename": "dev/core/src/com/google/gwt/core/ext/PropertyOracle.java",
         "patchSetId": 3
@@ -47,6 +64,23 @@
       "writtenOn": "2013-11-02T02:05:10Z",
       "side": 1,
       "message": "maybe change the type of this field?",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_120929f9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-04T18:44:11Z",
+      "side": 1,
+      "message": "s/propOracle/propertyOracle/",
       "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

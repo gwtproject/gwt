@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e15fd2d_1ff62b4a",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderNameConflictsTest.Ui.ui.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T21:41:37Z",
+      "side": 1,
+      "message": "nit: 2013",
+      "revId": "8e60008e6d32e83c1b3dc43be960ac8c29ff4ceb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_5f85c3a7",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderNameConflictsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T21:41:37Z",
+      "side": 1,
+      "message": "nit: 2013",
+      "revId": "8e60008e6d32e83c1b3dc43be960ac8c29ff4ceb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_3f7a0f08",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderNameConflictsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T21:41:37Z",
+      "side": 1,
+      "message": "Integration tests covering potential name conflicts in {@link UiBinder}.",
+      "revId": "8e60008e6d32e83c1b3dc43be960ac8c29ff4ceb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_ff73772e",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderNameConflictsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T21:41:37Z",
+      "side": 1,
+      "message": "Let\u0027s add little bit more assertion:\n\n assertEquals(\"templateBtn\", subject.template.getText())\n assertEquals(\"ownerBtn\", subject.owner.getText())\n\n(and pls update the ui.xml accordingly)",
+      "revId": "8e60008e6d32e83c1b3dc43be960ac8c29ff4ceb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e15fd2d_bf6dff4a",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderNameConflictsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-04T21:41:37Z",
+      "side": 1,
+      "message": "Actually I would remove the gwtSetup and make the \u0027subject\u0027 a local variable in the test method.",
+      "revId": "8e60008e6d32e83c1b3dc43be960ac8c29ff4ceb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

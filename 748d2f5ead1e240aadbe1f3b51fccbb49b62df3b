@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7ec09cbf_d2633a15",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-04T12:35:20Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e15fd2d_dc41e179",
         "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
         "patchSetId": 1
@@ -13,6 +30,75 @@
       "writtenOn": "2013-11-04T11:27:50Z",
       "side": 1,
       "message": "I would change the comment to:\n\"A charset at-rule is not relevant inside a style element. Ignore it\"\n\nMaybe, it would be nice also to add a warning message.",
+      "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2401a3_d69304ca",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-04T12:35:20Z",
+      "side": 1,
+      "message": "I would second that, at least people should know that they do something weird.",
+      "parentUuid": "7e15fd2d_dc41e179",
+      "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_3279eec2",
+        "filename": "user/test/com/google/gwt/resources/css/AtCharsetRuleStrippingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-04T12:35:20Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_127672d2",
+        "filename": "user/test/com/google/gwt/resources/css/AtCharsetRuleStrippingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-04T12:35:20Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ec09cbf_727366e2",
+        "filename": "user/test/com/google/gwt/resources/css/AtCharsetRuleStrippingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-04T12:35:20Z",
+      "side": 1,
+      "message": "nit: whitespace",
       "revId": "748d2f5ead1e240aadbe1f3b51fccbb49b62df3b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

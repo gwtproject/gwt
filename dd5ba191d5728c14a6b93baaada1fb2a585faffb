@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_925a7986",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T19:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ee71194_e55bf0ba",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_b2f93db0",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-04T18:44:11Z",
       "side": 1,
       "message": "i am not a fan of having these two functions use different naming conventions.",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_52600138",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T19:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_b2f93db0",
       "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_b2d77dae",
+        "filename": "dev/core/src/com/google/gwt/core/ext/PropertyOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T19:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_bd27537b",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_dda7a7b1",
         "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "1e2c007a_f2e1f587",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T19:41:30Z",
+      "side": 1,
+      "message": "addressed this in the way we discussed offline",
+      "parentUuid": "1e2c007a_dda7a7b1",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_120929f9",
         "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2013-11-04T18:44:11Z",
       "side": 1,
       "message": "s/propOracle/propertyOracle/",
+      "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2c007a_12e7699b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-04T19:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_120929f9",
       "revId": "dd5ba191d5728c14a6b93baaada1fb2a585faffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

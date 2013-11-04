@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.CachedGeneratorResult;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.IncrementalGenerator;
+import com.google.gwt.core.ext.LimitablePropertyOracle;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.RebindRuleResolver;
@@ -292,7 +293,7 @@ public class StandardGeneratorContext implements GeneratorContext {
   private final Map<String, PendingResource> pendingResources =
       new HashMap<String, PendingResource>();
 
-  private transient PropertyOracle propOracle;
+  private transient PropertyOracle propertyOracle;
 
   private RebindRuleResolver rebindRuleResolver;
 
@@ -561,7 +562,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   @Override
   public final PropertyOracle getPropertyOracle() {
-    return propOracle;
+    return propertyOracle;
   }
 
   @Override
@@ -650,6 +651,17 @@ public class StandardGeneratorContext implements GeneratorContext {
 
     try {
       RebindResult result;
+      // TODO(stalcup): refactor the Generator/PropertyOracle system (in a potentially backwards
+      // incompatible way) so that callers see a consistent interface and all Generators are forced
+      // to accurately declare the names of properties they care about.
+      if (propertyOracle instanceof LimitablePropertyOracle) {
+        // Configure the property oracle to throw an error if the current generator attempts to
+        // access some property for which it does not declaratively request access. This guarantees
+        // that the accessedPropertyNames list is up to date so that it is safe to use for
+        // optimization judgements during separate compilation.
+        LimitablePropertyOracle limitablePropertyOracle = (LimitablePropertyOracle) propertyOracle;
+        limitablePropertyOracle.setAccessiblePropertyNames(generator.getAccessedPropertyNames());
+      }
       if (generator instanceof IncrementalGenerator) {
         IncrementalGenerator incGenerator = (IncrementalGenerator) generator;
 
@@ -694,6 +706,10 @@ public class StandardGeneratorContext implements GeneratorContext {
           + "' threw an exception while rebinding '" + typeName + "'", e);
       throw new UnableToCompleteException();
     } finally {
+      if (propertyOracle instanceof LimitablePropertyOracle) {
+        LimitablePropertyOracle limitablePropertyOracle = (LimitablePropertyOracle) propertyOracle;
+        limitablePropertyOracle.setAccessiblePropertyNames(null);
+      }
       generatorEvent.end();
     }
   }
@@ -717,8 +733,8 @@ public class StandardGeneratorContext implements GeneratorContext {
    * Sets the current transient property oracle to answer current property
    * questions.
    */
-  public void setPropertyOracle(PropertyOracle propOracle) {
-    this.propOracle = propOracle;
+  public void setPropertyOracle(PropertyOracle propertyOracle) {
+    this.propertyOracle = propertyOracle;
   }
 
   public void setRebindRuleResolver(RebindRuleResolver resolver) {

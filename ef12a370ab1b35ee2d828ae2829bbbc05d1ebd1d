@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e97a103_5eb0550f",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-05T09:39:42Z",
+      "side": 1,
+      "message": "\u003e Are these the methods meant to be used by end users?\n\nThis will be only used by a few third-parties like adding MS prefixed pointer events - not meant to be used by app developers.\n\nI kind of remember setting it to public but can\u0027t remember why I took it back. I\u0027ll check it again.\n\n\u003e It also seems like it won\u0027t work if a non-DOMImplStandard-based \n\nThat is the idea. This is used for adding new generation of events that are recently added (or might be added in the future).",
+      "parentUuid": "9e5e312a_6db351f5",
+      "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e5e312a_ade269ee",
         "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-05T01:09:04Z",
       "side": 1,
       "message": "This style of coding isn\u0027t very easy to follow. :(  Also not very type safe.\n\nBut I don\u0027t have a suggestion of a way to better write it without introducing code overhead.",
+      "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e97a103_fea041ba",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-05T09:39:42Z",
+      "side": 1,
+      "message": "Yeah, I played with it a lot but every time it ended up with code bloat and larger APIs so I gave up. \nHowever given that this API is not technically public, fairly straight-forward and will only be used by a few third-parties (e.g. Vaadin, MGWT etc), I think it is reasonable.\nAlso not that, these people used to do JSNI ninja and play with private fields to do the similar customizations, this is way better :)\n\nI\u0027ll play with one more idea, that might be slightly better. Will let you know how it turns out.",
+      "parentUuid": "9e5e312a_ade269ee",
       "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

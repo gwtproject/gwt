@@ -15,9 +15,6 @@
  */
 package java.lang;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.impl.StringBufferImpl;
-
 /**
  * A fast way to create strings using multiple appends. This is implemented
  * using a {@link StringBufferImpl} that is chosen with deferred binding.
@@ -31,10 +28,46 @@ import com.google.gwt.core.client.impl.StringBufferImpl;
  * change made to one should be mirrored in the other.
  */
 public class StringBuilder implements CharSequence, Appendable {
-  private final StringBufferImpl impl = GWT.create(StringBufferImpl.class);
-  private final Object data = impl.createData();
+
+  /**
+   * Package protected to allow {@link StringBuffer} to reuse it.
+   */
+  static String reverseString(String s) {
+    int length = s.length();
+
+    if (length <= 1) {
+      return s;
+    }
+
+    char[] buffer = new char[length];
+
+    buffer[0] = s.charAt(length - 1);
+
+    for (int i = 1; i < length; i++) {
+      buffer[i] = s.charAt(length - 1 - i);
+      if (Character.isSurrogatePair(buffer[i], buffer[i - 1])) {
+        swap(buffer, i - 1, i);
+      }
+    }
+
+    return new String(buffer);
+  }
+
+  private static void swap(char[] buffer, int f, int s) {
+    char tmp = buffer[f];
+    buffer[f] = buffer[s];
+    buffer[s] = tmp;
+  }
+
+  /**
+   * Do not initialize field in class body.
+   * Initializing variables in the class body leads to hidden class changes and
+   * need to be avoided in performance critical code.
+   */
+  private String data;
 
   public StringBuilder() {
+    init();
   }
 
   public StringBuilder(CharSequence s) {
@@ -47,34 +80,36 @@ public class StringBuilder implements CharSequence, Appendable {
    */
   @SuppressWarnings("unused")
   public StringBuilder(int ignoredCapacity) {
+    init();
   }
 
   public StringBuilder(String s) {
+    init();
     append(s);
   }
 
   public StringBuilder append(boolean x) {
-    impl.append(data, x);
+    data += x;
     return this;
   }
 
   public StringBuilder append(char x) {
-    impl.appendNonNull(data, String.valueOf(x));
+    appendValue(String.valueOf(x));
     return this;
   }
 
   public StringBuilder append(char[] x) {
-    impl.appendNonNull(data, String.valueOf(x));
+    appendValue(String.valueOf(x));
     return this;
   }
 
   public StringBuilder append(char[] x, int start, int len) {
-    impl.appendNonNull(data, String.valueOf(x, start, len));
+    appendValue(String.valueOf(x, start, len));
     return this;
   }
 
   public StringBuilder append(CharSequence x) {
-    impl.append(data, x);
+    appendValue(x);
     return this;
   }
 
@@ -82,47 +117,47 @@ public class StringBuilder implements CharSequence, Appendable {
     if (x == null) {
       x = "null";
     }
-    impl.append(data, x.subSequence(start, end));
+    appendValue(x.subSequence(start, end));
     return this;
   }
 
   public StringBuilder append(double x) {
-    impl.append(data, x);
+    data += x;
     return this;
   }
 
   public StringBuilder append(float x) {
-    impl.append(data, x);
+    data += x;
     return this;
   }
 
   public StringBuilder append(int x) {
-    impl.append(data, x);
+    data += x;
     return this;
   }
 
   public StringBuilder append(long x) {
-    impl.appendNonNull(data, String.valueOf(x));
+    appendValue(String.valueOf(x));
     return this;
   }
 
   public StringBuilder append(Object x) {
-    impl.append(data, x);
+    appendValue(x);
     return this;
   }
 
   public StringBuilder append(String x) {
-    impl.append(data, x);
+    appendValue(x);
     return this;
   }
 
   public StringBuilder append(StringBuffer x) {
-    impl.append(data, x);
+    appendValue(x);
     return this;
   }
 
   public StringBuilder appendCodePoint(int x) {
-    impl.appendNonNull(data, String.valueOf(Character.toChars(x)));
+    appendValue(String.valueOf(Character.toChars(x)));
     return this;
   }
 
@@ -135,7 +170,7 @@ public class StringBuilder implements CharSequence, Appendable {
   }
 
   public char charAt(int index) {
-    return toString().charAt(index);
+    return data.charAt(index);
   }
 
   public StringBuilder delete(int start, int end) {
@@ -164,11 +199,11 @@ public class StringBuilder implements CharSequence, Appendable {
   }
 
   public int indexOf(String x) {
-    return toString().indexOf(x);
+    return data.indexOf(x);
   }
 
   public int indexOf(String x, int start) {
-    return toString().indexOf(x, start);
+    return data.indexOf(x, start);
   }
 
   public StringBuilder insert(int index, boolean x) {
@@ -220,24 +255,24 @@ public class StringBuilder implements CharSequence, Appendable {
   }
 
   public int lastIndexOf(String s) {
-    return toString().lastIndexOf(s);
+    return data.lastIndexOf(s);
   }
 
   public int lastIndexOf(String s, int start) {
-    return toString().lastIndexOf(s, start);
+    return data.lastIndexOf(s, start);
   }
 
   public int length() {
-    return impl.length(data);
+    return data.length();
   }
 
   public StringBuilder replace(int start, int end, String toInsert) {
-    impl.replace(data, start, end, toInsert);
+    data = data.substring(0, start) + toInsert + data.substring(end);
     return this;
   }
 
   public StringBuilder reverse() {
-    impl.reverse(data);
+    data = reverseString(data);
     return this;
   }
 
@@ -260,22 +295,35 @@ public class StringBuilder implements CharSequence, Appendable {
   }
 
   public CharSequence subSequence(int start, int end) {
-    return this.substring(start, end);
+    return data.substring(start, end);
   }
 
   public String substring(int begin) {
-    return toString().substring(begin);
+    return data.substring(begin);
   }
 
   public String substring(int begin, int end) {
-    return toString().substring(begin, end);
+    return data.substring(begin, end);
   }
 
   @Override
   public String toString() {
-    return impl.toString(data);
+    return data;
   }
 
   public void trimToSize() {
+  }
+
+  private void appendValue(Object o) {
+    data += o;
+  }
+
+  /**
+   * Initializes all fields, instead of initializing them in the class body.
+   * Initializing variables in the class body leads to hidden class changes and
+   * need to be avoided in performance critical code.
+   */
+  private void init() {
+    data = "";
   }
 }

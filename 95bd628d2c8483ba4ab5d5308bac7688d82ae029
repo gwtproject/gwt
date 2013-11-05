@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1e97a103_7ee43151",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-05T07:44:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e5e312a_eaade783",
+      "revId": "95bd628d2c8483ba4ab5d5308bac7688d82ae029",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e5e312a_8af78b71",
         "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2013-11-05T00:14:06Z",
       "side": 1,
       "message": "I don\u0027t think you need to qualify with \"WebAppContextWithReload.this.\" do you?\n\nAlso, I think you need to apply .replace(\u0027/\u0027, \u0027.\u0027)?",
+      "revId": "95bd628d2c8483ba4ab5d5308bac7688d82ae029",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e97a103_def22514",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-05T07:44:03Z",
+      "side": 1,
+      "message": "Good catch. Actually this snippet was from an earlier reverted patch but it looks like you are correct.",
+      "parentUuid": "9e5e312a_8af78b71",
       "revId": "95bd628d2c8483ba4ab5d5308bac7688d82ae029",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

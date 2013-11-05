@@ -16,6 +16,24 @@
       "revId": "f1438237659c09b6ce8625e32994b0f8d46f4a1b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_10af4cae",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-05T03:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_e5ebf194",
+      "revId": "f1438237659c09b6ce8625e32994b0f8d46f4a1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

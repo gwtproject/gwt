@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e8d99f1_a09dba80",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-11-05T04:52:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure that this is much nicer, though it does remove the need for \"\" \"\" while still allowing for empty strings in the case of missing source jars, something that lib-gwt.sh apparently considers possible. I think the new comments above make it clear how this is intended to work for future maintainers as well, but I\u0027m open to feedback on how to make it clearer, as well as suggestions on how to better script this without using a real language or extra library...",
+      "revId": "65cac646b8a3869b4b739402af44c2e0f40671ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

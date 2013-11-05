@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.impl;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.user.client.DOM;
@@ -27,6 +28,46 @@ import com.google.gwt.user.client.Event;
  * not legacy IEs).
  */
 abstract class DOMImplStandard extends DOMImpl {
+
+  /**
+   * Adds new custom bitless event dispatchers to GWT. If no specific event
+   * dispatcher supplied for an event, the default dispatcher will be used.
+   * See {@link #getBitlessEventDispatchers()} for an example of object layout.
+   * <p>
+   * Note that although this method is public for extensions, it is subject to
+   * change in different releases.
+   */
+  public static void addBitlessEventDispatchers(JavaScriptObject dispatchers) {
+    addEventDispatchers(dispatchers, bitlessEventDispatchers);
+  }
+
+  /**
+   * Adds new custom capture event dispatchers to GWT.
+   * See {@link #getCaptureEventDispatchers()} for an example of object layout.
+   * <p>
+   * Note that although this method is public for extensions, it is subject to
+   * change in different releases.
+   */
+  public static void addCaptureEventDispatchers(JavaScriptObject dispatchers) {
+    addEventDispatchers(dispatchers, captureEventDispatchers);
+  }
+
+  private static void addEventDispatchers(JavaScriptObject newDispatchers,
+      JavaScriptObject target) {
+    if (eventSystemIsInitialized) {
+      throw new IllegalStateException("Event system already initialized");
+    }
+
+    // Ensure that any default extensions for browser are registered via static
+    // initializers in deferred binding of DOMImpl:
+    GWT.create(DOMImpl.class);
+
+    foreach(newDispatchers, copyTo(target));
+  }
+
+  private static final native JavaScriptObject copyTo(JavaScriptObject map) /*-{
+    return function(key, value) { map[key] = value; };
+  }-*/;
 
   private static Element captureElem;
 

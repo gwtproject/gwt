@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "9e5e312a_6db351f5",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-05T01:09:04Z",
+      "side": 1,
+      "message": "Are these the methods meant to be used by end users?  If so, I don\u0027t think they\u0027ll be callable because DOMImplStandard is package-private?  It also seems like it won\u0027t work if a non-DOMImplStandard-based implementation (e.g., DOMImplIE8) of DOMImpl is used?",
+      "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_ade269ee",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-05T01:09:04Z",
+      "side": 1,
+      "message": "This style of coding isn\u0027t very easy to follow. :(  Also not very type safe.\n\nBut I don\u0027t have a suggestion of a way to better write it without introducing code overhead.",
+      "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e583941_08af27ae",
         "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
         "patchSetId": 2
@@ -13,6 +47,24 @@
       "writtenOn": "2013-11-05T01:01:16Z",
       "side": 1,
       "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_edd86142",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-05T01:09:04Z",
+      "side": 1,
+      "message": "Please fix.",
+      "parentUuid": "5e583941_08af27ae",
       "revId": "ef12a370ab1b35ee2d828ae2829bbbc05d1ebd1d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

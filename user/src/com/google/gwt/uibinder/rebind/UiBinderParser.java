@@ -307,9 +307,12 @@ public class UiBinderParser {
       }
     }
 
+    boolean hasAttributes = elem.hasChildNodes();
+
     /* Nope. If we know the type, maybe a @UiFactory will make it */
 
-    if (resourceType != null && writer.getOwnerClass().getUiFactoryMethod(resourceType) != null) {
+    if (resourceType != null && writer.getOwnerClass().getUiFactoryMethod(resourceType) != null 
+        && !hasAttributes) {
       createResourceUiFactory(elem, resourceName, resourceType);
       return;
     }
@@ -349,6 +352,12 @@ public class UiBinderParser {
         .isClassOrInterface();
     if (!resourceType.getErasedType().equals(methodReturnType)) {
       writer.die(elem, "Type must match %s.", methodReturnType);
+    }
+
+    if (factoryMethod.getParameters().length != 0) {
+      writer.die(elem,
+          "Missing %s factory method parameters. "
+          + "Use ui:attributes tag to specify the required parameters.", resourceType);
     }
 
     String initializer;

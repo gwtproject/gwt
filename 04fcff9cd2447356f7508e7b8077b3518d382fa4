@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e5e312a_d01d3479",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-05T02:50:48Z",
+      "side": 1,
+      "message": "this is a fix for a bug introduced during cleanup/review of PropertyProviderRegistratorGenerator\n\nwhen generating a JSNI function if you leave a space between the } and the -*/;, it won\u0027t actually compile.\n\neventually we\u0027ll be able to have test coverage of the compilation of the results of this generator, by running GWT tests in \"separate compilation\" mode",
+      "revId": "04fcff9cd2447356f7508e7b8077b3518d382fa4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_b02ac08f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyProviderRegistratorGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-05T02:50:48Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "04fcff9cd2447356f7508e7b8077b3518d382fa4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

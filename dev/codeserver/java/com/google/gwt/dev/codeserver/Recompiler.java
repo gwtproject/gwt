@@ -262,6 +262,9 @@ class Recompiler {
     maybeOverrideConfig(moduleDef, "propertiesJs",
         "com/google/gwt/core/ext/linker/impl/properties.js");
 
+    // Use debug names for CSS styles
+    maybeOverrideConfig(moduleDef, "CssResource.style", "debug");
+
     for (Map.Entry<String, String> entry : bindingProperties.entrySet()) {
       String propName = entry.getKey();
       String propValue = entry.getValue();

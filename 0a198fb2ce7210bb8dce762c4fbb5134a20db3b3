@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "dea7c988_27d8f460",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-06T18:20:46Z",
+      "side": 1,
+      "message": "Actually Htmlunit depends on jetty though not sure if it is used by the parts of htmlunit that we care.",
+      "parentUuid": "3eb9c5aa_47e5eefc",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3eb9c5aa_e74e6252",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2013-11-06T13:56:22Z",
       "side": 1,
       "message": "So there\u0027s no longer a need for a NoMetaInf version? (I think I already asked Goktug about that one, don\u0027t remember the answer)",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb9c5aa_6a0b173f",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-06T18:20:46Z",
+      "side": 1,
+      "message": "You asked about servlet-api before; we need NoMetaInf for that. However xerces worked fine with meta inf.",
+      "parentUuid": "3eb9c5aa_67ea72d0",
       "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

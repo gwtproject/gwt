@@ -309,14 +309,6 @@ abstract class DOMImpl {
     return elem.hasAttribute(name);
   }-*/;
 
-  public native String imgGetSrc(Element img) /*-{
-    return img.src;
-  }-*/;
-
-  public native void imgSetSrc(Element img, String src) /*-{
-    img.src = src;
-  }-*/;
-
   public abstract boolean isOrHasChild(Node parent, Node child);
 
   public native void scrollIntoView(Element elem) /*-{

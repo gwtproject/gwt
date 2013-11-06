@@ -20,6 +20,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
+import java.util.Set;
+
 /**
  * This is a refinement that will use data urls for browsers that support them.
  * Only files whose size are smaller than MAX_INLINE_SIZE will be inlined.
@@ -30,18 +32,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 public final class InlineClientBundleGenerator extends
     AbstractClientBundleGenerator {
 
-  private static ImmutableSet<String> relevantPropertyNames = ImmutableSet.of(
-      "CssResource.obfuscationPrefix", "user.agent", "CssResource.mergeEnabled",
-      "ClientBundle.enableInlining", "locale", "CssResource.style",
-      "CssResource.reservedClassPrefixes", "ClientBundle.enableRenaming",
-      "ExternalTextResource.useJsonp");
-
   private final ClientBundleContext clientBundleCtx = new ClientBundleContext();
-
-  @Override
-  public ImmutableSet<String> getAccessedPropertyNames() {
-    return relevantPropertyNames;
-  }
 
   @Override
   public boolean contentDependsOnTypes() {

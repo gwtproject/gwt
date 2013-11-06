@@ -36,12 +36,13 @@ public class CanvasTest extends GWTTestCase {
     return (geckoVersion != -1) && (geckoVersion >= 1009001);
   }-*/;
 
-  private static native boolean isIE6() /*-{
-    return @com.google.gwt.dom.client.DOMImplIE6::isIE6()();
-  }-*/;
-
   private static native boolean isWebkit525OrBefore() /*-{
     return @com.google.gwt.dom.client.DOMImplWebkit::isWebkit525OrBefore()();
+  }-*/;
+
+  private static native boolean isIE8() /*-{
+    var ua = $wnd.navigator.userAgent.toLowerCase();
+    return (ua.indexOf('msie') != -1 && ($doc.documentMode == 8));
   }-*/;
 
   protected Canvas canvas1;
@@ -177,7 +178,8 @@ public class CanvasTest extends GWTTestCase {
       assertTrue(Canvas.isSupported());
       assertTrue(Canvas.isSupported());
     }
-    if (isIE6()) {
+
+    if(isIE8()) {
       assertFalse(Canvas.isSupported());
       assertFalse(Canvas.isSupported());
     }

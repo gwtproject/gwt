@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5edbd905_d6ff5484",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5edbd905_f6fcd891",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5edbd905_96f9cca0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5edbd905_b6f650ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.js.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5edbd905_56b364f4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.js.ast.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5edbd905_76b8e8cf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T21:32:41Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -101,6 +101,160 @@
       "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_faf7d541",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "please fix.",
+      "parentUuid": "5edbd905_76b8e8cf",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_fa1ef5bb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "Do you know how is the runtime penaly for having trampoline for comparable? I suppose it affects all Sorted collections doesn\u0027t it?",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_fa7a75d3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "isNonStringJavaOjectNotArray? \n\nSeems to be lacking the dispatch for the array case in the comment and in the code.\n\nFor arrays getClass, like any other Java Object via __clazz, equals is taken care of by equalitynormalizer?, but what about hashcode and toString shouldn\u0027t be a static dispatch for those?",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_3af6bd4a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "Maybe s/isNonStringJavaObjectNotArrayMethod/\nisNotStringNorArrayNorJsoMethod/ and the method name in Cast as well.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_1a5bc170",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "Fix outdated comment.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_856756fd",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "s/typeMarkerObject/arrayTypeMarkerObject\n\nAdd a comment here or at the setTypeMarker.\n\nArrays have a typeMarker field but instead of referring to the nullMethod() object they refer to arrayTypeMarkerObject.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_a56ff2d0",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "Can this body be replaced by \nreturn !!canCastUnsafe ... ? so that there is less duplication.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_c5c31e6e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "s/isNonStringJavaObjectNotArray/isNotStringNorArrayNorJso/",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_85b51601",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-06T22:56:50Z",
+      "side": 1,
+      "message": "instanceof Array does not seem to be needed as the typeMarker for arrays seems not to be the nullMethod.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

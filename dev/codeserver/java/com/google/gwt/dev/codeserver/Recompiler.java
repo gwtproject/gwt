@@ -262,6 +262,12 @@ class Recompiler {
     maybeOverrideConfig(moduleDef, "propertiesJs",
         "com/google/gwt/core/ext/linker/impl/properties.js");
 
+    // Don't use obfuscated names for CSS styles
+    String style = getConfigProperty(moduleDef, "CssResource.style");
+    if (style == null || style.equals("obf")) {
+      maybeOverrideConfig(moduleDef, "CssResource.style", "debug");
+    }
+
     for (Map.Entry<String, String> entry : bindingProperties.entrySet()) {
       String propName = entry.getKey();
       String propValue = entry.getValue();
@@ -297,6 +303,15 @@ class Recompiler {
       BindingProperty binding = (BindingProperty) prop;
       binding.setAllowedValues(binding.getRootCondition(), newValue);
     }
+  }
+
+  private static String getConfigProperty(ModuleDef module, String propName) {
+    Property prop = module.getProperties().find(propName);
+    if (prop instanceof ConfigurationProperty) {
+      ConfigurationProperty config = (ConfigurationProperty) prop;
+      return config.getValue();
+    }
+    return null;
   }
 
   private static boolean maybeOverrideConfig(ModuleDef module, String propName, String newValue) {

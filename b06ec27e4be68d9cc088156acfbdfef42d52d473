@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3eb9c5aa_c7fa3e2d",
+        "filename": "user/src/com/google/gwt/canvas/Canvas.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T14:50:30Z",
+      "side": 1,
+      "message": "Isn\u0027t \u003call\u003e the default behavior?",
+      "revId": "b06ec27e4be68d9cc088156acfbdfef42d52d473",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

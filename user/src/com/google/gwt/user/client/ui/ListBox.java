@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -32,16 +32,16 @@ import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
 /**
  * A widget that presents a list of choices to the user, either as a list box or
  * as a drop-down list.
- * 
+ *
  * <p>
  * <img class='gallery' src='doc-files/ListBox.png'/>
  * </p>
- * 
+ *
  * <h3>CSS Style Rules</h3>
  * <ul class='css'>
  * <li>.gwt-ListBox { }</li>
  * </ul>
- * 
+ *
  * <p>
  * <h3>Example</h3>
  * {@example com.google.gwt.examples.ListBoxExample}
@@ -65,7 +65,7 @@ import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
  * specify item's value using value attribute as shown below.
  * <p>
  * For example:
- * 
+ *
  * <pre>
  * &lt;g:ListBox>
  *  &lt;g:item>
@@ -91,16 +91,16 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
     WordCountDirectionEstimator.get();
 
   private static final String BIDI_ATTR_NAME = "bidiwrapped";
-  
+
   private static final int INSERT_AT_END = -1;
 
   /**
    * Creates a ListBox widget that wraps an existing &lt;select&gt; element.
-   * 
+   *
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
    * {@link RootPanel#detachNow(Widget)}.
-   * 
+   *
    * @param element the element to be wrapped
    * @return list box
    */
@@ -123,24 +123,26 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * Creates an empty list box in single selection mode.
    */
   public ListBox() {
-    this(false);
+    super(Document.get().createSelectElement());
+    setStyleName("gwt-ListBox");
   }
 
   /**
-   * Creates an empty list box. The preferred way to enable multiple selections
-   * is to use this constructor rather than {@link #setMultipleSelect(boolean)}.
-   * 
+   * Creates an empty list box.
+   *
    * @param isMultipleSelect specifies if multiple selection is enabled
+   * @deprecated use {@link #setMultipleSelect(boolean)} instead.
    */
+  @Deprecated
   public ListBox(boolean isMultipleSelect) {
-    super(Document.get().createSelectElement(isMultipleSelect));
-    setStyleName("gwt-ListBox");
+    this();
+    setMultipleSelect(isMultipleSelect);
   }
 
   /**
    * This constructor may be used by subclasses to explicitly use an existing
    * element. This element must be a &lt;select&gt; element.
-   * 
+   *
    * @param element the element to be used
    */
   protected ListBox(Element element) {
@@ -158,15 +160,15 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   @Deprecated
   public void addChangeListener(ChangeListener listener) {
     ListenerWrapper.WrappedChangeListener.add(this, listener);
-   }
+  }
 
   /**
    * Adds an item to the list box. This method has the same effect as
-   * 
+   *
    * <pre>
    * addItem(item, item)
    * </pre>
-   * 
+   *
    * @param item the text of the item to be added
    */
   public void addItem(String item) {
@@ -176,11 +178,11 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   /**
    * Adds an item to the list box, specifying its direction. This method has the
    * same effect as
-   * 
+   *
    * <pre>
    * addItem(item, dir, item)
    * </pre>
-   * 
+   *
    * @param item the text of the item to be added
    * @param dir the item's direction
    */
@@ -190,7 +192,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Adds an item to the list box, specifying an initial value for the item.
-   * 
+   *
    * @param item the text of the item to be added
    * @param value the item's value, to be submitted if it is part of a
    *          {@link FormPanel}; cannot be <code>null</code>
@@ -202,7 +204,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   /**
    * Adds an item to the list box, specifying its direction and an initial value
    * for the item.
-   * 
+   *
    * @param item the text of the item to be added
    * @param dir the item's direction
    * @param value the item's value, to be submitted if it is part of a
@@ -225,7 +227,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Gets the number of items present in the list box.
-   * 
+   *
    * @return the number of items
    */
   public int getItemCount() {
@@ -234,7 +236,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Gets the text associated with the item at the specified index.
-   * 
+   *
    * @param index the index of the item whose text is to be retrieved
    * @return the text associated with the item
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -252,7 +254,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * Gets the currently-selected item. If multiple items are selected, this
    * method will return the first selected item ({@link #isItemSelected(int)}
    * can be used to query individual items).
-   * 
+   *
    * @return the selected index, or <code>-1</code> if none is selected
    */
   public int getSelectedIndex() {
@@ -261,7 +263,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Gets the value associated with the item at a given index.
-   * 
+   *
    * @param index the index of the item to be retrieved
    * @return the item's associated value
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -274,7 +276,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   /**
    * Gets the number of items that are visible. If only one item is visible,
    * then the box will be displayed as a drop-down list.
-   * 
+   *
    * @return the visible item count
    */
   public int getVisibleItemCount() {
@@ -283,11 +285,11 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Inserts an item into the list box. Has the same effect as
-   * 
+   *
    * <pre>
    * insertItem(item, item, index)
    * </pre>
-   * 
+   *
    * @param item the text of the item to be inserted
    * @param index the index at which to insert it
    */
@@ -298,11 +300,11 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   /**
    * Inserts an item into the list box, specifying its direction. Has the same
    * effect as
-   * 
+   *
    * <pre>
    * insertItem(item, dir, item, index)
    * </pre>
-   * 
+   *
    * @param item the text of the item to be inserted
    * @param dir the item's direction
    * @param index the index at which to insert it
@@ -318,7 +320,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * <pre>
    * insertItem(item, null, value, index)
    * </pre>
-   * 
+   *
    * @param item the text of the item to be inserted
    * @param value the item's value, to be submitted if it is part of a
    *          {@link FormPanel}.
@@ -333,7 +335,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * value for the item. If the index is less than zero, or greater than or
    * equal to the length of the list, then the item will be appended to the end
    * of the list.
-   * 
+   *
    * @param item the text of the item to be inserted
    * @param dir the item's direction. If {@code null}, the item is displayed in
    *          the widget's overall direction, or, if a direction estimator has
@@ -362,7 +364,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Determines whether an individual list item is selected.
-   * 
+   *
    * @param index the index of the item to be tested
    * @return <code>true</code> if the item is selected
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -374,7 +376,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Gets whether this list allows multiple selection.
-   * 
+   *
    * @return <code>true</code> if multiple selection is allowed
    */
   public boolean isMultipleSelect() {
@@ -420,12 +422,12 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Sets whether an individual list item is selected.
-   * 
+   *
    * <p>
    * Note that setting the selection programmatically does <em>not</em> cause
    * the {@link ChangeHandler#onChange(ChangeEvent)} event to be fired.
    * </p>
-   * 
+   *
    * @param index the index of the item to be selected or unselected
    * @param selected <code>true</code> to select the item
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -437,7 +439,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Sets the text associated with the item at a given index.
-   * 
+   *
    * @param index the index of the item to be set
    * @param text the item's new text
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -448,7 +450,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Sets the text associated with the item at a given index.
-   * 
+   *
    * @param index the index of the item to be set
    * @param text the item's new text
    * @param dir the item's direction.
@@ -478,16 +480,16 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
 
   /**
    * Sets the currently selected index.
-   * 
+   *
    * After calling this method, only the specified item in the list will remain
    * selected. For a ListBox with multiple selection enabled, see
    * {@link #setItemSelected(int, boolean)} to select multiple items at a time.
-   * 
+   *
    * <p>
    * Note that setting the selected index programmatically does <em>not</em>
    * cause the {@link ChangeHandler#onChange(ChangeEvent)} event to be fired.
    * </p>
-   * 
+   *
    * @param index the index of the item to be selected
    */
   public void setSelectedIndex(int index) {
@@ -498,7 +500,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * Sets the value associated with the item at a given index. This value can be
    * used for any purpose, but is also what is passed to the server when the
    * list box is submitted as part of a {@link FormPanel}.
-   * 
+   *
    * @param index the index of the item to be set
    * @param value the item's new value; cannot be <code>null</code>
    * @throws IndexOutOfBoundsException if the index is out of range
@@ -511,7 +513,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   /**
    * Sets the number of items that are visible. If only one item is visible,
    * then the box will be displayed as a drop-down list.
-   * 
+   *
    * @param visibleItems the visible item count
    */
   public void setVisibleItemCount(int visibleItems) {
@@ -522,7 +524,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * Retrieves the text of an option element. If the text was set by
    * {@link #setOptionText} and was wrapped with Unicode bidi formatting
    * characters, also removes those additional formatting characters.
-   *  
+   *
    * @param option an option element
    * @return the element's text
    */
@@ -539,7 +541,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * <ul>
    * <li>-item# = the option at the specified index.</li>
    * </ul>
-   * 
+   *
    * @see UIObject#onEnsureDebugId(String)
    */
   @Override
@@ -559,7 +561,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * opposite to the page's direction, also wraps it with Unicode bidi
    * formatting characters to prevent garbling, and indicates that this was done
    * by setting the option's <code>BIDI_ATTR_NAME</code> custom attribute.
-   * 
+   *
    * @param option an option element
    * @param text text to be set to the element
    * @param dir the text's direction. If {@code null} and direction estimation

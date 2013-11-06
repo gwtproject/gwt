@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,21 +26,21 @@ public class Document extends Node {
 
   /**
    * We cache Document.nativeGet() in DevMode, because crossing the JSNI
-   * boundary thousands of times just to read a constant value is slow. 
+   * boundary thousands of times just to read a constant value is slow.
    */
   private static Document doc;
-  
+
   /**
    * Gets the default document. This is the document in which the module is
    * running.
-   * 
+   *
    * @return the default document
    */
   public static Document get() {
     if (GWT.isScript()) {
       return nativeGet();
     }
-    
+
     // No need to be MT-safe. Single-threaded JS code.
     if (doc == null) {
       doc = nativeGet();
@@ -57,7 +57,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;a&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final AnchorElement createAnchorElement() {
@@ -66,7 +66,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;area&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final AreaElement createAreaElement() {
@@ -75,7 +75,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;audio&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final AudioElement createAudioElement() {
@@ -84,7 +84,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;base&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final BaseElement createBaseElement() {
@@ -93,7 +93,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;blockquote&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final QuoteElement createBlockQuoteElement() {
@@ -110,7 +110,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;br&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final BRElement createBRElement() {
@@ -122,7 +122,7 @@ public class Document extends Node {
    * <p>
    * <b>Warning!</b> The button type is actually implementation-dependent and is
    * read-only.
-   * 
+   *
    * @return the newly created element
    * @deprecated use {@link #createPushButtonElement()},
    *             {@link #createResetButtonElement()} or
@@ -135,7 +135,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='button'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createButtonInputElement() {
@@ -144,7 +144,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;canvas&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final CanvasElement createCanvasElement() {
@@ -153,7 +153,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;caption&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableCaptionElement createCaptionElement() {
@@ -170,7 +170,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='checkbox'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createCheckInputElement() {
@@ -179,12 +179,12 @@ public class Document extends Node {
 
   /**
    * Creates a 'click' event.
-   * 
+   *
    * <p>
    * Note that this method does not allow the event's 'button' field to be
    * specified, because not all browsers support it reliably for click events.
    * </p>
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -208,7 +208,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;col&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableColElement createColElement() {
@@ -218,7 +218,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;colgroup&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableColElement createColGroupElement() {
@@ -228,10 +228,10 @@ public class Document extends Node {
 
   /**
    * Creates a 'contextmenu' event.
-   * 
+   *
    * Note: Contextmenu events will not dispatch properly on Firefox 2 and
    * earlier.
-   * 
+   *
    * @return the event object
    */
   public final NativeEvent createContextMenuEvent() {
@@ -240,17 +240,17 @@ public class Document extends Node {
 
   /**
    * Creates a 'dblclick' event.
-   * 
+   *
    * <p>
    * Note that this method does not allow the event's 'button' field to be
    * specified, because not all browsers support it reliably for click events.
    * </p>
-   * 
+   *
    * <p>
    * Note that on some browsers, this may cause 'click' events to be synthesized
    * as well.
    * </p>
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -274,7 +274,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;del&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ModElement createDelElement() {
@@ -283,7 +283,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;div&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final DivElement createDivElement() {
@@ -292,7 +292,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;dl&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final DListElement createDLElement() {
@@ -301,7 +301,7 @@ public class Document extends Node {
 
   /**
    * Creates a new element.
-   * 
+   *
    * @param tagName the tag name of the element to be created
    * @return the newly created element
    */
@@ -311,7 +311,7 @@ public class Document extends Node {
 
   /**
    * Creates an 'error' event.
-   * 
+   *
    * @return the event object
    */
   public final NativeEvent createErrorEvent() {
@@ -320,7 +320,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;fieldset&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final FieldSetElement createFieldSetElement() {
@@ -330,7 +330,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='file'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createFileInputElement() {
@@ -339,7 +339,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'focus' event.
-   * 
+   *
    * @return the event object
    */
   public final NativeEvent createFocusEvent() {
@@ -348,7 +348,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;form&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final FormElement createFormElement() {
@@ -357,7 +357,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;frame&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final FrameElement createFrameElement() {
@@ -366,7 +366,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;frameset&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final FrameSetElement createFrameSetElement() {
@@ -376,7 +376,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;head&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final HeadElement createHeadElement() {
@@ -385,7 +385,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;h(n)&gt; element.
-   * 
+   *
    * @param n the type of heading, from 1 to 6 inclusive
    * @return the newly created element
    */
@@ -396,7 +396,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='hidden'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createHiddenInputElement() {
@@ -405,7 +405,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;hr&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final HRElement createHRElement() {
@@ -414,19 +414,19 @@ public class Document extends Node {
 
   /**
    * Creates an event.
-   * 
+   *
    * <p>
    * While this method may be used to create events directly, it is generally
    * preferable to use existing helper methods such as
    * {@link #createFocusEvent()}.
    * </p>
-   * 
+   *
    * <p>
    * Also, note that on Internet Explorer the 'canBubble' and 'cancelable'
    * arguments will be ignored (the event's behavior is inferred by the browser
    * based upon its type).
    * </p>
-   * 
+   *
    * @param type the type of event (e.g., BrowserEvents.FOCUS, BrowserEvents.LOAD, etc)
    * @param canBubble <code>true</code> if the event should bubble
    * @param cancelable <code>true</code> if the event should be cancelable
@@ -439,7 +439,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;iframe&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final IFrameElement createIFrameElement() {
@@ -448,7 +448,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;img&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ImageElement createImageElement() {
@@ -457,7 +457,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='image'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createImageInputElement() {
@@ -466,7 +466,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;ins&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ModElement createInsElement() {
@@ -475,14 +475,14 @@ public class Document extends Node {
 
   /**
    * Creates a key-code event ('keydown' or 'keyup').
-   * 
+   *
    * <p>
    * While this method may be used to create events directly, it is generally
    * preferable to use existing helper methods such as
    * {@link #createKeyDownEvent(boolean, boolean, boolean, boolean, int)} or
    * {@link #createKeyUpEvent(boolean, boolean, boolean, boolean, int)}.
    * </p>
-   * 
+   *
    * @param type the type of event (e.g., BrowserEvents.KEYDOWN, BrowserEvents.KEYPRESS, etc)
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
@@ -499,7 +499,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keydown' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -515,7 +515,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keydown' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -523,7 +523,7 @@ public class Document extends Node {
    * @param keyCode the key-code to be set on the event
    * @param charCode the char-code to be set on the event
    * @return the event object
-   * 
+   *
    * @deprecated as of GWT2.1 (keydown events don't have a charCode), use
    *             {@link #createKeyDownEvent(boolean, boolean, boolean, boolean, int)}
    */
@@ -536,20 +536,20 @@ public class Document extends Node {
 
   /**
    * Creates a key event.
-   * 
+   *
    * <p>
    * While this method may be used to create events directly, it is generally
    * preferable to use existing helper methods such as
    * {@link #createKeyPressEvent(boolean, boolean, boolean, boolean, int, int)}
    * .
    * </p>
-   * 
+   *
    * <p>
    * Also, note that on Internet Explorer the 'canBubble' and 'cancelable'
    * arguments will be ignored (the event's behavior is inferred by the browser
    * based upon its type).
    * </p>
-   * 
+   *
    * @param type the type of event (e.g., BrowserEvents.KEYDOWN, BrowserEvents.KEYPRESS, etc)
    * @param canBubble <code>true</code> if the event should bubble
    * @param cancelable <code>true</code> if the event should be cancelable
@@ -560,7 +560,7 @@ public class Document extends Node {
    * @param keyCode the key-code to be set on the event
    * @param charCode the char-code to be set on the event
    * @return the event object
-   * 
+   *
    * @deprecated use
    *             {@link #createKeyCodeEvent(String, boolean, boolean, boolean, boolean, int)}
    *             or
@@ -576,7 +576,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keypress' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -592,7 +592,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keypress' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -600,7 +600,7 @@ public class Document extends Node {
    * @param keyCode the key-code to be set on the event
    * @param charCode the char-code to be set on the event
    * @return the event object
-   * 
+   *
    * @deprecated as of GWT 2.1 (keypress events don't have a keyCode), use
    *             {@link #createKeyPressEvent(boolean, boolean, boolean, boolean, int)}
    */
@@ -613,7 +613,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keyup' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -629,7 +629,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'keyup' event.
-   * 
+   *
    * @param ctrlKey <code>true</code> if the ctrl key is depressed
    * @param altKey <code>true</code> if the alt key is depressed
    * @param shiftKey <code>true</code> if the shift key is depressed
@@ -637,7 +637,7 @@ public class Document extends Node {
    * @param keyCode the key-code to be set on the event
    * @param charCode the char-code to be set on the event
    * @return the event object
-   * 
+   *
    * @deprecated as of GWT 2.1 (keyup events don't have a charCode), use
    *             {@link #createKeyUpEvent(boolean, boolean, boolean, boolean, int)}
    */
@@ -650,7 +650,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;label&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final LabelElement createLabelElement() {
@@ -659,7 +659,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;legend&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final LegendElement createLegendElement() {
@@ -668,7 +668,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;li&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final LIElement createLIElement() {
@@ -677,7 +677,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;link&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final LinkElement createLinkElement() {
@@ -686,7 +686,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'load' event.
-   * 
+   *
    * @return the event object
    */
   public final NativeEvent createLoadEvent() {
@@ -695,7 +695,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;map&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final MapElement createMapElement() {
@@ -704,7 +704,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;meta&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final MetaElement createMetaElement() {
@@ -713,7 +713,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'mousedown' event.
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -736,20 +736,20 @@ public class Document extends Node {
 
   /**
    * Creates an mouse event.
-   * 
+   *
    * <p>
    * While this method may be used to create events directly, it is generally
    * preferable to use existing helper methods such as
    * {@link #createClickEvent(int, int, int, int, int, boolean, boolean, boolean, boolean)}
    * .
    * </p>
-   * 
+   *
    * <p>
    * Also, note that on Internet Explorer the 'canBubble' and 'cancelable'
    * arguments will be ignored (the event's behavior is inferred by the browser
    * based upon its type).
    * </p>
-   * 
+   *
    * @param type the type of event (e.g., BrowserEvents.FOCUS, BrowserEvents.LOAD, etc)
    * @param canBubble <code>true</code> if the event should bubble
    * @param cancelable <code>true</code> if the event should be cancelable
@@ -779,7 +779,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'mousemove' event.
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -802,10 +802,10 @@ public class Document extends Node {
 
   /**
    * Creates a 'mouseout' event.
-   * 
+   *
    * Note: The 'relatedTarget' parameter will be ignored on Firefox 2 and
    * earlier.
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -830,10 +830,10 @@ public class Document extends Node {
 
   /**
    * Creates a 'mouseover' event.
-   * 
+   *
    * Note: The 'relatedTarget' parameter will be ignored on Firefox 2 and
    * earlier.
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -858,7 +858,7 @@ public class Document extends Node {
 
   /**
    * Creates a 'mouseup' event.
-   * 
+   *
    * @param detail the event's detail property
    * @param screenX the event's screen-relative x-position
    * @param screenY the event's screen-relative y-position
@@ -881,7 +881,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;object&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ObjectElement createObjectElement() {
@@ -890,7 +890,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;ol&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final OListElement createOLElement() {
@@ -899,7 +899,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;optgroup&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final OptGroupElement createOptGroupElement() {
@@ -909,7 +909,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;option&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final OptionElement createOptionElement() {
@@ -918,7 +918,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;param&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ParamElement createParamElement() {
@@ -927,7 +927,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='password'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createPasswordInputElement() {
@@ -936,7 +936,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;p&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ParagraphElement createPElement() {
@@ -946,7 +946,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;pre&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final PreElement createPreElement() {
@@ -955,7 +955,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;button type='button'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ButtonElement createPushButtonElement() {
@@ -964,7 +964,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;q&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final QuoteElement createQElement() {
@@ -973,7 +973,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='radio'&gt; element.
-   * 
+   *
    * @param name the name of the radio input (used for grouping)
    * @return the newly created element
    */
@@ -983,7 +983,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;button type='reset'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ButtonElement createResetButtonElement() {
@@ -992,7 +992,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='reset'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createResetInputElement() {
@@ -1001,7 +1001,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;script&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ScriptElement createScriptElement() {
@@ -1010,7 +1010,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;script&gt; element.
-   * 
+   *
    * @param source the source code to set inside the element
    * @return the newly created element
    */
@@ -1020,10 +1020,10 @@ public class Document extends Node {
 
   /**
    * Creates a 'scroll' event.
-   * 
+   *
    * Note: Contextmenu events will not dispatch properly on Firefox 2 and
    * earlier.
-   * 
+   *
    * @return the event object
    */
   public final NativeEvent createScrollEvent() {
@@ -1032,26 +1032,32 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;select&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final SelectElement createSelectElement() {
-    return DOMImpl.impl.createSelectElement(this, false);
+    return (SelectElement) DOMImpl.impl.createElement(this, SelectElement.TAG);
   }
 
   /**
    * Creates a &lt;select&gt; element.
-   * 
+   *
    * @param multiple <code>true</code> to allow multiple-selection
    * @return the newly created element
+   *
+   * @deprecatred use {@link #createSelectElement()} and call
+   *              {@link SelectElement#setMultiple(boolean)} to configure multiple-selection.
    */
+  @Deprecated
   public final SelectElement createSelectElement(boolean multiple) {
-    return DOMImpl.impl.createSelectElement(this, multiple);
+    SelectElement el = createSelectElement();
+    el.setMultiple(multiple);
+    return el;
   }
 
   /**
    * Creates an &lt;source&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final SourceElement createSourceElement() {
@@ -1060,7 +1066,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;span&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final SpanElement createSpanElement() {
@@ -1069,7 +1075,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;style&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final StyleElement createStyleElement() {
@@ -1078,7 +1084,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;button type='submit'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final ButtonElement createSubmitButtonElement() {
@@ -1087,7 +1093,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='submit'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createSubmitInputElement() {
@@ -1096,7 +1102,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;table&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableElement createTableElement() {
@@ -1105,7 +1111,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;tbody&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableSectionElement createTBodyElement() {
@@ -1115,7 +1121,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;td&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableCellElement createTDElement() {
@@ -1125,7 +1131,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;textarea&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TextAreaElement createTextAreaElement() {
@@ -1135,7 +1141,7 @@ public class Document extends Node {
 
   /**
    * Creates an &lt;input type='text'&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final InputElement createTextInputElement() {
@@ -1144,7 +1150,7 @@ public class Document extends Node {
 
   /**
    * Creates a text node.
-   * 
+   *
    * @param data the text node's initial text
    * @return the newly created element
    */
@@ -1154,7 +1160,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;tfoot&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableSectionElement createTFootElement() {
@@ -1164,7 +1170,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;thead&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableSectionElement createTHeadElement() {
@@ -1174,7 +1180,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;th&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableCellElement createTHElement() {
@@ -1184,7 +1190,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;title&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TitleElement createTitleElement() {
@@ -1193,7 +1199,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;tr&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final TableRowElement createTRElement() {
@@ -1203,7 +1209,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;ul&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final UListElement createULElement() {
@@ -1212,9 +1218,9 @@ public class Document extends Node {
 
   /**
    * Creates an identifier guaranteed to be unique within this document.
-   * 
+   *
    * This is useful for allocating element id's.
-   * 
+   *
    * @return a unique identifier
    */
   public final native String createUniqueId() /*-{
@@ -1229,7 +1235,7 @@ public class Document extends Node {
 
   /**
    * Creates a &lt;video&gt; element.
-   * 
+   *
    * @return the newly created element
    */
   public final VideoElement createVideoElement() {
@@ -1238,7 +1244,7 @@ public class Document extends Node {
 
   /**
    * Enables or disables scrolling of the document.
-   * 
+   *
    * @param enable whether scrolling should be enabled or disabled
    */
   public final void enableScrolling(boolean enable) {
@@ -1249,7 +1255,7 @@ public class Document extends Node {
   /**
    * The element that contains the content for the document. In documents with
    * BODY contents, returns the BODY element.
-   * 
+   *
    * @return the document's body
    */
   public final native BodyElement getBody() /*-{
@@ -1260,27 +1266,27 @@ public class Document extends Node {
    * Returns the left offset between the absolute coordinate system and the
    * body's positioning context. This method is useful for positioning children
    * of the body element in absolute coordinates.
-   * 
+   *
    * <p>
    * For example, to position an element directly under the mouse cursor
    * (assuming you are handling a mouse event), do the following:
    * </p>
-   * 
+   *
    * <pre>
    * Event event;
    * Document doc;
    * DivElement child;  // assume absolutely-positioned child of the body
-   * 
+   *
    * // Get the event location in absolute coordinates.
    * int absX = event.getClientX() + Window.getScrollLeft();
    * int absY = event.getClientY() + Window.getScrollTop();
-   * 
+   *
    * // Position the child element, adjusting for the difference between the
    * // absolute coordinate system and the body's positioning coordinates.
    * child.getStyle().setPropertyPx("left", absX - doc.getBodyOffsetLeft());
    * child.getStyle().setPropertyPx("top", absY - doc.getBodyOffsetTop());
    * </pre>
-   * 
+   *
    * @return the left offset of the body's positioning coordinate system
    */
   public final int getBodyOffsetLeft() {
@@ -1291,7 +1297,7 @@ public class Document extends Node {
    * Returns the top offset between the absolute coordinate system and the
    * body's positioning context. This method is useful for positioning children
    * of the body element in absolute coordinates.
-   * 
+   *
    * @return the top offset of the body's positioning coordinate system
    * @see #getBodyOffsetLeft()
    */
@@ -1301,7 +1307,7 @@ public class Document extends Node {
 
   /**
    * The height of the document's client area.
-   * 
+   *
    * @return the document's client height
    */
   public final int getClientHeight() {
@@ -1310,7 +1316,7 @@ public class Document extends Node {
 
   /**
    * The width of the document's client area.
-   * 
+   *
    * @return the document's client width
    */
   public final int getClientWidth() {
@@ -1320,7 +1326,7 @@ public class Document extends Node {
   /**
    * Gets the document's "compatibility mode", typically used for determining
    * whether the document is in "quirks" or "strict" mode.
-   * 
+   *
    * @return one of "BackCompat" or "CSS1Compat"
    */
   public final native String getCompatMode() /*-{
@@ -1329,7 +1335,7 @@ public class Document extends Node {
 
   /**
    * Gets the document's element. This is typically the &lt;html&gt; element.
-   * 
+   *
    * @return the document element
    */
   public final native Element getDocumentElement() /*-{
@@ -1339,7 +1345,7 @@ public class Document extends Node {
   /**
    * The domain name of the server that served the document, or null if the
    * server cannot be identified by a domain name.
-   * 
+   *
    * @return the document's domain, or <code>null</code> if none exists
    */
   public final native String getDomain() /*-{
@@ -1350,7 +1356,7 @@ public class Document extends Node {
    * Returns the {@link Element} whose id is given by elementId. If no such
    * element exists, returns null. Behavior is not defined if more than one
    * element has this id.
-   * 
+   *
    * @param elementId the unique id value for an element
    * @return the matching element
    */
@@ -1362,7 +1368,7 @@ public class Document extends Node {
    * Returns a {@link NodeList} of all the {@link Element Elements} with a given
    * tag name in the order in which they are encountered in a preorder traversal
    * of the document tree.
-   * 
+   *
    * @param tagName the name of the tag to match on (the special value
    *          <code>"*"</code> matches all tags)
    * @return a list containing all the matched elements
@@ -1387,7 +1393,7 @@ public class Document extends Node {
    * Returns the URI of the page that linked to this page. The value is an empty
    * string if the user navigated to the page directly (not through a link, but,
    * for example, via a bookmark).
-   * 
+   *
    * @return the referrer URI
    */
   public final native String getReferrer() /*-{
@@ -1396,7 +1402,7 @@ public class Document extends Node {
 
   /**
    * The height of the scrollable area of the document.
-   * 
+   *
    * @return the height of the document's scrollable area
    */
   public final int getScrollHeight() {
@@ -1405,12 +1411,12 @@ public class Document extends Node {
 
   /**
    * The number of pixels that the document's content is scrolled from the left.
-   * 
+   *
    * <p>
    * If the document is in RTL mode, this method will return a negative value of
    * the number of pixels scrolled from the right.
    * </p>
-   * 
+   *
    * @return the document's left scroll position
    */
   public final int getScrollLeft() {
@@ -1419,7 +1425,7 @@ public class Document extends Node {
 
   /**
    * The number of pixels that the document's content is scrolled from the top.
-   * 
+   *
    * @return the document's top scroll position
    */
   public final int getScrollTop() {
@@ -1428,7 +1434,7 @@ public class Document extends Node {
 
   /**
    * The width of the scrollable area of the document.
-   * 
+   *
    * @return the width of the document's scrollable area
    */
   public final int getScrollWidth() {
@@ -1438,7 +1444,7 @@ public class Document extends Node {
   /**
    * Gets the title of a document as specified by the TITLE element in the head
    * of the document.
-   * 
+   *
    * @return the document's title
    */
   public final native String getTitle() /*-{
@@ -1447,7 +1453,7 @@ public class Document extends Node {
 
   /**
    * Gets the absolute URI of this document.
-   * 
+   *
    * @return the document URI
    */
   public final native String getURL() /*-{
@@ -1456,11 +1462,11 @@ public class Document extends Node {
 
   /**
    * Imports a node from another document to this document.
-   * 
+   *
    * The returned node has no parent; ({@link Node#getParentNode()} is null).
    * The source node is not altered or removed from the original document; this
    * method creates a new copy of the source node.
-   * 
+   *
    * For all nodes, importing a node creates a node object owned by the
    * importing document, with attribute values identical to the source node's
    * nodeName and nodeType, plus the attributes related to namespaces (prefix,
@@ -1469,7 +1475,7 @@ public class Document extends Node {
    * to the nodeType, attempting to mirror the behavior expected if a fragment
    * of XML or HTML source was copied from one document to another, recognizing
    * that the two documents may have different DTDs in the XML case.
-   * 
+   *
    * @param node the node to import
    * @param deep If <code>true</code>, recursively import the subtree under the
    *          specified node; if <code>false</code>, import only the node
@@ -1482,7 +1488,7 @@ public class Document extends Node {
   /**
    * Determines whether the document's "compatMode" is "CSS1Compat". This is
    * normally described as "strict" mode.
-   * 
+   *
    * @return <code>true</code> if the document is in CSS1Compat mode
    */
   public final boolean isCSS1Compat() {
@@ -1492,7 +1498,7 @@ public class Document extends Node {
   /**
    * Sets the number of pixels that the document's content is scrolled from the
    * left.
-   * 
+   *
    * @param left the document's left scroll position
    */
   public final void setScrollLeft(int left) {
@@ -1502,7 +1508,7 @@ public class Document extends Node {
   /**
    * Sets the number of pixels that the document's content is scrolled from the
    * top.
-   * 
+   *
    * @param top the document's top scroll position
    */
   public final void setScrollTop(int top) {
@@ -1512,7 +1518,7 @@ public class Document extends Node {
   /**
    * Sets the title of a document as specified by the TITLE element in the head
    * of the document.
-   * 
+   *
    * @param title the document's new title
    */
   public final native void setTitle(String title) /*-{
@@ -1524,9 +1530,9 @@ public class Document extends Node {
    * used to for scrolling and client-area measurement. In quirks-mode it is the
    * &lt;body&gt; element, while in standards-mode it is the &lt;html&gt;
    * element.
-   * 
+   *
    * This is package-protected because the viewport is
-   * 
+   *
    * @return the document's viewport element
    */
   final Element getViewportElement() {

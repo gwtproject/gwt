@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3eb9c5aa_273d5aa6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T13:56:22Z",
+      "side": 1,
+      "message": "typo: it*s* dependencies",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb9c5aa_47e5eefc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T13:56:22Z",
+      "side": 1,
+      "message": "That\u0027s not a dependency of HtmlUnit right? The summary should probably talk about upgrading HtmlUnit and Jetty, and their dependencies; or maybe split that change in two.",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb9c5aa_e74e6252",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T13:56:22Z",
+      "side": 1,
+      "message": "Change to a \"Bug:\" footer line? (make it searchable in Gerrit with \"tr:7224\": https://gwt-review.googlesource.com/#/q/tr:7224,n,z)",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb9c5aa_c751def4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T13:56:22Z",
+      "side": 1,
+      "message": "Not the correct link. Did you inadvertently changed the Change-Id?",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb9c5aa_67ea72d0",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-06T13:56:22Z",
+      "side": 1,
+      "message": "So there\u0027s no longer a need for a NoMetaInf version? (I think I already asked Goktug about that one, don\u0027t remember the answer)",
+      "revId": "0a198fb2ce7210bb8dce762c4fbb5134a20db3b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

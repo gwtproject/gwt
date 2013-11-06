@@ -321,7 +321,11 @@ public class DOM {
    * @return the newly-created element
    */
   public static com.google.gwt.user.client.Element createSelect(boolean multiple) {
-    return Document.get().createSelectElement(multiple).cast();
+    SelectElement selectElement = Document.get().createSelectElement();
+    if (multiple) {
+      selectElement.setMultiple(true);
+    }
+    return selectElement.cast();
   }
 
   /**

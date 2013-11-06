@@ -1036,17 +1036,24 @@ public class Document extends Node {
    * @return the newly created element
    */
   public final SelectElement createSelectElement() {
-    return DOMImpl.impl.createSelectElement(this, false);
+    return (SelectElement) DOMImpl.impl.createElement(this, SelectElement.TAG);
   }
 
   /**
    * Creates a &lt;select&gt; element.
-   * 
+   *
    * @param multiple <code>true</code> to allow multiple-selection
    * @return the newly created element
+   *
+   * @deprecated use {@link #createSelectElement()} instead. IE6 required to know wether an element
+   * had to be a single or a multi select element. This is no longer needed, you can now just use
+   * {@link SelectElement#setMultiple(boolean)}.
    */
+  @Deprecated
   public final SelectElement createSelectElement(boolean multiple) {
-    return DOMImpl.impl.createSelectElement(this, multiple);
+    SelectElement el = createSelectElement();
+    el.setMultiple(true);
+    return el;
   }
 
   /**

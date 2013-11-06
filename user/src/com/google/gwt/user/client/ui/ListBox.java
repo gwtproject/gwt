@@ -123,18 +123,24 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * Creates an empty list box in single selection mode.
    */
   public ListBox() {
-    this(false);
+    super(Document.get().createSelectElement());
+    setStyleName("gwt-ListBox");
   }
 
   /**
-   * Creates an empty list box. The preferred way to enable multiple selections
-   * is to use this constructor rather than {@link #setMultipleSelect(boolean)}.
-   * 
+   * Creates an empty list box.
+   *
+   * @deprecated use {@link #setMultipleSelect(boolean)} instead.
+   *
    * @param isMultipleSelect specifies if multiple selection is enabled
    */
+  @Deprecated
   public ListBox(boolean isMultipleSelect) {
-    super(Document.get().createSelectElement(isMultipleSelect));
-    setStyleName("gwt-ListBox");
+    this();
+    if (isMultipleSelect) {
+      SelectElement selectElement = getElement().cast();
+      selectElement.setMultiple(isMultipleSelect);
+    }
   }
 
   /**
@@ -158,7 +164,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   @Deprecated
   public void addChangeListener(ChangeListener listener) {
     ListenerWrapper.WrappedChangeListener.add(this, listener);
-   }
+  }
 
   /**
    * Adds an item to the list box. This method has the same effect as

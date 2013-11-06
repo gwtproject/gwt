@@ -74,8 +74,6 @@ public class DocumentTest extends GWTTestCase {
     assertEquals("q", doc.createQElement().getTagName().toLowerCase());
     assertEquals("script", doc.createScriptElement().getTagName().toLowerCase());
     assertEquals("select", doc.createSelectElement().getTagName().toLowerCase());
-    assertEquals("select",
-        doc.createSelectElement(false).getTagName().toLowerCase());
     assertEquals("span", doc.createSpanElement().getTagName().toLowerCase());
     assertEquals("style", doc.createStyleElement().getTagName().toLowerCase());
     assertEquals("table", doc.createTableElement().getTagName().toLowerCase());

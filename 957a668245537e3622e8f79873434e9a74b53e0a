@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e5e312a_de7ae5d3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-06T00:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_e5df7152",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_45b03d1e",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-04T20:19:00Z",
       "side": 1,
       "message": "Seems like we can simplify this: \"Generators that don\u0027t need access to every property can override this method to speed up the compile.\"",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5e312a_9e746de6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-06T00:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_45b03d1e",
       "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "becbf53b_2bf439b0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-06T00:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2c007a_256509b9",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2c007a_c527cd7a",
         "filename": "dev/core/src/com/google/gwt/core/ext/LimitablePropertyOracle.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-04T20:19:00Z",
       "side": 1,
       "message": "Could be changed to:\n\nvoid setPropertyChecker(PropertyChecker);\n\n(See my other comment.)",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_0beffdde",
+        "filename": "dev/core/src/com/google/gwt/core/ext/LimitablePropertyOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-06T00:15:23Z",
+      "side": 1,
+      "message": "switched to a design of wrapping property oracles (on the fly) with an access control wrapper before dispatching generator execution.\n\nit has the advantage of requiring no changes in generators or property oracles, while still enforcing property access restrictions.",
+      "parentUuid": "1e2c007a_c527cd7a",
       "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -98,6 +170,24 @@
       "writtenOn": "2013-11-05T19:28:44Z",
       "side": 1,
       "message": "the error is thrown inside of propertyOracle.getConfigurationProperty() and propertyOracle.getSelectionProperty(), neither of which know what generator is the caller. and i don\u0027t think they should know.\n\nthis is an error message for programmers and the generator caller is visible in the stacktrace. i\u0027m not sure it\u0027s worth doing more.\n\nthat being said, i could throw a custom error type here and catch it in a try/catch around generator.generate() in StandardGeneratorContext, and rethrow with a more specific message.\n\nwhat do you think?",
+      "parentUuid": "1e2c007a_25eee9e4",
+      "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becbf53b_ebd5d107",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyOracles.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-06T00:15:23Z",
+      "side": 1,
+      "message": "the new patch (different design) has more specific error messages",
       "parentUuid": "1e2c007a_25eee9e4",
       "revId": "957a668245537e3622e8f79873434e9a74b53e0a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5edbd905_30bee89b",
+        "filename": "user/src/com/google/gwt/user/client/impl/EventMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-06T02:09:49Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "b14f5baf1d4876da3ac77b05fc0e9d2d96e5e4e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

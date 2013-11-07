@@ -33,6 +33,23 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_58d51dd0",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-11-07T03:27:34Z",
+      "side": 1,
+      "message": "When we talked about this before, we decided we couldn\u0027t easily catch everything that would throw an NPE.  I suggest you need to cover pretty much every case and test for it, such as array derefs, method calls, etc.\n\nOne big problem is that any method calls that get devirtualized and inlined will not result in an NPE, but will just have \"this\" be null.  If you want to catch those, you would have to test this inside the called method.",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

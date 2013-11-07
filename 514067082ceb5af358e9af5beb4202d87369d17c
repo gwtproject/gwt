@@ -104,6 +104,24 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_3a801999",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-07T17:26:08Z",
+      "side": 1,
+      "message": "Yes let\u0027s bring your CL back to life to fix devmode correctly. Calling an instance method on null is not intuitive and the in the (probably few) places it is used I suppose it can be worked around easily. \n\nAlso invoking a method on a null dualImpl JSO throws a JS TypeError due to testing whether is a JavaObject or not. So having the same semantics for both cases would be a sane option.",
+      "parentUuid": "5e52f951_fba7cb9e",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

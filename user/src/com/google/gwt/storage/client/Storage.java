@@ -93,22 +93,6 @@ public final class Storage {
     }-*/;
   }
 
-  /**
-   * Detector for browsers that do not support Storage.
-   */
-  @SuppressWarnings("unused")
-  private static class StorageSupportDetectorNo extends StorageSupportDetector {
-    @Override
-    public boolean isLocalStorageSupported() {
-      return false;
-    }
-
-    @Override
-    public boolean isSessionStorageSupported() {
-      return false;
-    }
-  }
-
   static final StorageImpl impl = GWT.create(StorageImpl.class);
 
   private static Storage localStorage;

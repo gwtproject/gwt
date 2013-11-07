@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -38,7 +38,7 @@ import java.util.Set;
  */
 public class BrowserChannelServer extends BrowserChannel
     implements Runnable {
-  
+
   /**
    * Hook interface for responding to messages from the client.
    */
@@ -77,7 +77,7 @@ public class BrowserChannelServer extends BrowserChannel
   private static class ServerObjectRefFactory implements ObjectRefFactory {
 
     private final RemoteObjectTable<JsObjectRef> remoteObjectTable;
-    
+
     public ServerObjectRefFactory() {
       remoteObjectTable = new RemoteObjectTable<JsObjectRef>();
     }
@@ -107,9 +107,9 @@ public class BrowserChannelServer extends BrowserChannel
   public static final String JSO_CLASS = "com.google.gwt.core.client.JavaScriptObject";
 
   private static Map<String, byte[]> iconCache = new HashMap<String, byte[]>();
-  
+
   private static final Object cacheLock = new Object();
-  
+
   private DevModeSession devModeSession;
 
   private final SessionHandlerServer handler;
@@ -128,7 +128,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Create a code server for the supplied socket.
-   * 
+   *
    * @param initialLogger
    * @param socket
    * @param handler
@@ -152,10 +152,10 @@ public class BrowserChannelServer extends BrowserChannel
     this.ignoreRemoteDeath = ignoreRemoteDeath;
     init(initialLogger);
   }
-  
+
   /**
    * Indicate that Java no longer has references to the supplied JS objects.
-   * 
+   *
    * @param ids array of JS object IDs that have been freeded
    */
   public void freeJsValue(int[] ids) {
@@ -247,6 +247,17 @@ public class BrowserChannelServer extends BrowserChannel
         // reset the stack trace to here to minimize GWT infrastructure in
         // the stack trace
         exception.fillInStackTrace();
+
+        // Accessing a field of a null or undefined JavaScript value ends with at return value
+        // of null or undefined instead of a TypeError.
+        // TODO(rluble): make sure that only null dereferences fall here.
+        if (returnJsValue.isNull() || returnJsValue.isUndefined() ||
+            returnValue.isJsObject() && returnJsValue.getTypeString().contains("TypeError")) {
+          // Assume the JavaScript exception is a type error and throw an NPE instead.
+          RuntimeException npe = new NullPointerException();
+          npe.initCause(exception);
+          exception = npe;
+        }
         throw exception;
       }
     } catch (IOException e) {
@@ -258,7 +269,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Load the supplied JSNI code into the browser.
-   * 
+   *
    * @param jsni JSNI source to load into the browser
    */
   public void loadJsni(String jsni) {
@@ -273,7 +284,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * React to messages from the other side, where no return value is expected.
-   * 
+   *
    * @param handler
    * @throws RemoteDeathError
    */
@@ -314,9 +325,9 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * React to messages from the other side, where a return value is expected.
-   * 
+   *
    * @param handler
-   * @throws BrowserChannelException 
+   * @throws BrowserChannelException
    * @throws RemoteDeathError
    */
   public ReturnMessage reactToMessagesWhileWaitingForReturn(
@@ -378,7 +389,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Close the connection to the browser.
-   * 
+   *
    * @throws IOException
    */
   public void shutdown() throws IOException {
@@ -458,7 +469,7 @@ public class BrowserChannelServer extends BrowserChannel
         protocolVersion = Math.min(PROTOCOL_VERSION_CURRENT, maxVersion);
         new ProtocolVersionMessage(this, protocolVersion).send();
         type = Message.readMessageType(getStreamFromOtherSide());
-        
+
         // Optionally allow client to request switch of transports.  Inband is
         // always supported, so a return of an empty transport string requires
         // the client to stay in this channel.
@@ -472,7 +483,7 @@ public class BrowserChannelServer extends BrowserChannel
           new SwitchTransportMessage(this, transport, transportArgs).send();
           type = Message.readMessageType(getStreamFromOtherSide());
         }
-        
+
         // Now we expect a LoadModule message to load a GWT module.
         if (type != MessageType.LOAD_MODULE) {
           logger.log(TreeLogger.ERROR, "Unexpected message type " + type
@@ -556,7 +567,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Convert a JsValue into a BrowserChannel Value.
-   * 
+   *
    * @param localObjects lookup table for local objects -- may be null if jsval
    *          is known to be a primitive (including String).
    * @param jsval value to convert
@@ -594,7 +605,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Convert a BrowserChannel Value into a JsValue.
-   * 
+   *
    * @param ccl Compiling class loader, may be null if val is known to not be a
    *          Java object or exception.
    * @param localObjects table of Java objects, may be null as above.
@@ -665,7 +676,7 @@ public class BrowserChannelServer extends BrowserChannel
   /**
    * Create the requested transport and return the appropriate information so
    * the client can connect to the same transport.
-   * 
+   *
    * @param transport transport name to create
    * @return transport-specific arguments for the client to use in attaching
    *     to this transport
@@ -708,7 +719,7 @@ public class BrowserChannelServer extends BrowserChannel
 
   /**
    * Select a transport from those provided by the client.
-   * 
+   *
    * @param transports array of supported transports
    * @return null to continue in-band, or a transport type
    */

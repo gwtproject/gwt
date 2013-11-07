@@ -16,6 +16,108 @@
       "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_94fca491",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "how about just:\n\"(Separate compilation) Implement a real check that a JSO must is defined in the same module as the interface(s) it implements. Depends on upcoming JProgram changes.\"",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_b4c60051",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "s/sameModule/areInSameModule",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_b45ba0e4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "s/modulat/modular",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_34af9069",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "s/knoledge/knowledge\n\n\"Whether this type oracle has whole world knowledge. Monolithic compiles have whole world knowledge but separate compiles know only about their immediate source and the immediately referenced types.\"",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_54be8c9b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "\"Assume always dualImpl for separate compilation. \" is good but please also explain why",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_74d0e8e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-07T01:33:34Z",
+      "side": 1,
+      "message": "i realize the irony of commenting on my own mistakes :-P, but \"ensureEnsureDevirtualVersionExists\" mentions ensure twice",
+      "revId": "d533a6f252b3f734cac8b31718365b45ac804f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

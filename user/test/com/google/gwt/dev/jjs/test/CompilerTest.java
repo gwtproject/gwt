@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dev.jjs.test.compilertests.MethodNamedSameAsClass;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -245,7 +246,7 @@ public class CompilerTest extends GWTTestCase {
     @Override
     public native int foo() /*-{
       // This should call callSuper in TpoJsniParent, not the one
-      // in TpoJsniChild      
+      // in TpoJsniChild
       return this.@com.google.gwt.dev.jjs.test.CompilerTest$TpoJsniParent::callSuper()();
     }-*/;
 
@@ -300,7 +301,7 @@ public class CompilerTest extends GWTTestCase {
   private static volatile UninstantiableType volatileUninstantiableType;
 
   private static native void accessUninstantiableField(UninstantiableType u) /*-{
-    u.@com.google.gwt.dev.jjs.test.CompilerTest$UninstantiableType::field.toString();
+    var a =  u.@com.google.gwt.dev.jjs.test.CompilerTest$UninstantiableType::field;
   }-*/;
 
   private static native void accessUninstantiableMethod(UninstantiableType u) /*-{
@@ -419,7 +420,7 @@ public class CompilerTest extends GWTTestCase {
     }
     class MyFoo extends AbstractFoo implements SillyComparable<AbstractFoo> {
     }
-    
+
     assertEquals(0, new MyFoo().compareTo(new MyFoo()));
   }
 
@@ -596,7 +597,7 @@ public class CompilerTest extends GWTTestCase {
 
     // For these following tests, make sure that side effects in conditions
     // get propagated, even if they cause introduction of dead code.
-    // 
+    //
     boolean b = false;
     if ((b = true) ? true : true) {
     }
@@ -1106,9 +1107,6 @@ public class CompilerTest extends GWTTestCase {
       f.returnNull().toString();
       fail();
     } catch (NullPointerException e) {
-      // Development Mode
-    } catch (JavaScriptException e) {
-      // Production Mode
     }
 
     try {
@@ -1116,9 +1114,6 @@ public class CompilerTest extends GWTTestCase {
       fa[4] = null;
       fail();
     } catch (NullPointerException e) {
-      // Development Mode
-    } catch (JavaScriptException e) {
-      // Production Mode
     }
   }
 
@@ -1204,12 +1199,12 @@ public class CompilerTest extends GWTTestCase {
   public void testSubclassStaticInnerAndClinitOrdering() {
     new CheckSubclassStaticInnerAndClinitOrdering();
   }
-  
+
   public void testSwitchOnEnumTypedThis() {
     assertEquals("POSITIVE", ChangeDirection.POSITIVE.getText());
     assertEquals("NEGATIVE", ChangeDirection.NEGATIVE.getText());
   }
-  
+
   public void testSwitchStatement() {
     switch (0) {
       case 0:
@@ -1340,14 +1335,17 @@ public class CompilerTest extends GWTTestCase {
 
     try {
       accessUninstantiableField(u);
-      fail("Expected JavaScriptException");
-    } catch (JavaScriptException expected) {
+      fail("Expected NullPointerException (1)");
+    } catch (NullPointerException expected) {
+    } catch (JavaScriptException expectedInDevMode) {
+      // Devmode swallows the original TypeError exception and returns null.
+      assertFalse(GWT.isScript());
     }
 
     try {
       accessUninstantiableMethod(u);
-      fail("Expected JavaScriptException");
-    } catch (JavaScriptException expected) {
+      fail("Expected NullPointerException (2)");
+    } catch (NullPointerException expected) {
     }
 
     try {
@@ -1358,26 +1356,26 @@ public class CompilerTest extends GWTTestCase {
 
     try {
       volatileInt = u.intField++;
-      fail("Expected NullPointerException (1)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (3)");
+    } catch (NullPointerException expected) {
     }
 
     try {
       volatileInt = u.intField--;
-      fail("Expected NullPointerException (2)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (4)");
+    } catch (NullPointerException expected) {
     }
 
     try {
       volatileInt = ++u.intField;
-      fail("Expected NullPointerException (3)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (5)");
+    } catch (NullPointerException expected) {
     }
 
     try {
       volatileInt = --u.intField;
-      fail("Expected NullPointerException (4)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (6)");
+    } catch (NullPointerException expected) {
     }
 
     try {
@@ -1392,14 +1390,14 @@ public class CompilerTest extends GWTTestCase {
 
     try {
       volatileBoolean = u.intField == 0;
-      fail("Expected NullPointerException (6)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (7)");
+    } catch (NullPointerException expected) {
     }
 
     try {
       volatileBoolean = u.returnInt() == 0;
-      fail("Expected NullPointerException (7)");
-    } catch (Exception expected) {
+      fail("Expected NullPointerException (8)");
+    } catch (NullPointerException expected) {
     }
   }
 

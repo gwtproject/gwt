@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -52,10 +52,6 @@ public class JavaScriptExceptionTest extends GWTTestCase {
 
   private static native void throwNative(Object e) /*-{
     throw e;
-  }-*/;
-
-  private static native void throwTypeError(Object e) /*-{
-    e.notExistsWillThrowTypeError();
   }-*/;
 
   private static void throwSandwichJava(Object e) {
@@ -232,7 +228,7 @@ public class JavaScriptExceptionTest extends GWTTestCase {
     /**
      * Whether we're in Development Mode, or in Production Mode with
      * compiler.stackMode = emulated, extra properties should not be present.
-     * 
+     *
      * @see StackTraceCreator#getProperties(JavaScriptObject)
      */
     assertJsoProperties(false);
@@ -247,7 +243,7 @@ public class JavaScriptExceptionTest extends GWTTestCase {
      * In Production Mode with compiler.stackMode = native, extra properties
      * should be present. In Development Mode, extra properties should not be
      * present.
-     * 
+     *
      * @see StackTraceCreator#getProperties(JavaScriptObject)
      */
     assertJsoProperties(GWT.isScript());
@@ -262,7 +258,7 @@ public class JavaScriptExceptionTest extends GWTTestCase {
      * In Production Mode with compiler.stackMode = strip, extra properties
      * should be present. In Development Mode, extra properties should not be
      * present.
-     * 
+     *
      * @see StackTraceCreator#getProperties(JavaScriptObject)
      */
     assertJsoProperties(GWT.isScript());
@@ -307,25 +303,6 @@ public class JavaScriptExceptionTest extends GWTTestCase {
       assertEquals("foobarbaz", e.getThrown());
       assertTrue(e.getMessage().contains(e.getDescription()));
     }
-  }
-
-  @DoNotRunWith(Platform.HtmlUnitUnknown)
-  public void testTypeError() {
-    try {
-      throwTypeError("myobj");
-      fail();
-    } catch (JavaScriptException e) {
-      assertTypeError(e);
-      e = (JavaScriptException) javaNativeJavaSandwich(e);
-      assertTypeError(e);
-    }
-  }
-
-  private static void assertTypeError(JavaScriptException e) {
-    assertEquals("TypeError", e.getName());
-    assertTrue(e.getDescription().contains("notExistsWillThrowTypeError"));
-    assertTrue(e.isThrownSet());
-    assertTrue(e.getMessage().contains(e.getDescription()));
   }
 
   private static void assertDescription(JavaScriptException e, String description) {

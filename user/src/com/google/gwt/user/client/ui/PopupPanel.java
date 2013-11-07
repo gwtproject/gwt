@@ -1119,7 +1119,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * @param type the type of animation to use
    */
   public void setAnimationType(AnimationType type) {
-    animType = type;
+    animType = type != null ? type : AnimationType.CENTER;
   }
 
   /**

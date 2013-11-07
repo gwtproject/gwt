@@ -578,6 +578,16 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
       return null;
     }
 
+    if (expectedType instanceof Class) {
+      if (((Class)expectedType).getTypeParameters().length == 0) {
+        // Start a new scope for resolving type variables. This avoids false sharing because we don't
+        // implement type scopes properly. For example, if we expect a Serializable
+        // and are resolving a Map, we don't want to accidently bind the K,V type variables to
+        // bindings in the parent scope.
+        resolvedTypes = new DequeMap<TypeVariable<?>, Type>();
+      }
+    }
+
     return deserialize(typeSignature, expectedType, resolvedTypes);
   }
 

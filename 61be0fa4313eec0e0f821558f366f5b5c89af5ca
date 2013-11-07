@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_1b1c3f4f",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-11-07T14:52:20Z",
+      "side": 1,
+      "message": "Looks like you will have to enforce that type is not null or add a check later when animType is used?",
+      "revId": "61be0fa4313eec0e0f821558f366f5b5c89af5ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

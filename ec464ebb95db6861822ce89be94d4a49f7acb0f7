@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_e86c1bde",
+        "filename": "user/src/com/google/gwt/dom/client/ImageElement.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-07T19:26:28Z",
+      "side": 1,
+      "message": "Can you remove these unnecessary \u003cp\u003e and \u003c/p\u003e tags while you\u0027re here?",
+      "revId": "ec464ebb95db6861822ce89be94d4a49f7acb0f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_087077b0",
+        "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-07T19:26:28Z",
+      "side": 1,
+      "message": "Might as well just say \"... before IE starts ...\"?",
+      "revId": "ec464ebb95db6861822ce89be94d4a49f7acb0f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

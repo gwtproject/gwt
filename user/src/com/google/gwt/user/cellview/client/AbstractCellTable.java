@@ -43,6 +43,7 @@ import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
@@ -1536,6 +1537,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * 
    * @param widget the empty table widget, or null to disable
    */
+  @UiChild(tagname="emptytablewidget", limit=1)
   public void setEmptyTableWidget(Widget widget) {
     this.emptyTableWidget = widget;
   }
@@ -1622,6 +1624,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * 
    * @param widget the loading indicator, or null to disable
    */
+  @UiChild(tagname="loadingindicator", limit=1)
   public void setLoadingIndicator(Widget widget) {
     loadingIndicator = widget;
   }

@@ -28,6 +28,7 @@ import com.google.gwt.dev.jjs.test.CoverageTest;
 import com.google.gwt.dev.jjs.test.EnhancedForLoopTest;
 import com.google.gwt.dev.jjs.test.EnumsTest;
 import com.google.gwt.dev.jjs.test.EnumsWithNameObfuscationTest;
+import com.google.gwt.dev.jjs.test.ExceptionsTest;
 import com.google.gwt.dev.jjs.test.GenericCastTest;
 import com.google.gwt.dev.jjs.test.GwtIncompatibleTest;
 import com.google.gwt.dev.jjs.test.HostedTest;
@@ -80,6 +81,7 @@ public class CompilerSuite {
     suite.addTestSuite(EnhancedForLoopTest.class);
     suite.addTestSuite(EnumsTest.class);
     suite.addTestSuite(EnumsWithNameObfuscationTest.class);
+    suite.addTestSuite(ExceptionsTest.class);
     suite.addTestSuite(GenericCastTest.class);
     suite.addTestSuite(GwtIncompatibleTest.class);
     suite.addTestSuite(HostedTest.class);

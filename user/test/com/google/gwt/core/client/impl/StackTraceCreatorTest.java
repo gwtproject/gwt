@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,7 +27,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  * are static so that their names can be reliably determined in Production Mode.
  */
 public class StackTraceCreatorTest extends GWTTestCase {
-  
+
   public static void testJavaScriptException() {
     JsArrayString start = sample();
     Throwable t = null;
@@ -63,7 +63,7 @@ public class StackTraceCreatorTest extends GWTTestCase {
 
   /**
    * Just make sure that reentrant behavior doesn't fail.
-   */  
+   */
   public static void testReentrantCalls() {
     if (!GWT.isScript()) {
       // sample is useless in Development Mode
@@ -157,7 +157,7 @@ public class StackTraceCreatorTest extends GWTTestCase {
   }
 
   private static native void throwNative() /*-{
-    null.a();
+    throw null;
   }-*/;
 
   @Override
@@ -192,7 +192,7 @@ public class StackTraceCreatorTest extends GWTTestCase {
         c.extractName(" at Type.functionName (file.js:1:2)"));
     assertEquals("functionName@@file.js:1:2",
         c.extractName(" at Type.functionName [as methodName] (file.js:1:2)"));
-    
+
     // iOS style
     assertEquals("functionName@@file.js:1",
         c.extractName("functionName@file.js:1"));

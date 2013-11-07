@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_3ec93197",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_1eceed9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[warning] Please use \u0027Bug: issue NNNN\u0027 and place it just above the Change-Id line.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_7ed3a946",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_bebc21f2",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_9eb95d02",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_5ed86561",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_1eb54dff",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_dec3d56d",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_fec6997f",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_3eb0110f",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-07T19:52:52Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "dfd84568ca7c372a1de4861b8d424ded570ca662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

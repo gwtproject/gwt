@@ -86,6 +86,24 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_fba7cb9e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-11-07T16:56:57Z",
+      "side": 1,
+      "message": "Yes, John, good recollection. :-)\n\nWhen I saw this CL of Roberto\u0027s go by, I went back and found my old CL for correctly NPEing on null JSOs in DevMode:\n\nhttp://gwt-code-reviews.appspot.com/1620805/\n\nAnd, right, IIRC it was a good fix/implementation, but was rolled back because, as John said, it broke more than a few things internally (per the comments in that gwt-code-reviews CL).\n\nI copied that old CL locally and can re-submit it to gerrit--it\u0027s tiny, and the Issue has 33 stars, so a lot of users think it\u0027s important. But I also know DevMode is on the way out anyway. So, dunno, I\u0027m ambivalent at this point.",
+      "parentUuid": "5e52f951_f896b1e9",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

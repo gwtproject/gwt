@@ -16,6 +16,24 @@
       "revId": "3657054b96090fc235529f0c7df9e37dd2ffa760",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_be5ee1ab",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 6141
+      },
+      "writtenOn": "2013-11-07T20:56:33Z",
+      "side": 1,
+      "message": "Right you are. Tested, fixed, and tested.",
+      "parentUuid": "de65092b_486a6f08",
+      "revId": "3657054b96090fc235529f0c7df9e37dd2ffa760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

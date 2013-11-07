@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "defa6981_ec11cbda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-07T13:57:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb9c5aa_879686e9",
+      "revId": "aa36a536f7ec47c0791089a332fd5bb43fa22cc4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dea7c988_a73144d6",
         "filename": "user/super/com/google/gwt/emul/java/lang/StringBuffer.java",
         "patchSetId": 2

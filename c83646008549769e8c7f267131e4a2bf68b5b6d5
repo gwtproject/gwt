@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_c88e7f63",
+        "filename": "user/src/com/google/gwt/storage/Storage.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-07T19:20:37Z",
+      "side": 0,
+      "message": "Why get rid of this line?",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

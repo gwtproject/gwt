@@ -51,6 +51,24 @@
       "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_f74ebaa8",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-07T04:48:04Z",
+      "side": 1,
+      "message": "Thanks for the explanation.  Seems like there\u0027s no easy fix.\n\nLet\u0027s discuss it more tomorrow in person?  I\u0027ll try to read up on the code some more too.  As is, I\u0027m not eager to merge this so late in the release cycle, especially when it\u0027s tricky code and we don\u0027t have much time to validate it.  But I\u0027m still not ruling it out if we can be confident that the change doesn\u0027t have negative consequences.",
+      "parentUuid": "5e52f951_f8e351ba",
+      "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -122,6 +122,24 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_1b855fa9",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2013-11-07T18:20:15Z",
+      "side": 1,
+      "message": "Sounds good, Roberto, here it is:\n\nhttps://gwt-review.googlesource.com/#/c/5321/\n\nHopefully it will have better luck this time around. :-)",
+      "parentUuid": "de65092b_3a801999",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

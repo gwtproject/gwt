@@ -50,6 +50,24 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_7732aa27",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2013-11-07T04:52:54Z",
+      "side": 1,
+      "message": "I was planning to add more tests possibly all in c.g.g.core clientJavaScriptExceptionTest.java.\n\nThe idea of this patch is to bridge the gap but not close it completely as most users would want better exception reporting but are not willing to sacrifice code size.\n\nThere is another patch I am working on currently on what I call \"checked mode\" (and a respective doc that will be made public once it is a bit more fleshed out); where the compiler not only instruments statified and devirtualized methods but also inserts sanity checks at JSNI frontiers both ways.",
+      "parentUuid": "5e52f951_58d51dd0",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

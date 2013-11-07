@@ -68,6 +68,24 @@
       "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_f896b1e9",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2013-11-07T04:59:30Z",
+      "side": 1,
+      "message": "Ok, I just wonder if a 60% solution is much of an improvement.\n\nI also recall a patch which does the same devmode checks as this (Stephen Haberman, perhaps?) that was never landed because it turned out that people were making use of the fact that devirtualized/inlined calls could be called on null this in some cases, and it broke the code.  Personally, I don\u0027t think that is sufficient reason to avoid it though.",
+      "parentUuid": "de65092b_7732aa27",
+      "revId": "514067082ceb5af358e9af5beb4202d87369d17c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

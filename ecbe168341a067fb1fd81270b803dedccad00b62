@@ -16,6 +16,23 @@
       "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_b7d8c241",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-07T02:37:16Z",
+      "side": 1,
+      "message": "Can you summarize what the issue is?  It seems like if you\u0027re trying to serialize something like Map\u003cList\u003cX\u003e, List\u003cY\u003e\u003e, then this map would still have an entry for E\u003dX (E being List\u0027s type parameter) even when processing List\u003cY\u003e entries?\n\nIs there any risk that this change overshoots and introduces other problems?",
+      "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

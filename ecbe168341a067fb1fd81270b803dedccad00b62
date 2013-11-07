@@ -33,6 +33,24 @@
       "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_f8e351ba",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/ServerSerializationStreamReader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-07T03:46:33Z",
+      "side": 1,
+      "message": "The idea is that expectedType is the constraint that the object being deserialized needs to match, and resolvedTypes contains the variable bindings needed to fill in expectedType\u0027s type variables. So in your example, the left side would have to be Map which has type variables K,V and there are bindings:\n\n K -\u003e List\u003cE\u003e, E-\u003eX\n V -\u003e List\u003cE\u003e, E-\u003eY\n\nAnd there\u0027s definitely a problem there because E can\u0027t be bound to both X and Y in the DequeMap. So I think the DequeMap is the wrong data structure somehow, but this is nasty to change because it\u0027s in the public API of all the server-side custom deserializers.\n\nI decided not to solve that, and just tackle a simple case. If expectedType doesn\u0027t have any type variables (for example, it\u0027s just Serializable) then there\u0027s nothing to substitute and therefore resolvedTypes really ought to be empty; the type-checking of an object stored in a field whose type is Serializable shouldn\u0027t depend on context. (If it\u0027s a complicated object, it may very well have fields with type variables but these will be purely internal constraints.)\n\nBut there\u0027s definitely a risk that I missed something; type parameters are hard to reason about and this is just the simplest case I could be reasonably confident about.\n\nNow that I think about it, creating a new DequeMap for most readObject() calls probably has performance implications, so I should probably change this code to replace it only if it\u0027s nonempty.",
+      "parentUuid": "de65092b_b7d8c241",
+      "revId": "ecbe168341a067fb1fd81270b803dedccad00b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

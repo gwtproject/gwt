@@ -723,12 +723,14 @@ public class DataGrid<T> extends AbstractCellTable<T> implements RequiresResize 
   }
 
   @Override
+  @UiChild(tagname="emptytablewidget", limit=1)
   public void setEmptyTableWidget(Widget widget) {
     emptyTableWidgetContainer.setWidget(0, 0, widget);
     super.setEmptyTableWidget(widget);
   }
 
   @Override
+  @UiChild(tagname="loadingindicator", limit=1)
   public void setLoadingIndicator(Widget widget) {
     loadingIndicatorContainer.setWidget(0, 0, widget);
     super.setLoadingIndicator(widget);

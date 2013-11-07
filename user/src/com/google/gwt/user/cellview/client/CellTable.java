@@ -32,6 +32,7 @@ import com.google.gwt.resources.client.CssResource.ImportedWithPrefix;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.cellview.client.LoadingStateChangeEvent.LoadingState;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -748,12 +749,14 @@ public class CellTable<T> extends AbstractCellTable<T> implements
   }
 
   @Override
+  @UiChild(tagname="emptytablewidget", limit=1)
   public void setEmptyTableWidget(Widget widget) {
     emptyTableWidgetContainer.setWidget(widget);
     super.setEmptyTableWidget(widget);
   }
 
   @Override
+  @UiChild(tagname="loadingindicator", limit=1)
   public void setLoadingIndicator(Widget widget) {
     loadingIndicatorContainer.setWidget(widget);
     super.setLoadingIndicator(widget);

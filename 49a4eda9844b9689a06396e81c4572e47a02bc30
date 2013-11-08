@@ -34,6 +34,24 @@
       "revId": "49a4eda9844b9689a06396e81c4572e47a02bc30",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_3e29261a",
+        "filename": "eclipse/dev/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-08T17:12:42Z",
+      "side": 1,
+      "message": "By this one, you mean just the change to eclipse/dev/.classpath?  That I\u0027d be fine with.\n\nCherrypicking json-20131018 back to 2.6 is probably fine too, but I\u0027d need to think about it a bit more.",
+      "parentUuid": "de65092b_7e671eac",
+      "revId": "49a4eda9844b9689a06396e81c4572e47a02bc30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

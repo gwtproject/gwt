@@ -9,15 +9,44 @@
   <property.ensure name="gwt.dev.bin" location="${gwt.dev.build}/bin" />
   <property.ensure name="gwt.user.bin" location="${gwt.user.build}/bin" />
 
+  <property name="gwt.build.bnd" location="${gwt.build.out}/bnd" />
+
   <property name="project.lib.deps"
       location="${gwt.build.lib}/gwt-${ant.project.name}-deps.jar" />
 
   <target name="build" description="Packages this project into a jar"
-      depends="-servlet, -deps" />
+      depends="-servlet, -deps, osgify" />
 
   <target name="clean" description="Cleans this project's intermediate and output files">
     <delete file="${project.lib}" />
     <delete file="${project.lib.deps}" />
+  </target>
+
+  <target name="osgify" description="Transform GWT-Servlet in a OSGi bundle"
+    depends="-servlet">
+    <taskdef resource="aQute/bnd/ant/taskdef.properties"
+        classpath="${gwt.tools.lib}/bnd/bnd-1.50.0.jar"/>
+
+    <mkdir dir="${gwt.build.bnd}" />
+    <propertyregex property="gwt.bundle.version" input="${gwt.version}"
+      regexp="-" replace="." global="true" defaultValue="${gwt.version}" />
+
+    <echo message="Using ${gwt.bundle.version} as osgi Bundle-Version for GWT version ${gwt.version}"/>
+
+    <copy file="${basedir}/gwt-${ant.project.name}.bnd" tofile="${gwt.build.bnd}/gwt-${ant.project.name}.bnd">
+      <filterset>
+        <filter token="version" value="${gwt.bundle.version}"/>
+      </filterset>
+    </copy>
+
+    <bndwrap
+        jars='${gwt.build.lib}/gwt-${ant.project.name}.jar'
+        output='${gwt.build.lib}/gwt-${ant.project.name}-osgi.jar'
+        definitions="${gwt.build.bnd}" />
+
+    <move overwrite="true" file="${gwt.build.lib}/gwt-${ant.project.name}-osgi.jar"
+      tofile="${gwt.build.lib}/gwt-${ant.project.name}.jar"/>
+
   </target>
 
   <target name="-servlet" description="Packages this project into a jar">

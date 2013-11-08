@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_0f94f6df",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-08T23:08:39Z",
+      "side": 0,
+      "message": "you should better change the test case instead of removal; I added it for a reason :)",
+      "revId": "dfc3f41b3106dff5a8ae95b3923bd5583a722ddb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

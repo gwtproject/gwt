@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "defa6981_6fd02de2",
+        "filename": "servlet/gwt-servlet.bnd",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T08:49:02Z",
+      "side": 1,
+      "message": "Ok I agree, I\u0027ll change it to \"GWT :: Servlet\".",
+      "parentUuid": "de65092b_beb9b601",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e52f951_0ce367f5",
         "filename": "servlet/gwt-servlet.bnd",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2013-11-08T08:12:01Z",
       "side": 1,
       "message": "Shouldn\u0027t this be com.google.gwt.gwt-servlet?",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e025d43_f4e236ef",
+        "filename": "servlet/gwt-servlet.bnd",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T08:49:02Z",
+      "side": 1,
+      "message": "Yes you are right, that\u0027s the right convention. I\u0027ll change as you propose.",
+      "parentUuid": "5e52f951_0ce367f5",
       "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

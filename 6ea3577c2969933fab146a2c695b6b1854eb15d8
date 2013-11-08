@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_fec96e40",
+        "filename": "user/src/com/google/gwt/logging/server/JsonLogRecordServerUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-08T17:03:43Z",
+      "side": 1,
+      "message": "This change was made necessary because the updated json library parses \"{}\"  as object (not as string) hence .getString would throw an error. .fromJsonString expects a string version of a json object.",
+      "revId": "6ea3577c2969933fab146a2c695b6b1854eb15d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

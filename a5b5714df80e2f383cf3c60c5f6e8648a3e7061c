@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "defa6981_cfc681d7",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-11-08T11:16:45Z",
+      "side": 1,
+      "message": "nit : To be clear, I would add that the animation is used when opening the popup\n\n  * Set the type of animation to use when opening the popup",
+      "revId": "a5b5714df80e2f383cf3c60c5f6e8648a3e7061c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_2f83c57f",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2013-11-08T11:16:45Z",
+      "side": 1,
+      "message": "idem here\n\n  * Get the type of animation to use when opening the popup",
+      "revId": "a5b5714df80e2f383cf3c60c5f6e8648a3e7061c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_3b377869",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/DequeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-08T03:46:39Z",
+      "side": 1,
+      "message": "Why only make these two fields private?  Why not any of the three above?",
+      "revId": "ec1935ccfee9ff59c0051f3bd7443d385aa5aa1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

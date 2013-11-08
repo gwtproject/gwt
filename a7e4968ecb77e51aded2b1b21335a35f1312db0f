@@ -34,6 +34,24 @@
       "revId": "a7e4968ecb77e51aded2b1b21335a35f1312db0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_cc8ccfdd",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-11-08T15:00:48Z",
+      "side": 1,
+      "message": "Then the comment should also indicate that the type is used to determine the closing animation?",
+      "parentUuid": "defa6981_32b0480f",
+      "revId": "a7e4968ecb77e51aded2b1b21335a35f1312db0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

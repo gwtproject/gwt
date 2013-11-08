@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_0cfb6760",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-11-08T13:04:45Z",
+      "side": 1,
+      "message": "Doesn\u0027t it also affect the closing animation?  If not there is no need to indicate that ROLL_DOWN and ONE_WAY_CORNER do not animate when hiding.",
+      "revId": "a7e4968ecb77e51aded2b1b21335a35f1312db0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Bundle-Name: Google Web Toolkit :: Servlet
+Bundle-SymbolicName: gwt-servlet
+Bundle-Version: @version@
+Export-Package: *;version=@version@
+Import-Package: javax.servlet.*, !com.google.gwt.*, *;resolution:=optional

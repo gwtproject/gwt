@@ -1,0 +1,5 @@
+Bundle-Name: GWT :: Servlet
+Bundle-SymbolicName: com.google.gwt.gwt-servlet
+Bundle-Version: @version@
+Export-Package: com.google.gwt.user.client.rpc.*;version=@version@, org.hibernate.validator.engine;version=@version@, com.google.web.bindery.requestfactory.vm.impl.*;version=@version@, !javax.validation, !org.hibernate.validator.*, !*.client.*, !*.impl.*, *;version=@version@
+Import-Package: javax.servlet.*, javax.validation;resolution:=optional, org.json;resolution:=optional, javax.validation.*;resolution:=optional, org.json.*;resolution:=optional, !com.google.gwt.*, *;resolution:=optional

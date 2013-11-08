@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "5e52f951_2cb46bba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6301
+      },
+      "writtenOn": "2013-11-08T10:26:41Z",
+      "side": 1,
+      "message": "Package versioning in OSGi requires a bit of fore-thought ; that\u0027s why I suggested having a whitelist of exported packages. It\u0027s not necessarily tied to the version of the bundle, but it should represent the evolution of the API, following the rules of semantic versioning [1].\n\nSo my suggestion here would be to start either at 1.0.0 - signaling the first cut of the OSGi release or at 2.6.0 - to match the version of the bundle. But then the exported package versions need to be handled manually, and not kept in lock-step with the GWT versions.\n\nJust to give you an example: assume that we export com.google.gwt.servlet with version 2.6.0 now. Consumers will typically import a version range of [2.6.0,3.0.0), since that\u0027s guaranteed to be compatible for them. If GWT releases GWT 3.0.0 and we pick up the package versions from the bundle version, then all the consumer imports will no longer be resolved.\n\n\n[1]: http://www.osgi.org/wiki/uploads/Links/SemanticVersioning.pdf",
+      "parentUuid": "defa6981_8f42b9c3",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "defa6981_ef3ffd39",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1

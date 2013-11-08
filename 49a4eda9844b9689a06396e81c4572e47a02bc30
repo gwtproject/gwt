@@ -16,6 +16,24 @@
       "revId": "49a4eda9844b9689a06396e81c4572e47a02bc30",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_7e671eac",
+        "filename": "eclipse/dev/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-08T17:01:26Z",
+      "side": 1,
+      "message": "Because Closure compiler-rebased.jar had unrebased json in it :).\n\nWe probably want to cherry pick this one into 2.6",
+      "parentUuid": "de65092b_bbcc28fb",
+      "revId": "49a4eda9844b9689a06396e81c4572e47a02bc30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

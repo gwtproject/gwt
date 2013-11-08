@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_0ccd274d",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-08T11:05:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "c2aac83ff0568cee6a7085b26e526846dc3dfc46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

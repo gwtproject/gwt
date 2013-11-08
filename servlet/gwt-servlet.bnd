@@ -1,0 +1,5 @@
+Bundle-Name: GWT :: Servlet
+Bundle-SymbolicName: com.google.gwt.gwt-servlet
+Bundle-Version: @version@
+Export-Package: *;version=@version@
+Import-Package: javax.servlet.*, !com.google.gwt.*, *;resolution:=optional

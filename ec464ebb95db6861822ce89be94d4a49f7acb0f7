@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "defa6981_4f0c51cc",
+        "filename": "user/src/com/google/gwt/dom/client/ImageElement.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T09:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de65092b_e86c1bde",
+      "revId": "ec464ebb95db6861822ce89be94d4a49f7acb0f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de65092b_087077b0",
         "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-07T19:26:28Z",
       "side": 1,
       "message": "Might as well just say \"... before IE starts ...\"?",
+      "revId": "ec464ebb95db6861822ce89be94d4a49f7acb0f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e025d43_34b31ef6",
+        "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T09:27:13Z",
+      "side": 1,
+      "message": "Updated to say IE8-10, since this does not seem to be an issue with IE10 anymore, here is the original post about the limit: http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/internet-explorer-stylesheet-rule-selector-import-sheet-limit-maximum.aspx",
+      "parentUuid": "de65092b_087077b0",
       "revId": "ec464ebb95db6861822ce89be94d4a49f7acb0f7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

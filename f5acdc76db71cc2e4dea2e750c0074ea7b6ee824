@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "defa6981_324b28f1",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T18:43:51Z",
+      "side": 1,
+      "message": "Does it also apply to ie9? (how about ie10?)",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_b28c38dc",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T18:43:51Z",
+      "side": 1,
+      "message": "s/add/remove/",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_92893ccc",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T18:43:51Z",
+      "side": 1,
+      "message": "Remove the \u0027private\u0027 keyword?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e52f951_e7272cc6",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 1
@@ -13,6 +64,23 @@
       "writtenOn": "2013-11-08T18:23:46Z",
       "side": 1,
       "message": "only used in one place. Inline?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_32804899",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T18:43:51Z",
+      "side": 1,
+      "message": "How about the Safari and Mozilla specific impls we previously had? No longer needed?",
       "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

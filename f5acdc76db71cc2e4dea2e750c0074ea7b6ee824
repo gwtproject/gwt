@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_e7272cc6",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-08T18:23:46Z",
+      "side": 1,
+      "message": "only used in one place. Inline?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e52f951_07422054",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-08T18:23:46Z",
+      "side": 1,
+      "message": "inline?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

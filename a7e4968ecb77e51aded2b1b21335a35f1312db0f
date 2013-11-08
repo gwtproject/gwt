@@ -16,6 +16,24 @@
       "revId": "a7e4968ecb77e51aded2b1b21335a35f1312db0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_32b0480f",
+        "filename": "user/src/com/google/gwt/user/client/ui/PopupPanel.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 6060
+      },
+      "writtenOn": "2013-11-08T14:47:52Z",
+      "side": 1,
+      "message": "In the ligne 200 :\nif (curPanel.animType !\u003d AnimationType.CENTER \u0026\u0026 !showing) {\n   animate \u003d false;\n}\n\nThe closing animation is just for the AnimationType.CENTER. ROLL_DOWN and ONE_WAY_CORNER do not animate when hidding. It was used by the MenuBar.\nBut this can be used for create DropDownButton or other new widget.",
+      "parentUuid": "5e52f951_0cfb6760",
+      "revId": "a7e4968ecb77e51aded2b1b21335a35f1312db0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

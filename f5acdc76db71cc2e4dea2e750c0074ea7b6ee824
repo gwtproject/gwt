@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7e025d43_376200ef",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "Good catch, there is actually a fallback for ie9 here.\n\nJust tested with IE9 and updated to remove the fallback.",
+      "parentUuid": "defa6981_324b28f1",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "defa6981_b28c38dc",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-08T18:43:51Z",
       "side": 1,
       "message": "s/add/remove/",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_b2fa782b",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "defa6981_b28c38dc",
       "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7e025d43_f79878a8",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "Any specific reason to make this visible?",
+      "parentUuid": "defa6981_92893ccc",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e52f951_e7272cc6",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-08T18:23:46Z",
       "side": 1,
       "message": "only used in one place. Inline?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_92f77c43",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e52f951_e7272cc6",
       "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "feed6dca_3354d017",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "So far all tested browsers are okay (see comment in review).\n\nI do think that we actually do not need all those hacks from the past anymore. I want most GWT implementations to be based on a common browser standard.",
+      "parentUuid": "defa6981_32804899",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e52f951_07422054",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-08T18:23:46Z",
       "side": 1,
       "message": "inline?",
+      "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e025d43_d795746e",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-08T23:19:23Z",
+      "side": 1,
+      "message": "This is called form multiple places, I would rather keep the method.",
+      "parentUuid": "5e52f951_07422054",
       "revId": "f5acdc76db71cc2e4dea2e750c0074ea7b6ee824",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

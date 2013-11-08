@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_bbcc28fb",
+        "filename": "eclipse/dev/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-08T04:55:11Z",
+      "side": 1,
+      "message": "Was this entry just missing before?  Why didn\u0027t we ever notice before?",
+      "revId": "49a4eda9844b9689a06396e81c4572e47a02bc30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

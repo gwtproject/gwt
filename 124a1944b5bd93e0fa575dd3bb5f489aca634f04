@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "7e025d43_d47bb24c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T11:06:16Z",
+      "side": 1,
+      "message": "Ok and thank you for guidance ;-)",
+      "parentUuid": "defa6981_0f37e968",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "defa6981_2f990521",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2013-11-08T10:19:22Z",
       "side": 1,
       "message": "How about just looking at the META-INF/MANIFEST.MF file with whatever tool you want? (e.g. \"unzip -p gwt-servlet.jar META-INF/MANIFEST.MF\") That\u0027d be equivalent, right?",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "feed6dca_5026b2a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T11:06:16Z",
+      "side": 1,
+      "message": "bnd tool output is better indented and readable.\nAlso has other options (if you use -all instead that -manifest) that provide other info",
+      "parentUuid": "defa6981_2f990521",
       "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -122,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "feed6dca_d03102d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T11:06:16Z",
+      "side": 1,
+      "message": "I make this recommendation just for testers because I think it could be confusing to deploy the bundle that exports with version 0.0.0\n\nI would take in sync with the version of GWT, it will be confusing to have a bundle with a different version than the GWT main release.\n\nIn maven you usually default the Bundle-Version to ${pom.version} which is however normalized to the OSGi version format of \"MAJOR.MINOR.MICRO.QUALIFIER\", for example \"2.1-SNAPSHOT\" would become \"2.1.0.SNAPSHOT\"\n\nI simply replace dashes with dots assuming that all versions of GWT will be in a format x.y.z-q.",
+      "parentUuid": "5e52f951_2cb46bba",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "defa6981_ef3ffd39",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -133,6 +187,24 @@
       "writtenOn": "2013-11-08T10:19:22Z",
       "side": 1,
       "message": "I think the whole paragraph should be reworded; maybe something like:\n\n The generated OSGi header uses the gwt.version Ant property value as the\n Bundle-Version, with dashes converted to dots for OSGi-compliance.",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "feed6dca_10438a2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-08T11:06:16Z",
+      "side": 1,
+      "message": "Ok,\nI will and also specify better the assumption on the expected format.",
+      "parentUuid": "defa6981_ef3ffd39",
       "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

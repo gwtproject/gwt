@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "defa6981_0f37e968",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T10:19:22Z",
+      "side": 1,
+      "message": "Could you remove these lines (up to and including \"manifest can then be inspected\") from the commit message? I don\u0027t think they add anything useful to the history (once merged and the JAR added to GWT_TOOLS)",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_2f990521",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T10:19:22Z",
+      "side": 1,
+      "message": "How about just looking at the META-INF/MANIFEST.MF file with whatever tool you want? (e.g. \"unzip -p gwt-servlet.jar META-INF/MANIFEST.MF\") That\u0027d be equivalent, right?",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e52f951_2ceaabce",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +64,57 @@
       "writtenOn": "2013-11-08T07:44:19Z",
       "side": 1,
       "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_4f31f16f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T10:19:22Z",
+      "side": 1,
+      "message": "It actually uses the gwt.version Ant property, which defaults to env.GWT_VERSION but can be set using -Dgwt.version too.",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_8f42b9c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T10:19:22Z",
+      "side": 1,
+      "message": "What would you recommend to use for \u0027master\u0027 nightlies? Would 0.0.0 as we use now (and would like to continue using, from the latest discussions on the topic) be a problem?",
+      "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_ef3ffd39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-08T10:19:22Z",
+      "side": 1,
+      "message": "I think the whole paragraph should be reworded; maybe something like:\n\n The generated OSGi header uses the gwt.version Ant property value as the\n Bundle-Version, with dashes converted to dots for OSGi-compliance.",
       "revId": "124a1944b5bd93e0fa575dd3bb5f489aca634f04",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

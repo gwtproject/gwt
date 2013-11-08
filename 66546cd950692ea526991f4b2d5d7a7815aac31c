@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e52f951_6c378316",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/ExceptionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-08T17:18:03Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "66546cd950692ea526991f4b2d5d7a7815aac31c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

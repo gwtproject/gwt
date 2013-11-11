@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "defa6981_95b92602",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-11T04:31:37Z",
+      "side": 1,
+      "message": "How about adding a .gitignore in eclipse/ with content:\n\n bin/\n gwt-unitCache/\n war/",
+      "revId": "098f4a4b17390b361eef57117b3c3b033b0e089a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_b5bc22f2",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-11T04:31:37Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the whole \"/build\" be ignored?",
+      "revId": "098f4a4b17390b361eef57117b3c3b033b0e089a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

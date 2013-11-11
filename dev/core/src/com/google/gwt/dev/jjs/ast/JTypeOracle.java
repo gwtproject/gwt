@@ -36,7 +36,6 @@ import java.util.Set;
  * Oracle that can answer questions regarding the types in a program.
  */
 public class JTypeOracle implements Serializable {
-
   /**
    * Checks a clinit method to find out a few things.
    *
@@ -297,11 +296,6 @@ public class JTypeOracle implements Serializable {
   private final Map<JClassType, Map<String, JMethod>> polyClassMethodMap =
       new IdentityHashMap<JClassType, Map<String, JMethod>>();
 
-  /**
-   * Whether this type oracle has whole world knowledge or not. Monolithic compiles have whole
-   * world knowledge but separate compiles know only about their immediate source and the
-   * immediately referenced types
-   */
   private final boolean hasWholeWorldKnowledge;
 
   /**
@@ -595,6 +589,15 @@ public class JTypeOracle implements Serializable {
 
   public boolean isDualJsoInterface(JReferenceType maybeDualImpl) {
     return dualImpls.contains(maybeDualImpl.getUnderlyingType());
+  }
+
+  /**
+   * Whether this type oracle has whole world knowledge or not. Monolithic compiles have whole
+   * world knowledge but separate compiles know only about their immediate source and the
+   * immediately referenced types
+   */
+  public boolean hasWholeWorldKnowledge() {
+    return hasWholeWorldKnowledge;
   }
 
   /**

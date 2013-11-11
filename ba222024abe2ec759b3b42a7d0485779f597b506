@@ -16,6 +16,24 @@
       "revId": "ba222024abe2ec759b3b42a7d0485779f597b506",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de13499f_a4f24212",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/devmode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-11-11T06:42:44Z",
+      "side": 1,
+      "message": "Turns out this is not correct - devmode.js (and hosted.html) runs in its own iframe, away from where the real app might set its own unload handlers. In fact, attaching this to $wnd instead of window actually causes more problems - if dev mode calls us (if for example dev mode sets up a handler after the page loads), the app shuts down in the middle of the close handling code, inside a $entry, and we get a RemoteDeathError.",
+      "parentUuid": "7e7b3c37_cb36550f",
+      "revId": "ba222024abe2ec759b3b42a7d0485779f597b506",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

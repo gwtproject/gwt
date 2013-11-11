@@ -51,6 +51,24 @@
       "revId": "89aaf329a717b14a042147335556ab50fce4b125",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3edaa533_7f90ef30",
+        "filename": "eclipse/dev/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-11-11T19:56:59Z",
+      "side": 1,
+      "message": "Without it you get \"The type j.s.ServletContext cannot be resolved. It is indirectly referenced form required .class files\" with c.g.g.dev.shell.jetty.JettyLauncher marked red.",
+      "parentUuid": "defa6981_55afbeac",
+      "revId": "89aaf329a717b14a042147335556ab50fce4b125",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_69b5a3fe",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplIE6.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T19:42:19Z",
+      "side": 0,
+      "message": "please inline methods in DOMImpl that is no longer relevant with no IE6 support (e.g. methods only overridden by IE6 permutation).",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_e94ed351",
+        "filename": "user/test/com/google/gwt/canvas/client/CanvasTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T19:42:19Z",
+      "side": 0,
+      "message": "Is this change really meant to be part of this patch?",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_494c2759",
+        "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T19:42:19Z",
+      "side": 0,
+      "message": "Is this change really meant to be part of this patch?",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "b7178fc85b5e06738932edb248676ece22a856b5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_002b3696",
+        "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-11T20:52:52Z",
+      "side": 1,
+      "message": "MS changed that with IE10, see: http://msdn.microsoft.com/en-us/library/ie/hh920762.aspx\n\nHere is the background: http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/10164546.aspx\n\nUpdated the comment to single out IE8-9",
+      "parentUuid": "de65092b_892d9fb1",
+      "revId": "b7178fc85b5e06738932edb248676ece22a856b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

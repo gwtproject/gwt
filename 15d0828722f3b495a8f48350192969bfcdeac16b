@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_001963d1",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_c01e4bbc",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "Window is deferred bound so it is safer to use it instead. It actually includes different implementation for window.location.hash.\n\nThey are in the same package anyway, why do you bother?",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_40135bb7",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "Didn\u0027t verify but there are difference documented in multiple places [1] about hash / encoding differences in different Mozilla.\n\nIt looks like this change ignored all of that but the more worrying part is; if those differences are still in place and we didn\u0027t discover it testing this change then how can we be sure that everything still works fine?\n\n[1] WindowImplMozilla.java, HistoryImplMozilla.java",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_c5d5bd08",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "This method just shortcuts decode fragment and the doesn\u0027t sound a good match. Why not merge the two and keep calling it decodeFragment?\n\nAlso before that why bother with a shortcut?",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_4567edfd",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "nit: inline",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_2ae440c3",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "moving this to the end of the test would be safer.",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_8a90f431",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T16:37:19Z",
+      "side": 1,
+      "message": "why no longer assert the encoding functionality?",
+      "revId": "15d0828722f3b495a8f48350192969bfcdeac16b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

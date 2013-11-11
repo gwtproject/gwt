@@ -104,6 +104,24 @@
       "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_097eafc9",
+        "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-11T21:34:39Z",
+      "side": 0,
+      "message": "This is just an ordering problem.\n\nIf you submit Media changes (and other similar unrelated pieces) before than you don\u0027t need to include them here. \n\nThis may look like a nit because the end result is no different however ideally the source should be kept in a consistent state between submissions. Removing some of Media code/test in this patch and then remove the related deferred binding in a different patch is not preferable especially if it is easy to avoid.",
+      "parentUuid": "defa6981_c0200eb4",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

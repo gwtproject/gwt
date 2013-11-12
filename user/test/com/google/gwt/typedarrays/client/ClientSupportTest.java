@@ -64,6 +64,13 @@ public class ClientSupportTest extends GWTTestCase {
       assertTrue(isSupported);
       return;
     }
+
+    // IE11 - choosing the gecko permutation
+    if (ua.contains("trident/7.0") && ua.contains("like gecko")) {
+      assertTrue(isSupported);
+      return;
+    }
+
     assertFalse("Unknown browser (" + ua + ") assumed not to support typed arrays",
         isSupported);
   }

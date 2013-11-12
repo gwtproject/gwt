@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "defa6981_20e11269",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-12T16:18:09Z",
+      "side": 1,
+      "message": "\"TypedArray\u0027s ClientSupportTest\"",
+      "revId": "3ce7fc4383b14bf8fcfe51741fcba3dbb19c6ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

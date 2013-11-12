@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_955accb8",
+        "filename": "user/test/com/google/gwt/canvas/client/CanvasTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:46:58Z",
+      "side": 0,
+      "message": "replace with isIE8()?",
+      "revId": "c83646008549769e8c7f267131e4a2bf68b5b6d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

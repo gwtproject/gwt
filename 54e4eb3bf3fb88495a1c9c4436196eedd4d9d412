@@ -52,6 +52,24 @@
       "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defa6981_7be90b28",
+        "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-12T18:58:37Z",
+      "side": 1,
+      "message": "Well it was only testing of the compile time binding was correct and since this was the same for IE6 and IE8, it was fine.",
+      "parentUuid": "de65092b_c000041a",
+      "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,23 @@
       "revId": "3ce7fc4383b14bf8fcfe51741fcba3dbb19c6ad6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_556dd48c",
+        "filename": "user/test/com/google/gwt/typedarrays/client/ClientSupportTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:25:38Z",
+      "side": 1,
+      "message": "According to MSDN:\n\n\"In rare cases, it may be necessary to uniquely identify IE11. Use the Trident token to do so.\"\n\nSo I think we should leave \"like gecko\" out.",
+      "revId": "3ce7fc4383b14bf8fcfe51741fcba3dbb19c6ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

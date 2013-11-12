@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_d5bf2493",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "@deprecatred use {@link #createSelectElement()} and call {@link SelectElement#setMultiple(boolean)} to configure multiple-selection.",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_75af3068",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "pls fix the formatting (wrapped lines should be left aligned)",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_35fbf860",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "el.setMultiple(multiple)",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_95d5acd3",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "selectElement.setMultiple(multiple) instead?",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_b50708a8",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "incorrect order",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_15e19cb2",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "not sure we need to deprecate?",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_5502f499",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T17:44:06Z",
+      "side": 1,
+      "message": "setMultipleSelect(isMultipleSelect)",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

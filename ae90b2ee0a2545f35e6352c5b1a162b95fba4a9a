@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "de13499f_24c93297",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-12T00:24:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1edfa124_3edbc909",
+      "revId": "ae90b2ee0a2545f35e6352c5b1a162b95fba4a9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de65092b_4f4c2759",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-12T00:17:01Z",
       "side": 1,
       "message": "\"This is kind of hacky. It would be more general purpose to create a class literal implementation for every class and let used ones be pruned by optimization. Instead we\u0027re prematurely optimizing.\"",
+      "revId": "ae90b2ee0a2545f35e6352c5b1a162b95fba4a9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de13499f_c46c9ede",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-12T00:24:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de65092b_4f4c2759",
       "revId": "ae90b2ee0a2545f35e6352c5b1a162b95fba4a9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1edfa124_fef7a16f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-12T00:38:55Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "9fd1da7632c8efe306683b763f423cb707bc80a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1edfa124_1e244d41",
+        "filename": "user/src/com/google/gwt/event/dom/client/DomEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-12T00:38:55Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027registered\u0027",
+      "revId": "9fd1da7632c8efe306683b763f423cb707bc80a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1edfa124_3e29091a",
+        "filename": "user/test/com/google/gwt/event/dom/client/DomEventTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-12T00:38:55Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "9fd1da7632c8efe306683b763f423cb707bc80a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

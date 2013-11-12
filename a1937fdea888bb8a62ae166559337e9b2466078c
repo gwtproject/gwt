@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de65092b_bb009918",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "getEntryWrappedFunctionForOurHandler \u003e getHistoryChangeHandler?",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_e028a0b3",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "nit: calling it hashToken makes it consistent with below.",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_204c58af",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "hash.isEmpty()\n\nAlso as a nit; you can simplify with trenary:\n\n return hash.isEmpty() ? \"\" : decodeURI(hash.substring(1));",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_bb4ed983",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "// Firefox automatically decodes location.hash so parse it from Window.Location.getHref:",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_7bc9e195",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "still needed? (you didn\u0027t follow it below)",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_fb75f1a4",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "\"Test to make sure that there is no double unescaping of hash values. See \nhttps://bugzilla.mozilla.org/show_bug.cgi?id\u003d483304\"",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_1bc42d76",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T20:15:19Z",
+      "side": 1,
+      "message": "nit: you might want to move this test after the simpler scenario \"testTokenEscaping\"",
+      "revId": "a1937fdea888bb8a62ae166559337e9b2466078c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

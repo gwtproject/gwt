@@ -70,6 +70,24 @@
       "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_007e7cc9",
+        "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-12T19:35:59Z",
+      "side": 1,
+      "message": "I don\u0027t understand. DOMImplIE6.isIE6 is a runtime check for IE6 over navigator.useragent and doesn\u0027t even accept IE7.",
+      "parentUuid": "defa6981_7be90b28",
+      "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

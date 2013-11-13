@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fec48d62_35321010",
+        "filename": "user/src/com/google/gwt/media/Media.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2013-11-13T05:12:19Z",
+      "side": 1,
+      "message": "nit: Trailing whitespace.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 2
+      },
+      "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de65092b_b5bd48c1",
         "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
         "patchSetId": 1

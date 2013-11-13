@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9eb471df_dafca5e9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-13T01:52:07Z",
+      "side": 1,
+      "message": "this comment should probably be up 6 lines",
+      "revId": "103c8bb58429f4534e15803419937a045523b6a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9eb471df_faf969f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-13T01:52:07Z",
+      "side": 1,
+      "message": "would be nice if this for loop had a describing comment like the one on line 702",
+      "revId": "103c8bb58429f4534e15803419937a045523b6a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9eb471df_1a061d37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-13T01:52:07Z",
+      "side": 1,
+      "message": "now that this while loop is trimming both single and dual impls, this comment is out of date",
+      "revId": "103c8bb58429f4534e15803419937a045523b6a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

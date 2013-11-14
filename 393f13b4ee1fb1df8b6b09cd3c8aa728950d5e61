@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe72cd1e_b989a7cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-14T18:55:53Z",
+      "side": 1,
+      "message": "Hm, Jenkins is supposed to warn about blank lines like this.",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

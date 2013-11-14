@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ec0f169_1a7c7d44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-14T07:55:09Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll copy exactly your comment",
+      "parentUuid": "9ec0f169_ba0591d9",
+      "revId": "632a216389bcc27a41af8288bed290e6644db3fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed4012d_b6e80826",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9ec0f169_fa6789ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-14T07:55:09Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "1ed4012d_b6e80826",
+      "revId": "632a216389bcc27a41af8288bed290e6644db3fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fea72dcf_bdf0df4e",
         "filename": "servlet/build.xml",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-11-14T04:28:07Z",
       "side": 1,
       "message": "I actually don\u0027t think RF makes any use of Guava.",
+      "revId": "632a216389bcc27a41af8288bed290e6644db3fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ec0f169_ba61119a",
+        "filename": "servlet/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-14T07:55:09Z",
+      "side": 1,
+      "message": "I just want to preserve the meaning of the previous comment as guava has been moved up.\n\nI prefer to leave the comment and eventually the old author may check it.\nI hope it is ok also for you.",
+      "parentUuid": "fea72dcf_bdf0df4e",
       "revId": "632a216389bcc27a41af8288bed290e6644db3fc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

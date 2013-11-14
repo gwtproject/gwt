@@ -83,7 +83,7 @@ public abstract class ToolBase {
     return getClass().getName();
   }
 
-  protected void printHelp() {
+  protected void printHelp(boolean includeUndocumented) {
     System.err.println(About.getGwtVersion());
 
     Set<ArgHandler> uniqueArgHandlers = new LinkedHashSet<ArgHandler>(argHandlers.values());
@@ -120,7 +120,7 @@ public abstract class ToolBase {
     // Print the command-line template.
     //
     for (ArgHandler handler : uniqueArgHandlers) {
-      if (handler.isUndocumented()) {
+      if (!includeUndocumented && handler.isUndocumented()) {
         continue;
       }
       String helpTag = handler.getHelpTag();
@@ -137,7 +137,7 @@ public abstract class ToolBase {
 
     // Print the flagless args.
     //
-    if (nullHandler != null && !nullHandler.isUndocumented()) {
+    if (nullHandler != null && (!nullHandler.isUndocumented() || includeUndocumented)) {
       String[] tagArgs = nullHandler.getTagArgs();
       for (String element : tagArgs) {
         System.err.print(nullHandler.isRequired() ? " " : " [");
@@ -159,7 +159,7 @@ public abstract class ToolBase {
     // Print the details.
     //
     for (ArgHandler handler : uniqueArgHandlers) {
-      if (handler.isUndocumented()) {
+      if (!includeUndocumented && handler.isUndocumented()) {
         continue;
       }
       String helpTag = handler.getHelpTag();
@@ -178,7 +178,7 @@ public abstract class ToolBase {
 
     // And details for the "extra" args, if any.
     //
-    if (nullHandler != null && !nullHandler.isUndocumented()) {
+    if (nullHandler != null && (!nullHandler.isUndocumented() || includeUndocumented)) {
       System.err.println("and ");
       String tagArg = nullHandler.getTagArgs()[0];
       int len = tagArg.length();
@@ -198,14 +198,19 @@ public abstract class ToolBase {
 
     if (args.length > 0) {
       boolean help = false;
+      boolean helpUndocumented = false;
       if ("-help".equalsIgnoreCase(args[0])) {
         help = true;
       } else if ("-?".equals(args[0])) {
         help = true;
+      } else if ("-help-undocumented".equalsIgnoreCase(args[0])) {
+        help = helpUndocumented = true;
+      } else if ("-??".equals(args[0])) {
+        help = helpUndocumented = true;
       }
 
       if (help) {
-        printHelp();
+        printHelp(helpUndocumented);
         return false;
       }
     }
@@ -234,13 +239,13 @@ public abstract class ToolBase {
 
       if (handler == null) {
         System.err.println("Unknown argument: " + arg);
-        printHelp();
+        printHelp(false);
         return false;
       }
 
       int addtlConsumed = handler.handle(args, i);
       if (addtlConsumed == -1) {
-        printHelp();
+        printHelp(handler.isUndocumented());
         return false;
       }
 
@@ -270,7 +275,7 @@ public abstract class ToolBase {
         System.err.print(tagArg);
         System.err.println("'");
 
-        printHelp();
+        printHelp(argHandler.isUndocumented());
         return false;
       }
     }
@@ -279,7 +284,7 @@ public abstract class ToolBase {
       String tagArg = nullHandler.getTagArgs()[0];
       System.err.print(tagArg);
       System.err.println("'");
-      printHelp();
+      printHelp(false);
       return false;
     }
 

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe72cd1e_34505e9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "Done. (I mean the space is deleted :))",
+      "parentUuid": "fe72cd1e_b989a7cb",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe72cd1e_b4728eb9",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-14T20:30:13Z",
       "side": 1,
       "message": "\"reported to the browser. Browsers usually log uncaught exceptions to the JavaScript console.\"\n\nMaybe we should guarantee that this method doesn\u0027t throw? That would make error-handling code easier to understand.",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe72cd1e_74a8162c",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "Done.\n\nI think any exceptions at these point should bubble up. But I improved the implementation so that it is less likely to happen.",
+      "parentUuid": "fe72cd1e_b4728eb9",
       "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe72cd1e_74c496db",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "I think any exception from the test infra should bubble up and break the control flow. It will eventually show up in the browser.",
+      "parentUuid": "fe72cd1e_f495e66d",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe72cd1e_f43166d5",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-14T20:30:13Z",
       "side": 1,
       "message": "Wrap in a try..catch and call escapeToBrowser()?",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe72cd1e_94a8320c",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe72cd1e_f43166d5",
       "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fe72cd1e_1483627f",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "I think calling \"log to console\" suggests something else (\"window.console.log\").\n\nHere we are making the exception to escape to browser so that the browser itself can decide what to do (e.g. call window.console.error or pipes it to window.onerror).",
+      "parentUuid": "fe72cd1e_34677eff",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe72cd1e_54d31a46",
         "filename": "user/src/com/google/gwt/user/client/CommandExecutor.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-14T20:30:13Z",
       "side": 1,
       "message": "It looks like throwing this exception will cause the cancellation Timer\u0027s run() method to throw and then I can\u0027t verify what happens next, but I\u0027m assuming reportUncaughtException gets called. Maybe the javadoc for Timer.run() should say something about what happens to exceptions?",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe72cd1e_f47406e7",
+        "filename": "user/src/com/google/gwt/user/client/CommandExecutor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-14T21:31:04Z",
+      "side": 1,
+      "message": "That\u0027s true. This is not a specific behavior for Timer though.\n\nAny callback in GWT-SDK is wrapped with $entry to provide that functionality (all event handlers, RPC, scheduler etc.) - it is all over the place so only documented in UncaughtExceptionHandler related code. Singling out one might be interpreted as the others doesn\u0027t have the same behavior.\n\nIf you fell strongly about it let me know.",
+      "parentUuid": "fe72cd1e_54d31a46",
       "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

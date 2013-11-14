@@ -209,6 +209,24 @@
       "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_0c969779",
+        "filename": "user/src/com/google/gwt/user/client/CommandExecutor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-14T22:23:52Z",
+      "side": 1,
+      "message": "From the API caller\u0027s point of view, they don\u0027t know when $entry is used by the implementation, so it would be good to document it for Timer.run() and onSuccess() and onFailure() and so on. But we don\u0027t have to do this now.",
+      "parentUuid": "fe72cd1e_f47406e7",
+      "revId": "393f13b4ee1fb1df8b6b09cd3c8aa728950d5e61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

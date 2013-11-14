@@ -16,6 +16,23 @@
       "revId": "bb62211a3d6f85d081b3c528799b09b87e1043c1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe72cd1e_6b23d537",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-14T02:20:25Z",
+      "side": 1,
+      "message": "Off topic. Is the idea here to intern it only if there are more than 1 reference right?",
+      "revId": "bb62211a3d6f85d081b3c528799b09b87e1043c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

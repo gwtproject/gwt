@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bedf7555_0bfafdea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-14T23:45:26Z",
+      "side": 1,
+      "message": "devmode is not concerned with gwt-servlet ;-)\n\nIn case you have to further edit this commit, please remove mention of devmode here (otherwise, it\u0027s no big deal)",
+      "revId": "cf8e0b1f0bc3f9a350658079a884e0f8ade4749a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

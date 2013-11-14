@@ -17,23 +17,18 @@ package com.google.gwt.user.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-
 /**
- * IE implementation of {@link com.google.gwt.user.client.impl.WindowImpl}.
+ * IE8 implementation of {@link com.google.gwt.user.client.impl.WindowImpl}.
  */
-public class WindowImplIE extends WindowImpl {
+public class WindowImplIE8 extends WindowImplIE {
 
   @Override
-  public JavaScriptObject getOnClosingHandler() {
-     return wrap(super.getOnClosingHandler());
-  }
+  public native void addEventListener(String event, JavaScriptObject handler) /*-{
+    $wnd.attachEvent('on' + event, handler);
+  }-*/;
 
-  static native JavaScriptObject wrap(JavaScriptObject originalHandler) /*-{
-    return function() {
-      var ret = originalHandler();
-      // Avoid returning null as IE will coerce it into a string.
-      // Ensure that "" gets returned properly.
-      ret != null ? ret : "";
-    };
+  @Override
+  public native void removeEventListener(String event, JavaScriptObject handler) /*-{
+    $wnd.detachEvent('on' + event, handler);
   }-*/;
 }

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.client.impl;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * Mozilla implementation of {@link com.google.gwt.user.client.impl.WindowImpl}.
  */
@@ -33,4 +35,16 @@ public class WindowImplMozilla extends WindowImpl {
     return (hashLoc > 0) ? href.substring(hashLoc) : "";
   }-*/;
 
+  @Override
+  public JavaScriptObject getOnClosingHandler() {
+    // TODO(dankurka) clean up once we decided how to handle IE11
+    if (isIE11()) {
+      return WindowImplIE.wrap(super.getOnClosingHandler());
+    }
+    return super.getOnClosingHandler();
+  }
+
+  private native boolean isIE11() /*-{
+    return $wnd.navigator.userAgent.indexOf('Trident') != -1
+  }-*/;
 }

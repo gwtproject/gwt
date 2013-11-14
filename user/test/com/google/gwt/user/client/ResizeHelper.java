@@ -58,7 +58,7 @@ public final class ResizeHelper {
   public static boolean isResizeSupported() {
     String userAgent = Navigator.getUserAgent();
     if (userAgent.contains("Chrome")) {
-      return false; // All versions of Chrome are upsupported
+      return false; // All versions of Chrome are unsupported
     }
 
     if (userAgent.contains("Firefox")) {

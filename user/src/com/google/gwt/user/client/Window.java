@@ -16,6 +16,7 @@
 package com.google.gwt.user.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.Document;
@@ -264,9 +265,9 @@ public class Window {
      *
      * @return the URL's query string
      */
-    public static String getQueryString() {
-      return impl.getQueryString();
-    }
+    public static native String getQueryString() /*-{
+      return $wnd.location.search;
+    }-*/;
 
     /**
      * Reloads the current browser window. All GWT state will be lost.
@@ -481,16 +482,14 @@ public class Window {
       super(null);
     }
 
+    @Override
     public HandlerRegistration addCloseHandler(CloseHandler<Window> handler) {
       return addHandler(CloseEvent.getType(), handler);
     }
 
+    @Override
     public HandlerRegistration addResizeHandler(ResizeHandler handler) {
       return addHandler(ResizeEvent.getType(), handler);
-    }
-
-    public HandlerManager getHandlers() {
-      return this;
     }
   }
 
@@ -503,6 +502,10 @@ public class Window {
   private static int lastResizeHeight;
 
   private static final WindowImpl impl = GWT.create(WindowImpl.class);
+  private static JavaScriptObject scrollHandler;
+  private static JavaScriptObject resizeHandler;
+  private static JavaScriptObject closingHandler;
+  private static JavaScriptObject closedHandler;
 
   /**
    * Adds a {@link CloseEvent} handler.
@@ -894,6 +897,10 @@ public class Window {
     }
   }
 
+  private static native JavaScriptObject getClosedHandler() /*-{
+    return @com.google.gwt.user.client.Window::onClosed();
+  }-*/;
+
   private static WindowHandlers getHandlers() {
     if (handlers == null) {
       handlers = new WindowHandlers();
@@ -901,13 +908,27 @@ public class Window {
     return handlers;
   }
 
+
+  private static native JavaScriptObject getResizeHandler() /*-{
+    return $entry(@com.google.gwt.user.client.Window::onResize());
+  }-*/;
+
+  private static native JavaScriptObject getScrollHandler() /*-{
+    return $entry(@com.google.gwt.user.client.Window::onScroll());
+  }-*/;
+
   private static void maybeInitializeCloseHandlers() {
     if (GWT.isClient() && !closeHandlersInitialized) {
-      impl.initWindowCloseHandler();
+      closingHandler = impl.getOnClosingHandler();
+      impl.addEventListener("beforeunload", closingHandler);
+      closedHandler = getClosedHandler();
+      impl.addEventListener("unload", closedHandler);
+
       Impl.scheduleDispose(new Disposable() {
         @Override
         public void dispose() {
-          impl.disposeWindowCloseHandlers();
+          impl.removeEventListener("beforeunload", closingHandler);
+          impl.removeEventListener("unload", closedHandler);
         }
       });
       closeHandlersInitialized = true;
@@ -916,11 +937,12 @@ public class Window {
 
   private static void maybeInitializeResizeHandlers() {
     if (GWT.isClient() && !resizeHandlersInitialized) {
-      impl.initWindowResizeHandler();
+      resizeHandler = getResizeHandler();
+      impl.addEventListener("resize", resizeHandler);
       Impl.scheduleDispose(new Disposable() {
         @Override
         public void dispose() {
-          impl.disposeWindowResizeHandlers();
+          impl.removeEventListener("resize", resizeHandler);
         }
       });
       resizeHandlersInitialized = true;
@@ -929,11 +951,13 @@ public class Window {
 
   private static void maybeInitializeScrollHandlers() {
     if (GWT.isClient() && !scrollHandlersInitialized) {
-      impl.initWindowScrollHandler();
+      scrollHandler = getScrollHandler();
+      impl.addEventListener("scroll", scrollHandler);
+
       Impl.scheduleDispose(new Disposable() {
         @Override
         public void dispose() {
-          impl.disposeWindowScrollHandlers();
+          impl.removeEventListener("scroll", scrollHandler);
         }
       });
       scrollHandlersInitialized = true;

@@ -19,6 +19,7 @@ import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -31,6 +32,7 @@ import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,6 +228,7 @@ public class WindowTest extends GWTTestCase {
     RootPanel.get().add(largeDOM);
     delayTestFinish(1000);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         int newClientHeight = Window.getClientHeight();
         int newClientWidth = Window.getClientWidth();
@@ -242,6 +245,7 @@ public class WindowTest extends GWTTestCase {
     private int width;
     private boolean called;
 
+    @Override
     public void onResize(ResizeEvent event) {
       width = event.getWidth();
       height = event.getHeight();
@@ -286,6 +290,7 @@ public class WindowTest extends GWTTestCase {
 
     delayTestFinish(1000);
     Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+      @Override
       public boolean execute() {
         if (!handler.isCalled()) {
           return true; // we still didn't receive the callback, let's wait more
@@ -332,6 +337,7 @@ public class WindowTest extends GWTTestCase {
   static class ListenerTester implements WindowResizeListener {
     static int resize = 0;
 
+    @Override
     public void onWindowResized(int width, int height) {
       ++resize;
     }

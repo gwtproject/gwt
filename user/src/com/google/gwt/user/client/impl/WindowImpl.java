@@ -22,90 +22,20 @@ import com.google.gwt.core.client.JavaScriptObject;
  * {@link com.google.gwt.user.client.Window}.
  */
 public class WindowImpl {
-  private JavaScriptObject oldOnResize;
-  private JavaScriptObject oldOnScroll;
-  private JavaScriptObject oldOnBeforeUnload;
-  private JavaScriptObject oldOnUnload;
-
-  public native void disposeWindowCloseHandlers() /*-{
-    $wnd.onbeforeunload = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnBeforeUnload;
-    $wnd.onunload = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnUnload;
-  }-*/;
-  
-  public native void disposeWindowResizeHandlers() /*-{
-     $wnd.onresize = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnResize;
-   }-*/;
-  
-  public native void disposeWindowScrollHandlers() /*-{
-     $wnd.onscroll = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnScroll;
-   }-*/;
 
   public native String getHash() /*-{
     return $wnd.location.hash;
   }-*/;
 
-  public native String getQueryString() /*-{
-    return $wnd.location.search;
-  }-*/;
-  
-  public native void initWindowCloseHandler() /*-{
-    var oldOnBeforeUnload = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnBeforeUnload = $wnd.onbeforeunload;
-    var oldOnUnload =  this.@com.google.gwt.user.client.impl.WindowImpl::oldOnUnload = $wnd.onunload;
-    
-    // Old mozilla doesn't like $entry's explicit return statement and
-    // will always pop up a confirmation dialog.  This is worked around by
-    // just wrapping the call to onClosing(), which still has the semantics
-    // that we want.
-    $wnd.onbeforeunload = function(evt) {
-      var ret, oldRet;
-      try {
-        ret = $entry(@com.google.gwt.user.client.Window::onClosing())();
-      } finally {
-        oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
-      }
-      // Avoid returning null as IE6 will coerce it into a string.
-      // Ensure that "" gets returned properly.
-      if (ret != null) {
-        return ret;
-      }
-      if (oldRet != null) {
-        return oldRet;
-      }
-      // returns undefined.
-    };
-    
-    $wnd.onunload = $entry(function(evt) {
-      try {
-        @com.google.gwt.user.client.Window::onClosed()();
-      } finally {
-        oldOnUnload && oldOnUnload(evt);
-        $wnd.onresize = null;
-        $wnd.onscroll = null;
-        $wnd.onbeforeunload = null;
-        $wnd.onunload = null;
-      }
-    });
+  public native void addEventListener(String event, JavaScriptObject handler) /*-{
+    $wnd.addEventListener(event, handler, false);
   }-*/;
 
-  public native void initWindowResizeHandler() /*-{
-    var oldOnResize = this.@com.google.gwt.user.client.impl.WindowImpl::oldOnResize = $wnd.onresize;
-    $wnd.onresize = $entry(function(evt) {
-      try {
-        @com.google.gwt.user.client.Window::onResize()();
-      } finally {
-        oldOnResize && oldOnResize(evt);
-      }
-    });
+  public native void removeEventListener(String event, JavaScriptObject handler) /*-{
+    $wnd.removeEventListener(event, handler);
   }-*/;
 
-  public native void initWindowScrollHandler() /*-{
-    var oldOnScroll =  this.@com.google.gwt.user.client.impl.WindowImpl::oldOnScroll = $wnd.onscroll;
-    $wnd.onscroll = $entry(function(evt) {
-      try {
-        @com.google.gwt.user.client.Window::onScroll()();
-      } finally {
-        oldOnScroll && oldOnScroll(evt);
-      }
-    });
+  public native JavaScriptObject getOnClosingHandler() /*-{
+    return $entry(@com.google.gwt.user.client.Window::onClosing());
   }-*/;
 }

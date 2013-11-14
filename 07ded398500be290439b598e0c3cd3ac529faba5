@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe72cd1e_4e5b876f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-14T17:21:59Z",
+      "side": 1,
+      "message": "Some people might prefer it to be slower. More time to think.",
+      "revId": "07ded398500be290439b598e0c3cd3ac529faba5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

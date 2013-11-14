@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "fe72cd1e_f4f966f6",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-14T19:40:01Z",
+      "side": 1,
+      "message": "Change getCompilationUnitTypeNames to getRegularCompilationUnitTypeNames and maybe add one that actually returns all the units getCompilationUnitTypeNames.\n\nIn the future a type should only be provided by one library hence once the library is built there should be no need to distinguish super/regular. Add a TODO: make it an error to have a type provided by two different libraries even in the right place.",
+      "revId": "eb027bba2b16cfbe01acb92eee8139b3c0e55c22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe72cd1e_6e376316",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
         "patchSetId": 1

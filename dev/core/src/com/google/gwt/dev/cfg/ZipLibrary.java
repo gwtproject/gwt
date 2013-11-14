@@ -279,7 +279,8 @@ class ZipLibrary implements Library {
     // If the given type hasn't been read and cached yet.
     if (!compilationUnitsByTypeName.containsKey(typeName)) {
       // If the given type isn't in this library.
-      if (!getCompilationUnitTypeNames().contains(typeName)) {
+      if (!getCompilationUnitTypeNames().contains(typeName)
+          && !getSuperSourceCompilationUnitTypeNames().contains(typeName)) {
         compilationUnitsByTypeName.put(typeName, null);
         return null;
       }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee2691a_2c35d3c1",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-14T22:30:53Z",
+      "side": 1,
+      "message": "addSuppressed is new in Java 7. I don\u0027t think it matters in production mode, but for dev mode running in Java 6, maybe we shouldn\u0027t use it? Instead we could call escapeToBrowser() twice to log both exceptions.",
+      "revId": "56be43f5fde86786d2e3fc73ca0c971857e69a40",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

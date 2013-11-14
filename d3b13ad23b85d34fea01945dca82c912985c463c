@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe72cd1e_6ed5a3d0",
+        "filename": "user/src/com/google/gwt/user/client/impl/DOMImplStandard.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-14T10:26:04Z",
+      "side": 1,
+      "message": "Nit: Two colons in JSNI methed specs.",
+      "revId": "d3b13ad23b85d34fea01945dca82c912985c463c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe72cd1e_8ee9ffa0",
+        "filename": "user/src/com/google/gwt/user/client/impl/EventMap.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-14T10:26:04Z",
+      "side": 1,
+      "message": "Brief javadocs on these methods would be nice.",
+      "revId": "d3b13ad23b85d34fea01945dca82c912985c463c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

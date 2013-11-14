@@ -16,6 +16,24 @@
       "revId": "3b8e5c92712dc7787989ef1bb89ad37870749fe3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_ac8c23ad",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ToolBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-14T23:39:46Z",
+      "side": 1,
+      "message": "Never mind, I see that we already had \u0027-?\u0027\n\nI guess i don\u0027t mind \u0027-??\u0027 too much since it\u0027s undocumented :-) Could you add \u0027-helpfull\u0027 as well to match Google/C++. [1]\n\n[1] http://google-gflags.googlecode.com/svn/trunk/doc/gflags.html#special",
+      "parentUuid": "dee2691a_8cf5e73e",
+      "revId": "3b8e5c92712dc7787989ef1bb89ad37870749fe3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

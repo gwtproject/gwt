@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bedf7555_cbe3d548",
+        "filename": "servlet/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-14T23:17:40Z",
+      "side": 1,
+      "message": "FYI I\u0027ve found the commit that added that comment: https://gwt.googlesource.com/gwt/+/07b4e2ea82e5d7755fd01b44e8c135cdb03f5ff8\nother dependencies have been added in first position changing the meaning of the comment.",
+      "parentUuid": "1eab219f_1e96ad79",
+      "revId": "721e65e6edc360e38a4678525765ce31f44a635d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7eea5df0_51f0b40a",
         "filename": "servlet/build.xml",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-14T22:50:55Z",
       "side": 1,
       "message": "…and move that one to the \"-servlet\" target (add a comment that it\u0027s used by sourcemap)",
+      "revId": "721e65e6edc360e38a4678525765ce31f44a635d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bedf7555_abe88925",
+        "filename": "servlet/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6170
+      },
+      "writtenOn": "2013-11-14T23:17:40Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "7eea5df0_51f0b40a",
       "revId": "721e65e6edc360e38a4678525765ce31f44a635d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

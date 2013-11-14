@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1eab219f_1e96ad79",
+        "filename": "servlet/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-14T22:50:55Z",
+      "side": 1,
+      "message": "So, change back to \"following two jars\"…",
+      "revId": "721e65e6edc360e38a4678525765ce31f44a635d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7eea5df0_51f0b40a",
+        "filename": "servlet/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-14T22:50:55Z",
+      "side": 1,
+      "message": "…and move that one to the \"-servlet\" target (add a comment that it\u0027s used by sourcemap)",
+      "revId": "721e65e6edc360e38a4678525765ce31f44a635d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

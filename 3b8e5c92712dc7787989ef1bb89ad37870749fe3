@@ -34,6 +34,24 @@
       "revId": "3b8e5c92712dc7787989ef1bb89ad37870749fe3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e0e31b4_cae3c348",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ToolBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-14T23:43:19Z",
+      "side": 1,
+      "message": "Done\n\nReplaced -help-undocumented (which I didn\u0027t really like) with -helpfull",
+      "parentUuid": "dee2691a_ac8c23ad",
+      "revId": "3b8e5c92712dc7787989ef1bb89ad37870749fe3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

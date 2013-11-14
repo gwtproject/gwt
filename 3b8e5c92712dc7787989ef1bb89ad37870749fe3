@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee2691a_8cf5e73e",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ToolBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-14T23:20:28Z",
+      "side": 1,
+      "message": "Haven\u0027t seen -? or -?? before; is that an existing convention? (It conflicts with wildcards on Unix.)",
+      "revId": "3b8e5c92712dc7787989ef1bb89ad37870749fe3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

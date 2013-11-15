@@ -76,4 +76,17 @@
     <when-property-is name="compiler.useSourceMaps" value="false"/>
     <when-property-is name="compiler.stackMode" value="emulated"/>
   </replace-with>
+
+  <!-- only IE8 needs the polyfill, all others can take the native implementation -->
+  <!-- per default we are using the native Object.keys implementation this would break IE8 -->
+  <replace-with class="com.google.gwt.core.client.impl.PrivateInternalJsObjects.JsObjectsImplPolyFill">
+    <when-type-is class="com.google.gwt.core.client.impl.PrivateInternalJsObjects.JsObjectsImpl" />
+    <all>
+      <!-- Prevent IE9 fallback -->
+      <none>
+        <when-property-is name="user.agent" value="ie9" />
+      </none>
+      <when-property-is name="user.agent" value="ie8" />
+    </all>
+  </replace-with>
 </module>

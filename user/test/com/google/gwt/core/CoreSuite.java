@@ -23,6 +23,7 @@ import com.google.gwt.core.client.JavaScriptObjectTest;
 import com.google.gwt.core.client.JsArrayMixedTest;
 import com.google.gwt.core.client.JsArrayTest;
 import com.google.gwt.core.client.JsIdentityTest;
+import com.google.gwt.core.client.JsObjectsTest;
 import com.google.gwt.core.client.RuntimePropertyRegistryTest;
 import com.google.gwt.core.client.SchedulerTest;
 import com.google.gwt.core.client.ScriptInjectorTest;
@@ -54,6 +55,7 @@ public class CoreSuite {
     suite.addTestSuite(JsIdentityTest.class);
     suite.addTestSuite(JsArrayTest.class);
     suite.addTestSuite(JsArrayMixedTest.class);
+    suite.addTestSuite(JsObjectsTest.class);
     suite.addTestSuite(RunAsyncCodeTest.class);
     suite.addTestSuite(RuntimePropertyRegistryTest.class);
     suite.addTestSuite(SchedulerImplTest.class);

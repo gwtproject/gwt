@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee2691a_00065636",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "Object.keys",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_75d03a90",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "This suppression doesn\u0027t appear necessary at the moment, because you\u0027re explicitly referencing it below.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_d5b92e65",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "Please put base classes first, then specific implementations afterwards.  That way when you\u0027re reading the code straight through, the class definitions make more sense.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_757efaca",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "Nit: \u0027toLocaleString\u0027 comes lexicographically before \u0027toString\u0027.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_357872da",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "Nit: No space after function.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_5542de7e",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "I think this would be clearer as\n\n    if (obj \u003d\u003d\u003d null || (typeof obj !\u003d\u003d \u0027object\u0027 \u0026\u0026 typeof obj !\u003d\u003d \u0027function\u0027)) {",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_55941eb2",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "I like MDN\u0027s description of Object.keys: \"Returns an array of a given object\u0027s own enumerable properties.\"",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_75fb9a32",
+        "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "Google JS style guide doesn\u0027t seem to define spacing for single line object literals, but the overwhelming convention appears to be {a: 1, b: 2, c: 3}.  Please change here and below to that.\n\n(And when you\u0027re unsure, you should at least try to be consistent in your style; e.g., don\u0027t mix clashing styles like {a:1, b:2, c:3} and {a : 1, b : 2, c : 3}, as you did here.)",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_f50d4a93",
+        "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T18:47:48Z",
+      "side": 1,
+      "message": "This comment adds no value.  What bug?  Is there an issue number or something you can reference?\n\nAs is, I have no idea what bug you\u0027re talking about here.  If I needed to clean up this test later on, I\u0027d have no idea whether this test case is worth preserving or fixing.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

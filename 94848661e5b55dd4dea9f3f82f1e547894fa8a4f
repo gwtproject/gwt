@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "dee2691a_8f8f1910",
+        "filename": "distro-source/core/src/about.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-15T00:52:09Z",
+      "side": 1,
+      "message": "Acknowledged (this and below); I\u0027ll clean these up in a followup patch set.",
+      "parentUuid": "bedf7555_6b1aa18b",
+      "revId": "94848661e5b55dd4dea9f3f82f1e547894fa8a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e133ddc_89edd935",
         "filename": "distro-source/core/src/about.html",
         "patchSetId": 1

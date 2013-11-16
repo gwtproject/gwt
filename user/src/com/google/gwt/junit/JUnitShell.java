@@ -247,8 +247,6 @@ public class JUnitShell extends DevMode {
           return new String[]{"-port", "auto"};
         }
       });
-      registerHandler(new ArgHandlerWhitelist());
-      registerHandler(new ArgHandlerBlacklist());
       registerHandler(new ArgHandlerLogDir(options));
       registerHandler(new ArgHandlerLogLevel(options));
       registerHandler(new ArgHandlerGenDir(options));
@@ -598,7 +596,6 @@ public class JUnitShell extends DevMode {
      * system classloader to dominate. This makes JUnitHostImpl live in the
      * right classloader (mine).
      */
-    @SuppressWarnings("unchecked")
     @Override
     protected WebAppContext createWebAppContext(TreeLogger logger,
         File appRootDir) {

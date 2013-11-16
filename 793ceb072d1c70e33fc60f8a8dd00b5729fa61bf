@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef3211c_feff41d5",
+        "filename": "user/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-16T23:05:34Z",
+      "side": 1,
+      "message": "A bit late but I\u0027m just thinking: shouldn\u0027t we pass \"-userAgents gecko1_8\" to speed up compilation? (in that case, adding back -runStyle would make things clearer)",
+      "revId": "793ceb072d1c70e33fc60f8a8dd00b5729fa61bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

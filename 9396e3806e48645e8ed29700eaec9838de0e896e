@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e64b999_ee123bb3",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/ProxyCreator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-18T19:34:58Z",
+      "side": 1,
+      "message": "Nit: please remove trailing spaces.",
+      "revId": "9396e3806e48645e8ed29700eaec9838de0e896e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_8e07ff6f",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/ProxyCreator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-18T19:34:58Z",
+      "side": 1,
+      "message": "Nit: please remove trailing spaces.",
+      "revId": "9396e3806e48645e8ed29700eaec9838de0e896e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

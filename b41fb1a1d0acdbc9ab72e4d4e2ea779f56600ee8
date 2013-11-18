@@ -1,0 +1,2656 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9edf117f_854064bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_653d6041",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c598ac1f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a59da80d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05a3b451",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e5a7b059",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_458dbcd5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_258a38bf",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_8597c4e5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_659440e1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c57f0cf8",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a58488ad",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_057a9407",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e57e90f9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_45749c17",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_25719827",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_856ea443",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_656ba035",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c5e6ec99",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a5ebe861",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05f1f451",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e5f5f03d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_45fbfc31",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_25f87833",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_8505046e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_65028065",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c50d4c94",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a512c8b1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_0508d47f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e50cd095",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_4522dc03",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_251fd8b9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_851ce4c3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_6519e0d1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c5b42c6e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a5b92866",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05bf3448",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e5c330d2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_45a93c0e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_25a6b83d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_85b3447e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_65b0c071",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c5db8cb8",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a5e00866",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05d6148e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e5da10b2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_45d01c90",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_25cd18f6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_85ca24dc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_65c720d4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c5826c7a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a5876888",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_058d74a8",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e59170c6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_45977cb8",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_2594f8b1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_85a18416",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_659e00d4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c569cc14",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a56e4818",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05645436",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e568500e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_457e5cca",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_257b58da",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_857864dc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_657560e0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c550ac4e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a555a83c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/FieldDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_055bb470",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e55fb058",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_4545bc84",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_2542387e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_654c40b0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c5370c17",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_854fc4a4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a53c88fc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_05329426",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e5369018",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_452c9cc6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_8526a4e2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_252998b6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027else\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_6523a0d4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.List.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c8de0381",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a8e3bf48",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08e90b29",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027static\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e8edc734",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48f31319",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28f04f0a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027cls\u0027 hides a field.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88fd1be5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_68fa57ec",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c805632b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/DependencyRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_0800eb16",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027else\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a80a9f38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027else\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e804a72c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_481af38a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_2817af60",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_8814fb5a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c82c43b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_6811b768",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08374bff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a831ff0c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e83b07e9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_281e8f74",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_482153b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/SourceInfoCorrelation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_882b5b95",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Arrays.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_68289798",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c853a32f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a858df4c",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_084e2b85",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48483377",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e852e728",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_2845ef5c",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88423b53",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_683ff7ca",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c87a83a1",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a87f3f8f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08858b3f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e889475d",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_488f935f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_6896d77a",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88999bad",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_288ccf68",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c861e3eb",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a8661fff",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_085c6b2d",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e86027e5",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28732fc1",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_487673b1",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88707bb3",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_686d37d7",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c8c8c395",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a8cd7fa3",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08d3cb47",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e8d7872f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48bdd3eb",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28ba0ff5",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88c7db7b",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_68c41777",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c8af23ae",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a8b45f03",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08aaab9d",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e8ae67af",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48a4b3cd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28a16fbd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_889ebb79",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_689b778b",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c8160330",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a81bbf57",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08210b88",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027else\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e825c793",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_482b1368",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28284f69",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88351bc4",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_683257db",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c83d63aa",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a8429f27",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-18T23:41:51Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b41fb1a1d0acdbc9ab72e4d4e2ea779f56600ee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

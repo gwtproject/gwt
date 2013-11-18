@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e64b999_6bc07d15",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-18T15:59:56Z",
+      "side": 1,
+      "message": "\u003cp\u003e",
+      "revId": "e378f6d1b359bbba48b9bb2e84dd01bed7494872",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

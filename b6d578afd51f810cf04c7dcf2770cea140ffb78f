@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe180d2e_358f1061",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_00065636",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee2691a_75d03a90",
         "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-15T18:47:48Z",
       "side": 1,
       "message": "This suppression doesn\u0027t appear necessary at the moment, because you\u0027re explicitly referencing it below.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe180d2e_3548b076",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_75d03a90",
       "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe180d2e_1545b45c",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_d5b92e65",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee2691a_757efaca",
         "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-15T18:47:48Z",
       "side": 1,
       "message": "Nit: \u0027toLocaleString\u0027 comes lexicographically before \u0027toString\u0027.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe180d2e_75422856",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_757efaca",
       "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fe180d2e_553f2cca",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_357872da",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee2691a_5542de7e",
         "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-15T18:47:48Z",
       "side": 1,
       "message": "I think this would be clearer as\n\n    if (obj \u003d\u003d\u003d null || (typeof obj !\u003d\u003d \u0027object\u0027 \u0026\u0026 typeof obj !\u003d\u003d \u0027function\u0027)) {",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe180d2e_b57a00a0",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_5542de7e",
       "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "fe180d2e_957f0490",
+        "filename": "user/src/com/google/gwt/core/client/JsObjects.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_55941eb2",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee2691a_75fb9a32",
         "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
         "patchSetId": 1
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "fe180d2e_f5847845",
+        "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee2691a_75fb9a32",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee2691a_f50d4a93",
         "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
         "patchSetId": 1
@@ -149,6 +293,24 @@
       "writtenOn": "2013-11-15T18:47:48Z",
       "side": 1,
       "message": "This comment adds no value.  What bug?  Is there an issue number or something you can reference?\n\nAs is, I have no idea what bug you\u0027re talking about here.  If I needed to clean up this test later on, I\u0027d have no idea whether this test case is worth preserving or fixing.",
+      "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe180d2e_d5897c5d",
+        "filename": "user/test/com/google/gwt/core/client/JsObjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-18T11:33:39Z",
+      "side": 1,
+      "message": "updated to include a proper explanation",
+      "parentUuid": "dee2691a_f50d4a93",
       "revId": "b6d578afd51f810cf04c7dcf2770cea140ffb78f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

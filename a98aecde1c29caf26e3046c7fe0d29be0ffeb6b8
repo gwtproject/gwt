@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9edf117f_c8fc435f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a801ff96",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_08074ba9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e80b07b3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48f1537f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_28ee8f9e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88fb5b5f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/FieldDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_68f89762",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_c823a339",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_a828df16",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_081e2bef",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_e822e732",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_48183301",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_2815efc6",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_88123bdd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_680ff7b4",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-19T02:11:13Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "a98aecde1c29caf26e3046c7fe0d29be0ffeb6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

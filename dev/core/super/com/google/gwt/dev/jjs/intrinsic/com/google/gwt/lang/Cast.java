@@ -27,8 +27,8 @@ final class Cast {
 
   static native boolean canCast(Object src, int dstId) /*-{
     return src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId]
-        // Note, String is always queryid = 1
-        || dstId == 1 && typeof(src.valueOf()) == 'string';
+        // Note, String is always queryid = 1, Serializable = 2, CharSequence = 3, Comparable = 4
+        || (dstId > 0 && dstId < 5 && typeof(src.valueOf()) === 'string');
   }-*/;
 
   // Not functional yet. Works under the assumption that queryId is seedId. This will become true
@@ -40,22 +40,12 @@ final class Cast {
             !!srcSeed.prototype.@java.lang.Object::castableTypeMap[dstId]);
   }-*/;
 
-  /**
-   * Danger: value not coerced to boolean; use the result only in a boolean
-   * context.
-   */
-  static native boolean canCastUnsafe(Object src, int dstId) /*-{
-    return src.@java.lang.Object::castableTypeMap && src.@java.lang.Object::castableTypeMap[dstId]
-        // Note, String is always queryid = 1
-        || dstId == 1 && typeof(src.valueOf()) == 'string';
-  }-*/;
-
   static native String charToString(char x) /*-{
     return String.fromCharCode(x);
   }-*/;
 
   static Object dynamicCast(Object src, int dstId) {
-    if (src != null && !canCastUnsafe(src, dstId)) {
+    if (src != null && !canCast(src, dstId)) {
       throw new ClassCastException();
     }
     return src;
@@ -66,7 +56,7 @@ final class Cast {
    */
   static Object dynamicCastAllowJso(Object src, int dstId) {
     if (src != null && !isJavaScriptObject(src) &&
-        !canCastUnsafe(src, dstId)) {
+        !canCast(src, dstId)) {
       throw new ClassCastException();
     }
     return src;
@@ -219,31 +209,24 @@ final class Cast {
   /**
    * Returns whether the Object is a Java String.
    *
-   * Depends on the requirement that queryId = 1 is reserved for String,
-   * and that the trivial cast String to String is explicitly added to the
-   * castableTypeMap for String, and String cannot be the target of a cast from
-   * anything else (except for the trivial cast from Object), since
-   * java.lang.String is a final class.
-   * (See the constructor for the CastNormalizer.AssignTypeCastabilityVisitor).
-   *
    * Since java Strings are translated as JavaScript strings, Strings need to be
    * interchangeable between GWT modules, unlike other Java Objects.
    */
-  static boolean isJavaString(Object src) {
-    return canCast(src, 1);
-  }
+  static native boolean isJavaString(Object src) /*-{
+    return typeof(src.valueOf()) === 'string';
+  }-*/;
 
   /**
    * Returns whether the Object is a Java Object but not a String.
    *
-   * Depends on all Java Objects (except for String) having the typeMarker field
+   * Depends on all Java Objects (except for String and Arrays) having the typeMarker field
    * generated, and set to the nullMethod for the current GWT module.  Note this
    * test essentially tests whether an Object is a java object for the current
    * GWT module.  Java Objects from external GWT modules are not recognizable as
    * Java Objects in this context.
    */
   static boolean isNonStringJavaObject(Object src) {
-    return Util.getTypeMarker(src) == getNullMethod();
+    return Util.getTypeMarker(src) == getNullMethod() || instanceofArray(src);
   }
 
   /**
@@ -255,12 +238,15 @@ final class Cast {
    * GWT module.  Java Objects from external GWT modules are not recognizable as
    * Java Objects in this context.
    */
-  static boolean isNonStringJavaObjectNotArray(Object src) {
+  static boolean isNotStringNorArrayNorJsoMethod(Object src) {
     return Util.getTypeMarker(src) == getNullMethod() && !instanceofArray(src);
   }
 
+  /**
+   * Returns whether or not the given object is a Java array (not a JavaScript array)
+   */
   static native boolean instanceofArray(Object src) /*-{
-    return src instanceof Array;
+    return !!src.@java.lang.Object::castableTypeMap && src instanceof Array;
   }-*/;
 }
 

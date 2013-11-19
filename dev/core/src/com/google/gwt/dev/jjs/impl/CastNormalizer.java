@@ -91,6 +91,14 @@ public class CastNormalizer {
       // Force entries for Object and String.
       recordCastInternal(program.getTypeJavaLangObject(), program.getTypeJavaLangObject());
       recordCastInternal(program.getTypeJavaLangString(), program.getTypeJavaLangObject());
+
+      // Force entries for interfaces shared by Array and String
+      recordCastInternal(program.getIndexedType("Serializable"), program.getTypeJavaLangObject());
+
+      // Force entries for interfaces exclusive to String
+      recordCastInternal(program.getIndexedType("CharSequence"), program.getTypeJavaLangObject());
+      recordCastInternal(program.getIndexedType("Comparable"), program.getTypeJavaLangObject());
+
     }
 
     public void computeTypeCastabilityMaps() {
@@ -324,9 +332,17 @@ public class CastNormalizer {
       /*
        * Reserve query id 1 for java.lang.String to facilitate the mashup case.
        * Also, facilitates detecting an object as a Java String (see Cast.java)
-       * Multiple GWT modules need to modify String's prototype the same way.
        */
       tempSortedQueryTypes.add(program.getTypeJavaLangString());
+      /* Reserve query id 2 for Serializable */
+      tempSortedQueryTypes.add(program.getIndexedType("Serializable"));
+
+      /* Reserve query id 3 for CharSequence */
+      tempSortedQueryTypes.add(program.getIndexedType("CharSequence"));
+
+      /* Reserve query id 4 for Comparable */
+      tempSortedQueryTypes.add(program.getIndexedType("Comparable"));
+
       // Add the rest.
       tempSortedQueryTypes.addAll(sortedQueryTypes);
       sortedQueryTypes = new ArrayList<JReferenceType>(tempSortedQueryTypes);

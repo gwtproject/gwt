@@ -27,8 +27,6 @@ public final class Array {
    * TODO: static init instead of lazy init when we can elide the clinit calls.
    */
 
-  static Object typeMarkerObject = new Object();
-
   static final int FALSE_SEED_TYPE = 2;
 
   static final int LONG_SEED_TYPE = 3;
@@ -127,7 +125,6 @@ public final class Array {
       JavaScriptObject castableTypeMap, int queryId, Array array) {
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);
-    Util.setTypeMarker(array, Util.getTypeMarker(typeMarkerObject));
     array.queryId = queryId;
     return array;
   }

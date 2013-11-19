@@ -148,9 +148,9 @@ public class JsoDevirtualizer {
   protected Map<JMethod, JMethod> polyMethodToJsoMethod = new HashMap<JMethod, JMethod>();
 
   /**
-   * Contains the Cast.isNonStringJavaObject method.
+   * Contains the Cast.isNotStringNorArrayNorJsoObject method.
    */
-  private final JMethod isNonStringJavaObjectNotArrayMethod;
+  private final JMethod isNotStringNorArrayNorJsoObject;
 
   /**
    * Contains the Cast.isJavaString method.
@@ -176,7 +176,7 @@ public class JsoDevirtualizer {
 
   private JsoDevirtualizer(JProgram program) {
     this.program = program;
-    this.isNonStringJavaObjectNotArrayMethod =
+    this.isNotStringNorArrayNorJsoObject =
         program.getIndexedMethod("Cast.isNonStringJavaObjectNotArray");
     this.isJavaStringMethod = program.getIndexedMethod("Cast.isJavaString");
     staticImplCreator = new CreateStaticImplsVisitor(program);
@@ -216,7 +216,7 @@ public class JsoDevirtualizer {
    * <pre>
    * static boolean equals__devirtual$(Object this, Object other) {
    *   return Cast.isJavaString() ? String.equals(other) :
-   *     Cast.isNonStringJavaObject(this) ?
+   *     Cast.isNotStringNorArrayNorJsoObject(this) ?
    *       this.equals(other) : JavaScriptObject.equals$(this, other);
    * }
    * </pre>
@@ -283,8 +283,8 @@ public class JsoDevirtualizer {
         new JParameterRef(sourceInfo, thisParam)).getExpr());
 
     // Build from bottom up.
-    // isJavaObjectNotArray(temp)
-    JMethodCall condition = new JMethodCall(sourceInfo, null, isNonStringJavaObjectNotArrayMethod);
+    // isNotStringNorArrayNorJsoObject(temp)
+    JMethodCall condition = new JMethodCall(sourceInfo, null, isNotStringNorArrayNorJsoObject);
     condition.addArg(new JLocalRef(sourceInfo, temp));
 
     // temp.method(args)
@@ -305,7 +305,8 @@ public class JsoDevirtualizer {
       }
     }
 
-    // isJavaObjectNotArray(temp) ? temp.method(args) : jso$method(temp, args)
+    // isNotStringNorArrayNorJsoObject(temp) ? temp.method(args) : jso$method
+    // (temp, args)
     JConditional conditional =
         new JConditional(sourceInfo, polyMethod.getType(), condition, thenValue, elseValue);
 

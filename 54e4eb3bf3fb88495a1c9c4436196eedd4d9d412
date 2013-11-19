@@ -111,6 +111,24 @@
       "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe180d2e_d5f5fc3d",
+        "filename": "user/test/com/google/gwt/media/client/MediaTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-19T09:47:09Z",
+      "side": 1,
+      "message": "Let me rephrase: This isIE6 check was only used to test the compile time support rebinding for Media (not supported). So it is fine to change to IE8 to keep that testing. The code before could have tested for IE6, IE7 and IE8, but it did not. So I guess the test could have been better.",
+      "parentUuid": "de65092b_007e7cc9",
+      "revId": "54e4eb3bf3fb88495a1c9c4436196eedd4d9d412",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

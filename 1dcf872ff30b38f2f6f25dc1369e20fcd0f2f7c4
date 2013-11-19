@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e64b999_f2b4556d",
+        "filename": "user/src/com/google/gwt/resources/client/impl/ImageResourcePrototype.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-19T21:18:37Z",
+      "side": 1,
+      "message": "Perhaps we can introduce ImageResource.Bundled instead so that existing test code will work with the code path for standalone images?",
+      "revId": "1dcf872ff30b38f2f6f25dc1369e20fcd0f2f7c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

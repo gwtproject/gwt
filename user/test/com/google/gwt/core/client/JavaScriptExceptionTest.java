@@ -54,8 +54,15 @@ public class JavaScriptExceptionTest extends GWTTestCase {
     throw e;
   }-*/;
 
-  private static native void throwTypeError(Object e) /*-{
-    e.notExistsWillThrowTypeError();
+  private static native void throwTypeError() /*-{
+    "dummy".notExistsWillThrowTypeError();
+  }-*/;
+
+  private static native void throwSvgError() /*-{
+    // In Firefox, this throws an object (not Error), while in Webkit it merely returns 0
+    $doc.createElementNS("http://www.w3.org/2000/svg", "text").getBBox();
+    // If we reach here, make sure still some exception is thrown to keep test case simple
+    throw new Error;
   }-*/;
 
   private static void throwSandwichJava(Object e) {
@@ -312,12 +319,23 @@ public class JavaScriptExceptionTest extends GWTTestCase {
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testTypeError() {
     try {
-      throwTypeError("myobj");
+      throwTypeError();
       fail();
     } catch (JavaScriptException e) {
       assertTypeError(e);
       e = (JavaScriptException) javaNativeJavaSandwich(e);
       assertTypeError(e);
+    }
+  }
+
+  public void testSvgError() {
+    try {
+      throwSvgError();
+      fail();
+    } catch (JavaScriptException e) {
+      assertTrue(e.isThrownSet());
+      e = (JavaScriptException) javaNativeJavaSandwich(e);
+      assertTrue(e.isThrownSet());
     }
   }
 

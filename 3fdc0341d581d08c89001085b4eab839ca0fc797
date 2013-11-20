@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_54b0a970",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-20T19:40:40Z",
+      "side": 1,
+      "message": "* yes mostly filesets \u003d all but one\n\n* \"I am assuming that by name is meant identifier (expected to be unique)\", i don\u0027t understand the question",
+      "parentUuid": "5e64b999_f9b4386d",
+      "revId": "3fdc0341d581d08c89001085b4eab839ca0fc797",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_7997e8b8",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/NullLibraryBuilder.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-20T17:58:44Z",
       "side": 1,
       "message": "I find it a little odd that the builder keeps state that is queriable, maybe it should build a NullLibrary that answers queries.",
+      "revId": "3fdc0341d581d08c89001085b4eab839ca0fc797",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_14e1d168",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/NullLibraryBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-20T19:40:40Z",
+      "side": 1,
+      "message": "it\u0027s effectively a \"Mock\" LibraryBuilder. it only has getters for the data so that it can be checked in tests.\n\nwould this behavior still be weird if i renamed it?",
+      "parentUuid": "5e64b999_7997e8b8",
       "revId": "3fdc0341d581d08c89001085b4eab839ca0fc797",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

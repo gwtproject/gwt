@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e64b999_f9b4386d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T17:58:44Z",
+      "side": 1,
+      "message": "Testing my understanding: mostly filesets \u003d all but one?\n\nI am assuming that by name is meant identifier (expected to be unique)",
+      "revId": "3fdc0341d581d08c89001085b4eab839ca0fc797",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_7997e8b8",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/NullLibraryBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T17:58:44Z",
+      "side": 1,
+      "message": "I find it a little odd that the builder keeps state that is queriable, maybe it should build a NullLibrary that answers queries.",
+      "revId": "3fdc0341d581d08c89001085b4eab839ca0fc797",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

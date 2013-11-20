@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_1ab33bf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-20T20:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_daee03e1",
+      "revId": "1cbed892e98362adc7169b7e21c8ea0bb5ef0f14",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_bad6af11",
         "filename": "user/src/com/google/gwt/useragent/UserAgent.gwt.xml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-20T20:34:04Z",
       "side": 1,
       "message": "Accident?",
+      "revId": "1cbed892e98362adc7169b7e21c8ea0bb5ef0f14",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_bafd4f8d",
+        "filename": "user/src/com/google/gwt/useragent/UserAgent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-20T20:40:15Z",
+      "side": 1,
+      "message": "Yeap, internal version doesn\u0027t have the recent change, will fix.",
+      "parentUuid": "5e64b999_bad6af11",
       "revId": "1cbed892e98362adc7169b7e21c8ea0bb5ef0f14",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

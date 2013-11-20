@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9edf117f_51761eb1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.Correlation.Axis.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_31739ac1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.CorrelationFactory.RealCorrelationFactory.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_9170a6b3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_716d22d7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_d1c86e95",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_b1cdeaa3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_11d3f647",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_f1d7722f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_51bd7eeb",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/FieldDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_31ba7af5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_91c7067c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_71c40277",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_d1afcead",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_b1b4ca03",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/CorrelationFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsName.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_11aad69d",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.ArrayList.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_f1ae52af",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Arrays.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_51a45ecd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.HashSet.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_31a1dabd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_919ee679",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9edf117f_719b628b",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-20T19:45:58Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

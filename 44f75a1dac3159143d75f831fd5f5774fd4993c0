@@ -36,6 +36,125 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_7a6d97d6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "Are these exceptions transformed into InternalCompilerException by the caller chain ?",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_ba8c6f6a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "You can take your ldap off the comments;  AFAIK only TODOs go with ldap.\n\nChange comment to:\n-----\nDiscard Unknown or not-so-vaild ranges (e.g. {@link com.google.gwt.dev.js.ast.JsPro\ngram).\n-----\n\nAlso do you mean discard ranges that represent JS Ast nodes that are not interesting entities?",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_3ace3f9f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/sizeMetics/getSizeMetrics/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_fad7472f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/initFragSizes/initializeFragmentSizes/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_5ac7737c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/updateEntity/updateEntityDescriptor/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_baba2ff3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "// TODO(ocallau): Setting the obfuscated name could be avoided.\n\n\nIs could or should be avoided?",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_faae67af",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/recordCodeReference/recordCodeReferences/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9edf117f_9170a6b3",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
         "patchSetId": 3
@@ -87,6 +206,23 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_fa250793",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/currentPointerId/nextUniqueId/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9edf117f_b1cdeaa3",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
         "patchSetId": 3
@@ -115,6 +251,23 @@
       "writtenOn": "2013-11-20T19:45:58Z",
       "side": 1,
       "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_5a3533c0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "Maybe change name to: getEntityAsJsonObject\n\nand similarly next few functions.",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -206,6 +359,23 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_1a3edba5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "probably we want fields to be private instead of protected.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9edf117f_d1afcead",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 3
@@ -234,6 +404,74 @@
       "writtenOn": "2013-11-20T19:45:58Z",
       "side": 1,
       "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsName.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_fa3c27ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "s/depRecorder/dependencyRecorder/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_5a4c5358",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "Nit: comma in previous line (and normally space after comma)",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_1a0c9b05",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "If the correlation is needed by regular sourcemaps (when soyc is disabled)  maybe delete the todo and add isSourceMapEnabled || to the if statement.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_fa0ae7e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-20T20:35:36Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this next.",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

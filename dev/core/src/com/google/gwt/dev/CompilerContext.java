@@ -16,6 +16,7 @@ package com.google.gwt.dev;
 import com.google.gwt.dev.cfg.LibraryBuilder;
 import com.google.gwt.dev.cfg.LibraryGroup;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.cfg.NullLibraryBuilder;
 import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
@@ -35,7 +36,7 @@ public class CompilerContext {
   public static class Builder {
 
     private ResourceOracle buildResourceOracle;
-    private LibraryBuilder libraryBuilder;
+    private LibraryBuilder libraryBuilder = new NullLibraryBuilder();
     private LibraryGroup libraryGroup;
     private ModuleDef module;
     private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
@@ -98,7 +99,7 @@ public class CompilerContext {
   }
 
   private ResourceOracle buildResourceOracle;
-  private LibraryBuilder libraryBuilder;
+  private LibraryBuilder libraryBuilder = new NullLibraryBuilder();
   private LibraryGroup libraryGroup;
   private ModuleDef module;
 

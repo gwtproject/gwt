@@ -109,4 +109,18 @@
    -->
   <define-configuration-property name="js.identifier.blacklist.suffixes"
                                    is-multi-valued="true"/>
+
+  <!--
+    When enabled, the GWT compiler generates calls to window.console.time()
+    and window.console.timeEnd() before and after each Java method.
+   -->
+  <define-property name="compiler.methodProfiler" values="off,on"/>
+  <set-property name="compiler.methodProfiler" value="off"/>
+
+  <!--
+    When compiler.methodProfiler = on, selects the Java packages containing
+    the methods to be instrumented. If not set, all will be instrumented.
+   -->
+  <define-configuration-property name="compiler.methodProfiler.packagePrefix"
+                                 is-multi-valued="true"/>
 </module>

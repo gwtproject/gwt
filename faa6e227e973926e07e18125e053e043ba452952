@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_8049584a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-11-21T22:50:59Z",
+      "side": 1,
+      "message": "As this is migrating from use-at-your-own-risk in the clientbundle guts to this-is-how-you-generate-code of Generator, should this be guarded with Collections.unmodifiableMap? There didn\u0027t used to be a way to read from this map outside of ResGenUtil, so add was the only option, at least from outside ClientBundle code.\n\nAlong the same lines, any concerns with exposing java.io.File via getGeneratedFile? Within ResGenUtil it was only useful to reference via @Source (or cheat and cover up legitimate resources on the classpath or resource oracle), but from here you can do silly things like delete files, rewrite them, etc. Does this sort of functionality belong instead in the ResourceOracle or GeneratorContext?",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_803238d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2013-11-21T22:50:59Z",
+      "side": 1,
+      "message": "Should this use ModuleDef.getCanonicalName() instead? Otherwise you could be passing the rename-to short string into this rather than the full package+module name, which could lead to either collisions or one module overwriting another (not yet sure if that is desirable).\n\nAlong the same lines, EntryMethodHolderGenerator#generate probably doesn\u0027t need to worry about `replace(\"-\", \"_\")` since it is operating on source names (from the ModuleDef changes), and \"-\" isn\u0027t valid in that context.",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_e0d21c42",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 1

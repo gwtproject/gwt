@@ -34,7 +34,6 @@
     <when-type-is class="com.google.gwt.safecss.shared.SafeStylesUtils.Impl" />
     <any>
       <when-property-is name="user.agent" value="ie9" />
-      <when-property-is name="user.agent" value="ie10" />
     </any>
   </replace-with>
 

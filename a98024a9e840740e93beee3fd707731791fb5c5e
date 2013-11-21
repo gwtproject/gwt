@@ -16,6 +16,24 @@
       "revId": "a98024a9e840740e93beee3fd707731791fb5c5e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1eca41de_46115268",
+        "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2013-11-21T09:03:25Z",
+      "side": 1,
+      "message": "Indeed. Done.",
+      "parentUuid": "fe8bada0_3df0af0a",
+      "revId": "a98024a9e840740e93beee3fd707731791fb5c5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

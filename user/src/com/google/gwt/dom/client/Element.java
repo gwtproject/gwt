@@ -24,18 +24,6 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 public class Element extends Node {
 
   /**
-   * Fast helper method to convert small doubles to 32-bit int.
-   *
-   * <p>Note: you should be aware that this uses JavaScript rounding and thus
-   * does NOT provide the same semantics as <code>int b = (int) someDouble;</code>.
-   * In particular, if x is outside the range [-2^31,2^31), then toInt32(x) would return a value
-   * equivalent to x modulo 2^32, whereas (int) x would evaluate to either MIN_INT or MAX_INT.
-   */
-  private static native int toInt32(double val) /*-{
-    return val | 0;
-  }-*/;
-
-  /**
    * Constant returned from {@link #getDraggable()}.
    */
   public static final String DRAGGABLE_AUTO = "auto";
@@ -214,9 +202,9 @@ public class Element extends Node {
    * 
    * @return the element's client height
    */
-  public final int getClientHeight() {
-    return toInt32(getSubPixelClientHeight());
-  }
+  public final native int getClientHeight() /*-{
+    return this.clientHeight | 0;
+  }-*/;
 
   /**
    * Returns the inner width of an element in pixels, including padding but not
@@ -224,9 +212,9 @@ public class Element extends Node {
    * 
    * @return the element's client width
    */
-  public final int getClientWidth() {
-    return toInt32(getSubPixelClientWidth());
-  }
+  public final native int getClientWidth() /*-{
+    return this.clientWidth | 0;
+  }-*/;
 
   /**
    * Specifies the base direction of directionally neutral text and the
@@ -310,17 +298,17 @@ public class Element extends Node {
   /**
    * The height of an element relative to the layout.
    */
-  public final int getOffsetHeight() {
-    return toInt32(getSubPixelOffsetHeight());
-  }
+  public final native int getOffsetHeight() /*-{
+    return this.offsetHeight | 0;
+  }-*/;
 
   /**
    * The number of pixels that the upper left corner of the current element is
    * offset to the left within the offsetParent node.
    */
-  public final int getOffsetLeft() {
-    return toInt32(getSubPixelOffsetLeft());
-  }
+  public final native int getOffsetLeft() /*-{
+    return this.offsetLeft | 0;
+  }-*/;
 
   /**
    * Returns a reference to the object which is the closest (nearest in the
@@ -334,16 +322,16 @@ public class Element extends Node {
    * The number of pixels that the upper top corner of the current element is
    * offset to the top within the offsetParent node.
    */
-  public final int getOffsetTop() {
-    return toInt32(getSubPixelOffsetTop());
-  }
+  public final native int getOffsetTop() /*-{
+    return this.offsetTop | 0;
+  }-*/;
 
   /**
    * The width of an element relative to the layout.
    */
-  public final int getOffsetWidth() {
-    return toInt32(getSubPixelOffsetWidth());
-  }
+  public final native int getOffsetWidth() /*-{
+    return this.offsetWidth | 0;
+  }-*/;
 
   /**
    * The element immediately preceeding this element. If there is no such
@@ -416,9 +404,9 @@ public class Element extends Node {
   /**
    * The height of the scroll view of an element.
    */
-  public final int getScrollHeight() {
-    return toInt32(getSubPixelScrollHeight());
-  }
+  public final native int getScrollHeight() /*-{
+    return this.scrollHeight | 0;
+  }-*/;
 
   /**
    * The number of pixels that an element's content is scrolled from the left.
@@ -435,16 +423,16 @@ public class Element extends Node {
   /**
    * The number of pixels that an element's content is scrolled from the top.
    */
-  public final int getScrollTop() {
-    return toInt32(getSubPixelScrollTop());
-  }
+  public final native int getScrollTop() /*-{
+    return this.scrollTop | 0;
+  }-*/;
 
   /**
    * The width of the scroll view of an element.
    */
-  public final int getScrollWidth() {
-    return toInt32(getSubPixelScrollWidth());
-  }
+  public final native int getScrollWidth() /*-{
+    return this.scrollWidth | 0;
+  }-*/;
 
   /**
    * Gets a string representation of this element (as outer HTML).
@@ -815,39 +803,4 @@ public class Element extends Node {
      this.title = title || '';
    }-*/;
 
-  private final native double getSubPixelClientHeight() /*-{
-    return this.clientHeight;
-  }-*/;
-
-  private final native double getSubPixelClientWidth() /*-{
-    return this.clientWidth;
-  }-*/;
-
-  private final native double getSubPixelOffsetHeight() /*-{
-     return this.offsetHeight || 0;
-   }-*/;
-
-  private final native double getSubPixelOffsetLeft() /*-{
-     return this.offsetLeft || 0;
-  }-*/;
-
-  private final native double getSubPixelOffsetTop() /*-{
-    return this.offsetTop || 0;
-  }-*/;
-
-  private final native double getSubPixelOffsetWidth() /*-{
-    return this.offsetWidth || 0;
-  }-*/;
-
-  private final native double getSubPixelScrollHeight() /*-{
-    return this.scrollHeight || 0;
-  }-*/;
-
-  private final native double getSubPixelScrollTop() /*-{
-    return this.scrollTop || 0;
-  }-*/;
-
-  private final native double getSubPixelScrollWidth() /*-{
-    return this.scrollWidth || 0;
-  }-*/;
 }

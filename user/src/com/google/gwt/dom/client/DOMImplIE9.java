@@ -50,7 +50,7 @@ class DOMImplIE9 extends DOMImplStandardBase {
 
   @Override
   public int getScrollLeft(Element elem) {
-    int left = toInt32(getScrollLeftImpl(elem));
+    int left = getScrollLeftImpl(elem);
     if (isRTL(elem)) {
       left = -left;
     }
@@ -134,8 +134,8 @@ class DOMImplIE9 extends DOMImplStandardBase {
     return 0;
   }-*/;
 
-  private native double getScrollLeftImpl(Element elem) /*-{
-    return elem.scrollLeft || 0;
+  private native int getScrollLeftImpl(Element elem) /*-{
+    return elem.scrollLeft | 0;
   }-*/; 
 
   private native void setScrollLeftImpl(Element elem, int left) /*-{

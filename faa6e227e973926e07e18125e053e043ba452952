@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_570f36b4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-21T23:20:19Z",
+      "side": 1,
+      "message": "roberto and i talked about doing exactly that before agreeing to go this path. i totally agree that this functionality should be part of GeneratorContext (and should have always been there to begin with).\n\nbut we felt that doing so would be both a significantly larger change as well as a backward incompatible breakage for any third party generators that use ResourceGeneratorUtil.\n\n(the reason this is a large change is because once you get started you might as well get rid of the ResourceGeneratorUtil.Locator system which is a crude competing re-implementation of the existing ResourceOracle system. to make this work you\u0027d need to change generators to create resources through the GeneratorContext, but then GeneratorContext would need to pipe these resources into some new mutable ResourceOracle class)\n\nrather than take on all of that refactoring work right now and also incompatibly change the public interface, we opted for this somewhat hacky but small and more compatible solution.\n\nit\u0027s a hard judgement call. what do you suggest.",
+      "parentUuid": "3e8aa59d_023d4ca5",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_8049584a",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-21T22:50:59Z",
       "side": 1,
       "message": "As this is migrating from use-at-your-own-risk in the clientbundle guts to this-is-how-you-generate-code of Generator, should this be guarded with Collections.unmodifiableMap? There didn\u0027t used to be a way to read from this map outside of ResGenUtil, so add was the only option, at least from outside ClientBundle code.\n\nAlong the same lines, any concerns with exposing java.io.File via getGeneratedFile? Within ResGenUtil it was only useful to reference via @Source (or cheat and cover up legitimate resources on the classpath or resource oracle), but from here you can do silly things like delete files, rewrite them, etc. Does this sort of functionality belong instead in the ResourceOracle or GeneratorContext?",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_b7ae7269",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-21T23:20:19Z",
+      "side": 1,
+      "message": "i read that as 2 questions:\n\n1. shouldn\u0027t this getter returning an immutable map?\n\n2. doesn\u0027t this make more sense to be part of GeneratorContext?\n\nanswers:\n\n1. yes, done.\n\n2. see the response to Goktug asking the same question above.",
+      "parentUuid": "fe8bada0_8049584a",
       "revId": "faa6e227e973926e07e18125e053e043ba452952",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_d7984664",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-21T23:20:19Z",
+      "side": 1,
+      "message": "ah, two very good suggestions. i wasn\u0027t familiar with ModuleDef.getCanonicalName() but now that i\u0027m aware of it there\u0027s some other code i\u0027ll want to update as well.\n\ndone.",
+      "parentUuid": "fe8bada0_803238d8",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_e0d21c42",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-21T22:28:11Z",
       "side": 1,
       "message": "Couldn\u0027t the type just be added to indexedTypes? There is already the notion of not generating them if not needed I think.",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec055c0_e3be724a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-21T23:20:19Z",
+      "side": 1,
+      "message": "talked offline and agreed to modify INDEX_TYPES_SET so that it is no longer static and so becomes safe to directly modify and still be thread safe",
+      "parentUuid": "fe8bada0_e0d21c42",
       "revId": "faa6e227e973926e07e18125e053e043ba452952",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

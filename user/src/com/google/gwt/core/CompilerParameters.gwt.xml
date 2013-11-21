@@ -109,4 +109,17 @@
    -->
   <define-configuration-property name="js.identifier.blacklist.suffixes"
                                    is-multi-valued="true"/>
+
+  <!--
+    Specifies whether or not to instrument every function compiled from Java.
+   -->
+  <define-property name="compiler.methodProfiler" values="off,on"/>
+  <set-property name="compiler.methodProfiler" value="off"/>
+
+  <!--
+    When compiler.instrument = profile, allows the user to limit instrumentation
+    to the specified package prefix.
+   -->
+  <define-configuration-property name="compiler.methodProfiler.packagePrefix"
+                                 is-multi-valued="true"/>
 </module>

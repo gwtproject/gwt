@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_dd37ddc4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Certainly, they\u0027ll. in that case, Do I must replace them by Exception?",
+      "parentUuid": "5e64b999_7a6d97d6",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_ba8c6f6a",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
         "patchSetId": 3
@@ -64,6 +82,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "You can take your ldap off the comments;  AFAIK only TODOs go with ldap.\n\nChange comment to:\n-----\nDiscard Unknown or not-so-vaild ranges (e.g. {@link com.google.gwt.dev.js.ast.JsPro\ngram).\n-----\n\nAlso do you mean discard ranges that represent JS Ast nodes that are not interesting entities?",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_3d6719ff",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Yeah, based on my benchmarks, there some ranges, which source file is \"unknown\" or a qualified name like the example. I think, they are not useful, because the js output will be pointing to something artificial.",
+      "parentUuid": "5e64b999_ba8c6f6a",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_fd250193",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_3ace3f9f",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_fad7472f",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
         "patchSetId": 3
@@ -98,6 +152,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "s/initFragSizes/initializeFragmentSizes/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_9d2ba567",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_fad7472f",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_287eabc9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "This method has been deleted.",
+      "parentUuid": "5e64b999_5ac7737c",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_baba2ff3",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
         "patchSetId": 3
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_087be7d9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_baba2ff3",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_faae67af",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
         "patchSetId": 3
@@ -149,6 +257,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "s/recordCodeReference/recordCodeReferences/",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e64b999_bd28e96a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_faae67af",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +349,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_6878a3db",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_fa250793",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9edf117f_b1cdeaa3",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
         "patchSetId": 3
@@ -268,6 +412,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "Maybe change name to: getEntityAsJsonObject\n\nand similarly next few functions.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_68a1c313",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "I agree the prefix \u0027basic\u0027 could be confusing. I think the method prefix must be \u0027write\u0027/\u0027read\u0027, because this class is a (de)serializer.",
+      "parentUuid": "5e64b999_5a3533c0",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -376,6 +538,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_8b019197",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_1a3edba5",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9edf117f_d1afcead",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 3
@@ -427,6 +607,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_4802ff64",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_fa3c27ab",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_5a4c5358",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 3
@@ -438,6 +636,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "Nit: comma in previous line (and normally space after comma)",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_686ee346",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64b999_5a4c5358",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -461,6 +677,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_28fb4b33",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "As suggested by skybrian, an independent flag will be added",
+      "parentUuid": "5e64b999_1a0c9b05",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64b999_fa0ae7e7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
         "patchSetId": 3
@@ -472,6 +706,24 @@
       "writtenOn": "2013-11-20T20:35:36Z",
       "side": 1,
       "message": "Let\u0027s discuss this next.",
+      "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_a823bb39",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-21T00:55:47Z",
+      "side": 1,
+      "message": "Symbol maps includes declared array types. To support this in source maps we need to add JArrayType to Correlations. But, Do we want to support this on source maps? I think these cases wont be useful in source maps, neither storing their obfuscated names in the entities file (ie the new json files).",
+      "parentUuid": "5e64b999_fa0ae7e7",
       "revId": "44f75a1dac3159143d75f831fd5f5774fd4993c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -16,6 +16,23 @@
       "revId": "411ad97735069fbaa94304b27f4c97e2babcc847",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fec64dd8_e5795614",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-21T22:45:56Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this function?  It seems to just call instrument(toProfile, name), so I don\u0027t think it even needs to be JSNI (assuming there\u0027s a reason to keep it)?",
+      "revId": "411ad97735069fbaa94304b27f4c97e2babcc847",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

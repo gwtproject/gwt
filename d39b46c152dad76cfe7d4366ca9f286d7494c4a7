@@ -84,6 +84,23 @@
       "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_a00d7494",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-21T23:57:26Z",
+      "side": 1,
+      "message": "Oh, what happens if toProfile() throws an exception?  Do we need to make sure to end the timer still?\n\nShould we write this instead as:\n\n  logger.time(profileId);\n  try {\n    return toProfile.apply(this, arguments);\n  } finally {\n    logger.timeEnd(profileId);\n  }\n\nto handle that?",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

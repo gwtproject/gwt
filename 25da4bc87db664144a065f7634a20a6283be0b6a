@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_d7520629",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorderExt.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-21T20:44:24Z",
+      "side": 1,
+      "message": "FYI, this error message is complaining that you don\u0027t have a copyright notice at the top of these files.",
+      "parentUuid": "be6e95ae_b3b798de",
+      "revId": "25da4bc87db664144a065f7634a20a6283be0b6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be6e95ae_d3bc14c5",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
         "patchSetId": 6

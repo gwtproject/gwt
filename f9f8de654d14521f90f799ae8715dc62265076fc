@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be6e95ae_b3e07866",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-21T22:40:10Z",
+      "side": 1,
+      "message": "Hmm, we should probably be more specific:\n\n\"When enabled, the GWT compiler generates calls to window.console.time() and window.console.timeEnd() before and after each Java method.\"",
+      "revId": "f9f8de654d14521f90f799ae8715dc62265076fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_d3d5f482",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-21T22:40:10Z",
+      "side": 1,
+      "message": "\"When compiler.methodProfiler \u003d on, selects the Java packages containing the methods to be instrumented. If not set, all will be instrumented.\"",
+      "revId": "f9f8de654d14521f90f799ae8715dc62265076fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

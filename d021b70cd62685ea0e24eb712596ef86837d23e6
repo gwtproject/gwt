@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_dd318b23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-21T22:11:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure. I\u0027ve been using Campaign Management as my test app, and when fully instrumented, it won\u0027t load in Firefox.",
+      "parentUuid": "21660513_4230630f",
+      "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_82367b0d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-08T21:57:25Z",
       "side": 1,
       "message": "\"... and hard-codes it to only doing profiling using console.time.",
+      "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_fd364718",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-21T22:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_82367b0d",
       "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_1d2cd3c5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-21T22:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_22c3efd8",
+      "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_22752fc5",
         "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_3d298fb6",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-21T22:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_22752fc5",
+      "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21660513_a254df29",
         "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2013-10-08T21:57:25Z",
       "side": 1,
       "message": "Maybe make this multi-valued so you can give a list of prefixes? (I don\u0027t think it needs to scale much, so a linear check against each prefix seems fine.)",
+      "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_5d265be5",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-21T22:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21660513_a254df29",
       "revId": "d021b70cd62685ea0e24eb712596ef86837d23e6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

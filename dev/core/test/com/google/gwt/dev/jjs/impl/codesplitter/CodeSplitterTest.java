@@ -91,13 +91,13 @@ public class CodeSplitterTest extends JJSTestBase {
 
   // Compilation Configuration Properties.
   private BindingProperty stackMode = new BindingProperty("compiler.stackMode");
-  private BindingProperty[] orderedProps = {stackMode};
-  private String[] orderedPropValues = {"STRIP" };
+  private BindingProperty instrumentMode = new BindingProperty("compiler.methodProfiler");
+  private BindingProperty[] orderedProps = {stackMode, instrumentMode};
+  private String[] orderedPropValues = {"STRIP", "none"};
 
   private ConfigurationProperty initialSequenceProp =
       new ConfigurationProperty(CodeSplitters.PROP_INITIAL_SEQUENCE, true);
   private ConfigurationProperty[] configProps = { initialSequenceProp };
-
 
   private JProgram jProgram = null;
   private JsProgram jsProgram = null;
@@ -110,6 +110,7 @@ public class CodeSplitterTest extends JJSTestBase {
   public void setUp() throws Exception {
     super.setUp();
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
+    instrumentMode.addDefinedValue(new ConditionNone(), "off");
     jsProgram = new JsProgram();
   }
 

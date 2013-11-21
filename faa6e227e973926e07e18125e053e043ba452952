@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe8bada0_e0d21c42",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-21T22:28:11Z",
+      "side": 1,
+      "message": "Couldn\u0027t the type just be added to indexedTypes? There is already the notion of not generating them if not needed I think.",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

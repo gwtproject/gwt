@@ -88,8 +88,7 @@ public class JProgram extends JNode {
       "com.google.gwt.core.client.GWT", JProgram.JAVASCRIPTOBJECT,
       "com.google.gwt.lang.ClassLiteralHolder", "com.google.gwt.core.client.RunAsyncCallback",
       "com.google.gwt.core.client.impl.AsyncFragmentLoader",
-      "com.google.gwt.core.client.impl.Impl", "com.google.gwt.lang.EntryMethodHolder",
-      "com.google.gwt.core.client.prefetch.RunAsyncCode"));
+      "com.google.gwt.core.client.impl.Impl", "com.google.gwt.core.client.prefetch.RunAsyncCode"));
 
   public static final String JAVASCRIPTOBJECT = "com.google.gwt.core.client.JavaScriptObject";
 
@@ -284,7 +283,16 @@ public class JProgram extends JNode {
 
   private final Map<String, JMethod> indexedMethods = new HashMap<String, JMethod>();
 
+  /**
+   * An index of types, from type name to type instance.
+   */
   private final Map<String, JDeclaredType> indexedTypes = new HashMap<String, JDeclaredType>();
+
+  /**
+   * The set of names of types (beyond the basic INDEX_TYPES_SET) whose instance should be indexed
+   * when seen.
+   */
+  private final Set<String> moreTypeNamesToIndex = new HashSet<String>();
 
   private final Map<JMethod, JMethod> instanceToStaticMap = new IdentityHashMap<JMethod, JMethod>();
 
@@ -332,6 +340,14 @@ public class JProgram extends JNode {
     entryMethods.add(entryPoint);
   }
 
+  /**
+   * Adds the given type name to the set of type names (beyond the basic INDEX_TYPES_SET) whose
+   * instance should be indexed when seen.
+   */
+  public void addIndexedTypeName(String typeName) {
+    moreTypeNamesToIndex.add(typeName);
+  }
+
   public void addType(JDeclaredType type) {
     allTypes.add(type);
     String name = type.getName();
@@ -345,7 +361,7 @@ public class JProgram extends JNode {
       immortalCodeGenTypes.add((JClassType) type);
     }
 
-    if (INDEX_TYPES_SET.contains(name)) {
+    if (INDEX_TYPES_SET.contains(name) || moreTypeNamesToIndex.contains(name)) {
       indexedTypes.put(type.getShortName(), type);
       for (JMethod method : type.getMethods()) {
         if (!method.isPrivate()) {

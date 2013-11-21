@@ -16,6 +16,7 @@
 package com.google.gwt.resources.ext;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
+import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
@@ -29,7 +30,6 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
-import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.resources.client.ClientBundle.Source;
 
 import java.io.File;
@@ -70,7 +70,7 @@ public final class ResourceGeneratorUtil {
     }
 
     public URL locate(String resourceName) {
-      File f = namedFiles.get(resourceName);
+      File f = Generator.getGeneratedFile(resourceName);
       if (f != null && f.isFile() && f.canRead()) {
         try {
           return f.toURI().toURL();
@@ -103,8 +103,6 @@ public final class ResourceGeneratorUtil {
       return (r == null) ? null : r.getURL();
     }
   }
-
-  private static Map<String, File> namedFiles = Maps.create();
 
   /**
    * These are type names from previous APIs or from APIs with similar
@@ -158,11 +156,7 @@ public final class ResourceGeneratorUtil {
    *          system
    */
   public static void addNamedFile(String resourceName, File file) {
-    assert resourceName != null : "resourceName";
-    assert file != null : "file";
-    assert file.isFile() && file.canRead() : "file does not exist or cannot be read";
-
-    namedFiles = Maps.put(namedFiles, resourceName, file);
+    Generator.addGeneratedFile(resourceName, file);
   }
 
   /**

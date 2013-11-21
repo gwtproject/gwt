@@ -13,6 +13,10 @@
  */
 package com.google.gwt.core.ext;
 
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+
+import java.io.File;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,6 +28,20 @@ import java.util.Set;
  * The compiler will use this information to run generators less often and cache their outputs.
  */
 public abstract class Generator {
+
+  private static Map<String, File> generatedFilesByName = Maps.newHashMap();
+
+  /**
+   * Records generated resource files (such as css) which are not available on the classpath but
+   * which need to be accessible by other generators.
+   */
+  public static void addGeneratedFile(String name, File file) {
+    assert name != null : "name";
+    assert file != null : "file";
+    assert file.isFile() && file.canRead() : "file does not exist or cannot be read";
+
+    generatedFilesByName.put(name, file);
+  }
 
   /**
    * Escapes string content to be a valid string literal.
@@ -100,6 +118,20 @@ public abstract class Generator {
    */
   public Set<String> getAccessedPropertyNames() {
     return null;
+  }
+
+  /**
+   * Returns the map that contains previously recorded generated files for given names.
+   */
+  public static Map<String, File> getGeneratedFilesByName() {
+    return generatedFilesByName;
+  }
+
+  /**
+   * Returns the previously recorded generated file with the given name.
+   */
+  public static File getGeneratedFile(String name) {
+    return generatedFilesByName.get(name);
   }
 
   /**

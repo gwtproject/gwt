@@ -42,8 +42,10 @@ import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.Permutation;
 import com.google.gwt.dev.PrecompileTaskOptions;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
+import com.google.gwt.dev.cfg.EntryMethodHolderGenerator;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
+import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.UnifiedAst.AST;
@@ -141,6 +143,7 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Empty;
 import com.google.gwt.dev.util.Memory;
+import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
@@ -648,12 +651,16 @@ public class JavaToJavaScriptCompiler {
     JProgram jprogram = new JProgram();
     JsProgram jsProgram = new JsProgram();
 
+    String entryMethodHolderTypeName = buildEntryMethodHolder(
+        logger, compilerContext, rpo.getGeneratorContext(), allRootTypes, jprogram);
+
     try {
       // (2) Assemble the Java AST.
       UnifyAst unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
       unifyAst.addRootTypes(allRootTypes);
       // TODO: move this into UnifyAst?
-      findEntryPoints(logger, compilerContext, rpo, declEntryPts, jprogram);
+      findEntryPoints(
+          logger, compilerContext, rpo, declEntryPts, jprogram, entryMethodHolderTypeName);
       unifyAst.exec();
 
       List<String> finalTypeOracleTypes = Lists.create();
@@ -940,6 +947,29 @@ public class JavaToJavaScriptCompiler {
     return numNodes;
   }
 
+  /**
+   * Creates (and returns the name for) a new class to serve as the container for the invocation
+   * of registered entry point methods as part of module bootstrapping.<br />
+   *
+   * The resulting class will be invoked during bootstrapping like FooEntryMethodHolder.init(). By
+   * generating the class on the fly and naming it to match the current module, the resulting holder
+   * class can work in both monolithic and separate compilation schemes.
+   */
+  private static String buildEntryMethodHolder(TreeLogger logger, CompilerContext compilerContext,
+      StandardGeneratorContext context, Set<String> allRootTypes, JProgram jprogram)
+      throws UnableToCompleteException {
+    EntryMethodHolderGenerator entryMethodHolderGenerator = new EntryMethodHolderGenerator();
+    String entryMethodHolderTypeName =
+        entryMethodHolderGenerator.generate(logger, context, compilerContext.getModule().getName());
+    context.finish(logger);
+    // Ensures that unification traverses and keeps the class.
+    allRootTypes.add(entryMethodHolderTypeName);
+    // Ensures that JProgram knows to index this class's methods so that later bootstrap
+    // construction code is able to locate the FooEntryMethodHolder.init() function.
+    jprogram.addIndexedTypeName(entryMethodHolderTypeName);
+    return entryMethodHolderTypeName;
+  }
+
   private static MultipleDependencyGraphRecorder chooseDependencyRecorder(boolean soycEnabled,
       OutputStream out) {
     MultipleDependencyGraphRecorder dependencyRecorder = MultipleDependencyGraphRecorder.NULL_RECORDER;
@@ -995,10 +1025,12 @@ public class JavaToJavaScriptCompiler {
   }
 
   private static void findEntryPoints(TreeLogger logger, CompilerContext compilerContext,
-      RebindPermutationOracle rpo, String[] mainClassNames, JProgram program)
+      RebindPermutationOracle rpo, String[] mainClassNames, JProgram program,
+      String entryMethodHolderTypeName)
       throws UnableToCompleteException {
     Event findEntryPointsEvent = SpeedTracerLogger.start(CompilerEventType.FIND_ENTRY_POINTS);
-    JMethod bootStrapMethod = program.getIndexedMethod("EntryMethodHolder.init");
+    JMethod bootStrapMethod =
+        program.getIndexedMethod(SourceName.getShortClassName(entryMethodHolderTypeName) + ".init");
 
     JMethodBody body = (JMethodBody) bootStrapMethod.getBody();
     JBlock block = body.getBlock();

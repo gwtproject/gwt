@@ -50,6 +50,24 @@
       "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_f6301e6f",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-22T03:32:24Z",
+      "side": 1,
+      "message": "I think we should explicitly say that these properties are experimental and subject to change, and then wait until the next CL that adds another feature to the profiler to figure out how to generalize it. After all, nobody will be checking in files containing these properties and so there\u0027s nothing to migrate.",
+      "parentUuid": "1e78816e_3671b827",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

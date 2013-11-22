@@ -227,6 +227,24 @@
       "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec055c0_463f94ca",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-22T02:22:57Z",
+      "side": 1,
+      "message": "Probably worth adding a comment to that effect then so people don\u0027t later try to helpfully add try-finally.  E.g., \"Intentionally skip exception handling because it distorts performance measurements too much.\"\n\nWhat happens if the instrumented function does throw an exception though?  Does the timer just never finish?",
+      "parentUuid": "be6e95ae_766deed6",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

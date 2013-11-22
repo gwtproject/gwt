@@ -125,6 +125,7 @@ public final class Array {
       JavaScriptObject castableTypeMap, int queryId, Array array) {
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);
+    Util.setTypeMarker(array, Cast.getNullMethod());
     array.queryId = queryId;
     return array;
   }
@@ -160,14 +161,14 @@ public final class Array {
    */
   public static Object setCheck(Array array, int index, Object value) {
     if (value != null) {
-      if (array.queryId > 0 && !Cast.canCastUnsafe(value, array.queryId)) {
+      if (array.queryId > 0 && !Cast.canCast(value, array.queryId)) {
         // value must be castable to queryId
         throw new ArrayStoreException();
       } else if (array.queryId == -1 && Cast.isJavaObject(value)) {
         // value must be a JavaScriptObject
         throw new ArrayStoreException();
       } else if (array.queryId < -1 && !Cast.isJavaScriptObject(value)
-          && !Cast.canCastUnsafe(value, -array.queryId)) {
+          && !Cast.canCast(value, -array.queryId)) {
         // value must be a JavaScriptObject, or else castable to the inverse of
         // queryId
         throw new ArrayStoreException();

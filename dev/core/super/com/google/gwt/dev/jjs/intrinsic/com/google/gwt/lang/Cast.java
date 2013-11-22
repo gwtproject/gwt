@@ -202,7 +202,7 @@ final class Cast {
     return o;
   }
 
-  private static native JavaScriptObject getNullMethod() /*-{
+  static native JavaScriptObject getNullMethod() /*-{
     return @null::nullMethod();
   }-*/;
 
@@ -226,11 +226,11 @@ final class Cast {
    * Java Objects in this context.
    */
   static boolean isNonStringJavaObject(Object src) {
-    return Util.getTypeMarker(src) == getNullMethod() || instanceofArray(src);
+    return Util.getTypeMarker(src) == getNullMethod();
   }
 
   /**
-   * Returns whether the Object is a Java Object but not a String.
+   * Returns whether the Object is a Java Object but not a String or Array or Jso.
    *
    * Depends on all Java Objects (except for String) having the typeMarker field
    * generated, and set to the nullMethod for the current GWT module.  Note this
@@ -238,15 +238,12 @@ final class Cast {
    * GWT module.  Java Objects from external GWT modules are not recognizable as
    * Java Objects in this context.
    */
-  static boolean isNotStringNorArrayNorJsoMethod(Object src) {
+  static boolean isNotStringNorArrayNorJsoObject(Object src) {
     return Util.getTypeMarker(src) == getNullMethod() && !instanceofArray(src);
   }
 
-  /**
-   * Returns whether or not the given object is a Java array (not a JavaScript array)
-   */
   static native boolean instanceofArray(Object src) /*-{
-    return !!src.@java.lang.Object::castableTypeMap && src instanceof Array;
+    return Array.isArray(src);
   }-*/;
 }
 

@@ -26,12 +26,13 @@ import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
-import com.google.gwt.dev.util.FileBackedObject;
 import com.google.gwt.dev.util.Memory;
+import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
+import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -61,6 +62,7 @@ public class Compiler {
       registerHandler(new ArgHandlerWarDir(options));
       registerHandler(new ArgHandlerDeployDir(options));
       registerHandler(new ArgHandlerExtraDir(options));
+      registerHandler(new ArgHandlerSaveSourceOutput(options));
     }
 
     @Override
@@ -173,7 +175,7 @@ public class Compiler {
 
           Event compilePermutationsEvent = SpeedTracerLogger.start(CompilerEventType.COMPILE_PERMUTATIONS);
           Permutation[] allPerms = precompilation.getPermutations();
-          List<FileBackedObject<PermutationResult>> resultFiles =
+          List<PersistenceBackedObject<PermutationResult>> resultFiles =
               CompilePerms.makeResultFiles(options.getCompilerWorkDir(moduleName), allPerms);
           CompilePerms.compile(branch, compilerContext, precompilation, allPerms,
               options.getLocalWorkers(), resultFiles);

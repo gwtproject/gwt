@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,43 +25,57 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * All call sites that might result in virtual dispatch to a JSO must be
- * rewritten to force static dispatch. This transform may NOT be run multiple
- * times; it will create ever-expanding replacement expressions.
+ * JSO devirtualization is the process of converting virtual method calls on instances that might be
+ * a JSO in the AST like "someJsoObject.doFoo();" to static calls like
+ * "JavaScriptObject.doFoo__devirtual$(someJsoObject);"<br />
+ *
+ * See https://code.google.com/p/google-web-toolkit/wiki/OverlayTypes for why this is done.<br />
+ *
+ * To complete the transformation:<br />
+ * 1. methods that are defined on JSO subclasses must be turned into static functions.<br />
+ * 2. all method calls to the original functions must be rerouted to the new static versions.<br />
+ *
+ * All functions defined on JSO subclasses are devirtualized. This ensures they're available during
+ * separate compilation and it does not bloat optimized output because unused ones are pruned during
+ * monolithic compilation.<br />
+ *
+ * This transform may NOT be run multiple times; it will create ever-expanding replacement
+ * expressions.
  */
 public class JsoDevirtualizer {
 
   /**
    * Rewrite any virtual dispatches to Object or JavaScriptObject such that
-   * dispatch occurs statically for JSOs.
+   * dispatch occurs statically for JSOs. <br />
+   *
+   * In the following cases JMethodCalls need to be rewritten:
+   * <ol>
+   * <li>a dual dispatch interface</li>
+   * <li>a single dispatch trough single-jso interface</li>
+   * <li>a java.lang.Object override from JavaScriptObject</li>
+   * <li>in draftMode, a 'static' virtual JSO call that hasn't been made
+   * static yet.</li>
+   * </ol>
+   *
    */
   private class RewriteVirtualDispatches extends JModVisitor {
 
-    /**
-     * A method call at this point can be one of 5 things:
-     * <ol>
-     * <li>a dual dispatch interface</li>
-     * <li>a single dispatch trough single-jso interface</li>
-     * <li>a java.lang.Object override from JavaScriptObject, Array, or String</li>
-     * <li>an override of one of the methods of the interfaces on String.</li>
-     * <li>a regular dispatch (no JSOs involved or static JSO call)</li>
-     * <li>in draftMode, a 'static' virtual JSO call that hasn't been made
-     * static yet.</li>
-     * </ol>
-     */
+    @Override
+    public void endVisit(JMethod x, Context ctx) {
+      if (!mightBeJsoMethod(x)) {
+        return;
+      }
+      // The pruning pass will discard devirtualized methods that have not been called in
+      // whole program optimizing mode.
+      ensureDevirtualVersionExists(x);
+    }
+
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
-      JMethod newMethod;
-      JDeclaredType targetType = method.getEnclosingType();
-
-      if (targetType == null) {
+      if (!mightBeJsoMethod(method)) {
         return;
       }
-      if (!method.needsVtable()) {
-        return;
-      }
-
       JType instanceType = x.getInstance().getType();
       // if the instance can't possibly be a JSO, String, Array,
       // or an interface implemented String, don't devirtualize
@@ -76,39 +90,70 @@ public class JsoDevirtualizer {
         return;
       }
 
-      if (polyMethodToJsoMethod.containsKey(method)) {
+      ensureDevirtualVersionExists(method);
+
+      // Replaces this virtual method call with a static call to a devirtual version of the method.
+      JMethod devirtualMethod = devirtualMethodByMethod.get(method);
+      ctx.replaceMe(MakeCallsStatic.makeStaticCall(x, devirtualMethod));
+    }
+
+    @Override
+    public boolean visit(JMethod x, Context ctx) {
+      // Don't rewrite the polymorphic call inside of the devirtualizing method!
+      if (methodByDevirtualMethod.containsValue(x)) {
+        return false;
+      }
+      return true;
+    }
+
+    /**
+     * Constructs and caches a method that is a new static version of the given method or a
+     * trampoline function that wraps a new static version of the given method. It chooses which to
+     * construct based on how the given method's defining class relates to the JavascriptObject
+     * class.
+     */
+    private void ensureDevirtualVersionExists(JMethod method) {
+      if (devirtualMethodByMethod.containsKey(method)) {
         // already did this one before
-        newMethod = polyMethodToJsoMethod.get(method);
-      } else if (program.typeOracle.isDualJsoInterface(targetType)) {
+        return;
+      }
+
+      JDeclaredType targetType = method.getEnclosingType();
+
+      // Separate compilation treats all JSOs as if they are "dualImpl", as the interface might
+      // be implemented by a regular Java object in a separate module.
+
+      // TODO(rluble): (Separate compilation) JsoDevirtualizer should be run before optimizations
+      // and optimizations need to be strong enough to perform the same kind of size reductions
+      // achieved by keeping track of singleImpls.
+      if (program.typeOracle.isDualJsoInterface(targetType)) {
         JMethod overridingMethod =
             findOverridingMethod(method, program.typeOracle.getSingleJsoImpl(targetType));
         assert overridingMethod != null;
 
         JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
-        newMethod = getOrCreateDevirtualMethod(x, jsoStaticImpl);
-        polyMethodToJsoMethod.put(method, newMethod);
+        JMethod devirtualMethod = getOrCreateDevirtualMethod(method, jsoStaticImpl);
+        devirtualMethodByMethod.put(method, devirtualMethod);
       } else if (program.isJavaScriptObject(targetType)) {
         // It's a virtual JSO dispatch, usually occurs in draftCompile
-        newMethod = getStaticImpl(method);
-        polyMethodToJsoMethod.put(method, newMethod);
+        JMethod devirtualMethod = getStaticImpl(method);
+        devirtualMethodByMethod.put(method, devirtualMethod);
       } else if (program.typeOracle.isSingleJsoImpl(targetType)) {
-        // interface dispatch with single implementing JSO concrete type
-        JMethod overridingMethod =
-            findOverridingMethod(method, program.typeOracle.getSingleJsoImpl(targetType));
-        assert overridingMethod != null;
-        newMethod = getStaticImpl(overridingMethod);
-        polyMethodToJsoMethod.put(method, newMethod);
+          JMethod overridingMethod =
+              findOverridingMethod(method, program.typeOracle.getSingleJsoImpl(targetType));
+          assert overridingMethod != null;
+
+          JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
+          devirtualMethodByMethod.put(method, jsoStaticImpl);
       } else if (targetType == program.getTypeJavaLangObject()) {
-        // it's a java.lang.Object overriden method in JSO
+        // it's a java.lang.Object overridden method in JSO
         JMethod overridingMethod = findOverridingMethod(method, program.getJavaScriptObject());
         if (overridingMethod != null) {
           JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
-          newMethod = getOrCreateDevirtualMethod(x, jsoStaticImpl);
-          polyMethodToJsoMethod.put(method, newMethod);
+          JMethod devirtualMethod = getOrCreateDevirtualMethod(method, jsoStaticImpl);
+          devirtualMethodByMethod.put(method, devirtualMethod);
         } else {
-          // else this method isn't overriden by JavaScriptObject
-          assert false : "Object method not overridden by JavaScriptObject";
-          return;
+          assert false : "Object method not overriden by JavaScriptObject";
         }
       } else if (targetType == program.getTypeJavaLangString()
           || program.getTypeJavaLangString().getImplements().contains(targetType)) {
@@ -116,24 +161,31 @@ public class JsoDevirtualizer {
         JMethod overridingMethod = findOverridingMethod(method, program.getTypeJavaLangString());
         if (overridingMethod != null) {
           JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
-          newMethod = getOrCreateDevirtualMethod(x, jsoStaticImpl);
-          polyMethodToJsoMethod.put(method, newMethod);
+          JMethod newMethod = getOrCreateDevirtualMethod(method, jsoStaticImpl);
+          devirtualMethodByMethod.put(method, newMethod);
         } else {
-          // else this method isn't overriden by JavaScriptObject
+          // else this method isn't overridden by JavaScriptObject
           assert false : "String interface method not overridden by String";
           return;
         }
       } else {
-        return;
+        assert false : "Object method not related to JavaScriptObject";
       }
-      assert (newMethod != null);
-      ctx.replaceMe(MakeCallsStatic.makeStaticCall(x, newMethod));
     }
 
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      // Don't rewrite the polymorphic call inside of the devirtualizing method!
-      return !polyMethodToDevirtualMethods.containsValue(x);
+    private boolean mightBeJsoMethod(JMethod method) {
+      JDeclaredType targetType = method.getEnclosingType();
+
+      if (targetType == null || !method.needsVtable()) {
+        return false;
+      } else if (devirtualMethodByMethod.containsKey(method)
+          || program.isJavaScriptObject(targetType)
+          || program.typeOracle.isSingleJsoImpl(targetType)
+          || program.typeOracle.isDualJsoInterface(targetType)
+          || targetType == program.getTypeJavaLangObject()) {
+        return true;
+      }
+      return false;
     }
   }
 
@@ -145,7 +197,7 @@ public class JsoDevirtualizer {
    * Maps each Object instance methods (ie, {@link Object#equals(Object)}) onto
    * its corresponding devirtualizing method.
    */
-  protected Map<JMethod, JMethod> polyMethodToJsoMethod = new HashMap<JMethod, JMethod>();
+  protected Map<JMethod, JMethod> devirtualMethodByMethod = new HashMap<JMethod, JMethod>();
 
   /**
    * Contains the Cast.isNotStringNorArrayNorJsoObject method.
@@ -167,8 +219,7 @@ public class JsoDevirtualizer {
    * Contains the set of devirtualizing methods that replace polymorphic calls
    * to Object methods.
    */
-  private final Map<JMethod, JMethod> polyMethodToDevirtualMethods =
-      new HashMap<JMethod, JMethod>();
+  private final Map<JMethod, JMethod> methodByDevirtualMethod = new HashMap<JMethod, JMethod>();
 
   private final JProgram program;
 
@@ -177,7 +228,7 @@ public class JsoDevirtualizer {
   private JsoDevirtualizer(JProgram program) {
     this.program = program;
     this.isNotStringNorArrayNorJsoObject =
-        program.getIndexedMethod("Cast.isNonStringJavaObjectNotArray");
+        program.getIndexedMethod("Cast.isNotStringNorArrayNorJsoObject");
     this.isJavaStringMethod = program.getIndexedMethod("Cast.isJavaString");
     staticImplCreator = new CreateStaticImplsVisitor(program);
   }
@@ -212,7 +263,7 @@ public class JsoDevirtualizer {
   /**
    * Create a conditional method to discriminate between static and virtual
    * dispatch.
-   * 
+   *
    * <pre>
    * static boolean equals__devirtual$(Object this, Object other) {
    *   return Cast.isJavaString() ? String.equals(other) :
@@ -221,8 +272,7 @@ public class JsoDevirtualizer {
    * }
    * </pre>
    */
-  private JMethod getOrCreateDevirtualMethod(JMethodCall polyMethodCall, JMethod jsoImpl) {
-    JMethod polyMethod = polyMethodCall.getTarget();
+  private JMethod getOrCreateDevirtualMethod(JMethod method, JMethod jsoImpl) {
     /**
      * TODO(cromwellian) generate a inlined expression instead of Method Because
      * devirtualization happens after optimization, the devirtual methods don't
@@ -233,8 +283,8 @@ public class JsoDevirtualizer {
      * instance can't possibly be java.lang.String, then the JSO check becomes a
      * cheaper check for typeMarker.
      */
-    if (polyMethodToDevirtualMethods.containsKey(polyMethod)) {
-      return polyMethodToDevirtualMethods.get(polyMethod);
+    if (methodByDevirtualMethod.containsKey(method)) {
+      return methodByDevirtualMethod.get(method);
     }
 
     JClassType jsoType = program.getJavaScriptObject();
@@ -243,39 +293,39 @@ public class JsoDevirtualizer {
     // Create the new method.
     String prefix;
     Integer methodCount;
-    methodCount = jsoMethodInstances.get(polyMethod.getSignature());
+    methodCount = jsoMethodInstances.get(method.getSignature());
     if (methodCount == null) {
-      prefix = polyMethod.getName();
+      prefix = method.getName();
       methodCount = 0;
     } else {
-      prefix = polyMethod.getName() + methodCount;
+      prefix = method.getName() + methodCount;
       methodCount++;
     }
-    jsoMethodInstances.put(polyMethod.getSignature(), methodCount);
+    jsoMethodInstances.put(method.getSignature(), methodCount);
     String devirtualName = prefix + "__devirtual$";
-    JMethod newMethod =
-        new JMethod(sourceInfo, devirtualName, jsoType, polyMethod.getType(), false, true, true,
+    JMethod devirtualMethod =
+        new JMethod(sourceInfo, devirtualName, jsoType, method.getType(), false, true, true,
             AccessModifier.PUBLIC);
-    newMethod.setBody(new JMethodBody(sourceInfo));
-    jsoType.addMethod(newMethod);
-    newMethod.setSynthetic();
+    devirtualMethod.setBody(new JMethodBody(sourceInfo));
+    jsoType.addMethod(devirtualMethod);
+    devirtualMethod.setSynthetic();
 
     // Setup parameters.
     JParameter thisParam =
-        JProgram.createParameter(sourceInfo, "this$static", polyMethod.getEnclosingType(), true,
-            true, newMethod);
-    for (JParameter oldParam : polyMethod.getParams()) {
+        JProgram.createParameter(sourceInfo, "this$static", method.getEnclosingType(), true,
+            true, devirtualMethod);
+    for (JParameter oldParam : method.getParams()) {
       JProgram.createParameter(sourceInfo, oldParam.getName(), oldParam.getType(), true, false,
-          newMethod);
+          devirtualMethod);
     }
-    newMethod.freezeParamTypes();
-    newMethod.addThrownExceptions(polyMethod.getThrownExceptions());
-    sourceInfo.addCorrelation(sourceInfo.getCorrelator().by(newMethod));
+    devirtualMethod.freezeParamTypes();
+    devirtualMethod.addThrownExceptions(method.getThrownExceptions());
+    sourceInfo.addCorrelation(sourceInfo.getCorrelator().by(devirtualMethod));
 
     // maybeJsoInvocation = this$static
     JLocal temp =
         JProgram.createLocal(sourceInfo, "maybeJsoInvocation", thisParam.getType(), true,
-            (JMethodBody) newMethod.getBody());
+            (JMethodBody) devirtualMethod.getBody());
     JMultiExpression multi = new JMultiExpression(sourceInfo);
 
     // (maybeJsoInvocation = this$static, )
@@ -289,8 +339,8 @@ public class JsoDevirtualizer {
 
     // temp.method(args)
     JMethodCall thenValue =
-        new JMethodCall(sourceInfo, new JLocalRef(sourceInfo, temp), polyMethod);
-    for (JParameter param : newMethod.getParams()) {
+        new JMethodCall(sourceInfo, new JLocalRef(sourceInfo, temp), method);
+    for (JParameter param : devirtualMethod.getParams()) {
       if (param != thisParam) {
         thenValue.addArg(new JParameterRef(sourceInfo, param));
       }
@@ -299,7 +349,7 @@ public class JsoDevirtualizer {
     // jso$method(temp, args)
     JMethodCall elseValue = new JMethodCall(sourceInfo, null, jsoImpl);
     elseValue.addArg(new JLocalRef(sourceInfo, temp));
-    for (JParameter param : newMethod.getParams()) {
+    for (JParameter param : devirtualMethod.getParams()) {
       if (param != thisParam) {
         elseValue.addArg(new JParameterRef(sourceInfo, param));
       }
@@ -308,38 +358,38 @@ public class JsoDevirtualizer {
     // isNotStringNorArrayNorJsoObject(temp) ? temp.method(args) : jso$method
     // (temp, args)
     JConditional conditional =
-        new JConditional(sourceInfo, polyMethod.getType(), condition, thenValue, elseValue);
+        new JConditional(sourceInfo, method.getType(), condition, thenValue, elseValue);
 
     // Cast.isJavaString(temp) ? String.method(args) : conditional
     JMethodCall stringCondition = new JMethodCall(sourceInfo, null, isJavaStringMethod);
     stringCondition.addArg(new JLocalRef(sourceInfo, temp));
-    JMethod stringMethod = findOverridingMethod(polyMethod, program.getTypeJavaLangString());
+    JMethod stringMethod = findOverridingMethod(method, program.getTypeJavaLangString());
 
     JExpression stringThenValue;
     // special case String.getClass() since there is no ___clazz field
-    if (polyMethod.getName().equals("getClass")) {
+    if (method.getName().equals("getClass")) {
       stringThenValue = new JFieldRef(sourceInfo, null, program.getClassLiteralField(program
           .getTypeJavaLangString()), program.getTypeJavaLangClass());
     } else {
       JMethodCall stringThenValueCall = new JMethodCall(sourceInfo, null,
           getStaticImpl(stringMethod));
       stringThenValueCall.addArg(new JLocalRef(sourceInfo, temp));
-      for (JParameter param : newMethod.getParams()) {
+      for (JParameter param : devirtualMethod.getParams()) {
         if (param != thisParam) {
           stringThenValueCall.addArg(new JParameterRef(sourceInfo, param));
         }
       }
       stringThenValue = stringThenValueCall;
     }
-    JConditional stringConditional = new JConditional(sourceInfo, polyMethod.getType(),
+    JConditional stringConditional = new JConditional(sourceInfo, method.getType(),
         stringCondition, stringThenValue, conditional);
     multi.addExpressions(stringConditional);
 
     JReturnStatement returnStatement = new JReturnStatement(sourceInfo, multi);
-    ((JMethodBody) newMethod.getBody()).getBlock().addStmt(returnStatement);
-    polyMethodToDevirtualMethods.put(polyMethod, newMethod);
+    ((JMethodBody) devirtualMethod.getBody()).getBlock().addStmt(returnStatement);
+    methodByDevirtualMethod.put(method, devirtualMethod);
 
-    return newMethod;
+    return devirtualMethod;
   }
 
   private JMethod getStaticImpl(JMethod method) {

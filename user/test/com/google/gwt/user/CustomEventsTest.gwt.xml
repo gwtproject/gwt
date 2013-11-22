@@ -12,26 +12,6 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<!-- Deferred binding rules for HTMLTable.                                  -->
-<!--                                                                        -->
-<!-- This module is typically inherited via com.google.gwt.user.User        -->
-<!--                                                                        -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
-
-  <!-- Fall back to this rule if the browser isn't IE -->
-  <replace-with class="com.google.gwt.user.client.ui.HTMLTable.HTMLTableStandardImpl">
-    <when-type-is class="com.google.gwt.user.client.ui.HTMLTable.HTMLTableImpl"/>
-  </replace-with>
-
-  <!-- Implementation for IE -->
-  <replace-with class="com.google.gwt.user.client.ui.HTMLTable.HTMLTableIEImpl">
-    <when-type-is class="com.google.gwt.user.client.ui.HTMLTable.HTMLTableImpl"/>
-    <any>
-      <when-property-is name="user.agent" value="ie6"/>
-      <when-property-is name="user.agent" value="ie8"/>
-      <when-property-is name="user.agent" value="ie9"/>
-    </any>
-  </replace-with>
+	<inherits name="com.google.gwt.user.User"/>
 </module>

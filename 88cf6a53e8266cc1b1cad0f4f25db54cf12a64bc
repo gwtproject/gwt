@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e5e79fe_b884d9ad",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-22T02:46:17Z",
+      "side": 1,
+      "message": "Looks like define-configuration-property is a better fit.",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e78816e_1674bc16",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-22T02:46:17Z",
+      "side": 1,
+      "message": "what about\nname\u003d\"compiler.profiler.instrument.methods\" values\u003d\"true,false\" ?",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e78816e_3671b827",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-22T02:46:17Z",
+      "side": 1,
+      "message": "name\u003d\"compiler.profiler.instrument.filter\" ?",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

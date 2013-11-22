@@ -68,6 +68,24 @@
       "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_7d997baa",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-22T18:11:36Z",
+      "side": 1,
+      "message": "We don\u0027t really need to find the best but we should avoid putting something that clearly doesn\u0027t match the rest. For example there is no other on/off valued properties and that is pretty inconsistent with the rest. Also if we know that we want to keep under compiler.profiler or compiler.instrument, it is good start with that.",
+      "parentUuid": "be6e95ae_f6301e6f",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

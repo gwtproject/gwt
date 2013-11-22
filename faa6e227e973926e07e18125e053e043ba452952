@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_038ab250",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-22T00:19:57Z",
+      "side": 1,
+      "message": "We talked with John offline.\n\nEven we both think that ResourceOracle is the right way to go design-wise, it looks like it would be very time consuming to do right thing at the moment and will cause unnecessary delays to finish the work.\n\nHowever exposing these new public APIs from generator will make this functionality more discoverable with auto complete and also will be one more thing for developers to think about. Also at the end it will be more stuff to deprecate when we move to ResourceOracle in the future.\n\nFor that reasons, it looks like it is best to move this functionality to a non-public API under core (e.g. c.g.g.core.ext.impl.*) and let the ResourceGeneratorUtil use it until we implement the proper way via ResourceOracle.",
+      "parentUuid": "5ed03988_570f36b4",
+      "revId": "faa6e227e973926e07e18125e053e043ba452952",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_8049584a",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 1

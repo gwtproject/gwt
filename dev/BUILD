@@ -105,6 +105,9 @@ AugmentedJar(
     constraints = [],
     dojarjar = 1,
     wrap_javalibrary = 0,
+    deps = [
+        "//third_party/java_src/gwt/svn/tools:sourcemaps",
+    ],
 )
 
 # Builds gwt-dev-only.jar, which contains the GWT compiler and tools.
@@ -165,6 +168,7 @@ Zip(
             "core/src/**/*.properties",
             "core/src/**/*.xsd",
             "core/src/**/*.txt",
+            "core/src/com/google/gwt/dev/js/globals/globals.html",  # for testing
         ],
         exclude = [
             "**/package-info.java",
@@ -310,6 +314,7 @@ AugmentedJar(
     ],
     deps = [
         "//third_party/java/junit",
+        "//third_party/java_src/gwt/svn/tools:sourcemaps",
     ],
 )
 

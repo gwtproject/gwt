@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be6e95ae_36a6163e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-22T09:45:58Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "d4e980964f8094ab9ea126a67040b79da08c94f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_56b3927e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-22T09:45:58Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "d4e980964f8094ab9ea126a67040b79da08c94f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_00d548d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2393,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T01:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_37456286",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_97552e3d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 5
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_60e44cc4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2398,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T01:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_97552e3d",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_1742de7d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 5
@@ -64,6 +100,24 @@
       "writtenOn": "2013-11-21T23:42:59Z",
       "side": 1,
       "message": "(And if we return a set, this can be just prefixes.addAll(values).)",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_80e158b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T01:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_1742de7d",
       "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -105,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "be6e95ae_5670f2b1",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T01:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe8bada0_6069ac54",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_a00d7494",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
         "patchSetId": 5
@@ -133,6 +205,24 @@
       "writtenOn": "2013-11-22T00:36:36Z",
       "side": 1,
       "message": "Yes, that would be correct, but we don\u0027t know how much it distorts performance. (This is already a pretty heavyweight way of profiling. The more code we add, the more short methods get overweighted.)\n\nI\u0027m inclined to leave it as-is since it was actually useful, unless Reid wants to try it and confirm it still works for him.",
+      "parentUuid": "fe8bada0_a00d7494",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_766deed6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T01:49:36Z",
+      "side": 1,
+      "message": "As Brian said, this distorts performance fairly significantly. For my (admittedly very complex) app, it\u0027s the difference between successfully profiling and not.",
       "parentUuid": "fe8bada0_a00d7494",
       "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

@@ -2,6 +2,142 @@
   "comments": [
     {
       "key": {
+        "uuid": "fe8bada0_662b8496",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "\"instrumentation support\" too vague\n\n\"instrumentation\" can mean many different things.\n\npretty much everywhere where this patch introduces the word \"instrument\" or \"profile\" needs to be made more specific to make it clear that it\u0027s talking about method timings",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_863fb0c9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "roberto and i talked some about this. and we think this work should really be it\u0027s own independent JsModVisitor pass and should not be \"more logic\" stuck into the already too-large GenerateJavaScriptAST process.\n\nthis is better for a number of reasons:\n* the change is more surgical\n* turning it on and off amounts to just running or not running the visitor\n* it allows you to run the visitor *after all optimizations* which is probably want you want, since you don\u0027t want optimization passes rewriting your inserted instrumentation",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_c658d84e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "s/javaNames/javaNamesByJsName",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_a653cc2f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "don\u0027t populate this map if !instrument",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_e64dd489",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "s/funcName/javaFuncName",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_0653a02e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "// fall back on the obfuscated name",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_26217cb6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "s/profileFunction/createProfiledFunction\n\ns/toProfile/funcToProfile\n\ns/$tmp/profiledFunc",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_86289099",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "should mention that it works in FF/Webkit, but not IE",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e5e79fe_b884d9ad",
         "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
         "patchSetId": 6
@@ -19,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_fd360b01",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "agreed. we probably don\u0027t want this as a binding property since that will result in new permutations",
+      "parentUuid": "5e5e79fe_b884d9ad",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e78816e_1674bc16",
         "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
         "patchSetId": 6
@@ -30,6 +184,24 @@
       "writtenOn": "2013-11-22T02:46:17Z",
       "side": 1,
       "message": "what about\nname\u003d\"compiler.profiler.instrument.methods\" values\u003d\"true,false\" ?",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_dd3b47e9",
+        "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-22T19:35:04Z",
+      "side": 1,
+      "message": "agreed that other boolean properties are \"true,false\", so this one should be as well\n\nalso, for our boolean properties, the property name needs to be a verb or verb phrase.\n\nthe only time it\u0027s ok to be a noun or adjective, is when the values are not true/false. for example \"compiler.stackMode\"\u003d{strip,emulated,native}\n\nalso \"instrument\" is too vague, that could mean many things. what you\u0027re doing is just timing, and that needs to be clear.\n\nso i\u0027d lean toward something like \"compiler.instrumentation.timeMethods\"\u003d{true,false}",
+      "parentUuid": "1e78816e_1674bc16",
       "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

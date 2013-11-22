@@ -95,28 +95,6 @@ public class StackTraceCreator {
     }
 
     /**
-     * Returns the list of properties of an unexpected JavaScript exception.
-     */
-    public native String getProperties(JavaScriptObject e) /*-{
-      var result = "";
-      try {
-        for (var prop in e) {
-          if (prop != "name" && prop != "message" && prop != "toString") {
-            try {
-              var propValue = (prop != "__gwt$exception") ? e[prop] : "<skipped>";
-              result += "\n " + prop + ": " + propValue;
-            } catch (ignored) {
-              // Skip the property if it threw an exception.
-            }
-          }
-        }
-      } catch (ignored) {
-        // If we can't do "in" on the exception, just return what we have.
-      }
-      return result;
-    }-*/;
-
-    /**
      * Attempt to infer the stack from an unknown JavaScriptObject that had been
      * thrown. The default implementation just returns an empty array.
      *
@@ -195,17 +173,6 @@ public class StackTraceCreator {
       t.setStackTrace(stackTrace);
     }
 
-    /**
-     * When compiler.stackMode = emulated, return an empty string, rather than a
-     * list of properties, since the additional information regarding the origin
-     * of the JavaScriptException, relative to compiled JavaScript source code,
-     * adds no real value, since we have fully emulated stack traces.
-     */
-    @Override
-    public String getProperties(JavaScriptObject e) {
-      return "";
-    }
-
     @Override
     public JsArrayString inferFrom(Object e) {
       throw new RuntimeException("Should not reach here");
@@ -247,7 +214,7 @@ public class StackTraceCreator {
       return stack;
     }
 
-    protected native JsArrayString getStack(JavaScriptObject e) /*-{
+    private native JsArrayString getStack(JavaScriptObject e) /*-{
       return (e && e.stack) ? e.stack.split('\n') : [];
     }-*/;
 
@@ -425,54 +392,6 @@ public class StackTraceCreator {
   }-*/;
 
   /**
-   * Opera encodes stack trace information in the error's message.
-   */
-  static class CollectorOpera extends CollectorMoz {
-    /**
-     * We have much a much simpler format to work with.
-     */
-    @Override
-    protected String extractName(String fnToString) {
-      return fnToString.length() == 0 ? ANONYMOUS : fnToString;
-    }
-
-    /**
-     * Opera has the function name on every-other line.
-     */
-    @Override
-    protected JsArrayString getStack(JavaScriptObject e) {
-      JsArrayString toReturn = getMessage(e);
-      assert toReturn.length() % 2 == 0 : "Expecting an even number of lines";
-
-      int i, i2, j;
-      for (i = 0, i2 = 0, j = toReturn.length(); i2 < j; i++, i2 += 2) {
-        int idx = toReturn.get(i2).lastIndexOf("function ");
-        if (idx == -1) {
-          toReturn.set(i, "");
-        } else {
-          toReturn.set(i, toReturn.get(i2).substring(idx + 9).trim());
-        }
-      }
-      setLength(toReturn, i);
-
-      return toReturn;
-    }
-
-    @Override
-    protected int toSplice() {
-      return 3;
-    }
-
-    private native JsArrayString getMessage(JavaScriptObject e) /*-{
-      return (e && e.message) ? e.message.split('\n') : [];
-    }-*/;
-
-    private native void setLength(JsArrayString obj, int length) /*-{
-      obj.length = length;
-    }-*/;
-  }
-
-  /**
    * When compiler.stackMode = strip, we stub out the collector.
    */
   static class CollectorNull extends Collector {
@@ -516,20 +435,6 @@ public class StackTraceCreator {
     }
 
     GWT.<Collector> create(Collector.class).fillInStackTrace(t);
-  }
-
-  /**
-   * Returns the list of properties of an unexpected JavaScript exception,
-   * unless compiler.stackMode = emulated, in which case the empty string is
-   * returned. This method should only be called in Production Mode.
-   */
-  public static String getProperties(JavaScriptObject e) {
-    if (!GWT.isScript()) {
-      throw new RuntimeException(
-          "StackTraceCreator should only be called in Production Mode");
-    }
-
-    return GWT.<Collector> create(Collector.class).getProperties(e);
   }
 
   /**

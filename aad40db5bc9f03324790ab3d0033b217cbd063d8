@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be6e95ae_1652faf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-22T01:23:47Z",
+      "side": 1,
+      "message": "You can remove the note as it has been already updated externally and internally.",
+      "revId": "aad40db5bc9f03324790ab3d0033b217cbd063d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_96e44a03",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorderExt.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-22T01:23:47Z",
+      "side": 1,
+      "message": "s/discarding/discard/",
+      "revId": "aad40db5bc9f03324790ab3d0033b217cbd063d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_b6e946dc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-22T01:23:47Z",
+      "side": 1,
+      "message": "s/register/recorded/",
+      "revId": "aad40db5bc9f03324790ab3d0033b217cbd063d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_d6eec2e0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-22T01:23:47Z",
+      "side": 1,
+      "message": "Class definitions might be spread across different fragments.  The comment seems outdated as it seems that the code already handles entities that are spread across fragments.",
+      "revId": "aad40db5bc9f03324790ab3d0033b217cbd063d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

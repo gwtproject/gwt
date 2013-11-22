@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "be6e95ae_d6a962aa",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-22T00:36:36Z",
+      "side": 1,
+      "message": "We could feature-check all the methods, but actually I\u0027m not sure how much of this is needed since it\u0027s a developer tool that people only turn on temporarily, and I believe in Chrome, the \"console\" object is always there. So I\u0027d also be fine with a note near the property to turn it on that it\u0027s experimental and only works in Chrome.\n\nIf someone wants to get it to work in another browser, we can follow up with another patch.",
+      "parentUuid": "fe8bada0_6069ac54",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_a00d7494",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
         "patchSetId": 5
@@ -98,6 +116,24 @@
       "writtenOn": "2013-11-21T23:57:26Z",
       "side": 1,
       "message": "Oh, what happens if toProfile() throws an exception?  Do we need to make sure to end the timer still?\n\nShould we write this instead as:\n\n  logger.time(profileId);\n  try {\n    return toProfile.apply(this, arguments);\n  } finally {\n    logger.timeEnd(profileId);\n  }\n\nto handle that?",
+      "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be6e95ae_16a4bacc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Instrumentation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-22T00:36:36Z",
+      "side": 1,
+      "message": "Yes, that would be correct, but we don\u0027t know how much it distorts performance. (This is already a pretty heavyweight way of profiling. The more code we add, the more short methods get overweighted.)\n\nI\u0027m inclined to leave it as-is since it was actually useful, unless Reid wants to try it and confirm it still works for him.",
+      "parentUuid": "fe8bada0_a00d7494",
       "revId": "d39b46c152dad76cfe7d4366ca9f286d7494c4a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -16,6 +16,24 @@
       "revId": "9f8b8a2459743019142619e95ac397c43f427e0d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_06af20ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-22T22:39:08Z",
+      "side": 1,
+      "message": "Maybe change to typeNames or initialTypeNamesToIndex. Annoying.",
+      "parentUuid": "be6e95ae_796b1f35",
+      "revId": "9f8b8a2459743019142619e95ac397c43f427e0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

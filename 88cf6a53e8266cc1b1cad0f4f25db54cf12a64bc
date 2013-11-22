@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_fdd56b82",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 5995
+      },
+      "writtenOn": "2013-11-22T19:41:32Z",
+      "side": 1,
+      "message": "None of this code is mine. I took Ray\u0027s old CL and made it build again. I don\u0027t have anywhere near the expertise on the GWT compiler to make the change you\u0027re suggesting, and nowhere near the time to come up to speed on it. I\u0027ll just run this locally rather than going through the pain of figuring out how to check it in.",
+      "parentUuid": "fe8bada0_863fb0c9",
+      "revId": "88cf6a53e8266cc1b1cad0f4f25db54cf12a64bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8bada0_c658d84e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 6

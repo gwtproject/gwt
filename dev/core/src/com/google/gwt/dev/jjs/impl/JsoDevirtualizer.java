@@ -17,23 +17,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.ast.AccessModifier;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JConditional;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JLocal;
-import com.google.gwt.dev.jjs.ast.JLocalRef;
-import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
-import com.google.gwt.dev.jjs.ast.JParameter;
-import com.google.gwt.dev.jjs.ast.JParameterRef;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.jjs.ast.JTypeOracle;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.CreateStaticImplsVisitor;
 
@@ -93,9 +77,16 @@ public class JsoDevirtualizer {
         return;
       }
       JType instanceType = x.getInstance().getType();
-      // If the instance can't possibly be a JSO, don't devirtualize the call.
+      // if the instance can't possibly be a JSO, String, Array,
+      // or an interface implemented String, don't devirtualize
       if (instanceType != program.getTypeJavaLangObject()
-          && !program.typeOracle.canBeJavaScriptObject(instanceType)) {
+          && !program.typeOracle.canBeJavaScriptObject(instanceType)
+          // not a string
+          && instanceType != program.getTypeJavaLangString()
+          // not an array
+          && !(instanceType instanceof JArrayType)
+          // not an interface of String, e.g. CharSequence or Comparable
+          && !program.getTypeJavaLangString().getImplements().contains(instanceType)) {
         return;
       }
 
@@ -164,6 +155,19 @@ public class JsoDevirtualizer {
         } else {
           assert false : "Object method not overriden by JavaScriptObject";
         }
+      } else if (targetType == program.getTypeJavaLangString()
+          || program.getTypeJavaLangString().getImplements().contains(targetType)) {
+        // it's a java.lang.String method
+        JMethod overridingMethod = findOverridingMethod(method, program.getTypeJavaLangString());
+        if (overridingMethod != null) {
+          JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
+          JMethod newMethod = getOrCreateDevirtualMethod(method, jsoStaticImpl);
+          devirtualMethodByMethod.put(method, newMethod);
+        } else {
+          // else this method isn't overridden by JavaScriptObject
+          assert false : "String interface method not overridden by String";
+          return;
+        }
       } else {
         assert false : "Object method not related to JavaScriptObject";
       }
@@ -196,9 +200,14 @@ public class JsoDevirtualizer {
   protected Map<JMethod, JMethod> devirtualMethodByMethod = new HashMap<JMethod, JMethod>();
 
   /**
-   * Contains the Cast.isJavaObject method.
+   * Contains the Cast.isNotStringNorArrayNorJsoObject method.
    */
-  private final JMethod isJavaObjectMethod;
+  private final JMethod isNotStringNorArrayNorJsoObject;
+
+  /**
+   * Contains the Cast.isJavaString method.
+   */
+  private final JMethod isJavaStringMethod;
 
   /**
    * Key is the method signature, value is the number of unique instances with
@@ -218,7 +227,9 @@ public class JsoDevirtualizer {
 
   private JsoDevirtualizer(JProgram program) {
     this.program = program;
-    this.isJavaObjectMethod = program.getIndexedMethod("Cast.isJavaObject");
+    this.isNotStringNorArrayNorJsoObject =
+        program.getIndexedMethod("Cast.isNotStringNorArrayNorJsoObject");
+    this.isJavaStringMethod = program.getIndexedMethod("Cast.isJavaString");
     staticImplCreator = new CreateStaticImplsVisitor(program);
   }
 
@@ -254,10 +265,12 @@ public class JsoDevirtualizer {
    * dispatch.
    *
    * <pre>
-    * static boolean equals__devirtual$(Object this, Object other) {
-    *   return Cast.isJavaObject(this) ? this.equals(other) : JavaScriptObject.equals$(this, other);
-    * }
-    * </pre>
+   * static boolean equals__devirtual$(Object this, Object other) {
+   *   return Cast.isJavaString() ? String.equals(other) :
+   *     Cast.isNotStringNorArrayNorJsoObject(this) ?
+   *       this.equals(other) : JavaScriptObject.equals$(this, other);
+   * }
+   * </pre>
    */
   private JMethod getOrCreateDevirtualMethod(JMethod method, JMethod jsoImpl) {
     /**
@@ -299,7 +312,7 @@ public class JsoDevirtualizer {
 
     // Setup parameters.
     JParameter thisParam =
-        JProgram.createParameter(sourceInfo, "this$static", program.getTypeJavaLangObject(), true,
+        JProgram.createParameter(sourceInfo, "this$static", method.getEnclosingType(), true,
             true, devirtualMethod);
     for (JParameter oldParam : method.getParams()) {
       JProgram.createParameter(sourceInfo, oldParam.getName(), oldParam.getType(), true, false,
@@ -320,9 +333,9 @@ public class JsoDevirtualizer {
         new JParameterRef(sourceInfo, thisParam)).getExpr());
 
     // Build from bottom up.
-    // isJavaObject(temp)
-    JMethodCall isJavaObjectCheck = new JMethodCall(sourceInfo, null, isJavaObjectMethod);
-    isJavaObjectCheck.addArg(new JLocalRef(sourceInfo, temp));
+    // isNotStringNorArrayNorJsoObject(temp)
+    JMethodCall condition = new JMethodCall(sourceInfo, null, isNotStringNorArrayNorJsoObject);
+    condition.addArg(new JLocalRef(sourceInfo, temp));
 
     // temp.method(args)
     JMethodCall thenValue =
@@ -342,11 +355,35 @@ public class JsoDevirtualizer {
       }
     }
 
-    // isJavaObject(temp) ? temp.method(args) : jso$method(temp, args)
+    // isNotStringNorArrayNorJsoObject(temp) ? temp.method(args) : jso$method
+    // (temp, args)
     JConditional conditional =
-        new JConditional(sourceInfo, method.getType(), isJavaObjectCheck, thenValue, elseValue);
+        new JConditional(sourceInfo, method.getType(), condition, thenValue, elseValue);
 
-    multi.addExpressions(conditional);
+    // Cast.isJavaString(temp) ? String.method(args) : conditional
+    JMethodCall stringCondition = new JMethodCall(sourceInfo, null, isJavaStringMethod);
+    stringCondition.addArg(new JLocalRef(sourceInfo, temp));
+    JMethod stringMethod = findOverridingMethod(method, program.getTypeJavaLangString());
+
+    JExpression stringThenValue;
+    // special case String.getClass() since there is no ___clazz field
+    if (method.getName().equals("getClass")) {
+      stringThenValue = new JFieldRef(sourceInfo, null, program.getClassLiteralField(program
+          .getTypeJavaLangString()), program.getTypeJavaLangClass());
+    } else {
+      JMethodCall stringThenValueCall = new JMethodCall(sourceInfo, null,
+          getStaticImpl(stringMethod));
+      stringThenValueCall.addArg(new JLocalRef(sourceInfo, temp));
+      for (JParameter param : devirtualMethod.getParams()) {
+        if (param != thisParam) {
+          stringThenValueCall.addArg(new JParameterRef(sourceInfo, param));
+        }
+      }
+      stringThenValue = stringThenValueCall;
+    }
+    JConditional stringConditional = new JConditional(sourceInfo, method.getType(),
+        stringCondition, stringThenValue, conditional);
+    multi.addExpressions(stringConditional);
 
     JReturnStatement returnStatement = new JReturnStatement(sourceInfo, multi);
     ((JMethodBody) devirtualMethod.getBody()).getBlock().addStmt(returnStatement);

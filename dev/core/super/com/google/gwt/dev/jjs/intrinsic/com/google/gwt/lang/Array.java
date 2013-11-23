@@ -23,55 +23,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public final class Array {
 
-  private static final class ExpandoWrapper {
-    /**
-     * A JS array containing the names of any expandos we need to add to arrays
-     * (such as "hashCode", "equals", "toString").
-     */
-    private static final Object expandoNames = makeEmptyJsArray();
-
-    /**
-     * A JS array containing the values of any expandos we need to add to arrays
-     * (such as hashCode(), equals(), toString()).
-     */
-    private static final Object expandoValues = makeEmptyJsArray();
-
-    static {
-      initExpandos(new Array(), expandoNames, expandoValues);
-    }
-
-    public static void wrapArray(Array array) {
-      wrapArray(array, expandoNames, expandoValues);
-    }
-
-    private static native void initExpandos(Array protoType,
-        Object expandoNames, Object expandoValues) /*-{
-      var i = 0, value;
-      for ( var name in protoType) {
-        // Only copy non-null values over; this generally means only functions
-        // will get copied over, and not fields, which is good because we will
-        // setup the fields manually and it's best if length doesn't get blown
-        // away.
-        if (value = protoType[name]) {
-          expandoNames[i] = name;
-          expandoValues[i] = value;
-          ++i;
-        }
-      }
-    }-*/;
-
-    private static native Object makeEmptyJsArray() /*-{
-      return [];
-    }-*/;
-
-    private static native void wrapArray(Array array, Object expandoNames,
-        Object expandoValues) /*-{
-      for ( var i = 0, c = expandoNames.length; i < c; ++i) {
-        array[expandoNames[i]] = expandoValues[i];
-      }
-    }-*/;
-  }
-
   /*
    * TODO: static init instead of lazy init when we can elide the clinit calls.
    */
@@ -172,9 +123,9 @@ public final class Array {
    */
   public static Array initValues(Class<?> arrayClass,
       JavaScriptObject castableTypeMap, int queryId, Array array) {
-    ExpandoWrapper.wrapArray(array);
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);
+    Util.setTypeMarker(array, Cast.getNullMethod());
     array.queryId = queryId;
     return array;
   }
@@ -210,14 +161,14 @@ public final class Array {
    */
   public static Object setCheck(Array array, int index, Object value) {
     if (value != null) {
-      if (array.queryId > 0 && !Cast.canCastUnsafe(value, array.queryId)) {
+      if (array.queryId > 0 && !Cast.canCast(value, array.queryId)) {
         // value must be castable to queryId
         throw new ArrayStoreException();
       } else if (array.queryId == -1 && Cast.isJavaObject(value)) {
         // value must be a JavaScriptObject
         throw new ArrayStoreException();
       } else if (array.queryId < -1 && !Cast.isJavaScriptObject(value)
-          && !Cast.canCastUnsafe(value, -array.queryId)) {
+          && !Cast.canCast(value, -array.queryId)) {
         // value must be a JavaScriptObject, or else castable to the inverse of
         // queryId
         throw new ArrayStoreException();

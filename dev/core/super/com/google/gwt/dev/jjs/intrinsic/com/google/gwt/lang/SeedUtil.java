@@ -67,4 +67,17 @@ public class SeedUtil {
   public static native JavaScriptObject newSeed(int id) /*-{
     return new (@com.google.gwt.lang.SeedUtil::seedTable[id]);
   }-*/;
+
+  private static native boolean fallbackIsArray(Object arr) /*-{
+    return arr instanceof Array;
+  }-*/;
+
+  /**
+   * Patch up Array.isArray for browsers that don't support the fast native check.
+   */
+  public static native void patchIsArray() /*-{
+    if (!Array.isArray) {
+        Array.isArray = @com.google.gwt.lang.SeedUtil::fallbackIsArray(Ljava/lang/Object;);
+    }
+  }-*/;
 }

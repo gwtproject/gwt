@@ -162,8 +162,8 @@ import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
@@ -1940,6 +1940,13 @@ public class GenerateJavaScriptAST {
         generateToStringAlias(x, globalStmts);
         // special: setup the identifying typeMarker field
         generateTypeMarker(globalStmts);
+
+        // Patch Array.isArray
+        JsFunction patchFunc = indexedFunctions.get("SeedUtil.patchIsArray");
+        JsName patchFuncName = patchFunc.getName();
+        JsInvocation callPatchFunc = new JsInvocation(x.getSourceInfo());
+        callPatchFunc.setQualifier(patchFuncName.makeRef(x.getSourceInfo()));
+        globalStmts.add(callPatchFunc.makeStmt());
       }
     }
 
@@ -2163,28 +2170,6 @@ public class GenerateJavaScriptAST {
         JsStatement tmpAsgStmt = defineSeed.makeStmt();
         globalStmts.add(tmpAsgStmt);
         typeForStatMap.put(tmpAsgStmt, x);
-      } else {
-        /*
-         * MAGIC: java.lang.String is implemented as a JavaScript String
-         * primitive with a modified prototype.
-         */
-        JsNameRef rhs = prototype.makeRef(sourceInfo);
-        rhs.setQualifier(JsRootScope.INSTANCE.findExistingUnobfuscatableName("String").makeRef(
-            sourceInfo));
-        JsExpression tmpAsg = createAssignment(globalTemp.makeRef(sourceInfo), rhs);
-        JsExprStmt tmpAsgStmt = tmpAsg.makeStmt();
-        globalStmts.add(tmpAsgStmt);
-        typeForStatMap.put(tmpAsgStmt, x);
-        JField castableTypeMapField = program.getIndexedField("Object.castableTypeMap");
-        JsName castableTypeMapName = names.get(castableTypeMapField);
-        JsNameRef ctmRef = castableTypeMapName.makeRef(sourceInfo);
-        ctmRef.setQualifier(globalTemp.makeRef(sourceInfo));
-        JsExpression castMapLit = generateCastableTypeMap(x);
-        JsExpression ctmAsg = createAssignment(ctmRef,
-            castMapLit);
-        JsExprStmt ctmAsgStmt = ctmAsg.makeStmt();
-        globalStmts.add(ctmAsgStmt);
-        typeForStatMap.put(ctmAsgStmt, x);
       }
     }
 
@@ -2234,6 +2219,9 @@ public class GenerateJavaScriptAST {
 
     private void generateVTables(JClassType x, List<JsStatement> globalStmts) {
       boolean isString = (x == program.getTypeJavaLangString());
+      if (isString) {
+        return; // We do not patch String.prototype anymore
+      }
       for (JMethod method : x.getMethods()) {
         SourceInfo sourceInfo = method.getSourceInfo();
         if (method.needsVtable() && !method.isAbstract()) {
@@ -2241,16 +2229,11 @@ public class GenerateJavaScriptAST {
           lhs.setQualifier(globalTemp.makeRef(sourceInfo));
 
           JsExpression rhs;
-          if (isString && "toString".equals(method.getName()))  {
-            // special-case String.toString: alias to the native JS toString()
-            rhs = createNativeToStringRef(globalTemp.makeRef(sourceInfo));
-          } else {
-            /*
-             * Inline JsFunction rather than reference, e.g. _.vtableName =
-             * function functionName() { ... }
-             */
-            rhs = methodBodyMap.get(method.getBody());
-          }
+          /*
+           * Inline JsFunction rather than reference, e.g. _.vtableName =
+           * function functionName() { ... }
+           */
+          rhs = methodBodyMap.get(method.getBody());
           JsExpression asg = createAssignment(lhs, rhs);
           JsExprStmt asgStat = new JsExprStmt(x.getSourceInfo(), asg);
           globalStmts.add(asgStat);

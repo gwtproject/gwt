@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "de65092b_bea096b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5edbd905_f6fcd891",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5edbd905_96f9cca0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "de65092b_1e9eea7b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5edbd905_96f9cca0",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5edbd905_b6f650ac",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2013-11-06T21:32:41Z",
       "side": 1,
       "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.js.*.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_fe9a0e85",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5edbd905_b6f650ac",
       "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "de65092b_5e17c22c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be too bad, mostly sorted collections, and any code that directly uses Comparable. Note that this effectively just mimics what probably happens in the JS VM anyway, as it turns a polymorphic dispatch into a monomorphic property check followed by a monomorphic call. It may turn out to be a wash, but it would be nice to have a benchmark",
+      "parentUuid": "becbf53b_fa1ef5bb",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "becbf53b_fa7a75d3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
         "patchSetId": 1
@@ -150,6 +222,24 @@
       "writtenOn": "2013-11-06T22:56:50Z",
       "side": 1,
       "message": "isNonStringJavaOjectNotArray? \n\nSeems to be lacking the dispatch for the array case in the comment and in the code.\n\nFor arrays getClass, like any other Java Object via __clazz, equals is taken care of by equalitynormalizer?, but what about hashcode and toString shouldn\u0027t be a static dispatch for those?",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_3e1c864f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "This is just an example. Every polymorphic method of java.lang.Object is devirtualized. In the Array case, it will fall through to JavaScriptObject.equals()/hashCode()/toString() which is basically what you get with Java/Lang/Object today: reference equality, Impl.getHashCode(), and native toString()",
+      "parentUuid": "becbf53b_fa7a75d3",
       "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -173,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_9d8acf00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "becbf53b_3af6bd4a",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "becbf53b_1a5bc170",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
         "patchSetId": 1
@@ -190,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "5e64b999_7d727b75",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "becbf53b_1a5bc170",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "becbf53b_856756fd",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 1
@@ -201,6 +327,24 @@
       "writtenOn": "2013-11-06T22:56:50Z",
       "side": 1,
       "message": "s/typeMarkerObject/arrayTypeMarkerObject\n\nAdd a comment here or at the setTypeMarker.\n\nArrays have a typeMarker field but instead of referring to the nullMethod() object they refer to arrayTypeMarkerObject.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_9e215a8a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "I\u0027m thinking we can kill this. The typeMarker is really only used by the trampoline/instanceof checks and we already have special cased versions of those. This would get rid of setting an extra field on array instances, as well as a clinit()",
+      "parentUuid": "becbf53b_856756fd",
       "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -252,6 +396,24 @@
       "writtenOn": "2013-11-06T22:56:50Z",
       "side": 1,
       "message": "instanceof Array does not seem to be needed as the typeMarker for arrays seems not to be the nullMethod.",
+      "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de65092b_7e26fea0",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2013-11-23T11:57:50Z",
+      "side": 1,
+      "message": "This method is getting long, maybe we should invert the negatives and call it something like isPolymorphicJavaObject() and just document it excludes Strings, Arrays, and JSOs.",
+      "parentUuid": "becbf53b_85b51601",
       "revId": "3f67775ff41a6596de6c292f6b2498668b304a6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be6e95ae_471e7e75",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-23T23:36:35Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "4f2bc73bfd21655721037d6319ee6869f145afd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

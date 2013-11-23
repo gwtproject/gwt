@@ -81,17 +81,7 @@ public class Arrays {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(T[] out) {
-      int size = size();
-      if (out.length < size) {
-        out = Array.createFrom(out, size);
-      }
-      for (int i = 0; i < size; ++i) {
-        out[i] = (T) array[i];
-      }
-      if (out.length > size) {
-        out[size] = null;
-      }
-      return out;
+      return (T[]) ArrayList.toArray(array, array.length, out);
     }
   }
 

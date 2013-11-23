@@ -90,6 +90,16 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
     setCapacity(array, initialCapacity);
   }
 
+  /**
+   * Used by java.util.Arrays
+   */
+  @SuppressWarnings("unused")
+  ArrayList(E[] array) {
+    assert (array != null);
+    this.array = array;
+    size = array.length;
+  }
+
   @Override
   public boolean add(E o) {
     array[size++] = o;

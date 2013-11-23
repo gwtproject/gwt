@@ -40,6 +40,19 @@ import java.io.Serializable;
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
+  static <T> T[] toArray(T[] array, int size, T[] out) {
+    if (out.length < size) {
+      out = Array.createFrom(out, size);
+    }
+    for (int i = 0; i < size; ++i) {
+      out[i] = array[i];
+    }
+    if (out.length > size) {
+      out[size] = null;
+    }
+    return out;
+  }
+
   private static native void setCapacity(Object[] array, int newSize) /*-{
     array.length = newSize;
   }-*/;
@@ -214,16 +227,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @SuppressWarnings("unchecked")
   @Override
   public <T> T[] toArray(T[] out) {
-    if (out.length < size) {
-      out = Array.createFrom(out, size);
-    }
-    for (int i = 0; i < size; ++i) {
-      out[i] = (T) array[i];
-    }
-    if (out.length > size) {
-      out[size] = null;
-    }
-    return out;
+    return (T[]) toArray(array, size, out);
   }
 
   public void trimToSize() {

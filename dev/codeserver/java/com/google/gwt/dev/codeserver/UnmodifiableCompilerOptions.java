@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.File;
+import java.lang.Override;
 import java.util.List;
 
 /**
@@ -219,6 +220,11 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
 
   @Override
   public final void setWorkDir(File dir) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setJsTypeAssertionsEnabled(boolean enabled) {
     throw new UnsupportedOperationException();
   }
 }

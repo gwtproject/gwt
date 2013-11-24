@@ -23,6 +23,7 @@ import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.File;
+import java.lang.Override;
 import java.util.List;
 
 /**
@@ -165,6 +166,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean isEnabledGeneratingOnShards() {
     return true;
+  }
+
+  @Override
+  public boolean isJsTypeAssertionsEnabled() {
+    return false;
   }
 
   @Override

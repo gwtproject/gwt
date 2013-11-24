@@ -74,6 +74,7 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -185,6 +186,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+
+import static com.google.gwt.dev.js.ast.JsBinaryOperator.*;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
@@ -805,7 +808,7 @@ public class GenerateJavaScriptAST {
       JsExpression qualifier = (JsExpression) pop();
       JsNameRef ref = arrayLength.makeRef(x.getSourceInfo());
       ref.setQualifier(qualifier);
-      push(ref);
+      push(coerceToNumeric(x, ref));
     }
 
     @Override
@@ -813,7 +816,11 @@ public class GenerateJavaScriptAST {
       JsArrayAccess jsArrayAccess = new JsArrayAccess(x.getSourceInfo());
       jsArrayAccess.setIndexExpr((JsExpression) pop());
       jsArrayAccess.setArrayExpr((JsExpression) pop());
-      push(jsArrayAccess);
+      if (isNumbericType(x.getArrayType())) {
+        push(coerceToNumeric(x, jsArrayAccess));
+      } else {
+        push(jsArrayAccess);
+      }
     }
 
     @Override
@@ -831,15 +838,26 @@ public class GenerateJavaScriptAST {
        * Use === and !== on reference types, or else you can get wrong answers
        * when Object.toString() == 'some string'.
        */
-      if (myOp == JsBinaryOperator.EQ && x.getLhs().getType() instanceof JReferenceType
+      if (myOp == EQ && x.getLhs().getType() instanceof JReferenceType
           && x.getRhs().getType() instanceof JReferenceType) {
-        myOp = JsBinaryOperator.REF_EQ;
-      } else if (myOp == JsBinaryOperator.NEQ && x.getLhs().getType() instanceof JReferenceType
+        myOp = REF_EQ;
+      } else if (myOp == NEQ && x.getLhs().getType() instanceof JReferenceType
           && x.getRhs().getType() instanceof JReferenceType) {
-        myOp = JsBinaryOperator.REF_NEQ;
+        myOp = REF_NEQ;
       }
 
-      push(new JsBinaryOperation(x.getSourceInfo(), myOp, lhs, rhs));
+      JsExpression node = new JsBinaryOperation(x.getSourceInfo(), myOp, lhs, rhs);
+      if (isNumbericType(x.getType())) {
+        // a = b => a = b | 0
+        if (ctx.isLvalue() && x.getOp().isAssignment()) {
+          node = new JsBinaryOperation(x.getSourceInfo(), myOp,
+              lhs, coerceToNumeric(x, rhs));
+        } else {
+          // a op b => (a op b) | 0
+          node = coerceToNumeric(x, node);
+        }
+      }
+      push(node);
     }
 
     @Override
@@ -1016,7 +1034,7 @@ public class GenerateJavaScriptAST {
       }
 
       JsBinaryOperation binOp =
-          new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.ASG, localRef, initializer);
+          new JsBinaryOperation(x.getSourceInfo(), ASG, localRef, initializer);
 
       push(binOp.makeStmt());
     }
@@ -1111,7 +1129,9 @@ public class GenerateJavaScriptAST {
           nameRef.setQualifier(qualifier);
         }
       }
-
+      if (!ctx.isLvalue() && isNumbericType(x.getType())) {
+        curExpr = coerceToNumeric(x, curExpr);
+      }
       push(curExpr);
     }
 
@@ -1256,7 +1276,8 @@ public class GenerateJavaScriptAST {
         functionsForJsInlining.add(jsFunc);
       }
 
-      List<JsParameter> params = popList(x.getParams().size()); // params
+      java.util.List<JParameter> jParams = x.getParams();
+      List<JsParameter> params = popList(jParams.size()); // params
 
       if (!x.isNative()) {
         // Setup params on the generated function. A native method already got
@@ -1269,6 +1290,23 @@ public class GenerateJavaScriptAST {
         }
       }
 
+      // force numeric parameters to be coerced via self-assignment
+      if (params.size() == jParams.size()) {
+        for (int i = jParams.size() - 1; i >= 0; i--) {
+          JParameter jParameter = jParams.get(i);
+          JType paramType = jParameter.getType();
+          if (isNumbericType(paramType)) {
+            // param = coerce(param)
+            SourceInfo sourceInfo = jParameter.getSourceInfo();
+            JsParameter jsParameter = params.get(i);
+            JsBinaryOperation pCoerce = new JsBinaryOperation(sourceInfo,
+                JsBinaryOperator.ASG, jsParameter.getName().makeRef(sourceInfo),
+                coerceToNumeric(new JParameterRef(sourceInfo, jParameter),
+                    jsParameter.getName().makeRef(sourceInfo)));
+            jsFunc.getBody().getStatements().add(0, pCoerce.makeStmt());
+          }
+        }
+      }
       JsInvocation jsInvocation = maybeCreateClinitCall(x);
       if (jsInvocation != null) {
         jsFunc.getBody().getStatements().add(0, jsInvocation.makeStmt());
@@ -1502,7 +1540,11 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JReturnStatement x, Context ctx) {
       if (x.getExpr() != null) {
-        push(new JsReturn(x.getSourceInfo(), (JsExpression) pop())); // expr
+        JsExpression expr = (JsExpression) pop();
+        if (isNumbericType(x.getExpr().getType())) {
+          expr = coerceToNumeric(x.getExpr(), expr);
+        }
+        push(new JsReturn(x.getSourceInfo(), expr)); // expr
       } else {
         push(new JsReturn(x.getSourceInfo()));
       }
@@ -1871,7 +1913,7 @@ public class GenerateJavaScriptAST {
     }
 
     private JsExpression createAssignment(JsExpression lhs, JsExpression rhs) {
-      return new JsBinaryOperation(lhs.getSourceInfo(), JsBinaryOperator.ASG, lhs, rhs);
+      return new JsBinaryOperation(lhs.getSourceInfo(), ASG, lhs, rhs);
     }
 
     private JsExpression createCommaExpression(JsExpression lhs, JsExpression rhs) {
@@ -1880,7 +1922,7 @@ public class GenerateJavaScriptAST {
       } else if (rhs == null) {
         return lhs;
       }
-      return new JsBinaryOperation(lhs.getSourceInfo(), JsBinaryOperator.COMMA, lhs, rhs);
+      return new JsBinaryOperation(lhs.getSourceInfo(), COMMA, lhs, rhs);
     }
 
     private JsNameRef createNativeToStringRef(JsExpression qualifier) {
@@ -2356,6 +2398,39 @@ public class GenerateJavaScriptAST {
     }
   }
 
+  private JsExpression coerceToNumeric(JExpression x,
+      JsExpression node) {
+    if (!jsTypeAssertionsEnabled) {
+      return node;
+    }
+    if (isIntType(x.getType())) {
+      return new JsBinaryOperation(x.getSourceInfo(),
+          BIT_OR,
+          node,
+          new JsNumberLiteral(x.getSourceInfo(), 0));
+    } else if (isDoubleType(x.getType())) {
+      return new JsPrefixOperation(x.getSourceInfo(),
+          JsUnaryOperator.POS, node);
+    } else {
+      return node;
+    }
+  }
+
+  public boolean isIntType(JType x) {
+    return x == JPrimitiveType.INT ||
+        x == JPrimitiveType.BYTE ||
+        x == JPrimitiveType.CHAR ||
+        x == JPrimitiveType.SHORT;
+  }
+  private boolean isNumbericType(JType x) {
+    return isIntType(x) || isDoubleType(x);
+  }
+
+  private boolean isDoubleType(JType x) {
+    return x == JPrimitiveType.FLOAT ||
+        x == JPrimitiveType.DOUBLE;
+  }
+
   private static class JavaToJsOperatorMap {
     private static final Map<JBinaryOperator, JsBinaryOperator> bOpMap =
         new EnumMap<JBinaryOperator, JsBinaryOperator>(JBinaryOperator.class);
@@ -2363,39 +2438,39 @@ public class GenerateJavaScriptAST {
         new EnumMap<JUnaryOperator, JsUnaryOperator>(JUnaryOperator.class);
 
     static {
-      bOpMap.put(JBinaryOperator.MUL, JsBinaryOperator.MUL);
-      bOpMap.put(JBinaryOperator.DIV, JsBinaryOperator.DIV);
-      bOpMap.put(JBinaryOperator.MOD, JsBinaryOperator.MOD);
-      bOpMap.put(JBinaryOperator.ADD, JsBinaryOperator.ADD);
-      bOpMap.put(JBinaryOperator.CONCAT, JsBinaryOperator.ADD);
-      bOpMap.put(JBinaryOperator.SUB, JsBinaryOperator.SUB);
-      bOpMap.put(JBinaryOperator.SHL, JsBinaryOperator.SHL);
-      bOpMap.put(JBinaryOperator.SHR, JsBinaryOperator.SHR);
-      bOpMap.put(JBinaryOperator.SHRU, JsBinaryOperator.SHRU);
-      bOpMap.put(JBinaryOperator.LT, JsBinaryOperator.LT);
-      bOpMap.put(JBinaryOperator.LTE, JsBinaryOperator.LTE);
-      bOpMap.put(JBinaryOperator.GT, JsBinaryOperator.GT);
-      bOpMap.put(JBinaryOperator.GTE, JsBinaryOperator.GTE);
-      bOpMap.put(JBinaryOperator.EQ, JsBinaryOperator.EQ);
-      bOpMap.put(JBinaryOperator.NEQ, JsBinaryOperator.NEQ);
-      bOpMap.put(JBinaryOperator.BIT_AND, JsBinaryOperator.BIT_AND);
-      bOpMap.put(JBinaryOperator.BIT_XOR, JsBinaryOperator.BIT_XOR);
-      bOpMap.put(JBinaryOperator.BIT_OR, JsBinaryOperator.BIT_OR);
-      bOpMap.put(JBinaryOperator.AND, JsBinaryOperator.AND);
-      bOpMap.put(JBinaryOperator.OR, JsBinaryOperator.OR);
-      bOpMap.put(JBinaryOperator.ASG, JsBinaryOperator.ASG);
-      bOpMap.put(JBinaryOperator.ASG_ADD, JsBinaryOperator.ASG_ADD);
-      bOpMap.put(JBinaryOperator.ASG_CONCAT, JsBinaryOperator.ASG_ADD);
-      bOpMap.put(JBinaryOperator.ASG_SUB, JsBinaryOperator.ASG_SUB);
-      bOpMap.put(JBinaryOperator.ASG_MUL, JsBinaryOperator.ASG_MUL);
-      bOpMap.put(JBinaryOperator.ASG_DIV, JsBinaryOperator.ASG_DIV);
-      bOpMap.put(JBinaryOperator.ASG_MOD, JsBinaryOperator.ASG_MOD);
-      bOpMap.put(JBinaryOperator.ASG_SHL, JsBinaryOperator.ASG_SHL);
-      bOpMap.put(JBinaryOperator.ASG_SHR, JsBinaryOperator.ASG_SHR);
-      bOpMap.put(JBinaryOperator.ASG_SHRU, JsBinaryOperator.ASG_SHRU);
-      bOpMap.put(JBinaryOperator.ASG_BIT_AND, JsBinaryOperator.ASG_BIT_AND);
-      bOpMap.put(JBinaryOperator.ASG_BIT_OR, JsBinaryOperator.ASG_BIT_OR);
-      bOpMap.put(JBinaryOperator.ASG_BIT_XOR, JsBinaryOperator.ASG_BIT_XOR);
+      bOpMap.put(JBinaryOperator.MUL, MUL);
+      bOpMap.put(JBinaryOperator.DIV, DIV);
+      bOpMap.put(JBinaryOperator.MOD, MOD);
+      bOpMap.put(JBinaryOperator.ADD, ADD);
+      bOpMap.put(JBinaryOperator.CONCAT, ADD);
+      bOpMap.put(JBinaryOperator.SUB, SUB);
+      bOpMap.put(JBinaryOperator.SHL, SHL);
+      bOpMap.put(JBinaryOperator.SHR, SHR);
+      bOpMap.put(JBinaryOperator.SHRU, SHRU);
+      bOpMap.put(JBinaryOperator.LT, LT);
+      bOpMap.put(JBinaryOperator.LTE, LTE);
+      bOpMap.put(JBinaryOperator.GT, GT);
+      bOpMap.put(JBinaryOperator.GTE, GTE);
+      bOpMap.put(JBinaryOperator.EQ, EQ);
+      bOpMap.put(JBinaryOperator.NEQ, NEQ);
+      bOpMap.put(JBinaryOperator.BIT_AND, BIT_AND);
+      bOpMap.put(JBinaryOperator.BIT_XOR, BIT_XOR);
+      bOpMap.put(JBinaryOperator.BIT_OR, BIT_OR);
+      bOpMap.put(JBinaryOperator.AND, AND);
+      bOpMap.put(JBinaryOperator.OR, OR);
+      bOpMap.put(JBinaryOperator.ASG, ASG);
+      bOpMap.put(JBinaryOperator.ASG_ADD, ASG_ADD);
+      bOpMap.put(JBinaryOperator.ASG_CONCAT, ASG_ADD);
+      bOpMap.put(JBinaryOperator.ASG_SUB, ASG_SUB);
+      bOpMap.put(JBinaryOperator.ASG_MUL, ASG_MUL);
+      bOpMap.put(JBinaryOperator.ASG_DIV, ASG_DIV);
+      bOpMap.put(JBinaryOperator.ASG_MOD, ASG_MOD);
+      bOpMap.put(JBinaryOperator.ASG_SHL, ASG_SHL);
+      bOpMap.put(JBinaryOperator.ASG_SHR, ASG_SHR);
+      bOpMap.put(JBinaryOperator.ASG_SHRU, ASG_SHRU);
+      bOpMap.put(JBinaryOperator.ASG_BIT_AND, ASG_BIT_AND);
+      bOpMap.put(JBinaryOperator.ASG_BIT_OR, ASG_BIT_OR);
+      bOpMap.put(JBinaryOperator.ASG_BIT_XOR, ASG_BIT_XOR);
 
       uOpMap.put(JUnaryOperator.INC, JsUnaryOperator.INC);
       uOpMap.put(JUnaryOperator.DEC, JsUnaryOperator.DEC);
@@ -2579,20 +2654,23 @@ public class GenerateJavaScriptAST {
    * Java AST and constructs a JavaScript AST while collecting other useful information that
    * is used in subsequent passes.
    *
+   *
    * @param program           a Java AST
    * @param jsProgram         an (empty) JavaScript AST
    * @param outputOption      options that affect this transformation for this transformation
    *                          e.g. OBFUSCATED, etc.
    * @param symbolTable       an (empty) symbol table that will be populated here
    * @param propertyOracles   property oracles that correspond to the permutation being compiled.
+   * @param jsTypeAssertionsEnabled
    * @return A pair containing a JavaToJavaScriptMap and a Set of JsFunctions that need to be
    *         considered for inlining.
    */
   public static Pair<JavaToJavaScriptMap, Set<JsNode>> exec(JProgram program,
       JsProgram jsProgram, JsOutputOption outputOption, Map<StandardSymbolData, JsName> symbolTable,
-      PropertyOracle[] propertyOracles) {
+      PropertyOracle[] propertyOracles, boolean jsTypeAssertionsEnabled) {
     GenerateJavaScriptAST generateJavaScriptAST =
-        new GenerateJavaScriptAST(program, jsProgram, outputOption, symbolTable, propertyOracles);
+        new GenerateJavaScriptAST(program, jsProgram, outputOption, symbolTable, propertyOracles,
+            jsTypeAssertionsEnabled);
     return generateJavaScriptAST.execImpl();
   }
 
@@ -2657,6 +2735,7 @@ public class GenerateJavaScriptAST {
   private final Set<JsFunction> polymorphicJsFunctions = new IdentityHashSet<JsFunction>();
   private final Map<JMethod, JsName> polymorphicNames = new IdentityHashMap<JMethod, JsName>();
   private final JProgram program;
+  private final boolean jsTypeAssertionsEnabled;
 
   /**
    * Map of class type to allocated seed id.
@@ -2698,8 +2777,10 @@ public class GenerateJavaScriptAST {
       new HashMap<JsStatement, JMethod>();
 
   private GenerateJavaScriptAST(JProgram program, JsProgram jsProgram, JsOutputOption output,
-      Map<StandardSymbolData, JsName> symbolTable, PropertyOracle[] propertyOracles) {
+      Map<StandardSymbolData, JsName> symbolTable, PropertyOracle[] propertyOracles,
+      boolean jsTypeAssertionsEnabled) {
     this.program = program;
+    this.jsTypeAssertionsEnabled = jsTypeAssertionsEnabled;
     typeOracle = program.typeOracle;
     this.jsProgram = jsProgram;
     topScope = jsProgram.getScope();

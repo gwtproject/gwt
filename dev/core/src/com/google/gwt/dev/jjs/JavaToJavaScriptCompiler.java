@@ -354,7 +354,7 @@ public class JavaToJavaScriptCompiler {
       jprogram.typeOracle.recomputeAfterOptimizations();
       Pair<? extends JavaToJavaScriptMap, Set<JsNode>> genAstResult =
           GenerateJavaScriptAST.exec(jprogram, jsProgram, options.getOutput(), symbolTable,
-              propertyOracles);
+              propertyOracles, options.isJsTypeAssertionsEnabled());
 
       JavaToJavaScriptMap jjsmap = genAstResult.getLeft();
 

@@ -48,6 +48,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean soycHtmlDisabled = false;
   private boolean strict = false;
   private boolean strictResources = false;
+  private boolean typeAssertions = false;
 
   public JJSOptionsImpl() {
   }
@@ -79,6 +80,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setStrict(other.isStrict());
     setEnforceStrictResources(other.enforceStrictResources());
     setSourceLevel(other.getSourceLevel());
+    setJsTypeAssertionsEnabled(other.isJsTypeAssertionsEnabled());
   }
 
   @Override
@@ -176,6 +178,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public boolean isJsTypeAssertionsEnabled() {
+    return typeAssertions;
+  }
+
+  @Override
   @Deprecated
   public void setAggressivelyOptimize(boolean enabled) {
     aggressivelyOptimize = enabled;
@@ -229,6 +236,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public void setInlineLiteralParameters(boolean enabled) {
     inlineLiteralParameters = enabled;
+  }
+
+  @Override
+  public void setJsTypeAssertionsEnabled(boolean enabled) {
+    this.typeAssertions = enabled;
   }
 
   @Override

@@ -521,7 +521,7 @@ public class CodeSplitterTest extends JJSTestBase {
         new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
     JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
         jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
-        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
+        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}, false).getLeft();
     CodeSplitter.exec(logger, jProgram, jsProgram, map, expectedFragmentCount, leftOverMergeSize,
         NULL_RECORDER);
   }

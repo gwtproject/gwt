@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ed03988_54744917",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "s/dependants/dependentMethods/ ?",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_d47f99f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_9497e1e5",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "See my comments on the option object.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_14a3f151",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "s/OptionJsonSoyc/OptionEnableSoycJsonReport/\n\nor maybe OptionSoycOutputFormat and instead of using a ArgHandler flag use a ArgHandlerString to process it (html, json)",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_7466ad84",
+        "filename": "dev/core/test/com/google/gwt/dev/PrecompileTaskArgProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "maybe better -XenableSoycJsonReport",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_34a1d5bd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "This one can be made private right?",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_749b4d8b",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "move the final modifier to the parameter declaration and eliminate the local variable.\n\ns/regexPattern/namePattern/",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_f4ae1daf",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "(Maybe) transform into\n\nassertFalse(\"Duplicate jsni:  \"  + key, sdata.cointains(key));\n\nduplicate JSNi name? can you be more specific inthe message.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_34eef59e",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "Rephrase to:\n\nTest the correspondence between old symbol maps and and the information that is now provided by the sourcemap.\n\nThe matching is far from perfect.  SymbolMaps record 1-1 correspondences between symbols in JavaScript and the optimized version of the Java source.  The symbol mapping information provided in the sourcemap extensions maps the original Java source symbols to their JavaScript counterpart but the mapping is no longer 1-1. E.g. A source java method might have two versions after optimization due to MakeStaticCalls; and each of those versions might have different JavaScript names.\n\nAlso correspondence on field accesses, class literals can not be tested.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_94fb615f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "You can remove this if not needed. Alternatively you could log to a logger if you so wish.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_d4231939",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "Remove commented line.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_b4282517",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "s/cls/classDescriptor/",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_341555c7",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "remove commented out line.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_941241dd",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "remove if not needed.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_b44f85f9",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-25T21:59:36Z",
+      "side": 1,
+      "message": "classDescriptorsByName ? BySignature? byFullName? Choose a more descriptive name.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

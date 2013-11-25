@@ -160,6 +160,7 @@ public abstract class Composite extends Widget implements IsRenderable {
     }
 
     widget.onAttach();
+    doAttachChildren();
 
     // Clobber the widget's call to setEventListener(), causing all events to
     // be routed to this composite, which will delegate back to the widget by
@@ -176,6 +177,7 @@ public abstract class Composite extends Widget implements IsRenderable {
   protected void onDetach() {
     try {
       onUnload();
+      doDetachChildren();
       AttachEvent.fire(this, false);
     } finally {
       // We don't want an exception in user code to keep us from calling the

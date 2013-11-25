@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ed03988_141e51ef",
+        "filename": "tools/api-checker/config/gwt25_26userApi.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-11-25T21:47:48Z",
+      "side": 1,
+      "message": "fixed checkapi as requested",
+      "revId": "497253cfd2fd1ae198da0c6247d4d6ec0ade4024",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

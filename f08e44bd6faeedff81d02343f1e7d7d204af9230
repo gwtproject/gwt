@@ -16,6 +16,57 @@
       "revId": "f08e44bd6faeedff81d02343f1e7d7d204af9230",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1eca41de_a969f914",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-25T16:42:06Z",
+      "side": 1,
+      "message": "Should it test jsTypeAssertionsEnabled to avoid work when not needed?",
+      "revId": "f08e44bd6faeedff81d02343f1e7d7d204af9230",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "630ac615_18540515",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-25T16:42:06Z",
+      "side": 1,
+      "message": "Did you mean isNumericType? (without the \u0027b\u0027)",
+      "revId": "f08e44bd6faeedff81d02343f1e7d7d204af9230",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "630ac615_986b7533",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerEnableJsTypeAssertions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-11-25T16:42:06Z",
+      "side": 1,
+      "message": "Should it be jstypeassertions? (or jsTypeAssertions)",
+      "revId": "f08e44bd6faeedff81d02343f1e7d7d204af9230",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

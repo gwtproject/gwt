@@ -31,7 +31,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private boolean disableUpdateCheck;
   private boolean enableGeneratingOnShards = true;
   private File genDir;
-  private final JJSOptionsImpl jjsOptions = new JJSOptionsImpl();
   private int maxPermsPerPrecompile;
   private boolean saveSource;
   private boolean validateOnly;
@@ -364,4 +363,5 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   public boolean shouldRemoveDuplicateFunctions() {
     return jjsOptions.shouldRemoveDuplicateFunctions();
   }
+
 }

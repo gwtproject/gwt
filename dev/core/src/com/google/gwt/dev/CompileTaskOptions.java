@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev;
 
+import com.google.gwt.dev.util.arg.OptionEnableJsTypeAssertions;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionModuleName;
 import com.google.gwt.dev.util.arg.OptionWorkDir;
@@ -22,5 +23,6 @@ import com.google.gwt.dev.util.arg.OptionWorkDir;
 /**
  * A common set of options for all compile tasks.
  */
-public interface CompileTaskOptions extends OptionModuleName, OptionLogLevel, OptionWorkDir {
+public interface CompileTaskOptions extends OptionModuleName, OptionLogLevel, OptionWorkDir,
+    OptionEnableJsTypeAssertions {
 }

@@ -16,6 +16,7 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.dev.jjs.JJSOptionsImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,9 +27,11 @@ import java.util.List;
  */
 class CompileTaskOptionsImpl implements CompileTaskOptions {
 
+  protected final JJSOptionsImpl jjsOptions = new JJSOptionsImpl();
   private Type logLevel;
   private final List<String> moduleNames = new ArrayList<String>();
   private File workDir;
+  private boolean typeAssertions;
 
   public CompileTaskOptionsImpl() {
   }
@@ -45,6 +48,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     setLogLevel(other.getLogLevel());
     setModuleNames(other.getModuleNames());
     setWorkDir(other.getWorkDir());
+    setJsTypeAssertionsEnabled(other.isJsTypeAssertionsEnabled());
   }
 
   public File getCompilerWorkDir(String moduleName) {
@@ -74,5 +78,15 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
 
   public void setWorkDir(File workDir) {
     this.workDir = workDir;
+  }
+
+  @Override
+  public boolean isJsTypeAssertionsEnabled() {
+    return typeAssertions;
+  }
+
+  @Override
+  public void setJsTypeAssertionsEnabled(boolean enabled) {
+    this.typeAssertions = enabled;
   }
 }

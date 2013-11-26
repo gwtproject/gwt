@@ -58,8 +58,11 @@ public class JavaClassHierarchySetupUtil {
       // not a placeholder entry setup by Class.setClassLiteral
       _ = prototype;
     } else {
-      _ = prototypesByTypeId[typeId]  = (!superTypeId) ? {} : createSubclassPrototype(superTypeId);
+      _ = prototypesByTypeId[typeId]  = typeof(superTypeId) != 'number' ?
+          Object.create(superTypeId.prototype) :
+          (!superTypeId) ? {} : createSubclassPrototype(superTypeId);
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
+      _.constructor = seed;
     }
     for (var i = 3; i < arguments.length; ++i) {
       // Assign the type prototype to each constructor.
@@ -92,5 +95,49 @@ public class JavaClassHierarchySetupUtil {
     // TODO(rluble): Relies on Class.createFor*() storing the class literal wrapped as an array
     // to distinguish it from an actual prototype.
     return (entry instanceof Array) ? entry[0] : null;
+  }-*/;
+
+  /**
+   * Creates a JS namespace to attach exported classes to.
+   * @param namespace a dotted js namespace string
+   * @return a nested object literal representing the namespace
+   */
+  public static native JavaScriptObject provide(JavaScriptObject namespace) /*-{
+      var cur = this; // global this
+      if (namespace == '$wnd') {
+          return $wnd;
+      } else if (namespace === '') {
+          return cur;
+      }
+
+      // if namespace begins with $wnd, then we root the namespace there
+      if (namespace.substring(0, 5) == '$wnd.') {
+          cur = $wnd;
+          namespace = namespace.substring(5);
+      }
+      // borrowed from Closure's base.js
+      var parts = namespace.split('.');
+
+      // Internet Explorer exhibits strange behavior when throwing errors from
+      // methods externed in this manner.  See the testExportSymbolExceptions in
+      // base_test.html for an example.
+      if (!(parts[0] in cur) && cur.execScript) {
+          cur.execScript('var ' + parts[0]);
+      }
+
+      // Certain browsers cannot parse code in the form for((a in b); c;);
+      // This pattern is produced by the JSCompiler when it collapses the
+      // statement above into the conditional loop below. To prevent this from
+      // happening, use a for-loop and reserve the init logic as below.
+
+      // Parentheses added to eliminate strict JS warning in Firefox.
+      for (var part; parts.length && (part = parts.shift());) {
+          if (cur[part]) {
+              cur = cur[part];
+          } else {
+              cur = cur[part] = {};
+          }
+      }
+      return cur;
   }-*/;
 }

@@ -17,6 +17,7 @@
   <entry-point class="com.google.gwt.sample.hello.client.Hello"/>
 
   <!-- allow Super Dev Mode -->
-  <add-linker name="xsiframe"/>
+  <add-linker name="xs"/>
   <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+  <set-property name="user.agent" value="safari"/>
 </module>

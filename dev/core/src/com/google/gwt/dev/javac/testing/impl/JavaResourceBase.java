@@ -310,12 +310,27 @@ public class JavaResourceBase {
           "  public void addSuppressed(Throwable ex) { }",
           "}");
 
+  public static final MockJavaResource JSINTERFACE =
+      createMockJavaResource("com.google.gwt.core.client.js.JsInterface",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsInterface {\n",
+          "  String prototype() default \"\";\n",
+          "}");
+
+  public static final MockJavaResource JSEXPORT =
+      createMockJavaResource("com.google.gwt.core.client.js.JsExport",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsExport {\n",
+          "  String value() default \"\";\n",
+          "}");
+
   public static MockJavaResource[] getStandardResources() {
     return new MockJavaResource[]{
         AUTOCLOSEABLE, ANNOTATION, BYTE, BOOLEAN, CHARACTER, CHAR_SEQUENCE, CLASS,
         CLASS_NOT_FOUND_EXCEPTION, COLLECTION, COMPARABLE, DOUBLE, ENUM, EXCEPTION, ERROR, FLOAT,
         INTEGER, IS_SERIALIZABLE, JAVASCRIPTOBJECT, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER,
-        OBJECT, SERIALIZABLE, SHORT, STRING, STRING_BUILDER, SUPPRESS_WARNINGS, THROWABLE};
+        OBJECT, SERIALIZABLE, SHORT, STRING, STRING_BUILDER, SUPPRESS_WARNINGS, THROWABLE, JSINTERFACE,
+        JSEXPORT};
   }
 
   /**

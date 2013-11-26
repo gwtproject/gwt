@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_b1af88ae",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_54744917",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_d47f99f7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "Let\u0027s discuss this.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_3aa37f52",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SourceInfoCorrelator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_d47f99f7",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_31d9b845",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_9497e1e5",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_14a3f151",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionJsonSoyc.java",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "s/OptionJsonSoyc/OptionEnableSoycJsonReport/\n\nor maybe OptionSoycOutputFormat and instead of using a ArgHandler flag use a ArgHandlerString to process it (html, json)",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8bada0_11f4bcaf",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "The json-like report will replace the xml/html reports. So adding a format-like option is not an optimal solution, because at the end we will have only one format.",
+      "parentUuid": "5ed03988_14a3f151",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fe8bada0_71e340f5",
+        "filename": "dev/core/test/com/google/gwt/dev/PrecompileTaskArgProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "I think the tokens \"enable\" and \"report\" are redundants.",
+      "parentUuid": "5ed03988_7466ad84",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_34a1d5bd",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "This one can be made private right?",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_547e09ca",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_34a1d5bd",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_347b95da",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_749b4d8b",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_f4ae1daf",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -132,6 +258,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "(Maybe) transform into\n\nassertFalse(\"Duplicate jsni:  \"  + key, sdata.cointains(key));\n\nduplicate JSNi name? can you be more specific inthe message.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_5af0f30a",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_f4ae1daf",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_5a1e3375",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_34eef59e",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_94fb615f",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -166,6 +328,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "You can remove this if not needed. Alternatively you could log to a logger if you so wish.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_7a2177b5",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_94fb615f",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_1a531b2f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_d4231939",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_b4282517",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -200,6 +398,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "s/cls/classDescriptor/",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_5a45935b",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_b4282517",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_9a3f0bca",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_341555c7",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_941241dd",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -240,6 +474,24 @@
     },
     {
       "key": {
+        "uuid": "5ed03988_fa7a87a0",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_941241dd",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_b44f85f9",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 11
@@ -251,6 +503,24 @@
       "writtenOn": "2013-11-25T21:59:36Z",
       "side": 1,
       "message": "classDescriptorsByName ? BySignature? byFullName? Choose a more descriptive name.",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed03988_7a8fb75f",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-26T19:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed03988_b44f85f9",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -116,6 +116,7 @@ import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AllocationExpression;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
@@ -189,11 +190,13 @@ import org.eclipse.jdt.internal.compiler.ast.UnaryExpression;
 import org.eclipse.jdt.internal.compiler.ast.UnionTypeReference;
 import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
+import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import org.eclipse.jdt.internal.compiler.lookup.BaseTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
+import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalVariableBinding;
@@ -3342,6 +3345,24 @@ public class GwtAstBuilder {
       method.setSynthetic();
     }
     enclosingType.addMethod(method);
+    if (x.annotations != null) {
+      for (Annotation a : x.annotations) {
+        ReferenceBinding annBinding = (ReferenceBinding) a.resolvedType;
+        String annName = CharOperation.toString(annBinding.compoundName);
+        if ("com.google.gwt.core.client.js.JsExport".equals(annName)) {
+          for (ElementValuePair maybeValue : a.computeElementValuePairs()) {
+            if (maybeValue.getValue() instanceof StringConstant &&
+                "value".equals(String.valueOf(maybeValue.getName()))) {
+              method.setExportName(((StringConstant) maybeValue.getValue()).stringValue());
+              break;
+            }
+          }
+          break;
+        } else if ("com.google.gwt.core.client.js.JsProperty".equals(annName)) {
+          method.setJsProperty(true);
+        }
+      }
+    }
     typeMap.setMethod(b, method);
   }
 
@@ -3403,7 +3424,26 @@ public class GwtAstBuilder {
       if (binding.isClass()) {
         type = new JClassType(info, name, binding.isAbstract(), binding.isFinal());
       } else if (binding.isInterface() || binding.isAnnotationType()) {
-        type = new JInterfaceType(info, name);
+        boolean isJsInterface = false;
+        String jsPrototype = "";
+        if (x.annotations != null) {
+          for (Annotation a : x.annotations) {
+            ReferenceBinding annBinding = (ReferenceBinding) a.resolvedType;
+            String annName = CharOperation.toString(annBinding.compoundName);
+            if ("com.google.gwt.core.client.js.JsInterface".equals(annName)) {
+              isJsInterface = true;
+              for (ElementValuePair maybePrototype : a.computeElementValuePairs()) {
+                if (maybePrototype.getValue() instanceof StringConstant &&
+                    "prototype".equals(String.valueOf(maybePrototype.getName()))) {
+                  jsPrototype = ((StringConstant) maybePrototype.getValue()).stringValue();
+                  break;
+                }
+              }
+              break;
+            }
+          }
+        }
+        type = new JInterfaceType(info, name, isJsInterface, jsPrototype);
       } else if (binding.isEnum()) {
         if (binding.isAnonymousType()) {
           // Don't model an enum subclass as a JEnumType.

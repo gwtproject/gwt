@@ -74,6 +74,7 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -147,6 +148,7 @@ import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsSeedIdOf;
 import com.google.gwt.dev.js.ast.JsStatement;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsSwitch;
 import com.google.gwt.dev.js.ast.JsSwitchMember;
 import com.google.gwt.dev.js.ast.JsThisRef;
@@ -547,6 +549,10 @@ public class GenerateJavaScriptAST {
             polyName = interfaceScope.declareName(mangleNameForPrivatePoly(x), name);
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
+            polyName.setObfuscatable(false);
+            // if a JsInterface
+          } else if (program.typeOracle.isJsInterfaceMethod(x)) {
+            polyName = interfaceScope.declareName(name, name);
             polyName.setObfuscatable(false);
           } else {
             polyName = interfaceScope.declareName(mangleNameForPoly(x), name);
@@ -1359,8 +1365,10 @@ public class GenerateJavaScriptAST {
         }
       }
 
-      JsNameRef qualifier;
+      JsNameRef qualifier = null;
       JsExpression unnecessaryQualifier = null;
+      JsExpression result = null;
+
       if (method.isStatic()) {
         if (x.getInstance() != null) {
           unnecessaryQualifier = (JsExpression) pop(); // instance
@@ -1380,13 +1388,96 @@ public class GenerateJavaScriptAST {
           qualifier.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
           jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
         } else {
-          // Dispatch polymorphically (normal case).
-          qualifier = polymorphicNames.get(method).makeRef(x.getSourceInfo());
-          qualifier.setQualifier((JsExpression) pop()); // instance
+          JsName polyName = polymorphicNames.get(method);
+          // potentially replace method call with property access
+          if (x.getTarget().isJsProperty()) {
+            Pair<Boolean, String> getter = isGetter(x.getTarget());
+            Pair<Boolean, String> setter = isSetter(x.getTarget());
+            Pair<Boolean, String> has = isHas(x.getTarget());
+
+            // if fluent
+            boolean isFluent = x.getTarget().getType() instanceof JReferenceType
+                && x.getTarget().getType() == x.getTarget().getEnclosingType();
+            JsExpression qualExpr = (JsExpression) pop();
+
+            if (getter.getLeft()) {
+              // replace with qualExpr.property
+              JsNameRef property = new JsNameRef(x.getSourceInfo(), getter.getRight());
+              property.setQualifier(qualExpr);
+              result = createCommaExpression(unnecessaryQualifier, property);
+            } else if (setter.getLeft()) {
+              JsNameRef property = new JsNameRef(x.getSourceInfo(), setter.getRight());
+              // either qualExpr.prop or _.prop depending on fluent or not
+              property.setQualifier(isFluent ?
+                  globalTemp.makeRef(x.getSourceInfo()) :qualExpr );
+              // propExpr = arg
+              result = createAssignment(property, jsInvocation.getArguments().get(0));
+              if (isFluent) {
+                // (_ = qualExpr, _.prop = arg, _)
+                result = createCommaExpression(
+                    createAssignment(globalTemp.makeRef(x.getSourceInfo()), qualExpr),
+                    createCommaExpression(result,
+                      globalTemp.makeRef(x.getSourceInfo())));
+              }
+            } else if (has.getLeft()) {
+              JsNameRef property = new JsNameRef(x.getSourceInfo(), has.getRight());
+              result = new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP,
+                  property, qualExpr);
+            } else {
+              throw new InternalCompilerException("JsProperty not a setter, getter, or has.");
+            }
+          } else {
+            // Dispatch polymorphically (normal case).
+            qualifier = polyName.makeRef(x.getSourceInfo());
+            qualifier.setQualifier((JsExpression) pop()); // instance
+          }
         }
       }
-      jsInvocation.setQualifier(qualifier);
-      push(createCommaExpression(unnecessaryQualifier, jsInvocation));
+      if (!x.getTarget().isJsProperty()) {
+        jsInvocation.setQualifier(qualifier);
+        result = jsInvocation;
+      }
+      push(createCommaExpression(unnecessaryQualifier, result));
+    }
+
+    private Pair<Boolean, String> isGetter(JMethod method) {
+      String name = method.getName();
+      // zero arg non-void getX()
+      if (name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
+          method.getType() != JPrimitiveType.VOID && method.getParams().size() == 0) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return Pair.create(true, propName);
+      } else  if (name.length() > 3 && name.startsWith("is")
+          && Character.isUpperCase(name.charAt(2)) && method.getType() == JPrimitiveType.BOOLEAN
+          && method.getParams().size() == 0) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return Pair.create(true, propName);
+      } else if (method.getParams().size() == 0 && method.getType() != JPrimitiveType.VOID) {
+        return Pair.create(true, name);
+      }
+      return Pair.create(false, null);
+    }
+
+    private Pair<Boolean, String> isSetter(JMethod method) {
+      String name = method.getName();
+      if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
+          && method.getParams().size() == 1) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return Pair.create(true, propName);
+      } else if (method.getParams().size() == 1) {
+        return Pair.create(true, name);
+      }
+      return Pair.create(false, null);
+    }
+
+    private Pair<Boolean, String> isHas(JMethod method) {
+      String name = method.getName();
+      if (name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
+          && method.getParams().size() == 0 && method.getType() == JPrimitiveType.BOOLEAN) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return Pair.create(true, propName);
+      }
+      return Pair.create(false, null);
     }
 
     @Override
@@ -1934,6 +2025,7 @@ public class GenerateJavaScriptAST {
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
       generateSeedFuncAndPrototype(x, globalStmts);
       generateVTables(x, globalStmts);
+      generateExports(x, globalStmts);
 
       if (x == program.getTypeJavaLangObject()) {
         // special: setup a "toString" alias for java.lang.Object.toString()
@@ -2143,12 +2235,34 @@ public class GenerateJavaScriptAST {
         int newSeed = getSeedId(x);
         assert newSeed > 0;
         JClassType superClass = x.getSuperClass();
+        // check if there's an overriding prototype
+        String jsPrototype = null;
+        // TODO(cromwellian) fetch from flattened supertype hierarchy
+        for (JInterfaceType intf : x.getImplements()) {
+          if (intf.isJsInterface() && !"".equals(intf.getJsPrototype())) {
+            if (jsPrototype != null) {
+              // TODO(cromwellian) handle this more gracefully
+              throw new InternalCompilerException("JsPrototype set twice on " + x);
+            }
+            jsPrototype = intf.getJsPrototype();
+          }
+        }
         int superSeed = (superClass == null) ? -1 : getSeedId(x.getSuperClass());
         // SeedUtil.defineSeed(queryId, superId, castableMap, constructors)
         defineSeed.getArguments().add(new JsNumberLiteral(x.getSourceInfo(),
             newSeed));
-        defineSeed.getArguments().add(new JsNumberLiteral(x.getSourceInfo(),
-            superSeed));
+        if (jsPrototype == null) {
+          defineSeed.getArguments().add(new JsNumberLiteral(x.getSourceInfo(),
+              superSeed));
+        } else {
+          // $wnd.{jsPrototype}.prototype
+          JsNameRef jsProtoClassRef = new JsNameRef(x.getSourceInfo(), jsPrototype);
+          jsProtoClassRef.setQualifier(new JsNameRef(x.getSourceInfo(), "$wnd"));
+          JsNameRef jsProtoFieldRef = new JsNameRef(x.getSourceInfo(), "prototype");
+
+          jsProtoFieldRef.setQualifier(jsProtoClassRef);
+          defineSeed.getArguments().add(jsProtoClassRef);
+        }
         JsExpression castMap = generateCastableTypeMap(x);
         defineSeed.getArguments().add(castMap);
        
@@ -2257,6 +2371,53 @@ public class GenerateJavaScriptAST {
           vtableInitForMethodMap.put(asgStat, method);
         }
       }
+    }
+
+    private void generateExports(JClassType x, List<JsStatement> globalStmts) {
+
+      String lastProvidedNamespace = "";
+      for (JMethod m : x.getMethods()) {
+        // static functions or constructors may be exported
+        if ((m.isStatic() || m instanceof JConstructor) && m.getExportName() != null) {
+           String exportName = m.getExportName();
+           if ("".equals(exportName)) {
+             exportName = x.getEnclosingType().getName() + "." + x.getShortName();
+           }
+          Pair<String, String> exportNamespacePair = getExportNamespace(exportName);
+          if (!lastProvidedNamespace.equals(exportNamespacePair.getLeft())) {
+            JsName provideFunc = indexedFunctions.get("SeedUtil.provide").getName();
+            JsInvocation provideCall = new JsInvocation(x.getSourceInfo());
+            provideCall.setQualifier(provideFunc.makeRef(x.getSourceInfo()));
+            provideCall.getArguments().add(new JsStringLiteral(x.getSourceInfo(),
+                exportNamespacePair.getLeft()));
+            JsExprStmt provideStat = createAssignment(globalTemp.makeRef(x.getSourceInfo()),
+                provideCall).makeStmt();
+            globalStmts.add(provideStat);
+            lastProvidedNamespace = exportNamespacePair.getLeft();
+          }
+          JsNameRef leaf = new JsNameRef(x.getSourceInfo(), exportNamespacePair.getRight());
+          leaf.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+          JsExprStmt astStat = new JsExprStmt(x.getSourceInfo(),
+               createAssignment(leaf,
+                   names.get(m).makeRef(m.getSourceInfo())));
+          globalStmts.add(astStat);
+        }
+      }
+    }
+
+    /**
+     * Returns a pair of namespace and leaf name.
+     */
+    private Pair<String, String> getExportNamespace(String exportName) {
+      String[] parts = exportName.split("\\.");
+      StringBuffer sb = new StringBuffer();
+      for (int i = 0; i < parts.length - 1; i++) {
+        if (i != 0) {
+          sb.append('.');
+        }
+        sb.append(parts[i]);
+      }
+      return Pair.create(sb.toString(), parts[parts.length -1]);
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {

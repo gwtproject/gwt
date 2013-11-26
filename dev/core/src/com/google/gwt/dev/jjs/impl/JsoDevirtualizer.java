@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -89,16 +90,24 @@ public class JsoDevirtualizer {
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
+
       if (!mightBeJsoMethod(method)) {
         return;
       }
+
       JType instanceType = x.getInstance().getType();
+
+      if (instanceType instanceof JInterfaceType) {
+        if (((JInterfaceType) instanceType).isJsInterface()) {
+          return;
+        }
+      }
+
       // If the instance can't possibly be a JSO, don't devirtualize the call.
       if (instanceType != program.getTypeJavaLangObject()
           && !program.typeOracle.canBeJavaScriptObject(instanceType)) {
         return;
       }
-
       ensureDevirtualVersionExists(method);
 
       // Replaces this virtual method call with a static call to a devirtual version of the method.

@@ -48,7 +48,7 @@ public class SeedUtil {
         seed = @com.google.gwt.lang.SeedUtil::seedTable[id] = function() {
         };
       }
-      _ = seed.prototype = (superSeed < 0) ? {}
+      _ = seed.prototype = typeof(superSeed) != 'number' ? Object.create(superSeed.prototype) : (superSeed < 0) ? {}
           : @com.google.gwt.lang.SeedUtil::newSeed(I)(superSeed);
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
     }
@@ -66,5 +66,33 @@ public class SeedUtil {
    */
   public static native JavaScriptObject newSeed(int id) /*-{
     return new (@com.google.gwt.lang.SeedUtil::seedTable[id]);
+  }-*/;
+
+  public static native JavaScriptObject provide(JavaScriptObject namespace) /*-{
+    // borrowed from Closure's base.js
+    var parts = namespace.split('.');
+    var cur = $wnd;
+
+    // Internet Explorer exhibits strange behavior when throwing errors from
+    // methods externed in this manner.  See the testExportSymbolExceptions in
+    // base_test.html for an example.
+    if (!(parts[0] in cur) && cur.execScript) {
+      cur.execScript('var ' + parts[0]);
+    }
+
+    // Certain browsers cannot parse code in the form for((a in b); c;);
+    // This pattern is produced by the JSCompiler when it collapses the
+    // statement above into the conditional loop below. To prevent this from
+    // happening, use a for-loop and reserve the init logic as below.
+
+    // Parentheses added to eliminate strict JS warning in Firefox.
+    for (var part; parts.length && (part = parts.shift());) {
+      if (cur[part]) {
+        cur = cur[part];
+      } else {
+        cur = cur[part] = {};
+      }
+    }
+    return cur;
   }-*/;
 }

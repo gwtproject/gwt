@@ -40,6 +40,7 @@ import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap;
 import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.ArrayList;
@@ -565,8 +566,8 @@ public class CastNormalizer {
       assert (toType == toType.getUnderlyingType());
       if (program.typeOracle.canTriviallyCast(argType, toType)
       // don't depend on type-tightener having run
-          || (program.typeOracle.isEffectivelyJavaScriptObject(argType) && program.typeOracle
-              .isEffectivelyJavaScriptObject(toType))) {
+          || (program.typeOracle.willCrossCastLikeJso(argType) && program.typeOracle
+              .willCrossCastLikeJso(toType))) {
         // trivially true if non-null; replace with a null test
         JNullLiteral nullLit = program.getLiteralNull();
         JBinaryOperation eq =
@@ -576,18 +577,32 @@ public class CastNormalizer {
       } else {
         JMethod method;
         boolean isJsoCast = false;
+        boolean isJsInterfaceCast = false;
+        // TODO(cromwellian) fully deal with JSO concrete implements of
+        // JsInterface
         if (program.typeOracle.isDualJsoInterface(toType)) {
           method = program.getIndexedMethod("Cast.instanceOfOrJso");
-        } else if (program.typeOracle.isEffectivelyJavaScriptObject(toType)) {
+        } else if (program.typeOracle.willCrossCastLikeJso(toType)) {
           isJsoCast = true;
           method = program.getIndexedMethod("Cast.instanceOfJso");
         } else {
-          method = program.getIndexedMethod("Cast.instanceOf");
+          // a real castableTypeMap check or JS prototype check
+          if (program.typeOracle.isOrExtendsJsInterface(toType, true)) {
+            method = program.getIndexedMethod("Cast.instanceOfJsInterface");
+            isJsInterfaceCast = true;
+          } else {
+            method = program.getIndexedMethod("Cast.instanceOf");
+          }
         }
         JMethodCall call = new JMethodCall(x.getSourceInfo(), null, method);
         call.addArg(x.getExpr());
         if (!isJsoCast) {
           call.addArg(new JsQueryType(x.getSourceInfo(), toType, queryIdsByType.get(toType)));
+        }
+        if (isJsInterfaceCast) {
+          call.addArg(program.getLiteralString(x.getSourceInfo(),
+              program.typeOracle.getNearestJsInterface(toType,
+                  true).getJsPrototype()));
         }
         ctx.replaceMe(call);
       }

@@ -723,6 +723,9 @@ public class UnifyAst {
       if (t instanceof JClassType && isJso((JClassType) t)) {
         instantiate(t);
       }
+      if (t instanceof JInterfaceType && ((JInterfaceType) t).isJsInterface()) {
+	      instantiate(t);
+      }
     }
   }
 
@@ -927,7 +930,31 @@ public class UnifyAst {
     if (type == null) {
       return false;
     }
-    return type == program.getJavaScriptObject() || isJso(type.getSuperClass());
+    boolean isJso = type == program.getJavaScriptObject() || isJso(type.getSuperClass());
+    if (isJso) {
+      return true;
+    }
+
+    // if any of the superinterfaces as JsInterfaces, we consider this effectively a JSO
+    // for instantiability purposes
+    for (JInterfaceType intf : type.getImplements()) {
+      if (isJsInterface(intf)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isJsInterface(JInterfaceType intf) {
+    if (intf.isJsInterface()) {
+      return true;
+    }
+    for (JInterfaceType subIntf : intf.getImplements()) {
+      if (isJsInterface(subIntf)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

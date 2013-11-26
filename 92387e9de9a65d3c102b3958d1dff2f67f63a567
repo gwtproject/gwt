@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "63dba606_f64ff84b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-26T20:57:48Z",
+      "side": 1,
+      "message": "Are JSON soyc reports compatible with the closure compiler? If they aren\u0027t then maybe we should do this check in both cases.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0394aafd_bd007f5c",
         "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
         "patchSetId": 12

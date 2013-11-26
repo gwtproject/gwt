@@ -16,24 +16,76 @@
 package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.core.client.js.JsInterface;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * HelloWorld application.
  */
 public class Hello implements EntryPoint {
 
-  public void onModuleLoad() {
-    Button b = new Button("Click me", new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        Window.alert("Hello, AJAX");
-      }
-    });
-
-    RootPanel.get().add(b);
+  @JsInterface(prototype = "HTMLElement")
+  public interface HTMLElement {
+    void setAttribute(String atr, String value);
   }
+
+  @JsInterface
+  public interface GoogleMap extends HTMLElement {}
+
+
+
+  @JsInterface
+  interface MyAnchor{}
+
+  @JsInterface
+  interface BaseInter {
+    int m();
+  }
+  @JsInterface(prototype = "HTMLButtonElement")
+  interface Button {
+    void click();
+  }
+
+  @JsInterface
+  interface SomeCallback {
+    void callbackA();
+  }
+  static class Base implements BaseInter {
+    public int m() {
+      return 42;
+    }
+  }
+
+  static class Child extends Base implements SomeCallback {
+
+    @Override
+    public void callbackA() {
+      Window.alert("foo");
+    }
+  }
+
+  public void onModuleLoad() {
+    Button b = (Button) foo();
+    b.click();
+//    b.toString();
+    register(new Child());
+
+    MyAnchor map = abc(); // Fails here w/ CCE
+    Window.alert("" + map);
+
+    GoogleMap map2 = abc();
+    map2.setAttribute("style","height:400px; display:block");
+  }
+
+  public static native Object foo() /*-{
+    return $doc.createElement("button");
+  }-*/;
+
+  public static native void register(Base e) /*-{
+    $wnd.__r = e;
+  }-*/;
+
+  private static native <T> T abc() /*-{
+      return $doc.createElement("a");
+  }-*/;
 }

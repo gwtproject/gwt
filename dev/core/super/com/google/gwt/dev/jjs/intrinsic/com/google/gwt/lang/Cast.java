@@ -78,8 +78,22 @@ final class Cast {
     return src;
   }
 
+  /**
+   * A dynamic cast that optionally checks for JsInterface prototypes.
+   */
+  static Object dynamicCastWithPrototype(Object src, int dstId, String jsPrototype) {
+    if (src != null && !canCastUnsafe(src, dstId) && !jsInstanceOf(src, jsPrototype)) {
+      throw new ClassCastException();
+    }
+    return src;
+  }
+
   static boolean instanceOf(Object src, int dstId) {
     return (src != null) && canCast(src, dstId);
+  }
+
+  static boolean instanceOfJsInterface(Object src, int dstId, String proto) {
+    return instanceOf(src, dstId) || jsInstanceOf(src, proto);
   }
 
   static boolean instanceOfJso(Object src) {
@@ -126,6 +140,10 @@ final class Cast {
 
   static native boolean jsEquals(Object a, Object b) /*-{
     return a == b;
+  }-*/;
+
+  static native boolean jsInstanceOf(Object a, String b) /*-{
+    return a instanceof $wnd[b];
   }-*/;
 
   static native boolean jsNotEquals(Object a, Object b) /*-{

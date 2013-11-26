@@ -49,6 +49,46 @@ import java.util.Set;
  */
 public class JProgram extends JNode {
 
+  public JMethod getSingleAbstractMethod(JDeclaredType type) {
+    if (type instanceof JClassType) {
+      for (JInterfaceType intf : ((JClassType) type).getImplements()) {
+        JMethod samMethod = getSingleAbstractMethod(intf);
+        if (samMethod != null) {
+          return samMethod;
+        }
+      }
+
+      JClassType superType = type.getSuperClass();
+      JMethod samMethod = getSingleAbstractMethod(superType);
+      if (samMethod != null) {
+        return samMethod;
+      }
+    }
+
+    if (type instanceof JInterfaceType) {
+      JMethod samMethod = null;
+      boolean moreThanOne = false;
+      for (JMethod meth : type.getMethods()) {
+        if (meth.isAbstract()) {
+          if (samMethod == null) {
+            samMethod = meth;
+          } else {
+            moreThanOne = true;
+          }
+        }
+      }
+      if (!moreThanOne && samMethod != null) {
+        return samMethod;
+      }
+
+      for (JInterfaceType superIntf : ((JInterfaceType) type).getImplements()) {
+        return getSingleAbstractMethod(superIntf);
+      }
+    }
+
+    return null;
+  }
+
   private static final class ArrayTypeComparator implements Comparator<JArrayType>, Serializable {
     public int compare(JArrayType o1, JArrayType o2) {
       int comp = o1.getDims() - o2.getDims();

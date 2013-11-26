@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0394aafd_fdf60748",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-26T19:32:09Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0394aafd_9d034369",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-26T19:32:09Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0394aafd_bd007f5c",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-26T19:32:09Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

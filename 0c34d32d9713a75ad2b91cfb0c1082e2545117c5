@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ed03988_bab3ef7d",
+        "filename": "user/src/com/google/gwt/resources/client/impl/ImageResourcePrototype.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-11-26T00:02:00Z",
+      "side": 1,
+      "message": "Mark as experimental and subject to change so we\u0027re not stuck with this API if we want to change it for 3.0?",
+      "revId": "0c34d32d9713a75ad2b91cfb0c1082e2545117c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

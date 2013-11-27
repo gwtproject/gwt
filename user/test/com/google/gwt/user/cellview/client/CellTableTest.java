@@ -26,6 +26,9 @@ import com.google.gwt.dom.client.TableSectionElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.cellview.client.CellTable.Resources;
 import com.google.gwt.user.cellview.client.CellTable.Style;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Tests for {@link CellTable}.
@@ -298,6 +301,36 @@ public class CellTableTest extends AbstractCellTableTestBase<CellTable<String>> 
     table.getPresenter().flush();
     assertEquals("0px", col1.getStyle().getWidth());
     assertEquals("none", col1.getStyle().getDisplay().toLowerCase());
+  }
+
+  public void testEmptyTableWidgetAttachDetach() {
+    class AttachDetachAwareWidget extends Widget {
+      int attachCount = 0;
+      int detachCount = 0;
+
+      public AttachDetachAwareWidget() {
+        setElement(DOM.createAnchor());
+      }
+
+      @Override
+      protected void onAttach() {
+        attachCount++;
+      }
+
+      @Override
+      protected void onDetach() {
+        detachCount++;
+      }
+    }
+
+    AttachDetachAwareWidget widget = new AttachDetachAwareWidget();
+    CellTable<String> table = createAbstractHasData(new TextCell());
+    table.setEmptyTableWidget(widget);
+    assertTrue(widget.attachCount == 0);
+    RootPanel.get().add(table);
+    RootPanel.get().remove(table);
+    assertTrue(widget.attachCount > 0);
+    assertTrue(widget.detachCount > 0);
   }
 
   @Override

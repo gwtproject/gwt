@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "83bfba8b_49b18113",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2013-11-27T12:28:12Z",
+      "side": 1,
+      "message": "You could just keep one count and assert equals 1 here then assert equals 0 after the remove.",
+      "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_4aedf731",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 4

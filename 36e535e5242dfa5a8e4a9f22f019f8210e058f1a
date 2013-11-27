@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63dba606_ff734bbe",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T01:30:40Z",
+      "side": 1,
+      "message": "PrivateJsObjectImpl and provide accessors instead?\n\n(see my comments on other patch)",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_ff4fcb4b",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T01:30:40Z",
+      "side": 1,
+      "message": "why do we need the dynamic check?",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_7fb75be1",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T01:30:40Z",
+      "side": 1,
+      "message": "It looks like this is from MDN. It would be good to preserve the reference that was on the top of code.",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_5f9b7760",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T01:30:40Z",
+      "side": 1,
+      "message": "Looking at the code, do we still need all these workarounds for IE8 in our internal use cases?",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_9fe1dfee",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T01:30:40Z",
+      "side": 1,
+      "message": "We can get rid of the class hierarchy, xml and deferred binding:\n\n private UserAgent ua \u003d GWT.create(UserAgent.class);\n\n public static JsArrayString getKeys(JavaScriptObject object) {\n   return ua.getCompileTimeValue().equals(\"ie8\") ? getKeysPolyfill(object) : getKeysNative(object);\n }\n\nThis code should get rid of the unnecessary polyfill.",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_a3c7fad3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_a495bae0",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_e474221b",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "can be final",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_4382c67c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_e474221b",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_6387c28b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_0472862c",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_24f0ea4d",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "typeReference is only set in the from() method. To make it final, you could add another constructor and call it.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_e3409277",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/ClassDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_24f0ea4d",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_86144c5c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_c4aebe13",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_04a5a631",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
         "patchSetId": 12
@@ -115,6 +205,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "Can these be final?",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_a62628cb",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_04a5a631",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_065dbc29",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_24beaa4b",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_e49502b2",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
         "patchSetId": 12
@@ -149,6 +275,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "American English is \"dependent\" and British English is \"dependant\". I think think we should use \"dependent\" for consistency.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_86c52c77",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_e49502b2",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_06d29c43",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_445f2e5a",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_042a86a9",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
         "patchSetId": 12
@@ -183,6 +345,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "Move this above the Deserializer class.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_46165433",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptorJsonTranslator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "The inner class was moved to the top.",
+      "parentUuid": "63dba606_042a86a9",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_8929bd9d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_3f06b335",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_bf3f03c9",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
         "patchSetId": 12
@@ -234,6 +432,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "Instead of an array of arrays, this could be two arrays, one for fragSizes and the other for strAndVarSizes.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_49550514",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_bf3f03c9",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -257,6 +473,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_695a4145",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_7f319b0a",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_1f33af2c",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
         "patchSetId": 12
@@ -268,6 +502,24 @@
       "writtenOn": "2013-11-27T03:00:45Z",
       "side": 1,
       "message": "looks like this can be final. Also, perhaps the type should be passed to the constructor and made final.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_29544915",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MemberDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_1f33af2c",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -291,6 +543,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_0654dc8d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/MethodDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_3f38f303",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_df2c47c8",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 12
@@ -308,6 +578,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_697fa190",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "Not really, the method condense change them to compact packages, for example com { google { gwt ..} } into com.google.gwt { ..}",
+      "parentUuid": "63dba606_df2c47c8",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_f64ff84b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 12
@@ -319,6 +607,24 @@
       "writtenOn": "2013-11-26T20:57:48Z",
       "side": 1,
       "message": "Are JSON soyc reports compatible with the closure compiler? If they aren\u0027t then maybe we should do this check in both cases.",
+      "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2397ee03_6107b034",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure what \u0027compatible\u0027 means. But based on our previous conversation, probably it is not compatible. Fixed in the next patch.",
+      "parentUuid": "63dba606_f64ff84b",
       "revId": "92387e9de9a65d3c102b3958d1dff2f67f63a567",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

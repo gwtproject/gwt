@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83bfba8b_09d7098d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityRecorder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-11-27T19:59:59Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "595404661c554bb5a04242e920360f6f7c6087dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

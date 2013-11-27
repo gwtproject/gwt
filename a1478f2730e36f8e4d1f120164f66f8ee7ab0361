@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "63dba606_e48bc2c0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:05Z",
+      "side": 1,
+      "message": "Actually, these options are not mutually exclusive. The provided test enables both options to compare them.\n\nI\u0027ll add a TODO comment about considering a format-like flag later.",
+      "parentUuid": "63dba606_c4f6be76",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_7466ad84",
         "filename": "dev/core/test/com/google/gwt/dev/PrecompileTaskArgProcessorTest.java",
         "patchSetId": 11
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "I would say informative (IMHO redundancy is not a problem if the meaning is better conveyed ).\n\nWe should also have consistency consistency , (at least the enable/disable part should be present).",
       "parentUuid": "fe8bada0_71e340f5",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_640fd28b",
+        "filename": "dev/core/test/com/google/gwt/dev/PrecompileTaskArgProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-11-27T19:57:05Z",
+      "side": 1,
+      "message": "Ok, \"enabled\" will be added in the next patch.",
+      "parentUuid": "63dba606_e418a201",
       "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "63dba606_c4cc7e71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T00:35:40Z",
+      "side": 1,
+      "message": "Can you update the commit msg?\n\nThe first line is special and should summarize the whole patch.",
+      "parentUuid": "be6e95ae_a2ae6069",
+      "revId": "4812458f537163302f94493734ac74040366b56a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be6e95ae_825324c9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2013-11-25T21:03:08Z",
       "side": 1,
       "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "4812458f537163302f94493734ac74040366b56a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_e47e62c8",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-11-27T00:35:40Z",
+      "side": 1,
+      "message": "let\u0027s move doAttachChildren() call here for the correct order and update the docs (i.e. Call doAttachChildren() and onLoad() directly...)",
       "revId": "4812458f537163302f94493734ac74040366b56a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

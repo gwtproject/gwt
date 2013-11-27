@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_a3237ad3",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T18:27:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_6adebb82",
+      "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83bfba8b_49b18113",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-27T12:28:12Z",
       "side": 1,
       "message": "You could just keep one count and assert equals 1 here then assert equals 0 after the remove.",
+      "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_06013c1c",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T18:27:45Z",
+      "side": 1,
+      "message": "Yes. But I found it\u0027s better to add test of multiple attach / detach. Two count number could be handy. Test case modified.",
+      "parentUuid": "83bfba8b_49b18113",
       "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_e6ee602d",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T18:27:45Z",
+      "side": 1,
+      "message": "Sure. Modified",
+      "parentUuid": "63dba606_4aedf731",
+      "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_eaf14b11",
         "filename": "user/test/com/google/gwt/user/client/ui/CompositeTest.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-27T03:05:45Z",
       "side": 1,
       "message": "assertEquals(1, c.doAttachChildrenCount);",
+      "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_a611486b",
+        "filename": "user/test/com/google/gwt/user/client/ui/CompositeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T18:27:45Z",
+      "side": 1,
+      "message": "Done\n\nAnd also test multiple attach / detach case",
+      "parentUuid": "63dba606_eaf14b11",
       "revId": "87481b8400443d72272d90e72f5d0fabf3681290",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

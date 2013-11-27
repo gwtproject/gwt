@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "63dba606_dff1a711",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T01:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_c4cc7e71",
+      "revId": "4812458f537163302f94493734ac74040366b56a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be6e95ae_825324c9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2013-11-27T00:35:40Z",
       "side": 1,
       "message": "let\u0027s move doAttachChildren() call here for the correct order and update the docs (i.e. Call doAttachChildren() and onLoad() directly...)",
+      "revId": "4812458f537163302f94493734ac74040366b56a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_7f0c3b55",
+        "filename": "user/src/com/google/gwt/user/client/ui/Composite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 6365
+      },
+      "writtenOn": "2013-11-27T01:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dba606_e47e62c8",
       "revId": "4812458f537163302f94493734ac74040366b56a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

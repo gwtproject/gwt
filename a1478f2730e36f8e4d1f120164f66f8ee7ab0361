@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "63dba606_2ae8b322",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionJsonSoyc.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-11-27T03:08:55Z",
+      "side": 1,
+      "message": "It might be nice to generate both kinds of reports at the same time (for comparison). However, I don\u0027t think this will work based on the code in JavaToJavaScriptCompiler.\n\nSo, to avoid user confusion we would need a check that both flags are not turned on at the same time. The advantage of a flag to choose the format is that it is clearer that you can only do one or the other.",
+      "parentUuid": "63dba606_c4f6be76",
+      "revId": "a1478f2730e36f8e4d1f120164f66f8ee7ab0361",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_7466ad84",
         "filename": "dev/core/test/com/google/gwt/dev/PrecompileTaskArgProcessorTest.java",
         "patchSetId": 11

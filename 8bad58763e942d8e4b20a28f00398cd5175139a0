@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63dba606_e443c281",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-27T00:38:56Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler (or as the go guys would say more idiomatic) to append directly to a String? or to a StringBuilder if performance is an issue.",
+      "revId": "8bad58763e942d8e4b20a28f00398cd5175139a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63dba606_24330a2d",
+        "filename": "user/test/com/google/gwt/core/ext/test/GeneratorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-11-27T00:38:56Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "8bad58763e942d8e4b20a28f00398cd5175139a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

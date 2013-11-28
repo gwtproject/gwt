@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_d78bccc0",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-28T00:48:19Z",
+      "side": 1,
+      "message": "If we are running in an environment where this has already been polyfilled no need not to use it.\n\n(also see my comment below on polyfills)",
+      "parentUuid": "63dba606_ff4fcb4b",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_7fb75be1",
         "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-11-27T01:30:40Z",
       "side": 1,
       "message": "It looks like this is from MDN. It would be good to preserve the reference that was on the top of code.",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_979554e1",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-28T00:48:19Z",
+      "side": 1,
+      "message": "This is somewhat similar to MDN, let me put in a link.",
+      "parentUuid": "63dba606_7fb75be1",
       "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "c3a45289_779d380a",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-28T00:48:19Z",
+      "side": 1,
+      "message": "IE8 actually suffers from the enum bug (there is a test for that) that would start failing without this for IE8.\n\nThat said I think we need to start writing real polyfills in GWT that work with almost any browser instead of thinking of specific browsers.\nI think even with the new JsInterop we need a complete polyfill.\nWe should not just aim to make stuff like this work with all current supported browsers, but follow best practices form the rest of the web community when it comes to such polyfills. Since this is not widget code people might actually end up using some cross compiled java in a browser that we do not support in terms of UI.",
+      "parentUuid": "63dba606_5f9b7760",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dba606_9fe1dfee",
         "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2013-11-27T01:30:40Z",
       "side": 1,
       "message": "We can get rid of the class hierarchy, xml and deferred binding:\n\n private UserAgent ua \u003d GWT.create(UserAgent.class);\n\n public static JsArrayString getKeys(JavaScriptObject object) {\n   return ua.getCompileTimeValue().equals(\"ie8\") ? getKeysPolyfill(object) : getKeysNative(object);\n }\n\nThis code should get rid of the unnecessary polyfill.",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_f78848c6",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-28T00:48:19Z",
+      "side": 1,
+      "message": "I think we should not make core directly depend on user. This is why I did not consider it.",
+      "parentUuid": "63dba606_9fe1dfee",
       "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

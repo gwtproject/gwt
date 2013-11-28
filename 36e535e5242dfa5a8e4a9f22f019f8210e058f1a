@@ -228,6 +228,24 @@
       "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a45289_92424254",
+        "filename": "user/src/com/google/gwt/core/client/impl/JsObjects.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2013-11-28T02:22:45Z",
+      "side": 1,
+      "message": "That is what I wanted to do, the problem is that core does not have user agent and some people only include core. So I needed to make it work by default on every browser and if I would use the native implementation first it would not work for IE8.",
+      "parentUuid": "c3a45289_576b5c0a",
+      "revId": "36e535e5242dfa5a8e4a9f22f019f8210e058f1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

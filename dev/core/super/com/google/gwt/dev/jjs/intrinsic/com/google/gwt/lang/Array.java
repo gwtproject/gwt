@@ -122,6 +122,13 @@ public final class Array {
   }
 
   /**
+   * Returns the length of an array via Javascript.
+   */
+  public static native int getArrayLength(Object array) /*-{
+    return array.length;
+  }-*/;
+
+  /**
    * Creates an array like "new T[a][b][c][][]" by passing in a native JSON
    * array, [a, b, c].
    * 

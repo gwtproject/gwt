@@ -385,6 +385,119 @@ public class Arrays {
     return -low - 1;
   }
 
+  public static boolean[] copyOf(boolean[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static byte[] copyOf(byte[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static char[] copyOf(char[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static double[] copyOf(double[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static float[] copyOf(float[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static int[] copyOf(int[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static long[] copyOf(long[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  public static short[] copyOf(short[] original, int newLength) {
+    checkArraySize(newLength);
+    return copyOfRange(original, 0, newLength);
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> T[] copyOf(T[] original, int newLength) {
+    if (original == null) {
+      throw new NullPointerException();
+    }
+    checkArraySize(newLength);
+    T[] copy = Array.createFrom(original, newLength);
+    copyOfRange(original, copy, 0, newLength);
+    return copy;
+  }
+
+  public static boolean[] copyOfRange(boolean[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    boolean[] copy = new boolean[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static byte[] copyOfRange(byte[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    byte[] copy = new byte[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static char[] copyOfRange(char[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    char[] copy = new char[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static double[] copyOfRange(double[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    double[] copy = new double[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static float[] copyOfRange(float[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    float[] copy = new float[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static int[] copyOfRange(int[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    int[] copy = new int[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static long[] copyOfRange(long[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    long[] copy = new long[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  public static short[] copyOfRange(short[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    short[] copy = new short[to - from];
+    copyOfRange(original, copy, from, to);
+    return copy;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> T[] copyOfRange(T[] original, int from, int to) {
+    checkArrayRange(original, from, to);
+    return Array.cloneSubrange(original, from, to);
+  }
+
   public static boolean deepEquals(Object[] a1, Object[] a2) {
     if (a1 == a2) {
       return true;
@@ -1084,6 +1197,26 @@ public class Arrays {
     }
     b.append("]");
     return b.toString();
+  }
+
+  private static void checkArrayRange(Object array, int from, int to) {
+    if (array == null) {
+      throw new NullPointerException();
+    }
+    if (from > to) {
+      throw new IllegalArgumentException(from + " > " + to);
+    }
+  }
+
+  private static void checkArraySize(int size) {
+    if (size < 0) {
+      throw new NegativeArraySizeException();
+    }
+  }
+
+  private static void copyOfRange(Object src, Object dest, int from, int to) {
+    int length = Math.min(Array.getArrayLength(src) - from, to - from);
+    System.arraycopy(src, from, dest, 0, length);
   }
 
   /**

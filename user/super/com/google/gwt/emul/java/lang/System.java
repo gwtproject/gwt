@@ -16,6 +16,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.impl.Impl;
+import com.google.gwt.lang.Array;
 
 import java.io.PrintStream;
 
@@ -55,8 +56,8 @@ public final class System {
     if (!arrayTypeMatch(srcComp, destComp)) {
       throw new ArrayStoreException("Array types must match");
     }
-    int srclen = getArrayLength(src);
-    int destlen = getArrayLength(dest);
+    int srclen = Array.getArrayLength(src);
+    int destlen = Array.getArrayLength(dest);
     if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen
         || destOfs + len > destlen) {
       throw new IndexOutOfBoundsException();
@@ -131,13 +132,6 @@ public final class System {
 
   private static native double currentTimeMillis0() /*-{
     return (new Date()).getTime();
-  }-*/;
-
-  /**
-   * Returns the length of an array via Javascript.
-   */
-  private static native int getArrayLength(Object array) /*-{
-    return array.length;
   }-*/;
 
   /**

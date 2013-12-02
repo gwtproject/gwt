@@ -2,6 +2,142 @@
   "comments": [
     {
       "key": {
+        "uuid": "4325c2ed_cd75dde3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "\"Add -XenableJsonSoyc which outputs soyc reports in a new format.\"\n\n(Migrate is not the right word because we aren\u0027t updating any old code to use the new reports in this patch.)",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_2db11915",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "final?",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_4d256d93",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "I don\u0027t understand this notation. Could you expand this comment?",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_ad5229f7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/DependencyGraphRecorder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "Need to document what the key is. It looks like it is JDeclaredType.getName() which is the same as ClassDescriptor.getFullName(), which is the fully qualified binary name. But the invariant isn\u0027t that obvious.",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_adc1891c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/EntityDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "Maybe give an example of what this is for a class, method, or field, and similarly for getFullName().\n\nFor a class it looks like this is based on JDeclaredType.getName() which is the \"binary name\", so for an inner class would be something like Foo$Bar.",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_4d80cd97",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "javadoc",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_8d5ac5b5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "It looks like we condense the child packages multiple times, because the recursive call does it, and then after it returns we do it again.\n\nInstead of a recursive call, this could be a while loop, so we only condense each child once.",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_ad9509b3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2013-12-02T20:40:20Z",
+      "side": 1,
+      "message": "It looks like we do extra work due to the recursion. Each class is added to a map multiple times, once for each ancestor package.\n\nIt seems like it would be clearer and more efficient to do this non-recursively:\n\n  PackageDescriptor top \u003d ...\n  for each class:\n    p \u003d top;\n    for (name in class.getPackage().split(\".\")):\n      p \u003d p.createOrGetChildPackage(name);\n    p.addClass(class); \n  top.condense();",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4325c2ed_edc54176",
         "filename": "dev/core/src/com/google/gwt/dev/util/Util.java",
         "patchSetId": 15

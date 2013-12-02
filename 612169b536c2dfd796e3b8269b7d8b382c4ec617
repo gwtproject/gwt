@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "4325c2ed_0a019b95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-12-02T18:35:02Z",
+      "side": 1,
+      "message": "There is a potential mismatch between here and the places where interfaces of string are explicitly named. I would add a test to ensure that String implements only CharSequence and Comparable (in addition to marker interfaces) for the unlikely case that future Java versions add another interface to string.",
+      "revId": "612169b536c2dfd796e3b8269b7d8b382c4ec617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ed03988_5a9473b2",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/SeedUtil.java",
         "patchSetId": 2

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4325c2ed_5b388304",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1952,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-12-02T23:43:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4325c2ed_bbea5f90",
+      "revId": "c53b0e2f2d63b3a9d9f17bdffce1ed729f149734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4325c2ed_1b01eb95",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-02T23:22:20Z",
       "side": 1,
       "message": "make it an anonymous function or add a var to restrict its scope for the same reason as before.",
+      "revId": "c53b0e2f2d63b3a9d9f17bdffce1ed729f149734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_9b295bb7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2013-12-02T23:43:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4325c2ed_1b01eb95",
       "revId": "c53b0e2f2d63b3a9d9f17bdffce1ed729f149734",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

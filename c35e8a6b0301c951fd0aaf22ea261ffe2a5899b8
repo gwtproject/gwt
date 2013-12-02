@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4325c2ed_ed4c215a",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-02T19:29:06Z",
+      "side": 1,
+      "message": "Perhaps extract a method for the recurring pattern? (e.g. getLengthFromRange)",
+      "revId": "c35e8a6b0301c951fd0aaf22ea261ffe2a5899b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

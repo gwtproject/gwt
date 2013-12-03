@@ -20,16 +20,17 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonObject;
-import com.google.gwt.thirdparty.org.eclipse.jetty.http.MimeTypes;
-import com.google.gwt.thirdparty.org.eclipse.jetty.io.Buffer;
-import com.google.gwt.thirdparty.org.eclipse.jetty.server.AbstractHttpConnection;
-import com.google.gwt.thirdparty.org.eclipse.jetty.server.Request;
-import com.google.gwt.thirdparty.org.eclipse.jetty.server.Server;
-import com.google.gwt.thirdparty.org.eclipse.jetty.server.nio.SelectChannelConnector;
-import com.google.gwt.thirdparty.org.eclipse.jetty.servlet.FilterHolder;
-import com.google.gwt.thirdparty.org.eclipse.jetty.servlet.ServletContextHandler;
-import com.google.gwt.thirdparty.org.eclipse.jetty.servlet.ServletHolder;
-import com.google.gwt.thirdparty.org.eclipse.jetty.servlets.GzipFilter;
+import com.google.gwt.thirdparty.org.mortbay.io.Buffer;
+import com.google.gwt.thirdparty.org.mortbay.jetty.HttpConnection;
+import com.google.gwt.thirdparty.org.mortbay.jetty.MimeTypes;
+import com.google.gwt.thirdparty.org.mortbay.jetty.Request;
+import com.google.gwt.thirdparty.org.mortbay.jetty.Server;
+import com.google.gwt.thirdparty.org.mortbay.jetty.handler.AbstractHandler;
+import com.google.gwt.thirdparty.org.mortbay.jetty.nio.SelectChannelConnector;
+import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.FilterHolder;
+import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.ServletHandler;
+import com.google.gwt.thirdparty.org.mortbay.jetty.servlet.ServletHolder;
+import com.google.gwt.thirdparty.org.mortbay.servlet.GzipFilter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,14 +39,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
-import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -116,17 +115,17 @@ public class WebServer {
     Server server = new Server();
     server.addConnector(connector);
 
-    ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-    handler.setContextPath("/");
-    handler.addServlet(new ServletHolder(new HttpServlet() {
+    ServletHandler servletHandler = new ServletHandler();
+    servletHandler.addServletWithMapping(new ServletHolder(new HttpServlet() {
       @Override
       protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
         handleRequest(request.getPathInfo(), request, response);
       }
     }), "/*");
-    handler.addFilter(GzipFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
-    server.setHandler(handler);
+    servletHandler.addFilterWithMapping(new FilterHolder(GzipFilter.class),
+        "/*", AbstractHandler.DEFAULT);
+    server.addHandler(servletHandler);
     try {
       server.start();
     } catch (Exception e) {
@@ -506,7 +505,7 @@ public class WebServer {
 
   private static void setHandled(HttpServletRequest request) {
     Request baseRequest = (request instanceof Request) ? (Request) request :
-        AbstractHttpConnection.getCurrentConnection().getRequest();
+        HttpConnection.getCurrentConnection().getRequest();
     baseRequest.setHandled(true);
   }
 }

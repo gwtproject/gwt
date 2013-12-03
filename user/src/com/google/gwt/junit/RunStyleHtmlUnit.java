@@ -35,6 +35,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -96,9 +99,28 @@ public class RunStyleHtmlUnit extends RunStyle {
     public void run() {
       WebClient webClient = new WebClient(browser);
       webClient.setAlertHandler(this);
+      // Adding a handler that ignores errors to work-around
+      // https://sourceforge.net/tracker/?func=detail&aid=3090806&group_id=47038&atid=448266
+      webClient.setCssErrorHandler(new ErrorHandler() {
+
+        public void error(CSSParseException exception) {
+          // ignore
+        }
+
+        public void fatalError(CSSParseException exception) {
+          treeLogger.log(TreeLogger.WARN,
+              "CSS fatal error: " + exception.getURI() + " ["
+                  + exception.getLineNumber() + ":"
+                  + exception.getColumnNumber() + "] " + exception.getMessage());
+        }
+
+        public void warning(CSSParseException exception) {
+          // ignore
+        }
+      });
       webClient.setIncorrectnessListener(this);
-      webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-      webClient.getOptions().setThrowExceptionOnScriptError(true);
+      webClient.setThrowExceptionOnFailingStatusCode(false);
+      webClient.setThrowExceptionOnScriptError(true);
       webClient.setOnbeforeunloadHandler(this);
       webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
@@ -215,8 +237,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static Map<String, BrowserVersion> createBrowserMap() {
     Map<String, BrowserVersion> browserMap = new HashMap<String, BrowserVersion>();
     for (BrowserVersion browser : new BrowserVersion[] {
-        BrowserVersion.FIREFOX_17, BrowserVersion.INTERNET_EXPLORER_8,
-        BrowserVersion.INTERNET_EXPLORER_9, BrowserVersion.CHROME}) {
+        BrowserVersion.FIREFOX_3, BrowserVersion.FIREFOX_3_6, BrowserVersion.INTERNET_EXPLORER_6,
+        BrowserVersion.INTERNET_EXPLORER_7}) {
       browserMap.put(browser.getNickname(), browser);
     }
     return Collections.unmodifiableMap(browserMap);
@@ -241,8 +263,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   @Override
   public int initialize(String args) {
     if (args == null || args.length() == 0) {
-      // If no browsers specified, default to Firefox 17.
-      args = "FF17";
+      // If no browsers specified, default to Firefox 3.
+      args = "FF3";
     }
     Set<BrowserVersion> browserSet = new HashSet<BrowserVersion>();
     for (String browserName : args.split(",")) {

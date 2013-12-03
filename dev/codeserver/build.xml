@@ -22,8 +22,8 @@
         <include name="**/*.java"/>
       </fileset>
     </copy>
-    <replace dir="${src}" token="com.google.gwt.thirdparty.org.eclipse.jetty."
-             value="org.eclipse.jetty."/>
+    <replace dir="${src}" token="com.google.gwt.thirdparty.org.mortbay."
+             value="org.mortbay."/>
   </target>
 
   <target name="compile" depends="preprocess">

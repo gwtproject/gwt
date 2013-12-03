@@ -73,8 +73,8 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppContext;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.webapp.WebAppContext;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -606,7 +606,7 @@ public class JUnitShell extends DevMode {
         {
           // Prevent file locking on Windows; pick up file changes.
           getInitParams().put(
-              "org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
+              "org.mortbay.jetty.servlet.Default.useFileMappedBuffer", "false");
 
           // Prefer the parent class loader so that JUnit works.
           setParentLoaderPriority(true);
@@ -1144,9 +1144,10 @@ public class JUnitShell extends DevMode {
       path = '/' + module.getName() + path;
       if (!servletClass.equals(loadedServletsByPath.get(path))) {
         try {
-          wac.addServlet(servletClass, path);
+          Class<?> clazz = wac.loadClass(servletClass);
+          wac.addServlet(clazz, path);
           loadedServletsByPath.put(path, servletClass);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
           getTopLogger().log(
               TreeLogger.WARN,
               "Failed to load servlet class '" + servletClass

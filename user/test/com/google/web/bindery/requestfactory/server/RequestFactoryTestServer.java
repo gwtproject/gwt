@@ -15,15 +15,12 @@
  */
 package com.google.web.bindery.requestfactory.server;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.bio.SocketConnector;
-import org.eclipse.jetty.server.session.SessionHandler;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlets.GzipFilter;
-
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
+import org.mortbay.jetty.Handler;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.bio.SocketConnector;
+import org.mortbay.jetty.servlet.Context;
+import org.mortbay.jetty.servlet.SessionHandler;
+import org.mortbay.servlet.GzipFilter;
 
 /**
  * A utility class for hosting an instance of {@link RequestFactoryServlet}.
@@ -36,15 +33,13 @@ public class RequestFactoryTestServer {
     connector.setPort(9999);
     server.addConnector(connector);
 
-    ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-    handler.setContextPath("/");
-    handler.addServlet(RequestFactoryServlet.class, "/gwtRequest");
-    handler.addFilter(GzipFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
-
+    Context ctx = new Context();
+    ctx.addServlet(RequestFactoryServlet.class, "/gwtRequest");
+    ctx.addFilter(GzipFilter.class, "*", Handler.DEFAULT);
     SessionHandler sessionHandler = new SessionHandler();
     sessionHandler.getSessionManager().setMaxInactiveInterval(5);
-    handler.setSessionHandler(sessionHandler);
-    server.setHandler(handler);
+    ctx.setSessionHandler(sessionHandler);
+    server.addHandler(ctx);
 
     try {
       server.start();

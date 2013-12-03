@@ -15,25 +15,47 @@
  */
 package com.google.gwt.dev.util.arg;
 
+import com.google.gwt.util.tools.Utility;
+
 /**
- * Java source level compatibility constants.
- * Java versions range from 1.0 to 1.7.
- * Versions 1.5, 1.6 and 1.7 are also referred as 5, 6 and 7 respectively.
+ * Java source level compatibility constants. Java versions range from 1.0 to 1.7. Versions 1.6 and
+ * 1.7 are also referred as 6 and 7 respectively.
  *
  * Both names can be used indistinctly.
  */
 public enum SourceLevel {
-  // Source levels must appear in ascending order in order.
+  // Source levels must appear in ascending order for the default setting logic to work.
   JAVA6("1.6", "6"),
   JAVA7("1.7", "7");
 
   /**
    * The default java sourceLevel.
    */
-  public static final SourceLevel DEFAULT_SOURCE_LEVEL = JAVA7;
+  public static final SourceLevel DEFAULT_SOURCE_LEVEL;
 
   private final String stringValue;
   private final String altStringValue;
+
+  static {
+    // If everything fails set default to JAVA7.
+    SourceLevel result = JAVA7;
+    String javaSpecLevel = System.getProperty("java.specification.version");
+
+    try {
+      // Find the first version that is less or equal that javaSpecLevel by iterating in reverse
+      // order.
+      SourceLevel[] sourceLevels = SourceLevel.values();
+      for (int i = sourceLevels.length - 1; i >= 0; i--) {
+        if (Utility.versionCompare(javaSpecLevel, sourceLevels[i].stringValue) <= 0) {
+          // sourceLevel is <= javaSpecLevel, so keep this one.
+          result = sourceLevels[i];
+          break;
+        }
+      }
+    } catch (IllegalArgumentException e) {
+    }
+    DEFAULT_SOURCE_LEVEL = result;
+  }
 
   SourceLevel(String stringValue, String altStringValue) {
     this.stringValue = stringValue;
@@ -60,8 +82,8 @@ public enum SourceLevel {
   }
 
   /**
-   * Returns the SourceLevel given the string or alternate string representation;
-   * returns {@code null} if none is found.
+   * Returns the SourceLevel given the string or alternate string representation; returns {@code
+   * null} if none is found.
    */
   public static SourceLevel fromString(String sourceLevelString) {
     if (sourceLevelString == null) {
@@ -75,5 +97,5 @@ public enum SourceLevel {
     }
     return null;
   }
-
 }
+

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43a86290_af8a394b",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-03T23:10:09Z",
+      "side": 1,
+      "message": "nit: I would probably put this comment after the loop, stating that no match so return Java7.",
+      "revId": "cfad52a3b3b7fdc741ef34e0d44d061f4a364bc3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43a86290_ef944174",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-03T23:10:09Z",
+      "side": 1,
+      "message": "that -\u003e to",
+      "revId": "cfad52a3b3b7fdc741ef34e0d44d061f4a364bc3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43a86290_0f7a65a0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-03T23:10:09Z",
+      "side": 1,
+      "message": "It is good practice to document empty blocks; especially empty catch blocks by briefly explaining why the exception is ok to ignore.",
+      "revId": "cfad52a3b3b7fdc741ef34e0d44d061f4a364bc3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

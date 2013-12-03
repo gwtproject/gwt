@@ -33,6 +33,24 @@
       "revId": "23f7a572a4ee87bf51158418b1ae0797f3cc4047",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4325c2ed_f0ccf170",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/SourceLevel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-12-03T19:28:29Z",
+      "side": 1,
+      "message": "Discussed offline and agreed to refactor into a function.",
+      "parentUuid": "a3267ef6_2d4ab9ea",
+      "revId": "23f7a572a4ee87bf51158418b1ae0797f3cc4047",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

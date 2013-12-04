@@ -247,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "43a86290_ef64417e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-12-04T00:10:03Z",
+      "side": 1,
+      "message": "I am not sure whether condensing is really needed, maybe only the prefix.\n\nI think it would be clearer this way:\n\n if (packages.size() \u003d\u003d 1 \u0026\u0026 classes.size() \u003d\u003d 0) {\n      PackageDescriptor childPackage \u003d packages.get(0);\n     childPackage.condense(); \n      name \u003d (name.equals(DEFAULT_PKG) ? \"\" : name + \".\")  + childPackage.name;\n      longName \u003d childPackage.longName;\n      packages \u003d childPackage.packages;\n      classes \u003d childPackage.classes;\t\n      return;\t\n}",
+      "parentUuid": "a3fd9e74_26e2ce6e",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4325c2ed_ad9509b3",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 15
@@ -276,6 +294,24 @@
       "side": 1,
       "message": "Sorry, but I don\u0027t understand your code very well :-(\nI think, I have to re-formulate it from scratch to avoid recursion. I can merge this method and condense() in an iterative algorithm. It will be more efficient, but I\u0027m not sure it\u0027ll be clearer.",
       "parentUuid": "4325c2ed_ad9509b3",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43a86290_2f14899f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2013-12-04T00:10:03Z",
+      "side": 1,
+      "message": "W.r.t skybrians comments I think skybrian means:\n\n1) add a createOrGetChildPackage(String name) in PackageDescriptor that returns the subpackage with name as its name and creates it if it is not there.\n\n2) rewrite as\nPackageDescriptor top \u003d /* here goes the top (default) package) */\nfor (ClassDescriptor classDescription : classDescriptors)  {\n  PackageDescriptor package \u003d top;\n  for (String name: class.getPackageName().split(\".\")) {\n    // iterate on the package components\n     package \u003d package.createOrGetChildPackage(name);\n  }\n  package.addClass(class);\n}\ntop.condense(); // to get rid of \"empty\" prefixes.",
+      "parentUuid": "4325c2ed_76be3e4c",
       "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

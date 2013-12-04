@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8387ba28_ec11a36a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-04T20:30:52Z",
+      "side": 1,
+      "message": "Yeahp, this will disappear.",
+      "parentUuid": "43a86290_ef3d2142",
+      "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43a86290_af1f99b6",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2013-12-04T00:10:07Z",
       "side": 1,
       "message": "s/ist/its/",
+      "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8387ba28_c97851dc",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-04T20:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a86290_af1f99b6",
       "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8387ba28_e97515e3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-04T20:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a86290_6fc3f1d4",
+      "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43a86290_0f82657b",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 16
@@ -64,6 +118,24 @@
       "writtenOn": "2013-12-04T00:10:07Z",
       "side": 1,
       "message": "Probably should split this function in two to avoid back and forth map creation, insertion and copying:\n\npublic Map\u003c...\u003e getAllClassesByName() {\n  Map\u003cString, ClassDescriptor\u003e map \u003d Maps.newTreeMap();\n  populateAllClassesByName(map);\n}\n\nprivate void populateClassesByName(Map\u003c...\u003e map) {\n   for (ClassDescriptor cls : this.getClasses()) {\n      map.put(cls.getFullName(), cls);\n   }\n\n  for (PackageDescriptor subPkg : this.getPackages()) {\n    subPkg.populateClassesByName(map);\n  }\n}\n\n\nAlso s/subPkg/subPackage/\ns/map/classDescriptorsByName/  (orBy FullName)",
+      "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8387ba28_0950a94b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-04T20:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a86290_0f82657b",
       "revId": "e00a4958713b0ccb0fc188e36979b9a224256e89",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

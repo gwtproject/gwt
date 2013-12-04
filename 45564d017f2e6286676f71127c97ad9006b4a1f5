@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "637c86f1_0bdee180",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-04T20:32:40Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "45564d017f2e6286676f71127c97ad9006b4a1f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

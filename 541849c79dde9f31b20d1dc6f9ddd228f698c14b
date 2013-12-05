@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3cdd6a7_a8af83aa",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerSourceLevel.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T22:09:36Z",
+      "side": 1,
+      "message": "(lulz... even reviewing the CL, I didn\u0027t notice this change until the second pass)",
+      "revId": "541849c79dde9f31b20d1dc6f9ddd228f698c14b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3cdd6a7_28c37372",
+        "filename": "dev/core/test/com/google/gwt/dev/ArgProcessorBaseTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T22:09:36Z",
+      "side": 1,
+      "message": "These should be either \"new String[] { \"-foo\", \"val\" }\" or \"new String[] {\"-foo\", \"val\"}\".  (In particular, there should be a space between [] and {, and there should be a space after { iff there\u0027s a space before }.)",
+      "revId": "541849c79dde9f31b20d1dc6f9ddd228f698c14b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3cdd6a7_88bcc7f0",
+        "filename": "dev/core/test/com/google/gwt/dev/ArgProcessorTestBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T22:09:36Z",
+      "side": 1,
+      "message": "Why get rid of the varargs?",
+      "revId": "541849c79dde9f31b20d1dc6f9ddd228f698c14b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

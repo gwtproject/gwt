@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83ea5aed_f10e888d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_d11384b7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/MemberFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_b1080081",
+        "filename": "dev/core/src/com/google/gwt/dev/DistillerRebindPermutationOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[error] Unused import - java.io.File.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_910dfc90",
+        "filename": "dev/core/src/com/google/gwt/dev/ModuleTabPanel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_7123b808",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/AnnotationProxyFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_5120b4f9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/GeneratorContextBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.arg.SourceLevel.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_311d30be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027\u003c\u003c\u0027",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_111a2cc6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_f1b32884",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsDuplicateFunctionRemover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_d1b82461",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_b1bda04f",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNormalScope.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Iterator.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83ea5aed_91c29ccf",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-05T07:31:58Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "27cb3eb7a50ee725562e27bfe08b394a4f7f7196",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

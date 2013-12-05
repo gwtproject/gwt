@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e3cdd6a7_975866c2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-05T20:12:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a86290_a32c12c7",
+      "revId": "45564d017f2e6286676f71127c97ad9006b4a1f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "637c86f1_0bdee180",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
         "patchSetId": 17
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "e3cdd6a7_77194a03",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-05T20:12:04Z",
+      "side": 1,
+      "message": "Yeahp, that could be a problem. I updated this part and added the default package case to the method from()",
+      "parentUuid": "43a86290_a3433282",
+      "revId": "45564d017f2e6286676f71127c97ad9006b4a1f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43a86290_8338ee05",
         "filename": "dev/core/src/com/google/gwt/dev/util/Util.java",
         "patchSetId": 17
@@ -64,6 +100,24 @@
       "writtenOn": "2013-12-04T20:49:54Z",
       "side": 1,
       "message": "Add \"empty string if default\".\n\nOr should it better be null if there is none?",
+      "revId": "45564d017f2e6286676f71127c97ad9006b4a1f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3cdd6a7_d74edefc",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Util.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-05T20:12:04Z",
+      "side": 1,
+      "message": "Comment added.",
+      "parentUuid": "43a86290_8338ee05",
       "revId": "45564d017f2e6286676f71127c97ad9006b4a1f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -372,6 +372,24 @@
     },
     {
       "key": {
+        "uuid": "e3cdd6a7_775eeaad",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/coderef/PackageDescriptor.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 6095
+      },
+      "writtenOn": "2013-12-05T06:29:49Z",
+      "side": 1,
+      "message": "It was only called from static method from(). So I inlined it.",
+      "parentUuid": "43a86290_defba9ec",
+      "revId": "71c9bd84c1eefa469609ad949767e518e0820640",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4325c2ed_edc54176",
         "filename": "dev/core/src/com/google/gwt/dev/util/Util.java",
         "patchSetId": 15

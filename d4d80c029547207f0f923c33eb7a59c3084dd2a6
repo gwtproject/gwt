@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3cdd6a7_f779daac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T02:39:52Z",
+      "side": 1,
+      "message": "s/stared/started/",
+      "revId": "d4d80c029547207f0f923c33eb7a59c3084dd2a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3cdd6a7_97886658",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T02:39:52Z",
+      "side": 1,
+      "message": "s/the Jetty/Jetty/",
+      "revId": "d4d80c029547207f0f923c33eb7a59c3084dd2a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3cdd6a7_57740ea7",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2013-12-05T02:39:52Z",
+      "side": 1,
+      "message": "I think \"String\" here should be \"Class\u003c? extends Servlet\u003e\"?",
+      "revId": "d4d80c029547207f0f923c33eb7a59c3084dd2a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

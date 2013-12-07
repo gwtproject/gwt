@@ -51,9 +51,11 @@ public class SeedUtil {
       _ = seed.prototype = typeof(superSeed) != 'number' ? Object.create(superSeed.prototype) : (superSeed < 0) ? {}
           : @com.google.gwt.lang.SeedUtil::newSeed(I)(superSeed);
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
+      _.constructor = seed;
     }
     for (var i = 3; i < arguments.length; ++i) {
       arguments[i].prototype = _;
+      arguments[i].prototype.constructor = arguments[i];
     }
     if (seed.@java.lang.Object::___clazz) {
       _.@java.lang.Object::___clazz = seed.@java.lang.Object::___clazz;

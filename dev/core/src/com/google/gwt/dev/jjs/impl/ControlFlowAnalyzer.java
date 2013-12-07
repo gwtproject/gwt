@@ -928,6 +928,7 @@ public class ControlFlowAnalyzer {
     baseArrayType = program.getIndexedType("Array");
     getClassField = program.getIndexedField("Object.___clazz");
     getClassMethod = program.getIndexedMethod("Object.getClass");
+    instantiatedTypes.addAll(program.typeOracle.getInstantiatedJsoTypesViaCast());
     buildMethodsOverriding();
   }
 

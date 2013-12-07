@@ -78,6 +78,16 @@ final class Cast {
     return src;
   }
 
+  /**
+   * A dynamic cast that optionally checks for JsInterface prototypes.
+   */
+  static Object dynamicCastWithPrototype(Object src, int dstId, String jsPrototype) {
+    if (src != null && !canCastUnsafe(src, dstId) && !jsInstanceOf(src, jsPrototype)) {
+      throw new ClassCastException();
+    }
+    return src;
+  }
+
   static boolean instanceOf(Object src, int dstId) {
     return (src != null) && canCast(src, dstId);
   }

@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.impl.HasNameSort;
 import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.IdentitySets;
@@ -40,9 +41,18 @@ import java.util.Set;
 public class JTypeOracle implements Serializable {
 
   private LinkedHashSet<JMethod> exportedMethods = new LinkedHashSet<JMethod>();
+  private Set<JReferenceType> instantiatedJsoTypesViaCast = new HashSet<JReferenceType>();
 
   public LinkedHashSet<JMethod> getExportedMethods() {
     return exportedMethods;
+  }
+
+  public void setInstantiatedJsoTypesViaCast(Set<JReferenceType> instantiatedJsoTypesViaCast) {
+    this.instantiatedJsoTypesViaCast = instantiatedJsoTypesViaCast;
+  }
+
+  public Set<JReferenceType> getInstantiatedJsoTypesViaCast() {
+    return instantiatedJsoTypesViaCast;
   }
 
   /**
@@ -349,7 +359,7 @@ public class JTypeOracle implements Serializable {
   }
 
   private boolean hasLiveImplementors(JType type) {
-    if (type instanceof JInterfaceType) {
+    if (type instanceof JInterfaceType && isImplementedMap.get(type) != null) {
       for (JClassType impl : isImplementedMap.get(type)) {
         if (isInstantiatedType(impl)) {
           return true;
@@ -484,6 +494,11 @@ public class JTypeOracle implements Serializable {
         return true;
       }
     } else if (type instanceof JClassType) {
+      // Avoid infinite recursion
+//      if (qType != program.getJavaScriptObject() &&
+//          willCrossCastLikeJso(type) && willCrossCastLikeJso(qType)) {
+//        return true;
+//      }
 
       JClassType cType = (JClassType) type;
       if (qType instanceof JClassType) {
@@ -645,7 +660,7 @@ public class JTypeOracle implements Serializable {
     if (type instanceof JInterfaceType) {
       JInterfaceType intf = (JInterfaceType) type;
       if (isJsInterface(type)) {
-        if (!mustHavePrototype || intf.getJsPrototype() != null) {
+        if (!mustHavePrototype || !"".equals(intf.getJsPrototype())) {
           return intf;
         }
       }

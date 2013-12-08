@@ -904,7 +904,8 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
-
+      boolean isJsInterface = type instanceof JInterfaceType ?
+          isJsInterface((JInterfaceType) type) : false;
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
@@ -920,6 +921,10 @@ public class UnifyAst {
               pending = Lists.add(pending, method);
             }
             virtualMethodsPending.put(signature, pending);
+            if (isJsInterface) {
+              // Fake a call into the method to keep it around
+              flowInto(method);
+            }
           }
         }
       }

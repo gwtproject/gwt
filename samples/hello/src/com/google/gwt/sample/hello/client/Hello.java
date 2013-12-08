@@ -17,23 +17,52 @@ package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.js.JsInterface;
+import com.google.gwt.user.client.Window;
 
 /**
  * HelloWorld application.
  */
 public class Hello implements EntryPoint {
 
+  @JsInterface
+  interface BaseInter {
+    int m();
+  }
   @JsInterface(prototype = "Button")
   interface Button {
     void click();
   }
+
+  @JsInterface
+  interface SomeCallback {
+    void callbackA();
+  }
+  static class Base implements BaseInter {
+    public int m() {
+      return 42;
+    }
+  }
+
+  static class Child extends Base implements SomeCallback {
+
+    @Override
+    public void callbackA() {
+      Window.alert("foo");
+    }
+  }
+
   public void onModuleLoad() {
     Button b = (Button) foo();
     b.click();
     b.toString();
+    register(new Child());
   }
 
   public static native Object foo() /*-{
     return $doc.createElement("button");
+  }-*/;
+
+  public static native void register(Base e) /*-{
+    $wnd.__r = e;
   }-*/;
 }

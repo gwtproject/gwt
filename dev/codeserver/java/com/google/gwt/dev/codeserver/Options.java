@@ -16,8 +16,11 @@
 
 package com.google.gwt.dev.codeserver;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
+import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
+import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.util.tools.ArgHandler;
@@ -52,6 +55,7 @@ public class Options {
   // Use the same default as the GWT compiler.
   private SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
   private boolean strictResources = false;
+  private TreeLogger.Type logLevel = TreeLogger.Type.WARN;
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -115,6 +119,13 @@ public class Options {
    */
   boolean getNoPrecompile() {
     return noPrecompile;
+  }
+
+  /**
+   * Debug log level
+   */
+  TreeLogger.Type getLogLevel() {
+    return logLevel;
   }
 
   /**
@@ -184,6 +195,17 @@ public class Options {
         @Override
         public void setSourceLevel(SourceLevel sourceLevel) {
           Options.this.sourceLevel = sourceLevel;
+        }
+      }));
+      registerHandler(new ArgHandlerLogLevel(new OptionLogLevel() {
+        @Override
+        public TreeLogger.Type getLogLevel() {
+          return logLevel;
+        }
+
+        @Override
+        public void setLogLevel(TreeLogger.Type logLevel) {
+          Options.this.logLevel = logLevel;
         }
       }));
     }

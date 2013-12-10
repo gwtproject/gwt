@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3ad9efe_15edb6a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-10T14:05:54Z",
+      "side": 1,
+      "message": "\"Add -logLevel arg to CodeServer\" might be clearer ;-)\n\n(I know how hard it can be not having English as your native language)",
+      "revId": "c4a4adc01b8e9d9f650a6633e6705825dbeeec38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63b7264d_934edefb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-10T14:05:54Z",
+      "side": 1,
+      "message": "Not sure to which line(s) the \"Use the same default as the GWT compiler\" comment applies, so in doubt I\u0027d move that line above the comment (as the default in the GWT compiler is INFO, not WARN)",
+      "revId": "c4a4adc01b8e9d9f650a6633e6705825dbeeec38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83db3aac_ac974bec",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-10T14:05:54Z",
+      "side": 1,
+      "message": "debug?",
+      "revId": "c4a4adc01b8e9d9f650a6633e6705825dbeeec38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68f1c34f_00a6c6d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_e0a2c2c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_c09fbe74",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_a09cba80",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_80153624",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[error] \u0027:\u0027 is not followed by whitespace.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_601a3254",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_401f2e42",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2555,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not followed by whitespace.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f1c34f_20242a98",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2013-12-11T05:22:30Z",
+      "side": 1,
+      "message": "[error] Line contains a tab character.",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

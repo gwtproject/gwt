@@ -159,6 +159,21 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
   public boolean isAttached() {
     return attached;
   }
+  
+  /**
+   * Determines whether this is not only attached to the browser's document
+   * but also that it is currently rendered by checking that none of the its
+   * parents has been set invisible, which is a shortcoming of the isVisible() 
+   * method.
+   *  
+   * @return <code>true</code> if widget is displayed
+   */
+  public boolean isDisplayed() {
+    if(!attached || !isVisible())
+      return false;
+
+    return parent != null ? parent.isDisplayed() : true;
+  }
 
   public void onBrowserEvent(Event event) {
     switch (DOM.eventGetType(event)) {

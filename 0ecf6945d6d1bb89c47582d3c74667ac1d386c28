@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8b4d3fd_dc33ad10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-15T11:34:47Z",
+      "side": 1,
+      "message": "You\u0027d have better added this as a comment on the review. I don\u0027t think we\u0027d ever submit that change as is (as that message would end up in the repository history)",
+      "revId": "0ecf6945d6d1bb89c47582d3c74667ac1d386c28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8b4d3fd_bc38e1ed",
+        "filename": "user/src/com/google/gwt/user/client/ui/Widget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-15T11:34:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we should make judgement calls in javadocs, particularly if that\u0027s about our own API :-)\n\nBTW, I don\u0027t think it\u0027s a shortcoming of isVisible, it\u0027s just that isVisible is not what you\u0027re looking for.",
+      "range": {
+        "startLine": 166,
+        "startChar": 37,
+        "endLine": 166,
+        "endChar": 78
+      },
+      "revId": "0ecf6945d6d1bb89c47582d3c74667ac1d386c28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8b4d3fd_5cbc3ded",
+        "filename": "eclipse/user/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-16T09:51:40Z",
+      "side": 1,
+      "message": "These should be kind\u003d\"var\" and the path should be rooted at GWT_TOOLS.\n\nAlternatively, we could (and maybe/probably should) mark those dependencies exported\u003d\"true\" in the gwt-dev project (all dependencies of gwt-dev should probably be exported\u003dtrue, at least all those that will end up being packaged into gwt-dev.jar)",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "85ebca4ea4e3baae0db27d8dd39aa4e26c496889",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

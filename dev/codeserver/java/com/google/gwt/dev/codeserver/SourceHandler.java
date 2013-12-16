@@ -177,7 +177,7 @@ class SourceHandler {
       BufferedReader reader = new BufferedReader(new InputStreamReader(pageBytes));
       sendSourceFileAsHtml(moduleName, sourcePath, reader, response);
     } else {
-      PageUtil.sendStream("text/plain", pageBytes, response);
+      PageUtil.sendStream("text/java", pageBytes, response);
     }
   }
 

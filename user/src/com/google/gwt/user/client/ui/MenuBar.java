@@ -36,6 +36,7 @@ import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.PopupPanel.AnimationType;
 
@@ -1237,29 +1238,29 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
 
       @Override
       public void setPosition(int offsetWidth, int offsetHeight) {
+        int left;
+        int top;
 
         // depending on the bidi direction position a menu on the left or right
         // of its base item
         if (LocaleInfo.getCurrentLocale().isRTL()) {
           if (vertical) {
-            popup.setPopupPosition(MenuBar.this.getAbsoluteLeft() - offsetWidth
-                + 1, item.getAbsoluteTop());
+            left = MenuBar.this.getAbsoluteLeft() - offsetWidth + 1;
+            top = item.getAbsoluteTop();
           } else {
-            popup.setPopupPosition(item.getAbsoluteLeft()
-                + item.getOffsetWidth() - offsetWidth,
-                MenuBar.this.getAbsoluteTop() + MenuBar.this.getOffsetHeight()
-                    - 1);
+            left = item.getAbsoluteLeft() + item.getOffsetWidth() - offsetWidth;
+            top = MenuBar.this.getAbsoluteTop() + MenuBar.this.getOffsetHeight() - 1;
           }
         } else {
           if (vertical) {
-            popup.setPopupPosition(MenuBar.this.getAbsoluteLeft()
-                + MenuBar.this.getOffsetWidth() - 1, item.getAbsoluteTop());
+            left = MenuBar.this.getAbsoluteLeft() + MenuBar.this.getOffsetWidth() - 1;
+            top = item.getAbsoluteTop();
           } else {
-            popup.setPopupPosition(item.getAbsoluteLeft(),
-                MenuBar.this.getAbsoluteTop() + MenuBar.this.getOffsetHeight()
-                    - 1);
+            left = Math.min(Window.getClientWidth() - offsetWidth - 1, item.getAbsoluteLeft());
+            top = MenuBar.this.getAbsoluteTop() + MenuBar.this.getOffsetHeight() - 1;
           }
         }
+        popup.setPopupPosition(left, top);
       }
     });
   }

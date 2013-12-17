@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8e57b1d_d59fee00",
+        "filename": "eclipse/README.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2013-12-17T15:17:32Z",
+      "side": 0,
+      "message": "Are you sure about removing this sentence? I\u0027m 100% OK for the other, but much less sure for that one?",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "a42bdc2fba64bfa91fe48cb1ed06e6a1199bc4cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

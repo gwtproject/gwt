@@ -8,10 +8,6 @@ project for debugging the core GWT code.
 
 == Configure Eclipse Environment==
 
-  All relative paths are relative to the GWT source repository's
-  'trunk/eclipse' folder. For best results, launch Eclipse from the
-  trunk/eclipse folder from the command line.
-
 ---------- Required GWT variables ---------
 
 Window->Preferences->General->Workspace->Linked Resources

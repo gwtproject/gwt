@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a832dbd0_2d5b39e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-12-21T23:39:13Z",
+      "side": 1,
+      "message": "The UserAgent enum still contains \"opera\"?",
+      "revId": "e91da9cca941a381b996a0bdecaf9647cad044f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a832dbd0_ed684180",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-12-21T23:39:13Z",
+      "side": 1,
+      "message": "You should document that the ordering of enum values matters, as its the order in which the user agent check will be generated.",
+      "revId": "e91da9cca941a381b996a0bdecaf9647cad044f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a832dbd0_0d5e75d3",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2013-12-21T23:39:13Z",
+      "side": 1,
+      "message": "Missing \"if\" construct? You probably don\u0027t want to log always.",
+      "revId": "e91da9cca941a381b996a0bdecaf9647cad044f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

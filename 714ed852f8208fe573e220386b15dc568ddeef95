@@ -56,6 +56,30 @@
       "revId": "714ed852f8208fe573e220386b15dc568ddeef95",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "685e23ff_2eda3859",
+        "filename": "user/src/com/google/gwt/user/client/ui/MenuBar.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-26T19:59:26Z",
+      "side": 1,
+      "message": "Yes. Actually, looking at the gallery, menu alignments are completely broken for RTL.\n\nI originally just revived the earlier patch but after manual testing it is not even much useful solving the issue documented in the bug.\n\nI\u0027ll go ahead and send a patch to fix all problems.",
+      "parentUuid": "a832dbd0_eadca7ad",
+      "range": {
+        "startLine": 1251,
+        "startChar": 24,
+        "endLine": 1251,
+        "endChar": 39
+      },
+      "revId": "714ed852f8208fe573e220386b15dc568ddeef95",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

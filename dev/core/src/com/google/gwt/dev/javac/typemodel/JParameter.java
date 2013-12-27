@@ -40,6 +40,7 @@ public class JParameter implements com.google.gwt.core.ext.typeinfo.JParameter {
     this.enclosingMethod = enclosingMethod;
     this.type = srcParam.type;
     this.name = StringInterner.get().intern(srcParam.name);
+    this.argNameIsReal = true;
     this.annotations = srcParam.annotations;
   }
 

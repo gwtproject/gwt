@@ -31,7 +31,7 @@ class ParameterizedWidget<T> extends Composite {
 
   static final Binder binder = GWT.create(Binder.class);
 
-  @UiField Abstract<?> fromFactory;
+  @UiField Abstract<T> fromFactory;
   @UiField(provided = true) Specific<T> provided = new Specific<T>();
   
   ParameterizedWidget() {

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "685e23ff_c939b60c",
+        "filename": "user/src/com/google/gwt/layout/Layout.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-27T20:16:47Z",
+      "side": 1,
+      "message": "use none like elsewhere?",
+      "revId": "ce18ecb64d746d6be3107093c5ade5d03cde242e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -117,9 +117,10 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * <li>CENTER - Expand from the center of the popup</li>
    * <li>ONE_WAY_CORNER - Expand from the top left corner, do not animate hiding
    * </li>
+   * <li>ROLL_DOWN - Expand from the top to the bottom</li>
    * </ul>
    */
-  static enum AnimationType {
+  public static enum AnimationType {
     CENTER, ONE_WAY_CORNER, ROLL_DOWN
   }
 
@@ -1118,7 +1119,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    *
    * @param type the type of animation to use
    */
-  void setAnimationType(AnimationType type) {
+  public void setAnimationType(AnimationType type) {
     animType = type;
   }
 

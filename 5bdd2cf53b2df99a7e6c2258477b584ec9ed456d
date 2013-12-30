@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c86e2fb0_6d8199e1",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-30T20:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c86e2fb0_8d30b5d0",
+      "range": {
+        "startLine": 921,
+        "startChar": 22,
+        "endLine": 921,
+        "endChar": 27
+      },
+      "revId": "5bdd2cf53b2df99a7e6c2258477b584ec9ed456d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c86e2fb0_cd40ed25",
         "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderWriter.java",
         "patchSetId": 1
@@ -59,6 +83,54 @@
       "writtenOn": "2013-12-29T03:51:04Z",
       "side": 1,
       "message": "\"Even if\".",
+      "range": {
+        "startLine": 1122,
+        "startChar": 11,
+        "endLine": 1122,
+        "endChar": 19
+      },
+      "revId": "5bdd2cf53b2df99a7e6c2258477b584ec9ed456d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c86e2fb0_ad69f186",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-30T20:00:41Z",
+      "side": 1,
+      "message": "That\u0027s not what I meant. I reworded; PTAL.",
+      "parentUuid": "c86e2fb0_cd40ed25",
+      "range": {
+        "startLine": 1122,
+        "startChar": 44,
+        "endLine": 1122,
+        "endChar": 78
+      },
+      "revId": "5bdd2cf53b2df99a7e6c2258477b584ec9ed456d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c86e2fb0_8d7ef53a",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2013-12-30T20:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c86e2fb0_ad3bb1b2",
       "range": {
         "startLine": 1122,
         "startChar": 11,

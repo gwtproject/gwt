@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e89853f7_c3fe0553",
+        "filename": "user/test/com/google/gwt/regexp/shared/RegExpTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-01-02T17:19:12Z",
+      "side": 1,
+      "message": "I don\u0027t think this is how you want to test this - rather than hard-coding the expected pattern, verify that the result actually works regardless of whether it is running in the JVM or in JS.",
+      "revId": "51faab3674b13c001f3c286383590703edb0c452",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

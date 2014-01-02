@@ -38,7 +38,6 @@ import com.google.gwt.util.tools.Utility;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jdt.internal.compiler.problem.ShouldNotImplement;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -159,12 +158,12 @@ public class SourceMapTest extends TestCase {
 
     @Override
     public int getQueryId() {
-      throw new ShouldNotImplement(NOT_IMPLEMENTED_MESSAGE);
+      throw new RuntimeException(NOT_IMPLEMENTED_MESSAGE);
     }
 
     @Override
     public int getSeedId() {
-      throw new ShouldNotImplement(NOT_IMPLEMENTED_MESSAGE);
+      throw new RuntimeException(NOT_IMPLEMENTED_MESSAGE);
     }
 
     @Override

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -33,47 +34,436 @@ public class LinkedListTest extends ListTestBase {
   }
 
   public void testAddFirst() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    l.addFirst(o1);
+    assertEquals(new Object[] {o1}, l);
+    l.addFirst(o2);
+    assertEquals(new Object[]{o2, o1}, l);
+    l.addFirst(o3);
+    assertEquals(new Object[]{o3, o2, o1}, l);
   }
 
   public void testAddLast() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    l.addLast(o1);
+    assertEquals(new Object[] {o1}, l);
+    l.addLast(o2);
+    assertEquals(new Object[]{o1, o2}, l);
+    l.addLast(o3);
+    assertEquals(new Object[]{o1, o2, o3}, l);
+  }
+
+  public void testDescendingIterator() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    Iterator<Object> it = l.descendingIterator();
+    assertFalse(it.hasNext());
+    try {
+      it.next();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    it = l.descendingIterator();
+    assertTrue(it.hasNext());
+    assertEquals(o3, it.next());
+    assertTrue(it.hasNext());
+    assertEquals(o2, it.next());
+    assertTrue(it.hasNext());
+    assertEquals(o1, it.next());
+    assertFalse(it.hasNext());
+    try {
+      it.next();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l = new LinkedList<Object>();
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    it = l.descendingIterator();
+    assertTrue(it.hasNext());
+    assertEquals(o3, it.next());
+    it.remove();
+    assertEquals(2, l.size());
+    assertTrue(it.hasNext());
+    assertEquals(o2, it.next());
+    assertTrue(it.hasNext());
+    assertEquals(o1, it.next());
+    it.remove();
+    assertEquals(new Object[] {o2}, l);
   }
 
   public void testElement() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.element();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.element());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.element());
   }
 
   public void testGetFirst() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.getFirst();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.getFirst());
+    assertEquals(new Object[]{o1}, l);
+
+    l.add(o2);
+    assertEquals(o1, l.getFirst());
+    assertEquals(new Object[]{o1, o2}, l);
   }
 
   public void testGetLast() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.getLast();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.getLast());
+    assertEquals(new Object[]{o1}, l);
+
+    l.add(o2);
+    assertEquals(o2, l.getLast());
+    assertEquals(new Object[]{o1, o2}, l);
   }
 
   public void testOffer() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertTrue(l.offer(o1));
+    assertEquals(new Object[] {o1}, l);
+    assertTrue(l.offer(o2));
+    assertEquals(new Object[]{o1, o2}, l);
+    assertTrue(l.offer(o3));
+    assertEquals(new Object[]{o1, o2, o3}, l);
+  }
+
+  public void testOfferFirst() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertTrue(l.offerFirst(o1));
+    assertEquals(new Object[] {o1}, l);
+    assertTrue(l.offerFirst(o2));
+    assertEquals(new Object[]{o2, o1}, l);
+    assertTrue(l.offerFirst(o3));
+    assertEquals(new Object[]{o3, o2, o1}, l);
+  }
+
+  public void testOfferLast() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertTrue(l.offerLast(o1));
+    assertEquals(new Object[] {o1}, l);
+    assertTrue(l.offerLast(o2));
+    assertEquals(new Object[]{o1, o2}, l);
+    assertTrue(l.offerLast(o3));
+    assertEquals(new Object[]{o1, o2, o3}, l);
   }
 
   public void testPeek() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.peek());
+
+    l.add(o1);
+    assertEquals(o1, l.peek());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.peek());
+  }
+
+  public void testPeekFirst() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.peekFirst());
+
+    l.add(o1);
+    assertEquals(o1, l.peekFirst());
+    assertEquals(new Object[]{o1}, l);
+
+    l.add(o2);
+    assertEquals(o1, l.peekFirst());
+    assertEquals(new Object[]{o1, o2}, l);
+  }
+
+  public void testPeekLast() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.peekLast());
+
+    l.add(o1);
+    assertEquals(o1, l.peekLast());
+    assertEquals(new Object[]{o1}, l);
+
+    l.add(o2);
+    assertEquals(o2, l.peekLast());
+    assertEquals(new Object[]{o1, o2}, l);
   }
 
   public void testPoll() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.poll());
+
+    l.add(o1);
+    assertEquals(o1, l.poll());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.poll());
+    assertEquals(1, l.size());
+  }
+
+  public void testPollFirst() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.pollFirst());
+
+    l.add(o1);
+    assertEquals(o1, l.pollFirst());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.pollFirst());
+    assertEquals(1, l.size());
+  }
+
+  public void testPollLast() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertNull(l.pollLast());
+
+    l.add(o1);
+    assertEquals(o1, l.pollLast());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o2, l.pollLast());
+    assertEquals(1, l.size());
+  }
+
+  public void pop() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.pop();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.pop());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.pop());
+    assertEquals(1, l.size());
+  }
+
+  public void push() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    l.push(o1);
+    assertEquals(new Object[] {o1}, l);
+    l.push(o2);
+    assertEquals(new Object[]{o2, o1}, l);
+    l.push(o3);
+    assertEquals(new Object[]{o3, o2, o1}, l);
   }
 
   public void testRemove() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.remove();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.remove());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.remove());
+    assertEquals(1, l.size());
   }
 
   public void testRemoveFirst() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.removeFirst();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.removeFirst());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o1, l.removeFirst());
+    assertEquals(1, l.size());
+  }
+
+  public void testRemoveFirstOccurrence() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertFalse(l.removeFirstOccurrence(o1));
+
+    l.add(o1);
+    assertTrue(l.removeFirstOccurrence(o1));
+    assertTrue(l.isEmpty());
+
+    l = new LinkedList<Object>();
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    assertTrue(l.removeFirstOccurrence(o2));
+    assertEquals(new Object[] {o1, o3}, l);
+
+    l = new LinkedList<Object>();
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    assertTrue(l.removeFirstOccurrence(o2));
+    assertEquals(new Object[]{o1, o3, o1, o2, o3}, l);
   }
 
   public void testRemoveLast() {
-    // TODO(jat): implement
+    Object o1 = new Object();
+    Object o2 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    try {
+      l.removeLast();
+      fail();
+    } catch (NoSuchElementException e) {
+    }
+
+    l.add(o1);
+    assertEquals(o1, l.removeLast());
+    assertTrue(l.isEmpty());
+
+    l.add(o1);
+    l.add(o2);
+    assertEquals(o2, l.removeLast());
+    assertEquals(1, l.size());
+  }
+
+  public void testRemoveLastOccurrence() {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Object o3 = new Object();
+
+    LinkedList<Object> l = new LinkedList<Object>();
+    assertFalse(l.removeLastOccurrence(o1));
+
+    l.add(o1);
+    assertTrue(l.removeLastOccurrence(o1));
+    assertTrue(l.isEmpty());
+
+    l = new LinkedList<Object>();
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    assertTrue(l.removeLastOccurrence(o2));
+    assertEquals(new Object[] {o1, o3}, l);
+
+    l = new LinkedList<Object>();
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    l.add(o1);
+    l.add(o2);
+    l.add(o3);
+    assertTrue(l.removeLastOccurrence(o2));
+    assertEquals(new Object[]{o1, o2, o3, o1, o3}, l);
   }
 
   public void testRemoveRange() {

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a832dbd0_10c5ac47",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-02T11:50:28Z",
+      "side": 1,
+      "message": "UnsupportedOperationException?",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 32
+      },
+      "revId": "88257e30ace3fdfe0e3def8afffe27b6ddad876b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -712,6 +712,14 @@ public class RegExpTest extends GWTTestCase {
     assertTrue(RegExp.compile("[a-z]+").test("abc"));
     assertFalse(RegExp.compile("[a-z]+").test("42"));
   }
+  
+  public void testQuote() {
+    String input = "t[]e{}s(/-)t |q.,u?o**t+^e$\\/";
+    String output = RegExp.quote(input);
+    String expectedJavaOutput = "\\Qt[]e{}s(/-)t |q.,u?o**t+^e$\\/\\E";
+    String expectedJsOutput = "t\\[\\]e\\{\\}s\\(/\\-\\)t \\|q\\.,u\\?o\\*\\*t\\+\\^e\\$\\\\/";
+    assertTrue(output.equals(expectedJavaOutput) || output.equals(expectedJsOutput));
+  }
 
   /**
    * Checks that a regular expression matches all characters of a string and no

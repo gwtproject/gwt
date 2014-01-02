@@ -33,6 +33,24 @@
       "revId": "8093ed80e1e252a333b4a4884c7ab18a8fa4d00e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89853f7_437cb5ce",
+        "filename": "user/test/com/google/gwt/regexp/shared/RegExpTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 6545
+      },
+      "writtenOn": "2014-01-02T20:04:26Z",
+      "side": 1,
+      "message": "If it would not get quoted, then test would never return true.\nBut reordered anyway :)",
+      "parentUuid": "e89853f7_e36ce125",
+      "revId": "8093ed80e1e252a333b4a4884c7ab18a8fa4d00e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

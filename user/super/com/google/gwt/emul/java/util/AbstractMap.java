@@ -68,7 +68,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
       if (!containsKey(otherKey)) {
         return false;
       }
-      if (!Utility.equalsWithNullCheck(otherValue, get(otherKey))) {
+      if (!Objects.equals(otherValue, get(otherKey))) {
         return false;
       }
     }

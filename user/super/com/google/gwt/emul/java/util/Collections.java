@@ -118,7 +118,7 @@ public class Collections {
     }
 
     public boolean contains(Object item) {
-      return Utility.equalsWithNullCheck(element, item);
+      return Objects.equals(element, item);
     }
 
     public E get(int index) {

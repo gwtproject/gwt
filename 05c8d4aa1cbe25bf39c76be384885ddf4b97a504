@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d4f797f_8541c253",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-03T14:06:17Z",
+      "side": 1,
+      "message": "Why introduce that \u0027value\u0027 variable? \u0027+null\u0027 equals 0. Or this this about \u0027undefined\u0027? (+undefined is NaN) But then could we do it in a more readable way?\n\n if (this \u003d\u003d null) {\n   return 0;\n }\n // put the old code here",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "05c8d4aa1cbe25bf39c76be384885ddf4b97a504",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

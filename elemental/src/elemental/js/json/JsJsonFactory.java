@@ -48,9 +48,9 @@ public class JsJsonFactory implements JsonFactory {
     return JsJsonNull.create();
   }
 
-  public native JsonObject createObject() /*-{
-    return Object.create(null);
-  }-*/;
+  public JsonObject createObject() {
+    return JsJsonObject.create();
+  }
 
   @SuppressWarnings({"unchecked"})
   public <T extends JsonValue> T parse(String jsonString) throws JsonException {

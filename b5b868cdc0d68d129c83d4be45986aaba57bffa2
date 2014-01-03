@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d4f797f_25ffaed6",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedListTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-01-03T10:52:23Z",
+      "side": 1,
+      "message": "I should check here list size too",
+      "revId": "b5b868cdc0d68d129c83d4be45986aaba57bffa2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd48017b_c3157657",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedListTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-01-03T10:52:23Z",
+      "side": 1,
+      "message": "testPop",
+      "revId": "b5b868cdc0d68d129c83d4be45986aaba57bffa2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd48017b_a3127a6b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LinkedListTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-01-03T10:52:23Z",
+      "side": 1,
+      "message": "testPush",
+      "revId": "b5b868cdc0d68d129c83d4be45986aaba57bffa2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

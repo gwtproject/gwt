@@ -44,20 +44,11 @@ public class UserAgentAsserter implements EntryPoint {
     String runtimeValue = impl.getRuntimeValue();
 
     if (!compileTimeValue.equals(runtimeValue)) {
-      displayMismatchWarning(runtimeValue, compileTimeValue);
+      GWT.reportUncaughtException(new AssertionError(
+          "Possible problem with your *.gwt.xml module file.\n"
+          + "The compile time user.agent value (" + compileTimeValue + ") "
+          + "does not match the runtime user.agent value (" + runtimeValue + ").\n"
+          + "Expect more errors."));
     }
   }
-
-  /**
-   * Implemented as a JSNI method to avoid potentially using any user agent
-   * specific deferred binding code, since this method is called precisely when
-   * we're somehow executing code from the wrong user.agent permutation.
-   */
-  private native void displayMismatchWarning(String runtimeValue,
-      String compileTimeValue) /*-{
-    $wnd.alert("ERROR: Possible problem with your *.gwt.xml module file."
-        + "\nThe compile time user.agent value (" + compileTimeValue
-        + ") does not match the runtime user.agent value (" + runtimeValue
-        + "). Expect more errors.\n");
-  }-*/;
 }

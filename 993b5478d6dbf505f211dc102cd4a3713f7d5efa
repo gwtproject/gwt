@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd49e1a5_5b3d23da",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-06T19:40:07Z",
+      "side": 1,
+      "message": "this override is a problem. Since GWT Object does not implement clone the override does not work. I recently tried to add clone to object (as not implemented) but this broke a lot of people inside google.\n\nI am not sure what the best cause of action might be here.",
+      "range": {
+        "startLine": 244,
+        "startChar": 3,
+        "endLine": 244,
+        "endChar": 11
+      },
+      "revId": "993b5478d6dbf505f211dc102cd4a3713f7d5efa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

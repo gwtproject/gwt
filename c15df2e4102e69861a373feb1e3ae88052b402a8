@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8dd609da_d745148a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/JParameter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-06T18:14:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dd609da_17d95cbb",
+      "revId": "c15df2e4102e69861a373feb1e3ae88052b402a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dd609da_f7cff8ed",
         "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/JParameter.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-06T18:04:47Z",
       "side": 1,
       "message": "does this need to be .getName() to make sure that any deferred name construction logic in srcParam has occurred?",
+      "revId": "c15df2e4102e69861a373feb1e3ae88052b402a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dd609da_974f8ca6",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/JParameter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-06T18:14:47Z",
+      "side": 1,
+      "message": "As we discussed, changing this so that resolution of the name is still lazy. Otherwise we will start resolving parameter names where it doesn\u0027t matter (which is more common).",
+      "parentUuid": "8dd609da_f7cff8ed",
       "revId": "c15df2e4102e69861a373feb1e3ae88052b402a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

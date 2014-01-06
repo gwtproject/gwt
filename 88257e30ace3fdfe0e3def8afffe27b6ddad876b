@@ -22,6 +22,24 @@
       "revId": "88257e30ace3fdfe0e3def8afffe27b6ddad876b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dd609da_251ea645",
+        "filename": "user/test/com/google/gwt/core/ext/test/SourceMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-06T20:44:38Z",
+      "side": 1,
+      "message": "I also think that UnsupportedOperationException is better here. LGTM otherwise.",
+      "parentUuid": "a832dbd0_10c5ac47",
+      "revId": "88257e30ace3fdfe0e3def8afffe27b6ddad876b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

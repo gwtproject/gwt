@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dd609da_a0fcc48c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-06T22:37:25Z",
+      "side": 1,
+      "message": "Add inline comment:\n// should throw if from \u003e to",
+      "range": {
+        "startLine": 521,
+        "startChar": 31,
+        "endLine": 521,
+        "endChar": 33
+      },
+      "revId": "b56e272c7eb06e3ec530e6cc947df09382353fc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dd609da_8014200f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-06T22:37:25Z",
+      "side": 1,
+      "message": "int length \u003d to - from;\nif( length \u003c 0) throw ....\nreturn length;",
+      "range": {
+        "startLine": 1284,
+        "startChar": 2,
+        "endLine": 1284,
+        "endChar": 9
+      },
+      "revId": "b56e272c7eb06e3ec530e6cc947df09382353fc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

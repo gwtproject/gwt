@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dd609da_daac598a",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-01-06T18:53:24Z",
+      "side": 1,
+      "message": "Return type here should be \"Object\" not \"LinkedList\u003cE\u003e\".",
+      "range": {
+        "startLine": 245,
+        "startChar": 9,
+        "endLine": 245,
+        "endChar": 22
+      },
+      "revId": "11e2f89a405e696b7a6bf25ad41d15dcfc055be3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

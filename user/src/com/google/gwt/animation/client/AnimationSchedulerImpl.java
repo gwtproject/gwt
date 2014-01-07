@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,41 +15,98 @@
  */
 package com.google.gwt.animation.client;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 
 /**
- * Base class for animation implementations.
+ * Scheduler implementation that tries to use window.requestAnimationFrame and
+ * otherwise uses polyfills.
  */
-abstract class AnimationSchedulerImpl extends AnimationScheduler {
+public class AnimationSchedulerImpl extends AnimationScheduler {
 
-  /**
-   * The singleton instance of animation scheduler.
-   */
-  static final AnimationScheduler INSTANCE;
+  private class AnimationHandleImpl extends AnimationHandle {
 
-  static {
-    AnimationScheduler impl = GWT.create(AnimationScheduler.class);
+    private JavaScriptObject holder;
 
-    /*
-     * If the implementation isn't natively supported, revert back to the timer
-     * based implementation.
-     * 
-     * If impl==null (such as with GWTMockUitlities.disarm()), use null. We
-     * don't want to create a new AnimationSchedulerImplTimer in this case.
-     */
-    if (impl instanceof AnimationSchedulerImpl) {
-      if (!((AnimationSchedulerImpl) impl).isNativelySupported()) {
-        impl = new AnimationSchedulerImplTimer();
-      }
+    public AnimationHandleImpl(JavaScriptObject holder) {
+      this.holder = holder;
     }
 
-    INSTANCE = impl;
+    @Override
+    public void cancel() {
+      AnimationSchedulerImpl.this.cancel(cancelFunction, holder);
+    }
   }
 
-  /**
-   * Check if the implementation is natively supported.
-   * 
-   * @return true if natively supported, false if not
-   */
-  protected abstract boolean isNativelySupported();
+  public static final AnimationSchedulerImpl INSTANCE = new AnimationSchedulerImpl();
+
+  // TODO: replace with call to capabilities API?
+  private static native boolean hasRequestAnimationFrame() /*-{
+   return (!!$wnd.requestAnimationFrame && 
+       (!!$wnd.cancelAnimationFrame || !!$wnd.cancelRequestAnimationFrame));
+  }-*/;
+
+  private JavaScriptObject requestFunction;
+  private JavaScriptObject cancelFunction;
+
+  private AnimationSchedulerImpl() {
+    if (hasRequestAnimationFrame()) {
+      initModern();
+    } else {
+      initPolyfill();
+    }
+  }
+
+  @Override
+  public AnimationHandle requestAnimationFrame(AnimationCallback callback, Element element) {
+    JavaScriptObject id = requestAnimationFrameImpl(callback, element, requestFunction);
+    return new AnimationHandleImpl(id);
+  }
+
+  private native void cancel(JavaScriptObject cancelFunction, JavaScriptObject holder) /*-{
+    // not calling window.cancelAnimationFrame with window as this breaks FireFox and Safari.
+    cancelFunction.call($wnd, holder.id);
+  }-*/;
+
+  private native void initModern() /*-{
+    var request = $wnd.requestAnimationFrame;
+    var cancel = $wnd.cancelAnimationFrame || $wnd.cancelRequestAnimationFrame;
+
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::requestFunction = request;
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::cancelFunction = cancel;
+  }-*/;
+  
+  private native void initPolyfill() /*-{
+    var lastTime = 0;
+    var request = function(callback, element) {
+      var currTime = @com.google.gwt.core.client.Duration::currentTimeMillis()();
+      // Using 16 ms as a callback base will yield 60 fps (1000 / 16 = 66.66);
+      var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+      lastTime = currTime + timeToCall;
+      return $wnd.setTimeout(function() {
+        callback(currTime + timeToCall);
+      }, timeToCall);
+    };
+
+    var cancel = function(id){
+      $wnd.clearTimeout(id);
+    };
+
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::requestFunction = request;
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::cancelFunction = cancel;
+  }-*/;
+
+  private native JavaScriptObject requestAnimationFrameImpl(AnimationCallback callback,
+      Element element, JavaScriptObject requestFunction) /*-{
+    var wrapper = function(time){
+      callback.@com.google.gwt.animation.client.AnimationScheduler.AnimationCallback::execute(D)(time);
+    };
+
+    // not calling window.requestAnimationFrame with window as this breaks FireFox and Safari.
+    var id = requestFunction.call($wnd, $entry(wrapper), element);
+
+    // some platforms seem to return numbers, others opaque handles
+    // just to be safe wrap the result in a JSO.
+    return {id: id};
+  }-*/;
 }

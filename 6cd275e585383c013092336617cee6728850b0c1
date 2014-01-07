@@ -34,6 +34,23 @@
       "revId": "6cd275e585383c013092336617cee6728850b0c1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d25f1ed_961e5270",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceOracleImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-07T23:39:01Z",
+      "side": 1,
+      "message": "The naming suggests that if a.isPreferredOver(b)  then a is preferred over b. The logic seems to correspond to the old implementation so I suggest that the check in isPreferredOver is flipped and the if rewritten to \n\nresourceDescription.isPrefrerredOver(collidingResourceData)",
+      "revId": "6cd275e585383c013092336617cee6728850b0c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

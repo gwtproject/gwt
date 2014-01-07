@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d25f1ed_30996e66",
+        "filename": "user/src/com/google/gwt/layout/Layout.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-07T19:51:56Z",
+      "side": 1,
+      "message": "nit: can you start with \u003cwhen\u003e to be consistent with the rest? (also I think it is easier to follow that way)",
+      "revId": "d8e8f3e1302a64cac62c4b4e69a764af8443e791",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

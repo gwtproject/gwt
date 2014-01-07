@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed13059f_6a52d3a2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JModVisitorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-07T23:58:35Z",
+      "side": 1,
+      "message": "2014",
+      "revId": "30f2254aae82bd87af218ae3e1c7b56d5c6cb212",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed13059f_ca1147d9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JModVisitorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-07T23:58:35Z",
+      "side": 1,
+      "message": "s/comprehesive/comprehensive\n\nthese tests look pretty comprehensive to me, just curious what more you wanted to add?",
+      "revId": "30f2254aae82bd87af218ae3e1c7b56d5c6cb212",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed13059f_0a4d1f03",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JModVisitorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-07T23:58:35Z",
+      "side": 1,
+      "message": "s/RemoveAllExpressionStatements/RemoveAllExpressionStatementsVisitor",
+      "revId": "30f2254aae82bd87af218ae3e1c7b56d5c6cb212",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

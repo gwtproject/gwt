@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d25f1ed_5b3c03a7",
+        "filename": "dev/core/src/com/google/gwt/dev/util/OutputFileSetOnDirectory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-07T21:56:11Z",
+      "side": 1,
+      "message": "Any reason why not do just \n\nreturn new File(dir, prefix+path).getCanonicalFile();",
+      "revId": "7b93e770bf58f5d5b3ba1434eb96a0610f9f1874",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

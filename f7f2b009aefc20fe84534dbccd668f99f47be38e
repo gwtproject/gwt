@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd555ff_c0ecbe39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-07T02:44:28Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "f7f2b009aefc20fe84534dbccd668f99f47be38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dd555ff_e0f9c2f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-07T02:44:28Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "f7f2b009aefc20fe84534dbccd668f99f47be38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dd555ff_00f78601",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-07T02:44:28Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "f7f2b009aefc20fe84534dbccd668f99f47be38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

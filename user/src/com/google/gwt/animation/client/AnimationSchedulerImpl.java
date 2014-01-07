@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,41 +15,101 @@
  */
 package com.google.gwt.animation.client;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 
 /**
- * Base class for animation implementations.
+ * Scheduler implementation that tries to use window.requestAnimationFrame and
+ * otherwise uses polyfills.
  */
-abstract class AnimationSchedulerImpl extends AnimationScheduler {
+public class AnimationSchedulerImpl extends AnimationScheduler {
 
-  /**
-   * The singleton instance of animation scheduler.
-   */
-  static final AnimationScheduler INSTANCE;
+  public static final AnimationSchedulerImpl INSTANCE = new AnimationSchedulerImpl();
 
-  static {
-    AnimationScheduler impl = GWT.create(AnimationScheduler.class);
+  private class AnimationHandleImpl extends AnimationHandle {
 
-    /*
-     * If the implementation isn't natively supported, revert back to the timer
-     * based implementation.
-     * 
-     * If impl==null (such as with GWTMockUitlities.disarm()), use null. We
-     * don't want to create a new AnimationSchedulerImplTimer in this case.
-     */
-    if (impl instanceof AnimationSchedulerImpl) {
-      if (!((AnimationSchedulerImpl) impl).isNativelySupported()) {
-        impl = new AnimationSchedulerImplTimer();
-      }
+    private JavaScriptObject holder;
+
+    public AnimationHandleImpl(JavaScriptObject holder) {
+      this.holder = holder;
     }
-
-    INSTANCE = impl;
+    @Override
+    public void cancel() {
+      AnimationSchedulerImpl.this.cancel(cancelFunction, holder);
+    }
   }
 
-  /**
-   * Check if the implementation is natively supported.
-   * 
-   * @return true if natively supported, false if not
-   */
-  protected abstract boolean isNativelySupported();
+  private JavaScriptObject requestFunction;
+  private JavaScriptObject cancelFunction;
+
+  private AnimationSchedulerImpl() {
+    initializeAnimationFunctions();
+  }
+
+  @Override
+  public AnimationHandle requestAnimationFrame(AnimationCallback callback, Element element) {
+    JavaScriptObject id = requestAnimationFrameImpl(callback, element, requestFunction);
+    return new AnimationHandleImpl(id);
+  }
+
+  private native void cancel(JavaScriptObject cancelFunction, JavaScriptObject holder) /*-{
+      // not calling window.cancelAnimationFrame with window as this breaks FireFox and Safari.
+      cancelFunction.call($wnd, holder.id);
+  }-*/;
+
+  private native void initializeAnimationFunctions() /*-{
+    // prefer the unprefixed version
+    var request = $wnd.requestAnimationFrame;
+    var cancel = $wnd.cancelAnimationFrame || $wnd.cancelRequestAnimationFrame;
+
+    // polyfill request and cancel if either of them is not present
+    if (!request || !cancel) {
+      var lastTime = 0;
+      request = function(callback, element) {
+        // IE8, Safari 3.2 and Opera 10.1 do not have Date.now
+        // when removing IE8 support we change this to Date.now()
+        var currTime = +new Date();
+        // Using 16 ms as a callback base will yield 60 fps (1000 / 16 = 66.66);
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        lastTime = currTime + timeToCall;
+        return $wnd.setTimeout(function() {
+          callback(currTime + timeToCall);
+        }, timeToCall);
+      };
+
+      cancel = function(id){
+        $wnd.clearTimeout(id);
+      };
+    }
+
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::requestFunction = request;
+    this.@com.google.gwt.animation.client.AnimationSchedulerImpl::cancelFunction = cancel;
+  }-*/;
+
+  private native JavaScriptObject requestAnimationFrameImpl(AnimationCallback callback,
+      Element element, JavaScriptObject requestFunction) /*-{
+    var wrapper = $entry(function(now) {
+      // modern browsers call the animate function with a high res timer
+      // emulate for older browsers
+      if(!now) {
+        // since current (Jan 2014) iOS7 and Safari7 do not have support for $wnd.performance,
+        // we need to check $wnd.performance first
+        if ($wnd.performance && $wnd.performance.now) {
+          now = $wnd.performance.now();
+        } else {
+          // safe to use Date.now() since IE8 will already call with a value for now
+          // due to our polyfill 
+          now = Date.now();
+        }
+      }
+      callback.@com.google.gwt.animation.client.AnimationScheduler.AnimationCallback::execute(D)(now);
+    });
+
+    // not calling window.requestAnimationFrame with window as this breaks FireFox and Safari.
+    var id = requestFunction.call($wnd, wrapper, element);
+
+    // some platforms seem to return numbers, others opaque handles
+    // just to be safe wrap the result in a JSO.
+    return {id: id};
+  }-*/;
 }

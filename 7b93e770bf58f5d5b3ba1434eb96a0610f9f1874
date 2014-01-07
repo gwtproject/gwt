@@ -16,6 +16,24 @@
       "revId": "7b93e770bf58f5d5b3ba1434eb96a0610f9f1874",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dae3595_7b563b1e",
+        "filename": "dev/core/src/com/google/gwt/dev/util/OutputFileSetOnDirectory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-01-07T22:46:38Z",
+      "side": 1,
+      "message": "The only interesting case I came up with was that split() can produces empty strings if prefix + path evaluates to something containing double slashes.\n\nI think new File(parent, \"\") inside the for-loop will evaluate to parent and new File(\"prefix//path\") will be normalized to a single slash, so it should be fine to replace the loop with new File(dir, prefix+path).getCanonicalFile();",
+      "parentUuid": "4d25f1ed_5b3c03a7",
+      "revId": "7b93e770bf58f5d5b3ba1434eb96a0610f9f1874",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

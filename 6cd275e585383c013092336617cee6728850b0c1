@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d25f1ed_fb7697ec",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-07T23:14:52Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it make more sense to call initializeResourceOracles() as the last thing in build()?",
+      "revId": "6cd275e585383c013092336617cee6728850b0c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

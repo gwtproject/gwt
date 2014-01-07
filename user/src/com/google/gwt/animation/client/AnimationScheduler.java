@@ -53,7 +53,7 @@ public abstract class AnimationScheduler {
    * Returns the default implementation of the AnimationScheduler API.
    */
   public static AnimationScheduler get() {
-    return AnimationSchedulerImpl.INSTANCE;
+    return AnimationSchedulerImplStandard.INSTANCE;
   }
 
   /**

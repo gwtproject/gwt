@@ -51,6 +51,24 @@
       "revId": "6cd275e585383c013092336617cee6728850b0c1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed13059f_aae84b9c",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceOracleImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-07T23:45:40Z",
+      "side": 1,
+      "message": "good catch",
+      "parentUuid": "4d25f1ed_961e5270",
+      "revId": "6cd275e585383c013092336617cee6728850b0c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

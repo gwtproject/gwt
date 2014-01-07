@@ -52,6 +52,24 @@
       "revId": "b06ec27e4be68d9cc088156acfbdfef42d52d473",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d25f1ed_50d98261",
+        "filename": "user/src/com/google/gwt/canvas/Canvas.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-07T19:33:49Z",
+      "side": 1,
+      "message": "FYI, I looked at earlier usages and saw that \u0027none\u0027 was used inside \u0027all\u0027 if there are multiple conditions and your usage here is consistent with those.",
+      "parentUuid": "685e23ff_e96cba25",
+      "revId": "b06ec27e4be68d9cc088156acfbdfef42d52d473",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

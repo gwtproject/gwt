@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd555ff_006ce6db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-07T03:03:39Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "ccddd466771d6d28c0b0f0b9bcd7da17f650a4e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dd555ff_20caca8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-07T03:03:39Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "ccddd466771d6d28c0b0f0b9bcd7da17f650a4e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

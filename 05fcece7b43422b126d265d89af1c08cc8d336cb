@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d76fd12_8c74aba8",
+        "filename": "dev/core/src/com/google/gwt/dev/util/OutputFileSetOnDirectory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-08T19:53:38Z",
+      "side": 1,
+      "message": "I think it\u0027s okay to allow \"..\" but maybe we should do a check that the resulting file isn\u0027t outside the root directory (this.dir)? It seems like an OutputFileSet should only allow callers to write to files underneath the directory you give it.",
+      "range": {
+        "startLine": 87,
+        "startChar": 15,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "05fcece7b43422b126d265d89af1c08cc8d336cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

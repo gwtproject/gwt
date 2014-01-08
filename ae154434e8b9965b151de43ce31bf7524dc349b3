@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd93a168_4e5b9334",
+        "filename": "dev/core/test/com/google/gwt/dev/util/OutputFileSetOnDirectoryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5700
+      },
+      "writtenOn": "2014-01-08T20:28:30Z",
+      "side": 1,
+      "message": "Looks good, but I\u0027d like to see a test for two in a row, i.e. /path/to/../../file",
+      "revId": "ae154434e8b9965b151de43ce31bf7524dc349b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_8c904731",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad0e6db3_ea98c763",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4df411d1_f28206a5",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-01-09T01:15:02Z",
       "side": 1,
       "message": "Based on http://caniuse.com/requestanimationframe\n\nThe only prefix we possibly care about is \"webkit\" and then only on older Safari.\n\nAlso, the \"webkit\" version behaves differently than non-webkit [1], so it\u0027s not necessarily safe to interchange them. (Generally true of prefixed API\u0027s.)\n\n\nI think it would be simplest to use the unprefixed API and fallback on the Timer and not bother with the prefixed API?\n\n[1] crbug/236255",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 7
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_0c5697b8",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "At first I thought to disagree here, but setTimeout is not such a bad replacement for requestAnimationFrame.\n\nI think we might be better of *only* using the not prefixed versions (since those do not contain the incombatibilities like the cancel problem) and polyfill if we need to.\n\nRight now this will effect iOS6, FF on Android and Safari \u003c\u003d 6.1 which would be acceptable. Firefox on android is very likely to introduce a unprefixed version very soon and the other usage of the other system will simply fade away.\n\nFor something like mgwt where I care about using the prefixed versions for mobile I would simply right an alternative implementation that will cover all platforms.\nI think the right way forward might be to use mostly non prefixed APIs, so that we will not see another behaviour change like we saw in chrome.",
+      "parentUuid": "4df411d1_f28206a5",
       "range": {
         "startLine": 68,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_6c763b69",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad0e6db3_4ac1133b",
+      "range": {
+        "startLine": 80,
+        "startChar": 37,
+        "endLine": 80,
+        "endChar": 39
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ede2251a_0c2fb772",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2014-01-09T12:37:09Z",
       "side": 1,
       "message": "This should only be done that way if you polyfilled request. There are browsers out there (there have been at least) with request but no cancel.",
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_ac8b0306",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ede2251a_0c2fb772",
       "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_4cbdbf97",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "I think we should try to go with the high resolution timer then and change the documentation on the timestamp.\n\nI have seen some things on jitter due to the resolution of the normal timestamp. Question is how many people really rel on this being a timestamp relative to 1970 or just a delta, maybe we should change duration to use the new api as well and eliminate the problem for most people this way.",
+      "parentUuid": "ede2251a_ac1d4349",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4df411d1_52f55238",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 1
@@ -122,6 +236,30 @@
       "writtenOn": "2014-01-09T01:15:02Z",
       "side": 1,
       "message": "For best portability, I don\u0027t think we should use the request id or cancelAnimationFrame at all. Just keep a \"cancelled\" boolean in a wrapper like in the old Firefox implementation. The requestAnimationFrame callback will fire but do nothing, so that\u0027s very cheap.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 10
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_2cca7337",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T14:44:13Z",
+      "side": 1,
+      "message": "I covered this a bit in the other comment, I think we could go unprefixed and therefore rely on the cancel function to work properly.",
+      "parentUuid": "4df411d1_52f55238",
       "range": {
         "startLine": 110,
         "startChar": 8,

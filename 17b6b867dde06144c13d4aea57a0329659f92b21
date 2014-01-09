@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "cdcac190_422c4cad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T20:23:22Z",
+      "side": 1,
+      "message": "\"Change AnimationScheduler to start using requestAnimationFrame on IE10, IE11, and any future browsers that have an unprefixed requestAnimationFrame.\"\n\n(It\u0027s best to lead with the customer-visible benefit and then talk about GWT internals; this would have avoided some confusion of the \"why are you doing this\" variety.)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_2293908a",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T20:23:22Z",
+      "side": 1,
+      "message": "In the long run, this would be a good place to use a capabilities API. For now, how about this:\n\nif (hasRequestAnimationFrame()) {\n  initModern();\n} else {\n  initEmulated();\n}\n\n// TODO: replace with call to capabilities API?\nnative boolean hasRequestAnimationFrame() {\n  return !!$wnd.requestAnimationFrame;\n}\n\nThe advantage of using a capabilities API would be that it allows a static implementation to save a few bytes where the timer-based version isn\u0027t necessary.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 4
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_8275c4a4",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T20:23:22Z",
+      "side": 1,
+      "message": "I still think we can avoid using cancelAnimationFrame altogether, so there\u0027s nothing to polyfill.",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 14
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dd6993f_2dfcad52",
         "filename": "user/src/com/google/gwt/core/client/Duration.java",
         "patchSetId": 3

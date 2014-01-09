@@ -26,6 +26,11 @@ public class Duration {
    * Production Mode, this method is to be preferred.
    */
   public static native double currentTimeMillis() /*-{
+    // IE8, Safari 3.2 and Opera 10.1 do not have Date.now
+    // when removing IE8 support we change this to Date.now()
+    if (Date.now) {
+      return Date.now();
+    }
     return (new Date()).getTime();
   }-*/;
 

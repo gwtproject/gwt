@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4df411d1_55741c15",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dd6993f_cd6f6986",
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dd6993f_0d7d713e",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2014-01-09T15:18:02Z",
       "side": 1,
       "message": "Is this comment really needed? Aren\u0027t we always supposed to use $wnd anyway? (except in very rare cases where this needs to be documented then)",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 95
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4df411d1_35719825",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "I wanted to highlight here if ou stick window.rAF into a variable you loose the this bindind and this will create issues with FF and Safari (they do not work when window is not this for the call). For this reason I choose to call them throw call instead of directly invoking them.",
+      "parentUuid": "0dd6993f_0d7d713e",
       "range": {
         "startLine": 56,
         "startChar": 6,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "4df411d1_156e9445",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad0e6db3_6a8e17d6",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 2
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ede2251a_4c181ffd",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2014-01-09T15:18:02Z",
       "side": 1,
       "message": "I think that if we used Duration.currentTimeMillis(), we wouldn\u0027t need such a thing; that comment would go into Duration and when we get rid of IE8 support we would have only one place to change.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 65
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4df411d1_f5e3108c",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "you are right, much better thing!",
+      "parentUuid": "ede2251a_4c181ffd",
       "range": {
         "startLine": 69,
         "startChar": 8,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_8c2f270d",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "I think you are right, I verified Chrome, FF, IE10+, still need Safari and iOS, but I think we are good here.",
+      "parentUuid": "ad0e6db3_2a981f13",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 35
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad0e6db3_4a8b53c4",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 2
@@ -122,6 +236,30 @@
       "writtenOn": "2014-01-09T15:18:02Z",
       "side": 1,
       "message": "Same comment as above re. windows vs. $wnd",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 94
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4df411d1_d5e80c69",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T16:29:26Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "ad0e6db3_4a8b53c4",
       "range": {
         "startLine": 108,
         "startChar": 4,

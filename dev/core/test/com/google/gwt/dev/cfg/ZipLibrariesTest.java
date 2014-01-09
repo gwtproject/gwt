@@ -88,7 +88,7 @@ public class ZipLibrariesTest extends TestCase {
     zipLibraryWriter.addDependencyLibraryNames(expectedDependencyLibraryNames);
     zipLibraryWriter.addCompilationUnit(expectedCompilationUnit);
     zipLibraryWriter.addCompilationUnit(expectedSuperSourceCompilationUnit);
-    zipLibraryWriter.write();
+    zipLibraryWriter.write(0);
 
     // Read data back from disk.
     ZipLibrary zipLibrary = new ZipLibrary(zipFile.getPath());
@@ -125,7 +125,7 @@ public class ZipLibrariesTest extends TestCase {
     // Put data in the library and save it.
     ZipLibraryWriter zipLibraryWriter = new ZipLibraryWriter(zipFile.getPath());
     zipLibraryWriter.setLibraryName("BazLib");
-    zipLibraryWriter.write();
+    zipLibraryWriter.write(0);
 
     // Change the expected version number so that this next read should fail.
     ZipLibraries.versionNumber++;

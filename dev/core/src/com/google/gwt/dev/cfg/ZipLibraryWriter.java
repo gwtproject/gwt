@@ -13,6 +13,10 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.GeneratedResource;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.CompiledClass;
 import com.google.gwt.dev.jjs.CompilerIoException;
@@ -28,6 +32,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimaps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,6 +44,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -93,7 +99,9 @@ public class ZipLibraryWriter implements LibraryWriter {
       ensureParentDirectoryExists();
       createFileIfMissing();
       try {
-        zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
+        zipOutputStream =
+            new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
+        zipOutputStream.setLevel(Deflater.BEST_SPEED);
       } catch (FileNotFoundException e) {
         throw new CompilerIoException(
             "Failed to open new library file " + zipFile.getPath() + " as a stream.", e);
@@ -125,7 +133,7 @@ public class ZipLibraryWriter implements LibraryWriter {
       }
     }
 
-    private void write() {
+    private void write(long lastModified) {
       ensureFileReady();
 
       try {
@@ -151,9 +159,12 @@ public class ZipLibraryWriter implements LibraryWriter {
         writeNewConfigurationPropertyValuesByName();
         writeReboundTypeNames();
         writeRanGeneratorNames();
+        writeGeneratedArtifactPaths();
+        writeGeneratedArtifacts();
       } finally {
         try {
           zipOutputStream.close();
+          zipFile.setLastModified(lastModified);
         } catch (IOException e) {
           throw new CompilerIoException(
               "Failed to close new library file " + zipFile.getPath() + ".", e);
@@ -208,6 +219,27 @@ public class ZipLibraryWriter implements LibraryWriter {
 
     private void writeDependencyLibraryNames() {
       writeStringSet(Libraries.DEPENDENCY_LIBRARY_NAMES_ENTRY_NAME, dependencyLibraryNames);
+    }
+
+    private void writeGeneratedArtifactPaths() {
+      Set<String> generatedArtifactNames = Sets.newHashSet();
+      for (GeneratedResource generatedArtifact : generatedArtifacts.find(GeneratedResource.class)) {
+        generatedArtifactNames.add(generatedArtifact.getPartialPath());
+      }
+      writeStringSet(Libraries.GENERATED_ARTIFACT_NAMES_ENTRY_NAME, generatedArtifactNames);
+    }
+
+    private void writeGeneratedArtifacts() {
+      for (GeneratedResource generatedArtifact : generatedArtifacts.find(GeneratedResource.class)) {
+        startEntry(Libraries.DIRECTORY_GENERATED_ARTIFACTS + generatedArtifact.getPartialPath());
+        try {
+          generatedArtifact.writeTo(TreeLogger.NULL, zipOutputStream);
+        } catch (UnableToCompleteException e) {
+          throw new CompilerIoException("Failed to read generated artifact "
+              + generatedArtifact.getPartialPath() + " to write into new library file "
+              + zipFile.getPath() + ".", e);
+        }
+      }
     }
 
     private void writeLibraryName() {
@@ -321,6 +353,7 @@ public class ZipLibraryWriter implements LibraryWriter {
   private Map<String, Resource> buildResourcesByPath = Maps.newHashMap();
   private Map<String, CompilationUnit> compilationUnitsByTypeName = Maps.newHashMap();
   private Set<String> dependencyLibraryNames = Sets.newHashSet();
+  private ArtifactSet generatedArtifacts = new ArtifactSet();
   private String libraryName;
   private Multimap<String, String> newBindingPropertyValuesByName = LinkedHashMultimap.create();
   private Multimap<String, String> newConfigurationPropertyValuesByName =
@@ -384,6 +417,11 @@ public class ZipLibraryWriter implements LibraryWriter {
   }
 
   @Override
+  public void addGeneratedArtifacts(ArtifactSet generatedArtifacts) {
+    this.generatedArtifacts.addAll(generatedArtifacts);
+  }
+
+  @Override
   public void addNewBindingPropertyValuesByName(
       String propertyName, Iterable<String> propertyValues) {
     newBindingPropertyValuesByName.putAll(propertyName, propertyValues);
@@ -439,7 +477,7 @@ public class ZipLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void write() {
-    zipWriter.write();
+  public void write(long lastModified) {
+    zipWriter.write(lastModified);
   }
 }

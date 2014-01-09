@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdcac190_2de021b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "We should say here that the new entry point isn\u0027t ready to use yet.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 7
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_8d5cd5b2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/GeneratedResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "Technically this is changing a public API (it\u0027s in gwt/core/ext/linker and not in an impl directory). So in theory we could be breaking a generator somewhere, though I don\u0027t see one in google3.\n\nOkay to remove since it\u0027s unused, but it seems like someday we should add this back since it\u0027s useful debugging information.\n\nIdeally when there\u0027s a compile error in a generated file, the GWT compiler should say where this generated file came from. Probably the best thing would be to point back to the .gwt.xml file containing the \"generate-with\" rule (which would give the class name) and the Java file containing the GWT.create() rule.",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_02b65473",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "I think we should give the reader some context here. Something like this:\n\n\"This is a replacement for {@link Compiler} that supports all the same functionality and also supports separate compilation.\n\n\"By default, it assumes you\u0027re compiling a GWT library and outputs a library file. (The -workDir and -war options are ignored.)\"\n\n\"When compiling the top-level module, you should also pass the --link flag to create the GWT application.\n\nEXPERIMENTAL; separate compilation doesn\u0027t actually work yet.\n\"\n\n(Except that I don\u0027t know how much of that is true; the idea is that it should explain how to use this entry point. Maybe give an example?)",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_82d3849b",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "Not sure if we should bother with this in new code.\n\nWe\u0027re not keeping that system up-to-date; I believe it\u0027s still telling people they should upgrade to 2.3.\n\nSee: http://tools.google.com/webtoolkit/currentversion.xml",
+      "range": {
+        "startLine": 100,
+        "startChar": 32,
+        "endLine": 100,
+        "endChar": 65
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_edcea99e",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "For clarity, could you split this into compile() and link()",
+      "range": {
+        "startLine": 123,
+        "startChar": 17,
+        "endLine": 123,
+        "endChar": 26
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_ad67913d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "Don\u0027t need this.",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_ed56a945",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "This will surprise the user so we probably shouldn\u0027t do this.",
+      "range": {
+        "startLine": 167,
+        "startChar": 34,
+        "endLine": 167,
+        "endChar": 46
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_8d461594",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t set lastModified.",
+      "range": {
+        "startLine": 481,
+        "startChar": 14,
+        "endLine": 481,
+        "endChar": 19
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_ed3fc9eb",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/MockLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T23:39:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t need last modified",
+      "range": {
+        "startLine": 120,
+        "startChar": 14,
+        "endLine": 120,
+        "endChar": 19
+      },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

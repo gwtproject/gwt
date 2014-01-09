@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdcac190_cd508d23",
+        "filename": "user/src/com/google/gwt/core/client/Duration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-09T22:06:58Z",
+      "side": 1,
+      "message": "We don\u0027t care about Safari 3.2 and Opera right? I would just put a one line comment:\n\n // IE8 doesn\u0027t support Date.now",
+      "revId": "8d214fce58228167abd08439501cb0ffc9f657d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

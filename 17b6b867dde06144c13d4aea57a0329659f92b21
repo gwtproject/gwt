@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_cc3f6fec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T21:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_422c4cad",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_2293908a",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_ec3a2bfe",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T21:34:23Z",
+      "side": 1,
+      "message": "Sounds like a good idea, will update",
+      "parentUuid": "cdcac190_2293908a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 4
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_8275c4a4",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2014-01-09T20:23:22Z",
       "side": 1,
       "message": "I still think we can avoid using cancelAnimationFrame altogether, so there\u0027s nothing to polyfill.",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 14
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_0c4d77ac",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-09T21:34:23Z",
+      "side": 1,
+      "message": "I think we should not avoid it an follow the spec closely. Calling into JS will always interrupt the render thread in the browser and therefore has performance implications (not sure how many). I could not find any example in the JS world that people avoided the cancel function, or neither any problems with any non prefixed cancel function.",
+      "parentUuid": "cdcac190_8275c4a4",
       "range": {
         "startLine": 64,
         "startChar": 8,

@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0dd6993f_cd6f6986",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "nit: shouldn\u0027t there be a blank line above?",
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dd6993f_0d7d713e",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "Is this comment really needed? Aren\u0027t we always supposed to use $wnd anyway? (except in very rare cases where this needs to be documented then)",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 95
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad0e6db3_6a8e17d6",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 2
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_4c181ffd",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "I think that if we used Duration.currentTimeMillis(), we wouldn\u0027t need such a thing; that comment would go into Duration and when we get rid of IE8 support we would have only one place to change.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 65
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad0e6db3_2a981f13",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "Is there any browser that implements a non-prefixed version of the API and doesn\u0027t pass in a high-res timer?!\n\nI think we can get rid of that comment and the code below, leaving the wrapper as a simple wrapper around calling the callback.",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 35
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad0e6db3_4a8b53c4",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T15:18:02Z",
+      "side": 1,
+      "message": "Same comment as above re. windows vs. $wnd",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 94
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

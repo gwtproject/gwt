@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "ede2251a_4c8b7fc4",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-09T16:40:41Z",
+      "side": 1,
+      "message": "Ah, OK then. Maybe we could say something like:\n\n // make sure to use $wnd as the \u0027this\u0027 value or it breaks Firefox and Safari\n\n(BTW, the Mozilla folks insist that it\u0027s Firefox, not FireFox ;-) )",
+      "parentUuid": "4df411d1_35719825",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 95
+      },
+      "revId": "7931c621cb32bcd436f7aba4ca4e09a9c9b594b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad0e6db3_6a8e17d6",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
         "patchSetId": 2

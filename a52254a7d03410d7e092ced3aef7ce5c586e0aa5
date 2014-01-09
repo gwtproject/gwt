@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4df411d1_f28206a5",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T01:15:02Z",
+      "side": 1,
+      "message": "Based on http://caniuse.com/requestanimationframe\n\nThe only prefix we possibly care about is \"webkit\" and then only on older Safari.\n\nAlso, the \"webkit\" version behaves differently than non-webkit [1], so it\u0027s not necessarily safe to interchange them. (Generally true of prefixed API\u0027s.)\n\n\nI think it would be simplest to use the unprefixed API and fallback on the Timer and not bother with the prefixed API?\n\n[1] crbug/236255",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 7
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4df411d1_52f55238",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-09T01:15:02Z",
+      "side": 1,
+      "message": "For best portability, I don\u0027t think we should use the request id or cancelAnimationFrame at all. Just keep a \"cancelled\" boolean in a wrapper like in the old Firefox implementation. The requestAnimationFrame callback will fire but do nothing, so that\u0027s very cheap.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 10
+      },
+      "revId": "a52254a7d03410d7e092ced3aef7ce5c586e0aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

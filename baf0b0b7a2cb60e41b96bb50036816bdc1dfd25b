@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4df411d1_95a8442e",
+        "filename": "user/test/com/google/gwt/canvas/client/CanvasTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-09T15:16:50Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "baf0b0b7a2cb60e41b96bb50036816bdc1dfd25b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

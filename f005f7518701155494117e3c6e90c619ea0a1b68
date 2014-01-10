@@ -122,6 +122,24 @@
       "revId": "f005f7518701155494117e3c6e90c619ea0a1b68",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_dc071caa",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-10T02:51:44Z",
+      "side": 1,
+      "message": "Searching the current page interacts badly with scrolling in Gerrit. \nhttps://b.corp.google.com/issue?id\u003d12478388",
+      "parentUuid": "cdcac190_1c6b547e",
+      "revId": "f005f7518701155494117e3c6e90c619ea0a1b68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

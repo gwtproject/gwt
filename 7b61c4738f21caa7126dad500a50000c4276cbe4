@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_0861d3ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_2de021b1",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_8d5cd5b2",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/GeneratedResource.java",
         "patchSetId": 1
@@ -42,6 +60,24 @@
         "endLine": 27,
         "endChar": 29
       },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_a85f7f1e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/GeneratedResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "agreed",
+      "parentUuid": "cdcac190_8d5cd5b2",
       "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_48c8eb8d",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_02b65473",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_82d3849b",
         "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
         "patchSetId": 1
@@ -88,6 +142,24 @@
         "endLine": 100,
         "endChar": 65
       },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_c8acfbbb",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_82d3849b",
       "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -117,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_8877231b",
+        "filename": "dev/core/src/com/google/gwt/dev/SeparateCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "done.\n\ni ran with it some and ended up with stages:\n\nnormalizeOptions(logger);\nloadLibraries(logger);\nloadModule(logger);\ncompileModule(logger);\nif (compilerOptions.shouldLink()) {\n  linkLibraries(logger);\n}\n\nsorry for all of the churn",
+      "parentUuid": "cdcac190_edcea99e",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_ad67913d",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
         "patchSetId": 1
@@ -128,6 +218,24 @@
       "writtenOn": "2014-01-09T23:39:59Z",
       "side": 1,
       "message": "Don\u0027t need this.",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_e811f7ae",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_ad67913d",
       "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -157,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_c8063b77",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_ed56a945",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_8d461594",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
         "patchSetId": 1
@@ -180,6 +306,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_a80bff7c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_8d461594",
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcac190_ed3fc9eb",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/MockLibraryWriter.java",
         "patchSetId": 1
@@ -197,6 +341,24 @@
         "endLine": 120,
         "endChar": 19
       },
+      "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_88216303",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/MockLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-10T01:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_ed3fc9eb",
       "revId": "7b61c4738f21caa7126dad500a50000c4276cbe4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

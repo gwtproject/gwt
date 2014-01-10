@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede2251a_8f22798d",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-10T11:18:52Z",
+      "side": 1,
+      "message": "nit: maybe we should change this to be $doc.documentMode \u003d\u003d 10, this would be more explicit in terms of IE11",
+      "range": {
+        "startLine": 45,
+        "startChar": 47,
+        "endLine": 45,
+        "endChar": 70
+      },
+      "revId": "55b4df83fe66828c0c2622bb8c496f992755b45b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

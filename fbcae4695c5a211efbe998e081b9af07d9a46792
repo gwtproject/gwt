@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdcac190_d57c8f01",
+        "filename": "elemental/src/elemental/js/json/JsJsonObject.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-01-10T20:54:47Z",
+      "side": 0,
+      "message": "Hm, technically, removing this method potentially breaks the public API.  It\u0027s silly, but can you restore it and mark it @Deprecated and add a warning that it will be removed in the next release and callers should use put(String,JsonValue) instead?",
+      "range": {
+        "startLine": 103,
+        "startChar": 21,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "fbcae4695c5a211efbe998e081b9af07d9a46792",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

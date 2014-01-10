@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_4896ab7a",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-10T00:13:06Z",
+      "side": 1,
+      "message": "I don\u0027t think people use cancelling very much, so there\u0027s not a lot out there.\n\nIn AnimationScheduler cancelling is only going to happen on the last frame of an animation, so I don\u0027t think it\u0027s going to matter much; it\u0027s just one more frame that does nothing.  Looking at Google3, mgwt cancels an animation on touchStart which isn\u0027t that often. But I suppose it could matter if someone is repeatedly scheduling a lot of short animations.\n\nCancelling seemed trickier last year when the spec wasn\u0027t finalized yet. The prefixed requestAnimationFrame functions returned different things and that resulted in incompatibility for us in DevMode since we do type checking. \n\nBut I think that\u0027s gone now, if we stick to non-prefixed. So ok.",
+      "parentUuid": "ede2251a_0c4d77ac",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 14
+      },
+      "revId": "17b6b867dde06144c13d4aea57a0329659f92b21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dd6993f_2dfcad52",
         "filename": "user/src/com/google/gwt/core/client/Duration.java",
         "patchSetId": 3

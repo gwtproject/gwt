@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdcac190_48458b5d",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-10T00:14:47Z",
+      "side": 1,
+      "message": "Do we still need to check for cancelRequestAnimationFrame? It\u0027s not in the standard.",
+      "range": {
+        "startLine": 46,
+        "startChar": 46,
+        "endLine": 46,
+        "endChar": 73
+      },
+      "revId": "91aaac0f0c5f586848109ca4874919e11535f097",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

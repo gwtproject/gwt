@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede2251a_ef3c5dab",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-10T11:28:19Z",
+      "side": 1,
+      "message": "I do not like the extra property lookup every time, but just for the cancel function to initialize it before does not make so much sense.",
+      "range": {
+        "startLine": 64,
+        "startChar": 53,
+        "endLine": 64,
+        "endChar": 80
+      },
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede2251a_0f2fa972",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-10T11:28:19Z",
+      "side": 1,
+      "message": "Let aus maybe add a comment why we are using call here instead of directly invoking the thing. The error message produced by Firefox and Safari is very cryptic and it took me a while to figure out. Something like:\n\"// make sure to use $wnd as the \u0027this\u0027 value or it breaks Firefox and Safari\"",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 17
+      },
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

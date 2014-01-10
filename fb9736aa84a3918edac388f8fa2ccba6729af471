@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede2251a_4f437185",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-01-10T20:43:26Z",
+      "side": 1,
+      "message": "Don\u0027t put this in the commit message, just do the change as you feel it should be done and lets discuss.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 42
+      },
+      "revId": "fb9736aa84a3918edac388f8fa2ccba6729af471",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

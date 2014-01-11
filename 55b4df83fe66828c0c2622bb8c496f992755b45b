@@ -22,6 +22,24 @@
       "revId": "55b4df83fe66828c0c2622bb8c496f992755b45b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_419e8178",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-11T03:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ede2251a_8f22798d",
+      "revId": "55b4df83fe66828c0c2622bb8c496f992755b45b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

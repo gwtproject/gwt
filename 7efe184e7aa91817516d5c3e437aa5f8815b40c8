@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_e137cdfb",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-11T02:17:51Z",
+      "side": 1,
+      "message": "That\u0027s the chrome and it looks like it has been fixed; so I think we can drop it.",
+      "parentUuid": "cdcac190_2b4804f3",
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ede2251a_0f2fa972",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
         "patchSetId": 6

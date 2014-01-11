@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cdcac190_6b66fc88",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-11T00:23:48Z",
+      "side": 1,
+      "message": "Maybe move INSTANCE to this file so that the name doesn\u0027t imply that it\u0027s always the standard instance?",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 50
+      },
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ede2251a_ef3c5dab",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
         "patchSetId": 6
@@ -13,6 +36,30 @@
       "writtenOn": "2014-01-10T11:28:19Z",
       "side": 1,
       "message": "I do not like the extra property lookup every time, but just for the cancel function to initialize it before does not make so much sense.",
+      "range": {
+        "startLine": 64,
+        "startChar": 53,
+        "endLine": 64,
+        "endChar": 80
+      },
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_2b4804f3",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-11T00:23:48Z",
+      "side": 1,
+      "message": "Does any browser still use cancelRequestAnimationFrame? Maybe that browser should fall back to the timer-based implementation?",
+      "parentUuid": "ede2251a_ef3c5dab",
       "range": {
         "startLine": 64,
         "startChar": 53,

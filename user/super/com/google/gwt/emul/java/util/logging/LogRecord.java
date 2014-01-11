@@ -19,7 +19,6 @@ package java.util.logging;
 import com.google.gwt.core.shared.SerializableThrowable;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *  An emulation of the java.util.logging.LogRecord class. See
@@ -32,49 +31,49 @@ public class LogRecord implements Serializable {
   private String msg;
   private SerializableThrowable thrown = null;
   private long millis;
-  
+
   public LogRecord(Level level, String msg) {
     this.level = level;
     this.msg = msg;
-    millis = new Date().getTime();
+    millis = System.currentTimeMillis();
   }
-  
+
   protected LogRecord() {
     // for serialization
   }
-  
+
   public Level getLevel() {
     return level;
   }
-  
+
   public String getLoggerName() {
     return loggerName;
   }
-  
+
   public String getMessage() {
     return msg;
   }
-  
+
   public long getMillis() {
     return millis;
   }
-  
+
   public Throwable getThrown() {
     return thrown;
-  } 
+  }
   
   public void setLevel(Level newLevel) {
     level = newLevel;
-  } 
-  
+  }
+
   public void setLoggerName(String newName) {
     loggerName = newName;
   }
-  
+
   public void setMessage(String newMessage) {
     msg = newMessage;
   }
-  
+
   public void setMillis(long newMillis) {
     millis = newMillis;
   }

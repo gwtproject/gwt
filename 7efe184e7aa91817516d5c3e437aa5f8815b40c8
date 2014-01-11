@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "cdcac190_21b3851d",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-11T03:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcac190_6b66fc88",
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ede2251a_ef3c5dab",
         "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
         "patchSetId": 6
@@ -107,6 +125,24 @@
         "endLine": 65,
         "endChar": 17
       },
+      "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcac190_01b889f3",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-11T03:40:47Z",
+      "side": 1,
+      "message": "I removed the indirect call.",
+      "parentUuid": "ede2251a_0f2fa972",
       "revId": "7efe184e7aa91817516d5c3e437aa5f8815b40c8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

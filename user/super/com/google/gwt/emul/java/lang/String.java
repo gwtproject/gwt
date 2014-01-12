@@ -969,6 +969,11 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   public native String trim() /*-{
+    // IE8 does not have String.trim
+    // when removing IE8 support we change this to this.trim()
+    if (this.trim) {
+      return this.trim();
+    }
     if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {
       return this;
     }

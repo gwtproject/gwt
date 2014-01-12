@@ -2805,6 +2805,7 @@ public class GenerateJavaScriptAST {
 
     // Object polymorphic
     Map<String, String> namesToIdents = new HashMap<String, String>();
+    namesToIdents.put("clone", "cL");
     namesToIdents.put("getClass", "gC");
     namesToIdents.put("hashCode", "hC");
     namesToIdents.put("equals", "eQ");

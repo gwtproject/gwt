@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad33cd7d_85160461",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-12T14:36:09Z",
+      "side": 1,
+      "message": "That line should be in the footer (next to Change-Id)",
+      "revId": "0affde48b87b3a8b8bd97a7865f2df5993e70c83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

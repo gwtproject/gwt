@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.rpc;
 
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArrayDeque;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArrayList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArraysAsList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeEmptyKey;
@@ -39,6 +40,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeVector;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
@@ -59,6 +61,9 @@ import java.util.Vector;
  * The Remote Service Async class for GWT RPC Collections testing.
  */
 public interface CollectionsTestServiceAsync {
+  void echo(ArrayDeque<MarkerTypeArrayDeque> value,
+      AsyncCallback<ArrayDeque<MarkerTypeArrayDeque>> callback);
+
   void echo(ArrayList<MarkerTypeArrayList> value,
       AsyncCallback<ArrayList<MarkerTypeArrayList>> callback);
 

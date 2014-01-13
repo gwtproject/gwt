@@ -16,6 +16,7 @@
 package com.google.gwt.user.client.rpc;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArrayDeque;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArrayList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeArraysAsList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeEmptyKey;
@@ -41,6 +42,7 @@ import com.google.gwt.user.client.rpc.core.java.util.LinkedHashMap_CustomFieldSe
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
@@ -81,6 +83,23 @@ public class CollectionsTest extends RpcTestBase {
       public void onSuccess(int[] result) {
         assertNotNull(result);
         assertTrue(TestSetValidator.equals(expected, result));
+        finishTest();
+      }
+    });
+  }
+
+  public void testArrayDeque() {
+    CollectionsTestServiceAsync service = getServiceAsync();
+    final ArrayDeque<MarkerTypeArrayDeque> expected = TestSetFactory.createArrayDeque();
+    delayTestFinishForRpc();
+    service.echo(expected, new AsyncCallback<ArrayDeque<MarkerTypeArrayDeque>>() {
+      public void onFailure(Throwable caught) {
+        TestSetValidator.rethrowException(caught);
+      }
+
+      public void onSuccess(ArrayDeque<MarkerTypeArrayDeque> result) {
+        assertNotNull(result);
+        assertTrue(TestSetValidator.isValid(expected, result));
         finishTest();
       }
     });

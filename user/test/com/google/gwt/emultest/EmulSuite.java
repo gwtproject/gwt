@@ -38,6 +38,7 @@ import com.google.gwt.emultest.java.sql.SqlDateTest;
 import com.google.gwt.emultest.java.sql.SqlTimeTest;
 import com.google.gwt.emultest.java.sql.SqlTimestampTest;
 import com.google.gwt.emultest.java.util.ApacheMapTest;
+import com.google.gwt.emultest.java.util.ArrayDequeTest;
 import com.google.gwt.emultest.java.util.ArrayListTest;
 import com.google.gwt.emultest.java.util.ArraysTest;
 import com.google.gwt.emultest.java.util.CollectionsTest;
@@ -97,6 +98,7 @@ public class EmulSuite {
 
     //-- java.util
     suite.addTestSuite(ApacheMapTest.class);
+    suite.addTestSuite(ArrayDequeTest.class);
     suite.addTestSuite(ArrayListTest.class);
     suite.addTestSuite(ArraysTest.class);
     suite.addTestSuite(CollectionsTest.class);

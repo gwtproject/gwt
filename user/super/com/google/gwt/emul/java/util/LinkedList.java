@@ -199,8 +199,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
 
   @Override
   public boolean add(E o) {
-    addLast(o);
-    return true;
+    return offerLast(o);
   }
 
   @Override

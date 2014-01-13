@@ -20,6 +20,7 @@ import com.google.gwt.event.shared.UmbrellaException;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -75,6 +76,20 @@ public class TestSetFactory {
     @Override
     public String toString() {
       return value;
+    }
+  }
+
+  /**
+   * A single-use marker type to independently check type parameter exposure in
+   * various collections.
+   */
+  public static final class MarkerTypeArrayDeque extends MarkerBase {
+    public MarkerTypeArrayDeque(String value) {
+      super(value);
+    }
+
+    MarkerTypeArrayDeque() {
+      super(null);
     }
   }
 
@@ -492,6 +507,16 @@ public class TestSetFactory {
     public int hashCode() {
       return 0;
     }
+  }
+
+  public static ArrayDeque<MarkerTypeArrayDeque> createArrayDeque() {
+    ArrayDeque<MarkerTypeArrayDeque> deque = new ArrayDeque<MarkerTypeArrayDeque>();
+    deque.add(new MarkerTypeArrayDeque("foo"));
+    deque.add(new MarkerTypeArrayDeque("bar"));
+    deque.add(new MarkerTypeArrayDeque("baz"));
+    deque.add(new MarkerTypeArrayDeque("bal"));
+    deque.add(new MarkerTypeArrayDeque("w00t"));
+    return deque;
   }
 
   public static ArrayList<MarkerTypeArrayList> createArrayList() {

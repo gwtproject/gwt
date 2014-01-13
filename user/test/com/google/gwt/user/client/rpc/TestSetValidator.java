@@ -37,6 +37,7 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertSame;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -300,6 +301,16 @@ public class TestSetValidator {
      */
     
     return true;
+  }
+
+  public static boolean isValid(ArrayDeque<?> expected, ArrayDeque<?> actual) {
+    if (actual == null) {
+      return false;
+    }
+
+    Iterator<?> expectedEntries = expected.iterator();
+    Iterator<?> actualEntries = actual.iterator();
+    return equals(expectedEntries, actualEntries);
   }
 
   public static boolean isValid(ArrayList<?> list) {

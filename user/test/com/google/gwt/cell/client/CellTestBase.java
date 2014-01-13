@@ -111,6 +111,8 @@ public abstract class CellTestBase<T> extends GWTTestCase {
     public void update(T value) {
       assertNull(lastValue);
       assertNotNull(value);
+      // ValueUpdater should be called only if value has actually changed.
+      assertNotSame(lastValue, value);
       this.lastValue = value;
     }
   }

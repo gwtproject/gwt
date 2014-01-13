@@ -16,8 +16,9 @@
 package com.google.gwt.dev.util.collect;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Utility methods for operating on memory-efficient maps. All maps of size 0 or
@@ -36,6 +37,18 @@ public class Maps {
 
   public static <K, V> Map<K, V> create(K key, V value) {
     return Collections.singletonMap(key, value);
+  }
+
+  /**
+   * Returns a map with inverted key-value mappings. Not safe to use if any of the values are bound
+   * to multiple keys.
+   */
+  public static <K, V> Map<V, K> invert(Map<K, V> map) {
+    Map<V, K> invertedMap = new HashMap<V, K>();
+    for (Entry<K, V> entry : map.entrySet()) {
+      invertedMap.put(entry.getValue(), entry.getKey());
+    }
+    return invertedMap;
   }
 
   public static <K, V> Map<K, V> normalize(Map<K, V> map) {

@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.impl.ResourceGeneratorUtilImpl;
 import com.google.gwt.core.ext.linker.Artifact;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.CompilationMetricsArtifact;
@@ -43,10 +44,18 @@ import com.google.gwt.core.linker.SoycReportLinker;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.Permutation;
 import com.google.gwt.dev.PrecompileTaskOptions;
+import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.EntryMethodHolderGenerator;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.cfg.PropertyProviderRegistratorGenerator;
+import com.google.gwt.dev.cfg.Rule;
+import com.google.gwt.dev.cfg.RuleBaseline;
+import com.google.gwt.dev.cfg.RuleGenerateWith;
+import com.google.gwt.dev.cfg.RuntimeRebindRegistratorGenerator;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
+import com.google.gwt.dev.javac.CompilationUnit;
+import com.google.gwt.dev.javac.LibraryGroupUnitCache;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
@@ -94,6 +103,7 @@ import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
 import com.google.gwt.dev.jjs.impl.Pruner;
+import com.google.gwt.dev.jjs.impl.ReboundTypeRecorder;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
@@ -142,6 +152,7 @@ import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVisitor;
+import com.google.gwt.dev.resource.impl.FileResource;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Empty;
 import com.google.gwt.dev.util.Memory;
@@ -149,18 +160,23 @@ import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
-import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.soyc.SoycDashboard;
 import com.google.gwt.soyc.io.ArtifactsOutputDirectory;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.SetMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
@@ -169,13 +185,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 
+import javax.annotation.Nullable;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
@@ -294,6 +314,7 @@ public class JavaToJavaScriptCompiler {
   public static PermutationResult compilePermutation(TreeLogger logger,
       CompilerContext compilerContext, UnifiedAst unifiedAst, Permutation permutation)
       throws UnableToCompleteException {
+    ModuleDef module = compilerContext.getModule();
     JJSOptions options = unifiedAst.getOptions();
     long startTimeMilliseconds = System.currentTimeMillis();
 
@@ -336,13 +357,19 @@ public class JavaToJavaScriptCompiler {
 
       // (4) Optimize the normalized Java AST for each permutation.
       int optimizationLevel = options.getOptimizationLevel();
-      if (optimizationLevel == OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
-        draftOptimize(jprogram);
+      if (module.isMonolithic()) {
+        if (optimizationLevel == OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+          draftOptimize(jprogram);
+        } else {
+          optimize(options, jprogram);
+        }
       } else {
-        optimize(options, jprogram);
+        localOptimize(jprogram);
       }
 
-      RemoveEmptySuperCalls.exec(jprogram);
+      if (module.isMonolithic()) {
+        RemoveEmptySuperCalls.exec(jprogram);
+      }
 
       // (5) "Normalize" the high-level Java tree into a lower-level tree more
       // suited for JavaScript code generation. Don't go reordering these
@@ -358,7 +385,9 @@ public class JavaToJavaScriptCompiler {
 
       // (6) Perform further post-normalization optimizations
       // Prune everything
-      Pruner.exec(jprogram, false);
+      if (module.isMonolithic()) {
+        Pruner.exec(jprogram, false);
+      }
       // prune all Object.getClass() overrides and replace with inline field ref
       ReplaceGetClassOverrides.exec(jprogram);
 
@@ -415,44 +444,46 @@ public class JavaToJavaScriptCompiler {
           "compiler.useSourceMaps", "true", true, false, false);
 
       MultipleDependencyGraphRecorder dependencyRecorder = null;
-      if (options.isRunAsyncEnabled()) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      if (module.isMonolithic()) {
+        if (options.isRunAsyncEnabled()) {
+          ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        int expectedFragmentCount = options.getFragmentCount();
-        // -1 is the default value, we trap 0 just in case (0 is not a legal value  in any case)
-        if (expectedFragmentCount <= 0) {
-          // Fragment count not set check fragments merge.
-          int numberOfMerges =  options.getFragmentsMerge();
-          if (numberOfMerges > 0) {
-            // + 1 for left over, + 1 for initial gave us the total number
-            // of fragments without splitting.
-            expectedFragmentCount = Math.max(0,
-                jprogram.getRunAsyncs().size() + 2 - numberOfMerges);
+          int expectedFragmentCount = options.getFragmentCount();
+          // -1 is the default value, we trap 0 just in case (0 is not a legal value  in any case)
+          if (expectedFragmentCount <= 0) {
+            // Fragment count not set check fragments merge.
+            int numberOfMerges =  options.getFragmentsMerge();
+            if (numberOfMerges > 0) {
+              // + 1 for left over, + 1 for initial gave us the total number
+              // of fragments without splitting.
+              expectedFragmentCount = Math.max(0,
+                  jprogram.getRunAsyncs().size() + 2 - numberOfMerges);
+            }
           }
-        }
 
-        int minFragmentSize = findIntegerConfigurationProperty(propertyOracles, logger,
-            CodeSplitters.MIN_FRAGMENT_SIZE, 0);
+          int minFragmentSize = findIntegerConfigurationProperty(propertyOracles, logger,
+              CodeSplitters.MIN_FRAGMENT_SIZE, 0);
+  
+          dependencyRecorder = chooseDependencyRecorder(options, jprogram, baos);
+          CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, expectedFragmentCount,
+              minFragmentSize, dependencyRecorder);
 
-        dependencyRecorder = chooseDependencyRecorder(options, jprogram, baos);
-        CodeSplitter.exec(logger, jprogram, jsProgram, jjsmap, expectedFragmentCount,
-            minFragmentSize, dependencyRecorder);
-
-        if (baos.size() == 0) {
-          dependencyRecorder = recordNonSplitDependencies(jprogram, baos, options);
+          if (baos.size() == 0) {
+            dependencyRecorder = recordNonSplitDependencies(jprogram, baos, options);
+          }
+          if (baos.size() > 0) {
+            dependencies =
+                new SyntheticArtifact(SoycReportLinker.class, "dependencies" + permutationId
+                    + ".xml.gz", baos.toByteArray());
+          }
+        } else if (options.isSoycEnabled() || options.isJsonSoycEnabled()) {
+          dependencyRecorder = recordNonSplitDependencies(jprogram, new ByteArrayOutputStream(),
+              options);
         }
-        if (baos.size() > 0) {
-          dependencies =
-              new SyntheticArtifact(SoycReportLinker.class, "dependencies" + permutationId
-                  + ".xml.gz", baos.toByteArray());
-        }
-      } else if (options.isSoycEnabled() || options.isJsonSoycEnabled()) {
-        dependencyRecorder = recordNonSplitDependencies(jprogram, new ByteArrayOutputStream(),
-            options);
       }
 
       // (10.5) Obfuscate
-      Map<JsName, String> obfuscateMap = Maps.create();
+      Map<JsName, String> obfuscateMap = Maps.newHashMap();
       switch (options.getOutput()) {
         case OBFUSCATED:
           obfuscateMap = JsStringInterner.exec(jprogram, jsProgram);
@@ -467,7 +498,9 @@ public class JavaToJavaScriptCompiler {
           JsPrettyNamer.exec(jsProgram, propertyOracles);
           break;
         case DETAILED:
-          obfuscateMap = JsStringInterner.exec(jprogram, jsProgram);
+          if (module.isMonolithic()) {
+            obfuscateMap = JsStringInterner.exec(jprogram, jsProgram);
+          }
           JsVerboseNamer.exec(jsProgram, propertyOracles);
           break;
         default:
@@ -513,7 +546,7 @@ public class JavaToJavaScriptCompiler {
               - ManagementFactory.getRuntimeMXBean().getStartTime());
           compilationMetrics.setJsSize(sizeBreakdowns);
           compilationMetrics.setPermutationDescription(permutation.prettyPrint());
-          toReturn.addArtifacts(Lists.create(unifiedAst.getModuleMetrics(), unifiedAst
+          toReturn.addArtifacts(Lists.newArrayList(unifiedAst.getModuleMetrics(), unifiedAst
               .getPrecompilationMetrics(), compilationMetrics));
         }
       }
@@ -644,20 +677,24 @@ public class JavaToJavaScriptCompiler {
     if (additionalRootTypes == null) {
       additionalRootTypes = Empty.STRINGS;
     }
-    if (declEntryPts.length + additionalRootTypes.length == 0) {
+    if (module.isMonolithic() && declEntryPts.length + additionalRootTypes.length == 0) {
       throw new IllegalArgumentException("entry point(s) required");
     }
 
-    JProgram jprogram = new JProgram();
+    JProgram jprogram = new JProgram(module.isMonolithic() || options.shouldLink());
     JsProgram jsProgram = new JsProgram();
     Set<String> allRootTypes = new TreeSet<String>();
 
-    // Find all the possible rebinds for declared entry point types.
-    for (String element : declEntryPts) {
-      String[] all = rpo.getAllPossibleRebindAnswers(logger, element);
-      Collections.addAll(allRootTypes, all);
+    if (module.isMonolithic()) {
+      // Find all the possible rebinds for declared entry point types.
+      for (String element : declEntryPts) {
+        String[] all = rpo.getAllPossibleRebindAnswers(logger, element);
+        Collections.addAll(allRootTypes, all);
+      }
+      rpo.getGeneratorContext().finish(logger);
+    } else {
+      Collections.addAll(allRootTypes, declEntryPts);
     }
-    rpo.getGeneratorContext().finish(logger);
     Collections.addAll(allRootTypes, additionalRootTypes);
     allRootTypes.addAll(JProgram.CODEGEN_TYPES_SET);
     allRootTypes.addAll(jprogram.getTypeNamesToIndex());
@@ -676,6 +713,21 @@ public class JavaToJavaScriptCompiler {
     String entryMethodHolderTypeName = buildEntryMethodHolder(
         logger, compilerContext, rpo.getGeneratorContext(), allRootTypes, jprogram);
 
+    if (!module.isMonolithic()) {
+      StandardGeneratorContext generatorContext = rpo.getGeneratorContext();
+      runGeneratorsToFixedPoint(logger, compilerContext, generatorContext, rpo);
+
+      Set<JDeclaredType> reboundTypes =
+          gatherReboundTypes(rpo.getCompilationState().getCompilationUnits());
+      buildFallbackRuntimeRebindRules(logger, compilerContext, reboundTypes, generatorContext);
+      buildLocalRuntimeRebindRules(logger, compilerContext, generatorContext);
+
+      buildRuntimeRebindRegistrator(
+          logger, compilerContext, generatorContext, allRootTypes, jprogram);
+      buildPropertyProviderRegistrator(
+          logger, compilerContext, generatorContext, allRootTypes, jprogram);
+    }
+
     try {
       // (2) Assemble the Java AST.
       UnifyAst unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
@@ -685,11 +737,10 @@ public class JavaToJavaScriptCompiler {
           logger, compilerContext, rpo, declEntryPts, jprogram, entryMethodHolderTypeName);
       unifyAst.exec();
 
-      List<String> finalTypeOracleTypes = Lists.create();
+      List<String> finalTypeOracleTypes = Lists.newArrayList();
       if (precompilationMetrics != null) {
         for (com.google.gwt.core.ext.typeinfo.JClassType type : typeOracle.getTypes()) {
-          finalTypeOracleTypes =
-              Lists.add(finalTypeOracleTypes, type.getPackage().getName() + "." + type.getName());
+          finalTypeOracleTypes.add(type.getPackage().getName() + "." + type.getName());
         }
         precompilationMetrics.setFinalTypeOracleTypes(finalTypeOracleTypes);
       }
@@ -788,6 +839,265 @@ public class JavaToJavaScriptCompiler {
       throw CompilationProblemReporter.logAndTranslateException(logger, e);
     } finally {
     }
+  }
+
+  private static Set<String> getTypeNames(Set<JDeclaredType> types) {
+    Set<String> typeNames = Sets.newHashSet();
+    for (JDeclaredType type : types) {
+      typeNames.add(type.getName());
+    }
+    return typeNames;
+  }
+
+  private static Set<JDeclaredType> gatherReboundTypes(
+      Collection<CompilationUnit> compilationUnits) {
+    Set<JDeclaredType> reboundTypes = Sets.newLinkedHashSet();
+    for (CompilationUnit compilationUnit : compilationUnits) {
+      for (JDeclaredType type : compilationUnit.getTypes()) {
+        ReboundTypeRecorder.exec(type, reboundTypes);
+      }
+    }
+    return reboundTypes;
+  }
+
+  public static Set<String> badRebindCombinations = Sets.newHashSet();
+  public static Set<String> previouslyReboundTypeNames = Sets.newHashSet();
+  public static SetMultimap<String, String> generatorNamesByPreviouslyReboundTypeName =
+      HashMultimap.create();
+
+  private static void runGeneratorsToFixedPoint(TreeLogger logger, CompilerContext compilerContext,
+      StandardGeneratorContext generatorContext, RebindPermutationOracle rpo)
+      throws UnableToCompleteException {
+    boolean fixedPoint;
+    do {
+      compilerContext.getLibraryWriter().setReboundTypeNames(
+          getTypeNames(gatherReboundTypes(rpo.getCompilationState().getCompilationUnits())));
+
+      fixedPoint = runGenerators(
+          logger, compilerContext, generatorContext, rpo.getCompilationState().getTypeOracle());
+    } while (!fixedPoint);
+
+    // This is a horribly dirty hack to work around the fact that CssResourceGenerator uses a
+    // completely nonstandard resource creation and caching mechanism that ignores the
+    // GeneratorContext infrastructure. It and GenerateCssAst need to be fixed.
+    for (Entry<String, File> entry :
+        ResourceGeneratorUtilImpl.getGeneratedFilesByName().entrySet()) {
+      String resourcePath = entry.getKey();
+      File resourceFile = entry.getValue();
+      compilerContext.getLibraryWriter()
+          .addBuildResource(new FileResource(null, resourcePath, resourceFile));
+    }
+  }
+
+  /**
+   * Figures out which generators should run in the current context and runs them. Generator
+   * execution can create new opportunities for further generator execution so this function should
+   * be invoked repeatedly till a fixed point is reached.
+   *
+   * @param typeOracle
+   *
+   * @return whether a fixed point was reached.
+   */
+  private static boolean runGenerators(TreeLogger logger, CompilerContext compilerContext,
+      StandardGeneratorContext generatorContext, TypeOracle typeOracle)
+      throws UnableToCompleteException {
+    boolean fixedPoint = true;
+    boolean globalCompile = compilerContext.getOptions().shouldLink();
+    Set<Rule> generatorRules = Sets.newHashSet(compilerContext.getModule().getGeneratorRules());
+
+    for (Rule rule : generatorRules) {
+      RuleGenerateWith generatorRule = (RuleGenerateWith) rule;
+      String generatorName = generatorRule.getName();
+
+      if (generatorRule.contentDependsOnTypes() && !globalCompile) {
+        // Type unstable generators can only be safely run in the global phase.
+        // TODO(stalcup): modify type unstable generators such that their output is no longer
+        // unstable.
+        continue;
+      }
+
+      // Run generator for new rebound types.
+      Set<String> newReboundTypeNames =
+          compilerContext.gatherNewReboundTypeNamesForGenerator(generatorName);
+      fixedPoint &= runGenerator(
+          logger, generatorRule, newReboundTypeNames, compilerContext, generatorContext);
+
+      // If the content of generator output varies when some relevant properties change and some
+      // relevant properties have changed.
+      if (generatorRule.contentDependsOnProperties()
+          && relevantPropertiesHaveChanged(generatorRule, compilerContext)) {
+        // Rerun the generator on old rebound types to replace old stale output.
+        Set<String> oldReboundTypeNames =
+            compilerContext.gatherOldReboundTypeNamesForGenerator(generatorName);
+        fixedPoint &= runGenerator(
+            logger, generatorRule, oldReboundTypeNames, compilerContext, generatorContext);
+      }
+
+      compilerContext.getLibraryWriter().addRanGeneratorName(generatorName);
+    }
+
+    return fixedPoint;
+  }
+
+  /**
+   * Generator output can create opportunities for further generator execution, so runGenerators()
+   * is repeated to a fixed point. But previously handled generator/reboundType pairs should be
+   * ignored.
+   */
+  private static void removePreviouslyReboundCombinations(
+      final String generatorName, Set<String> newReboundTypeNames) {
+    newReboundTypeNames.removeAll(
+        Sets.newHashSet(Sets.filter(newReboundTypeNames, new Predicate<String>() {
+          @Override
+          public boolean apply(@Nullable String newReboundTypeName) {
+            return generatorNamesByPreviouslyReboundTypeName.containsEntry(
+                newReboundTypeName, generatorName);
+          }
+        })));
+  }
+
+  private static boolean relevantPropertiesHaveChanged(
+      RuleGenerateWith generatorRule, CompilerContext compilerContext) {
+    String generatorName = generatorRule.getName();
+
+    // Gather binding and configuration property values that have been changed in the part of
+    // the library dependency tree on which this generator has not yet run.
+    Multimap<String, String> newConfigurationPropertyValues =
+        compilerContext.gatherNewConfigurationPropertyValuesForGenerator(generatorName);
+    Multimap<String, String> newBindingPropertyValues =
+        compilerContext.gatherNewBindingPropertyValuesForGenerator(generatorName);
+
+    return generatorRule.caresAboutProperties(newConfigurationPropertyValues.keySet())
+        || generatorRule.caresAboutProperties(newBindingPropertyValues.keySet());
+  }
+
+  /**
+   * Runs a particular generator on the provided set of rebound types. Takes care to guard against
+   * duplicate work during reruns as generation approaches a fixed point.
+   *
+   * @return whether a fixed point was reached.
+   */
+  private static boolean runGenerator(TreeLogger logger, RuleGenerateWith generatorRule,
+      Set<String> reboundTypeNames, CompilerContext compilerContext,
+      StandardGeneratorContext context) throws UnableToCompleteException {
+    boolean fixedPoint = true;
+    removePreviouslyReboundCombinations(generatorRule.getName(), reboundTypeNames);
+    reboundTypeNames.removeAll(previouslyReboundTypeNames);
+
+    for (String reboundTypeName : reboundTypeNames) {
+      if (badRebindCombinations.contains(generatorRule.getName() + "-" + reboundTypeName)) {
+        continue;
+      }
+      generatorNamesByPreviouslyReboundTypeName.put(reboundTypeName, generatorRule.getName());
+      reboundTypeName = reboundTypeName.replace("$", ".");
+      generatorRule.generate(logger, compilerContext.getModule(), context, reboundTypeName);
+
+      if (context.isDirty()) {
+        fixedPoint = false;
+        previouslyReboundTypeNames.add(reboundTypeName);
+        // Ensure that cascading generations rerun properly.
+        for (String generatedTypeName : context.getGeneratedUnitMap().keySet()) {
+          generatorNamesByPreviouslyReboundTypeName.removeAll(generatedTypeName);
+        }
+        context.finish(logger);
+      } else {
+        badRebindCombinations.add(generatorRule.getName() + "-" + reboundTypeName);
+      }
+    }
+
+    return fixedPoint;
+  }
+
+  private static void buildLocalRuntimeRebindRules(
+      TreeLogger logger, CompilerContext compilerContext, StandardGeneratorContext context)
+      throws UnableToCompleteException {
+
+    // Create rebinders for rules specified in the module.
+    Iterator<Rule> iterator = compilerContext.getModule().getRules().iterator();
+    while (iterator.hasNext()) {
+      Rule rule = iterator.next();
+      if (rule instanceof RuleGenerateWith) {
+        continue;
+      }
+      rule.generate(logger, compilerContext.getModule(), context);
+    }
+  }
+
+  private static JDeclaredType getTypeByName(List<JDeclaredType> types, String typeName) {
+    for (JDeclaredType type : types) {
+      if (type.getName().equals(typeName)) {
+        return type;
+      }
+    }
+    return null;
+  }
+
+  private static void buildFallbackRuntimeRebindRules(TreeLogger logger,
+      CompilerContext compilerContext, Set<JDeclaredType> reboundTypes,
+      StandardGeneratorContext context) throws UnableToCompleteException {
+    // Create fallback rebinds.
+    for (JDeclaredType reboundType : reboundTypes) {
+      // HACK, really need to have all types resolved before now :(. Needs redesign.
+      String resourcePath = LibraryGroupUnitCache.typeNameToResourcePath(reboundType.getName());
+      CompilationUnit compilationUnit = compilerContext.getUnitCache().find(resourcePath);
+      reboundType = getTypeByName(compilationUnit.getTypes(), reboundType.getName());
+
+      if (!reboundType.isInstantiable()) {
+        continue;
+      }
+      RuleBaseline rule = new RuleBaseline(reboundType.getName().replace("$", "."));
+      rule.generate(logger, compilerContext.getModule(), context);
+    }
+  }
+
+  private static void buildRuntimeRebindRegistrator(TreeLogger logger,
+      CompilerContext compilerContext, StandardGeneratorContext context, Set<String> allRootTypes,
+      JProgram jprogram) throws UnableToCompleteException {
+    RuntimeRebindRegistratorGenerator runtimeRebindRegistratorGenerator =
+        new RuntimeRebindRegistratorGenerator();
+    String runtimeRebindRegistratorTypeName = runtimeRebindRegistratorGenerator.generate(
+        logger, context, compilerContext.getModule().getName());
+    // Ensures that unification traverses and keeps the class.
+    allRootTypes.add(runtimeRebindRegistratorTypeName);
+    // Ensures that JProgram knows to index this class's methods so that later bootstrap
+    // construction code is able to locate the FooRuntimeRebindRegistrator.register() function.
+    jprogram.addIndexedTypeName(runtimeRebindRegistratorTypeName);
+    jprogram.setRuntimeRebindRegistratorTypeName(runtimeRebindRegistratorTypeName);
+    context.finish(logger);
+  }
+
+  private static void buildPropertyProviderRegistrator(TreeLogger logger,
+      CompilerContext compilerContext, StandardGeneratorContext context, Set<String> allRootTypes,
+      JProgram jprogram) throws UnableToCompleteException {
+    SortedSet<BindingProperty> bindingProperties =
+        compilerContext.getModule().getProperties().getBindingProperties();
+    SortedSet<ConfigurationProperty> configurationProperties =
+        compilerContext.getModule().getProperties().getConfigurationProperties();
+
+    PropertyProviderRegistratorGenerator propertyProviderRegistratorGenerator =
+        new PropertyProviderRegistratorGenerator(bindingProperties, configurationProperties);
+    String propertyProviderRegistratorTypeName = propertyProviderRegistratorGenerator.generate(
+        logger, context, compilerContext.getModule().getName());
+    // Ensures that unification traverses and keeps the class.
+    allRootTypes.add(propertyProviderRegistratorTypeName);
+    // Ensures that JProgram knows to index this class's methods so that later bootstrap
+    // construction code is able to locate the FooPropertyProviderRegistrator.register() function.
+    jprogram.addIndexedTypeName(propertyProviderRegistratorTypeName);
+    jprogram.setPropertyProviderRegistratorTypeName(propertyProviderRegistratorTypeName);
+    context.finish(logger);
+  }
+
+  /**
+   * Perform just the minimal optimizations which are safe with local knowledge.
+   */
+  protected static void localOptimize(JProgram jprogram) {
+    Event draftOptimizeEvent = SpeedTracerLogger.start(CompilerEventType.DRAFT_OPTIMIZE);
+    Finalizer.exec(jprogram);
+    jprogram.typeOracle.recomputeAfterOptimizations();
+    // needed for certain libraries that depend on dead stripping to work
+    DeadCodeElimination.exec(jprogram);
+    jprogram.typeOracle.recomputeAfterOptimizations();
+    draftOptimizeEvent.end();
   }
 
   /**
@@ -1084,31 +1394,38 @@ public class JavaToJavaScriptCompiler {
       }
 
       // Couldn't find a static main method; must rebind the class
-      String[] resultTypeNames = rpo.getAllPossibleRebindAnswers(logger, mainClassName);
-      List<JClassType> resultTypes = new ArrayList<JClassType>();
-      List<JExpression> entryCalls = new ArrayList<JExpression>();
-      for (String resultTypeName : resultTypeNames) {
-        JDeclaredType resultType = program.getFromTypeMap(resultTypeName);
-        if (resultType == null) {
-          logger.log(TreeLogger.ERROR, "Could not find module entry point class '" + resultTypeName
-              + "' after rebinding from '" + mainClassName + "'", null);
-          throw new UnableToCompleteException();
-        }
+      if (compilerContext.getModule().isMonolithic()) {
+        String[] resultTypeNames = rpo.getAllPossibleRebindAnswers(logger, mainClassName);
+        List<JClassType> resultTypes = new ArrayList<JClassType>();
+        List<JExpression> entryCalls = new ArrayList<JExpression>();
+        for (String resultTypeName : resultTypeNames) {
+          JDeclaredType resultType = program.getFromTypeMap(resultTypeName);
+          if (resultType == null) {
+            logger.log(TreeLogger.ERROR, "Could not find module entry point class '" + resultTypeName
+                + "' after rebinding from '" + mainClassName + "'", null);
+            throw new UnableToCompleteException();
+          }
 
-        JMethodCall onModuleLoadCall =
-            createReboundModuleLoad(logger, info, resultType, mainClassName, bootStrapMethod
-                .getEnclosingType());
-        resultTypes.add((JClassType) resultType);
-        entryCalls.add(onModuleLoadCall);
-      }
-      if (resultTypes.size() == 1) {
-        block.addStmt(entryCalls.get(0).makeStatement());
+          JMethodCall onModuleLoadCall =
+              createReboundModuleLoad(logger, info, resultType, mainClassName, bootStrapMethod
+                  .getEnclosingType());
+          resultTypes.add((JClassType) resultType);
+          entryCalls.add(onModuleLoadCall);
+        }
+        if (resultTypes.size() == 1) {
+          block.addStmt(entryCalls.get(0).makeStatement());
+        } else {
+          JReboundEntryPoint reboundEntryPoint =
+              new JReboundEntryPoint(info, mainType, resultTypes, entryCalls);
+          block.addStmt(reboundEntryPoint);
+        }
       } else {
-        JReboundEntryPoint reboundEntryPoint =
-            new JReboundEntryPoint(info, mainType, resultTypes, entryCalls);
-        block.addStmt(reboundEntryPoint);
+        JMethodCall onModuleLoadCall = createReboundModuleLoad(
+            logger, info, mainType, mainClassName, bootStrapMethod.getEnclosingType());
+        block.addStmt(onModuleLoadCall.makeStatement());
       }
     }
+
     program.addEntryMethod(bootStrapMethod);
     findEntryPointsEvent.end();
   }
@@ -1213,7 +1530,7 @@ public class JavaToJavaScriptCompiler {
   }
 
   /**
-   * This method can be used to fetch the list of referenced classs.
+   * This method can be used to fetch the list of referenced class.
    *
    * This method is intended to support compiler metrics in the precompile
    * phase.
@@ -1348,7 +1665,8 @@ public class JavaToJavaScriptCompiler {
    *   Stats.onModuleStart("mainClassName");
    * </pre>
    */
-  private static JStatement makeStatsCalls(SourceInfo info, JProgram program, String mainClassName) {
+  private static JStatement makeStatsCalls(
+      SourceInfo info, JProgram program, String mainClassName) {
     JMethod isStatsAvailableMethod = program.getIndexedMethod("Stats.isStatsAvailable");
     JMethod onModuleStartMethod = program.getIndexedMethod("Stats.onModuleStart");
 

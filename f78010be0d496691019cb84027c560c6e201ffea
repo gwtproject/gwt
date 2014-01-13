@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d30bd7d_96ce4c45",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-13T22:31:27Z",
+      "side": 1,
+      "message": "s/Return/Returns/ for consistency.",
+      "range": {
+        "startLine": 118,
+        "startChar": 5,
+        "endLine": 118,
+        "endChar": 11
+      },
+      "revId": "f78010be0d496691019cb84027c560c6e201ffea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d30bd7d_76e610d2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/Rule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-13T22:31:27Z",
+      "side": 1,
+      "message": "Add a doc comment.",
+      "revId": "f78010be0d496691019cb84027c560c6e201ffea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d30bd7d_b62fc80c",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/Maps.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-13T22:31:27Z",
+      "side": 1,
+      "message": "Other option is to use guava\u0027s bidirectional maps (BiMap).",
+      "revId": "f78010be0d496691019cb84027c560c6e201ffea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

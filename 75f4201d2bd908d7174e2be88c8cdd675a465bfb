@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d30bd7d_6575f0a1",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-14T19:16:54Z",
+      "side": 1,
+      "message": "Bring the comment up to date.",
+      "revId": "75f4201d2bd908d7174e2be88c8cdd675a465bfb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

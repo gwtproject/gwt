@@ -81,6 +81,27 @@ public abstract class EditableCellTestBase<T, V> extends CellTestBase<T> {
    */
   protected Element testOnBrowserEvent(String startHtml, NativeEvent event,
       final T value, V viewData, T expectedValue, V expectedViewData) {
+    return testOnBrowserEvent(startHtml, event, value, viewData, expectedValue, expectedViewData,
+        new MockValueUpdater());
+  }
+
+  /**
+   * Test
+   * {@link Cell#onBrowserEvent(Element, Object, Object, NativeEvent, ValueUpdater)}
+   * with the specified conditions.
+   *
+   * @param startHtml the innerHTML of the cell before the test starts
+   * @param event the event to fire
+   * @param value the cell value
+   * @param viewData the initial view data
+   * @param expectedValue the expected value passed to the value updater, or
+   *          null if none expected
+   * @param expectedViewData the expected value of the view data after the event
+   * @param valueUpdater the value updater callback to be executed when some change occurs
+   * @return the parent element
+   */
+  protected <U extends MockValueUpdater> Element testOnBrowserEvent(String startHtml, NativeEvent event,
+      final T value, V viewData, T expectedValue, V expectedViewData, final U valueUpdater) {
     // Setup the parent element.
     final Element parent = Document.get().createDivElement();
     parent.setInnerHTML(startHtml);
@@ -91,7 +112,6 @@ public abstract class EditableCellTestBase<T, V> extends CellTestBase<T> {
     Element target = (child == null) ? parent : child;
 
     // Pass the event to the cell.
-    final MockValueUpdater valueUpdater = new MockValueUpdater();
     final AbstractEditableCell<T, V> cell = createCell();
     cell.setViewData(DEFAULT_KEY, viewData);
     Event.setEventListener(parent, new EventListener() {

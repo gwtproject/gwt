@@ -29,6 +29,21 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  */
 public class EditTextCellTest extends EditableCellTestBase<String, ViewData> {
 
+  class EditTextCellMockValueUpdater extends MockValueUpdater {
+
+    private boolean updated;
+
+    @Override
+    public void update(String value) {
+      super.update(value);
+      updated = true;
+    }
+
+    public boolean hasUpdated() {
+      return updated;
+    }
+  }
+
   public void testEdit() {
     EditTextCell cell = createCell();
     Element parent = Document.get().createDivElement();
@@ -102,6 +117,35 @@ public class EditTextCellTest extends EditableCellTestBase<String, ViewData> {
 
     // Verify the input element is gone.
     assertEquals("newValue", parent.getInnerHTML());
+  }
+
+  /**
+   * Commit and check whether value updater was executed or not.
+   */
+  public void testOnBrowserEventValueChanged() {
+    NativeEvent event = Document.get().createKeyUpEvent(
+        false, false, false, false, KeyCodes.KEY_ENTER);
+
+    ViewData viewData = new ViewData("originalValue");
+    assertTrue(viewData.isEditing());
+
+    final EditTextCellMockValueUpdater valueUpdater = new EditTextCellMockValueUpdater();
+    testOnBrowserEvent("<input type='text' value='originalValue'></input>", event, "originalValue",
+        viewData, "originalValue", viewData, valueUpdater);
+    assertFalse(viewData.isEditing());
+
+    // Verify the value updater was skipped
+    assertFalse(valueUpdater.hasUpdated());
+
+    viewData.setText("newValue");
+    viewData.setEditing(true);
+    assertTrue(viewData.isEditingAgain());
+
+    testOnBrowserEvent("<input type='text' value='newValue'></input>", event, "originalValue",
+        viewData, "newValue", viewData, valueUpdater);
+
+    // Verify the value updater was called
+    assertTrue(valueUpdater.hasUpdated());
   }
 
   /**

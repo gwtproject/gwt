@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad810d4e_86427ac7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-14T22:15:57Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f3426b5b5bf2839430fd855ac96130ca6ee0afe4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

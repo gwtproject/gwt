@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -24,6 +25,24 @@ import com.google.gwt.dev.javac.StandardGeneratorContext;
  * A rule to explicitly fail during a deferred binding request.
  */
 public class RuleFail extends Rule {
+
+  @Override
+  public String generateCreateInstanceExpression() {
+    return "throw 'Deferred binding request failed for type ' + requestTypeName + '.';";
+  }
+
+  @Override
+  public String generateMatchesExpression() {
+    return "return " + getRootCondition().toSource() + ";";
+  }
+
+  @Override
+  public void generateRuntimeRebindClasses(
+      TreeLogger logger, ModuleDef module, GeneratorContext context)
+      throws UnableToCompleteException {
+    runtimeRebindRuleGenerator.generate(
+        generateCreateInstanceExpression(), generateMatchesExpression());
+  }
 
   @Override
   public RebindResult realize(TreeLogger logger, StandardGeneratorContext context,

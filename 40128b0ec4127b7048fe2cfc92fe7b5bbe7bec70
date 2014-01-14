@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "2d30bd7d_6aadbf82",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-14T18:17:45Z",
+      "side": 1,
+      "message": "There is getPackage(String qualifiedName) in dev.util.Util similar to this one, may use the one in Util.",
+      "revId": "40128b0ec4127b7048fe2cfc92fe7b5bbe7bec70",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d30bd7d_ea6a2f78",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-14T18:17:45Z",
+      "side": 1,
+      "message": "maybe assert that x.getQualifier() \u003d\u003d null here",
+      "revId": "40128b0ec4127b7048fe2cfc92fe7b5bbe7bec70",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad810d4e_1566b687",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
         "patchSetId": 1

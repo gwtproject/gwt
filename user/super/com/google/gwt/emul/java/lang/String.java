@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,9 +30,9 @@ import java.util.Comparator;
 
 /**
  * Intrinsic string class.
- * 
+ *
  * TODO(jat): consider whether we want to support the following methods;
- * 
+ *
  * <ul>
  * <li>deprecated methods dealing with bytes (I assume not since I can't see
  * much use for them)
@@ -57,7 +57,7 @@ import java.util.Comparator;
  * <li>format(String format, Object... args)
  * </ul>
  * </ul>
- * 
+ *
  * Also, in general, we need to improve our support of non-ASCII characters. The
  * problem is that correct support requires large tables, and we don't want to
  * make users who aren't going to use that pay for it. There are two ways to do
@@ -70,12 +70,12 @@ import java.util.Comparator;
  * subset such as Latin1-5) will not pay for large tables, even if they do call
  * toLowercase(), for example.
  * </ol>
- * 
+ *
  * Also, if we ever add multi-locale support, there are a number of other
  * methods such as toLowercase(Locale) we will want to consider supporting. This
  * is probably rare, but there will be some apps (such as a translation tool)
  * which cannot be written without this support.
- * 
+ *
  * Another category of incomplete support is that we currently just use the JS
  * regex support, which is not exactly the same as Java. We should support Java
  * syntax by mapping it into equivalent JS patterns, or emulating them.
@@ -148,7 +148,7 @@ public final class String implements Comparable<String>, CharSequence,
       while (i < n) {
         hashCode = hashCode * 31 + str.charAt(i++);
       }
-      
+
       // TODO: make a JSNI call in case JDT gets smart about removing this
       // Do a final fitting to 32 bits
       return hashCode | 0;
@@ -227,7 +227,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   /**
    * Checks that bounds are correct.
-   * 
+   *
    * @param legalCount the end of the legal range
    * @param start must be >= 0
    * @param end must be <= legalCount and must be >= start
@@ -257,7 +257,7 @@ public final class String implements Comparable<String>, CharSequence,
    * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
    * dollar signs "$$", and removes all other lone backslashes, which serve as
    * escapes in Java but are passed through literally in JavaScript.
-   * 
+   *
    * @skip
    */
   static String __translateReplaceString(String replaceStr) {
@@ -389,7 +389,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   /**
    * Encode a single character in UTF8.
-   * 
+   *
    * @param bytes byte array to store character in
    * @param ofs offset into byte array to store first byte
    * @param codePoint character to encode
@@ -760,7 +760,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native boolean matches(String regex) /*-{
@@ -790,7 +790,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   public native String replace(char from, char to) /*-{
 
-    // We previously used \\uXXXX, but Safari 2 doesn't match them properly 
+    // We previously used \\uXXXX, but Safari 2 doesn't match them properly
 // in RegExp
     // See http://bugs.webkit.org/show_bug.cgi?id=8043
     //     http://bugs.webkit.org/show_bug.cgi?id=6257
@@ -812,7 +812,7 @@ public final class String implements Comparable<String>, CharSequence,
     // follow the spec for "$$" in the replacement string: it
     // will insert a literal "$$". IE and Firefox, meanwhile,
     // treat "$$" as "$".
-    
+
     // Escape regex special characters from literal replacement string.
     String regex = from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
     // Escape $ since it is for match backrefs and \ since it is used to escape
@@ -827,7 +827,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String replaceAll(String regex, String replace) /*-{
@@ -840,7 +840,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String replaceFirst(String regex, String replace) /*-{
@@ -863,7 +863,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String[] split(String regex, int maxMatch) /*-{
@@ -876,12 +876,12 @@ public final class String implements Comparable<String>, CharSequence,
     // The current string that is being matched; trimmed as each piece matches
     var trail = this;
     // used to detect repeated zero length matches
-    // Must be null to start with because the first match of "" makes no 
+    // Must be null to start with because the first match of "" makes no
     // progress by intention
     var lastTrail = null;
     // We do the split manually to avoid Javascript incompatibility
     while (true) {
-      // None of the information in the match returned are useful as we have no 
+      // None of the information in the match returned are useful as we have no
       // subgroup handling
       var matchObj = compiled.exec(trail);
       if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
@@ -972,8 +972,8 @@ public final class String implements Comparable<String>, CharSequence,
     if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {
       return this;
     }
-    var r1 = this.replace(/^(\s*)/, '');
-    var r2 = r1.replace(/\s*$/, '');
+    var r1 = this.replace(/^((\s|\0)*)/, '');
+    var r2 = r1.replace(/(\s|\0)*$/, '');
     return r2;
   }-*/;
 }

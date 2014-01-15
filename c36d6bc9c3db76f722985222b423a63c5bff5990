@@ -50,6 +50,24 @@
       "revId": "c36d6bc9c3db76f722985222b423a63c5bff5990",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "add66d80_6ae377c0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayListTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6141
+      },
+      "writtenOn": "2014-01-15T21:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df0590e_0cad9fb5",
+      "revId": "c36d6bc9c3db76f722985222b423a63c5bff5990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

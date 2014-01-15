@@ -33,6 +33,23 @@
       "revId": "c36d6bc9c3db76f722985222b423a63c5bff5990",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0df0590e_0cad9fb5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayListTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-15T20:52:53Z",
+      "side": 1,
+      "message": "Can you add following comment in catch block:\n\n // add() is expected to fail but shouldn\u0027t leave in a inconsistent state.\n // See: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id\u003d6533203",
+      "revId": "c36d6bc9c3db76f722985222b423a63c5bff5990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

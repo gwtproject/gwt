@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dca7dde_4f9e8578",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-16T19:11:20Z",
+      "side": 1,
+      "message": "Maybe rename to optimizeNormalizedJavaAst?",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 18
+      },
+      "revId": "1ae4b2b0073f8eb48b724acab21f248e9875faba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dca7dde_af2d79b1",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsNamespaceChooserTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-16T17:46:54Z",
+      "side": 1,
+      "message": "The double semicolon results from having the semicolon after the function definition (a function definition does not have a trailing semi)\n\nChange to \"function f() {} f();\"",
+      "revId": "b21a959809d88a25a191d43317b10603b098e468",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2dca7dde_8f323d0d",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsNamespaceChooserTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-16T17:46:54Z",
+      "side": 1,
+      "message": "Same here remove the extra semi",
+      "range": {
+        "startLine": 77,
+        "startChar": 17,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "b21a959809d88a25a191d43317b10603b098e468",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2dca7dde_0f1f6d6e",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsNamespaceChooserTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-16T17:46:54Z",
+      "side": 1,
+      "message": "s/expected/statements/",
+      "range": {
+        "startLine": 127,
+        "startChar": 22,
+        "endLine": 127,
+        "endChar": 30
+      },
+      "revId": "b21a959809d88a25a191d43317b10603b098e468",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

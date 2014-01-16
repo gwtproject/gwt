@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -24,9 +25,34 @@ import com.google.gwt.dev.javac.StandardGeneratorContext;
  * Abstract base class for various kinds of deferred binding rules.
  */
 public abstract class Rule {
-  
+
+  protected RuntimeRebindRuleGenerator runtimeRebindRuleGenerator =
+      new RuntimeRebindRuleGenerator();
   private int fallbackEvalCost = Integer.MAX_VALUE;
   private final ConditionAll rootCondition = new ConditionAll();
+
+  /**
+   * Generate runtime rebind classes that perform the same rebinding behavior represented by the
+   * current Rule.
+   */
+  @SuppressWarnings("unused")
+  public void generateRuntimeRebindClasses(
+      TreeLogger logger, ModuleDef module, GeneratorContext context)
+      throws UnableToCompleteException {
+    // Defaults to doing nothing.
+  }
+
+  /**
+   * Generate and return a String of Java source that will create an instance of whatever type this
+   * Rule intends to rebind to.
+   */
+  public abstract String generateCreateInstanceExpression();
+
+  /**
+   * Generate and return a String of Java source that will act as a condition to filter the runtime
+   * environment and only pass when the Rule's intended conditions are met.
+   */
+  public abstract String generateMatchesExpression();
 
   /**
    * Returns the cost of evaluation fallback binding values.
@@ -39,13 +65,12 @@ public abstract class Rule {
   public int getFallbackEvaluationCost() {
     return fallbackEvalCost;
   }
-  
+
   public ConditionAll getRootCondition() {
     return rootCondition;
   }
-  
-  public boolean isApplicable(TreeLogger logger,
-      StandardGeneratorContext context, String typeName)
+
+  public boolean isApplicable(TreeLogger logger, StandardGeneratorContext context, String typeName)
       throws UnableToCompleteException {
     DeferredBindingQuery query = new DeferredBindingQuery(
         context.getPropertyOracle(), context.getActiveLinkerNames(),

@@ -483,7 +483,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
     try {
       TreeLogger branch;
-      if (!committedGeneratedCups.isEmpty()) {
+      if (isDirty()) {
         // Assimilate the new types into the type oracle.
         //
         String msg = "Assimilating generated source";
@@ -517,12 +517,21 @@ public class StandardGeneratorContext implements GeneratorContext {
         }
       }
 
-      uncommittedGeneratedCupsByPrintWriter.clear();
-      committedGeneratedCups.clear();
-      newlyGeneratedTypeNames.clear();
-      newlyGeneratedArtifacts = new ArtifactSet();
-      cachedTypeNamesToReuse = null;
+      reset();
     }
+  }
+
+  public boolean isDirty() {
+    return !committedGeneratedCups.isEmpty();
+  }
+
+  @Override
+  public void reset() {
+    uncommittedGeneratedCupsByPrintWriter.clear();
+    committedGeneratedCups.clear();
+    newlyGeneratedTypeNames.clear();
+    newlyGeneratedArtifacts = new ArtifactSet();
+    cachedTypeNamesToReuse = null;
   }
 
   public Set<String> getActiveLinkerNames() {
@@ -565,8 +574,13 @@ public class StandardGeneratorContext implements GeneratorContext {
   }
 
   @Override
+  public boolean isGlobalCompile() {
+    return compilerContext.getOptions().shouldLink();
+  }
+  
+  @Override
   public ResourceOracle getResourcesOracle() {
-    return compilerContext.getModule().getBuildResourceOracle();
+    return compilerContext.getBuildResourceOracle();
   }
 
   @Override
@@ -821,7 +835,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     }
 
     // Check for public path collision.
-    if (compilerContext.getModule().findPublicFile(partialPath) != null) {
+    if (compilerContext.getPublicResourceOracle().getResourceMap().containsKey(partialPath)) {
       logger.log(TreeLogger.WARN, "Cannot create resource '" + partialPath
           + "' because it already exists on the public path", null);
       return null;

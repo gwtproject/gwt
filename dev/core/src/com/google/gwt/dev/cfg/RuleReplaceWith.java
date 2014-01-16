@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.RebindMode;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
@@ -30,6 +31,24 @@ public class RuleReplaceWith extends Rule {
 
   public RuleReplaceWith(String typeName) {
     this.replacementTypeName = typeName;
+  }
+
+  @Override
+  public String generateCreateInstanceExpression() {
+    return "return @" + getReplacementTypeName() + "::new()();";
+  }
+
+  @Override
+  public String generateMatchesExpression() {
+    return "return " + getRootCondition().toSource() + ";";
+  }
+
+  @Override
+  public void generateRuntimeRebindClasses(
+      TreeLogger logger, ModuleDef module, GeneratorContext context)
+      throws UnableToCompleteException {
+    runtimeRebindRuleGenerator.generate(
+        generateCreateInstanceExpression(), generateMatchesExpression());
   }
 
   public String getReplacementTypeName() {

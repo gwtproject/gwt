@@ -22,6 +22,24 @@
       "revId": "1ae4b2b0073f8eb48b724acab21f248e9875faba",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d21a6266_730a0081",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-17T21:12:26Z",
+      "side": 1,
+      "message": "since it\u0027s in the wrong place, i\u0027d rather not give it a name that sounds like it\u0027s a real legitimate stage",
+      "parentUuid": "2dca7dde_4f9e8578",
+      "revId": "1ae4b2b0073f8eb48b724acab21f248e9875faba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

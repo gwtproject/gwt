@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d21a6266_135e2cb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-17T19:58:08Z",
+      "side": 1,
+      "message": "s/RuleBaseLine/RuleGenerateWithFallback/",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "f79c533e1f04400e1903a457cc098fcd73fbfa1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d21a6266_93c59c29",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 7

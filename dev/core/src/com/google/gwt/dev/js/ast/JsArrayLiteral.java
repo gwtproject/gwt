@@ -1,11 +1,11 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -24,6 +24,8 @@ import java.util.List;
 public final class JsArrayLiteral extends JsLiteral {
 
   private final List<JsExpression> exprs = new ArrayList<JsExpression>();
+
+  private boolean internable = false;
 
   public JsArrayLiteral(SourceInfo sourceInfo) {
     super(sourceInfo);
@@ -74,5 +76,17 @@ public final class JsArrayLiteral extends JsLiteral {
       v.acceptWithInsertRemove(exprs);
     }
     v.endVisit(this, ctx);
+  }
+
+  /**
+   * Some array literals are not mutated and hence internable.
+   */
+  @Override
+  public boolean isInternable() {
+    return internable;
+  }
+
+  public void setInternable() {
+    internable = true;
   }
 }

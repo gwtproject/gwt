@@ -30,6 +30,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.HashBiMap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -272,9 +273,8 @@ public class JProgram extends JNode {
 
   public final List<JClassType> immortalCodeGenTypes = new ArrayList<JClassType>();
 
-  // TODO(rluble): (Separate compilation) the second parameter (hasWholeWorldKnoledge) must be
-  // false when doing separate compilation.
   public final JTypeOracle typeOracle;
+
   /**
    * Special serialization treatment.
    */
@@ -284,7 +284,7 @@ public class JProgram extends JNode {
 
   private final HashMap<JType, JArrayType> arrayTypes = new HashMap<JType, JArrayType>();
 
-  private IdentityHashMap<JReferenceType, JsCastMap> castMaps;
+  private Map<JReferenceType, JsCastMap> castMaps;
 
   private BiMap<JType, JField> classLiteralFieldsByType;
 
@@ -931,10 +931,10 @@ public class JProgram extends JNode {
     return JPrimitiveType.VOID;
   }
 
-  public void initTypeInfo(IdentityHashMap<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
+  public void initTypeInfo(Map<JReferenceType, JsCastMap> instantiatedCastableTypesMap) {
     castMaps = instantiatedCastableTypesMap;
     if (castMaps == null) {
-      castMaps = new IdentityHashMap<JReferenceType, JsCastMap>();
+      castMaps = Maps.newIdentityHashMap();
     }
   }
 

@@ -48,6 +48,24 @@
     },
     {
       "key": {
+        "uuid": "d21a6266_b31778a2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-17T21:14:36Z",
+      "side": 1,
+      "message": "since it\u0027s in the wrong place i\u0027d rather not give it a name that sounds like a real legitimate stage",
+      "parentUuid": "d21a6266_93c59c29",
+      "revId": "f79c533e1f04400e1903a457cc098fcd73fbfa1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d21a6266_73d200f2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 7
@@ -59,6 +77,24 @@
       "writtenOn": "2014-01-17T19:57:25Z",
       "side": 1,
       "message": "I was reading these comments today and was wondering what does it mean \", possible\" ?",
+      "revId": "f79c533e1f04400e1903a457cc098fcd73fbfa1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d21a6266_93147c9e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-17T21:14:36Z",
+      "side": 1,
+      "message": "think i lost some of the comment, fixed to \"if possible\"",
+      "parentUuid": "d21a6266_73d200f2",
       "revId": "f79c533e1f04400e1903a457cc098fcd73fbfa1e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

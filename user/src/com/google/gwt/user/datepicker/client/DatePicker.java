@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -38,52 +38,46 @@ import java.util.Map;
 
 /**
  * Standard GWT date picker.
- *
+ * 
  * <h3>CSS Style Rules</h3>
- *
+ * 
  * <ul class="css">
- *
+ * 
  * <li>.gwt-DatePicker { }</li>
- *
+ * 
  * <li>.datePickerMonthSelector { the month selector widget }</li>
- *
+ * 
  * <li>.datePickerMonth { the month in the month selector widget } <li>
- *
- * <li>.datePickerYear { the year in the month selector widget } <li>
- *
+ * 
  * <li>.datePickerPreviousButton { the previous month button } <li>
- *
+ * 
  * <li>.datePickerNextButton { the next month button } <li>
- *
- * <li>.datePickerPreviousYearButton { the previous year button } <li>
- *
- * <li>.datePickerNextYearButton { the next year button } <li>
- *
+ * 
  * <li>.datePickerDays { the portion of the picker that shows the days }</li>
- *
+ * 
  * <li>.datePickerWeekdayLabel { the label over weekdays }</li>
- *
+ * 
  * <li>.datePickerWeekendLabel { the label over weekends }</li>
- *
+ * 
  * <li>.datePickerDay { a single day }</li>
- *
+ * 
  * <li>.datePickerDayIsToday { today's date }</li>
- *
+ * 
  * <li>.datePickerDayIsWeekend { a weekend day }</li>
- *
+ * 
  * <li>.datePickerDayIsFiller { a day in another month }</li>
- *
+ * 
  * <li>.datePickerDayIsValue { the selected day }</li>
- *
+ * 
  * <li>.datePickerDayIsDisabled { a disabled day }</li>
- *
+ * 
  * <li>.datePickerDayIsHighlighted { the currently highlighted day }</li>
- *
+ * 
  * <li>.datePickerDayIsValueAndHighlighted { the highlighted day if it is also
  * selected }</li>
- *
+ * 
  * </ul>
- *
+ * 
  * <p>
  * <h3>Example</h3>
  * {@example com.google.gwt.examples.DatePickerExample}
@@ -176,16 +170,8 @@ public class DatePicker extends Composite implements
       return wrap("NextButton");
     }
 
-    public String nextYearButton() {
-      return wrap("NextYearButton");
-    }
-
     public String previousButton() {
       return wrap("PreviousButton");
-    }
-
-    public String previousYearButton() {
-      return wrap("PreviousYearButton");
     }
 
     public String weekdayLabel() {
@@ -196,13 +182,9 @@ public class DatePicker extends Composite implements
       return wrap("WeekendLabel");
     }
 
-    public String year() {
-      return wrap("Year");
-    }
-
     /**
      * Prepends the base name to the given style.
-     *
+     * 
      * @param style style name
      * @return style name
      */
@@ -263,20 +245,15 @@ public class DatePicker extends Composite implements
     }
   }
 
-  private static final int DEFAULT_VISIBLE_YEAR_COUNT = 21;
-
   private final DateStyler styler = new DateStyler();
 
-  private final MonthSelector monthAndYearSelector;
+  private final MonthSelector monthSelector;
   private final CalendarView view;
   private final CalendarModel model;
   private Date value;
   private Date highlighted;
   private StandardCss css = StandardCss.DEFAULT;
   private LeafValueEditor<Date> editor;
-  private int visibleYearCount = DEFAULT_VISIBLE_YEAR_COUNT;
-  private boolean yearArrowsVisible;
-  private boolean yearAndMonthDropdownVisible;
 
   /**
    * Create a new date picker.
@@ -288,23 +265,23 @@ public class DatePicker extends Composite implements
 
   /**
    * Creates a new date picker.
-   *
-   * @param monthAndYearSelector the month selector
+   * 
+   * @param monthSelector the month selector
    * @param view the view
    * @param model the model
    */
 
-  protected DatePicker(MonthSelector monthAndYearSelector, CalendarView view,
+  protected DatePicker(MonthSelector monthSelector, CalendarView view,
       CalendarModel model) {
 
     this.model = model;
-    this.monthAndYearSelector = monthAndYearSelector;
-    monthAndYearSelector.setDatePicker(this);
+    this.monthSelector = monthSelector;
+    monthSelector.setDatePicker(this);
     this.view = view;
     view.setDatePicker(this);
 
     view.setup();
-    monthAndYearSelector.setup();
+    monthSelector.setup();
     this.setup();
 
     setCurrentMonth(new Date());
@@ -322,7 +299,7 @@ public class DatePicker extends Composite implements
   /**
    * Adds a show range handler and immediately activate the handler on the
    * current view.
-   *
+   * 
    * @param handler the handler
    * @return the handler registration
    */
@@ -413,14 +390,14 @@ public class DatePicker extends Composite implements
 
   /**
    * Gets the current month the date picker is showing.
-   *
+   * 
    * <p>
    * A datepicker <b> may </b> show days not in the current month. It
    * <b>must</b> show all days in the current month.
    * </p>
-   *
+   * 
    * @return the current month
-   *
+   * 
    */
   public Date getCurrentMonth() {
     return getModel().getCurrentMonth();
@@ -428,7 +405,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Returns the first shown date.
-   *
+   * 
    * @return the first date.
    */
   // Final because the view should always control the value of the first date.
@@ -438,7 +415,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Gets the highlighted date (the one the mouse is hovering over), if any.
-   *
+   * 
    * @return the highlighted date
    */
   public final Date getHighlightedDate() {
@@ -447,7 +424,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Returns the last shown date.
-   *
+   * 
    * @return the last date.
    */
   // Final because the view should always control the value of the last date.
@@ -456,16 +433,9 @@ public class DatePicker extends Composite implements
   }
 
   /**
-   * Returns the number of year to display in the years selection dropdown.
-   */
-  public int getVisibleYearCount() {
-    return visibleYearCount;
-  }
-
-  /**
    * Gets the style associated with a date (does not include styles set via
    * {@link #addTransientStyleToDates}).
-   *
+   * 
    * @param date the date
    * @return the styles associated with this date
    */
@@ -475,7 +445,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Returns the selected date, or null if none is selected.
-   *
+   * 
    * @return the selected date, or null
    */
   public final Date getValue() {
@@ -484,9 +454,8 @@ public class DatePicker extends Composite implements
 
   /**
    * Is the visible date enabled?
-   *
+   * 
    * @param date the date, which must be visible
-   *
    * @return is the date enabled?
    */
   public boolean isDateEnabled(Date date) {
@@ -496,9 +465,8 @@ public class DatePicker extends Composite implements
 
   /**
    * Is the date currently shown in the date picker?
-   *
+   * 
    * @param date
-   *
    * @return is the date currently shown
    */
   public boolean isDateVisible(Date date) {
@@ -507,22 +475,6 @@ public class DatePicker extends Composite implements
     Date last = r.getLastDate();
     return (date != null && (CalendarUtil.isSameDate(first, date)
         || CalendarUtil.isSameDate(last, date) || (first.before(date) && last.after(date))));
-  }
-
-  /**
-   * Can the user navigate through the years?
-   *
-   * @return is the year navigation is enabled
-   */
-  public boolean isYearArrowsVisible() {
-    return yearArrowsVisible;
-  }
-
-  /**
-   * Is the year and month selectable via a dropdown?
-   */
-  public boolean isYearAndMonthDropdownVisible() {
-    return yearAndMonthDropdownVisible;
   }
 
   @Override
@@ -568,42 +520,12 @@ public class DatePicker extends Composite implements
    * A datepicker <b> may </b> show days not in the current month. It
    * <b>must</b> show all days in the current month.
    * </p>
-   *
+   * 
    * @param month the month to show
    */
   public void setCurrentMonth(Date month) {
     getModel().setCurrentMonth(month);
     refreshAll();
-  }
-
-  /**
-   * Set the number of years to display in the years selection dropdown. The range of years will be
-   * centered on the selected date.
-   */
-  public void setVisibleYearCount(int numberOfYears) {
-    if (numberOfYears <= 0) {
-      throw new IllegalArgumentException("The number of years to display must be positive");
-    }
-
-    visibleYearCount = numberOfYears;
-    getMonthSelector().refresh();
-  }
-
-  /**
-   * Set if the user can navigate through the years via a set of backward and forward buttons.
-   */
-  public void setYearArrowsVisible(boolean yearArrowsVisible) {
-    this.yearArrowsVisible = yearArrowsVisible;
-    getMonthSelector().refresh();
-  }
-
-  /**
-   * If the <code>dropdownVisible</code> is equal to true, the user will be able to change the current month and
-   * the current year of the date picker via two dropdown lists.
-   */
-  public void setYearAndMonthDropdownVisible(boolean dropdownVisible) {
-    this.yearAndMonthDropdownVisible = dropdownVisible;
-    getMonthSelector().refresh();
   }
 
   /**
@@ -649,7 +571,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Sets the {@link DatePicker}'s value.
-   *
+   * 
    * @param newValue the new value
    */
   public final void setValue(Date newValue) {
@@ -658,7 +580,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Sets the {@link DatePicker}'s value.
-   *
+   * 
    * @param newValue the new value for this date picker
    * @param fireEvents should events be fired.
    */
@@ -682,7 +604,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Gets the {@link CalendarModel} associated with this date picker.
-   *
+   * 
    * @return the model
    */
   protected final CalendarModel getModel() {
@@ -691,16 +613,16 @@ public class DatePicker extends Composite implements
 
   /**
    * Gets the {@link MonthSelector} associated with this date picker.
-   *
+   * 
    * @return the month selector
    */
   protected final MonthSelector getMonthSelector() {
-    return monthAndYearSelector;
+    return monthSelector;
   }
 
   /**
    * Gets the {@link CalendarView} associated with this date picker.
-   *
+   * 
    * @return the view
    */
   protected final CalendarView getView() {
@@ -741,7 +663,7 @@ public class DatePicker extends Composite implements
   /**
    * Gets the css associated with this date picker for use by extended month and
    * cell grids.
-   *
+   * 
    * @return the css.
    */
   final StandardCss css() {
@@ -750,7 +672,7 @@ public class DatePicker extends Composite implements
 
   /**
    * Sets the highlighted date.
-   *
+   * 
    * @param highlighted highlighted date
    */
   void setHighlightedDate(Date highlighted) {

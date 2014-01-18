@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1226bab5_cd1a49cc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayDequeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-18T16:16:24Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "41005094c9b8d995e4f1d80dd0ea9eb86304878d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

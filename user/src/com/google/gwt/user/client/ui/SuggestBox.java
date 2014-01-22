@@ -323,6 +323,10 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
       suggestionPopup.hide();
     }
 
+    public void showSuggestions() {
+      suggestionPopup.show();
+    }
+
     public boolean isAnimationEnabled() {
       return suggestionPopup.isAnimationEnabled();
     }
@@ -661,6 +665,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   private SuggestOracle oracle;
   private String currentText;
   private LeafValueEditor<String> editor;
+  private HandlerRegistration defaultKeyUpHandler;
   private final SuggestionDisplay display;
   private final ValueBoxBase<String> box;
   private final Callback callback = new Callback() {
@@ -1102,6 +1107,13 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     }
   }
 
+  /**
+   * Prevents suggestions being generated on every key up.
+   */
+  public void unregisterDefaultKeyUpHandler() {
+    defaultKeyUpHandler.removeHandler();
+  }
+
   @Override
   protected void onEnsureDebugId(String baseID) {
     super.onEnsureDebugId(baseID);
@@ -1151,7 +1163,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
 
     TextBoxEvents events = new TextBoxEvents();
     box.addKeyDownHandler(events);
-    box.addKeyUpHandler(events);
+    defaultKeyUpHandler = box.addKeyUpHandler(events);
     box.addValueChangeHandler(events);
   }
 

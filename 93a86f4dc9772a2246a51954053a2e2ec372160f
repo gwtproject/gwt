@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52b912a9_c7a79ecd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_e7a422cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_87a1a6b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_a79e2a7d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_4713ae44",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_67183260",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnableToCompleteException\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_071db64e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-22T22:19:10Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "93a86f4dc9772a2246a51954053a2e2ec372160f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

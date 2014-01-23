@@ -33,6 +33,24 @@
       "revId": "a764bf1c6d6879d7b70a55e5ec9be665445d1746",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_6b8a3d08",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-23T01:06:12Z",
+      "side": 1,
+      "message": "Indexed fields shouldn\u0027t be problem because I fixed JsName.makeRef() to return a qualified ref when the name has been moved to a namespace.\n\nJsFunction is different because we use JsFunction.getName() for two purposes: (1) is this an anonymous function expression? (2) what name should we use to refer to this function? When a function is in a namespace, it could be referenced but it\u0027s initialized using an anonymous function.\n\nPossibly we could change getIndexedFunction() to return the JsName, and then use makeRef() to create a reference and getStaticRef() to get the function, instead of using function.getName().getRef(). But that\u0027s a bigger change.",
+      "parentUuid": "7239b600_00a206bc",
+      "revId": "a764bf1c6d6879d7b70a55e5ec9be665445d1746",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

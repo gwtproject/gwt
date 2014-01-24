@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "72b456b0_7d2e7ba8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-01-24T07:41:35Z",
+      "side": 1,
+      "message": "Maybe use a LinkedHashSet instead to have insertion order iteration and no duplicates.",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 4
+      },
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_5d29379d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-01-24T07:41:35Z",
+      "side": 1,
+      "message": "Either add INTERN_ARRAYS and the case for arrays in LiteralInterningVisitor or remove the counting here.",
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52b912a9_0dd2b59e",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 4
@@ -47,6 +87,52 @@
       "writtenOn": "2014-01-24T02:58:33Z",
       "side": 1,
       "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_fd126b72",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsLiteralInternerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-01-24T07:41:35Z",
+      "side": 1,
+      "message": "Remove, almost duplicate.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_9d0faf49",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsLiteralInternerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-01-24T07:41:35Z",
+      "side": 1,
+      "message": "Make comment more explanatory.",
+      "range": {
+        "startLine": 88,
+        "startChar": 13,
+        "endLine": 88,
+        "endChar": 16
+      },
       "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

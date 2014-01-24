@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7239b600_260da206",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CodeSplitterCollapsedPropertiesTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-24T19:18:31Z",
+      "side": 1,
+      "message": "Have two tests each with different WithProperty annotation?",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 44
+      },
+      "revId": "1db649b4648dff65cd757b0f856863fd7a74725d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

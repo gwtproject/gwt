@@ -26,7 +26,7 @@ class HistoryImplTimer extends HistoryImpl {
     var token = '';
 
     // Get the initial token from the url's hash component.
-    var hash = $wnd.location.hash;
+    var hash = @com.google.gwt.user.client.Window.Location::getHash()();
     if (hash.length > 0) {
       token = this.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
     }
@@ -37,7 +37,7 @@ class HistoryImplTimer extends HistoryImpl {
     var historyImpl = this;
 
     var checkHistory = $entry(function() {
-      var token = '', hash = $wnd.location.hash;
+      var token = '', hash = @com.google.gwt.user.client.Window.Location::getHash()();
       if (hash.length > 0) {
         token = historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       }

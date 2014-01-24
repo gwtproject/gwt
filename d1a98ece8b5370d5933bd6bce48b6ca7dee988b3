@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72b456b0_fda10b21",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T19:28:16Z",
+      "side": 1,
+      "message": "missing line break",
+      "revId": "d1a98ece8b5370d5933bd6bce48b6ca7dee988b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_9dc56fd2",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsLiteralInternerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T19:28:16Z",
+      "side": 1,
+      "message": "these are very readable",
+      "revId": "d1a98ece8b5370d5933bd6bce48b6ca7dee988b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

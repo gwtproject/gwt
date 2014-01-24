@@ -22,6 +22,30 @@
       "revId": "1db649b4648dff65cd757b0f856863fd7a74725d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_9d7b2fd3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CodeSplitterCollapsedPropertiesTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T19:37:20Z",
+      "side": 1,
+      "message": "The failure is not present if WithProperty is used instead of the provider in the gwt.xml file.",
+      "parentUuid": "7239b600_260da206",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 44
+      },
+      "revId": "1db649b4648dff65cd757b0f856863fd7a74725d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_83362015",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/SizeMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Copies from you actually!",
+      "parentUuid": "72b456b0_02411e54",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_c23a26d6",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/SizeMapRecorder.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "now that you\u0027re interning more types, does a more complicated literal type decoding need to be done here?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_633b1cff",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/SizeMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Here is accounting separately strings in fragments.\n\nOther literals where not considered earlier (as they where either custom interned or not at all). So it is working as before.\n\nWe will have to revisit this at some point.",
+      "parentUuid": "72b456b0_c23a26d6",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_8303c09f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52b912a9_6dbc91c0",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_2260e2de",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "yay, this is much nicer",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_c32f88b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "But did not fix the comment uuuhhh.",
+      "parentUuid": "72b456b0_2260e2de",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_032a10a5",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsHoister.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "I added an assertion, because left hand side of property initializers can only be strings, numbers or identifiers.\n\nAnd some passes where handling that wrong. So now if it is not successful the stack becomes nonsense and the new assertions where broken.\n\nThere should be a way to abort visitors forcefully.",
+      "parentUuid": "72b456b0_823f4e9c",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_770f7a8f",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "\"Each unique literal\"",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_e3260cdf",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_770f7a8f",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_46db8695",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_1704fe6e",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_97c54ed2",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "s/Occurence/Occurrence",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_26e00238",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Fixed many mispellings of occurrence here but didnt catch this one. nice.",
+      "parentUuid": "72b456b0_97c54ed2",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_86e58e4a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_b7c2d2c5",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_4201561d",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "it looks like entries are added to this set, and removed from this set, but the contents of this set are never read?\n\nif so, remove it",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_66ea0a1a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Not used, not needed, confused and gone.",
+      "parentUuid": "72b456b0_4201561d",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_c6ee762b",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "It is now.",
+      "parentUuid": "72b456b0_977b0ed3",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_175f1e61",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -200,6 +398,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "it sounds like this comment is saying that this code path will only run if the literal is not internable, but it looks to me like it will be run regardless",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_a6eb7219",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "72b456b0_175f1e61",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_06f97ef2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_7773faff",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_97178ea2",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -234,6 +468,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "comment is stale",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_e6f57af6",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_97178ea2",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_46026627",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_77b69a71",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_37c022ca",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -268,6 +538,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "s/Strings/literals",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_26076237",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_37c022ca",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_86fc6ee0",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_d7a42634",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_6229fa9d",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -302,6 +608,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_66016a1e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_6229fa9d",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_c615d65d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_424f1685",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52b912a9_0dc1553f",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -336,6 +678,24 @@
       "writtenOn": "2014-01-23T23:16:38Z",
       "side": 1,
       "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_23fe3451",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52b912a9_0dc1553f",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_4629c69d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNumberLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_024b5e47",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_c2446635",
         "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
         "patchSetId": 3
@@ -376,6 +754,24 @@
     },
     {
       "key": {
+        "uuid": "7239b600_262e42a7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_c2446635",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b456b0_82e66e04",
         "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
         "patchSetId": 3
@@ -387,6 +783,24 @@
       "writtenOn": "2014-01-24T01:50:50Z",
       "side": 1,
       "message": "please add an explanation for why the empty object is not internable",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7239b600_8633ce0d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-24T02:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b456b0_82e66e04",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "72b456b0_02411e54",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/SizeMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "nice rename",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_c23a26d6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/impl/SizeMapRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "now that you\u0027re interning more types, does a more complicated literal type decoding need to be done here?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52b912a9_6dbc91c0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 3
@@ -19,6 +53,278 @@
     },
     {
       "key": {
+        "uuid": "72b456b0_2260e2de",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "yay, this is much nicer",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_823f4e9c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsHoister.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "so either way you\u0027re going to stack.pop(), but you\u0027re only going to set the newInit\u0027s labelExpr if cloning was successful.\n\nwhy even bother? isn\u0027t the entire JsObjectLiteral going to be thrown out or ignored since cloning failed?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_770f7a8f",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "\"Each unique literal\"",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_1704fe6e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "\"internable literal\"",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_97c54ed2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "s/Occurence/Occurrence",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_b7c2d2c5",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "s/computeLiteralCounts/getLiteralCounts",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_4201561d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "it looks like entries are added to this set, and removed from this set, but the contents of this set are never read?\n\nif so, remove it",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_977b0ed3",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "why isn\u0027t this one checknig if (x.isInternable()) ?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_175f1e61",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "it sounds like this comment is saying that this code path will only run if the literal is not internable, but it looks to me like it will be run regardless",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_7773faff",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "missing blank line",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_97178ea2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "comment is stale",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_77b69a71",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "s/Strings/literals",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_37c022ca",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "s/Strings/literals",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_d7a42634",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "s/Strings/literals\n\netc etc",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_6229fa9d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "?",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_424f1685",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "we talked about this one offline and agreed that it should be re-examined, also hasLhsLiteral()",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52b912a9_0dc1553f",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 3
@@ -30,6 +336,57 @@
       "writtenOn": "2014-01-23T23:16:38Z",
       "side": 1,
       "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_024b5e47",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNumberLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "formatting",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_c2446635",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "hashCode and equals should use the same list of class properties",
+      "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b456b0_82e66e04",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-24T01:50:50Z",
+      "side": 1,
+      "message": "please add an explanation for why the empty object is not internable",
       "revId": "a0d4fb6d01a4321cc656b688ffdfb7b40b228503",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52b912a9_0dd2b59e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-24T02:58:33Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_2dd7798f",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-24T02:58:33Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b912a9_cdcb3de6",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-24T02:58:33Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "881cbcddbb6f9603d0733c05b769c5d3b89e634f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

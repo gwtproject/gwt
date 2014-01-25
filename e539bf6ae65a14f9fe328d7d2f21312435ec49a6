@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b226cef6_4a39d3b4",
+        "filename": "user/test/com/google/gwt/user/client/ui/MenuBarTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-25T08:25:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e539bf6ae65a14f9fe328d7d2f21312435ec49a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

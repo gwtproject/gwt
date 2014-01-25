@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f213e69e_a4eec229",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-25T09:06:53Z",
+      "side": 1,
+      "message": "Bug: issue 8473",
+      "revId": "ada693dfa4749c4152b8dc3209b698c699e88ff2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

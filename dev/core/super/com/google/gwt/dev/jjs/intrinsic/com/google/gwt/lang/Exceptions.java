@@ -91,6 +91,26 @@ final class Exceptions {
   }
 
   /**
+   * Throws DevOnlyNullPointerException if the argument is null. Otherwise,
+   * returns the argument.
+   *
+   * <p>The GWT compiler inserts calls to this method as a debugging aid, but
+   * they will be removed in production compiles. We throw a non-standard
+   * exception to make it harder to accidentally write code that works in
+   * development and fails in production.
+   *
+   * <p> Instead of attempting to catch this exception, we recommend adding
+   * an explicit null check and throwing java.lang.NullPointerException,
+   * so that the GWT compiler doesn't remove the null check you're depending on.
+   */
+  static <T> T checkNotNull(T arg) {
+    if (arg == null) {
+      throw new DevOnlyNullPointerException();
+    }
+    return arg;
+  }
+
+  /**
    * Use by the try-with-resources construct. Look at
    * {@link com.google.gwt.dev.jjs.impl.GwtAstBuilder.createCloseBlockFor}.
    *

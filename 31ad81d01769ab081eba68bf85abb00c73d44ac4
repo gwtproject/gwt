@@ -57,6 +57,30 @@
       "revId": "31ad81d01769ab081eba68bf85abb00c73d44ac4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_fa9a1512",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-27T23:32:11Z",
+      "side": 1,
+      "message": "Method rename to onWildcardValueChange_multi.\n\nThe raw types doesn\u0027t work and i don\u0027t think that is a regression, so I will skip that.",
+      "parentUuid": "32df3e25_fef5e1f5",
+      "range": {
+        "startLine": 225,
+        "startChar": 7,
+        "endLine": 225,
+        "endChar": 38
+      },
+      "revId": "31ad81d01769ab081eba68bf85abb00c73d44ac4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

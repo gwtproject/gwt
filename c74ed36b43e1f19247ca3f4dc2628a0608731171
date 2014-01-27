@@ -92,6 +92,30 @@
       "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_df990baf",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Exceptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-27T20:15:06Z",
+      "side": 1,
+      "message": "That\u0027s a bit trickier:\n\nThe optimization pass is in the Java AST, not the JavaScript AST, so we\u0027d probably have to add the method call anyway and replace it with toString later on.\n\nThe call may be an expression (such as foo().bar().baz() and we don\u0027t want to evaluate the first part of the chain twice, so we\u0027d have to introduce a variable for it:\n\n  var temp1 \u003d foo();\n  temp1.toString;\n  var temp2 \u003d bar(temp1);\n  temp2.toString;\n  baz(temp2);\n\nAnother possibility would be to do the null check in the called method rather than the caller. That would make adding arg1.toString pretty easy. I put it in the caller because I thought the stack trace looked a bit better - we\u0027re blaming the caller rather than the callee.",
+      "parentUuid": "d2f7c297_7fe57747",
+      "range": {
+        "startLine": 106,
+        "startChar": 15,
+        "endLine": 106,
+        "endChar": 27
+      },
+      "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

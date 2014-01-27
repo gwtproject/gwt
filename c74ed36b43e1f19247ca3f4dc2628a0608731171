@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2f7c297_b1a43833",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-27T17:20:27Z",
+      "side": 1,
+      "message": "Maybe rename isJso to isJsoCall?",
+      "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

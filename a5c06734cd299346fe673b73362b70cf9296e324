@@ -16,6 +16,29 @@
       "revId": "a5c06734cd299346fe673b73362b70cf9296e324",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_3ad2ddf0",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-27T23:20:06Z",
+      "side": 1,
+      "message": "If we go this route, this is better to be more explicit. Something like setAutoRefreshSuggestionList(false)",
+      "range": {
+        "startLine": 1113,
+        "startChar": 14,
+        "endLine": 1113,
+        "endChar": 43
+      },
+      "revId": "a5c06734cd299346fe673b73362b70cf9296e324",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

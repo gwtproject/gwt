@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d2f7c297_941acaca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-27T19:39:14Z",
+      "side": 1,
+      "message": "Actually, I was thinking that perhaps we could introduce an @AllowNullThis annotation and put it on methods like cast() where we rely on such trickery. It would be better documentation of what\u0027s currently an obscure practice. But it might be hard to find and update all the places where we do that.\n\nFor now I\u0027m hoping that excluding all JSO\u0027s is sufficient. It seems like non-JSO code that relies on a null \"this\" would have failed in Dev Mode before, so it should be rare?",
+      "parentUuid": "d2f7c297_54d182e7",
+      "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2f7c297_b1a43833",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
         "patchSetId": 1

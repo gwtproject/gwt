@@ -116,6 +116,30 @@
       "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_ffd4c7ff",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Exceptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-01-27T20:57:57Z",
+      "side": 1,
+      "message": "Ok, I found it here: https://plus.google.com/+GoogleChromeDevelopers/posts/AcQJn4L2XAp\n\nI think it should be fine to introduce the check to call site.\nIn addition to being fast, I also like the idea of keeping the semantics closer to js by letting browser throw type error.",
+      "parentUuid": "d2f7c297_df990baf",
+      "range": {
+        "startLine": 106,
+        "startChar": 15,
+        "endLine": 106,
+        "endChar": 27
+      },
+      "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

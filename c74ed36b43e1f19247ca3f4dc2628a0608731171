@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d2f7c297_54d182e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-27T19:07:45Z",
+      "side": 1,
+      "message": "And dispatches on interfaces that are dual impl (i.e. implemented by both JSOs and regular classes) get a JS type error if the this is null.\n\nAt some point we will have to bite the bullet and make the null check on JSOs.\n\nIt should be safe to check null in the method created by getOrCreateDevirtualMethod as this is the case where a typeerror occurs if this\u003d null.",
+      "parentUuid": "f213e69e_a41c0282",
+      "revId": "c74ed36b43e1f19247ca3f4dc2628a0608731171",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2f7c297_b1a43833",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
         "patchSetId": 1

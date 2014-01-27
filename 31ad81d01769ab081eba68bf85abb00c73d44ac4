@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d2f7c297_b181d86f",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/HandlerEvaluator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-27T17:42:39Z",
+      "side": 1,
+      "message": "Fix the preceding comment as it no longer applies.",
+      "revId": "31ad81d01769ab081eba68bf85abb00c73d44ac4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32df3e25_fef5e1f5",
         "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.java",
         "patchSetId": 1

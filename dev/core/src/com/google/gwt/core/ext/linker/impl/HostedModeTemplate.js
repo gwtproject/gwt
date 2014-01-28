@@ -53,8 +53,8 @@ function __MODULE_FUNC__() {
       moduleName: '__MODULE_NAME__',
       sessionId: $sessionId,
       subSystem: 'startup',
-      evtGroup: 'bootstrap', 
-      millis:(new Date()).getTime(), 
+      evtGroup: 'bootstrap',
+      millis:(new Date()).getTime(),
       type: 'begin'
     });
   }
@@ -74,7 +74,7 @@ function __MODULE_FUNC__() {
     try {
       var query = $wnd.location.search;
       return (query.indexOf('gwt.codesvr=') != -1
-          || query.indexOf('gwt.hosted=') != -1 
+          || query.indexOf('gwt.hosted=') != -1
           || ($wnd.external && $wnd.external.gwtOnLoad)) &&
           (query.indexOf('gwt.hybrid') == -1);
     } catch (e) {
@@ -138,7 +138,7 @@ function __MODULE_FUNC__() {
 
     // Gets the part of a url up to and including the 'path' portion.
     function getDirectoryOfFile(path) {
-      // Truncate starting at the first '?' or '#', whichever comes first. 
+      // Truncate starting at the first '?' or '#', whichever comes first.
       var hashIndex = path.lastIndexOf('#');
       if (hashIndex == -1) {
         hashIndex = path.length;
@@ -295,8 +295,8 @@ function __MODULE_FUNC__() {
       iframe.tabIndex = -1;
       // Due to an IE6/7 refresh quirk, this must be an appendChild.
       $doc.body.appendChild(iframe);
-      
-      /* 
+
+      /*
        * The src has to be set after the iframe is attached to the DOM to avoid
        * refresh quirks in Safari.  We have to use the location.replace trick to
        * avoid FF2 refresh quirks.
@@ -304,16 +304,16 @@ function __MODULE_FUNC__() {
       $stats && $stats({
         moduleName:'__MODULE_NAME__',
         sessionId: $sessionId,
-        subSystem:'startup', 
-        evtGroup: 'moduleStartup', 
-        millis:(new Date()).getTime(), 
+        subSystem:'startup',
+        evtGroup: 'moduleStartup',
+        millis:(new Date()).getTime(),
         type: 'moduleRequested'
       });
       iframe.contentWindow.location.replace(base + strongName);
     }
   }
 
-  // --------------- PROPERTY PROVIDERS --------------- 
+  // --------------- PROPERTY PROVIDERS ---------------
 
 // __PROPERTIES_BEGIN__
 // __PROPERTIES_END__
@@ -341,9 +341,9 @@ function __MODULE_FUNC__() {
     $stats && $stats({
       moduleName:'__MODULE_NAME__',
       sessionId: $sessionId,
-      subSystem:'startup', 
-      evtGroup: 'loadExternalRefs', 
-      millis:(new Date()).getTime(), 
+      subSystem:'startup',
+      evtGroup: 'loadExternalRefs',
+      millis:(new Date()).getTime(),
       type: 'end'
     });
     maybeStartModule();
@@ -391,9 +391,9 @@ function __MODULE_FUNC__() {
   $stats && $stats({
     moduleName:'__MODULE_NAME__',
     sessionId: $sessionId,
-    subSystem:'startup', 
-    evtGroup: 'bootstrap', 
-    millis:(new Date()).getTime(), 
+    subSystem:'startup',
+    evtGroup: 'bootstrap',
+    millis:(new Date()).getTime(),
     type: 'selectingPermutation'
   });
 
@@ -450,9 +450,9 @@ function __MODULE_FUNC__() {
   $stats && $stats({
     moduleName:'__MODULE_NAME__',
     sessionId: $sessionId,
-    subSystem:'startup', 
-    evtGroup: 'bootstrap', 
-    millis:(new Date()).getTime(), 
+    subSystem:'startup',
+    evtGroup: 'bootstrap',
+    millis:(new Date()).getTime(),
     type: 'end'
   });
 

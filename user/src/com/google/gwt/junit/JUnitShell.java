@@ -648,6 +648,7 @@ public class JUnitShell extends DevMode {
     return unitTestShell.messageQueue;
   }
 
+
   /**
    * Get the list of remote user agents to compile. This method returns null
    * until all clients have connected.

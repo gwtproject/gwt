@@ -64,9 +64,9 @@ public class JavaAstConstructor {
       code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
       code.append("public final class Array {\n");
       code.append("  static void setCheck(Array array, int index, Object value) { }\n");
-      code.append("  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap, int queryId, int length, int seedType) { }\n");
-      code.append("  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs, int[] queryIdExprs, int[] dimExprs, int count, int seedType) { }\n");
-      code.append("  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap, int queryId, Array array) { }\n");
+      code.append("  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap, int elementTypeId, boolean canElementBeJso, int length, int seedType) { }\n");
+      code.append("  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs, int[] elementTypeIds, boolean canLeafElementBeJso, int[] dimExprs, int count, int seedType) { }\n");
+      code.append("  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap, int elementTypeId, boolean canElementBeJso, Array array) { }\n");
       code.append("  public int length = 0;\n");
       code.append("  protected Class<?> arrayClass = null;\n");
       code.append("}\n");

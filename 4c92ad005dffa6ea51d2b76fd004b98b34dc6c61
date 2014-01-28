@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d2f7c297_4ae39686",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T21:06:50Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "f213e69e_edf89df0",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f213e69e_adeea529",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-28T20:32:42Z",
       "side": 1,
       "message": "this class doesn\u0027t really contain any ids? shouldn\u0027t it be named JTypeReference or something like that?",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_2ae8ca60",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T21:06:50Z",
+      "side": 1,
+      "message": "It represents a typeidentifier for a type, or more exactly is a proxy for one. I am not sure whether renaming to JTypeReference is a good idea because it will be a different usage than all other J..Refs that we have. JType is always  treated as a type reference.",
+      "parentUuid": "f213e69e_adeea529",
       "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d2f7c297_ca1dc6c6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T21:06:50Z",
+      "side": 1,
+      "message": "This is because it is subclass of JNameOf (historical). Need to be refactored out.\n\nstringType is a reference to the JType for javaLangString, needed for JNameOf. Do not why, I have not looked into it but needs to be looked into and refactor appropiately.",
+      "parentUuid": "f213e69e_2a3c5bf8",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f213e69e_0a419f78",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-01-28T20:32:42Z",
       "side": 1,
       "message": "what does \"node\" refer to?",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_aa1afac9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T21:06:50Z",
+      "side": 1,
+      "message": "node is the actual JType. Renamed.\n\nIt also confused the heck out of me.",
+      "parentUuid": "f213e69e_0a419f78",
       "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

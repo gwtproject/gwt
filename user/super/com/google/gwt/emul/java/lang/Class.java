@@ -1,12 +1,12 @@
 /*
  * Copyright 2006 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
 /**
  * Generally unsupported. This class is provided so that the GWT compiler can
  * choke down class literal references.
- * 
+ *
  * @param <T> the type of the object
  */
 public final class Class<T> implements Type {
@@ -33,20 +33,21 @@ public final class Class<T> implements Type {
   private static final int ENUM = 0x00000008;
 
   static native String asString(int number) /*-{
-    // for primitives, the seedId isn't a number, but a string like ' Z'
+    // TODO(rluble): Make general for the case of String type ids.
+    // for primitives, the runtime type id  isn't a number, but a string like ' Z'
     return typeof(number) == 'number' ?  "S" + (number < 0 ? -number : number) : number;
   }-*/;
 
   /**
    * Create a Class object for an array.
-   * 
+   *
    * @skip
    */
   static <T> Class<T> createForArray(String packageName, String className,
-      int seedId, Class<?> componentType) {
+      int typeId, Class<?> componentType) {
     // Initialize here to avoid method inliner
     Class<T> clazz = new Class<T>();
-    setName(clazz, packageName, className, seedId != 0 ? -seedId : 0);
+    setName(clazz, packageName, className, typeId != 0 ? -typeId : 0);
     clazz.modifiers = ARRAY;
     clazz.superclass = Object.class;
     clazz.componentType = componentType;
@@ -55,29 +56,29 @@ public final class Class<T> implements Type {
 
   /**
    * Create a Class object for a class.
-   * 
+   *
    * @skip
    */
   static <T> Class<T> createForClass(String packageName, String className,
-      int seedId, Class<? super T> superclass) {
+      int typeId, Class<? super T> superclass) {
     // Initialize here to avoid method inliner
     Class<T> clazz = new Class<T>();
-    setName(clazz, packageName, className, seedId);
+    setNameForClass(clazz, packageName, className, typeId);
     clazz.superclass = superclass;
     return clazz;
   }
 
   /**
    * Create a Class object for an enum.
-   * 
+   *
    * @skip
    */
   static <T> Class<T> createForEnum(String packageName, String className,
-      int seedId, Class<? super T> superclass,
+      int typeId, Class<? super T> superclass,
       JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) {
     // Initialize here to avoid method inliner
     Class<T> clazz = new Class<T>();
-    setName(clazz, packageName, className, seedId);
+    setNameForClass(clazz, packageName, className, typeId);
     clazz.modifiers = (enumConstantsFunc != null) ? ENUM : 0;
     clazz.superclass = clazz.enumSuperclass = superclass;
     clazz.enumConstantsFunc = enumConstantsFunc;
@@ -87,7 +88,7 @@ public final class Class<T> implements Type {
 
   /**
    * Create a Class object for an interface.
-   * 
+   *
    * @skip
    */
   static <T> Class<T> createForInterface(String packageName, String className) {
@@ -100,14 +101,14 @@ public final class Class<T> implements Type {
 
   /**
    * Create a Class object for a primitive.
-   * 
+   *
    * @skip
    */
   static Class<?> createForPrimitive(String packageName, String className,
-      int seedId) {
+      int typeId) {
     // Initialize here to avoid method inliner
     Class<?> clazz = new Class<Object>();
-    setName(clazz, packageName, className, seedId);
+    setName(clazz, packageName, className, typeId);
     clazz.modifiers = PRIMITIVE;
     return clazz;
   }
@@ -127,64 +128,75 @@ public final class Class<T> implements Type {
   }
 
   /**
-   * null or 0 implies lack of seed function / non-instantiable type
+   * null implies lack of seed function / non-instantiable type
    */
-  static native boolean isInstantiable(int seedId) /*-{
-    return typeof (seedId) == 'number' && seedId > 0;
+  static native boolean isInstantiable(int typeId) /*-{
+    return typeof (typeId) == 'number' && typeId >0;
   }-*/;
 
   /**
    * null implies pruned.
    */
-  static native boolean isInstantiableOrPrimitive(int seedId) /*-{
-    return seedId != null && seedId != 0;
+  static native boolean isInstantiableOrPrimitive(int typeId) /*-{
+    return typeId != null && typeId !=0;
   }-*/;
 
   /**
    * Install class literal into seed.prototype.clazz field such that
    * Object.getClass() returning this.clazz returns the literal. Also stores
-   * seedId on class literal for looking up prototypes given a literal. This
+   * typeId on class literal for looking up prototypes given a literal. This
    * is used for deRPC at the moment, but may be used to implement
    * Class.newInstance() in the future.
    */
-  static native void setClassLiteral(int seedId, Class<?> clazz) /*-{
+  static native void setClassLiteral(int typeId, Class<?> clazz) /*-{
     var proto;
-    clazz.@java.lang.Class::seedId = seedId;
-    // String is the exception to the usual vtable setup logic
-    if (seedId == 2) {
-      proto = String.prototype
-    } else {
-      if (seedId > 0) {
-        // Guarantees virtual method won't be pruned by using a JSNI ref
-        // This is required because deRPC needs to call it.
-        var seed = @java.lang.Class::getSeedFunction(Ljava/lang/Class;)(clazz);
-        // A class literal may be referenced prior to an async-loaded vtable setup
-        // For example, class literal lives in inital fragment,
-        // but type is instantiated in another fragment
-        if (seed) {
-          proto = seed.prototype;
-        } else {
-          // Leave a place holder for now to be filled in by __defineSeed__ later
-          seed = @com.google.gwt.lang.SeedUtil::seedTable[seedId] = function(){};
-          seed.@java.lang.Object::___clazz = clazz;
-          return;
-        }
+    clazz.@java.lang.Class::seedId = typeId;
+    if (typeId > 0) {
+      // Guarantees virtual method won't be pruned by using a JSNI ref
+      // This is required because deRPC needs to call it.
+      var seed = @java.lang.Class::getSeedFunction(Ljava/lang/Class;)(clazz);
+      // A class literal may be referenced prior to an async-loaded vtable setup
+      // For example, class literal lives in inital fragment,
+      // but type is instantiated in another fragment
+      if (seed) {
+        proto = seed.prototype;
       } else {
+        // Leave a place holder for now to be filled in by __defineSeed__ later
+        seed = @com.google.gwt.lang.SeedUtil::seedTable[typeId] = function(){};
+        seed.@java.lang.Object::___clazz = clazz;
         return;
       }
+    } else {
+      return;
     }
     proto.@java.lang.Object::___clazz = clazz;
   }-*/;
 
   /**
-   * The seedId parameter can take on the following values:
+   * The typeId parameter can take on the following values:
+   * > 0 =>  type is instantiable class
+   * < 0 => type is instantiable array
+   * null => type is not instantiable
+   * string => type is primitive
+   */
+  static void setNameForClass(Class<?> clazz, String packageName, String className,
+      int typeId) {
+    setName(clazz, packageName, className, typeId);
+
+    if (isInstantiable(typeId)) {
+      setClassLiteral(typeId, clazz);
+    }
+  }
+
+  /**
+   * The typeId parameter can take on the following values:
    * > 0 =>  type is instantiable class
    * < 0 => type is instantiable array
    * null => type is not instantiable
    * string => type is primitive
    */
   static void setName(Class<?> clazz, String packageName, String className,
-      int seedId) {
+      int typeId) {
     if (clazz.isClassMetadataEnabled()) {
       clazz.typeName = packageName + className;
       clazz.simpleName = className;
@@ -195,14 +207,11 @@ public final class Class<T> implements Type {
        * during application start up, before class Integer has been initialized.
        */
       clazz.typeName = "Class$"
-          + (isInstantiableOrPrimitive(seedId) ? asString(seedId) : "" + clazz.hashCode());
+          + (isInstantiableOrPrimitive(typeId) ? asString(typeId) : "" + clazz.hashCode());
       clazz.simpleName = clazz.typeName;
     }
-
-    if (isInstantiable(seedId)) {
-      setClassLiteral(seedId, clazz);
-    }
   }
+
 
   JavaScriptObject enumValueOfFunc;
 
@@ -225,7 +234,7 @@ public final class Class<T> implements Type {
 
   /**
    * Not publicly instantiable.
-   * 
+   *
    * @skip
    */
   private Class() {

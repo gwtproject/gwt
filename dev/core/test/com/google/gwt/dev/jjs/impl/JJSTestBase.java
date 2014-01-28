@@ -257,7 +257,7 @@ public abstract class JJSTestBase extends TestCase {
       }
     });
 
-    sourceOracle.addOrReplace(new MockJavaResource("java.lang.AutoCloseable") {
+/*    sourceOracle.addOrReplace(new MockJavaResource("java.lang.AutoCloseable") {
       @Override
       public CharSequence getContent() {
         return ""
@@ -267,7 +267,7 @@ public abstract class JJSTestBase extends TestCase {
             + "}";
       }
     });
-
+  */
     sourceOracle.addOrReplace(new MockJavaResource("com.google.gwt.lang.Exceptions") {
       @Override
       public CharSequence getContent() {
@@ -283,18 +283,8 @@ public abstract class JJSTestBase extends TestCase {
         }
     });
 
-    sourceOracle.addOrReplace(new MockJavaResource("java.lang.String") {
-      @Override
-      public CharSequence getContent() {
-        return "package java.lang;" +
-          "public class String {" +
-          "  public int length() { return 0; }" +
-          "  public char charAt(int pos) { return 0; }" +
-          "  public String toString() { return this; }" +
-          "  public int hashCode() { return 0; }" +
-          "}";
-      }
-    });
+   /* sourceOracle.addOrReplace(JavaResourceBase.CHAR_SEQUENCE, JavaResourceBase.COMPARABLE,
+        JavaResourceBase.STRING);*/
   }
 
   /**

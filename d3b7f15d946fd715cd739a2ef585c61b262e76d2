@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f213e69e_8dbbe9a3",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-01-28T23:34:21Z",
+      "side": 1,
+      "message": "Do you need to call .build() here and assign the result to compilerContext, since the first line of the for loop below right away also calls build and sets compilerContext?",
+      "range": {
+        "startLine": 153,
+        "startChar": 64,
+        "endLine": 153,
+        "endChar": 69
+      },
+      "revId": "d3b7f15d946fd715cd739a2ef585c61b262e76d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

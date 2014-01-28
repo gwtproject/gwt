@@ -76,7 +76,6 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JSeedIdOf;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
@@ -84,6 +83,7 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JTypeIdOf;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
@@ -92,7 +92,6 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
 import com.google.gwt.dev.jjs.ast.js.JsonObject;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
 import com.google.gwt.dev.util.TextOutput;
@@ -138,7 +137,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_PROTECTED = "protected ".toCharArray();
   protected static final char[] CHARS_PUBLIC = "public ".toCharArray();
   protected static final char[] CHARS_RETURN = "return".toCharArray();
-  protected static final char[] CHARS_SEEDIDOF = " JSeedIdOf ".toCharArray();
+  protected static final char[] CHARS_SEEDIDOF = " JTypeIdOf ".toCharArray();
   protected static final char[] CHARS_SLASHSTAR = "/*".toCharArray();
   protected static final char[] CHARS_STARSLASH = "*/".toCharArray();
   protected static final char[] CHARS_STATIC = "static ".toCharArray();
@@ -690,18 +689,10 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JNameOf x, Context ctx) {
     print(CHARS_SLASHSTAR);
-    print(x instanceof JSeedIdOf ? CHARS_SEEDIDOF : CHARS_NAMEOF);
+    print(x instanceof JTypeIdOf ? CHARS_SEEDIDOF : CHARS_NAMEOF);
     print(CHARS_STARSLASH);
     printStringLiteral(x.getNode().getName());
     return false;
-  }
-
-  @Override
-  public boolean visit(JsQueryType x, Context ctx) {
-    print(CHARS_SLASHSTAR);
-    printTypeName(x.getQueryType());
-    print(CHARS_STARSLASH);
-    return super.visit(x, ctx);
   }
 
   @Override

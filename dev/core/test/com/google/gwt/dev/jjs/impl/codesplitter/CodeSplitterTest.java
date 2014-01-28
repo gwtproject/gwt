@@ -30,9 +30,11 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.JsOutputOption;
+import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.impl.ArrayNormalizer;
 import com.google.gwt.dev.jjs.impl.CastNormalizer;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
@@ -40,6 +42,7 @@ import com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.MethodCallTightener;
+import com.google.gwt.dev.jjs.impl.ResolveTypeIds;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
@@ -521,11 +524,12 @@ public class CodeSplitterTest extends JJSTestBase {
     ArrayNormalizer.exec(jProgram, false);
     TypeTightener.exec(jProgram);
     MethodCallTightener.exec(jProgram);
+    Map<JType, JLiteral> typeIdsByType = ResolveTypeIds.exec(jProgram);
 
     Map<StandardSymbolData, JsName> symbolTable =
         new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
     JavaToJavaScriptMap map = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, JsOutputOption.PRETTY, symbolTable, new PropertyOracle[]{
+        jProgram, jsProgram, JsOutputOption.PRETTY, typeIdsByType, symbolTable, new PropertyOracle[]{
         new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)}).getLeft();
     CodeSplitter.exec(logger, jProgram, jsProgram, map, expectedFragmentCount, leftOverMergeSize,
         NULL_RECORDER);

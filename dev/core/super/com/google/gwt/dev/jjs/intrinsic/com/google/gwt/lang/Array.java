@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -97,7 +97,8 @@ public final class Array {
   public static <T> T[] cloneSubrange(T[] array, int fromIndex, int toIndex) {
     Array a = asArrayType(array);
     Array result = arraySlice(a, fromIndex, toIndex);
-    initValues(a.getClass(), Util.getCastableTypeMap(a), a.queryId, result);
+    initValues(a.getClass(), Util.getCastableTypeMap(a), a.elementTypeId, a.canElementBeJSO,
+        result);
     // implicit type arg not inferred (as of JDK 1.5.0_07)
     return Array.<T> asArray(result);
   }
@@ -116,7 +117,8 @@ public final class Array {
   public static <T> T[] createFrom(T[] array, int length) {
     Array a = asArrayType(array);
     Array result = createFromSeed(NULL_SEED_TYPE, length);
-    initValues(a.getClass(), Util.getCastableTypeMap(a), a.queryId, result);
+    initValues(a.getClass(), Util.getCastableTypeMap(a), a.elementTypeId,  a.canElementBeJSO,
+        result);
     // implicit type arg not inferred (as of JDK 1.5.0_07)
     return Array.<T> asArray(result);
   }
@@ -124,84 +126,91 @@ public final class Array {
   /**
    * Creates an array like "new T[a][b][c][][]" by passing in a native JSON
    * array, [a, b, c].
-   * 
+   *
    * @param arrayClass the class of the array
    * @param castableTypeMap the map of types to which this array can be casted,
    *          in the form of a JSON map object
-   * @param queryId the queryId of the array
+   * @param elementTypeId the typeId of array elements
+   * @param canElementBeJSO true if the elements can be JSOs
    * @param length the length of the array
-   * @param seedType the primitive type of the array; 0: null; 1: zero; 2: false; 3: long
+   * @param initValueType what is the initial value for elements;
+   *           0: null; 1: zero; 2: false; 3: long
    * @return the new array
    */
-  public static Array initDim(Class<?> arrayClass, 
-        JavaScriptObject castableTypeMap, int queryId, int length, int seedType) {
-    Array result = createFromSeed(seedType, length);
-    initValues(arrayClass, castableTypeMap, queryId, result);
+  public static Array initDim(Class<?> arrayClass, JavaScriptObject castableTypeMap,
+      int elementTypeId, int length,  boolean canElementBeJSO, int initValueType) {
+    Array result = createFromSeed(initValueType, length);
+    initValues(arrayClass, castableTypeMap, elementTypeId, canElementBeJSO, result);
     return result;
   }
 
   /**
    * Creates an array like "new T[a][b][c][][]" by passing in a native JSON
    * array, [a, b, c].
-   * 
+   *
    * @param arrayClasses the class of each dimension of the array
    * @param castableTypeMapExprs the JSON castableTypeMap of each dimension,
    *          from highest to lowest
-   * @param queryIdExprs the queryId of each dimension, from highest to lowest
+   * @param elementTypeIds the elementTypeId of each dimension, from highest to lowest
+   * @param canLeafElementBeJSO true if the elements can be JSOs
    * @param dimExprs the length of each dimension, from highest to lower
-   * @param seedType the primitive type of the array; 0: null; 1: zero; 2: false; 3: long
+   * @param initValueType what is the initial value for elements;
+   *           0: null; 1: zero; 2: false; 3: long
    * @return the new array
    */
-  public static Array initDims(Class<?> arrayClasses[], 
-      JavaScriptObject[] castableTypeMapExprs, int[] queryIdExprs, 
-      int[] dimExprs, int count, int seedType) {
-    return initDims(arrayClasses, castableTypeMapExprs, queryIdExprs, 
-        dimExprs, 0, count, seedType);
+  public static Array initDims(Class<?> arrayClasses[],
+      JavaScriptObject[] castableTypeMapExprs, int[] elementTypeIds,
+      boolean canLeafElementBeJSO, int[] dimExprs, int count, int initValueType) {
+    return initDims(arrayClasses, castableTypeMapExprs, elementTypeIds, canLeafElementBeJSO,
+        dimExprs, 0, count, initValueType);
   }
 
   /**
    * Creates an array like "new T[][]{a,b,c,d}" by passing in a native JSON
    * array, [a, b, c, d].
-   * 
+   *
    * @param arrayClass the class of the array
    * @param castableTypeMap the map of types to which this array can be casted,
    *          in the form of a JSON map object
-   * @param queryId the queryId of the array
+   * @param elementTypeId the typeId of array elements
+   * @param canElementBeJSO true if the elements can be JSOs
    * @param array the JSON array that will be transformed into a GWT array
    * @return values; having wrapped it for GWT
    */
-  public static Array initValues(Class<?> arrayClass,
-      JavaScriptObject castableTypeMap, int queryId, Array array) {
+  public static Array initValues(Class<?> arrayClass, JavaScriptObject castableTypeMap,
+      int elementTypeId, boolean canElementBeJSO, Array array) {
     ExpandoWrapper.wrapArray(array);
     setClass(array, arrayClass);
     Util.setCastableTypeMap(array, castableTypeMap);
-    array.queryId = queryId;
+    array.elementTypeId = elementTypeId;
+    array.canElementBeJSO = canElementBeJSO;
     return array;
   }
 
   /**
    * Performs an array assignment, after validating the type of the value being
-   * stored. The form of the type check depends on the value of queryId, as
+   * stored. The form of the type check depends on the value of elementTypeId and whether
+   * canElementTypeBeJso, as
    * follows:
    * <p>
-   * If the queryId is > 0, this indicates a normal cast check should be
-   * performed, using the queryId as the cast destination type.
+   * If the elementTypeId is > 0, this indicates a normal cast check should be
+   * performed, using the elementTypeId as the cast destination type.
    * JavaScriptObjects cannot be stored in this case.
    * <p>
-   * If the queryId == 0, this is the cast target for the Object type, in which
+   * If the elementTypeId == 0, this is the cast target for the Object type, in which
    * case all types can be stored, including JavaScriptObject.
    * <p>
-   * If the queryId == -1, this indicates that only JavaScriptObjects can be
+   * If the elementTypeId == -1, this indicates that only JavaScriptObjects can be
    * stored (-1 is the cast target for JavaScriptObject, by convention).
    * <p>
-   * If the queryId is < -1, this indicates that both JavaScriptObjects, and
+   * If the elementTypeId is < -1, this indicates that both JavaScriptObjects, and
    * Java types can be stored. In the case of Java types, the inverse of the
-   * queryId is used for castability testing. This case is provided to support
+   * elementTypeId is used for castability testing. This case is provided to support
    * arrays declared with an interface type, which has dual implementations
    * (i.e. interface types which have both Java and JavaScriptObject
    * implementations).
    * <p>
-   * Note, by convention, a queryId of 1 is reserved for String, which is a
+   * Note, by convention, a elementTypeId of 1 is reserved for String, which is a
    * final class, and can't implement an interface, and thus, it's inverse, -1,
    * can safely be interpreted as a special case, as stated above.
    * <p>
@@ -210,16 +219,16 @@ public final class Array {
    */
   public static Object setCheck(Array array, int index, Object value) {
     if (value != null) {
-      if (array.queryId > 0 && !Cast.canCastUnsafe(value, array.queryId)) {
-        // value must be castable to queryId
+      if (!array.canElementBeJSO && array.elementTypeId != 0 &&
+          !Cast.canCastUnsafe(value, array.elementTypeId)) {
+        // value must be castable to elementType.
         throw new ArrayStoreException();
-      } else if (array.queryId == -1 && Cast.isJavaObject(value)) {
+      } else if (array.elementTypeId == -1 && Cast.isJavaObject(value)) {
         // value must be a JavaScriptObject
         throw new ArrayStoreException();
-      } else if (array.queryId < -1 && !Cast.isJavaScriptObject(value)
-          && !Cast.canCastUnsafe(value, -array.queryId)) {
-        // value must be a JavaScriptObject, or else castable to the inverse of
-        // queryId
+      } else if (array.canElementBeJSO && !Cast.isJavaScriptObject(value)
+          && !Cast.canCastUnsafe(value, array.elementTypeId)) {
+        // value must be a JavaScriptObject, or else castable to the elementType.
         throw new ArrayStoreException();
       }
     }
@@ -246,7 +255,7 @@ public final class Array {
 
   /**
    * Creates a primitive JSON array of a given seedType.
-   * 
+   *
    * @param seedType the primitive type of the array; 0: null; 1: zero;
    *     2: false; 3: (long) 0
    * @param length the requested length
@@ -272,22 +281,22 @@ public final class Array {
     return array;
   }-*/;
 
-  private static Array initDims(Class<?> arrayClasses[],
-      JavaScriptObject[] castableTypeMapExprs, int[] queryIdExprs, int[] dimExprs, 
+  private static Array initDims(Class<?> arrayClasses[], JavaScriptObject[] castableTypeMapExprs,
+      int[] elementTypeIds, boolean canLeafElementBeJSO, int[] dimExprs,
       int index, int count, int seedType) {
     int length = dimExprs[index];
     boolean isLastDim = (index == (count - 1));
 
     Array result = createFromSeed(isLastDim ? seedType : NULL_SEED_TYPE, length);
-    initValues(arrayClasses[index], castableTypeMapExprs[index], 
-        queryIdExprs[index], result);
+    initValues(arrayClasses[index], castableTypeMapExprs[index],
+        elementTypeIds[index], isLastDim ? canLeafElementBeJSO : false, result);
 
     if (!isLastDim) {
       // Recurse to next dimension.
       ++index;
       for (int i = 0; i < length; ++i) {
         set(result, i, initDims(arrayClasses, castableTypeMapExprs,
-            queryIdExprs, dimExprs, index, count, seedType));
+            elementTypeIds, canLeafElementBeJSO, dimExprs, index, count, seedType));
       }
     }
     return result;
@@ -313,8 +322,9 @@ public final class Array {
   /**
    * A representation of the necessary cast target for objects stored into this
    * array.
-   * 
+   *
    * @see #setCheck
    */
-  protected int queryId = 0;
+  protected int elementTypeId = 0;
+  protected boolean canElementBeJSO = false;
 }

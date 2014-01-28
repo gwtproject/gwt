@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "f213e69e_edf89df0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "maybe put an immutable list wrapper around this return value",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_adeea529",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "this class doesn\u0027t really contain any ids? shouldn\u0027t it be named JTypeReference or something like that?",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_2a3c5bf8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "why is this called \"stringType\"",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_0a419f78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeIdOf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "what does \"node\" refer to?",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b226cef6_735932ca",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
         "patchSetId": 1
@@ -13,6 +81,91 @@
       "writtenOn": "2014-01-28T19:39:18Z",
       "side": 1,
       "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_cdf5e1f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "if you rename JTypeIdOf, you\u0027ll want to rename this function too",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_6dfcaddf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "this file no longer references -1, 0, or 1 in any of the code. this comment either needs to be removed or updated",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_0d07f936",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "\"\u003e 0\" would be \"!\u003d 0\" and \"!\u003d -1\"\n\nif (qType !\u003d program.getTypeJavaLangObject() \u0026\u0026 qType !\u003d program.getJavaScriptObject()) {",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_2d29159f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "this change doesn\u0027t look equivalent",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_0d2ed9a6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "s/type/castToType",
       "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -36,6 +189,91 @@
     },
     {
       "key": {
+        "uuid": "f213e69e_6d4aed76",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "there shouldn\u0027t be any references to -1 in this file",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_6d330d0f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "rename \"params\"",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_8d192992",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1802,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "s/typeIds/typeIdLiterals",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_ed26ddc7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "s/typeIdExpression/typeIdLiteral",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_cd2321b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "\"JIntLiteral.get(-1)\" ?\n\nthere shouldn\u0027t be any references to -1 in this file",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b226cef6_b3628a6c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveTypeIds.java",
         "patchSetId": 1
@@ -53,6 +291,40 @@
     },
     {
       "key": {
+        "uuid": "f213e69e_aa2fabb6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveTypeIds.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "s/typesReferencedByID/referencedTypes",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_8a2c6fc3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveTypeIds.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b226cef6_935f86ac",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveTypeIds.java",
         "patchSetId": 1
@@ -64,6 +336,23 @@
       "writtenOn": "2014-01-28T19:39:18Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f213e69e_0de09937",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveTypeIds.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 1,
+      "message": "s/typeIdsByType/typeIdLiteralsByType",
       "revId": "4c92ad005dffa6ea51d2b76fd004b98b34dc6c61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

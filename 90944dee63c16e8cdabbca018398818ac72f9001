@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f213e69e_ed0ffd47",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-28T20:32:42Z",
+      "side": 0,
+      "message": "this code makes sure that there is a query id created for the JSO type. is there a matching need to make sure a castmap is generated for the JSO type (and stored in the jprogram with the other cast maps)?",
+      "revId": "90944dee63c16e8cdabbca018398818ac72f9001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

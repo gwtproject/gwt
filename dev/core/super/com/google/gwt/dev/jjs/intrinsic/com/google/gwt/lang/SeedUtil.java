@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,11 +21,13 @@ import com.google.gwt.core.client.JavaScriptObject;
  * Utility class for fetching prototype-seed functions for injection into JsAST.
  */
 public class SeedUtil {
-
   /*
   * Holds a map of seedId to anonymous Javascript functions (prototypes for class vtables).
   */
   private static JavaScriptObject seedTable = JavaScriptObject.createObject();
+
+  public static final int javaLangObjectId = 1;
+  public static final int javaLangStringId = 2;
 
   /**
    * If not already created, generates an anonymous function and assigns it a slot in the global
@@ -53,6 +55,7 @@ public class SeedUtil {
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
     }
     for (var i = 3; i < arguments.length; ++i) {
+      // Assign the seed prototype to each constructor.
       arguments[i].prototype = _;
     }
     if (seed.@java.lang.Object::___clazz) {

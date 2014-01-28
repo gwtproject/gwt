@@ -226,7 +226,7 @@ final class Cast {
    * interchangeable between GWT modules, unlike other Java Objects.
    */
   private static boolean isJavaString(Object src) {
-    return canCast(src, 1);
+    return canCast(src, SeedUtil.javaLangStringId);
   }
 
   /**

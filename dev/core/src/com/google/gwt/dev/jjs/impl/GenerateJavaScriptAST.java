@@ -38,6 +38,7 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBreakStatement;
 import com.google.gwt.dev.jjs.ast.JCaseStatement;
+import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
@@ -55,9 +56,11 @@ import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JGwtCreate;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
+import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLabel;
 import com.google.gwt.dev.jjs.ast.JLabeledStatement;
+import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
@@ -78,7 +81,6 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JSeedIdOf;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
@@ -92,8 +94,6 @@ import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
@@ -126,6 +126,7 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsLabel;
+import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameOf;
@@ -145,7 +146,6 @@ import com.google.gwt.dev.js.ast.JsPropertyInitializer;
 import com.google.gwt.dev.js.ast.JsReturn;
 import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.js.ast.JsScope;
-import com.google.gwt.dev.js.ast.JsSeedIdOf;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsSwitch;
@@ -671,27 +671,29 @@ public class GenerateJavaScriptAST {
     private void recordSymbol(JReferenceType x, JsName jsName) {
       StringBuilder sb = new StringBuilder();
       sb.append('{');
-      JsCastMap castMap = program.getCastMap(x);
+      JCastMap castMap = program.getCastMap(x);
       if (castMap != null) {
         boolean isFirst = true;
-        for (JExpression expr : castMap.getExprs()) {
-          JsQueryType queryType = (JsQueryType) expr;
+        for (JExpression type : castMap.getCanCastToTypes()) {
           if (isFirst) {
             isFirst = false;
           } else {
             sb.append(',');
           }
-          sb.append(queryType.getQueryId());
+          sb.append(type.toSource());
           sb.append(":1");
         }
       }
       sb.append('}');
       CastableTypeMap castableTypeMap = new StandardCastableTypeMap(sb.toString());
 
+      // TODO(rluble): This needs improvement.
+
+      int typeId = getRuntimeTypeId(x) != null ? ((JIntLiteral) getRuntimeTypeId(x)).getValue() : -1;
       StandardSymbolData symbolData =
           StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(), x
-              .getSourceInfo().getStartLine(), program.getQueryId(x), castableTypeMap,
-              x instanceof JClassType || x instanceof JArrayType ? getSeedId(x) : -1);
+              .getSourceInfo().getStartLine(), typeId, castableTypeMap,
+              x instanceof JClassType || x instanceof JArrayType ? typeId : -1);
       assert !symbolTable.containsKey(symbolData);
       symbolTable.put(symbolData, jsName);
     }
@@ -1495,17 +1497,11 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
-    public void endVisit(JSeedIdOf x, Context ctx) {
-      JsName name = names.get(x.getNode());
-      push(new JsSeedIdOf(x.getSourceInfo(), name, getSeedId((JReferenceType) x.getNode())));
-    }
-
-    @Override
-    public void endVisit(JsCastMap x, Context ctx) {
-      super.endVisit(x, ctx);
-      JsArrayLiteral arrayLit = (JsArrayLiteral) pop();
+    public void endVisit(JCastMap x, Context ctx) {
       SourceInfo sourceInfo = x.getSourceInfo();
-      push(castMapToObjectLiteral(arrayLit, sourceInfo));
+
+      List<JsExpression> params = popList(x.getCanCastToTypes().size()); // castable type ids/
+      push(buildJsCastMapLiteral(params, sourceInfo));
     }
 
     @Override
@@ -1803,13 +1799,15 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    private JsObjectLiteral castMapToObjectLiteral(JsArrayLiteral arrayLit, SourceInfo sourceInfo) {
+    private JsObjectLiteral buildJsCastMapLiteral(List<JsExpression> typeIds,
+        SourceInfo sourceInfo) {
       JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
       objLit.setInternable();
       List<JsPropertyInitializer> props = objLit.getPropertyInitializers();
       JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
-      for (JsExpression expr : arrayLit.getExpressions()) {
-        JsPropertyInitializer prop = new JsPropertyInitializer(sourceInfo, expr, one);
+      for (JsExpression typeIdExpression : typeIds) {
+        JsPropertyInitializer prop = new JsPropertyInitializer(sourceInfo,
+            typeIdExpression, one);
         props.add(prop);
       }
       return objLit;
@@ -1851,7 +1849,7 @@ public class GenerateJavaScriptAST {
     }
 
     private JsExpression generateCastableTypeMap(JClassType x) {
-      JsCastMap castMap = program.getCastMap(x);
+      JCastMap castMap = program.getCastMap(x);
       if (castMap != null) {
         JField castableTypeMapField = program.getIndexedField("Object.castableTypeMap");
         JsName castableTypeMapName = names.get(castableTypeMapField);
@@ -2168,22 +2166,29 @@ public class GenerateJavaScriptAST {
       }
     }
 
+    private final GenerateJavaScriptLiterals javaToJavaScriptLiteralConverter =
+        new GenerateJavaScriptLiterals();
+
+    private JsLiteral convertJavaLiteral(JLiteral javaLiteral) {
+      javaToJavaScriptLiteralConverter.accept(javaLiteral);
+      return (JsLiteral) javaToJavaScriptLiteralConverter.pop();
+    }
+
     private void generateSeedFuncAndPrototype(JClassType x, List<JsStatement> globalStmts) {
       SourceInfo sourceInfo = x.getSourceInfo();
       if (x != program.getTypeJavaLangString()) {
+
         JsInvocation defineSeed = new JsInvocation(x.getSourceInfo());
         JsName seedNameRef = indexedFunctions.get(
             "SeedUtil.defineSeed").getName();
         defineSeed.setQualifier(seedNameRef.makeRef(x.getSourceInfo()));
-        int newSeed = getSeedId(x);
-        assert newSeed > 0;
+        JLiteral typeId = getRuntimeTypeId(x);
         JClassType superClass = x.getSuperClass();
-        int superSeed = (superClass == null) ? -1 : getSeedId(x.getSuperClass());
+        JLiteral superTypeId = (superClass == null) ? JIntLiteral.get(-1) :
+            getRuntimeTypeId(x.getSuperClass());
         // SeedUtil.defineSeed(queryId, superId, castableMap, constructors)
-        defineSeed.getArguments().add(new JsNumberLiteral(x.getSourceInfo(),
-            newSeed));
-        defineSeed.getArguments().add(new JsNumberLiteral(x.getSourceInfo(),
-            superSeed));
+        defineSeed.getArguments().add(convertJavaLiteral(typeId));
+        defineSeed.getArguments().add(convertJavaLiteral(superTypeId));
         JsExpression castMap = generateCastableTypeMap(x);
         defineSeed.getArguments().add(castMap);
 
@@ -2615,10 +2620,12 @@ public class GenerateJavaScriptAST {
    *         considered for inlining.
    */
   public static Pair<JavaToJavaScriptMap, Set<JsNode>> exec(JProgram program,
-      JsProgram jsProgram, JsOutputOption outputOption, Map<StandardSymbolData, JsName> symbolTable,
+      JsProgram jsProgram, JsOutputOption outputOption, Map<JType, JLiteral> typeIdsByType,
+      Map<StandardSymbolData, JsName> symbolTable,
       PropertyOracle[] propertyOracles) {
     GenerateJavaScriptAST generateJavaScriptAST =
-        new GenerateJavaScriptAST(program, jsProgram, outputOption, symbolTable, propertyOracles);
+        new GenerateJavaScriptAST(program, jsProgram, outputOption, typeIdsByType,
+            symbolTable, propertyOracles);
     return generateJavaScriptAST.execImpl();
   }
 
@@ -2720,8 +2727,11 @@ public class GenerateJavaScriptAST {
   private final Map<JsStatement, JMethod> vtableInitForMethodMap =
       new HashMap<JsStatement, JMethod>();
 
+  private final Map<JType, JLiteral> typeIdsByType;
+
   private GenerateJavaScriptAST(JProgram program, JsProgram jsProgram, JsOutputOption output,
-      Map<StandardSymbolData, JsName> symbolTable, PropertyOracle[] propertyOracles) {
+      Map<JType, JLiteral> typeIdsByType, Map<StandardSymbolData, JsName> symbolTable,
+      PropertyOracle[] propertyOracles) {
     this.program = program;
     typeOracle = program.typeOracle;
     this.jsProgram = jsProgram;
@@ -2730,6 +2740,7 @@ public class GenerateJavaScriptAST {
     interfaceScope = new JsNormalScope(objectScope, "Interfaces");
     this.output = output;
     this.symbolTable = symbolTable;
+    this.typeIdsByType = typeIdsByType;
 
     this.stripStack =
         JsStackEmulator.getStackMode(propertyOracles) == JsStackEmulator.StackMode.STRIP;
@@ -2770,7 +2781,8 @@ public class GenerateJavaScriptAST {
     namesToIdents.put("castableTypeMap", "cM");
     namesToIdents.put("___clazz", "cZ");
     // Array magic field
-    namesToIdents.put("queryId", "qI");
+    namesToIdents.put("elementTypeId", "tI");
+    namesToIdents.put("canElementBeJSO", "cJ");
 
     List<JField> fields = new ArrayList<JField>(program.getTypeJavaLangObject().getFields());
     fields.addAll(program.getIndexedType("Array").getFields());
@@ -2781,11 +2793,6 @@ public class GenerateJavaScriptAST {
         specialObfuscatedFields.put(field, ident);
       }
     }
-
-    // force java.lang.Object,java.lang.String
-    // to have seed ids 1,2
-    getSeedId(program.getTypeJavaLangObject());
-    getSeedId(program.getTypeJavaLangString());
   }
 
   String getNameString(HasName hasName) {
@@ -2796,15 +2803,8 @@ public class GenerateJavaScriptAST {
   /**
    * Looks up or assigns a seed id for a type..
    */
-  int getSeedId(JReferenceType type) {
-    Integer val = seedIdMap.get(type);
-    int seedId = val == null ? 0 : val;
-
-    if (seedId == 0) {
-      seedId = nextSeedId++;
-      seedIdMap.put(type, seedId);
-    }
-    return seedId;
+  JLiteral getRuntimeTypeId(JReferenceType type) {
+    return typeIdsByType.get(type);
   }
 
   String mangleName(JField x) {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -18,12 +18,17 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * An AST node whose evaluation results in the seedId of its node.
+ * An AST node whose evaluation results in a runtime type reference of its node.
  */
-public class JSeedIdOf extends JNameOf {
+public class JRuntimeTypeReference extends JExpression {
 
-  public JSeedIdOf(SourceInfo info, JClassType stringType, HasName node) {
-    super(info, stringType, node);
+  private JReferenceType typeReference;
+  private JType expressionType;
+
+  public JRuntimeTypeReference(SourceInfo info, JType expressionType, JReferenceType typeReference) {
+    super(info);
+    this.typeReference = typeReference;
+    this.expressionType = expressionType;
   }
 
   @Override
@@ -34,4 +39,21 @@ public class JSeedIdOf extends JNameOf {
     visitor.endVisit(this, ctx);
   }
 
+  @Override
+  public boolean hasSideEffects() {
+    return false;
+  }
+
+  @Override
+  public JType getType() {
+    // TODO(rluble): Here we should return Unknown type.
+    return expressionType;
+  }
+
+  /**
+   * Returns the type this node is proxy for.
+   */
+  public JReferenceType getReferredType() {
+    return typeReference;
+  }
 }

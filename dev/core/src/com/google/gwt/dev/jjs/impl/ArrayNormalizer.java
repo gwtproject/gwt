@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,6 +22,8 @@ import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
+import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
+import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JLiteral;
@@ -33,11 +35,11 @@ import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
+import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.util.collect.Lists;
+
+import java.util.Collections;
 
 /**
  * Replace array accesses and instantiations with calls to the Array class.
@@ -50,29 +52,27 @@ public class ArrayNormalizer {
 
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
-      if (x.getOp() == JBinaryOperator.ASG && x.getLhs() instanceof JArrayRef) {
-        JArrayRef arrayRef = (JArrayRef) x.getLhs();
-        JType elementType = arrayRef.getType();
-        if (elementType instanceof JNullType) {
-          // will generate a null pointer exception instead
-          return;
-        }
+      if (disableCastChecking || x.getOp() != JBinaryOperator.ASG ||
+          !( x.getLhs() instanceof JArrayRef)) {
+        return;
+      }
+      JArrayRef arrayRef = (JArrayRef) x.getLhs();
+      JType elementType = arrayRef.getType();
+      if (elementType instanceof JNullType || !(elementType instanceof JReferenceType)) {
+        // JNullType will generate a null pointer exception instead,
+        // Primitive array types are statically correct, no need to set check.
+        return;
+      }
 
-        /*
-         * See if we need to do a checked store. Primitives and (effectively)
-         * final are statically correct.
-         */
-        if (!disableCastChecking) {
-          if (elementType instanceof JReferenceType) {
-            if (!((JReferenceType) elementType).isFinal() || !program.typeOracle.canTriviallyCast(
-                (JReferenceType) x.getRhs().getType(), (JReferenceType) elementType)) {
-              // replace this assignment with a call to setCheck()
-              JMethodCall call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
-              call.addArgs(arrayRef.getInstance(), arrayRef.getIndexExpr(), x.getRhs());
-              ctx.replaceMe(call);
-            }
-          }
-        }
+      /*
+       * See if we need to do a checked store. Effectively final are statically correct.
+       */
+      if (!(elementType).isFinal() || !program.typeOracle.canTriviallyCast(
+          (JReferenceType) x.getRhs().getType(), (JReferenceType) elementType)) {
+        // replace this assignment with a call to setCheck()
+        JMethodCall call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
+        call.addArgs(arrayRef.getInstance(), arrayRef.getIndexExpr(), x.getRhs());
+        ctx.replaceMe(call);
       }
     }
 
@@ -99,43 +99,57 @@ public class ArrayNormalizer {
       }
     }
 
-    private JsQueryType getElementQueryType(SourceInfo sourceInfo, JArrayType arrayType) {
+    private boolean canLeafElementTypeBeJSO(JArrayType arrayType) {
       JType elementType = arrayType.getElementType();
-      int elementQueryId = -1;
-      if (elementType instanceof JReferenceType) {
-        JReferenceType elementRefType = (JReferenceType) elementType;
-        elementType = elementRefType.getUnderlyingType();
-        if (program.typeOracle.isEffectivelyJavaScriptObject(elementRefType)) {
-          /*
-           * treat types that are effectively JSO's as JSO's, for the purpose of
-           * castability checking
-           */
-          elementRefType = program.getJavaScriptObject();
-        }  
-        elementQueryId = program.getQueryId(elementRefType);
-        if (program.typeOracle.isDualJsoInterface(elementRefType)) {
-          /*
-           * invert the queryId, to indicate dual castability for JSO's and the
-           * Java type represented by the inverse of the queryId
-           */
-          elementQueryId *= -1;
-        }
+      if (elementType instanceof JArrayType) {
+        return canLeafElementTypeBeJSO((JArrayType) elementType);
       }
-      return new JsQueryType(sourceInfo, elementType, elementQueryId);
+      if (!(elementType instanceof JReferenceType)) {
+        return false;
+      }
+
+      JReferenceType elementRefType = (JReferenceType) elementType;
+      if (program.typeOracle.isEffectivelyJavaScriptObject(elementRefType) ||
+          program.typeOracle.isDualJsoInterface(elementRefType)) {
+        return true;
+      }
+      return false;
+    }
+
+    private JRuntimeTypeReference getRuntimeTypeReference(SourceInfo sourceInfo,
+        JArrayType arrayType) {
+      JType elementType = arrayType.getElementType();
+      if (!(elementType instanceof JReferenceType)) {
+        // elementType is a primitive type, store check will be performed statically.
+        elementType = JNullType.INSTANCE;
+      }
+
+      if (program.typeOracle.isEffectivelyJavaScriptObject(elementType)) {
+        /*
+         * treat types that are effectively JSO's as JSO's, for the purpose of
+         * castability checking
+         */
+        elementType = program.getJavaScriptObject();
+      } else {
+        elementType = ((JReferenceType) elementType).getUnderlyingType();
+      }
+      return new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
+          (JReferenceType)  elementType);
     }
 
     private JExpression getOrCreateCastMap(SourceInfo sourceInfo, JArrayType arrayType) {
-      JsCastMap castableTypeMap = program.getCastMap(arrayType);
-      if (castableTypeMap == null || castableTypeMap.getExprs().size() == 0) {
-        return new JsCastMap(sourceInfo, Lists.<JsQueryType>create(), program.getJavaScriptObject());
+      JCastMap castableTypeMap = program.getCastMap(arrayType);
+      if (castableTypeMap == null) {
+        return new JCastMap(sourceInfo, program.getTypeJavaLangObject(),
+            Collections.<JReferenceType>emptyList());
       }
       return castableTypeMap;
     }
 
     /**
-     * @see com.google.gwt.lang.Array regarding seed types
+     * @see com.google.gwt.lang.Array regarding initial value types types
      */
-    private JIntLiteral getSeedTypeLiteralFor(JType type) {
+    private JIntLiteral getInitValueTypeFor(JType type) {
       if (type instanceof JPrimitiveType) {
         if (type == program.getTypePrimitiveLong()) {
           // The long type, thus 0L (index 3)
@@ -158,10 +172,13 @@ public class ArrayNormalizer {
       JMethodCall call = new JMethodCall(sourceInfo, null, initDim, arrayType);
       JLiteral classLit = x.getClassLiteral();
       JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
-      JLiteral queryIdLit = getElementQueryType(sourceInfo, arrayType);
+      JRuntimeTypeReference elementTypeId = getRuntimeTypeReference(sourceInfo, arrayType);
+      JBooleanLiteral canLeafElementBeJSOLiteral =
+          JBooleanLiteral.get(canLeafElementTypeBeJSO(arrayType));
       JExpression dim = x.dims.get(0);
       JType elementType = arrayType.getElementType();
-      call.addArgs(classLit, castableTypeMap, queryIdLit, dim, getSeedTypeLiteralFor(elementType));
+      call.addArgs(classLit, castableTypeMap, elementTypeId, dim, canLeafElementBeJSOLiteral,
+          getInitValueTypeFor(elementType));
       ctx.replaceMe(call);
     }
 
@@ -171,8 +188,10 @@ public class ArrayNormalizer {
       JMethodCall call = new JMethodCall(sourceInfo, null, initDims, arrayType);
       JsonArray classLitList = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray castableTypeMapList = new JsonArray(sourceInfo, program.getJavaScriptObject());
-      JsonArray queryIdList = new JsonArray(sourceInfo, program.getJavaScriptObject());
+      JsonArray elementTypeIdList = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray dimList = new JsonArray(sourceInfo, program.getJavaScriptObject());
+      JBooleanLiteral canLeafElementBeJSOLiteral =
+          JBooleanLiteral.get(canLeafElementTypeBeJSO(arrayType));
       JType cur = arrayType;
       for (int i = 0; i < dims; ++i) {
         // Walk down each type from most dims to least.
@@ -184,14 +203,14 @@ public class ArrayNormalizer {
         JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, curArrayType);
         castableTypeMapList.getExprs().add(castableTypeMap);
 
-        JLiteral queryIdLit = getElementQueryType(sourceInfo, curArrayType);
-        queryIdList.getExprs().add(queryIdLit);
+        JRuntimeTypeReference elementTypeIdLit = getRuntimeTypeReference(sourceInfo, curArrayType);
+        elementTypeIdList.getExprs().add(elementTypeIdLit);
 
         dimList.getExprs().add(x.dims.get(i));
         cur = curArrayType.getElementType();
       }
-      call.addArgs(classLitList, castableTypeMapList, queryIdList, dimList, program
-          .getLiteralInt(dims), getSeedTypeLiteralFor(cur));
+      call.addArgs(classLitList, castableTypeMapList, elementTypeIdList,canLeafElementBeJSOLiteral,
+          dimList, program.getLiteralInt(dims), getInitValueTypeFor(cur));
       ctx.replaceMe(call);
     }
 
@@ -201,12 +220,14 @@ public class ArrayNormalizer {
       JMethodCall call = new JMethodCall(sourceInfo, null, initValues, arrayType);
       JLiteral classLit = x.getClassLiteral();
       JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
-      JLiteral queryIdLit = getElementQueryType(sourceInfo, arrayType);
+      JRuntimeTypeReference elementTypeIds = getRuntimeTypeReference(sourceInfo, arrayType);
       JsonArray initList = new JsonArray(sourceInfo, program.getJavaScriptObject());
+      JBooleanLiteral canLeafElementBeJSOLiteral =
+          JBooleanLiteral.get(canLeafElementTypeBeJSO(arrayType));
       for (int i = 0; i < x.initializers.size(); ++i) {
         initList.getExprs().add(x.initializers.get(i));
       }
-      call.addArgs(classLit, castableTypeMap, queryIdLit, initList);
+      call.addArgs(classLit, castableTypeMap, elementTypeIds, canLeafElementBeJSOLiteral, initList);
       ctx.replaceMe(call);
     }
   }

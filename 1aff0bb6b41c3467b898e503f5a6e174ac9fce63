@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2f7c297_6aac923c",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T20:54:43Z",
+      "side": 1,
+      "message": "s/no body/nobody/",
+      "range": {
+        "startLine": 148,
+        "startChar": 50,
+        "endLine": 148,
+        "endChar": 57
+      },
+      "revId": "1aff0bb6b41c3467b898e503f5a6e174ac9fce63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_aa8ddadb",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-28T20:54:43Z",
+      "side": 1,
+      "message": "s/cautios/cautious/",
+      "range": {
+        "startLine": 48,
+        "startChar": 75,
+        "endLine": 48,
+        "endChar": 82
+      },
+      "revId": "1aff0bb6b41c3467b898e503f5a6e174ac9fce63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

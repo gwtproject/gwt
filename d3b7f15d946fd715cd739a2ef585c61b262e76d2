@@ -22,6 +22,30 @@
       "revId": "d3b7f15d946fd715cd739a2ef585c61b262e76d2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52a83290_af123971",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-01-29T00:02:57Z",
+      "side": 1,
+      "message": "Seems like it\u0027s the convention elsewhere to call \"compilerContext \u003d compilerContextBuilder.foo(...).build()\".  I think it\u0027s fine to stay consistent here even if not strictly necessary.",
+      "parentUuid": "f213e69e_8dbbe9a3",
+      "range": {
+        "startLine": 153,
+        "startChar": 64,
+        "endLine": 153,
+        "endChar": 69
+      },
+      "revId": "d3b7f15d946fd715cd739a2ef585c61b262e76d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

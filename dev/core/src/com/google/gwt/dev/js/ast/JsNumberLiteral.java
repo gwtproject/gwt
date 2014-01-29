@@ -77,10 +77,10 @@ public final class JsNumberLiteral extends JsValueLiteral {
 
   /**
    * Number literals are always internable but it is only profitable to intern numbers with more
-   * than 3 digits.
+   * than 5 digits.
    */
   @Override
   public boolean isInternable() {
-    return Double.toString(value).length() > 3;
+    return Double.toString(value).length() > 5;
   }
 }

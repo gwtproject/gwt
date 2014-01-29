@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.shell;
 
-import com.google.gwt.core.client.GWTBridge;
+import com.google.gwt.core.shared.GWTBridge;
 import com.google.gwt.dev.About;
 
 /**

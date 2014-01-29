@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -80,7 +80,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks Command cancellation
    */
   public void testDoExecuteCommands_cancellation() {
@@ -112,7 +112,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks that calling {@link CommandExecutor#doExecuteCommands(double)} with no
    * items in the queue is safe
    */
@@ -125,7 +125,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks IncrementalCommand cancellation
    */
   public void testDoExecuteCommands_IncrementalCommandCancellation() {
@@ -158,7 +158,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks that an incremental command executes and is removed from the queue
    * when it is done
    */
@@ -176,7 +176,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks that null does in fact cause a pause.
    */
   public void testDoExecuteCommands_pause() {
@@ -199,15 +199,12 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#doExecuteCommands(int)}.
-   * 
+   *
    * Checks that after one pass dispatch pass, we still have the incremental
    * command in the queue
    */
   public void testDoExecuteCommands_timeSliceUsage() {
     final CommandExecutor ce = new NonRestartingCommandExecutor();
-
-    Command tc = new TestCommand();
-    ce.submit(tc);
 
     TestIncrementalCommand tic = new TestIncrementalCommand();
     ce.submit(tic);
@@ -221,7 +218,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#submit(com.google.gwt.user.client.Command)}.
-   * 
+   *
    * <p/> Cases:
    * <ul>
    * <li>Submit <code>null</code></li>
@@ -240,7 +237,7 @@ public class CommandExecutorTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.user.client.CommandExecutor#submit(com.google.gwt.user.client.IncrementalCommand)}.
-   * 
+   *
    * <p/> Cases:
    * <ul>
    * <li>Submit <code>null</code></li>

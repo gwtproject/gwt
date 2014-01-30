@@ -16,6 +16,29 @@
       "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f7c297_1afe0151",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-01-30T21:19:29Z",
+      "side": 1,
+      "message": "Please wrap.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

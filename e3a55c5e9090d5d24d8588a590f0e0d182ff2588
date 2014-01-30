@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "52811216_7c22bd88",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T02:14:43Z",
+      "side": 1,
+      "message": "Count. renamed to MINIMUM_NUMBER_OF_OCCURRENCES_TO_INTERN",
+      "parentUuid": "52811216_1cdb8196",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52811216_010b1ead",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-30T01:19:01Z",
       "side": 1,
       "message": "i think usually asserts are the first line in the function",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_9c269199",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T02:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52811216_010b1ead",
       "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "52811216_5c3419be",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T02:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52811216_c15f46ab",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52811216_1c02a126",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "52811216_5ceb39cd",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T02:14:43Z",
+      "side": 1,
+      "message": "Discussed offline, cost of this should be minimal as it is only duplicate when not profitable, and in those cases it implies that occurrences*literal_size is very small.\n\nI assume it is OK. Let me know if you still want me to keep track of profitability.",
+      "parentUuid": "52811216_1c02a126",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52811216_5cfc19df",
         "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNumberLiteral.java",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2014-01-30T01:19:01Z",
       "side": 1,
       "message": "maybe this judgement is redundant (and less accurate) now that we have profitability calculation?",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_fcdb0d3c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNumberLiteral.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T02:14:43Z",
+      "side": 1,
+      "message": "Yes. removed.",
+      "parentUuid": "52811216_5cfc19df",
       "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

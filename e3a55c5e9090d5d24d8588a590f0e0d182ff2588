@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52811216_1cdb8196",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-30T01:19:01Z",
+      "side": 1,
+      "message": "INTERN_THRESHOLD, is that intern count or intern size that\u0027s being thresholded?",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_010b1ead",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-30T01:19:01Z",
+      "side": 1,
+      "message": "i think usually asserts are the first line in the function",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_c15f46ab",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-30T01:19:01Z",
+      "side": 1,
+      "message": "there\u0027s a double space after the +",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_1c02a126",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-30T01:19:01Z",
+      "side": 1,
+      "message": "this is letting some duplicate profitability analysis occur",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_5cfc19df",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNumberLiteral.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-01-30T01:19:01Z",
+      "side": 1,
+      "message": "maybe this judgement is redundant (and less accurate) now that we have profitability calculation?",
+      "revId": "e3a55c5e9090d5d24d8588a590f0e0d182ff2588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

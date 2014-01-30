@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "52811216_81d1ceea",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T00:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2824e17_90c03c6b",
+      "revId": "8a2471fa04a68c78d73388563334cf9dcdda03a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2824e17_b0bd40ea",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "52811216_c1e2e6b4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T00:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2824e17_b0bd40ea",
+      "revId": "8a2471fa04a68c78d73388563334cf9dcdda03a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2824e17_d0cab488",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-01-30T00:31:25Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "8a2471fa04a68c78d73388563334cf9dcdda03a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52811216_01dddef9",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsLiteralInterner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-01-30T00:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2824e17_d0cab488",
       "revId": "8a2471fa04a68c78d73388563334cf9dcdda03a4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

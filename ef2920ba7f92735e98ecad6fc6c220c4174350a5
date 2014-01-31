@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2824e17_deae4511",
+        "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-31T16:56:22Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "ef2920ba7f92735e98ecad6fc6c220c4174350a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2824e17_feab09fe",
+        "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-01-31T16:56:22Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "ef2920ba7f92735e98ecad6fc6c220c4174350a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

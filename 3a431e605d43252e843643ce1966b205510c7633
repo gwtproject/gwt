@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3202de8d_e6011e23",
+        "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-31T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5242f2dc_3f45c72e",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "3a431e605d43252e843643ce1966b205510c7633",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5242f2dc_df07fbe4",
         "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3202de8d_06f67a01",
+        "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-31T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5242f2dc_df07fbe4",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 81
+      },
+      "revId": "3a431e605d43252e843643ce1966b205510c7633",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5242f2dc_ff0c3f0b",
         "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2014-01-31T22:25:32Z",
       "side": 1,
       "message": "perhaps also test with a one that return java.lang.Boolean?",
+      "range": {
+        "startLine": 70,
+        "startChar": 25,
+        "endLine": 70,
+        "endChar": 37
+      },
+      "revId": "3a431e605d43252e843643ce1966b205510c7633",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f8a2d4_a3fb1ae7",
+        "filename": "user/test/com/google/gwt/core/client/EntryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-01-31T23:12:20Z",
+      "side": 1,
+      "message": "Not sure this would be really useful: java.lang.Boolean would be an \"opaque object\" in JSNI: typeof would be \"object\" but it wouldn\u0027t be \"instanceof Boolean\" and wouldn\u0027t have a valueOf() method to turn it into a boolean value.",
+      "parentUuid": "5242f2dc_ff0c3f0b",
       "range": {
         "startLine": 70,
         "startChar": 25,

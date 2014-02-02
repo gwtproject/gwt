@@ -39,6 +39,57 @@
       "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92138adb_6cef5328",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-02T14:38:07Z",
+      "side": 1,
+      "message": "If we lazily rebuild the type map, this wouldn\u0027t be needed.",
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92138adb_ace42b4c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-02T14:38:07Z",
+      "side": 1,
+      "message": "It feels wrong to me to have different behavior on the iterator vs headSet/tailSet/subSet -- either they should all be unmodifiable, or they should all properly wrap modifying operations.\n\nThis whole class is already basically a wrapper for a sorted set, so it could probably be done pretty easily by adding a private constructor that lets you supply the backing set, and then just passing in headSet/tailSet/subSet to that constructor, though having to rebuild the type map each time makes that more expensive after this change.  Maybe you could do it lazily, since most likely places using headSet/etc are just going to be treating it as a SortedSet and not an ArtifactSet and so will never call find.",
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92138adb_ccdf5f7f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-02T14:38:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be return true here to preserve previous behavior?\n\nThat also seems like there should be a test that would have caught this error.",
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

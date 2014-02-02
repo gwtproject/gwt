@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "5242f2dc_62d5f80a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-02T17:53:08Z",
+      "side": 1,
+      "message": "Good catch. I did the Iterator thing before I did the head/tail/sub sets and failed to circle back.\n\nI made the iterator unmodifiable for the moment, but I\u0027ll fool around with the approach you suggest.",
+      "parentUuid": "92138adb_ace42b4c",
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92138adb_ccdf5f7f",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
         "patchSetId": 1
@@ -87,6 +105,24 @@
       "writtenOn": "2014-02-02T14:38:07Z",
       "side": 1,
       "message": "Shouldn\u0027t there be return true here to preserve previous behavior?\n\nThat also seems like there should be a test that would have caught this error.",
+      "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5242f2dc_82d27c22",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-02T17:53:08Z",
+      "side": 1,
+      "message": "Yes. I\u0027ll fix this.",
+      "parentUuid": "92138adb_ccdf5f7f",
       "revId": "c4ebd1e2a858661cff91f0123ca5106c6c42d162",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -15,11 +15,20 @@
  */
 package com.google.gwt.core.ext.linker;
 
+import com.google.gwt.thirdparty.guava.common.base.Supplier;
+import com.google.gwt.thirdparty.guava.common.collect.Iterators;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimaps;
+
+import java.io.ObjectInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -28,7 +37,17 @@ import java.util.TreeSet;
  */
 public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
+  private static final Supplier<SortedSet<Artifact<?>>> TREE_SETS =
+      new Supplier<SortedSet<Artifact<?>>>() {
+    @Override
+    public SortedSet<Artifact<?>> get() {
+      return new TreeSet<Artifact<?>>();
+    }
+  };
+
   private SortedSet<Artifact<?>> treeSet = new TreeSet<Artifact<?>>();
+  private transient Multimap<Class<?>, Artifact<?>> byType = createTypeMap();
+  private transient Map<Class<?>, SortedSet<?>> cache = null;
 
   public ArtifactSet() {
   }
@@ -37,19 +56,46 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
     addAll(copyFrom);
   }
 
+  private static Multimap<Class<?>, Artifact<?>> createTypeMap() {
+    return Multimaps.newSortedSetMultimap(
+        new HashMap<Class<?>, Collection<Artifact<?>>>(), TREE_SETS);
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    byType = createTypeMap();
+    for (Artifact a : treeSet) {
+      byType.put(a.getClass(), a);
+    }
+  }
+
   @Override
   public boolean add(Artifact<?> o) {
-    return treeSet.add(o);
+    if (treeSet.add(o)) {
+      cache = null;
+      byType.put(o.getClass(), o);
+      return true;
+    }
+    return false;
   }
 
   @Override
   public boolean addAll(Collection<? extends Artifact<?>> c) {
-    return treeSet.addAll(c);
+    if (treeSet.addAll(c)) {
+      cache = null;
+      for (Artifact<?> a : c) {
+        byType.put(a.getClass(), a);
+      }
+      return true;
+    }
+    return false;
   }
 
   @Override
   public void clear() {
+    cache = null;
     treeSet.clear();
+    byType.clear();
   }
 
   @Override
@@ -89,13 +135,23 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
    */
   public <T extends Artifact<? super T>> SortedSet<T> find(
       Class<T> artifactType) {
-    // TODO make this sub-linear (but must retain order for styles/scripts!)
-    SortedSet<T> toReturn = new TreeSet<T>();
-    for (Artifact<?> artifact : this) {
-      if (artifactType.isInstance(artifact)) {
-        toReturn.add(artifactType.cast(artifact));
+    if (cache == null) {
+      cache = new HashMap<Class<?>, SortedSet<?>>();
+    } else {
+      SortedSet<?> s = cache.get(artifactType);
+      if (s != null) {
+        return (SortedSet<T>) s;
       }
     }
+
+    SortedSet<T> toReturn = new TreeSet();
+    for (Map.Entry<Class<?>, Collection<Artifact<?>>> entry : byType.asMap().entrySet()) {
+      if (artifactType.isAssignableFrom(entry.getKey())) {
+        toReturn.addAll((SortedSet<? extends T>) entry.getValue());
+      }
+    }
+    toReturn = Collections.unmodifiableSortedSet(toReturn);
+    cache.put(artifactType, toReturn);
     return toReturn;
   }
 
@@ -122,7 +178,7 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public SortedSet<Artifact<?>> headSet(Artifact<?> toElement) {
-    return treeSet.headSet(toElement);
+    return Collections.unmodifiableSortedSet(treeSet.headSet(toElement));
   }
 
   @Override
@@ -132,7 +188,7 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public Iterator<Artifact<?>> iterator() {
-    return treeSet.iterator();
+    return Iterators.unmodifiableIterator(treeSet.iterator());
   }
 
   @Override
@@ -142,12 +198,24 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public boolean remove(Object o) {
-    return treeSet.remove(o);
+    if (treeSet.remove(o)) {
+      cache = null;
+      byType.remove(o.getClass(), o);
+      return true;
+    }
+    return false;
   }
 
   @Override
   public boolean removeAll(Collection<?> c) {
-    return treeSet.removeAll(c);
+    if (treeSet.removeAll(c)) {
+      cache = null;
+      for (Object o : c) {
+        byType.remove(o.getClass(), o);
+      }
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -157,14 +225,19 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
    * @return <code>true</code> if an equivalent Artifact was already present.
    */
   public boolean replace(Artifact<?> artifact) {
-    boolean toReturn = treeSet.remove(artifact);
-    treeSet.add(artifact);
+    boolean toReturn = remove(artifact);
+    add(artifact);
     return toReturn;
   }
 
   @Override
   public boolean retainAll(Collection<?> c) {
-    return treeSet.retainAll(c);
+    if (treeSet.retainAll(c)) {
+      cache = null;
+      byType.values().retainAll(c);
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -175,12 +248,12 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
   @Override
   public SortedSet<Artifact<?>> subSet(Artifact<?> fromElement,
       Artifact<?> toElement) {
-    return treeSet.subSet(fromElement, toElement);
+    return Collections.unmodifiableSortedSet(treeSet.subSet(fromElement, toElement));
   }
 
   @Override
   public SortedSet<Artifact<?>> tailSet(Artifact<?> fromElement) {
-    return treeSet.tailSet(fromElement);
+    return Collections.unmodifiableSortedSet(treeSet.tailSet(fromElement));
   }
 
   @Override

@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92138adb_ef8335a9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-03T22:59:05Z",
+      "side": 1,
+      "message": "If this is null, that is because clear has been called, or we deserialized it, right?  Why wouldn\u0027t we recreate the byType map and then populate it as normal?",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 8
+      },
+      "revId": "399280df4fc394daf3aac59279c61fdc07f45b8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92138adb_2f9b8d19",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-03T22:59:05Z",
+      "side": 1,
+      "message": "The fact this can happen seems like a bad code smell.  Some code that gets passed an ArtifactSet now has to worry about getting an exception on find if its caller passed in a head/tail/subset-based ArtifactSet, leading to an obscure runtime error.\n\nI think maybe a better approach would be to have views maintain their own cache and by-type maps, and just get passed in the base Set\u003cArtifact\u003e, and invalidate the parent\u0027s caches\u0027maps if they get modified (and let them be lazily recalculated).\n\nWe\u0027re probably overthinking all of this anyway - does any known caller actually use the views and try and modify through them?  Maybe the first approach of just not allowing modifications through views (and do likewise with the iterator) would be best.",
+      "revId": "399280df4fc394daf3aac59279c61fdc07f45b8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92138adb_ef9c5516",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-02-03T22:59:05Z",
+      "side": 1,
+      "message": "Does this really do what you want here?  It seems like two threads could pass this get check, and then one of them would wipe out the cache.  I guess in the case of a cache that isn\u0027t that big a deal since you just lose performance not data.",
+      "revId": "399280df4fc394daf3aac59279c61fdc07f45b8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

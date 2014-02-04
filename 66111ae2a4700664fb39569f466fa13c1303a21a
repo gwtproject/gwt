@@ -16,6 +16,24 @@
       "revId": "66111ae2a4700664fb39569f466fa13c1303a21a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "125b1ae2_85ada2b2",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-04T13:02:45Z",
+      "side": 1,
+      "message": "Actually, you can\u0027t as you\u0027d unbox a boxed value:\n\n Object(new Boolean(false)) \u003d\u003d false",
+      "parentUuid": "521bd206_b7b26810",
+      "revId": "66111ae2a4700664fb39569f466fa13c1303a21a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

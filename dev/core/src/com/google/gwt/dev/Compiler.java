@@ -149,6 +149,10 @@ public class Compiler {
       if (options.getWarDir() != null && !options.getWarDir().getName().endsWith(".jar")) {
         persistentUnitCacheDir = new File(options.getWarDir(), "../");
       }
+
+      // UnitCacheFactory will return the same unitCache instance on each invocation. So if
+      // Compiler.run() is invoked multiple times within the same process, the same unitCache will
+      // be used each time. This is safe as UnitCaches are implemented specifically to support this.
       compilerContext = compilerContextBuilder.unitCache(
           UnitCacheFactory.get(logger, persistentUnitCacheDir)).build();
 

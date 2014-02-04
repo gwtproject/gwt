@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "521bd206_b7b26810",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-02-04T01:45:06Z",
+      "side": 1,
+      "message": "Not that it matters, but you can do wrapping and unwrapping without an object field.\n\ne.g. Object(x) wraps x, and x.valueOf() unwraps.\n\nObject(4).valueOf() \u003d\u003d 4\nObject([]).valueOf() \u003d\u003d []\nObject(\"x\").valueOf() \u003d\u003d \"x\"\nObject(null).valueOf() \u003d\u003d {} // Wat. Typical JS, must catch this.",
+      "revId": "66111ae2a4700664fb39569f466fa13c1303a21a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "521bd206_b76a686f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-04T02:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521bd206_37dc1835",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "34650d5b44486557708bf41654dd4bff8a751295",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "521bd206_b7efc8d7",
         "filename": "user/src/com/google/gwt/storage/client/Storage.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "521bd206_378098de",
+        "filename": "user/src/com/google/gwt/storage/client/Storage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-04T02:01:47Z",
+      "side": 1,
+      "message": "changed little bit more.",
+      "parentUuid": "521bd206_b7efc8d7",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 22
+      },
+      "revId": "34650d5b44486557708bf41654dd4bff8a751295",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "521bd206_77d29025",
         "filename": "user/src/com/google/gwt/storage/client/Storage.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2014-02-04T01:53:28Z",
       "side": 1,
       "message": "Nit: Space after catch.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 16
+      },
+      "revId": "34650d5b44486557708bf41654dd4bff8a751295",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "521bd206_d76b5c76",
+        "filename": "user/src/com/google/gwt/storage/client/Storage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-04T02:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521bd206_77d29025",
       "range": {
         "startLine": 80,
         "startChar": 8,

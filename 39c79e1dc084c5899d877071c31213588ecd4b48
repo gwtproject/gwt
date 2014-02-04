@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "521bd206_d7283c9d",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-04T01:39:31Z",
+      "side": 1,
+      "message": "Maybe rename UnitCacheFactory to GlobalUnitCacheSingleton?",
+      "range": {
+        "startLine": 153,
+        "startChar": 9,
+        "endLine": 153,
+        "endChar": 25
+      },
+      "revId": "39c79e1dc084c5899d877071c31213588ecd4b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

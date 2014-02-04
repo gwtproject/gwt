@@ -473,6 +473,40 @@
     },
     {
       "key": {
+        "uuid": "521bd206_b737c8f8",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-02-04T01:37:54Z",
+      "side": 1,
+      "message": "Hopefully this doesn\u0027t force a clinit() to be inserted.",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "521bd206_571d0c7b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/SeedUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-02-04T01:37:54Z",
+      "side": 1,
+      "message": "Can you verify that these get stripped out in optimized mode and don\u0027t create two excess globals? Otherwise, as an Immortal Type, this is likely to inject two extra vars that a later Js optimization pass won\u0027t remove?",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b20eceb3_07b429fe",
         "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
         "patchSetId": 3

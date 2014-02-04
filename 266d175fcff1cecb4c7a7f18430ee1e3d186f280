@@ -19,6 +19,121 @@
     },
     {
       "key": {
+        "uuid": "b20eceb3_911dfb7e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "then might as well put it in normalizeSemantics()",
+      "range": {
+        "startLine": 269,
+        "startChar": 45,
+        "endLine": 269,
+        "endChar": 66
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_b18d9f6d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 785,
+        "startChar": 54,
+        "endLine": 785,
+        "endChar": 55
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_71904783",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "\"instantiatedCastableTypesMap\" is overreaching. the purpose of the castMaps really depends on who is calling initTypeInfo()",
+      "range": {
+        "startLine": 932,
+        "startChar": 57,
+        "endLine": 932,
+        "endChar": 85
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_9193bb90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 980,
+        "startChar": 35,
+        "endLine": 980,
+        "endChar": 49
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_3ff73b70",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JRuntimeTypeReference.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "please extend the comment to explain why Unknown type should be returned",
+      "range": {
+        "startLine": 49,
+        "startChar": 29,
+        "endLine": 49,
+        "endChar": 35
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92138adb_4fd24125",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
         "patchSetId": 3
@@ -30,6 +145,448 @@
       "writtenOn": "2014-02-03T21:11:27Z",
       "side": 1,
       "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_f16af7c1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "please fix",
+      "parentUuid": "92138adb_4fd24125",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_b1db5f62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "this elementType).isFinal() check can/should be moved up to the previous if statement as well?",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_b106bfe5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "types types",
+      "range": {
+        "startLine": 150,
+        "startChar": 62,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_914e1b56",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "variable name \"elementTypeId\" is stale\n\nditto for a couple others as well",
+      "range": {
+        "startLine": 175,
+        "startChar": 28,
+        "endLine": 175,
+        "endChar": 41
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_31152f99",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "this comment is stale",
+      "range": {
+        "startLine": 62,
+        "startChar": 34,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_11b10b78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 97,
+        "startChar": 29,
+        "endLine": 97,
+        "endChar": 45
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_d1ba5353",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_d1d1339b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "s/qType/castTargetType",
+      "range": {
+        "startLine": 232,
+        "startChar": 26,
+        "endLine": 232,
+        "endChar": 31
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_31c3efcd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "s/querySet/castSourceTypes",
+      "range": {
+        "startLine": 238,
+        "startChar": 35,
+        "endLine": 238,
+        "endChar": 43
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_1187cb8f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "s/argType/castSourceType",
+      "range": {
+        "startLine": 243,
+        "startChar": 28,
+        "endLine": 243,
+        "endChar": 35
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_f440a576",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "why not ctx.removeMe()?",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_07db0997",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeIds.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "\"Assigns and replaces JRuntimeTypeReference nodes with an int type id literal.\u003cbr /\u003e\n\nInts are assigned sequentially under the assumption that all types in the application are known.\"",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_c732910a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeIds.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "this class resolves to int type ids. since we\u0027re going to also have a String type id resolver, maybe this class should be called IntTypeIdAssigner ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 34
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_5f2d4fbc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeIds.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "misspelling",
+      "range": {
+        "startLine": 74,
+        "startChar": 37,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_279a8da3",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "comments are stale",
+      "range": {
+        "startLine": 196,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 84
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_07b429fe",
+        "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "revert file?",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_47cb418e",
+        "filename": "user/src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "delete?",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 19
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_c7adf1b1",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "revert file?",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_a7b2fd0f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/ArrayStoreException.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "revert file?",
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_8727f995",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "rename all seedId references to typeId ?",
+      "range": {
+        "startLine": 36,
+        "startChar": 27,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20eceb3_874ed955",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-04T01:14:26Z",
+      "side": 1,
+      "message": "does this 0 need to be replaced with @com.google.gwt.lang.SeedUtil::javaLangObjectId or something similar?",
+      "range": {
+        "startLine": 140,
+        "startChar": 38,
+        "endLine": 140,
+        "endChar": 39
+      },
       "revId": "266d175fcff1cecb4c7a7f18430ee1e3d186f280",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

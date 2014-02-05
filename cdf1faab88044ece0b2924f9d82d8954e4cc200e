@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52d59277_8706a637",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectClassData.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-05T17:37:08Z",
+      "side": 1,
+      "message": "Maybe add \"from bytecode\"",
+      "revId": "cdf1faab88044ece0b2924f9d82d8954e4cc200e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

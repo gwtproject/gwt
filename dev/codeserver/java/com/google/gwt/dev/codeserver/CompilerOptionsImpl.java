@@ -230,8 +230,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
 
   @Override
   public boolean shouldAddRuntimeChecks() {
-    // TODO set to true in a separate patch
-    return false;
+    return true;
   }
 
   @Override

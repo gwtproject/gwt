@@ -33,6 +33,40 @@
       "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2468641_20fc128c",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-07T22:22:01Z",
+      "side": 1,
+      "message": "Can you create an inner class (e.g. C.Large) and move the new static variables and static initialization there so that not every test will pay the overhead for this initialization?",
+      "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2468641_e0976a34",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/SystemTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-07T22:22:01Z",
+      "side": 1,
+      "message": "nit: replace with \n\n assertTrue(Array.equals(C.LARGE_CHAR_ARRAY_VALUE, chardest));",
+      "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

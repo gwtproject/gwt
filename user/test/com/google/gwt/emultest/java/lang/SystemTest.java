@@ -274,6 +274,22 @@ public class SystemTest extends GWTTestCase {
     for (int i = 1; i < 6; ++i) {
       assertEquals(src[i + 1], dest[i]);
     }
+
+    int inputLength = C.LARGE_CHAR_ARRAY_VALUE.length;
+    char[] charDest = new char[inputLength];
+    System.arraycopy(C.LARGE_CHAR_ARRAY_VALUE, 0, charDest, 0, inputLength);
+    for (int i = 0; i < inputLength; ++i) {
+      assertEquals(C.LARGE_CHAR_ARRAY_VALUE[i], charDest[i]);
+    }
+    int offset = inputLength / 2;
+    char[] manyNulls = new char[offset / 2];
+    assertTrue(manyNulls.length > 100000);
+    System.arraycopy(manyNulls, 0, charDest, offset, manyNulls.length);
+    assertEquals('f', charDest[offset - 1]);
+    for (int i = 0; i < manyNulls.length; ++i) {
+      assertEquals('\0', charDest[offset + i]);
+    }
+    assertEquals('a', charDest[offset + manyNulls.length]);
   }
 
   public void testGetProperty() {

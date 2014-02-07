@@ -76,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "f2468641_72c350cc",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T20:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2468641_72a9906f",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "1b02e6011eb06bbb98bfcd603f97be5bdc67decd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2468641_b20cd80a",
         "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
         "patchSetId": 3
@@ -87,6 +111,30 @@
       "writtenOn": "2014-02-07T20:02:43Z",
       "side": 1,
       "message": "\u0027C\u0027 seems unnecessary since it\u0027s in the same class?",
+      "range": {
+        "startLine": 49,
+        "startChar": 52,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "1b02e6011eb06bbb98bfcd603f97be5bdc67decd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2468641_32a2a826",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T20:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2468641_b20cd80a",
       "range": {
         "startLine": 49,
         "startChar": 52,

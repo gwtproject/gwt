@@ -197,11 +197,9 @@ public final class String implements Comparable<String>, CharSequence,
     return __valueOf(x, offset, end);
   }
 
-  public static native String valueOf(char[] x) /*-{
-    // Trick: fromCharCode is a vararg method, so we can use apply() to pass the
-    // entire input in one shot.
-    return String.fromCharCode.apply(null, x);
-  }-*/;
+  public static String valueOf(char[] x) {
+    return __valueOf(x, 0, x.length);
+  }
 
   public static String valueOf(double x) {
     return "" + x;
@@ -274,10 +272,18 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   static native String __valueOf(char x[], int start, int end) /*-{
-    // Trick: fromCharCode is a vararg method, so we can use apply() to pass the
-    // entire input in one shot.
-    x = x.slice(start, end);
-    return String.fromCharCode.apply(null, x);
+    // Function.prototype.apply suffers from call stack size limits, so for the sake of
+    // correctness, implement via loop concatenation beyond a certain size.
+    // Performance: http://jsperf.com/string-fromcharcode-test
+    if ((end - start) < 100000) {
+      return String.fromCharCode.apply(null, x.slice(start, end));
+    } else {
+      var s = "";
+      for (var i=start; i < end; i++) {
+        s += String.fromCharCode(x[i]);
+      }
+      return s;
+    }
   }-*/;
 
   /**

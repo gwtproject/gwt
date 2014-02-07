@@ -139,8 +139,9 @@ public final class System {
 
   /**
    * Copy an array using native Javascript. The destination array must be a real
-   * Java array (ie, already has the GWT type info on it). No error checking is
-   * performed -- the caller is expected to have verified everything first.
+   * Java array (ie, already has the GWT type info on it) with enough capacity for the additional
+   * elements. No error checking is performed -- the caller is expected to have verified
+   * everything first.
    *
    * @param src source array for copy
    * @param srcOfs offset into source array
@@ -148,9 +149,19 @@ public final class System {
    * @param destOfs offset into destination array
    * @param len number of elements to copy
    */
-  private static native void nativeArraycopy(Object src, int srcOfs, Object dest, int destOfs,
-      int len) /*-{
-    Array.prototype.splice.apply(dest, [destOfs, len].concat(src.slice(srcOfs, srcOfs + len)));
+  private static native void nativeArraycopy(
+      Object src, int srcOfs, Object dest, int destOfs, int len) /*-{
+    // Function.prototype.apply suffers from call stack size limits, so for the sake of
+    // correctness, implement via loop concatenation beyond a certain size.
+    // Performace: http://jsperf.com/loop-vs-slice-copy/4
+    var toCopy = src.slice(srcOfs, srcOfs + len);
+    if (len < 100000) {
+      Array.prototype.splice.apply(dest, [destOfs, len].concat(toCopy));
+    } else {
+      for (var i=0; i < len; i++) {
+        dest[destOfs + i] = toCopy[i];
+      }
+    }
   }-*/;
 
 }

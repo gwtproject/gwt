@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "d2434232_eb5d91b6",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-07T15:32:39Z",
+      "side": 1,
+      "message": "Thinking about it, it would be better to just do:\n\n if (size \u003d\u003d size()) {\n   // nothing to do\n   return;\n }\n if (size \u003e size()) {\n   put(size-1, null);\n } else {\n   … // current code that shortens the array by copying it\n }",
+      "parentUuid": "b2324ed1_ea34a75e",
+      "revId": "e80433b1ab18738da0730e0a4348d7bd1406620d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12231a8f_2560ae64",
         "filename": "user/test/com/google/web/bindery/autobean/vm/impl/JsonSplittableTest.java",
         "patchSetId": 1

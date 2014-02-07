@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "0ff85137_5d6cbbdc",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T18:02:02Z",
+      "side": 1,
+      "message": "i think there\u0027s not much value in pointing out a language feature...",
+      "parentUuid": "12231a8f_05449264",
+      "revId": "4152ab7ba580632aa298173e666e3c86d12a7b8b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12231a8f_653b86db",
         "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
         "patchSetId": 2
@@ -81,6 +99,24 @@
       "writtenOn": "2014-02-07T10:35:27Z",
       "side": 1,
       "message": "Maybe we could avoid that first copy just using\n\n batchStart\u003dsrcOfs, end\u003dsrcOfs+len\n\nand then slicing right from src?",
+      "revId": "4152ab7ba580632aa298173e666e3c86d12a7b8b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ff85137_dd77aba7",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T18:02:02Z",
+      "side": 1,
+      "message": "the modification safety behavior of System.arraycopy won\u0027t be preserved.  quote from java\u0027s javadoc:\n\n\"If the src and dest arguments refer to the same array object, then the copying is performed as if the components at positions srcPos through srcPos+length-1 were first copied to a temporary array with length components and then the contents of the temporary array were copied into positions destPos through destPos+length-1 of the destination array.\"\n\ni had implemented this before like you suggest, but the SystemTest.testArraycopyOverlap fails on the first test due to the self modification.\n\nhttps://gwt.googlesource.com/gwt/+/master/user/test/com/google/gwt/emultest/java/lang/SystemTest.java",
+      "parentUuid": "12231a8f_653b86db",
       "revId": "4152ab7ba580632aa298173e666e3c86d12a7b8b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

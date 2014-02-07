@@ -270,13 +270,17 @@ public class JsonSplittable implements Splittable, HasSplittable {
 
   public void setSize(int size) {
     // This is terrible, but there's no API support for resizing or splicing
+	int copySize = Math.min(size(), size);
     JSONArray newArray = new JSONArray();
-    for (int i = 0; i < size; i++) {
-      try {
+    try {
+      for (int i = 0; i < copySize; i++) {
         newArray.put(i, array.get(i));
-      } catch (JSONException e) {
-        throw new RuntimeException(e);
       }
+      for (int i = copySize; i < size; i++) {
+        newArray.put(i, JSONObject.NULL);
+      }
+    } catch (JSONException e) {
+      throw new RuntimeException(e);
     }
     array = newArray;
   }

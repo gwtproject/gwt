@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "f2468641_204a52e4",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T22:50:43Z",
+      "side": 1,
+      "message": "resolved offline.  the overhead of initialing a 1200kB (600k * 2B [uncode char]) for 4 tests that use this class is negligible.",
+      "parentUuid": "f2468641_20fc128c",
+      "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2468641_e0976a34",
         "filename": "user/test/com/google/gwt/emultest/java/lang/SystemTest.java",
         "patchSetId": 9
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "The other one doesn\u0027t tell much either but i\u0027m ok with both ways.",
       "parentUuid": "f2468641_a0aac251",
+      "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2468641_60445ad4",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/SystemTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 6745
+      },
+      "writtenOn": "2014-02-07T22:50:43Z",
+      "side": 1,
+      "message": "updated to note index of the error, too.",
+      "parentUuid": "f2468641_c0242e3f",
       "revId": "ebebd4d4572eaec274b452920bb8b55641d8e082",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

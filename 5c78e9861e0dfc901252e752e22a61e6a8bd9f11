@@ -16,6 +16,24 @@
       "revId": "5c78e9861e0dfc901252e752e22a61e6a8bd9f11",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2468641_fb371bf7",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-08T00:59:02Z",
+      "side": 1,
+      "message": "Yes, my bad.",
+      "parentUuid": "b2324ed1_8a4fab86",
+      "revId": "5c78e9861e0dfc901252e752e22a61e6a8bd9f11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

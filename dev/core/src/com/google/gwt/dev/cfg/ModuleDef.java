@@ -479,6 +479,13 @@ public class ModuleDef {
     return name;
   }
 
+  @Deprecated
+  public CompilationState getCompilationState(TreeLogger logger)
+      throws UnableToCompleteException {
+    CompilerContext emptyCompilerContext = new CompilerContext.Builder().build();
+    return getCompilationState(logger, emptyCompilerContext);
+  }
+
   public CompilationState getCompilationState(TreeLogger logger, CompilerContext compilerContext)
       throws UnableToCompleteException {
     doRefresh();

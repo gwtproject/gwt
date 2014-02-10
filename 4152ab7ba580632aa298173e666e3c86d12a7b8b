@@ -120,6 +120,24 @@
       "revId": "4152ab7ba580632aa298173e666e3c86d12a7b8b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f7db19f_15cdd44b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-10T11:02:09Z",
+      "side": 1,
+      "message": "Maybe we could have special-cased the src\u003d\u003d\u003ddest case?\n\n if (src \u003d\u003d\u003d dest) {\n   // when copying within the same array, make a copy first (see System.arraycopy javadoc)\n   src \u003d src.slice(srcOfs, srcOfs + len);\n   srcOfs \u003d 0;\n }\n for (var batchStart \u003d srcOfs, end\u003dsrcOfs+len; batchStart \u003c end; ) {",
+      "parentUuid": "0ff85137_dd77aba7",
+      "revId": "4152ab7ba580632aa298173e666e3c86d12a7b8b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

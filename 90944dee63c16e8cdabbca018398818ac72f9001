@@ -16,6 +16,24 @@
       "revId": "90944dee63c16e8cdabbca018398818ac72f9001",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2824e17_fe9ea97d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CastNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-11T02:26:53Z",
+      "side": 0,
+      "message": "No need to have castMaps for jsotype, a Jso is identified by the lack of runtime id (typeMarker) .",
+      "parentUuid": "f213e69e_ed0ffd47",
+      "revId": "90944dee63c16e8cdabbca018398818ac72f9001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

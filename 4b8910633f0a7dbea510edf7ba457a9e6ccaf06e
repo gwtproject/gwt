@@ -51,6 +51,24 @@
       "revId": "4b8910633f0a7dbea510edf7ba457a9e6ccaf06e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f405174_fdc7c72f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-11T12:43:40Z",
+      "side": 1,
+      "message": "My bad actually; Gerrit/JGit cares: https://eclipse.googlesource.com/jgit/jgit/+/master/org.eclipse.jgit/src/org/eclipse/jgit/revwalk/RevCommit.java (search for getFooterLines)\n\nBeing silent here in the presubmit check would mean Gerrit could treat as footers lines that we don\u0027t detect as such; in cases such as:\n\n Subject line\n \n Message body containing\n Footer: like line\n \u003cspace\u003e\n Change-Id: blah\n\nWe want the presubmit check to tell us about the \"missing blank line\" because otherwise Gerrit would treat the \"Footer:\" line like a footer line (imagine if it were a \"Signed-Off-By\" line or similar)",
+      "parentUuid": "4f3ec9eb_df9f5b78",
+      "revId": "4b8910633f0a7dbea510edf7ba457a9e6ccaf06e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

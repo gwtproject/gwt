@@ -33,6 +33,24 @@
       "revId": "4b8910633f0a7dbea510edf7ba457a9e6ccaf06e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f3ec9eb_df9f5b78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-11T11:19:01Z",
+      "side": 1,
+      "message": "Crap, trailing whitespace… I think we should just update the presubmit check to treat that as a blank line (Gerrit doesn\u0027t mind, a search for \"tr:8396\" works as expected)",
+      "parentUuid": "2fc51524_6e8a4fbf",
+      "revId": "4b8910633f0a7dbea510edf7ba457a9e6ccaf06e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

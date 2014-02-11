@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fc51524_4e51932b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_6e56cf26",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_0e4b8b79",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_2e50c724",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_ce44a369",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027canElementBeJSO\u0027.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_ee415f56",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027canLeafElementBeJSO\u0027.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_8e3e9bc9",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027canElementBeJSO\u0027.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc51524_ae3b57d8",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-11T01:56:33Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "ff5fcd65fefb4894dbbb8273f7793dc55ecc67a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

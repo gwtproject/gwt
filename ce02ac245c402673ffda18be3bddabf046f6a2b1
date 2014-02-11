@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf48f97a_1d0883f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-02-11T00:13:18Z",
+      "side": 1,
+      "message": "Please use a more descriptive and standalone commit message.  Generally a commit message should be a one line summary (like an email subject line), a blank line, then a more detailed description.  Don\u0027t assume readers will be familiar with the issue thread.\n\nAlso, the preferred way to mention an issue number is \"Bug: issue 8564\" immediately before the Change-Id line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "ce02ac245c402673ffda18be3bddabf046f6a2b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf48f97a_7d6d3789",
+        "filename": "user/src/com/google/gwt/resources/css/SubstitutionReplacer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-02-11T00:13:18Z",
+      "side": 1,
+      "message": "I\u0027d suggest getting rid of the extra set of parentheses here.  I don\u0027t think they contribute anything:\n\n\n  if (!(methodType instanceof JClassType) ||\n      ...) {",
+      "range": {
+        "startLine": 112,
+        "startChar": 12,
+        "endLine": 112,
+        "endChar": 49
+      },
+      "revId": "ce02ac245c402673ffda18be3bddabf046f6a2b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

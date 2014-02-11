@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8fbfe18b_3dd247ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-11T23:24:04Z",
+      "side": 1,
+      "message": "From the test infra perspective, at the top there is either web mode or dev mode. I wouldn\u0027t consider \u0027draft mode\u0027 as a third mode.",
+      "parentUuid": "8fbfe18b_9dac9381",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "e04b5f7255f296937a5b961b02becade32b32870",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fbfe18b_bda95770",
         "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8fbfe18b_9de013ae",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-11T23:24:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fbfe18b_bda95770",
+      "range": {
+        "startLine": 651,
+        "startChar": 13,
+        "endLine": 651,
+        "endChar": 17
+      },
+      "revId": "e04b5f7255f296937a5b961b02becade32b32870",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fbfe18b_5d84dbfa",
         "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2014-02-11T23:00:40Z",
       "side": 1,
       "message": "Split on \u0027.\u0027 not on \u0027,\u0027?",
+      "range": {
+        "startLine": 979,
+        "startChar": 38,
+        "endLine": 979,
+        "endChar": 41
+      },
+      "revId": "e04b5f7255f296937a5b961b02becade32b32870",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fbfe18b_3d07a7ae",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-11T23:24:04Z",
+      "side": 1,
+      "message": "Good catch! I\u0027ll also take a look if we could have easily discovered this earlier.",
+      "parentUuid": "8fbfe18b_5d84dbfa",
       "range": {
         "startLine": 979,
         "startChar": 38,

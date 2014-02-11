@@ -62,6 +62,40 @@
       "revId": "ce02ac245c402673ffda18be3bddabf046f6a2b1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f3ec9eb_7fd60f3d",
+        "filename": "user/src/com/google/gwt/resources/css/SubstitutionReplacer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-11T11:10:47Z",
+      "side": 1,
+      "message": "While we\u0027re here, we can get rid of this cast (which is effectively casting the method\u0027s return value to the method\u0027s return type!)",
+      "revId": "ce02ac245c402673ffda18be3bddabf046f6a2b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f3ec9eb_bfbff7df",
+        "filename": "user/src/com/google/gwt/resources/css/SubstitutionReplacer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-11T11:10:47Z",
+      "side": 1,
+      "message": "We can also simplify this code to just use getSafeUri().asString() unconditionally, and this will remove a @Deprecated warning (both getUrl and getURL are deprecated)",
+      "revId": "ce02ac245c402673ffda18be3bddabf046f6a2b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

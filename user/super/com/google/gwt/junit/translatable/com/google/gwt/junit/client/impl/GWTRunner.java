@@ -28,7 +28,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.google.gwt.useragent.client.UserAgent;
 
 import java.util.HashMap;
 
@@ -58,8 +57,7 @@ public class GWTRunner implements EntryPoint {
      */
     @Override
     public void onSuccess(InitialResponse result) {
-      clientInfo = new ClientInfo(result.getSessionId(),
-          clientInfo.getUserAgent());
+      clientInfo = new ClientInfo(result.getSessionId());
       testBlockListener.onSuccess(result.getTestBlock());
     }
   }
@@ -216,7 +214,7 @@ public class GWTRunner implements EntryPoint {
   @Override
   public void onModuleLoad() {
     testAccessor = new GWTTestAccessor();
-    clientInfo = new ClientInfo(parseQueryParamInteger(SESSIONID_QUERY_PARAM, -1), getUserAgent());
+    clientInfo = new ClientInfo(parseQueryParamInteger(SESSIONID_QUERY_PARAM, -1));
     maxRetryCount = parseQueryParamInteger(RETRYCOUNT_QUERY_PARAM, 3);
     currentBlock = checkForQueryParamTestToRun();
     if (currentBlock != null) {
@@ -232,11 +230,6 @@ public class GWTRunner implements EntryPoint {
        */
       syncToServer();
     }
-  }
-
-  private String getUserAgent() {
-    UserAgent userAgentProperty = GWT.create(UserAgent.class);
-    return userAgentProperty.getCompileTimeValue();
   }
 
   public void reportResultsAndGetNextMethod(JUnitResult result) {

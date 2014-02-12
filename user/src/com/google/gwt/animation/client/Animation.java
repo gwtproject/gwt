@@ -26,15 +26,11 @@ import com.google.gwt.dom.client.Element;
  */
 public abstract class Animation {
 
-  private final AnimationCallback callback = new AnimationCallback() {
+  // VisibleForTesting
+  final AnimationCallback callback = new AnimationCallback() {
     @Override
     public void execute(double timestamp) {
-      if (update(timestamp)) {
-        // Schedule the next animation frame.
-        requestHandle = scheduler.requestAnimationFrame(callback, element);
-      } else {
-        requestHandle = null;
-      }
+      tick(Duration.currentTimeMillis());
     }
   };
 
@@ -267,6 +263,21 @@ public abstract class Animation {
    */
   private boolean isRunning(int curRunId) {
     return isRunning && (runId == curRunId);
+  }
+
+  /**
+   * Called by the AnimationCallback except the argument is a timestamp
+   * from Epoch, never a high-res timestamp, so we can do our computations
+   * relative to {@link #startTime}.
+   */
+  // VisibleForTesting
+  void tick(double curTime) {
+    if (update(curTime)) {
+      // Schedule the next animation frame.
+      requestHandle = scheduler.requestAnimationFrame(callback, element);
+    } else {
+      requestHandle = null;
+    }
   }
 
   /**

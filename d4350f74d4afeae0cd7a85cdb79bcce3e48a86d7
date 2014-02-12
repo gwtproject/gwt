@@ -56,6 +56,30 @@
       "revId": "d4350f74d4afeae0cd7a85cdb79bcce3e48a86d7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f405174_e6f2947d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-12T09:49:25Z",
+      "side": 1,
+      "message": "Yes, objects are always compared by reference identity (even new Boolean(true) \u003d\u003d\u003d new Boolean(true) is false!), and arrays are just objects with special accessors for the \u0027length\u0027 property.",
+      "parentUuid": "8fbfe18b_af7efd37",
+      "range": {
+        "startLine": 156,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 15
+      },
+      "revId": "d4350f74d4afeae0cd7a85cdb79bcce3e48a86d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

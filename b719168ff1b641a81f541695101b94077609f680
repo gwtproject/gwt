@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f3ec9eb_685db7b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-12T09:43:58Z",
+      "side": 1,
+      "message": "Could you add a line:\n\n Bug: issue 8565\n\nnext to the Change-Id line?",
+      "revId": "b719168ff1b641a81f541695101b94077609f680",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f405174_c6e678cb",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-12T09:43:58Z",
+      "side": 1,
+      "message": "This import should be com.google.gwt.core.shared.GwtIncompatible",
+      "revId": "b719168ff1b641a81f541695101b94077609f680",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fabf157_39b497fd",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-12T09:43:58Z",
+      "side": 1,
+      "message": "I\u0027d rather not use any value at all, or try a better description. How about:\n\n @GwtIncompatible(\"Server-side only but loaded through naming convention so must be in same package as shared MyRequestFactory interface\")\n\nwith MyRequestFactory coming from the \u0027x\u0027 (x.getSimpleName())",
+      "revId": "b719168ff1b641a81f541695101b94077609f680",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

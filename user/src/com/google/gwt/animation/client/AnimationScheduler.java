@@ -31,8 +31,13 @@ public abstract class AnimationScheduler {
   public interface AnimationCallback {
     /**
      * Invokes the command.
+     * <p>
+     * <b>Note:</b> the timestamp should only be used for comparisons with other
+     * timestamps received in that same method. Specifically, the timestamp is in
+     * milliseconds but is not guaranteed to be relative to Epoch, or even to the
+     * {@code navigationStart} from the Navigation Timing API.
      * 
-     * @param timestamp the current timestamp
+     * @param timestamp the current timestamp, in milliseconds
      */
     void execute(double timestamp);
   }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fa38db3_302dc8a9",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-13T09:48:05Z",
+      "side": 1,
+      "message": "nit: could you wrap after the comma to keep GwtIncompatible.class.getSimpleName() on a single line?",
+      "revId": "578896c30d46f80a0ba54ae308e615a281bdaa16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fdfd524_1e51ad2c",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-13T09:48:05Z",
+      "side": 1,
+      "message": "simpleName is the name of the generated deobfuscator builder, I think we want x.getSimpleName() here.",
+      "revId": "578896c30d46f80a0ba54ae308e615a281bdaa16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

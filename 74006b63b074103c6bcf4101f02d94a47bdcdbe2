@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "afcbc564_37e04aea",
+        "filename": "user/src/com/google/gwt/user/client/ui/MenuBar.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-13T20:10:14Z",
+      "side": 1,
+      "message": "In that case it wouldn\u0027t match any styles from the GWT theme. Also keep in mind, I\u0027m just following the earlier decision here.",
+      "parentUuid": "2fdfd524_81b47cff",
+      "range": {
+        "startLine": 1180,
+        "startChar": 0,
+        "endLine": 1180,
+        "endChar": 48
+      },
+      "revId": "74006b63b074103c6bcf4101f02d94a47bdcdbe2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fdfd524_e1a2a0bc",
         "filename": "user/src/com/google/gwt/user/client/ui/MenuBar.java",
         "patchSetId": 4
@@ -76,6 +100,30 @@
       "writtenOn": "2014-02-13T19:07:46Z",
       "side": 1,
       "message": "to me getAbsoluteTop() should always be 0 , since this is the position of the popup before being positioned.\n\nDid you mean something else here?",
+      "range": {
+        "startLine": 1222,
+        "startChar": 61,
+        "endLine": 1222,
+        "endChar": 75
+      },
+      "revId": "74006b63b074103c6bcf4101f02d94a47bdcdbe2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcbc564_d7af1e74",
+        "filename": "user/src/com/google/gwt/user/client/ui/MenuBar.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-13T20:10:14Z",
+      "side": 1,
+      "message": "\u003e getAbsoluteTop() should always be 0\n\nAre you sure? I think absolute top can be effected by other things like css and I\u0027m only trying to capture the offset.",
+      "parentUuid": "2fdfd524_e1a2a0bc",
       "range": {
         "startLine": 1222,
         "startChar": 61,

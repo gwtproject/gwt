@@ -52,6 +52,24 @@
       "revId": "1e0586cc683a501cfde5f2e28325f1201090ef46",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fabf157_d978e309",
+        "filename": "user/src/com/google/gwt/animation/client/AnimationSchedulerImplStandard.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-13T10:23:17Z",
+      "side": 1,
+      "message": "Gosh! It\u0027s not as easy as it seemed! The problem mostly is because of the AnimationTest: it passes specific timestamps to the callback, but the fix to Animation is to actually ignore them, so we need to refactor things a bit.\n\nI was thinking of adding a getCurrentTimeStamp() or similar to AnimationScheduler that would return $wnd.performance.now() or currentTimeMillis() depending on the implementation, and could easily be faked in StubAnimationScheduler, but now the problem is that Safari doesn\u0027t implement performance.now(), and I don\u0027t think we want it to fallback to the Timer implementation (we could also use currentTimeMillis in AnimationSchedulerImplStandard instead of the high-res timestamp when performance.now isn\u0027t available, but it somehow defeats our efforts to change the AnimationCallback semantics)\n\nAnyway: https://gwt-review.googlesource.com/6400 and https://gwt-review.googlesource.com/6401",
+      "parentUuid": "4f3ec9eb_139c1c9d",
+      "revId": "1e0586cc683a501cfde5f2e28325f1201090ef46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -85,34 +85,84 @@ public class History {
     }
   }
 
-  private static class HistoryImpl {
+  
+  private interface HistoryImpl {
+    void attachListener(JavaScriptObject handler);
 
-    private JavaScriptObject handler;
+    void dispose(JavaScriptObject handler);
 
-    public void attachListener(JavaScriptObject handler) {
-      this.handler = handler;
-      addDomListener(handler);
-    }
+    void newToken(String historyToken);
 
-    public void dispose() {
-      removeDomListener(handler);
-    }
+    void replaceToken(String historyToken);
 
+    void maybeRunOtherListeners();
+  }
+  /**
+   * This is the standard implementation for HistoryImpl using HTML pushstate.
+   */
+  private static class HistoryImplPushState implements HistoryImpl {
+    // List of browsers that do not support pushstate:
+    // IE8-9, Android 3.x, Android 4.0, Android 4.1
+    static native boolean isSupported() /*-{
+      return $wnd.history.pushState != null &&
+          $wnd.history.replaceState != null;
+    }-*/;
+
+    @Override
+    public native void attachListener(JavaScriptObject handler) /*-{
+      $wnd.addEventListener('popstate', handler);
+    }-*/;
+
+    @Override
+    public native void dispose(JavaScriptObject handler) /*-{
+      $wnd.removeEventListener('popstate', handler);
+    }-*/;
+
+    @Override
+    public native void newToken(String historyToken) /*-{
+      $wnd.history.pushState({}, "", '#' + historyToken);
+    }-*/;
+
+    @Override
     public void maybeRunOtherListeners() {
     }
 
-    private native void addDomListener(JavaScriptObject handler) /*-{
+    @Override
+    public native void replaceToken(String historyToken) /*-{
+      $wnd.history.replaceState({}, "", '#' + historyToken);
+    }-*/;
+  }
+
+  private static class HistoryImplHashToken extends HistoryImplPushState {
+
+    @Override
+    public native void attachListener(JavaScriptObject handler) /*-{
       $wnd.addEventListener('hashchange', handler);
     }-*/;
 
-    private native void removeDomListener(JavaScriptObject handler) /*-{
+    @Override
+    public native void dispose(JavaScriptObject handler) /*-{
       $wnd.removeEventListener('hashchange', handler);
     }-*/;
+
+    @Override
+    public native void newToken(String historyToken) /*-{
+      $wnd.location.hash = historyToken;
+    }-*/;
+
+    @Override
+    public void maybeRunOtherListeners() {
+    }
+
+    @Override
+    public void replaceToken(String historyToken) {
+      Window.Location.replace("#" + historyToken);
+    }
   }
 
   // used for rebinding
   @SuppressWarnings("unused")
-  private static class HistoryImplIE8 extends HistoryImpl {
+  private static class HistoryImplIE8 extends HistoryImplHashToken {
 
     private JavaScriptObject oldHandler;
 
@@ -123,7 +173,7 @@ public class History {
     }
 
     @Override
-    public void dispose() {
+    public void dispose(JavaScriptObject handler) {
       setListener(oldHandler);
     }
 
@@ -179,14 +229,17 @@ public class History {
   private static HistoryImpl impl;
 
   static {
-    impl = GWT.create(HistoryImpl.class);
+    // Feature test for HTML5 pushstate, otherwise use rebinding.
+    impl = HistoryImplPushState.isSupported() ?
+        new HistoryImplPushState() : (HistoryImpl) GWT.create(HistoryImpl.class);
     historyEventSource = new HistoryEventSource();
     token = getDecodedHash();
-    impl.attachListener(getHistoryChangeHandler());
+    final JavaScriptObject handler = getHistoryChangeHandler();
+    impl.attachListener(handler);
     Impl.scheduleDispose(new Disposable() {
       @Override
       public void dispose() {
-        impl.dispose();
+        impl.dispose(handler);
       }
     });
   }
@@ -292,7 +345,7 @@ public class History {
     if (!historyToken.equals(getToken())) {
       token = historyToken;
       String updateToken = encodeHistoryToken(historyToken);
-      nativeUpdate(updateToken);
+      impl.newToken(updateToken);
       if (issueEvent) {
         historyEventSource.fireValueChangedEvent(historyToken);
       }
@@ -325,6 +378,49 @@ public class History {
     WrapHistory.remove(historyEventSource.getHandlers(), listener);
   }
 
+  /**
+   * Replace the current history token on top of the browsers history stack.
+   *
+   * <p>Note: This method has problems on older browsers (IE8 and IE9). Since these
+   * do not support HTML5 pushState we update the URL with window.location.replace,
+   * this unfortunately has side effects when using the iframe linker. Make sure you are
+   * using the cross site linker when using this method in your code.
+   *
+   * <p>Calling this method will cause
+   * {@link ValueChangeHandler#onValueChange(com.google.gwt.event.logical.shared.ValueChangeEvent)}
+   * to be called as well.
+   *
+   * @param historyToken history token to replace current top entry
+   */
+  public static void replaceItem(String historyToken) {
+    replaceItem(historyToken, true);
+  }
+
+  /**
+   * Replace the current history token on top of the browsers history stack.
+   *
+   * <p>Note: This method has problems on older browsers (IE8 and IE9). Since these
+   * do not support HTML5 pushState we update the URL with window.location.replace,
+   * this unfortunately has side effects when using the iframe linker. Make sure you are
+   * using the cross site linker when using this method in your code.
+   *
+   * <p>Calling this method will cause
+   * {@link ValueChangeHandler#onValueChange(com.google.gwt.event.logical.shared.ValueChangeEvent)}
+   * to be called as well if and only if issueEvent is true.
+   *
+   * @param historyToken history token to replace current top entry
+   * @param issueEvent issueEvent true if a
+   *          {@link ValueChangeHandler#onValueChange(com.google.gwt.event.logical.shared.ValueChangeEvent)}
+   *          event should be issued
+   */
+  public static void replaceItem(String historyToken, boolean issueEvent) {
+    token = historyToken;
+    impl.replaceToken(encodeHistoryToken(historyToken));
+    if (issueEvent) {
+      fireCurrentHistoryState();
+    }
+  }
+
   private static native String decodeURI(String s) /*-{
     return $wnd.decodeURI(s.replace("%23", "#"));
   }-*/;
@@ -336,14 +432,6 @@ public class History {
 
   private static native JavaScriptObject getHistoryChangeHandler() /*-{
     return $entry(@com.google.gwt.user.client.History::onHashChanged());
-  }-*/;
-
-  /**
-   * The standard updateHash implementation assigns to location.hash() with an
-   * encoded history token.
-   */
-  private static native void nativeUpdate(String historyToken) /*-{
-    $wnd.location.hash = historyToken;
   }-*/;
 
   // this is called from JS when the native onhashchange occurs

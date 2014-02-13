@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afcbc564_cb1bfdcd",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 13
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-13T03:16:01Z",
+      "side": 1,
+      "message": "Actually this is wrong - com.google.gwt.lang is not a public interface - we shouldn\u0027t be listing changes here.",
+      "revId": "782d732be4c146675beef4726ec20239c5a6df5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

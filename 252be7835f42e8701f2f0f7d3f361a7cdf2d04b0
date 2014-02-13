@@ -16,6 +16,24 @@
       "revId": "252be7835f42e8701f2f0f7d3f361a7cdf2d04b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcbc564_1169964e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-13T18:11:58Z",
+      "side": 1,
+      "message": "Playing around with jsperf it seems that the best check is \n\ntypeof(plain_string) \u003d\u003d \"string\" || (plain_string.constructor \u0026\u0026 plain_string.constructor.prototype \u003d\u003d String.prototype)\n\nThis one is basically the fastest in FF all around and the fastest in Chrome except for the case of Boxed Strings (in which case is only 35% slower)\n\nIt is up to 4 times faster than the original check!\n\nHavent tried safari nor IE though.\n\nhttp://jsperf.com/isastring-plainjsstring\n\nhttp://jsperf.com/isastring-boxedstring\n\nhttp://jsperf.com/isastring-notastring",
+      "parentUuid": "afcbc564_f67c28cc",
+      "revId": "252be7835f42e8701f2f0f7d3f361a7cdf2d04b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

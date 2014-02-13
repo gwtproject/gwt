@@ -129,7 +129,9 @@ class DeobfuscatorBuilder extends ScannerBase<Void> {
     println("import %s;", OperationData.class.getCanonicalName());
     println("import %s;", OperationKey.class.getCanonicalName());
     println("import %s;", GwtIncompatible.class.getCanonicalName());
-    println("@%s(\"Incompatible class\")", GwtIncompatible.class.getSimpleName());
+    println("@%s(\"Server-side only but loaded through naming convention "
+        + "so must be in same package as shared %s interface\")", GwtIncompatible.class
+        .getSimpleName(), simpleName);
     println("public final class %s extends %s {", simpleName, Deobfuscator.Builder.class
         .getCanonicalName());
     println("{");

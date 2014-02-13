@@ -20,6 +20,10 @@
   <inherits name="com.google.gwt.core.Core"/>
   <inherits name="com.google.gwt.user.UserAgent"/>
 
+  <replace-with class="com.google.gwt.user.client.History.HistoryImplHashToken">
+    <when-type-is class="com.google.gwt.user.client.History.HistoryImpl" />
+  </replace-with>
+
   <!-- IE8 does not work with the standard implementation -->
   <replace-with class="com.google.gwt.user.client.History.HistoryImplIE8">
     <when-type-is class="com.google.gwt.user.client.History.HistoryImpl" />

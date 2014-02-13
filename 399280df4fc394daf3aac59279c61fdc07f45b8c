@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "afcbc564_5fdfa47f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-13T23:24:14Z",
+      "side": 1,
+      "message": "Finally getting back to this; sorry about the delay.\n\nI like the performance win, but despite having tried several times I\u0027m finding this code rather hard to follow. It would help if you added comments explaining the lifecycle and invariants of these fields, so the reader doesn\u0027t have to read the whole class to figure out your intentions.\n\nPerhaps introducing an inner class or two to encapsulate some of the internals might help?",
+      "range": {
+        "startLine": 52,
+        "startChar": 65,
+        "endLine": 52,
+        "endChar": 70
+      },
+      "revId": "399280df4fc394daf3aac59279c61fdc07f45b8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92138adb_ef8335a9",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
         "patchSetId": 4

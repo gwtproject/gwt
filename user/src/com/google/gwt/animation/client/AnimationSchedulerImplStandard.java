@@ -29,7 +29,13 @@ class AnimationSchedulerImplStandard extends AnimationScheduler {
    * @return {@code true} if natively supported, {@code false} if not
    */
   static native boolean isNativelySupported() /*-{
-    return !!$wnd.requestAnimationFrame && !!$wnd.cancelAnimationFrame;
+    return (!!$wnd.requestAnimationFrame && !!$wnd.cancelAnimationFrame
+      && !!$wnd.performance && !!$wnd.performance.now);
+  }-*/;
+
+  @Override
+  public native double currentTimeStamp() /*-{
+    return $wnd.performance.now();
   }-*/;
 
   @Override

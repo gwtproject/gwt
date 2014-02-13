@@ -72,7 +72,8 @@ public abstract class Animation {
   private final AnimationScheduler scheduler;
 
   /**
-   * The start time of the {@link Animation}.
+   * The start time of the {@link Animation}, relative to the same base as
+   * the timestamps from the {@link AnimationScheduler}.
    */
   private double startTime = -1;
 
@@ -191,12 +192,13 @@ public abstract class Animation {
     isRunning = true;
     isStarted = false;
     this.duration = duration;
-    this.startTime = startTime;
     this.element = element;
     ++runId;
 
+    this.startTime = (startTime - Duration.currentTimeMillis()) + scheduler.currentTimeStamp();
+
     // Execute the first callback.
-    callback.execute(Duration.currentTimeMillis());
+    callback.execute(scheduler.currentTimeStamp());
   }
 
   /**
@@ -272,7 +274,7 @@ public abstract class Animation {
   /**
    * Update the {@link Animation}.
    * 
-   * @param curTime the current time
+   * @param curTime the current time (in the same referential as {@link #startTime})
    * @return true if the animation should run again, false if it is complete
    */
   private boolean update(double curTime) {

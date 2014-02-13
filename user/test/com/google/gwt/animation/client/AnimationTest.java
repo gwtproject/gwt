@@ -17,7 +17,6 @@ package com.google.gwt.animation.client;
 
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.animation.client.testing.StubAnimationScheduler;
-import com.google.gwt.core.client.Duration;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.List;
@@ -168,7 +167,7 @@ public class AnimationTest extends GWTTestCase {
 
     // Complete the animation.
     // TODO(cromwellian) remove this 4000 hack after the failure is found
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER + 4000);
+    scheduler.tick(curTime + DELAY_MULTIPLIER + 4000);
     assertFalse(anim.isRunning());
     anim.assertStarted(false);
     anim.assertUpdated(false);
@@ -229,7 +228,7 @@ public class AnimationTest extends GWTTestCase {
 
 
     // Update the animation.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
+    scheduler.tick(curTime + DELAY_MULTIPLIER);
     assertTrue(anim.isRunning());
     anim.assertStarted(false);
     anim.assertUpdated(true);
@@ -280,7 +279,7 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Force the animation to complete.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER + 100);
+    scheduler.tick(curTime + DELAY_MULTIPLIER + 100);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(false);
@@ -352,7 +351,7 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Force the update.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
+    scheduler.tick(curTime + DELAY_MULTIPLIER);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(false);
@@ -443,7 +442,7 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Force the animation to complete.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER + 100);
+    scheduler.tick(curTime + DELAY_MULTIPLIER + 100);
     anim.assertStarted(true);
     anim.assertUpdated(false);
     anim.assertCompleted(false);
@@ -465,28 +464,28 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Update, but still before the start time.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
+    scheduler.tick(curTime + DELAY_MULTIPLIER);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(false);
     anim.reset();
 
     // Start the animation.
-    executeLastCallbackAt(curTime + 2 * DELAY_MULTIPLIER);
+    scheduler.tick(curTime + 2 * DELAY_MULTIPLIER);
     anim.assertStarted(true);
     anim.assertUpdated(false);
     anim.assertCompleted(false);
     anim.reset();
 
     // Update the animation.
-    executeLastCallbackAt(curTime + 3 * DELAY_MULTIPLIER);
+    scheduler.tick(curTime + 3 * DELAY_MULTIPLIER);
     anim.assertStarted(false);
     anim.assertUpdated(true);
     anim.assertCompleted(false);
     anim.reset();
 
     // Complete the animation.
-    executeLastCallbackAt(curTime + 4 * DELAY_MULTIPLIER + 100);
+    scheduler.tick(curTime + 4 * DELAY_MULTIPLIER + 100);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(true);
@@ -507,14 +506,14 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Update the progress.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
+    scheduler.tick(curTime + DELAY_MULTIPLIER);
     anim.assertStarted(false);
     anim.assertUpdated(true);
     anim.assertCompleted(false);
     anim.reset();
 
     // Complete the animation.
-    executeLastCallbackAt(curTime + 2 * DELAY_MULTIPLIER + 100);
+    scheduler.tick(curTime + 2 * DELAY_MULTIPLIER + 100);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(true);
@@ -535,14 +534,14 @@ public class AnimationTest extends GWTTestCase {
     anim.reset();
 
     // Update the progress.
-    executeLastCallbackAt(curTime + DELAY_MULTIPLIER);
+    scheduler.tick(curTime + DELAY_MULTIPLIER);
     anim.assertStarted(false);
     anim.assertUpdated(true);
     anim.assertCompleted(false);
     anim.reset();
 
     // Complete the animation.
-    executeLastCallbackAt(curTime + 2 * DELAY_MULTIPLIER + 100);
+    scheduler.tick(curTime + 2 * DELAY_MULTIPLIER + 100);
     anim.assertStarted(false);
     anim.assertUpdated(false);
     anim.assertCompleted(true);
@@ -566,24 +565,12 @@ public class AnimationTest extends GWTTestCase {
   protected void gwtSetUp() throws Exception {
     scheduler = new StubAnimationScheduler();
     callbacks = scheduler.getAnimationCallbacks();
-    curTime = Duration.currentTimeMillis();
+    curTime = scheduler.currentTimeStamp();
   }
 
   @Override
   protected void gwtTearDown() throws Exception {
     scheduler = null;
     callbacks = null;
-  }
-
-  /**
-   * Execute the last callback requested from the scheduler at the specified
-   * time.
-   * 
-   * @param timestamp the time to pass to the callback
-   */
-  private void executeLastCallbackAt(double timestamp) {
-    assertTrue(callbacks.size() > 0);
-    AnimationCallback callback = callbacks.remove(callbacks.size() - 1);
-    callback.execute(timestamp);
   }
 }

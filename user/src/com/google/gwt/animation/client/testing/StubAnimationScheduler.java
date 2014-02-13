@@ -22,9 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A stub implementation of {@link AnimationScheduler} that does not execute the
- * callbacks. Use {@link StubAnimationScheduler#getAnimationCallbacks()} to
- * retrieve and execute callbacks manually.
+ * A stub implementation of {@link AnimationScheduler}.
+ * <p>
+ * Callbacks are recorded and can be retrieved using {@link #getAnimationCallbacks()}
+ * to, for example, execute them manually.
+ * <p>
+ * You can also execute all recorded callbacks (and clear the
+ * list) using {@link #tick(double)}.
  */
 public class StubAnimationScheduler extends AnimationScheduler {
 
@@ -59,8 +63,34 @@ public class StubAnimationScheduler extends AnimationScheduler {
   }
 
   @Override
+  public double currentTimeStamp() {
+    // Note: use System instead of Duration so we don't require GWTTestCase
+    return System.currentTimeMillis();
+  }
+
+  @Override
   public StubAnimationHandle requestAnimationFrame(AnimationCallback callback, Element element) {
     callbacks.add(callback);
     return new StubAnimationHandle(callback);
+  }
+
+  /**
+   * Execute all the recorded callbacks at the given timestamp, and clears the list.
+   * <p>
+   * The timestamp should be computed relative to a previous call to {@link #currentTimeStamp()}.
+   * <p>
+   * <b>Implementation note:</b> exceptions thrown by callbacks will bubble and interrupt
+   * the execution. The state of the {@link StubAnimationScheduler} is undefined after
+   * such exceptions. If you want to handle exceptions thrown by callbacks, retrieve them
+   * using {@link #getAnimationCallbacks()} and execute them manually.
+   * 
+   * @param timestamp the timestamp passed to the callbacks.
+   */
+  public void tick(double timestamp) {
+    List<AnimationCallback> cbs = new ArrayList<AnimationCallback>(this.callbacks);
+    this.callbacks.clear();
+    for (AnimationCallback callback : cbs) {
+      callback.execute(timestamp);
+    }
   }
 }

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.animation.client;
 
+import com.google.gwt.core.client.Duration;
 import com.google.gwt.dom.client.Element;
 
 /**
@@ -65,6 +66,20 @@ public abstract class AnimationScheduler {
               ? new AnimationSchedulerImplStandard() : new AnimationSchedulerImplTimer();
     }
     return instance;
+  }
+
+  /**
+   * Returns the current timestamp.
+   * <p>
+   * This can be used, for example, to record the start time of an animation and later compare
+   * it to values received in an {@link AnimationCallback}.
+   * <p>
+   * The default implementation returns {@link Duration#currentTimeMillis()} for backwards
+   * compatibility. Subclasses are advised to override the method even if their implementation
+   * would be identical, as the method might be made abstract in the future.
+   */
+  public double currentTimeStamp() {
+    return Duration.currentTimeMillis();
   }
 
   /**

@@ -75,6 +75,11 @@ class AnimationSchedulerImplTimer extends AnimationScheduler {
   };
 
   @Override
+  public double currentTimeStamp() {
+    return Duration.currentTimeMillis();
+  }
+
+  @Override
   public AnimationHandle requestAnimationFrame(final AnimationCallback callback, Element element) {
     // Save the animation frame request.
     AnimationHandleImpl requestId = new AnimationHandleImpl(callback);

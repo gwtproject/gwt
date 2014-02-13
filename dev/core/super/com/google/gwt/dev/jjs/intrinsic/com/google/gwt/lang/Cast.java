@@ -221,7 +221,8 @@ final class Cast {
    */
   // Visible for getIndexedMethod()
   static native boolean isJavaString(Object src) /*-{
-    return typeof src.valueOf() == "string";
+    // For some reason some objects in IE8 lack valueOf.
+    return !!src.valueOf && typeof(src.valueOf()) == "string";
   }-*/;
 
   /**

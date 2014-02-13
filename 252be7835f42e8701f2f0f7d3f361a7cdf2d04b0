@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afcbc564_f67c28cc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-02-13T07:17:25Z",
+      "side": 1,
+      "message": "Ugh, seriously? I dislike that we have to pay this tax on every platform. I suppose it\u0027s ok for now, but we should investigate perhaps injecting different implementations of these intrinsic classes.\n\nEither that, or leak a TODO and file a bug pointing to this reminding us to remove it when we deprecate IE8.",
+      "revId": "252be7835f42e8701f2f0f7d3f361a7cdf2d04b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

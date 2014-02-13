@@ -221,7 +221,10 @@ final class Cast {
    */
   // Visible for getIndexedMethod()
   static native boolean isJavaString(Object src) /*-{
-    return typeof src.valueOf() == "string";
+    // TODO(rluble): This probably needs to be specialized by browser.
+    // Beware of valueOf(), for some reason some objects in IE8 lack valueOf.
+    return typeof(src) == "string" ||
+        (src.constructor && src.constructor.prototype == String.prototype);
   }-*/;
 
   /**

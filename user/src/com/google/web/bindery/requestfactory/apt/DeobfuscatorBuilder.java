@@ -15,7 +15,7 @@
  */
 package com.google.web.bindery.requestfactory.apt;
 
-import com.google.gwt.thirdparty.guava.common.annotations.GwtIncompatible;
+import com.google.gwt.core.shared.GwtIncompatible;
 import com.google.web.bindery.requestfactory.vm.impl.Deobfuscator;
 import com.google.web.bindery.requestfactory.vm.impl.OperationData;
 import com.google.web.bindery.requestfactory.vm.impl.OperationKey;

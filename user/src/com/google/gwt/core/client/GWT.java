@@ -17,6 +17,7 @@ package com.google.gwt.core.client;
 
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.core.client.impl.Impl;
+import com.google.gwt.core.shared.GWTBridge;
 
 /**
  * Supports core functionality that in some cases requires direct support from

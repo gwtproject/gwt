@@ -15,7 +15,7 @@
  */
 package com.google.gwt.junit;
 
-import com.google.gwt.core.client.GWTBridge;
+import com.google.gwt.core.shared.GWTBridge;
 import com.google.gwt.dev.About;
 import com.google.gwt.i18n.client.Messages;
 

@@ -16,7 +16,7 @@
 package com.google.gwt.junit;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWTBridge;
+import com.google.gwt.core.shared.GWTBridge;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

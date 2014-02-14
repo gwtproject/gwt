@@ -15,41 +15,118 @@
  */
 package com.google.gwt.core.ext.linker;
 
+import com.google.gwt.thirdparty.guava.common.base.Supplier;
+import com.google.gwt.thirdparty.guava.common.collect.ForwardingIterator;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSortedSet;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimaps;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Provides stable ordering and de-duplication of artifacts.
  */
 public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
+  private static final Supplier<SortedSet<Object>> TREE_SETS =
+      new Supplier<SortedSet<Object>>() {
+    @Override
+    public SortedSet<Object> get() {
+      return new TreeSet<Object>();
+    }
+  };
+
+  private final boolean isView;
+
   private SortedSet<Artifact<?>> treeSet = new TreeSet<Artifact<?>>();
 
+  /**
+   * Groups set members by their concrete type.
+   *
+   * <p>This is maintained to speed-up the find operation.  It is generated on
+   * the first call to {@link #find(Class)} and kept up-to-date during each
+   * subsequent ArtifactSet mutation.
+   *
+   * <p>For find, all members that are assignable to a type can be quickly
+   * located by iterating through the keys of this index, avoiding the need to
+   * individually check each member of the set; since they share a concrete
+   * type, they will collectively be assignable or not assignable to the type
+   * being found.
+   */
+  private transient TypeIndex byType = new TypeIndex();
+
+  /**
+   * Caches the results of {@link #find(Class)}.  If an entry for the Class
+   * being found is located in the cache, it can be returned immediately.
+   *
+   * <p>If a set is mutated, the cache is cleared.
+   */
+  private transient AtomicReference<Map<Class<?>, SortedSet<?>>> cache;
+
   public ArtifactSet() {
+    this(new TreeSet<Artifact<?>>(),
+        new AtomicReference<Map<Class<?>, SortedSet<?>>>(), false);
   }
 
   public ArtifactSet(Collection<? extends Artifact<?>> copyFrom) {
+    this();
     addAll(copyFrom);
+  }
+
+  private ArtifactSet(
+      SortedSet<Artifact<?>> backingSet,
+      AtomicReference<Map<Class<?>, SortedSet<?>>> cache,
+      boolean isView) {
+    this.treeSet = backingSet;
+    this.cache = cache;
+    this.isView = isView;
+  }
+
+  /**
+   * Wraps a low-level subSet, headSet, or tailSet in such a way that 'byType'
+   * and 'cache' will be correctly maintained for this ArtifactSet when the
+   * views are mutated.
+   */
+  private SortedSet<Artifact<?>> createView(SortedSet<Artifact<?>> backing) {
+    return new ArtifactSet(backing, cache, true);
   }
 
   @Override
   public boolean add(Artifact<?> o) {
-    return treeSet.add(o);
+    if (treeSet.add(o)) {
+      cache.set(null);
+      byType.add(o);
+      return true;
+    }
+    return false;
   }
 
   @Override
   public boolean addAll(Collection<? extends Artifact<?>> c) {
-    return treeSet.addAll(c);
+    if (treeSet.addAll(c)) {
+      cache.set(null);
+      for (Artifact<?> a : c) {
+        byType.add(a);
+      }
+      return true;
+    }
+    return false;
   }
 
   @Override
   public void clear() {
+    cache.set(null);
     treeSet.clear();
+    byType = new TypeIndex();
   }
 
   @Override
@@ -83,19 +160,41 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
    *   }
    * </pre>
    * 
+   * <p>The returned SortedSet is immutable.
+   *
    * @param <T> the desired type of Artifact
    * @param artifactType the desired type of Artifact
    * @return all Artifacts in the ArtifactSet assignable to the desired type
    */
+  @SuppressWarnings("unchecked")
   public <T extends Artifact<? super T>> SortedSet<T> find(
       Class<T> artifactType) {
-    // TODO make this sub-linear (but must retain order for styles/scripts!)
-    SortedSet<T> toReturn = new TreeSet<T>();
-    for (Artifact<?> artifact : this) {
-      if (artifactType.isInstance(artifact)) {
-        toReturn.add(artifactType.cast(artifact));
+    // The views are secretly ArtifactSet (it isn't advertised on the interface)
+    // so that we can maintain the byType index and the cache.  find() does not
+    // reliably work for them, and the method shouldn't normally be exposed and
+    // accessible for a view.
+    if (isView) {
+      throw new UnsupportedOperationException(
+          "Cannot find() for views created via headSet/tailSet/subSet");
+    }
+
+    if (cache.get() == null) {
+      // Create the cache since it did not previously exist.
+      cache.set(new HashMap<Class<?>, SortedSet<?>>());
+    } else {
+      // The cache previously existed, so see if it has an entry that matches
+      // artifact type.
+      SortedSet<?> s = cache.get().get(artifactType);
+      if (s != null) {
+        return (SortedSet<T>) s;
       }
     }
+
+    // Bummer. Cache miss.  Do this the harder way.
+    SortedSet<T> toReturn = byType.find(artifactType);
+
+    // Cache the result
+    cache.get().put(artifactType, toReturn);
     return toReturn;
   }
 
@@ -122,7 +221,7 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public SortedSet<Artifact<?>> headSet(Artifact<?> toElement) {
-    return treeSet.headSet(toElement);
+    return createView(treeSet.headSet(toElement));
   }
 
   @Override
@@ -132,7 +231,20 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public Iterator<Artifact<?>> iterator() {
-    return treeSet.iterator();
+    return new ForwardingIterator<Artifact<?>>() {
+      private final Iterator<Artifact<?>> backing = treeSet.iterator();
+
+      @Override
+      protected Iterator<Artifact<?>> delegate() {
+        return backing;
+      }
+
+      @Override
+      public void remove() {
+        delegate().remove();
+        cache.set(null);
+      }
+    };
   }
 
   @Override
@@ -142,12 +254,24 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
 
   @Override
   public boolean remove(Object o) {
-    return treeSet.remove(o);
+    if (treeSet.remove(o)) {
+      cache.set(null);
+      byType.remove(o);
+      return true;
+    }
+    return false;
   }
 
   @Override
   public boolean removeAll(Collection<?> c) {
-    return treeSet.removeAll(c);
+    if (treeSet.removeAll(c)) {
+      cache.set(null);
+      for (Object o : c) {
+        byType.remove(o);
+      }
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -157,14 +281,19 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
    * @return <code>true</code> if an equivalent Artifact was already present.
    */
   public boolean replace(Artifact<?> artifact) {
-    boolean toReturn = treeSet.remove(artifact);
-    treeSet.add(artifact);
+    boolean toReturn = remove(artifact);
+    add(artifact);
     return toReturn;
   }
 
   @Override
   public boolean retainAll(Collection<?> c) {
-    return treeSet.retainAll(c);
+    if (treeSet.retainAll(c)) {
+      cache.set(null);
+      byType.retainAll(c);
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -175,12 +304,12 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
   @Override
   public SortedSet<Artifact<?>> subSet(Artifact<?> fromElement,
       Artifact<?> toElement) {
-    return treeSet.subSet(fromElement, toElement);
+    return createView(treeSet.subSet(fromElement, toElement));
   }
 
   @Override
   public SortedSet<Artifact<?>> tailSet(Artifact<?> fromElement) {
-    return treeSet.tailSet(fromElement);
+    return createView(treeSet.tailSet(fromElement));
   }
 
   @Override
@@ -196,5 +325,75 @@ public final class ArtifactSet implements SortedSet<Artifact<?>>, Serializable {
   @Override
   public String toString() {
     return treeSet.toString();
+  }
+
+  /**
+   * Organizes set members by their concrete type.
+   */
+  private final class TypeIndex {
+    private transient Multimap<Class<?>, Object> index = null;
+
+    /**
+     * Adds an item to the index.  If the initial index has not yet been
+     * created, no action is taken.
+     */
+    public void add(Object o) {
+      if (index != null) {
+        index.put(o.getClass(), o);
+      }
+    }
+
+    /**
+     * Removes an item from the index.  If the initial index has not yet been
+     * created, no action is taken.
+     */
+    public void remove(Object o) {
+      if (index != null) {
+        index.remove(o.getClass(), o);
+      }
+    }
+
+    /**
+     * Retains all members of the index that also exist in c, discarding others.
+     * If the initial index has not yet been created, no action is taken.
+     */
+    public void retainAll(Collection<?> c) {
+      if (index != null) {
+        index.values().retainAll(c);
+      }
+    }
+
+    /**
+     * Locates all indexed members that can be assigned to artifactType.
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends Comparable> SortedSet<T> find(Class<T> artifactType) {
+      // Create a type index if it did not previously exist.  The type index is
+      // necessary below.
+      if (index == null) {
+        generateTypeIndex();
+      }
+
+      // Using the type index, gather all members assignable to artifactType.
+      ImmutableSortedSet.Builder<T> builder = ImmutableSortedSet.<T>naturalOrder();
+      for (Map.Entry<Class<?>, ?> entry : index.asMap().entrySet()) {
+        if (artifactType.isAssignableFrom(entry.getKey())) {
+          builder.addAll((SortedSet<? extends T>) entry.getValue());
+        }
+      }
+      return builder.build();
+    }
+
+    /**
+     * Groups all set members by their concrete type and puts the result into
+     * the 'byType' index.
+     */
+    private void generateTypeIndex() {
+      index = Multimaps.newSortedSetMultimap(
+          new HashMap<Class<?>, Collection<Object>>(), TREE_SETS);
+      for (Artifact a : treeSet) {
+        index.put(a.getClass(), a);
+      }
+    }
   }
 }

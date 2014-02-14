@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4fb329fa_5a8ed119",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-14T01:37:16Z",
+      "side": 1,
+      "message": "Done. Added \"TypeIndex\" class and a number of comments.",
+      "parentUuid": "afcbc564_5fdfa47f",
+      "range": {
+        "startLine": 52,
+        "startChar": 65,
+        "endLine": 52,
+        "endChar": 70
+      },
+      "revId": "399280df4fc394daf3aac59279c61fdc07f45b8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92138adb_ef8335a9",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
         "patchSetId": 4

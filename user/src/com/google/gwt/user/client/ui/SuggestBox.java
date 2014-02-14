@@ -102,7 +102,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class SuggestBox extends Composite implements HasText, HasFocus,
     HasAnimation, HasEnabled, SourcesClickEvents, SourcesChangeEvents,
-    SourcesKeyboardEvents, FiresSuggestionEvents, HasAllKeyHandlers,
+    SourcesKeyboardEvents, HasAllKeyHandlers,
     HasValue<String>, HasSelectionHandlers<Suggestion>,
     IsEditor<LeafValueEditor<String>> {
 
@@ -764,16 +764,6 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   }
 
   /**
-   * Adds an event to this handler.
-   *
-   * @deprecated use {@link #addSelectionHandler} instead.
-   */
-  @Deprecated
-  public void addEventHandler(final SuggestionHandler handler) {
-    ListenerWrapper.WrappedOldSuggestionHandler.add(this, handler);
-  }
-
-  /**
    * Adds a listener to receive focus events on the SuggestBox's text box. The
    * source Widget for these events will be the SuggestBox.
    *
@@ -975,15 +965,6 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   @Deprecated
   public void removeClickListener(ClickListener listener) {
     ListenerWrapper.WrappedClickListener.remove(box, listener);
-  }
-
-  /**
-   * @deprecated Use the {@link HandlerRegistration#removeHandler} method no the
-   *             object returned by {@link #addSelectionHandler} instead
-   */
-  @Deprecated
-  public void removeEventHandler(SuggestionHandler handler) {
-    ListenerWrapper.WrappedOldSuggestionHandler.remove(this, handler);
   }
 
   /**

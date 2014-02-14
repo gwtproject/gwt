@@ -78,8 +78,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.BaseListenerWrapper;
 import com.google.gwt.user.client.Event;
 
@@ -638,32 +638,6 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       getListener().onSubmitComplete(
           new FormSubmitCompleteEvent((FormPanel) event.getSource(),
               event.getResults()));
-    }
-  }
-
-  static class WrappedOldSuggestionHandler extends
-      ListenerWrapper<SuggestionHandler> implements
-      SelectionHandler<SuggestOracle.Suggestion> {
-    /**
-     * @deprecated will be removed in GWT 2.0 along with the listener classes
-     */
-    @Deprecated
-    public static void add(SuggestBox source, SuggestionHandler listener) {
-      source.addSelectionHandler(new WrappedOldSuggestionHandler(listener));
-    }
-
-    public static void remove(Widget eventSource, SuggestionHandler listener) {
-      baseRemove(eventSource, listener, SelectionEvent.getType());
-    }
-
-    private WrappedOldSuggestionHandler(SuggestionHandler listener) {
-      super(listener);
-    }
-
-    public void onSelection(SelectionEvent<SuggestOracle.Suggestion> event) {
-      getListener().onSuggestionSelected(
-          new SuggestionEvent((SuggestBox) event.getSource(),
-              event.getSelectedItem()));
     }
   }
 

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afcbc564_bd07d8ab",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-14T02:57:12Z",
+      "side": 1,
+      "message": "Could you rename this to \"findCache\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 65,
+        "endLine": 73,
+        "endChar": 70
+      },
+      "revId": "2e13acc5673c4b52367102572e200d52f02b7bcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcbc564_5d85ecad",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-14T02:57:12Z",
+      "side": 1,
+      "message": "It\u0027s surprising that we\u0027re passing the findCache to the view when the view doesn\u0027t even implement find(). Of course this is only to clear it on mutation.\n\nIt appears that each View wraps a TreeSet that\u0027s itself actually a view of its parent\u0027s TreeSet. However, each view has its own TypeIndex, and mutating a view (adding a new item, for example) doesn\u0027t update its parent\u0027s TypeIndex or vice-versa. But I can\u0027t see anywhere that a View uses its own TypeIndex; I think a TypeIndex is only used in find()? So it doesn\u0027t actually need one.\n\nI think it would be clearer to have an static inner View class with a parent field. If we delegate all mutations to the parent then we could be sure it updates all its indexes.\n\nHowever, I\u0027m not sure if that\u0027s correct either. I\u0027m unclear on what happens when you call add() on a view with an object that wouldn\u0027t normally show up in that view. Does the mutation succeed but it disappears from the view? Or suppose you call remove() with an object that doesn\u0027t exist in the view but it exists in the parent?\n\nIt\u0027s rather unfortunate that ArtifactSet implements SortedSet at all. I don\u0027t think GWT actually needs all this complexity with fully mutable views. We probably shouldn\u0027t spend any effort making views fast; instead, if necessary we can modify GWT to not use views in performance-sensitive code.",
+      "range": {
+        "startLine": 100,
+        "startChar": 36,
+        "endLine": 100,
+        "endChar": 41
+      },
+      "revId": "2e13acc5673c4b52367102572e200d52f02b7bcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcbc564_3da10810",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-14T02:57:12Z",
+      "side": 1,
+      "message": "Can we make this static and just pass in the backing TreeSet? I think that\u0027s the only outer field that it references.",
+      "range": {
+        "startLine": 333,
+        "startChar": 10,
+        "endLine": 333,
+        "endChar": 15
+      },
+      "revId": "2e13acc5673c4b52367102572e200d52f02b7bcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcbc564_dd82dc72",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-14T02:57:12Z",
+      "side": 1,
+      "message": "Remove \"transient\". (TypeIndex isn\u0027t serializable.)",
+      "range": {
+        "startLine": 334,
+        "startChar": 12,
+        "endLine": 334,
+        "endChar": 21
+      },
+      "revId": "2e13acc5673c4b52367102572e200d52f02b7bcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

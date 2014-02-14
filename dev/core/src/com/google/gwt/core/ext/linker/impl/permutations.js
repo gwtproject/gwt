@@ -20,7 +20,7 @@ function getCompiledCodeFilename() {
   // the strong name of the cache.js file to load.
   var answers = [];
 
-  var softPermutationId;
+  var softPermutationId = 0;
 
   // Deferred-binding mapper function.  Sets a value into the several-level-deep
   // answers map. The keys are specified by a non-zero-length propValArray,

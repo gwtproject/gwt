@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4fb329fa_baba8d9d",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-14T03:00:28Z",
+      "side": 1,
+      "message": "yes, looking at it more closely. i think you\u0027re right.\n\ni thought you were writing unit tests, but they\u0027re really functional tests. you\u0027re exercising more than one way that input could trip on the issue you fixed in UnusedImportsRemover.\n\ntests look good.",
+      "parentUuid": "afcbc564_ddd3bc27",
+      "range": {
+        "startLine": 64,
+        "startChar": 14,
+        "endLine": 64,
+        "endChar": 57
+      },
+      "revId": "bb13ae8ab4ecce08d0dd3dac235bdbb223a09c68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afcbc564_7c7f19f3",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTest.java",
         "patchSetId": 2

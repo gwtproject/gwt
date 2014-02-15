@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cff8f9d4_63b3e2e6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T00:32:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f816916_cdddbd33",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "77f066817850cd06dc1c2df5592b1a03600408c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fd6913f_ade3fd44",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2014-02-14T20:38:57Z",
       "side": 1,
       "message": "I don\u0027t think addAll() is necessarily an atomic operation. That is, if one of the elements of c is not within the range of the view, super.addAll() will throw an exception, but any previously added elements will already be added to the treeSet. In that case, byType wouldn\u0027t have the element and we\u0027d be in an inconsistent state.\n\nI think this could be fixed (or at least made consistent) with a loop that calls add().",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 13
+      },
+      "revId": "77f066817850cd06dc1c2df5592b1a03600408c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cff8f9d4_03aaee63",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T00:32:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0fd6913f_ade3fd44",
       "range": {
         "startLine": 110,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "cff8f9d4_e38352f2",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T00:32:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fd9956f_4e19338e",
+      "range": {
+        "startLine": 181,
+        "startChar": 14,
+        "endLine": 181,
+        "endChar": 23
+      },
+      "revId": "77f066817850cd06dc1c2df5592b1a03600408c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fd9956f_6e174f66",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 7
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "cff8f9d4_c388560f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T00:32:01Z",
+      "side": 1,
+      "message": "Fixed.  I just drop the index in this case.",
+      "parentUuid": "2fd9956f_6e174f66",
+      "range": {
+        "startLine": 193,
+        "startChar": 6,
+        "endLine": 193,
+        "endChar": 12
+      },
+      "revId": "77f066817850cd06dc1c2df5592b1a03600408c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4fbfa9de_3711986f",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 7
@@ -105,6 +201,30 @@
       "writtenOn": "2014-02-14T20:38:57Z",
       "side": 1,
       "message": "needs a null check like the others",
+      "range": {
+        "startLine": 238,
+        "startChar": 6,
+        "endLine": 238,
+        "endChar": 11
+      },
+      "revId": "77f066817850cd06dc1c2df5592b1a03600408c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cff8f9d4_63788250",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T00:32:01Z",
+      "side": 1,
+      "message": "Fixed, although I actually need to null-it-out to make the check at line 295 work.",
+      "parentUuid": "4fbfa9de_3711986f",
       "range": {
         "startLine": 238,
         "startChar": 6,

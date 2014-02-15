@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fd6913f_b61b4e5a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-15T01:31:32Z",
+      "side": 1,
+      "message": "I\u0027m lost here. How does this work? Class is not comparable which will yield to runtime error as soon as you start adding items??",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 6
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

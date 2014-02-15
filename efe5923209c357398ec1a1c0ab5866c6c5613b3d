@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "af0e65b3_aa8f6fa3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-15T04:42:30Z",
+      "side": 1,
+      "message": "should be private",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 11
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fd6913f_b61b4e5a",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 8
@@ -114,6 +137,53 @@
         "startChar": 0,
         "endLine": 215,
         "endChar": 6
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af0e65b3_ca8aa395",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-15T04:42:30Z",
+      "side": 1,
+      "message": "It doesn\u0027t matter much because TypeIndexedSet is only ever instantiated with an Artifact and this inner class is only used within TypeIndexedSet.\n\nI suppose T could be declared to extend Comparable but I don\u0027t think it will make the code much clearer.",
+      "parentUuid": "0fd6913f_167a22ce",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 6
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af0e65b3_aa688f08",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-15T04:42:30Z",
+      "side": 1,
+      "message": "remove \"public\" and below",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 228,
+        "endChar": 10
       },
       "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

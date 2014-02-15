@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cff8f9d4_c33bb64e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T05:08:21Z",
+      "side": 1,
+      "message": "Needs to be visible to ArtifactSet so that it can call findAssignableTo.",
+      "parentUuid": "af0e65b3_aa8f6fa3",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 11
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fd6913f_b61b4e5a",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 8
@@ -168,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "cff8f9d4_8335be5b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T05:08:21Z",
+      "side": 1,
+      "message": "I qualified T as a Comparable, but it doesn\u0027t really change TypeIndex.",
+      "parentUuid": "af0e65b3_ca8aa395",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 6
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af0e65b3_aa688f08",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
         "patchSetId": 8
@@ -179,6 +227,30 @@
       "writtenOn": "2014-02-15T04:42:30Z",
       "side": 1,
       "message": "remove \"public\" and below",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 228,
+        "endChar": 10
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cff8f9d4_a330ba6b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-02-15T05:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af0e65b3_aa688f08",
       "range": {
         "startLine": 228,
         "startChar": 4,

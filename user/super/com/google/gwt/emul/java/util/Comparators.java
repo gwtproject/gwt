@@ -15,14 +15,16 @@
  */
 package java.util;
 
+/**
+ * @SKIP
+ *
+ * This is a utility class that provides a default Comparator. This class
+ * exists so Arrays and Collections can share the natural comparator without
+ * having to know internals of each other.
+ *
+ * This class is package protected since it is not in the JRE.
+ */
 class Comparators {
-  /*
-   * This is a utility class that provides a default Comparator. This class
-   * exists so Arrays and Collections can share the natural comparator without
-   * having to know internals of each other.
-   * 
-   * This class is package protected since it is not in the JRE.
-   */
 
   /**
    * Compares two Objects according to their <i>natural ordering</i>.
@@ -32,6 +34,17 @@ class Comparators {
   private static final Comparator<Object> NATURAL = new Comparator<Object>() {
     public int compare(Object o1, Object o2) {
       return ((Comparable<Object>) o1).compareTo(o2);
+    }
+  };
+
+  /**
+   * Compares two Objects according to their reverse <i>natural ordering</i>.
+   *
+   * @see java.lang.Comparable
+   */
+  private static final Comparator<Comparable<Object>> REVERSE = new Comparator<Comparable<Object>>() {
+    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
+      return o2.compareTo(o1);
     }
   };
 
@@ -46,5 +59,18 @@ class Comparators {
    */
   public static <T> Comparator<T> natural() {
     return (Comparator<T>) NATURAL;
+  }
+
+  /**
+   * Returns the reverse order Comparator.
+   * <p>
+   * Example:
+   *
+   * <pre>Comparator&lt;String&gt; compareString = Comparators.reverse()</pre>
+   *
+   * @return the reverse order Comparator
+   */
+  public static <T> Comparator<T> reverse() {
+    return (Comparator<T>) REVERSE;
   }
 }

@@ -714,12 +714,6 @@ public class Collections {
   @SuppressWarnings("unchecked")
   public static final Set EMPTY_SET = new EmptySet();
 
-  private static Comparator<Comparable<Object>> reverseComparator = new Comparator<Comparable<Object>>() {
-    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
-      return o2.compareTo(o1);
-    }
-  };
-
   public static <T> boolean addAll(Collection<? super T> c, T... a) {
     boolean result = false;
     for (T e : a) {
@@ -1008,7 +1002,7 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> reverseOrder() {
-    return (Comparator<T>) reverseComparator;
+    return Comparators.reverse();
   }
 
   public static <T> Comparator<T> reverseOrder(final Comparator<T> cmp) {

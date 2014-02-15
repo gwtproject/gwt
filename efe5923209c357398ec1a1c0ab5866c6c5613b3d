@@ -46,6 +46,30 @@
       "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fd6913f_96b852aa",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-15T02:15:23Z",
+      "side": 1,
+      "message": "Then the values should be comparable. i.e. T extends Comparable? It still looks like we are missing some type enforcements here.",
+      "parentUuid": "0fd6913f_f69e7653",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 6
+      },
+      "revId": "efe5923209c357398ec1a1c0ab5866c6c5613b3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f2db129_f5de9882",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "Should we use 2 Impl classes instead? we\u0027d do a single hasPushState check at startup rather than within each and every method (even if it\u0027s just a simple \u0027if\u0027 on a boolean field), something like:\n\n impl \u003d HistoryImplPushState.isSupported()\n     ? new HistoryImplPushState()\n     : GWT.create(HistoryImpl.class);",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f38c15d_a160dee1",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "We never use history.state, so how about testing for history.pushState instead?",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f38c15d_016c2adb",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "Rename to addHashChangeListener to match your remove method?",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f2db129_55ee6c2b",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "The javadoc for this method should say that events will be fired (either in the same way as newItem, or saying this is equivalent to calling replaceItem(historyToken, true).",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f2db129_b5e82020",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "We should probably mention mobile browsers here.",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f47d5ed_5e7bf594",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-16T10:35:33Z",
+      "side": 1,
+      "message": "Maybe call it replaceItem, for consistency with newItem.",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

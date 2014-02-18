@@ -40,6 +40,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     return node * 2 + 1 >= size;
   }
 
+  /**
+   * The comparator, or null if priority queue uses elements' natural ordering.
+   */
   private Comparator<? super E> cmp;
 
   /**
@@ -59,7 +62,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   public PriorityQueue(int initialCapacity) {
-    this(initialCapacity, Comparators.natural());
+    this(initialCapacity, null);
   }
 
   public PriorityQueue(int initialCapacity, Comparator<? super E> cmp) {
@@ -126,6 +129,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean offer(E e) {
+    Comparator<? super E> cmp = getEffectiveComparator();
     int node = heap.size();
     heap.add(e);
     while (node > 0) {
@@ -236,10 +240,11 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
    * @param node the parent of the two subtrees to merge
    */
   protected void mergeHeaps(int node) {
+    Comparator<? super E> cmp = getEffectiveComparator();
     int heapSize = heap.size();
     E value = heap.get(node);
     while (!isLeaf(node, heapSize)) {
-      int smallestChild = getSmallestChild(node, heapSize);
+      int smallestChild = getSmallestChild(cmp, node, heapSize);
       if (cmp.compare(value, heap.get(smallestChild)) < 0) {
         // Current node is smaller than the smallest child, so we are done.
         break;
@@ -251,7 +256,15 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     heap.set(node, value);
   }
 
-  private int getSmallestChild(int node, int heapSize) {
+  @SuppressWarnings("unchecked")
+  private Comparator<? super E> getEffectiveComparator() {
+    if (cmp == null) {
+      return Comparators.natural();
+    }
+    return cmp;
+  }
+
+  private int getSmallestChild(Comparator<? super E> cmp, int node, int heapSize) {
     int smallestChild;
     int leftChild = getLeftChild(node); // start with left child
     int rightChild = leftChild + 1;

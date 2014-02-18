@@ -40,14 +40,20 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     return node * 2 + 1 >= size;
   }
 
-  private Comparator<? super E> cmp;
+  private final Comparator<? super E> cmp;
 
   /**
    * A heap held in an array. heap[0] is the root of the heap (the smallest
    * element), the subtrees of node i are 2*i+1 (left) and 2*i+2 (right). Node i
    * is a leaf node if 2*i>=n. Node i's parent, if i>0, is floor((i-1)/2).
    */
-  private ArrayList<E> heap;
+  private final ArrayList<E> heap;
+
+  /**
+   * The passed-in comparator, or null if priority queue uses elements'
+   * natural ordering.
+   */
+  private final Comparator<? super E> passedInComparator;
 
   public PriorityQueue() {
     this(11);
@@ -59,12 +65,15 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   public PriorityQueue(int initialCapacity) {
-    this(initialCapacity, Comparators.natural());
+    this(initialCapacity, null);
   }
 
-  public PriorityQueue(int initialCapacity, Comparator<? super E> cmp) {
+  @SuppressWarnings("unchecked")
+  public PriorityQueue(int initialCapacity, Comparator<? super E> passedInComparator) {
     heap = new ArrayList<E>(initialCapacity);
-    this.cmp = cmp;
+    this.passedInComparator = passedInComparator;
+    this.cmp = (Comparator<? super E>) (passedInComparator == null ?
+        Comparators.natural() : passedInComparator);
   }
 
   @SuppressWarnings("unchecked")
@@ -100,7 +109,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   public Comparator<? super E> comparator() {
-    return cmp;
+    return passedInComparator;
   }
 
   @Override

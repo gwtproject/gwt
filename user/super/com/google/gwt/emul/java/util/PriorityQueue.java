@@ -40,6 +40,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     return node * 2 + 1 >= size;
   }
 
+  /**
+   * The comparator, or null if priority queue uses elements' natural ordering.
+   */
   private Comparator<? super E> cmp;
 
   /**
@@ -59,7 +62,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   public PriorityQueue(int initialCapacity) {
-    this(initialCapacity, Comparators.natural());
+    this(initialCapacity, null);
   }
 
   public PriorityQueue(int initialCapacity, Comparator<? super E> cmp) {
@@ -126,12 +129,13 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean offer(E e) {
+    Comparator<? super E> comparator = getEffectiveComparator();
     int node = heap.size();
     heap.add(e);
     while (node > 0) {
       int childNode = node;
       node = getParent(node);
-      if (cmp.compare(heap.get(node), e) <= 0) {
+      if (comparator.compare(heap.get(node), e) <= 0) {
         // parent is smaller, so we have a valid heap
         heap.set(childNode, e);
         return true;
@@ -236,11 +240,12 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
    * @param node the parent of the two subtrees to merge
    */
   protected void mergeHeaps(int node) {
+    Comparator<? super E> comparator = getEffectiveComparator();
     int heapSize = heap.size();
     E value = heap.get(node);
     while (!isLeaf(node, heapSize)) {
-      int smallestChild = getSmallestChild(node, heapSize);
-      if (cmp.compare(value, heap.get(smallestChild)) < 0) {
+      int smallestChild = getSmallestChild(comparator, node, heapSize);
+      if (comparator.compare(value, heap.get(smallestChild)) < 0) {
         // Current node is smaller than the smallest child, so we are done.
         break;
       }
@@ -251,13 +256,21 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     heap.set(node, value);
   }
 
-  private int getSmallestChild(int node, int heapSize) {
+  @SuppressWarnings("unchecked")
+  private Comparator<? super E> getEffectiveComparator() {
+    if (cmp == null) {
+      return Comparators.natural();
+    }
+    return cmp;
+  }
+
+  private int getSmallestChild(Comparator<? super E> comparator, int node, int heapSize) {
     int smallestChild;
     int leftChild = getLeftChild(node); // start with left child
     int rightChild = leftChild + 1;
     smallestChild = leftChild;
     if ((rightChild < heapSize)
-        && (cmp.compare(heap.get(rightChild), heap.get(leftChild)) < 0)) {
+        && (comparator.compare(heap.get(rightChild), heap.get(leftChild)) < 0)) {
       // right child is smaller, go down that path
       smallestChild = rightChild;
     }

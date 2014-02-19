@@ -39,13 +39,14 @@ final class Cast {
         !!@com.google.gwt.lang.Cast::stringCastMap[dstId];
   }-*/;
 
-  // Not functional yet. Works under the assumption that queryId is seedId. This will become true
-  // when separate compilation switches to using type name Strings as seedId. Will eventually be the
-  // implementation for class.isAssignableFrom().
-  static native boolean canCastSeed(String srcId, String dstId) /*-{
-    var srcSeed = @com.google.gwt.lang.SeedUtil::seedTable[srcId];
-    return (srcSeed.prototype.@java.lang.Object::castableTypeMap &&
-            !!srcSeed.prototype.@java.lang.Object::castableTypeMap[dstId]);
+  // Not functional yet. Introduced for separate compilation, under the assumption that typeIds are
+  // String.
+  // Will eventually be the implementation for class.isAssignableFrom().
+  // TODO(rluble): Unify the logic into a version that accepts either strings or int as typeIds.
+  static native boolean canCastTypeId(String srcId, String dstId) /*-{
+    var srcMetadata = @com.google.gwt.lang.MetadataUtil::prototypeByTypeId[srcId];
+    return (srcMetadata.prototype.@java.lang.Object::castableTypeMap &&
+            !!srcMetadata.prototype.@java.lang.Object::castableTypeMap[dstId]);
   }-*/;
 
   static native String charToString(char x) /*-{

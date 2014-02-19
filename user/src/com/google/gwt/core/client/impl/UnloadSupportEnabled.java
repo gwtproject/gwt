@@ -79,12 +79,12 @@ public class UnloadSupportEnabled extends UnloadSupport {
         // Browsers without window.frameElement don't benefit from removing the iframe
         var frame = window.frameElement;
         var i;
-        // null out seedTable and class entries
-        for (key in @com.google.gwt.lang.SeedUtil::seedTable) {
-          var obj = @com.google.gwt.lang.SeedUtil::seedTable[key];
+        // null out prototypeByTypeId and class entries
+        for (key in @com.google.gwt.lang.MetadataUtil::prototypeByTypeId) {
+          var obj = @com.google.gwt.lang.MetadataUtil::prototypeByTypeId[key];
           obj.prototype.@java.lang.Object::___clazz = null;
         }
-        @com.google.gwt.lang.SeedUtil::seedTable = null;
+        @com.google.gwt.lang.MetadataUtil::prototypeByTypeId = null;
         // String is special cased
         String.prototype.@java.lang.Object::___clazz = null;
         for (i = 0; i < keys.length; i++) {

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cff9d9ff_1e76691c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/permutations.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-19T17:28:49Z",
+      "side": 1,
+      "message": "Add a comment stating that if soft permutation is 0 it won\u0027t be encoded in the strong name with {@see PermutationsUtil::addPermutationsJs}",
+      "revId": "1c39799d2ae55995bcab29c8bf7982c09c90bdda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

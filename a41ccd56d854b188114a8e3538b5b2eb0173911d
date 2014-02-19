@@ -16,6 +16,24 @@
       "revId": "a41ccd56d854b188114a8e3538b5b2eb0173911d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afdf457e_28d16f20",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-19T20:34:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cff9d9ff_4492e48e",
+      "revId": "a41ccd56d854b188114a8e3538b5b2eb0173911d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

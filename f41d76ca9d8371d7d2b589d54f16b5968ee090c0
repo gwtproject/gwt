@@ -46,6 +46,30 @@
       "revId": "f41d76ca9d8371d7d2b589d54f16b5968ee090c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f8b8d70_d7090b88",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-19T00:53:26Z",
+      "side": 0,
+      "message": "In most cases it will be the same. But looking at the uses it might be wanted to create an array that is NOT initialized as it will be initialized later. \n\nI think we should have an explicit createUninitializedArrayFrom for those cases.\n\nI don\u0027t think that it will make any practical difference but it will be easier to read.",
+      "parentUuid": "6f8b8d70_b77ec7f4",
+      "range": {
+        "startLine": 119,
+        "startChar": 55,
+        "endLine": 119,
+        "endChar": 67
+      },
+      "revId": "f41d76ca9d8371d7d2b589d54f16b5968ee090c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

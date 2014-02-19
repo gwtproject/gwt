@@ -188,10 +188,14 @@ public class JsNamespaceChooser {
         continue;
       }
 
+      // Convert the function statement into an assignment taking a named function expression:
+      // var a.b = function b() { ... }
+      // It's named for better stack traces in some browsers.
+      // (The name won't be in global scope, but *is* in scope inside the function, so
+      // we still need to reserve it.)
       JsNameRef newName = name.makeRef(func.getSourceInfo());
       JsBinaryOperation assign =
           new JsBinaryOperation(func.getSourceInfo(), JsBinaryOperator.ASG, newName, func);
-      func.setName(null);
       statements.set(i, new JsExprStmt(parent.getSourceInfo(), assign));
       changed = true;
     }

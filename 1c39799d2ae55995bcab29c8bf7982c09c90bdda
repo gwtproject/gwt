@@ -16,6 +16,24 @@
       "revId": "1c39799d2ae55995bcab29c8bf7982c09c90bdda",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afdf457e_c82723ca",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/permutations.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-19T18:09:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cff9d9ff_1e76691c",
+      "revId": "1c39799d2ae55995bcab29c8bf7982c09c90bdda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

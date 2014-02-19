@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dom.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.safehtml.shared.SafeHtml;
 
@@ -22,6 +23,10 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * All HTML element interfaces derive from this class.
  */
 public class Element extends Node {
+
+  private static native boolean isClassListSupported() /*-{
+    return "classList" in $doc.documentElement;
+  }-*/;
 
   /**
    * Fast helper method to convert small doubles to 32-bit int.
@@ -102,6 +107,15 @@ public class Element extends Node {
    */
   public final boolean addClassName(String className) {
     className = trimClassName(className);
+
+    if (GWT.isScript() && isClassListSupported()) {
+      boolean contains = classListContains(className);
+      if (!contains) {
+        classListAdd(className);
+        return true;
+      }
+      return false;
+    }
 
     // Get the current style string.
     String oldClassName = getClassName();
@@ -514,6 +528,11 @@ public class Element extends Node {
    */
   public final boolean hasClassName(String className) {
     className = trimClassName(className);
+
+    if (GWT.isScript() && isClassListSupported()) {
+      return classListContains(className);
+    }
+
     int idx = indexOfName(getClassName(), className);
     return idx != -1;
   }
@@ -546,6 +565,15 @@ public class Element extends Node {
    */
   public final boolean removeClassName(String className) {
     className = trimClassName(className);
+
+    if (GWT.isScript() && isClassListSupported()) {
+      boolean contains = classListContains(className);
+      if (contains) {
+        classListRemove(className);
+        return true;
+      }
+      return false;
+    }
 
     // Get the current style string.
     String oldStyle = getClassName();
@@ -612,6 +640,12 @@ public class Element extends Node {
    * @param className the class name to be toggled
    */
   public final void toggleClassName(String className) {
+    if (GWT.isScript() && isClassListSupported()) {
+      className = trimClassName(className);
+      classListToggle(className);
+      return;
+    }
+
     boolean added = addClassName(className);
     if (!added) {
       removeClassName(className);
@@ -814,6 +848,22 @@ public class Element extends Node {
      // on some browsers.
      this.title = title || '';
    }-*/;
+
+  private native void classListAdd(String className) /*-{
+    this.classList.add(className);
+  }-*/;
+
+  private native boolean classListContains(String className) /*-{
+    return this.classList.contains(className);
+  }-*/;
+
+  private native void classListRemove(String className) /*-{
+    this.classList.remove(className);
+  }-*/;
+
+  private native void classListToggle(String className) /*-{
+    this.classList.toggle(className);
+  }-*/;
 
   private final native double getSubPixelClientHeight() /*-{
     return this.clientHeight;

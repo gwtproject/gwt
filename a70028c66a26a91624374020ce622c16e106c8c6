@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f8b8d70_9aa16a24",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-19T02:51:07Z",
+      "side": 1,
+      "message": "Since this isn\u0027t intended as part of ArtifactSet\u0027s public API, I think you can remove \"protected\" and just have default access.",
+      "range": {
+        "startLine": 79,
+        "startChar": 22,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "a70028c66a26a91624374020ce622c16e106c8c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f8b8d70_bad22e9e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-19T02:51:07Z",
+      "side": 1,
+      "message": "Changing to private didn\u0027t work but I think you can remove \"protected\".",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 11
+      },
+      "revId": "a70028c66a26a91624374020ce622c16e106c8c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f8b8d70_dad7f28c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/TypeIndexedSet.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-19T02:51:07Z",
+      "side": 1,
+      "message": "Maybe change Object to Comparable throughout for the items in the TypeIndex?",
+      "range": {
+        "startLine": 209,
+        "startChar": 44,
+        "endLine": 209,
+        "endChar": 50
+      },
+      "revId": "a70028c66a26a91624374020ce622c16e106c8c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cff9d9ff_4492e48e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-19T19:10:56Z",
+      "side": 1,
+      "message": "Maybe expand this comment? \n\nThere are a lot of subtleties here. From JS perspective b (in a.b) and b (in the function header) are different names residing in different (unrelated) scopes.\nFor now we are modeling both as being the same name b declared in the global scope and that is safe, but if in the future we decide to model package scopes, that needs to be done with care.",
+      "revId": "a41ccd56d854b188114a8e3538b5b2eb0173911d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef15bdf4_5d990fac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T02:27:13Z",
+      "side": 1,
+      "message": "line too long",
+      "range": {
+        "startLine": 441,
+        "startChar": 6,
+        "endLine": 441,
+        "endChar": 15
+      },
+      "revId": "0593e246ed1f8ce534b6b8337946dd531184c72a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_fd60dbe2",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T02:27:13Z",
+      "side": 1,
+      "message": "forgot to mention this before but:\ns/srcId/srcTypeId\ns/dstId/dstTypeId",
+      "range": {
+        "startLine": 44,
+        "startChar": 45,
+        "endLine": 44,
+        "endChar": 50
+      },
+      "revId": "0593e246ed1f8ce534b6b8337946dd531184c72a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -52,6 +52,24 @@
       "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efaa1deb_ece94bd5",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-20T11:49:00Z",
+      "side": 1,
+      "message": "Well, requestfactory-apt includes c.g.g.user.server.Base64Utils (needed by OperationKey, which is used here).\n\nIs this somehow breaking your build? In the open-source/Ant build at least, requestfactory-* JARs are extracted from gwt-user.jar+gwt-dev.jar using the RequestFactoryJarExtrator tool that uses ASM to get all needed classes, so that requestfactory-apt.jar now actually includes the c.g.g.core.shared.GwtIncompatible class.\n\nI have the change ready if it really is needed, but I\u0027d like to understand the reasons first, as it\u0027s not an issue with the Ant build (maybe we\u0027ll revisit this when we modularize the build though, after we move away from Ant)",
+      "parentUuid": "ef15bdf4_23bd14e7",
+      "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

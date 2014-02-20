@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f854d89_2045ea62",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T03:12:44Z",
+      "side": 1,
+      "message": "Great comment, thanks!",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "9773c6cd1b05fe67a9e5a0010d29b5f20ce134f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

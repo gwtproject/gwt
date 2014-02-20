@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fb70d4d_b00838f7",
+        "filename": "dev/core/src/com/google/gwt/dev/Permutation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-20T03:02:35Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "180dd4f0e7439165eef8b07ebcc4646731eb696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -77,15 +77,8 @@ public final class Permutation implements Serializable {
    */
   public void mergeFrom(Permutation other, SortedSet<String> liveRebindRequests) {
     if (getClass().desiredAssertionStatus()) {
-      for (SortedMap<String, String> myRebind : orderedRebindAnswers) {
-        for (SortedMap<String, String> otherRebind : other.orderedRebindAnswers) {
-          for (String rebindRequest : liveRebindRequests) {
-            String myAnswer = myRebind.get(rebindRequest);
-            String otherAnswer = otherRebind.get(rebindRequest);
-            assert myAnswer.equals(otherAnswer);
-          }
-        }
-      }
+      // Traverse and compare in unison.
+      assertSameAnswers(liveRebindRequests, orderedRebindAnswers, other.orderedRebindAnswers);
     }
     mergeRebindsFromCollapsed(other);
   }
@@ -128,6 +121,19 @@ public final class Permutation implements Serializable {
     SortedMap<String, String> answerMap = orderedRebindAnswers.get(0);
     assert answerMap != null;
     answerMap.put(requestType, resultType);
+  }
+
+  private static void assertSameAnswers( SortedSet<String> liveRebindRequests,
+      List<SortedMap<String, String>> thisOrderedRebindAnswers,
+      List<SortedMap<String, String>> thatOrderedRebindAnswers) {
+    assert thisOrderedRebindAnswers.size() == thatOrderedRebindAnswers.size();
+    for (int i = 0; i < thisOrderedRebindAnswers.size(); i++) {
+      for (String rebindRequest : liveRebindRequests) {
+        String thisAnswer = thisOrderedRebindAnswers.get(i).get(rebindRequest);
+        String thatAnswer = thatOrderedRebindAnswers.get(i).get(rebindRequest);
+        assert thisAnswer.equals(thatAnswer);
+      }
+    }
   }
 
   /**

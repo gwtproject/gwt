@@ -105,7 +105,7 @@ public class UnloadSupportEnabled extends UnloadSupport {
   }
 
   public int setInterval(JavaScriptObject func, int time) {
-    if (!Impl.isModuleUnloaded()) {
+    if (!com.google.gwt.core.client.impl.Impl.isModuleUnloaded()) {
       TimerDisposable disposable = new TimerDisposable(intervals, false);
       final int timerId = setInterval0(func, time);
       intervals.put(timerId, disposable);
@@ -128,7 +128,7 @@ public class UnloadSupportEnabled extends UnloadSupport {
     }
   }
 
-  void dispose(Disposable d) {
+  void dispose(com.google.gwt.core.client.impl.Disposable d) {
     if (d != null) {
       try {
         d.dispose();
@@ -140,20 +140,21 @@ public class UnloadSupportEnabled extends UnloadSupport {
   }
 
   void disposeAll() {
-    LinkedHashSet<Disposable> copy = new LinkedHashSet<Disposable>(disposables);
-    for (Disposable d : copy) {
+    LinkedHashSet<com.google.gwt.core.client.impl.Disposable> copy = new LinkedHashSet<com.google.gwt.core.client.impl.Disposable>(disposables);
+    for (com.google.gwt.core.client.impl.Disposable d : copy) {
       dispose(d);
     }
   }
 
-  void scheduleDispose(Disposable d) {
+  void scheduleDispose(com.google.gwt.core.client.impl.Disposable d) {
     disposables.add(d);
   }
 
   int setTimeout(JavaScriptObject func, int time) {
-    if (!Impl.isModuleUnloaded()) {
+    if (!com.google.gwt.core.client.impl.Impl.isModuleUnloaded()) {
       TimerDisposable disposable = new TimerDisposable(timeouts, true);
-      final int timerId = UnloadSupport.setTimeout0(func, time, disposable);
+      final int timerId = com.google.gwt.core.client.impl.UnloadSupport
+          .setTimeout0(func, time, disposable);
       timeouts.put(timerId, disposable);
       disposable.timerId = timerId;
       scheduleDispose(disposable);

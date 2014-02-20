@@ -20,6 +20,7 @@ import com.google.gwt.dev.cfg.StaticPropertyOracle;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -77,13 +78,17 @@ public final class Permutation implements Serializable {
    */
   public void mergeFrom(Permutation other, SortedSet<String> liveRebindRequests) {
     if (getClass().desiredAssertionStatus()) {
-      for (SortedMap<String, String> myRebind : orderedRebindAnswers) {
-        for (SortedMap<String, String> otherRebind : other.orderedRebindAnswers) {
-          for (String rebindRequest : liveRebindRequests) {
-            String myAnswer = myRebind.get(rebindRequest);
-            String otherAnswer = otherRebind.get(rebindRequest);
-            assert myAnswer.equals(otherAnswer);
-          }
+      // Traverse and compare in unison.
+      for (Iterator<SortedMap<String, String>> thisIterator = orderedRebindAnswers.iterator(),
+          thatIterator = other.orderedRebindAnswers.iterator();
+          thisIterator.hasNext();) {
+        assert thatIterator.hasNext();
+        SortedMap<String, String> thisRebind = thisIterator.next();
+        SortedMap<String, String> thatRebind = thatIterator.next();
+        for (String rebindRequest : liveRebindRequests) {
+          String thisAnswer = thisRebind.get(rebindRequest);
+          String thatAnswer = thatRebind.get(rebindRequest);
+          assert thisAnswer.equals(thatAnswer);
         }
       }
     }

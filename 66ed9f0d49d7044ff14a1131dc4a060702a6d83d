@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6f854d89_603ff2c6",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T03:12:27Z",
+      "side": 1,
+      "message": "Cool, thanks for the explanation.",
+      "parentUuid": "ef15bdf4_7a005161",
+      "range": {
+        "startLine": 368,
+        "startChar": 35,
+        "endLine": 368,
+        "endChar": 67
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4fd5e977_8755061a",
         "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdater.java",
         "patchSetId": 1

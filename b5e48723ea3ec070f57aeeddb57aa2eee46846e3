@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef15bdf4_ba84a9b3",
+        "filename": "dev/core/src/com/google/gwt/dev/Permutation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-20T02:11:55Z",
+      "side": 1,
+      "message": "extract a method here? e.g.\n\n assertAnswers(liveRebindRequests, orderedRebindAnswers, other.orderedRebindAnswers)",
+      "revId": "b5e48723ea3ec070f57aeeddb57aa2eee46846e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_da9405bc",
+        "filename": "dev/core/src/com/google/gwt/dev/Permutation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-20T02:11:55Z",
+      "side": 1,
+      "message": "Alternative:\n\nassert answers1.size() \u003d\u003d answers2.size();\nfor (String request : liveRebindRequests) {\n  for(int i\u003d0; i \u003c answers1.size(), i++) {\n    assert answers1.get(i).get(request).equals(answers2.get(i).get(request));\n  }\n}",
+      "revId": "b5e48723ea3ec070f57aeeddb57aa2eee46846e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -70,6 +70,24 @@
       "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_a30da406",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-20T13:24:12Z",
+      "side": 1,
+      "message": "I didn\u0027t realize it included Base64Utils.\n\nInternally we don\u0027t build with ant, we use our internal build system and dependencies are listed explicitly (in this case I missed that Base64Utils was listed); I did not want to add a new dependency on user but if there is one already then listing the GwtIncompatible as well does no longer seem a problem.\n\nThanks and sorry for the confusion.",
+      "parentUuid": "efaa1deb_ece94bd5",
+      "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

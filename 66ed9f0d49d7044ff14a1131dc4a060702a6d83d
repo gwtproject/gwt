@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ef15bdf4_7a005161",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T02:19:54Z",
+      "side": 1,
+      "message": "Thanks for the review Stephen, let me see if i can explain this well.\n\nIt starts with Generators.\n\nGenerators are allowed to ask the TypeOracle for Type instances (TypeOracle.findType()), and they reference them by unmangled fully qualified source name.\n\nSince the new LibraryTypeOracle fails through these calls to an underlying LibraryGroup, the indexing there *has* to also be keyed by these same unmangled fully qualified source names.\n\nI\u0027m not happy about it since source names are actually ambiguous and can collide. Keying these TypeOracle requests by binary or internal name would have been better and yes would have made it possible to get rid of this map entirely (since binary names and internal names of nested classes can be trivially trimmed to find the name of the enclosing class and then that used to find the correct CompilationUnit), but I don\u0027t think I have the option of changing this part of the existing TypeOracle interface.\n\nI guess conceivably the names could be consistently mangled on the way in, but I think doing so would just increase the change of collision even further. But I could be wrong.\n\nThere\u0027s another detail that may not be immediately obvious, but I tried to call out a bit. And that is that while Libraries contain whole precompiled CompilationUnits (which might contain some nested type definitions within the top level type definition) for example \"com.google.Foo\", TypeOracles have to be able to return types for nested references like \"com.google.Foo.Bar\". Which is where nestedNamesByCompilationUnitName comes in. It allows LibraryGroup to unambiguously translate \"com.google.Foo.Bar\" to \"com.google.Foo\" so that it can return the right CompilationUnit that contains both type Foo and nested type Foo.Bar.",
+      "parentUuid": "af7bc55e_e2e30644",
+      "range": {
+        "startLine": 368,
+        "startChar": 35,
+        "endLine": 368,
+        "endChar": 67
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4fd5e977_8755061a",
         "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdater.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-02-20T01:39:06Z",
       "side": 1,
       "message": "I am curious (so maybe add a comment?) about why indexing doesn\u0027t need to happen here. Sorry, perhaps it is obvious...",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 28
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_da3b65fc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T02:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fd5e977_8755061a",
       "range": {
         "startLine": 48,
         "startChar": 8,

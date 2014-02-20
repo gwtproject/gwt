@@ -34,6 +34,24 @@
       "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_23bd14e7",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/DeobfuscatorBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-20T11:25:12Z",
+      "side": 1,
+      "message": "The issue is in requestfactory-apt which has not a dependency on user AFAIK (it has a small dependency on dev).\n\nOther solution is to refer to GwtIncompatible as a string here but it seems less clean.",
+      "parentUuid": "cfa71922_eb313108",
+      "revId": "0768ec29035733e7c8ccdac2cadcb508e1021e23",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

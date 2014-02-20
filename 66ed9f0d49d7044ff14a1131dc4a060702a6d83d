@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af7bc55e_e2e30644",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibraryWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T01:39:06Z",
+      "side": 1,
+      "message": "Looks really great.\n\nOut of curiosity, if you were to rely on name mangling, could you have avoided this map? If so, thanks for going out of your way to do a non-mangled approach.\n\n(And if you needed this map anyway, then I\u0027m curious where my assumption is wrong.)",
+      "range": {
+        "startLine": 368,
+        "startChar": 35,
+        "endLine": 368,
+        "endChar": 67
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fd5e977_8755061a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T01:39:06Z",
+      "side": 1,
+      "message": "I am curious (so maybe add a comment?) about why indexing doesn\u0027t need to happen here. Sorry, perhaps it is obvious...",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 28
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fd5e977_473caed0",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/LibraryCompilationUnitTypeOracleUpdaterFromSourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T01:39:06Z",
+      "side": 1,
+      "message": "Nice test.",
+      "range": {
+        "startLine": 101,
+        "startChar": 7,
+        "endLine": 101,
+        "endChar": 63
+      },
+      "revId": "66ed9f0d49d7044ff14a1131dc4a060702a6d83d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fd5e977_e74a0274",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveTypeSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-20T01:39:06Z",
+      "side": 0,
+      "message": "Nice.",
+      "range": {
+        "startLine": 44,
+        "startChar": 44,
+        "endLine": 44,
+        "endChar": 63
+      },
+      "revId": "9127163369543cf5fe7ead99ebec75f58db47901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

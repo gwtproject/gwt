@@ -16,6 +16,24 @@
       "revId": "180dd4f0e7439165eef8b07ebcc4646731eb696b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_837d08c8",
+        "filename": "dev/core/src/com/google/gwt/dev/Permutation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-20T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fb70d4d_b00838f7",
+      "revId": "180dd4f0e7439165eef8b07ebcc4646731eb696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

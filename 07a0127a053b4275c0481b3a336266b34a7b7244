@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ef15bdf4_1745b689",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "s/prototypeByTypeId/prototypesByTypeId",
+      "range": {
+        "startLine": 79,
+        "startChar": 28,
+        "endLine": 79,
+        "endChar": 45
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef15bdf4_b7f7a274",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JType.java",
         "patchSetId": 1
@@ -58,6 +81,236 @@
         "startChar": 5,
         "endLine": 2773,
         "endChar": 14
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_172e56b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "s/prototypeByTypeId/prototypesByTypeId",
+      "range": {
+        "startLine": 65,
+        "startChar": 42,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_da36c5fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 313,
+        "startChar": 5,
+        "endLine": 313,
+        "endChar": 17
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_da208582",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "this comment is no longer accurate, since with typeIds this function will now always work correctly",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 99
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_3a26d99b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "this isn\u0027t returning metadata anymore, this should be a prototype object",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_ba3ae9aa",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/MetadataUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "as we discussed offline, isn\u0027t this more of a \"java type hierarchy constructor\" thing?",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 25
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_1a4cbd5b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/MetadataUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "s/superclassTypeId/superTypeId",
+      "range": {
+        "startLine": 45,
+        "startChar": 68,
+        "endLine": 45,
+        "endChar": 84
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_badf892f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "s/id/typeId",
+      "range": {
+        "startLine": 599,
+        "startChar": 53,
+        "endLine": 599,
+        "endChar": 55
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_5adbd53d",
+        "filename": "user/src/com/google/gwt/rpc/linker/ClientOracleLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "wasn\u0027t this function signature changed to only take typeId in 1 slot now?",
+      "range": {
+        "startLine": 81,
+        "startChar": 14,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_9a0d6d07",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "s/metadata/prototype",
+      "range": {
+        "startLine": 38,
+        "startChar": 38,
+        "endLine": 38,
+        "endChar": 46
+      },
+      "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_5af475a1",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-20T01:33:46Z",
+      "side": 1,
+      "message": "\"differentiate\"",
+      "range": {
+        "startLine": 178,
+        "startChar": 26,
+        "endLine": 178,
+        "endChar": 39
       },
       "revId": "07a0127a053b4275c0481b3a336266b34a7b7244",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

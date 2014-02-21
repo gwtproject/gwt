@@ -16,6 +16,24 @@
       "revId": "c513f2adb288999608adb9b3c70cbad8523dd39b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af64a5c8_fddac35c",
+        "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-02-21T19:52:46Z",
+      "side": 1,
+      "message": "JavaDoc states that comparator() should return null if queue uses \"natural ordering\" which is the case for Comparators.natural.\n\nBut I think you are right. Client would expect to get comparator passed to constructor.\n\nDo you think the best solution to resolve this is to save passed comparator and to introduce internal method compare?:\n\nprivate int compare(E o1, E o2) {\n   return cmp \u003d\u003d null ? Comparators.natural().compare(o1, o2) : cmp.compare(o1, o2);\n}",
+      "parentUuid": "0f3a11a9_3348f0e8",
+      "revId": "c513f2adb288999608adb9b3c70cbad8523dd39b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

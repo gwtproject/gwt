@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0f3a11a9_73ab5800",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-21T19:57:58Z",
+      "side": 1,
+      "message": "@John, @Roberto: Can we fix issue 6799? It looks like we keep deferring it and then get hit by it again and again.",
+      "parentUuid": "ef985df7_5cae5d11",
+      "revId": "37fb4cf88a2dbf7851c04ec39885422e2672c261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf9559be_fb356f5a",
         "filename": "user/src/com/google/web/bindery/requestfactory/vm/impl/Deobfuscator.java",
         "patchSetId": 2

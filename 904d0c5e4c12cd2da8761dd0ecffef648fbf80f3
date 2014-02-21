@@ -22,6 +22,30 @@
       "revId": "904d0c5e4c12cd2da8761dd0ecffef648fbf80f3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f3a11a9_1631221d",
+        "filename": "user/test/com/google/gwt/junit/ExpectedFailure.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-21T21:49:03Z",
+      "side": 1,
+      "message": "This is not a public API, the code is under user/test.",
+      "parentUuid": "0f3a11a9_134854a1",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 33
+      },
+      "revId": "904d0c5e4c12cd2da8761dd0ecffef648fbf80f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

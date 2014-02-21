@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f3a11a9_134854a1",
+        "filename": "user/test/com/google/gwt/junit/ExpectedFailure.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-21T20:19:32Z",
+      "side": 1,
+      "message": "I think I screwed up when reviewing this patch. It looks like the intent is to fix the tests for GWTTestCase itself, but as a side effect, @ExpectedFailure is now part of the GWTTestCase public API. That\u0027s unfortunate because it doesn\u0027t work in TestGal.\n\nIt looks like it\u0027s undocumented (other than in the JavaDoc) and there are no usages outside GWT itself, so perhaps we can remove it again?\n\nOtherwise I will add support to TestGal so it can run the tests.",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 33
+      },
+      "revId": "904d0c5e4c12cd2da8761dd0ecffef648fbf80f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

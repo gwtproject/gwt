@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef985df7_3ca19122",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-21T15:11:53Z",
+      "side": 1,
+      "message": "No it\u0027s not invalid: http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8\n\nDagger, for one, generates classes using $ names: https://github.com/square/dagger/blob/master/core/src/main/java/dagger/internal/loaders/GeneratedAdapters.java (this is only the suffix, the prefix is the binary name of the class: https://github.com/square/dagger/blob/master/compiler/src/main/java/dagger/internal/codegen/Util.java#L67)\n\nIt is true however that the GWT Compiler chokes on such classes: https://code.google.com/p/google-web-toolkit/issues/detail?id\u003d6799 (see also https://github.com/tbroyer/sheath/blob/master/sheath/src/main/java/sheath/rebind/SheathGenerator.java#L111 )",
+      "revId": "37fb4cf88a2dbf7851c04ec39885422e2672c261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef985df7_5cae5d11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-21T15:11:53Z",
+      "side": 1,
+      "message": "As said above, the bug is in TypeOracle. I\u0027m not opposed to changing the name of the generated deobfuscator builders as a temporary workaround though.",
+      "revId": "37fb4cf88a2dbf7851c04ec39885422e2672c261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf9559be_fb356f5a",
+        "filename": "user/src/com/google/web/bindery/requestfactory/vm/impl/Deobfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-21T15:11:53Z",
+      "side": 1,
+      "message": "There\u0027s no need for this method AFAICT; this is just the equivalent of Class#getName.\n\nhttp://docs.oracle.com/javase/7/docs/api/java/lang/Class.html#getName()\n\nhttp://docs.oracle.com/javase/specs/jls/se7/html/jls-13.html#jls-13.1",
+      "revId": "37fb4cf88a2dbf7851c04ec39885422e2672c261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

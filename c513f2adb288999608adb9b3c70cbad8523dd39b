@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f3a11a9_3348f0e8",
+        "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-21T19:42:05Z",
+      "side": 1,
+      "message": "if somebody passed Comparators.natural via constructor, this will return null which is still not correct for the contract right?",
+      "revId": "c513f2adb288999608adb9b3c70cbad8523dd39b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

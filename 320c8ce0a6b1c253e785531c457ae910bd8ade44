@@ -16,6 +16,29 @@
       "revId": "320c8ce0a6b1c253e785531c457ae910bd8ade44",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f3a11a9_61d45eff",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-02-21T22:17:28Z",
+      "side": 1,
+      "message": "Intentionally keeping this line?  (I vaguely recall there was some reason we needed two versions of Guava somewhere, but maybe that\u0027s no longer the case.)",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 93
+      },
+      "revId": "320c8ce0a6b1c253e785531c457ae910bd8ade44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

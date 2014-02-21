@@ -24,7 +24,6 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
-import com.google.gwt.dev.jjs.ast.JCharLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
@@ -283,86 +282,6 @@ public class CastNormalizer {
   }
 
   /**
-   * Explicitly convert any char or long type expressions within a concat
-   * operation into strings because normal JavaScript conversion does not work
-   * correctly.
-   */
-  private class ConcatVisitor extends JModVisitor {
-
-    @Override
-    public void endVisit(JBinaryOperation x, Context ctx) {
-      if (x.getOp() == JBinaryOperator.CONCAT) {
-        JExpression newLhs = convertString(x.getLhs());
-        JExpression newRhs = convertString(x.getRhs());
-        if (newLhs != x.getLhs() || newRhs != x.getRhs()) {
-          JBinaryOperation newExpr =
-              new JBinaryOperation(x.getSourceInfo(), program.getTypeJavaLangString(),
-                  JBinaryOperator.CONCAT, newLhs, newRhs);
-          ctx.replaceMe(newExpr);
-        }
-      } else if (x.getOp() == JBinaryOperator.ASG_CONCAT) {
-        JExpression newRhs = convertString(x.getRhs());
-        if (newRhs != x.getRhs()) {
-          JBinaryOperation newExpr =
-              new JBinaryOperation(x.getSourceInfo(), program.getTypeJavaLangString(),
-                  JBinaryOperator.ASG_CONCAT, x.getLhs(), newRhs);
-          ctx.replaceMe(newExpr);
-        }
-      }
-    }
-
-    private JExpression convertString(JExpression expr) {
-      JPrimitiveType charType = program.getTypePrimitiveChar();
-      if (expr.getType() == charType) {
-        if (expr instanceof JCharLiteral) {
-          JCharLiteral charLit = (JCharLiteral) expr;
-          return program.getLiteralString(expr.getSourceInfo(), new char[]{charLit.getValue()});
-        } else {
-          // Replace with Cast.charToString(c)
-          JMethodCall call =
-              new JMethodCall(expr.getSourceInfo(), null, program
-                  .getIndexedMethod("Cast.charToString"));
-          call.addArg(expr);
-          return call;
-        }
-      } else if (expr.getType() == program.getTypePrimitiveLong()) {
-        // Replace with LongLib.toString(l)
-        JMethodCall call =
-            new JMethodCall(expr.getSourceInfo(), null, program
-                .getIndexedMethod("LongLib.toString"));
-        call.addArg(expr);
-        return call;
-      }
-      return expr;
-    }
-  }
-
-  /**
-   * Handle integral divide operations which may have floating point results.
-   */
-  private class DivVisitor extends JModVisitor {
-
-    @Override
-    public void endVisit(JBinaryOperation x, Context ctx) {
-      JType type = x.getType();
-      if (x.getOp() == JBinaryOperator.DIV && type != program.getTypePrimitiveFloat()
-          && type != program.getTypePrimitiveDouble()) {
-        /*
-         * If the numerator was already in range, we can assume the output is
-         * also in range. Therefore, we don't need to do the full conversion,
-         * but rather a narrowing int conversion instead.
-         */
-        String methodName = "Cast.narrow_" + type.getName();
-        JMethod castMethod = program.getIndexedMethod(methodName);
-        JMethodCall call = new JMethodCall(x.getSourceInfo(), null, castMethod, type);
-        x.setType(program.getTypePrimitiveDouble());
-        call.addArg(x);
-        ctx.replaceMe(call);
-      }
-    }
-  }
-
-  /**
    * Replaces all casts and instanceof operations with calls to implementation
    * methods.
    */
@@ -566,14 +485,6 @@ public class CastNormalizer {
   }
 
   private void execImpl() {
-    {
-      ConcatVisitor visitor = new ConcatVisitor();
-      visitor.accept(program);
-    }
-    {
-      DivVisitor visitor = new DivVisitor();
-      visitor.accept(program);
-    }
     {
       AssignTypeCastabilityVisitor assigner = new AssignTypeCastabilityVisitor();
       assigner.accept(program);

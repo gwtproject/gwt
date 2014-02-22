@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef713d8d_e8d59b2f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-22T04:24:53Z",
+      "side": 1,
+      "message": "declare as a final TypeIndexedSet? Maybe rename from treeSet to something else. \"delegate\"?",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 19
+      },
+      "revId": "7973c09ae1e0166f86423333f69137eccd689e25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef713d8d_08dbb762",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/ArtifactSet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-22T04:24:53Z",
+      "side": 1,
+      "message": "If we know it\u0027s a TypeIndexedSet, we can call treeSet.freeze(). Then treeSet can be final and we don\u0027t need a separate typeIndex field.",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "7973c09ae1e0166f86423333f69137eccd689e25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4f58891a_325f0ead",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-02-22T01:26:36Z",
+      "side": 1,
+      "message": "Per issue 6799, I would enjoy seeing that fixed as well...let me know if I can help, but I would have no problem deferring to John or Roberto. :-)",
+      "parentUuid": "0f3a11a9_73ab5800",
+      "revId": "37fb4cf88a2dbf7851c04ec39885422e2672c261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf9559be_fb356f5a",
         "filename": "user/src/com/google/web/bindery/requestfactory/vm/impl/Deobfuscator.java",
         "patchSetId": 2

@@ -202,6 +202,66 @@ public class Collections {
     }
   }
 
+  private static final class SetFromMap<E> extends AbstractSet<E>
+      implements Serializable {
+
+    private final Map<E, Boolean> backingMap;
+
+    SetFromMap(Map<E, Boolean> map) {
+      backingMap = map;
+    }
+
+    @Override
+    public boolean add(E e) {
+      return backingMap.put(e, Boolean.TRUE) == null;
+    }
+
+    @Override
+    public void clear() {
+      backingMap.clear();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+      return backingMap.containsKey(o);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return o == this || backingMap.keySet().equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+      return backingMap.keySet().hashCode();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+      return backingMap.keySet().iterator();
+    }
+
+    @Override
+    public boolean remove(Object o) {
+      return backingMap.remove(o) != null;
+    }
+
+    @Override
+    public int size() {
+      return backingMap.keySet().size();
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+      return backingMap.keySet().toArray(a);
+    }
+
+    @Override
+    public String toString() {
+      return backingMap.keySet().toString();
+    }
+  }
+
   private static final class SingletonList<E> extends AbstractList<E> implements Serializable {
     private E element;
 
@@ -970,6 +1030,13 @@ public class Collections {
   public static <T> T min(Collection<? extends T> coll,
       Comparator<? super T> comp) {
     return max(coll, reverseOrder(comp));
+  }
+
+  public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
+    if (!map.isEmpty()) {
+      throw new IllegalArgumentException("map is not empty");
+    }
+    return new SetFromMap<E>(map);
   }
 
   public static <T> List<T> nCopies(int n, T o) {

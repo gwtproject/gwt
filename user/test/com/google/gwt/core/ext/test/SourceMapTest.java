@@ -158,12 +158,7 @@ public class SourceMapTest extends TestCase {
     }
 
     @Override
-    public int getQueryId() {
-      throw new ShouldNotImplement(NOT_IMPLEMENTED_MESSAGE);
-    }
-
-    @Override
-    public int getSeedId() {
+    public int getRuntimeTypeId() {
       throw new ShouldNotImplement(NOT_IMPLEMENTED_MESSAGE);
     }
 
@@ -201,6 +196,7 @@ public class SourceMapTest extends TestCase {
       return ++counter;
     }
 
+    @Override
     public String toString() {
       return jsniIdent + " -> " + jsName;
     }

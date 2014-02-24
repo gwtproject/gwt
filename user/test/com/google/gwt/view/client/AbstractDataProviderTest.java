@@ -15,6 +15,7 @@
  */
 package com.google.gwt.view.client;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
@@ -163,8 +164,9 @@ public class AbstractDataProviderTest extends GWTTestCase {
     
     // Set a key provider
     ProvidesKey<String> keyProvider = new ProvidesKey<String>() {
+      @Override
       public Object getKey(String item) {
-        return item == null ? item : item.toUpperCase();
+        return item == null ? item : StringCase.toUpper(item);
       }
     };
     provider = createDataProvider(keyProvider);

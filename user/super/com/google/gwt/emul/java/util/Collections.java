@@ -24,6 +24,41 @@ import java.io.Serializable;
  */
 public class Collections {
 
+  private static final class LifoQueue<E> extends AbstractQueue<E> implements
+      Serializable {
+
+    private final Deque<E> deque;
+
+    LifoQueue(Deque<E> deque) {
+      this.deque = deque;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+      return deque.iterator();
+    }
+
+    @Override
+    public boolean offer(E e) {
+      return deque.offerFirst(e);
+    }
+
+    @Override
+    public E peek() {
+      return deque.peekFirst();
+    }
+
+    @Override
+    public E poll() {
+      return deque.pollFirst();
+    }
+
+    @Override
+    public int size() {
+      return deque.size();
+    }
+  }
+
   private static final class EmptyList extends AbstractList implements
       RandomAccess, Serializable {
     @Override
@@ -37,8 +72,68 @@ public class Collections {
     }
 
     @Override
+    public Iterator iterator() {
+      return emptyIterator();
+    }
+
+    @Override
+    public ListIterator listIterator() {
+      return emptyListIterator();
+    }
+
+    @Override
     public int size() {
       return 0;
+    }
+  }
+
+  private static final class EmptyListIterator implements ListIterator {
+
+    static final EmptyListIterator INSTANCE = new EmptyListIterator();
+
+    @Override
+    public void add(Object o) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean hasNext() {
+      return false;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+      return false;
+    }
+
+    @Override
+    public Object next() {
+      throw new NoSuchElementException();
+    }
+
+    @Override
+    public int nextIndex() {
+      return 0;
+    }
+
+    @Override
+    public Object previous() {
+      throw new NoSuchElementException();
+    }
+
+    @Override
+    public int previousIndex() {
+      return -1;
+    }
+
+    @Override
+    public void remove() {
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public void set(Object o) {
+      throw new IllegalStateException();
     }
   }
 
@@ -51,19 +146,7 @@ public class Collections {
 
     @Override
     public Iterator iterator() {
-      return new Iterator() {
-        public boolean hasNext() {
-          return false;
-        }
-
-        public Object next() {
-          throw new NoSuchElementException();
-        }
-
-        public void remove() {
-          throw new UnsupportedOperationException();
-        }
-      };
+      return emptyIterator();
     }
 
     @Override
@@ -110,6 +193,15 @@ public class Collections {
     }
   }
 
+  private static final class ReverseComparator implements Comparator<Comparable<Object>> {
+    static final ReverseComparator INSTANCE = new ReverseComparator();
+
+    @Override
+    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
+      return o2.compareTo(o1);
+    }
+  }
+
   private static final class SingletonList<E> extends AbstractList<E> implements Serializable {
     private E element;
 
@@ -118,7 +210,7 @@ public class Collections {
     }
 
     public boolean contains(Object item) {
-      return Utility.equalsWithNullCheck(element, item);
+      return Objects.equals(element, item);
     }
 
     public E get(int index) {
@@ -631,18 +723,16 @@ public class Collections {
   @SuppressWarnings("unchecked")
   public static final Set EMPTY_SET = new EmptySet();
 
-  private static Comparator<Comparable<Object>> reverseComparator = new Comparator<Comparable<Object>>() {
-    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
-      return o2.compareTo(o1);
-    }
-  };
-
   public static <T> boolean addAll(Collection<? super T> c, T... a) {
     boolean result = false;
     for (T e : a) {
       result |= c.add(e);
     }
     return result;
+  }
+
+  public static <T> Queue<T> asLifoQueue(Deque<T> deque) {
+    return new LifoQueue<T>(deque);
   }
 
   /**
@@ -783,8 +873,18 @@ public class Collections {
   }
 
   @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <T> Iterator<T> emptyIterator() {
+    return (Iterator<T>) EmptyListIterator.INSTANCE;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
   public static <T> List<T> emptyList() {
     return (List<T>) EMPTY_LIST;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <T> ListIterator<T> emptyListIterator() {
+    return (ListIterator<T>) EmptyListIterator.INSTANCE;
   }
 
   @SuppressWarnings(value = {"unchecked", "cast"})
@@ -820,7 +920,7 @@ public class Collections {
   public static int frequency(Collection<?> c, Object o) {
     int count = 0;
     for (Object e : c) {
-      if (o == null ? e == null : o.equals(e)) {
+      if (Objects.equals(o, e)) {
         ++count;
       }
     }
@@ -884,7 +984,7 @@ public class Collections {
     boolean modified = false;
     for (ListIterator<T> it = list.listIterator(); it.hasNext();) {
       T t = it.next();
-      if (t == null ? oldVal == null : t.equals(oldVal)) {
+      if (Objects.equals(t, oldVal)) {
         it.set(newVal);
         modified = true;
       }
@@ -911,7 +1011,7 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> reverseOrder() {
-    return (Comparator<T>) reverseComparator;
+    return (Comparator<T>) ReverseComparator.INSTANCE;
   }
 
   public static <T> Comparator<T> reverseOrder(final Comparator<T> cmp) {

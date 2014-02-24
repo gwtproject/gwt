@@ -30,7 +30,7 @@ import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.Property;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
-import com.google.gwt.dev.javac.CompilationStateBuilder;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
@@ -80,7 +80,8 @@ class Recompiler {
         System.setProperty("gwt.speedtracerlog",
             appSpace.getSpeedTracerLogFile().getAbsolutePath());
       }
-      CompilationStateBuilder.init(logger, appSpace.getUnitCacheDir());
+      compilerContext = compilerContextBuilder.unitCache(
+          UnitCacheSingleton.get(logger, appSpace.getUnitCacheDir())).build();
     }
 
     long startTime = System.currentTimeMillis();
@@ -100,7 +101,7 @@ class Recompiler {
     try {
       CompilerOptions compilerOptions = new CompilerOptionsImpl(
           compileDir, options.getModuleNames(), options.getSourceLevel(),
-          options.enforceStrictResources());
+          options.enforceStrictResources(), options.getLogLevel());
       compilerContext = compilerContextBuilder.options(compilerOptions).build();
       ModuleDef module = loadModule(compileLogger, bindingProperties);
 
@@ -109,7 +110,7 @@ class Recompiler {
       moduleName.set(newModuleName);
       compilerOptions = new CompilerOptionsImpl(
           compileDir, Lists.newArrayList(newModuleName), options.getSourceLevel(),
-          options.enforceStrictResources());
+          options.enforceStrictResources(), options.getLogLevel());
       compilerContext = compilerContextBuilder.options(compilerOptions).build();
 
       success = new Compiler(compilerOptions).run(compileLogger, module);
@@ -212,7 +213,7 @@ class Recompiler {
     this.resourceLoader.set(resources);
 
     ModuleDef moduleDef = ModuleDefLoader.loadFromResources(
-        logger, compilerContext, originalModuleName, resources, true, true);
+        logger, compilerContext, originalModuleName, resources, true);
     compilerContext = compilerContextBuilder.module(moduleDef).build();
 
     // We need a cross-site linker. Automatically replace the default linker.

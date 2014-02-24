@@ -13,6 +13,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.resource.Resource;
@@ -35,7 +36,9 @@ public interface LibraryWriter {
   void addBuildResource(Resource buildResource);
 
   /**
-   * Adds a previously compiled (but not yet unified) compilation unit.
+   * Adds a previously compiled (but not yet unified) compilation unit.<br />
+   *
+   * Provided compilation units are assumed to have already been validated.
    */
   void addCompilationUnit(CompilationUnit compilationUnit);
 
@@ -48,6 +51,12 @@ public interface LibraryWriter {
    * Registers dependency on a set of other libraries.
    */
   void addDependencyLibraryNames(Set<String> dependencyLibraryNames);
+
+  /**
+   * Adds a generated artifact. Artifacts created by generators need to be collected so that they
+   * can be provided to the final linker.
+   */
+  void addGeneratedArtifacts(ArtifactSet generatedArtifacts);
 
   /**
    * Registers newly legal values on some binding property.
@@ -87,10 +96,10 @@ public interface LibraryWriter {
   PersistenceBackedObject<PermutationResult> getPermutationResultHandle();
 
   /**
-   * Returns the set of names of types which are the subject of GWT.create() calls in source code
-   * for this library.
+   * Returns the set of source names of types which are the subject of GWT.create() calls in source
+   * code for this library.
    */
-  Set<String> getReboundTypeNames();
+  Set<String> getReboundTypeSourceNames();
 
   /**
    * Records the library name.<br />
@@ -104,7 +113,7 @@ public interface LibraryWriter {
    * Records the set of names of types which are the subject of GWT.create() calls in source code
    * for this library.
    */
-  void setReboundTypeNames(Set<String> reboundTypeNames);
+  void setReboundTypeSourceNames(Set<String> reboundTypeSourceNames);
 
   /**
    * Finishes writing all library contents and closes the library.

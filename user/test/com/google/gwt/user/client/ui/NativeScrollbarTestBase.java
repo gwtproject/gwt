@@ -73,6 +73,7 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
     // Wait for the scroll size to take effect.
     delayTestFinish(TEST_TIMEOUT);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         // Scroll to position 100.
         setScrollPosition(scrollbar, 100);
@@ -80,9 +81,11 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
 
         // Wait for the scroll position to take effect.
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
           public void execute() {
             // Add a scroll handler.
             final TestScrollHandler handler = new TestScrollHandler() {
+              @Override
               public void onScroll(ScrollEvent event) {
                 finish();
               }
@@ -111,6 +114,7 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
   public void testSetScrollPosition() {
     // Add a scroll handler.
     final TestScrollHandler handler = new TestScrollHandler() {
+      @Override
       public void onScroll(ScrollEvent event) {
         finish();
       }
@@ -123,6 +127,7 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
     // Wait for the scroll size to take effect.
     delayTestFinish(TEST_TIMEOUT);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         // Set the scroll position.
         setScrollPosition(scrollbar, 100);
@@ -142,7 +147,6 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
     });
   }
 
-  @DoNotRunWith(Platform.HtmlUnitLayout)
   public void testSetScrollSize() {
     setScrollSize(scrollbar, 500);
     assertEquals(500, getScrollSize(scrollbar));
@@ -159,6 +163,7 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
     // Wait for the scroll size to take effect.
     delayTestFinish(TEST_TIMEOUT);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         // Scroll to position 100.
         setScrollPosition(scrollbar, 100);
@@ -166,9 +171,11 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
 
         // Wait for the scroll position to take effect.
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
           public void execute() {
             // Add a scroll handler.
             final TestScrollHandler handler = new TestScrollHandler() {
+              @Override
               public void onScroll(ScrollEvent event) {
                 finish();
               }

@@ -17,13 +17,18 @@ import com.google.gwt.dev.cfg.Libraries.IncompatibleLibraryVersionException;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.MockCompilationUnit;
 import com.google.gwt.dev.javac.testing.impl.MockResource;
+import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.ast.JClassType;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -57,12 +62,22 @@ public class ZipLibrariesTest extends TestCase {
     Set<String> expectedLocaleConfigurationValues = Sets.newHashSet("en", "fr");
     Set<String> expectedDependencyLibraryNames = Sets.newHashSet("FooLib", "BarLib");
     MockCompilationUnit expectedCompilationUnit =
-        new MockCompilationUnit("com.google.gwt.core.client.RuntimeRebinder", "blah");
-    MockCompilationUnit expectedSuperSourceCompilationUnit =
-        new MockCompilationUnit("com.google.gwt.core.client.SuperRuntimeRebinder", "superblah") {
+        new MockCompilationUnit("com.google.gwt.lang.RuntimeRebinder", "blah");
+    MockCompilationUnit expectedSuperSourceCompilationUnit = new MockCompilationUnit(
+        "com.google.gwt.lang.SuperRuntimeRebinder", "superblah") {
+      @Override
+      public boolean isSuperSource() {
+        return true;
+      }
+    };
+    MockCompilationUnit expectedNestedTypeCompilationUnit =
+        new MockCompilationUnit("com.google.gwt.user.Outer", "superblah") {
             @Override
-          public boolean isSuperSource() {
-            return true;
+          public List<JDeclaredType> getTypes() {
+            return Lists.<JDeclaredType> newArrayList(
+                new JClassType(SourceOrigin.UNKNOWN, "com.google.gwt.user.Outer", false, true),
+                new JClassType(SourceOrigin.UNKNOWN, "com.google.gwt.user.Outer.Inner", false,
+                    true));
           }
         };
 
@@ -88,14 +103,15 @@ public class ZipLibrariesTest extends TestCase {
     zipLibraryWriter.addDependencyLibraryNames(expectedDependencyLibraryNames);
     zipLibraryWriter.addCompilationUnit(expectedCompilationUnit);
     zipLibraryWriter.addCompilationUnit(expectedSuperSourceCompilationUnit);
+    zipLibraryWriter.addCompilationUnit(expectedNestedTypeCompilationUnit);
     zipLibraryWriter.write();
 
     // Read data back from disk.
     ZipLibrary zipLibrary = new ZipLibrary(zipFile.getPath());
     CompilationUnit actualCompilationUnit =
-        zipLibrary.getCompilationUnitByTypeName("com.google.gwt.core.client.RuntimeRebinder");
+        zipLibrary.getCompilationUnitByTypeSourceName("com.google.gwt.lang.RuntimeRebinder");
     CompilationUnit actualSuperSourceCompilationUnit =
-        zipLibrary.getCompilationUnitByTypeName("com.google.gwt.core.client.SuperRuntimeRebinder");
+        zipLibrary.getCompilationUnitByTypeSourceName("com.google.gwt.lang.SuperRuntimeRebinder");
 
     // Compare it.
     assertEquals(expectedLibraryName, zipLibrary.getLibraryName());
@@ -116,6 +132,8 @@ public class ZipLibrariesTest extends TestCase {
         actualSuperSourceCompilationUnit.getResourceLocation());
     assertEquals(expectedSuperSourceCompilationUnit.getTypeName(),
         actualSuperSourceCompilationUnit.getTypeName());
+    assertTrue(zipLibrary.getNestedNamesByCompilationUnitName().get("com.google.gwt.user.Outer")
+        .contains("com.google.gwt.user.Outer.Inner"));
   }
 
   public void testVersionNumberException() throws IOException {

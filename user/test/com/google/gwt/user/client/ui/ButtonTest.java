@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -40,6 +41,7 @@ public class ButtonTest extends GWTTestCase {
     boolean clicked;
     EventTarget target;
 
+    @Override
     public void onClick(ClickEvent event) {
       target = event.getNativeEvent().getEventTarget();
       clicked = true;
@@ -49,6 +51,7 @@ public class ButtonTest extends GWTTestCase {
   private static class H2 implements SubmitHandler {
     boolean submitted;
 
+    @Override
     public void onSubmit(SubmitEvent event) {
       submitted = true;
       event.cancel();
@@ -111,19 +114,19 @@ public class ButtonTest extends GWTTestCase {
     Button button = new Button("hello");
     button.setHTML(SafeHtmlUtils.fromSafeConstant(html));
     
-    assertEquals(html, button.getHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(button.getHTML()));
   }
 
   public void testSafeHtmlConstructor() {
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html));
     
-    assertEquals(html, button.getHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(button.getHTML()));
   }
 
   public void testSafeHtmlWithHandler() {
     H handler = new H();
     Button button = new Button(SafeHtmlUtils.fromSafeConstant(html), handler);
     
-    assertEquals(html, button.getHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(button.getHTML()));
   }
 }

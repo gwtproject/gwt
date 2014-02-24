@@ -34,12 +34,12 @@ import com.google.gwt.dev.cfg.Script;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.js.JsLiteralInterner;
 import com.google.gwt.dev.js.JsObfuscateNamer;
 import com.google.gwt.dev.js.JsParser;
 import com.google.gwt.dev.js.JsParserException;
 import com.google.gwt.dev.js.JsPrettyNamer;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
-import com.google.gwt.dev.js.JsStringInterner;
 import com.google.gwt.dev.js.JsSymbolResolver;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
 import com.google.gwt.dev.js.JsVerboseNamer;
@@ -49,6 +49,7 @@ import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.OutputFileSet;
 
@@ -73,7 +74,7 @@ import java.util.TreeSet;
 public class StandardLinkerContext extends Linker implements LinkerContext {
 
   /**
-   * Applies the {@link JsStringInterner} optimization to each top-level
+   * Applies the {@link JsLiteralInterner} optimization to each top-level
    * function defined within a JsProgram.
    */
   private static class TopFunctionStringInterner extends JsModVisitor {
@@ -92,19 +93,21 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
     @Override
     public boolean visit(JsFunction x, JsContext ctx) {
-      didChange |= JsStringInterner.exec(program, x.getBody(), x.getScope(), true);
+      didChange |= JsLiteralInterner.exec(program, x.getBody(), x.getScope(), true);
       return false;
     }
   }
 
   public static final Comparator<ConfigurationProperty> CONFIGURATION_PROPERTY_COMPARATOR =
       new Comparator<ConfigurationProperty>() {
+        @Override
         public int compare(ConfigurationProperty o1, ConfigurationProperty o2) {
           return o1.getName().compareTo(o2.getName());
         }
       };
 
   static final Comparator<SelectionProperty> SELECTION_PROPERTY_COMPARATOR = new Comparator<SelectionProperty>() {
+    @Override
     public int compare(SelectionProperty o1, SelectionProperty o2) {
       return o1.getName().compareTo(o2.getName());
     }
@@ -123,17 +126,20 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
   private final Map<String, StandardSelectionProperty> propertiesByName = new HashMap<String, StandardSelectionProperty>();
 
+  private ResourceOracle publicResourceOracle;
+
   private final SortedSet<SelectionProperty> selectionProperties;
 
   public StandardLinkerContext(TreeLogger logger, ModuleDef module,
-      JJSOptions jjsOptions) throws UnableToCompleteException {
+      ResourceOracle publicResourceOracle, JJSOptions jjsOptions) throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG,
         "Constructing StandardLinkerContext", null);
 
-    this.jjsOptions = jjsOptions;
     this.moduleFunctionName = module.getFunctionName();
     this.moduleName = module.getName();
     this.moduleLastModified = module.lastModified();
+    this.publicResourceOracle = publicResourceOracle;
+    this.jjsOptions = jjsOptions;
 
     // Sort the linkers into the order they should actually run.
     linkerClasses = new ArrayList<Class<? extends Linker>>();
@@ -244,10 +250,10 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
   public ArtifactSet getArtifactsForPublicResources(TreeLogger logger,
       ModuleDef module) {
     ArtifactSet artifacts = new ArtifactSet();
-    for (String path : module.getAllPublicFiles()) {
+    for (String path : publicResourceOracle.getPathNames()) {
       String partialPath = path.replace(File.separatorChar, '/');
       PublicResource resource = new StandardPublicResource(partialPath,
-          module.findPublicFile(path));
+          publicResourceOracle.getResourceMap().get(path));
       artifacts.add(resource);
       if (logger.isLoggable(TreeLogger.SPAM)) {
         logger.log(TreeLogger.SPAM, "Added public resource " + resource, null);
@@ -277,6 +283,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     return artifacts;
   }
 
+  @Override
   public SortedSet<ConfigurationProperty> getConfigurationProperties() {
     return configurationProperties;
   }
@@ -299,18 +306,22 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     return linkerShortNames.get(linkerType) + '/' + partialPath;
   }
 
+  @Override
   public String getModuleFunctionName() {
     return moduleFunctionName;
   }
 
+  @Override
   public long getModuleLastModified() {
     return moduleLastModified;
   }
 
+  @Override
   public String getModuleName() {
     return moduleName;
   }
 
+  @Override
   public SortedSet<SelectionProperty> getProperties() {
     return selectionProperties;
   }
@@ -406,6 +417,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     return workingArtifacts;
   }
 
+  @Override
   public boolean isOutputCompact() {
     return jjsOptions.getOutput().shouldMinimize();
   }
@@ -416,6 +428,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     throw new UnsupportedOperationException();
   }
 
+  @Override
   public String optimizeJavaScript(TreeLogger logger, String program)
       throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG, "Attempting to optimize JS", null);
@@ -442,8 +455,8 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     switch (jjsOptions.getOutput()) {
       case OBFUSCATED:
         /*
-         * We can't apply the regular JsStringInterner to the JsProgram that
-         * we've just created. In the normal case, the JsStringInterner adds an
+         * We can't apply the regular JsLiteralInterner to the JsProgram that
+         * we've just created. In the normal case, the JsLiteralInterner adds an
          * additional statement to the program's global JsBlock, however we
          * don't know exactly what the form and structure of our JsProgram are,
          * so we'll limit the scope of the modifications to each top-level

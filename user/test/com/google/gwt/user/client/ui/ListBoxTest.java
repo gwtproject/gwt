@@ -60,6 +60,7 @@ public class ListBoxTest extends GWTTestCase {
 
     delayTestFinish(5000);
     DeferredCommand.addCommand(new Command() {
+      @Override
       public void execute() {
         UIObjectTest.assertDebugIdContents("myList-item0", "option0");
         UIObjectTest.assertDebugIdContents("myList-item1", "option1");
@@ -172,10 +173,17 @@ public class ListBoxTest extends GWTTestCase {
     ListBox lb = new ListBox();
     lb.clear();
     for (int i = 0; i < 3; i++) {
-      lb.addItem(Integer.toString(i), Integer.toString(i));
+      lb.addItem(Integer.toString(i), i + "-value");
     }
     lb.setSelectedIndex(2);
     assertEquals(2, lb.getSelectedIndex());
+    assertEquals("2-value", lb.getSelectedValue());
+    assertEquals("2", lb.getSelectedItemText());
+
+    lb.setSelectedIndex(-1);
+    assertEquals(-1, lb.getSelectedIndex());
+    assertNull(lb.getSelectedValue());
+    assertNull(lb.getSelectedItemText());
   }
 
   public void testSelection() {
@@ -185,7 +193,7 @@ public class ListBoxTest extends GWTTestCase {
       box.setSelectedIndex(-1);
       assertEquals(-1, box.getSelectedIndex());
       box.setSelectedIndex(0);
-      assertEquals("a", box.getItemText(box.getSelectedIndex()));
+      assertEquals("a", box.getSelectedItemText());
     }
 
     // Testing multiple selection

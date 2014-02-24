@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -214,14 +214,14 @@ public abstract class CompilationUnit implements Serializable {
     }
   }
 
-  protected static final DiskCache diskCache = DiskCache.INSTANCE;
-
   public static final Comparator<CompilationUnit> COMPARATOR = new Comparator<CompilationUnit>() {
     @Override
     public int compare(CompilationUnit o1, CompilationUnit o2) {
       return o1.getResourcePath().compareTo(o2.getResourcePath());
     }
   };
+
+  protected static final DiskCache diskCache = DiskCache.INSTANCE;
 
   private static final Pattern GENERATED_CLASSNAME_PATTERN = Pattern.compile(".+\\$\\d.*");
 
@@ -235,7 +235,7 @@ public abstract class CompilationUnit implements Serializable {
    * If new compilers have different conventions for anonymous and synthetic
    * classes, this code needs to be updated.
    * </p>
-   * 
+   *
    * @param className name of the class to be checked.
    * @return true iff class or any of its enclosing classes are anonymous or
    *         synthetic.
@@ -334,7 +334,7 @@ public abstract class CompilationUnit implements Serializable {
    * virtual location (in the case of generators or mock data) where the source
    * for this unit originated. This should be unique for each unit compiled to
    * create a module.
-   * 
+   *
    * @see com.google.gwt.dev.resource.Resource#getLocation()
    */
   public abstract String getResourceLocation();
@@ -342,19 +342,36 @@ public abstract class CompilationUnit implements Serializable {
   /**
    * Returns the full abstract path of the resource. If a resource has been
    * re-rooted, this path should include any path prefix that was stripped.
-   * 
-   * @see com.google.gwt.dev.resource.Resource#getPath() 
+   *
+   * @see com.google.gwt.dev.resource.Resource#getPath()
    * @see com.google.gwt.dev.resource.Resource#getPathPrefix()
    */
   public abstract String getResourcePath();
 
   /**
-   * Returns the fully-qualified name of the top level public type.
+   * Returns the contained type with the given name.
+   */
+  public JDeclaredType getTypeByName(String typeName) {
+    for (JDeclaredType type : getTypes()) {
+      if (type.getName().equals(typeName)) {
+        return type;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Returns the source name of the top level public type.
    */
   public abstract String getTypeName();
 
   /**
-   * Returns the GWT AST types in this unit.
+   * Returns a copy of the GWT AST types in this unit.<br />
+   *
+   * Callers are free to modify the returned type instances without worrying about modifying the
+   * original CompilationUnit instances. It is this protection that makes it safe to reuse a single
+   * UnitCache and the same CompilationUnit instances across multiple compiles within the same
+   * process.
    */
   public List<JDeclaredType> getTypes() {
     try {
@@ -405,7 +422,7 @@ public abstract class CompilationUnit implements Serializable {
   public abstract boolean isGenerated();
 
   /**
-   * 
+   *
    * @return true if the Compilation Unit is from a super-source.
    */
   @Deprecated

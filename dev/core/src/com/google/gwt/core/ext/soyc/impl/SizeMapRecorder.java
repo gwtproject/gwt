@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,7 +22,9 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.SizeBreakdown;
+import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsName;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
@@ -63,6 +65,7 @@ public class SizeMapRecorder {
    * Sorts by JsName.getIdent().
    */
   private static final Comparator<JsName> JSNAME_SORT = new Comparator<JsName>() {
+    @Override
     public int compare(JsName o1, JsName o2) {
       return o1.getIdent().compareTo(o2.getIdent());
     }
@@ -98,7 +101,7 @@ public class SizeMapRecorder {
    * equivalents. The portion of the input string between start (inclusive) and
    * end (exclusive) is scanned.  The output is appended to the given
    * StringBuilder.
-   * 
+   *
    * @param code the input String
    * @param start the first character position to scan.
    * @param end the character position following the last character to scan.
@@ -173,7 +176,7 @@ public class SizeMapRecorder {
    * @param logger a TreeLogger
    */
   public static void recordMap(TreeLogger logger, OutputStream out, SizeBreakdown[] sizeBreakdowns,
-      JavaToJavaScriptMap jjsmap, Map<JsName, String> obfuscateMap) throws IOException {
+      JavaToJavaScriptMap jjsmap, Map<JsName, JsLiteral> internedLiteralByVariableName) throws IOException {
     out = new GZIPOutputStream(out);
     Writer writer = new OutputStreamWriter(out, Util.DEFAULT_ENCODING);
 
@@ -188,7 +191,8 @@ public class SizeMapRecorder {
       for (Entry<JsName, Integer> sizeMapEntry : sizeMap.entrySet()) {
         JsName name = sizeMapEntry.getKey();
         int size = sizeMapEntry.getValue();
-        TypedProgramReference typedRef = typedProgramReference(name, jjsmap, obfuscateMap);
+        TypedProgramReference typedRef = typedProgramReference(name, jjsmap,
+            internedLiteralByVariableName);
         writer.append("  <size " + "type=\"" + escapeXml(typedRef.type) + "\" " + "ref=\""
             + escapeXml(typedRef.description) + "\" " + "size=\"" + size + "\"/>\n");
       }
@@ -200,7 +204,7 @@ public class SizeMapRecorder {
   }
 
   private static TypedProgramReference typedProgramReference(JsName name,
-      JavaToJavaScriptMap jjsmap, Map<JsName, String> obfuscateMap) {
+      JavaToJavaScriptMap jjsmap, Map<JsName, JsLiteral> internedLiteralByVariableName) {
     JMethod method = jjsmap.nameToMethod(name);
     if (method != null) {
       StringBuilder sb = new StringBuilder();
@@ -231,9 +235,9 @@ public class SizeMapRecorder {
       return new TypedProgramReference("type", type.getName());
     }
 
-    String string = obfuscateMap.get(name);
-    if (string != null) {
-      return new TypedProgramReference("string", string);
+    JsLiteral literal = internedLiteralByVariableName.get(name);
+    if (literal instanceof JsStringLiteral) {
+      return new TypedProgramReference("string", ((JsStringLiteral) literal).getValue());
     }
 
     return new TypedProgramReference("var", name.getShortIdent());

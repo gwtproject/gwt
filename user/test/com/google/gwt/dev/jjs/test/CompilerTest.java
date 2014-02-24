@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dev.jjs.test.compilertests.MethodNamedSameAsClass;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -36,6 +37,7 @@ public class CompilerTest extends GWTTestCase {
   interface Silly { }
 
   interface SillyComparable<T extends Silly> extends Comparable<T> {
+    @Override
     int compareTo(T obj);
   }
 
@@ -60,6 +62,7 @@ public class CompilerTest extends GWTTestCase {
 
   private static class Bm2KeyNav<E extends Bm2ComponentEvent> implements
       Bm2Listener<E> {
+    @Override
     public int handleEvent(Bm2ComponentEvent ce) {
       return 5;
     }
@@ -431,6 +434,7 @@ public class CompilerTest extends GWTTestCase {
    */
   public void testBridgeMethods4() {
     abstract class MyMapAbstract<V> implements MyMap {
+      @Override
       public String get(String key) {
         return null;
       }
@@ -1189,7 +1193,7 @@ public class CompilerTest extends GWTTestCase {
     assertFalse("Hello, AJAX".equals("me"));
     assertTrue("Hello, AJAX".equals("Hello, AJAX"));
     assertTrue("Hello, AJAX".equalsIgnoreCase("HELLO, ajax"));
-    assertEquals("hello, ajax", "Hello, AJAX".toLowerCase());
+    assertEquals("hello, ajax", StringCase.toLower("Hello, AJAX"));
 
     assertEquals("foobar", "foo" + barShouldInline());
     assertEquals("1bar", 1 + barShouldInline());

@@ -257,17 +257,6 @@ public abstract class JJSTestBase extends TestCase {
       }
     });
 
-    sourceOracle.addOrReplace(new MockJavaResource("java.lang.AutoCloseable") {
-      @Override
-      public CharSequence getContent() {
-        return ""
-            + "package java.lang;"
-            + "public interface AutoCloseable { "
-            + "  void close() throws Exception;"
-            + "}";
-      }
-    });
-
     sourceOracle.addOrReplace(new MockJavaResource("com.google.gwt.lang.Exceptions") {
       @Override
       public CharSequence getContent() {
@@ -277,22 +266,10 @@ public abstract class JJSTestBase extends TestCase {
             + "  static RuntimeException makeAssertionError() { return new RuntimeException(); }"
             + "  static Throwable safeClose(AutoCloseable resource, Throwable mainException) {"
             + "    return mainException;"
-            + "  } "
+            + "  }"
+            + "  static <T> T checkNotNull(T value) { return value; }"
             + "}";
         }
-    });
-
-    sourceOracle.addOrReplace(new MockJavaResource("java.lang.String") {
-      @Override
-      public CharSequence getContent() {
-        return "package java.lang;" +
-          "public class String {" +
-          "  public int length() { return 0; }" +
-          "  public char charAt(int pos) { return 0; }" +
-          "  public String toString() { return this; }" +
-          "  public int hashCode() { return 0; }" +
-          "}";
-      }
     });
   }
 
@@ -308,4 +285,30 @@ public abstract class JJSTestBase extends TestCase {
    * Java source level compatibility option.
    */
   protected SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
+
+  public Result assertTransform(String codeSnippet, JVisitor visitor)
+      throws UnableToCompleteException {
+    JProgram program = compileSnippet("void", codeSnippet);
+    JMethod mainMethod = findMainMethod(program);
+    visitor.accept(mainMethod);
+    return new Result("void", codeSnippet, mainMethod.getBody().toSource());
+  }
+
+  public final class Result {
+    private final String optimized;
+    private final String returnType;
+    private final String userCode;
+
+    public Result(String returnType, String userCode, String optimized) {
+      this.returnType = returnType;
+      this.userCode = userCode;
+      this.optimized = optimized;
+    }
+
+    public void into(String expected) throws UnableToCompleteException {
+      JProgram program = compileSnippet(returnType, expected);
+      expected = getMainMethodSource(program);
+      assertEquals(userCode, expected, optimized);
+    }
+  }
 }

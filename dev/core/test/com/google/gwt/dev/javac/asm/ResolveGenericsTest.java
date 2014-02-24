@@ -34,6 +34,7 @@ import com.google.gwt.dev.javac.typemodel.JPackage;
 import com.google.gwt.dev.javac.typemodel.JRealClassType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
+import com.google.gwt.dev.util.Name.BinaryName;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -79,28 +80,29 @@ public class ResolveGenericsTest extends AsmTestCase {
       this.delegate = resolver;
     }
 
+    @Override
     public void addImplementedInterface(JRealClassType type, JClassType intf) {
       delegate.addImplementedInterface(type, intf);
     }
 
+    @Override
     public void addThrows(JAbstractMethod method, JClassType exception) {
       delegate.addThrows(method, exception);
     }
 
-    public Map<String, JRealClassType> getInternalMapper() {
-      return delegate.getInternalMapper();
-    }
-
+    @Override
     public TypeOracle getTypeOracle() {
       return delegate.getTypeOracle();
     }
 
+    @Override
     public JMethod newMethod(JClassType type, String name,
         Map<Class<? extends Annotation>, Annotation> declaredAnnotations,
         JTypeParameter[] typeParams) {
       return delegate.newMethod(type, name, declaredAnnotations, typeParams);
     }
 
+    @Override
     public void newParameter(JAbstractMethod method, JType argType,
         String argName,
         Map<Class<? extends Annotation>, Annotation> declaredAnnotations,
@@ -109,6 +111,7 @@ public class ResolveGenericsTest extends AsmTestCase {
           argNamesAreReal);
     }
 
+    @Override
     public JRealClassType newRealClassType(JPackage pkg,
         String enclosingTypeName, boolean isLocalType, String className,
         boolean isIntf) {
@@ -116,28 +119,38 @@ public class ResolveGenericsTest extends AsmTestCase {
           className, isIntf);
     }
 
+    @Override
     public boolean resolveAnnotation(TreeLogger logger,
         CollectAnnotationData annotVisitor,
         Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
       return true;
     }
 
+    @Override
     public boolean resolveAnnotations(TreeLogger logger,
         List<CollectAnnotationData> annotations,
         Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
       return true;
     }
 
+    @Override
     public boolean resolveClass(TreeLogger logger, JRealClassType type) {
       return true;
     }
 
+    @Override
     public void setReturnType(JAbstractMethod method, JType returnType) {
       delegate.setReturnType(method, returnType);
     }
 
+    @Override
     public void setSuperClass(JRealClassType type, JClassType superType) {
       delegate.setSuperClass(type, superType);
+    }
+
+    @Override
+    public JRealClassType findByInternalName(String typeInternalName) {
+      return delegate.findByInternalName(typeInternalName);
     }
   }
 
@@ -178,10 +191,10 @@ public class ResolveGenericsTest extends AsmTestCase {
   private final JRealClassType testType;
 
   public ResolveGenericsTest() {
-    typeOracleUpdater = TypeOracleTestingUtils.buildStandardUpdaterWith(failTreeLogger);
+    typeOracleUpdater =
+        TypeOracleTestingUtils.buildStandardUpdaterWith(failTreeLogger);
     resolver = new MockResolver(typeOracleUpdater.getMockResolver());
     oracle = typeOracleUpdater.getTypeOracle();
-    createUnresolvedClass(String.class, null);
     testHandler = createUnresolvedClass(TestHandler.class, null);
     testHandler1 = createUnresolvedClass(TestHandler1.class, null);
     testOuter0 = createUnresolvedClass(TestOuter0.class, null);
@@ -196,9 +209,8 @@ public class ResolveGenericsTest extends AsmTestCase {
         "dispatch", TestHandler.class);
     for (JClassType type : oracle.getTypes()) {
       if (type instanceof JRealClassType) {
-        typeOracleUpdater.getInternalMapper().put(
-            type.getQualifiedBinaryName().replace('.', '/'),
-            (JRealClassType) type);
+        typeOracleUpdater.getTypesByInternalName().put(
+            BinaryName.toInternalName(type.getQualifiedBinaryName()), (JRealClassType) type);
       }
     }
   }
@@ -289,11 +301,10 @@ public class ResolveGenericsTest extends AsmTestCase {
   }
 
   private void resolveClassSignature(JRealClassType type, String signature) {
-    Map<String, JRealClassType> internalMapper = resolver.getInternalMapper();
     TypeParameterLookup lookup = new TypeParameterLookup();
     lookup.pushEnclosingScopes(type);
     ResolveClassSignature classResolver =
-        new ResolveClassSignature(resolver, internalMapper, failTreeLogger, type, lookup);
+        new ResolveClassSignature(resolver, failTreeLogger, type, lookup);
     new SignatureReader(signature).accept(classResolver);
     classResolver.finish();
   }

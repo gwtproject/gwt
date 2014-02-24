@@ -15,6 +15,7 @@
  */
 package com.google.gwt.view.client;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.view.client.SelectionModel.AbstractSelectionModel;
@@ -43,6 +44,7 @@ public class AbstractSelectionModelTest extends GWTTestCase {
       eventFired = false;
     }
 
+    @Override
     public void onSelectionChange(SelectionChangeEvent event) {
       assertFalse(eventFired);
       eventFired = true;
@@ -60,10 +62,12 @@ public class AbstractSelectionModelTest extends GWTTestCase {
       super(keyProvider);
     }
     
+    @Override
     public boolean isSelected(T object) {
       return false;
     }
 
+    @Override
     public void setSelected(T object, boolean selected) {
       scheduleSelectionChangeEvent();
     }
@@ -152,8 +156,9 @@ public class AbstractSelectionModelTest extends GWTTestCase {
 
     // Defer to the key provider if one is set.
     ProvidesKey<String> keyProvider = new ProvidesKey<String>() {
+      @Override
       public Object getKey(String item) {
-        return item == null ? item : item.toUpperCase();
+        return item == null ? item : StringCase.toUpper(item);
       }
     };
     model = createSelectionModel(keyProvider);

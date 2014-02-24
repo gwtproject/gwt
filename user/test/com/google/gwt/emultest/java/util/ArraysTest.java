@@ -415,6 +415,7 @@ public class ArraysTest extends EmulTestBase {
   @SuppressWarnings("unchecked")
   public void testBinarySearchObjectComparator() {
     Comparator inverseSort = new Comparator() {
+      @Override
       public int compare(Object o1, Object o2) {
         return ((Comparable) o2).compareTo(o1);
       }
@@ -469,6 +470,689 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(-1, ret);
     ret = Arrays.binarySearch(a3, (short) -71);
     assertEquals(0, ret);
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(boolean[], int)}.
+   */
+  public void testCopyOfBoolean() {
+    boolean[] a1 = {true, true, false, true, true, true, false, false, true};
+    boolean[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new boolean[] {true, true}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(false, ret[i]);
+    }
+
+    boolean[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new boolean[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(false, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(byte[], int)}.
+   */
+  public void testCopyOfByte() {
+    byte[] a1 = {9, 8, 7, 5, 1, 2, 3, 4, 0};
+    byte[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new byte[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((byte) 0, ret[i]);
+    }
+
+    byte[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new byte[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((byte) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(char[], int)}.
+   */
+  public void testCopyOfChar() {
+    char[] a1 = {9, 8, 7, 5, 1, 2, 3, 4, 0};
+    char[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new char[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((char) 0, ret[i]);
+    }
+
+    char[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new char[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((char) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(double[], int)}.
+   */
+  public void testCopyOfDouble() {
+    double[] a1 = {0.5, 1.25, -7., 0., 3.75, 101, 0.25, 33.75};
+    double[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new double[] {0.5, 1.25}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0., ret[i]);
+    }
+
+    double[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new double[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0., ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(float[], int)}.
+   */
+  public void testCopyOfFloat() {
+    float[] a1 = {0.5f, 1.25f, -7f, 0f, 3.75f, 101f, 0.25f, 33.75f};
+    float[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new float[] {0.5f, 1.25f}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0f, ret[i]);
+    }
+
+    float[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new float[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0f, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(int[], int)}.
+   */
+  public void testCopyOfInt() {
+    int[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
+    int[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new int[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0, ret[i]);
+    }
+
+    int[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new int[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(long[], int)}.
+   */
+  public void testCopyOfLong() {
+    long[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
+    long[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new long[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0L, ret[i]);
+    }
+
+    long[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new long[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0L, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(short[], int)}.
+   */
+  public void testCopyOfShort() {
+    short[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
+    short[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new short[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((short) 0, ret[i]);
+    }
+
+    short[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new short[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((short) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOf(Object[], int)}.
+   */
+  public void testCopyOfObject() {
+    Object obj1 = new Object();
+    Object obj2 = new Object();
+    Object obj3 = new Object();
+
+    Object[] a1 = {null, obj1, obj2, null, obj3};
+    Object[] ret = Arrays.copyOf(a1, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOf(a1, 2);
+    assertTrue(Arrays.equals(new Object[] {null, obj1}, ret));
+
+    ret = Arrays.copyOf(a1, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(null, ret[i]);
+    }
+
+    Object[] emptyArray = {};
+    ret = Arrays.copyOf(emptyArray, 0);
+    assertTrue(Arrays.equals(new Object[0], ret));
+
+    ret = Arrays.copyOf(emptyArray, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(null, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(boolean[], int, int)}.
+   */
+  public void testCopyOfRangeBoolean() {
+    boolean[] a1 = {true, true, false, true, true};
+    boolean[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new boolean[] {true, true}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new boolean[] {false, true}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new boolean[] {true, true, false}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new boolean[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(false, ret[i]);
+    }
+
+    boolean[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new boolean[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(false, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(byte[], int, int)}.
+   */
+  public void testCopyOfRangeByte() {
+    byte[] a1 = {9, 8, 7, 5, 1};
+    byte[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new byte[] {9, 8}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new byte[] {7, 5}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new byte[] {5, 1, 0}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new byte[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((byte) 0, ret[i]);
+    }
+
+    byte[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new byte[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((byte) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(char[], int, int)}.
+   */
+  public void testCopyOfRangeChar() {
+    char[] a1 = {9, 8, 7, 5, 1};
+    char[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new char[] {9, 8}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new char[] {7, 5}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new char[] {5, 1, 0}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new char[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((char) 0, ret[i]);
+    }
+
+    char[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new char[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((char) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(double[], int, int)}.
+   */
+  public void testCopyOfRangeDouble() {
+    double[] a1 = {0.5, 1.25, -7., 0., 3.75};
+    double[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new double[] {0.5, 1.25}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new double[] {-7, 0.}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new double[] {0., 3.75, 0.}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new double[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0., ret[i]);
+    }
+
+    double[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new double[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0., ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(float[], int, int)}.
+   */
+  public void testCopyOfRangeFloat() {
+    float[] a1 = {0.5f, 1.25f, -7f, 0f, 3.75f};
+    float[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new float[] {0.5f, 1.25f}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new float[] {-7f, 0f}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new float[] {0f, 3.75f, 0f}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new float[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0f, ret[i]);
+    }
+
+    float[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new float[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0f, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(int[], int, int)}.
+   */
+  public void testCopyOfRangeInt() {
+    int[] a1 = {9, 8, 7, 5, 1};
+    int[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new int[] {9, 8}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new int[] {7, 5}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new int[] {5, 1, 0}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new int[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0, ret[i]);
+    }
+
+    int[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new int[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(long[], int, int)}.
+   */
+  public void testCopyOfRangeLong() {
+    long[] a1 = {9, 8, 7, 5, 1};
+    long[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new long[] {9, 8}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new long[] {7, 5}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new long[] {5, 1, 0}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new long[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(0L, ret[i]);
+    }
+
+    long[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new long[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(0L, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(short[], int, int)}.
+   */
+  public void testCopyOfRangeShort() {
+    short[] a1 = {9, 8, 7, 5, 1};
+    short[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new short[] {9, 8}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new short[] {7, 5}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new short[] {5, 1, 0}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new short[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals((short) 0, ret[i]);
+    }
+
+    short[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new short[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals((short) 0, ret[i]);
+    }
+  }
+
+  /**
+   * Tests {@link Arrays#copyOfRange(Object[], int, int)}.
+   */
+  public void testCopyOfRangeObject() {
+    Object obj1 = new Object();
+    Object obj2 = new Object();
+    Object obj3 = new Object();
+
+    Object[] a1 = {null, obj1, obj2, null, obj3};
+    Object[] ret = Arrays.copyOfRange(a1, 0, a1.length);
+    assertNotSame(a1, ret);
+    assertTrue(Arrays.equals(a1, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 2);
+    assertTrue(Arrays.equals(new Object[] {null, obj1}, ret));
+
+    ret = Arrays.copyOfRange(a1, 2, 4);
+    assertTrue(Arrays.equals(new Object[] {obj2, null}, ret));
+
+    ret = Arrays.copyOfRange(a1, 3, 6);
+    assertTrue(Arrays.equals(new Object[] {null, obj3, null}, ret));
+
+    ret = Arrays.copyOfRange(a1, 0, 0);
+    assertTrue(Arrays.equals(new Object[0], ret));
+
+    ret = Arrays.copyOfRange(a1, 0, a1.length * 2);
+    assertEquals(a1.length * 2, ret.length);
+    int i = 0;
+    for (; i < a1.length; i++) {
+      assertEquals(a1[i], ret[i]);
+    }
+    for (; i < ret.length; i++) {
+      assertEquals(null, ret[i]);
+    }
+
+    Object[] emptyArray = {};
+    ret = Arrays.copyOfRange(emptyArray, 0, 0);
+    assertTrue(Arrays.equals(new Object[0], ret));
+
+    ret = Arrays.copyOfRange(emptyArray, 0, 5);
+    assertEquals(5, ret.length);
+    for (; i < ret.length; i++) {
+      assertEquals(null, ret[i]);
+    }
   }
 
   /**
@@ -555,6 +1239,7 @@ public class ArraysTest extends EmulTestBase {
     Object[] sorted = {"a", "b", "b", "c"};
     assertEquals(x, sorted);
     Comparator<Object> t = new Comparator<Object>() {
+      @Override
       @SuppressWarnings("unchecked")
       public int compare(Object o1, Object o2) {
         return ((Comparable<Object>) o2).compareTo(o1);
@@ -584,6 +1269,7 @@ public class ArraysTest extends EmulTestBase {
     while (validPermutation(permutation, origData.length)) {
       TestObject[] permutedArray = getPermutation(origData, permutation);
       Arrays.sort(permutedArray, new Comparator<TestObject>() {
+        @Override
         public int compare(TestObject a, TestObject b) {
           return a.getValue() - b.getValue();
         }

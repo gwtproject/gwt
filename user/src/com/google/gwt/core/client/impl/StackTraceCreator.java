@@ -73,25 +73,13 @@ public class StackTraceCreator {
       return toReturn;
     }-*/;
 
-    public void createStackTrace(JavaScriptException e) {
-      JsArrayString stack = inferFrom(e.getThrown());
-
+    protected StackTraceElement[] getStackTrace(JsArrayString stack) {
       StackTraceElement[] stackTrace = new StackTraceElement[stack.length()];
       for (int i = 0, j = stackTrace.length; i < j; i++) {
         stackTrace[i] = new StackTraceElement("Unknown", stack.get(i), null,
             LINE_NUMBER_UNKNOWN);
       }
-      e.setStackTrace(stackTrace);
-    }
-
-    public void fillInStackTrace(Throwable t) {
-      JsArrayString stack = StackTraceCreator.createStackTrace();
-      StackTraceElement[] stackTrace = new StackTraceElement[stack.length()];
-      for (int i = 0, j = stackTrace.length; i < j; i++) {
-        stackTrace[i] = new StackTraceElement("Unknown", stack.get(i), null,
-            LINE_NUMBER_UNKNOWN);
-      }
-      t.setStackTrace(stackTrace);
+      return stackTrace;
     }
 
     /**
@@ -109,19 +97,26 @@ public class StackTraceCreator {
      * Package-access for testing.
      */
     protected String extractName(String fnToString) {
-      return extractNameFromToString(fnToString);
-    }
-
-    /**
-     * Raise an exception and return it.
-     */
-    protected native JavaScriptObject makeException() /*-{
-      try {
-        null.a();
-      } catch (e) {
-        return e;
+      String toReturn = "";
+      fnToString = fnToString.trim();
+      int index = fnToString.indexOf("(");
+      int start = fnToString.startsWith("function") ? 8 : 0;
+      if (index == -1) {
+        // Firefox 14 does not include parenthesis and uses '@' symbol instead to terminate symbol
+        index = fnToString.indexOf('@');
+        /**
+         * Firefox 14 doesn't return strings like 'function()' for anonymous methods, so
+         * we assert a space must trail 'function' keyword for a method named 'functionName', e.g.
+         * functionName:file.js:2 won't accidentally strip off the 'function' prefix which is part
+         * of the name.
+         */
+        start = fnToString.startsWith("function ") ? 9 : 0;
       }
-    }-*/;
+      if (index != -1) {
+        toReturn = fnToString.substring(start, index).trim();
+      }
+      return toReturn.length() > 0 ? toReturn : ANONYMOUS;
+    }
   }
 
   /**
@@ -144,13 +139,10 @@ public class StackTraceCreator {
     }
 
     @Override
-    public void createStackTrace(JavaScriptException e) {
-      // No-op, relying on initializer call to collect()
-    }
-
-    @Override
-    public void fillInStackTrace(Throwable t) {
-      JsArrayString stack = collect();
+    protected StackTraceElement[] getStackTrace(JsArrayString stack) {
+      if (stack.length() == 0) {
+        return null;
+      }
       JsArrayString locations = getLocation();
       StackTraceElement[] stackTrace = new StackTraceElement[stack.length()];
       for (int i = 0, j = stackTrace.length; i < j; i++) {
@@ -170,12 +162,7 @@ public class StackTraceCreator {
         stackTrace[i] = new StackTraceElement("Unknown", stack.get(i),
             fileName, lineNumber);
       }
-      t.setStackTrace(stackTrace);
-    }
-
-    @Override
-    public JsArrayString inferFrom(Object e) {
-      throw new RuntimeException("Should not reach here");
+      return stackTrace;
     }
 
     private native JsArrayString getLocation()/*-{
@@ -203,6 +190,17 @@ public class StackTraceCreator {
     public JsArrayString collect() {
       return splice(inferFrom(makeException()), toSplice());
     }
+
+    /**
+     * Raise an exception and return it.
+     */
+    protected native JavaScriptObject makeException() /*-{
+      try {
+        null.a();
+      } catch (e) {
+        return e;
+      }
+    }-*/;
 
     @Override
     public JsArrayString inferFrom(Object e) {
@@ -261,18 +259,6 @@ public class StackTraceCreator {
         res = splice(new Collector().collect(), 1);
       }
       return res;
-    }
-
-    @Override
-    public void createStackTrace(JavaScriptException e) {
-      JsArrayString stack = inferFrom(e.getThrown());
-      parseStackTrace(e, stack);
-    }
-
-    @Override
-    public void fillInStackTrace(Throwable t) {
-      JsArrayString stack = StackTraceCreator.createStackTrace();
-      parseStackTrace(t, stack);
     }
 
     @Override
@@ -349,7 +335,8 @@ public class StackTraceCreator {
       return 3;
     }
 
-    private void parseStackTrace(Throwable e, JsArrayString stack) {
+    @Override
+    protected StackTraceElement[] getStackTrace(JsArrayString stack) {
       StackTraceElement[] stackTrace = new StackTraceElement[stack.length()];
       for (int i = 0, j = stackTrace.length; i < j; i++) {
         String stackElements[] = stack.get(i).split("@@");
@@ -373,7 +360,7 @@ public class StackTraceCreator {
         stackTrace[i] = new StackTraceElement("Unknown", stackElements[0], fileName + "@" + col,
             replaceIfNoSourceMap(line < 0 ? -1 : line));
       }
-      e.setStackTrace(stackTrace);
+      return stackTrace;
     }
   }
 
@@ -401,13 +388,8 @@ public class StackTraceCreator {
     }
 
     @Override
-    public void createStackTrace(JavaScriptException e) {
-      // empty, since Throwable.getStackTrace() properly handles null
-    }
-
-    @Override
-    public void fillInStackTrace(Throwable t) {
-      // empty, since Throwable.getStackTrace() properly handles null
+    protected StackTraceElement[] getStackTrace(JsArrayString stack) {
+      return null;
     }
   }
 
@@ -421,7 +403,12 @@ public class StackTraceCreator {
           "StackTraceCreator should only be called in Production Mode");
     }
 
-    GWT.<Collector> create(Collector.class).createStackTrace(e);
+    Collector collector = GWT.<Collector> create(Collector.class);
+    JsArrayString stack = collector.inferFrom(e.getThrown());
+    StackTraceElement[] stackTrace = collector.getStackTrace(stack);
+    if (stackTrace != null) {
+      e.setStackTrace(stackTrace);
+    }
   }
 
   /**
@@ -434,42 +421,12 @@ public class StackTraceCreator {
           "StackTraceCreator should only be called in Production Mode");
     }
 
-    GWT.<Collector> create(Collector.class).fillInStackTrace(t);
-  }
-
-  /**
-   * Create a stack trace based on the current execution stack. This method
-   * should only be called in Production Mode.
-   */
-  static JsArrayString createStackTrace() {
-    if (!GWT.isScript()) {
-      throw new RuntimeException(
-          "StackTraceCreator should only be called in Production Mode");
+    Collector collector = GWT.<Collector> create(Collector.class);
+    JsArrayString stack = collector.collect();
+    StackTraceElement[] stackTrace = collector.getStackTrace(stack);
+    if (stackTrace != null) {
+      t.setStackTrace(stackTrace);
     }
-
-    return GWT.<Collector> create(Collector.class).collect();
-  }
-
-  static String extractNameFromToString(String fnToString) {
-    String toReturn = "";
-    fnToString = fnToString.trim();
-    int index = fnToString.indexOf("(");
-    int start = fnToString.startsWith("function") ? 8 : 0;
-    if (index == -1) {
-      // Firefox 14 does not include parenthesis and uses '@' symbol instead to terminate symbol
-      index = fnToString.indexOf('@');
-      /**
-       * Firefox 14 doesn't return strings like 'function()' for anonymous methods, so
-       * we assert a space must trail 'function' keyword for a method named 'functionName', e.g.
-       * functionName:file.js:2 won't accidentally strip off the 'function' prefix which is part
-       * of the name.
-       */
-      start = fnToString.startsWith("function ") ? 9 : 0;
-    }
-    if (index != -1) {
-      toReturn = fnToString.substring(start, index).trim();
-    }
-    return toReturn.length() > 0 ? toReturn : ANONYMOUS;
   }
 
   private static native JsArrayString splice(JsArrayString arr, int length) /*-{

@@ -20,6 +20,8 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.JdtCompiler.AdditionalTypeProviderDelegate;
 import com.google.gwt.dev.javac.JdtCompiler.UnitProcessor;
+import com.google.gwt.dev.javac.typemodel.LibraryTypeOracle;
+import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
@@ -41,7 +43,6 @@ import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -229,6 +230,7 @@ public class CompilationStateBuilder {
         Collection<CompilationUnitBuilder> builders,
         Map<CompilationUnitBuilder, CompilationUnit> cachedUnits, EventType eventType)
         throws UnableToCompleteException {
+      UnitCache unitCache = compilerContext.getUnitCache();
       // Initialize the set of valid classes to the initially cached units.
       for (CompilationUnit unit : cachedUnits.values()) {
         for (CompiledClass cc : unit.getCompiledClasses()) {
@@ -389,12 +391,12 @@ public class CompilationStateBuilder {
   private static final CompilationStateBuilder instance = new CompilationStateBuilder();
 
   /**
-   * Use previously compiled {@link CompilationUnit}s to pre-populate the unit
-   * cache.
+   * Use previously compiled {@link CompilationUnit}s to pre-populate the unit cache.
    */
-  public static void addArchive(CompilationUnitArchive module) {
-    UnitCache unitCache = instance.unitCache;
-    for (CachedCompilationUnit archivedUnit : module.getUnits().values()) {
+  public static void addArchive(
+      CompilerContext compilerContext, CompilationUnitArchive compilationUnitArchive) {
+    UnitCache unitCache = compilerContext.getUnitCache();
+    for (CachedCompilationUnit archivedUnit : compilationUnitArchive.getUnits().values()) {
       if (archivedUnit.getTypesSerializedVersion() != GwtAstBuilder.getSerializationVersion()) {
         continue;
       }
@@ -442,20 +444,6 @@ public class CompilationStateBuilder {
   }
 
   /**
-   * Called to setup the directory where the persistent {@link CompilationUnit}
-   * cache should be stored. Only the first call to init() will have an effect.
-   */
-  public static synchronized void init(TreeLogger logger, File cacheDirectory) {
-    instance.unitCache = UnitCacheFactory.get(logger, cacheDirectory);
-  }
-
-  /**
-   * A cache to store compilation units. This value may be overridden with an
-   * explicit call to {@link #init(TreeLogger, File)}.
-   */
-  private UnitCache unitCache = new MemoryUnitCache();
-
-  /**
    * Build a new compilation state from a source oracle. Allow the caller to
    * specify a compiler delegate that will handle undefined names.
    *
@@ -465,6 +453,7 @@ public class CompilationStateBuilder {
       CompilerContext compilerContext, Set<Resource> resources,
       AdditionalTypeProviderDelegate compilerDelegate)
     throws UnableToCompleteException {
+    UnitCache unitCache = compilerContext.getUnitCache();
 
     // Units we definitely want to build.
     List<CompilationUnitBuilder> builders = new ArrayList<CompilationUnitBuilder>();
@@ -511,7 +500,20 @@ public class CompilationStateBuilder {
     Collection<CompilationUnit> resultUnits = compileMoreLater.compile(
         logger, compilerContext, builders, cachedUnits,
         CompilerEventType.JDT_COMPILER_CSB_FROM_ORACLE);
-    return new CompilationState(logger, resultUnits, compileMoreLater);
+
+    boolean compileMonolithic = compilerContext.shouldCompileMonolithic();
+    TypeOracle typeOracle = null;
+    CompilationUnitTypeOracleUpdater typeOracleUpdater = null;
+    if (compileMonolithic) {
+      typeOracle = new TypeOracle();
+      typeOracleUpdater = new CompilationUnitTypeOracleUpdater(typeOracle);
+    } else {
+      typeOracle = new LibraryTypeOracle(compilerContext);
+      typeOracleUpdater = ((LibraryTypeOracle) typeOracle).getTypeOracleUpdater();
+    }
+
+    return new CompilationState(logger, typeOracle, typeOracleUpdater, resultUnits,
+        compileMoreLater);
   }
 
   public CompilationState doBuildFrom(
@@ -528,6 +530,7 @@ public class CompilationStateBuilder {
   synchronized Collection<CompilationUnit> doBuildGeneratedTypes(TreeLogger logger,
       CompilerContext compilerContext, Collection<GeneratedUnit> generatedUnits,
       CompileMoreLater compileMoreLater) throws UnableToCompleteException {
+    UnitCache unitCache = compilerContext.getUnitCache();
 
     // Units we definitely want to build.
     List<CompilationUnitBuilder> builders = new ArrayList<CompilationUnitBuilder>();

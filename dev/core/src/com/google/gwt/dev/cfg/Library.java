@@ -13,6 +13,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.resource.Resource;
@@ -50,10 +51,11 @@ public interface Library {
   InputStream getClassFileStream(String classFilePath);
 
   /**
-   * Returns the compilation unit with the given type name. The returned compilation unit might be
-   * regular or might be super sourced depending on which was stored during library construction.
+   * Returns the compilation unit with the given type source name. The returned compilation unit
+   * might be regular or might be super sourced depending on which was stored during library
+   * construction.
    */
-  CompilationUnit getCompilationUnitByTypeName(String typeName);
+  CompilationUnit getCompilationUnitByTypeSourceName(String typeSourceName);
 
   /**
    * Returns the set of names of dependency libraries. Facilitates LibraryGroup's library tree
@@ -62,9 +64,19 @@ public interface Library {
   Set<String> getDependencyLibraryNames();
 
   /**
+   * Returns the set of artifacts that were created by generators when compiling this library.
+   */
+  ArtifactSet getGeneratedArtifacts();
+
+  /**
    * Returns the name of the library. Should be unique within the library dependency tree.
    */
   String getLibraryName();
+
+  /**
+   * Returns a mapping from compilation unit type source name to a list of nested type source names.
+   */
+  Multimap<String, String> getNestedNamesByCompilationUnitName();
 
   /**
    * Returns a mapping from binding property name to a list of values which were made legal for that
@@ -105,11 +117,11 @@ public interface Library {
   Set<String> getRanGeneratorNames();
 
   /**
-   * Returns the set of names of types which are the subject of GWT.create() calls in source code
-   * for this library. This list of types is needed for generator execution and reconstructing this
-   * list from source would be very costly.
+   * Returns the set of source names of types which are the subject of GWT.create() calls in source
+   * code for this library. This list of types is needed for generator execution and reconstructing
+   * this list from source would be very costly.
    */
-  Set<String> getReboundTypeNames();
+  Set<String> getReboundTypeSourceNames();
 
   /**
    * Returns the set of regular (non-super-source) class file paths. Facilitates LibraryGroup's fast
@@ -118,11 +130,11 @@ public interface Library {
   Set<String> getRegularClassFilePaths();
 
   /**
-   * Returns the set of regular (non-super-source) compilation unit type names. Facilitates
+   * Returns the set of regular (non-super-source) compilation unit type source names. Facilitates
    * LibraryGroup's fast single compilation unit retrieval across large groups of provided
    * libraries.
    */
-  Set<String> getRegularCompilationUnitTypeNames();
+  Set<String> getRegularCompilationUnitTypeSourceNames();
 
   /**
    * Returns the set of super source class file paths. Facilitates LibraryGroup's fast single class
@@ -132,9 +144,9 @@ public interface Library {
   Set<String> getSuperSourceClassFilePaths();
 
   /**
-   * Returns the set of super source compilation unit type names. Facilitates LibraryGroup's fast
-   * compilation unit retrieval across large groups of provided libraries and makes possible the
-   * prioritization of super source over regular compilation units.
+   * Returns the set of super source compilation unit type source names. Facilitates LibraryGroup's
+   * fast compilation unit retrieval across large groups of provided libraries and makes possible
+   * the prioritization of super source over regular compilation units.
    */
-  Set<String> getSuperSourceCompilationUnitTypeNames();
+  Set<String> getSuperSourceCompilationUnitTypeSourceNames();
 }

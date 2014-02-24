@@ -89,7 +89,16 @@ public final class Impl {
    */
   public static native JavaScriptObject entry(JavaScriptObject jsFunction) /*-{
     return function() {
-      return @com.google.gwt.core.client.impl.Impl::entry0(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)(jsFunction, this, arguments);
+      if (@com.google.gwt.core.client.GWT::isScript()()) {
+        return @com.google.gwt.core.client.impl.Impl::entry0(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)(jsFunction, this, arguments);
+      } else {
+        var _ = @com.google.gwt.core.client.impl.Impl::entry0(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)(jsFunction, this, arguments);
+        if (_ != null) {
+          // Unwraps for Development Mode (see #apply())
+          _ = _.val;
+        }
+        return _;
+      }
     };
   }-*/;
 
@@ -200,11 +209,10 @@ public final class Impl {
     }
 
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler == Impl.uncaughtExceptionHandlerForTest) {
-      return; // Already reported so we're done.
-    }
-
     if (handler != null) {
+      if (handler == Impl.uncaughtExceptionHandlerForTest) {
+        return; // Already reported so we're done.
+      }
       // TODO(goktug): Handler might throw an exception but catching and reporting it to browser
       // here breaks assumptions of some existing hybrid apps that uses UCE for exception
       // conversion. We don't have an alternative functionality (yet) and it is too risky to include
@@ -213,8 +221,13 @@ public final class Impl {
       return; // Done.
     }
 
-    // Make sure that the exception is not swallowed and let the browser handle it
-    reportToBrowser(e);
+    // Make sure that the exception is not swallowed
+    if (GWT.isClient()) {
+      reportToBrowser(e);
+    } else {
+      System.err.print("Uncaught exception ");
+      e.printStackTrace(System.err);
+    }
   }
 
   private static void reportToBrowser(Throwable e) {
@@ -284,8 +297,8 @@ public final class Impl {
     } else {
       var _ = jsFunction.apply(thisObj, args);
       if (_ != null) {
-        // Wrap for Development Mode
-        _ = Object(_);
+        // Wrap for Development Mode (unwrapped in #entry())
+        _ = { val: _ };
       }
       return _;
     }

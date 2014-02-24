@@ -22,7 +22,7 @@ import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.javac.CompilationState;
-import com.google.gwt.dev.javac.CompilationStateBuilder;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.shell.ArtifactAcceptor;
 import com.google.gwt.dev.shell.BrowserChannelServer;
 import com.google.gwt.dev.shell.BrowserListener;
@@ -99,7 +99,7 @@ public abstract class DevModeBase implements DoneCallback {
         ModuleDef moduleDef = loadModule(logger, moduleName, true);
         assert (moduleDef != null);
 
-        ArchivePreloader.preloadArchives(logger, moduleDef);
+        ArchivePreloader.preloadArchives(logger, compilerContext);
 
         CompilationState compilationState = moduleDef.getCompilationState(logger, compilerContext);
         ShellModuleSpaceHost host =
@@ -922,7 +922,8 @@ public abstract class DevModeBase implements DoneCallback {
     ui.initialize(options.getLogLevel());
     topLogger = ui.getTopLogger();
 
-    CompilationStateBuilder.init(getTopLogger(), persistentCacheDir);
+    compilerContext = compilerContextBuilder.unitCache(
+        UnitCacheSingleton.get(getTopLogger(), persistentCacheDir)).build();
 
     // Set done callback
     ui.setCallback(DoneEvent.getType(), this);
@@ -1003,7 +1004,8 @@ public abstract class DevModeBase implements DoneCallback {
         logger.branch(TreeLogger.DEBUG, "Linking module '" + module.getName() + "'");
 
     // Create a new active linker stack for the fresh link.
-    StandardLinkerContext linkerStack = new StandardLinkerContext(linkLogger, module, options);
+    StandardLinkerContext linkerStack = new StandardLinkerContext(
+        linkLogger, module, compilerContext.getPublicResourceOracle(), options);
     ArtifactSet artifacts = linkerStack.getArtifactsForPublicResources(logger, module);
     artifacts = linkerStack.invokeLegacyLinkers(linkLogger, artifacts);
     artifacts = linkerStack.invokeFinalLink(linkLogger, artifacts);
@@ -1024,7 +1026,7 @@ public abstract class DevModeBase implements DoneCallback {
   protected ModuleDef loadModule(TreeLogger logger, String moduleName, boolean refresh)
       throws UnableToCompleteException {
     ModuleDef moduleDef =
-        ModuleDefLoader.loadFromClassPath(logger, compilerContext, moduleName, refresh, true);
+        ModuleDefLoader.loadFromClassPath(logger, compilerContext, moduleName, refresh);
     compilerContext = compilerContextBuilder.module(moduleDef).build();
     assert (moduleDef != null) : "Required module state is absent";
     return moduleDef;

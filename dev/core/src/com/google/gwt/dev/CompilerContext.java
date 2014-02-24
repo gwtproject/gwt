@@ -13,10 +13,14 @@
  */
 package com.google.gwt.dev;
 
+import com.google.gwt.dev.cfg.CombinedResourceOracle;
 import com.google.gwt.dev.cfg.LibraryGroup;
+import com.google.gwt.dev.cfg.LibraryGroupBuildResourceOracle;
+import com.google.gwt.dev.cfg.LibraryGroupPublicResourceOracle;
 import com.google.gwt.dev.cfg.LibraryWriter;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.NullLibraryWriter;
+import com.google.gwt.dev.javac.MemoryUnitCache;
 import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
@@ -36,20 +40,24 @@ public class CompilerContext {
   public static class Builder {
 
     private ResourceOracle buildResourceOracle;
-    private LibraryWriter libraryWriter = new NullLibraryWriter();
+    private boolean compileMonolithic = true;
     private LibraryGroup libraryGroup;
+    private LibraryWriter libraryWriter = new NullLibraryWriter();
     private ModuleDef module;
     private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
     private ResourceOracle publicResourceOracle;
     private ResourceOracle sourceResourceOracle;
-    private UnitCache unitCache;
+    private UnitCache unitCache = new MemoryUnitCache();
 
     public CompilerContext build() {
+      initializeResourceOracles();
+
       CompilerContext compilerContext = new CompilerContext();
       compilerContext.buildResourceOracle = buildResourceOracle;
       compilerContext.libraryWriter = libraryWriter;
       compilerContext.libraryGroup = libraryGroup;
       compilerContext.module = module;
+      compilerContext.compileMonolithic = compileMonolithic;
       compilerContext.options = options;
       compilerContext.publicResourceOracle = publicResourceOracle;
       compilerContext.sourceResourceOracle = sourceResourceOracle;
@@ -57,8 +65,19 @@ public class CompilerContext {
       return compilerContext;
     }
 
-    public Builder buildResourceOracle(ResourceOracle buildResourceOracle) {
-      this.buildResourceOracle = buildResourceOracle;
+    /**
+     * Sets whether compilation should proceed monolithically or separately.
+     */
+    public Builder compileMonolithic(boolean compileMonolithic) {
+      this.compileMonolithic = compileMonolithic;
+      return this;
+    }
+
+    /**
+     * Sets the libraryGroup and uses it to set resource oracles as well.
+     */
+    public Builder libraryGroup(LibraryGroup libraryGroup) {
+      this.libraryGroup = libraryGroup;
       return this;
     }
 
@@ -67,11 +86,9 @@ public class CompilerContext {
       return this;
     }
 
-    public Builder libraryGroup(LibraryGroup libraryGroup) {
-      this.libraryGroup = libraryGroup;
-      return this;
-    }
-
+    /**
+     * Sets the module and uses it to set resource oracles as well.
+     */
     public Builder module(ModuleDef module) {
       this.module = module;
       return this;
@@ -82,25 +99,60 @@ public class CompilerContext {
       return this;
     }
 
-    public Builder publicResourceOracle(ResourceOracle publicResourceOracle) {
-      this.publicResourceOracle = publicResourceOracle;
-      return this;
-    }
-
-    public Builder sourceResourceOracle(ResourceOracle sourceResourceOracle) {
-      this.sourceResourceOracle = sourceResourceOracle;
-      return this;
-    }
-
     public Builder unitCache(UnitCache unitCache) {
       this.unitCache = unitCache;
       return this;
     }
+
+    /**
+     * Initialize source, build, and public resource oracles using the most complete currently
+     * available combination of moduleDef and libraryGroup.<br />
+     *
+     * When executing as part of a monolithic compilation there will likely only be a moduleDef
+     * available. That will result in sourcing resource oracles only from it, which is what
+     * monolithic compilation expects.<br />
+     *
+     * When executing as part of a separate compilation there will likely be both a moduleDef and
+     * libraryGroup available. That will result in sourcing resource oracles from a mixed
+     * combination, which is what separate compilation expects.
+     */
+    private void initializeResourceOracles() {
+      if (libraryGroup != null) {
+        if (module != null) {
+          sourceResourceOracle = module.getSourceResourceOracle();
+          buildResourceOracle = new CombinedResourceOracle(
+              module.getBuildResourceOracle(), new LibraryGroupBuildResourceOracle(libraryGroup));
+          publicResourceOracle = new CombinedResourceOracle(
+              module.getPublicResourceOracle(), new LibraryGroupPublicResourceOracle(libraryGroup));
+        } else {
+          sourceResourceOracle = null;
+          buildResourceOracle = new LibraryGroupBuildResourceOracle(libraryGroup);
+          publicResourceOracle = new LibraryGroupPublicResourceOracle(libraryGroup);
+        }
+      } else {
+        if (module != null) {
+          sourceResourceOracle = module.getSourceResourceOracle();
+          buildResourceOracle = module.getBuildResourceOracle();
+          publicResourceOracle = module.getPublicResourceOracle();
+        } else {
+          sourceResourceOracle = null;
+          buildResourceOracle = null;
+          publicResourceOracle = null;
+        }
+      }
+    }
   }
 
   private ResourceOracle buildResourceOracle;
-  private LibraryWriter libraryWriter = new NullLibraryWriter();
+  /**
+   * Whether compilation should proceed monolithically or separately. It is an example of a
+   * configuration property that is not assignable by command line args. If more of these accumulate
+   * they should be grouped together instead of floating free here.
+   */
+  private boolean compileMonolithic = true;
   private LibraryGroup libraryGroup;
+  private LibraryWriter libraryWriter = new NullLibraryWriter();
+
   private ModuleDef module;
 
   // TODO(stalcup): split this into module parsing, precompilation, compilation, and linking option
@@ -108,7 +160,7 @@ public class CompilerContext {
   private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
   private ResourceOracle publicResourceOracle;
   private ResourceOracle sourceResourceOracle;
-  private UnitCache unitCache;
+  private UnitCache unitCache = new MemoryUnitCache();
 
   /**
    * Walks the parts of the library dependency graph that have not run the given generator
@@ -145,25 +197,25 @@ public class CompilerContext {
 
   public Set<String> gatherNewReboundTypeNamesForGenerator(String generatorName) {
     Set<String> newReboundTypeNames =
-        getLibraryGroup().gatherNewReboundTypeNamesForGenerator(generatorName);
-    newReboundTypeNames.addAll(libraryWriter.getReboundTypeNames());
+        getLibraryGroup().gatherNewReboundTypeSourceNamesForGenerator(generatorName);
+    newReboundTypeNames.addAll(libraryWriter.getReboundTypeSourceNames());
     return newReboundTypeNames;
   }
 
   public Set<String> gatherOldReboundTypeNamesForGenerator(String generatorName) {
-    return getLibraryGroup().gatherOldReboundTypeNamesForGenerator(generatorName);
+    return getLibraryGroup().gatherOldReboundTypeSourceNamesForGenerator(generatorName);
   }
 
   public ResourceOracle getBuildResourceOracle() {
     return buildResourceOracle;
   }
 
-  public LibraryWriter getLibraryWriter() {
-    return libraryWriter;
-  }
-
   public LibraryGroup getLibraryGroup() {
     return libraryGroup;
+  }
+
+  public LibraryWriter getLibraryWriter() {
+    return libraryWriter;
   }
 
   public ModuleDef getModule() {
@@ -184,5 +236,9 @@ public class CompilerContext {
 
   public UnitCache getUnitCache() {
     return unitCache;
+  }
+
+  public boolean shouldCompileMonolithic() {
+    return compileMonolithic;
   }
 }

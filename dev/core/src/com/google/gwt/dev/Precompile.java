@@ -233,7 +233,7 @@ public class Precompile {
     // doesn't block when the library is accessed for the first time.
     new GraphicsInitThread().start();
 
-    ArchivePreloader.preloadArchives(logger, compilerContext.getModule());
+    ArchivePreloader.preloadArchives(logger, compilerContext);
 
     try {
       ModuleDef module = compilerContext.getModule();
@@ -413,8 +413,8 @@ public class Precompile {
           ModuleDefLoader.loadFromClassPath(logger, compilerContext, moduleName);
       compilerContext = compilerContextBuilder.module(module).build();
 
-      StandardLinkerContext linkerContext =
-          new StandardLinkerContext(TreeLogger.NULL, module, options);
+      StandardLinkerContext linkerContext = new StandardLinkerContext(
+          TreeLogger.NULL, module, compilerContext.getPublicResourceOracle(), options);
 
       boolean generateOnShards = true;
 

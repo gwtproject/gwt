@@ -18,8 +18,10 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.JsOutputOption;
+import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.File;
@@ -31,16 +33,20 @@ import java.util.List;
  */
 class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   private final CompileDir compileDir;
+  private final List<String> libraryPaths;
   private final List<String> moduleNames;
   private final SourceLevel sourceLevel;
   private final boolean strictResources;
+  private final TreeLogger.Type logLevel;
 
   CompilerOptionsImpl(CompileDir compileDir, List<String> moduleNames, SourceLevel sourceLevel,
-      boolean strictResources) {
+      boolean strictResources, TreeLogger.Type logLevel) {
     this.compileDir = compileDir;
+    this.libraryPaths = ImmutableList.<String>of();
     this.moduleNames = Lists.newArrayList(moduleNames);
     this.sourceLevel = sourceLevel;
     this.strictResources = strictResources;
+    this.logLevel = logLevel;
   }
 
   @Override
@@ -73,6 +79,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
     return compileDir.getGenDir();
   }
 
+  @Override
+  public List<String> getLibraryPaths() {
+    return libraryPaths;
+  }
+
   /**
    * Number of threads to use to compile permutations.
    */
@@ -83,7 +94,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
 
   @Override
   public TreeLogger.Type getLogLevel() {
-    return TreeLogger.Type.WARN;
+    return logLevel;
   }
 
   @Override
@@ -97,6 +108,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
+  public JsNamespaceOption getNamespace() {
+    return JsNamespaceOption.BY_JAVA_PACKAGE;
+  }
+
+  @Override
   public int getOptimizationLevel() {
     return OptionOptimize.OPTIMIZE_LEVEL_DRAFT;
   }
@@ -107,8 +123,8 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public boolean shouldSaveSource() {
-    return false; // handling this a different way
+  public String getOutputLibraryPath() {
+    return null;
   }
 
   @Override
@@ -213,12 +229,23 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
+  public boolean shouldAddRuntimeChecks() {
+    // TODO set to true in a separate patch
+    return false;
+  }
+
+  @Override
   public boolean shouldClusterSimilarFunctions() {
     return false;
   }
 
   @Override
   public boolean shouldInlineLiteralParameters() {
+    return false;
+  }
+
+  @Override
+  public boolean shouldLink() {
     return false;
   }
 
@@ -235,5 +262,10 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean shouldRemoveDuplicateFunctions() {
     return false;
+  }
+
+  @Override
+  public boolean shouldSaveSource() {
+    return false; // handling this a different way
   }
 }

@@ -13,6 +13,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.resource.Resource;
@@ -44,6 +45,10 @@ public class NullLibraryWriter implements LibraryWriter {
 
   @Override
   public void addDependencyLibraryNames(Set<String> dependencyLibraryNames) {
+  }
+
+  @Override
+  public void addGeneratedArtifacts(ArtifactSet generatedArtifacts) {
   }
 
   @Override
@@ -80,7 +85,7 @@ public class NullLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public Set<String> getReboundTypeNames() {
+  public Set<String> getReboundTypeSourceNames() {
     return strings;
   }
 
@@ -89,7 +94,7 @@ public class NullLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void setReboundTypeNames(Set<String> reboundTypeNames) {
+  public void setReboundTypeSourceNames(Set<String> reboundTypeSourceNames) {
   }
 
   @Override

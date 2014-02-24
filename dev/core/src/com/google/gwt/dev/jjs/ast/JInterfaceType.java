@@ -76,14 +76,17 @@ public class JInterfaceType extends JDeclaredType {
     return null;
   }
 
+  @Override
   public boolean isAbstract() {
     return true;
   }
 
+  @Override
   public boolean isFinal() {
     return false;
   }
 
+  @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       fields = visitor.acceptWithInsertRemoveImmutable(fields);

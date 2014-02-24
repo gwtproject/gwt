@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -76,7 +76,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JSeedIdOf;
+import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
@@ -92,7 +92,6 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
 import com.google.gwt.dev.jjs.ast.js.JsonObject;
-import com.google.gwt.dev.jjs.ast.js.JsCastMap.JsQueryType;
 import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
 import com.google.gwt.dev.util.TextOutput;
@@ -119,7 +118,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_DO = "do".toCharArray();
   protected static final char[] CHARS_DOTCLASS = ".class".toCharArray();
   protected static final char[] CHARS_ELSE = "else".toCharArray();
-  protected static final char[] CHARS_EMPTYDIMS = "[]".toCharArray();
   protected static final char[] CHARS_EXTENDS = "extends ".toCharArray();
   protected static final char[] CHARS_FALSE = "false".toCharArray();
   protected static final char[] CHARS_FINAL = "final ".toCharArray();
@@ -138,7 +136,8 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_PROTECTED = "protected ".toCharArray();
   protected static final char[] CHARS_PUBLIC = "public ".toCharArray();
   protected static final char[] CHARS_RETURN = "return".toCharArray();
-  protected static final char[] CHARS_SEEDIDOF = " JSeedIdOf ".toCharArray();
+  protected static final char[] CHARS_RUNTIMETYPEREFERENCE =
+      " JRuntimeTypeReference ".toCharArray();
   protected static final char[] CHARS_SLASHSTAR = "/*".toCharArray();
   protected static final char[] CHARS_STARSLASH = "*/".toCharArray();
   protected static final char[] CHARS_STATIC = "static ".toCharArray();
@@ -408,6 +407,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JDoStatement x, Context ctx) {
     print(CHARS_DO);
+    needSemi = true;
     if (x.getBody() != null) {
       nestedStatementPush(x.getBody());
       accept(x.getBody());
@@ -689,18 +689,19 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JNameOf x, Context ctx) {
     print(CHARS_SLASHSTAR);
-    print(x instanceof JSeedIdOf ? CHARS_SEEDIDOF : CHARS_NAMEOF);
+    print(CHARS_NAMEOF);
     print(CHARS_STARSLASH);
     printStringLiteral(x.getNode().getName());
     return false;
   }
 
   @Override
-  public boolean visit(JsQueryType x, Context ctx) {
+  public boolean visit(JRuntimeTypeReference x, Context ctx) {
     print(CHARS_SLASHSTAR);
-    printTypeName(x.getQueryType());
+    print(CHARS_RUNTIMETYPEREFERENCE);
     print(CHARS_STARSLASH);
-    return super.visit(x, ctx);
+    printStringLiteral(x.getReferredType().getName());
+    return false;
   }
 
   @Override

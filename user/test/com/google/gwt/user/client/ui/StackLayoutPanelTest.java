@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.BeforeSelectionEvent;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;
@@ -31,6 +32,7 @@ import java.util.List;
  */
 public class StackLayoutPanelTest extends WidgetTestBase {
   static class Adder implements HasWidgetsTester.WidgetAdder {
+    @Override
     public void addChild(HasWidgets container, Widget child) {
       ((StackLayoutPanel) container).add(child, new Label("Header"), 1);
     }
@@ -51,11 +53,13 @@ public class StackLayoutPanelTest extends WidgetTestBase {
       assertEquals(expected, onSelectionFired);
     }
 
+    @Override
     public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
       assertFalse(onSelectionFired);
       onBeforeSelectionFired = true;
     }
 
+    @Override
     public void onSelection(SelectionEvent<Integer> event) {
       assertTrue(onBeforeSelectionFired);
       onSelectionFired = true;
@@ -122,7 +126,7 @@ public class StackLayoutPanelTest extends WidgetTestBase {
 
     assertEquals(1, panel.getWidgetCount());
     assertEquals(html,
-        panel.getHeaderWidget(0).getElement().getInnerHTML().toLowerCase());
+        StringCase.toLower(panel.getHeaderWidget(0).getElement().getInnerHTML()));
   }
 
   public void testAttachDetachOrder() {
@@ -180,7 +184,7 @@ public class StackLayoutPanelTest extends WidgetTestBase {
 
     assertEquals(1, panel.getWidgetCount());
     assertEquals(html,
-        panel.getHeaderWidget(0).getElement().getInnerHTML().toLowerCase());
+        StringCase.toLower(panel.getHeaderWidget(0).getElement().getInnerHTML()));
   }
 
   public void testInsertWithHTML() {
@@ -321,7 +325,7 @@ public class StackLayoutPanelTest extends WidgetTestBase {
     panel.setHeaderHTML(0, SafeHtmlUtils.fromSafeConstant(html));
     Widget header = panel.getHeaderWidget(0);
 
-    assertEquals(html, header.getElement().getInnerHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(header.getElement().getInnerHTML()));
   }
 
   /**

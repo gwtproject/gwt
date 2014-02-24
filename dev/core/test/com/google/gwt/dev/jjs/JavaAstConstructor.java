@@ -64,9 +64,9 @@ public class JavaAstConstructor {
       code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
       code.append("public final class Array {\n");
       code.append("  static void setCheck(Array array, int index, Object value) { }\n");
-      code.append("  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap, int queryId, int length, int seedType) { }\n");
-      code.append("  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs, int[] queryIdExprs, int[] dimExprs, int count, int seedType) { }\n");
-      code.append("  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap, int queryId, Array array) { }\n");
+      code.append("  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap, int elementTypeId, int elementTypeClass, int length) { }\n");
+      code.append("  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs, int[] elementTypeIds, int leafElementTypeClass, int[] dimExprs, int count) { }\n");
+      code.append("  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap, int elementTypeId, int elementTypeClass, Array array) { }\n");
       code.append("  public int length = 0;\n");
       code.append("  protected Class<?> arrayClass = null;\n");
       code.append("}\n");
@@ -78,7 +78,10 @@ public class JavaAstConstructor {
     public CharSequence getContent() {
       StringBuilder code = new StringBuilder();
       code.append("package com.google.gwt.lang;\n");
+      code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
       code.append("public final class Cast {\n");
+      code.append("  private static JavaScriptObject stringCastMap;\n");
+      code.append("  public static native String charToString(char x) /*-{ }-*/;\n");
       code.append("  public static Object dynamicCast(Object src, int dstId) { return src;}\n");
       code.append("  public static boolean instanceOf(Object src, int dstId) { return false;}\n");
       code.append("  public static native boolean isNull(Object a) /*-{ }-*/;\n");
@@ -96,9 +99,9 @@ public class JavaAstConstructor {
       code.append("package java.lang;\n");
       code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
       code.append("public final class Class<T> {\n");
-      code.append("  static <T> Class<T> createForArray(String packageName, String className, String seedName, Class<?> componentType) { return new Class<T>(); }\n");
-      code.append("  static <T> Class<T> createForClass(String packageName, String className, String seedName, Class<? super T> superclass) { return new Class<T>(); }\n");
-      code.append("  static <T> Class<T> createForEnum(String packageName, String className, String seedName, Class<? super T> superclass, JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) { return new Class<T>(); }\n");
+      code.append("  static <T> Class<T> createForArray(String packageName, String className, String typeId, Class<?> componentType) { return new Class<T>(); }\n");
+      code.append("  static <T> Class<T> createForClass(String packageName, String className, String typeId, Class<? super T> superclass) { return new Class<T>(); }\n");
+      code.append("  static <T> Class<T> createForEnum(String packageName, String className, String typeId, Class<? super T> superclass, JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) { return new Class<T>(); }\n");
       code.append("  static <T> Class<T> createForInterface(String packageName, String className) { return new Class<T>(); }\n");
       code.append("  static <T> Class<T> createForPrimitive(String packageName, String className, String jni) { return new Class<T>(); }\n");
       code.append("  static boolean isClassMetadataEnabled() { return true; }\n");
@@ -185,6 +188,7 @@ public class JavaAstConstructor {
       code.append("package com.google.gwt.core.client;\n");
       code.append("public interface RunAsyncCallback {\n");
       code.append("  void onSuccess();\n");
+      code.append("  void onFailure(Throwable reason);\n");
       code.append("}\n");
       return code;
     }

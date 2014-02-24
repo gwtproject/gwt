@@ -127,10 +127,12 @@ public class RequestBuilderTest extends RequestTestBase {
       RequestBuilder builder = new RequestBuilder(RequestBuilder.GET,
           "http://www.freebsd.org");
       builder.sendRequest(null, new RequestCallback() {
+        @Override
         public void onError(Request request, Throwable exception) {
           // should never get here
         }
 
+        @Override
         public void onResponseReceived(Request request, Response response) {
           // should never get here
         }
@@ -194,11 +196,6 @@ public class RequestBuilderTest extends RequestTestBase {
     testSend(builder, SERVLET_GET_RESPONSE);
   }
 
-  /*
-   * Need to file an HtmlUnit bug. TODO(amitmanjhi): contribute an HtmlUnit
-   * patch.
-   */
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testSend_HEAD() throws RequestException {
     RequestBuilder builder = new RequestBuilder(RequestBuilder.HEAD,
         getTestBaseURL());
@@ -233,11 +230,6 @@ public class RequestBuilderTest extends RequestTestBase {
     testSendRequest(builder, null, SERVLET_GET_RESPONSE);
   }
 
-  /*
-   * Need to file an HtmlUnit bug. TODO(amitmanjhi): contribute an HtmlUnit
-   * patch.
-   */
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testSendRequest_HEAD() throws RequestException {
     RequestBuilder builder = new RequestBuilder(RequestBuilder.HEAD,
         getTestBaseURL());
@@ -342,10 +334,12 @@ public class RequestBuilderTest extends RequestTestBase {
     builder.setHeader("Foo", "Bar1");
 
     builder.sendRequest(null, new RequestCallback() {
+      @Override
       public void onError(Request request, Throwable exception) {
         fail(exception.getMessage());
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         assertEquals(SERVLET_GET_RESPONSE, response.getText());
         assertEquals(200, response.getStatusCode());
@@ -372,10 +366,12 @@ public class RequestBuilderTest extends RequestTestBase {
         getTestBaseURL() + "setTimeout/noTimeout");
     builder.setTimeoutMillis(10000);
     builder.sendRequest(null, new RequestCallback() {
+      @Override
       public void onError(Request request, Throwable exception) {
         fail(exception.getMessage());
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         assertEquals(SERVLET_GET_RESPONSE, response.getText());
         assertEquals(200, response.getStatusCode());
@@ -405,10 +401,12 @@ public class RequestBuilderTest extends RequestTestBase {
         getTestBaseURL() + "setTimeout/timeout");
     builder.setTimeoutMillis(2000);
     builder.sendRequest(null, new RequestCallback() {
+      @Override
       public void onError(Request request, Throwable exception) {
         finishTest();
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         assertEquals(SERVLET_GET_RESPONSE, response.getText());
         assertEquals(200, response.getStatusCode());
@@ -443,10 +441,12 @@ public class RequestBuilderTest extends RequestTestBase {
       throws RequestException {
     delayTestFinishForRequest();
     builder.setCallback(new RequestCallback() {
+      @Override
       public void onError(Request request, Throwable exception) {
         fail(exception.getMessage());
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         assertEquals(expectedResponse, response.getText());
         assertEquals(200, response.getStatusCode());
@@ -468,10 +468,12 @@ public class RequestBuilderTest extends RequestTestBase {
       final String expectedResponse) throws RequestException {
     delayTestFinishForRequest();
     builder.sendRequest(requestData, new RequestCallback() {
+      @Override
       public void onError(Request request, Throwable exception) {
         fail(exception.getMessage());
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         assertEquals(expectedResponse, response.getText());
         assertEquals(200, response.getStatusCode());

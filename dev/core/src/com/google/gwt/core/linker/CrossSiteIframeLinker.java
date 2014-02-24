@@ -236,9 +236,13 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
    * (May return either the JavaScript itself or the name of a Java resource ending with ".js".)
    */
   protected String getJsDevModeRedirectHook(LinkerContext context) {
+    if (shouldUseSelfForWindowAndDocument(context)) {
+      // Probably a Web Worker. Super Dev Mode isn't supported.
+      return "";
+    }
+
     // Enable Super Dev Mode for this app if the devModeRedirectEnabled config property is true.
-    // TODO(skybrian) Change the default to enabled once we're sure it's safe.
-    if (getBooleanConfigurationProperty(context, "devModeRedirectEnabled", false)) {
+    if (getBooleanConfigurationProperty(context, "devModeRedirectEnabled", true)) {
       return "com/google/gwt/core/linker/DevModeRedirectHook.js";
     } else {
       return "";
@@ -254,11 +258,12 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
   protected String getJsDevModeUrlValidation(LinkerContext context) {
     // As a default, if the user provides devModeUrlWhitelistRegexp, then we verify that it
     // matches devModeUrl.
-    String regexp = getStringConfigurationProperty(context, "devModeUrlWhitelistRegexp", "");
+    String regexp = getStringConfigurationProperty(context, "devModeUrlWhitelistRegexp",
+        "http://(localhost|127\\.0\\.0\\.1)(:\\d+)?/.*");
     if (!regexp.isEmpty()) {
       return ""
           + "if (!/^" + regexp.replace("/", "\\/") + "$/.test(devModeUrl)) {\n"
-          + "  if (window.console && console.log) {\n"
+          + "  if (devModeUrl && window.console && console.log) {\n"
           + "    console.log('Ignoring non-whitelisted Dev Mode URL: ' + devModeUrl);\n"
           + "  }\n"
           + "  devModeUrl = '';"
@@ -418,7 +423,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.print("var $doc = $wnd.document;");
 
     // The functions for runAsync are set up in the bootstrap script so they
-    // can be overriden in the same way as other bootstrap code is, however
+    // can be overridden in the same way as other bootstrap code is, however
     // they will be called from, and expected to run in the scope of the GWT code
     // (usually an iframe) so, here we set up those pointers.
     out.print("function __gwtStartLoadingFragment(frag) {");
@@ -431,6 +436,22 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.print("}");
     out.newlineOpt();
     out.print("function __gwtInstallCode(code) {return __gwtModuleFunction.__installRunAsyncCode(code);}");
+    out.newlineOpt();
+
+    // The functions for property access are set up in the bootstrap script however
+    // they will be called from, and expected to run in the scope of the GWT code
+    // (usually an iframe) so, here we set up those pointers.
+    out.print("function __gwt_isKnownPropertyValue(propName, propValue) {");
+    out.newlineOpt();
+    out.print("return __gwtModuleFunction.__gwt_isKnownPropertyValue(propName, propValue);");
+    out.newlineOpt();
+    out.print("}");
+    out.newlineOpt();
+    out.print("function __gwt_getMetaProperty(name) {");
+    out.newlineOpt();
+    out.print("return __gwtModuleFunction.__gwt_getMetaProperty(name);");
+    out.newlineOpt();
+    out.print("}");
     out.newlineOpt();
 
     // Even though we call the $sendStats function in the code written in this

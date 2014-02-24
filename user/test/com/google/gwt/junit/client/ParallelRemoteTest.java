@@ -15,6 +15,8 @@
  */
 package com.google.gwt.junit.client;
 
+import com.google.gwt.core.shared.impl.StringCase;
+
 /**
  * This class tests the -remoteweb parallel execution features in GWT's JUnit
  * support. This test should not be part of the automatically run test suite,
@@ -29,33 +31,34 @@ package com.google.gwt.junit.client;
  */
 public class ParallelRemoteTest extends GWTTestCase {
 
+  @Override
   public String getModuleName() {
     return "com.google.gwt.junit.JUnit";
   }
 
   public void testAssertFailsOnNotIE() {
-    String agent = getAgent().toLowerCase();
+    String agent = StringCase.toLower(getAgent());
     if (agent.indexOf("msie") == -1) {
       fail("Browser is not IE.");
     }
   }
 
   public void testAssertFailsOnNotSafari() {
-    String agent = getAgent().toLowerCase();
+    String agent = StringCase.toLower(getAgent());
     if (agent.indexOf("safari") == -1) {
       fail("Browser is not Safari.");
     }
   }
 
   public void testExceptionFailsOnNotIE() {
-    String agent = getAgent().toLowerCase();
+    String agent = StringCase.toLower(getAgent());
     if (agent.indexOf("msie") == -1) {
       throw new RuntimeException("Browser is not IE.");
     }
   }
 
   public void testExceptionFailsOnNotSafari() {
-    String agent = getAgent().toLowerCase();
+    String agent = StringCase.toLower(getAgent());
     if (agent.indexOf("safari") == -1) {
       throw new RuntimeException("Browser is not Safari.");
     }

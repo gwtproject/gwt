@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,7 +42,7 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JSeedIdOf;
+import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
@@ -71,14 +71,14 @@ import java.util.Stack;
  * a global level based on method calls and new operations; it does not perform
  * any local code flow analysis. But, a local code flow optimization pass that
  * can eliminate method calls would allow Pruner to prune additional nodes.
- * 
+ *
  * Note: references to pruned types may still exist in the tree after this pass
  * runs, however, it should only be in contexts that do not rely on any code
  * generation for the pruned type. For example, it's legal to have a variable of
  * a pruned type, or to try to cast to a pruned type. These will cause natural
  * failures at run time; or later optimizations might be able to hard-code
  * failures at compile time.
- * 
+ *
  * Note: this class is limited to pruning parameters of static methods only.
  */
 public class Pruner {
@@ -206,9 +206,9 @@ public class Pruner {
     }
 
     @Override
-    public void endVisit(JSeedIdOf x, Context ctx) {
-      if (x.getNode() instanceof JClassType) {
-        endVisit((JNameOf) x, ctx);  
+    public void endVisit(JRuntimeTypeReference x, Context ctx) {
+      if (!program.typeOracle.isInstantiatedType(x.getReferredType())) {
+        ctx.replaceMe(program.getLiteralNull());
       }
     }
 
@@ -367,6 +367,7 @@ public class Pruner {
           // Never prune clinit directly out of the class.
           if (i > 0) {
             type.removeMethod(i);
+            program.removeStaticImplMapping(method);
             madeChanges();
             --i;
           }
@@ -399,6 +400,7 @@ public class Pruner {
         // all other interface methods are instance and abstract
         if (!isInstantiated || !referencedNonTypes.contains(method)) {
           type.removeMethod(i);
+          assert program.instanceMethodForStaticImpl(method) == null;
           madeChanges();
           --i;
         }
@@ -414,7 +416,7 @@ public class Pruner {
          * Don't prune parameters on unreferenced methods. The methods might not
          * be reachable through the current method traversal routines, but might
          * be used or checked elsewhere.
-         * 
+         *
          * Basically, if we never actually checked if the method parameters were
          * used or not, don't prune them. Doing so would leave a number of
          * dangling JParameterRefs that blow up in later optimizations.
@@ -429,12 +431,13 @@ public class Pruner {
          * devirtualizations. If the instance method has been pruned, then it's
          * okay. Also, it's okay on the final pass (saveCodeTypes == false)
          * since no more devirtualizations will occur.
-         * 
+         *
          * TODO: prune params; MakeCallsStatic smarter to account for it.
          */
-        JMethod staticImplFor = program.staticImplFor(x);
+        JMethod instanceMethod = program.instanceMethodForStaticImpl(x);
         // Unless the instance method has already been pruned, of course.
-        if (saveCodeGenTypes && staticImplFor != null && referencedNonTypes.contains(staticImplFor)) {
+        if (saveCodeGenTypes && instanceMethod != null &&
+            referencedNonTypes.contains(instanceMethod)) {
           // instance method is still live
           return true;
         }
@@ -517,7 +520,7 @@ public class Pruner {
      * never be rescured. This in turn causes invalid references to static
      * methods, which violates otherwise good assumptions about compiler
      * operation.
-     * 
+     *
      * TODO: Remove this when ControlFlowAnalyzer doesn't special-case
      * CLH.clinit().
      */
@@ -558,7 +561,7 @@ public class Pruner {
        * never be rescured. This in turn causes invalid references to static
        * methods, which violates otherwise good assumptions about compiler
        * operation.
-       * 
+       *
        * TODO: Remove this when ControlFlowAnalyzer doesn't special-case
        * CLH.clinit().
        */

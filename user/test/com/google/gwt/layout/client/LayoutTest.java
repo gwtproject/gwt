@@ -303,7 +303,6 @@ public class LayoutTest extends GWTTestCase {
    * bottom-height). Ok, so we don't test the *entire* cross-product, but enough
    * to be comfortable.
    */
-  @DoNotRunWith(Platform.HtmlUnitLayout)
   public void testStaticConstraints() {
     // This test assumes enough size. Ignore it if size cannot be guaranteed.
     if (!ResizeHelper.isResizeSupported()) {
@@ -346,7 +345,6 @@ public class LayoutTest extends GWTTestCase {
   /**
    * Tests all unit types.
    */
-  @DoNotRunWith(Platform.HtmlUnitLayout)
   public void testUnits() {
     // This test assumes enough size. Ignore it if size cannot be guaranteed.
     if (!ResizeHelper.isResizeSupported()) {
@@ -494,6 +492,7 @@ public class LayoutTest extends GWTTestCase {
   private void testAnimationTransitions_LTWH_LTRB(final Unit unit0,
       final Unit unit1) {
     testAnimationTransitionsHelper(new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l0.setLeftWidth(0, unit0, 10, unit0);
         l0.setTopHeight(0, unit0, 10, unit0);
@@ -501,6 +500,7 @@ public class LayoutTest extends GWTTestCase {
         l1.setTopBottom(1, unit1, 1, unit1);
       }
     }, new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l1.setLeftWidth(0, unit0, 10, unit0);
         l1.setTopHeight(0, unit0, 10, unit0);
@@ -515,6 +515,7 @@ public class LayoutTest extends GWTTestCase {
   private void testAnimationTransitions_LTWH_RBWH(final Unit unit0,
       final Unit unit1) {
     testAnimationTransitionsHelper(new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l0.setLeftWidth(0, unit0, 10, unit0);
         l0.setTopHeight(0, unit0, 10, unit0);
@@ -522,6 +523,7 @@ public class LayoutTest extends GWTTestCase {
         l1.setBottomHeight(0, unit1, 10, unit1);
       }
     }, new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l1.setLeftWidth(0, unit0, 10, unit0);
         l1.setTopHeight(0, unit0, 10, unit0);
@@ -536,6 +538,7 @@ public class LayoutTest extends GWTTestCase {
   private void testAnimationTransitions_RBWH_LTRB(final Unit unit0,
       final Unit unit1) {
     testAnimationTransitionsHelper(new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l0.setRightWidth(0, unit0, 10, unit0);
         l0.setBottomHeight(0, unit0, 10, unit0);
@@ -543,6 +546,7 @@ public class LayoutTest extends GWTTestCase {
         l1.setTopBottom(1, unit1, 1, unit1);
       }
     }, new LayerInitializer() {
+      @Override
       public void setupLayers(Layer l0, Layer l1) {
         l1.setRightWidth(0, unit0, 10, unit0);
         l1.setBottomHeight(0, unit0, 10, unit0);
@@ -572,6 +576,7 @@ public class LayoutTest extends GWTTestCase {
     after.setupLayers(layer0, layer1);
     delayTestFinish(TEST_DELAY);
     layout.layout(100, new Layout.AnimationCallback() {
+      @Override
       public void onAnimationComplete() {
         // Assert that the two layers have swapped positions.
         assertEquals(l0, wrapper1.getOffsetLeft());
@@ -587,6 +592,7 @@ public class LayoutTest extends GWTTestCase {
         finishTest();
       }
 
+      @Override
       public void onLayout(Layer layer, double progress) {
       }
     });

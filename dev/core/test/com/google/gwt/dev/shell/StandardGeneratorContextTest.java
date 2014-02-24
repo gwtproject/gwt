@@ -148,7 +148,6 @@ public class StandardGeneratorContextTest extends TestCase {
     genCtx.setCurrentGenerator(MockGenerator.class);
     GeneratedResource res = genCtx.commitResource(mockLogger, os);
     assertEquals(path, res.getPartialPath());
-    assertEquals(MockGenerator.class, res.getGenerator());
     assertEquals(1, artifactSet.size());
     assertTrue(artifactSet.contains(res));
     try {
@@ -261,7 +260,6 @@ public class StandardGeneratorContextTest extends TestCase {
    * file is already on the public path.
    *
    * @throws UnableToCompleteException
-   * @throws IOException
    */
   public void testTryCreateResource_outputFileOnPublicPath()
       throws UnableToCompleteException {

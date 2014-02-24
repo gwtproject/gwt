@@ -15,6 +15,7 @@
  */
 package java.lang;
 
+import com.google.gwt.core.client.JsDate;
 import com.google.gwt.core.client.impl.Impl;
 
 import java.io.PrintStream;
@@ -84,13 +85,13 @@ public final class System {
           destArray[destOfs++] = srcArray[srcOfs++];
         }
       }
-    } else {
+    } else if (len > 0) {
       nativeArraycopy(src, srcOfs, dest, destOfs, len);
     }
   }
 
   public static long currentTimeMillis() {
-    return (long) currentTimeMillis0();
+    return (long) JsDate.now();
   }
 
   /**
@@ -129,10 +130,6 @@ public final class System {
     }
   }
 
-  private static native double currentTimeMillis0() /*-{
-    return (new Date()).getTime();
-  }-*/;
-
   /**
    * Returns the length of an array via Javascript.
    */
@@ -142,8 +139,9 @@ public final class System {
 
   /**
    * Copy an array using native Javascript. The destination array must be a real
-   * Java array (ie, already has the GWT type info on it). No error checking is
-   * performed -- the caller is expected to have verified everything first.
+   * Java array (ie, already has the GWT type info on it) with enough capacity for the additional
+   * elements. No error checking is performed -- the caller is expected to have verified
+   * everything first.
    *
    * @param src source array for copy
    * @param srcOfs offset into source array
@@ -151,9 +149,22 @@ public final class System {
    * @param destOfs offset into destination array
    * @param len number of elements to copy
    */
-  private static native void nativeArraycopy(Object src, int srcOfs, Object dest, int destOfs,
-      int len) /*-{
-    Array.prototype.splice.apply(dest, [destOfs, len].concat(src.slice(srcOfs, srcOfs + len)));
+  private static native void nativeArraycopy(
+      Object src, int srcOfs, Object dest, int destOfs, int len) /*-{
+    // Work around function.prototype.apply call stack size limits.
+    // Performance: http://jsperf.com/java-system-arraycopy/2
+    if (src === dest) {
+      // copying to the same array, make a copy first
+      src = src.slice(srcOfs, srcOfs + len);
+      srcOfs = 0;
+    }
+    for (var batchStart = srcOfs, end = srcOfs + len; batchStart < end;) { // increment in block
+      var batchEnd = Math.min(batchStart + 10000, end);
+      len = batchEnd - batchStart;
+      Array.prototype.splice.apply(dest, [destOfs, len].concat(src.slice(batchStart, batchEnd)));
+      batchStart = batchEnd;
+      destOfs += len;
+    }
   }-*/;
 
 }

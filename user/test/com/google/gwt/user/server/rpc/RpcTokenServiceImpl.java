@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.server.rpc;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.user.client.rpc.RpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenTestService;
 
@@ -26,12 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 public class RpcTokenServiceImpl extends RpcTokenAwareRemoteService 
     implements RpcTokenTestService {
 
+  @Override
   public void test() { }
   
+  @Override
   public String capitalize(String input) {
-    return input.toUpperCase();
+    return StringCase.toUpper(input);
   }
   
+  @Override
   public RpcToken getRpcTokenFromRequest() {
     HttpServletRequest req = getThreadLocalRequest();
     RpcToken token = (RpcToken) req.getAttribute(RpcTokenAwareRemoteService.TOKEN);

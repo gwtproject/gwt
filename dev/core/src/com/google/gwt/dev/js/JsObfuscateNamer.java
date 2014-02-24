@@ -50,6 +50,7 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
    * Returns a valid unused obfuscated top scope name by keeping track of the last (highest)
    * name produced.
    */
+  @Override
   public String getFreshName() {
     String newIdent;
     while (true) {
@@ -132,7 +133,7 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
   }
 
   private boolean isLegal(JsScope scope, String newIdent) {
-    if (!isAvailableIdent(newIdent)) {
+    if (!reserved.isAvailable(newIdent)) {
       return false;
     }
     /*

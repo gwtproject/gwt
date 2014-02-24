@@ -36,10 +36,14 @@ public class JParameter implements com.google.gwt.core.ext.typeinfo.JParameter {
 
   private JType type;
 
+  /**
+   * Creates a new JParameter from an existing one.
+   */
   JParameter(JAbstractMethod enclosingMethod, JParameter srcParam) {
     this.enclosingMethod = enclosingMethod;
     this.type = srcParam.type;
-    this.name = StringInterner.get().intern(srcParam.name);
+    this.name = srcParam.name;
+    this.argNameIsReal = srcParam.argNameIsReal;
     this.annotations = srcParam.annotations;
   }
 
@@ -56,32 +60,39 @@ public class JParameter implements com.google.gwt.core.ext.typeinfo.JParameter {
     annotations = ImmutableAnnotations.EMPTY.plus(declaredAnnotations);
   }
 
+  @Override
   public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
     return annotations.getAnnotation(annotationClass);
   }
 
+  @Override
   public Annotation[] getAnnotations() {
     return annotations.getAnnotations();
   }
 
+  @Override
   public Annotation[] getDeclaredAnnotations() {
     return annotations.getDeclaredAnnotations();
   }
 
+  @Override
   public JAbstractMethod getEnclosingMethod() {
     return enclosingMethod;
   }
 
+  @Override
   @Deprecated
   public final String[][] getMetaData(String tagName) {
     return TypeOracle.NO_STRING_ARR_ARR;
   }
 
+  @Override
   @Deprecated
   public final String[] getMetaDataTags() {
     return TypeOracle.NO_STRINGS;
   }
 
+  @Override
   public String getName() {
     if (!argNameIsReal) {
       name = enclosingMethod.getRealParameterName(this);
@@ -90,10 +101,12 @@ public class JParameter implements com.google.gwt.core.ext.typeinfo.JParameter {
     return name;
   }
 
+  @Override
   public JType getType() {
     return type;
   }
 
+  @Override
   public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
     return annotations.isAnnotationPresent(annotationClass);
   }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,59 +30,66 @@ import java.util.Comparator;
 
 /**
  * Intrinsic string class.
- * 
- * TODO(jat): consider whether we want to support the following methods;
- * 
- * <ul>
- * <li>deprecated methods dealing with bytes (I assume not since I can't see
- * much use for them)
- * <ul>
- * <li>String(byte[] ascii, int hibyte)
- * <li>String(byte[] ascii, int hibyte, int offset, int count)
- * <li>getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin)
- * </ul>
- * <li>methods which in JS will essentially do nothing or be the same as other
- * methods
- * <ul>
- * <li>copyValueOf(char[] data)
- * <li>copyValueOf(char[] data, int offset, int count)
- * </ul>
- * <li>methods added in Java 1.6 (the issue is how will it impact users
- * building against Java 1.5)
- * <ul>
- * <li>isEmpty()
- * </ul>
- * <li>other methods which are not straightforward in JS
- * <ul>
- * <li>format(String format, Object... args)
- * </ul>
- * </ul>
- * 
- * Also, in general, we need to improve our support of non-ASCII characters. The
- * problem is that correct support requires large tables, and we don't want to
- * make users who aren't going to use that pay for it. There are two ways to do
- * that:
- * <ol>
- * <li>construct the tables in such a way that if the corresponding method is
- * not called the table will be elided from the output.
- * <li>provide a deferred binding target selecting the level of compatibility
- * required. Those that only need ASCII (or perhaps a different relatively small
- * subset such as Latin1-5) will not pay for large tables, even if they do call
- * toLowercase(), for example.
- * </ol>
- * 
- * Also, if we ever add multi-locale support, there are a number of other
- * methods such as toLowercase(Locale) we will want to consider supporting. This
- * is probably rare, but there will be some apps (such as a translation tool)
- * which cannot be written without this support.
- * 
- * Another category of incomplete support is that we currently just use the JS
- * regex support, which is not exactly the same as Java. We should support Java
- * syntax by mapping it into equivalent JS patterns, or emulating them.
  */
+
 public final class String implements Comparable<String>, CharSequence,
     Serializable {
+  /* TODO(jat): consider whether we want to support the following methods;
+   *
+   * <ul>
+   * <li>deprecated methods dealing with bytes (I assume not since I can't see
+   * much use for them)
+   * <ul>
+   * <li>String(byte[] ascii, int hibyte)
+   * <li>String(byte[] ascii, int hibyte, int offset, int count)
+   * <li>getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin)
+   * </ul>
+   * <li>methods which in JS will essentially do nothing or be the same as other
+   * methods
+   * <ul>
+   * <li>copyValueOf(char[] data)
+   * <li>copyValueOf(char[] data, int offset, int count)
+   * </ul>
+   * <li>methods added in Java 1.6 (the issue is how will it impact users
+   * building against Java 1.5)
+   * <ul>
+   * <li>isEmpty()
+   * </ul>
+   * <li>other methods which are not straightforward in JS
+   * <ul>
+   * <li>format(String format, Object... args)
+   * </ul>
+   * </ul>
+   *
+   * <p>Also, in general, we need to improve our support of non-ASCII characters. The
+   * problem is that correct support requires large tables, and we don't want to
+   * make users who aren't going to use that pay for it. There are two ways to do
+   * that:
+   * <ol>
+   * <li>construct the tables in such a way that if the corresponding method is
+   * not called the table will be elided from the output.
+   * <li>provide a deferred binding target selecting the level of compatibility
+   * required. Those that only need ASCII (or perhaps a different relatively small
+   * subset such as Latin1-5) will not pay for large tables, even if they do call
+   * toLowercase(), for example.
+   * </ol>
+   *
+   * Also, if we ever add multi-locale support, there are a number of other
+   * methods such as toLowercase(Locale) we will want to consider supporting. This
+   * is probably rare, but there will be some apps (such as a translation tool)
+   * which cannot be written without this support.
+   *
+   * Another category of incomplete support is that we currently just use the JS
+   * regex support, which is not exactly the same as Java. We should support Java
+   * syntax by mapping it into equivalent JS patterns, or emulating them.
+   *
+   * IMPORTANT NOTE: if newer JREs add new interfaces to String, please update
+   * {@link JsoDevirtualizer} and {@link JavaResourceBase}
+   */
 
+  /**
+   * Hashcode caching for strings.
+   */
   static final class HashCache {
     /**
      * The "old" cache; it will be dumped when front is full.
@@ -148,7 +155,7 @@ public final class String implements Comparable<String>, CharSequence,
       while (i < n) {
         hashCode = hashCode * 31 + str.charAt(i++);
       }
-      
+
       // TODO: make a JSNI call in case JDT gets smart about removing this
       // Do a final fitting to 32 bits
       return hashCode | 0;
@@ -197,11 +204,9 @@ public final class String implements Comparable<String>, CharSequence,
     return __valueOf(x, offset, end);
   }
 
-  public static native String valueOf(char[] x) /*-{
-    // Trick: fromCharCode is a vararg method, so we can use apply() to pass the
-    // entire input in one shot.
-    return String.fromCharCode.apply(null, x);
-  }-*/;
+  public static String valueOf(char[] x) {
+    return __valueOf(x, 0, x.length);
+  }
 
   public static String valueOf(double x) {
     return "" + x;
@@ -227,7 +232,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   /**
    * Checks that bounds are correct.
-   * 
+   *
    * @param legalCount the end of the legal range
    * @param start must be >= 0
    * @param end must be <= legalCount and must be >= start
@@ -257,7 +262,7 @@ public final class String implements Comparable<String>, CharSequence,
    * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
    * dollar signs "$$", and removes all other lone backslashes, which serve as
    * escapes in Java but are passed through literally in JavaScript.
-   * 
+   *
    * @skip
    */
   static String __translateReplaceString(String replaceStr) {
@@ -274,10 +279,15 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   static native String __valueOf(char x[], int start, int end) /*-{
-    // Trick: fromCharCode is a vararg method, so we can use apply() to pass the
-    // entire input in one shot.
-    x = x.slice(start, end);
-    return String.fromCharCode.apply(null, x);
+    // Work around function.prototype.apply call stack size limits.
+    // Performance: http://jsperf.com/string-fromcharcode-test/13
+    var s = "";
+    for (var batchStart = start; batchStart < end;) { // increment in block
+      var batchEnd = Math.min(batchStart + 10000, end);
+      s += String.fromCharCode.apply(null, x.slice(batchStart, batchEnd));
+      batchStart = batchEnd;
+    }
+    return s;
   }-*/;
 
   /**
@@ -306,9 +316,9 @@ public final class String implements Comparable<String>, CharSequence,
    */
   static String _String(byte[] bytes, int ofs, int len, String charset)
       throws UnsupportedEncodingException {
-    if (CHARSET_UTF8.equals(charset)) {
+    if (CHARSET_UTF8.equalsIgnoreCase(charset)) {
       return utf8ToString(bytes, ofs, len);
-    } else if (CHARSET_8859_1.equals(charset) || CHARSET_LATIN1.equals(charset)) {
+    } else if (CHARSET_8859_1.equalsIgnoreCase(charset) || CHARSET_LATIN1.equalsIgnoreCase(charset)) {
       return latin1ToString(bytes, ofs, len);
     } else {
       throw new UnsupportedEncodingException("Charset " + charset
@@ -389,7 +399,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   /**
    * Encode a single character in UTF8.
-   * 
+   *
    * @param bytes byte array to store character in
    * @param ofs offset into byte array to store first byte
    * @param codePoint character to encode
@@ -691,10 +701,10 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public byte[] getBytes(String charSet) throws UnsupportedEncodingException {
-    if (CHARSET_UTF8.equals(charSet)) {
+    if (CHARSET_UTF8.equalsIgnoreCase(charSet)) {
       return getBytesUtf8(this);
     }
-    if (CHARSET_8859_1.equals(charSet) || CHARSET_LATIN1.equals(charSet)) {
+    if (CHARSET_8859_1.equalsIgnoreCase(charSet) || CHARSET_LATIN1.equalsIgnoreCase(charSet)) {
       return getBytesLatin1(this);
     }
     throw new UnsupportedEncodingException(charSet + " is not supported");
@@ -704,6 +714,25 @@ public final class String implements Comparable<String>, CharSequence,
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
+  }
+
+  /**
+   * Magic; JSODevirtualizer will use this implementation.<p>
+   *
+   * Each class gets a synthetic stubs for getClass at AST construction time with the exception of
+   * Object, JavaScriptObject and subclasses and String; see {@link GwtAstBuilder.createMembers()}.
+   * <p>
+   *
+   * These stubs are replaced in {@link ReplaceGetClassOverrides} by an access to field __clazz
+   * which is initialized in each class prototype to point to the class literal. String is
+   * implemented as a plain JavaScript string hence lacking said field.<p>
+   *
+   * The devirtualizer {@link JsoDevirtualizer} will insert a trampoline that uses this
+   * implementation.
+   */
+  @Override
+  public Class<? extends Object> getClass() {
+    return String.class;
   }
 
   @Override
@@ -760,7 +789,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native boolean matches(String regex) /*-{
@@ -790,7 +819,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   public native String replace(char from, char to) /*-{
 
-    // We previously used \\uXXXX, but Safari 2 doesn't match them properly 
+    // We previously used \\uXXXX, but Safari 2 doesn't match them properly
 // in RegExp
     // See http://bugs.webkit.org/show_bug.cgi?id=8043
     //     http://bugs.webkit.org/show_bug.cgi?id=6257
@@ -812,7 +841,7 @@ public final class String implements Comparable<String>, CharSequence,
     // follow the spec for "$$" in the replacement string: it
     // will insert a literal "$$". IE and Firefox, meanwhile,
     // treat "$$" as "$".
-    
+
     // Escape regex special characters from literal replacement string.
     String regex = from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
     // Escape $ since it is for match backrefs and \ since it is used to escape
@@ -827,7 +856,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String replaceAll(String regex, String replace) /*-{
@@ -840,7 +869,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String replaceFirst(String regex, String replace) /*-{
@@ -863,7 +892,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   * 
+   *
    * TODO(jat): properly handle Java regex syntax
    */
   public native String[] split(String regex, int maxMatch) /*-{
@@ -876,12 +905,12 @@ public final class String implements Comparable<String>, CharSequence,
     // The current string that is being matched; trimmed as each piece matches
     var trail = this;
     // used to detect repeated zero length matches
-    // Must be null to start with because the first match of "" makes no 
+    // Must be null to start with because the first match of "" makes no
     // progress by intention
     var lastTrail = null;
     // We do the split manually to avoid Javascript incompatibility
     while (true) {
-      // None of the information in the match returned are useful as we have no 
+      // None of the information in the match returned are useful as we have no
       // subgroup handling
       var matchObj = compiled.exec(trail);
       if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
@@ -972,8 +1001,6 @@ public final class String implements Comparable<String>, CharSequence,
     if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {
       return this;
     }
-    var r1 = this.replace(/^(\s*)/, '');
-    var r2 = r1.replace(/\s*$/, '');
-    return r2;
+    return this.replace(/^[\u0000-\u0020]*|[\u0000-\u0020]*$/g, '');
   }-*/;
 }

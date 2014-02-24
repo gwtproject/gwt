@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.shared.impl.StringCase;
 
 import org.apache.commons.collections.TestMap;
 
@@ -71,6 +72,7 @@ public class IdentityHashMapTest extends TestMap {
   private static final String KEY_TEST_PUT = "testPut";
   private static final String KEY_TEST_REMOVE = "testRemove";
   private static final Object ODD_ZERO_KEY = new Object() {
+    @Override
     public int hashCode() {
       return 0;
     }
@@ -125,6 +127,7 @@ public class IdentityHashMapTest extends TestMap {
     assertFalse(hashMap.entrySet().iterator().hasNext());
   }
 
+  @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
   }
@@ -568,7 +571,7 @@ public class IdentityHashMapTest extends TestMap {
     assertTrue(keySet.size() == SIZE_ONE);
     assertTrue(keySet.contains(KEY_TEST_KEY_SET));
     assertFalse(keySet.contains(VALUE_TEST_KEY_SET));
-    assertFalse(keySet.contains(KEY_TEST_KEY_SET.toUpperCase()));
+    assertFalse(keySet.contains(StringCase.toUpper(KEY_TEST_KEY_SET)));
   }
 
   /*
@@ -603,18 +606,18 @@ public class IdentityHashMapTest extends TestMap {
     assertEquals(srcMap.size(), dstMap.size());
     assertTrue(dstMap.containsKey(KEY_1));
     assertTrue(dstMap.containsValue(VALUE_1));
-    assertFalse(dstMap.containsKey(KEY_1.toUpperCase()));
-    assertFalse(dstMap.containsValue(VALUE_1.toUpperCase()));
+    assertFalse(dstMap.containsKey(StringCase.toUpper(KEY_1)));
+    assertFalse(dstMap.containsValue(StringCase.toUpper(VALUE_1)));
 
     assertTrue(dstMap.containsKey(KEY_2));
     assertTrue(dstMap.containsValue(VALUE_2));
-    assertFalse(dstMap.containsKey(KEY_2.toUpperCase()));
-    assertFalse(dstMap.containsValue(VALUE_2.toUpperCase()));
+    assertFalse(dstMap.containsKey(StringCase.toUpper(KEY_2)));
+    assertFalse(dstMap.containsValue(StringCase.toUpper(VALUE_2)));
 
     assertTrue(dstMap.containsKey(KEY_3));
     assertTrue(dstMap.containsValue(VALUE_3));
-    assertFalse(dstMap.containsKey(KEY_3.toUpperCase()));
-    assertFalse(dstMap.containsValue(VALUE_3.toUpperCase()));
+    assertFalse(dstMap.containsKey(StringCase.toUpper(KEY_3)));
+    assertFalse(dstMap.containsValue(StringCase.toUpper(VALUE_3)));
 
     // Check that an empty map does not blow away the contents of the
     // destination map
@@ -733,10 +736,12 @@ public class IdentityHashMapTest extends TestMap {
     assertEquals(val, VALUE_VAL);
   }
 
+  @Override
   protected Map makeConfirmedMap() {
     return new IdentityHashMap();
   }
 
+  @Override
   protected Map makeEmptyMap() {
     return new IdentityHashMap();
   }

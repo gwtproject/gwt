@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
@@ -43,6 +44,7 @@ public class CheckBoxTest extends GWTTestCase {
       });
     }
 
+    @Override
     public void onClick(Widget sender) {
       ++fired;
     }
@@ -51,6 +53,7 @@ public class CheckBoxTest extends GWTTestCase {
   private static class Handler implements ValueChangeHandler<Boolean> {
     Boolean received = null;
 
+    @Override
     public void onValueChange(ValueChangeEvent<Boolean> event) {
       received = event.getValue();
     }
@@ -183,6 +186,7 @@ public class CheckBoxTest extends GWTTestCase {
 
     check.setText("Burger");
     check.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent arg0) {
         clickCount[0]++;
       }
@@ -227,14 +231,14 @@ public class CheckBoxTest extends GWTTestCase {
   public void testSafeHtmlConstructor() {
     CheckBox box = new CheckBox(SafeHtmlUtils.fromSafeConstant(html));
     
-    assertEquals(html, box.getHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(box.getHTML()));
   }
 
   public void testSetSafeHtml() {
     CheckBox box = new CheckBox("hello");
     box.setHTML(SafeHtmlUtils.fromSafeConstant(html));
     
-    assertEquals(html, box.getHTML().toLowerCase());
+    assertEquals(html, StringCase.toLower(box.getHTML()));
   }
 
   @SuppressWarnings("deprecation")

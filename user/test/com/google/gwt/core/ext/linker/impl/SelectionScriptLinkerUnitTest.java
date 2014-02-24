@@ -26,16 +26,11 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.StatementRanges;
-import com.google.gwt.dev.Permutation;
-import com.google.gwt.dev.cfg.BindingProperty;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
-import com.google.gwt.dev.jjs.PermutationResult;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import junit.framework.TestCase;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -47,87 +42,39 @@ import java.util.TreeSet;
 public class SelectionScriptLinkerUnitTest extends TestCase {
   private static class MockLinkerContext implements LinkerContext {
 
+    @Override
     public SortedSet<ConfigurationProperty> getConfigurationProperties() {
       return new TreeSet<ConfigurationProperty>();
     }
 
+    @Override
     public String getModuleFunctionName() {
       return MOCK_MODULE_NAME;
     }
 
+    @Override
     public long getModuleLastModified() {
       return MOCK_MODULE_LAST_MODIFIED;
     }
 
+    @Override
     public String getModuleName() {
       return MOCK_MODULE_NAME;
     }
 
+    @Override
     public SortedSet<SelectionProperty> getProperties() {
       return new TreeSet<SelectionProperty>();
     }
 
+    @Override
     public boolean isOutputCompact() {
       return true;
     }
 
+    @Override
     public String optimizeJavaScript(TreeLogger logger, String jsProgram) {
       return jsProgram;
-    }
-  }
-
-  private static class MockPermutationResult implements PermutationResult {
-    private ArtifactSet artifacts = new ArtifactSet();
-
-    public void addArtifacts(Collection<? extends Artifact<?>> newArtifacts) {
-      artifacts.addAll(newArtifacts);
-    }
-
-    public ArtifactSet getArtifacts() {
-      return artifacts;
-    }
-
-    public byte[][] getJs() {
-      return new byte[][] {
-          getBytes("code for fragment 0"), getBytes("code for fragment 1")};
-    }
-
-    public Permutation getPermutation() {
-      return new Permutation(0, new StaticPropertyOracle(
-          new BindingProperty[0], new String[0],
-          new com.google.gwt.dev.cfg.ConfigurationProperty[0]));
-    }
-
-    public byte[] getSerializedSymbolMap() {
-      return getBytes("symbol map");
-    }
-
-    public StatementRanges[] getStatementRanges() {
-      ArrayList<StatementRanges> ranges = new ArrayList<StatementRanges>();
-      for (byte[] js : getJs()) {
-        ranges.add(new MockStatementRanges(js.length));
-      }
-      return ranges.toArray(new StatementRanges[0]);
-    }
-  }
-
-  private static class MockStatementRanges implements StatementRanges {
-    private int length;
-
-    MockStatementRanges(int length) {
-      this.length = length;
-    }
-
-    public int end(int i) {
-      return length;
-    }
-
-    public int numStatements() {
-      return 1;
-    }
-
-    public int start(int i) {
-      return 0;
     }
   }
 
@@ -228,10 +175,17 @@ public class SelectionScriptLinkerUnitTest extends TestCase {
   }
 
   private StandardCompilationResult createCompilationResult() {
+    byte[][] js = new byte[][] {getBytes("code for fragment 0"), getBytes("code for fragment 1")};
+    String jsStrongName = "fooStrongName";
+    StatementRanges[] statementRanges = new StatementRanges[] {
+        new StandardStatementRanges(Lists.newArrayList(0), Lists.newArrayList(10)),
+        new StandardStatementRanges(Lists.newArrayList(0), Lists.newArrayList(20))};
+    byte[] symbolMapBytes = getBytes("symbol map");
+
     StandardCompilationResult result = new StandardCompilationResult(
-        new MockPermutationResult());
+        new MockPermutationResult(js, jsStrongName, statementRanges, symbolMapBytes));
     result.addSelectionPermutation(new TreeMap<SelectionProperty, String>());
-    result.addSoftPermutation(Collections.<SelectionProperty, String> emptyMap());
+    result.addSoftPermutation(Collections.<SelectionProperty, String>emptyMap());
     return result;
   }
 

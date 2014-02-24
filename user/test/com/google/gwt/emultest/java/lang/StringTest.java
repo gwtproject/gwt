@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,6 +17,7 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.io.UnsupportedEncodingException;
@@ -24,7 +25,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * TODO: COMPILER OPTIMIZATIONS HAVE MADE THIS TEST NOT ACTUALLY TEST ANYTHING!
  * NEED A VERSION THAT DOESN'T USE STATICALLY DETERMINABLE STRINGS!
- * 
+ *
  * See individual method TODOs for ones that still need work -- the ones without
  * comments are already protected against optimization.
  */
@@ -83,14 +84,14 @@ public class StringTest extends GWTTestCase {
      * plane -- it may not show properly depending on your fonts, etc. The
      * character is the Gothic letter Faihu, or U+10346. We use it to verify
      * that multi-char UTF16 characters are handled properly.
-     * 
+     *
      * In Windows 2000, registry changes are required to support non-BMP
      * characters (or surrogates in general) -- surrogates are not supported
      * before Win2k and they are enabled by default in WinXP and later.
-     * 
+     *
      * [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
      * NT\CurrentVersion\LanguagePack] SURROGATE=(REG_DWORD)0x00000002
-     * 
+     *
      * [HKEY_CURRENT_USER\Software\Microsoft\Internet
      * Explorer\International\Scripts\42] IEFixedFontName=[Surrogate Font Face
      * Name] IEPropFontName=[Surrogate Font Face Name]
@@ -174,51 +175,61 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testConstructorLatin1() throws UnsupportedEncodingException {
+    internalTestConstructorLatin1("ISO-8859-1");
+    internalTestConstructorLatin1("iso-8859-1");
+  }
+
+  private void internalTestConstructorLatin1(String encoding) throws UnsupportedEncodingException {
     byte bytes[] = new byte[] {
         (byte) 0xE0, (byte) 0xDF, (byte) 0xE7, (byte) 0xD0, (byte) 0xE9, 'f'
     };
-    String str = new String(bytes, "ISO-8859-1");
+    String str = new String(bytes, encoding);
     assertEquals("àßçÐéf", str);
-    str = new String(bytes, 1, 3, "ISO-8859-1");
+    str = new String(bytes, 1, 3, encoding);
     assertEquals("ßçÐ", str);
     try {
-      new String(bytes, 1, 6, "ISO-8859-1");
+      new String(bytes, 1, 6, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
-      new String(bytes, -1, 2, "ISO-8859-1");
+      new String(bytes, -1, 2, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
-      new String(bytes, 6, 2, "ISO-8859-1");
+      new String(bytes, 6, 2, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
 
   public void testConstructorUtf8() throws UnsupportedEncodingException {
+    internalTestConstructorUtf8("UTF-8");
+    internalTestConstructorUtf8("utf-8");
+  }
+
+  private void internalTestConstructorUtf8(String encoding) throws UnsupportedEncodingException {
     byte bytes[] = new byte[] {
         (byte) 0xC3, (byte) 0xA0, (byte) 0xC3, (byte) 0x9F, (byte) 0xC3,
         (byte) 0xA7, (byte) 0xC3, (byte) 0x90, (byte) 0xC3, (byte) 0xA9, 'f'
     };
-    String str = new String(bytes, "UTF-8");
+    String str = new String(bytes, encoding);
     assertEquals("àßçÐéf", str);
-    str = new String(bytes, 2, 6, "UTF-8");
+    str = new String(bytes, 2, 6, encoding);
     assertEquals("ßçÐ", str);
     try {
-      new String(bytes, 2, 12, "UTF-8");
+      new String(bytes, 2, 12, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
-      new String(bytes, -1, 2, "UTF-8");
+      new String(bytes, -1, 2, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
-      new String(bytes, 12, 2, "UTF-8");
+      new String(bytes, 12, 2, encoding);
       assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
     } catch (IndexOutOfBoundsException expected) {
     }
@@ -293,9 +304,14 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testGetBytesLatin1() throws UnsupportedEncodingException {
+    internalTestGetBytesLatin1("ISO-8859-1");
+    internalTestGetBytesLatin1("iso-8859-1");
+  }
+
+  private void internalTestGetBytesLatin1(String encoding) throws UnsupportedEncodingException {
     // Contains only ISO-Latin-1 characters.
     String str = "Îñtérñåtîöñålîzåtîöñ";
-    byte[] bytes = str.getBytes("ISO-8859-1");
+    byte[] bytes = str.getBytes(encoding);
     assertEquals(str.length(), bytes.length);
     for (int i = 0; i < str.length(); ++i) {
       assertEquals("latin1 byte " + i + " differs", (byte) str.charAt(i),
@@ -304,13 +320,18 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testGetBytesUtf8() throws UnsupportedEncodingException {
+    internalTestGetBytesUtf8("UTF-8");
+    internalTestGetBytesUtf8("utf-8");
+  }
+
+  private void internalTestGetBytesUtf8(String encoding) throws UnsupportedEncodingException {
     // Test a range of characters getting encoded to UTF8 in 1-2 bytes.
     char[] chars = new char[384];
     for (int i = 0; i < chars.length; ++i) {
       chars[i] = (char) i;
     }
     String str = String.copyValueOf(chars);
-    byte[] bytes = str.getBytes("UTF-8");
+    byte[] bytes = str.getBytes(encoding);
     assertEquals(640, bytes.length);
     for (int i = 0; i < 128; ++i) {
       assertEquals("Position " + i, i, bytes[i]);
@@ -330,7 +351,7 @@ public class StringTest extends GWTTestCase {
       Character.toChars(firstCodePoint + i, chars, 2 * i);
     }
     str = String.copyValueOf(chars);
-    bytes = str.getBytes("UTF-8");
+    bytes = str.getBytes(encoding);
     assertEquals(4 * numChars, bytes.length);
     for (int i = 0; i < numChars; ++i) {
       assertEquals("1st byte of " + i, (byte) 0xF4, bytes[4 * i]);
@@ -344,12 +365,12 @@ public class StringTest extends GWTTestCase {
 
   /**
    * Tests hashing with strings.
-   * 
+   *
    * The specific strings used in this test used to trigger failures because we
    * use a JavaScript object as a hash map to cache the computed hash codes.
    * This conflicts with built-in properties defined on objects -- see issue
    * #631.
-   * 
+   *
    */
   public void testHashCode() {
     String[] testStrings = {
@@ -425,9 +446,9 @@ public class StringTest extends GWTTestCase {
    * TODO: needs rewriting to avoid compiler optimizations.
    */
   public void testLowerCase() {
-    assertEquals("abc", "AbC".toLowerCase());
-    assertEquals("abc", "abc".toLowerCase());
-    assertEquals("", "".toLowerCase());
+    assertEquals("abc", StringCase.toLower("AbC"));
+    assertEquals("abc", StringCase.toLower("abc"));
+    assertEquals("", StringCase.toLower(""));
   }
 
   public void testMatch() {
@@ -479,7 +500,7 @@ public class StringTest extends GWTTestCase {
     assertFalse(test.regionMatches(true, 1, "bCdx", 0, 4));
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
-    test = test.toUpperCase();
+    test = StringCase.toUpper(test);
     assertTrue(test.regionMatches(true, 0, "XAbCd", 1, 4));
     assertTrue(test.regionMatches(true, 1, "BcD", 0, 3));
     assertTrue(test.regionMatches(true, 1, "bCdx", 0, 3));
@@ -576,7 +597,7 @@ public class StringTest extends GWTTestCase {
         0));
     // issue 2742
     compareList("issue2742", new String[] {}, hideFromCompiler("/").split("/", 0));
-    
+
     // Splitting an empty string should result in an array containing a single
     // empty string.
     String[] s = "".split(",");
@@ -629,23 +650,43 @@ public class StringTest extends GWTTestCase {
    */
   public void testTrim() {
     trimRightAssertEquals("abc", "   \t abc \n  ");
-    trimRightAssertEquals("abc", "abc".trim());
+    trimRightAssertEquals("abc", "abc");
     trimRightAssertSame("abc", "abc");
     String s = '\u0023' + "hi";
     trimRightAssertSame(s, s);
-    trimRightAssertEquals("abc", " abc".trim());
-    trimRightAssertEquals("abc", "abc ".trim());
-    trimRightAssertEquals("", "".trim());
-    trimRightAssertEquals("", "   \t ".trim());
+    trimRightAssertEquals("abc", " abc");
+    trimRightAssertEquals("abc", "abc ");
+    trimRightAssertEquals("", "");
+    trimRightAssertEquals("", "   \t ");
+
+    // Check for removal of nulls; trim treats nulls as if they are whitespace.
+    // See issue 8534.
+
+    trimRightAssertEquals("abc", "\0\0\0 abc");
+    trimRightAssertEquals("abc", "abc\0\0\0");
+    trimRightAssertEquals("abc", "abc   \0\0\0");
+    trimRightAssertEquals("abc", "   \0 \0 \0" + "abc");
+    trimRightAssertEquals("abc \0 a", "    abc \0 a");
+    trimRightAssertEquals("abc \0 a", "    abc \0 a   \0");
+    trimRightAssertEquals("abc \0 a", "    abc \0 a   \0   ");
+    trimRightAssertEquals("\u0021\u0020abc", "\u0019\u0017\u0021\u0020abc\u0019\u0017\u0018 ");
+    trimRightAssertEquals("\u0021 abc",
+        "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009" +
+        "\n" + "\u000b\u000c" + "\r" + "\u000e\u000f" +
+        "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019" +
+        "\u001A\u001b\u001c\u001d\u001e\u001f\u0020\u0021 " + "abc");
+
+    // JavaScript would trim \u2029 and other unicode whitespace type characters; but Java wont
+    trimRightAssertEquals("\u2029abc\u00a0","\u2029abc\u00a0");
   }
 
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
   public void testUpperCase() {
-    assertEquals("abc", "AbC".toLowerCase());
-    assertEquals("abc", "abc".toLowerCase());
-    assertEquals("", "".toLowerCase());
+    assertEquals("abc", StringCase.toLower("AbC"));
+    assertEquals("abc", StringCase.toLower("abc"));
+    assertEquals("", StringCase.toLower(""));
   }
 
   /*
@@ -662,11 +703,12 @@ public class StringTest extends GWTTestCase {
         4));
     assertEquals(C.FALSE_STRING, String.valueOf(C.FALSE_VALUE));
     assertEquals(C.TRUE_STRING, String.valueOf(C.TRUE_VALUE));
+    assertEquals(C.LARGE_CHAR_ARRAY_STRING, String.valueOf(C.LARGE_CHAR_ARRAY_VALUE));
   }
 
   /**
    * Helper method for testTrim to avoid compiler optimizations.
-   * 
+   *
    * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertEquals(String left, String right) {
@@ -675,7 +717,7 @@ public class StringTest extends GWTTestCase {
 
   /**
    * Helper method for testTrim to avoid compiler optimizations.
-   * 
+   *
    * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertSame(String left, String right) {

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.view.client;
 
+import com.google.gwt.core.shared.impl.StringCase;
+
 /**
  * Tests for {@link SingleSelectionModel}.
  */
@@ -48,6 +50,7 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
   public void testSelectedChangeEvent() {
     SingleSelectionModel<String> model = createSelectionModel(null);
     SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
+      @Override
       public void onSelectionChange(SelectionChangeEvent event) {
         finishTest();
       }
@@ -61,6 +64,7 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
   public void testNoDuplicateChangeEvent() {
     SingleSelectionModel<String> model = createSelectionModel(null);
     SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
+      @Override
       public void onSelectionChange(SelectionChangeEvent event) {
         fail();
       }
@@ -75,6 +79,7 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
   public void testNoDuplicateChangeEvent2() {
     SingleSelectionModel<String> model = createSelectionModel(null);
     SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
+      @Override
       public void onSelectionChange(SelectionChangeEvent event) {
         fail();
       }
@@ -127,8 +132,9 @@ public class SingleSelectionModelTest extends AbstractSelectionModelTest {
 
   public void testSetSelectedWithKeyProvider() {
     ProvidesKey<String> keyProvider = new ProvidesKey<String>() {
+      @Override
       public Object getKey(String item) {
-        return item.toUpperCase();
+        return StringCase.toUpper(item);
       }
     };
     SingleSelectionModel<String> model = createSelectionModel(keyProvider);

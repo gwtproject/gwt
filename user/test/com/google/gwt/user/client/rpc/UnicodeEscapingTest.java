@@ -151,9 +151,7 @@ public class UnicodeEscapingTest extends GWTTestCase {
    * equivalent in that case.
    * 
    * @throws InvalidCharacterException
-   * HtmlUnit test failed intermittently in draft mode.
    */
-  @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testClientToServerBMPLow() throws InvalidCharacterException {
     delayTestFinish(TEST_FINISH_DELAY_MS);
     clientToServerVerifyRange(Character.MIN_CODE_POINT,
@@ -187,10 +185,7 @@ public class UnicodeEscapingTest extends GWTTestCase {
    * issue, particularly with combining marks, though they should be logically
    * equivalent in that case.  Surrogate characters are also not tested here,
    * see {@link #disabled_testServerToClientBMPSurrogates()}.
-   * 
-   * HtmlUnit test failed intermittently in draft mode.
    */
-  @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testServerToClientBMP() {
     delayTestFinish(TEST_FINISH_DELAY_MS);
     serverToClientVerify(Character.MIN_CODE_POINT,
@@ -243,11 +238,13 @@ public class UnicodeEscapingTest extends GWTTestCase {
         new AsyncCallback<Boolean>() {
           List<Throwable> fails = new ArrayList<Throwable>();
 
+          @Override
           public void onFailure(Throwable caught) {
             fails.add(caught);
             onSuccess(false);
           }
 
+          @Override
           public void onSuccess(Boolean ignored) {
             current += step;
             if (current < end) {
@@ -281,11 +278,13 @@ public class UnicodeEscapingTest extends GWTTestCase {
         Math.min(end, current + size), new AsyncCallback<String>() {
           List<Throwable> fails = new ArrayList<Throwable>();
 
+          @Override
           public void onFailure(Throwable caught) {
             fails.add(caught);
             nextBatch();
           }
 
+          @Override
           public void onSuccess(String str) {
             try {
               verifyStringContainingCharacterRange(current, Math.min(end,

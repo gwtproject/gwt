@@ -19,6 +19,7 @@ package com.google.gwt.dev;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.JJSOptionsImpl;
 import com.google.gwt.dev.jjs.JsOutputOption;
+import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.File;
@@ -91,6 +92,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public int getMaxPermsPerPrecompile() {
     return maxPermsPerPrecompile;
+  }
+
+  @Override
+  public JsNamespaceOption getNamespace() {
+    return jjsOptions.getNamespace();
   }
 
   @Override
@@ -200,6 +206,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setAddRuntimeChecks(boolean enabled) {
+    jjsOptions.setAddRuntimeChecks(enabled);
+  }
+
+  @Override
   @Deprecated
   public void setAggressivelyOptimize(boolean aggressivelyOptimize) {
     jjsOptions.setAggressivelyOptimize(aggressivelyOptimize);
@@ -281,6 +292,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setNamespace(JsNamespaceOption newValue) {
+    jjsOptions.setNamespace(newValue);
+  }
+
+  @Override
   public void setOptimizationLevel(int level) {
     jjsOptions.setOptimizationLevel(level);
   }
@@ -348,6 +364,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setValidateOnly(boolean validateOnly) {
     this.validateOnly = validateOnly;
+  }
+
+  @Override
+  public boolean shouldAddRuntimeChecks() {
+    return jjsOptions.shouldAddRuntimeChecks();
   }
 
   @Override

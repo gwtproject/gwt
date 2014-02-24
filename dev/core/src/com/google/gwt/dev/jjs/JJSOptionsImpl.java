@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs;
 
+import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
@@ -25,6 +26,7 @@ import java.io.Serializable;
  */
 public class JJSOptionsImpl implements JJSOptions, Serializable {
 
+  private boolean addRuntimeChecks = false;
   private boolean aggressivelyOptimize = true;
   private boolean closureCompilerEnabled;
   private boolean clusterSimilarFunctions = true;
@@ -36,6 +38,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private int fragmentsMerge = -1;
   private boolean inlineLiteralParameters = true;
   private boolean jsonSoycEnabled = false;
+  private JsNamespaceOption namespace = JsNamespaceOption.NONE;
   private int optimizationLevel = OptionOptimize.OPTIMIZE_LEVEL_DEFAULT;
   private boolean optimizeDataflow = true;
   private boolean optimizePrecompile = false;
@@ -58,6 +61,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   public void copyFrom(JJSOptions other) {
+    setAddRuntimeChecks(other.shouldAddRuntimeChecks());
     setAggressivelyOptimize(other.isAggressivelyOptimize());
     setCastCheckingDisabled(other.isCastCheckingDisabled());
     setClassMetadataDisabled(other.isClassMetadataDisabled());
@@ -81,6 +85,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setStrict(other.isStrict());
     setEnforceStrictResources(other.enforceStrictResources());
     setSourceLevel(other.getSourceLevel());
+    setNamespace(other.getNamespace());
   }
 
   @Override
@@ -99,6 +104,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public JsNamespaceOption getNamespace() {
+    return namespace;
+  }
+
+  @Override
   public int getOptimizationLevel() {
     return optimizationLevel;
   }
@@ -113,6 +123,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     return sourceLevel;
   }
 
+  @Override
   @Deprecated
   public boolean isAggressivelyOptimize() {
     return aggressivelyOptimize;
@@ -183,6 +194,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public void setAddRuntimeChecks(boolean enabled) {
+    addRuntimeChecks = enabled;
+  }
+
+  @Override
   @Deprecated
   public void setAggressivelyOptimize(boolean enabled) {
     aggressivelyOptimize = enabled;
@@ -244,6 +260,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public void setNamespace(JsNamespaceOption newValue) {
+    namespace = newValue;
+  }
+
+  @Override
   public void setOptimizationLevel(int level) {
     optimizationLevel = level;
   }
@@ -301,6 +322,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public void setStrict(boolean enabled) {
     strict = enabled;
+  }
+
+  @Override
+  public boolean shouldAddRuntimeChecks() {
+    return addRuntimeChecks;
   }
 
   @Override

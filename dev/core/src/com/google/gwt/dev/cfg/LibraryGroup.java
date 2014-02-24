@@ -13,6 +13,7 @@
  */
 package com.google.gwt.dev.cfg;
 
+import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.cfg.Libraries.IncompatibleLibraryVersionException;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.InternalCompilerException;
@@ -96,18 +97,19 @@ public class LibraryGroup {
     return fromLibraries(zipLibraries, true);
   }
 
-  private Set<String> compilationUnitTypeNames;
+  private Set<String> compilationUnitTypeSourceNames;
+  private ArtifactSet generatedArtifacts;
   private List<Library> libraries = Lists.newArrayList();
   private Map<String, Library> librariesByBuildResourcePath;
   private Map<String, Library> librariesByClassFilePath;
-  private Map<String, Library> librariesByCompilationUnitTypeName;
+  private Map<String, Library> librariesByCompilationUnitTypeSourceName;
   private Map<String, Library> librariesByName;
   private Map<String, Library> librariesByPublicResourcePath;
   private List<PersistenceBackedObject<PermutationResult>> permutationResultHandles;
-  private Set<String> reboundTypeNames;
+  private Set<String> reboundTypeSourceNames;
   private List<Library> rootLibraries;
 
-  private Set<String> superSourceCompilationUnitTypeNames;
+  private Set<String> superSourceCompilationUnitTypeSourceNames;
 
   private LibraryGroup() {
     // Private to force class construction via one of the public factory functions.
@@ -136,7 +138,7 @@ public class LibraryGroup {
    */
   public Multimap<String, String> gatherNewBindingPropertyValuesForGenerator(String generatorName) {
     Multimap<String, String> newBindingPropertyValuesByName = LinkedHashMultimap.create();
-    for (Library libraryPendingGeneratorRun : gatherLibrariesForGenerator(generatorName, true)) {
+    for (Library libraryPendingGeneratorRun : gatherLibrariesForGenerator(generatorName, false)) {
       newBindingPropertyValuesByName.putAll(
           libraryPendingGeneratorRun.getNewBindingPropertyValuesByName());
     }
@@ -151,7 +153,7 @@ public class LibraryGroup {
   public Multimap<String, String> gatherNewConfigurationPropertyValuesForGenerator(
       String generatorName) {
     Multimap<String, String> newConfigurationPropertyValuesByName = LinkedHashMultimap.create();
-    for (Library libraryPendingGeneratorRun : gatherLibrariesForGenerator(generatorName, true)) {
+    for (Library libraryPendingGeneratorRun : gatherLibrariesForGenerator(generatorName, false)) {
       newConfigurationPropertyValuesByName.putAll(
           libraryPendingGeneratorRun.getNewConfigurationPropertyValuesByName());
     }
@@ -162,24 +164,26 @@ public class LibraryGroup {
    * Walks the parts of the library dependency graph that have not run the given generator
    * referenced by name and accumulates and returns a set of newly rebound type names.
    */
-  public Set<String> gatherNewReboundTypeNamesForGenerator(String generatorName) {
-    Set<String> newReboundTypeNames = Sets.newHashSet();
-    for (Library libraryPendingGeneratorRun : gatherLibrariesForGenerator(generatorName, true)) {
-      newReboundTypeNames.addAll(libraryPendingGeneratorRun.getReboundTypeNames());
+  public Set<String> gatherNewReboundTypeSourceNamesForGenerator(String generatorName) {
+    Set<String> newReboundTypeSourceNames = Sets.newHashSet();
+    List<Library> unprocessedLibraries = gatherLibrariesForGenerator(generatorName, false);
+    for (Library unprocessedLibrary : unprocessedLibraries) {
+      newReboundTypeSourceNames.addAll(unprocessedLibrary.getReboundTypeSourceNames());
     }
-    return newReboundTypeNames;
+    return newReboundTypeSourceNames;
   }
 
   /**
    * Walks the parts of the library dependency graph that have already run the given generator
    * referenced by name and accumulates and returns the set of old rebound type names.
    */
-  public Set<String> gatherOldReboundTypeNamesForGenerator(String generatorName) {
-    Set<String> oldReboundTypeNames = Sets.newHashSet();
-    for (Library processedLibrary : gatherLibrariesForGenerator(generatorName, false)) {
-      oldReboundTypeNames.addAll(processedLibrary.getReboundTypeNames());
+  public Set<String> gatherOldReboundTypeSourceNamesForGenerator(String generatorName) {
+    Set<String> oldReboundTypeSourceNames = Sets.newHashSet();
+    List<Library> processedLibraries = gatherLibrariesForGenerator(generatorName, true);
+    for (Library processedLibrary : processedLibraries) {
+      oldReboundTypeSourceNames.addAll(processedLibrary.getReboundTypeSourceNames());
     }
-    return oldReboundTypeNames;
+    return oldReboundTypeSourceNames;
   }
 
   /**
@@ -215,29 +219,40 @@ public class LibraryGroup {
   /**
    * Returns the compilation unit for the given compilation unit type name if present or null.
    */
-  public CompilationUnit getCompilationUnitByTypeName(String typeName) {
-    if (!getLibrariesByCompilationUnitTypeName().containsKey(typeName)) {
+  public CompilationUnit getCompilationUnitByTypeSourceName(String typeSourceName) {
+    if (!getLibrariesByCompilationUnitTypeSourceName().containsKey(typeSourceName)) {
       return null;
     }
-    Library library = getLibrariesByCompilationUnitTypeName().get(typeName);
-    return library.getCompilationUnitByTypeName(typeName);
+    Library library = getLibrariesByCompilationUnitTypeSourceName().get(typeSourceName);
+    return library.getCompilationUnitByTypeSourceName(typeSourceName);
   }
 
   /**
-   * Returns the set of all compilation unit type names (both regular and super sourced). Useful to
-   * be able to force loading of all known types to make subtype queries accurate for example when
-   * doing global generator execution.
+   * Returns the set of all compilation unit type source names (both regular and super sourced).
+   * Useful to be able to force loading of all known types to make subtype queries accurate for
+   * example when doing global generator execution.
    */
-  public Set<String> getCompilationUnitTypeNames() {
-    if (compilationUnitTypeNames == null) {
-      compilationUnitTypeNames = Sets.newLinkedHashSet();
+  public Set<String> getCompilationUnitTypeSourceNames() {
+    if (compilationUnitTypeSourceNames == null) {
+      compilationUnitTypeSourceNames = Sets.newLinkedHashSet();
       for (Library library : libraries) {
-        compilationUnitTypeNames.addAll(library.getRegularCompilationUnitTypeNames());
-        compilationUnitTypeNames.addAll(library.getSuperSourceCompilationUnitTypeNames());
+        compilationUnitTypeSourceNames.addAll(library.getRegularCompilationUnitTypeSourceNames());
+        compilationUnitTypeSourceNames.addAll(
+            library.getSuperSourceCompilationUnitTypeSourceNames());
       }
-      compilationUnitTypeNames = Collections.unmodifiableSet(compilationUnitTypeNames);
+      compilationUnitTypeSourceNames = Collections.unmodifiableSet(compilationUnitTypeSourceNames);
     }
-    return compilationUnitTypeNames;
+    return compilationUnitTypeSourceNames;
+  }
+
+  public ArtifactSet getGeneratedArtifacts() {
+    if (generatedArtifacts == null) {
+      generatedArtifacts = new ArtifactSet();
+      for (Library library : libraries) {
+        generatedArtifacts.addAll(library.getGeneratedArtifacts());
+      }
+    }
+    return generatedArtifacts;
   }
 
   /**
@@ -276,32 +291,32 @@ public class LibraryGroup {
    * Returns the set of names of types which are the subject of GWT.create() calls in source code in
    * any of the contained libraries.
    */
-  public Set<String> getReboundTypeNames() {
-    if (reboundTypeNames == null) {
-      reboundTypeNames = Sets.newLinkedHashSet();
+  public Set<String> getReboundTypeSourceNames() {
+    if (reboundTypeSourceNames == null) {
+      reboundTypeSourceNames = Sets.newLinkedHashSet();
       for (Library library : libraries) {
-        reboundTypeNames.addAll(library.getReboundTypeNames());
+        reboundTypeSourceNames.addAll(library.getReboundTypeSourceNames());
       }
-      reboundTypeNames = Collections.unmodifiableSet(reboundTypeNames);
+      reboundTypeSourceNames = Collections.unmodifiableSet(reboundTypeSourceNames);
     }
-    return reboundTypeNames;
+    return reboundTypeSourceNames;
   }
 
   /**
-   * Returns the set of compilation unit type names for all contained super source compilation
-   * units.
+   * Returns the set of compilation unit type source names for all contained super source
+   * compilation units.
    */
-  public Set<String> getSuperSourceCompilationUnitTypeNames() {
-    if (superSourceCompilationUnitTypeNames == null) {
-      superSourceCompilationUnitTypeNames = Sets.newLinkedHashSet();
+  public Set<String> getSuperSourceCompilationUnitTypeSourceNames() {
+    if (superSourceCompilationUnitTypeSourceNames == null) {
+      superSourceCompilationUnitTypeSourceNames = Sets.newLinkedHashSet();
       for (Library library : libraries) {
-        superSourceCompilationUnitTypeNames.addAll(
-            library.getSuperSourceCompilationUnitTypeNames());
+        superSourceCompilationUnitTypeSourceNames.addAll(
+            library.getSuperSourceCompilationUnitTypeSourceNames());
       }
-      superSourceCompilationUnitTypeNames =
-          Collections.unmodifiableSet(superSourceCompilationUnitTypeNames);
+      superSourceCompilationUnitTypeSourceNames =
+          Collections.unmodifiableSet(superSourceCompilationUnitTypeSourceNames);
     }
-    return superSourceCompilationUnitTypeNames;
+    return superSourceCompilationUnitTypeSourceNames;
   }
 
   // VisibleForTesting
@@ -387,7 +402,8 @@ public class LibraryGroup {
    * Walks the library dependency graph and collects a list of libraries that either have or have
    * not run the given generator depending on the given gatherNotProcessed boolean.
    */
-  private List<Library> gatherLibrariesForGenerator(String generatorName, boolean generatorWasRun) {
+  private List<Library> gatherLibrariesForGenerator(
+      String generatorName, boolean gatherLibrariesThatHaveAlreadyRunThisGenerator) {
     Set<Library> exploredLibraries = Sets.newHashSet();
     LinkedList<Library> unexploredLibraries = Lists.newLinkedList();
     List<Library> librariesForGenerator = Lists.newArrayList();
@@ -397,13 +413,15 @@ public class LibraryGroup {
       Library library = unexploredLibraries.removeFirst();
       exploredLibraries.add(library);
 
-      boolean alreadyProcessed = library.getRanGeneratorNames().contains(generatorName);
-      if (generatorWasRun && alreadyProcessed) {
+      boolean libraryHasAlreadyRunThisGenerator =
+          library.getRanGeneratorNames().contains(generatorName);
+      if (!gatherLibrariesThatHaveAlreadyRunThisGenerator && libraryHasAlreadyRunThisGenerator) {
+        // don't gather this one
         continue;
       }
 
+      // gather this library
       librariesForGenerator.add(library);
-
       for (Library dependencyLibrary : asLibraries(library.getDependencyLibraryNames())) {
         if (exploredLibraries.contains(dependencyLibrary)) {
           continue;
@@ -456,29 +474,43 @@ public class LibraryGroup {
   }
 
   // TODO(stalcup): throw an error if more than one version of a type is provided.
-  private Map<String, Library> getLibrariesByCompilationUnitTypeName() {
-    if (librariesByCompilationUnitTypeName == null) {
-      librariesByCompilationUnitTypeName = Maps.newLinkedHashMap();
+  private Map<String, Library> getLibrariesByCompilationUnitTypeSourceName() {
+    if (librariesByCompilationUnitTypeSourceName == null) {
+      librariesByCompilationUnitTypeSourceName = Maps.newLinkedHashMap();
 
       // Record regular compilation units first.
       for (Library library : libraries) {
-        for (String compilationUnitTypeName : library.getRegularCompilationUnitTypeNames()) {
-          librariesByCompilationUnitTypeName.put(compilationUnitTypeName, library);
+        for (String compilationUnitTypeSourceName :
+            library.getRegularCompilationUnitTypeSourceNames()) {
+          librariesByCompilationUnitTypeSourceName.put(compilationUnitTypeSourceName, library);
+
+          Collection<String> nestedTypeSourceNames =
+              library.getNestedNamesByCompilationUnitName().get(compilationUnitTypeSourceName);
+          for (String nestedTypeSourceName : nestedTypeSourceNames) {
+            librariesByCompilationUnitTypeSourceName.put(nestedTypeSourceName, library);
+          }
         }
       }
 
       // Overwrite with superSource compilation units, so they have higher priority.
       for (Library library : libraries) {
-        for (String superSourceCompilationUnitTypeName :
-            library.getSuperSourceCompilationUnitTypeNames()) {
-          librariesByCompilationUnitTypeName.put(superSourceCompilationUnitTypeName, library);
+        for (String superSourceCompilationUnitTypeSourceName :
+            library.getSuperSourceCompilationUnitTypeSourceNames()) {
+          librariesByCompilationUnitTypeSourceName.put(superSourceCompilationUnitTypeSourceName,
+              library);
+
+          Collection<String> nestedTypeSourceNames = library.getNestedNamesByCompilationUnitName()
+              .get(superSourceCompilationUnitTypeSourceName);
+          for (String nestedTypeSourceName : nestedTypeSourceNames) {
+            librariesByCompilationUnitTypeSourceName.put(nestedTypeSourceName, library);
+          }
         }
       }
 
-      librariesByCompilationUnitTypeName =
-          Collections.unmodifiableMap(librariesByCompilationUnitTypeName);
+      librariesByCompilationUnitTypeSourceName =
+          Collections.unmodifiableMap(librariesByCompilationUnitTypeSourceName);
     }
-    return librariesByCompilationUnitTypeName;
+    return librariesByCompilationUnitTypeSourceName;
   }
 
   private Map<String, Library> getLibrariesByPublicResourcePath() {

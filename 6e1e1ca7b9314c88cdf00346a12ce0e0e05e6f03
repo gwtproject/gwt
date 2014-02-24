@@ -87,6 +87,24 @@
       "revId": "6e1e1ca7b9314c88cdf00346a12ce0e0e05e6f03",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_7bb65f08",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-02-24T22:47:38Z",
+      "side": 1,
+      "message": "I agree that AbstractMap.keySet() should be fixed.\nIn that case I prefer Roberto\u0027s suggestion to use keySet() everywhere.\n\nAnd another question. I\u0027m not familiar with GWT\u0027s serialization but can this uninitialized keySet problem be fixed by CustomFieldSerializer for SetFromMap?",
+      "parentUuid": "7cf18d4f_03aa5099",
+      "revId": "6e1e1ca7b9314c88cdf00346a12ce0e0e05e6f03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

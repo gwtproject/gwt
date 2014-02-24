@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cf18d4f_4396183a",
+        "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-24T23:08:08Z",
+      "side": 1,
+      "message": "Let\u0027s avoid adding a new field and also please remove final from the fields (to keep them GWT-RPC serializable).\n\nIn order to do that, you can introduce getEffectiveComparator  that returns provided comparator or Comparators.natural if it is null.\n\nUse this method to get the comparator before starting the loop (i.e. beginning of mergeHeaps \u0026 offer) and then pass it around if needed (looks like only one more place needs it).",
+      "range": {
+        "startLine": 56,
+        "startChar": 38,
+        "endLine": 56,
+        "endChar": 56
+      },
+      "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_e3776c5c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-24T23:08:08Z",
+      "side": 1,
+      "message": "Can you add the test case for Comparator.natural? i.e.\n\n comparator \u003d Comparators.natural();\n pq \u003d new PriorityQueue\u003cInteger\u003e(11, comparator);\n assertEquals(comparator, pq.comparator());",
+      "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

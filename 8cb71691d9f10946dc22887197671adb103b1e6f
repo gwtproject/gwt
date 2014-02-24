@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "af64a5c8_2026ce9b",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-24T16:39:09Z",
+      "side": 1,
+      "message": "Oh, OK. Maybe just say \"IE8 and IE9\" then? (rather than the broader \"older browsers\")",
+      "parentUuid": "ef985df7_22788a4f",
+      "revId": "8cb71691d9f10946dc22887197671adb103b1e6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f47d5ed_5e7bf594",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 3

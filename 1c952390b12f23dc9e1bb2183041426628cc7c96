@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7cf18d4f_20c42a50",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-24T20:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf89137_fdcdc7fd",
+      "range": {
+        "startLine": 319,
+        "startChar": 15,
+        "endLine": 319,
+        "endChar": 22
+      },
+      "revId": "1c952390b12f23dc9e1bb2183041426628cc7c96",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_777d5092",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2014-02-24T19:34:23Z",
       "side": 1,
       "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "1c952390b12f23dc9e1bb2183041426628cc7c96",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_00c92668",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-24T20:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_777d5092",
       "revId": "1c952390b12f23dc9e1bb2183041426628cc7c96",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

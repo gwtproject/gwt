@@ -16,6 +16,69 @@
       "revId": "63db6268fc849d1aa234cb90f031570e97657dcf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_3dca0f38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCoercionNormalizer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-24T19:31:00Z",
+      "side": 1,
+      "message": "this assertion is new, and was previously a \"silently do nothing to the operation and its args\"?\n\nhave we tried some big compiles to make sure the new assertion doesn\u0027t do anything surprising?",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "63db6268fc849d1aa234cb90f031570e97657dcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_5de6fb98",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeCoercionNormalizerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-24T19:31:00Z",
+      "side": 1,
+      "message": "nice new tests, very easy to read",
+      "revId": "63db6268fc849d1aa234cb90f031570e97657dcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_9d70031c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeCoercionNormalizerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-24T19:31:00Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "63db6268fc849d1aa234cb90f031570e97657dcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

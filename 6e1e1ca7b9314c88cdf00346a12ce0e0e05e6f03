@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7cf18d4f_e3740ca3",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-24T22:39:47Z",
+      "side": 1,
+      "message": "please document here why we are doing this.",
+      "revId": "6e1e1ca7b9314c88cdf00346a12ce0e0e05e6f03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cf18d4f_203d4af0",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 2
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "I\u0027m just confused that GWT\u0027s AbstractMap creates set on every call",
       "parentUuid": "7cf18d4f_203d4af0",
+      "revId": "6e1e1ca7b9314c88cdf00346a12ce0e0e05e6f03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_435e182b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-24T22:39:47Z",
+      "side": 1,
+      "message": "I think that\u0027s ok to avoid set creation.\nHowever, as a styling it is good to avoid assignments as part of other statements and follow common lazy evaluation pattern for readability:\n\n if(keySet \u003d\u003d null) {\n   keySet \u003d backingMap.keySet();\n }\n return keySet;",
+      "parentUuid": "dc0199f4_1bde3b51",
       "revId": "6e1e1ca7b9314c88cdf00346a12ce0e0e05e6f03",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_1bb87ba6",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf89137_5735b4ee",
+      "range": {
+        "startLine": 94,
+        "startChar": 46,
+        "endLine": 94,
+        "endChar": 54
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_d70d4454",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "7cf18d4f_86cf8ea1",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done, but we need to make sure to not call any methods twice because of the IE8 impl (it was to reattach the old listener",
+      "parentUuid": "1cf89137_d70d4454",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_baf62dff",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -53,6 +95,30 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "Any reason to introduce all these additional methods and just have the implementation here?",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 15
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_7bd09fe5",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Cleaned up, this made sense with Change #3.",
+      "parentUuid": "5c0f6924_baf62dff",
       "range": {
         "startLine": 115,
         "startChar": 6,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "7cf18d4f_66d48a31",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "I think this refers to the URL that did not update on Safari in the past, other than that I could not find any issues (Not: we are not using the state object at all)\n\nFor a good overview on detail support see:\nhttps://github.com/browserstate/history.js/wiki/The-State-of-the-HTML5-History-API",
+      "parentUuid": "1cf89137_b7975877",
+      "range": {
+        "startLine": 123,
+        "startChar": 19,
+        "endLine": 123,
+        "endChar": 28
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_dae9e124",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -99,6 +189,30 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "nit:remove space",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_5bd5e3d3",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_dae9e124",
       "range": {
         "startLine": 138,
         "startChar": 0,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_9bda4bff",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "This is the implementation that is used for browsers that do not support pushstate. (Androids \u0026 IE9). IE8 can not use this since there is no support for hashchange events.",
+      "parentUuid": "1cf89137_0c803f6a",
+      "range": {
+        "startLine": 139,
+        "startChar": 23,
+        "endLine": 139,
+        "endChar": 43
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_7730b000",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -145,6 +283,24 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "Already defined in the parent class?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_7bfbff5f",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "changed inheritance for classes does not apply anymore.",
+      "parentUuid": "1cf89137_7730b000",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_5b004396",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "The hash token implementation does not work properly across browsers with any linker (All IEs affected and firefox), while pushstate makes our tests past.\n\nWe need three implementations:\n * one for IE8 since it does not support hashchange events\n * one for browsers that do not support pushstate but have hashchange event\n * one for all modern browsers using replaceState",
+      "parentUuid": "5c0f6924_5a05d12d",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8c6c4f22",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -191,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_1b0abbb6",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Since we are reading the current location at startup into token and compare this against every fired event, we do not care about events beeing fired at startup or not.\nAs long as the tokens match (which they should), we should be fine. \n\nCan you think of any good way to test this?",
+      "parentUuid": "1cf89137_8c6c4f22",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef985df7_02070ead",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -202,6 +400,24 @@
       "writtenOn": "2014-02-24T16:39:21Z",
       "side": 1,
       "message": "Missing \u003cp\u003e ?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_fbeeef9c",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef985df7_02070ead",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -254,6 +470,54 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_5b8cc323",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_7a52d52f",
+      "range": {
+        "startLine": 227,
+        "startChar": 7,
+        "endLine": 227,
+        "endChar": 14
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_9b67eb7d",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_5a57111e",
+      "range": {
+        "startLine": 227,
+        "startChar": 82,
+        "endLine": 227,
+        "endChar": 86
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_3a4c5d92",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 4
@@ -265,6 +529,30 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "instead.",
+      "range": {
+        "startLine": 229,
+        "startChar": 22,
+        "endLine": 229,
+        "endChar": 29
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_3b91f737",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_3a4c5d92",
       "range": {
         "startLine": 229,
         "startChar": 22,
@@ -300,6 +588,30 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_fb7a6f46",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_9a25a9bf",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 14
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_fa45c564",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 4
@@ -311,6 +623,24 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "Can we switch the linker for our tests instead?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_5b73a36d",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Thomas is already doing this: https://gwt-review.googlesource.com/#/c/6424/\n\nI created a bug to track the removal of this if condition: \nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d8600",
+      "parentUuid": "5c0f6924_fa45c564",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -334,6 +664,24 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_1b6d1b8a",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Nope, I think they stayed in after fiddling around with IE8 \u0026 IE9 failure, good catch",
+      "parentUuid": "5c0f6924_3a357df0",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_fa1ee576",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 4
@@ -345,6 +693,24 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "Can you move this closer to its context?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_db5e93d6",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_fa1ee576",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -368,6 +734,24 @@
     },
     {
       "key": {
+        "uuid": "dc0199f4_bb5bc7e4",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "I am making sure here that the URL has been properly updated (not just the token in history). Safari sometimes does not update the URL that is displayed to the user, but the test shows that it returns the proper url even though its not being displayed in the browser address bar.",
+      "parentUuid": "5c0f6924_ba286d97",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_5a303100",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 4
@@ -379,6 +763,24 @@
       "writtenOn": "2014-02-25T02:20:22Z",
       "side": 1,
       "message": "You can use History.getToken or event.getValue",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_9b580be9",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-02-25T11:15:16Z",
+      "side": 1,
+      "message": "see my comment above",
+      "parentUuid": "5c0f6924_5a303100",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

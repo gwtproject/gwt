@@ -39,6 +39,24 @@
       "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c0a6d15_3e3571f0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-02-25T22:13:15Z",
+      "side": 1,
+      "message": "Unfortunately, Comparators.natural() has package private access",
+      "parentUuid": "7cf18d4f_e3776c5c",
+      "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -101,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_3578db95",
+        "filename": "dev/core/src/com/google/gwt/core/linker/IFrameLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T22:56:38Z",
+      "side": 1,
+      "message": "If we are going to delete the code, that\u0027s how we can push them out of this deprecated classes :)\n\nAnyway, as long as we don\u0027t mention much about this in public, I think we can keep it :)",
+      "parentUuid": "7c0a6d15_fe1ed976",
+      "revId": "bcf2fdf850974a2ed0f0ef0215ca3373bf6fb2e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_bdfe2718",
         "filename": "dev/core/src/com/google/gwt/core/linker/XSLinker.java",
         "patchSetId": 1

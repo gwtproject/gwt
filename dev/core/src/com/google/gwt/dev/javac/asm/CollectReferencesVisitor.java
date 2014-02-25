@@ -143,8 +143,8 @@ public class CollectReferencesVisitor extends EmptyVisitor {
   }
 
   @Override
-  public void visit(int version, int access, String name, String signature,
-      String superName, String[] interfaces) {
+  public void visit(int version, int access, String name, String nestedSourceName,
+      String signature, String superName, String[] interfaces) {
     if (superName != null) {
       referencedTypes.add(superName);
     }

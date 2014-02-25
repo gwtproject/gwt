@@ -42,7 +42,7 @@ import com.google.gwt.dev.asm.Opcodes;
 
 /**
  * A node that represents a class.
- * 
+ *
  * @author Eric Bruneton
  */
 public class ClassNode extends ClassVisitor {
@@ -63,6 +63,12 @@ public class ClassNode extends ClassVisitor {
      * {@link com.google.gwt.dev.asm.Type#getInternalName() getInternalName}).
      */
     public String name;
+
+    /**
+     * The portion of the class source name that comes after the package like Foo,
+     * Foo.Bar, or Foo$Bar.
+     */
+    public String nestedSourceName;
 
     /**
      * The signature of the class. May be <tt>null</tt>.
@@ -117,7 +123,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * The runtime visible annotations of this class. This list is a list of
      * {@link AnnotationNode} objects. May be <tt>null</tt>.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.tree.AnnotationNode
      * @label visible
      */
@@ -126,7 +132,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * The runtime invisible annotations of this class. This list is a list of
      * {@link AnnotationNode} objects. May be <tt>null</tt>.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.tree.AnnotationNode
      * @label invisible
      */
@@ -135,7 +141,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * The non standard attributes of this class. This list is a list of
      * {@link Attribute} objects. May be <tt>null</tt>.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.Attribute
      */
     public List<Attribute> attrs;
@@ -143,7 +149,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * Informations about the inner classes of this class. This list is a list
      * of {@link InnerClassNode} objects.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.tree.InnerClassNode
      */
     public List<InnerClassNode> innerClasses;
@@ -151,7 +157,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * The fields of this class. This list is a list of {@link FieldNode}
      * objects.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.tree.FieldNode
      */
     public List<FieldNode> fields;
@@ -159,7 +165,7 @@ public class ClassNode extends ClassVisitor {
     /**
      * The methods of this class. This list is a list of {@link MethodNode}
      * objects.
-     * 
+     *
      * @associates com.google.gwt.dev.asm.tree.MethodNode
      */
     public List<MethodNode> methods;
@@ -175,7 +181,7 @@ public class ClassNode extends ClassVisitor {
 
     /**
      * Constructs a new {@link ClassNode}.
-     * 
+     *
      * @param api
      *            the ASM API version implemented by this visitor. Must be one
      *            of {@link Opcodes#ASM4}.
@@ -194,11 +200,12 @@ public class ClassNode extends ClassVisitor {
 
     @Override
     public void visit(final int version, final int access, final String name,
-            final String signature, final String superName,
-            final String[] interfaces) {
+            String nestedSourceName, final String signature,
+            final String superName, final String[] interfaces) {
         this.version = version;
         this.access = access;
         this.name = name;
+        this.nestedSourceName = nestedSourceName;
         this.signature = signature;
         this.superName = superName;
         if (interfaces != null) {
@@ -284,7 +291,7 @@ public class ClassNode extends ClassVisitor {
      * This methods checks that this node, and all its nodes recursively, do not
      * contain elements that were introduced in more recent versions of the ASM
      * API than the given version.
-     * 
+     *
      * @param api
      *            an ASM API version. Must be one of {@link Opcodes#ASM4}.
      */
@@ -294,7 +301,7 @@ public class ClassNode extends ClassVisitor {
 
     /**
      * Makes the given class visitor visit this class.
-     * 
+     *
      * @param cv
      *            a class visitor.
      */
@@ -302,7 +309,7 @@ public class ClassNode extends ClassVisitor {
         // visits header
         String[] interfaces = new String[this.interfaces.size()];
         this.interfaces.toArray(interfaces);
-        cv.visit(version, access, name, signature, superName, interfaces);
+        cv.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
         // visits source
         if (sourceFile != null || sourceDebug != null) {
             cv.visitSource(sourceFile, sourceDebug);

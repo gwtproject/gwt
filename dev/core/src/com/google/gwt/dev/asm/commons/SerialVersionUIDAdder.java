@@ -198,8 +198,8 @@ public class SerialVersionUIDAdder extends ClassVisitor {
      */
     @Override
     public void visit(final int version, final int access, final String name,
-            final String signature, final String superName,
-            final String[] interfaces) {
+            String nestedSourceName, final String signature,
+            final String superName, final String[] interfaces) {
         computeSVUID = (access & Opcodes.ACC_INTERFACE) == 0;
 
         if (computeSVUID) {
@@ -208,7 +208,7 @@ public class SerialVersionUIDAdder extends ClassVisitor {
             this.interfaces = interfaces;
         }
 
-        super.visit(version, access, name, signature, superName, interfaces);
+        super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
     }
 
     /*

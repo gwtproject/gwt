@@ -137,10 +137,10 @@ public final class TraceClassVisitor extends ClassVisitor {
 
     @Override
     public void visit(final int version, final int access, final String name,
-            final String signature, final String superName,
-            final String[] interfaces) {
+            String nestedSourceName, final String signature,
+            final String superName, final String[] interfaces) {
         p.visit(version, access, name, signature, superName, interfaces);
-        super.visit(version, access, name, signature, superName, interfaces);
+        super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
     }
 
     @Override

@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -174,13 +174,13 @@ public class RequestFactoryJarExtractor {
 
   /**
    * Abstracts the mechanism by which class files are loaded.
-   * 
+   *
    * @see ClassLoaderLoader
    */
   public interface Loader {
     /**
      * Returns true if the specified resource can be loaded.
-     * 
+     *
      * @param resource a resource name (e.g. <code>com/example/Foo.class</code>)
      */
     boolean exists(String resource);
@@ -188,7 +188,7 @@ public class RequestFactoryJarExtractor {
     /**
      * Returns an InputStream to access the specified resource, or
      * <code>null</code> if no such resource exists.
-     * 
+     *
      * @param resource a resource name (e.g. <code>com/example/Foo.class</code>)
      */
     InputStream getResourceAsStream(String resource);
@@ -390,8 +390,8 @@ public class RequestFactoryJarExtractor {
     }
 
     @Override
-    public void visit(int version, int access, String name, String signature, String superName,
-        String[] interfaces) {
+    public void visit(int version, int access, String name, String nestedSourceName,
+        String signature, String superName, String[] interfaces) {
       name = processInternalName(sourceType, name);
       superName = processInternalName(sourceType, superName);
       if (interfaces != null) {
@@ -399,7 +399,7 @@ public class RequestFactoryJarExtractor {
           interfaces[i] = processInternalName(sourceType, interfaces[i]);
         }
       }
-      super.visit(version, access, name, signature, superName, interfaces);
+      super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
     }
 
     @Override
@@ -742,12 +742,12 @@ public class RequestFactoryJarExtractor {
   private static final boolean VERBOSE = false;
 
   /**
-   * 
+   *
    */
   private static final String CODE_AND_SOURCE = "+src";
 
   /**
-   * 
+   *
    */
   private static final String SOURCE_ONLY = "-src";
 
@@ -886,7 +886,7 @@ public class RequestFactoryJarExtractor {
   /**
    * Load the classfile for the given binary name and apply the provided
    * visitor.
-   * 
+   *
    * @return <code>true</code> if the visitor was successfully visited
    */
   private static boolean visit(RequestFactoryJarExtractor.ErrorContext logger,
@@ -1026,7 +1026,7 @@ public class RequestFactoryJarExtractor {
 
   /**
    * Process a type, possibly returning a rebased type.
-   * 
+   *
    * @param sourceType TODO
    */
   private Type processType(String sourceType, Type type) {

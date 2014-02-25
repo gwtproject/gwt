@@ -38,7 +38,7 @@ import com.google.gwt.dev.asm.Opcodes;
 
 /**
  * A {@link ClassVisitor} for type remapping.
- * 
+ *
  * @author Eugene Kuleshov
  */
 public class RemappingClassAdapter extends ClassVisitor {
@@ -58,12 +58,12 @@ public class RemappingClassAdapter extends ClassVisitor {
     }
 
     @Override
-    public void visit(int version, int access, String name, String signature,
-            String superName, String[] interfaces) {
+    public void visit(int version, int access, String name, String nestedSourceName,
+            String signature, String superName, String[] interfaces) {
         this.className = name;
-        super.visit(version, access, remapper.mapType(name), remapper
-                .mapSignature(signature, false), remapper.mapType(superName),
-                interfaces == null ? null : remapper.mapTypes(interfaces));
+        super.visit(version, access, remapper.mapType(name), nestedSourceName, remapper
+            .mapSignature(signature, false), remapper.mapType(superName), interfaces == null ? null
+                : remapper.mapTypes(interfaces));
     }
 
     @Override

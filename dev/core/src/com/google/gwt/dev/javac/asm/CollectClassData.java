@@ -149,6 +149,8 @@ public class CollectClassData extends EmptyVisitor {
   private String[] interfaceInternalNames;
   // internal name
   private String internalName;
+  // nested source name
+  private String nestedSourceName;
   private final List<CollectMethodData> methods = new ArrayList<CollectMethodData>();
   private String signature;
   private String source = null;
@@ -207,6 +209,10 @@ public class CollectClassData extends EmptyVisitor {
     return methods;
   }
 
+  public String getNestedSourceName() {
+    return nestedSourceName;
+  }
+
   public String getSignature() {
     return signature;
   }
@@ -244,17 +250,19 @@ public class CollectClassData extends EmptyVisitor {
    *
    * @param version classfile version (ie, Opcodes.V1_5 etc)
    * @param access access flags (ie, bitwise or of Opcodes.ACC_*)
-   * @param internalName internal name of this class (ie, com/google/Foo)
    * @param signature generic signature or null
-   * @param superInternalName internal name of superclass (ie, java/lang/Object)
    * @param interfaces array of internal names of implemented interfaces
+   * @param internalName internal name of this class (ie, com/google/Foo)
+   * @param nestedSourceName nested source name of this class (ie, Foo, Foo.Bar, or Foo$Bar)
+   * @param superInternalName internal name of superclass (ie, java/lang/Object)
    */
   @Override
-  public void visit(int version, int access, String internalName, String signature,
-      String superInternalName, String[] interfaces) {
+  public void visit(int version, int access, String internalName, String nestedSourceName,
+      String signature, String superInternalName, String[] interfaces) {
     this.access = access;
     assert Name.isInternalName(internalName);
     this.internalName = internalName;
+    this.nestedSourceName = nestedSourceName;
     this.signature = signature;
     this.superInternalName = superInternalName;
     this.interfaceInternalNames = interfaces;

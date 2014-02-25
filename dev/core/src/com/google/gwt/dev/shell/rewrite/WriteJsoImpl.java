@@ -69,14 +69,14 @@ abstract class WriteJsoImpl extends ClassVisitor {
     }
 
     @Override
-    public void visit(int version, int access, String name, String signature,
-        String superName, String[] interfaces) {
+    public void visit(int version, int access, String name, String nestedSourceName,
+        String signature, String superName, String[] interfaces) {
 
       ArrayList<String> jsoDescList = new ArrayList<String>();
       jsoDescList.addAll(jsoDescriptors);
       interfaces = jsoDescList.toArray(new String[jsoDescList.size()]);
 
-      super.visit(version, access, name, signature, superName, interfaces);
+      super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
 
       /*
        * Generate the synthetic "hostedModeReferece" field to contain the
@@ -207,13 +207,13 @@ abstract class WriteJsoImpl extends ClassVisitor {
     }
 
     @Override
-    public void visit(int version, int access, String name, String signature,
-        String superName, String[] interfaces) {
+    public void visit(int version, int access, String name, String nestedSourceName,
+        String signature, String superName, String[] interfaces) {
       // Reference the old superclass's implementation class.
       superName += '$';
       interfaces = null;
 
-      super.visit(version, access, name, signature, superName, interfaces);
+      super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
     }
 
     @Override
@@ -271,11 +271,11 @@ abstract class WriteJsoImpl extends ClassVisitor {
    * Records the original name and resets access opcodes.
    */
   @Override
-  public void visit(int version, int access, String name, String signature,
-      String superName, String[] interfaces) {
+  public void visit(int version, int access, String name, String nestedSourceName,
+      String signature, String superName, String[] interfaces) {
     originalName = name;
     super.visit(version, Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC
-        | Opcodes.ACC_SYNTHETIC, name + '$', signature, superName, interfaces);
+        | Opcodes.ACC_SYNTHETIC, name + '$', nestedSourceName, signature, superName, interfaces);
   }
 
   /**

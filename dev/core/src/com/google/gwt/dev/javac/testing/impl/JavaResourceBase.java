@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.javac.testing.impl;
 
+
 /**
  * Contains standard Java source files for testing.
  */
@@ -244,6 +245,18 @@ public class JavaResourceBase {
           "  public Class<?> getClass() { return ___clazz; }"
           ,
           "}");
+
+  public static final MockJavaResource OUTER_INNER = createMockJavaResource(
+      "com.google.Outer",
+      "package com.google;",
+      "public class Outer {",
+      "  private static class Inner {",
+      "    private static class Deep$est {}",
+      "  }",
+      "}");
+
+  public static final MockJavaResource PSEUDO_INNER = createMockJavaResource(
+      "com.google.Pseudo$Inner", "package com.google;", "public class Pseudo$Inner {}");
 
   public static final MockJavaResource SERIALIZABLE =
       createMockJavaResource("java.io.Serializable",

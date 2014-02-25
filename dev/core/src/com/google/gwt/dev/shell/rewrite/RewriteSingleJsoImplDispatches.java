@@ -138,10 +138,10 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
   }
 
   @Override
-  public void visit(int version, int access, String name, String signature,
-      String superName, String[] interfaces) {
+  public void visit(int version, int access, String name, String nestedSourceName,
+      String signature, String superName, String[] interfaces) {
     assert currentTypeName == null;
-    super.visit(version, access, name, signature, superName, interfaces);
+    super.visit(version, access, name, nestedSourceName, signature, superName, interfaces);
 
     /*
      * This visitor would mangle JSO$ since it acts as a roll-up of all

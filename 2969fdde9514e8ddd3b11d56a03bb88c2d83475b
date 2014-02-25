@@ -2,6 +2,195 @@
   "comments": [
     {
       "key": {
+        "uuid": "1cf89137_5735b4ee",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "nit: change the order.",
+      "range": {
+        "startLine": 94,
+        "startChar": 46,
+        "endLine": 94,
+        "endChar": 54
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_d70d4454",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Probably it would be make more sense to keep the handler as a local variable in caller method and pass it in dispose. (Otherwise calling attachListener twice cause leak)",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_baf62dff",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Any reason to introduce all these additional methods and just have the implementation here?",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 15
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_b7975877",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "http://caniuse.com/#search\u003dpushState says there are buggy behavior with Safari. Do we know what those buggy behaviors are and can we add workarounds for those?",
+      "range": {
+        "startLine": 123,
+        "startChar": 19,
+        "endLine": 123,
+        "endChar": 28
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_dae9e124",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "nit:remove space",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_0c803f6a",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "This class is not used other than being the parent class for HistoryImplIE8? I\u0027m lost here...",
+      "range": {
+        "startLine": 139,
+        "startChar": 23,
+        "endLine": 139,
+        "endChar": 43
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_7730b000",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Already defined in the parent class?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_5a05d12d",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "isSupported is a runtime check so this basically defeats the purpose deferred bindings. Any reason to keep deferred bindings and GWT.create?\n\nThere might be some but I don\u0027t understand the benefit of having two implementations - using location.hash/hashchange and other one with push/pop state. Why is the benefit of additional code bloat?",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_8c6c4f22",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "From MSDN:\n\"Browsers tend to handle the popstate event differently on page load. Chrome and Safari always emit a popstate event on page load, but Firefox doesn\u0027t.\"\n\nThere are 2 questions here.\n\n1. How are you going to handle this difference?\n\n2. How are you going to keep existing apps working?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef985df7_02070ead",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -13,6 +202,183 @@
       "writtenOn": "2014-02-24T16:39:21Z",
       "side": 1,
       "message": "Missing \u003cp\u003e ?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_5a57111e",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "fail.",
+      "range": {
+        "startLine": 227,
+        "startChar": 82,
+        "endLine": 227,
+        "endChar": 86
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_7a52d52f",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Running",
+      "range": {
+        "startLine": 227,
+        "startChar": 7,
+        "endLine": 227,
+        "endChar": 14
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_3a4c5d92",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "instead.",
+      "range": {
+        "startLine": 229,
+        "startChar": 22,
+        "endLine": 229,
+        "endChar": 29
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_9a25a9bf",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "See my comments above.",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 14
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_fa45c564",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Can we switch the linker for our tests instead?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_3a357df0",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "any reason to have 2 tokens inserted here?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_fa1ee576",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Can you move this closer to its context?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_ba286d97",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "Why timer? Is the events executed asynchronous? Are we correctly emulating that?",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_5a303100",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T02:20:22Z",
+      "side": 1,
+      "message": "You can use History.getToken or event.getValue",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

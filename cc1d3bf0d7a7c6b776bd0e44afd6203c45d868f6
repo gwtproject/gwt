@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c0f6924_176bb407",
+        "filename": "dev/core/src/com/google/gwt/core/linker/DevModeRedirectHook.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-25T01:09:00Z",
+      "side": 1,
+      "message": "nit: we are using var \u0027_gwt_dummy_\u0027 in Storage, you can reuse that.",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 31
+      },
+      "revId": "cc1d3bf0d7a7c6b776bd0e44afd6203c45d868f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

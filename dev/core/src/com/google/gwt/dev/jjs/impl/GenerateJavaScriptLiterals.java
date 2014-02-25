@@ -16,16 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
-import com.google.gwt.dev.jjs.ast.JCharLiteral;
-import com.google.gwt.dev.jjs.ast.JDoubleLiteral;
-import com.google.gwt.dev.jjs.ast.JFloatLiteral;
-import com.google.gwt.dev.jjs.ast.JIntLiteral;
-import com.google.gwt.dev.jjs.ast.JLongLiteral;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JStringLiteral;
-import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsNameRef;
@@ -140,5 +131,17 @@ public class GenerateJavaScriptLiterals extends JVisitor {
 
   protected final <T extends JsVisitable> void push(T node) {
     nodeStack.push(node);
+  }
+
+  public JsNameRef convertQualifiedPrototypeToNameRef(SourceInfo sourceInfo, String jsPrototype) {
+    String parts[] = jsPrototype.split("\\.");
+    JsNameRef toReturn = new JsNameRef(sourceInfo, parts[parts.length - 1]);
+    JsNameRef ref = toReturn;
+    for (int i = parts.length - 2; i >= 0; i--) {
+      JsNameRef qualifier = new JsNameRef(sourceInfo, parts[i]);
+      ref.setQualifier(qualifier);
+      ref = qualifier;
+    }
+    return toReturn;
   }
 }

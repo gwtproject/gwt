@@ -24,80 +24,37 @@ import com.google.gwt.user.client.Window;
  */
 public class Hello implements EntryPoint {
 
-  @JsInterface(prototype = "HTMLElement")
-  public interface HTMLElement {
-    void setAttribute(String atr, String value);
+  @JsInterface(prototype = "$wnd.MyClass")
+  public interface MyClass {
+    void constructor(int x);
+    int getX();
+
+      public static class Prototype implements MyClass {
+          public Prototype(int i) {
+          }
+
+          @Override
+          public native int getX() /*-{
+              return 2;
+          }-*/;
+      }
   }
 
-  @JsInterface
-  public interface GoogleMap extends HTMLElement {
-    void registerCallback(SomeCallback someCallback);
-  }
-
-
-
-  @JsInterface
-  interface MyAnchor{}
-
-  @JsInterface
-  interface BaseInter {
-    int m();
-  }
-  @JsInterface(prototype = "HTMLButtonElement")
-  interface Button {
-    void click();
-    void addEventListener(String event, SomeCallback a);
-  }
-
-  @JsInterface
-  interface SomeCallback {
-    void callbackA();
-  }
-  static class Base implements BaseInter {
-    public int m() {
-      return 42;
+  static class MyChildClass extends MyClass.Prototype {
+    MyChildClass() {
+      super(99);
     }
-  }
-
-  static class Child extends Base implements SomeCallback {
 
     @Override
-    public void callbackA() {
-      Window.alert("foo");
-    }
-  }
-
-  public void onModuleLoad() {
-    Button b = (Button) foo();
-    b.click();
-//    b.toString();
-    register(new Child());
-
-    MyAnchor map = abc(); // Fails here w/ CCE
-    Window.alert("" + map);
-
-    GoogleMap map2 = abc();
-    map2.setAttribute("style","height:400px; display:block");
-
-    b.addEventListener("click", new SomeCallback() {
-      @Override
-      public void callbackA() {
-        Window.alert("hello");
+      public int getX() {
+          return super.getX() + 10;
       }
-    });
+  }
+  public void onModuleLoad() {
+     MyChildClass foo = new MyChildClass();
+     Object bar = Math.random() > 0.0001 ? foo : "Hello";
+     Window.alert((bar instanceof MyClass)+"");
+     Window.alert("getX = " + foo.getX());
   }
 
-  public static native Object foo() /*-{
-    var but = $doc.createElement("button");
-    $doc.body.appendChild(but);
-    return but;
-  }-*/;
-
-  public static native void register(Base e) /*-{
-    $wnd.__r = e;
-  }-*/;
-
-  private static native <T> T abc() /*-{
-      return $doc.createElement("a");
-  }-*/;
 }

@@ -58,12 +58,13 @@ public class JavaClassHierarchySetupUtil {
       // not a placeholder entry setup by Class.setClassLiteral
       _ = prototype;
     } else {
-      _ = prototypesByTypeId[typeId]  = typeof(superTypeId) != 'number' ?
+      var isJsPrototype = superTypeId && typeof(superTypeId) != 'number';
+      _ = prototypesByTypeId[typeId]  = isJsPrototype  ?
           Object.create(superTypeId.prototype) :
           (!superTypeId) ? {} : createSubclassPrototype(superTypeId);
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
-      _.constructor = seed;
-    }
+      _.constructor = isJsPrototype ? superTypeId : _;
+l    }
     for (var i = 3; i < arguments.length; ++i) {
       // Assign the type prototype to each constructor.
       arguments[i].prototype = _;
@@ -84,6 +85,7 @@ public class JavaClassHierarchySetupUtil {
     // Don't name it just constructor as it does not work!
     var constructorFn = function() {}
     constructorFn.prototype = prototypesByTypeId[superTypeId];
+
     return new constructorFn();
   }-*/;
 

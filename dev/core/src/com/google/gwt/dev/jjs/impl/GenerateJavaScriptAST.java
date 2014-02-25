@@ -1417,8 +1417,43 @@ public class GenerateJavaScriptAST {
           JsName callName = objectScope.declareName("call");
           callName.setObfuscatable(false);
           qualifier = callName.makeRef(x.getSourceInfo());
-          qualifier.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
+          JsNameRef methodRef = names.get(method).makeRef(x.getSourceInfo());
+          qualifier.setQualifier(methodRef);
           jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
+
+
+          // Is this method targeting a Foo.Prototype class?
+          if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+            String jsPrototype = null;
+            // find JsInterface of Prototype method being invoked.
+            for (JInterfaceType intf : method.getEnclosingType().getImplements()) {
+              JInterfaceType jsIntf = program.typeOracle.getNearestJsInterface(intf, true);
+              if (jsIntf != null) {
+                jsPrototype = jsIntf.getJsPrototype();
+                break;
+              }
+            }
+            assert jsPrototype != null : "Unable to find JsInterface with prototype";
+
+            // in JsInterface case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
+            // the method target should be on a class that ends with $Prototype and implements a JsInterface
+            if (!(method instanceof JConstructor) && program.typeOracle.isJsInterfaceMethod(method)) {
+              JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
+              // remove StaticRef from JsName node so that Js optimization passes leave it alone
+              methodRef.getName().setStaticRef(null);
+              methodRef.setQualifier(protoRef);
+              // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
+              protoRef.setQualifier(javaToJavaScriptLiteralConverter.convertQualifiedPrototypeToNameRef(
+                  x.getSourceInfo(), jsPrototype));
+            }
+
+            // if invoking a super constructor and the class is a JsInterface prototype, invoke the JS constructor
+            if (method instanceof JConstructor) {
+              // this makes the call as jsPrototype.call(this, args)
+              qualifier.setQualifier(javaToJavaScriptLiteralConverter.convertQualifiedPrototypeToNameRef(
+                  x.getSourceInfo(), jsPrototype));
+            }
+          }
         } else {
           JsName polyName = polymorphicNames.get(method);
           // potentially replace method call with property access
@@ -2323,7 +2358,6 @@ public class GenerateJavaScriptAST {
       // check if there's an overriding prototype
       String jsPrototype = maybeGetJsInterfacePrototype(superClass);
 
-
       // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
       defineClass.getArguments().add(convertJavaLiteral(typeId));
       // setup superclass normally
@@ -2331,8 +2365,8 @@ public class GenerateJavaScriptAST {
         defineClass.getArguments().add(convertJavaLiteral(superTypeId));
       } else {
         // setup extension of native JS object
-        JsNameRef jsProtoClassRef = convertQualifiedPrototypeToNameRef(x.getSourceInfo(),
-            jsPrototype);
+        JsNameRef jsProtoClassRef = javaToJavaScriptLiteralConverter.convertQualifiedPrototypeToNameRef(
+          x.getSourceInfo(), jsPrototype);
         // TODO(cromwellian) deal with module vs global scoping issue
         // jsProtoClassRef.setQualifier(new JsNameRef(x.getSourceInfo(), "$wnd"));
         JsNameRef jsProtoFieldRef = new JsNameRef(x.getSourceInfo(), "prototype");
@@ -2356,20 +2390,13 @@ public class GenerateJavaScriptAST {
       typeForStatMap.put(tmpAsgStmt, x);
     }
 
-    private JsNameRef convertQualifiedPrototypeToNameRef(SourceInfo sourceInfo, String jsPrototype) {
-      String parts[] = jsPrototype.split("\\.");
-      JsNameRef ref = new JsNameRef(sourceInfo, parts[parts.length - 1]);
-      for (int i = parts.length - 1; i >= 0; i--) {
-        JsNameRef qualifier = new JsNameRef(sourceInfo, parts[i]);
-        ref.setQualifier(qualifier);
-        ref = qualifier;
-      }
-      return ref;
-    }
-
     private String maybeGetJsInterfacePrototype(JClassType superClass) {
+      if (superClass == null) {
+          return null;
+      }
       JDeclaredType enclosingType = superClass.getEnclosingType();
-      if (enclosingType != null && enclosingType instanceof JInterfaceType) {
+      if (enclosingType != null && enclosingType instanceof JInterfaceType &&
+              JProgram.isJsInterfacePrototype(superClass)) {
         JInterfaceType intf = (JInterfaceType) enclosingType;
         if (intf.isJsInterface()) {
           return intf.getJsPrototype();
@@ -2472,7 +2499,7 @@ public class GenerateJavaScriptAST {
            }
           Pair<String, String> exportNamespacePair = getExportNamespace(exportName);
           if (!lastProvidedNamespace.equals(exportNamespacePair.getLeft())) {
-            JsName provideFunc = indexedFunctions.get("SeedUtil.provide").getName();
+            JsName provideFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.provide").getName();
             JsInvocation provideCall = new JsInvocation(x.getSourceInfo());
             provideCall.setQualifier(provideFunc.makeRef(x.getSourceInfo()));
             provideCall.getArguments().add(new JsStringLiteral(x.getSourceInfo(),

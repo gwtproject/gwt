@@ -83,8 +83,8 @@ final class Cast {
   /**
    * A dynamic cast that optionally checks for JsInterface prototypes.
    */
-  static Object dynamicCastWithPrototype(Object src, int dstId, String jsPrototype) {
-    if (src != null && !canCastUnsafe(src, dstId) && !jsInstanceOf(src, jsPrototype)) {
+  static Object dynamicCastWithPrototype(Object src, int dstId, String jsType) {
+    if (src != null && !canCast(src, dstId) && !jsInstanceOf(src, jsType)) {
       throw new ClassCastException();
     }
     return src;
@@ -94,8 +94,8 @@ final class Cast {
     return (src != null) && canCast(src, dstId);
   }
 
-  static boolean instanceOfJsInterface(Object src, int dstId, String proto) {
-    return instanceOf(src, dstId) || jsInstanceOf(src, proto);
+  static boolean instanceOfJsInterface(Object src, int dstId, String jsType) {
+    return instanceOf(src, dstId) || jsInstanceOf(src, jsType);
   }
 
   static boolean instanceOfJso(Object src) {
@@ -144,8 +144,28 @@ final class Cast {
     return a == b;
   }-*/;
 
-  static native boolean jsInstanceOf(Object a, String b) /*-{
-    return a instanceof $wnd[b];
+  /**
+   * Determine if object is an instanceof jsType regardless of window or frame.
+   */
+  static native boolean jsInstanceOf(Object obj, String jsType) /*-{
+    if (obj instanceof jsType) {
+        return true;
+    }
+    if (obj && obj.constructor) {
+      var jsFunction = obj.constructor;
+        // Find native 'Function' function
+        while (jsFunction != jsFunction.constructor) {
+          jsFunction = jsFunction.constructor;
+        }
+        // eval 'return window' in context in window which defines obj's constructor
+        var jsTypeInContext = jsFunction("return window;")();
+        // build up contextWindow.some.type.Path
+        for (var parts = jsType.split("."), i = 0, l = parts.length; i < l && jsTypeInContext; i++) {
+            jsTypeInContext = jsTypeInContext[parts[i]];
+        }
+        return obj instanceof jsTypeInContext;
+    }
+    return false;
   }-*/;
 
   static native boolean jsNotEquals(Object a, Object b) /*-{

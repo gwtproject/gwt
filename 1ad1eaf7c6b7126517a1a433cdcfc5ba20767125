@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c156131_99f49ba0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Name.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T10:13:07Z",
+      "side": 0,
+      "message": "Did you really mean to remove that TODO? (i.e. do you give up on improving validation here?)",
+      "revId": "1ad1eaf7c6b7126517a1a433cdcfc5ba20767125",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

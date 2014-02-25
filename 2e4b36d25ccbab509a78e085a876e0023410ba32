@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c156131_99ddbb32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T10:13:07Z",
+      "side": 1,
+      "message": "nit: that should be a \"Bug:\" footer line:\n\n Bug: issue 6799",
+      "revId": "2e4b36d25ccbab509a78e085a876e0023410ba32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c156131_59ba83c3",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Name.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T10:13:07Z",
+      "side": 1,
+      "message": "Could be written as\n\n return name \u003d\u003d null || !name.contains(\"/\");\n\nfor consistency with isBinaryName and isInternalName.",
+      "revId": "2e4b36d25ccbab509a78e085a876e0023410ba32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_9bcfeb6a",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JdtCompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T10:13:07Z",
+      "side": 1,
+      "message": "Any reason you don\u0027t test Outer.Inner.Deep$est here? (and possibly mock it elsewhere)",
+      "revId": "2e4b36d25ccbab509a78e085a876e0023410ba32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

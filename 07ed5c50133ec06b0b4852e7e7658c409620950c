@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "9c156131_dc1b2185",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T13:55:58Z",
+      "side": 1,
+      "message": "nit: 2 blank lines (+ whitespace)",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c156131_fc1ee576",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T13:55:58Z",
+      "side": 1,
+      "message": "nit: missing blank line",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c0a6d15_fb902b83",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-02-25T13:55:58Z",
+      "side": 1,
+      "message": "Did you mean \"implements HistoryImpl\" ?",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_da768119",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 5

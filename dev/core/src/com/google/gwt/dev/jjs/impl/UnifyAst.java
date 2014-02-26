@@ -228,9 +228,6 @@ public class UnifyAst {
         assert x.getType() == target.getType();
       }
 
-      if (target.getName().equals("doIt")) {
-        boolean xx = true;
-      }
       // rescue any single-abstract-methods flowing into JsInterface methods (lambdas which might be invoked)
       if (program.typeOracle.isOrExtendsJsInterface(target.getEnclosingType(), false)) {
         for (JParameter param : target.getParams()) {

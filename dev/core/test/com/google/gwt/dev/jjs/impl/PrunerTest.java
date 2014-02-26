@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
@@ -64,7 +65,34 @@ public class PrunerTest extends OptimizerTestBase {
         "}-*/;");
     addSnippetClassDecl("static void methodWithUninstantiatedParam(UninstantiatedClass c) { }");
     addSnippetClassDecl("interface UnusedInterface { void foo(); }");
+    addSnippetClassDecl("interface Callback { void go(); }");
+    addSnippetImport("com.google.gwt.core.client.js.JsInterface");
+    addSnippetImport("com.google.gwt.core.client.js.JsExport");
 
+    addSnippetClassDecl("@JsInterface interface Js { void doIt(Callback cb); }");
+    addSnippetClassDecl("@JsInterface(prototype=\"Foo\") interface JsProto { " +
+        "static class Prototype implements JsProto {" +
+        "public Prototype(int arg) {}" +
+        "public void doIt(Callback cb) {}" +
+        "}" +
+        "void doIt(Callback cb); " +
+        "}");
+    addSnippetClassDecl("static class JsProtoImpl extends JsProto.Prototype {" +
+        "public JsProtoImpl() { super(10); }" +
+        "public void doIt(Callback cb) { super.doIt(cb); }" +
+        "}");
+
+    addSnippetClassDecl("static class JsProtoImpl2 extends JsProto.Prototype {" +
+        "@JsExport(\"foo\") public JsProtoImpl2() { super(10); }" +
+        "public void doIt(Callback cb) { super.doIt(cb); }" +
+        "}");
+
+    addSnippetClassDecl("static class JsProtoImpl3 extends JsProto.Prototype {" +
+        "public JsProtoImpl3() { super(10); }" +
+        "public void doIt(Callback cb) { super.doIt(cb); }" +
+        "}");
+
+    addSnippetClassDecl("static native void rescueByCallback() /*-{ }-*/;");
     Result result;
     (result = optimize("void", 
         "usedMethod();",
@@ -77,7 +105,9 @@ public class PrunerTest extends OptimizerTestBase {
         "methodWithUninstantiatedParam(null);",
         "new UsedClass(null);",
         "new UsedClass(returnUninstantiatedClass(), returnUninstantiatedClass());",
-        "UninstantiatedClass localUninstantiated = null;"
+        "UninstantiatedClass localUninstantiated = null;",
+        "JsProtoImpl jsp = new JsProtoImpl();",
+        "jsp.doIt(new Callback() { public void go() { rescueByCallback(); } });"
         )).intoString(
             "EntryPoint.usedMethod();",
             "EntryPoint.foo(EntryPoint.unassignedField);",
@@ -87,7 +117,9 @@ public class PrunerTest extends OptimizerTestBase {
             "null.nullMethod();",
             "EntryPoint.methodWithUninstantiatedParam();",
             "new EntryPoint$UsedClass();",
-            "new EntryPoint$UsedClass((EntryPoint.returnUninstantiatedClass(), EntryPoint.returnUninstantiatedClass()));"
+            "new EntryPoint$UsedClass((EntryPoint.returnUninstantiatedClass(), EntryPoint.returnUninstantiatedClass()));",
+            "EntryPoint$JsProtoImpl jsp = new EntryPoint$JsProtoImpl();",
+            "jsp.doIt(new EntryPoint$1());"
             );
     
     assertNotNull(result.findMethod("usedMethod"));
@@ -138,6 +170,30 @@ public class PrunerTest extends OptimizerTestBase {
         "\n" +
         "}", 
         result.findClass("EntryPoint$UsedInterface").toSource());
+
+    // Callback.go should be rescued even though a direct invocation of the go method doesn't exist
+    assertNotNull(findMethod(result.findClass("EntryPoint$1"), "go"));
+
+    // Neither super ctor call, nor super call's param is pruned
+    assertEquals(
+        "public EntryPoint$JsProtoImpl(){\n" +
+            "  super(10);\n" +
+            "  this.$init();\n" +
+            "}",
+        findMethod(result.findClass("EntryPoint$JsProtoImpl"), "EntryPoint$JsProtoImpl").toSource());
+
+    // super call isn't pruned even though Prototype.doIt doesn't use the value of cb
+    assertEquals(
+        "public void doIt(EntryPoint$Callback cb){\n" +
+            "  super(cb);\n" +
+            "}",
+        findMethod(result.findClass("EntryPoint$JsProtoImpl"), "doIt").toSource());
+
+    // Not exported, and not instantiated, so should be pruned
+    assertNull(result.findClass("EntryPoint$JsProtoImpl3"));
+
+    // Should be rescued because of @JsExport
+    assertNotNull(result.findClass("EntryPoint$JsProtoImpl2"));
   }
 
   @Override

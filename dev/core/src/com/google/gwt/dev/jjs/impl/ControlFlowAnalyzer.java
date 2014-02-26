@@ -1017,6 +1017,8 @@ public class ControlFlowAnalyzer {
      * scope this down via flags or module properties.
      */
     for (JMethod method : program.typeOracle.getExportedMethods()) {
+      // treat class as instantiated, since a ctor may be called from JS export
+      rescuer.rescue(method.getEnclosingType(), true, true);
       traverseFrom(method);
     }
 

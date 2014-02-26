@@ -117,6 +117,9 @@ public class MethodInliner {
         } else if (!body.getLocals().isEmpty()) {
           // methods with local variables cannot be inlined
           possibleToInline = false;
+        } else if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+          // don't inline calls to JsInterface Prototype methods, since these are merely stubs to preserve super calls
+          possibleToInline = false;
         } else {
           JMultiExpression multi = createMultiExpressionFromBody(body, ignoringReturnValueFor == x);
           if (multi != null) {

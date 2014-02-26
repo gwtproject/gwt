@@ -57,6 +57,24 @@
       "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_00fecc83",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:46:33Z",
+      "side": 1,
+      "message": "Really? Then I have wasted your time. With that fact, your initial patch was already good as we don\u0027t need to worry about any user passing Comparators.natural to PriorityQueue :(\n\nAnyway, I\u0027ll leave to you to choose which implementation to go with.",
+      "parentUuid": "7c0a6d15_3e3571f0",
+      "revId": "9cdb5085c00292572f2dcf8119d84865c886ae87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -33,6 +33,24 @@
       "revId": "fd5dd15142a2c53626c830cc598c15ff952678c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_8fa9e162",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5000
+      },
+      "writtenOn": "2014-02-26T22:36:35Z",
+      "side": 1,
+      "message": "(You can safely ignore these warnings; Jenkins seems to be treating the https:// URL as a \"Foo: bar\" footer field like the Change-Id and Review-Link fields below.)",
+      "parentUuid": "5c0f6924_06d70414",
+      "revId": "fd5dd15142a2c53626c830cc598c15ff952678c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

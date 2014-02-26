@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1cf89137_30f58936",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:03:39Z",
+      "side": 1,
+      "message": "nit:space",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 2
+      },
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c156131_dc1b2185",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 5
@@ -13,6 +36,29 @@
       "writtenOn": "2014-02-25T13:55:58Z",
       "side": 1,
       "message": "nit: 2 blank lines (+ whitespace)",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_f073a126",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:03:39Z",
+      "side": 1,
+      "message": "nit: missing javadoc (also for the other classes)",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 31
+      },
       "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +99,23 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_4b518425",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:03:39Z",
+      "side": 1,
+      "message": "We can get rid of maybeRunOtherListeners() from the contract and internal methods here by changing this method to following:\n\nvar oldHandler \u003d $window.onhashchange;\n$wnd.onhashchange \u003d function() {\n  handler();\n  if (oldHandler !\u003d null) {\n    try {\n      oldHandler();\n    } catch(e) {\n      // we do not care about errors from another module or JS\n    }\n  }\n};\nthis.@...HistoryImplIE8::oldHandler \u003d oldHandler;",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_da768119",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 5
@@ -64,6 +127,29 @@
       "writtenOn": "2014-02-25T11:16:44Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_b09f5907",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:03:39Z",
+      "side": 1,
+      "message": "nit:space",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 4
+      },
       "revId": "07ed5c50133ec06b0b4852e7e7658c409620950c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

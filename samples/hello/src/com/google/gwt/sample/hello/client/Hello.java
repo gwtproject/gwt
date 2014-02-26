@@ -16,6 +16,7 @@
 package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.js.JsInterface;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -27,13 +28,26 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Hello implements EntryPoint {
 
-  public void onModuleLoad() {
-    Button b = new Button("Click me", new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        Window.alert("Hello, AJAX");
-      }
-    });
+  public interface ArrayLike{
+    Object get(int i);
+  }
 
-    RootPanel.get().add(b);
+  public interface MapLike {
+    void put(String key, String value);
+  }
+
+  @JsInterface(prototype="HTMLElement")
+  public interface HTMLElement extends ArrayLike {
+    void addEventListener(String foo);
+  }
+
+  @JsInterface(prototype="HTMLButtonElement")
+  public interface HTMLButtonElement extends HTMLElement, MapLike {
+    void click();
+  }
+
+
+  public void onModuleLoad() {
+
   }
 }

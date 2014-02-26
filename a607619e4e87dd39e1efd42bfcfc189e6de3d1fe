@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c0f6924_46ca9c38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_26cfa848",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027:\u0027 is not followed by whitespace.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_06e4a4c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptLiterals.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_e6e090b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_c6dd8cfa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_a6da98fe",
+        "filename": "user/test/com/google/gwt/core/CoreSuite.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.core.client.*.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_86fb145f",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Exception.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_66000097",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Override.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_4605fca4",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_260a08b7",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_06ef049b",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_e6ebf08a",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-26T23:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "a607619e4e87dd39e1efd42bfcfc189e6de3d1fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

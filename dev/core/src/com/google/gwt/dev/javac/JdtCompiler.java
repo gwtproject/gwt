@@ -30,13 +30,15 @@ import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.util.tools.Utility;
-
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.Compiler;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
+import org.eclipse.jdt.internal.compiler.apt.dispatch.BaseAnnotationProcessorManager;
+import org.eclipse.jdt.internal.compiler.apt.dispatch.BaseProcessingEnvImpl;
+import org.eclipse.jdt.internal.compiler.apt.dispatch.ProcessorInfo;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.Block;
@@ -51,6 +53,7 @@ import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
+import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
@@ -71,9 +74,26 @@ import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
+import javax.annotation.processing.Filer;
+import javax.annotation.processing.Messager;
+import javax.annotation.processing.Processor;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.NestingKind;
+import javax.tools.Diagnostic;
+import javax.tools.FileObject;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.net.JarURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,10 +101,13 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ServiceConfigurationError;
+import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -285,11 +308,12 @@ public class JdtCompiler {
     private TreeLogger logger;
     private int abortCount = 0;
 
-    public CompilerImpl(TreeLogger logger, CompilerOptions compilerOptions) {
+    public CompilerImpl(final TreeLogger logger, CompilerOptions compilerOptions) {
       super(new INameEnvironmentImpl(), DefaultErrorHandlingPolicies.proceedWithAllProblems(),
           compilerOptions, new ICompilerRequestorImpl(), new DefaultProblemFactory(
               Locale.getDefault()));
       this.logger = logger;
+      this.annotationProcessorManager = new GwtAnnotationProcessingManager(logger);
     }
 
     /**
@@ -376,6 +400,250 @@ public class JdtCompiler {
 
     int getAbortCount() {
       return abortCount;
+    }
+
+    private class GwtBaseProcessingEnv extends BaseProcessingEnvImpl {
+
+      private final TreeLogger logger;
+
+      public GwtBaseProcessingEnv(TreeLogger logger) {
+        this.logger = logger;
+        _compiler = CompilerImpl.this;
+        _filer = new GwtAnnotationFiler(this);
+      }
+
+      @Override
+      public void addNewUnit(final ICompilationUnit unit) {
+        StringWriter sw = new StringWriter();
+        StandardGeneratorContext.GeneratedUnitImpl gu =
+            new StandardGeneratorContext.GeneratedUnitImpl(sw, String.valueOf(unit.getMainTypeName()));
+        try {
+          sw.write(unit.getContents());
+          sw.close();
+          gu.commit(logger);
+          super.addNewUnit(new Adapter(new CompilationUnitBuilder.GeneratedCompilationUnitBuilder(gu)));
+        } catch (IOException e) {
+          problemReporter.abortDueToInternalError(e.getMessage());
+        }
+      }
+
+      @Override
+      public Messager getMessager() {
+        return new Messager() {
+
+          @Override
+          public void printMessage(Diagnostic.Kind kind, CharSequence charSequence) {
+            logger.log(kindToLevel(kind), String.valueOf(charSequence));
+          }
+
+          private TreeLogger.Type kindToLevel(Diagnostic.Kind kind) {
+            switch (kind) {
+              case ERROR:
+                return TreeLogger.ERROR;
+              case WARNING:
+              case MANDATORY_WARNING:
+                return TreeLogger.WARN;
+              default:
+                return TreeLogger.INFO;
+            }
+          }
+
+          @Override
+          public void printMessage(Diagnostic.Kind kind, CharSequence charSequence, Element element) {
+            logger.log(kindToLevel(kind), String.valueOf(charSequence));
+          }
+
+          @Override
+          public void printMessage(Diagnostic.Kind kind, CharSequence charSequence, Element element,
+                                   AnnotationMirror annotationMirror) {
+            logger.log(kindToLevel(kind), String.valueOf(charSequence));
+          }
+
+          @Override
+          public void printMessage(Diagnostic.Kind kind, CharSequence charSequence, Element element,
+                                   AnnotationMirror annotationMirror,
+                                   AnnotationValue annotationValue) {
+            logger.log(kindToLevel(kind), String.valueOf(charSequence));
+          }
+        };
+      }
+
+      @Override
+      public LookupEnvironment getLookupEnvironment() {
+        return CompilerImpl.this.lookupEnvironment;
+      }
+
+      @Override
+      public Locale getLocale() {
+        return Locale.getDefault();
+      }
+
+      private class GwtMemoryFileObject extends SimpleJavaFileObject {
+
+        private long lastModified;
+        private boolean _closed;
+        private GwtBaseProcessingEnv env;
+
+        protected GwtMemoryFileObject(URI fileName, Kind kind, GwtBaseProcessingEnv env) {
+          super(fileName, kind);
+          this.env = env;
+        }
+
+        byte[] fileData = new byte[0];
+
+        public boolean isNameCompatible(java.lang.String simpleName, javax.tools.JavaFileObject.Kind kind)
+        {
+          return super.isNameCompatible(simpleName,kind);
+
+        }
+
+        @Override
+        public InputStream openInputStream() throws IOException {
+          return new ByteArrayInputStream(fileData);
+        }
+
+
+        @Override
+        public OutputStream openOutputStream() throws IOException {
+          return new ByteArrayOutputStream() {
+            @Override
+            public void close() throws IOException {
+              fileData = toByteArray();
+              lastModified = System.currentTimeMillis();
+              closed();
+            }
+          };
+        }
+
+        protected void closed() {
+          if (!_closed) {
+            _closed = true;
+            switch(this.getKind()) {
+              case SOURCE :
+                env.addNewUnit(new org.eclipse.jdt.internal.compiler.batch.CompilationUnit(
+                    new String(fileData).toCharArray(), uri.getPath(), null));
+                break;
+              case CLASS :
+                IBinaryType binaryType = null;
+                try {
+                  binaryType = ClassFileReader.read(openInputStream(), uri.getPath());
+                } catch (ClassFormatException e) {
+                  // ignore
+                } catch (IOException e) {
+                  // ignore
+                }
+                if (binaryType != null) {
+                  char[] name = binaryType.getName();
+                  ReferenceBinding type = env._compiler.lookupEnvironment.getType(CharOperation.splitOn('/', name));
+                  if (type != null && type.isValidBinding() && type.isBinaryBinding()) {
+                    env.addNewClassFile(type);
+                  }
+                }
+                break;
+              case HTML:
+              case OTHER:
+                break;
+            }
+          }
+        }
+
+        @Override
+        public long getLastModified() {
+          return lastModified;
+        }
+
+        @Override
+        public NestingKind getNestingKind() {
+          return NestingKind.TOP_LEVEL;
+        }
+      }
+      private class GwtAnnotationFiler implements Filer {
+        private GwtBaseProcessingEnv env;
+
+        public GwtAnnotationFiler(GwtBaseProcessingEnv env) {
+          this.env = env;
+        }
+
+        @Override
+        public JavaFileObject createSourceFile(CharSequence charSequence, Element... elements) throws IOException {
+          return new GwtMemoryFileObject(makeUri(charSequence, "java"), JavaFileObject.Kind.SOURCE, env);
+        }
+
+        private URI makeUri(CharSequence charSequence, String ext) {
+          return URI.create("file:///gen/" + charSequence + "." + ext);
+        }
+
+        @Override
+        public JavaFileObject createClassFile(CharSequence charSequence, Element... elements) throws IOException {
+          return new GwtMemoryFileObject(makeUri(charSequence, "class"), JavaFileObject.Kind.CLASS, env);
+        }
+
+        @Override
+        public FileObject createResource(JavaFileManager.Location location, CharSequence charSequence,
+                                         CharSequence charSequence2, Element... elements) throws IOException {
+          return null;
+        }
+
+        @Override
+        public FileObject getResource(JavaFileManager.Location location,
+                                      CharSequence charSequence, CharSequence charSequence2) throws IOException {
+          return null;
+        }
+      }
+    }
+
+    private class GwtAnnotationProcessingManager extends BaseAnnotationProcessorManager {
+      private final TreeLogger logger;
+      public ServiceLoader<Processor> serviceLoader;
+      public Iterator<Processor> serviceLoaderIter;
+
+      public GwtAnnotationProcessingManager(TreeLogger logger) {
+        this.logger = logger;
+        _processingEnv = new GwtBaseProcessingEnv(logger);
+      }
+
+      @Override
+      public void configure(Object batchCompiler, String[] options) {
+        super.configure(this, options);
+      }
+
+      @Override
+      public ProcessorInfo discoverNextProcessor() {
+        if (null == serviceLoader ) {
+          serviceLoader = ServiceLoader.load(Processor.class, Thread.currentThread().getContextClassLoader());
+          serviceLoaderIter = serviceLoader.iterator();
+        }
+        try {
+          if (serviceLoaderIter.hasNext()) {
+            Processor p = serviceLoaderIter.next();
+            if (p.getClass().getName().equals("com.google.gwt.codegen.annotation.JsInterfaceProcessor")) {
+              p.init(_processingEnv);
+              ProcessorInfo pi = new ProcessorInfo(p);
+              _processors.add(pi);
+              StringBuilder sb = new StringBuilder();
+              sb.append("Discovered processor service "); //$NON-NLS-1$
+              sb.append(pi);
+              sb.append("\n  supporting "); //$NON-NLS-1$
+              sb.append(pi.getSupportedAnnotationTypesAsString());
+              logger.log(TreeLogger.Type.WARN, sb.toString());
+              return pi;
+            } else {
+              // We only run the JsInterfaceProcessor inside JDT, all others must be run by normal build systems
+              return null;
+            }
+          }
+        } catch (ServiceConfigurationError e) {
+          // TODO: better error handling
+          throw new AbortCompilation(null, e);
+        }
+        return null;
+
+      }
+
+      @Override
+      public void reportProcessorException(Processor processor, Exception e) {
+
+      }
     }
   }
 
@@ -537,6 +805,8 @@ public class JdtCompiler {
     options.reportUnusedDeclaredThrownExceptionIncludeDocCommentReference = false;
     options.reportUnusedDeclaredThrownExceptionExemptExceptionAndThrowable = false;
     options.inlineJsrBytecode = true;
+    options.storeAnnotations = true;
+    options.processAnnotations = true;
     return options;
   }
 

@@ -16,6 +16,7 @@
 package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.js.JsInterface;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;

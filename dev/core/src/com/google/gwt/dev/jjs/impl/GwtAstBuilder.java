@@ -116,6 +116,7 @@ import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AllocationExpression;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
@@ -189,11 +190,14 @@ import org.eclipse.jdt.internal.compiler.ast.UnaryExpression;
 import org.eclipse.jdt.internal.compiler.ast.UnionTypeReference;
 import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
+import org.eclipse.jdt.internal.compiler.impl.StringConstant;
+import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BaseTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
+import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalVariableBinding;
@@ -225,6 +229,10 @@ import java.util.Stack;
  * contain unresolved references.
  */
 public class GwtAstBuilder {
+
+  public static final String JSEXPORT_CLASS = "com.google.gwt.core.client.js.JsExport";
+  public static final String JSPROPERTY_CLASS = "com.google.gwt.core.client.js.JsProperty";
+  public static final String JSINTERFACE_CLASS = "com.google.gwt.core.client.js.JsInterface";
 
   /**
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
@@ -3193,6 +3201,12 @@ public class GwtAstBuilder {
               getFieldDisposition(binding));
     }
     enclosingType.addField(field);
+    if (x.annotations != null) {
+      AnnotationBinding jsExport = getAnnotation(x.binding, JSEXPORT_CLASS);
+      if (jsExport != null) {
+        field.setExportName(getAnnotationParameterString(jsExport, "value"));
+      }
+    }
     typeMap.setField(binding, field);
   }
 
@@ -3288,6 +3302,9 @@ public class GwtAstBuilder {
     boolean isNested = isNested(declaringClass);
     if (x.isConstructor()) {
       method = new JConstructor(info, (JClassType) enclosingType);
+      if (x.isDefaultConstructor()) {
+        ((JConstructor) method).setDefaultConstructor();
+      }
       if (x.binding.declaringClass.isEnum()) {
         // Enums have hidden arguments for name and value
         method.addParam(new JParameter(info, "enum$name", typeMap.get(x.scope.getJavaLangString()),
@@ -3344,7 +3361,70 @@ public class GwtAstBuilder {
       method.setSynthetic();
     }
     enclosingType.addMethod(method);
+    if (x.annotations != null) {
+      AnnotationBinding jsExport = getAnnotation(x.binding, JSEXPORT_CLASS);
+      AnnotationBinding jsProperty = getAnnotation(x.binding, JSPROPERTY_CLASS);
+      if (jsExport != null) {
+        method.setExportName(getAnnotationParameterString(jsExport, "value"));
+      }
+      if (jsProperty != null) {
+        method.setJsProperty(true);
+      }
+    }
     typeMap.setMethod(b, method);
+  }
+
+  public static String getAnnotationParameterString(AnnotationBinding a, String paramName) {
+    if (a != null) {
+      for (ElementValuePair maybeValue : a.getElementValuePairs()) {
+        if (maybeValue.getValue() instanceof StringConstant &&
+            paramName.equals(String.valueOf(maybeValue.getName()))) {
+          return ((StringConstant) maybeValue.getValue()).stringValue();
+        }
+      }
+    }
+    return null;
+  }
+
+  static AnnotationBinding getAnnotation(AnnotationBinding[] annotations, String nameToFind) {
+    if (annotations != null) {
+      for (AnnotationBinding a : annotations) {
+        ReferenceBinding annBinding = a.getAnnotationType();
+        String annName = CharOperation.toString(annBinding.compoundName);
+        if (nameToFind.equals(annName)) {
+          return a;
+        }
+      }
+    }
+    return null;
+  }
+
+  static AnnotationBinding getAnnotation(Annotation[] annotations, String nameToFind) {
+    if (annotations != null) {
+      for (Annotation a : annotations) {
+        AnnotationBinding annBinding = a.getCompilerAnnotation();
+        if (annBinding != null) {
+          String annName = CharOperation.toString(annBinding.getAnnotationType().compoundName);
+          if (nameToFind.equals(annName)) {
+            return annBinding;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  public static AnnotationBinding getAnnotation(Binding binding, String nameToFind) {
+    if (binding instanceof SourceTypeBinding) {
+      ClassScope scope = ((SourceTypeBinding) binding).scope;
+      return scope != null ? getAnnotation(scope.referenceType().annotations, nameToFind) : null;
+    } else if (binding instanceof ReferenceBinding) {
+      return getAnnotation(((ReferenceBinding) binding).getAnnotations(), nameToFind);
+    } else if (binding instanceof MethodBinding) {
+      return getAnnotation(((MethodBinding) binding).sourceMethod().annotations, nameToFind);
+    } else {
+      return null;
+    }
   }
 
   private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method) {
@@ -3405,7 +3485,16 @@ public class GwtAstBuilder {
       if (binding.isClass()) {
         type = new JClassType(info, name, binding.isAbstract(), binding.isFinal());
       } else if (binding.isInterface() || binding.isAnnotationType()) {
-        type = new JInterfaceType(info, name);
+        boolean isJsInterface = false;
+        String jsPrototype = "";
+        if (x.annotations != null) {
+          AnnotationBinding jsInterface = getAnnotation(x.binding, JSINTERFACE_CLASS);
+          if (jsInterface != null) {
+            isJsInterface = true;
+            jsPrototype = getAnnotationParameterString(jsInterface, "prototype");
+          }
+        }
+        type = new JInterfaceType(info, name, isJsInterface, jsPrototype);
       } else if (binding.isEnum()) {
         if (binding.isAnonymousType()) {
           // Don't model an enum subclass as a JEnumType.

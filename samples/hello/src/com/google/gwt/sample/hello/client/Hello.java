@@ -25,9 +25,14 @@ import com.google.gwt.user.client.Window;
  */
 public class Hello implements EntryPoint {
 
+  interface Callback {
+    void run();
+  }
+
   @JsInterface(prototype = "$wnd.MyClass")
   public interface MyClass {
     int getX();
+    void doIt(Callback cb);
 
       public static class Prototype implements MyClass {
           public Prototype(int i) {
@@ -37,6 +42,11 @@ public class Hello implements EntryPoint {
           public native int getX() /*-{
               return 2;
           }-*/;
+
+        @Override
+        public native void doIt(Callback cb) /*-{
+            return;
+        }-*/;
       }
   }
 
@@ -57,6 +67,12 @@ public class Hello implements EntryPoint {
 
   public void onModuleLoad() {
      MyChildClass foo = new MyChildClass();
+    foo.doIt(new Callback() {
+      @Override
+      public void run() {
+        Window.alert("hello");
+      }
+    });
      Object bar = Math.random() > 0.0001 ? foo : "Hello";
      Window.alert((bar instanceof MyClass)+"");
      Window.alert("getX = " + foo.getX());

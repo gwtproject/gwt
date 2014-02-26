@@ -392,6 +392,19 @@ public class ControlFlowAnalyzer {
         }
       }
 
+
+      // rescue any single-abstract-methods flowing into JsInterface methods (lambdas which might be invoked)
+      if (program.typeOracle.isJsInterfaceMethod(method)) {
+        for (JParameter param : method.getParams()) {
+          if (param.getType() instanceof JDeclaredType) {
+            JMethod singleAbstractMethod = program.getSingleAbstractMethod((JDeclaredType) param.getType());
+            if (singleAbstractMethod != null) {
+              rescue(singleAbstractMethod);
+            }
+          }
+        }
+      }
+
       if (argsToRescueIfParameterRead == null || method.canBePolymorphic()
           || call instanceof JsniMethodRef) {
         return true;
@@ -740,8 +753,9 @@ public class ControlFlowAnalyzer {
         JExpression arg = args.get(i);
         JParameter param = params.get(i);
         if (arg.hasSideEffects() || liveFieldsAndMethods.contains(param)
-            // rescue any args of JsInterface Prototype methods
-            || JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+            // rescue any args of JsInterface Prototype methods or JsInterface
+            || program.typeOracle.isJsInterfaceMethod(method)
+            || program.isJsInterfacePrototype(method.getEnclosingType())) {
           this.accept(arg);
           continue;
         }

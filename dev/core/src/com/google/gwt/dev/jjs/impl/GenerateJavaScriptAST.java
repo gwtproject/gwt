@@ -1321,7 +1321,6 @@ public class GenerateJavaScriptAST {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
       JsInvocation jsInvocation = new JsInvocation(x.getSourceInfo());
-
       popList(jsInvocation.getArguments(), x.getArgs().size()); // args
 
       if (JProgram.isClinit(method)) {
@@ -1348,9 +1347,9 @@ public class GenerateJavaScriptAST {
           method = clinitTarget.getClinitMethod();
         }
       } else {
-        if (method.getEnclosingType() instanceof JInterfaceType &&
-            ((JInterfaceType) method.getEnclosingType()).isJsInterface() &&
-            method.needsVtable() && method.getParams().size() == x.getArgs().size()) {
+
+        if (program.typeOracle.isOrExtendsJsInterface(method.getEnclosingType(), false) &&
+            method.getParams().size() == x.getArgs().size()) {
           // rewrite Single-Abstract-Method args as JsFunctions
           List<JParameter> params = method.getParams();
           List<JsExpression> arguments = jsInvocation.getArguments();

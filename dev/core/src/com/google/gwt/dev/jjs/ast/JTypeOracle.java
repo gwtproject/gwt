@@ -664,7 +664,9 @@ public class JTypeOracle implements Serializable {
           return intf;
         }
       }
-      for (JInterfaceType superIntf : intf.getImplements()) {
+    }
+    if (type instanceof JDeclaredType) {
+      for (JInterfaceType superIntf : ((JDeclaredType) type).getImplements()) {
         JInterfaceType jsIntf = getNearestJsInterface(superIntf,
             mustHavePrototype);
         if (jsIntf != null) {

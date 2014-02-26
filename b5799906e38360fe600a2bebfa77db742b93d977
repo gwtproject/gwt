@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cf89137_650908f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "it\u0027s worth mentioning why we want to be able to use globally unique strings",
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_255f80d4",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardSymbolData.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "think this should be readUTF not readObject, also no cast to String",
+      "range": {
+        "startLine": 183,
+        "startChar": 25,
+        "endLine": 183,
+        "endChar": 35
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_c56e9c89",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardSymbolData.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "think this should be writeUTF not writeObject",
+      "range": {
+        "startLine": 213,
+        "startChar": 8,
+        "endLine": 213,
+        "endChar": 19
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_a5aef066",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "maybe s/typeReference/typeId",
+      "range": {
+        "startLine": 681,
+        "startChar": 13,
+        "endLine": 681,
+        "endChar": 26
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_a5003097",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "do these need to be protected?",
+      "range": {
+        "startLine": 148,
+        "startChar": 2,
+        "endLine": 148,
+        "endChar": 11
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_251300e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "this todo is too vague",
+      "range": {
+        "startLine": 166,
+        "startChar": 7,
+        "endLine": 166,
+        "endChar": 28
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_056b644c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-26T23:00:12Z",
+      "side": 1,
+      "message": "this \u0027*\u0027 is valid syntax?",
+      "range": {
+        "startLine": 52,
+        "startChar": 44,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "b5799906e38360fe600a2bebfa77db742b93d977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

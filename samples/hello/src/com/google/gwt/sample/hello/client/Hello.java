@@ -16,24 +16,66 @@
 package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsInterface;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * HelloWorld application.
  */
 public class Hello implements EntryPoint {
 
+  interface Callback {
+    void run();
+  }
+
+  @JsInterface(prototype = "$wnd.MyClass")
+  public interface MyClass {
+    int getX();
+    void doIt(Callback cb);
+
+      public static class Prototype implements MyClass {
+          public Prototype(int i) {
+          }
+
+          @Override
+          public native int getX() /*-{
+              return 2;
+          }-*/;
+
+        @Override
+        public native void doIt(Callback cb) /*-{
+            return;
+        }-*/;
+      }
+  }
+
+  static class MyChildClass extends MyClass.Prototype {
+
+    public MyChildClass() {
+      super(99);
+    }
+
+    @JsExport("$wnd.MyChildClass.anotherMethod")
+    public static void anotherMethod() { Window.alert("Hello");}
+    @Override
+      public int getX() {
+          return               super.getX() +
+              10;
+      }
+  }
+
   public void onModuleLoad() {
-    Button b = new Button("Click me", new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        Window.alert("Hello, AJAX");
+     MyChildClass foo = new MyChildClass();
+    foo.doIt(new Callback() {
+      @Override
+      public void run() {
+        Window.alert("hello");
       }
     });
-
-    RootPanel.get().add(b);
+     Object bar = Math.random() > 0.0001 ? foo : "Hello";
+     Window.alert((bar instanceof MyClass)+"");
+     Window.alert("getX = " + foo.getX());
   }
+
 }

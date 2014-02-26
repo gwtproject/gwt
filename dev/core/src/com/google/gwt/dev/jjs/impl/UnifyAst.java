@@ -27,45 +27,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.HasName;
-import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JBinaryOperation;
-import com.google.gwt.dev.jjs.ast.JBlock;
-import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
-import com.google.gwt.dev.jjs.ast.JCastOperation;
-import com.google.gwt.dev.jjs.ast.JClassLiteral;
-import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JConditional;
-import com.google.gwt.dev.jjs.ast.JConstructor;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JEnumType;
-import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JExpressionStatement;
-import com.google.gwt.dev.jjs.ast.JField;
-import com.google.gwt.dev.jjs.ast.JFieldRef;
-import com.google.gwt.dev.jjs.ast.JGwtCreate;
-import com.google.gwt.dev.jjs.ast.JInstanceOf;
-import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
-import com.google.gwt.dev.jjs.ast.JNameOf;
-import com.google.gwt.dev.jjs.ast.JNewArray;
-import com.google.gwt.dev.jjs.ast.JNewInstance;
-import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.jjs.ast.JNonNullType;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JPrimitiveType;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JStringLiteral;
-import com.google.gwt.dev.jjs.ast.JThisRef;
-import com.google.gwt.dev.jjs.ast.JTryStatement;
-import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.jjs.ast.JVariable;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
@@ -264,6 +226,18 @@ public class UnifyAst {
       if (!(x instanceof JNewInstance)) {
         // Should not have an overridden type at this point.
         assert x.getType() == target.getType();
+      }
+
+      // rescue any single-abstract-methods flowing into JsInterface methods (lambdas which might be invoked)
+      if (program.typeOracle.isOrExtendsJsInterface(target.getEnclosingType(), false)) {
+        for (JParameter param : target.getParams()) {
+          if (param.getType() instanceof JDeclaredType) {
+            JMethod singleAbstractMethod = program.getSingleAbstractMethod((JDeclaredType) param.getType());
+            if (singleAbstractMethod != null) {
+              flowInto(singleAbstractMethod);
+            }
+          }
+        }
       }
       flowInto(target);
     }
@@ -724,6 +698,9 @@ public class UnifyAst {
       if (t instanceof JClassType && isJso((JClassType) t)) {
         instantiate(t);
       }
+      if (t instanceof JInterfaceType && ((JInterfaceType) t).isJsInterface()) {
+        instantiate(t);
+      }
     }
   }
 
@@ -902,6 +879,8 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
+      boolean isJsInterface = type instanceof JInterfaceType ?
+          isJsInterface((JInterfaceType) type) : false;
 
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
@@ -918,7 +897,15 @@ public class UnifyAst {
               pending = Lists.add(pending, method);
             }
             virtualMethodsPending.put(signature, pending);
+            if (isJsInterface) {
+              // Fake a call into the method to keep it around
+              flowInto(method);
+            }
           }
+        } else if (method.getExportName() != null &&
+            (method.isStatic() || method.isConstructor())) {
+          // rescue any @JsExport methods
+          flowInto(method);
         }
       }
     }
@@ -928,7 +915,31 @@ public class UnifyAst {
     if (type == null) {
       return false;
     }
-    return type == program.getJavaScriptObject() || isJso(type.getSuperClass());
+    boolean isJso = type == program.getJavaScriptObject() || isJso(type.getSuperClass());
+    if (isJso) {
+      return true;
+    }
+
+    // if any of the superinterfaces as JsInterfaces, we consider this effectively a JSO
+    // for instantiability purposes
+    for (JInterfaceType intf : type.getImplements()) {
+      if (isJsInterface(intf)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isJsInterface(JInterfaceType intf) {
+    if (intf.isJsInterface()) {
+      return true;
+    }
+    for (JInterfaceType subIntf : intf.getImplements()) {
+      if (isJsInterface(subIntf)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

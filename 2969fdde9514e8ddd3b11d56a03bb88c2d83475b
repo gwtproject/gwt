@@ -354,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "5c0f6924_1d075377",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:05:38Z",
+      "side": 1,
+      "message": "\u003e The hash token implementation does not work properly across browsers with any linker\n\nMy point is, can\u0027t we just use the one with onhashchange and get rid of two other implementations?",
+      "parentUuid": "dc0199f4_5b004396",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8c6c4f22",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -383,6 +407,24 @@
       "side": 1,
       "message": "Since we are reading the current location at startup into token and compare this against every fired event, we do not care about events beeing fired at startup or not.\nAs long as the tokens match (which they should), we should be fine. \n\nCan you think of any good way to test this?",
       "parentUuid": "1cf89137_8c6c4f22",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0f6924_3dd45787",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:05:38Z",
+      "side": 1,
+      "message": "Can you document this on the related method below? (i.e. spurious event firing may happen with pushstate)\n\nFor the testing part, I don\u0027t think it is feasible to test with GWTTestCase.",
+      "parentUuid": "dc0199f4_1b0abbb6",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -647,6 +689,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_f06a8146",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:05:38Z",
+      "side": 1,
+      "message": "The change is merged, so let\u0027s get rid of this so that we can really test this with IE8/9.",
+      "parentUuid": "dc0199f4_5b73a36d",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0f6924_3a357df0",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
         "patchSetId": 4
@@ -746,6 +806,24 @@
       "side": 1,
       "message": "I am making sure here that the URL has been properly updated (not just the token in history). Safari sometimes does not update the URL that is displayed to the user, but the test shows that it returns the proper url even though its not being displayed in the browser address bar.",
       "parentUuid": "5c0f6924_ba286d97",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_d03e6538",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T01:05:38Z",
+      "side": 1,
+      "message": "If it is not displayed properly then the bookmarks will be broken, right? I don\u0027t think that would be an acceptable behavior. Maybe this is one of the problems referred in caniuse.com?",
+      "parentUuid": "dc0199f4_bb5bc7e4",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

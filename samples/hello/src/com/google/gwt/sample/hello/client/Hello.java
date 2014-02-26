@@ -16,6 +16,7 @@
 package com.google.gwt.sample.hello.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.js.JsExport;
 import com.google.gwt.core.client.js.JsInterface;
 import com.google.gwt.user.client.Window;
 
@@ -26,7 +27,6 @@ public class Hello implements EntryPoint {
 
   @JsInterface(prototype = "$wnd.MyClass")
   public interface MyClass {
-    void constructor(int x);
     int getX();
 
       public static class Prototype implements MyClass {
@@ -41,15 +41,20 @@ public class Hello implements EntryPoint {
   }
 
   static class MyChildClass extends MyClass.Prototype {
-    MyChildClass() {
+
+    public MyChildClass() {
       super(99);
     }
 
+    @JsExport("$wnd.MyChildClass.anotherMethod")
+    public static void anotherMethod() { Window.alert("Hello");}
     @Override
       public int getX() {
-          return super.getX() + 10;
+          return               super.getX() +
+              10;
       }
   }
+
   public void onModuleLoad() {
      MyChildClass foo = new MyChildClass();
      Object bar = Math.random() > 0.0001 ? foo : "Hello";

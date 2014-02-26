@@ -2531,7 +2531,7 @@ public class GenerateJavaScriptAST {
         }
         sb.append(parts[i]);
       }
-      return Pair.create(sb.toString(), parts[parts.length -1]);
+      return Pair.create(sb.toString(), parts[parts.length - 1]);
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {

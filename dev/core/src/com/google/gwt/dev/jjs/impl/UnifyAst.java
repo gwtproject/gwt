@@ -907,6 +907,7 @@ public class UnifyAst {
       staticInitialize(type);
       boolean isJsInterface = type instanceof JInterfaceType ?
           isJsInterface((JInterfaceType) type) : false;
+
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
@@ -927,6 +928,10 @@ public class UnifyAst {
               flowInto(method);
             }
           }
+        } else if (method.getExportName() != null &&
+            (method.isStatic() || method.isConstructor())) {
+          // rescue any @JsExport methods
+          flowInto(method);
         }
       }
     }

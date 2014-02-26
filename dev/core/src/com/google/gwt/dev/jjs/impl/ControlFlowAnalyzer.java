@@ -593,6 +593,12 @@ public class ControlFlowAnalyzer {
           if (method == getClassMethod) {
             rescueClassLiteralsIfGetClassIsLive();
           }
+          if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+            // for JsInterface Prototype methods, rescue all parameters
+            for (JParameter param : method.getParams()) {
+              rescue(param);
+            }
+          }
           return true;
         }
       }
@@ -733,7 +739,9 @@ public class ControlFlowAnalyzer {
       for (int c = params.size(); i < c; ++i) {
         JExpression arg = args.get(i);
         JParameter param = params.get(i);
-        if (arg.hasSideEffects() || liveFieldsAndMethods.contains(param)) {
+        if (arg.hasSideEffects() || liveFieldsAndMethods.contains(param)
+            // rescue any args of JsInterface Prototype methods
+            || JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
           this.accept(arg);
           continue;
         }

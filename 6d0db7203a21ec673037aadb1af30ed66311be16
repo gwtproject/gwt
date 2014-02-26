@@ -16,6 +16,47 @@
       "revId": "6d0db7203a21ec673037aadb1af30ed66311be16",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_6fa1fd8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T22:14:26Z",
+      "side": 1,
+      "message": "Can you change this commit message with following:\n\nReplace \"new Function\" with \"function() {}\" in XMLHttpRequest\n\nnew Function() was used due to ie6 which is not supported anymore.",
+      "parentUuid": "5c0f6924_e61bf084",
+      "revId": "6d0db7203a21ec673037aadb1af30ed66311be16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf18d4f_4f96393a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-26T22:14:26Z",
+      "side": 1,
+      "message": "Can you wrap the lines?",
+      "range": {
+        "startLine": 9,
+        "startChar": 81,
+        "endLine": 9,
+        "endChar": 88
+      },
+      "revId": "6d0db7203a21ec673037aadb1af30ed66311be16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -81,8 +81,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
 
-import javax.annotation.Nullable;
-
 /**
  * Compiles the Java <code>JProgram</code> representation into its corresponding library Js source.
  * <br />
@@ -394,7 +392,7 @@ public class LibraryJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler {
       newReboundTypeNames.removeAll(
           Sets.newHashSet(Sets.filter(newReboundTypeNames, new Predicate<String>() {
             @Override
-            public boolean apply(@Nullable String newReboundTypeName) {
+            public boolean apply(String newReboundTypeName) {
               return generatorNamesByPreviouslyReboundTypeName.containsEntry(
                   newReboundTypeName, generatorName);
             }

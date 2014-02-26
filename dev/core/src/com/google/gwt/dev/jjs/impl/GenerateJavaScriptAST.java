@@ -1399,6 +1399,7 @@ public class GenerateJavaScriptAST {
       JsNameRef qualifier = null;
       JsExpression unnecessaryQualifier = null;
       JsExpression result = null;
+      boolean isJsProperty = false;
 
       if (method.isStatic()) {
         if (x.getInstance() != null) {
@@ -1456,14 +1457,23 @@ public class GenerateJavaScriptAST {
         } else {
           JsName polyName = polymorphicNames.get(method);
           // potentially replace method call with property access
-          if (x.getTarget().isJsProperty()) {
+          JMethod target = x.getTarget();
+          for (JMethod overrideMethod : target.getOverrides()) {
+            if (overrideMethod.isJsProperty()) {
+              isJsProperty = true;
+              break;
+            }
+          }
+          if (isJsProperty) {
             Pair<Boolean, String> getter = isGetter(x.getTarget());
             Pair<Boolean, String> setter = isSetter(x.getTarget());
             Pair<Boolean, String> has = isHas(x.getTarget());
 
             // if fluent
-            boolean isFluent = x.getTarget().getType() instanceof JReferenceType
-                && x.getTarget().getType() == x.getTarget().getEnclosingType();
+            JType type = x.getTarget().getType();
+
+            boolean isFluent = type instanceof JReferenceType
+                && ((JReferenceType) type).getUnderlyingType() == x.getTarget().getEnclosingType();
             JsExpression qualExpr = (JsExpression) pop();
 
             if (getter.getLeft()) {
@@ -1499,7 +1509,7 @@ public class GenerateJavaScriptAST {
           }
         }
       }
-      if (!x.getTarget().isJsProperty()) {
+      if (!isJsProperty) {
         jsInvocation.setQualifier(qualifier);
         result = jsInvocation;
       }

@@ -56,7 +56,6 @@ import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JGwtCreate;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
-import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLabel;
 import com.google.gwt.dev.jjs.ast.JLabeledStatement;
@@ -679,11 +678,11 @@ public class GenerateJavaScriptAST {
 
       // TODO(rluble): RuntimeTypeIds will not necessarily be integers, the symbolmap format needs
       // to change.
-      int intTypeReference = getRuntimeTypeReference(x) != null ?
-          ((JIntLiteral) getRuntimeTypeReference(x)).getValue() : -1;
+      String typeReference = getRuntimeTypeReference(x) != null ?
+         getRuntimeTypeReference(x).toSource() : null;
       StandardSymbolData symbolData =
           StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(), x
-              .getSourceInfo().getStartLine(), castableTypeMap, intTypeReference);
+              .getSourceInfo().getStartLine(), castableTypeMap, typeReference);
       assert !symbolTable.containsKey(symbolData);
       symbolTable.put(symbolData, jsName);
     }

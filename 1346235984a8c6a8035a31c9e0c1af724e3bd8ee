@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cf89137_2ade28f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JInterfaceType.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "maybe use null to denote no prototype (here and below).",
+      "range": {
+        "startLine": 58,
+        "startChar": 28,
+        "endLine": 58,
+        "endChar": 32
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_ca00e498",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "There should be checks analogous to JsoRestrictionChecker somewhere else to ensure JsInterfaces are proper (no overloads) and also implementors are proper (no implementing more than one JsInterface with prototype, etc).",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_ca5224a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "We need to be careful about live subtypes/implementors in modular compilation. Make hasLiveImplementors return true if hasWholeWorldKnowledge is true.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_8a5c1cb9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "Remove commented code. Or add at TODO explaining the problem.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_6a9310ff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "I know this test was here already. We should always do getUnderlyingType or else this kind of check might fail.\n\nI think we should replace al \u003d\u003d on JProgram.getType...() for JProgram.isType...() unless we are certain that exprType is never a JNonNullType.\n\nIf it is expected that it is one, and here probably is as it can be instantiatedInJavaScript add \nassert ! (exprType instanceOf JNonNullType) so at least tests would fail.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_4af2944e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "Ahh. Tricky. This is needed for the case that a some (JSNI maybe) returns some javascript object that then is cast into a JsInterface with prototype; right?\n\nMaybe elaborate a bit more in the comments.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_6aa79039",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "Extract as method (maybe called bindSingleAbstractMethods)?\n\nI think that at some point we should organize GenerateJavaScriptAST into functional units so that related code is close together.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_4a9614bf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "s/type/paramType/",
+      "range": {
+        "startLine": 1358,
+        "startChar": 18,
+        "endLine": 1358,
+        "endChar": 22
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_2aa3c81b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "s/}/)/",
+      "range": {
+        "startLine": 1366,
+        "startChar": 58,
+        "endLine": 1366,
+        "endChar": 59
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_6a80b06b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "extract as method(s) the checks for annotation presence",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_8de8b622",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "Maybe leave these two entry points but abstract the bodies into one; second parameter of the abstracted method can receive a function that when called creates the appropriate prototype.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_aa38f800",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:08:53Z",
+      "side": 1,
+      "message": "Extract as method and call here and in createSubclassPrototype.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 10
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

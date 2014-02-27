@@ -128,6 +128,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_48785c4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T17:44:28Z",
+      "side": 1,
+      "message": "On a second look I am not actually sure why this is needed, if an JsInterface (with a protoype) only appears in an instanceOf check, how is it different from regular interfaces that only appear in a instanceOf check.\n\nCan you document it with a proper test case?",
+      "parentUuid": "1cf89137_4af2944e",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_6aa79039",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 13
@@ -139,6 +157,24 @@
       "writtenOn": "2014-02-27T05:08:53Z",
       "side": 1,
       "message": "Extract as method (maybe called bindSingleAbstractMethods)?\n\nI think that at some point we should organize GenerateJavaScriptAST into functional units so that related code is close together.",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_c8aeac68",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T17:44:28Z",
+      "side": 1,
+      "message": "maybe the extracted method should be named rewriteSamMethodAnonymousFunction?",
+      "parentUuid": "1cf89137_6aa79039",
       "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -184,6 +220,52 @@
         "startChar": 58,
         "endLine": 1366,
         "endChar": 59
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_28c75034",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T17:44:28Z",
+      "side": 1,
+      "message": "extract method maybe named dispatchToJsPrototype?",
+      "range": {
+        "startLine": 1427,
+        "startChar": 0,
+        "endLine": 1454,
+        "endChar": 51
+      },
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_28de30f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T17:44:28Z",
+      "side": 1,
+      "message": "extract method named dispatchJsProperty, or maybe break into three dispatchToGetter, dispatchToSetter, dispatchToHas?",
+      "range": {
+        "startLine": 1468,
+        "startChar": 0,
+        "endLine": 1510,
+        "endChar": 2
       },
       "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

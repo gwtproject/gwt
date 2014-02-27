@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc2fd98a_6ba90160",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-27T22:33:40Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "4e51db3bcd5744b0e0f92447dc81432584df71a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc2fd98a_4bae456a",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ZipLibrary.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-02-27T22:33:40Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "4e51db3bcd5744b0e0f92447dc81432584df71a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

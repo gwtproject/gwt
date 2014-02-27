@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_ea7de093",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-27T20:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf89137_97ae8935",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_d7e65197",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-27T02:26:55Z",
       "side": 1,
       "message": "Is this needed? I would not patch up the initialization. GenerateJavaScriptAST decides how to initialize fields.",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_7e963231",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-27T20:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf89137_d7e65197",
       "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_6a78b096",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-27T20:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf89137_77f53d35",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_571921d4",
         "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsBlock.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2014-02-27T02:26:55Z",
       "side": 1,
       "message": "why not stmts.removeAll()?\n\ns/after/newStmts/ (or newStmts, replacementStatements or a more appropriate name)",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_4a11746b",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsBlock.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-02-27T20:20:56Z",
+      "side": 1,
+      "message": "removeAll() takes a collection, and the ArrayList implementation calls contains(), so it\u0027s O(n^2). But now I see that clear() is the method I was looking for, so this method is unnecessary.\n\n(Incidentally, JsModVisitor.ListContext seems inefficient for inserting or removing statements at the beginning of the program. Since it\u0027s using an ArrayList it will be O(n) per insert or delete.)",
+      "parentUuid": "1cf89137_571921d4",
       "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

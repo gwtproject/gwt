@@ -50,6 +50,16 @@ public class JsBlock extends JsStatement {
     v.endVisit(this, ctx);
   }
 
+  /**
+   * Replace all statements with a new list of statements.
+   */
+  public void replaceAll(List<JsStatement> after) {
+    while (!stmts.isEmpty()) {
+      stmts.remove(stmts.size() - 1);
+    }
+    stmts.addAll(after);
+  }
+
   @Override
   public boolean unconditionalControlBreak() {
     for (JsStatement stmt : stmts) {

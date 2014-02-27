@@ -69,6 +69,10 @@ public class CompilationStateBuilder {
 
     private final class UnitProcessorImpl implements UnitProcessor {
 
+      /**
+       * A callback after the JDT compiler has compiled a .java file and created a matching
+       * CompilationUnitDeclaration. We take this opportunity to create a matching CompilationUnit.
+       */
       @Override
       public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,
           List<CompiledClass> compiledClasses) {
@@ -97,7 +101,9 @@ public class CompilationStateBuilder {
           Map<TypeDeclaration, Binding[]> artificialRescues =
               new HashMap<TypeDeclaration, Binding[]>();
           ArtificialRescueChecker.check(cud, builder.isGenerated(), artificialRescues);
-          BinaryTypeReferenceRestrictionsChecker.check(cud);
+          if (compilerContext.shouldCompileMonolithic()) {
+            BinaryTypeReferenceRestrictionsChecker.check(cud);
+          }
 
           MethodArgNamesLookup methodArgs = MethodParamCollector.collect(cud,
               builder.getSourceMapPath());
@@ -512,8 +518,8 @@ public class CompilationStateBuilder {
       typeOracleUpdater = ((LibraryTypeOracle) typeOracle).getTypeOracleUpdater();
     }
 
-    return new CompilationState(logger, typeOracle, typeOracleUpdater, resultUnits,
-        compileMoreLater);
+    return new CompilationState(logger, compilerContext, typeOracle, typeOracleUpdater,
+        resultUnits, compileMoreLater);
   }
 
   public CompilationState doBuildFrom(

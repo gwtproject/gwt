@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cf89137_97ae8935",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T02:26:55Z",
+      "side": 1,
+      "message": "Maybe return the statement(s) in visitGlobalFunction/visitGlobalVar and insert into after right here; so that after is just a local and the flow is clearer.\n\nalso visitGlobalFunction/addPackageToFunction (or renameGlobalFunction or a more explicit name).\n\nsimilar for visitGlobalVar.",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_d7e65197",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T02:26:55Z",
+      "side": 1,
+      "message": "Is this needed? I would not patch up the initialization. GenerateJavaScriptAST decides how to initialize fields.",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_77f53d35",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T02:26:55Z",
+      "side": 1,
+      "message": "The function also keeps its unqualified name for better stack....",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_571921d4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsBlock.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T02:26:55Z",
+      "side": 1,
+      "message": "why not stmts.removeAll()?\n\ns/after/newStmts/ (or newStmts, replacementStatements or a more appropriate name)",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_37b1f56f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsNamespaceChooserTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T02:26:55Z",
+      "side": 1,
+      "message": "Nice unit test! Thanks!",
+      "revId": "f0fcd20a7804096cc019b0cf0b366ef534719001",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

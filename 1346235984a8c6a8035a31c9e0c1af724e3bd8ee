@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "1cf89137_cd823e3f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-27T05:23:15Z",
+      "side": 1,
+      "message": "I meant it should return true if hasWholeWorldKnowledge is false.:)",
+      "parentUuid": "1cf89137_ca5224a5",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8a5c1cb9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 13

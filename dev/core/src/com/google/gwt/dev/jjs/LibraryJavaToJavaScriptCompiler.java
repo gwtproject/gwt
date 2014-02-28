@@ -47,6 +47,7 @@ import com.google.gwt.dev.jjs.impl.codesplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.js.JsVerboseNamer;
 import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsName;
+import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.resource.impl.FileResource;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -97,6 +98,11 @@ public class LibraryJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler {
       jprogram.typeOracle.recomputeAfterOptimizations();
       draftOptimizeEvent.end();
     }
+
+    @Override
+    protected void optimizeJs(Set<JsNode> inlinableJsFunctions)throws InterruptedException {
+    }
+
 
     @Override
     protected void postNormalizationOptimizeJava() {

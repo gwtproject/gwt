@@ -1,0 +1,266 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c58ad41_31eb7261",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "You are redefining jsTypeContext instead of assigning? So we are probably not covering this in our tests?",
+      "range": {
+        "startLine": 184,
+        "startChar": 8,
+        "endLine": 184,
+        "endChar": 27
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_7108ca88",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "I\u0027m lost in this function, I\u0027ll try to look with a fresh mind tomorrow.\nPoint to a reference (if you\u0027re following an algorithm that is already documented) or putting more description might be useful for future as well.",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_f1795a0b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "Does obj being null is a valid case? It looks like it shouldn\u0027t be and we should fail fast.",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 34
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_b19c020e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "nit: perhaps temp -\u003e F ?",
+      "range": {
+        "startLine": 93,
+        "startChar": 21,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_71220a36",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "Why are we setting constructor to superClass instead of our own constructor?\n\nProbably we need to mimic something similar to:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance\n(i.e. instantiate the prototype and set the constructor)",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_7100ca1f",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "nit: inline like the rest",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_71520a30",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "As we discussed in the mail, always calling super (as in java semantics) might not work well for javascript objects. What do you think about my proposal for explicit constructor calls via methods marked with @JsConstructor instead?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_51826640",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "Here, instead of setting prototype by hand, is it possible to call defineClass for the second time to be sure everything is working as expected?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_f1771aa5",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "Can we put different pieces into separate tests?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_b12e4272",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "We were also having issues with classes that has only single method were treated as SAM even they were marked as @JsInterface. Can you cover that in your test cases as well?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_118cee70",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_11b50ef7",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "Is there a bug here?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_7138cab2",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "What is this needed? Is there a bug?",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 17
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_7111ea38",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T04:35:15Z",
+      "side": 1,
+      "message": "It would be great to have tests for different instanceof scenarios listed in the document:\n\n @JsInterface(prototype \u003d \"HTMLElement\")\n interface HTMLElement extends Element {\n\n HTMLElement obj \u003d ...;  // real javascript object\n obj instanceOf Object \u003d\u003d true\n obj instanceOf HtmlElement \u003d\u003d true\n obj instanceOf Iterator \u003d\u003d false\n obj instanceOf AJsInterface \u003d\u003d true\n obj instanceOf AJsInterfaceWithSamePrototype \u003d\u003d true\n obj instanceOf AJsInterfaceWithDifferentPrototype \u003d\u003d false\n obj instanceOf AJsInterfaceInheritsDifferentPrototype \u003d\u003d false\n\n\n class MyCustomElement extends HtmlElement.Prototype implements Iterator { ... }\n \n MyCustomElement obj \u003d ...; // a java object extends javascript object treated as a java object\n obj instanceOf Object \u003d\u003d true\n obj instanceOf HtmlElement \u003d\u003d true\n obj instanceOf Iterator \u003d\u003d true\n obj instanceOf AJsInterface \u003d\u003d false\n obj instanceOf AJsInterfaceWithSamePrototype \u003d\u003d false\n obj instanceOf AJsInterfaceWithDifferentPrototype \u003d\u003d false",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_8bf431a0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-28T00:29:10Z",
+      "side": 1,
+      "message": "Maybe if there are more that one prototype require that one of the interfaces extends the other.",
+      "parentUuid": "1cf89137_0daee612",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_ca5224a5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 13
@@ -230,6 +248,24 @@
       "side": 1,
       "message": "Yeah, if you have something like this:\n\n@JsInterface\ninterface Window {}\n\npublic native Object getWindow() /*-{ return $wnd; }-*/;\n\ngetWindow() instanceof Window will return false, because Window will be a null type, never instantiated (pruned), so CastNormalizer will insert false.\n\nI covered some of the edge cases in another message in this thread. At some point, we will need to simplify and centralize these edge cases dealing with JsInterfaces and JSOs.",
       "parentUuid": "1cf89137_4af2944e",
+      "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_0b9ba161",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-28T00:29:10Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "1cf89137_2dcd22a3",
       "revId": "1346235984a8c6a8035a31c9e0c1af724e3bd8ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

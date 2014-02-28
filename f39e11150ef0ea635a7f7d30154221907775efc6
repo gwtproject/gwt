@@ -50,6 +50,23 @@
       "revId": "f39e11150ef0ea635a7f7d30154221907775efc6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_51dee683",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-02-28T02:26:29Z",
+      "side": 1,
+      "message": "Great description.",
+      "revId": "f39e11150ef0ea635a7f7d30154221907775efc6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

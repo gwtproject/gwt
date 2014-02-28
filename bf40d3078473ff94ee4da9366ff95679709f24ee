@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_8e99df1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-28T02:13:41Z",
+      "side": 1,
+      "message": "i\u0027ll add a TODO explaining why this is the right thing to do for library compiles and also what kind of verification should be done to be safe in all cases.",
+      "parentUuid": "1c26d1b5_cfe0f4e7",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 11
+      },
+      "revId": "bf40d3078473ff94ee4da9366ff95679709f24ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_c81b4f85",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ConfigurationProperty.java",
         "patchSetId": 1
@@ -53,6 +77,24 @@
       "writtenOn": "2014-02-28T01:29:07Z",
       "side": 1,
       "message": "Shouldn\u0027t there be also a setTargetLibraryValues()?",
+      "revId": "bf40d3078473ff94ee4da9366ff95679709f24ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_6ed0ebe5",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ConfigurationProperty.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-28T02:13:41Z",
+      "side": 1,
+      "message": "it looks like this is a dead function (is only ever used in tests). removing it",
+      "parentUuid": "7c58ad41_c81b4f85",
       "revId": "bf40d3078473ff94ee4da9366ff95679709f24ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_8ead5f18",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-28T02:13:41Z",
+      "side": 1,
+      "message": "the PathPrefixSet API contains some assertions to verify that a PathPrefix is only ever inserted into 1 PathPrefixSet instance.\n\nmy code was previously violating this assertion but there was no test coverage to catch it.\n\nthere was no logical bug, but rather than turn off the assertion i avoid the \"not really necessary\" first PathPrefixSet insertion and instead store resource PathPrefix instances in a HashSet.",
+      "parentUuid": "7c58ad41_e845f364",
+      "range": {
+        "startLine": 211,
+        "startChar": 10,
+        "endLine": 211,
+        "endChar": 25
+      },
+      "revId": "bf40d3078473ff94ee4da9366ff95679709f24ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_883c37d1",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 1
@@ -93,6 +159,30 @@
       "writtenOn": "2014-02-28T01:29:07Z",
       "side": 1,
       "message": "why 1000 and 0 or -1? oh now I see it has only moved anyhow do you know why?",
+      "range": {
+        "startLine": 594,
+        "startChar": 32,
+        "endLine": 594,
+        "endChar": 36
+      },
+      "revId": "bf40d3078473ff94ee4da9366ff95679709f24ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_2ed43387",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-02-28T02:13:41Z",
+      "side": 1,
+      "message": "the system seems to treat 0 as a special value. my memory of it is a little foggy now but i believe it was treating it as if there was no modification date set at all",
+      "parentUuid": "7c58ad41_883c37d1",
       "range": {
         "startLine": 594,
         "startChar": 32,

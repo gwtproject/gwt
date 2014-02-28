@@ -278,7 +278,7 @@ public abstract class JavaToJavaScriptCompiler {
 
         // (5) Construct the Js AST
         Pair<? extends JavaToJavaScriptMap, Set<JsNode>> jjsMapAndInlineableFunctions =
-            GenerateJavaScriptAST.exec(jprogram, jsProgram, options.getOutput(),
+            GenerateJavaScriptAST.exec(jprogram, jsProgram, compilerContext,
                 typeIdLiteralssByType,  symbolTable, propertyOracles);
         JavaToJavaScriptMap jjsmap = jjsMapAndInlineableFunctions.getLeft();
 

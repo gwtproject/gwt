@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_7c00a11f",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-02-28T05:45:23Z",
+      "side": 1,
+      "message": "Yes, it is quite confusing and not standardized (yet).\n\nI thought about your question while reviewing this and actually it depends on the context.\n\nYou could either extend by A.prototype \u003d new Parent() or A.prototype \u003d Object.create(Parent.prototype)  - at least the way I see things - although I have read a lot on this but still everything is not clear for me :)\n\nNote that, those two alternatives are not exactly same and may not work similar depending how the Parent object is setup.\n\nHowever, for the custom elements case, you instantiate with the second option so that is similar to what is done here.\n\nOn the other hand, to be honest I\u0027m not 100% sure we are correctly modeling everything with the new stuff.",
+      "parentUuid": "7c58ad41_318ff2a9",
+      "range": {
+        "startLine": 89,
+        "startChar": 33,
+        "endLine": 89,
+        "endChar": 36
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_f1795a0b",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 16

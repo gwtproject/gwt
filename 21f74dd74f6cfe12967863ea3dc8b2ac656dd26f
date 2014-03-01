@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c58ad41_657121f4",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-01T00:31:23Z",
+      "side": 1,
+      "message": "nit: Can you put related pieces next to each other?",
+      "revId": "21f74dd74f6cfe12967863ea3dc8b2ac656dd26f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

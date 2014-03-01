@@ -16,6 +16,24 @@
       "revId": "21f74dd74f6cfe12967863ea3dc8b2ac656dd26f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_88b54cd4",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-01T01:05:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_657121f4",
+      "revId": "21f74dd74f6cfe12967863ea3dc8b2ac656dd26f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

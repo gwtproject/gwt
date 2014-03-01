@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_88866cbb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-01T01:28:30Z",
+      "side": 1,
+      "message": "yes i\u0027m not super happy with the name either. agreed to change the name when the better name becomes clearer",
+      "parentUuid": "7c58ad41_884d4c0b",
+      "range": {
+        "startLine": 521,
+        "startChar": 38,
+        "endLine": 521,
+        "endChar": 60
+      },
+      "revId": "779627ac8848647dd689e70c7458168d99b99b91",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_482e3411",
         "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
         "patchSetId": 2

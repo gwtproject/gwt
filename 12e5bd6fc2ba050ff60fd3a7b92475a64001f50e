@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_43205580",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-01T02:12:23Z",
+      "side": 1,
+      "message": "That\u0027s the spirit :)\n\nWe should force compiler guys write even more GWT code for such improvements.",
+      "parentUuid": "7c58ad41_e3f62900",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_08939cff",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/ConditionTest.java",
         "patchSetId": 1

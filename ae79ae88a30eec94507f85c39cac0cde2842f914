@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_e87cc8cb",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-01T01:47:24Z",
+      "side": 1,
+      "message": "var can be removed, AFAIK multiple vars in the same scope are equiv to having one var at the scope and the rest plain assignment.",
+      "parentUuid": "7c58ad41_31eb7261",
+      "range": {
+        "startLine": 184,
+        "startChar": 8,
+        "endLine": 184,
+        "endChar": 27
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_7108ca88",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 16
@@ -128,6 +152,29 @@
         "startChar": 21,
         "endLine": 93,
         "endChar": 25
+      },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_08995cee",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-01T01:47:24Z",
+      "side": 1,
+      "message": "I would like to have this logic factored in one place given that defineClass and defileClassWithPrototype share most of the logic and portableObjectCreate and createSubclassPrototype are also similar.\n\n1) extract into \n\nstatic native JSO JCHSU.portableObjectCreate(JSO proto) /*-{\n  if (proto \u0026\u0026 Object.create) {\n    return Object.create(proto);\n  }\n  function dummyCtor() {}\n  dummyCtor.prototype \u003d proto || {};\n  return new dummyCtor();   \n\n}-*/ \n and delete createSubclassPrototype.\n\nKeep the main creation logic in defineClassWithPrototype(), change generation code to pass directly the prototype instead of the object whose prototype is wanted or rename this one to an approriate name and keep defineClassWithPrototype()  \n\nand make defineClass be\ndefineClass() {\n  defineClassWithPrototype(..., prototypesByTypeId[superTypeId], ...);\n}",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 7
       },
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

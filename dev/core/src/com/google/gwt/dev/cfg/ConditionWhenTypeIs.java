@@ -31,7 +31,7 @@ public class ConditionWhenTypeIs extends Condition {
 
   @Override
   public String toSource() {
-    return String.format("requestTypeName.equals(\"%s\")", exactTypeName);
+    return String.format("requestTypeClass == %s.class", exactTypeName);
   }
 
   @Override

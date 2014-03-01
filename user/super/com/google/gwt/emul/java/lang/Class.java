@@ -284,6 +284,12 @@ public final class Class<T> implements Type {
     }
   }
 
+  public native boolean isAssignableFrom(Class<?> that) /*-{
+    var srcTypeId = that.@java.lang.Class::typeId;
+    var dstTypeId = this.@java.lang.Class::typeId;
+    return @com.google.gwt.lang.Cast::canCastTypeId(*)(srcTypeId, dstTypeId);
+  }-*/;
+
   public boolean isArray() {
     return (modifiers & ARRAY) != 0;
   }

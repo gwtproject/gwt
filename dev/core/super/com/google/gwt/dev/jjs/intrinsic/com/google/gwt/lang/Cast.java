@@ -40,7 +40,6 @@ final class Cast {
         !!@com.google.gwt.lang.Cast::stringCastMap[dstId];
   }-*/;
 
-  // Will eventually be the implementation for class.isAssignableFrom().
   static native boolean canCastTypeId(JavaScriptObject srcTypeId, JavaScriptObject dstTypeId) /*-{
     var prototype = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId[srcTypeId];
     return (prototype.@java.lang.Object::castableTypeMap &&

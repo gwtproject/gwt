@@ -34,5 +34,5 @@ public abstract class RuntimeRebindRule {
    * Returns whether the requested type name along with the current browser environment satisfies
    * the condition embedded in this rule.
    */
-  public abstract boolean matches(String requestTypeName);
+  public abstract boolean matches(Class<?> requestTypeClass);
 }

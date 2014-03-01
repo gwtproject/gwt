@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7c58ad41_e30d0954",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-01T01:54:50Z",
+      "side": 1,
+      "message": "This entry will not exist if the class isn\u0027t instantiated.\nFor example, \n\nclass A{}\nclass B{} extends A\n\nB.class.isAssignableFrom(A.class);\n\nThe GWT compiler will completely prune A and B as they are never instantiated. Therefore, they will get no type ids. Therefore, you won\u0027t be able to look up the prototypes.\n\nOk, let\u0027s allocate them:\nnew B()\nnew A()\n\nand let\u0027s make A implements X, Y, Z\n\nNow, will A.class.isAssignableFrom(X.class) work?\n\nNo, it will not. Because CastNormalizer only synthesizes CastMap entries for types that are actually recorded as the target of an \u0027instanceof\u0027 operation. \n\nIn order to make this work, you\u0027d have to put in a special compiler pass to recognize the argument of isAssignableFrom() and ensure that it is added to the CastMap. However, this will fail if things aren\u0027t done with literal classes, e.g\n\nList\u003cClass\u003e classes \u003d Arrays.asList(X.class, Y.class, Z.class);\n\nfor (Class x : classes) A.class.isAssignableFrom(x); // ooops, we don\u0027t know what X is\n\n\nThis is why supporting this method has always been very low on our list, because doing it actually requires lugging around type information for every type that is referenced, and therefore, the CastMaps of all used classes will get bigger.\n\nThis might be fixable when we switch to using a deliberate field flag system for runtime information, e.g. we represent A as\n\nA.prototype.__implements_X\u003dtrue\nA.prototype.__implements_Y\u003dtrue\nA.prototype.__implements_Z\u003dtrue\n\nNow \u0027instanceof X\u0027 is translated as \u0027o.__implements_X\u0027\n\nAnd Class.isAssignableFrom would be represented as a dictionary lookup of the right __implements_Blah, and we could teach Js Optimizer to prune all unreferenced fields, either by direct property access or by \u0027quoted\u0027 dictionary lookup. Still, it will result in some code bloat.\n\nIn general, generating \u0027instanceof\u0027 helper methods is superior.",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_08939cff",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/ConditionTest.java",
         "patchSetId": 1

@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_f9b938aa",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-02T22:36:38Z",
+      "side": 1,
+      "message": "For now this is a clutch to implement runtime rebind rules in separate compilation (used by dev.cfg.ConditionWhenTypeAssignableTo); in separate compilation (which as of now is only unoptimized) nothing is pruned and for every defined class a full cast map is computed and is registered in the prototypesById map. With the exception of Arrays, primitives and String, which are not registered in prototypedById and.\n\nA different option would have been instead of evaluating all rebind rules at runtime in separate compilation use a scheme similar to soft permutations; but that scheme requires global information hence it can not be done piecewise modularly but it could be done at link time. We might need to iterate after modular compilation is a reality (pretty soon).",
+      "parentUuid": "7c58ad41_e30d0954",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_08939cff",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/ConditionTest.java",
         "patchSetId": 1

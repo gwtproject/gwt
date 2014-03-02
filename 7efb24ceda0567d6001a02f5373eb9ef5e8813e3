@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c8d0df2_8030b601",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-02T10:02:28Z",
+      "side": 1,
+      "message": "[warning] Footer lines should be separated from message body by a blank line.",
+      "revId": "7efb24ceda0567d6001a02f5373eb9ef5e8813e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

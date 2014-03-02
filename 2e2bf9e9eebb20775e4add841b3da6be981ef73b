@@ -22,6 +22,30 @@
       "revId": "2e2bf9e9eebb20775e4add841b3da6be981ef73b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0199f4_30b58ef7",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-02T16:51:06Z",
+      "side": 1,
+      "message": "Seems only ie8 does not support it.\n\nDone.",
+      "parentUuid": "dc0199f4_10c3b279",
+      "range": {
+        "startLine": 1381,
+        "startChar": 49,
+        "endLine": 1381,
+        "endChar": 51
+      },
+      "revId": "2e2bf9e9eebb20775e4add841b3da6be981ef73b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -28,8 +28,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
@@ -149,6 +152,12 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     return "{" + key + "=" + value + "}";
   }
 
+  private static <E> Collection<E> reverseCollection(Collection<E> c) {
+    List<E> reversedCollection = new ArrayList<E>(c);
+    Collections.reverse(reversedCollection);
+    return reversedCollection;
+  }
+
   /**
    * comparator used when creating the SortedMap.
    */
@@ -163,6 +172,46 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
+  }
+
+  public void testCeilingEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.ceilingEntry(keys[0]).getKey());
+    assertEquals(keys[0], map.ceilingEntry(getLessThanMinimumKey()).getKey());
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.ceilingEntry(getLessThanMinimumKey()).getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.ceilingEntry(getLessThanMinimumKey()).getKey());
+    assertEquals(keys[0], map.ceilingEntry(keys[0]).getKey());
+    assertEquals(keys[1], map.ceilingEntry(keys[1]).getKey());
+    assertEquals(null, map.ceilingEntry(getGreaterThanMaximumKey()));
+  }
+
+  public void testCeilingKey() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.ceilingKey(keys[0]));
+    assertEquals(keys[0], map.ceilingKey(getLessThanMinimumKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.ceilingKey(getLessThanMinimumKey()));
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.ceilingKey(getLessThanMinimumKey()));
+    assertEquals(keys[0], map.ceilingKey(keys[0]));
+    assertEquals(keys[1], map.ceilingKey(keys[1]));
+    assertEquals(null, map.ceilingKey(getGreaterThanMaximumKey()));
   }
 
   /**
@@ -227,7 +276,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#comparator()
    */
   public void testComparator() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     if (isNaturalOrder()) {
       assertEquals(null, sortedMap.comparator());
     } else {
@@ -453,6 +502,119 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
   }
 
+  public void testDescendingKeySet() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+
+    NavigableSet<K> keySet = map.descendingKeySet();
+    _assertEquals(keySet, keySet);
+    _assertEquals(map.descendingKeySet(), keySet);
+
+    map.put(keys[1], values[1]);
+    map.put(keys[2], values[2]);
+    _assertEquals(reverseCollection(keySet), keySet);
+    _assertEquals(map.keySet(), keySet.descendingSet());
+  }
+
+  public void testDescendingKeySet_viewPut() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+
+    Set<K> keySet = map.descendingKeySet();
+    assertEquals(1, keySet.size());
+
+    map.put(keys[1], values[1]);
+    assertEquals(2, keySet.size());
+
+    try {
+      keySet.add(keys[2]);
+      fail();
+    } catch (Exception e) {
+      // java.util.NavigableMap.navigableKeySet() does not support add
+    }
+    try {
+      keySet.addAll(keySet);
+      fail();
+    } catch (Exception e) {
+      // java.util.NavigableMap.navigableKeySet() does not support addAll
+    }
+  }
+
+  public void testDescendingKeySet_viewRemove() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+
+    Set<K> keySet = map.descendingKeySet();
+    assertEquals(2, keySet.size());
+
+    map.remove(keys[1]);
+    assertEquals(1, keySet.size());
+
+    map.put(keys[1], values[1]);
+    keySet.remove(keys[0]);
+    assertEquals(1, map.size());
+    assertEquals(1, keySet.size());
+    assertEquals(keys[1], keySet.iterator().next());
+
+    keySet.clear();
+    assertEquals(0, map.size());
+    assertEquals(0, keySet.size());
+  }
+
+  @SuppressWarnings("unchecked")
+  public void testDescendingKeySetIteratorRemove() {
+    NavigableMap<K, V> map = createNavigableMap();
+    map.putAll(makeFullMap());
+    resetFull();
+    ArrayList<K> keys = new ArrayList<K>();
+    for (Object key : getSampleKeys()) {
+      keys.add((K) key);
+    }
+    Comparator<? super K> cmp = ((TreeMap<K, V>) map).comparator();
+    Collections.sort(keys, Collections.reverseOrder(cmp));
+    Iterator<K> it = map.descendingKeySet().iterator();
+    for (K key : keys) {
+      assertTrue(it.hasNext());
+      K rem = it.next();
+      it.remove();
+      assertEquals(key, rem);
+    }
+    assertEquals(0, map.size());
+  }
+
+  public void testDescendingMap() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+
+    NavigableMap<K, V> descendingMap = map.descendingMap();
+    _assertEquals(descendingMap, descendingMap);
+    _assertEquals(map.descendingMap(), descendingMap);
+
+    map.put(keys[1], values[1]);
+    _assertEquals(map, descendingMap.descendingMap());
+    _assertEquals(reverseCollection(map.entrySet()), descendingMap.entrySet());
+
+    descendingMap.put(keys[2], values[2]);
+    _assertEquals(reverseCollection(map.entrySet()), descendingMap.entrySet());
+    _assertEquals(map.entrySet(), descendingMap.descendingMap().entrySet());
+
+    descendingMap.remove(keys[1]);
+    _assertEquals(reverseCollection(map.entrySet()), descendingMap.entrySet());
+
+    descendingMap.clear();
+    assertEquals(descendingMap.size(), 0);
+    assertEquals(map.size(), 0);
+  }
+
   /**
    * Test method for 'java.util.Map.entrySet().remove(Object)'.
    * 
@@ -622,28 +784,54 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     // TODO no tests for finalize?
   }
 
+  public void testFirstEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.firstEntry().getKey());
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.firstEntry().getKey());
+    assertEquals(keys[0], map.lastEntry().getKey());
+    assertEquals(map.lastEntry().getKey(), map.firstEntry().getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.firstEntry().getKey());
+    assertFalse(keys[1].equals(map.firstEntry().getKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.firstEntry().getKey());
+    assertFalse(keys[0].equals(map.lastEntry().getKey()));
+    assertFalse(map.lastEntry().getKey().equals(map.firstEntry().getKey()));
+  }
+
   /**
    * Test method for 'java.util.SortedMap.firstKey()'.
    * 
    * @see java.util.SortedMap#firstKey()
    */
   public void testFirstKey() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     // test with a single entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    assertEquals(getKeys()[0], sortedMap.firstKey());
+
+    sortedMap.put(keys[0], values[0]);
+    assertEquals(keys[0], sortedMap.firstKey());
     // is it consistent with other methods
     assertEquals(sortedMap.keySet().toArray()[0], sortedMap.firstKey());
-    assertEquals(getKeys()[0], sortedMap.lastKey());
+    assertEquals(keys[0], sortedMap.lastKey());
     assertEquals(sortedMap.lastKey(), sortedMap.firstKey());
 
     // test with two entry map
-    sortedMap.put(getKeys()[1], getValues()[1]);
-    assertEquals(getKeys()[0], sortedMap.firstKey());
-    assertFalse(getKeys()[1].equals(sortedMap.firstKey()));
+    sortedMap.put(keys[1], values[1]);
+    assertEquals(keys[0], sortedMap.firstKey());
+    assertFalse(keys[1].equals(sortedMap.firstKey()));
     // is it consistent with other methods
     assertEquals(sortedMap.keySet().toArray()[0], sortedMap.firstKey());
-    assertFalse(getKeys()[0].equals(sortedMap.lastKey()));
+    assertFalse(keys[0].equals(sortedMap.lastKey()));
     assertFalse(sortedMap.lastKey().equals(sortedMap.firstKey()));
   }
 
@@ -653,7 +841,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#firstKey()
    */
   public void testFirstKey_throwsNoSuchElementException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     // test with no entries
     try {
       sortedMap.firstKey();
@@ -661,6 +849,50 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     } catch (NoSuchElementException e) {
       // expected outcome
     }
+  }
+
+  public void testFloorEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.floorEntry(getLessThanMinimumKey()));
+    assertEquals(keys[0], map.floorEntry(keys[0]).getKey());
+    assertEquals(keys[0], map.floorEntry(keys[1]).getKey());
+    assertEquals(keys[0], map.floorEntry(getGreaterThanMaximumKey()).getKey());
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.floorEntry(keys[1]).getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(null, map.floorEntry(getLessThanMinimumKey()));
+    assertEquals(keys[0], map.floorEntry(keys[0]).getKey());
+    assertEquals(keys[1], map.floorEntry(keys[1]).getKey());
+    assertEquals(keys[1], map.floorEntry(getGreaterThanMaximumKey()).getKey());
+  }
+
+  public void testFloorKey() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.floorKey(getLessThanMinimumKey()));
+    assertEquals(keys[0], map.floorKey(keys[0]));
+    assertEquals(keys[0], map.floorKey(keys[1]));
+    assertEquals(keys[0], map.floorKey(getGreaterThanMaximumKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.floorKey(keys[1]));
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(null, map.floorKey(getLessThanMinimumKey()));
+    assertEquals(keys[0], map.floorKey(keys[0]));
+    assertEquals(keys[1], map.floorKey(keys[1]));
+    assertEquals(keys[1], map.floorKey(getGreaterThanMaximumKey()));
   }
 
   /**
@@ -748,51 +980,115 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Test method for 'java.util.SortedMap.headMap(Object)'.
+   * Test method for 'java.util.SortedMap.headMap(Object)' and
+   * 'java.util.NavigableMap.headMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#headMap(Object)
+   * @see java.util.NavigableMap#headMap(Object, boolean)
    */
   public void testHeadMap() {
     // test with no entries
-    assertNotNull(createSortedMap().headMap(getKeys()[0]));
+    K[] keys = getSortedKeys();
+    NavigableMap<K, V> map = createNavigableMap();
+    assertNotNull(map.headMap(keys[0]));
+    assertNotNull(map.headMap(keys[0], false));
+    assertNotNull(map.headMap(keys[0], true));
   }
 
   /**
-   * Test method for 'java.util.SortedMap.headMap(Object)'.
+   * Test method for 'java.util.SortedMap.headMap(Object)' and
+   * 'java.util.NavigableMap.headMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#headMap(Object)
+   * @see java.util.NavigableMap#headMap(Object, boolean)
    */
   public void testHeadMap_entries0_size() {
     // test with no entries
-    assertEquals(0, createSortedMap().headMap(getKeys()[0]).size());
+    K[] keys = getSortedKeys();
+    assertEquals(0, createNavigableMap().headMap(keys[0]).size());
+
+    NavigableMap<K, V> exclusiveHeadMap = createNavigableMap().headMap(keys[0], false);
+    assertEquals(0, exclusiveHeadMap.size());
+    assertNull(exclusiveHeadMap.firstEntry());
+    assertNull(exclusiveHeadMap.lastEntry());
+    try {
+      assertNull(exclusiveHeadMap.firstKey());
+      fail();
+    } catch (NoSuchElementException e) {
+      // expected outcome
+    }
+    try {
+      assertNull(exclusiveHeadMap.lastKey());
+      fail();
+    } catch (NoSuchElementException e) {
+      // expected outcome
+    }
+
+    NavigableMap<K, V> inclusiveHeadMap = createNavigableMap().headMap(keys[0], true);
+    assertEquals(0, inclusiveHeadMap.size());
+    assertNull(inclusiveHeadMap.firstEntry());
+    assertNull(inclusiveHeadMap.lastEntry());
+    try {
+      assertNull(inclusiveHeadMap.firstKey());
+      fail();
+    } catch (NoSuchElementException e) {
+      // expected outcome
+    }
+    try {
+      assertNull(inclusiveHeadMap.lastKey());
+      fail();
+    } catch (NoSuchElementException e) {
+      // expected outcome
+    }
   }
 
   /**
-   * Test method for 'java.util.SortedMap.headMap(Object)'.
+   * Test method for 'java.util.SortedMap.headMap(Object)' and
+   * 'java.util.NavigableMap.headMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#headMap(Object)
+   * @see java.util.NavigableMap#headMap(Object, boolean)
    */
   public void testHeadMap_entries1() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    NavigableMap<K, V> map = createNavigableMap();
     // test with a single entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    assertEquals(0, sortedMap.headMap(getKeys()[0]).size());
+    map.put(keys[0], getValues()[0]);
+
+    assertEquals(0, map.headMap(keys[0]).size());
+    assertEquals(0, map.headMap(keys[0], false).size());
+    assertEquals(1, map.headMap(keys[0], true).size());
   }
 
   /**
-   * Test method for 'java.util.SortedMap.headMap(Object)'.
+   * Test method for 'java.util.SortedMap.headMap(Object)' and
+   * 'java.util.NavigableMap.headMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#headMap(Object)
+   * @see java.util.NavigableMap#headMap(Object, boolean)
    */
   public void testHeadMap_entries2() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
     // test with two entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    sortedMap.put(getKeys()[1], getValues()[1]);
-    assertEquals(0, sortedMap.headMap(getKeys()[0]).size());
-    assertEquals(1, sortedMap.headMap(getKeys()[1]).size());
-    assertEquals(getKeys()[0],
-        sortedMap.tailMap(getKeys()[0]).keySet().toArray()[0]);
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+
+    assertEquals(0, map.headMap(keys[0]).size());
+    assertEquals(1, map.headMap(keys[1]).size());
+    assertEquals(keys[0], map.tailMap(keys[0]).keySet().toArray()[0]);
+
+    assertEquals(0, map.headMap(keys[0], false).size());
+    assertEquals(1, map.headMap(keys[1], false).size());
+    assertEquals(keys[0], map.headMap(keys[0], true).keySet().toArray()[0]);
+
+    assertEquals(1, map.headMap(keys[0], true).size());
+    assertEquals(2, map.headMap(keys[1], true).size());
+    assertEquals(keys[0], map.headMap(keys[1], false).keySet().toArray()[0]);
+    assertEquals(keys[1], map.headMap(keys[1], true).keySet().toArray()[1]);
+    assertEquals(0, map.headMap(keys[0], false).keySet().size());
+    assertEquals(keys[1], map.headMap(keys[1], true).keySet().toArray()[1]);
   }
 
   /**
@@ -802,7 +1098,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testHeadMap_throwsClassCastException() {
-    SortedMap sortedMap = createSortedMap();
+    SortedMap sortedMap = createNavigableMap();
     sortedMap.put(getKeys()[0], getValues()[0]);
     if (isNaturalOrder()) {
       // TODO Why does this succeed with natural ordering when subMap doesn't?
@@ -832,13 +1128,90 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#headMap(Object)
    */
   public void testHeadMap_throwsNullPointerException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     try {
       sortedMap.headMap(null);
       assertTrue(useNullKey() || GWT.isScript());
     } catch (NullPointerException e) {
       assertFalse(useNullKey());
     }
+  }
+
+  public void testHeadMap_viewPutRemove() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+    map.put(keys[2], values[2]);
+    map.put(keys[3], values[3]);
+
+    NavigableMap<K, V> headMap = map.headMap(keys[2], true);
+    try {
+      headMap.put(keys[3], values[3]);
+      fail();
+    } catch (IllegalArgumentException e) {
+      // must not insert value outside the range
+    }
+    headMap.remove(keys[3]);
+    assertEquals(2, headMap.size());
+    assertEquals(3, map.size());
+    assertTrue(map.containsKey(keys[3]));
+
+    headMap.put(keys[1], values[1]);
+    assertEquals(3, headMap.size());
+    assertEquals(4, map.size());
+    assertTrue(map.containsKey(keys[1]));
+    assertTrue(headMap.containsKey(keys[1]));
+
+    headMap.remove(keys[1]);
+    assertFalse(map.containsKey(keys[1]));
+    assertFalse(headMap.containsKey(keys[1]));
+
+    headMap.clear();
+    assertEquals(0, headMap.size());
+    assertEquals(1, map.size());
+    assertTrue(map.containsKey(keys[3]));
+  }
+
+  public void testHigherEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.higherEntry(keys[0]));
+    assertEquals(keys[0], map.higherEntry(getLessThanMinimumKey()).getKey());
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.higherEntry(getLessThanMinimumKey()).getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.higherEntry(getLessThanMinimumKey()).getKey());
+    assertEquals(keys[1], map.higherEntry(keys[0]).getKey());
+    assertEquals(null, map.higherEntry(keys[1]));
+    assertEquals(null, map.higherEntry(getGreaterThanMaximumKey()));
+  }
+
+  public void testHigherKey() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.higherKey(keys[0]));
+    assertEquals(keys[0], map.higherKey(getLessThanMinimumKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.higherKey(getLessThanMinimumKey()));
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.higherKey(getLessThanMinimumKey()));
+    assertEquals(keys[1], map.higherKey(keys[0]));
+    assertEquals(null, map.higherKey(keys[1]));
+    assertEquals(null, map.higherKey(getGreaterThanMaximumKey()));
   }
 
   /**
@@ -927,29 +1300,54 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     assertEquals(0, map.size());
   }
 
+  public void testLastEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.lastEntry().getKey());
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.lastEntry().getKey());
+    assertEquals(keys[0], map.firstEntry().getKey());
+    assertEquals(map.firstEntry().getKey(), map.lastEntry().getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(keys[1], map.lastEntry().getKey());
+    assertFalse(keys[0].equals(map.lastEntry().getKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[1], map.lastEntry().getKey());
+    assertEquals(keys[0], map.firstEntry().getKey());
+    assertFalse(map.firstEntry().getKey().equals(map.lastEntry().getKey()));
+  }
+
   /**
    * Test method for 'java.util.SortedMap.lastKey()'.
    * 
    * @see java.util.SortedMap#lastKey()
    */
   public void testLastKey() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    SortedMap<K, V> sortedMap = createNavigableMap();
 
     // test with a single entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    assertEquals(getKeys()[0], sortedMap.lastKey());
+    sortedMap.put(keys[0], values[0]);
+    assertEquals(keys[0], sortedMap.lastKey());
     // is it consistent with other methods
     assertEquals(sortedMap.keySet().toArray()[0], sortedMap.lastKey());
-    assertEquals(getKeys()[0], sortedMap.firstKey());
+    assertEquals(keys[0], sortedMap.firstKey());
     assertEquals(sortedMap.firstKey(), sortedMap.lastKey());
 
     // test with two entry map
-    sortedMap.put(getKeys()[1], getValues()[1]);
-    assertEquals(getKeys()[1], sortedMap.lastKey());
-    assertFalse(getKeys()[0].equals(sortedMap.lastKey()));
+    sortedMap.put(keys[1], values[1]);
+    assertEquals(keys[1], sortedMap.lastKey());
+    assertFalse(keys[0].equals(sortedMap.lastKey()));
     // is it consistent with other methods
     assertEquals(sortedMap.keySet().toArray()[1], sortedMap.lastKey());
-    assertEquals(getKeys()[0], sortedMap.firstKey());
+    assertEquals(keys[0], sortedMap.firstKey());
     assertFalse(sortedMap.firstKey().equals(sortedMap.lastKey()));
   }
 
@@ -959,7 +1357,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#lastKey()
    */
   public void testLastKey_throwsNoSuchElementException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     // test with no entries
     try {
       sortedMap.lastKey();
@@ -967,6 +1365,177 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     } catch (NoSuchElementException e) {
       // expected outcome
     }
+  }
+
+  public void testLowerEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.lowerEntry(getLessThanMinimumKey()));
+    assertEquals(null, map.lowerEntry(keys[0]));
+    assertEquals(keys[0], map.lowerEntry(keys[1]).getKey());
+    assertEquals(keys[0], map.lowerEntry(getGreaterThanMaximumKey()).getKey());
+// is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.lowerEntry(keys[1]).getKey());
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(null, map.lowerEntry(getLessThanMinimumKey()));
+    assertEquals(null, map.lowerEntry(keys[0]));
+    assertEquals(keys[0], map.lowerEntry(keys[1]).getKey());
+    assertEquals(keys[1], map.lowerEntry(getGreaterThanMaximumKey()).getKey());
+  }
+
+  public void testLowerKey() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    // test with a single entry map
+    map.put(keys[0], values[0]);
+    assertEquals(null, map.lowerKey(getLessThanMinimumKey()));
+    assertEquals(null, map.lowerKey(keys[0]));
+    assertEquals(keys[0], map.lowerKey(keys[1]));
+    assertEquals(keys[0], map.lowerKey(getGreaterThanMaximumKey()));
+    // is it consistent with other methods
+    assertEquals(map.keySet().toArray()[0], map.lowerKey(keys[1]));
+
+    // test with two entry map
+    map.put(keys[1], values[1]);
+    assertEquals(null, map.lowerKey(getLessThanMinimumKey()));
+    assertEquals(null, map.lowerKey(keys[0]));
+    assertEquals(keys[0], map.lowerKey(keys[1]));
+    assertEquals(keys[1], map.lowerKey(getGreaterThanMaximumKey()));
+  }
+
+  public void testNavigableKeySet() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+
+    Set<K> keySet = map.navigableKeySet();
+    _assertEquals(map.navigableKeySet(), keySet);
+    _assertEquals(keySet, keySet);
+
+    map.put(keys[1], values[1]);
+    map.put(keys[2], values[2]);
+    _assertEquals(map.navigableKeySet(), keySet);
+    _assertEquals(keySet, keySet);
+  }
+
+  public void testNavigableKeySet_viewPut() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+
+    Set<K> keySet = map.navigableKeySet();
+    assertEquals(1, keySet.size());
+    map.put(keys[1], values[1]);
+    assertEquals(2, keySet.size());
+
+    try {
+      keySet.add(keys[2]);
+      fail();
+    } catch (Exception e) {
+      // java.util.NavigableMap.navigableKeySet() does not support add
+    }
+    try {
+      keySet.addAll(keySet);
+      fail();
+    } catch (Exception e) {
+      // java.util.NavigableMap.navigableKeySet() does not support addAll
+    }
+  }
+
+  public void testNavigableKeySet_viewRemove() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+
+    Set<K> keySet = map.navigableKeySet();
+    assertEquals(2, keySet.size());
+    map.remove(keys[1]);
+    assertEquals(1, keySet.size());
+
+    map.put(keys[1], values[1]);
+    keySet.remove(keys[0]);
+    assertEquals(1, map.size());
+    assertEquals(1, keySet.size());
+    assertEquals(keys[1], keySet.iterator().next());
+
+    keySet.clear();
+    assertEquals(0, map.size());
+    assertEquals(0, keySet.size());
+  }
+
+  @SuppressWarnings("unchecked")
+  public void testNavigableKeySetIteratorRemove() {
+    NavigableMap<K, V> map = createNavigableMap();
+    map.putAll(makeFullMap());
+    resetFull();
+    ArrayList<K> keys = new ArrayList<K>();
+    for (Object key : getSampleKeys()) {
+      keys.add((K) key);
+    }
+    Comparator<? super K> cmp = ((TreeMap<K, V>) map).comparator();
+    Collections.sort(keys, cmp);
+    Iterator<K> it = map.navigableKeySet().iterator();
+    for (K key : keys) {
+      assertTrue(it.hasNext());
+      K rem = it.next();
+      it.remove();
+      assertEquals(key, rem);
+    }
+    assertEquals(0, map.size());
+  }
+
+  public void testPollFirstEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    assertNull(map.pollFirstEntry());
+    assertEquals(0, map.size());
+
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.pollFirstEntry().getKey());
+    assertEquals(0, map.size());
+
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+    assertEquals(keys[0], map.pollFirstEntry().getKey());
+    assertEquals(1, map.size());
+    assertEquals(keys[1], map.pollFirstEntry().getKey());
+    assertEquals(0, map.size());
+    assertNull(map.pollFirstEntry());
+  }
+
+  public void testPollLastEntry() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    assertNull(map.pollLastEntry());
+    assertEquals(0, map.size());
+
+    map.put(keys[0], values[0]);
+    assertEquals(keys[0], map.pollLastEntry().getKey());
+    assertEquals(0, map.size());
+
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+    assertEquals(keys[1], map.pollLastEntry().getKey());
+    assertEquals(1, map.size());
+    assertEquals(keys[0], map.pollLastEntry().getKey());
+    assertEquals(0, map.size());
+    assertNull(map.pollLastEntry());
   }
 
   /**
@@ -1030,7 +1599,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.Map#put(Object, Object)
    */
   public void testPut_nullKey() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
 
     if (useNullKey()) {
       assertNull(sortedMap.put(null, getValues()[0]));
@@ -1590,31 +2159,77 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Test method for 'java.util.SortedMap.subMap(Object, Object)'.
+   * Test method for 'java.util.SortedMap.subMap(Object, Object)' and
+   * 'java.util.NavigableMap.subMap(Object, boolean, Object, boolean)'.
    * 
    * @see java.util.SortedMap#subMap(Object, Object)
+   * @see java.util.NavigableMap#subMap(Object, boolean, Object, boolean)
    */
   public void testSubMap() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
     // test with no entries
-    assertEquals(0, sortedMap.subMap(getKeys()[0], getKeys()[0]).size());
+    assertEquals(0, map.subMap(keys[0], keys[0]).size());
+    assertEquals(0, map.subMap(keys[0], false, keys[0], false).size());
+    assertEquals(0, map.subMap(keys[0], true, keys[0], false).size());
+    assertEquals(0, map.subMap(keys[0], false, keys[0], true).size());
+    assertEquals(0, map.subMap(keys[0], true, keys[0], true).size());
 
     // test with a single entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    assertEquals(0, sortedMap.subMap(getKeys()[0], getKeys()[0]).size());
+    map.put(keys[0], values[0]);
+
+    assertEquals(0, map.subMap(keys[0], keys[0]).size());
     // bounded by a "wide" range
-    assertEquals(1, sortedMap.subMap(getLessThanMinimumKey(),
-        getGreaterThanMaximumKey()).size());
+    assertEquals(1, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
+    assertEquals(1, map.subMap(getLessThanMinimumKey(), false,
+        getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(getLessThanMinimumKey(), true,
+        getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(getLessThanMinimumKey(), false,
+        getGreaterThanMaximumKey(), true).size());
+    assertEquals(1, map.subMap(getLessThanMinimumKey(), true,
+        getGreaterThanMaximumKey(), true).size());
 
     // test with two entry map
-    sortedMap.put(getKeys()[1], getValues()[1]);
-    assertEquals(1, sortedMap.subMap(getKeys()[0], getKeys()[1]).size());
-    assertEquals(getKeys()[0],
-        sortedMap.subMap(getKeys()[0], getKeys()[1]).keySet().toArray()[0]);
+    map.put(keys[1], values[1]);
+
+    assertEquals(1, map.subMap(keys[0], keys[1]).size());
+    assertEquals(keys[0], map.subMap(keys[0], keys[1]).keySet().toArray()[0]);
+
+    assertEquals(0, map.subMap(keys[0], false, keys[1], false).size());
+
+    assertEquals(1, map.subMap(keys[0], false, keys[1], true).size());
+    assertEquals(keys[1], map.subMap(keys[0], false,
+        keys[1], true).keySet().toArray()[0]);
+
+    assertEquals(1, map.subMap(keys[0], true, keys[1], false).size());
+    assertEquals(keys[0], map.subMap(keys[0], true,
+        keys[1], false).keySet().toArray()[0]);
+
+    assertEquals(2, map.subMap(keys[0], true, keys[1], true).size());
+    assertEquals(keys[0], map.subMap(keys[0], true,
+        keys[1], true).keySet().toArray()[0]);
+    assertEquals(keys[1], map.subMap(keys[0], true,
+        keys[1], true).keySet().toArray()[1]);
+
     // bounded by a "wide" range
-    SortedMap<K, V> subMap = sortedMap.subMap(getLessThanMinimumKey(),
-        getGreaterThanMaximumKey());
-    assertEquals(2, subMap.size());
+    assertEquals(2, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
+
+    assertEquals(2, map.subMap(getLessThanMinimumKey(), false,
+        getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(keys[0], false,
+        getGreaterThanMaximumKey(), false).size());
+    assertEquals(0, map.subMap(keys[0], false,
+        keys[1], false).size());
+    assertEquals(2, map.subMap(keys[0], true,
+        getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(keys[0], true,
+        keys[1], false).size());
+    assertEquals(2, map.subMap(keys[0], true,
+        getGreaterThanMaximumKey(), true).size());
+    assertEquals(2, map.subMap(keys[0], true,
+        keys[1], true).size());
   }
 
   /**
@@ -1624,7 +2239,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testSubMap_throwsClassCastException() {
-    SortedMap sortedMap = createSortedMap();
+    SortedMap sortedMap = createNavigableMap();
     sortedMap.put(getKeys()[0], getValues()[0]);
     try {
       sortedMap.subMap(getConflictingKey(), getKeys()[0]);
@@ -1652,7 +2267,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#subMap(Object, Object)
    */
   public void testSubMap_throwsIllegalArgumentException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     try {
       sortedMap.subMap(getGreaterThanMaximumKey(), getLessThanMinimumKey());
       fail("expected exception");
@@ -1668,7 +2283,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#subMap(Object, Object)
    */
   public void testSubMap_throwsNullPointerException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     try {
       sortedMap.subMap(null, getLessThanMinimumKey());
       assertTrue(useNullKey());
@@ -1687,61 +2302,157 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
   }
 
+  public void testSubMap_viewPutRemove() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+    map.put(keys[3], values[3]);
+
+    NavigableMap<K, V> subMap = map.subMap(keys[1], true, keys[3], true);
+    try {
+      subMap.put(keys[0], values[0]);
+      fail();
+    } catch (IllegalArgumentException e) {
+      // must not insert value outside the range
+    }
+    subMap.remove(keys[0]);
+    assertEquals(2, subMap.size());
+    assertEquals(3, map.size());
+    assertTrue(map.containsKey(keys[0]));
+
+    subMap.put(keys[2], values[2]);
+    assertEquals(3, subMap.size());
+    assertEquals(4, map.size());
+    assertTrue(map.containsKey(keys[2]));
+    assertTrue(subMap.containsKey(keys[2]));
+
+    subMap.remove(keys[2]);
+    assertFalse(map.containsKey(keys[2]));
+    assertFalse(subMap.containsKey(keys[2]));
+
+    subMap.clear();
+    assertEquals(0, subMap.size());
+    assertEquals(1, map.size());
+    assertTrue(map.containsKey(keys[0]));
+  }
+
   /**
-   * Test method for 'java.util.SortedMap.tailMap(Object)'.
+   * Test method for 'java.util.SortedMap.tailMap(Object)' and
+   * 'java.util.NavigableMap.tailMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#tailMap(Object)
+   * @see java.util.NavigableMap#tailMap(Object, boolean)
    */
   public void testTailMap_entries0() {
     // test with no entries
-    Map<K, V> tailMap = createSortedMap().tailMap(getKeys()[0]);
-    assertNotNull(tailMap);
+    K[] keys = getSortedKeys();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    assertNotNull(map.tailMap(keys[0]));
+    assertNotNull(map.tailMap(keys[0], false));
+    assertNotNull(map.tailMap(keys[0], true));
   }
 
   /**
-   * Test method for 'java.util.SortedMap.tailMap(Object)'.
+   * Test method for 'java.util.SortedMap.tailMap(Object)' and
+   * 'java.util.NavigableMap.tailMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#tailMap(Object)
+   * @see java.util.NavigableMap#tailMap(Object, boolean)
    */
   public void testTailMap_entries0_size() {
     // test with no entries
-    Map<K, V> tailMap = createSortedMap().tailMap(getKeys()[0]);
+    K[] keys = getSortedKeys();
+    NavigableMap<K, V> map = createNavigableMap();
+
+    Map<K, V> tailMap = map.tailMap(keys[0]);
     assertNotNull(tailMap);
     assertEquals(0, tailMap.size());
+
+    Map<K, V> exclusiveTailMap = map.tailMap(keys[0], false);
+    assertNotNull(exclusiveTailMap);
+    assertEquals(0, exclusiveTailMap.size());
+
+    Map<K, V> inclusiveTailMap = map.tailMap(keys[0], true);
+    assertNotNull(inclusiveTailMap);
+    assertEquals(0, inclusiveTailMap.size());
   }
 
   /**
-   * Test method for 'java.util.SortedMap.tailMap(Object)'.
+   * Test method for 'java.util.SortedMap.tailMap(Object)' and
+   * 'java.util.NavigableMap.tailMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#tailMap(Object)
+   * @see java.util.NavigableMap#tailMap(Object, boolean)
    */
   public void testTailMap_entries1_size_keyValue() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> map = createNavigableMap();
     // test with a single entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    Map<K, V> tailMap = sortedMap.tailMap(getKeys()[0]);
+    map.put(keys[0], values[0]);
+
+    Map<K, V> tailMap = map.tailMap(keys[0]);
     assertEquals(1, tailMap.size());
-    assertEquals(getKeys()[0], tailMap.keySet().toArray()[0]);
+    assertEquals(keys[0], tailMap.keySet().toArray()[0]);
+
+    Map<K, V> exclusiveTailMap = map.tailMap(keys[0], false);
+    assertEquals(0, exclusiveTailMap.size());
+    assertEquals(0, exclusiveTailMap.keySet().size());
+
+    Map<K, V> inclusiveTailMap = map.tailMap(keys[0], true);
+    assertEquals(1, inclusiveTailMap.size());
+    assertEquals(keys[0], inclusiveTailMap.keySet().toArray()[0]);
   }
 
   /**
-   * Test method for 'java.util.SortedMap.tailMap(Object)'.
+   * Test method for 'java.util.SortedMap.tailMap(Object)' and
+   * 'java.util.NavigableMap.tailMap(Object, boolean)'.
    * 
    * @see java.util.SortedMap#tailMap(Object)
+   * @see java.util.NavigableMap#tailMap(Object, boolean)
    */
   public void testTailMap_entries2_size_keyValue() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+    NavigableMap<K, V> sortedMap = createNavigableMap();
     // test with two entry map
-    sortedMap.put(getKeys()[0], getValues()[0]);
-    Map<K, V> tailMap = sortedMap.tailMap(getKeys()[0]);
+    sortedMap.put(keys[0], values[0]);
+
+    Map<K, V> tailMap = sortedMap.tailMap(keys[0]);
     assertEquals(1, tailMap.size());
-    sortedMap.put(getKeys()[1], getValues()[1]);
-    tailMap = sortedMap.tailMap(getKeys()[1]);
+    Map<K, V> exclusiveTailMap = sortedMap.tailMap(keys[0], false);
+    assertEquals(0, exclusiveTailMap.size());
+    Map<K, V> inclusiveTailMap = sortedMap.tailMap(keys[0], true);
+    assertEquals(1, inclusiveTailMap.size());
+
+    sortedMap.put(keys[1], values[1]);
+
+    tailMap = sortedMap.tailMap(keys[1]);
     assertEquals(1, tailMap.size());
-    tailMap = sortedMap.tailMap(getKeys()[0]);
+
+    exclusiveTailMap = sortedMap.tailMap(keys[1], false);
+    assertEquals(0, exclusiveTailMap.size());
+
+    inclusiveTailMap = sortedMap.tailMap(keys[1], true);
+    assertEquals(1, inclusiveTailMap.size());
+
+    tailMap = sortedMap.tailMap(keys[0]);
     assertEquals(2, tailMap.size());
-    assertEquals(getKeys()[0], tailMap.keySet().toArray()[0]);
-    assertEquals(getKeys()[1], tailMap.keySet().toArray()[1]);
+    assertEquals(keys[0], tailMap.keySet().toArray()[0]);
+    assertEquals(keys[1], tailMap.keySet().toArray()[1]);
+
+    exclusiveTailMap = sortedMap.tailMap(keys[0], false);
+    assertEquals(1, exclusiveTailMap.size());
+    assertEquals(keys[1], exclusiveTailMap.keySet().toArray()[0]);
+
+    inclusiveTailMap = sortedMap.tailMap(keys[0], true);
+    assertEquals(2, inclusiveTailMap.size());
+    assertEquals(keys[0], inclusiveTailMap.keySet().toArray()[0]);
+    assertEquals(keys[1], inclusiveTailMap.keySet().toArray()[1]);
   }
 
   /**
@@ -1751,7 +2462,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    */
   @SuppressWarnings("unchecked")
   public void testTailMap_throwsClassCastException() {
-    SortedMap sortedMap = createSortedMap();
+    SortedMap sortedMap = createNavigableMap();
     sortedMap.put(getKeys()[0], getValues()[0]);
     if (isNaturalOrder()) {
       // TODO Why does this succeed with natural ordering when subMap doesn't?
@@ -1781,13 +2492,50 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @see java.util.SortedMap#tailMap(Object)
    */
   public void testTailMap_throwsNullPointerException() {
-    SortedMap<K, V> sortedMap = createSortedMap();
+    SortedMap<K, V> sortedMap = createNavigableMap();
     try {
       sortedMap.tailMap(null);
       assertTrue(useNullKey());
     } catch (NullPointerException e) {
       assertFalse(useNullKey());
     }
+  }
+
+  public void testTailMap_viewPutRemove() {
+    K[] keys = getSortedKeys();
+    V[] values = getSortedValues();
+
+    NavigableMap<K, V> map = createNavigableMap();
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+    map.put(keys[3], values[3]);
+
+    NavigableMap<K, V> tailMap = map.tailMap(keys[1], true);
+    try {
+      tailMap.put(keys[0], values[0]);
+      fail();
+    } catch (IllegalArgumentException e) {
+      // must not insert value outside the range
+    }
+    tailMap.remove(keys[0]);
+    assertEquals(2, tailMap.size());
+    assertEquals(3, map.size());
+    assertTrue(map.containsKey(keys[0]));
+
+    tailMap.put(keys[2], values[2]);
+    assertEquals(3, tailMap.size());
+    assertEquals(4, map.size());
+    assertTrue(map.containsKey(keys[2]));
+    assertTrue(tailMap.containsKey(keys[2]));
+
+    tailMap.remove(keys[2]);
+    assertFalse(map.containsKey(keys[2]));
+    assertFalse(tailMap.containsKey(keys[2]));
+
+    tailMap.clear();
+    assertEquals(0, tailMap.size());
+    assertEquals(1, map.size());
+    assertTrue(map.containsKey(keys[0]));
   }
 
   /**
@@ -1917,12 +2665,11 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   Map<K, V> createMap() {
-    return createSortedMap();
+    return createNavigableMap();
   }
 
-  SortedMap<K, V> createSortedMap() {
-    SortedMap<K, V> map = createTreeMap();
-    return map;
+  NavigableMap<K, V> createNavigableMap() {
+    return createTreeMap();
   }
 
   TreeMap<K, V> createTreeMap() {
@@ -1940,6 +2687,10 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   abstract K[] getKeys2();
 
   abstract K getLessThanMinimumKey();
+
+  abstract K[] getSortedKeys();
+
+  abstract V[] getSortedValues();
 
   abstract V[] getValues();
 

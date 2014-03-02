@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc0199f4_90e342f8",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingScriptTagLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-03-02T23:47:43Z",
+      "side": 1,
+      "message": "Do we need to update the year here? (probably not, but just asking)",
+      "revId": "bd533d49a0fee4b4f63a23e9bc2ae90a7daf472a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c156131_738a009a",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingScriptTagLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-03-02T23:47:43Z",
+      "side": 1,
+      "message": "Javadoc needs to be updated (re. \"Xhr based\")",
+      "revId": "bd533d49a0fee4b4f63a23e9bc2ae90a7daf472a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

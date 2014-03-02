@@ -17,14 +17,14 @@ package com.google.gwt.emultest.java.util;
 
 import java.util.Comparator;
 import java.util.Set;
-import java.util.SortedSet;
+import java.util.NavigableSet;
 
 /**
  * Tests <code>TreeMap</code> with a <code>Comparator</code>.
  */
 public class TreeSetIntegerWithComparatorTest extends TreeSetIntegerTest {
   @Override
-  protected SortedSet<Integer> createSortedSet() {
+  protected NavigableSet<Integer> createNavigableSet() {
     setComparator(new Comparator<Integer>() {
       @Override
       public int compare(Integer o1, Integer o2) {
@@ -37,11 +37,11 @@ public class TreeSetIntegerWithComparatorTest extends TreeSetIntegerTest {
         return o1.compareTo(o2);
       }
     });
-    return super.createSortedSet();
+    return super.createNavigableSet();
   }
 
   @Override
   protected Set<Integer> makeEmptySet() {
-    return createSortedSet();
+    return createNavigableSet();
   }
 }

@@ -17,7 +17,7 @@ package com.google.gwt.emultest.java.util;
 
 import java.util.Comparator;
 import java.util.Map;
-import java.util.SortedMap;
+import java.util.NavigableMap;
 
 /**
  * Tests <code>TreeMap</code> with a <code>Comparator</code>.
@@ -25,7 +25,7 @@ import java.util.SortedMap;
 public class TreeMapStringStringWithComparatorTest extends
     TreeMapStringStringTest {
   @Override
-  protected SortedMap<String, String> createSortedMap() {
+  protected NavigableMap<String, String> createNavigableMap() {
     setComparator(new Comparator<String>() {
       @Override
       public int compare(String o1, String o2) {
@@ -38,12 +38,12 @@ public class TreeMapStringStringWithComparatorTest extends
         return o1.compareTo(o2);
       }
     });
-    return super.createSortedMap();
+    return super.createNavigableMap();
   }
 
   @Override
   protected Map<String, String> makeEmptyMap() {
-    return createSortedMap();
+    return createNavigableMap();
   }
 
   @Override

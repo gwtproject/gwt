@@ -26,8 +26,8 @@ import java.io.Serializable;
  * @param <K> key type
  * @param <V> value type
  */
-public class TreeMap<K, V> extends AbstractMap<K, V> implements
-    SortedMap<K, V>, Serializable {
+public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements
+    Serializable {
   /*
    * Implementation derived from public domain C implementation as of 5
    * September 2007 at:
@@ -38,17 +38,17 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
    */
 
   /**
-   * Iterator for <code>EntrySet</code>.
+   * Iterator for <code>descendingMap().entrySet()</code>.
    */
-  private final class EntryIterator implements Iterator<Entry<K, V>> {
-    private final Iterator<Map.Entry<K, V>> iter;
-    private Map.Entry<K, V> last = null;
+  private final class DescendingEntryIterator implements Iterator<Entry<K, V>> {
+    private final ListIterator<Entry<K, V>> iter;
+    private Entry<K, V> last = null;
 
     /**
-     * Constructor for <code>EntrySetIterator</code>.
+     * Constructor for <code>DescendingEntryIterator</code>.
      */
-    public EntryIterator() {
-      this(SubMapType.All, null, null);
+    public DescendingEntryIterator() {
+      this(SubMapType.All, null, false, null, false);
     }
 
     /**
@@ -57,78 +57,88 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
      * @param fromKey the first key to return in the iterator.
      * @param toKey the upper bound of keys to return.
      */
-    public EntryIterator(SubMapType type, K fromKey, K toKey) {
-      List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>();
-      inOrderAdd(list, type, TreeMap.this.root, fromKey, toKey);
-      this.iter = list.iterator();
+    public DescendingEntryIterator(SubMapType type,
+        K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+      List<Entry<K, V>> list = new ArrayList<Entry<K, V>>();
+      inOrderAdd(list, type, TreeMap.this.root,
+          fromKey, fromInclusive, toKey, toInclusive);
+      this.iter = list.listIterator(list.size());
     }
 
+    @Override
     public boolean hasNext() {
-      return iter.hasNext();
+      return iter.hasPrevious();
     }
 
-    public Map.Entry<K, V> next() {
-      return last = iter.next();
+    @Override
+    public Entry<K, V> next() {
+      return last = iter.previous();
     }
 
+    @Override
     public void remove() {
       iter.remove();
       TreeMap.this.remove(last.getKey());
     }
+  }
 
-    private void inOrderAdd(List<Map.Entry<K, V>> list, SubMapType type,
-        Node<K, V> current, K fromKey, K toKey) {
-      if (current == null) {
-        return;
-      }
-      if (current.child[LEFT] != null) {
-        inOrderAdd(list, type, current.child[LEFT], fromKey, toKey);
-      }
-      if (inRange(type, current.getKey(), fromKey, toKey)) {
-        list.add(current);
-      }
-      if (current.child[RIGHT] != null) {
-        inOrderAdd(list, type, current.child[RIGHT], fromKey, toKey);
-      }
+  /**
+   * Iterator for <code>EntrySet</code>.
+   */
+  private final class EntryIterator implements Iterator<Entry<K, V>> {
+    private final ListIterator<Entry<K, V>> iter;
+    private Entry<K, V> last = null;
+
+    /**
+     * Constructor for <code>EntrySetIterator</code>.
+     */
+    public EntryIterator() {
+      this(SubMapType.All, null, false, null, false);
     }
 
-    private boolean inRange(SubMapType type, K key, K fromKey, K toKey) {
-      if (type.toKeyValid()) {
-        if (cmp.compare(key, toKey) >= 0) {
-          return false;
-        }
-      }
-      if (type.fromKeyValid()) {
-        if (cmp.compare(key, fromKey) < 0) {
-          return false;
-        }
-      }
-      return true;
+    /**
+     * Create an iterator which may return only a restricted range.
+     *
+     * @param fromKey the first key to return in the iterator.
+     * @param toKey the upper bound of keys to return.
+     */
+    public EntryIterator(SubMapType type,
+        K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+      List<Entry<K, V>> list = new ArrayList<Entry<K, V>>();
+      inOrderAdd(list, type, TreeMap.this.root,
+          fromKey, fromInclusive, toKey, toInclusive);
+      this.iter = list.listIterator();
+    }
+
+    @Override
+    public boolean hasNext() {
+      return iter.hasNext();
+    }
+
+    @Override
+    public Entry<K, V> next() {
+      return last = iter.next();
+    }
+
+    @Override
+    public void remove() {
+      iter.remove();
+      TreeMap.this.remove(last.getKey());
     }
   }
 
-  private final class EntrySet extends AbstractSet<Entry<K, V>> {
-    @Override
-    public void clear() {
-      TreeMap.this.clear();
-    }
+  private final class EntrySet extends AbstractNavigableMap<K, V>.EntrySet {
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean contains(Object o) {
-      if (!(o instanceof Map.Entry)) {
+      if (!(o instanceof Entry)) {
         return false;
       }
-      Map.Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
+      Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
       Entry<K, V> lookupEntry = getEntry(entry.getKey());
       return lookupEntry != null
-          && Objects.equals(lookupEntry.getValue(),
-              entry.getValue());
-    }
-
-    @Override
-    public Iterator<Entry<K, V>> iterator() {
-      return new EntryIterator();
+          && Objects.equals(lookupEntry.getValue(), entry.getValue());
     }
 
     @SuppressWarnings("unchecked")
@@ -141,19 +151,14 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
        * that was copied by the time we can delete a node that will make that
        * copy.
        */
-      if (!(o instanceof Map.Entry)) {
+      if (!(o instanceof Entry)) {
         return false;
       }
-      Map.Entry<K, V> entry = (Map.Entry<K, V>) o; // suppress unchecked
+      Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
       State<V> state = new State<V>();
       state.matchValue = true;
       state.value = entry.getValue();
       return removeWithState(entry.getKey(), state);
-    }
-
-    @Override
-    public int size() {
-      return TreeMap.this.size();
     }
   }
 
@@ -201,18 +206,20 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
 
     @Override
     public boolean equals(Object o) {
-      if (!(o instanceof Map.Entry)) {
+      if (!(o instanceof Entry)) {
         return false;
       }
-      Map.Entry<?, ?> other = (Map.Entry<?, ?>) o;
+      Entry<?, ?> other = (Entry<?, ?>) o;
       return Objects.equals(key, other.getKey())
           && Objects.equals(value, other.getValue());
     }
 
+    @Override
     public K getKey() {
       return key;
     }
 
+    @Override
     public V getValue() {
       return value;
     }
@@ -224,6 +231,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       return keyHash ^ valueHash;
     }
 
+    @Override
     public V setValue(V value) {
       V old = this.value;
       this.value = value;
@@ -261,17 +269,23 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     }
   }
 
-  private class SubMap extends AbstractMap<K, V> implements SortedMap<K, V> {
+  private class SubMap extends AbstractNavigableMap<K, V> {
+
+    public final boolean fromInclusive;
 
     // valid only if type is Range or Tail
     public final K fromKey;
+
+    public final boolean toInclusive;
 
     // valid only if type is Range or Head
     public final K toKey;
 
     public final SubMapType type;
 
-    SubMap(SubMapType type, K fromKey, K toKey) {
+    SubMap(SubMapType type,
+        K fromKey, boolean fromInclusive,
+        K toKey, boolean toInclusive) {
       switch (type) {
         case Range:
           if (cmp.compare(toKey, fromKey) < 0) {
@@ -293,9 +307,17 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       }
       this.type = type;
       this.fromKey = fromKey;
+      this.fromInclusive = fromInclusive;
       this.toKey = toKey;
+      this.toInclusive = toInclusive;
     }
 
+    @Override
+    public Entry<K, V> ceilingEntry(K key) {
+      return guardInRange(TreeMap.this.getNodeAfter(key, true));
+    }
+
+    @Override
     public Comparator<? super K> comparator() {
       return TreeMap.this.comparator();
     }
@@ -311,24 +333,23 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     }
 
     @Override
-    public Set<java.util.Map.Entry<K, V>> entrySet() {
-      return new AbstractSet<Entry<K, V>>() {
+    public Set<Entry<K, V>> entrySet() {
+      return new EntrySet() {
 
         @SuppressWarnings("unchecked")
         @Override
         public boolean contains(Object o) {
-          if (!(o instanceof Map.Entry)) {
+          if (!(o instanceof Entry)) {
             return false;
           }
-          Map.Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
+          Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
           K key = entry.getKey();
           if (!inRange(key)) {
             return false;
           }
           Entry<K, V> lookupEntry = getEntry(key);
           return lookupEntry != null
-              && Objects.equals(lookupEntry.getValue(),
-                  entry.getValue());
+              && Objects.equals(lookupEntry.getValue(), entry.getValue());
         }
 
         @Override
@@ -336,18 +357,13 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
           return SubMap.this.isEmpty();
         }
 
-        @Override
-        public Iterator<Entry<K, V>> iterator() {
-          return new EntryIterator(type, fromKey, toKey);
-        }
-
         @SuppressWarnings("unchecked")
         @Override
         public boolean remove(Object o) {
-          if (!(o instanceof Map.Entry)) {
+          if (!(o instanceof Entry)) {
             return false;
           }
-          Map.Entry<K, V> entry = (Map.Entry<K, V>) o; // suppress unchecked
+          Entry<K, V> entry = (Entry<K, V>) o; // suppress unchecked
           if (!inRange(entry.getKey())) {
             return false;
           }
@@ -356,27 +372,27 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
           state.value = entry.getValue();
           return removeWithState(entry.getKey(), state);
         }
-
-        @Override
-        public int size() {
-          // TODO(jat): more efficient way to do this?
-          int n = 0;
-          Iterator<Entry<K, V>> it = iterator();
-          while (it.hasNext()) {
-            it.next();
-            n++;
-          }
-          return n;
-        }
       };
     }
 
-    public K firstKey() {
-      Node<K, V> node = throwNSE(getFirstSubmapNode());
-      if (type.toKeyValid() && cmp.compare(node.key, toKey) > 0) {
-        throw new NoSuchElementException();
+    @Override
+    public Node<K, V> firstEntry() {
+      Node<K, V> node = getFirstSubmapNode();
+      if (node == null) {
+        return null;
       }
-      return node.key;
+      if (type.toKeyValid()) {
+        int compare = cmp.compare(node.key, toKey);
+        if (compare > 0 || (!toInclusive && compare == 0)) {
+          return null;
+        }
+      }
+      return node;
+    }
+
+    @Override
+    public Entry<K, V> floorEntry(K key) {
+      return guardInRange(TreeMap.this.getNodeBefore(key, true));
     }
 
     @SuppressWarnings("unchecked")
@@ -389,16 +405,27 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       return TreeMap.this.get(key);
     }
 
-    public SortedMap<K, V> headMap(K toKey) {
+    @Override
+    Entry<K, V> getEntry(K key) {
+      return guardInRange(TreeMap.this.getEntry(key));
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K toKey, boolean toInclusive) {
       if (type.toKeyValid() && cmp.compare(toKey, this.toKey) > 0) {
-        throw new IllegalArgumentException("subMap: " + toKey
-            + " greater than " + this.toKey);
+        throw new IllegalArgumentException("subMap: " + toKey +
+            " greater than " + this.toKey);
       }
       if (type.fromKeyValid()) {
-        return TreeMap.this.subMap(fromKey, toKey);
+        return TreeMap.this.subMap(fromKey, fromInclusive, toKey, toInclusive);
       } else {
-        return TreeMap.this.headMap(toKey);
+        return TreeMap.this.headMap(toKey, toInclusive);
       }
+    }
+
+    @Override
+    public Entry<K, V> higherEntry(K key) {
+      return guardInRange(TreeMap.this.getNodeAfter(key, false));
     }
 
     @Override
@@ -406,12 +433,24 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       return getFirstSubmapNode() == null;
     }
 
-    public K lastKey() {
-      Node<K, V> node = throwNSE(getLastSubmapNode());
-      if (type.fromKeyValid() && cmp.compare(node.key, fromKey) < 0) {
-        throw new NoSuchElementException();
+    @Override
+    public Node<K, V> lastEntry() {
+      Node<K, V> node = getLastSubmapNode();
+      if (node == null) {
+        return null;
       }
-      return node.key;
+      if (type.fromKeyValid()) {
+        int compare = cmp.compare(node.key, fromKey);
+        if (compare < 0 || (!fromInclusive && compare == 0)) {
+          return null;
+        }
+      }
+      return node;
+    }
+
+    @Override
+    public Entry<K, V> lowerEntry(K key) {
+      return guardInRange(TreeMap.this.getNodeBefore(key, false));
     }
 
     @Override
@@ -433,34 +472,60 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       return TreeMap.this.remove(key);
     }
 
-    public SortedMap<K, V> subMap(K newFromKey, K newToKey) {
-      if (type.fromKeyValid() && cmp.compare(newFromKey, fromKey) < 0) {
-        throw new IllegalArgumentException("subMap: " + newFromKey
-            + " less than " + fromKey);
+    @Override
+    public int size() {
+      // TODO(jat): more efficient way to do this?
+      int n = 0;
+      Iterator<Entry<K, V>> it = entryIterator();
+      while (it.hasNext()) {
+        it.next();
+        n++;
       }
-      if (type.toKeyValid() && cmp.compare(newToKey, toKey) > 0) {
-        throw new IllegalArgumentException("subMap: " + newToKey
-            + " greater than " + toKey);
-      }
-      return TreeMap.this.subMap(newFromKey, newToKey);
+      return n;
     }
 
-    public SortedMap<K, V> tailMap(K fromKey) {
+    @Override
+    public NavigableMap<K, V> subMap(K newFromKey, boolean newFromInclusive,
+        K newToKey, boolean newToInclusive) {
+      if (type.fromKeyValid() && cmp.compare(newFromKey, fromKey) < 0) {
+        throw new IllegalArgumentException("subMap: " + newFromKey +
+            " less than " + fromKey);
+      }
+      if (type.toKeyValid() && cmp.compare(newToKey, toKey) > 0) {
+        throw new IllegalArgumentException("subMap: " + newToKey +
+            " greater than " + toKey);
+      }
+      return TreeMap.this.subMap(newFromKey, newFromInclusive,
+          newToKey, newToInclusive);
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
       if (type.fromKeyValid() && cmp.compare(fromKey, this.fromKey) < 0) {
         throw new IllegalArgumentException("subMap: " + fromKey + " less than "
             + this.fromKey);
       }
       if (type.toKeyValid()) {
-        return TreeMap.this.subMap(fromKey, toKey);
+        return TreeMap.this.subMap(fromKey, inclusive, toKey, toInclusive);
       } else {
-        return TreeMap.this.tailMap(fromKey);
+        return TreeMap.this.tailMap(fromKey, inclusive);
       }
+    }
+
+    @Override
+    Iterator<Entry<K, V>> descendingEntryIterator() {
+      return new DescendingEntryIterator(type, fromKey, fromInclusive, toKey, toInclusive);
+    }
+
+    @Override
+    Iterator<Entry<K, V>> entryIterator() {
+      return new EntryIterator(type, fromKey, fromInclusive, toKey, toInclusive);
     }
 
     private Node<K, V> getFirstSubmapNode() {
       Node<K, V> node;
       if (type.fromKeyValid()) {
-        node = getNodeAtOrAfter(fromKey);
+        node = getNodeAfter(fromKey, fromInclusive);
       } else {
         node = getFirstNode();
       }
@@ -471,7 +536,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     private Node<K, V> getLastSubmapNode() {
       Node<K, V> node;
       if (type.toKeyValid()) {
-        node = getNodeBefore(toKey);
+        node = getNodeBefore(toKey, toInclusive);
       } else {
         node = getLastNode();
       }
@@ -479,18 +544,12 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       return node != null && inRange(node.getKey()) ? node : null;
     }
 
+    private Entry<K, V> guardInRange(Entry<K, V> entry) {
+      return inRange(entry.getKey()) ? entry : null;
+    }
+
     private boolean inRange(K key) {
-      if (type.toKeyValid()) {
-        if (cmp.compare(key, toKey) >= 0) {
-          return false;
-        }
-      }
-      if (type.fromKeyValid()) {
-        if (cmp.compare(key, fromKey) < 0) {
-          return false;
-        }
-      }
-      return true;
+      return TreeMap.this.inRange(type, key, fromKey, fromInclusive, toKey, toInclusive);
     }
   }
 
@@ -546,24 +605,6 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     return 1 - child;
   }
 
-  /**
-   * Throw a NoSuchElementException if the specified node is null.
-   *
-   * Used to clean up error checking at use sites.
-   *
-   * @param node node to check
-   * @param <NK> key type
-   * @param <NV> value type
-   * @return node, guaranteed to be non-null
-   * @throws NoSuchElementException if node is null
-   */
-  private static <NK, NV> Node<NK, NV> throwNSE(Node<NK, NV> node) {
-    if (node == null) {
-      throw new NoSuchElementException();
-    }
-    return node;
-  }
-
   // The comparator to use.
   private Comparator<? super K> cmp;
 
@@ -573,6 +614,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
    */
   @SuppressWarnings("unused")
   private K exposeKeyType;
+
   @SuppressWarnings("unused")
   private V exposeValueType;
 
@@ -607,11 +649,17 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
   }
 
   @Override
+  public Entry<K, V> ceilingEntry(K key) {
+    return getNodeAfter(key, true);
+  }
+
+  @Override
   public void clear() {
     root = null;
     size = 0;
   }
 
+  @Override
   public Comparator<? super K> comparator() {
     if (cmp == Comparators.natural()) {
       return null;
@@ -630,8 +678,14 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     return new EntrySet();
   }
 
-  public K firstKey() {
-    return throwNSE(getFirstNode()).key;
+  @Override
+  public Entry<K, V> firstEntry() {
+    return getFirstNode();
+  }
+
+  @Override
+  public Entry<K, V> floorEntry(K key) {
+    return getNodeBefore(key, true);
   }
 
   @SuppressWarnings("unchecked")
@@ -648,12 +702,24 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     return entry != null ? entry.getValue() : null;
   }
 
-  public SortedMap<K, V> headMap(K toKey) {
-    return new SubMap(SubMapType.Head, null, toKey);
+  @Override
+  public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
+    return new SubMap(SubMapType.Head, null, false, toKey, inclusive);
   }
 
-  public K lastKey() {
-    return throwNSE(getLastNode()).key;
+  @Override
+  public Entry<K, V> higherEntry(K key) {
+    return getNodeAfter(key, false);
+  }
+
+  @Override
+  public Entry<K, V> lastEntry() {
+    return getLastNode();
+  }
+
+  @Override
+  public Entry<K, V> lowerEntry(K key) {
+    return getNodeBefore(key, false);
   }
 
   @Override
@@ -682,29 +748,32 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     return size;
   }
 
-  public SortedMap<K, V> subMap(final K fromKey, final K toKey) {
-    return new SubMap(SubMapType.Range, fromKey, toKey);
+  @Override
+  public NavigableMap<K, V> subMap(
+      K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+    return new SubMap(SubMapType.Range, fromKey, fromInclusive, toKey, toInclusive);
   }
 
-  public SortedMap<K, V> tailMap(K fromKey) {
-    return new SubMap(SubMapType.Tail, fromKey, null);
+  @Override
+  public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
+    return new SubMap(SubMapType.Tail, fromKey, inclusive, null, false);
   }
 
   /**
-   * Returns the first node which compares equal to or greater than the given
-   * key.
+   * Returns the first node which compares greater than the given key.
    *
    * @param key the key to search for
    * @return the next node, or null if there is none
    */
-  protected Node<K, V> getNodeAtOrAfter(K key) {
+  protected Node<K, V> getNodeAfter(K key, boolean inclusive) {
     Node<K, V> foundNode = null;
     Node<K, V> node = root;
     while (node != null) {
       int c = cmp.compare(key, node.key);
-      if (c == 0) {
+      if (inclusive && c == 0) {
         return node;
-      } else if (c > 0) {
+      }
+      if (c >= 0) {
         node = node.child[RIGHT];
       } else {
         foundNode = node;
@@ -720,11 +789,14 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
    * @param key the key to search for
    * @return the previous node, or null if there is none
    */
-  protected Node<K, V> getNodeBefore(K key) {
+  protected Node<K, V> getNodeBefore(K key, boolean inclusive) {
     Node<K, V> foundNode = null;
     Node<K, V> node = root;
     while (node != null) {
       int c = cmp.compare(key, node.key);
+      if (inclusive && c == 0) {
+        return node;
+      }
       if (c <= 0) {
         node = node.child[LEFT];
       } else {
@@ -749,6 +821,16 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
    */
   void assertCorrectness() {
     assertCorrectness(root, true);
+  }
+
+  @Override
+  Iterator<Entry<K, V>> descendingEntryIterator() {
+    return new DescendingEntryIterator();
+  }
+
+  @Override
+  Iterator<Entry<K, V>> entryIterator() {
+    return new EntryIterator();
   }
 
   /**
@@ -792,7 +874,8 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
    * @param key the search key
    * @return the node matching the key or null
    */
-  private Node<K, V> getEntry(K key) {
+  @Override
+  Node<K, V> getEntry(K key) {
     Node<K, V> tree = root;
     while (tree != null) {
       int c = cmp.compare(key, tree.key);
@@ -834,6 +917,44 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
       node = node.child[RIGHT];
     }
     return node;
+  }
+
+  private void inOrderAdd(List<Entry<K, V>> list, SubMapType type, Node<K, V> current,
+      K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+    if (current == null) {
+      return;
+    }
+    // TODO: truncate this recursion if the whole subtree is known to be
+    // outside of bounds?
+    if (current.child[LEFT] != null) {
+      inOrderAdd(list, type, current.child[LEFT],
+          fromKey, fromInclusive, toKey, toInclusive);
+    }
+    if (inRange(type, current.getKey(), fromKey, fromInclusive,
+        toKey, toInclusive)) {
+      list.add(current);
+    }
+    if (current.child[RIGHT] != null) {
+      inOrderAdd(list, type, current.child[RIGHT],
+          fromKey, fromInclusive, toKey, toInclusive);
+    }
+  }
+
+  private boolean inRange(SubMapType type, K key,
+      K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+    if (type.toKeyValid()) {
+      int compare = cmp.compare(key, toKey);
+      if (compare > 0 || (!toInclusive && compare == 0)) {
+        return false;
+      }
+    }
+    if (type.fromKeyValid()) {
+      int compare = cmp.compare(key, fromKey);
+      if (compare < 0 || (!fromInclusive && compare == 0)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

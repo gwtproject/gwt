@@ -66,6 +66,13 @@ public class TokenStreamTest extends TestCase {
     assertGoodJsni("@org.group.Foo::bar(*)");
     assertBadJsni("@org.group.Foo::bar(*");
 
+    // References to enclosing class methods and fields
+    assertGoodJsni("@::bar()");
+    assertGoodJsni("@::bar(I)");
+    assertGoodJsni("@::bar(*)");
+    // bad reference.
+    assertBadJsni("@bar");
+
     // Refs that span lines
     assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;)");
     assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;\n)");

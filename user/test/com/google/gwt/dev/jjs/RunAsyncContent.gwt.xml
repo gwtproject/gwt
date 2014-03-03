@@ -18,4 +18,5 @@
   <replace-with class="com.google.gwt.dev.jjs.test.LoggingScriptTagLoadingStrategy">
     <when-type-is class="com.google.gwt.core.client.impl.AsyncFragmentLoader.LoadingStrategy"/>
   </replace-with>
+  <add-linker name="std" />
 </module>

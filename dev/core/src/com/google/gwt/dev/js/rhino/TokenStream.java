@@ -256,7 +256,7 @@ public class TokenStream {
         SCRIPT      = 147,   // top-level node for entire script
 
         LAST_TOKEN  = 147,
-    
+
         // This value is only used as a return value for getTokenHelper,
         // which is only called from getToken and exists to avoid an excessive
         // recursion problem if a number of lines in a row are comments.
@@ -621,7 +621,7 @@ public class TokenStream {
 
         return id;
     }
-    
+
     private int stringToKeyword(String name) {
         int id = getKeywordId(name);
         if (id == 0) { return EOF; }
@@ -684,7 +684,7 @@ public class TokenStream {
             this.pushbackToken = EOF;
         return result;
     }
-    
+
     public static boolean isJSKeyword(String s) {
         return getKeywordId(s) != 0;
     }
@@ -810,7 +810,7 @@ public class TokenStream {
                 stringBufferTop = 0;
                 addToString(c);
             }
-            
+
             // bruce: special handling of JSNI signatures
             // - it would be nice to handle Unicode escapes in the future
             //
@@ -1352,16 +1352,30 @@ public class TokenStream {
       in.unread();
     }
 
+    /**
+     * Finds references in characters immediately after an '@' sign.
+     */
     private int jsniMatchReference() throws IOException {
 
-      // First, read the type name whose member is being accessed. 
-      if (!jsniMatchQualifiedTypeName('.', ':')) {
-        return ERROR;
+      // First, read the type name whose member is being accessed unless it is referencing the
+      // enclosing class via @::field.
+      // TODO(rluble): Maybe local references should be just @field; but that requires either a
+      // substantial revamping of the tokenizer or modifications to the parser code.
+      int c = in.read();
+      if (c == ':') {
+        // Class name is omitted.
+        addToString(c);
+      } else {
+        // Read fully qualified class name.
+        in.unread();
+        if (!jsniMatchQualifiedTypeName('.', ':')) {
+          return ERROR;
+        }
       }
 
       // Now we must the second colon.
       //
-      int c = in.read();
+      c = in.read();
       if (c != ':') {
           in.unread();
           reportSyntaxError("msg.jsni.expected.char", new String[] { ":" });
@@ -1469,9 +1483,9 @@ public class TokenStream {
         reportSyntaxError("msg.jsni.expected.identifier", null);
         return false;
       }
-      
+
       addToString(c);
-      
+
       for (;;) {
         c = in.read();
         if (Character.isJavaIdentifierPart((char)c)) {
@@ -1507,9 +1521,9 @@ public class TokenStream {
      * should appear after the '@' in a JSNI reference.
      * @param sepChar the character that will separate the Java idents
      *        (either a '.' or '/')
-     * @param endChar the character that indicates the end of the 
+     * @param endChar the character that indicates the end of the
      */
-    private boolean jsniMatchQualifiedTypeName(char sepChar, char endChar) 
+    private boolean jsniMatchQualifiedTypeName(char sepChar, char endChar)
         throws IOException {
       int c = in.read();
 
@@ -1520,7 +1534,7 @@ public class TokenStream {
         reportSyntaxError("msg.jsni.expected.identifier", null);
         return false;
       }
-      
+
       // Now actually add the first ident char.
       //
       addToString(c);
@@ -1536,7 +1550,7 @@ public class TokenStream {
           break;
         }
       }
-      
+
       // Arrray-type reference
       while (c == '[') {
         if (']' == in.peek()) {
@@ -1574,7 +1588,7 @@ public class TokenStream {
         return true;
       }
     }
-    
+
     private String getStringFromBuffer() {
         return new String(stringBuffer, 0, stringBufferTop);
     }

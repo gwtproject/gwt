@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc0199f4_50edbae1",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/LoggingScriptTagLoadingStrategy.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-03-03T00:00:28Z",
+      "side": 1,
+      "message": "nit: \"A script tag\" rather than \"An script tag\"; but we\u0027re in tests here so unless someone else asks for changes (a new patch set), let\u0027s just ignore that.",
+      "revId": "23965a6fae16fa20e3a0d7af216eaceb511e461a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

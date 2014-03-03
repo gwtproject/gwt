@@ -93,6 +93,7 @@ import java.util.jar.JarFile;
  * Manages the process of compiling {@link CompilationUnit}s.
  */
 public class JdtCompiler {
+
   /**
    * Provides hooks for changing the behavior of the JdtCompiler when unknown
    * types are encountered during compilation. Currently used for allowing

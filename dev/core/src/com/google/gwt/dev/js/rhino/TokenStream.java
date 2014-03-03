@@ -1354,14 +1354,23 @@ public class TokenStream {
 
     private int jsniMatchReference() throws IOException {
 
-      // First, read the type name whose member is being accessed. 
-      if (!jsniMatchQualifiedTypeName('.', ':')) {
-        return ERROR;
+      // First, read the type name whose member is being accessed unless it is referencing the
+      // enclosing class via @::field.
+      // TODO(rluble): Maybe local references should be just @field; but that requires either a
+      // substantial revamiping of the tokenizer or modifications to the parser code.
+      int c = in.read();
+      if (c == ':') {
+        addToString(c);
+      } else {
+        in.unread();
+        if (!jsniMatchQualifiedTypeName('.', ':')) {
+          return ERROR;
+        }
       }
 
       // Now we must the second colon.
       //
-      int c = in.read();
+      c = in.read();
       if (c != ':') {
           in.unread();
           reportSyntaxError("msg.jsni.expected.char", new String[] { ":" });

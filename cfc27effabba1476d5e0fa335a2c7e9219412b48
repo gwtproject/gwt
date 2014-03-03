@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c8d0df2_80baf6c0",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-03T00:25:40Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "cfc27effabba1476d5e0fa335a2c7e9219412b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

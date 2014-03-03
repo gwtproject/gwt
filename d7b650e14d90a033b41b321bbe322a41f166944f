@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_a3570a1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c8d0df2_43515825",
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_c07d5494",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2014-03-03T20:18:39Z",
       "side": 1,
       "message": "don\u0027t add blank line",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 0
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_c352fe2d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_c07d5494",
       "range": {
         "startLine": 186,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_63511226",
+        "filename": "dev/core/src/com/google/gwt/dev/js/rhino/TokenStream.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_a08ca024",
+      "range": {
+        "startLine": 1355,
+        "startChar": 16,
+        "endLine": 1355,
+        "endChar": 36
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_20a790d1",
         "filename": "dev/core/src/com/google/gwt/dev/js/rhino/TokenStream.java",
         "patchSetId": 3
@@ -76,6 +142,30 @@
       "writtenOn": "2014-03-03T20:18:39Z",
       "side": 1,
       "message": "spelling",
+      "range": {
+        "startLine": 1360,
+        "startChar": 21,
+        "endLine": 1360,
+        "endChar": 31
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_e33ce2d1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/rhino/TokenStream.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_20a790d1",
       "range": {
         "startLine": 1360,
         "startChar": 21,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_638c7272",
+        "filename": "dev/core/src/com/google/gwt/dev/js/rhino/TokenStream.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_6096a831",
+      "range": {
+        "startLine": 1363,
+        "startChar": 8,
+        "endLine": 1363,
+        "endChar": 23
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_c06c3423",
         "filename": "dev/core/src/com/google/gwt/dev/util/JsniRef.java",
         "patchSetId": 3
@@ -122,6 +236,30 @@
       "writtenOn": "2014-03-03T20:18:39Z",
       "side": 1,
       "message": "missing blank line",
+      "range": {
+        "startLine": 197,
+        "startChar": 3,
+        "endLine": 198,
+        "endChar": 11
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_43916e84",
+        "filename": "dev/core/src/com/google/gwt/dev/util/JsniRef.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_c06c3423",
       "range": {
         "startLine": 197,
         "startChar": 3,
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_c3643efa",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "thx.",
+      "parentUuid": "7c58ad41_4080446b",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 3
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_207d50c6",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
         "patchSetId": 3
@@ -168,6 +330,30 @@
       "writtenOn": "2014-03-03T20:18:39Z",
       "side": 1,
       "message": "as you identified, this syntax is not as short as it could be.\n\ni\u0027m not sure if we want to marry ourselves to this syntax since this is a long term decision. but i defer to goktug for this topic.",
+      "range": {
+        "startLine": 473,
+        "startChar": 21,
+        "endLine": 473,
+        "endChar": 33
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_a3694ad1",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Let\u0027s push a discussion.",
+      "parentUuid": "7c58ad41_207d50c6",
       "range": {
         "startLine": 473,
         "startChar": 21,
@@ -197,6 +383,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_43784e96",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_007a4ccd",
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_80619c1f",
         "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
         "patchSetId": 3
@@ -208,6 +412,30 @@
       "writtenOn": "2014-03-03T20:18:39Z",
       "side": 1,
       "message": "unnecessary double blank line",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 0
+      },
+      "revId": "d7b650e14d90a033b41b321bbe322a41f166944f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_23a79ad1",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-03T20:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_80619c1f",
       "range": {
         "startLine": 75,
         "startChar": 0,

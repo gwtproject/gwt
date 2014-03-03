@@ -49,7 +49,7 @@ public class JsniRef {
    * <li>the method parameter types, excluding the parentheses
    * </ol>
    */
-  private static Pattern JsniRefPattern = Pattern.compile("@?([^:]+)::([^(]+)(\\((.*)\\))?");
+  private static Pattern JsniRefPattern = Pattern.compile("@?([^:@]*)::([^(]+)(\\((.*)\\))?");
 
   /**
    * Parse a Java reference from JSNI code. This parser is forgiving; it does
@@ -123,7 +123,7 @@ public class JsniRef {
     return types.toArray(Empty.STRINGS);
   }
 
-  private final String className;
+  private String className;
   private final String memberName;
   private final String[] paramTypes;
   private final String paramTypesString;
@@ -192,6 +192,9 @@ public class JsniRef {
     return paramTypesString;
   }
 
+  public void setClassName(String className) {
+    this.className = className;
+  }
   @Override
   public String toString() {
     return "@" + className + "::" + memberSignature();

@@ -32,24 +32,34 @@ import java.util.Set;
  */
 public abstract class CheckerTestCase extends TestCase {
 
+  public void setPackage(String buggyPackage) {
+    // Allow either a simple package name (depth 1) or null (denoting default package)
+    assert buggyPackage == null || !buggyPackage.matches(".*[/].*");
+    this.buggyPackage = buggyPackage == null ? "" : buggyPackage;
+  }
+
   protected void shouldGenerate(CharSequence buggyCode, CharSequence extraCode,
       int line, Type logLevel, String logHeader, String message) {
     UnitTestTreeLogger.Builder b = new UnitTestTreeLogger.Builder();
     b.setLowestLogLevel(logLevel);
     if (message != null) {
-      b.expect(logLevel, logHeader + " in '/mock/Buggy.java'", null);
+      String resourcePath = "/mock/" + buggyPackage.replace(".","/");
+      resourcePath += resourcePath.endsWith("/") ? "" : "/";
+      b.expect(logLevel, logHeader + " in '" + resourcePath + "Buggy.java'", null);
       final String fullMessage = "Line " + line + ": " + message;
       b.expect(logLevel, fullMessage, null);
     }
     UnitTestTreeLogger logger = b.createLogger();
     TypeOracle oracle = buildOracle(buggyCode, extraCode, logger);
     logger.assertCorrectLogEntries();
+    String className = buggyPackage;
+    className += ((className.isEmpty() || className.endsWith(".")) ? "" : ".") + "Buggy";
     if (message != null && logLevel == TreeLogger.ERROR) {
       assertNull("Buggy compilation unit not removed from type oracle",
-          oracle.findType("Buggy"));
+          oracle.findType(className));
     } else {
       assertNotNull("Buggy compilation unit removed with only a warning",
-          oracle.findType("Buggy"));
+          oracle.findType(className));
     }
   }
 
@@ -87,6 +97,8 @@ public abstract class CheckerTestCase extends TestCase {
     shouldGenerateWarning(buggyCode, null, line, message);
   }
 
+  private String buggyPackage = "";
+
   private void addLongCheckingCups(Set<Resource> resources) {
     StringBuilder code = new StringBuilder();
     code.append("package com.google.gwt.core.client;\n");
@@ -100,7 +112,8 @@ public abstract class CheckerTestCase extends TestCase {
       CharSequence extraCode, UnitTestTreeLogger logger) {
     Set<Resource> resources = new HashSet<Resource>();
     addLongCheckingCups(resources);
-    StaticJavaResource buggyResource = new StaticJavaResource("Buggy",
+    String buggyResourceName = (buggyPackage.isEmpty() ? "" : (buggyPackage + ".")) + "Buggy";
+    StaticJavaResource buggyResource = new StaticJavaResource(buggyResourceName,
         buggyCode);
     Set<GeneratedUnit> generatedUnits = CompilationStateTestBase.getGeneratedUnits(buggyResource);
     if (extraCode != null) {

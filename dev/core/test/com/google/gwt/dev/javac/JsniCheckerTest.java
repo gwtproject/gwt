@@ -463,6 +463,19 @@ public class JsniCheckerTest extends CheckerTestCase {
         "Missing qualifier on instance field 'Buggy.foo'");
   }
 
+  public void testEnclosingClassField() {
+    setPackage("some");
+    StringBuffer code = new StringBuffer();
+    code.append("package some;");
+    code.append("class Buggy {\n");
+    code.append("  int foo = 3;\n");
+    code.append("  native void jsniMethod() /*-{\n");
+    code.append("    this.@::foo;\n");
+    code.append("  }-*/;\n");
+    code.append("}\n");
+    shouldGenerateNoWarning(code);
+  }
+
   public void testInnerClass() {
     StringBuffer code = new StringBuffer();
     code.append("public class Buggy {\n");
@@ -920,5 +933,56 @@ public class JsniCheckerTest extends CheckerTestCase {
     code.append("}\n");
 
     shouldGenerateNoError(code);
+  }
+
+  public void testAmbiguousWildcardRef() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy {\n");
+    code.append("  int m(String x) { return -1; }\n");
+    code.append("  int m(Integer x) { return -1; }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(this.@Buggy::m(*)(\"hello\")); }-*/;\n");
+    code.append("}\n");
+    shouldGenerateError(
+        code,
+        5,
+        "Referencing method 'Buggy.m(*)': ambiguous wildcard match");
+  }
+
+  public void testAmbiguousWildcardRefWithSuperclass() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy extends Extra{\n");
+    code.append("  int m(String x) { return -1; }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(this.@Buggy::m(*)(\"hello\")); }-*/;\n");
+    code.append("}\n");
+
+    StringBuffer extra = new StringBuffer();
+    extra.append("class Extra {\n");
+    extra.append("  static long along = 3;\n");
+    extra.append("  int m(Integer x) { return -1; }\n");
+    extra.append("}\n");
+
+    shouldGenerateError(
+        code, extra,
+        4,
+        "Referencing method 'Buggy.m(*)': ambiguous wildcard match");
+  }
+
+  public void testWildcardRefWithSuperclass() {
+    StringBuffer code = new StringBuffer();
+    code.append("class Buggy extends Extra{\n");
+    code.append("  int m(String x) { return -1; }\n");
+    code.append("  native void jsniMeth() /*-{\n");
+    code.append("    $wnd.alert(this.@Buggy::m(*)(\"hello\")); }-*/;\n");
+    code.append("}\n");
+
+    StringBuffer extra = new StringBuffer();
+    extra.append("class Extra {\n");
+    extra.append("  static long along = 3;\n");
+    extra.append("  int m(String x) { return -1; }\n");
+    extra.append("}\n");
+
+    shouldGenerateNoError(code, extra);
   }
 }

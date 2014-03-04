@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "dc76f9c4_73a1c08d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-04T19:27:00Z",
+      "side": 1,
+      "message": "added comments making it clear that, yes, these functions are only correct when supporting type information is available. also added comments mentioning that direct dynamic usage of \"canCastTypeId\" is only done during library compilation",
+      "parentUuid": "7c58ad41_f9b938aa",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_08939cff",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/ConditionTest.java",
         "patchSetId": 1
@@ -83,6 +101,24 @@
       "writtenOn": "2014-03-01T01:30:06Z",
       "side": 1,
       "message": "Hey there :)",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_4eff55d1",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/ConditionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-04T19:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_08939cff",
       "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "I see what you mean, in separate compilation draft mode we have a full representation of the hierarchy and this would work correctly without more overhead.\n\nAs it is done in this patch it would not really work in optimized mode, it would only consider assignability from the persepective of seen asignability (if the compiler has to do a check then the information would be there otherwise not) so it might respond not assignable at runtime for things that are assignable. I just realized that. We could have an analysis to make it work in optimized code without any code bloat if the feature is not used.\n\nBut we are not using the runtime rebinding code either in optimized code so it is safe to implement it this way but maybe let\u0027s move this to Cast.java so that it is not part of our api yet. What a shame.\n\nThinking more about the problem, some corner cases won\u0027t work. Arrays are not registered in the prototype tables but they could by if only to keep class literals.\n\nJohn, add a todo here and in Class.createForArray/primitive to register all class literals.",
       "parentUuid": "7c58ad41_e8f16849",
+      "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_f3c5d04b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-04T19:27:00Z",
+      "side": 1,
+      "message": "yes, building Class.isAssignableFrom() was premature and incomplete. my real goal was to be able to handle ConditionWhenTypeAssignable checks at runtime for library compilation.\n\ni\u0027ve removed this and made the Condition implementation more direct and documented to be only safe in the limited conditions available during library compilation.",
+      "parentUuid": "7c58ad41_83d40d32",
       "revId": "12e5bd6fc2ba050ff60fd3a7b92475a64001f50e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

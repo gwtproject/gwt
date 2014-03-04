@@ -605,8 +605,11 @@ public class CodeSplitterTest extends JJSTestBase {
       @Override
       public CharSequence getContent() {
         return "package com.google.gwt.lang; public class JavaClassHierarchySetupUtil {" +
-               "public static Object defineClass(int typeId, int superTypeId, Object map)" +
-               "{return null;}}";
+               "  public static Object defineClass(int typeId, int superTypeId, Object map) {" +
+               "    return null;" +
+               "  }" +
+              "  public static void patchIsArray() {}" +
+              "}";
       }
     });
 

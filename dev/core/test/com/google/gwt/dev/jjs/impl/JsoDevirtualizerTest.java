@@ -35,7 +35,8 @@ public class JsoDevirtualizerTest extends OptimizerTestBase {
         StringBuffer code = new StringBuffer();
         code.append("package com.google.gwt.lang;");
         code.append("public class Cast {");
-        code.append("  public static boolean isNonStringJavaObject(Object o) { return true; }");
+        code.append("  public static boolean isRegularJavaObject(Object o) { return true; }");
+        code.append("  public static boolean instanceofArray(Object o) { return false; }");
         code.append("  public static boolean isJavaString(Object o) { return true; }");
         code.append("  public static boolean isJavaScriptObject(Object o) { return true; }");
         code.append("}");

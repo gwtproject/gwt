@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -100,6 +101,8 @@ public class JsoDevirtualizer {
           && !program.typeOracle.canBeJavaScriptObject(instanceType)
           // not a string
           && instanceType != program.getTypeJavaLangString()
+          // not an array
+          && !(instanceType instanceof JArrayType)
           // not an interface of String, e.g. CharSequence or Comparable
           && !program.getTypeJavaLangString().getImplements().contains(instanceType)) {
         return;
@@ -224,15 +227,19 @@ public class JsoDevirtualizer {
 
 
   /**
-   * Contains the Cast.isNonStringJavaObject method.
+   * Contains the Cast.isRegularJavaObject method.
    */
-  private final JMethod isNonStringJavaObjectMethod;
+  private final JMethod isRegularJavaObjectMethod;
 
   /**
    * Contains the Cast.isJavaString method.
    */
   private final JMethod isJavaStringMethod;
 
+  /**
+   * Contains the Cast.instanceofArray method.
+   */
+  private final JMethod instanceofArrayMethod;
   /**
    * Key is the method signature, value is the number of unique instances with
    * the same signature.
@@ -253,7 +260,8 @@ public class JsoDevirtualizer {
   private JsoDevirtualizer(JProgram program) {
     this.program = program;
     this.isJavaStringMethod = program.getIndexedMethod("Cast.isJavaString");
-    this.isNonStringJavaObjectMethod = program.getIndexedMethod("Cast.isNonStringJavaObject");
+    this.isRegularJavaObjectMethod = program.getIndexedMethod("Cast.isRegularJavaObject");
+    this.instanceofArrayMethod = program.getIndexedMethod("Cast.instanceofArray");
     // TODO: consider turning on null checks for "this"?
     // However, for JSO's there is existing code that relies on nulls being okay.
     this.converter = new StaticCallConverter(program, false);
@@ -294,7 +302,7 @@ public class JsoDevirtualizer {
    * <pre>
    * static boolean equals__devirtual$(Object this, Object other) {
    *   return Cast.isJavaString() ? String.equals(other) :
-   *       Cast.isNonStringJavaObject(this) ?
+   *       Cast.isRegularJavaObjectMethod(this) ?
    *       this.equals(other) : JavaScriptObject.equals$(this, other);
    * }
    * </pre>
@@ -306,9 +314,7 @@ public class JsoDevirtualizer {
      * optimize well in the JS pass. Consider "inlining" a hand optimized
      * devirtual method at callsites instead of a JMethodCall. As a bonus, the
      * inlined code can be specialized for each callsite, for example, if there
-     * are no side effects, then there's no need for a temporary. Or, if the
-     * instance can't possibly be java.lang.String, then the JSO check becomes a
-     * cheaper check for typeMarker.
+     * are no side effects, then there's no need for a temporary.
      */
     if (methodByDevirtualMethod.containsKey(method)) {
       return methodByDevirtualMethod.get(method);
@@ -363,10 +369,10 @@ public class JsoDevirtualizer {
         new JParameterRef(sourceInfo, thisParam)).getExpr());
 
     // Build from bottom up.
-    // isNonStringJavaObject(temp)
-    JMethodCall isNonStringJavaObjectCheck =
-        new JMethodCall(sourceInfo, null, isNonStringJavaObjectMethod);
-    isNonStringJavaObjectCheck.addArg(new JLocalRef(sourceInfo, temp));
+    // isRegularJavaObjectMethod(temp)
+    JMethodCall isRegularJavaObjectCheck =
+        new JMethodCall(sourceInfo, null, isRegularJavaObjectMethod);
+    isRegularJavaObjectCheck.addArg(new JLocalRef(sourceInfo, temp));
 
     // temp.method(args)
     JMethodCall thenValue =
@@ -386,9 +392,9 @@ public class JsoDevirtualizer {
       }
     }
 
-    // isNotStringJavaObject(temp) ? temp.method(args) : jso$method(temp, args)
+    // isRegularJavaObjectCheck(temp) ? temp.method(args) : jso$method(temp, args)
     JConditional conditional =
-        new JConditional(sourceInfo, method.getType(), isNonStringJavaObjectCheck,
+        new JConditional(sourceInfo, method.getType(), isRegularJavaObjectCheck,
             thenValue, elseValue);
 
     JMethod stringMethod = findOverridingMethod(method, program.getTypeJavaLangString());
@@ -396,7 +402,7 @@ public class JsoDevirtualizer {
       // It is a method overriden by String. {@code conditional} already dispatches correctly
       // methods defined at String.
 
-      // Cast.isJavaString(temp) ? String.method(args) : conditional
+      // Cast.isJavaString(temp) ? String.method(temp, args) : conditional
       JMethodCall stringCondition =
           new JMethodCall(sourceInfo, null, isJavaStringMethod, new JLocalRef(sourceInfo, temp));
       assert stringMethod != null : "String does not override " +  method.toString() +
@@ -412,6 +418,24 @@ public class JsoDevirtualizer {
       }
       conditional = new JConditional(sourceInfo, method.getType(),
           stringCondition, staticImplCall, conditional);
+    }
+    if (method.getEnclosingType() == program.getTypeJavaLangObject()) {
+      // Method is implicitly inherited by arrays, devirtualize.
+
+      // Cast.instanceofArray(temp) ? Object.method(temp, args) : conditional
+      JMethodCall arrayCondition =
+          new JMethodCall(sourceInfo, null, instanceofArrayMethod, new JLocalRef(sourceInfo, temp));
+
+      JMethodCall staticImplCall = new JMethodCall(sourceInfo, null,
+          getStaticImpl(method));
+      staticImplCall.addArg(new JLocalRef(sourceInfo, temp));
+      for (JParameter param : devirtualMethod.getParams()) {
+        if (param != thisParam) {
+          staticImplCall.addArg(new JParameterRef(sourceInfo, param));
+        }
+      }
+      conditional = new JConditional(sourceInfo, method.getType(),
+          arrayCondition, staticImplCall, conditional);
     }
 
     multi.addExpressions(conditional);

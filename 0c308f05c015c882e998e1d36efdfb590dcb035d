@@ -46,6 +46,30 @@
       "revId": "0c308f05c015c882e998e1d36efdfb590dcb035d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_fcafd877",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerNamespace.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-04T21:01:54Z",
+      "side": 1,
+      "message": "draftCompile is a flag name not an option. Options are usually all upper-case as they usually correspond to enums and constants.",
+      "parentUuid": "dc76f9c4_a8b03f6c",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "0c308f05c015c882e998e1d36efdfb590dcb035d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

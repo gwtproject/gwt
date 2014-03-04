@@ -33,7 +33,7 @@
   <set-property name="compiler.stackMode" value="emulated">
     <none>
       <!-- Don't use stack trace emulation if source maps enabled -->
-      <when-property-is name="compiler.useSourceMaps" value="true"/>
+      <when-property-is name="compiler.useSourceMaps" value="false"/>
     </none>
   </set-property>
 

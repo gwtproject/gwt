@@ -592,5 +592,4 @@ public class CodeSplitterTest extends JJSTestBase {
     }
     return properties;
   }
-
 }

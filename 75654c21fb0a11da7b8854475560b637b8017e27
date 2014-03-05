@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc76f9c4_ab3d94a3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-03-05T05:57:17Z",
+      "side": 1,
+      "message": "Maybe move all these mocks to JavaAstConstructor. Those will get loaded by JJSTestBase in the constructor via a call to getCompilerTypes(). And that is the place where compiler intrinsics reside.\n\nPossibly rename JavaAstConstructor to CompilerResourcesMocks?",
+      "range": {
+        "startLine": 280,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 3
+      },
+      "revId": "75654c21fb0a11da7b8854475560b637b8017e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_6b377cc0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-03-05T05:57:17Z",
+      "side": 1,
+      "message": "this one also possibly would also fit in JavaAstConstructor.",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 7
+      },
+      "revId": "75654c21fb0a11da7b8854475560b637b8017e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_2b49844f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStackEmulatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-03-05T05:57:17Z",
+      "side": 1,
+      "message": "Thanks for writing unit tests, they are much needed.",
+      "revId": "75654c21fb0a11da7b8854475560b637b8017e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

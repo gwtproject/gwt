@@ -25,7 +25,6 @@ public class BrowserInfo {
   private static final String UNKNOWN = "Unknown";
   private static final String FIREFOX = "FF";
   private static final String SAFARI = "Safari";
-  private static final String OPERA = "Opera";
   private static final String CHROME = "Chrome";
   private static final String IE = "IE";
 
@@ -42,8 +41,6 @@ public class BrowserInfo {
       return IE;
     } else if (lcAgent.contains("chrome")) {
       return CHROME;
-    } else if (lcAgent.contains("opera")) {
-      return OPERA;
     } else if (lcAgent.contains("webkit") || lcAgent.contains("safari")) {
       return SAFARI;
     } else if (lcAgent.contains("firefox") || lcAgent.contains("minefield")) {

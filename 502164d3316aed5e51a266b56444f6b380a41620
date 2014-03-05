@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc76f9c4_ae527d2c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-05T23:43:04Z",
+      "side": 1,
+      "message": "Move the jsoSubType into the if.",
+      "range": {
+        "startLine": 507,
+        "startChar": 3,
+        "endLine": 507,
+        "endChar": 50
+      },
+      "revId": "502164d3316aed5e51a266b56444f6b380a41620",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_ce301903",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-05T23:43:04Z",
+      "side": 1,
+      "message": "Probably not needed",
+      "range": {
+        "startLine": 509,
+        "startChar": 21,
+        "endLine": 509,
+        "endChar": 46
+      },
+      "revId": "502164d3316aed5e51a266b56444f6b380a41620",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc76f9c4_8e3781bf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-05T23:43:04Z",
+      "side": 1,
+      "message": "Might not need to wrapit into an arraylist.",
+      "range": {
+        "startLine": 845,
+        "startChar": 34,
+        "endLine": 845,
+        "endChar": 60
+      },
+      "revId": "502164d3316aed5e51a266b56444f6b380a41620",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

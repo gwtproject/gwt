@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcce5d4a_325ca8b7",
+        "filename": "dev/core/src/com/google/gwt/dev/util/BrowserInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-03-05T20:36:24Z",
+      "side": 0,
+      "message": "As this class is used for UI purposes I would keep Opera and make a check like lcAgent.contains(\"opr/\") which will match Blink based Opera 15+. This check should then be done before the Chrome check.",
+      "revId": "9eb1978abafed8626074f749c54ac00ec55cef05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

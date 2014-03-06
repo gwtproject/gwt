@@ -52,6 +52,24 @@
       "revId": "9eb1978abafed8626074f749c54ac00ec55cef05",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_23854aad",
+        "filename": "dev/core/src/com/google/gwt/dev/util/BrowserInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-06T01:12:55Z",
+      "side": 0,
+      "message": "Ok, thanks, I\u0027ll update the logic.",
+      "parentUuid": "fcce5d4a_328588ad",
+      "revId": "9eb1978abafed8626074f749c54ac00ec55cef05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

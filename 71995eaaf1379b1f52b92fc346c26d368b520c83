@@ -16,6 +16,40 @@
       "revId": "71995eaaf1379b1f52b92fc346c26d368b520c83",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_42ae3738",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-06T22:48:44Z",
+      "side": 1,
+      "message": "Since instanceof ArrayType is called much rarer in Javascript, I feel we should invert these conditions. RegularJavaObject is probably the most frequent case, with String, then JSO, then Arrays last.\n\nThis could really degrade collection performance for example, with every hashCode()/equals() call requiring a double conditional evaluation, whereas it could early exit in the majority of cases.\n\nTODO: try to come up with a way to avoid calling Cast.instanceOfArray twice in the same expression. (compiler won\u0027t do CSE on it, maybe closure would?)",
+      "revId": "71995eaaf1379b1f52b92fc346c26d368b520c83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_62e1f37e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-06T22:48:44Z",
+      "side": 1,
+      "message": "Remove debugger statement",
+      "revId": "71995eaaf1379b1f52b92fc346c26d368b520c83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

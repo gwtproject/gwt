@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcce5d4a_d21be4cd",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-03-06T07:01:34Z",
+      "side": 1,
+      "message": "If IE8 needs this we still have to add it though, but should add it with a remark to be removed together with IE8 support",
+      "range": {
+        "startLine": 1381,
+        "startChar": 15,
+        "endLine": 1381,
+        "endChar": 16
+      },
+      "revId": "348c69f6459b774fe7a0b86e930d4a168420fa7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5c6be9dc_91dfaca6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T22:11:47Z",
+      "side": 1,
+      "message": "i thiiiink this updated comment is better. if not let me know",
+      "parentUuid": "dca43989_38ffadd2",
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dca43989_989a61a0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2014-03-06T18:36:07Z",
       "side": 1,
       "message": "So program.getromTypeMap uses both binary and source names ast their keys? Shouldn\u0027t it be more sensible to store sourcenames and do the translate before checking?",
+      "range": {
+        "startLine": 1086,
+        "startChar": 0,
+        "endLine": 1090,
+        "endChar": 5
+      },
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_2cd9a768",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T22:11:47Z",
+      "side": 1,
+      "message": "at the stage when this is performed there isn\u0027t enough information available to convert from binaryName to sourceName before calling JProgram.getFromTypeMap().\n\ni\u0027ve added a TODO to JProgram.getFromTypeMap() documenting that it is buggy and needs to be replaced with dual indexes (both on binary name and source name)",
+      "parentUuid": "dca43989_989a61a0",
       "range": {
         "startLine": 1086,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "5c6be9dc_51d914be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T22:11:47Z",
+      "side": 1,
+      "message": "i\u0027ll give it a go but it\u0027ll require passing some function wrapper objects :-/",
+      "parentUuid": "dca43989_3851ed26",
+      "range": {
+        "startLine": 1084,
+        "startChar": 1,
+        "endLine": 1198,
+        "endChar": 3
+      },
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c6be9dc_0c8e2369",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 1
@@ -76,6 +142,24 @@
       "writtenOn": "2014-03-06T21:30:46Z",
       "side": 1,
       "message": "I guess you don\u0027t mean to include this file in this patch?",
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_8cd47332",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T22:11:47Z",
+      "side": 1,
+      "message": "err, yes. i\u0027ll revert the file since there are no real changes.",
+      "parentUuid": "5c6be9dc_0c8e2369",
       "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

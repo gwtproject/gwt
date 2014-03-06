@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cb929a9_30090efa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "inlining",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_703d46a1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/JavaAstConstructor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 136,
+        "startChar": 62,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_3037cec1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 50,
+        "startChar": 36,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_f048564d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "why the double blank line",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_90455a34",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "this comment seems really out of place",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_10edeae2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 37
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_500a82f2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "you could use that Iterables trick here to turn remainingFunctions into a typed set",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 42
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb929a9_700f8601",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-06T01:04:11Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 18
+      },
+      "revId": "4fa66023e937840f110b795c3e3b36dd91d8ae2a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dca43989_38ffadd2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-06T18:36:07Z",
+      "side": 1,
+      "message": "The comment is confusing, is it more mark all types in current module as reachable?",
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_989a61a0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-06T18:36:07Z",
+      "side": 1,
+      "message": "So program.getromTypeMap uses both binary and source names ast their keys? Shouldn\u0027t it be more sensible to store sourcenames and do the translate before checking?",
+      "range": {
+        "startLine": 1086,
+        "startChar": 0,
+        "endLine": 1090,
+        "endChar": 5
+      },
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_3851ed26",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-06T18:36:07Z",
+      "side": 1,
+      "message": "Refactor this two methods as they share 99% of their code.\n\nSo jprogram.typeMap stores both binaryName and sourceNames,",
+      "range": {
+        "startLine": 1084,
+        "startChar": 1,
+        "endLine": 1198,
+        "endChar": 3
+      },
+      "revId": "1e19ad4560a087000c39b4c062bc1dd378b133fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

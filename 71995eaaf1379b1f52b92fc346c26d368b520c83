@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "dca43989_9bd576d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsoDevirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-07T01:18:59Z",
+      "side": 1,
+      "message": "To detect that smthng is a RegularJavaObject we need to test that it has typeMarker (or the castmap) AND check that is not an array (as those also have typeMarker and castMap.\n\nWe could possible do away removing the typeMarker on arrays.\n\nThe regular string test (typeof \u003d\u003d \"string\") is very fast (compared to checking the typeMarker) and most of the strings in GWT (if not all) are not boxed. I wonder if any of these devirtualized functions are called very ofter for strings (if so it would make sense to split the string test in two)\n\nI will rewrite the devirtualizer so that it is easier to explore the different alternatives.",
+      "parentUuid": "dca43989_42ae3738",
+      "revId": "71995eaaf1379b1f52b92fc346c26d368b520c83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dca43989_62e1f37e",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 1

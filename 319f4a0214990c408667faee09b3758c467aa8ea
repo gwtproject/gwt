@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c6be9dc_809c375c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_a0a13b90",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.ByteArrayInputStream\u0027 import.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_40961f3a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_609b2361",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JavaWriter.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_00b027d4",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JavaWriter.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Closeable\u0027 import.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_20ad2b80",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_c0a9cf73",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.IOException\u0027 import.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_e0a653a1",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_80875700",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_a08cdb24",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_40913f36",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_6096c331",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_007b474c",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_2078cb4c",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_c0846ff8",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_e08173e5",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_806e7788",
+        "filename": "user/src/com/google/gwt/codegen/annotation/JsInterfaceProcessor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_a0737b6c",
+        "filename": "user/src/com/google/gwt/codegen/annotation/TypeSimplifier.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_40685f7a",
+        "filename": "user/src/com/google/gwt/codegen/annotation/TypeSimplifier.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.HashMap\u0027 import.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_606d6389",
+        "filename": "user/src/com/google/gwt/codegen/annotation/TypeSimplifier.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[error] Comment matches to-do format \u0027@author\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6be9dc_00626798",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-07T08:39:22Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "319f4a0214990c408667faee09b3758c467aa8ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

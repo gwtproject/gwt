@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c2ba1c2_a9317d1b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-08T16:17:43Z",
+      "side": 0,
+      "message": "I don\u0027t think you meant to delete this file :)",
+      "revId": "19924fad48232a2f16905e9354e4aab366e36a5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

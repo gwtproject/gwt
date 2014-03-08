@@ -189,6 +189,23 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_e92b75a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-08T15:37:51Z",
+      "side": 1,
+      "message": "Is there any practical reason to skip class literals in JsInterface chains other than code size? Please add an explanation here.",
+      "revId": "9a8c01f10fd4b1964ce96d35bc96d8fbb9a04332",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c6be9dc_20a76bd1",
         "filename": "user/src/com/google/gwt/codegen/annotation/JavaWriter.java",
         "patchSetId": 19

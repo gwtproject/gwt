@@ -93,4 +93,13 @@ public class JavaClassHierarchySetupUtil {
     // to distinguish it from an actual prototype.
     return (entry instanceof Array) ? entry[0] : null;
   }-*/;
+
+  /**
+   * Retrieves to prototype for a type if exists, null otherwise.
+   */
+  public static native JavaScriptObject getClassPrototype(JavaScriptObject typeId) /*-{
+    var prototypeForTypeId =
+        @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId[typeId];
+    return prototypeForTypeId;
+  }-*/;
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ceed1c6_7cb3c5cc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-11T22:22:16Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "f46614967e555c484a0d0d8cad85d76d2b070439",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

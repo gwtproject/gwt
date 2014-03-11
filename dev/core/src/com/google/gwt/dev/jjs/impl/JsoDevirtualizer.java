@@ -101,7 +101,9 @@ public class JsoDevirtualizer {
           // not a string
           && instanceType != program.getTypeJavaLangString()
           // not an interface of String, e.g. CharSequence or Comparable
-          && !program.getTypeJavaLangString().getImplements().contains(instanceType)) {
+          && !program.getTypeJavaLangString().getImplements().contains(instanceType)
+          // it is a super.m() call and the superclass is not a JSO.
+          || x.isStaticDispatchOnly() && !program.isJavaScriptObject(method.getEnclosingType())) {
         return;
       }
 

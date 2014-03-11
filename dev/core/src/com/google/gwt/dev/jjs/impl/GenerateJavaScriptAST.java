@@ -1372,24 +1372,46 @@ public class GenerateJavaScriptAST {
           unnecessaryQualifier = (JsExpression) pop(); // instance
         }
         qualifier = names.get(method).makeRef(x.getSourceInfo());
+      } else if (x.isStaticDispatchOnly() && method.isConstructor()) {
+        /*
+         * Constructor calls throw {@code this} and {@code super} are always dispatched statically
+         * using the constructor function name (constructors are always defined as top level
+         * functions).
+         *
+         * Because constructors are modeled like instance methods they have an implicit {@code this}
+         * parameter, hence they are called constructor.call(this, ...).
+         */
+        JsName callName = objectScope.declareName("call");
+        callName.setObfuscatable(false);
+        qualifier = callName.makeRef(x.getSourceInfo());
+        qualifier.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
+        jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
+
+      } else if (x.isStaticDispatchOnly()) {
+        // Regular super call. This calls are always static and optimizations normally statify them.
+        // They can appear in completely unoptimized code, hence need to be handled here.
+        assert !method.isConstructor();
+
+        // Construct JCHSU.getPrototypeFor(type).polyname
+        JsNameRef getClassProtoFunctionRef = indexedFunctions.get(
+            "JavaClassHierarchySetupUtil.getClassPrototype").getName().makeRef(x.getSourceInfo());
+        JsInvocation getPrototypeCall = new JsInvocation(x.getSourceInfo());
+        getPrototypeCall.setQualifier(getClassProtoFunctionRef);
+        getPrototypeCall.getArguments()
+            .add(convertJavaLiteral(typeIdsByType.get(method.getEnclosingType())));
+        JsNameRef methodNameRef = polymorphicNames.get(method).makeRef(x.getSourceInfo());
+        methodNameRef.setQualifier(getPrototypeCall);
+
+        // Construct JCHSU.getPrototypeFor(type).polyname.call(this,...)
+        JsName callName = objectScope.declareName("call");
+        callName.setObfuscatable(false);
+        qualifier = callName.makeRef(x.getSourceInfo());
+        qualifier.setQualifier(methodNameRef);
+        jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
       } else {
-        if (x.isStaticDispatchOnly()) {
-          /*
-           * Dispatch statically (odd case). This happens when a call that must
-           * be static is targeting an instance method that could not be
-           * transformed into a static. Super/this constructor calls work this
-           * way. Have to use a "call" construct.
-           */
-          JsName callName = objectScope.declareName("call");
-          callName.setObfuscatable(false);
-          qualifier = callName.makeRef(x.getSourceInfo());
-          qualifier.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
-          jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
-        } else {
-          // Dispatch polymorphically (normal case).
-          qualifier = polymorphicNames.get(method).makeRef(x.getSourceInfo());
-          qualifier.setQualifier((JsExpression) pop()); // instance
-        }
+        // Dispatch polymorphically (normal case).
+        qualifier = polymorphicNames.get(method).makeRef(x.getSourceInfo());
+        qualifier.setQualifier((JsExpression) pop()); // instance
       }
       jsInvocation.setQualifier(qualifier);
       push(createCommaExpression(unnecessaryQualifier, jsInvocation));

@@ -101,7 +101,8 @@ public class JsoDevirtualizer {
           // not a string
           && instanceType != program.getTypeJavaLangString()
           // not an interface of String, e.g. CharSequence or Comparable
-          && !program.getTypeJavaLangString().getImplements().contains(instanceType)) {
+          && !program.getTypeJavaLangString().getImplements().contains(instanceType) ||
+          x.isStaticDispatchOnly()) {
         return;
       }
 

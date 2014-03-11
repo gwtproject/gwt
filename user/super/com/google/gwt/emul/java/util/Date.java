@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -54,7 +54,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   /**
    * Ensure a number is displayed with two digits.
-   * 
+   *
    * @return a two-character base 10 representation of the number
    */
   protected static String padTwo(int number) {
@@ -242,25 +242,37 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   /*
    * Some browsers have the following behavior:
-   * 
+   *
+   * (1)
    * // Assume a U.S. time zone with daylight savings
    * // Set a non-existent time: 2:00 am Sunday March 8, 2009
    * var date = new Date(2009, 2, 8, 2, 0, 0);
    * var hours = date.getHours(); // returns 1
-   * 
-   * The equivalent Java code will return 3. To compensate, we determine the
-   * amount of daylight savings adjustment by comparing the time zone offsets
-   * for the requested time and a time one day later, and add the adjustment to
-   * the hours and minutes of the requested time.
+   *
+   * The equivalent Java code will return 3.
+   *
+   * (2)
+   * // Assume a U.S. time zone with daylight savings
+   * // Set to an ambiguous time: 1:30 am Sunday November 1, 2009
+   * var date = new Date(2009, 10, 1, 1, 30, 0);
+   * var nextHour = new Date(date.getTime() + 60*60*1000);
+   * var hours = nextHour.getHours(); // returns 1
+   *
+   * The equivalent Java code will return 2.
+   *
+   * To compensate, fixDaylightSavings adjusts the date to match Java semantics.
    */
 
   /**
-   * Detects if the requested time falls into a non-existent time range due to
-   * local time advancing into daylight savings time. If so, push the requested
-   * time forward out of the non-existent range.
+   * Detects if the requested time falls into a non-existent time range due to local time advancing
+   * into daylight savings time or is ambiguos due to going out of daylight savings. If so, adjust
+   * accordingly.
    */
   private void fixDaylightSavings(int hours) {
     if ((jsdate.getHours() % 24) != (hours % 24)) {
+      // The requested time falls into a non-existent time range due to
+      // local time advancing into daylight savings time. If so, push the requested
+      // time forward out of the non-existent range.
       JsDate copy = JsDate.create(jsdate.getTime());
       copy.setDate(copy.getDate() + 1);
       int timeDiff = jsdate.getTimezoneOffset() - copy.getTimezoneOffset();
@@ -280,6 +292,14 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
             jsdate.getSeconds(), jsdate.getMilliseconds());
         jsdate.setTime(newTime.getTime());
       }
+      return;
+    }
+    // Add an hour.
+    JsDate newTime = JsDate.create(jsdate.getTime() + 60 * 60 * 1000);
+    if (newTime.getHours() == jsdate.getHours()) {
+      // If the requested time falls in the "duplicated" hour due to going back out of daylight
+      // savings time, return an object representing the latter time.
+      jsdate.setTime(newTime.getTime());
     }
   }
 }

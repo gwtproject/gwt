@@ -82,6 +82,23 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_e55edbd5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Let\u0027s do not add \"$wnd\" to the contract. I\u0027m not sure if there are enough compelling reasons to add this. Probably if somebody wants different semantics that would more like to the callee and they could jsni or some utility instead of instanceof operator in such case.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_6c614f1d",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 25
@@ -99,6 +116,74 @@
         "endLine": 63,
         "endChar": 24
       },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_2571131f",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Does this need to be a separate method or does it get complicated?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_259ab310",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: indentations look incorrect in this method.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_e55d3bb3",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "It looks like you are not setting the constructor?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_c502b765",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be the window by default? What are the use cases for global this?",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -158,6 +243,308 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_85571f46",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Foo_Prototype should be a top level class right?\nProbably it wouldn\u0027t matter for this context but it is better to follow the real world.\n\n(also similar lines below)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_05e4ce4c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "This is not an error per spec.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_a5306201",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Perhaps you can also add a test for\n\n  @JsProperty int foo(int)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_4891bb84",
+        "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "I think we didn\u0027t discuss the field option earlier.",
+      "range": {
+        "startLine": 30,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 72
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_a5e6a295",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "What about c.g.gwt.js instead? c.g.gwt.core has plenty of JSO based code and probably is mostly not safe for shared code while this code is and might be referred from shared code in the future?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_2590f2ef",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: \u003cp\u003e",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 3
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_659aea11",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: \u003cp\u003e",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_4846db71",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: don\u0027t need curly here",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 28
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_0567ae3b",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Let\u0027s postpone adding this until we understand extension problem is a rule or just happens for some objects.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_084d038f",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "As I argued earlier, let\u0027s do not generate super calls to prototype object as it is not always ok in JS semantics - instead we should let developer to make explicit calls to super constructor functions wherever needed as in real js world.\n\nFor that developer can annotate a method with JsConstructor and calls to that method will be translated into MyConstructor.call(this, ...).\n\nThis provides ability to define multiple type-safe delegates to constructors and also gives the most flexibility in terms of following real life js.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_454886ec",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Can you make this more javadoc friendly:\n\n \u003cp\u003e Examples:\n \u003cli\u003e {@code ..} ....\n \u003cli\u003e {@code ..} ....\n \u003cli\u003e {@code ..} ....",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_85427ec8",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: \u003cp\u003e here",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_65f66a71",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Can you make this RUNTIME instead? (so that we can make reflection based mocks work accordingly)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_25bab29e",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "RetentionPolicy.Source instead?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_85defef3",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Probably not required to be documented?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_855c3ede",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "This will show up in all auto completes for \"Js...\". Can you name it something else. perhaps PrototypeOfJsInterace?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_2c3e37f0",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 25
@@ -205,6 +592,108 @@
       "side": 1,
       "message": "Yes please add test for BAMs.",
       "parentUuid": "9c2ba1c2_850a7fef",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_8540be52",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "Here, instead of setting prototype by hand, is it possible to call defineClass for the second time to be sure everything is working as expected?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_a5a18290",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_852f1e6f",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "assertFalse(obj instanceOf AJsInterfaceInheritsDifferentPrototype)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_85e1deeb",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "This should be false per spec as it is against java semantics.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_656f8acf",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "We were also having issues with classes that has only single method were treated as SAM even they were marked as @JsInterface. Can you cover that in your test cases as well?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_45b086d5",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-12T23:32:39Z",
+      "side": 1,
+      "message": "nit: your indentation is incorrect in most native methods.",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

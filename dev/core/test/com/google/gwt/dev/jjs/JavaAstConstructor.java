@@ -63,11 +63,11 @@ public class JavaAstConstructor {
           "public final class Array {",
           "  static void setCheck(Array array, int index, Object value) { }",
           "  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap,",
-          "      int elementTypeId, int elementTypeClass, int length) { }",
+          "      int elementTypeId, int elementTypeCategory, int length) { }",
           "  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs,",
-          "      int[] elementTypeIds, int leafElementTypeClass, int[] dimExprs, int count) { }",
+          "      int[] elementTypeIds, int leafElementTypeCategory, int[] dimExprs, int count) { }",
           "  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap,",
-          "      int elementTypeId, int elementTypeClass, Array array) { }",
+          "      int elementTypeId, int elementTypeCategory, Array array) { }",
           "}"
       );
     }
@@ -83,7 +83,13 @@ public class JavaAstConstructor {
           "  private static JavaScriptObject stringCastMap;",
           "  public static native String charToString(char x) /*-{ }-*/;",
           "  public static Object dynamicCast(Object src, int dstId) { return src;}",
+          "  public static Object dynamicCastAllowJso(Object src, int dstId) { return src;}",
+          "  public static Object dynamicCastJso(Object src) { return src;}",
+          "  public static Object dynamicCastToString(Object src) { return src;}",
           "  public static boolean instanceOf(Object src, int dstId) { return false;}",
+          "  public static boolean instanceOfOrJso(Object src, int dst) { return false;}",
+          "  public static boolean instanceOfJso(Object src) { return false;}",
+          "  public static boolean isJavaString(Object src) { return false;}",
           "  public static native boolean isNull(Object a) /*-{ }-*/;",
           "  public static native boolean isNotNull(Object a) /*-{ }-*/;",
           "  public static native boolean jsEquals(Object a, Object b) /*-{ }-*/;",

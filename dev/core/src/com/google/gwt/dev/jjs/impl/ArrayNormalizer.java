@@ -99,27 +99,29 @@ public class ArrayNormalizer {
       }
     }
 
-    private int getTypeClass(JType elementType) {
+    private TypeCategory getTypeClass(JType elementType) {
       if (elementType instanceof JPrimitiveType) {
         if (elementType == JPrimitiveType.BOOLEAN) {
-          return TYPE_PRIMITIVE_BOOLEAN;
+          return TypeCategory.TYPE_PRIMITIVE_BOOLEAN;
         } else if (elementType == JPrimitiveType.LONG) {
-          return TYPE_PRIMITIVE_LONG;
+          return TypeCategory.TYPE_PRIMITIVE_LONG;
         } else {
-          return TYPE_PRIMITIVE_NUMBER;
+          return TypeCategory.TYPE_PRIMITIVE_NUMBER;
         }
       }
 
       assert elementType instanceof JReferenceType;
       JReferenceType elementRefType = ((JReferenceType) elementType).getUnderlyingType();
       if (elementRefType == program.getTypeJavaLangObject()) {
-        return TYPE_JAVA_LANG_OBJECT;
+        return TypeCategory.TYPE_JAVA_LANG_OBJECT;
+      } else if (elementRefType == program.getTypeJavaLangString()) {
+        return TypeCategory.TYPE_JAVA_LANG_STRING;
       } else if (program.typeOracle.isEffectivelyJavaScriptObject(elementRefType)) {
-        return TYPE_JSO;
+        return TypeCategory.TYPE_JSO;
       } else if (program.typeOracle.isDualJsoInterface(elementRefType)) {
-        return TYPE_JAVA_OBJECT_OR_JSO;
+        return TypeCategory.TYPE_JAVA_OBJECT_OR_JSO;
       }
-      return TYPE_JAVA_OBJECT;
+      return TypeCategory.TYPE_JAVA_OBJECT;
     }
 
     private JRuntimeTypeReference getElementRuntimeTypeReference(SourceInfo sourceInfo,
@@ -161,7 +163,7 @@ public class ArrayNormalizer {
       JRuntimeTypeReference arrayElementRuntimeTypeReference =
           getElementRuntimeTypeReference(sourceInfo, arrayType);
       JType elementType = arrayType.getElementType();
-      JIntLiteral elementTypeClass = JIntLiteral.get(getTypeClass(elementType));
+      JIntLiteral elementTypeClass = JIntLiteral.get(getTypeClass(elementType).ordinal());
       JExpression dim = x.dims.get(0);
       call.addArgs(classLit, castableTypeMap, arrayElementRuntimeTypeReference, dim,
           elementTypeClass);
@@ -195,7 +197,7 @@ public class ArrayNormalizer {
         currentElementType = curArrayType.getElementType();
       }
       JType leafElementType = currentElementType;
-      JIntLiteral leafElementTypeClass = JIntLiteral.get(getTypeClass(leafElementType));
+      JIntLiteral leafElementTypeClass = JIntLiteral.get(getTypeClass(leafElementType).ordinal());
       call.addArgs(classLitList, castableTypeMaps, elementTypeReferences, leafElementTypeClass,
           dimList, program.getLiteralInt(dims));
       ctx.replaceMe(call);
@@ -210,7 +212,7 @@ public class ArrayNormalizer {
       JRuntimeTypeReference elementTypeIds = getElementRuntimeTypeReference(sourceInfo, arrayType);
       JsonArray initList = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JIntLiteral leafElementTypeClass =
-          JIntLiteral.get(getTypeClass(arrayType.getElementType()));
+          JIntLiteral.get(getTypeClass(arrayType.getElementType()).ordinal());
       for (int i = 0; i < x.initializers.size(); ++i) {
         initList.getExprs().add(x.initializers.get(i));
       }
@@ -244,14 +246,4 @@ public class ArrayNormalizer {
     ArrayVisitor visitor = new ArrayVisitor();
     visitor.accept(program);
   }
-
-  // Array element type classes
-  // These are also hard coded in the emulation library see {@link Array.java}
-  static final int TYPE_JAVA_OBJECT = 0;
-  static final int TYPE_JAVA_OBJECT_OR_JSO = 1;
-  static final int TYPE_JSO = 2;
-  static final int TYPE_JAVA_LANG_OBJECT = 3;
-  static final int TYPE_PRIMITIVE_LONG = 4;
-  static final int TYPE_PRIMITIVE_NUMBER = 5;
-  static final int TYPE_PRIMITIVE_BOOLEAN = 6;
 }

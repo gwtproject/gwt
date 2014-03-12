@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_65e82bd4",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-12T21:55:28Z",
+      "side": 1,
+      "message": "Those are tested in other methods of this class (did you expand all?)",
+      "parentUuid": "dc10b997_ec541f3e",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_2c3e37f0",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 25
@@ -133,6 +151,24 @@
       "writtenOn": "2014-03-12T19:52:36Z",
       "side": 1,
       "message": "Can you add tests for the features that are missing tests here? i.e. JsProperties, BAMs?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_850a7fef",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-12T21:55:28Z",
+      "side": 1,
+      "message": "JsProperty is tested in testJsProperties()\n\nI can add a test for lambda conversion.",
+      "parentUuid": "dc10b997_2c3e37f0",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

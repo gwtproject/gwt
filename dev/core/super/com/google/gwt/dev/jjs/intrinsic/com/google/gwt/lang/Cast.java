@@ -61,6 +61,13 @@ final class Cast {
     return src;
   }
 
+  static Object dynamicCastToString(Object src) {
+    if (src != null && !isJavaString(src)) {
+      throw new ClassCastException();
+    }
+    return src;
+  }
+
   /**
    * Allow a dynamic cast to an object, always succeeding if it's a JSO.
    */

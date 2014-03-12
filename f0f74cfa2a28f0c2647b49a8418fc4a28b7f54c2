@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c2ba1c2_91cf6e46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-12T00:10:17Z",
+      "side": 1,
+      "message": "This is a change for web mode, not dev mode, so perhaps reword this to make it clear that dev mode is unchanged:\n\n\"Fix HtmlUnit exception handling in web mode tests.\n\n\"A previous workaround intended for HtmlUnit tests running in dev mode had a side effect of causing web mode HtmlUnit to exit in response to any uncaught JavaScript exception. This causes mysterious timeouts when web mode HtmlUnit tests fail. To fix, enable the workaround only for dev mode.\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "f0f74cfa2a28f0c2647b49a8418fc4a28b7f54c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

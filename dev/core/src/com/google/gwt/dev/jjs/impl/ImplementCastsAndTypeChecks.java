@@ -94,6 +94,11 @@ public class ImplementCastsAndTypeChecks {
           } else if (program.typeOracle.isDualJsoInterface(refType)) {
             // An interface that should succeed when the object is a JSO
             method = program.getIndexedMethod("Cast.dynamicCastAllowJso");
+          } else if (toType == program.getTypeJavaLangString()) {
+            // Specially handle strings as it is a very common case, and String is special anyway.
+            // NOTE: this is kind of a hack as Cast.isJavaString only has 1 parameter, so it will
+            // ignore the second.
+            method = program.getIndexedMethod("Cast.dynamicCastToString");
           } else {
             // A regular cast
             method = program.getIndexedMethod("Cast.dynamicCast");
@@ -209,6 +214,11 @@ public class ImplementCastsAndTypeChecks {
         } else if (program.typeOracle.isEffectivelyJavaScriptObject(toType)) {
           isJsoCast = true;
           method = program.getIndexedMethod("Cast.instanceOfJso");
+        } else if (toType == program.getTypeJavaLangString()) {
+          // Specially handle strings as it is a very common case, and String is special anyway.
+          // NOTE: this is kind of a hack as Cast.isJavaString only has 1 parameter, so it will
+          // ignore the second.
+          method = program.getIndexedMethod("Cast.isJavaString");
         } else {
           method = program.getIndexedMethod("Cast.instanceOf");
         }

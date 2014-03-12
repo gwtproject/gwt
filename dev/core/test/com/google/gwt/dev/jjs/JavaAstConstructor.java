@@ -83,6 +83,7 @@ public class JavaAstConstructor {
           "  private static JavaScriptObject stringCastMap;",
           "  public static native String charToString(char x) /*-{ }-*/;",
           "  public static Object dynamicCast(Object src, int dstId) { return src;}",
+          "  public static Object dynamicCastToString(Object src) { return src;}",
           "  public static boolean instanceOf(Object src, int dstId) { return false;}",
           "  public static native boolean isNull(Object a) /*-{ }-*/;",
           "  public static native boolean isNotNull(Object a) /*-{ }-*/;",

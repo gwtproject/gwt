@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c2ba1c2_c82beb97",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "through",
+      "range": {
+        "startLine": 1369,
+        "startChar": 29,
+        "endLine": 1369,
+        "endChar": 34
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_0836a3fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "are invoked like: \"constructor.call(this, ...)\".",
+      "range": {
+        "startLine": 1374,
+        "startChar": 33,
+        "endLine": 1374,
+        "endChar": 72
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_48789b96",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "please mention why we can\u0027t do that (it\u0027s because String and JSOs don\u0027t have a prototype right?)",
+      "range": {
+        "startLine": 1388,
+        "startChar": 25,
+        "endLine": 1389,
+        "endChar": 67
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_88a453cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "extract method.getEnclosingType() as a local variable named \"superType\"",
+      "range": {
+        "startLine": 1395,
+        "startChar": 54,
+        "endLine": 1395,
+        "endChar": 79
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_083343d5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 98,
+        "startChar": 15,
+        "endLine": 98,
+        "endChar": 17
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_e837cfbd",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-12T23:39:32Z",
+      "side": 1,
+      "message": "it",
+      "range": {
+        "startLine": 98,
+        "startChar": 41,
+        "endLine": 98,
+        "endChar": 42
+      },
+      "revId": "9b82e062c2e2c6861e1c8587d0db497421711ba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

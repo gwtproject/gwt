@@ -2894,7 +2894,7 @@ public class GenerateJavaScriptAST {
     namesToIdents.put("___clazz", "cZ");
     // Array magic field
     namesToIdents.put("elementTypeId", "tI");
-    namesToIdents.put("elementTypeClass", "eT");
+    namesToIdents.put("elementTypeCategory", "eT");
 
     List<JField> fields = Lists.newArrayList(program.getTypeJavaLangObject().getFields());
     fields.addAll(program.getIndexedType("Array").getFields());

@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "3c1ab5b4_75d91268",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-13T16:44:31Z",
+      "side": 1,
+      "message": "Yes actually all browsers, except from old versions of opera and FF, so I agree I can remove this comment.",
+      "parentUuid": "12f07a0e_fd90e7c7",
+      "revId": "a73567d7f1f4841f3aa2ad4db441a38fbac37f25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2fcc6ee_bfdad38f",
         "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
         "patchSetId": 6
@@ -77,6 +95,24 @@
         "endLine": 204,
         "endChar": 9
       },
+      "revId": "a73567d7f1f4841f3aa2ad4db441a38fbac37f25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dce519f4_af240195",
+        "filename": "user/src/com/google/gwt/user/client/ui/FileUpload.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-13T16:44:31Z",
+      "side": 1,
+      "message": "Not sure where you want the \u003cp\u003e",
+      "parentUuid": "f2fcc6ee_bfdad38f",
       "revId": "a73567d7f1f4841f3aa2ad4db441a38fbac37f25",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

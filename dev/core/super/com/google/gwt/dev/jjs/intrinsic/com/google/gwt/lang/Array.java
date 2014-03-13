@@ -180,7 +180,7 @@ public final class Array {
           && !Cast.canCast(value, array.elementTypeId)) {
         // value must be castable to elementType.
         throw new ArrayStoreException();
-      } else if (array.elementTypeClass == TYPE_JSO && Cast.isJavaObject(value)) {
+      } else if (array.elementTypeClass == TYPE_JSO && !Cast.isJavaScriptObject(value)) {
         // value must be a JavaScriptObject
         throw new ArrayStoreException();
       } else if (array.elementTypeClass == TYPE_JAVA_OBJECT_OR_JSO

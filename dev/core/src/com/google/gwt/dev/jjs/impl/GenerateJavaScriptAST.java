@@ -1949,8 +1949,9 @@ public class GenerateJavaScriptAST {
         setupStringCastMap(program.getTypeJavaLangString(), globalStmts);
 
         // Patch Array.isArray
-        JsFunction patchFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.patchIsArray");
-        JsName patchFuncName = patchFunc.getName();
+        JsFunction modernizerFn =
+            indexedFunctions.get("JavaClassHierarchySetupUtil.modernizeBrowser");
+        JsName patchFuncName = modernizerFn.getName();
         JsInvocation callPatchFunc = new JsInvocation(x.getSourceInfo());
         callPatchFunc.setQualifier(patchFuncName.makeRef(x.getSourceInfo()));
         globalStmts.add(callPatchFunc.makeStmt());

@@ -1949,8 +1949,9 @@ public class GenerateJavaScriptAST {
         setupStringCastMap(program.getTypeJavaLangString(), globalStmts);
 
         // Patch Array.isArray
-        JsFunction patchFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.patchIsArray");
-        JsName patchFuncName = patchFunc.getName();
+        JsFunction modernizerFn =
+            indexedFunctions.get("JavaClassHierarchySetupUtil.modernizeBrowser");
+        JsName patchFuncName = modernizerFn.getName();
         JsInvocation callPatchFunc = new JsInvocation(x.getSourceInfo());
         callPatchFunc.setQualifier(patchFuncName.makeRef(x.getSourceInfo()));
         globalStmts.add(callPatchFunc.makeStmt());
@@ -2915,13 +2916,8 @@ public class GenerateJavaScriptAST {
     namesToIdents.put("typeMarker", "tM");
     namesToIdents.put("castableTypeMap", "cM");
     namesToIdents.put("___clazz", "cZ");
-    // Array magic field
-    namesToIdents.put("elementTypeId", "tI");
-    namesToIdents.put("elementTypeClass", "eT");
 
-    List<JField> fields = Lists.newArrayList(program.getTypeJavaLangObject().getFields());
-    fields.addAll(program.getIndexedType("Array").getFields());
-    for (JField field : fields) {
+    for (JField field : program.getTypeJavaLangObject().getFields()) {
       if (!field.isStatic()) {
         String ident = namesToIdents.get(field.getName());
         assert ident != null : field.getEnclosingType().getName() + "::" + field.getName() +

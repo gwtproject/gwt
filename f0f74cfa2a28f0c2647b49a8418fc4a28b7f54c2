@@ -22,6 +22,30 @@
       "revId": "f0f74cfa2a28f0c2647b49a8418fc4a28b7f54c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_0e818ba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-13T02:50:54Z",
+      "side": 1,
+      "message": "I have updated the commit message similar to your suggestion.",
+      "parentUuid": "9c2ba1c2_91cf6e46",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "f0f74cfa2a28f0c2647b49a8418fc4a28b7f54c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

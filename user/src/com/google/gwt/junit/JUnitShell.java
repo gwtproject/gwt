@@ -612,8 +612,7 @@ public class JUnitShell extends DevMode {
           getInitParams().put(
               "org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 
-          // Prefer the parent class loader so that JUnit works.
-          setParentLoaderPriority(true);
+          setClassLoader(ClassLoader.getSystemClassLoader());
         }
       };
     }

@@ -295,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_6b9ab911",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-13T01:33:13Z",
+      "side": 1,
+      "message": "I thought one might want to follow the contract of the interface without extending the prototype. Isn\u0027t that sound realistic?",
+      "parentUuid": "9c2ba1c2_a8431782",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_a5306201",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
         "patchSetId": 25
@@ -347,6 +365,24 @@
       "side": 1,
       "message": "Which option? The spec covers ctors, methods, and fields does it not?",
       "parentUuid": "9c2ba1c2_4891bb84",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_8b160da3",
+        "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-13T01:33:13Z",
+      "side": 1,
+      "message": "Sorry my bad. I thought I didn\u0027t cover the fields so I wasn\u0027t sure if I had thought about implications but it looks like it is covered in doc.",
+      "parentUuid": "9c2ba1c2_c8576b45",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -474,6 +510,24 @@
     },
     {
       "key": {
+        "uuid": "9c2ba1c2_cb6c8523",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-13T01:33:13Z",
+      "side": 1,
+      "message": "I was thinking that the extension was problematic because the way they implemented the classes you have tested for, not because extending native objects are forbidden. I am still optimistic that they will support such extensions for HTMLElement. But as you said, we can leave the code and remove later if needed.",
+      "parentUuid": "9c2ba1c2_287d67c6",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_084d038f",
         "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
         "patchSetId": 25
@@ -503,6 +557,24 @@
       "side": 1,
       "message": "Super calls are not automatically generated. This annotation only controls the annotation processor, so for example,\n\n@JsInterface(..., constructor \u003d {int.class})\n\ncreates a stub super constructor\n\nclass Foo_Prototype {\n   public Foo_Prototype(int x) { ... }\n}\n\nInvoking this from a subclass\n\nclass MyFoo extends Foo_Prototype {\n   MyFoo() { super(42); }\n}\n\nIs the only instance in which a super call to a JS constructor will ever happen. You have to a) specifically have a stub ctor in the Prototype and b) manually call it in client code.\n\nAutomatically synthesized/inserted super-calls do not happen.\n\nThis annotation only exists, because if you do need to call a super-ctor, your only option is to manually write and stub out the entire _Prototype, which is annoying and error prone.",
       "parentUuid": "9c2ba1c2_084d038f",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_cb3e45ef",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-13T01:33:13Z",
+      "side": 1,
+      "message": "I\u0027m kind of lost here.\n\nAre you saying you always generate a default constructor in addition to the constructor requested by the default using this field? And you do nothing when it is called (including the implicit super() calls), only generate a js call when there is an explicit call such as \"super(a, b)\"? Then how the developer opts-in to make a call to super constructor when that are no arguments?",
+      "parentUuid": "9c2ba1c2_088183a1",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

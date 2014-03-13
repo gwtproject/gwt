@@ -16,6 +16,23 @@
       "revId": "46c0781bf7a8952d469b4a9a9978abf8a1e4829b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dce519f4_e45b90e3",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-03-13T09:20:23Z",
+      "side": 1,
+      "message": "That means ${appRootDir}/WEB-INF is never used to find classes and resources (I don\u0027t think anyone uses this but it\u0027s a breaking change nevertheless) and it also breaks anyone launching the tests with a specific ClassLoader that\u0027s not the system classloader (might very well break Maven and/or Gradle).",
+      "revId": "46c0781bf7a8952d469b4a9a9978abf8a1e4829b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

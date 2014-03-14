@@ -139,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "7caeed94_671cdcf9",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-14T01:38:37Z",
+      "side": 1,
+      "message": "I think these two can be factored so that the main logic is not duplicated.",
+      "parentUuid": "9c2ba1c2_2571131f",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_259ab310",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 25
@@ -736,6 +754,24 @@
       "side": 1,
       "message": "Yes please add test for BAMs.",
       "parentUuid": "9c2ba1c2_850a7fef",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7caeed94_8721f02e",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-14T01:38:37Z",
+      "side": 1,
+      "message": "s/BAM/SAM/ :)",
+      "parentUuid": "dc10b997_370a00f2",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

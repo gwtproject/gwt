@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_c02df413",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc10b997_cc67a37c",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_2c34775d",
         "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
         "patchSetId": 25
@@ -65,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_a039e0ed",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "But these types are needed before the JavaAst is constructed, and JSORestrictionsChecker doesn\u0027t use any of the Java AST",
+      "parentUuid": "dc10b997_2c34775d",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_0c39bb55",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 25
@@ -82,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_801ffc72",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc10b997_0c39bb55",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_e55edbd5",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 25
@@ -93,6 +147,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "Let\u0027s do not add \"$wnd\" to the contract. I\u0027m not sure if there are enough compelling reasons to add this. Probably if somebody wants different semantics that would more like to the callee and they could jsni or some utility instead of instanceof operator in such case.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_c04bb47a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Let\u0027s discuss removing this in a followup CL. We\u0027d still need to strip it or deal with it anyway because the current spec places no restrictions on the path that is allowed in the prototype attribute.",
+      "parentUuid": "9c2ba1c2_e55edbd5",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -278,6 +350,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_e0047834",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t matter with the new annotation anymore. I\u0027ll change one of the examples so that both arrangements are tested.",
+      "parentUuid": "9c2ba1c2_85571f46",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_05e4ce4c",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
         "patchSetId": 25
@@ -331,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_dd703bf3",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "I think you\u0027re right that this seems only natural. I will leave the code for this commented out by a flag for now, and figure out a way to add a \u0027lint\u0027 mode to JSORestrictionsChecker later to warn when turned on.",
+      "parentUuid": "9c2ba1c2_6b9ab911",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_a5306201",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
         "patchSetId": 25
@@ -342,6 +450,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "Perhaps you can also add a test for\n\n  @JsProperty int foo(int)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_dd5b9b71",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "9c2ba1c2_a5306201",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -407,6 +533,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_8046dc6e",
+        "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_8b160da3",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_a5e6a295",
         "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
         "patchSetId": 25
@@ -418,6 +562,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "What about c.g.gwt.js instead? c.g.gwt.core has plenty of JSO based code and probably is mostly not safe for shared code while this code is and might be referred from shared code in the future?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_e081183c",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "That doesn\u0027t follow our current pattern of having translatable code live in a \u0027client\u0027 directory. It would have to be c.g.gwt.js.client in that circumstance. Let\u0027s land the CL and bikeshed on package naming and move it later.",
+      "parentUuid": "9c2ba1c2_a5e6a295",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -447,6 +609,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_a08b205a",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_2590f2ef",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_659aea11",
         "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
         "patchSetId": 25
@@ -464,6 +644,24 @@
         "endLine": 36,
         "endChar": 3
       },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_80913c88",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_659aea11",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -599,6 +797,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_e0ba38ea",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "No, basically when the compiler sees a super() JMethodCall in a subclass of a Prototype class, it checks the JMethod.isDefaultMethod() field.\n\nThis basically returns true if the user didn\u0027t hand-write the method (the javac/jdt compiler synthesized it by default), which means we won\u0027t invoke it in that circumstance.\n\nExample:\n\nClass Prototype {\n  // no ctor defined, Javac compiler generates invisible default one\n}\n\nclass Foo extends Prototype {\n  Foo() {} // compiler inserts invisible call to Prototype\u0027s super()\n}\n\nIn this scenario, we do nothing (we do not call the super(), it is ignored)\n\nclass Foo extends Prototype {\n  Foo() { super(); } // user puts his own super() call, still, the parent super-ctor is synthetic, we won\u0027t call it\n}\n\n\nClass Prototype {\n   Prototype() { ... } // we wrote our own stubbed out Prototype ctor()\n}\n\nclass Foo extends Prototype {\n   Foo() {} // compiler inserts super() call\n}\n\nIn this case, we translate the super() call to JsPrototype.prototype.call(this), e.g. \n\nThat is, the only way you can ever invoke a Javascript super ctor on a JS prototype is if you specifically declare one in the _Prototype class. You can do this in two ways:\n\nOption 1: Hand write your own _Prototype stub class\nOption 2: add constructor\u003d in the @JsInterface declaration, and the annotation processor will write out the stub for you.\n\nThat is, you can only invoke super prototype ctors if you specifically opt in and ask for it. Otherwise, calls to super() are translated as NO-OP. And the reason why they are translated to NO-OP by default is because the Java compiler *always* inserts a super call to the base class, it is part of the Java spec.",
+      "parentUuid": "9c2ba1c2_cb3e45ef",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_454886ec",
         "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
         "patchSetId": 25
@@ -610,6 +826,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "Can you make this more javadoc friendly:\n\n \u003cp\u003e Examples:\n \u003cli\u003e {@code ..} ....\n \u003cli\u003e {@code ..} ....\n \u003cli\u003e {@code ..} ....",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_a0b440fb",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_454886ec",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -639,6 +873,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_60a748d0",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_85427ec8",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_65f66a71",
         "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
         "patchSetId": 25
@@ -650,6 +902,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "Can you make this RUNTIME instead? (so that we can make reflection based mocks work accordingly)",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_80aa5c98",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_65f66a71",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -673,6 +943,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_804c9c61",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_25bab29e",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_85defef3",
         "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
         "patchSetId": 25
@@ -690,6 +978,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_a03680c1",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_85defef3",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_855c3ede",
         "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
         "patchSetId": 25
@@ -701,6 +1007,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "This will show up in all auto completes for \"Js...\". Can you name it something else. perhaps PrototypeOfJsInterace?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_6049884f",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2ba1c2_855c3ede",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -795,6 +1119,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_a0956024",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Don\u0027t think so, defineClass will early exit and I don\u0027t have the arguments to feed defneClass either.",
+      "parentUuid": "9c2ba1c2_8540be52",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_a5a18290",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 25
@@ -806,6 +1148,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "why is this needed?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_408564f0",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "If full optimizations are turned on, it is possible for the compiler to dead-strip the doc1/doc2/doc3 variables since they are not used, therefore the casts could potentially be stripped. I haven\u0027t verified the compiler does this, but it could do it in the future.",
+      "parentUuid": "9c2ba1c2_a5a18290",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -840,6 +1200,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "This should be false per spec as it is against java semantics.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf69de_a0b7a0b6",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:14:34Z",
+      "side": 1,
+      "message": "Is it? When testing against \u0027Object\u0027 type, a cast against any type (T) could theoretically succeed.  Maybe the spec should say that only one interface can be bound to a given prototype, otherwise, it seems legal to have HTMLButtonElement and YetAnotherHtmlButtonElement which both point to the same JS prototype.",
+      "parentUuid": "9c2ba1c2_85e1deeb",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

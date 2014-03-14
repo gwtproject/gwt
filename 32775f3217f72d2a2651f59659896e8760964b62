@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7caeed94_8709f0fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-14T00:03:18Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "32775f3217f72d2a2651f59659896e8760964b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7caeed94_a7fd1489",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-14T00:03:18Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "32775f3217f72d2a2651f59659896e8760964b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

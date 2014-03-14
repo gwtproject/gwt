@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc994585_f26ee8d1",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-14T07:48:31Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "837511a51595336278579f7838eb3b245fcf5762",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

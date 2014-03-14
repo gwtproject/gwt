@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc994585_52d97467",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-14T08:07:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "2e6ce5fbd8370710486b05a51daa2548b45c4071",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

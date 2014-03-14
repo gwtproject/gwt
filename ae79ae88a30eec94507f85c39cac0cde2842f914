@@ -49,6 +49,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_32ffedd2",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "I explained this in a separate doc, but essentially, if the instanceof check is not against $wnd, it has to compute the window from where the object originated, and then construct a reference to it. This is just a sneaky way to discover the window object that owns a given object reference.",
+      "parentUuid": "7c58ad41_31eb7261",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_7108ca88",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 16
@@ -113,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_32e80d21",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "\u0027obj\u0027 in this case is something like \u0027HTMLButtonElement\u0027, which is a function, not an object. We actually want to clone the prototype for our purposes via Object.create.\n\nTrying to construct a native function actually throws a hard TypeError in Chrome.",
+      "parentUuid": "7c58ad41_318ff2a9",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_f1795a0b",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 16
@@ -136,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_d2f65100",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Technically, it should never be null unless someone has a typo in their prototype. This is actually here to make JsInterfaceTest work because the ScriptInjector runs from within GWT code. I need a way to inject script into a GWTTestCase before the GWT module is defined.\n\nI will remove this when I fix the test.",
+      "parentUuid": "7c58ad41_f1795a0b",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_b19c020e",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 16
@@ -153,6 +207,24 @@
         "endLine": 93,
         "endChar": 25
       },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_922b3999",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_b19c020e",
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -199,6 +271,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_ef2e12bc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "You\u0027re right. I fixed it. Just so happens, this doesn\u0027t affect GWT because the prototype checks (instanceof) are always against the superClass proto (e.g. HTMLButtonElement). If the class is a Java class, then it checks the castableTypeMap instead.\n\nHowever if we later move to a more JS-like system for translating instanceof, this might bite us. Also in DevTools, when you print the object, it might print the wrong name.",
+      "parentUuid": "7c58ad41_71220a36",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_7100ca1f",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 16
@@ -210,6 +300,24 @@
       "writtenOn": "2014-02-28T04:35:15Z",
       "side": 1,
       "message": "nit: inline like the rest",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_f21b9584",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_7100ca1f",
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -233,6 +341,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_b2251dbf",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Let\u0027s leave that for a follow on CL. This functionality is only a placeholder, and is mainly an artifact of the code in GenJsAST I updated to handle \u0027super\u0027 qualified calls in general.",
+      "parentUuid": "7c58ad41_71520a30",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_51826640",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 16
@@ -244,6 +370,24 @@
       "writtenOn": "2014-02-28T04:35:15Z",
       "side": 1,
       "message": "Here, instead of setting prototype by hand, is it possible to call defineClass for the second time to be sure everything is working as expected?",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_32512d27",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "defineClass* early exits if called a second time with the same ID.",
+      "parentUuid": "7c58ad41_51826640",
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -267,6 +411,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_b2819de6",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_f1771aa5",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_b12e4272",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 16
@@ -284,6 +446,24 @@
     },
     {
       "key": {
+        "uuid": "7c58ad41_f2a6f5d2",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll add that. I\u0027ll need to find a spec legitimate way of handling this.  As far as the Java spec is concerned, any SAM class can be treated as a lambda.\n\nCertainly, any non-abstract class that is not the subtype of a SAM should not be treated as a lambda. That is, a class with only one method that doesn\u0027t implement a SAM interface. The question is, are there concrete classes that should not be lambda-promoted.\n\nConsider a JS interface mapping JSON object. The put() method is being used to store arbitrary Java objects. Do you want the value, even if it is lambda-like, to be wrapped in a function?\n\nWe may have to actually require people to annotate the parameters of interfaces that are eligible for lambda-conversion. It makes things more tedious, but would be less surprising, e.g.\n\ninterface EventTarget {\n  void addEventListener(String eventName, @JsFunction EventListener listener);\n}\n\nOne workaround for the time being is to use the synthetic bit. Lambda\u0027s create synthetic inner classes, so any non-static, synthetic inner class would get promoted.",
+      "parentUuid": "7c58ad41_b12e4272",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c58ad41_118cee70",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 16
@@ -295,6 +475,24 @@
       "writtenOn": "2014-02-28T04:35:15Z",
       "side": 1,
       "message": "nit: extra space",
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_b242bd27",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_118cee70",
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -335,6 +533,24 @@
         "endLine": 158,
         "endChar": 17
       },
+      "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c58ad41_12c98968",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:52Z",
+      "side": 1,
+      "message": "There is the potential for the compiler to optimize away assignments, which would then allow the cast-checks to be optimized away, e.g.\n\nassertNotNull(doc1 \u003d (MyClass) xxx)\n\nif doc1 is unused, it goes away, leaving\n\nassertNotNull((MyClass) xxx)\n\nbut assertNotNull takes an (Object), so casting from (Object) to (MyClass) is a trivially true cast and can go away.\n\nI haven\u0027t proven this actually happens, it\u0027s just a precaution.",
+      "parentUuid": "7c58ad41_7138cab2",
       "revId": "ae79ae88a30eec94507f85c39cac0cde2842f914",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "dca43989_3661f91d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c58ad41_7a577795",
+      "revId": "ddc73a0dd7e129f6d47620e249b730aecbbeee51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c8d0df2_80d516d7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 18
@@ -240,6 +258,24 @@
       "writtenOn": "2014-03-03T18:11:11Z",
       "side": 1,
       "message": "Can you add a comment explaining the else block? I don\u0027t follow this case.",
+      "revId": "ddc73a0dd7e129f6d47620e249b730aecbbeee51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_b654093d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:28Z",
+      "side": 1,
+      "message": "If a super() call binds to a non-user written super-constructor on a Prototype base class (e.g. the compiler synthesized it), we get rid of the super call, since attempting to call super-constructors fails most of the time for most browser objects unless the library is specifically written to take params. e.g. we don\u0027t want to invoke HTMLButtonElement.call(this), so we replace it with \u00271\u0027 and hope the compiler dead strips it.",
+      "parentUuid": "7c58ad41_1a2f5bba",
       "revId": "ddc73a0dd7e129f6d47620e249b730aecbbeee51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

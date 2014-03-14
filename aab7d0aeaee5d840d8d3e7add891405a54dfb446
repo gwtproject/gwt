@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cb3e9f9_406edf8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-14T01:51:15Z",
+      "side": 1,
+      "message": "\"patchFuncName\" needs to be renamed as well",
+      "range": {
+        "startLine": 1954,
+        "startChar": 15,
+        "endLine": 1954,
+        "endChar": 28
+      },
+      "revId": "aab7d0aeaee5d840d8d3e7add891405a54dfb446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb3e9f9_80b397cb",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-14T01:51:15Z",
+      "side": 1,
+      "message": "looks like a debug statement slipped through",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 13
+      },
+      "revId": "aab7d0aeaee5d840d8d3e7add891405a54dfb446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb3e9f9_00c78733",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-14T01:51:15Z",
+      "side": 1,
+      "message": "might as well put this closing } on it\u0027s own line",
+      "range": {
+        "startLine": 105,
+        "startChar": 75,
+        "endLine": 105,
+        "endChar": 78
+      },
+      "revId": "aab7d0aeaee5d840d8d3e7add891405a54dfb446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

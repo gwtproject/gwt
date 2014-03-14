@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dce519f4_8f074575",
+        "filename": "user/src/com/google/gwt/resources/css/SubstitutionReplacer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-14T00:28:25Z",
+      "side": 1,
+      "message": "Extra space at the end of the line.\n\nYou can remove unneeded parenthesis around the \u0026\u0026 condition which has more precedence than ||",
+      "revId": "1808cb44417e55c48e1fbf18f580c035eb130bf3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

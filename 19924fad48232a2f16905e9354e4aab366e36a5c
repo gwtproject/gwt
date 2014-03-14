@@ -16,6 +16,24 @@
       "revId": "19924fad48232a2f16905e9354e4aab366e36a5c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c2ba1c2_4c09eff8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-03-14T22:15:02Z",
+      "side": 0,
+      "message": "Oops, meant to revert. :)",
+      "parentUuid": "9c2ba1c2_a9317d1b",
+      "revId": "19924fad48232a2f16905e9354e4aab366e36a5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

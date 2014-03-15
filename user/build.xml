@@ -216,26 +216,31 @@
     </gwt.jar>
   </target>
 
-  <target name="checkstyle" description="Static analysis of source">
-    <gwt.checkstyle>
-      <fileset dir="src" >
-        <exclude name="javax/validation/super/javax/validation/constraints/Pattern.java"/>
-        <exclude name="javax/validation/super/javax/validation/spi/ConfigurationState.java"/>
-        <exclude name="javax/validation/super/javax/validation/MessageInterpolator.java"/>
-        <exclude name="javax/validation/super/javax/validation/Configuration.java"/>
-        <exclude name="javax/validation/super/javax/validation/Validation.java"/>
-        <exclude name="org/hibernate/validator/super/org/hibernate/validator/**/*.java"/>
-        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
-      </fileset>
-      <fileset dir="super/com/google/gwt/emul" />
-      <fileset dir="super/com/google/gwt/junit/translatable" />
-    </gwt.checkstyle>
-    <gwt.checkstyle.tests>
-      <fileset dir="test">
-        <include name="com/google/**/*.java" />
-        <include name="test/**" />
-      </fileset>
-    </gwt.checkstyle.tests>
+  <target name="checkstyle-source" description="Static analysis of source">
+      <gwt.checkstyle>
+          <fileset dir="src" >
+              <exclude name="javax/validation/super/javax/validation/constraints/Pattern.java"/>
+              <exclude name="javax/validation/super/javax/validation/spi/ConfigurationState.java"/>
+              <exclude name="javax/validation/super/javax/validation/MessageInterpolator.java"/>
+              <exclude name="javax/validation/super/javax/validation/Configuration.java"/>
+              <exclude name="javax/validation/super/javax/validation/Validation.java"/>
+              <exclude name="org/hibernate/validator/super/org/hibernate/validator/**/*.java"/>
+              <exclude name="org/hibernate/validator/ValidationMessages.java"/>
+          </fileset>
+          <fileset dir="super/com/google/gwt/emul" />
+          <fileset dir="super/com/google/gwt/junit/translatable" />
+      </gwt.checkstyle>
+  </target>
+  <target name="checkstyle-tests" description="Static analysis of source">
+      <gwt.checkstyle.tests>
+          <fileset dir="test">
+              <include name="com/google/**/*.java" />
+              <include name="test/**" />
+          </fileset>
+      </gwt.checkstyle.tests>
+  </target>
+
+  <target name="checkstyle" description="Static analysis of source" depends="checkstyle-tests,checkstyle-source">
   </target>
 
   <target name="test.remoteweb" depends="test.web.remote">

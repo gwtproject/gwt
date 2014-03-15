@@ -17,22 +17,17 @@
 */
 package org.hibernate.jsr303.tck.tests.messageinterpolation;
 
-import java.util.Date;
+import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectConstraintViolationMessages;
+import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectNumberOfViolations;
+import static org.hibernate.jsr303.tck.util.TestUtil.getDefaultMessageInterpolator;
+import static org.hibernate.jsr303.tck.util.TestUtil.getValidatorUnderTest;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.shared.GwtLocale;
-import com.google.gwt.i18n.shared.GwtLocaleFactory;
 
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.MessageInterpolator;
-import javax.validation.Validator;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
-import javax.validation.metadata.ConstraintDescriptor;
-
+import org.hibernate.jsr303.tck.util.TestUtil;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.testharness.AbstractTest;
@@ -42,16 +37,19 @@ import org.jboss.testharness.impl.packaging.Classes;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.Test;
 
-import org.hibernate.jsr303.tck.util.TestUtil;
-import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectConstraintViolationMessages;
-import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectNumberOfViolations;
-import static org.hibernate.jsr303.tck.util.TestUtil.getDefaultMessageInterpolator;
-import static org.hibernate.jsr303.tck.util.TestUtil.getValidatorUnderTest;
+import java.util.Date;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.MessageInterpolator;
+import javax.validation.Validator;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import javax.validation.metadata.ConstraintDescriptor;
 
 /**
  * Modified by Google:

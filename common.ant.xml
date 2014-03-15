@@ -43,7 +43,7 @@
   <property name="gwt.build.jni" location="${gwt.build}/jni" />
   <property name="gwt.build.staging" location="${gwt.build}/staging" />
   <property name="gwt.build.dist" location="${gwt.build}/dist" />
-  <!-- gwt.threadsPerProcessor supercedes gwt.threadCount unless set to 0 --> 
+  <!-- gwt.threadsPerProcessor supercedes gwt.threadCount unless set to 0 -->
   <property name="gwt.threadsPerProcessor" value="1" />
   <property name="gwt.threadCount" value="1" />
   <property name="project.build" location="${gwt.build.out}/${project.tail}" />
@@ -61,7 +61,7 @@
   <property name="junit.out" location="${project.build}/test" />
   <property name="emma.dir" value="${gwt.tools.redist}/emma" />
   <property name="emma.filter.exclude" value="" />
-  
+
   <!-- Sanity check -->
   <available file="${gwt.tools}" type="dir" property="gwt.tools.exists" />
   <fail unless="gwt.tools.exists" message="Cannot find '${gwt.tools}' tools directory; perhaps you should define the GWT_TOOLS environment variable" />
@@ -96,16 +96,16 @@
     <isset property="build.host.iswindows" />
   </condition>
   <fail unless="build.host.platform" message="Building on ${os.name} is not supported" />
-  
+
   <!-- JVM -->
   <condition property="build.jvm.is15">
      <equals arg1="${ant.java.version}" arg2="1.5"/>
-  </condition>  
+  </condition>
 
   <condition property="build.jvm.is16">
      <equals arg1="${ant.java.version}" arg2="1.6"/>
-  </condition> 
-  
+  </condition>
+
   <!-- JUnit support -->
   <property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${gwt.version}/gwt-dev.jar" />
   <property name="gwt.junit.port" value="8888" />
@@ -125,15 +125,15 @@
       <pathelement location="${gwt.tools.antlib}/ant-contrib-1.0b3.jar" />
     </classpath>
   </taskdef>
-  
-  
+
+
   <!-- Pulls in tasks defined in antcount, i.e. countfilter -->
   <taskdef resource="net/sf/antcount/antlib.xml">
     <classpath>
       <pathelement location="${gwt.tools.antlib}/antcount-1.2.jar" />
     </classpath>
   </taskdef>
-  
+
 
   <!-- Global Custom Tasks -->
   <presetdef name="gwt.ant">
@@ -257,7 +257,7 @@
         </report>
       </emma>
 
-      <condition property="junit.stop.build" value="true"> 
+      <condition property="junit.stop.build" value="true">
         <and>
           <istrue value="@{haltonfailure}"/>
           <isset property="junit.failure"/>
@@ -290,16 +290,16 @@
          be noticed as invalidating the previously-generated filter output.  This property
          names where such a sentinel lives; it is tested with <available/> and created
          with <touch/> -->
-      <mkdir dir="${project.build}/sentinels" /> 
-      <property name="filter.sentinel" 
+      <mkdir dir="${project.build}/sentinels" />
+      <property name="filter.sentinel"
           location="${project.build}/sentinels/gwt-${gwt.version}-git-${gwt.gitrev}" />
     </sequential>
   </macrodef>
-  
+
   <macrodef name="gwt.revfilter" description="Filters files for versioning">
     <attribute name="todir" description="Destination for the filtered copy"/>
-    
-    <element name="src.fileset" implicit="true" 
+
+    <element name="src.fileset" implicit="true"
       description="Source for the filtered copy"/>
     <sequential>
       <!-- These files must be filtered for versioning -->
@@ -319,7 +319,7 @@
     <attribute name="name"/>
     <element name="timer.elements" implicit="true" optional="false"/>
     <sequential>
-      <taskdef name="timer" 
+      <taskdef name="timer"
         classname="com.google.gwt.ant.taskdefs.Timer"
         classpath="${gwt.build.lib}/ant-gwt.jar" />
       <timer name="@{name}">
@@ -332,7 +332,7 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true" />
     <sequential>
-      <taskdef resource="checkstyletask.properties" classpath="${gwt.tools.antlib}/checkstyle-all-4.2.jar" />
+      <taskdef resource="checkstyletask.properties" classpath="${gwt.tools.antlib}/checkstyle-5.7-all.jar" />
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle.xml" maxErrors="0" failOnViolation="false" failureProperty="gwt.checkstyle.failed">
         <formatter type="xml" toFile="@{outputdirectory}/checkstyle_log.xml"/>
@@ -347,7 +347,7 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true" />
     <sequential>
-      <taskdef resource="checkstyletask.properties" classpath="${gwt.tools.antlib}/checkstyle-all-4.2.jar" />
+      <taskdef resource="checkstyletask.properties" classpath="${gwt.tools.antlib}/checkstyle-5.7-all.jar" />
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle-tests.xml" maxErrors="0" failOnViolation="false" failureProperty="gwt.checkstyle-tests.failed">
         <formatter type="xml" toFile="@{outputdirectory}/checkstyle_tests_log.xml"/>
@@ -375,7 +375,7 @@
     </sequential>
   </macrodef>
 
-  <!-- Targets for emma support.  To run tests with emma enabled, use 
+  <!-- Targets for emma support.  To run tests with emma enabled, use
        ant <test-target> -Demma.enabled=true -->
   <path id="emma.taskdef.lib">
     <pathelement location="${emma.dir}/emma-2.0.5312-patched.jar" />

@@ -1,9 +1,9 @@
 //Modified by Google
 package org.jboss.testharness.spi;
 
-import java.util.Collection;
-
 import org.jboss.testharness.api.DeploymentException;
+
+import java.util.Collection;
 
 /**
  * Standalone mode deployment related operations. If the TCK is placed in

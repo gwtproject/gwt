@@ -230,21 +230,23 @@
     </replace>
   </target>
 
-  <target name="checkstyle" description="Static analysis of source">
-    <gwt.checkstyle>
-      <fileset dir="core/src">
-        <filename name="com/google/gwt/dev/shell/remoteui/RemoteMessageProto.java" negate="yes" />
-        <filename name="com/google/gwt/dev/asm/**/*.java" negate="yes" />
-        <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes" />
-        <filename name="org/eclipse/**/*.java" negate="yes" />
-        <filename name="org/apache/**/*.java" negate="yes" />
-      </fileset>
-    </gwt.checkstyle>
+  <target name="checkstyle-source" description="Static analysis of source">
+      <gwt.checkstyle>
+          <fileset dir="core/src">
+              <filename name="com/google/gwt/dev/shell/remoteui/RemoteMessageProto.java" negate="yes" />
+              <filename name="com/google/gwt/dev/asm/**/*.java" negate="yes" />
+              <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes" />
+              <filename name="org/eclipse/**/*.java" negate="yes" />
+              <filename name="org/apache/**/*.java" negate="yes" />
+          </fileset>
+          <fileset dir="core/super" />
+      </gwt.checkstyle>
+  </target>
 
-    <gwt.checkstyle>
-      <fileset dir="core/super/com/google/gwt/dev/jjs/intrinsic" />
-    </gwt.checkstyle>
+  <target name="checkstyle-tests" description="Static analysis of tests">
+  </target>
 
+  <target name="checkstyle" description="Static analysis of source" depends="checkstyle-tests,checkstyle-source">
   </target>
 
   <target name="test" depends="build, compile.tests" description="Run unit tests for this project.">

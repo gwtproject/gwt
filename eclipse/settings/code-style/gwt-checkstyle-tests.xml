@@ -25,6 +25,7 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="JavadocType">
             <property name="severity" value="error"/>
             <property name="scope" value="protected"/>
+            <property name="allowMissingParamTags" value="true"/>
         </module>
         <module name="PackageName">
             <property name="severity" value="error"/>

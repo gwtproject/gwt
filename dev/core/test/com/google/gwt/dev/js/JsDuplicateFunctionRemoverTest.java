@@ -88,7 +88,7 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     String firstName = new MockNameGenerator().getFreshName();
     assertEquals("_.method1=" + firstName + ";_.method2=" + firstName +
         ";_.method1();_.method2();function " + firstName + "(){}\n",
-		    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class));
+        optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class));
   }
 
 
@@ -195,7 +195,6 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     // the same.
     assertTrue(assignments.get("_.b") != assignments.get("_.c") ||
         topScope_a.getShortIdent().equals(f2_a.getShortIdent()));
-
   }
 
   private static void setAllFromJava(JsProgram program) {

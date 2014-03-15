@@ -49,6 +49,9 @@ import java.util.regex.Pattern;
 public abstract class OptimizerTestBase extends JJSTestBase {
   protected boolean runDeadCodeElimination = false;
 
+  /**
+   * Holds the result of optimization to compare agains expected results.
+   */
   protected final class Result {
     private final String returnType;
     private final String originalCode;

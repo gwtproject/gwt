@@ -1,9 +1,9 @@
 package org.jboss.testharness.api;
 
-import java.util.List;
-
 import org.jboss.testharness.spi.Containers;
 import org.jboss.testharness.spi.StandaloneContainers;
+
+import java.util.List;
 
 /**
  * The configuration of the TCK.
@@ -16,7 +16,7 @@ import org.jboss.testharness.spi.StandaloneContainers;
  * specified here. The defaults are also listed here.
  *
  * The TCK may also be configured programatically through this interface
- * 
+ *
  * <p>
  * Modified by Google.
  * <ul>

@@ -17,9 +17,23 @@
 */
 package org.hibernate.jsr303.tck.tests.bootstrap;
 
+import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectConstraintViolationMessages;
+import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectNumberOfViolations;
+import static org.testng.Assert.assertFalse;
+
 import com.google.gwt.i18n.shared.GwtLocale;
 
+import org.hibernate.jsr303.tck.util.TestUtil;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.testharness.AbstractTest;
+import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.ArtifactType;
+import org.jboss.testharness.impl.packaging.Classes;
+import org.testng.annotations.Test;
+
 import java.util.Set;
+
 import javax.validation.Configuration;
 import javax.validation.ConstraintViolation;
 import javax.validation.MessageInterpolator;
@@ -28,19 +42,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.testharness.AbstractTest;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ArtifactType;
-import org.jboss.testharness.impl.packaging.Classes;
-import static org.testng.Assert.assertFalse;
-import org.testng.annotations.Test;
-
-import org.hibernate.jsr303.tck.util.TestUtil;
-import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectConstraintViolationMessages;
-import static org.hibernate.jsr303.tck.util.TestUtil.assertCorrectNumberOfViolations;
 
 /**
  * @author Hardy Ferentschik

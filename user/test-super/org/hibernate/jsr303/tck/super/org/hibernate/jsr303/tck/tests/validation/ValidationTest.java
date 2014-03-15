@@ -17,8 +17,24 @@
 */
 package org.hibernate.jsr303.tck.tests.validation;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
+import org.hibernate.jsr303.tck.common.TCKValidationProvider;
+import org.hibernate.jsr303.tck.common.TCKValidatorConfiguration;
+import org.hibernate.jsr303.tck.util.TestUtil;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.testharness.AbstractTest;
+import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.ArtifactType;
+import org.jboss.testharness.impl.packaging.Classes;
+import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.validation.Configuration;
 import javax.validation.Validation;
 import javax.validation.ValidationProviderResolver;
@@ -26,22 +42,6 @@ import javax.validation.ValidatorFactory;
 import javax.validation.bootstrap.GenericBootstrap;
 import javax.validation.bootstrap.ProviderSpecificBootstrap;
 import javax.validation.spi.ValidationProvider;
-
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.testharness.AbstractTest;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ArtifactType;
-import org.jboss.testharness.impl.packaging.Classes;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
-import org.testng.annotations.Test;
-
-import org.hibernate.jsr303.tck.common.TCKValidationProvider;
-import org.hibernate.jsr303.tck.common.TCKValidatorConfiguration;
-import org.hibernate.jsr303.tck.util.TestUtil;
 
 /**
  * Tests for the implementation of <code>Validation</code>.

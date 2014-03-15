@@ -1,8 +1,8 @@
 package org.jboss.testharness.impl.packaging;
 
-import java.util.Set;
-
 import org.jboss.testharness.api.ResourceDescriptor;
+
+import java.util.Set;
 
 /**
  * @author Hardy Ferentschik

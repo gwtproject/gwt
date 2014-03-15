@@ -2,13 +2,14 @@ package org.testng;
 
 import org.testng.collections.Lists;
 
-//import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+//import java.lang.reflect.Array;
 
 
 /**
@@ -624,13 +625,13 @@ public class Assert {
     assertNotSame(actual, expected, null);
   }
 
-  static private void failArrayLengthsNotEqual(int actualLength, int expectedLength, 
+  static private void failArrayLengthsNotEqual(int actualLength, int expectedLength,
       String message) {
     failNotEquals(actualLength, expectedLength, message == null ? "" : message
         + " (Array lengths are not the same)");
   }
 
-  static private void failArrayValuesAtIndexNotEqual(Object actual, Object expected, int index, 
+  static private void failArrayValuesAtIndexNotEqual(Object actual, Object expected, int index,
       String message) {
     failNotEquals(actual, expected, message == null ? "" : message
         + " (values as index " + index + " are not the same)");

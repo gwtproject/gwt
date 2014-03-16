@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cba6def_bbec73e7",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "2014",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_39f86b94",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "odd \u0027;\u0027",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_f9b433d7",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "missing \u0027;\u0027 at the end of statement",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_19f5af9a",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "odd \u0027;\u0027",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ca891a1_0011a839",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "I dont understand the way property is checked here.\n\nWill this work?:\n\nvar number \u003d parseInt(property);\n\nif (!isNaN(number)) {}",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_d9b977cf",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "toIndex \u003d length;\n\n\nor it even can be reduced to:\n\nint length \u003d Math.min(toIndex, length());",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cba6def_9bf1afbd",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "do we need offsets array? it could be calculated below line 740",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ca891a1_20a144b9",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "maybe this loop would look more clear?\n\ndo {\n  index++;\n  word \u003d getWord(array, index);\n} while (word \u003d\u003d 0xffffffff);\nreturn bitIndex(index) + Integer.numberOfTrailingZeros(~word);",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ca891a1_40a450c9",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "odd \u0027;\u0027",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_b9bebbb3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "2014",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd4752d_99c3ff49",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "This method would not be needed if BitSetTest extended EmulTestBase",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cba6def_7bd7fb12",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "\u0027i !\u003d 0\u0027  is always true",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cba6def_5bd4370c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-03-16T21:21:21Z",
+      "side": 1,
+      "message": "set is already initialized in line 1071",
+      "revId": "8b72b6797086163e99bedb9e9d26106b654c06e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

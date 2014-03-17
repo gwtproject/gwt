@@ -14,6 +14,7 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.dev.cfg.CombinedResourceOracle;
+import com.google.gwt.dev.cfg.Library;
 import com.google.gwt.dev.cfg.LibraryGroup;
 import com.google.gwt.dev.cfg.LibraryGroupBuildResourceOracle;
 import com.google.gwt.dev.cfg.LibraryGroupPublicResourceOracle;
@@ -23,6 +24,7 @@ import com.google.gwt.dev.cfg.NullLibraryWriter;
 import com.google.gwt.dev.javac.MemoryUnitCache;
 import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.ResourceOracle;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
 import java.util.Set;
@@ -41,7 +43,7 @@ public class CompilerContext {
 
     private ResourceOracle buildResourceOracle;
     private boolean compileMonolithic = true;
-    private LibraryGroup libraryGroup;
+    private LibraryGroup libraryGroup = createDefaultEmptyLibraryGroup();
     private LibraryWriter libraryWriter = new NullLibraryWriter();
     private ModuleDef module;
     private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
@@ -143,6 +145,10 @@ public class CompilerContext {
     }
   }
 
+  private static LibraryGroup createDefaultEmptyLibraryGroup() {
+    return LibraryGroup.fromLibraries(Lists.<Library> newArrayList(), true);
+  }
+
   private ResourceOracle buildResourceOracle;
   /**
    * Whether compilation should proceed monolithically or separately. It is an example of a
@@ -150,7 +156,7 @@ public class CompilerContext {
    * they should be grouped together instead of floating free here.
    */
   private boolean compileMonolithic = true;
-  private LibraryGroup libraryGroup;
+  private LibraryGroup libraryGroup = createDefaultEmptyLibraryGroup();
   private LibraryWriter libraryWriter = new NullLibraryWriter();
 
   private ModuleDef module;

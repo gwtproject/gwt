@@ -101,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "5cbf69de_237dd592",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-17T03:10:03Z",
+      "side": 1,
+      "message": "I see. We should probably take the mock resources out of JavaAstConstructor and into a separate GwtMockRosources then. We\u0027ll do that in a future patch, leave them there for now.",
+      "parentUuid": "5cbf69de_a039e0ed",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_0c39bb55",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 25

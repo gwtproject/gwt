@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dcdfd954_b486a650",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-17T18:55:57Z",
+      "side": 1,
+      "message": "already fixed",
+      "parentUuid": "dcdfd954_312c08c2",
+      "revId": "5cc4f34ff68f8bc8c9647a5615106eacf30b346e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcdfd954_f13d60f3",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2014-03-17T18:49:44Z",
       "side": 1,
       "message": "\u003cbr /\u003e -\u003e \u003cbr\u003e",
+      "range": {
+        "startLine": 6,
+        "startChar": 30,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "5cc4f34ff68f8bc8c9647a5615106eacf30b346e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcdfd954_d481323c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-17T18:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdfd954_f13d60f3",
       "range": {
         "startLine": 6,
         "startChar": 30,
@@ -77,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "dcdfd954_94504a24",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-17T18:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdfd954_714bb0a2",
+      "revId": "5cc4f34ff68f8bc8c9647a5615106eacf30b346e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcdfd954_71329020",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
         "patchSetId": 2
@@ -88,6 +148,24 @@
       "writtenOn": "2014-03-17T18:49:44Z",
       "side": 1,
       "message": "nit: provide a description inside exception",
+      "revId": "5cc4f34ff68f8bc8c9647a5615106eacf30b346e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcdfd954_948baa5a",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ImmutableLibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-17T18:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdfd954_71329020",
       "revId": "5cc4f34ff68f8bc8c9647a5615106eacf30b346e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

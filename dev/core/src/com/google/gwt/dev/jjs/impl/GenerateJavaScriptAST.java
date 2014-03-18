@@ -71,12 +71,14 @@ import com.google.gwt.dev.jjs.ast.JNameOf;
 import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
+import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JNumericEntry;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -544,6 +546,10 @@ public class GenerateJavaScriptAST {
             polyName = interfaceScope.declareName(mangleNameForPrivatePoly(x), name);
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
+            polyName.setObfuscatable(false);
+            // if a JsInterface
+          } else if (program.typeOracle.isJsInterfaceMethod(x)) {
+            polyName = interfaceScope.declareName(name, name);
             polyName.setObfuscatable(false);
           } else {
             polyName = interfaceScope.declareName(mangleNameForPoly(x), name);
@@ -1324,7 +1330,6 @@ public class GenerateJavaScriptAST {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
       JsInvocation jsInvocation = new JsInvocation(x.getSourceInfo());
-
       popList(jsInvocation.getArguments(), x.getArgs().size()); // args
 
       if (JProgram.isClinit(method)) {
@@ -1350,10 +1355,36 @@ public class GenerateJavaScriptAST {
           // replace the method with its retargeted clinit
           method = clinitTarget.getClinitMethod();
         }
+      } else {
+
+        if (program.typeOracle.isOrExtendsJsInterface(method.getEnclosingType(), false) &&
+            method.getParams().size() == x.getArgs().size()) {
+          // rewrite Single-Abstract-Method args as JsFunctions
+          List<JParameter> params = method.getParams();
+          List<JsExpression> arguments = jsInvocation.getArguments();
+
+          for (int i = 0; i < params.size(); i++) {
+            JType paramType = params.get(i).getType();
+            if (paramType instanceof JNonNullType) {
+              paramType = ((JNonNullType) paramType).getUnderlyingType();
+            }
+            if (paramType instanceof JDeclaredType) {
+              JMethod samMethod = program.getSingleAbstractMethod((JDeclaredType) paramType);
+              if (samMethod != null) {
+                JsExpression boundSamMethod = bindSingleAbstractMethodAsJsFunction(arguments.get(i), samMethod);
+                arguments.set(i, boundSamMethod);
+              }
+            }
+          }
+        }
       }
 
-      JsNameRef qualifier;
+      JsNameRef qualifier = null;
       JsExpression unnecessaryQualifier = null;
+      JsExpression result = null;
+      boolean isJsProperty = false;
+      result = jsInvocation;
+
       if (method.isStatic()) {
         if (x.getInstance() != null) {
           unnecessaryQualifier = (JsExpression) pop(); // instance
@@ -1399,13 +1430,186 @@ public class GenerateJavaScriptAST {
         qualifier = callName.makeRef(x.getSourceInfo());
         qualifier.setQualifier(methodNameRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
+        // Is this method targeting a Foo_Prototype class?
+        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+          result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
+        }
       } else {
-        // Dispatch polymorphically (normal case).
-        qualifier = polymorphicNames.get(method).makeRef(x.getSourceInfo());
-        qualifier.setQualifier((JsExpression) pop()); // instance
+        JsName polyName = polymorphicNames.get(method);
+        // potentially replace method call with property access
+        JMethod target = x.getTarget();
+        for (JMethod overrideMethod : target.getOverrides()) {
+          if (overrideMethod.isJsProperty()) {
+            isJsProperty = true;
+            break;
+          }
+        }
+        if (isJsProperty || target.isJsProperty()) {
+          String getter = isGetter(target);
+          String setter = isSetter(target);
+          String has = isHas(target);
+
+          // if fluent
+          JType type = target.getType();
+
+          boolean isFluent = type instanceof JReferenceType
+              && type != program.getTypeJavaLangObject() &&
+              program.typeOracle.canTriviallyCast(x.getTarget().getEnclosingType(),
+                  ((JReferenceType) type).getUnderlyingType());
+          JsExpression qualExpr = (JsExpression) pop();
+
+          if (getter != null) {
+            result = dispatchAsGetter(x, unnecessaryQualifier, getter, qualExpr);
+          } else if (setter != null) {
+            result = dispatchAsSetter(x, jsInvocation, setter, isFluent, qualExpr);
+          } else if (has != null) {
+            result = dispatchAsHas(x, has, qualExpr);
+          } else {
+            throw new InternalCompilerException("JsProperty not a setter, getter, or has.");
+          }
+        } else {
+          // Dispatch polymorphically (normal case).
+          qualifier = polyName.makeRef(x.getSourceInfo());
+          qualifier.setQualifier((JsExpression) pop()); // instance
+        }
       }
-      jsInvocation.setQualifier(qualifier);
-      push(createCommaExpression(unnecessaryQualifier, jsInvocation));
+      if (!isJsProperty) {
+        jsInvocation.setQualifier(qualifier);
+      }
+      push(createCommaExpression(unnecessaryQualifier, result));
+    }
+
+    private JsExpression dispatchAsHas(JMethodCall x, String has, JsExpression qualExpr) {
+      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), has);
+      result = new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP,
+          property, qualExpr);
+      return result;
+    }
+
+    private JsExpression dispatchAsSetter(JMethodCall x, JsInvocation jsInvocation, String setter, boolean isFluent, JsExpression qualExpr) {
+      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), setter);
+      // either qualExpr.prop or _.prop depending on fluent or not
+      property.setQualifier(isFluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
+      // propExpr = arg
+      result = createAssignment(property, jsInvocation.getArguments().get(0));
+      if (isFluent) {
+        // (_ = qualExpr, _.prop = arg, _)
+        result = createCommaExpression(
+            createAssignment(globalTemp.makeRef(x.getSourceInfo()), qualExpr),
+            createCommaExpression(result,
+              globalTemp.makeRef(x.getSourceInfo())));
+      }
+      return result;
+    }
+
+    private JsExpression dispatchAsGetter(JMethodCall x, JsExpression unnecessaryQualifier, String getter, JsExpression qualExpr) {
+      JsExpression result;// replace with qualExpr.property
+      JsNameRef property = new JsNameRef(x.getSourceInfo(), getter);
+      property.setQualifier(qualExpr);
+      result = createCommaExpression(unnecessaryQualifier, property);
+      return result;
+    }
+
+    /**
+     * Setup qualifier and methodRef to dispatch to super-ctor or super-method.
+     */
+    private JsExpression dispatchToSuperPrototype(JMethodCall x, JMethod method, JsNameRef qualifier,
+                                                  JsNameRef methodRef, JsInvocation jsInvocation) {
+      String jsPrototype = null;
+      // find JsInterface of Prototype method being invoked.
+      for (JInterfaceType intf : method.getEnclosingType().getImplements()) {
+        JInterfaceType jsIntf = program.typeOracle.getNearestJsInterface(intf, true);
+        if (jsIntf != null) {
+          jsPrototype = jsIntf.getJsPrototype();
+          break;
+        }
+      }
+      assert jsPrototype != null : "Unable to find JsInterface with prototype";
+
+      // in JsInterface case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
+      // the method target should be on a class that ends with $Prototype and implements a JsInterface
+      if (!(method instanceof JConstructor) && program.typeOracle.isJsInterfaceMethod(method)) {
+        JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
+        methodRef = new JsNameRef(methodRef.getSourceInfo(), method.getName());
+        // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
+        protoRef.setQualifier(javaToJavaScriptLiteralConverter.convertQualifiedPrototypeToNameRef(
+            x.getSourceInfo(), jsPrototype));
+        methodRef.setQualifier(protoRef);
+        qualifier.setQualifier(methodRef);
+        return jsInvocation;
+      }
+
+      return JsNullLiteral.INSTANCE;
+    }
+
+    private JsExpression bindSingleAbstractMethodAsJsFunction(JsExpression arg, JMethod samMethod) {
+      // Construct the following expression in steps
+      // arg => (_ = arg, _.@samMethod.bind(_); )
+
+      // _ = arg
+      JsExpression tempAsg = createAssignment(globalTemp.makeRef(arg.getSourceInfo()),
+          arg);
+
+      JsNameRef samFunc = polymorphicNames.get(samMethod).makeRef(arg.getSourceInfo());
+      JsName bindName = objectScope.declareName("bind");
+      bindName.setObfuscatable(false);
+
+      // bind()
+      JsInvocation bindInv = new JsInvocation(arg.getSourceInfo());
+      JsNameRef bindRef = bindName.makeRef(arg.getSourceInfo());
+      bindInv.setQualifier(bindRef);
+
+      // bind(_)
+      bindInv.getArguments().add(globalTemp.makeRef(arg.getSourceInfo()));
+
+      // samFunc.bind(_)
+      bindRef.setQualifier(samFunc);
+
+      // _.samFunc.bind(_)
+      samFunc.setQualifier(globalTemp.makeRef(arg.getSourceInfo()));
+
+      // (_ = arg, _.samFunc.bind(_))
+      return createCommaExpression(tempAsg, bindInv);
+    }
+
+    private String isGetter(JMethod method) {
+      String name = method.getName();
+      // zero arg non-void getX()
+      if (name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
+          method.getType() != JPrimitiveType.VOID && method.getParams().size() == 0) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else  if (name.length() > 3 && name.startsWith("is")
+          && Character.isUpperCase(name.charAt(2)) && method.getType() == JPrimitiveType.BOOLEAN
+          && method.getParams().size() == 0) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else if (method.getParams().size() == 0 && method.getType() != JPrimitiveType.VOID) {
+        return name;
+      }
+      return null;
+    }
+
+    private String isSetter(JMethod method) {
+      String name = method.getName();
+      if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
+          && method.getParams().size() == 1) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else if (method.getParams().size() == 1) {
+        return name;
+      }
+      return null;
+    }
+
+    private String isHas(JMethod method) {
+      String name = method.getName();
+      if (name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
+          && method.getParams().size() == 0 && method.getType() == JPrimitiveType.BOOLEAN) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      }
+      return null;
     }
 
     @Override
@@ -1938,6 +2142,7 @@ public class GenerateJavaScriptAST {
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
       generateClassDefinition(x, globalStmts);
       generateVTables(x, globalStmts);
+      generateExports(x, globalStmts);
 
       if (x == program.getTypeJavaLangObject()) {
         // special: setup a "toString" alias for java.lang.Object.toString()
@@ -2273,16 +2478,37 @@ public class GenerateJavaScriptAST {
       assert x != program.getTypeJavaLangString();
 
       JsInvocation defineClass = new JsInvocation(sourceInfo);
-      JsName defineClassRef = indexedFunctions.get(
-          "JavaClassHierarchySetupUtil.defineClass").getName();
-      defineClass.setQualifier(defineClassRef.makeRef(sourceInfo));
+
       JLiteral typeId = getRuntimeTypeReference(x);
       JClassType superClass = x.getSuperClass();
       JLiteral superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
           getRuntimeTypeReference(x.getSuperClass());
+      // check if there's an overriding prototype
+      JInterfaceType jsPrototypeIntf = program.maybeGetJsInterfaceFromPrototype(superClass);
+      String jsPrototype = jsPrototypeIntf != null ? jsPrototypeIntf.getJsPrototype() : null;
+      // choose appropriate setup function
+      JsName defineClassRef = indexedFunctions.get(
+          jsPrototype == null ? "JavaClassHierarchySetupUtil.defineClass" :
+              "JavaClassHierarchySetupUtil.defineClassWithPrototype").getName();
+
+      defineClass.setQualifier(defineClassRef.makeRef(sourceInfo));
+
       // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
       defineClass.getArguments().add(convertJavaLiteral(typeId));
-      defineClass.getArguments().add(convertJavaLiteral(superTypeId));
+      // setup superclass normally
+      if (jsPrototype == null) {
+        defineClass.getArguments().add(convertJavaLiteral(superTypeId));
+      } else {
+        // setup extension of native JS object
+        JsNameRef jsProtoClassRef = javaToJavaScriptLiteralConverter.convertQualifiedPrototypeToNameRef(
+          x.getSourceInfo(), jsPrototype);
+        // TODO(cromwellian) deal with module vs global scoping issue
+        // jsProtoClassRef.setQualifier(new JsNameRef(x.getSourceInfo(), "$wnd"));
+        JsNameRef jsProtoFieldRef = new JsNameRef(x.getSourceInfo(), "prototype");
+
+        jsProtoFieldRef.setQualifier(jsProtoClassRef);
+        defineClass.getArguments().add(jsProtoClassRef);
+      }
       JsExpression castMap = generateCastableTypeMap(x);
       defineClass.getArguments().add(castMap);
 
@@ -2381,6 +2607,84 @@ public class GenerateJavaScriptAST {
           vtableInitForMethodMap.put(asgStat, method);
         }
       }
+    }
+
+    private void generateExports(JClassType x, List<JsStatement> globalStmts) {
+
+      String lastProvidedNamespace = "";
+      for (JMethod m : x.getMethods()) {
+        // static functions or constructors may be exported
+        if ((m.isStatic() || m instanceof JConstructor) && m.getExportName() != null) {
+          JsNameRef exportRhs = names.get(m).makeRef(m.getSourceInfo());
+          String exportName = m.getExportName();
+          lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
+        }
+      }
+
+      for (JField f : x.getFields()) {
+        if (f.isStatic() && f.getExportName() != null) {
+          JsNameRef exportRhs = names.get(f).makeRef(f.getSourceInfo());
+          String exportName = f.getExportName();
+          lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
+        }
+      }
+    }
+
+    private String exportMember(JClassType x, List<JsStatement> globalStmts, String lastProvidedNamespace,
+                                JsNameRef exportRhs, String exportName) {
+      exportName = fixupExportName(x, exportName);
+      Pair<String, String> exportNamespacePair = getExportNamespace(exportName);
+      lastProvidedNamespace = exportProvidedNamespace(x, globalStmts, lastProvidedNamespace, exportNamespacePair);
+      createAndAddExportAssignment(x, globalStmts, exportRhs, exportNamespacePair);
+      return lastProvidedNamespace;
+    }
+
+    private void createAndAddExportAssignment(JClassType x, List<JsStatement> globalStmts, JsNameRef exportRhs,
+                                              Pair<String, String> exportNamespacePair) {
+      JsNameRef leaf = new JsNameRef(x.getSourceInfo(), exportNamespacePair.getRight());
+      leaf.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+      JsExprStmt astStat = new JsExprStmt(x.getSourceInfo(),
+           createAssignment(leaf,
+               exportRhs));
+      globalStmts.add(astStat);
+    }
+
+    private String fixupExportName(JClassType x, String exportName) {
+      if ("".equals(exportName)) {
+        exportName = x.getEnclosingType().getName() + "." + x.getShortName();
+      }
+      return exportName;
+    }
+
+    private String exportProvidedNamespace(JClassType x, List<JsStatement> globalStmts,
+                                           String lastProvidedNamespace, Pair<String, String> exportNamespacePair) {
+      if (!lastProvidedNamespace.equals(exportNamespacePair.getLeft())) {
+        JsName provideFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.provide").getName();
+        JsInvocation provideCall = new JsInvocation(x.getSourceInfo());
+        provideCall.setQualifier(provideFunc.makeRef(x.getSourceInfo()));
+        provideCall.getArguments().add(new JsStringLiteral(x.getSourceInfo(),
+            exportNamespacePair.getLeft()));
+        JsExprStmt provideStat = createAssignment(globalTemp.makeRef(x.getSourceInfo()),
+            provideCall).makeStmt();
+        globalStmts.add(provideStat);
+        lastProvidedNamespace = exportNamespacePair.getLeft();
+      }
+      return lastProvidedNamespace;
+    }
+
+    /**
+     * Returns a pair of namespace and leaf name.
+     */
+    private Pair<String, String> getExportNamespace(String exportName) {
+      String[] parts = exportName.split("\\.");
+      StringBuffer sb = new StringBuffer();
+      for (int i = 0; i < parts.length - 1; i++) {
+        if (i != 0) {
+          sb.append('.');
+        }
+        sb.append(parts[i]);
+      }
+      return Pair.create(sb.toString(), parts[parts.length -  1]);
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {

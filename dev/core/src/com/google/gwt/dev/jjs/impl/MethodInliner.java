@@ -106,6 +106,12 @@ public class MethodInliner {
 
       boolean possibleToInline = false;
 
+      JDeclaredType enclosingType = method.getEnclosingType();
+      if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        // don't inline calls to JsInterface Prototype methods, since these are merely stubs to preserve super calls
+        possibleToInline = false;
+      }
+
       if (method.isStatic() && !method.isNative()) {
         JMethodBody body = (JMethodBody) method.getBody();
         List<JStatement> stmts = body.getStatements();
@@ -117,7 +123,7 @@ public class MethodInliner {
         } else if (!body.getLocals().isEmpty()) {
           // methods with local variables cannot be inlined
           possibleToInline = false;
-        } else {
+        }  else {
           JMultiExpression multi = createMultiExpressionFromBody(body, ignoringReturnValueFor == x);
           if (multi != null) {
             possibleToInline = tryInlineExpression(x, ctx, multi);

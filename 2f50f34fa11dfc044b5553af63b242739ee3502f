@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08adab_62ecfaa3",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-18T23:23:55Z",
+      "side": 1,
+      "message": "This caused a regression internally. Are you sure this is fixed in gecko 1.9+?",
+      "revId": "2f50f34fa11dfc044b5553af63b242739ee3502f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

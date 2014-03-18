@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcdfd954_149fb508",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/AssignabilityChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-18T00:40:30Z",
+      "side": 1,
+      "message": "s/superTypeHierarchy/fromSuperTypeHierarchy/",
+      "range": {
+        "startLine": 169,
+        "startChar": 20,
+        "endLine": 169,
+        "endChar": 38
+      },
+      "revId": "8ed9e3965ffb35ac196c0429c3a4d163e9bddfa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcdfd954_d4a80d2d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/AssignabilityChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-18T00:40:30Z",
+      "side": 1,
+      "message": "s/erasedType/toErasedType/\n\nsimilar for jClassType down",
+      "range": {
+        "startLine": 178,
+        "startChar": 17,
+        "endLine": 178,
+        "endChar": 27
+      },
+      "revId": "8ed9e3965ffb35ac196c0429c3a4d163e9bddfa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

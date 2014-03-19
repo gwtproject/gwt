@@ -189,6 +189,41 @@
     },
     {
       "key": {
+        "uuid": "7c08adab_3dff4317",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "I might be missing something.\n\nIf we don\u0027t check for \"$wnd\" and if somebody uses it in a prototype, as it is not supported, it will be broken or the behaviour will be undefined right? Why do we need to do it later?",
+      "parentUuid": "5cbf69de_c04bb47a",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_0fb68606",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "You might have missed comments in this file.",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc10b997_6c614f1d",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 25
@@ -604,6 +639,24 @@
     },
     {
       "key": {
+        "uuid": "7c08adab_0f11e639",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "I meant c.g.gwt.js.client but let\u0027s discuss it later.",
+      "parentUuid": "5cbf69de_e081183c",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_2590f2ef",
         "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
         "patchSetId": 25
@@ -944,6 +997,29 @@
     },
     {
       "key": {
+        "uuid": "7c08adab_af1f7a43",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "nit: extra curly brackets (in other annotations as well)",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_25bab29e",
         "filename": "user/src/com/google/gwt/core/client/js/impl/JsInterfacePrototype.java",
         "patchSetId": 25
@@ -1190,6 +1266,24 @@
     },
     {
       "key": {
+        "uuid": "7c08adab_9d650f2b",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "I see. Can you state that in the comment as it may not be obvious to the reader?",
+      "parentUuid": "5cbf69de_408564f0",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_852f1e6f",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 25
@@ -1242,6 +1336,24 @@
     },
     {
       "key": {
+        "uuid": "7c08adab_0f52062f",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "It is hard to enforce one interface per prototype.\nI thought it would be nicer to follow java semantics to avoid surprises, but it may be surprising the other way as well.\n\nSo I\u0027ll update the docs to reflect this change. However with this, don\u0027t you need to make sure that instanceof checks are NOT optimized to false? I know you were earlier concerned about instanceof check optimized to true.",
+      "parentUuid": "5cbf69de_a0b7a0b6",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2ba1c2_656f8acf",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 25
@@ -1253,6 +1365,24 @@
       "writtenOn": "2014-03-12T23:32:39Z",
       "side": 1,
       "message": "We were also having issues with classes that has only single method were treated as SAM even they were marked as @JsInterface. Can you cover that in your test cases as well?",
+      "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_2fa70a9f",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:49:20Z",
+      "side": 1,
+      "message": "If this needs to be deferred, can you add a TODO comment?",
+      "parentUuid": "9c2ba1c2_656f8acf",
       "revId": "af4ec44ad1c779b5825026eb7e5c230bc9454a32",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

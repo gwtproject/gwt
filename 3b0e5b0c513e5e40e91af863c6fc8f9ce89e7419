@@ -1,0 +1,231 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcfbbdcb_33f89294",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "originalImportsByCud.put(decl, Arrays.asList(decl.imports))",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_d326de46",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "The best practice for utility classes is to make it final and include a private default constructor. However, you can ignore this if the rest of the code is not following it.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_339d3209",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "Please always use StringBuilder instead of StringBuffer unless if you are doing multithreading.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_133fd635",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "nit: one other common pattern is to avoid the if in the loop:\n\n StringBuffer result \u003d new StringBuffer();\n if (i \u003e 0) {\n   result.append(name[0]);\n }\n for (int i \u003d 1; i \u003c name.length; i++) {\n    result.append(\u0027.\u0027).append(name[i]);\n }\n return result.toString();",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_53778e15",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "Actually following might work as well:\nJoiner.on(\u0027.\u0027).join(name);",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_98c1a5d3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "I thought this has the highest precedence in Java. Can you add tests to verify we are following exact java semantics for precedency of class resolving?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_53754e9b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "As you are no longer short circuiting when a method is found, wouldn\u0027t be easier to have two passes, first one that collects the methods that match and second one that looks for ambiguity?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_33cd32a3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "you only need this part if jsni is a (*) match, right? So otherwise unnecessarily collecting the methods. As I suggested in the previous comment, I would investigate restructuring the alright here.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_93fe26d3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "Can you add a test case to ensure that it will not complaint for the private methods defined in the parent with the same name?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_73784a97",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "This will unnecessarily copy the array, you can use Arrays.equals instead.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_38ff5117",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "ImmutableSet.of() ? (and below)",
+      "range": {
+        "startLine": 678,
+        "startChar": 13,
+        "endLine": 678,
+        "endChar": 26
+      },
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_f36d5a8d",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "The comment is not very clear. Can you update it?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_135916ec",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T21:23:05Z",
+      "side": 1,
+      "message": "Maybe and old comment? These are all bad references.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

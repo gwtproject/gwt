@@ -3387,7 +3387,7 @@ public class GwtAstBuilder {
         char[] localName = binding.constantPoolName();
         name = new String(localName).replace('/', '.');
       } else {
-        name = JdtUtil.sourceNameFromNamesArray(binding.compoundName);
+        name = JdtUtil.asDottedString(binding.compoundName);
       }
       name = intern(name);
       JDeclaredType type;

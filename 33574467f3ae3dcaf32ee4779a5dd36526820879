@@ -1,0 +1,354 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08adab_fd9beb61",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/GeneratedClassnameTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": ":: -\u003e #",
+      "range": {
+        "startLine": 20,
+        "startChar": 35,
+        "endLine": 20,
+        "endChar": 37
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_1da7df9e",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/AfterAssimilate.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra spaces",
+      "range": {
+        "startLine": 20,
+        "startChar": 84,
+        "endLine": 20,
+        "endChar": 86
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_9d950f25",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/DeclaresGenericInnerInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 19,
+        "startChar": 68,
+        "endLine": 19,
+        "endChar": 69
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_7d7b7b4c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/DefaultClass.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 19,
+        "startChar": 19,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_5d78b74d",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/Derived.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 19,
+        "startChar": 44,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_3d8503f2",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/DerivedInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 19,
+        "startChar": 23,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_9d6cef8e",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/ExtendsGenericOuter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "missing \u003cp\u003e ?",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 2
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_dd726769",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/ExtendsGenericOuter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "checkstlye doesn\u0027t complain about this?",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 6
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_fd9e4b0a",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/mediatortest/ReferencesParameterizedTypeBeforeItsGenericFormHasBeenProcessed.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "Ok, I\u0027m going to give up commenting on this :)\nYou are inconsistent in spacing here. Actually the best is to put it into new line or prefix it to the paragraphed text.",
+      "range": {
+        "startLine": 19,
+        "startChar": 58,
+        "endLine": 19,
+        "endChar": 61
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_3d5ce3db",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/typemodel/test/CB.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_ddadc76c",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/typemodel/test/GenericClass.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "As you already touched can you fix the format",
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_9db74fb7",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/typemodel/test/GenericClassWithDependentTypeBounds.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 27,
+        "startChar": 73,
+        "endLine": 27,
+        "endChar": 74
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_1dc47f2b",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "remove instead?",
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_5de1d7b1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/gflow/CfgAnalysisTestBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 34,
+        "startChar": 66,
+        "endLine": 34,
+        "endChar": 67
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_7deffb99",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsToStringGenerationVisitorAccuracyTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "add empty line before",
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_5d1317e6",
+        "filename": "eclipse/settings/code-style/gwt-checkstyle.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T00:29:12Z",
+      "side": 1,
+      "message": "extra space (and below)",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

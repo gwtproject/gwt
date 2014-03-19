@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcfbbdcb_b80341da",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T19:33:13Z",
+      "side": 1,
+      "message": "maybe expand this function description to account for the new behavior in this function",
+      "range": {
+        "startLine": 282,
+        "startChar": 5,
+        "endLine": 282,
+        "endChar": 66
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_d80efd03",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T19:33:13Z",
+      "side": 1,
+      "message": "it seems like this log output will sometimes be lieing if !binding.isAllowedValue(newValue) ?",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 90
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_986c058f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T19:33:13Z",
+      "side": 1,
+      "message": "i\u0027m uncomfortable with the code knowing about the contents of specific binding properties.\n\ncan you add a TODO to replace this with something more general purpose?",
+      "range": {
+        "startLine": 308,
+        "startChar": 8,
+        "endLine": 308,
+        "endChar": 54
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

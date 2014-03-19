@@ -53,6 +53,75 @@
     },
     {
       "key": {
+        "uuid": "fcfbbdcb_c7a3c04e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "If SAMs are not going to be in this cl, please remove.",
+      "range": {
+        "startLine": 54,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 3
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_a7a8c42b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "Move this part to the patch that will implement SAMs.",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 9
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_6793ecff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "Move this to the patch that will introduce SAMs.",
+      "range": {
+        "startLine": 1359,
+        "startChar": 0,
+        "endLine": 1379,
+        "endChar": 9
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c08adab_af09bac3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 28
@@ -64,6 +133,75 @@
       "writtenOn": "2014-03-19T01:58:20Z",
       "side": 1,
       "message": "This should be gone right? Perhaps add a test case to verify calling super constructors are not supported?",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_4790f0f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "Move this to the patch that will implement SAMs.",
+      "range": {
+        "startLine": 1545,
+        "startChar": 2,
+        "endLine": 1573,
+        "endChar": 5
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_279df408",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "Maybe replace here by JsExport.class.getCanonicalName()",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 118
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_079af810",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T11:35:46Z",
+      "side": 1,
+      "message": "remove extra space.",
+      "range": {
+        "startLine": 126,
+        "startChar": 10,
+        "endLine": 126,
+        "endChar": 11
+      },
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

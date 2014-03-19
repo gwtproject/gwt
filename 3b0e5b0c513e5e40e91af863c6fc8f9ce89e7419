@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_bf39d7ed",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_33f89294",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_d326de46",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T21:23:05Z",
       "side": 1,
       "message": "The best practice for utility classes is to make it final and include a private default constructor. However, you can ignore this if the rest of the code is not following it.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4209dd_df513b2b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_d326de46",
       "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_3f3dc7cb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "done with joiner.",
+      "parentUuid": "fcfbbdcb_339d3209",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_133fd635",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-19T21:23:05Z",
       "side": 1,
       "message": "nit: one other common pattern is to avoid the if in the loop:\n\n StringBuffer result \u003d new StringBuffer();\n if (i \u003e 0) {\n   result.append(name[0]);\n }\n for (int i \u003d 1; i \u003c name.length; i++) {\n    result.append(\u0027.\u0027).append(name[i]);\n }\n return result.toString();",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4209dd_bf8b175a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_133fd635",
       "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_5f91ab84",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_53778e15",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_98c1a5d3",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2014-03-19T21:23:05Z",
       "side": 1,
       "message": "I thought this has the highest precedence in Java. Can you add tests to verify we are following exact java semantics for precedency of class resolving?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4209dd_bff1d7bc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "This one has the lowest. \n\nJLS 6.4.1 \"A type-import-on-demand declaration never causes any other declaration to be shadowed.\"\n\nBut you are right this implementation might differ from Java in subtle ways. Let me revisit this to follow JLS 6.4 more closely.",
+      "parentUuid": "fcfbbdcb_98c1a5d3",
       "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_7fd4af0c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Will do in a follow up.",
+      "parentUuid": "fcfbbdcb_53754e9b",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_33cd32a3",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 11
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_3fde272d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "fcfbbdcb_33cd32a3",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_93fe26d3",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 11
@@ -149,6 +293,24 @@
       "writtenOn": "2014-03-19T21:23:05Z",
       "side": 1,
       "message": "Can you add a test case to ensure that it will not complaint for the private methods defined in the parent with the same name?",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4209dd_df093bfe",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "fcfbbdcb_93fe26d3",
       "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -212,6 +374,24 @@
     },
     {
       "key": {
+        "uuid": "5c4209dd_1f0ec34f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_f36d5a8d",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_135916ec",
         "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
         "patchSetId": 11
@@ -223,6 +403,24 @@
       "writtenOn": "2014-03-19T21:23:05Z",
       "side": 1,
       "message": "Maybe and old comment? These are all bad references.",
+      "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4209dd_3f0b8740",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-19T22:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_135916ec",
       "revId": "3b0e5b0c513e5e40e91af863c6fc8f9ce89e7419",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fcfbbdcb_d8addd6c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-19T19:53:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_b80341da",
+      "range": {
+        "startLine": 282,
+        "startChar": 5,
+        "endLine": 282,
+        "endChar": 66
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_d80efd03",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "fcfbbdcb_78e4a9c3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-19T19:53:21Z",
+      "side": 1,
+      "message": "I think it\u0027s clear in context. Example:\n\nbinding: user.agent\u003dsafari\nbinding: compiler.useSourceMaps\u003dtrue\n   [WARN] property \u0027compiler.useSourceMaps\u0027 cannot be set to \u0027true\u0027\n   allowed values: false\n   recovered with compiler.useSourceMaps\u003dfalse\nbinding: locale\u003den\n   [WARN] property \u0027locale\u0027 cannot be set to \u0027en\u0027\n   allowed values: ar, en_US, ru, zh_CN\n   recovered with locale\u003den_US",
+      "parentUuid": "fcfbbdcb_d80efd03",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 90
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_986c058f",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2014-03-19T19:33:13Z",
       "side": 1,
       "message": "i\u0027m uncomfortable with the code knowing about the contents of specific binding properties.\n\ncan you add a TODO to replace this with something more general purpose?",
+      "range": {
+        "startLine": 308,
+        "startChar": 8,
+        "endLine": 308,
+        "endChar": 54
+      },
+      "revId": "67556f22ba5f90eae71e8fdd2ba53b708c747b52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfbbdcb_b81b4101",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-19T19:53:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_986c058f",
       "range": {
         "startLine": 308,
         "startChar": 8,

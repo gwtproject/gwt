@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08adab_cf7f4ef0",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T01:59:33Z",
+      "side": 1,
+      "message": "can you replace this for loop with:\noriginalImportsByCud.putAll(decl, decl.imports);\n?",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 62
+      },
+      "revId": "01529d47534026dbd8e83599270ba0ecc9f787e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_2f3f0a36",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T01:59:33Z",
+      "side": 1,
+      "message": "i think this is vulnerable to false positives?\n\nfor example:\n\"com.google.FooBar\".endsWith(\"Bar\")\n\nditto for similar checks below",
+      "range": {
+        "startLine": 229,
+        "startChar": 9,
+        "endLine": 229,
+        "endChar": 45
+      },
+      "revId": "01529d47534026dbd8e83599270ba0ecc9f787e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_2f682a4d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T01:59:33Z",
+      "side": 1,
+      "message": "blank line here to match the others",
+      "range": {
+        "startLine": 233,
+        "startChar": 7,
+        "endLine": 234,
+        "endChar": 5
+      },
+      "revId": "01529d47534026dbd8e83599270ba0ecc9f787e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_af5bfabf",
+        "filename": "dev/core/test/com/google/gwt/dev/js/TokenStreamTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T01:59:33Z",
+      "side": 1,
+      "message": "in the last couple patches you replaced this with:\n@Foo::bar() syntax right?\n\nif so you should probably provide an example of it here",
+      "range": {
+        "startLine": 70,
+        "startChar": 18,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "01529d47534026dbd8e83599270ba0ecc9f787e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -349,6 +349,29 @@
       "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c0da9ba_0aa0bb0b",
+        "filename": "user/super/com/google/gwt/safehtml/super/com/google/gwt/safehtml/shared/SafeUriHostedModeUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-19T00:31:01Z",
+      "side": 1,
+      "message": "name is wrong",
+      "range": {
+        "startLine": 21,
+        "startChar": 36,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "33574467f3ae3dcaf32ee4779a5dd36526820879",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

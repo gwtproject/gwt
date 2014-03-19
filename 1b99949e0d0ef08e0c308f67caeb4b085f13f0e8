@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08adab_6f5e22b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 28
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "Pls fix commit msg.",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_2f826aea",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "Perhaps use ImmutableMap.Builder in the static initializer instead?",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_8f627697",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "You said you are going to add void earlier.\n\nAlso is this better to be part of this patch or the one introduces APT?",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_af09bac3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "This should be gone right? Perhaps add a test case to verify calling super constructors are not supported?",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_cfeceee8",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/PrototypeOfJsInterface.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "Line over 100 chars",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_6f49824f",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/PrototypeOfJsInterface.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "you missed this one.",
+      "range": {
+        "startLine": 28,
+        "startChar": 27,
+        "endLine": 28,
+        "endChar": 32
+      },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_efa3324e",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "Can you make @JsInterface hidden behind a flag in this or an immediate follow up patch? We should be careful this is not used in google3 yet (other than the one that you\u0027re intending to use).",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_8f16f6d4",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "TODO: Add test cases for property overriding of @JsProperty methods in java object",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c08adab_2f0dcac1",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-19T01:58:20Z",
+      "side": 1,
+      "message": "TODO: Add test case for following:\n\n\ninterface ANonJsInterface {\n void methodA()\n}\n\ninterface AJsInterface {\n void methodA()\n}\n\nclass MyClass implements ANonJsInterface, AJsInterface {\n  void methodA() { ... }\n}\n\nverify methodA() is dispatched properly from both interfaces.\n\n\nAlso please add a similar test case but this time make methodA implemented in parent JS class.",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

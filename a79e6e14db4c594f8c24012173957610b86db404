@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c30f57d_a5bea8b3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-20T17:40:07Z",
+      "side": 1,
+      "message": "is there some reason this chunk was moved to before the unresolvedSimple and unresolvedQualified collecting loops?",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 51
+      },
+      "revId": "a79e6e14db4c594f8c24012173957610b86db404",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c30f57d_85784c4f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-20T17:40:07Z",
+      "side": 1,
+      "message": "// The above restriction checks may have recorded more errors.",
+      "range": {
+        "startLine": 162,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 55
+      },
+      "revId": "a79e6e14db4c594f8c24012173957610b86db404",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c30f57d_c595e423",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-20T17:40:07Z",
+      "side": 1,
+      "message": "// Only construct the GWT AST if the JDT output is still valid.",
+      "range": {
+        "startLine": 163,
+        "startChar": 14,
+        "endLine": 166,
+        "endChar": 22
+      },
+      "revId": "a79e6e14db4c594f8c24012173957610b86db404",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c30f57d_c56c0490",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationStateBuilderRegressionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-20T17:40:07Z",
+      "side": 1,
+      "message": "just \"CompilationStateBuilderTest\"",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 50
+      },
+      "revId": "a79e6e14db4c594f8c24012173957610b86db404",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c30f57d_05ae7c68",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationStateBuilderRegressionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-20T17:40:07Z",
+      "side": 1,
+      "message": "nice tests",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 5
+      },
+      "revId": "a79e6e14db4c594f8c24012173957610b86db404",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c642d9a_880377da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-20T23:05:17Z",
+      "side": 1,
+      "message": "Can you add following line here:\n Bug: issue 7876",
+      "revId": "7466b9f1c63f815c55aa161015a187753811dc13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

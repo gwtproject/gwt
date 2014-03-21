@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cee8935_f3c3f847",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-21T17:49:29Z",
+      "side": 1,
+      "message": "isn\u0027t this supposed to be \"class Buggy extends Super {\" ?",
+      "range": {
+        "startLine": 1141,
+        "startChar": 9,
+        "endLine": 1141,
+        "endChar": 24
+      },
+      "revId": "2fc79dd25a8e5ee4deb7a01d051ea82d695fea61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_53b0e4d5",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-21T17:49:29Z",
+      "side": 1,
+      "message": "i don\u0027t believe volatile is changing access privilege on this property, why is it mentioned?",
+      "range": {
+        "startLine": 1149,
+        "startChar": 11,
+        "endLine": 1149,
+        "endChar": 19
+      },
+      "revId": "2fc79dd25a8e5ee4deb7a01d051ea82d695fea61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

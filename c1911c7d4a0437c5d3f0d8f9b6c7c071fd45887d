@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcfc9dee_7ca4d9c9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2840,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-21T01:29:46Z",
+      "side": 1,
+      "message": "Nice.",
+      "range": {
+        "startLine": 2836,
+        "startChar": 8,
+        "endLine": 2840,
+        "endChar": 9
+      },
+      "revId": "c1911c7d4a0437c5d3f0d8f9b6c7c071fd45887d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfc9dee_5ca11db8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReboundTypeRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-21T01:29:46Z",
+      "side": 1,
+      "message": "All this inGwtClass seems very hacky; I guess it is ok for now.",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "c1911c7d4a0437c5d3f0d8f9b6c7c071fd45887d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

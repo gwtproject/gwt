@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cee8935_9fdd5388",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "Perhaps re-write as:\n\n List\u003cJDeclaredType\u003e types \u003d cud.compilationResult().hasErrors() ? ImmutableList.of()\n    : astBuilder.process(cud, builder.getSourceMapPath(), artificialRescues, jsniMethods, jsniRefs);",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_7f0e8f50",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "wrap setClasses?",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_3f1fe774",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "Use Joiner instead?",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_5f262bca",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "nit: pls move to top or bottom",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_1f75c39c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "nit: dot at the end",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_9f155327",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "Why an immediate form of the String is interned? Next line replaces it anyway? What is the advantage?",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_1f22e387",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "String is not interned here. Perhaps setClassName method itself  should do the interning?",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_9f3c33a7",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "nit: ImmutableSet.Builder is alternative here",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cee8935_3ffec783",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-21T00:17:55Z",
+      "side": 1,
+      "message": "Can you add at least manually test that this is working as expected?",
+      "revId": "30688ff4ce6e86b08a7863e9c68cb04e04384dd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

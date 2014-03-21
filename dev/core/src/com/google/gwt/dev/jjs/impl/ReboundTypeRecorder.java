@@ -31,11 +31,24 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import java.util.Set;
 
 /**
- * Records all rebinds in an AST that has not been unified.
+ * Records all rebinds in an AST that has not been unified.<br />
+ *
+ * Normally it is an error for compiled code to call GWT.create() and pass an argument that is not a
+ * class literal. But the GWT.java class itself does this itself for purpose of Hosted Mode
+ * delegation and that particular usage is detected and allowed.
  */
 public class ReboundTypeRecorder {
 
   private class ReboundTypeVisitor extends JVisitor {
+    private boolean inGwtClass = false;
+
+    @Override
+    public boolean visit(JDeclaredType x, Context ctx) {
+      inGwtClass = x.getName().equals("com.google.gwt.core.client.GWT")
+          || x.getName().equals("com.google.gwt.core.shared.GWT");
+      return super.visit(x, ctx);
+    }
+
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
@@ -43,6 +56,14 @@ public class ReboundTypeRecorder {
       if (GWT_CREATE_METHOD_SIGNATURES.contains(methodSignature)) {
         JExpression classLiteralArgument = x.getArgs().get(0);
         if (!(classLiteralArgument instanceof JClassLiteral)) {
+          if (inGwtClass) {
+            // The GWT.java class itself calls GWT.crete() and passes and argument that is not a
+            // class literal and does so for purpose of Hosted Mode delegation. This particular
+            // usage needs to be ignored.
+            return;
+          }
+          // It is an error for compiled code to call GWT.create() and pass an argument that is not
+          // a class literal.
           throw new InternalCompilerException(
               "Only class literals may be used as arguments to GWT.create()");
         }

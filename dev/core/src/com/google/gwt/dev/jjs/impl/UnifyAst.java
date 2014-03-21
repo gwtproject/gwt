@@ -285,11 +285,16 @@ public class UnifyAst {
         assert errorsFound;
         return;
       }
+
+      String enclosingTypeName = currentMethod.getEnclosingType().getName();
+      boolean inGwtClass = enclosingTypeName.equals("com.google.gwt.core.client.GWT")
+          || enclosingTypeName.equals("com.google.gwt.core.shared.GWT");
+
       if (magicMethodCalls.contains(target)) {
         if (gwtDebuggerMethods.contains(target)) {
           return; // handled in endVisit for JExpressionStatement
         }
-        JExpression result = handleMagicMethodCall(x);
+        JExpression result = handleMagicMethodCall(x, inGwtClass);
         if (result == null) {
           // Error of some sort.
           result = JNullLiteral.INSTANCE;
@@ -406,10 +411,18 @@ public class UnifyAst {
       return !magicMethodCalls.contains(target);
     }
 
-    private JExpression createRebindExpression(JMethodCall gwtCreateCall) {
+    private JExpression createRebindExpression(JMethodCall gwtCreateCall, boolean inGwtClass) {
       assert (gwtCreateCall.getArgs().size() == 1);
       JExpression arg = gwtCreateCall.getArgs().get(0);
       if (!(arg instanceof JClassLiteral)) {
+        if (inGwtClass) {
+          // The GWT.java class itself calls GWT.crete() and passes and argument that is not a
+          // class literal and does so for purpose of Hosted Mode delegation. This particular
+          // usage needs to be ignored.
+          return null;
+        }
+        // It is an error for compiled code to call GWT.create() and pass an argument that is not
+        // a class literal.
         error(gwtCreateCall, "Only class literals may be used as arguments to GWT.create()");
         return null;
       }
@@ -517,11 +530,11 @@ public class UnifyAst {
       }
     }
 
-    private JExpression handleMagicMethodCall(JMethodCall x) {
+    private JExpression handleMagicMethodCall(JMethodCall x, boolean inGwtClass) {
       JMethod target = x.getTarget();
       String sig = target.getEnclosingType().getName() + '.' + target.getSignature();
       if (GWT_CREATE.equals(sig) || OLD_GWT_CREATE.equals(sig)) {
-        return createRebindExpression(x);
+        return createRebindExpression(x, inGwtClass);
       } else if (IMPL_GET_NAME_OF.equals(sig)) {
         return handleImplNameOf(x);
       }
@@ -541,7 +554,6 @@ public class UnifyAst {
   private static final String GWT_DEBUGGER_SHARED = "com.google.gwt.core.shared.GWT.debugger()V";
 
   private static final String GWT_DEBUGGER_CLIENT = "com.google.gwt.core.client.GWT.debugger()V";
-
 
   private static final String GWT_IS_CLIENT = "com.google.gwt.core.shared.GWT.isClient()Z";
 
@@ -693,9 +705,9 @@ public class UnifyAst {
     // If this is a library compile.
     if (!compilerContext.shouldCompileMonolithic()) {
       // Trace execution from all types supplied as source and resolve references.
-      Set<String> sourceNames = ImmutableSet.copyOf(compiledClassesBySourceName.keySet());
-      for (String sourceTypeName : sourceNames) {
-        JDeclaredType type = findType(sourceTypeName, sourceNameBasedTypeLocator);
+      Set<String> internalNames = ImmutableSet.copyOf(compiledClassesByInternalName.keySet());
+      for (String internalName : internalNames) {
+        JDeclaredType type = findType(internalName, internalNameBasedTypeLocator);
         instantiate(type);
         for (JField field : type.getFields()) {
           flowInto(field);
@@ -800,14 +812,16 @@ public class UnifyAst {
     compilerContext.getUnitCache().add(referencedCompilationUnit);
     compilationState.addReferencedCompilationUnits(logger, Lists.create(referencedCompilationUnit));
     // Record the types in the JProgram but do *not* flow into them and resolve their internal
-    // references. There's no need since they're not part of this library.
-    for (JDeclaredType referenceOnlyType : referencedCompilationUnit.getTypes()) {
+    // references. There's no need since they're not part of this library. It's important to call
+    // getTypes() only ONCE since each call returns a new copy.
+    List<JDeclaredType> types = referencedCompilationUnit.getTypes();
+    for (JDeclaredType referenceOnlyType : types) {
       program.addType(referenceOnlyType);
       program.addReferenceOnlyType(referenceOnlyType);
     }
     // Flow into the signature of each contained method, so that method call references from
     // inside this library to functions on these external types can resolve.
-    for (JDeclaredType t : referencedCompilationUnit.getTypes()) {
+    for (JDeclaredType t : types) {
       for (JMethod method : t.getMethods()) {
         flowInto(method);
       }

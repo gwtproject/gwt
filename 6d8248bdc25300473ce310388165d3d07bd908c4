@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc573db2_84904635",
+        "filename": "user/src/com/google/gwt/i18n/client/constants/DateTimeConstantsImpl_az.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-21T14:00:08Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we update DateTimeFormatInfoImpl_az.java ?\nhttps://gwt.googlesource.com/gwt/+/master/user/src/com/google/gwt/i18n/client/impl/cldr/DateTimeFormatInfoImpl_az.java",
+      "revId": "6d8248bdc25300473ce310388165d3d07bd908c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc573db2_a4954224",
+        "filename": "user/src/com/google/gwt/i18n/client/constants/DateTimeConstantsImpl_az_Cyrl.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-21T14:00:08Z",
+      "side": 1,
+      "message": "Update DateTimeFormatInfoImpl_az_Cyrl.java ?",
+      "revId": "6d8248bdc25300473ce310388165d3d07bd908c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc573db2_447b2e4c",
+        "filename": "user/src/com/google/gwt/i18n/client/constants/DateTimeConstantsImpl_be.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-21T14:00:08Z",
+      "side": 1,
+      "message": "Change DateTimeFormatInfoImpl_be.java?",
+      "revId": "6d8248bdc25300473ce310388165d3d07bd908c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

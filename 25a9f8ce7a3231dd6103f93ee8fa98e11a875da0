@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ce98d2a_a072ba67",
+        "filename": "user/src/com/google/gwt/i18n/client/constants/DateTimeConstantsImpl_tr.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-21T14:00:08Z",
+      "side": 0,
+      "message": "If CLDR specification is correct we should close the issue #7206",
+      "revId": "25a9f8ce7a3231dd6103f93ee8fa98e11a875da0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ce98d2a_c086de03",
+        "filename": "user/src/com/google/gwt/i18n/client/constants/NumberConstantsImpl_es_PE.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-21T14:00:08Z",
+      "side": 0,
+      "message": "See issue #8078, it seems that in peru they use comma for thousand and dot for decimal see http://lh.2xlibre.net/locale/es_PE/.\n\nSee comment from Thomas, he says it should be fixed in version 22, but this is 24 and seems not be fixed.",
+      "revId": "25a9f8ce7a3231dd6103f93ee8fa98e11a875da0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

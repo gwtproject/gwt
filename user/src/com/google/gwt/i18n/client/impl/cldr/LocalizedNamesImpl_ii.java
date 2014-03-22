@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,10 +18,10 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6443 $
+//  cldrVersion=25
+//  number=$Revision: 9061 $
 //  type=root
-//  date=$Date: 2012-01-25 14:51:07 -0500 (Wed, 25 Jan 2012) $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 
 
 /**
@@ -281,6 +281,7 @@ public class LocalizedNamesImpl_ii extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XK",
         "YE",
         "YT",
         "ZA",

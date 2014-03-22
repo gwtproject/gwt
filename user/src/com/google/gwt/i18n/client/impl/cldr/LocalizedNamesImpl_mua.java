@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,9 +18,9 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  cldrVersion=25
+//  number=$Revision: 9287 $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 //  type=root
 
 
@@ -180,7 +180,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "ST",
         "SN",
         "VG",
-        "CS",
         "CI",
         "SL",
         "SG",
@@ -287,6 +286,7 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "UZ",
         "VA",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "NZ",
@@ -342,7 +342,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
     namesMap.put("CN", "syiŋ");
     namesMap.put("CO", "kolombiya");
     namesMap.put("CR", "kosta Rika");
-    namesMap.put("CS", "Serbiya ne Montenegro");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "kap ma laŋne");
     namesMap.put("CY", "Syipriya");
@@ -569,7 +568,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "CN": "syiŋ",
         "CO": "kolombiya",
         "CR": "kosta Rika",
-        "CS": "Serbiya ne Montenegro",
         "CU": "Kuba",
         "CV": "kap ma laŋne",
         "CY": "Syipriya",

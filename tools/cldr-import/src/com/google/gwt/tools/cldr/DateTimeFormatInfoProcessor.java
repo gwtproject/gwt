@@ -540,6 +540,23 @@ public class DateTimeFormatInfoProcessor extends Processor {
     generateDayNumber(pw, locale, "weekendEnd", "weekendEnd");
     generateDayNumber(pw, locale, "weekendStart", "weekendStart");
 
+    if (locale.isDefault()) {
+      // TODO(manolo): this has been taken from DateTimeFormatCreator.
+      // Why do we have two ways to generate the same class?
+      pw.println();
+      pw.println("  public String dateFormat() {");
+      pw.println("    return dateFormatMedium();");
+      pw.println("  }");
+      pw.println();
+      pw.println("  public String dateTime(String timePattern, String datePattern) {");
+      pw.println("    return datePattern + \" \" + timePattern;");
+      pw.println("  }");
+      pw.println();
+      pw.println("  public String timeFormat() {");
+      pw.println("    return timeFormatMedium();");
+      pw.println("  }");
+    }
+
     pw.println("}");
     pw.close();
   }

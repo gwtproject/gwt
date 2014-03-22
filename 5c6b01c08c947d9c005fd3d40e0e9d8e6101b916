@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cb2c15a_f13128cd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-22T02:02:18Z",
+      "side": 1,
+      "message": "Don\u0027t get mad at me but I somehow didn\u0027t see this code in my review :)\n\nWe should probably skip not only private but all non-public methods from parent classes.",
+      "revId": "5c6b01c08c947d9c005fd3d40e0e9d8e6101b916",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

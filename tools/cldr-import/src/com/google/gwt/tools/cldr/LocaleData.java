@@ -348,7 +348,13 @@ public class LocaleData {
     Map<String, String> map = getMap(category, locale);
     CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
     XPathParts parts = new XPathParts();
-    parts.set(cldr.getFullXPath(path));
+    String s = cldr.getFullXPath(path);
+    if (s == null) {
+      System.err.println("LocaleData.addAttributeEntry: unable to getFullXPath of '" + path
+          + "' locale=" + locale);
+      return;
+    }
+    parts.set(s);
     Map<String, String> attr = parts.findAttributes(tag);
     if (attr == null) {
       return;
@@ -386,6 +392,7 @@ public class LocaleData {
   }
 
   public void addDateTimeFormatEntries(String group, Factory cldrFactory) {
+    // TODO(manolo): for some reason this always fails:
     addAttributeEntries(group, cldrFactory, "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/"
         + group + "Formats/default", "default", "default", "choice");
     addDateTimeFormatEntries(group, "full", cldrFactory);

@@ -16,6 +16,24 @@
       "revId": "5c6b01c08c947d9c005fd3d40e0e9d8e6101b916",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_513f5434",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T04:11:44Z",
+      "side": 1,
+      "message": "I am not getting mad. I\u0027d like to get it perfect the first time, but I prefer perfect to sooner :)\n\nI see I missed also skipping package protected. I\u0027ll make a follow up patch for that.",
+      "parentUuid": "9cb2c15a_f13128cd",
+      "revId": "5c6b01c08c947d9c005fd3d40e0e9d8e6101b916",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

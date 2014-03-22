@@ -16,6 +16,23 @@
       "revId": "ba03092ef7404d5e19dc19b6dd1c5417622b63a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_918a5cbf",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStackEmulatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T04:51:13Z",
+      "side": 1,
+      "message": "This does not look correct, it should have restored it to EntryPoint.java:6",
+      "revId": "ba03092ef7404d5e19dc19b6dd1c5417622b63a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

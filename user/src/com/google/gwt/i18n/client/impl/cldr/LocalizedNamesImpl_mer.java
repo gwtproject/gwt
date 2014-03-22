@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,9 +18,9 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  cldrVersion=24
+//  number=$Revision: 9287 $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 //  type=root
 
 
@@ -234,7 +234,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "RS",
         "PS",
         "RW",
-        "CS",
         "SM",
         "WS",
         "AS",
@@ -288,6 +287,7 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -330,7 +330,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
     namesMap.put("CM", "Kameruni");
     namesMap.put("CO", "Kolombia");
     namesMap.put("CR", "Kostarika");
-    namesMap.put("CS", "Sabia na Montenegoro");
     namesMap.put("CU", "Kiuba");
     namesMap.put("CV", "Kepuvede");
     namesMap.put("CY", "Caipurasi");
@@ -396,7 +395,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
     namesMap.put("MC", "Monako");
     namesMap.put("MG", "Madagasika");
     namesMap.put("MH", "Aĩrandi cia Marshal");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanima");
     namesMap.put("MP", "Aĩrandi cia Mariana ya nothi");
     namesMap.put("MQ", "Martiniki");
@@ -508,7 +506,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "CM": "Kameruni",
         "CO": "Kolombia",
         "CR": "Kostarika",
-        "CS": "Sabia na Montenegoro",
         "CU": "Kiuba",
         "CV": "Kepuvede",
         "CY": "Caipurasi",
@@ -574,7 +571,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "MC": "Monako",
         "MG": "Madagasika",
         "MH": "Aĩrandi cia Marshal",
-        "MK": "Macedonia",
         "MM": "Myanima",
         "MP": "Aĩrandi cia Mariana ya nothi",
         "MQ": "Martiniki",

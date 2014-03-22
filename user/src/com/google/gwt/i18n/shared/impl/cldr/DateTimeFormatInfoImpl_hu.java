@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,9 +16,9 @@
 package com.google.gwt.i18n.shared.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//   cldrVersion=24
+//  number=$Revision: 9317 $
+//  date=$Date: 2013-09-07 01:00:05 +0200 (Sat, 07 Sep 2013) $
 //  type=root
 
 /**
@@ -45,13 +45,8 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String dateFormatMedium() {
-    return "yyyy.MM.dd.";
-  }
-
-  @Override
   public String dateFormatShort() {
-    return "yyyy.MM.dd.";
+    return "y. MM. dd.";
   }
 
   @Override
@@ -107,7 +102,12 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "M.d.";
+    return "M. d.";
+  }
+
+  @Override
+  public String formatYear() {
+    return "y.";
   }
 
   @Override
@@ -132,12 +132,12 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "y.M.";
+    return "y. M.";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "yyyy.MM.dd.";
+    return "y. MM. dd.";
   }
 
   @Override
@@ -175,24 +175,6 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsNarrow() {
-    return new String[] {
-        "J",
-        "F",
-        "M",
-        "Á",
-        "M",
-        "J",
-        "J",
-        "Á",
-        "Sz",
-        "O",
-        "N",
-        "D"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrowStandalone() {
     return new String[] {
         "J",
         "F",

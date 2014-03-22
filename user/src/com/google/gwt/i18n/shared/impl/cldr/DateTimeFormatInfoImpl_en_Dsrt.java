@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.shared.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6472 Google $
+//   cldrVersion=24
+//  number=$Revision: 9061 $
 //  type=root
-//  date=$Date: 2012-01-27 18:53:35 -0500 (Fri, 27 Jan 2012) $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_Dsrt" locale.
@@ -32,6 +32,46 @@ public class DateTimeFormatInfoImpl_en_Dsrt extends DateTimeFormatInfoImpl_en {
         "𐐈𐐣",
         "𐐑𐐣"
     };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "y MMMM d, EEEE";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "y MMMM d";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "y MMM d";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "y-MM-dd";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
   }
 
   @Override
@@ -127,6 +167,26 @@ public class DateTimeFormatInfoImpl_en_Dsrt extends DateTimeFormatInfoImpl_en {
         "𐐗3",
         "𐐗4"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH:mm";
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.client.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5806 $
+//   cldrVersion=24
+//  number=$Revision: 9061 $
 //  type=root
-//  date=$Date: 2011-05-02 14:42:02 -0400 (Mon, 02 May 2011) $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "eo" locale.
@@ -164,19 +164,6 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
         "ĵaŭdo",
         "vendredo",
         "sabato"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

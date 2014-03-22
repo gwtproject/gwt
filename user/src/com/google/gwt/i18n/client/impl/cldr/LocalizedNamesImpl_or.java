@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,10 +18,10 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
+//  cldrVersion=24
+//  number=$Revision: 9287 $
 //  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 
 
 /**
@@ -46,9 +46,9 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "DG",
         "EA",
         "IC",
-        "SS",
         "SX",
         "TA",
+        "XK",
         "AT",
         "AU",
         "CI",
@@ -155,6 +155,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "ZA",
         "KR",
         "GS",
+        "SS",
         "NF",
         "NO",
         "NE",
@@ -258,7 +259,6 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "LK",
         "AE",
         "RS",
-        "CS",
         "CY",
         "SA",
         "ST",
@@ -384,7 +384,6 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("CN", "ଚିନ୍");
     namesMap.put("CO", "କୋଲମ୍ବିଆ");
     namesMap.put("CR", "କୋଷ୍ଟା ରିକା");
-    namesMap.put("CS", "ସର୍ବିଆ ଏବଂ ମଣ୍ଟେନଗ୍ରୋ");
     namesMap.put("CU", "କ୍ୱିବା");
     namesMap.put("CV", "କେପ୍ ଭର୍ଦେ");
     namesMap.put("CX", "ଖ୍ରୀଷ୍ଟମାସ ଆଇଲ୍ୟାଣ୍ଡ");
@@ -543,6 +542,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("SN", "ସେନେଗାଲ୍");
     namesMap.put("SO", "ସୋମାଲିଆ");
     namesMap.put("SR", "ସୁରିନାମ");
+    namesMap.put("SS", "ଦକ୍ଷିନ ସୁଦାନ");
     namesMap.put("ST", "ସାଓ ଟୋମେ ଏବଂ ପ୍ରିନସିପି");
     namesMap.put("SV", "ଏଲ୍ ସାଲଭାଡୋର୍");
     namesMap.put("SY", "ସିରିଆ");
@@ -673,7 +673,6 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "CN": "ଚିନ୍",
         "CO": "କୋଲମ୍ବିଆ",
         "CR": "କୋଷ୍ଟା ରିକା",
-        "CS": "ସର୍ବିଆ ଏବଂ ମଣ୍ଟେନଗ୍ରୋ",
         "CU": "କ୍ୱିବା",
         "CV": "କେପ୍ ଭର୍ଦେ",
         "CX": "ଖ୍ରୀଷ୍ଟମାସ ଆଇଲ୍ୟାଣ୍ଡ",
@@ -832,6 +831,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "SN": "ସେନେଗାଲ୍",
         "SO": "ସୋମାଲିଆ",
         "SR": "ସୁରିନାମ",
+        "SS": "ଦକ୍ଷିନ ସୁଦାନ",
         "ST": "ସାଓ ଟୋମେ ଏବଂ ପ୍ରିନସିପି",
         "SV": "ଏଲ୍ ସାଲଭାଡୋର୍",
         "SY": "ସିରିଆ",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.shared.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 4123 $
+//   cldrVersion=24
+//  number=$Revision: 9280 $
 //  type=EG
-//  date=$Date: 2009-05-05 19:06:42 -0400 (Tue, 05 May 2009) $
+//  date=$Date: 2013-08-27 20:07:13 +0200 (Tue, 27 Aug 2013) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_EG" locale.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,9 +18,9 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
+//  cldrVersion=24
+//  number=$Revision: 9061 $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 //  type=root
 
 
@@ -246,10 +246,10 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "SI",
         "SO",
         "LK",
-        "SS",
         "ST",
         "US",
         "SD",
+        "SS",
         "CH",
         "SR",
         "SV",
@@ -286,6 +286,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "VI",
         "VN",
         "WF",
+        "XK",
         "YE",
         "YT",
         "ZM",
@@ -349,7 +350,6 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("MA", "Marocco");
     namesMap.put("MD", "Moldavia");
     namesMap.put("MH", "Insulas Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Birmania/Myanmar");
     namesMap.put("MP", "Insulas Marianna del Nord");
     namesMap.put("NC", "Nove Caledonia");
@@ -366,6 +366,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("SB", "Insulas Solomon");
     namesMap.put("SE", "Svedia");
     namesMap.put("SK", "Slovachia");
+    namesMap.put("SS", "Sudan del Sud");
     namesMap.put("SZ", "Swazilandia");
     namesMap.put("TC", "Insulas Turcos e Caicos");
     namesMap.put("TD", "Tchad");
@@ -442,7 +443,6 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "MA": "Marocco",
         "MD": "Moldavia",
         "MH": "Insulas Marshall",
-        "MK": "Macedonia",
         "MM": "Birmania/Myanmar",
         "MP": "Insulas Marianna del Nord",
         "NC": "Nove Caledonia",
@@ -459,6 +459,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "SB": "Insulas Solomon",
         "SE": "Svedia",
         "SK": "Slovachia",
+        "SS": "Sudan del Sud",
         "SZ": "Swazilandia",
         "TC": "Insulas Turcos e Caicos",
         "TD": "Tchad",

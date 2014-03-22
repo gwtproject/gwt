@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.client.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
+//  cldrVersion=24
+//  number=$Revision: 9287 $
 //  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 
 
 /**
@@ -33,13 +33,13 @@ public class LocalizedNamesImpl_en extends LocalizedNamesImpl {
         "US",
         "IN",
         "NG",
-        "GB",
         "PH",
+        "GB",
         "PK",
         "DE",
         "KE",
         "CA",
-        "AU",
+        "ZA",
     };
   }
 }

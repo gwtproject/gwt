@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,10 +18,10 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6472 Google $
+//  cldrVersion=24
+//  number=$Revision: 9061 $
 //  type=root
-//  date=$Date: 2012-01-27 18:53:35 -0500 (Fri, 27 Jan 2012) $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 
 
 /**
@@ -34,32 +34,22 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     return new String[] {
         "AC",
         "BQ",
-        "IC",
-        "CT",
-        "EA",
         "CP",
         "CW",
         "DG",
-        "NQ",
-        "FQ",
-        "JT",
-        "MI",
-        "VD",
-        "PC",
-        "PZ",
+        "EA",
+        "IC",
         "LC",
-        "SX",
         "SS",
+        "SX",
         "TA",
         "TN",
-        "PU",
         "UA",
         "VE",
-        "WK",
+        "XK",
         "EG",
         "ET",
         "TL",
-        "DD",
         "AR",
         "AM",
         "OM",
@@ -102,7 +92,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "GB",
         "US",
         "AE",
-        "SU",
         "YE",
         "EU",
         "UY",
@@ -111,7 +100,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "HK",
         "HM",
         "HU",
-        "YD",
         "PL",
         "PN",
         "PY",
@@ -234,7 +222,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "SN",
         "CF",
         "RS",
-        "CS",
         "SO",
         "WS",
         "CY",
@@ -277,7 +264,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "MS",
         "MN",
         "MZ",
-        "FX",
         "MX",
         "MG",
         "MK",
@@ -294,7 +280,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "NR",
         "NC",
         "NZ",
-        "NT",
         "NI",
         "NL",
         "AN",
@@ -392,13 +377,11 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("CN", "𐐕𐐴𐑌𐐲");
     namesMap.put("CO", "𐐗𐐲𐑊𐐲𐑋𐐺𐐨𐐲");
     namesMap.put("CR", "𐐗𐐱𐑅𐐻𐐲 𐐡𐐨𐐿𐐲");
-    namesMap.put("CS", "𐐝𐐲𐑉𐐺𐐨𐐲 𐐰𐑌𐐼 𐐣𐐪𐑌𐐲𐑌𐐨𐑀𐑉𐐬");
     namesMap.put("CU", "𐐗𐐷𐐭𐐺𐐲");
     namesMap.put("CV", "𐐗𐐩𐐹 𐐚𐐯𐑉𐐼𐐨");
     namesMap.put("CX", "𐐗𐑉𐐮𐑅𐑋𐐲𐑅 𐐌𐑊𐐲𐑌𐐼");
     namesMap.put("CY", "𐐝𐐴𐐹𐑉𐐲𐑅");
     namesMap.put("CZ", "𐐕𐐯𐐿 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿");
-    namesMap.put("DD", "𐐀𐑅𐐻 𐐖𐐲𐑉𐑋𐐲𐑌𐐨");
     namesMap.put("DE", "𐐖𐐲𐑉𐑋𐐲𐑌𐐨");
     namesMap.put("DJ", "𐐖𐐲𐐺𐐭𐐼𐐨");
     namesMap.put("DK", "𐐔𐐯𐑌𐑋𐐪𐑉𐐿");
@@ -419,7 +402,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("FM", "𐐣𐐴𐐿𐑉𐐲𐑌𐐨𐑈𐐲");
     namesMap.put("FO", "𐐙𐐯𐑉𐐬 𐐌𐑊𐐲𐑌𐐼𐑆");
     namesMap.put("FR", "𐐙𐑉𐐰𐑌𐑅");
-    namesMap.put("FX", "𐐣𐐯𐐻𐑉𐐲𐐹𐐪𐑊𐐲𐐻𐐲𐑌 𐐙𐑉𐐰𐑌𐑅");
     namesMap.put("GA", "𐐘𐐲𐐺𐐪𐑌");
     namesMap.put("GB", "𐐏𐐭𐑌𐐴𐐻𐐲𐐼 𐐗𐐨𐑍𐐼𐐲𐑋");
     namesMap.put("GD", "𐐘𐑉𐐲𐑌𐐩𐐼𐐲");
@@ -439,7 +421,7 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("GU", "𐐘𐐶𐐪𐑋");
     namesMap.put("GW", "𐐘𐐮𐑌𐐨-𐐒𐐮𐑅𐐵");
     namesMap.put("GY", "𐐘𐐴𐐰𐑌𐐲");
-    namesMap.put("HK", "𐐐𐐬𐑍 𐐗𐐬𐑍");
+    namesMap.put("HK", "𐐐𐐬𐑍 𐐗𐐬𐑍 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲");
     namesMap.put("HM", "𐐐𐐲𐑉𐐼 𐐌𐑊𐐲𐑌𐐼 𐐰𐑌𐐼 𐐣𐐿𐐔𐐱𐑌𐐲𐑊𐐼 𐐌𐑊𐐲𐑌𐐼𐑆");
     namesMap.put("HN", "𐐐𐐪𐑌𐐼𐐭𐑉𐐲𐑅");
     namesMap.put("HR", "𐐗𐑉𐐬𐐩𐑇𐐲");
@@ -491,7 +473,7 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("ML", "𐐣𐐪𐑊𐐨");
     namesMap.put("MM", "𐐣𐐨𐐲𐑌𐑋𐐪𐑉");
     namesMap.put("MN", "𐐣𐐪𐑍𐑀𐐬𐑊𐐨𐐲");
-    namesMap.put("MO", "𐐣𐐲𐐿𐐵");
+    namesMap.put("MO", "𐐣𐐲𐐿𐐵 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲");
     namesMap.put("MP", "𐐤𐐱𐑉𐑄𐐲𐑉𐑌 𐐣𐐰𐑉𐐨𐐱𐑌𐐲 𐐌𐑊𐐲𐑌𐐼𐑆");
     namesMap.put("MQ", "𐐣𐐪𐑉𐐻𐑌𐐨𐐿");
     namesMap.put("MR", "𐐣𐐱𐑉𐐲𐐻𐐩𐑌𐐨𐐲");
@@ -513,7 +495,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("NO", "𐐤𐐱𐑉𐐶𐐩");
     namesMap.put("NP", "𐐤𐐩𐐹𐐪𐑊");
     namesMap.put("NR", "𐐤𐐪𐐭𐑉𐐭");
-    namesMap.put("NT", "𐐤𐐭𐐻𐑉𐐲𐑊 𐐞𐐬𐑌");
     namesMap.put("NU", "𐐤𐐷𐐭𐐩");
     namesMap.put("NZ", "𐐤𐐭 𐐞𐐨𐑊𐐲𐑌𐐼");
     namesMap.put("OM", "𐐄𐑋𐐲𐑌");
@@ -554,7 +535,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("SO", "𐐝𐐲𐑋𐐪𐑊𐐨𐐲");
     namesMap.put("SR", "𐐝𐐭𐑉𐐲𐑌𐐪𐑋");
     namesMap.put("ST", "𐐝𐐵 𐐓𐐬𐑋 𐐰𐑌𐐼 𐐑𐑉𐐮𐑌𐐽𐐮𐐹𐐩");
-    namesMap.put("SU", "𐐏𐐭𐑌𐐷𐐲𐑌 𐐲𐑂 𐐝𐐬𐑂𐐨𐐯𐐻 𐐝𐐬𐑇𐐲𐑊𐐮𐑅𐐻 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿𐑅");
     namesMap.put("SV", "𐐇𐑊 𐐝𐐰𐑊𐑂𐐲𐐼𐐱𐑉");
     namesMap.put("SY", "𐐝𐐮𐑉𐐨𐐲");
     namesMap.put("SZ", "𐐝𐐶𐐪𐑆𐐨𐑊𐐰𐑌𐐼");
@@ -586,7 +566,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
     namesMap.put("VU", "𐐚𐐪𐑌𐐳𐐪𐐼𐐭");
     namesMap.put("WF", "𐐎𐐪𐑊𐐮𐑅 𐐰𐑌𐐼 𐐙𐐭𐐻𐐭𐑌𐐲");
     namesMap.put("WS", "𐐝𐐲𐑋𐐬𐐲");
-    namesMap.put("YD", "𐐑𐐨𐐹𐐲𐑊𐑆 𐐔𐐯𐑋𐐲𐐿𐑉𐐰𐐼𐐮𐐿 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿 𐐲𐑂 𐐏𐐯𐑋𐐲𐑌");
     namesMap.put("YE", "𐐏𐐯𐑋𐐲𐑌");
     namesMap.put("YT", "𐐣𐐪𐐷𐐱𐐻");
     namesMap.put("ZA", "𐐝𐐵𐑃 𐐈𐑁𐑉𐐲𐐿𐐲");
@@ -682,13 +661,11 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "CN": "𐐕𐐴𐑌𐐲",
         "CO": "𐐗𐐲𐑊𐐲𐑋𐐺𐐨𐐲",
         "CR": "𐐗𐐱𐑅𐐻𐐲 𐐡𐐨𐐿𐐲",
-        "CS": "𐐝𐐲𐑉𐐺𐐨𐐲 𐐰𐑌𐐼 𐐣𐐪𐑌𐐲𐑌𐐨𐑀𐑉𐐬",
         "CU": "𐐗𐐷𐐭𐐺𐐲",
         "CV": "𐐗𐐩𐐹 𐐚𐐯𐑉𐐼𐐨",
         "CX": "𐐗𐑉𐐮𐑅𐑋𐐲𐑅 𐐌𐑊𐐲𐑌𐐼",
         "CY": "𐐝𐐴𐐹𐑉𐐲𐑅",
         "CZ": "𐐕𐐯𐐿 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿",
-        "DD": "𐐀𐑅𐐻 𐐖𐐲𐑉𐑋𐐲𐑌𐐨",
         "DE": "𐐖𐐲𐑉𐑋𐐲𐑌𐐨",
         "DJ": "𐐖𐐲𐐺𐐭𐐼𐐨",
         "DK": "𐐔𐐯𐑌𐑋𐐪𐑉𐐿",
@@ -709,7 +686,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "FM": "𐐣𐐴𐐿𐑉𐐲𐑌𐐨𐑈𐐲",
         "FO": "𐐙𐐯𐑉𐐬 𐐌𐑊𐐲𐑌𐐼𐑆",
         "FR": "𐐙𐑉𐐰𐑌𐑅",
-        "FX": "𐐣𐐯𐐻𐑉𐐲𐐹𐐪𐑊𐐲𐐻𐐲𐑌 𐐙𐑉𐐰𐑌𐑅",
         "GA": "𐐘𐐲𐐺𐐪𐑌",
         "GB": "𐐏𐐭𐑌𐐴𐐻𐐲𐐼 𐐗𐐨𐑍𐐼𐐲𐑋",
         "GD": "𐐘𐑉𐐲𐑌𐐩𐐼𐐲",
@@ -729,7 +705,7 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "GU": "𐐘𐐶𐐪𐑋",
         "GW": "𐐘𐐮𐑌𐐨-𐐒𐐮𐑅𐐵",
         "GY": "𐐘𐐴𐐰𐑌𐐲",
-        "HK": "𐐐𐐬𐑍 𐐗𐐬𐑍",
+        "HK": "𐐐𐐬𐑍 𐐗𐐬𐑍 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲",
         "HM": "𐐐𐐲𐑉𐐼 𐐌𐑊𐐲𐑌𐐼 𐐰𐑌𐐼 𐐣𐐿𐐔𐐱𐑌𐐲𐑊𐐼 𐐌𐑊𐐲𐑌𐐼𐑆",
         "HN": "𐐐𐐪𐑌𐐼𐐭𐑉𐐲𐑅",
         "HR": "𐐗𐑉𐐬𐐩𐑇𐐲",
@@ -781,7 +757,7 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "ML": "𐐣𐐪𐑊𐐨",
         "MM": "𐐣𐐨𐐲𐑌𐑋𐐪𐑉",
         "MN": "𐐣𐐪𐑍𐑀𐐬𐑊𐐨𐐲",
-        "MO": "𐐣𐐲𐐿𐐵",
+        "MO": "𐐣𐐲𐐿𐐵 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲",
         "MP": "𐐤𐐱𐑉𐑄𐐲𐑉𐑌 𐐣𐐰𐑉𐐨𐐱𐑌𐐲 𐐌𐑊𐐲𐑌𐐼𐑆",
         "MQ": "𐐣𐐪𐑉𐐻𐑌𐐨𐐿",
         "MR": "𐐣𐐱𐑉𐐲𐐻𐐩𐑌𐐨𐐲",
@@ -803,7 +779,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "NO": "𐐤𐐱𐑉𐐶𐐩",
         "NP": "𐐤𐐩𐐹𐐪𐑊",
         "NR": "𐐤𐐪𐐭𐑉𐐭",
-        "NT": "𐐤𐐭𐐻𐑉𐐲𐑊 𐐞𐐬𐑌",
         "NU": "𐐤𐐷𐐭𐐩",
         "NZ": "𐐤𐐭 𐐞𐐨𐑊𐐲𐑌𐐼",
         "OM": "𐐄𐑋𐐲𐑌",
@@ -844,7 +819,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "SO": "𐐝𐐲𐑋𐐪𐑊𐐨𐐲",
         "SR": "𐐝𐐭𐑉𐐲𐑌𐐪𐑋",
         "ST": "𐐝𐐵 𐐓𐐬𐑋 𐐰𐑌𐐼 𐐑𐑉𐐮𐑌𐐽𐐮𐐹𐐩",
-        "SU": "𐐏𐐭𐑌𐐷𐐲𐑌 𐐲𐑂 𐐝𐐬𐑂𐐨𐐯𐐻 𐐝𐐬𐑇𐐲𐑊𐐮𐑅𐐻 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿𐑅",
         "SV": "𐐇𐑊 𐐝𐐰𐑊𐑂𐐲𐐼𐐱𐑉",
         "SY": "𐐝𐐮𐑉𐐨𐐲",
         "SZ": "𐐝𐐶𐐪𐑆𐐨𐑊𐐰𐑌𐐼",
@@ -876,7 +850,6 @@ public class LocalizedNamesImpl_en_Dsrt extends LocalizedNamesImpl_en {
         "VU": "𐐚𐐪𐑌𐐳𐐪𐐼𐐭",
         "WF": "𐐎𐐪𐑊𐐮𐑅 𐐰𐑌𐐼 𐐙𐐭𐐻𐐭𐑌𐐲",
         "WS": "𐐝𐐲𐑋𐐬𐐲",
-        "YD": "𐐑𐐨𐐹𐐲𐑊𐑆 𐐔𐐯𐑋𐐲𐐿𐑉𐐰𐐼𐐮𐐿 𐐡𐐨𐐹𐐲𐐺𐑊𐐮𐐿 𐐲𐑂 𐐏𐐯𐑋𐐲𐑌",
         "YE": "𐐏𐐯𐑋𐐲𐑌",
         "YT": "𐐣𐐪𐐷𐐱𐐻",
         "ZA": "𐐝𐐵𐑃 𐐈𐑁𐑉𐐲𐐿𐐲",

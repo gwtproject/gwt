@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.client.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 4123 $
+//  cldrVersion=24
+//  number=$Revision: 9061 $
 //  type=root
-//  date=$Date: 2009-05-05 19:06:42 -0400 (Tue, 05 May 2009) $
+//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
 
 
 /**
@@ -30,10 +30,6 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
-        "BQ",
-        "CW",
-        "SS",
-        "SX",
         "TT",
         "TR",
         "TC",
@@ -42,6 +38,8 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "BT",
         "CF",
         "CN",
+        "HK",
+        "MO",
         "DK",
         "EC",
         "ER",
@@ -73,6 +71,7 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "NP",
         "BF",
         "BV",
+        "GP",
         "GT",
         "WF",
         "GM",
@@ -117,7 +116,6 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "ZW",
         "AM",
         "AZ",
-        "AX",
         "TZ",
         "NG",
         "VE",
@@ -136,6 +134,7 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "GF",
         "TF",
         "PF",
+        "MF",
         "GI",
         "KE",
         "FI",
@@ -153,33 +152,34 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "GS",
         "AQ",
         "KR",
+        "SS",
         "KZ",
         "KH",
         "TD",
         "BO",
         "KW",
         "CI",
+        "XK",
         "KM",
         "TN",
         "JO",
         "US",
+        "UM",
         "VI",
         "AS",
-        "UM",
         "MR",
         "GB",
         "IO",
         "VG",
         "GH",
         "DG",
-        "HK",
         "CG",
         "CD",
         "CO",
         "CR",
-        "GP",
         "EG",
         "CK",
+        "CW",
         "NO",
         "GG",
         "GL",
@@ -215,7 +215,9 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "VA",
         "MZ",
         "AN",
+        "SX",
         "NL",
+        "BQ",
         "CM",
         "GE",
         "GN",
@@ -231,9 +233,9 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "SN",
         "SC",
         "RS",
-        "CS",
         "TJ",
         "AT",
+        "AX",
         "EE",
         "IE",
         "SG",
@@ -245,10 +247,9 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "IT",
         "BL",
         "VC",
+        "PM",
         "ST",
         "KN",
-        "PM",
-        "MF",
         "SM",
         "SH",
         "CX",
@@ -274,7 +275,6 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
         "LB",
         "MX",
         "JE",
-        "MO",
         "AU",
         "RW",
         "LU",

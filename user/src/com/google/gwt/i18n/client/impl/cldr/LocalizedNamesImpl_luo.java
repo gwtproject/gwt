@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,10 +18,10 @@ package com.google.gwt.i18n.client.impl.cldr;
 import com.google.gwt.core.client.JavaScriptObject;
 
 // DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
+//  cldrVersion=24
+//  number=$Revision: 9287 $
 //  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 
 
 /**
@@ -246,7 +246,6 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "ST",
         "SA",
         "SN",
-        "CS",
         "SC",
         "SL",
         "SG",
@@ -295,6 +294,7 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -309,14 +309,12 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
     namesMap.put("CD", "Democratic Republic of the Congo");
     namesMap.put("CG", "Congo");
     namesMap.put("CI", "Côte d");
-    namesMap.put("CS", "Serbia gi Montenegro");
     namesMap.put("CV", "Cape Verde Islands");
     namesMap.put("FK", "Chuia mar Falkland");
     namesMap.put("KN", "Saint Kitts gi Nevis");
     namesMap.put("KP", "Korea Masawa");
     namesMap.put("KR", "Korea Milambo");
     namesMap.put("MH", "Chuia mar Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
     namesMap.put("NF", "Chuia mar Norfolk");
     namesMap.put("PM", "Saint Pierre gi Miquelon");
@@ -344,14 +342,12 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "CD": "Democratic Republic of the Congo",
         "CG": "Congo",
         "CI": "Côte d",
-        "CS": "Serbia gi Montenegro",
         "CV": "Cape Verde Islands",
         "FK": "Chuia mar Falkland",
         "KN": "Saint Kitts gi Nevis",
         "KP": "Korea Masawa",
         "KR": "Korea Milambo",
         "MH": "Chuia mar Marshall",
-        "MK": "Macedonia",
         "MM": "Myanmar",
         "NF": "Chuia mar Norfolk",
         "PM": "Saint Pierre gi Miquelon",

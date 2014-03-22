@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.shared;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6549 Google $
+//   cldrVersion=24
+//  number=$Revision: 9308 $
 //  type=root
-//  date=$Date: 2012-02-08 14:09:21 -0500 (Wed, 08 Feb 2012) $
+//  date=$Date: 2013-09-04 21:41:52 +0200 (Wed, 04 Sep 2013) $
 
 /**
  * Default implementation of DateTimeFormatInfo interface, using values from
@@ -40,13 +40,8 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
   }
 
   @Override
-  public String dateFormat() {
-    return dateFormatMedium();
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
+    return "y MMMM d, EEEE";
   }
 
   @Override
@@ -61,12 +56,7 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String dateFormatShort() {
-    return "yyyy-MM-dd";
-  }
-
-  @Override
-  public String dateTime(String timePattern, String datePattern) {
-    return dateTimeMedium(timePattern, datePattern);
+    return "y-MM-dd";
   }
 
   @Override
@@ -162,12 +152,12 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE MMMM d";
+    return "MMMM d, EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
+    return "MM-dd";
   }
 
   @Override
@@ -197,17 +187,17 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String formatYearMonthNum() {
-    return "y-M";
+    return "y-MM";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y-M-d";
+    return "y-MM-dd";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, y MMM d";
+    return "y MMM d, EEE";
   }
 
   @Override
@@ -310,11 +300,6 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
   }
 
   @Override
-  public String timeFormat() {
-    return timeFormatMedium();
-  }
-
-  @Override
   public String timeFormatFull() {
     return "HH:mm:ss zzzz";
   }
@@ -396,5 +381,20 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
   @Override
   public int weekendStart() {
     return 6;
+  }
+
+  @Override
+  public String dateFormat() {
+    return dateFormatMedium();
+  }
+
+  @Override
+  public String dateTime(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String timeFormat() {
+    return timeFormatMedium();
   }
 }

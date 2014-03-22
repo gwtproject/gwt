@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.client.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
+//   cldrVersion=24
+//  number=$Revision: 9315 $
 //  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
+//  date=$Date: 2013-09-05 18:52:00 +0200 (Thu, 05 Sep 2013) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "haw" locale.
@@ -161,19 +161,6 @@ public class DateTimeFormatInfoImpl_haw extends DateTimeFormatInfoImpl {
         "Poʻahā",
         "Poʻalima",
         "Poʻaono"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,10 +16,10 @@
 package com.google.gwt.i18n.shared.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6472 Google $
+//   cldrVersion=24
+//  number=$Revision: 9287 $
 //  type=root
-//  date=$Date: 2012-01-27 18:53:35 -0500 (Fri, 27 Jan 2012) $
+//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "sr_Latn" locale.
@@ -46,13 +46,8 @@ public class DateTimeFormatInfoImpl_sr_Latn extends DateTimeFormatInfoImpl_sr {
   public String[] erasShort() {
     return new String[] {
         "p. n. e.",
-        "n. e"
+        "n. e."
     };
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "y MMM";
   }
 
   @Override
@@ -112,20 +107,20 @@ public class DateTimeFormatInfoImpl_sr_Latn extends DateTimeFormatInfoImpl_sr {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1. kvartal",
-        "2. kvartal",
-        "3. kvartal",
-        "4. kvartal"
+        "Prvo tromesečje",
+        "Drugo tromesečje",
+        "Treće tromesečje",
+        "Četvrto tromesečje"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "K1",
+        "K2",
+        "K3",
+        "K4"
     };
   }
 

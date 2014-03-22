@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,9 +16,9 @@
 package com.google.gwt.i18n.client.impl.cldr;
 
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6177 $
-//  date=$Date: 2011-09-27 11:37:06 -0400 (Tue, 27 Sep 2011) $
+//   cldrVersion=24
+//  number=$Revision: 9280 $
+//  date=$Date: 2013-08-27 20:07:13 +0200 (Tue, 27 Aug 2013) $
 //  type=root
 
 /**
@@ -28,12 +28,12 @@ public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public String dateFormatMedium() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yyyy/M/d";
+    return "y/M/d";
   }
 
   @Override
@@ -48,7 +48,61 @@ public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public String formatYearMonthNum() {
-    return "yyyy/M";
+    return "y/M";
+  }
+
+  @Override
+  public String[] monthsFull() {
+    return new String[] {
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "ماي",
+        "يونيو",
+        "يوليوز",
+        "غشت",
+        "شتنبر",
+        "أكتوبر",
+        "نونبر",
+        "دجنبر"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "ي",
+        "ف",
+        "م",
+        "أ",
+        "م",
+        "ن",
+        "ل",
+        "غ",
+        "ش",
+        "ك",
+        "ب",
+        "د"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "ماي",
+        "يونيو",
+        "يوليوز",
+        "غشت",
+        "شتنبر",
+        "أكتوبر",
+        "نونبر",
+        "دجنبر"
+    };
   }
 
   @Override

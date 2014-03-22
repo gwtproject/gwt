@@ -386,8 +386,12 @@ public class LocaleData {
   }
 
   public void addDateTimeFormatEntries(String group, Factory cldrFactory) {
-    addAttributeEntries(group, cldrFactory, "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/"
-        + group + "Formats/default", "default", "default", "choice");
+    // TODO(manolo): This Xpath selector does not match anything in v24 raising a NPE.
+    //  I had a look at v21 and 1-8-1 xml files and there is nothing under this path,
+    //  maybe this was something internal to google cldr versions.
+    //
+    //  addAttributeEntries(group, cldrFactory, "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/"
+    //      + group + "Formats/default", "default", "default", "choice");
     addDateTimeFormatEntries(group, "full", cldrFactory);
     addDateTimeFormatEntries(group, "long", cldrFactory);
     addDateTimeFormatEntries(group, "medium", cldrFactory);

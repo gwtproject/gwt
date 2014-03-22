@@ -1,0 +1,2894 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_84f7ccfb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/DefaultLocalizedNames.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64f440f7",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4ff14d2",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_aa.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4048833",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_af.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04fa9ce1",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_agq.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4fe90d3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ak.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_4414a45d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ar.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_2411986d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_as.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_840eac4d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_asa.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_640ba03f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c42a7495",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_be.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a42f68a3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bem.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04357cef",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bez.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e43970ed",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bg.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_441f8473",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_241cf87c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84298c9d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bn_IN.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_642600cb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bo_IN.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c451d42b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_brx.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a456481f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_044c5c91",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bs_Cyrl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4505025",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_bs_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44466471",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ca.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24435861",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_chr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84406c53",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_dav.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_643d60cb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_de.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c47c3499",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_de_CH.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a481283d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_dje.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04873c4f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_dyo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e48b3059",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ebu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44914485",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_el.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_248eb868",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_849b4ca5",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_150.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_6498c0a8",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_AU.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c46394ef",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_DG.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a46808cd",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_Dsrt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_045e1c29",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_FK.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e46210e9",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_HK.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44782497",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_IN.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_2475189d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_IO.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84722cb3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_MO.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_646f20cf",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_NZ.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4cef4a4",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_PK.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4d3e848",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_SG.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04d9fc68",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_SH.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4ddf054",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_en_VG.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44c30479",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_eo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24c0786a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_es.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84cd0ca5",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_es_MX.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64ca808c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_et.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4b554fb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_eu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4bac8e8",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ewo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04b0dc06",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ff.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4b4d0fc",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_fi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44aae49a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_fo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24a7d8d0",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_fr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84a4ecca",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_fr_CA.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64a1e0b8",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_fr_CH.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c410b438",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_gl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a415a826",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_gsw.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_041bbc5a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_gu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e41fb042",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_gv.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_4425c48e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ha.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24223888",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ha_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_842fcc6e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_haw.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_642c407a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_he.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c43714c1",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_hi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a43c88a6",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_hr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04329cd0",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_id.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e43690c2",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_444ca460",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ii.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24499850",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_is.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_8446ac3c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_it.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_6443a02e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_jgo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4e274f4",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kab.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4e76802",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kde.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04ed7ce2",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_khq.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4f170bc",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ki.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44d78412",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24d4f80b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kkj.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84e18cec",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64de002e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kln.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c409d4fe",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_km.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a40e4802",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04045ce0",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ko.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e40850f8",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44fe6484",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ks_Arab.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24fb5894",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ksf.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84f86c96",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ksh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64f5609a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_kw.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4b434d8",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ky.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4b928d0",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lag.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04bf3cb2",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lkt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4c33048",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ln.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44c94468",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24c6b857",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84d34c14",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64d0c007",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_luo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c49b9462",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_lv.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4a0088c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mas.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04961c38",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mfe.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e49a105c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mg.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44b024d6",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mgh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24ad1880",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mgo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84aa2c66",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64a7209e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ms.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c486f403",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ms_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a48be80b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_0491fc37",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_my.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e495f023",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_447b044c",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nl_BE.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_2478784d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nnh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84850cf4",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_648280eb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nso.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c46d548e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nus.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a472c867",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_nyn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_0468dc79",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_or.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e46cd08f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_os.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_4462e499",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_pa.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_245fd8d3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_pa_Guru.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_845cecdd",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_pt_CV.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_6459e0eb",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_pt_MO.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4a8b45f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_pt_TL.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4ada86d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_rm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04b3bccd",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_rn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4b7b0b5",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ro.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44bdc495",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_rof.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24ba389f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ru.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84c7cc31",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_rw.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64c4402d",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sah.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4cf1448",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_seh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4d488d9",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ses.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04ca9c37",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_shi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e4ce9049",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_shi_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44e4a4c3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sq.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24e198b3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84deacf3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sr_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64dba005",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4fa745b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_st.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4ff6849",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sv.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04057ca5",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sv_FI.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e40970c3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_sw.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44ef8499",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_swc.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_24ecf8a2",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ta.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84f98c63",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_te.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64f60071",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_tig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c421d431",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_twq.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4264845",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ur.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_041c5cf7",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_uz.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e420502b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_uz_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_441664d7",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_vai.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_241358e7",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_vai_Latn.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84106cd9",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ve.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_640d60c1",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_vo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c44c340f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_wae.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a45128a3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_wal.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_04573c95",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_xh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e45b30bf",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_xog.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_4461446b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_yo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_245eb8ae",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_yo_BJ.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_846b4c4b",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zgh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_6468c04e",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_c4339475",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hans.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_a4380853",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hans_HK.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_042e1c0f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hans_MO.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_e432106f",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hant.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_444824ed",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hant_HK.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_244518d3",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hant_MO.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_84422cc9",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zh_Hant_TW.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_643f2035",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_zu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-22T16:57:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8d252ac4eeb4a784cb384a8dce720ced22bf2db1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

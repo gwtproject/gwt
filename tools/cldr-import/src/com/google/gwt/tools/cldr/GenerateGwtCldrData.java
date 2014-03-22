@@ -36,7 +36,6 @@ import java.util.Set;
  * Generate a country list for each locale, taking into account the literate
  * population of each country speaking the language.
  */
-@SuppressWarnings("unchecked")
 public class GenerateGwtCldrData {
 
   private static final GwtLocaleFactory factory = new GwtLocaleFactoryImpl();

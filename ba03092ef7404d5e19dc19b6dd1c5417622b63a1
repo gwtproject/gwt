@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cb2c15a_d132246f",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T03:56:58Z",
+      "side": 1,
+      "message": "I think it might be a more straight forward code by only modifying record in the following way (made the comments inline in the original",
+      "revId": "ba03092ef7404d5e19dc19b6dd1c5417622b63a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

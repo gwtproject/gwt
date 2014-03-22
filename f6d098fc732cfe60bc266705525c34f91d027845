@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cb2c15a_3148d0ec",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T03:56:58Z",
+      "side": 0,
+      "message": "Add !(x instanceof JsInvocation || x instanceof JsNew) so that only ignores same location in nodes that are not of interest.",
+      "range": {
+        "startLine": 749,
+        "startChar": 16,
+        "endLine": 751,
+        "endChar": 22
+      },
+      "revId": "f6d098fc732cfe60bc266705525c34f91d027845",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_1145ccd2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T03:56:58Z",
+      "side": 0,
+      "message": "Here you can patch up x if x is JsInvocation or the JsNew and has at least one parameter by creating a new instance of the node with all the same info but the last arg (at this point the args have already been processed) enclosed in a comma expression and update.",
+      "revId": "f6d098fc732cfe60bc266705525c34f91d027845",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

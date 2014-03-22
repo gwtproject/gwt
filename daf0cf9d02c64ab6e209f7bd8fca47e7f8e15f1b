@@ -67,6 +67,98 @@
       "revId": "daf0cf9d02c64ab6e209f7bd8fca47e7f8e15f1b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_54d0e206",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceCreatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T23:14:30Z",
+      "side": 1,
+      "message": "s/return;/{return;}/",
+      "range": {
+        "startLine": 100,
+        "startChar": 37,
+        "endLine": 100,
+        "endChar": 43
+      },
+      "revId": "daf0cf9d02c64ab6e209f7bd8fca47e7f8e15f1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_14c65a57",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceCreatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T23:14:30Z",
+      "side": 1,
+      "message": "s/return;/{return;}/",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 14
+      },
+      "revId": "daf0cf9d02c64ab6e209f7bd8fca47e7f8e15f1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_74d36615",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceCreatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T23:14:30Z",
+      "side": 1,
+      "message": "s/return;/{return;}/",
+      "range": {
+        "startLine": 111,
+        "startChar": 36,
+        "endLine": 111,
+        "endChar": 44
+      },
+      "revId": "daf0cf9d02c64ab6e209f7bd8fca47e7f8e15f1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_b49b0e63",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceCreatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-22T23:14:30Z",
+      "side": 1,
+      "message": "fix whitespace.",
+      "range": {
+        "startLine": 113,
+        "startChar": 51,
+        "endLine": 113,
+        "endChar": 52
+      },
+      "revId": "daf0cf9d02c64ab6e209f7bd8fca47e7f8e15f1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

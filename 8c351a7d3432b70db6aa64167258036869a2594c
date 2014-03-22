@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_e4e7b04f",
+        "filename": "eclipse/README-CLDR.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-22T16:04:16Z",
+      "side": 1,
+      "message": "The Google update was going to bring this to a modified 24 release - I suppose we can change this back if we stick with using a Google-modified CLDR.\n\nAlso, we should probably mention that you need to build CLDR first.",
+      "range": {
+        "startLine": 4,
+        "startChar": 52,
+        "endLine": 4,
+        "endChar": 54
+      },
+      "revId": "8c351a7d3432b70db6aa64167258036869a2594c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_44edc42f",
+        "filename": "eclipse/tools/cldr-import/GenerateGwtCldrData.launch",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-22T16:04:16Z",
+      "side": 1,
+      "message": "What is this needed for?",
+      "revId": "8c351a7d3432b70db6aa64167258036869a2594c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -507,20 +507,6 @@ public class StringTest extends GWTTestCase {
     assertFalse(test.regionMatches(true, 1, "bCdx", 0, 4));
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
-
-    try {
-      test.regionMatches(-1, null, -1, -1);
-      fail();
-    } catch (NullPointerException expected) {
-      // NPE must be thrown before any range checks
-    }
-
-    try {
-      test.regionMatches(true, -1, null, -1, -1);
-      fail();
-    } catch (NullPointerException expected) {
-      // NPE must be thrown before any range checks
-    }
   }
 
   public void testReplace() {
@@ -637,34 +623,6 @@ public class StringTest extends GWTTestCase {
     assertEquals("cd", haystack.substring(2, 4));
     assertEquals("bc", "abcdef".substring(1, 3));
     assertEquals("bcdef", "abcdef".substring(1));
-
-    try {
-      "string".substring(-1);
-      fail();
-    } catch (StringIndexOutOfBoundsException expected) {
-      // beginIndex < 0
-    }
-
-    try {
-      "string".substring(100);
-      fail();
-    } catch (StringIndexOutOfBoundsException expected) {
-      // beginIndex > string length
-    }
-
-    try {
-      "string".substring(1, 100);
-      fail();
-    } catch (StringIndexOutOfBoundsException expected) {
-      // endIndex > string length
-    }
-
-    try {
-      "string".substring(3, 1);
-      fail();
-    } catch (StringIndexOutOfBoundsException expected) {
-      // beginIndex > endIndex
-    }
   }
 
   public void testToCharArray() {

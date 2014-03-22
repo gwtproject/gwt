@@ -350,10 +350,6 @@ public class JsoTest extends GWTTestCase {
     objArray[0] = makeJSO();
     objArray[0] = makeFoo();
     objArray[0] = makeBar();
-
-    Foo[][] foo = new Foo[10][];
-    Object[][] fooAsObject = foo;
-    fooAsObject[0] = new Bar[1];
   }
 
   public void testBasic() {

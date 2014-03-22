@@ -25,6 +25,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
+import com.google.gwt.dev.js.ast.HasArguments;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
@@ -616,6 +617,17 @@ public class JsStackEmulator {
      */
     private final Set<JsNode> nodesInRefContext = new HashSet<JsNode>();
 
+    /**
+     * Nodes in this set are the last nodes to be evaluated before function
+     * calls.
+     *
+     * The location must be set before after evaluation so that correct
+     * location is on the stack during the function call. (This is
+     * necessary when the stack trace collector is called during
+     * the function.)
+     */
+    private final Set<JsNode> nodesBeforeCalls = new HashSet<JsNode>();
+
     public LocationVisitor(JsFunction function) {
       super(function);
       resetPosition();
@@ -642,6 +654,7 @@ public class JsStackEmulator {
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
+      exitCall(x);
       nodesInRefContext.remove(x.getQualifier());
       record(x, ctx);
     }
@@ -653,6 +666,7 @@ public class JsStackEmulator {
 
     @Override
     public void endVisit(JsNew x, JsContext ctx) {
+      exitCall(x);
       record(x, ctx);
     }
 
@@ -698,6 +712,13 @@ public class JsStackEmulator {
     @Override
     public boolean visit(JsInvocation x, JsContext ctx) {
       nodesInRefContext.add(x.getQualifier());
+      enterCall(x);
+      return true;
+    }
+
+    @Override
+    public boolean visit(JsNew x, JsContext ctx) {
+      enterCall(x);
       return true;
     }
 
@@ -739,6 +760,20 @@ public class JsStackEmulator {
       }
     }
 
+    private void enterCall(HasArguments x) {
+      List<JsExpression> args = x.getArguments();
+      if (args.size() > 0) {
+        nodesBeforeCalls.add(args.get(args.size() - 1));
+      }
+    }
+
+    private void exitCall(HasArguments x) {
+      List<JsExpression> args = x.getArguments();
+      if (args.size() > 0) {
+        nodesBeforeCalls.remove(args.get(args.size() - 1));
+      }
+    }
+
     private void record(JsExpression x, JsContext ctx) {
       if (ctx.isLvalue()) {
         // Assignments to comma expressions aren't legal
@@ -746,35 +781,64 @@ public class JsStackEmulator {
       } else if (nodesInRefContext.contains(x)) {
         // Don't modify references into non-references
         return;
-      } else if (x.getSourceInfo().getStartLine() == lastLine
-          && (!recordFileNames || x.getSourceInfo().getFileName().equals(
-              lastFile))) {
-        // Same location; ignore
-        return;
       }
 
       SourceInfo info = x.getSourceInfo();
 
-      // ($locations[stackIndex] = fileName + lineNumber, x)
-      JsExpression location = new JsStringLiteral(info,
-          String.valueOf(lastLine = info.getStartLine()));
+      boolean locationChanged = info.getStartLine() != lastLine
+          || (recordFileNames && !info.getFileName().equals(lastFile));
+
+      JsExpression original = x;
+      if (locationChanged) {
+        lastLine = info.getStartLine();
+        if (recordFileNames) {
+          lastFile = info.getFileName();
+        }
+      }
+
+      if (nodesBeforeCalls.contains(x)) {
+        // set the location again before calling the function
+        x = recordAfter(x);
+      }
+
+      if (locationChanged) {
+        x = recordBefore(x);
+      }
+
+      if (original != x) {
+        ctx.replaceMe(x);
+      }
+    }
+
+    // Records lastLine and possibly lastFile before evaluating an expression.
+    // ($locations[stackIndex] = fileName + lineNumber, x)
+    private JsExpression recordBefore(JsExpression x) {
+      SourceInfo info = x.getSourceInfo();
+      return new JsBinaryOperation(info, JsBinaryOperator.COMMA, assignLocation(info), x);
+    }
+
+    // Records lastLine and possibly lastFile after evaluating an expression.
+    // Requires a temporary: ($tmp = x, $locations[stackIndex] = fileName + lineNumber, $tmp)
+    private JsExpression recordAfter(JsExpression x) {
+      SourceInfo info = x.getSourceInfo();
+      JsExpression setTmp = new JsBinaryOperation(info, JsBinaryOperator.ASG, tmp.makeRef(info), x);
+      return new JsBinaryOperation(info, JsBinaryOperator.COMMA,
+          new JsBinaryOperation(info, JsBinaryOperator.COMMA, setTmp, assignLocation(info)),
+          tmp.makeRef(info));
+    }
+
+    // $locations[stackIndex] = fileName + lineNumber
+    private JsBinaryOperation assignLocation(SourceInfo info) {
+      JsExpression location = new JsStringLiteral(info, String.valueOf(lastLine));
       if (recordFileNames) {
         // 'fileName:' + lineNumber
-        JsStringLiteral stringLit = new JsStringLiteral(info,
-            baseName(lastFile = info.getFileName()) + ":");
-        location = new JsBinaryOperation(info, JsBinaryOperator.ADD, stringLit,
-            location);
+        JsStringLiteral stringLit = new JsStringLiteral(info, baseName(lastFile) + ":");
+        location = new JsBinaryOperation(info, JsBinaryOperator.ADD, stringLit, location);
       }
 
       JsArrayAccess access = new JsArrayAccess(info, lineNumbers.makeRef(info),
           stackIndexRef(info));
-      JsBinaryOperation asg = new JsBinaryOperation(info, JsBinaryOperator.ASG,
-          access, location);
-
-      JsBinaryOperation comma = new JsBinaryOperation(info,
-          JsBinaryOperator.COMMA, asg, x);
-
-      ctx.replaceMe(comma);
+      return new JsBinaryOperation(info, JsBinaryOperator.ASG, access, location);
     }
 
     private void resetPosition() {
@@ -870,6 +934,7 @@ public class JsStackEmulator {
   private boolean recordLineNumbers;
   private JsName stack;
   private JsName stackDepth;
+  private JsName tmp;
 
   private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
       PropertyOracle[] propertyOracles,
@@ -912,6 +977,7 @@ public class JsStackEmulator {
         "$stackDepth");
     lineNumbers = jsProgram.getScope().declareName("$JsStackEmulator_location",
         "$location");
+    tmp = jsProgram.getScope().declareName("$JsStackEmulator_tmp", "$tmp");
   }
 
   private void makeVars() {

@@ -348,7 +348,19 @@ public class LocaleData {
     Map<String, String> map = getMap(category, locale);
     CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
     XPathParts parts = new XPathParts();
-    parts.set(cldr.getFullXPath(path));
+    String fullPath = cldr.getFullXPath(path);
+    if (fullPath == null) {
+      // The XPATH selector looks like
+      // //ldml/dates/calendars/calendar[@type="gregorian"]/(date|time)Formats/default
+      //
+      // In v24, they removed the 'default' entry under (date|time)Formats, but
+      // in21 it was always set to 'medium', except in the cases of 'fa' dateFormat set
+      // set to 'long' and marked as unconfirmed,  and 'dz' (timeFormat, 'long', unconfirmed).
+      // So since both exception was unconfirmed, the safer option is to return 'medium' in any case.
+      map.put(key, "medium");
+      return;
+    }
+    parts.set(fullPath);
     Map<String, String> attr = parts.findAttributes(tag);
     if (attr == null) {
       return;

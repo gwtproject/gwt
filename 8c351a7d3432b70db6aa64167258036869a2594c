@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "dc5439b3_062f7c70",
+        "filename": "eclipse/README-CLDR.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-22T16:46:13Z",
+      "side": 1,
+      "message": "This number is just an example in the instructions, since 25 is latest in CLDR I think it is ok for someone wanting to update GWT i18n files.\n\nI hadn\u0027t have to build CLDR, I just checked it out and everything worked fine, .jars and .xml where  in place.",
+      "parentUuid": "dcf999ff_e4e7b04f",
+      "revId": "8c351a7d3432b70db6aa64167258036869a2594c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcf999ff_44edc42f",
         "filename": "eclipse/tools/cldr-import/GenerateGwtCldrData.launch",
         "patchSetId": 2
@@ -36,6 +54,24 @@
       "writtenOn": "2014-03-22T16:04:16Z",
       "side": 1,
       "message": "What is this needed for?",
+      "revId": "8c351a7d3432b70db6aa64167258036869a2594c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc5439b3_6622f089",
+        "filename": "eclipse/tools/cldr-import/GenerateGwtCldrData.launch",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-22T16:46:13Z",
+      "side": 1,
+      "message": "My eclipse introduced it automatically when I run it, I suppose it\u0027s ok.",
+      "parentUuid": "dcf999ff_44edc42f",
       "revId": "8c351a7d3432b70db6aa64167258036869a2594c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

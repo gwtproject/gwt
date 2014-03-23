@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_84c86cec",
+        "filename": "tools/cldr-import/build.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-23T20:41:12Z",
+      "side": 1,
+      "message": "We no longer need the other paths?",
+      "revId": "6a058b87c252946ff02beb4166cb91543a8034bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_64c560d0",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleData.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-23T20:41:12Z",
+      "side": 1,
+      "message": "Hmm, I see it in 1.8.1\n\u003cldml\u003e\n \u003cdates\u003e\n  \u003ccalendars\u003e\n   \u003ccalendar type\u003d\"gregorian\"\u003e\n    \u003cdateFormats\u003e\n     \u003cdefault choice\u003d\"medium\"/\u003e\n     \u003cdateFormatLength type\u003d\"full\"\u003e\n     ...\n\nOther things are going to expect this key to be there, so I think if we don\u0027t find the key we should default to \"medium\".\n\nHowever, we probably need to find out what ICU does and/or what was intended for determining the default format used in a locale - maybe Mark Davis can help?",
+      "revId": "6a058b87c252946ff02beb4166cb91543a8034bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

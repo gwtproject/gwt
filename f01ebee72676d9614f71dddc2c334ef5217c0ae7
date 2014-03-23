@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc5439b3_66fbd093",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/testdata/cpe1/org/example/foo/server/FooServer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-23T19:43:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be c.g.g.d.r.u.t.cpe1... instead of cpe2 ? my eclipse complains.",
+      "revId": "f01ebee72676d9614f71dddc2c334ef5217c0ae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

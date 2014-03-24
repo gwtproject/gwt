@@ -190,6 +190,29 @@
     },
     {
       "key": {
+        "uuid": "9cb2c15a_73f5339a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-24T23:32:55Z",
+      "side": 1,
+      "message": "Also see this line passes test.EntryPoint as an \"entryPoint\" and let\u0027s it treated accordingly. You probably want to remove it from here as well?",
+      "range": {
+        "startLine": 83,
+        "startChar": 27,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cb2c15a_dde06e7e",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
         "patchSetId": 1

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_8fc7e531",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleData.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-24T15:13:12Z",
+      "side": 1,
+      "message": "Didn\u0027t realize this was the only caller of addAttributeEntry and that addDateTimeFormatEntries was the only caller of this.\n\nIf so, we can add convenience wrappers that pass null if they are ever needed.",
+      "revId": "ece812b47a40fe92f397c9938246b710e6279d9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

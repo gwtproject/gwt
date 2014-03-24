@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_4f783d97",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleData.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-03-24T13:47:14Z",
+      "side": 1,
+      "message": "We cannot assume this is the XPath, as this code is used from many different places and this would likely cause silent corruption in a future CLDR update that changed a path we rely on.\n\nRather than checking the path here and setting a default, I would prefer to pass a default value into this method (default null, probably with a helper so callers that don\u0027t care about a default can be unchanged), and logic like:\n\nMap\u003cString, String\u003e attr \u003d null;\nif (fullPath !\u003d null) {\n  parts.set(fullPath);\n  attr \u003d parts.findAttributes(tag);\n}\nString value;\nif (attr \u003d\u003d null) {\n  if (defaultValue \u003d\u003d null) {\n    return;\n  }\n  value \u003d defaultValue;\n} else {\n  value \u003d attr.get(attribute);\n}\nmap.put(key, value);\n\nI structured the code this way to preserve existing behavior around the tag not being present versus being present but having no value -- I don\u0027t remember exactly, but I believe that will result in blocking inheritance from a parent locale.",
+      "revId": "d669065c8b99804f6e9d92e29847a939d5b0d6b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

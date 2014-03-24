@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "fcfc9dee_051bb85a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-24T23:03:13Z",
+      "side": 1,
+      "message": "from the perspective of the test it is just \"some function\". it\u0027s not getting special treatment by the compiler (it\u0027s only getting special treatment by the test itself).\n\nso, i would say it\u0027s not an \"onModuleLoad\" function.",
+      "parentUuid": "9cb2c15a_905c0dde",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 58
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cb2c15a_10cadd37",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
         "patchSetId": 1
@@ -248,6 +272,30 @@
       "writtenOn": "2014-03-24T22:34:10Z",
       "side": 1,
       "message": "perhaps this one was an entryPoint to ensure that it never gets inlined?",
+      "range": {
+        "startLine": 60,
+        "startChar": 38,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcfc9dee_e51fac42",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-24T23:03:13Z",
+      "side": 1,
+      "message": "there is no special handling that prevents entry methods from being inlined.",
+      "parentUuid": "9cb2c15a_10cadd37",
       "range": {
         "startLine": 60,
         "startChar": 38,

@@ -20,6 +20,7 @@ import com.google.gwt.thirdparty.guava.common.base.Strings;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
+import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 /**
  * Utility functions to interact with JDT classes.
@@ -41,12 +42,16 @@ public final class JdtUtil {
     return result.toString();
   }
 
-  public static String getSourceName(ReferenceBinding classBinding) {
+  public static String getSourceName(TypeBinding classBinding) {
     return Joiner.on(".").skipNulls().join(new String[] {
         Strings.emptyToNull(CharOperation.charToString(classBinding.qualifiedPackageName())),
         CharOperation.charToString(classBinding.qualifiedSourceName())});
   }
 
   private JdtUtil() {
+  }
+
+  public static boolean isNested(ReferenceBinding binding) {
+    return binding.isNestedType() && !binding.isStatic();
   }
 }

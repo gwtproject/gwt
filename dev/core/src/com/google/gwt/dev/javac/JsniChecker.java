@@ -21,8 +21,8 @@ import com.google.gwt.dev.jdt.SafeASTVisitor;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
+import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.StringInterner;
@@ -179,7 +179,7 @@ public class JsniChecker {
     }
   }
 
-  private class JsniRefChecker extends JsVisitor {
+  private class JsniRefChecker extends JsModVisitor {
 
     private final boolean hasUnsafeLongsAnnotation;
     private final MethodDeclaration method;
@@ -212,6 +212,14 @@ public class JsniChecker {
 
       Binding binding = checkRef(x.getSourceInfo(), jsniRef, x.getQualifier() != null,
           ctx.isLvalue());
+
+      assert !x.isResolved();
+      if (!ident.equals(jsniRef.toString())) {
+        ident = jsniRef.toString();
+        JsNameRef newRef = new JsNameRef(x.getSourceInfo(), ident);
+        newRef.setQualifier(x.getQualifier());
+        ctx.replaceMe(newRef);
+      }
       if (binding != null) {
         jsniRefs.put(ident, binding);
       }
@@ -549,6 +557,15 @@ public class JsniChecker {
       return null;
     }
 
+    /**
+     * Returns true if {@code method}, is a method in {@code fromClass} (to support current
+     * private method access} or is a public method of a superClass.
+     * the sublcass.
+     */
+    private boolean isMethodVisibleToJsniRef(ReferenceBinding fromClass, MethodBinding method) {
+      return fromClass == method.declaringClass || method.isPublic();
+    }
+
     private List<MethodBinding> getMatchingMethods(ReferenceBinding clazz, JsniRef jsniRef) {
       assert jsniRef.isMethod();
       List<MethodBinding> foundMethods = Lists.newArrayList();
@@ -561,14 +578,11 @@ public class JsniChecker {
       } else {
         Queue<ReferenceBinding> work = Lists.newLinkedList();
         work.add(clazz);
-        // Allow private methods from the current class, but not from its supers.
-        boolean allowPrivate = true;
         while (!work.isEmpty()) {
-          clazz = work.remove();
+          ReferenceBinding currentClass = work.remove();
           NEXT_METHOD:
-          for (MethodBinding findMethod : clazz.getMethods(methodName.toCharArray())) {
-            // TODO(rluble): restructure into collecting and checking ambiguity.
-            if (!allowPrivate && findMethod.isPrivate()) {
+          for (MethodBinding findMethod : currentClass.getMethods(methodName.toCharArray())) {
+            if (!isMethodVisibleToJsniRef(clazz, findMethod)) {
               continue;
             }
             if (!paramTypesMatch(findMethod, jsniRef)) {
@@ -583,12 +597,11 @@ public class JsniChecker {
             }
             foundMethods.add(findMethod);
           }
-          allowPrivate = false;
-          ReferenceBinding[] superInterfaces = clazz.superInterfaces();
+          ReferenceBinding[] superInterfaces = currentClass.superInterfaces();
           if (superInterfaces != null) {
             work.addAll(Arrays.asList(superInterfaces));
           }
-          ReferenceBinding superclass = clazz.superclass();
+          ReferenceBinding superclass = currentClass.superclass();
           if (superclass != null) {
             work.add(superclass);
           }

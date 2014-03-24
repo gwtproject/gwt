@@ -261,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "9cb2c15a_b3567b1f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-24T23:25:45Z",
+      "side": 1,
+      "message": "The method is special treated and test is basically trying to emulate an entry point; naming it accordingly just helps the reader to understand the special treatment and I can\u0027t see any strong reason to change it. Anyway I would recommend you to not change but that\u0027s your call.",
+      "parentUuid": "fcfc9dee_051bb85a",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 58
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cb2c15a_10cadd37",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAstTest.java",
         "patchSetId": 1

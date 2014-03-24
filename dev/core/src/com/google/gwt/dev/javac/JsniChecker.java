@@ -549,6 +549,22 @@ public class JsniChecker {
       return null;
     }
 
+    /**
+     * Returns true if {@code superMethod}, a method defined in some superclass is visible from
+     * the sublcass.
+     */
+    private boolean  isSuperMethodVisible(ReferenceBinding fromClass, MethodBinding superMethod) {
+      if (fromClass == superMethod.declaringClass || superMethod.isPublic() ||
+          superMethod.isProtected()) {
+        return true;
+      }
+      if (superMethod.isPrivate()) {
+        return  false;
+      }
+      // The method is package private.
+      return fromClass.getPackage() == superMethod.declaringClass.getPackage();
+    }
+
     private List<MethodBinding> getMatchingMethods(ReferenceBinding clazz, JsniRef jsniRef) {
       assert jsniRef.isMethod();
       List<MethodBinding> foundMethods = Lists.newArrayList();
@@ -561,14 +577,12 @@ public class JsniChecker {
       } else {
         Queue<ReferenceBinding> work = Lists.newLinkedList();
         work.add(clazz);
-        // Allow private methods from the current class, but not from its supers.
-        boolean allowPrivate = true;
         while (!work.isEmpty()) {
-          clazz = work.remove();
+          ReferenceBinding currentClass = work.remove();
           NEXT_METHOD:
-          for (MethodBinding findMethod : clazz.getMethods(methodName.toCharArray())) {
+          for (MethodBinding findMethod : currentClass.getMethods(methodName.toCharArray())) {
             // TODO(rluble): restructure into collecting and checking ambiguity.
-            if (!allowPrivate && findMethod.isPrivate()) {
+            if (!isSuperMethodVisible(clazz, findMethod)) {
               continue;
             }
             if (!paramTypesMatch(findMethod, jsniRef)) {
@@ -583,12 +597,11 @@ public class JsniChecker {
             }
             foundMethods.add(findMethod);
           }
-          allowPrivate = false;
-          ReferenceBinding[] superInterfaces = clazz.superInterfaces();
+          ReferenceBinding[] superInterfaces = currentClass.superInterfaces();
           if (superInterfaces != null) {
             work.addAll(Arrays.asList(superInterfaces));
           }
-          ReferenceBinding superclass = clazz.superclass();
+          ReferenceBinding superclass = currentClass.superclass();
           if (superclass != null) {
             work.add(superclass);
           }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cb2c15a_c621c031",
+        "filename": "eclipse/README-CLDR.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-24T19:25:22Z",
+      "side": 1,
+      "message": "sp: substitution",
+      "range": {
+        "startLine": 15,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 29
+      },
+      "revId": "0403e9c75269d09ae48188a35ca67c579a83f89c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

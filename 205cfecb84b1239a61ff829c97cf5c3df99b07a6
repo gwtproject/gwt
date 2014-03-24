@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_15cac437",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-24T23:29:34Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "205cfecb84b1239a61ff829c97cf5c3df99b07a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_f5ce3849",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-24T23:29:34Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "205cfecb84b1239a61ff829c97cf5c3df99b07a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

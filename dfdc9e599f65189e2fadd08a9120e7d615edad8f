@@ -91,6 +91,29 @@
       "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_dde06e7e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FullCompileTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-24T21:57:50Z",
+      "side": 1,
+      "message": "goktug: the test infrastructure doesn\u0027t rely on special compiler handling of EntryPoints and onModuleLoad. instead right here it registers the function that it wants treated as the \"entry method\" for code splitting purposes.\n\nfor a test to be getting any the benefit of \"real\" special handling in the Compiler for EntryPoint classes with onModuleLoad functions, it would need to be exercising the JavaToJavaScriptCompiler class code path. But basically no tests do this. Instead they depend on a test replica of that code path in JavaAstConstructor.",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 58
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

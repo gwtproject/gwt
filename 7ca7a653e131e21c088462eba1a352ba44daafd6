@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcfc9dee_a581243d",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStackEmulatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-24T21:57:50Z",
+      "side": 0,
+      "message": "goktug: no this is not a change in coverage of \"inlining\" behavior.\n\nwhen this was a static method the compiler needed to generate a guard clinit() statement for the class. but now that the method is an instance method it can assume the clinit for the class has already been run (and thus not generate a clinit call here).\n\nalso speaking more generally, MethodInliner.java has no special treatment for onModuleLoad. so there is no such special treatment for which to have or lose test coverage.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 78
+      },
+      "revId": "7ca7a653e131e21c088462eba1a352ba44daafd6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

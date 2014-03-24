@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc5439b3_c6b404d8",
+        "filename": "tools/cldr-import/build.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-24T07:20:25Z",
+      "side": 1,
+      "message": "If you have a look to the project.class.path block all removed lines here are included in that. This is a normal way to simply the file.",
+      "parentUuid": "dcf999ff_84c86cec",
+      "revId": "6a058b87c252946ff02beb4166cb91543a8034bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcf999ff_64c560d0",
         "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleData.java",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-23T20:41:12Z",
       "side": 1,
       "message": "Hmm, I see it in 1.8.1\n\u003cldml\u003e\n \u003cdates\u003e\n  \u003ccalendars\u003e\n   \u003ccalendar type\u003d\"gregorian\"\u003e\n    \u003cdateFormats\u003e\n     \u003cdefault choice\u003d\"medium\"/\u003e\n     \u003cdateFormatLength type\u003d\"full\"\u003e\n     ...\n\nOther things are going to expect this key to be there, so I think if we don\u0027t find the key we should default to \"medium\".\n\nHowever, we probably need to find out what ICU does and/or what was intended for determining the default format used in a locale - maybe Mark Davis can help?",
+      "revId": "6a058b87c252946ff02beb4166cb91543a8034bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc5439b3_66c67059",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/LocaleData.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-03-24T07:20:25Z",
+      "side": 1,
+      "message": "I have checked what v21 returned, and it always did \u0027medium\u0027 except in the cases of:\n- \u0027fa\u0027 where it was returning \u0027long\u0027 for dateFormat\n- \u0027dz\u0027 which returned \u0027long\u0027 for timeFormat.\n\nBoth cases were marked as draft\u003d\"unconfirmed\", so IMO it\u0027s safer to return always \u0027medium\u0027 .",
+      "parentUuid": "dcf999ff_64c560d0",
       "revId": "6a058b87c252946ff02beb4166cb91543a8034bf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

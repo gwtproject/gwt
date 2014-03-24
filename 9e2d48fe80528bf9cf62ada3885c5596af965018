@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cb2c15a_2becd5a2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-24T18:06:16Z",
+      "side": 1,
+      "message": "What actually matters is the caller itself not the subclass, right?\n\nIf it\u0027s difficult to achieve correct java semantics, we can go for a different (and probably stricter) one.",
+      "revId": "9e2d48fe80528bf9cf62ada3885c5596af965018",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

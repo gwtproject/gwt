@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf999ff_d5b5fcfa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-24T21:49:29Z",
+      "side": 1,
+      "message": "Isn\u0027t it better to get the source info from the block (like the old code); that at least would point to the generated init  (which should have a comment about being magically filled in).",
+      "range": {
+        "startLine": 1065,
+        "startChar": 49,
+        "endLine": 1066,
+        "endChar": 47
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_75ca288c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-24T21:49:29Z",
+      "side": 1,
+      "message": "Nice. I like how it is clearer with findMethod/find instead of the indexed method hack.",
+      "range": {
+        "startLine": 1050,
+        "startChar": 1,
+        "endLine": 1077,
+        "endChar": 89
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_15b00407",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/LibraryJavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-24T21:49:29Z",
+      "side": 1,
+      "message": "Maybe move nameOf out of JGwtCreate. It is strange to see it here.",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 197,
+        "endChar": 22
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf999ff_55aa8c9a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-24T21:49:29Z",
+      "side": 1,
+      "message": "What if there are more than one? I suggest an assertion that covers that case. Or maybe better always use the full signature",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 3
+      },
+      "revId": "dfdc9e599f65189e2fadd08a9120e7d615edad8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

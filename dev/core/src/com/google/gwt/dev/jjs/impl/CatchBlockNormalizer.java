@@ -63,6 +63,11 @@ public class CatchBlockNormalizer {
 
     @Override
     public void endVisit(JTryStatement x, Context ctx) {
+      if (x.getCatchClauses().isEmpty() &&
+          (x.getFinallyBlock() == null || x.getFinallyBlock().isEmpty())) {
+        ctx.replaceMe(x.getTryBlock());
+      }
+
       if (x.getCatchClauses().isEmpty()) {
         return;
       }

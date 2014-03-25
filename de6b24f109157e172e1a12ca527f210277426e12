@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cd5a977_fbd8d766",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-25T16:46:16Z",
+      "side": 1,
+      "message": "maybe change findMethod and add a boolean parameter includeInherited?\n\nI particularly dislike adding the Recursive postfix.",
+      "range": {
+        "startLine": 174,
+        "startChar": 17,
+        "endLine": 174,
+        "endChar": 36
+      },
+      "revId": "de6b24f109157e172e1a12ca527f210277426e12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,6 +33,46 @@
       "revId": "205cfecb84b1239a61ff829c97cf5c3df99b07a6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cd5a977_07f2b64d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-25T18:23:02Z",
+      "side": 1,
+      "message": "Is reset needed in the end? I don\u0027t think it is needed, nor the other one below.",
+      "range": {
+        "startLine": 794,
+        "startChar": 8,
+        "endLine": 794,
+        "endChar": 47
+      },
+      "revId": "205cfecb84b1239a61ff829c97cf5c3df99b07a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cd5a977_c706de78",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStackEmulatorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-25T18:23:02Z",
+      "side": 1,
+      "message": "Add a test for a function call where the qualifier gets inlined and there are no arguments to the call.",
+      "revId": "205cfecb84b1239a61ff829c97cf5c3df99b07a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

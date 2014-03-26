@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "99157331_d9469398",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/FlowPanelParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-03-26T16:16:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_fdce2749",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1c3954_ddc96b44",
         "filename": "user/src/com/google/gwt/uibinder/elementparsers/FlowPanelParser.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "dc1c3954_b8b75d68",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/FlowPanelParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-03-26T16:16:55Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "dc1c3954_ddc96b44",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9e79793_05601467",
         "filename": "user/src/com/google/gwt/user/client/ui/FlowPanel.java",
         "patchSetId": 1
@@ -59,6 +107,24 @@
       "writtenOn": "2014-03-26T12:15:42Z",
       "side": 1,
       "message": "Would the following be better?\nthis(DivElement.TAG)",
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19f8a337_1d3e33ec",
+        "filename": "user/src/com/google/gwt/user/client/ui/FlowPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-03-26T16:16:55Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "b9e79793_05601467",
       "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

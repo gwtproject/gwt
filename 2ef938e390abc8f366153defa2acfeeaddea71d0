@@ -45,6 +45,23 @@
       "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9e79793_05601467",
+        "filename": "user/src/com/google/gwt/user/client/ui/FlowPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2014-03-26T12:15:42Z",
+      "side": 1,
+      "message": "Would the following be better?\nthis(DivElement.TAG)",
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

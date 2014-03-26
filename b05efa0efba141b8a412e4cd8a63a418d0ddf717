@@ -39,6 +39,98 @@
       "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_f73c88f5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-26T01:47:44Z",
+      "side": 1,
+      "message": "also \"The resolution mappings of validated references are stored for later reuse.\"",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_b2685ecd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-26T01:47:44Z",
+      "side": 1,
+      "message": "as we discussed offline this class is more than just a \"Checker\". please go ahead with those renames you wanted to do.",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_7298a6a8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-26T01:47:44Z",
+      "side": 1,
+      "message": "please add a short comment about the fact that this is replacing short JsNameRef idents with fully qualified resolved ones, so that later using code can benefit from the already resolved results.",
+      "range": {
+        "startLine": 216,
+        "startChar": 6,
+        "endLine": 216,
+        "endChar": 29
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_b75bf071",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-26T01:47:44Z",
+      "side": 1,
+      "message": "please humor me by adding a comment saying something along the lines of \"Unlike Java, package-private access is not allowed.\"",
+      "range": {
+        "startLine": 566,
+        "startChar": 6,
+        "endLine": 566,
+        "endChar": 69
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

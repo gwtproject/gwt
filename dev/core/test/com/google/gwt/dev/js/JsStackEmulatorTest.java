@@ -39,6 +39,7 @@ import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.impl.ArrayNormalizer;
+import com.google.gwt.dev.jjs.impl.CatchBlockNormalizer;
 import com.google.gwt.dev.jjs.impl.ComputeCastabilityInformation;
 import com.google.gwt.dev.jjs.impl.ComputeInstantiatedJsoInterfaces;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
@@ -234,8 +235,38 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
         "$location[stackIndex]='EntryPoint.java:'+'7',$clinit_EntryPoint();" +
-        "throw ($tmp=($location[stackIndex]='EntryPoint.java:'+'5',factory),"  +
-        "$location[stackIndex]='EntryPoint.java:'+'8',$tmp).makeException()" +
+        "throw unwrap(($tmp=($location[stackIndex]='EntryPoint.java:'+'5',factory)," +
+        "$location[stackIndex]='EntryPoint.java:'+'8',$tmp).makeException())" +
+        "}");
+  }
+
+  public void testTryCatch() throws Exception {
+    recordFileNamesProp.setValue("true");
+    recordLineNumbersProp.setValue("true");
+
+    JsProgram program = compileClass(
+        "package test;",
+        "public class EntryPoint {",
+        "  public static void onModuleLoad() {",
+        "    try {",
+        "      throw new RuntimeException();",
+        "    } catch (RuntimeException e) {" ,
+        "      String s = e.getMessage();",
+        "    }",
+        "  }",
+        "}");
+
+    // Note: it's up to the catch block to fix $stackDepth.
+    checkOnModuleLoad(program, "function onModuleLoad(){" +
+        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();var e,s;" +
+        "try{throw $location[stackIndex]='EntryPoint.java:'+'5',new RuntimeException" +
+        "}catch($e0){$e0=wrap($e0);" +
+        "$stackDepth=($location[stackIndex]='EntryPoint.java:'+'6',stackIndex);" +
+        "if(instanceOf($e0,4)){" +
+        "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage()}" +
+        "else throw unwrap(($location[stackIndex]='EntryPoint.java:'+'6',$e0))}" +
+        "$stackDepth=stackIndex-1" +
         "}");
   }
 
@@ -287,6 +318,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
       MethodInliner.exec(jProgram);
     }
 
+    CatchBlockNormalizer.exec(jProgram);
     // Construct the JavaScript AST.
 
     // These passes are needed by GenerateJavaScriptAST.

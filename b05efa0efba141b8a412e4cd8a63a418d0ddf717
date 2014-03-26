@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc1c3954_57c71c32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-26T01:00:00Z",
+      "side": 1,
+      "message": "Non-public superclass members ...",
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_b7d4d0d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-26T01:00:00Z",
+      "side": 1,
+      "message": "To refer to a non-public method, ...",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 8
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

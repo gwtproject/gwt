@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "392487a3_0a1eeb76",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-26T21:34:14Z",
+      "side": 1,
+      "message": "fix the comment to include the cast.",
+      "range": {
+        "startLine": 1088,
+        "startChar": 37,
+        "endLine": 1088,
+        "endChar": 82
+      },
+      "revId": "b113175d246209af9b52c49fe40c8f94eed0f9a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

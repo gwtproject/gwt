@@ -43,6 +43,7 @@ import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST;
 import com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
+import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsName;
@@ -67,7 +68,26 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
   private final ConfigurationProperty recordLineNumbersProp =
       new ConfigurationProperty("compiler.emulatedStack.recordLineNumbers", false);
 
-  public void testGeneratedJavaScriptForSimpleThrow() throws Exception {
+  private boolean inline = false;
+
+  public void testEmptyMethod() throws Exception {
+    recordFileNamesProp.setValue("true");
+    recordLineNumbersProp.setValue("true");
+
+    JsProgram program = compileClass(
+        "package test;",
+        "public class EntryPoint {",
+        "  public static void onModuleLoad() {",
+        "  }",
+        "}");
+
+    checkOnModuleLoad(program, "function onModuleLoad(){" +
+        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();" +
+        "$stackDepth=stackIndex-1}");
+  }
+
+  public void testSimpleThrow() throws Exception {
     recordFileNamesProp.setValue("true");
     recordLineNumbersProp.setValue("true");
 
@@ -84,6 +104,61 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
         "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();" +
         "throw new ($location[stackIndex]='EntryPoint.java:'+'4',RuntimeException)" +
+        "}");
+  }
+
+  public void testThrowWithInlineMethodCall() throws Exception {
+    recordFileNamesProp.setValue("true");
+    recordLineNumbersProp.setValue("true");
+    inline = true;
+
+    JsProgram program = compileClass(
+        "package test;",
+        "public class EntryPoint {",
+        "  static Object thing = \"hello\";",
+        "  private static String message() { return thing",
+        "    .toString(); }",
+        "  public static void onModuleLoad() {",
+        "    throw new RuntimeException(message());",
+        "  }",
+        "}");
+
+    checkOnModuleLoad(program, "function onModuleLoad(){" +
+        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:'+'6',$clinit_EntryPoint();" +
+        "throw new ($location[stackIndex]='EntryPoint.java:'+'7',RuntimeException)" +
+        "(($tmp=($location[stackIndex]='EntryPoint.java:'+'4',thing).toString$()," +
+        "$location[stackIndex]='EntryPoint.java:'+'7',$tmp))" +
+        "}");
+  }
+
+  public void testThrowWithChainedMethodCall() throws Exception {
+    recordFileNamesProp.setValue("true");
+    recordLineNumbersProp.setValue("true");
+    inline = true;
+
+    JsProgram program = compileClass(
+        "package test;",
+        "public class EntryPoint {",
+        "  static Factory factory;",
+        "  static Factory getFactory() {" +
+            "    return factory;",
+        "  }",
+        "  public static void onModuleLoad() {",
+        "    throw getFactory().makeException();",
+        "  }",
+        "  static class Factory {",
+        "    RuntimeException makeException() {",
+        "      return new RuntimeException();",
+        "    }",
+        "  }",
+        "}");
+
+    checkOnModuleLoad(program, "function onModuleLoad(){" +
+        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:'+'6',$clinit_EntryPoint();" +
+        "throw $location[stackIndex]='EntryPoint.java:'+'7'," +
+        "($location[stackIndex]='EntryPoint.java:'+'4',factory).makeException()" +
         "}");
   }
 
@@ -116,6 +191,10 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
             sourceOracle.getResources(), null);
     JProgram jProgram = AstConstructor.construct(logger, state, options, new Properties());
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
+
+    if (inline) {
+      MethodInliner.exec(jProgram);
+    }
 
     // Construct the JavaScript AST.
 

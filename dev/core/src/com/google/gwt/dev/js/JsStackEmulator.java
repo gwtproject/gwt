@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
@@ -100,31 +101,7 @@ public class JsStackEmulator {
 
     @Override
     public void endVisit(JsExprStmt x, JsContext ctx) {
-      // Looking for e = wrap(e);
-      JsExpression expr = x.getExpression();
-
-      if (!(expr instanceof JsBinaryOperation)) {
-        return;
-      }
-
-      JsBinaryOperation op = (JsBinaryOperation) expr;
-      if (!(op.getArg2() instanceof JsInvocation)) {
-        return;
-      }
-
-      JsInvocation i = (JsInvocation) op.getArg2();
-      JsExpression q = i.getQualifier();
-      if (!(q instanceof JsNameRef)) {
-        return;
-      }
-
-      JsName name = ((JsNameRef) q).getName();
-      if (name == null) {
-        return;
-      }
-
-      // caughtFunction is the JsFunction translated from Exceptions.wrap
-      if (name.getStaticRef() != wrapFunction) {
+      if (!isExceptionWrappingCode(x)) {
         return;
       }
 
@@ -136,6 +113,37 @@ public class JsStackEmulator {
 
       ctx.insertAfter(reset.makeStmt());
     }
+  }
+
+  private boolean isExceptionWrappingCode(JsExprStmt x) {
+    // Looking for e = wrap(e);
+    JsExpression expr = x.getExpression();
+
+    if (!(expr instanceof JsBinaryOperation)) {
+      return false;
+    }
+
+    JsBinaryOperation op = (JsBinaryOperation) expr;
+    if (!(op.getArg2() instanceof JsInvocation)) {
+      return false;
+    }
+
+    JsInvocation i = (JsInvocation) op.getArg2();
+    JsExpression q = i.getQualifier();
+    if (!(q instanceof JsNameRef)) {
+      return false;
+    }
+
+    JsName name = ((JsNameRef) q).getName();
+    if (name == null) {
+      return false;
+    }
+
+    // caughtFunction is the JsFunction translated from Exceptions.wrap
+    if (name.getStaticRef() != wrapFunction) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -576,9 +584,12 @@ public class JsStackEmulator {
         JMethod method = jjsmap.nameToMethod(fnName);
         /**
          * Do not instrumental immortal types because they are potentially
-         * evaluated before anything else has been defined.
+         * evaluated before anything else has been defined, nor the Exceptions class that contains
+         * exception handling machinery.
          */
-        if (method != null && jprogram.immortalCodeGenTypes.contains(method.getEnclosingType())) {
+        if (method != null &&
+            (jprogram.immortalCodeGenTypes.contains(method.getEnclosingType()) ||
+                method.getEnclosingType() == exceptionsClass)) {
           return;
         }
         if (recordLineNumbers) {
@@ -623,13 +634,6 @@ public class JsStackEmulator {
     }
 
     @Override
-    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
-      // do not instrument left hand side of initializer.
-      x.setValueExpr(accept(x.getValueExpr()));
-      return false;
-    }
-
-    @Override
     public void endVisit(JsArrayAccess x, JsContext ctx) {
       record(x, ctx);
     }
@@ -646,7 +650,6 @@ public class JsStackEmulator {
       nodesInRefContext.remove(x.getQualifier());
 
       // Record the location as close as possible to calling the function.
-
       List<JsExpression> args = x.getArguments();
       if (!args.isEmpty()) {
         recordAfterLastArg(x);
@@ -702,6 +705,14 @@ public class JsStackEmulator {
       nodesInRefContext.remove(x.getArg());
     }
 
+    @Override
+    public boolean visit(JsExprStmt x, JsContext ctx) {
+      if (isExceptionWrappingCode(x)) {
+        // Don't instrument exception wrapping code.
+        return false;
+      }
+      return true;
+    }
     /**
      * This is essentially a hacked-up version of JsFor.traverse to account for
      * flow control differing from visitation order. It resets lastFile and
@@ -749,6 +760,13 @@ public class JsStackEmulator {
         nodesInRefContext.add(x.getArg());
       }
       return true;
+    }
+
+    @Override
+    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
+      // do not instrument left hand side of initializer.
+      x.setValueExpr(accept(x.getValueExpr()));
+      return false;
     }
 
     /**
@@ -996,6 +1014,7 @@ public class JsStackEmulator {
   private JsName stack;
   private JsName stackDepth;
   private JsName tmp;
+  private JDeclaredType exceptionsClass;
 
   private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
       PropertyOracle[] propertyOracles,
@@ -1003,6 +1022,7 @@ public class JsStackEmulator {
     this.jprogram = jprogram;
     this.jsProgram = jsProgram;
     this.jjsmap = jjsmap;
+    this.exceptionsClass = jprogram.getFromTypeMap("com.google.gwt.lang.Exceptions");
 
     assert propertyOracles.length > 0;
     PropertyOracle oracle = propertyOracles[0];
@@ -1019,6 +1039,16 @@ public class JsStackEmulator {
       e.printStackTrace();
     }
   }
+
+  private boolean shouldInstrumentFunction(JsExpression functionExpression) {
+    if (!(functionExpression instanceof JsNameRef)) {
+      return true;
+    }
+    JsNameRef fnNameRef = (JsNameRef) functionExpression;
+    JMethod method = jjsmap.nameToMethod(fnNameRef.getName());
+    return method == null || method.getEnclosingType() != exceptionsClass;
+  }
+
 
   private void execImpl() {
     wrapFunction = jsProgram.getIndexedFunction("Exceptions.wrap");

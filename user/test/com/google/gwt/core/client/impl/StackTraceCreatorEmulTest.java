@@ -26,6 +26,11 @@ import com.google.gwt.core.client.impl.StackTraceCreator.Collector;
  */
 public class StackTraceCreatorEmulTest extends StackTraceCreatorTest {
 
+  @Override
+  public void gwtSetUp() {
+    enableCheckLocation();
+  }
+
   public static void testJavaScriptException() {
     JsArrayString start = sample();
     Throwable t = null;
@@ -50,7 +55,8 @@ public class StackTraceCreatorEmulTest extends StackTraceCreatorTest {
     if (!GWT.isScript()) {
       myName = "testJavaScriptException";
     } else {
-      myName = Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorEmulTest::testJavaScriptException()");
+      myName = Impl.getNameOf(
+          "@com.google.gwt.core.client.impl.StackTraceCreatorEmulTest::testJavaScriptException()");
     }
 
     checkStack(myName, t);
@@ -92,7 +98,8 @@ public class StackTraceCreatorEmulTest extends StackTraceCreatorTest {
     if (!GWT.isScript()) {
       myName = "testStackTraces";
     } else {
-      myName = Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorEmulTest::testStackTraces()");
+      myName = Impl.getNameOf(
+          "@com.google.gwt.core.client.impl.StackTraceCreatorEmulTest::testStackTraces()");
     }
 
     checkStack(myName, t);

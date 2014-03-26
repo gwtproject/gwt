@@ -25,6 +25,8 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class StackTraceCreatorTest extends GWTTestCase {
 
+  private boolean checkLocation = false;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.StackTraceCreatorTest";
@@ -42,13 +44,24 @@ public class StackTraceCreatorTest extends GWTTestCase {
 
     final String[] expected = {
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException3(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException1(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException3(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException2(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException1(*)"),
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::testTrace()"),
     };
 
+    final String[] expectedLocations = {
+        "Throwable.java:56",
+        "StackTraceCreatorTest.java:159",
+        "StackTraceCreatorTest.java:150",
+        "StackTraceCreatorTest.java:144",
+        "StackTraceCreatorTest.java:39"
+    };
     assertTrace(expected, t.getStackTrace(), 0);
+    assertLocationTrace(expectedLocations, t.getStackTrace(), 0);
   }
 
   @DoNotRunWith(Platform.Devel)
@@ -66,21 +79,49 @@ public class StackTraceCreatorTest extends GWTTestCase {
         nativeMethodNames[0],
         nativeMethodNames[1],
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwNative(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException3(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException1(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException3(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException2(*)"),
+        Impl.getNameOf(
+            "@com.google.gwt.core.client.impl.StackTraceCreatorTest::throwException1(*)"),
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceCreatorTest::testTraceNative()"),
     };
 
     StackTraceElement[] trace = t.getStackTrace();
 
+    final String[] expectedLocations = {
+        "StackTraceCreatorTest.java:168",
+        "StackTraceCreatorTest.java:165",
+        "StackTraceCreatorTest.java:177",
+        "StackTraceCreatorTest.java:157",
+        "StackTraceCreatorTest.java:150",
+        "StackTraceCreatorTest.java:144",
+        "StackTraceCreatorTest.java:71"
+    };
+
     int offset = getTraceOffset(trace, expected[0]);
     assertTrace(expected, trace, offset);
+    assertLocationTrace(expectedLocations, t.getStackTrace(), offset);
   }
 
   private void assertTrace(final String[] expected, StackTraceElement[] trace, int offset) {
     for (int i = 0; i < expected.length; i++) {
       assertEquals("Incorrect frame at " + i, expected[i], trace[i + offset].getMethodName());
+    }
+  }
+
+  protected void assertLocationTrace(final String[] expectedLocations, StackTraceElement[] trace,
+      int offset) {
+    if (!checkLocation) {
+      // There is no general way to assert locations in the client, with the exception for the
+      // emulated stack mode.
+      return;
+    }
+    for (int i = 0; i < expectedLocations.length; i++) {
+      assertEquals("Incorrect localion inframe at " + i,
+          expectedLocations[i], trace[i + offset].getFileName() + ":" +
+          trace[i + offset].getLineNumber());
     }
   }
 
@@ -138,5 +179,9 @@ public class StackTraceCreatorTest extends GWTTestCase {
 
   static String extractName(String fnToString) {
     return new Collector().extractName(fnToString);
+  }
+
+  protected void enableCheckLocation() {
+    this.checkLocation = true;
   }
 }

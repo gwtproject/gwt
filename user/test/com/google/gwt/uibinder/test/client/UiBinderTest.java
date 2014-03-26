@@ -657,6 +657,10 @@ public class UiBinderTest extends GWTTestCase {
         StringCase.toLower(widgetUi.labelWithComputedText.getText()));
   }
   
+  public void testFlowPanelWithTag() {
+    assertEquals("P", widgetUi.flowPanelWithTag.getElement().getTagName());
+  }
+
   /**
    * Assert that the expect strings are found in body, and in the order given.
    * WARNING: both body and expected are normalized to lower case, to get around

@@ -15,8 +15,9 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Node;
-import com.google.gwt.user.client.DOM;
 
 /**
  * A panel that formats its child widgets using the default HTML layout
@@ -31,7 +32,14 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
    * Creates an empty flow panel.
    */
   public FlowPanel() {
-    setElement(DOM.createDiv());
+    this(DivElement.TAG);
+  }
+
+  /**
+   * Creates an empty flow panel with a custom tag.
+   */
+  public FlowPanel(String tag) {
+    setElement(Document.get().createElement(tag));
   }
 
   /**
@@ -58,6 +66,7 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
     }
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
@@ -70,6 +79,7 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
    * @throws IndexOutOfBoundsException if <code>beforeIndex</code> is out of
    *           range
    */
+  @Override
   public void insert(Widget w, int beforeIndex) {
     insert(w, getElement(), beforeIndex, true);
   }

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc1c3954_fdce2749",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/FlowPanelParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-26T05:55:20Z",
+      "side": 1,
+      "message": "nit: spaces",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc1c3954_ddc96b44",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/FlowPanelParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-26T05:55:20Z",
+      "side": 1,
+      "message": "Perhaps we should fail if uifield is provided and also a tag name is provided?\n\n    OwnerField uiField \u003d writer.getOwnerClass().getUiField(fieldName);\n    if (uiField !\u003d null \u0026\u0026 uiField.isProvided()) {\n      // fail();\n    }",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "2ef938e390abc8f366153defa2acfeeaddea71d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

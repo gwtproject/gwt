@@ -978,7 +978,10 @@ public class JsniCheckerTest extends CheckerTestCase {
        "    return @null::nullField;",
        "  }-*/;",
        "}");
-    shouldGenerateNoWarning(buggy);
+    shouldGenerateError(
+        buggy,
+        3,
+        "Referencing class 'null': unable to resolve class");
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
@@ -989,7 +992,7 @@ public class JsniCheckerTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing field 'null.foo': 'nullField' is the only legal field reference for 'null'");
+        "Referencing class 'null': unable to resolve class");
   }
 
   public void testNullMethod() {
@@ -999,7 +1002,10 @@ public class JsniCheckerTest extends CheckerTestCase {
        "    return @null::nullMethod()();",
        "  }-*/;",
        "}");
-    shouldGenerateNoWarning(buggy);
+    shouldGenerateError(
+        buggy,
+        3,
+        "Referencing class 'null': unable to resolve class");
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
@@ -1010,7 +1016,7 @@ public class JsniCheckerTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing method 'null.foo()': 'nullMethod()' is the only legal method for 'null'");
+        "Referencing class 'null': unable to resolve class");
   }
 
   public void testOverloadedMethodWithNoWarning() {

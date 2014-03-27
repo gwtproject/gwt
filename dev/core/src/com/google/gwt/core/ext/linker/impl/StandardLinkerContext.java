@@ -52,6 +52,7 @@ import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.OutputFileSet;
+import com.google.gwt.dev.util.arg.OptionOptimize;
 
 import java.io.File;
 import java.io.IOException;
@@ -415,6 +416,10 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
       }
     }
     return workingArtifacts;
+  }
+
+  public boolean isDraftCompile() {
+    return jjsOptions.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_DRAFT;
   }
 
   @Override

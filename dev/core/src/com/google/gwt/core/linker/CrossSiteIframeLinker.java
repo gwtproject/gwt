@@ -32,6 +32,7 @@ import com.google.gwt.core.ext.linker.impl.PropertiesMappingArtifact;
 import com.google.gwt.core.ext.linker.impl.PropertiesUtil;
 import com.google.gwt.core.ext.linker.impl.ResourceInjectionUtil;
 import com.google.gwt.core.ext.linker.impl.SelectionScriptLinker;
+import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.About;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
@@ -709,5 +710,14 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     // statement and even if we're not using an eval, the filename contains the strongname which
     // isn't stable across recompiles.
     out.print("\n//# sourceURL=" + context.getModuleName() + "-" + fragmentId + ".js\n");
+  }
+
+  /**
+   * If true, avoid optimizations that make debugging harder.
+   * (Experimental API.)
+   */
+  protected final boolean isDraftCompile(LinkerContext context) {
+    return (context instanceof StandardLinkerContext) &&
+        ((StandardLinkerContext) context).isDraftCompile();
   }
 }

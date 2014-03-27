@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f91d8f5d_8ee20ff4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-27T19:41:36Z",
+      "side": 0,
+      "message": "now that this syntax is no longer supported, the presence of a binding \u003d\u003d null would indicate an error?\n\nseems like we either need to be throwing an error here or need to add a comment explaining what this branch means and why it\u0027s not an error",
+      "range": {
+        "startLine": 261,
+        "startChar": 47,
+        "endLine": 267,
+        "endChar": 13
+      },
+      "revId": "d1748aa062afa739ac18ad6af3fa067e03caf49f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

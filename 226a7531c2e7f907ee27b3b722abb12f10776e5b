@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f91d8f5d_2e0adbed",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-27T19:41:36Z",
+      "side": 1,
+      "message": "can you add a comment about it setting the type marker in the Object prototype and that cascading to effect all subtypes?",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 63,
+        "endChar": 25
+      },
+      "revId": "226a7531c2e7f907ee27b3b722abb12f10776e5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_2ec3fb4b",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-27T19:41:36Z",
+      "side": 1,
+      "message": "s/testNullField/testOldStyleNullField",
+      "range": {
+        "startLine": 974,
+        "startChar": 14,
+        "endLine": 974,
+        "endChar": 27
+      },
+      "revId": "226a7531c2e7f907ee27b3b722abb12f10776e5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_4ebe37b6",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-03-27T19:41:36Z",
+      "side": 1,
+      "message": "s/testNullMethod/testOldStyleNullMethod",
+      "range": {
+        "startLine": 998,
+        "startChar": 14,
+        "endLine": 998,
+        "endChar": 28
+      },
+      "revId": "226a7531c2e7f907ee27b3b722abb12f10776e5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -247,6 +247,7 @@ public class JavaAstConstructor {
               "    return null;",
               "  }",
               "  public static void modernizeBrowser() {}",
+              "  public static void emptyMethod() {}",
               "}"
           );
         }

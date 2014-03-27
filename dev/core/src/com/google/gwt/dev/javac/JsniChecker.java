@@ -397,20 +397,6 @@ public class JsniChecker {
     private Binding checkRef(SourceInfo errorInfo, JsniRef jsniRef, boolean hasQualifier,
         boolean isLvalue) {
       String className = jsniRef.className();
-      if ("null".equals(className)) {
-        // Do not emit errors for null.nullField or null.nullMethod.
-        // TODO(rluble): Why should these ever reach checkRef()?
-        if (jsniRef.isField() && !"nullField".equals(jsniRef.memberName())) {
-          emitError("Referencing field '" + jsniRef.className() + "."
-              + jsniRef.memberName()
-              + "': 'nullField' is the only legal field reference for 'null'", errorInfo);
-        } else if (jsniRef.isMethod() && !"nullMethod()".equals(jsniRef.memberSignature())) {
-          emitError("Referencing method '" + jsniRef.className() + "."
-              + jsniRef.memberSignature()
-              + "': 'nullMethod()' is the only legal method for 'null'", errorInfo);
-        }
-        return null;
-      }
 
       boolean isArray = false;
       int dims = 0;

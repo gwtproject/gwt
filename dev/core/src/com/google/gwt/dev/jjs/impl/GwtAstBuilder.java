@@ -256,16 +256,10 @@ public class GwtAstBuilder {
         String ident = x.getIdent();
         if (ident.charAt(0) == '@') {
           Binding binding = jsniRefs.get(ident);
-          SourceInfo info = x.getSourceInfo();
-          if (binding == null) {
-            assert ident.startsWith("@null::");
-            if ("@null::nullMethod()".equals(ident)) {
-              processMethod(x, info, JMethod.NULL_METHOD);
-            } else {
-              assert "@null::nullField".equals(ident);
-              processField(x, info, JField.NULL_FIELD, ctx);
-            }
-          } else if (binding instanceof TypeBinding) {
+          // All jsni references should have been resolved before building the AST.
+          assert binding != null;
+
+          SourceInfo info = x.getSourceInfo(); if (binding instanceof TypeBinding) {
             JType type = typeMap.get((TypeBinding) binding);
             processClassLiteral(x, info, type, ctx);
           } else if (binding instanceof FieldBinding) {

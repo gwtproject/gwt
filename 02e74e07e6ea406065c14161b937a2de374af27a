@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d91a8b66_766d4e1b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "isInnerClass?\n\n(Because technically a nested class can be static)",
+      "range": {
+        "startLine": 54,
+        "startChar": 24,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_3667d63d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "I think the common practice is to either:\n\n abc\n \u003cp\u003e\n klm\n\n\nor\n\n\n abc\n \n \u003cp\u003eklm",
+      "range": {
+        "startLine": 73,
+        "startChar": 22,
+        "endLine": 73,
+        "endChar": 24
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_166cda1b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "We have tests that are covering these right?",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_3660f619",
+        "filename": "dev/core/src/com/google/gwt/dev/util/JsniRef.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "(An ignorant question)\n\nSo I guess you are changing this as we no longer need to support (*) but the new pattern looks more complex. Why is that?",
+      "range": {
+        "startLine": 54,
+        "startChar": 25,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_1665fa29",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCollectorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "Probably this class is not intended to be in the patch?",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_f6971eba",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be fully qualified so that developer could see how the class is resolved? Isn\u0027t that how javac outputs errors?",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_d6cb02e6",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsniDispatchTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "pls fix.",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91a8b66_568932a1",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsniDispatchTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T22:26:01Z",
+      "side": 1,
+      "message": "Nice tests!",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

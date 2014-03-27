@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_cedec7f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_57c71c32",
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1c3954_b7d4d0d9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2014-03-26T01:00:00Z",
       "side": 1,
       "message": "To refer to a non-public method, ...",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 8
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_eee183b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_b7d4d0d9",
       "range": {
         "startLine": 12,
         "startChar": 3,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_0ebcbf98",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_f73c88f5",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1c3954_b2685ecd",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 3
@@ -76,6 +142,30 @@
       "writtenOn": "2014-03-26T01:47:44Z",
       "side": 1,
       "message": "as we discussed offline this class is more than just a \"Checker\". please go ahead with those renames you wanted to do.",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_eeb863a6",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_b2685ecd",
       "range": {
         "startLine": 81,
         "startChar": 13,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_aec26b20",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_7298a6a8",
+      "range": {
+        "startLine": 216,
+        "startChar": 6,
+        "endLine": 216,
+        "endChar": 29
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1c3954_b75bf071",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
         "patchSetId": 3
@@ -122,6 +236,30 @@
       "writtenOn": "2014-03-26T01:47:44Z",
       "side": 1,
       "message": "please humor me by adding a comment saying something along the lines of \"Unlike Java, package-private access is not allowed.\"",
+      "range": {
+        "startLine": 566,
+        "startChar": 6,
+        "endLine": 566,
+        "endChar": 69
+      },
+      "revId": "b05efa0efba141b8a412e4cd8a63a418d0ddf717",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_4ecbd73a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-27T21:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1c3954_b75bf071",
       "range": {
         "startLine": 566,
         "startChar": 6,

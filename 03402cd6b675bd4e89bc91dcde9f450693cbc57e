@@ -56,6 +56,30 @@
       "revId": "03402cd6b675bd4e89bc91dcde9f450693cbc57e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_a3ce046c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-03-27T18:18:54Z",
+      "side": 1,
+      "message": "Removed speculative comment.",
+      "parentUuid": "f91d8f5d_57e7ee04",
+      "range": {
+        "startLine": 664,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 34
+      },
+      "revId": "03402cd6b675bd4e89bc91dcde9f450693cbc57e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

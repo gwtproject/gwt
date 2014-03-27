@@ -57,12 +57,7 @@ public class FlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
     try {
       doLogicalClear();
     } finally {
-      // Remove all existing child nodes.
-      Node child = getElement().getFirstChild();
-      while (child != null) {
-        getElement().removeChild(child);
-        child = getElement().getFirstChild();
-      }
+      getElement().removeAllChildren();
     }
   }
 

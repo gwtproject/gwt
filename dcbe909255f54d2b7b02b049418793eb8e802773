@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f91d8f5d_233e74ec",
+        "filename": "user/test/com/google/gwt/core/CoreJreSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-27T19:03:32Z",
+      "side": 1,
+      "message": "Core tests that runs as a regular JRE test.\n(Perhaps?)",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 11
+      },
+      "revId": "dcbe909255f54d2b7b02b049418793eb8e802773",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

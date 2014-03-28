@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_d41651a5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91a8b66_766d4e1b",
+      "range": {
+        "startLine": 54,
+        "startChar": 24,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d91a8b66_3667d63d",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2014-03-27T22:26:01Z",
       "side": 1,
       "message": "I think the common practice is to either:\n\n abc\n \u003cp\u003e\n klm\n\n\nor\n\n\n abc\n \n \u003cp\u003eklm",
+      "range": {
+        "startLine": 73,
+        "startChar": 22,
+        "endLine": 73,
+        "endChar": 24
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_b413d5b3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91a8b66_3667d63d",
       "range": {
         "startLine": 73,
         "startChar": 22,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_54bc814b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "Yes, it is only relevant for DevMode and we are covering.",
+      "parentUuid": "d91a8b66_166cda1b",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d91a8b66_3660f619",
         "filename": "dev/core/src/com/google/gwt/dev/util/JsniRef.java",
         "patchSetId": 4
@@ -76,6 +142,30 @@
       "writtenOn": "2014-03-27T22:26:01Z",
       "side": 1,
       "message": "(An ignorant question)\n\nSo I guess you are changing this as we no longer need to support (*) but the new pattern looks more complex. Why is that?",
+      "range": {
+        "startLine": 54,
+        "startChar": 25,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_d4af710d",
+        "filename": "dev/core/src/com/google/gwt/dev/util/JsniRef.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "It does support \u0027*\u0027. I added the parsing of [] so that we can check if it is an Array reference and how many dimensions here easily.",
+      "parentUuid": "d91a8b66_3660f619",
       "range": {
         "startLine": 54,
         "startChar": 25,
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_b4acf519",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniCollectorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91a8b66_1665fa29",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d91a8b66_f6971eba",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
         "patchSetId": 4
@@ -116,6 +224,24 @@
       "writtenOn": "2014-03-27T22:26:01Z",
       "side": 1,
       "message": "Shouldn\u0027t this be fully qualified so that developer could see how the class is resolved? Isn\u0027t that how javac outputs errors?",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_74e09d63",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "I opted for leaving the text that the user entered in the left hand side of the message. \n\nThe message could be improved by saying unable to resolve field \u0027f\u0027 in class \u0027A.B1.CC\u0027. I\u0027ll tackle that in a follow up.",
+      "parentUuid": "d91a8b66_f6971eba",
       "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "f91d8f5d_54d5a183",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsniDispatchTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91a8b66_d6cb02e6",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d91a8b66_568932a1",
         "filename": "user/test/com/google/gwt/dev/jjs/test/JsniDispatchTest.java",
         "patchSetId": 4
@@ -150,6 +294,24 @@
       "writtenOn": "2014-03-27T22:26:01Z",
       "side": 1,
       "message": "Nice tests!",
+      "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_14cf29f6",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsniDispatchTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-03-28T19:17:26Z",
+      "side": 1,
+      "message": "thanks",
+      "parentUuid": "d91a8b66_568932a1",
       "revId": "02e74e07e6ea406065c14161b937a2de374af27a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

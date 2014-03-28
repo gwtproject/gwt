@@ -16,6 +16,69 @@
       "revId": "43028106b4223288db2955ecc49e563e7fc96e91",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_31e7d754",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-28T00:02:41Z",
+      "side": 1,
+      "message": "nit: can you fix the wrapping?",
+      "range": {
+        "startLine": 586,
+        "startChar": 9,
+        "endLine": 588,
+        "endChar": 40
+      },
+      "revId": "43028106b4223288db2955ecc49e563e7fc96e91",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_b1f2c70a",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceCreatorEmulTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-28T00:02:41Z",
+      "side": 1,
+      "message": "pls revert the file.",
+      "revId": "43028106b4223288db2955ecc49e563e7fc96e91",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_318b575b",
+        "filename": "user/test/com/google/gwt/junit/client/GWTTestCaseStackTraceTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-03-28T00:02:41Z",
+      "side": 1,
+      "message": "As we discussed, less test this in StackTraceCreatorEmulTest.",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 20
+      },
+      "revId": "43028106b4223288db2955ecc49e563e7fc96e91",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

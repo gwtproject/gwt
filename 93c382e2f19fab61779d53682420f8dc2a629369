@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5944db56_de1ae980",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/user/client/rpc/RpcTokenTestWithTypeObfuscation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-03-31T18:25:43Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "93c382e2f19fab61779d53682420f8dc2a629369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

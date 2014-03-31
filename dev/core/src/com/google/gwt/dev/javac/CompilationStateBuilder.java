@@ -84,7 +84,7 @@ public class CompilationStateBuilder {
             // Only collect jsniMethod, artificial rescues, etc if the compilation unit
             // does not have errors.
             Map<MethodDeclaration, JsniMethod> jsniMethods =
-                JsniCollector.collectJsniMethods(cud, builder.getSourceMapPath(),
+                JsniMethodCollector.collectJsniMethods(cud, builder.getSourceMapPath(),
                     builder.getSource(), JsRootScope.INSTANCE, DummyCorrelationFactory.INSTANCE);
 
             JSORestrictionsChecker.check(jsoState, cud);

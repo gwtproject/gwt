@@ -241,55 +241,57 @@ public class GwtAstBuilder {
   class AstVisitor extends SafeASTVisitor {
 
     /**
-     * Resolves local references to function parameters, and JSNI references.
+     * Collects JSNI references from native method bodies and replaces the ones referring to
+     * compile time constants by their correspoinding constant value.
      */
-    private class JsniResolver extends JsModVisitor {
+    private class JsniReferenceCollector extends JsModVisitor {
       private final GenerateJavaScriptLiterals generator = new GenerateJavaScriptLiterals();
       private final JsniMethodBody nativeMethodBody;
 
-      private JsniResolver(JsniMethodBody nativeMethodBody) {
+      private JsniReferenceCollector(JsniMethodBody nativeMethodBody) {
         this.nativeMethodBody = nativeMethodBody;
       }
 
       @Override
       public void endVisit(JsNameRef x, JsContext ctx) {
+        if (!x.isJsniReference()) {
+          return;
+        }
         String ident = x.getIdent();
-        if (ident.charAt(0) == '@') {
-          Binding binding = jsniRefs.get(ident);
-          SourceInfo info = x.getSourceInfo();
-          if (binding == null) {
-            assert ident.startsWith("@null::");
-            if ("@null::nullMethod()".equals(ident)) {
-              processMethod(x, info, JMethod.NULL_METHOD);
-            } else {
-              assert "@null::nullField".equals(ident);
-              processField(x, info, JField.NULL_FIELD, ctx);
-            }
-          } else if (binding instanceof TypeBinding) {
-            JType type = typeMap.get((TypeBinding) binding);
-            processClassLiteral(x, info, type, ctx);
-          } else if (binding instanceof FieldBinding) {
-            FieldBinding fieldBinding = (FieldBinding) binding;
-            /*
-             * We must replace any compile-time constants with the constant
-             * value of the field.
-             */
-            if (isCompileTimeConstant(fieldBinding)) {
-              assert !ctx.isLvalue();
-              JExpression constant = getConstant(info, fieldBinding.constant());
-              generator.accept(constant);
-              JsExpression result = generator.pop();
-              assert (result != null);
-              ctx.replaceMe(result);
-            } else {
-              // Normal: create a jsniRef.
-              JField field = typeMap.get(fieldBinding);
-              processField(x, info, field, ctx);
-            }
+        Binding binding = jsniRefs.get(ident);
+        SourceInfo info = x.getSourceInfo();
+        if (binding == null) {
+          assert ident.startsWith("@null::");
+          if ("@null::nullMethod()".equals(ident)) {
+            processMethod(x, info, JMethod.NULL_METHOD);
           } else {
-            JMethod method = typeMap.get((MethodBinding) binding);
-            processMethod(x, info, method);
+            assert "@null::nullField".equals(ident);
+            processField(x, info, JField.NULL_FIELD, ctx);
           }
+        } else if (binding instanceof TypeBinding) {
+          JType type = typeMap.get((TypeBinding) binding);
+          processClassLiteral(x, info, type, ctx);
+        } else if (binding instanceof FieldBinding) {
+          FieldBinding fieldBinding = (FieldBinding) binding;
+          /*
+           * We must replace any compile-time constants with the constant
+           * value of the field.
+           */
+          if (isCompileTimeConstant(fieldBinding)) {
+            assert !ctx.isLvalue();
+            JExpression constant = getConstant(info, fieldBinding.constant());
+            generator.accept(constant);
+            JsExpression result = generator.pop();
+            assert (result != null);
+            ctx.replaceMe(result);
+          } else {
+            // Normal: create a jsniRef.
+            JField field = typeMap.get(fieldBinding);
+            processField(x, info, field, ctx);
+          }
+        } else {
+          JMethod method = typeMap.get((MethodBinding) binding);
+          processMethod(x, info, method);
         }
       }
 
@@ -2505,8 +2507,8 @@ public class GwtAstBuilder {
       // Resolve locals, params, and JSNI.
       JsParameterResolver localResolver = new JsParameterResolver(jsFunction);
       localResolver.accept(jsFunction);
-      JsniResolver jsniResolver = new JsniResolver(body);
-      jsniResolver.accept(jsFunction);
+      JsniReferenceCollector jsniReferenceCollector = new JsniReferenceCollector(body);
+      jsniReferenceCollector.accept(jsFunction);
     }
 
     private void processSuperCallLocalArgs(ReferenceBinding superClass, JMethodCall call) {

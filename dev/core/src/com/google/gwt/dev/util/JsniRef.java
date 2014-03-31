@@ -211,9 +211,19 @@ public class JsniRef {
     return resolvedClassName;
   }
 
+  public String getFullResolvedClassName() {
+    return resolvedClassName == null ? null :
+        resolvedClassName + Strings.repeat("[]", arrayDimensions);
+  }
+
   public String getResolvedReference() {
-    return "@" + resolvedClassName + Strings.repeat("[]", arrayDimensions) + "::"
-        + resolvedNemberSignature;
+    String fullResolvedClassName = getFullResolvedClassName();
+    return fullResolvedClassName == null || resolvedClassName == null ? null :
+        "@" + fullResolvedClassName + "::" + resolvedNemberSignature;
+  }
+
+  public String getResolvedMemberSignature() {
+    return resolvedNemberSignature;
   }
 
   public String fullClassName() {

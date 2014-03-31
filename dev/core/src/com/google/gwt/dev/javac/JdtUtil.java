@@ -17,10 +17,17 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
+import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
+import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utility functions to interact with JDT classes.
@@ -43,13 +50,59 @@ public final class JdtUtil {
   }
 
   public static String getSourceName(TypeBinding classBinding) {
-    return Joiner.on(".").skipNulls().join(new String[] {
+    return Joiner.on(".").skipNulls().join(new String[]{
         Strings.emptyToNull(CharOperation.charToString(classBinding.qualifiedPackageName())),
         CharOperation.charToString(classBinding.qualifiedSourceName())});
   }
 
   public static boolean isInnerClass(ReferenceBinding binding) {
     return binding.isNestedType() && !binding.isStatic();
+  }
+
+  public static String formatMethodSignature(MethodBinding methodBinding) {
+    ReferenceBinding declaringClassBinding = methodBinding.declaringClass;
+    StringBuilder methodNameWithSignature = new StringBuilder();
+    String selector = String.valueOf(methodBinding.selector);
+    List<TypeBinding> parameterTypeBindings = Lists.newArrayList();
+    if (selector.equals("<init>")) {
+      // It is a constructor.
+      // (1) use the JSNI selector instead of <init>.
+      selector = "new";
+      // (2) add the implicit constructor parameters types for non static inner classes.
+      if (isInnerClass(declaringClassBinding)) {
+        NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClassBinding;
+        if (nestedBinding.enclosingInstances != null) {
+          for (SyntheticArgumentBinding argumentBinding : nestedBinding.enclosingInstances) {
+            parameterTypeBindings.add(argumentBinding.type);
+          }
+        }
+      }
+    }
+
+    parameterTypeBindings.addAll(Arrays.asList(methodBinding.parameters));
+    methodNameWithSignature.append(selector);
+    methodNameWithSignature.append("(");
+    for (TypeBinding parameterTypeBinding : parameterTypeBindings) {
+      methodNameWithSignature.append(parameterTypeBinding.signature());
+    }
+    methodNameWithSignature.append(")");
+    return methodNameWithSignature.toString();
+  }
+
+  public static String formatBinding(MethodBinding methodBinding) {
+    String accessModifier = null;
+    if (methodBinding.isProtected()) {
+      accessModifier = "protected";
+    } else if (methodBinding.isPrivate()) {
+      accessModifier = "private";
+    } else if (methodBinding.isPublic()) {
+      accessModifier = "public";
+    }
+    return Joiner.on(" ").skipNulls().join(
+        accessModifier,
+        methodBinding.isStatic() ? "static" : null,
+        getSourceName(methodBinding.declaringClass) + "." +
+            formatMethodSignature(methodBinding));
   }
 
   private JdtUtil() {

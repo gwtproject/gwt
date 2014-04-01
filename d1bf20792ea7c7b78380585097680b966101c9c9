@@ -16,6 +16,328 @@
       "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_21dd8e85",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "this function needs a comment describing purpose and some example output",
+      "range": {
+        "startLine": 62,
+        "startChar": 23,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4101b223",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "what is the \"selector\"?",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4187f2b9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "reference in comment is stale",
+      "range": {
+        "startLine": 617,
+        "startChar": 61,
+        "endLine": 617,
+        "endChar": 70
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_e4a7349d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "i took this to mean \"If you\u0027re inside of class A then it\u0027s ok to refer to anything (even private stuff) inside class A\".\n\nbut it turned out that what\u0027s really meant is \"As long as the JSNI class reference is explicit then all functions are visible\"\n\nhow about phrase it as:\n// All methods are visible (regardless of access) as long as the JSNI class reference is explicit.",
+      "range": {
+        "startLine": 623,
+        "startChar": 13,
+        "endLine": 624,
+        "endChar": 22
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19ab4358_34c1fed1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "why was this changed? i think i could construct a false positive for this",
+      "range": {
+        "startLine": 681,
+        "startChar": 6,
+        "endLine": 681,
+        "endChar": 63
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_81b29ac7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "please add a TODO documenting that this is a fixup pass that should probably be occurring before GenerateJavaScriptAST and happening on it\u0027s own.",
+      "range": {
+        "startLine": 1700,
+        "startChar": 20,
+        "endLine": 1700,
+        "endChar": 61
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_81973a35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "move this comment down to after these new guard statements",
+      "range": {
+        "startLine": 1701,
+        "startChar": 10,
+        "endLine": 1701,
+        "endChar": 54
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_e1a7269d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "// If the invocation has no qualifier.",
+      "range": {
+        "startLine": 1702,
+        "startChar": 10,
+        "endLine": 1702,
+        "endChar": 57
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4186d206",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "// Then it\u0027s not an instance dispatch and so can\u0027t be a constructor.",
+      "range": {
+        "startLine": 1703,
+        "startChar": 12,
+        "endLine": 1703,
+        "endChar": 19
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_c1bb02a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "// If this dispatch was not created in JSNI.",
+      "range": {
+        "startLine": 1706,
+        "startChar": 10,
+        "endLine": 1706,
+        "endChar": 39
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_a1b87ea5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1707,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "// Then there\u0027s no need to rewrite foo.new() as new Foo();",
+      "range": {
+        "startLine": 1707,
+        "startChar": 12,
+        "endLine": 1707,
+        "endChar": 19
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_41fa525b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1724,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "this is a nice replacement for that isJsniIdent function",
+      "range": {
+        "startLine": 1724,
+        "startChar": 17,
+        "endLine": 1724,
+        "endChar": 34
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_81045aac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 245,
+        "startChar": 39,
+        "endLine": 245,
+        "endChar": 53
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_41237239",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNameRef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-01T20:47:01Z",
+      "side": 1,
+      "message": "is it possible to instead set a boolean (during JSNI method reference resolution?) on these instance?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 39
+      },
+      "revId": "d1bf20792ea7c7b78380585097680b966101c9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

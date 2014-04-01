@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d653da_5a3949b4",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T23:52:04Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_7a3e8d9f",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/overrides/package2/SomeSubClassInAnotherPackage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T23:52:04Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_1a33c1d6",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/overrides/package2/SomeSubSubClassInAnotherPackage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T23:52:04Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_3a3805ae",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/overrides/package3/SomeInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T23:52:04Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

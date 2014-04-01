@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d653da_f4b856a6",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T09:55:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.guava.common.base.Strings\u0027 import.",
+      "revId": "932e73f1b629ad112d3a7aff1762aedea4be448b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_94c54a2d",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T09:55:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JNonNullType.",
+      "revId": "932e73f1b629ad112d3a7aff1762aedea4be448b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_b4c2ce20",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-01T09:55:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JParameter.",
+      "revId": "932e73f1b629ad112d3a7aff1762aedea4be448b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

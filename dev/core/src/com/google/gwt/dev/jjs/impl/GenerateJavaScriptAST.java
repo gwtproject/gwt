@@ -542,6 +542,8 @@ public class GenerateJavaScriptAST {
           JsName polyName;
           if (x.isPrivate()) {
             polyName = interfaceScope.declareName(mangleNameForPrivatePoly(x), name);
+          } else if (x.isDefault()) {
+            polyName = interfaceScope.declareName(mangleNameForPackagePrivatePoly(x), name);
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
             polyName.setObfuscatable(false);
@@ -1707,7 +1709,7 @@ public class GenerateJavaScriptAST {
               assert node instanceof JConstructor;
               assert ref.getQualifier() == null;
               JsName jsName = names.get(node);
-              assert (jsName != null);
+               assert (jsName != null);
               ref.resolve(jsName);
               JsNew jsNew = new JsNew(x.getSourceInfo(), ref);
               jsNew.getArguments().addAll(x.getArguments());
@@ -2363,23 +2365,46 @@ public class GenerateJavaScriptAST {
       typeForStatMap.put(stmt, program.getTypeJavaLangObject());
     }
 
+    /**
+     * Create a vtable assignment of the form _.polyname = rhs; and register the line as
+     * created for {@code method}.
+     */
+    private void generateVTableAssignment(List<JsStatement> globalStmts, JMethod method,
+        JsName lhsName, JsExpression rhs) {
+      SourceInfo sourceInfo = method.getSourceInfo();
+      JsNameRef lhs = lhsName.makeRef(sourceInfo);
+      lhs.setQualifier(globalTemp.makeRef(sourceInfo));
+      JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
+      globalStmts.add(polyAssignment);
+      vtableInitForMethodMap.put(polyAssignment, method);
+    }
+
+    /**
+     * Creates the assignment for all polynames for a certain class, assumes that the global
+     * variable _ points the JavaScript prototype for {@code x}.
+     */
     private void generateVTables(JClassType x, List<JsStatement> globalStmts) {
       assert x != program.getTypeJavaLangString();
       for (JMethod method : x.getMethods()) {
         SourceInfo sourceInfo = method.getSourceInfo();
         if (method.needsVtable() && !method.isAbstract()) {
-          JsNameRef lhs = polymorphicNames.get(method).makeRef(sourceInfo);
-          lhs.setQualifier(globalTemp.makeRef(sourceInfo));
-
           /*
            * Inline JsFunction rather than reference, e.g. _.vtableName =
            * function functionName() { ... }
            */
           JsExpression rhs = methodBodyMap.get(method.getBody());
-          JsExpression asg = createAssignment(lhs, rhs);
-          JsExprStmt asgStat = new JsExprStmt(x.getSourceInfo(), asg);
-          globalStmts.add(asgStat);
-          vtableInitForMethodMap.put(asgStat, method);
+          generateVTableAssignment(globalStmts, method, polymorphicNames.get(method), rhs);
+
+          if (method.exposesdDirectlyOverridenPackagePrivateMethod()) {
+            // If this method exposes a package private method, it needs 2 names.
+            // _.name2 = _.name1
+            JsNameRef polyname = polymorphicNames.get(method).makeRef(sourceInfo);
+            polyname.setQualifier(globalTemp.makeRef(sourceInfo));
+
+            generateVTableAssignment(globalStmts, method,
+                polymorphicNames.get(program.typeOracle.getTopMostDefinition(method)),
+                polyname);
+          }
         }
       }
     }
@@ -2955,22 +2980,35 @@ public class GenerateJavaScriptAST {
     return s;
   }
 
-  String mangleNameForPoly(JMethod x) {
-    assert !x.isPrivate() && !x.isStatic();
-    StringBuffer sb = new StringBuffer();
+  String mangleNameForPackagePrivatePoly(JMethod x) {
+    assert x.isDefault() && !x.isStatic();
+    StringBuilder sb = new StringBuilder();
+    /*
+     * Private instance methods in different classes should not override each
+     * other, so they must have distinct polymorphic names. Therefore, add the
+     * class name to the mangled name.
+     */
+    sb.append("package_private$");
+    JMethod topDefinition = program.typeOracle.getTopMostDefinition(x);
+    sb.append(getNameString(topDefinition.getEnclosingType()));
+    sb.append("$");
     sb.append(getNameString(x));
-    sb.append("__");
-    for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
-      JType type = x.getOriginalParamTypes().get(i);
-      sb.append(type.getJavahSignatureName());
-    }
-    sb.append(x.getOriginalReturnType().getJavahSignatureName());
+    constructManglingSignature(x, sb);
     return sb.toString();
   }
 
+  String mangleNameForPoly(JMethod x) {
+    assert !x.isPrivate() && !x.isStatic();
+    StringBuilder sb = new StringBuilder();
+    sb.append(getNameString(x));
+    constructManglingSignature(x, sb);
+    return sb.toString();
+  }
+
+
   String mangleNameForPrivatePoly(JMethod x) {
     assert x.isPrivate() && !x.isStatic();
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     /*
      * Private instance methods in different classes should not override each
      * other, so they must have distinct polymorphic names. Therefore, add the
@@ -2980,13 +3018,17 @@ public class GenerateJavaScriptAST {
     sb.append(getNameString(x.getEnclosingType()));
     sb.append("$");
     sb.append(getNameString(x));
+    constructManglingSignature(x, sb);
+    return sb.toString();
+  }
+
+  private void constructManglingSignature(JMethod x, StringBuilder sb) {
     sb.append("__");
     for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
       JType type = x.getOriginalParamTypes().get(i);
       sb.append(type.getJavahSignatureName());
     }
     sb.append(x.getOriginalReturnType().getJavahSignatureName());
-    return sb.toString();
   }
 
   String mangleNameSpecialObfuscate(JField x) {

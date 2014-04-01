@@ -618,6 +618,27 @@ public class JTypeOracle implements Serializable {
     return dualImpls.contains(maybeDualImpl.getUnderlyingType());
   }
 
+
+  /**
+   * Returns the method definition where {@code method} is first defined in a class.
+   */
+  public JMethod getTopMostDefinition(JMethod method) {
+    if (method.getEnclosingType() instanceof JInterfaceType) {
+      return null;
+    }
+    JMethod currentDefinition = method;
+    for (JMethod override : method.getOverrides()) {
+      if (override.getEnclosingType() instanceof JInterfaceType) {
+        continue;
+      }
+      if (isSuperClass((JClassType) currentDefinition.getEnclosingType(),
+          (JClassType) override.getEnclosingType())) {
+        currentDefinition = override;
+      }
+    }
+    return currentDefinition;
+  }
+
   /**
    * Whether this type oracle has whole world knowledge or not. Monolithic compiles have whole
    * world knowledge but separate compiles know only about their immediate source and the

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -177,14 +177,6 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   /**
-   * Add methods that this method overrides.
-   */
-  public void addOverrides(List<JMethod> toAdd) {
-    assert canBePolymorphic();
-    overrides = Lists.addAll(overrides, toAdd);
-  }
-
-  /**
    * Adds a parameter to this method.
    */
   public void addParam(JParameter x) {
@@ -214,6 +206,30 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
       paramTypes.add(param.getType());
     }
     setOriginalTypes(returnType, paramTypes);
+  }
+
+  /**
+   * Returns true if this method directly overrides a package private method.
+   */
+  public boolean exposesdDirectlyOverridenPackagePrivateMethod() {
+    if (isPrivate() || isDefault()) {
+      return false;
+    }
+
+    boolean overridesPrivatePackageMethod = false;
+    for (JMethod override : overrides) {
+      if (override.getEnclosingType() instanceof JInterfaceType) {
+        continue;
+      }
+      if (!override.isDefault()) {
+        // Package private method is exposed by the class where override is declared.
+        return false;
+      }
+      overridesPrivatePackageMethod = true;
+    }
+
+    // Method is not exposed in any superclass, hence it is exposed here.
+    return overridesPrivatePackageMethod;
   }
 
   public AccessModifier getAccess() {
@@ -471,7 +487,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   /**
    * See {@link #writeBody(ObjectOutputStream)}.
-   * 
+   *
    * @see #writeBody(ObjectOutputStream)
    */
   void readBody(ObjectInputStream stream) throws IOException, ClassNotFoundException {
@@ -489,7 +505,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * After all types, fields, and methods are written to the stream, this method
    * writes method bodies to the stream.
-   * 
+   *
    * @see JProgram#writeObject(ObjectOutputStream)
    */
   void writeBody(ObjectOutputStream stream) throws IOException {

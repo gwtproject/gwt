@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3943a782_7eb1f10b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2430,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:29Z",
+      "side": 1,
+      "message": "There are two design alternatives here. \nEither \n(1)  generate an extra assignment in the classes where a package protected method becomes protected/public. In which case needs to be a closure so that if the protected/public method gets overriden down the line dispatches throw the name corresponding to the package private method are correct. This would need to be generated only once as:\n\n_.package_private_name \u003d function() { this.public_name.apply(this, arguments); }\n\nor (2) repeat the static assignment at each subclass that redefined the public/protected method. In this cases case every subclass will have the following assignment:\n\n_.package_private_name \u003d _.public_name\n\n\nAfter discussing with the closure guys, they suggested the second alternative as being more closure friendly. \n\nIn most practical cases the package private version will be made static and all this would have been optimized away.",
+      "range": {
+        "startLine": 2405,
+        "startChar": 2,
+        "endLine": 2430,
+        "endChar": 35
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

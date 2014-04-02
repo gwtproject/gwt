@@ -93,6 +93,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_0d99941a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_15d24411",
+      "range": {
+        "startLine": 212,
+        "startChar": 5,
+        "endLine": 212,
+        "endChar": 77
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_35b948cd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 1
@@ -104,6 +128,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "spelling",
+      "range": {
+        "startLine": 214,
+        "startChar": 17,
+        "endLine": 214,
+        "endChar": 62
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_cd8e8cd7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_35b948cd",
       "range": {
         "startLine": 214,
         "startChar": 17,
@@ -139,6 +187,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_ad8188a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Comment addressed below.",
+      "parentUuid": "99349308_35ff884b",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 49
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_15ab646b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 1
@@ -150,6 +222,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "s/override/overriddenMethod",
+      "range": {
+        "startLine": 220,
+        "startChar": 17,
+        "endLine": 220,
+        "endChar": 25
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_8d8644b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done. Changed all uses of override(s) to overridenMethod(s)",
+      "parentUuid": "99349308_15ab646b",
       "range": {
         "startLine": 220,
         "startChar": 17,
@@ -179,6 +275,24 @@
     },
     {
       "key": {
+        "uuid": "99349308_4d51dca0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "If this method already overrides a public or protected method then it does not DIRECTLY expose a package private method. The package private method is exposed by one of the super classes.\n\nBut I actually changes the meaning of this method to be exposes directly or indirectly.",
+      "parentUuid": "99349308_cd768c62",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_b5ea7885",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 1
@@ -190,6 +304,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "delete line",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 228,
+        "endChar": 43
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_0d723424",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Comment addressed below.",
+      "parentUuid": "99349308_b5ea7885",
       "range": {
         "startLine": 228,
         "startChar": 6,
@@ -249,6 +387,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_de11146f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "I have actually changed the meaning of this method to include methods that transitively expose a package private method so got rid of the boolean variable.",
+      "parentUuid": "99349308_b0460697",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 40
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_952f740a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 1
@@ -260,6 +422,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "s/currentDefinition/currentMethod",
+      "range": {
+        "startLine": 629,
+        "startChar": 12,
+        "endLine": 629,
+        "endChar": 29
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_edf39051",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_952f740a",
       "range": {
         "startLine": 629,
         "startChar": 12,
@@ -295,6 +481,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_cdf04c48",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_95565498",
+      "range": {
+        "startLine": 630,
+        "startChar": 17,
+        "endLine": 630,
+        "endChar": 25
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_70863ebc",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -306,6 +516,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "remove jank",
+      "range": {
+        "startLine": 1712,
+        "startChar": 12,
+        "endLine": 1712,
+        "endChar": 18
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_2dfe1819",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_70863ebc",
       "range": {
         "startLine": 1712,
         "startChar": 12,
@@ -341,6 +575,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_0dfb5428",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2370,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "thx",
+      "parentUuid": "99349308_1017f2a2",
+      "range": {
+        "startLine": 2369,
+        "startChar": 7,
+        "endLine": 2370,
+        "endChar": 34
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_70ef5e6a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -352,6 +610,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "somewhere the code comments needs to carefully explain why it is that methods that expose a package private method, need to have 2 names.\n\ni think that place is here.",
+      "range": {
+        "startLine": 2399,
+        "startChar": 12,
+        "endLine": 2400,
+        "endChar": 32
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_a0ecefe6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "done. And actually found a corner case while writing the comment.",
+      "parentUuid": "99349308_70ef5e6a",
       "range": {
         "startLine": 2399,
         "startChar": 12,
@@ -387,6 +669,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_00dddb2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2989,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_300e7694",
+      "range": {
+        "startLine": 2987,
+        "startChar": 4,
+        "endLine": 2989,
+        "endChar": 38
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_7008fe84",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -398,6 +704,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "s/sb/partialSignature",
+      "range": {
+        "startLine": 3025,
+        "startChar": 67,
+        "endLine": 3025,
+        "endChar": 69
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4010831d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3025,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_7008fe84",
       "range": {
         "startLine": 3025,
         "startChar": 67,
@@ -427,6 +757,24 @@
     },
     {
       "key": {
+        "uuid": "99349308_a356b997",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_90d5c287",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_10b0926b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 1
@@ -438,6 +786,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "// The foundMethod isn\u0027t actually an override because the shared signature doesn\u0027t take into account package private access.",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_e3a56132",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Clarified.",
+      "parentUuid": "99349308_10b0926b",
       "range": {
         "startLine": 90,
         "startChar": 8,
@@ -531,6 +903,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "s/m/M",
+      "range": {
+        "startLine": 148,
+        "startChar": 58,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_63db11bb",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T19:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_d0ce2af8",
       "range": {
         "startLine": 148,
         "startChar": 58,

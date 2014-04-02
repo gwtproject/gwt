@@ -301,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "79527f52_d8dc8d35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T23:27:47Z",
+      "side": 1,
+      "message": "You\u0027re right, I was thinking of the way it used to be structured, before the refactoring and before I hoisted it out of the if/else cascade (which fixed a heisenbug where -XdisableCastChecking could cause JSOs to get stripped)",
+      "parentUuid": "79527f52_38ce69a5",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_eded50a1",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 32

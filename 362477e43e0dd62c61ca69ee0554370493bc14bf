@@ -152,6 +152,24 @@
       "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dca43989_960d4d9a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:33Z",
+      "side": 1,
+      "message": "$wnd[b] returns a constructor. instanceof and isPrototypeOf both essentially do the same thing, but instanceof is 500% faster (http://jsperf.com/instanceof-vs-isprototypeof)",
+      "parentUuid": "28ab4b9f_93c50e4a",
+      "revId": "362477e43e0dd62c61ca69ee0554370493bc14bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

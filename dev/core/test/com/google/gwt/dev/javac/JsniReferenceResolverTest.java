@@ -358,6 +358,33 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
     shouldGenerateNoWarning(buggy);
   }
+  public void testAssignment_InstanceMethod_toField() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Some",
+        "public class Some {",
+        "  public void callback() {",
+        "  }",
+        "  native void installCallback(Some o) /*-{",
+        "    $wnd.someCallback = o.@Some::callback();",
+        "  }-*/;",
+        "}");
+
+    shouldGenerateWarning(buggy, 5, "Method reference 'Some.callback' is assigned to a field "
+        + "but is not capturing the qualifier 'o'");
+  }
+
+  public void testAssignment_InstanceMethod_toVariable() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Some",
+        "public class Some {",
+        "  public void callback() {",
+        "  }",
+        "  native void installCallback(Some o) /*-{",
+        "    var a = o.@Some::callback();",
+        "  }-*/;",
+        "}");
+
+    shouldGenerateNoWarning(buggy);
+  }
+
 
   public void testJsoStaticMethod() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
@@ -379,16 +406,18 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing method 'com.google.gwt.core.client.JavaScriptObject.toString()': references to instance methods in overlay types are illegal");
+        "Referencing method 'com.google.gwt.core.client.JavaScriptObject.toString()': "
+            + "references to instance methods in overlay types are illegal");
   }
 
   public void testJsoInterfaceMethod() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+       "import com.google.gwt.core.client.JavaScriptObject;",
        "class Buggy {",
        "  interface IFoo {",
        "    void foo();",
        "  }",
-       "  static final class Foo extends com.google.gwt.core.client.JavaScriptObject implements IFoo{",
+       "  static final class Foo extends JavaScriptObject implements IFoo {",
        "    protected Foo() { };",
        "    public void foo() { };",
        "  }",
@@ -398,8 +427,10 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
     shouldGenerateError(
         buggy,
-        10,
-        "Referencing interface method 'Buggy.IFoo.foo()': implemented by 'Buggy$Foo'; references to instance methods in overlay types are illegal; use a stronger type or a Java trampoline method");
+        11,
+        "Referencing interface method 'Buggy.IFoo.foo()': implemented by 'Buggy$Foo'; "
+            + "references to instance methods in overlay types are illegal;"
+            + " use a stronger type or a Java trampoline method");
   }
 
   public void testJsoSubclassInstanceMethod() {
@@ -416,7 +447,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         7,
-        "Referencing method 'Buggy.Foo.foo()': references to instance methods in overlay types are illegal");
+        "Referencing method 'Buggy.Foo.foo()': "
+            + "references to instance methods in overlay types are illegal");
   }
 
   public void testJsoSubclassStaticMethod() {

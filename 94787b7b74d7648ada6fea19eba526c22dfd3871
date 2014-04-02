@@ -162,6 +162,23 @@
     },
     {
       "key": {
+        "uuid": "99349308_cd768c62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T16:22:01Z",
+      "side": 1,
+      "message": "Why does this early exit? Wouldn\u0027t you have to check all of them?",
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_b5ea7885",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 1

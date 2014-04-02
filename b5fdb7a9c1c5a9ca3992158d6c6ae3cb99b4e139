@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99349308_8d95a426",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Is this only relevant for new Js interop or was it also a bug with regular JSOs?\n\nIf it was a bug with JSOs, we should add the relevant regression test.",
+      "range": {
+        "startLine": 101,
+        "startChar": 1,
+        "endLine": 105,
+        "endChar": 1
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4da27c95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Doesn\u0027t this constructor need to copy rescueViaACast also?\n\nI guess that when this constructor is called all the types in cfa.rescueViaCast have already been rescued right? if so I think you should do rescueViaCast.clear() in RescueVisitor::RescueVisitor and assert here cfa.rescueViaCast.isEmpty().",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_4d743c56",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 3200,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Could we encapsulate all annotation accessors related to JsInterface into a separate file JsInteropUtil? \n\nand transform this into getExportName(....). Similarly for the rest of accesses below.",
+      "range": {
+        "startLine": 3195,
+        "startChar": 0,
+        "endLine": 3200,
+        "endChar": 5
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_cd5facd0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 3431,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Move all these to JdtUtil.",
+      "range": {
+        "startLine": 3368,
+        "startChar": 0,
+        "endLine": 3431,
+        "endChar": 3
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_6da8205c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "remove.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 11
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_cdb84ca7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Duplication. Same condition as previous different order.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 17
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_cde16cb5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "All this instantiation logic does not seem to belong here. I think it should be moved to CFA. Or at worst a completely separate pass ComputeInstantiatedJsoTypes.",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 5
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_eded50a1",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T16:31:50Z",
+      "side": 1,
+      "message": "Goktug had some comment on this, could you address those.",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 193,
+        "endChar": 7
+      },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

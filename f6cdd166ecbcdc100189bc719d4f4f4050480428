@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3943a782_416d341b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_5e6cf51c",
+      "range": {
+        "startLine": 1021,
+        "startChar": 25,
+        "endLine": 1021,
+        "endChar": 32
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99d653da_60357c5a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2014-04-02T21:39:38Z",
       "side": 1,
       "message": "situation",
+      "range": {
+        "startLine": 2410,
+        "startChar": 27,
+        "endLine": 2410,
+        "endChar": 33
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_c14944a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d653da_60357c5a",
       "range": {
         "startLine": 2410,
         "startChar": 27,
@@ -94,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "3943a782_8160dc1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2430,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_7eb1f10b",
+      "range": {
+        "startLine": 2405,
+        "startChar": 2,
+        "endLine": 2430,
+        "endChar": 35
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_215bc872",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2430,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d653da_4034f85b",
+      "range": {
+        "startLine": 2429,
+        "startChar": 15,
+        "endLine": 2430,
+        "endChar": 34
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99d653da_0046f0e0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2014-04-02T21:39:38Z",
       "side": 1,
       "message": "not a sentence",
+      "range": {
+        "startLine": 90,
+        "startChar": 11,
+        "endLine": 90,
+        "endChar": 64
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_e4f28e0b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d653da_0046f0e0",
       "range": {
         "startLine": 90,
         "startChar": 11,
@@ -163,6 +283,54 @@
     },
     {
       "key": {
+        "uuid": "3943a782_e4244ec4",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_a15fd8d0",
+      "range": {
+        "startLine": 22,
+        "startChar": 36,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_04285a94",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_c162e498",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 22
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3943a782_015decd7",
         "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
         "patchSetId": 3
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "3943a782_64395eea",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_015decd7",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 69
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3943a782_21ad886b",
         "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
         "patchSetId": 3
@@ -197,6 +389,30 @@
       "writtenOn": "2014-04-02T21:39:38Z",
       "side": 1,
       "message": "after being made public",
+      "range": {
+        "startLine": 28,
+        "startChar": 50,
+        "endLine": 28,
+        "endChar": 67
+      },
+      "revId": "f6cdd166ecbcdc100189bc719d4f4f4050480428",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_a41a467f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/overrides/package1/ClassExposingM.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T22:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3943a782_21ad886b",
       "range": {
         "startLine": 28,
         "startChar": 50,

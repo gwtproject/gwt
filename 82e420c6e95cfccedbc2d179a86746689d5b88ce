@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d653da_4bb65906",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-02T23:30:36Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "82e420c6e95cfccedbc2d179a86746689d5b88ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99d653da_ebaaad97",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/emultest/java/util/TreeSetIntegerWithComparatorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-02T23:30:36Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.NavigableSet\u0027 import.",
+      "revId": "82e420c6e95cfccedbc2d179a86746689d5b88ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

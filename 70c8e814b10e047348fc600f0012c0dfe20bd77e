@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79527f52_f85cf1dd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "Perhaps use ImmutableMap.Builder in the static initializer instead of extending the hashmap?",
+      "range": {
+        "startLine": 755,
+        "startChar": 10,
+        "endLine": 755,
+        "endChar": 17
+      },
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_788101a2",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "Can you add a TODO comment to remove the support for \"$wnd\"?",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_b849d9a9",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "Shouldn\u0027t \"$wnd\" be default? Are there any strong use cases for \u0027global this\u0027?",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_b89719bb",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "nit: remove extra {}",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_3884a98c",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "nit: remove extra {}",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_d8facd22",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "\u003e If full optimizations are turned on, it is possible for the compiler to dead-strip the doc1/doc2/doc3 variables since they are not used, therefore the casts could potentially be stripped. I haven\u0027t verified the compiler does this, but it could do it in the future.\n\nCan you state that in the comment as it may not be obvious to the reader?",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_d8ac8d1b",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-02T23:56:23Z",
+      "side": 1,
+      "message": "\u003e \u003e This should be false per spec as it is against java semantics.\n\n\u003e Is it? When testing against \u0027Object\u0027 type, a cast against any type (T) could theoretically succeed. Maybe the spec should say that only one interface can be bound to a given prototype, otherwise, it seems legal to have HTMLButtonElement and YetAnotherHtmlButtonElement which both point to the same JS prototype.\n\nIt is hard to enforce one interface per prototype. I thought it would be nicer to follow java semantics to avoid surprises, but it may be surprising the other way as well.\nSo I\u0027ll update the docs to reflect this change. However with this, don\u0027t you need to make sure that instanceof checks are NOT optimized to false? I know you were earlier concerned about instanceof check optimized to true.",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

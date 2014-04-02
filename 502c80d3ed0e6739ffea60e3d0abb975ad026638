@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d653da_0b44d166",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-02T22:58:01Z",
+      "side": 1,
+      "message": "[error] \u0027org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration\u0027 should be separated from previous imports.",
+      "revId": "502c80d3ed0e6739ffea60e3d0abb975ad026638",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

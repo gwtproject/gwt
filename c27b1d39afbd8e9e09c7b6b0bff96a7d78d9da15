@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79527f52_788e21ac",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 35
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T23:48:34Z",
+      "side": 1,
+      "message": "Add a TODO to move these resource to a the intrinsic/GWT mock resources class.",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 1
+      },
+      "revId": "c27b1d39afbd8e9e09c7b6b0bff96a7d78d9da15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_18e0c562",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 35
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T23:48:34Z",
+      "side": 1,
+      "message": "assert ** cfa. ** rescuedViaCast.isEmpty();",
+      "range": {
+        "startLine": 962,
+        "startChar": 11,
+        "endLine": 962,
+        "endChar": 25
+      },
+      "revId": "c27b1d39afbd8e9e09c7b6b0bff96a7d78d9da15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

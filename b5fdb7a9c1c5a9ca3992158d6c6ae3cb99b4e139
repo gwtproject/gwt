@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "3943a782_c4e4b2c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "As far as I can tell, it didn\u0027t cause any problems for JSOs, but it did break once I added JsInterop logic to CFA.  SingleImplJsoTest actually is the regression test in that regard.\n\nI can better explain this in person.",
+      "parentUuid": "99349308_8d95a426",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_4da27c95",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 32
@@ -36,6 +54,24 @@
       "writtenOn": "2014-04-02T16:31:50Z",
       "side": 1,
       "message": "Doesn\u0027t this constructor need to copy rescueViaACast also?\n\nI guess that when this constructor is called all the types in cfa.rescueViaCast have already been rescued right? if so I think you should do rescueViaCast.clear() in RescueVisitor::RescueVisitor and assert here cfa.rescueViaCast.isEmpty().",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_24ff564b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "99349308_4da27c95",
       "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "3943a782_448702ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 3200,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_4d743c56",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_cd5facd0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 32
@@ -82,6 +136,24 @@
         "endLine": 3431,
         "endChar": 3
       },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_e498ce18",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 3431,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_cd5facd0",
       "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -111,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "3943a782_64867ebc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_6da8205c",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_cdb84ca7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
         "patchSetId": 32
@@ -128,6 +218,24 @@
         "endLine": 116,
         "endChar": 17
       },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_a477e615",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99349308_cdb84ca7",
       "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -157,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "3943a782_c41cb2c8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "By the time this runs, the Casts are removed, so the CFA can\u0027t really do anything. This information is dependent on logic in this class that would be duplicated here. Basically,I\u0027d have to copy paste the same visitor from here, except remove the mutation. That seems sort of wasteful. If we\u0027re going to refactor this, let\u0027s leave it for later.",
+      "parentUuid": "99349308_cde16cb5",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_eded50a1",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 32
@@ -174,6 +300,24 @@
         "endLine": 193,
         "endChar": 7
       },
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3943a782_44b2627c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:49:01Z",
+      "side": 1,
+      "message": "I\u0027d rather not remove them just yet, I need this functionality to test on an internal app. I will remove these in followup CLs. Let\u0027s just get this landed and then iterate. This is harmless as is.",
+      "parentUuid": "99349308_eded50a1",
       "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

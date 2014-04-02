@@ -208,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "99349308_b0460697",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T02:14:56Z",
+      "side": 1,
+      "message": "Note that overridesPrivatePackegeMethod can be false when overrides is not empty (but consists only of interface methods).\n\nAre you suggesting that Interface methods never appear in overrides? That might be the case, I\u0027ll have to check.",
+      "parentUuid": "99349308_35282812",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 40
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_952f740a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 1
@@ -420,6 +444,30 @@
       "writtenOn": "2014-04-02T02:01:49Z",
       "side": 1,
       "message": "i think we want this test function to run in both a Java TestCase and a GWTTestCase. can you put the function in some common place and call it from two different tests?",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 30
+      },
+      "revId": "94787b7b74d7648ada6fea19eba526c22dfd3871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99349308_b02f26b7",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T02:14:56Z",
+      "side": 1,
+      "message": "It sort of runs as a Java test case indirectly by running in devmode (and the classes do not contain any jsni so they fully run as Java). When we dispose of devmode we will have to find a generic solution to run most of the compiler GwtTestCases in Java.",
+      "parentUuid": "99349308_5084da8c",
       "range": {
         "startLine": 128,
         "startChar": 2,

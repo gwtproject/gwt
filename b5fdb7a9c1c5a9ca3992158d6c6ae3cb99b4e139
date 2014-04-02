@@ -283,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "79527f52_38ce69a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-02T23:11:51Z",
+      "side": 1,
+      "message": "What am I missing here, they look quite orthogonal to me. I might be missing something looking at it in gerrit but it seems to me that we can introduce the following pass, and call it just before ImplementCastsAndTypeChecks (and the only duplication is the condition in endVisit(JCastOperation)).\n\n\n\npublic class ComputeInstanciatedJsoInterfaces {\n\n  class InstantiatedJsoInterfacesCollector extends JVisitor {\n\n    public void endVisit(JCastOperation x, Context ctx) {\n      JExpression replaceExpr;\n      JType toType \u003d x.getCastType();\n      JExpression expr \u003d x.getExpr();\n\n\n      // Even if disableCastChecking is enabled, we need to rescue JSOs\n      if (toType instanceof JReferenceType \u0026\u0026 !(toType instanceof JNullType)) {\n        JReferenceType refType \u003d ((JReferenceType) toType).getUnderlyingType();\n\n\n          instantiateJsoInterface(refType);\n        }\n      }\n   }\n\n   private void instantiateJsoInterface(JReferenceType toType) {\n      if (instantiatedJsoTypes.add(toType)) {\n        if (program.typeOracle.getSingleJsoImpl(toType) !\u003d null) {\n          // rescuing an Interface via Cast, we record the JSO implementing it\n          instantiateJsoInterface(program.typeOracle.getSingleJsoImpl(toType));\n        }\n        // if it\u0027s a class, and the superType is JSO, rescue it too\n        if (toType instanceof JClassType) {\n          JClassType superType \u003d ((JClassType) toType).getSuperClass();\n          if (superType !\u003d null \u0026\u0026 program.isJavaScriptObject(superType)) {\n            instantiateJsoInterface(superType);\n          }\n        }\n\n        // if we extend another JsInterface, or Interface with JSO implementation, rescue it\n        for (JInterfaceType intf : ((JDeclaredType) toType).getImplements()) {\n          if (intf.isJsInterface() || program.typeOracle.getSingleJsoImpl(intf) !\u003d null) {\n            instantiateJsoInterface(intf);\n          }\n        }\n      }\n    }\n      private final JProgram program;\n\n     private final Set\u003cJReferenceType\u003e instantiatedJsoTypes \u003d new HashSet\u003cJReferenceType\u003e();\n     \n  public static void exec(JProgram program, boolean disableCastChecking) {\n    new ComputeInstanciatedJsoInterfaces(program, disableCastChecking).execImpl();\n  }\n  \n  private ComputeInstanciatedJsoInterfaces(JProgram program) {\n    this.program \u003d program;\n  }\n\n  private void execImpl() {\n    InstantiatedJsoInterfacesCollector replacer \u003d new InstantiatedJsoInterfacesCollector();\n    replacer.accept(program);\n    program.typeOracle.setInstantiatedJsoTypesViaCast(instantiatedJsoTypes);\n  }\n    \n }",
+      "parentUuid": "3943a782_c41cb2c8",
+      "revId": "b5fdb7a9c1c5a9ca3992158d6c6ae3cb99b4e139",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99349308_eded50a1",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 32

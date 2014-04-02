@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "9cb2c15a_f490f635",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "This actually fixes a bug that is unrelated to APT. Right now, the compiler will error out on any Java annotation that has Class[] values in it, regardless of whether it used for APT.",
+      "parentUuid": "7c08adab_8f627697",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_c7a3c04e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 28
@@ -70,6 +88,24 @@
         "endLine": 92,
         "endChar": 3
       },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_347b9e4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_c7a3c04e",
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "19ab4358_8b2d3178",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_a7a8c42b",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_6793ecff",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 28
@@ -122,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "19ab4358_4b3979b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_6793ecff",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c08adab_af09bac3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 28
@@ -133,6 +205,24 @@
       "writtenOn": "2014-03-19T01:58:20Z",
       "side": 1,
       "message": "This should be gone right? Perhaps add a test case to verify calling super constructors are not supported?",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_54a7429d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "This code is for super.method() calls, not super()-constructor calls.",
+      "parentUuid": "7c08adab_af09bac3",
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -162,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "19ab4358_2b38bdad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_4790f0f0",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_279df408",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 28
@@ -185,6 +293,24 @@
     },
     {
       "key": {
+        "uuid": "9cb2c15a_b4866e02",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "If you do that, then JsExport has to be in the classpath of the gwt-dev jar. Right now, they are in the gwt-user.jar. This would create more of the cyclical dependencies between gwt-dev and gwt-user that I want to avoid. \n\nIf later, we modularize these things out into a separate gwt-interop.jar file, I\u0027d be happy to go back and refactor, but I think it\u0027s not a big win.",
+      "parentUuid": "fcfbbdcb_279df408",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfbbdcb_079af810",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
         "patchSetId": 28
@@ -202,6 +328,24 @@
         "endLine": 126,
         "endChar": 11
       },
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19ab4358_ab434d2d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcfbbdcb_079af810",
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -248,6 +392,24 @@
     },
     {
       "key": {
+        "uuid": "19ab4358_0b05c1de",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/PrototypeOfJsInterface.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "?",
+      "parentUuid": "7c08adab_6f49824f",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c08adab_efa3324e",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 28
@@ -259,6 +421,24 @@
       "writtenOn": "2014-03-19T01:58:20Z",
       "side": 1,
       "message": "Can you make @JsInterface hidden behind a flag in this or an immediate follow up patch? We should be careful this is not used in google3 yet (other than the one that you\u0027re intending to use).",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb2c15a_948b6a0c",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "I could put it in a follow up patch by making JSORestrictionsChecker simply fail it if it is used. More important is landing this patch and iterating I think.",
+      "parentUuid": "7c08adab_efa3324e",
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -282,6 +462,24 @@
     },
     {
       "key": {
+        "uuid": "19ab4358_8bdf7128",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c08adab_8f16f6d4",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c08adab_2f0dcac1",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 28
@@ -293,6 +491,24 @@
       "writtenOn": "2014-03-19T01:58:20Z",
       "side": 1,
       "message": "TODO: Add test case for following:\n\n\ninterface ANonJsInterface {\n void methodA()\n}\n\ninterface AJsInterface {\n void methodA()\n}\n\nclass MyClass implements ANonJsInterface, AJsInterface {\n  void methodA() { ... }\n}\n\nverify methodA() is dispatched properly from both interfaces.\n\n\nAlso please add a similar test case but this time make methodA implemented in parent JS class.",
+      "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19ab4358_ebd2a521",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-02T22:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c08adab_2f0dcac1",
       "revId": "1b99949e0d0ef08e0c308f67caeb4b085f13f0e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

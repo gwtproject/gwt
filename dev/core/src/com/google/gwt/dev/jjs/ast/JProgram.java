@@ -350,6 +350,42 @@ public class JProgram extends JNode {
 
   private FragmentPartitioningResult fragmentPartitioninResult;
 
+  // The following members provide support to diverse compile hints.
+
+  /**
+   * Set of method that are pinned and should be skipped by optimizations such as
+   * inlining, statification and prunned.
+   */
+  private Set<JMethod> pinnedMethods = Sets.newHashSet();
+
+  /**
+   * Returns true if the inliner should try to inline {@code method}.
+   */
+  public boolean isInlineable(JMethod method) {
+    return !pinnedMethods.contains(method);
+  }
+
+  /**
+   * Returns true if the pruner should try to prune {@code method}.
+   */
+  public boolean isPrunnable(JMethod method) {
+    return !pinnedMethods.contains(method);
+  }
+
+  /**
+   * Returns true if {@link MakeCallsStatic} should try to statify {@code method}.
+   */
+  public boolean isStatifiable(JMethod method) {
+    return !pinnedMethods.contains(method);
+  }
+
+  /**
+   * Add a pinned method.
+   */
+  public void addPinnedMethod(JMethod method) {
+    pinnedMethods.add(method);
+  }
+
   public JProgram() {
     super(SourceOrigin.UNKNOWN);
     typeOracle = new JTypeOracle(this, true);

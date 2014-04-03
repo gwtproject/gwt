@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "590cdb77_af46996f",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-03T07:50:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.collect.ImmutableMap.",
+      "revId": "97b9673f6e6ab51f6780ac38aa445eb12742bf76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "79527f52_be23818c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79527f52_788101a2",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79527f52_b849d9a9",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 34
@@ -53,6 +71,24 @@
       "writtenOn": "2014-04-02T23:56:23Z",
       "side": 1,
       "message": "Shouldn\u0027t \"$wnd\" be default? Are there any strong use cases for \u0027global this\u0027?",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_be4c2161",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "WebWorkers use global this.\n\nProblem with $wnd being default is that it is not what we want when compiling against closure code. I will need to add a compiler/module config for this later. I\u0027ll add a TODO. GWT-Exporter has a config property as to whether to assume all exports start with $wnd or with global scope.",
+      "parentUuid": "79527f52_b849d9a9",
       "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -76,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "79527f52_7eec49e6",
+        "filename": "user/src/com/google/gwt/core/client/js/JsInterface.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79527f52_b89719bb",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79527f52_3884a98c",
         "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
         "patchSetId": 34
@@ -87,6 +141,24 @@
       "writtenOn": "2014-04-02T23:56:23Z",
       "side": 1,
       "message": "nit: remove extra {}",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_5ef185ba",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79527f52_3884a98c",
       "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -110,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "79527f52_dedc7535",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79527f52_d8facd22",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79527f52_d8ac8d1b",
         "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
         "patchSetId": 34
@@ -121,6 +211,24 @@
       "writtenOn": "2014-04-02T23:56:23Z",
       "side": 1,
       "message": "\u003e \u003e This should be false per spec as it is against java semantics.\n\n\u003e Is it? When testing against \u0027Object\u0027 type, a cast against any type (T) could theoretically succeed. Maybe the spec should say that only one interface can be bound to a given prototype, otherwise, it seems legal to have HTMLButtonElement and YetAnotherHtmlButtonElement which both point to the same JS prototype.\n\nIt is hard to enforce one interface per prototype. I thought it would be nicer to follow java semantics to avoid surprises, but it may be surprising the other way as well.\nSo I\u0027ll update the docs to reflect this change. However with this, don\u0027t you need to make sure that instanceof checks are NOT optimized to false? I know you were earlier concerned about instanceof check optimized to true.",
+      "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79527f52_9ec4bd51",
+        "filename": "user/test/com/google/gwt/core/client/JsInterfaceTest.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-03T01:53:05Z",
+      "side": 1,
+      "message": "If it is a truly dynamic check (type is Object), it own\u0027t optimize to false, but this would:\n\n@JsInterface(prototype\u003d\"foo\")\ninterface I {}\n\n@JsInterface(prototype\u003d\"foo\")\ninterface J{}\nclass C implements I {}\n\nC c \u003d new C();\nc instanceof J \u003d\u003d\u003e TypeOracle.canTheoreticallyCast(c,J) returns false, so it is replaced with a null check\n\nI may have to add logic in a follow up CL once we hash out how it is supposed to work, so that canTheoreticallyCast takes into account identical prototypes.\n\nI will add a TODO here and in JTypeOracle.",
+      "parentUuid": "79527f52_d8ac8d1b",
       "revId": "70c8e814b10e047348fc600f0012c0dfe20bd77e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

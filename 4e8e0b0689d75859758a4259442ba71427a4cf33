@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "79527f52_9bc4cf51",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-03T00:25:57Z",
+      "side": 1,
+      "message": "how about \"Instance method \u0027Some.callback\u0027 loses its instance scope when assigned to a field.\"",
+      "revId": "4e8e0b0689d75859758a4259442ba71427a4cf33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79527f52_9b432f60",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
         "patchSetId": 1

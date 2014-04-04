@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9be0bc6_96ebea1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-04-04T11:02:31Z",
+      "side": 1,
+      "message": "Could you  follow this format for the commit message :\n\nThe subject describing the change briefly (less than 70 characters IIRC)\n\nThe body describing your change in detail (must be wrapped in lines of 70 characters IIRC)\n\nBug: number of the bug if relevant\nChange-Id: id of the change",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "f405cd734569afdc0142c9c623740dd693e3086e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9be0bc6_b6e8e61f",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-04-04T11:02:31Z",
+      "side": 1,
+      "message": "use 2 spaces instead of tab for indentation",
+      "revId": "f405cd734569afdc0142c9c623740dd693e3086e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

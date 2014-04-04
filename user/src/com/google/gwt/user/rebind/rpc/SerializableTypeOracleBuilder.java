@@ -117,7 +117,7 @@ import java.util.Map.Entry;
 public class SerializableTypeOracleBuilder {
 
   static class TypeInfoComputed {
-		public ArrayList<String> uninstantiableClasses = new ArrayList<String>();
+    public ArrayList<String> uninstantiableClasses = new ArrayList<String>();
 
     /**
      * <code>true</code> if the type is automatically or manually serializable

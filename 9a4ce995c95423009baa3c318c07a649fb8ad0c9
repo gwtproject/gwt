@@ -22,6 +22,30 @@
       "revId": "9a4ce995c95423009baa3c318c07a649fb8ad0c9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39c80775_f68335ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-04T21:36:58Z",
+      "side": 1,
+      "message": "thx.",
+      "parentUuid": "39c80775_960a01ec",
+      "range": {
+        "startLine": 564,
+        "startChar": 4,
+        "endLine": 564,
+        "endChar": 30
+      },
+      "revId": "9a4ce995c95423009baa3c318c07a649fb8ad0c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

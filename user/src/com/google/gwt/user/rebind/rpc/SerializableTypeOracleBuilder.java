@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -36,6 +36,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.rebind.rpc.ProblemReport.Priority;
 import com.google.gwt.user.rebind.rpc.TypeParameterExposureComputer.TypeParameterFlowInfo;
 import com.google.gwt.user.rebind.rpc.TypePaths.TypePath;
+import com.google.gwt.dev.jjs.ast.JNode;
+
 
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -53,19 +55,19 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 /**
  * Builds a {@link SerializableTypeOracle} for a given set of root types.
- *
+ * 
  * <p>
  * There are two goals for this builder. First, discover the set of serializable
  * types that can be serialized if you serialize one of the root types. Second,
  * to make sure that all root types can actually be serialized by GWT.
  * </p>
- *
+ * 
  * <p>
  * To find the serializable types, it includes the root types, and then it
  * iteratively traverses the type hierarchy and the fields of any type already
@@ -74,7 +76,7 @@ import java.util.TreeSet;
  * parameterized type, these exposure values are used to determine how to treat
  * the arguments.
  * </p>
- *
+ * 
  * <p>
  * A type qualifies for serialization if it or one of its subtypes is
  * automatically or manually serializable. Automatic serialization is selected
@@ -85,19 +87,19 @@ import java.util.TreeSet;
  * qualifies for both manual and automatic serialization, manual serialization
  * is preferred.
  * </p>
- *
+ * 
  * <p>
  * Some types may be marked as "enhanced," either automatically by the presence
  * of a JDO <code>@PersistenceCapable</code> or JPA <code>@Entity</code> tag on
  * the class definition, or manually by extending the 'rpc.enhancedClasses'
  * configuration property in the GWT module XML file. For example, to manually
  * mark the class com.google.myapp.MyPersistentClass as enhanced, use:
- *
+ * 
  * <pre>
  * <extend-configuration-property name='rpc.enhancedClasses'
  *     value='com.google.myapp.MyPersistentClass'/>
  * </pre>
- *
+ * 
  * <p>
  * Enhanced classes are checked for the presence of additional serializable
  * fields on the server that were not defined in client code as seen by the GWT
@@ -115,6 +117,7 @@ import java.util.TreeSet;
 public class SerializableTypeOracleBuilder {
 
   static class TypeInfoComputed {
+    public ArrayList<String> uninstantiableClasses = new ArrayList<String>();
 
     /**
      * <code>true</code> if the type is automatically or manually serializable
@@ -353,7 +356,7 @@ public class SerializableTypeOracleBuilder {
 
   /**
    * Finds the custom field serializer for a given type.
-   *
+   * 
    * @param typeOracle
    * @param type
    * @return the custom field serializer for a type or <code>null</code> if
@@ -371,7 +374,7 @@ public class SerializableTypeOracleBuilder {
 
   /**
    * Finds the custom field serializer for a given qualified source name.
-   *
+   * 
    * @param typeOracle
    * @param customFieldSerializerName
    * @return the custom field serializer for a type of <code>null</code> if
@@ -392,7 +395,7 @@ public class SerializableTypeOracleBuilder {
 
   /**
    * Returns the name for a custom field serializer, given a source name.
-   *
+   * 
    * @param sourceName
    * @return the custom field serializer type name for a given source name.
    */
@@ -739,11 +742,11 @@ public class SerializableTypeOracleBuilder {
 
   /**
    * Constructs a builder.
-   *
+   * 
    * @param logger
    * @param propertyOracle
    * @param context
-   *
+   * 
    * @throws UnableToCompleteException if we fail to find one of our special
    *           types
    */
@@ -786,15 +789,20 @@ public class SerializableTypeOracleBuilder {
 
   /**
    * Builds a {@link SerializableTypeOracle} for a given set of root types.
-   *
+   * 
    * @param logger
    * @return a {@link SerializableTypeOracle} for the specified set of root
    *         types
-   *
+   * 
    * @throws UnableToCompleteException if there was not at least one
    *           instantiable type assignable to each of the specified root types
    */
-  public SerializableTypeOracle build(TreeLogger logger) throws UnableToCompleteException {
+  private void error(String errorMessage, TreeLogger logger) {
+    logger.log(TreeLogger.ERROR, errorMessage);
+  }
+
+	
+	public SerializableTypeOracle build(TreeLogger logger) throws UnableToCompleteException {
     alreadyCheckedObject = false;
 
     boolean allSucceeded = true;
@@ -802,11 +810,17 @@ public class SerializableTypeOracleBuilder {
     for (Entry<JClassType, TreeLogger> entry : rootTypes.entrySet()) {
       ProblemReport problems = new ProblemReport();
       problems.setContextType(entry.getKey());
-      boolean entrySucceeded =
-          computeTypeInstantiability(entry.getValue(), entry.getKey(),
-              TypePaths.createRootPath(entry.getKey()), problems).hasInstantiableSubtypes();
+				TypeInfoComputed tic = computeTypeInstantiability(entry.getValue(), entry.getKey(),
+              TypePaths.createRootPath(entry.getKey()), problems);
+
+      boolean entrySucceeded = tic.hasInstantiableSubtypes();
       if (!entrySucceeded) {
         problems.report(logger, TreeLogger.ERROR, TreeLogger.INFO);
+				error("Unable to instantiate class " + entry.getKey().getName(), logger);
+				error("Unserializeable Classes Follow:  ", logger);
+				for (int i=0; i<tic.uninstantiableClasses.size(); i++) {
+					error(tic.uninstantiableClasses.get(i), logger);
+				}
       } else {
         maybeReport(logger, problems);
       }
@@ -898,18 +912,23 @@ public class SerializableTypeOracleBuilder {
    * This method determines information about serializing a type with GWT. To do
    * so, it must traverse all subtypes as well as all field types of those
    * types, transitively.
-   *
+   * 
    * It returns a {@link TypeInfoComputed} with the information found.
-   *
+   * 
    * As a side effect, all types needed--plus some--to serialize this type are
    * accumulated in {@link #typeToTypeInfoComputed}. In particular, there will
    * be an entry for any type that has been validated by this method, as a
    * shortcircuit to avoid recomputation.
-   *
+   * 
    * The method is exposed using default access to enable testing.
    */
-  TypeInfoComputed computeTypeInstantiability(TreeLogger logger, JType type, TypePath path,
+	TypeInfoComputed computeTypeInstantiability(TreeLogger logger, JType type, TypePath path,
       ProblemReport problems) {
+		return computeTypeInstantiability(logger, type, path, problems, null);
+	}
+
+  TypeInfoComputed computeTypeInstantiability(TreeLogger logger, JType type, TypePath path,
+      ProblemReport problems, TypeInfoComputed typeInfo) {
     assert (type != null);
     if (type.isPrimitive() != null) {
       TypeInfoComputed tic = ensureTypeInfoComputed(type, path);
@@ -935,7 +954,7 @@ public class SerializableTypeOracleBuilder {
     if (isTypeParameter != null) {
       if (typeParametersInRootTypes.contains(isTypeParameter)) {
         return computeTypeInstantiability(localLogger, isTypeParameter.getFirstBound(), TypePaths
-            .createTypeParameterInRootPath(path, isTypeParameter), problems);
+            .createTypeParameterInRootPath(path, isTypeParameter), problems, typeInfo);
       }
 
       /*
@@ -952,12 +971,12 @@ public class SerializableTypeOracleBuilder {
     JWildcardType isWildcard = classType.isWildcard();
     if (isWildcard != null) {
       boolean success = true;
+      tic = ensureTypeInfoComputed(classType, path);
       for (JClassType bound : isWildcard.getUpperBounds()) {
         success &=
-            computeTypeInstantiability(localLogger, bound, path, problems)
+            computeTypeInstantiability(localLogger, bound, path, problems, tic)
                 .hasInstantiableSubtypes();
       }
-      tic = ensureTypeInfoComputed(classType, path);
       tic.setInstantiableSubtypes(success);
       tic.setInstantiable(false);
       return tic;
@@ -1000,7 +1019,16 @@ public class SerializableTypeOracleBuilder {
     tic = ensureTypeInfoComputed(classType, path);
     Set<JClassType> instantiableTypes = new HashSet<JClassType>();
     boolean anySubtypes =
-        checkSubtypes(localLogger, originalType, instantiableTypes, path, problems);
+        checkSubtypes(localLogger, originalType, instantiableTypes, path, problems, tic);
+		if (!anySubtypes)	{
+			tic.uninstantiableClasses.add(classType.toString());
+			if (typeInfo!=null)	{
+				for (int i=tic.uninstantiableClasses.size()-1; i>=0; i--){
+					typeInfo.uninstantiableClasses.add(0, tic.uninstantiableClasses.get(i));
+				}
+			}
+		}
+
     if (!tic.isDone()) {
       tic.setInstantiableSubtypes(anySubtypes);
       tic.setInstantiable(false);
@@ -1017,7 +1045,7 @@ public class SerializableTypeOracleBuilder {
   /**
    * Returns <code>true</code> if the fields of the type should be considered
    * for serialization.
-   *
+   * 
    * Default access to allow for testing.
    */
   boolean shouldConsiderFieldsForSerialization(JClassType type, ProblemReport problems) {
@@ -1035,7 +1063,7 @@ public class SerializableTypeOracleBuilder {
   /**
    * Consider any subtype of java.lang.Object which qualifies for serialization.
    */
-  private void checkAllSubtypesOfObject(TreeLogger logger, TypePath parent, ProblemReport problems) {
+  private void checkAllSubtypesOfObject(TreeLogger logger, TypePath parent, ProblemReport problems, TypeInfoComputed typeInfo) {
     if (alreadyCheckedObject) {
       return;
     }
@@ -1054,7 +1082,7 @@ public class SerializableTypeOracleBuilder {
     for (JClassType cls : allTypes) {
       if (isDeclaredSerializable(cls)) {
         computeTypeInstantiability(localLogger, cls, TypePaths.createSubtypePath(parent, cls,
-            typeOracle.getJavaLangObject()), problems);
+            typeOracle.getJavaLangObject()), problems, typeInfo);
       }
     }
   }
@@ -1125,6 +1153,7 @@ public class SerializableTypeOracleBuilder {
     // TODO: Propagating the constraints will produce better results as long
     // as infinite expansion can be avoided in the process.
     JField[] fields = baseType.getFields();
+		String badFields = "";
     if (fields.length > 0) {
       TreeLogger localLogger =
           logger.branch(TreeLogger.DEBUG, "Analyzing the fields of type '"
@@ -1143,11 +1172,14 @@ public class SerializableTypeOracleBuilder {
         if (typeInfo.isManuallySerializable()
             && fieldType.getLeafType() == typeOracle.getJavaLangObject()) {
           checkAllSubtypesOfObject(fieldLogger.branch(TreeLogger.WARN,
-              "Object was reached from a manually serializable type", null), path, problems);
+              "Object was reached from a manually serializable type", null), path, problems, typeInfo);
         } else {
-          allSucceeded &=
-              computeTypeInstantiability(fieldLogger, fieldType, path, problems)
+					boolean test = computeTypeInstantiability(fieldLogger, fieldType, path, problems, typeInfo)
                   .hasInstantiableSubtypes();
+          allSucceeded &= test;
+					if (!test) {
+						badFields += " " + fieldType.getSimpleSourceName();
+					}
         }
       }
     }
@@ -1155,13 +1187,13 @@ public class SerializableTypeOracleBuilder {
     boolean succeeded = allSucceeded || typeInfo.isManuallySerializable();
     if (succeeded) {
       typeInfo.setFieldSerializable();
-    }
-
+		}
+		
     return succeeded;
   }
 
   private boolean checkSubtype(TreeLogger logger, JClassType classOrInterface,
-      JClassType originalType, TypePath parent, ProblemReport problems) {
+      JClassType originalType, TypePath parent, ProblemReport problems, TypeInfoComputed typeInfo) {
     if (classOrInterface.isEnum() != null) {
       // The fields of an enum are never serialized; they are always okay.
       return true;
@@ -1174,7 +1206,7 @@ public class SerializableTypeOracleBuilder {
          * Backwards compatibility. Raw collections or maps force all object
          * subtypes to be considered.
          */
-        checkAllSubtypesOfObject(logger, parent, problems);
+        checkAllSubtypesOfObject(logger, parent, problems, typeInfo);
       } else {
         TreeLogger paramsLogger =
             logger.branch(TreeLogger.DEBUG, "Checking parameters of '"
@@ -1204,7 +1236,7 @@ public class SerializableTypeOracleBuilder {
       boolean superTypeOk = false;
       superTypeOk =
           checkSubtype(logger, superType, originalType, TypePaths.createSupertypePath(parent,
-              superType, classOrInterface), problems);
+              superType, classOrInterface), problems, typeInfo);
 
       /*
        * If my super type did not check out, then I am not instantiable and we
@@ -1225,7 +1257,7 @@ public class SerializableTypeOracleBuilder {
    * instantiable relative to a known base type.
    */
   private boolean checkSubtypes(TreeLogger logger, JClassType originalType,
-      Set<JClassType> instSubtypes, TypePath path, ProblemReport problems) {
+      Set<JClassType> instSubtypes, TypePath path, ProblemReport problems, TypeInfoComputed typeInfo) {
     JRealClassType baseType = getBaseType(originalType);
     TreeLogger computationLogger =
         logger.branch(TreeLogger.DEBUG, "Finding possibly instantiable subtypes");
@@ -1268,7 +1300,7 @@ public class SerializableTypeOracleBuilder {
           verificationLogger.branch(TreeLogger.DEBUG, candidate
               .getParameterizedQualifiedSourceName());
       boolean instantiable =
-          checkSubtype(subtypeLogger, candidate, originalType, subtypePath, problems);
+          checkSubtype(subtypeLogger, candidate, originalType, subtypePath, problems, tic);
       anySubtypes |= instantiable;
       tic.setInstantiable(instantiable);
 
@@ -1297,7 +1329,7 @@ public class SerializableTypeOracleBuilder {
    * @param paramIndex - The index of the parameter in the generic type
    * @param typeArg - An upper bound on the actual argument being applied to the
    *          generic type
-   *
+   * 
    * @return Whether the a parameterized type can be serializable if
    *         <code>baseType</code> is the base type and the
    *         <code>paramIndex</code>th type argument is a subtype of
@@ -1641,7 +1673,7 @@ public class SerializableTypeOracleBuilder {
   /**
    * Remove serializable types that were visited due to speculative paths but
    * are not really needed for serialization.
-   *
+   * 
    * NOTE: This is currently much more limited than it should be. For example, a
    * path sensitive prune could remove instantiable types also.
    */

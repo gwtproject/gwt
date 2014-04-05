@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "19734325_48037f6b",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T03:39:21Z",
+      "side": 1,
+      "message": "Probably not. Will remove.",
+      "parentUuid": "d9be0bc6_5cbc114c",
+      "range": {
+        "startLine": 53,
+        "startChar": 42,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9be0bc6_bca28526",
         "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
         "patchSetId": 4
@@ -70,6 +94,24 @@
       "writtenOn": "2014-04-05T02:15:40Z",
       "side": 1,
       "message": "Also test devirtualization?",
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_881c97c7",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T03:39:21Z",
+      "side": 1,
+      "message": "Devirtualization is tricky in the sense that it can not be prevented (if you prevent it other stuff wont work). \n\nI don\u0027t have a concrete plan to tackle that yet but it will only affect JSOs, String, Object and Arrays.",
+      "parentUuid": "d9be0bc6_bca28526",
       "revId": "9576be36413938d382b39cb734eeaea824891726",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +181,30 @@
     },
     {
       "key": {
+        "uuid": "19734325_c8168fa5",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T03:39:21Z",
+      "side": 1,
+      "message": "I am not sure what you mean here. I thought you were pointing to the extra blank line. \n\nWhat did I miss? I am still missing it.",
+      "parentUuid": "d9be0bc6_9c1ce9c7",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 9
+      },
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9be0bc6_bc19a5d6",
         "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
         "patchSetId": 4
@@ -150,6 +216,30 @@
       "writtenOn": "2014-04-05T02:15:40Z",
       "side": 1,
       "message": "is there really a case where indexof is not defined?",
+      "range": {
+        "startLine": 86,
+        "startChar": 22,
+        "endLine": 86,
+        "endChar": 36
+      },
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_e8134bb2",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T03:39:21Z",
+      "side": 1,
+      "message": "I misread this failure (JavaScriptException: (TypeError) : Unable to get property \u0027indexOf\u0027 of undefined or null reference)",
+      "parentUuid": "d9be0bc6_bc19a5d6",
       "range": {
         "startLine": 86,
         "startChar": 22,

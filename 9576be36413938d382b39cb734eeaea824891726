@@ -118,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "19734325_88a57733",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T17:13:37Z",
+      "side": 1,
+      "message": "On the other hand it will partially work, dispatching to a Java object through an Object method will only add 1 trampoline to the stack but the Object function will be there. It is only String, Array and JSOs where the function will no longer be called...",
+      "parentUuid": "19734325_881c97c7",
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9be0bc6_7cc1cdd0",
         "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
         "patchSetId": 4
@@ -135,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "19734325_cb4209cb",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T17:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9be0bc6_7cc1cdd0",
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9be0bc6_dcaf410d",
         "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
         "patchSetId": 4
@@ -146,6 +182,30 @@
       "writtenOn": "2014-04-05T02:15:40Z",
       "side": 1,
       "message": "nit: prunnableFnName?\n(and similar below)",
+      "range": {
+        "startLine": 63,
+        "startChar": 13,
+        "endLine": 63,
+        "endChar": 28
+      },
+      "revId": "9576be36413938d382b39cb734eeaea824891726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_eb3fc531",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-05T17:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9be0bc6_dcaf410d",
       "range": {
         "startLine": 63,
         "startChar": 13,

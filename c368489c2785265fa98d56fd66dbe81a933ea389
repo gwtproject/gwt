@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19734325_88c1f772",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-05T01:17:57Z",
+      "side": 1,
+      "message": "please add a function comment that makes it clear why this is called \"defaultCompile\" and not just \"compile\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "c368489c2785265fa98d56fd66dbe81a933ea389",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

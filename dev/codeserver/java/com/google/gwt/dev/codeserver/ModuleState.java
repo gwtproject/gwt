@@ -46,7 +46,10 @@ class ModuleState {
       throws UnableToCompleteException {
     this.recompiler = recompiler;
     this.logger = logger;
+    defaultCompile(noPrecompile);
+  }
 
+  void defaultCompile(boolean noPrecompile) throws UnableToCompleteException {
     CompileDir compileDir;
     if (noPrecompile) {
       compileDir = recompiler.noCompile();

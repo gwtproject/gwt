@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19734325_ce2db777",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-05T23:54:23Z",
+      "side": 1,
+      "message": "This might be better named implementDynamicTypeCheck or implementCastOrInstanceOfOperation.",
+      "revId": "ea35fa68c6f30a9bcfcbd4e8afe88b7be0087df6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_ee2a735c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-05T23:54:23Z",
+      "side": 1,
+      "message": "Duplicate code already in ArrayNormalizer? Maybe move to JProgram or JTypeOracle?",
+      "revId": "ea35fa68c6f30a9bcfcbd4e8afe88b7be0087df6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_0e398fb5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-05T23:54:23Z",
+      "side": 1,
+      "message": "This looks kind of expensive, I wonder if we should build a lookup table and index into it. At the very least, maybe hoist the array.elementTypeCategory into a local variable to avoid 4 prototype/property lookups. Switch/case might be more efficient too, since it will only read the value once and avoid creating a local.\n\nThese kind of hot methods (think of  a manual array copy loop!), we should be diligent about using jsperf to validate the fastest construct, since most people don\u0027t run with -XdisableCastChecking.",
+      "revId": "ea35fa68c6f30a9bcfcbd4e8afe88b7be0087df6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

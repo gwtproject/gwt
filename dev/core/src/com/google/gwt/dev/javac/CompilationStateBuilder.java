@@ -34,6 +34,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -80,18 +81,28 @@ public class CompilationStateBuilder {
           List<CompiledClass> compiledClasses) {
         Event event = SpeedTracerLogger.start(DevModeEventType.CSB_PROCESS);
         try {
+          // Collect parameter method names event when the compilation unit has errors.
+          // TODO(rluble): Make sure this pass does not fail when JDT produces incomplete ASTs
+          // for compilation units with errors.
+          MethodArgNamesLookup methodArgs = MethodParamCollector.collect(cud,
+                builder.getSourceMapPath());
+
+          List<JDeclaredType> types = ImmutableList.of();
+          final Set<String> jsniDeps = Sets.newHashSet();
+          final Map<String, Binding> jsniRefs = Maps.newHashMap();
+          Map<MethodDeclaration, JsniMethod> jsniMethods = ImmutableMap.of();
+          List<String> apiRefs = ImmutableList.of();
+
           if (!cud.compilationResult().hasErrors()) {
             // Only collect jsniMethod, artificial rescues, etc if the compilation unit
             // does not have errors.
-            Map<MethodDeclaration, JsniMethod> jsniMethods =
+            jsniMethods =
                 JsniMethodCollector.collectJsniMethods(cud, builder.getSourceMapPath(),
                     builder.getSource(), JsRootScope.INSTANCE, DummyCorrelationFactory.INSTANCE);
 
             JSORestrictionsChecker.check(jsoState, cud);
 
             // JSNI check + collect dependencies.
-            final Set<String> jsniDeps = Sets.newHashSet();
-            final Map<String, Binding> jsniRefs = Maps.newHashMap();
             JsniReferenceResolver
                 .resolve(cud, cudOriginaImports, jsoState, jsniMethods, jsniRefs,
                     new JsniReferenceResolver.TypeResolver() {
@@ -130,61 +141,53 @@ public class CompilationStateBuilder {
               BinaryTypeReferenceRestrictionsChecker.check(cud);
             }
 
-            MethodArgNamesLookup methodArgs = MethodParamCollector.collect(cud,
-                builder.getSourceMapPath());
-
-            final Interner<String> interner = StringInterner.get();
-            String packageName = interner.intern(Shared.getPackageName(builder.getTypeName()));
-
-            List<String> unresolvedSimple = Lists.newArrayList();
-            for (char[] simpleRef : cud.compilationResult().simpleNameReferences) {
-              unresolvedSimple.add(interner.intern(String.valueOf(simpleRef)));
-            }
-
-            List<String> unresolvedQualified = Lists.newArrayList();
-            for (char[][] qualifiedRef : cud.compilationResult().qualifiedReferences) {
-              unresolvedQualified.add(interner.intern(CharOperation.toString(qualifiedRef)));
-            }
-            for (String jsniDep : jsniDeps) {
-              unresolvedQualified.add(interner.intern(jsniDep));
-            }
-            List<String> apiRefs = compiler.collectApiRefs(cud);
-            for (int i = 0; i < apiRefs.size(); ++i) {
-              apiRefs.set(i, interner.intern(apiRefs.get(i)));
-            }
-
-            Dependencies dependencies =
-                new Dependencies(packageName, unresolvedQualified, unresolvedSimple, apiRefs);
-
-            List<JDeclaredType> types = ImmutableList.of();
             if (!cud.compilationResult().hasErrors()) {
-              // The above checks might have recorded errors.
+              // The above checks might have recorded errors; so we need to check here again.
               // So only construct the GWT AST if no JDT errors and no errors from our checks.
               types = astBuilder.process(cud, builder.getSourceMapPath(), artificialRescues,
                   jsniMethods, jsniRefs);
             }
 
-            for (CompiledClass cc : compiledClasses) {
-              allValidClasses.put(cc.getSourceName(), cc);
-            }
-            builder
-                .setTypes(types)
-                .setDependencies(dependencies)
-                .setJsniMethods(jsniMethods.values())
-                .setMethodArgs(methodArgs)
-                .setClasses(compiledClasses)
-                .setProblems(cud.compilationResult().getProblems());
-          } else {
-            // Compilation unit already has errors from JDT, make an empty builder so that the
-            // error state is retained and can be reported later.
-            builder
-                .setTypes(Collections.<JDeclaredType>emptyList())
-                .setDependencies(new Dependencies())
-                .setJsniMethods(Collections.<JsniMethod>emptyList())
-                .setMethodArgs(new MethodArgNamesLookup())
-                .setClasses(compiledClasses)
-                .setProblems(cud.compilationResult().getProblems());
+            // Only run this pass if JDT was able to compile the unit with no errors, otherwise
+            // the JDT AST traversal might throw exceptions.
+            apiRefs = compiler.collectApiRefs(cud);
           }
+
+          final Interner<String> interner = StringInterner.get();
+          String packageName = interner.intern(Shared.getPackageName(builder.getTypeName()));
+
+          List<String> unresolvedSimple = Lists.newArrayList();
+          for (char[] simpleRef : cud.compilationResult().simpleNameReferences) {
+            unresolvedSimple.add(interner.intern(String.valueOf(simpleRef)));
+          }
+
+          List<String> unresolvedQualified = Lists.newArrayList();
+          for (char[][] qualifiedRef : cud.compilationResult().qualifiedReferences) {
+            unresolvedQualified.add(interner.intern(CharOperation.toString(qualifiedRef)));
+          }
+          for (String jsniDep : jsniDeps) {
+            unresolvedQualified.add(interner.intern(jsniDep));
+          }
+          for (int i = 0; i < apiRefs.size(); ++i) {
+            apiRefs.set(i, interner.intern(apiRefs.get(i)));
+          }
+
+          Dependencies dependencies =
+              new Dependencies(packageName, unresolvedQualified, unresolvedSimple, apiRefs);
+
+          for (CompiledClass cc : compiledClasses) {
+            allValidClasses.put(cc.getSourceName(), cc);
+          }
+
+          // Even when compilation units have erros, return a consistent builder.
+          builder
+              .setTypes(types)
+              .setDependencies(dependencies)
+              .setJsniMethods(jsniMethods.values())
+              .setMethodArgs(methodArgs)
+              .setClasses(compiledClasses)
+              .setProblems(cud.compilationResult().getProblems());
+
           buildQueue.add(builder);
         } finally {
           event.end();

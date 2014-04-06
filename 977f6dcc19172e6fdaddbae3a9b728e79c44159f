@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9be0bc6_a7e432c6",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/usedimports/package-info.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-06T11:59:29Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javax.annotation.CheckReturnValue\u0027 import.",
+      "revId": "977f6dcc19172e6fdaddbae3a9b728e79c44159f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

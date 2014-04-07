@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99873329_2f100d1d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T14:45:36Z",
+      "side": 1,
+      "message": "Do you know if this happen in IOS7, or it has been fixed?\nIs this solution an empiric one, or there is some documentation I can read?",
+      "revId": "b1b78afb74a999fc79aa014a3a825c8de5c571be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

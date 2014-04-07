@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9be0bc6_0dc6e5de",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-07T23:43:18Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "6c49e9cf914bb82519b2f7495d3809938a39eebd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

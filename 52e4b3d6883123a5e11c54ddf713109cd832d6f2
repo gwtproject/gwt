@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b9823717_d0d1d40d",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/ProxyAutoBean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T15:00:54Z",
+      "side": 1,
+      "message": "Yes it\u0027s better to move it, I see TypeUtils is the place for all those static methods dealing with Class objects.",
+      "parentUuid": "797c3ff1_ce2db777",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "797c3ff1_0eb7cf04",
         "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I generally use it where the comment is neither a TODO, FIXME or NOTE (generally a question about the implementation choice) but we want it to be easy to find with a grep on the codebase.\n\nThere are a few such markers in AutoBeans and RequestFactory already.",
       "parentUuid": "797c3ff1_0eb7cf04",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99873329_afaddd80",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T15:00:54Z",
+      "side": 1,
+      "message": "gotcha",
+      "parentUuid": "b9823717_703828af",
       "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

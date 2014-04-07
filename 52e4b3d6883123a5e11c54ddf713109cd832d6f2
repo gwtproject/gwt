@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9823717_b0be20e0",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/ProxyAutoBean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T14:23:57Z",
+      "side": 1,
+      "message": "do you have any reason not to use else in these blocks?\n\nIts not important it would makes the code clearer, reading this it seems that type could be changing in the previous block, and need to be reevaluated in each \u0027if\u0027 stament",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "797c3ff1_0eb7cf04",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T14:23:57Z",
+      "side": 1,
+      "message": "What does XXX mean?",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9823717_501a4455",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/RequestFactoryScanner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-07T14:23:57Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

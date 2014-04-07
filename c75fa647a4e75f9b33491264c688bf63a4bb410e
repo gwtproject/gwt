@@ -19,6 +19,144 @@
     },
     {
       "key": {
+        "uuid": "19734325_ae32361d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "i don\u0027t think we do structural \"category\" comments in the body of classes, they don\u0027t holdup as properties get renamed/moved/sorted",
+      "range": {
+        "startLine": 353,
+        "startChar": 5,
+        "endLine": 353,
+        "endChar": 68
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_4e5b8271",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "\"prunable\" with 1 n",
+      "range": {
+        "startLine": 371,
+        "startChar": 17,
+        "endLine": 371,
+        "endChar": 28
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_110c4f54",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "how about s/isStatifiable/allowStatificationOf",
+      "range": {
+        "startLine": 246,
+        "startChar": 6,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_5181673a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "how about s/isInlineable/allowInliningOf",
+      "range": {
+        "startLine": 114,
+        "startChar": 61,
+        "endLine": 114,
+        "endChar": 73
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_31530b35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "how about s/isPrunnable/allowPruningOf",
+      "range": {
+        "startLine": 256,
+        "startChar": 46,
+        "endLine": 256,
+        "endChar": 57
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_1197ef79",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-07T19:05:10Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 56,
+        "startChar": 70,
+        "endLine": 56,
+        "endChar": 72
+      },
+      "revId": "c75fa647a4e75f9b33491264c688bf63a4bb410e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19734325_ee16eea4",
         "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
         "patchSetId": 5

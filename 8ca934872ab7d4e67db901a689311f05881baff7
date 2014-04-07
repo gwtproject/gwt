@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19734325_0767ad7f",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-07T22:55:13Z",
+      "side": 1,
+      "message": "Could you drop the whitespace fixes from this patch? Perhaps we should fix them but it\u0027s a separate issue.",
+      "range": {
+        "startLine": 3,
+        "startChar": 1,
+        "endLine": 3,
+        "endChar": 2
+      },
+      "revId": "8ca934872ab7d4e67db901a689311f05881baff7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_22dd772f",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-07T22:55:13Z",
+      "side": 1,
+      "message": "I looked at subclasses that override processCall() and sometimes they ignore the issue and do something like this:\n\n  try {\n    super.processCall(...);\n  } catch (AnotherException e) {\n    return encodeResponseForFailure(...);\n  }\n\nOr else they decode the request twice. So, I think we might want to split this function in two:\n\n  processCall(String payload) {\n\n    RPCRequest rpcRequest;\n    try {\n      rpcRequest \u003d RPC.decodeRequest(...)\n    } ... {\n      // if this fails, we don\u0027t have an rpcRequest yet.\n    }\n    return processCall(rpcRequest);\n  }\n\n  processCall(RPCRequest rpcRequest) {\n    try {\n      onAfterRequestDeserialized(...);\n      return RPC.invokeAndEncode(...);\n    } ... {\n      // failure can set serialization policy and flags properly.\n    }\n  }",
+      "range": {
+        "startLine": 259,
+        "startChar": 16,
+        "endLine": 259,
+        "endChar": 27
+      },
+      "revId": "8ca934872ab7d4e67db901a689311f05881baff7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_a7ced9f6",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-07T22:55:13Z",
+      "side": 1,
+      "message": "We should encourage non-servlet callers to use this method as well so that they get the same fix. So I think we should put this method in the RPC class, next to the other ones.\n\nHowever, the method name cannot be the same because it will be ambiguous when the first argument is null. Perhaps it should be called RPC.encodeResponseForFailedRequest?",
+      "revId": "8ca934872ab7d4e67db901a689311f05881baff7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19734325_c2466371",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-07T22:55:13Z",
+      "side": 1,
+      "message": "For readability, maybe inline so we call the four-argument version.",
+      "range": {
+        "startLine": 445,
+        "startChar": 17,
+        "endLine": 445,
+        "endChar": 41
+      },
+      "revId": "8ca934872ab7d4e67db901a689311f05881baff7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

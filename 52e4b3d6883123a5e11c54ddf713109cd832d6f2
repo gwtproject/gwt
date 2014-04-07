@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "797c3ff1_ce2db777",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/ProxyAutoBean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-07T14:45:38Z",
+      "side": 1,
+      "message": "There\u0027s no point in using \u0027else\u0027 when the previous block unconditionally \u0027return\u0027s or \u0027throw\u0027s (and you\u0027ll note that I didn\u0027t strictly adhere to that rule: there\u0027s an \u0027else\u0027 that shouldn\u0027t be there)\n\nThat said, I think you\u0027re right that it would be more readable given the size of the \u0027if\u0027 blocks.\n\nWhat do you think about moving that method to c.g.w.b.autobean.vm.impl.TypeUtils too?",
+      "parentUuid": "b9823717_b0be20e0",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "797c3ff1_0eb7cf04",
         "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-07T14:23:57Z",
       "side": 1,
       "message": "What does XXX mean?",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9823717_703828af",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-07T14:45:38Z",
+      "side": 1,
+      "message": "I generally use it where the comment is neither a TODO, FIXME or NOTE (generally a question about the implementation choice) but we want it to be easy to find with a grep on the codebase.\n\nThere are a few such markers in AutoBeans and RequestFactory already.",
+      "parentUuid": "797c3ff1_0eb7cf04",
       "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

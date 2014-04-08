@@ -22,6 +22,30 @@
       "revId": "f862607cc62b2e28a88648a6a146be28a85d3f04",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_bb986817",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-08T22:19:12Z",
+      "side": 1,
+      "message": "doh.",
+      "parentUuid": "99157331_029810e8",
+      "range": {
+        "startLine": 262,
+        "startChar": 10,
+        "endLine": 262,
+        "endChar": 83
+      },
+      "revId": "f862607cc62b2e28a88648a6a146be28a85d3f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

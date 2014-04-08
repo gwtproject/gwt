@@ -402,6 +402,30 @@
     },
     {
       "key": {
+        "uuid": "590dbbba_4abfd3dd",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T19:26:15Z",
+      "side": 1,
+      "message": "Actually, I\u0027m pretty sure we decided only to have 2 implementations :) (One HTML5 PushState based implementation and a legacy implementation used by anything that cannot use the pushstate). However looking at new implementations, everything become quite straight forward, so I think it is now OK to have 3 different implementations.\n\nAlso in the meeting, we discussed the limitations of pushstate in Safari. (more specifically: url might not get updated sometimes). I said that, it is unacceptable if the bookmark functionality is lost and you said you are going to check if bookmarks still work even the url is not updated. Did you look at that?",
+      "parentUuid": "f9e2ef19_4c8fffd3",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8c6c4f22",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4

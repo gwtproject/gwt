@@ -378,6 +378,30 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_4c8fffd3",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-08T12:44:38Z",
+      "side": 1,
+      "message": "As discussed before, we need PushStateImpl(future), hashoken with window.addEventListener (older browser except IE8), and IE8 hash change with window.onhashchange.",
+      "parentUuid": "5c0f6924_1d075377",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8c6c4f22",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4
@@ -425,6 +449,24 @@
       "side": 1,
       "message": "Can you document this on the related method below? (i.e. spurious event firing may happen with pushstate)\n\nFor the testing part, I don\u0027t think it is feasible to test with GWTTestCase.",
       "parentUuid": "dc0199f4_1b0abbb6",
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e2ef19_aca7835a",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-08T12:44:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f6924_3dd45787",
       "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

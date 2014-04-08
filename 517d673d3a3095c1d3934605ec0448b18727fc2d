@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "39d9e76f_ae2e570c",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-08T13:36:11Z",
+      "side": 1,
+      "message": "Er, no: this is a native method on \u0027window\u0027, called by the browser, without the $entry wrapper, so it won\u0027t go through our UncaughtExceptionHandler. \u0027handler\u0027 is $entry-wrapped though.",
+      "parentUuid": "f9e2ef19_acbb0354",
+      "range": {
+        "startLine": 172,
+        "startChar": 10,
+        "endLine": 176,
+        "endChar": 11
+      },
+      "revId": "517d673d3a3095c1d3934605ec0448b18727fc2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19d6e33f_edf90567",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 6
@@ -189,6 +213,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f9e2ef19_cce40f92",
+      "range": {
+        "startLine": 423,
+        "startChar": 45,
+        "endLine": 423,
+        "endChar": 57
+      },
+      "revId": "517d673d3a3095c1d3934605ec0448b18727fc2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39d9e76f_8e339b74",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-08T13:36:11Z",
+      "side": 1,
+      "message": "Actually not ;-)",
+      "parentUuid": "f9e2ef19_2cb0336c",
       "range": {
         "startLine": 423,
         "startChar": 45,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19d6e33f_6d15155a",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-08T07:44:28Z",
+      "side": 1,
+      "message": "Maybe a comment saying include \u0027javax\u0027 but exclude \u0027javax.servlet\u0027. \nIt\u0027s difficult to figure out in a first view how classpathpattern works.",
+      "revId": "5a2facca9d3816dac1c57ad2d6432212f8d823c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "590dbbba_072af6a5",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "nit:space",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 2
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_6a24d794",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "addListener?",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_4a211383",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "It is better to go in pair:\n\n attachListener \u0026 detachListener\n\nor you can change both to:\n\n addListener \u0026 removeListener",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_4d7ecdc2",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "nit: probably wrap is unneeded here",
+      "range": {
+        "startLine": 106,
+        "startChar": 10,
+        "endLine": 106,
+        "endChar": 11
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_4afc7388",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "nit: fix wrapping and also consider using \u003cp\u003e if you want to break to new line or don\u0027t break at all.",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_4d47ed94",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "History implementation for IE8 using onhashchange.",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_ed346160",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "nit: you can make this shorter:\n\n  var ex;\n  try {\n    handler();\n  } catch(e) {\n    ex \u003d e;\n  }\n\n  try {\n    oldHandler \u0026\u0026 oldHandler();\n  } catch(e) {\n    ex \u003d\u003d ex || e;\n  }\n\n  ex \u0026\u0026 throw ex;\n\n\nAlso keep in mind you can get rid of the catch blocks all together which is backward compatible:\n\n\n  handler();\n  oldHandler \u0026\u0026 oldHandler();",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590dbbba_8d9285cb",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-08T21:11:03Z",
+      "side": 1,
+      "message": "The current creation logic has two problems.\n1. It doesn\u0027t always respect rebinds.\n2. It always include pushstate implementation.\n\nThe second issue is minor but the first issue looks more significant.\n\nFollowing should solve both problems:\n\n\n  HistoryImpl createHistoryImpl() {\n    HistoryImpl impl \u003d GWT.create(HistoryImpl.class);\n    if (impl instanceof HistoryImplPushState \u0026\u0026 !HistoryImplPushState.isSupported()) {\n      impl \u003d new HistoryImplHashToken();\n    }\n    return impl;\n  }",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -426,6 +426,30 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_2fdf05f2",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-08T19:49:51Z",
+      "side": 1,
+      "message": "Yes you are right  we agreed on two rebindings, I just wanted to say this looks better to me this way.\n\nI looked at the URL problem: wrote a small app that updated the URL, bookmarked it and made sure that it works. Can\u0027t find any problems so far.",
+      "parentUuid": "590dbbba_4abfd3dd",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 72
+      },
+      "revId": "2969fdde9514e8ddd3b11d56a03bb88c2d83475b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf89137_8c6c4f22",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 4

@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "39d9e76f_8e071b76",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-08T14:38:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand.\n\nOriginally, you have\n\n $wnd.onhashchange \u003d\u003d oldHandler\n\nand all is well. Replacing it with\n\n $wnd.onhashchange \u003d function() { oldHandler(); }\n\nshouldn\u0027t change anything. Now drop a call to some other method before oldHandler:\n\n $wnd.onhashchange \u003d function() {\n   handler();\n   oldHandler();\n };\n\nWhat\u0027s the difference wrt UncaughtExceptionHandler?\n\nActually, I\u0027d rather say we need a try/catch around handler(), in case there\u0027s NO uncaught exception handler, to make sure oldHandler is called in all cases:\n\n $wnd.onhashchange \u003d function() {\n   try {\n     handler()\n   } catch (e) {\n     // ignore errors\n   }\n   oldHandler();\n };\n\nOr maybe note the exception in a variable, and after oldHandler successfully completes throw the exception:\n\n $wnd.onhashchange \u003d function() {\n   var ex;\n   try {\n     handler()\n   } catch (e) {\n     ex \u003d e;\n   }\n   oldHandler();\n   if (ex !\u003d null) {\n     throw ex;\n   }\n };",
+      "parentUuid": "f9e2ef19_2f0f054c",
+      "range": {
+        "startLine": 172,
+        "startChar": 10,
+        "endLine": 176,
+        "endChar": 11
+      },
+      "revId": "517d673d3a3095c1d3934605ec0448b18727fc2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19d6e33f_edf90567",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 6

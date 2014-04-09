@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7916ffdd_1817c5a2",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-09T23:17:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "92a7ef82f027c3554ab4cd057c513a447811a6a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

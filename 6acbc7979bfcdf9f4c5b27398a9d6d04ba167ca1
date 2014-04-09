@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9f8cbd4_839b7e5f",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-09T03:35:20Z",
+      "side": 1,
+      "message": "These 4 JSNI functions are not using JSNI field refs to Object, so I assume the __elementTypeId$ won\u0027t be obfuscated.\n\nIt would be better to put these fields on Array or Object, and then use array.@java.lang.Object::__elementTypeId  or array.@com.google.gwt.lang.Array::__elementTypeId.\n\nOtherwise, they become unresolvable JsNameRef\u0027s that are not obfuscatable IIRC.\n\nTechnically, you can put them on any helper object that is guaranteed to be instantiable and just do @a.b.c::field. Putting them on Array is probably best.",
+      "revId": "6acbc7979bfcdf9f4c5b27398a9d6d04ba167ca1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7916ffdd_18c905ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-09T23:27:41Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "33cb837705716e9c2202e07901dd98ee5e85c9c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3975673e_110fae4b",
         "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
         "patchSetId": 3

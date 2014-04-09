@@ -16,6 +16,190 @@
       "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_6e1baf86",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "The canonical module names of dependency library modules per depending library module.",
+      "range": {
+        "startLine": 212,
+        "startChar": 9,
+        "endLine": 212,
+        "endChar": 21
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_2e25a7bd",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "canonical module names",
+      "range": {
+        "startLine": 217,
+        "startChar": 17,
+        "endLine": 217,
+        "endChar": 29
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_4ebcb399",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "i went through the logic in detail and it seems right and is nicely dense as well, but i think it would be nice to add single line comments for the various stages (2 or 3 of them)",
+      "range": {
+        "startLine": 884,
+        "startChar": 2,
+        "endLine": 884,
+        "endChar": 48
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_ceb66307",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "i think it would read nicer like this\n\nboolean isLibrary \u003d !filesetModuleNames.contains(dependentModuleName);\nif (isLibrary) {",
+      "range": {
+        "startLine": 892,
+        "startChar": 12,
+        "endLine": 892,
+        "endChar": 61
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_cee183f2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDefSchema.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "don\u0027t need final",
+      "range": {
+        "startLine": 1449,
+        "startChar": 4,
+        "endLine": 1449,
+        "endChar": 10
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_2edda72e",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/ModuleDefLoaderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "not a sentence",
+      "range": {
+        "startLine": 103,
+        "startChar": 5,
+        "endLine": 103,
+        "endChar": 66
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_ae6d178a",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/ModuleDefLoaderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "a \"dependent\" is someone who depends on me, so in a graph dependents are like parents.\n\nthis function is intended to return the things that I depend *on*, so it should really be called getDirectDependencies",
+      "range": {
+        "startLine": 110,
+        "startChar": 19,
+        "endLine": 110,
+        "endChar": 38
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3975673e_2e5a87e0",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/testdata/dependents/Five.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-09T22:53:59Z",
+      "side": 1,
+      "message": "please add a rename\u003d\"something\" to all of these xml files, so that the tests will also be proving that the module renames are not involved in the names that are gathered and reported",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 8
+      },
+      "revId": "d876bf41d1ee2b9349f06c140cb39c0159846077",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

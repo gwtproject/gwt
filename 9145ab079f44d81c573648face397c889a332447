@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39d9e76f_915a9eba",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-09T10:20:32Z",
+      "side": 1,
+      "message": "IIUC, this needs to be replaced by HistoryImplPushState.\n\nIE8 will use HistoryImplIE8, and all other browsers will use HistoryImplPushState. Then in the code we check that if pushState is not supported then we fallback to HistoryImplHashToken.\n\nWe should probably add a comment here about the process; e.g. \"will possibly be replaced programmatically by HistoryImplHashToken if pushState is not supported\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 58,
+        "endLine": 23,
+        "endChar": 78
+      },
+      "revId": "9145ab079f44d81c573648face397c889a332447",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

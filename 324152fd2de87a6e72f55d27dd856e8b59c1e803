@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_4f1a51cb",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590dbbba_072af6a5",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 2
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "590dbbba_6a24d794",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2014-04-08T21:11:03Z",
       "side": 1,
       "message": "addListener?",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e2ef19_4fa3712d",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "going with attach \u0026 detach",
+      "parentUuid": "590dbbba_6a24d794",
       "range": {
         "startLine": 89,
         "startChar": 9,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_2f1705a3",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "going with attach \u0026 detach",
+      "parentUuid": "590dbbba_4a211383",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "590dbbba_4d7ecdc2",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2014-04-08T21:11:03Z",
       "side": 1,
       "message": "nit: probably wrap is unneeded here",
+      "range": {
+        "startLine": 106,
+        "startChar": 10,
+        "endLine": 106,
+        "endChar": 11
+      },
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e2ef19_0f14499a",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590dbbba_4d7ecdc2",
       "range": {
         "startLine": 106,
         "startChar": 10,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_efb1fd77",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590dbbba_4afc7388",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "590dbbba_4d47ed94",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 8
@@ -122,6 +236,24 @@
       "writtenOn": "2014-04-08T21:11:03Z",
       "side": 1,
       "message": "History implementation for IE8 using onhashchange.",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e2ef19_cfb6416e",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590dbbba_4d47ed94",
       "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "f9e2ef19_afbbf553",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Lets keep in the try catch, this way it is more consistent with the other implementations.",
+      "parentUuid": "590dbbba_ed346160",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "590dbbba_8d9285cb",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 8
@@ -156,6 +306,24 @@
       "writtenOn": "2014-04-08T21:11:03Z",
       "side": 1,
       "message": "The current creation logic has two problems.\n1. It doesn\u0027t always respect rebinds.\n2. It always include pushstate implementation.\n\nThe second issue is minor but the first issue looks more significant.\n\nFollowing should solve both problems:\n\n\n  HistoryImpl createHistoryImpl() {\n    HistoryImpl impl \u003d GWT.create(HistoryImpl.class);\n    if (impl instanceof HistoryImplPushState \u0026\u0026 !HistoryImplPushState.isSupported()) {\n      impl \u003d new HistoryImplHashToken();\n    }\n    return impl;\n  }",
+      "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e2ef19_6fa62d3f",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-09T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590dbbba_8d9285cb",
       "revId": "324152fd2de87a6e72f55d27dd856e8b59c1e803",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

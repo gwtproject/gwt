@@ -16,6 +16,24 @@
       "revId": "6acbc7979bfcdf9f4c5b27398a9d6d04ba167ca1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79efdfff_99ff5fcf",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-09T15:55:06Z",
+      "side": 1,
+      "message": "I know. Formerly there was queryId and it was not really obfuscated either. It was mapped to qI in obfuscated mode (by GenerateJavaScriptAST). Because these fields are internal to arrays their identifier length does not affect codesize (with our current inlining strategies) as the only references are in this class.\n\nI think the less special handling, the better. The only fields that really need a Java presence are the ones shared by real Java objects and these special sort of overlay objects (arrays and string), and AFAICT these are only castmap, typemarker and __class.\n\nInstantiability IS a problem as Array is no longer instantiable. So it will require yet another artificial hack to make it instantiable. \n\nOTOH, they could be placed in java.lang.Object though; but again it makes the code less clear and more hacky.",
+      "parentUuid": "d9f8cbd4_839b7e5f",
+      "revId": "6acbc7979bfcdf9f4c5b27398a9d6d04ba167ca1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

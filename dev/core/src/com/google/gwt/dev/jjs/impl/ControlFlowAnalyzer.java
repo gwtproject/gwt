@@ -641,6 +641,11 @@ public class ControlFlowAnalyzer {
               rescue(param);
             }
           }
+          if (!postOptimizationPass) {
+            if (method.getSpecialization() != null) {
+              rescue(method.getSpecialization().getTargetMethod());
+            }
+          }
           return true;
         }
       }
@@ -1031,6 +1036,12 @@ public class ControlFlowAnalyzer {
   public void setForPruning() {
     assert argsToRescueIfParameterRead == null;
     argsToRescueIfParameterRead = new HashMap<JParameter, List<JExpression>>();
+  }
+
+  private boolean postOptimizationPass;
+
+  public void setForPostOptimize() {
+    postOptimizationPass = true;
   }
 
   /**

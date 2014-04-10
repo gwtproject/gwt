@@ -82,6 +82,7 @@ import java.util.Stack;
  * Note: this class is limited to pruning parameters of static methods only.
  */
 public class Pruner {
+
   /**
    * Remove assignments to pruned fields, locals and params. Nullify the return
    * type of methods declared to return a globally uninstantiable type. Replace

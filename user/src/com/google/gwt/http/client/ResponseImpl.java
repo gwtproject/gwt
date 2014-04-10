@@ -22,7 +22,7 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  */
 class ResponseImpl extends Response {
 
-  private final XMLHttpRequest xmlHttpRequest;
+  private XMLHttpRequest xmlHttpRequest;
 
   public ResponseImpl(XMLHttpRequest xmlHttpRequest) {
     this.xmlHttpRequest = xmlHttpRequest;
@@ -39,14 +39,20 @@ class ResponseImpl extends Response {
 
   @Override
   public Header[] getHeaders() {
-    String allHeaders = xmlHttpRequest.getAllResponseHeaders();
+    String allHeaders = getHeadersAsString();
     String[] unparsedHeaders = allHeaders.split("\n");
-    Header[] parsedHeaders = new Header[unparsedHeaders.length];
+    int countNotEmpty = 0;
+    for (String unparsed : unparsedHeaders) {
+      if (unparsed != null && !"".equals(unparsed.trim())) {
+        countNotEmpty++;
+      }
+    }
+    Header[] parsedHeaders = new Header[countNotEmpty];
 
-    for (int i = 0, n = unparsedHeaders.length; i < n; ++i) {
+    for (int i = 0, h = 0, n = unparsedHeaders.length; i < n; ++i, ++h) {
       String unparsedHeader = unparsedHeaders[i];
 
-      if (unparsedHeader.length() == 0) {
+      if (unparsedHeader == null || unparsedHeader.trim().length() == 0) {
         continue;
       }
 
@@ -74,7 +80,7 @@ class ResponseImpl extends Response {
         }
       };
 
-      parsedHeaders[i] = header;
+      parsedHeaders[h] = header;
     }
 
     return parsedHeaders;
@@ -82,7 +88,8 @@ class ResponseImpl extends Response {
 
   @Override
   public String getHeadersAsString() {
-    return xmlHttpRequest.getAllResponseHeaders();
+    String headers = xmlHttpRequest.getAllResponseHeaders();
+    return headers != null ? headers : "";
   }
 
   @Override
@@ -102,5 +109,10 @@ class ResponseImpl extends Response {
 
   private boolean isResponseReady() {
     return xmlHttpRequest.getReadyState() == XMLHttpRequest.DONE;
+  }
+
+  // visible for testing
+  void resetXMLHttpRequest() {
+    xmlHttpRequest = XMLHttpRequest.create();
   }
 }

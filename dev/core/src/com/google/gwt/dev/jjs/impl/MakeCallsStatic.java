@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.Specialization;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -434,6 +435,20 @@ public class MakeCallsStatic {
     CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program);
     for (JMethod method : toBeMadeStatic) {
       creator.accept(method);
+    }
+    for (JMethod method : toBeMadeStatic) {
+      // if method has specialization, add it to the static method
+      Specialization specialization = method.getSpecialization();
+      if (specialization != null) {
+        JMethod staticMethod = program.getStaticImpl(method);
+        List<JType> params = new ArrayList<JType>(specialization.getParams());
+        params.add(0, staticMethod.getParams().get(0).getType());
+        staticMethod.setSpecialization(params, specialization.getReturns(),
+            staticMethod.getName());
+        staticMethod.getSpecialization().resolve(params,
+            specialization.getReturns(), program.getStaticImpl(specialization
+                .getTargetMethod()));
+      }
     }
 
     /*

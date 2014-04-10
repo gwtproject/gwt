@@ -17,17 +17,25 @@ package com.google.gwt.http.client;
 
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A {@link Response} implementation based on a {@link XMLHttpRequest}.
  */
 class ResponseImpl extends Response {
 
-  private final XMLHttpRequest xmlHttpRequest;
+  private XMLHttpRequest xmlHttpRequest;
 
   public ResponseImpl(XMLHttpRequest xmlHttpRequest) {
     this.xmlHttpRequest = xmlHttpRequest;
 
     assert isResponseReady();
+  }
+
+  // Visible for testing only
+  ResponseImpl() {
+    this.xmlHttpRequest = XMLHttpRequest.create();
   }
 
   @Override
@@ -39,14 +47,13 @@ class ResponseImpl extends Response {
 
   @Override
   public Header[] getHeaders() {
-    String allHeaders = xmlHttpRequest.getAllResponseHeaders();
+    String allHeaders = getHeadersAsString();
     String[] unparsedHeaders = allHeaders.split("\n");
-    Header[] parsedHeaders = new Header[unparsedHeaders.length];
+    List<Header> parsedHeaders = new ArrayList<Header>();
 
-    for (int i = 0, n = unparsedHeaders.length; i < n; ++i) {
-      String unparsedHeader = unparsedHeaders[i];
+    for (String unparsedHeader : unparsedHeaders) {
 
-      if (unparsedHeader.length() == 0) {
+      if (unparsedHeader == null || unparsedHeader.trim().length() == 0) {
         continue;
       }
 
@@ -74,15 +81,16 @@ class ResponseImpl extends Response {
         }
       };
 
-      parsedHeaders[i] = header;
+      parsedHeaders.add(header);
     }
 
-    return parsedHeaders;
+    return parsedHeaders.toArray(new Header[parsedHeaders.size()]);
   }
 
   @Override
   public String getHeadersAsString() {
-    return xmlHttpRequest.getAllResponseHeaders();
+    String headers = xmlHttpRequest.getAllResponseHeaders();
+    return headers != null ? headers : "";
   }
 
   @Override
@@ -102,5 +110,10 @@ class ResponseImpl extends Response {
 
   private boolean isResponseReady() {
     return xmlHttpRequest.getReadyState() == XMLHttpRequest.DONE;
+  }
+
+  // visible for testing
+  void resetXMLHttpRequest() {
+    xmlHttpRequest = XMLHttpRequest.create();
   }
 }

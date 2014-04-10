@@ -127,6 +127,13 @@ public class ResponseTest extends RequestTestBase {
     });
   }
 
+  public void testGetHeadersOffline() {
+    ResponseImpl resp = new ResponseImpl();
+    Header[] headers = resp.getHeaders();
+    assertNotNull(headers);
+    assertEquals(0, headers.length);
+  }
+
   /**
    * Test method for {@link com.google.gwt.http.client.Response#getStatusText()}.
    */

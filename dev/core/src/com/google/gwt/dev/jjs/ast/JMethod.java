@@ -38,6 +38,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   private String exportName;
   private boolean jsProperty;
+  private Specialization specialization;
 
   public void setExportName(String exportName) {
     this.exportName = exportName;
@@ -53,6 +54,60 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   public boolean isJsProperty() {
     return jsProperty;
+  }
+
+  public void setSpecialization(List<JType> paramTypes, JType returnsType,
+      String targetMethod) {
+    this.specialization = new Specialization(paramTypes, returnsType,
+        targetMethod);
+  }
+
+  public Specialization getSpecialization() {
+    return specialization;
+  }
+
+  public static class Specialization implements Serializable {
+    private List<JType> params;
+    private JType returns;
+    private String target;
+
+    public Specialization(List<JType> params,
+        JType returns, String target) {
+      this.params = params;
+      this.returns = returns;
+      this.target = target;
+    }
+
+    public List<JType> getParams() {
+      return params;
+    }
+
+    public JType getReturns() {
+      return returns;
+    }
+
+    public String getTarget() {
+      return target;
+    }
+
+    public String getParamSignature(JType origReturnValue) {
+      String paramSig = null;
+      if (paramSig == null) {
+        StringBuilder sb = new StringBuilder();
+        sb.append('(');
+        for (JType type : params) {
+          sb.append(type.getJsniSignatureName());
+        }
+        sb.append(')');
+        if (returns != null) {
+          sb.append(returns.getJsniSignatureName());
+        } else {
+          sb.append(origReturnValue.getJsniSignatureName());
+        }
+        paramSig = sb.toString();
+      }
+      return paramSig;
+    }
   }
 
   private static class ExternalSerializedForm implements Serializable {

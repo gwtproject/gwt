@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
@@ -48,6 +49,7 @@ import com.google.gwt.dev.jjs.ast.JGwtCreate;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.Specialization;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -989,6 +991,33 @@ public class UnifyAst {
             }
           }
         }
+      }
+
+      if (method.getSpecialization() != null) {
+        Specialization specialization = method.getSpecialization();
+        List<JType> resolvedParams = new ArrayList<JType>();
+        for (JType param : specialization.getParams()) {
+          resolvedParams.add(translate(param));
+        }
+
+        JType resolvedReturn = null;
+        if (specialization.getReturns() != null) {
+          resolvedReturn = translate(specialization.getReturns());
+        }
+
+        JMethod targetMethod = program.typeOracle
+            .getMethodBySignature((JClassType) method.getEnclosingType()
+                , specialization.getTargetSignature(method));
+        if (targetMethod != null) {
+          flowInto(targetMethod);
+          specialization.resolve(resolvedParams, resolvedReturn,
+              targetMethod);
+        } else {
+          logger.log(Type.ERROR, "Unable to locate @SpecializeMethod target "
+              + specialization.getTargetSignature(method) + " for method " +
+              method.getSignature());
+        }
+
       }
       // Queue up visit / resolve on the body.
       todo.add(method);

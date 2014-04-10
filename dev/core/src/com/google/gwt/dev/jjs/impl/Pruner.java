@@ -612,6 +612,9 @@ public class Pruner {
 
     ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
     livenessAnalyzer.setForPruning();
+    if (!saveCodeGenTypes) {
+      livenessAnalyzer.setForPostOptimize();
+    }
 
     // SPECIAL: Immortal codegen types are never pruned
     traverseTypes(livenessAnalyzer, program.immortalCodeGenTypes);

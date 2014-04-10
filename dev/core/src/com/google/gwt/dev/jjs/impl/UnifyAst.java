@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
@@ -48,6 +49,7 @@ import com.google.gwt.dev.jjs.ast.JGwtCreate;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.Specialization;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -81,6 +83,8 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+
+import org.jboss.testharness.impl.util.Strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -992,6 +996,44 @@ public class UnifyAst {
               flowInto(p);
             }
           }
+        }
+      }
+
+      if (method.getSpecialization() != null) {
+        Specialization specialization = method.getSpecialization();
+        List<JType> resolvedParams = new ArrayList<JType>();
+        if (specialization.getParams() == null) {
+          logger.log(Type.WARN, "Forgot to specify params= attribute on "
+              + "method " + method.getSignature());
+          method.removeSpecialization();
+        } else {
+          for (JType param : specialization.getParams()) {
+            resolvedParams.add(translate(param));
+          }
+        }
+        JType resolvedReturn = null;
+        if (specialization.getReturns() != null) {
+          resolvedReturn = translate(specialization.getReturns());
+        }
+
+        JMethod targetMethod = program.typeOracle
+            .getMethodBySignature((JClassType) method.getEnclosingType()
+                , specialization.getTargetSignature(method));
+        if (targetMethod != null) {
+          flowInto(targetMethod);
+          specialization.resolve(resolvedParams, resolvedReturn,
+              targetMethod);
+        } else {
+          if (Strings.isEmpty(specialization.getTarget())) {
+            logger.log(Type.WARN, "Unable to locate @SpecializeMethod target, "
+                + " forgot to specify target= attribute on method " +
+                method.getSignature());
+          } else {
+            logger.log(Type.WARN, "Unable to locate @SpecializeMethod target "
+                + specialization.getTargetSignature(method) + " for method " +
+                method.getSignature());
+          }
+          method.removeSpecialization();
         }
       }
       // Queue up visit / resolve on the body.

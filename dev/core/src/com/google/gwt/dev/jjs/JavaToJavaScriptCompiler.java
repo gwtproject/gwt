@@ -78,6 +78,7 @@ import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JsAbstractTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsFunctionClusterer;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic;
+import com.google.gwt.dev.jjs.impl.MethodCallSpecializer;
 import com.google.gwt.dev.jjs.impl.MethodCallTightener;
 import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
@@ -1344,6 +1345,7 @@ public abstract class JavaToJavaScriptCompiler {
     stats.add(MakeCallsStatic.exec(options, jprogram).recordVisits(numNodes));
     stats.add(TypeTightener.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodCallTightener.exec(jprogram).recordVisits(numNodes));
+    stats.add(MethodCallSpecializer.exec(jprogram).recordVisits(numNodes));
     stats.add(DeadCodeElimination.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodInliner.exec(jprogram).recordVisits(numNodes));
     if (options.shouldInlineLiteralParameters()) {

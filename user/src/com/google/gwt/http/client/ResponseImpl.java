@@ -41,12 +41,18 @@ class ResponseImpl extends Response {
   public Header[] getHeaders() {
     String allHeaders = xmlHttpRequest.getAllResponseHeaders();
     String[] unparsedHeaders = allHeaders.split("\n");
-    Header[] parsedHeaders = new Header[unparsedHeaders.length];
+    int countNotEmpty = 0;
+    for (String unparsed : unparsedHeaders) {
+      if (unparsed != null && !"".equals(unparsed.trim())) {
+        countNotEmpty++;
+      }
+    }
+    Header[] parsedHeaders = new Header[countNotEmpty];
 
     for (int i = 0, n = unparsedHeaders.length; i < n; ++i) {
       String unparsedHeader = unparsedHeaders[i];
 
-      if (unparsedHeader.length() == 0) {
+      if (unparsedHeader == null || unparsedHeader.trim().length() == 0) {
         continue;
       }
 

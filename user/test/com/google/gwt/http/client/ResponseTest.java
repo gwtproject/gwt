@@ -127,6 +127,29 @@ public class ResponseTest extends RequestTestBase {
     });
   }
 
+  public void testGetHeadersFailure() {
+    executeTest(new RequestCallback() {
+      @Override
+      public void onResponseReceived(Request request, Response response) {
+        Header[] headers = response.getHeaders();
+        if (headers.length > 0) {
+          // offline case, headers are "", this should not occur
+          assertNotNull(headers[0]);
+        }
+        finishTest();
+      }
+
+      @Override
+      public void onError(Request request, Throwable exception) {
+        if (exception instanceof RuntimeException) {
+
+        } else {
+          raiseUnexpectedException(exception);
+        }
+      }
+    });
+  }
+
   /**
    * Test method for {@link com.google.gwt.http.client.Response#getStatusText()}.
    */

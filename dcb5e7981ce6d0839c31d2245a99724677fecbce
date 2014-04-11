@@ -186,6 +186,207 @@
       "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_680c1755",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "I have seen this code elsewhere. Could you have it only in one place and reuse it here?",
+      "range": {
+        "startLine": 93,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 22
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_281b2f87",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3370,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "This should emit a legible error. Also emit an error when the target method can not be resolved.",
+      "range": {
+        "startLine": 3370,
+        "startChar": 4,
+        "endLine": 3370,
+        "endChar": 62
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_682537bd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "We probably want to have here an actual JMethod. That is what we do in JMethodCall isn\u0027t it? We should be able to leverage JDT (like in JSNIReferenceResolver (formerly JSNIChecker)) to validate and get a MethodBinding.",
+      "range": {
+        "startLine": 3372,
+        "startChar": 10,
+        "endLine": 3372,
+        "endChar": 22
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_28e96f23",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "isn\u0027t \n(x.isVolatile() || x.canBePolymorphic() || !x.getTarget().isStatic() x.canBePolymophic() \n\nenough here? (also doesn\u0027t x.getTarget().isAbstract \u003d\u003e x.canBePolymorphic? If not it should I think).\n\nAre there circumstances in which the method is not final but the dispatch is static and specialization is not desired?",
+      "range": {
+        "startLine": 46,
+        "startChar": 27,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_c800c323",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "I guess that you only expect to run for statified method and all the first condition is to avoid the hash lookup.\n\nI suggest to move the optimization condition to instanceMethodForStaticImpl() and delete from here.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 75
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_e8ff87cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "You should add to control flow analysis to rescue specializers. That task would be easier if MakeClassStatic copied specializers from the instance method.",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_08fbcbe5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "could you rewrite this to\nif (instanceMethod \u003d\u003d null) {\n  return;\n}\n\n...\n\nif (specialization \u003d\u003d null) {\nreturn;\n}\n\n..\n\nso that is not so nested?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 6
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_6897f778",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "I think we should do resolve like on line 978.",
+      "range": {
+        "startLine": 994,
+        "startChar": 0,
+        "endLine": 1009,
+        "endChar": 7
+      },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_889a3b9f",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/CompilerHint.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-11T01:33:16Z",
+      "side": 1,
+      "message": "When I metioned compiler hint my though was to have a single annotation @CompilerHint for all hints so that we don\u0027t bloat GWTastBuilder with annotations.\n\n@CompilerHint(type\u003d\"specializeMethod\" , target\u003d, when\u003d{ .... here would be the signature})\n\nand then have @CompilerHints(@CompilerHint(...)) when multiple compiler hints are needed.",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

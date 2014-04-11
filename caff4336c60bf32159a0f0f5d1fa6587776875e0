@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9df977e_08bc6b4a",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-11T09:49:03Z",
+      "side": 1,
+      "message": "[error] \u0027impl\u0027 hides a field.",
+      "revId": "caff4336c60bf32159a0f0f5d1fa6587776875e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

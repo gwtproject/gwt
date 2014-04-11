@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "79e99f2a_a3276443",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-11T07:56:31Z",
+      "side": 1,
+      "message": "It\u0027d be more readable as:\n\n !unparsed.trim().isEmpty()\n\nBut we could also avoid the trim() by splitting on more than just \"\\n\", and we could possibly save a few \"empty items\" by splitting on \\n+ (in practice, it should never happen):\n\n String[] unparsedHeaders \u003d allHeaders.split(\"\\\\s*(\\\\n\\\\s*)+\");\n\n(note that this is not strictly equivalent, as trim() removes every control character and space, not just \"spacing characters\" like \\s in a regexp)",
+      "range": {
+        "startLine": 46,
+        "startChar": 30,
+        "endLine": 46,
+        "endChar": 57
+      },
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39f3a71c_81f97c9a",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-11T07:56:31Z",
+      "side": 1,
+      "message": "Another case where isEmpty() could be used.",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 71
+      },
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79b7df4c_9073746e",
         "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
         "patchSetId": 2
@@ -30,6 +76,24 @@
       "writtenOn": "2014-04-11T00:51:13Z",
       "side": 1,
       "message": "This is another source of empty header entry.\n\nI think instead of have pre-iteration and trying to count headers, it looks more practical to use an ArrayList with toArray (i.e. put the headers into an ArrayList and then call toArray to get the final output to return).",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39f3a71c_21fce887",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-11T07:56:31Z",
+      "side": 1,
+      "message": "+1, I don\u0027t think the overhead is significant enough to justify going to the array level, particularly given that arrays in JS are not fixed-sized.",
+      "parentUuid": "79b7df4c_9073746e",
       "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

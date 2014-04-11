@@ -16,6 +16,40 @@
       "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79b7df4c_9073746e",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-11T00:51:13Z",
+      "side": 1,
+      "message": "This is another source of empty header entry.\n\nI think instead of have pre-iteration and trying to count headers, it looks more practical to use an ArrayList with toArray (i.e. put the headers into an ArrayList and then call toArray to get the final output to return).",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79b7df4c_f02e400d",
+        "filename": "user/test/com/google/gwt/http/client/ResponseTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-11T00:51:13Z",
+      "side": 1,
+      "message": "It looks like you are just trying to test ResponseImpl with a newly created XMLHttpRequest. What about doing that directly instead of an async test? e.g.\n\n  ResponseImpl response \u003d new ResonponseImpl(XMLHttpRequest.create());\n  Header[] header \u003d response.getHeaders();\n  ... assert...",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

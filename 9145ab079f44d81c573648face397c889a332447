@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "39f3a71c_c1d0a4e9",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-11T09:45:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9921f333_b9ac9f3d",
+      "range": {
+        "startLine": 23,
+        "startChar": 58,
+        "endLine": 23,
+        "endChar": 78
+      },
+      "revId": "9145ab079f44d81c573648face397c889a332447",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9921f333_b95a5fba",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 10
@@ -60,6 +84,24 @@
       "writtenOn": "2014-04-09T20:53:46Z",
       "side": 1,
       "message": "I specifically suggested a createHistoryImpl method so that compiler can upgrade the type and optimize the instanceof operation which will drop unnecessary code.\n\nYour code may or may not work so you need to double check if you want to follow that path. On the other hand, following code only has one assignment for impl so it should be quite easy for compiler to optimize that:\n\n  HistoryImpl createHistoryImpl() {\n    HistoryImpl impl \u003d GWT.create(HistoryImpl.class);\n    if (impl instanceof HistoryImplPushState \u0026\u0026 !HistoryImplPushState.isSupported()) {\n      return new HistoryImplHashToken();\n    }\n    return impl;\n  }",
+      "revId": "9145ab079f44d81c573648face397c889a332447",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39f3a71c_a1d598d7",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-11T09:45:08Z",
+      "side": 1,
+      "message": "Updated to a separate method and compiles strips it for IE8.",
+      "parentUuid": "9921f333_b95a5fba",
       "revId": "9145ab079f44d81c573648face397c889a332447",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

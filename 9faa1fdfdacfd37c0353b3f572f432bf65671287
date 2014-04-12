@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9df977e_3c309115",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T19:49:52Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027UnexpectedException\u0027.",
+      "revId": "9faa1fdfdacfd37c0353b3f572f432bf65671287",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_9c2d5dc0",
+        "filename": "/home/mdempsky/gwt/user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T19:49:52Z",
+      "side": 1,
+      "message": "[info] Unable to get class information for @throws tag \u0027SerializationException\u0027.",
+      "revId": "9faa1fdfdacfd37c0353b3f572f432bf65671287",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -100,6 +100,42 @@
     },
     {
       "key": {
+        "uuid": "59d5bb77_6775720c",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-12T06:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79b7df4c_9073746e",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d5bb77_e7e96267",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-12T06:37:36Z",
+      "side": 1,
+      "message": "Yeah, I checked to see if ResponseBuilder was using Java collections. If it had avoided them entirely, I\u0027d be concerned about pulling in collections dependencies, but since ResponseBuilder already uses JRE collections, there\u0027s no negative to using them here.",
+      "parentUuid": "39f3a71c_21fce887",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79b7df4c_f02e400d",
         "filename": "user/test/com/google/gwt/http/client/ResponseTest.java",
         "patchSetId": 2
@@ -111,6 +147,24 @@
       "writtenOn": "2014-04-11T00:51:13Z",
       "side": 1,
       "message": "It looks like you are just trying to test ResponseImpl with a newly created XMLHttpRequest. What about doing that directly instead of an async test? e.g.\n\n  ResponseImpl response \u003d new ResonponseImpl(XMLHttpRequest.create());\n  Header[] header \u003d response.getHeaders();\n  ... assert...",
+      "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d5bb77_6711f2dc",
+        "filename": "user/test/com/google/gwt/http/client/ResponseTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-12T06:37:36Z",
+      "side": 1,
+      "message": "You\u0027ll still need an extra testing only ctor, because the ctor will fail if isReadyState !\u003d DONE. I\u0027ll add that ctor.",
+      "parentUuid": "79b7df4c_f02e400d",
       "revId": "fb6e0dcb7b1abeb5de2223f0c15e60edd50986a9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

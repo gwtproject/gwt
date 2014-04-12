@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19c7c3d6_25d6ce17",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-12T05:40:38Z",
+      "side": 1,
+      "message": "Perhaps put into allowedFromSystemClassLoader",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 416,
+        "endChar": 43
+      },
+      "revId": "e5520d9cd1813a3186439f84207ebaaee58a486c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

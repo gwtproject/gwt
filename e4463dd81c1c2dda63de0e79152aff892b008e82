@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9df977e_bcfe614b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_1c04ada9",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_fc08e9be",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_5cee359d",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JClassType.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_3ceb718d",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_9cf8bd5d",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_7cf5f962",
+        "filename": "/home/mdempsky/gwt/user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_dc224535",
+        "filename": "/home/mdempsky/gwt/user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_bc278143",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_1c1dcdf3",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9df977e_fc21092f",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-12T01:43:18Z",
+      "side": 1,
+      "message": "[error] \u0027catch\u0027 is not followed by whitespace.",
+      "revId": "e4463dd81c1c2dda63de0e79152aff892b008e82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

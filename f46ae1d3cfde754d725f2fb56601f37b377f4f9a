@@ -16,6 +16,144 @@
       "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_25c24e76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "remove stale comment.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 77
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_45702aac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "Alternatively we could have a small normalization pass that removes all specialization information from the tree (would be relatively cheap as it does not need to visit method bodies).\n\nThat would eliminate the need for modality en control flow analyzer.",
+      "range": {
+        "startLine": 644,
+        "startChar": 0,
+        "endLine": 648,
+        "endChar": 2
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_85d22245",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "Now that errors are handled in UnifyAST it does not need to be handled here; just add the additional checks there if needed. Also an ICE is a bit drastic, should be a regular compilation error....",
+      "range": {
+        "startLine": 3371,
+        "startChar": 0,
+        "endLine": 3372,
+        "endChar": 62
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_c5dc1a59",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "This maybe is better an invariant of the specialization and an error might be signaled where all the other checks happen (in UnifyAST).",
+      "range": {
+        "startLine": 59,
+        "startChar": 5,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_e5d79633",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "remove stale comment.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 18
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c7c3d6_6573a6ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-04-12T04:01:38Z",
+      "side": 1,
+      "message": "Because it is a hint maybe reduce this to a WARN and remove specialization in this situation.",
+      "range": {
+        "startLine": 1016,
+        "startChar": 0,
+        "endLine": 1018,
+        "endChar": 37
+      },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

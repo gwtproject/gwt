@@ -13,8 +13,7 @@
 <!-- limitations under the License.                                         -->
 
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.useragent.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
   <inherits name="com.google.gwt.dom.DOM"/>
   <inherits name="com.google.gwt.animation.Animation"/>
   <inherits name="com.google.gwt.aria.Aria"/>

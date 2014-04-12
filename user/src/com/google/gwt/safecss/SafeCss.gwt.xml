@@ -17,8 +17,7 @@
 <!-- SafeCss - facilities for avoiding XSS attacks                         -->
 <!--                                                                       -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
   <public path="public" />
 
   <replace-with class="com.google.gwt.safecss.shared.SafeStylesUtils.ImplIE6To8">

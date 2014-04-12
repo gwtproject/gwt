@@ -17,8 +17,7 @@
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
 
   <!-- Include User module to inherit Timer -->
   <inherits name="com.google.gwt.user.User"/>

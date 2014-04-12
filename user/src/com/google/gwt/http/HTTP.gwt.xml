@@ -18,7 +18,7 @@
 <!-- package must inherit this module.                                      -->
 <!--                                                                        -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
   <inherits name="com.google.gwt.xhr.XMLHttpRequest"/>
   <source path="client" />
   <public path="public" />

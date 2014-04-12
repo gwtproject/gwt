@@ -14,8 +14,7 @@
 
 <!-- Support for typed arrays.                                              -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.useragent.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent" />
 
   <source path="client" />
   <source path="shared" />
@@ -58,4 +57,3 @@
 
   <!-- TODO: other optimized versions? -->
 </module>
-

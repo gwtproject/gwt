@@ -13,8 +13,7 @@
 <!-- limitations under the License.                                         -->
 
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.user.UserAgent" />
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
   <source path="client" />
   <public path="public" />
 

@@ -14,8 +14,7 @@
 
 <!-- Deferred binding rules for Tree.                                       -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
 
   <!-- IE-specific implementation -->
   <replace-with class="com.google.gwt.user.client.ui.TreeItem.TreeItemImplIE6">

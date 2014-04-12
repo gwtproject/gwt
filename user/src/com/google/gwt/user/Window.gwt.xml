@@ -17,8 +17,7 @@
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
 <module type="fileset">
-  <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.core.CoreWithUserAgent"/>
 
   <replace-with class="com.google.gwt.user.client.impl.WindowImplMozilla">
     <when-type-is class="com.google.gwt.user.client.impl.WindowImpl"/>

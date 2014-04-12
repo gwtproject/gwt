@@ -24,8 +24,7 @@
 <!-- to all GWT applications.                                               -->
 
 <module type="fileset">
-	<inherits name="com.google.gwt.core.Core" />
-	<inherits name="com.google.gwt.user.UserAgent" />
+	<inherits name="com.google.gwt.core.CoreWithUserAgent"/>
 
 	<!-- IE6 needs a different implementation. IE8 does not. -->
 	<replace-with

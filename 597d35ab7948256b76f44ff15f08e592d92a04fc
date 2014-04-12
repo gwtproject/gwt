@@ -16,6 +16,86 @@
       "revId": "597d35ab7948256b76f44ff15f08e592d92a04fc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d5bb77_4a8153e5",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-12T00:36:54Z",
+      "side": 1,
+      "message": "revert to final?",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 10
+      },
+      "revId": "597d35ab7948256b76f44ff15f08e592d92a04fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9a7eb21_25b9a2a9",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-12T00:36:54Z",
+      "side": 1,
+      "message": "My guess is, this is required to avoid the assertion?\n\nThen an alternative to exposing constructor is extending the ResponseImpl in the test:\n\n  ResponseImpl resp \u003d new ResponseImpl(XMLHttpRequest.create()) {\n    public void isResponseReady() { return true; }\n  };\n\nI personally try to avoid introducing test specific code into production code but if you like it the other way, I\u0027m fine with that.",
+      "revId": "597d35ab7948256b76f44ff15f08e592d92a04fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d5bb77_2abcdf98",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-12T00:36:54Z",
+      "side": 1,
+      "message": "nit: unparsedHeader.trim().isEmpty()",
+      "range": {
+        "startLine": 56,
+        "startChar": 57,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "597d35ab7948256b76f44ff15f08e592d92a04fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d5bb77_ca6d438a",
+        "filename": "user/src/com/google/gwt/http/client/ResponseImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-12T00:36:54Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "597d35ab7948256b76f44ff15f08e592d92a04fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

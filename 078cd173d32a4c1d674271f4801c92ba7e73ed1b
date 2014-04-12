@@ -16,6 +16,29 @@
       "revId": "078cd173d32a4c1d674271f4801c92ba7e73ed1b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39f3a71c_c408b28a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-12T14:09:37Z",
+      "side": 1,
+      "message": "nit: XMLHttpRequest, or XHR",
+      "range": {
+        "startLine": 9,
+        "startChar": 45,
+        "endLine": 9,
+        "endChar": 59
+      },
+      "revId": "078cd173d32a4c1d674271f4801c92ba7e73ed1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

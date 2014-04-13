@@ -333,7 +333,11 @@
           </fileset>
           <fileset dir="core/super" excludes="**/package.html"/>
           <fileset dir="${javac.out}"/>
-          <zipfileset src="${alldeps.jar}"/>
+          <zipfileset src="${alldeps.jar}">
+            <!-- those classes that we replace with our own versions -->
+            <exclude name="org/apache/catalina/loader/WebappClassLoader*.class"/>
+            <exclude name="org/eclipse/jdt/internal/compiler/lookup/SourceTypeBinding.class"/>
+          </zipfileset>
 
           <zipfileset file="${gwt.tools.soyc}/classLevel.css"
                       prefix="com/google/gwt/soyc/resources/"/>

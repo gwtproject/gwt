@@ -423,15 +423,13 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
         var entryKey = entry.@java.util.Map$Entry::getKey()();
         if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
           // Found an exact match, just update the existing entry
-          var previous = entry.@java.util.Map$Entry::getValue()();
-          entry.@java.util.Map$Entry::setValue(Ljava/lang/Object;)(value);
-          return previous;
+          return entry.@java.util.Map$Entry::setValue(Ljava/lang/Object;)(value);
         }
       }
     } else {
       array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode] = [];
     }
-    var entry = @java.util.MapEntryImpl::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
+    var entry = @java.util.AbstractMap$SimpleEntry::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
     array.push(entry);
     ++this.@java.util.AbstractHashMap::size;
     return null;

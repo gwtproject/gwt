@@ -22,6 +22,30 @@
       "revId": "62d41fb5a0f424c2cba7c7a8f821ea924a3a1544",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "398f27af_be391957",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CatchBlockNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-14T21:08:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59d5bb77_8ad50bd8",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "62d41fb5a0f424c2cba7c7a8f821ea924a3a1544",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

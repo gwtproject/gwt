@@ -26,6 +26,9 @@ import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.JsniRef;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
+import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
@@ -53,6 +56,7 @@ import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.PackageBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ProblemReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
@@ -137,6 +141,7 @@ public class JsniReferenceResolver {
     @Override
     public void endVisitValid(TypeDeclaration typeDeclaration, BlockScope scope) {
       suppressWarningsStack.pop();
+
     }
 
     @Override
@@ -239,6 +244,8 @@ public class JsniReferenceResolver {
 
       // Here we have a qualified JSNI method reference assigned to a field.
       JsniRef jsniRef = JsniRef.parse(rhs.getIdent());
+      MethodBinding methodBinding = (MethodBinding) jsniRefs.get(rhs.getIdent());
+      resolveJsniRef(jsniRef, methodBinding);
       emitWarning("unsafe", WARN_NOT_CAPTURING_QUALIFIER, x.getSourceInfo(), jsniRef,
           rhs.getQualifier().toSource());
     }
@@ -277,13 +284,17 @@ public class JsniReferenceResolver {
 
     private void resolveClassReference(JsniRef jsniRef) {
       // Precedence rules as of JLS 6.4.1.
-      // 1. Enclosing type.
+      // 1. Through enclosing type. (inner classes, outer classes)
       // 2. Visible type in same compilation unit.
       // 3. Named import.
       // 4. Same package.
       // 5. Import on demand.
 
       String originalName = jsniRef.className();
+
+      // If type reference part is omitted use the enclosing class.
+       originalName = originalName == null ?
+          JdtUtil.getSourceName(method.binding.declaringClass) : originalName;
       String importedClassName = originalName;
       if (importedClassName.contains(".")) {
         // Only retain up the first dot to support innerclasses. E.g. import c.g.A and reference
@@ -291,25 +302,30 @@ public class JsniReferenceResolver {
         importedClassName = importedClassName.substring(0,importedClassName.indexOf("."));
       }
 
-      // 1 & 2. Check to see if this name refers to the enclosing class or is directly accessible
+      // 1. Check to see if this name refers to the enclosing class or is directly accessible
       // from it.
-      ReferenceBinding declaringClass = method.binding.declaringClass;
-      while (declaringClass != null) {
-        String declaringClassName = JdtUtil.getSourceName(declaringClass);
-        if (declaringClassName.equals(importedClassName) ||
-            declaringClassName.endsWith("." + importedClassName)) {
-          // Referring to declaring class name using unqualified name.
-          jsniRef.setResolvedClassName(declaringClassName +
-              originalName.substring(importedClassName.length()));
+      ReferenceBinding contextClass = method.binding.declaringClass;
+      while (contextClass != null) {
+        if (tryResolveInClass(jsniRef, originalName, contextClass, method.binding.declaringClass)) {
           return;
         }
-        String fullClassName = declaringClassName + "." + originalName;
-        if (typeResolver.resolveType(fullClassName) != null) {
-          jsniRef.setResolvedClassName(fullClassName);
-          return;
-        }
-        declaringClass = declaringClass.enclosingTypeAt(1);
+        contextClass = contextClass.superclass();
+        // Try to resolve as inner class.
       }
+
+      contextClass = method.binding.declaringClass.enclosingTypeAt(1);
+      while (contextClass != null) {
+        if (tryResolveInClass(jsniRef, originalName, contextClass, method.binding.declaringClass)) {
+          return;
+        }
+        contextClass = contextClass.enclosingTypeAt(1);
+      }
+
+      // 2. Top level in the same compilation unit.
+      if (tryResolveInPackage(jsniRef, originalName, method.binding.declaringClass.getPackage()))
+        return;
+
+
 
       // 3. Check to see if this name is one of the named imports.
       for (ImportReference importReference : cudImports) {
@@ -351,6 +367,28 @@ public class JsniReferenceResolver {
       // Otherwise leave it as it is.
       // TODO(rluble): Maybe we should leave it null here.
       jsniRef.setResolvedClassName(jsniRef.className());
+    }
+
+    private boolean tryResolveInClass(JsniRef jsniRef, String originalName,
+        ReferenceBinding declaringClass, ReferenceBinding referringClass) {
+      String fullClassName = JdtUtil.getSourceName(declaringClass) + "." + originalName;
+      ReferenceBinding resolvedBinding = typeResolver.resolveType(fullClassName);
+      if (resolvedBinding != null && isInnerClassVisible(referringClass, resolvedBinding)) {
+        jsniRef.setResolvedClassName(fullClassName);
+        return true;
+      }
+      return false;
+    }
+
+    private boolean tryResolveInPackage(JsniRef jsniRef, String originalName,
+        PackageBinding packageBinding) {
+      String fullClassName = Joiner.on(".").skipNulls().join(
+          Strings.emptyToNull(JdtUtil.getSourceName(packageBinding)), originalName);
+      if (typeResolver.resolveType(fullClassName) != null) {
+        jsniRef.setResolvedClassName(fullClassName);
+        return true;
+      }
+      return false;
     }
 
     private FieldBinding checkAndResolveFieldRef(SourceInfo errorInfo, ReferenceBinding clazz,
@@ -501,96 +539,6 @@ public class JsniReferenceResolver {
         return checkAndResolveFieldRef(errorInfo, clazz, jsniRef, hasQualifier, isLvalue);
       }
     }
-    private static final String WARN_NOT_CAPTURING_QUALIFIER =
-        "Instance method reference '%2$s.%3$s' loses its instance ('%8$s') when assigned; "
-            + "to remove this warning either assign to a local variable or construct "
-            + "the proper closure using an anonymous function or by calling "
-            + "Function.prototype.bind";
-    private static final String ERR_ILLEGAL_ARRAY_OR_PRIMITIVE_REFERENCE =
-        "Referencing member '%2$s.%4$s': 'class' is " +
-        "the only legal reference for arrays and primitive types";
-    private static final String ERR_ILLEGAL_ASSIGNMENT_TO_CLASS_LITERAL =
-        "Illegal assignment to class literal '%2$s.%3$s'";
-    private static final String ERR_UNABLE_TO_RESOLVE_CLASS =
-        "Referencing class '%2$s': unable to resolve class";
-    private static final String ERR_ILLEGAL_ANONYMOUS_INNER_CLASS =
-        "Referencing class '%2$s': JSNI references to anonymous classes are illegal";
-    private static final String ERR_ILLEGAL_FIELD_ACCESS_ON_NULL =
-        "Referencing field '%2$s.%3$s': 'nullField' is the only legal field reference for 'null'";
-    private static final String ERR_ILLEGAL_METHOD_ACCESS_ON_NULL =
-        "Referencing method '%2$s.%4$s': 'nullMethod()' is the only legal method for 'null'";
-    private static final String ERR_ILLEGAL_PARAMETER =
-        "Parameter %8$d of method '%2$s.%3$s': type '%9$s' may not be passed out of JSNI code";
-    private static final String ERR_ILLEGAL_RETURN_TYPE =
-        "Referencing method '%2$s.%3$s': return type '%8$s' is not safe to access in JSNI code";
-    private static final String ERR_REFERENCE_TO_JSO_INTERFACE_METHOD =
-        "Referencing interface method '%2$s.%4$s': implemented by '%8$s';" +
-        " references to instance methods in overlay types are illegal;" +
-        " use a stronger type or a Java trampoline method";
-    private static final String ERR_REFERENCE_TO_JSO_INSTANCE_METHOD =
-        "Referencing method '%2$s.%4$s': " +
-         "references to instance methods in overlay types are illegal";
-    private static final String ERR_MISSING_QUALIFIER_INSTANCE_METHOD =
-        "Missing qualifier on instance method '%2$s.%3$s'";
-    private static final String ERR_UNNECESSARY_QUALIFIER_STATIC_METHOD =
-        "Unnecessary qualifier on static method '%2$s.%3$s'";
-    private static final String ERR_MISSING_QUALIFIER_INSTANCE_FIELD =
-        "Missing qualifier on instance field '%2$s.%3$s'";
-    private static final String ERR_UNNECESSARY_QUALIFIER_STATIC_FIELD =
-        "Unnecessary qualifier on static field '%2$s.%3$s'";
-    private static final String ERR_ILLEGAL_ASSIGNMENT_TO_METHOD =
-        "Illegal assignment to method '%2$s.%3$s'";
-    private static final String ERR_UNABLE_TO_RESOLVE_METHOD =
-        "Referencing method '%2$s.%4$s': unable to resolve method in class '%6$s'";
-    private static final String ERR_UNABLE_TO_RESOLVE_FIELD =
-        "Referencing field '%2$s.%4$s': unable to resolve field in class '%6$s'";
-    private static final String ERR_AMBIGUOUS_WILDCARD_MATCH =
-        "Referencing method '%2$s.%4$s': ambiguous wildcard match; "
-            + "both '%8$s' and '%9$s' match";
-    private static final String ERR_UNSAFE_FIELD_ACCESS =
-        "Referencing field '%2$s.%3$s': type '%8$s' is not safe to access in JSNI code";
-    private static final String ERR_ILLEGAL_ASSIGNMENT_TO_COMPILE_TIME_CONSTANT =
-        "Illegal assignment to compile-time constant '%2$s.%3$s'";
-    private static final String ERR_MALFORMED_JSNI_IDENTIFIER =
-        "Malformed JSNI identifier '%8$s'";
-    private static final String WARN_DEPRECATED_CLASS =
-        "Referencing deprecated class '%2$s'";
-    private static final String WARN_DEPRECATED_METHOD =
-        "Referencing method '%2$s.%3$s': method '%6$s.%7$s' is deprecated";
-    private static final String WARN_DEPRECATED_FIELD =
-        "Referencing field '%2$s.%3$s': field '%6$s.%7$s' is deprecated";
-
-    /**
-     * Formats messages for {@link #emitError} and {@link #emitWarning}, substituting as follows:
-     * <ul>
-     * <li> %1$s -> full original jsni string </li>
-     * <li> %2$s -> full original jsni classname </li>
-     * <li> %3$s -> full original jsni membername </li>
-     * <li> %4$s -> full original jsni memberspec </li>
-     * <li> %5$s -> full resolved jsni string </li>
-     * <li> %6$s -> full resolved jsni classname </li>
-     * <li> %7$s -> full resolved jsni member with signature </li>
-     * </ul>
-     */
-    private String formatMessage(String msg, JsniRef jsniRef, Object... extraPars) {
-      Object[] formatParameters = new Object[extraPars.length + 7];
-      if (jsniRef != null) {
-        formatParameters[0] = jsniRef.toString();
-        formatParameters[1] = jsniRef.fullClassName();
-        formatParameters[2] = jsniRef.memberName();
-        formatParameters[3] = jsniRef.memberSignature();
-        formatParameters[4] = jsniRef.getResolvedReference();
-        formatParameters[5] = jsniRef.getFullResolvedClassName();
-        formatParameters[6] = jsniRef.getResolvedMemberSignature();
-      }
-
-      for (int i = 0; i < extraPars.length; i++) {
-        formatParameters[i + 7] = extraPars[i];
-      }
-
-      return String.format(msg, formatParameters);
-    }
-
 
     private void emitError(String msg, SourceInfo errorInfo, JsniRef jsniRef, Object... extraPars) {
       JsniMethodCollector.reportJsniError(errorInfo, method, formatMessage(msg, jsniRef, extraPars));
@@ -643,6 +591,18 @@ public class JsniReferenceResolver {
         }
       }
       return null;
+    }
+
+    /**
+     * Returns true if {@code class}, is an inner class that is visible to {@code referencingClass}
+     */
+    private boolean isInnerClassVisible(ReferenceBinding referencingClass,
+        ReferenceBinding targetInnerClass) {
+      return  // All public and protected inner classes are visible.
+              targetInnerClass.isPublic() || targetInnerClass.isProtected()
+              // Package private are visible from the same package.
+              || targetInnerClass.isDefault() && targetInnerClass.getPackage() ==
+              referencingClass.getPackage();
     }
 
     /**
@@ -791,15 +751,14 @@ public class JsniReferenceResolver {
               StringLiteral expression = (StringLiteral) ai.expressions[i];
               valuesSetBuilder.add(expression.constant.stringValue().toLowerCase(Locale.ENGLISH));
             } else {
-              suppressionAnnotationWarning(a,
-                  "Unable to analyze SuppressWarnings annotation, " +
-                      ai.expressions[i].toString() + " not a string constant.");
+              suppressionAnnotationWarning(a, WARN_UNABLE_TO_ANALYZE_SUPRESSWARNINGS,
+                  ai.expressions[i].toString());
             }
           }
           return valuesSetBuilder.build();
         } else {
-          suppressionAnnotationWarning(a, "Unable to analyze SuppressWarnings annotation, " +
-              valueExpr.toString() + " not a string constant.");
+          suppressionAnnotationWarning(a, WARN_UNABLE_TO_ANALYZE_SUPRESSWARNINGS,
+              valueExpr.toString());
         }
       }
     }
@@ -884,9 +843,9 @@ public class JsniReferenceResolver {
         "longJsniRestriction.html"));
   }
 
-  private void suppressionAnnotationWarning(ASTNode node, String message) {
-    GWTProblem.recordProblem(node, cud.compilationResult(), message, null,
-        ProblemSeverities.Warning);
+  private void suppressionAnnotationWarning(ASTNode node, String message, String... params) {
+    GWTProblem.recordProblem(node, cud.compilationResult(), formatMessage(message, null, params),
+        null, ProblemSeverities.Warning);
   }
 
   private static void resolveJsniRef(JsniRef jsniRef, FieldBinding fieldBinding) {
@@ -906,4 +865,121 @@ public class JsniReferenceResolver {
     jsniRef.setResolvedClassName(JdtUtil.getSourceName(declaringClassBinding));
     jsniRef.setResolvedMemberWithSignature(JdtUtil.formatMethodSignature(methodBinding));
   }
+
+  @VisibleForTesting
+  static final String WARN_NOT_CAPTURING_QUALIFIER =
+      "Reference '%1$s': Instance method reference '%6$s.%7$s' loses its instance ('%8$s') "
+          + "when assigned; "
+          + "to remove this warning either assign to a local variable or construct "
+          + "the proper closure using an anonymous function or by calling "
+          + "Function.prototype.bind";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_ARRAY_OR_PRIMITIVE_REFERENCE =
+      "Reference '%1$s': 'class' is " +
+          "the only legal reference for arrays and primitive types";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_ASSIGNMENT_TO_CLASS_LITERAL =
+      "Illegal assignment to class literal '%6$s.class'";
+  @VisibleForTesting
+  static final String ERR_UNABLE_TO_RESOLVE_CLASS =
+      "Reference '%1$s': unable to resolve class '%6$s'";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_ANONYMOUS_INNER_CLASS =
+      "Reference '%1$s': JSNI references to anonymous classes are illegal";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_PARAMETER =
+      "Reference '%1$s': Parameter %8$d of method '%6$s.%7$s': type '%9$s' may not be passed out"
+          + " of JSNI code";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_RETURN_TYPE =
+      "Reference '%1$s': return type '%8$s' is not safe to access in JSNI code";
+  @VisibleForTesting
+  static final String ERR_REFERENCE_TO_JSO_INTERFACE_METHOD =
+      "Reference '%1$s': illegal reference to interface method '%6$s.%7$s': " +
+          "implemented by overlay '%8$s';" +
+          " references to instance methods in overlay types are illegal;" +
+          " use a stronger type or a Java trampoline method";
+  @VisibleForTesting
+  static final String ERR_REFERENCE_TO_JSO_INSTANCE_METHOD =
+      "Reference '%1$s': illegal reference to '%6$s.%7$s'; "
+          + "references to instance methods in overlay types are illegal";
+  @VisibleForTesting
+  static final String ERR_MISSING_QUALIFIER_INSTANCE_METHOD =
+      "Reference '%1$s': Missing qualifier on instance method '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_UNNECESSARY_QUALIFIER_STATIC_METHOD =
+      "Reference '%1$s':Unnecessary qualifier on static method '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_MISSING_QUALIFIER_INSTANCE_FIELD =
+      "Reference '%1$s': Missing qualifier on instance field '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_UNNECESSARY_QUALIFIER_STATIC_FIELD =
+      "Reference '%1$s': Unnecessary qualifier on static field '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_ASSIGNMENT_TO_METHOD =
+      "Reference '%1$s': Illegal assignment to method '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_UNABLE_TO_RESOLVE_METHOD =
+      "Reference '%1$s': unable to resolve method '%4$s' in class '%6$s'";
+  @VisibleForTesting
+  static final String ERR_UNABLE_TO_RESOLVE_FIELD =
+      "Reference '%1$s': unable to resolve field '%4$s' in class '%6$s'";
+  @VisibleForTesting
+  static final String ERR_AMBIGUOUS_WILDCARD_MATCH =
+      "Reference '%1$s': ambiguous wildcard match; both '%8$s' and '%9$s' match";
+  @VisibleForTesting
+  static final String ERR_UNSAFE_FIELD_ACCESS =
+      "Reference '%1$s': unsafe to access field '%6$s.%7$s'; it is unsafe to access fields of "
+          + "type '%8$s' in JSNI code";
+  @VisibleForTesting
+  static final String ERR_ILLEGAL_ASSIGNMENT_TO_COMPILE_TIME_CONSTANT =
+      "Reference '%1$s': Illegal assignment to compile-time constant '%6$s.%7$s'";
+  @VisibleForTesting
+  static final String ERR_MALFORMED_JSNI_IDENTIFIER =
+      "Malformed JSNI identifier '%8$s'";
+  @VisibleForTesting
+  static final String WARN_DEPRECATED_CLASS =
+      "Reference '%1$s': Referencing deprecated class '%6$s'";
+  @VisibleForTesting
+  static final String WARN_DEPRECATED_METHOD =
+      "Reference '%1$s': method '%6$s.%7$s' is deprecated";
+  @VisibleForTesting
+  static final String WARN_DEPRECATED_FIELD =
+      "Reference '%1$s': field '%6$s.%7$s' is deprecated";
+  @VisibleForTesting
+  static final String WARN_UNABLE_TO_ANALYZE_SUPRESSWARNINGS =
+    "Unable to analyze SuppressWarnings annotation, %8$s not a string constant.";
+
+  /**
+   * Formats messages for {@link #emitError} and {@link #emitWarning}, substituting as follows:
+   * <ul>
+   * <li> %1$s -> full original jsni string </li>
+   * <li> %2$s -> full original jsni classname </li>
+   * <li> %3$s -> full original jsni membername </li>
+   * <li> %4$s -> full original jsni memberspec </li>
+   * <li> %5$s -> full resolved jsni string </li>
+   * <li> %6$s -> full resolved jsni classname </li>
+   * <li> %7$s -> full resolved jsni member with signature </li>
+   * <li> %8$s on -> extra parameters</li>
+   * </ul>
+   */
+  private String formatMessage(String msg, JsniRef jsniRef, Object... extraPars) {
+    Object[] formatParameters = new Object[extraPars.length + 7];
+    if (jsniRef != null) {
+      formatParameters[0] = jsniRef.toString();
+      formatParameters[1] = jsniRef.fullClassName();
+      formatParameters[2] = jsniRef.memberName();
+      formatParameters[3] = jsniRef.memberSignature();
+      formatParameters[4] = jsniRef.getResolvedReference();
+      formatParameters[5] = jsniRef.getFullResolvedClassName();
+      formatParameters[6] = jsniRef.getResolvedMemberSignature();
+    }
+
+    for (int i = 0; i < extraPars.length; i++) {
+      formatParameters[i + 7] = extraPars[i];
+    }
+
+    return String.format(msg, formatParameters);
+  }
+
 }

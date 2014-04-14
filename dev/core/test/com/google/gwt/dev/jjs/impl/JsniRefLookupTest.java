@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JsniRefLookup.ErrorReporter;
 import com.google.gwt.dev.util.JsniRef;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 /**
  * Tests class {@link JsniRefLookup}.
@@ -53,128 +54,119 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Intf") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public interface Intf {\n");
-        code.append("  public int addTwoOverloaded(int x);\n");
-        code.append("  public int addOne(int x);\n");
-        code.append("  public int foo(int x);\n");
-        code.append("  public double foo(double x);\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public interface Intf {",
+        "  public int addTwoOverloaded(int x);",
+        "  public int addOne(int x);",
+        "  public int foo(int x);",
+        "  public double foo(double x);",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.Foo") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public class Foo implements Intf {\n");
-        code.append("  public Foo() { }\n");
-        code.append("  public Foo(int x) { }\n");
-        code.append("  public static int intStatic;\n");
-        code.append("  public int intInstance;\n");
-        code.append("  public int addOne(int x) { return x+1; }\n");
-        code.append("  public int addTwoOverloaded(int x) { return x+2; }\n");
-        code.append("  public double addTwoOverloaded(double x) { return x+2; }\n");
-        code.append("  public int foo(int x) { return x+1; }\n");
-        code.append("  public double foo(double x) { return x+1; }\n");
-        code.append("  public int bar(int x) { return x+1; }\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public class Foo implements Intf {",
+        "  public Foo() { }",
+        "  public Foo(int x) { }",
+        "  public static int intStatic;",
+        "  public int intInstance;",
+        "  public int addOne(int x) { return x+1; }",
+        "  public int addTwoOverloaded(int x) { return x+2; }",
+        "  public double addTwoOverloaded(double x) { return x+2; }",
+        "  public int foo(int x) { return x+1; }",
+        "  public double foo(double x) { return x+1; }",
+        "  public int bar(int x) { return x+1; }",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.Bar") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public class Bar extends Foo {\n");
-        code.append("  public Bar() { }\n");
-        code.append("  public int foo(int x) { return x+1; }\n");
-        code.append("  public int bar(int x) { return x+1; }\n");
-        code.append("  public double bar(double x) { return x+1; }\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public class Bar extends Foo {",
+        "  public Bar() { }",
+        "  public int foo(int x) { return x+1; }",
+        "  public int bar(int x) { return x+1; }",
+        "  public double bar(double x) { return x+1; }",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.GenericClass") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public abstract class GenericClass<T> {\n");
-        code.append("  abstract void set(T x);\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public abstract class GenericClass<T> {",
+        "  abstract void set(T x);",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.ClassWithBridge") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("class ClassWithBridge extends GenericClass<String> {\n");
-        code.append("  void set(String x) { }\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "class ClassWithBridge extends GenericClass<String> {",
+        "  void set(String x) { }",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.PrivateSup") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public class PrivateSup {\n");
-        code.append("  private static int field;\n");
-        code.append("  private static int method() { return 0; }\n");
-        code.append("  private static int fieldSup;\n");
-        code.append("  private static int methodSuP() { return 0; }\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public class PrivateSup {",
+        "  private static int field;",
+        "  private static int method() { return 0; }",
+        "  private static int fieldSup;",
+        "  private static int methodSuP() { return 0; }",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.PrivateSub") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public class PrivateSub extends PrivateSup {\n");
-        code.append("  private static float field;\n");
-        code.append("  private static float method() { return 0; }\n");
-        code.append("  private static float methodSub() { return 0; }\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public class PrivateSub extends PrivateSup {",
+        "  private static float field;",
+        "  private static float method() { return 0; }",
+        "  private static float methodSub() { return 0; }",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.DiffRetSuper") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public interface DiffRetSuper {\n");
-        code.append("  Object foo();\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public interface DiffRetSuper {",
+        "  Object foo();",
+        "}");
       }
     });
 
     sourceOracle.addOrReplace(new MockJavaResource("test.DiffRetSub") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
-        code.append("package test;\n");
-        code.append("public interface DiffRetSub extends DiffRetSuper {\n");
-        code.append("  String foo();\n");
-        code.append("}\n");
-        return code;
+        return Joiner.on('\n').join(
+        "package test;",
+        "public interface DiffRetSub extends DiffRetSuper {",
+        "  String foo();",
+        "}");
       }
     });
 
@@ -192,7 +184,7 @@ public class JsniRefLookupTest extends JJSTestBase {
   public void testBasicLookups() {
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JField res = (JField) lookup("test.Foo::intStatic", errors);
+      JField res = (JField) lookup("@test.Foo::intStatic", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("intStatic", res.getName());
@@ -200,7 +192,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JField res = (JField) lookup("test.Foo::intInstance", errors);
+      JField res = (JField) lookup("@test.Foo::intInstance", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("intInstance", res.getName());
@@ -208,14 +200,14 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::addOne(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::addOne(I)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::addTwoOverloaded(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::addTwoOverloaded(I)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
@@ -223,7 +215,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::addTwoOverloaded(D)", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::addTwoOverloaded(D)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
@@ -231,7 +223,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::new()", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::new()", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("Foo", res.getName());
@@ -239,17 +231,17 @@ public class JsniRefLookupTest extends JJSTestBase {
 
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::bogoField", errors);
+      lookup("@test.Foo::bogoField", errors);
       errors.assertHasError();
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::bogoMethod()", errors);
+      lookup("@test.Foo::bogoMethod()", errors);
       errors.assertHasError();
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::new(J)", errors);
+      lookup("@test.Foo::new(J)", errors);
       errors.assertHasError();
     }
   }
@@ -258,7 +250,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     {
       MockErrorReporter errors = new MockErrorReporter();
       JMethod res = (JMethod) lookup(
-          "test.ClassWithBridge::set(Ljava/lang/String;)", errors);
+          "@test.ClassWithBridge::set(Ljava/lang/String;)", errors);
       errors.assertNoError();
       assertEquals("test.ClassWithBridge", res.getEnclosingType().getName());
       assertEquals("set", res.getName());
@@ -267,7 +259,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.ClassWithBridge::set(*)", errors);
+      JMethod res = (JMethod) lookup("@test.ClassWithBridge::set(*)", errors);
       errors.assertNoError();
       assertEquals("test.ClassWithBridge", res.getEnclosingType().getName());
       assertEquals("set", res.getName());
@@ -278,7 +270,7 @@ public class JsniRefLookupTest extends JJSTestBase {
       // For backward compatibility, allow calling a bridge method directly
       MockErrorReporter errors = new MockErrorReporter();
       JMethod res = (JMethod) lookup(
-          "test.ClassWithBridge::set(Ljava/lang/Object;)", errors);
+          "@test.ClassWithBridge::set(Ljava/lang/Object;)", errors);
       errors.assertNoError();
       assertEquals("test.ClassWithBridge", res.getEnclosingType().getName());
       assertEquals("set", res.getName());
@@ -290,7 +282,7 @@ public class JsniRefLookupTest extends JJSTestBase {
   public void testConstructors() {
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::new()", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::new()", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("Foo", res.getName());
@@ -298,7 +290,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::new(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::new(I)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("Foo", res.getName());
@@ -307,13 +299,13 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::new(*)", errors);
+      lookup("@test.Foo::new(*)", errors);
       errors.assertHasError();
     }
 
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::new()", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::new()", errors);
       errors.assertNoError();
       assertEquals("test.Bar", res.getEnclosingType().getName());
       assertEquals("Bar", res.getName());
@@ -321,7 +313,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::new(*)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::new(*)", errors);
       errors.assertNoError();
       assertEquals("test.Bar", res.getEnclosingType().getName());
       assertEquals("Bar", res.getName());
@@ -329,7 +321,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Bar::new(I)", errors);
+      lookup("@test.Bar::new(I)", errors);
       errors.assertHasError();
     }
   }
@@ -338,14 +330,14 @@ public class JsniRefLookupTest extends JJSTestBase {
     // test lookups of methods where the subtype is specified
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::addOne(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::addOne(I)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::addTwoOverloaded(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::addTwoOverloaded(I)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
@@ -353,7 +345,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::addTwoOverloaded(D)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::addTwoOverloaded(D)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
@@ -361,14 +353,14 @@ public class JsniRefLookupTest extends JJSTestBase {
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::addOne(*)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::addOne(*)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Bar::addTwoOverloaded(*)", errors);
+      lookup("@test.Bar::addTwoOverloaded(*)", errors);
       errors.assertHasError();
     }
 
@@ -378,28 +370,28 @@ public class JsniRefLookupTest extends JJSTestBase {
      */
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::foo(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::foo(I)", errors);
       errors.assertNoError();
       assertEquals("test.Bar", res.getEnclosingType().getName());
       assertEquals("foo", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::bar(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::bar(I)", errors);
       errors.assertNoError();
       assertEquals("test.Bar", res.getEnclosingType().getName());
       assertEquals("bar", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Bar::bar(D)", errors);
+      JMethod res = (JMethod) lookup("@test.Bar::bar(D)", errors);
       errors.assertNoError();
       assertEquals("test.Bar", res.getEnclosingType().getName());
       assertEquals("bar", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Bar::foo(*)", errors);
+      lookup("@test.Bar::foo(*)", errors);
       errors.assertHasError();
     }
 
@@ -409,7 +401,7 @@ public class JsniRefLookupTest extends JJSTestBase {
      */
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.DiffRetSub::foo()", errors);
+      JMethod res = (JMethod) lookup("@test.DiffRetSub::foo()", errors);
       errors.assertNoError();
       assertEquals("test.DiffRetSub", res.getEnclosingType().getName());
       assertEquals("foo", res.getName());
@@ -420,28 +412,28 @@ public class JsniRefLookupTest extends JJSTestBase {
     // Test lookups in the interface that specify the types
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::addTwoOverloaded(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::addTwoOverloaded(I)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::addOne(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::addOne(I)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::foo(I)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::foo(I)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("foo", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::foo(D)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::foo(D)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("foo", res.getName());
@@ -450,21 +442,21 @@ public class JsniRefLookupTest extends JJSTestBase {
     // Test lookups that use wildcards
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::addTwoOverloaded(*)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::addTwoOverloaded(*)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("addTwoOverloaded", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Intf::addOne(*)", errors);
+      JMethod res = (JMethod) lookup("@test.Intf::addOne(*)", errors);
       errors.assertNoError();
       assertEquals("test.Intf", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Intf::foo(*)", errors);
+      lookup("@test.Intf::foo(*)", errors);
       errors.assertHasError();
     }
   }
@@ -473,14 +465,14 @@ public class JsniRefLookupTest extends JJSTestBase {
     // test private entries in the requested class
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.PrivateSub::method()", errors);
+      JMethod res = (JMethod) lookup("@test.PrivateSub::method()", errors);
       errors.assertNoError();
       assertEquals("test.PrivateSub", res.getEnclosingType().getName());
       assertEquals("method", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JField res = (JField) lookup("test.PrivateSub::field", errors);
+      JField res = (JField) lookup("@test.PrivateSub::field", errors);
       errors.assertNoError();
       assertEquals("test.PrivateSub", res.getEnclosingType().getName());
       assertEquals("field", res.getName());
@@ -489,12 +481,12 @@ public class JsniRefLookupTest extends JJSTestBase {
     // test private entries in the superclass
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.PrivateSub::methodSup()", errors);
+      lookup("@test.PrivateSub::methodSup()", errors);
       errors.assertHasError();
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.PrivateSub::fieldSup", errors);
+      lookup("@test.PrivateSub::fieldSup", errors);
       errors.assertHasError();
     }
   }
@@ -502,19 +494,19 @@ public class JsniRefLookupTest extends JJSTestBase {
   public void testWildcardLookups() {
     {
       MockErrorReporter errors = new MockErrorReporter();
-      JMethod res = (JMethod) lookup("test.Foo::addOne(*)", errors);
+      JMethod res = (JMethod) lookup("@test.Foo::addOne(*)", errors);
       errors.assertNoError();
       assertEquals("test.Foo", res.getEnclosingType().getName());
       assertEquals("addOne", res.getName());
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::addTwoOverloaded(*)", errors);
+      lookup("@test.Foo::addTwoOverloaded(*)", errors);
       errors.assertHasError();
     }
     {
       MockErrorReporter errors = new MockErrorReporter();
-      lookup("test.Foo::bogoMethod(*)", errors);
+      lookup("@test.Foo::bogoMethod(*)", errors);
       errors.assertHasError();
     }
   }

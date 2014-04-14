@@ -29,6 +29,7 @@ import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.PackageBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
@@ -61,6 +62,11 @@ public final class JdtUtil {
     return Joiner.on(".").skipNulls().join(new String[]{
         Strings.emptyToNull(CharOperation.charToString(classBinding.qualifiedPackageName())),
         CharOperation.charToString(classBinding.qualifiedSourceName())});
+  }
+
+  public static String getSourceName(PackageBinding packageBinding) {
+    return Joiner.on(".").skipNulls().join(
+            CharOperation.charArrayToStringArray(packageBinding.compoundName));
   }
 
   public static boolean isInnerClass(ReferenceBinding binding) {

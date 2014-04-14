@@ -51,7 +51,7 @@ public class JsniRef {
    * <li>the method parameter types, excluding the parentheses
    * </ol>
    */
-  private static Pattern JsniRefPattern = Pattern.compile("@?([^:@\\[\\]]*)((?:\\[\\])*)::([^(]+)(\\((.*)\\))?");
+  private static Pattern JsniRefPattern = Pattern.compile("@(?:([^:@\\[\\]]+)((?:\\[\\])*)::)?([\\w$]+)(\\((.*)\\))?");
 
   /**
    * Parse a Java reference from JSNI code. This parser is forgiving; it does
@@ -64,8 +64,13 @@ public class JsniRef {
       return null;
     }
 
+    int arrayDimensions = 0;
     String className = matcher.group(1);
-    int arrayDimensions = matcher.group(2).length() / 2;
+    if (className == null) {
+      assert matcher.group(2) == null;
+    } else {
+      arrayDimensions = matcher.group(2).length() / 2;
+    }
     String memberName = matcher.group(3);
     String paramTypesString = null;
     String[] paramTypes = null;
@@ -227,12 +232,12 @@ public class JsniRef {
   }
 
   public String fullClassName() {
-    return className + Strings.repeat("[]", arrayDimensions);
+    return className == null ? null : (className + Strings.repeat("[]", arrayDimensions));
   }
 
   @Override
   public String toString() {
-    return "@" + fullClassName() + "::" + memberSignature();
+    return "@" + (fullClassName() == null ? "" : (fullClassName() + "::")) + memberSignature();
   }
 
   public boolean isArray() {

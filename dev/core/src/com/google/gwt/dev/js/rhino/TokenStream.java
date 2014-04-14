@@ -1343,42 +1343,78 @@ public class TokenStream {
         }
     }
 
+    private boolean jsniIsWhiteSpace(int c) {
+      return isJSSpace(c) || c == '\n';
+    }
+
     private void skipWhitespace() throws IOException {
       int tmp;
       do {
         tmp = in.read();
-      } while (isJSSpace(tmp) || tmp == '\n');
+      } while (jsniIsWhiteSpace(tmp));
       // Reposition back to first non whitespace char.
       in.unread();
     }
 
+
     private int jsniMatchReference() throws IOException {
 
-      // First, read the type name whose member is being accessed.
-      if (!jsniMatchQualifiedTypeName('.', ':')) {
+      boolean referenceTypeOmitted = true;
+      // Read the first identifier part
+      if (!jsniMatchIdentifier()) {
         return ERROR;
       }
 
-      // Now we must the second colon.
-      //
-      int c = in.read();
-      if (c != ':') {
-          in.unread();
-          reportSyntaxError("msg.jsni.expected.char", new String[] { ":" });
+      // It is a qualified name, finish parsing it.
+      if (in.peek() == '.') {
+        expectChar('.');
+        referenceTypeOmitted = false;
+        if (!jsniMatchQualifiedTypeName('.')) {
           return ERROR;
+        }
       }
-      addToString(c);
 
-      // Skip whitespace starting after ::.
-      skipWhitespace();
+      // Match braces for array types.
+      referenceTypeOmitted &= !jsniMaybeMatchArrayBraces();
 
-      // Finish by reading the field or method signature.
-      if (!jsniMatchMethodSignatureOrFieldName()) {
-        return ERROR;
+      // Now there should be double colon unless the whole type reference part is omitted.
+      if (!referenceTypeOmitted || in.peek() == ':') {
+        expectChars("::");
+        skipWhitespace();
+        // Match field/method name.
+        if (!jsniMatchIdentifier()) {
+          // Assume the callee reported the error and unread the last char.
+          return ERROR;
+        }
+      }
+
+      if (in.peek() == '(') {
+        // Finish by reading the field or method signature.
+        if (!jsniMatchMethodSignature()) {
+          return ERROR;
+        }
       }
 
       this.string = new String(stringBuffer, 0, stringBufferTop);
       return NAME;
+    }
+
+    private boolean expectChars(String s) throws IOException {
+      for (char c : s.toCharArray()) {
+        if (!expectChar(c))
+          return false;
+      }
+      return true;
+    }
+
+    private boolean expectChar(char c) throws IOException {
+      if (in.peek() != c) {
+        reportSyntaxError("msg.jsni.expected.char", new String[] { String.valueOf(c) });
+        return false;
+      }
+      in.read();
+      addToString(c);
+      return true;
     }
 
     private boolean jsniMatchParamListSignature() throws IOException {
@@ -1390,36 +1426,22 @@ public class TokenStream {
       // First check for the special case of * as the parameter list, indicating
       // a wildcard
       if (in.peek() == '*') {
-        addToString(in.read());
-        if (in.peek() != ')') {
-          reportSyntaxError("msg.jsni.expected.char", new String[] { ")" });
+        expectChar('*');
+        skipWhitespace();
+      } else {
+        // Otherwise, loop through reading one param type at a time
+        skipWhitespace();
+        while (in.peek() != ')') {
+
+          if (!jsniMatchParamTypeSignature()) {
+            return false;
+          }
+          // Skip whitespace between parameters.
+          skipWhitespace();
         }
-        addToString(in.read());
-        return true;
       }
 
-      // Otherwise, loop through reading one param type at a time
-      do {
-        // Skip whitespace between parameters.
-        skipWhitespace();
-
-        int c = in.read();
-
-        if (c == ')') {
-          // Finished successfully.
-          //
-          addToString(c);
-          return true;
-        }
-
-        in.unread();
-      } while (jsniMatchParamTypeSignature());
-
-      // If we made it here, we can assume that there was an invalid type
-      // signature that was already reported and that the offending char
-      // was already unread.
-      //
-      return false;
+      return expectChar(')');
     }
 
     private boolean jsniMatchParamTypeSignature() throws IOException {
@@ -1439,7 +1461,11 @@ public class TokenStream {
         case 'L':
           // Class/Interface type prefix.
           addToString(c);
-          return jsniMatchQualifiedTypeName('/', ';');
+          if (!jsniMatchQualifiedTypeName('/')) {
+            return false;
+          }
+          expectChar(';');
+          return true;
         case '[':
           // Array type prefix.
           addToString(c);
@@ -1458,9 +1484,8 @@ public class TokenStream {
       return jsniMatchParamTypeSignature();
     }
 
-    private boolean jsniMatchMethodSignatureOrFieldName() throws IOException {
+    private boolean jsniMatchIdentifier() throws IOException {
       int c = in.read();
-
 
       // We must see an ident start here.
       //
@@ -1474,105 +1499,64 @@ public class TokenStream {
 
       for (;;) {
         c = in.read();
-        if (Character.isJavaIdentifierPart((char)c)) {
-          addToString(c);
-        }
-        else if (c == '(') {
-          // This means we're starting a JSNI method signature.
-          //
-          addToString(c);
-          if (jsniMatchParamListSignature()) {
-            // Finished a method signature with success.
-            // Assume the callee unread the last char.
-            //
-            return true;
-          }
-          else {
-            // Assume the callee reported the error and unread the last char.
-            //
-            return false;
-          }
-        }
-        else {
-          // We don't know this char, so it finishes the token.
-          //
+        if (!Character.isJavaIdentifierPart((char) c)) {
           in.unread();
           return true;
         }
+        addToString(c);
       }
     }
 
+    private boolean jsniMatchMethodSignature() throws IOException {
+      if (!expectChar('(')) {
+        return false;
+      }
+
+     return jsniMatchParamListSignature();
+    }
+
+    private boolean jsniMaybeMatchArrayBraces() throws IOException {
+      boolean matched = false;
+      // Arrray-type reference
+      int c = in.read();
+      while (c == '[') {
+        if (']' != in.peek()) {
+          in.unread();
+          return matched;
+        }
+        addToString('[');
+        addToString(in.read());
+        c = in.read();
+        matched = true;
+      }
+      in.unread();
+      return matched;
+    }
     /**
      * This method is called to match the fully-qualified type name that
      * should appear after the '@' in a JSNI reference.
      * @param sepChar the character that will separate the Java idents
      *        (either a '.' or '/')
-     * @param endChar the character that indicates the end of the
      */
-    private boolean jsniMatchQualifiedTypeName(char sepChar, char endChar)
+    private boolean jsniMatchQualifiedTypeName(char sepChar)
         throws IOException {
-      int c = in.read();
+      int c;
 
-      // Whether nested or not, we must see an ident start here.
-      //
-      if (!Character.isJavaIdentifierStart((char)c)) {
-        in.unread();
-        reportSyntaxError("msg.jsni.expected.identifier", null);
-        return false;
-      }
-
-      // Now actually add the first ident char.
-      //
-      addToString(c);
-
-      // And append any other ident chars.
-      //
-      for (;;) {
-        c = in.read();
-        if (Character.isJavaIdentifierPart((char)c)) {
-          addToString(c);
-        }
-        else {
-          break;
-        }
-      }
-
-      // Arrray-type reference
-      while (c == '[') {
-        if (']' == in.peek()) {
-          addToString('[');
-          addToString(in.read());
-          c = in.read();
-        } else {
-          break;
-        }
-      }
-
-      // We have a non-ident char to classify.
-      //
-      if (c == sepChar) {
-        addToString(c);
-        if (jsniMatchQualifiedTypeName(sepChar, endChar)) {
-          // We consumed up to the endChar, so we finished with total success.
-          //
-          return true;
-        } else {
-          // Assume that the nested call reported the syntax error and
-          // unread the last character.
-          //
+      do {
+        if (!jsniMatchIdentifier()) {
+          // Error already reported.
           return false;
         }
-      } else if (c == endChar) {
-        // Matched everything up to the specified end char.
-        //
-        addToString(c);
-        return true;
-      } else {
-        // This is an unknown char that finishes the token.
-        //
-        in.unread();
-        return true;
-      }
+
+        c = in.read();
+        if (c == sepChar) {
+          addToString(c);
+        }
+      } while (c == sepChar);
+
+      // This is an unknown char that finishes the token.
+      in.unread();
+      return true;
     }
 
     private String getStringFromBuffer() {

@@ -41,7 +41,7 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     StringBuffer code = new StringBuffer();
     code.append("class Foo {\n");
     code.append("  native void m(Object o) /*-{\n");
-    code.append("    o.@Foo::m(Ljava/lang/String);\n");
+    code.append("    o.@Foo::m(Ljava/lang/String;);\n");
     code.append("  }-*/;\n");
     code.append("}\n");
     String source = code.toString();
@@ -55,15 +55,15 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     assertEquals(3, problem.getSourceLineNumber());
     assertTrue(problem.isError());
     assertEquals(
-        "Referencing method 'Foo.m(Ljava/lang/String)': unable to resolve method in class 'Foo'",
-        problem.getMessage());
+        "Reference '@Foo::m(Ljava/lang/String;)': unable to resolve method 'm(Ljava/lang/String;)'"
+            + " in class 'Foo'", problem.getMessage());
   }
 
   public void testMalformedJsniRefPosition() {
     StringBuffer code = new StringBuffer();
     code.append("class Foo {\n");
     code.append("  native void m() /*-{\n");
-    code.append("    @Bar;\n");
+    code.append("    @m(*;\n");
     code.append("  }-*/;\n");
     code.append("}\n");
     String source = code.toString();
@@ -73,7 +73,7 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     assertEquals(source.indexOf('@') + "Bar".length(), problem.getSourceStart());
     assertEquals(3, problem.getSourceLineNumber());
     assertTrue(problem.isError());
-    assertEquals("Expected \":\" in JSNI reference\n>     @Bar;\n> --------^",
+    assertEquals("Expected \")\" in JSNI reference\n>     @m(*;\n> --------^",
         problem.getMessage());
   }
 
@@ -81,7 +81,7 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     StringBuffer code = new StringBuffer();
     code.append("class Foo {\n");
     code.append("  native\nvoid\nm()\n\n\n/*-{\n\n");
-    code.append("    @Bar;\n");
+    code.append("    @m(*;\n");
     code.append("  }-*/;\n");
     code.append("}\n");
     String source = code.toString();
@@ -91,7 +91,7 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     assertEquals(source.indexOf('@') + "Bar".length(), problem.getSourceStart());
     assertEquals(9, problem.getSourceLineNumber());
     assertTrue(problem.isError());
-    assertEquals("Expected \":\" in JSNI reference\n>     @Bar;\n> --------^",
+    assertEquals("Expected \")\" in JSNI reference\n>     @m(*;\n> --------^",
         problem.getMessage());
   }
 
@@ -99,7 +99,7 @@ public class JsniMethodCollectorTest extends CompilationStateTestBase {
     StringBuffer code = new StringBuffer();
     code.append("class Foo {\n");
     code.append("  native void m(Object o) /*-{\n");
-    code.append("    o.@Foo::m(Ljava/lang/Object);\n");
+    code.append("    o.@Foo::m(Ljava/lang/Object;);\n");
     code.append("  }-*/;\n");
     code.append("}\n");
     String source = code.toString();

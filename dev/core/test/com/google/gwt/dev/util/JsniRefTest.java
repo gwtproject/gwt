@@ -29,6 +29,40 @@ public class JsniRefTest extends TestCase {
       assertEquals("someField", ref.memberSignature());
       assertFalse(ref.isMethod());
       assertTrue(ref.isField());
+      assertFalse(ref.isArray());
+    }
+
+    {
+      JsniRef ref = JsniRef.parse("@some.package.SomeClass[][]::someField");
+      assertEquals("some.package.SomeClass", ref.className());
+      assertEquals("someField", ref.memberName());
+      assertEquals("someField", ref.memberSignature());
+      assertFalse(ref.isMethod());
+      assertTrue(ref.isField());
+      assertTrue(ref.isArray());
+      assertTrue(ref.getDimensions() == 2);
+    }
+
+    {
+      JsniRef ref = JsniRef.parse("@someField");
+      assertNull(ref.className());
+      assertEquals("someField", ref.memberName());
+      assertEquals("someField", ref.memberSignature());
+      assertFalse(ref.isMethod());
+      assertTrue(ref.isField());
+      assertFalse(ref.isArray());
+    }
+
+    {
+      JsniRef ref = JsniRef.parse("@someMeth()");
+      assertNull(ref.className());
+      assertEquals("someMeth", ref.memberName());
+      assertEquals("someMeth()", ref.memberSignature());
+      assertTrue(ref.isMethod());
+      assertFalse(ref.isField());
+      assertFalse(ref.matchesAnyOverload());
+      assertEquals(0, ref.paramTypes().length);
+      assertFalse(ref.isArray());
     }
 
     {
@@ -40,6 +74,7 @@ public class JsniRefTest extends TestCase {
       assertFalse(ref.isField());
       assertFalse(ref.matchesAnyOverload());
       assertEquals(0, ref.paramTypes().length);
+      assertFalse(ref.isArray());
     }
 
     {
@@ -62,6 +97,7 @@ public class JsniRefTest extends TestCase {
       assertEquals("J", ref.paramTypes()[6]);
       assertEquals("Ljava/lang/String;", ref.paramTypes()[7]);
       assertEquals("S", ref.paramTypes()[8]);
+      assertFalse(ref.isArray());
     }
 
     {
@@ -71,22 +107,18 @@ public class JsniRefTest extends TestCase {
       assertEquals("someMeth", ref.memberName());
       assertTrue(ref.isMethod());
       assertTrue(ref.matchesAnyOverload());
+      assertFalse(ref.isArray());
     }
 
     {
       // test some badly formatted wildcard strings
       assertNull(JsniRef.parse("@some.package.SomeClass::someMeth(*"));
       assertNull(JsniRef.parse("@some.package.SomeClass::someMeth(I*)"));
-    }
-
-    {
-      // test with no preceding at sign
-      JsniRef ref = JsniRef.parse("some.package.SomeClass::someField");
-      assertEquals("some.package.SomeClass", ref.className());
-      assertEquals("someField", ref.memberName());
-      assertEquals("someField", ref.memberSignature());
-      assertFalse(ref.isMethod());
-      assertTrue(ref.isField());
+      // Missing @
+      assertNull(JsniRef.parse("some.package.SomeClass::someField"));
+      // Misplaced arrays markers
+      assertNull(JsniRef.parse("@some.package[].SomeClass::someField"));
+      assertNull(JsniRef.parse("@[]someField"));
     }
   }
 

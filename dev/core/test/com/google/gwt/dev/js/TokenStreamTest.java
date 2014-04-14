@@ -62,6 +62,10 @@ public class TokenStreamTest extends TestCase {
     assertBadJsni("@org.group.Foo::bar(A)");
     assertBadJsni("@org.group.Foo::bar(L)");
 
+    // Array refs.
+    assertGoodJsni("@org.group.Foo[][]::bar");
+    assertGoodJsni("@org.group.Foo[]::bar()");
+
     // Method refs with * as the parameter list
     assertGoodJsni("@org.group.Foo::bar(*)");
     assertBadJsni("@org.group.Foo::bar(*");
@@ -77,9 +81,12 @@ public class TokenStreamTest extends TestCase {
     assertGoodJsni("@org.group.Foo::bar(\nLorg/group/Foo;\nZ)");
     assertGoodJsni("@org.group.Foo::\nbar()");
 
-
     assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo;,\nZ)");
     assertBadJsni("@org.group.Foo::bar(\nLorg/group/Foo,\nZ)");
+
+    // Ommitted class name;
+    assertGoodJsni("@bar()");
+    assertGoodJsni("@bar");
 
     // bad references
     assertBadJsni("@");
@@ -87,8 +94,12 @@ public class TokenStreamTest extends TestCase {
     assertBadJsni("@org.group.Foo:");
     assertBadJsni("@org.group.Foo::");
     assertBadJsni("@org.group.Foo::(");
+    assertBadJsni("@org.group.Foo[::bar");
+    assertBadJsni("@bar(");
     assertBadJsni("@::bar()");
-    assertBadJsni("@bar");
+
+    // This should be bad jsni but we seem to accept it.
+    assertBadJsni("@org.group.Foo::bar(Lorg/group/Foo)");
   }
 
   private void assertBadJsni(String token) throws IOException {

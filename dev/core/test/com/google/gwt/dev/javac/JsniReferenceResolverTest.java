@@ -38,8 +38,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
       "    o.@Buggy$1::foo;",
       "  }-*/;",
       "}");
-    shouldGenerateError(buggy, 8, "Referencing class 'Buggy$1': "
-        + "unable to resolve class");
+    shouldGenerateError(buggy, 8,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Buggy$1::foo", null, null, null, null, "Buggy$1"));
   }
 
   /**
@@ -60,11 +61,12 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
 
-    shouldGenerateError(buggy, 10, "Referencing class 'Buggy$1.A': "
-        + "unable to resolve class");
+    shouldGenerateError(buggy, 10,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Buggy$1.A::foo", null, null, null, null, "Buggy$1.A"));
   }
 
-  public void testArrayBadMember() {
+  public void testArray_badMember() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
        "  native void jsniMethod() /*-{",
@@ -74,8 +76,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing member 'Buggy[][].blah': 'class' is the only legal reference for arrays and " +
-        "primitive types");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ARRAY_OR_PRIMITIVE_REFERENCE,
+            "@Buggy[][]::blah"));
   }
 
   public void testArrayClass() {
@@ -106,7 +108,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 3,
-        "Illegal assignment to class literal 'Buggy.class'");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ASSIGNMENT_TO_CLASS_LITERAL,
+            null, null, null, null, null, "Buggy", "class"));
   }
 
   public void testCyclicReferences() {
@@ -127,8 +130,10 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
           "  }-*/;",
           "}");
 
-      shouldGenerateError(buggy, extra, 4, "Referencing field 'Extra.along': "
-          + "type 'long' is not safe to access in JSNI code");
+      shouldGenerateError(buggy, extra,
+          4,
+          String.format(JsniReferenceResolver.ERR_UNSAFE_FIELD_ACCESS,
+              "@Extra::along", null, null, null, null, "Extra", "along", "long"));
     }
 
     {
@@ -150,8 +155,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
           "  }-*/;",
           "}");
 
-      shouldGenerateError(buggy, extra, 5, "Referencing field 'Extra.along': "
-          + "type 'long' is not safe to access in JSNI code");
+      shouldGenerateError(buggy, extra, 5,
+          String.format(JsniReferenceResolver.ERR_UNSAFE_FIELD_ACCESS,
+              "@Extra::along", null, null, null, null, "Extra", "along", "long"));
     }
   }
 
@@ -165,7 +171,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
 
     shouldGenerateWarning(buggy, 4,
-        "Referencing field 'Buggy.bar': field 'Buggy.bar' is deprecated");
+        String.format(JsniReferenceResolver.WARN_DEPRECATED_FIELD,
+            "@Buggy::bar", null, null, null, null, "Buggy", "bar"));
   }
 
   public void testDeprecationMethod() {
@@ -178,7 +185,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
 
     shouldGenerateWarning(buggy, 4,
-        "Referencing method 'Buggy.foo': method 'Buggy.foo()' is deprecated");
+        String.format(JsniReferenceResolver.WARN_DEPRECATED_METHOD,
+            "@Buggy::foo()", null, null, null, null, "Buggy", "foo()"));
   }
 
   public void testDeprecationSuppression() {
@@ -239,7 +247,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }",
        "}");
     shouldGenerateWarning(buggy, 3,
-        "Unable to analyze SuppressWarnings annotation, RAWTYPES not a string constant.");
+        String.format(JsniReferenceResolver.WARN_UNABLE_TO_ANALYZE_SUPRESSWARNINGS,
+            null, null, null, null, null, null, null, "RAWTYPES"));
   }
 
   /**
@@ -254,7 +263,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }",
        "}");
     shouldGenerateWarning(buggy, 3,
-        "Unable to analyze SuppressWarnings annotation, UNCHECKED not a string constant.");
+        String.format(JsniReferenceResolver.WARN_UNABLE_TO_ANALYZE_SUPRESSWARNINGS,
+            null, null, null, null, null, null, null, "UNCHECKED"));
   }
 
   public void testDeprecationType() {
@@ -268,7 +278,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
 
-    shouldGenerateWarning(buggy, 6, "Referencing deprecated class 'D'");
+    shouldGenerateWarning(buggy, 6,
+        String.format(JsniReferenceResolver.WARN_DEPRECATED_CLASS,
+            "@D::bar", null, null, null, null, "D", "bar"));
   }
 
   public void testField() {
@@ -291,7 +303,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
 
     shouldGenerateError(buggy, 4,
-        "Referencing field 'Buggy.x': type 'long' is not safe to access in JSNI code");
+        String.format(JsniReferenceResolver.ERR_UNSAFE_FIELD_ACCESS,
+            "@Buggy::x", null, null, null, null, "Buggy", "x", "long"));
   }
 
   public void testFieldAssignment() {
@@ -336,7 +349,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Illegal assignment to compile-time constant 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ASSIGNMENT_TO_COMPILE_TIME_CONSTANT,
+            "@Buggy::foo", null, null, null, null, "Buggy", "foo"));
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
@@ -346,7 +360,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Illegal assignment to compile-time constant 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ASSIGNMENT_TO_COMPILE_TIME_CONSTANT,
+            "@Buggy::foo", null, null, null, null, "Buggy", "foo"));
 
     // Not a compile-time constant.
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
@@ -358,7 +373,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
     shouldGenerateNoWarning(buggy);
   }
-  public void testAssignment_InstanceMethod_toField() {
+  public void testAssignment_instanceMethod_toField() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Some",
         "public class Some {",
         "  public void callback() {",
@@ -369,10 +384,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
         "}");
 
     shouldGenerateWarning(buggy, 5,
-        "Instance method reference 'Some.callback' loses its instance ('o') when assigned; "
-            + "to remove this warning either assign to a local variable or construct "
-            + "the proper closure using an anonymous function or by calling "
-            + "Function.prototype.bind");
+        String.format(JsniReferenceResolver.WARN_NOT_CAPTURING_QUALIFIER,
+            "@Some::callback()", null, null, null, null, "Some","callback()", "o"));
   }
 
   public void testAssignment_InstanceMethod_toVariable() {
@@ -409,8 +422,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing method 'com.google.gwt.core.client.JavaScriptObject.toString()': "
-            + "references to instance methods in overlay types are illegal");
+        String.format(JsniReferenceResolver.ERR_REFERENCE_TO_JSO_INSTANCE_METHOD,
+            "@com.google.gwt.core.client.JavaScriptObject::toString()", null, null, null, null,
+            "com.google.gwt.core.client.JavaScriptObject", "toString()"));
   }
 
   public void testJsoInterfaceMethod() {
@@ -431,9 +445,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         11,
-        "Referencing interface method 'Buggy.IFoo.foo()': implemented by 'Buggy$Foo'; "
-            + "references to instance methods in overlay types are illegal;"
-            + " use a stronger type or a Java trampoline method");
+        String.format(JsniReferenceResolver.ERR_REFERENCE_TO_JSO_INTERFACE_METHOD,
+            "@Buggy.IFoo::foo()", null, null, null, null, "Buggy.IFoo", "foo()", "Buggy$Foo"));
   }
 
   public void testJsoSubclassInstanceMethod() {
@@ -447,12 +460,14 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "    new Object().@Buggy.Foo::foo()();",
        "  }-*/;",
        "}");
+
     shouldGenerateError(
         buggy,
         7,
-        "Referencing method 'Buggy.Foo.foo()': "
-            + "references to instance methods in overlay types are illegal");
+        String.format(JsniReferenceResolver.ERR_REFERENCE_TO_JSO_INSTANCE_METHOD,
+            "@Buggy.Foo::foo()", null, null, null, null, "Buggy.Foo", "foo()"));
   }
+
 
   public void testJsoSubclassStaticMethod() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
@@ -488,7 +503,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Unnecessary qualifier on static field 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_UNNECESSARY_QUALIFIER_STATIC_FIELD,
+            "@Buggy::foo", null, null, null, null, "Buggy", "foo"));
   }
 
   public void testFieldUnqualified() {
@@ -500,7 +516,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Missing qualifier on instance field 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_MISSING_QUALIFIER_INSTANCE_FIELD,
+            "@Buggy::foo", null, null, null, null, "Buggy", "foo"));
   }
 
   public void testEnclosingClassField() {
@@ -525,10 +542,10 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 5,
-        "Referencing field 'Buggy.bar': unable to resolve field in class 'some.Buggy'");
+        "Reference '@Buggy::bar': unable to resolve field 'bar' in class 'some.Buggy'");
   }
 
-  public void testImportedClassField_PartialMatch() {
+  public void testImportedClassField_partialMatch() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
       "package some;",
       "import other.pack.OtherPackageClass;",
@@ -549,7 +566,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
           buggy,
           otherPackageClass,
           5,
-          "Referencing class 'PackageClass': unable to resolve class");
+          String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+              "@PackageClass::f", null, null, null, null,  "PackageClass"));
   }
 
   public void testImportedClassField_Precedence() {
@@ -780,6 +798,99 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateNoWarning(buggy, otherPackageClass);
   }
 
+  public void testInheritedInnerClass_protected() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
+        "package some;",
+        "import other.pack.*;",
+        "public class Buggy extends OtherPackageClass {",
+        "  native void jsniMeth() /*-{",
+        "    $wnd.alert(@Inner::x);",
+        "  }-*/;",
+        "}");
+
+    MockJavaResource otherPackageClass =
+        JavaResourceBase.createMockJavaResource("other.pack.OtherPackageClass",
+            "package other.pack;",
+            "public class OtherPackageClass {",
+            "  protected static class Inner {",
+            "    static int x = 3;",
+            "  }",
+            "}");
+
+    shouldGenerateNoError(buggy, otherPackageClass);
+  }
+
+  public void testInheritedInnerClass_samePackage() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
+        "package some;",
+        "public class Buggy extends SamePackageClass {",
+        "  native void jsniMeth() /*-{",
+        "    $wnd.alert(@Inner::x);",
+        "  }-*/;",
+        "}");
+
+    MockJavaResource samePackageClass =
+        JavaResourceBase.createMockJavaResource("some.SamePackageClass",
+            "package some;",
+            "public class SamePackageClass {",
+            "  protected static class Inner {",
+            "    static int x = 3;",
+            "  }",
+            "}");
+
+    shouldGenerateNoError(buggy, samePackageClass);
+  }
+
+  public void testInheritedInnerClass_notVisible1() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
+        "package some;",
+        "import other.pack.*;",
+        "public class Buggy extends OtherPackageClass {",
+        "  native void jsniMeth() /*-{",
+        "    $wnd.alert(@Inner::x);",
+        "  }-*/;",
+        "}");
+
+    MockJavaResource otherPackageClass =
+        JavaResourceBase.createMockJavaResource("other.pack.OtherPackageClass",
+            "package other.pack;",
+            "public class OtherPackageClass{",
+            "  static class Inner {",
+            "    static int x = 3;",
+            "  }",
+            "}");
+
+    shouldGenerateError(buggy, otherPackageClass,
+        5,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Inner::x", null, null, null, null, "Inner"));
+  }
+
+  public void testInheritedInnerClass_notVisible2() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
+        "package some;",
+        "public class Buggy extends SamePackageClass {",
+        "  native void jsniMeth() /*-{",
+        "    $wnd.alert(@Inner::x);",
+        "  }-*/;",
+        "}");
+
+    MockJavaResource samePackageClass =
+        JavaResourceBase.createMockJavaResource("some.SamePackageClass",
+            "package some;",
+            "public class SamePackageClass {",
+            "  private static class Inner {",
+            "    static int x = 3;",
+            "  }",
+            "}");
+
+
+    shouldGenerateError(buggy, samePackageClass,
+        4,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Inner::x", null, null, null, null, "Inner"));
+  }
+
   public void testInnerClass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "public class Buggy {",
@@ -791,23 +902,27 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
 
-    shouldGenerateError(buggy, 6, "Referencing field 'Buggy.Inner.x': "
-        + "type 'long' is not safe to access in JSNI code");
+    shouldGenerateError(buggy, 6,
+        String.format(JsniReferenceResolver.ERR_UNSAFE_FIELD_ACCESS,
+            "@Buggy.Inner::x", null, null, null, null, "Buggy.Inner", "x", "long"));
   }
 
   public void testInnerClassDollar() {
+    // TODO(rluble): this test should actually fail, as names in JSNI should be only
+    // assumed to be source names not binary names.
+    // c.g.g.dev.javac.JdtCompiler.resolveType()  implements type resolution very loosely,
+    // and should be made more strict.
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "public class Buggy {",
        "  static class Inner {",
-       "    static long x = 3;",
+       "    static int x = 3;",
        "  }",
        "  native void jsniMeth() /*-{",
        "    $wnd.alert(@Buggy$Inner::x);",
        "  }-*/;",
        "}");
 
-    shouldGenerateError(buggy, 6, "Referencing field 'Buggy$Inner.x': "
-        + "type 'long' is not safe to access in JSNI code");
+    shouldGenerateNoError(buggy);
   }
 
   public void testInnerNew() {
@@ -823,8 +938,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "}");
 
     // Cannot resolve, missing synthetic enclosing instance.
-    shouldGenerateError(buggy, 7, "Referencing method 'Buggy.Inner.new(Z)': "
-        + "unable to resolve method in class 'Buggy.Inner'");
+    shouldGenerateError(buggy, 7,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_METHOD,
+            "@Buggy.Inner::new(Z)", null, null, "new(Z)", null, "Buggy.Inner"));
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "public class Buggy {",
@@ -891,11 +1007,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
        "  native void jsniMethod() /*-{",
-       "    @Buggy;",
+       "    @m(*;",
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 3,
-        "Expected \":\" in JSNI reference\n>     @Buggy;\n" + "> ----------^");
+        "Expected \")\" in JSNI reference\n>     @m(*;\n" + "> --------^");
   }
 
   public void testMethod() {
@@ -919,7 +1035,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Parameter 1 of method 'Buggy.print': type 'long' may not be passed out of JSNI code");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_PARAMETER,
+            "@Buggy::print(J)", null, null, null, null, "Buggy", "print(J)", 1, "long"));
   }
 
   public void testMethodAssignment() {
@@ -930,7 +1047,9 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "    this.@Buggy::foo() = null;",
        "  }-*/;",
        "}");
-    shouldGenerateError(buggy, 4, "Illegal assignment to method 'Buggy.foo'");
+    shouldGenerateError(buggy, 4,
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ASSIGNMENT_TO_METHOD,
+            "@Buggy::foo()", null, null, null, null, "Buggy", "foo()"));
   }
 
   /**
@@ -966,7 +1085,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         4,
-        "Referencing method 'Buggy.m': return type 'long' is not safe to access in JSNI code");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_RETURN_TYPE,
+            "@Buggy::m()", null, null, null, null, "Buggy", "m()", "long"));
   }
 
   public void testMethodStatic() {
@@ -989,7 +1109,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Unnecessary qualifier on static method 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_UNNECESSARY_QUALIFIER_STATIC_METHOD,
+            "@Buggy::foo()", null, null, null, null, "Buggy", "foo()"));
   }
 
   public void testMethodUnqualified() {
@@ -1001,7 +1122,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 4,
-        "Missing qualifier on instance method 'Buggy.foo'");
+        String.format(JsniReferenceResolver.ERR_MISSING_QUALIFIER_INSTANCE_METHOD,
+            "@Buggy::foo()", null, null, null, null, "Buggy", "foo()"));
   }
 
   public void testNew() {
@@ -1033,7 +1155,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing class 'null': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@null::nullField", null, null, null, null, "null"));
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
@@ -1044,7 +1167,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing class 'null': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@null::foo", null, null, null, null, "null"));
   }
 
   public void testOldStyleNullMethod() {
@@ -1057,7 +1181,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing class 'null': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@null::nullMethod()", null, null, null, null, "null"));
 
     buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
@@ -1068,7 +1193,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing class 'null': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@null::foo()", null, null, null, null, "null"));
   }
 
   public void testOverloadedMethodWithNoWarning() {
@@ -1091,11 +1217,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  native void jsniMeth() /*-{",
        "    $wnd.alert(this.@Buggy::m(I)(10)); }-*/;",
        "}");
-
     shouldGenerateError(
         buggy,
         5,
-        "Referencing method 'Buggy.m': return type 'long' is not safe to access in JSNI code");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_RETURN_TYPE,
+            "@Buggy::m(I)", null, null, null, null, "Buggy", "m(I)", "long"));
   }
 
   public void testPrimitiveBadMember() {
@@ -1108,8 +1234,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         3,
-        "Referencing member 'boolean.blah': "
-            + "'class' is the only legal reference for arrays and primitive types");
+        String.format(JsniReferenceResolver.ERR_ILLEGAL_ARRAY_OR_PRIMITIVE_REFERENCE,
+            "@boolean::blah"));
   }
 
   public void testPrimitiveClass() {
@@ -1130,7 +1256,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 3,
-        "Referencing class 'Z': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Z::class", null, null, null, null, "Z"));
   }
 
   public void testRefInString() {
@@ -1192,7 +1319,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
       // Note that the ambiguous CC is resolved to some.A.B.CC and not to A.B1.CC.
       shouldGenerateError(buggy, 7 ,
-          "Referencing field 'CC.f': unable to resolve field in class 'some.A.B.CC'");
+          "Reference '@CC::f': unable to resolve field 'f' in class 'some.A.B.CC'");
     }
   }
 
@@ -1211,7 +1338,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
     shouldGenerateError(buggy, extra,
         3,
-        "Referencing field 'Buggy.x': unable to resolve field in class 'Buggy'");
+        "Reference '@Buggy::x': unable to resolve field 'x' in class 'Buggy'");
   }
 
   public void testUnresolvedClass() {
@@ -1222,7 +1349,8 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 3,
-        "Referencing class 'Foo': unable to resolve class");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_CLASS,
+            "@Foo::x", null, null, null, null, "Foo"));
   }
 
   public void testUnresolvedField() {
@@ -1233,18 +1361,18 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
        "  }-*/;",
        "}");
     shouldGenerateError(buggy, 3,
-        "Referencing field 'Buggy.x': unable to resolve field in class 'Buggy'");
+        "Reference '@Buggy::x': unable to resolve field 'x' in class 'Buggy'");
   }
 
   public void testUnresolvedMethod() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
        "  native void jsniMethod() /*-{",
-       "    @Buggy::x(Ljava/lang/String);",
+       "    @Buggy::x(Ljava/lang/String;);",
        "  }-*/;",
        "}");
-    shouldGenerateError(buggy, 3, "Referencing method 'Buggy.x(Ljava/lang/String)': "
-        + "unable to resolve method in class 'Buggy'");
+    shouldGenerateError(buggy, 3, "Reference '@Buggy::x(Ljava/lang/String;)': unable to resolve "
+        + "method 'x(Ljava/lang/String;)' in class 'Buggy'");
   }
 
   public void testUnsafeAnnotation() {
@@ -1299,22 +1427,123 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
           buggy,
           extra,
           3,
-          "Referencing field 'Extra.Inner.x': type 'long' is not safe to access in JSNI code");
+          String.format(JsniReferenceResolver.ERR_UNSAFE_FIELD_ACCESS,
+              "@Extra.Inner::x", null, null, null, null, "Extra.Inner", "x", "long"));
     }
   }
 
-  public void testWildcardMethodAccess() {
+  public void testClassMethodAccess() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
        "  int m(String x) { return -1; }",
        "  native void jsniMeth() /*-{",
-       "    this.@Buggy::m(*)(\"hello\"); }-*/;",
+       "    this.@m(*)(\"hello\"); }-*/;",
        "}");
 
     shouldGenerateNoError(buggy);
   }
 
-  public void testWilcardMethodAccess_Ambiguous_withinClass() {
+  public void testClassMethodAccess_outerclass() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int m(String x) { return -1; }",
+        "  class Inner {",
+        "    native void jsniMeth() /*-{",
+        "      this.@m(*)(\"hello\"); }-*/;",
+        "  }",
+        "}");
+
+    shouldGenerateError(buggy,
+        5,
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_METHOD,
+            "@m(*)", null, null, "m(*)", null, "Buggy.Inner"));
+  }
+
+  public void testClassFieldAccess() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int f = 1;",
+        "  native void jsniMeth() /*-{",
+        "    this.@f=1; }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+  public void testClassFieldAccess_superclass() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int f = 1;",
+        "  native void jsniMeth() /*-{",
+        "    this.@f=1; }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+  public void testClassArrayFieldAccess() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int[] f = new int[10];",
+        "  native void jsniMeth() /*-{",
+        "    this.@f [1]=1; }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+  public void testClassFieldAccess_callingStoredMethod_error() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int[] f = new int[10];",
+        "  native void jsniMeth() /*-{",
+        "    this.@f(1); }-*/;",
+        "}");
+
+    shouldGenerateError(
+        buggy,
+        4,
+        "Expected a valid parameter type signature in JSNI method reference\n"
+            + ">     this.@f(1); }\n"
+            + "> ------------^");
+  }
+
+  public void testClassFieldAccess_callingStoredMethod_space() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int[] f = new int[10];",
+        "  native void jsniMeth() /*-{",
+        "    this.@f (1); }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+  public void testClassFieldAccess_callingStoredMethod_paren() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int[] f = new int[10];",
+        "  native void jsniMeth() /*-{",
+        "    (this.@f)(1); }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+
+  public void testWildcardMethodAccess() {
+    MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
+        "class Buggy {",
+        "  int m(String x) { return -1; }",
+        "  native void jsniMeth() /*-{",
+        "    this.@m(*)(\"hello\"); }-*/;",
+        "}");
+
+    shouldGenerateNoError(buggy);
+  }
+
+
+  public void testWildcardMethodAccess_Ambiguous_withinClass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy {",
        "  int m(String x) { return -1; }",
@@ -1325,12 +1554,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateError(
         buggy,
         5,
-        "Referencing method 'Buggy.m(*)': ambiguous wildcard match; "
-            + "both 'Buggy.m(Ljava/lang/String;)' and "
-            + "'Buggy.m(Ljava/lang/Integer;)' match");
+        "Reference '@Buggy::m(*)': ambiguous wildcard match; both 'Buggy.m(Ljava/lang/String;)' and"
+            + " 'Buggy.m(Ljava/lang/Integer;)' match");
   }
 
-  public void testWildcardMethodAccess_Ambiguous_withSuperClass() {
+  public void testWildcardMethodAccess_ambiguous_withSuperClass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy extends Extra{",
        "  public int m(String x) { return -1; }",
@@ -1347,12 +1575,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
         buggy,
         extra,
         4,
-        "Referencing method 'Buggy.m(*)': ambiguous wildcard match; "
-          + "both 'public Buggy.m(Ljava/lang/String;)' and "
-          + "'public Extra.m(Ljava/lang/Integer;)' match");
+        "Reference '@Buggy::m(*)': ambiguous wildcard match; both " +
+            "'public Buggy.m(Ljava/lang/String;)' and 'public Extra.m(Ljava/lang/Integer;)' match");
   }
 
-  public void testWildcardMethodAccess_NoConflict_OverrideFromSuperclass() {
+  public void testWildcardMethodAccess_noConflict_overrideFromSuperclass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
        "class Buggy extends Extra {",
        "  public int m(String x) { return -1; }",
@@ -1368,7 +1595,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateNoError(buggy, extra);
   }
 
-  public void testWildcardMethodAccess_Conflict_WithSuperclass() {
+  public void testWildcardMethodAccess_conflict_withSuperclass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  protected int m(String x) { return -1; }",
@@ -1383,12 +1610,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
     shouldGenerateError(buggy, extra,
         4,
-        "Referencing method 'Buggy.m(*)': ambiguous wildcard match; "
-            + "both 'protected Buggy.m(Ljava/lang/String;)' and "
-            + "'public Super.m(Ljava/lang/Object;)' match");
+        "Reference '@Buggy::m(*)': ambiguous wildcard match; both 'protected "
+            + "Buggy.m(Ljava/lang/String;)' and 'public Super.m(Ljava/lang/Object;)' match");
   }
 
-  public void testWildcardMethodAccess_Conflict_PrivateWithSuperclass() {
+  public void testWildcardMethodAccess_conflict_privateWithSuperclass() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  private int m(String x) { return -1; }",
@@ -1403,12 +1629,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
     shouldGenerateError(buggy, extra,
         4,
-        "Referencing method 'Buggy.m(*)': ambiguous wildcard match; "
-            + "both 'private Buggy.m(Ljava/lang/String;)' and "
-            + "'public Super.m(Ljava/lang/Object;)' match");
+        "Reference '@Buggy::m(*)': ambiguous wildcard match; both " +
+            "'private Buggy.m(Ljava/lang/String;)' and 'public Super.m(Ljava/lang/Object;)' match");
   }
 
-  public void testWildcardSuperclassMethod_PackagePrivate_DifferentPackage() {
+  public void testWildcardSuperclassMethod_packagePrivate_differentPackage() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
         "package some;",
         "import other.Super;",
@@ -1425,10 +1650,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
     shouldGenerateError(buggy, extra,
         5,
-        "Referencing method 'Buggy.m(*)': unable to resolve method in class 'some.Buggy'");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_METHOD,
+            "@Buggy::m(*)", null, null, "m(*)", null, "some.Buggy"));
   }
 
-  public void testWildcardSuperclassMethod_PackagePrivate_SamePackage() {
+  public void testWildcardSuperclassMethod_packagePrivate_samePackage() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  native void jsniMeth() /*-{",
@@ -1443,7 +1669,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateNoError(buggy, extra);
   }
 
-  public void testWildcardSuperclassMethod_Private() {
+  public void testWildcardSuperclassMethod_private() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  native void jsniMeth() /*-{",
@@ -1457,10 +1683,11 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
 
     shouldGenerateError(buggy, extra,
         3,
-        "Referencing method 'Buggy.m(*)': unable to resolve method in class 'Buggy'");
+        String.format(JsniReferenceResolver.ERR_UNABLE_TO_RESOLVE_METHOD,
+            "@Buggy::m(*)", null, null, "m(*)", null, "Buggy"));
   }
 
-  public void testWildcardSuperclassMethod_Protected() {
+  public void testWildcardSuperclassMethod_protected() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("some.Buggy",
         "package some;",
         "import other.Super;",
@@ -1478,7 +1705,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateNoError(buggy, extra);
   }
 
-  public void testWildcardSuperclassMethod_Public() {
+  public void testWildcardSuperclassMethod_public() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  native void jsniMeth() /*-{",
@@ -1493,7 +1720,7 @@ public class JsniReferenceResolverTest extends CheckerTestCase {
     shouldGenerateNoError(buggy, extra);
   }
 
-  public void testWildcardMethodAccess_PotentialConflict() {
+  public void testWildcardMethodAccess_potentialConflict() {
     MockJavaResource buggy = JavaResourceBase.createMockJavaResource("Buggy",
         "class Buggy extends Super {",
         "  int m(String x) { return -1; }",

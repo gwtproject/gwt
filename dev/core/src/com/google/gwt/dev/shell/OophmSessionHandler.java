@@ -112,7 +112,7 @@ public class OophmSessionHandler extends SessionHandlerServer {
 
     // Treat dispatch id 0 as toString()
     if (methodDispatchId == 0) {
-      methodDispatchId = cl.getDispId("java.lang.Object::toString()");
+      methodDispatchId = cl.getDispId("@java.lang.Object::toString()");
     }
 
     JsValueOOPHM jsThis = new JsValueOOPHM();

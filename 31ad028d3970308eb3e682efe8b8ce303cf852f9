@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "598a1b9e_8225dcbf",
+        "filename": "user/src/com/google/gwt/safehtml/rebind/SafeHtmlTemplatesGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-14T20:14:22Z",
+      "side": 1,
+      "message": "nit: any reason to inline isString? That looks inconsistent with the rest of the checks.",
+      "range": {
+        "startLine": 491,
+        "startChar": 10,
+        "endLine": 491,
+        "endChar": 77
+      },
+      "revId": "31ad028d3970308eb3e682efe8b8ce303cf852f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

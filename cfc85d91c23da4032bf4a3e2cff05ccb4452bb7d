@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "f9982ff7_5c73bdb9",
+        "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-14T22:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "398f27af_1eee8d9c",
+      "range": {
+        "startLine": 38,
+        "startChar": 35,
+        "endLine": 38,
+        "endChar": 43
+      },
+      "revId": "cfc85d91c23da4032bf4a3e2cff05ccb4452bb7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39f3a71c_722520bd",
         "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
         "patchSetId": 2
@@ -53,6 +77,30 @@
       "writtenOn": "2014-04-14T21:44:30Z",
       "side": 1,
       "message": "Do we really need the explicit null?",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "cfc85d91c23da4032bf4a3e2cff05ccb4452bb7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9982ff7_fc3809e9",
+        "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-14T22:33:04Z",
+      "side": 1,
+      "message": "Every code sample I\u0027ve seen and our own implementation passes null. If you think that is not needed, perhaps you can send cleanup including other usages?",
+      "parentUuid": "39f3a71c_722520bd",
       "range": {
         "startLine": 42,
         "startChar": 15,

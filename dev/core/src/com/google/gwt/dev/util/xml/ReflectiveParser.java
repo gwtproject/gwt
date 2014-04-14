@@ -1,12 +1,12 @@
 /*
  * Copyright 2006 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,7 @@
 package com.google.gwt.dev.util.xml;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.util.tools.Utility;
 
@@ -23,6 +24,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -44,7 +46,7 @@ import javax.xml.parsers.SAXParserFactory;
  * elements) is ignored, so think attributes.
  */
 public final class ReflectiveParser {
-  
+
   private static SAXParserFactory saxParserFactory;
 
   private static synchronized SAXParser createNewSaxParser() throws ParserConfigurationException,
@@ -366,8 +368,19 @@ public final class ReflectiveParser {
         Utility.close(reader);
       }
 
-      if (caught != null) {
+      if (caught instanceof UnableToCompleteException) {
+        // Error has already been logged.
+        throw (UnableToCompleteException) caught;
+      } else if (caught instanceof SAXParseException) {
+        SAXParseException parseException = ((SAXParseException) caught);
+        logger.log(Type.ERROR, "Line " + parseException.getLineNumber() + ", column " +
+            parseException.getColumnNumber() + " : " + parseException.getMessage());
+      } else if (caught != null) {
+        // Generic error message.
         Messages.XML_PARSE_FAILED.log(logger, caught);
+      }
+
+      if (caught != null) {
         throw new UnableToCompleteException();
       }
     }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b97b175f_88f6dba6",
+        "filename": "/home/mdempsky/gwt/user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-14T21:59:40Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "53c1f063c12f4bebd619175e2969d1609869f272",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b97b175f_a8b39fee",
+        "filename": "/home/mdempsky/gwt/user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-14T21:59:40Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "53c1f063c12f4bebd619175e2969d1609869f272",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

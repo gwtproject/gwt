@@ -344,7 +344,8 @@ public class ModuleDefLoader {
         logger.log(TreeLogger.ERROR, "Error parsing URI", e);
         throw new UnableToCompleteException();
       }
-      String compilationUnitArchiveName = slashedModuleName + ModuleDefLoader.COMPILATION_UNIT_ARCHIVE_SUFFIX;
+      String compilationUnitArchiveName = slashedModuleName +
+          ModuleDefLoader.COMPILATION_UNIT_ARCHIVE_SUFFIX;
       URL compiledModuleURL = resourceLoader.getResource(compilationUnitArchiveName);
       if (compiledModuleURL != null) {
         moduleDef.addCompilationUnitArchiveURL(compiledModuleURL);
@@ -379,6 +380,8 @@ public class ModuleDefLoader {
         // Then save a copy of the xml file in the created library file.
         libraryWriter.addBuildResource(new UrlResource(moduleURL, resName, lastModified));
       }
+    } catch (UnableToCompleteException e) {
+      throw  e;
     } catch (Throwable e) {
       logger.log(TreeLogger.ERROR, "Unexpected error while processing XML", e);
       throw new UnableToCompleteException();

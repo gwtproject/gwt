@@ -64,5 +64,5 @@
 
   <add-linker name="soycReport" />
   <add-linker name="symbolMaps" />
-  
+
 </module>

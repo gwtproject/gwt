@@ -33,6 +33,52 @@
       "revId": "9ef6d78673ba20b2b8e79b6c51952868a108fc5c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "398f27af_010aaced",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-14T21:59:22Z",
+      "side": 1,
+      "message": "This variable doesn\u0027t need to be initialized once the reference in the catch block is removed, because it\u0027s always set.",
+      "range": {
+        "startLine": 267,
+        "startChar": 28,
+        "endLine": 267,
+        "endChar": 32
+      },
+      "revId": "9ef6d78673ba20b2b8e79b6c51952868a108fc5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "398f27af_41d3d426",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-14T21:59:22Z",
+      "side": 1,
+      "message": "since the decode failed, this will always be null.",
+      "range": {
+        "startLine": 274,
+        "startChar": 48,
+        "endLine": 274,
+        "endChar": 58
+      },
+      "revId": "9ef6d78673ba20b2b8e79b6c51952868a108fc5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

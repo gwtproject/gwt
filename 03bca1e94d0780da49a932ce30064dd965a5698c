@@ -22,6 +22,30 @@
       "revId": "03bca1e94d0780da49a932ce30064dd965a5698c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9982ff7_5fe00fe7",
+        "filename": "dev/core/src/com/google/gwt/dev/util/xml/ReflectiveParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-14T23:40:28Z",
+      "side": 1,
+      "message": "Thanx.",
+      "parentUuid": "f9982ff7_9c52a52e",
+      "range": {
+        "startLine": 369,
+        "startChar": 6,
+        "endLine": 369,
+        "endChar": 56
+      },
+      "revId": "03bca1e94d0780da49a932ce30064dd965a5698c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

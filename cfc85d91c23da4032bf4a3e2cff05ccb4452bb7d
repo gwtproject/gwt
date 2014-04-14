@@ -16,6 +16,29 @@
       "revId": "cfc85d91c23da4032bf4a3e2cff05ccb4452bb7d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "398f27af_1eee8d9c",
+        "filename": "user/src/com/google/gwt/core/client/impl/XhrLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-14T21:13:06Z",
+      "side": 1,
+      "message": "Perhaps refer to the explanation in XMLHttpRequest for why this is an empty function?",
+      "range": {
+        "startLine": 38,
+        "startChar": 35,
+        "endLine": 38,
+        "endChar": 43
+      },
+      "revId": "cfc85d91c23da4032bf4a3e2cff05ccb4452bb7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

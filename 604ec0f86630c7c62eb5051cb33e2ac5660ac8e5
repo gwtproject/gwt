@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b97b175f_689c370c",
+        "filename": "user/src/com/google/gwt/core/client/HttpThrowableReporter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-14T23:14:36Z",
+      "side": 1,
+      "message": "The JSON format is not the same so this isn\u0027t a direct substitution. (However, the format in JsonLogRecordClientUtil seems better.)",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "604ec0f86630c7c62eb5051cb33e2ac5660ac8e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

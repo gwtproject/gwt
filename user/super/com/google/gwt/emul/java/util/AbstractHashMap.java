@@ -431,7 +431,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     } else {
       array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode] = [];
     }
-    var entry = @java.util.MapEntryImpl::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
+    var entry = @java.util.AbstractMap$SimpleEntry::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
     array.push(entry);
     ++this.@java.util.AbstractHashMap::size;
     return null;

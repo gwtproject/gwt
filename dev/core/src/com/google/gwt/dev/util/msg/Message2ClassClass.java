@@ -21,18 +21,19 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 /**
  * Class & Class message.
  */
-public final class Message2ClassClass extends Message2 {
+public final class Message2ClassClass extends Message {
 
   public Message2ClassClass(Type type, String fmt) {
-    super(type, fmt);
+    super(type, fmt, 2);
   }
 
   public TreeLogger branch(TreeLogger logger, Class<?> c1, Class<?> c2,
       Throwable caught) {
-    return branch2(logger, c1, c2, getFormatter(c1), getFormatter(c2), caught);
+    return branch(logger, new Object[]{c1, c2}, new Formatter[]{getFormatter(c1),
+        getFormatter(c2)}, caught);
   }
 
   public void log(TreeLogger logger, Class<?> c1, Class<?> c2, Throwable caught) {
-    log2(logger, c1, c2, getFormatter(c1), getFormatter(c2), caught);
+    log(logger, new Object[]{c1, c2}, new Formatter[]{getFormatter(c1), getFormatter(c2)}, caught);
   }
 }

@@ -22,10 +22,9 @@ import java.lang.reflect.Method;
 import java.net.URL;
 
 /**
- * Fast way to produce messages for the logger. Use $N to specify the
- * replacement argument. Caveats: - N must be a single digit (you shouldn't need
- * more than 10 args, right?) - '$' cannot be escaped - each arg can only appear
- * once
+ * Fast way to produce messages for the logger. Use $N to specify the replacement argument. Caveats:
+ * - N must be a single digit (you shouldn't need more than 10 args, right?) - '$' cannot be escaped
+ * - each arg can only appear once
  */
 public abstract class Message {
 
@@ -150,5 +149,39 @@ public abstract class Message {
 
   protected final Formatter getToStringFormatter() {
     return FMT_TOSTRING;
+  }
+
+  protected TreeLogger branch(TreeLogger logger, Object[] args, Formatter[] fmts,
+      Throwable caught) {
+    return logger.branch(type, compose(args, fmts),
+        caught);
+  }
+
+  protected String compose(Object[] args, Formatter[] fmts) {
+    // Format the objects.
+
+    String[] formattedArgs = new String[args.length];
+    for (int i = 0; i < argIndices.length; i++) {
+      formattedArgs[i] =
+          (args[argIndices[i]] != null ? fmts[argIndices[i]].format(args[argIndices[i]]) : "null");
+    }
+    // Cache the length of the inserts.
+    //
+
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int i = 0; i < formattedArgs.length; i++) {
+      stringBuilder.append(fmtParts[i]);
+      stringBuilder.append(formattedArgs[i]);
+    }
+    // final literal
+    stringBuilder.append(fmtParts[fmtParts.length - 1]);
+
+    return stringBuilder.toString();
+  }
+
+  protected void log(TreeLogger logger, Object[] args, Formatter[] fmts, Throwable caught) {
+    if (logger.isLoggable(type)) {
+      logger.log(type, compose(args, fmts), caught);
+    }
   }
 }

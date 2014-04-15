@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b97b175f_2bcf89f5",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-15T09:35:56Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.AbstractMap.SimpleImmutableEntry\u0027 import.",
+      "revId": "bce17c3fbae9b345b028ca3ed9226bb8646a612a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

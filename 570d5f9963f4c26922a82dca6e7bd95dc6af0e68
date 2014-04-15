@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9980137b_fb5f2f5a",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/ModuleDefLoaderTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-15T00:59:54Z",
+      "side": 1,
+      "message": "s/module/moduleName",
+      "range": {
+        "startLine": 386,
+        "startChar": 46,
+        "endLine": 386,
+        "endChar": 52
+      },
+      "revId": "570d5f9963f4c26922a82dca6e7bd95dc6af0e68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

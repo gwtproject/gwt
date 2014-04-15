@@ -41,7 +41,14 @@ public abstract class ListTestBase extends TestArrayList {
     assertTrue(makeFullList().addAll(makeFullList()));
     assertFalse(makeFullList().addAll(1, makeEmptyList()));
     assertTrue(makeFullList().addAll(1, makeFullList()));
+
+    List<Integer> list = makeEmptyList();
+    list.addAll(Arrays.asList(1, 2, 3, 4));
+    list.addAll(2, Arrays.asList(21, 22));
+
+    checkListSizeAndContent(list, 1, 2, 21, 22, 3 ,4);
   }
+
 
   public void testAddWatch() {
     List s = makeEmptyList();

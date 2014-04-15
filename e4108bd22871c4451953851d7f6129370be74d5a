@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "f9c3cfc8_2749b4f0",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FooReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-15T11:55:06Z",
+      "side": 1,
+      "message": "You\u0027re right, so if Goktug agrees it\u0027s better to move it to RFTestBase.",
+      "parentUuid": "f9c3cfc8_e7cafc35",
+      "revId": "e4108bd22871c4451953851d7f6129370be74d5a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39f3a71c_f20930fa",
         "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/FooReceiver.java",
         "patchSetId": 1

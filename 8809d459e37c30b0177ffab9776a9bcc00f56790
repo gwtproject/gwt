@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "198c23b9_ba0cb855",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T22:09:34Z",
+      "side": 1,
+      "message": "if {@code true} overwrite the existing elements, otherwise insert the elements.",
+      "range": {
+        "startLine": 180,
+        "startChar": 21,
+        "endLine": 180,
+        "endChar": 22
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9969f3a4_f9f017ba",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ListTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T22:09:34Z",
+      "side": 1,
+      "message": "nit: perhaps extract into testAddAllReturnValue?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9969f3a4_79440736",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ListTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T22:09:34Z",
+      "side": 1,
+      "message": "Can you also test the border cases?",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

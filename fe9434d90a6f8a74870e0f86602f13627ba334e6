@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59ee9b35_f3cf7843",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-15T12:16:56Z",
+      "side": 1,
+      "message": "I agree that exception should be caught but\nshould we not set here empty string as it was before?",
+      "revId": "fe9434d90a6f8a74870e0f86602f13627ba334e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

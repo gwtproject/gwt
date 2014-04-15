@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59ee9b35_2e5df7b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-15T21:46:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b964f7c8_f466583e",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b964f7c8_f48d78ae",
         "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "The line is wrapped after \u0027as\u0027, however there is plenty of space afterwards.",
       "parentUuid": "59ee9b35_4e603b69",
+      "range": {
+        "startLine": 77,
+        "startChar": 48,
+        "endLine": 77,
+        "endChar": 50
+      },
+      "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9c3cfc8_0a78ff03",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-15T21:46:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b964f7c8_6ff6f102",
       "range": {
         "startLine": 77,
         "startChar": 48,

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,7 @@
 package com.google.gwt.user.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.impl.Disposable;
 import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.dom.client.Document;
@@ -224,7 +225,7 @@ public class Window {
      * at the time this method was called.
      * Any changes to the window's location will be reflected in the result
      * of subsequent calls.
-     * 
+     *
      * @return a map from URL query parameter names to a list of values
      */
     public static Map<String, List<String>> getParameterMap() {
@@ -308,7 +309,16 @@ public class Window {
             values = new ArrayList<String>();
             out.put(kv[0], values);
           }
-          values.add(kv.length > 1 ? URL.decodeQueryString(kv[1]) : "");
+
+          String v = "";
+          if (kv.length > 1) {
+            try {
+              v = URL.decodeQueryString(kv[1]);
+            } catch (JavaScriptException e) {
+              v = kv[1];
+            }
+          }
+          values.add(v);
         }
       }
 

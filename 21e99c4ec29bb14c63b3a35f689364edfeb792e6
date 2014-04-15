@@ -45,6 +45,30 @@
       "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59ee9b35_4e603b69",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-15T21:38:06Z",
+      "side": 1,
+      "message": "I\u0027m sorry, what about it?",
+      "parentUuid": "b964f7c8_f48d78ae",
+      "range": {
+        "startLine": 77,
+        "startChar": 48,
+        "endLine": 77,
+        "endChar": 50
+      },
+      "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

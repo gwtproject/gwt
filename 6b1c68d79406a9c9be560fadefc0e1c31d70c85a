@@ -22,6 +22,30 @@
       "revId": "6b1c68d79406a9c9be560fadefc0e1c31d70c85a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "795efffe_38bfe9de",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposerFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T22:41:07Z",
+      "side": 1,
+      "message": "Although the class is public, it is not practical to refer to it because it is only used in two places; a private field inside ClassSourceFileComposerFactory and the package protected ClassSourceFileComposer; both are hidden from outside.\n\nSo only possible breakage scenario is, if someone extends the class and use it for the purposes outside of this package which is very unlikely. (Probably we should also change the visibility to package visible).\n\nSo I think we can just take the shortcut here and not wait for an extra release to get rid of the code.",
+      "parentUuid": "b964f7c8_6eab576b",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "6b1c68d79406a9c9be560fadefc0e1c31d70c85a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

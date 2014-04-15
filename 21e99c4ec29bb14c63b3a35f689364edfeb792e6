@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b964f7c8_f466583e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T21:35:55Z",
+      "side": 1,
+      "message": "Removes IE specific timeout code in XMLHttPRequest#clearOnReadyStateChange",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b964f7c8_f48d78ae",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-15T21:35:55Z",
+      "side": 1,
+      "message": "Can you fix the line wrapping?",
+      "range": {
+        "startLine": 77,
+        "startChar": 48,
+        "endLine": 77,
+        "endChar": 50
+      },
+      "revId": "21e99c4ec29bb14c63b3a35f689364edfeb792e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

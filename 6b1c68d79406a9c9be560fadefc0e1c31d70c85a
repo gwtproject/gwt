@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b964f7c8_6eab576b",
+        "filename": "user/src/com/google/gwt/user/rebind/ClassSourceFileComposerFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-15T18:39:48Z",
+      "side": 1,
+      "message": "This is a public API change (for generators). In particular, there was nothing to stop someone from subclassing JavaSourceCategory to create new categories, but that\u0027s not possible for a real Java enum.\n\nI doubt the advanced functionality is used much; it\u0027s not used at all for Google.\n\nStill, it seems like we should deprecate Enum and the JavaSourceCategory constructor for a release before making this change?",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "6b1c68d79406a9c9be560fadefc0e1c31d70c85a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59ee9b35_1305bcde",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-15T10:12:18Z",
+      "side": 0,
+      "message": "Huh?! I\u0027ve never seen (or used) such a configuration. Could you shed some lights? Maybe link to such a configuration in the wild?\n\nHow well does it play with M2Eclipse and the GPE auto-detecting the gwt-maven-plugin and setting the GWT SDK to the one from the POM?",
+      "parentUuid": "39f3a71c_f2513029",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "aed19c7947ecf64bf603e0a6c804c0b0401da255",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59ee9b35_73dd282e",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-15T10:12:18Z",
+      "side": 1,
+      "message": "But then there\u0027s no need to re-define the gwt-maven-plugin\u0027s dependencies. So either we use ${gwtVersion} as the gwt-maven-plugin version and we remove the plugin dependencies, or we keep it that way, with identical but \"unrelated\" versions for GWT and the gwt-maven-plugin.\n\nI\u0027d happily go with the former (which would simplify the POM and aligns with what people should write unless they really need different versions of GWT and the plugin – e.g. they use a patched GWT, or a patched plugin, or the plugin hasn\u0027t yet been released for the version of GWT they want to use, or the plugin has had a bugfix release), but it makes it a bit harder to test the WebAppCreator with a GWT RC (not yet pushed to Central), where the plugin hasn\u0027t yet been released (because it cannot update its GWT dependencies yet).\n\nWDYT?",
+      "parentUuid": "39f3a71c_124dbc8d",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "aed19c7947ecf64bf603e0a6c804c0b0401da255",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

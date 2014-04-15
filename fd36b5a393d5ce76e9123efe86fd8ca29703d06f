@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9c3cfc8_4a99571a",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-15T20:48:18Z",
+      "side": 1,
+      "message": "key (or even key.isEmpty()) can be used here too",
+      "revId": "fd36b5a393d5ce76e9123efe86fd8ca29703d06f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

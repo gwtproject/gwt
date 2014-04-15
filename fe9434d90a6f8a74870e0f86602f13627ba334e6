@@ -16,6 +16,24 @@
       "revId": "fe9434d90a6f8a74870e0f86602f13627ba334e6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59ee9b35_53a6243e",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-15T13:56:33Z",
+      "side": 1,
+      "message": "We set empty string when kv.length \u003d\u003d 0 (line 313) like before.\nWhat we do now, is to set the value to the original value if it cannot be decoded, which I think is the correct behavior.",
+      "parentUuid": "59ee9b35_f3cf7843",
+      "revId": "fe9434d90a6f8a74870e0f86602f13627ba334e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

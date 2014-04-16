@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "393d679f_aee47790",
+        "filename": "user/test/com/google/gwt/dev/jjs/CodeSplitterCollapsedPropertiesTest.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-16T14:23:27Z",
+      "side": 1,
+      "message": "Should be useragent.UserAgent",
+      "revId": "56799f00458e896a00033b0210302a58a7521024",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

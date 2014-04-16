@@ -16,6 +16,24 @@
       "revId": "fd36b5a393d5ce76e9123efe86fd8ca29703d06f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "393d679f_ae055731",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-04-16T06:21:12Z",
+      "side": 1,
+      "message": "Actually I dont want to be very intrusive, and I try to modify only the lines which fixes the bug so as reviewers can see easily what is coming. This line was already here. From the point of view of JS created both will be optimised to the almost same output.",
+      "parentUuid": "f9c3cfc8_4a99571a",
+      "revId": "fd36b5a393d5ce76e9123efe86fd8ca29703d06f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

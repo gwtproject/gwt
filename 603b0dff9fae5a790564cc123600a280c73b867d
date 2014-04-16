@@ -22,6 +22,30 @@
       "revId": "603b0dff9fae5a790564cc123600a280c73b867d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5f7a345_8378a209",
+        "filename": "user/src/com/google/gwt/core/CoreWithUserAgent.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-16T21:56:35Z",
+      "side": 1,
+      "message": "Yes, there is already another patch on its way. I have been maintaining two branches to test it with incremental compile and it\u0027s kind of painful to keep them in sync :(",
+      "parentUuid": "59585b1a_f28586ae",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "603b0dff9fae5a790564cc123600a280c73b867d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

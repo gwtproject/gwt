@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9710f8d_f43818e9",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T00:08:40Z",
+      "side": 1,
+      "message": "Took Jin Yi\u0027s suggestion.",
+      "parentUuid": "198c23b9_ba0cb855",
+      "range": {
+        "startLine": 180,
+        "startChar": 21,
+        "endLine": 180,
+        "endChar": 22
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "795efffe_58f9fd96",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-04-15T22:54:03Z",
       "side": 1,
       "message": "at this point, rather than make a boolean argument that completely changes the behavior of the method, should this be made private and have two public methods that hide this binary distinction (nativeArrayInsert and nativeArrayWrite)?",
+      "range": {
+        "startLine": 183,
+        "startChar": 73,
+        "endLine": 183,
+        "endChar": 82
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9710f8d_d4331c0c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T00:08:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "795efffe_58f9fd96",
       "range": {
         "startLine": 183,
         "startChar": 73,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f9710f8d_1447546e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ListTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T00:08:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9969f3a4_f9f017ba",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9969f3a4_79440736",
         "filename": "user/test/com/google/gwt/emultest/java/util/ListTestBase.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2014-04-15T22:09:34Z",
       "side": 1,
       "message": "Can you also test the border cases?",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "8809d459e37c30b0177ffab9776a9bcc00f56790",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9710f8d_f451f828",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ListTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T00:08:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9969f3a4_79440736",
       "range": {
         "startLine": 49,
         "startChar": 4,

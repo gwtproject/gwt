@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85e7c793_888b1b9f",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserChannelClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-16T19:10:12Z",
+      "side": 1,
+      "message": "nit: space",
+      "range": {
+        "startLine": 226,
+        "startChar": 42,
+        "endLine": 226,
+        "endChar": 43
+      },
+      "revId": "f776c6917399ed2f6cd581855ad478161dc0d529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

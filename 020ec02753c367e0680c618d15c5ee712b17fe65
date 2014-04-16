@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "994e5355_14d67a17",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T16:28:43Z",
+      "side": 1,
+      "message": "Yeah. I know. I did not realize there where other occurrences,",
+      "parentUuid": "f9710f8d_144914f0",
+      "range": {
+        "startLine": 175,
+        "startChar": 33,
+        "endLine": 175,
+        "endChar": 37
+      },
+      "revId": "020ec02753c367e0680c618d15c5ee712b17fe65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9710f8d_b4394057",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2014-04-16T00:36:26Z",
       "side": 1,
       "message": "insert",
+      "range": {
+        "startLine": 177,
+        "startChar": 39,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "020ec02753c367e0680c618d15c5ee712b17fe65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "994e5355_34d37e28",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-16T16:28:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9710f8d_b4394057",
       "range": {
         "startLine": 177,
         "startChar": 39,

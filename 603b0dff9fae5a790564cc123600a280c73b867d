@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59585b1a_f28586ae",
+        "filename": "user/src/com/google/gwt/core/CoreWithUserAgent.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-16T21:53:51Z",
+      "side": 1,
+      "message": "These are in EmulationWithUserAgent",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "603b0dff9fae5a790564cc123600a280c73b867d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

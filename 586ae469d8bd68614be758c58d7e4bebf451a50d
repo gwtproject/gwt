@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b93237d1_2a787f04",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-16T14:02:31Z",
+      "side": 1,
+      "message": "abstract class?",
+      "revId": "586ae469d8bd68614be758c58d7e4bebf451a50d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b93237d1_4afe9319",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-16T14:02:31Z",
+      "side": 1,
+      "message": "I think this line is odd as toString() returns string\nor is it just for accessing local variable in the loop?",
+      "revId": "586ae469d8bd68614be758c58d7e4bebf451a50d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b93237d1_0a157b5a",
         "filename": "user/super/com/google/gwt/emul/java/lang/StringBuffer.java",
         "patchSetId": 1

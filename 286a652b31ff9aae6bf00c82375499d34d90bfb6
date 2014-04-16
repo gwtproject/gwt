@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25f61b4a_48e19336",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-16T22:24:13Z",
+      "side": 1,
+      "message": "Can you add a GWT.log? Something like following:\n\n GWT.log(\"Cannot decode query string: \" + val, e);",
+      "range": {
+        "startLine": 312,
+        "startChar": 17,
+        "endLine": 312,
+        "endChar": 18
+      },
+      "revId": "286a652b31ff9aae6bf00c82375499d34d90bfb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5f7a345_861f904d",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-16T22:24:13Z",
+      "side": 1,
+      "message": "Actually I have seen some suggestions to fallback back to \u0027unescape\u0027 when decode fails. What do you think about it?",
+      "range": {
+        "startLine": 313,
+        "startChar": 10,
+        "endLine": 313,
+        "endChar": 11
+      },
+      "revId": "286a652b31ff9aae6bf00c82375499d34d90bfb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

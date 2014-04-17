@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25445b56_4f452d78",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-17T19:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_72e45872",
+      "range": {
+        "startLine": 426,
+        "startChar": 33,
+        "endLine": 426,
+        "endChar": 43
+      },
+      "revId": "22d252f02e57842834bc44a74197fd99dbc05bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_55adbebc",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2014-04-17T01:37:23Z",
       "side": 1,
       "message": "Although semantically SimpleImmutableEntry is a better match, by using SimpleEntry here, we can increase the chance of SimpleImmutableEntry getting pruned.",
+      "revId": "22d252f02e57842834bc44a74197fd99dbc05bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25445b56_2f3ae907",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-17T19:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_55adbebc",
       "revId": "22d252f02e57842834bc44a74197fd99dbc05bbc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "250ffb25_173f34f8",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedHashMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-17T19:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_527714e8",
+      "revId": "22d252f02e57842834bc44a74197fd99dbc05bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_752562cd",
         "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
         "patchSetId": 6
@@ -70,6 +130,30 @@
       "writtenOn": "2014-04-17T01:37:23Z",
       "side": 1,
       "message": "nit: I guess the new SimpleEntry is suitable here.",
+      "range": {
+        "startLine": 520,
+        "startChar": 25,
+        "endLine": 520,
+        "endChar": 45
+      },
+      "revId": "22d252f02e57842834bc44a74197fd99dbc05bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "250ffb25_f733a02e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-04-17T19:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_752562cd",
       "range": {
         "startLine": 520,
         "startChar": 25,

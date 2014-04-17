@@ -237,7 +237,8 @@ public class JsniRef {
 
   @Override
   public String toString() {
-    return "@" + (fullClassName() == null ? "" : (fullClassName() + "::")) + memberSignature();
+    final String fullClassName = fullClassName();
+    return "@" + (fullClassName == null ? "" : (fullClassName + "::")) + memberSignature();
   }
 
   public boolean isArray() {

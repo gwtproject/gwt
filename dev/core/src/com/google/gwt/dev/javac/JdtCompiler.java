@@ -66,7 +66,6 @@ import org.eclipse.jdt.internal.compiler.lookup.MethodScope;
 import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
-import org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding;
 import org.eclipse.jdt.internal.compiler.parser.Parser;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
@@ -355,7 +354,6 @@ public class JdtCompiler {
         createCompiledClass(classFile, results);
       }
       List<CompiledClass> compiledClasses = new ArrayList<CompiledClass>(results.values());
-      addBinaryTypes(compiledClasses);
 
       ICompilationUnit icu = cud.compilationResult().compilationUnit;
       Adapter adapter = (Adapter) icu;
@@ -632,54 +630,40 @@ public class JdtCompiler {
   }
 
   private static ReferenceBinding resolveType(LookupEnvironment lookupEnvironment,
-      String sourceOrBinaryName) {
+      String sourceName) {
     ReferenceBinding type = null;
 
-    int p = sourceOrBinaryName.indexOf('$');
-    if (p > 0) {
-      // resolve an outer type before trying to get the cached inner
-      String cupName = sourceOrBinaryName.substring(0, p);
-      char[][] chars = CharOperation.splitOn('.', cupName.toCharArray());
-      ReferenceBinding outerType = lookupEnvironment.getType(chars);
+    char[][] compoundName = CharOperation.splitOn('.', sourceName.toCharArray());
+
+    char[][] outerTypeCompoundName = null;
+    ReferenceBinding outerType = null;
+    for (int i = compoundName.length; i > 0; i--) {
+      outerTypeCompoundName = new char[i][];
+      System.arraycopy(compoundName, 0, outerTypeCompoundName, 0, i);
+      // Try to resolve
+      outerType = lookupEnvironment.getType(outerTypeCompoundName);
       if (outerType != null) {
-        // outer class was found
-        resolveRecursive(outerType);
-        chars = CharOperation.splitOn('.', sourceOrBinaryName.toCharArray());
-        type = lookupEnvironment.getCachedType(chars);
-        if (type == null) {
-          // no inner type; this is a pure failure
-          return null;
-        }
+        break;
       }
-    } else {
-      // just resolve the type straight out
-      char[][] chars = CharOperation.splitOn('.', sourceOrBinaryName.toCharArray());
-      type = lookupEnvironment.getType(chars);
     }
 
-    if (type != null) {
-      if (type instanceof UnresolvedReferenceBinding) {
-        /*
-         * Since type is an instance of UnresolvedReferenceBinding, we know that
-         * the return value BinaryTypeBinding.resolveType will be of type
-         * ReferenceBinding
-         */
-        type = (ReferenceBinding) BinaryTypeBinding.resolveType(type, lookupEnvironment, true);
-      }
-      // found it
-      return type;
+    if (outerType == null) {
+      return null;
     }
 
-    // Assume that the last '.' should be '$' and try again.
-    //
-    p = sourceOrBinaryName.lastIndexOf('.');
-    if (p >= 0) {
-      sourceOrBinaryName =
-          sourceOrBinaryName.substring(0, p) + "$" + sourceOrBinaryName.substring(p + 1);
-      return resolveType(lookupEnvironment, sourceOrBinaryName);
-    }
+    // Resolve the type and all inner classes.
+    resolveRecursive(outerType);
 
-    return null;
+    // Reassemble compound name.
+    char[][] innerclassCompoundName = outerTypeCompoundName;
+    for (int i = innerclassCompoundName.length; i < compoundName.length; i++) {
+       innerclassCompoundName[innerclassCompoundName.length - 1] =
+           (CharOperation.charToString(innerclassCompoundName[innerclassCompoundName.length - 1])
+           + "$" + CharOperation.charToString(compoundName[i])).toCharArray();
+    }
+    type = lookupEnvironment.getCachedType(innerclassCompoundName);
+
+    return type;
   }
 
   /**
@@ -987,8 +971,8 @@ public class JdtCompiler {
     }
   }
 
-  public ReferenceBinding resolveType(String sourceOrBinaryName) {
-    return resolveType(compilerImpl.lookupEnvironment, sourceOrBinaryName);
+  public ReferenceBinding resolveType(String sourceName) {
+    return resolveType(compilerImpl.lookupEnvironment, sourceName);
   }
 
   public void setAdditionalTypeProviderDelegate(AdditionalTypeProviderDelegate newDelegate) {

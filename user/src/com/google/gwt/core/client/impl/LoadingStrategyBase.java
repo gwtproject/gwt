@@ -183,7 +183,7 @@ public class LoadingStrategyBase implements LoadingStrategy {
   protected static native String gwtStartLoadingFragment(int fragment,
       LoadTerminatedHandler loadErrorHandler) /*-{
     function loadFailed(e) {
-      loadErrorHandler.@com.google.gwt.core.client.impl.AsyncFragmentLoader$LoadTerminatedHandler::loadTerminated(Ljava/lang/Throwable;)(e);
+      loadErrorHandler.@com.google.gwt.core.client.impl.AsyncFragmentLoader.LoadTerminatedHandler::loadTerminated(Ljava/lang/Throwable;)(e);
     }
     return __gwtStartLoadingFragment(fragment, $entry(loadFailed));
   }-*/;

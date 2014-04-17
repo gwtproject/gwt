@@ -289,7 +289,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     for (var key in stringMap) {
       // only keys that start with a colon ':' count
       if (key.charCodeAt(0) == 58) {
-        var entry = @java.util.AbstractHashMap$MapEntryString::new(Ljava/util/AbstractHashMap;Ljava/lang/String;)(this, key.substring(1));
+        var entry = @java.util.AbstractHashMap.MapEntryString::new(Ljava/util/AbstractHashMap;Ljava/lang/String;)(this, key.substring(1));
         dest.@java.util.Collection::add(Ljava/lang/Object;)(entry);
       }
     }
@@ -316,7 +316,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
         var array = hashCodeMap[hashCodeInt];
         for ( var i = 0, c = array.length; i < c; ++i) {
           var entry = array[i];
-          var entryValue = entry.@java.util.Map$Entry::getValue()();
+          var entryValue = entry.@java.util.Map.Entry::getValue()();
           if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(value, entryValue)) {
             return true;
           }
@@ -365,9 +365,9 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     if (array) {
       for ( var i = 0, c = array.length; i < c; ++i) {
         var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
+        var entryKey = entry.@java.util.Map.Entry::getKey()();
         if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
-          return entry.@java.util.Map$Entry::getValue()();
+          return entry.@java.util.Map.Entry::getValue()();
         }
       }
     }
@@ -392,7 +392,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     if (array) {
       for ( var i = 0, c = array.length; i < c; ++i) {
         var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
+        var entryKey = entry.@java.util.Map.Entry::getKey()();
         if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
           return true;
         }
@@ -471,7 +471,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     if (array) {
       for ( var i = 0, c = array.length; i < c; ++i) {
         var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
+        var entryKey = entry.@java.util.Map.Entry::getKey()();
         if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
           if (array.length == 1) {
             // remove the whole array
@@ -481,7 +481,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
             array.splice(i, 1);
           }
           --this.@java.util.AbstractHashMap::size;
-          return entry.@java.util.Map$Entry::getValue()();
+          return entry.@java.util.Map.Entry::getValue()();
         }
       }
     }

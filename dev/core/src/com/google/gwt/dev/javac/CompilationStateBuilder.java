@@ -361,6 +361,9 @@ public class CompilationStateBuilder {
         } finally {
           buildQueue = null;
         }
+        for (CompilationUnit unit : newlyBuiltUnits) {
+          compiler.addCompiledUnit(unit);
+        }
         resultUnits.addAll(newlyBuiltUnits);
         builders.clear();
 

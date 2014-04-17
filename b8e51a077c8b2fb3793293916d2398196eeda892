@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "853507d4_d20424e3",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Formatter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "Is this meant to be in this patch?",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_72bb38d6",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "Can you use javadoc formatting? \u003cp\u003e \u003cli\u003e etc.",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_d2cb0451",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "can you fix the line wraps?",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 3
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_126f4c7e",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "preconditions for the length expectations?",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_92833cef",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "local var?",
+      "range": {
+        "startLine": 166,
+        "startChar": 11,
+        "endLine": 166,
+        "endChar": 30
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_92d57cef",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "these comments look weird?",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_f2e8488c",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message1URL.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "Can you provide the one argument overload for convenience in the parent class so you will not repeat it all over in different messages?",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_121bcc07",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message2LongString.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-17T00:52:40Z",
+      "side": 1,
+      "message": "actually you might want to have the two argument overload as well.",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

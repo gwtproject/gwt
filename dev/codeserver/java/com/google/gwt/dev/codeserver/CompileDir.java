@@ -18,6 +18,7 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.util.Util;
 
 import java.io.File;
 
@@ -37,6 +38,13 @@ public class CompileDir {
    */
   public CompileDir(File dir) {
     this.dir = dir;
+  }
+
+  /**
+   * Deletes the compileDir directory structure.
+   */
+  public void delete() {
+    Util.recursiveDelete(dir, false);
   }
 
   /**

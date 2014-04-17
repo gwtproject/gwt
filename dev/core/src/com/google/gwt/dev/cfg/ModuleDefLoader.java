@@ -164,17 +164,6 @@ public class ModuleDefLoader {
       libraryWriter.setLibraryName(module.getCanonicalName());
       libraryWriter.addDependencyLibraryNames(module.getExternalLibraryCanonicalModuleNames());
 
-      // Records binding property defined values that were newly created in this library.
-      for (BindingProperty bindingProperty : module.getProperties().getBindingProperties()) {
-        libraryWriter.addNewBindingPropertyValuesByName(
-            bindingProperty.getName(), bindingProperty.getTargetLibraryDefinedValues());
-      }
-      // Records configuration property value changes that occurred in this library.
-      for (ConfigurationProperty configurationProperty :
-          module.getProperties().getConfigurationProperties()) {
-        libraryWriter.addNewConfigurationPropertyValuesByName(
-            configurationProperty.getName(), configurationProperty.getTargetLibraryValues());
-      }
       // Saves non java and gwt.xml build resources, like PNG and CSS files.
       for (Resource buildResource : module.getBuildResourceOracle().getResources()) {
         if (buildResource.getPath().endsWith(".java")
@@ -275,8 +264,12 @@ public class ModuleDefLoader {
     this.resourceLoader = loader;
   }
 
-  public boolean enforceStrictResources() {
-    return compilerContext.getOptions().enforceStrictResources();
+  public boolean enforceStrictSourceResources() {
+    return compilerContext.getOptions().enforceStrictSourceResources();
+  }
+
+  public boolean enforceStrictPublicResources() {
+    return compilerContext.getOptions().enforceStrictPublicResources();
   }
 
   /**
@@ -352,8 +345,7 @@ public class ModuleDefLoader {
       }
     }
     if (moduleURL == null) {
-      logger.log(TreeLogger.ERROR,"Unable to find '" + resName + "' on your classpath; "
-          + "could be a typo, or maybe you forgot to include a classpath entry for source?");
+      logger.log(TreeLogger.ERROR, formatUnableToFindModuleMessage(resName));
       throw new UnableToCompleteException();
     }
 
@@ -389,5 +381,11 @@ public class ModuleDefLoader {
     } finally {
       Utility.close(r);
     }
+  }
+
+  // VisibleForTesting
+  public static String formatUnableToFindModuleMessage(String moduleResourcePath) {
+    return "Unable to find '" + moduleResourcePath + "' on your classpath; "
+        + "could be a typo, or maybe you forgot to include a classpath entry for source?";
   }
 }

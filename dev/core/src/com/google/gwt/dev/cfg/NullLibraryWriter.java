@@ -19,9 +19,7 @@ import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
-import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-import com.google.gwt.thirdparty.guava.common.collect.Multimaps;
 
 import java.util.Set;
 
@@ -31,9 +29,6 @@ import java.util.Set;
  */
 public class NullLibraryWriter implements LibraryWriter {
 
-  private Multimap<String, String> newBindingPropertyValuesByName = LinkedHashMultimap.create();
-  private Multimap<String, String> newConfigurationPropertyValuesByName =
-      LinkedHashMultimap.create();
   private Set<String> strings = ImmutableSet.of();
 
   @Override
@@ -57,33 +52,12 @@ public class NullLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void addNewBindingPropertyValuesByName(String propertyName,
-      Iterable<String> propertyValues) {
-    newBindingPropertyValuesByName.putAll(propertyName, propertyValues);
-  }
-
-  @Override
-  public void addNewConfigurationPropertyValuesByName(String propertyName,
-      Iterable<String> propertyValues) {
-    newConfigurationPropertyValuesByName.putAll(propertyName, propertyValues);
+  public void addProcessedReboundTypeSourceNameForGenerator(String processedReboundTypeSourceName,
+      String generatorName) {
   }
 
   @Override
   public void addPublicResource(Resource publicResource) {
-  }
-
-  @Override
-  public void addRanGeneratorName(String generatorName) {
-  }
-
-  @Override
-  public Multimap<String, String> getNewBindingPropertyValuesByName() {
-    return Multimaps.unmodifiableMultimap(newBindingPropertyValuesByName);
-  }
-
-  @Override
-  public Multimap<String, String> getNewConfigurationPropertyValuesByName() {
-    return Multimaps.unmodifiableMultimap(newConfigurationPropertyValuesByName);
   }
 
   @Override
@@ -92,7 +66,12 @@ public class NullLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public Set<String> getReboundTypeSourceNames() {
+  public Multimap<String, String> getProcessedReboundTypeSourceNamesByGenerator() {
+    return null;
+  }
+
+  @Override
+  public Set<String> getRequestedReboundTypeSourceNames() {
     return strings;
   }
 
@@ -101,7 +80,7 @@ public class NullLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void setReboundTypeSourceNames(Set<String> reboundTypeSourceNames) {
+  public void setRequestedReboundTypeSourceNames(Set<String> reboundTypeSourceNames) {
   }
 
   @Override

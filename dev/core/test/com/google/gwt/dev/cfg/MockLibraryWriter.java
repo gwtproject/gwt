@@ -18,7 +18,7 @@ import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.ZipEntryBackedObject;
-import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -32,9 +32,8 @@ public class MockLibraryWriter implements LibraryWriter {
   private Set<String> buildResourcePaths = Sets.newHashSet();
   private Set<String> dependencyLibraryNames = Sets.newHashSet();
   private String libraryName;
-  private Multimap<String, String> newBindingPropertyValuesByName = ArrayListMultimap.create();
-  private Multimap<String, String> newConfigurationPropertyValuesByName =
-      ArrayListMultimap.create();
+  private Multimap<String, String> processedReboundTypeSourceNamesByGenerator =
+      HashMultimap.create();
   private Set<String> reboundTypeNames;
 
   @Override
@@ -61,23 +60,13 @@ public class MockLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void addNewBindingPropertyValuesByName(
-      String propertyName, Iterable<String> propertyValues) {
-    newBindingPropertyValuesByName.putAll(propertyName, propertyValues);
-  }
-
-  @Override
-  public void addNewConfigurationPropertyValuesByName(
-      String propertyName, Iterable<String> propertyValues) {
-    newConfigurationPropertyValuesByName.putAll(propertyName, propertyValues);
+  public void addProcessedReboundTypeSourceNameForGenerator(String processedReboundTypeSourceName,
+      String generatorName) {
+    processedReboundTypeSourceNamesByGenerator.put(generatorName, processedReboundTypeSourceName);
   }
 
   @Override
   public void addPublicResource(Resource publicResource) {
-  }
-
-  @Override
-  public void addRanGeneratorName(String generatorName) {
   }
 
   public Set<String> getBuildResourcePaths() {
@@ -93,22 +82,17 @@ public class MockLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public Multimap<String, String> getNewBindingPropertyValuesByName() {
-    return newBindingPropertyValuesByName;
-  }
-
-  @Override
-  public Multimap<String, String> getNewConfigurationPropertyValuesByName() {
-    return newConfigurationPropertyValuesByName;
-  }
-
-  @Override
   public ZipEntryBackedObject<PermutationResult> getPermutationResultHandle() {
     return null;
   }
 
   @Override
-  public Set<String> getReboundTypeSourceNames() {
+  public Multimap<String, String> getProcessedReboundTypeSourceNamesByGenerator() {
+    return processedReboundTypeSourceNamesByGenerator;
+  }
+
+  @Override
+  public Set<String> getRequestedReboundTypeSourceNames() {
     return reboundTypeNames;
   }
 
@@ -118,7 +102,7 @@ public class MockLibraryWriter implements LibraryWriter {
   }
 
   @Override
-  public void setReboundTypeSourceNames(Set<String> reboundTypeSourceNames) {
+  public void setRequestedReboundTypeSourceNames(Set<String> reboundTypeSourceNames) {
     this.reboundTypeNames = reboundTypeSourceNames;
   }
 

@@ -37,12 +37,14 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Queues;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -59,6 +61,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -99,6 +102,36 @@ public class ModuleDef {
    */
   private enum AttributeSource {
     EXTERNAL_LIBRARY, TARGET_LIBRARY
+  }
+
+  /**
+   * Encapsulates two String names which conceptually represent the starting and ending points of a
+   * path.
+   */
+  private static class PathEndNames {
+
+    private String fromName;
+    private String toName;
+
+    public PathEndNames(String fromName, String toName) {
+      this.fromName = fromName;
+      this.toName = toName;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+      if (object instanceof PathEndNames) {
+        PathEndNames that = (PathEndNames) object;
+        return Objects.equal(this.fromName, that.fromName)
+            && Objects.equal(this.toName, that.toName);
+      }
+      return false;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(fromName, toName);
+    }
   }
 
   private static final ResourceFilter NON_JAVA_RESOURCES = new ResourceFilter() {
@@ -207,11 +240,18 @@ public class ModuleDef {
    */
   private String nameOverride;
 
-
   /**
    * The canonical module names of dependency library modules per depending library module.
    */
-  private Multimap<String, String> directDependentsModuleNamesByModuleName = HashMultimap.create();
+  private Multimap<String, String> directDependencyModuleNamesByModuleName = HashMultimap.create();
+
+  /**
+   * A mapping from a pair of starting and ending module names of a path to the ordered list of
+   * names of fileset modules that connect those end points. The mapping allows one to discover what
+   * path of filesets are connecting a pair of libraries when those libraries do not directly depend
+   * on one another.
+   */
+  private Map<PathEndNames, List<String>> filesetPathByPathEndNames = Maps.newHashMap();
 
   /**
    * Records the canonical module names for filesets.
@@ -263,10 +303,10 @@ public class ModuleDef {
   }
 
   /**
-   * Register a {@code dependentModuleName} as a directDependent of {@code currentModuleName}
+   * Register a {@code dependencyModuleName} as a directDependency of {@code currentModuleName}
    */
-  public void addDirectDependent(String currentModuleName, String dependentModuleName) {
-    directDependentsModuleNamesByModuleName.put(currentModuleName, dependentModuleName);
+  public void addDirectDependency(String currentModuleName, String dependencyModuleName) {
+    directDependencyModuleNamesByModuleName.put(currentModuleName, dependencyModuleName);
   }
 
   /**
@@ -580,7 +620,7 @@ public class ModuleDef {
    */
   public Collection<String> getDirectDependencies(String libraryModuleName) {
     assert !filesetModuleNames.contains(libraryModuleName);
-    return directDependentsModuleNamesByModuleName.get(libraryModuleName);
+    return directDependencyModuleNamesByModuleName.get(libraryModuleName);
   }
 
   public synchronized String[] getEntryPointTypeNames() {
@@ -838,12 +878,16 @@ public class ModuleDef {
     }
   }
 
-  private void addExternalLibraryCanonicalModuleName(String canonicalModuleName) {
+  private void addExternalLibraryCanonicalModuleName(String externalLibraryCanonicalModuleName) {
     // Ignore circular dependencies on self.
-    if (canonicalModuleName.equals(getCanonicalName())) {
+    if (externalLibraryCanonicalModuleName.equals(getCanonicalName())) {
       return;
     }
-    externalLibraryCanonicalModuleNames.add(canonicalModuleName);
+    externalLibraryCanonicalModuleNames.add(externalLibraryCanonicalModuleName);
+  }
+
+  public List<String> getFileSetPathBetween(String fromModuleName, String toModuleName) {
+    return filesetPathByPathEndNames.get(new PathEndNames(fromModuleName, toModuleName));
   }
 
   private boolean attributeIsForTargetLibrary() {
@@ -878,20 +922,32 @@ public class ModuleDef {
     }
   }
 
+  private static LinkedList<String> createExtendedCopy(LinkedList<String> list,
+      String extendingElement) {
+    LinkedList<String> extendedCopy = Lists.newLinkedList(list);
+    extendedCopy.add(extendingElement);
+    return extendedCopy;
+  }
+
   /**
    * Reduce the direct dependency graph to exclude filesets.
    */
   private void computeLibraryDependencyGraph() {
-    for (String moduleName : Lists.newArrayList(directDependentsModuleNamesByModuleName.keySet())) {
+    for (String moduleName : Lists.newArrayList(directDependencyModuleNamesByModuleName.keySet())) {
       Set<String> libraryModules = Sets.newHashSet();
       Set<String> filesetsProcessed = Sets.newHashSet();
 
       // Direct dependents might be libraries or fileset, so add them to a queue of modules
       // to process.
-      Queue<String> modulesToProcess =
-          Queues.newArrayDeque(directDependentsModuleNamesByModuleName.get(moduleName));
-      while (!modulesToProcess.isEmpty()) {
-        String dependentModuleName = modulesToProcess.poll();
+      Queue<LinkedList<String>> modulePathsToProcess = Queues.newArrayDeque();
+      Collection<String> directDependencyModuleNames =
+          directDependencyModuleNamesByModuleName.get(moduleName);
+      for (String directDependencyModuleName : directDependencyModuleNames) {
+        modulePathsToProcess.add(Lists.newLinkedList(ImmutableList.of(directDependencyModuleName)));
+      }
+      while (!modulePathsToProcess.isEmpty()) {
+        LinkedList<String> dependentModuleNamePath = modulePathsToProcess.poll();
+        String dependentModuleName = dependentModuleNamePath.getLast();
 
         boolean isLibrary = !filesetModuleNames.contains(dependentModuleName);
         if (isLibrary) {
@@ -899,6 +955,10 @@ public class ModuleDef {
           // the library itself.
           if (!moduleName.equals(dependentModuleName)) {
             libraryModules.add(dependentModuleName);
+
+            dependentModuleNamePath.removeLast();
+            filesetPathByPathEndNames.put(new PathEndNames(moduleName, dependentModuleName),
+                dependentModuleNamePath);
           }
           continue;
         }
@@ -907,16 +967,19 @@ public class ModuleDef {
 
         // Get the dependencies of the dependent module under consideration and add all those
         // that have not been already processed to the queue of modules to process.
-        Set<String> notAlreadyProcessed =
-            Sets.newHashSet(directDependentsModuleNamesByModuleName.get(dependentModuleName));
-        notAlreadyProcessed.removeAll(filesetsProcessed);
-        modulesToProcess.addAll(notAlreadyProcessed);
+        Set<String> notAlreadyProcessedModules =
+            Sets.newHashSet(directDependencyModuleNamesByModuleName.get(dependentModuleName));
+        notAlreadyProcessedModules.removeAll(filesetsProcessed);
+        for (String notAlreadyProcessedModule : notAlreadyProcessedModules) {
+          modulePathsToProcess.add(
+              createExtendedCopy(dependentModuleNamePath, notAlreadyProcessedModule));
+        }
       }
       // Rewrite the dependents with the set just computed.
-      directDependentsModuleNamesByModuleName.replaceValues(moduleName, libraryModules);
+      directDependencyModuleNamesByModuleName.replaceValues(moduleName, libraryModules);
     }
     // Remove all fileset entries.
-    directDependentsModuleNamesByModuleName.removeAll(filesetModuleNames);
+    directDependencyModuleNamesByModuleName.removeAll(filesetModuleNames);
   }
 
   private synchronized void ensureResourcesScanned() {

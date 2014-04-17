@@ -59,35 +59,15 @@ public interface LibraryWriter {
   void addGeneratedArtifacts(ArtifactSet generatedArtifacts);
 
   /**
-   * Registers newly legal values on some binding property.
+   * Registers the type (by it's source name) as having been processed by the given generator.
    */
-  void addNewBindingPropertyValuesByName(String propertyName, Iterable<String> propertyValues);
-
-  /**
-   * Sets the newly current value(s) on some configuration property.
-   */
-  void addNewConfigurationPropertyValuesByName(
-      String propertyName, Iterable<String> propertyValues);
+  void addProcessedReboundTypeSourceNameForGenerator(String processedReboundTypeSourceName,
+      String generatorName);
 
   /**
    * Adds a public resource (such as a html, css, or png file).
    */
   void addPublicResource(Resource publicResource);
-
-  /**
-   * Marks a generator as having been executed for this library and all sub libraries.
-   */
-  void addRanGeneratorName(String generatorName);
-
-  /**
-   * Returns the map of binding property names to newly legal values.
-   */
-  Multimap<String, String> getNewBindingPropertyValuesByName();
-
-  /**
-   * Returns a map of configuration property names to newly set value(s).
-   */
-  Multimap<String, String> getNewConfigurationPropertyValuesByName();
 
   /**
    * Returns a handle to the permutation result object that was constructed as part of the
@@ -96,10 +76,16 @@ public interface LibraryWriter {
   PersistenceBackedObject<PermutationResult> getPermutationResultHandle();
 
   /**
+   * Returns a mapping from generator name to the set of source names of types that have been
+   * processed by that generator in this library.
+   */
+  Multimap<String, String> getProcessedReboundTypeSourceNamesByGenerator();
+
+  /**
    * Returns the set of source names of types which are the subject of GWT.create() calls in source
    * code for this library.
    */
-  Set<String> getReboundTypeSourceNames();
+  Set<String> getRequestedReboundTypeSourceNames();
 
   /**
    * Records the library name.<br />
@@ -113,7 +99,7 @@ public interface LibraryWriter {
    * Records the set of names of types which are the subject of GWT.create() calls in source code
    * for this library.
    */
-  void setReboundTypeSourceNames(Set<String> reboundTypeSourceNames);
+  void setRequestedReboundTypeSourceNames(Set<String> requestedReboundTypeSourceNames);
 
   /**
    * Finishes writing all library contents and closes the library.

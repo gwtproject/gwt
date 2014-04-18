@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_a12032ff",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Formatter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_d20424e3",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_72bb38d6",
         "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-17T00:52:40Z",
       "side": 1,
       "message": "Can you use javadoc formatting? \u003cp\u003e \u003cli\u003e etc.",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_4195f6b8",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_72bb38d6",
       "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_7c253dcd",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_d2cb0451",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 3
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_126f4c7e",
         "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
         "patchSetId": 1
@@ -70,6 +130,24 @@
       "writtenOn": "2014-04-17T00:52:40Z",
       "side": 1,
       "message": "preconditions for the length expectations?",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_7c4c1d87",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_126f4c7e",
       "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_7c5add2e",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_92833cef",
+      "range": {
+        "startLine": 166,
+        "startChar": 11,
+        "endLine": 166,
+        "endChar": 30
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_92d57cef",
         "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
         "patchSetId": 1
@@ -110,6 +212,24 @@
       "writtenOn": "2014-04-17T00:52:40Z",
       "side": 1,
       "message": "these comments look weird?",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_3c5465fd",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_92d57cef",
       "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_30e6c950",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message1URL.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_f2e8488c",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_121bcc07",
         "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message2LongString.java",
         "patchSetId": 1
@@ -150,6 +294,24 @@
       "writtenOn": "2014-04-17T00:52:40Z",
       "side": 1,
       "message": "actually you might want to have the two argument overload as well.",
+      "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_b0f19906",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message2LongString.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_121bcc07",
       "revId": "b8e51a077c8b2fb3793293916d2398196eeda892",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

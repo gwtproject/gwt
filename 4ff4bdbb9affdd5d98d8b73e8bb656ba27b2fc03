@@ -298,6 +298,57 @@
       "revId": "4ff4bdbb9affdd5d98d8b73e8bb656ba27b2fc03",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_d2be59ef",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:24:00Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "4ff4bdbb9affdd5d98d8b73e8bb656ba27b2fc03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_08e6f0bd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:24:00Z",
+      "side": 1,
+      "message": "Nice.",
+      "revId": "4ff4bdbb9affdd5d98d8b73e8bb656ba27b2fc03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_c820e800",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:24:00Z",
+      "side": 1,
+      "message": "Add \"External types are saved straight from the initial AST build before normalizations; hence method that where devirtualized before are not present in the reference class loaded from the library even though they are present in the JavaScript output. If this is a reference type the method is created just to be referenced but its implementation will not be in the output JavaScript for the current module (except for inlining).\"\n\nOr better worded.",
+      "revId": "4ff4bdbb9affdd5d98d8b73e8bb656ba27b2fc03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

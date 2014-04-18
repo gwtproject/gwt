@@ -16,6 +16,46 @@
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_a81fe44c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:24:17Z",
+      "side": 1,
+      "message": "Maybe use Multimap\u003cString, String\u003e",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 34
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_a8bb64d4",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:24:17Z",
+      "side": 1,
+      "message": "Can you add an example?\n\nThis represents a dependency edge between two modules, right?",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

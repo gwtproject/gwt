@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "255d3b32_f0ddd128",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T19:33:35Z",
+      "side": 1,
+      "message": "new item?",
+      "range": {
+        "startLine": 29,
+        "startChar": 79,
+        "endLine": 29,
+        "endChar": 80
+      },
+      "revId": "336a6c18ee4bb0c25b4bca7c13a7e21204089902",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_f004b1e2",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T19:33:35Z",
+      "side": 1,
+      "message": "nit: you don\u0027t really need to end \u003cli\u003e tags in javadocs.",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "336a6c18ee4bb0c25b4bca7c13a7e21204089902",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_b083d9ee",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T19:33:35Z",
+      "side": 1,
+      "message": "It is defined as \u003cT\u003e but it looks like you using stuff as Object[] anyway?",
+      "revId": "336a6c18ee4bb0c25b4bca7c13a7e21204089902",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_d0d88d28",
+        "filename": "dev/core/src/com/google/gwt/dev/util/msg/Message3IntMethodString.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T19:33:35Z",
+      "side": 1,
+      "message": "nit: unneeded wrap (also double check the one above and other files)",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "336a6c18ee4bb0c25b4bca7c13a7e21204089902",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

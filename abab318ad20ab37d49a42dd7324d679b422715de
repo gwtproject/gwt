@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "255d3b32_50249d37",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/dev/util/msg/Message.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-18T19:43:40Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "abab318ad20ab37d49a42dd7324d679b422715de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

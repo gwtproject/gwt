@@ -19,6 +19,126 @@
     },
     {
       "key": {
+        "uuid": "853507d4_e3862d00",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "if this shouldn\u0027t be called perhaps you should throw an assertionerror?",
+      "range": {
+        "startLine": 80,
+        "startChar": 11,
+        "endLine": 80,
+        "endChar": 15
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_5e46f265",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_436859fb",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "nit: space",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 10
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_633a3d09",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "we have @visiblefortesting",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_9ed7ba5c",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "library -\u003e Library (and below)",
+      "range": {
+        "startLine": 85,
+        "startChar": 11,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_9e4c5a88",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "nit: As far as I can see, there are no public methods here. Perhaps you would like to make the class package visible and the methods public?\n\nA general good practice is choose visibility of the methods as they would be in a public class even the class is not public.",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_a262664d",
         "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
         "patchSetId": 2
@@ -88,6 +208,46 @@
     },
     {
       "key": {
+        "uuid": "853507d4_1e406a44",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "nit: isRootModuleKnown?",
+      "range": {
+        "startLine": 181,
+        "startChar": 17,
+        "endLine": 181,
+        "endChar": 36
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_9e733ac4",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "Revert formatting",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_fd113374",
         "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
         "patchSetId": 2
@@ -111,6 +271,23 @@
     },
     {
       "key": {
+        "uuid": "853507d4_7e78969f",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "See my earlier comment on visibility",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_e282ae74",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
         "patchSetId": 2
@@ -128,6 +305,23 @@
         "endLine": 125,
         "endChar": 14
       },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_5ecb9285",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ConditionAll.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "Perhaps instead of redefining this multiple times, you just want to check if getClass() \u003d\u003d object.getClass() in the base class?",
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -318,6 +512,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "\"filesetDeps\"",
+      "range": {
+        "startLine": 254,
+        "startChar": 42,
+        "endLine": 254,
+        "endChar": 67
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_9e469a35",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T01:51:39Z",
+      "side": 1,
+      "message": "use Multimap instead?",
+      "parentUuid": "853507d4_c8a58828",
       "range": {
         "startLine": 254,
         "startChar": 42,

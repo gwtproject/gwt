@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "255d3b32_a6fe037d",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-18T22:08:00Z",
+      "side": 1,
+      "message": "Did you mean to make this public?",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "593caf18da7e8cf436bdf5184735fbf625ab258d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -56,6 +56,24 @@
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_033db1db",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-18T00:32:58Z",
+      "side": 1,
+      "message": "Maybe rename to LibraryDependencyEdge",
+      "parentUuid": "853507d4_a8bb64d4",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

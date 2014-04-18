@@ -19,6 +19,121 @@
     },
     {
       "key": {
+        "uuid": "05291785_a262664d",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Could you make this a top-level class?",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_02037a73",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Could you use delegation instead of inheritance? Maybe have an inner class containing the options.",
+      "range": {
+        "startLine": 41,
+        "startChar": 43,
+        "endLine": 41,
+        "endChar": 61
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_82164aaf",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "\u0027,\u0027 -\u003e \u0027;\u0027",
+      "range": {
+        "startLine": 71,
+        "startChar": 68,
+        "endLine": 71,
+        "endChar": 69
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_fd113374",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "This is static anyway so maybe move it to the factory?\n\n  JarHandlerFactory.install()\n  JarHandlerFactory.closeStreams()",
+      "range": {
+        "startLine": 83,
+        "startChar": 22,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_e282ae74",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "The parent class has an equals() method that\u0027s now bogus. Since we\u0027re implementing equals() in both subclasses, I suggest removing it.",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 14
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_a81fe44c",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
         "patchSetId": 2
@@ -35,6 +150,75 @@
         "startChar": 9,
         "endLine": 136,
         "endChar": 34
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_3d469b65",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Seems too long. addGeneratedType() and move the rest to javadoc?",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_dd3c37e2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "setGwtCreateTypes()?",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 41
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_88c0a031",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "How about:\n\nFilesetPair: A key indicating that a fileset depends on another fileset, possibly indirectly. That is, it asserts some path exists but doesn\u0027t specify which one.",
+      "range": {
+        "startLine": 108,
+        "startChar": 5,
+        "endLine": 108,
+        "endChar": 17
       },
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -71,6 +255,259 @@
       "side": 1,
       "message": "Maybe rename to LibraryDependencyEdge",
       "parentUuid": "853507d4_a8bb64d4",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_e8f28c79",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "How about just \"directDeps\" and move the rest to JavaDoc?",
+      "range": {
+        "startLine": 246,
+        "startChar": 35,
+        "endLine": 246,
+        "endChar": 74
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_a8f5a469",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "\"Multiple paths may exist; this map contains only one of them.\"",
+      "range": {
+        "startLine": 252,
+        "startChar": 19,
+        "endLine": 252,
+        "endChar": 20
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_c8a58828",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "\"filesetDeps\"",
+      "range": {
+        "startLine": 254,
+        "startChar": 42,
+        "endLine": 254,
+        "endChar": 67
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_689b3c20",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Since you\u0027re copying the whole list and not appending to it, creating an ArrayList of the exact size seems more efficient.",
+      "range": {
+        "startLine": 927,
+        "startChar": 44,
+        "endLine": 927,
+        "endChar": 57
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_286c1446",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "How about \"name\"?",
+      "range": {
+        "startLine": 945,
+        "startChar": 18,
+        "endLine": 945,
+        "endChar": 44
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_23eb1519",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Lists.newArrayList(item)",
+      "range": {
+        "startLine": 946,
+        "startChar": 53,
+        "endLine": 946,
+        "endChar": 66
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_08003063",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "\"path\"",
+      "range": {
+        "startLine": 949,
+        "startChar": 27,
+        "endLine": 949,
+        "endChar": 50
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853507d4_68de9ca1",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "\"unprocessed\"",
+      "range": {
+        "startLine": 970,
+        "startChar": 20,
+        "endLine": 970,
+        "endChar": 46
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_82bd2a5b",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "Umm, this is the sort of name they make fun of Java programmers for. How about JarHandler?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 41
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_7dfe63d7",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandlerFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "JarHandlerFactory?",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_e2ad0e23",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandlerFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-18T00:33:16Z",
+      "side": 1,
+      "message": "How about closeStreams()",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 34
+      },
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

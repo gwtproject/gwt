@@ -82,6 +82,39 @@ public class SimplePagerTest extends AbstractPagerTest {
     assertFalse(pager.isPreviousButtonDisabled());
     assertTrue(pager.isNextButtonDisabled());
   }
+  
+  public void testNextButtonsDisabledWithEmptyDisplay() {
+    SimplePager pager = createPager();
+    
+    // Set the display.
+    HasRows display = new MockHasData<String>();
+    
+    // Set range limited
+    pager.setRangeLimited(true);
+    pager.setPageSize(30);
+    
+    pager.setDisplay(display);
+
+    assertTrue(pager.isPreviousButtonDisabled());
+    assertTrue(pager.isNextButtonDisabled());
+  }
+  
+  public void testNextButtonsDisabledWithEmptyDataGrid() {
+    SimplePager pager = createPager();
+    
+    // Set the display.
+    DataGrid<String> display = new DataGrid<String>();
+    
+    // Set range limited
+    pager.setRangeLimited(true);
+    pager.setPageSize(30);
+    
+    pager.setDisplay(display);
+    
+
+    assertTrue(pager.isPreviousButtonDisabled());
+    assertTrue(pager.isNextButtonDisabled());
+  }
 
   @Override
   protected SimplePager createPager() {

@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_c139e6ef",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "i\u0027m mimicking shouldSaveSource() in this same file. i\u0027d like to be consistent.\n\nlet me know if you insist on this change.",
+      "parentUuid": "853507d4_e3862d00",
+      "range": {
+        "startLine": 80,
+        "startChar": 11,
+        "endLine": 80,
+        "endChar": 15
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_5e46f265",
         "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
         "patchSetId": 2
@@ -53,6 +77,24 @@
       "writtenOn": "2014-04-18T01:51:39Z",
       "side": 1,
       "message": "public?",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_a1bb92fd",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_5e46f265",
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_61ad9abd",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_436859fb",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 10
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_633a3d09",
         "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
         "patchSetId": 2
@@ -93,6 +159,24 @@
       "writtenOn": "2014-04-18T01:51:39Z",
       "side": 1,
       "message": "we have @visiblefortesting",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_21a7a2dd",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "whoa, did not know we had access to that. means there are a bunch of these i can change",
+      "parentUuid": "853507d4_633a3d09",
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -122,6 +206,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_811f6e4d",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_9ed7ba5c",
+      "range": {
+        "startLine": 85,
+        "startChar": 11,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_9e4c5a88",
         "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
         "patchSetId": 2
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_61247aa1",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_9e4c5a88",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_a262664d",
         "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
         "patchSetId": 2
@@ -150,6 +276,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "Could you make this a top-level class?",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_e1cbca50",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "sure",
+      "parentUuid": "05291785_a262664d",
       "range": {
         "startLine": 42,
         "startChar": 22,
@@ -185,6 +335,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_01bb7eb2",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05291785_02037a73",
+      "range": {
+        "startLine": 41,
+        "startChar": 43,
+        "endLine": 41,
+        "endChar": 61
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_82164aaf",
         "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
         "patchSetId": 2
@@ -196,6 +370,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "\u0027,\u0027 -\u003e \u0027;\u0027",
+      "range": {
+        "startLine": 71,
+        "startChar": 68,
+        "endLine": 71,
+        "endChar": 69
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_c1c44622",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05291785_82164aaf",
       "range": {
         "startLine": 71,
         "startChar": 68,
@@ -231,6 +429,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_21cd6240",
+        "filename": "dev/core/src/com/google/gwt/dev/IncrementalBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_1e406a44",
+      "range": {
+        "startLine": 181,
+        "startChar": 17,
+        "endLine": 181,
+        "endChar": 36
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_9e733ac4",
         "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
         "patchSetId": 2
@@ -242,6 +464,24 @@
       "writtenOn": "2014-04-18T01:51:39Z",
       "side": 1,
       "message": "Revert formatting",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_01e93e8e",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_9e733ac4",
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -271,6 +511,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_a1b71271",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05291785_fd113374",
+      "range": {
+        "startLine": 83,
+        "startChar": 22,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_7e78969f",
         "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
         "patchSetId": 2
@@ -282,6 +546,24 @@
       "writtenOn": "2014-04-18T01:51:39Z",
       "side": 1,
       "message": "See my earlier comment on visibility",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_bc2295be",
+        "filename": "dev/core/src/com/google/gwt/dev/LibraryCompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "this isn\u0027t intended to be part of the public api contract of this class, so it\u0027s not \"public\" on purpose",
+      "parentUuid": "853507d4_7e78969f",
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -311,6 +593,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_9c36b1fc",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05291785_e282ae74",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 14
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_5ecb9285",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ConditionAll.java",
         "patchSetId": 2
@@ -328,6 +634,24 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_7cc1bd64",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ConditionAll.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "i\u0027m following the exact equals and hashCode pattern used by and in the Guava library. i\u0027d rather not deviate",
+      "parentUuid": "853507d4_5ecb9285",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_a81fe44c",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
         "patchSetId": 2
@@ -339,6 +663,30 @@
       "writtenOn": "2014-04-18T00:24:17Z",
       "side": 1,
       "message": "Maybe use Multimap\u003cString, String\u003e",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 34
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_dd0437e3",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_a81fe44c",
       "range": {
         "startLine": 136,
         "startChar": 9,
@@ -374,6 +722,30 @@
     },
     {
       "key": {
+        "uuid": "05291785_7d70a35f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "i\u0027ve shortened it some, what do you think.",
+      "parentUuid": "05291785_3d469b65",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_dd3c37e2",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
         "patchSetId": 2
@@ -397,6 +769,30 @@
     },
     {
       "key": {
+        "uuid": "05291785_3dffbb49",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "i\u0027ve shortened it some, what do you think.",
+      "parentUuid": "05291785_dd3c37e2",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 41
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_88c0a031",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 2
@@ -408,6 +804,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "How about:\n\nFilesetPair: A key indicating that a fileset depends on another fileset, possibly indirectly. That is, it asserts some path exists but doesn\u0027t specify which one.",
+      "range": {
+        "startLine": 108,
+        "startChar": 5,
+        "endLine": 108,
+        "endChar": 17
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_9d090f92",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "took Roberto\u0027s suggestion instead.",
+      "parentUuid": "853507d4_88c0a031",
       "range": {
         "startLine": 108,
         "startChar": 5,
@@ -455,6 +875,42 @@
     },
     {
       "key": {
+        "uuid": "05291785_bd0ccba1",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_033db1db",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_fd7c9342",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "yes, done.",
+      "parentUuid": "853507d4_a8bb64d4",
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_e8f28c79",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 2
@@ -489,6 +945,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "\"Multiple paths may exist; this map contains only one of them.\"",
+      "range": {
+        "startLine": 252,
+        "startChar": 19,
+        "endLine": 252,
+        "endChar": 20
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_3d10dbb0",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_a8f5a469",
       "range": {
         "startLine": 252,
         "startChar": 19,
@@ -548,6 +1028,30 @@
     },
     {
       "key": {
+        "uuid": "05291785_fd2933ef",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_9e469a35",
+      "range": {
+        "startLine": 254,
+        "startChar": 42,
+        "endLine": 254,
+        "endChar": 67
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_689b3c20",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 2
@@ -559,6 +1063,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "Since you\u0027re copying the whole list and not appending to it, creating an ArrayList of the exact size seems more efficient.",
+      "range": {
+        "startLine": 927,
+        "startChar": 44,
+        "endLine": 927,
+        "endChar": 57
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255d3b32_1c13e12e",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "these lists are LinkedLists because they\u0027re used for getLast() and removeLast() in computeLibraryDependencyGraph()",
+      "parentUuid": "853507d4_689b3c20",
       "range": {
         "startLine": 927,
         "startChar": 44,
@@ -617,6 +1145,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_9cfeb17d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "these lists are LinkedLists because they\u0027re used for getLast() and removeLast() in computeLibraryDependencyGraph()",
+      "parentUuid": "853507d4_23eb1519",
+      "range": {
+        "startLine": 946,
+        "startChar": 53,
+        "endLine": 946,
+        "endChar": 66
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "853507d4_08003063",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
         "patchSetId": 2
@@ -663,6 +1215,30 @@
     },
     {
       "key": {
+        "uuid": "255d3b32_7cbbfdd5",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853507d4_68de9ca1",
+      "range": {
+        "startLine": 970,
+        "startChar": 20,
+        "endLine": 970,
+        "endChar": 46
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_82bd2a5b",
         "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandler.java",
         "patchSetId": 2
@@ -674,6 +1250,30 @@
       "writtenOn": "2014-04-18T00:33:16Z",
       "side": 1,
       "message": "Umm, this is the sort of name they make fun of Java programmers for. How about JarHandler?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 41
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_bd65eb59",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "updated",
+      "parentUuid": "05291785_82bd2a5b",
       "range": {
         "startLine": 38,
         "startChar": 13,
@@ -709,6 +1309,30 @@
     },
     {
       "key": {
+        "uuid": "05291785_5df4c73a",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandlerFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "updated",
+      "parentUuid": "05291785_7dfe63d7",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05291785_e2ad0e23",
         "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandlerFactory.java",
         "patchSetId": 2
@@ -725,6 +1349,53 @@
         "startChar": 14,
         "endLine": 46,
         "endChar": 34
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_3df9fb32",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarUrlStreamHandlerFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05291785_e2ad0e23",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 34
+      },
+      "revId": "c864bc339597fb80a06c66e60677048570364520",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_3dc7bbda",
+        "filename": "dev/core/test/com/google/gwt/dev/IncrementalBuilderTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-18T20:43:12Z",
+      "side": 1,
+      "message": "rluble noticed this: looks like my + 1000 change (to prevent flakiness when the test runs really fast and the library timestamp matches the java file timestamp) got lost somewhere.\n\nneed to add it back.",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 56
       },
       "revId": "c864bc339597fb80a06c66e60677048570364520",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

@@ -33,6 +33,29 @@
       "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_e6d75a7f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-19T04:43:27Z",
+      "side": 1,
+      "message": "Actually, I was thinking something more like following:\n(I think both are good options - we can discuss more Monday)\n\n @interface RunsLocal {\n   final String[] ANY \u003d {\"%ANY%\"};\n\n   boolean requiresProperties() default {};\n }\n\n // Legacy generator - can access anything\n class MyGenerator extends Generator { ... }\n\n // Can\u0027t access global typeset nor any properties\n @RunsLocal\n class MyGenerator extends Generator { ... }\n\n // Can access user.agent and gwt.locale property\n @RunsLocal(requiresProperties \u003d {\"user.agent\", \"gwt.locale\"})\n class MyGenerator extends Generator { ... }\n\n // Can access any properties\n @RunsLocal(requiresProperties \u003d ANY)\n class MyGenerator extends Generator { ... }\n\nI\u0027ll think more about the name; can be named @LocalGenerator, @CanRunLocally or something like that.",
+      "range": {
+        "startLine": 37,
+        "startChar": 20,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

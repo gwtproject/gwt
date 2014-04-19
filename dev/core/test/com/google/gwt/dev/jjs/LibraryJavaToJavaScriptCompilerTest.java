@@ -15,11 +15,14 @@ package com.google.gwt.dev.jjs;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.Generator.RequiredInput;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.CompilerOptionsImpl;
+import com.google.gwt.dev.PrecompileTaskOptions;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.Condition;
 import com.google.gwt.dev.cfg.ConditionWhenPropertyIs;
@@ -69,12 +72,8 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
    * Test Generator that wants to create a FooShim%user.agent% type for every processed FooShim
    * type.
    */
+  @RequiredInput(globalTypeSet = false, properties = {"user.agent"})
   public static class BrowserShimGenerator extends Generator {
-
-    @Override
-    public boolean contentDependsOnTypes() {
-      return false;
-    }
 
     @Override
     public String generate(TreeLogger logger, GeneratorContext generatorContext,
@@ -92,23 +91,14 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
         throw new UnableToCompleteException();
       }
     }
-
-    @Override
-    public Set<String> getAccessedPropertyNames() {
-      return Sets.newHashSet("user.agent");
-    }
   }
 
   /**
    * Test Generator that wants to create a FooShim%locale% type for every processed FooShim
    * type.
    */
+  @RequiredInput(globalTypeSet = false, properties = {"locale"})
   public static class LocaleMessageGenerator extends Generator {
-
-    @Override
-    public boolean contentDependsOnTypes() {
-      return false;
-    }
 
     @Override
     public String generate(TreeLogger logger, GeneratorContext generatorContext,
@@ -125,11 +115,6 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
       } catch (BadPropertyValueException e) {
         throw new UnableToCompleteException();
       }
-    }
-
-    @Override
-    public Set<String> getAccessedPropertyNames() {
-      return Sets.newHashSet("locale");
     }
   }
 
@@ -185,6 +170,7 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
 
     @Override
     public ArtifactSet finish(TreeLogger logger) throws UnableToCompleteException {
+      dirty = false;
       // Don't actually compile generated source code;
       return new ArtifactSet();
     }
@@ -258,11 +244,11 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
       }
 
       @Override
-      protected boolean runGenerator(RuleGenerateWith generatorRule,
+      protected void runGenerator(RuleGenerateWith generatorRule,
           Set<String> reboundTypeSourceNames) throws UnableToCompleteException {
         processedReboundTypeSourceNames.addAll(reboundTypeSourceNames);
         runCountByGeneratorName.incrementAndGet(generatorRule.getName());
-        return super.runGenerator(generatorRule, reboundTypeSourceNames);
+        super.runGenerator(generatorRule, reboundTypeSourceNames);
       }
     }
 
@@ -377,12 +363,12 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
     Properties properties = new Properties();
     BindingProperty userAgentProperty = properties.createBinding("user.agent");
     userAgentProperty.setProvider(new PropertyProvider("return navigator.userAgent;"));
-    userAgentProperty.addDefinedValue(userAgentProperty.getRootCondition(), "mozilla");
-    userAgentProperty.addDefinedValue(userAgentProperty.getRootCondition(), "webkit");
+    userAgentProperty.addTargetLibraryDefinedValue(userAgentProperty.getRootCondition(), "mozilla");
+    userAgentProperty.addTargetLibraryDefinedValue(userAgentProperty.getRootCondition(), "webkit");
     BindingProperty flavorProperty = properties.createBinding("flavor");
     flavorProperty.setProvider(new PropertyProvider("return window.properties.flavor;"));
-    flavorProperty.addDefinedValue(flavorProperty.getRootCondition(), "Vanilla");
-    flavorProperty.addDefinedValue(flavorProperty.getRootCondition(), "Chocolate");
+    flavorProperty.addTargetLibraryDefinedValue(flavorProperty.getRootCondition(), "Vanilla");
+    flavorProperty.addTargetLibraryDefinedValue(flavorProperty.getRootCondition(), "Chocolate");
     ConfigurationProperty emulateStackProperty =
         properties.createConfiguration("emulateStack", false);
     emulateStackProperty.setValue("TRUE");
@@ -445,12 +431,12 @@ public class LibraryJavaToJavaScriptCompilerTest extends TestCase {
         .getConditions().add(new ConditionWhenTypeEndsWith("Messages"));
     module.addRule(localeMessageGenerateRule);
     LibraryGroup libraryGroup = LibraryGroupTest.buildVariedPropertyGeneratorLibraryGroup(
-        "com.google.gwt.dev.jjs.LibraryJavaToJavaScriptCompilerTest.BrowserShimGenerator",
         Sets.newHashSet("com.google.ChromeMessages"),
-        "com.google.gwt.dev.jjs.LibraryJavaToJavaScriptCompilerTest.LocaleMessageGenerator",
         Sets.newHashSet("com.google.WindowShim"));
+    PrecompileTaskOptions options = new CompilerOptionsImpl();
+    options.setFinalProperties(module.getProperties());
     compilerContext = new CompilerContext.Builder().libraryGroup(libraryGroup)
-        .libraryWriter(libraryWriter).module(module).build();
+        .libraryWriter(libraryWriter).module(module).options(options).build();
     finishSetUpWithCompilerContext();
 
     // Analyzes properties and generators in the library group and watches output in the generator

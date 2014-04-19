@@ -14,18 +14,77 @@
 package com.google.gwt.core.ext;
 
 import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Set;
 
 /**
  * Generates source code for subclasses during deferred binding requests. Subclasses must be
- * thread-safe.<br />
- *
- * Well-behaved generators can speed up the separate compiles by overriding @{link
- * #getAccessedPropertyNames}, @{link #contentDependsOnProperties}, and @{contentDependsOnTypes}".
- * The compiler will use this information to run generators less often and cache their outputs.
+ * thread-safe.
+ * <p>
+ * Well-behaved generators can speed up execution by strictly specifying their minimal input using
+ * the {@code RequiredInput} annotation.
  */
 public abstract class Generator {
+
+  /**
+   * An annotation for specifying the types of information a Generator needs as input to be able to
+   * run accurately.
+   */
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface RequiredInput {
+
+    /**
+     * Whether a Generator needs access to all possible types to be able to run accurately.
+     */
+    public boolean globalTypeSet() default true;
+
+    /**
+     * The list of names of properties which will be accessed by this Generator. It is assumed that
+     * any change in the values of these properties will affect the content of Generator output.
+     */
+    public String[] properties() default {"%ALL%"};
+  }
+
+  public static Set<String> getAccessedPropertyNames(Class<? extends Generator> generatorClass) {
+    RequiredInput requiredInputAnnotation = generatorClass.getAnnotation(RequiredInput.class);
+    // If the Generator says nothing about its required input.
+    if (requiredInputAnnotation == null) {
+      // Assume it needs all properties.
+      return null;
+    }
+    String[] properties = requiredInputAnnotation.properties();
+    if (properties.length == 1 && "%ALL%".equals(properties[0])) {
+      // Means all properties.
+      return null;
+    }
+    return Sets.newHashSet(properties);
+  }
+
+  public static boolean contentDependsOnTypes(Class<? extends Generator> generatorClass) {
+    RequiredInput requiredInputAnnotation = generatorClass.getAnnotation(RequiredInput.class);
+    // If the Generator says nothing about its required input.
+    if (requiredInputAnnotation == null) {
+      // Assume that it needs a global type set.
+      return true;
+    }
+    // Otherwise let it answer.
+    return requiredInputAnnotation.globalTypeSet();
+  }
+
+  public static boolean contentDependsOnProperties(Class<? extends Generator> generatorClass) {
+    RequiredInput requiredInputAnnotation = generatorClass.getAnnotation(RequiredInput.class);
+    // If the Generator says nothing about its required input.
+    if (requiredInputAnnotation == null) {
+      // Assume that it depends on properties.
+      return true;
+    }
+    // If it does specify it's required input then anything other than an empty array is a list of
+    // required properties.
+    return requiredInputAnnotation.properties().length > 0;
+  }
 
   private static final int MAX_SIXTEEN_BIT_NUMBER_STRING_LENGTH = 5;
 
@@ -134,37 +193,4 @@ public abstract class Generator {
    */
   public abstract String generate(TreeLogger logger, GeneratorContext context, String typeName)
       throws UnableToCompleteException;
-
-  /**
-   * Returns the set of names of all properties that are accessed by generator execution and affect
-   * its behavior. Returning a null indicates that *all* properties are considered relevant.<br />
-   *
-   * Generators that don't need access to every property can override this method to speed up
-   * separate compiles.
-   */
-  public Set<String> getAccessedPropertyNames() {
-    return null;
-  }
-
-  /**
-   * Whether the *content* of created files (not the list of files created) changes as the set value
-   * of configuration properties or the list of legal values of binding properties changes.<br />
-   *
-   * Generators whose output content is stable even when property values change can override this
-   * method to speed up separate compiles.
-   */
-  public boolean contentDependsOnProperties() {
-    return true;
-  }
-
-  /**
-   * Whether the *content* of created files (not the list of files created) changes as more types
-   * are created that match some subtype query.<br />
-   *
-   * Generators whose output content is stable even as new types are created can override this
-   * method to speed up separate compiles.
-   */
-  public boolean contentDependsOnTypes() {
-    return true;
-  }
 }

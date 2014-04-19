@@ -81,7 +81,7 @@ public class GeneratorTest extends TestCase {
     SimpleGenerator simpleGenerator = new SimpleGenerator();
     // Defaults to the worst case of claiming that generator output content is unstable and will
     // change as property values change.
-    assertTrue(simpleGenerator.contentDependsOnProperties());
+    assertTrue(Generator.contentDependsOnProperties(simpleGenerator.getClass()));
   }
 
   public void testDefaultRelevantPropertyNames() {
@@ -89,14 +89,14 @@ public class GeneratorTest extends TestCase {
     // Defaults to the worst case of claiming that generator output content is affected by all
     // properties (that is the meaning of returning null as opposed to a specific list of property
     // names).
-    assertNull(simpleGenerator.getAccessedPropertyNames());
+    assertNull(Generator.getAccessedPropertyNames(simpleGenerator.getClass()));
   }
 
   public void testDefaultTypeStability() {
     SimpleGenerator simpleGenerator = new SimpleGenerator();
     // Defaults to the worst case of claiming that generator output content is unstable and will
     // change as the list of available types changes.
-    assertTrue(simpleGenerator.contentDependsOnTypes());
+    assertTrue(Generator.contentDependsOnTypes(simpleGenerator.getClass()));
   }
 
   public void testEscapedClassName() {

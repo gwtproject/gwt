@@ -22,6 +22,30 @@
       "revId": "2b99cfc38f9eaf8d497d989c7b5c60923daaaac9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_e3d74c7f",
+        "filename": "dev/core/src/com/google/gwt/dev/SignatureDumper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-19T00:56:16Z",
+      "side": 1,
+      "message": "Discussed offline.\n\nSummary; we shouldn\u0027t only stop on c\u003d\u003dnull because if the class \u0027c\u0027 is not filtered out, that class will print the public methods from it\u0027s hidden parents anyway.\n\nFor the second question; duplicate methods look like OK.",
+      "parentUuid": "05291785_83ce4c3e",
+      "range": {
+        "startLine": 134,
+        "startChar": 52,
+        "endLine": 134,
+        "endChar": 70
+      },
+      "revId": "2b99cfc38f9eaf8d497d989c7b5c60923daaaac9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

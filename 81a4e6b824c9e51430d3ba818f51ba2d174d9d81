@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05291785_83164caf",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-19T01:19:45Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05291785_631b60d9",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-19T01:19:45Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

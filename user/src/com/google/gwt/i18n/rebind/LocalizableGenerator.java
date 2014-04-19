@@ -21,6 +21,7 @@ import com.google.gwt.codegen.server.CodeGenUtils;
 import com.google.gwt.codegen.server.JavaSourceWriterBuilder;
 import com.google.gwt.codegen.server.SourceWriter;
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.Generator.RequiredInput;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
@@ -37,7 +38,6 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.shared.GwtLocale;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +52,8 @@ import java.util.TreeSet;
  * Generator used to bind classes extending the <code>Localizable</code> and
  * <code>Constants</code> interfaces.
  */
+@RequiredInput(globalTypeSet = false, properties = {
+    "locale.queryparam", "locale", "runtime.locales", "locale.cookie"})
 public class LocalizableGenerator extends Generator {
 
   /**
@@ -103,9 +105,6 @@ public class LocalizableGenerator extends Generator {
   public static final String MESSAGES_NAME = Messages.class.getName();
 
   private LocalizableLinkageCreator linkageCreator = new LocalizableLinkageCreator();
-
-  private static ImmutableSet<String> relevantPropertyNames =
-      ImmutableSet.of("locale.queryparam", "locale", "runtime.locales", "locale.cookie");
 
   /**
    * Generate an implementation for the given type.
@@ -184,21 +183,6 @@ public class LocalizableGenerator extends Generator {
     }
 
     return returnedClass;
-  }
-
-  @Override
-  public Set<String> getAccessedPropertyNames() {
-    return relevantPropertyNames;
-  }
-
-  @Override
-  public boolean contentDependsOnProperties() {
-    return false;
-  }
-
-  @Override
-  public boolean contentDependsOnTypes() {
-    return false;
   }
 
   /**

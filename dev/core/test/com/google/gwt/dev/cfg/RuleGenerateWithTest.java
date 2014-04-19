@@ -15,6 +15,7 @@ package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.Generator.RequiredInput;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
@@ -41,27 +42,13 @@ public class RuleGenerateWithTest extends TestCase {
   /**
    * Test Generator that cares about properties Foo and Bar.
    */
+  @RequiredInput(globalTypeSet = false, properties = {"Foo", "Bar"})
   public static class CaresAboutPropertiesGenerator extends Generator {
-
-    @Override
-    public boolean contentDependsOnProperties() {
-      return true;
-    }
-
-    @Override
-    public boolean contentDependsOnTypes() {
-      return false;
-    }
 
     @Override
     public String generate(TreeLogger logger, GeneratorContext context, String typeName)
         throws UnableToCompleteException {
       return null;
-    }
-
-    @Override
-    public Set<String> getAccessedPropertyNames() {
-      return Sets.newHashSet("Foo", "Bar");
     }
   }
 
@@ -69,17 +56,8 @@ public class RuleGenerateWithTest extends TestCase {
    * Test Generator that wants to create types for some combination of user.agent and flavor
    * property values.
    */
+  @RequiredInput(globalTypeSet = false, properties = {"user.agent", "flavor"})
   public static class FooGenerator extends Generator {
-
-    @Override
-    public boolean contentDependsOnProperties() {
-      return true;
-    }
-
-    @Override
-    public boolean contentDependsOnTypes() {
-      return false;
-    }
 
     @Override
     public String generate(TreeLogger logger, GeneratorContext context, String typeName)
@@ -111,11 +89,6 @@ public class RuleGenerateWithTest extends TestCase {
       } catch (BadPropertyValueException e) {
         throw new UnableToCompleteException();
       }
-    }
-
-    @Override
-    public Set<String> getAccessedPropertyNames() {
-      return Sets.newHashSet("user.agent", "flavor");
     }
   }
 

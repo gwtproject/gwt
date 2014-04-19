@@ -679,8 +679,8 @@ public class StandardGeneratorContext implements GeneratorContext {
       // incompatible way) so that all Generators are forced to accurately declare the names of
       // properties they care about.
       propertyOracle = new SubsetFilteringPropertyOracle(
-          generator.getAccessedPropertyNames(), originalPropertyOracle,
-          generatorClassName + ".getAccessedPropertyNames() may need to be updated.");
+          Generator.getAccessedPropertyNames(generator.getClass()), originalPropertyOracle,
+          generatorClassName + "'s RequiredInput annotation may need to be updated.");
       if (generator instanceof IncrementalGenerator) {
         IncrementalGenerator incGenerator = (IncrementalGenerator) generator;
 

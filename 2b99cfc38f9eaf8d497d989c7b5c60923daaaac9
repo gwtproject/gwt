@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05291785_83ce4c3e",
+        "filename": "dev/core/src/com/google/gwt/dev/SignatureDumper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-19T00:11:13Z",
+      "side": 1,
+      "message": "You probably need to only stop on c\u003d\u003dnull. A package protected method might be exposed two classes down (even if the direct super is in a different package).\n\nAlso, does it matter printing a member 2 times or not?",
+      "range": {
+        "startLine": 134,
+        "startChar": 52,
+        "endLine": 134,
+        "endChar": 70
+      },
+      "revId": "2b99cfc38f9eaf8d497d989c7b5c60923daaaac9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -42,7 +42,6 @@ import com.google.gwt.dev.jjs.impl.LongCastNormalizer;
 import com.google.gwt.dev.jjs.impl.LongEmulationNormalizer;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
 import com.google.gwt.dev.jjs.impl.Pruner;
-import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
@@ -101,7 +100,6 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
       if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
         optimizeJavaToFixedPoint();
       }
-      RemoveEmptySuperCalls.exec(jprogram);
     }
 
     @Override

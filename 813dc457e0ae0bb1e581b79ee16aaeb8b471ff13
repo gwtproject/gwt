@@ -464,6 +464,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_772a28a0",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:53:15Z",
+      "side": 1,
+      "message": "There is a slight problem with @Inherited. You cannot opt-out from running locally in subclasses anymore - that means you need to switch from inheritance to composition for reuse in such cases.\nAs subclassing is not so common in generators, it doesn\u0027t matter much to me so I\u0027m fine with both ways.",
+      "parentUuid": "65d653dd_f4d4d67c",
+      "range": {
+        "startLine": 118,
+        "startChar": 32,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_f1794850",
         "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
         "patchSetId": 3

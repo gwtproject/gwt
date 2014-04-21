@@ -89,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_3477be17",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_51fe14d7",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_117dec8e",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 3
@@ -129,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_54efe267",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_51c13464",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_f1b1481f",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 3
@@ -140,6 +182,30 @@
       "writtenOn": "2014-04-21T21:28:02Z",
       "side": 1,
       "message": "Set -\u003e Can be set ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 7,
+        "endLine": 62,
+        "endChar": 10
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_74f4663b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_f1b1481f",
       "range": {
         "startLine": 62,
         "startChar": 7,
@@ -169,6 +235,24 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_d402f26d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_b13980c7",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_7119d84e",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
         "patchSetId": 3
@@ -186,6 +270,24 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_94ba2a5a",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_7119d84e",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_d40f52be",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
         "patchSetId": 3
@@ -197,6 +299,24 @@
       "writtenOn": "2014-04-21T21:28:02Z",
       "side": 1,
       "message": "Create an object field accessedProperties initialized in constructor so it is not built multiple times?",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_14639a21",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_d40f52be",
       "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -320,6 +440,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_f4d4d67c",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_b1ac208d",
+      "range": {
+        "startLine": 118,
+        "startChar": 32,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_f1794850",
         "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
         "patchSetId": 3
@@ -343,6 +487,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_94d1ca8b",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_f1794850",
+      "range": {
+        "startLine": 119,
+        "startChar": 22,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d653dd_5170545f",
         "filename": "user/src/com/google/gwt/rpc/rebind/RpcServiceGenerator.java",
         "patchSetId": 3
@@ -354,6 +522,24 @@
       "writtenOn": "2014-04-21T21:28:02Z",
       "side": 1,
       "message": "revert the file?",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_7490e6ca",
+        "filename": "user/src/com/google/gwt/rpc/rebind/RpcServiceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d653dd_5170545f",
       "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

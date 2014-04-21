@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d653dd_97378c6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCoercionNormalizer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T22:49:39Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 20
+      },
+      "revId": "192a8b7430a506c6761541ed957e4ac02a453f95",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

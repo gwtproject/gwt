@@ -16,6 +16,98 @@
       "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_ba8e41d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-21T16:52:05Z",
+      "side": 1,
+      "message": "For ranges corresponding to statements and its parts there will always exist the enclosing range (the whole statements).\n\nI guess you could have adjacent ranges if you have two top statements on the same line with no space separating them.\n\n  a \u003d 1;b \u003d 2;",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 75
+      },
+      "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_5a29350e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-21T16:52:05Z",
+      "side": 1,
+      "message": "s/getJavaExpression/getJavaIdentifier/ ?\n\nIsn\u0027t this fields purpose to hold a source name for a specific range that correspond to a JavaScript identifier?",
+      "range": {
+        "startLine": 94,
+        "startChar": 19,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_1adf2dea",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-21T16:52:05Z",
+      "side": 1,
+      "message": "s/buf/buffer or unionBuffer.",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 19
+      },
+      "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_3a4d51f9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-21T16:52:05Z",
+      "side": 1,
+      "message": "Can uou move the flushing logic to the UnionBuffer class so only three functions are needed\n\n appendRange(r, info);\n appendNamedRange(r, info, expression);\n end();\n\n\nAnd pass out in the constructor of UnionBuffer()?\n\nMaybe also rename UnionBuffer to SourceMapRangeConsolidator?",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 7
+      },
+      "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

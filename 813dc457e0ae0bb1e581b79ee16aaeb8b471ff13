@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_b4d88efe",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6571f3c6_99959b60",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6571f3c6_b992df73",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/RuleGenerateWithTest.java",
         "patchSetId": 3
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_14ff1a49",
+        "filename": "dev/core/test/com/google/gwt/dev/cfg/RuleGenerateWithTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6571f3c6_b992df73",
+      "range": {
+        "startLine": 168,
+        "startChar": 52,
+        "endLine": 168,
+        "endChar": 56
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6571f3c6_591f034e",
         "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
         "patchSetId": 3
@@ -76,6 +124,30 @@
       "writtenOn": "2014-04-21T21:14:05Z",
       "side": 1,
       "message": "@RunsLocal is not defined using @Inherited so @RunsLocal on an abstract class is useless here. Either annotated the definition of @RunsLocal with @Inherited or remove this annotation here.\n\nMarking it with @Inherited would also mean that you can remove the annotation on the both sub classes in this CL (Inline + MHTML)",
+      "range": {
+        "startLine": 118,
+        "startChar": 35,
+        "endLine": 118,
+        "endChar": 38
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_f43a9653",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T21:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6571f3c6_591f034e",
       "range": {
         "startLine": 118,
         "startChar": 35,

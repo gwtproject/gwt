@@ -17,6 +17,7 @@ package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.Generator.RunsLocal;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
@@ -24,6 +25,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -39,6 +41,24 @@ import java.util.Set;
  * required.
  */
 public class RuleGenerateWith extends Rule {
+
+  public static final Set<String> ALL_PROPERTIES = ImmutableSet.of();
+
+  /**
+   * Returns a Set of the names of properties that will be accessed by the given Generator.
+   */
+  public static Set<String> getAccessedPropertyNames(Class<? extends Generator> generatorClass) {
+    RunsLocal runsLocalAnnotation = generatorClass.getAnnotation(RunsLocal.class);
+    // If the Generator says nothing about its required input.
+    if (runsLocalAnnotation == null) {
+      return ALL_PROPERTIES;
+    }
+    String[] properties = runsLocalAnnotation.requiresProperties();
+    if (properties.length == 1 && "%ALL%".equals(properties[0])) {
+      return ALL_PROPERTIES;
+    }
+    return Sets.newHashSet(properties);
+  }
 
   private Generator generator;
   private Class<? extends Generator> generatorClass;
@@ -59,30 +79,25 @@ public class RuleGenerateWith extends Rule {
    * trigger Generators within Rules whose output might have changed.
    */
   public boolean caresAboutProperties(Set<String> propertyNames) {
-    Set<String> generatorPropertyNames = getGenerator().getAccessedPropertyNames();
+    Set<String> accessedPropertyNames = getAccessedPropertyNames(generatorClass);
 
-    if (generatorPropertyNames == null) {
+    // If this generator cares about all properties.
+    if (accessedPropertyNames == ALL_PROPERTIES) {
+      // Then if some properties were supplied, it cares about them.
       return !propertyNames.isEmpty();
     }
 
-    if (!Sets.intersection(generatorPropertyNames, propertyNames).isEmpty()) {
-      return true;
-    }
-
-    Set<String> conditionalPropertyNames = getRootCondition().getRequiredProperties();
-    if (!Sets.intersection(conditionalPropertyNames, propertyNames).isEmpty()) {
-      return true;
-    }
-
-    return false;
+    // Otherwise an explicit list of cared about properties was supplied. Return whether any of the
+    // supplied properties is cared about.
+    return !Sets.intersection(accessedPropertyNames, propertyNames).isEmpty();
   }
 
-  public boolean contentDependsOnProperties() {
-    return getGenerator().contentDependsOnProperties();
-  }
-
+  /**
+   * Returns whether the output of the Generator being managed by this rule depends on access to the
+   * global set of types to be able to run accurately.
+   */
   public boolean contentDependsOnTypes() {
-    return getGenerator().contentDependsOnTypes();
+    return generatorClass.getAnnotation(RunsLocal.class) == null;
   }
 
   @Override
@@ -203,8 +218,8 @@ public class RuleGenerateWith extends Rule {
           new DynamicPropertyOracle(moduleProperties);
 
       // Maybe prime the pump.
-      if (getGenerator().getAccessedPropertyNames() != null) {
-        for (String accessedPropertyName : getGenerator().getAccessedPropertyNames()) {
+      if (getAccessedPropertyNames(generatorClass) != ALL_PROPERTIES) {
+        for (String accessedPropertyName : getAccessedPropertyNames(generatorClass)) {
           try {
             dynamicPropertyOracle.getSelectionProperty(logger, accessedPropertyName);
           } catch (BadPropertyValueException e) {
@@ -212,8 +227,7 @@ public class RuleGenerateWith extends Rule {
           }
         }
       }
-      boolean needsAllTypesIfRun =
-          getGenerator().contentDependsOnTypes() && context.isGlobalCompile();
+      boolean needsAllTypesIfRun = contentDependsOnTypes() && context.isGlobalCompile();
       TypeOracle typeModelTypeOracle =
           (com.google.gwt.dev.javac.typemodel.TypeOracle) context.getTypeOracle();
 

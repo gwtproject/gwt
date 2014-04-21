@@ -66,6 +66,143 @@
     },
     {
       "key": {
+        "uuid": "65d653dd_51fe14d7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "pls update the javadoc. Perhaps something like:\n\n\"If annotated by {@code @RunsLocal}, a generator can minimize its impact on compilation speed. See {@link RunsLocal} for details.\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_117dec8e",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "An optional annotation indicating that a Generator can be run with local information during incremental compilation.\n\u003cp\u003e\nWhen this annotation is applied, the generator cannot access global level type information (e.g. {@code JClassType#getSubTypes} or {@code TypeOracle#getTypes}) and also accesses to property values are restricted to the ones defined by {@link #requiredProperties}.\n\u003cp\u003e\nThis information is used by Generator invocation during incremental compilation to run Generators as early as possible in the compile tree (and thus as parallelized and cached as possible).",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 5
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_51c13464",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "A special value for {@link #requiresProperties} to indicate that any property can affect this generator\u0027s output. While this gives access to any property value, this may slowdown the compilation speed to precompute all property values.",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_f1b1481f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "Set -\u003e Can be set ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 7,
+        "endLine": 62,
+        "endChar": 10
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_b13980c7",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "ImmutableSet.copyOf(properties)",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_7119d84e",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "Perhaps you can replace the method with:\n\n  public static final Set\u003cString\u003e ALL_PROPERTIES \u003d ImmutableSet.of(RunsLocal.ALL);\n\n  public static Set\u003cString\u003e getAccessedPropertyNames(Class\u003c? extends Generator\u003e generatorClass) {\n    RunsLocal runsLocal \u003d generatorClass.getAnnotation(RunsLocal.class);\n    return runsLocal \u003d\u003d null ? ALL_PROPERTIES : ImmutableSet.copyOf(runsLocal.requiredProperties());\n  }",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_d40f52be",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/RuleGenerateWith.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "Create an object field accessedProperties initialized in constructor so it is not built multiple times?",
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6571f3c6_b992df73",
         "filename": "dev/core/test/com/google/gwt/dev/cfg/RuleGenerateWithTest.java",
         "patchSetId": 3
@@ -154,6 +291,69 @@
         "endLine": 118,
         "endChar": 38
       },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_b1ac208d",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "{\"%ALL\"} -\u003e ALL (and all other places)",
+      "range": {
+        "startLine": 118,
+        "startChar": 32,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_f1794850",
+        "filename": "user/src/com/google/gwt/resources/rebind/context/AbstractClientBundleGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "you probably don\u0027t need an annotation here as its abstract, perhaps just indicate that this is for documentation purposes with a comment?",
+      "range": {
+        "startLine": 119,
+        "startChar": 22,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_5170545f",
+        "filename": "user/src/com/google/gwt/rpc/rebind/RpcServiceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T21:28:02Z",
+      "side": 1,
+      "message": "revert the file?",
       "revId": "813dc457e0ae0bb1e581b79ee16aaeb8b471ff13",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

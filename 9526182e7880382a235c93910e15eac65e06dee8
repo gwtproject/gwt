@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d653dd_57460438",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T22:07:12Z",
+      "side": 1,
+      "message": "looking at https://gwt.googlesource.com/gwt/+/6f589d361fe7e1cec06ef6a1f6a5495e69591b28%5E%21/#F1 i can see that yes, this was being done before but was lost in that patch",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 228,
+        "endChar": 29
+      },
+      "revId": "9526182e7880382a235c93910e15eac65e06dee8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

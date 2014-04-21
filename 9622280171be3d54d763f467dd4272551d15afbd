@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5768bc3_162f1aaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-21T21:59:03Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "9622280171be3d54d763f467dd4272551d15afbd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5768bc3_36349600",
+        "filename": "/home/mdempsky/gwt/dev/core/src/com/google/gwt/core/ext/soyc/SourceMappingWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-21T21:59:03Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "9622280171be3d54d763f467dd4272551d15afbd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

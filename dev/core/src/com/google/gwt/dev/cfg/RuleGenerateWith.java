@@ -59,30 +59,11 @@ public class RuleGenerateWith extends Rule {
    * trigger Generators within Rules whose output might have changed.
    */
   public boolean caresAboutProperties(Set<String> propertyNames) {
-    Set<String> generatorPropertyNames = getGenerator().getAccessedPropertyNames();
-
-    if (generatorPropertyNames == null) {
-      return !propertyNames.isEmpty();
-    }
-
-    if (!Sets.intersection(generatorPropertyNames, propertyNames).isEmpty()) {
-      return true;
-    }
-
-    Set<String> conditionalPropertyNames = getRootCondition().getRequiredProperties();
-    if (!Sets.intersection(conditionalPropertyNames, propertyNames).isEmpty()) {
-      return true;
-    }
-
-    return false;
-  }
-
-  public boolean contentDependsOnProperties() {
-    return getGenerator().contentDependsOnProperties();
+    return Generator.caresAboutProperties(generatorClass, propertyNames);
   }
 
   public boolean contentDependsOnTypes() {
-    return getGenerator().contentDependsOnTypes();
+    return Generator.contentDependsOnTypes(generatorClass);
   }
 
   @Override
@@ -203,8 +184,8 @@ public class RuleGenerateWith extends Rule {
           new DynamicPropertyOracle(moduleProperties);
 
       // Maybe prime the pump.
-      if (getGenerator().getAccessedPropertyNames() != null) {
-        for (String accessedPropertyName : getGenerator().getAccessedPropertyNames()) {
+      if (Generator.getAccessedPropertyNames(generatorClass) != Generator.ALL_PROPERTIES) {
+        for (String accessedPropertyName : Generator.getAccessedPropertyNames(generatorClass)) {
           try {
             dynamicPropertyOracle.getSelectionProperty(logger, accessedPropertyName);
           } catch (BadPropertyValueException e) {
@@ -212,8 +193,7 @@ public class RuleGenerateWith extends Rule {
           }
         }
       }
-      boolean needsAllTypesIfRun =
-          getGenerator().contentDependsOnTypes() && context.isGlobalCompile();
+      boolean needsAllTypesIfRun = contentDependsOnTypes() && context.isGlobalCompile();
       TypeOracle typeModelTypeOracle =
           (com.google.gwt.dev.javac.typemodel.TypeOracle) context.getTypeOracle();
 

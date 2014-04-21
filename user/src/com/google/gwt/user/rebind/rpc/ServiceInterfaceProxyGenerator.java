@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.rebind.rpc;
 
+import com.google.gwt.core.ext.Generator.RunsLocal;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.IncrementalGenerator;
 import com.google.gwt.core.ext.RebindResult;
@@ -22,14 +23,14 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
-
-import java.util.Set;
 
 /**
  * Generator for producing the asynchronous version of a
  * {@link com.google.gwt.user.client.rpc.RemoteService RemoteService} interface.
  */
+@RunsLocal(requiresGlobalTypeSet = true, requiresProperties = {
+    "gwt.elideTypeNamesFromRPC", "rpc.enhancedClasses", "gwt.suppressNonStaticFinalFieldWarnings",
+    "rpc.blacklist"})
 public class ServiceInterfaceProxyGenerator extends IncrementalGenerator {
 
   /*
@@ -40,10 +41,6 @@ public class ServiceInterfaceProxyGenerator extends IncrementalGenerator {
    * by a version of this generator with a different version id.
    */
   private static final long GENERATOR_VERSION_ID = 1L;
-
-  private static ImmutableSet<String> relevantPropertyNames = ImmutableSet.of(
-      "gwt.elideTypeNamesFromRPC", "rpc.enhancedClasses", "gwt.suppressNonStaticFinalFieldWarnings",
-      "rpc.blacklist");
 
   @Override
   public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext ctx,
@@ -72,11 +69,6 @@ public class ServiceInterfaceProxyGenerator extends IncrementalGenerator {
             + remoteService.getQualifiedSourceName() + "'", null);
 
     return proxyCreator.create(proxyLogger, ctx);
-  }
-
-  @Override
-  public Set<String> getAccessedPropertyNames() {
-    return relevantPropertyNames;
   }
 
   @Override

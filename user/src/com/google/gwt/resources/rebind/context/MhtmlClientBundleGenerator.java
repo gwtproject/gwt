@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.resources.rebind.context;
 
+import com.google.gwt.core.ext.Generator.RunsLocal;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -27,6 +28,7 @@ import com.google.gwt.resources.ext.ClientBundleRequirements;
 /**
  * Generates Multipart HTML files.
  */
+@RunsLocal(requiresProperties = {"%ALL%"})
 public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
 
   private static final String BUNDLE_EXTENSION = ".cache.txt";

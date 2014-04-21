@@ -22,6 +22,30 @@
       "revId": "593caf18da7e8cf436bdf5184735fbf625ab258d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d653dd_9a65715a",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-21T23:45:40Z",
+      "side": 1,
+      "message": "You might have missed this one?",
+      "parentUuid": "255d3b32_a6fe037d",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "593caf18da7e8cf436bdf5184735fbf625ab258d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

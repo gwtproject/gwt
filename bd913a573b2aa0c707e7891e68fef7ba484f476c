@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a59dab27_1e6ac96d",
+        "filename": "/home/mdempsky/gwt/user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-21T18:14:11Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks.",
+      "revId": "bd913a573b2aa0c707e7891e68fef7ba484f476c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "458dcff1_357d628f",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T18:28:34Z",
+      "side": 1,
+      "message": "\"requiresProperties \u003d ANY\" i\u0027m not doing that because it\u0027s a compile error \"The value for annotation attribute Generator.RunsLocal.requiresProperties must be an array initializer\"",
+      "parentUuid": "458dcff1_e6d75a7f",
+      "range": {
+        "startLine": 37,
+        "startChar": 20,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "250ffb25_5ad391e7",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 1
@@ -76,6 +100,24 @@
     },
     {
       "key": {
+        "uuid": "458dcff1_b553b2f1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T18:28:34Z",
+      "side": 1,
+      "message": "expanded the documentation",
+      "parentUuid": "250ffb25_5ad391e7",
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "250ffb25_1acd1940",
         "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
         "patchSetId": 1
@@ -87,6 +129,24 @@
       "writtenOn": "2014-04-19T15:21:03Z",
       "side": 1,
       "message": "JavaDoc because \"return null\" has a special meaning. In general I would prefer a requiresAllProperties(Class\u003c? extends Generator\u003e) method but I guess returning null is more practical (and does not require a second class.getAnnotation() call)?",
+      "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458dcff1_95ac6e7b",
+        "filename": "dev/core/src/com/google/gwt/core/ext/Generator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-21T18:28:34Z",
+      "side": 1,
+      "message": "i mostly agree with you that returning \"null\" isn\u0027t great.\n\nthere are 3 callers, i can move one of the calling function into here and get rid of it\u0027s need to know that \"null\" means all. but the other 2 callers can\u0027t be moved.\n\ni\u0027ll move the one moveable function and create a constant to represent \"ALL\" to make the code more readable when it is used.",
+      "parentUuid": "250ffb25_1acd1940",
       "revId": "81a4e6b824c9e51430d3ba818f51ba2d174d9d81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

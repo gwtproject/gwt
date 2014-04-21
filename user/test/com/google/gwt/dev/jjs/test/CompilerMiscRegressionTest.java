@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks;
 import com.google.gwt.dev.jjs.test.overrides.package1.Caller;
 import com.google.gwt.dev.jjs.test.overrides.package1.ClassExposingM;
 import com.google.gwt.dev.jjs.test.overrides.package1.SomeParent;
@@ -29,7 +30,9 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Tests Miscelaneous fixes.
@@ -53,6 +56,19 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     var lhs = val;
     return - --lhs;
   }-*/;
+
+  /**
+   * The array {@code map.get("one")[0]} gets normalized (by {@link ImplementCastsAndTypeChecks}) to
+   * {@code Cast.dynamicCast(map.get("one"), ...)[0]}. The expression resulting from dynamiCast
+   * would have type Object and that would not be a valid type for an array access operation.
+   */
+  public void testOverridingReturnType() {
+    Map<String, String[]> map = new HashMap();
+    map.put("one", new String[10]);
+
+    map.get("one")[0] = "one";
+    assertEquals("one", map.get("one")[0]);
+  }
 
   /**
    * Test for issues 6373 and 3942.

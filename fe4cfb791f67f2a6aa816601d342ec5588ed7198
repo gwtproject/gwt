@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5a4cb87_43464638",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-22T00:10:36Z",
+      "side": 1,
+      "message": "Ray, isn\u0027t this redundant? Only static methods are inlined.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 7
+      },
+      "revId": "fe4cfb791f67f2a6aa816601d342ec5588ed7198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -46,6 +46,30 @@
       "revId": "593caf18da7e8cf436bdf5184735fbf625ab258d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5a4cb87_e3b1721f",
+        "filename": "dev/core/src/com/google/gwt/dev/BuildTarget.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-22T00:11:51Z",
+      "side": 1,
+      "message": "i thought you asked me to make the class package private and the contents public.\n\ni guess not.\n\ni have switched them back to private again.",
+      "parentUuid": "65d653dd_9a65715a",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "593caf18da7e8cf436bdf5184735fbf625ab258d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

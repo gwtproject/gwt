@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.soyc.SourceMapRecorderExt;
 import com.google.gwt.core.ext.soyc.coderef.EntityDescriptor.Fragment;
 import com.google.gwt.core.linker.SoycReportLinker;
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -64,7 +65,7 @@ public class EntityRecorder {
   public static final String INITIAL_SEQUENCE = "initialSequence";
 
   public static List<SyntheticArtifact> makeSoycArtifacts(int permutationId,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, JavaToJavaScriptMap jjsmap,
+      List<JsSourceMap> sourceInfoMaps, JavaToJavaScriptMap jjsmap,
       SizeBreakdown[] sizeBreakdowns, DependencyGraphRecorder codeGraph, JProgram jprogram) {
 
     EntityRecorder recorder = new EntityRecorder(sizeBreakdowns, permutationId);

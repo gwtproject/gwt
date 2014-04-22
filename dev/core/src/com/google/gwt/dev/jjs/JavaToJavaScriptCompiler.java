@@ -225,7 +225,6 @@ public abstract class JavaToJavaScriptCompiler {
       try {
         // (1) Initialize local state.
         long startTimeMs = System.currentTimeMillis();
-        List<Map<Range, SourceInfo>> sourceInfoMaps = new ArrayList<Map<Range, SourceInfo>>();
         PropertyOracle[] propertyOracles = permutation.getPropertyOracles();
         int permutationId = permutation.getId();
         AST ast = unifiedAst.getFreshAst();
@@ -307,6 +306,7 @@ public abstract class JavaToJavaScriptCompiler {
         JsBreakUpLargeVarStatements.exec(jsProgram, propertyOracles);
 
         // (8) Generate Js source
+        List<JsSourceMap> sourceInfoMaps = new ArrayList<JsSourceMap>();
         boolean isSourceMapsEnabled = PropertyOracles.findBooleanProperty(
             logger, propertyOracles, "compiler.useSourceMaps", "true", true, false, false);
         String[] jsFragments = new String[jsProgram.getFragmentCount()];
@@ -378,7 +378,7 @@ public abstract class JavaToJavaScriptCompiler {
     private void addSourceMapArtifacts(int permutationId, JavaToJavaScriptMap jjsmap,
         Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder,
         boolean isSourceMapsEnabled, SizeBreakdown[] sizeBreakdowns,
-        List<Map<Range, SourceInfo>> sourceInfoMaps, PermutationResult permutationResult) {
+        List<JsSourceMap> sourceInfoMaps, PermutationResult permutationResult) {
       if (options.isJsonSoycEnabled()) {
         // TODO: enable this when ClosureCompiler is enabled
         if (options.isClosureCompilerEnabled()) {
@@ -408,7 +408,7 @@ public abstract class JavaToJavaScriptCompiler {
         Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder,
         Map<JsName, JsLiteral> internedLiteralByVariableName, String[] js,
         SizeBreakdown[] sizeBreakdowns,
-        List<Map<Range, SourceInfo>> sourceInfoMaps, PermutationResult permutationResult,
+        List<JsSourceMap> sourceInfoMaps, PermutationResult permutationResult,
         CompilationMetricsArtifact compilationMetrics)
         throws IOException, UnableToCompleteException {
       // TODO: enable this when ClosureCompiler is enabled
@@ -431,7 +431,7 @@ public abstract class JavaToJavaScriptCompiler {
         Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder,
         Map<JsName, JsLiteral> internedLiteralByVariableName, boolean isSourceMapsEnabled,
         String[] jsFragments, SizeBreakdown[] sizeBreakdowns,
-        List<Map<Range, SourceInfo>> sourceInfoMaps, PermutationResult permutationResult)
+        List<JsSourceMap> sourceInfoMaps, PermutationResult permutationResult)
         throws IOException, UnableToCompleteException {
       CompilationMetricsArtifact compilationMetrics = addCompilerMetricsArtifact(
           unifiedAst, permutation, startTimeMs, sizeBreakdowns, permutationResult);
@@ -447,7 +447,7 @@ public abstract class JavaToJavaScriptCompiler {
      */
     private void generateJavaScriptCode(JavaToJavaScriptMap jjsMap, String[] jsFragments,
         StatementRanges[] ranges, SizeBreakdown[] sizeBreakdowns,
-        List<Map<Range, SourceInfo>> sourceInfoMaps, boolean sourceMapsEnabled) {
+        List<JsSourceMap> sourceInfoMaps, boolean sourceMapsEnabled) {
       boolean useClosureCompiler = options.isClosureCompilerEnabled();
       if (useClosureCompiler) {
         ClosureJsRunner runner = new ClosureJsRunner();
@@ -468,7 +468,7 @@ public abstract class JavaToJavaScriptCompiler {
 
         StatementRanges statementRanges = v.getStatementRanges();
         String code = out.toString();
-        Map<Range, SourceInfo> infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
+        JsSourceMap infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
 
         JsAbstractTextTransformer transformer =
             new JsAbstractTextTransformer(code, statementRanges, infoMap) {
@@ -507,7 +507,7 @@ public abstract class JavaToJavaScriptCompiler {
     }
 
     private Collection<? extends Artifact<?>> makeSoycArtifacts(int permutationId, String[] js,
-        SizeBreakdown[] sizeBreakdowns, List<Map<Range, SourceInfo>> sourceInfoMaps,
+        SizeBreakdown[] sizeBreakdowns, List<JsSourceMap> sourceInfoMaps,
         SyntheticArtifact dependencies, JavaToJavaScriptMap jjsmap,
         Map<JsName, JsLiteral> internedLiteralByVariableName,
         ModuleMetricsArtifact moduleMetricsArtifact,

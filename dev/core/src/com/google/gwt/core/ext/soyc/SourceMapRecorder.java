@@ -18,6 +18,7 @@ package com.google.gwt.core.ext.soyc;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.core.linker.SymbolMapsLinker;
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3;
@@ -40,7 +41,7 @@ import java.util.Set;
 public class SourceMapRecorder {
 
   public static List<SyntheticArtifact> makeSourceMapArtifacts(int permutationId,
-      List<Map<Range, SourceInfo>> sourceInfoMaps) {
+      List<JsSourceMap> sourceInfoMaps) {
     try {
       return (new SourceMapRecorder(permutationId)).recordSourceMap(sourceInfoMaps);
     } catch (Exception e) {
@@ -54,7 +55,7 @@ public class SourceMapRecorder {
     this.permutationId = permutationId;
   }
 
-  protected List<SyntheticArtifact> recordSourceMap(List<Map<Range, SourceInfo>> sourceInfoMaps)
+  protected List<SyntheticArtifact> recordSourceMap(List<JsSourceMap> sourceInfoMaps)
       throws IOException, JSONException, SourceMapParseException {
     List<SyntheticArtifact> toReturn = Lists.newArrayList();
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

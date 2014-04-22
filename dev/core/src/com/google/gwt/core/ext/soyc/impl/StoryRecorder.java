@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.soyc.Member;
 import com.google.gwt.core.ext.soyc.Range;
 import com.google.gwt.dev.jjs.Correlation;
 import com.google.gwt.dev.jjs.Correlation.Axis;
+import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
@@ -67,7 +68,7 @@ public class StoryRecorder {
    * Used to record dependencies of a program.
    */
   public static void recordStories(TreeLogger logger, OutputStream out,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, String[] js) {
+      List<JsSourceMap> sourceInfoMaps, String[] js) {
     new StoryRecorder().recordStoriesImpl(logger, out, sourceInfoMaps, js);
   }
 
@@ -102,7 +103,7 @@ public class StoryRecorder {
   }
 
   protected void recordStoriesImpl(TreeLogger logger, OutputStream out,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, String[] js) {
+      List<JsSourceMap> sourceInfoMaps, String[] js) {
 
     logger = logger.branch(TreeLogger.INFO, "Creating Stories file for the compile report");
 

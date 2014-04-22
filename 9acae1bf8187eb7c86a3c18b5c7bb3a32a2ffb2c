@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "a5a4cb87_2698f860",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-22T01:10:43Z",
+      "side": 1,
+      "message": "They don\u0027t have to be adjacent in Java because all we care about is the line number.\n\nHowever, they do need to be adjacent in JavaScript. We would need to fix the semicolon issue and that would probably be enough to merge ranges for obfuscated JavaScript. For pretty mode, they still wouldn\u0027t be merged because the sourcemap specification requires ranges to be split on newlines.",
+      "parentUuid": "458dcff1_ba8e41d8",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 75
+      },
+      "revId": "9acae1bf8187eb7c86a3c18b5c7bb3a32a2ffb2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "458dcff1_5a29350e",
         "filename": "dev/core/src/com/google/gwt/core/ext/soyc/SourceMapRecorder.java",
         "patchSetId": 1

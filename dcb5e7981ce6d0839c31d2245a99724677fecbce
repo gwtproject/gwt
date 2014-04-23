@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "59d5bb77_8abb4bed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "Not exactly identical, but I extracted a static method with extra params.",
+      "parentUuid": "b9df977e_680c1755",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9df977e_281b2f87",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 1
@@ -258,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "59d5bb77_6a47f73b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "It might be easier to do it during the UnifyAst JMethod.resolve() since I can lookup a resolved JMethod at that point in time. Otherwise, it\u0027s a lot of code just to stash a JMethod here which isn\u0027t even useful until much later passes. \n\nThe only justification really for doing it this early would be to print errors early in the compile. \n\nI think it would overcomplexify to add something like JSNIReferenceResolver just for this.",
+      "parentUuid": "b9df977e_682537bd",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9df977e_28e96f23",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
         "patchSetId": 1
@@ -275,6 +311,24 @@
         "endLine": 47,
         "endChar": 38
       },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59bcdb31_0f1485cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "Constructors?",
+      "parentUuid": "b9df977e_28e96f23",
       "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -304,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "59bcdb31_8f399557",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "You mean move the above if statement (isFinal || isStatic||....) into that? Are you sure all of the callers have the same restriction?",
+      "parentUuid": "b9df977e_c800c323",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9df977e_e8ff87cd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
         "patchSetId": 1
@@ -321,6 +393,24 @@
         "endLine": 86,
         "endChar": 20
       },
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59bcdb31_cfac3d3f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "I will add rescue during non-final passes. (Final pruner will allow them to be pruned, since if no specialization happened at all, you want them to go away)\n\nI will change MakeCallsStatic to copy the specializers. It\u0027ll have to rescue both the target method, as well as it\u0027s static version as well. \n\nYou have instanceMethod1 rescues specializedMethod1 \n\nrescue of staticInstanceMethod1 implies rescue of staticSpecializedMethod1",
+      "parentUuid": "b9df977e_e8ff87cd",
       "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -350,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "59d5bb77_eaebe7cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9df977e_08fbcbe5",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9df977e_6897f778",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 1
@@ -373,6 +481,24 @@
     },
     {
       "key": {
+        "uuid": "39cac7de_6643aed0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9df977e_6897f778",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9df977e_889a3b9f",
         "filename": "dev/core/super/com/google/gwt/core/client/impl/CompilerHint.java",
         "patchSetId": 1
@@ -384,6 +510,24 @@
       "writtenOn": "2014-04-11T01:33:16Z",
       "side": 1,
       "message": "When I metioned compiler hint my though was to have a single annotation @CompilerHint for all hints so that we don\u0027t bloat GWTastBuilder with annotations.\n\n@CompilerHint(type\u003d\"specializeMethod\" , target\u003d, when\u003d{ .... here would be the signature})\n\nand then have @CompilerHints(@CompilerHint(...)) when multiple compiler hints are needed.",
+      "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59bcdb31_6f9c310c",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/CompilerHint.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:16:59Z",
+      "side": 1,
+      "message": "I don\u0027t think this will really make the code any cleaner, it\u0027ll just overload the meanings of all the fields on CompilerHint. If eventually, CompilerHint ends up dealing with Classes, Methods, Parameters, and sprouts lots of extra parameters, you might end up with a maddening bunch of if/else checks. The JavaDoc for this would also get ballooned since it would have to describe every hint syntax.\n\nIt also sounds like you want the \"when\" condition to be a String, but that seems less safe and require more error checking in GwtAstBuilder.",
+      "parentUuid": "b9df977e_889a3b9f",
       "revId": "dcb5e7981ce6d0839c31d2245a99724677fecbce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

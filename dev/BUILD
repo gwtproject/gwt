@@ -1,4 +1,4 @@
-# Copyright 2012 Google Inc.
+# Copyright 2014 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -13,351 +13,553 @@
 # the License.
 
 # Description:
-#   The GWT compiler and dev mode.
+#   The standard GWT libraries.
 
 # Google owns the copyright
 licenses(["unencumbered"])
 
 package(
     default_visibility = [
-        "//third_party/java_src/gwt:__pkg__",
-        "//third_party/java_src/gwt/legacy:__pkg__",
-        "//third_party/java_src/gwt/svn/trunk/user:__pkg__",
+        "//third_party/java/gwt:__subpackages__",
+        "//third_party/java_src/gwt:__subpackages__",
     ],
 )
 
 subinclude("//third_party/java_src/gwt:build-macros")
 
-# This target logically corresponds to gwt-dev.jar but doesn't
-# actually create it, for faster builds after a compiler change.
-java_import(
-    name = "dev",
-    jars = [
-        ":gwt-dev-deps.jar",
-        ":gwt-dev-only.jar",
-    ],
-)
-
-# Files needed by the ant tests
-filegroup(
-    name = "ant",
+# The classes in gwt-user.jar that GWT applications can depend on.
+# We want the final output of this NOT to depend on gwt-dev,
+# though it is built with that dependency, because user code can and should
+# depend on this without also touching the compiler and shell internals.
+AugmentedJar(
+    name = "gwt-user-classes-src",
     srcs = glob(
-        [
-            "build.xml",
-            "core/src/**/*",
-            "core/super/**/*",
-            "core/test/**/*",
-        ],
+        ["src/**/*.java"],
         exclude = [
-            "**/*~",
-            "**/#*",
+            "src/com/google/gwt/junit/**/*.java",  # see gwt-testing
+            "**/super/**",
+            "**/RunStyleSelenium.java",
         ],
     ),
+    added_jars = ["//third_party/java_src/gwt/svn/tools:user_jars"],
+    added_roots = [
+        "src",
+        "super",
+    ],
+    # We only need the Java classes so don't wait for the rest of :gwt-dev.
+    build_deps = [
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
+        # Safe to depend on servlet_api_3 because build_deps doesn't leak
+        "//third_party/java_src/gwt/svn/tools:servlet_api_3",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+        "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-classes",
+        "//third_party/java/junit",
+    ],
+    constraints = [],
+    dojarjar = 1,
+    exclude_glob = [
+        "**/package.html",
+        "**/package-info.java",
+        "src/com/google/gwt/junit/**",
+        "super/com/google/gwt/junit/**",
+    ],
+    java_library_name = "gwt-user-classes",
+    output_name = "gwt-user-classes-src.jar",
+    wrap_javalibrary = 0,
 )
 
-# Classes needed by the requestfactory annotation processor
+# This target is used by a java_plugin over in java/gwt/BUILD. It's
+# a pretty simple annotation processor, so in order to keep it from being a
+# build bottleneck, it's simply built from scratch.
 java_library(
-    name = "requestfactory-apt-deps",
-    srcs = [
-        "core/src/com/google/gwt/core/ext/typeinfo/JniConstants.java",
-        "core/src/com/google/gwt/dev/asm/Opcodes.java",
-        "core/src/com/google/gwt/dev/asm/Type.java",
-        "core/src/com/google/gwt/dev/asm/commons/Method.java",
-        "core/src/com/google/gwt/dev/util/Name.java",
-        "core/src/com/google/gwt/dev/util/StringKey.java",
+    name = "requestfactory-apt",
+    srcs = glob([
+        "src/com/google/web/bindery/requestfactory/apt/*.java",
+    ]) + [
+        "src/com/google/web/bindery/requestfactory/shared/JsonRpcProxy.java",
+        "src/com/google/web/bindery/requestfactory/shared/JsonRpcService.java",
+        "src/com/google/web/bindery/requestfactory/shared/Locator.java",
+        "src/com/google/web/bindery/requestfactory/shared/Service.java",
+        "src/com/google/web/bindery/requestfactory/shared/ServiceLocator.java",
+        "src/com/google/web/bindery/requestfactory/shared/ServiceName.java",
+        "src/com/google/web/bindery/requestfactory/shared/SkipInterfaceValidation.java",
+        "src/com/google/web/bindery/requestfactory/shared/ProxyFor.java",
+        "src/com/google/web/bindery/requestfactory/shared/ProxyForName.java",
+        "src/com/google/web/bindery/requestfactory/vm/impl/ClassComparator.java",
+        "src/com/google/web/bindery/requestfactory/vm/impl/Deobfuscator.java",
+        "src/com/google/web/bindery/requestfactory/vm/impl/OperationData.java",
+        "src/com/google/web/bindery/requestfactory/vm/impl/OperationKey.java",
+        "src/com/google/gwt/core/shared/GwtIncompatible.java",
+        "src/com/google/gwt/user/server/Base64Utils.java",
+    ],
+    deps = [
+        "//third_party/java_src/gwt/svn/trunk/dev:requestfactory-apt-deps",
     ],
 )
 
-# Dependencies of gwt-servlet.jar. (Included in server run-time classpaths.)
+# Packages just AutoBeans source into a jar with correct java root.
+AugmentedJar(
+    name = "autobean-classes-src",
+    srcs = glob(["src/com/google/web/bindery/autobean/**/*.java"]),
+    added_root_globs = {"src": ["src/com/google/web/bindery/autobean/**/*.java"]},
+    # We only need the Java classes so don't wait for the rest of :gwt-dev.
+    build_deps = [
+        "//third_party/java_src/gwt:gwt-user-full",
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+        "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-classes",
+    ],
+    constraints = [],
+    dojarjar = 1,
+    exclude_glob = [
+        "**/package.html",
+        "**/package-info.java",
+    ],
+    java_library_name = "autobean-classes",
+    output_name = "autobean-classes-src.jar",
+    wrap_javalibrary = 0,
+)
+
+# Repackages the AutoBeans.gwt.xml file with correct java root by placing it in
+# "java/".
+genrule(
+    name = "autobean-gwt-xml",
+    srcs = [":src/com/google/web/bindery/autobean/AutoBean.gwt.xml"],
+    outs = ["java/com/google/web/bindery/autobean/AutoBean.gwt.xml"],
+    cmd = ("cp $(location :src/com/google/web/bindery/autobean/AutoBean.gwt.xml) " +
+           "$(location java/com/google/web/bindery/autobean/AutoBean.gwt.xml)"),
+)
+
 java_library(
-    name = "servlet-deps",
+    name = "autobean",
+    srcs = [":autobean-classes-src.jar"],
+    constraints = [
+        "gwt",
+        "public",
+    ],
+    gwtxml = "java/com/google/web/bindery/autobean/AutoBean.gwt.xml",
+    deps = [
+        "//third_party/java_src/gwt:gwt-dev",
+        "//third_party/java_src/gwt:gwt-user-full",
+    ],
+)
+
+# Packages just IncrementalBuilder test resource into a jar with correct java root.
+AugmentedJar(
+    name = "incremental-build-system-test-res",
+    srcs = [],
+    added_root_globs = {
+        "test": [
+            "test/com/google/gwt/dev/testdata/incrementalbuildsystem/*",
+        ],
+    },
+    # We only need the Java classes so don't wait for the rest of :gwt-dev.
+    build_deps = [
+        "//third_party/java_src/gwt:gwt-user-full",
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+        "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-classes",
+    ],
+    constraints = [],
+    dojarjar = 1,
+    exclude_glob = [
+        "**/package.html",
+        "**/package-info.java",
+    ],
+    output_name = "incremental-build-system-test-res.jar",
+    wrap_javalibrary = 0,
+)
+
+# See //third_party/java/gwt:regexp
+java_library(
+    name = "jvm_regexp",
+    srcs = glob(
+        ["src/com/google/gwt/regexp/shared/*.java"],
+        exclude = ["**/package-info.java"],
+    ),
+    constraints = ["android"],
+)
+
+# See //third_party/java/gwt:hibernate-validation-support
+java_library(
+    name = "hibernate-validation-support",
     srcs = glob(
         [
-            "core/src/com/google/gwt/**/shared/**/*.java",
-            "core/src/com/google/gwt/dev/asm/**/*.java",
-            "core/src/com/google/gwt/dev/util/Name.java",
-            "core/src/com/google/gwt/dev/util/StringKey.java",
-            "core/src/com/google/gwt/util/tools/Utility.java",
-            "core/src/com/google/gwt/util/tools/shared/**/*.java",
+            "src/org/hibernate/validator/**/*_CustomFieldSerializer.java",
+            "src/org/hibernate/validator/engine/ValidationSupport.java",
+        ],
+        exclude = ["**/package-info.java"],
+    ),
+    deps = [
+        "//third_party/java/hibernate:validator",
+        "//third_party/java/javax_validation",
+        "//third_party/java_src/gwt:gwt-servlet",
+    ],
+)
+
+# The indirection through libgwt-servlet-impl.jar is needed so that Java symbols in the outputs of
+# this package are distributed in one form (through the class jars, as AugmentedJar does)
+# This prevents them appearing them on classpath as both sources and classes, which confuses javac
+# For example see b/3033925
+java_library(
+    name = "gwt-servlet-internal",
+    srcs = [":libgwt-servlet-impl.jar"],
+)
+
+java_library(
+    name = "gwt-servlet-impl",
+    srcs = glob(
+        [
+            "src/com/google/gwt/**/server/**/*.java",
+            "src/com/google/gwt/**/shared/**/*.java",
+            "src/com/google/web/bindery/**/server/**/*.java",
+            "src/com/google/web/bindery/**/shared/**/*.java",
+            "src/com/google/web/bindery/**/vm/**/*.java",
+            "src/com/google/web/bindery/event/shared/**/*.java",
+            "src/javax/validation/**/*_CustomFieldSerializer.java",
+            # Despite the "client" designation, these packages are
+            # also reached by server RPC code:
+            "src/com/google/gwt/canvas/dom/client/*.java",
+            "src/com/google/gwt/debug/client/DebugInfo.java",
+            "src/com/google/gwt/media/dom/client/*.java",
+            "src/com/google/gwt/user/client/rpc/core/**/*CustomFieldSerializer*.java",
+            "src/com/google/gwt/user/client/rpc/core/java/util/*.java",
+            "src/com/google/gwt/user/client/rpc/SerializedTypeViolationException.java",
+            "src/com/google/gwt/user/client/rpc/IncompatibleRemoteServiceException.java",
+            "src/com/google/gwt/user/client/rpc/IsSerializable.java",
+            "src/com/google/gwt/user/client/rpc/GwtTransient.java",
+            "src/com/google/gwt/user/client/rpc/RemoteService.java",
+            "src/com/google/gwt/user/client/rpc/AsyncCallback.java",
+            "src/com/google/gwt/user/client/rpc/RemoteServiceRelativePath.java",
+            "src/com/google/gwt/user/client/rpc/RpcToken.java",
+            "src/com/google/gwt/user/client/rpc/RpcTokenException.java",
+            "src/com/google/gwt/user/client/rpc/RpcTokenExceptionHandler.java",
+            "src/com/google/gwt/user/client/rpc/impl/AbstractSerialization*.java",
+            "src/com/google/gwt/user/client/rpc/RpcRequestBuilder.java",
+            "src/com/google/gwt/user/client/rpc/ServiceDefTarget.java",
+            "src/com/google/gwt/user/client/rpc/InvocationException.java",
+            "src/com/google/gwt/user/client/rpc/CustomFieldSerializer.java",
+            "src/com/google/gwt/user/client/rpc/XsrfProtectedService.java",
+            "src/com/google/gwt/user/client/rpc/XsrfToken.java",
+            "src/com/google/gwt/user/client/rpc/XsrfTokenService.java",
+            "src/com/google/gwt/http/client/RequestBuilder.java",
+            "src/com/google/gwt/http/client/Request.java",
+            "src/com/google/gwt/http/client/Header.java",
+            "src/com/google/gwt/http/client/Response.java",
+            "src/com/google/gwt/http/client/ResponseImpl.java",
+            "src/com/google/gwt/http/client/RequestException.java",
+            "src/com/google/gwt/http/client/RequestPermissionException.java",
+            "src/com/google/gwt/http/client/RequestTimeoutException.java",
+            "src/com/google/gwt/http/client/RequestCallback.java",
+            "src/com/google/gwt/http/client/StringValidator.java",
+            "src/com/google/gwt/http/client/URL.java",
+            "src/com/google/gwt/http/client/UrlBuilder.java",
+            "src/com/google/gwt/json/client/JSONArray.java",
+            "src/com/google/gwt/json/client/JSONBoolean.java",
+            "src/com/google/gwt/json/client/JSONException.java",
+            "src/com/google/gwt/json/client/JSONNull.java",
+            "src/com/google/gwt/json/client/JSONNumber.java",
+            "src/com/google/gwt/json/client/JSONObject.java",
+            "src/com/google/gwt/json/client/JSONString.java",
+            "src/com/google/gwt/json/client/JSONValue.java",
+            "src/com/google/gwt/core/client/impl/SerializableThrowable.java",
+            "src/com/google/gwt/core/client/JsonUtils.java",
+            "src/com/google/gwt/core/client/impl/WeakMapping.java",
+            "src/com/google/gwt/xhr/client/ReadyStateChangeHandler.java",
+            "src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+            "src/com/google/gwt/user/client/Timer.java",
+            "src/com/google/gwt/user/client/rpc/SerializationException.java",
+            "src/com/google/gwt/user/client/rpc/SerializationStreamReader.java",
+            "src/com/google/gwt/user/client/rpc/SerializationStreamWriter.java",
+            "src/com/google/gwt/rpc/client/ast/*.java",
+            "src/com/google/gwt/rpc/client/impl/CommandSerializationStreamWriterBase.java",
+            "src/com/google/gwt/rpc/client/impl/CommandClientSerializationStreamReader.java",
+            "src/com/google/gwt/rpc/client/impl/EscapeUtil.java",
+            "src/com/google/gwt/user/client/rpc/impl/ClientSerializationStreamWriter.java",
+            "src/com/google/gwt/user/client/rpc/impl/Serializer.java",
+            "src/com/google/gwt/rpc/client/impl/HasValuesCommandSink.java",
+            "src/com/google/gwt/rpc/client/impl/SimplePayloadSink.java",
+            "src/com/google/gwt/rpc/client/impl/RemoteException.java",
+            # ...which need:
+            "src/com/google/gwt/core/client/GWT.java",
+            "src/com/google/gwt/core/client/JavaScriptException.java",
+            "src/com/google/gwt/core/client/JavaScriptObject.java",
+            "src/com/google/gwt/core/client/JsArray.java",
+            "src/com/google/gwt/core/client/JsDate.java",
+            "src/com/google/gwt/core/client/Duration.java",
+            "src/com/google/gwt/core/client/Scheduler.java",
+            "src/com/google/gwt/user/client/Window.java",
+            "src/com/google/gwt/user/client/Window*.java",
+            "src/com/google/gwt/user/client/BaseListenerWrapper.java",
+            "src/com/google/gwt/user/client/Element.java",
+            "src/com/google/gwt/user/client/Event.java",
+            "src/com/google/gwt/user/client/EventListener.java",
+            "src/com/google/gwt/user/client/EventPreview.java",
+            "src/com/google/gwt/user/client/NativePreviewEvent.java",
+            "src/com/google/gwt/user/client/History.java",
+            "src/com/google/gwt/user/client/impl/HistoryImpl.java",
+            "src/com/google/gwt/user/client/impl/DomImpl.java",
+            "src/com/google/gwt/user/client/HistoryListener.java",
+            "src/com/google/gwt/user/client/Cookies.java",
+            "src/com/google/gwt/user/client/ui/AcceptsOneWidget.java",
+            "src/com/google/gwt/user/client/ui/Widget.java",
+            "src/com/google/gwt/user/client/ui/IsWidget.java",
+            "src/com/google/gwt/user/client/ui/HasOneWidget.java",
+            "src/com/google/gwt/user/client/ui/HasVisibility.java",
+            "src/com/google/gwt/user/client/ui/HasWidgets.java",
+            "src/com/google/gwt/user/client/ui/HasText.java",
+            "src/com/google/gwt/user/client/ui/AbsolutePanel.java",
+            "src/com/google/gwt/user/client/ui/ComplexPanel.java",
+            "src/com/google/gwt/user/client/ui/IndexedPanel.java",
+            "src/com/google/gwt/user/client/ui/InsertPanel.java",
+            "src/com/google/gwt/user/client/ui/Panel.java",
+            "src/com/google/gwt/user/client/ui/AttachDetachException.java",
+            "src/com/google/gwt/user/client/ui/UIObject.java",
+            "src/com/google/gwt/user/client/ui/PotentialElement.java",
+            "src/com/google/gwt/user/client/ui/RootPanel.java",
+            "src/com/google/gwt/user/client/ui/WidgetCollection.java",
+            "src/com/google/gwt/event/dom/client/HasNativeEvent.java",
+            "src/com/google/gwt/event/dom/client/PrivateMap.java",
+            "src/com/google/gwt/event/dom/client/DomEvent.java",
+            "src/com/google/gwt/event/dom/client/KeyEvent.java",
+            "src/com/google/gwt/event/dom/client/KeyCodeEvent.java",
+            "src/com/google/gwt/event/dom/client/KeyCodes.java",
+            "src/com/google/gwt/event/dom/client/KeyUpEvent.java",
+            "src/com/google/gwt/event/dom/client/HasKeyUpHandlers.java",
+            "src/com/google/gwt/event/dom/client/KeyUpHandler.java",
+            "src/com/google/gwt/user/client/DOM.java",
+            "src/com/google/gwt/user/client/impl/DOMImpl.java",
+            "src/com/google/gwt/user/client/impl/WindowImpl.java",
+            "src/com/google/gwt/dom/client/*.java",
+            "src/com/google/gwt/core/client/impl/Impl.java",
+            "src/com/google/gwt/core/client/impl/Disposable.java",
+            "src/com/google/gwt/core/client/impl/UnloadSupport.java",
+            "src/com/google/gwt/core/client/impl/StackTraceCreator.java",
+            "src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+            "src/com/google/gwt/core/client/impl/AsyncFragmentLoader.java",
+            "src/com/google/gwt/core/client/impl/OnSuccessExecutor.java",
+            "src/com/google/gwt/core/client/impl/SynchronousOnSuccessExecutor.java",
+            "src/com/google/gwt/core/client/JsArrayInteger.java",
+            "src/com/google/gwt/core/client/JsArrayString.java",
+            "src/com/google/gwt/core/client/RunAsyncCallback.java",
+            "src/com/google/gwt/i18n/client/constants/*.java",
+            "src/com/google/gwt/i18n/client/impl/cldr/*.java",
+            "src/com/google/gwt/i18n/client/impl/plurals/*.java",
+            "src/com/google/gwt/i18n/client/impl/*.java",
+            "src/com/google/gwt/i18n/client/*.java",
+            "src/com/google/gwt/i18n/rebind/keygen/*.java",
+            # And it's also sensible to want for serialization:
+            "src/com/google/gwt/user/client/ui/SuggestOracle.java",
         ],
         exclude = [
             "**/junit/**",
             "**/super/**",
             "**/package-info.java",
-        ],
-    ),
-    deps = [
-        # GWTBridge & UnsafeNativeLong
-        ":compiler.standalone.super",
-    ],
-)
-
-# Builds gwt-dev-deps.jar, which contains third-party deps for gwt-dev.jar.
-# (This is a separate jar for better build caching.)
-AugmentedJar(
-    name = "gwt-dev-deps",
-    srcs = [],
-    added_jars = [
-        "//third_party/java_src/gwt/legacy:libdev.jar",
-        "//third_party/java_src/gwt/legacy:dev-resources.jar",
-        "//third_party/java_src/gwt/svn/tools:dev_jars",
-        "//third_party/java_src/gwt/svn/tools:legacy_dev_jars",
-    ],
-    constraints = [],
-    dojarjar = 1,
-    wrap_javalibrary = 0,
-)
-
-# Builds gwt-dev-only.jar, which contains the GWT compiler and tools.
-# Relies on gwt-dev-deps.jar being in the classpath.
-AugmentedJar(
-    name = "gwt-dev-only",
-    srcs = [],
-    added_jars = [
-        ":libgwt-dev-classes.jar",
-        ":gwt-dev-resources.jar",
-        ":libcompiler.standalone.jar",
-        ":libcompiler.standalone.super.jar",
-        ":super-resources.jar",
-    ],
-    constraints = [],
-    dojarjar = 1,
-    resources = ["//tools/gwt:gwt_google_defaults"],
-    wrap_javalibrary = 0,
-)
-
-# All the dev classes before jarjaring.
-# This should only be used in code that will itself be jarjar-ed
-# or in internal tests.
-# (Exposed because it helps other targets build faster than
-# if they waited for gwt-dev to be jarjar-ed.)
-# TODO: split up.
-java_library(
-    name = "gwt-dev-classes",
-    srcs = glob(
-        ["core/src/**/*.java"],
-        exclude = ["**/package-info.java"],
-    ),
-    # Temporary workaround to ensure Java 6 compatible class files after Java
-    # 7 upgrade.
-    # TODO: only the requestfactory client should be required to be Android
-    # compatible.
-    constraints = ["android"],
-    deps = [
-        ":compiler.standalone.super",
-        "//third_party/java_src/gwt/svn/tools:dev_deps",
-        # Safe to depend on servlet_api_3 because nobody directly depends on gwt-dev-classes
-        "//third_party/java_src/gwt/svn/tools:servlet_api_3",
-    ],
-)
-
-# Resource files in core/src.
-# (Includes .java files.)
-Zip(
-    name = "gwt-dev-resources.jar",
-    srcs = glob(
-        [
-            "core/src/**/*.java",
-            "core/src/**/*.html",
-            "core/src/**/*.css",
-            "core/src/**/*.js",
-            "core/src/**/*.png",
-            "core/src/**/*.gif",
-            "core/src/**/*.keystore",
-            "core/src/**/*.proto",
-            "core/src/**/*.properties",
-            "core/src/**/*.xsd",
-            "core/src/**/*.txt",
-            "core/src/com/google/gwt/dev/js/globals/globals.html",  # for testing
-        ],
-        exclude = [
-            "**/package-info.java",
-            "README.txt",
-        ],
-    ),
-    root = "core/src",
-)
-
-java_library(
-    name = "compiler.standalone",
-    srcs = glob(
-        [
-            "core/src/com/google/gwt/core/ext/**/*.java",
-            "core/src/com/google/gwt/core/linker/**/*.java",
-            "core/src/com/google/gwt/dev/About.java",
-            "core/src/com/google/gwt/dev/CompilerContext.java",
-            "core/src/com/google/gwt/dev/CompileTaskOptions.java",
-            "core/src/com/google/gwt/dev/CompileTaskOptionsImpl.java",
-            "core/src/com/google/gwt/dev/GwtVersion.java",
-            "core/src/com/google/gwt/dev/Permutation.java",
-            "core/src/com/google/gwt/dev/PrecompileTaskOptions.java",
-            "core/src/com/google/gwt/dev/PrecompileTaskOptionsImpl.java",
-            "core/src/com/google/gwt/dev/PrecompilationResult.java",
-            "core/src/com/google/gwt/dev/asm/**/*.java",
-            "core/src/com/google/gwt/dev/cfg/**/*.java",
-            "core/src/com/google/gwt/dev/javac/**/*.java",
-            "core/src/com/google/gwt/dev/jdt/**/*.java",
-            "core/src/com/google/gwt/dev/jjs/**/*.java",
-            "core/src/com/google/gwt/dev/js/**/*.java",
-            "core/src/com/google/gwt/dev/json/*.java",
-            "core/src/com/google/gwt/dev/resource/**/*.java",
-            "core/src/com/google/gwt/dev/util/**/*.java",
-            "core/src/com/google/gwt/dev/shell/DevModeSession.java",
-            "core/src/com/google/gwt/soyc/**/*.java",
-            "core/src/com/google/gwt/util/**/*.java",
-            "core/src/org/eclipse/jdt/**/*.java",
-        ],
-        exclude = [
-            "**/testing/**",
+            "src/com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor.java",
         ],
     ),
     javacopts = [
-        "-encoding utf8",
         "-source 5",
         "-target 5",
     ],
     deps = [
-        ":compiler.standalone.super",
-        "//third_party/java_src/gwt/svn/tools:compiler_deps",
+        "//third_party/java/json",
+        "//third_party/java/servlet/servlet_api",
+        "//third_party/java_src/gwt/svn/tools:servlet_deps",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+        "//third_party/java_src/gwt/svn/trunk/dev:servlet-deps",
     ],
 )
 
-# This is a bootstrap library; it will later be stripped out of the classpath
-# chain, since the "real" versions are super-source not class files.
-# TODO(scottb): this thing may be completely obsolete.
-java_library(
-    name = "compiler.standalone.super",
-    srcs = glob(
-        ["core/super/**/*.java"],
-        exclude = [
-            "core/super/com/google/gwt/dev/jjs/intrinsic/**",
-            "**/package-info.java",
-        ],
-    ),
-    constraints = ["android"],
-    javacopts = [
-        "-encoding utf8",
-        "-source 5",
-        "-target 5",
-    ],
-)
-
-# Resource files in core/super (including Java source)
-Zip(
-    name = "super-resources.jar",
-    srcs = glob(
-        [
-            "core/super/**/*.java",
-            "core/super/**/*.xml",
-        ],
-        exclude = ["**/package-info.java"],
-    ),
-    root = "core/super",
-)
-
-# A minimal library for annotations not likely to otherwise need gwt-user.jar
-# (so i18n annotations are out, they'd need i18n classes and interfaces, but
-# @GwtScriptOnly is in).  The test is that this target is for POJO Java work
-# that happens to want a bit of annotations to hint GWT what to do.
+# The minimum requirements for GWT-RPC serializable object definition.
+# Includes support for data transfer objects (with default or custom field serialization)
+# but not server interfaces, services, client code, etc.
 #
-# CAUTION: Most internal Google code ends up depending on this, via
-#  //j/c/g/common/collect:collect-gwt.  You really don't want it to be big!
+# CAUTION: most of google ends up depending on this, via common/base:base-gwt
+# and common/collect:collect-gwt.  You really don't want it to be big!
 java_library(
-    name = "interop-annotations",
+    name = "gwt-dto-serializers",
     srcs = [
-        "core/super/com/google/gwt/core/client/GwtScriptOnly.java",
-        "core/super/com/google/gwt/core/client/UnsafeNativeLong.java",
-    ],
+        "src/com/google/gwt/user/client/rpc/CustomFieldSerializer.java",
+        "src/com/google/gwt/user/client/rpc/GwtTransient.java",
+        "src/com/google/gwt/user/client/rpc/IsSerializable.java",
+        "src/com/google/gwt/user/client/rpc/SerializationException.java",
+        "src/com/google/gwt/user/client/rpc/SerializationStreamReader.java",
+        "src/com/google/gwt/user/client/rpc/SerializationStreamWriter.java",
+        "src/com/google/gwt/user/client/rpc/core/java/util/Collections.java",
+    ] + glob([
+        "src/com/google/gwt/user/client/rpc/core/java/util/*_CustomFieldSerializer*.java",
+    ]),
     constraints = [
-        "android",
         "gwt",
         "public",
     ],
-    gwtxml = ":interop-annotations-gwtxml",
+    gwtxml = "Gwt-dto-serializers.gwt.xml",
     javacopts = [
-        "-encoding utf8",
         "-source 5",
         "-target 5",
     ],
 )
 
-# (This is a genrule so that it won't be mirrored to svn and git.)
-genrule(
-    name = "interop-annotations-gwtxml",
-    outs = ["Gwt-dev-interop-annotations.gwt.xml"],
-    cmd = "$(ECHO) '<module><source path=\"client\" /></module>' > $(@)",
-)
-
-# All test code in dev.
-# TODO: split up.
+# Creates gwt-testing.jar, which contains GWTTestCase and its infrastructure.
+# (The jar depends on gwt-user.jar but the dependency isn't declared.
+# Instead we assume it will be added by a wrapper rule.)
 AugmentedJar(
-    name = "dev-test-code",
-    srcs = glob([
-        "core/test/**/*.java",
-    ]),
-    added_jars = [
-        # for soycTest
-        "//third_party/java_src/gwt/svn/trunk/samples:hello-src.jar",
-    ],
-    added_roots = [
-        "core/test",
-    ],
+    name = "gwt-testing",
+    srcs = glob(
+        ["src/com/google/gwt/junit/**/*.java"],
+        exclude = [
+            "**/super/**",
+            "**/RunStyleSelenium.java",
+        ],
+    ),
+    added_root_globs = {
+        "src": ["src/com/google/gwt/junit/**"],
+        "super": ["super/com/google/gwt/junit/**"],
+    },
     build_deps = [
-        ":gwt-dev-classes",
-        ":compiler.standalone.super",
-        "//third_party/java_src/gwt/svn/tools:dev_deps",  # for pre-jarjar imports
-    ],
-    constraints = [],
-    dojarjar = 1,
-    export_deps = [
-        ":dev",  # for the post-jarjar names
-    ],
-    deps = [
+        ":gwt-user-classes-src",
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
+        # Safe to depend on servlet_api_3 because build_deps doesn't leak
+        "//third_party/java_src/gwt/svn/tools:servlet_api_3",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+        "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-classes",
         "//third_party/java/junit",
     ],
+    dojarjar = 1,
+    exclude_glob = [
+        "**/package.html",
+        "**/package-info.java",
+        "**/RunStyleSelenium.java",
+    ],
 )
 
-gwt_test(
-    name = "tests_dev.IncrementalBuilderTest",
-    data = [
-        "//third_party/java_src/gwt:gwt-dev-full.jar",
-        "//third_party/java_src/gwt:gwt-user-full",
-        "//third_party/java_src/gwt/svn/trunk/user:incremental-build-system-test-res.jar",
+# === TESTS ===
+
+AugmentedJar(
+    name = "user-test-code",
+    srcs = glob(
+        [
+            "test/**/*.java",
+            "test_i18n_bar/**/*.java",
+        ],
+        exclude = [
+            "test/**/super/**",
+            "**/RunStyleSeleniumTest.java",
+        ],
+    ),
+    added_roots = [
+        "test",
+        "test-super",
+        "test_i18n_bar",
     ],
-    jvm_flags = [
-        "-Dgwt.cp=third_party/java_src/gwt/svn/trunk/user/incremental-build-system-test-res.jar\;third_party/java_src/gwt/gwt-dev-full.jar\;third_party/java_src/gwt/gwt-user-full.jar",
-        "-ea",
+    build_deps = [
+        ":gwt-user-classes",
+        ":gwt-user-classes_jardeps",
+        ":gwt-testing",
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
+        # Safe to depend on servlet_api_3 because build_deps doesn't leak
+        "//third_party/java_src/gwt/svn/tools:servlet_api_3",
+        "//third_party/java_src/gwt/svn/trunk/dev",
+        # for pre-jarjar imports
+        "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-classes",
     ],
-    main_class = "com.google.gwt.dev.IncrementalBuilderTest",
+    constraints = [
+        "gwt",
+        "public",
+    ],
+    dojarjar = 1,
+    export_deps = [
+        "//third_party/java_src/gwt:gwt-dev",  # for the post-jarjar names
+        "//third_party/java_src/gwt:gwt",
+    ],
+    # visibility = ["//third_party/java_src/gwt:friends"],
     deps = [
-        ":dev-test-code",
-        "//third_party/java_src/gwt/svn/trunk/user:incremental-build-system-test-res",
+        "//third_party/java/jsr305_annotations",
+        "//third_party/java/junit",
+        "//third_party/java_src/gwt/svn/tools:testtool_deps",
+        "//third_party/java_src/gwt/svn/tools:validator_deps",
+        "//third_party/java_src/gwt/svn/tools:validator_tck_deps",
+        "//third_party/java_src/gwt/svn/trunk/dev:dev-test-code",
     ],
 )
 
-# The "dev" directory is tested by loose tests.  Some of them fail because of
-# classpath expectations that are invalid in Google's distributed build
-# environment.
-GWT_DEV_TESTS = glob(
-    [
-        "core/test/**/*Test.java",
-    ],
-    # TODO(fabbott): These fail due to classpath differences,
-    #    because the distributed build's classpath is jar'ed not loose
-    exclude = [
-        "core/test/**/ClassPathEntryTest.java",
-        "core/test/**/ResourceOracleImplTest.java",
-    ] +
-    # Handled separately because it needs a custom test target with
-    # custom classpath.
-    [
-        "core/test/**/IncrementalBuilderTest.java",
-    ],
+filegroup(
+    name = "browser_suite_files",
+    srcs = glob(
+        ["test/**/*Suite.java"],
+        exclude = [
+            "test/**/*JreSuite.java",
+        ],
+    ),
 )
 
-GwtTestSuites(
-    name = "tests",
-    jvm_flags = ["-ea"],
-    srcjars = [":dev-test-code"],
-    tests = GWT_DEV_TESTS,
+filegroup(
+    name = "nobrowser_suite_files",
+    srcs = glob(["test/**/*JreSuite.java"]),
+)
+
+filegroup(
+    name = "emma_suite_files",
+    srcs = glob(
+        ["test/**/*Suite.java"],
+        exclude = [
+            "test/**/CompilerSuite.java",
+            "test/**/*JreSuite.java",
+        ],
+    ),
+)
+
+# === ant and checkstyle ===
+
+# Files to be excluded from ant tests.
+ANT_EXCLUDES = [
+    "**/.git/**",
+    "**/.svn/**",
+    # in case eclipse output is mixed into source
+    "**/war/WEB-INF/classes/**",
+    "**/webapp/WEB-INF/classes/**",
+    "**/bin/**",
+    # emacs backup and autosave files
+    "**/*~",
+    "**/#*",
+    "test_i18n_dollar/**",
+]
+
+filegroup(
+    name = "checkstyle_files",
+    srcs = glob(
+        ["*/com/google/gwt/**/*.java"],
+        exclude = ANT_EXCLUDES,
+        exclude_directories = 1,
+    ),
+)
+
+filegroup(
+    name = "checkapi_files",
+    srcs = glob(
+        [
+            "**/*.java",
+            "**/gwt*userApi.conf",
+        ],
+        exclude = ANT_EXCLUDES,
+        exclude_directories = 1,
+    ),
+)
+
+filegroup(
+    name = "ant_files",
+    srcs = glob(
+        [
+            "build.xml",
+            "javadoc/**/*",
+            "src/**/*",
+            "style/**/*",
+            "super/**/*",
+            "test/**/*",
+            "test_i18n_bar/**/*",
+            "test-super/**/*",
+        ],
+        exclude = ANT_EXCLUDES,
+    ),
 )

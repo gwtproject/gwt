@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5f76b98_6e9caf5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-04-23T22:09:43Z",
+      "side": 1,
+      "message": "That line should be in the footer. Actually, you can, and probably should, keep the same change id.",
+      "revId": "104050e7ff3b9dd4605b1df2fc88bc6f1bbf301a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

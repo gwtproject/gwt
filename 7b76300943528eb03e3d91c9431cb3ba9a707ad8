@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85fd0775_5bfecf1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JsSourceMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-23T00:36:07Z",
+      "side": 1,
+      "message": "This is extremely inefficient implementation for basic Map lookup operations. Is this what you really want or would you like to use ForwardingMap instead?",
+      "revId": "7b76300943528eb03e3d91c9431cb3ba9a707ad8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

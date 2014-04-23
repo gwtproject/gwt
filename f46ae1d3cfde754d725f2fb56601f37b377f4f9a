@@ -65,6 +65,24 @@
     },
     {
       "key": {
+        "uuid": "85fd0775_2dc5861c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:17:39Z",
+      "side": 1,
+      "message": "I don\u0027t believe that\u0027s true. You\u0027d still need to visit every JMethodCall or JsniMethodRef to see of some code is directly calling that method. \n\nBasically, you need to JVisitor collect all @GwtSpecialize methods invoked via JMethodCall/JsniMethodRef over the entire program, and then remove any targets of @GwtSpecialize that are not in that collection.  You\u0027d also miss stuff where a @GwtSpecialize method is calling other stuff, and retaining it.\n\nDo you prune special methodA, but methodA was the only method calling regular methodB, and so now you don\u0027t prune B.\n\nI think leaving it like this for now is fine. What\u0027s here is really just the identical state that Pruner\u0027s final pass has.",
+      "parentUuid": "19c7c3d6_45702aac",
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19c7c3d6_85d22245",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 3
@@ -82,6 +100,24 @@
         "endLine": 3372,
         "endChar": 62
       },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85fd0775_0dbc02f5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c7c3d6_85d22245",
       "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -111,6 +147,24 @@
     },
     {
       "key": {
+        "uuid": "85fd0775_ad933645",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c7c3d6_c5dc1a59",
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19c7c3d6_e5d79633",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
         "patchSetId": 3
@@ -134,6 +188,24 @@
     },
     {
       "key": {
+        "uuid": "85fd0775_4d8e0a20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c7c3d6_e5d79633",
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19c7c3d6_6573a6ba",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 3
@@ -151,6 +223,24 @@
         "endLine": 1018,
         "endChar": 37
       },
+      "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85fd0775_2debc6c6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-23T21:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c7c3d6_6573a6ba",
       "revId": "f46ae1d3cfde754d725f2fb56601f37b377f4f9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85fd0775_3bf5cb68",
+        "filename": "user/src/com/google/gwt/core/client/impl/StackTraceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-23T00:26:53Z",
+      "side": 1,
+      "message": "This code conceptually belongs to CollectorChrome.\n\nI don\u0027t know if it is worth the trouble to move it though.",
+      "range": {
+        "startLine": 438,
+        "startChar": 1,
+        "endLine": 441,
+        "endChar": 5
+      },
+      "revId": "36b6cc1aa58a8218f21b0bdc09fb0b3ad719f50b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

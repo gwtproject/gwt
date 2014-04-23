@@ -34,6 +34,24 @@
       "revId": "7b76300943528eb03e3d91c9431cb3ba9a707ad8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85fd0775_6634d601",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JsSourceMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-23T00:52:10Z",
+      "side": 1,
+      "message": "Thanks, I\u0027m going to try making it not implement Map.",
+      "parentUuid": "85fd0775_7b10f3b1",
+      "revId": "7b76300943528eb03e3d91c9431cb3ba9a707ad8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

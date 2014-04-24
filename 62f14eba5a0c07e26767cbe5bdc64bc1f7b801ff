@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d01310_a13fbed4",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-24T01:31:52Z",
+      "side": 1,
+      "message": "nit: \"Thrown is not set\" instead?",
+      "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d01310_e195465f",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-24T01:31:52Z",
+      "side": 1,
+      "message": "This is very bad. It looks like Chrome no longer has useful information inside the error message :(",
+      "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d01310_214c8e86",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-24T01:31:52Z",
+      "side": 1,
+      "message": "Perhaps just assertFalse(\"Empty description\", e.getDescription().isEmpty())?",
+      "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

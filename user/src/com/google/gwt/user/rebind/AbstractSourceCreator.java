@@ -22,8 +22,7 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.shared.impl.StringCase;
 
 /**
- * Super class for AbstractMethod and AbstractClass creators. The primary
- * purpose is to pull up helper methods for logging and printing.
+ * Super class for source creators with helper methods for logging and printing.
  */
 public class AbstractSourceCreator {
   
@@ -33,7 +32,7 @@ public class AbstractSourceCreator {
    * @param message
    * @return treelogger
    */
-  protected static TreeLogger branch(TreeLogger logger, String message) {
+  public static TreeLogger branch(TreeLogger logger, String message) {
     return logger.branch(TreeLogger.TRACE, message, null);
   }
 
@@ -43,7 +42,7 @@ public class AbstractSourceCreator {
    * @param msg msg
    * @return the exception to throw
    */
-  protected static UnableToCompleteException error(TreeLogger logger, String msg) {
+  public static UnableToCompleteException error(TreeLogger logger, String msg) {
     logger.log(TreeLogger.ERROR, msg, null);
     return new UnableToCompleteException();
   }
@@ -54,7 +53,7 @@ public class AbstractSourceCreator {
    * @param msg msg
    * @return the exception to throw
    */
-  protected static UnableToCompleteException error(TreeLogger logger, String msg, Throwable cause) {
+  public static UnableToCompleteException error(TreeLogger logger, String msg, Throwable cause) {
     logger.log(TreeLogger.ERROR, msg, cause);
     return new UnableToCompleteException();
   }
@@ -65,7 +64,7 @@ public class AbstractSourceCreator {
    * @param e throwable
    * @return th exception to throw
    */
-  protected static UnableToCompleteException error(TreeLogger logger,
+  public static UnableToCompleteException error(TreeLogger logger,
       Throwable e) {
     logger.log(TreeLogger.ERROR, e.getMessage(), e);
     return new UnableToCompleteException();
@@ -78,7 +77,7 @@ public class AbstractSourceCreator {
    * @param type
    * @return the string representation
    */
-  protected static String getJavaObjectTypeFor(JPrimitiveType type) {
+  public static String getJavaObjectTypeFor(JPrimitiveType type) {
     if (type == JPrimitiveType.INT) {
       return "Integer";
     } else {
@@ -94,7 +93,7 @@ public class AbstractSourceCreator {
    * @param wrapMe String to wrap
    * @return wrapped String
    */
-  protected static String wrap(String wrapMe) {
+  public static String wrap(String wrapMe) {
     return "\"" + Generator.escape(wrapMe) + "\"";
   }
 }

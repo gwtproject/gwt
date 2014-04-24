@@ -16,6 +16,69 @@
       "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85b427df_83fd64d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-24T17:35:48Z",
+      "side": 1,
+      "message": "maybe extract this body into a private method and call it from CreateStaticImplsVisitor instead",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 37
+      },
+      "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85b427df_432a6c9f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-24T17:35:48Z",
+      "side": 1,
+      "message": "Make into a remove specialization pass as we discussed offline so that no special handling is needed here.",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 5
+      },
+      "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85b427df_e390e087",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-24T17:35:48Z",
+      "side": 1,
+      "message": "Add a TODO(): this should probably be moved to GwtAstBuilder.",
+      "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

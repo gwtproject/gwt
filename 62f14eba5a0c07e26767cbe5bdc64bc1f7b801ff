@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "65d01310_a1e09ee2",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-24T01:39:05Z",
+      "side": 1,
+      "message": "It reads better this way. assertTrue() now calls assertEquals, so the error turns out something like this:\n\ne.isThrownSet() for a TypeError: expected true was false",
+      "parentUuid": "65d01310_a13fbed4",
+      "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65d01310_e195465f",
         "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-04-24T01:31:52Z",
       "side": 1,
       "message": "Perhaps just assertFalse(\"Empty description\", e.getDescription().isEmpty())?",
+      "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d01310_21148e17",
+        "filename": "user/test/com/google/gwt/core/client/JavaScriptExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-04-24T01:39:05Z",
+      "side": 1,
+      "message": "It seems about the same.",
+      "parentUuid": "65d01310_214c8e86",
       "revId": "62f14eba5a0c07e26767cbe5bdc64bc1f7b801ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

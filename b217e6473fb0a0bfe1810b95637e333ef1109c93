@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2581bb17_368ea61f",
+        "filename": "user/test/com/google/gwt/http/client/URLTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-04-25T14:57:17Z",
+      "side": 1,
+      "message": "nit: rename exception to ignored",
+      "range": {
+        "startLine": 147,
+        "startChar": 33,
+        "endLine": 147,
+        "endChar": 35
+      },
+      "revId": "b217e6473fb0a0bfe1810b95637e333ef1109c93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

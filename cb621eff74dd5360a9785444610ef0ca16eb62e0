@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2581bb17_27759a4f",
+        "filename": "dev/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-04-25T00:18:18Z",
+      "side": 1,
+      "message": "wrap to next line",
+      "range": {
+        "startLine": 12,
+        "startChar": 86,
+        "endLine": 12,
+        "endChar": 124
+      },
+      "revId": "cb621eff74dd5360a9785444610ef0ca16eb62e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,23 @@
       "revId": "d45bf3cf1732df9618d6f5c7aaf4cd6f02f26720",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45086fab_a8e09b34",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-25T21:42:08Z",
+      "side": 1,
+      "message": "Can we do this as a global pass in the normalizations?",
+      "revId": "d45bf3cf1732df9618d6f5c7aaf4cd6f02f26720",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

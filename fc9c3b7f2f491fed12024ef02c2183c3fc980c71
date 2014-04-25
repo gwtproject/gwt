@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "c5e29f1a_ac2e63af",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-25T21:42:01Z",
+      "side": 1,
+      "message": "ahh, I see. So then isn\u0027t it the case now that the target method might have not even been statifed.  FindStaticDispatchSitesVisitor only chooses to statify method that are involved in a devirtualization.",
+      "parentUuid": "05767712_899e5ddc",
+      "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85b427df_432a6c9f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 6

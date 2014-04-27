@@ -86,8 +86,6 @@ public class JsInterfaceTest extends GWTTestCase {
   }
 
   static class MyClassImpl extends JsInterfaceTest.MyClass.Prototype {
-    public static boolean calledFromJsHostPageWindow = false;
-    public static boolean calledFromJsModuleWindow = false;
 
     MyClassImpl() {
       x(42).setY(7);
@@ -96,17 +94,35 @@ public class JsInterfaceTest extends GWTTestCase {
     public int sum(int bias) {
       return super.sum(bias) + 100;
     }
+  }
+
+  @JsInterface
+  interface JsInterfaceExporter {
+  }
+
+  static class MyClassImpl2 implements JsInterfaceExporter {
+    public static boolean calledFromJsHostPageWindow = false;
+    public static boolean calledFromJsModuleWindow = false;
 
     @JsExport("$wnd.exportedFromJava")
     public static void callMe() {
-      calledFromJsHostPageWindow = true;
-    }
+          calledFromJsHostPageWindow = true;
+      }
 
     @JsExport("exportedFromJava2")
     public static void callMe2() {
-      calledFromJsModuleWindow = true;
-    }
+          calledFromJsModuleWindow = true;
+      }
   }
+
+    static class MyClassImpl3 implements JsInterfaceExporter {
+      public static boolean calledFromJsModuleWindow = false;
+
+      @JsExport("$wnd.MyClassImpl3")
+      public MyClassImpl3() {
+          calledFromJsModuleWindow = true;
+      }
+    }
 
   @JsInterface(prototype = "HTMLElement")
   interface HTMLElement {
@@ -164,14 +180,6 @@ public class JsInterfaceTest extends GWTTestCase {
   public void testSubClassWithSuperCalls() {
     MyClassImpl mc = new MyClassImpl();
     assertEquals(150, mc.sum(1));
-
-    // Test exported method can be called from JS in host page
-    ScriptInjector.fromString("exportedFromJava();").setWindow(ScriptInjector.TOP_WINDOW).inject();
-    assertTrue(MyClassImpl.calledFromJsHostPageWindow);
-
-    // Test exported method can be called from JS in module window
-    ScriptInjector.fromString("exportedFromJava2();").inject();
-    assertTrue(MyClassImpl.calledFromJsModuleWindow);
   }
 
   public void testJsProperties() {
@@ -185,11 +193,15 @@ public class JsInterfaceTest extends GWTTestCase {
   public void testJsExports() {
     // Test exported method can be called from JS in host page
     ScriptInjector.fromString("exportedFromJava();").setWindow(ScriptInjector.TOP_WINDOW).inject();
-    assertTrue(MyClassImpl.calledFromJsHostPageWindow);
+    assertTrue(MyClassImpl2.calledFromJsHostPageWindow);
 
     // Test exported method can be called from JS in module window
     ScriptInjector.fromString("exportedFromJava2();").inject();
-    assertTrue(MyClassImpl.calledFromJsModuleWindow);
+    assertTrue(MyClassImpl2.calledFromJsModuleWindow);
+
+    // Test exported constructor called from JS in module window
+    ScriptInjector.fromString("new $wnd.MyClassImpl3();").inject();
+    assertTrue(MyClassImpl3.calledFromJsModuleWindow);
   }
 
   public void testCasts() {

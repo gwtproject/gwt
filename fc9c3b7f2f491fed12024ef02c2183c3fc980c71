@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "8508a7da_a0a63eaf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-04-28T23:22:52Z",
+      "side": 1,
+      "message": "Eventually our target method will be finalized, this is actually a requirement of the specialize spec (target must be monomorphic) During one of the compile loops, the target method, say, AbstractHashMap.putStringValue, will be a candidate for being made static. At that point, it will be in the toBeMadeStatic as well.\n\nDo you think we should allow the specialized method to be final (monomorphic), but permit the target method to be polymorphic?",
+      "parentUuid": "c5e29f1a_ac2e63af",
+      "revId": "fc9c3b7f2f491fed12024ef02c2183c3fc980c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85b427df_432a6c9f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 6

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c557ffb2_586eadd0",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-28T20:51:00Z",
+      "side": 1,
+      "message": "nit: a query string -\u003e a URL query string",
+      "parentUuid": "c56fff39_c4675eef",
+      "range": {
+        "startLine": 312,
+        "startChar": 17,
+        "endLine": 312,
+        "endChar": 18
+      },
+      "revId": "286a652b31ff9aae6bf00c82375499d34d90bfb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5f7a345_861f904d",
         "filename": "user/src/com/google/gwt/user/client/Window.java",
         "patchSetId": 4
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Actually, we are leaving the original (unescaped) value in the values list (see the WindowTest). I that what you meant?",
       "parentUuid": "e5f7a345_861f904d",
+      "range": {
+        "startLine": 313,
+        "startChar": 10,
+        "endLine": 313,
+        "endChar": 11
+      },
+      "revId": "286a652b31ff9aae6bf00c82375499d34d90bfb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c557ffb2_983f45a7",
+        "filename": "user/src/com/google/gwt/user/client/Window.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-28T20:51:00Z",
+      "side": 1,
+      "message": "what I meant was, try decodeUriComponent first and if it fails use unescape. Similar to here:\n\n http://stackoverflow.com/a/8267593\n\nNot sure if it is the best idea but just an option to think about.",
+      "parentUuid": "a56ccb48_83eabe11",
       "range": {
         "startLine": 313,
         "startChar": 10,

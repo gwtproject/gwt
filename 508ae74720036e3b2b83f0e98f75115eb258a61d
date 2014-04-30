@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4af15c4f_af08258b",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsReportGenerationVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-30T19:47:53Z",
+      "side": 1,
+      "message": "isLoop does not seem to be a good name since it returns true for JsSwitch.\n\nAlso how do if stmts end up with the condition in the source map?",
+      "range": {
+        "startLine": 131,
+        "startChar": 18,
+        "endLine": 131,
+        "endChar": 24
+      },
+      "revId": "508ae74720036e3b2b83f0e98f75115eb258a61d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4af15c4f_8ff4416e",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsReportGenerationVisitorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-04-30T19:47:53Z",
+      "side": 1,
+      "message": "This is here because of a it is named, right? \n\nI wonder whether we really need this here. I think named ranges are only important at variable definition (local vars, parameter declaration and field declarations).\n\nMaybe we should remove them in an upcoming patch.",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 14
+      },
+      "revId": "508ae74720036e3b2b83f0e98f75115eb258a61d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

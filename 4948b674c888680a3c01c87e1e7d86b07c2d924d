@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05caf7dd_a38d8d23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:17Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "4948b674c888680a3c01c87e1e7d86b07c2d924d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_e397852f",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractPager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:17Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not followed by whitespace.",
+      "revId": "4948b674c888680a3c01c87e1e7d86b07c2d924d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_0393c147",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractPager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:17Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not preceded with whitespace.",
+      "revId": "4948b674c888680a3c01c87e1e7d86b07c2d924d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_237a3d45",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:17Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not followed by whitespace.",
+      "revId": "4948b674c888680a3c01c87e1e7d86b07c2d924d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_437db93b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/SimplePager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:17Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not preceded with whitespace.",
+      "revId": "4948b674c888680a3c01c87e1e7d86b07c2d924d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

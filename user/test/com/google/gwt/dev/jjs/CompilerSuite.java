@@ -110,7 +110,6 @@ public class CompilerSuite {
     suite.addTestSuite(RunAsyncTest.class);
     suite.addTestSuite(ScriptOnlyTest.class);
     suite.addTestSuite(SingleJsoImplTest.class);
-    suite.addTestSuite(SpecializationTest.class);
     suite.addTestSuite(StackTraceLineNumbersTest.class);
     suite.addTestSuite(TypeHierarchyTest.class);
     suite.addTestSuite(UnusedImportsTest.class);

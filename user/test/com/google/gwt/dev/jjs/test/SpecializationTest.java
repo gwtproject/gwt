@@ -37,7 +37,7 @@ public class SpecializationTest extends GWTTestCase {
       if (k instanceof String) {
         putString((String) k, v); // keeps putString from being pruned
       }
-      fail("Shouldn't be called due to specialization");
+      throw new RuntimeException("Shouldn't be called due to specialization");
     }
 
     public void putString(String k, V v) {
@@ -53,7 +53,11 @@ public class SpecializationTest extends GWTTestCase {
 
   public void testSpecialization() {
     TestImpl<String, Object> succ = new TestImpl<String, Object>();
-    succ.put("key", VALUE);
+    try {
+      succ.put("key", VALUE);
+    } catch (Exception e) {
+      fail (e.getMessage());
+    }
   }
 
   public void testSpecializationFallback() {
@@ -62,8 +66,8 @@ public class SpecializationTest extends GWTTestCase {
     try {
       succ.put(42, VALUE);
       fail();
-    } catch (Throwable t) {
-      // swallow failure, we expect putString is called
+    } catch (Exception t) {
+      // swallow failure, we expect put() is called normally
     }
   }
 }

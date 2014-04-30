@@ -64,57 +64,15 @@ import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.Test;
 
 /**
- * The complete compiler suite.
+ * Compiler suite for tests not to be run in draft compile.
  */
-public class CompilerSuite {
+public class OptimizedOnlyCompilerSuite {
 
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("Test for com.google.gwt.dev.jjs");
 
     // $JUnit-BEGIN$
-    suite.addTestSuite(AnnotationsTest.class);
-    suite.addTestSuite(AutoboxTest.class);
-    suite.addTestSuite(BlankInterfaceTest.class);
-    suite.addTestSuite(ClassCastTest.class);
-    suite.addTestSuite(ClassObjectTest.class);
-    suite.addTestSuite(CodeSplitterCollapsedPropertiesTest.class);
-    suite.addTestSuite(CompilerTest.class);
-    suite.addTestSuite(CompilerMiscRegressionTest.class);
-    suite.addTestSuite(CoverageTest.class);
-    suite.addTestSuite(EnhancedForLoopTest.class);
-    suite.addTestSuite(EnumsTest.class);
-    suite.addTestSuite(EnumsWithNameObfuscationTest.class);
-    suite.addTestSuite(GenericCastTest.class);
-    suite.addTestSuite(GwtIncompatibleTest.class);
-    suite.addTestSuite(HostedTest.class);
-    suite.addTestSuite(InitialLoadSequenceTest.class);
-    suite.addTestSuite(InnerClassTest.class);
-    suite.addTestSuite(InnerOuterSuperTest.class);
-    suite.addTestSuite(Java7Test.class);
-    suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
-    suite.addTestSuite(JsniConstructorTest.class);
-    suite.addTestSuite(JsniDispatchTest.class);
-    suite.addTestSuite(JsoTest.class);
-    suite.addTestSuite(JsStaticEvalTest.class);
-    suite.addTestSuite(JStaticEvalTest.class);
-    suite.addTestSuite(MemberShadowingTest.class);
-    suite.addTestSuite(MethodBindTest.class);
-    suite.addTestSuite(MethodCallTest.class);
-    suite.addTestSuite(MethodInterfaceTest.class);
-    suite.addTestSuite(MiscellaneousTest.class);
-    suite.addTestSuite(NativeLongTest.class);
-    suite.addTestSuite(ObjectIdentityTest.class);
-    suite.addTestSuite(RunAsyncContentTest.class);
-    suite.addTestSuite(RunAsyncFailureTest.class);
-    suite.addTestSuite(RunAsyncMetricsIntegrationTest.class);
-    suite.addTestSuite(RunAsyncTest.class);
-    suite.addTestSuite(ScriptOnlyTest.class);
-    suite.addTestSuite(SingleJsoImplTest.class);
-    suite.addTestSuite(StackTraceLineNumbersTest.class);
-    suite.addTestSuite(TypeHierarchyTest.class);
-    suite.addTestSuite(UnusedImportsTest.class);
-    suite.addTestSuite(UnstableGeneratorTest.class);
-    suite.addTestSuite(VarargsTest.class);
+    suite.addTestSuite(SpecializationTest.class);
     // $JUnit-END$
 
     return suite;

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca046c04_e2fe4217",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T21:47:19Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "611f57892ae1fc31976e70bece4c6fab8f3ac477",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca046c04_c20b4687",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T21:47:19Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is preceded with whitespace.",
+      "revId": "611f57892ae1fc31976e70bece4c6fab8f3ac477",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

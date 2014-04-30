@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca046c04_7cec19e2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsniReferenceResolver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-04-30T20:50:56Z",
+      "side": 1,
+      "message": "nit: perhaps replace with for(;;) ?",
+      "revId": "1b0e1b767fe92f109f91ea6718da60b179b1ae37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

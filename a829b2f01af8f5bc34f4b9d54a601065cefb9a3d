@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca046c04_fc170960",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CheckerTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T19:54:16Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "a829b2f01af8f5bc34f4b9d54a601065cefb9a3d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "05caf7dd_63d6f5fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:10Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "be703deb7f6d856c4c7a0736597aab8c05cba37f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05caf7dd_304a858f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 10
@@ -13,6 +30,40 @@
       "writtenOn": "2014-04-29T23:50:17Z",
       "side": 1,
       "message": "Revert this file.",
+      "revId": "be703deb7f6d856c4c7a0736597aab8c05cba37f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_c3a1a99b",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:10Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "be703deb7f6d856c4c7a0736597aab8c05cba37f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05caf7dd_a3a62daf",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-04-30T00:07:10Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
       "revId": "be703deb7f6d856c4c7a0736597aab8c05cba37f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

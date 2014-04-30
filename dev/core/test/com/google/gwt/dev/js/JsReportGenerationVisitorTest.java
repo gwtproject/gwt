@@ -40,8 +40,9 @@ public class JsReportGenerationVisitorTest extends TestCase {
   boolean compact = false;
   JsProgram program;
 
-  // TODO(skybrian) don't generate ranges for all of these nodes. Just do executable code.
-  // (Documenting it as-is for now.)
+  // The Rhino-based JavaScript parser doesn't provide character ranges
+  // in SourceInfo. Therefore we can't test expression removal here and
+  // all tests include expressions that would normally be removed.
 
   public void testEmpty() throws Exception {
     program = parseJs("");
@@ -90,11 +91,9 @@ public class JsReportGenerationVisitorTest extends TestCase {
     checkMappings(
         "if(true){x=1}else{y=2}",
         "true",
-        "{x=1}",
         "x=1",
         "x",
         "1",
-        "{y=2}",
         "y=2",
         "y",
         "2"
@@ -106,11 +105,9 @@ public class JsReportGenerationVisitorTest extends TestCase {
     checkMappings(
         "if (true) {\n  x = 1;\n}\n else {\n  y = 2;\n}\n",
         "true",
-        "{\n  x = 1;\n}\n",
         "  x = 1;\n",
         "  x",
         "1",
-        "{\n  y = 2;\n}\n",
         "  y = 2;\n",
         "  y",
         "2"
@@ -122,7 +119,6 @@ public class JsReportGenerationVisitorTest extends TestCase {
     program = parseJs("function f() { return 42; }");
     checkMappings("function f(){return 42}\n",
         "function f(){return 42}",
-        "{return 42}",
         "return 42",
         "42"
     );
@@ -131,11 +127,31 @@ public class JsReportGenerationVisitorTest extends TestCase {
   public void testFunctionPretty() throws Exception {
     program = parseJs("function f() { return 42; }");
     checkMappings(
-      "function f(){\n  return 42;\n}\n\n",
-      "function f(){\n  return 42;\n}\n",
-      "{\n  return 42;\n}\n",
-      "  return 42;\n",
-      "42"
+        "function f(){\n  return 42;\n}\n\n",
+        "function f(){\n  return 42;\n}\n",
+        "  return 42;\n",
+        "42"
+    );
+  }
+
+  public void testTryStatementCompact() throws Exception {
+    compact = true;
+    program = parseJs("try{ 123 } catch (e) { 456 } finally { 789 }");
+    checkMappings(
+        "try{123}catch(e){456}finally{789}",
+        "123",
+        "456",
+        "789"
+    );
+  }
+
+  public void testTryStatementPretty() throws Exception {
+    program = parseJs("try { 123 } catch (e) { 456 } finally { 789 }");
+    checkMappings(
+        "try {\n  123;\n}\n catch (e) {\n  456;\n}\n finally {\n  789;\n}\n",
+        "  123;\n",
+        "  456;\n",
+        "  789;\n"
     );
   }
 
@@ -152,7 +168,7 @@ public class JsReportGenerationVisitorTest extends TestCase {
       throws IOException, JsParserException {
     DefaultTextOutput text = new DefaultTextOutput(compact);
     JsReportGenerationVisitor generator = new JsReportGenerationVisitor(text,
-        JavaToJavaScriptMap.EMPTY);
+        JavaToJavaScriptMap.EMPTY, false);
     generator.accept(program);
     String actual = dumpMappings(text.toString(), generator.getSourceInfoMap());
 

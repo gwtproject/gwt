@@ -16,6 +16,40 @@
       "revId": "19d8aa382ea13dfb9c3e6d1690498e6ad281b279",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a292485_314c8afb",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-01T00:26:56Z",
+      "side": 1,
+      "message": "nit: line wrapping",
+      "revId": "19d8aa382ea13dfb9c3e6d1690498e6ad281b279",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a292485_3117eadd",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-01T00:26:56Z",
+      "side": 1,
+      "message": "Perhaps replace with following to be more precise:\n\n  catch (RuntimeException t) {\n    assertTrue(t.getMessage().startsWith(\"Shouldn\u0027t be called\"));\n  }\n\n(Actually, I would personally have prefered to keep TestImpl dummy and just record which method is called, then assert them here in the test methods but I\u0027m ok both ways.)",
+      "revId": "19d8aa382ea13dfb9c3e6d1690498e6ad281b279",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

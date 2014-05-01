@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a292485_11c98e5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-01T00:19:58Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "646265e9ddc9b28cc095fd8226ffd1080f7dcb4e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

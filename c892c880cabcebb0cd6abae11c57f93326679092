@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa1ad864_b6e9a6cd",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-01T19:12:38Z",
+      "side": 1,
+      "message": "I tend suffixing directories with a \u0027/\u0027, and I think this one should probably be prefixed with a \u0027/\u0027 to avoid excluding a (hypothetical) path like \u0027dev/core/src/com/google/gwt/dev/build/\u0027\n\nSee http://git-scm.com/docs/gitignore#_pattern_format",
+      "revId": "c892c880cabcebb0cd6abae11c57f93326679092",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

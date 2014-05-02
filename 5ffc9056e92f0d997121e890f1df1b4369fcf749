@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a71c0c6_53511c94",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-02T18:23:03Z",
+      "side": 1,
+      "message": "typo and not a sentence",
+      "range": {
+        "startLine": 285,
+        "startChar": 58,
+        "endLine": 286,
+        "endChar": 73
+      },
+      "revId": "5ffc9056e92f0d997121e890f1df1b4369fcf749",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a71c0c6_5397dc32",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 4
@@ -13,6 +36,29 @@
       "writtenOn": "2014-05-02T18:14:16Z",
       "side": 1,
       "message": "[error] Got an exception - unexpected char: \u0027\\\u0027",
+      "revId": "5ffc9056e92f0d997121e890f1df1b4369fcf749",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a71c0c6_d3ee8c93",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-02T18:23:03Z",
+      "side": 1,
+      "message": "please fix",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 1
+      },
       "revId": "5ffc9056e92f0d997121e890f1df1b4369fcf749",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

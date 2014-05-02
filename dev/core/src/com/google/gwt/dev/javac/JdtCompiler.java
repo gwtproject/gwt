@@ -273,12 +273,20 @@ public class JdtCompiler {
       this.diet = saveDiet;
       if (removeGwtIncompatible) {
         // Remove @GwtIncompatible classes and members.
+        // It is safe to remove @GwtIncompatible types, fields and methods on incomplete ASTs due
+        // to parsing errors.
         GwtIncompatiblePreprocessor.preproccess(decl);
       }
       if (decl.imports != null) {
         originalImportsByCud.putAll(decl, Arrays.asList(decl.imports));
       }
-      if (removeUnusedImports) {
+      if (decl.hasErrors()) {
+        // The unit has parsing errors; its JDT AST might not be complete. In this case do not
+        // remove unused imports as it is not safe to do. Removing imports in this case will
+        // make the error reporting logic to cnmplain about missing types.
+        return decl;
+      }
+\      if (removeUnusedImports) {
         // Lastly remove any unused imports
         UnusedImportsRemover.exec(decl);
       }

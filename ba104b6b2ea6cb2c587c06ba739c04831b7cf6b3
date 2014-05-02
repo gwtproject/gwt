@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a71c0c6_28fe734b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-02T17:53:02Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "ba104b6b2ea6cb2c587c06ba739c04831b7cf6b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

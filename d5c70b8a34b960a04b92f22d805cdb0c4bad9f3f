@@ -22,6 +22,80 @@
       "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a8354c4_cb381dc3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-02T00:46:30Z",
+      "side": 1,
+      "message": "The UI workflow is confusing. There are two bookmarklets, if you click \"Dev Mode On\", it shows you a dialog with dev mode statuses for different modules but if you choose \"Dev Mode Off\" it disables all dev modes.\n\nInstead of having two bookmarklets can we just have one called \"SuperDevMode\" and change the heading accordingly?",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a8354c4_2bf669b4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-02T00:46:30Z",
+      "side": 1,
+      "message": "We have lost numbering, indentation spaces etc. I ran it and it looked kind of ugly. We should at least have some indentation and spacing below header and above footer.",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a8354c4_ab8fd963",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-02T00:46:30Z",
+      "side": 1,
+      "message": "Isn\u0027t having a check box makes more sense here?\n\nActually together with my previous suggestion, we could have something like following:\n\n -----------------------------------------------------------------\n|                                                                 |\n| GWT modules running in dev mode:                                |\n|  ■ com.google.gwt.corp.jfk.gallery.WidgetGalleryApp  |COMPILE|  |\n|  ■ com.google.gwt................  |COMPILE|                    |\n|                                                                 |\n -----------------------------------------------------------------\n\nHere the compile button is only enabled if the checkbox is checked.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 61
+      },
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a8354c4_4bce4d3d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-02T00:46:30Z",
+      "side": 1,
+      "message": "This doesn\u0027t look helpful. Do we really need that? Instead of this link perhaps we could add a tip here:\n\"Tip: Drag Compile bookmarklets to bookmark bar for quick initiation of compile\u0026refresh\"",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4adb1c06_70db1088",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/ProxyAutoBean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-02T23:44:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9823717_d0d1d40d",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "797c3ff1_0eb7cf04",
         "filename": "user/src/com/google/web/bindery/requestfactory/apt/ProxyScanner.java",
         "patchSetId": 2
@@ -119,6 +137,24 @@
       "writtenOn": "2014-04-07T14:23:57Z",
       "side": 1,
       "message": "spaces",
+      "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ae0a8ae_4fd66d63",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/RequestFactoryScanner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-02T23:44:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9823717_501a4455",
       "revId": "52e4b3d6883123a5e11c54ddf713109cd832d6f2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

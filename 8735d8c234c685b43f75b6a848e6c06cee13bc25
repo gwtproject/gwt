@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a71c0c6_8878dfd7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-02T18:00:36Z",
+      "side": 1,
+      "message": "The naming convention is problematic here. disallowInliningOf is instructing to disallow while allowInliningOf returns boolean state.\nAlternative: addNoninlineableFunction/isInlinableFunction (you can omit the \"Function\" part)",
+      "revId": "8735d8c234c685b43f75b6a848e6c06cee13bc25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

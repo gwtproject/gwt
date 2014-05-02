@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a8354c4_68a317a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-02T04:07:24Z",
+      "side": 1,
+      "message": "Perhaps, but I think that should be a different patch.",
+      "parentUuid": "8a6c34f2_5ad61563",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 67
+      },
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a8354c4_cb381dc3",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "6a71c0c6_1cf979e9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-02T04:07:24Z",
+      "side": 1,
+      "message": "The main thing about \"Dev Mode Off\" is that it works even when the code server isn\u0027t running. Perhaps it\u0027s less useful with this change, but I don\u0027t want to remove it yet.",
+      "parentUuid": "8a8354c4_cb381dc3",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a8354c4_2bf669b4",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2014-05-02T00:46:30Z",
       "side": 1,
       "message": "We have lost numbering, indentation spaces etc. I ran it and it looked kind of ugly. We should at least have some indentation and spacing below header and above footer.",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a71c0c6_9cbd89f4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-02T04:07:24Z",
+      "side": 1,
+      "message": "Added spacing and put the bullets back. I changed it to be a hollow bullet if Super Dev Mode is off and a solid bullet if it\u0027s on.",
+      "parentUuid": "8a8354c4_2bf669b4",
       "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "6a71c0c6_fc0fe54b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-02T04:07:24Z",
+      "side": 1,
+      "message": "The button does a page reload, and this would be unexpected for a check box.",
+      "parentUuid": "8a8354c4_ab8fd963",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 61
+      },
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a8354c4_4bce4d3d",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 1
@@ -93,6 +177,24 @@
       "writtenOn": "2014-05-02T00:46:30Z",
       "side": 1,
       "message": "This doesn\u0027t look helpful. Do we really need that? Instead of this link perhaps we could add a tip here:\n\"Tip: Drag Compile bookmarklets to bookmark bar for quick initiation of compile\u0026refresh\"",
+      "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a71c0c6_5c24d1d2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-02T04:07:24Z",
+      "side": 1,
+      "message": "I wanted something to show which code server you are using. (Is it localhost or some other machine?) But perhaps that\u0027s too subtle and I should show the codeserver URL.",
+      "parentUuid": "8a8354c4_4bce4d3d",
       "revId": "d5c70b8a34b960a04b92f22d805cdb0c4bad9f3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

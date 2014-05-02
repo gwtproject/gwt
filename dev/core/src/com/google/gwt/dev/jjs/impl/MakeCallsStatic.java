@@ -256,7 +256,7 @@ public class MakeCallsStatic {
         return false;
       }
 
-      if (!program.allowStatificationOf(method)) {
+      if (!program.allowDevitualizationOf(method)) {
         // Method has been specifically excluded from statification.
         return false;
       }

@@ -366,7 +366,7 @@ public class JProgram extends JNode {
   /**
    * Returns true if {@link MakeCallsStatic} should try to statify {@code method}.
    */
-  public boolean allowStatificationOf(JMethod method) {
+  public boolean allowDevitualizationOf(JMethod method) {
     return !pinnedMethods.contains(method);
   }
 

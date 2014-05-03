@@ -169,7 +169,12 @@ public class CalendarUtil {
   @SuppressWarnings("deprecation") // GWT requires Date
   public static void resetTime(Date date) {
     long msec = date.getTime();
-    msec = (msec / 1000) * 1000;
+    long offset = msec % 1000;
+    if (offset > 0) {
+      msec -= offset;
+    } else if (offset < 0) {
+      msec -= (1000 + offset);
+    }
     date.setTime(msec);
     date.setHours(0);
     date.setMinutes(0);

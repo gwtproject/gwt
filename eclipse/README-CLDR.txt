@@ -21,6 +21,9 @@ Steps to process CLDR data using Eclipse:
     File -> Import -> General -> Existing Projects in Workspace
   Browse to $GWT_ROOT/eclipse and select the cldr-data, cldr-tools,
   and cldr-import projects.
-4) Run the GenerateGwtCldrData launch config -- by default, it will
+4) Set Compiler compliant level to 1.7
+    Project -> Properties -> Java Compiler -> Enable project specific settings
+    -> Compliler compliance level 1.7 -> use default compliance settings.
+5) Run the GenerateGwtCldrData launch config -- by default, it will
   overwrite files in the GWT distribution; edit the --outdir argument
   if you want it to go somewhere else.

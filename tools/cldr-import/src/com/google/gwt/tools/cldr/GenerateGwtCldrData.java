@@ -17,9 +17,9 @@ package com.google.gwt.tools.cldr;
 
 import com.google.gwt.i18n.server.GwtLocaleFactoryImpl;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
-
 import com.ibm.icu.dev.tool.UOption;
 
+import org.unicode.cldr.util.CLDRPaths;
 import org.unicode.cldr.util.CldrUtility;
 import org.unicode.cldr.util.Factory;
 
@@ -51,7 +51,7 @@ public class GenerateGwtCldrData {
         + "produced by cldr-tools)");
     UOption[] options = {
         UOption.HELP_H(), UOption.HELP_QUESTION_MARK(),
-        UOption.SOURCEDIR().setDefault(CldrUtility.MAIN_DIRECTORY),
+        UOption.SOURCEDIR().setDefault(CLDRPaths.MAIN_DIRECTORY),
         outputDir().setDefault("./"),
         restrictLocales(),
         processors().setDefault(DEFAULT_PROCESSORS),

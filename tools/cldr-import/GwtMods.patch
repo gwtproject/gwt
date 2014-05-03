@@ -1,164 +1,403 @@
-Index: tools/java/org/unicode/cldr/tool/GenerateCoverageLevels.java
+Index: common/bcp47/timezone.xml
 ===================================================================
---- tools/java/org/unicode/cldr/tool/GenerateCoverageLevels.java	(revision 6738)
-+++ tools/java/org/unicode/cldr/tool/GenerateCoverageLevels.java	(working copy)
-@@ -398,7 +398,7 @@
+--- common/bcp47/timezone.xml	(revision 10023)
++++ common/bcp47/timezone.xml	(working copy)
+@@ -7,7 +7,7 @@
+ -->
  
-   private static void markData(String title, Set<String> localesFound, LocaleLevelData mapLevelData, TreeSet<String> mainAvailable, Level level, long weight, R2<String, String> samples) {
-     if (!mainAvailable.containsAll(localesFound)) {
--      System.out.println(title + " Locales that are not in main: " + Builder.with(new TreeSet<String>())
-+      System.out.println(title + " Locales that are not in main: " + Builder.<String, TreeSet<String>>with(new TreeSet<String>())
-               .addAll(localesFound).removeAll(mainAvailable)
-               .filter(nonAliasLocaleFilter).get());
-     }
-Index: tools/java/org/unicode/cldr/util/SupplementalDataInfo.java
+ <ldmlBCP47>
+-    <version number="$Revision$"/>
++    <version number="$Revision 9854 GWT $"/>
+     <generation date="$Date$"/>
+     <keyword>
+         <key name="tz" description="Time zone key" alias="timezone">
+@@ -29,6 +29,7 @@
+             <type name="aqplm" description="Palmer Station, Anvers Island" alias="Antarctica/Palmer"/>
+             <type name="aqrot" description="Rothera Station, Adelaide Island" alias="Antarctica/Rothera"/>
+             <type name="aqsyw" description="Syowa Station, East Ongul Island" alias="Antarctica/Syowa"/>
++            <type name="aqtrl" description="Troll Station, Queen Maud Land" alias="Antarctica/Troll" since="26"/>
+             <type name="aqvos" description="Vostok Station, Lake Vostok" alias="Antarctica/Vostok"/>
+             <type name="arbue" description="Buenos Aires, Argentina" alias="America/Buenos_Aires America/Argentina/Buenos_Aires"/>
+             <type name="arcor" description="Córdoba, Argentina" alias="America/Cordoba America/Argentina/Cordoba America/Rosario"/>
+Index: common/main/bn.xml
 ===================================================================
---- tools/java/org/unicode/cldr/util/SupplementalDataInfo.java	(revision 6738)
-+++ tools/java/org/unicode/cldr/util/SupplementalDataInfo.java	(working copy)
-@@ -875,7 +875,7 @@
-             // get bcp47 files also
-             File files2[] = new File(canonicalpath + "/../bcp47").listFiles();
- 
--            CBuilder<File, ArrayList<File>> builder = Builder.with(new ArrayList<File>()).addAll(files1);
-+            CBuilder<File, ArrayList<File>> builder = Builder.<File, ArrayList<File>>with(new ArrayList<File>()).addAll(files1);
-             if (files2 != null) {
-                 builder.addAll(files2);
-             }
-Index: common/main/ga.xml
+--- common/main/bn.xml	(revision 10023)
++++ common/main/bn.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9967 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="bn"/>
+ 	</identity>
+@@ -1454,8 +1454,9 @@
+ 							<dayPeriod type="pm">অপরাহ্ণ</dayPeriod>
+ 						</dayPeriodWidth>
+ 						<dayPeriodWidth type="wide">
+-							<dayPeriod type="am">পূর্বাহ্ণ</dayPeriod>
+-							<dayPeriod type="pm">অপরাহ্ণ</dayPeriod>
++                                                <!-- Google specific fix for http://b/1469531 -->
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
+ 					</dayPeriodContext>
+ 				</dayPeriods>
+Index: common/main/en.xml
 ===================================================================
---- common/main/ga.xml	(revision 6738)
-+++ common/main/ga.xml	(working copy)
-@@ -299,8 +299,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">An Ghuine-Bhissau</territory>
- 			<territory type="GY">An Ghuáin</territory>
--			<territory type="HK">R.R.S. na Síne Hong Cong</territory>
--			<territory type="HK" alt="short">Hong Cong</territory>
-+			<territory type="HK" alt="SAR">R.R.S. na Síne Hong Cong</territory>
-+			<territory type="HK">Hong Cong</territory>
- 			<territory type="HM">Oileán Heard agus Oileáin McDonald</territory>
- 			<territory type="HN">Hondúras</territory>
- 			<territory type="HR">An Chróit</territory>
-@@ -352,8 +352,8 @@
- 			<territory type="ML">Mailí</territory>
- 			<territory type="MM">Maenmar</territory>
- 			<territory type="MN">An Mhongóil</territory>
--			<territory type="MO">R.R.S. na Síne Macáó</territory>
--			<territory type="MO" alt="short">Macáó</territory>
-+			<territory type="MO" alt="SAR">R.R.S. na Síne Macáó</territory>
-+			<territory type="MO">Macáó</territory>
- 			<territory type="MP">Oileáin Mariana Thuaidh</territory>
- 			<territory type="MQ">Martainíc</territory>
- 			<territory type="MR">An Mharatáin</territory>
-Index: common/main/kl.xml
-===================================================================
---- common/main/kl.xml	(revision 6738)
-+++ common/main/kl.xml	(working copy)
-@@ -149,7 +149,6 @@
- 			<territory type="GW" draft="unconfirmed">Guinea-Bissau</territory>
- 			<territory type="GY" draft="unconfirmed">Guyana</territory>
- 			<territory type="HK" draft="unconfirmed">Hongkong</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">Hongkong</territory>
- 			<territory type="HN" draft="unconfirmed">Honduras</territory>
- 			<territory type="HT" draft="unconfirmed">Haiti</territory>
- 			<territory type="HU" draft="unconfirmed">Ungarni</territory>
-@@ -195,7 +194,6 @@
- 			<territory type="ML" draft="unconfirmed">Mali</territory>
- 			<territory type="MM" draft="unconfirmed">Burma</territory>
- 			<territory type="MO" draft="unconfirmed">Macao</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">Macao</territory>
- 			<territory type="MQ" draft="unconfirmed">Martinique</territory>
- 			<territory type="MR" draft="unconfirmed">Mauritania</territory>
- 			<territory type="MS" draft="unconfirmed">Montserrat</territory>
-Index: common/main/sr.xml
-===================================================================
---- common/main/sr.xml	(revision 6738)
-+++ common/main/sr.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">Гуам</territory>
- 			<territory type="GW">Гвинеја-Бисао</territory>
- 			<territory type="GY">Гвајана</territory>
--			<territory type="HK">Хонг Конг С. А. Р. Кина</territory>
--			<territory type="HK" alt="short">Хонг Конг</territory>
-+			<territory type="HK" alt="SAR">Хонг Конг С. А. Р. Кина</territory>
-+			<territory type="HK">Хонг Конг</territory>
- 			<territory type="HM">Херд и Мекдоналд Острва</territory>
- 			<territory type="HN">Хондурас</territory>
- 			<territory type="HR">Хрватска</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">Мали</territory>
- 			<territory type="MM">Мијанмар [Бурма]</territory>
- 			<territory type="MN">Монголија</territory>
--			<territory type="MO">Макао С. А. Р. Кина</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао С. А. Р. Кина</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Северна Маријанска Острва</territory>
- 			<territory type="MQ">Мартиник</territory>
- 			<territory type="MR">Мауританија</territory>
-@@ -1336,7 +1336,8 @@
- 						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
- 						<dateFormatItem id="MMdd">MM-dd</dateFormatItem>
- 						<dateFormatItem id="MMM">LLL</dateFormatItem>
--						<dateFormatItem id="MMMd">d. MMM</dateFormatItem>
-+                                                <!-- Google Patch -->
-+						<dateFormatItem id="MMMd">dd. MMM</dateFormatItem>
- 						<dateFormatItem id="MMMdd">dd.MMM</dateFormatItem>
- 						<dateFormatItem id="MMMEd">E d. MMM</dateFormatItem>
- 						<dateFormatItem id="MMMMd">d. MMMM</dateFormatItem>
-Index: common/main/de.xml
-===================================================================
---- common/main/de.xml	(revision 6738)
-+++ common/main/de.xml	(working copy)
-@@ -791,8 +791,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Sonderverwaltungszone Hongkong</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Sonderverwaltungszone Hongkong</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- und McDonald-Inseln</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatien</territory>
-@@ -847,8 +847,8 @@
+--- common/main/en.xml	(revision 10023)
++++ common/main/en.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9876 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="en"/>
+ 	</identity>
+@@ -772,10 +772,10 @@
+ 			<territory type="BZ">Belize</territory>
+ 			<territory type="CA">Canada</territory>
+ 			<territory type="CC">Cocos (Keeling) Islands</territory>
+-			<territory type="CD">Congo - Kinshasa</territory>
++			<territory type="CD">Congo (DRC)</territory>   <!-- Google Patch: take variant form -->
+ 			<territory type="CD" alt="variant">Congo (DRC)</territory>
+ 			<territory type="CF">Central African Republic</territory>
+-			<territory type="CG">Congo - Brazzaville</territory>
++			<territory type="CG">Congo (Republic)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="CG" alt="variant">Congo (Republic)</territory>
+ 			<territory type="CH">Switzerland</territory>
+ 			<territory type="CI">Côte d’Ivoire</territory>
+@@ -811,7 +811,7 @@
+ 			<territory type="EU">European Union</territory>
+ 			<territory type="FI">Finland</territory>
+ 			<territory type="FJ">Fiji</territory>
+-			<territory type="FK">Falkland Islands</territory>
++			<territory type="FK">Falkland Islands (Islas Malvinas)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="FK" alt="variant">Falkland Islands (Islas Malvinas)</territory>
+ 			<territory type="FM">Micronesia</territory>
+ 			<territory type="FO">Faroe Islands</territory>
+@@ -887,7 +887,7 @@
+ 			<territory type="MF">Saint Martin</territory>
+ 			<territory type="MG">Madagascar</territory>
+ 			<territory type="MH">Marshall Islands</territory>
+-			<territory type="MK">Macedonia</territory>
++			<territory type="MK">Macedonia (FYROM)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="MK" alt="variant">Macedonia (FYROM)</territory>
  			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolei</territory>
--			<territory type="MO">Sonderverwaltungszone Macao</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Sonderverwaltungszone Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nördliche Marianen</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauretanien</territory>
+ 			<territory type="MM">Myanmar (Burma)</territory>
+@@ -1276,18 +1276,20 @@
+ 							<month type="12">Mo12</month>
+ 						</monthWidth>
+ 						<monthWidth type="wide">
+-							<month type="1">Month1</month>
+-							<month type="2">Month2</month>
+-							<month type="3">Month3</month>
+-							<month type="4">Month4</month>
+-							<month type="5">Month5</month>
+-							<month type="6">Month6</month>
+-							<month type="7">Month7</month>
+-							<month type="8">Month8</month>
+-							<month type="9">Month9</month>
+-							<month type="10">Month10</month>
+-							<month type="11">Month11</month>
+-							<month type="12">Month12</month>
++                                                        <!-- Google Patch: Revert MonthX to X. CLDR bug #5932 -->
++							<month type="1">1</month>
++							<month type="2">2</month>
++							<month type="3">3</month>
++							<month type="4">4</month>
++							<month type="5">5</month>
++							<month type="6">6</month>
++							<month type="7">7</month>
++							<month type="8">8</month>
++							<month type="9">9</month>
++							<month type="10">10</month>
++							<month type="11">11</month>
++							<month type="12">12</month>
++                                                        <!-- End Google Patch -->
+ 						</monthWidth>
+ 					</monthContext>
+ 				</months>
+@@ -4345,6 +4347,7 @@
+ 				<displayName>Philippine Peso</displayName>
+ 				<displayName count="one">Philippine peso</displayName>
+ 				<displayName count="other">Philippine pesos</displayName>
++				<symbol>Php</symbol>  <!-- google patch bug 1453176 -->
+ 			</currency>
+ 			<currency type="PKR">
+ 				<displayName>Pakistani Rupee</displayName>
+Index: common/main/en_GB.xml
+===================================================================
+--- common/main/en_GB.xml	(revision 10023)
++++ common/main/en_GB.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9876 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="en"/>
+ 		<territory type="GB"/>
+@@ -550,6 +550,7 @@
+ 							<greatestDifference id="H">HH–HH</greatestDifference>
+ 						</intervalFormatItem>
+ 						<intervalFormatItem id="hm">
++						  	<greatestDifference id="a">h:mm a – h:mm a</greatestDifference>   <!-- Google patch /b/11479739-->
+ 							<greatestDifference id="h">h:mm–h:mm a</greatestDifference>
+ 							<greatestDifference id="m">h:mm–h:mm a</greatestDifference>
+ 						</intervalFormatItem>
+Index: common/main/fr_CA.xml
+===================================================================
+--- common/main/fr_CA.xml	(revision 10023)
++++ common/main/fr_CA.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9280 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="fr"/>
+ 		<territory type="CA"/>
+@@ -51,6 +51,7 @@
+ 			<territory type="RE" draft="contributed">Réunion</territory>
+ 			<territory type="TC" draft="contributed">Îles Turks et Caïques</territory>
+ 			<territory type="UM" draft="contributed">Îles éloignées des États-Unis</territory>
++			<territory type="XK">Kosovo</territory>
+ 		</territories>
+ 		<keys>
+ 			<key type="calendar" draft="contributed">Calendrier</key>
+Index: common/main/hi.xml
+===================================================================
+--- common/main/hi.xml	(revision 10023)
++++ common/main/hi.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="hi"/>
+ 	</identity>
+@@ -176,7 +176,7 @@
+ 			<language type="hai">हैडा</language>
+ 			<language type="haw">हवाई</language>
+ 			<language type="he">हिब्रू</language>
+-			<language type="hi">हिंदी</language>
++			<language type="hi">हिन्दी</language> <!-- google patch b/11322559 -->
+ 			<language type="hil">हिलिगेनन</language>
+ 			<language type="hit">हिताइत</language>
+ 			<language type="hmn">ह्मॉंग</language>
+@@ -1482,14 +1482,16 @@
+ 							<dayPeriod type="am">पूर्व</dayPeriod>
+ 							<dayPeriod type="pm">अपर</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
+ 						<dayPeriodWidth type="narrow">
+-							<dayPeriod type="am">पू</dayPeriod>
+-							<dayPeriod type="pm">अ</dayPeriod>
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
+ 						<dayPeriodWidth type="wide">
+-							<dayPeriod type="am">पूर्वाह्न</dayPeriod>
+-							<dayPeriod type="pm">अपराह्न</dayPeriod>
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- End Google Patch -->
+ 					</dayPeriodContext>
+ 				</dayPeriods>
+ 				<eras>
+Index: common/main/kk.xml
+===================================================================
+--- common/main/kk.xml	(revision 10023)
++++ common/main/kk.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="kk"/>
+ 	</identity>
+@@ -292,7 +292,7 @@
+ 			<territory type="BZ">Белиз</territory>
+ 			<territory type="CA">Канада</territory>
+ 			<territory type="CC">Кокос аралдары</territory>
+-			<territory type="CD">Конго</territory>
++			<territory type="CD">Конго Демократиялық Республикасы</territory>   <!-- Google patch; take variant. /b/11324281 -->
+ 			<territory type="CD" alt="variant">Конго Демократиялық Республикасы</territory>
+ 			<territory type="CF">Орталық Африка Республикасы</territory>
+ 			<territory type="CG">Конго Республикасы</territory>
+Index: common/main/pt_PT.xml
+===================================================================
+--- common/main/pt_PT.xml	(revision 10023)
++++ common/main/pt_PT.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="pt"/>
+ 		<territory type="PT"/>
+@@ -4390,7 +4390,7 @@
+ 				<displayName>Rupia indiana</displayName>
+ 				<displayName count="one">Rupia indiana</displayName>
+ 				<displayName count="other">Rupias indianas</displayName>
+-				<symbol>₹</symbol>
++				<symbol draft="contributed">Rs.</symbol>   <!-- Google Patch: prevent overwrite from pt.xml -->
+ 			</currency>
+ 			<currency type="IQD">
+ 				<displayName>Dinar iraquiano</displayName>
+Index: common/main/root.xml
+===================================================================
+--- common/main/root.xml	(revision 10023)
++++ common/main/root.xml	(working copy)
+@@ -3347,7 +3347,7 @@
+ 				<symbol alt="narrow">₪</symbol>
+ 			</currency>
+ 			<currency type="INR">
+-				<symbol>₹</symbol>
++				<symbol>Rs.</symbol>   <!-- Google Patch.  Bug # 1453176 -->
+ 				<symbol alt="narrow">₹</symbol>
+ 			</currency>
+ 			<currency type="JMD">
+Index: common/main/ta.xml
+===================================================================
+--- common/main/ta.xml	(revision 10023)
++++ common/main/ta.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9876 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="ta"/>
+ 	</identity>
+@@ -1564,10 +1564,12 @@
+ 				</quarters>
+ 				<dayPeriods>
+ 					<dayPeriodContext type="format">
++                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
+ 						<dayPeriodWidth type="abbreviated">
+-							<dayPeriod type="am">முற்பகல்</dayPeriod>
+-							<dayPeriod type="pm">பிற்பகல்</dayPeriod>
++							<dayPeriod type="am">AM</dayPeriod>
++							<dayPeriod type="pm">PM</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- End Google Patch -->
+ 						<dayPeriodWidth type="narrow">
+ 							<dayPeriod type="am">AM</dayPeriod>
+ 							<dayPeriod type="pm">PM</dayPeriod>
+Index: common/main/tr.xml
+===================================================================
+--- common/main/tr.xml	(revision 10023)
++++ common/main/tr.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="tr"/>
+ 	</identity>
+@@ -1684,7 +1684,7 @@
+ 					</dateFormatLength>
+ 					<dateFormatLength type="short">
+ 						<dateFormat>
+-							<pattern>d.MM.y</pattern>
++							<pattern>d MM y</pattern>   <!-- Google Patch /b/8566501 -->
+ 						</dateFormat>
+ 					</dateFormatLength>
+ 				</dateFormats>
+@@ -4594,7 +4594,7 @@
+ 				<displayName>Türk Lirası</displayName>
+ 				<displayName count="one">Türk lirası</displayName>
+ 				<displayName count="other">Türk lirası</displayName>
+-				<symbol>₺</symbol>
++				<symbol>TL</symbol>   <!-- Google Patch /b/9064055 -->
+ 			</currency>
+ 			<currency type="TTD">
+ 				<displayName>Trinidad ve Tobago Doları</displayName>
+Index: common/main/uk.xml
+===================================================================
+--- common/main/uk.xml	(revision 10023)
++++ common/main/uk.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="uk"/>
+ 	</identity>
+@@ -769,7 +769,7 @@
+ 			<territory type="FJ">Фіджі</territory>
+ 			<territory type="FK">Фолклендські острови</territory>
+ 			<territory type="FK" alt="variant">Фолклендські (Мальвінські) острови</territory>
+-			<territory type="FM">Мікронезія</territory>
++			<territory type="FM">Мікронезія Федеративні Штати</territory> <!-- Google Patch: take variant form -->
+ 			<territory type="FM" alt="variant">Мікронезія Федеративні Штати</territory>
+ 			<territory type="FO">Фарерські острови</territory>
+ 			<territory type="FR">Франція</territory>
+Index: common/main/zh.xml
+===================================================================
+--- common/main/zh.xml	(revision 10023)
++++ common/main/zh.xml	(working copy)
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="zh"/>
+ 	</identity>
+@@ -4461,6 +4461,18 @@
+ 				<exemplarCity>富纳富提</exemplarCity>
+ 			</zone>
+ 			<zone type="Asia/Taipei">
++				<!-- Begin Google Patch for CLDR bug # 2202 -->
++				<long>
++					<generic>台北时间</generic>
++					<standard>台北标准时间</standard>
++					<daylight>台北夏令时间</daylight>
++                                </long>
++				<short>
++					<generic>台北</generic>
++					<standard>台北</standard>
++					<daylight>台北</daylight>
++				</short>
++                                <!-- End Google Patch.  -->
+ 				<exemplarCity>台北</exemplarCity>
+ 			</zone>
+ 			<zone type="Africa/Dar_es_Salaam">
 Index: common/main/zh_Hant.xml
 ===================================================================
---- common/main/zh_Hant.xml	(revision 6738)
+--- common/main/zh_Hant.xml	(revision 10023)
 +++ common/main/zh_Hant.xml	(working copy)
-@@ -779,8 +779,8 @@
- 			<territory type="GU">關島</territory>
- 			<territory type="GW">幾內亞比索</territory>
- 			<territory type="GY">蓋亞納</territory>
--			<territory type="HK">中華人民共和國香港特別行政區</territory>
--			<territory type="HK" alt="short">香港</territory>
-+			<territory type="HK" alt="SAR">中華人民共和國香港特別行政區</territory>
-+			<territory type="HK">香港</territory>
- 			<territory type="HM">赫德與麥克當諾群島</territory>
- 			<territory type="HN">宏都拉斯</territory>
- 			<territory type="HR">克羅埃西亞</territory>
-@@ -835,8 +835,8 @@
- 			<territory type="ML">馬利</territory>
- 			<territory type="MM">緬甸</territory>
- 			<territory type="MN">蒙古</territory>
--			<territory type="MO">中華人民共和國澳門特別行政區</territory>
--			<territory type="MO" alt="short">澳門</territory>
-+			<territory type="MO" alt="SAR">中華人民共和國澳門特別行政區</territory>
-+			<territory type="MO">澳門</territory>
- 			<territory type="MP">北馬里亞納群島</territory>
- 			<territory type="MQ">馬丁尼克島</territory>
- 			<territory type="MR">茅利塔尼亞</territory>
-@@ -3535,8 +3535,20 @@
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9852 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="zh"/>
+ 		<script type="Hant"/>
+@@ -4728,8 +4728,20 @@
  				<exemplarCity>富那富提</exemplarCity>
  			</zone>
  			<zone type="Asia/Taipei">
@@ -180,2243 +419,380 @@ Index: common/main/zh_Hant.xml
  			<zone type="Africa/Dar_es_Salaam">
  				<exemplarCity>沙蘭港</exemplarCity>
  			</zone>
-@@ -5532,8 +5544,9 @@
- 				<displayName>烏干達先令</displayName>
- 			</currency>
- 			<currency type="USD">
--				<displayName draft="contributed">美金</displayName>
--				<symbol draft="contributed">$</symbol>
-+				<displayName>美元</displayName>  <!-- Google Patch.  Same as zh.xml
-+								 	Restores value that changed with CLDR 1.9.
-+									Probable error in public CLDR. -->
- 			</currency>
- 			<currency type="USN">
- 				<displayName>美元（次日）</displayName>
-Index: common/main/ta.xml
-===================================================================
---- common/main/ta.xml	(revision 6738)
-+++ common/main/ta.xml	(working copy)
-@@ -792,8 +792,8 @@
- 			<territory type="GU">குவாம்</territory>
- 			<territory type="GW">கினி-பிஸ்ஸாவ்</territory>
- 			<territory type="GY">கயானா</territory>
--			<territory type="HK">ஹாங்காங் சார் சீனா</territory>
--			<territory type="HK" alt="short">ஹாங்காங்</territory>
-+			<territory type="HK" alt="SAR">ஹாங்காங் சார் சீனா</territory>
-+			<territory type="HK">ஹாங்காங்</territory>
- 			<territory type="HM">ஹேர்ட் மற்றும் மெக்டொனால்டு</territory>
- 			<territory type="HN">ஹாண்டுராஸ்</territory>
- 			<territory type="HR">குரோசியா</territory>
-@@ -848,8 +848,8 @@
- 			<territory type="ML">மாலீ</territory>
- 			<territory type="MM">மியான்மார் [பர்மா]</territory>
- 			<territory type="MN">மங்கோலியா</territory>
--			<territory type="MO">மகாவோ சார் சீனா</territory>
--			<territory type="MO" alt="short">மகாவோ</territory>
-+			<territory type="MO" alt="SAR">மகாவோ சார் சீனா</territory>
-+			<territory type="MO">மகாவோ</territory>
- 			<territory type="MP">வடக்கு மரியானா தீவுகள்</territory>
- 			<territory type="MQ">மார்டினிக்</territory>
- 			<territory type="MR">மௌரிடானியா</territory>
-@@ -1232,18 +1232,20 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="abbreviated">
--							<dayPeriod type="am">முற்பகல்</dayPeriod>
--							<dayPeriod type="pm">பிற்பகல்</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="narrow">
--							<dayPeriod type="am">முற்பகல்</dayPeriod>
--							<dayPeriod type="pm">பிற்பகல்</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">முற்பகல்</dayPeriod>
--							<dayPeriod type="pm">பிற்பகல்</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/gsw.xml
-===================================================================
---- common/main/gsw.xml	(revision 6738)
-+++ common/main/gsw.xml	(working copy)
-@@ -784,8 +784,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gineea-Bissau</territory>
- 			<territory type="GY">Guäjaana</territory>
--			<territory type="HK">Sonderverwaltigszone Hongkong</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Sonderverwaltigszone Hongkong</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Höörd- und MäcDonald-Insle</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroaazie</territory>
-@@ -840,8 +840,8 @@
- 			<territory type="ML">Maali</territory>
- 			<territory type="MM">Müanmar</territory>
- 			<territory type="MN">Mongolei</territory>
--			<territory type="MO">Sonderverwaltigszone Macao</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Sonderverwaltigszone Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nördlichi Mariaane</territory>
- 			<territory type="MQ">Martinigg</territory>
- 			<territory type="MR">Mauretaanie</territory>
-Index: common/main/el.xml
-===================================================================
---- common/main/el.xml	(revision 6738)
-+++ common/main/el.xml	(working copy)
-@@ -799,8 +799,8 @@
- 			<territory type="GU">Γκουάμ</territory>
- 			<territory type="GW">Γουινέα-Μπισάου</territory>
- 			<territory type="GY">Γουιάνα</territory>
--			<territory type="HK">Χονγκ Κονγκ ΕΔΠ Κίνας</territory>
--			<territory type="HK" alt="short">Χονγκ Κονγκ</territory>
-+			<territory type="HK" alt="SAR">Χονγκ Κονγκ ΕΔΠ Κίνας</territory>
-+			<territory type="HK">Χονγκ Κονγκ</territory>
- 			<territory type="HM">Νήσοι Χερντ και Μακντόναλντ</territory>
- 			<territory type="HN">Ονδούρα</territory>
- 			<territory type="HR">Κροατία</territory>
-@@ -855,8 +855,8 @@
- 			<territory type="ML">Μάλι</territory>
- 			<territory type="MM">Μιανμάρ</territory>
- 			<territory type="MN">Μογγολία</territory>
--			<territory type="MO">Μακάο ΕΔΠ Κίνας</territory>
--			<territory type="MO" alt="short">Μακάο</territory>
-+			<territory type="MO" alt="SAR">Μακάο ΕΔΠ Κίνας</territory>
-+			<territory type="MO">Μακάο</territory>
- 			<territory type="MP">Βόρειες Μαριάνες Νήσοι</territory>
- 			<territory type="MQ">Μαρτινίκα</territory>
- 			<territory type="MR">Μαυριτανία</territory>
-Index: common/main/et.xml
-===================================================================
---- common/main/et.xml	(revision 6738)
-+++ common/main/et.xml	(working copy)
-@@ -756,8 +756,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong - Hiina erihalduspiirkond</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong - Hiina erihalduspiirkond</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard ja McDonald saared</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Horvaatia</territory>
-@@ -812,8 +812,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongoolia</territory>
--			<territory type="MO">Aomen - Hiina erihalduspiirkond</territory>
--			<territory type="MO" alt="short">Aomen</territory>
-+			<territory type="MO" alt="SAR">Aomen - Hiina erihalduspiirkond</territory>
-+			<territory type="MO">Aomen</territory>
- 			<territory type="MP">Põhja-Mariaanid</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritaania</territory>
-Index: common/main/mr.xml
-===================================================================
---- common/main/mr.xml	(revision 6738)
-+++ common/main/mr.xml	(working copy)
-@@ -792,8 +792,8 @@
- 			<territory type="GU">गुआम</territory>
- 			<territory type="GW">गिनी-बिसाउ</territory>
- 			<territory type="GY">गयाना</territory>
--			<territory type="HK">हाँगकाँग एसएआर क्षेत्र चीन</territory>
--			<territory type="HK" alt="short">हाँगकाँग</territory>
-+			<territory type="HK" alt="SAR">हाँगकाँग एसएआर क्षेत्र चीन</territory>
-+			<territory type="HK">हाँगकाँग</territory>
- 			<territory type="HM">हर्ड बेट आणि मैकडोनाल्ड बेट</territory>
- 			<territory type="HN">होंडुराज्</territory>
- 			<territory type="HR">क्रोएशिया</territory>
-@@ -848,8 +848,8 @@
- 			<territory type="ML">माली</territory>
- 			<territory type="MM">म्यानमार [ब्रह्मदेश]</territory>
- 			<territory type="MN">मंगोलिया</territory>
--			<territory type="MO">मकाओ एसएआर चायना</territory>
--			<territory type="MO" alt="short">मकाऊ</territory>
-+			<territory type="MO" alt="SAR">मकाओ एसएआर चायना</territory>
-+			<territory type="MO">मकाऊ</territory>
- 			<territory type="MP">उत्तरी मारियाना बेटे</territory>
- 			<territory type="MQ">मार्टिनिक</territory>
- 			<territory type="MR">मॉरिटानिया</territory>
-@@ -1214,18 +1214,20 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="abbreviated">
--							<dayPeriod type="am">AM</dayPeriod>
--							<dayPeriod type="pm">PM</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="narrow">
--							<dayPeriod type="am">a</dayPeriod>
--							<dayPeriod type="pm">p</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">म.पू.</dayPeriod>
--							<dayPeriod type="pm">म.नं.</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/sk.xml
-===================================================================
---- common/main/sk.xml	(revision 6738)
-+++ common/main/sk.xml	(working copy)
-@@ -497,8 +497,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guayana</territory>
--			<territory type="HK">Hongkong S.A.R. Číny</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong S.A.R. Číny</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Heardove ostrovy a McDonaldove ostrovy</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Chorvátsko</territory>
-@@ -553,8 +553,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mjanmarsko</territory>
- 			<territory type="MN">Mongolsko</territory>
--			<territory type="MO">Makao S.A.R. Číny</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Makao S.A.R. Číny</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Severné Mariány</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mauritánia</territory>
-Index: common/main/hi.xml
-===================================================================
---- common/main/hi.xml	(revision 6738)
-+++ common/main/hi.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">गुआम</territory>
- 			<territory type="GW">गीनी-बिसाउ</territory>
- 			<territory type="GY">गुयाना</territory>
--			<territory type="HK">हांगकांग विशेष प्रशासनिक क्षेत्र चीन</territory>
--			<territory type="HK" alt="short">हाँग काँग</territory>
-+			<territory type="HK" alt="SAR">हांगकांग विशेष प्रशासनिक क्षेत्र चीन</territory>
-+			<territory type="HK">हाँग काँग</territory>
- 			<territory type="HM">हर्ड द्वीप और मैकडोनॉल्ड द्वीप</territory>
- 			<territory type="HN">हाण्डूरस</territory>
- 			<territory type="HR">क्रोशिया</territory>
-@@ -849,8 +849,9 @@
- 			<territory type="ML">माली</territory>
- 			<territory type="MM">म्यानमार</territory>
- 			<territory type="MN">मंगोलिया</territory>
--			<territory type="MO">मकाओ चीन</territory>
--			<territory type="MO" alt="short">मकाओ</territory>
-+			<territory type="MO" alt="SAR">मकाओ चीन</territory>
-+			<territory type="MO" alt="proposed-x1001" draft="unconfirmed">मकाओ SAR चीन</territory>
-+			<territory type="MO">मकाओ</territory>
- 			<territory type="MP">नॉर्दन मारियाना द्वीपसमूह</territory>
- 			<territory type="MQ">मार्टीनिक</territory>
- 			<territory type="MR">मॉरिटानिया</territory>
-@@ -1175,10 +1176,12 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">पूर्वाह्न</dayPeriod>
--							<dayPeriod type="pm">अपराह्न</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/lt.xml
-===================================================================
---- common/main/lt.xml	(revision 6738)
-+++ common/main/lt.xml	(working copy)
-@@ -790,8 +790,8 @@
- 			<territory type="GU">Guamas</territory>
- 			<territory type="GW">Bisau Gvinėja</territory>
- 			<territory type="GY">Gajana</territory>
--			<territory type="HK">Kinijos S. A. R. Honkongas</territory>
--			<territory type="HK" alt="short">Honkongas</territory>
-+			<territory type="HK" alt="SAR">Kinijos S. A. R. Honkongas</territory>
-+			<territory type="HK">Honkongas</territory>
- 			<territory type="HM">Heardo ir McDonaldo Salų Sritis</territory>
- 			<territory type="HN">Hondūras</territory>
- 			<territory type="HR">Kroatija</territory>
-Index: common/main/tr.xml
-===================================================================
---- common/main/tr.xml	(revision 6738)
-+++ common/main/tr.xml	(working copy)
-@@ -792,8 +792,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gine-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hong Kong SAR - Çin</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong SAR - Çin</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Heard Adası ve McDonald Adaları</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Hırvatistan</territory>
-@@ -848,8 +848,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Moğolistan</territory>
--			<territory type="MO">Makao SAR - Çin</territory>
--			<territory type="MO" alt="short">Makao</territory>
-+			<territory type="MO" alt="SAR">Makao SAR - Çin</territory>
-+			<territory type="MO">Makao</territory>
- 			<territory type="MP">Kuzey Mariana Adaları</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Moritanya</territory>
-@@ -1417,7 +1417,7 @@
- 					</dateFormatLength>
- 					<dateFormatLength type="short">
- 						<dateFormat>
--							<pattern>dd.MM.yyyy</pattern>
-+							<pattern>dd MM yyyy</pattern>  <!-- Google Patch -->
- 						</dateFormat>
- 					</dateFormatLength>
- 				</dateFormats>
-Index: common/main/ar.xml
-===================================================================
---- common/main/ar.xml	(revision 6738)
-+++ common/main/ar.xml	(working copy)
-@@ -767,8 +767,8 @@
- 			<territory type="GU">غوام</territory>
- 			<territory type="GW">غينيا بيساو</territory>
- 			<territory type="GY">غيانا</territory>
--			<territory type="HK">هونغ كونغ الصينية</territory>
--			<territory type="HK" alt="short">هونغ كونغ</territory>
-+			<territory type="HK" alt="SAR">هونغ كونغ الصينية</territory>
-+			<territory type="HK">هونغ كونغ</territory>
- 			<territory type="HM">جزيرة هيرد وجزر ماكدونالد</territory>
- 			<territory type="HN">هندوراس</territory>
- 			<territory type="HR">كرواتيا</territory>
-@@ -823,8 +823,8 @@
- 			<territory type="ML">مالي</territory>
- 			<territory type="MM">ميانمار -بورما</territory>
- 			<territory type="MN">منغوليا</territory>
--			<territory type="MO">مكاو الصينية [منطقة إدارية خاصة]</territory>
--			<territory type="MO" alt="short">ماكاو</territory>
-+			<territory type="MO" alt="SAR">مكاو الصينية [منطقة إدارية خاصة]</territory>
-+			<territory type="MO">ماكاو</territory>
- 			<territory type="MP">جزر ماريانا الشمالية</territory>
- 			<territory type="MQ">مارتينيك</territory>
- 			<territory type="MR">موريتانيا</territory>
-Index: common/main/mk.xml
-===================================================================
---- common/main/mk.xml	(revision 6738)
-+++ common/main/mk.xml	(working copy)
-@@ -692,8 +692,8 @@
- 			<territory type="GU">Гвам</territory>
- 			<territory type="GW">Гвинеа-Биса</territory>
- 			<territory type="GY">Гвајана</territory>
--			<territory type="HK">Хонг Конг С.А.Р Кина</territory>
--			<territory type="HK" alt="short">Хонг Конг</territory>
-+			<territory type="HK" alt="SAR">Хонг Конг С.А.Р Кина</territory>
-+			<territory type="HK">Хонг Конг</territory>
- 			<territory type="HM">Хардови острови и Мекдоналд Острови</territory>
- 			<territory type="HN">Хондурас</territory>
- 			<territory type="HR">Хрватска</territory>
-@@ -748,8 +748,8 @@
- 			<territory type="ML">Мали</territory>
- 			<territory type="MM">Мјанмар [Бурма]</territory>
- 			<territory type="MN">Монголија</territory>
--			<territory type="MO">Макао С.А.Р Кина</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао С.А.Р Кина</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Северни Маријанини Острови</territory>
- 			<territory type="MQ">Мартиник</territory>
- 			<territory type="MR">Мавританија</territory>
-Index: common/main/az.xml
-===================================================================
---- common/main/az.xml	(revision 6738)
-+++ common/main/az.xml	(working copy)
-@@ -757,8 +757,8 @@
- 			<territory type="GU" draft="contributed">Quam</territory>
- 			<territory type="GW" draft="contributed">Qvineya-Bisau</territory>
- 			<territory type="GY" draft="contributed">Quyana</territory>
--			<territory type="HK" draft="contributed">Honk Konq çina</territory>
--			<territory type="HK" alt="short" draft="contributed">Honk Konq</territory>
-+			<territory type="HK" alt="SAR" draft="contributed">Honk Konq çina</territory>
-+			<territory type="HK" draft="contributed">Honk Konq</territory>
- 			<territory type="HM" draft="contributed">Hörd və Makdonald Adaları</territory>
- 			<territory type="HN" draft="contributed">Qonduras</territory>
- 			<territory type="HR" draft="contributed">Xorvatiya</territory>
-@@ -811,8 +811,8 @@
- 			<territory type="ML" draft="contributed">Mali</territory>
- 			<territory type="MM" draft="contributed">Myanmar</territory>
- 			<territory type="MN" draft="contributed">Monqoliya</territory>
--			<territory type="MO" draft="contributed">Makao Çina</territory>
--			<territory type="MO" alt="short" draft="contributed">Makao</territory>
-+			<territory type="MO" alt="SAR" draft="contributed">Makao Çina</territory>
-+			<territory type="MO" draft="contributed">Makao</territory>
- 			<territory type="MP" draft="contributed">Şimal Mariana Adaları</territory>
- 			<territory type="MQ" draft="contributed">Martiniqu</territory>
- 			<territory type="MR" draft="contributed">Mavritaniya</territory>
-Index: common/main/ms.xml
-===================================================================
---- common/main/ms.xml	(revision 6738)
-+++ common/main/ms.xml	(working copy)
-@@ -357,7 +357,7 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hong Kong S.A.R., China</territory>
-+			<territory type="HK">Hong Kong</territory> <!-- Google Patch: remove SAR China -->
- 			<territory type="HK" alt="short">Hong Kong</territory>
- 			<territory type="HM">Heard Island and McDonald Islands</territory>
- 			<territory type="HN">Honduras</territory>
-@@ -413,8 +413,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macau SAR China</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+			<territory type="MO" alt="SAR">Macau SAR China</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Northern Mariana Islands</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/nb.xml
-===================================================================
---- common/main/nb.xml	(revision 6738)
-+++ common/main/nb.xml	(working copy)
-@@ -811,8 +811,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong S.A.R. Kina</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong S.A.R. Kina</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heardøya og McDonaldøyene</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatia</territory>
-@@ -867,8 +867,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macao S.A.R. Kina</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao S.A.R. Kina</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nord-Marianene</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/ru.xml
-===================================================================
---- common/main/ru.xml	(revision 6738)
-+++ common/main/ru.xml	(working copy)
-@@ -789,8 +789,8 @@
- 			<territory type="GU">Гуам</territory>
- 			<territory type="GW">Гвинея-Бисау</territory>
- 			<territory type="GY">Гайана</territory>
--			<territory type="HK">Гонконг (особый район)</territory>
--			<territory type="HK" alt="short">Гонконг</territory>
-+			<territory type="HK" alt="SAR">Гонконг (особый район)</territory>
-+			<territory type="HK">Гонконг</territory>
- 			<territory type="HM">Острова Херд и Макдональд</territory>
- 			<territory type="HN">Гондурас</territory>
- 			<territory type="HR">Хорватия</territory>
-@@ -845,8 +845,8 @@
- 			<territory type="ML">Мали</territory>
- 			<territory type="MM">Мьянма</territory>
- 			<territory type="MN">Монголия</territory>
--			<territory type="MO">Макао (особый район)</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао (особый район)</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Северные Марианские о-ва</territory>
- 			<territory type="MQ">Мартиника</territory>
- 			<territory type="MR">Мавритания</territory>
-Index: common/main/pt_PT.xml
-===================================================================
---- common/main/pt_PT.xml	(revision 6738)
-+++ common/main/pt_PT.xml	(working copy)
-@@ -142,7 +142,7 @@
- 			<territory type="FX" draft="contributed">França (continental)</territory>
- 			<territory type="GL">Gronelândia</territory>
- 			<territory type="GW">Guiné-Bissau</territory>
--			<territory type="HK">Região Administrativa Especial de Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Região Administrativa Especial de Hong Kong</territory>
- 			<territory type="IR">Irão</territory>
- 			<territory type="KE">Quénia</territory>
- 			<territory type="KG">Quirguizistão</territory>
-@@ -157,7 +157,7 @@
- 			<territory type="MK">Macedónia</territory>
- 			<territory type="MK" alt="variant">Antiga República jugoslava da Macedónia</territory>
- 			<territory type="MM">Mianmar</territory>
--			<territory type="MO">Região Administrativa Especial de Macau</territory>
-+			<territory type="MO" alt="SAR">Região Administrativa Especial de Macau</territory>
- 			<territory type="MP">Ilhas Mariana do Norte</territory>
- 			<territory type="MS" draft="contributed">Monserrate</territory>
- 			<territory type="MU">Maurícias</territory>
-Index: common/main/kn.xml
-===================================================================
---- common/main/kn.xml	(revision 6738)
-+++ common/main/kn.xml	(working copy)
-@@ -792,8 +792,8 @@
- 			<territory type="GU">ಗುಯಾಮ್</territory>
- 			<territory type="GW">ಗಿನಿ-ಬಿಸ್ಸಾವ್</territory>
- 			<territory type="GY">ಗಯಾನಾ</territory>
--			<territory type="HK">ಹಾಂಗ್‌ ಕಾಂಗ್‌ SAR ಚೀನಾ</territory>
--			<territory type="HK" alt="short">ಹಾಂಗ್ ಕಾಂಗ್</territory>
-+			<territory type="HK" alt="SAR">ಹಾಂಗ್‌ ಕಾಂಗ್‌ SAR ಚೀನಾ</territory>
-+			<territory type="HK">ಹಾಂಗ್ ಕಾಂಗ್</territory>
- 			<territory type="HM">ಹರ್ಡ್ ದ್ವೀಪ ಮತ್ತು ಮಾಕ್‌ಡೊನಾಲ್ಡ್ ದ್ವೀಪಗಳು</territory>
- 			<territory type="HN">ಹೊಂಡುರಾಸ್</territory>
- 			<territory type="HR">ಕ್ರೋಯೇಶಿಯಾ</territory>
-@@ -848,8 +848,8 @@
- 			<territory type="ML">ಮಾಲಿ</territory>
- 			<territory type="MM">ಮಯನ್ಮಾರ್</territory>
- 			<territory type="MN">ಮೊಂಗೋಲಿಯಾ</territory>
--			<territory type="MO">ಮೆಕ್ವಾ SAR ಚೀನಾ</territory>
--			<territory type="MO" alt="short">ಮಖಾವ್</territory>
-+			<territory type="MO" alt="SAR">ಮೆಕ್ವಾ SAR ಚೀನಾ</territory>
-+			<territory type="MO">ಮಖಾವ್</territory>
- 			<territory type="MP">ಉತ್ತರ ಮರಿಯಾನಾ ದ್ವೀಪಗಳು</territory>
- 			<territory type="MQ">ಮಾರ್ಟಿನಿಕ್</territory>
- 			<territory type="MR">ಮಾರಿಟಾನಿಯಾ</territory>
-@@ -1143,18 +1143,20 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="abbreviated">
--							<dayPeriod type="am">AM</dayPeriod>
--							<dayPeriod type="pm">PM</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="narrow">
--							<dayPeriod type="am">ಪೂರ್ವಾಹ್ನ</dayPeriod>
--							<dayPeriod type="pm">ಅಪ.</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">AM</dayPeriod>
--							<dayPeriod type="pm">PM</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/sl.xml
-===================================================================
---- common/main/sl.xml	(revision 6738)
-+++ common/main/sl.xml	(working copy)
-@@ -767,8 +767,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gvineja Bissau</territory>
- 			<territory type="GY">Gvajana</territory>
--			<territory type="HK">Posebno administrativno območje LR Kitajske Hong Kong</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Posebno administrativno območje LR Kitajske Hong Kong</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Otok Heard in otočje McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Hrvaška</territory>
-@@ -823,8 +823,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mjanmar [Burma]</territory>
- 			<territory type="MN">Mongolija</territory>
--			<territory type="MO">Posebno administrativno območje LR Kitajske Macao</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Posebno administrativno območje LR Kitajske Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Severni Marianski otoki</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mavretanija</territory>
-Index: common/main/en_Dsrt.xml
-===================================================================
---- common/main/en_Dsrt.xml	(revision 6738)
-+++ common/main/en_Dsrt.xml	(working copy)
-@@ -358,8 +358,8 @@
- 			<territory type="GU">𐐘𐐶𐐪𐑋</territory>
- 			<territory type="GW">𐐘𐐮𐑌𐐨-𐐒𐐮𐑅𐐵</territory>
- 			<territory type="GY">𐐘𐐴𐐰𐑌𐐲</territory>
--			<territory type="HK">𐐐𐐬𐑍 𐐗𐐬𐑍 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲</territory>
--			<territory type="HK" alt="short">𐐐𐐬𐑍 𐐗𐐬𐑍</territory>
-+			<territory type="HK" alt="SAR">𐐐𐐬𐑍 𐐗𐐬𐑍 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲</territory>
-+			<territory type="HK">𐐐𐐬𐑍 𐐗𐐬𐑍</territory>
- 			<territory type="HM">𐐐𐐲𐑉𐐼 𐐌𐑊𐐲𐑌𐐼 𐐰𐑌𐐼 𐐣𐐿𐐔𐐱𐑌𐐲𐑊𐐼 𐐌𐑊𐐲𐑌𐐼𐑆</territory>
- 			<territory type="HN">𐐐𐐪𐑌𐐼𐐭𐑉𐐲𐑅</territory>
- 			<territory type="HR">𐐗𐑉𐐬𐐩𐑇𐐲</territory>
-@@ -411,8 +411,8 @@
- 			<territory type="ML">𐐣𐐪𐑊𐐨</territory>
- 			<territory type="MM">𐐣𐐨𐐲𐑌𐑋𐐪𐑉</territory>
- 			<territory type="MN">𐐣𐐪𐑍𐑀𐐬𐑊𐐨𐐲</territory>
--			<territory type="MO">𐐣𐐲𐐿𐐵 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲</territory>
--			<territory type="MO" alt="short">𐐣𐐲𐐿𐐵</territory>
-+			<territory type="MO" alt="SAR">𐐣𐐲𐐿𐐵 𐐝𐐈𐐡 𐐕𐐴𐑌𐐲</territory>
-+			<territory type="MO">𐐣𐐲𐐿𐐵</territory>
- 			<territory type="MP">𐐤𐐱𐑉𐑄𐐲𐑉𐑌 𐐣𐐰𐑉𐐨𐐱𐑌𐐲 𐐌𐑊𐐲𐑌𐐼𐑆</territory>
- 			<territory type="MQ">𐐣𐐪𐑉𐐻𐑌𐐨𐐿</territory>
- 			<territory type="MR">𐐣𐐱𐑉𐐲𐐻𐐩𐑌𐐨𐐲</territory>
-Index: common/main/hr.xml
-===================================================================
---- common/main/hr.xml	(revision 6738)
-+++ common/main/hr.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gvineja Bisau</territory>
- 			<territory type="GY">Gvajana</territory>
--			<territory type="HK">Hong Kong S.A.R. Kine</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong S.A.R. Kine</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Otok Heard i Otoci McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Hrvatska</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mijanma</territory>
- 			<territory type="MN">Mongolija</territory>
--			<territory type="MO">Makao S.A.R. Kine</territory>
--			<territory type="MO" alt="short">Makao</territory>
-+			<territory type="MO" alt="SAR">Makao S.A.R. Kine</territory>
-+			<territory type="MO">Makao</territory>
- 			<territory type="MP">Sjeverni Marijanski Otoci</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mauritanija</territory>
-Index: common/main/en.xml
-===================================================================
---- common/main/en.xml	(revision 6738)
-+++ common/main/en.xml	(working copy)
-@@ -794,7 +794,7 @@
- 			<territory type="BZ">Belize</territory>
- 			<territory type="CA">Canada</territory>
- 			<territory type="CC">Cocos [Keeling] Islands</territory>
--			<territory type="CD">Congo - Kinshasa</territory>
-+			<territory type="CD">Congo [DRC]</territory> <!-- Google Patch: take variant form -->
- 			<territory type="CD" alt="variant">Congo [DRC]</territory>
- 			<territory type="CF">Central African Republic</territory>
- 			<territory type="CG">Congo - Brazzaville</territory>
-@@ -836,7 +836,7 @@
- 			<territory type="EU">European Union</territory>
- 			<territory type="FI">Finland</territory>
- 			<territory type="FJ">Fiji</territory>
--			<territory type="FK">Falkland Islands</territory>
-+			<territory type="FK">Falkland Islands [Islas Malvinas]</territory> <!-- Google Patch: take variant form -->
- 			<territory type="FK" alt="variant">Falkland Islands [Islas Malvinas]</territory>
- 			<territory type="FM">Micronesia</territory>
- 			<territory type="FO">Faroe Islands</territory>
-@@ -862,8 +862,9 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hong Kong SAR China</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+                        <!-- Google Patch: take short form for HK -->
-+			<territory type="HK" alt="SAR">Hong Kong SAR China</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Heard Island and McDonald Islands</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croatia</territory>
-@@ -915,13 +916,14 @@
- 			<territory type="MG">Madagascar</territory>
- 			<territory type="MH">Marshall Islands</territory>
- 			<territory type="MI">Midway Islands</territory>
--			<territory type="MK">Macedonia</territory>
-+			<territory type="MK">Macedonia [FYROM]</territory> <!-- Google Patch: take variant form -->
- 			<territory type="MK" alt="variant">Macedonia [FYROM]</territory>
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar [Burma]</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macau SAR China</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+                        <!-- Google Patch: take variant form for MO -->
-+			<territory type="MO" alt="SAR">Macau SAR China</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Northern Mariana Islands</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-@@ -4131,6 +4133,7 @@
- 				<displayName>Philippine Peso</displayName>
- 				<displayName count="one">Philippine peso</displayName>
- 				<displayName count="other">Philippine pesos</displayName>
-+                                <symbol>Php</symbol>  <!-- Google Patch -->
- 			</currency>
- 			<currency type="PKR">
- 				<displayName>Pakistani Rupee</displayName>
-Index: common/main/as.xml
-===================================================================
---- common/main/as.xml	(revision 6738)
-+++ common/main/as.xml	(working copy)
-@@ -235,7 +235,8 @@
- 		</timeZoneNames>
- 	</dates>
- 	<numbers>
--		<defaultNumberingSystem>latn</defaultNumberingSystem>
-+		<!-- Google Patch: http://unicode.org/cldr/trac/ticket/4193 -->
-+		<defaultNumberingSystem>beng</defaultNumberingSystem>
- 		<otherNumberingSystems>
- 			<native>beng</native>
- 		</otherNumberingSystems>
-Index: common/main/ml.xml
-===================================================================
---- common/main/ml.xml	(revision 6738)
-+++ common/main/ml.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">ഗ്വാം</territory>
- 			<territory type="GW">ഗിനി-ബിസോ</territory>
- 			<territory type="GY">ഗയാന</territory>
--			<territory type="HK">ഹോങ് കോങ് എസ്.ഏ.ആര്‍. ചൈന</territory>
--			<territory type="HK" alt="short">ഹോങ് കോങ്</territory>
-+			<territory type="HK" alt="SAR">ഹോങ് കോങ് എസ്.ഏ.ആര്‍. ചൈന</territory>
-+			<territory type="HK">ഹോങ് കോങ്</territory>
- 			<territory type="HM">ഹിയേര്‍ഡ് ദ്വീപും മക്ഡൊണാള്ഡ് ദ്വീപുകളും</territory>
- 			<territory type="HN">ഹോണ്ടുറാസ്</territory>
- 			<territory type="HR">ക്രൊയേഷ്യ</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">മാലി</territory>
- 			<territory type="MM">മ്യാന്‍മാര്‍</territory>
- 			<territory type="MN">മംഗോളിയ</territory>
--			<territory type="MO">മക്കാവോ SAR ചൈന</territory>
--			<territory type="MO" alt="short">മക്കാവോ</territory>
-+			<territory type="MO" alt="SAR">മക്കാവോ SAR ചൈന</territory>
-+			<territory type="MO">മക്കാവോ</territory>
- 			<territory type="MP">ഉത്തര മറിയാനാ ദ്വീപുകള്‍</territory>
- 			<territory type="MQ">മാര്‍ട്ടീനിക്</territory>
- 			<territory type="MR">മൗറിറ്റാനിയ</territory>
-@@ -1190,8 +1190,10 @@
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">രാവിലെ</dayPeriod>
--							<dayPeriod type="pm">വൈകുന്നേരം</dayPeriod>
-+                                                        <!-- Begin Google Patch.  Buganizer 5948448 -->
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
-+                                                        <!-- End Google Patch -->
- 						</dayPeriodWidth>
- 					</dayPeriodContext>
- 				</dayPeriods>
-Index: common/main/mt.xml
-===================================================================
---- common/main/mt.xml	(revision 6738)
-+++ common/main/mt.xml	(working copy)
-@@ -620,8 +620,8 @@
- 			<territory type="GU">Gwam</territory>
- 			<territory type="GW">Ginea-Bissaw</territory>
- 			<territory type="GY">Gujana</territory>
--			<territory type="HK">Ħong Kong S.A.R., Ċina</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">Ħong Kong</territory>
-+			<territory type="HK" alt="SAR">Ħong Kong S.A.R., Ċina</territory>
-+			<territory type="HK">Ħong Kong</territory>
- 			<territory type="HM">Heard Island and McDonald Islands</territory>
- 			<territory type="HN">Ħonduras</territory>
- 			<territory type="HR">Kroazja</territory>
-@@ -671,8 +671,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mjanmar</territory>
- 			<territory type="MN">Mongolja</territory>
--			<territory type="MO">Macao S.A.R., China</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao S.A.R., China</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Gżejjer Marjana ta’ Fuq</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mawritanja</territory>
-Index: common/main/vi.xml
-===================================================================
---- common/main/vi.xml	(revision 6738)
-+++ common/main/vi.xml	(working copy)
-@@ -356,8 +356,8 @@
- 			<territory type="GU">Đảo Gu-am</territory>
- 			<territory type="GW">Ghi-nê Bít-xao</territory>
- 			<territory type="GY">Guy-a-na</territory>
--			<territory type="HK">Đặc khu hành chính Hồng Kông thuộc CHND Trung Hoa</territory>
--			<territory type="HK" alt="short">Hồng Kông</territory>
-+			<territory type="HK" alt="SAR">Đặc khu hành chính Hồng Kông thuộc CHND Trung Hoa</territory>
-+			<territory type="HK">Hồng Kông</territory>
- 			<territory type="HM" draft="contributed">Đảo Heard và Quần đảo McDonald</territory>
- 			<territory type="HN">Hôn-đu-rát</territory>
- 			<territory type="HR">Crô-a-ti-a</territory>
-@@ -411,8 +411,8 @@
- 			<territory type="ML">Ma-li</territory>
- 			<territory type="MM">Mi-an-ma</territory>
- 			<territory type="MN">Mông Cổ</territory>
--			<territory type="MO" draft="contributed">Đặc khu hành chính Macao thuộc CHND Trung Hoa</territory>
--			<territory type="MO" alt="short" draft="contributed">Macao</territory>
-+			<territory type="MO" draft="contributed" alt="SAR">Đặc khu hành chính Macao thuộc CHND Trung Hoa</territory>
-+			<territory type="MO" draft="contributed">Macao</territory>
- 			<territory type="MP" draft="contributed">Quần Đảo Bắc Mariana</territory>
- 			<territory type="MR">Mô-ri-ta-ni</territory>
- 			<territory type="MS" draft="contributed">Montserrat</territory>
-Index: common/main/ca.xml
-===================================================================
---- common/main/ca.xml	(revision 6738)
-+++ common/main/ca.xml	(working copy)
-@@ -794,8 +794,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Regió administrativa especial xinesa de Hong Kong</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Regió administrativa especial xinesa de Hong Kong</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Illa Heard i Illes McDonald</territory>
- 			<territory type="HN">Hondures</territory>
- 			<territory type="HR">Croàcia</territory>
-@@ -850,8 +850,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar [Birmània]</territory>
- 			<territory type="MN">Mongòlia</territory>
--			<territory type="MO">Regió administrativa especial xinesa de Macau</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+			<territory type="MO" alt="SAR">Regió administrativa especial xinesa de Macau</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Illes Mariannes del Nord</territory>
- 			<territory type="MQ">Martinica</territory>
- 			<territory type="MR">Mauritània</territory>
-Index: common/main/gl.xml
-===================================================================
---- common/main/gl.xml	(revision 6738)
-+++ common/main/gl.xml	(working copy)
-@@ -389,8 +389,8 @@
- 			<territory type="GU" draft="contributed">Guam</territory>
- 			<territory type="GW" draft="contributed">Guinea-Bissau</territory>
- 			<territory type="GY" draft="contributed">Güiana</territory>
--			<territory type="HK" draft="contributed">Hong Kong RAE de China</territory>
--			<territory type="HK" alt="short" draft="contributed">Hong Kong</territory>
-+			<territory type="HK" alt="SAR" draft="contributed">Hong Kong RAE de China</territory>
-+			<territory type="HK" draft="contributed">Hong Kong</territory>
- 			<territory type="HM" draft="contributed">Illa Heard e Illas McDonald</territory>
- 			<territory type="HN" draft="contributed">Honduras</territory>
- 			<territory type="HR" draft="contributed">Croacia</territory>
-@@ -445,8 +445,8 @@
- 			<territory type="ML" draft="contributed">Mali</territory>
- 			<territory type="MM" draft="contributed">Myanmar</territory>
- 			<territory type="MN" draft="contributed">Mongolia</territory>
--			<territory type="MO" draft="contributed">Macau RAE de China</territory>
--			<territory type="MO" alt="short" draft="contributed">Macau</territory>
-+			<territory type="MO" alt="SAR" draft="contributed">Macau RAE de China</territory>
-+			<territory type="MO" draft="contributed">Macau</territory>
- 			<territory type="MP" draft="contributed">Illas Marianas do norte</territory>
- 			<territory type="MQ" draft="contributed">Martinica</territory>
- 			<territory type="MR" draft="contributed">Mauritania</territory>
-Index: common/main/se.xml
-===================================================================
---- common/main/se.xml	(revision 6738)
-+++ common/main/se.xml	(working copy)
-@@ -264,7 +264,6 @@
- 			<territory type="GW" draft="unconfirmed">Guinea-Bissau</territory>
- 			<territory type="GY" draft="unconfirmed">Guyana</territory>
- 			<territory type="HK" draft="unconfirmed">Hongkong</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">Hongkong</territory>
- 			<territory type="HM" draft="unconfirmed">Heard- ja McDonald-sullot</territory>
- 			<territory type="HN" draft="unconfirmed">Honduras</territory>
- 			<territory type="HR" draft="unconfirmed">Kroátia</territory>
-@@ -319,7 +318,6 @@
- 			<territory type="MM" draft="unconfirmed">Burma</territory>
- 			<territory type="MN" draft="unconfirmed">Mongolia</territory>
- 			<territory type="MO" draft="unconfirmed">Makáo</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">Makáo</territory>
- 			<territory type="MP" draft="unconfirmed">Davvi-Mariánat</territory>
- 			<territory type="MQ" draft="unconfirmed">Martinique</territory>
- 			<territory type="MR" draft="unconfirmed">Mauretánia</territory>
-Index: common/main/ko.xml
-===================================================================
---- common/main/ko.xml	(revision 6738)
-+++ common/main/ko.xml	(working copy)
-@@ -775,8 +775,8 @@
- 			<territory type="GU">괌</territory>
- 			<territory type="GW">기네비쏘</territory>
- 			<territory type="GY">가이아나</territory>
--			<territory type="HK">홍콩, 중국 특별행정구</territory>
--			<territory type="HK" alt="short">홍콩</territory>
-+			<territory type="HK" alt="SAR">홍콩, 중국 특별행정구</territory>
-+			<territory type="HK">홍콩</territory>
- 			<territory type="HM">허드섬-맥도널드제도</territory>
- 			<territory type="HN">온두라스</territory>
- 			<territory type="HR">크로아티아</territory>
-@@ -831,8 +831,8 @@
- 			<territory type="ML">말리</territory>
- 			<territory type="MM">미얀마</territory>
- 			<territory type="MN">몽골</territory>
--			<territory type="MO">마카오, 중국 특별행정구</territory>
--			<territory type="MO" alt="short">마카오</territory>
-+			<territory type="MO" alt="SAR">마카오, 중국 특별행정구</territory>
-+			<territory type="MO">마카오</territory>
- 			<territory type="MP">북마리아나제도</territory>
- 			<territory type="MQ">말티니크</territory>
- 			<territory type="MR">모리타니</territory>
-Index: common/main/lv.xml
-===================================================================
---- common/main/lv.xml	(revision 6738)
-+++ common/main/lv.xml	(working copy)
-@@ -729,8 +729,8 @@
- 			<territory type="GU">Guama</territory>
- 			<territory type="GW">Gvineja-Bisava</territory>
- 			<territory type="GY">Gajāna</territory>
--			<territory type="HK">Ķīnas īpašās pārvaldes apgabals Honkonga</territory>
--			<territory type="HK" alt="short">Honkonga</territory>
-+			<territory type="HK" alt="SAR">Ķīnas īpašās pārvaldes apgabals Honkonga</territory>
-+			<territory type="HK">Honkonga</territory>
- 			<territory type="HM">Hērda un Makdonalda salas</territory>
- 			<territory type="HN">Hondurasa</territory>
- 			<territory type="HR">Horvātija</territory>
-@@ -785,8 +785,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mjanma [Birma]</territory>
- 			<territory type="MN">Mongolija</territory>
--			<territory type="MO">Ķīnas īpašās pārvaldes apgabals Makao</territory>
--			<territory type="MO" alt="short">Makao</territory>
-+			<territory type="MO" alt="SAR">Ķīnas īpašās pārvaldes apgabals Makao</territory>
-+			<territory type="MO">Makao</territory>
- 			<territory type="MP">Ziemeļu Marianas salas</territory>
- 			<territory type="MQ">Martinika</territory>
- 			<territory type="MR">Mauritānija</territory>
-Index: common/main/uk.xml
-===================================================================
---- common/main/uk.xml	(revision 6738)
-+++ common/main/uk.xml	(working copy)
-@@ -781,7 +781,7 @@
- 			<territory type="FJ">Фіджі</territory>
- 			<territory type="FK">Фолклендські острови</territory>
- 			<territory type="FK" alt="variant">Фолклендські [Мальвінські] острови</territory>
--			<territory type="FM">Мікронезія</territory>
-+			<territory type="FM">Мікронезія Федеративні Штати</territory> <!-- Google Patch: take variant form -->
- 			<territory type="FM" alt="variant">Мікронезія Федеративні Штати</territory>
- 			<territory type="FO">Фарерські острови</territory>
- 			<territory type="FR">Франція</territory>
-@@ -804,8 +804,8 @@
- 			<territory type="GU">Гуам</territory>
- 			<territory type="GW">Гвінея-Біссау</territory>
- 			<territory type="GY">Гайана</territory>
--			<territory type="HK">Гонконґ О.А.Р. Китаю</territory>
--			<territory type="HK" alt="short">Гонконґ</territory>
-+			<territory type="HK" alt="SAR">Гонконґ О.А.Р. Китаю</territory>
-+			<territory type="HK">Гонконґ</territory>
- 			<territory type="HM">Острови Херд і Мак-Дональд</territory>
- 			<territory type="HN">Гондурас</territory>
- 			<territory type="HR">Хорватія</territory>
-@@ -860,8 +860,8 @@
- 			<territory type="ML">Малі</territory>
- 			<territory type="MM">Мʼянма [Бірма]</territory>
- 			<territory type="MN">Монголія</territory>
--			<territory type="MO">Макао О.А.Р. Китаю</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао О.А.Р. Китаю</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Північні Маріанські Острови</territory>
- 			<territory type="MQ">Мартиніка</territory>
- 			<territory type="MR">Мавританія</territory>
-Index: common/main/ja.xml
-===================================================================
---- common/main/ja.xml	(revision 6738)
-+++ common/main/ja.xml	(working copy)
-@@ -779,8 +779,8 @@
- 			<territory type="GU">グアム</territory>
- 			<territory type="GW">ギニアビサウ</territory>
- 			<territory type="GY">ガイアナ</territory>
--			<territory type="HK">中華人民共和国香港特別行政区</territory>
--			<territory type="HK" alt="short">香港</territory>
-+			<territory type="HK" alt="SAR">中華人民共和国香港特別行政区</territory>
-+			<territory type="HK">香港</territory>
- 			<territory type="HM">ハード島・マクドナルド諸島</territory>
- 			<territory type="HN">ホンジュラス</territory>
- 			<territory type="HR">クロアチア</territory>
-@@ -835,8 +835,8 @@
- 			<territory type="ML">マリ</territory>
- 			<territory type="MM">ミャンマー</territory>
- 			<territory type="MN">モンゴル</territory>
--			<territory type="MO">中華人民共和国マカオ特別行政区</territory>
--			<territory type="MO" alt="short">マカオ</territory>
-+			<territory type="MO" alt="SAR">中華人民共和国マカオ特別行政区</territory>
-+			<territory type="MO">マカオ</territory>
- 			<territory type="MP">北マリアナ諸島</territory>
- 			<territory type="MQ">マルティニーク島</territory>
- 			<territory type="MR">モーリタニア</territory>
-@@ -1587,8 +1587,10 @@
- 						<era type="1">西暦</era>
- 					</eraNames>
- 					<eraAbbr>
--						<era type="0">BC</era>
--						<era type="1">AD</era>
-+                                                <!-- Google Patch for b 2736196.
-+                                                     Remove when failing tests are fixed. -->
-+						<era type="0">紀元前</era>
-+						<era type="1">西暦</era>
- 					</eraAbbr>
- 				</eras>
- 				<dateFormats>
-@@ -4241,6 +4243,14 @@
- 					<standard>イラン標準時</standard>
- 					<daylight>イラン夏時間</daylight>
- 				</long>
-+				<!-- Begin Google Patch.  Restore CLDR 1.9 values  -->
-+				<short>
-+					<generic>JT</generic>
-+					<standard>JST</standard>
-+					<daylight>JDT</daylight>
-+				</short>
-+				<commonlyUsed>true</commonlyUsed>
-+				<!-- End Google Patch -->
- 			</metazone>
- 			<metazone type="Irkutsk">
- 				<long>
-Index: common/main/bs.xml
-===================================================================
---- common/main/bs.xml	(revision 6738)
-+++ common/main/bs.xml	(working copy)
-@@ -782,8 +782,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gvineja-Bisao</territory>
- 			<territory type="GY">Gvajana</territory>
--			<territory type="HK">Hong Kong (S. A. R. Kina)</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong (S. A. R. Kina)</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Herd i Mekdonald Ostrva</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Hrvatska</territory>
-@@ -838,8 +838,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mijanmar</territory>
- 			<territory type="MN">Mongolija</territory>
--			<territory type="MO">Makao (S. A. R. Kina)</territory>
--			<territory type="MO" alt="short">Makao</territory>
-+			<territory type="MO" alt="SAR">Makao (S. A. R. Kina)</territory>
-+			<territory type="MO">Makao</territory>
- 			<territory type="MP">Severna Marijanska Ostrva</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mauritanija</territory>
-Index: common/main/nl.xml
-===================================================================
---- common/main/nl.xml	(revision 6738)
-+++ common/main/nl.xml	(working copy)
-@@ -800,8 +800,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinee-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong SAR van China</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong SAR van China</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- en McDonaldeilanden</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatië</territory>
-@@ -856,8 +856,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolië</territory>
--			<territory type="MO">Macao SAR van China</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao SAR van China</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Noordelijke Marianeneilanden</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritanië</territory>
-Index: common/main/en_GB.xml
-===================================================================
---- common/main/en_GB.xml	(revision 6738)
-+++ common/main/en_GB.xml	(working copy)
-@@ -128,6 +128,9 @@
- 							<greatestDifference id="d">d-d</greatestDifference>
- 						</intervalFormatItem>
- 						<intervalFormatItem id="hm">
-+                                                        <!-- Google-specific fix for http://b/4025220 -->
-+							<greatestDifference id="a">h:mm a-h:mm a</greatestDifference>
-+                                                        <!-- End Google-specific fix -->
- 							<greatestDifference id="h">h:mm-h:mm a</greatestDifference>
- 							<greatestDifference id="m">h:mm-h:mm a</greatestDifference>
- 						</intervalFormatItem>
-@@ -366,6 +369,11 @@
- 				</currencyFormat>
- 			</currencyFormatLength>
- 		</currencyFormats>
-+		<currencies>
-+			<currency type="GBP">
-+				<symbol>£</symbol>  <!-- Google Addition. -->
-+			</currency>
-+		</currencies>
- 	</numbers>
- </ldml>
- 
-Index: common/main/ro.xml
-===================================================================
---- common/main/ro.xml	(revision 6738)
-+++ common/main/ro.xml	(working copy)
-@@ -478,8 +478,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guineea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">R.A.S. Hong Kong a Chinei</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">R.A.S. Hong Kong a Chinei</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Insula Heard și Insulele McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croația</territory>
-@@ -534,8 +534,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">R.A.S. Macao a Chinei</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">R.A.S. Macao a Chinei</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Insulele Mariane de Nord</territory>
- 			<territory type="MQ">Martinica</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/gu.xml
-===================================================================
---- common/main/gu.xml	(revision 6738)
-+++ common/main/gu.xml	(working copy)
-@@ -791,8 +791,8 @@
- 			<territory type="GU">ગ્વામ</territory>
- 			<territory type="GW">ગિની-બિસાઉ</territory>
- 			<territory type="GY">ગયાના</territory>
--			<territory type="HK">હોંગકોંગ સાર ચીન</territory>
--			<territory type="HK" alt="short">હોંગ કોંગ</territory>
-+			<territory type="HK" alt="SAR">હોંગકોંગ સાર ચીન</territory>
-+			<territory type="HK">હોંગ કોંગ</territory>
- 			<territory type="HM">હર્ડ આઇલૅંડ એંડ મેકડોનાલ્ડ આઇલૅંડ્સ</territory>
- 			<territory type="HN">હોન્ડુરસ</territory>
- 			<territory type="HR">ક્રોએશિયા</territory>
-@@ -847,8 +847,8 @@
- 			<territory type="ML">માલી</territory>
- 			<territory type="MM">મ્યાંમાર</territory>
- 			<territory type="MN">મંગોલિયા</territory>
--			<territory type="MO">મકાઉ SAR ચીન</territory>
--			<territory type="MO" alt="short">મકાઓ</territory>
-+			<territory type="MO" alt="SAR">મકાઉ SAR ચીન</territory>
-+			<territory type="MO">મકાઓ</territory>
- 			<territory type="MP">ઉતરીય મારિયાના આઇલેન્ડ્સ</territory>
- 			<territory type="MQ">માર્ટીનીક</territory>
- 			<territory type="MR">મૌરિટાનિયા</territory>
-@@ -1085,7 +1085,7 @@
- 							<month type="7">જુલાઈ</month>
- 							<month type="8">ઑગસ્ટ</month>
- 							<month type="9">સપ્ટેમ્બર</month>
--							<month type="10">ઑક્ટ્બર</month>
-+							<month type="10">ઑક્ટોબર</month> <!-- Google patch: http://b/issue?id=5475206 http://unicode.org/cldr/trac/ticket/4170 -->
- 							<month type="11">નવેમ્બર</month>
- 							<month type="12">ડિસેમ્બર</month>
- 						</monthWidth>
-@@ -1170,10 +1170,12 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">પૂર્વ મધ્યાહ્ન</dayPeriod>
--							<dayPeriod type="pm">ઉત્તર મધ્યાહ્ન</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/da.xml
-===================================================================
---- common/main/da.xml	(revision 6738)
-+++ common/main/da.xml	(working copy)
-@@ -798,8 +798,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">SAR Hongkong</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">SAR Hongkong</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- og McDonald-øerne</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatien</territory>
-@@ -854,8 +854,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongoliet</territory>
--			<territory type="MO">SAR Macao</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">SAR Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nordmarianerne</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauretanien</territory>
-Index: common/main/nds.xml
-===================================================================
---- common/main/nds.xml	(revision 6738)
-+++ common/main/nds.xml	(working copy)
-@@ -773,8 +773,8 @@
- 			<territory type="GU" draft="unconfirmed">Guam</territory>
- 			<territory type="GW" draft="unconfirmed">Guinea-Bissau</territory>
- 			<territory type="GY" draft="unconfirmed">Guyana</territory>
--			<territory type="HK" draft="unconfirmed">Sünnerverwaltensrebeed Hongkong</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">Hongkong</territory>
-+			<territory type="HK" alt="SAR" draft="unconfirmed">Sünnerverwaltensrebeed Hongkong</territory>
-+			<territory type="HK" draft="unconfirmed">Hongkong</territory>
- 			<territory type="HM" draft="unconfirmed">Heard- un McDonald-Eilannen</territory>
- 			<territory type="HN" draft="unconfirmed">Honduras</territory>
- 			<territory type="HR" draft="unconfirmed">Kroatien</territory>
-@@ -827,8 +827,8 @@
- 			<territory type="ML" draft="unconfirmed">Mali</territory>
- 			<territory type="MM" draft="unconfirmed">Birma</territory>
- 			<territory type="MN" draft="unconfirmed">Mongolei</territory>
--			<territory type="MO" draft="unconfirmed">Sünnerverwaltensrebeed Macao</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">Macao</territory>
-+			<territory type="MO" alt="SAR" draft="unconfirmed">Sünnerverwaltensrebeed Macao</territory>
-+			<territory type="MO" draft="unconfirmed">Macao</territory>
- 			<territory type="MP" draft="unconfirmed">Nöördliche Marianen</territory>
- 			<territory type="MQ" draft="unconfirmed">Martinique</territory>
- 			<territory type="MR" draft="unconfirmed">Mauretanien</territory>
-Index: common/main/sv.xml
-===================================================================
---- common/main/sv.xml	(revision 6738)
-+++ common/main/sv.xml	(working copy)
-@@ -815,8 +815,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong (S.A.R. Kina)</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong (S.A.R. Kina)</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- och McDonaldöarna</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatien</territory>
-@@ -871,8 +871,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongoliet</territory>
--			<territory type="MO">Macao (S.A.R. Kina)</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao (S.A.R. Kina)</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nordmarianerna</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauretanien</territory>
-Index: common/main/te.xml
-===================================================================
---- common/main/te.xml	(revision 6738)
-+++ common/main/te.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">గ్వామ్</territory>
- 			<territory type="GW">గినియా-బిస్సావ్</territory>
- 			<territory type="GY">గయానా</territory>
--			<territory type="HK">చైనా యొక్క హాంగ్కాంగ్</territory>
--			<territory type="HK" alt="short">హాంగ్ కాంగ్</territory>
-+			<territory type="HK" alt="SAR">చైనా యొక్క హాంగ్కాంగ్</territory>
-+			<territory type="HK">హాంగ్ కాంగ్</territory>
- 			<territory type="HM">హెర్డ్ దీవి మరియు మాక్ డోనాల్డ్ దీవులు</territory>
- 			<territory type="HN">హోండోరాస్</territory>
- 			<territory type="HR">క్రోయేషియా</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">మాలి</territory>
- 			<territory type="MM">మ్యాన్మార్</territory>
- 			<territory type="MN">మంగోలియా</territory>
--			<territory type="MO">మాకావ్ సార్ చైనా</territory>
--			<territory type="MO" alt="short">మాకావ్</territory>
-+			<territory type="MO" alt="SAR">మాకావ్ సార్ చైనా</territory>
-+			<territory type="MO">మాకావ్</territory>
- 			<territory type="MP">ఉత్తర మరియానా దీవులు</territory>
- 			<territory type="MQ">మార్టినిక్</territory>
- 			<territory type="MR">మౌరిటేనియా</territory>
-@@ -1195,16 +1195,18 @@
- 				</quarters>
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
-+                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
- 						<dayPeriodWidth type="wide">
- 							<dayPeriod type="afternoon">రాత్రి</dayPeriod>
--							<dayPeriod type="am">పూర్వాహ్నం</dayPeriod>
-+							<dayPeriod type="am">am</dayPeriod>
- 							<dayPeriod type="earlyMorning">ఉదయం</dayPeriod>
- 							<dayPeriod type="evening">అర్ధరాత్రి</dayPeriod>
- 							<dayPeriod type="morning">మధ్యాహ్నం</dayPeriod>
- 							<dayPeriod type="night">తెల్లవారుఝాము</dayPeriod>
- 							<dayPeriod type="noon">సాయంకాలం</dayPeriod>
--							<dayPeriod type="pm">అపరాహ్నం</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
-+                                                <!-- End Google Patch -->
- 					</dayPeriodContext>
- 				</dayPeriods>
- 				<eras>
-Index: common/main/is.xml
-===================================================================
---- common/main/is.xml	(revision 6738)
-+++ common/main/is.xml	(working copy)
-@@ -137,7 +137,7 @@
- 			<language type="efi">efík</language>
- 			<language type="egy">fornegypska</language>
- 			<language type="eka">ekajúk</language>
--			<language type="el">nýgríska (1453-)</language>
-+			<language type="el">nýgríska</language>
- 			<language type="elx">elamít</language>
- 			<language type="en">enska</language>
- 			<language type="en_AU">áströlsk enska</language>
-Index: common/main/ne.xml
-===================================================================
---- common/main/ne.xml	(revision 6738)
-+++ common/main/ne.xml	(working copy)
-@@ -357,8 +357,8 @@
- 			<territory type="GU" draft="contributed">गुवाम</territory>
- 			<territory type="GW" draft="contributed">गिनी-बिसाउ</territory>
- 			<territory type="GY" draft="contributed">गुयाना</territory>
--			<territory type="HK" draft="contributed">हङकङ चिनिँया समाजवादी स्वायत्त क्षेत्र</territory>
--			<territory type="HK" alt="short" draft="contributed">हङकङ</territory>
-+			<territory type="HK" alt="SAR" draft="contributed">हङकङ चिनिँया समाजवादी स्वायत्त क्षेत्र</territory>
-+			<territory type="HK" draft="contributed">हङकङ</territory>
- 			<territory type="HM" draft="contributed">हर्ड टापु र म्याकडोनाल्ड टापु</territory>
- 			<territory type="HN" draft="contributed">हन्डुरास</territory>
- 			<territory type="HR" draft="contributed">क्रोएशिया</territory>
-@@ -411,8 +411,8 @@
- 			<territory type="ML" draft="contributed">माली</territory>
- 			<territory type="MM" draft="contributed">म्यान्मार</territory>
- 			<territory type="MN" draft="contributed">मङ्गोलिया</territory>
--			<territory type="MO" draft="contributed">मकावो चिनिँया स्वशासित क्षेत्र</territory>
--			<territory type="MO" alt="short" draft="contributed">मकावो</territory>
-+			<territory type="MO" alt="SAR" draft="contributed">मकावो चिनिँया स्वशासित क्षेत्र</territory>
-+			<territory type="MO" draft="contributed">मकावो</territory>
- 			<territory type="MP" draft="contributed">उत्तरी मारिआना टापु</territory>
- 			<territory type="MQ" draft="contributed">मार्टिनिक</territory>
- 			<territory type="MR" draft="contributed">माउरिटानिया</territory>
-Index: common/main/fo.xml
-===================================================================
---- common/main/fo.xml	(revision 6738)
-+++ common/main/fo.xml	(working copy)
-@@ -297,7 +297,6 @@
- 			<territory type="GW">Guinea Bissau</territory>
- 			<territory type="GY">Gujana</territory>
- 			<territory type="HK" draft="unconfirmed">Hongkong</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">Hongkong</territory>
- 			<territory type="HM" draft="unconfirmed">Heard- og McDonald-oyggjarnar</territory>
- 			<territory type="HN" draft="unconfirmed">Honduras</territory>
- 			<territory type="HR">Kroatia</territory>
-@@ -353,7 +352,6 @@
- 			<territory type="MM" draft="unconfirmed">Burma</territory>
- 			<territory type="MN" draft="unconfirmed">Mongolia</territory>
- 			<territory type="MO" draft="unconfirmed">Makao</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">Makao</territory>
- 			<territory type="MP" draft="unconfirmed">Norðurmarianoyggjarnar</territory>
- 			<territory type="MQ" draft="unconfirmed">Martinique</territory>
- 			<territory type="MR">Móritania</territory>
-Index: common/main/root.xml
-===================================================================
---- common/main/root.xml	(revision 6738)
-+++ common/main/root.xml	(working copy)
-@@ -2521,7 +2521,7 @@
- 				<symbol>€</symbol>
- 			</currency>
- 			<currency type="GBP">
--				<symbol>£</symbol>
-+				<symbol>UK£</symbol>  <!-- Google Patch.  Was plain £ -->
- 			</currency>
- 			<currency type="HKD">
- 				<symbol>HK$</symbol>
-@@ -2530,7 +2530,7 @@
- 				<symbol>₪</symbol>
- 			</currency>
- 			<currency type="INR">
--				<symbol>₹</symbol>
-+				<symbol>Rs.</symbol>   <!-- Google Patch.  Bug # 1453176 -->
- 			</currency>
- 			<currency type="JPY">
- 				<symbol>JP¥</symbol>
-Index: common/main/ka.xml
-===================================================================
---- common/main/ka.xml	(revision 6738)
-+++ common/main/ka.xml	(working copy)
-@@ -334,8 +334,8 @@
- 			<territory type="GU" draft="contributed">გუამი</territory>
- 			<territory type="GW">გვინეა-ბისაუ</territory>
- 			<territory type="GY">გაიანა</territory>
--			<territory type="HK" draft="contributed">ჰონგ კონგი</territory>
--			<territory type="HK" alt="short">ჰონგ კონგი</territory>
-+			<territory type="HK" alt="SAR" draft="contributed">ჰონგ კონგი</territory>
-+			<territory type="HK">ჰონგ კონგი</territory>
- 			<territory type="HM" draft="contributed">ჰერდის კუნძული და მაკდონალდის კუნძულები</territory>
- 			<territory type="HN">ჰონდურასი</territory>
- 			<territory type="HR">ჰორვატია</territory>
-@@ -387,8 +387,8 @@
- 			<territory type="ML">მალი</territory>
- 			<territory type="MM">მიანმარი</territory>
- 			<territory type="MN">მონღოლეთი</territory>
--			<territory type="MO" draft="contributed">მაკაო</territory>
--			<territory type="MO" alt="short">მაკაო</territory>
-+			<territory type="MO" alt="SAR" draft="contributed">მაკაო</territory>
-+			<territory type="MO">მაკაო</territory>
- 			<territory type="MQ" draft="contributed">მარტინიკი</territory>
- 			<territory type="MR">მავრიტანია</territory>
- 			<territory type="MS">მონსერატი</territory>
-Index: common/main/cs.xml
-===================================================================
---- common/main/cs.xml	(revision 6738)
-+++ common/main/cs.xml	(working copy)
-@@ -722,8 +722,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong - zvláštní administrativní oblast Číny</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong, zvláštní administrativní oblast Číny</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heardův ostrov a McDonaldovy ostrovy</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Chorvatsko</territory>
-@@ -778,8 +778,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolsko</territory>
--			<territory type="MO">Macao - zvláštní administrativní oblast Číny</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Zvláštní administrativní oblast Číny Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Severní Mariany</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mauritánie</territory>
-@@ -1360,6 +1360,9 @@
- 							<greatestDifference id="h" draft="contributed">h–h a</greatestDifference>
- 						</intervalFormatItem>
- 						<intervalFormatItem id="hm">
-+                                                        <!-- Google-specific fix for http://b/4025220 -->
-+							<greatestDifference id="a">h:mm a-h:mm a</greatestDifference>
-+							<!-- End Google-specific fix -->
- 							<greatestDifference id="h" draft="contributed">h:mm–h:mm a</greatestDifference>
- 							<greatestDifference id="m" draft="contributed">h:mm–h:mm a</greatestDifference>
- 						</intervalFormatItem>
-Index: common/main/he.xml
-===================================================================
---- common/main/he.xml	(revision 6738)
-+++ common/main/he.xml	(working copy)
-@@ -493,8 +493,8 @@
- 			<territory type="GU">גואם</territory>
- 			<territory type="GW">גיניאה-ביסאו</territory>
- 			<territory type="GY">גיאנה</territory>
--			<territory type="HK">הונג קונג - מחוז מנהלי מיוחד של סין</territory>
--			<territory type="HK" alt="short">הונג קונג</territory>
-+			<territory type="HK" alt="SAR">הונג קונג - מחוז מנהלי מיוחד של סין</territory>
-+			<territory type="HK">הונג קונג</territory>
- 			<territory type="HM" draft="contributed">איי הרד ואיי מקדונלנד</territory>
- 			<territory type="HN">הונדורס</territory>
- 			<territory type="HR">קרואטיה</territory>
-@@ -549,8 +549,8 @@
- 			<territory type="ML">מאלי</territory>
- 			<territory type="MM">מייאנמאר</territory>
- 			<territory type="MN">מונגוליה</territory>
--			<territory type="MO">מקאו - מחוז מנהלי מיוחד של סין</territory>
--			<territory type="MO" alt="short">מקאו</territory>
-+			<territory type="MO" alt="SAR">מקאו - מחוז מנהלי מיוחד של סין</territory>
-+			<territory type="MO">מקאו</territory>
- 			<territory type="MP">איי מריאנה הצפוניים</territory>
- 			<territory type="MQ">מרטיניק</territory>
- 			<territory type="MR">מאוריטניה</territory>
-Index: common/main/hu.xml
-===================================================================
---- common/main/hu.xml	(revision 6738)
-+++ common/main/hu.xml	(working copy)
-@@ -801,8 +801,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong SAR Kína</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong SAR Kína</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard és McDonald Szigetek</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Horvátország</territory>
-@@ -857,8 +857,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mianmar [Burma]</territory>
- 			<territory type="MN">Mongólia</territory>
--			<territory type="MO">Makaó SAR Kína</territory>
--			<territory type="MO" alt="short">Makaó</territory>
-+			<territory type="MO" alt="SAR">Makaó SAR Kína</territory>
-+			<territory type="MO">Makaó</territory>
- 			<territory type="MP">Északi Mariana-szigetek</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritánia</territory>
-Index: common/main/af.xml
-===================================================================
---- common/main/af.xml	(revision 6738)
-+++ common/main/af.xml	(working copy)
-@@ -398,7 +398,6 @@
- 			<territory type="GW">Guinee-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
- 			<territory type="HK">Hongkong</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
- 			<territory type="HM">Heard-eiland en McDonald-eilande</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroasië</territory>
-@@ -453,8 +452,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mianmar</territory>
- 			<territory type="MN">Mongolië</territory>
--			<territory type="MO">Macau SAR China</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+			<territory type="MO" alt="SAR">Macau SAR China</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Noordelike Marianaeilande</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mouritanië</territory>
-Index: common/main/id.xml
-===================================================================
---- common/main/id.xml	(revision 6738)
-+++ common/main/id.xml	(working copy)
-@@ -60,7 +60,9 @@
- 			<language type="bem">Bemba</language>
- 			<language type="ber">Rumpun Bahasa Berber</language>
- 			<language type="bez">Bena</language>
--			<language type="bg">Bulgaria</language>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<language type="bg">Bulgar</language>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<language type="bh">Bihari</language>
- 			<language type="bho">Bhojpur</language>
- 			<language type="bi">Bislama</language>
-@@ -157,8 +159,10 @@
- 			<language type="fat">Fanti</language>
- 			<language type="ff">Fulah</language>
- 			<language type="fi">Suomi</language>
--			<language type="fil">Filipina</language>
--			<language type="fiu">Rumpun Bahasa Finno-Ugrik</language>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<language type="fil">Filipino</language>
-+			<!-- End Google-specific change (http://b/2160147) -->
-+                        <language type="fiu">Rumpun Bahasa Finno-Ugrik</language>
- 			<language type="fj">Fiji</language>
- 			<language type="fo">Faro</language>
- 			<language type="fon">Fon</language>
-@@ -517,7 +521,10 @@
- 			<language type="za">Zhuang</language>
- 			<language type="zap">Zapotek</language>
- 			<language type="zen">Zenaga</language>
--			<language type="zh">Mandarin</language>
-+                        <!-- TODO (aheninger): http://b/2590843, move to CLDR 1.8 data? -->
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<language type="zh">China</language>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<language type="zh_Hans">Mandarin (aksara sederhana)</language>
- 			<language type="zh_Hant">Mandarin (aksara tradisional)</language>
- 			<language type="znd">Zande</language>
-@@ -727,7 +734,9 @@
- 			<territory type="CK">Kepulauan Cook</territory>
- 			<territory type="CL">Cile</territory>
- 			<territory type="CM">Kamerun</territory>
--			<territory type="CN">Cina</territory>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<territory type="CN">China</territory>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<territory type="CO">Kolombia</territory>
- 			<territory type="CP">Pulau Clipperton</territory>
- 			<territory type="CR">Kosta Rika</territory>
-@@ -736,7 +745,9 @@
- 			<territory type="CV">Tanjung Verde</territory>
- 			<territory type="CX">Pulau Christmas</territory>
- 			<territory type="CY">Siprus</territory>
--			<territory type="CZ">Republik Ceko</territory>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<territory type="CZ">Republik Cheska</territory>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<territory type="DE">Jerman</territory>
- 			<territory type="DG">Diego Garcia</territory>
- 			<territory type="DJ">Jibuti</territory>
-@@ -759,9 +770,13 @@
- 			<territory type="FK" alt="variant">Kepulauan Malvinas</territory>
- 			<territory type="FM">Mikronesia</territory>
- 			<territory type="FO">Kepulauan Faroe</territory>
--			<territory type="FR">Perancis</territory>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<territory type="FR">Prancis</territory>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<territory type="GA">Gabon</territory>
--			<territory type="GB">Inggris Raya</territory>
-+			<!-- Begin Google-specific change (http://b/2160147) -->
-+			<territory type="GB">Britania Raya</territory>
-+			<!-- End Google-specific change (http://b/2160147) -->
- 			<territory type="GD">Grenada</territory>
- 			<territory type="GE">Georgia</territory>
- 			<territory type="GF">Guyana Perancis</territory>
-@@ -779,8 +794,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hong Kong SAR China</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong SAR China</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Pulau Heard dan Kepulauan McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroasia</territory>
-@@ -835,8 +850,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Makau SAR China</territory>
--			<territory type="MO" alt="short">Makau</territory>
-+			<territory type="MO" alt="SAR">Makau SAR China</territory>
-+			<territory type="MO">Makau</territory>
- 			<territory type="MP">Kepulauan Mariana Utara</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/it.xml
-===================================================================
---- common/main/it.xml	(revision 6738)
-+++ common/main/it.xml	(working copy)
-@@ -774,8 +774,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Regione Amministrativa Speciale di Hong Kong della Repubblica Popolare Cinese</territory>
--			<territory type="HK" alt="short">Hong-Kong</territory>
-+			<territory type="HK" alt="SAR">Regione Amministrativa Speciale di Hong Kong della Repubblica Popolare Cinese</territory>
-+			<territory type="HK">Hong-Kong</territory>
- 			<territory type="HM">Isole Heard ed Isole McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croazia</territory>
-@@ -830,8 +830,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Regione Amministrativa Speciale di Macao della Repubblica Popolare Cinese</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Regione Amministrativa Speciale di Macao della Repubblica Popolare Cinese</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Isole Marianne Settentrionali</territory>
- 			<territory type="MQ">Martinica</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/be.xml
-===================================================================
---- common/main/be.xml	(revision 6738)
-+++ common/main/be.xml	(working copy)
-@@ -322,8 +322,8 @@
- 			<territory type="GT">Гватэмала</territory>
- 			<territory type="GW">Гвінея-Бісаў</territory>
- 			<territory type="GY">Гаяна</territory>
--			<territory type="HK">Гон-Конг, Кітай (САР)</territory>
--			<territory type="HK" alt="short">Гон-Конг</territory>
-+			<territory type="HK" alt="SAR">Гон-Конг, Кітай (САР)</territory>
-+			<territory type="HK">Гон-Конг</territory>
- 			<territory type="HM">Гэрда востраў і МакДоналда астравы</territory>
- 			<territory type="HN">Гандурас</territory>
- 			<territory type="HR">Харватыя</territory>
-@@ -373,8 +373,8 @@
- 			<territory type="ML">Малі</territory>
- 			<territory type="MM">М'янма</territory>
- 			<territory type="MN">Манголія</territory>
--			<territory type="MO">Макао, Кітай (САР)</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао, Кітай (САР)</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Паўночныя Марыянскія астравы</territory>
- 			<territory type="MQ">Марцініка</territory>
- 			<territory type="MR">Маўрытанія</territory>
-Index: common/main/sr_Latn.xml
-===================================================================
---- common/main/sr_Latn.xml	(revision 6738)
-+++ common/main/sr_Latn.xml	(working copy)
-@@ -784,8 +784,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gvineja-Bisao</territory>
- 			<territory type="GY">Gvajana</territory>
--			<territory type="HK">Hong Kong (S. A. R. Kina)</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong (S. A. R. Kina)</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Herd i Mekdonald Ostrva</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Hrvatska</territory>
-@@ -840,8 +840,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mijanmar</territory>
- 			<territory type="MN">Mongolija</territory>
--			<territory type="MO">Makao (S. A. R. Kina)</territory>
--			<territory type="MO" alt="short">Makao</territory>
-+			<territory type="MO" alt="SAR">Makao (S. A. R. Kina)</territory>
-+			<territory type="MO">Makao</territory>
- 			<territory type="MP">Severna Marijanska Ostrva</territory>
- 			<territory type="MQ">Martinik</territory>
- 			<territory type="MR">Mauritanija</territory>
-@@ -1252,7 +1252,9 @@
- 						<dateFormatItem id="MEd" draft="provisional">E, M-d</dateFormatItem>
- 						<dateFormatItem id="MMdd" draft="provisional">MM-dd</dateFormatItem>
- 						<dateFormatItem id="MMM" draft="provisional">LLL</dateFormatItem>
--						<dateFormatItem id="MMMd" draft="provisional">MMM d.</dateFormatItem>
-+						<!-- Begin Google-specific change (http://b/3076474) -->
-+						<dateFormatItem id="MMMd">dd. MMM</dateFormatItem>
-+						<!-- End Google-specific change (http://b/3076474) -->
- 						<dateFormatItem id="MMMdd" draft="provisional">dd.MMM</dateFormatItem>
- 						<dateFormatItem id="MMMEd" draft="provisional">E d. MMM</dateFormatItem>
- 						<dateFormatItem id="MMMMd" draft="provisional">MMMM d.</dateFormatItem>
-Index: common/main/nn.xml
-===================================================================
---- common/main/nn.xml	(revision 6738)
-+++ common/main/nn.xml	(working copy)
-@@ -806,8 +806,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong S.A.R. Kina</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong S.A.R. Kina</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- og McDonaldsøyane</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatia</territory>
-@@ -862,8 +862,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macao S.A.R. Kina</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao S.A.R. Kina</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Nord-Marianane</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/pl.xml
-===================================================================
---- common/main/pl.xml	(revision 6738)
-+++ common/main/pl.xml	(working copy)
-@@ -788,8 +788,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Gwinea Bissau</territory>
- 			<territory type="GY">Gujana</territory>
--			<territory type="HK">Hongkong SAR</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong SAR</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Wyspy Heard i McDonalda</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Chorwacja</territory>
-@@ -844,8 +844,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Birma</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Makau SAR</territory>
--			<territory type="MO" alt="short">Makau</territory>
-+			<territory type="MO" alt="SAR">Makau SAR</territory>
-+			<territory type="MO">Makau</territory>
- 			<territory type="MP">Mariany Północne</territory>
- 			<territory type="MQ">Martynika</territory>
- 			<territory type="MR">Mauretania</territory>
-Index: common/main/to.xml
-===================================================================
---- common/main/to.xml	(revision 6738)
-+++ common/main/to.xml	(working copy)
-@@ -359,8 +359,8 @@
- 			<territory type="GU">Kuamu</territory>
- 			<territory type="GW">Kini-Pisau</territory>
- 			<territory type="GY">Kuiana</territory>
--			<territory type="HK">Hongi Kongi SAR Siaina</territory>
--			<territory type="HK" alt="short">Hongi Kongi</territory>
-+			<territory type="HK" alt="SAR">Hongi Kongi SAR Siaina</territory>
-+			<territory type="HK">Hongi Kongi</territory>
- 			<territory type="HM">ʻOtumotu Heati mo Makitonali</territory>
- 			<territory type="HN">Honitulasi</territory>
- 			<territory type="HR">Kuloisia</territory>
-@@ -415,8 +415,8 @@
- 			<territory type="ML">Māli</territory>
- 			<territory type="MM">Pema</territory>
- 			<territory type="MN">Mongokōlia</territory>
--			<territory type="MO">Makau SAR Siaina</territory>
--			<territory type="MO" alt="short">Makau</territory>
-+			<territory type="MO" alt="SAR">Makau SAR Siaina</territory>
-+			<territory type="MO">Makau</territory>
- 			<territory type="MP">ʻOtumotu Maliana tokelau</territory>
- 			<territory type="MQ">Mateniki</territory>
- 			<territory type="MR">Maulitenia</territory>
-Index: common/main/pt.xml
-===================================================================
---- common/main/pt.xml	(revision 6738)
-+++ common/main/pt.xml	(working copy)
-@@ -797,8 +797,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guiné Bissau</territory>
- 			<territory type="GY">Guiana</territory>
--			<territory type="HK">Hong Kong, Região Admin. Especial da China</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong, Região Admin. Especial da China</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Ilha Heard e Ilhas McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croácia</territory>
-@@ -853,8 +853,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Mianmar [Birmânia]</territory>
- 			<territory type="MN">Mongólia</territory>
--			<territory type="MO">Macau, Região Admin. Especial da China</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+			<territory type="MO" alt="SAR">Macau, Região Admin. Especial da China</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Ilhas Marianas do Norte</territory>
- 			<territory type="MQ">Martinica</territory>
- 			<territory type="MR">Mauritânia</territory>
-Index: common/main/en_US.xml
-===================================================================
---- common/main/en_US.xml	(revision 6738)
-+++ common/main/en_US.xml	(working copy)
-@@ -7,4 +7,13 @@
- 		<language type="en"/>
- 		<territory type="US"/>
- 	</identity>
-+	<!-- Begin Google patch, workaround until Golden image test file in Charts is fixed. -->
-+	<numbers>
-+		<currencies>
-+			<currency type="AUD">
-+				<symbol>A$</symbol>
-+			</currency>
-+		</currencies>
-+	</numbers>
-+	<!-- End Google Patch -->
- </ldml>
 Index: common/main/zh_Hant_HK.xml
 ===================================================================
---- common/main/zh_Hant_HK.xml	(revision 6738)
+--- common/main/zh_Hant_HK.xml	(revision 10023)
 +++ common/main/zh_Hant_HK.xml	(working copy)
-@@ -323,6 +323,11 @@
+@@ -6,7 +6,7 @@
+ -->
+ <ldml>
+ 	<identity>
+-		<version number="$Revision$"/>
++		<version number="$Revision 9287 GWT $"/>
+ 		<generation date="$Date$"/>
+ 		<language type="zh"/>
+ 		<script type="Hant"/>
+@@ -110,6 +110,7 @@
+ 			<territory type="VA" draft="contributed">梵蒂岡宮城</territory>
+ 			<territory type="VC" draft="contributed">聖文森特和格林納丁斯</territory>
+ 			<territory type="VU" draft="contributed">瓦努阿圖</territory>
++			<territory type="XK" draft="contributed">科索沃</territory>   <!-- Google patch -->
+ 			<territory type="ZM" draft="contributed">贊比亞</territory>
+ 		</territories>
+ 		<variants>
+@@ -752,6 +753,11 @@
  		</timeZoneNames>
  	</dates>
  	<numbers>
-+		<!-- Google Patch: be compatible with ICU 4.0 -->
 +		<symbols>
++                        <!-- Google specific to be compatible with ICU4.0 -->
 +			<group>,</group>
 +			<list>;</list>
 +		</symbols>
  		<currencyFormats numberSystem="latn">
  			<currencyFormatLength>
- 				<currencyFormat>
-Index: common/main/fa.xml
+ 				<currencyFormat type="standard">
+Index: common/supplemental/likelySubtags.xml
 ===================================================================
---- common/main/fa.xml	(revision 6738)
-+++ common/main/fa.xml	(working copy)
-@@ -753,8 +753,8 @@
- 			<territory type="GU">گوام</territory>
- 			<territory type="GW">گینهٔ بیسائو</territory>
- 			<territory type="GY">گویان</territory>
--			<territory type="HK">هنگ‌کنگ، ناحیهٔ ویژهٔ حکومتی چین</territory>
--			<territory type="HK" alt="short">هنگ‌کنگ</territory>
-+			<territory type="HK" alt="SAR">هنگ‌کنگ، ناحیهٔ ویژهٔ حکومتی چین</territory>
-+			<territory type="HK">هنگ‌کنگ</territory>
- 			<territory type="HM">جزیرهٔ هرد و جزایر مک‌دونالد</territory>
- 			<territory type="HN">هندوراس</territory>
- 			<territory type="HR">کرواسی</territory>
-@@ -809,8 +809,8 @@
- 			<territory type="ML">مالی</territory>
- 			<territory type="MM">میانمار [برمه]</territory>
- 			<territory type="MN">مغولستان</territory>
--			<territory type="MO">ماکائو، ناحیهٔ ویژهٔ حکومتی چین</territory>
--			<territory type="MO" alt="short">ماکائو</territory>
-+			<territory type="MO" alt="SAR">ماکائو، ناحیهٔ ویژهٔ حکومتی چین</territory>
-+			<territory type="MO">ماکائو</territory>
- 			<territory type="MP">جزایر ماریانای شمالی</territory>
- 			<territory type="MQ">مارتینیک</territory>
- 			<territory type="MR">موریتانی</territory>
-Index: common/main/fi.xml
+--- common/supplemental/likelySubtags.xml	(revision 10023)
++++ common/supplemental/likelySubtags.xml	(working copy)
+@@ -6,7 +6,7 @@
+ For terms of use, see http://www.unicode.org/copyright.html
+ -->
+ <supplementalData>
+-    <version number="$Revision$"/>
++    <version number="$Revision 9959 GWT $"/>
+     <generation date="$Date$"/>
+     <likelySubtags>
+ 		<likelySubtag from="aa" to="aa_Latn_ET"/>
+@@ -391,8 +391,10 @@
+ 		<!--{ Japanese; ?; ? } => { Japanese; Japanese; Japan }-->
+ 		<likelySubtag from="jgo" to="jgo_Latn_CM"/>
+ 		<!--{ Ngomba; ?; ? } => { Ngomba; Latin; Cameroon }-->
++		<!-- Begin Google patch.  Work around value issues with go/iii-synonyms -->
+ 		<likelySubtag from="ji" to="ji_Hebr_UA"/>
+-		<!--{ null; ?; ? } => { null; Hebrew; Ukraine }-->
++		<!--{ Yiddish; ?; ? } => { Yiddish; Hebrew; Ukraine }-->
++		<!-- End Google patch -->
+ 		<likelySubtag from="jmc" to="jmc_Latn_TZ"/>
+ 		<!--{ Machame; ?; ? } => { Machame; Latin; Tanzania }-->
+ 		<likelySubtag from="jml" to="jml_Deva_NP"/>
+@@ -509,6 +511,10 @@
+ 		<!--{ Kurdish; ?; Lebanon } => { Kurdish; Arabic; Lebanon }-->
+ 		<likelySubtag from="ku_Arab" to="ku_Arab_IQ"/>
+ 		<!--{ Kurdish; Arabic; ? } => { Kurdish; Arabic; Iraq }-->
++		<!-- Begin (leftover) Google patch (CLDR ticket #3459) -->
++                <likelySubtag from="ku_IR" to="ku_Arab_IR"/>
++                <!--{ Kurdish; ?; Iran } => { Kurdish; Arabic; Iran }-->
++		<!-- End Google patch -->
+ 		<likelySubtag from="kum" to="kum_Cyrl_RU"/>
+ 		<!--{ Kumyk; ?; ? } => { Kumyk; Cyrillic; Russia }-->
+ 		<likelySubtag from="kv" to="kv_Cyrl_RU"/>
+@@ -863,6 +869,8 @@
+ 		<!--{ Koyraboro Senni; ?; ? } => { Koyraboro Senni; Latin; Mali }-->
+ 		<likelySubtag from="sg" to="sg_Latn_CF"/>
+ 		<!--{ Sango; ?; ? } => { Sango; Latin; Central African Republic }-->
++		<likelySubtag from="sh" to="sr_Latn_RS"/> <!-- Google patch -->
++		<!--{ Serbo-Croatian; ?; ? } => { Serbian; Latin; Serbia } [Google patch]-->
+ 		<likelySubtag from="shi" to="shi_Tfng_MA"/>
+ 		<!--{ Tachelhit; ?; ? } => { Tachelhit; Tifinagh; Morocco }-->
+ 		<likelySubtag from="shn" to="shn_Mymr_MM"/>
+@@ -1299,6 +1307,8 @@
+ 		<!--{ ?; ?; Cyprus } => { Greek; Greek; Cyprus }-->
+ 		<likelySubtag from="und_CZ" to="cs_Latn_CZ"/>
+ 		<!--{ ?; ?; Czech Republic } => { Czech; Latin; Czech Republic }-->
++		<likelySubtag from="und_Cyrl_KZ" to="kk_Cyrl_KZ"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Cyrillic; Kazakhstan } => { Kazakh; Cyrillic; Kazakhstan } [Google patch]-->
+ 		<likelySubtag from="und_DE" to="de_Latn_DE"/>
+ 		<!--{ ?; ?; Germany } => { German; Latin; Germany }-->
+ 		<likelySubtag from="und_DJ" to="aa_Latn_DJ"/>
+@@ -1325,10 +1335,14 @@
+ 		<!--{ ?; ?; Spain } => { Spanish; Latin; Spain }-->
+ 		<likelySubtag from="und_ET" to="am_Ethi_ET"/>
+ 		<!--{ ?; ?; Ethiopia } => { Amharic; Ethiopic; Ethiopia }-->
++		<likelySubtag from="und_Ethi_ER" to="ti_Ethi_ER"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Ethiopic; Eritrea } => { Tigrinya; Ethiopic; Eritrea } [Google patch]-->
+ 		<likelySubtag from="und_EU" to="en_Latn_GB"/>
+ 		<!--{ ?; ?; European Union } => { English; Latin; United Kingdom }-->
+ 		<likelySubtag from="und_FI" to="fi_Latn_FI"/>
+ 		<!--{ ?; ?; Finland } => { Finnish; Latin; Finland }-->
++		<likelySubtag from="und_FJ" to="fj_Latn_FJ"/> <!-- Google patch, See http://unicode.org/cldr/trac/ticket/4247 -->
++		<!--{ ?; ?; Fiji } => { Fijian; Latin; Fiji } [Google patch]-->
+ 		<likelySubtag from="und_FM" to="chk_Latn_FM"/>
+ 		<!--{ ?; ?; Micronesia } => { Chuukese; Latin; Micronesia }-->
+ 		<likelySubtag from="und_FO" to="fo_Latn_FO"/>
+@@ -1357,6 +1371,8 @@
+ 		<!--{ ?; ?; South Georgia & South Sandwich Islands } => { ?; Latin; South Georgia & South Sandwich Islands }-->
+ 		<likelySubtag from="und_GT" to="es_Latn_GT"/>
+ 		<!--{ ?; ?; Guatemala } => { Spanish; Latin; Guatemala }-->
++		<likelySubtag from="und_GU" to="ch_Latn_GU"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; ?; Guam } => { Chamorro; Latin; Guam } [Google patch]-->
+ 		<likelySubtag from="und_GW" to="pt_Latn_GW"/>
+ 		<!--{ ?; ?; Guinea-Bissau } => { Portuguese; Latin; Guinea-Bissau }-->
+ 		<likelySubtag from="und_HK" to="zh_Hant_HK"/>
+@@ -1435,6 +1451,8 @@
+ 		<!--{ ?; ?; Saint Martin } => { French; Latin; Saint Martin }-->
+ 		<likelySubtag from="und_MG" to="mg_Latn_MG"/>
+ 		<!--{ ?; ?; Madagascar } => { Malagasy; Latin; Madagascar }-->
++		<likelySubtag from="und_MH" to="mh_Latn_MH"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Marshall Islands } => { Marshallese; Latin; Marshall Islands } [Google patch]-->
+ 		<likelySubtag from="und_MK" to="mk_Cyrl_MK"/>
+ 		<!--{ ?; ?; Macedonia } => { Macedonian; Cyrillic; Macedonia }-->
+ 		<likelySubtag from="und_ML" to="bm_Latn_ML"/>
+@@ -1471,10 +1489,14 @@
+ 		<!--{ ?; ?; Nicaragua } => { Spanish; Latin; Nicaragua }-->
+ 		<likelySubtag from="und_NL" to="nl_Latn_NL"/>
+ 		<!--{ ?; ?; Netherlands } => { Dutch; Latin; Netherlands }-->
+-		<likelySubtag from="und_NO" to="nb_Latn_NO"/>
+-		<!--{ ?; ?; Norway } => { Norwegian Bokmål; Latin; Norway }-->
++		<likelySubtag from="und_NO" to="no_Latn_NO"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; ?; Norway } => { Norwegian; Latin; Norway } [Google patch]-->
+ 		<likelySubtag from="und_NP" to="ne_Deva_NP"/>
+ 		<!--{ ?; ?; Nepal } => { Nepali; Devanagari; Nepal }-->
++		<likelySubtag from="und_NR" to="na_Latn_NR"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Nauru } => { Nauru; Latin; Nauru } [Google patch]-->
++		<likelySubtag from="und_NU" to="niu_Latn_NU"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Niue } => { Niuean; Latin; Niue } [Google patch]-->
+ 		<likelySubtag from="und_OM" to="ar_Arab_OM"/>
+ 		<!--{ ?; ?; Oman } => { Arabic; Arabic; Oman }-->
+ 		<likelySubtag from="und_PA" to="es_Latn_PA"/>
+@@ -1527,8 +1549,8 @@
+ 		<!--{ ?; ?; Sweden } => { Swedish; Latin; Sweden }-->
+ 		<likelySubtag from="und_SI" to="sl_Latn_SI"/>
+ 		<!--{ ?; ?; Slovenia } => { Slovenian; Latin; Slovenia }-->
+-		<likelySubtag from="und_SJ" to="nb_Latn_SJ"/>
+-		<!--{ ?; ?; Svalbard and Jan Mayen } => { Norwegian Bokmål; Latin; Svalbard and Jan Mayen }-->
++		<likelySubtag from="und_SJ" to="no_Latn_SJ"/> <!-- Google patch -->
++		<!--{ ?; ?; Svalbard and Jan Mayen } => { Norwegian; Latin; Svalbard and Jan Mayen } [Google patch]-->
+ 		<likelySubtag from="und_SK" to="sk_Latn_SK"/>
+ 		<!--{ ?; ?; Slovakia } => { Slovak; Latin; Slovakia }-->
+ 		<likelySubtag from="und_SM" to="it_Latn_SM"/>
+@@ -1621,6 +1643,8 @@
+ 		<!--{ ?; Arabic; Nigeria } => { Hausa; Arabic; Nigeria }-->
+ 		<likelySubtag from="und_Arab_PK" to="ur_Arab_PK"/>
+ 		<!--{ ?; Arabic; Pakistan } => { Urdu; Arabic; Pakistan }-->
++		<likelySubtag from="und_Arab_SN" to="wo_Arab_SN"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Arabic; Senegal } => { Wolof; Arabic; Senegal } [Google patch]-->
+ 		<likelySubtag from="und_Arab_TJ" to="fa_Arab_TJ"/>
+ 		<!--{ ?; Arabic; Tajikistan } => { Persian; Arabic; Tajikistan }-->
+ 		<likelySubtag from="und_Arab_TR" to="zza_Arab_TR"/>
+@@ -1641,6 +1665,8 @@
+ 		<!--{ ?; Batak; ? } => { Batak Toba; Batak; Indonesia }-->
+ 		<likelySubtag from="und_Beng" to="bn_Beng_BD"/>
+ 		<!--{ ?; Bengali; ? } => { Bengali; Bengali; Bangladesh }-->
++		<likelySubtag from="und_Beng_IN" to="bn_Beng_IN"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Bengali; India } => { Bengali; Bengali; India } [Google patch]-->
+ 		<likelySubtag from="und_Bopo" to="zh_Bopo_TW"/>
+ 		<!--{ ?; Bopomofo; ? } => { Chinese; Bopomofo; Taiwan }-->
+ 		<likelySubtag from="und_Brah" to="pra_Brah_IN"/>
+@@ -1773,16 +1799,26 @@
+ 		<!--{ ?; Latin; Cyprus } => { Turkish; Latin; Cyprus }-->
+ 		<likelySubtag from="und_Latn_DZ" to="fr_Latn_DZ"/>
+ 		<!--{ ?; Latin; Algeria } => { French; Latin; Algeria }-->
++		<likelySubtag from="und_Latn_ES" to="es_Latn_ES"/>
++		<!--{ ?; Latin; Spain } => { Spanish; Latin; Spain } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_ET" to="en_Latn_ET"/>
+ 		<!--{ ?; Latin; Ethiopia } => { English; Latin; Ethiopia }-->
++		<likelySubtag from="und_Latn_GB" to="en_Latn_GB"/>
++		<!--{ ?; Latin; United Kingdom } => { English; Latin; United Kingdom } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_GE" to="ku_Latn_GE"/>
+ 		<!--{ ?; Latin; Georgia } => { Kurdish; Latin; Georgia }-->
++		<likelySubtag from="und_Latn_GH" to="ak_Latn_GH"/>
++		<!--{ ?; Latin; Ghana } => { Akan; Latin; Ghana } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_GR" to="tr_Latn_GR"/>
+ 		<!--{ ?; Latin; Greece } => { Turkish; Latin; Greece }-->
++		<likelySubtag from="und_Latn_ID" to="id_Latn_ID"/>
++		<!--{ ?; Latin; Indonesia } => { Indonesian; Latin; Indonesia } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_IL" to="ro_Latn_IL"/>
+ 		<!--{ ?; Latin; Israel } => { Romanian; Latin; Israel }-->
+ 		<likelySubtag from="und_Latn_IR" to="tk_Latn_IR"/>
+ 		<!--{ ?; Latin; Iran } => { Turkmen; Latin; Iran }-->
++		<likelySubtag from="und_Latn_IT" to="it_Latn_IT"/>
++		<!--{ ?; Latin; Italy } => { Italian; Latin; Italy } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_KM" to="fr_Latn_KM"/>
+ 		<!--{ ?; Latin; Comoros } => { French; Latin; Comoros }-->
+ 		<likelySubtag from="und_Latn_KZ" to="de_Latn_KZ"/>
+@@ -1803,10 +1839,14 @@
+ 		<!--{ ?; Latin; Syria } => { French; Latin; Syria }-->
+ 		<likelySubtag from="und_Latn_TN" to="fr_Latn_TN"/>
+ 		<!--{ ?; Latin; Tunisia } => { French; Latin; Tunisia }-->
++		<likelySubtag from="und_Latn_TR" to="tr_Latn_TR"/>
++		<!--{ ?; Latin; Turkey } => { Turkish; Latin; Turkey } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_TW" to="trv_Latn_TW"/>
+ 		<!--{ ?; Latin; Taiwan } => { Taroko; Latin; Taiwan }-->
+ 		<likelySubtag from="und_Latn_UA" to="pl_Latn_UA"/>
+ 		<!--{ ?; Latin; Ukraine } => { Polish; Latin; Ukraine }-->
++		<likelySubtag from="und_Latn_ZA" to="af_Latn_ZA"/>
++		<!--{ ?; Latin; South Africa } => { Afrikaans; Latin; South Africa } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Lepc" to="lep_Lepc_IN"/>
+ 		<!--{ ?; Lepcha; ? } => { Lepcha; Lepcha; India }-->
+ 		<likelySubtag from="und_Limb" to="lif_Limb_IN"/>
+Index: common/supplemental/metaZones.xml
 ===================================================================
---- common/main/fi.xml	(revision 6738)
-+++ common/main/fi.xml	(working copy)
-@@ -812,8 +812,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hongkong – Kiinan e.h.a.</territory>
--			<territory type="HK" alt="short">Hongkong</territory>
-+			<territory type="HK" alt="SAR">Hongkong – Kiinan e.h.a.</territory>
-+			<territory type="HK">Hongkong</territory>
- 			<territory type="HM">Heard- ja McDonaldinsaaret</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Kroatia</territory>
-@@ -868,8 +868,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar [Burma]</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macao – Kiinan e.h.a.</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Macao – Kiinan e.h.a.</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Pohjois-Mariaanit</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/bn.xml
+--- common/supplemental/metaZones.xml	(revision 10023)
++++ common/supplemental/metaZones.xml	(working copy)
+@@ -6,7 +6,7 @@
+ For terms of use, see http://www.unicode.org/copyright.html
+ -->
+ <supplementalData>
+-	<version number="$Revision$"/>
++	<version number="$Revision 9923 GWT $"/>
+ 	<generation date="$Date$"/>
+ 
+ 	<metaZones>
+@@ -775,6 +775,9 @@
+ 			<timezone type="Antarctica/Syowa">
+ 				<usesMetazone mzone="Syowa"/>
+ 			</timezone>
++			<timezone type="Antarctica/Troll">
++				<usesMetazone mzone="GMT"/>
++			</timezone>
+ 			<timezone type="Antarctica/Vostok">
+ 				<usesMetazone mzone="Vostok"/>
+ 			</timezone>
+@@ -1283,7 +1286,8 @@
+ 				<usesMetazone to="1990-06-30 23:00" mzone="Moscow"/>
+ 				<usesMetazone to="1994-04-30 21:00" from="1990-06-30 23:00" mzone="Europe_Eastern"/>
+ 				<usesMetazone to="1997-03-30 01:00" from="1994-04-30 21:00" mzone="Moscow"/>
+-				<usesMetazone from="1997-03-30 01:00" mzone="Europe_Eastern"/>
++				<usesMetazone to="2014-03-30 00:00" from="1997-03-30 01:00" mzone="Europe_Eastern"/>
++				<usesMetazone from="2014-03-30 00:00" mzone="Moscow"/>
+ 			</timezone>
+ 			<timezone type="Europe/Skopje">
+ 				<usesMetazone mzone="Europe_Central"/>
+Index: common/supplemental/supplementalData.xml
 ===================================================================
---- common/main/bn.xml	(revision 6738)
-+++ common/main/bn.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">গুয়াম</territory>
- 			<territory type="GW">গিনি-বিসাউ</territory>
- 			<territory type="GY">গিয়ানা</territory>
--			<territory type="HK" draft="contributed">হংকং এসএআর চীনা</territory>
--			<territory type="HK" alt="short">হংকং</territory>
-+			<territory type="HK" alt="SAR" draft="contributed">হংকং এসএআর চীনা</territory>
-+			<territory type="HK">হংকং</territory>
- 			<territory type="HM">হার্ড দ্বীপ এবং ম্যাকডোনাল্ড দ্বীপপুঞ্জ</territory>
- 			<territory type="HN">হণ্ডুরাস</territory>
- 			<territory type="HR">ক্রোয়েশিয়া</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">মালি</territory>
- 			<territory type="MM">মায়ানমার</territory>
- 			<territory type="MN">মঙ্গোলিয়া</territory>
--			<territory type="MO" draft="contributed">ম্যাকাও এসএআর চীনা</territory>
--			<territory type="MO" alt="short">ম্যাকাও</territory>
-+			<territory type="MO" alt="SAR" draft="contributed">ম্যাকাও এসএআর চীনা</territory>
-+			<territory type="MO">ম্যাকাও</territory>
- 			<territory type="MP">উত্তরাঞ্চলীয় মারিয়ানা দ্বীপপুঞ্জ</territory>
- 			<territory type="MQ">মার্টিনিক</territory>
- 			<territory type="MR" draft="contributed">মরিতানিয়া</territory>
-@@ -1172,8 +1172,9 @@
- 				<dayPeriods>
- 					<dayPeriodContext type="format">
- 						<dayPeriodWidth type="wide">
--							<dayPeriod type="am">পূর্বাহ্ণ</dayPeriod>
--							<dayPeriod type="pm">অপরাহ্ণ</dayPeriod>
-+                                                <!-- Google specific fix for http://b/1469531 -->
-+							<dayPeriod type="am">am</dayPeriod>
-+							<dayPeriod type="pm">pm</dayPeriod>
- 						</dayPeriodWidth>
- 					</dayPeriodContext>
- 				</dayPeriods>
-@@ -3757,7 +3758,8 @@
- 		</timeZoneNames>
- 	</dates>
- 	<numbers>
--		<defaultNumberingSystem>latn</defaultNumberingSystem>
-+		<!-- Google Patch: http://unicode.org/cldr/trac/ticket/4193 -->
-+		<defaultNumberingSystem>beng</defaultNumberingSystem>
- 		<otherNumberingSystems>
- 			<native>beng</native>
- 		</otherNumberingSystems>
-Index: common/main/zh.xml
+--- common/supplemental/supplementalData.xml	(revision 10023)
++++ common/supplemental/supplementalData.xml	(working copy)
+@@ -7,7 +7,7 @@
+ -->
+ 
+ <supplementalData>
+-    <version number="$Revision$"/>
++    <version number="$Revision 9959 GWT $"/>
+     <generation date="$Date$"/>
+     <currencyData>
+         <fractions>
+@@ -3682,7 +3682,7 @@
+ 		</territory>
+ 		<territory type="TR" gdp="1167000000000" literacyPercent="94.1" population="80694500">	<!--Turkey-->
+ 			<languagePopulation type="tr" populationPercent="93" officialStatus="official" references="R1206"/>	<!--Turkish-->
+-			<languagePopulation type="ku_Latn" populationPercent="5.5"/>	<!--Kurdish (Latin)-->
++			<languagePopulation type="ku" populationPercent="5.5"/>		<!--Kurdish (Latin) Google patch: use "ku", CLDR ticket 4794 -->
+ 			<languagePopulation type="zza" populationPercent="1.4"/>	<!--Zaza-->
+ 			<languagePopulation type="kbd" populationPercent="0.77"/>	<!--Kabardian-->
+ 			<languagePopulation type="az_Latn" populationPercent="0.74"/>	<!--Azerbaijani (Latin)-->
+@@ -4689,9 +4689,20 @@
+ 		<parentLocale parent="en_GB" locales="en_150 en_AU en_BE en_DG en_FK en_GG en_GI en_HK en_IE en_IM en_IN en_IO en_JE en_MO en_MT en_NZ en_PK en_SG en_SH en_VG"/>
+ 		<parentLocale parent="es_419" locales="es_AR es_BO es_CL es_CO es_CR es_CU es_DO es_EC es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE"/>
+ 		<parentLocale parent="pt_PT" locales="pt_AO pt_CV pt_GW pt_MO pt_MZ pt_ST pt_TL"/>
++                <!-- Google Patch: Explicit parent for locales when parent has on override of Parent to root.
++                                   Works around bug in ICU4J.  ICU ticket 9389  -->
++                <parentLocale parent="zh_Hant" locales="zh_Hant_HK zh_Hant_TW"/>
+ 		<parentLocale parent="zh_Hant_HK" locales="zh_Hant_MO"/>
++                <parentLocale parent="az_Cyrl" locales="az_Cyrl_AZ"/>
++                <parentLocale parent="sr_Latn" locales="sr_Latn_BA sr_Latn_ME sr_Latn_RS"/>
++                <parentLocale parent="pa_Arab" locales="pa_Arab_PK"/>
++                <parentLocale parent="shi_Tfng" locales="shi_Tfng_MA"/>
++                <parentLocale parent="uz_Arab" locales="uz_Arab_AF"/>
++                <parentLocale parent="uz_Latn" locales="uz_Latn_UZ"/>
++                <parentLocale parent="vai_Latn" locales="vai_Latn_LR"/>
++                <!-- End Google Patch -->
+ 	</parentLocales>
+-	
++
+ 	<references>
+ 		<reference type="R1000" uri="https://www.cia.gov/cia/publications/factbook/geos/aa.html">Dutch official</reference>
+ 		<reference type="R1001" uri="http://www.migrationinformation.org/Feature/display.cfm?ID=72">At most 6% are not fluent in English</reference>
+Index: common/supplemental/supplementalMetadata.xml
 ===================================================================
---- common/main/zh.xml	(revision 6738)
-+++ common/main/zh.xml	(working copy)
-@@ -775,8 +775,8 @@
- 			<territory type="GU">关岛</territory>
- 			<territory type="GW">几内亚比绍</territory>
- 			<territory type="GY">圭亚那</territory>
--			<territory type="HK">中国香港特别行政区</territory>
--			<territory type="HK" alt="short">香港</territory>
-+			<territory type="HK" alt="SAR">中国香港特别行政区</territory>
-+			<territory type="HK">香港</territory>
- 			<territory type="HM">赫德与麦克唐纳群岛</territory>
- 			<territory type="HN">洪都拉斯</territory>
- 			<territory type="HR">克罗地亚</territory>
-@@ -831,8 +831,8 @@
- 			<territory type="ML">马里</territory>
- 			<territory type="MM">缅甸</territory>
- 			<territory type="MN">蒙古</territory>
--			<territory type="MO">中国澳门特别行政区</territory>
--			<territory type="MO" alt="short">澳门</territory>
-+			<territory type="MO" alt="SAR">中国澳门特别行政区</territory>
-+			<territory type="MO">澳门</territory>
- 			<territory type="MP">北马里亚纳群岛</territory>
- 			<territory type="MQ">马提尼克群岛</territory>
- 			<territory type="MR">毛里塔尼亚</territory>
-@@ -3647,6 +3647,18 @@
- 				<exemplarCity>富纳富提</exemplarCity>
- 			</zone>
- 			<zone type="Asia/Taipei">
-+				<!-- Begin Google Patch for CLDR bug # 2202 -->
-+				<long>
-+					<generic>台北时间</generic>
-+					<standard>台北标准时间</standard>
-+					<daylight>台北夏令时间</daylight>
-+                                </long>
-+				<short>
-+					<generic>台北</generic>
-+					<standard>台北</standard>
-+					<daylight>台北</daylight>
-+				</short>
-+                                <!-- End Google Patch.  -->
- 				<exemplarCity>台北</exemplarCity>
- 			</zone>
- 			<zone type="Africa/Dar_es_Salaam">
-Index: common/main/fil.xml
+--- common/supplemental/supplementalMetadata.xml	(revision 10023)
++++ common/supplemental/supplementalMetadata.xml	(working copy)
+@@ -7,7 +7,7 @@
+ -->
+ 
+ <supplementalData>
+-    <version number="$Revision$"/>
++    <version number="$Revision 9857 GWT $"/>
+     <generation date="$Date$"/>
+     <metadata>
+         <attributeOrder>
+@@ -612,6 +612,7 @@
+                 Antarctica/Palmer
+                 Antarctica/Rothera
+                 Antarctica/Syowa
++                Antarctica/Troll
+                 Antarctica/Vostok
+                 Arctic/Longyearbyen
+                 Asia/Aden Asia/Almaty Asia/Amman Asia/Anadyr Asia/Aqtau Asia/Aqtobe
+@@ -1849,6 +1850,7 @@
+              <blockingItems elements="identity supplementalData cldrTest collation transform"/>
+          </blocking>
+         <skipDefaultLocale services="segmentation collation"/>
++	<!-- Google patch: added ku_Arab and ku_Latn_SY labels to locales list.  See http://unicode.org/cldr/trac/ticket/4796 -->
+ 		<defaultContent locales="
+ 			aa_ET af_ZA agq_CM ak_GH am_ET ar_001 as_IN asa_TZ ast_ES az_Cyrl_AZ az_Latn
+ 			az_Latn_AZ
+@@ -1864,7 +1866,7 @@
+ 			ja_JP jgo_CM jmc_TZ
+ 			ka_GE kab_DZ kaj_NG kam_KE kcg_NG kde_TZ kea_CV ken_CM khq_ML ki_KE kk_Cyrl
+ 			kk_Cyrl_KZ kkj_CM kl_GL kln_KE km_KH kn_IN ko_KR kok_IN kpe_LR ks_Arab
+-			ks_Arab_IN ksb_TZ ksf_CM ksh_DE ku_Latn ku_Latn_TR kw_GB ky_Cyrl ky_Cyrl_KG
++			ks_Arab_IN ksb_TZ ksf_CM ksh_DE ku_Arab ku_Latn ku_Latn_SY ku_Latn_TR kw_GB ky_Cyrl ky_Cyrl_KG
+ 			lag_TZ lg_UG lkt_US ln_CD lo_LA lt_LT lu_CD luo_KE luy_KE lv_LV
+ 			mas_KE mer_KE mfe_MU mg_MG mgh_MZ mgo_CM mi_NZ mk_MK ml_IN mn_Cyrl mn_Cyrl_MN
+ 			mn_Mong_CN mr_IN ms_Arab_MY ms_Latn ms_Latn_MY mt_MT mua_CM my_MM
+Index: common/supplemental/windowsZones.xml
 ===================================================================
---- common/main/fil.xml	(revision 6738)
-+++ common/main/fil.xml	(working copy)
-@@ -317,7 +317,9 @@
- 			<territory type="CX">Christmas Island</territory>
- 			<territory type="CY">Cyprus</territory>
- 			<territory type="CZ">Czech Republic</territory>
--			<territory type="DE">Germany</territory>
-+			<!-- Begin Google-specific change (http://b/2162266) -->
-+			<territory type="DE">Alemanya</territory>
-+			<!-- End Google-specific change (http://b/2162266) -->
- 			<territory type="DG">Diego Garcia</territory>
- 			<territory type="DJ">Djibouti</territory>
- 			<territory type="DK">Denmark</territory>
-@@ -359,8 +361,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Hong Kong SAR China</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Hong Kong SAR China</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Heard Island and McDonald Islands</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croatia</territory>
-@@ -415,8 +417,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Macau SAR China</territory>
--			<territory type="MO" alt="short">Macau</territory>
-+			<territory type="MO" alt="SAR">Macau SAR China</territory>
-+			<territory type="MO">Macau</territory>
- 			<territory type="MP">Northern Mariana Islands</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/th.xml
-===================================================================
---- common/main/th.xml	(revision 6738)
-+++ common/main/th.xml	(working copy)
-@@ -793,8 +793,8 @@
- 			<territory type="GU">กวม</territory>
- 			<territory type="GW">กินี-บิสเซา</territory>
- 			<territory type="GY">กายอานา</territory>
--			<territory type="HK">ฮ่องกง เขตปกครองพิเศษประเทศจีน</territory>
--			<territory type="HK" alt="short">ฮ่องกง</territory>
-+			<territory type="HK" alt="SAR">ฮ่องกง เขตปกครองพิเศษประเทศจีน</territory>
-+			<territory type="HK">ฮ่องกง</territory>
- 			<territory type="HM">เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์</territory>
- 			<territory type="HN">ฮอนดูรัส</territory>
- 			<territory type="HR">โครเอเชีย</territory>
-@@ -849,8 +849,8 @@
- 			<territory type="ML">มาลี</territory>
- 			<territory type="MM">เมียนม่าร์ [พม่า]</territory>
- 			<territory type="MN">มองโกเลีย</territory>
--			<territory type="MO">มาเก๊า เขตปกครองพิเศษประเทศจีน</territory>
--			<territory type="MO" alt="short">มาเก๊า</territory>
-+			<territory type="MO" alt="SAR">มาเก๊า เขตปกครองพิเศษประเทศจีน</territory>
-+			<territory type="MO">มาเก๊า</territory>
- 			<territory type="MP">หมู่เกาะนอร์เทิร์นมาเรียนา</territory>
- 			<territory type="MQ">มาร์ตินีก</territory>
- 			<territory type="MR">มอริเตเนีย</territory>
-Index: common/main/es.xml
-===================================================================
---- common/main/es.xml	(revision 6738)
-+++ common/main/es.xml	(working copy)
-@@ -781,8 +781,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinea-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">Región Administrativa Especial de Hong Kong de la República Popular China</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">Región Administrativa Especial de Hong Kong de la República Popular China</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Islas Heard y McDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croacia</territory>
-@@ -837,8 +837,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar [Birmania]</territory>
- 			<territory type="MN">Mongolia</territory>
--			<territory type="MO">Región Administrativa Especial de Macao de la República Popular China</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">Región Administrativa Especial de Macao de la República Popular China</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Islas Marianas del Norte</territory>
- 			<territory type="MQ">Martinica</territory>
- 			<territory type="MR">Mauritania</territory>
-Index: common/main/my.xml
-===================================================================
---- common/main/my.xml	(revision 6738)
-+++ common/main/my.xml	(working copy)
-@@ -291,8 +291,8 @@
- 			<territory type="GS" draft="unconfirmed">တောင် ဂျော်ဂျီယာ နှင့် တောင် ဆင်းဒဝစ်ဂျ် ကျွန်းစုများ</territory>
- 			<territory type="GT">ဂွာတီမာလာ</territory>
- 			<territory type="GU">ဂူအမ်</territory>
--			<territory type="HK">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်</territory>
--			<territory type="HK" alt="short">ဟောင်ကောင်</territory>
-+			<territory type="HK" alt="SAR">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်</territory>
-+			<territory type="HK">ဟောင်ကောင်</territory>
- 			<territory type="HN">ဟွန်ဒူးရပ်စ်</territory>
- 			<territory type="HR">ခရိုအေးရှား</territory>
- 			<territory type="HT">ဟေတီ</territory>
-@@ -335,8 +335,8 @@
- 			<territory type="ML">မာလီ</territory>
- 			<territory type="MM">မြန်မာ</territory>
- 			<territory type="MN">မွန်ဂိုးလီးယား</territory>
--			<territory type="MO">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို</territory>
--			<territory type="MO" alt="short">မကာအို</territory>
-+			<territory type="MO" alt="SAR">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို</territory>
-+			<territory type="MO">မကာအို</territory>
- 			<territory type="MV">မော်လဒိုက်</territory>
- 			<territory type="MW">မာလာဝီ</territory>
- 			<territory type="MX">မက္ကဆီကို</territory>
-Index: common/main/bg.xml
-===================================================================
---- common/main/bg.xml	(revision 6738)
-+++ common/main/bg.xml	(working copy)
-@@ -784,8 +784,8 @@
- 			<territory type="GU">Гуам</territory>
- 			<territory type="GW">Гвинея-Бисау</territory>
- 			<territory type="GY">Гвиана</territory>
--			<territory type="HK">Хонг-Конг О.А.Р. на Китай</territory>
--			<territory type="HK" alt="short" draft="contributed">Хонконг</territory>
-+			<territory type="HK" alt="SAR">Хонг-Конг О.А.Р. на Китай</territory>
-+			<territory type="HK">Хонг-Конг</territory>
- 			<territory type="HM">Остров Хърд и Острови Макдоналд</territory>
- 			<territory type="HN">Хондурас</territory>
- 			<territory type="HR">Хърватска</territory>
-@@ -840,8 +840,8 @@
- 			<territory type="ML">Мали</territory>
- 			<territory type="MM">Мианмар [Бирма]</territory>
- 			<territory type="MN">Монголия</territory>
--			<territory type="MO">Макао О.А.Р. на Китай</territory>
--			<territory type="MO" alt="short">Макао</territory>
-+			<territory type="MO" alt="SAR">Макао О.А.Р. на Китай</territory>
-+			<territory type="MO">Макао</territory>
- 			<territory type="MP">Северни Мариански Острови</territory>
- 			<territory type="MQ">Мартиника</territory>
- 			<territory type="MR">Мавритания</territory>
-Index: common/main/bo.xml
-===================================================================
---- common/main/bo.xml	(revision 6738)
-+++ common/main/bo.xml	(working copy)
-@@ -152,7 +152,7 @@
- 			<territory type="GT" draft="unconfirmed">གྷོ་ཊེ་མ་ལ།</territory>
- 			<territory type="GW" draft="unconfirmed">གྷི་ནི་ཡ་བིས྄་སོ།</territory>
- 			<territory type="GY" draft="unconfirmed">གྷུ་ཡཱ་ན།</territory>
--			<territory type="HK" alt="short" draft="unconfirmed">ཧོང་ཀོང༌།</territory>
-+			<territory type="HK" draft="unconfirmed">ཧོང་ཀོང༌།</territory>
- 			<territory type="HN" draft="unconfirmed">ཧོན་དུ་རས྄།</territory>
- 			<territory type="HR" draft="unconfirmed">ཀུརོ་ཤི་ཡ།</territory>
- 			<territory type="HT" draft="unconfirmed">ཧེ་ཏི།</territory>
-@@ -195,7 +195,7 @@
- 			<territory type="ML" draft="unconfirmed">མ་ལི།</territory>
- 			<territory type="MM" draft="unconfirmed">འབར་མ།</territory>
- 			<territory type="MN" draft="unconfirmed">སོག་ཡུལ།</territory>
--			<territory type="MO" alt="short" draft="unconfirmed">མེ་ཀའོ།</territory>
-+			<territory type="MO" draft="unconfirmed">མེ་ཀའོ།</territory>
- 			<territory type="MR" draft="unconfirmed">མཽ་རི་ཏ་ནི་ཡ།</territory>
- 			<territory type="MT" draft="unconfirmed">མལ་ཊ།</territory>
- 			<territory type="MU" draft="unconfirmed">མཽ་རིཤས྄།</territory>
-Index: common/main/fr.xml
-===================================================================
---- common/main/fr.xml	(revision 6738)
-+++ common/main/fr.xml	(working copy)
-@@ -811,8 +811,8 @@
- 			<territory type="GU">Guam</territory>
- 			<territory type="GW">Guinée-Bissau</territory>
- 			<territory type="GY">Guyana</territory>
--			<territory type="HK">R.A.S. chinoise de Hong Kong</territory>
--			<territory type="HK" alt="short">Hong Kong</territory>
-+			<territory type="HK" alt="SAR">R.A.S. chinoise de Hong Kong</territory>
-+			<territory type="HK">Hong Kong</territory>
- 			<territory type="HM">Îles Heard et MacDonald</territory>
- 			<territory type="HN">Honduras</territory>
- 			<territory type="HR">Croatie</territory>
-@@ -867,8 +867,8 @@
- 			<territory type="ML">Mali</territory>
- 			<territory type="MM">Myanmar</territory>
- 			<territory type="MN">Mongolie</territory>
--			<territory type="MO">R.A.S. chinoise de Macao</territory>
--			<territory type="MO" alt="short">Macao</territory>
-+			<territory type="MO" alt="SAR">R.A.S. chinoise de Macao</territory>
-+			<territory type="MO">Macao</territory>
- 			<territory type="MP">Îles Mariannes du Nord</territory>
- 			<territory type="MQ">Martinique</territory>
- 			<territory type="MR">Mauritanie</territory>
-@@ -930,7 +930,9 @@
- 			<territory type="SO">Somalie</territory>
- 			<territory type="SR">Suriname</territory>
- 			<territory type="ST">Sao Tomé-et-Principe</territory>
--			<territory type="SV">El Salvador</territory>
-+			<!-- Begin Google-specific change (http://b/1351357) -->
-+			<territory type="SV">Salvador</territory>
-+			<!-- End Google-specific change (http://b/1351357) -->
- 			<territory type="SY">Syrie</territory>
- 			<territory type="SZ">Swaziland</territory>
- 			<territory type="TA">Tristan da Cunha</territory>
-Index: common/supplemental/plurals.xml
-===================================================================
---- common/supplemental/plurals.xml	(revision 6738)
-+++ common/supplemental/plurals.xml	(working copy)
-@@ -89,12 +89,14 @@
-             <pluralRule count="one">n within 0..1</pluralRule>
-             <pluralRule count="few">n in 2..10</pluralRule>
-         </pluralRules>
--        <pluralRules locales="br"> <!-- from http://unicode.org/cldr/trac/ticket/2886 -->
-+<!--   Commented out since ICU can't parse the x,y,z form
-+        <pluralRules locales="br">  - from http://unicode.org/cldr/trac/ticket/2886 
-             <pluralRule count="one">n mod 10 is 1 and n mod 100 not in 11,71,91</pluralRule>
-             <pluralRule count="two">n mod 10 is 2 and n mod 100 not in 12,72,92</pluralRule>
-             <pluralRule count="few">n mod 10 in 3..4,9 and n mod 100 not in 10..19,70..79,90..99</pluralRule>
-             <pluralRule count="many">n mod 1000000 is 0 and n is not 0</pluralRule>
-         </pluralRules>
-+-->
-         <pluralRules locales="ksh">
-             <pluralRule count="zero">n is 0</pluralRule>
-             <pluralRule count="one">n is 1</pluralRule>
-@@ -105,10 +107,12 @@
-         <pluralRules locales="gv">
-             <pluralRule count="one">n mod 10 in 1..2 or n mod 20 is 0</pluralRule>
-         </pluralRules>
-+<!--   Commented out since ICU can't parse the x,y,z form
-         <pluralRules locales="gd">
-             <pluralRule count="one">n in 1,11</pluralRule>
-             <pluralRule count="two">n in 2,12</pluralRule>
-             <pluralRule count="few">n in 3..10,13..19</pluralRule>
-         </pluralRules>
-+-->
-     </plurals>
- </supplementalData>
-Index: common/supplemental/ordinals.xml
-===================================================================
---- common/supplemental/ordinals.xml	(revision 6738)
-+++ common/supplemental/ordinals.xml	(working copy)
-@@ -8,19 +8,22 @@
-         <pluralRules locales="fil fr ms ro vi">
-             <pluralRule count="one">n is 1</pluralRule>
-         </pluralRules>
-+<!--   Commented out since ICU can't parse the x,y,z form
-         <pluralRules locales="hu">
-             <pluralRule count="one">n in 1,5</pluralRule>
-         </pluralRules>
-         <pluralRules locales="sv">
-             <pluralRule count="one">n mod 10 in 1,2 and n mod 100 not in 11,12</pluralRule>
-         </pluralRules>
-+-->
-         <pluralRules locales="en">
-             <pluralRule count="one">n mod 10 is 1 and n mod 100 is not 11</pluralRule>
-             <pluralRule count="two">n mod 10 is 2 and n mod 100 is not 12</pluralRule>
-             <pluralRule count="few">n mod 10 is 3 and n mod 100 is not 13</pluralRule>
-         </pluralRules>
-+<!--   Commented out since ICU can't parse the x,y,z form
-         <pluralRules locales="it">
--            <!-- n is 11 or n is 8 * 10^x, where x >= 0 -->
-+            <!- n is 11 or n is 8 * 10^x, where x >= 0 ->
-             <pluralRule count="many">n in 11,8,80,800</pluralRule>
-         </pluralRules>
-         <pluralRules locales="ca">
-@@ -48,8 +51,9 @@
- 	    <pluralRules locales="zu">
- 	        <pluralRule count="one">n is 1</pluralRule>
- 	        <pluralRule count="few">n in 2..9</pluralRule>
--	        <!-- n starts with a 1 and n > 1 -->
-+	        <!- n starts with a 1 and n > 1 ->
- 	        <pluralRule count="many">n in 10..19,100..199,1000..1999</pluralRule>
- 	    </pluralRules>
-+-->
-     </plurals>
- </supplementalData>
+--- common/supplemental/windowsZones.xml	(revision 10023)
++++ common/supplemental/windowsZones.xml	(working copy)
+@@ -7,11 +7,11 @@
+ -->
+ 
+ <supplementalData>
+-	<version number="$Revision$"/>
++	<version number="$Revision 9723 GWT $"/>
+ 	<generation date="$Date$"/>
+ 
+ 	<windowsZones>
+-		<mapTimezones otherVersion="7de0000" typeVersion="2013i">
++		<mapTimezones otherVersion="7de0000" typeVersion="2014b">
+ 
+ 			<!-- (UTC-12:00) International Date Line West -->
+ 			<mapZone other="Dateline Standard Time" territory="001" type="Etc/GMT+12"/>
+@@ -62,7 +62,7 @@
+ 			<mapZone other="Mountain Standard Time" territory="001" type="America/Denver"/>
+ 			<mapZone other="Mountain Standard Time" territory="CA" type="America/Edmonton America/Cambridge_Bay America/Inuvik America/Yellowknife"/>
+ 			<mapZone other="Mountain Standard Time" territory="MX" type="America/Ojinaga"/>
+-			<mapZone other="Mountain Standard Time" territory="US" type="America/Denver America/Boise America/Shiprock"/>
++			<mapZone other="Mountain Standard Time" territory="US" type="America/Denver America/Boise"/>
+ 			<mapZone other="Mountain Standard Time" territory="ZZ" type="MST7MDT"/>
+ 
+ 			<!-- (UTC-06:00) Central America -->
+@@ -367,7 +367,7 @@
+ 			<mapZone other="FLE Standard Time" territory="FI" type="Europe/Helsinki"/>
+ 			<mapZone other="FLE Standard Time" territory="LT" type="Europe/Vilnius"/>
+ 			<mapZone other="FLE Standard Time" territory="LV" type="Europe/Riga"/>
+-			<mapZone other="FLE Standard Time" territory="UA" type="Europe/Kiev Europe/Simferopol Europe/Uzhgorod Europe/Zaporozhye"/>
++			<mapZone other="FLE Standard Time" territory="UA" type="Europe/Kiev Europe/Uzhgorod Europe/Zaporozhye"/>
+ 
+ 			<!-- (UTC+02:00) Istanbul -->
+ 			<mapZone other="Turkey Standard Time" territory="001" type="Europe/Istanbul"/>
+@@ -435,7 +435,7 @@
+ 
+ 			<!-- (UTC+04:00) Moscow, St. Petersburg, Volgograd -->
+ 			<mapZone other="Russian Standard Time" territory="001" type="Europe/Moscow"/>
+-			<mapZone other="Russian Standard Time" territory="RU" type="Europe/Moscow Europe/Samara Europe/Volgograd"/>
++			<mapZone other="Russian Standard Time" territory="RU" type="Europe/Moscow Europe/Samara Europe/Simferopol Europe/Volgograd"/>
+ 
+ 			<!-- (UTC+04:00) Port Louis -->
+ 			<mapZone other="Mauritius Standard Time" territory="001" type="Indian/Mauritius"/>
+@@ -618,7 +618,7 @@
+ 			<!-- (UTC+12:00) Auckland, Wellington -->
+ 			<mapZone other="New Zealand Standard Time" territory="001" type="Pacific/Auckland"/>
+ 			<mapZone other="New Zealand Standard Time" territory="AQ" type="Antarctica/McMurdo"/>
+-			<mapZone other="New Zealand Standard Time" territory="NZ" type="Pacific/Auckland Antarctica/South_Pole"/>
++			<mapZone other="New Zealand Standard Time" territory="NZ" type="Pacific/Auckland"/>
+ 
+ 			<!-- (UTC+12:00) Coordinated Universal Time+12 -->
+ 			<mapZone other="UTC+12" territory="001" type="Etc/GMT-12"/>

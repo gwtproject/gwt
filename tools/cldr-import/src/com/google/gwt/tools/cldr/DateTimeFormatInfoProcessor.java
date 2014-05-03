@@ -542,24 +542,6 @@ public class DateTimeFormatInfoProcessor extends Processor {
     generateDayNumber(pw, locale, "weekendEnd", "weekendEnd");
     generateDayNumber(pw, locale, "weekendStart", "weekendStart");
 
-    if (locale.isDefault()) {
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String dateFormat() {");
-      pw.println("    return dateFormatMedium();");
-      pw.println("  }");
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String dateTime(String timePattern, String datePattern) {");
-      pw.println("    return datePattern + \" \" + timePattern;");
-      pw.println("  }");
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String timeFormat() {");
-      pw.println("    return timeFormatMedium();");
-      pw.println("  }");
-    }
-
     pw.println("}");
     pw.close();
   }

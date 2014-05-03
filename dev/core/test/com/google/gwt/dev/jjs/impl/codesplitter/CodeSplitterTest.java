@@ -38,7 +38,7 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +60,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
         }
 
         @Override
-        public void methodIsLiveBecause(JMethod liveMethod, ArrayList<JMethod> dependencyChain) {
+        public void methodIsLiveBecause(JMethod liveMethod, List<JMethod> dependencyChain) {
         }
 
         @Override

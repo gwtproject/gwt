@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4adb1c06_903a34e1",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/CurrencyData.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-03T14:59:08Z",
+      "side": 1,
+      "message": "If possible, we should keep saying it\u0027s a patched version of CLDR (maybe \"GWT\" instead of \"Google\" though)",
+      "revId": "a309d9e6e04805e6d2012613006901f922646800",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6abf008d_0fb069cd",
         "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl.java",
         "patchSetId": 2

@@ -16,6 +16,8 @@
 package java.util;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * To keep performance characteristics in line with Java community expectations,
@@ -64,6 +66,9 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public void add(int index, E o) {
+    if(index < 0 || index > size()) {
+      throw new ArrayIndexOutOfBoundsException(index);
+    }
     arrayList.add(index, o);
   }
 
@@ -74,6 +79,9 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public boolean addAll(int index, Collection<? extends E> c) {
+    if(index < 0 || index > size()) {
+      throw new ArrayIndexOutOfBoundsException(index);
+    }
     return arrayList.addAll(index, c);
   }
 
@@ -125,11 +133,15 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public E firstElement() {
+    if(isEmpty()) {
+      throw new NoSuchElementException();
+    }
     return get(0);
   }
 
   @Override
   public E get(int index) {
+    checkArrayIndex(index);
     return arrayList.get(index);
   }
 
@@ -161,10 +173,9 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   public E lastElement() {
     if (isEmpty()) {
-      throw new IndexOutOfBoundsException("last");
-    } else {
-      return get(size() - 1);
+      throw new NoSuchElementException();
     }
+    return get(size() - 1);
   }
 
   @Override
@@ -181,6 +192,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public E remove(int index) {
+    checkArrayIndex(index);
     return arrayList.remove(index);
   }
 
@@ -203,6 +215,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public E set(int index, E elem) {
+    checkArrayIndex(index);
     return arrayList.set(index, elem);
   }
 
@@ -252,5 +265,11 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   @Override
   protected void removeRange(int fromIndex, int endIndex) {
     arrayList.removeRange(fromIndex, endIndex);
+  }
+  
+  private static void checkArrayIndex(int index) {
+    if(index < 0 || index >= size()) {
+      throw new ArrayIndexOutOfBoundsException(index);
+    }
   }
 }

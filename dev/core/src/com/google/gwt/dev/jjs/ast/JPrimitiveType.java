@@ -121,6 +121,9 @@ public class JPrimitiveType extends JType {
     visitor.endVisit(this, ctx);
   }
 
+  public static JPrimitiveType getType(String typeName) {
+    return Singletons.map.get(typeName);
+  }
   /**
    * Canonicalize to singleton; uses {@link JType#name}.
    */

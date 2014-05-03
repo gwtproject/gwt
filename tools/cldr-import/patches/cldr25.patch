@@ -1,0 +1,608 @@
+diff -u -r cldr25_publ/common/bcp47/timezone.xml cldr25_goog/common/bcp47/timezone.xml
+--- cldr25_publ/common/bcp47/timezone.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/bcp47/timezone.xml	2014-04-07 16:41:15.000000000 -0700
+@@ -29,6 +29,7 @@
+             <type name="aqplm" description="Palmer Station, Anvers Island" alias="Antarctica/Palmer"/>
+             <type name="aqrot" description="Rothera Station, Adelaide Island" alias="Antarctica/Rothera"/>
+             <type name="aqsyw" description="Syowa Station, East Ongul Island" alias="Antarctica/Syowa"/>
++            <type name="aqtrl" description="Troll Station, Queen Maud Land" alias="Antarctica/Troll" since="26"/>
+             <type name="aqvos" description="Vostok Station, Lake Vostok" alias="Antarctica/Vostok"/>
+             <type name="arbue" description="Buenos Aires, Argentina" alias="America/Buenos_Aires America/Argentina/Buenos_Aires"/>
+             <type name="arcor" description="Córdoba, Argentina" alias="America/Cordoba America/Argentina/Cordoba America/Rosario"/>
+diff -u -r cldr25_publ/common/main/bn.xml cldr25_goog/common/main/bn.xml
+--- cldr25_publ/common/main/bn.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/bn.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -1454,8 +1454,9 @@
+ 							<dayPeriod type="pm">অপরাহ্ণ</dayPeriod>
+ 						</dayPeriodWidth>
+ 						<dayPeriodWidth type="wide">
+-							<dayPeriod type="am">পূর্বাহ্ণ</dayPeriod>
+-							<dayPeriod type="pm">অপরাহ্ণ</dayPeriod>
++                                                <!-- Google specific fix for http://b/1469531 -->
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
+ 					</dayPeriodContext>
+ 				</dayPeriods>
+diff -u -r cldr25_publ/common/main/en_GB.xml cldr25_goog/common/main/en_GB.xml
+--- cldr25_publ/common/main/en_GB.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/en_GB.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -550,6 +550,7 @@
+ 							<greatestDifference id="H">HH–HH</greatestDifference>
+ 						</intervalFormatItem>
+ 						<intervalFormatItem id="hm">
++						  	<greatestDifference id="a">h:mm a – h:mm a</greatestDifference>   <!-- Google patch /b/11479739-->
+ 							<greatestDifference id="h">h:mm–h:mm a</greatestDifference>
+ 							<greatestDifference id="m">h:mm–h:mm a</greatestDifference>
+ 						</intervalFormatItem>
+diff -u -r cldr25_publ/common/main/en.xml cldr25_goog/common/main/en.xml
+--- cldr25_publ/common/main/en.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/en.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -772,10 +772,10 @@
+ 			<territory type="BZ">Belize</territory>
+ 			<territory type="CA">Canada</territory>
+ 			<territory type="CC">Cocos (Keeling) Islands</territory>
+-			<territory type="CD">Congo - Kinshasa</territory>
++			<territory type="CD">Congo (DRC)</territory>   <!-- Google Patch: take variant form -->
+ 			<territory type="CD" alt="variant">Congo (DRC)</territory>
+ 			<territory type="CF">Central African Republic</territory>
+-			<territory type="CG">Congo - Brazzaville</territory>
++			<territory type="CG">Congo (Republic)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="CG" alt="variant">Congo (Republic)</territory>
+ 			<territory type="CH">Switzerland</territory>
+ 			<territory type="CI">Côte d’Ivoire</territory>
+@@ -811,7 +811,7 @@
+ 			<territory type="EU">European Union</territory>
+ 			<territory type="FI">Finland</territory>
+ 			<territory type="FJ">Fiji</territory>
+-			<territory type="FK">Falkland Islands</territory>
++			<territory type="FK">Falkland Islands (Islas Malvinas)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="FK" alt="variant">Falkland Islands (Islas Malvinas)</territory>
+ 			<territory type="FM">Micronesia</territory>
+ 			<territory type="FO">Faroe Islands</territory>
+@@ -887,7 +887,7 @@
+ 			<territory type="MF">Saint Martin</territory>
+ 			<territory type="MG">Madagascar</territory>
+ 			<territory type="MH">Marshall Islands</territory>
+-			<territory type="MK">Macedonia</territory>
++			<territory type="MK">Macedonia (FYROM)</territory>  <!-- Google Patch: take variant form -->
+ 			<territory type="MK" alt="variant">Macedonia (FYROM)</territory>
+ 			<territory type="ML">Mali</territory>
+ 			<territory type="MM">Myanmar (Burma)</territory>
+@@ -1276,18 +1276,20 @@
+ 							<month type="12">Mo12</month>
+ 						</monthWidth>
+ 						<monthWidth type="wide">
+-							<month type="1">Month1</month>
+-							<month type="2">Month2</month>
+-							<month type="3">Month3</month>
+-							<month type="4">Month4</month>
+-							<month type="5">Month5</month>
+-							<month type="6">Month6</month>
+-							<month type="7">Month7</month>
+-							<month type="8">Month8</month>
+-							<month type="9">Month9</month>
+-							<month type="10">Month10</month>
+-							<month type="11">Month11</month>
+-							<month type="12">Month12</month>
++                                                        <!-- Google Patch: Revert MonthX to X. CLDR bug #5932 -->
++							<month type="1">1</month>
++							<month type="2">2</month>
++							<month type="3">3</month>
++							<month type="4">4</month>
++							<month type="5">5</month>
++							<month type="6">6</month>
++							<month type="7">7</month>
++							<month type="8">8</month>
++							<month type="9">9</month>
++							<month type="10">10</month>
++							<month type="11">11</month>
++							<month type="12">12</month>
++                                                        <!-- End Google Patch -->
+ 						</monthWidth>
+ 					</monthContext>
+ 				</months>
+@@ -4345,6 +4347,7 @@
+ 				<displayName>Philippine Peso</displayName>
+ 				<displayName count="one">Philippine peso</displayName>
+ 				<displayName count="other">Philippine pesos</displayName>
++				<symbol>Php</symbol>  <!-- google patch bug 1453176 -->
+ 			</currency>
+ 			<currency type="PKR">
+ 				<displayName>Pakistani Rupee</displayName>
+diff -u -r cldr25_publ/common/main/fr_CA.xml cldr25_goog/common/main/fr_CA.xml
+--- cldr25_publ/common/main/fr_CA.xml	2013-10-09 15:18:20.000000000 -0700
++++ cldr25_goog/common/main/fr_CA.xml	2013-10-14 15:04:19.000000000 -0700
+@@ -51,6 +51,7 @@
+ 			<territory type="RE" draft="contributed">Réunion</territory>
+ 			<territory type="TC" draft="contributed">Îles Turks et Caïques</territory>
+ 			<territory type="UM" draft="contributed">Îles éloignées des États-Unis</territory>
++			<territory type="XK">Kosovo</territory>
+ 		</territories>
+ 		<keys>
+ 			<key type="calendar" draft="contributed">Calendrier</key>
+diff -u -r cldr25_publ/common/main/hi.xml cldr25_goog/common/main/hi.xml
+--- cldr25_publ/common/main/hi.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/hi.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -176,7 +176,7 @@
+ 			<language type="hai">हैडा</language>
+ 			<language type="haw">हवाई</language>
+ 			<language type="he">हिब्रू</language>
+-			<language type="hi">हिंदी</language>
++			<language type="hi">हिन्दी</language> <!-- google patch b/11322559 -->
+ 			<language type="hil">हिलिगेनन</language>
+ 			<language type="hit">हिताइत</language>
+ 			<language type="hmn">ह्मॉंग</language>
+@@ -1482,14 +1482,16 @@
+ 							<dayPeriod type="am">पूर्व</dayPeriod>
+ 							<dayPeriod type="pm">अपर</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
+ 						<dayPeriodWidth type="narrow">
+-							<dayPeriod type="am">पू</dayPeriod>
+-							<dayPeriod type="pm">अ</dayPeriod>
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
+ 						<dayPeriodWidth type="wide">
+-							<dayPeriod type="am">पूर्वाह्न</dayPeriod>
+-							<dayPeriod type="pm">अपराह्न</dayPeriod>
++							<dayPeriod type="am">am</dayPeriod>
++							<dayPeriod type="pm">pm</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- End Google Patch -->
+ 					</dayPeriodContext>
+ 				</dayPeriods>
+ 				<eras>
+diff -u -r cldr25_publ/common/main/kk.xml cldr25_goog/common/main/kk.xml
+--- cldr25_publ/common/main/kk.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/kk.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -292,7 +292,7 @@
+ 			<territory type="BZ">Белиз</territory>
+ 			<territory type="CA">Канада</territory>
+ 			<territory type="CC">Кокос аралдары</territory>
+-			<territory type="CD">Конго</territory>
++			<territory type="CD">Конго Демократиялық Республикасы</territory>   <!-- Google patch; take variant. /b/11324281 -->
+ 			<territory type="CD" alt="variant">Конго Демократиялық Республикасы</territory>
+ 			<territory type="CF">Орталық Африка Республикасы</territory>
+ 			<territory type="CG">Конго Республикасы</territory>
+diff -u -r cldr25_publ/common/main/pt_PT.xml cldr25_goog/common/main/pt_PT.xml
+--- cldr25_publ/common/main/pt_PT.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/pt_PT.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -4390,7 +4390,7 @@
+ 				<displayName>Rupia indiana</displayName>
+ 				<displayName count="one">Rupia indiana</displayName>
+ 				<displayName count="other">Rupias indianas</displayName>
+-				<symbol>₹</symbol>
++				<symbol draft="contributed">Rs.</symbol>   <!-- Google Patch: prevent overwrite from pt.xml -->
+ 			</currency>
+ 			<currency type="IQD">
+ 				<displayName>Dinar iraquiano</displayName>
+diff -u -r cldr25_publ/common/main/root.xml cldr25_goog/common/main/root.xml
+--- cldr25_publ/common/main/root.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/root.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -3347,7 +3347,7 @@
+ 				<symbol alt="narrow">₪</symbol>
+ 			</currency>
+ 			<currency type="INR">
+-				<symbol>₹</symbol>
++				<symbol>Rs.</symbol>   <!-- Google Patch.  Bug # 1453176 -->
+ 				<symbol alt="narrow">₹</symbol>
+ 			</currency>
+ 			<currency type="JMD">
+diff -u -r cldr25_publ/common/main/ta.xml cldr25_goog/common/main/ta.xml
+--- cldr25_publ/common/main/ta.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/ta.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -1564,10 +1564,12 @@
+ 				</quarters>
+ 				<dayPeriods>
+ 					<dayPeriodContext type="format">
++                                                <!-- Begin Google Patch.  Buganizer 5948448 -->
+ 						<dayPeriodWidth type="abbreviated">
+-							<dayPeriod type="am">முற்பகல்</dayPeriod>
+-							<dayPeriod type="pm">பிற்பகல்</dayPeriod>
++							<dayPeriod type="am">AM</dayPeriod>
++							<dayPeriod type="pm">PM</dayPeriod>
+ 						</dayPeriodWidth>
++                                                <!-- End Google Patch -->
+ 						<dayPeriodWidth type="narrow">
+ 							<dayPeriod type="am">AM</dayPeriod>
+ 							<dayPeriod type="pm">PM</dayPeriod>
+diff -u -r cldr25_publ/common/main/tr.xml cldr25_goog/common/main/tr.xml
+--- cldr25_publ/common/main/tr.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/tr.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -1684,7 +1684,7 @@
+ 					</dateFormatLength>
+ 					<dateFormatLength type="short">
+ 						<dateFormat>
+-							<pattern>d.MM.y</pattern>
++							<pattern>d MM y</pattern>   <!-- Google Patch /b/8566501 -->
+ 						</dateFormat>
+ 					</dateFormatLength>
+ 				</dateFormats>
+@@ -4594,7 +4594,7 @@
+ 				<displayName>Türk Lirası</displayName>
+ 				<displayName count="one">Türk lirası</displayName>
+ 				<displayName count="other">Türk lirası</displayName>
+-				<symbol>₺</symbol>
++				<symbol>TL</symbol>   <!-- Google Patch /b/9064055 -->
+ 			</currency>
+ 			<currency type="TTD">
+ 				<displayName>Trinidad ve Tobago Doları</displayName>
+diff -u -r cldr25_publ/common/main/uk.xml cldr25_goog/common/main/uk.xml
+--- cldr25_publ/common/main/uk.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/uk.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -769,7 +769,7 @@
+ 			<territory type="FJ">Фіджі</territory>
+ 			<territory type="FK">Фолклендські острови</territory>
+ 			<territory type="FK" alt="variant">Фолклендські (Мальвінські) острови</territory>
+-			<territory type="FM">Мікронезія</territory>
++			<territory type="FM">Мікронезія Федеративні Штати</territory> <!-- Google Patch: take variant form -->
+ 			<territory type="FM" alt="variant">Мікронезія Федеративні Штати</territory>
+ 			<territory type="FO">Фарерські острови</territory>
+ 			<territory type="FR">Франція</territory>
+diff -u -r cldr25_publ/common/main/zh_Hant_HK.xml cldr25_goog/common/main/zh_Hant_HK.xml
+--- cldr25_publ/common/main/zh_Hant_HK.xml	2013-10-09 15:18:20.000000000 -0700
++++ cldr25_goog/common/main/zh_Hant_HK.xml	2013-10-14 15:04:19.000000000 -0700
+@@ -110,6 +110,7 @@
+ 			<territory type="VA" draft="contributed">梵蒂岡宮城</territory>
+ 			<territory type="VC" draft="contributed">聖文森特和格林納丁斯</territory>
+ 			<territory type="VU" draft="contributed">瓦努阿圖</territory>
++			<territory type="XK" draft="contributed">科索沃</territory>   <!-- Google patch -->
+ 			<territory type="ZM" draft="contributed">贊比亞</territory>
+ 		</territories>
+ 		<variants>
+@@ -752,6 +753,11 @@
+ 		</timeZoneNames>
+ 	</dates>
+ 	<numbers>
++		<symbols>
++                        <!-- Google specific to be compatible with ICU4.0 -->
++			<group>,</group>
++			<list>;</list>
++		</symbols>
+ 		<currencyFormats numberSystem="latn">
+ 			<currencyFormatLength>
+ 				<currencyFormat type="standard">
+diff -u -r cldr25_publ/common/main/zh_Hant.xml cldr25_goog/common/main/zh_Hant.xml
+--- cldr25_publ/common/main/zh_Hant.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/zh_Hant.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -4728,8 +4728,20 @@
+ 				<exemplarCity>富那富提</exemplarCity>
+ 			</zone>
+ 			<zone type="Asia/Taipei">
++				<!-- Begin Google Patch for CLDR bug # 2022 -->
++				<long>
++					<generic>台北時間</generic>
++					<standard>台北標準時間</standard>
++					<daylight>台北夏令時間</daylight>
++                                </long>
++				<short>
++					<generic>台北</generic>
++					<standard>台北</standard>
++					<daylight>台北</daylight>
++				</short>
+ 				<exemplarCity>台北</exemplarCity>
+-			</zone>
++				<!-- End Google Patch -->
++                        </zone>
+ 			<zone type="Africa/Dar_es_Salaam">
+ 				<exemplarCity>沙蘭港</exemplarCity>
+ 			</zone>
+diff -u -r cldr25_publ/common/main/zh.xml cldr25_goog/common/main/zh.xml
+--- cldr25_publ/common/main/zh.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/main/zh.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -4461,6 +4461,18 @@
+ 				<exemplarCity>富纳富提</exemplarCity>
+ 			</zone>
+ 			<zone type="Asia/Taipei">
++				<!-- Begin Google Patch for CLDR bug # 2202 -->
++				<long>
++					<generic>台北时间</generic>
++					<standard>台北标准时间</standard>
++					<daylight>台北夏令时间</daylight>
++                                </long>
++				<short>
++					<generic>台北</generic>
++					<standard>台北</standard>
++					<daylight>台北</daylight>
++				</short>
++                                <!-- End Google Patch.  -->
+ 				<exemplarCity>台北</exemplarCity>
+ 			</zone>
+ 			<zone type="Africa/Dar_es_Salaam">
+diff -u -r cldr25_publ/common/supplemental/likelySubtags.xml cldr25_goog/common/supplemental/likelySubtags.xml
+--- cldr25_publ/common/supplemental/likelySubtags.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/supplemental/likelySubtags.xml	2014-04-04 15:13:47.000000000 -0700
+@@ -391,8 +391,10 @@
+ 		<!--{ Japanese; ?; ? } => { Japanese; Japanese; Japan }-->
+ 		<likelySubtag from="jgo" to="jgo_Latn_CM"/>
+ 		<!--{ Ngomba; ?; ? } => { Ngomba; Latin; Cameroon }-->
++		<!-- Begin Google patch.  Work around value issues with go/iii-synonyms -->
+ 		<likelySubtag from="ji" to="ji_Hebr_UA"/>
+-		<!--{ null; ?; ? } => { null; Hebrew; Ukraine }-->
++		<!--{ Yiddish; ?; ? } => { Yiddish; Hebrew; Ukraine }-->
++		<!-- End Google patch -->
+ 		<likelySubtag from="jmc" to="jmc_Latn_TZ"/>
+ 		<!--{ Machame; ?; ? } => { Machame; Latin; Tanzania }-->
+ 		<likelySubtag from="jml" to="jml_Deva_NP"/>
+@@ -509,6 +511,10 @@
+ 		<!--{ Kurdish; ?; Lebanon } => { Kurdish; Arabic; Lebanon }-->
+ 		<likelySubtag from="ku_Arab" to="ku_Arab_IQ"/>
+ 		<!--{ Kurdish; Arabic; ? } => { Kurdish; Arabic; Iraq }-->
++		<!-- Begin (leftover) Google patch (CLDR ticket #3459) -->
++                <likelySubtag from="ku_IR" to="ku_Arab_IR"/>
++                <!--{ Kurdish; ?; Iran } => { Kurdish; Arabic; Iran }-->
++		<!-- End Google patch -->
+ 		<likelySubtag from="kum" to="kum_Cyrl_RU"/>
+ 		<!--{ Kumyk; ?; ? } => { Kumyk; Cyrillic; Russia }-->
+ 		<likelySubtag from="kv" to="kv_Cyrl_RU"/>
+@@ -863,6 +869,8 @@
+ 		<!--{ Koyraboro Senni; ?; ? } => { Koyraboro Senni; Latin; Mali }-->
+ 		<likelySubtag from="sg" to="sg_Latn_CF"/>
+ 		<!--{ Sango; ?; ? } => { Sango; Latin; Central African Republic }-->
++		<likelySubtag from="sh" to="sr_Latn_RS"/> <!-- Google patch -->
++		<!--{ Serbo-Croatian; ?; ? } => { Serbian; Latin; Serbia } [Google patch]-->
+ 		<likelySubtag from="shi" to="shi_Tfng_MA"/>
+ 		<!--{ Tachelhit; ?; ? } => { Tachelhit; Tifinagh; Morocco }-->
+ 		<likelySubtag from="shn" to="shn_Mymr_MM"/>
+@@ -1299,6 +1307,8 @@
+ 		<!--{ ?; ?; Cyprus } => { Greek; Greek; Cyprus }-->
+ 		<likelySubtag from="und_CZ" to="cs_Latn_CZ"/>
+ 		<!--{ ?; ?; Czech Republic } => { Czech; Latin; Czech Republic }-->
++		<likelySubtag from="und_Cyrl_KZ" to="kk_Cyrl_KZ"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Cyrillic; Kazakhstan } => { Kazakh; Cyrillic; Kazakhstan } [Google patch]-->
+ 		<likelySubtag from="und_DE" to="de_Latn_DE"/>
+ 		<!--{ ?; ?; Germany } => { German; Latin; Germany }-->
+ 		<likelySubtag from="und_DJ" to="aa_Latn_DJ"/>
+@@ -1325,10 +1335,14 @@
+ 		<!--{ ?; ?; Spain } => { Spanish; Latin; Spain }-->
+ 		<likelySubtag from="und_ET" to="am_Ethi_ET"/>
+ 		<!--{ ?; ?; Ethiopia } => { Amharic; Ethiopic; Ethiopia }-->
++		<likelySubtag from="und_Ethi_ER" to="ti_Ethi_ER"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Ethiopic; Eritrea } => { Tigrinya; Ethiopic; Eritrea } [Google patch]-->
+ 		<likelySubtag from="und_EU" to="en_Latn_GB"/>
+ 		<!--{ ?; ?; European Union } => { English; Latin; United Kingdom }-->
+ 		<likelySubtag from="und_FI" to="fi_Latn_FI"/>
+ 		<!--{ ?; ?; Finland } => { Finnish; Latin; Finland }-->
++		<likelySubtag from="und_FJ" to="fj_Latn_FJ"/> <!-- Google patch, See http://unicode.org/cldr/trac/ticket/4247 -->
++		<!--{ ?; ?; Fiji } => { Fijian; Latin; Fiji } [Google patch]-->
+ 		<likelySubtag from="und_FM" to="chk_Latn_FM"/>
+ 		<!--{ ?; ?; Micronesia } => { Chuukese; Latin; Micronesia }-->
+ 		<likelySubtag from="und_FO" to="fo_Latn_FO"/>
+@@ -1357,6 +1371,8 @@
+ 		<!--{ ?; ?; South Georgia & South Sandwich Islands } => { ?; Latin; South Georgia & South Sandwich Islands }-->
+ 		<likelySubtag from="und_GT" to="es_Latn_GT"/>
+ 		<!--{ ?; ?; Guatemala } => { Spanish; Latin; Guatemala }-->
++		<likelySubtag from="und_GU" to="ch_Latn_GU"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; ?; Guam } => { Chamorro; Latin; Guam } [Google patch]-->
+ 		<likelySubtag from="und_GW" to="pt_Latn_GW"/>
+ 		<!--{ ?; ?; Guinea-Bissau } => { Portuguese; Latin; Guinea-Bissau }-->
+ 		<likelySubtag from="und_HK" to="zh_Hant_HK"/>
+@@ -1435,6 +1451,8 @@
+ 		<!--{ ?; ?; Saint Martin } => { French; Latin; Saint Martin }-->
+ 		<likelySubtag from="und_MG" to="mg_Latn_MG"/>
+ 		<!--{ ?; ?; Madagascar } => { Malagasy; Latin; Madagascar }-->
++		<likelySubtag from="und_MH" to="mh_Latn_MH"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Marshall Islands } => { Marshallese; Latin; Marshall Islands } [Google patch]-->
+ 		<likelySubtag from="und_MK" to="mk_Cyrl_MK"/>
+ 		<!--{ ?; ?; Macedonia } => { Macedonian; Cyrillic; Macedonia }-->
+ 		<likelySubtag from="und_ML" to="bm_Latn_ML"/>
+@@ -1471,10 +1489,14 @@
+ 		<!--{ ?; ?; Nicaragua } => { Spanish; Latin; Nicaragua }-->
+ 		<likelySubtag from="und_NL" to="nl_Latn_NL"/>
+ 		<!--{ ?; ?; Netherlands } => { Dutch; Latin; Netherlands }-->
+-		<likelySubtag from="und_NO" to="nb_Latn_NO"/>
+-		<!--{ ?; ?; Norway } => { Norwegian Bokmål; Latin; Norway }-->
++		<likelySubtag from="und_NO" to="no_Latn_NO"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; ?; Norway } => { Norwegian; Latin; Norway } [Google patch]-->
+ 		<likelySubtag from="und_NP" to="ne_Deva_NP"/>
+ 		<!--{ ?; ?; Nepal } => { Nepali; Devanagari; Nepal }-->
++		<likelySubtag from="und_NR" to="na_Latn_NR"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Nauru } => { Nauru; Latin; Nauru } [Google patch]-->
++		<likelySubtag from="und_NU" to="niu_Latn_NU"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Latin; Niue } => { Niuean; Latin; Niue } [Google patch]-->
+ 		<likelySubtag from="und_OM" to="ar_Arab_OM"/>
+ 		<!--{ ?; ?; Oman } => { Arabic; Arabic; Oman }-->
+ 		<likelySubtag from="und_PA" to="es_Latn_PA"/>
+@@ -1527,8 +1549,8 @@
+ 		<!--{ ?; ?; Sweden } => { Swedish; Latin; Sweden }-->
+ 		<likelySubtag from="und_SI" to="sl_Latn_SI"/>
+ 		<!--{ ?; ?; Slovenia } => { Slovenian; Latin; Slovenia }-->
+-		<likelySubtag from="und_SJ" to="nb_Latn_SJ"/>
+-		<!--{ ?; ?; Svalbard and Jan Mayen } => { Norwegian Bokmål; Latin; Svalbard and Jan Mayen }-->
++		<likelySubtag from="und_SJ" to="no_Latn_SJ"/> <!-- Google patch -->
++		<!--{ ?; ?; Svalbard and Jan Mayen } => { Norwegian; Latin; Svalbard and Jan Mayen } [Google patch]-->
+ 		<likelySubtag from="und_SK" to="sk_Latn_SK"/>
+ 		<!--{ ?; ?; Slovakia } => { Slovak; Latin; Slovakia }-->
+ 		<likelySubtag from="und_SM" to="it_Latn_SM"/>
+@@ -1621,6 +1643,8 @@
+ 		<!--{ ?; Arabic; Nigeria } => { Hausa; Arabic; Nigeria }-->
+ 		<likelySubtag from="und_Arab_PK" to="ur_Arab_PK"/>
+ 		<!--{ ?; Arabic; Pakistan } => { Urdu; Arabic; Pakistan }-->
++		<likelySubtag from="und_Arab_SN" to="wo_Arab_SN"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Arabic; Senegal } => { Wolof; Arabic; Senegal } [Google patch]-->
+ 		<likelySubtag from="und_Arab_TJ" to="fa_Arab_TJ"/>
+ 		<!--{ ?; Arabic; Tajikistan } => { Persian; Arabic; Tajikistan }-->
+ 		<likelySubtag from="und_Arab_TR" to="zza_Arab_TR"/>
+@@ -1641,6 +1665,8 @@
+ 		<!--{ ?; Batak; ? } => { Batak Toba; Batak; Indonesia }-->
+ 		<likelySubtag from="und_Beng" to="bn_Beng_BD"/>
+ 		<!--{ ?; Bengali; ? } => { Bengali; Bengali; Bangladesh }-->
++		<likelySubtag from="und_Beng_IN" to="bn_Beng_IN"/> <!-- Google patch. See http://unicode.org/cldr/trac/ticket/4783 -->
++		<!--{ ?; Bengali; India } => { Bengali; Bengali; India } [Google patch]-->
+ 		<likelySubtag from="und_Bopo" to="zh_Bopo_TW"/>
+ 		<!--{ ?; Bopomofo; ? } => { Chinese; Bopomofo; Taiwan }-->
+ 		<likelySubtag from="und_Brah" to="pra_Brah_IN"/>
+@@ -1773,16 +1799,26 @@
+ 		<!--{ ?; Latin; Cyprus } => { Turkish; Latin; Cyprus }-->
+ 		<likelySubtag from="und_Latn_DZ" to="fr_Latn_DZ"/>
+ 		<!--{ ?; Latin; Algeria } => { French; Latin; Algeria }-->
++		<likelySubtag from="und_Latn_ES" to="es_Latn_ES"/>
++		<!--{ ?; Latin; Spain } => { Spanish; Latin; Spain } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_ET" to="en_Latn_ET"/>
+ 		<!--{ ?; Latin; Ethiopia } => { English; Latin; Ethiopia }-->
++		<likelySubtag from="und_Latn_GB" to="en_Latn_GB"/>
++		<!--{ ?; Latin; United Kingdom } => { English; Latin; United Kingdom } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_GE" to="ku_Latn_GE"/>
+ 		<!--{ ?; Latin; Georgia } => { Kurdish; Latin; Georgia }-->
++		<likelySubtag from="und_Latn_GH" to="ak_Latn_GH"/>
++		<!--{ ?; Latin; Ghana } => { Akan; Latin; Ghana } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_GR" to="tr_Latn_GR"/>
+ 		<!--{ ?; Latin; Greece } => { Turkish; Latin; Greece }-->
++		<likelySubtag from="und_Latn_ID" to="id_Latn_ID"/>
++		<!--{ ?; Latin; Indonesia } => { Indonesian; Latin; Indonesia } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_IL" to="ro_Latn_IL"/>
+ 		<!--{ ?; Latin; Israel } => { Romanian; Latin; Israel }-->
+ 		<likelySubtag from="und_Latn_IR" to="tk_Latn_IR"/>
+ 		<!--{ ?; Latin; Iran } => { Turkmen; Latin; Iran }-->
++		<likelySubtag from="und_Latn_IT" to="it_Latn_IT"/>
++		<!--{ ?; Latin; Italy } => { Italian; Latin; Italy } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_KM" to="fr_Latn_KM"/>
+ 		<!--{ ?; Latin; Comoros } => { French; Latin; Comoros }-->
+ 		<likelySubtag from="und_Latn_KZ" to="de_Latn_KZ"/>
+@@ -1803,10 +1839,14 @@
+ 		<!--{ ?; Latin; Syria } => { French; Latin; Syria }-->
+ 		<likelySubtag from="und_Latn_TN" to="fr_Latn_TN"/>
+ 		<!--{ ?; Latin; Tunisia } => { French; Latin; Tunisia }-->
++		<likelySubtag from="und_Latn_TR" to="tr_Latn_TR"/>
++		<!--{ ?; Latin; Turkey } => { Turkish; Latin; Turkey } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Latn_TW" to="trv_Latn_TW"/>
+ 		<!--{ ?; Latin; Taiwan } => { Taroko; Latin; Taiwan }-->
+ 		<likelySubtag from="und_Latn_UA" to="pl_Latn_UA"/>
+ 		<!--{ ?; Latin; Ukraine } => { Polish; Latin; Ukraine }-->
++		<likelySubtag from="und_Latn_ZA" to="af_Latn_ZA"/>
++		<!--{ ?; Latin; South Africa } => { Afrikaans; Latin; South Africa } [Google patch; CLDR ticket 4783]-->
+ 		<likelySubtag from="und_Lepc" to="lep_Lepc_IN"/>
+ 		<!--{ ?; Lepcha; ? } => { Lepcha; Lepcha; India }-->
+ 		<likelySubtag from="und_Limb" to="lif_Limb_IN"/>
+diff -u -r cldr25_publ/common/supplemental/metaZones.xml cldr25_goog/common/supplemental/metaZones.xml
+--- cldr25_publ/common/supplemental/metaZones.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/supplemental/metaZones.xml	2014-04-07 16:41:15.000000000 -0700
+@@ -775,6 +775,9 @@
+ 			<timezone type="Antarctica/Syowa">
+ 				<usesMetazone mzone="Syowa"/>
+ 			</timezone>
++			<timezone type="Antarctica/Troll">
++				<usesMetazone mzone="GMT"/>
++			</timezone>
+ 			<timezone type="Antarctica/Vostok">
+ 				<usesMetazone mzone="Vostok"/>
+ 			</timezone>
+@@ -1283,7 +1286,8 @@
+ 				<usesMetazone to="1990-06-30 23:00" mzone="Moscow"/>
+ 				<usesMetazone to="1994-04-30 21:00" from="1990-06-30 23:00" mzone="Europe_Eastern"/>
+ 				<usesMetazone to="1997-03-30 01:00" from="1994-04-30 21:00" mzone="Moscow"/>
+-				<usesMetazone from="1997-03-30 01:00" mzone="Europe_Eastern"/>
++				<usesMetazone to="2014-03-30 00:00" from="1997-03-30 01:00" mzone="Europe_Eastern"/>
++				<usesMetazone from="2014-03-30 00:00" mzone="Moscow"/>
+ 			</timezone>
+ 			<timezone type="Europe/Skopje">
+ 				<usesMetazone mzone="Europe_Central"/>
+diff -u -r cldr25_publ/common/supplemental/supplementalData.xml cldr25_goog/common/supplemental/supplementalData.xml
+--- cldr25_publ/common/supplemental/supplementalData.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/supplemental/supplementalData.xml	2014-04-03 15:52:51.000000000 -0700
+@@ -3682,7 +3682,7 @@
+ 		</territory>
+ 		<territory type="TR" gdp="1167000000000" literacyPercent="94.1" population="80694500">	<!--Turkey-->
+ 			<languagePopulation type="tr" populationPercent="93" officialStatus="official" references="R1206"/>	<!--Turkish-->
+-			<languagePopulation type="ku_Latn" populationPercent="5.5"/>	<!--Kurdish (Latin)-->
++			<languagePopulation type="ku" populationPercent="5.5"/>		<!--Kurdish (Latin) Google patch: use "ku", CLDR ticket 4794 -->
+ 			<languagePopulation type="zza" populationPercent="1.4"/>	<!--Zaza-->
+ 			<languagePopulation type="kbd" populationPercent="0.77"/>	<!--Kabardian-->
+ 			<languagePopulation type="az_Latn" populationPercent="0.74"/>	<!--Azerbaijani (Latin)-->
+@@ -4689,7 +4689,18 @@
+ 		<parentLocale parent="en_GB" locales="en_150 en_AU en_BE en_DG en_FK en_GG en_GI en_HK en_IE en_IM en_IN en_IO en_JE en_MO en_MT en_NZ en_PK en_SG en_SH en_VG"/>
+ 		<parentLocale parent="es_419" locales="es_AR es_BO es_CL es_CO es_CR es_CU es_DO es_EC es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE"/>
+ 		<parentLocale parent="pt_PT" locales="pt_AO pt_CV pt_GW pt_MO pt_MZ pt_ST pt_TL"/>
++                <!-- Google Patch: Explicit parent for locales when parent has on override of Parent to root.
++                                   Works around bug in ICU4J.  ICU ticket 9389  -->
++                <parentLocale parent="zh_Hant" locales="zh_Hant_HK zh_Hant_TW"/>
+ 		<parentLocale parent="zh_Hant_HK" locales="zh_Hant_MO"/>
++                <parentLocale parent="az_Cyrl" locales="az_Cyrl_AZ"/>
++                <parentLocale parent="sr_Latn" locales="sr_Latn_BA sr_Latn_ME sr_Latn_RS"/>
++                <parentLocale parent="pa_Arab" locales="pa_Arab_PK"/>
++                <parentLocale parent="shi_Tfng" locales="shi_Tfng_MA"/>
++                <parentLocale parent="uz_Arab" locales="uz_Arab_AF"/>
++                <parentLocale parent="uz_Latn" locales="uz_Latn_UZ"/>
++                <parentLocale parent="vai_Latn" locales="vai_Latn_LR"/>
++                <!-- End Google Patch -->
+ 	</parentLocales>
+ 	
+ 	<references>
+diff -u -r cldr25_publ/common/supplemental/supplementalMetadata.xml cldr25_goog/common/supplemental/supplementalMetadata.xml
+--- cldr25_publ/common/supplemental/supplementalMetadata.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/supplemental/supplementalMetadata.xml	2014-04-07 16:41:15.000000000 -0700
+@@ -612,6 +612,7 @@
+                 Antarctica/Palmer
+                 Antarctica/Rothera
+                 Antarctica/Syowa
++                Antarctica/Troll
+                 Antarctica/Vostok
+                 Arctic/Longyearbyen
+                 Asia/Aden Asia/Almaty Asia/Amman Asia/Anadyr Asia/Aqtau Asia/Aqtobe
+@@ -1849,6 +1850,7 @@
+              <blockingItems elements="identity supplementalData cldrTest collation transform"/>
+          </blocking>
+         <skipDefaultLocale services="segmentation collation"/>
++	<!-- Google patch: added ku_Arab and ku_Latn_SY labels to locales list.  See http://unicode.org/cldr/trac/ticket/4796 -->
+ 		<defaultContent locales="
+ 			aa_ET af_ZA agq_CM ak_GH am_ET ar_001 as_IN asa_TZ ast_ES az_Cyrl_AZ az_Latn
+ 			az_Latn_AZ
+@@ -1864,7 +1866,7 @@
+ 			ja_JP jgo_CM jmc_TZ
+ 			ka_GE kab_DZ kaj_NG kam_KE kcg_NG kde_TZ kea_CV ken_CM khq_ML ki_KE kk_Cyrl
+ 			kk_Cyrl_KZ kkj_CM kl_GL kln_KE km_KH kn_IN ko_KR kok_IN kpe_LR ks_Arab
+-			ks_Arab_IN ksb_TZ ksf_CM ksh_DE ku_Latn ku_Latn_TR kw_GB ky_Cyrl ky_Cyrl_KG
++			ks_Arab_IN ksb_TZ ksf_CM ksh_DE ku_Arab ku_Latn ku_Latn_SY ku_Latn_TR kw_GB ky_Cyrl ky_Cyrl_KG
+ 			lag_TZ lg_UG lkt_US ln_CD lo_LA lt_LT lu_CD luo_KE luy_KE lv_LV
+ 			mas_KE mer_KE mfe_MU mg_MG mgh_MZ mgo_CM mi_NZ mk_MK ml_IN mn_Cyrl mn_Cyrl_MN
+ 			mn_Mong_CN mr_IN ms_Arab_MY ms_Latn ms_Latn_MY mt_MT mua_CM my_MM
+diff -u -r cldr25_publ/common/supplemental/windowsZones.xml cldr25_goog/common/supplemental/windowsZones.xml
+--- cldr25_publ/common/supplemental/windowsZones.xml	2014-04-02 14:50:36.000000000 -0700
++++ cldr25_goog/common/supplemental/windowsZones.xml	2014-04-07 16:41:15.000000000 -0700
+@@ -11,7 +11,7 @@
+ 	<generation date="$Date: 2014-02-12 14:40:21 -0800 (Wed, 12 Feb 2014) $"/>
+ 
+ 	<windowsZones>
+-		<mapTimezones otherVersion="7de0000" typeVersion="2013i">
++		<mapTimezones otherVersion="7de0000" typeVersion="2014b">
+ 
+ 			<!-- (UTC-12:00) International Date Line West -->
+ 			<mapZone other="Dateline Standard Time" territory="001" type="Etc/GMT+12"/>
+@@ -62,7 +62,7 @@
+ 			<mapZone other="Mountain Standard Time" territory="001" type="America/Denver"/>
+ 			<mapZone other="Mountain Standard Time" territory="CA" type="America/Edmonton America/Cambridge_Bay America/Inuvik America/Yellowknife"/>
+ 			<mapZone other="Mountain Standard Time" territory="MX" type="America/Ojinaga"/>
+-			<mapZone other="Mountain Standard Time" territory="US" type="America/Denver America/Boise America/Shiprock"/>
++			<mapZone other="Mountain Standard Time" territory="US" type="America/Denver America/Boise"/>
+ 			<mapZone other="Mountain Standard Time" territory="ZZ" type="MST7MDT"/>
+ 
+ 			<!-- (UTC-06:00) Central America -->
+@@ -367,7 +367,7 @@
+ 			<mapZone other="FLE Standard Time" territory="FI" type="Europe/Helsinki"/>
+ 			<mapZone other="FLE Standard Time" territory="LT" type="Europe/Vilnius"/>
+ 			<mapZone other="FLE Standard Time" territory="LV" type="Europe/Riga"/>
+-			<mapZone other="FLE Standard Time" territory="UA" type="Europe/Kiev Europe/Simferopol Europe/Uzhgorod Europe/Zaporozhye"/>
++			<mapZone other="FLE Standard Time" territory="UA" type="Europe/Kiev Europe/Uzhgorod Europe/Zaporozhye"/>
+ 
+ 			<!-- (UTC+02:00) Istanbul -->
+ 			<mapZone other="Turkey Standard Time" territory="001" type="Europe/Istanbul"/>
+@@ -435,7 +435,7 @@
+ 
+ 			<!-- (UTC+04:00) Moscow, St. Petersburg, Volgograd -->
+ 			<mapZone other="Russian Standard Time" territory="001" type="Europe/Moscow"/>
+-			<mapZone other="Russian Standard Time" territory="RU" type="Europe/Moscow Europe/Samara Europe/Volgograd"/>
++			<mapZone other="Russian Standard Time" territory="RU" type="Europe/Moscow Europe/Samara Europe/Simferopol Europe/Volgograd"/>
+ 
+ 			<!-- (UTC+04:00) Port Louis -->
+ 			<mapZone other="Mauritius Standard Time" territory="001" type="Indian/Mauritius"/>
+@@ -618,7 +618,7 @@
+ 			<!-- (UTC+12:00) Auckland, Wellington -->
+ 			<mapZone other="New Zealand Standard Time" territory="001" type="Pacific/Auckland"/>
+ 			<mapZone other="New Zealand Standard Time" territory="AQ" type="Antarctica/McMurdo"/>
+-			<mapZone other="New Zealand Standard Time" territory="NZ" type="Pacific/Auckland Antarctica/South_Pole"/>
++			<mapZone other="New Zealand Standard Time" territory="NZ" type="Pacific/Auckland"/>
+ 
+ 			<!-- (UTC+12:00) Coordinated Universal Time+12 -->
+ 			<mapZone other="UTC+12" territory="001" type="Etc/GMT-12"/>

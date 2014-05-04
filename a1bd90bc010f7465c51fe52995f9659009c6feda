@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ae0a8ae_8f3a15e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-04T15:03:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6abf008d_c9401149",
+      "revId": "a1bd90bc010f7465c51fe52995f9659009c6feda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ac5a423_eeb07f1d",
         "filename": "user/test/com/google/web/bindery/requestfactory/server/MethodProvidedByServiceLayerJreTest.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-04T11:21:37Z",
       "side": 1,
       "message": "2014",
+      "revId": "a1bd90bc010f7465c51fe52995f9659009c6feda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ac5a423_aeba77f7",
+        "filename": "user/test/com/google/web/bindery/requestfactory/server/MethodProvidedByServiceLayerJreTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-04T15:03:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ac5a423_eeb07f1d",
       "revId": "a1bd90bc010f7465c51fe52995f9659009c6feda",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

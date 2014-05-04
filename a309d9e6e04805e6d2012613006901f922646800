@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2ae0a8ae_ef14015e",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/CurrencyData.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-05-04T06:50:25Z",
+      "side": 1,
+      "message": "Changed the patch so as it changes the revision of the data file when it has any modification.  This line will change to \u0027Revision: 9737 GWT\u0027 if the patch was run.",
+      "parentUuid": "4adb1c06_903a34e1",
+      "revId": "a309d9e6e04805e6d2012613006901f922646800",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6abf008d_0fb069cd",
         "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl.java",
         "patchSetId": 2

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ae0a8ae_6f525126",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-04T10:38:27Z",
+      "side": 1,
+      "message": "Maybe use a link (https://gwt-review.googlesource.com/7460), or use the Change-Id instead of the \"short ID\" (I56d61621591138ac2b568ebe8bb2b7d5173bb3d2)",
+      "revId": "e0450e2003e1068ce6c8a48b98f605d2872eb3d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

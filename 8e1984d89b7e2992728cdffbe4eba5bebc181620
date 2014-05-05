@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a2fd4b4_fc934978",
+        "filename": "user/test/com/google/gwt/core/client/impl/ImplTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-05T20:56:15Z",
+      "side": 1,
+      "message": "s/prunnable/prunable",
+      "range": {
+        "startLine": 75,
+        "startChar": 35,
+        "endLine": 75,
+        "endChar": 44
+      },
+      "revId": "8e1984d89b7e2992728cdffbe4eba5bebc181620",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

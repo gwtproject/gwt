@@ -57,8 +57,6 @@ public class ImplTest extends GWTTestCase {
     assertNotNull(foo.statifiableFunction(null));
     assertNotNull(inlinableFunction());
     assertNotNullNorEmpty(
-        Impl.getNameOf("@com.google.gwt.core.client.impl.ImplTest::prunableFunction()"));
-    assertNotNullNorEmpty(
         Impl.getNameOf("@com.google.gwt.core.client.impl.ImplTest::inlinableFunction()"));
     assertNotNullNorEmpty(
         Impl.getNameOf("@com.google.gwt.core.client.impl.ImplTest.Foo::statifiableFunction(*)"));
@@ -73,8 +71,8 @@ public class ImplTest extends GWTTestCase {
 
     String prunnableFnName =
         Impl.getNameOf("@com.google.gwt.core.client.impl.ImplTest::prunableFunction()");
-    assertTrue("Expecting 'prunableFunction' got '" + prunnableFnName + "'",
-        prunnableFnName.contains("prunableFunction"));
+    assertTrue("Expecting 'prunableFunction' or null got '" + prunnableFnName + "'",
+        prunnableFnName == null || prunnableFnName.contains("prunableFunction"));
 
     String inlineableFnName =
         Impl.getNameOf("@com.google.gwt.core.client.impl.ImplTest::inlinableFunction()");

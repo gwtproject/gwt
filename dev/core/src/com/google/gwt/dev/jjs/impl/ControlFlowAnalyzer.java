@@ -437,17 +437,6 @@ public class ControlFlowAnalyzer {
     }
 
     @Override
-    public boolean visit(JNameOf x, Context ctx) {
-      if (x.getNode() == null) {
-        return true;
-      }
-
-      assert x.getNode() instanceof JMethod;
-      rescue((JMethod) x.getNode());
-      return true;
-    }
-
-    @Override
     public boolean visit(JNewArray newArray, Context ctx) {
       // rescue and instantiate the array type
       JArrayType arrayType = newArray.getArrayType();

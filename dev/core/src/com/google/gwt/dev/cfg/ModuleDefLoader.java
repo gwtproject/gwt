@@ -321,6 +321,7 @@ public class ModuleDefLoader {
 
     long lastModified = 0;
     if (moduleURL != null) {
+      moduleDef.recordModuleGwtXmlFile(moduleName, moduleURL.getPath());
       String externalForm = moduleURL.toExternalForm();
       if (logger.isLoggable(TreeLogger.DEBUG)) {
         logger.log(TreeLogger.DEBUG, "Module location: " + externalForm, null);

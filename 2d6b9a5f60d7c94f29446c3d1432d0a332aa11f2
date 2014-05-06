@@ -22,6 +22,30 @@
       "revId": "2d6b9a5f60d7c94f29446c3d1432d0a332aa11f2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4adb1c06_76f1c8ba",
+        "filename": "user/src/com/google/gwt/user/datepicker/client/CalendarUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-05-06T19:02:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaaa1052_8b8f7164",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 5
+      },
+      "revId": "2d6b9a5f60d7c94f29446c3d1432d0a332aa11f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

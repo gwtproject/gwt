@@ -50,6 +50,23 @@
       "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_1e97fc68",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-06T19:11:35Z",
+      "side": 1,
+      "message": "nit: perhaps float:right?",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

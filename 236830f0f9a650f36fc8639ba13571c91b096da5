@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_411a4944",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T20:21:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4adb1c06_b3ad0289",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4adb1c06_53885611",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-06T11:52:06Z",
       "side": 1,
       "message": "This should probably set \u0027background\u0027 rather than just \u0027backgroundColor\u0027 (what if there\u0027s a stylesheet with \"div { background-image: url(black.png) }\" ?)",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_a10fd5ff",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T20:21:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4adb1c06_53885611",
       "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_81145117",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T20:21:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4adb1c06_738d5a20",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3ee8ea_1e97fc68",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-06T19:11:35Z",
       "side": 1,
       "message": "nit: perhaps float:right?",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_e108bdf7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T20:21:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3ee8ea_1e97fc68",
       "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4adb1c06_b3ad0289",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-06T11:52:06Z",
+      "side": 1,
+      "message": "To be sure, color should always be set together with background (e.g. what if there\u0027s a stylesheet defining \"a { background: black; }\" ?)",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4adb1c06_53885611",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-06T11:52:06Z",
+      "side": 1,
+      "message": "This should probably set \u0027background\u0027 rather than just \u0027backgroundColor\u0027 (what if there\u0027s a stylesheet with \"div { background-image: url(black.png) }\" ?)",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4adb1c06_738d5a20",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-06T11:52:06Z",
+      "side": 1,
+      "message": "This should probably set \u0027background\u0027 rather than just \u0027backgroundColor\u0027 (what if there\u0027s a stylesheet with \"div { background-image: url(black.png) }\" ?)",
+      "revId": "236830f0f9a650f36fc8639ba13571c91b096da5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

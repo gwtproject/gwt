@@ -53,14 +53,14 @@ public class PathPrefixSetTest extends TestCase {
     assertFalse(pps.includesDirectory("com/google/gwt/user/server/"));
     assertFalse(pps.includesDirectory("com/google/gwt/xml/client/"));
 
-    assertEquals(pp1,
-        pps.includesResource("com/google/gwt/user/client/Command.java"));
-    assertEquals(pp1,
-        pps.includesResource("com/google/gwt/user/client/Timer.java"));
-    assertEquals(pp2,
-        pps.includesResource("com/google/gwt/i18n/client/Messages.java"));
-    assertEquals(pp3,
-        pps.includesResource("com/google/gwt/dom/client/DivElement.java"));
+    assertEquals(pp1, pps.includesResource(
+        "com/google/gwt/user/client/Command.java").getPathPrefix());
+    assertEquals(pp1, pps.includesResource(
+        "com/google/gwt/user/client/Timer.java").getPathPrefix());
+    assertEquals(pp2, pps.includesResource(
+        "com/google/gwt/i18n/client/Messages.java").getPathPrefix());
+    assertEquals(pp3, pps.includesResource(
+        "com/google/gwt/dom/client/DivElement.java").getPathPrefix());
 
     assertNull(
         pps.includesResource("com/google/gwt/user/rebind/rpc/ServiceInterfaceProxyGenerator.java"));
@@ -87,10 +87,10 @@ public class PathPrefixSetTest extends TestCase {
     pps.add(pp2);
 
     // Correct prefix, and filter should allow .
-    assertEquals(pp1,
-        pps.includesResource("com/google/gwt/user/public/clear.cache.gif"));
-    assertEquals(pp2,
-        pps.includesResource("com/google/gwt/sample/mail/public/inboxIcon.gif"));
+    assertEquals(pp1, pps.includesResource(
+        "com/google/gwt/user/public/clear.cache.gif").getPathPrefix());
+    assertEquals(pp2, pps.includesResource(
+        "com/google/gwt/sample/mail/public/inboxIcon.gif").getPathPrefix());
 
     // Correct prefix, but filter should exclude.
     assertNull(pps.includesResource("com/google/gwt/user/public/README.txt"));
@@ -121,11 +121,11 @@ public class PathPrefixSetTest extends TestCase {
     // pp5 now overrides pp2
     pps.add(pp5);
 
-    assertEquals(pp3, pps.includesResource("W.java"));
-    assertEquals(pp5, pps.includesResource("a/X.java"));
-    assertEquals(pp1, pps.includesResource("a/b/Y.java"));
-    assertEquals(pp4, pps.includesResource("a/b/c/Z.java"));
-    assertEquals(pp4, pps.includesResource("a/b/c/d/V.java"));
+    assertEquals(pp3, pps.includesResource("W.java").getPathPrefix());
+    assertEquals(pp5, pps.includesResource("a/X.java").getPathPrefix());
+    assertEquals(pp1, pps.includesResource("a/b/Y.java").getPathPrefix());
+    assertEquals(pp4, pps.includesResource("a/b/c/Z.java").getPathPrefix());
+    assertEquals(pp4, pps.includesResource("a/b/c/d/V.java").getPathPrefix());
   }
 
   public void testExcludes_DenyOverridesAllow() {
@@ -133,12 +133,13 @@ public class PathPrefixSetTest extends TestCase {
 
     String[] excludesDeny = new String[] {"a/b/FILTERMEOUT"};
     String[] excludesAllow = null;
-    PathPrefix pathPrefixFilterDeny =
-        new PathPrefix("a/b/", null, false, excludesDeny);
-    PathPrefix pathPrefixFilterAllow = new PathPrefix("a/b/", null, false, excludesAllow);
+    PathPrefix pathPrefixExcludesDeny =
+        new PathPrefix("FooModule", "a/b/", null, false, excludesDeny);
+    PathPrefix pathPrefixExcludesAllow =
+        new PathPrefix("BarModule", "a/b/", null, false, excludesAllow);
 
-    pathPrefixSet.add(pathPrefixFilterDeny);
-    pathPrefixSet.add(pathPrefixFilterAllow);
+    pathPrefixSet.add(pathPrefixExcludesDeny);
+    pathPrefixSet.add(pathPrefixExcludesAllow);
 
     assertNull(pathPrefixSet.includesResource("a/b/FILTERMEOUT"));
   }
@@ -178,8 +179,8 @@ public class PathPrefixSetTest extends TestCase {
     pathPrefixSet.add(pathPrefixSpecificFilterAllow);
 
     assertNull(pathPrefixSet.includesResource("a/b/FILTERMEOUT"));
-    assertEquals(pathPrefixSpecificFilterAllow,
-        pathPrefixSet.includesResource("a/b/c/DONT_FILTERMEOUT"));
+    assertEquals(pathPrefixSpecificFilterAllow, pathPrefixSet.includesResource(
+        "a/b/c/DONT_FILTERMEOUT").getPathPrefix());
   }
 
   public void testOverlappingPrefixesNonEmptyFilter() {
@@ -209,12 +210,12 @@ public class PathPrefixSetTest extends TestCase {
     pps.add(pp4);
     pps.add(pp5);
 
-    assertEquals(pp1, pps.includesResource("W.java"));
+    assertEquals(pp1, pps.includesResource("W.java").getPathPrefix());
 
     // see TODO in the implementation note for PathPrefixSet.java
     // assertEquals(pp2, pps.includesResource("a/X.java"));
-    assertEquals(pp5, pps.includesResource("a/Y.java"));
-    assertEquals(pp3, pps.includesResource("a/b/Y.java"));
+    assertEquals(pp5, pps.includesResource("a/Y.java").getPathPrefix());
+    assertEquals(pp3, pps.includesResource("a/b/Y.java").getPathPrefix());
     // This should be gone, since it is found in b.
     assertNull(pps.includesResource("a/b/FILTERMEOUT"));
     /*
@@ -222,9 +223,10 @@ public class PathPrefixSetTest extends TestCase {
      * b's. The logic here is that the prefix including c is more specific and
      * seemed to want c's resources to be included.
      */
-    assertEquals(pp4, pps.includesResource("a/b/c/DONT_FILTERMEOUT"));
-    assertEquals(pp4, pps.includesResource("a/b/c/Z.java"));
-    assertEquals(pp4, pps.includesResource("a/b/c/d/V.java"));
+    assertEquals(pp4,
+        pps.includesResource("a/b/c/DONT_FILTERMEOUT").getPathPrefix());
+    assertEquals(pp4, pps.includesResource("a/b/c/Z.java").getPathPrefix());
+    assertEquals(pp4, pps.includesResource("a/b/c/d/V.java").getPathPrefix());
   }
 
   /**
@@ -238,10 +240,10 @@ public class PathPrefixSetTest extends TestCase {
     PathPrefix pp1 = new PathPrefix("", null);
     pps.add(pp1);
 
-    assertEquals(pp1, pps.includesResource("W.java"));
-    assertEquals(pp1, pps.includesResource("a/X.java"));
-    assertEquals(pp1, pps.includesResource("a/b/Y.java"));
-    assertEquals(pp1, pps.includesResource("a/b/c/Z.java"));
+    assertEquals(pp1, pps.includesResource("W.java").getPathPrefix());
+    assertEquals(pp1, pps.includesResource("a/X.java").getPathPrefix());
+    assertEquals(pp1, pps.includesResource("a/b/Y.java").getPathPrefix());
+    assertEquals(pp1, pps.includesResource("a/b/c/Z.java").getPathPrefix());
   }
 
   public void testZeroLengthPrefixNonEmptyFilter() {
@@ -259,7 +261,7 @@ public class PathPrefixSetTest extends TestCase {
 
     assertNull(pps.includesResource("W.java"));
     assertNull(pps.includesResource("a/X.java"));
-    assertEquals(pp1, pps.includesResource("a/b/Y.java"));
+    assertEquals(pp1, pps.includesResource("a/b/Y.java").getPathPrefix());
     assertNull(pps.includesResource("a/b/c/Z.java"));
   }
 }

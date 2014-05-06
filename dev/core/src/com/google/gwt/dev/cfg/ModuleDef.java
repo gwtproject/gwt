@@ -41,12 +41,12 @@ import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
-import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Queues;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -73,7 +73,7 @@ import java.util.Set;
  * Represents a module specification. In principle, this could be built without
  * XML for unit tests.
  */
-public class ModuleDef {
+public class ModuleDef implements DepsInfoProvider {
   /**
    * Marks a module in a way that can be used to calculate the effective bounds of a library module
    * in a module tree.
@@ -103,6 +103,69 @@ public class ModuleDef {
    */
   private enum AttributeSource {
     EXTERNAL_LIBRARY, TARGET_LIBRARY
+  }
+
+  /**
+   * Contains the names of a set of transitive dependency modules for a particular module.
+   * <p>
+   * The construction of this information requires a recursive walk and following fixup of partial
+   * views. Temporary state is contained here to facilitate those processes.
+   */
+  private class TransitiveDepsBuilder {
+
+    private Set<TransitiveDepsBuilder> sawPartialViewOfBuilders = Sets.newHashSet();
+    private Queue<TransitiveDepsBuilder> showedPartialViewToBuilders = Lists.newLinkedList();
+    private boolean naiveBuildDone;
+    private Set<String> transitiveDepsModuleNames = Sets.newHashSet();
+
+    private void build(String moduleName) {
+      Collection<String> directDepsModuleNames = getDirectDependencies(moduleName);
+      transitiveDepsModuleNames.add(moduleName);
+      transitiveDepsModuleNames.addAll(directDepsModuleNames);
+
+      for (String directDepsModuleName : directDepsModuleNames) {
+        TransitiveDepsBuilder childBuilder = getTransitiveDepsBuilder(directDepsModuleName);
+
+        // If we're looking at the contents of childBuilder before childBuilder is done with its own
+        // build. This is caused by circular dependencies.
+        if (!childBuilder.naiveBuildDone) {
+          // Then remember that this partial view occurred so that it can be fixed up later.
+          sawPartialViewOfBuilders.add(childBuilder);
+          childBuilder.showedPartialViewToBuilders.add(this);
+        }
+
+        transitiveDepsModuleNames.addAll(childBuilder.transitiveDepsModuleNames);
+      }
+
+      naiveBuildDone = true;
+      maybeFixPartialViews();
+    }
+
+    private void maybeFixPartialViews() {
+      if (!sawPartialViewOfBuilders.isEmpty()) {
+        // My transitiveDepsModuleNames set might not be correct yet so don't try to fixup others
+        // who saw a partial view of me.
+        return;
+      }
+
+      if (showedPartialViewToBuilders.isEmpty()) {
+        // No one saw a partial view of me so there is no one for me to fix up.
+        return;
+      }
+
+      // My transitiveDepsModuleNames set must be complete.
+      while (!showedPartialViewToBuilders.isEmpty()) {
+        TransitiveDepsBuilder builderWithPartialView = showedPartialViewToBuilders.remove();
+
+        // Fix the partial view of me that had been previously shown to this other builder.
+        builderWithPartialView.transitiveDepsModuleNames.addAll(transitiveDepsModuleNames);
+        builderWithPartialView.sawPartialViewOfBuilders.remove(this);
+
+        // This other builder might now be complete, give it a chance to cascade to fix up anyone
+        // who saw a partial view of him.
+        builderWithPartialView.maybeFixPartialViews();
+      }
+    }
   }
 
   /**
@@ -217,7 +280,8 @@ public class ModuleDef {
   /**
    * The canonical module names of dependency library modules per depending library module.
    */
-  private Multimap<String, String> directDependencyModuleNamesByModuleName = HashMultimap.create();
+  private LinkedHashMultimap<String, String> directDepModuleNamesByModuleName =
+      LinkedHashMultimap.create();
 
   private final List<String> entryPointTypeNames = new ArrayList<String>();
 
@@ -225,6 +289,16 @@ public class ModuleDef {
    * Names of free-standing compilable library modules that are depended upon by this module.
    */
   private final Set<String> externalLibraryCanonicalModuleNames = Sets.newLinkedHashSet();
+
+  /**
+   * A stack that keeps track of the type of the current module in the enterModule/exitModule tree.
+   */
+  private final Deque<ModuleType> currentModuleType = Lists.newLinkedList();
+
+  /**
+   * A stack that keeps track of the name of the current module in the enterModule/exitModule tree.
+   */
+  private final Deque<String> currentLibraryModuleNames = Lists.newLinkedList();
 
   /**
    * Records the canonical module names for filesets.
@@ -301,6 +375,16 @@ public class ModuleDef {
    */
   private final Set<String> targetLibraryCanonicalModuleNames = Sets.newLinkedHashSet();
 
+  /**
+   * A mapping from the names of modules to an accumulation of their transitive dependency info.
+   */
+  private Map<String, TransitiveDepsBuilder> transitiveDepsBuildersByModuleName = Maps.newHashMap();
+
+  /**
+   * A mapping from names of modules to path to their associated .gwt.xml file.
+   */
+  private Map<String, String> gwtXmlPathByModuleName = Maps.newHashMap();
+
   public ModuleDef(String name) {
     this(name, ResourceLoaders.forClassLoader(Thread.currentThread()));
   }
@@ -323,7 +407,7 @@ public class ModuleDef {
    * Register a {@code dependencyModuleName} as a directDependency of {@code currentModuleName}
    */
   public void addDirectDependency(String currentModuleName, String dependencyModuleName) {
-    directDependencyModuleNamesByModuleName.put(currentModuleName, dependencyModuleName);
+    directDepModuleNamesByModuleName.put(currentModuleName, dependencyModuleName);
   }
 
   public synchronized void addEntryPointTypeName(String typeName) {
@@ -367,8 +451,9 @@ public class ModuleDef {
     if (!attributeIsForTargetLibrary()) {
       return;
     }
-    publicPrefixSet.add(new PathPrefix(publicPackage, defaultFilters.customResourceFilter(
-        includeList, excludeList, skipList, defaultExcludes, caseSensitive), true, excludeList));
+    publicPrefixSet.add(new PathPrefix(getCurrentLibraryModuleName(), publicPackage, defaultFilters
+        .customResourceFilter(includeList, excludeList, skipList, defaultExcludes, caseSensitive),
+        true, excludeList));
   }
 
   public void addResourcePath(String resourcePath) {
@@ -378,7 +463,8 @@ public class ModuleDef {
     if (!attributeIsForTargetLibrary()) {
       return;
     }
-    resourcePrefixes.add(new PathPrefix(resourcePath, NON_JAVA_RESOURCES));
+    resourcePrefixes.add(new PathPrefix(getCurrentLibraryModuleName(), resourcePath,
+        NON_JAVA_RESOURCES, false, null));
   }
 
   public void addRule(Rule rule) {
@@ -403,9 +489,9 @@ public class ModuleDef {
     if (!attributeIsForTargetLibrary()) {
       return;
     }
-    PathPrefix pathPrefix =
-        new PathPrefix(sourcePackage, defaultFilters.customJavaFilter(includeList, excludeList,
-            skipList, defaultExcludes, caseSensitive), isSuperSource, excludeList);
+    PathPrefix pathPrefix = new PathPrefix(getCurrentLibraryModuleName(),
+        sourcePackage, defaultFilters.customJavaFilter(includeList, excludeList, skipList,
+            defaultExcludes, caseSensitive), isSuperSource, excludeList);
     sourcePrefixSet.add(pathPrefix);
   }
 
@@ -471,8 +557,11 @@ public class ModuleDef {
    * modules ModuleType to updates its idea of attribute source.
    */
   public void enterModule(ModuleType moduleType, String canonicalModuleName) {
+    currentModuleType.push(moduleType);
     if (moduleType == ModuleType.FILESET) {
       addFileset(canonicalModuleName);
+    } else {
+      currentLibraryModuleNames.push(canonicalModuleName);
     }
     if (monolithic) {
       // When you're monolithic the module tree is all effectively one giant library.
@@ -514,6 +603,9 @@ public class ModuleDef {
   }
 
   public void exitModule() {
+    if (currentModuleType.pop() == ModuleType.LIBRARY) {
+      currentLibraryModuleNames.pop();
+    }
     currentAttributeSource.pop();
   }
 
@@ -599,8 +691,8 @@ public class ModuleDef {
       // well.
       PathPrefixSet newPathPrefixes = new PathPrefixSet();
       for (PathPrefix pathPrefix : pathPrefixes.values()) {
-        newPathPrefixes.add(
-            new PathPrefix(pathPrefix.getPrefix(), NON_JAVA_RESOURCES, pathPrefix.shouldReroot()));
+        newPathPrefixes.add(new PathPrefix(pathPrefix.getModuleName(), pathPrefix.getPrefix(),
+            NON_JAVA_RESOURCES, pathPrefix.shouldReroot(), null));
       }
 
       // Register build resource paths.
@@ -637,7 +729,7 @@ public class ModuleDef {
    */
   public Collection<String> getDirectDependencies(String libraryModuleName) {
     assert !filesetModuleNames.contains(libraryModuleName);
-    return directDependencyModuleNamesByModuleName.get(libraryModuleName);
+    return directDepModuleNamesByModuleName.get(libraryModuleName);
   }
 
   public synchronized String[] getEntryPointTypeNames() {
@@ -664,6 +756,11 @@ public class ModuleDef {
   public List<Rule> getGeneratorRules() {
     return ImmutableList.copyOf(
         Iterators.filter(rules.iterator(), Predicates.instanceOf(RuleGenerateWith.class)));
+  }
+
+  @Override
+  public String getGwtXmlFilePath(String moduleName) {
+    return gwtXmlPathByModuleName.get(moduleName);
   }
 
   public Class<? extends Linker> getLinker(String name) {
@@ -744,6 +841,12 @@ public class ModuleDef {
     return servletClassNamesByPath.keySet().toArray(Empty.STRINGS);
   }
 
+  @Override
+  public Set<String> getSourceModuleNames(String typeSourceName) {
+    ensureResourcesScanned();
+    return lazySourceOracle.getSourceModulesByTypeSourceName().get(typeSourceName);
+  }
+
   public synchronized ResourceOracle getSourceResourceOracle() {
     ensureResourcesScanned();
     return lazySourceOracle;
@@ -762,6 +865,11 @@ public class ModuleDef {
    */
   public Set<String> getTargetLibraryCanonicalModuleNames() {
     return targetLibraryCanonicalModuleNames;
+  }
+
+  @Override
+  public Set<String> getTransitiveDepModuleNames(String libraryModuleName) {
+    return getTransitiveDepsBuilder(libraryModuleName).transitiveDepsModuleNames;
   }
 
   public boolean isGwtXmlFileStale() {
@@ -792,6 +900,14 @@ public class ModuleDef {
    */
   public synchronized void mapServlet(String path, String servletClassName) {
     servletClassNamesByPath.put(path, servletClassName);
+  }
+
+  public void printOverlappingSourceWarnings(TreeLogger logger) {
+    lazySourceOracle.printOverlappingModuleIncludeWarnings(logger);
+  }
+
+  public void recordModuleGwtXmlFile(String moduleName, String fileSourcePath) {
+    gwtXmlPathByModuleName.put(moduleName, fileSourcePath);
   }
 
   public synchronized void refresh() {
@@ -943,7 +1059,7 @@ public class ModuleDef {
    * Reduce the direct dependency graph to exclude filesets.
    */
   private void computeLibraryDependencyGraph() {
-    for (String moduleName : Lists.newArrayList(directDependencyModuleNamesByModuleName.keySet())) {
+    for (String moduleName : Lists.newArrayList(directDepModuleNamesByModuleName.keySet())) {
       Set<String> libraryModules = Sets.newHashSet();
       Set<String> filesetsProcessed = Sets.newHashSet();
 
@@ -951,7 +1067,7 @@ public class ModuleDef {
       // to process.
       Queue<LinkedList<String>> modulePathsToProcess = Queues.newArrayDeque();
       Collection<String> directDependencyModuleNames =
-          directDependencyModuleNamesByModuleName.get(moduleName);
+          directDepModuleNamesByModuleName.get(moduleName);
       for (String directDependencyModuleName : directDependencyModuleNames) {
         modulePathsToProcess.add(Lists.newLinkedList(ImmutableList.of(directDependencyModuleName)));
       }
@@ -978,17 +1094,17 @@ public class ModuleDef {
         // Get the dependencies of the dependent module under consideration and add all those
         // that have not been already processed to the queue of modules to process.
         Set<String> unProcessedModules =
-            Sets.newHashSet(directDependencyModuleNamesByModuleName.get(dependentModuleName));
+            Sets.newHashSet(directDepModuleNamesByModuleName.get(dependentModuleName));
         unProcessedModules.removeAll(filesetsProcessed);
         for (String unProcessedModule : unProcessedModules) {
           modulePathsToProcess.add(createExtendedCopy(dependentModuleNamePath, unProcessedModule));
         }
       }
       // Rewrite the dependents with the set just computed.
-      directDependencyModuleNamesByModuleName.replaceValues(moduleName, libraryModules);
+      directDepModuleNamesByModuleName.replaceValues(moduleName, libraryModules);
     }
     // Remove all fileset entries.
-    directDependencyModuleNamesByModuleName.removeAll(filesetModuleNames);
+    directDepModuleNamesByModuleName.removeAll(filesetModuleNames);
   }
 
   private synchronized void ensureResourcesScanned() {
@@ -1005,5 +1121,19 @@ public class ModuleDef {
     lazyPublicOracle.scanResources(TreeLogger.NULL);
     lazySourceOracle.scanResources(TreeLogger.NULL);
     moduleDefEvent.end();
+  }
+
+  private String getCurrentLibraryModuleName() {
+    return currentLibraryModuleNames.isEmpty() ? "" : currentLibraryModuleNames.peek();
+  }
+
+  private TransitiveDepsBuilder getTransitiveDepsBuilder(String moduleName) {
+    if (!transitiveDepsBuildersByModuleName.containsKey(moduleName)) {
+      TransitiveDepsBuilder transitiveDepsBuilder = new TransitiveDepsBuilder();
+      // Store the builder even before it's been expanded, to shortcircuit circular dependencies.
+      transitiveDepsBuildersByModuleName.put(moduleName, transitiveDepsBuilder);
+      transitiveDepsBuilder.build(moduleName);
+    }
+    return transitiveDepsBuildersByModuleName.get(moduleName);
   }
 }

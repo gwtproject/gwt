@@ -53,6 +53,40 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_e88382b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeRefDepsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-06T18:25:25Z",
+      "side": 1,
+      "message": "Missing collection in Jsni..Refs",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_48f38e54",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeRefDepsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-06T18:25:25Z",
+      "side": 1,
+      "message": "Don\u0027t you also need here\nif (x.getInstance() !\u003d null) { maybe...(x.getInstance().getType())}",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3ee8ea_e508d28c",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
         "patchSetId": 1

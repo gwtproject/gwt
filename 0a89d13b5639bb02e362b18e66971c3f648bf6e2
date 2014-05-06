@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_811611ad",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/DepsInfoProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3ee8ea_c5014e6c",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3ee8ea_a5feca15",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/DepsInfoProvider.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-06T02:18:56Z",
       "side": 1,
       "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_e12a7de1",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/DepsInfoProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3ee8ea_a5feca15",
       "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_21258511",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/DepsInfoProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3ee8ea_050cd69e",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3ee8ea_e88382b1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeRefDepsChecker.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-06T18:25:25Z",
       "side": 1,
       "message": "Missing collection in Jsni..Refs",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_d72e177d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeRefDepsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "thanks, done",
+      "parentUuid": "2a3ee8ea_e88382b1",
       "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "aa49f8a5_bb854749",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeRefDepsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "we talked offline and agreed this isn\u0027t necessary",
+      "parentUuid": "2a3ee8ea_48f38e54",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3ee8ea_e508d28c",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-05-06T02:18:56Z",
       "side": 1,
       "message": "[warning] \u0027}\u0027 should be on the same line.",
+      "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa49f8a5_fb8fcf62",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-06T22:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3ee8ea_e508d28c",
       "revId": "0a89d13b5639bb02e362b18e66971c3f648bf6e2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

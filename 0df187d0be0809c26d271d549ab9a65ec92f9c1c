@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a3ee8ea_c26ca448",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T01:03:11Z",
+      "side": 1,
+      "message": "I added makeTextElt() which is a bit more general.",
+      "parentUuid": "6a71c0c6_4833a71a",
+      "revId": "0df187d0be0809c26d271d549ab9a65ec92f9c1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a71c0c6_48fba799",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-02T17:53:58Z",
       "side": 1,
       "message": "Enabling compile button only if the dev-mode started and also changing the order is probably better for the user workflow:\n\n- User clicks Dev-mode bookmarklet - only Start is enabled.\n- User clicks Start; that enables dev mode and refreshes the page.\n- User clicks Dev-mode bookmarklet again, this time it shows a Stop button instead of start and also adds a \"Recompile\" button.\n\nOtherwise, it is confusing for first-time users to click which one and in which order - also if the user needs to click compile button after clicking the Start etc.",
+      "revId": "0df187d0be0809c26d271d549ab9a65ec92f9c1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3ee8ea_e208c88c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-06T01:03:11Z",
+      "side": 1,
+      "message": "I replaced the Start / Stop button with a status indicator you can click on.\n\nRationale: beginners should just press \"Compile\". This is also the workflow we want when the compiler is fast enough.\n\nTurning dev mode on and off without recompiling is a somewhat unsafe workaround that might go away someday, so it\u0027s okay if it\u0027s less discoverable.",
+      "parentUuid": "6a71c0c6_48fba799",
       "revId": "0df187d0be0809c26d271d549ab9a65ec92f9c1c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

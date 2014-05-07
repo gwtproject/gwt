@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaedb0ca_8d78014c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-07T23:45:52Z",
+      "side": 1,
+      "message": "move to next line?",
+      "range": {
+        "startLine": 721,
+        "startChar": 86,
+        "endLine": 721,
+        "endChar": 87
+      },
+      "revId": "c135b7e149f5d7f2903717590f8925c725c50261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

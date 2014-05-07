@@ -715,14 +715,14 @@ public class GenerateJavaScriptAST {
       sb.append('}');
       CastableTypeMap castableTypeMap = new StandardCastableTypeMap(sb.toString());
 
-
-      String typeId = getRuntimeTypeReference(x) != null ?
-         getRuntimeTypeReference(x).toSource() : null;
-      StandardSymbolData symbolData =
-          StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(), x
+      if (getRuntimeTypeReference(x) != null && typeOracle.isInstantiatedType(x)) {
+        String typeId = getRuntimeTypeReference(x).toSource();
+        StandardSymbolData symbolData =
+            StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(), x
               .getSourceInfo().getStartLine(), castableTypeMap, typeId);
-      assert !symbolTable.containsKey(symbolData);
-      symbolTable.put(symbolData, jsName);
+        assert !symbolTable.containsKey(symbolData);
+        symbolTable.put(symbolData, jsName);
+      }
     }
 
     private <T extends HasEnclosingType & HasName & HasSourceInfo> void recordSymbol(T x,

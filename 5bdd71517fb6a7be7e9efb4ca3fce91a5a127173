@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca654c2b_ba6ee9cc",
+        "filename": "dev/core/test/com/google/gwt/core/ext/linker/SymbolMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-07T21:46:37Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "5bdd71517fb6a7be7e9efb4ca3fce91a5a127173",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

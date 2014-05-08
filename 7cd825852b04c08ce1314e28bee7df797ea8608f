@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2aa8a88f_ef636152",
+        "filename": "dev/core/test/com/google/gwt/core/ext/linker/SymbolMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-08T23:47:17Z",
+      "side": 1,
+      "message": "let\u0027s file a bug to track this newly discovered but already existing flakey behavior.",
+      "range": {
+        "startLine": 230,
+        "startChar": 6,
+        "endLine": 230,
+        "endChar": 79
+      },
+      "revId": "7cd825852b04c08ce1314e28bee7df797ea8608f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

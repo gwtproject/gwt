@@ -22,6 +22,30 @@
       "revId": "71bf4fd9d60cfbfda9ad9ea51121017047a99cf0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca138c9f_334df282",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerOverlappingSourceWarnings.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-08T21:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca138c9f_0722383e",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 43
+      },
+      "revId": "71bf4fd9d60cfbfda9ad9ea51121017047a99cf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

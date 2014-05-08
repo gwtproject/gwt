@@ -15,8 +15,10 @@
  */
 package com.google.gwt.dev.resource.impl;
 
+import com.google.gwt.dev.resource.impl.PathPrefix.Judgement;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +42,7 @@ public class PathPrefixSet {
     private Map<String, TrieNode> children = Maps.create();
     private final String part;
 
-    private PathPrefix prefix;
+    private List<PathPrefix> prefixes = Lists.newArrayList();
 
     public TrieNode(String part) {
       this.part = StringInterner.get().intern(part);
@@ -54,24 +56,16 @@ public class PathPrefixSet {
       return newChild;
     }
 
-    public void extendPathPrefix(PathPrefix prefix) {
-      if (this.prefix == null) {
-        this.prefix = prefix;
-      } else {
-        this.prefix.merge(prefix);
-      }
+    public void addPathPrefix(PathPrefix prefix) {
+      prefixes.add(prefix);
     }
 
     public TrieNode findChild(String part) {
       return children.get(part);
     }
 
-    public PathPrefix getPathPrefix() {
-      return prefix;
-    }
-
-    public boolean hasChildren() {
-      return !children.isEmpty();
+    public List<PathPrefix> getPathPrefixes() {
+      return prefixes;
     }
 
     @Override
@@ -119,7 +113,7 @@ public class PathPrefixSet {
      * prefix to the root so that we can apply the filter.
      */
     if ("".equals(pathPrefix)) {
-      rootTrieNode.extendPathPrefix(prefix);
+      rootTrieNode.addPathPrefix(prefix);
       return false;
     }
 
@@ -139,7 +133,7 @@ public class PathPrefixSet {
       }
     }
     assert (parentNode != null);
-    parentNode.extendPathPrefix(prefix);
+    parentNode.addPathPrefix(prefix);
     return didAdd;
   }
 
@@ -180,7 +174,7 @@ public class PathPrefixSet {
      * includes it).
      */
 
-    if (rootTrieNode.getPathPrefix() != null) {
+    if (!rootTrieNode.getPathPrefixes().isEmpty()) {
       // Case (1).
       return true;
     }
@@ -191,8 +185,8 @@ public class PathPrefixSet {
       assert (!"".equals(part));
       TrieNode childNode = parentNode.findChild(part);
       if (childNode != null) {
-        PathPrefix pathPrefix = childNode.getPathPrefix();
-        if (pathPrefix != null) {
+        List<PathPrefix> pathPrefixes = childNode.getPathPrefixes();
+        if (!pathPrefixes.isEmpty()) {
           // Case (2).
           return true;
         }
@@ -219,55 +213,72 @@ public class PathPrefixSet {
    *         Otherwise, returns null. So it returns null if either no prefixes
    *         match or the most specific prefix excludes the resource.
    */
-  public PathPrefix includesResource(String resourceAbstractPathName) {
+  public ResourceResolution includesResource(String resourceAbstractPathName) {
     String[] parts = resourceAbstractPathName.split("/");
     return includesResource(resourceAbstractPathName, parts);
   }
 
   /**
-   * Implementation of {@link #includesDirectory(String)}.
+   * Dives down the package hierarchy looking for the most specific
+   * package that applies to this resource. The filter of the most specific
+   * package is the final determiner of inclusion/exclusion, such that more
+   * specific subpackages can override the filter settings on less specific
+   * superpackages.
    */
-  public PathPrefix includesResource(String resourceAbstractPathName, String[] parts) {
-    /*
-     * Algorithm: dive down the package hierarchy looking for the most specific
-     * package that applies to this resource. The filter of the most specific
-     * package is the final determiner of inclusion/exclusion, such that more
-     * specific subpackages can override the filter settings on less specific
-     * superpackages.
-     */
-
+  public ResourceResolution includesResource(String resourceAbstractPathName,
+      String[] parts) {
     assertValidAbstractResourcePathName(resourceAbstractPathName);
 
+    ResourceResolution resourceResolution = new ResourceResolution();
     TrieNode currentNode = rootTrieNode;
-    PathPrefix mostSpecificPrefix = rootTrieNode.getPathPrefix();
+    List<PathPrefix> mostSpecificPrefixes = rootTrieNode.getPathPrefixes();
 
     // Walk all but the last path part, which is assumed to be a file name.
     for (String part : parts) {
       assert (!"".equals(part));
       TrieNode childNode = currentNode.findChild(part);
-      if (childNode != null) {
-        // We found a more specific node.
-        PathPrefix moreSpecificPrefix = childNode.getPathPrefix();
-        if (moreSpecificPrefix != null) {
-          mostSpecificPrefix = moreSpecificPrefix;
-        }
-        currentNode = childNode;
-      } else {
-        // No valid branch to follow.
+      if (childNode == null) {
         break;
+      }
+
+      // We found a more specific node.
+      List<PathPrefix>  moreSpecificPrefixes = childNode.getPathPrefixes();
+      if (!moreSpecificPrefixes.isEmpty()) {
+        // Record the module name of every PathPrefix that would allow this
+        // resource. This enables detailed dependency validity checking.
+        for (PathPrefix candidatePrefix : moreSpecificPrefixes) {
+          if (candidatePrefix.getJudgement(
+              resourceAbstractPathName).isInclude()) {
+            resourceResolution.addSourceModuleName(
+                candidatePrefix.getModuleName());
+          }
+        }
+
+        mostSpecificPrefixes = moreSpecificPrefixes;
+      }
+      currentNode = childNode;
+    }
+
+    PathPrefix chiefPrefix = null;
+    Judgement chiefJudgement = null;
+    for (PathPrefix candidatePrefix : mostSpecificPrefixes) {
+      Judgement judgement = candidatePrefix.getJudgement(
+          resourceAbstractPathName);
+
+      // EXCLUSION_EXCLUDE > FILTER_INCLUDE > IMPLICIT_EXCLUDE
+      if (chiefJudgement == null ||
+          judgement.getPriority() > chiefJudgement.getPriority()) {
+        chiefPrefix = candidatePrefix;
+        chiefJudgement = judgement;
       }
     }
 
-    if (mostSpecificPrefix == null
-        || !mostSpecificPrefix.allows(resourceAbstractPathName)) {
-      /*
-       * Didn't match any specified prefix or the filter of the most specific
-       * prefix disallows the resource
-       */
+    if (chiefPrefix == null || !chiefJudgement.isInclude()) {
       return null;
     }
 
-    return mostSpecificPrefix;
+    resourceResolution.setPathPrefix(chiefPrefix);
+    return resourceResolution;
   }
 
   @Override

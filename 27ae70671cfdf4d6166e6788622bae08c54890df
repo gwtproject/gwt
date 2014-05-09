@@ -75,6 +75,24 @@
       "revId": "27ae70671cfdf4d6166e6788622bae08c54890df",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aa8a88f_643b100b",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeTemplate.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-09T18:31:49Z",
+      "side": 1,
+      "message": "I suspect leaving out \"var\" was just a mistake. The comment says \"exposed for permutations code\" but I think that means whatever is substituted into __PROCESS_METAS__. Since that\u0027s an inner function, it has access to its parent\u0027s variables.",
+      "parentUuid": "6a87002a_c9669165",
+      "revId": "27ae70671cfdf4d6166e6788622bae08c54890df",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

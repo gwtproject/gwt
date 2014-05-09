@@ -22,10 +22,4 @@
  * on each side.
  */
 function processMetas() {
-  // Set some of the variables in the main script
-  __gwt_getMetaProperty = function(name) {
-    return null;
-  }
-  __propertyErrorFunction = null;
-  __MODULE_FUNC__.__errFn = null;
 }

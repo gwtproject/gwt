@@ -22,6 +22,30 @@
       "revId": "3a3904b824b484c2b6877b86fe006f8779d35cb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaa770cf_bddfbf71",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installScriptAlreadyIncluded.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-05-09T19:10:56Z",
+      "side": 1,
+      "message": "You\u0027re right. In iframe $wnd points to parent window.",
+      "parentUuid": "2aa8a88f_a4e258b1",
+      "range": {
+        "startLine": 24,
+        "startChar": 58,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "3a3904b824b484c2b6877b86fe006f8779d35cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

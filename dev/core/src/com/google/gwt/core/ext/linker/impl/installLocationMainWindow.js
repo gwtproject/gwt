@@ -15,11 +15,6 @@ function getInstallLocationDoc() {
   return window.document;
 }
 
-function getInstallLocation() {
-  setupInstallLocation();
-  return window.document.body;
-}
-
 function setupInstallLocation() {
   if (init) { return; }
   var script = window.document.createElement('script');

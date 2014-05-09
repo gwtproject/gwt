@@ -46,6 +46,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a87002a_2929eda8",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5045
+      },
+      "writtenOn": "2014-05-09T06:21:48Z",
+      "side": 0,
+      "message": "This is the configuration that I used all the time with eclipse and maven. If you look at gwt-site-webapp we are using it there. I have no idea how it works with M2Eclipse, it is fine to be configured with GPE though (although I handpick the GWT version).",
+      "parentUuid": "59ee9b35_1305bcde",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

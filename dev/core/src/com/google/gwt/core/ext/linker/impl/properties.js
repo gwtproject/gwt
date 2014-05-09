@@ -60,4 +60,4 @@
   };
 
   __MODULE_FUNC__.__computePropValue = computePropValue;
-  $wnd.__gwt_activeModules["__MODULE_NAME__"].bindings = __MODULE_FUNC__.__getPropMap;
+  activeModules["__MODULE_NAME__"].bindings = __MODULE_FUNC__.__getPropMap;

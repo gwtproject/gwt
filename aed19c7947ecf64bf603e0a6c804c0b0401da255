@@ -70,6 +70,30 @@
       "revId": "aed19c7947ecf64bf603e0a6c804c0b0401da255",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a827417_aa3dcfdc",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-09T09:32:16Z",
+      "side": 1,
+      "message": "The issue is that as long as the RC is not published, gwt-maven-plugin cannot be updated, so you cannot use the same version for both here.\n\nTesting would thus mean:\n\n* maven/push-gwt.sh to get the GWT RC into your local Maven repo\n* update the gwt-maven-plugin locally to use those RCs, update the POM\u0027s version to be the RC and \"mvn install\"\n* only now can you test webAppCreator.\n\nAlternatively to updating gwt-maven-plugin\u0027s POM to be the RC, you could also use SNAPSHOT versions for everything.",
+      "parentUuid": "6a87002a_e9099547",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "aed19c7947ecf64bf603e0a6c804c0b0401da255",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

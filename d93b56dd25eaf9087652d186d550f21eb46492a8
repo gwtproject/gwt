@@ -70,6 +70,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa93b868_2b52b924",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-09T09:32:16Z",
+      "side": 0,
+      "message": "That means that you have to:\n\n* download GWT separately from what Maven already does (either as an Eclipse plugin, or the SDK and then configuring Eclipse to recognize it)\n* make sure to keep the GWT version in your Eclipse project and the POM in sync\n* run \"mvn eclipse:eclipse\" every time you change your POM before you can refresh the project in Eclipse to pick up the changes\n\n…when M2E on the other hand could just import the project, and the GPE+M2E-integration automatically configure GPE to use the JARs that Maven just downloaded, and always keep everything in sync (so updating GWT is only a matter of changing the gwtVersion property in your POM and letting everything reconfigure itself automatically; same when changing other dependencies).\n\nI\u0027d favor the simplest process and ditch the maven-eclipse-plugin.\n\nMoreover, WebAppCreator means you already have downloaded the GWT SDK so if you use the -maven flag it probably means you\u0027re new to Maven, so the simplest the better: generate the project, import it as a Maven project in Eclipse (i.e. using M2E, which is bundled in Eclipse for a couple years now, so it doesn\u0027t even requires an additional download) and you\u0027re done.",
+      "parentUuid": "6a87002a_2929eda8",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

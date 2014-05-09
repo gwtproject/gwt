@@ -21,14 +21,14 @@ function installScript(filename) {
     var doc = getInstallLocationDoc();
     var script;
     // for sourcemaps, we inject textNodes into the script element on Chrome
-    if (navigator.userAgent.indexOf("Chrome") > -1 && window.JSON) {
+    if (navigator.userAgent.indexOf("Chrome") > -1 && $wnd.JSON) {
       var scriptFrag = doc.createDocumentFragment()
       // surround code with eval until crbug #90707 
       scriptFrag.appendChild(doc.createTextNode("eval(\""));
       for (var i = 0; i < code.length; i++) {
         // escape newlines, backslashes, and quotes with JSON.stringify
         // rather than create multiple script tags which mess up line numbers, we use 1 tag, multiple text nodes
-        var c = window.JSON.stringify(code[i]); 
+        var c = $wnd.JSON.stringify(code[i]);
         // trim beginning/end quotes
         scriptFrag.appendChild(doc.createTextNode(c.substring(1, c.length - 1)));
       }

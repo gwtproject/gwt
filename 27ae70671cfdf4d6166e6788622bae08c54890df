@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a87002a_e907d5a2",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeTemplate.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-05-09T12:38:02Z",
+      "side": 1,
+      "message": "I haven\u0027t found code that uses this function outside of module function\u0027s scope.",
+      "revId": "27ae70671cfdf4d6166e6788622bae08c54890df",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

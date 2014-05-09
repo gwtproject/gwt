@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2aa8a88f_a4e258b1",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installScriptAlreadyIncluded.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-09T18:05:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure if $wnd points to the same thing as window in all cases. Can this code be running in an iframe?",
+      "range": {
+        "startLine": 24,
+        "startChar": 58,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "3a3904b824b484c2b6877b86fe006f8779d35cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

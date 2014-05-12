@@ -148,6 +148,8 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     }
     replaceAll(ss, "__MODULE_FUNC__", context.getModuleFunctionName());
     replaceAll(ss, "__MODULE_NAME__", context.getModuleName());
+
+    replaceAll(ss, "__HOSTED_MODE_SUPPORTED__", Boolean.toString(hasHostedFile()));
     replaceAll(ss, "__HOSTED_FILENAME__", getHostedFilenameFull(context));
 
     if (context.isOutputCompact()) {
@@ -548,10 +550,11 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
   @Override
   protected void maybeAddHostedModeFile(TreeLogger logger, LinkerContext context,
       ArtifactSet artifacts, CompilationResult result) throws UnableToCompleteException {
-    String filename = getHostedFilename();
-    if ("".equals(filename)) {
+    if (!hasHostedFile()) {
       return;
     }
+
+    String filename = getHostedFilename();
 
     // when we're including bootstrap in the primary fragment, we should be
     // generating devmode files for each permutation. Otherwise, we generate it
@@ -604,7 +607,9 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     try {
       String mappings = mappingArtifact.getSerialized();
       // CHECKSTYLE_OFF
-      mappings = mappings.concat("Devmode:" + getHostedFilename());
+      if (hasHostedFile()) {
+        mappings = mappings.concat("Devmode:" + getHostedFilename());
+      }
       // CHECKSTYLE_ON
       serializedMap = emitString(logger, mappings, "compilation-mappings.txt");
       // TODO(unnurg): make this Deploy
@@ -689,6 +694,11 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       out.append("}\n");
     }
     return out.toString();
+  }
+
+  private boolean hasHostedFile() {
+    String hostedFilename = getHostedFilename();
+    return hostedFilename != null && !hostedFilename.isEmpty();
   }
 
   private void writeMagicComments(DefaultTextOutput out, LinkerContext context, int fragmentId,

@@ -43,9 +43,11 @@ function getCompiledCodeFilename() {
   __PROPERTIES__
   
   sendStats('bootstrap', 'selectingPermutation');
-  if (isHostedMode()) {
+
+  if (__HOSTED_MODE_SUPPORTED__ && isHostedMode()) {
     return computeUrlForResource("__HOSTED_FILENAME__"); 
   }
+
   var strongName;
   try {
     // __PERMUTATIONS_BEGIN__

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0a30447d_59ea2714",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-12T19:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea43f0df_e01c9c01",
+      "range": {
+        "startLine": 126,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 3
+      },
+      "revId": "0d16b9224e309b22e5a32fca00f3982e5e278673",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea43f0df_20860402",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2014-05-12T18:24:04Z",
       "side": 1,
       "message": "\"instantiated\"",
+      "range": {
+        "startLine": 532,
+        "startChar": 25,
+        "endLine": 532,
+        "endChar": 36
+      },
+      "revId": "0d16b9224e309b22e5a32fca00f3982e5e278673",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a30447d_99f8bfe7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-12T19:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea43f0df_20860402",
       "range": {
         "startLine": 532,
         "startChar": 25,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0a30447d_b9fd7bd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-12T19:12:19Z",
+      "side": 1,
+      "message": "thx.",
+      "parentUuid": "ea43f0df_205fe4c7",
+      "range": {
+        "startLine": 624,
+        "startChar": 6,
+        "endLine": 624,
+        "endChar": 27
+      },
+      "revId": "0d16b9224e309b22e5a32fca00f3982e5e278673",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea43f0df_004748db",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2014-05-12T18:24:04Z",
       "side": 1,
       "message": "it looks like just 2 circumstances?",
+      "range": {
+        "startLine": 233,
+        "startChar": 62,
+        "endLine": 233,
+        "endChar": 76
+      },
+      "revId": "0d16b9224e309b22e5a32fca00f3982e5e278673",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a30447d_5913077e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-12T19:12:19Z",
+      "side": 1,
+      "message": "I guess I copied the comment and did not update it. Fixed it.",
+      "parentUuid": "ea43f0df_004748db",
       "range": {
         "startLine": 233,
         "startChar": 62,

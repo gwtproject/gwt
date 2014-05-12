@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0a30447d_f903f32c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-12T19:12:19Z",
+      "side": 0,
+      "message": "Yes. In a nutshell under the covers an instance of Array was created for arrays and is not any longer (and for some time).",
+      "parentUuid": "ea43f0df_a04bf4e3",
+      "range": {
+        "startLine": 139,
+        "startChar": 17,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "3097937830eab4a65e64443cfde38a9d7721c4fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea43f0df_00abc862",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 3

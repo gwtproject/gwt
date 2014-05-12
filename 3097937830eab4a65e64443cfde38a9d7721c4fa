@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea43f0df_a04bf4e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-12T18:24:04Z",
+      "side": 0,
+      "message": "and this rescue is no longer necessary because in a previous CL you finished removing all of the instance functions on Array.java ?",
+      "range": {
+        "startLine": 139,
+        "startChar": 17,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "3097937830eab4a65e64443cfde38a9d7721c4fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea43f0df_00abc862",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-12T18:24:04Z",
+      "side": 0,
+      "message": "i take it this was the code that was failing to properly handle multi-dimensional javascript arrays?",
+      "range": {
+        "startLine": 585,
+        "startChar": 8,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "3097937830eab4a65e64443cfde38a9d7721c4fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

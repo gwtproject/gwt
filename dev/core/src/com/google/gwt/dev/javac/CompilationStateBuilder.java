@@ -530,7 +530,6 @@ public class CompilationStateBuilder {
 
     CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext, compilerDelegate);
 
-    // For each incoming Java source file...
     for (Resource resource : resources) {
       // Create a builder for all incoming units.
       CompilationUnitBuilder builder = CompilationUnitBuilder.create(resource);

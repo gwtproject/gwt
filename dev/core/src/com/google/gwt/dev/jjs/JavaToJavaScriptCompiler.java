@@ -111,11 +111,7 @@ import com.google.gwt.dev.js.JsSymbolResolver;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
 import com.google.gwt.dev.js.SizeBreakdown;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
-import com.google.gwt.dev.js.ast.JsBinaryOperation;
-import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
-import com.google.gwt.dev.js.ast.JsExprStmt;
-import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsLabel;
@@ -128,6 +124,7 @@ import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsVars;
+import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Empty;
@@ -146,9 +143,9 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -160,13 +157,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js
@@ -257,6 +251,9 @@ public abstract class JavaToJavaScriptCompiler {
         if (System.getProperty("gwt.coverage") != null) {
           instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
         }
+
+        // TypeOracle needs this to make decisions in several optimization passes
+        jprogram.typeOracle.setJsInteropMode(compilerContext.getOptions().getJsInteropMode());
 
         // TODO(stalcup): move to after normalize.
         // (4) Optimize the resolved Java AST
@@ -463,7 +460,7 @@ public abstract class JavaToJavaScriptCompiler {
       JsArrayLiteral permProps = new JsArrayLiteral(SourceOrigin.UNKNOWN);
       for (ImmutableMap<String, String> propMap : props.findEmbeddedProperties(logger)) {
         JsArrayLiteral entryList = new JsArrayLiteral(SourceOrigin.UNKNOWN);
-        for (Entry<String, String> entry : propMap.entrySet()) {
+        for (Map.Entry<String, String> entry : propMap.entrySet()) {
           JsArrayLiteral pair = new JsArrayLiteral(SourceOrigin.UNKNOWN);
           pair.getExpressions().add(new JsStringLiteral(SourceOrigin.UNKNOWN, entry.getKey()));
           pair.getExpressions().add(new JsStringLiteral(SourceOrigin.UNKNOWN, entry.getValue()));
@@ -472,14 +469,15 @@ public abstract class JavaToJavaScriptCompiler {
         permProps.getExpressions().add(entryList);
       }
 
-      // Generate: $permProps = ...;
-      JsName permPropsName = jsProgram.getScope().findExistingUnobfuscatableName("$permProps");
-      JsExpression assign = new JsBinaryOperation(SourceOrigin.UNKNOWN, JsBinaryOperator.ASG,
-          new JsNameRef(SourceOrigin.UNKNOWN, permPropsName), permProps);
+      // Generate: var $permProps = ...;
+      JsVar var = new JsVar(SourceOrigin.UNKNOWN,
+          jsProgram.getScope().findExistingUnobfuscatableName("$permProps"));
+      var.setInitExpr(permProps);
+      JsVars vars = new JsVars(SourceOrigin.UNKNOWN);
+      vars.add(var);
 
       // Put it at the beginning for easy reference.
-      jsProgram.getGlobalBlock().getStatements().add(0,
-          new JsExprStmt(SourceOrigin.UNKNOWN, assign));
+      jsProgram.getGlobalBlock().getStatements().add(0, vars);
     }
 
     /**
@@ -807,7 +805,9 @@ public abstract class JavaToJavaScriptCompiler {
 
     private Map<JsName, JsLiteral> runObfuscateNamer(PermProps props) {
       Map<JsName, JsLiteral> internedLiteralByVariableName =
-          JsLiteralInterner.exec(jprogram, jsProgram, JsLiteralInterner.INTERN_ALL);
+          JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
+              & (byte) (jprogram.typeOracle.isInteropEnabled()
+              ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
       FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram,
           props.getConfigProps());
       if (options.shouldRemoveDuplicateFunctions()

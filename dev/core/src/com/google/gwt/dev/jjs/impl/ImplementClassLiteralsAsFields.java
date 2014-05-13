@@ -23,6 +23,7 @@ import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JEnumType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JField.Disposition;
@@ -206,8 +207,8 @@ public class ImplementClassLiteralsAsFields {
 
       JLiteral superclassLiteral;
       if (classType.getSuperClass() != null) {
-        if (JProgram.isJsInterfacePrototype(classType)) {
-          JInterfaceType jsInterface = program.typeOracle.getNearestJsInterface(classType, true);
+        if (JProgram.isJsTypePrototype(classType)) {
+          JDeclaredType jsInterface = program.typeOracle.getNearestJsType(classType, true);
           assert jsInterface != null;
           superclassLiteral = createDependentClassLiteral(info, jsInterface);
         } else {

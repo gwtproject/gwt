@@ -23,11 +23,8 @@ import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.core.shared.SerializableThrowable;
-import com.google.gwt.dev.ArgProcessorBase;
+import com.google.gwt.dev.*;
 import com.google.gwt.dev.Compiler;
-import com.google.gwt.dev.CompilerContext;
-import com.google.gwt.dev.CompilerOptions;
-import com.google.gwt.dev.DevMode;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.Properties;
@@ -37,30 +34,7 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
-import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableAggressiveOptimization;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableInlineLiteralParameters;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableOptimizeDataflow;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableOrdinalizeEnums;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableRemoveDuplicateFunctions;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableRunAsync;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
-import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
-import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
-import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
-import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
-import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
-import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
-import com.google.gwt.dev.util.arg.ArgHandlerMaxPermsPerPrecompile;
-import com.google.gwt.dev.util.arg.ArgHandlerNamespace;
-import com.google.gwt.dev.util.arg.ArgHandlerOptimize;
-import com.google.gwt.dev.util.arg.ArgHandlerScriptStyle;
-import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
-import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
-import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.arg.*;
 import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.TimeoutException;
@@ -71,32 +45,23 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerInt;
 import com.google.gwt.util.tools.ArgHandlerString;
-
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import javax.servlet.Servlet;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.servlet.Servlet;
 
 /**
  * This class is responsible for hosting JUnit test case execution. There are
@@ -573,6 +538,8 @@ public class JUnitShell extends DevMode {
           return true;
         }
       });
+
+      registerHandler(new ArgHandlerJsInteropMode(options));
     }
 
     @Override

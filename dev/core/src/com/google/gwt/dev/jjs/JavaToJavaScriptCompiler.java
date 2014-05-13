@@ -122,6 +122,7 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVars;
+import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Empty;
@@ -153,7 +154,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -250,6 +250,9 @@ public abstract class JavaToJavaScriptCompiler {
         if (System.getProperty("gwt.coverage") != null) {
           instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
         }
+
+        // TypeOracle needs this to make decisions in several optimization passes
+        jprogram.typeOracle.setJsInteropMode(compilerContext.getOptions().getJsInteropMode());
 
         // TODO(stalcup): move to after normalize.
         // (4) Optimize the resolved Java AST
@@ -767,7 +770,9 @@ public abstract class JavaToJavaScriptCompiler {
 
     private Map<JsName, JsLiteral> runObfuscateNamer(PermProps props) {
       Map<JsName, JsLiteral> internedLiteralByVariableName =
-          JsLiteralInterner.exec(jprogram, jsProgram, JsLiteralInterner.INTERN_ALL);
+          JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
+              & (byte) (jprogram.typeOracle.isInteropEnabled()
+              ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
       FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram,
           props.getConfigProps());
       if (options.shouldRemoveDuplicateFunctions()

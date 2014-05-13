@@ -13,20 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.js.impl;
+package com.google.gwt.core.client.js;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
- * Marker annotation used to indicate which JsInterface stub classes trigger prototype overriding
- * behavior in subtypes. This class is meant to be used by implementers of annotation processors.
+ * Provides a default namespace for @JsExport annotations which don't specify a value. The
+ * computed fully qualified export symbol will be a combination of @JsNamespace and the Java name
+ * of the method or field @JsExport is applied to. If applied to package-info.java, applies
+ * to all types in a package.
  */
 @Retention(RetentionPolicy.CLASS)
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.PACKAGE})
 @Documented
-public @interface PrototypeOfJsInterface {
+public @interface JsNamespace {
+  String value() default "";
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.js;
+package com.google.gwt.core.client.js.impl;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -22,13 +22,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * JsExport marks a constructor, static method, or static field as creating a an unobfuscated alias
- * in the global scope. JsExport acts as an entry-point from the standpoint of the optimizer,
- * and all code reachable from an exported method is also considered live, so use with care.
+ * Marker annotation used to indicate which JsType stub classes trigger prototype overriding
+ * behavior in subtypes. This class is meant to be used by implementers of annotation processors.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.FIELD, ElementType.TYPE })
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.TYPE)
 @Documented
-public @interface JsExport {
-  String value() default "";
+public @interface PrototypeOfJsType {
 }

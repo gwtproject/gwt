@@ -18,28 +18,8 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JClassLiteral;
-import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
-import com.google.gwt.dev.jjs.ast.JEnumType;
-import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.jjs.ast.JField.Disposition;
-import com.google.gwt.dev.jjs.ast.JFieldRef;
-import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JLiteral;
-import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JPrimitiveType;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
-import com.google.gwt.dev.jjs.ast.JStringLiteral;
-import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -206,8 +186,8 @@ public class ImplementClassLiteralsAsFields {
 
       JLiteral superclassLiteral;
       if (classType.getSuperClass() != null) {
-        if (JProgram.isJsInterfacePrototype(classType)) {
-          JInterfaceType jsInterface = program.typeOracle.getNearestJsInterface(classType, true);
+        if (JProgram.isJsTypePrototype(classType)) {
+          JDeclaredType jsInterface = program.typeOracle.getNearestJsType(classType, true);
           assert jsInterface != null;
           superclassLiteral = createDependentClassLiteral(info, jsInterface);
         } else {

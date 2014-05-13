@@ -270,6 +270,10 @@ public class JdtCompiler {
       boolean saveDiet = this.diet;
       this.diet = false;
       CompilationUnitDeclaration decl = super.parse(sourceUnit, compilationResult);
+      if (String.valueOf(decl.getFileName()).contains("package-info")) {
+        boolean xx = true;
+      }
+
       this.diet = saveDiet;
       if (removeGwtIncompatible) {
         // Remove @GwtIncompatible classes and members.

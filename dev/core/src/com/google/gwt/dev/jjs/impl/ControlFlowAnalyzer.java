@@ -220,9 +220,9 @@ public class ControlFlowAnalyzer {
             rescue(jsoImplementor, true, true);
           }
         }
-      } else if (program.typeOracle.isJsInterface(targetType)
-          && ((JInterfaceType) targetType).getJsPrototype() != null) {
-        // keep alive JsInterface with prototype used in cast so it can used in cast checks against JS objects later
+      } else if (program.typeOracle.isJsType(targetType)
+        && ((JDeclaredType) targetType).getJsPrototype() != null) {
+        // keep alive JsType with prototype used in cast so it can used in cast checks against JS objects later
         rescue((JReferenceType) targetType, true, true);
       }
 
@@ -318,10 +318,10 @@ public class ControlFlowAnalyzer {
     @Override
     public boolean visit(JInstanceOf x, Context ctx) {
       JReferenceType targetType = x.getTestType();
-      if (program.typeOracle.isJsInterface(targetType)
-          && ((JInterfaceType) targetType).getJsPrototype() != null) {
-        // keep alive JsInterface with prototype used in cast so it can used in cast checks against JS objects later
-        rescue((JReferenceType) targetType, true, true);
+      if (program.typeOracle.isJsType(targetType)
+          && ((JDeclaredType) targetType).getJsPrototype() != null) {
+        // keep alive JsType with prototype used in cast so it can used in cast checks against JS objects later
+        rescue(targetType, true, true);
       }
       return true;
     }
@@ -620,45 +620,43 @@ public class ControlFlowAnalyzer {
       }
     }
 
-    private void rescue(JMethod method) {
-      if (method == null) {
-        return;
-      }
-
-      if (!liveFieldsAndMethods.add(method)) {
-        // Already in the set.
-        return;
-      }
-
-      membersToRescueIfTypeIsInstantiated.remove(method);
-      if (dependencyRecorder != null) {
-        curMethodStack.add(method);
-        dependencyRecorder.methodIsLiveBecause(method, curMethodStack);
-      }
-      accept(method);
-      if (dependencyRecorder != null) {
-        curMethodStack.remove(curMethodStack.size() - 1);
-      }
-      if (method.isNative()) {
-        /*
-         * SPECIAL: returning from this method passes a value from
-         * JavaScript into Java.
-         */
-        maybeRescueJavaScriptObjectPassingIntoJava(method.getType());
-      }
-      rescueOverridingMethods(method);
-      if (method == getClassMethod) {
-        rescueClassLiteralsIfGetClassIsLive();
-      }
-      if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
-        // for JsInterface Prototype methods, rescue all parameters
-        for (JParameter param : method.getParams()) {
-          rescue(param);
+    private boolean rescue(JMethod method) {
+      if (method != null) {
+        if (!liveFieldsAndMethods.contains(method)) {
+          liveFieldsAndMethods.add(method);
+          membersToRescueIfTypeIsInstantiated.remove(method);
+          if (dependencyRecorder != null) {
+            curMethodStack.add(method);
+            dependencyRecorder.methodIsLiveBecause(method, curMethodStack);
+          }
+          accept(method);
+          if (dependencyRecorder != null) {
+            curMethodStack.remove(curMethodStack.size() - 1);
+          }
+          if (method.isNative()) {
+            /*
+             * SPECIAL: returning from this method passes a value from
+             * JavaScript into Java.
+             */
+            maybeRescueJavaScriptObjectPassingIntoJava(method.getType());
+          }
+          rescueOverridingMethods(method);
+          if (method == getClassMethod) {
+            rescueClassLiteralsIfGetClassIsLive();
+          }
+          if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
+            // for JsInterface Prototype methods, rescue all parameters
+            for (JParameter param : method.getParams()) {
+              rescue(param);
+            }
+          }
+          if (method.getSpecialization() != null) {
+            rescue(method.getSpecialization().getTargetMethod());
+          }
+          return true;
         }
       }
-      if (method.getSpecialization() != null) {
-        rescue(method.getSpecialization().getTargetMethod());
-      }
+      return true;
     }
 
     private void rescue(JReferenceType type, boolean isReferenced, boolean isInstantiated) {
@@ -682,42 +680,45 @@ public class ControlFlowAnalyzer {
         doVisit = true;
       }
 
-      if (!doVisit) {
-        return;
-      }
+      if (doVisit) {
+        accept(type);
+        if (type instanceof JDeclaredType) {
+          /*
+           * For @JsType, we rescue all JsType methods
+           * methods because we don't know if they'll be called from JS or not.
+           * That is, the Java implementor may be called because the interface
+           * was passed into JS, or it may be called via exported functions.
+           *
+           * We may be able to tighten this to check for @JsExport as well,
+           * since if there is no @JsExport, the only way for JS code to get a
+           * reference to the interface is by it being constructed in Java
+           * and passed via JSNI into JS, and in that mechanism, the
+           * rescue would happen automatically.
+           */
+          JDeclaredType dtype = (JDeclaredType) type;
 
-      accept(type);
-      if (type instanceof JInterfaceType) {
-        /*
-         * For @JsInterface with a Java implementor, we rescue all interface
-         * methods because we don't know if they'll be called from JS or not.
-         * That is, the Java implementor may be called because the interface
-         * was passed into JS, or it may be called via exported functions.
-         *
-         * We may be able to tighten this to check for @JsExport as well,
-         * since if there is no @JsExport, the only way for JS code to get a
-         * reference to the interface is by it being constructed in Java
-         * and passed via JSNI into JS, and in that mechanism, the
-         * rescue would happen automatically.
-         */
-        JInterfaceType intfType = (JInterfaceType) type;
-
-        if (intfType.isJsInterface()) {
-          for (JMethod method : intfType.getMethods()) {
-            rescue(method);
+          if (dtype.isJsType()) {
+            for (JMethod method : dtype.getMethods()) {
+              if (method.needsVtable()) {
+                rescue(method);
+              }
+            }
           }
         }
       }
-      if (!(type instanceof JDeclaredType)) {
-        return;
-      }
-      for (JNode artificial : ((JDeclaredType) type).getArtificialRescues()) {
-        if (artificial instanceof JReferenceType) {
-          rescue((JReferenceType) artificial, true, true);
-        } else if (artificial instanceof JVariable) {
-          rescue((JVariable) artificial);
-        } else if (artificial instanceof JMethod) {
-          rescue((JMethod) artificial);
+
+      if (type instanceof JDeclaredType) {
+        List<JNode> artificialRescues = ((JDeclaredType) type).getArtificialRescues();
+        if (artificialRescues != null) {
+          for (JNode artificial : artificialRescues) {
+            if (artificial instanceof JReferenceType) {
+              rescue((JReferenceType) artificial, true, true);
+            } else if (artificial instanceof JVariable) {
+              rescue((JVariable) artificial);
+            } else if (artificial instanceof JMethod) {
+              rescue((JMethod) artificial);
+            }
+          }
         }
       }
     }
@@ -798,8 +799,8 @@ public class ControlFlowAnalyzer {
         JParameter param = params.get(i);
         if (arg.hasSideEffects() || liveFieldsAndMethods.contains(param)
             // rescue any args of JsInterface Prototype methods or JsInterface
-            || program.typeOracle.isJsInterfaceMethod(method)
-            || JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+            || program.typeOracle.isJsTypeMethod(method)
+            || JProgram.isJsTypePrototype(method.getEnclosingType())) {
           this.accept(arg);
           continue;
         }

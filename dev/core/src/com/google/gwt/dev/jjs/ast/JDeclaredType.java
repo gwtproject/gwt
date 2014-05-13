@@ -47,6 +47,8 @@ import java.util.List;
  */
 public abstract class JDeclaredType extends JReferenceType {
 
+  protected final String jsPrototype;
+  protected final JsInteropType jsInteropType;
   /**
    * The other nodes that this node should implicitly rescue. Special
    * serialization treatment.
@@ -90,8 +92,14 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   private List<JInterfaceType> superInterfaces = Lists.create();
 
-  public JDeclaredType(SourceInfo info, String name) {
+  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType, String jsPrototype) {
     super(info, name);
+    this.jsInteropType = interopType;
+    this.jsPrototype = jsPrototype;
+  }
+
+  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType) {
+    this(info, name, interopType, null);
   }
 
   public void addArtificialRescue(JNode node) {
@@ -281,6 +289,18 @@ public abstract class JDeclaredType extends JReferenceType {
   public String getShortName() {
     int dotpos = name.lastIndexOf('.');
     return name.substring(dotpos + 1);
+  }
+
+  public boolean isJsType() {
+    return jsInteropType != JsInteropType.NONE;
+  }
+
+  public JsInteropType getJsInteropType() {
+    return jsInteropType;
+  }
+
+  public String getJsPrototype() {
+    return jsPrototype;
   }
 
   /**
@@ -483,5 +503,30 @@ public abstract class JDeclaredType extends JReferenceType {
       }
     }
     return null;
+  }
+
+  public String getQualifiedExportName() {
+    if (enclosingType == null) {
+      return getName();
+    } else {
+      return enclosingType.getQualifiedExportName() + "." + getLeafName();
+    }
+  }
+
+  private String getLeafName() {
+    String shortName = getShortName();
+    return shortName.substring(shortName.lastIndexOf('$') + 1);
+  }
+
+  /**
+   * The type of JsType this can be: NONE, NO_PROTOTYPE, JS_PROTOTYPE, NATIVE_PROTOTYPE (e.g. DOM element), and
+   * WEB_COMPONENT.
+   */
+  public enum JsInteropType {
+    NONE,
+    NO_PROTOTYPE,
+    JS_PROTOTYPE,
+    NATIVE_PROTOTYPE,
+    WEB_COMPONENT
   }
 }

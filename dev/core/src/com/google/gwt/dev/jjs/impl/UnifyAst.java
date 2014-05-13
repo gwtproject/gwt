@@ -852,7 +852,7 @@ public class UnifyAst {
           || hasAnyExports(t))) {
         instantiate(t);
       }
-      if (t instanceof JInterfaceType && ((JInterfaceType) t).isJsInterface()) {
+      if (t.isJsType()) {
         instantiate(t);
       }
     }
@@ -1145,8 +1145,7 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
-      boolean isJsInterface = type instanceof JInterfaceType ?
-          isJsInterface((JInterfaceType) type) : false;
+      boolean isJsType = type.isJsType();
 
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
@@ -1163,7 +1162,7 @@ public class UnifyAst {
               pending = Lists.add(pending, method);
             }
             virtualMethodsPending.put(signature, pending);
-            if (isJsInterface) {
+            if (isJsType) {
               // Fake a call into the method to keep it around
               flowInto(method);
             }
@@ -1186,22 +1185,22 @@ public class UnifyAst {
       return true;
     }
 
-    // if any of the superinterfaces as JsInterfaces, we consider this effectively a JSO
+    // if any of the superinterfaces as JsTypes, we consider this effectively a JSO
     // for instantiability purposes
     for (JInterfaceType intf : type.getImplements()) {
-      if (isJsInterface(intf)) {
+      if (isJsType(intf)) {
         return true;
       }
     }
     return false;
   }
 
-  private boolean isJsInterface(JInterfaceType intf) {
-    if (intf.isJsInterface()) {
+  private boolean isJsType(JInterfaceType intf) {
+    if (intf.isJsType()) {
       return true;
     }
     for (JInterfaceType subIntf : intf.getImplements()) {
-      if (isJsInterface(subIntf)) {
+      if (isJsType(subIntf)) {
         return true;
       }
     }

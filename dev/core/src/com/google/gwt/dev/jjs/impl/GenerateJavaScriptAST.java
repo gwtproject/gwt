@@ -552,8 +552,8 @@ public class GenerateJavaScriptAST {
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
             polyName.setObfuscatable(false);
-            // if a JsInterface
-          } else if (program.typeOracle.isJsInterfaceMethod(x)) {
+            // if a JsType
+          } else if (program.typeOracle.isJsTypeMethod(x)) {
             polyName = interfaceScope.declareName(name, name);
             polyName.setObfuscatable(false);
           } else {
@@ -894,8 +894,8 @@ public class GenerateJavaScriptAST {
         return;
       }
 
-      if (JProgram.isJsInterfacePrototype(x)) {
-        // Don't generate JS for magic @PrototypeOfJsInterface stubs classes
+      if (JProgram.isJsTypePrototype(x)) {
+        // Don't generate JS for magic @PrototypeOfJsType stubs classes
         return;
       }
 
@@ -1396,7 +1396,7 @@ public class GenerateJavaScriptAST {
         JsNameRef methodRef = names.get(method).makeRef(x.getSourceInfo());
         qualifier.setQualifier(methodRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodRef, jsInvocation);
         }
       } else if (x.isStaticDispatchOnly() && !method.isConstructor()) {
@@ -1424,11 +1424,11 @@ public class GenerateJavaScriptAST {
         qualifier.setQualifier(methodNameRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
         // Is this method targeting a Foo_Prototype class?
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
         }
         // Is this method targeting a Foo_Prototype class?
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
         }
       } else {
@@ -1513,19 +1513,21 @@ public class GenerateJavaScriptAST {
     private JsExpression dispatchToSuperPrototype(JMethodCall x, JMethod method, JsNameRef qualifier,
                                                   JsNameRef methodRef, JsInvocation jsInvocation) {
       String jsPrototype = null;
-      // find JsInterface of Prototype method being invoked.
+      // find JsType of Prototype method being invoked.
       for (JInterfaceType intf : method.getEnclosingType().getImplements()) {
-        JInterfaceType jsIntf = program.typeOracle.getNearestJsInterface(intf, true);
+        JDeclaredType jsIntf = program.typeOracle.getNearestJsType(intf, true);
+        assert jsIntf instanceof JInterfaceType;
+
         if (jsIntf != null) {
           jsPrototype = jsIntf.getJsPrototype();
           break;
         }
       }
-      assert jsPrototype != null : "Unable to find JsInterface with prototype";
+      assert jsPrototype != null : "Unable to find JsType with prototype";
 
-      // in JsInterface case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
-      // the method target should be on a class that ends with $Prototype and implements a JsInterface
-      if (!(method instanceof JConstructor) && program.typeOracle.isJsInterfaceMethod(method)) {
+      // in JsType case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
+      // the method target should be on a class that ends with $Prototype and implements a JsType
+      if (!(method instanceof JConstructor) && program.typeOracle.isJsTypeMethod(method)) {
         JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
         methodRef = new JsNameRef(methodRef.getSourceInfo(), method.getName());
         // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
@@ -1792,8 +1794,8 @@ public class GenerateJavaScriptAST {
         return false;
       }
 
-      // Don't generate JS for magic @PrototypeOfJsInterface classes
-      if (JProgram.isJsInterfacePrototype(x)) {
+      // Don't generate JS for magic @PrototypeOfJsType classes
+      if (JProgram.isJsTypePrototype(x)) {
         return false;
       }
 
@@ -2467,7 +2469,7 @@ public class GenerateJavaScriptAST {
       JLiteral superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
           getRuntimeTypeReference(x.getSuperClass());
       // check if there's an overriding prototype
-      JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsInterfaceFromPrototype(superClass);
+      JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsTypeFromPrototype(superClass);
       String jsPrototype = jsPrototypeIntf != null ? jsPrototypeIntf.getJsPrototype() : null;
       // choose appropriate setup function
       JsName defineClassRef = indexedFunctions.get(
@@ -2630,9 +2632,10 @@ public class GenerateJavaScriptAST {
       String lastProvidedNamespace = "";
       for (JMethod m : x.getMethods()) {
         // static functions or constructors may be exported
-        if ((m.isStatic() || m instanceof JConstructor) && m.getExportName() != null) {
+        if ((m.isStatic() || m instanceof JConstructor
+          && !((JConstructor) m).isDefaultConstructor()) && m.getExportName() != null) {
           JsNameRef exportRhs = names.get(m).makeRef(m.getSourceInfo());
-          String exportName = m.getExportName();
+          String exportName = m.getQualifiedExportName();
           lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
         }
       }
@@ -2640,7 +2643,7 @@ public class GenerateJavaScriptAST {
       for (JField f : x.getFields()) {
         if (f.isStatic() && f.getExportName() != null) {
           JsNameRef exportRhs = names.get(f).makeRef(f.getSourceInfo());
-          String exportName = f.getExportName();
+          String exportName = f.getQualifiedExportName();
           lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
         }
       }
@@ -2686,9 +2689,7 @@ public class GenerateJavaScriptAST {
     }
 
     private String fixupExportName(JClassType x, String exportName) {
-      if ("".equals(exportName)) {
-        exportName = x.getEnclosingType().getName() + "." + x.getShortName();
-      }
+
       return exportName;
     }
 

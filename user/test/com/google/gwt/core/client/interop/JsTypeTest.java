@@ -13,12 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client;
+package com.google.gwt.core.client.interop;
 
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.core.client.js.JsExport;
-import com.google.gwt.core.client.js.JsInterface;
+import com.google.gwt.core.client.js.JsNamespace;
 import com.google.gwt.core.client.js.JsProperty;
-import com.google.gwt.core.client.js.impl.PrototypeOfJsInterface;
+import com.google.gwt.core.client.js.JsType;
+import com.google.gwt.core.client.js.impl.PrototypeOfJsType;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -26,19 +28,75 @@ import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Iterator;
 
 /**
- * Tests JsInterface and JsExport.
+ * Tests JsType and JsExport.
  */
 @DoNotRunWith({Platform.Devel, Platform.HtmlUnitBug})
-public class JsInterfaceTest extends GWTTestCase {
+public class JsTypeTest extends GWTTestCase {
 
-  @JsInterface(prototype = "$wnd.MyClass")
-  interface MyClass {
+  // test that disjoint types that virtually inherit identically named methods work
+  interface Collection {
+    void add(Object o);
+  }
 
-    @JsInterface(prototype = "MyClass")
+  @JsType
+  interface List extends Collection {
+    void add(Object o);
+  }
+
+  static class AbstractCollection implements Collection {
+    Object x;
+    public void add(Object o) {
+      x = o;
+    }
+  }
+
+  @JsType
+  static class ListImpl extends AbstractCollection implements List {
+    public void add(Object o) {
+      x = o.toString();
+    }
+  }
+
+  static class FooImpl extends AbstractCollection implements Collection {
+    @Override
+    public void add(Object o) {
+      super.add(o);
+      x = x.toString() + "x";
+    }
+  }
+
+  @JsType
+  static class MyJsTypeClass {
+    public int shouldBeAvailable() {
+      return 1138;
+    }
+
+    private int shouldNotBeAvailable() {
+      return 0;
+    }
+  }
+
+  @JsType
+  static class NestedTest {
+    @JsType
+    @JsExport
+    public enum NestedEnum {
+      FOO, BAR;
+
+      public String name2() {
+        return name();
+      }
+    }
+  }
+
+  @JsType(prototype = "$wnd.MyJsInterface")
+  interface MyJsInterface {
+
+    @JsType(prototype = "MyJsInterface")
     interface LocalMyClass {
     }
 
-    @JsInterface
+    @JsType
     interface ButtonLikeJso {
     }
 
@@ -46,7 +104,7 @@ public class JsInterfaceTest extends GWTTestCase {
     int x();
 
     @JsProperty
-    MyClass x(int a);
+    MyJsInterface x(int a);
 
     @JsProperty
     int getY();
@@ -56,8 +114,8 @@ public class JsInterfaceTest extends GWTTestCase {
 
     int sum(int bias);
 
-    @PrototypeOfJsInterface
-    static class Prototype implements MyClass {
+    @PrototypeOfJsType
+    static class Prototype implements MyJsInterface {
 
       @Override
       public int x() {
@@ -65,7 +123,7 @@ public class JsInterfaceTest extends GWTTestCase {
       }
 
       @Override
-      public MyClass x(int a) {
+      public MyJsInterface x(int a) {
         return this;
       }
 
@@ -85,7 +143,7 @@ public class JsInterfaceTest extends GWTTestCase {
     }
   }
 
-  static class MyClassImpl extends JsInterfaceTest.MyClass.Prototype {
+  static class MyClassImpl extends MyJsInterface.Prototype {
 
     MyClassImpl() {
       x(42).setY(7);
@@ -96,11 +154,7 @@ public class JsInterfaceTest extends GWTTestCase {
     }
   }
 
-  @JsInterface
-  interface JsInterfaceExporter {
-  }
-
-  static class MyClassImpl2 implements JsInterfaceExporter {
+  static class MyClassImpl2 {
     public static boolean calledFromJsHostPageWindow = false;
     public static boolean calledFromJsModuleWindow = false;
 
@@ -115,7 +169,7 @@ public class JsInterfaceTest extends GWTTestCase {
       }
   }
 
-  static class MyClassImpl3 implements JsInterfaceExporter {
+  static class MyClassImpl3 {
     public static boolean calledFromJsModuleWindow = false;
     public static int foo = 0;
     static {
@@ -133,29 +187,47 @@ public class JsInterfaceTest extends GWTTestCase {
     }
   }
 
-  @JsInterface(prototype = "HTMLElement")
+  @JsNamespace("$wnd.foo")
+  @JsExport
+  public static class NamespaceTester {
+    public static int BAR = 42;
+  }
+
+  @JsNamespace("$wnd.foo")
+  public static class OuternamespaceTester {
+    @JsExport
+    public static class Inner {
+      public static int BAZ = 99;
+    }
+  }
+
+  @JsExport
+  public static class PackageNamespaceTester {
+    public static int WOO = 1001;
+  }
+
+  @JsType(prototype = "HTMLElement")
   interface HTMLElement {
-    @PrototypeOfJsInterface
+    @PrototypeOfJsType
     static class Prototype implements HTMLElement {
     }
   }
 
-  @JsInterface(prototype = "HTMLElement")
+  @JsType(prototype = "HTMLElement")
   interface HTMLAnotherElement {
-    @PrototypeOfJsInterface
+    @PrototypeOfJsType
     static class Prototype implements HTMLAnotherElement {
     }
   }
 
-  @JsInterface(prototype = "HTMLButtonElement")
+  @JsType(prototype = "HTMLButtonElement")
   interface HTMLButtonElement extends HTMLElement {
-    @PrototypeOfJsInterface
+    @PrototypeOfJsType
     static class Prototype implements HTMLButtonElement {
     }
   }
 
-  static class MyButtonWithIterator extends JsInterfaceTest.HTMLButtonElement.Prototype implements Iterable {
-
+  static class MyButtonWithIterator extends JsTypeTest.HTMLButtonElement.Prototype implements Iterable {
     @Override
     public Iterator iterator() {
       return null;
@@ -164,12 +236,12 @@ public class JsInterfaceTest extends GWTTestCase {
 
   @Override
   protected void gwtSetUp() throws Exception {
-    ScriptInjector.fromString("function MyClass() {}\n" +
-        "MyClass.prototype.sum = function sum(bias) { return this.x + this.y + bias; }\n" +
-        "MyClass.prototype.go = function(cb) { cb('Hello'); }")
+    ScriptInjector.fromString("function MyJsInterface() {}\n" +
+      "MyJsInterface.prototype.sum = function sum(bias) { return this.x + this.y + bias; }\n" +
+      "MyJsInterface.prototype.go = function(cb) { cb('Hello'); }")
         .setWindow(ScriptInjector.TOP_WINDOW).inject();
-    ScriptInjector.fromString("function MyClass() {}\n" +
-        "MyClass.prototype.sum = function sum(bias) { return this.x + this.y + bias; }\n")
+    ScriptInjector.fromString("function MyJsInterface() {}\n" +
+        "MyJsInterface.prototype.sum = function sum(bias) { return this.x + this.y +   bias; }\n")
         .inject();
     patchPrototype(MyClassImpl.class);
   }
@@ -184,6 +256,64 @@ public class JsInterfaceTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.Core";
+  }
+
+  private native int callShouldBeAvailable(Object ref) /*-{
+    return ref.shouldBeAvailable();
+  }-*/;
+
+  private native String getEnumNameViaJs(NestedTest.NestedEnum ref) /*-{
+      return ref.name2();
+  }-*/;
+
+  private native int getFooBAR() /*-{
+      return $wnd && $wnd.foo && $wnd.foo.NamespaceTester && $wnd.foo.NamespaceTester.BAR || 0;
+  }-*/;
+
+  private native int getWOO() /*-{
+      return $wnd && $wnd.woo && $wnd.woo.PackageNamespaceTester
+          && $wnd.woo.PackageNamespaceTester.WOO || 0;
+  }-*/;
+
+  public void testClassNamespace() {
+    assertEquals(NamespaceTester.BAR, getFooBAR());
+  }
+
+  public void testPackageNamespace() {
+    assertEquals(PackageNamespaceTester.WOO, getWOO());
+  }
+
+
+  public void testVirtualUpRefs() {
+    ListImpl l2 = new ListImpl();
+    FooImpl f2 = new FooImpl(); // both inherit .add(), but this one shouldn't be renamed
+    // prevent type tightening, force c to be Collection holding l2
+    Collection c = localMyClass() != null ? l2 : f2;
+    // should invoke obfuscated method
+    c.add("Hello");
+    assertEquals("Hello", l2.x);
+    // force ListImpl to be assigned to collection without tightening
+    Collection c2 = localMyClass() != null ? f2 : l2;
+    c2.add("World");
+    assertEquals("Worldx", f2.x);
+
+    // should call not through bridge
+    f2.add("One");
+    assertEquals("Onex", f2.x);
+
+    // call through bridge
+    l2.add("Two");
+    assertEquals("Two", l2.x);
+  }
+
+  public void testJsTypeNestedEnum() {
+      assertEquals(NestedTest.NestedEnum.FOO.name(),
+        getEnumNameViaJs(NestedTest.NestedEnum.FOO));
+  }
+
+  public void testJsTypeCallableFromJs() {
+    MyJsTypeClass jsType = new MyJsTypeClass();
+    assertEquals(1138, callShouldBeAvailable(jsType));
   }
 
   public void testSubClassWithSuperCalls() {
@@ -214,26 +344,26 @@ public class JsInterfaceTest extends GWTTestCase {
   }
 
   public void testCasts() {
-    MyClass doc1 = null;
-    MyClass.LocalMyClass doc2 = null;
-    MyClass.ButtonLikeJso doc3 = null;
+    MyJsInterface doc1 = null;
+    MyJsInterface.LocalMyClass doc2 = null;
+    MyJsInterface.ButtonLikeJso doc3 = null;
     try {
-      assertNotNull(doc1 = (MyClass) mainMyClass());
-      assertNotNull(doc2 = (MyClass.LocalMyClass) localMyClass());
-      assertNotNull(doc2 = (MyClass.LocalMyClass) mainMyClass());
+      assertNotNull(doc1 = (MyJsInterface) mainMyClass());
+      assertNotNull(doc2 = (MyJsInterface.LocalMyClass) localMyClass());
+      assertNotNull(doc2 = (MyJsInterface.LocalMyClass) mainMyClass());
     } catch (ClassCastException cce) {
       fail();
     }
 
     try {
-      assertNotNull(doc1 = (MyClass) localMyClass());
+      assertNotNull(doc1 = (MyJsInterface) localMyClass());
       fail();
     } catch (ClassCastException cce) {
     }
 
     try {
-      assertNotNull(doc3 = (MyClass.ButtonLikeJso) mainMyClass());
-      assertNotNull(doc3 = (MyClass.ButtonLikeJso) localMyClass());
+      assertNotNull(doc3 = (MyJsInterface.ButtonLikeJso) mainMyClass());
+      assertNotNull(doc3 = (MyJsInterface.ButtonLikeJso) localMyClass());
     } catch (ClassCastException cce) {
       fail();
     }
@@ -250,16 +380,16 @@ public class JsInterfaceTest extends GWTTestCase {
 
   public void testInstanceOf() {
     // check that instanceof works between frames
-    assertTrue(mainMyClass() instanceof MyClass);
-    assertTrue(localMyClass() instanceof MyClass.LocalMyClass);
-    assertTrue(mainMyClass() instanceof MyClass.LocalMyClass);
+    assertTrue(mainMyClass() instanceof MyJsInterface);
+    assertTrue(localMyClass() instanceof MyJsInterface.LocalMyClass);
+    assertTrue(mainMyClass() instanceof MyJsInterface.LocalMyClass);
 
-    // check that JsInterfaces without prototypes can cross-cast like JSOs
-    assertTrue(mainMyClass() instanceof MyClass.ButtonLikeJso);
-    assertTrue(localMyClass() instanceof MyClass.ButtonLikeJso);
+    // check that JsTypes without prototypes can cross-cast like JSOs
+    assertTrue(mainMyClass() instanceof MyJsInterface.ButtonLikeJso);
+    assertTrue(localMyClass() instanceof MyJsInterface.ButtonLikeJso);
 
     // check that it doesn't work if $wnd is forced
-    assertFalse(localMyClass() instanceof MyClass);
+    assertFalse(localMyClass() instanceof MyJsInterface);
   }
 
   static native boolean isIE8() /*-{
@@ -280,7 +410,7 @@ public class JsInterfaceTest extends GWTTestCase {
     assertTrue(obj instanceof HTMLElement);
     assertFalse(obj instanceof Iterator);
     assertTrue(obj instanceof HTMLAnotherElement);
-    assertFalse(obj instanceof MyClass.LocalMyClass);
+    assertFalse(obj instanceof MyJsInterface.LocalMyClass);
 
     // to foil type tightening
     obj = alwaysTrue() ? new MyButtonWithIterator() : null;
@@ -295,7 +425,7 @@ public class JsInterfaceTest extends GWTTestCase {
      * result, as well as add a test here that can be type-tightened.
      */
     assertTrue(obj instanceof HTMLAnotherElement);
-    assertFalse(obj instanceof MyClass.LocalMyClass);
+    assertFalse(obj instanceof MyJsInterface.LocalMyClass);
   }
 
   private native boolean alwaysTrue() /*-{
@@ -307,21 +437,21 @@ public class JsInterfaceTest extends GWTTestCase {
   }-*/;
 
   private native Object localMyClass() /*-{
-    return new MyClass();
+    return new MyJsInterface();
   }-*/;
 
   private native Object mainMyClass() /*-{
-    return new $wnd.MyClass();
+    return new $wnd.MyJsInterface();
   }-*/;
   /*
    * TODO (cromwellian): Add test case for following:
-   * interface ANonJsInterface {
+   * interface ANonJsType {
    *  void methodA()
    * }
-   * interface AJsInterface {
+   * interface AJsType {
    * void methodA()
    * }
-   * class MyClass implements ANonJsInterface, AJsInterface {
+   * class MyJsInterface implements ANonJsType, AJsType {
    *   void methodA() { ... }
    * }
    * verify methodA() is dispatched properly from both interfaces.

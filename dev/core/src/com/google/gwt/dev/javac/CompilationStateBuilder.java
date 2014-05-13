@@ -49,13 +49,8 @@ import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -531,7 +526,16 @@ public class CompilationStateBuilder {
     CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext, compilerDelegate);
 
     // For each incoming Java source file...
+    LinkedHashSet<Resource> sortedResources = new LinkedHashSet<Resource>();
+    // lift all package-info's to be compiled first so they are available in GwtAstBuilder
     for (Resource resource : resources) {
+      if (resource.getPath().endsWith("/package-info.java")) {
+        sortedResources.add(resource);
+      }
+    }
+    sortedResources.addAll(resources);
+
+    for (Resource resource : sortedResources) {
       // Create a builder for all incoming units.
       CompilationUnitBuilder builder = CompilationUnitBuilder.create(resource);
 

@@ -139,8 +139,9 @@ import com.google.gwt.soyc.io.ArtifactsOutputDirectory;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -153,13 +154,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js
@@ -250,6 +248,9 @@ public abstract class JavaToJavaScriptCompiler {
         if (System.getProperty("gwt.coverage") != null) {
           instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
         }
+
+        // TypeOracle needs this to make decisions in several optimization passes
+        jprogram.typeOracle.setJsInteropMode(compilerContext.getOptions().getJsInteropMode());
 
         // TODO(stalcup): move to after normalize.
         // (4) Optimize the resolved Java AST
@@ -767,7 +768,9 @@ public abstract class JavaToJavaScriptCompiler {
 
     private Map<JsName, JsLiteral> runObfuscateNamer(PermProps props) {
       Map<JsName, JsLiteral> internedLiteralByVariableName =
-          JsLiteralInterner.exec(jprogram, jsProgram, JsLiteralInterner.INTERN_ALL);
+          JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
+              & (byte) (jprogram.typeOracle.isInteropEnabled()
+              ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
       FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram,
           props.getConfigProps());
       if (options.shouldRemoveDuplicateFunctions()

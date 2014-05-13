@@ -23,16 +23,7 @@ import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
 import org.eclipse.jdt.internal.compiler.impl.StringConstant;
-import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
-import org.eclipse.jdt.internal.compiler.lookup.Binding;
-import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
-import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
-import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
-import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
-import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
-import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
-import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
-import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -185,8 +176,12 @@ public final class JdtUtil {
       return scope != null ? getAnnotation(scope.referenceType().annotations, nameToFind) : null;
     } else if (binding instanceof ReferenceBinding) {
       return getAnnotation(((ReferenceBinding) binding).getAnnotations(), nameToFind);
+    } else if (binding instanceof SyntheticMethodBinding) {
+      return null;
     } else if (binding instanceof MethodBinding) {
       return getAnnotation(((MethodBinding) binding).sourceMethod().annotations, nameToFind);
+    } else if (binding instanceof FieldBinding) {
+      return getAnnotation(((FieldBinding) binding).sourceField().annotations, nameToFind);
     } else {
       return null;
     }

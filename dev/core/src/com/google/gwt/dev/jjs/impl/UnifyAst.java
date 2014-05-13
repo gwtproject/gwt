@@ -384,7 +384,7 @@ public class UnifyAst {
       // potentially different from the one in the exception variable.
       for (JTryStatement.CatchClause clause : x.getCatchClauses()) {
         List<JType> types = clause.getTypes();
-        for (int i = 0; i <  types.size(); i++) {
+        for (int i = 0; i < types.size(); i++) {
           JReferenceType resolvedType = translate((JReferenceType) types.get(i));
           assert resolvedType.replaces(types.get(i));
           types.set(i, resolvedType);
@@ -422,7 +422,7 @@ public class UnifyAst {
       JClassLiteral classLiteral = (JClassLiteral) arg;
       if (!(classLiteral.getRefType() instanceof JDeclaredType)) {
         error(gwtCreateCall,
-            "Only classes and interfaces may be used as arguments to GWT.create()");
+          "Only classes and interfaces may be used as arguments to GWT.create()");
         return null;
       }
 
@@ -434,16 +434,16 @@ public class UnifyAst {
     }
 
     private JExpression createRuntimeRebindExpression(JMethodCall gwtCreateCall,
-        JClassLiteral classLiteral) {
+                                                      JClassLiteral classLiteral) {
       // RuntimeRebinder.createInstance(classLiteral);
       JMethod runtimeCreateInstanceMethod =
-          program.getIndexedMethod("RuntimeRebinder.createInstance");
+        program.getIndexedMethod("RuntimeRebinder.createInstance");
       return new JMethodCall(gwtCreateCall.getSourceInfo(), null, runtimeCreateInstanceMethod,
-          classLiteral);
+        classLiteral);
     }
 
     private JExpression createStaticRebindExpression(JMethodCall gwtCreateCall,
-        JClassLiteral classLiteral) {
+                                                     JClassLiteral classLiteral) {
       JDeclaredType type = (JDeclaredType) classLiteral.getRefType();
       String reqType = BinaryName.toSourceName(type.getName());
       List<String> answers;
@@ -475,10 +475,10 @@ public class UnifyAst {
           return null;
         }
         JExpression result = JGwtCreate.createInstantiationExpression(gwtCreateCall.getSourceInfo(),
-            (JClassType) answerType, currentMethod.getEnclosingType());
+          (JClassType) answerType, currentMethod.getEnclosingType());
         if (result == null) {
           error(gwtCreateCall,
-              "Rebind result '" + answer + "' has no default (zero argument) constructors");
+            "Rebind result '" + answer + "' has no default (zero argument) constructors");
           return null;
         }
         instantiationExpressions.add(result);
@@ -488,7 +488,7 @@ public class UnifyAst {
         return instantiationExpressions.get(0);
       } else {
         return new JGwtCreate(gwtCreateCall.getSourceInfo(), reqType, answers,
-            program.getTypeJavaLangObject(), instantiationExpressions);
+          program.getTypeJavaLangObject(), instantiationExpressions);
       }
     }
 
@@ -535,13 +535,13 @@ public class UnifyAst {
   }
 
   private static final String CLASS_DESIRED_ASSERTION_STATUS =
-      "java.lang.Class.desiredAssertionStatus()Z";
+    "java.lang.Class.desiredAssertionStatus()Z";
 
   private static final String CLASS_IS_CLASS_METADATA_ENABLED =
-      "java.lang.Class.isClassMetadataEnabled()Z";
+    "java.lang.Class.isClassMetadataEnabled()Z";
 
   public static final String GWT_CREATE =
-      "com.google.gwt.core.shared.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
+    "com.google.gwt.core.shared.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
 
   private static final String GWT_DEBUGGER_SHARED = "com.google.gwt.core.shared.GWT.debugger()V";
 
@@ -554,10 +554,10 @@ public class UnifyAst {
   private static final String GWT_IS_SCRIPT = "com.google.gwt.core.shared.GWT.isScript()Z";
 
   private static final String IMPL_GET_NAME_OF =
-      "com.google.gwt.core.client.impl.Impl.getNameOf(Ljava/lang/String;)Ljava/lang/String;";
+    "com.google.gwt.core.client.impl.Impl.getNameOf(Ljava/lang/String;)Ljava/lang/String;";
 
   public static final String OLD_GWT_CREATE =
-      "com.google.gwt.core.client.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
+    "com.google.gwt.core.client.GWT.create(Ljava/lang/Class;)Ljava/lang/Object;";
 
   private static final String OLD_GWT_IS_CLIENT = "com.google.gwt.core.client.GWT.isClient()Z";
 
@@ -569,20 +569,20 @@ public class UnifyAst {
    * Methods for which the call site must be replaced with magic AST nodes.
    */
   private static final Set<String> GWT_DEBUGGER_METHOD_CALLS =
-      new LinkedHashSet<String>(Arrays.asList(GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT));
+    new LinkedHashSet<String>(Arrays.asList(GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT));
 
   /**
    * Methods for which the call site must be replaced with magic AST nodes.
    */
   private static final Set<String> MAGIC_METHOD_CALLS = new LinkedHashSet<String>(Arrays.asList(
-      GWT_CREATE, GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT, OLD_GWT_CREATE, IMPL_GET_NAME_OF));
+    GWT_CREATE, GWT_DEBUGGER_SHARED, GWT_DEBUGGER_CLIENT, OLD_GWT_CREATE, IMPL_GET_NAME_OF));
 
   /**
    * Methods with magic implementations that the compiler must insert.
    */
   private static final Set<String> MAGIC_METHOD_IMPLS = new LinkedHashSet<String>(Arrays.asList(
-      GWT_IS_CLIENT, OLD_GWT_IS_CLIENT, GWT_IS_PROD_MODE, OLD_GWT_IS_PROD_MODE, GWT_IS_SCRIPT,
-      OLD_GWT_IS_SCRIPT, CLASS_DESIRED_ASSERTION_STATUS, CLASS_IS_CLASS_METADATA_ENABLED));
+    GWT_IS_CLIENT, OLD_GWT_IS_CLIENT, GWT_IS_PROD_MODE, OLD_GWT_IS_PROD_MODE, GWT_IS_SCRIPT,
+    OLD_GWT_IS_SCRIPT, CLASS_DESIRED_ASSERTION_STATUS, CLASS_IS_CLASS_METADATA_ENABLED));
 
   private final CompilationState compilationState;
   private final Map<String, CompiledClass> compiledClassesByInternalName;
@@ -626,14 +626,14 @@ public class UnifyAst {
 
   private final Set<String> virtualMethodsLive = new HashSet<String>();
   private final Map<String, List<JMethod>> virtualMethodsPending =
-      new java.util.HashMap<String, List<JMethod>>();
+    new java.util.HashMap<String, List<JMethod>>();
 
   private NameBasedTypeLocator sourceNameBasedTypeLocator;
   private NameBasedTypeLocator binaryNameBasedTypeLocator;
   private NameBasedTypeLocator internalNameBasedTypeLocator;
 
   public UnifyAst(TreeLogger logger, CompilerContext compilerContext, JProgram program,
-      JsProgram jsProgram, RebindPermutationOracle rpo) {
+                  JsProgram jsProgram, RebindPermutationOracle rpo) {
     this.logger = logger;
     this.compilerContext = compilerContext;
     this.program = program;
@@ -686,10 +686,10 @@ public class UnifyAst {
 
   /**
    * Translates and stitches (unifies) type ASTs into one connected graph.<br />
-   *
+   * <p/>
    * For normal monolithic compiles only types reachable from entry points are traversed. This
    * speeds, saves memory trims unreferenced elements.<br />
-   *
+   * <p/>
    * Library compiles traverse all types that were supplied as source in the compilation state and
    * no elements are pruned.
    */
@@ -849,10 +849,10 @@ public class UnifyAst {
      */
     for (JDeclaredType t : types) {
       if (t instanceof JClassType && (isJso((JClassType) t)
-          || hasAnyExports(t))) {
+        || hasAnyExports(t))) {
         instantiate(t);
       }
-      if (t instanceof JInterfaceType && ((JInterfaceType) t).isJsInterface()) {
+      if (t.isJsType()) {
         instantiate(t);
       }
     }
@@ -942,8 +942,8 @@ public class UnifyAst {
   private void error(JNode x, String errorMessage) {
     errorsFound = true;
     TreeLogger branch =
-        logger
-            .branch(TreeLogger.ERROR, "Errors in '" + x.getSourceInfo().getFileName() + "'", null);
+      logger
+        .branch(TreeLogger.ERROR, "Errors in '" + x.getSourceInfo().getFileName() + "'", null);
     // Append 'Line #: msg' to the error message.
     StringBuffer msgBuf = new StringBuffer();
     int line = x.getSourceInfo().getStartLine();
@@ -990,7 +990,7 @@ public class UnifyAst {
       }
       JType returnType = translate(method.getType());
       List<JClassType> thrownExceptions =
-          new ArrayList<JClassType>(method.getThrownExceptions().size());
+        new ArrayList<JClassType>(method.getThrownExceptions().size());
       for (JClassType thrownException : method.getThrownExceptions()) {
         thrownExceptions.add(translate(thrownException));
       }
@@ -1017,7 +1017,7 @@ public class UnifyAst {
         List<JType> resolvedParams = new ArrayList<JType>();
         if (specialization.getParams() == null) {
           logger.log(Type.WARN, "Forgot to specify params= attribute on "
-              + "method " + method.getSignature());
+            + "method " + method.getSignature());
           method.removeSpecialization();
         } else {
           for (JType param : specialization.getParams()) {
@@ -1030,22 +1030,22 @@ public class UnifyAst {
         }
 
         JMethod targetMethod = program.typeOracle
-            .getMethodBySignature((JClassType) method.getEnclosingType()
-                , specialization.getTargetSignature(method));
+          .getMethodBySignature((JClassType) method.getEnclosingType()
+            , specialization.getTargetSignature(method));
         if (targetMethod != null) {
           flowInto(targetMethod);
           specialization.resolve(resolvedParams, resolvedReturn,
-              targetMethod);
+            targetMethod);
         } else {
           if (specialization.getTarget() == null ||
-              "".equals(specialization.getTarget())) {
+            "".equals(specialization.getTarget())) {
             logger.log(Type.WARN, "Unable to locate @SpecializeMethod target, "
-                + " forgot to specify target= attribute on method " +
-                method.getSignature());
+              + " forgot to specify target= attribute on method " +
+              method.getSignature());
           } else {
             logger.log(Type.WARN, "Unable to locate @SpecializeMethod target "
-                + specialization.getTargetSignature(method) + " for method " +
-                method.getSignature());
+              + specialization.getTargetSignature(method) + " for method " +
+              method.getSignature());
           }
           method.removeSpecialization();
         }
@@ -1093,14 +1093,14 @@ public class UnifyAst {
       protected CompilationUnit getCompilationUnitFromSource(String binaryName) {
         // There is no binary name based index for this, use the internal name based one instead.
         return internalNameBasedTypeLocator.getCompilationUnitFromSource(
-            BinaryName.toInternalName(binaryName));
+          BinaryName.toInternalName(binaryName));
       }
 
       @Override
       protected boolean sourceCompilationUnitIsAvailable(String binaryName) {
         // There is no binary name based index for this, use the internal name based one instead.
         return internalNameBasedTypeLocator.sourceCompilationUnitIsAvailable(
-            BinaryName.toInternalName(binaryName));
+          BinaryName.toInternalName(binaryName));
       }
     };
     internalNameBasedTypeLocator = new NameBasedTypeLocator(compiledClassesByInternalName) {
@@ -1108,7 +1108,7 @@ public class UnifyAst {
       protected CompilationUnit getCompilationUnitFromLibrary(String internalName) {
         // There is no internal name based index for this, use the binary name based one instead.
         return binaryNameBasedTypeLocator.getCompilationUnitFromLibrary(
-            InternalName.toBinaryName(internalName));
+          InternalName.toBinaryName(internalName));
       }
 
       @Override
@@ -1121,7 +1121,7 @@ public class UnifyAst {
       protected boolean resolvedTypeIsAvailable(String internalName) {
         // There is no internal name based index for this, use the binary name based one instead.
         return binaryNameBasedTypeLocator.resolvedTypeIsAvailable(
-            InternalName.toBinaryName(internalName));
+          InternalName.toBinaryName(internalName));
       }
     };
   }
@@ -1145,8 +1145,7 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
-      boolean isJsInterface = type instanceof JInterfaceType ?
-          isJsInterface((JInterfaceType) type) : false;
+      boolean isJsType = type.isJsType();
 
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
@@ -1163,15 +1162,21 @@ public class UnifyAst {
               pending = Lists.add(pending, method);
             }
             virtualMethodsPending.put(signature, pending);
-            if (isJsInterface) {
+            if (isJsType) {
               // Fake a call into the method to keep it around
               flowInto(method);
             }
           }
         } else if (method.getExportName() != null &&
-            (method.isStatic() || method.isConstructor())) {
+          (method.isStatic() || method.isConstructor())) {
           // rescue any @JsExport methods
           flowInto(method);
+        }
+      }
+
+      for (JField field : type.getFields()) {
+        if (field.isStatic() && field.getExportName() != null) {
+          flowInto(field);
         }
       }
     }
@@ -1186,22 +1191,22 @@ public class UnifyAst {
       return true;
     }
 
-    // if any of the superinterfaces as JsInterfaces, we consider this effectively a JSO
+    // if any of the superinterfaces as JsTypes, we consider this effectively a JSO
     // for instantiability purposes
     for (JInterfaceType intf : type.getImplements()) {
-      if (isJsInterface(intf)) {
+      if (isJsType(intf)) {
         return true;
       }
     }
     return false;
   }
 
-  private boolean isJsInterface(JInterfaceType intf) {
-    if (intf.isJsInterface()) {
+  private boolean isJsType(JInterfaceType intf) {
+    if (intf.isJsType()) {
       return true;
     }
     for (JInterfaceType subIntf : intf.getImplements()) {
-      if (isJsInterface(subIntf)) {
+      if (isJsType(subIntf)) {
         return true;
       }
     }
@@ -1230,17 +1235,17 @@ public class UnifyAst {
       methodMap.put(methodSignature, method);
       if (MAGIC_METHOD_IMPLS.contains(methodSignature)) {
         if (methodSignature.startsWith("com.google.gwt.core.client.GWT.")
-            || methodSignature.startsWith("com.google.gwt.core.shared.GWT.")) {
+          || methodSignature.startsWith("com.google.gwt.core.shared.GWT.")) {
           // GWT.isClient, GWT.isScript, GWT.isProdMode all true.
           implementMagicMethod(method, JBooleanLiteral.TRUE);
         } else {
           assert methodSignature.startsWith("java.lang.Class.");
           if (CLASS_DESIRED_ASSERTION_STATUS.equals(methodSignature)) {
             implementMagicMethod(method,
-                JBooleanLiteral.get(compilerContext.getOptions().isEnableAssertions()));
+              JBooleanLiteral.get(compilerContext.getOptions().isEnableAssertions()));
           } else if (CLASS_IS_CLASS_METADATA_ENABLED.equals(methodSignature)) {
             implementMagicMethod(method,
-                JBooleanLiteral.get(!compilerContext.getOptions().isClassMetadataDisabled()));
+              JBooleanLiteral.get(!compilerContext.getOptions().isClassMetadataDisabled()));
           } else {
             assert false;
           }
@@ -1271,11 +1276,22 @@ public class UnifyAst {
       }
       resolvedRescues.add(node);
     }
-    type.resolve(resolvedInterfaces, resolvedRescues);
+
+    JDeclaredType pkgInfo = findPackageInfo(type);
+    type.resolve(resolvedInterfaces, resolvedRescues,
+      pkgInfo != null ? pkgInfo.getJsNamespace() : null);
+  }
+
+  private JDeclaredType findPackageInfo(JDeclaredType type) {
+    String pkg = type.getName();
+    pkg = pkg.substring(0, pkg.lastIndexOf('.'));
+    JDeclaredType pkgInfo = internalFindTypeViaLocator(pkg + ".package-info",
+      binaryNameBasedTypeLocator);
+    return pkgInfo;
   }
 
   public JDeclaredType findType(String typeName, NameBasedTypeLocator nameBasedTypeLocator)
-      throws UnableToCompleteException {
+    throws UnableToCompleteException {
     JDeclaredType type = internalFindType(typeName, nameBasedTypeLocator);
     if (errorsFound) {
       // Already logged.
@@ -1284,8 +1300,8 @@ public class UnifyAst {
     return type;
   }
 
-  private JDeclaredType internalFindType(String typeName,
-      NameBasedTypeLocator nameBasedTypeLocator) {
+  private JDeclaredType internalFindTypeViaLocator(String typeName,
+                                         NameBasedTypeLocator nameBasedTypeLocator) {
     if (nameBasedTypeLocator.resolvedTypeIsAvailable(typeName)) {
       return nameBasedTypeLocator.getResolvedType(typeName);
     }
@@ -1293,6 +1309,17 @@ public class UnifyAst {
     if (nameBasedTypeLocator.sourceCompilationUnitIsAvailable(typeName)) {
       assimilateSourceUnit(nameBasedTypeLocator.getCompilationUnitFromSource(typeName));
       return nameBasedTypeLocator.getResolvedType(typeName);
+    }
+
+    return null;
+  }
+
+  private JDeclaredType internalFindType(String typeName,
+      NameBasedTypeLocator nameBasedTypeLocator) {
+
+    JDeclaredType toReturn = internalFindTypeViaLocator(typeName, nameBasedTypeLocator);
+    if (toReturn != null) {
+      return toReturn;
     }
 
     if (compilerContext.shouldCompileMonolithic()) {

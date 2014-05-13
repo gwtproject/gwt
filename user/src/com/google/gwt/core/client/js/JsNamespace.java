@@ -22,13 +22,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * JsExport marks a constructor, static method, or static field as creating a an unobfuscated alias
- * in the global scope. JsExport acts as an entry-point from the standpoint of the optimizer,
- * and all code reachable from an exported method is also considered live, so use with care.
+ * Provides a default namespace for @JsExport annotations which don't specify a value. The
+ * computed fully qualified export symbol will be a combination of the nearest enclosing
+ * \@JsNamespace and the Java name of the method or field @JsExport is applied to. If applied to
+ * package-info.java, applies to all types in a package.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.FIELD, ElementType.TYPE })
+@Retention(RetentionPolicy.CLASS)
+@Target({ElementType.TYPE, ElementType.PACKAGE})
 @Documented
-public @interface JsExport {
+public @interface JsNamespace {
   String value() default "";
 }

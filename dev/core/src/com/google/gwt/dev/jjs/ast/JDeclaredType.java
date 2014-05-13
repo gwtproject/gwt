@@ -47,6 +47,10 @@ import java.util.List;
  */
 public abstract class JDeclaredType extends JReferenceType {
 
+  protected final String jsPrototype;
+  protected final JsInteropType jsInteropType;
+  private String jsNamespace = "";
+
   /**
    * The other nodes that this node should implicitly rescue. Special
    * serialization treatment.
@@ -90,8 +94,14 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   private List<JInterfaceType> superInterfaces = Lists.create();
 
-  public JDeclaredType(SourceInfo info, String name) {
+  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType, String jsPrototype) {
     super(info, name);
+    this.jsInteropType = interopType;
+    this.jsPrototype = jsPrototype;
+  }
+
+  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType) {
+    this(info, name, interopType, null);
   }
 
   public void addArtificialRescue(JNode node) {
@@ -283,6 +293,18 @@ public abstract class JDeclaredType extends JReferenceType {
     return name.substring(dotpos + 1);
   }
 
+  public boolean isJsType() {
+    return jsInteropType != JsInteropType.NONE;
+  }
+
+  public JsInteropType getJsInteropType() {
+    return jsInteropType;
+  }
+
+  public String getJsPrototype() {
+    return jsPrototype;
+  }
+
   /**
    * Returns this type's super class, or <code>null</code> if this type is
    * {@link Object} or an interface.
@@ -348,11 +370,15 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Resolves external references during AST stitching.
    */
-  public void resolve(List<JInterfaceType> resolvedInterfaces, List<JNode> resolvedRescues) {
+  public void resolve(List<JInterfaceType> resolvedInterfaces, List<JNode> resolvedRescues,
+                      String jsNamespace) {
     assert JType.replaces(resolvedInterfaces, superInterfaces);
     superInterfaces = Lists.normalize(resolvedInterfaces);
     assert JNameOf.replacesNamedElements(resolvedRescues, artificialRescues);
     artificialRescues = Lists.normalize(resolvedRescues);
+    if (this.jsNamespace.isEmpty()) {
+      this.jsNamespace = jsNamespace;
+    }
   }
 
   /**
@@ -483,5 +509,42 @@ public abstract class JDeclaredType extends JReferenceType {
       }
     }
     return null;
+  }
+
+  public String getQualifiedExportName() {
+    if (!jsNamespace.isEmpty()) {
+      return jsNamespace + "." + getLeafName();
+    }
+
+    if (enclosingType == null) {
+        return getName();
+    } else {
+      return enclosingType.getQualifiedExportName() + "." + getLeafName();
+    }
+  }
+
+  public String getJsNamespace() {
+    return jsNamespace;
+  }
+
+  public void setJsNamespace(String jsNamespace) {
+    this.jsNamespace = jsNamespace;
+  }
+
+  private String getLeafName() {
+    String fqName = getName();
+    return fqName.substring(getEnclosingType().getName().length() + 1);
+  }
+
+  /**
+   * The type of JsType this can be: NONE, NO_PROTOTYPE, JS_PROTOTYPE, NATIVE_PROTOTYPE (e.g. DOM element), and
+   * WEB_COMPONENT.
+   */
+  public enum JsInteropType {
+    NONE,
+    NO_PROTOTYPE,
+    JS_PROTOTYPE,
+    NATIVE_PROTOTYPE,
+    WEB_COMPONENT
   }
 }

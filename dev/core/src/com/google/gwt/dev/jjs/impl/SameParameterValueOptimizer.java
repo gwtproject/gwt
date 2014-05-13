@@ -66,8 +66,8 @@ public class SameParameterValueOptimizer {
       JMethod method = x.getTarget();
 
       if (x.canBePolymorphic() || rescuedMethods.contains(method)
-          // Don't optimize calls to JsInterface Prototype methods
-          || JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+          // Don't optimize calls to JsType Prototype methods
+          || JProgram.isJsTypePrototype(method.getEnclosingType())) {
         return;
       }
 

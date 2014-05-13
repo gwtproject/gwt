@@ -49,6 +49,7 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.resource.ResourceOracle;
+import com.google.gwt.dev.util.arg.JsInteropMode;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.OutputFileSet;
 
@@ -463,7 +464,6 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
         JsPrettyNamer.exec(jsProgram, null);
         break;
       case DETAILED:
-        // As above with OBFUSCATED
         TopFunctionStringInterner.exec(jsProgram);
         JsVerboseNamer.exec(jsProgram, null);
         break;

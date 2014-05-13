@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2013 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,16 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev;
+package com.google.gwt.core.client.js;
 
-import com.google.gwt.dev.util.arg.OptionJsInteropMode;
-import com.google.gwt.dev.util.arg.OptionOutDir;
-import com.google.gwt.dev.util.arg.OptionSourceLevel;
-import com.google.gwt.dev.util.arg.OptionStrict;
+import java.lang.annotation.*;
 
 /**
- * The complete set of options for {@link CompileModule}.
+ * JsExport marks a constructor, static method, or static field as creating a an unobfuscated alias
+ * in the global scope. JsExport acts as an entry-point from the standpoint of the optimizer,
+ * and all code reachable from an exported method is also considered live, so use with care.
  */
-public interface CompileModuleOptions extends CompileTaskOptions, OptionOutDir, OptionStrict,
-    OptionSourceLevel, OptionJsInteropMode {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.FIELD})
+@Documented
+public @interface JsNoExport {
 }

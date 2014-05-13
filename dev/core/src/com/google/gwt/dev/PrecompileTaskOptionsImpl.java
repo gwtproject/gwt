@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.JJSOptionsImpl;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.JsInteropMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private int maxPermsPerPrecompile;
   private File missingDepsFile;
   private boolean saveSource;
+  private String sourceMapFilePrefix;
   private boolean validateOnly;
   private boolean warnOverlappingSource;
   private boolean warnMissingDeps;
@@ -67,6 +69,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     setDisableUpdateCheck(other.isUpdateCheckDisabled());
     setGenDir(other.getGenDir());
     setSaveSource(other.shouldSaveSource());
+    setSourceMapFilePrefix(other.getSourceMapFilePrefix());
     setMaxPermsPerPrecompile(other.getMaxPermsPerPrecompile());
     setWarnOverlappingSource(other.warnOverlappingSource());
     setWarnMissingDeps(other.warnMissingDeps());
@@ -129,6 +132,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   public SourceLevel getSourceLevel()
   {
     return jjsOptions.getSourceLevel();
+  }
+
+  @Override
+  public String getSourceMapFilePrefix() {
+    return sourceMapFilePrefix;
   }
 
   @Override
@@ -363,6 +371,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setSourceMapFilePrefix(String path) {
+    sourceMapFilePrefix = path;
+  }
+
+  @Override
   public void setSoycEnabled(boolean enabled) {
     jjsOptions.setSoycEnabled(enabled);
   }
@@ -440,5 +453,13 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public boolean warnMissingDeps() {
     return warnMissingDeps;
+  }
+
+  @Override public JsInteropMode getJsInteropMode() {
+    return jjsOptions.getJsInteropMode();
+  }
+
+  @Override public void setJsInteropMode(JsInteropMode mode) {
+    jjsOptions.setJsInteropMode(mode);
   }
 }

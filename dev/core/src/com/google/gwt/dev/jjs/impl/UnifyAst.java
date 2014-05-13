@@ -642,13 +642,15 @@ public class UnifyAst {
     this.compilationState = rpo.getCompilationState();
     this.compiledClassesByInternalName = compilationState.getClassFileMap();
     this.compiledClassesBySourceName = compilationState.getClassFileMapBySource();
-
     initializeNameBasedLocators();
   }
 
   public void addRootTypes(Collection<String> sourceTypeNames) throws UnableToCompleteException {
     for (String sourceTypeName : sourceTypeNames) {
-      internalFindType(sourceTypeName, sourceNameBasedTypeLocator);
+      JDeclaredType type = internalFindType(sourceTypeName, sourceNameBasedTypeLocator);
+      if (type != null && hasAnyExports(type)) {
+        instantiate(type);
+      }
     }
     if (errorsFound) {
       // Already logged.
@@ -720,6 +722,23 @@ public class UnifyAst {
           flowInto(method);
         }
       }
+    } else {
+      boolean savedErrorsFound = errorsFound;
+      Set<String> internalNames = ImmutableSet.copyOf(compiledClassesByInternalName.keySet());
+      for (String internalName : internalNames) {
+        JDeclaredType type = internalFindType(internalName, internalNameBasedTypeLocator);
+        //
+        if (type != null && (type.isJsType() || hasAnyExports(type))) {
+          instantiate(type);
+          for (JField field : type.getFields()) {
+            flowInto(field);
+          }
+          for (JMethod method : type.getMethods()) {
+            flowInto(method);
+          }
+        }
+      }
+      errorsFound = savedErrorsFound;
     }
 
     /*
@@ -848,11 +867,11 @@ public class UnifyAst {
      * to copy the exact semantics of ControlFlowAnalyzer.
      */
     for (JDeclaredType t : types) {
-      if (t instanceof JClassType && (isJso((JClassType) t)
-          || hasAnyExports(t))) {
+      if (t instanceof JClassType && isJso((JClassType) t)
+          || hasAnyExports(t)) {
         instantiate(t);
       }
-      if (t instanceof JInterfaceType && ((JInterfaceType) t).isJsInterface()) {
+      if (t.isJsType()) {
         instantiate(t);
       }
     }
@@ -861,6 +880,12 @@ public class UnifyAst {
   private boolean hasAnyExports(JDeclaredType t) {
     for (JMethod method : t.getMethods()) {
       if (method.getExportName() != null) {
+        return true;
+      }
+    }
+
+    for (JField field : t.getFields()) {
+      if (field.getExportName() != null) {
         return true;
       }
     }
@@ -1145,8 +1170,7 @@ public class UnifyAst {
         instantiate(intf);
       }
       staticInitialize(type);
-      boolean isJsInterface = type instanceof JInterfaceType ?
-          isJsInterface((JInterfaceType) type) : false;
+      boolean isJsType = type.isJsType();
 
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
@@ -1163,7 +1187,7 @@ public class UnifyAst {
               pending = Lists.add(pending, method);
             }
             virtualMethodsPending.put(signature, pending);
-            if (isJsInterface) {
+            if (isJsType) {
               // Fake a call into the method to keep it around
               flowInto(method);
             }
@@ -1172,6 +1196,12 @@ public class UnifyAst {
             (method.isStatic() || method.isConstructor())) {
           // rescue any @JsExport methods
           flowInto(method);
+        }
+      }
+
+      for (JField field : type.getFields()) {
+        if (field.isStatic() && field.getExportName() != null) {
+          flowInto(field);
         }
       }
     }
@@ -1189,19 +1219,19 @@ public class UnifyAst {
     // if any of the superinterfaces as JsInterfaces, we consider this effectively a JSO
     // for instantiability purposes
     for (JInterfaceType intf : type.getImplements()) {
-      if (isJsInterface(intf)) {
+      if (isJsType(intf)) {
         return true;
       }
     }
     return false;
   }
 
-  private boolean isJsInterface(JInterfaceType intf) {
-    if (intf.isJsInterface()) {
+  private boolean isJsType(JInterfaceType intf) {
+    if (intf.isJsType()) {
       return true;
     }
     for (JInterfaceType subIntf : intf.getImplements()) {
-      if (isJsInterface(subIntf)) {
+      if (isJsType(subIntf)) {
         return true;
       }
     }
@@ -1271,7 +1301,18 @@ public class UnifyAst {
       }
       resolvedRescues.add(node);
     }
-    type.resolve(resolvedInterfaces, resolvedRescues);
+
+    JDeclaredType pkgInfo = findPackageInfo(type);
+    type.resolve(resolvedInterfaces, resolvedRescues,
+        pkgInfo != null ? pkgInfo.getJsNamespace() : null);
+  }
+
+  private JDeclaredType findPackageInfo(JDeclaredType type) {
+    String pkg = type.getName();
+    pkg = pkg.substring(0, pkg.lastIndexOf('.'));
+    JDeclaredType pkgInfo = internalFindTypeViaLocator(pkg + ".package-info",
+        binaryNameBasedTypeLocator);
+    return pkgInfo;
   }
 
   public JDeclaredType findType(String typeName, NameBasedTypeLocator nameBasedTypeLocator)
@@ -1284,15 +1325,28 @@ public class UnifyAst {
     return type;
   }
 
-  private JDeclaredType internalFindType(String typeName,
+  private JDeclaredType internalFindTypeViaLocator(String typeName,
       NameBasedTypeLocator nameBasedTypeLocator) {
     if (nameBasedTypeLocator.resolvedTypeIsAvailable(typeName)) {
       return nameBasedTypeLocator.getResolvedType(typeName);
     }
 
     if (nameBasedTypeLocator.sourceCompilationUnitIsAvailable(typeName)) {
-      assimilateSourceUnit(nameBasedTypeLocator.getCompilationUnitFromSource(typeName));
+      assimilateSourceUnit(
+          nameBasedTypeLocator.getCompilationUnitFromSource(typeName));
       return nameBasedTypeLocator.getResolvedType(typeName);
+    }
+
+    return null;
+  }
+
+  private JDeclaredType internalFindType(String typeName,
+      NameBasedTypeLocator nameBasedTypeLocator) {
+
+    JDeclaredType toReturn = internalFindTypeViaLocator(typeName,
+        nameBasedTypeLocator);
+    if (toReturn != null) {
+      return toReturn;
     }
 
     if (compilerContext.shouldCompileMonolithic()) {

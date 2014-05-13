@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Google Inc.
+ * Copyright 2013 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,16 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev;
-
-import com.google.gwt.dev.util.arg.OptionJsInteropMode;
-import com.google.gwt.dev.util.arg.OptionOutDir;
-import com.google.gwt.dev.util.arg.OptionSourceLevel;
-import com.google.gwt.dev.util.arg.OptionStrict;
+package com.google.gwt.dev.util.arg;
 
 /**
- * The complete set of options for {@link CompileModule}.
+ * An option that can indicates the Javascript interop mode.
  */
-public interface CompileModuleOptions extends CompileTaskOptions, OptionOutDir, OptionStrict,
-    OptionSourceLevel, OptionJsInteropMode {
+public interface OptionJsInteropMode {
+
+  JsInteropMode getJsInteropMode();
+
+  void setJsInteropMode(JsInteropMode mode);
 }

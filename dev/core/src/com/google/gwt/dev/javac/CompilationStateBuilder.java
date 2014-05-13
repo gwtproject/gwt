@@ -52,6 +52,7 @@ import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -530,7 +531,6 @@ public class CompilationStateBuilder {
 
     CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext, compilerDelegate);
 
-    // For each incoming Java source file...
     for (Resource resource : resources) {
       // Create a builder for all incoming units.
       CompilationUnitBuilder builder = CompilationUnitBuilder.create(resource);

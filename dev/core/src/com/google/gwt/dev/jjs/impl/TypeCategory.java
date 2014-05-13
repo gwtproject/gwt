@@ -54,7 +54,7 @@ public  enum TypeCategory {
       return TypeCategory.TYPE_JSO;
     } else if (program.typeOracle.isDualJsoInterface(underlyingType)) {
       return TypeCategory.TYPE_JAVA_OBJECT_OR_JSO;
-    } else if (program.typeOracle.isOrExtendsJsInterface(underlyingType, true)) {
+    } else if (program.typeOracle.isOrExtendsJsType(underlyingType, true)) {
       return TypeCategory.TYPE_JS_INTERFACE;
     }
     return TypeCategory.TYPE_JAVA_OBJECT;

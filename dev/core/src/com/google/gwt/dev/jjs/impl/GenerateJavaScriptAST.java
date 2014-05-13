@@ -550,10 +550,11 @@ public class GenerateJavaScriptAST {
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
             polyName.setObfuscatable(false);
-            // if a JsInterface
-          } else if (program.typeOracle.isJsInterfaceMethod(x)) {
-            polyName = interfaceScope.declareName(name, name);
-            polyName.setObfuscatable(false);
+            // if a JsType and we can set set the interface method to non-obfuscatable
+          } else if (program.typeOracle.isJsTypeMethod(x) &&
+              !program.typeOracle.needsJsInteropBridgeMethod(x)) {
+              polyName = interfaceScope.declareName(name, name);
+              polyName.setObfuscatable(false);
           } else {
             polyName = interfaceScope.declareName(mangleNameForPoly(x), name);
           }
@@ -892,8 +893,8 @@ public class GenerateJavaScriptAST {
         return;
       }
 
-      if (JProgram.isJsInterfacePrototype(x)) {
-        // Don't generate JS for magic @PrototypeOfJsInterface stubs classes
+      if (JProgram.isJsTypePrototype(x)) {
+        // Don't generate JS for magic @PrototypeOfJsType stubs classes
         return;
       }
 
@@ -958,6 +959,12 @@ public class GenerateJavaScriptAST {
 
       if (!vars.isEmpty()) {
         globalStmts.add(vars);
+      }
+
+      if (typeOracle.isInstantiatedType(x) && !program.isJavaScriptObject(x) &&
+        x !=  program.getTypeJavaLangString()) {
+        // done after class setup because exports may rely on static vars
+        generateExports(x, globalStmts);
       }
 
       for (JNode node : x.getArtificialRescues()) {
@@ -1102,7 +1109,7 @@ public class GenerateJavaScriptAST {
        */
 
       // See if we need a clinit
-      JsInvocation jsInvocation = maybeCreateClinitCall(field);
+      JsInvocation jsInvocation = maybeCreateClinitCall(field, false);
       if (jsInvocation != null) {
         curExpr = createCommaExpression(jsInvocation, curExpr);
       }
@@ -1394,7 +1401,7 @@ public class GenerateJavaScriptAST {
         JsNameRef methodRef = names.get(method).makeRef(x.getSourceInfo());
         qualifier.setQualifier(methodRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodRef, jsInvocation);
         }
       } else if (x.isStaticDispatchOnly() && !method.isConstructor()) {
@@ -1422,11 +1429,11 @@ public class GenerateJavaScriptAST {
         qualifier.setQualifier(methodNameRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
         // Is this method targeting a Foo_Prototype class?
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
         }
         // Is this method targeting a Foo_Prototype class?
-        if (JProgram.isJsInterfacePrototype(method.getEnclosingType())) {
+        if (JProgram.isJsTypePrototype(method.getEnclosingType())) {
           result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
         }
       } else {
@@ -1511,19 +1518,21 @@ public class GenerateJavaScriptAST {
     private JsExpression dispatchToSuperPrototype(JMethodCall x, JMethod method, JsNameRef qualifier,
                                                   JsNameRef methodRef, JsInvocation jsInvocation) {
       String jsPrototype = null;
-      // find JsInterface of Prototype method being invoked.
+      // find JsType of Prototype method being invoked.
       for (JInterfaceType intf : method.getEnclosingType().getImplements()) {
-        JInterfaceType jsIntf = program.typeOracle.getNearestJsInterface(intf, true);
+        JDeclaredType jsIntf = program.typeOracle.getNearestJsType(intf, true);
+        assert jsIntf instanceof JInterfaceType;
+
         if (jsIntf != null) {
           jsPrototype = jsIntf.getJsPrototype();
           break;
         }
       }
-      assert jsPrototype != null : "Unable to find JsInterface with prototype";
+      assert jsPrototype != null : "Unable to find JsType with prototype";
 
-      // in JsInterface case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
-      // the method target should be on a class that ends with $Prototype and implements a JsInterface
-      if (!(method instanceof JConstructor) && program.typeOracle.isJsInterfaceMethod(method)) {
+      // in JsType case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
+      // the method target should be on a class that ends with $Prototype and implements a JsType
+      if (!(method instanceof JConstructor) && program.typeOracle.isJsTypeMethod(method)) {
         JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
         methodRef = new JsNameRef(methodRef.getSourceInfo(), method.getName());
         // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
@@ -1790,8 +1799,8 @@ public class GenerateJavaScriptAST {
         return false;
       }
 
-      // Don't generate JS for magic @PrototypeOfJsInterface classes
-      if (JProgram.isJsInterfacePrototype(x)) {
+      // Don't generate JS for magic @PrototypeOfJsType classes
+      if (JProgram.isJsTypePrototype(x)) {
         return false;
       }
 
@@ -1919,7 +1928,7 @@ public class GenerateJavaScriptAST {
             x.resolve(jsName);
 
             // See if we need to add a clinit call to a static field ref
-            JsInvocation clinitCall = maybeCreateClinitCall(field);
+            JsInvocation clinitCall = maybeCreateClinitCall(field, false);
             if (clinitCall != null) {
               JsExpression commaExpr = createCommaExpression(clinitCall, x);
               ctx.replaceMe(commaExpr);
@@ -2125,7 +2134,6 @@ public class GenerateJavaScriptAST {
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
       generateClassDefinition(x, globalStmts);
       generateVTables(x, globalStmts);
-      generateExports(x, globalStmts);
 
       if (x == program.getTypeJavaLangObject()) {
         // special: setup a "toString" alias for java.lang.Object.toString()
@@ -2464,7 +2472,7 @@ public class GenerateJavaScriptAST {
       JLiteral superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
           getRuntimeTypeReference(x.getSuperClass());
       // check if there's an overriding prototype
-      JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsInterfaceFromPrototype(superClass);
+      JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsTypeFromPrototype(superClass);
       String jsPrototype = jsPrototypeIntf != null ? jsPrototypeIntf.getJsPrototype() : null;
       // choose appropriate setup function
       JsName defineClassRef = indexedFunctions.get(
@@ -2580,8 +2588,20 @@ public class GenerateJavaScriptAST {
            * function functionName() { ... }
            */
           JsExpression rhs = methodBodyMap.get(method.getBody());
-          generateVTableAssignment(globalStmts, method, polymorphicNames.get(method), rhs);
-
+          JsName polyJsName = polymorphicNames.get(method);
+          generateVTableAssignment(globalStmts, method, polyJsName, rhs);
+          if (program.typeOracle.needsJsInteropBridgeMethod(method)) {
+            JsName exportedName = polyJsName.getEnclosing().declareName(
+                method.getName(), method.getName());
+//            _.exportedName = makeBridgeMethod(_.polyName)
+            exportedName.setObfuscatable(false);
+            JsNameRef polyRef = polyJsName.makeRef(sourceInfo);
+            polyRef.setQualifier(globalTemp.makeRef(sourceInfo));
+            generateVTableAssignment(globalStmts, method,
+                exportedName,
+                createJsInteropBridgeMethod(method,
+                    polyRef));
+          }
           if (method.exposesOverriddenPackagePrivateMethod() &&
               getPackagePrivateName(method) != null) {
             // This method exposes a package private method that is actually live, hence it needs
@@ -2611,7 +2631,7 @@ public class GenerateJavaScriptAST {
             // It should be noted that all subclasses of a.D will have the two methods collapsed,
             // and hence this assignment will be present in the vtable setup for all subclasses.
 
-            JsNameRef polyname = polymorphicNames.get(method).makeRef(sourceInfo);
+            JsNameRef polyname = polyJsName.makeRef(sourceInfo);
             polyname.setQualifier(globalTemp.makeRef(sourceInfo));
 
             generateVTableAssignment(globalStmts, method,
@@ -2625,26 +2645,60 @@ public class GenerateJavaScriptAST {
     private void generateExports(JClassType x, List<JsStatement> globalStmts) {
 
       String lastProvidedNamespace = "";
+      boolean createdClinit = false;
+
       for (JMethod m : x.getMethods()) {
         // static functions or constructors may be exported
-        if ((m.isStatic() || m instanceof JConstructor) && m.getExportName() != null) {
-          JsNameRef exportRhs = names.get(m).makeRef(m.getSourceInfo());
-          String exportName = m.getExportName();
+        if ((m.isStatic() || m instanceof JConstructor
+          && !((JConstructor) m).isDefaultConstructor()) && m.getExportName() != null) {
+          createdClinit = maybeHoistClinit(globalStmts, createdClinit, maybeCreateClinitCall(m));
+          JsExpression exportRhs = createJsInteropBridgeMethod(m,
+              names.get(m).makeRef(m.getSourceInfo()));
+          String exportName = m.getQualifiedExportName();
           lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
         }
       }
 
       for (JField f : x.getFields()) {
         if (f.isStatic() && f.getExportName() != null) {
+          createdClinit = maybeHoistClinit(globalStmts, createdClinit,
+              maybeCreateClinitCall(f, true));
           JsNameRef exportRhs = names.get(f).makeRef(f.getSourceInfo());
-          String exportName = f.getExportName();
+          String exportName = f.getQualifiedExportName();
           lastProvidedNamespace = exportMember(x, globalStmts, lastProvidedNamespace, exportRhs, exportName);
         }
       }
     }
 
+    private JsExpression createJsInteropBridgeMethod(JMethod m, JsNameRef methodRef) {
+      if (m.isStatic() || m instanceof JConstructor) {
+        return methodRef;
+      } else {
+        // call JHCSU.makeBridgeMethod(functionRefToBeCalled)
+        JsFunction makeBridgeMethod = indexedFunctions.get("JavaClassHierarchySetupUtil.makeBridgeMethod");
+        JsNameRef makeBridgeMethodRef = makeBridgeMethod.getName().makeRef(methodRef.getSourceInfo());
+        JsInvocation invokeBridge = new JsInvocation(methodRef.getSourceInfo());
+        invokeBridge.setQualifier(makeBridgeMethodRef);
+        invokeBridge.getArguments().add(methodRef);
+        return invokeBridge;
+      }
+    }
+
+    private boolean maybeHoistClinit(List<JsStatement> globalStmts, boolean createdClinit,
+                                     JsInvocation clInitJsInvocation) {
+      // TODO(cromwellian): move to using Object.defineProperty and bridge functions
+      // Hoist clinit to first member that needs it
+      if (!createdClinit) {
+        if (clInitJsInvocation != null) {
+          globalStmts.add(clInitJsInvocation.makeStmt());
+          createdClinit = true;
+        }
+      }
+      return createdClinit;
+    }
+
     private String exportMember(JClassType x, List<JsStatement> globalStmts, String lastProvidedNamespace,
-                                JsNameRef exportRhs, String exportName) {
+        JsExpression exportRhs, String exportName) {
       exportName = fixupExportName(x, exportName);
       Pair<String, String> exportNamespacePair = getExportNamespace(exportName);
       lastProvidedNamespace = exportProvidedNamespace(x, globalStmts, lastProvidedNamespace, exportNamespacePair);
@@ -2652,8 +2706,8 @@ public class GenerateJavaScriptAST {
       return lastProvidedNamespace;
     }
 
-    private void createAndAddExportAssignment(JClassType x, List<JsStatement> globalStmts, JsNameRef exportRhs,
-                                              Pair<String, String> exportNamespacePair) {
+    private void createAndAddExportAssignment(JClassType x, List<JsStatement> globalStmts,
+        JsExpression exportRhs, Pair<String, String> exportNamespacePair) {
       JsNameRef leaf = new JsNameRef(x.getSourceInfo(), exportNamespacePair.getRight());
       leaf.setQualifier(getExportLhsQualifier(x, exportNamespacePair.getLeft()));
       JsExprStmt astStat = new JsExprStmt(x.getSourceInfo(),
@@ -2683,9 +2737,7 @@ public class GenerateJavaScriptAST {
     }
 
     private String fixupExportName(JClassType x, String exportName) {
-      if ("".equals(exportName)) {
-        exportName = x.getEnclosingType().getName() + "." + x.getShortName();
-      }
+
       return exportName;
     }
 
@@ -2743,7 +2795,8 @@ public class GenerateJavaScriptAST {
 
     private boolean isMethodPotentiallyCalledAcrossClasses(JMethod method) {
       assert !hasWholeWorldKnowledge || crossClassTargets != null;
-      return crossClassTargets == null || crossClassTargets.contains(method);
+      return crossClassTargets == null || crossClassTargets.contains(method) ||
+          method.getExportName() != null || program.typeOracle.isJsTypeMethod(method);
     }
 
     /**
@@ -2758,13 +2811,18 @@ public class GenerateJavaScriptAST {
       return liveCtors == null || liveCtors.contains(method);
     }
 
-    private JsInvocation maybeCreateClinitCall(JField x) {
+    private JsInvocation maybeCreateClinitCall(JField x, boolean isExported) {
       if (!x.isStatic()) {
         return null;
       }
 
       JDeclaredType targetType = x.getEnclosingType().getClinitTarget();
-      if (!currentMethod.getEnclosingType().checkClinitTo(targetType)) {
+      if (targetType == null) {
+        return null;
+      }
+
+      if (!isExported &&
+          (currentMethod == null || !currentMethod.getEnclosingType().checkClinitTo(targetType))) {
         return null;
       } else if (targetType.equals(program.getTypeClassLiteralHolder())) {
         return null;

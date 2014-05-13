@@ -70,6 +70,21 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     specialization = null;
   }
 
+  public String getQualifiedExportName() {
+    if ("".equals(exportName)) {
+      String qualifiedExportName = getEnclosingType().getQualifiedExportName();
+      return this instanceof JConstructor ? qualifiedExportName :
+          qualifiedExportName + "." + getLeafName();
+    } else {
+      return exportName;
+    }
+  }
+
+  private String getLeafName() {
+    String shortName = getName();
+    return shortName.substring(shortName.lastIndexOf('$') + 1);
+  }
+
   /**
    * AST representation of @SpecializeMethod.
    */

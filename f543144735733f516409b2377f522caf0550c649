@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aaf9f8ff_3b18978f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - org.eclipse.jdt.internal.compiler.lookup.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_1b15db57",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_7b221fc3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_5b1f6375",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_bb4ca786",
+        "filename": "user/src/com/google/gwt/core/client/js/JsNamespace.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - java.lang.annotation.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_9b51eb22",
+        "filename": "user/test/com/google/gwt/core/CoreSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.core.client.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_fb462f64",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.js.JsProperty\u0027 import.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_db4b736a",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-13T20:56:33Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

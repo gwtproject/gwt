@@ -121,6 +121,86 @@
     },
     {
       "key": {
+        "uuid": "2aeee834_5356248e",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-14T02:38:51Z",
+      "side": 1,
+      "message": "what about protected?",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aeee834_1325bc34",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-14T02:38:51Z",
+      "side": 1,
+      "message": "what about JsProperty? I can\u0027t remember if that was implemented or not.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aeee834_b37df0f8",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-14T02:38:51Z",
+      "side": 1,
+      "message": "jstype is only needed for name2 to be callable from js right?",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aeee834_b31b30d7",
+        "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-14T02:38:51Z",
+      "side": 1,
+      "message": "I\u0027m confused what the intention is here with \"implements JsTypeExporter\". Having JsType on marker interfaces should be a no-op, right?",
+      "range": {
+        "startLine": 127,
+        "startChar": 39,
+        "endLine": 127,
+        "endChar": 53
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf9f8ff_db4b736a",
         "filename": "user/test/com/google/gwt/core/client/JsTypeTest.java",
         "patchSetId": 1

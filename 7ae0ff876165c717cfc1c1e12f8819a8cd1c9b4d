@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "aaa73822_f4274ea3",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T17:04:03Z",
+      "side": 1,
+      "message": "Maybe GwtCreateMap or GwtCreateAnswers?",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "7ae0ff876165c717cfc1c1e12f8819a8cd1c9b4d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aeee834_88aeb681",
         "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
         "patchSetId": 2

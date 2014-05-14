@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a69c0a1_7cd5d5ec",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T21:42:32Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 7
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf9f8ff_3b18978f",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
         "patchSetId": 1
@@ -36,6 +59,75 @@
     },
     {
       "key": {
+        "uuid": "6a69c0a1_7c8315f1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T21:42:32Z",
+      "side": 1,
+      "message": "exportName.isEmpty() ?",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a69c0a1_1c5bf90d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T21:42:32Z",
+      "side": 1,
+      "message": "Can you keep the nesting as before?\n\nif (method \u003d\u003d null) {\n  return;\n}\n\nif (!liveFieldsAndMethod.add(method)) {\n  return;\n}",
+      "range": {
+        "startLine": 624,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 18
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a69c0a1_bcf04db9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T21:42:32Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 683,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 9
+      },
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf9f8ff_7b221fc3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
         "patchSetId": 1
@@ -47,6 +139,24 @@
       "writtenOn": "2014-05-13T20:56:33Z",
       "side": 1,
       "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.dev.jjs.ast.*.",
+      "revId": "f543144735733f516409b2377f522caf0550c649",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a69c0a1_bc192d51",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-14T21:42:32Z",
+      "side": 1,
+      "message": "Please fix. You probably want to change your intellij configuration so that this does not happen. (Settings/Code Style/Java/Imports)",
+      "parentUuid": "aaf9f8ff_7b221fc3",
       "revId": "f543144735733f516409b2377f522caf0550c649",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

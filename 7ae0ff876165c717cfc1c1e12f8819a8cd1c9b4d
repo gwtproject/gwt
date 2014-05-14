@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eac690d8_aebf3bef",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-14T20:26:49Z",
+      "side": 1,
+      "message": "I went with GwtCreateMap",
+      "parentUuid": "aaa73822_f4274ea3",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "7ae0ff876165c717cfc1c1e12f8819a8cd1c9b4d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aeee834_88aeb681",
         "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2014-05-14T02:50:04Z",
       "side": 1,
       "message": "Is it possible to use Multimaps instead throughout the class?",
+      "revId": "7ae0ff876165c717cfc1c1e12f8819a8cd1c9b4d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eac690d8_85f2224f",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-14T20:26:49Z",
+      "side": 1,
+      "message": "It\u0027s a good idea but it\u0027s tricky so I think it should be a different patch. For getPossibleAnswers(), the only caller is RebindAnswersPermutationKey which calls toString() on the result. I don\u0027t want to change the format without good unit tests.",
+      "parentUuid": "2aeee834_88aeb681",
       "revId": "7ae0ff876165c717cfc1c1e12f8819a8cd1c9b4d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

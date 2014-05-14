@@ -180,6 +180,7 @@ java_library(
             "core/src/com/google/gwt/core/ext/**/*.java",
             "core/src/com/google/gwt/core/linker/**/*.java",
             "core/src/com/google/gwt/dev/About.java",
+            "core/src/com/google/gwt/dev/AnswerMap.java",
             "core/src/com/google/gwt/dev/CompilerContext.java",
             "core/src/com/google/gwt/dev/CompileTaskOptions.java",
             "core/src/com/google/gwt/dev/CompileTaskOptionsImpl.java",

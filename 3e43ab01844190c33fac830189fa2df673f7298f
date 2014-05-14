@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aaf9f8ff_be781509",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-14T00:27:29Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "3e43ab01844190c33fac830189fa2df673f7298f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_9e7d59f9",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-14T00:27:29Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "3e43ab01844190c33fac830189fa2df673f7298f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_fe729d26",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-14T00:27:29Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Arrays.",
+      "revId": "3e43ab01844190c33fac830189fa2df673f7298f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_de77e114",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-14T00:27:29Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.LinkedHashMap.",
+      "revId": "3e43ab01844190c33fac830189fa2df673f7298f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf9f8ff_3e6d2542",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-14T00:27:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3e43ab01844190c33fac830189fa2df673f7298f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

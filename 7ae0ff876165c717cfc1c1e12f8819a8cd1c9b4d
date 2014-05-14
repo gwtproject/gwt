@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2aeee834_88aeb681",
+        "filename": "dev/core/src/com/google/gwt/dev/AnswerMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-14T02:50:04Z",
+      "side": 1,
+      "message": "Is it possible to use Multimaps instead throughout the class?",
+      "revId": "7ae0ff876165c717cfc1c1e12f8819a8cd1c9b4d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

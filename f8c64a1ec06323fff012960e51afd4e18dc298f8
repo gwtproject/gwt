@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4a2cfc7a_6ed52bed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-05-15T23:37:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4e2058_9ff19608",
+      "range": {
+        "startLine": 1145,
+        "startChar": 8,
+        "endLine": 1145,
+        "endChar": 22
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4e2058_1f4cc681",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "4a2cfc7a_cec3773c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-05-15T23:37:06Z",
+      "side": 1,
+      "message": "This is really dumb about how it finds breaks, so...\n\nint a \u003d ...;\nswitch (0) {\n  case 0:\n    if (a \u003d\u003d 0) {\n      break;\n    } else {\n      break;\n    }\n  case 1:\n    doSomethingForCase(1);\n}\n\nwould reduce to\n\nint a \u003d ...;\nswitch (0) {\n  case 0:\n    if (a \u003d\u003d 0) {\n      break;\n    } else {\n      break;\n    }\n    doSomethingForCase(1);\n}\n\nwhich is illegal in java source, since javac can figure out that the \"doSomethingForCase(1);\" is not reachable.\n\nIf, at this stage of compilation, that doesn\u0027t matter and doSomethingForCase(1) will get culled through some other mechanism,  then I can remove those cases.",
+      "parentUuid": "6a4e2058_1f4cc681",
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4e2058_1f976633",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2014-05-15T23:12:12Z",
       "side": 1,
       "message": "Can we just remove via the iterators? Probably need to replace dev.util.collect by standard java.util in JBlock.",
+      "range": {
+        "startLine": 1179,
+        "startChar": 6,
+        "endLine": 1190,
+        "endChar": 7
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_4ed86726",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-05-15T23:37:06Z",
+      "side": 1,
+      "message": "Through some gnarly impl details, it would be safe.\n\ndev.util.collect will use a mutable list-type if the number of entries is \u003e 1.  Since this is the non-empty body of a switch, there should be at least two statements in that body (case + at least one other thing).",
+      "parentUuid": "6a4e2058_1f976633",
       "range": {
         "startLine": 1179,
         "startChar": 6,

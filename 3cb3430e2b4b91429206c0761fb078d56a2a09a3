@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a4e2058_094c94fa",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/installLocationMainWindow.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-05-15T21:57:09Z",
+      "side": 1,
+      "message": "How about \"wndInstalled\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "3cb3430e2b4b91429206c0761fb078d56a2a09a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

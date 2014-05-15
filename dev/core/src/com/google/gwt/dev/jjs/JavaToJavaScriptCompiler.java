@@ -1217,6 +1217,11 @@ public abstract class JavaToJavaScriptCompiler {
   }
 
   /**
+   * Encapsulates a compiler option to disable runtime cast checking.
+   */
+  private static final String CAST_CHECKING_PROPERTY = "compiler.cast.checking.disabled";
+
+  /**
    * Ending optimization passes when the rate of change has reached this value results in gaining
    * nearly all of the impact while avoiding the long tail of costly but low-impact passes.
    */
@@ -1280,6 +1285,17 @@ public abstract class JavaToJavaScriptCompiler {
   public abstract UnifiedAst precompile(RebindPermutationOracle rpo, String[] entryPointTypeNames,
       String[] additionalRootTypes, boolean singlePermutation,
       PrecompilationMetricsArtifact precompilationMetrics) throws UnableToCompleteException;
+
+  protected boolean isCastCheckingDisabled() {
+    if (module != null) {
+      ConfigurationProperty castCheckingDisabledProp =
+          (ConfigurationProperty) module.getProperties().find(CAST_CHECKING_PROPERTY);
+      if (castCheckingDisabledProp != null) {
+        return Boolean.parseBoolean(castCheckingDisabledProp.getValue());
+      }
+    }
+    return options.isCastCheckingDisabled();
+  }
 
   protected final void optimizeJavaToFixedPoint() throws InterruptedException {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE);

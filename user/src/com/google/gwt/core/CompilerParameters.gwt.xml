@@ -48,7 +48,13 @@
       is-multi-valued='false' />
    <set-configuration-property name="compiler.enum.obfuscate.names"
       value="false" />
-    
+
+  <!--
+    Encapsulates a compiler option to disable runtime cast checking.
+  -->
+  <define-configuration-property name='compiler.cast.checking.disabled'
+    is-multi-valued='false' />
+
   <!-- From here down, the properties are unsupported and are only available for test cases -->
 
   <!--

@@ -53,6 +53,7 @@ import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
@@ -568,6 +569,11 @@ public class DeadCodeElimination {
     @Override
     public void endVisit(JSwitchStatement x, Context ctx) {
       switchBlocks.remove(x.getBody());
+
+      // If it returns true, it was reduced to nothing
+      if (tryReduceSwitchWithConstantInput(x, ctx)) {
+        return;
+      }
 
       if (hasNoDefaultCase(x)) {
         removeEmptyCases(x);
@@ -1099,6 +1105,92 @@ public class DeadCodeElimination {
         }
       }
       return null;
+    }
+
+    /**
+     * Tries to removes cases and statements from switches whose expression is a
+     * constant value.
+     *
+     * @return true, if the switch was completely eliminated and replaced by its
+     * expression
+     */
+    private boolean tryReduceSwitchWithConstantInput(JSwitchStatement s, Context ctx) {
+      if (!(s.getExpr() instanceof JValueLiteral)) {
+        // the input is not a constant
+        return false;
+      }
+      JValueLiteral targetValue = (JValueLiteral) s.getExpr();
+
+      // Find the matching case
+      JCaseStatement matchingCase = null;
+      for (JStatement subStatement : s.getBody().getStatements()) {
+        if (subStatement instanceof JCaseStatement) {
+          JCaseStatement caseStatement = (JCaseStatement) subStatement;
+          if (caseStatement.getExpr() == null) {
+            // speculatively put the default case into the matching case
+            matchingCase = caseStatement;
+          } else if (caseStatement.getExpr() instanceof JValueLiteral) {
+            JValueLiteral caseValue = (JValueLiteral) caseStatement.getExpr();
+            if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
+              matchingCase = caseStatement;
+              break;
+            }
+          }
+        }
+      }
+
+      if (matchingCase == null) {
+        // the switch has no default and no matching cases
+        // the expression is a value literal, so it can go away completely
+        removeMe(s, ctx);
+        madeChanges();
+        return true;
+      }
+
+      Iterator<JStatement> it = s.getBody().getStatements().iterator();
+      List<JStatement> remove = new ArrayList<JStatement>();
+
+      // Remove things until we find the matching case
+      while (it.hasNext()) {
+        JStatement statement = it.next();
+        if (statement == matchingCase) {
+          break;
+        } else {
+          remove.add(statement);
+        }
+      }
+
+      // Until a break or a return, preserve everything that isn't a case or default
+      //
+      // The optimization is weaker than it could be.  If all paths within some block
+      // lead to a break or return, then we could drop all of the following statements
+      // within the switch.  This just looks for a non-nested break or return.
+      while (it.hasNext()) {
+        JStatement statement = it.next();
+        if (statement instanceof JBreakStatement || statement instanceof JReturnStatement) {
+          break;
+        }
+      }
+
+      // having found a break or return (or reached the end), remove all remaining
+      while (it.hasNext()) {
+        remove.add(it.next());
+      }
+
+      if (!remove.isEmpty()) {
+        // Removes the clearly dead statements.
+        madeChanges();
+        for (int i = s.getBody().getStatements().size() - 1,
+                 j = remove.size() - 1;
+             i >= 0 && j >= 0; i--) {
+          if (s.getBody().getStatements().get(i) == remove.get(j)) {
+            s.getBody().removeStmt(i);
+            j--;
+          }
+        }
+      }
+
+      return false;
     }
 
     private boolean hasNoDefaultCase(JSwitchStatement x) {

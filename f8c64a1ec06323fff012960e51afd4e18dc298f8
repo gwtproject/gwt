@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a4e2058_9ff19608",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-15T23:12:12Z",
+      "side": 1,
+      "message": "No need to call madeChanges, ctx.remove/replace in removeMe will already do that.",
+      "range": {
+        "startLine": 1145,
+        "startChar": 8,
+        "endLine": 1145,
+        "endChar": 22
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a4e2058_1f4cc681",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-15T23:12:12Z",
+      "side": 1,
+      "message": "You could also remove in this loop any instance of JCaseStatement, right?",
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a4e2058_1f976633",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-15T23:12:12Z",
+      "side": 1,
+      "message": "Can we just remove via the iterators? Probably need to replace dev.util.collect by standard java.util in JBlock.",
+      "range": {
+        "startLine": 1179,
+        "startChar": 6,
+        "endLine": 1190,
+        "endChar": 7
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2cfc7a_a8755b51",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - java.util.*.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_c86a8f6c",
+        "filename": "user/src/com/google/gwt/core/client/js/JsNamespace.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Unknown tag \u0027JsNamespace\u0027.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_e86f5379",
+        "filename": "user/test/com/google/gwt/core/CoreSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.impl.ImplTest\u0027 import.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_0865879a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_28624b93",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_485f7fc6",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_685c43d1",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_88a5f790",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_a8aabb5b",
+        "filename": "user/test/com/google/gwt/core/client/interop/package-info.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-15T07:07:26Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "64aee409a7936766f0a546c841a90671ca531a51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

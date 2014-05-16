@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2cfc7a_116dae41",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-16T16:47:13Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - java.util.*.",
+      "revId": "41d414eba18a202e83b51b01523e260d9dec9eac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_316ab22a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-16T16:47:13Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "41d414eba18a202e83b51b01523e260d9dec9eac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "4a2cfc7a_fce47149",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-05-16T18:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4e2058_e24cc687",
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4e2058_1f976633",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 2
@@ -161,6 +179,30 @@
       "side": 1,
       "message": "It is probably better to replace the dev.collect.util in JBlock so that it is not brittle to future changes.",
       "parentUuid": "4a2cfc7a_4ed86726",
+      "range": {
+        "startLine": 1179,
+        "startChar": 6,
+        "endLine": 1190,
+        "endChar": 7
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2cfc7a_9cd53557",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5740
+      },
+      "writtenOn": "2014-05-16T18:17:54Z",
+      "side": 1,
+      "message": "I tried a simple swap of list-types in JBlock, but it caused a lot of failures.  I think that it is sometimes getting back a non-ArrayList from traverse in JBlock, and then things break when I don\u0027t use dev.util.collect.Lists to manipulate that list.\n\nTo mitigate this, I\u0027m copying the result of visitor.acceptWithInsertRemoveImmutable in traverse into a fresh ArrayList.",
+      "parentUuid": "6a4e2058_2247ae62",
       "range": {
         "startLine": 1179,
         "startChar": 6,

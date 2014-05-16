@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2cfc7a_6e08cbb3",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PropertyPermutations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-16T00:14:37Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "dd02c862e308ff32eca97c3477a40efc06a641b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

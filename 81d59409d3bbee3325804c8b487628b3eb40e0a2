@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2cfc7a_11020e70",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-16T16:54:15Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.LinkedHashSet.",
+      "revId": "81d59409d3bbee3325804c8b487628b3eb40e0a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

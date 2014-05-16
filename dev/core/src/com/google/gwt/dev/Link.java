@@ -33,7 +33,7 @@ import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyPermutations;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
+import com.google.gwt.dev.cfg.SoftProps;
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
@@ -312,11 +312,9 @@ public class Link {
   private static void addSelectionPermutations(
       StandardCompilationResult compilation, Permutation perm,
       StandardLinkerContext linkerContext) {
-    for (StaticPropertyOracle propOracle : perm.getPropertyOracles()) {
-      compilation.addSelectionPermutation(computeSelectionPermutation(
-          linkerContext, propOracle));
-      compilation.addSoftPermutation(computeSoftPermutation(linkerContext,
-          propOracle));
+    for (SoftProps props : perm.getProps().getSoftProps()) {
+      compilation.addSelectionPermutation(computeSelectionPermutation(linkerContext, props));
+      compilation.addSoftPermutation(computeSoftPermutation(linkerContext, props));
     }
   }
 
@@ -344,9 +342,9 @@ public class Link {
    * Return a map giving the value of each non-trivial selection property.
    */
   private static Map<SelectionProperty, String> computeSelectionPermutation(
-      StandardLinkerContext linkerContext, StaticPropertyOracle propOracle) {
-    BindingProperty[] orderedProps = propOracle.getOrderedProps();
-    String[] orderedPropValues = propOracle.getOrderedPropValues();
+      StandardLinkerContext linkerContext, SoftProps props) {
+    BindingProperty[] orderedProps = props.getOrderedProps();
+    String[] orderedPropValues = props.getOrderedPropValues();
     Map<SelectionProperty, String> unboundProperties = new HashMap<SelectionProperty, String>();
     for (int i = 0; i < orderedProps.length; i++) {
       SelectionProperty key = linkerContext.getProperty(orderedProps[i].getName());
@@ -369,9 +367,9 @@ public class Link {
   }
 
   private static Map<SelectionProperty, String> computeSoftPermutation(
-      StandardLinkerContext linkerContext, StaticPropertyOracle propOracle) {
-    BindingProperty[] orderedProps = propOracle.getOrderedProps();
-    String[] orderedPropValues = propOracle.getOrderedPropValues();
+      StandardLinkerContext linkerContext, SoftProps props) {
+    BindingProperty[] orderedProps = props.getOrderedProps();
+    String[] orderedPropValues = props.getOrderedPropValues();
     Map<SelectionProperty, String> softProperties = new HashMap<SelectionProperty, String>();
     for (int i = 0; i < orderedProps.length; i++) {
       if (orderedProps[i].getCollapsedValues().isEmpty()) {

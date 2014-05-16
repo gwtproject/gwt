@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f10a43e_7aaad9aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBlock.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T21:21:02Z",
+      "side": 1,
+      "message": "I think you can replace this by  just\n\nvisitor.acceptWithInsertRemove(statements);",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 41
+      },
+      "revId": "63bbad6b4d22d2c4446d5782819c4281207bf86b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_9a85adf7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T21:21:02Z",
+      "side": 1,
+      "message": "You could use here statement.unconditionalControlBreak()",
+      "range": {
+        "startLine": 1162,
+        "startChar": 0,
+        "endLine": 1164,
+        "endChar": 16
+      },
+      "revId": "63bbad6b4d22d2c4446d5782819c4281207bf86b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

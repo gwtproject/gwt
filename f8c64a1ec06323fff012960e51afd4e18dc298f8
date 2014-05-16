@@ -212,6 +212,30 @@
       "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_baf4f164",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T21:20:48Z",
+      "side": 1,
+      "message": "where you using visitor.acceptWithInsertRemoveImmutable()? that one might create dev.util.collect lists\n\nit should work if you use visitor.acceptWithInsertRemove().",
+      "parentUuid": "4a2cfc7a_9cd53557",
+      "range": {
+        "startLine": 1179,
+        "startChar": 6,
+        "endLine": 1190,
+        "endChar": 7
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

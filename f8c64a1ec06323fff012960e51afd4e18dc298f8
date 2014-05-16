@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "6a4e2058_e24cc687",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T00:36:52Z",
+      "side": 1,
+      "message": "Yep, at this stage it is OK (the dataflow analyzer will for sure cull these but is kind of buggy and turned of by default now).",
+      "parentUuid": "4a2cfc7a_cec3773c",
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4e2058_1f976633",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 2
@@ -119,6 +137,30 @@
       "side": 1,
       "message": "Through some gnarly impl details, it would be safe.\n\ndev.util.collect will use a mutable list-type if the number of entries is \u003e 1.  Since this is the non-empty body of a switch, there should be at least two statements in that body (case + at least one other thing).",
       "parentUuid": "6a4e2058_1f976633",
+      "range": {
+        "startLine": 1179,
+        "startChar": 6,
+        "endLine": 1190,
+        "endChar": 7
+      },
+      "revId": "f8c64a1ec06323fff012960e51afd4e18dc298f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a4e2058_2247ae62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T00:36:52Z",
+      "side": 1,
+      "message": "It is probably better to replace the dev.collect.util in JBlock so that it is not brittle to future changes.",
+      "parentUuid": "4a2cfc7a_4ed86726",
       "range": {
         "startLine": 1179,
         "startChar": 6,

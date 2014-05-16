@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a4e2058_0b155e14",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ConfigProps.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T23:22:33Z",
+      "side": 1,
+      "message": "Can we call this ConfigurationProperties?",
+      "range": {
+        "startLine": 36,
+        "startChar": 13,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "cca1f5e20a854f8e770aa27a9aac1fc0e40b033e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_e09996f2",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/HardProps.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-16T23:22:33Z",
+      "side": 1,
+      "message": "Maybe better PermutationProperties and SoftPermutationProperties for SoftProps.",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "cca1f5e20a854f8e770aa27a9aac1fc0e40b033e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

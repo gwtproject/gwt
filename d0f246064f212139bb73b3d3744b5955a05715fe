@@ -91,6 +91,217 @@
       "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_69aa1162",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "Extending non jsinterface\u0027d classes was forbidden by the spec. There were several reasons for that to ensure correct behavior but unfortunately I cannot recall them. I need to think about it again.",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_c9c23d16",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "Not really abstract. Perhaps CollectionBase?",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_09b955b6",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "o.toString() + \"AbstractCollection\"",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_e9b501ba",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "o.toString() + \"ListImpl\"",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_69d1f1db",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "you might want to split this to\n\n o.toString() + \"FooImpl\"\n\nand another function addWithSuper\n\n addWithSuper() {\n   x \u003d super.addWithSuper() + \"FooImpl\"\n }\n\nand test them independently.",
+      "range": {
+        "startLine": 64,
+        "startChar": 26,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_4922ad2f",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "Can you add a test for the case how JsType works with public methods from non-jstyped parent classes.",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_8941e5c9",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "It might be good test to include something like following:\n\n@JsType interface X{ void a(); }\n\nclass XImpl { void a(){} }\n\n@JsType class Y extends XImpl {\n void b() {}\n}",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_c90b5db2",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "is this required?",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_091275e6",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "Perhaps we should special-case Enum#name and make it always exported?",
+      "range": {
+        "startLine": 86,
+        "startChar": 19,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_494bcde7",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "perhaps add tests for static initializer in @JsExport classes and @JStype interfaces?",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_2950998d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-17T02:18:51Z",
+      "side": 1,
+      "message": "what happens if a JSNI method returns JsType concrete object?",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

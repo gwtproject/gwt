@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f3a00c6_5175d4db",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsReportGenerationVisitor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-19T23:57:19Z",
+      "side": 1,
+      "message": "Cast is not needed here, nor is the previous instanceof check",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 24
+      },
+      "revId": "dd29da284ddb5ea6ed25322ea4c3e71e0a9e29ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

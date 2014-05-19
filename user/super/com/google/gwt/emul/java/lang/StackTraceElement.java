@@ -16,6 +16,7 @@
 package java.lang;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Included for hosted mode source compatibility. Partially implemented
@@ -37,6 +38,7 @@ public final class StackTraceElement implements Serializable {
 
   public StackTraceElement(String className, String methodName,
       String fileName, int lineNumber) {
+    assert className != null;
     this.className = className;
     this.methodName = methodName;
     this.fileName = fileName;
@@ -59,6 +61,26 @@ public final class StackTraceElement implements Serializable {
     return methodName;
   }
 
+  @Override
+  public boolean equals(Object other) {
+    // NOTE: Checking getClass after casting to STE can help pruning of getClass methods.
+    if (other instanceof StackTraceElement) {
+      StackTraceElement st = (StackTraceElement) other;
+      return StackTraceElement.class == st.getClass()
+          && lineNumber == st.lineNumber
+          && Objects.equals(methodName, st.methodName)
+          && Objects.equals(className, st.className)
+          && Objects.equals(fileName, st.fileName);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(lineNumber, className, methodName, fileName);
+  }
+
+  @Override
   public String toString() {
     return className + "." + methodName + "("
         + (fileName != null ? fileName : "Unknown Source")

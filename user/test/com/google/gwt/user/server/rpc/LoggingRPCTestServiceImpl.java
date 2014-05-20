@@ -16,6 +16,8 @@
 
 package com.google.gwt.user.server.rpc;
 
+import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
+
 import com.google.gwt.core.server.StackTraceDeobfuscator;
 import com.google.gwt.junit.linker.JUnitSymbolMapsLinker;
 import com.google.gwt.logging.server.RemoteLoggingServiceUtil;
@@ -34,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Remote service implementation for serialization of GWT core.java.util.logging emulations.
  */
-public class LoggingRPCTestServiceImpl extends HybridServiceServlet implements
+public class LoggingRPCTestServiceImpl extends RemoteServiceServlet implements
     LoggingRPCTestService {
 
   @Override
@@ -85,4 +87,30 @@ public class LoggingRPCTestServiceImpl extends HybridServiceServlet implements
   private String getJunitSymbolMapsPath() {
     return getRequestModuleBasePath() + "/" + JUnitSymbolMapsLinker.SYMBOL_MAP_DIR;
   }
+
+  /**
+   * Extract the module's base path from the current request.
+   *
+   * @return the module's base path, modulo protocol and host, as reported by
+   *         {@link com.google.gwt.core.client.GWT#getModuleBaseURL()} or
+   *         <code>null</code> if the request did not contain the
+   *         {@value com.google.gwt.user.client.rpc.RpcRequestBuilder#MODULE_BASE_HEADER} header
+   */
+  protected final String getRequestModuleBasePath() {
+    try {
+      String header = getThreadLocalRequest().getHeader(MODULE_BASE_HEADER);
+      if (header == null) {
+        return null;
+      }
+      String path = new URL(header).getPath();
+      String contextPath = getThreadLocalRequest().getContextPath();
+      if (!path.startsWith(contextPath)) {
+        return null;
+      }
+      return path.substring(contextPath.length());
+    } catch (MalformedURLException e) {
+      return null;
+    }
+  }
+
 }

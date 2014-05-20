@@ -21,6 +21,7 @@ import java.io.Serializable;
 /**
  * An encapsulation of a JSON map containing a set of castable type ids.
  */
+@Deprecated
 public interface CastableTypeMap extends Serializable {
 
     /**

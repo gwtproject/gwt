@@ -84,8 +84,23 @@ public class CloseableJarHandler extends sun.net.www.protocol.jar.Handler {
       return jarUrlConnection.getContentEncoding();
     }
 
-    // No need to override getContentLegth() and getContentLengthLong() because they get rerouted
-    // to getHeaderField...()
+    @Override
+    public int getContentLength() {
+      return jarUrlConnection.getContentLength();
+    }
+
+    /**
+     * A Java 7 only method for getting the number of bytes in a resource referenced by URL.
+     */
+    public long getContentLengthLong() {
+      int contentLength = jarUrlConnection.getContentLength();
+      if (contentLength == -1) {
+        throw new RuntimeException("Content length could not be read because it exceeded "
+            + Integer.MAX_VALUE + " bytes.");
+      }
+      return contentLength;
+    }
+
     @Override
     public String getContentType() {
       return jarUrlConnection.getContentType();

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5f3a00c6_6b60dd16",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-20T15:39:20Z",
+      "side": 1,
+      "message": "Done.\n\nI will keep the assert as we are not enforcing many of this null checks. After introducing the checked-mode in compiler, we should go over this assertions.",
+      "parentUuid": "4a531cfd_df9327d6",
+      "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a3da49e_dddfb770",
         "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-20T09:01:19Z",
       "side": 1,
       "message": "OpenJDK 7 only checks for \u0027instanceof\u0027.",
+      "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f3a00c6_2be5356d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-20T15:39:20Z",
+      "side": 1,
+      "message": "Done. (I misread the declaringClass part of the implementation)",
+      "parentUuid": "0a3da49e_dddfb770",
       "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +107,42 @@
     },
     {
       "key": {
+        "uuid": "5f3a00c6_0610286c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-20T15:39:20Z",
+      "side": 1,
+      "message": "\"Checking getClass after casting to STE can help pruning of getClass methods\".\n\nIt was basically aiding the compiler. Equals method is unlikely to be pruned or inlined which will result in a getClass call over Object which could enforce compiler to keep all getClass methods. With the initial instanceof check and casting, compiler knows getClass will only be called in the subclasses of STE.",
+      "parentUuid": "2a58a819_a9fe31d2",
+      "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f3a00c6_0b4f11a3",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-20T15:39:20Z",
+      "side": 1,
+      "message": "In GWT -at least for the common case and small classes- I don\u0027t think benefits of early other\u003d\u003dthis exit outweighs the cost.",
+      "parentUuid": "4a531cfd_9f727ff8",
+      "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a58a819_3e9a7590",
         "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2014-05-20T09:01:19Z",
       "side": 1,
       "message": "We know className is never null, so we can use\n\n className.equals(st.className)\n\nor will the GWT compiler be smart enough to a) inline equals() and then b) optimize out the null-check?",
+      "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f3a00c6_46df5072",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-20T15:39:20Z",
+      "side": 1,
+      "message": "I didn\u0027t bother because we weren\u0027t enforcing the null checks and we could potentially break existing usages. Hopefully compiler will take care of the extra check.",
+      "parentUuid": "2a58a819_3e9a7590",
       "revId": "5c93aad25fb3d782ef368937433c479df2cef6c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -15,59 +15,43 @@
  */
 package com.google.gwt.user.server.rpc;
 
-import com.google.gwt.rpc.server.ClientOracle;
-import com.google.gwt.rpc.server.RpcServlet;
+import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
+
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.SerializationException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.zip.GZIPOutputStream;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * EXPERIMENTAL and subject to change. Do not use this in production code.
  * <p>
- * This RemoteServiceServlet provides support for both legacy and deRPC clients
- * at the cost of additional runtime overhead and API complexity.
+ * This RemoteServiceServlet provides support for GWT-RPC clients.
  */
-public class HybridServiceServlet extends RpcServlet implements
+public class HybridServiceServlet extends AbstractRemoteServiceServlet implements
     SerializationPolicyProvider {
 
-  /**
-   * Records permutations for which {@link #getClientOracle()} should return
-   * <code>null</code>.
-   */
-  private final Set<String> legacyPermutations = new HashSet<String>();
-
+  private static final boolean DUMP_PAYLOAD = Boolean.getBoolean("gwt.rpc.dumpPayload");
   /**
    * A cache of moduleBaseURL and serialization policy strong name to
    * {@link SerializationPolicy}.
    */
   private final Map<String, SerializationPolicy> serializationPolicyCache = new HashMap<String, SerializationPolicy>();
 
-  /**
-   * This method will return <code>null</code> instead of throwing an exception.
-   */
   @Override
-  public ClientOracle getClientOracle() {
-    String strongName = getPermutationStrongName();
-    if (legacyPermutations.contains(strongName)) {
-      return null;
-    }
-    try {
-      return super.getClientOracle();
-    } catch (SerializationException e) {
-      legacyPermutations.add(strongName);
-      return null;
-    }
-  }
-
   public final SerializationPolicy getSerializationPolicy(String moduleBaseURL,
       String strongName) {
 
@@ -87,7 +71,8 @@ public class HybridServiceServlet extends RpcServlet implements
               + strongName
               + "' for module '"
               + moduleBaseURL
-              + "'; a legacy, 1.3.3 compatible, serialization policy will be used.  You may experience SerializationExceptions as a result.");
+              + "'; a legacy, 1.3.3 compatible, serialization policy will be used."
+              + "  You may experience SerializationExceptions as a result.");
       serializationPolicy = RPC.getDefaultSerializationPolicy();
     }
 
@@ -98,26 +83,40 @@ public class HybridServiceServlet extends RpcServlet implements
     return serializationPolicy;
   }
 
-  @Override
-  public void processCall(ClientOracle clientOracle, String payload,
+  /**
+   * Extract the module's base path from the current request.
+   *
+   * @return the module's base path, modulo protocol and host, as reported by
+   *         {@link com.google.gwt.core.client.GWT#getModuleBaseURL()} or
+   *         <code>null</code> if the request did not contain the
+   *         {@value com.google.gwt.user.client.rpc.RpcRequestBuilder#MODULE_BASE_HEADER} header
+   */
+  protected final String getRequestModuleBasePath() {
+    try {
+      String header = getThreadLocalRequest().getHeader(MODULE_BASE_HEADER);
+      if (header == null) {
+        return null;
+      }
+      String path = new URL(header).getPath();
+      String contextPath = getThreadLocalRequest().getContextPath();
+      if (!path.startsWith(contextPath)) {
+        return null;
+      }
+      return path.substring(contextPath.length());
+    } catch (MalformedURLException e) {
+      return null;
+    }
+  }
+  public void processCall(String payload,
       OutputStream stream) throws SerializationException {
 
-    if (!Character.isDigit(payload.charAt(0))) {
-      // Picking up null returned from getClientOracle()
-      if (clientOracle == null) {
-        throw new SerializationException("No ClientOracle for permutation "
-            + getPermutationStrongName());
-      }
-      super.processCall(clientOracle, payload, stream);
-    } else {
-      String toReturn = processCall(payload);
-      onAfterResponseSerialized(toReturn);
+    String toReturn = processCall(payload);
+    onAfterResponseSerialized(toReturn);
 
-      try {
-        stream.write(toReturn.getBytes(RPCServletUtils.CHARSET_UTF8));
-      } catch (IOException e) {
-        throw new SerializationException("Unable to commit bytes", e);
-      }
+    try {
+      stream.write(toReturn.getBytes(RPCServletUtils.CHARSET_UTF8));
+    } catch (IOException e) {
+      throw new SerializationException("Unable to commit bytes", e);
     }
   }
 
@@ -180,4 +179,87 @@ public class HybridServiceServlet extends RpcServlet implements
           serializationPolicy);
     }
   }
+
+  @Override
+  public final void processPost(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException,
+      SerializationException {
+
+    // Read the request fully.
+    String requestPayload = readContent(request);
+    if (DUMP_PAYLOAD) {
+      System.out.println(requestPayload);
+    }
+
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+
+    // Configure the OutputStream based on configuration and capabilities
+    boolean canCompress = RPCServletUtils.acceptsGzipEncoding(request)
+        && shouldCompressResponse(request, response);
+
+    OutputStream out;
+    if (DUMP_PAYLOAD) {
+      out = new ByteArrayOutputStream();
+
+    } else if (canCompress) {
+      RPCServletUtils.setGzipEncodingHeader(response);
+      out = new GZIPOutputStream(response.getOutputStream());
+
+    } else {
+      out = response.getOutputStream();
+    }
+
+    // Invoke the core dispatching logic, which returns the serialized result.
+    processCall(requestPayload, out);
+
+    if (DUMP_PAYLOAD) {
+      byte[] bytes = ((ByteArrayOutputStream) out).toByteArray();
+      System.out.println(new String(bytes, "UTF-8"));
+      response.getOutputStream().write(bytes);
+    } else if (canCompress) {
+      /*
+       * We want to write the end of the gzip data, but not close the underlying
+       * OutputStream in case there are servlet filters that want to write
+       * headers after processPost().
+       */
+      ((GZIPOutputStream) out).finish();
+    }
+  }
+
+  /**
+   * Determines whether the response to a given servlet request should or should
+   * not be GZIP compressed. This method is only called in cases where the
+   * requester accepts GZIP encoding.
+   * <p>
+   * This implementation currently returns <code>true</code> if the request
+   * originates from a non-local address. Subclasses can override this logic.
+   * </p>
+   *
+   * @param request the request being served
+   * @param response the response that will be written into
+   * @return <code>true</code> if responsePayload should be GZIP compressed,
+   *         otherwise <code>false</code>.
+   */
+  protected boolean shouldCompressResponse(HttpServletRequest request,
+      HttpServletResponse response) {
+    return !isRequestFromLocalAddress();
+  }
+
+  /**
+   * Utility function to determine if the thread-local request originates from a
+   * local address.
+   */
+  private boolean isRequestFromLocalAddress() {
+    try {
+      InetAddress addr = InetAddress.getByName(getThreadLocalRequest().getRemoteAddr());
+
+      return InetAddress.getLocalHost().equals(addr)
+          || addr.isLoopbackAddress() || addr.isSiteLocalAddress()
+          || addr.isLinkLocalAddress();
+    } catch (UnknownHostException e) {
+      return false;
+    }
+  }
+
 }

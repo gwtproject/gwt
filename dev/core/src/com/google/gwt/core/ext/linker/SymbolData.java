@@ -84,6 +84,8 @@ public interface SymbolData extends Serializable {
   /**
    * Returns a JSON map of castableTypes.
    */
+
+  @Deprecated
   CastableTypeMap getCastableTypeMap();
 
   /**

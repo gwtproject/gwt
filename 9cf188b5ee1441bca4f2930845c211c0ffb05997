@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7f8344c5_b7517ae9",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-21T22:45:48Z",
+      "side": 1,
+      "message": "Anything under sun.* is implementation detail of JDK. You should be able to implement a custom protocol handler by extending java.net.URLStreamHandler. Let\u0027s pair on this.",
+      "parentUuid": "7f8344c5_711ea2f9",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff281483_6b221699",
         "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
         "patchSetId": 1

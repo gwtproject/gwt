@@ -8,24 +8,15 @@
 // $wnd - the location where the bootstrap module is defined. Should also
 //        be the location where the __gwtStatsEvent is defined
 
-var wndInstalled = false;
-
 function getInstallLocationDoc() {
-  setupInstallLocation();
   return window.document;
 }
 
 // This function is left for compatibility
 // and may be used by custom linkers
 function getInstallLocation() {
-  return getInstallLocationDoc().body;
+  return window.document.body;
 }
 
 function setupInstallLocation() {
-  if (wndInstalled) { return; }
-  var script = window.document.createElement('script');
-  script.language='javascript';
-  script.text = "var $wnd = window;";
-  window.document.body.appendChild(script);
-  wndInstalled = true;
 }

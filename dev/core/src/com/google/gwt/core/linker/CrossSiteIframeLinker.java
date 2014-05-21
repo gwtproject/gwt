@@ -408,7 +408,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     // By default, $wnd is not set when the module starts, but a replacement for
     // installLocationIframe.js may set it.
 
-    out.print("var $wnd = $wnd || window.parent;");
+    out.print("var $wnd = $wnd || window.parent || window;");
     out.newlineOpt();
     out.print("var __gwtModuleFunction = $wnd." + context.getModuleFunctionName() + ";");
     out.newlineOpt();

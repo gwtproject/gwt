@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff281483_4ba4fad9",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-21T02:18:41Z",
+      "side": 1,
+      "message": "Can we avoid using non public apis (ie. sun.*)?",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff281483_6b221699",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-21T02:18:41Z",
+      "side": 1,
+      "message": "Why is this broken in the first place given that getHeaderField is already forwarded?",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff281483_d87d62c2",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-21T02:18:41Z",
+      "side": 1,
+      "message": "Nit perhaps instead just say:\n\n // No @Override as the method is only available in Java 7\n public long getContentLengthLong() {\n ....",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

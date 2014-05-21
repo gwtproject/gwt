@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7f8344c5_711ea2f9",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-21T21:19:39Z",
+      "side": 1,
+      "message": "no, i believe this is the standard way to implement a custom protocol handler",
+      "parentUuid": "ff281483_4ba4fad9",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff281483_6b221699",
         "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7f8344c5_310eda98",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-21T21:19:39Z",
+      "side": 1,
+      "message": "sun.net.www.protocol.jar.JarURLConnection (which is the active subclass of java.net.JarURLConnection that is actually in use here) has a custom implementation of getContentLength() that does not make use of getHeaderField().\n\nas a result it does not matter that getHeaderField() is forwarded, if you\u0027re not forwarding getContentLength() the result will be wrong.",
+      "parentUuid": "ff281483_6b221699",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff281483_d87d62c2",
         "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-21T02:18:41Z",
       "side": 1,
       "message": "Nit perhaps instead just say:\n\n // No @Override as the method is only available in Java 7\n public long getContentLengthLong() {\n ....",
+      "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f8344c5_51135ebb",
+        "filename": "dev/core/src/com/google/gwt/dev/url/CloseableJarHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-21T21:19:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff281483_d87d62c2",
       "revId": "9cf188b5ee1441bca4f2930845c211c0ffb05997",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

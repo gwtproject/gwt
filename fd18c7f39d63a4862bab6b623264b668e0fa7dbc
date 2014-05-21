@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a58a819_29e88189",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-21T08:59:25Z",
+      "side": 1,
+      "message": "nit: compare className before methodName to keep the comparison order more logical (I can understand that lineNumber is checked first, as I suspect numbers are faster to compare than strings, particularly as it cannot be null)",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 52
+      },
+      "revId": "fd18c7f39d63a4862bab6b623264b668e0fa7dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

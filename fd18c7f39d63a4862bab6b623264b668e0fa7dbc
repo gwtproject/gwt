@@ -22,6 +22,30 @@
       "revId": "fd18c7f39d63a4862bab6b623264b668e0fa7dbc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f8344c5_02e82a8a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/StackTraceElement.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-21T16:31:02Z",
+      "side": 1,
+      "message": "We don\u0027t put classnames when we generate the stack trace so it is usually not a differentiating factor.\nEven it exists method name will be probably be shorter than classname (vs. iterating all com.google.gwt only to figure out the rest is different).",
+      "parentUuid": "2a58a819_29e88189",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 52
+      },
+      "revId": "fd18c7f39d63a4862bab6b623264b668e0fa7dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -23,9 +23,6 @@ function getInstallLocation() {
 
 function setupInstallLocation() {
   if (wndInstalled) { return; }
-  var script = window.document.createElement('script');
-  script.language='javascript';
-  script.text = "var $wnd = window;";
-  window.document.body.appendChild(script);
+  window.$wnd = window;
   wndInstalled = true;
 }

@@ -118,6 +118,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a531cfd_4d2f8e79",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-22T15:01:44Z",
+      "side": 0,
+      "message": "Note: m2eclipse is bundled in every version of Eclipse for Java developers for at least 2 years (IIRC). So \"you don\u0027t need m2eclipse\" is not a compelling argument.\n\nBut OK to leave the eclipse:eclipse plugin config here, assuming the Google Plugin for Eclipse works OK with that config (i.e. no GWT_CONTAINER classpathContainer, just the GWT jars in the build path). I\u0027m opposed to configuring a GWT_CONTAINER like done in gwt-site-webapp though.\n\nShould we leave the comment about AspectJ then? Maybe we could remove it and use the latest version of the plugin? (people using AspectJ and Maven should know what they\u0027re doing IMO)",
+      "parentUuid": "2a58a819_1b5a1e2a",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

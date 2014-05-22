@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bfa05c5b_bc0081cd",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/CastableTypeMap.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-22T17:00:02Z",
+      "side": 1,
+      "message": "Done. Removed.",
+      "parentUuid": "3f8d4cf3_d4067c39",
+      "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f8d4cf3_f4b62016",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/SymbolData.java",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2014-05-22T01:53:50Z",
       "side": 1,
       "message": "So are we sure deRpc was the only use case?",
+      "range": {
+        "startLine": 85,
+        "startChar": 5,
+        "endLine": 85,
+        "endChar": 12
+      },
+      "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfa05c5b_3cc8f158",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/SymbolData.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-22T17:00:02Z",
+      "side": 1,
+      "message": "Yes. SymbolData is only used by linkers and that method what only called by ClientOracleLinker.",
+      "parentUuid": "3f8d4cf3_f4b62016",
       "range": {
         "startLine": 85,
         "startChar": 5,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "bfa05c5b_9cd6e5f7",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-22T17:00:02Z",
+      "side": 1,
+      "message": "I thought it was sorted by name. Moved to the end.",
+      "parentUuid": "3f8d4cf3_b42418cf",
+      "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f8d4cf3_34480872",
         "filename": "user/src/com/google/gwt/user/server/rpc/HybridServiceServlet.java",
         "patchSetId": 4
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "bfa05c5b_fc7b6944",
+        "filename": "user/src/com/google/gwt/user/server/rpc/HybridServiceServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-22T17:00:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f8d4cf3_34480872",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f8d4cf3_945d5424",
         "filename": "user/test/com/google/gwt/user/server/rpc/LoggingRPCTestServiceImpl.java",
         "patchSetId": 4
@@ -93,6 +177,24 @@
       "writtenOn": "2014-05-22T01:53:50Z",
       "side": 1,
       "message": "Perhaps this should be in RemoteServiceServlet? I remember seeing this code elsewhere - probably in unit test infra....",
+      "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_d03ad1b8",
+        "filename": "user/test/com/google/gwt/user/server/rpc/LoggingRPCTestServiceImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-22T17:00:02Z",
+      "side": 1,
+      "message": "Moved to RemoveServiceServlet.",
+      "parentUuid": "3f8d4cf3_945d5424",
       "revId": "2c8cbfc9740637a02d2bd4ee876856cbbb4cb82c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

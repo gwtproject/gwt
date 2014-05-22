@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f3f0cb7_81c87d8c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-22T22:46:38Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - org.eclipse.jdt.internal.compiler.lookup.*.",
+      "revId": "3605116dad22fccccd11cf07c0196f290fda945e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_61cd999a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-22T22:46:38Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "3605116dad22fccccd11cf07c0196f290fda945e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_41d29538",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-22T22:46:38Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "3605116dad22fccccd11cf07c0196f290fda945e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_21b79114",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-22T22:46:38Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "3605116dad22fccccd11cf07c0196f290fda945e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_01b48d0b",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-22T22:46:38Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3605116dad22fccccd11cf07c0196f290fda945e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

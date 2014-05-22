@@ -142,6 +142,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfa05c5b_dc578ddd",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-05-22T16:00:10Z",
+      "side": 0,
+      "message": "I suggest ditching mvn eclipse:eclipse b/c it has problems in the way it builds the eclipse project settings. Once the project is built with mvn eclipse:eclipse, you can not update the maven project in Eclipse using maven update. You have to manually do this on the command line.. I\u0027ve always found m2e import does a better job with setting up the project and document that in all my documents. And since Eclipse is being used, its all IDE, so import maven project, and update maven project, no need for any command line to import gwt project into eclipse, and if it needs to be fixed, thats easy re-import the project. :)",
+      "parentUuid": "4a531cfd_4d2f8e79",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -94,6 +94,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a58a819_1b5a1e2a",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-05-22T13:52:03Z",
+      "side": 0,
+      "message": "mvn eclipse:eclipse is used widely, I use it more than m2eclipse since some times I have had problems.  Of course you need google-eclipse plugin but not m2eclipse.\nRunning eclipse:eclipse you dont need to download the SDK, since it uses .jars in .m2/repository",
+      "parentUuid": "aa93b868_2b52b924",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

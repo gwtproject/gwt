@@ -16,6 +16,24 @@
       "revId": "2c9c06b4709e3ac13990894c894f315dc243c03c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a3da49e_95098391",
+        "filename": "eclipse/README.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-05-22T14:52:55Z",
+      "side": 1,
+      "message": "Because there\u0027s no GWT_ROOT variable actually ;-)\nThe GWT_ROOT variable is only usable for linking resources, not for \"extending\" it.",
+      "parentUuid": "0a3da49e_750b37b1",
+      "revId": "2c9c06b4709e3ac13990894c894f315dc243c03c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

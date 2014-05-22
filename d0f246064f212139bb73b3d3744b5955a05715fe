@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "7f10a43e_a38de8df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_0085aa47",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_409a8262",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 7
@@ -42,6 +60,24 @@
         "endLine": 714,
         "endChar": 40
       },
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f10a43e_a0d6fecd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "I got an NPE on this line for some reason, I\u0027ll try running without it and see why",
+      "parentUuid": "7f10a43e_409a8262",
       "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "7f10a43e_c367bc61",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1903,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_209f8e52",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_4095e226",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 7
@@ -94,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "7f10a43e_eedce7f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "fixed (argh, I tried IntelliJ 13.1 \"import eclipse codestyle\" feature and it made it worse. Had to use a diff tool to fix)",
+      "parentUuid": "7f10a43e_4095e226",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_69aa1162",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -105,6 +177,24 @@
       "writtenOn": "2014-05-17T02:18:51Z",
       "side": 1,
       "message": "Extending non jsinterface\u0027d classes was forbidden by the spec. There were several reasons for that to ensure correct behavior but unfortunately I cannot recall them. I need to think about it again.",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff281483_97d0ce83",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Neither can I, fortunately, I don\u0027t need it for this test, because what I\u0027m using for my other project is something like this:\n\nList extends Collection, JsListInterface {}\n\nTo cause List to be a JsInterface without putting @JsInterface on List itself.\n\nI just need to fix the test.",
+      "parentUuid": "7f10a43e_69aa1162",
       "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -134,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "ff281483_d799b6f2",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_c9c23d16",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_09b955b6",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -157,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "ff281483_176f3e10",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_09b955b6",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_e9b501ba",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -168,6 +294,24 @@
       "writtenOn": "2014-05-17T02:18:51Z",
       "side": 1,
       "message": "o.toString() + \"ListImpl\"",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff281483_f783927a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_e9b501ba",
       "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -248,6 +392,24 @@
     },
     {
       "key": {
+        "uuid": "ff281483_57470684",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Yes, because name2() is a prototype method",
+      "parentUuid": "7f10a43e_c90b5db2",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_091275e6",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -271,6 +433,24 @@
     },
     {
       "key": {
+        "uuid": "ff281483_e2e50e44",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "There might harm enum obfuscation and increase bloat (due to enum() always assumed to be called).  We need to provide a solution for \u0027interop overlay\u0027 I think, which is, how to configure classes you don\u0027t own and can\u0027t modify to be jsinterop. I\u0027d save that for a later cl.",
+      "parentUuid": "7f10a43e_091275e6",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_494bcde7",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -288,6 +468,24 @@
     },
     {
       "key": {
+        "uuid": "9f9d5828_4ae40b49",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f10a43e_494bcde7",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f10a43e_2950998d",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -299,6 +497,24 @@
       "writtenOn": "2014-05-17T02:18:51Z",
       "side": 1,
       "message": "what happens if a JSNI method returns JsType concrete object?",
+      "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f9d5828_6afc67db",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-05-22T23:39:44Z",
+      "side": 1,
+      "message": "Right now there\u0027s no difference, I\u0027m going to introduce code to handle @JsProperty overrides on concrete classes in a separate patch as that requires more complicated class setup.",
+      "parentUuid": "7f10a43e_2950998d",
       "revId": "d0f246064f212139bb73b3d3744b5955a05715fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

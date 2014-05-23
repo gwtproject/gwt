@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f3f0cb7_e1586966",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PermProps.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-23T01:49:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.collect.Maps.",
+      "revId": "459649e4b4fa4642a6ed25d1745a3b1eae018a37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_c155652c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PermProps.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-23T01:49:47Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Map.",
+      "revId": "459649e4b4fa4642a6ed25d1745a3b1eae018a37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_a1426172",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-23T01:49:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsObjectLiteral.",
+      "revId": "459649e4b4fa4642a6ed25d1745a3b1eae018a37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3f0cb7_81475d83",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-05-23T01:49:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsPropertyInitializer.",
+      "revId": "459649e4b4fa4642a6ed25d1745a3b1eae018a37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

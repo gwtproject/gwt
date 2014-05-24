@@ -16,6 +16,7 @@
 <module type="fileset">
   <define-linker name="xsiframe" class="com.google.gwt.core.linker.CrossSiteIframeLinker" />
   <define-linker name="direct_install" class="com.google.gwt.core.linker.DirectInstallLinker" />
+  <define-linker name="csp_linker" class="com.google.gwt.core.linker.CspCrossSiteIframeLinker" />
   <define-configuration-property name="xsiframe.failIfScriptTag" is-multi-valued="FALSE"/>
 
   <!-- Properties controlling behavior of the linker (overridden by Super Dev Mode) -->

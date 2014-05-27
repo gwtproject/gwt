@@ -575,7 +575,13 @@ public class JProgram extends JNode {
            */
           JReferenceType leafRefType1 = (JReferenceType) leafType1;
           JReferenceType leafRefType2 = (JReferenceType) leafType2;
-          JReferenceType leafGeneralization = generalizeTypes(leafRefType1, leafRefType2);
+
+          /**
+           * Never generalize arrays to arrays for {@link JNonNullType} as it is a safe conservative
+           * option. Array initialization is not accounted for in {@link TypeTightener}.
+           */
+          JReferenceType leafGeneralization =
+              generalizeTypes(leafRefType1, leafRefType2).getUnderlyingType();
           return getTypeArray(leafGeneralization, dims1);
 
         } else {

@@ -180,7 +180,7 @@ public class ComputeCastabilityInformation {
     }
 
     /**
-     * Create the mapping from a class to its query types.
+     * Create the mapping from a class to the types it can be cast to.
      */
     private void computeCastMap(JReferenceType type) {
       if (type == null || alreadyRan.contains(type)) {

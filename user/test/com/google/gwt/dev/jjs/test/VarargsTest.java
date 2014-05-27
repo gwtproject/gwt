@@ -24,6 +24,8 @@ import java.util.Arrays;
  */
 public class VarargsTest extends GWTTestCase {
 
+  private static class Foo { }
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
@@ -59,7 +61,18 @@ public class VarargsTest extends GWTTestCase {
     assertTrue(Arrays.equals(expected, actual));
   }
 
+  /**
+   * Test for issue 8736.
+   */
+  public void testNullEmptyFoo() {
+    assertNotNull(fooVararg());
+  }
+
   private String[] vararg(String... args) {
+    return args;
+  }
+
+  private Foo[] fooVararg(Foo... args) {
     return args;
   }
 

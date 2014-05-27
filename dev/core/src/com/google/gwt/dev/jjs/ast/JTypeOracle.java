@@ -492,6 +492,10 @@ public class JTypeOracle implements Serializable {
         }
 
         if (dims == qDims) {
+          if (qLeafType instanceof JNullType && !instantiatedTypes.contains(leafType)) {
+            // An a array of a non instantiable type can be trivially cast to null[].
+            return true;
+          }
           if (leafType instanceof JReferenceType && qLeafType instanceof JReferenceType) {
             return canTriviallyCast((JReferenceType) leafType, (JReferenceType) qLeafType);
           }

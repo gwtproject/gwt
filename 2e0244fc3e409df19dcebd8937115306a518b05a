@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ffd0472_860e1a96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-27T19:24:08Z",
+      "side": 1,
+      "message": "embed which properties? all of them?",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "2e0244fc3e409df19dcebd8937115306a518b05a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ffd0472_a66a3e2a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-05-27T19:24:08Z",
+      "side": 1,
+      "message": "so it\u0027s like: List\u003cList\u003cPair\u003cString, String\u003e\u003e\u003e foo;\n\nwhat is the meaning of the data i get back from foo.get(0) versus foo.get(1)?\n\nboth return a List\u003cPair\u003cString, String\u003e\u003e, what is the semantic meaning of each of these lists?",
+      "range": {
+        "startLine": 455,
+        "startChar": 6,
+        "endLine": 455,
+        "endChar": 93
+      },
+      "revId": "2e0244fc3e409df19dcebd8937115306a518b05a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

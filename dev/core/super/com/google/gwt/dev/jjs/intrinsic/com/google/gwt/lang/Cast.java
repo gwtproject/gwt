@@ -158,7 +158,8 @@ final class Cast {
 
     // fast check for $wnd versions when CastNormalizer can pass function refs directly
     // TODO(cromwellian) restore JSymbolLiteral to allow JS reference literals to be passed through
-    if (typeof(jsType) === 'function'  && obj instanceof jsType) {
+    var jsTypeCstr = window[jsType];
+    if (typeof(jsTypeCstr) === 'function'  && obj instanceof jsTypeCstr) {
         return true;
     }
 

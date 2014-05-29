@@ -188,7 +188,7 @@ public abstract class StackTraceDeobfuscator {
     // Warm the symbol cache for all symbols in this stack trace.
     Set<String> requiredSymbols = new HashSet<String>();
     for (StackTraceElement ste : st) {
-      requiredSymbols.add(ste.getMethodName());
+      requiredSymbols.add(normalizeMethodName(ste.getMethodName()));
     }
     loadSymbolMap(strongName, requiredSymbols);
 
@@ -214,7 +214,8 @@ public abstract class StackTraceDeobfuscator {
     int fragmentId = -1;
 
     String steFilename = ste.getFileName();
-    String symbolData = loadOneSymbol(strongName, ste.getMethodName());
+    String steMethodName = normalizeMethodName(ste.getMethodName());
+    String symbolData = loadOneSymbol(strongName, steMethodName);
 
     boolean sourceMapCapable = false;
 
@@ -245,7 +246,7 @@ public abstract class StackTraceDeobfuscator {
           methodName = ref[1];
         } else {
           declaringClass = ste.getClassName();
-          methodName = ste.getMethodName();
+          methodName = steMethodName;
         }
 
         // parts[3] contains the source file URI or "Unknown"
@@ -412,6 +413,12 @@ public abstract class StackTraceDeobfuscator {
 
     symbolCache.putAll(strongName, toReturn);
     return toReturn;
+  }
+
+  private static String normalizeMethodName(String name) {
+    // IE puts "at " before method name which makes the decoding not functional
+    if (name.startsWith("at ")) return name.substring(3);
+    else return name;
   }
 
   /**

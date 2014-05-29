@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffde5426_811d5cfa",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "Revert.",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffde5426_c10e84c4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "code style",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 47
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffde5426_614bf0e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "codestyle",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 21
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffde5426_8150fc8f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "codestyle",
+      "range": {
+        "startLine": 374,
+        "startChar": 1,
+        "endLine": 374,
+        "endChar": 22
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fd54c00_a63b5256",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "This is the list of all the methods that x overrides, right?  Do you mind adding a JavaDoc to getAllOverridenMethods?",
+      "range": {
+        "startLine": 76,
+        "startChar": 30,
+        "endLine": 76,
+        "endChar": 53
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfc43063_d57d5cc2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "Do you mind keeping the nesting as before?",
+      "range": {
+        "startLine": 628,
+        "startChar": 4,
+        "endLine": 630,
+        "endChar": 4
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfc43063_b580e06f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "Do you mind keeping the nesting as before?",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfc43063_f57a58c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "formatting.",
+      "range": {
+        "startLine": 2596,
+        "startChar": 1,
+        "endLine": 2596,
+        "endChar": 6
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff8c944a_d77d56c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "Is there a reason to distinguish between \"\" and null names? Maybe refactor this chunk into clearExportedNames().",
+      "range": {
+        "startLine": 1942,
+        "startChar": 0,
+        "endLine": 1958,
+        "endChar": 11
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff8c944a_c20cb25e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-05-29T00:48:00Z",
+      "side": 1,
+      "message": "I see that this is related to my comment in GwtAstBuilder. \n\nI prefer that to be explicit by adding the class wide export flag in JDeclared type then you can a method in JDeclaredType::hasAnyExport(). Finally decide either to leave the exportedNames as null or as \"\".\n\nThen in GwtAstBuilder it is only a matter of adding setting the  flag.",
+      "range": {
+        "startLine": 862,
+        "startChar": 4,
+        "endLine": 870,
+        "endChar": 20
+      },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

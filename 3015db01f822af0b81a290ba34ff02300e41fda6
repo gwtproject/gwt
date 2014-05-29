@@ -217,6 +217,57 @@
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff8c944a_82cb8a2d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-29T01:26:17Z",
+      "side": 1,
+      "message": "Can you add a test for the case how JsType works with public methods from non-jstyped parent classes?",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff8c944a_c20e72c4",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-29T01:26:17Z",
+      "side": 1,
+      "message": "Can you add a test to show following works as expected:\n\n @JsType\n interface X{ void a(); }\n\n\n class XImpl { void a(){} }\n\n\n @JsType \n class Y extends XImpl { void b() {} }\n\n\n // a() should exists and shouldn\u0027t be obfuscated as well as b()",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff8c944a_4277e255",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-29T01:26:17Z",
+      "side": 1,
+      "message": "what about static initializer on a JsInterface?",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f33447f_2b66e9f6",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-30T18:36:09Z",
+      "side": 1,
+      "message": "Do we need to remove these stuff as well?",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "93a19657e152a7d4370241be9df693737c53b017",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f33447f_0b5d2521",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-05-30T18:36:09Z",
+      "side": 1,
+      "message": "Add com.google.gwt.rpc.client.impl to excluded packages and remove from here?",
+      "range": {
+        "startLine": 180,
+        "startChar": 19,
+        "endLine": 180,
+        "endChar": 25
+      },
+      "revId": "93a19657e152a7d4370241be9df693737c53b017",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

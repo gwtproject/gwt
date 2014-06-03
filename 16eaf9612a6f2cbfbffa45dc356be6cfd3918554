@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfcdbca8_00dac382",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceEmulTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-03T01:59:29Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "16eaf9612a6f2cbfbffa45dc356be6cfd3918554",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfcdbca8_e0dea774",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceEmulTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-03T01:59:29Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "16eaf9612a6f2cbfbffa45dc356be6cfd3918554",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

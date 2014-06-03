@@ -93,10 +93,6 @@ function maven-gwt() {
     zip -d $GWT_EXTRACT_DIR/requestfactory-${i}.jar org/json/*
   done
 
-  # Remove bundled org/json classes from gwt-dev
-  echo "Removing org.json classes from gwt-dev"
-  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar org/json/*
-
   # Silently skip Elemental if it doesn't exist
   gwtLibs='dev user servlet codeserver'
   if [ -f $GWT_EXTRACT_DIR/gwt-elemental.jar ]; then

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfe21c19_db5f1f51",
+        "filename": "eclipse/dev/codeserver/.checkstyle",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-04T08:19:10Z",
+      "side": 1,
+      "message": "Looks like a copy/paste from eclipse/dev/.checkstyle; AFAICT this won\u0027t actually check anything as the code is in \"codeserver/java/\", not \"core/src/\".\n\nBTW, in the Ant build, we don\u0027t checkstyle dev/codeserver; this is a mistake and we should fix that (in another change though). Similarly, we don\u0027t checkstyle the dev/core/test in Eclipse while we do it in Ant.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 139
+      },
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffd8146d_0828bb0f",
+        "filename": "eclipse/dev/codeserver/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-04T08:19:10Z",
+      "side": 1,
+      "message": "nit: inconsistent spacing for indentation ⇒ use tabs.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 8
+      },
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fea00f0_2b4ff547",
+        "filename": "eclipse/dev/codeserver/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-04T08:19:10Z",
+      "side": 1,
+      "message": "I just merged I66f1fd9c1b7804a4808b57fa95e4662ce9e61fd3 so this file shouldn\u0027t be necessary.",
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

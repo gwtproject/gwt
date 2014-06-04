@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f33447f_9fdac1a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-04T07:00:27Z",
+      "side": 1,
+      "message": "issue 8478?",
+      "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f33447f_ffe42d72",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-04T07:00:27Z",
+      "side": 1,
+      "message": "Actually it might be better to return \u0027unknown\u0027 for runtimeValue so that developers could detect the fallback mode. As a side effect, this state will be logged by UserAgentAsserter as well, which sounds fare to me.\n\nWhat do you think?",
+      "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

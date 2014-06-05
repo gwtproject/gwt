@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bfe21c19_e1c34cce",
+        "filename": "eclipse/dev/codeserver/.checkstyle",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-06-05T06:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfe21c19_db5f1f51",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 139
+      },
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffd8146d_0828bb0f",
         "filename": "eclipse/dev/codeserver/.classpath",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5fea00f0_262decc9",
+        "filename": "eclipse/dev/codeserver/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-06-05T06:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffd8146d_0828bb0f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 8
+      },
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fea00f0_2b4ff547",
         "filename": "eclipse/dev/codeserver/.gitignore",
         "patchSetId": 1
@@ -59,6 +107,24 @@
       "writtenOn": "2014-06-04T08:19:10Z",
       "side": 1,
       "message": "I just merged I66f1fd9c1b7804a4808b57fa95e4662ce9e61fd3 so this file shouldn\u0027t be necessary.",
+      "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fea00f0_4630f01f",
+        "filename": "eclipse/dev/codeserver/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-06-05T06:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fea00f0_2b4ff547",
       "revId": "a6f51628446db1878bd433eaa25ef4b276380059",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

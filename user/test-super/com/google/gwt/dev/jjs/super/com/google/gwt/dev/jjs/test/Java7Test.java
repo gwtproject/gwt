@@ -1,12 +1,12 @@
 /*
  * Copyright 2013 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -302,6 +302,53 @@ public class Java7Test extends GWTTestCase {
       // Here we make sure that this clause is not entered when the supertype is thrown.
       fail("Caught E1 instead of E2|E3");
     } catch (E1 x) {
+    }
+  }
+
+  private Object unoptimizableId(Object o) {
+    if (Math.random() > -10) {
+      return o;
+    }
+    return null;
+  }
+
+  public void testPrimitiveCastsFromObject() {
+    Object o = unoptimizableId((byte) 2);
+    assertEquals((byte) 2, (byte) o);
+    o = unoptimizableId((short) 3);
+    assertEquals((short) 3, (short) o);
+    o = unoptimizableId(1);
+    assertEquals(1, (int) o);
+    o = unoptimizableId(1L);
+    assertEquals(1L, (long) o);
+    o = unoptimizableId(0.1f);
+    assertEquals(0.1f, (float) o);
+    o = unoptimizableId(0.1);
+    assertEquals(0.1, (double) o);
+    o = unoptimizableId(true);
+    assertEquals(true, (boolean) o);
+    o = unoptimizableId('a');
+    assertEquals('a', (char) o);
+    // Test cast from supers.
+    // TODO(rluble): enable these after JDT upgrade as the currenct JDT will
+    // give a compilation errors.
+    // Number n = (Number) unoptimizableId(5);
+    // assertEquals(5, (int) n);
+    // Serializable s = (Serializable) unoptimizableId(6);
+    // assertEquals(6, (int) s);
+    // Comparable<Integer> c = (Comparable<Integer>) unoptimizableId(7);
+    // assertEquals(7, (int) c);
+
+    // Failing casts.
+    try {
+      boolean b = (boolean) o;
+      fail("Should have thrown a ClassCastException");
+      // Use b so that is not prunned in optimized mode.
+      // TODO(rluble): "(boolean) o" should be considered as having side effects if it can throw an
+      // exception
+      assertTrue(b);
+    } catch (Exception e) {
+      // Expected.
     }
   }
 }

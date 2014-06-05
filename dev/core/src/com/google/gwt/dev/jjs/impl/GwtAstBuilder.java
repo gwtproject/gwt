@@ -2802,9 +2802,22 @@ public class GwtAstBuilder {
     }
 
     private JExpression unbox(JExpression original, int implicitConversion) {
-      int typeId = implicitConversion & TypeIds.COMPILE_TYPE_MASK;
+      int compileTypeId = implicitConversion & TypeIds.COMPILE_TYPE_MASK;
       ClassScope scope = curClass.scope;
-      BaseTypeBinding primitiveType = (BaseTypeBinding) TypeBinding.wellKnownType(scope, typeId);
+      TypeBinding targetBinding = TypeBinding.wellKnownType(scope, compileTypeId);
+      BaseTypeBinding primitiveType = null;
+      if (!(targetBinding instanceof BaseTypeBinding)) {
+        // Direct cast from non-boxed-type reference type to a primitive type,
+        // wrap with a cast operation.
+        int runtimeTypeId = (implicitConversion & TypeIds.IMPLICIT_CONVERSION_MASK) >> 4;
+        original =
+            new JCastOperation(original.getSourceInfo(), typeMap.get(targetBinding), original);
+        targetBinding = TypeBinding.wellKnownType(scope, runtimeTypeId);
+        assert (targetBinding instanceof BaseTypeBinding);
+      }
+
+      primitiveType = (BaseTypeBinding) targetBinding;
+
       ReferenceBinding boxType = (ReferenceBinding) scope.boxing(primitiveType);
       char[] selector = CharOperation.concat(primitiveType.simpleName, VALUE);
       MethodBinding valueMethod =

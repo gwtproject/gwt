@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2c3030_480a4241",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Exception.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_6807fe35",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Math.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_08276ad9",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Object.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_282ca6ba",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_c830920e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_e8354efb",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[error] Should use uppercase \u0027L\u0027.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_881b7a8b",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-05T19:14:54Z",
+      "side": 1,
+      "message": "[error] Should use uppercase \u0027L\u0027.",
+      "revId": "7ca6736a5a7f4ba0e3bcaa88af243b24a00a12d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

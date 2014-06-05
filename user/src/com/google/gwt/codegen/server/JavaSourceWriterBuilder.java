@@ -27,7 +27,44 @@ import java.util.TreeSet;
  * Experimental API - subject to change.
  */
 public class JavaSourceWriterBuilder {
- 
+
+  /**
+   * Callbacks to allow customization of the output.
+   */
+  public static class CallbackHooks {
+
+    /**
+     * Called just after the class declaration has started and before the first method.
+     *
+     * @param pw
+     */
+    public void afterClassStart(AbortablePrintWriter pw) {
+    }
+
+    /**
+     * Called after all import declarations and before the class Javadoc comment.
+     *
+     * @param pw
+     */
+    public void afterImports(AbortablePrintWriter pw) {
+    }
+
+    /**
+     * Called after the package declaration and before the import declarations.
+     *
+     * @param pw
+     */
+    public void afterPackage(AbortablePrintWriter pw) {
+    }
+
+    /**
+     * Called after the file has been opened but before the package line has been written.
+     * @param pw
+     */
+    public void beforeFileStart(AbortablePrintWriter pw) {
+    }
+  }
+
   private final String className;
   private final String packageName;
   private final AbortablePrintWriter printWriter;
@@ -35,6 +72,8 @@ public class JavaSourceWriterBuilder {
   private final List<String> annotations = new ArrayList<String>();
 
   private boolean isClass = true;
+
+  private CallbackHooks callbacks;
 
   private String classComment;
 
@@ -77,6 +116,15 @@ public class JavaSourceWriterBuilder {
   /**
    * Add an import entry.
    * 
+   * @param type class to import
+   */
+  public void addImport(Class<?> type) {
+    addImport(type.getCanonicalName());
+  }
+
+  /**
+   * Add an import entry.
+   * 
    * @param typeName fully-qualified source name
    */
   public void addImport(String typeName) {
@@ -93,7 +141,7 @@ public class JavaSourceWriterBuilder {
    *           or invalid
    */
   public SourceWriter createSourceWriter() {
-    return new JavaSourceWriter(printWriter, packageName, imports, isClass, classComment,
+    return new JavaSourceWriter(printWriter, callbacks, packageName, imports, isClass, classComment,
         annotations, className, superClassName, interfaceNames);
   }
 
@@ -156,6 +204,15 @@ public class JavaSourceWriterBuilder {
    */
   public void makeInterface() {
     isClass = false;
+  }
+
+  /**
+   * Set the callbacks to be called during generation of the Java source.
+   * 
+   * @param callbacks (may be null for no callbacks)
+   */
+  public void setCallbacks(CallbackHooks callbacks) {
+    this.callbacks = callbacks;
   }
 
   /**

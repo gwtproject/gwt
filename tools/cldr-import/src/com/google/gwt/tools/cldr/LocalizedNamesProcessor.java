@@ -15,12 +15,14 @@
  */
 package com.google.gwt.tools.cldr;
 
+import com.google.gwt.codegen.server.CodeGenUtils;
+import com.google.gwt.codegen.server.JavaSourceWriterBuilder;
+import com.google.gwt.codegen.server.SourceWriter;
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.tools.cldr.RegionLanguageData.RegionPopulation;
 
-import org.unicode.cldr.util.Factory;
+import com.ibm.icu.text.MessageFormat;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.CollationKey;
@@ -61,6 +63,17 @@ public class LocalizedNamesProcessor extends Processor {
     }
   }
 
+  private static final String CATEGORY_LANGUAGE = "language";
+  private static final String CATEGORY_LOCALE_DISPLAY_NAMES = "localeDisplayNames";
+  private static final String CATEGORY_LOCALE_PATTERN = "localePattern";
+  private static final String CATEGORY_LOCALE_SEPARATOR = "localeSeparator";
+  private static final String CATEGORY_SCRIPT = "script";
+  private static final String CATEGORY_TERRITORY = "territory";
+  private static final String CATEGORY_VARIANT = "variant";
+
+  private static final String KEY_LIKELYORDER = "!likelyorder";
+  private static final String KEY_SORTORDER = "!sortorder";
+
   /**
    * Split a list of region codes into an array.
    * 
@@ -75,20 +88,28 @@ public class LocalizedNamesProcessor extends Processor {
     return split;
   }
 
-  private final RegionLanguageData regionLanguageData;
+  public LocalizedNamesProcessor(Processors processors) {
+    super(processors);
+    addEntries(CATEGORY_LOCALE_PATTERN, "//ldml/localeDisplayNames/localeDisplayPattern",
+        "localePattern", null);
+    addEntries(CATEGORY_LOCALE_SEPARATOR, "//ldml/localeDisplayNames/localeDisplayPattern",
+        "localeSeparator", null);
+    addEntries(CATEGORY_TERRITORY, "//ldml/localeDisplayNames/territories", "territory", "type");
+    addEntries(CATEGORY_LANGUAGE, "//ldml/localeDisplayNames/languages", "language", "type");
+    addEntries(CATEGORY_SCRIPT, "//ldml/localeDisplayNames/scripts", "script", "type");
+    addEntries(CATEGORY_VARIANT, "//ldml/localeDisplayNames/variants", "variant", "type");
 
-  public LocalizedNamesProcessor(File outputDir, Factory cldrFactory, LocaleData localeData) {
-    super(outputDir, cldrFactory, localeData);
-    regionLanguageData = new RegionLanguageData(cldrFactory);
   }
 
   @Override
-  protected void cleanupData() {
-    localeData.copyLocaleData("en", "default", "territory", "languages", "scripts", "variants");
+  public void cleanupData() {
+    localeData.copyLocaleData("en", "default", CATEGORY_TERRITORY, "languages", "scripts",
+        "variants");
+    copyNativeDisplayNames();
     // Generate a sort order before removing duplicates
-    for (GwtLocale locale : localeData.getNonEmptyLocales("territory")) {
+    for (GwtLocale locale : localeData.getNonEmptyLocales(CATEGORY_TERRITORY)) {
       // TODO(jat): deal with language population data that has a script
-      Map<String, String> map = localeData.getEntries("territory", locale);
+      Map<String, String> map = localeData.getEntries(CATEGORY_TERRITORY, locale);
       List<String> countryCodes = new ArrayList<String>();
       for (String regionCode : map.keySet()) {
         // only include real country codes
@@ -115,9 +136,8 @@ public class LocalizedNamesProcessor extends Processor {
         }
         buf.append(countryCodes.get(names[i].getIndex()));
       }
-      localeData.addEntry("territory", locale, "!sortorder", buf.toString());
+      localeData.addEntry(CATEGORY_TERRITORY, locale, KEY_SORTORDER, buf.toString());
     }
-    Set<String> locales = cldrFactory.getAvailableLanguages();
     for (GwtLocale locale : localeData.getAllLocales()) {
       Set<RegionPopulation> regions = getRegionsForLocale(locale);
       StringBuilder buf = new StringBuilder();
@@ -134,184 +154,150 @@ public class LocalizedNamesProcessor extends Processor {
           buf.append(region.getRegion());
         }
       }
-      localeData.addEntry("territory", locale, "!likelyorder", buf.toString());
-    }
-    localeData.removeDuplicates("territory");
-    localeData.removeDuplicates("language");
-    localeData.removeDuplicates("script");
-    localeData.removeDuplicates("variant");
-  }
+      localeData.addEntry(CATEGORY_TERRITORY, locale, KEY_LIKELYORDER, buf.toString());
 
-  @Override
-  protected void loadData() throws IOException {
-    System.out.println("Loading data for localized names");
-    localeData.addVersions(cldrFactory);
-    localeData.addEntries("territory", cldrFactory, "//ldml/localeDisplayNames/territories",
-        "territory", "type");
-    localeData.addEntries("language", cldrFactory, "//ldml/localeDisplayNames/languages",
-        "language", "type");
-    localeData.addEntries("script", cldrFactory, "//ldml/localeDisplayNames/scripts", "script",
-        "type");
-    localeData.addEntries("variant", cldrFactory, "//ldml/localeDisplayNames/variants", "variant",
-        "type");
-  }
-
-  @Override
-  protected void writeOutputFiles() throws IOException {
-    for (GwtLocale locale : localeData.getNonEmptyLocales("territory")) {
-      Map<String, String> namesMap = localeData.getEntries("territory", locale);
-      List<String> regionCodesWithNames = new ArrayList<String>();
-      for (String regionCode : namesMap.keySet()) {
-        if (!regionCode.startsWith("!")) {
-          // skip entries which aren't actually region codes
-          regionCodesWithNames.add(regionCode);
-        }
-      }
-      String[] sortOrder = getRegionOrder(namesMap.get("!sortorder"));
-      String[] likelyOrder = getRegionOrder(namesMap.get("!likelyorder"));
-      if (regionCodesWithNames.isEmpty() && sortOrder == null && likelyOrder == null) {
-        // nothing to do
-        return;
-      }
-      // sort for deterministic output
-      Collections.sort(regionCodesWithNames);
-      if (locale.isDefault()) {
-        generateDefaultLocale(locale, namesMap, regionCodesWithNames, sortOrder, likelyOrder);
-      }
-      generateLocale(locale, namesMap, regionCodesWithNames, sortOrder, likelyOrder);
-    }
-  }
-
-  /**
-   * @param locale
-   * @param namesMap
-   * @param regionCodesWithNames
-   * @param sortOrder
-   * @param likelyOrder
-   */
-  private void generateDefaultLocale(GwtLocale locale, Map<String, String> namesMap,
-      List<String> regionCodesWithNames, String[] sortOrder, String[] likelyOrder)
-      throws IOException {
-    PrintWriter pw = null;
-    try {
-      pw = createOutputFile("client/DefaultLocalizedNames.java");
-      printHeader(pw);
-      pw.println("package com.google.gwt.i18n.client;");
-      pw.println();
-      printVersion(pw, locale, "// ");
-      pw.println();
-      pw.println("/**");
-      pw.println(" * Default LocalizedNames implementation.");
-      pw.println(" */");
-      pw.print("public class DefaultLocalizedNames extends " + "DefaultLocalizedNamesBase {");
-      if (likelyOrder != null) {
-        writeStringListMethod(pw, "loadLikelyRegionCodes", likelyOrder);
-      }
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  protected void loadNameMap() {");
-      pw.println("    super.loadNameMap();");
-      for (String code : regionCodesWithNames) {
-        String name = namesMap.get(code);
-        if (name != null) {
-          pw.println("    namesMap.put(\"" + quote(code) + "\", \"" + quote(name) + "\");");
-        }
-      }
-      pw.println("  }");
-      if (sortOrder != null) {
-        writeStringListMethod(pw, "loadSortedRegionCodes", sortOrder);
-      }
-      pw.println("}");
-    } finally {
-      if (pw != null) {
-        pw.close();
-      }
-    }
-  }
-
-  /**
-   * @param locale
-   * @param likelyOrder
-   * @param sortOrder
-   * @param regionCodesWithNames
-   * @param namesMap
-   */
-  private void generateLocale(GwtLocale locale, Map<String, String> namesMap,
-      List<String> regionCodesWithNames, String[] sortOrder, String[] likelyOrder)
-      throws IOException {
-    PrintWriter pw = null;
-    try {
-      pw = createFile("LocalizedNamesImpl", "java", locale.getAsString());
-      printHeader(pw);
-      pw.println("package com.google.gwt.i18n.client.impl.cldr;");
-      pw.println();
-      if (!regionCodesWithNames.isEmpty()) {
-        pw.println("import com.google.gwt.core.client.JavaScriptObject;");
-        pw.println();
-      }
-      printVersion(pw, locale, "// ");
-      pw.println();
-      pw.println("/**");
-      pw.println(" * Localized names for the \"" + locale + "\" locale.");
-      pw.println(" */");
-      pw.print("public class LocalizedNamesImpl" + localeSuffix(locale) + " extends ");
-      if (locale.isDefault()) {
-        pw.print("LocalizedNamesImplBase");
-      } else {
-        pw.print("LocalizedNamesImpl" + localeSuffix(localeData.inheritsFrom(locale)));
-      }
-      pw.println(" {");
       if (!locale.isDefault()) {
-        if (likelyOrder != null) {
-          writeStringListMethod(pw, "loadLikelyRegionCodes", likelyOrder);
-        }
-        if (sortOrder != null) {
-          writeStringListMethod(pw, "loadSortedRegionCodes", sortOrder);
-        }
-        if (!regionCodesWithNames.isEmpty()) {
-          pw.println();
-          pw.println("  @Override");
-          pw.println("  protected void loadNameMapJava() {");
-          pw.println("    super.loadNameMapJava();");
-          for (String code : regionCodesWithNames) {
-            String name = namesMap.get(code);
-            if (name != null && !name.equals(code)) {
-              pw.println("    namesMap.put(\"" + quote(code) + "\", \"" + quote(name) + "\");");
-            }
+        // generate display names for each locale
+        for (GwtLocale nameLocale : localeData.getAllLocales()) {
+          String displayName = getDisplayNameForLocale(locale, nameLocale);
+          if (displayName != null) {
+            localeData.addEntry(CATEGORY_LOCALE_DISPLAY_NAMES, locale, nameLocale.toString(), displayName);
           }
-          pw.println("  }");
-          pw.println();
-          pw.println("  @Override");
-          pw.println("  protected JavaScriptObject loadNameMapNative() {");
-          pw.println("    return overrideMap(super.loadNameMapNative(), " + "loadMyNameMap());");
-          pw.println("  }");
-          pw.println();
-          pw.println("  private native JavaScriptObject loadMyNameMap() /*-{");
-          generateNativeMap(pw, regionCodesWithNames, namesMap);
-          pw.println("  }-*/;");
         }
-      } else if (!regionCodesWithNames.isEmpty()) {
-        pw.println();
-        pw.println("  @Override");
-        pw.println("  protected native JavaScriptObject loadNameMapNative() " + "/*-{");
-        generateNativeMap(pw, regionCodesWithNames, namesMap);
-        pw.println("  }-*/;");
       }
-      pw.println("}");
-    } finally {
-      if (pw != null) {
-        pw.close();
+    }
+    localeData.copyLocaleData("en", "default", CATEGORY_LOCALE_DISPLAY_NAMES);
+    /*
+     * We must write the properties files used for server-side before we remove
+     * duplicates, because those files need to be complete.
+     */
+    writeLocalizedNamesProperties();
+
+    localeData.removeDuplicates(CATEGORY_TERRITORY);
+    localeData.removeDuplicates(CATEGORY_LANGUAGE);
+    localeData.removeDuplicates(CATEGORY_SCRIPT);
+    localeData.removeDuplicates(CATEGORY_VARIANT);
+    localeData.removeDuplicates(CATEGORY_LOCALE_DISPLAY_NAMES);
+  }
+
+  @Override
+  public void writeOutputFiles() throws IOException {
+    writeLocalizedNames();
+    writeLocaleDisplayNames();
+  }
+
+  /**
+   * Copy each locale's native display name to sharedLocaleData.
+   */
+  private void copyNativeDisplayNames() {
+    for (GwtLocale locale : localeData.getAllLocales()) {
+      if (locale.isDefault()) {
+        continue;
       }
+      String result = getDisplayNameForLocale(locale, locale);
+      sharedLocaleData.addEntry(CATEGORY_LOCALE_NATIVE_DISPLAY_NAME, locale, locale.toString(), result);
     }
   }
 
   /**
+   * @param locale
+   * @param likelyOrder
+   * @param sortOrder
    * @param regionCodesWithNames
    * @param namesMap
    */
-  private void generateNativeMap(PrintWriter pw, List<String> regionCodesWithNames,
+  private void generateClientLocale(GwtLocale locale, Map<String, String> namesMap,
+      List<String> regionCodesWithNames, String[] sortOrder, String[] likelyOrder) {
+    ProcessorCodeGenContext codeGen = new ProcessorCodeGenContext("user/src/");
+    String pkg = "com.google.gwt.i18n.client.impl.cldr";
+    String myClass = "LocalizedNamesImpl" + localeSuffix(locale);
+    JavaSourceWriterBuilder jswb = codeGen.addClass(pkg, myClass);
+    sharedLocaleData.addEntry(CATEGORY_GENCLASSES_CLIENT, locale, "LocalizedNames", pkg + "."
+        + myClass);
+    jswb.setCallbacks(new PrintVersionCallback(locale));
+    if (!regionCodesWithNames.isEmpty()) {
+      jswb.addImport("com.google.gwt.core.client.JavaScriptObject");
+    }
+    if (locale.isDefault()) {
+      jswb.addImport("com.google.gwt.i18n.client.impl.LocalizedNamesImplBase");
+    }
+    jswb.setJavaDocCommentForClass("Localized names for the \"" + locale + "\" locale.");
+    if (locale.isDefault()) {
+      jswb.setSuperclass("LocalizedNamesImplBase");
+    } else {
+      jswb.setSuperclass("LocalizedNamesImpl"
+          + localeSuffix(localeData.inheritsFrom(CATEGORY_TERRITORY, locale)));
+    }
+    SourceWriter pw = jswb.createSourceWriter();
+    if (likelyOrder != null) {
+      writeStringListMethod(pw, "loadLikelyRegionCodes", likelyOrder);
+    }
+    if (!regionCodesWithNames.isEmpty()) {
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected JavaScriptObject loadNameMap() {");
+      pw.indentln("return overrideMap(super.loadNameMap(), nameMapOverrides());");
+      pw.println("}");
+    }
+    if (sortOrder != null) {
+      writeStringListMethod(pw, "loadSortedRegionCodes", sortOrder);
+    }
+    if (!regionCodesWithNames.isEmpty()) {
+      pw.println();
+      pw.println("private native JavaScriptObject nameMapOverrides() /*-{");
+      generateNativeMap(pw, regionCodesWithNames, namesMap);
+      pw.println("}-*/;");
+    }
+    pw.close();
+  }
+
+  private void generateLocaleDisplayNames(GwtLocale locale, Map<String, String> namesMap) {
+    String myClass = "LocaleDisplayNamesImpl" + localeSuffix(locale);
+    String pkg = "com.google.gwt.i18n.shared.impl.cldr";
+    ProcessorCodeGenContext codeGen = new ProcessorCodeGenContext("user/src/");
+    JavaSourceWriterBuilder jswb = codeGen.addClass(pkg, myClass);
+    jswb.setCallbacks(new PrintVersionCallback(locale));
+    sharedLocaleData.addEntry(CATEGORY_GENCLASSES, locale, "LocaleDisplayNames", pkg + "."
+        + myClass);
+    String superClass;
+    if (locale.isDefault()) {
+      superClass = "LocaleDisplayNamesImplBase";
+      jswb.addImport("com.google.gwt.i18n.shared.impl.LocaleDisplayNamesImplBase");
+    } else {
+      GwtLocale parent = localeData.inheritsFrom(CATEGORY_LOCALE_DISPLAY_NAMES, locale);
+      superClass = "LocaleDisplayNamesImpl" + localeSuffix(parent);
+    }
+    jswb.setSuperclass(superClass);
+    jswb.addImport("java.util.Map");
+    jswb.setJavaDocCommentForClass("Locale display names for the \"" + locale + "\" locale.\n");
+    SourceWriter pw = jswb.createSourceWriter();
+    pw.println();
+    pw.println("@Override");
+    pw.println("protected Map<String, String> loadDisplayNames() {");
+    pw.indent();
+    pw.println("Map<String, String> result = super.loadDisplayNames();");
+    Set<String> keySet = namesMap.keySet();
+    String[] keys = keySet.toArray(new String[keySet.size()]);
+    Arrays.sort(keys);
+    for (String key : keys) {
+      pw.println("result.put(" + CodeGenUtils.asStringLiteral(key) + ", "
+          + CodeGenUtils.asStringLiteral(namesMap.get(key)) + ");");
+    }
+    pw.println("return result;");
+    pw.outdent();
+    pw.println("}");
+    pw.close();
+  }
+
+  /**
+   * @param pw
+   * @param regionCodesWithNames
+   * @param namesMap
+   */
+  private void generateNativeMap(SourceWriter pw, List<String> regionCodesWithNames,
       Map<String, String> namesMap) {
-    pw.println("    return {");
+    pw.println("return {");
+    pw.indent();
     boolean firstLine = true;
     for (String code : regionCodesWithNames) {
       String name = namesMap.get(code);
@@ -321,11 +307,131 @@ public class LocalizedNamesProcessor extends Processor {
         } else {
           pw.println(",");
         }
-        pw.print("        \"" + quote(code) + "\": \"" + quote(name) + "\"");
+        pw.print("\"" + quote(code) + "\": \"" + quote(name) + "\"");
       }
     }
     pw.println();
-    pw.println("    };");
+    pw.outdent();
+    pw.println("};");
+  }
+
+  /**
+   * @param locale
+   * @param likelyOrder
+   * @param sortOrder
+   * @param regionCodesWithNames
+   * @param namesMap
+   */
+  private void generateSharedJavaLocale(GwtLocale locale, Map<String, String> namesMap,
+      List<String> regionCodesWithNames, String[] sortOrder, String[] likelyOrder) {
+    GwtLocale parent = localeData.inheritsFrom(CATEGORY_TERRITORY, locale);
+    String myClass = "LocalizedNamesImpl" + localeSuffix(locale);
+    String pkg = "com.google.gwt.i18n.shared.impl.cldr";
+    ProcessorCodeGenContext codeGen = new ProcessorCodeGenContext("user/src/");
+    JavaSourceWriterBuilder jswb = codeGen.addClass(pkg, myClass);
+    jswb.setCallbacks(new PrintVersionCallback(locale));
+    String superClass;
+    if (locale.isDefault()) {
+      superClass = "LocalizedNamesImplBase";
+    } else {
+      superClass = "LocalizedNamesImpl" + localeSuffix(parent);
+    }
+    jswb.setSuperclass(superClass);
+    sharedLocaleData.addEntry(CATEGORY_GENCLASSES, locale, "LocalizedNames", pkg + "." + myClass);
+    if (locale.isDefault()) {
+      jswb.addImport("com.google.gwt.i18n.shared.impl.LocalizedNamesImplBase");
+    }
+    jswb.setJavaDocCommentForClass("Localized names for the \"" + locale + "\" locale.\n");
+    SourceWriter pw = jswb.createSourceWriter();
+    if (likelyOrder != null) {
+      writeStringListMethod(pw, "getLikelyRegionCodes", likelyOrder);
+    }
+    if (!regionCodesWithNames.isEmpty()) {
+      pw.println();
+      pw.println("@Override");
+      pw.println("protected void ensureNameMap() {");
+      pw.indent();
+      pw.println("super.ensureNameMap();");
+      for (String code : regionCodesWithNames) {
+        String name = namesMap.get(code);
+        if (name != null && !name.equals(code)) {
+          pw.println("nameMap.put(\"" + quote(code) + "\", \"" + quote(name) + "\");");
+        }
+      }
+      pw.outdent();
+      pw.println("}");
+    }
+    if (sortOrder != null) {
+      writeStringListMethod(pw, "loadSortedRegionCodes", sortOrder, false);
+    }
+    pw.close();
+  }
+
+  /**
+   * Get the display name for {@code locale}, as displayed in {@code targetLocale}.
+   *
+   * @param targetLocale
+   * @param locale
+   * @return
+   */
+  private String getDisplayNameForLocale(GwtLocale targetLocale, GwtLocale locale) {
+    if (locale.isDefault()) {
+      // Should there be a better name for this?
+      return "Default of last resort";
+    }
+    String localePattern = localeData.getEntry(CATEGORY_LOCALE_PATTERN, targetLocale, "value");
+    String localeSeparator = localeData.getEntry(CATEGORY_LOCALE_SEPARATOR, targetLocale, "value");
+    String language = locale.getLanguage();
+    String region = locale.getRegion();
+    String baseName = localeData.getInheritedEntry(CATEGORY_LANGUAGE, targetLocale, language);
+    if (baseName == null) {
+      baseName = language;
+    }
+    // Collect the additional descriptions
+    StringBuilder buf = new StringBuilder();
+
+    // If the region is part of a special name for the language, use it.  Otherwise, add it to the
+    // list of additional descriptions.
+    if (region != null) {
+      String val = localeData.getInheritedEntry(CATEGORY_LANGUAGE, targetLocale, language + "_" + region);
+      if (val != null) {
+        baseName = val;
+      } else {
+        val = localeData.getInheritedEntry(CATEGORY_TERRITORY, targetLocale, region);
+        if (val != null) {
+          buf.append(val);
+        }
+      }
+    }
+    // Add in the script if present, but only if it isn't the default script
+    String script = locale.getScript();
+    GwtLocale localeDefScript = localeData.getLocaleFactory().fromComponents(locale.getLanguage(),
+        null, locale.getRegion(), locale.getVariant());
+    if (script != null && !locale.usesSameScript(localeDefScript)) {
+      String val = localeData.getInheritedEntry(CATEGORY_SCRIPT, targetLocale, script);
+      if (val != null) {
+        if (buf.length() > 0) {
+          buf.append(localeSeparator);
+        }
+        buf.append(val);
+      }
+    }
+    // Add in the variant if present
+    String variant = locale.getVariant();
+    if (variant != null) {
+      String val = localeData.getInheritedEntry(CATEGORY_VARIANT, targetLocale, variant);
+      if (val != null) {
+        if (buf.length() > 0) {
+          buf.append(localeSeparator);
+        }
+        buf.append(val);
+      }
+    }
+    if (buf.length() > 0) {
+      return MessageFormat.format(localePattern, baseName, buf.toString());
+    } else {
+      return baseName;
+    }
   }
 
   /**
@@ -333,31 +439,105 @@ public class LocalizedNamesProcessor extends Processor {
    * @return region populations speaking this language
    */
   private Set<RegionPopulation> getRegionsForLocale(GwtLocale locale) {
-    Set<RegionPopulation> retVal =
-        regionLanguageData
-            .getRegions(locale.getLanguageNotNull() + "_" + locale.getScriptNotNull());
+    RegionLanguageData regionLanguageData = cldrData.getRegionLanguageData();
+    Set<RegionPopulation> retVal = regionLanguageData.getRegions(locale.getLanguageNotNull() + "_"
+        + locale.getScriptNotNull());
     if (retVal.isEmpty()) {
       retVal = regionLanguageData.getRegions(locale.getLanguageNotNull());
     }
     return retVal;
   }
 
+  private void writeLocaleDisplayNames() {
+    for (GwtLocale locale : localeData.getNonEmptyLocales(CATEGORY_LOCALE_DISPLAY_NAMES)) {
+      Map<String, String> namesMap = localeData.getEntries(CATEGORY_LOCALE_DISPLAY_NAMES, locale);
+      generateLocaleDisplayNames(locale, namesMap);
+    }
+  }
+
+  private void writeLocalizedNames() {
+    for (GwtLocale locale : localeData.getNonEmptyLocales(CATEGORY_TERRITORY)) {
+      Map<String, String> namesMap = localeData.getEntries(CATEGORY_TERRITORY, locale);
+      List<String> regionCodesWithNames = new ArrayList<String>();
+      for (String regionCode : namesMap.keySet()) {
+        if (!regionCode.startsWith("!")) {
+          // skip entries which aren't actually region codes
+          regionCodesWithNames.add(regionCode);
+        }
+      }
+      String[] sortOrder = getRegionOrder(namesMap.get(KEY_SORTORDER));
+      String[] likelyOrder = getRegionOrder(namesMap.get(KEY_LIKELYORDER));
+      if (regionCodesWithNames.isEmpty() && sortOrder == null && likelyOrder == null) {
+        // nothing to do
+        return;
+      }
+      // sort for deterministic output
+      Collections.sort(regionCodesWithNames);
+      generateClientLocale(locale, namesMap, regionCodesWithNames, sortOrder, likelyOrder);
+      generateSharedJavaLocale(locale, namesMap, regionCodesWithNames, sortOrder, likelyOrder);
+    }
+  }
+
+  private void writeLocalizedNamesProperties() {
+    for (GwtLocale locale : localeData.getAllLocales()) {
+      PrintWriter pw = null;
+      try {
+        pw = createOutputFile("client/cldr/LocaleDisplayNames" + localeSuffix(locale)
+            + ".properties");
+        printPropertiesHeader(pw);
+        pw.println();
+        printVersion(pw, locale, "# ");
+        Map<String, String> map = localeData.getEntries(CATEGORY_LOCALE_DISPLAY_NAMES, locale);
+        Set<String> keySet = map.keySet();
+        String[] keys = keySet.toArray(new String[keySet.size()]);
+        Arrays.sort(keys);
+        for (String localeName : keys) {
+          pw.println(localeName + "=" + map.get(localeName));
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      } finally {
+        if (pw != null) {
+          pw.close();
+        }
+      }
+    }
+  }
+
+
   /**
    * Generate a method which returns an array of string constants.
    * 
-   * @param pw PrintWriter to write on
+   * @param pw SourceWriter to write on
    * @param methodName the name of the method to create
    * @param values the list of string values to return.
    */
-  private void writeStringListMethod(PrintWriter pw, String methodName, String[] values) {
+  private void writeStringListMethod(SourceWriter pw, String methodName, String[] values) {
+    writeStringListMethod(pw, methodName, values, true);
+  }
+
+  /**
+   * Generate a method which returns an array of string constants.
+   * 
+   * @param pw SourceWriter to write on
+   * @param methodName the name of the method to create
+   * @param values the list of string values to return.
+   */
+  private void writeStringListMethod(SourceWriter pw, String methodName, String[] values, boolean isPublic) {
     pw.println();
-    pw.println("  @Override");
-    pw.println("  public String[] " + methodName + "() {");
-    pw.println("    return new String[] {");
+    pw.println("@Override");
+    pw.println((isPublic ? "public" : "protected") + " String[] " + methodName + "() {");
+    pw.indent();
+    pw.println("return new String[] {");
+    pw.indent();
+    pw.indent();
     for (String code : values) {
-      pw.println("        \"" + Processor.quote(code) + "\",");
+      pw.println("\"" + Processor.quote(code) + "\",");
     }
-    pw.println("    };");
-    pw.println("  }");
+    pw.outdent();
+    pw.outdent();
+    pw.println("};");
+    pw.outdent();
+    pw.println("}");
   }
 }

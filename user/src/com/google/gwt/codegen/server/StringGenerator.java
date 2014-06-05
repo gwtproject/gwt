@@ -39,10 +39,23 @@ public abstract class StringGenerator {
    * @return {@link StringGenerator} instance
    */
   public static StringGenerator create(StringBuilder buf, boolean returnsSafeHtml) {
+    return create(buf, returnsSafeHtml, false);
+  }
+
+  /**
+   * Create a {@link StringGenerator} instance.
+   * 
+   * @param buf
+   * @param returnsSafeHtml
+   * @param singleQuoteLiterals
+   * @return {@link StringGenerator} instance
+   */
+  public static StringGenerator create(StringBuilder buf, boolean returnsSafeHtml,
+      boolean singleQuoteLiterals) {
     if (returnsSafeHtml) {
-      return new SafeHtmlStringGenerator(buf);
+      return new SafeHtmlStringGenerator(buf, singleQuoteLiterals);
     } else {
-      return new PlainStringGenerator(buf);
+      return new PlainStringGenerator(buf, singleQuoteLiterals);
     }
   }
 
@@ -50,6 +63,11 @@ public abstract class StringGenerator {
    * Output string buffer.
    */
   protected final StringBuilder buf;
+
+  /**
+   * True if we should put literals inside single quotes, and double any single quotes.
+   */
+  protected final boolean singleQuoteLiterals;
 
   /**
    * True if we are in the middle of a string literal.
@@ -60,9 +78,11 @@ public abstract class StringGenerator {
    * Initialize the StringGenerator with an output buffer.
    *
    * @param buf output buffer
+   * @param singleQuoteLiterals 
    */
-  protected StringGenerator(StringBuilder buf) {
+  protected StringGenerator(StringBuilder buf, boolean singleQuoteLiterals) {
     this.buf = buf;
+    this.singleQuoteLiterals = singleQuoteLiterals;
     inString = false;
   }
   /**
@@ -84,6 +104,9 @@ public abstract class StringGenerator {
   public void appendExpression(String expression, boolean isSafeHtmlTyped,
       boolean isPrimitiveTyped, boolean needsConversionToString) {
     if (inString) {
+      if (singleQuoteLiterals) {
+        buf.append('\'');
+      }
       buf.append('"');
       afterExpression(Type.LITERAL);
       inString = false;
@@ -116,7 +139,13 @@ public abstract class StringGenerator {
     if (!inString) {
       beforeExpression(Type.LITERAL);
       buf.append('"');
+      if (singleQuoteLiterals) {
+        buf.append('\'');
+      }
       inString = true;
+    }
+    if (singleQuoteLiterals) {
+      str = str.replaceAll("'", "''");
     }
     buf.append(str);
   }
@@ -135,6 +164,9 @@ public abstract class StringGenerator {
    */
   public void completeString() {
     if (inString) {
+      if (singleQuoteLiterals) {
+        buf.append('\'');
+      }
       buf.append('"');
       afterExpression(Type.LITERAL);
     }

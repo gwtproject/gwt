@@ -17,6 +17,7 @@ package com.google.gwt.tools.cldr;
 
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import org.unicode.cldr.util.CLDRFile;
 import org.unicode.cldr.util.Factory;
@@ -30,7 +31,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Collects all the locale data from CLDR, grouping it by how it will be used
@@ -74,6 +77,36 @@ public class LocaleData {
 
     public Currency(String code) {
       this.code = code;
+    }
+
+    /**
+     * Encode the currency data as needed by CurrencyListGenerator.
+     * 
+     * @param currency
+     * @return a string containing the property file entry for the specified
+     *         currency
+     */
+    public String encodeCurrencyData() {
+      StringBuilder buf = new StringBuilder();
+      appendBlankForNull(buf, displayName);
+      buf.append('|');
+      appendBlankForNull(buf, symbol);
+      buf.append('|').append(decimalDigits);
+      buf.append('|').append(inUse);
+      buf.append('|').append(rounding);
+      buf.append('|');
+      appendBlankForNull(buf, decimalSeparator);
+      buf.append('|');
+      appendBlankForNull(buf, groupingSeparator);
+      buf.append('|');
+      appendBlankForNull(buf, pattern);
+      return buf.toString();
+    }
+
+    private void appendBlankForNull(StringBuilder buf, String str) {
+      if (str != null) {
+        buf.append(str);
+      }
     }
 
     @Override
@@ -207,10 +240,14 @@ public class LocaleData {
     public int compare(GwtLocale a, GwtLocale b) {
       Integer depthA = localeDepth.get(a);
       Integer depthB = localeDepth.get(b);
-      int c = 0;
-      if (depthA != null && depthB != null) {
-        c = depthB - depthA;
+      // don't want Integer.MAX_VALUE as we could get overflow
+      if (depthA == null) {
+        depthA = 10000;
       }
+      if (depthB == null) {
+        depthB = 10000;
+      }
+      int c = depthB - depthA;
       if (c == 0) {
         c = a.compareTo(b);
       }
@@ -263,6 +300,115 @@ public class LocaleData {
     public String toString() {
       return "[cat=" + category + ", locale=" + locale + "]";
     }
+  }
+
+  public static final String WIDTH_ABBREV = "abbrev";
+
+  public static final String WIDTH_NARROW = "narrow";
+
+  public static final String WIDTH_WIDE = "wide";
+
+  public static final String CATEGORY_NUMBERS = "numbers";
+
+  public static final String CATEGORY_NUMBERS_EXTRA = "numbers-extra";
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @param size
+   * @param standAlone
+   * @param redirect
+   * @return category
+   */
+  public static String CATEGORY_NUMBER_SYS(String numberSystem) {
+    return CATEGORY_NUMBERS + "-" + numberSystem;
+  }
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_ABBREV(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_ABBREV, false);
+  }
+
+  /**
+   * Generate the narrow category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_NARROW(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_NARROW, false);
+  }
+
+  /**
+   * Generate the stand-alone abbreviated category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_ABBREV(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_ABBREV, true);
+  }
+
+  /**
+   * Generate the stand-alone narrow category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_NARROW(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_NARROW, true);
+  }
+
+  /**
+   * Generate the stand-alone wide category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_SA_WIDE(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_WIDE, true);
+  }
+
+  /**
+   * Generate the wide category given a time period.
+   *
+   * @param period
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDE(String period) {
+    return CATEGORY_PERIOD_WIDTH(period, WIDTH_WIDE, false);
+  }
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @param size
+   * @param standAlone
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDTH(String period, String size, boolean standAlone) {
+    return CATEGORY_PERIOD_WIDTH(period, size, standAlone, false);
+  }
+
+  /**
+   * Generate the abbreviated category given a time period.
+   *
+   * @param period
+   * @param size
+   * @param standAlone
+   * @param redirect
+   * @return category
+   */
+  public static String CATEGORY_PERIOD_WIDTH(String period, String size, boolean standAlone,
+      boolean redirect) {
+    return period + (standAlone ? "-sa-" : "-") + size + (redirect ? "-redirect" : "");
   }
 
   /**
@@ -342,6 +488,7 @@ public class LocaleData {
    * @param tag
    * @param key
    * @param attribute
+   * @param defaultValue value to use if the attribute isn't found, null to not store a value
    */
   public void addAttributeEntry(String category, GwtLocale locale, Factory cldrFactory,
       String path, String tag, String key, String attribute, String defaultValue) {
@@ -382,18 +529,23 @@ public class LocaleData {
   public void addCurrencyEntries(String category, Factory cldrFactory,
       Map<String, Integer> currencyFractions, int defaultCurrencyFraction, Set<String> stillInUse,
       Map<String, Integer> rounding) {
+    Pattern regex = Pattern.compile("^//ldml/numbers/symbols[^/]*latn[^/]*/.*$");
     for (GwtLocale locale : allLocales.keySet()) {
       // skip the "default" locale for now
       if (locale.isDefault()) {
         continue;
       }
+      // TODO(jat): handle number system properly
+      Map<String, String> localeWide = fetchTagValues(locale, cldrFactory, regex,
+          "currencyDecimal");
       addCurrencyEntries(category, locale, cldrFactory, currencyFractions, defaultCurrencyFraction,
-          stillInUse, rounding);
+          stillInUse, rounding, localeWide);
     }
     // run the "default" locale last, to override inherited entries
     GwtLocale locale = localeFactory.getDefault();
+    Map<String, String> localeWide = fetchTagValues(locale, cldrFactory, regex, "currencyDecimal");
     addCurrencyEntries(category, locale, cldrFactory, currencyFractions, defaultCurrencyFraction,
-        stillInUse, rounding);
+        stillInUse, rounding, localeWide);
   }
 
   public void addDateTimeFormatEntries(String group, Factory cldrFactory) {
@@ -412,8 +564,43 @@ public class LocaleData {
     }
   }
 
+  public void addEntries(String category, Factory cldrFactory, String prefix, String tag,
+      String keyAttribute, String mapAttribute) {
+    for (GwtLocale locale : allLocales.keySet()) {
+      addEntries(category, locale, cldrFactory, prefix, tag, keyAttribute, mapAttribute);
+    }
+  }
+
+  public void addEntries(String category, Factory cldrFactory, String prefix, String matchTag,
+      String matchAttr, String matchVal, String tag, String keyAttribute) {
+    for (GwtLocale locale : allLocales.keySet()) {
+      addEntries(category, locale, cldrFactory, prefix, matchTag, matchAttr, matchVal, tag,
+          keyAttribute, "value");
+    }
+  }
+
+  public void addEntries(String category, Factory cldrFactory, String prefix, String matchTag,
+      String matchAttr, String matchVal, String tag, String keyAttribute, String mapAttribute) {
+    for (GwtLocale locale : allLocales.keySet()) {
+      addEntries(category, locale, cldrFactory, prefix, matchTag, matchAttr, matchVal, tag,
+          keyAttribute, mapAttribute);
+    }
+  }
+
   public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
       String tag, String keyAttribute) {
+    addEntries(category, locale, cldrFactory, prefix, null, null, null, tag, keyAttribute, "value");
+  }
+
+  public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
+      String tag, String keyAttribute, String mapAttribute) {
+    addEntries(category, locale, cldrFactory, prefix, null, null, null, tag, keyAttribute,
+        mapAttribute);
+  }
+
+  public void addEntries(String category, GwtLocale locale, Factory cldrFactory, String prefix,
+      String matchTag, String matchAttr, String matchVal, String tag, String keyAttribute,
+      String mapAttribute) {
     Map<String, String> map = getMap(category, locale);
     CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
     XPathParts parts = new XPathParts();
@@ -429,13 +616,20 @@ public class LocaleData {
         // ignore alternate strings
         continue;
       }
+      if (matchTag != null) {
+        Map<String, String> attr = parts.findAttributes(matchTag);
+        String val = attr.get(matchAttr);
+        if (!Objects.equals(matchVal, val)) {
+          continue;
+        }
+      }
       Map<String, String> attr = parts.findAttributes(tag);
       if (attr == null) {
         continue;
       }
       String value = cldr.getStringValue(path);
       boolean draft = parts.containsAttribute("draft");
-      String key = keyAttribute != null ? attr.get(keyAttribute) : "value";
+      String key = keyAttribute != null ? attr.get(keyAttribute) : mapAttribute;
       if (!draft || !map.containsKey(key)) {
         map.put(key, value);
       }
@@ -445,6 +639,22 @@ public class LocaleData {
   public void addEntry(String category, GwtLocale locale, String key, String value) {
     Map<String, String> map = getMap(category, locale);
     map.put(key, value);
+  }
+
+  public void addEntryIfMissing(String category, GwtLocale locale, String key, String value) {
+    Map<String, String> map = getMap(category, locale);
+    if (!map.containsKey(key)) {
+      map.put(key, value);
+    }
+  }
+
+  public void addEntry(String category, GwtLocale locale, String key, String value,
+      boolean draft) {
+    if (draft) {
+      addEntryIfMissing(category, locale, key, value);
+    } else {
+      addEntry(category, locale, key, value);
+    }
   }
 
   /**
@@ -473,6 +683,21 @@ public class LocaleData {
     addEntries(period + "-sa-wide", cldrFactory,
         "//ldml/dates/calendars/calendar[@type=\"gregorian\"]/" + period + "s/" + period
             + "Context[@type=\"stand-alone\"]/" + period + "Width[@type=\"wide\"]", period, "type");
+  }
+
+  public void addNumberData(Factory cldrFactory) {
+    // default if we don't get one later
+    addEntry(CATEGORY_NUMBERS, defaultLocale, "!default", "latn");
+    for (GwtLocale locale : allLocales.keySet()) {
+      String numberSystem = fetchTagValue(locale, cldrFactory,
+          "//ldml/numbers/defaultNumberingSystem", "latn");
+      addEntry(CATEGORY_NUMBERS, locale, "!default", numberSystem);
+      addNumberSymbols(cldrFactory);
+      addNumberPatterns(locale, cldrFactory, "decimal");
+      addNumberPatterns(locale, cldrFactory, "scientific");
+      addNumberPatterns(locale, cldrFactory, "percent");
+      addNumberPatterns(locale, cldrFactory, "currency");
+    }
   }
 
   /**
@@ -579,6 +804,49 @@ public class LocaleData {
     }
   }
 
+  public String fetchTagValue(GwtLocale locale, Factory cldrFactory, String prefix,
+      String defaultVal) {
+    String result = defaultVal;
+    CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
+    XPathParts parts = new XPathParts();
+    Iterator<String> iterator = cldr.iterator(prefix);
+    if (iterator.hasNext()) {
+      String path = iterator.next();
+      String fullXPath = cldr.getFullXPath(path);
+      if (fullXPath == null) {
+        fullXPath = path;
+      }
+      parts.set(fullXPath);
+      result = cldr.getStringValue(path);
+    }
+    return result;
+  }
+
+  public Map<String, String> fetchTagValues(GwtLocale locale, Factory cldrFactory, Pattern regex,
+      String... tags) {
+    Map<String,String> result = new HashMap<String, String>();
+    Set<String> tagSet = new HashSet<String>();
+    tagSet.addAll(Arrays.asList(tags));
+    CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
+    XPathParts parts = new XPathParts();
+    Iterator<String> iterator = cldr.iterator(regex.matcher(""));
+    while (iterator.hasNext()) {
+      String path = iterator.next();
+      String fullXPath = cldr.getFullXPath(path);
+      if (fullXPath == null) {
+        fullXPath = path;
+      }
+      parts.set(fullXPath);
+      boolean draft = parts.containsAttribute("draft");
+      String tag = parts.getElement(-1);
+      if (tagSet.contains(tag) && (!draft || !result.containsKey(tag))) {
+        String value = cldr.getStringValue(path);
+        result.put(tag, value);
+      }
+    }
+    return result;
+  }
+
   public Map<String, Map<String, String>> getAllEntries(String localeName) {
     GwtLocale locale = localeFactory.fromString(localeName);
     Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
@@ -596,6 +864,13 @@ public class LocaleData {
    */
   public Set<GwtLocale> getAllLocales() {
     return Collections.unmodifiableSet(allLocales.keySet());
+  }
+
+  /**
+   * @return all locales present in the CLDR data.
+   */
+  public Map<GwtLocale, String> getAllLocalesMap() {
+    return Collections.unmodifiableMap(allLocales);
   }
 
   /**
@@ -678,11 +953,12 @@ public class LocaleData {
    * @return all locales that have some data associated with them in the
    *         specified category.
    */
-  public Set<GwtLocale> getNonEmptyLocales(String category) {
+  public Set<GwtLocale> getNonEmptyLocales(String... category) {
     Set<GwtLocale> result = new HashSet<GwtLocale>();
+    Set<String> requestedCategories = new HashSet<String>(Arrays.asList(category));
     for (Map.Entry<MapKey, Map<String, String>> entry : maps.entrySet()) {
       Map<String, String> map = entry.getValue();
-      if (!category.equals(entry.getKey().category) || map.isEmpty()) {
+      if (map.isEmpty() || !requestedCategories.contains(entry.getKey().category)) {
         continue;
       }
       result.add(entry.getKey().getLocale());
@@ -724,11 +1000,17 @@ public class LocaleData {
    * @return GwtLocale of nearest ancestor with the specified category
    */
   public GwtLocale inheritsFrom(String category, GwtLocale locale) {
+    return inheritsFrom(locale, category);
+  }
+
+  public GwtLocale inheritsFrom(GwtLocale locale, String... categories) {
     GwtLocale parent = inheritsFrom.get(locale);
     while (parent != null && parent != defaultLocale) {
-      Map<String, String> map = getMap(category, parent);
-      if (!map.isEmpty()) {
-        return parent;
+      for (String category : categories) {
+        Map<String, String> map = getMap(category, parent);
+        if (!map.isEmpty()) {
+          return parent;
+        }
       }
       parent = inheritsFrom.get(parent);
     }
@@ -815,6 +1097,24 @@ public class LocaleData {
         if (value == null || value.equals(parentMap.get(entry.getKey()))) {
           it.remove();
         }
+      }
+    }
+  }
+
+  /**
+   * Remove entries that are duplicates of the entries in the parent locale.
+   * 
+   * @param matchCategory
+   */
+  public void removeDuplicates(String category, GwtLocale locale, Map<String, String> baseMap) {
+    MapKey key = new MapKey(category, locale);
+    Map<String, String> map = maps.get(key);
+    Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+    while (it.hasNext()) {
+      Map.Entry<String, String> entry = it.next();
+      String value = entry.getValue();
+      if (value == null || value.equals(baseMap.get(entry.getKey()))) {
+        it.remove();
       }
     }
   }
@@ -928,10 +1228,11 @@ public class LocaleData {
    * @param defaultCurrencyFraction
    * @param stillInUse
    * @param rounding 
+   * @param localeWide 
    */
   private void addCurrencyEntries(String category, GwtLocale locale, Factory cldrFactory,
       Map<String, Integer> currencyFractions, int defaultCurrencyFraction, Set<String> stillInUse,
-      Map<String, Integer> rounding) {
+      Map<String, Integer> rounding, Map<String, String> localeWide) {
     Map<String, String> outputMap = getMap(category, locale);
     Map<String, String> defaultMap = null;
     if (!locale.isDefault()) {
@@ -962,11 +1263,14 @@ public class LocaleData {
           currency.setDecimalDigits(defaultCurrencyFraction);
         }
         currency.setInUse(stillInUse.contains(currencyCode));
-        tempMap.put(currencyCode, currency);
         Integer roundingMult = rounding.get(currencyCode);
         if (roundingMult != null) {
           currency.setRounding(roundingMult);
         }
+        if (localeWide.containsKey("currencyDecimal")) {
+          currency.setDecimalSeparator(localeWide.get("currencyDecimal"));
+        }
+        tempMap.put(currencyCode, currency);
       }
       String field = parts.getElement(4);
       String value = cldr.getStringValue(fullPath);
@@ -999,12 +1303,12 @@ public class LocaleData {
     }
     for (Currency currency : tempMap.values()) {
       String code = currency.getCode();
-      outputMap.put(code, encodeCurrencyData(currency));
+      outputMap.put(code, currency.encodeCurrencyData());
       if (defaultMap != null) {
         // Don't copy language-specific things to default
         currency.setDisplayName(code);
         currency.setSymbol(null);
-        defaultMap.put(code, encodeCurrencyData(currency));
+        defaultMap.put(code, currency.encodeCurrencyData());
       }
     }
   }
@@ -1014,6 +1318,102 @@ public class LocaleData {
         + "Formats/" + group + "FormatLength" + "[@type=\"" + length + "\"]/" + group
         + "Format[@type=\"standard\"]" + "/pattern[@type=\"standard\"]", group + "FormatLength",
         "type");
+  }
+
+  //ldml/numbers/decimalFormats[@numberSystem='arab']/decimalFormatLength[not(@type)]/decimalFormat/pattern
+  //ldml/numbers/scientificFormats[@numberSystem]/scientificFormatlength[not(@type)]/scientificFormat/pattern
+  //ldml/numbers/percentFormats[@numberSystem]/percentFormatlength[not(@type)]/percentFormat/pattern
+  //ldml/numbers/currencyFormats[@numberSystem]/currencyFormatlength[not(@type)]/currencyFormat/pattern
+  private void addNumberPatterns(GwtLocale locale, Factory cldrFactory, String pattern) {
+    CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
+    XPathParts parts = new XPathParts();
+    Pattern regex = Pattern.compile("^//ldml/numbers/" + pattern + "Formats[^/]*/" + pattern
+        + "FormatLength[^/]*/" + pattern + "Format[^/]*/pattern.*$");
+    Iterator<String> iterator = cldr.iterator(regex.matcher(""));
+    while (iterator.hasNext()) {
+      String path = iterator.next();
+      String fullXPath = cldr.getFullXPath(path);
+      if (fullXPath == null) {
+        fullXPath = path;
+      }
+      parts.set(fullXPath);
+      if (parts.containsAttribute("alt")) {
+        // ignore alternate strings
+        continue;
+      }
+      Map<String, String> attr = parts.findAttributes(pattern + "Formats");
+      String numberSystem = attr.get("numberSystem");
+      if (numberSystem != null) {
+        attr = parts.findAttributes(pattern + "FormatLength");
+        String value = cldr.getStringValue(path);
+        String compact = attr.get("type");
+        String category = CATEGORY_NUMBER_SYS(numberSystem);
+        Map<String, String> map = getMap(category, locale);
+        if (compact == null) {
+          boolean draft = parts.containsAttribute("draft");
+          String key = pattern + "Pattern";
+          if (!draft || !map.containsKey(key)) {
+            map.put(key, value);
+            // shouldn't be doing this here, but painful to do it elsewhere
+            if ("currency".equals(pattern)) {
+              String simpleCurrency = value.replaceAll("\u00A4+", "\u00A4\u00A4\u00A4\u00A4");
+              String globalCurrency = simpleCurrency.replaceAll("(;|$)", "\u00A4\u00A4$1");
+              map.put("simpleCurrencyPattern", simpleCurrency);
+              map.put("globalCurrencyPattern", globalCurrency);
+            }
+          }
+        } else {
+          // TODO(jat): process compact patterns
+        }
+      }
+    }
+  }
+
+  private void addNumberSymbols(Factory cldrFactory) {
+    Map<String, String> keymap = ImmutableMap.<String, String>builder()
+        .put("decimal", "decimalSeparator")
+        .put("group", "groupingSeparator")
+        .put("list", "listSeparator")
+        .put("percentSign", "percent")
+        .put("plusSign", "plusSign")
+        .put("minusSign", "minusSign")
+        .put("exponential", "exponentialSymbol")
+        .put("perMille", "perMille")
+        .put("infinity", "infinity")
+        .put("nan", "notANumber")
+        .build();
+    for (GwtLocale locale : allLocales.keySet()) {
+      CLDRFile cldr = cldrFactory.make(allLocales.get(locale), true);
+      XPathParts parts = new XPathParts();
+      Iterator<String> iterator = cldr.iterator("//ldml/numbers/symbols");
+      while (iterator.hasNext()) {
+        String path = iterator.next();
+        String fullXPath = cldr.getFullXPath(path);
+        if (fullXPath == null) {
+          fullXPath = path;
+        }
+        parts.set(fullXPath);
+        if (parts.containsAttribute("alt")) {
+          // ignore alternate strings
+          continue;
+        }
+        Map<String, String> attr = parts.findAttributes("symbols");
+        String ns = attr.get("numberSystem");
+        if (ns != null) {
+          // mark that we have seen this number system in this locale
+          getMap(CATEGORY_NUMBERS, locale).put(ns, "1");
+          String category = CATEGORY_NUMBER_SYS(ns);
+          Map<String, String> map = getMap(category, locale);
+          String value = cldr.getStringValue(path);
+          boolean draft = parts.containsAttribute("draft");
+          String tag = parts.getElement(-1);
+          String key = keymap.get(tag);
+          if (key != null && (!draft || !map.containsKey(key))) {
+            map.put(key, value);
+          }
+        }
+      }
+    }
   }
 
   private void buildInheritsFrom() {
@@ -1053,48 +1453,6 @@ public class LocaleData {
   }
 
   /**
-   * Encode the currency data as needed by CurrencyListGenerator.
-   * 
-   * @param currency
-   * @return a string containing the property file entry for the specified
-   *         currency
-   */
-  private String encodeCurrencyData(Currency currency) {
-    StringBuilder buf = new StringBuilder();
-    String skipped = "";
-    String displayName = currency.getDisplayName();
-    if (displayName == null) {
-      displayName = currency.getCode();
-    }
-    buf.append(displayName);
-    String symbol = currency.getSymbol();
-    if (symbol != null && !currency.getCode().equals(symbol)) {
-      buf.append('|');
-      buf.append(symbol);
-      skipped = "";
-    } else {
-      skipped = "|";
-    }
-    if (currency.getDecimalDigits() != 2) {
-      buf.append(skipped).append('|');
-      buf.append(currency.getDecimalDigits());
-      skipped = "";
-    } else {
-      skipped += "|";
-    }
-    if (!currency.isInUse()) {
-      buf.append(skipped).append("|1");
-      skipped = "";
-    } else {
-      skipped += "|";
-    }
-    if (currency.getRounding() != 0) {
-      buf.append(skipped).append("|").append(currency.getRounding());
-    }
-    return buf.toString();
-  }
-
-  /**
    * Get a map for a given class/locale combination.
    * 
    * @param category
@@ -1102,7 +1460,7 @@ public class LocaleData {
    * 
    * @return map for the specified class/locale
    */
-  private Map<String, String> getMap(String category, GwtLocale locale) {
+  public Map<String, String> getMap(String category, GwtLocale locale) {
     MapKey mapKey = new MapKey(category, locale);
     Map<String, String> map = maps.get(mapKey);
     if (map == null) {
@@ -1127,5 +1485,16 @@ public class LocaleData {
       }
     });
     return keys;
+  }
+
+  public GwtLocaleFactory getLocaleFactory() {
+    return localeFactory;
+  }
+
+  public void addEntries(String category, GwtLocale locale, Map<String, String> values) {
+    if (values != null) {
+      Map<String, String> map = getMap(category, locale);
+      map.putAll(values);
+    }
   }
 }

@@ -16,6 +16,8 @@
 package com.google.gwt.dom.client;
 
 import com.google.gwt.core.shared.impl.StringCase;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -170,5 +172,29 @@ public class DocumentTest extends GWTTestCase {
 
     doc.setTitle("myTitle");
     assertEquals("myTitle", doc.getTitle());
+  }
+
+  @DoNotRunWith(Platform.HtmlUnitLayout)
+  public void testScrollLeft() {
+    Document doc = Document.get();
+
+    doc.getBody().setInnerHTML("<div style='width: 5000px; height: 5000px'></div>");
+
+    doc.setScrollLeft(15);
+    int scrollLeft = doc.getScrollLeft();
+
+    assertEquals(15, scrollLeft);
+  }
+
+  @DoNotRunWith(Platform.HtmlUnitLayout)
+  public void testScrollTop() {
+    Document doc = Document.get();
+
+    doc.getBody().setInnerHTML("<div style='width: 5000px; height: 5000px'></div>");
+
+    doc.setScrollTop(15);
+    int scrollTop = doc.getScrollTop();
+
+    assertEquals(15, scrollTop);
   }
 }

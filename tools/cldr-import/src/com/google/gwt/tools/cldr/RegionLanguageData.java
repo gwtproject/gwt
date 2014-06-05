@@ -15,13 +15,12 @@
  */
 package com.google.gwt.tools.cldr;
 
-import org.unicode.cldr.util.CLDRFile;
-import org.unicode.cldr.util.Factory;
+import com.google.gwt.i18n.shared.GwtLocale;
+
 import org.unicode.cldr.util.XPathParts;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -30,7 +29,38 @@ import java.util.TreeSet;
 /**
  * Encapsulates region/language literacy data from CLDR.
  */
-public class RegionLanguageData {
+public class RegionLanguageData implements QueryMatchCallback {
+
+  @Override
+  public void process(GwtLocale locale, XPathParts parts, String value) {
+    String language = parts.findAttributeValue("languagePopulation", "type");
+    if (language == null) {
+      return;
+    }
+    String territory = parts.findAttributeValue("territory", "type");
+    String literacyPercentStr = parts.findAttributeValue("territory", "literacyPercent");
+    String populationStr = parts.findAttributeValue("territory", "population");
+    String populationPercentStr =
+        parts.findAttributeValue("languagePopulation", "populationPercent");
+    String statusStr = parts.findAttributeValue("languagePopulation", "officialStatus");
+    double literacyPercent = Double.parseDouble(literacyPercentStr) * .01;
+    double population = Double.parseDouble(populationStr);
+    double populationPercent = Double.parseDouble(populationPercentStr) * .01;
+    double literatePopulation = population * populationPercent * literacyPercent;
+    boolean official = "official".equals(statusStr);
+    SortedSet<RegionPopulation> regPop = languageMap.get(language);
+    if (regPop == null) {
+      regPop = new TreeSet<RegionPopulation>();
+      languageMap.put(language, regPop);
+    }
+    regPop.add(new RegionPopulation(territory, literatePopulation, official));
+    SortedSet<LanguagePopulation> langPop = regionMap.get(territory);
+    if (langPop == null) {
+      langPop = new TreeSet<LanguagePopulation>();
+      regionMap.put(territory, langPop);
+    }
+    langPop.add(new LanguagePopulation(language, literatePopulation, official));
+  }
 
   /**
    * Stores the populate literate in a given language.
@@ -152,13 +182,14 @@ public class RegionLanguageData {
     }
   }
 
-  private final Factory cldrFactory;
-
   private Map<String, SortedSet<LanguagePopulation>> regionMap;
   private Map<String, SortedSet<RegionPopulation>> languageMap;
 
-  public RegionLanguageData(Factory cldrFactory) {
-    this.cldrFactory = cldrFactory;
+  public RegionLanguageData(CldrData cldrData) {
+    regionMap = new HashMap<String, SortedSet<LanguagePopulation>>();
+    languageMap = new HashMap<String, SortedSet<RegionPopulation>>();
+    cldrData.registerSupplemental("supplementalData",
+        new XPathQuery("//supplementalData/territoryInfo/territory"), this);
   }
 
   public Set<LanguagePopulation> getLanguages(String region) {
@@ -180,44 +211,5 @@ public class RegionLanguageData {
   }
 
   private void ensureMaps() {
-    if (regionMap != null) {
-      return;
-    }
-    regionMap = new HashMap<String, SortedSet<LanguagePopulation>>();
-    languageMap = new HashMap<String, SortedSet<RegionPopulation>>();
-    CLDRFile supp = cldrFactory.getSupplementalData();
-    XPathParts parts = new XPathParts();
-    Iterator<String> iterator = supp.iterator("//supplementalData/territoryInfo/territory");
-    while (iterator.hasNext()) {
-      String path = iterator.next();
-      parts.set(supp.getFullXPath(path));
-      String language = parts.findAttributeValue("languagePopulation", "type");
-      if (language == null) {
-        continue;
-      }
-      String territory = parts.findAttributeValue("territory", "type");
-      String literacyPercentStr = parts.findAttributeValue("territory", "literacyPercent");
-      String populationStr = parts.findAttributeValue("territory", "population");
-      String populationPercentStr =
-          parts.findAttributeValue("languagePopulation", "populationPercent");
-      String statusStr = parts.findAttributeValue("languagePopulation", "officialStatus");
-      double literacyPercent = Double.parseDouble(literacyPercentStr) * .01;
-      double population = Double.parseDouble(populationStr);
-      double populationPercent = Double.parseDouble(populationPercentStr) * .01;
-      double literatePopulation = population * populationPercent * literacyPercent;
-      boolean official = "official".equals(statusStr);
-      SortedSet<RegionPopulation> regPop = languageMap.get(language);
-      if (regPop == null) {
-        regPop = new TreeSet<RegionPopulation>();
-        languageMap.put(language, regPop);
-      }
-      regPop.add(new RegionPopulation(territory, literatePopulation, official));
-      SortedSet<LanguagePopulation> langPop = regionMap.get(territory);
-      if (langPop == null) {
-        langPop = new TreeSet<LanguagePopulation>();
-        regionMap.put(territory, langPop);
-      }
-      langPop.add(new LanguagePopulation(language, literatePopulation, official));
-    }
   }
 }

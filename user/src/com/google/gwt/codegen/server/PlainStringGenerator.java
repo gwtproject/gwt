@@ -27,9 +27,10 @@ class PlainStringGenerator extends StringGenerator {
    * Initialize the StringGenerator with an output buffer.
    *
    * @param buf output buffer
+   * @param singleQuoteLiterals 
    */
-  PlainStringGenerator(StringBuilder buf) {
-    super(buf);
+  PlainStringGenerator(StringBuilder buf, boolean singleQuoteLiterals) {
+    super(buf, singleQuoteLiterals);
   }
 
   @Override

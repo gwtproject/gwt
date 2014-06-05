@@ -32,9 +32,10 @@ class SafeHtmlStringGenerator extends StringGenerator {
    * Initialize the StringGenerator with an output buffer.
    *
    * @param buf output buffer
+   * @param singleQuoteLiterals 
    */
-  SafeHtmlStringGenerator(StringBuilder buf) {
-    super(buf);
+  SafeHtmlStringGenerator(StringBuilder buf, boolean singleQuoteLiterals) {
+    super(buf, singleQuoteLiterals);
     buf.append("new " + SAFE_HTML_BUILDER_FQCN + "()");
   }
 

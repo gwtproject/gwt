@@ -15,43 +15,33 @@
  */
 package com.google.gwt.tools.cldr;
 
-import com.google.gwt.i18n.server.GwtLocaleFactoryImpl;
-import com.google.gwt.i18n.shared.GwtLocaleFactory;
+import com.google.gwt.i18n.shared.GwtLocale;
 
 import com.ibm.icu.dev.tool.UOption;
 
-import org.unicode.cldr.util.CldrUtility;
-import org.unicode.cldr.util.Factory;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Generate a country list for each locale, taking into account the literate
  * population of each country speaking the language.
  */
-@SuppressWarnings("unchecked")
 public class GenerateGwtCldrData {
 
-  private static final GwtLocaleFactory factory = new GwtLocaleFactoryImpl();
-
-  private static final String DEFAULT_PROCESSORS = "CurrencyDataProcessor,"
-      + "DateTimeFormatInfoProcessor,ListFormattingProcessor,LocalizedNamesProcessor";
+  // LocaleInfoProcessor pulls in all others, so the default is to generate everything
+  private static final String DEFAULT_PROCESSORS = "LocaleInfoProcessor";
 
   public static void main(String[] args) throws IOException, SecurityException,
-      NoSuchMethodException, IllegalArgumentException, InstantiationException,
-      IllegalAccessException, InvocationTargetException {
-    System.out.println("Starting to generate from CLDR data (ignore -D lines "
-        + "produced by cldr-tools)");
+      IllegalArgumentException {
+    System.out.println("Starting to generate from CLDR data");
     UOption[] options = {
         UOption.HELP_H(), UOption.HELP_QUESTION_MARK(),
-        UOption.SOURCEDIR().setDefault(CldrUtility.MAIN_DIRECTORY),
+        // v24
+        // UOption.SOURCEDIR().setDefault(CldrUtility.MAIN_DIRECTORY),
+        // v25
+        UOption.SOURCEDIR(),
         outputDir().setDefault("./"),
         restrictLocales(),
         processors().setDefault(DEFAULT_PROCESSORS),
@@ -80,28 +70,32 @@ public class GenerateGwtCldrData {
         System.err.println("Ignoring " + procName + " (" + thrown + ")");
       }
     }
-    Factory cldrFactory = Factory.make(sourceDir, ".*");
-    Set<String> locales = cldrFactory.getAvailable();
-    if (restrictLocales != null) {
-      Set<String> newLocales = new HashSet<String>();
-      newLocales.add("root");  // always include root or things break
-      for (String locale : restrictLocales.split(",")) {
-        if (!locales.contains(locale)) {
-          System.err.println("Ignoring non-existent locale " + locale);
-          continue;
-        }
-        newLocales.add(locale);
-      }
-      locales = newLocales;
-    }
-    System.out.println("Processing " + locales.size() + " locales");
+    CldrData cldrData = new CldrData(sourceDir, restrictLocales);
     File outputDir = new File(targetDir);
-    LocaleData localeData = new LocaleData(factory, locales);
+    Processors processors = new Processors(cldrData, outputDir);
     for (Class<? extends Processor> processorClass : processorClasses) {
-      Constructor<? extends Processor> ctor =
-          processorClass.getConstructor(File.class, Factory.class, LocaleData.class);
-      Processor processor = ctor.newInstance(outputDir, cldrFactory, localeData);
-      processor.run();
+      processors.requireProcessor(processorClass);
+    }
+    System.out.println("Loading external data");
+    for (GwtLocale locale : cldrData.allLocales()) {
+      System.out.println("  " + locale.toString());
+      for (Processor processor : processors) {
+        processor.loadExternalData(locale);
+      }
+    }
+    System.out.println("Loading CLDR data");
+    cldrData.processData();
+    System.out.println("Cleaning up data");
+    for (Processor processor : processors) {
+      processor.cleanupData();
+    }
+    System.out.println("Performing post-processing");
+    for (Processor processor : processors) {
+      processor.afterCleanup();
+    }
+    System.out.println("Writing output files");
+    for (Processor processor : processors) {
+      processor.writeOutputFiles();
     }
     System.out.println("Finished.");
   }

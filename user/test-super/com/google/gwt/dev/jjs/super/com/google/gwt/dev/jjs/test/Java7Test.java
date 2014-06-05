@@ -304,4 +304,40 @@ public class Java7Test extends GWTTestCase {
     } catch (E1 x) {
     }
   }
+
+  private Object unoptimizableId(Object o) {
+    if (Math.random() > -10) {
+      return o;
+    }
+    return null;
+  }
+
+  public void testPrimitiveCastsFromObject() {
+    Object o = unoptimizableId((byte) 2);
+    assertEquals((byte) 2, (byte) o);
+    o = unoptimizableId((short) 3);
+    assertEquals((short) 3, (short) o);
+    o = unoptimizableId(1);
+    assertEquals(1, (int) o);
+    o = unoptimizableId(1L);
+    assertEquals(1L, (long) o);
+    o = unoptimizableId(0.1f);
+    assertEquals(0.1f, (float) o);
+    o = unoptimizableId(0.1);
+    assertEquals(0.1, (double) o);
+    o = unoptimizableId(true);
+    assertEquals(true, (boolean) o);
+    o = unoptimizableId('a');
+    assertEquals('a', (char) o);
+    try {
+      boolean b = (boolean) o;
+      fail("Should have thrown a ClassCastException");
+      // Use b so that is not prunned in optimized mode.
+      // TODO(rluble): "(boolean) o" should be considered as having side effects if it can throw an
+      // exception
+      assertTrue(b);
+    } catch (Exception e) {
+      // Expected.
+    }
+  }
 }

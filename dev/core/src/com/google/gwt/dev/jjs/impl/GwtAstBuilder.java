@@ -2802,13 +2802,13 @@ public class GwtAstBuilder {
     }
 
     private JExpression unbox(JExpression original, int implicitConversion) {
-      int typeId = implicitConversion & TypeIds.COMPILE_TYPE_MASK;
+      int targetTypeId = (implicitConversion & TypeIds.IMPLICIT_CONVERSION_MASK) >> 4;
       ClassScope scope = curClass.scope;
-      BaseTypeBinding primitiveType = (BaseTypeBinding) TypeBinding.wellKnownType(scope, typeId);
+      BaseTypeBinding primitiveType = (BaseTypeBinding) TypeBinding.wellKnownType(scope, targetTypeId);
+
       ReferenceBinding boxType = (ReferenceBinding) scope.boxing(primitiveType);
       char[] selector = CharOperation.concat(primitiveType.simpleName, VALUE);
-      MethodBinding valueMethod =
-          boxType.getExactMethod(selector, NO_TYPES, scope.compilationUnitScope());
+      MethodBinding valueMethod = boxType.getExactMethod(selector, NO_TYPES, scope.compilationUnitScope());
       assert valueMethod != null;
       JMethod unboxMethod = typeMap.get(valueMethod);
       JMethodCall call = new JMethodCall(original.getSourceInfo(), original, unboxMethod);

@@ -16,6 +16,24 @@
       "revId": "a643039e8df3e7a52c45e5ea722fd3d55637ec01",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df4350e0_20726e67",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-06T19:19:50Z",
+      "side": 1,
+      "message": "Done. However I think that the previous example exercises the same code path\n\n  Short n \u003d (short) 1; Object o \u003d n;  boolean b \u003d (boolean) o.\n\ngets translated to \n\n  Short n \u003d (short) 1; Object o \u003d n;  boolean b \u003d (boolean) (Boolean) o.\n\nwhich triggers the ClassCastException. Curiously this happens even for compatible types.\n\n  Short n \u003d (short) 1; Object o \u003d n; int i \u003d (int) o.\n\nas the previous snippet throws a ClassCastException in GWT, eclipse\u0027s Java, openJDK Java which seems surprising.",
+      "parentUuid": "5fea00f0_f0467986",
+      "revId": "a643039e8df3e7a52c45e5ea722fd3d55637ec01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

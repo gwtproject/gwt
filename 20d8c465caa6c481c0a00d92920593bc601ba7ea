@@ -34,6 +34,24 @@
       "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_e37a5095",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2807,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2014-06-06T16:47:14Z",
+      "side": 1,
+      "message": "I\u0027m more worried that the check here is for compileTypeId \u003d\u003d TypeIds.T_JavaLangObject\n\nI\u0027d want to see a test to ensure that something like\n\nComparable x \u003d 5;  would work.\n\nI don\u0027t have JDT semantics memorized, but would implicitConversion \u0026 TypeIds.COMPILE_TYPE_MASKreturn T_JavaLangObject for any reference type (e.g. Comparable, Serializable)?",
+      "parentUuid": "7f81844b_15bd5650",
+      "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2c3030_e840ee6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2807,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-06T00:16:36Z",
+      "side": 1,
+      "message": "Is it only Object, or could you also cast from Number?\ne.g.\n\nNumber x \u003d new Integer(5);\nint y \u003d (int)x?",
+      "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

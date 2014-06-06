@@ -52,6 +52,24 @@
       "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f1b2808_12579000",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2807,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-06T17:24:28Z",
+      "side": 1,
+      "message": "Actually Java 7 JDT rejects all but cast from Object to primitive types, hence the second byte of implicit conversion only provides T_JavaLangObject.\n\nThat was fixed in newer versions of the JDT so we will have to revisit this topic after the upgrade.\n\nI changed the code defensibly so that will probably work in newer JDTs by always inserting a cast for reference types. But looking at newer JDTs TypeIds.java, only T_JavaLangObject is there as a reference type (appart from T_null and T_JavaLangString), so I am guessing that any other reference type will be represented as Object in this context.",
+      "parentUuid": "df2c3030_e37a5095",
+      "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fea00f0_f0467986",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-06T17:34:46Z",
+      "side": 1,
+      "message": "Add a test casting a\n\n new Object()\n\n(or String or whatever) to a primitive type? (and see it fail with a ClassCastException. The CCE below tests boxed type to unboxed type of incompatible types (boxed type to boxed type of incompatible type, then, never reached, unboxing).",
+      "revId": "a643039e8df3e7a52c45e5ea722fd3d55637ec01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

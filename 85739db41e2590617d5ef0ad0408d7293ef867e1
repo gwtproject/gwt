@@ -16,6 +16,23 @@
       "revId": "85739db41e2590617d5ef0ad0408d7293ef867e1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfe21c19_499126f7",
+        "filename": "user/src/com/google/gwt/logging/client/LogConfiguration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-06T22:45:31Z",
+      "side": 1,
+      "message": "I have an idea.\n\nWhat if addHandlerIfNotNull method had annotation\n\n@SpecializeMethod(params \u003d {NullLogHandler.class}, target \u003d \"emptyAddHandler\")\n\nwould compiler optimize null handlers out of the code?",
+      "revId": "85739db41e2590617d5ef0ad0408d7293ef867e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

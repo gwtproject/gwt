@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f81844b_db4dbf85",
+        "filename": "user/src/com/google/gwt/logging/Logging.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-06T23:19:31Z",
+      "side": 1,
+      "message": "Is it ok that it has logging level\u0027s value?",
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

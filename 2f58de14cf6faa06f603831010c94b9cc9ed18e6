@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2c3030_46f2324f",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-06T19:07:36Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "2f58de14cf6faa06f603831010c94b9cc9ed18e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

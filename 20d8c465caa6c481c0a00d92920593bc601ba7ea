@@ -16,6 +16,24 @@
       "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f81844b_15bd5650",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2807,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-06T01:28:22Z",
+      "side": 1,
+      "message": "\u003e The type Object means any reference type other than the eight wrapper classes Boolean, Byte, Short, Character, Integer, Long, Float, Double.\n\nSource: http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5",
+      "parentUuid": "df2c3030_e840ee6a",
+      "revId": "20d8c465caa6c481c0a00d92920593bc601ba7ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

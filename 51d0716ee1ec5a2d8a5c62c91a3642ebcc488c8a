@@ -16,6 +16,24 @@
       "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f33447f_0853c49a",
+        "filename": "user/src/com/google/gwt/logging/Logging.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-07T00:10:25Z",
+      "side": 1,
+      "message": "Yes, SEVERE is a valid value here. It basically helps to compile out non-severe logging:\n\n\"...Setting this value to FALSE will compile out all logging.  Setting it to SEVERE or WARNING means that the logging framework will not compile out, but the basic logging calls like logger.info() and logger.fine() will compile out if it is below the level that is set.  Note that something like logger.log(Level.INFO, \"foo\", e) *will not* compile out at this point.  If you have something that is important to have compiled out, you should put it behind a LogConfiguration.isLoggingEnabled(Level.INFO) guard.\"",
+      "parentUuid": "7f81844b_db4dbf85",
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

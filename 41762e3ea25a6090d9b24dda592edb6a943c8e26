@@ -16,6 +16,24 @@
       "revId": "41762e3ea25a6090d9b24dda592edb6a943c8e26",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f33447f_bb2d44cb",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-07T05:10:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df2c3030_232cc9ba",
+      "revId": "41762e3ea25a6090d9b24dda592edb6a943c8e26",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

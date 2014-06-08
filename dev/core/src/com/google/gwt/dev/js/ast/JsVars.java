@@ -14,6 +14,7 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -69,8 +70,9 @@ public class JsVars extends JsStatement implements Iterable<JsVars.JsVar> {
 
   private final List<JsVar> vars = new ArrayList<JsVar>();
 
-  public JsVars(SourceInfo sourceInfo) {
+  public JsVars(SourceInfo sourceInfo, JsVar... vars) {
     super(sourceInfo);
+    Lists.addAll(this.vars, vars);
   }
 
   public void add(JsVar var) {

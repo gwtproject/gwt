@@ -279,6 +279,21 @@ public class JavaAstConstructor {
       );
     }
   };
+
+  public static final MockJavaResource MODULE_UTILS =
+      new MockJavaResource("com.google.gwt.lang.ModuleUtils") {
+        @Override
+        public CharSequence getContent() {
+          return Joiner.on("\n").join(
+              "package com.google.gwt.lang;",
+              "public class ModuleUtils {",
+              "  public static void createGwtOnLoad() {}",
+              "  public static Object nullIfUndefined() { return null; }",
+              "}"
+          );
+        }
+      };
+
   public static final MockJavaResource RUNASYNCCALLBACK = new MockJavaResource(
       "com.google.gwt.core.client.RunAsyncCallback") {
     @Override
@@ -348,7 +363,7 @@ public class JavaAstConstructor {
     result.remove(JavaResourceBase.ENUM);
     Collections.addAll(result, ASYNCFRAGMENTLOADER, ARRAY, CAST, CLASS, CLASSLITERALHOLDER,
         COLLAPSED_PROPERTY_HOLDER, ENUM, EXCEPTIONS, GWT, GWT_SHARED, IMPL,
-        JAVA_CLASS_HIERARCHY_SETUP_UTIL, LONGLIB, RUNASYNCCALLBACK, RUNASYNCCODE);
+        JAVA_CLASS_HIERARCHY_SETUP_UTIL, LONGLIB, MODULE_UTILS, RUNASYNCCALLBACK, RUNASYNCCODE);
     return result.toArray(new MockJavaResource[result.size()]);
   }
 }

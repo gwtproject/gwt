@@ -160,6 +160,9 @@ import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -167,6 +170,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -2128,218 +2132,126 @@ public class GenerateJavaScriptAST {
      * Creates gwtOnLoad bootstrapping code. Unusually, the created code is executed as part of
      * source loading and runs in the global scope (not inside of any function scope).
      */
-    // TODO(stalcup): get rid of manually synthesized AST and replace it either with calls to static
-    // functions that vary only in their data arguments or else create source with a Generator.
     private void generateGwtOnLoad(JsFunction[] entryFuncs,
         List<JsStatement> globalStmts) {
       /**
        * <pre>
-       * {MODULE_RuntimeRebindRegistrator}.register();
-       * {MODULE_PropertyProviderRegistrator}.register();
        * var $entry = Impl.registerEntry();
        * // Stub gwtOnLoad at top level so that HtmlUnit can find it.
        * // On first execution this will assign a value of null into gwtOnLoad.
-       * // It's value will actually be built inside of the following anonymous
-       * // function and subsequent executions will preserve the existing value.
+       * // It's value will actually be built inside of ModuleUtils.createGwtOnLoad()
+       * // and subsequent executions will preserve the existing value.
        * // Since gwtOnLoad is being varred, this will work in the global scope
        * // as well as in speculative future scopes in which linkers might
        * // choose to place the output.
        * var gwtOnLoad = typeof gwtOnLoad === 'undefined' ? null : gwtOnLoad;
-       * // Create gwtOnLoad in function scope so the previousGwtOnLoad reference is preserved.
-       * (function() {
-       *   var previousGwtOnLoad = gwtOnLoad;
-       *   gwtOnLoad = function(errFn, modName, modBase, softPermutationId) {
-       *     if (previousGwtOnLoad) {
-       *       previousGwtOnLoad(errFn, modName, modBase, softPermutationId);
-       *     }
-       *     $moduleName = modName;
-       *     $moduleBase = modBase;
-       *     CollapsedPropertyHolder.permutationId = softPermutationId;
-       *     if (errFn) {
-       *       try {
-       *         $entry(init)();
-       *       } catch(e) {
-       *         errFn(modName);
-       *       }
-       *     } else {
-       *       $entry(init)();
-       *     }
-       *   }
-       * }());
+       * ModuleUtils.createGwtOnLoad(MODULE_RuntimeRebindRegistrator,
+       *    MODULE_PropertyProviderRegistrator);
        * </pre>
        */
 
       SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
-
-      String moduleRuntimeRebindRegistratorSourceName =
-          program.getRuntimeRebindRegistratorTypeSourceName();
-      // Skip if no runtime rebind registry code in this module, probably a monolithic compile.
-      if (moduleRuntimeRebindRegistratorSourceName != null) {
-        // RuntimeRebindRegistrator.register();
-        String runtimeRebindRegistratorTypeShortName =
-            SourceName.getShortClassName(moduleRuntimeRebindRegistratorSourceName);
-        JsFunction registerRuntimeRebindsFunction =
-            indexedFunctions.get(runtimeRebindRegistratorTypeShortName + ".register");
-        JsInvocation registerRuntimeRebindsCall = new JsInvocation(sourceInfo);
-        registerRuntimeRebindsCall.setQualifier(
-            registerRuntimeRebindsFunction.getName().makeRef(sourceInfo));
-        globalStmts.add(registerRuntimeRebindsCall.makeStmt());
-      }
-
-      String modulepropertyProviderRegistratorSourceName =
-          program.getPropertyProviderRegistratorTypeSourceName();
-      // Skip if no runtime property registry code in this module, probably a monolithic compile.
-      if (modulepropertyProviderRegistratorSourceName != null) {
-        // PropertyProviderRegistrator.register();
-        String propertyProviderRegistratorTypeShortName =
-            SourceName.getShortClassName(program.getPropertyProviderRegistratorTypeSourceName());
-        JsFunction registerPropertyProvidersFunction =
-            indexedFunctions.get(propertyProviderRegistratorTypeShortName + ".register");
-        JsInvocation registerPropertyProvidersCall = new JsInvocation(sourceInfo);
-        registerPropertyProvidersCall.setQualifier(
-            registerPropertyProvidersFunction.getName().makeRef(sourceInfo));
-        globalStmts.add(registerPropertyProvidersCall.makeStmt());
-      }
+      JsExpression registerRuntimeRebindsFunc = getRegisterRuntimeRebindsFunction();
+      JsExpression registerPropertyProvidersFunc = getRegisterPropertyProviderFunction();
 
       // var $entry = Impl.registerEntry();
       JsName entryName = topScope.declareName("$entry");
-      JsVar entryVar = new JsVar(sourceInfo, entryName);
-      JsInvocation registerEntryCall = new JsInvocation(sourceInfo);
-      JsFunction registerEntryFunction = indexedFunctions.get("Impl.registerEntry");
-      registerEntryCall.setQualifier(registerEntryFunction.getName().makeRef(sourceInfo));
-      entryVar.setInitExpr(registerEntryCall);
-      JsVars entryVars = new JsVars(sourceInfo);
-      entryVars.add(entryVar);
+      JsStatement entryVars = constructFunctionCallStatement(entryName, "Impl.registerEntry");
       globalStmts.add(entryVars);
 
       // Stub gwtOnLoad at top level so that HtmlUnit can find it.
       // var gwtOnLoad = typeof gwtOnLoad === 'undefined' ? null : gwtOnLoad;
-      JsName gwtOnLoadName = topScope.findExistingUnobfuscatableName("gwtOnLoad");
-      JsVar gwtOnLoadNameVar = new JsVar(sourceInfo, gwtOnLoadName);
-      gwtOnLoadNameVar.setInitExpr(new JsConditional(sourceInfo, new JsBinaryOperation(sourceInfo,
-          JsBinaryOperator.REF_EQ, new JsPrefixOperation(
-              sourceInfo, JsUnaryOperator.TYPEOF, gwtOnLoadName.makeRef(sourceInfo)),
-          new JsStringLiteral(sourceInfo, "undefined")), JsNullLiteral.INSTANCE,
-          gwtOnLoadName.makeRef(sourceInfo)));
-      JsVars gwtOnLoadNameVars = new JsVars(sourceInfo);
-      gwtOnLoadNameVars.add(gwtOnLoadNameVar);
-      globalStmts.add(gwtOnLoadNameVars);
+      JsName gwtOnLoad = topScope.findExistingUnobfuscatableName("gwtOnLoad");
+      JsStatement gwtOnLoadAssignment = constructFunctionCallStatement(gwtOnLoad,
+          "ModuleUtils.nullIfUndefined",gwtOnLoad.makeRef(sourceInfo));
+      globalStmts.add(gwtOnLoadAssignment);
 
-      // Create gwtOnLoad in function scope so the previousGwtOnLoad reference is preserved.
-      // (function() {
-      JsFunction createGwtOnLoadFunction = new JsFunction(sourceInfo, topScope);
-      JsBlock createGwtOnLoadBody = new JsBlock(sourceInfo);
-      createGwtOnLoadFunction.setBody(createGwtOnLoadBody);
 
-      // var previousGwtOnLoad = gwtOnLoad;
-      JsName previousGwtOnLoadName =
-          createGwtOnLoadFunction.getScope().declareName("previousGwtOnLoad");
-      JsVar previousGwtOnLoadNameVar = new JsVar(sourceInfo, previousGwtOnLoadName);
-      previousGwtOnLoadNameVar.setInitExpr(gwtOnLoadName.makeRef(sourceInfo));
-      JsVars previousGwtOnLoadNameVars = new JsVars(sourceInfo);
-      previousGwtOnLoadNameVars.add(previousGwtOnLoadNameVar);
-      createGwtOnLoadBody.getStatements().add(previousGwtOnLoadNameVars);
 
-      // gwtOnLoad = function(errFn, modName, modBase, softPermutationId) {
-      JsFunction gwtOnLoad = new JsFunction(sourceInfo, createGwtOnLoadFunction.getScope());
-      gwtOnLoad.setArtificiallyRescued(true);
-      JsBlock gwtOnLoadFunctionBody = new JsBlock(sourceInfo);
-      gwtOnLoad.setBody(gwtOnLoadFunctionBody);
-      JsExpression gwtOnLoadAssignment =
-          createAssignment(gwtOnLoadName.makeRef(sourceInfo), gwtOnLoad);
-      createGwtOnLoadBody.getStatements().add(gwtOnLoadAssignment.makeStmt());
-      JsScope fnScope = gwtOnLoad.getScope();
-      List<JsParameter> gwtOnLoadParams = gwtOnLoad.getParameters();
-      JsName errFn = fnScope.declareName("errFn");
-      JsName modName = fnScope.declareName("modName");
-      JsName modBase = fnScope.declareName("modBase");
-      JsName softPermutationId = fnScope.declareName("softPermutationId");
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, errFn));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, modName));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, modBase));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, softPermutationId));
+      // ModUtils.createGwtOnLoad(registerRuntimeRebindsFunc, registerPropertyProviderFunc,
+      // gwtOnLoad, initFunc1, initFunc2, ...)
 
-      // if (previousGwtOnLoad) {
-      //   previousGwtOnLoad();
-      // }
-      JsIf previousGwtOnLoadIf = new JsIf(sourceInfo);
-      gwtOnLoadFunctionBody.getStatements().add(previousGwtOnLoadIf);
-      previousGwtOnLoadIf.setIfExpr(previousGwtOnLoadName.makeRef(sourceInfo));
-      JsInvocation previousGwtOnLoadCall = new JsInvocation(sourceInfo);
-      previousGwtOnLoadCall.setQualifier(previousGwtOnLoadName.makeRef(sourceInfo));
-      List<JsExpression> previousGwtOnLoadCallArguments = previousGwtOnLoadCall.getArguments();
-      previousGwtOnLoadCallArguments.add(errFn.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(modName.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(modBase.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(softPermutationId.makeRef(sourceInfo));
-      previousGwtOnLoadIf.setThenStmt(previousGwtOnLoadCall.makeStmt());
+      List<JsExpression> arguments = Lists.newArrayList();
+      arguments.add(registerRuntimeRebindsFunc);
+      arguments.add(registerPropertyProvidersFunc);
+      arguments.add(gwtOnLoad.makeRef(sourceInfo));
+      Iterables.addAll(arguments, Iterables.transform(
+          Iterables.filter(Arrays.asList(entryFuncs), new Predicate<JsFunction>() {
+            @Override
+            public boolean apply(JsFunction jsFunction) {
+              return jsFunction != indexedFunctions.get("Impl.registerEntry");
+            }
+          }),
+          new Function<JsFunction, JsExpression>() {
+            @Override
+            public JsExpression apply(JsFunction jsFunction) {
+              return jsFunction.getName().makeRef(SourceOrigin.UNKNOWN);
+            }
+          }));
 
-      // $moduleName = modName;
-      JsExpression moduleNameAssignment =
-          createAssignment(topScope.findExistingUnobfuscatableName("$moduleName").makeRef(
-              sourceInfo), modName.makeRef(sourceInfo));
-      gwtOnLoadFunctionBody.getStatements().add(moduleNameAssignment.makeStmt());
+      JsStatement createGwtOnLoadFunctionCall = constructFunctionCallStatement(null,
+          "ModuleUtils.createGwtOnLoad", arguments.toArray(new JsExpression[arguments.size()]));
 
-      // $moduleBase = modBase;
-      JsExpression moduleBaseAssignment =
-          createAssignment(topScope.findExistingUnobfuscatableName("$moduleBase").makeRef(
-              sourceInfo), modBase.makeRef(sourceInfo));
-      gwtOnLoadFunctionBody.getStatements().add(moduleBaseAssignment.makeStmt());
+      globalStmts.add(createGwtOnLoadFunctionCall);
+    }
 
-      // Assignment to CollapsedPropertyHolder.permutationId only if it's used
-      // CollapsedPropertyHolder.permutationId = softPermutationId;
-      JsName permutationIdFieldName =
-          names.get(program.getIndexedField("CollapsedPropertyHolder.permutationId"));
-      if (permutationIdFieldName != null) {
-        JsExpression permutationIdAssignment =
-            createAssignment(permutationIdFieldName.makeRef(sourceInfo), softPermutationId
-                .makeRef(sourceInfo));
-        gwtOnLoadFunctionBody.getStatements().add(permutationIdAssignment.makeStmt());
+    private JsExpression getRegisterPropertyProviderFunction() {
+      String modulepropertyProviderRegistratorSourceName =
+          program.getPropertyProviderRegistratorTypeSourceName();
+      // Skip if no runtime property registry code in this module, probably a monolithic compile.
+      if (modulepropertyProviderRegistratorSourceName == null) {
+        return JsNullLiteral.INSTANCE;
       }
 
-      // if (errFn) {
-      //   try {
-      //     $entry(init)();
-      //   } catch(e) {
-      //     errFn(modName);
-      //   }
-      // } else {
-      //   $entry(init)();
-      // }
-      JsIf jsIf = new JsIf(sourceInfo);
-      gwtOnLoadFunctionBody.getStatements().add(jsIf);
-      jsIf.setIfExpr(errFn.makeRef(sourceInfo));
-      JsTry jsTry = new JsTry(sourceInfo);
-      jsIf.setThenStmt(jsTry);
-      JsBlock callBlock = new JsBlock(sourceInfo);
-      jsIf.setElseStmt(callBlock);
-      jsTry.setTryBlock(callBlock);
-      for (JsFunction func : entryFuncs) {
-        if (func == registerEntryFunction) {
-          continue;
-        } else if (func != null) {
-          JsInvocation call = new JsInvocation(sourceInfo);
-          call.setQualifier(entryName.makeRef(sourceInfo));
-          call.getArguments().add(func.getName().makeRef(sourceInfo));
-          JsInvocation entryCall = new JsInvocation(sourceInfo);
-          entryCall.setQualifier(call);
-          callBlock.getStatements().add(entryCall.makeStmt());
-        }
-      }
-      JsCatch jsCatch = new JsCatch(sourceInfo, fnScope, "e");
-      jsTry.getCatches().add(jsCatch);
-      JsBlock catchBlock = new JsBlock(sourceInfo);
-      jsCatch.setBody(catchBlock);
-      JsInvocation errCall = new JsInvocation(sourceInfo);
-      catchBlock.getStatements().add(errCall.makeStmt());
-      errCall.setQualifier(errFn.makeRef(sourceInfo));
-      errCall.getArguments().add(modName.makeRef(sourceInfo));
-      errCall.getArguments().add(jsCatch.getParameter().getName().makeRef(sourceInfo));
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      // PropertyProviderRegistrator.register();
+      String propertyProviderRegistratorTypeShortName =
+          SourceName.getShortClassName(program.getPropertyProviderRegistratorTypeSourceName());
+      JsFunction registerPropertyProvidersFunction =
+          indexedFunctions.get(propertyProviderRegistratorTypeShortName + ".register");
+      return registerPropertyProvidersFunction.getName().makeRef(sourceInfo);
+    }
 
-      // }());
-      JsInvocation createGwtOnLoadCall = new JsInvocation(sourceInfo);
-      createGwtOnLoadCall.setQualifier(createGwtOnLoadFunction);
-      globalStmts.add(createGwtOnLoadCall.makeStmt());
+    private JsExpression getRegisterRuntimeRebindsFunction() {
+      String moduleRuntimeRebindRegistratorSourceName =
+          program.getRuntimeRebindRegistratorTypeSourceName();
+      // Skip if no runtime rebind registry code in this module, probably a monolithic compile.
+      if (moduleRuntimeRebindRegistratorSourceName == null) {
+        return JsNullLiteral.INSTANCE;
+      }
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      // RuntimeRebindRegistrator.register();
+      String runtimeRebindRegistratorTypeShortName =
+          SourceName.getShortClassName(moduleRuntimeRebindRegistratorSourceName);
+      JsFunction registerRuntimeRebindsFunction =
+          indexedFunctions.get(runtimeRebindRegistratorTypeShortName + ".register");
+      return registerRuntimeRebindsFunction.getName().makeRef(sourceInfo);
+    }
+
+    /**
+     * Creats a statement for a function call to an indexed function.
+     * <p>
+     * If {@code assignToVariableName} is not null, the result of the invocation is varred to
+     * the that variable.
+     */
+    private JsStatement constructFunctionCallStatement(JsName assignToVariableName,
+        String indexedFunctionName, JsExpression... args) {
+
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      JsInvocation registerEntryCall = new JsInvocation(sourceInfo);
+      JsFunction registerEntryFunction = indexedFunctions.get(indexedFunctionName);
+      registerEntryCall.setQualifier(registerEntryFunction.getName().makeRef(sourceInfo));
+      registerEntryCall.getArguments().addAll(Arrays.asList(args));
+
+      if (assignToVariableName == null) {
+        return registerEntryCall.makeStmt();
+      }
+
+      JsVar var = new JsVar(sourceInfo, assignToVariableName);
+      var.setInitExpr(registerEntryCall);
+      JsVars entryVars = new JsVars(sourceInfo);
+      entryVars.add(var);
+      return entryVars;
     }
 
     private void generateImmortalTypes(JsVars globals) {

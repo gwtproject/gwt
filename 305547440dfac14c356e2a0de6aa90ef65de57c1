@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2c3030_297a6700",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2197,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-08T05:08:57Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "305547440dfac14c356e2a0de6aa90ef65de57c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_497fa3ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2197,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-08T05:08:57Z",
+      "side": 1,
+      "message": "[error] Empty statement.",
+      "revId": "305547440dfac14c356e2a0de6aa90ef65de57c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df2c3030_e9730f27",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-08T05:08:57Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "305547440dfac14c356e2a0de6aa90ef65de57c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

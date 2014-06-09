@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ff5d74d3_fb8f531a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-09T23:53:22Z",
+      "side": 1,
+      "message": "\"Apps will automatically get console and devmode logging...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f81844b_db4dbf85",
         "filename": "user/src/com/google/gwt/logging/Logging.gwt.xml",
         "patchSetId": 3

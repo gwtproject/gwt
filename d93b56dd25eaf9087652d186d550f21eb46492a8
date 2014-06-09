@@ -166,6 +166,30 @@
       "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf7e9c23_0f0b098d",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-09T19:27:39Z",
+      "side": 0,
+      "message": "This block is historically here (I did the first commit years ago) because in the past m2eclipse used to read maven-eclipse-plugin configuration and setup appropriately google plugin  adding GWT builder and nature. Since m2eclipse became m2e some years ago they change the strategy and removed that feature, they had good reasons for it though. AFAIK, right now, for automatically adding gwt nature and builder automatically is running eclipse:eclipse, otherwise if you import the project with m2e, you have to setup manually the google plugin.\n\nThe way gwt-site-webapp does it makes sense to me, I\u0027d rather the eclipse:eclipse way instead of m2e, since I dont want eclipse tasks running inside eclipse.\n\nI have asked some teams and there are people using both ways. I would vote for leaving these lines here removing the aspectJ comment.",
+      "parentUuid": "2a58a819_1b5a1e2a",
+      "range": {
+        "startLine": 170,
+        "startChar": 19,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "d93b56dd25eaf9087652d186d550f21eb46492a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

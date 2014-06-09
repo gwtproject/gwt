@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "ff5d74d3_2c3857bf",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-09T19:24:11Z",
+      "side": 1,
+      "message": "why special-cased?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_6ce08fe3",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-09T19:24:11Z",
+      "side": 1,
+      "message": "nit: format\n\nalso the description is not easy to read - you might want to consider rewording some.\n\nalso perhaps you should move this documentation to javadoc...",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 34
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_ec21df93",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-09T19:24:11Z",
+      "side": 1,
+      "message": "I didn\u0027t get this part?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_6c9baf93",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-09T19:24:11Z",
+      "side": 1,
+      "message": "let\u0027s do not change the behavior yet as $entry has others side effects and might cause some headache.",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df719054_b070165c",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
         "patchSetId": 3

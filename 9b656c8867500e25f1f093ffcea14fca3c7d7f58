@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df719054_b070165c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-09T17:40:22Z",
+      "side": 1,
+      "message": "can we use here something simpler like?:\n\nreturn value \u003d\u003d null ? null : value;",
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

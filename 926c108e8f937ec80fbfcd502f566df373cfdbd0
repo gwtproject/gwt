@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff5d74d3_b433222d",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T21:17:53Z",
+      "side": 1,
+      "message": "Internally, can we also put a similar warning to the target under java/com/google/gwt/dev/codeserver?",
+      "revId": "926c108e8f937ec80fbfcd502f566df373cfdbd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

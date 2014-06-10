@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffa0140a_8eea3b3f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsNamerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T18:56:38Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "2c71ce1ddcd9383882e33365b582f7271100541a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

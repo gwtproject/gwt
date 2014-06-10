@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_fbfbd358",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T00:13:15Z",
+      "side": 1,
+      "message": "No, I understand that part. I was trying to ask why they are not processed like any other init function here together with the rest of the init functions.",
+      "parentUuid": "ff5d74d3_ecd0ffda",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5d74d3_6ce08fe3",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
         "patchSetId": 3
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_7b25a311",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T00:13:15Z",
+      "side": 1,
+      "message": "I see. What about the \u0027nullIfUndefined\u0027 part?",
+      "parentUuid": "ff5d74d3_4ce033ac",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5d74d3_6c9baf93",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
         "patchSetId": 3
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "The behaviour here did not change, the functions here not module entry points.",
       "parentUuid": "ff5d74d3_6c9baf93",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_9bf65f3f",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T00:13:15Z",
+      "side": 1,
+      "message": "Oh so we have inconsistent behavior with monolithic and incremental compilation? (i.e. we potentially and likely running module entry points with independent $entry functions in incremental)",
+      "parentUuid": "ff5d74d3_2cd7f7cc",
       "range": {
         "startLine": 67,
         "startChar": 15,

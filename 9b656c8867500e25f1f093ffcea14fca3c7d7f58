@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_435c79a7",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-06-10T04:33:26Z",
+      "side": 1,
+      "message": "All the \"registering functions\" need to be run before any of the module entrypoints.\n\nSo these functions are run directly when createGwtOnLoad is called whereas the gwtOnLoad chain of functions are only setup here and are invoked at the end with a direct call to gwtOnLoad().",
+      "parentUuid": "ff5d74d3_fbfbd358",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5d74d3_6ce08fe3",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
         "patchSetId": 3
@@ -191,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_a39c4d15",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-06-10T04:33:26Z",
+      "side": 1,
+      "message": "Necessary due to what I think is an htmlunit bug.\n\nIf you just do\n\n  var gwtOnLoad;\n  ModuleUtils.createGwtOnLoad(..., gwtOnLoad...)\n\nworks in every browser but not in HtmlUnit (which complains with an error of the sort gwtOnLoad not defined).\n\nDoing \n\n  var gwtOnLoad \u003d gwtOnLoad \u003d\u003d null ? null : gwtOnload    \n  ModuleUtils.createGwtOnLoad(..., gwtOnLoad...)\n\nhas the same meaning as the previous snippet and works with HtmlUnit.\n\nProbably we should stash the variable gwtOnLoad in the top level explictely and this trick wont be needed.\n\n\nThe function nullIfUndefined was just created to avoid creating the condition by AST synthesis.",
+      "parentUuid": "ff5d74d3_7b25a311",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5d74d3_6c9baf93",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
         "patchSetId": 3
@@ -250,6 +298,30 @@
       "side": 1,
       "message": "Oh so we have inconsistent behavior with monolithic and incremental compilation? (i.e. we potentially and likely running module entry points with independent $entry functions in incremental)",
       "parentUuid": "ff5d74d3_2cd7f7cc",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "9b656c8867500e25f1f093ffcea14fca3c7d7f58",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_23913df8",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-06-10T04:33:26Z",
+      "side": 1,
+      "message": "I am not sure why there is an array of functions here (but that was what was being synthesized anyhow).\n\nNormally there will be only one initFunction and it would be EntryMethodHolder.init() which inits all entry points with one $entry(), but I see you are right there seems to be a small semantic mismatch, in modular compilation there seems to be an $entry() per (library) module.\n\nIf we move to wrap every entry point with $entry the behaviour will be consistent. Let\u0027s discuss this item. \n\nThis patch preserves the current behaviour.",
+      "parentUuid": "ff5d74d3_9bf65f3f",
       "range": {
         "startLine": 67,
         "startChar": 15,

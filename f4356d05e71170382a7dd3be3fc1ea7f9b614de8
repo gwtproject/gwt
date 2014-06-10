@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff5d74d3_9bc5ff1b",
+        "filename": "user/src/com/google/gwt/junit/CompileStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-10T00:06:52Z",
+      "side": 1,
+      "message": "please expand the acronym",
+      "range": {
+        "startLine": 173,
+        "startChar": 78,
+        "endLine": 173,
+        "endChar": 82
+      },
+      "revId": "f4356d05e71170382a7dd3be3fc1ea7f9b614de8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_fb9753ef",
+        "filename": "user/src/com/google/gwt/junit/JUnit.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-10T00:06:52Z",
+      "side": 1,
+      "message": "It\u0027s a bit confusing to launch the same servlet twice for different purposes. How about a separate servlet that just has the logOnServer() method?",
+      "range": {
+        "startLine": 48,
+        "startChar": 69,
+        "endLine": 48,
+        "endChar": 82
+      },
+      "revId": "f4356d05e71170382a7dd3be3fc1ea7f9b614de8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_bb4f9bf1",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-10T00:06:52Z",
+      "side": 1,
+      "message": "It\u0027s can be confusing to have browser and server logging in the same log file. Maybe we should add a \"browser:\" prefix to the message in the LogRecord as a hint about where it came from?",
+      "range": {
+        "startLine": 170,
+        "startChar": 44,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "f4356d05e71170382a7dd3be3fc1ea7f9b614de8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

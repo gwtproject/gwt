@@ -16,6 +16,24 @@
       "revId": "9d284f8d6372930d8118d1998dfe6b0700427383",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ff9d800_9e2b99a4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsVars.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-10T00:11:27Z",
+      "side": 1,
+      "message": "I meant Collections.addAll().",
+      "parentUuid": "bf7e9c23_6fb08d79",
+      "revId": "9d284f8d6372930d8118d1998dfe6b0700427383",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

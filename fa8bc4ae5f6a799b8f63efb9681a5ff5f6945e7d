@@ -39,6 +39,30 @@
       "revId": "fa8bc4ae5f6a799b8f63efb9681a5ff5f6945e7d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fd6e483_cafa63dc",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-10T23:13:03Z",
+      "side": 1,
+      "message": "Yes, I missed that. Thanks",
+      "parentUuid": "7fd6e483_eaf5a7ec",
+      "range": {
+        "startLine": 310,
+        "startChar": 120,
+        "endLine": 310,
+        "endChar": 136
+      },
+      "revId": "fa8bc4ae5f6a799b8f63efb9681a5ff5f6945e7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

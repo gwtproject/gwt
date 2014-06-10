@@ -87,6 +87,24 @@
       "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f12b80c_3331e8de",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-06-10T03:29:47Z",
+      "side": 1,
+      "message": "That\u0027s my understanding as well, but since \"fallback\" is overloaded even within the context of properties, I\u0027ll restate one more time:\n\nThe two fallback features seem to have different goals: one says \u0027pretend to be that other one for any rule that doesn\u0027t explicitly mention you\u0027, and the other says \u0027if you aren\u0027t recognized to be *any* property at all, behave as if you were always that other one\u0027. The former (defining a property and in that declaration pointing at a fallback) is useful for an almost-supported case, where you actually want to call out the differences between the implementation, but still hopefully scrape along. In the latter case you have no idea what will work, and don\u0027t care to track that you don\u0027t know, and are simply punting.\n\nSo in my mind `set-property-fallback` is good for avoiding an \u0027unknown\u0027 or \u0027ie6\u0027 value and requesting that all unexpected browsers be treated as if they were modern, whereas the `fallback-value` attribute is useful to explicitly define \u0027unknown\u0027 or \u0027ie6\u0027, handle it in a `replace-with` rule, and ignore the barrage of warnings.\n\nThe chief difference is called out in what the UserAgentAsserter would do - with a `fallback-value` and lots of warnings, it too will warn the user, with a `set-property-fallback` set, it will be fooled just like the rest of the rebind rules.",
+      "parentUuid": "ff5d74d3_addf5e98",
+      "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -93,6 +93,30 @@
       "revId": "2a33f27cc7c2edfbadb93ff0de2ab5d53073693b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fbc0831_72bd3650",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-10T20:57:51Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "ff5d74d3_748e0adc",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "2a33f27cc7c2edfbadb93ff0de2ab5d53073693b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

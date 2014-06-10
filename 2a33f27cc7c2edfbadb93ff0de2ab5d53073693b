@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fb2005d_f4c8f6ec",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-06-10T20:05:36Z",
+      "side": 1,
+      "message": "Nit: trailing white space",
+      "range": {
+        "startLine": 60,
+        "startChar": 34,
+        "endLine": 60,
+        "endChar": 35
+      },
+      "revId": "2a33f27cc7c2edfbadb93ff0de2ab5d53073693b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

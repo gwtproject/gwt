@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_7465aa57",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-10T20:54:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb2005d_f4c8f6ec",
+      "range": {
+        "startLine": 60,
+        "startChar": 34,
+        "endLine": 60,
+        "endChar": 35
+      },
+      "revId": "2a33f27cc7c2edfbadb93ff0de2ab5d53073693b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb70c4e_531f56bc",
         "filename": "dev/codeserver/build.xml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-06-10T20:19:49Z",
       "side": 1,
       "message": "Do we need these includes? Can\u0027t we just use all of \"java/\"\n\n \u003cinclude dir\u003d\"java\"/\u003e",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "2a33f27cc7c2edfbadb93ff0de2ab5d53073693b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_748e0adc",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-10T20:54:20Z",
+      "side": 1,
+      "message": "We could, but I prefer a whitelist so that the build doesn\u0027t accidentally pick up any cruft left behind by editors or other tools.",
+      "parentUuid": "3fb70c4e_531f56bc",
       "range": {
         "startLine": 21,
         "startChar": 0,

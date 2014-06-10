@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffa0140a_8e007b24",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/RequestFactorySuite.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T06:23:47Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.web.bindery.requestfactory.gwt.client.ProxyForInterfacesTest\u0027 import.",
+      "revId": "5b1aa77ff1ecc5247e00bba409edf2ea46b2eaca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa0140a_eef5bfec",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T06:23:47Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "5b1aa77ff1ecc5247e00bba409edf2ea46b2eaca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa0140a_cefa83dc",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T06:23:47Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "5b1aa77ff1ecc5247e00bba409edf2ea46b2eaca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa0140a_2e10676d",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T06:23:47Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "5b1aa77ff1ecc5247e00bba409edf2ea46b2eaca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa0140a_0e0dab57",
+        "filename": "user/test/com/google/web/bindery/requestfactory/vm/RequestFactoryJreSuite.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-10T06:23:47Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.web.bindery.requestfactory.server.ProxyForInterfacesJreTest\u0027 import.",
+      "revId": "5b1aa77ff1ecc5247e00bba409edf2ea46b2eaca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

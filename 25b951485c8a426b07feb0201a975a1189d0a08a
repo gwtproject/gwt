@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fd6e483_2a1b3f8d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-10T23:35:23Z",
+      "side": 1,
+      "message": "$entry(initializeModules) () ?",
+      "revId": "25b951485c8a426b07feb0201a975a1189d0a08a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -139,6 +139,24 @@
       "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fbc0831_b2e5de71",
+        "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-10T21:04:04Z",
+      "side": 1,
+      "message": "I seem to remember a time where window.foo could throw (rather than being undefined) in IE; but that was a long time ago and probably no longer exists in current versions we support.\n\nSo if we use !! rather than \u0027in\u0027 elsewhere, let\u0027s use !! here as well.",
+      "parentUuid": "ff5d74d3_14bf9650",
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

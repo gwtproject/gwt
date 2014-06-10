@@ -211,22 +211,17 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     clearImpl();
   }
 
+  @SpecializeMethod(params = {String.class}, target = "hasStringValue")
   @Override
   public boolean containsKey(Object key) {
     return (key == null) ? nullSlotLive : (!(key instanceof String)
         ? hasHashValue(key, getHashCode(key)) : hasStringValue((String) key));
   }
 
+  @SpecializeMethod(params = {String.class}, target = "containsStringValueOrNull")
   @Override
   public boolean containsValue(Object value) {
-    if (nullSlotLive && equals(nullSlot, value)) {
-      return true;
-    } else if (containsStringValue(value)) {
-      return true;
-    } else if (containsHashValue(value)) {
-      return true;
-    }
-    return false;
+    return containsStringValueOrNull((String) value) || containsHashValue(value);
   }
 
   @Override
@@ -336,7 +331,14 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * Returns true if stringMap contains any key whose value is Object equal to
    * <code>value</code>.
    */
-  private native boolean containsStringValue(Object value) /*-{
+  protected native boolean containsStringValueOrNull(String value) /*-{
+    if (this.@java.util.AbstractHashMap::nullSlotLive) {
+      var entryValue = this.@java.util.AbstractHashMap::nullSlot;
+      if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(value, entryValue)) {
+        return true;
+      }
+    }
+
     var stringMap = this.@java.util.AbstractHashMap::stringMap;
     for ( var key in stringMap) {
       // only keys that start with a colon ':' count
@@ -413,7 +415,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   /**
    * Returns true if the given key exists in the stringMap.
    */
-  private native boolean hasStringValue(String key) /*-{
+  protected native boolean hasStringValue(String key) /*-{
+    if (key == null) {
+      return this.@java.util.AbstractHashMap::nullSlotLive;
+    }
     return (':' + key) in this.@java.util.AbstractHashMap::stringMap;
   }-*/;
 

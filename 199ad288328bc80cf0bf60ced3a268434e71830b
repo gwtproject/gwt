@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "3fb70c4e_703b70be",
+        "filename": "requestfactory/build.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T09:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb70c4e_f0476060",
+      "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fb2005d_d1d18434",
         "filename": "user/test/com/google/web/bindery/requestfactory/gwt/RequestFactorySuite.java",
         "patchSetId": 9
@@ -53,6 +71,24 @@
       "writtenOn": "2014-06-10T08:26:14Z",
       "side": 1,
       "message": "nit: keep the list sorted alphabetically (feel free to move RequestBatcherTest down to respect ordering)",
+      "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fbc0831_2f3189de",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/RequestFactorySuite.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T09:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb2005d_d1d18434",
       "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "1fbc0831_0f2e4580",
+        "filename": "user/test/com/google/web/bindery/requestfactory/gwt/client/ProxyForInterfacesTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T09:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fbc0831_af70d9b6",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 73
+      },
+      "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fb2005d_31b73014",
         "filename": "user/test/com/google/web/bindery/requestfactory/vm/RequestFactoryJreSuite.java",
         "patchSetId": 9
@@ -93,6 +153,24 @@
       "writtenOn": "2014-06-10T08:26:14Z",
       "side": 1,
       "message": "nit: keep the list sorted alphabetically",
+      "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fb2005d_71ed38da",
+        "filename": "user/test/com/google/web/bindery/requestfactory/vm/RequestFactoryJreSuite.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T09:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb2005d_31b73014",
       "revId": "199ad288328bc80cf0bf60ced3a268434e71830b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

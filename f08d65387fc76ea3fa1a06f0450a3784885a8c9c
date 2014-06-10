@@ -69,6 +69,24 @@
       "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_addf5e98",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T01:15:40Z",
+      "side": 1,
+      "message": "From other discussions, what I get is;\n\nIf they really want to support otherwise un-supported browsers, they could re-define the \u0027unknown\u0027 user-agent with a fallback.\n\nIf they are not really supporting the un-supported browsers but just want to provide a better fallback,  they could define the fallback and keep the UserAgentAsserter enabled - I think.\n\nSo it sounds like both use cases are covered.",
+      "parentUuid": "df2c3030_69913ff7",
+      "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

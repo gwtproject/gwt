@@ -159,6 +159,23 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     }
   }
 
+  private static native JavaScriptObject createStringMap() /*-{
+    return Object.create ? Object.create(null) : {};
+  }-*/;
+
+  private static native boolean isValidKey(String key) /*-{
+    // only keys that start with a colon ':' count
+    return Object.create || key.charCodeAt(0) == 58;
+  }-*/;
+
+  private static native String maskKey(String key) /*-{
+    return Object.create ? key : ':' + key;
+  }-*/;
+
+  private static native String unmaskKey(String key) /*-{
+    return Object.create ? key : key.substring(1);
+  }-*/;
+
   /**
    * A map of integral hashCodes onto entries.
    */
@@ -293,9 +310,9 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   private native void addAllStringEntries(Collection<?> dest) /*-{
     var stringMap = this.@java.util.AbstractHashMap::stringMap;
     for (var key in stringMap) {
-      // only keys that start with a colon ':' count
-      if (key.charCodeAt(0) == 58) {
-        var entry = @java.util.AbstractHashMap$MapEntryString::new(Ljava/util/AbstractHashMap;Ljava/lang/String;)(this, key.substring(1));
+      if (@java.util.AbstractHashMap::isValidKey(Ljava/lang/String;)(key)) {
+        key = @java.util.AbstractHashMap::unmaskKey(Ljava/lang/String;)(key);
+        var entry = @java.util.AbstractHashMap$MapEntryString::new(Ljava/util/AbstractHashMap;Ljava/lang/String;)(this, key);
         dest.@java.util.Collection::add(Ljava/lang/Object;)(entry);
       }
     }
@@ -303,7 +320,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   private void clearImpl() {
     hashCodeMap = JavaScriptObject.createArray();
-    stringMap = JavaScriptObject.createObject();
+    stringMap = createStringMap();
     nullSlotLive = false;
     nullSlot = null;
     size = 0;
@@ -339,8 +356,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   private native boolean containsStringValue(Object value) /*-{
     var stringMap = this.@java.util.AbstractHashMap::stringMap;
     for ( var key in stringMap) {
-      // only keys that start with a colon ':' count
-      if (key.charCodeAt(0) == 58) {
+      if (@java.util.AbstractHashMap::isValidKey(Ljava/lang/String;)(key)) {
         var entryValue = stringMap[key];
         if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(value, entryValue)) {
           return true;
@@ -388,7 +404,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     if (key == null) {
       return this.@java.util.AbstractHashMap::nullSlot;
     }
-    return this.@java.util.AbstractHashMap::stringMap[':' + key];
+    return this.@java.util.AbstractHashMap::stringMap[@java.util.AbstractHashMap::maskKey(Ljava/lang/String;)(key)];
   }-*/;
 
   /**
@@ -414,7 +430,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * Returns true if the given key exists in the stringMap.
    */
   private native boolean hasStringValue(String key) /*-{
-    return (':' + key) in this.@java.util.AbstractHashMap::stringMap;
+    return @java.util.AbstractHashMap::maskKey(Ljava/lang/String;)(key) in this.@java.util.AbstractHashMap::stringMap;
   }-*/;
 
   /**
@@ -462,7 +478,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
       return this.@java.util.AbstractHashMap::putNullSlot(Ljava/lang/Object;)(value);
     }
     var result, stringMap = this.@java.util.AbstractHashMap::stringMap;
-    key = ':' + key;
+    key = @java.util.AbstractHashMap::maskKey(Ljava/lang/String;)(key);
     if (key in stringMap) {
       result = stringMap[key];
     } else {
@@ -521,7 +537,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     }
 
     var result, stringMap = this.@java.util.AbstractHashMap::stringMap;
-    key = ':' + key;
+    key = @java.util.AbstractHashMap::maskKey(Ljava/lang/String;)(key);
     if (key in stringMap) {
       result = stringMap[key];
       --this.@java.util.AbstractHashMap::size;

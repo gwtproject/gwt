@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ff5d74d3_fb5f5350",
+        "filename": "user/src/com/google/gwt/junit/JUnit.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T00:22:17Z",
+      "side": 1,
+      "message": "Sharing deobfuscation cache between different servlets is not trivial without keeping static state which I don\u0027t want to do.",
+      "parentUuid": "ff5d74d3_fb9753ef",
+      "range": {
+        "startLine": 48,
+        "startChar": 69,
+        "endLine": 48,
+        "endChar": 82
+      },
+      "revId": "f4356d05e71170382a7dd3be3fc1ea7f9b614de8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5d74d3_bb4f9bf1",
         "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
         "patchSetId": 2
@@ -59,6 +83,30 @@
       "writtenOn": "2014-06-10T00:06:52Z",
       "side": 1,
       "message": "It\u0027s can be confusing to have browser and server logging in the same log file. Maybe we should add a \"browser:\" prefix to the message in the LogRecord as a hint about where it came from?",
+      "range": {
+        "startLine": 170,
+        "startChar": 44,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "f4356d05e71170382a7dd3be3fc1ea7f9b614de8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff5d74d3_4d07ca35",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-10T00:22:17Z",
+      "side": 1,
+      "message": "This is basically the same behavior from default java.util.logging removeservice implementation. The client and server are different packages so the loggers can be potentially separated with log configuration. On the other hand, we don\u0027t much server code with GWTTestcase\u0027s anyway.\n\nLet\u0027s start with this and see if we need any customization later.",
+      "parentUuid": "ff5d74d3_bb4f9bf1",
       "range": {
         "startLine": 170,
         "startChar": 44,

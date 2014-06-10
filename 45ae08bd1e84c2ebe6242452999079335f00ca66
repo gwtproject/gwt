@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fb2005d_f1f5a8ec",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T06:47:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t all these methods be fixed in DOMImpl instead of doing JSNI here? otherwise code using directly DOMImpl.getScrollLeft would eventually fail.",
+      "revId": "45ae08bd1e84c2ebe6242452999079335f00ca66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fb70c4e_30e9e821",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-06-10T06:47:57Z",
+      "side": 1,
+      "message": "I\u0027d rather these setters being fixed in DOMImpl if possible.",
+      "revId": "45ae08bd1e84c2ebe6242452999079335f00ca66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

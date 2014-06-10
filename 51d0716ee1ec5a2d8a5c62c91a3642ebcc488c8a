@@ -57,6 +57,46 @@
       "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fbc0831_f2c806ed",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-10T20:44:48Z",
+      "side": 1,
+      "message": "Did you want the two class\u003d\"\" in reverse order? (replace with PopupLogHandler when type is HasWidgetsLogHandler)",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 74
+      },
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fb70c4e_f3c80aed",
+        "filename": "user/src/com/google/gwt/logging/client/ConsoleLogHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-10T20:44:48Z",
+      "side": 1,
+      "message": "We could also use\n\n return (\u0027console\u0027 in window);",
+      "revId": "51d0716ee1ec5a2d8a5c62c91a3642ebcc488c8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f7b4460_82a4fa2d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-06-11T00:26:02Z",
+      "side": 0,
+      "message": "nice",
+      "range": {
+        "startLine": 1177,
+        "startChar": 5,
+        "endLine": 1178,
+        "endChar": 79
+      },
+      "revId": "332deff1dc076245f1f2ff66f3354cec42c8f097",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

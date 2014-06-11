@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1f8a489d_c1419971",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/PermProps.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-06-11T21:30:54Z",
+      "side": 1,
+      "message": "previously it would output messages like this:\n\n\"1 properties listed in js.embedded.properties are undefined\"\n\ni changed it to\n\n\"1 property(s) listed in js.embedded.properties are undefined\"\n\nwhat is your objection?",
+      "parentUuid": "3fd0ec87_b1ecc275",
+      "range": {
+        "startLine": 137,
+        "startChar": 40,
+        "endLine": 137,
+        "endChar": 44
+      },
+      "revId": "2b07ca633b7973608cf1855f9343ac4228c43df0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fd0ec87_f173da26",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationProblemReporter.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-06-11T21:24:25Z",
       "side": 1,
       "message": "not that it matters much, but always use StringBuilder instead of StringBuffer if there are no concurrency concerns.",
+      "range": {
+        "startLine": 374,
+        "startChar": 6,
+        "endLine": 374,
+        "endChar": 18
+      },
+      "revId": "2b07ca633b7973608cf1855f9343ac4228c43df0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f8a489d_a12d75cb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationProblemReporter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-06-11T21:30:54Z",
+      "side": 1,
+      "message": "not my code but i\u0027ll make the change",
+      "parentUuid": "3fd0ec87_f173da26",
       "range": {
         "startLine": 374,
         "startChar": 6,

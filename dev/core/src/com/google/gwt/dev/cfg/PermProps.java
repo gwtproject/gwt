@@ -134,7 +134,7 @@ public class PermProps {
     // Warn about binding properties that don't exist.
     if (!propsWanted.isEmpty()) {
       TreeLogger branch = logger.branch(Type.WARN,
-          propsWanted.size() + "properties listed in js.embedded.properties are undefined");
+          propsWanted.size() + " property(s) listed in js.embedded.properties are undefined");
       for (String prop : propsWanted) {
         branch.log(Type.WARN, "undefined property: '" + prop + "'");
       }

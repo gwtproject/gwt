@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f8a489d_3cd26838",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-06-11T21:36:34Z",
+      "side": 1,
+      "message": "how about adding an assertion failed message here.\n\nalso, it isn\u0027t immediately clear that\u0027s it\u0027s verifying that all resulting file names are the same and that that is a proxy for file contents being the same.",
+      "range": {
+        "startLine": 172,
+        "startChar": 6,
+        "endLine": 172,
+        "endChar": 19
+      },
+      "revId": "8f63d21eed1a85b145f10dda865015e6366968d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

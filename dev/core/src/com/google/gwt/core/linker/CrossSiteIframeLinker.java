@@ -422,7 +422,10 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.newlineOpt();
     out.print("var $strongName = '" + strongName + "';");
     out.newlineOpt();
+    out.print("var $permProps = [];");
+    out.newlineOpt();
     out.print("var $doc = $wnd.document;");
+    out.newlineOpt();
 
     // The functions for runAsync are set up in the bootstrap script so they
     // can be overridden in the same way as other bootstrap code is, however
@@ -485,7 +488,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.newlineOpt();
     out.print("$sendStats('moduleStartup', 'end');");
     out.newlineOpt();
-    out.print("$permProps && __gwtModuleFunction.__moduleStartupDone($permProps);");
+    out.print("__gwtModuleFunction.__moduleStartupDone($permProps);");
 
     writeMagicComments(out, context, 0, strongName);
     return out.toString();

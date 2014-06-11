@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5fdbe0ac_e93bf507",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-06-11T13:51:18Z",
+      "side": 1,
+      "message": "It won\u0027t fail even if you use DOMImpl directly as you have to use GWT.create() method to get an instance of DOMImpl.\n\nI don\u0027t fix that directly in DOMImpl because the code in DOMImpl is the correct (I mean the standard) way to get the scollLeft value. The problem is that Safari (and  Chrome before) doesn\u0027t follow the standard way  and always applies document scrolling to the body element. Chrome fixed that recently and as they target the same permutation, we have to fix that in this class.",
+      "parentUuid": "5fb2005d_f1f5a8ec",
+      "revId": "45ae08bd1e84c2ebe6242452999079335f00ca66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb70c4e_30e9e821",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
         "patchSetId": 3

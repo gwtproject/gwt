@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f6424c8_a0ec9e75",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardLinkerContext.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.arg.JsInteropMode.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_c0f1924a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardLinkerContext.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.util.DefaultTextOutput\u0027 import.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_e0f6963f",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModule.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_00fc6a1e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_20016e6c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] File contains tab characters (this is the first instance).",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_600b668c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_40fe6217",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] \u0027else\u0027 is not followed by whitespace.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_80087a8f",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerJsInteropMode.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_a013bebd",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/JsInteropMode.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_c018b2dc",
+        "filename": "user/src/com/google/gwt/core/client/js/JsNoExport.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-11T23:25:22Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - java.lang.annotation.*.",
+      "revId": "674c19c36a0ef0acdb7611631627b4cc3564745b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

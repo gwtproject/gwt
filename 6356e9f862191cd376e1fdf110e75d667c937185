@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f8a489d_65d46278",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-11T00:54:36Z",
+      "side": 1,
+      "message": "Generating either\n\n  $permProps \u003d [[...]];\n\nor\n\n  var $permProps \u003d [[...]];\n\nshould work, even if the linker does not declare $permProps it would not harm assigning or varring it.\n\nAm I missing something here? Is this necessary because otherwise is prunned in closure?",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 22
+      },
+      "revId": "6356e9f862191cd376e1fdf110e75d667c937185",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

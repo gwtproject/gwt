@@ -341,6 +341,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_eaf58bec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-12T22:29:21Z",
+      "side": 1,
+      "message": "See my comment in UnifyAST",
+      "parentUuid": "df74307d_d826f1a9",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff8c944a_c20cb25e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 12
@@ -376,6 +394,24 @@
       "side": 1,
       "message": "The flag would allow hasAnyExports() to run quickly, but elsewhere, each method and field needs to have its own exportedName field, because methods can be individually override (with other than default name) or blocked via @JsNoExport\n\n@JsExport on a class type is purely syntactic sugar which saves you the trouble of redeclaring @JsExport on every public static, it serves no other function or meaning,\n\n@JsExport, as far as the rest of the compiler is concerned, only applies to members of a class, not the class itself. This differs from @JsType which does apply to the type itself.",
       "parentUuid": "ff8c944a_c20cb25e",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_0a364707",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-12T22:29:21Z",
+      "side": 1,
+      "message": "I think that encoding the fact that nothing is exported by null name vs exported and default via \"\" makes the code obscure and non obvious.\n\nI suggest adding a boolean that encodes whether the the field/method/type is exported, and use null (rather than \"\") to denote default value.\n\nAlso move hasAnyExports to be a method of JDeclaredType.",
+      "parentUuid": "df74307d_f82bad70",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

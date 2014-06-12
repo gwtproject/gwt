@@ -290,6 +290,7 @@ public class JavaAstConstructor {
               "public class ModuleUtils {",
               "  public static void gwtOnLoad() {}",
               "  public static void addInitFunctions() {}",
+              "  public static void setPermProps() {}",
               "  public static Object registerEntry() { return Impl.registerEntry(); }",
               "}"
           );

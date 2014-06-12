@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f6424c8_a9fba9e2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-12T22:00:52Z",
+      "side": 1,
+      "message": "[error] \u0027org.eclipse.jdt.core.compiler.CharOperation\u0027 should be separated from previous imports.",
+      "revId": "cf40cab96d59a81412681d6d3594eb6cc8ee4858",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

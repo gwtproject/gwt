@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_189ea983",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffde5426_811d5cfa",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffde5426_c10e84c4",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 12
@@ -36,6 +54,24 @@
         "endLine": 331,
         "endChar": 47
       },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_389b6594",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffde5426_c10e84c4",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_f8a80db0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffde5426_614bf0e7",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffde5426_8150fc8f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
         "patchSetId": 12
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_58982195",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffde5426_8150fc8f",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fd54c00_a63b5256",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 12
@@ -105,6 +177,24 @@
         "endLine": 76,
         "endChar": 53
       },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_7895dd59",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "?? It is already Javadoc\u0027ed",
+      "parentUuid": "3fd54c00_a63b5256",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -151,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_981c7958",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc43063_b580e06f",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfc43063_f57a58c7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 12
@@ -168,6 +276,24 @@
         "endLine": 2596,
         "endChar": 6
       },
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_b8213595",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc43063_f57a58c7",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -197,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_d826f1a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Yes, a null name means no @JsExport annotation was present at all, a \"\" means @JsExport was present, but the value attribute wasn\u0027t specified (it defaults to \"\")\n\nThis chunk doesn\u0027t clear anything. It actually propagates a @JsExport on the class down to every static method and field. Setting the field to \u0027\"\"\u0027 actually is the same as if the field had an individual @JsExport annotation declared on it.",
+      "parentUuid": "ff8c944a_d77d56c2",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff8c944a_c20cb25e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 12
@@ -220,6 +364,24 @@
     },
     {
       "key": {
+        "uuid": "df74307d_f82bad70",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "The flag would allow hasAnyExports() to run quickly, but elsewhere, each method and field needs to have its own exportedName field, because methods can be individually override (with other than default name) or blocked via @JsNoExport\n\n@JsExport on a class type is purely syntactic sugar which saves you the trouble of redeclaring @JsExport on every public static, it serves no other function or meaning,\n\n@JsExport, as far as the rest of the compiler is concerned, only applies to members of a class, not the class itself. This differs from @JsType which does apply to the type itself.",
+      "parentUuid": "ff8c944a_c20cb25e",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff8c944a_82cb8a2d",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 12
@@ -231,6 +393,24 @@
       "writtenOn": "2014-05-29T01:26:17Z",
       "side": 1,
       "message": "Can you add a test for the case how JsType works with public methods from non-jstyped parent classes?",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_e9f5a1ec",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "Is it ok to add these in a follow up CL, I have a big 500+ class CL I need to get in, I promise I\u0027ll beef up the unit tests after it lands (my mega cl exercises and tests almost everything in app code)",
+      "parentUuid": "ff8c944a_82cb8a2d",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -254,6 +434,24 @@
     },
     {
       "key": {
+        "uuid": "7f6424c8_09fbb5e1",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "ff8c944a_c20e72c4",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff8c944a_4277e255",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 12
@@ -265,6 +463,24 @@
       "writtenOn": "2014-05-29T01:26:17Z",
       "side": 1,
       "message": "what about static initializer on a JsInterface?",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_2910796d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-12T22:02:15Z",
+      "side": 1,
+      "message": "WIll app in follow on. It works (app code uses it)",
+      "parentUuid": "ff8c944a_4277e255",
       "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

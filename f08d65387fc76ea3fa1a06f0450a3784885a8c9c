@@ -105,6 +105,24 @@
       "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff77347c_9ffb7fe3",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-12T02:10:37Z",
+      "side": 1,
+      "message": "\u003e The chief difference is called out in what the UserAgentAsserter would do - with a `fallback-value` and lots of warnings, it too will warn the user, with a `set-property-fallback` set, it will be fooled just like the rest of the rebind rules.\n\nIf I\u0027m not missing something, if you pass \u0027null\u0027 here instead of getFallbackValue; it will behave like following (which I think what we want):\n\nWith a defined \u0027unknown\u0027 property with a fallback-value (i.e. almost-supported case); UseragentAsserter will *not* complain as both compile time and runtime values are going to be same: \u0027unknown\u0027.\n\nWith set-property-fallback to modern browser (i.e. have-no-idea-what-will-work); UseragentAsserter will complain via GWT.uncaughtExceptionHandler. Also the developer can choose to show warning in the main page by checking the useragent.runtimeValue which will return \u0027unknown\u0027.\n\n(BTW, UserAgentAsserter no longer warns the user via dialog)",
+      "parentUuid": "9f12b80c_3331e8de",
+      "revId": "f08d65387fc76ea3fa1a06f0450a3784885a8c9c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

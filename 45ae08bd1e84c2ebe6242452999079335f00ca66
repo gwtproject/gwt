@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7f6424c8_633c50dd",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-12T00:16:11Z",
+      "side": 1,
+      "message": "nit: end with \u0027.\u0027\n\n(and in other places below)",
+      "range": {
+        "startLine": 230,
+        "startChar": 53,
+        "endLine": 230,
+        "endChar": 57
+      },
+      "revId": "45ae08bd1e84c2ebe6242452999079335f00ca66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fb2005d_f1f5a8ec",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplStandardBase.java",
         "patchSetId": 3

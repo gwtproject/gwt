@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df74307d_6966edf7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsRootScope.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-12T19:27:35Z",
+      "side": 1,
+      "message": "\"gwt related\" \u003d\u003e \"gwt-related\"\n\"show\" \u003d\u003e \"should\"",
+      "range": {
+        "startLine": 333,
+        "startChar": 36,
+        "endLine": 333,
+        "endChar": 40
+      },
+      "revId": "0984df780ded2406b7d3f7d11fc5994648019b2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_a9156513",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-12T19:27:35Z",
+      "side": 1,
+      "message": "If we will be adding more variables, maybe this gets intention across better:\n\npublic static native void setGwtProperty(String name,\n  JavaScriptObject value) /*-{\n  if (!$wnd[\u0027$gwt\u0027]) {\n    $wnd[\u0027$gwt\u0027] \u003d {}\n  }\n  $wnd[\u0027$gwt\u0027][name] \u003d value;\n}-*/;",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 14
+      },
+      "revId": "0984df780ded2406b7d3f7d11fc5994648019b2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

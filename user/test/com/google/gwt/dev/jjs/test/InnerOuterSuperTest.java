@@ -18,29 +18,19 @@ package com.google.gwt.dev.jjs.test;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * TODO: document me.
+ * Tests several innerclasses scenarios
  */
 public class InnerOuterSuperTest extends GWTTestCase {
 
-  /**
-   * TODO: document me.
-   */
-  public static class Outer {
-
-    /**
-     * TODO: document me.
-     */
-    public class OuterIsNotSuper {
+  static class Outer {
+    class OuterIsNotSuper {
 
       public int getValue() {
         return value;
       }
     }
 
-    /**
-     * TODO: document me.
-     */
-    public class OuterIsSuper extends Outer {
+    class OuterIsSuper extends Outer {
 
       public OuterIsSuper(int i) {
         super(i);
@@ -68,19 +58,14 @@ public class InnerOuterSuperTest extends GWTTestCase {
       }
     }
 
-    /**
-     * TODO: document me.
-     */
-    public static class TestQualifiedSuperCall extends OuterIsNotSuper {
+    static class TestQualifiedSuperCall extends OuterIsNotSuper {
       public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
       }
     }
 
-    /**
-     * TODO: document me.
-     */
-    public class TestUnqualifiedSuperCall extends OuterIsNotSuper {
+
+    class TestUnqualifiedSuperCall extends OuterIsNotSuper {
       public TestUnqualifiedSuperCall() {
         super();
       }
@@ -147,5 +132,30 @@ public class InnerOuterSuperTest extends GWTTestCase {
     Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
     };
     assertEquals(2, x.getValue());
+  }
+
+
+  static class A {
+    class B {
+      public int v1 = Math.random() > 3 ? 0 : 1;
+    }
+  }
+
+  int v2 = Math.random() > 3 ? 0 : 2;
+
+  public void testDoubleOuter() {
+    final int v3 = Math.random() > 3 ? 0 : 3;
+    final int v4 = Math.random() > 3 ? 0 : 4;
+    A.B ab = new A().new B() {
+      int mv1 = v1;
+      int mv2 = v2;
+      int mv3 = v3;
+      int mv4 = v4;
+
+      public String toString() {
+        return "" + mv1 + mv2 + mv3 + mv4 + " " + v1 + v2 + v3 + v4;
+      }
+    };
+    assertEquals("1234 1234", ab.toString());
   }
 }

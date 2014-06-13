@@ -98,10 +98,6 @@ public class Java7AstTest extends JJSTestBase {
         "Object o = null; char s = (char) ((Character) o).charValue();",
         "Object o = null; char s = (char) o;");
 
-    assertEqualBlock(
-        "Object o = null; char s = (char) ((Character) o).charValue();",
-        "Object o = null; char s = (char) o;");
-
     // This is the expected behaviour, however JDT 3.8.3 emits a compiler error.
     // TODO(rluble): uncomment when JDT is updated.
     // assertEqualBlock(

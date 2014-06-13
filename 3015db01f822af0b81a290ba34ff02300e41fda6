@@ -418,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "3fd0ec87_d2921102",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-13T18:13:53Z",
+      "side": 1,
+      "message": "That means we\u0027ll have to add an extra boolean field to every member. It\u0027ll make serialization size bigger as well as resident AST memory go up. \n\nI\u0027m happy to change it, but it seems like it trades off memory for readability.\n\nYou\u0027d still have to handle \"\", because that\u0027s the way Java annotations work, you cannot have a default value of \u0027null\u0027",
+      "parentUuid": "df74307d_0a364707",
+      "revId": "3015db01f822af0b81a290ba34ff02300e41fda6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff8c944a_82cb8a2d",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 12

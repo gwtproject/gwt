@@ -112,7 +112,6 @@ import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
@@ -221,7 +220,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -644,8 +642,8 @@ public class GwtAstBuilder {
       try {
         List<JStatement> statements = pop(x.statements);
         JStatement constructorCall = pop(x.constructorCall);
-        JBlock block = curMethod.body.getBlock();
-        SourceInfo info = curMethod.method.getSourceInfo();
+        final JBlock block = curMethod.body.getBlock();
+        final SourceInfo info = curMethod.method.getSourceInfo();
 
         /*
          * Determine if we have an explicit this call. The presence of an
@@ -663,22 +661,18 @@ public class GwtAstBuilder {
          */
         if (!hasExplicitThis) {
           ReferenceBinding declaringClass = (ReferenceBinding) x.binding.declaringClass.erasure();
-          if (JdtUtil.isInnerClass(declaringClass)) {
-            NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
-            if (nestedBinding.enclosingInstances != null) {
-              for (SyntheticArgumentBinding arg : nestedBinding.enclosingInstances) {
-                JBinaryOperation asg = assignSyntheticField(info, arg);
-                block.addStmt(asg.makeStatement());
-              }
-            }
-
-            if (nestedBinding.outerLocalVariables != null) {
-              for (SyntheticArgumentBinding arg : nestedBinding.outerLocalVariables) {
-                JBinaryOperation asg = assignSyntheticField(info, arg);
-                block.addStmt(asg.makeStatement());
-              }
-            }
-          }
+          JdtUtil.processSyntheticArgumentBindings(declaringClass,
+              new Function<SyntheticArgumentBinding, Void>() {
+                @Override
+                public Void apply(SyntheticArgumentBinding arg) {
+                  if (arg.matchingField == null) {
+                    return null;
+                  }
+                  JBinaryOperation asg = assignSyntheticField(info, arg);
+                  block.addStmt(asg.makeStatement());
+                  return null;
+                }
+              });
         }
 
         if (constructorCall != null) {
@@ -692,6 +686,8 @@ public class GwtAstBuilder {
         if (!hasExplicitThis) {
           JMethod initMethod = curClass.type.getInitMethod();
           JMethodCall initCall = new JMethodCall(info, makeThisRef(info), initMethod);
+          maybeAddSyntheticParameters((ReferenceBinding) x.binding.declaringClass.erasure(),
+              initCall);
           block.addStmt(initCall.makeStatement());
         }
 
@@ -701,6 +697,21 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private void maybeAddSyntheticParameters(ReferenceBinding declaringClass,
+        final JMethodCall initCall) {
+
+      final SourceInfo info = initCall.getSourceInfo();
+
+      JdtUtil.processSyntheticArgumentBindings(declaringClass,
+          new Function<SyntheticArgumentBinding, Void>() {
+            @Override
+            public Void apply(SyntheticArgumentBinding arg) {
+              initCall.addArg(new JParameterRef(info, (JParameter) curMethod.locals.get(arg)));
+              return null;
+            }
+          });
     }
 
     @Override
@@ -783,7 +794,7 @@ public class GwtAstBuilder {
           }
           call.addArgs(callArgs);
           if (nestedSuper) {
-            processSuperCallLocalArgs(superClass, call);
+            addCapturesToExplicitConstructorCall(superClass, call);
           }
         } else {
           assert (x.qualification == null);
@@ -794,7 +805,7 @@ public class GwtAstBuilder {
           }
           call.addArgs(callArgs);
           if (nested) {
-            processThisCallLocalArgs(declaringClass, call);
+            addCapturesToExplicitConstructorCall(declaringClass, call);
           }
         }
         call.setStaticDispatchOnly();
@@ -1701,7 +1712,7 @@ public class GwtAstBuilder {
         pushMethodInfo(new MethodInfo(method, body, x.scope));
 
         // Map all arguments.
-        Iterator<JParameter> it = method.getParams().iterator();
+        final Iterator<JParameter> it = method.getParams().iterator();
 
         // Enum arguments have no mapping.
         if (curClass.classType.isEnumOrSubclass() != null) {
@@ -1712,16 +1723,18 @@ public class GwtAstBuilder {
 
         // Map synthetic arguments for outer this.
         ReferenceBinding declaringClass = (ReferenceBinding) x.binding.declaringClass.erasure();
-        boolean isNested = JdtUtil.isInnerClass(declaringClass);
-        if (isNested) {
-          NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
-          if (nestedBinding.enclosingInstances != null) {
-            for (int i = 0; i < nestedBinding.enclosingInstances.length; ++i) {
-              SyntheticArgumentBinding arg = nestedBinding.enclosingInstances[i];
-              curMethod.locals.put(arg, it.next());
-            }
-          }
-        }
+
+        final Function<SyntheticArgumentBinding, Void> mapSyntheticArgumentFunction =
+            new Function<SyntheticArgumentBinding, Void>() {
+              @Override
+              public Void apply(SyntheticArgumentBinding arg) {
+                curMethod.locals.put(arg, it.next());
+                return null;
+              }
+            };
+
+        JdtUtil.processEnclosingInstanceSyntheticArgumentBindings(declaringClass,
+            mapSyntheticArgumentFunction);
 
         // Map user arguments.
         if (x.arguments != null) {
@@ -1729,19 +1742,8 @@ public class GwtAstBuilder {
             curMethod.locals.put(argument.binding, it.next());
           }
         }
-
-        // Map synthetic arguments for locals.
-        if (isNested) {
-          // add synthetic args for locals
-          NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
-          // add synthetic args for outer this and locals
-          if (nestedBinding.outerLocalVariables != null) {
-            for (int i = 0; i < nestedBinding.outerLocalVariables.length; ++i) {
-              SyntheticArgumentBinding arg = nestedBinding.outerLocalVariables[i];
-              curMethod.locals.put(arg, it.next());
-            }
-          }
-        }
+        JdtUtil.processCaptureVariableSyntheticArgumentBindings(declaringClass,
+            mapSyntheticArgumentFunction);
 
         x.statements = reduceToReachable(x.statements);
         return true;
@@ -2060,33 +2062,27 @@ public class GwtAstBuilder {
        */
       SourceTypeBinding binding = x.binding;
       if (JdtUtil.isInnerClass(binding)) {
-        // add synthetic fields for outer this and locals
         assert (type instanceof JClassType);
         NestedTypeBinding nestedBinding = (NestedTypeBinding) binding;
+        // Add synthetic fields for enclosing instances.
         if (nestedBinding.enclosingInstances != null) {
-          for (int i = 0; i < nestedBinding.enclosingInstances.length; ++i) {
-            SyntheticArgumentBinding arg = nestedBinding.enclosingInstances[i];
+          for (SyntheticArgumentBinding arg : nestedBinding.enclosingInstances) {
+            if (arg.matchingField == null) {
+              // No field needed.
+              continue;
+            }
             createSyntheticField(arg, type, Disposition.THIS_REF);
           }
         }
 
+        // Add synthetic field for closure-captured variables
         if (nestedBinding.outerLocalVariables != null) {
-          for (int i = 0; i < nestedBinding.outerLocalVariables.length; ++i) {
-            SyntheticArgumentBinding arg = nestedBinding.outerLocalVariables[i];
-            // See InnerClassTest.testOuterThisFromSuperCall().
-            boolean isReallyThisRef = false;
-            if (arg.actualOuterLocalVariable instanceof SyntheticArgumentBinding) {
-              SyntheticArgumentBinding outer =
-                  (SyntheticArgumentBinding) arg.actualOuterLocalVariable;
-              if (outer.matchingField != null) {
-                JField field = typeMap.get(outer.matchingField);
-                if (field.isThisRef()) {
-                  isReallyThisRef = true;
-                }
-              }
+          for (SyntheticArgumentBinding arg : nestedBinding.outerLocalVariables) {
+            if (arg.matchingField == null) {
+              // No field needed.
+              continue;
             }
-            createSyntheticField(arg, type, isReallyThisRef ? Disposition.THIS_REF
-                : Disposition.FINAL);
+            createSyntheticField(arg, type, Disposition.FINAL);
           }
         }
       }
@@ -2135,9 +2131,10 @@ public class GwtAstBuilder {
     }
 
     private JBinaryOperation assignSyntheticField(SourceInfo info, SyntheticArgumentBinding arg) {
+      assert arg.matchingField != null;
       JParameter param = (JParameter) curMethod.locals.get(arg);
       assert param != null;
-      JField field = curClass.syntheticFields.get(arg);
+      JField field = curClass.syntheticFields.get(arg.matchingField);
       assert field != null;
       JFieldRef lhs = makeInstanceFieldRef(info, field);
       JParameterRef rhs = new JParameterRef(info, param);
@@ -2260,17 +2257,14 @@ public class GwtAstBuilder {
       return newLocal;
     }
 
-    private JField createSyntheticField(SyntheticArgumentBinding arg, JDeclaredType enclosingType,
+    private void createSyntheticField(SyntheticArgumentBinding arg, JDeclaredType enclosingType,
         Disposition disposition) {
       JType type = typeMap.get(arg.type);
       SourceInfo info = enclosingType.getSourceInfo();
       JField field = new JField(info, intern(arg.name), enclosingType, type, false, disposition);
       enclosingType.addField(field);
-      curClass.syntheticFields.put(arg, field);
-      if (arg.matchingField != null) {
-        typeMap.setField(arg.matchingField, field);
-      }
-      return field;
+      curClass.syntheticFields.put(arg.matchingField, field);
+      typeMap.setField(arg.matchingField, field);
     }
 
     private JExpression getConstant(SourceInfo info, Constant constant) {
@@ -2394,9 +2388,15 @@ public class GwtAstBuilder {
       ReferenceBinding type;
       if (curMethod.scope.isInsideInitializer() && path[0] instanceof SyntheticArgumentBinding) {
         SyntheticArgumentBinding b = (SyntheticArgumentBinding) path[0];
-        JField field = curClass.syntheticFields.get(b);
-        assert field != null;
-        ref = makeInstanceFieldRef(info, field);
+        if (b.matchingField != null) {
+          JField field = curClass.syntheticFields.get(b.matchingField);
+          assert field != null;
+          ref = makeInstanceFieldRef(info, field);
+        } else {
+          JParameter parameter = (JParameter) curMethod.locals.get(b);
+          assert parameter != null;
+          ref = new JParameterRef(info, parameter);
+        }
         type = (ReferenceBinding) b.type.erasure();
       } else if (path[0] instanceof SyntheticArgumentBinding) {
         SyntheticArgumentBinding b = (SyntheticArgumentBinding) path[0];
@@ -2530,24 +2530,13 @@ public class GwtAstBuilder {
       jsniReferenceCollector.accept(jsFunction);
     }
 
-    private void processSuperCallLocalArgs(ReferenceBinding superClass, JMethodCall call) {
-      if (superClass.syntheticOuterLocalVariables() != null) {
-        for (SyntheticArgumentBinding arg : superClass.syntheticOuterLocalVariables()) {
-          // TODO: use emulation path here.
-          // Got to be one of my params
-          JType varType = typeMap.get(arg.type);
-          String varName = intern(arg.name);
-          JParameter param = null;
-          for (JParameter paramIt : curMethod.method.getParams()) {
-            if (varType == paramIt.getType() && varName.equals(paramIt.getName())) {
-              param = paramIt;
-            }
-          }
-          if (param == null) {
-            throw new InternalCompilerException(
-                "Could not find matching local arg for explicit super ctor call.");
-          }
-          call.addArg(new JParameterRef(call.getSourceInfo(), param));
+    private void addCapturesToExplicitConstructorCall(ReferenceBinding targetClass, JMethodCall call) {
+      if (targetClass.syntheticOuterLocalVariables() != null) {
+        for (SyntheticArgumentBinding arg : targetClass.syntheticOuterLocalVariables()) {
+          VariableBinding path[] = curMethod.scope.getEmulationPath(arg.actualOuterLocalVariable);
+          JParameter parameter = (JParameter) curMethod.locals.get(path[0]);
+          assert parameter != null;
+          call.addArg(new JParameterRef(call.getSourceInfo(), parameter));
         }
       }
     }
@@ -2571,16 +2560,6 @@ public class GwtAstBuilder {
         } else {
           // Get implicit outer object.
           call.addArg(makeThisReference(call.getSourceInfo(), targetType, false, curMethod.scope));
-        }
-      }
-    }
-
-    private void processThisCallLocalArgs(ReferenceBinding binding, JMethodCall call) {
-      if (binding.syntheticOuterLocalVariables() != null) {
-        for (SyntheticArgumentBinding arg : binding.syntheticOuterLocalVariables()) {
-          JParameter param = (JParameter) curMethod.locals.get(arg);
-          assert param != null;
-          call.addArg(new JParameterRef(call.getSourceInfo(), param));
         }
       }
     }
@@ -2618,13 +2597,29 @@ public class GwtAstBuilder {
     }
 
     private void pushInitializerMethodInfo(FieldDeclaration x, MethodScope scope) {
-      JMethod initMeth;
+      JMethod initMethod;
       if (x.isStatic()) {
-        initMeth = curClass.type.getClinitMethod();
+        initMethod = curClass.type.getClinitMethod();
       } else {
-        initMeth = curClass.type.getInitMethod();
+        initMethod = curClass.type.getInitMethod();
       }
-      pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope));
+      pushMethodInfo(new MethodInfo(initMethod, (JMethodBody) initMethod.getBody(), scope));
+      if (x.isStatic()) {
+        return;
+      }
+
+      assert initMethod == curClass.type.getInitMethod();
+      final Iterator<JParameter> it = initMethod.getParams().iterator();
+
+      ReferenceBinding declaringClass = (ReferenceBinding) scope.enclosingReceiverType().erasure();
+      JdtUtil.processSyntheticArgumentBindings(declaringClass,
+          new Function<SyntheticArgumentBinding, Void>() {
+            @Override
+            public Void apply(SyntheticArgumentBinding arg) {
+              curMethod.locals.put(arg, it.next());
+              return null;
+            }
+          });
     }
 
     private void pushMethodInfo(MethodInfo newInfo) {
@@ -2653,28 +2648,27 @@ public class GwtAstBuilder {
 
       // Enums: hidden arguments for the name and id.
       if (x.enumConstant != null) {
-        call.addArgs(getStringLiteral(info, x.enumConstant.name), JIntLiteral
-            .get(x.enumConstant.binding.original().id));
+        call.addArgs(
+            getStringLiteral(info, x.enumConstant.name),
+            JIntLiteral.get(x.enumConstant.binding.original().id));
       }
 
       // Synthetic args for inner classes
       ReferenceBinding targetBinding = (ReferenceBinding) b.declaringClass.erasure();
       boolean isNested = JdtUtil.isInnerClass(targetBinding);
-      if (isNested) {
-        // Synthetic this args for inner classes
-        if (targetBinding.syntheticEnclosingInstanceTypes() != null) {
-          ReferenceBinding checkedTargetType =
-              targetBinding.isAnonymousType() ? (ReferenceBinding) targetBinding.superclass()
-                  .erasure() : targetBinding;
-          ReferenceBinding targetEnclosingType = checkedTargetType.enclosingType();
-          for (ReferenceBinding argType : targetBinding.syntheticEnclosingInstanceTypes()) {
-            argType = (ReferenceBinding) argType.erasure();
-            if (qualifier != null && argType == targetEnclosingType) {
-              call.addArg(qualExpr);
-            } else {
-              JExpression thisRef = makeThisReference(info, argType, false, scope);
-              call.addArg(thisRef);
-            }
+        // Synthetic enclosing instance args for inner classes
+      if (isNested && targetBinding.syntheticEnclosingInstanceTypes() != null) {
+        ReferenceBinding checkedTargetType =
+            targetBinding.isAnonymousType() ? (ReferenceBinding) targetBinding.superclass()
+                .erasure() : targetBinding;
+        ReferenceBinding targetEnclosingType = checkedTargetType.enclosingType();
+        for (ReferenceBinding argType : targetBinding.syntheticEnclosingInstanceTypes()) {
+          argType = (ReferenceBinding) argType.erasure();
+          if (qualifier != null && argType == targetEnclosingType) {
+            call.addArg(qualExpr);
+          } else {
+            JExpression thisRef = makeThisReference(info, argType, false, scope);
+            call.addArg(thisRef);
           }
         }
       }
@@ -2682,30 +2676,27 @@ public class GwtAstBuilder {
       // Plain old regular user arguments
       call.addArgs(arguments);
 
-      // Synthetic args for inner classes
-      if (isNested) {
-        // Synthetic locals for local classes
-        if (targetBinding.syntheticOuterLocalVariables() != null) {
-          for (SyntheticArgumentBinding arg : targetBinding.syntheticOuterLocalVariables()) {
-            LocalVariableBinding targetVariable = arg.actualOuterLocalVariable;
-            VariableBinding[] path = scope.getEmulationPath(targetVariable);
-            assert path.length == 1;
-            if (curMethod.scope.isInsideInitializer()
-                && path[0] instanceof SyntheticArgumentBinding) {
-              SyntheticArgumentBinding sb = (SyntheticArgumentBinding) path[0];
-              JField field = curClass.syntheticFields.get(sb);
-              assert field != null;
-              call.addArg(makeInstanceFieldRef(info, field));
-            } else if (path[0] instanceof LocalVariableBinding) {
-              JExpression localRef = makeLocalRef(info, (LocalVariableBinding) path[0]);
-              call.addArg(localRef);
-            } else if (path[0] instanceof FieldBinding) {
-              JField field = typeMap.get((FieldBinding) path[0]);
-              assert field != null;
-              call.addArg(makeInstanceFieldRef(info, field));
-            } else {
-              throw new InternalCompilerException("Unknown emulation path.");
-            }
+      // Synthetic closure-captured args for inner classes
+      if (isNested && targetBinding.syntheticOuterLocalVariables() != null) {
+        for (SyntheticArgumentBinding arg : targetBinding.syntheticOuterLocalVariables()) {
+          LocalVariableBinding targetVariable = arg.actualOuterLocalVariable;
+          VariableBinding[] path = scope.getEmulationPath(targetVariable);
+          assert path.length == 1;
+          if (curMethod.scope.isInsideInitializer()
+              && path[0] instanceof SyntheticArgumentBinding) {
+            SyntheticArgumentBinding sb = (SyntheticArgumentBinding) path[0];
+            JField field = curClass.syntheticFields.get(sb.matchingField);
+            assert field != null;
+            call.addArg(makeInstanceFieldRef(info, field));
+          } else if (path[0] instanceof LocalVariableBinding) {
+            JExpression localRef = makeLocalRef(info, (LocalVariableBinding) path[0]);
+            call.addArg(localRef);
+          } else if (path[0] instanceof FieldBinding) {
+            JField field = typeMap.get((FieldBinding) path[0]);
+            assert field != null;
+            call.addArg(makeInstanceFieldRef(info, field));
+          } else {
+            throw new InternalCompilerException("Unknown emulation path.");
           }
         }
       }
@@ -2781,9 +2772,15 @@ public class GwtAstBuilder {
           assert path.length == 1;
           if (curMethod.scope.isInsideInitializer() && path[0] instanceof SyntheticArgumentBinding) {
             SyntheticArgumentBinding sb = (SyntheticArgumentBinding) path[0];
-            JField field = curClass.syntheticFields.get(sb);
-            assert field != null;
-            result = makeInstanceFieldRef(info, field);
+            if  (sb.matchingField != null) {
+              JField field = curClass.syntheticFields.get(sb.matchingField);
+              assert field != null;
+              result = makeInstanceFieldRef(info, field);
+            } else {
+              JParameter parameter = (JParameter) curMethod.locals.get(sb);
+              assert parameter != null;
+              result = new JParameterRef(info, parameter);
+            }
           } else if (path[0] instanceof LocalVariableBinding) {
             result = makeLocalRef(info, (LocalVariableBinding) path[0]);
           } else if (path[0] instanceof FieldBinding) {
@@ -2920,8 +2917,7 @@ public class GwtAstBuilder {
   static class ClassInfo {
     public final JClassType classType;
     public final ClassScope scope;
-    public final Map<SyntheticArgumentBinding, JField> syntheticFields =
-        new IdentityHashMap<SyntheticArgumentBinding, JField>();
+    public final Map<FieldBinding, JField> syntheticFields = Maps.newIdentityHashMap();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
 
@@ -3224,7 +3220,7 @@ public class GwtAstBuilder {
   private void createMembers(TypeDeclaration x) {
     SourceTypeBinding binding = x.binding;
     JDeclaredType type = (JDeclaredType) typeMap.get(binding);
-    SourceInfo info = type.getSourceInfo();
+    final SourceInfo info = type.getSourceInfo();
     try {
       /**
        * We emulate static initializers and instance initializers as methods. As
@@ -3238,8 +3234,13 @@ public class GwtAstBuilder {
 
       if (type instanceof JClassType) {
         assert type.getMethods().size() == 1;
-        createSyntheticMethod(info, "$init", type, JPrimitiveType.VOID, false, false, true,
-            AccessModifier.PRIVATE);
+        final JMethod initMethod = createSyntheticMethod(info, "$init", type, JPrimitiveType.VOID,
+            false, false, true, AccessModifier.PRIVATE);
+        ReferenceBinding declaringClass = (ReferenceBinding) x.binding.erasure();
+
+        // Create synthetic parameters.
+        addEnclosingInstanceSyntheticParameters(declaringClass, initMethod);
+        addCaptureSyntheticParameters(declaringClass, initMethod);
 
         // Add a getClass() implementation for all non-Object, non-String classes.
         if (isSyntheticGetClassNeeded(x, type)) {
@@ -3303,14 +3304,12 @@ public class GwtAstBuilder {
     if (x instanceof Clinit) {
       return;
     }
-    SourceInfo info = makeSourceInfo(x);
+    final SourceInfo info = makeSourceInfo(x);
     MethodBinding b = x.binding;
     ReferenceBinding declaringClass = (ReferenceBinding) b.declaringClass.erasure();
-    Set<String> alreadyNamedVariables = Sets.newHashSet();
     JDeclaredType enclosingType = (JDeclaredType) typeMap.get(declaringClass);
     assert !enclosingType.isExternal();
     JMethod method;
-    boolean isNested = JdtUtil.isInnerClass(declaringClass);
     if (x.isConstructor()) {
       method = new JConstructor(info, (JClassType) enclosingType);
       if (x.isDefaultConstructor()) {
@@ -3323,47 +3322,21 @@ public class GwtAstBuilder {
         method.addParam(new JParameter(info, "enum$ordinal", JPrimitiveType.INT, true, false,
             method));
       }
-      // add synthetic args for outer this
-      if (isNested) {
-        NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
-        if (nestedBinding.enclosingInstances != null) {
-          for (int i = 0; i < nestedBinding.enclosingInstances.length; ++i) {
-            SyntheticArgumentBinding arg = nestedBinding.enclosingInstances[i];
-            String argName = String.valueOf(arg.name);
-            if (alreadyNamedVariables.contains(argName)) {
-              argName += "_" + i;
-            }
-            createParameter(info, arg, argName, method);
-            alreadyNamedVariables.add(argName);
-          }
-        }
-      }
     } else {
       method =
           new JMethod(info, intern(b.selector), enclosingType, typeMap.get(b.returnType), b
               .isAbstract(), b.isStatic(), b.isFinal(), AccessModifier.fromMethodBinding(b));
     }
 
-    // User args.
+    if (x.isConstructor() || x.isInitializationMethod()) {
+      addEnclosingInstanceSyntheticParameters(declaringClass, method);
+    }
+
+    // Add user declared  arguments.
     createParameters(method, x);
 
-    if (x.isConstructor()) {
-      if (isNested) {
-        // add synthetic args for locals
-        NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
-        // add synthetic args for outer this and locals
-        if (nestedBinding.outerLocalVariables != null) {
-          for (int i = 0; i < nestedBinding.outerLocalVariables.length; ++i) {
-            SyntheticArgumentBinding arg = nestedBinding.outerLocalVariables[i];
-            String argName = String.valueOf(arg.name);
-            if (alreadyNamedVariables.contains(argName)) {
-              argName += "_" + i;
-            }
-            createParameter(info, arg, argName, method);
-            alreadyNamedVariables.add(argName);
-          }
-        }
-      }
+    if (x.isConstructor() || x.isInitializationMethod()) {
+      addCaptureSyntheticParameters(declaringClass, method);
     }
 
     mapExceptions(method, b);
@@ -3375,6 +3348,40 @@ public class GwtAstBuilder {
     JsInteropUtil.maybeSetJsinteropMethodProperties(x, method);
     maybeAddMethodSpecialization(x, method);
     typeMap.setMethod(b, method);
+  }
+
+  /**
+   * Adds synthetic arguments related to enclosing instances.
+   */
+  private void addEnclosingInstanceSyntheticParameters(ReferenceBinding declaringClass,
+      final JMethod method) {
+    final SourceInfo info = method.getSourceInfo();
+    JdtUtil.processEnclosingInstanceSyntheticArgumentBindings(declaringClass,
+        new Function<SyntheticArgumentBinding, Void>() {
+          @Override
+          public Void apply(SyntheticArgumentBinding arg) {
+            String argName = String.valueOf(arg.name) + "_" + arg.resolvedPosition;
+            createParameter(info, arg, argName, method);
+            return null;
+          }
+        });
+  }
+
+  /**
+   * Adds synthetic arguments related to closure-capture locals.
+   */
+  private void addCaptureSyntheticParameters(ReferenceBinding declaringClass,
+      final JMethod method) {
+    final SourceInfo info = method.getSourceInfo();
+    JdtUtil.processCaptureVariableSyntheticArgumentBindings(declaringClass,
+        new Function<SyntheticArgumentBinding, Void>() {
+          @Override
+          public Void apply(SyntheticArgumentBinding arg) {
+            String argName = String.valueOf(arg.name) + "_" + arg.resolvedPosition;
+            createParameter(info, arg, argName, method);
+            return null;
+          }
+        });
   }
 
   private void maybeAddMethodSpecialization(AbstractMethodDeclaration x,

@@ -105,7 +105,9 @@ public class UrlBuilder {
 
   /**
    * Set the hash portion of the location (ex. myAnchor or #myAnchor).
-   * 
+   * <p>
+   * Note: Starting with GWT 2.7 the hash will be automatically escaped.
+   *
    * @param hash the hash
    */
   public UrlBuilder setHash(String hash) {

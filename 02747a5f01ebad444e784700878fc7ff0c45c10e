@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df74307d_03d1ccdc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-13T21:22:54Z",
+      "side": 1,
+      "message": "Maybe we should turn off all initerning if outputing through closure? Are you using -XenableClosureCompiler?",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 774,
+        "endChar": 58
+      },
+      "revId": "02747a5f01ebad444e784700878fc7ff0c45c10e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_23afa870",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-13T21:22:54Z",
+      "side": 1,
+      "message": "Bad merge. Delete this line, the local is not used (the statement is created at line 2431).",
+      "range": {
+        "startLine": 2390,
+        "startChar": 3,
+        "endLine": 2390,
+        "endChar": 62
+      },
+      "revId": "02747a5f01ebad444e784700878fc7ff0c45c10e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="core/test_i18n_dollar"/>
 	<classpathentry kind="src" path="core/test_i18n_bar"/>
 	<classpathentry kind="src" path="core/javadoc"/>
-	<classpathentry kind="src" path="core/test"/>
+	<classpathentry excluding="**/super/**" kind="src" path="core/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2.jar" sourcepath="/GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2-src.zip"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/junit/junit-4.8.2.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-4.8.2-src.jar"/>
@@ -64,5 +64,10 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jscomp/20131118/sourcemap-rebased.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.8.3.v20130121-145325.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter-3.8.3.v20130121-145325.jar"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

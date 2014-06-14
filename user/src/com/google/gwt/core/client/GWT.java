@@ -173,6 +173,108 @@ public final class GWT {
   }
 
   /**
+   * Execute inline Javascript efficiently. This method substitutes for the functionality
+   * of JavaScript Native Methods by providing a method for synthesizing Javascript functions
+   * without declaring native Java methods.
+   * <p>
+   * Example:
+   * <code>
+   * GWT.jsni("$wnd.alert($0 + ' ' + $1)", "Hello", 42);
+   * </code>
+   * <p>
+   * Each position in the varargs supplied to the function is available as a numerically indexed
+   * Javascript local variable <b>$<i>n</i></b>.
+   * <p>
+   * Primitive types are passed to Javascript unboxed, and return values are returned unboxed if
+   * the context is unboxed, such as when assigning to an integer, or passing to a another method.
+   * As such, jsni() is a <i>magic method</i> not equivalent to an eval() statement. The first
+   * argument to jsni() containing the Javascript string MUST be a literal. This expression is
+   * parsed and optimized at <b>compile time</b>.
+   * <p>
+   * Note on format of javascript expression:
+   * <p>
+   * There are two forms permitted: Expression, and Statement.
+   * <p>
+   * An expression contains no semicolons, no control flow statements (if/do/for/while), such
+   * as short mathematical expressions, variable or property evaluations, or method calls.
+   * <p>
+   * Expressions are synthesized into something resembling a JSNI method by the compiler, for
+   * example, GWT.jsni("$0 + $1 + Date.now()", 2, 3) would be equivalent to:
+   * <p><code>
+   * public static native int func(int $0, int $1) /*- { return $0 + $1 + Date.now(); } -* /;
+   * </code>
+   * <p>Note that a 'return' statement and trailing semicolon were added by the compiler. In
+   * statement mode, the javascript string literal is placed in the body of a function with
+   * no modification.
+   *
+   * @param javascript a <b>literal</b> Javascript string, cannot be an expression or variable
+   * @param args arguments supplied as positional arguments to the function
+   * @param <T> the return type of value of the function in Javascript
+   */
+  public static <T> T jsni(String javascript, Object... args) {
+    return jsniEmulated(javascript, args);
+  }
+
+  private static native <T> T jsniEmulated(String javascript, Object... args) /*-{
+    var maybeUnbox = @com.google.gwt.core.client.GWT::maybeUnbox(Ljava/lang/Object;);
+    var argStr = [];
+    argStr.push("$maybeUnbox");
+
+    for (var i = 0; i < args.length; i++) {
+      argStr.push("$" + i);
+    }
+    var func = "";
+    for (var i = 0; i < args.length; i++) {
+      var arg = "$" + i;
+      func += arg + " = $maybeUnbox("+arg+");";
+    }
+    // single line statement
+    if (javascript.indexOf('\n') == -1 && javascript.trim().charAt(javascript.trim().length -1)  != ';') {
+      func += 'return ' + javascript + ';';
+    } else {
+      func += javascript;
+    }
+    argStr.push(func);
+    var constructedFunction = Function.apply(null, argStr);
+    var result = constructedFunction.apply(null, [maybeUnbox].concat(args));
+    if (typeof(result) === 'number') {
+      return @java.lang.Double::valueOf(D)(result);
+    }
+    if (typeof(result) === 'boolean') {
+      return result ? @java.lang.Boolean::TRUE : @java.lang.Boolean::FALSE;
+    }
+
+    return result;
+  }-*/;
+
+  // this function cannot run in a JRE context, only for compile to JS
+  private static Object maybeUnbox(Object boxedType) {
+    if (boxedType instanceof Number) {
+      return unboxToDouble((Number) boxedType);
+    }
+    if (boxedType instanceof Boolean) {
+      return unboxToBoolean(((Boolean) boxedType).booleanValue());
+    }
+    if (boxedType instanceof Character) {
+      return unboxToDouble(((Character) boxedType).charValue());
+    }
+    return boxedType;
+  }
+
+  // reinterpret-cast hacks, these do not return Object and won't work in DevMode/JRE.
+  private static native Object unboxToDouble(Number number) /*-{
+    return number.@java.lang.Number::doubleValue()();
+  }-*/;
+
+  private static native Object unboxToDouble(char number) /*-{
+    return number;
+  }-*/;
+
+  private static native Object unboxToBoolean(boolean bool) /*-{
+    return bool;
+  }-*/;
+
+  /**
    * Reports an exception caught at the "top level" to a handler set via
    * {@link #setUncaughtExceptionHandler(UncaughtExceptionHandler)}. This is
    * used in places where the browser calls into user code such as event

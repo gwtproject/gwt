@@ -23,6 +23,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.SpecializeMethod;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -682,12 +683,17 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   @Override
+  @SpecializeMethod(params = {String.class}, target = "__equalsString")
   public boolean equals(Object other) {
     if (!(other instanceof String)) {
       return false;
     }
     return __equals(this, other);
   }
+
+  protected native boolean __equalsString(String otherString) /*-{
+     return this == otherString;
+  }-*/;
 
   public native boolean equalsIgnoreCase(String other) /*-{
     if (other == null)

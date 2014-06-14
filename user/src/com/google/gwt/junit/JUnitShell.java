@@ -50,6 +50,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerDisableRunAsync;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
+import com.google.gwt.dev.util.arg.ArgHandlerEnableClosureCompiler;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
@@ -72,14 +73,13 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerInt;
 import com.google.gwt.util.tools.ArgHandlerString;
-
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import javax.servlet.Servlet;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -96,8 +96,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.servlet.Servlet;
 
 /**
  * This class is responsible for hosting JUnit test case execution. There are
@@ -321,6 +319,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerLocalWorkers(options));
       registerHandler(new ArgHandlerNamespace(options));
       registerHandler(new ArgHandlerOptimize(options));
+      registerHandler(new ArgHandlerEnableClosureCompiler(options));
 
       /*
        * ----- Options specific to JUnitShell -----

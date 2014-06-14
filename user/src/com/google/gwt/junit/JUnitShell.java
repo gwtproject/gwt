@@ -1111,7 +1111,12 @@ public class JUnitShell extends DevMode {
             userAgents.toArray(new String[0]));
       }
     }
-    if (!new Compiler(options).run(getTopLogger(), module)) {
+    try {
+      if (!new Compiler(options).run(getTopLogger(), module)) {
+        throw new UnableToCompleteException();
+      }
+    } catch (Exception e) {
+      getTopLogger().log(Type.ERROR, "Failed to compile", e);
       throw new UnableToCompleteException();
     }
     // TODO(scottb): prepopulate currentCompilationState somehow?

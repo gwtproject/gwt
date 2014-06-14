@@ -98,7 +98,10 @@ import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.js.JsAbstractSymbolResolver;
+import com.google.gwt.dev.js.JsParser;
+import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -106,6 +109,9 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.js.ast.JsReturn;
+import com.google.gwt.dev.js.ast.JsRootScope;
+import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
@@ -113,7 +119,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
@@ -213,6 +218,7 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 import org.eclipse.jdt.internal.compiler.lookup.VariableBinding;
 import org.eclipse.jdt.internal.compiler.util.Util;
 
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1141,7 +1147,92 @@ public class GwtAstBuilder {
           }
         }
 
-        JMethodCall call = new JMethodCall(info, receiver, method);
+        JMethodCall call = null;
+        if (method.getEnclosingType().getName().equals("com.google.gwt.core.client.GWT") &&
+            method.getName().startsWith("jsni")) {
+          if (!(x.arguments[0] instanceof StringLiteral)) {
+            throw new InternalCompilerException(curClass.type,
+                "First argument to GWT.jsni must be a string literal", null);
+          }
+          String javaScript = ((StringLiteral) x.arguments[0]).constant.stringValue();
+
+          JType returnType = method.getType();
+
+          // synthesize a native JSNI method called __jsni$<n>
+          JMethod jsniMethod = new JMethod(info, "__jsni$" + curClass.gwtJsniCount++,
+              curClass.classType, returnType, false, true, true, AccessModifier.PRIVATE);
+          JsniMethodBody jsniMethodBody = new JsniMethodBody(info);
+          jsniMethod.setBody(jsniMethodBody);
+
+          // synthesize an anonymous JS function containing the string literal argument
+          String javaScriptSrc = "function(";
+
+          if (x.arguments.length > 1) {
+            for (int i = 1; i < x.arguments.length; i++) {
+              String paramName = "$" + (i - 1);
+              if (i > 1) {
+                javaScriptSrc += ", ";
+              }
+              javaScriptSrc += paramName;
+              // record the Java types from JDT before boxing in varargs
+              jsniMethod.addParam(new JParameter(info, paramName,
+                  typeMap.get(x.arguments[i].resolvedType), true, false, jsniMethod));
+            }
+          }
+          javaScriptSrc += ") {";
+          javaScriptSrc += javaScript;
+          javaScriptSrc += "}";
+
+          List<JsStatement> parsedStmts = JsParser.parse(info,
+              JsRootScope.INSTANCE, new StringReader(javaScriptSrc));
+
+          JsFunction jsFunction = ((JsFunction) (((JsExprStmt) parsedStmts.get(0))).getExpression());
+          jsFunction.setFromJava(true);
+          JsBlock funcBody = jsFunction.getBody();
+          // add a return statement if single statement expression
+          if (funcBody.getStatements().size() == 1
+              && funcBody.getStatements().get(0) instanceof JsExprStmt) {
+            JsExprStmt singleExpr = (JsExprStmt) funcBody.getStatements().get(0);
+            funcBody.getStatements().set(0, new JsReturn(singleExpr.getSourceInfo(),
+                singleExpr.getExpression()));
+          }
+
+          JsParameterResolver localResolver = new JsParameterResolver(jsFunction);
+          localResolver.accept(jsFunction);
+          jsniMethodBody.setFunc(jsFunction);
+          curClass.classType.addMethod(jsniMethod);
+          jsniMethod.freezeParamTypes();
+          // replace GWT.jsni call with call to generated method
+          call = new JMethodCall(info, receiver, jsniMethod);
+
+          // always true for var args
+          assert arguments.get(1) instanceof JNewArray;
+
+          JNewArray varArgs = (JNewArray) arguments.get(1);
+          // unpack the new Object[] { } array initializer
+          for (int i = 0; i < varArgs.initializers.size(); i++) {
+            JExpression arg = varArgs.initializers.get(i);
+            // try to unbox if you see a call to a boxing expression
+            if (arg instanceof JMethodCall) {
+              JMethodCall maybeBoxCall = (JMethodCall) arg;
+              JMethod boxingTarget = maybeBoxCall.getTarget();
+              JDeclaredType enclosingBox = boxingTarget.getEnclosingType();
+              // look for Number.valueOf call on subtypes
+              if (boxingTarget.getName().equals("valueOf")
+                  && boxingTarget.getOriginalParamTypes().size() == 1
+                  && boxingTarget.getOriginalParamTypes().get(0) instanceof JPrimitiveType
+                  && enclosingBox.getSuperClass().getShortName().equals("Number")) {
+                 call.addArg(maybeBoxCall.getArgs().get(0));
+                continue;
+              }
+            }
+            call.addArg(arg);
+          }
+        } else {
+          call = new JMethodCall(info, receiver, method);
+          // The arguments come first...
+          call.addArgs(arguments);
+        }
 
         // On a super ref, don't allow polymorphic dispatch. Oddly enough,
         // QualifiedSuperReference not derived from SuperReference!
@@ -1150,9 +1241,6 @@ public class GwtAstBuilder {
         if (isSuperRef) {
           call.setStaticDispatchOnly();
         }
-
-        // The arguments come first...
-        call.addArgs(arguments);
 
         if (x.valueCast != null) {
           JType castType = typeMap.get(x.valueCast);
@@ -2924,6 +3012,7 @@ public class GwtAstBuilder {
         new IdentityHashMap<SyntheticArgumentBinding, JField>();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
+    public int gwtJsniCount = 0;
 
     public ClassInfo(JDeclaredType type, TypeDeclaration x) {
       this.type = type;

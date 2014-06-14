@@ -525,7 +525,8 @@ public class TypeTightener {
       }
 
       // tighten based on non-instantiability
-      if (!program.typeOracle.isInstantiatedType(refType)) {
+      if (!program.typeOracle.isInstantiatedType(refType)
+          && !program.typeOracle.isJsType(refType)) {
         x.setType(typeNull);
         madeChanges();
         return;
@@ -541,7 +542,7 @@ public class TypeTightener {
        * The only information that we can infer about native methods is if they
        * are declared to return a leaf type.
        */
-      if (x.isNative()) {
+      if (x.isNative() || program.typeOracle.isJsTypeMethod(x)) {
         return;
       }
 
@@ -700,7 +701,7 @@ public class TypeTightener {
       }
 
       // tighten based on non-instantiability
-      if (!program.typeOracle.isInstantiatedType(refType)) {
+      if (!program.typeOracle.isInstantiatedType(refType) && !program.typeOracle.isJsType(refType)) {
         x.setType(typeNull);
         madeChanges();
         return;

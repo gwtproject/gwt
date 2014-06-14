@@ -220,12 +220,7 @@ public class ControlFlowAnalyzer {
             rescue(jsoImplementor, true, true);
           }
         }
-      } else if (program.typeOracle.isJsType(targetType)
-        && ((JDeclaredType) targetType).getJsPrototype() != null) {
-        // keep alive JsType with prototype used in cast so it can used in cast checks against JS objects later
-        rescue((JReferenceType) targetType, true, true);
       }
-
       return true;
     }
 
@@ -531,7 +526,8 @@ public class ControlFlowAnalyzer {
 
     private boolean canBeInstantiatedInJavaScript(JType type) {
       if (program.typeOracle.canBeInstantiatedInJavascript(type) ||
-          program.isJavaLangString(type)) {
+          program.isJavaLangString(type) ||
+          program.typeOracle.isJsType(type)) {
         return true;
       }
 
@@ -636,7 +632,7 @@ public class ControlFlowAnalyzer {
         if (dependencyRecorder != null) {
           curMethodStack.remove(curMethodStack.size() - 1);
         }
-        if (method.isNative()) {
+        if (method.isNative() || program.typeOracle.isJsTypeMethod(method)) {
             /*
              * SPECIAL: returning from this method passes a value from
              * JavaScript into Java.
@@ -968,7 +964,7 @@ public class ControlFlowAnalyzer {
   private final JMethod getClassMethod;
   private final JProgram program;
   private Set<JReferenceType> referencedTypes = Sets.newHashSet();
-  private final RescueVisitor rescuer = new RescueVisitor();
+  private final RescueVisitor rescuer;
   private final Set<JReferenceType> rescuedViaCast = Sets.newHashSet();
   private final JMethod runAsyncOnsuccess;
   private JMethod stringValueOfChar = null;
@@ -993,6 +989,7 @@ public class ControlFlowAnalyzer {
     methodsThatOverrideMe = cfa.methodsThatOverrideMe;
     getClassField = program.getIndexedField("Object.___clazz");
     getClassMethod = program.getIndexedMethod("Object.getClass");
+    rescuer = new RescueVisitor();
   }
 
   public ControlFlowAnalyzer(JProgram program) {
@@ -1004,6 +1001,7 @@ public class ControlFlowAnalyzer {
     getClassMethod = program.getIndexedMethod("Object.getClass");
     rescuedViaCast.addAll(program.typeOracle.getInstantiatedJsoTypesViaCast());
     buildMethodsOverriding();
+    rescuer = new RescueVisitor();
   }
 
   /**

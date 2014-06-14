@@ -261,7 +261,7 @@ public class JSORestrictionsChecker {
 
       checkJsTypeMethodsForOverloads(methodSignatures, noExports, binding);
       for (MethodBinding mb : binding.methods()) {
-        checkJsProperty(mb, true);
+        checkJsProperty(mb, binding.isInterface());
         checkJsExport(mb, !binding.isInterface());
       }
     }
@@ -369,7 +369,7 @@ public class JSORestrictionsChecker {
         return ClassState.JSTYPE;
       }
 
-      if (checkClassImplementingJsType(type)) {
+      if (!type.binding.isInterface() && checkClassImplementingJsType(type)) {
         return ClassState.JSTYPE_IMPL;
       }
 
@@ -410,7 +410,7 @@ public class JSORestrictionsChecker {
 
       for (MethodBinding mb : type.binding.methods()) {
         checkJsExport(mb, true);
-        checkJsProperty(mb, false);
+        checkJsProperty(mb, type.binding.isInterface());
       }
 
       AnnotationBinding jsinterfaceAnn = JdtUtil.getAnnotation(jsInterface,

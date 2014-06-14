@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import com.google.gwt.core.client.impl.IterateAsArray;
 import com.google.gwt.lang.Array;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ import java.io.Serializable;
  *
  * @param <E> the element type.
  */
+@IterateAsArray(getter = "get", length = "size")
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
@@ -153,7 +155,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public E get(int index) {
-    checkIndex(index, size);
+//    checkIndex(index, size);
     return array[index];
   }
 

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f6920a1_2266d4a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-14T23:00:56Z",
+      "side": 1,
+      "message": "Could you use permalinks?\n\nhttps://gwt-review.googlesource.com/7865 here, and https://groups.google.com/d/topic/google-web-toolkit-contributors/gr5H1sp11jU/discussion below\n\nHere, you could also use the Change-Id of the other change, which Gerrit and Gitiles will both auto-link: I34ce8f327734483bec1886b7d9611012a98a1d8f",
+      "revId": "5d2ee22dea1b7487d8d23d9d85f0b5070ca659a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

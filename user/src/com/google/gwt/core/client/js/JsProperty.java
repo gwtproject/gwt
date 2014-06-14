@@ -42,4 +42,5 @@ import java.lang.annotation.Target;
 @Documented
 public @interface JsProperty {
   String value() default "";
+  boolean indexed() default false;
 }

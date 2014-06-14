@@ -208,12 +208,7 @@ public class ControlFlowAnalyzer {
             rescue(jsoImplementor, true, true);
           }
         }
-      } else if (program.typeOracle.isJsType(targetType)
-        && ((JDeclaredType) targetType).getJsPrototype() != null) {
-        // keep alive JsType with prototype used in cast so it can used in cast checks against JS objects later
-        rescue((JReferenceType) targetType, true, true);
       }
-
       return true;
     }
 
@@ -517,7 +512,8 @@ public class ControlFlowAnalyzer {
 
     private boolean canBeInstantiatedInJavaScript(JType type) {
       if (program.typeOracle.canBeInstantiatedInJavascript(type) ||
-          program.isJavaLangString(type)) {
+          program.isJavaLangString(type) ||
+          program.typeOracle.isJsType(type)) {
         return true;
       }
 

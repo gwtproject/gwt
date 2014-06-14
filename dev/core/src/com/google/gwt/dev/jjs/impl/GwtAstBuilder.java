@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.client.impl.DoNotInline;
 import com.google.gwt.core.client.impl.SpecializeMethod;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.javac.GWTProblem;
 import com.google.gwt.dev.javac.JSORestrictionsChecker;
 import com.google.gwt.dev.javac.JdtUtil;
 import com.google.gwt.dev.javac.JsInteropUtil;
@@ -100,7 +101,11 @@ import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.js.JsAbstractSymbolResolver;
+import com.google.gwt.dev.js.JsParser;
+import com.google.gwt.dev.js.JsParserException;
+import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -108,6 +113,9 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.js.ast.JsReturn;
+import com.google.gwt.dev.js.ast.JsRootScope;
+import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
@@ -116,7 +124,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
@@ -217,9 +224,12 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 import org.eclipse.jdt.internal.compiler.lookup.VariableBinding;
 import org.eclipse.jdt.internal.compiler.util.Util;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -233,6 +243,11 @@ import java.util.Set;
  * contain unresolved references.
  */
 public class GwtAstBuilder {
+
+  public static final String JS_CLASS = "com.google.gwt.core.client.js.Js";
+  public static final TypeBinding[] INT_TYPE = new TypeBinding[] {TypeBinding.INT};
+  public static final String ITERATEASARRAY_CLASS =
+      "com.google.gwt.core.client.impl.IterateAsArray";
 
   /**
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
@@ -885,14 +900,14 @@ public class GwtAstBuilder {
         if (x.collectionVariable != null) {
           /**
            * <pre>
-         * for (final T[] i$array = collection,
-         *          int i$index = 0,
-         *          final int i$max = i$array.length;
-         *      i$index < i$max; ++i$index) {
-         *   T elementVar = i$array[i$index];
-         *   // user action
-         * }
-         * </pre>
+           * for (final T[] i$array = collection,
+           *          int i$index = 0,
+           *          final int i$max = i$array.length;
+           *      i$index < i$max; ++i$index) {
+           *   T elementVar = i$array[i$index];
+           *   // user action
+           * }
+           * </pre>
            */
           JLocal arrayVar =
               JProgram.createLocal(info, elementVarName + "$array", collection.getType(), true,
@@ -929,50 +944,117 @@ public class GwtAstBuilder {
 
           result = new JForStatement(info, initializers, condition, increments, body);
         } else {
-          /**
-           * <pre>
-           * for (Iterator&lt;T&gt; i$iterator = collection.iterator(); i$iterator.hasNext();) {
-           *   T elementVar = i$iterator.next();
-           *   // user action
-           * }
-           * </pre>
-           */
+
           CompilationUnitScope cudScope = scope.compilationUnitScope();
           ReferenceBinding javaUtilIterator = scope.getJavaUtilIterator();
           ReferenceBinding javaLangIterable = scope.getJavaLangIterable();
           MethodBinding iterator = javaLangIterable.getExactMethod(ITERATOR, NO_TYPES, cudScope);
           MethodBinding hasNext = javaUtilIterator.getExactMethod(HAS_NEXT, NO_TYPES, cudScope);
           MethodBinding next = javaUtilIterator.getExactMethod(NEXT, NO_TYPES, cudScope);
-          JLocal iteratorVar =
-              JProgram.createLocal(info, (elementVarName + "$iterator"), typeMap
-                  .get(javaUtilIterator), false, curMethod.body);
+          ReferenceBinding iterateAsArrayType = findBindingWithIterateAsArray(
+              (ReferenceBinding) x.collection.resolvedType);
+          MethodBinding iterateAsArrayGetter = null;
+          MethodBinding iterateAsArrayLength = null;
 
-          List<JStatement> initializers = Lists.newArrayListWithCapacity(1);
-          // Iterator<T> i$iterator = collection.iterator()
-          initializers.add(makeDeclaration(info, iteratorVar, new JMethodCall(info, collection,
-              typeMap.get(iterator))));
-
-          // i$iterator.hasNext()
-          JExpression condition =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(hasNext));
-
-          // T elementVar = (T) i$iterator.next();
-          elementDecl.initializer =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(next));
-
-          // Perform any implicit reference type casts (due to generics).
-          // Note this occurs before potential unboxing.
-          if (elementVar.getType() != javaLangObject) {
-            TypeBinding collectionElementType = (TypeBinding) collectionElementTypeField.get(x);
-            JType toType = typeMap.get(collectionElementType);
-            assert (toType instanceof JReferenceType);
-            elementDecl.initializer = maybeCast(toType, elementDecl.initializer);
+          if (iterateAsArrayType != null) {
+            AnnotationBinding ab = JdtUtil.getAnnotation(iterateAsArrayType, ITERATEASARRAY_CLASS);
+            if (ab != null) {
+              iterateAsArrayGetter = getIterateAsArrayMethodBinding(cudScope, iterateAsArrayType,
+                  ab, "getter", INT_TYPE);
+              iterateAsArrayLength = getIterateAsArrayMethodBinding(cudScope, iterateAsArrayType,
+                  ab, "length", NO_TYPES);
+            }
           }
+          if (iterateAsArrayGetter != null && iterateAsArrayLength != null) {
+            /**
+             * <pre>
+             * for (final T[] i$array = collection,
+             *          int i$index = 0,
+             *          final int i$max = i$array.length();
+             *      i$index < i$max; ++i$index) {
+             *   T elementVar = i$array.at(i$index);
+             *   // user action
+             * }
+             * </pre>
+             */
+            JLocal arrayVar =
+                JProgram.createLocal(info, elementVarName + "$array", collection.getType(), true,
+                    curMethod.body);
+            JLocal indexVar =
+                JProgram.createLocal(info, elementVarName + "$index", JPrimitiveType.INT, false,
+                    curMethod.body);
+            JLocal maxVar =
+                JProgram.createLocal(info, elementVarName + "$max", JPrimitiveType.INT, true,
+                    curMethod.body);
 
-          body.addStmt(0, elementDecl);
+            JMethod lengthMethod = typeMap.get(iterateAsArrayLength);
+            JMethod getterMethod = typeMap.get(iterateAsArrayGetter);
 
-          result = new JForStatement(info, initializers, condition,
-              null, body);
+            List<JStatement> initializers = Lists.newArrayListWithCapacity(3);
+            // T[] i$array = arr
+            initializers.add(makeDeclaration(info, arrayVar, collection));
+            // int i$index = 0
+            initializers.add(makeDeclaration(info, indexVar, JIntLiteral.get(0)));
+            // int i$max = i$array.length()
+            initializers.add(makeDeclaration(info, maxVar, new JMethodCall(info, new JLocalRef(info,
+                arrayVar), lengthMethod)));
+
+            // i$index < i$max
+            JExpression condition =
+                new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.LT, new JLocalRef(
+                    info, indexVar), new JLocalRef(info, maxVar));
+
+            // ++i$index
+            JExpression increments = new JPrefixOperation(info, JUnaryOperator.INC,
+                new JLocalRef(info, indexVar));
+
+            // T elementVar = i$array.at(i$index);
+            elementDecl.initializer =
+                new JMethodCall(info, new JLocalRef(info, arrayVar), getterMethod,
+                    new JLocalRef(info, indexVar));
+            body.addStmt(0, elementDecl);
+
+            result = new JForStatement(info, initializers, condition, increments, body);
+          } else {
+            /**
+             * <pre>
+             * for (Iterator&lt;T&gt; i$iterator = collection.iterator(); i$iterator.hasNext();) {
+             *   T elementVar = i$iterator.next();
+             *   // user action
+             * }
+             * </pre>
+             */
+            JLocal iteratorVar =
+                JProgram.createLocal(info, (elementVarName + "$iterator"), typeMap
+                    .get(javaUtilIterator), false, curMethod.body);
+
+            List<JStatement> initializers = Lists.newArrayListWithCapacity(1);
+            // Iterator<T> i$iterator = collection.iterator()
+            initializers.add(makeDeclaration(info, iteratorVar, new JMethodCall(info, collection,
+                typeMap.get(iterator))));
+
+            // i$iterator.hasNext()
+            JExpression condition =
+                new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(hasNext));
+
+            // T elementVar = (T) i$iterator.next();
+            elementDecl.initializer =
+                new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(next));
+
+            // Perform any implicit reference type casts (due to generics).
+            // Note this occurs before potential unboxing.
+            if (elementVar.getType() != javaLangObject) {
+              TypeBinding collectionElementType = (TypeBinding) collectionElementTypeField.get(x);
+              JType toType = typeMap.get(collectionElementType);
+              assert (toType instanceof JReferenceType);
+              elementDecl.initializer = maybeCast(toType, elementDecl.initializer);
+            }
+
+            body.addStmt(0, elementDecl);
+
+            result = new JForStatement(info, initializers, condition,
+                null, body);
+          }
         }
 
         // May need to box or unbox the element assignment.
@@ -982,6 +1064,49 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private MethodBinding getIterateAsArrayMethodBinding(CompilationUnitScope cudScope,
+        ReferenceBinding iterateAsArrayType, AnnotationBinding ab, String paramName,
+        TypeBinding[] paramTypes) {
+      String methodName = JdtUtil.getAnnotationParameterString(ab, paramName);
+      if (methodName != null) {
+        return iterateAsArrayType.getExactMethod(methodName.toCharArray(),
+            paramTypes, cudScope);
+      } else {
+        // TODO (cromwellian): report warning?
+      }
+      return null;
+    }
+
+    Map<ReferenceBinding, ReferenceBinding> iterateAsArrayCache =
+        new HashMap<ReferenceBinding, ReferenceBinding>();
+
+    private ReferenceBinding findBindingWithIterateAsArray(ReferenceBinding refBinding) {
+      ReferenceBinding itAsArray = iterateAsArrayCache.get(refBinding);
+      if (itAsArray == null) {
+        AnnotationBinding ab = JdtUtil.getAnnotation(refBinding.erasure(),
+            ITERATEASARRAY_CLASS);
+        if (ab != null) {
+          itAsArray = refBinding;
+        }
+        if (itAsArray == null && refBinding.superclass() != null) {
+          itAsArray = findBindingWithIterateAsArray(refBinding.superclass());
+        }
+        if (itAsArray == null) {
+          for (ReferenceBinding sup : refBinding.superInterfaces()) {
+            itAsArray = findBindingWithIterateAsArray(sup);
+            if (itAsArray != null) {
+              break;
+            }
+          }
+        }
+        if (itAsArray != null) {
+          itAsArray = (ReferenceBinding) itAsArray.erasure();
+          iterateAsArrayCache.put(refBinding, itAsArray);
+        }
+      }
+      return itAsArray;
     }
 
     @Override
@@ -1124,7 +1249,47 @@ public class GwtAstBuilder {
           }
         }
 
-        JMethodCall call = new JMethodCall(info, receiver, method);
+        JMethodCall call;
+        if (isJsInteropMagicMethod(method)) {
+          String javaScript = getJsMagicMethodSource(x);
+          call = synthesizeJsMagicMethod(x, info, method, arguments, javaScript);
+        } else if (isJsInteropMagicArrayLiteralMethod(method)) {
+          String javaScript = "[";
+          JNewArray varArgs = (JNewArray) arguments.get(arguments.size() - 1);
+          for (int i = 0; i < varArgs.initializers.size(); i++) {
+            if (i > 0) {
+              javaScript += ",";
+            }
+            javaScript += "$" + i;
+          }
+          javaScript += "]";
+          call = synthesizeJsMagicMethod(x, info, method, arguments, javaScript);
+        } else if (isJsInteropMagicMapLiteralMethod(method)) {
+          String javaScript = "({";
+          JNewArray varArgs = (JNewArray) arguments.get(arguments.size() - 1);
+          if (varArgs.initializers.size() % 2 == 1) {
+            GWTProblem.recordError(x, curCud.scope.referenceContext,
+                "Call to Js.map must have an even number of arguments.", null);
+          }
+          for (int i = 0; i < varArgs.initializers.size(); i += 2) {
+            if (i > 0) {
+              javaScript += ",";
+            }
+            JExpression keyArg = varArgs.initializers.get(i);
+            if (keyArg instanceof JStringLiteral) {
+              javaScript += "\"" + ((JStringLiteral) keyArg).getValue() + "\": $" + (i + 1);
+            } else {
+              GWTProblem.recordError(x.arguments[i], curCud.scope.referenceContext,
+                  "even numbered argument to Js.map must be string type", null);
+            }
+          }
+          javaScript += "})";
+          call = synthesizeJsMagicMethod(x, info, method, arguments, javaScript);
+        } else {
+          call = new JMethodCall(info, receiver, method);
+          // The arguments come first...
+          call.addArgs(arguments);
+        }
 
         // On a super ref, don't allow polymorphic dispatch. Oddly enough,
         // QualifiedSuperReference not derived from SuperReference!
@@ -1133,9 +1298,6 @@ public class GwtAstBuilder {
         if (isSuperRef) {
           call.setStaticDispatchOnly();
         }
-
-        // The arguments come first...
-        call.addArgs(arguments);
 
         if (x.valueCast != null) {
           JType castType = typeMap.get(x.valueCast);
@@ -1146,6 +1308,128 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private JMethodCall synthesizeJsMagicMethod(MessageSend x, SourceInfo info, JMethod method,
+        List<JExpression> arguments, String javaScript) throws IOException, JsParserException {
+      JMethodCall call;JType returnType = method.getType();
+
+      // synthesize a native JSNI method called __jsni$<n>
+      JMethod jsniMethod = new JMethod(info, "__jsni$" + curClass.gwtJsniCount++,
+          curClass.classType, returnType, false, false, true, AccessModifier.PRIVATE);
+      JsniMethodBody jsniMethodBody = new JsniMethodBody(info);
+      jsniMethod.setBody(jsniMethodBody);
+
+      // synthesize an anonymous JS function containing the string literal argument
+      String javaScriptSrc = synthesizeJsMagicMethodBodySource(x, info, javaScript, jsniMethod,
+          arguments);
+
+      JsFunction jsFunction = parseAndFixupJsMagicMethod(info, javaScriptSrc);
+      jsniMethodBody.setFunc(jsFunction);
+      curClass.classType.addMethod(jsniMethod);
+      jsniMethod.freezeParamTypes();
+      // replace GWT.jsni call with call to generated method
+      call = new JMethodCall(info, new JThisRef(info, curClass.classType), jsniMethod);
+
+      // always true for var args
+      assert arguments.get(1) instanceof JNewArray;
+
+      unboxJsMagicMethodVarargs(arguments, call);
+      return call;
+    }
+
+    private void unboxJsMagicMethodVarargs(List<JExpression> arguments, JMethodCall call) {
+      JNewArray varArgs = (JNewArray) arguments.get(arguments.size() - 1);
+      // unpack the new Object[] { } array initializer
+      for (int i = 0; i < varArgs.initializers.size(); i++) {
+        JExpression arg = varArgs.initializers.get(i);
+        // try to unbox if you see a call to a boxing expression
+        if (arg instanceof JMethodCall) {
+          JMethodCall maybeBoxCall = (JMethodCall) arg;
+          JMethod boxingTarget = maybeBoxCall.getTarget();
+          JDeclaredType enclosingBox = boxingTarget.getEnclosingType();
+          // look for Number.valueOf call on subtypes
+          if (boxingTarget.getName().equals("valueOf")
+              && boxingTarget.getOriginalParamTypes().size() == 1
+              && boxingTarget.getOriginalParamTypes().get(0) instanceof JPrimitiveType
+              && enclosingBox.getSuperClass().getShortName().equals("Number")) {
+             call.addArg(maybeBoxCall.getArgs().get(0));
+            continue;
+          }
+        }
+        call.addArg(arg);
+      }
+    }
+
+    private JsFunction parseAndFixupJsMagicMethod(SourceInfo info, String javaScriptSrc)
+        throws IOException, JsParserException {
+      List<JsStatement> parsedStmts = JsParser.parse(info,
+          JsRootScope.INSTANCE, new StringReader(javaScriptSrc));
+
+      JsFunction jsFunction = ((JsFunction) (((JsExprStmt) parsedStmts.get(0))).getExpression());
+      jsFunction.setFromJava(true);
+      JsBlock funcBody = jsFunction.getBody();
+      // add a return statement if single statement expression
+      if (funcBody.getStatements().size() == 1
+          && funcBody.getStatements().get(0) instanceof JsExprStmt) {
+        JsExprStmt singleExpr = (JsExprStmt) funcBody.getStatements().get(0);
+        funcBody.getStatements().set(0, new JsReturn(singleExpr.getSourceInfo(),
+            singleExpr.getExpression()));
+      }
+
+      JsParameterResolver localResolver = new JsParameterResolver(jsFunction);
+      localResolver.accept(jsFunction);
+      return jsFunction;
+    }
+
+    private String synthesizeJsMagicMethodBodySource(MessageSend x, SourceInfo info,
+        String javaScript, JMethod jsniMethod, List<JExpression> arguments) {
+      String javaScriptSrc = "function(";
+      JExpression maybeVarArgs = arguments.get(arguments.size() - 1);
+      if (maybeVarArgs instanceof JNewArray) {
+        // x.arguments of foo(a, b, c, vararg1, vararg2, vararg3) =>
+        // arguments array is (a, b, c, JNewArray(v1, v2, v3) => .size = 4
+        int varArgsStartAt = arguments.size() - 1;
+        for (int i = varArgsStartAt; i < x.arguments.length; i++) {
+          String paramName = "$" + (i - varArgsStartAt);
+          if (i > varArgsStartAt) {
+            javaScriptSrc += ", ";
+          }
+          javaScriptSrc += paramName;
+          // record the Java types from JDT before boxing in varargs
+          jsniMethod.addParam(new JParameter(info, paramName,
+              typeMap.get(x.arguments[i].resolvedType), true, false, jsniMethod));
+        }
+      }
+      javaScriptSrc += ") {";
+      javaScriptSrc += javaScript;
+      javaScriptSrc += "}";
+      return javaScriptSrc;
+    }
+
+    private String getJsMagicMethodSource(MessageSend x) {
+      if (!(x.arguments[0] instanceof StringLiteral)) {
+        GWTProblem.recordError(x, curCud.scope.referenceContext,
+            "First argument to Js.js* methods must be a string literal", null);
+      }
+      return ((StringLiteral) x.arguments[0]).constant.stringValue();
+    }
+
+    private boolean isJsInteropMagicMethod(JMethod method) {
+      return method.getEnclosingType().getName().equals(JS_CLASS) &&
+          method.getName().startsWith("js");
+    }
+
+    private boolean isJsInteropMagicArrayLiteralMethod(JMethod method) {
+      return method.getEnclosingType().getName().equals(JS_CLASS) &&
+          (method.getName().equals("array") ||
+           method.getName().equals("ints") ||
+          method.getName().equals("strings"));
+    }
+
+    private boolean isJsInteropMagicMapLiteralMethod(JMethod method) {
+      return method.getEnclosingType().getName().equals(JS_CLASS) &&
+          method.getName().equals("map");
     }
 
     @Override
@@ -2839,6 +3123,7 @@ public class GwtAstBuilder {
         new IdentityHashMap<SyntheticArgumentBinding, JField>();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
+    public int gwtJsniCount = 0;
 
     public ClassInfo(JDeclaredType type, TypeDeclaration x) {
       this.type = type;

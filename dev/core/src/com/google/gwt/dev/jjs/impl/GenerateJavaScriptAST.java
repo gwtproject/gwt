@@ -1403,9 +1403,10 @@ public class GenerateJavaScriptAST {
           }
         }
         if (isJsProperty || target.isJsProperty()) {
-          String getter = isGetter(target);
-          String setter = isSetter(target);
-          String has = isHas(target);
+          boolean indexed = target.getJsProperty() == JMethod.JsPropertyType.INDEXED;
+          String getter = isGetter(target, indexed);
+          String setter = isSetter(target, indexed);
+          String has = isHas(target, indexed);
 
           // if fluent
           JType type = target.getType();
@@ -1416,11 +1417,12 @@ public class GenerateJavaScriptAST {
           JsExpression qualExpr = pop();
 
           if (getter != null) {
-            result = dispatchAsGetter(x, unnecessaryQualifier, getter, qualExpr);
+            result = dispatchAsGetter(x, unnecessaryQualifier, jsInvocation, getter, qualExpr,
+                indexed);
           } else if (setter != null) {
-            result = dispatchAsSetter(x, jsInvocation, setter, isFluent, qualExpr);
+            result = dispatchAsSetter(x, jsInvocation, setter, isFluent, qualExpr, indexed);
           } else if (has != null) {
-            result = dispatchAsHas(x, has, qualExpr);
+            result = dispatchAsHas(x, has, jsInvocation, qualExpr, indexed);
           } else {
             throw new InternalCompilerException("JsProperty not a setter, getter, or has.");
           }
@@ -1503,20 +1505,34 @@ public class GenerateJavaScriptAST {
       pendingLocals.add(var);
       return tmpName;
     }
-
-    private JsExpression dispatchAsHas(JMethodCall x, String has, JsExpression qualExpr) {
-      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), has);
+    
+    private JsExpression dispatchAsHas(JMethodCall x, String has, JsInvocation jsInvocation,
+        JsExpression qualExpr, boolean indexed) {
+      JsExpression result;
+      JsExpression property = !indexed ? new JsNameRef(x.getSourceInfo(), has) :
+          jsInvocation.getArguments().get(0);
       result = new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP,
           property, qualExpr);
       return result;
     }
 
-    private JsExpression dispatchAsSetter(JMethodCall x, JsInvocation jsInvocation, String setter, boolean isFluent, JsExpression qualExpr) {
-      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), setter);
-      // either qualExpr.prop or _.prop depending on fluent or not
-      property.setQualifier(isFluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
-      // propExpr = arg
-      result = createAssignment(property, jsInvocation.getArguments().get(0));
+    private JsExpression dispatchAsSetter(JMethodCall x, JsInvocation jsInvocation, String setter,
+        boolean isFluent, JsExpression qualExpr, boolean indexed) {
+      JsExpression result;
+      if (!indexed) {
+        JsNameRef property = new JsNameRef(x.getSourceInfo(), setter);
+        // either qualExpr.prop or _.prop depending on fluent or not
+        property.setQualifier(isFluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
+        // propExpr = arg
+        result = createAssignment(property, jsInvocation.getArguments().get(0));
+      } else {
+        // qualExpr[arg]
+        JsArrayAccess arrayRef = new JsArrayAccess(x.getSourceInfo(),
+            isFluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr,
+            jsInvocation.getArguments().get(0));
+        // qualExpr[arg] = arg2
+        result = createAssignment(arrayRef, jsInvocation.getArguments().get(1));
+      }
       if (isFluent) {
         // (_ = qualExpr, _.prop = arg, _)
         result = createCommaExpression(
@@ -1527,12 +1543,19 @@ public class GenerateJavaScriptAST {
       return result;
     }
 
-    private JsExpression dispatchAsGetter(JMethodCall x, JsExpression unnecessaryQualifier, String getter, JsExpression qualExpr) {
+    private JsExpression dispatchAsGetter(JMethodCall x, JsExpression unnecessaryQualifier,
+        JsInvocation jsInvocation, String getter, JsExpression qualExpr, boolean indexed) {
       JsExpression result;// replace with qualExpr.property
-      JsNameRef property = new JsNameRef(x.getSourceInfo(), getter);
-      property.setQualifier(qualExpr);
-      result = createCommaExpression(unnecessaryQualifier, property);
-      return result;
+      if (!indexed) {
+        JsNameRef property = new JsNameRef(x.getSourceInfo(), getter);
+        property.setQualifier(qualExpr);
+        result = createCommaExpression(unnecessaryQualifier, property);
+        return result;
+      } else {
+        JsArrayAccess arrayRef = new JsArrayAccess(x.getSourceInfo(), qualExpr,
+            jsInvocation.getArguments().get(0));
+        return createCommaExpression(unnecessaryQualifier, arrayRef);
+      }
     }
 
     /**
@@ -1569,40 +1592,90 @@ public class GenerateJavaScriptAST {
       return JsNullLiteral.INSTANCE;
     }
 
-    private String isGetter(JMethod method) {
+    private String isGetter(JMethod method, boolean indexed) {
       String name = method.getName();
       // zero arg non-void getX()
-      if (name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
-          method.getType() != JPrimitiveType.VOID && method.getParams().size() == 0) {
+      if (!indexed && name.length() > 3 && name.startsWith("get")
+          && Character.isUpperCase(name.charAt(3)) && method.getType() != JPrimitiveType.VOID
+          && method.getParams().size() == 0) {
         String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
         return propName;
-      } else  if (name.length() > 3 && name.startsWith("is")
+      } else if (indexed && name.length() > 3 && name.startsWith("get")
+          && Character.isUpperCase(name.charAt(3)) && method.getType() != JPrimitiveType.VOID
+          && isIndexedGetterArgumentType(method)) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else  if (!indexed && name.length() > 3 && name.startsWith("is")
           && Character.isUpperCase(name.charAt(2)) && method.getType() == JPrimitiveType.BOOLEAN
           && method.getParams().size() == 0) {
         String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
         return propName;
-      } else if (method.getParams().size() == 0 && method.getType() != JPrimitiveType.VOID) {
+      } else if (indexed && name.length() > 3 && name.startsWith("is")
+          && Character.isUpperCase(name.charAt(2)) && method.getType() == JPrimitiveType.BOOLEAN
+          && isIndexedGetterArgumentType(method)) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else if (!indexed && method.getParams().size() == 0
+          && method.getType() != JPrimitiveType.VOID) {
+        return name;
+      } else if (indexed && isIndexedGetterArgumentType(method)
+          && method.getType() != JPrimitiveType.VOID) {
         return name;
       }
       return null;
     }
 
-    private String isSetter(JMethod method) {
+    private boolean isIndexedGetterArgumentType(JMethod method) {
+      JType type = maybeGetUnderlyingType(method.getParams().get(0).getType());
+      return method.getParams().size() == 1 &&
+          (type == JPrimitiveType.INT
+          || type == program.getTypeJavaLangString());
+    }
+
+    private boolean isIndexedSetterArgumentType(JMethod method) {
+      JType type = maybeGetUnderlyingType(method.getParams().get(0).getType());
+      return method.getParams().size() == 2 &&
+          (type == JPrimitiveType.INT
+              || type == program.getTypeJavaLangString());
+    }
+
+    public JType maybeGetUnderlyingType(JType type) {
+      if (type instanceof JReferenceType) {
+        return ((JReferenceType) type).getUnderlyingType();
+      }
+      return type;
+    }
+
+    private String isSetter(JMethod method, boolean indexed) {
       String name = method.getName();
-      if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
+      if (!indexed && name.length() > 3 && name.startsWith("set")
+          && Character.isUpperCase(name.charAt(3))
           && method.getParams().size() == 1) {
         String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
         return propName;
-      } else if (method.getParams().size() == 1) {
+      } else if (indexed && name.length() > 3 && name.startsWith("set")
+          && Character.isUpperCase(name.charAt(3))
+          && isIndexedSetterArgumentType(method)) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else if (!indexed && method.getParams().size() == 1) {
+        return name;
+      } else if (indexed && isIndexedSetterArgumentType(method)) {
         return name;
       }
       return null;
     }
 
-    private String isHas(JMethod method) {
+    private String isHas(JMethod method, boolean indexed) {
       String name = method.getName();
-      if (name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
+      if (!indexed && name.length() > 3 && name.startsWith("has")
+          && Character.isUpperCase(name.charAt(3))
           && method.getParams().size() == 0 && method.getType() == JPrimitiveType.BOOLEAN) {
+        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
+        return propName;
+      } else if (indexed && name.length() > 3 && name.startsWith("has")
+          && Character.isUpperCase(name.charAt(3))
+          && isIndexedGetterArgumentType(method) && method.getType() == JPrimitiveType.BOOLEAN) {
         String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
         return propName;
       }

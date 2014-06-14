@@ -637,6 +637,8 @@ public class JdtCompiler {
     options.complianceLevel = jdtSourceLevel;
     options.sourceLevel = jdtSourceLevel;
     options.targetJDK = jdtSourceLevel;
+
+    options.storeAnnotations = true;
     return options;
   }
 

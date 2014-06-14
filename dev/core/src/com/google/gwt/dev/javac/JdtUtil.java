@@ -18,7 +18,6 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
@@ -66,6 +65,10 @@ public final class JdtUtil {
       result.append(name[i]);
     }
     return result.toString();
+  }
+
+  public static char[][] asCharArray(String name) {
+    return CharOperation.splitOn('.', name.toCharArray());
   }
 
   /**

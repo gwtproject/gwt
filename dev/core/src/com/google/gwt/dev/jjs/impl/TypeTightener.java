@@ -714,7 +714,7 @@ public class TypeTightener {
       }
 
       // tighten based on non-instantiability
-      if (!program.typeOracle.isInstantiatedType(refType)) {
+      if (!program.typeOracle.isInstantiatedType(refType) && !program.typeOracle.isJsType(refType)) {
         x.setType(typeNull);
         madeChanges();
         return;

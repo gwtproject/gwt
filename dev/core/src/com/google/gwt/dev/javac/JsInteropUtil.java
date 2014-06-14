@@ -78,7 +78,9 @@ public final class JsInteropUtil {
         method.setExportName(value);
       }
       if (jsProperty != null) {
-        method.setJsProperty(true);
+        method.setJsProperty(JdtUtil.getAnnotationParameterBoolean(jsProperty, "indexed") ?
+            JMethod.JsPropertyType.INDEXED : JMethod.JsPropertyType.FIELD);
+        method.setJsPropertyName(JdtUtil.getAnnotationParameterString(jsProperty, "value"));
       }
       if (JdtUtil.getAnnotation(x.binding, JSNOEXPORT_CLASS) != null) {
         method.setNoExport(true);

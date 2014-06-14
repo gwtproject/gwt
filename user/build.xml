@@ -118,8 +118,6 @@
             location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
         <pathelement
             location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar"/>
-        <!-- Bootstrap support needed for obfuscated type tokens for JRE runtime -->
-        <pathelement location="${gwt.tools.lib}/requestfactory/requestfactory-apt.jar"/>
         <pathelement
             location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
         <pathelement location="${gwt.dev.jar}"/>
@@ -156,6 +154,8 @@
         <pathelement location="${gwt.tools.lib}/requestfactory/requestfactory-apt.jar"/>
         <path refid="test.extraclasspath"/>
       </classpath>
+      <compilerarg value="-processor"/>
+      <compilerarg value="com.google.web.bindery.requestfactory.apt.RfValidator"/>
     </gwt.javac>
   </target>
 

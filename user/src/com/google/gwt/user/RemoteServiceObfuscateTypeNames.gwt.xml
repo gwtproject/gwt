@@ -16,8 +16,8 @@
   Inheriting this module will remove type names from the RPC payload.  This
   requires the server to be configured to use the RPC whitelist file.
  -->
-<module type="fileset">
-  <inherits name="com.google.gwt.user.RemoteService" />
+<module>
+  <inherits name="com.google.gwt.rpc.RPC" />
   
   <!--
     Do not simply copy this. It is likely that the mechanism used to enable

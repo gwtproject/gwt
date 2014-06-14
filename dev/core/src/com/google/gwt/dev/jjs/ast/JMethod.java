@@ -37,9 +37,20 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     CanBeSetFinal, CanBeNative, CanBeStatic {
 
   private String exportName;
-  private boolean jsProperty;
+  private JsPropertyType jsProperty = JsPropertyType.NONE;
   private Specialization specialization;
   private boolean noExport = false;
+  private String jsPropertyName;
+
+  public void setJsPropertyName(String jsPropertyName) {
+    this.jsPropertyName = jsPropertyName;
+  }
+
+  public String getJsPropertyName() {
+    return jsPropertyName;
+  }
+
+  public enum JsPropertyType { NONE, FIELD, INDEXED };
 
   public boolean isNoExport() {
     return noExport;
@@ -57,12 +68,16 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return exportName;
   }
 
-  public void setJsProperty(boolean jsProperty) {
+  public void setJsProperty(JsPropertyType jsProperty) {
     this.jsProperty = jsProperty;
   }
 
-  public boolean isJsProperty() {
+  public JsPropertyType getJsProperty() {
     return jsProperty;
+  }
+
+  public boolean isJsProperty() {
+    return jsProperty != JsPropertyType.NONE;
   }
 
   public void setSpecialization(List<JType> paramTypes, JType returnsType,

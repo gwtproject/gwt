@@ -261,7 +261,7 @@ public class JSORestrictionsChecker {
 
       checkJsTypeMethodsForOverloads(methodSignatures, noExports, binding);
       for (MethodBinding mb : binding.methods()) {
-        checkJsProperty(mb, true);
+        checkJsProperty(mb, binding.isInterface());
         checkJsExport(mb, !binding.isInterface());
       }
     }
@@ -278,47 +278,72 @@ public class JSORestrictionsChecker {
     private void checkJsProperty(MethodBinding mb, boolean allowed) {
       AnnotationBinding jsProperty = JdtUtil.getAnnotation(mb, JsInteropUtil.JSPROPERTY_CLASS);
       if (jsProperty != null) {
+        boolean indexed = JdtUtil.getAnnotationParameterBoolean(jsProperty, "indexed");
         if (!allowed) {
           errorOn(mb, ERR_JSPROPERTY_ONLY_ON_INTERFACES);
           return;
         }
         String methodName = String.valueOf(mb.selector);
-        if (!isGetter(methodName, mb) && !isSetter(methodName, mb) && !isHas(methodName, mb)) {
+        if (!isGetter(methodName, mb, indexed) && !isSetter(methodName, mb, indexed) && !isHas(methodName, mb,
+            indexed)) {
           errorOn(mb, ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
         }
       }
     }
 
-    private boolean isGetter(String name, MethodBinding mb) {
+    private boolean isGetter(String name, MethodBinding mb, boolean indexed) {
       // zero arg non-void getX()
-      if (name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
+      if (!indexed && name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
          mb.returnType == TypeBinding.VOID && mb.parameters.length == 0) {
         return true;
-      } else  if (name.length() > 3 && name.startsWith("is")
+      } else if (indexed && name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
+          mb.returnType == TypeBinding.VOID && mb.parameters.length == 1) {
+        // TODO (cromwellian): in all indexed cases, assert type is String or int
+        return true;
+      } else  if (!indexed && name.length() > 3 && name.startsWith("is")
           && Character.isUpperCase(name.charAt(2)) &&  mb.returnType == TypeBinding.BOOLEAN
           && mb.parameters.length == 0) {
         return true;
-      } else if (mb.parameters.length == 0 && mb.returnType != TypeBinding.VOID) {
+      } else  if (indexed && name.length() > 3 && name.startsWith("is")
+          && Character.isUpperCase(name.charAt(2)) &&  mb.returnType == TypeBinding.BOOLEAN
+          && mb.parameters.length == 1) {
+        return true;
+      } else if (!indexed && mb.parameters.length == 0 && mb.returnType != TypeBinding.VOID) {
+        return true;
+      } else if (indexed && mb.parameters.length == 1 && mb.returnType != TypeBinding.VOID) {
         return true;
       }
       return false;
     }
 
-    private boolean isSetter(String name, MethodBinding mb) {
-      if (mb.returnType == TypeBinding.VOID || mb.returnType == mb.declaringClass) {
+    private boolean isSetter(String name, MethodBinding mb, boolean indexed) {
+      if (!indexed && mb.returnType == TypeBinding.VOID || mb.returnType == mb.declaringClass) {
         if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
             && mb.parameters.length == 1) {
           return true;
         } else if (mb.parameters.length == 1) {
           return true;
         }
+      } else  if (indexed && mb.returnType == TypeBinding.VOID
+          || mb.returnType == mb.declaringClass) {
+        if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
+            && mb.parameters.length == 2) {
+          return true;
+        } else if (!indexed && mb.parameters.length == 1) {
+          return true;
+        } else if (indexed && mb.parameters.length == 2) {
+          return true;
+        }
       }
       return false;
     }
 
-    private boolean isHas(String name, MethodBinding mb) {
-      if (name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
+    private boolean isHas(String name, MethodBinding mb, boolean indexed) {
+      if (!indexed && name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
           && mb.parameters.length == 0 && mb.returnType == TypeBinding.BOOLEAN) {
+        return true;
+      } else if (indexed && name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
+          && mb.parameters.length == 1 && mb.returnType == TypeBinding.BOOLEAN) {
         return true;
       }
       return false;
@@ -337,8 +362,11 @@ public class JSORestrictionsChecker {
           if (mb.isConstructor() || mb.isStatic()) {
             continue;
           }
-          if (JdtUtil.getAnnotation(mb, JsInteropUtil.JSPROPERTY_CLASS) != null) {
-            if (isGetter(methodName, mb) || isSetter(methodName, mb) || isHas(methodName, mb)) {
+          AnnotationBinding jsProp = JdtUtil.getAnnotation(mb, JsInteropUtil.JSPROPERTY_CLASS);
+          if (jsProp != null) {
+            boolean indexed = JdtUtil.getAnnotationParameterBoolean(jsProp, "indexed");
+            if (isGetter(methodName, mb, indexed)
+                || isSetter(methodName, mb, indexed) || isHas(methodName, mb, indexed)) {
               // js properties are allowed to be overloaded (setter/getter)
               continue;
             }
@@ -369,7 +397,7 @@ public class JSORestrictionsChecker {
         return ClassState.JSTYPE;
       }
 
-      if (checkClassImplementingJsType(type)) {
+      if (!type.binding.isInterface() && checkClassImplementingJsType(type)) {
         return ClassState.JSTYPE_IMPL;
       }
 
@@ -410,7 +438,7 @@ public class JSORestrictionsChecker {
 
       for (MethodBinding mb : type.binding.methods()) {
         checkJsExport(mb, true);
-        checkJsProperty(mb, false);
+        checkJsProperty(mb, type.binding.isInterface());
       }
 
       AnnotationBinding jsinterfaceAnn = JdtUtil.getAnnotation(jsInterface,

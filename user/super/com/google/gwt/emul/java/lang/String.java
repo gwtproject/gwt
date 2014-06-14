@@ -23,6 +23,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.SpecializeMethod;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;

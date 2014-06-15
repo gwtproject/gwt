@@ -16,6 +16,52 @@
       "revId": "e8e888a97db6b0397ad2a677b6b4a2fec0b34753",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f6920a1_4263c897",
+        "filename": "user/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-15T00:45:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this have the same \u003ccompilerarg\u003e as below in compile.tests because you removed the rf-apt.jar from classpath ?",
+      "range": {
+        "startLine": 103,
+        "startChar": 5,
+        "endLine": 103,
+        "endChar": 14
+      },
+      "revId": "e8e888a97db6b0397ad2a677b6b4a2fec0b34753",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f6920a1_6260cc8a",
+        "filename": "user/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-15T00:45:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be removed now as you call the processor directly?",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 88
+      },
+      "revId": "e8e888a97db6b0397ad2a677b6b4a2fec0b34753",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

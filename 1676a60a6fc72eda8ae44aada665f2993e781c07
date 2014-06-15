@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f6424c8_ef9201d0",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-15T05:33:57Z",
+      "side": 1,
+      "message": "[error] Name \u0027_jsniEmulated\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "1676a60a6fc72eda8ae44aada665f2993e781c07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_0f9815ef",
+        "filename": "user/test/com/google/gwt/core/client/interop/GwtJsniTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-15T05:33:57Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "1676a60a6fc72eda8ae44aada665f2993e781c07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_2f9dd9de",
+        "filename": "user/test/com/google/gwt/core/client/interop/GwtJsniTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-15T05:33:57Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "1676a60a6fc72eda8ae44aada665f2993e781c07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_4f9a0de8",
+        "filename": "user/test/com/google/gwt/core/client/interop/GwtJsniTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-15T05:33:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "1676a60a6fc72eda8ae44aada665f2993e781c07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f6424c8_6fa7d132",
+        "filename": "user/test/com/google/gwt/core/client/interop/GwtJsniTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-15T05:33:57Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "1676a60a6fc72eda8ae44aada665f2993e781c07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

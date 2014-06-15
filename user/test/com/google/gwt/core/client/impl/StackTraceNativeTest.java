@@ -25,7 +25,10 @@ import com.google.gwt.junit.Platform;
 /**
  * Tests {@link StackTraceCreator} in the native mode.
  */
-@DoNotRunWith(Platform.Devel)
+// TODO(davido): Doesn't work on htmlunit-core-js-2.17
+// Works as is on htmlunit-core-js-2.15, though
+//@DoNotRunWith(Platform.Devel)
+@DoNotRunWith(Platform.HtmlUnitBug)
 public class StackTraceNativeTest extends StackTraceTestBase {
 
   @Override

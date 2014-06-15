@@ -26,5 +26,10 @@
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm-commons</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-all</artifactId>
+            <version>9.2.14.v20151106</version>
+        </dependency>
     </dependencies>
 </project>

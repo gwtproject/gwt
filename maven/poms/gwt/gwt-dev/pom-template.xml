@@ -19,5 +19,17 @@
             <artifactId>json</artifactId>
             <version>20090211</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>8.1.15.v20140411</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>8.1.15.v20140411</version>
+        </dependency>
     </dependencies>
 </project>

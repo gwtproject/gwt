@@ -97,6 +97,10 @@ function maven-gwt() {
   echo "Removing org.json classes from gwt-dev"
   zip -d $GWT_EXTRACT_DIR/gwt-dev.jar org/json/*
 
+  # Remove bundled jetty classes from gwt-dev
+  echo "Removing jetty classes from gwt-dev"
+  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar org/eclipse/jetty/*
+
   # Silently skip Elemental if it doesn't exist
   gwtLibs='dev user servlet codeserver'
   if [ -f $GWT_EXTRACT_DIR/gwt-elemental.jar ]; then

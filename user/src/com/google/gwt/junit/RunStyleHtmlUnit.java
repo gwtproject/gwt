@@ -197,11 +197,10 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Map<BrowserVersion, String> USER_AGENT_MAP  = Maps.newHashMap();
 
   static {
-    addBrowser(BrowserVersion.FIREFOX_17, "gecko1_8");
+    addBrowser(BrowserVersion.FIREFOX_31, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");
     addBrowser(BrowserVersion.INTERNET_EXPLORER_8, "ie8");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER_9, "ie9");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER_10, "ie10");
+    addBrowser(BrowserVersion.INTERNET_EXPLORER_11, "ie11");
   }
 
   private static void addBrowser(BrowserVersion browser, String userAgent) {

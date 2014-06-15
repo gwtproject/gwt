@@ -10,6 +10,7 @@
     <gwt.javac srcdir="java">
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/jetty/jetty-9.2.0.v20140526/jetty-servlets-9.2.0.v20140526.jar"/>
       </classpath>
     </gwt.javac>
   </target>

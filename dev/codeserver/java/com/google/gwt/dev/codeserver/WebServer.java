@@ -21,11 +21,10 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.json.JsonObject;
 
 import org.eclipse.jetty.http.MimeTypes;
-import org.eclipse.jetty.io.Buffer;
-import org.eclipse.jetty.server.AbstractHttpConnection;
+import org.eclipse.jetty.server.HttpConnection;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.servlets.GzipFilter;
@@ -102,15 +101,15 @@ public class WebServer {
     this.logger = logger;
   }
 
+  @SuppressWarnings("serial")
   public void start() throws UnableToCompleteException {
 
-    SelectChannelConnector connector = new SelectChannelConnector();
+    Server newServer = new Server();
+    ServerConnector connector = new ServerConnector(newServer);
     connector.setHost(bindAddress);
     connector.setPort(port);
     connector.setReuseAddress(false);
     connector.setSoLingerTime(0);
-
-    Server newServer = new Server();
     newServer.addConnector(connector);
 
     ServletContextHandler newHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -485,8 +484,8 @@ public class WebServer {
 
   /* visible for testing */
   static String guessMimeType(String filename) {
-    Buffer mimeType = MIME_TYPES.getMimeByExtension(filename);
-    return mimeType != null ? mimeType.toString() : "";
+    String mimeType = MIME_TYPES.getMimeByExtension(filename);
+    return mimeType != null ? mimeType : "";
   }
 
   /**
@@ -515,7 +514,7 @@ public class WebServer {
 
   private static void setHandled(HttpServletRequest request) {
     Request baseRequest = (request instanceof Request) ? (Request) request :
-        AbstractHttpConnection.getCurrentConnection().getRequest();
+        HttpConnection.getCurrentConnection().getHttpChannel().getRequest();
     baseRequest.setHandled(true);
   }
 }

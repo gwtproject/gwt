@@ -139,6 +139,24 @@
       "revId": "5d2ee22dea1b7487d8d23d9d85f0b5070ca659a6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6463b9f2_69a46595",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-17T11:07:21Z",
+      "side": 1,
+      "message": "FYI: https://gwt-review.googlesource.com/7920",
+      "parentUuid": "df3990b5_0debd18a",
+      "revId": "5d2ee22dea1b7487d8d23d9d85f0b5070ca659a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

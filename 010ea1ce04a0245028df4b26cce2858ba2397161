@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4466b513_b85df9cc",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-17T23:31:16Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.event.dom.client.DomEvent.",
+      "revId": "010ea1ce04a0245028df4b26cce2858ba2397161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

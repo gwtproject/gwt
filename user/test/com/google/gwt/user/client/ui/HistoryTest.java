@@ -15,8 +15,11 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -46,12 +49,32 @@ public class HistoryTest extends GWTTestCase {
     return split[1];
   }
 
+  private AnchorElement anchorElement;
   private HandlerRegistration handlerRegistration;
   private Timer timer;
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.user.User";
+  }
+
+  public void testClickLink() {
+    History.newItem("something_as_base");
+
+    addHistoryListenerImpl(new ValueChangeHandler<String>() {
+
+      @Override
+      public void onValueChange(ValueChangeEvent<String> event) {
+        assertEquals("href1", event.getValue());
+        finishTest();
+      }
+    });
+
+    delayTestFinish(200);
+
+    NativeEvent clickEvent =
+        Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false);
+    anchorElement.dispatchEvent(clickEvent);
   }
 
   /* Tests against issue #572: Double unescaping of history tokens. */
@@ -446,6 +469,12 @@ public class HistoryTest extends GWTTestCase {
     return e.getInnerHTML().length() == 0;
   }
 
+  protected void gwtSetUp() throws Exception {
+    anchorElement = Document.get().createAnchorElement();
+    anchorElement.setHref("#href1");
+    Document.get().getBody().appendChild(anchorElement);
+  }
+
   @Override
   protected void gwtTearDown() throws Exception {
     if (handlerRegistration != null) {
@@ -456,6 +485,7 @@ public class HistoryTest extends GWTTestCase {
       timer.cancel();
       timer = null;
     }
+    Document.get().getBody().removeChild(anchorElement);
   }
 
   private void addHistoryListenerImpl(ValueChangeHandler<String> handler) {

@@ -46,6 +46,30 @@
       "revId": "99425c2edffb93ca3e060bde703f3e50dc13213c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24446156_afbff9e7",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-17T05:36:20Z",
+      "side": 1,
+      "message": "In CrossSiteIframeLinker, it\u0027s set to the parent window:\n\n  var $wnd \u003d $wnd || window.parent;\n\nThe reason we have a $wnd variable is to point to the top-level window, regardless of whether the linker installs the fragment into an iframe or not.\n\nSorry, I should have caught this. I will send a patch tomorrow.",
+      "parentUuid": "7f3264d4_e7c2153a",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "99425c2edffb93ca3e060bde703f3e50dc13213c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

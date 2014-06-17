@@ -22,6 +22,30 @@
       "revId": "99425c2edffb93ca3e060bde703f3e50dc13213c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f3264d4_e7c2153a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/ModuleUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-17T04:08:12Z",
+      "side": 1,
+      "message": "Hasn\u0027t $wnd  been assigned to window at the very top? We should probably add a test for this.",
+      "parentUuid": "7f3264d4_c700b125",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "99425c2edffb93ca3e060bde703f3e50dc13213c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

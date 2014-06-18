@@ -16,6 +16,24 @@
       "revId": "f37448b88220f6eba5d1d6061231e2beec82eb8e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04975d03_92480c94",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-06-18T00:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4932916_e0109c70",
+      "revId": "f37448b88220f6eba5d1d6061231e2beec82eb8e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

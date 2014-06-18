@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4932916_e0109c70",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-18T00:12:19Z",
+      "side": 1,
+      "message": "can you do the creation and removal of the anchor element locally?",
+      "revId": "f37448b88220f6eba5d1d6061231e2beec82eb8e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

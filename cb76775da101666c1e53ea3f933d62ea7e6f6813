@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "246b81de_7ad2f5e3",
+        "filename": "user/src/com/google/gwt/core/CoreWithUserAgent.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-18T21:21:23Z",
+      "side": 1,
+      "message": "I\u0027ve just tested it on Chrome and it uses legacy version",
+      "revId": "cb76775da101666c1e53ea3f933d62ea7e6f6813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

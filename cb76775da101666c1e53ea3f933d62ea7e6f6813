@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e47c09a6_b8f09570",
+        "filename": "user/src/com/google/gwt/core/CoreWithUserAgent.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-06-18T21:32:08Z",
+      "side": 1,
+      "message": "I\u0027m sorry. My mistake. I looked again into generated js and it uses Object.create!",
+      "parentUuid": "4466b513_52727465",
+      "revId": "cb76775da101666c1e53ea3f933d62ea7e6f6813",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4466b513_4714f8a3",
         "filename": "user/super/com/google/gwt/emul/java/util/InternalJsStringMap.java",
         "patchSetId": 10

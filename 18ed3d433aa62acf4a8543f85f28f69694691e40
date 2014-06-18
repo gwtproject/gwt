@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4932916_a03cd4dc",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMapFromStringTo.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-18T00:48:27Z",
+      "side": 1,
+      "message": "Some suggestions:\n\nRename InternalJsMapFromStringTo to InternalJsStringMap and make it use the modern implementation.\n\nThen extend InternalJsStringMap with a static inner class named InternalJsStringMapLegacy which contains the legacy implementation.\n\nThis will save you one class and also give you prettier names (I think).",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "18ed3d433aa62acf4a8543f85f28f69694691e40",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4932916_404e307f",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMapFromStringTo.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-18T00:48:27Z",
+      "side": 1,
+      "message": "You can now omit the fully qualified name. i.e.\n\n  return this.@JsEs5ObjectMapImpl::backingMap[key]",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "18ed3d433aa62acf4a8543f85f28f69694691e40",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e47c09a6_d5e19ce9",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-18T09:51:27Z",
+      "side": 1,
+      "message": "I think we should add\n\n public final native void click() /*-{\n   this.click();\n }-*/;\n\nto AnchorElement and just use it here.\n\n(note: InputElement#click uses JSNI as above, whereas ButtonElement#click uses DOMImpl#buttonClick which has an override for Mozilla synthesizing a click event)",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 46
+      },
+      "revId": "35f4183f4e3bacf7ad05eb9c0cc8968bc7421243",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

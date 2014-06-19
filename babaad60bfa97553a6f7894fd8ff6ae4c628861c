@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "e43fa9e6_c3e14aea",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-19T21:55:08Z",
+      "side": 1,
+      "message": "I played with it and actually there is a potential improvement here. \"key in data\" checks are slow even without prototype chain. So I will change the implementation but I don\u0027t want to make any changes in this patch that might affect the performance.\nI will move the code into stringmap and optimize it in the next patch.",
+      "parentUuid": "e47c09a6_fbae071f",
+      "revId": "babaad60bfa97553a6f7894fd8ff6ae4c628861c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e47c09a6_5ba4db94",
         "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
         "patchSetId": 1

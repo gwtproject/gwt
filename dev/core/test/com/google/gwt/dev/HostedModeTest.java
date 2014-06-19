@@ -60,11 +60,15 @@ public class HostedModeTest extends ArgProcessorTestBase {
     assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://127.0.0.1.40:88/foo"));
     assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org"));
     assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org:88"));
-    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org:88/"));
-    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org:88/foo"));
+    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted(
+        "http://localhost.evildomain.org:88/"));
+    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted(
+        "http://localhost.evildomain.org:88/foo"));
     assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org/"));
-    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://localhost.evildomain.org/foo"));
-    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://www.evildomain.org/foo?http://localhost"));
+    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted(
+        "http://localhost.evildomain.org/foo"));
+    assertFalse(BrowserWidgetHostChecker.isAlwaysWhitelisted(
+        "http://www.evildomain.org/foo?http://localhost"));
     assertTrue(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://127.0.0.1"));
     assertTrue(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://127.0.0.1:88"));
     assertTrue(BrowserWidgetHostChecker.isAlwaysWhitelisted("http://127.0.0.1:88/"));

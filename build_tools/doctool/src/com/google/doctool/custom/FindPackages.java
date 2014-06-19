@@ -53,7 +53,8 @@ public class FindPackages {
    * the JAVA_PKGS property.  Add packages here as needed.
    */
   private static final String[] JAVA_PKGS = {
-    "java.lang", "java.lang.annotation", "java.math", "java.io", "java.sql", "java.util", "java.util.logging"};
+    "java.lang", "java.lang.annotation", "java.math", "java.io", "java.sql", "java.util",
+      "java.util.logging"};
 
   /**
    * User packages to include, regardless of exclusions.  Add packages here
@@ -126,7 +127,8 @@ public class FindPackages {
       }
       out.println("# The last package should not have a trailing semicolon");
       out.println("");
-      out.println("# Individual classes to include when we don't want to include an entire package");
+      out.println(
+          "# Individual classes to include when we don't want to include an entire package");
       out.println("USER_CLASSES=\\");
 
       // Output a package-info.java once for each package

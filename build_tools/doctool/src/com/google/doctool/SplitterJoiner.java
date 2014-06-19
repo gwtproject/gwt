@@ -89,13 +89,22 @@ public class SplitterJoiner {
   private static void help() {
     System.out.println("Usage: SplitterJoiner split infile+");
     System.out.println("Usage: SplitterJoiner join tag outfile (infile|dir)+");
-    System.out.println("\tsplit         indicates that inputs file should be split into multiple output files");
-    System.out.println("\tjoin          indicates xml files (or directories) should be merged into one big xml file (on stdout)");
-    System.out.println("\ttag           when joining, the outermost xml tag name");
-    System.out.println("\toutfile       when joining, the file to write the joined output into");
-    System.out.println("\tinfile        if splitting, an input file to split");
-    System.out.println("\t              if joining, a file whose contents should be merged in");
-    System.out.println("\tdir           when joining, a directory whose xml files' contents should be merged in");
+    System.out.println(
+        "\tsplit         indicates that inputs file should be split into multiple output files");
+    System.out.println(
+        "\tjoin          indicates xml files (or directories) should be merged into");
+    System.out.println(
+        "\t              one big xml file (on stdout)");
+    System.out.println(
+        "\ttag           when joining, the outermost xml tag name");
+    System.out.println(
+        "\toutfile       when joining, the file to write the joined output into");
+    System.out.println(
+        "\tinfile        if splitting, an input file to split");
+    System.out.println(
+        "\t              if joining, a file whose contents should be merged in");
+    System.out.println(
+        "\tdir           when joining, a directory whose xml files' contents should be merged in");
   }
 
   private static boolean isNewerThan(File file, long lastModified) {
@@ -240,7 +249,8 @@ public class SplitterJoiner {
 
             writer = new PrintWriter(new FileWriter(outFile), true);
 
-            writer.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+            writer.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
+                + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
 
           } else if (writer != null) {
             // Write this line to the current file.

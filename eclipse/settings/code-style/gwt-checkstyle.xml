@@ -10,6 +10,12 @@ Description:
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
     <property name="severity" value="warning"/>
+    <!-- Trailing whitespace check. -->
+    <module name="RegexpSingleline">
+      <property name="fileExtensions" value="java"/>
+      <property name="format" value="\s+$"/>
+      <property name="severity" value="warning"/>
+    </module>
     <module name="RegexpHeader">
        <property name="fileExtensions" value="java"/>
        <property name="severity" value="error"/>
@@ -24,6 +30,10 @@ Description:
     <module name="TreeWalker">
        <property name="fileExtensions" value="java"/>
        <module name="FileContentsHolder" />
+       <module name="LineLength">
+         <property name="max" value="100"/>
+         <property name="severity" value="warning"/>
+       </module>
        <module name="InterfaceIsType">
             <property name="severity" value="ignore"/>
         </module>

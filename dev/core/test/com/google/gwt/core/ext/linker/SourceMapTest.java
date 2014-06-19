@@ -488,8 +488,8 @@ public class SourceMapTest extends TestCase {
           new DefaultHandler() {
             int isIdx = 0;
             @Override
-            public void startElement(String uri, String localName, String qName, Attributes attributes)
-                throws SAXException {
+            public void startElement(String uri, String localName, String qName,
+                Attributes attributes) throws SAXException {
               super.startElement(uri, localName, qName, attributes);
               try {
                 if (localName.equals("splipoint")) {
@@ -506,7 +506,8 @@ public class SourceMapTest extends TestCase {
                   }
                   assertTrue(present);
                 } else if (localName.equals("splitpointref")) {
-                  assertEquals(Integer.parseInt(attributes.getValue("id")), initSeq.getInt(isIdx++));
+                  assertEquals(Integer.parseInt(attributes.getValue("id")),
+                      initSeq.getInt(isIdx++));
                 }
               } catch (JSONException ex) {
                 fail(ex.getMessage());

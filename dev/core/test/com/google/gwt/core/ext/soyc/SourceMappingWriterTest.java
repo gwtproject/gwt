@@ -95,7 +95,8 @@ public class SourceMappingWriterTest extends TestCase {
   }
 
   private void addMapping(String substring, int javaStartLine) {
-    writer.addMapping(findRange(substring), SourceOrigin.create(javaStartLine, JAVA_FILENAME), null);
+    writer.addMapping(findRange(substring), SourceOrigin.create(javaStartLine, JAVA_FILENAME),
+        null);
   }
 
   /**

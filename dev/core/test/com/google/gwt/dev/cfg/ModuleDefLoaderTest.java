@@ -221,8 +221,10 @@ public class ModuleDefLoaderTest extends TestCase {
 
     ModuleDef three = ModuleDefLoader.loadFromClassPath(
         logger, compilerContext, "com.google.gwt.dev.cfg.testdata.merging.Three");
-    assertNotNull(three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/InOne.java"));
-    assertNotNull(three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/Shared.java"));
+    assertNotNull(
+        three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/InOne.java"));
+    assertNotNull(
+        three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/Shared.java"));
     assertNull(three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/InTwo.java"));
     assertNull(three.findSourceFile("com/google/gwt/dev/cfg/testdata/merging/client/Toxic.java"));
   }
@@ -233,7 +235,8 @@ public class ModuleDefLoaderTest extends TestCase {
   public void testModuleNamingInvalid() {
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.setLowestLogLevel(TreeLogger.ERROR);
-    builder.expectError("Invalid module name: 'com.google.gwt.dev.cfg.testdata.naming.Invalid..Foo'", null);
+    builder.expectError(
+        "Invalid module name: 'com.google.gwt.dev.cfg.testdata.naming.Invalid..Foo'", null);
     UnitTestTreeLogger logger = builder.createLogger();
     try {
       ModuleDefLoader.loadFromClassPath(
@@ -271,7 +274,8 @@ public class ModuleDefLoaderTest extends TestCase {
   public void testModuleNestedNamingInvalid() {
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.setLowestLogLevel(TreeLogger.ERROR);
-    builder.expectError("Invalid module name: 'com.google.gwt.dev.cfg.testdata.naming.Invalid..Foo'", null);
+    builder.expectError(
+        "Invalid module name: 'com.google.gwt.dev.cfg.testdata.naming.Invalid..Foo'", null);
     UnitTestTreeLogger logger = builder.createLogger();
     try {
       ModuleDefLoader.loadFromClassPath(logger,

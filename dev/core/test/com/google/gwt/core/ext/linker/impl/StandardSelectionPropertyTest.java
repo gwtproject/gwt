@@ -60,7 +60,8 @@ public class StandardSelectionPropertyTest extends TestCase {
 
   private static final TreeLogger logger = new FailErrorLogger();
 
-  private static final SortedSet<ConfigurationProperty> configProperties = new TreeSet<ConfigurationProperty>();
+  private static final SortedSet<ConfigurationProperty> configProperties =
+      new TreeSet<ConfigurationProperty>();
 
   public void testNoFallback() throws UnableToCompleteException {
     BindingProperty bp = new BindingProperty("doesNotUseFallback");

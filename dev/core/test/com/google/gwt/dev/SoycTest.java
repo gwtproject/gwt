@@ -45,12 +45,17 @@ public class SoycTest extends TestCase {
       new Compiler(options).run(logger);
 
       // make sure the files have been produced
-      assertTrue(new File(options.getExtraDir() + "/hello/soycReport/compile-report/index.html").exists());
-      assertTrue(new File(options.getExtraDir() + "/hello/soycReport/compile-report/SoycDashboard-1-index.html").exists());
-      assertTrue(new File(options.getExtraDir() + "/hello/soycReport/compile-report/total-1-overallBreakdown.html").exists());
-      assertTrue(new File(options.getExtraDir() + "/hello/soycReport/compile-report/soyc.css").exists());
+      assertTrue(new File(options.getExtraDir()
+          + "/hello/soycReport/compile-report/index.html").exists());
+      assertTrue(new File(options.getExtraDir()
+          + "/hello/soycReport/compile-report/SoycDashboard-1-index.html").exists());
+      assertTrue(new File(options.getExtraDir()
+          + "/hello/soycReport/compile-report/total-1-overallBreakdown.html").exists());
+      assertTrue(new File(options.getExtraDir()
+          + "/hello/soycReport/compile-report/soyc.css").exists());
 
-      assertFalse(new File(options.getExtraDir() + "/hello/soycReport/compile-report/index2.html").exists());
+      assertFalse(new File(options.getExtraDir()
+          + "/hello/soycReport/compile-report/index2.html").exists());
     } finally {
       Util.recursiveDelete(work, false);
     }

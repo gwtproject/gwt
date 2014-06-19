@@ -14,7 +14,7 @@ A more lenient set of style checks for test cases, needed because test often nee
     <module name="RegexpSingleline">
       <property name="fileExtensions" value="java"/>
       <property name="format" value="\s+$"/>
-      <property name="severity" value="warning"/>
+      <property name="severity" value="error"/>
     </module>
     <module name="RegexpHeader">
        <property name="fileExtensions" value="java"/> 
@@ -32,7 +32,7 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="FileContentsHolder"/>
         <module name="LineLength">
           <property name="max" value="100"/>
-          <property name="severity" value="warning"/>
+          <property name="severity" value="error"/>
         </module>
         <module name="InterfaceIsType">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>

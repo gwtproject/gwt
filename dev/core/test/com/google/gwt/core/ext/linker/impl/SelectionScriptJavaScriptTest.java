@@ -90,7 +90,8 @@ public class SelectionScriptJavaScriptTest extends TestCase {
    */
   public void testModuleSpecificMetas2() throws IOException {
     StringBuffer metas = new StringBuffer();
-    metas.append("<meta name=\"some.other.module::gwt:property\" content=\"baseUrl=http://new/base\">\n");
+    metas.append(
+        "<meta name=\"some.other.module::gwt:property\" content=\"baseUrl=http://new/base\">\n");
 
     StringBuffer testCode = new StringBuffer();
     testCode.append(loadProcessMetas());
@@ -110,8 +111,10 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     StringBuffer metas = new StringBuffer();
     metas.append("<meta name=\"gwt:property\" content=\"baseUrl=http://new/base\">\n");
     metas.append("<meta name=\"gwt:property\" content=\"novalue\">\n");
-    metas.append("<meta name=\"gwt:onPropertyErrorFn\" content=\"function() { alert('custom prop error called');}\"}>\n");
-    metas.append("<meta name=\"gwt:onLoadErrorFn\" content=\"function() { alert('custom onLoad error called');}\">\n");
+    metas.append("<meta name=\"gwt:onPropertyErrorFn\" "
+        + "content=\"function() { alert('custom prop error called');}\"}>\n");
+    metas.append("<meta name=\"gwt:onLoadErrorFn\" "
+        + "content=\"function() { alert('custom onLoad error called');}\">\n");
 
     StringBuffer testCode = new StringBuffer();
     testCode.append(loadProcessMetas());

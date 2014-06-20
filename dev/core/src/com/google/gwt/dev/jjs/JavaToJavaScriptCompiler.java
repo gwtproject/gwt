@@ -113,6 +113,7 @@ import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.StringTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
+import com.google.gwt.dev.jjs.impl.RewriteConstructorCallsForUnboxedTypes;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
@@ -511,6 +512,8 @@ public final class JavaToJavaScriptCompiler {
   private void postNormalizationOptimizeJava() {
     Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_POST_NORMALIZER_OPTIMIZERS);
     try {
+      // Rewrite must occur before final code-gen prune
+      RewriteConstructorCallsForUnboxedTypes.exec(jprogram);
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
         Pruner.exec(jprogram, false);

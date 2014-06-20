@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84fd0d75_7230180d",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-06-20T00:38:47Z",
+      "side": 1,
+      "message": "This should really not be an array, since v8 will assume it to be an actual array and then will later need to convert it into a map. Discussed offline: We will address this in a follow up patch.",
+      "range": {
+        "startLine": 32,
+        "startChar": 63,
+        "endLine": 32,
+        "endChar": 74
+      },
+      "revId": "42a1490ca2d02a6f28597e2f2d41d11a1c607748",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84fd0d75_f23c08de",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-06-20T00:38:47Z",
+      "side": 1,
+      "message": "for a version based of Object.create we can get rid of this.",
+      "revId": "42a1490ca2d02a6f28597e2f2d41d11a1c607748",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c465452b_7494682d",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-06-20T00:38:47Z",
+      "side": 1,
+      "message": "see above",
+      "range": {
+        "startLine": 113,
+        "startChar": 24,
+        "endLine": 113,
+        "endChar": 32
+      },
+      "revId": "42a1490ca2d02a6f28597e2f2d41d11a1c607748",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

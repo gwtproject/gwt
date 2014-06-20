@@ -1,0 +1,121 @@
+// Generates project and module files for IntelliJ IDEA.
+// (The official GWT build is still ant for now.)
+//
+// Setup:
+//
+// If svn/tools is not checked out at ../tools, set GWT_TOOL to its location:
+//
+//   export GWT_TOOLS=...
+//
+// Then, to generate the project:
+//
+//   gradle idea
+//
+// Known issues:
+// - "gradle build" does not work yet. (Problems running tests.)
+//
+// - IDEA may prompt you to create an IDEA project from the gradle build. You should
+// decline because this doesn't work yet.
+
+allprojects {
+    apply plugin: 'idea'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    apply plugin: 'java'
+    // GWT supports Java 7 but the build tools are still Java 6 for now.
+    sourceCompatibility = 1.7
+}
+
+// Subprojects inherit the Groovy methods defined here.
+
+def addSourcesToIdeaClasspath(iml, srcs) {
+    iml.withXml {
+        provider ->
+            provider.node.component.find { it.@name == 'NewModuleRootManager' }.children().get(0).plus {
+                orderEntry(type: 'module-library', exported: true) {
+                    library {
+                        CLASSES {
+                            srcs.each {
+                                root(url: it)
+                            }
+                        }
+                    }
+                }
+            }
+    }
+}
+
+def addGwtFacetToIdea(iml) {
+    iml.withXml {
+        provider ->
+            // Add a facet manager if none present
+            if (!provider.node.component.find { it.@name == 'FaceManager' }) {
+                provider.node.appendNode("component", ["name": "FacetManager"])
+            }
+            provider.node.component.find { it.@name == 'FacetManager' }.replaceNode {
+                component(name: 'FacetManager') {
+                    facet(type: 'gwt', name: "GWT") {
+                        configuration {
+                            setting(name: "compilerMaxHeapSize", value: 1024)
+                            setting(name: "gwtScriptOutputStyle", value: 'PRETTY')
+                            setting(name: "gwtSdkUrl", value: 'file://')
+                        }
+                    }
+                }
+            }
+    }
+}
+
+// Creates a path to a file in svn/tools.
+def localJar(path) {
+    String tools = System.getenv("GWT_TOOLS");
+    if (tools == null) {
+        // TODO: autodetect
+        throw new RuntimeException("Please define GWT_TOOLS");
+    }
+    File f = new File(tools, "lib/" + path);
+    if (!f.isFile()) {
+        throw new RuntimeException((String)"no such file: " + f.toString());
+    }
+    return files("${System.env.GWT_TOOLS}/lib/" + path);
+}
+
+/// Creates a run configuration that runs the GWT Compiler on the given module.
+def addIdeaRunTarget(provider, appName, gwtModule, ideaModule) {
+
+    provider.node.component.find { it.@name == 'RunManager' }.children().get(0).plus {
+        configuration(default: false, name: appName, type: 'Application', factoryName: 'Application') {
+            extension(name: "coverage", enabled: false, merge: false, runner: "idea")
+            option(name: 'MAIN_CLASS_NAME', value: 'com.google.gwt.dev.Compiler')
+            option(name: 'VM_PARAMETERS', value: '')
+            option(name: 'PROGRAM_PARAMETERS', value: gwtModule)
+            option(name: 'WORKING_DIRECTORY', value: 'file://$PROJECT_DIR$/out/production/' + ideaModule)
+            option(name: 'ALTERNATIVE_JRE_PATH_ENABLED', value: false)
+            option(name: 'ALTERNATIVE_JRE_PATH', value: '')
+            option(name: 'ENABLE_SWING_INSPECTOR', value: false)
+            option(name: 'ENV_VARIABLES')
+            option(name: 'PASS_PARENT_ENVS', value: true)
+            module(name: ideaModule)
+            envs()
+            RunnerSettings(RunnerId: 'Run')
+            ConfigurationWrapper(RunnerId: 'Run')
+            method()
+        }
+        list(size: 1) {
+            item(index: 0, class: "java.lang.String", itemvalue: "Application." + appName)
+        }
+    }
+}
+
+idea {
+    workspace {
+        iws.withXml {
+            provider ->
+                addIdeaRunTarget(provider, "Compile Hello", "com.google.gwt.sample.hello.Hello", "hello")
+        }
+    }
+}

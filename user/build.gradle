@@ -1,0 +1,56 @@
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+            exclude '**/com/google/gwt/regexp/super/**'
+            exclude '**/com/google/gwt/validation/super/**'
+            exclude '**/javax/validation/super/**'
+            exclude '**/org/hibernate/validator/super/**'
+        }
+    }
+   test {
+       java {
+            srcDir 'test'
+        }
+   }
+}
+
+
+dependencies {
+    compile files('super')
+    compile files('src')
+    compile files('test')
+    compile localJar("junit/junit-4.8.2.jar")
+    compile localJar("selenium/selenium-java-client-driver.jar")
+    compile localJar("w3c/sac/sac-1.3.jar")
+    compile localJar("w3c/flute/flute-1.3-gg2.jar")
+    compile localJar('selenium/selenium-java-client-driver.jar')
+    compile localJar("javax/validation/validation-api-1.0.0.GA.jar")
+    compile localJar("javax/validation/validation-api-1.0.0.GA-sources.jar")
+    compile localJar("hibernate/validator/hibernate-validator-4.1.0.Final.jar")
+    compile localJar("hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar")
+    compile localJar("requestfactory/requestfactory-apt-2011-08-18.jar")
+    compile localJar("streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar")
+    compile project(":dev")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+idea {
+    module {
+        excludeDirs = [file('super')]
+        FileTree tree = fileTree(dir: 'src')
+        tree.visit { f ->
+            if (f.name == 'super') {
+                excludeDirs << file('src/' + f.relativePath)
+            }
+        }
+        tree = fileTree(dir: 'test')
+        tree.visit { f ->
+            if (f.name == 'testdata') {
+                excludeDirs << file('test/' + f.relativePath)
+            }
+        }
+        addSourcesToIdeaClasspath(iml, ['file://$MODULE_DIR$/super', 'file://$MODULE_DIR$/src'])
+        addGwtFacetToIdea(iml)
+    }
+}

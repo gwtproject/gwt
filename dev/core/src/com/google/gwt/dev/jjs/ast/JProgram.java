@@ -77,6 +77,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public static final Set<String> CODEGEN_TYPES_SET = Sets.newLinkedHashSet(Arrays.asList(
       "com.google.gwt.lang.Array", "com.google.gwt.lang.Cast",
+      "java.lang.Boolean",
+      "java.lang.Double",
       "com.google.gwt.lang.RuntimePropertyRegistry", "com.google.gwt.lang.Exceptions",
       "com.google.gwt.lang.LongLib", "com.google.gwt.lang.Stats", "com.google.gwt.lang.Util",
       "java.lang.Object"));
@@ -289,6 +291,10 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   private JClassType typeString;
 
+  private JClassType typeDouble;
+
+  private JClassType typeBoolean;
+
   private FragmentPartitioningResult fragmentPartitioningResult;
 
   /**
@@ -354,6 +360,12 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       case "java.lang.String":
         typeString = (JClassType) type;
         break;
+      case "java.lang.Double":
+        typeDouble = (JClassType) type;
+        break;
+      case "java.lang.Boolean":
+        typeBoolean = (JClassType) type;
+        break;
       case "java.lang.Class":
         typeClass = (JClassType) type;
         break;
@@ -364,6 +376,10 @@ public class JProgram extends JNode implements ArrayTypeCreator {
         typeSpecialClassLiteralHolder = (JClassType) type;
         break;
     }
+  }
+
+  public boolean canBeUnboxedType(JType type) {
+    return type == typeDouble || type == typeBoolean || type == typeString;
   }
 
   /**
@@ -936,6 +952,14 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public JClassType getTypeJavaLangString() {
     return typeString;
+  }
+
+  public JClassType getTypeJavaLangDouble() {
+    return typeDouble;
+  }
+
+  public JClassType getTypeJavaLangBoolean() {
+    return typeBoolean;
   }
 
   public Set<String> getTypeNamesToIndex() {

@@ -113,6 +113,7 @@ import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.StringTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
+import com.google.gwt.dev.jjs.impl.RewriteConstructorCallsForUnboxedTypes;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
@@ -325,6 +326,9 @@ public final class JavaToJavaScriptCompiler {
       // TODO(stalcup): hide metrics gathering in a callback or subclass
       logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
 
+      // Rewrite calls to from boxed constructor types to specialized unboxed methods
+      RewriteConstructorCallsForUnboxedTypes.exec(jprogram);
+
       // (2) Transform unresolved Java AST to resolved Java AST
       ResolvePermutationDependentValues
           .exec(jprogram, properties, permutation.getPropertyAndBindingInfos());
@@ -511,6 +515,7 @@ public final class JavaToJavaScriptCompiler {
   private void postNormalizationOptimizeJava() {
     Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_POST_NORMALIZER_OPTIMIZERS);
     try {
+      // Rewrite must occur before final code-gen prune
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
         Pruner.exec(jprogram, false);

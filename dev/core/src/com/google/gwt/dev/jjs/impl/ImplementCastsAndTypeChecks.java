@@ -226,6 +226,7 @@ public class ImplementCastsAndTypeChecks {
 
     assert EnumSet.of(TypeCategory.TYPE_JSO, TypeCategory.TYPE_JAVA_OBJECT_OR_JSO,
         TypeCategory.TYPE_JAVA_LANG_OBJECT, TypeCategory.TYPE_JAVA_LANG_STRING,
+        TypeCategory.TYPE_JAVA_LANG_NUMBER,
         TypeCategory.TYPE_JAVA_OBJECT, TypeCategory.TYPE_JS_PROTOTYPE,
         TypeCategory.TYPE_JS_FUNCTION).contains(typeCategory);
 
@@ -302,6 +303,8 @@ public class ImplementCastsAndTypeChecks {
     this.instanceOfMethodsByTargetTypeCategory.put(
         TypeCategory.TYPE_JAVA_LANG_STRING, program.getIndexedMethod("Cast.isJavaString"));
     this.instanceOfMethodsByTargetTypeCategory.put(
+        TypeCategory.TYPE_JAVA_LANG_NUMBER, program.getIndexedMethod("Cast.isJavaNumber"));
+    this.instanceOfMethodsByTargetTypeCategory.put(
         TypeCategory.TYPE_JS_PROTOTYPE, program.getIndexedMethod("Cast.instanceOfJsPrototype"));
     this.instanceOfMethodsByTargetTypeCategory.put(
         TypeCategory.TYPE_JS_FUNCTION, program.getIndexedMethod("Cast.instanceOfJsFunction"));
@@ -317,6 +320,8 @@ public class ImplementCastsAndTypeChecks {
         TypeCategory.TYPE_JSO, program.getIndexedMethod("Cast.dynamicCastJso"));
     this.dynamicCastMethodsByTargetTypeCategory.put(
         TypeCategory.TYPE_JAVA_LANG_STRING, program.getIndexedMethod("Cast.dynamicCastToString"));
+    this.dynamicCastMethodsByTargetTypeCategory.put(
+        TypeCategory.TYPE_JAVA_LANG_NUMBER, program.getIndexedMethod("Cast.dynamicCastToNumber"));
     this.dynamicCastMethodsByTargetTypeCategory.put(
         TypeCategory.TYPE_JS_PROTOTYPE, program.getIndexedMethod("Cast.dynamicCastWithPrototype"));
     this.dynamicCastMethodsByTargetTypeCategory.put(

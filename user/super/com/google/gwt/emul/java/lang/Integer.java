@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
@@ -220,6 +222,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     return toRadixString(value, radix);
   }
 
+  @DoNotInline
   public static Integer valueOf(int i) {
     if (i > -129 && i < 128) {
       int rebase = i + 128;
@@ -308,5 +311,4 @@ public final class Integer extends Number implements Comparable<Integer> {
   public String toString() {
     return toString(value);
   }
-
 }

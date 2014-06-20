@@ -16,10 +16,14 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.JCastOperation;
+import com.google.gwt.dev.jjs.ast.JClassType;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
+import com.google.gwt.dev.jjs.ast.JNewInstance;
+import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 
@@ -41,12 +45,32 @@ public class AutoboxUtils {
   private final Map<JDeclaredType, JMethod> unboxMethods =
       new LinkedHashMap<JDeclaredType, JMethod>();
 
+  private final Map<JClassType, JMethod> createPrimitiveMethods =
+      new LinkedHashMap<JClassType, JMethod>();
+
+  private final Map<JClassType, JMethod> createStringMethods =
+      new LinkedHashMap<JClassType, JMethod>();
+
+  private JProgram program;
+
   public AutoboxUtils(JProgram program) {
+    this.program = program;
+    JDeclaredType boxedNumericTypeHelper = program.getIndexedType("BoxedNumericTypeHelper");
+
     for (JPrimitiveType primType : TYPES) {
       JDeclaredType wrapperType = program.getFromTypeMap(primType.getWrapperTypeName());
       String boxSig =
           "valueOf(" + primType.getJsniSignatureName() + ")" + wrapperType.getJsniSignatureName();
       String unboxSig = primType.getName() + "Value()" + primType.getJsniSignatureName();
+
+
+      String createPrimSig = "$create" + wrapperType.getSimpleName() + "(" + primType
+          .getJsniSignatureName() + ")" + wrapperType.getJsniSignatureName();
+
+      String createStringSig = "$create" + wrapperType.getSimpleName() + "(" + program
+          .getTypeJavaLangString().getJsniSignatureName() + ")" + wrapperType
+          .getJsniSignatureName();
+
       for (JMethod method : wrapperType.getMethods()) {
         if (method.isStatic()) {
           if (method.getSignature().equals(boxSig)) {
@@ -58,9 +82,15 @@ public class AutoboxUtils {
           }
         }
       }
+      for (JMethod method : boxedNumericTypeHelper.getMethods()) {
+        if (method.getSignature().equals(createPrimSig)) {
+          createPrimitiveMethods.put((JClassType) wrapperType, method);
+        }
+        if (method.getSignature().equals(createStringSig)) {
+          createStringMethods.put((JClassType) wrapperType, method);
+        }
+      }
     }
-    assert boxMethods.size() == TYPES.length;
-    assert unboxMethods.size() == TYPES.length;
   }
 
   /**
@@ -95,9 +125,28 @@ public class AutoboxUtils {
   public JExpression undoUnbox(JExpression arg) {
     if (arg instanceof JMethodCall) {
       JMethodCall argMethodCall = (JMethodCall) arg;
-      assert unboxMethods.values().contains(argMethodCall.getTarget());
-      return argMethodCall.getInstance();
+      if (unboxMethods.values().contains(argMethodCall.getTarget())) {
+        if (argMethodCall.getTarget().isStatic()) {
+          // in a static method call, the 'this$static' param is the primitive number
+          return argMethodCall.getArgs().get(0);
+        } else {
+          // otherwise, it's the qualifier of the call
+          return argMethodCall.getInstance();
+        }
+      }
     }
     return null;
+  }
+
+  public JNode convertPrimitiveCtorCallToCreateCall(JNewInstance x) {
+    JMethod createMethod = createPrimitiveMethods.get(x.getTarget().getEnclosingType());
+    assert createMethod != null;
+    return new JMethodCall(x.getSourceInfo(), null, createMethod, x.getArgs().get(0));
+  }
+
+  public JNode convertStringCtorCallToCreateCall(JNewInstance x) {
+    JMethod createMethod = createStringMethods.get(x.getTarget().getEnclosingType());
+    assert createMethod != null;
+    return new JMethodCall(x.getSourceInfo(), null, createMethod, x.getArgs().get(0));
   }
 }

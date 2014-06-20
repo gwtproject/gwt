@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>double</code> as an object.
  */
@@ -261,6 +263,7 @@ public final class Double extends Number implements Comparable<Double> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Double valueOf(double d) {
     return new Double(d);
   }
@@ -327,6 +330,7 @@ public final class Double extends Number implements Comparable<Double> {
     return isInfinite(value);
   }
 
+  @DoNotInline
   public boolean isNaN() {
     return isNaN(value);
   }
@@ -344,5 +348,14 @@ public final class Double extends Number implements Comparable<Double> {
   @Override
   public String toString() {
     return toString(value);
+  }
+
+  // Hack for devirtualizer to treat Boolean's/Characters as Doubles
+  public boolean booleanValue() {
+    return Boolean.parseBoolean(toString());
+  }
+
+  public char charValue() {
+    return (char) intValue();
   }
 }

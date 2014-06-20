@@ -164,6 +164,9 @@ public class DuplicateExecuteOnceRemover extends JsModVisitor {
 
   @Override
   public boolean visit(JsExprStmt x, JsContext ctx) {
+    if (x.getExpression().toSource().contains("clinit_Double")) {
+      boolean xx = true;
+    }
     if (isDuplicateCall(x.getExpression())) {
       if (ctx.canRemove()) {
         ctx.removeMe();

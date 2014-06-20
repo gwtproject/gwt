@@ -118,6 +118,7 @@ public class SameParameterValueOptimizer {
       }
     }
 
+
     @Override
     public boolean visit(JMethod x, Context ctx) {
       if (isNotOptimizable(x)) {

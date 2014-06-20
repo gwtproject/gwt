@@ -76,6 +76,14 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public static final Set<String> CODEGEN_TYPES_SET = Sets.newLinkedHashSet(Arrays.asList(
       "com.google.gwt.lang.Array", "com.google.gwt.lang.Cast",
+      "java.lang.Boolean",
+      "java.lang.Byte",
+      "java.lang.Character",
+      "java.lang.Float",
+      "java.lang.Double",
+      "java.lang.Integer",
+      "java.lang.Short",
+      "javaemul.internal.BoxedNumericTypeHelper",
       "com.google.gwt.lang.RuntimePropertyRegistry", "com.google.gwt.lang.Exceptions",
       "com.google.gwt.lang.LongLib", "com.google.gwt.lang.Stats", "com.google.gwt.lang.Util",
       "java.lang.Object"));
@@ -288,6 +296,18 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   private JClassType typeString;
 
+  private JClassType typeNumber;
+
+  private JClassType typeDouble;
+
+  private JClassType typeBoolean;
+
+  private JClassType typeCharacter;
+
+  private boolean autoboxingDisabled;
+
+  private Set<JDeclaredType> unboxableTypes = Sets.newHashSet();
+
   private FragmentPartitioningResult fragmentPartitioningResult;
 
   /**
@@ -372,6 +392,27 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       case "java.lang.String":
         typeString = (JClassType) type;
         break;
+      case "java.lang.Number":
+        typeNumber = (JClassType) type;
+        break;
+      case "java.lang.Double":
+        typeDouble = (JClassType) type;
+        unboxableTypes.add(type);
+        break;
+      case "java.lang.Boolean":
+        typeBoolean = (JClassType) type;
+        unboxableTypes.add(type);
+        break;
+      case "java.lang.Character":
+        typeCharacter = (JClassType) type;
+        unboxableTypes.add(type);
+        break;
+      case "java.lang.Float":
+      case "java.lang.Integer":
+      case "java.lang.Short":
+      case "java.lang.Byte":
+        unboxableTypes.add(type);
+        break;
       case "java.lang.Class":
         typeClass = (JClassType) type;
         break;
@@ -382,6 +423,18 @@ public class JProgram extends JNode implements ArrayTypeCreator {
         typeSpecialClassLiteralHolder = (JClassType) type;
         break;
     }
+  }
+
+  public void setAutoboxingDisabled(boolean disabled) {
+    this.autoboxingDisabled = disabled;
+  }
+
+  public boolean isAutoboxingDisabled() {
+    return autoboxingDisabled;
+  }
+
+  public boolean canBeUnboxedType(JType type) {
+    return autoboxingDisabled && type instanceof JDeclaredType && unboxableTypes.contains(type);
   }
 
   /**
@@ -956,6 +1009,21 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return typeString;
   }
 
+  public JClassType getTypeJavaLangNumber() {
+    return typeNumber;
+  }
+
+  public JClassType getTypeJavaLangDouble() {
+    return typeDouble;
+  }
+
+  public JClassType getTypeJavaLangBoolean() {
+    return typeBoolean;
+  }
+
+  public JClassType getTypeJavaLangCharacter() {
+    return typeCharacter;
+  }
   public Set<String> getTypeNamesToIndex() {
     return typeNamesToIndex;
   }
@@ -1134,6 +1202,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   private static Set<String> buildInitialTypeNamesToIndex() {
     Set<String> typeNamesToIndex = Sets.newHashSet();
     typeNamesToIndex.addAll(ImmutableList.of("java.io.Serializable", "java.lang.Object",
+       "java.lang.Number",
         "java.lang.String", "java.lang.Class", "java.lang.CharSequence", "java.lang.Cloneable",
         "java.lang.Comparable", "java.lang.Enum", "java.lang.Iterable", "java.util.Iterator",
         "java.lang.AssertionError", "java.lang.Boolean", "java.lang.Byte", "java.lang.Character",

@@ -2348,8 +2348,15 @@ public class GenerateJavaScriptAST {
         // special: setup a "toString" alias for java.lang.Object.toString()
         generateToStringAlias(x, globalStmts);
 
-        // Set up the artificial castmap for string.
-        setupStringCastMap(program.getTypeJavaLangString(), globalStmts);
+        // Set up the artificial castmap for string, double, and boolean
+        setupCastMapForUnboxedType(program.getTypeJavaLangString(), globalStmts,
+            "Cast.stringCastMap");
+
+        setupCastMapForUnboxedType(program.getTypeJavaLangDouble(), globalStmts,
+            "Cast.doubleCastMap");
+
+        setupCastMapForUnboxedType(program.getTypeJavaLangBoolean(), globalStmts,
+            "Cast.booleanCastMap");
 
         //  Perform necessary polyfills.
         globalStmts.add(constructInvocation(x.getSourceInfo(),
@@ -2661,11 +2668,12 @@ public class GenerateJavaScriptAST {
     }
 
     /*
-     * Sets up the catmap for String.
+     * Sets up the castmap for type X
      */
-    private void setupStringCastMap(JClassType x, List<JsStatement> globalStmts) {
-      //  Cast.stringCastMap = /* String cast map */ { ..:1, ..:1}
-      JField castableTypeMapField = program.getIndexedField("Cast.stringCastMap");
+    private void setupCastMapForUnboxedType(JClassType x, List<JsStatement> globalStmts,
+        String castMapField) {
+      //  Cast.[castMapName]ringCastMap = /* cast map */ { ..:1, ..:1}
+      JField castableTypeMapField = program.getIndexedField(castMapField);
       JsName castableTypeMapName = names.get(castableTypeMapField);
       JsNameRef ctmRef = castableTypeMapName.makeRef(x.getSourceInfo());
 

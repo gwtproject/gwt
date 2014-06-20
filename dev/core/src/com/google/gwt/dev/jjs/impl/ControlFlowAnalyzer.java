@@ -366,6 +366,11 @@ public class ControlFlowAnalyzer {
             }
           }
         }.accept(func);
+      } else if (x.isConstructor() && program.canBeUnboxedType(enclosingType)) {
+        // ugly: fake a parameter read for stubbed out constructors
+        for (JParameter param : x.getParams()) {
+          rescue(param);
+        }
       }
 
       return true;
@@ -413,7 +418,6 @@ public class ControlFlowAnalyzer {
       }
 
       rescueArgumentsIfParametersCanBeRead(call);
-
       return false;
     }
 

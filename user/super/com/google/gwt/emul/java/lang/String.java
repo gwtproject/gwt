@@ -174,104 +174,7 @@ public final class String implements Comparable<String>, CharSequence,
     return replaceStr;
   }
 
-  /**
-   * @skip
-   */
-  static String _String() {
-    return "";
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes) {
-    return _String(bytes, 0, bytes.length);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes, int ofs, int len) {
-    return _String(bytes, ofs, len, EmulatedCharset.UTF_8);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes, int ofs, int len, String charsetName)
-      throws UnsupportedEncodingException {
-    return _String(bytes, ofs, len, getCharset(charsetName));
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes, int ofs, int len, Charset charset) {
-    return valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes, String charsetName)
-      throws UnsupportedEncodingException {
-    return _String(bytes, 0, bytes.length, charsetName);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(byte[] bytes, Charset charset)
-      throws UnsupportedEncodingException {
-    return _String(bytes, 0, bytes.length, charset.name());
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(char value[]) {
-    return valueOf(value);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(char value[], int offset, int count) {
-    return valueOf(value, offset, count);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(int[] codePoints, int offset, int count) {
-    char[] chars = new char[count * 2];
-    int charIdx = 0;
-    while (count-- > 0) {
-      charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
-    }
-    return valueOf(chars, 0, charIdx);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(String other) {
-    return other;
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(StringBuffer sb) {
-    return valueOf(sb);
-  }
-
-  /**
-   * @skip
-   */
-  static String _String(StringBuilder sb) {
-    return valueOf(sb);
-  }
+ 
 
   // CHECKSTYLE_ON
 
@@ -302,71 +205,58 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String() {
-    // magic delegation to _String
-    _String();
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes) {
-    // magic delegation to _String
-    _String(bytes);
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes, int ofs, int len) {
-    // magic delegation to _String
-    _String(bytes, ofs, len);
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes, int ofs, int len, String charsetName)
       throws UnsupportedEncodingException {
-    // magic delegation to _String
-    _String(bytes, ofs, len, charsetName);
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes, int ofs, int len, Charset charset) {
-    // magic delegation to _String
-    _String(bytes, ofs, len, charset);
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes, String charsetName)
       throws UnsupportedEncodingException {
-    // magic delegation to _String
-    _String(bytes, charsetName);
+    // replaced by call to Util.$createString
   }
 
   public String(byte[] bytes, Charset charset)
       throws UnsupportedEncodingException {
-    // magic delegation to _String
-    _String(bytes, charset);
+    // replaced by call to Util.$createString
   }
 
   public String(char value[]) {
-    // magic delegation to _String
-    _String(value);
+    // replaced by call to Util.$createString
   }
 
   public String(char value[], int offset, int count) {
-    // magic delegation to _String
-    _String(value, offset, count);
+    // replaced by call to Util.$createString
   }
 
   public String(int codePoints[], int offset, int count) {
-    // magic delegation to _String
-    _String(codePoints, offset, count);
+    // replaced by call to Util.$createString
   }
 
   public String(String other) {
-    // magic delegation to _String
-    _String(other);
+    // replaced by call to Util.$createString
   }
 
   public String(StringBuffer sb) {
-    // magic delegation to _String
-    _String(sb);
+    // replaced by call to Util.$createString
   }
 
   public String(StringBuilder sb) {
-    // magic delegation to _String
-    _String(sb);
+    // replaced by call to Util.$createString
   }
 
   @Override
@@ -779,4 +669,105 @@ public final class String implements Comparable<String>, CharSequence,
     }
     return start > 0 || end < length ? substring(start, end) : this;
   }
+
+  // CHECKSTYLE_OFF: Utility Methods for unboxed String.
+  /**
+   * @skip
+   */
+  static String $createString() {
+    return "";
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes) {
+    return $createString(bytes, 0, bytes.length);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes, int ofs, int len) {
+    return $createString(bytes, ofs, len, EmulatedCharset.UTF_8);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes, int ofs, int len, String charsetName)
+      throws UnsupportedEncodingException {
+    return $createString(bytes, ofs, len, String.getCharset(charsetName));
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes, int ofs, int len, Charset charset) {
+    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes, String charsetName)
+      throws UnsupportedEncodingException {
+    return $createString(bytes, 0, bytes.length, charsetName);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(byte[] bytes, Charset charset)
+      throws UnsupportedEncodingException {
+    return $createString(bytes, 0, bytes.length, charset.name());
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(char value[]) {
+    return String.valueOf(value);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(char value[], int offset, int count) {
+    return String.valueOf(value, offset, count);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(int[] codePoints, int offset, int count) {
+    char[] chars = new char[count * 2];
+    int charIdx = 0;
+    while (count-- > 0) {
+      charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
+    }
+    return String.valueOf(chars, 0, charIdx);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(String other) {
+    return other;
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(StringBuffer sb) {
+    return String.valueOf(sb);
+  }
+
+  /**
+   * @skip
+   */
+  static String $createString(StringBuilder sb) {
+    return String.valueOf(sb);
+  }
+  // CHECKSTYLE_ON: end utility methods
 }

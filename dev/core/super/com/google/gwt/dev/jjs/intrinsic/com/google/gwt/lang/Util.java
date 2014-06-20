@@ -24,7 +24,6 @@ import javaemul.internal.annotations.DoNotInline;
  * castableTypeMap and typeMarker fields.
  */
 final class Util {
-
   static native JavaScriptObject getCastableTypeMap(Object o) /*-{
     return o.@java.lang.Object::castableTypeMap;
   }-*/;

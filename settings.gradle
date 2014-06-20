@@ -1,0 +1,4 @@
+// The list of subdirectories that contain build.gradle files.
+// (Add another directory to the list when you add a new build.gradle file.)
+
+include ":user", ":dev", ":samples/hello"

@@ -288,6 +288,10 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   private JClassType typeString;
 
+  private JClassType typeNumber;
+
+  private JClassType typeDouble;
+
   private FragmentPartitioningResult fragmentPartitioningResult;
 
   /**
@@ -371,6 +375,12 @@ public class JProgram extends JNode implements ArrayTypeCreator {
         break;
       case "java.lang.String":
         typeString = (JClassType) type;
+        break;
+      case "java.lang.Number":
+        typeNumber = (JClassType) type;
+        break;
+      case "java.lang.Double":
+        typeDouble = (JClassType) type;
         break;
       case "java.lang.Class":
         typeClass = (JClassType) type;
@@ -956,6 +966,13 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return typeString;
   }
 
+  public JClassType getTypeJavaLangNumber() {
+    return typeNumber;
+  }
+
+  public JClassType getTypeJavaLangDouble() {
+    return typeDouble;
+  }
   public Set<String> getTypeNamesToIndex() {
     return typeNamesToIndex;
   }
@@ -1134,6 +1151,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   private static Set<String> buildInitialTypeNamesToIndex() {
     Set<String> typeNamesToIndex = Sets.newHashSet();
     typeNamesToIndex.addAll(ImmutableList.of("java.io.Serializable", "java.lang.Object",
+        "java.lang.Number",
         "java.lang.String", "java.lang.Class", "java.lang.CharSequence", "java.lang.Cloneable",
         "java.lang.Comparable", "java.lang.Enum", "java.lang.Iterable", "java.util.Iterator",
         "java.lang.AssertionError", "java.lang.Boolean", "java.lang.Byte", "java.lang.Character",

@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>double</code> as an object.
  */
@@ -261,6 +263,7 @@ public final class Double extends Number implements Comparable<Double> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Double valueOf(double d) {
     return new Double(d);
   }
@@ -280,6 +283,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @Override
+  @DoNotInline
   public byte byteValue() {
     return (byte) value;
   }
@@ -290,6 +294,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @Override
+  @DoNotInline
   public double doubleValue() {
     return value;
   }
@@ -300,6 +305,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @Override
+  @DoNotInline
   public float floatValue() {
     return (float) value;
   }
@@ -319,6 +325,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @Override
+  @DoNotInline
   public int intValue() {
     return (int) value;
   }
@@ -327,16 +334,19 @@ public final class Double extends Number implements Comparable<Double> {
     return isInfinite(value);
   }
 
+  @DoNotInline
   public boolean isNaN() {
     return isNaN(value);
   }
 
   @Override
+  @DoNotInline
   public long longValue() {
     return (long) value;
   }
 
   @Override
+  @DoNotInline
   public short shortValue() {
     return (short) value;
   }

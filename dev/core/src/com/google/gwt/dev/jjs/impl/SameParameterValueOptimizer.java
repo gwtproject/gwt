@@ -118,6 +118,7 @@ public class SameParameterValueOptimizer {
       }
     }
 
+
     @Override
     public boolean visit(JMethod x, Context ctx) {
       if (isNotOptimizable(x)) {
@@ -127,7 +128,9 @@ public class SameParameterValueOptimizer {
     }
 
     private boolean isNotOptimizable(JMethod x) {
-      return x.needsVtable() || x.canBeCalledExternally();
+      return x.needsVtable() || x.canBeCalledExternally() ||
+          (autoboxingDisabled && program.typeOracle.isSuperClass(x.getEnclosingType(),
+              program.getTypeJavaLangNumber()));
     }
 
     private boolean equalLiterals(JValueLiteral l1, JValueLiteral l2) {
@@ -174,12 +177,14 @@ public class SameParameterValueOptimizer {
 
   @VisibleForTesting
   static OptimizerStats exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT, false);
   }
 
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx,
+      boolean autoboxingDisabled) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new SameParameterValueOptimizer(program).execImpl(program, optimizerCtx);
+    OptimizerStats stats = new SameParameterValueOptimizer(program, autoboxingDisabled).execImpl(
+        program, optimizerCtx);
     optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
@@ -196,6 +201,7 @@ public class SameParameterValueOptimizer {
   private final Map<JParameter, JValueLiteral> parameterValues =
       new IdentityHashMap<JParameter, JValueLiteral>();
   private final JProgram program;
+  private boolean autoboxingDisabled;
 
   /**
    * These methods should not be tried to be optimized, either because they are polymorphic or we
@@ -203,8 +209,9 @@ public class SameParameterValueOptimizer {
    */
   private final Set<JMethod> nonOptimizableMethods = new HashSet<JMethod>();
 
-  private SameParameterValueOptimizer(JProgram program) {
+  private SameParameterValueOptimizer(JProgram program, boolean autoboxingDisabled) {
     this.program = program;
+    this.autoboxingDisabled = autoboxingDisabled;
   }
 
   private OptimizerStats execImpl(JNode node, OptimizerContext optimizerCtx) {

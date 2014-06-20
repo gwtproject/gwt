@@ -135,7 +135,7 @@ public class DevirtualizerTest extends OptimizerTestBase {
 
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
-    Devirtualizer.exec(program);
+    Devirtualizer.exec(program, false);
     return true;
   }
 }

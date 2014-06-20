@@ -33,6 +33,7 @@ public  enum TypeCategory {
   TYPE_JSO,
   TYPE_JAVA_LANG_OBJECT,
   TYPE_JAVA_LANG_STRING,
+  TYPE_JAVA_LANG_NUMBER,
   TYPE_JS_PROTOTYPE,
   TYPE_JS_FUNCTION,
   TYPE_PRIMITIVE_LONG,
@@ -59,6 +60,9 @@ public  enum TypeCategory {
       return TypeCategory.TYPE_JAVA_LANG_OBJECT;
     } else if (type == program.getTypeJavaLangString()) {
       return TypeCategory.TYPE_JAVA_LANG_STRING;
+    } else if (type == program.getTypeJavaLangNumber() ||
+        type == program.getTypeJavaLangDouble()) {
+      return TypeCategory.TYPE_JAVA_LANG_NUMBER;
     } else if (program.typeOracle.isEffectivelyJavaScriptObject(type)) {
       return TypeCategory.TYPE_JSO;
     } else if (program.typeOracle.isDualJsoInterface(type)

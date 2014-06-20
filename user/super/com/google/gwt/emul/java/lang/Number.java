@@ -17,6 +17,8 @@ package java.lang;
 
 import java.io.Serializable;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Abstract base class for numeric wrapper classes.
  */
@@ -362,6 +364,7 @@ public abstract class Number implements Serializable {
 
   // CHECKSTYLE_ON
 
+  @DoNotInline
   public byte byteValue() {
     return (byte) intValue();
   }
@@ -374,6 +377,7 @@ public abstract class Number implements Serializable {
 
   public abstract long longValue();
 
+  @DoNotInline
   public short shortValue() {
     return (short) intValue();
   }

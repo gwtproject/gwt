@@ -601,10 +601,10 @@ public class JsStaticEval {
       JsBinaryOperator.OR, JsBinaryOperator.AND, JsBinaryOperator.BIT_AND,
       JsBinaryOperator.BIT_OR, JsBinaryOperator.COMMA);
 
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(JsProgram program, boolean simplifyNull) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsStaticEval(program).execImpl();
+    OptimizerStats stats = new JsStaticEval(program, simplifyNull).execImpl();
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -707,15 +707,15 @@ public class JsStaticEval {
     return expr;
   }
 
-  private static JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
+  private JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 
-    if (arg1 instanceof JsNullLiteral) {
+    if (arg1 instanceof JsNullLiteral && simplifyNull) {
       return simplifyNullEq(expr, arg2);
     }
 
-    if (arg2 instanceof JsNullLiteral) {
+    if (arg2 instanceof JsNullLiteral && simplifyNull) {
       return simplifyNullEq(expr, arg1);
     }
 
@@ -735,7 +735,7 @@ public class JsStaticEval {
   /**
    * Simplify exp == null.
    */
-  private static JsExpression simplifyNullEq(JsExpression original, JsExpression exp) {
+  private JsExpression simplifyNullEq(JsExpression original, JsExpression exp) {
     assert (original != null);
 
     if (exp instanceof JsValueLiteral) {
@@ -749,7 +749,7 @@ public class JsStaticEval {
     return original;
   }
 
-  private static  JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
+  private JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 
@@ -880,9 +880,11 @@ public class JsStaticEval {
   }
 
   private final JsProgram program;
+  private boolean simplifyNull;
 
-  public JsStaticEval(JsProgram program) {
+  public JsStaticEval(JsProgram program, boolean simplifyNull) {
     this.program = program;
+    this.simplifyNull = simplifyNull;
   }
 
   public OptimizerStats execImpl() {

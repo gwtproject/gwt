@@ -19,6 +19,7 @@ package com.google.gwt.dev;
 import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerCompileReport;
 import com.google.gwt.dev.util.arg.ArgHandlerCompilerMetrics;
+import com.google.gwt.dev.util.arg.ArgHandlerDisableAutoboxing;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
@@ -96,6 +97,7 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerStrictResources());
     registerHandler(new ArgHandlerValidateOnlyFlag(options));
     registerHandler(new ArgHandlerSourceLevel(options));
+    registerHandler(new ArgHandlerDisableAutoboxing(options));
   }
 
   @Override

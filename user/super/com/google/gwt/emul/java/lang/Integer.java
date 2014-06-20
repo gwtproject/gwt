@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
@@ -220,6 +222,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     return toRadixString(value, radix);
   }
 
+  @DoNotInline
   public static Integer valueOf(int i) {
     if (i > -129 && i < 128) {
       int rebase = i + 128;
@@ -261,6 +264,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   @Override
+  @DoNotInline
   public byte byteValue() {
     return (byte) value;
   }
@@ -270,6 +274,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   @Override
+  @DoNotInline
   public double doubleValue() {
     return value;
   }
@@ -280,6 +285,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   @Override
+  @DoNotInline
   public float floatValue() {
     return value;
   }
@@ -290,16 +296,19 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   @Override
+  @DoNotInline
   public int intValue() {
     return value;
   }
 
   @Override
+  @DoNotInline
   public long longValue() {
     return value;
   }
 
   @Override
+  @DoNotInline
   public short shortValue() {
     return (short) value;
   }

@@ -430,4 +430,14 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   public void setClosureCompilerFormatEnabled(boolean enabled) {
     jjsOptions.setClosureCompilerFormatEnabled(enabled);
   }
+
+  @Override
+  public boolean isAutoboxingDisabled() {
+    return jjsOptions.isAutoboxingDisabled();
+  }
+
+  @Override
+  public void setAutoboxingDisabled(boolean disabled) {
+    jjsOptions.setAutoboxingDisabled(disabled);
+  }
 }

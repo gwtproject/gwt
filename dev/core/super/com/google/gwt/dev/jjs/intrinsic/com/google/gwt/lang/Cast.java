@@ -268,6 +268,16 @@ final class Cast {
   }-*/;
 
   /**
+   * Returns whether the Object is a Java Number.
+   *
+   * Java Numbers are translated to JavaScript numbers.
+   */
+  @HasNoSideEffects
+  static native boolean isJavaNumber(Object src) /*-{
+    return typeof(src) === "number";
+  }-*/;
+
+  /**
    * Returns true if Object can dispatch instance methods and does not need a compiler
    * provided trampoline.
    *

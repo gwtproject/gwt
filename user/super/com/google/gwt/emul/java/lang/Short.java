@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>short</code> as an object.
  */
@@ -65,6 +67,7 @@ public final class Short extends Number implements Comparable<Short> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Short valueOf(short s) {
     if (s > -129 && s < 128) {
       int rebase = s + 128;

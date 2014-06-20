@@ -102,6 +102,7 @@ import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
 import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
+import com.google.gwt.dev.jjs.impl.RemoveAutoboxing;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
 import com.google.gwt.dev.jjs.impl.ReplaceDefenderMethodReferences;
@@ -459,7 +460,7 @@ public final class JavaToJavaScriptCompiler {
   protected TypeMapper<?> normalizeSemantics() {
     Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_NORMALIZERS);
     try {
-      Devirtualizer.exec(jprogram);
+      Devirtualizer.exec(jprogram, options.isAutoboxingDisabled());
       CatchBlockNormalizer.exec(jprogram);
       PostOptimizationCompoundAssignmentNormalizer.exec(jprogram);
       LongCastNormalizer.exec(jprogram);
@@ -509,6 +510,9 @@ public final class JavaToJavaScriptCompiler {
     try {
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
+        if (options.isAutoboxingDisabled()) {
+          RemoveAutoboxing.exec(jprogram);
+        }
         Pruner.exec(jprogram, false);
         // Last Java optimization step, update type oracle accordingly.
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
@@ -1008,7 +1012,7 @@ public final class JavaToJavaScriptCompiler {
       OptimizerStats stats = new OptimizerStats("Pass " + counter);
 
       // Remove unused functions if possible.
-      stats.add(JsStaticEval.exec(jsProgram));
+      stats.add(JsStaticEval.exec(jsProgram, !options.isAutoboxingDisabled()));
       // Inline Js function invocations
       stats.add(JsInliner.exec(jsProgram, toInline));
       // Remove unused functions if possible.
@@ -1515,7 +1519,8 @@ public final class JavaToJavaScriptCompiler {
     stats.add(DeadCodeElimination.exec(jprogram, optimizerCtx).recordVisits(numNodes));
     stats.add(MethodInliner.exec(jprogram, optimizerCtx).recordVisits(numNodes));
     if (options.shouldInlineLiteralParameters()) {
-      stats.add(SameParameterValueOptimizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
+      stats.add(SameParameterValueOptimizer.exec(jprogram, optimizerCtx,
+          options.isAutoboxingDisabled()).recordVisits(numNodes));
     }
     if (options.shouldOrdinalizeEnums()) {
       stats.add(EnumOrdinalizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));

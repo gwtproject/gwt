@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>float</code> as an object.
  */
@@ -153,6 +155,7 @@ public final class Float extends Number implements Comparable<Float> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Float valueOf(float f) {
     return new Float(f);
   }
@@ -215,6 +218,7 @@ public final class Float extends Number implements Comparable<Float> {
   }
 
   @Override
+  @DoNotInline
   public int intValue() {
     return (int) value;
   }

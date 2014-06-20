@@ -19,6 +19,7 @@ import com.google.gwt.dev.util.arg.OptionAllowJDTConstantInlining;
 import com.google.gwt.dev.util.arg.OptionCheckedMode;
 import com.google.gwt.dev.util.arg.OptionClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.OptionClusterSimilarFunctions;
+import com.google.gwt.dev.util.arg.OptionDisableAutoboxing;
 import com.google.gwt.dev.util.arg.OptionDisableCastChecking;
 import com.google.gwt.dev.util.arg.OptionDisableClassMetadata;
 import com.google.gwt.dev.util.arg.OptionEnableAssertions;
@@ -57,5 +58,6 @@ public interface JJSOptions extends OptionOptimize,
     OptionFragmentsMerge, OptionFragmentCount, OptionSourceLevel, OptionNamespace,
     OptionCheckedMode, OptionJsInteropMode, OptionUseDetailedTypeIds,
     OptionAllowJDTConstantInlining, OptionMethodNameDisplayMode,
-    OptionClosureFormattedOutput {
+    OptionClosureFormattedOutput,
+    OptionDisableAutoboxing {
 }

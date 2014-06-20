@@ -40,17 +40,27 @@ public class AutoboxUtils {
 
   private final Map<JDeclaredType, JMethod> unboxMethods =
       new LinkedHashMap<JDeclaredType, JMethod>();
+  private JProgram program;
 
   public AutoboxUtils(JProgram program) {
+    this.program = program;
     for (JPrimitiveType primType : TYPES) {
       JDeclaredType wrapperType = program.getFromTypeMap(primType.getWrapperTypeName());
       String boxSig =
           "valueOf(" + primType.getJsniSignatureName() + ")" + wrapperType.getJsniSignatureName();
       String unboxSig = primType.getName() + "Value()" + primType.getJsniSignatureName();
+      String staticUnboxSig = "$" + primType.getName() + "Value(" +
+          wrapperType.getJsniSignatureName() + ")" + primType.getJsniSignatureName();
+
       for (JMethod method : wrapperType.getMethods()) {
         if (method.isStatic()) {
           if (method.getSignature().equals(boxSig)) {
             boxMethods.put(primType, method);
+          }
+          // Double.intValue() may or may not be staticified, we catch both
+          if (method.getSignature().equals(staticUnboxSig) &&
+              !unboxMethods.containsKey(wrapperType)) {
+            unboxMethods.put(wrapperType, method);
           }
         } else {
           if (method.getSignature().equals(unboxSig)) {
@@ -95,8 +105,30 @@ public class AutoboxUtils {
   public JExpression undoUnbox(JExpression arg) {
     if (arg instanceof JMethodCall) {
       JMethodCall argMethodCall = (JMethodCall) arg;
-      assert unboxMethods.values().contains(argMethodCall.getTarget());
-      return argMethodCall.getInstance();
+      if (unboxMethods.values().contains(argMethodCall.getTarget())) {
+        if (argMethodCall.getTarget().isStatic()) {
+          // in a static method call, the 'this$static' param is the primitive number
+          return argMethodCall.getArgs().get(0);
+        } else {
+          // otherwise, it's the qualifier of the call
+          return argMethodCall.getInstance();
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * If <code>x</code> is an box expression, then return the expression that
+   * is being boxed by it. Otherwise, return <code>null</code>.
+   */
+  public JExpression undoBox(JExpression arg) {
+    if (arg instanceof JMethodCall) {
+      JMethodCall argMethodCall = (JMethodCall) arg;
+      if (boxMethods.values().contains(argMethodCall.getTarget())) {
+        // first argument of valueOf method call is the primitive number.
+        return argMethodCall.getArgs().get(0);
+      }
     }
     return null;
   }

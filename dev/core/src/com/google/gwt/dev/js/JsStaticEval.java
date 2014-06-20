@@ -601,10 +601,10 @@ public class JsStaticEval {
       JsBinaryOperator.OR, JsBinaryOperator.AND, JsBinaryOperator.BIT_AND,
       JsBinaryOperator.BIT_OR, JsBinaryOperator.COMMA);
 
-  public static OptimizerStats exec(JsProgram program) {
+  public static OptimizerStats exec(JsProgram program, boolean simplyNullComparisons) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
         CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsStaticEval(program).execImpl();
+    OptimizerStats stats = new JsStaticEval(program, simplyNullComparisons).execImpl();
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -707,15 +707,19 @@ public class JsStaticEval {
     return expr;
   }
 
-  private static JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
+  private JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 
-    if (arg1 instanceof JsNullLiteral) {
+    /*
+     * When autoboxing is disabled, we cannot change if(o != null) into if(o) because
+     * a Double.valueOf(0) should return true, but an if(0) will return false.
+     */
+    if (arg1 instanceof JsNullLiteral && simplifyNullComparisons) {
       return simplifyNullEq(expr, arg2);
     }
 
-    if (arg2 instanceof JsNullLiteral) {
+    if (arg2 instanceof JsNullLiteral && simplifyNullComparisons) {
       return simplifyNullEq(expr, arg1);
     }
 
@@ -735,7 +739,7 @@ public class JsStaticEval {
   /**
    * Simplify exp == null.
    */
-  private static JsExpression simplifyNullEq(JsExpression original, JsExpression exp) {
+  private JsExpression simplifyNullEq(JsExpression original, JsExpression exp) {
     assert (original != null);
 
     if (exp instanceof JsValueLiteral) {
@@ -749,7 +753,7 @@ public class JsStaticEval {
     return original;
   }
 
-  private static  JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
+  private JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 
@@ -880,9 +884,11 @@ public class JsStaticEval {
   }
 
   private final JsProgram program;
+  private boolean simplifyNullComparisons;
 
-  public JsStaticEval(JsProgram program) {
+  public JsStaticEval(JsProgram program, boolean simplifyNullComparisons) {
     this.program = program;
+    this.simplifyNullComparisons = simplifyNullComparisons;
   }
 
   public OptimizerStats execImpl() {

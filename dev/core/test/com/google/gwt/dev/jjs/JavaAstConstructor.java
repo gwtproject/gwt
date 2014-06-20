@@ -82,6 +82,8 @@ public class JavaAstConstructor {
           "import com.google.gwt.core.client.JavaScriptObject;",
           "public final class Cast {",
           "  private static JavaScriptObject stringCastMap;",
+          "  private static JavaScriptObject doubleCastMap;",
+          "  private static JavaScriptObject booleanCastMap;",
           "  public static native String charToString(char x) /*-{ }-*/;",
           "  public static Object dynamicCast(Object src, int dstId) { return src;}",
           "  public static Object dynamicCastAllowJso(Object src, int dstId) { return src;}",

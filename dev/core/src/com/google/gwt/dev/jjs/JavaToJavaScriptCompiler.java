@@ -113,6 +113,7 @@ import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.StringTypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
+import com.google.gwt.dev.jjs.impl.RewriteBooleanAndDoubleBoxedInstantiations;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
@@ -348,6 +349,7 @@ public final class JavaToJavaScriptCompiler {
       // Replace compile time constants by their values.
       // TODO(rluble): eventually move to normizeSemantics.
       CompileTimeConstantsReplacer.exec(jprogram);
+      RewriteBooleanAndDoubleBoxedInstantiations.exec(jprogram);
 
       // TODO(stalcup): move to after normalize.
       // (3) Optimize the resolved Java AST

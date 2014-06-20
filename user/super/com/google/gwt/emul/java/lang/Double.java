@@ -269,39 +269,37 @@ public final class Double extends Number implements Comparable<Double> {
     return new Double(s);
   }
 
-  private final transient double value;
-
   public Double(double value) {
-    this.value = value;
+    // replaced by $createDouble
   }
 
   public Double(String s) {
-    value = parseDouble(s);
+    // replaced by $createDoubleFromString
   }
 
   @Override
   public byte byteValue() {
-    return (byte) value;
+    return (byte) doubleValue();
   }
 
   @Override
-  public int compareTo(Double b) {
-    return compare(this.value, b.value);
-  }
+  public native int compareTo(Double b) /*-{
+    return @Double::compare(*)(this, b);
+  }-*/;
 
   @Override
-  public double doubleValue() {
-    return value;
-  }
+  public native double doubleValue() /*-{
+    return this;
+  }-*/;
 
   @Override
-  public boolean equals(Object o) {
-    return (o instanceof Double) && (((Double) o).value == value);
-  }
+  public native boolean equals(Object o) /*-{
+    return this === o;
+  }-*/;
 
   @Override
   public float floatValue() {
-    return (float) value;
+    return (float) doubleValue();
   }
 
   /**
@@ -315,34 +313,42 @@ public final class Double extends Number implements Comparable<Double> {
    */
   @Override
   public int hashCode() {
-    return hashCode(value);
+    return hashCode(doubleValue());
   }
 
   @Override
   public int intValue() {
-    return (int) value;
+    return (int) doubleValue();
   }
 
   public boolean isInfinite() {
-    return isInfinite(value);
+    return isInfinite(doubleValue());
   }
 
   public boolean isNaN() {
-    return isNaN(value);
+    return isNaN(doubleValue());
   }
 
   @Override
   public long longValue() {
-    return (long) value;
+    return (long) doubleValue();
   }
 
   @Override
   public short shortValue() {
-    return (short) value;
+    return (short) doubleValue();
   }
 
   @Override
   public String toString() {
-    return toString(value);
+    return toString(doubleValue());
+  }
+
+  static native Double $createDouble(double x) /*-{
+    return x;
+  }-*/;
+
+  static Double $createDoubleFromString(String s) {
+    return $createDouble(parseDouble(s));
   }
 }

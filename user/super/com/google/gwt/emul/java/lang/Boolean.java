@@ -26,8 +26,8 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
    */
 
   // CHECKSTYLE_OFF: These have to be created somewhere.
-  public static final Boolean FALSE = new Boolean(false);
-  public static final Boolean TRUE = new Boolean(true);
+  public static final Boolean FALSE = $createBoolean(false);
+  public static final Boolean TRUE = $createBoolean(true);
 
   // CHECKSTYLE_ON
 
@@ -70,37 +70,44 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return valueOf(parseBoolean(s));
   }
 
-  private final transient boolean value;
 
   public Boolean(boolean value) {
-    this.value = value;
+    // constructor replaced by call to $createBoolean
   }
 
   public Boolean(String s) {
-    this(parseBoolean(s));
+    // constructor replaced by call to $createBooleanFromString
   }
 
-  public boolean booleanValue() {
-    return value;
-  }
-
-  @Override
-  public int compareTo(Boolean b) {
-    return compare(value, b.value);
-  }
+  public native boolean booleanValue() /*-{
+    return this;
+  }-*/;
 
   @Override
-  public boolean equals(Object o) {
-    return (o instanceof Boolean) && (((Boolean) o).value == value);
-  }
+  public native int compareTo(Boolean b) /*-{
+    return @Boolean::compare(*)(this, b);
+  }-*/;
 
   @Override
-  public int hashCode() {
-    return hashCode(value);
-  }
+  public native boolean equals(Object o) /*-{
+    return this === o;
+  }-*/;
 
   @Override
-  public String toString() {
-    return toString(value);
+  public native int hashCode() /*-{
+    return @Boolean::hashCode(Z)(this);
+  }-*/;
+
+  @Override
+  public native String toString() /*-{
+    return @Boolean::toString(Z)(this);
+  }-*/;
+
+  static native Boolean $createBoolean(boolean x) /*-{
+    return x;
+  }-*/;
+
+  static Boolean $createBooleanFromString(String x) {
+    return $createBoolean(parseBoolean(x));
   }
 }

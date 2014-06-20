@@ -1,0 +1,4 @@
+// This is a list of the subprojects that have build files that Gradle should read.
+// Add another directory to the list when you add a new build.gradle file.
+
+include ":user", ":dev", ":samples/hello"

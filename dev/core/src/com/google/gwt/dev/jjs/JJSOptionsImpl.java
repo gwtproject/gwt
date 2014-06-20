@@ -57,6 +57,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
   private boolean closureFormatEnabled = false;
+  private boolean disableAutoboxing = false;
 
   public JJSOptionsImpl() {
   }
@@ -90,6 +91,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setUseDetailedTypeIds(other.useDetailedTypeIds());
     setMethodNameDisplayMode(other.getMethodNameDisplayMode());
     setClosureCompilerFormatEnabled(other.isClosureCompilerFormatEnabled());
+    setAutoboxingDisabled(other.isAutoboxingDisabled());
   }
 
   @Override
@@ -379,5 +381,16 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public void setClosureCompilerFormatEnabled(boolean enabled) {
     closureFormatEnabled = enabled;
+  }
+
+
+  @Override
+  public boolean isAutoboxingDisabled() {
+    return disableAutoboxing;
+  }
+
+  @Override
+  public void setAutoboxingDisabled(boolean disabled) {
+    this.disableAutoboxing = disabled;
   }
 }

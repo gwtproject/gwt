@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a native <code>char</code> as an object.
  *
@@ -393,6 +395,7 @@ public final class Character implements Comparable<Character>, Serializable {
     return String.fromCharCode(c).toUpperCase().charCodeAt(0);
   }-*/;
 
+  @DoNotInline
   public static Character valueOf(char c) {
     if (c < 128) {
       Character result = BoxedValues.boxedValues[c];

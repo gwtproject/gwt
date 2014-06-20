@@ -102,6 +102,7 @@ import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
 import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
+import com.google.gwt.dev.jjs.impl.RemoveBoxedTypes;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
 import com.google.gwt.dev.jjs.impl.ReplaceDefenderMethodReferences;
@@ -459,6 +460,7 @@ public final class JavaToJavaScriptCompiler {
   protected TypeMapper<?> normalizeSemantics() {
     Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_NORMALIZERS);
     try {
+      jprogram.setAutoboxingDisabled(shouldOptimize() && options.isAutoboxingDisabled());
       Devirtualizer.exec(jprogram);
       CatchBlockNormalizer.exec(jprogram);
       PostOptimizationCompoundAssignmentNormalizer.exec(jprogram);
@@ -492,6 +494,7 @@ public final class JavaToJavaScriptCompiler {
 
   private void optimizeJava() throws InterruptedException {
     if (shouldOptimize()) {
+      jprogram.setAutoboxingDisabled(options.isAutoboxingDisabled());
       optimizeJavaToFixedPoint();
       RemoveEmptySuperCalls.exec(jprogram);
     }
@@ -509,6 +512,7 @@ public final class JavaToJavaScriptCompiler {
     try {
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
+        RemoveBoxedTypes.exec(jprogram);
         Pruner.exec(jprogram, false);
         // Last Java optimization step, update type oracle accordingly.
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
@@ -1008,7 +1012,7 @@ public final class JavaToJavaScriptCompiler {
       OptimizerStats stats = new OptimizerStats("Pass " + counter);
 
       // Remove unused functions if possible.
-      stats.add(JsStaticEval.exec(jsProgram));
+      stats.add(JsStaticEval.exec(jsProgram, !options.isAutoboxingDisabled()));
       // Inline Js function invocations
       stats.add(JsInliner.exec(jsProgram, toInline));
       // Remove unused functions if possible.

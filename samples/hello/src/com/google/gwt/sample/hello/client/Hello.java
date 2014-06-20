@@ -28,9 +28,20 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Hello implements EntryPoint {
 
   public void onModuleLoad() {
+    final Double x = 13.0;
+
     Button b = new Button("Click me", new ClickHandler() {
       public void onClick(ClickEvent event) {
-        Window.alert("Hello, AJAX");
+        double z = 12 + x;
+        Object o = Math.random() > 0.5 ? z : "Bar";
+        Window.alert("Hello, AJAX " + z);
+        Window.alert("Hello, AJAX " + x.equals("Foo"));
+        Window.alert("Hello, AJAX " + o.equals("Foo"));
+        Window.alert("Hello, AJAX " + o.equals(13.0));
+        Window.alert("Hello, AJAX " + o.equals(new Double(13.0)));
+        Window.alert("Hello, AJAX " + o.equals(new Double("13.0")));
+        Window.alert("Hello, AJAX " + x.equals(13.0));
+        Window.alert("Hello, AJAX " + (x.hashCode() == 10));
       }
     });
 

@@ -70,6 +70,10 @@ final class Cast {
     return src;
   }
 
+  static Object dynamicCastToNumber(Object src) {
+    checkType(src == null || isJavaNumber(src));
+    return src;
+  }
   /**
    * Allow a dynamic cast to an object, always succeeding if it's a JSO.
    */
@@ -265,6 +269,19 @@ final class Cast {
   @HasNoSideEffects
   static native boolean isJavaString(Object src) /*-{
     return typeof(src) === "string";
+  }-*/;
+
+  /**
+   * Returns whether the Object is a Java Number. (*)
+   *
+   * Java Numbers are translated to JavaScript numbers.
+   *
+   * (*) Note, for purposes of simplicity, we treat booleans as a kind of '1-bit' number
+   * rather than handle them separately for autobox/unboxing.
+   */
+  @HasNoSideEffects
+  static native boolean isJavaNumber(Object src) /*-{
+    return typeof(src) === "number" || typeof(src) === "boolean";
   }-*/;
 
   /**

@@ -1,0 +1,22 @@
+// Generates the "hello" module for IntelliJ IDEA
+
+// TODO: for some reason this creates a "sample" subdirectory and puts the iml file there.
+// It should be in the current directory.
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+dependencies {
+    compile project(":user")
+}
+
+idea {
+    module {
+        addSourcesToIdeaClasspath(iml, ['file://$MODULE_DIR$/../src'])
+    }
+}

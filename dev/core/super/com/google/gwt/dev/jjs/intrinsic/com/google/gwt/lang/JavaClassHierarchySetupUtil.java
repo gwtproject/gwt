@@ -207,6 +207,36 @@ public class JavaClassHierarchySetupUtil {
           return Object.prototype.toString.call(vArg) === "[object Array]";
         };
     }
+
+    // Implement similar to:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+    if (!Object.keys) {
+      var hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+      dontEnums = ['constructor', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',
+          'toLocaleString', 'toString', 'valueOf'];
+
+      Object.keys = function(obj) {
+        if (obj === null || (typeof obj !== 'object' && typeof obj !== 'function')) {
+          throw new TypeError('Object.keys called on non-object');
+        }
+
+        var result = [], prop, i;
+        for (prop in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+            result.push(prop);
+          }
+        }
+
+        if (hasDontEnumBug) {
+          for (i = 0; i < dontEnums.length; i++) {
+            if (Object.prototype.hasOwnProperty.call(obj, dontEnums[i])) {
+              result.push(dontEnums[i]);
+            }
+          }
+        }
+        return result;
+      };
+    }
   }-*/;
 
   /**

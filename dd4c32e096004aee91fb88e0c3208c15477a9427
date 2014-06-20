@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "242541ef_ca078335",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_2a261fde",
+        "filename": "user/src/com/google/gwt/core/client/js/JsArray.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_0a2b5ba4",
+        "filename": "user/src/com/google/gwt/core/client/js/JsMapLike.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_6a30170d",
+        "filename": "user/src/com/google/gwt/core/client/js/JsMutableArrayLike.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_4a3553fb",
+        "filename": "user/src/com/google/gwt/core/client/js/impl/JsArrayLikeIterableAdapter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_aa196f93",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.File\u0027 import.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_8a162b61",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Name \u0027__equalsString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_ea2367c5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsJsniTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.js.Js.js\u0027 import.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_ca2023bc",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsJsniTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_2a4f3f7e",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsJsniTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_0a54fb0c",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsJsniTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_6a493775",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsJsniTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-06-20T05:21:17Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dd4c32e096004aee91fb88e0c3208c15477a9427",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

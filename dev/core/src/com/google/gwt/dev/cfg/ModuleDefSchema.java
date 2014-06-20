@@ -852,6 +852,14 @@ public class ModuleDefSchema extends Schema {
             excludeList, skipList, defaultExcludes, caseSensitive);
       } else {
         /*
+         * Always exclude any super packages, since this would not be a valid java package anyway.
+         */
+        String[] newArray = new String[excludeList.length + 1];
+        System.arraycopy(excludeList, 0, newArray, 0, excludeList.length);
+        newArray[excludeList.length] = "**/super/**/*";
+        excludeList = newArray;
+
+        /*
          * Add the full package path to the include/exclude/skip lists since the
          * logical name of classes on the source path includes the package path
          * but the include, exclude, and skip lists do not.

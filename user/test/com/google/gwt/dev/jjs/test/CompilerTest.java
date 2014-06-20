@@ -1023,7 +1023,7 @@ public class CompilerTest extends GWTTestCase {
     class Foo {
       public Foo(int j) {
         assertEquals(1, j);
-      };
+      }
     }
     final int i;
     new Foo(i = 1) {

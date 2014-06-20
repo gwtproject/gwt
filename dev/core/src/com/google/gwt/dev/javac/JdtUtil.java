@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -83,25 +84,36 @@ public final class JdtUtil {
    */
   public static String formatMethodSignature(MethodBinding methodBinding) {
     ReferenceBinding declaringClassBinding = methodBinding.declaringClass;
-    StringBuilder methodNameWithSignature = new StringBuilder();
     String methodName = String.valueOf(methodBinding.selector);
-    List<TypeBinding> parameterTypeBindings = Lists.newArrayList();
-    if (methodName.equals("<init>")) {
+    final List<TypeBinding> parameterTypeBindings = Lists.newArrayList();
+    final Function<SyntheticArgumentBinding, Void> addSyntheticParameterSignatureFunction =
+        new Function<SyntheticArgumentBinding, Void>() {
+          @Override
+          public Void apply(SyntheticArgumentBinding arg) {
+            parameterTypeBindings.add(arg.type);
+            return null;
+          }
+        };
+
+    final boolean isConstructor = methodName.equals("<init>");
+    if (isConstructor) {
       // It is a constructor.
       // (1) use the JSNI methodName instead of <init>.
       methodName = "new";
       // (2) add the implicit constructor parameters types for non static inner classes.
-      if (isInnerClass(declaringClassBinding)) {
-        NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClassBinding;
-        if (nestedBinding.enclosingInstances != null) {
-          for (SyntheticArgumentBinding argumentBinding : nestedBinding.enclosingInstances) {
-            parameterTypeBindings.add(argumentBinding.type);
-          }
-        }
-      }
+      processEnclosingInstanceSyntheticArgumentBindings(declaringClassBinding,
+          addSyntheticParameterSignatureFunction);
     }
 
     parameterTypeBindings.addAll(Arrays.asList(methodBinding.parameters));
+
+    if (isConstructor) {
+      // (3) add the implicit constructor parameters types for closure-captured variables.
+      processCaptureVariableSyntheticArgumentBindings(declaringClassBinding,
+          addSyntheticParameterSignatureFunction);
+    }
+
+    StringBuilder methodNameWithSignature = new StringBuilder();
     methodNameWithSignature.append(methodName);
     methodNameWithSignature.append("(");
     for (TypeBinding parameterTypeBinding : parameterTypeBindings) {
@@ -241,6 +253,53 @@ public final class JdtUtil {
       return mb.sourceMethod();
     } catch (Exception e) {
       return null;
+    }
+  }
+
+  /**
+   * Applies {@code process} to each SyntheticArgumentBinding of a nested class.
+   */
+  public static void processSyntheticArgumentBindings(ReferenceBinding declaringClass,
+      Function<SyntheticArgumentBinding, Void> process) {
+    processEnclosingInstanceSyntheticArgumentBindings(declaringClass, process);
+    processCaptureVariableSyntheticArgumentBindings(declaringClass, process);
+  }
+
+  /**
+   * Applies {@code process} to each SyntheticArgumentBinding corresponding to a closure-captured
+   * variable of a nested class.
+   */
+  public static void processCaptureVariableSyntheticArgumentBindings(
+      ReferenceBinding declaringClass, Function<SyntheticArgumentBinding, Void> process) {
+    if (!isInnerClass(declaringClass)) {
+      return;
+    }
+
+    NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
+    if (nestedBinding.outerLocalVariables != null) {
+      // Add Synthetic arguments for captured locals.
+      for (SyntheticArgumentBinding arg : nestedBinding.outerLocalVariables) {
+        process.apply(arg);
+      }
+    }
+  }
+
+  /**
+   * Applies {@code process} to each SyntheticArgumentBinding corresponding to an enclosing instance
+   * of a nested class.
+   */
+  public static void processEnclosingInstanceSyntheticArgumentBindings(
+      ReferenceBinding declaringClass, Function<SyntheticArgumentBinding, Void> process) {
+    if (!isInnerClass(declaringClass)) {
+      return;
+    }
+
+    NestedTypeBinding nestedBinding = (NestedTypeBinding) declaringClass;
+    if (nestedBinding.enclosingInstances != null) {
+      // Add Synthetic arguments for outer classes.
+      for (SyntheticArgumentBinding arg : nestedBinding.enclosingInstances) {
+        process.apply(arg);
+      }
     }
   }
 }

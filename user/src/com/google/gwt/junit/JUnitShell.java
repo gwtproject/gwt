@@ -40,6 +40,7 @@ import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
+import com.google.gwt.dev.util.arg.ArgHandlerDisableAutoboxing;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
@@ -292,6 +293,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerJsInteropMode(options));
       registerHandler(new ArgHandlerSetProperties(options));
       registerHandler(new ArgHandlerClosureFormattedOutput(options));
+      registerHandler(new ArgHandlerDisableAutoboxing(options));
 
       /*
        * ----- Options specific to JUnitShell -----

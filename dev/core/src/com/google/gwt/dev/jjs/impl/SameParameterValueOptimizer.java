@@ -118,6 +118,7 @@ public class SameParameterValueOptimizer {
       }
     }
 
+
     @Override
     public boolean visit(JMethod x, Context ctx) {
       if (isNotOptimizable(x)) {
@@ -128,6 +129,8 @@ public class SameParameterValueOptimizer {
 
     private boolean isNotOptimizable(JMethod x) {
       return x.needsVtable() || x.canBeCalledExternally();
+          // Don't move parameters of methods on the Number subtypes which are boxed
+//          || program.canBeUnboxedType(x.getEnclosingType());
     }
 
     private boolean equalLiterals(JValueLiteral l1, JValueLiteral l2) {

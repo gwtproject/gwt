@@ -1,0 +1,174 @@
+// Generates project and module files for IntelliJ IDEA.
+// (The official GWT build is still ant for now.)
+//
+// Setup:
+//
+// Set GWT_TOOLS to svn/tools. Something like:
+//
+//   export GWT_TOOLS=...
+//
+// Generate the IDEA project and modules:
+//
+//   gradle idea
+//
+// Then open gwt.ipr in IDEA.
+//
+// You should be able to recompile everything in IDEA: "Make Project" and "Rebuild Project"
+// should work without errors. Then running the "Compile Hello" run configuration should succeed.
+//
+// Known issues:
+//
+// - "gradle build" does not work yet. (Problems running tests.)
+//
+// - If you have the Gradle plugin installed in IDEA, it may prompt you to create an
+//   IDEA project from the gradle build. You should decline because this doesn't work.
+
+allprojects {
+    apply plugin: 'idea'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    apply plugin: 'java'
+    // GWT supports Java 7 but the build tools are still Java 6 for now.
+    sourceCompatibility = 1.7
+}
+
+// Subprojects inherit the Groovy methods defined here.
+
+import org.gradle.api.XmlProvider
+import org.gradle.plugins.ide.idea.model.IdeaModule
+import org.gradle.plugins.ide.idea.model.IdeaModuleIml
+
+// Locates the svn/tools directory.
+def File findGwtTools() {
+    String tools = System.getenv("GWT_TOOLS");
+    if (tools == null) {
+        File f = new File("../tools").getAbsoluteFile();
+        if (!f.isDirectory()) {
+            throw new RuntimeException("Please define GWT_TOOLS");
+        }
+        return f;
+    }
+    File f= new File(tools);
+    if (!f.isDirectory()) {
+        String msg = "GWT_TOOLS not set to a directory: " + f.toString()
+        throw new RuntimeException(msg);
+    }
+    return f;
+}
+
+// Creates a path to a file in svn/tools.
+def toolJar(String path) {
+    File tools = findGwtTools();
+    File f = new File(tools, "lib/" + path);
+    if (!f.isFile()) {
+        throw new RuntimeException((String)"no such file: " + f.toString());
+    }
+    return files(f);
+}
+
+// Excludes some directories from the IDEA module's sources.
+// Params:
+//   module - the idea.module property
+//   searchDir - the root of the directory tree to search
+//   excludedDir - the name to exclude
+def excludeEachSubDir(IdeaModule module, String searchDir, String excludedDir) {
+    FileTree tree = fileTree(dir: searchDir)
+    tree.visit { f ->
+        if (f.name == excludedDir) {
+            module.excludeDirs << file(searchDir + '/' + f.relativePath)
+        }
+    }
+}
+
+// Adds source roots to an IDEA module.
+// Params:
+//   iml - the idea.module.iml property
+//   srcs - a list of URL's (typically beginning with "file://$MODULE_DIR$/".).
+def addSourcesToIdeaClasspath(IdeaModuleIml iml, List<String> srcs) {
+    iml.withXml {
+        provider ->
+            provider.node.component.find { it.@name == 'NewModuleRootManager' }.children().get(0).plus {
+                orderEntry(type: 'module-library', exported: true) {
+                    library {
+                        CLASSES {
+                            srcs.each {
+                                root(url: it)
+                            }
+                        }
+                    }
+                }
+            }
+    }
+}
+
+def addGwtFacetToIdea(IdeaModuleIml iml) {
+    iml.withXml {
+        provider ->
+            // Add a facet manager if none present
+            if (!provider.node.component.find { it.@name == 'FaceManager' }) {
+                provider.node.appendNode("component", ["name": "FacetManager"])
+            }
+            provider.node.component.find { it.@name == 'FacetManager' }.replaceNode {
+                component(name: 'FacetManager') {
+                    facet(type: 'gwt', name: "GWT") {
+                        configuration {
+                            setting(name: "compilerMaxHeapSize", value: 1024)
+                            setting(name: "gwtScriptOutputStyle", value: 'PRETTY')
+                            setting(name: "gwtSdkUrl", value: 'file://')
+                        }
+                    }
+                }
+            }
+    }
+}
+
+/// Creates a run configuration that runs the GWT Compiler on the given module.
+def addGwtCompilerRunner(XmlProvider provider, String menuName, String gwtModule, String ideaModule) {
+
+    provider.node.component.find { it.@name == 'RunManager' }.children().get(0).plus {
+        configuration(default: false, name: menuName, type: 'Application', factoryName: 'Application') {
+            extension(name: "coverage", enabled: false, merge: false, runner: "idea")
+            option(name: 'MAIN_CLASS_NAME', value: 'com.google.gwt.dev.Compiler')
+            option(name: 'VM_PARAMETERS', value: '')
+            option(name: 'PROGRAM_PARAMETERS', value: gwtModule)
+            option(name: 'WORKING_DIRECTORY', value: 'file://$PROJECT_DIR$/out/production/' + ideaModule)
+            option(name: 'ALTERNATIVE_JRE_PATH_ENABLED', value: false)
+            option(name: 'ALTERNATIVE_JRE_PATH', value: '')
+            option(name: 'ENABLE_SWING_INSPECTOR', value: false)
+            option(name: 'ENV_VARIABLES')
+            option(name: 'PASS_PARENT_ENVS', value: true)
+            module(name: ideaModule)
+            envs()
+            RunnerSettings(RunnerId: 'Run')
+            ConfigurationWrapper(RunnerId: 'Run')
+            method()
+        }
+        list(size: 1) {
+            item(index: 0, class: "java.lang.String", itemvalue: "Application." + menuName)
+        }
+    }
+}
+
+idea {
+   project {
+     languageLevel = '1.7'
+     ipr {
+       withXml { provider ->
+         provider.node.component
+             .find { it.@name == 'VcsDirectoryMappings' }
+             .mapping.@vcs = 'Git'
+         }
+       }
+     }
+
+    workspace {
+        iws.withXml {
+            provider ->
+                addGwtCompilerRunner(provider, "Compile Hello", "com.google.gwt.sample.hello.Hello", "hello")
+        }
+    }
+}

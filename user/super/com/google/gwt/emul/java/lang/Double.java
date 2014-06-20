@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>double</code> as an object.
  */
@@ -261,6 +263,7 @@ public final class Double extends Number implements Comparable<Double> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Double valueOf(double d) {
     return new Double(d);
   }
@@ -327,6 +330,7 @@ public final class Double extends Number implements Comparable<Double> {
     return isInfinite(value);
   }
 
+  @DoNotInline
   public boolean isNaN() {
     return isNaN(value);
   }
@@ -345,4 +349,82 @@ public final class Double extends Number implements Comparable<Double> {
   public String toString() {
     return toString(value);
   }
+
+  public static native Double $createDouble(double d) /*-{
+    return d;
+  }-*/;
+
+  public static Double $createDouble(String s) {
+    return $createDouble(parseDouble(s));
+  }
+
+  public static byte $byteValue(Number n) {
+    return (byte) $intValue(n);
+  }
+
+  public static native int $compareTo(Object b) /*-{
+    return @Double::compare(*)(this, b);
+  }-*/;
+
+  public static native double $doubleValue(Number n) /*-{
+    return n;
+  }-*/;
+
+  public static native boolean $equals(Number n, Object o) /*-{
+    return n === value;
+  }-*/;
+
+  public static native float $floatValue(Number n) /*-{
+    return this;
+  }-*/;
+
+  /**
+   * Performance caution: using Double objects as map keys is not recommended.
+   * Using double values as keys is generally a bad idea due to difficulty
+   * determining exact equality. In addition, there is no efficient JavaScript
+   * equivalent of <code>doubleToIntBits</code>. As a result, this method
+   * computes a hash code by truncating the whole number portion of the double,
+   * which may lead to poor performance for certain value sets if Doubles are
+   * used as keys in a {@link java.util.HashMap}.
+   */
+  public static native int $hashCode(Number n) /*-{
+    // coerce to int
+    return n | 0;
+  }-*/;
+
+  public static native int $intValue(Number n) /*-{
+    return n;
+  }-*/;
+
+  public static boolean $isInfinite(Number n) {
+    return isInfinite($doubleValue(n));
+  }
+
+  public static boolean $isNaN(Number n) {
+    return isNaN($doubleValue(n));
+  }
+
+  public static long $longValue(Number n) {
+    return (long) $doubleValue(n);
+  };
+
+  public static short $shortValue(Number n) {
+    return (short) $doubleValue(n);
+  }
+
+  public static String $toString(Number n) {
+    return toString($doubleValue(n));
+  }
+
+  public static Class $getClass(Number n) {
+    return Double.class;
+  }
+
+  public boolean booleanValue() {
+    return !isNaN(doubleValue());
+  }
+
+  public static native boolean $booleanValue(Number n) /*-{
+    return !!n;
+  }-*/;
 }

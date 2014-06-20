@@ -671,6 +671,16 @@ public class Pruner {
        * contained methods for later user.
        */
       traverseTypes(livenessAnalyzer, program.codeGenTypes);
+
+      if (program.isAutoboxingDisabled()) {
+        // We need to convert constructor calls of [BoxedType](String) to parse[BoxedType](String)
+        // after the parse methods may already have been removed because they were never directly
+        // invoked. These will be removed in the final code pruning pass.
+        AutoboxUtils autoboxUtils = new AutoboxUtils(program);
+        for (JMethod parseMethod : autoboxUtils.getParseMethods()) {
+          livenessAnalyzer.traverseFrom(parseMethod);
+        }
+      }
     }
     livenessAnalyzer.traverseEverything();
 

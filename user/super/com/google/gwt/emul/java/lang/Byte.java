@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps native <code>byte</code> as an object.
  */
@@ -63,6 +65,7 @@ public final class Byte extends Number implements Comparable<Byte> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Byte valueOf(byte b) {
     int rebase = b + 128;
     Byte result = BoxedValues.boxedValues[rebase];
@@ -138,5 +141,13 @@ public final class Byte extends Number implements Comparable<Byte> {
   @Override
   public String toString() {
     return toString(value);
+  }
+
+  public static native Byte $createByte(byte b) /*-{
+    return b;
+  }-*/;
+
+  public static Byte $createByte(String s) {
+    return $createByte(parseByte(s));
   }
 }

@@ -17,6 +17,8 @@ package java.lang;
 
 import java.io.Serializable;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps native <code>boolean</code> as an object.
  */
@@ -62,6 +64,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return String.valueOf(x);
   }
 
+  @DoNotInline
   public static Boolean valueOf(boolean b) {
     return b ? TRUE : FALSE;
   }
@@ -103,4 +106,11 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   public String toString() {
     return toString(value);
   }
-}
+
+  public static native Boolean $createBoolean(boolean b) /*-{
+    return b;
+  }-*/;
+
+  public static Boolean $createBoolean(String s) {
+    return $createBoolean(parseBoolean(s));
+  }}

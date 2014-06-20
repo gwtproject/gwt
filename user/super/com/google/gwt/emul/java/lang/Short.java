@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.DoNotInline;
+
 /**
  * Wraps a primitive <code>short</code> as an object.
  */
@@ -65,6 +67,7 @@ public final class Short extends Number implements Comparable<Short> {
     return String.valueOf(b);
   }
 
+  @DoNotInline
   public static Short valueOf(short s) {
     if (s > -129 && s < 128) {
       int rebase = s + 128;
@@ -143,5 +146,13 @@ public final class Short extends Number implements Comparable<Short> {
   @Override
   public String toString() {
     return toString(value);
+  }
+
+  public static native Short $createShort(short s) /*-{
+    return s;
+  }-*/;
+
+  public static Short $createShort(String s) {
+    return $createShort(parseShort(s));
   }
 }

@@ -74,6 +74,8 @@ import java.util.Map;
  */
 public class Devirtualizer {
 
+  private final AutoboxUtils autoboxUtils;
+
   /**
    * Rewrite any virtual dispatches to Object, Strings or JavaScriptObject such that
    * dispatch occurs statically for JSOs, strings and arrays. <br />
@@ -109,12 +111,13 @@ public class Devirtualizer {
       }
       JType instanceType = x.getInstance().getType().getUnderlyingType();
 
-      // If the instance can't possibly be a JSO, String or an interface implemented by String, do
-      // not devirtualize.
+      // If the instance can't possibly be a JSO, String, Number, or an interface implemented by
+      // String, do not devirtualize.
       if (instanceType != program.getTypeJavaLangObject()
           && !program.typeOracle.canBeJavaScriptObject(instanceType)
           // not a string
           && instanceType != program.getTypeJavaLangString()
+          && !(program.canBeUnboxedType(instanceType))
           // not an array
           && !(instanceType instanceof JArrayType)
           // not an interface of String, e.g. CharSequence or Comparable
@@ -204,6 +207,7 @@ public class Devirtualizer {
           || program.typeOracle.isDualJsoInterface(targetType)
           || targetType == program.getTypeJavaLangObject()
           || targetType == program.getTypeJavaLangString()
+          || program.canBeUnboxedType(targetType)
           || program.getTypeJavaLangString().getImplements().contains(targetType)) {
         return true;
       }
@@ -239,6 +243,11 @@ public class Devirtualizer {
    * Contains the Cast.isJavaString method.
    */
   private final JMethod isJavaStringMethod;
+
+  /**
+   * Contains the Cast.isJavaNumber method.
+   */
+  private final JMethod isJavaNumberMethod;
 
   /**
    * Contains the Cast.instanceofArray method.
@@ -298,6 +307,8 @@ public class Devirtualizer {
   private Devirtualizer(JProgram program) {
     this.program = program;
     this.isJavaStringMethod = program.getIndexedMethod("Cast.isJavaString");
+    this.isJavaNumberMethod = program.getIndexedMethod("Cast.isJavaNumber");
+
     this.hasJavaObjectVirtualDispatch =
         program.getIndexedMethod("Cast.hasJavaObjectVirtualDispatch");
     this.isJavaArray = program.getIndexedMethod("Cast.isJavaArray");
@@ -305,6 +316,7 @@ public class Devirtualizer {
     // However, for JSO's there is existing code that relies on nulls being okay.
     this.converter = new StaticCallConverter(program, false);
     staticImplCreator = new CreateStaticImplsVisitor(program);
+    this.autoboxUtils = new AutoboxUtils(program);
   }
 
   private void execImpl() {
@@ -391,6 +403,7 @@ public class Devirtualizer {
   private static final byte HAS_JAVA_VIRTUAL_DISPATCH = 0x02;
   private static final byte JAVA_ARRAY = 0x04;
   private static final byte JSO = 0x08;
+  private static final byte NUMBER = 0x10;
 
   /**
    * Create a conditional method to discriminate between static and virtual
@@ -417,10 +430,12 @@ public class Devirtualizer {
     JReferenceType enclosingType = method.getEnclosingType();
     if (enclosingType == program.getTypeJavaLangObject()) {
       // Object methods can be dispatched to all four possible classes.
-      possibleTargetTypes = STRING | HAS_JAVA_VIRTUAL_DISPATCH | JAVA_ARRAY | JSO;
+      possibleTargetTypes = STRING | HAS_JAVA_VIRTUAL_DISPATCH | JAVA_ARRAY | JSO | NUMBER;
     } else if (enclosingType == program.getTypeJavaLangString()) {
       // String is final and can not be extended.
       possibleTargetTypes |= STRING;
+    } else if (program.canBeUnboxedType(enclosingType)) {
+      possibleTargetTypes |= NUMBER;
     }
 
     if (program.typeOracle.isDualJsoInterface(enclosingType)) {
@@ -433,8 +448,13 @@ public class Devirtualizer {
     }
 
     if (program.getTypeJavaLangString().getImplements().contains(enclosingType)) {
-      // If it is an interface implemented by String.
+      // If it is an interface implemented by String or Number
       possibleTargetTypes |= (byte) (STRING | HAS_JAVA_VIRTUAL_DISPATCH);
+      // java.lang.Number doesn't implement Comparable, but all of it's primitive subtypes do
+      if (program.isAutoboxingDisabled()
+          && enclosingType.getName().equals(Comparable.class.getName())) {
+        possibleTargetTypes |= NUMBER;
+      }
     }
 
     /////////////////////////////////////////////////////////////////
@@ -447,6 +467,34 @@ public class Devirtualizer {
           method.getName() + " not overridden by String";
       dispatchToMethodByTargetType.put(STRING,
           staticImplCreator.getOrCreateStaticImpl(program, overridingMethod));
+    }
+    if (program.isAutoboxingDisabled() && (possibleTargetTypes & NUMBER) != 0) {
+      // find a matching method to devirtualize to
+      JMethod overridingMethod = null;
+      overridingMethod = findOverridingMethod(method, program.getTypeJavaLangDouble());
+      if (overridingMethod != null) {
+        if (!overridingMethod.getName().equals("$init")) {
+          // good, we've found an instance method on double, now let's map it to a static version
+          JMethod indexedMethod = program.getIndexedMethodOrNull(overridingMethod
+              .getEnclosingType().getSimpleName() + ".$" + overridingMethod.getName());
+          if (indexedMethod != null) {
+            dispatchToMethodByTargetType.put(NUMBER, indexedMethod);
+          }
+        }
+
+      }
+      // but this can fail for booleanValue(), so look in Boolean
+//      if (overridingMethod == null) {
+//        overridingMethod = findOverridingMethod(method, program.getTypeJavaLangBoolean());
+//      }
+      // or can fail for charValue(), so look in Character
+//      if (overridingMethod == null) {
+//        overridingMethod = findOverridingMethod(method, program.getTypeJavaLangCharacter());
+//      }
+      assert overridingMethod != null : method.getEnclosingType().getName() + "::" +
+          method.getName() + " not overridden by Double";
+//      dispatchToMethodByTargetType.put(NUMBER,
+//          staticImplCreator.getOrCreateStaticImpl(program, overridingMethod));
     }
     if ((possibleTargetTypes & JSO) != 0) {
       JMethod overridingMethod = findOverridingMethod(method,
@@ -486,6 +534,9 @@ public class Devirtualizer {
     } else if (dispatchToMethodByTargetType.get(STRING) != null) {
       // Methods from interfaces implemented by String end up in String.
       devirtualMethodEnclosingClass = program.getTypeJavaLangString();
+    } else if (dispatchToMethodByTargetType.get(NUMBER) != null) {
+      // Methods from interfaces implemented only by Number (or Boolean) end up in Double.
+      devirtualMethodEnclosingClass = program.getTypeJavaLangDouble();
     } else if (dispatchToMethodByTargetType.get(JSO) != null) {
       // This is an interface method implemented by a JSO, place in the JSO class.
       devirtualMethodEnclosingClass = (JClassType)
@@ -545,6 +596,13 @@ public class Devirtualizer {
         maybeCreateDispatch(dispatchToMethodByTargetType.get(STRING), devirtualMethod),
         dispatchExpression);
 
+    // Dispatch to regular number
+    if (program.isAutoboxingDisabled()) {
+      dispatchExpression = constructMinimalCondition(isJavaNumberMethod,
+          new JParameterRef(thisParam.getSourceInfo(), thisParam),
+          maybeCreateDispatch(dispatchToMethodByTargetType.get(NUMBER), devirtualMethod),
+          dispatchExpression);
+    }
     // return dispatchConditional;
     JReturnStatement returnStatement = new JReturnStatement(sourceInfo, dispatchExpression);
 

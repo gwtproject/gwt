@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "242541ef_e14f0a44",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-20T19:46:34Z",
+      "side": 1,
+      "message": "nit: perhaps you can consider polyfilling this as well in a separate patch so we could get rid of ugly \"F\" shows up in prototype chains.",
+      "revId": "4dc8ea0455a5947c6a7f5129aba7ecb822e4b4c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_817a8e92",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-20T19:46:34Z",
+      "side": 1,
+      "message": "nit: Implementation is similar to:",
+      "range": {
+        "startLine": 211,
+        "startChar": 7,
+        "endLine": 211,
+        "endChar": 16
+      },
+      "revId": "4dc8ea0455a5947c6a7f5129aba7ecb822e4b4c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_4159b634",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-20T19:46:34Z",
+      "side": 1,
+      "message": "Can you comment on each polyfil that they needed for IE8 only?",
+      "revId": "4dc8ea0455a5947c6a7f5129aba7ecb822e4b4c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "242541ef_e1e8aaca",
+        "filename": "user/test/com/google/gwt/core/client/ObjectKeysPolyfillTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-20T19:46:34Z",
+      "side": 1,
+      "message": "Can you move this CompilerSuite?",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "4dc8ea0455a5947c6a7f5129aba7ecb822e4b4c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

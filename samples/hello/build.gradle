@@ -1,0 +1,19 @@
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+dependencies {
+    compile project(":user")
+}
+
+idea {
+    module {
+        addSourcesToIdeaClasspath(iml, ['file://$MODULE_DIR$/../src'])
+    }
+}

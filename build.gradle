@@ -1,0 +1,92 @@
+sourceCompatibility = 1.7
+version = '1.0'
+
+allprojects {
+    version = '1.0'
+    apply plugin: 'idea'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    apply plugin: 'java'
+}
+
+def addSourcesToIdeaClasspath(iml, srcs) {
+    iml.withXml {
+        provider ->
+            provider.node.component.find { it.@name == 'NewModuleRootManager' }.children().get(0).plus {
+                orderEntry(type: 'module-library', exported: true) {
+                    library {
+                        CLASSES {
+                            srcs.each {
+                                root(url: it)
+                            }
+                        }
+                    }
+                }
+            }
+    }
+}
+
+def addGwtFacetToIdea(iml) {
+    iml.withXml {
+        provider ->
+            // Add a facet manager if none present
+            if (!provider.node.component.find { it.@name == 'FaceManager' }) {
+                provider.node.appendNode("component", ["name": "FacetManager"])
+            }
+            provider.node.component.find { it.@name == 'FacetManager' }.replaceNode {
+                component(name: 'FacetManager') {
+                    facet(type: 'gwt', name: "GWT") {
+                        configuration {
+                            setting(name: "compilerMaxHeapSize", value: 1024)
+                            setting(name: "gwtScriptOutputStyle", value: 'PRETTY')
+                            setting(name: "gwtSdkUrl", value: 'file://')
+                        }
+                    }
+                }
+            }
+    }
+}
+
+def localJar(path) {
+    return files("${System.env.GWT_TOOLS}/lib/" + path)
+}
+
+def addIdeaRunTarget(provider, appName, gwtModule, ideaProject) {
+    print "Hello"
+    provider.node.component.find { it.@name == 'RunManager' }.children().get(0).plus {
+        configuration(default: false, name: appName, type: 'Application', factoryName: 'Application') {
+            extension(name: "coverage", enabled: false, merge: false, runner: "idea")
+            option(name: 'MAIN_CLASS_NAME', value: 'com.google.gwt.dev.Compiler')
+            option(name: 'VM_PARAMETERS', value: '')
+            option(name: 'PROGRAM_PARAMETERS', value: gwtModule)
+            option(name: 'WORKING_DIRECTORY', value: 'file://$PROJECT_DIR$/out/production/' + ideaProject)
+            option(name: 'ALTERNATIVE_JRE_PATH_ENABLED', value: false)
+            option(name: 'ALTERNATIVE_JRE_PATH', value: '')
+            option(name: 'ENABLE_SWING_INSPECTOR', value: false)
+            option(name: 'ENV_VARIABLES')
+            option(name: 'PASS_PARENT_ENVS', value: true)
+            module(name: ideaProject)
+            envs()
+            RunnerSettings(RunnerId: 'Run')
+            ConfigurationWrapper(RunnerId: 'Run')
+            method()
+        }
+        list(size: 1) {
+            item(index: 0, class: "java.lang.String", itemvalue: "Application." + appName)
+        }
+    }
+}
+
+idea {
+    workspace {
+        iws.withXml {
+            provider ->
+                addIdeaRunTarget(provider, "Hello", "com.google.gwt.sample.hello.Hello", "hello")
+                addIdeaRunTarget(provider, "Mail", "com.google.gwt.sample.mail.Mail", "mail")
+        }
+    }
+}

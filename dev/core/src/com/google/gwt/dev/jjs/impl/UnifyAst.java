@@ -844,6 +844,7 @@ public class UnifyAst {
      */
     // String literals.
     instantiate(program.getTypeJavaLangString());
+
     // ControlFlowAnalyzer.rescueByConcat().
     flowInto(program.getIndexedMethod("Object.toString"));
     mapApi(program.getTypeJavaLangString());

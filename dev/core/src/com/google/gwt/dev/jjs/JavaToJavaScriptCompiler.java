@@ -102,6 +102,7 @@ import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
 import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
+import com.google.gwt.dev.jjs.impl.RewriteBooleanAndDoubleBoxedInstantiations;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
 import com.google.gwt.dev.jjs.impl.ReplaceDefenderMethodReferences;
@@ -348,6 +349,7 @@ public final class JavaToJavaScriptCompiler {
       // Replace compile time constants by their values.
       // TODO(rluble): eventually move to normizeSemantics.
       CompileTimeConstantsReplacer.exec(jprogram);
+      RewriteBooleanAndDoubleBoxedInstantiations.exec(jprogram);
 
       // TODO(stalcup): move to after normalize.
       // (3) Optimize the resolved Java AST

@@ -707,7 +707,7 @@ public class JsStaticEval {
     return expr;
   }
 
-  private static JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
+  private JsExpression simplifyEqAndRefEq(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 
@@ -749,7 +749,7 @@ public class JsStaticEval {
     return original;
   }
 
-  private static  JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
+  private static JsExpression simplifyNeAndRefNe(JsBinaryOperation expr) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
 

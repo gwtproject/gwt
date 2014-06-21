@@ -24,16 +24,14 @@ import java.util.Properties;
  */
 public class About {
   /**
-   * Tag used for text replacement of the SVN version (split up to avoid
-   * replacing it here).
+   * Tag used for text replacement of the GIT version.
    */
-  private static final String GWT_GITREV_TAG = "@GWT_" + "GITREV@";
+  private static final String GWT_GITREV_TAG = "@GWT_GITREV@";
 
   /**
-   * Tag used for text replacement of the GWT version (split up to avoid
-   * replacing it here).
+   * Tag used for text replacement of the GWT version.
    */
-  private static final String GWT_VERSION_TAG = "@GWT_" + "VERSION@";
+  private static final String GWT_VERSION_TAG = "@GWT_VERSION@";
 
   private static final String gwtName = "Google Web Toolkit";
   private static final String gwtGitRev;

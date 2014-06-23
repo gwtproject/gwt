@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44d5d5fe_0085c6f5",
+        "filename": "eclipse/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-23T08:55:57Z",
+      "side": 1,
+      "message": "Can you change the comment to \"class output path configured in .classpath\"? \n\nWith your note above it would look strange to have comments about specific IDEs in the file.",
+      "revId": "3df2e83a179176d3b1cb0f25635c064509dfc4db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -38,24 +38,9 @@ class InternalJsStringMap<V> {
     }-*/;
 
     @Override
-    public native V get(String key) /*-{
-      return this.@InternalJsStringMap::backingMap[key];
-    }-*/;
-
-    @Override
-    public native void set(String key, V value) /*-{
-      this.@InternalJsStringMap::backingMap[key] = value;
-    }-*/;
-
-    @Override
-    public native void remove(String key) /*-{
-      delete this.@InternalJsStringMap::backingMap[key];
-    }-*/;
-
-    @Override
-    public native boolean contains(String key) /*-{
-      return key in this.@InternalJsStringMap::backingMap;
-    }-*/;
+    String normalize(String key) {
+      return key;
+    }
 
     @Override
     public native boolean containsValue(Object value, AbstractHashMap<?, ?> host) /*-{
@@ -78,25 +63,59 @@ class InternalJsStringMap<V> {
   }
 
   private final JavaScriptObject backingMap = createMap();
+  private int size;
 
   native JavaScriptObject createMap() /*-{
     return {};
   }-*/;
 
-  public native V get(String key) /*-{
-    return this.@InternalJsStringMap::backingMap[':' + key];
+  String normalize(String key) {
+    return ':' + key;
+  }
+
+  public final boolean contains(String key) {
+    return !isUndefined(get(key));
+  }
+
+  public final V get(String key) {
+    return at(normalize(key));
+  }
+
+  public final V put(String key, V value) {
+    key = normalize(key);
+
+    V oldValue = get(key);
+    if (isUndefined(oldValue)) {
+      size++;
+    }
+
+    set(key, toNullIfUndefined(value));
+
+    return oldValue;
+  }
+
+  public final V remove(String key) {
+    key = normalize(key);
+
+    V value = at(key);
+    if (!isUndefined(value)) {
+      delete(key);
+      --size;
+    }
+
+    return value;
+  }
+
+  private native V at(String key) /*-{
+    return this.@InternalJsStringMap::backingMap[key];
   }-*/;
 
-  public native void set(String key, V value) /*-{
-    this.@InternalJsStringMap::backingMap[':' + key] = value;
+  private native void set(String key, V value) /*-{
+    return this.@InternalJsStringMap::backingMap[key] = value;
   }-*/;
 
-  public native void remove(String key) /*-{
-    delete this.@InternalJsStringMap::backingMap[':' + key];
-  }-*/;
-
-  public native boolean contains(String key) /*-{
-    return (':' + key) in this.@InternalJsStringMap::backingMap;
+  private native void delete(String key) /*-{
+    delete this.@InternalJsStringMap::backingMap[key];
   }-*/;
 
   public native boolean containsValue(Object value, AbstractHashMap<?, ?> host) /*-{
@@ -121,5 +140,17 @@ class InternalJsStringMap<V> {
         dest.@Collection::add(Ljava/lang/Object;)(entry);
       }
     }
+  }-*/;
+
+  public int size() {
+    return size;
+  }
+
+  private static <T> T toNullIfUndefined(T value) {
+    return isUndefined(value) ? null : value;
+  }
+
+  private static native boolean isUndefined(Object value) /*-{
+    return value == undefined;
   }-*/;
 }

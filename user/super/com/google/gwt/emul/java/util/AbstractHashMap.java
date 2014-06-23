@@ -206,7 +206,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   @Override
   public int size() {
-    return size;
+    return size + stringMap.size();
   }
 
   /**
@@ -323,18 +323,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * key did not exist.
    */
   protected V putStringValue(String key, V value) {
-    if (key == null) {
-      return putHashValue(null, value);
-    }
-
-    V oldValue = null;
-    if (stringMap.contains(key)) {
-      oldValue = stringMap.get(key);
-    } else {
-      ++size;
-    }
-    stringMap.set(key, value);
-    return oldValue;
+    return key == null ? putHashValue(null, value) : stringMap.put(key, value);
   }
 
   /**
@@ -353,16 +342,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * exist.
    */
   protected V removeStringValue(String key) {
-    if (key == null) {
+    if (key != null)
+      return stringMap.remove(key);
+    else {
       return removeHashValue(null);
     }
-
-    V value = null;
-    if (stringMap.contains(key)) {
-      value = stringMap.get(key);
-      --size;
-      stringMap.remove(key);
-    }
-    return value;
   }
 }

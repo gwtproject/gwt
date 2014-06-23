@@ -16,6 +16,24 @@
       "revId": "3df2e83a179176d3b1cb0f25635c064509dfc4db",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c413859f_a7e9a491",
+        "filename": "eclipse/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-06-23T09:15:46Z",
+      "side": 1,
+      "message": "Done.\n\nAlso added a note above about the .project and .classpath which are not actually \"Eclipse specific\" but can be used in other IDEs too.",
+      "parentUuid": "44d5d5fe_0085c6f5",
+      "revId": "3df2e83a179176d3b1cb0f25635c064509dfc4db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,7 +16,6 @@
 package com.google.gwt.user.rebind.rpc;
 
 import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JArrayType;
@@ -34,6 +33,7 @@ import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.user.client.rpc.GwtTransient;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.rebind.rpc.ProblemReport.Priority;
+import com.google.gwt.user.rebind.rpc.Shared.SerializeFinalFieldsOptions;
 import com.google.gwt.user.rebind.rpc.TypeParameterExposureComputer.TypeParameterFlowInfo;
 import com.google.gwt.user.rebind.rpc.TypePaths.TypePath;
 
@@ -569,8 +569,9 @@ public class SerializableTypeOracleBuilder {
    * considering its type.
    */
   static boolean shouldConsiderForSerialization(TreeLogger logger,
-      boolean suppressNonStaticFinalFieldWarnings, JField field) {
-    if (field.isStatic() || field.isTransient()) {
+      GeneratorContext context, JField field) {
+    if (field.isStatic() || field.isTransient() ||
+        field.isAnnotationPresent(GwtTransient.class)) {
       return false;
     }
 
@@ -579,22 +580,37 @@ public class SerializableTypeOracleBuilder {
     }
 
     if (field.isFinal()) {
-      TreeLogger.Type logLevel;
-      if (isManuallySerializable(field.getEnclosingType())) {
-        /*
-         * If the type has a custom serializer, assume the programmer knows
-         * best.
-         */
-        logLevel = TreeLogger.DEBUG;
-      } else {
-        logLevel = TreeLogger.WARN;
+      SerializeFinalFieldsOptions doFinal = Shared.shouldSerializeFinalFields(logger, context);
+      if (doFinal != SerializeFinalFieldsOptions.TRUE) {
+        conditionallyWarnUser(logger, context, field, doFinal);
+        return false;
       }
-      logger.branch(suppressNonStaticFinalFieldWarnings ? TreeLogger.DEBUG : logLevel, "Field '"
-          + field.toString() + "' will not be serialized because it is final", null);
-      return false;
     }
-
     return true;
+  }
+
+  private static void conditionallyWarnUser(TreeLogger logger, GeneratorContext context,
+      JField field, SerializeFinalFieldsOptions doFinal) {
+    // the new setting is checked first (defaults to false)
+    if (doFinal == SerializeFinalFieldsOptions.FALSE_NOWARN) {
+      return;
+    } else if (doFinal == SerializeFinalFieldsOptions.AUDIT) {
+      logger.branch(TreeLogger.ERROR, "Field '" + field.toString() + "' will be serialized"
+          + " when rpc.serialFinalizeFields = true");
+      return;
+    }
+    TreeLogger.Type logLevel;
+    if (Shared.shouldSuppressNonStaticFinalFieldWarnings(logger, context)) {
+      // respect the legacy gwt.suppressNonStaticFinalFieldWarnings flag
+      logLevel = TreeLogger.DEBUG;
+    } else if (isManuallySerializable(field.getEnclosingType())) {
+      // If the type has a custom serializer, assume the programmer knows best.
+      logLevel = TreeLogger.DEBUG;
+    } else {
+      logLevel = TreeLogger.WARN;
+    }
+    logger.branch(logLevel, "Field '" + field.toString()
+        + "' will not be serialized because it is final", null);
   }
 
   private static boolean directlyImplementsMarkerInterface(JClassType type) {
@@ -709,19 +725,12 @@ public class SerializableTypeOracleBuilder {
 
   private final Map<JClassType, TreeLogger> rootTypes = new LinkedHashMap<JClassType, TreeLogger>();
 
-  /**
-   * If <code>true</code> we will not warn if a serializable type contains a
-   * non-static final field. We warn because these fields are not serialized.
-   */
-  private final boolean suppressNonStaticFinalFieldWarnings;
-
   private final TypeConstrainer typeConstrainer;
   private TypeFilter typeFilter = DEFAULT_TYPE_FILTER;
 
   private final TypeOracle typeOracle;
 
-  private final TypeParameterExposureComputer typeParameterExposureComputer =
-      new TypeParameterExposureComputer(typeFilter);
+  private final TypeParameterExposureComputer typeParameterExposureComputer;
 
   /**
    * The set of type parameters that appear in one of the root types.
@@ -741,16 +750,16 @@ public class SerializableTypeOracleBuilder {
    * Constructs a builder.
    *
    * @param logger
-   * @param propertyOracle
    * @param context
    *
    * @throws UnableToCompleteException if we fail to find one of our special
    *           types
    */
-  public SerializableTypeOracleBuilder(TreeLogger logger, PropertyOracle propertyOracle,
-      GeneratorContext context) throws UnableToCompleteException {
+  public SerializableTypeOracleBuilder(TreeLogger logger, GeneratorContext context)
+      throws UnableToCompleteException {
     this.context = context;
     this.typeOracle = context.getTypeOracle();
+    this.typeParameterExposureComputer = new TypeParameterExposureComputer(context, typeFilter);
     typeConstrainer = new TypeConstrainer(typeOracle);
 
     try {
@@ -761,9 +770,7 @@ public class SerializableTypeOracleBuilder {
       throw new UnableToCompleteException();
     }
 
-    suppressNonStaticFinalFieldWarnings =
-        Shared.shouldSuppressNonStaticFinalFieldWarnings(logger, propertyOracle);
-    enhancedClasses = Shared.getEnhancedTypes(propertyOracle);
+    enhancedClasses = Shared.getEnhancedTypes(context.getPropertyOracle());
   }
 
   public void addRootType(TreeLogger logger, JType type) {
@@ -1132,7 +1139,7 @@ public class SerializableTypeOracleBuilder {
               + "' that qualify for serialization", null);
 
       for (JField field : fields) {
-        if (!shouldConsiderForSerialization(localLogger, suppressNonStaticFinalFieldWarnings, field)) {
+        if (!shouldConsiderForSerialization(localLogger, context, field)) {
           continue;
         }
 

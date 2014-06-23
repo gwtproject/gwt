@@ -17,6 +17,7 @@ package com.google.gwt.user.rebind.rpc;
 
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.StubGeneratorContext;
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JArrayType;
@@ -76,9 +77,15 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
    */
   static class MockContext extends StubGeneratorContext {
     private TypeOracle typeOracle;
+    private PropertyOracle propertyOracle;
 
     MockContext(TypeOracle typeOracle) {
       this.typeOracle = typeOracle;
+    }
+
+    MockContext(TypeOracle typeOracle, PropertyOracle propertyOracle) {
+      this.typeOracle = typeOracle;
+      this.propertyOracle = propertyOracle;
     }
 
     @Override
@@ -86,6 +93,11 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       return typeOracle;
     }
 
+    @Override
+    public PropertyOracle getPropertyOracle() {
+      return propertyOracle;
+    }
+    
     @Override
     public boolean isProdMode() {
       return true;
@@ -217,9 +229,9 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   private static SerializableTypeOracleBuilder createSerializableTypeOracleBuilder(
       TreeLogger logger, TypeOracle to) throws UnableToCompleteException {
     // Make an empty property oracle.
-    PropertyOracle props = new BindingProps(new BindingProperty[0], new String[0],
-        ConfigProps.EMPTY).toPropertyOracle();
-    return new SerializableTypeOracleBuilder(logger, props, new MockContext(to));
+    PropertyOracle propertyOracle =
+        new BindingProps(new BindingProperty[0], new String[0], ConfigProps.EMPTY).toPropertyOracle();
+    return new SerializableTypeOracleBuilder(logger, new MockContext(to, propertyOracle));
   }
 
   private static TypeInfo[] getActualTypeInfo(SerializableTypeOracle sto) {

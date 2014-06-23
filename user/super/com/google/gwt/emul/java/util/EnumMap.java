@@ -102,13 +102,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     }
 
     public V getValue() {
-      return values[key.ordinal()];
+      return getValue(key);
     }
 
     public V setValue(V value) {
-      V old = getValue();
-      values[key.ordinal()] = value;
-      return old;
+      return setValue(key, value);
     }
   }
 
@@ -155,7 +153,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   @Override
   public boolean containsValue(Object value) {
     for (K key : keySet) {
-      if (Objects.equals(value, values[key.ordinal()])) {
+      if (Objects.equals(value, getValue(key))) {
         return true;
       }
     }
@@ -169,18 +167,18 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
 
   @Override
   public V get(Object k) {
-    return keySet.contains(k) ? values[asOrdinal(k)] : null;
+    return keySet.contains(k) ? getValue(k) : null;
   }
 
   @Override
   public V put(K key, V value) {
     keySet.add(key);
-    return set(key.ordinal(), value);
+    return setValue(key, value);
   }
 
   @Override
   public V remove(Object key) {
-    return keySet.remove(key) ? set(asOrdinal(key), null) : null;
+    return keySet.remove(key) ? setValue(key, null) : null;
   }
 
   @Override
@@ -202,6 +200,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     return asKey(key).ordinal();
   }
 
+  private V getValue(Object k) {
+    return values[asOrdinal(k)];
+  }
+
   @SuppressWarnings("unchecked")
   private void init(Class<K> type) {
     keySet = EnumSet.noneOf(type);
@@ -213,7 +215,8 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     values = Array.clone(m.values);
   }
 
-  private V set(int ordinal, V value) {
+  private V setValue(Object key, V value) {
+    int ordinal = asOrdinal(key);
     V was = values[ordinal];
     values[ordinal] = value;
     return was;

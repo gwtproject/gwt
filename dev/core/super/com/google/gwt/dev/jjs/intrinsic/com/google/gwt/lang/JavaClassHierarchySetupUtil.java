@@ -117,7 +117,12 @@ public class JavaClassHierarchySetupUtil {
   }-*/;
 
   private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{
-    function F() {};
+    if (!!Object.create) {
+      return Object.create(obj);
+    }
+
+    // This is only needed for IE8
+    function F() {}
     F.prototype = obj || {};
     return new F();
   }-*/;

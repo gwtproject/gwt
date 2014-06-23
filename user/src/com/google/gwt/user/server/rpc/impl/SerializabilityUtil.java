@@ -173,14 +173,14 @@ public class SerializabilityUtil {
    * serialization. The returned list will be sorted into a canonical order to
    * ensure consistent answers.
    */
-  public static Field[] applyFieldSerializationPolicy(Class<?> clazz) {
+  public static Field[] applyFieldSerializationPolicy(SerializationPolicy policy, Class<?> clazz) {
     Field[] serializableFields;
     serializableFields = classSerializableFieldsCache.get(clazz);
     if (serializableFields == null) {
       ArrayList<Field> fieldList = new ArrayList<Field>();
       Field[] fields = clazz.getDeclaredFields();
       for (Field field : fields) {
-        if (fieldQualifiesForSerialization(field)) {
+        if (fieldQualifiesForSerialization(policy, field)) {
           fieldList.add(field);
         }
       }
@@ -474,14 +474,17 @@ public class SerializabilityUtil {
     return false;
   }
 
-  static boolean isNotStaticTransientOrFinal(Field field) {
-    /*
-     * Only serialize fields that are not static, transient (including
-     * @GwtTransient), or final.
-     */
+  static boolean isFinal(Field field) {
     int fieldModifiers = field.getModifiers();
-    return !Modifier.isStatic(fieldModifiers) && !Modifier.isTransient(fieldModifiers)
-        && !hasGwtTransientAnnotation(field) && !Modifier.isFinal(fieldModifiers);
+    return Modifier.isFinal(fieldModifiers);
+  }
+
+  static boolean isNotStaticTransientOrEnum(Field field) {
+    int fieldModifiers = field.getModifiers();
+    return !Modifier.isStatic(fieldModifiers)
+        && !Modifier.isTransient(fieldModifiers)
+        && !hasGwtTransientAnnotation(field)
+        && !field.getDeclaringClass().equals(Enum.class);
   }
 
   /**
@@ -586,7 +589,7 @@ public class SerializabilityUtil {
     return false;
   }
 
-  private static boolean fieldQualifiesForSerialization(Field field) {
+  private static boolean fieldQualifiesForSerialization(SerializationPolicy policy, Field field) {
     if (Throwable.class == field.getDeclaringClass()) {
       /**
        * Only serialize Throwable's detailMessage field; all others are ignored.
@@ -595,13 +598,14 @@ public class SerializabilityUtil {
        * necessitate a change to our JRE emulation's version of Throwable.
        */
       if ("detailMessage".equals(field.getName())) {
-        assert (isNotStaticTransientOrFinal(field));
+        assert (isNotStaticTransientOrEnum(field));
         return true;
       } else {
         return false;
       }
     } else {
-      return isNotStaticTransientOrFinal(field);
+      return isNotStaticTransientOrEnum(field)
+          && (!isFinal(field) || policy.shouldSerializeFinalFields());
     }
   }
 
@@ -904,7 +908,7 @@ public class SerializabilityUtil {
         crc.update(constant.name().getBytes(RPCServletUtils.CHARSET_UTF8));
       }
     } else if (!instanceType.isPrimitive()) {
-      Field[] fields = applyFieldSerializationPolicy(instanceType);
+      Field[] fields = applyFieldSerializationPolicy(policy, instanceType);
       Set<String> clientFieldNames = policy.getClientFieldNamesForEnhancedClass(instanceType);
       for (Field field : fields) {
         assert (field != null);

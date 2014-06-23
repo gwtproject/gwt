@@ -17,6 +17,7 @@ package com.google.gwt.user.rebind.rpc;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
+import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
@@ -32,6 +33,14 @@ import java.util.Locale;
 import java.util.Set;
 
 class Shared {
+
+  static enum SerializeFinalFieldsOptions { FALSE, FALSE_NOWARN, AUDIT, TRUE };
+
+  /**
+   * Property used to control whether final fields should be serialized
+   * in RPC.
+   */
+  private static final String RPC_PROP_SERIALIZE_FINAL_FIELDS = "rpc.serializeFinalFields";
 
   /**
    * Property used to control whether or not the RPC system will emit warnings
@@ -83,12 +92,27 @@ class Shared {
   }
 
   /**
+   * Returns <code>false</code>, <code>false_nowarn</code>,or <code>true</code> to indicate
+   * whether we should serialize final fields in rpc.
+   */
+  static SerializeFinalFieldsOptions shouldSerializeFinalFields(TreeLogger logger,
+      GeneratorContext context) {
+    String serializeFinalFieldsStringValue = getStringProperty(logger, context.getPropertyOracle(),
+        RPC_PROP_SERIALIZE_FINAL_FIELDS, "FALSE").toUpperCase();
+    try {
+      return SerializeFinalFieldsOptions.valueOf(serializeFinalFieldsStringValue);
+    } catch (IllegalArgumentException e) {
+      return SerializeFinalFieldsOptions.FALSE;
+    }
+  }
+
+  /**
    * Returns <code>true</code> if warnings should not be emitted for final
    * fields in serializable types.
    */
   static boolean shouldSuppressNonStaticFinalFieldWarnings(TreeLogger logger,
-      PropertyOracle propertyOracle) {
-    return getBooleanProperty(logger, propertyOracle,
+      GeneratorContext context) {
+    return getBooleanProperty(logger, context.getPropertyOracle(),
         RPC_PROP_SUPPRESS_NON_STATIC_FINAL_FIELD_WARNINGS, false);
   }
 
@@ -208,6 +232,15 @@ class Shared {
       return "String";
     } else {
       return "Object";
+    }
+  }
+  
+  private static String getStringProperty(TreeLogger logger,
+      PropertyOracle propertyOracle, String propertyName, String defaultValue) {
+    try {
+      return propertyOracle.getSelectionProperty(logger, propertyName).getCurrentValue();
+    } catch (BadPropertyValueException e) {
+      return defaultValue;
     }
   }
 }

@@ -44,6 +44,22 @@
   <set-configuration-property name="gwt.elideTypeNamesFromRPC" value="false" />
 
   <!--
+    Declare a property to determine whether final fields should be serialized.
+
+    false: Final fields will be skipped, and warnings generated.
+    false_nowarn: Final fields will be skipped, and no warnings generated.
+    audit: Final fields to be serialized will cause errors, so you can ensure that you
+      are not sending sensitive values over the wire.
+    true: Final fields will be serialized.
+  -->
+  <define-property name="rpc.serializeFinalFields" values="false,false_nowarn,audit,true" />
+  
+  <!--
+    Default value for rpc serialization on final fields.
+  -->
+  <set-property name="rpc.serializeFinalFields" value="false" />
+
+  <!--
       Contains regular expressions, optionally prefixed with '+' or '-'.
       Each type being considered for serialization is tested against the
       list of expressions in order, and if there is a match it is added to the

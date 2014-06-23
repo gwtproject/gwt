@@ -27,6 +27,9 @@ import com.google.gwt.user.client.rpc.EnumsTestWithTypeObfuscation;
 import com.google.gwt.user.client.rpc.ExceptionsTest;
 import com.google.gwt.user.client.rpc.FailedRequestTest;
 import com.google.gwt.user.client.rpc.FailingRequestBuilderTest;
+import com.google.gwt.user.client.rpc.FinalFieldsFalseNoWarnTest;
+import com.google.gwt.user.client.rpc.FinalFieldsFalseTest;
+import com.google.gwt.user.client.rpc.FinalFieldsTest;
 import com.google.gwt.user.client.rpc.InheritanceTest;
 import com.google.gwt.user.client.rpc.InheritanceTestWithTypeObfuscation;
 import com.google.gwt.user.client.rpc.ObjectGraphTest;
@@ -67,6 +70,9 @@ public class RPCSuite {
     // GWTTestCases
     suite.addTestSuite(ValueTypesTest.class);
     suite.addTestSuite(EnumsTest.class);
+    suite.addTestSuite(FinalFieldsTest.class);
+    suite.addTestSuite(FinalFieldsFalseTest.class);
+    suite.addTestSuite(FinalFieldsFalseNoWarnTest.class);
     suite.addTestSuite(InheritanceTest.class);
     suite.addTestSuite(CollectionsTest.class);
     suite.addTestSuite(CoreJavaTest.class);

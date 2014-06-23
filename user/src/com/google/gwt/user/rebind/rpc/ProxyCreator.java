@@ -62,6 +62,7 @@ import com.google.gwt.user.client.rpc.impl.RpcStatsContext;
 import com.google.gwt.user.linker.rpc.RpcLogArtifact;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.google.gwt.user.rebind.rpc.Shared.SerializeFinalFieldsOptions;
 import com.google.gwt.user.server.rpc.SerializationPolicyLoader;
 import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
 
@@ -288,10 +289,10 @@ public class ProxyCreator {
     String rpcLog = null;
     try {
       SerializableTypeOracleBuilder typesSentFromBrowserBuilder =
-          new SerializableTypeOracleBuilder(logger, propertyOracle, context);
+          new SerializableTypeOracleBuilder(logger, context);
       typesSentFromBrowserBuilder.setTypeFilter(blacklistTypeFilter);
       SerializableTypeOracleBuilder typesSentToBrowserBuilder =
-          new SerializableTypeOracleBuilder(logger, propertyOracle, context);
+          new SerializableTypeOracleBuilder(logger, context);
       typesSentToBrowserBuilder.setTypeFilter(blacklistTypeFilter);
 
       addRoots(logger, typeOracle, typesSentFromBrowserBuilder, typesSentToBrowserBuilder);
@@ -324,6 +325,10 @@ public class ProxyCreator {
           typesSentFromBrowser = typesSentFromBrowserBuilder.build(logger);
           typesSentToBrowser = typesSentToBrowserBuilder.build(logger);
         }
+      }
+
+      if (typesSentFromBrowserBuilder.shouldFailBuild || typesSentToBrowserBuilder.shouldFailBuild) {
+        throw new UnableToCompleteException();
       }
     } finally {
       event.end();
@@ -744,12 +749,17 @@ public class ProxyCreator {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       OutputStreamWriter osw =
           new OutputStreamWriter(baos, SerializationPolicyLoader.SERIALIZATION_POLICY_FILE_ENCODING);
-      TypeOracle oracle = ctx.getTypeOracle();
       PrintWriter pw = new PrintWriter(osw);
 
       JType[] serializableTypes =
           unionOfTypeArrays(serializationSto.getSerializableTypes(), deserializationSto
               .getSerializableTypes(), new JType[] {serviceIntf});
+
+      SerializeFinalFieldsOptions doFinal = Shared.shouldSerializeFinalFields(logger, ctx);
+      pw.print(SerializationPolicyLoader.FINAL_FIELDS_KEYWORD);
+      pw.print(", ");
+      pw.print(doFinal == SerializeFinalFieldsOptions.TRUE);
+      pw.print('\n');
 
       for (int i = 0; i < serializableTypes.length; ++i) {
         JType type = serializableTypes[i];
@@ -765,7 +775,7 @@ public class ProxyCreator {
          * Include the serialization signature to bump the RPC file name if
          * obfuscated identifiers are used.
          */
-        pw.print(", " + SerializationUtils.getSerializationSignature(oracle, type));
+        pw.print(", " + SerializationUtils.getSerializationSignature(ctx, type));
         pw.print('\n');
 
         /*

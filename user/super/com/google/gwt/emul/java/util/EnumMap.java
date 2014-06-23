@@ -102,13 +102,11 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     }
 
     public V getValue() {
-      return values[key.ordinal()];
+      return get(key);
     }
 
     public V setValue(V value) {
-      V old = getValue();
-      values[key.ordinal()] = value;
-      return old;
+      return set(key, value);
     }
   }
 
@@ -155,7 +153,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   @Override
   public boolean containsValue(Object value) {
     for (K key : keySet) {
-      if (Objects.equals(value, values[key.ordinal()])) {
+      if (Objects.equals(value, get(key))) {
         return true;
       }
     }
@@ -175,12 +173,12 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   @Override
   public V put(K key, V value) {
     keySet.add(key);
-    return set(key.ordinal(), value);
+    return set(key, value);
   }
 
   @Override
   public V remove(Object key) {
-    return keySet.remove(key) ? set(asOrdinal(key), null) : null;
+    return keySet.remove(key) ? set(key, null) : null;
   }
 
   @Override
@@ -213,7 +211,8 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     values = Array.clone(m.values);
   }
 
-  private V set(int ordinal, V value) {
+  private V set(Object key, V value) {
+    int ordinal = asOrdinal(key);
     V was = values[ordinal];
     values[ordinal] = value;
     return was;

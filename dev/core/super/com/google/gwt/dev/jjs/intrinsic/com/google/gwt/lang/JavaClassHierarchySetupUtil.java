@@ -54,6 +54,7 @@ public class JavaClassHierarchySetupUtil {
 
     var prototype = prototypesByTypeId[typeId];
     var clazz = maybeGetClassLiteralFromPlaceHolder(prototype);
+    var _;
     if (prototype && !clazz) {
       // not a placeholder entry setup by Class.setClassLiteral
       _ = prototype;
@@ -94,14 +95,14 @@ public class JavaClassHierarchySetupUtil {
 
       var prototype = prototypesByTypeId[typeId];
       var clazz = maybeGetClassLiteralFromPlaceHolder(prototype);
+    var _;
 
       if (prototype && !clazz) {
           // not a placeholder entry setup by Class.setClassLiteral
           _ = prototype;
       } else {
           var superPrototype = jsSuperClass && jsSuperClass.prototype || {};
-          _ = prototypesByTypeId[typeId] =  @com.google.gwt.lang.JavaClassHierarchySetupUtil::
-              portableObjCreate(Lcom/google/gwt/core/client/JavaScriptObject;)(superPrototype);
+          _ = prototypesByTypeId[typeId] =  Object.create(superPrototype);
           // Make polymorphic dispatch work in v8 for overridden methods.
           // TODO(dankurka): remove this once we have new style cast maps.
           _['__$objectId_' + typeId] = 1;
@@ -116,12 +117,6 @@ public class JavaClassHierarchySetupUtil {
       }
   }-*/;
 
-  private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{
-    function F() {};
-    F.prototype = obj || {};
-    return new F();
-  }-*/;
-
   /**
    * Create a subclass prototype.
    */
@@ -129,8 +124,7 @@ public class JavaClassHierarchySetupUtil {
     // Setup aliases for (horribly long) JSNI references.
     var prototypesByTypeId = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId;
     // end of alias definitions.
-    return @com.google.gwt.lang.JavaClassHierarchySetupUtil::
-        portableObjCreate(Lcom/google/gwt/core/client/JavaScriptObject;)(prototypesByTypeId[superTypeId]);
+    return Object.create(prototypesByTypeId[superTypeId]);
   }-*/;
 
   /**
@@ -237,6 +231,21 @@ public class JavaClassHierarchySetupUtil {
           }
         }
         return result;
+      };
+    }
+
+    // This is only needed for IE8
+    if (!Object.create) {
+      Object.create = function (proto, properties) {
+        function F() {}
+        F.prototype = proto || {};
+        var obj = new F();
+        if (properties != null) {
+          for (var key in Object.keys(properties)) {
+            obj[key] = properties[key];
+          }
+        }
+        return obj;
       };
     }
   }-*/;

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a7a9cf_fdaae7a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-24T18:19:04Z",
+      "side": 1,
+      "message": "is this meant to be disabled? remove or comment.",
+      "range": {
+        "startLine": 2618,
+        "startChar": 1,
+        "endLine": 2627,
+        "endChar": 7
+      },
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4a7a9cf_9d152312",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-24T18:19:04Z",
+      "side": 1,
+      "message": "Again botched merge.",
+      "range": {
+        "startLine": 2851,
+        "startChar": 1,
+        "endLine": 2860,
+        "endChar": 11
+      },
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4a7a9cf_1d8b535b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-24T18:19:04Z",
+      "side": 1,
+      "message": "Please be careful when you merge or copy files on top of the repo. Some changes in modernize browser  where lost.",
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

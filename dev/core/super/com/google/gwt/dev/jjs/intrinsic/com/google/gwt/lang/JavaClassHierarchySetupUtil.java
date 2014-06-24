@@ -191,10 +191,41 @@ public class JavaClassHierarchySetupUtil {
   /**
    * Create a function that invokes the specified method reference.
    */
-  public static native JavaScriptObject makeBridgeMethod(JavaScriptObject methodRef) /*-{
+  public static native JavaScriptObject makeBridgeMethod(
+      JavaScriptObject methodRef, boolean returnsLong, boolean[] longParams) /*-{
     return function() {
-      return methodRef.apply(this, arguments);
+      var args = [];
+      for (var i = 0; i < arguments.length; i++) {
+        var maybeCoerced = @JavaClassHierarchySetupUtil::maybeCoerceToLong(Ljava/lang/Object;Z)(arguments[i], longParams[i]);
+        args.push(maybeCoerced);
+      }
+      var result = methodRef.apply(this, args);
+      return returnsLong ? @JavaClassHierarchySetupUtil::maybeCoerceFromLong(Ljava/lang/Object;Z)(result, returnsLong) : result;
     };
+  }-*/;
+
+  public static native boolean trampolineBridgeMethod(Object o, Object bridgeRef,
+      Object nonbridgeRef) /*-{
+    return @com.google.gwt.lang.Cast::isJavaScriptObject(Ljava/lang/Object;)(o)
+        ? bridgeRef : nonbridgeRef;
+  }-*/;
+
+  private static native Object maybeCoerceToLong(Object o, boolean isLong) /*-{
+    if (!isLong) {
+      return o;
+    }
+    if (typeof(o) == 'number') {
+      return @com.google.gwt.lang.LongLib::fromDouble(D)(o);
+    }
+    return o;
+  }-*/;
+
+  private static native Object maybeCoerceFromLong(Object o, boolean isLong) /*-{
+      if (!isLong) {
+          return o;
+      }
+
+      return @com.google.gwt.lang.LongLib::toDouble(Lcom/google/gwt/lang/LongLibBase$LongEmul;)(o);
   }-*/;
 
   /**
@@ -202,42 +233,10 @@ public class JavaClassHierarchySetupUtil {
    */
   public static native void modernizeBrowser() /*-{
     // Patch up Array.isArray for browsers that don't support the fast native check.
-    // This is only needed for IE8
     if (!Array.isArray) {
         Array.isArray = function (vArg) {
           return Object.prototype.toString.call(vArg) === "[object Array]";
         };
-    }
-
-    // Implemented similar to:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-    // This is only needed for IE8
-    if (!Object.keys) {
-      var hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
-      dontEnums = ['constructor', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',
-          'toLocaleString', 'toString', 'valueOf'];
-
-      Object.keys = function(obj) {
-        if (obj === null || (typeof obj !== 'object' && typeof obj !== 'function')) {
-          throw new TypeError('Object.keys called on non-object');
-        }
-
-        var result = [], prop, i;
-        for (prop in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-            result.push(prop);
-          }
-        }
-
-        if (hasDontEnumBug) {
-          for (i = 0; i < dontEnums.length; i++) {
-            if (Object.prototype.hasOwnProperty.call(obj, dontEnums[i])) {
-              result.push(dontEnums[i]);
-            }
-          }
-        }
-        return result;
-      };
     }
   }-*/;
 

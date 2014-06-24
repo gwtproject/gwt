@@ -48,6 +48,24 @@
     },
     {
       "key": {
+        "uuid": "a46cd148_a6dee81f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-24T18:54:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46cd148_061c1c55",
+      "revId": "a54e1e043e090be8ece1712ffe9e98f4f75273b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a46cd148_462614ad",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 2
@@ -59,6 +77,24 @@
       "writtenOn": "2014-06-24T18:41:07Z",
       "side": 1,
       "message": "Add javadoc here.",
+      "revId": "a54e1e043e090be8ece1712ffe9e98f4f75273b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a46cd148_86e1ecea",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-24T18:54:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46cd148_462614ad",
       "revId": "a54e1e043e090be8ece1712ffe9e98f4f75273b5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

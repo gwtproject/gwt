@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a7a9cf_c6a4f8dc",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-24T21:27:35Z",
+      "side": 1,
+      "message": "Apologies; I was thinking that GeneratorContext was specific to the GWT-RPC generator but actually it\u0027s part of GWT\u0027s public API. One solution might be to create an RpcGeneratorContext class that wraps it, with an additional flag that says \"fail the compile later\". Then we can check this flag at the top level of the GWT-RPC generator after all the errors have been generated:\n\nRpcGeneratorContext {\n  final GeneratorContext context;\n  boolean buildWillFail \u003d false;\n\n  logFatalError(logger, errorMessage) {\n    // log the error\n    buildWillFail \u003d true;\n  }\n}\n\nIt might have some forwarding methods for convenience, but probably shouldn\u0027t actually implement the GeneratorContext interface.\n\nPerhaps someday the entire GWT-RPC generator could be migrated to use this class, but for now we could just pass it down where necessary.",
+      "range": {
+        "startLine": 598,
+        "startChar": 6,
+        "endLine": 598,
+        "endChar": 12
+      },
+      "revId": "6d1943701c17c41cb04daf5d9017ab8b3deca7aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

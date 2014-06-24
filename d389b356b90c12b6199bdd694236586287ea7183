@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "a46cd148_06c25c6d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-24T18:35:23Z",
+      "side": 1,
+      "message": "yes, deleteng it",
+      "parentUuid": "e4a7a9cf_fdaae7a7",
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4a7a9cf_9d152312",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "a46cd148_e6bc60f5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-24T18:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a7a9cf_9d152312",
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4a7a9cf_1d8b535b",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 1
@@ -59,6 +95,24 @@
       "writtenOn": "2014-06-24T18:19:04Z",
       "side": 1,
       "message": "Please be careful when you merge or copy files on top of the repo. Some changes in modernize browser  where lost.",
+      "revId": "d389b356b90c12b6199bdd694236586287ea7183",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a46cd148_c66684f7",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-06-24T18:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a7a9cf_1d8b535b",
       "revId": "d389b356b90c12b6199bdd694236586287ea7183",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -191,10 +191,41 @@ public class JavaClassHierarchySetupUtil {
   /**
    * Create a function that invokes the specified method reference.
    */
-  public static native JavaScriptObject makeBridgeMethod(JavaScriptObject methodRef) /*-{
+  public static native JavaScriptObject makeBridgeMethod(
+      JavaScriptObject methodRef, boolean returnsLong, boolean[] longParams) /*-{
     return function() {
-      return methodRef.apply(this, arguments);
+      var args = [];
+      for (var i = 0; i < arguments.length; i++) {
+        var maybeCoerced = @JavaClassHierarchySetupUtil::maybeCoerceToLong(Ljava/lang/Object;Z)(arguments[i], longParams[i]);
+        args.push(maybeCoerced);
+      }
+      var result = methodRef.apply(this, args);
+      return returnsLong ? @JavaClassHierarchySetupUtil::maybeCoerceFromLong(Ljava/lang/Object;Z)(result, returnsLong) : result;
     };
+  }-*/;
+
+  public static native boolean trampolineBridgeMethod(Object o, Object bridgeRef,
+      Object nonbridgeRef) /*-{
+    return @com.google.gwt.lang.Cast::isJavaScriptObject(Ljava/lang/Object;)(o)
+        ? bridgeRef : nonbridgeRef;
+  }-*/;
+
+  private static native Object maybeCoerceToLong(Object o, boolean isLong) /*-{
+    if (!isLong) {
+      return o;
+    }
+    if (typeof(o) == 'number') {
+      return @com.google.gwt.lang.LongLib::fromDouble(D)(o);
+    }
+    return o;
+  }-*/;
+
+  private static native Object maybeCoerceFromLong(Object o, boolean isLong) /*-{
+      if (!isLong) {
+          return o;
+      }
+
+      return @com.google.gwt.lang.LongLib::toDouble(Lcom/google/gwt/lang/LongLibBase$LongEmul;)(o);
   }-*/;
 
   /**

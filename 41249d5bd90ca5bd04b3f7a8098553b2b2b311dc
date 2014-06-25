@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24bf01e0_37f2b80a",
+        "filename": "user/test/com/google/gwt/dom/client/DOMImplTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-25T03:51:34Z",
+      "side": 1,
+      "message": "Can you write the tests under DocumentTest and via Document.getScrollLeft?",
+      "revId": "41249d5bd90ca5bd04b3f7a8098553b2b2b311dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24bf01e0_570e4c54",
+        "filename": "user/test/com/google/gwt/dom/client/DOMImplTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-25T03:51:34Z",
+      "side": 1,
+      "message": "Let\u0027s keep this like \u00275000\u0027, I just don\u0027t trust browsers under stress :)",
+      "revId": "41249d5bd90ca5bd04b3f7a8098553b2b2b311dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24bf01e0_1708d443",
+        "filename": "user/test/com/google/gwt/dom/client/DOMImplTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-25T03:51:34Z",
+      "side": 1,
+      "message": "nit: can you use extra empty lines just for grouping related code?",
+      "revId": "41249d5bd90ca5bd04b3f7a8098553b2b2b311dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

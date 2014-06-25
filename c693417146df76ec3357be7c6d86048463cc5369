@@ -56,6 +56,30 @@
       "revId": "c693417146df76ec3357be7c6d86048463cc5369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ca118f_9313dcbc",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-25T18:27:34Z",
+      "side": 1,
+      "message": "Anonymous functions are formatted different in each browser and this change ensures that we are generating a sample by this class.",
+      "parentUuid": "44ba35ef_1ee90dcd",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "c693417146df76ec3357be7c6d86048463cc5369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

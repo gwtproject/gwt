@@ -33,6 +33,29 @@
       "revId": "c693417146df76ec3357be7c6d86048463cc5369",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44ba35ef_1ee90dcd",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-25T17:08:43Z",
+      "side": 1,
+      "message": "I am not sure I follow why you need an extra anonymous function frame in the stack trace",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "c693417146df76ec3357be7c6d86048463cc5369",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

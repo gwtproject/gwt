@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6487392a_529b2a64",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-26T08:51:46Z",
+      "side": 1,
+      "message": "Why not just docMode \u003d\u003d 8 / 9 / 10 ?",
+      "range": {
+        "startLine": 45,
+        "startChar": 46,
+        "endLine": 45,
+        "endChar": 74
+      },
+      "revId": "42650f1e6c5b6dfd25179caf561d1648ce6cc630",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

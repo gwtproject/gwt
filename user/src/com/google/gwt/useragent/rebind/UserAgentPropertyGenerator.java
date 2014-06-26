@@ -40,10 +40,10 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
    */
   private enum UserAgent {
     safari("return (ua.indexOf('webkit') != -1);"),
-    ie10("return (ua.indexOf('msie') != -1 && ($doc.documentMode == 10));"),
-    ie9("return (ua.indexOf('msie') != -1 && ($doc.documentMode >= 9));"),
-    ie8("return (ua.indexOf('msie') != -1 && ($doc.documentMode >= 8));"),
-    gecko1_8("return (ua.indexOf('gecko') != -1);");
+    ie10("return (ua.indexOf('msie') != -1 && (docMode >= 10 && docMode < 11));"),
+    ie9("return (ua.indexOf('msie') != -1 && (docMode >= 9 && docMode < 11));"),
+    ie8("return (ua.indexOf('msie') != -1 && (docMode >= 8 && docMode < 11));"),
+    gecko1_8("return (ua.indexOf('gecko') != -1 || docMode >= 11);");
 
     private final String predicateBlock;
 
@@ -71,6 +71,7 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
 
     // write preamble
     body.println("var ua = navigator.userAgent.toLowerCase();");
+    body.println("var docMode = $doc.documentMode;");
 
     for (UserAgent userAgent : UserAgent.values()) {
       // write only selected user agents

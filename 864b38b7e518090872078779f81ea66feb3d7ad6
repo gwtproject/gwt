@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "840eedb3_cd1bdd44",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-26T16:46:56Z",
+      "side": 1,
+      "message": "Move this line close to the declaration of pendindLocals.",
+      "range": {
+        "startLine": 1528,
+        "startChar": 3,
+        "endLine": 1528,
+        "endChar": 21
+      },
+      "revId": "864b38b7e518090872078779f81ea66feb3d7ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "840eedb3_8dfcc58f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-26T16:46:56Z",
+      "side": 1,
+      "message": "I really don\u0027t like relying on naming assumptions to avoid clashes.\n\nUse findExisitingName to make sure the name does not clash with one declared in the same scope.",
+      "range": {
+        "startLine": 1533,
+        "startChar": 1,
+        "endLine": 1533,
+        "endChar": 72
+      },
+      "revId": "864b38b7e518090872078779f81ea66feb3d7ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

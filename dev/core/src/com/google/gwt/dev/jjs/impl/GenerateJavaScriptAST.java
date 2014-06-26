@@ -779,6 +779,8 @@ public class GenerateJavaScriptAST {
       arrayLength.setObfuscatable(false);
     }
 
+    private JsVars pendingLocals;
+
     @Override
     public void endVisit(JAbsentArrayDimension x, Context ctx) {
       throw new InternalCompilerException("Should not get here.");
@@ -1289,12 +1291,17 @@ public class GenerateJavaScriptAST {
         jsFunc.setTrace();
       }
 
+      if (!pendingLocals.isEmpty()) {
+        jsFunc.getBody().getStatements().add(0, pendingLocals);
+      }
+
       push(jsFunc);
       Integer entryIndex = entryMethodToIndex.get(x);
       if (entryIndex != null) {
         entryFunctions[entryIndex] = jsFunc;
       }
       currentMethod = null;
+      pendingLocals = null;
     }
 
     @Override
@@ -1483,36 +1490,50 @@ public class GenerateJavaScriptAST {
         JMethod method, JsInvocation jsInvocation,
         JsExpression unnecessaryQualifier, JsExpression result,
         JsName polyName) {
-      // _ = instance value
-      JsExpression tmp = createAssignment(globalTemp.makeRef(
-              x.getSourceInfo()), ((JsExpression) pop()));
+
+      JsName tempLocal = createTmpLocal();
+
+      // tempLocal = instance value
+      JsExpression tmp = createAssignment(tempLocal.makeRef(
+          x.getSourceInfo()), ((JsExpression) pop()));
       JsName trampMethName = indexedFunctions.get(
           "JavaClassHierarchySetupUtil.trampolineBridgeMethod").getName();
 
-      // _.jsBridgeMethRef
+      // tempLocal.jsBridgeMethRef
       JsName bridgejsName = polyName.getEnclosing().findExistingName(method.getName());
       JsNameRef bridgeRef = bridgejsName != null ? bridgejsName.makeRef(x.getSourceInfo())
           : new JsNameRef(x.getSourceInfo(), method.getName());
-      bridgeRef.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+      bridgeRef.setQualifier(tempLocal.makeRef(x.getSourceInfo()));
 
-      // _.javaMethRef
+      // tempLocal.javaMethRef
       JsNameRef javaMethRef = polyName.makeRef(x.getSourceInfo());
-      javaMethRef.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+      javaMethRef.setQualifier(tempLocal.makeRef(x.getSourceInfo()));
 
       JsInvocation callTramp = new JsInvocation(x.getSourceInfo(),
           trampMethName.makeRef(x.getSourceInfo()),
-          globalTemp.makeRef(x.getSourceInfo()),
+          tempLocal.makeRef(x.getSourceInfo()),
           bridgeRef,
           javaMethRef);
 
       JsNameRef bind = new JsNameRef(x.getSourceInfo(), "bind");
       JsInvocation callBind = new JsInvocation(x.getSourceInfo());
       callBind.setQualifier(bind);
-      callBind.getArguments().add(globalTemp.makeRef(x.getSourceInfo()));
-      // (_ = instance, tramp(_, _.bridgeRef, _.javaRef)).bind(_)
+      callBind.getArguments().add(tempLocal.makeRef(x.getSourceInfo()));
+      // (tempLocal = instance, tramp(tempLocal, tempLocal.bridgeRef, tempLocal.javaRef)).bind(tempLocal)
       bind.setQualifier(createCommaExpression(tmp, callTramp));
       jsInvocation.setQualifier(callBind);
       push(createCommaExpression(unnecessaryQualifier, result));
+    }
+
+    int tmpNumber = 0;
+
+    private JsName createTmpLocal() {
+      SourceInfo sourceInfo = currentMethod.getSourceInfo();
+      JsFunction func = methodBodyMap.get(currentMethod.getBody());
+      JsName tmpName = func.getScope().declareName("$tmp$" + tmpNumber);
+      JsVar var = new JsVar(sourceInfo, tmpName);
+      pendingLocals.add(var);
+      return tmpName;
     }
 
     private JsExpression dispatchAsHas(JMethodCall x, String has, JsExpression qualExpr) {
@@ -1905,6 +1926,7 @@ public class GenerateJavaScriptAST {
         return false;
       }
       currentMethod = x;
+      pendingLocals = new JsVars(x.getSourceInfo());
       return true;
     }
 

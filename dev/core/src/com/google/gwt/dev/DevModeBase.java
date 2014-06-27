@@ -37,9 +37,11 @@ import com.google.gwt.dev.ui.DevModeUI;
 import com.google.gwt.dev.ui.DoneCallback;
 import com.google.gwt.dev.ui.DoneEvent;
 import com.google.gwt.dev.util.BrowserInfo;
+import com.google.gwt.dev.util.arg.ArgHandlerDisableOldEmmaSupport;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableGeneratorResultCaching;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
+import com.google.gwt.dev.util.arg.OptionDisableOldEmmaSupport;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -459,7 +461,7 @@ public abstract class DevModeBase implements DoneCallback {
    */
   protected interface HostedModeBaseOptions extends PrecompileTaskOptions, OptionLogDir,
       OptionNoServer, OptionPort, OptionCodeServerPort, OptionStartupURLs, OptionRemoteUI,
-      OptionBindAddress {
+      OptionBindAddress, OptionDisableOldEmmaSupport {
   }
 
   /**
@@ -478,6 +480,7 @@ public abstract class DevModeBase implements DoneCallback {
     private String remoteUIClientId;
     private String remoteUIHost;
     private int remoteUIHostPort;
+    private boolean shouldDisableOldEmmaSupport;
     private final List<String> startupURLs = new ArrayList<String>();
 
     @Override
@@ -597,6 +600,16 @@ public abstract class DevModeBase implements DoneCallback {
     public boolean useRemoteUI() {
       return remoteUIHost != null;
     }
+
+    @Override
+    public void setDisableOldEmmaSupport(boolean enabled) {
+      this.shouldDisableOldEmmaSupport = enabled;
+    }
+
+    @Override
+    public boolean shouldDisableOldEmmaSupport() {
+      return shouldDisableOldEmmaSupport;
+    }
   }
 
   /**
@@ -701,6 +714,7 @@ public abstract class DevModeBase implements DoneCallback {
       registerHandler(new ArgHandlerBindAddress(options));
       registerHandler(new ArgHandlerCodeServerPort(options));
       registerHandler(new ArgHandlerRemoteUI(options));
+      registerHandler(new ArgHandlerDisableOldEmmaSupport(options));
     }
   }
 
@@ -885,7 +899,7 @@ public abstract class DevModeBase implements DoneCallback {
       CompilationState compilationState, ModuleDef moduleDef) throws UnableToCompleteException {
     ArtifactAcceptor artifactAcceptor = createArtifactAcceptor(logger, moduleDef);
     return new ShellModuleSpaceHost(logger, compilationState, moduleDef, options.getGenDir(),
-        artifactAcceptor, getRebindCache(moduleDef.getName()));
+        artifactAcceptor, getRebindCache(moduleDef.getName()), !options.shouldDisableOldEmmaSupport());
   }
 
   protected abstract void doShutDownServer();

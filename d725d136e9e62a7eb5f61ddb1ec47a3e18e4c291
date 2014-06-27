@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4f851d3_2c5ef2c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-06-27T16:13:23Z",
+      "side": 1,
+      "message": "Update the comment now that it is\n\n(tempLocal \u003d instance, tramp(...).bind(tempLocal))",
+      "range": {
+        "startLine": 1533,
+        "startChar": 6,
+        "endLine": 1533,
+        "endChar": 105
+      },
+      "revId": "d725d136e9e62a7eb5f61ddb1ec47a3e18e4c291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

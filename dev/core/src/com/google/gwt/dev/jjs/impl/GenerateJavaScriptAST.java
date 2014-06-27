@@ -540,6 +540,9 @@ public class GenerateJavaScriptAST {
     public boolean visit(JMethod x, Context ctx) {
       // my polymorphic name
       String name = x.getName();
+      if (x.getName().equals("plusDuration")) {
+        boolean xx = true;
+      }
       if (x.needsVtable()) {
         if (polymorphicNames.get(x) == null) {
           JsName polyName;
@@ -1531,8 +1534,9 @@ public class GenerateJavaScriptAST {
       callBind.setQualifier(bind);
       callBind.getArguments().add(tempLocal.makeRef(x.getSourceInfo()));
       // (tempLocal = instance, tramp(tempLocal, tempLocal.bridgeRef, tempLocal.javaRef)).bind(tempLocal)
-      bind.setQualifier(createCommaExpression(tmp, callTramp));
+      bind.setQualifier(callTramp);
       jsInvocation.setQualifier(callBind);
+      result = createCommaExpression(tmp, jsInvocation);
       push(createCommaExpression(unnecessaryQualifier, result));
     }
 
@@ -2262,26 +2266,15 @@ public class GenerateJavaScriptAST {
     private void setupGwtOnLoad(JsFunction[] entryFuncs, List<JsStatement> globalStmts) {
       /**
        * <pre>
-       * {MODULE_RuntimeRebindRegistrator}.register();
-       * {MODULE_PropertyProviderRegistrator}.register();
        * var $entry = Impl.registerEntry();
        * var gwtOnLoad = ModuleUtils.gwtOnLoad();
+       * {MODULE_RuntimeRebindRegistrator}.register();
+       * {MODULE_PropertyProviderRegistrator}.register();
        * ModuleUtils.addInitFunctions(init1, init2,...)
        * </pre>
        */
 
       final SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
-
-      // {MODULE_RuntimeRebindRegistrator}.register();
-      // {MODULE_PropertyProviderRegistrator}.register();
-      List<String> registerFnList = Lists.newArrayList();
-      mayAddProviderRegisterFn(registerFnList,
-          program.getRuntimeRebindRegistratorTypeSourceName());
-      mayAddProviderRegisterFn(registerFnList,
-          program.getPropertyProviderRegistratorTypeSourceName());
-      for (String registerFnName : registerFnList) {
-        globalStmts.add(constructInvocation(sourceInfo, registerFnName).makeStmt());
-      }
 
       // var $entry = ModuleUtils.registerEntry();
       JsStatement entryVars = constructFunctionCallStatement(
@@ -2295,6 +2288,16 @@ public class GenerateJavaScriptAST {
           indexedFunctions.get("ModuleUtils.gwtOnLoad").getName().makeRef(sourceInfo)));
       globalStmts.add(new JsVars(sourceInfo, varGwtOnLoad));
 
+      // {MODULE_RuntimeRebindRegistrator}.register();
+      // {MODULE_PropertyProviderRegistrator}.register();
+      List<String> registerFnList = Lists.newArrayList();
+      mayAddProviderRegisterFn(registerFnList,
+          program.getRuntimeRebindRegistratorTypeSourceName());
+      mayAddProviderRegisterFn(registerFnList,
+          program.getPropertyProviderRegistratorTypeSourceName());
+      for (String registerFnName : registerFnList) {
+        globalStmts.add(constructInvocation(sourceInfo, registerFnName).makeStmt());
+      }
 
       // ModuleUtils.addInitFunctions(init1, init2,...)
       List<JsExpression> arguments = Lists.transform(Arrays.asList(entryFuncs),

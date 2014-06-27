@@ -57,19 +57,22 @@ public class ShellModuleSpaceHost implements ModuleSpaceHost {
   private ModuleSpace space;
 
   private RebindCache rebindCache;
+  
+  private boolean isOldEmmaSupportEnabled;
 
   /**
    * @param module the module associated with the hosted module space
    */
   public ShellModuleSpaceHost(TreeLogger logger,
       CompilationState compilationState, ModuleDef module, File genDir,
-      ArtifactAcceptor artifactAcceptor, RebindCache rebindCache) {
+      ArtifactAcceptor artifactAcceptor, RebindCache rebindCache, boolean isOldEmmaSupportEnabled) {
     this.logger = logger;
     this.compilationState = compilationState;
     this.module = module;
     this.genDir = genDir;
     this.artifactAcceptor = artifactAcceptor;
     this.rebindCache = rebindCache;
+    this.isOldEmmaSupportEnabled = isOldEmmaSupportEnabled;
   }
 
   @Override
@@ -138,7 +141,7 @@ public class ShellModuleSpaceHost implements ModuleSpaceHost {
       // accidentally 'escaping' its domain and loading classes from the system
       // class loader (the one that loaded the shell itself).
       //
-      classLoader = new CompilingClassLoader(logger, compilationState, readySpace);
+      classLoader = new CompilingClassLoader(logger, compilationState, readySpace, isOldEmmaSupportEnabled);
     } finally {
       moduleSpaceHostReadyEvent.end();
     }

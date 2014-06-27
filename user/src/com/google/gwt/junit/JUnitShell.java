@@ -43,6 +43,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableInlineLiteralParameters;
+import com.google.gwt.dev.util.arg.ArgHandlerDisableOldEmmaSupport;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableOptimizeDataflow;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableOrdinalizeEnums;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableRemoveDuplicateFunctions;
@@ -320,6 +321,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerLocalWorkers(options));
       registerHandler(new ArgHandlerNamespace(options));
       registerHandler(new ArgHandlerOptimize(options));
+      registerHandler(new ArgHandlerDisableOldEmmaSupport(options));
 
       /*
        * ----- Options specific to JUnitShell -----

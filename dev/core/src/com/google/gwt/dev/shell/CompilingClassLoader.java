@@ -745,9 +745,9 @@ public final class CompilingClassLoader extends ClassLoader implements
   private static final String CLASS_DUMP_PATH = System.getProperty(
       "gwt.dev.classDumpPath", "rewritten-classes");
 
-  private static boolean emmaAvailable = false;
+  private boolean emmaAvailable = false;
 
-  private static EmmaStrategy emmaStrategy;
+  private EmmaStrategy emmaStrategy;
 
   /**
    * Caches the byte code for {@link JavaScriptHost}.
@@ -768,21 +768,6 @@ public final class CompilingClassLoader extends ClassLoader implements
     for (Class<?> c : BRIDGE_CLASSES) {
       BRIDGE_CLASS_NAMES.put(c.getName(), c);
     }
-    /*
-     * Specific support for bridging to Emma since the user classloader is
-     * generally completely isolated.
-     *
-     * We are looking for a specific emma class "com.vladium.emma.rt.RT". If
-     * that changes in the future, this code would need to be updated as well.
-     */
-    try {
-      Class<?> emmaBridge = Class.forName(EmmaStrategy.EMMA_RT_CLASSNAME,
-          false, Thread.currentThread().getContextClassLoader());
-      BRIDGE_CLASS_NAMES.put(EmmaStrategy.EMMA_RT_CLASSNAME, emmaBridge);
-      emmaAvailable = true;
-    } catch (ClassNotFoundException ignored) {
-    }
-    emmaStrategy = EmmaStrategy.get(emmaAvailable);
   }
 
   private static void classDump(String name, byte[] bytes) {
@@ -945,13 +930,32 @@ public final class CompilingClassLoader extends ClassLoader implements
   private final Map<Integer, Object> weakJsoCache = new MapMaker().weakValues().makeMap();
 
   public CompilingClassLoader(TreeLogger logger,
-      CompilationState compilationState, ShellJavaScriptHost javaScriptHost)
+      CompilationState compilationState, ShellJavaScriptHost javaScriptHost,boolean isOldEmmaSupportEnabled)
       throws UnableToCompleteException {
     super(null);
     this.logger = logger;
     this.compilationState = compilationState;
     this.shellJavaScriptHost = javaScriptHost;
     this.typeOracle = compilationState.getTypeOracle();
+
+    if( isOldEmmaSupportEnabled)
+    {
+      /*
+       * Specific support for bridging to Emma since the user classloader is
+       * generally completely isolated.
+       *
+       * We are looking for a specific emma class "com.vladium.emma.rt.RT". If
+       * that changes in the future, this code would need to be updated as well.
+       */
+      try {
+        Class<?> emmaBridge = Class.forName(EmmaStrategy.EMMA_RT_CLASSNAME,
+            false, Thread.currentThread().getContextClassLoader());
+        BRIDGE_CLASS_NAMES.put(EmmaStrategy.EMMA_RT_CLASSNAME, emmaBridge);
+        emmaAvailable = true;
+      } catch (ClassNotFoundException ignored) {
+      }
+    }
+    emmaStrategy = EmmaStrategy.get(emmaAvailable);
 
     // Assertions are always on in hosted mode.
     setDefaultAssertionStatus(true);

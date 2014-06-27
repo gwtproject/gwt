@@ -46,6 +46,30 @@
       "revId": "42650f1e6c5b6dfd25179caf561d1648ce6cc630",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c450e5a6_bcc6c14c",
+        "filename": "user/src/com/google/gwt/useragent/rebind/UserAgentPropertyGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-27T09:58:48Z",
+      "side": 1,
+      "message": "I can understand that for supporting newer IE versions without being forced to introduce a new IE permutation in GWT immediately. \nHowever I have a hard time to imagine why anyone would want to disable ie10 / ie9 so that the next older ie permutation is used by GWT, especially as IE10 isn\u0027t the newest IE anymore.\n\nBut I don\u0027t have a strong opinion on that.",
+      "parentUuid": "840eedb3_ed1461a8",
+      "range": {
+        "startLine": 45,
+        "startChar": 46,
+        "endLine": 45,
+        "endChar": 74
+      },
+      "revId": "42650f1e6c5b6dfd25179caf561d1648ce6cc630",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

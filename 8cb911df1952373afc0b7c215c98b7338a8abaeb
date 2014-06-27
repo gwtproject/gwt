@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4f851d3_120232d7",
+        "filename": "user/src/com/google/gwt/user/RemoteService.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-27T02:26:04Z",
+      "side": 1,
+      "message": "\"ensure that legacy code is not [...]\"",
+      "range": {
+        "startLine": 51,
+        "startChar": 71,
+        "endLine": 51,
+        "endChar": 77
+      },
+      "revId": "8cb911df1952373afc0b7c215c98b7338a8abaeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f851d3_32052edf",
+        "filename": "user/src/com/google/gwt/user/RemoteService.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-27T02:26:04Z",
+      "side": 1,
+      "message": "I think this should be a configuration property. I can\u0027t think of any reason why we\u0027d want to have permutations with different values.",
+      "range": {
+        "startLine": 55,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "8cb911df1952373afc0b7c215c98b7338a8abaeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f851d3_f216761e",
+        "filename": "user/src/com/google/gwt/user/RemoteService.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-27T02:26:04Z",
+      "side": 1,
+      "message": "nit: trailing space",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 2
+      },
+      "revId": "8cb911df1952373afc0b7c215c98b7338a8abaeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f851d3_d2449ad9",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-27T02:26:04Z",
+      "side": 1,
+      "message": "An array seems a bit hacky. I like to use AtomicBoolean for this sort of thing, even though we don\u0027t care about concurrency here.\n\nOr perhaps SerializableTypeOracleBuilder could implement an interface:\n\ninterface BuildFailedListener {\n  setBuildFailed();\n}",
+      "range": {
+        "startLine": 572,
+        "startChar": 46,
+        "endLine": 572,
+        "endChar": 53
+      },
+      "revId": "8cb911df1952373afc0b7c215c98b7338a8abaeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84334d7e_6543c056",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-06-27T02:26:04Z",
+      "side": 1,
+      "message": "I was hoping we were ready, but this is trouble. Unfortunately, we have a large number of subclasses of SerializationPolicy. Returning false would let us land the patch, but break everyone when we (or they) flip the flag because the server-side GWT-RPC protocol would not match the client. A flag you can\u0027t turn on isn\u0027t a great migration strategy.\n\nI could fix the subclasses, but it\u0027s unclear what the fix should be. For example, some serialization policies don\u0027t actually read the compiler-generated policy file at all. In the GWT SDK there is LegacySerializationPolicy, and in our code we have FreeForAllSerializationPolicy (for testing) that just lets everything through. Any hard-coded value will be wrong for one setting of the config property, so the subclass has to be modified at the same time the config property gets flipped.\n\nThat makes flipping the flag harder since it\u0027s not just a compiler flag flip, it\u0027s also a server-side flag flip. Different apps may use the same SerializationPolicy subclass. If they choose different settings then there\u0027s no correct value, so it has to get passed in as a parameter (like you did with StandardSerializationPolicy) and the callers have to be updated.\n\nI\u0027m wondering if putting an annotation on the server-side GWT-RPC service interface might be a better solution after all. The annotation is easily read by the servlet (using reflection) and it means we could get rid of the serialization policy changes. We already require that the server should be running pretty much the same Java classes as the GWT compiler saw, so in some ways it would just be more of the same.\n\nWelcome to the joys of working on legacy software. I don\u0027t have an answer yet; I have to think about this some more. The auditing code would help me figure out the damage though, so maybe I\u0027ll patch that in and see how bad it is.",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 16
+      },
+      "revId": "8cb911df1952373afc0b7c215c98b7338a8abaeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

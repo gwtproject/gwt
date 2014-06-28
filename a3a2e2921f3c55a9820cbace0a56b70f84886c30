@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6421f930_7cfd9517",
+        "filename": "user/src/com/google/web/bindery/requestfactory/RequestFactory.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-06-28T14:12:33Z",
+      "side": 1,
+      "message": "Just a thought because RequestFactory inheriting UI looks strange:\n\n   - Make a module for c.g.g.editor.ui and name it for example UiEditor\n   - Make a module for file c.g.g.editor.client.adapters.HasDataEditor and name it HasDataEditor.\n   - Exclude the files from 1.) and 2.) from Editor.gwt.xml and remove the fileset attribute. The Editor module should be compilable on its own now.\n   - Let UiEditor and HasDataEditor modules inherit Editor\n   - Let UI inherit UiEditor (and remove Editor from UI)\n   - Let CellView inherit HasDataEditor (and remove Editor from CellView)\n\nHopefully I haven\u0027t missed anything, but finally you should be able to inherit Editor in RequestFactory and don\u0027t pull in UI stuff.",
+      "revId": "a3a2e2921f3c55a9820cbace0a56b70f84886c30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

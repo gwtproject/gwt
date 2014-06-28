@@ -30,6 +30,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 class InternalJsHashcodeMap<K, V> {
 
   private final JavaScriptObject backingMap = JavaScriptObject.createArray();
+  private int size;
 
   public native V put(K key, V value, int hashCode, AbstractHashMap<?, ?> host) /*-{
     var array = this.@InternalJsHashcodeMap::backingMap[hashCode];
@@ -47,7 +48,7 @@ class InternalJsHashcodeMap<K, V> {
     }
     var entry = @AbstractMap.SimpleEntry::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
     array.push(entry);
-    host.@AbstractHashMap::size++;
+    this.@InternalJsHashcodeMap::size++;
     return null;
   }-*/;
 
@@ -65,13 +66,17 @@ class InternalJsHashcodeMap<K, V> {
             // splice out the entry we're removing
             array.splice(i, 1);
           }
-          host.@AbstractHashMap::size--;
+          this.@InternalJsHashcodeMap::size--;
           return entry.@Map.Entry::getValue()();
         }
       }
     }
     return null;
   }-*/;
+
+  public int size() {
+    return size;
+  }
 
   public native Map.Entry<K, V> getEntry(Object key, int hashCode, AbstractHashMap<?, ?> host) /*-{
     var array = this.@InternalJsHashcodeMap::backingMap[hashCode];

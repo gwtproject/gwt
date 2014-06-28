@@ -115,7 +115,7 @@ class InternalJsStringMap<V> {
   }-*/;
 
   private native void set(String key, V value) /*-{
-    return this.@InternalJsStringMap::backingMap[key] = value;
+    this.@InternalJsStringMap::backingMap[key] = value;
   }-*/;
 
   private native void delete(String key) /*-{

@@ -81,8 +81,8 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      */
     public EntrySetIterator() {
       List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>();
-      addAllStringEntries(list);
-      addAllHashEntries(list);
+      stringMap.addAllEntries(list);
+      hashCodeMap.addAllEntries(list);
       this.iter = list.iterator();
     }
 
@@ -115,13 +115,8 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    */
   private transient InternalJsStringMap<V> stringMap;
 
-  private int size;
-
-  {
-    clearImpl();
-  }
-
   public AbstractHashMap() {
+    resetMap();
   }
 
   public AbstractHashMap(int ignored) {
@@ -135,15 +130,17 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
       throw new IllegalArgumentException(
           "initial capacity was negative or load factor was non-positive");
     }
+    resetMap();
   }
 
   public AbstractHashMap(Map<? extends K, ? extends V> toBeCopied) {
-    this.putAll(toBeCopied);
+    resetMap();
+    putAll(toBeCopied);
   }
 
   @Override
   public void clear() {
-    clearImpl();
+    resetMap();
   }
 
   @SpecializeMethod(params = {String.class}, target = "hasStringValue")
@@ -184,7 +181,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   @Override
   public int size() {
-    return size + stringMap.size();
+    return hashCodeMap.size() + stringMap.size();
   }
 
   /**
@@ -205,20 +202,6 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    */
   private int hash(Object key) {
     return key == null ? 0 : getHashCode(key);
-  }
-
-  private void addAllHashEntries(Collection<?> dest) {
-    hashCodeMap.addAllEntries(dest);
-  }
-
-  private void addAllStringEntries(Collection<?> dest) {
-    stringMap.addAllEntries(dest);
-  }
-
-  private void clearImpl() {
-    hashCodeMap = GWT.create(InternalJsHashcodeMap.class);
-    stringMap = GWT.create(InternalJsStringMap.class);
-    size = 0;
   }
 
   /**
@@ -317,5 +300,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    */
   protected V removeStringValue(String key) {
     return key == null ? removeHashValue(null) : stringMap.remove(key);
+  }
+
+  private void resetMap() {
+    hashCodeMap = GWT.create(InternalJsHashcodeMap.class);
+    stringMap = GWT.create(InternalJsStringMap.class);
   }
 }

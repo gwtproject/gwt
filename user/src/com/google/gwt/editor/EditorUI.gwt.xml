@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!--
-  Copyright 2010 Google Inc.
+  Copyright 2014 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy of
@@ -15,15 +15,10 @@
   the License.
 -->
 
-<!-- Editor framework support -->
-<module>
-  <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.event.Event" />
-  <inherits name="com.google.gwt.validation.Validation" />
+<!-- Editor framework, UI support -->
+<module type="fileset">
+  <inherits name="com.google.gwt.editor.Editor" />
 
-  <source path="client" skips="adapters/HasDataEditor.java"/>
-
-  <generate-with class="com.google.gwt.editor.rebind.SimpleBeanEditorDriverGenerator">
-    <when-type-assignable class="com.google.gwt.editor.client.SimpleBeanEditorDriver" />
-  </generate-with>
+  <source path="client" includes="adapters/HasDataEditor.java"/>
+  <source path="ui/client"/>
 </module>

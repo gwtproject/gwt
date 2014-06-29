@@ -18,18 +18,19 @@
   <inherits name='com.google.gwt.core.Core'/>
   <inherits name='com.google.web.bindery.autobean.AutoBean'/>
   <inherits name='com.google.gwt.http.HTTP'/>
-  <inherits name='com.google.gwt.logging.LoggingDisabled'/>
-  <inherits name='com.google.gwt.user.UI'/>
 
-  <source path="gwt/client"/>
-  <source path="gwt/ui/client"/>
+  <source path="gwt/client">
+    <skip path="HasRequestContext.java"/>
+    <skip path="RequestFactoryEditorDriver.java"/>
+    <skip path="impl/AbstractRequestFactoryEditorDriver.java"/>
+    <skip path="impl/Initializer.java"/>
+    <skip path="impl/PathCollector.java"/>
+    <skip path="impl/RequestFactoryEditorDelegate.java"/>
+    <skip path="testing/MockRequestFactoryEditorDriver.java"/>
+  </source>
   <source path="shared"/>
   <super-source path="super" />
-  <generate-with
-    class="com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator">
-    <when-type-assignable
-      class="com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver" />
-  </generate-with>
+
   <generate-with class="com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator">
     <when-type-assignable class='com.google.web.bindery.requestfactory.shared.RequestFactory'/>
   </generate-with>

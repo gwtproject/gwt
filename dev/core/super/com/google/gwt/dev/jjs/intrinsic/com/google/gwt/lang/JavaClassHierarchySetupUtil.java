@@ -54,6 +54,7 @@ public class JavaClassHierarchySetupUtil {
 
     var prototype = prototypesByTypeId[typeId];
     var clazz = maybeGetClassLiteralFromPlaceHolder(prototype);
+    var _;
     if (prototype && !clazz) {
       // not a placeholder entry setup by Class.setClassLiteral
       _ = prototype;
@@ -91,7 +92,7 @@ public class JavaClassHierarchySetupUtil {
 
       var prototype = prototypesByTypeId[typeId];
       var clazz = maybeGetClassLiteralFromPlaceHolder(prototype);
-
+      var _;
       if (prototype && !clazz) {
           // not a placeholder entry setup by Class.setClassLiteral
           _ = prototype;

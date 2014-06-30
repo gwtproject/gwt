@@ -16,6 +16,24 @@
       "revId": "a3a2e2921f3c55a9820cbace0a56b70f84886c30",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c429c520_8eb2afe9",
+        "filename": "user/src/com/google/web/bindery/requestfactory/RequestFactory.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-06-30T20:04:12Z",
+      "side": 1,
+      "message": "Thanks. I wasn\u0027t motivated enough to fight with the circular deps under UI but looks like Thomas started playing with some of these ideas, let\u0027s follow up there for further refactoring.",
+      "parentUuid": "6421f930_7cfd9517",
+      "revId": "a3a2e2921f3c55a9820cbace0a56b70f84886c30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

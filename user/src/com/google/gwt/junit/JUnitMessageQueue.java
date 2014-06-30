@@ -16,17 +16,16 @@
 package com.google.gwt.junit;
 
 import com.google.gwt.junit.client.TimeoutException;
-import com.google.gwt.junit.client.impl.JUnitHost.ClientInfo;
-import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.junit.client.impl.JUnitResult;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A message queue to pass data between {@link JUnitShell} and
@@ -45,58 +44,9 @@ import java.util.Map.Entry;
 public class JUnitMessageQueue {
 
   /**
-   * Server-side client info that includes a description.
+   * Marker object that indicates a test is still running.
    */
-  public static class ClientInfoExt extends ClientInfo {
-    /**
-     * A description of this client.
-     */
-    private final String desc;
-
-    public ClientInfoExt(int sessionId, String desc) {
-      super(sessionId);
-      this.desc = desc;
-    }
-
-    public String getDesc() {
-      return desc;
-    }
-  }
-
-  /**
-   * Holds the state of an individual client.
-   */
-  public static class ClientStatus {
-    private int blockIndex = 0;
-    private ClientInfoExt clientInfo;
-    private boolean isNew = true;
-
-    public ClientStatus(ClientInfoExt clientInfo) {
-      this.clientInfo = clientInfo;
-    }
-
-    public String getDesc() {
-      return clientInfo.getDesc();
-    }
-
-    public int getId() {
-      return clientInfo.getSessionId();
-    }
-
-    @Override
-    public String toString() {
-      return clientInfo.getDesc();
-    }
-
-    public void updateClientInfo(ClientInfoExt clientInfo) {
-      this.clientInfo = clientInfo;
-    }
-  }
-
-  /**
-   * Records results for each client; must lock before accessing.
-   */
-  private final Map<Integer, ClientStatus> clientStatuses = new HashMap<Integer, ClientStatus>();
+  private static final JUnitResult RUNNING = new JUnitResult();
 
   /**
    * The lock used to synchronize access to clientStatuses.
@@ -107,122 +57,88 @@ public class JUnitMessageQueue {
    * Set to true when the last test block has been added. This is used to tell
    * clients that all tests are complete.
    */
-  private boolean isLastTestBlockAvailable;
+  private volatile boolean isLastTestBlockAvailable;
 
   /**
-   * The number of TestCase clients executing in parallel.
+   * The list of test blocks to run. Visible for testing.
    */
-  private int numClients = 1;
-
-  /**
-   * The list of test blocks to run.
-   */
-  private final List<TestInfo[]> testBlocks = new ArrayList<TestInfo[]>();
+  final BlockingDeque<TestInfo[]> testBlocks = new LinkedBlockingDeque<TestInfo[]>();
 
   /**
    * Maps the TestInfo to the results from each clientId. If JUnitResult is
    * null, it means that the client requested the test but did not report the
    * results yet.
    */
-  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<TestInfo, Map<ClientStatus, JUnitResult>>();
+  private final Map<TestInfo, JUnitResult> testResults = new ConcurrentHashMap<TestInfo, JUnitResult>();
 
   /**
    * Only instantiable within this package.
    */
-  JUnitMessageQueue(int numClients) {
-    this.numClients = numClients;
-  }
+  JUnitMessageQueue() { }
 
   /**
    * Called by the servlet to query for for the next block to test.
    * 
    * @param clientInfo information about the client
-   * @param blockIndex the index of the test block to get
    * @param timeout how long to wait for an answer
-   * @return the next test to run, or <code>null</code> if
-   *         <code>timeout</code> is exceeded or the next test does not match
-   *         <code>testClassName</code>
+   * @return the next test to run, or <code>null</code> if the last test block received.
    */
-  public TestBlock getTestBlock(ClientInfoExt clientInfo, int blockIndex,
-      long timeout) throws TimeoutException {
-    synchronized (clientStatusesLock) {
-      ClientStatus clientStatus = ensureClientStatus(clientInfo);
-      clientStatus.blockIndex = blockIndex;
+  public TestInfo[] getTestBlock(long timeout) throws TimeoutException {
+    // The client has finished all of the tests.
+    if (isLastTestBlockAvailable && testBlocks.isEmpty()) {
+      return null;
+    }
 
-      // The client has finished all of the tests.
-      if (isLastTestBlockAvailable && blockIndex >= testBlocks.size()) {
-        return null;
-      }
+    TestInfo[] tests = peekTestBlock(timeout);
+    if (tests == null) {
+      throw new TimeoutException("No tests fetched within " + timeout + "ms.");
+    }
 
-      long startTime = System.currentTimeMillis();
-      long stopTime = startTime + timeout;
-      while (blockIndex >= testBlocks.size()) {
-        long timeToWait = stopTime - System.currentTimeMillis();
-        if (timeToWait < 1) {
-          double elapsed = (System.currentTimeMillis() - startTime) / 1000.0;
-          throw new TimeoutException("The servlet did not respond to the "
-              + "next query to test within " + timeout + "ms.\n"
-              + " Client description: " + clientInfo.getDesc() + "\n"
-              + " Actual time elapsed: " + elapsed + " seconds.\n");
-        }
-        try {
-          clientStatusesLock.wait(timeToWait);
-        } catch (InterruptedException e) {
-          /*
-           * Should never happen; but if it does, just send a null back to the
-           * client, which will cause it to stop running tests.
-           */
-          System.err.println("Unexpected thread interruption");
-          e.printStackTrace();
-          return null;
-        }
-      }
+    // Mark all the test block as running.
+    testResults.putAll(createResults(tests, RUNNING));
+    return tests;
+  }
 
-      // Record that this client has retrieved the current tests.
-      TestInfo[] tests = testBlocks.get(blockIndex);
-      for (TestInfo testInfo : tests) {
-        ensureResults(testInfo).put(clientStatus, null);
+  private TestInfo[] peekTestBlock(long timeout) {
+    try {
+      TestInfo[] tests = testBlocks.pollFirst(timeout, TimeUnit.MILLISECONDS);
+      if (tests != null) {
+        testBlocks.offerFirst(tests);
       }
-      return new TestBlock(tests, blockIndex);
+      return tests;
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+      System.exit(1);
+      return null;
     }
   }
 
   /**
    * Reports a failure from a client that cannot startup.
    * 
-   * @param clientInfo information about the client
    * @param result the failure result
    */
-  public void reportFatalLaunch(ClientInfoExt clientInfo, JUnitResult result) {
+  public void reportFatalLaunch(JUnitResult result) {
     // Fatal launch error, cause this client to fail the whole block.
-    ClientStatus clientStatus = ensureClientStatus(clientInfo);
-    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
-    for (TestInfo testInfo : testBlocks.get(clientStatus.blockIndex)) {
-      results.put(testInfo, result);
-    }
-    reportResults(clientInfo, results);
+    reportResults(createResults(testBlocks.peek(), result));
   }
 
   /**
    * Called by the servlet to report the results of the last test to run.
-   * 
-   * @param clientInfo information about the client
+   *
    * @param results the result of running the test block
    */
-  public void reportResults(ClientInfoExt clientInfo,
-      Map<TestInfo, JUnitResult> results) {
+  public void reportResults(Map<TestInfo, JUnitResult> results) {
+    assert results != null : "results cannot be null";
+
+    // Drop the last test block.
+    testBlocks.poll();
+
+    // Cache the test results.
+    testResults.putAll(results);
+
+    // Notify so that waitForTestResults is unblocked.
     synchronized (clientStatusesLock) {
-      if (results == null) {
-        throw new IllegalArgumentException("results cannot be null");
-      }
-      ClientStatus clientStatus = ensureClientStatus(clientInfo);
-
-      // Cache the test results.
-      for (Map.Entry<TestInfo, JUnitResult> entry : results.entrySet()) {
-        TestInfo testInfo = entry.getKey();
-        ensureResults(testInfo).put(clientStatus, entry.getValue());
-      }
-
       clientStatusesLock.notifyAll();
     }
   }
@@ -233,45 +149,10 @@ public class JUnitMessageQueue {
    * @param isLastBlock true if this is the last test block that will be added
    */
   void addTestBlocks(List<TestInfo[]> newTestBlocks, boolean isLastBlock) {
-    synchronized (clientStatusesLock) {
-      if (isLastTestBlockAvailable) {
-        throw new IllegalArgumentException(
-            "Cannot add test blocks after the last block is added");
-      }
-      for (TestInfo[] testBlock : newTestBlocks) {
-        if (testBlock.length == 0) {
-          throw new IllegalArgumentException("TestBlocks cannot be empty");
-        }
-      }
-      testBlocks.addAll(newTestBlocks);
-      if (isLastBlock) {
-        isLastTestBlockAvailable = true;
-      }
-      clientStatusesLock.notifyAll();
-    }
-  }
+    assert !isLastTestBlockAvailable : "Cannot add test blocks after the last block is added";
 
-  /**
-   * Returns any new clients that have contacted the server since the last call.
-   * The same client will never be returned from this method twice.
-   */
-  String[] getNewClients() {
-    synchronized (clientStatusesLock) {
-      List<String> results = new ArrayList<String>();
-      for (ClientStatus clientStatus : clientStatuses.values()) {
-        if (clientStatus.isNew) {
-          results.add(clientStatus.getDesc());
-          // Record that this client is no longer new.
-          clientStatus.isNew = false;
-        }
-      }
-      clientStatusesLock.notifyAll();
-      return results.toArray(new String[results.size()]);
-    }
-  }
-
-  int getNumClients() {
-    return numClients;
+    testBlocks.addAll(newTestBlocks);
+    isLastTestBlockAvailable = isLastBlock;
   }
 
   /**
@@ -279,143 +160,16 @@ public class JUnitMessageQueue {
    * 
    * @param testInfo the {@link TestInfo} that the clients retrieved
    */
-  int getNumClientsRetrievedTest(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      int count = 0;
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
-      if (results != null) {
-        count = results.size();
-      }
-      return count;
-    }
+  boolean isClientRetrievedTest(TestInfo testInfo) {
+    return testResults.containsKey(testInfo);
   }
 
   /**
-   * Returns how many clients have connected.
+   * Fetches the result of a completed test.
    */
-  int getNumConnectedClients() {
-    synchronized (clientStatusesLock) {
-      return clientStatuses.size();
-    }
-  }
-
-  /**
-   * Fetches the results of a completed test.
-   * 
-   * @param testInfo the {@link TestInfo} to check for results
-   * @return A map of results from all clients.
-   */
-  Map<ClientStatus, JUnitResult> getResults(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      return testResults.get(testInfo);
-    }
-  }
-
-  /**
-   * Visible for testing.
-   * 
-   * @return the test blocks
-   */
-  List<TestInfo[]> getTestBlocks() {
-    return testBlocks;
-  }
-
-  /**
-   * Returns a pretty printed list of clients that have not retrieved the
-   * current test. Used for error reporting.
-   * 
-   * @param testInfo the {@link TestInfo} we are waiting for
-   * @return a string containing the list of clients that have not retrieved the
-   *         current test.
-   */
-  String getUnretrievedClients(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
-      StringBuilder buf = new StringBuilder();
-      int lineCount = 0;
-      for (ClientStatus clientStatus : clientStatuses.values()) {
-        if (lineCount > 0) {
-          buf.append('\n');
-        }
-
-        if (results == null || !results.containsKey(clientStatus)) {
-          buf.append(" - NO RESPONSE: ");
-        } else {
-          buf.append(" - (ok): ");
-        }
-        buf.append(clientStatus.getDesc());
-        ++lineCount;
-      }
-      int difference = numClients - getNumClientsRetrievedTest(testInfo);
-      if (difference > 0) {
-        if (lineCount > 0) {
-          buf.append('\n');
-        }
-        buf.append(" - "
-            + difference
-            + " client(s) haven't responded back to JUnitShell since the start of the test.");
-      }
-      return buf.toString();
-    }
-  }
-
-  /**
-   * Returns a human-formatted message identifying what clients have connected
-   * but have not yet reported results for this test. It is used in a timeout
-   * condition, to identify what we're still waiting on.
-   * 
-   * @param testInfo the {@link TestInfo} that the clients are working on
-   * @return human readable message
-   */
-  String getWorkingClients(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      // Print a list of clients that have connected but not returned results.
-      int itemCount = 0;
-      StringBuilder buf = new StringBuilder();
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
-      if (results != null) {
-        for (Map.Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
-          if (entry.getValue() == null) {
-            buf.append(entry.getKey().getDesc());
-            buf.append("\n");
-            itemCount++;
-          }
-        }
-      }
-
-      // Print the number of other clients.
-      int difference = numClients - itemCount;
-      if (difference > 0) {
-        if (itemCount > 0) {
-          buf.append('\n');
-        }
-        buf.append(difference
-            + " other client(s) haven't responded back to JUnitShell since the start of the test.");
-      }
-      return buf.toString();
-    }
-  }
-
-  /**
-   * Called by the shell to see if the currently-running test has completed.
-   * 
-   * @param testInfo the {@link TestInfo} to check for results
-   * @return If the test has completed, <code>true</code>, otherwise
-   *         <code>false</code>.
-   */
-  boolean hasResults(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
-      if (results == null || results.size() < numClients) {
-        return false;
-      }
-      for (JUnitResult result : results.values()) {
-        if (result == null) {
-          return false;
-        }
-      }
-      return true;
-    }
+  JUnitResult getResult(TestInfo testInfo) {
+    JUnitResult result = testResults.get(testInfo);
+    return result == RUNNING ? null : result;
   }
 
   /**
@@ -424,24 +178,11 @@ public class JUnitMessageQueue {
    * THROWABLES_NOT_RETRIED}.
    */
   boolean needsRerunning(TestInfo testInfo) {
-    Map<ClientStatus, JUnitResult> results = getResults(testInfo);
-    if (results == null) {
+    JUnitResult result = testResults.get(testInfo);
+    if (result == null || result == RUNNING) {
       return true;
     }
-    if (results.size() != numClients) {
-      return true;
-    }
-    for (Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
-      JUnitResult result = entry.getValue();
-      if (result == null) {
-        return true;
-      }
-
-      if (isNonFatalFailure(result)) {
-        return true;
-      }
-    }
-    return false;
+    return isNonFatalFailure(result);
   }
 
   private boolean isNonFatalFailure(JUnitResult result) {
@@ -451,9 +192,7 @@ public class JUnitMessageQueue {
   }
 
   void removeResults(TestInfo testInfo) {
-    synchronized (clientStatusesLock) {
-      testResults.remove(testInfo);
-    }
+    testResults.remove(testInfo);
   }
 
   void waitForResults(int millis) {
@@ -465,37 +204,10 @@ public class JUnitMessageQueue {
     }
   }
 
-  /**
-   * Ensure that a {@link ClientStatus} for the clientId exists.
-   * 
-   * @param clientId the id of the client
-   * @return the {@link ClientStatus} for the client
-   */
-  private ClientStatus ensureClientStatus(ClientInfoExt clientInfo) {
-    int id = clientInfo.getSessionId();
-    ClientStatus clientStatus = clientStatuses.get(id);
-    if (clientStatus == null) {
-      clientStatus = new ClientStatus(clientInfo);
-      clientStatuses.put(id, clientStatus);
-    } else {
-      // Maybe update the client info (IP might change if through a proxy).
-      clientStatus.updateClientInfo(clientInfo);
-    }
-    return clientStatus;
-  }
-
-  /**
-   * Get the map of test results from all clients for a given {@link TestInfo},
-   * creating it if necessary.
-   * 
-   * @param testInfo the {@link TestInfo}
-   * @return the map of all results
-   */
-  private Map<ClientStatus, JUnitResult> ensureResults(TestInfo testInfo) {
-    Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
-    if (results == null) {
-      results = new IdentityHashMap<ClientStatus, JUnitResult>();
-      testResults.put(testInfo, results);
+  private static Map<TestInfo, JUnitResult> createResults(TestInfo[] tests, JUnitResult result) {
+    Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
+    for (TestInfo testInfo : tests) {
+      results.put(testInfo, result);
     }
     return results;
   }

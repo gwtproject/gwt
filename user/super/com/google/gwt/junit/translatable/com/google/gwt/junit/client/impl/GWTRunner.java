@@ -18,11 +18,7 @@ package com.google.gwt.junit.client.impl;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.junit.client.impl.JUnitHost.ClientInfo;
-import com.google.gwt.junit.client.impl.JUnitHost.InitialResponse;
-import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -40,33 +36,11 @@ import java.util.HashMap;
  */
 public class GWTRunner implements EntryPoint {
 
-  private final class InitialResponseListener implements
-      AsyncCallback<InitialResponse> {
-
-    /**
-     * Delegate to the {@link TestBlockListener}.
-     */
-    @Override
-    public void onFailure(Throwable caught) {
-      testBlockListener.onFailure(caught);
-    }
-
-    /**
-     * Update our client info with the server-provided session id then delegate
-     * to the {@link TestBlockListener}.
-     */
-    @Override
-    public void onSuccess(InitialResponse result) {
-      clientInfo = new ClientInfo(result.getSessionId());
-      testBlockListener.onSuccess(result.getTestBlock());
-    }
-  }
-
   /**
    * The RPC callback object for {@link GWTRunner#junitHost}. When
    * {@link #onSuccess} is called, it's time to run the next test case.
    */
-  private final class TestBlockListener implements AsyncCallback<TestBlock> {
+  private final class TestBlockListener implements AsyncCallback<TestInfo[]> {
 
     /**
      * The number of times we've failed to communicate with the server on the
@@ -97,12 +71,12 @@ public class GWTRunner implements EntryPoint {
      * A call to junitHost succeeded; run the next test case.
      */
     @Override
-    public void onSuccess(TestBlock nextTestBlock) {
+    public void onSuccess(TestInfo[] nextTestBlock) {
       curRetryCount = 0;
       currentBlock = nextTestBlock;
       currentTestIndex = 0;
       currentResults.clear();
-      if (currentBlock != null && currentBlock.getTests().length > 0) {
+      if (currentBlock != null && currentBlock.length > 0) {
         doRunTest();
       }
     }
@@ -114,33 +88,18 @@ public class GWTRunner implements EntryPoint {
   static GWTRunner sInstance;
 
   /**
-   * A query param specifying my unique session cookie.
-   */
-  private static final String SESSIONID_QUERY_PARAM = "gwt.junit.sessionId";
-
-  /**
    * The maximum number of times to retry communication with the server per test batch.
    */
   private static final int MAX_RETRY_COUNT = 3;
-
-  /**
-   * A query param specifying the block index to start on.
-   */
-  private static final String BLOCKINDEX_QUERY_PARAM = "gwt.junit.blockindex";
 
   public static GWTRunner get() {
     return sInstance;
   }
 
   /**
-   * This client's info.
-   */
-  private ClientInfo clientInfo;
-
-  /**
    * The current block of tests to execute.
    */
-  private TestBlock currentBlock;
+  private TestInfo[] currentBlock;
 
   /**
    * Active test within current block of tests.
@@ -161,11 +120,6 @@ public class GWTRunner implements EntryPoint {
    * The remote service to communicate with.
    */
   private final JUnitHostAsync junitHost = (JUnitHostAsync) GWT.create(JUnitHost.class);
-
-  /**
-   * Handles all {@link InitialResponse InitialResponses}.
-   */
-  private final InitialResponseListener initialResponseListener = new InitialResponseListener();
 
   /**
    * Handles all {@link TestBlock TestBlocks}.
@@ -191,7 +145,6 @@ public class GWTRunner implements EntryPoint {
   @Override
   public void onModuleLoad() {
     testAccessor = new GWTTestAccessor();
-    clientInfo = new ClientInfo(parseQueryParamInteger(SESSIONID_QUERY_PARAM, -1));
 
     // Kick off the test running process by getting the first method to run from the server.
     syncToServer();
@@ -205,7 +158,7 @@ public class GWTRunner implements EntryPoint {
     TestInfo currentTest = getCurrentTest();
     currentResults.put(currentTest, result);
     ++currentTestIndex;
-    if (currentTestIndex < currentBlock.getTests().length) {
+    if (currentTestIndex < currentBlock.length) {
       // Run the next test after a short delay.
       Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
         @Override
@@ -234,54 +187,15 @@ public class GWTRunner implements EntryPoint {
       // The module is correct.
       runTest();
     } else {
-      /*
-       * We're being asked to run a test in a different module. We must navigate
-       * the browser to a new URL which will run that other module.  We retain
-       * the same path suffix (e.g., '/junit.html') as the current URL.
-       */
-      String currentPath = Window.Location.getPath();
-      String pathSuffix = currentPath.substring(currentPath.lastIndexOf('/'));
-
-      UrlBuilder builder = Window.Location.createUrlBuilder();
-      builder.setParameter(BLOCKINDEX_QUERY_PARAM,
-          Integer.toString(currentBlock.getIndex())).setPath(
-          newModule + pathSuffix);
-      // Hand off the session id to the next module.
-      if (clientInfo.getSessionId() >= 0) {
-        builder.setParameter(SESSIONID_QUERY_PARAM,
-            String.valueOf(clientInfo.getSessionId()));
-      }
-      // Replace "%3A" with ":" as a hack to support broken DevMode plugins.
-      Window.Location.replace(builder.buildString().replaceAll("%3A", ":"));
+      String newHref = Window.Location.getHref().replace(currentModule, newModule);
+      Window.Location.replace(newHref);
       currentBlock = null;
       currentTestIndex = 0;
     }
   }
 
   private TestInfo getCurrentTest() {
-    return currentBlock.getTests()[currentTestIndex];
-  }
-
-  /**
-   * Parse an integer from a query parameter, returning the default value if
-   * the parameter cannot be found.
-   *
-   * @param paramName the parameter name
-   * @param defaultValue the default value
-   * @return the integer value of the parameter
-   */
-  private int parseQueryParamInteger(String paramName, int defaultValue) {
-    String value = Window.Location.getParameter(paramName);
-    if (value != null) {
-      try {
-        return Integer.parseInt(value);
-      } catch (NumberFormatException e) {
-        setFailureMessage("'" + value + "' is not a valid value for " +
-            paramName + ".");
-        return defaultValue;
-      }
-    }
-    return defaultValue;
+    return currentBlock[currentTestIndex];
   }
 
   private void runTest() {
@@ -310,14 +224,7 @@ public class GWTRunner implements EntryPoint {
   }
 
   private void syncToServer() {
-    if (currentBlock == null) {
-      int firstBlockIndex = parseQueryParamInteger(BLOCKINDEX_QUERY_PARAM, 0);
-      junitHost.getTestBlock(firstBlockIndex, clientInfo,
-          initialResponseListener);
-    } else {
-      junitHost.reportResultsAndGetTestBlock(currentResults,
-          currentBlock.getIndex() + 1, clientInfo, testBlockListener);
-    }
+    junitHost.reportResultsAndGetTestBlock(currentResults, testBlockListener);
   }
 
   private static native void reportFatalError(String errorMsg)/*-{
@@ -328,3 +235,4 @@ public class GWTRunner implements EntryPoint {
     $wnd.junitError("", errorMsg);
   }-*/;
 }
+

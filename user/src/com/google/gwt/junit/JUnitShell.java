@@ -62,7 +62,6 @@ import com.google.gwt.dev.util.arg.ArgHandlerScriptStyle;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
-import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.TimeoutException;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
@@ -92,7 +91,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -857,9 +855,9 @@ public class JUnitShell extends DevMode {
   private boolean runStyleStarted;
 
   /**
-   * If true, we haven't started all the clients yet. (Used for manual mode.)
+   * If true, the client hasn't connected yet. (Used for manual mode.)
    */
-  private boolean waitingForClients = true;
+  private boolean waitingForClient = true;
 
   /**
    * If true, the last attempt to launch failed.
@@ -970,12 +968,11 @@ public class JUnitShell extends DevMode {
     if (!super.doStartup()) {
       return false;
     }
-    int numClients = createRunStyle(runStyleName);
-    if (numClients < 0) {
+    if (createRunStyle(runStyleName) < 0) {
       // RunStyle already logged reasons for its failure
       return false;
     }
-    messageQueue = new JUnitMessageQueue(numClients);
+    messageQueue = new JUnitMessageQueue();
 
     if (tries >= 1) {
       runStyle.setTries(tries);
@@ -1019,34 +1016,21 @@ public class JUnitShell extends DevMode {
    * Checks to see if this test run is complete.
    */
   protected boolean notDone() {
-    int activeClients = messageQueue.getNumClientsRetrievedTest(currentTestInfo);
-    int expectedClients = messageQueue.getNumClients();
-    if (runStyle instanceof RunStyleManual && waitingForClients) {
-      String[] newClients = messageQueue.getNewClients();
-      int printIndex = activeClients - newClients.length + 1;
-      for (String newClient : newClients) {
-        System.out.println(printIndex + " - " + newClient);
-        ++printIndex;
-      }
-      if (activeClients < expectedClients) {
+    boolean testRetrieved = messageQueue.isClientRetrievedTest(currentTestInfo);
+    if (runStyle instanceof RunStyleManual && waitingForClient) {
+      if (!testRetrieved) {
         // Wait forever for first contact; user-driven.
         return true;
       }
-      waitingForClients = false;
+      waitingForClient = false;
     }
 
     long currentTimeMillis = System.currentTimeMillis();
-    if (activeClients >= expectedClients) {
-      if (activeClients > expectedClients) {
-        getTopLogger().log(
-            TreeLogger.WARN,
-            "Too many clients: expected " + expectedClients + ", found "
-                + activeClients);
-      }
+    if (testRetrieved) {
 
       /*
-       * It's now safe to release any reference to the last module since all
-       * clients have transitioned to the current module.
+       * It's now safe to release any reference to the last module since
+       * client has transitioned to the current module.
        */
       lastModule = currentModule;
       if (testMethodTimeout == 0) {
@@ -1055,10 +1039,7 @@ public class JUnitShell extends DevMode {
         double elapsed = (currentTimeMillis - testBeginTime) / 1000.0;
         throw new TimeoutException(
             "The browser did not complete the test method "
-                + currentTestInfo.toString() + " in "
-                + testBatchingMethodTimeoutMillis
-                + "ms.\n  We have no results from:\n"
-                + messageQueue.getWorkingClients(currentTestInfo)
+                + currentTestInfo.toString() + " in " + testBatchingMethodTimeoutMillis + "ms.\n"
                 + "Actual time elapsed: " + elapsed + " seconds.\n"
                 + "Try increasing this timeout using the '-testMethodTimeout minutes' option\n");
       }
@@ -1067,8 +1048,7 @@ public class JUnitShell extends DevMode {
       throw new TimeoutException(
           "The browser did not contact the server within "
               + baseTestBeginTimeoutMillis + "ms.\n"
-              + messageQueue.getUnretrievedClients(currentTestInfo)
-              + "\n Actual time elapsed: " + elapsed + " seconds.\n"
+              + "Actual time elapsed: " + elapsed + " seconds.\n"
               + "Try increasing this timeout using the '-testBeginTimeout minutes' option\n"
               + "The default value of minutes is 1, i.e., the server waits 1 minute or 60 seconds.\n");
     }
@@ -1085,7 +1065,7 @@ public class JUnitShell extends DevMode {
       throw new TimeoutException(msg.toString());
     }
 
-    if (messageQueue.hasResults(currentTestInfo)) {
+    if (messageQueue.getResult(currentTestInfo) != null) {
       return false;
     } else if (pendingException == null) {
       // Instead of waiting around for results, try to compile the next module.
@@ -1279,23 +1259,14 @@ public class JUnitShell extends DevMode {
     return true;
   }
 
-  private void processTestResult(TestCase testCase, TestResult testResult) {
+  private void processTestResult(TestCase testCase, TestResult testResult, JUnitResult result) {
+    assert (result != null);
 
-    Map<ClientStatus, JUnitResult> results = messageQueue.getResults(currentTestInfo);
-    assert results != null;
-    assert results.size() == messageQueue.getNumClients() : results.size()
-        + " != " + messageQueue.getNumClients();
-
-    for (Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
-      JUnitResult result = entry.getValue();
-      assert (result != null);
-
-      if (result.isAnyException()) {
-        if (result.isExceptionOf(AssertionFailedError.class)) {
-          testResult.addFailure(testCase, toAssertionFailedError(result.getException()));
-        } else {
-          testResult.addError(testCase, result.getException());
-        }
+    if (result.isAnyException()) {
+      if (result.isExceptionOf(AssertionFailedError.class)) {
+        testResult.addFailure(testCase, toAssertionFailedError(result.getException()));
+      } else {
+        testResult.addError(testCase, result.getException());
       }
     }
   }
@@ -1365,9 +1336,11 @@ public class JUnitShell extends DevMode {
     currentTestInfo = new TestInfo(currentModule.getName(),
         testCase.getClass().getName(), testCase.getName());
     numTries++;
-    if (messageQueue.hasResults(currentTestInfo)) {
+
+    JUnitResult junitResult = messageQueue.getResult(currentTestInfo);
+    if (junitResult != null) {
       // Already have a result.
-      processTestResult(testCase, testResult);
+      processTestResult(testCase, testResult, junitResult);
       return;
     }
     compileStrategy.maybeAddTestBlockForCurrentTest(testCase, batchingStrategy);
@@ -1417,8 +1390,8 @@ public class JUnitShell extends DevMode {
         return;
       }
     }
-    assert (messageQueue.hasResults(currentTestInfo));
-    processTestResult(testCase, testResult);
+
+    processTestResult(testCase, testResult, messageQueue.getResult(currentTestInfo));
   }
 
   /**

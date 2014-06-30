@@ -99,11 +99,10 @@ public abstract class RunStyle {
   }
 
   /**
-   * Initialize the runstyle with any supplied arguments, and return the number
-   * of clients this runstyle controls.
-   * 
+   * Initialize the runstyle with any supplied arguments.
+   *
    * @param args arguments passed in -runStyle option, null if none supplied
-   * @return the number of clients, or -1 if initialization was unsuccessful
+   * @return -1 if initialization was unsuccessful
    */
   public abstract int initialize(String args);
 

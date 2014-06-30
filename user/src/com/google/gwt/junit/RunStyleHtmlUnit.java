@@ -39,10 +39,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -214,9 +210,9 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Set<Platform> PLATFORMS = ImmutableSet.of(Platform.HtmlUnitBug,
       Platform.HtmlUnitLayout, Platform.HtmlUnitUnknown);
 
-  private Set<BrowserVersion> browsers = new HashSet<BrowserVersion>();
+  private BrowserVersion browser;
   private boolean developmentMode;
-  private final List<Thread> threads = new ArrayList<Thread>();
+  private HtmlUnitThread thread;
 
   /**
    * Create a RunStyle instance with the passed-in browser targets.
@@ -236,47 +232,35 @@ public class RunStyleHtmlUnit extends RunStyle {
       // If no browsers specified, default to Firefox 17.
       args = "FF17";
     }
-    Set<BrowserVersion> browserSet = new HashSet<BrowserVersion>();
-    Set<String> userAgentSet = new HashSet<String>();
-    for (String browserName : args.split(",")) {
-      BrowserVersion browser = BROWSER_MAP.get(browserName);
-      if (browser == null) {
-        getLogger().log(
-            TreeLogger.ERROR,
-            "RunStyleHtmlUnit: Unknown browser " + "name " + browserName
-                + ", expected browser name: one of " + BROWSER_MAP.keySet());
-        return -1;
-      }
-      browserSet.add(browser);
-      userAgentSet.add(USER_AGENT_MAP.get(browser));
+    if (args.split(",").length > 1) {
+      return 2; // Causes JUnitShell to log an error message about multi-browser deprecation
     }
-    browsers = Collections.unmodifiableSet(browserSet);
-    setUserAgents(Collections.unmodifiableSet(userAgentSet));
+
+    browser = BROWSER_MAP.get(args);
+    if (browser == null) {
+      getLogger().log(TreeLogger.ERROR, "RunStyleHtmlUnit: Unknown browser " + "name " + args
+          + ", expected browser name: one of " + BROWSER_MAP.keySet());
+      return -1;
+    }
     setTries(DEFAULT_TRIES); // set to the default value for this RunStyle
-    return browsers.size();
+    return 1;
+  }
+
+  @Override
+  public String getUserAgent() {
+    return USER_AGENT_MAP.get(browser);
   }
 
   @Override
   public void launchModule(String moduleName) {
-    for (BrowserVersion browser : browsers) {
-      String url = shell.getModuleUrl(moduleName);
-      HtmlUnitThread hut = createHtmlUnitThread(browser, url);
-      TreeLogger logger = shell.getTopLogger();
-      if (logger.isLoggable(TreeLogger.INFO)) {
-        logger.log(TreeLogger.INFO,
-            "Starting " + url + " on browser " + browser.getNickname());
-      }
-      /*
-       * TODO (amitmanjhi): Is it worth pausing here and waiting for the main
-       * test thread to get to an "okay" state.
-       */
-      hut.start();
-      threads.add(hut);
-    }
-  }
-
-  public int numBrowsers() {
-    return browsers.size();
+    String url = shell.getModuleUrl(moduleName);
+    thread = createHtmlUnitThread(browser, url);
+    getLogger().log(TreeLogger.INFO, "Starting " + url + " on browser " + browser.getNickname());
+    /*
+     * TODO (amitmanjhi): Is it worth pausing here and waiting for the main
+     * test thread to get to an "okay" state.
+     */
+    thread.start();
   }
 
   @Override

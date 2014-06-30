@@ -119,10 +119,6 @@ public class CompileStrategyTest extends TestCase {
      */
     private List<TestInfo[]> testBlocks;
 
-    public MockJUnitMessageQueue() {
-      super(1);
-    }
-
     @Override
     void addTestBlocks(List<TestInfo[]> newTestBlocks, boolean isLastBlock) {
       assertNull(testBlocks);

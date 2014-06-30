@@ -18,9 +18,6 @@ package com.google.gwt.junit;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Runs in Production Mode via browsers managed as an external process. This
  * feature is experimental and is not officially supported.
@@ -56,20 +53,18 @@ class RunStyleExternalBrowser extends RunStyle {
 
     @Override
     public void run() {
-      for (ExternalBrowser browser : externalBrowsers) {
-        if (browser.getProcess() != null) {
-          try {
-            browser.getProcess().exitValue();
-          } catch (IllegalThreadStateException e) {
-            // The process is still active. Kill it.
-            browser.getProcess().destroy();
-          }
+      if (browser.getProcess() != null) {
+        try {
+          browser.getProcess().exitValue();
+        } catch (IllegalThreadStateException e) {
+          // The process is still active. Kill it.
+          browser.getProcess().destroy();
         }
       }
     }
   }
 
-  private ExternalBrowser[] externalBrowsers;
+  private ExternalBrowser browser;
 
   /**
    * @param shell the containing shell
@@ -79,70 +74,49 @@ class RunStyleExternalBrowser extends RunStyle {
   }
 
   @Override
-  public String[] getInterruptedHosts() {
-    // Make sure all browsers are still running
-    Set<String> toRet = null;
-    for (ExternalBrowser browser : externalBrowsers) {
-      try {
-        browser.getProcess().exitValue();
-
-        // The host exited, so return its path.
-        if (toRet == null) {
-          toRet = new HashSet<String>();
-        }
-        toRet.add(browser.getPath());
-      } catch (IllegalThreadStateException e) {
-        // The process is still active, keep looking.
-      }
+  public boolean isBrowserAlive() {
+    try {
+      browser.getProcess().exitValue();
+      return false;
+    } catch (IllegalThreadStateException e) {
+      // The process is still active.
+      return true;
     }
-    return toRet == null ? null : toRet.toArray(new String[toRet.size()]);
   }
 
   @Override
   public int initialize(String args) {
     if (args == null || args.length() == 0) {
-      getLogger().log(
-          TreeLogger.ERROR,
-          "ExternalBrowser runstyle requires an "
-              + "argument listing one or more executables of external browsers to "
-              + "launch");
+      getLogger().log(TreeLogger.ERROR, "ExternalBrowser runstyle requires an  argument listing an"
+          + "executable of external browser to launch");
       return -1;
     }
-    String browsers[] = args.split(",");
-    synchronized (this) {
-      this.externalBrowsers = new ExternalBrowser[browsers.length];
-      for (int i = 0; i < browsers.length; ++i) {
-        externalBrowsers[i] = new ExternalBrowser(browsers[i]);
-      }
+    if (args.split(",").length > 1) {
+      return 2; // Causes JUnitShell to log an error message about multi-browser deprecation
     }
+    browser = new ExternalBrowser(args);
     Runtime.getRuntime().addShutdownHook(new ShutdownCb());
-    return browsers.length;
+    return 1;
   }
 
   @Override
-  public synchronized void launchModule(String moduleName)
-      throws UnableToCompleteException {
+  public synchronized void launchModule(String moduleName) throws UnableToCompleteException {
     String commandArray[] = new String[2];
-    // construct the URL for the browser to hit
+    commandArray[0] = browser.getPath();
     commandArray[1] = shell.getModuleUrl(moduleName);
 
     Process child = null;
-    for (ExternalBrowser browser : externalBrowsers) {
-      try {
-        commandArray[0] = browser.getPath();
-
-        child = Runtime.getRuntime().exec(commandArray);
-        if (child == null) {
-          getLogger().log(TreeLogger.ERROR,
-              "Problem exec()'ing " + commandArray[0]);
-          throw new UnableToCompleteException();
-        }
-      } catch (Exception e) {
-        getLogger().log(TreeLogger.ERROR,
-            "Error launching external browser at " + browser.getPath(), e);
+    try {
+      child = Runtime.getRuntime().exec(commandArray);
+      if (child == null) {
+        getLogger().log(TreeLogger.ERROR, "Problem exec()'ing " + commandArray[0]);
         throw new UnableToCompleteException();
       }
-      browser.setProcess(child);
+    } catch (Exception e) {
+      getLogger().log(TreeLogger.ERROR, "Error launching external browser at " + browser.getPath(),
+          e);
+      throw new UnableToCompleteException();
     }
+    browser.setProcess(child);
   }
 }

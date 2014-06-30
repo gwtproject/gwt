@@ -15,7 +15,6 @@
  */
 package com.google.gwt.junit;
 
-import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 
 /**
@@ -24,35 +23,18 @@ import com.google.gwt.core.ext.UnableToCompleteException;
  */
 class RunStyleManual extends RunStyle {
 
-  private int numClients;
-
   public RunStyleManual(JUnitShell shell) {
     super(shell);
   }
 
   @Override
   public int initialize(String args) {
-    numClients = 1;
-    if (args != null) {
-      try {
-        numClients = Integer.parseInt(args);
-      } catch (NumberFormatException e) {
-        getLogger().log(TreeLogger.ERROR,
-            "Error parsing argument \"" + args + "\"", e);
-        return -1;
-      }
-    }
-    return numClients;
+    return 1;
   }
 
   @Override
   public void launchModule(String moduleName) throws UnableToCompleteException {
-    if (numClients == 1) {
-      System.out.println("Please navigate your browser to this URL:");
-    } else {
-      System.out.println("Please navigate " + numClients
-          + " browsers to this URL:");
-    }
+    System.out.println("Please navigate your browser to this URL:");
     System.out.println(shell.getModuleUrl(moduleName));
   }
 }

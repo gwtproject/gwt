@@ -35,8 +35,6 @@ public abstract class RunStyle {
 
   private int tries = 1;
 
-  private Set<String> userAgents;
-
   /**
    * Constructor for RunStyle. Any subclass must provide a constructor with the
    * same signature since this will be how the RunStyle is created via
@@ -48,11 +46,17 @@ public abstract class RunStyle {
     this.shell = shell;
   }
 
+  public boolean isBrowserAlive() {
+    return getInterruptedHosts() == null;
+  }
+
   /**
    * Tests whether the test was interrupted.
    * 
    * @return the interrupted hosts, or null if not interrupted
+   * @deprecated override {@link #isBrowserAlive()} instead.
    */
+  @Deprecated
   public String[] getInterruptedHosts() {
     return null;
   }
@@ -80,12 +84,12 @@ public abstract class RunStyle {
   }
 
   /**
-   * Returns user agents for this run style.
-   *
-   * @return the user agents, or {@code null} if unknown
+   * Returns user agent for this run style.
+   * 
+   * @return the user agent, or {@code null} if unknown
    */
-  public Set<String> getUserAgents() {
-    return userAgents;
+  public String getUserAgent() {
+    return null;
   }
 
   /**
@@ -99,11 +103,10 @@ public abstract class RunStyle {
   }
 
   /**
-   * Initialize the runstyle with any supplied arguments, and return the number
-   * of clients this runstyle controls.
-   * 
+   * Initialize the runstyle with any supplied arguments.
+   *
    * @param args arguments passed in -runStyle option, null if none supplied
-   * @return the number of clients, or -1 if initialization was unsuccessful
+   * @return -1 if initialization was unsuccessful
    */
   public abstract int initialize(String args);
 
@@ -125,13 +128,6 @@ public abstract class RunStyle {
    */
   public void setTries(int tries) {
     this.tries = tries;
-  }
-
-  /**
-   * Sets the associated user agents for this run style.
-   */
-  public void setUserAgents(Set<String> userAgents) {
-    this.userAgents = userAgents;
   }
 
   /**

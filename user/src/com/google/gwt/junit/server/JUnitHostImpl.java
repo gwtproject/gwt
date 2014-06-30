@@ -47,66 +47,24 @@ import javax.servlet.http.HttpServletResponse;
 public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, RemoteLoggingService {
 
   /**
-   * A hook into GWTUnitTestShell, the underlying unit test process.
-   */
-  private static JUnitMessageQueue sHost = null;
-
-  /**
    * A maximum timeout to wait for the test system to respond with the next
    * test. The test system should respond nearly instantly if there are further
    * tests to run, unless the tests have not yet been compiled.
    */
   private static final int TIME_TO_WAIT_FOR_TESTNAME = 300000;
 
-  /**
-   * Monotonic increase counter to create unique client session ids.
-   */
-  private static final AtomicInteger uniqueSessionId = new AtomicInteger();
-
-  /**
-   * Tries to grab the GWTUnitTestShell sHost environment to communicate with
-   * the real test process.
-   */
-  private static synchronized JUnitMessageQueue getHost() {
-    if (sHost == null) {
-      sHost = JUnitShell.getMessageQueue();
-      if (sHost == null) {
-        throw new InvocationException(
-            "Unable to find JUnitShell; is this servlet running under GWTTestCase?");
-      }
-    }
-    return sHost;
-  }
-
   private StackTraceDeobfuscator deobfuscator;
 
-  public InitialResponse getTestBlock(int blockIndex, ClientInfo clientInfo)
-      throws TimeoutException {
-    ClientInfoExt clientInfoExt;
-    HttpServletRequest request = getThreadLocalRequest();
-    if (clientInfo.getSessionId() < 0) {
-      clientInfoExt = createNewClientInfo(request);
-    } else {
-      clientInfoExt = createClientInfo(clientInfo, request);
+  public TestInfo[] reportResultsAndGetTestBlock(
+      HashMap<TestInfo, JUnitResult> results) throws TimeoutException {
+    JUnitMessageQueue host = JUnitShell.getMessageQueue();
+    if (results.size() > 0) {
+      for (JUnitResult result : results.values()) {
+        initResult(result);
+      }
+      host.reportResults(results);
     }
-    TestBlock initialTestBlock = getHost().getTestBlock(clientInfoExt,
-        blockIndex, TIME_TO_WAIT_FOR_TESTNAME);
-    // Send back the updated session id.
-    return new InitialResponse(clientInfoExt.getSessionId(), initialTestBlock);
-  }
-
-  public TestBlock reportResultsAndGetTestBlock(
-      HashMap<TestInfo, JUnitResult> results, int testBlock,
-      ClientInfo clientInfo) throws TimeoutException {
-    for (JUnitResult result : results.values()) {
-      initResult(getThreadLocalRequest(), result);
-    }
-    JUnitMessageQueue host = getHost();
-    ClientInfoExt clientInfoExt = createClientInfo(clientInfo,
-        getThreadLocalRequest());
-    host.reportResults(clientInfoExt, results);
-    return host.getTestBlock(clientInfoExt, testBlock,
-        TIME_TO_WAIT_FOR_TESTNAME);
+    return host.getTestBlock(TIME_TO_WAIT_FOR_TESTNAME);
   }
 
   @Override
@@ -123,37 +81,16 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
     } else if (requestURI.endsWith("/junithost/error/launch")) {
       String requestPayload = RPCServletUtils.readContentAsGwtRpc(request);
       JUnitResult result = new JUnitResult();
-      initResult(request, result);
+      initResult(result);
       result.setException(new JUnitFatalLaunchException(requestPayload));
-      getHost().reportFatalLaunch(createNewClientInfo(request), result);
+      JUnitShell.getMessageQueue().reportFatalLaunch(result);
     } else {
       super.service(request, response);
     }
   }
 
-  private ClientInfoExt createClientInfo(ClientInfo clientInfo, HttpServletRequest request) {
-    assert (clientInfo.getSessionId() >= 0);
-    return new ClientInfoExt(clientInfo.getSessionId(), getClientDesc(request));
-  }
-
-  private ClientInfoExt createNewClientInfo(HttpServletRequest request) {
-    return new ClientInfoExt(createSessionId(), getClientDesc(request));
-  }
-
-  private int createSessionId() {
-    return uniqueSessionId.getAndIncrement();
-  }
-
-  /**
-   * Returns a client description for the current request.
-   */
-  private String getClientDesc(HttpServletRequest request) {
-    String machine = request.getRemoteHost();
-    String agent = request.getHeader("User-Agent");
-    return machine + " / " + agent;
-  }
-
-  private void initResult(HttpServletRequest request, JUnitResult result) {
+  private void initResult(JUnitResult result) {
+    HttpServletRequest request = getThreadLocalRequest();
     result.setAgent(request.getHeader("User-Agent"));
     result.setHost(request.getRemoteHost());
     Throwable throwable = result.getException();
@@ -189,3 +126,4 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
     return deobfuscator;
   }
 }
+

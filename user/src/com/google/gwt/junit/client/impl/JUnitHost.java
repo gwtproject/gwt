@@ -28,91 +28,6 @@ import java.util.HashMap;
 public interface JUnitHost extends RemoteService {
 
   /**
-   * Information about the client browser.
-   */
-  public static class ClientInfo implements Serializable {
-    /**
-     * This client's unique session id.
-     */
-    private int sessionId;
-
-    public ClientInfo(int sessionId) {
-      this.sessionId = sessionId;
-    }
-
-    /**
-     * Constructor for serialization.
-     */
-    ClientInfo() {
-    }
-
-    public int getSessionId() {
-      return sessionId;
-    }
-  }
-
-  /**
-   * An initial response that sets the client session id.
-   */
-  public static class InitialResponse implements Serializable {
-    /**
-     * The unique client session id.
-     */
-    private int sessionId;
-
-    /**
-     * The first test block to run.
-     */
-    private TestBlock testBlock;
-
-    public InitialResponse(int sessionId, TestBlock testBlock) {
-      this.sessionId = sessionId;
-      this.testBlock = testBlock;
-    }
-
-    /**
-     * Constructor for serialization.
-     */
-    InitialResponse() {
-    }
-
-    public int getSessionId() {
-      return sessionId;
-    }
-
-    public TestBlock getTestBlock() {
-      return testBlock;
-    }
-  }
-
-  /**
-   * Returned from the server to tell the system what test to run next.
-   */
-  public static class TestBlock implements Serializable {
-    private int index;
-    private TestInfo[] tests;
-
-    public TestBlock(TestInfo[] tests, int index) {
-      this.tests = tests;
-      this.index = index;
-    }
-
-    /**
-     * Constructor for serialization.
-     */
-    TestBlock() {
-    }
-
-    public int getIndex() {
-      return index;
-    }
-
-    public TestInfo[] getTests() {
-      return tests;
-    }
-  }
-
-  /**
    * Returned from the server to tell the system what test to run next.
    */
   public static class TestInfo implements Serializable {
@@ -176,27 +91,13 @@ public interface JUnitHost extends RemoteService {
   }
 
   /**
-   * Gets a specific block of tests to run.
-   * 
-   * @param blockIndex the index of the test block to retrieve
-   * @param clientInfo the info for this client
-   * @return the initial response
-   * @throws TimeoutException if the wait for the next method times out.
-   */
-  InitialResponse getTestBlock(int blockIndex, ClientInfo clientInfo)
-      throws TimeoutException;
-
-  /**
-   * Reports results for the last method run and gets the name of next method to
-   * run.
-   * 
+   * Reports results for the last method run and gets the name of next method to run.
+   *
    * @param results the results of executing the test
-   * @param blockIndex the index of the test block to retrieve
-   * @param clientInfo the info for this client
    * @return the next test block
    * @throws TimeoutException if the wait for the next method times out.
    */
-  TestBlock reportResultsAndGetTestBlock(
-      HashMap<TestInfo, JUnitResult> results, int blockIndex,
-      ClientInfo clientInfo) throws TimeoutException;
+  TestInfo[] reportResultsAndGetTestBlock(HashMap<TestInfo, JUnitResult> results)
+      throws TimeoutException;
 }
+

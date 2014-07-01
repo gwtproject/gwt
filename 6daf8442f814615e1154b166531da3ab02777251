@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841c2dfc_80d83aae",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "Heh, trying to debug the issue, I had added OptionStrict*Resources to CompileModuleOptions and an ArgHandlerStrictResources to the CompileModule. That wasn\u0027t enough though.\n\n(FYI, I also added ArgHandlerIncrementalCompileWarnings and ArgHandlerOverlappingSourceWarnings to try to get more info but that didn\u0027t work)",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c450e5a6_c2cc06ff",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "Hmm, shouldn\u0027t this module be \"non fileset\"? It\u0027s inherited by RequestFactory too.\n\nAre you aware of any blocker to remove the type\u003d\"fileset\"?",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6421f930_dfbdb356",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "Ideally we\u0027d want to modularize those (similarly to the way Jens/I proposed modularizing Editor and RequestFactory), but we can do that in a later change.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 55
+      },
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6421f930_1f232b11",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "This is a fileset module, and it\u0027s included in Emulation (i.e. Core, for the non-fileset module)",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c450e5a6_62b2d285",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "nit: there\u0027s no \u0027public\u0027; I saw you removed some of those in other modules, so might want to remote it here too.",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6421f930_9fc73bdb",
+        "filename": "user/src/com/google/gwt/media/Media.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "nit: there\u0027s no \u0027public\u0027.",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841c2dfc_00766aea",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "Correct me if I\u0027m wrong but code.Core no longer brings in UserAgent. Here, we get UserAgent through DOM and HTTP.",
+      "range": {
+        "startLine": 17,
+        "startChar": 43,
+        "endLine": 17,
+        "endChar": 73
+      },
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6421f930_dfe6137d",
+        "filename": "user/src/com/google/gwt/touch/Touch.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "nit: there\u0027s no \u0027public\u0027",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6421f930_ffebd741",
+        "filename": "user/src/com/google/gwt/user/DOM.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "That one should probably be changed to useragent.UserAgent.",
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841c2dfc_c06f120c",
+        "filename": "user/src/com/google/gwt/user/UI.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "Shouldn\u0027t that read simply \"rpc/\" or \"rpc/**\"? Also, shouldn\u0027t we rather put it as a child \u003cskip\u003e element for consistency?",
+      "range": {
+        "startLine": 49,
+        "startChar": 24,
+        "endLine": 49,
+        "endChar": 40
+      },
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c450e5a6_22d5aa74",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of copying those from PotentialElement. Couldn\u0027t we include PotentialElement in user.DOM rather than user.UI? (it\u0027s just an include here and a few skips there)",
+      "range": {
+        "startLine": 1064,
+        "startChar": 0,
+        "endLine": 1074,
+        "endChar": 7
+      },
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

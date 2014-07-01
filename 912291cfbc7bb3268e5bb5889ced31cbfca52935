@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6421f930_5f9c43e1",
+        "filename": "user/src/com/google/gwt/view/View.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T08:53:29Z",
+      "side": 0,
+      "message": "Wondering: shouldn\u0027t we add a comment to the fileset modules pointing to the non-fileset module that inherit them?\n\nImagine that I need classes from c.g.g.view, instead of grepping for view.View –which is only easy if you have a checkout of GWT– to find the non-fileset module that I should inherit (instead of inheriting view.View directly, and missing some other dependencies that I\u0027d have to chase down –namely cell.Cell and event.EventBase, cell.Cell brings in dom.DOM– ; in this case, grepping would lead me to CellView which I\u0027d have to grep again to find user.UI), I could just open the View.gwt.xml and it would tell me what to inherit (in this case user.UI)",
+      "revId": "912291cfbc7bb3268e5bb5889ced31cbfca52935",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

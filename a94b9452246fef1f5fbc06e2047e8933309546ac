@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_269cfc87",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:26:58Z",
+      "side": 1,
+      "message": "(Or perhaps JettyDevMode if that\u0027s too long.)\n\njavadoc:\n\n\"Starts a Jetty server to run a web app with Super Dev Mode on. Partially backward-compatible with the DevMode entry point, for an easier transition.\"\n\nI don\u0027t want to call it SuperDevMode because we might have other launchers later. (For example, for App Engine.)",
+      "parentUuid": "e4efa930_260ebc53",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_433dba48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
         "patchSetId": 3

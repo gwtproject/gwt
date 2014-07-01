@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "841c2dfc_aea44fdb",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T15:57:14Z",
+      "side": 1,
+      "message": "Apparently, DevModeBase dates back to 2008 (named HostedModeBase at the time) as a base class for GWTShell and HostedMode, when introducing HostedMode with support for \"WAR\" project layouts (instead of forcing everything as public resources or servlets declared in the gwt.xml files).\n\nGWTShell survived until Dec 2012, and I believe DevModeBase is no longer needed since then.\n\nWe\u0027d have to check with Google in case they built some tool on top of DevModeBase, but otherwise I wouldn\u0027t mind breaking someone else, this is internal API anyway (despite being \u0027public\u0027).",
+      "parentUuid": "841c2dfc_ce5743ff",
+      "revId": "e4d9f1c7f4a0d7e8e869623f65e4b284d9fba613",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841c2dfc_235378f3",
         "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
         "patchSetId": 1

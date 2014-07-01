@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_b147a883",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "The name of the class \"LoggingDisabled\" is misleading. This is more like \"LoggingBase\". It actually pulls in the functionality for the more complex logging.",
+      "parentUuid": "e4efa930_066d8085",
+      "range": {
+        "startLine": 128,
+        "startChar": 55,
+        "endLine": 128,
+        "endChar": 59
+      },
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_f1349001",
         "filename": "user/src/com/google/gwt/logging/impl/LoggerConfigurator.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_8cf24f08",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfigurator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "I think I liked the LoggerConfigurator better. It is meant to configure Logger instances for handlers, formatting, log levels etc.",
+      "parentUuid": "e4efa930_f1349001",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_91242cd0",
         "filename": "user/src/com/google/gwt/logging/impl/LoggerConfigurator.java",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2014-07-01T20:32:15Z",
       "side": 1,
       "message": "Since it\u0027s not public yet, perhaps this should be less general-purpose until we figure out another use case.\n\naddRootHandlers(Logger root);",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 16
+      },
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_712ec0c6",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfigurator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "I already have another use case. If an app needs per package log configuration (as in JDK), this is good way to support that. So I prefer to keep it as it doesn\u0027t complicate the code.",
+      "parentUuid": "e4efa930_91242cd0",
       "range": {
         "startLine": 29,
         "startChar": 7,
@@ -106,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_b11b2845",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "@Jens: ConsoleLogHandler is in logging that this package shouldn\u0027t depend on - that was the idea to start with. I am going to deal with exceptions via native traces - that should hopefully work much better with the debuggers.\n\n@Brian: If somebody pulls in Logging (which is need for ConsoleLogHandler), this handler is disabled so there is no double logging. Using the same class alone will not prevent duplicate messages.",
+      "parentUuid": "e4efa930_46e148b0",
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841c2dfc_e3582034",
         "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
         "patchSetId": 3
@@ -123,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_715b60b0",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "841c2dfc_e3582034",
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "041cbd1d_563a94e0",
         "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
         "patchSetId": 3
@@ -134,6 +242,24 @@
       "writtenOn": "2014-07-01T19:14:57Z",
       "side": 1,
       "message": "I think this check could be problematic in IE9, see http://whattheheadsaid.com/2011/04/internet-explorer-9s-problematic-console-object",
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_7107e07e",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T21:33:42Z",
+      "side": 1,
+      "message": "Not sure it would worth the trouble here as this basically the same console check in every other part of the SDK.",
+      "parentUuid": "041cbd1d_563a94e0",
       "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

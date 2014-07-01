@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "841c2dfc_ce5743ff",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-01T15:35:12Z",
+      "side": 1,
+      "message": "It makes very sense to me.\nTo me it was odd that we had a DevModeBase only used by DevMode instead of having just one DevMode class, so I thought probably something else is going on and maybe some 3party tool is using it, could we break anything?",
+      "parentUuid": "6421f930_a22544a0",
+      "revId": "e4d9f1c7f4a0d7e8e869623f65e4b284d9fba613",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841c2dfc_235378f3",
         "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
         "patchSetId": 1

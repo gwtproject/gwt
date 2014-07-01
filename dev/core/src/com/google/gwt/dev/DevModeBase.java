@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev;
 
+import com.google.gwt.core.ext.ServletContainer;
+import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
@@ -23,53 +25,68 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.shell.ArtifactAcceptor;
 import com.google.gwt.dev.shell.BrowserChannelServer;
-import com.google.gwt.dev.shell.BrowserListener;
 import com.google.gwt.dev.shell.BrowserWidgetHost;
 import com.google.gwt.dev.shell.BrowserWidgetHostChecker;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.ModuleSpaceHost;
-import com.google.gwt.dev.shell.OophmSessionHandler;
 import com.google.gwt.dev.shell.ShellModuleSpaceHost;
+import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.shell.remoteui.RemoteUI;
 import com.google.gwt.dev.ui.DevModeUI;
 import com.google.gwt.dev.ui.DoneCallback;
 import com.google.gwt.dev.ui.DoneEvent;
+import com.google.gwt.dev.ui.RestartServerCallback;
+import com.google.gwt.dev.ui.RestartServerEvent;
 import com.google.gwt.dev.util.BrowserInfo;
+import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
+import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableGeneratorResultCaching;
+import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
+import com.google.gwt.dev.util.arg.ArgHandlerModuleName;
+import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
+import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
+import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerString;
+import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.BindException;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+import java.util.regex.Pattern;
 
 /**
  * The main executable class for the hosted mode shell. This class must not have
  * any GUI dependencies.
  */
-public abstract class DevModeBase implements DoneCallback {
+public abstract class DevModeBase implements DoneCallback, RestartServerCallback  {
   /**
    * Implementation of BrowserWidgetHost that supports the abstract UI
    * interface.
    */
   public class UiBrowserWidgetHostImpl implements BrowserWidgetHost {
-
     @Override
     public ModuleHandle createModuleLogger(String moduleName, String userAgent, String url,
         String tabKey, String sessionKey, BrowserChannelServer serverChannel, byte[] userAgentIcon) {
@@ -295,8 +312,8 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
-    public String getPurposeSnippet() {
-      return "Starts a servlet container serving the directory specified by the -war flag.";
+    public boolean getDefaultValue() {
+      return !options.isNoServer();
     }
 
     @Override
@@ -305,14 +322,14 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
-    public boolean setFlag(boolean value) {
-      options.setNoServer(!value);
-      return true;
+    public String getPurposeSnippet() {
+      return "Starts a servlet container serving the directory specified by the -war flag.";
     }
 
     @Override
-    public boolean getDefaultValue() {
-      return !options.isNoServer();
+    public boolean setFlag(boolean value) {
+      options.setNoServer(!value);
+      return true;
     }
   }
 
@@ -427,6 +444,116 @@ public abstract class DevModeBase implements DoneCallback {
   }
 
   /**
+   * Handles the -server command line flag.
+   */
+  protected static class ArgHandlerServer extends ArgHandlerString {
+
+    private static final String DEFAULT_SCL = JettyLauncher.class.getName();
+
+    private HostedModeBaseOptions options;
+
+    public ArgHandlerServer(HostedModeBaseOptions options) {
+      this.options = options;
+    }
+
+    @Override
+    public String[] getDefaultArgs() {
+      if (options.isNoServer()) {
+        return null;
+      } else {
+        return new String[]{getTag(), DEFAULT_SCL};
+      }
+    }
+
+    @Override
+    public String getPurpose() {
+      return "Specify a different embedded web server to run (must implement ServletContainerLauncher)";
+    }
+
+    @Override
+    public String getTag() {
+      return "-server";
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[]{"servletContainerLauncher[:args]"};
+    }
+
+    @Override
+    public boolean setString(String arg) {
+      // Supercedes -noserver.
+      options.setNoServer(false);
+      String sclClassName;
+      String sclArgs;
+      int idx = arg.indexOf(':');
+      if (idx >= 0) {
+        sclArgs = arg.substring(idx + 1);
+        sclClassName = arg.substring(0, idx);
+      } else {
+        sclArgs = null;
+        sclClassName = arg;
+      }
+      if (sclClassName.length() == 0) {
+        sclClassName = DEFAULT_SCL;
+      }
+      Throwable t;
+      try {
+        Class<?> clazz =
+            Class.forName(sclClassName, true, Thread.currentThread().getContextClassLoader());
+        Class<? extends ServletContainerLauncher> sclClass =
+            clazz.asSubclass(ServletContainerLauncher.class);
+        options.setServletContainerLauncher(sclClass.newInstance());
+        options.setServletContainerLauncherArgs(sclArgs);
+        return true;
+      } catch (ClassCastException e) {
+        t = e;
+      } catch (ClassNotFoundException e) {
+        t = e;
+      } catch (InstantiationException e) {
+        t = e;
+      } catch (IllegalAccessException e) {
+        t = e;
+      }
+      System.err.println("Unable to load server class '" + sclClassName + "'");
+      t.printStackTrace();
+      return false;
+    }
+  }
+
+  /**
+   * Handles a startup url that can be passed on the command line.
+   */
+  protected static class ArgHandlerStartupURLs extends ArgHandlerString {
+    private final OptionStartupURLs options;
+
+    public ArgHandlerStartupURLs(OptionStartupURLs options) {
+      this.options = options;
+    }
+
+    @Override
+    public String getPurpose() {
+      return "Automatically launches the specified URL";
+    }
+
+    @Override
+    public String getTag() {
+      return "-startupUrl";
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[]{"url"};
+    }
+
+    @Override
+    public boolean setString(String arg) {
+      options.addStartupURL(arg);
+      return true;
+    }
+  }
+
+  /**
    * Handles the -whitelist command line flag.
    */
   protected static class ArgHandlerWhitelist extends ArgHandlerString {
@@ -455,11 +582,56 @@ public abstract class DevModeBase implements DoneCallback {
   }
 
   /**
+   * The base dev mode argument processor.
+   */
+  public static class ArgProcessor extends ArgProcessorBase {
+    public ArgProcessor(HostedModeBaseOptions options) {
+      registerHandler(new ArgHandlerNoServerFlag(options));
+      registerHandler(new ArgHandlerPort(options));
+      registerHandler(new ArgHandlerWhitelist());
+      registerHandler(new ArgHandlerBlacklist());
+      registerHandler(new ArgHandlerEnableGeneratorResultCaching());
+      registerHandler(new ArgHandlerLogDir(options));
+      registerHandler(new ArgHandlerLogLevel(options));
+      registerHandler(new ArgHandlerGenDir(options));
+      registerHandler(new ArgHandlerBindAddress(options));
+      registerHandler(new ArgHandlerCodeServerPort(options));
+      registerHandler(new ArgHandlerRemoteUI(options));
+      registerHandler(new ArgHandlerServer(options));
+      registerHandler(new ArgHandlerStartupURLs(options));
+      registerHandler(new ArgHandlerWarDir(options));
+      registerHandler(new ArgHandlerDeployDir(options));
+      registerHandler(new ArgHandlerExtraDir(options));
+      registerHandler(new ArgHandlerWorkDirOptional(options));
+      registerHandler(new ArgHandlerDisableUpdateCheck(options));
+      registerHandler(new ArgHandlerSourceLevel(options));
+      registerHandler(new ArgHandlerModuleName(options) {
+        @Override
+        public String getPurpose() {
+          return super.getPurpose() + " to host";
+        }
+      });
+    }
+
+    @Override
+    protected String getName() {
+      return DevModeBase.class.getName();
+    }
+  }
+
+  /**
    * Base options for dev mode.
    */
   protected interface HostedModeBaseOptions extends PrecompileTaskOptions, OptionLogDir,
       OptionNoServer, OptionPort, OptionCodeServerPort, OptionStartupURLs, OptionRemoteUI,
-      OptionBindAddress {
+      OptionBindAddress, CompilerOptions {
+    ServletContainerLauncher getServletContainerLauncher();
+
+    String getServletContainerLauncherArgs();
+
+    void setServletContainerLauncher(ServletContainerLauncher scl);
+
+    void setServletContainerLauncherArgs(String args);
   }
 
   /**
@@ -472,13 +644,19 @@ public abstract class DevModeBase implements DoneCallback {
     private String bindAddress;
     private int codeServerPort;
     private String connectAddress;
+    private File deployDir;
+    private File extraDir;
     private boolean isNoServer;
+    private int localWorkers;
     private File logDir;
     private int port;
     private String remoteUIClientId;
     private String remoteUIHost;
     private int remoteUIHostPort;
+    private ServletContainerLauncher scl;
+    private String sclArgs;
     private final List<String> startupURLs = new ArrayList<String>();
+    private File warDir;
 
     @Override
     public void addStartupURL(String url) {
@@ -511,6 +689,21 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
+    public File getDeployDir() {
+      return (deployDir == null) ? new File(warDir, "WEB-INF/deploy") : deployDir;
+    }
+
+    @Override
+    public File getExtraDir() {
+      return extraDir;
+    }
+
+    @Override
+    public int getLocalWorkers() {
+      return localWorkers;
+    }
+
+    @Override
     public File getLogDir() {
       return logDir;
     }
@@ -539,25 +732,40 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
+    public File getSaveSourceOutput() {
+      return null;
+    }
+
+    @Override
+    public ServletContainerLauncher getServletContainerLauncher() {
+      return scl;
+    }
+
+    @Override
+    public String getServletContainerLauncherArgs() {
+      return sclArgs;
+    }
+
+    @Override
     public List<String> getStartupURLs() {
       return Collections.unmodifiableList(startupURLs);
     }
-
+    @Override
+    public File getWarDir() {
+      return warDir;
+    }
     @Override
     public boolean isNoServer() {
       return isNoServer;
     }
-
     @Override
     public void setBindAddress(String bindAddress) {
       this.bindAddress = bindAddress;
     }
-
     @Override
     public void setClientId(String clientId) {
       this.remoteUIClientId = clientId;
     }
-
     @Override
     public void setCodeServerPort(int port) {
       codeServerPort = port;
@@ -569,6 +777,21 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
+    public void setDeployDir(File deployDir) {
+      this.deployDir = deployDir;
+    }
+
+    @Override
+    public void setExtraDir(File extraDir) {
+      this.extraDir = extraDir;
+    }
+
+    @Override
+    public void setLocalWorkers(int localWorkers) {
+      this.localWorkers = localWorkers;
+    }
+
+    @Override
     public void setLogFile(String filename) {
       logDir = new File(filename);
     }
@@ -576,6 +799,11 @@ public abstract class DevModeBase implements DoneCallback {
     @Override
     public void setNoServer(boolean isNoServer) {
       this.isNoServer = isNoServer;
+    }
+
+    @Deprecated
+    public void setOutDir(File outDir) {
+      this.warDir = outDir;
     }
 
     @Override
@@ -591,6 +819,26 @@ public abstract class DevModeBase implements DoneCallback {
     @Override
     public void setRemoteUIHostPort(int remoteUIHostPort) {
       this.remoteUIHostPort = remoteUIHostPort;
+    }
+
+    @Override
+    public void setSaveSourceOutput(File debugDir) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setServletContainerLauncher(ServletContainerLauncher scl) {
+      this.scl = scl;
+    }
+
+    @Override
+    public void setServletContainerLauncherArgs(String args) {
+      sclArgs = args;
+    }
+
+    @Override
+    public void setWarDir(File warDir) {
+      this.warDir = warDir;
     }
 
     @Override
@@ -683,31 +931,16 @@ public abstract class DevModeBase implements DoneCallback {
     List<String> getStartupURLs();
   }
 
-  /**
-   * The base dev mode argument processor.
-   */
-  protected abstract static class ArgProcessor extends ArgProcessorBase {
-    public ArgProcessor(HostedModeBaseOptions options, boolean forceServer) {
-      if (!forceServer) {
-        registerHandler(new ArgHandlerNoServerFlag(options));
-      }
-      registerHandler(new ArgHandlerPort(options));
-      registerHandler(new ArgHandlerWhitelist());
-      registerHandler(new ArgHandlerBlacklist());
-      registerHandler(new ArgHandlerEnableGeneratorResultCaching());
-      registerHandler(new ArgHandlerLogDir(options));
-      registerHandler(new ArgHandlerLogLevel(options));
-      registerHandler(new ArgHandlerGenDir(options));
-      registerHandler(new ArgHandlerBindAddress(options));
-      registerHandler(new ArgHandlerCodeServerPort(options));
-      registerHandler(new ArgHandlerRemoteUI(options));
-    }
-  }
-
   private static final boolean generatorResultCachingDisabled =
       (System.getProperty("gwt.disableGeneratorResultCaching") != null);
 
   private static final Random RNG = new Random();
+
+  /**
+   * The pattern for files usable as startup URLs.
+   */
+  private static final Pattern STARTUP_FILE_PATTERN = Pattern.compile(".*\\.(html|jsp)",
+      Pattern.CASE_INSENSITIVE);
 
   public static String normalizeURL(String unknownUrlText, boolean isHttps, int port, String host) {
     if (unknownUrlText.contains("://")) {
@@ -761,31 +994,41 @@ public abstract class DevModeBase implements DoneCallback {
 
   protected String bindAddress;
 
-  protected int codeServerPort;
+  protected CompilerContext compilerContext;
+
+  protected final CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
 
   protected String connectAddress;
 
   protected boolean isHttps;
 
-  protected BrowserListener listener;
-
+  /**
+   * Hiding super field because it's actually the same object, just with a
+   * stronger type.
+   */
   protected final HostedModeBaseOptions options;
-
-  protected final CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
-
-  protected CompilerContext compilerContext;
 
   protected DevModeUI ui = null;
 
   private final Semaphore blockUntilDone = new Semaphore(0);
 
-  private BrowserWidgetHost browserHost = new UiBrowserWidgetHostImpl();
-
   private boolean headlessMode = false;
 
   private Map<String, RebindCache> rebindCaches = null;
 
+  /**
+   * The server that was started.
+   */
+  private ServletContainer server;
+
   private boolean started;
+
+  private final Map<String, ModuleDef> startupModules = new LinkedHashMap<String, ModuleDef>();
+
+  /**
+   * Tracks whether we created a temp workdir that we need to destroy.
+   */
+  private boolean tempWorkDir = false;
 
   private TreeLogger topLogger;
 
@@ -833,6 +1076,17 @@ public abstract class DevModeBase implements DoneCallback {
   }
 
   /**
+   * Called by the UI on a restart server event.
+   */
+  public void onRestartServer(TreeLogger logger) {
+    try {
+      server.refresh();
+    } catch (UnableToCompleteException e) {
+      // ignore, problem already logged
+    }
+  }
+
+  /**
    * Sets up all the major aspects of running the shell graphically, including
    * creating the main window and optionally starting an embedded web server.
    */
@@ -869,7 +1123,9 @@ public abstract class DevModeBase implements DoneCallback {
     return CheckForUpdates.ONE_MINUTE;
   }
 
-  protected abstract HostedModeBaseOptions createOptions();
+  protected HostedModeBaseOptions createOptions() {
+    return new HostedModeBaseOptionsImpl();
+  }
 
   /**
    * Creates an instance of ShellModuleSpaceHost (or a derived class) using the
@@ -888,7 +1144,20 @@ public abstract class DevModeBase implements DoneCallback {
         artifactAcceptor, getRebindCache(moduleDef.getName()));
   }
 
-  protected abstract void doShutDownServer();
+  protected void doShutDownServer() {
+    if (server != null) {
+      try {
+        server.stop();
+      } catch (UnableToCompleteException e) {
+        // Already logged.
+      }
+      server = null;
+    }
+
+    if (tempWorkDir) {
+      Util.recursiveDelete(options.getWorkDir(), false);
+    }
+  }
 
   /**
    * Perform any slower startup tasks, such as loading modules. This is separate
@@ -898,11 +1167,91 @@ public abstract class DevModeBase implements DoneCallback {
    * @return false if startup failed
    */
   protected boolean doSlowStartup() {
-    // do nothing by default
+    tempWorkDir = options.getWorkDir() == null;
+    if (tempWorkDir) {
+      try {
+        options.setWorkDir(Utility.makeTemporaryDirectory(null, "gwtc"));
+      } catch (IOException e) {
+        System.err.println("Unable to create hosted mode work directory");
+        e.printStackTrace();
+        return false;
+      }
+    }
+
+    TreeLogger branch = getTopLogger().branch(TreeLogger.TRACE, "Linking modules");
+    Event slowStartupEvent = SpeedTracerLogger.start(DevModeEventType.SLOW_STARTUP);
+    try {
+      for (ModuleDef module : startupModules.values()) {
+        TreeLogger loadLogger =
+            branch.branch(TreeLogger.DEBUG, "Bootstrap link for command-line module '"
+                + module.getCanonicalName() + "'");
+        link(loadLogger, module);
+      }
+    } catch (UnableToCompleteException e) {
+      // Already logged.
+      return false;
+    } finally {
+      slowStartupEvent.end();
+    }
     return true;
   }
 
-  protected abstract boolean doStartup();
+  protected boolean doStartup() {
+    // Background scan the classpath to warm the cache.
+    Thread scanThread = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        ResourceOracleImpl.preload(TreeLogger.NULL);
+      }
+    });
+    scanThread.setDaemon(true);
+    scanThread.setPriority((Thread.MIN_PRIORITY + Thread.NORM_PRIORITY) / 2);
+    scanThread.start();
+
+    File persistentCacheDir = null;
+    if (options.getWarDir() != null && !options.getWarDir().getName().endsWith(".jar")) {
+      persistentCacheDir = new File(options.getWarDir(), "../");
+    }
+
+    if (!doStartup(persistentCacheDir)) {
+      return false;
+    }
+
+    ServletValidator servletValidator = null;
+    ServletWriter servletWriter = null;
+    File webXml = new File(options.getWarDir(), "WEB-INF/web.xml");
+    if (!options.isNoServer()) {
+      if (webXml.exists()) {
+        servletValidator = ServletValidator.create(getTopLogger(), webXml);
+      } else {
+        servletWriter = new ServletWriter();
+      }
+    }
+
+    TreeLogger branch = getTopLogger().branch(TreeLogger.TRACE, "Loading modules");
+    try {
+      for (String moduleName : options.getModuleNames()) {
+        TreeLogger moduleBranch = branch.branch(TreeLogger.TRACE, moduleName);
+        ModuleDef module = loadModule(moduleBranch, moduleName, false);
+        // Create a hard reference to the module to avoid gc-ing it until we
+        // actually load the module from the browser.
+        startupModules.put(module.getName(), module);
+
+        if (!options.isNoServer()) {
+          validateServletTags(moduleBranch, servletValidator, servletWriter, module);
+        }
+      }
+      if (servletWriter != null) {
+        servletWriter.realize(webXml);
+      }
+    } catch (IOException e) {
+      getTopLogger().log(TreeLogger.WARN, "Unable to generate '" + webXml.getAbsolutePath() + "'");
+    } catch (UnableToCompleteException e) {
+      // Already logged.
+      return false;
+    }
+    return true;
+  }
 
   /**
    * Perform any startup tasks, including initializing the UI (if any) and the
@@ -951,26 +1300,78 @@ public abstract class DevModeBase implements DoneCallback {
     return true;
   }
 
-  protected abstract int doStartUpServer();
+  protected int doStartUpServer() {
+    // Create the war directory if it doesn't exist
+    File warDir = options.getWarDir();
+    if (!warDir.exists() && !warDir.mkdirs()) {
+      getTopLogger().log(TreeLogger.ERROR, "Unable to create war directory " + warDir);
+      return -1;
+    }
 
-  protected void ensureCodeServerListener() {
-    if (listener == null) {
-      codeServerPort = options.getCodeServerPort();
-      listener =
-          new BrowserListener(getTopLogger(), bindAddress, codeServerPort, new OophmSessionHandler(
-              getTopLogger(), browserHost));
-      listener.start();
-      try {
-        // save the port we actually used if it was auto
-        codeServerPort = listener.getSocketPort();
-      } catch (UnableToCompleteException e) {
-        // ignore errors listening, we will catch them later
+    Event jettyStartupEvent = SpeedTracerLogger.start(DevModeEventType.JETTY_STARTUP);
+    boolean clearCallback = true;
+    try {
+      ui.setCallback(RestartServerEvent.getType(), this);
+
+      ServletContainerLauncher scl = options.getServletContainerLauncher();
+
+      TreeLogger serverLogger = ui.getWebServerLogger(getWebServerName(), scl.getIconBytes());
+
+      String sclArgs = options.getServletContainerLauncherArgs();
+      if (sclArgs != null) {
+        if (!scl.processArguments(serverLogger, sclArgs)) {
+          return -1;
+        }
+      }
+
+      isHttps = scl.isSecure();
+
+      // Tell the UI if the web server is secure
+      if (isHttps) {
+        ui.setWebServerSecure(serverLogger);
+      }
+
+      /*
+       * TODO: This is a hack to pass the base log level to the SCL. We'll have
+       * to figure out a better way to do this for SCLs in general.
+       */
+      if (scl instanceof JettyLauncher) {
+        JettyLauncher jetty = (JettyLauncher) scl;
+        jetty.setBaseRequestLogLevel(getBaseLogLevelForUI());
+      }
+      scl.setBindAddress(bindAddress);
+
+      if (serverLogger.isLoggable(TreeLogger.TRACE)) {
+        serverLogger.log(TreeLogger.TRACE, "Starting HTTP on port " + getPort(), null);
+      }
+      server = scl.start(serverLogger, getPort(), options.getWarDir());
+      assert (server != null);
+      clearCallback = false;
+      return server.getPort();
+    } catch (BindException e) {
+      System.err.println("Port " + bindAddress + ':' + getPort()
+          + " is already is use; you probably still have another session active");
+    } catch (Exception e) {
+      System.err.println("Unable to start embedded HTTP server");
+      e.printStackTrace();
+    } finally {
+      jettyStartupEvent.end();
+      if (clearCallback) {
+        // Clear the callback if we failed to start the server
+        ui.setCallback(RestartServerEvent.getType(), null);
       }
     }
+    return -1;
   }
+
+  protected abstract void ensureCodeServerListener();
 
   protected String getHost() {
     return connectAddress;
+  }
+
+  protected String getWebServerName() {
+    return options.getServletContainerLauncher().getName();
   }
 
   /**
@@ -978,7 +1379,20 @@ public abstract class DevModeBase implements DoneCallback {
    * URLs should be added to {@code options.addStartupUrl(url)}.
    */
   protected void inferStartupUrls() {
-    // do nothing by default
+    // Look for launchable files directly under war
+    File warDir = options.getWarDir();
+    if (!warDir.exists()) {
+      // if the war directory doesn't exist, there are no startup files there
+      return;
+    }
+    for (File htmlFile : warDir.listFiles(new FilenameFilter() {
+      @Override
+      public boolean accept(File dir, String name) {
+        return STARTUP_FILE_PATTERN.matcher(name).matches();
+      }
+    })) {
+      options.addStartupURL(htmlFile.getName());
+    }
   }
 
   /**
@@ -1025,6 +1439,11 @@ public abstract class DevModeBase implements DoneCallback {
    */
   protected ModuleDef loadModule(TreeLogger logger, String moduleName, boolean refresh)
       throws UnableToCompleteException {
+    if (startupModules.containsKey(moduleName)) {
+      // First load of a startup module; remove from list, no need to refresh.
+      return startupModules.remove(moduleName);
+    }
+
     ModuleDef moduleDef =
         ModuleDefLoader.loadFromClassPath(logger, compilerContext, moduleName, refresh);
     compilerContext = compilerContextBuilder.module(moduleDef).build();
@@ -1032,36 +1451,7 @@ public abstract class DevModeBase implements DoneCallback {
     return moduleDef;
   }
 
-  protected URL processUrl(String url) throws UnableToCompleteException {
-    /*
-     * TODO(jat): properly support launching arbitrary browsers -- need some UI
-     * API tweaks to support that.
-     */
-    URL parsedUrl = null;
-    try {
-      parsedUrl = new URL(url);
-      String path = parsedUrl.getPath();
-      String query = parsedUrl.getQuery();
-      String hash = parsedUrl.getRef();
-      String hostedParam =
-          BrowserListener.getDevModeURLParams(connectAddress, listener.getSocketPort());
-      if (query == null) {
-        query = hostedParam;
-      } else {
-        query += '&' + hostedParam;
-      }
-      path += '?' + query;
-      if (hash != null) {
-        path += '#' + hash;
-      }
-      parsedUrl = new URL(parsedUrl.getProtocol(), parsedUrl.getHost(), parsedUrl.getPort(), path);
-      url = parsedUrl.toExternalForm();
-    } catch (MalformedURLException e) {
-      getTopLogger().log(TreeLogger.ERROR, "Invalid URL " + url, e);
-      throw new UnableToCompleteException();
-    }
-    return parsedUrl;
-  }
+  protected abstract URL processUrl(String url) throws UnableToCompleteException;
 
   protected abstract void produceOutput(TreeLogger logger, StandardLinkerContext linkerStack,
       ArtifactSet artifacts, ModuleDef module, boolean isRelink) throws UnableToCompleteException;
@@ -1148,7 +1538,10 @@ public abstract class DevModeBase implements DoneCallback {
    * Log a warning explaining that no startup URLs were specified and no
    * plausible startup URLs were found.
    */
-  protected abstract void warnAboutNoStartupUrls();
+  protected void warnAboutNoStartupUrls() {
+    getTopLogger().log(TreeLogger.WARN,
+        "No startup URLs supplied and no plausible ones found -- use " + "-startupUrl");
+  }
 
   private ArtifactAcceptor createArtifactAcceptor(TreeLogger logger, final ModuleDef module)
       throws UnableToCompleteException {
@@ -1245,7 +1638,6 @@ public abstract class DevModeBase implements DoneCallback {
    * @param logger TreeLogger instance to use
    */
   private void setStartupUrls(final TreeLogger logger) {
-    ensureCodeServerListener();
     Map<String, URL> startupUrls = new HashMap<String, URL>();
     for (String prenormalized : options.getStartupURLs()) {
       String startupURL = normalizeURL(prenormalized, isHttps, getPort(), getHost());
@@ -1258,5 +1650,28 @@ public abstract class DevModeBase implements DoneCallback {
       }
     }
     ui.setStartupUrls(startupUrls);
+  }
+
+  private void validateServletTags(TreeLogger logger, ServletValidator servletValidator,
+      ServletWriter servletWriter, ModuleDef module) {
+    String[] servletPaths = module.getServletPaths();
+    if (servletPaths.length == 0) {
+      return;
+    }
+
+    TreeLogger servletLogger =
+        logger.branch(TreeLogger.DEBUG, "Validating <servlet> tags for module '" + module.getName()
+            + "'", null, new InstalledHelpInfo("servletMappings.html"));
+    for (String servletPath : servletPaths) {
+      String servletClass = module.findServletForPath(servletPath);
+      assert (servletClass != null);
+      // Prefix module name to convert module mapping to global mapping.
+      servletPath = "/" + module.getName() + servletPath;
+      if (servletValidator == null) {
+        servletWriter.addMapping(servletClass, servletPath);
+      } else {
+        servletValidator.validate(servletLogger, servletClass, servletPath);
+      }
+    }
   }
 }

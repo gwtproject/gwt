@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "045e7dcf_2fbda9ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T01:35:30Z",
+      "side": 1,
+      "message": "I think the user-visible change should be the headline:\n\n\"Drop support for testing multiple browsers in parallel\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "51931dd1adc80b6182b5653d4cc9d968a3d31c3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c429c520_c37e4087",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -64,6 +87,29 @@
       "writtenOn": "2014-06-30T05:07:32Z",
       "side": 1,
       "message": "[info] Unused @param tag for \u0027clientInfo\u0027.",
+      "revId": "51931dd1adc80b6182b5653d4cc9d968a3d31c3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045e7dcf_0f3a2db9",
+        "filename": "user/src/com/google/gwt/junit/RunStyle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T01:35:30Z",
+      "side": 1,
+      "message": "update javadoc",
+      "range": {
+        "startLine": 102,
+        "startChar": 62,
+        "endLine": 102,
+        "endChar": 68
+      },
       "revId": "51931dd1adc80b6182b5653d4cc9d968a3d31c3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

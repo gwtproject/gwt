@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a454d1b1_0388ce0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-01T06:15:52Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "3f38eb847653e270a061b1025405bfdd2c0d8726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a454d1b1_637bc246",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-01T06:15:52Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "3f38eb847653e270a061b1025405bfdd2c0d8726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a454d1b1_2385caf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-01T06:15:52Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "3f38eb847653e270a061b1025405bfdd2c0d8726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a454d1b1_c372b667",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-01T06:15:52Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027clientInfo\u0027.",
+      "revId": "3f38eb847653e270a061b1025405bfdd2c0d8726",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

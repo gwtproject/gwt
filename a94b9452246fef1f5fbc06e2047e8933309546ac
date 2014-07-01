@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4efa930_260ebc53",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Maybe call this SuperDevModeWithJetty?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_433dba48",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "I don\u0027t think we should extend HostedModeOptionsImpl since there are quite a lot of flags, most of which are legacy and unneeded for this new entry point. I think instead, we should start fresh like I did with CodeServer\u0027s options and only add the flags that seem to be needed. Any other options can be hard-coded. We can always add more flags later.\n\n(The options should be a top-level class.)",
+      "range": {
+        "startLine": 40,
+        "startChar": 53,
+        "endLine": 40,
+        "endChar": 74
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_03cc529c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Picking an unused port is a bit trickier than this. It seems worth having a separate PortPicker utility class for it.\n\nTo avoid possible conflicts, I think we should exclude commonly-used fixed ports (like 8080 and 9876 :-) from the range. There\u0027s an IANA standard [1] that says we should use 49152 to 65535.\n\nWe should also check that the port isn\u0027t taken. Maybe something like:\n\n        try {\n          ServerSocket socket \u003d new ServerSocket(port);\n          int realPort \u003d socket.getLocalPort();\n          socket.close();\n          return realPort;\n        } catch (IOException ioe) {\n          // try again\n        }\n\nAlso, it might as well use SecureRandom(); it couldn\u0027t hurt.\n\n[1] http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_e0967cc3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "I think it would be better to build a List\u003cString\u003e here to hold the flags, so we don\u0027t have to think about how to handle filenames that contain spaces.",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 13
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_a0f0f446",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Hmm, maybe better to switch to the other version of CodeServer.main(), so that option parsing happens in the main thread:\n\nOutside the Thread:\n\n    final Options options \u003d new Options();\n    if (!options.parseArgs(args)) {\n       // handle error\n    }\n\nThen run() can be just this:\n\nvoid run() {\n  try {   \n    CodeServer.main(options);\n  } catch (Exception e) {\n    // handle error\n  }\n}\n\nIf it makes it easier, you could add a variation of Options.parseArgs() that takes an Iterable\u003cString\u003e instead of a String[].\n\n(I\u0027d like to refactor CodeServer\u0027s Options object so there\u0027s a more type-safe way to create it, but that can happen later.)",
+      "range": {
+        "startLine": 110,
+        "startChar": 21,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_63d2768e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/hosted.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Maybe \"stub.nocache.js\" would be a better name for this.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_63a39627",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/hosted.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Maybe wrap the whole script in a function to avoid inadvertently exporting any new symbols:\n\nfunction($wnd, $doc) {\n\n}(window, document);",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_6320b602",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/hosted.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T19:10:22Z",
+      "side": 1,
+      "message": "Maybe check for session storage first and skip the rest of the script if it fails? (I\u0027m not sure if we should touch __gwt_activeModules at all if we couldn\u0027t start.)",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 12
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,12 +25,10 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.shell.ArtifactAcceptor;
 import com.google.gwt.dev.shell.BrowserChannelServer;
-import com.google.gwt.dev.shell.BrowserListener;
 import com.google.gwt.dev.shell.BrowserWidgetHost;
 import com.google.gwt.dev.shell.BrowserWidgetHostChecker;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.ModuleSpaceHost;
-import com.google.gwt.dev.shell.OophmSessionHandler;
 import com.google.gwt.dev.shell.ShellModuleSpaceHost;
 import com.google.gwt.dev.shell.remoteui.RemoteUI;
 import com.google.gwt.dev.ui.DevModeUI;
@@ -48,7 +46,6 @@ import com.google.gwt.util.tools.ArgHandlerString;
 
 import java.io.File;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -220,7 +217,7 @@ public abstract class DevModeBase implements DoneCallback {
 
     @Override
     public String getPurpose() {
-      return "Specifies the TCP port for the code server (defaults to " + DEFAULT_PORT + ")";
+      return "Specifies the TCP port for the code server (defaults to " + DEFAULT_PORT + " for classic-devMode or 9876 for super-devMode)";
     }
 
     @Override
@@ -759,15 +756,9 @@ public abstract class DevModeBase implements DoneCallback {
 
   protected TreeLogger.Type baseLogLevelForUI = null;
 
-  protected String bindAddress;
-
-  protected int codeServerPort;
-
   protected String connectAddress;
 
   protected boolean isHttps;
-
-  protected BrowserListener listener;
 
   protected final HostedModeBaseOptions options;
 
@@ -779,7 +770,7 @@ public abstract class DevModeBase implements DoneCallback {
 
   private final Semaphore blockUntilDone = new Semaphore(0);
 
-  private BrowserWidgetHost browserHost = new UiBrowserWidgetHostImpl();
+  protected BrowserWidgetHost browserHost = new UiBrowserWidgetHostImpl();
 
   private boolean headlessMode = false;
 
@@ -915,7 +906,6 @@ public abstract class DevModeBase implements DoneCallback {
    * @return true if startup was successful
    */
   protected boolean doStartup(File persistentCacheDir) {
-    bindAddress = options.getBindAddress();
     connectAddress = options.getConnectAddress();
 
     // Create the main app window.
@@ -953,21 +943,7 @@ public abstract class DevModeBase implements DoneCallback {
 
   protected abstract int doStartUpServer();
 
-  protected void ensureCodeServerListener() {
-    if (listener == null) {
-      codeServerPort = options.getCodeServerPort();
-      listener =
-          new BrowserListener(getTopLogger(), bindAddress, codeServerPort, new OophmSessionHandler(
-              getTopLogger(), browserHost));
-      listener.start();
-      try {
-        // save the port we actually used if it was auto
-        codeServerPort = listener.getSocketPort();
-      } catch (UnableToCompleteException e) {
-        // ignore errors listening, we will catch them later
-      }
-    }
-  }
+  protected abstract void ensureCodeServerListener();
 
   protected String getHost() {
     return connectAddress;
@@ -1032,36 +1008,7 @@ public abstract class DevModeBase implements DoneCallback {
     return moduleDef;
   }
 
-  protected URL processUrl(String url) throws UnableToCompleteException {
-    /*
-     * TODO(jat): properly support launching arbitrary browsers -- need some UI
-     * API tweaks to support that.
-     */
-    URL parsedUrl = null;
-    try {
-      parsedUrl = new URL(url);
-      String path = parsedUrl.getPath();
-      String query = parsedUrl.getQuery();
-      String hash = parsedUrl.getRef();
-      String hostedParam =
-          BrowserListener.getDevModeURLParams(connectAddress, listener.getSocketPort());
-      if (query == null) {
-        query = hostedParam;
-      } else {
-        query += '&' + hostedParam;
-      }
-      path += '?' + query;
-      if (hash != null) {
-        path += '#' + hash;
-      }
-      parsedUrl = new URL(parsedUrl.getProtocol(), parsedUrl.getHost(), parsedUrl.getPort(), path);
-      url = parsedUrl.toExternalForm();
-    } catch (MalformedURLException e) {
-      getTopLogger().log(TreeLogger.ERROR, "Invalid URL " + url, e);
-      throw new UnableToCompleteException();
-    }
-    return parsedUrl;
-  }
+  protected abstract URL processUrl(String url) throws UnableToCompleteException;
 
   protected abstract void produceOutput(TreeLogger logger, StandardLinkerContext linkerStack,
       ArtifactSet artifacts, ModuleDef module, boolean isRelink) throws UnableToCompleteException;

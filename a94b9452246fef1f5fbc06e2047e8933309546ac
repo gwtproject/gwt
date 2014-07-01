@@ -193,6 +193,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_ac746baa",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-07-01T21:37:29Z",
+      "side": 1,
+      "message": "-remoteUI starts up the older launch shell/window (server for it), I don\u0027t think it fits in this context and isn\u0027t needed. And -Dgwt.devjar seems probably isn\u0027t needed. The rest of the args so far look useful or dependent, as they provide the coordinates to web application configuration.",
+      "parentUuid": "64b2d95d_71ec18de",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_433dba48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
         "patchSetId": 3

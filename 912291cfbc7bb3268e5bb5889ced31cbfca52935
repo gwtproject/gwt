@@ -16,6 +16,24 @@
       "revId": "912291cfbc7bb3268e5bb5889ced31cbfca52935",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4efa930_b1c6887e",
+        "filename": "user/src/com/google/gwt/view/View.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-01T20:45:41Z",
+      "side": 0,
+      "message": "Yes, we could to that. Actually we should also use at least some naming convention to discourage usage (e.g. start with underscore) because it will cause incremental compile to fail.",
+      "parentUuid": "6421f930_5f9c43e1",
+      "revId": "912291cfbc7bb3268e5bb5889ced31cbfca52935",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

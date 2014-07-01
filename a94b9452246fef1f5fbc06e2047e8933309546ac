@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_0623c034",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-07-01T19:54:32Z",
+      "side": 1,
+      "message": "CodeServer is a different jar, forgot about that, you\u0027re right in that case, that would make the dependencies ugly. \n\nIn this format, I think it would be handy to carry in every arg that dev mode uses for alternate server configuration like for app engine. For instance here is an appengine DevMode args list and in this case any server could be used as the servlet container. Thoughts?\n\n-startupUrl WE_Simple.html -war /Users/branflake2267/git/WrightwayEconomy/WE_Simple/war -remoteUI \"${gwt_remote_ui_server_port}:${unique_id}\" -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.wrightwayeconomy.WE_Simple_Neptune",
+      "parentUuid": "240701cd_7767d0f3",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_433dba48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
         "patchSetId": 3

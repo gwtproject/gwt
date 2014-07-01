@@ -36,6 +36,46 @@
     },
     {
       "key": {
+        "uuid": "6421f930_a22544a0",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T14:28:44Z",
+      "side": 1,
+      "message": "Why not merge this into DevModeBase?\n\nDevModeBase is currently only used by DevMode, so instead of extracting a few things from DevMode into a new intermediate class between DevMode and DevModeBase, let\u0027s just move those things to DevModeBase and use that as the base class for SuperDevMode.",
+      "revId": "e4d9f1c7f4a0d7e8e869623f65e4b284d9fba613",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841c2dfc_235378f3",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-01T14:28:44Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "e4d9f1c7f4a0d7e8e869623f65e4b284d9fba613",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a454d1b1_e3233243",
         "filename": "dev/core/src/com/google/gwt/dev/DevModeCommon.java",
         "patchSetId": 1

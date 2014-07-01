@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a454d1b1_06f45c63",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1593,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-01T18:51:09Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "5027ea640030ab74b75a1555593b65bbb071e8fb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

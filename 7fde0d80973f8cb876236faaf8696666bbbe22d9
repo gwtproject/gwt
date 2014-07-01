@@ -16,6 +16,24 @@
       "revId": "7fde0d80973f8cb876236faaf8696666bbbe22d9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841c2dfc_e3d3406e",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-01T08:55:39Z",
+      "side": 1,
+      "message": "My bad, I see it\u0027s used in equalsBridge.",
+      "parentUuid": "841c2dfc_e0425675",
+      "revId": "7fde0d80973f8cb876236faaf8696666bbbe22d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841c2dfc_e3582034",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-07-01T09:36:29Z",
+      "side": 1,
+      "message": "nit: add a new line before this line for readability",
+      "revId": "7021432eedd36719d466f93bde43098ebcf3e2c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

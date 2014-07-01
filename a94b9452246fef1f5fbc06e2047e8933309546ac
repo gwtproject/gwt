@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "64b2d95d_71ec18de",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-01T21:09:49Z",
+      "side": 1,
+      "message": "If it turns out we need all the DevMode flags for backward compatibility with GPE, Vaadin, or anything else then I\u0027m okay with that, since the point of this entry point is backward compatibility. I\u0027m just wondering if there are any flags that nobody uses or are perhaps broken or inapplicable to Super Dev Mode and we could drop. That\u0027s hard to tell if we just inherit all the flags at once without looking at them one by one.",
+      "parentUuid": "e4efa930_0623c034",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_433dba48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
         "patchSetId": 3

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e4efa930_a68e4c1d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-07-01T19:31:53Z",
+      "side": 1,
+      "message": "If it only serves Jetty, I suspect it will be harder to use with GPE if at all b/c it will not integrate well with GPE app engine configuration. iirc the -server arg for devmode passes in another potential server option.",
+      "parentUuid": "e4efa930_269cfc87",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a94b9452246fef1f5fbc06e2047e8933309546ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4efa930_433dba48",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SuperDevMode.java",
         "patchSetId": 3

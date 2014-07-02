@@ -1,16 +1,14 @@
 /*
  * Copyright 2008 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.google.gwt.dev.jjs.ast;
@@ -68,10 +66,10 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * A method needs a JsInterop bridge if any of the following are true:
-   * 1) the method name conflicts with a method name of a non-JsType/JsExport method in a superclass
-   * 2) the method returns or accepts Single-Abstract-Method types
-   * 3) the method returns or accepts JsAware/JsConvert types.
+   * A method needs a JsInterop bridge if any of the following are true: 1) the method name
+   * conflicts with a method name of a non-JsType/JsExport method in a superclass 2) the method
+   * returns or accepts Single-Abstract-Method types 3) the method returns or accepts
+   * JsAware/JsConvert types.
    */
   public boolean needsJsInteropBridgeMethod(JMethod x) {
     if (!isInteropEnabled()) {
@@ -80,38 +78,23 @@ public class JTypeOracle implements Serializable {
 
     /*
      * We need Javascript bridge methods for exports in this class
-     * @JsType
-     * interface A {
-     *   X m();
-     * }
-     * Y is a subtype of X
-     * interface B extends A {
-     *   Y m();
-     * }
      *
-     * We now have an 'overload' situation, but there's only one concrete
-     * implementor.
+     * @JsType interface A { X m(); } Y is a subtype of X interface B extends A { Y m(); }
      *
-     * class C implements B {
-     *   Y m() { }
-     * }
+     * We now have an 'overload' situation, but there's only one concrete implementor.
      *
-     * JDT/GwtAstBuilder will insert a synthetic method to make sure A is
-     * implemented.
+     * class C implements B { Y m() { } }
      *
-     * class C implements B {
-     *   X m() { return this.m(); [targetd at Y] }
-     *   Y m() { }
-     * }
+     * JDT/GwtAstBuilder will insert a synthetic method to make sure A is implemented.
      *
-     * Since both methods are part of JsType interfaces, both are considered
-     * exportable, but they can't own the same JsName. It doesn't matter
-     * which one is exported since they do the same thing.  Here we detect
-     * that a covariant return situation exists and assert that a JS bridge
-     * method is needed. That is, we will not let either of these methods
-     * 'own' the JsName. If we don't do this, and the X m() get's exported,
-     * you end up with an infinite loop and other oddities (because it's
-     * an exported method and it invoked itself through it's own exported
+     * class C implements B { X m() { return this.m(); [targetd at Y] } Y m() { } }
+     *
+     * Since both methods are part of JsType interfaces, both are considered exportable, but they
+     * can't own the same JsName. It doesn't matter which one is exported since they do the same
+     * thing. Here we detect that a covariant return situation exists and assert that a JS bridge
+     * method is needed. That is, we will not let either of these methods 'own' the JsName. If we
+     * don't do this, and the X m() get's exported, you end up with an infinite loop and other
+     * oddities (because it's an exported method and it invoked itself through it's own exported
      * name).
      *
      * This change lets both methods have their Java obfuscated name.
@@ -120,23 +103,23 @@ public class JTypeOracle implements Serializable {
     List<JParameter> xParams = x.getParams();
     if (isJsTypeMethod(x)) {
       for (JMethod other : x.getEnclosingType().getMethods()) {
-         if (other == x) {
-           continue;
-         }
-         if (isJsTypeMethod(other) && x.getName().equals(other.getName())) {
-           List<JParameter> otherParams = other.getParams();
-           if (otherParams.size() == xParams.size()) {
-             for (int i = 0; i < otherParams.size(); i++) {
-               if (otherParams.get(i).getType() != xParams.get(i).getType()) {
-                 break;
-               }
-             }
-             // found exact method match, covariant return
-             return true;
-           } else {
-             break;
-           }
-         }
+        if (other == x) {
+          continue;
+        }
+        if (isJsTypeMethod(other) && x.getName().equals(other.getName())) {
+          List<JParameter> otherParams = other.getParams();
+          if (otherParams.size() == xParams.size()) {
+            for (int i = 0; i < otherParams.size(); i++) {
+              if (otherParams.get(i).getType() != xParams.get(i).getType()) {
+                break;
+              }
+            }
+            // found exact method match, covariant return
+            return true;
+          } else {
+            break;
+          }
+        }
       }
     }
 
@@ -168,8 +151,7 @@ public class JTypeOracle implements Serializable {
   }
 
   public boolean isExportedMethod(JMethod method) {
-    return isInteropEnabled() && method.getExportName() != null
-        && !method.isNoExport();
+    return isInteropEnabled() && method.getExportName() != null && !method.isNoExport();
   }
 
   public boolean isInteropEnabled() {
@@ -188,17 +170,16 @@ public class JTypeOracle implements Serializable {
    * <li>If it runs any code other than clinit calls.</li>
    * </ol>
    *
-   * This is used to remove "dead clinit cycles" where self-referential cycles
-   * of empty clinits can keep each other alive.
+   * This is used to remove "dead clinit cycles" where self-referential cycles of empty clinits can
+   * keep each other alive.
    */
   private static final class CheckClinitVisitor extends JVisitor {
 
     private final Set<JDeclaredType> clinitTargets = new IdentityHashSet<JDeclaredType>();
 
     /**
-     * Tracks whether any live code is run in this clinit. This is only reliable
-     * because we explicitly visit all AST structures that might contain
-     * non-clinit-calling code.
+     * Tracks whether any live code is run in this clinit. This is only reliable because we
+     * explicitly visit all AST structures that might contain non-clinit-calling code.
      *
      * @see #mightBeDeadCode(JExpression)
      * @see #mightBeDeadCode(JStatement)
@@ -297,9 +278,9 @@ public class JTypeOracle implements Serializable {
 
   /**
    * Compare two methods based on name and original argument types
-   * {@link JMethod#getOriginalParamTypes()}. Note that nothing special is done
-   * here regarding methods with type parameters in their argument lists. The
-   * caller must be careful that this level of matching is sufficient.
+   * {@link JMethod#getOriginalParamTypes()}. Note that nothing special is done here regarding
+   * methods with type parameters in their argument lists. The caller must be careful that this
+   * level of matching is sufficient.
    */
   public static boolean methodsDoMatch(JMethod method1, JMethod method2) {
     // static methods cannot match each other
@@ -336,42 +317,38 @@ public class JTypeOracle implements Serializable {
   private JDeclaredType baseArrayType;
 
   /**
-   * A map of all interfaces to the set of classes that could theoretically
-   * implement them.
+   * A map of all interfaces to the set of classes that could theoretically implement them.
    */
   private final Map<JInterfaceType, Set<JClassType>> couldBeImplementedMap =
       new IdentityHashMap<JInterfaceType, Set<JClassType>>();
 
   /**
-   * A map of all classes to the set of interfaces that they could theoretically
-   * implement.
+   * A map of all classes to the set of interfaces that they could theoretically implement.
    */
   private final Map<JClassType, Set<JInterfaceType>> couldImplementMap =
       new IdentityHashMap<JClassType, Set<JInterfaceType>>();
 
   /**
-   * The set of all interfaces that are initially implemented by both a Java and
-   * Overlay type.
+   * The set of all interfaces that are initially implemented by both a Java and Overlay type.
    */
   private final Set<JInterfaceType> dualImpls = new IdentityHashSet<JInterfaceType>();
 
   /**
-   * A map of all classes to the set of interfaces they directly implement,
-   * possibly through inheritance.
+   * A map of all classes to the set of interfaces they directly implement, possibly through
+   * inheritance.
    */
   private final Map<JClassType, Set<JInterfaceType>> implementsMap =
       new IdentityHashMap<JClassType, Set<JInterfaceType>>();
 
   /**
-   * The types in the program that are instantiable. All types in this set
-   * should be run-time types as defined at
-   * {@link JProgram#getRunTimeType(JReferenceType)}.
+   * The types in the program that are instantiable. All types in this set should be run-time types
+   * as defined at {@link JProgram#getRunTimeType(JReferenceType)}.
    */
   private Set<JReferenceType> instantiatedTypes = null;
 
   /**
-   * A map of all interfaces to the set of classes that directly implement them,
-   * possibly through inheritance.
+   * A map of all interfaces to the set of classes that directly implement them, possibly through
+   * inheritance.
    */
   private final Map<JInterfaceType, Set<JClassType>> isImplementedMap =
       new IdentityHashMap<JInterfaceType, Set<JClassType>>();
@@ -386,8 +363,8 @@ public class JTypeOracle implements Serializable {
   private JClassType javaLangObject = null;
 
   /**
-   * A map of all interfaces that are implemented by overlay types to the
-   * overlay type that initially implements it.
+   * A map of all interfaces that are implemented by overlay types to the overlay type that
+   * initially implements it.
    */
   private final Map<JInterfaceType, JClassType> jsoSingleImpls =
       new IdentityHashMap<JInterfaceType, JClassType>();
@@ -403,38 +380,27 @@ public class JTypeOracle implements Serializable {
   private final JProgram program;
 
   /**
-   * A map of all classes to the set of classes that extend them, directly or
-   * indirectly.
+   * A map of all classes to the set of classes that extend them, directly or indirectly.
    */
   private final Map<JReferenceType, Set<JReferenceType>> subClassMap =
       new IdentityHashMap<JReferenceType, Set<JReferenceType>>();
 
   /**
-   * A map of all interfaces to the set of interfaces that extend them, directly
-   * or indirectly.
-   */
-  private final Map<JInterfaceType, Set<JInterfaceType>> subInterfaceMap =
-      new IdentityHashMap<JInterfaceType, Set<JInterfaceType>>();
-
-  /**
-   * A map of all classes to the set of classes they extend, directly or
-   * indirectly.
+   * A map of all classes to the set of classes they extend, directly or indirectly.
    */
   private final Map<JReferenceType, Set<JReferenceType>> superClassMap =
       new IdentityHashMap<JReferenceType, Set<JReferenceType>>();
 
   /**
-   * A map of all interfaces to the set of interfaces they extend, directly or
-   * indirectly.
+   * A map of all interfaces to the set of interfaces they extend, directly or indirectly.
    */
   private final Map<JInterfaceType, Set<JInterfaceType>> superInterfaceMap =
       new IdentityHashMap<JInterfaceType, Set<JInterfaceType>>();
   /**
-   * A map of all methods with virtual overrides, onto the collection of
-   * overridden methods. Each key method's collections is a map of the set of
-   * subclasses who inherit the key method mapped onto the set of interface
-   * methods the key method virtually implements. For a definition of a virtual
-   * override, see {@link #getAllVirtualOverrides(JMethod)}.
+   * A map of all methods with virtual overrides, onto the collection of overridden methods. Each
+   * key method's collections is a map of the set of subclasses who inherit the key method mapped
+   * onto the set of interface methods the key method virtually implements. For a definition of a
+   * virtual override, see {@link #getAllVirtualOverrides(JMethod)}.
    */
   private final Map<JMethod, Map<JClassType, Set<JMethod>>> virtualUpRefMap =
       new IdentityHashMap<JMethod, Map<JClassType, Set<JMethod>>>();
@@ -466,14 +432,12 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * True if the type is a JSO or interface implemented by JSO or a JsType without
-   * prototype.
+   * True if the type is a JSO or interface implemented by JSO or a JsType without prototype.
    */
   public boolean canCrossCastLikeJso(JType type) {
     JDeclaredType dtype = getNearestJsType(type, false);
-    return canBeJavaScriptObject(type) ||
-        (dtype instanceof JInterfaceType &&
-          isOrExtendsJsType(type, false) && !isOrExtendsJsType(type, true));
+    return canBeJavaScriptObject(type) || (dtype instanceof JInterfaceType
+        && isOrExtendsJsType(type, false) && !isOrExtendsJsType(type, true));
   }
 
   /**
@@ -481,8 +445,8 @@ public class JTypeOracle implements Serializable {
    * without the prototype that is not implemented by a Java class.
    */
   public boolean willCrossCastLikeJso(JType type) {
-    return isEffectivelyJavaScriptObject(type) || canCrossCastLikeJso(type) &&
-        type instanceof JInterfaceType && !hasLiveImplementors(type);
+    return isEffectivelyJavaScriptObject(type) || canCrossCastLikeJso(type)
+        && type instanceof JInterfaceType && !hasLiveImplementors(type);
   }
 
   public boolean hasLiveImplementors(JType type) {
@@ -522,8 +486,8 @@ public class JTypeOracle implements Serializable {
     }
 
     /**
-     * Cross-cast allowed in theory, prevents TypeTightener from turning
-     * cross-casts into null-casts.
+     * Cross-cast allowed in theory, prevents TypeTightener from turning cross-casts into
+     * null-casts.
      */
     if (canCrossCastLikeJso(type) && canCrossCastLikeJso(qType)) {
       return true;
@@ -558,10 +522,10 @@ public class JTypeOracle implements Serializable {
       }
 
       /*
-       * Warning: If this code is ever updated to consider casts of array types
-       * to interface types, then be sure to consider that casting an array to
-       * Serializable and Cloneable succeeds. Currently all casts of an array to
-       * an interface return true, which is overly conservative but is safe.
+       * Warning: If this code is ever updated to consider casts of array types to interface types,
+       * then be sure to consider that casting an array to Serializable and Cloneable succeeds.
+       * Currently all casts of an array to an interface return true, which is overly conservative
+       * but is safe.
        */
     } else if (type instanceof JClassType) {
 
@@ -666,7 +630,6 @@ public class JTypeOracle implements Serializable {
     superClassMap.clear();
     subClassMap.clear();
     superInterfaceMap.clear();
-    subInterfaceMap.clear();
     implementsMap.clear();
     couldImplementMap.clear();
     isImplementedMap.clear();
@@ -699,8 +662,8 @@ public class JTypeOracle implements Serializable {
     }
 
     /*
-     * Now that the basic type hierarchy is computed, compute which JSOs
-     * implement interfaces singly or dually.
+     * Now that the basic type hierarchy is computed, compute which JSOs implement interfaces singly
+     * or dually.
      */
     JClassType jsoType = program.getJavaScriptObject();
     List<JClassType> jsoSubTypes = Lists.create();
@@ -759,10 +722,9 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * References to any methods which this method implementation might override
-   * or implement in any instantiable class, including strange cases where there
-   * is no direct relationship between the methods except in a subclass that
-   * inherits one and implements the other. Example:
+   * References to any methods which this method implementation might override or implement in any
+   * instantiable class, including strange cases where there is no direct relationship between the
+   * methods except in a subclass that inherits one and implements the other. Example:
    *
    * <pre>
    * interface IFoo {
@@ -775,8 +737,7 @@ public class JTypeOracle implements Serializable {
    * }
    * </pre>
    *
-   * In this case, <code>Unrelated.foo()</code> virtually implements
-   * <code>IFoo.foo()</code> in subclass <code>Foo</code>.
+   * In this case, <code>Unrelated.foo()</code> virtually implements <code>IFoo.foo()</code> in subclass <code>Foo</code>.
    */
   public Set<JMethod> getAllOverriddenMethods(JMethod method) {
     Set<JMethod> results = Sets.newIdentityHashSet();
@@ -792,8 +753,7 @@ public class JTypeOracle implements Serializable {
   /**
    * Get the nearest JS type.
    */
-  public JDeclaredType getNearestJsType(JType type,
-      boolean mustHavePrototype) {
+  public JDeclaredType getNearestJsType(JType type, boolean mustHavePrototype) {
     if (isInteropEnabled()) {
       if (type instanceof JNonNullType) {
         type = ((JNonNullType) type).getUnderlyingType();
@@ -808,8 +768,7 @@ public class JTypeOracle implements Serializable {
       }
       if (type instanceof JDeclaredType) {
         for (JInterfaceType superIntf : ((JDeclaredType) type).getImplements()) {
-          JDeclaredType jsIntf = getNearestJsType(superIntf,
-              mustHavePrototype);
+          JDeclaredType jsIntf = getNearestJsType(superIntf, mustHavePrototype);
           if (jsIntf != null) {
             return jsIntf;
           }
@@ -847,7 +806,6 @@ public class JTypeOracle implements Serializable {
     return dualImpls.contains(maybeDualImpl.getUnderlyingType());
   }
 
-
   /**
    * Returns the method definition where {@code method} is first defined in a class.
    */
@@ -869,9 +827,9 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Whether this type oracle has whole world knowledge or not. Monolithic compiles have whole
-   * world knowledge but separate compiles know only about their immediate source and the
-   * immediately referenced types.
+   * Whether this type oracle has whole world knowledge or not. Monolithic compiles have whole world
+   * knowledge but separate compiles know only about their immediate source and the immediately
+   * referenced types.
    */
   public boolean hasWholeWorldKnowledge() {
     return hasWholeWorldKnowledge;
@@ -977,13 +935,13 @@ public class JTypeOracle implements Serializable {
    * Whether the type is a JS interface (does not check supertypes).
    */
   public boolean isJsType(JType type) {
-    return isInteropEnabled() &&
-        (type instanceof JDeclaredType && ((JDeclaredType) type).isJsType());
+    return isInteropEnabled()
+        && (type instanceof JDeclaredType && ((JDeclaredType) type).isJsType());
   }
 
   /**
-   * Whether the type or any supertypes is a JS type, optionally, only return true if
-   * one of the types has a js prototype.
+   * Whether the type or any supertypes is a JS type, optionally, only return true if one of the
+   * types has a js prototype.
    */
   public boolean isOrExtendsJsType(JType type, boolean mustHavePrototype) {
     if (isInteropEnabled()) {
@@ -1009,22 +967,20 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * This method should be called after altering the types that are live in the
-   * associated JProgram.
+   * This method should be called after altering the types that are live in the associated JProgram.
    */
   public void recomputeAfterOptimizations() {
     Set<JDeclaredType> computed = new IdentityHashSet<JDeclaredType>();
 
     if (hasWholeWorldKnowledge) {
       // Optimizations that only make sense in whole world compiles:
-      //   (1) minimize clinit()s.
+      // (1) minimize clinit()s.
       for (JDeclaredType type : program.getDeclaredTypes()) {
         computeClinitTarget(type, computed);
       }
 
-      //   (2) make JSOs singleImpl when all the Java implementors are gone.
-      nextDual:
-      for (Iterator<JInterfaceType> it = dualImpls.iterator(); it.hasNext(); ) {
+      // (2) make JSOs singleImpl when all the Java implementors are gone.
+      nextDual : for (Iterator<JInterfaceType> it = dualImpls.iterator(); it.hasNext();) {
         JInterfaceType dualIntf = it.next();
         Set<JClassType> implementors = get(isImplementedMap, dualIntf);
         for (JClassType implementor : implementors) {
@@ -1037,8 +993,8 @@ public class JTypeOracle implements Serializable {
         it.remove();
       }
 
-      //   (3) prune JSOs from jsoSingleImpls and dualImpls when JSO isn't live hence the
-      //       interface is no longer considered to be implemented by a JSO.
+      // (3) prune JSOs from jsoSingleImpls and dualImpls when JSO isn't live hence the
+      // interface is no longer considered to be implemented by a JSO.
       Iterator<Entry<JInterfaceType, JClassType>> jit = jsoSingleImpls.entrySet().iterator();
       while (jit.hasNext()) {
         Entry<JInterfaceType, JClassType> jsoSingleImplEntry = jit.next();
@@ -1070,9 +1026,8 @@ public class JTypeOracle implements Serializable {
     }
     if (superClass != null) {
       /*
-       * Compute super first so that it's already been tightened to the tightest
-       * possible target; this ensures if we're tightened as well it's to the
-       * transitively tightest target.
+       * Compute super first so that it's already been tightened to the tightest possible target;
+       * this ensures if we're tightened as well it's to the transitively tightest target.
        */
       computeClinitTarget(superClass, computed);
     }
@@ -1116,16 +1071,15 @@ public class JTypeOracle implements Serializable {
       }
 
       /*
-       * If target has a clinit, so do I; but only if target has already been
-       * recomputed this run.
+       * If target has a clinit, so do I; but only if target has already been recomputed this run.
        */
       if (target.hasClinit() && computed.contains(target)) {
         return type;
       }
 
       /*
-       * Prevent recursion sickness: ignore this call for now since this call is
-       * being accounted for higher on the stack.
+       * Prevent recursion sickness: ignore this call for now since this call is being accounted for
+       * higher on the stack.
        */
       if (alreadySeen.contains(target)) {
         continue;
@@ -1143,8 +1097,8 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Compute all of the things I might conceivably implement, either through
-   * super types or sub types.
+   * Compute all of the things I might conceivably implement, either through super types or sub
+   * types.
    */
   private void computeCouldImplement(JClassType type) {
     Set<JInterfaceType> couldImplementSet = new IdentityHashSet<JInterfaceType>();
@@ -1175,8 +1129,7 @@ public class JTypeOracle implements Serializable {
     Set<JInterfaceType> implementsSet = new IdentityHashSet<JInterfaceType>();
     List<JClassType> list = new ArrayList<JClassType>();
     list.add(type);
-    list.addAll(
-        ImmutableList.copyOf(Iterables.filter(get(superClassMap, type), JClassType.class)));
+    list.addAll(ImmutableList.copyOf(Iterables.filter(get(superClassMap, type), JClassType.class)));
     for (JClassType superclass : list) {
       for (JInterfaceType intf : superclass.getImplements()) {
         implementsSet.add(intf);
@@ -1194,11 +1147,10 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * WEIRD: Suppose class Foo declares void f(){} and unrelated interface I also
-   * declares void f(). Then suppose Bar extends Foo implements I and doesn't
-   * override f(). We need to record a "virtual" upref from Foo.f() to I.f() so
-   * that if I.f() is rescued AND Bar is instantiable, Foo.f() does not get
-   * pruned.
+   * WEIRD: Suppose class Foo declares void f(){} and unrelated interface I also declares void f().
+   * Then suppose Bar extends Foo implements I and doesn't override f(). We need to record a
+   * "virtual" upref from Foo.f() to I.f() so that if I.f() is rescued AND Bar is instantiable,
+   * Foo.f() does not get pruned.
    */
   private void computeVirtualUpRefs(JClassType type) {
     if (type.getSuperClass() == null || type.getSuperClass() == javaLangObject) {
@@ -1206,9 +1158,9 @@ public class JTypeOracle implements Serializable {
     }
 
     /*
-     * For each interface I directly implement, check all methods and make sure
-     * I define implementations for them. If I don't, then check all my super
-     * classes to find virtual overrides.
+     * For each interface I directly implement, check all methods and make sure I define
+     * implementations for them. If I don't, then check all my super classes to find virtual
+     * overrides.
      */
     for (JInterfaceType intf : type.getImplements()) {
       computeVirtualUpRefs(type, intf);
@@ -1219,9 +1171,9 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * For each interface I directly implement, check all methods and make sure I
-   * define implementations for them. If I don't, then check all my super
-   * classes to find virtual overrides.
+   * For each interface I directly implement, check all methods and make sure I define
+   * implementations for them. If I don't, then check all my super classes to find virtual
+   * overrides.
    */
   private void computeVirtualUpRefs(JClassType type, JInterfaceType intf) {
     outer : for (JMethod intfMethod : intf.getMethods()) {
@@ -1234,8 +1186,8 @@ public class JTypeOracle implements Serializable {
 
       // this class does not directly implement the interface method
       // if any super classes do, create a virtual up ref
-      for (JClassType superType = type.getSuperClass(); superType != javaLangObject; superType =
-          superType.getSuperClass()) {
+      for (JClassType superType = type.getSuperClass(); superType != javaLangObject;
+          superType = superType.getSuperClass()) {
         for (JMethod superMethod : superType.getMethods()) {
           if (methodsDoMatch(intfMethod, superMethod)) {
             // this super class directly implements the interface method
@@ -1258,8 +1210,7 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Returns true if type extends the interface represented by qType, either
-   * directly or indirectly.
+   * Returns true if type extends the interface represented by qType, either directly or indirectly.
    */
   private boolean extendsInterface(JInterfaceType type, JInterfaceType qType) {
     return get(superInterfaceMap, type).contains(qType);
@@ -1310,8 +1261,8 @@ public class JTypeOracle implements Serializable {
       if (superClass == null) {
         methodsBySignature = new HashMap<String, JMethod>();
       } else {
-        Map<String, JMethod> superMethodsBySignature = getOrCreateMethodsBySignatureForType(
-            type.getSuperClass());
+        Map<String, JMethod> superMethodsBySignature =
+            getOrCreateMethodsBySignatureForType(type.getSuperClass());
         methodsBySignature = new HashMap<String, JMethod>(superMethodsBySignature);
       }
       for (JMethod method : type.getMethods()) {
@@ -1326,8 +1277,8 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Returns true if type implements the interface represented by qType, either
-   * directly or indirectly.
+   * Returns true if type implements the interface represented by qType, either directly or
+   * indirectly.
    */
   private boolean implementsInterface(JClassType type, JInterfaceType qType) {
     return get(implementsMap, type).contains(qType);
@@ -1374,8 +1325,7 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Record all of my super interfaces (and myself as a sub interface of
-   * them).
+   * Record all of my super interfaces (and myself as a sub interface of them).
    */
   private void recordSuperSubInfo(JInterfaceType type) {
     if (!type.getImplements().isEmpty()) {
@@ -1392,9 +1342,7 @@ public class JTypeOracle implements Serializable {
       JInterfaceType cur) {
     for (JInterfaceType intf : cur.getImplements()) {
       superSet.add(intf);
-      add(subInterfaceMap, intf, base);
       recordSuperSubInfo(base, superSet, intf);
     }
   }
-
 }

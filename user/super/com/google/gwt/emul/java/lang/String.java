@@ -23,6 +23,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.SpecializeMethod;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -681,12 +682,10 @@ public final class String implements Comparable<String>, CharSequence,
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
   }-*/;
 
+  @SpecializeMethod(params = {String.class}, target = "equalsToAnotherString")
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof String)) {
-      return false;
-    }
-    return __equals(this, other);
+    return (other instanceof String) && __equals(this, other);
   }
 
   public native boolean equalsIgnoreCase(String other) /*-{
@@ -694,6 +693,10 @@ public final class String implements Comparable<String>, CharSequence,
       return false;
     return (this == other) || (this.toLowerCase() == other.toLowerCase());
   }-*/;
+
+  protected boolean equalsToAnotherString(String other) {
+    return __equals(this, other);
+  }
 
   public byte[] getBytes() {
     // default character set for GWT is UTF-8

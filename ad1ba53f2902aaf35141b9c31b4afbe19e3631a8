@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "64b2d95d_d4ccd2fe",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-02T02:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d6ed80_0dde55e9",
+      "revId": "ad1ba53f2902aaf35141b9c31b4afbe19e3631a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d6ed80_8d5ec553",
         "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
         "patchSetId": 4
@@ -111,6 +129,30 @@
     },
     {
       "key": {
+        "uuid": "64b2d95d_94c24acb",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-02T02:34:11Z",
+      "side": 1,
+      "message": "I agree its fragile. Another reason for the \u0027peek\u0027 is actually because of the weird contract between JUnitShell and GWTRunner.\n\nCurrently, if GWTRunner hits a new module name it basically reloads and re-requests the last test block without reporting test results. I want to change that contract but I didn\u0027t want to introduce even bigger change.",
+      "parentUuid": "84d6ed80_8d5ec553",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 32
+      },
+      "revId": "ad1ba53f2902aaf35141b9c31b4afbe19e3631a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d6ed80_cd271d3d",
         "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
         "patchSetId": 4
@@ -122,6 +164,30 @@
       "writtenOn": "2014-07-02T01:40:36Z",
       "side": 1,
       "message": "It seems like this should be putFirst(). If we cannot put it back then something is wrong and there should be an exception.\n\n(Also, this isn\u0027t actually thread-safe, but I assume nobody else is pulling from this queue.)",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 29
+      },
+      "revId": "ad1ba53f2902aaf35141b9c31b4afbe19e3631a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64b2d95d_f4c756d9",
+        "filename": "user/src/com/google/gwt/junit/JUnitMessageQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-02T02:34:11Z",
+      "side": 1,
+      "message": "This is a unbounded queue so offerFirst,putFirst,addFirst are effectively same but to make the expectation more obvious I\u0027ll change it to \"addFirst\".\n\nAlso added a comment to point why the method is safe.",
+      "parentUuid": "84d6ed80_cd271d3d",
       "range": {
         "startLine": 106,
         "startChar": 19,

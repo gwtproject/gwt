@@ -23,6 +23,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.SpecializeMethod;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -381,11 +382,6 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(sb);
   }
 
-  private static native boolean __equals(String me, Object other) /*-{
-    // Coerce me to a primitive string to force string comparison
-    return String(me) == other;
-  }-*/;
-
   // CHECKSTYLE_ON
 
   private static native int compareTo(String thisStr, String otherStr) /*-{
@@ -681,18 +677,21 @@ public final class String implements Comparable<String>, CharSequence,
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
   }-*/;
 
+  @SpecializeMethod(params = {String.class}, target = "equalsToAnotherString")
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof String)) {
-      return false;
-    }
-    return __equals(this, other);
+    return (other instanceof String) && equalsToAnotherString((String) other);
   }
 
   public native boolean equalsIgnoreCase(String other) /*-{
     if (other == null)
       return false;
     return (this == other) || (this.toLowerCase() == other.toLowerCase());
+  }-*/;
+
+  protected native boolean equalsToAnotherString(String other) /*-{
+    // Coerce me to a primitive string to force string comparison
+    return String(this) == other;
   }-*/;
 
   public byte[] getBytes() {

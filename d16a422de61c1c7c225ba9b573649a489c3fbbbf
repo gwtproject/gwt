@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4c6c9d8_71088345",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-07-03T19:56:54Z",
+      "side": 1,
+      "message": "I tried this jar out in GPE. So far this worked good.",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -17,7 +17,7 @@ package com.google.gwt.i18n.rebind;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.i18n.client.impl.ConstantMap;
+import com.google.gwt.i18n.client.impl.ConstantMapCreator;
 import com.google.gwt.i18n.rebind.AbstractResource.MissingResourceException;
 import com.google.gwt.i18n.rebind.AbstractResource.ResourceList;
 import com.google.gwt.i18n.shared.GwtLocale;
@@ -67,13 +67,13 @@ class ConstantsMapMethodCreator extends AbstractLocalizableMethodCreator {
     // make sure cache exists
     enableCache();
     // check cache for array
-    String constantMapClassName = ConstantMap.class.getCanonicalName();
+    String constantMapCreatorClassName = ConstantMapCreator.class.getCanonicalName();
     println(GENERIC_STRING_MAP_TYPE + " args = (" + GENERIC_STRING_MAP_TYPE
         + ") cache.get(" + wrap(methodName) + ");");
     // if not found create Map
     println("if (args == null) {");
     indent();
-    println("args = new " + constantMapClassName + "(new String[] {");
+    println("args = " + constantMapCreatorClassName + ".create(new String[] {");
     String keyString;
     try {
       keyString = resourceList.getRequiredString(mapName);

@@ -18,37 +18,12 @@ package com.google.gwt.i18n;
 import com.google.gwt.i18n.client.impl.ConstantMap;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Test ConstantMap using Apache's tests.
  */
 public class ConstantMapTest extends MapTestBase {
-
-  private static final class ConstantMapNoJsni extends ConstantMap {
-    private Map<String, String> noJsniImpl;
-
-    private ConstantMapNoJsni(String[] keys, String[] values) {
-      super(keys, values);
-    }
-
-    @Override
-    public String get(String key) {
-      return noJsniImpl.get(key);
-    }
-
-    @Override
-    protected void init() {
-      noJsniImpl = new HashMap<String, String>();
-    }
-
-    @Override
-    protected void putImpl(String key, String value) {
-      noJsniImpl.put(key, value);
-    }
-  }
 
   @Override
   protected boolean isRemoveModifiable() {
@@ -57,15 +32,14 @@ public class ConstantMapTest extends MapTestBase {
 
   @Override
   protected Map<String, String> makeEmptyMap() {
-    return Collections.unmodifiableMap(new ConstantMapNoJsni(new String[] {},
-        new String[] {}));
+    return new ConstantMap(new String[] {}, new String[] {});
   }
 
   @Override
   protected Map<String, String> makeFullMap() {
     String[] keys = Arrays.asList(getSampleKeys()).toArray(new String[0]);
     String[] values = Arrays.asList(getSampleValues()).toArray(new String[0]);
-    return Collections.unmodifiableMap(new ConstantMapNoJsni(keys, values));
+    return new ConstantMap(keys, values);
   }
 
   @Override

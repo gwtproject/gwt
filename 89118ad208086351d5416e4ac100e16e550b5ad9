@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e43969b5_6d3a95e1",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/ConstantMapCreator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-06T11:13:19Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "89118ad208086351d5416e4ac100e16e550b5ad9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_8d6fc1d7",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/ConstantMapCreator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-06T11:13:19Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "89118ad208086351d5416e4ac100e16e550b5ad9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

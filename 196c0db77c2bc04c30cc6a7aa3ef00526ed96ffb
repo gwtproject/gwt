@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "643739c4_eccbe32b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-07T20:03:31Z",
+      "side": 1,
+      "message": "This might cause inconsistencies, especially with IE. Can we reuse the code in c.g.gwt.useragent or perhaps just leave the IE part out?",
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_2c517b92",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-07T20:03:31Z",
+      "side": 1,
+      "message": "This might turn into a public contract and we should also avoid name collisions so let\u0027s name it little bit for longer term.\n\nI\u0027m not the best css class namer but a suggestion:\n\n .gwt-DevModeRefresh\n .gwt-DevModeStatusCompiling\n .gwt-DevModeStatusError",
+      "range": {
+        "startLine": 97,
+        "startChar": 5,
+        "endLine": 97,
+        "endChar": 13
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_14867cc5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-07T18:52:25Z",
+      "side": 1,
+      "message": "If you review the patch 10,  I have set a bunch of CSS properties using a style tag instead of setting them in the element. The app can modify the button after this nocache script is run. Users can move the button, change the content, hide it, etc. using css-injector or whatever css approach.",
+      "parentUuid": "246381c5_e0485874",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6469f9a1_62db6cf9",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 9
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "As with my remark above, might make this configurable too, in case the app itself uses the keystrokes?",
       "parentUuid": "c498e5f7_c5a530a9",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "445eb5fe_4c569fe3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-07T18:52:25Z",
+      "side": 1,
+      "message": "Yeah that can be a nit. But imo it is not very important, since this is only loaded if they are debugging. They always could use the current way to run superdevmode with bookmarkers. Anyway this is an idea,  but maybe export a couple of functions like $wnd.disableSdmKey and $wnd.disableSdmButton and the app could call them using jsni.",
+      "parentUuid": "e43969b5_d3496cef",
       "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

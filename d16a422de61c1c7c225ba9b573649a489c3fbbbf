@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c498e5f7_c5a530a9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-07T12:44:19Z",
+      "side": 1,
+      "message": "Good catch!, this is a typo in the comment it should read as Ctrl-Y which is a combination of keys I found was not using in any browser. Actually the code is right since keycode 89 is \u0027Y\u0027",
+      "parentUuid": "6469f9a1_62db6cf9",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6469f9a1_a2f58468",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 9
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-07T06:53:11Z",
       "side": 1,
       "message": "It was hard for me to recognize that the compile is running. Some kind of alert would be better I think.",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_b15e9a53",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-07T12:44:19Z",
+      "side": 1,
+      "message": "Yo are right, In my next patch set, I have removed the opacity and added some css tweaks, so as the button is more meaningful and there are messages when compiling and failures.",
+      "parentUuid": "6469f9a1_a2f58468",
       "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -81,6 +117,24 @@
       "writtenOn": "2014-07-07T06:53:11Z",
       "side": 1,
       "message": "Additional whitespace here and below on purpose?",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "445eb5fe_810240d5",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-07T12:44:19Z",
+      "side": 1,
+      "message": "I did format the file with the eclipse gwt formatter, and it added these spaces.\nJenkins has validated the syntax and it is ok, so I guess this space must be here.",
+      "parentUuid": "6469f9a1_42e748bc",
       "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

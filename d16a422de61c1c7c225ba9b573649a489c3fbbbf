@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "246381c5_e0485874",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-07-07T18:31:13Z",
+      "side": 1,
+      "message": "This would be my only argument about this - consider making this customizable (perhaps like __MODULE_NAME__ replacement, but a configuration-property or java system property). Possible values could be BOTTOM_RIGHT, BOTTOM_LEFT, NONE, allowing people to move it out of the way (if apps have their own buttons in the corners), or avoid it entirely (and use the Compile bookmarklet).",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6469f9a1_62db6cf9",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 9
@@ -48,6 +65,24 @@
       "side": 1,
       "message": "Good catch!, this is a typo in the comment it should read as Ctrl-Y which is a combination of keys I found was not using in any browser. Actually the code is right since keycode 89 is \u0027Y\u0027",
       "parentUuid": "6469f9a1_62db6cf9",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_d3496cef",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-07-07T18:31:13Z",
+      "side": 1,
+      "message": "As with my remark above, might make this configurable too, in case the app itself uses the keystrokes?",
+      "parentUuid": "c498e5f7_c5a530a9",
       "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

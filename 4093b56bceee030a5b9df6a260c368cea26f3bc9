@@ -22,6 +22,30 @@
       "revId": "4093b56bceee030a5b9df6a260c368cea26f3bc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_72ac2e8d",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceNativeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-07T21:12:04Z",
+      "side": 1,
+      "message": "What do you mean with move up? If you mean \"move the function to the top of the file\" then we no longer do that for a while and I highly discourage it; please don\u0027t recommended that anymore unless it makes logically more sense to do so.",
+      "parentUuid": "043d9d9e_7107d27e",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "4093b56bceee030a5b9df6a260c368cea26f3bc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

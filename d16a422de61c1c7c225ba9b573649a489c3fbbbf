@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "6469f9a1_c2d198df",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5890
+      },
+      "writtenOn": "2014-07-07T06:53:11Z",
+      "side": 1,
+      "message": "Not needing the bookmarklets is definitely great. But I recognized this element more as an indicator that sdm is running, as I will very likely use the shortcut below to recompile.",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6469f9a1_62db6cf9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5890
+      },
+      "writtenOn": "2014-07-07T06:53:11Z",
+      "side": 1,
+      "message": "Ctrl-K is taken by Chrome and FF to move the insertion point to the web search field",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6469f9a1_a2f58468",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5890
+      },
+      "writtenOn": "2014-07-07T06:53:11Z",
+      "side": 1,
+      "message": "It was hard for me to recognize that the compile is running. Some kind of alert would be better I think.",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4c6c9d8_71088345",
         "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
         "patchSetId": 9
@@ -13,6 +64,23 @@
       "writtenOn": "2014-07-03T19:56:54Z",
       "side": 1,
       "message": "I tried this jar out in GPE. So far this worked good.",
+      "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6469f9a1_42e748bc",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5890
+      },
+      "writtenOn": "2014-07-07T06:53:11Z",
+      "side": 1,
+      "message": "Additional whitespace here and below on purpose?",
       "revId": "d16a422de61c1c7c225ba9b573649a489c3fbbbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

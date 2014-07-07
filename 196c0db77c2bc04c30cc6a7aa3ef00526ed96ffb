@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "643739c4_1d86a3c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"bookmarklets\"",
+      "range": {
+        "startLine": 16,
+        "startChar": 29,
+        "endLine": 16,
+        "endChar": 40
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4c6c9d8_13282e0c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"bookmarklets\"",
+      "range": {
+        "startLine": 20,
+        "startChar": 40,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4c6c9d8_5383c6b4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "This isn\u0027t actually an array since it\u0027s not indexed by integer, so {} seems better.",
+      "range": {
+        "startLine": 31,
+        "startChar": 57,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_eccbe32b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -13,6 +82,52 @@
       "writtenOn": "2014-07-07T20:03:31Z",
       "side": 1,
       "message": "This might cause inconsistencies, especially with IE. Can we reuse the code in c.g.gwt.useragent or perhaps just leave the IE part out?",
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_cc9a9f60",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"bookmarklets\"",
+      "range": {
+        "startLine": 57,
+        "startChar": 63,
+        "endLine": 57,
+        "endChar": 74
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "246381c5_0c44a32c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "Perhaps \"serverUrl\", \"nocacheUrl\" \"compileUrl\"?",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 59,
+        "endChar": 15
+      },
       "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -35,6 +150,512 @@
         "startChar": 5,
         "endLine": 97,
         "endChar": 13
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "246381c5_4c085bf7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "What if the page contains multiple modules? Perhaps there\u0027s a way to align the compile buttons so they don\u0027t overlap? Also, the buttons should be distinguishable.\n\nPerhaps whichever module runs first should create a dialog box in the corner, and then each module can add its own compile button.\n\n(I think we should support multiple modules, but I\u0027m fine deferring it to another patch if that makes it easier.)",
+      "range": {
+        "startLine": 99,
+        "startChar": 13,
+        "endLine": 99,
+        "endChar": 16
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_f2349e01",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "Surprisingly, it looks like IE8 supports this.\nhttp://caniuse.com/css-gencontent",
+      "range": {
+        "startLine": 116,
+        "startChar": 22,
+        "endLine": 116,
+        "endChar": 28
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "246381c5_6cec3fde",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "I think this needs to be optional in case the app uses Control-Y for something else. Also, if there are multiple modules on the same page, it seems like they would all try to compile at once.\n\nMaybe the best approach would be to take out the key bindings for now and add them in a second patch.",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_cf745113",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "Not sure why the javadoc was reformatted?",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 6
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_129f727f",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"Runs Super Dev Mode instead of classic Development Mode.\"",
+      "range": {
+        "startLine": 101,
+        "startChar": 14,
+        "endLine": 101,
+        "endChar": 18
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_92444232",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"Determines whether to start the code server or not.\"\nremove blank line.",
+      "range": {
+        "startLine": 352,
+        "startChar": 3,
+        "endLine": 352,
+        "endChar": 4
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_f243be24",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "No need to reformat. (And below.)",
+      "range": {
+        "startLine": 373,
+        "startChar": 13,
+        "endLine": 373,
+        "endChar": 17
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_f2981e61",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"for classic Dev Mode or 9876 for Super Dev Mode\".",
+      "range": {
+        "startLine": 221,
+        "startChar": 18,
+        "endLine": 221,
+        "endChar": 25
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_36837eb6",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "perhaps rename to \"makeStartupUrl\"",
+      "range": {
+        "startLine": 1012,
+        "startChar": 25,
+        "endLine": 1012,
+        "endChar": 35
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_d26cfa8b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "No reformat.",
+      "range": {
+        "startLine": 107,
+        "startChar": 21,
+        "endLine": 107,
+        "endChar": 22
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_d674fa12",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "I think jat might have been thinking about automatically launching the browser instead of just displaying the startup URLs. I don\u0027t think we\u0027re going to do that any time soon, so I think you can remove the TODO.",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 11
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_560aca87",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "If I understand this correctly, this code is needed if the user previously ran Super Dev Mode and then switches to Dev Mode? Maybe say something like:\n\n\"Update the timestamp for files that Super Dev Mode might previously have touched.\"",
+      "range": {
+        "startLine": 194,
+        "startChar": 67,
+        "endLine": 194,
+        "endChar": 71
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_f2965ec3",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"Super Dev Mode\"",
+      "range": {
+        "startLine": 196,
+        "startChar": 64,
+        "endLine": 196,
+        "endChar": 69
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_d6c79ad9",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "makeStartupUrl?",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 16
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_c1d8b28b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "How about:\n\n/**\n * Writes compiler output to the right places so that the\n * browser will see the newly compiled GWT code.\n * (For example, updates the nocache.js file.)\n */\nvoid writeCompilerOutput()",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_9d58d333",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "I think most of these can be final.",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 9
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_b2478683",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"codeServerPort\"",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_3699bef1",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"codeServerArgs\"",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 32
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_7d96bf69",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "I think you can move thread creation after the try..catch block.",
+      "range": {
+        "startLine": 102,
+        "startChar": 6,
+        "endLine": 102,
+        "endChar": 18
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_f66f360b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "\"Unable to find main() method for Super Dev Mode code server. Hint: verify that gwt-codeserver.jar is in your classpath.\"",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 33
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_f66816ff",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "It seems better to throw UnableToCompleteException in this case; there\u0027s no need to print the stack trace.",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 15
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43969b5_36345e15",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-07T22:10:58Z",
+      "side": 1,
+      "message": "It looks like this null check is unnecessary; if the constructor succeeds, there will be a thread.",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 20
       },
       "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

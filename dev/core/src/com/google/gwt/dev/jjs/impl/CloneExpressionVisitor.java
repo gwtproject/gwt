@@ -252,7 +252,7 @@ public class CloneExpressionVisitor extends JVisitor {
   public boolean visit(JNewArray x, Context ctx) {
     expression =
         new JNewArray(x.getSourceInfo(), x.getArrayType(), cloneExpressions(x.dims),
-            cloneExpressions(x.initializers), x.getClassLiterals());
+            cloneExpressions(x.initializers), cloneExpression(x.getBaseClassLiteral()));
     return false;
   }
 

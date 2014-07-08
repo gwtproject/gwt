@@ -669,6 +669,28 @@ public class JProgram extends JNode {
     return result;
   }
 
+  /**
+   * Returns an expression that evaluates to an array class literal at runtime.
+   */
+  public JExpression getArrayClassLiteralExpression(SourceInfo sourceInfo, JType baseType,
+      int dimensions) {
+    return getArrayClassLiteralExpression(sourceInfo, getClassLiteralField(baseType),
+        baseType, dimensions);
+  }
+
+  /**
+   * Returns an expression that evaluates to an array class literal at runtime.
+   */
+  public JExpression getArrayClassLiteralExpression(SourceInfo sourceInfo, JField field,
+      JType baseType, int dimensions) {
+    JClassLiteral baseClassLiteral = new JClassLiteral(sourceInfo, baseType);
+    baseClassLiteral.setField(field);
+    return new JMethodCall(sourceInfo,null,
+        getIndexedMethod("Class.getClassLiteralForArray"),
+        new JFieldRef(sourceInfo, null, field, field.getEnclosingType()),
+        getLiteralInt(dimensions));
+  }
+
   public Map<JReferenceType, JCastMap> getCastMap() {
     return Collections.unmodifiableMap(castMaps);
   }

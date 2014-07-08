@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "643739c4_1cc77c4b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-08T19:52:34Z",
+      "side": 1,
+      "message": "Need to add a check that incremental and filePerCompile aren\u0027t used at the same time.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "a52c86963649e17c8148d95a8cf5bd77a7cc01e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_fc10e822",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-08T19:52:34Z",
+      "side": 1,
+      "message": "The term \"monolithic compile\" seems confusing here so let\u0027s just avoid it. Maybe something like:\n\n\"Compiles faster by creating a JavaScript file per class. Can\u0027t be turned on at the same time as shouldCompileIncremental().\"",
+      "range": {
+        "startLine": 129,
+        "startChar": 5,
+        "endLine": 129,
+        "endChar": 34
+      },
+      "revId": "a52c86963649e17c8148d95a8cf5bd77a7cc01e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_3c0b60f6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-08T19:52:34Z",
+      "side": 1,
+      "message": "\"Compiles faster by creating a JavaScript file per class. Can\u0027t be used with -Xincremental.\"",
+      "range": {
+        "startLine": 287,
+        "startChar": 14,
+        "endLine": 287,
+        "endChar": 67
+      },
+      "revId": "a52c86963649e17c8148d95a8cf5bd77a7cc01e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -694,6 +694,30 @@
     },
     {
       "key": {
+        "uuid": "a41cd152_23b50aba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-08T23:28:38Z",
+      "side": 1,
+      "message": "yes but i don\u0027t mean to cache it permanently in persisted ImmediateTypeRelations. i mean it could be cached locally for the duration of this particular compile. basically the same lifespan as the extended type relations indexes.\n\nthat being said, if there\u0027s no performance impact either way then i think no change would be necessary",
+      "parentUuid": "043d9d9e_425682e3",
+      "range": {
+        "startLine": 792,
+        "startChar": 4,
+        "endLine": 792,
+        "endChar": 37
+      },
+      "revId": "90a6ce7d8d57140b3cff6e962932ca7404befc44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_e29a0c60",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 1

@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -665,6 +666,35 @@ public class JProgram extends JNode {
     List<JArrayType> result = Lists.newArrayList(arrayTypes.values());
     Collections.sort(result, ARRAYTYPE_COMPARATOR);
     return result;
+  }
+
+  /**
+   * Returns an expression that evaluates to an array class literal at runtime.
+   * <p>
+   * Note: This version can only be called after {@link ImplementClassLiteralsAsFields} has been
+   * run.
+   */
+  public JExpression createArrayClassLiteralExpression(SourceInfo sourceInfo, JType leafType,
+      int dimensions) {
+    JField leafTypeClassLiteralField = getClassLiteralField(leafType);
+    assert leafTypeClassLiteralField != null : "Array leaf type must have a class literal field; "
+        + "either ImplementClassLiteralsAsField has not run yet or or there is an error computing"
+        + "live class literals.";
+    return createArrayClassLiteralExpression(sourceInfo, leafTypeClassLiteralField,
+        leafType, dimensions);
+  }
+
+  /**
+   * Returns an expression that evaluates to an array class literal at runtime.
+   */
+  public JExpression createArrayClassLiteralExpression(SourceInfo sourceInfo, JField field,
+      JType leafType, int dimensions) {
+    JClassLiteral leafTypeClassLiteral = new JClassLiteral(sourceInfo, leafType);
+    leafTypeClassLiteral.setField(field);
+    return new JMethodCall(sourceInfo,null,
+        getIndexedMethod("Class.getClassLiteralForArray"),
+        new JFieldRef(sourceInfo, null, field, field.getEnclosingType()),
+        getLiteralInt(dimensions));
   }
 
   public Map<JReferenceType, JCastMap> getCastMap() {

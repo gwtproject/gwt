@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -44,6 +45,15 @@ public class ClassObjectTest extends GWTTestCase {
     }
   }
 
+  private static class JSO extends JavaScriptObject {
+    protected JSO() {
+    }
+  }
+
+  private static native JSO getJSO() /*-{
+    return {};
+  }-*/;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
@@ -58,6 +68,11 @@ public class ClassObjectTest extends GWTTestCase {
           o.getClass().getName());
       assertEquals("class [Lcom.google.gwt.dev.jjs.test.ClassObjectTest$Foo;",
           o.getClass().toString());
+      assertEquals("com.google.gwt.core.client.JavaScriptObject$", JSO.class.getName());
+      assertEquals("[Lcom.google.gwt.core.client.JavaScriptObject$;",
+          new JSO[3].getClass().getName());
+      assertEquals("com.google.gwt.core.client.JavaScriptObject$",
+          getJSO().getClass().getName());
     }
     assertTrue(o.getClass().isArray());
     assertFalse(o.getClass().isEnum());

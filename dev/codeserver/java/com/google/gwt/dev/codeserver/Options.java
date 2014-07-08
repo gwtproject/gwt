@@ -43,6 +43,7 @@ import java.util.List;
  */
 public class Options {
   private boolean compileIncremental = false;
+  private boolean compilePerFile = false;
   private boolean noPrecompile = false;
   private boolean isCompileTest = false;
   private File workDir;
@@ -122,6 +123,14 @@ public class Options {
    */
   boolean shouldCompileIncremental() {
     return compileIncremental;
+  }
+
+  /**
+   * Whether monolithic recompiles should process only changed files and construct JS output by
+   * linking old and new JS on a per class basis.
+   */
+  boolean shouldCompilePerFile() {
+    return compilePerFile;
   }
 
   /**
@@ -211,6 +220,7 @@ public class Options {
       registerHandler(new FailOnErrorFlag());
       registerHandler(new StrictResourcesFlag());
       registerHandler(new CompileIncrementalFlag());
+      registerHandler(new CompilePerFileFlag());
       registerHandler(new ArgHandlerSourceLevel(new OptionSourceLevel() {
         @Override
         public SourceLevel getSourceLevel() {
@@ -262,6 +272,35 @@ public class Options {
     @Override
     public boolean getDefaultValue() {
       return !noPrecompile;
+    }
+  }
+
+  private class CompilePerFileFlag extends ArgHandlerFlag {
+
+    @Override
+    public String getLabel() {
+      return "compilePerFile";
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Compile and link the application on a per file basis.";
+    }
+
+    @Override
+    public boolean setFlag(boolean value) {
+      compilePerFile = value;
+      return true;
+    }
+
+    @Override
+    public boolean getDefaultValue() {
+      return false;
+    }
+
+    @Override
+    public boolean isExperimental() {
+      return true;
     }
   }
 

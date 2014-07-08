@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a41cd152_e3fcd290",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-08T23:14:41Z",
+      "side": 1,
+      "message": "Fix the comment. Primitives are not made lazy in this patch.",
+      "range": {
+        "startLine": 258,
+        "startChar": 5,
+        "endLine": 258,
+        "endChar": 15
+      },
+      "revId": "c10c4ad184f4a33823d873453f7fa25fdd919dcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

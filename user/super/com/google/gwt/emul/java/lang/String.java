@@ -382,15 +382,12 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   private static native boolean __equals(String me, Object other) /*-{
-    // Coerce me to a primitive string to force string comparison
-    return String(me) == other;
+    return me == other;
   }-*/;
 
   // CHECKSTYLE_ON
 
   private static native int compareTo(String thisStr, String otherStr) /*-{
-    // Coerce to a primitive string to force string comparison
-    thisStr = String(thisStr);
     if (thisStr == otherStr) {
       return 0;
     }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "643739c4_3cdb60ac",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-08T20:45:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "043d9d9e_828b0a59",
+      "revId": "e75fd39d0c3f7e8e6f27cd156fa3bfe8e872b4d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c498e5f7_abeb955b",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-08T18:50:44Z",
       "side": 1,
       "message": "I dont like that new logger will be created for every call.\n\nCan we add here static class holder for this? Compiler should prune it if implementation is not LoggerImplNull",
+      "revId": "e75fd39d0c3f7e8e6f27cd156fa3bfe8e872b4d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "643739c4_1ce69c7a",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-08T20:45:01Z",
+      "side": 1,
+      "message": "I didn\u0027t understand the value. We basically return an empty object when the LoggerImpl is null also this is same as before; why bother caching it?",
+      "parentUuid": "c498e5f7_abeb955b",
       "revId": "e75fd39d0c3f7e8e6f27cd156fa3bfe8e872b4d6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

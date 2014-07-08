@@ -25,6 +25,7 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JEnumType;
+import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JField.Disposition;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
@@ -72,8 +73,23 @@ public class ImplementClassLiteralsAsFields {
   private class NormalizeVisitor extends JModVisitor {
     @Override
     public void endVisit(JClassLiteral x, Context ctx) {
-      JField field = resolveClassLiteralField(x.getRefType());
-      x.setField(field);
+      JType type = x.getRefType();
+//      if (type instanceof JPrimitiveType) {
+        // Replace for a call to dynamically create the actual class literal.
+
+//      } else
+      if (type instanceof JArrayType) {
+        JArrayType arrayType = (JArrayType) type;
+        JType baseType = arrayType.getLeafType();
+        JField field = resolveClassLiteralField(baseType);
+
+        JExpression arrayClassLiteralExpression = program.getArrayClassLiteralExpression(
+            x.getSourceInfo(),field, baseType, arrayType.getDims());
+        ctx.replaceMe(arrayClassLiteralExpression);
+      } else {
+        JField field = resolveClassLiteralField(x.getRefType());
+        x.setField(field);
+      }
     }
   }
 
@@ -136,18 +152,7 @@ public class ImplementClassLiteralsAsFields {
    * Class.createForInterface(&quot;java.lang.&quot;, &quot;Comparable&quot;)
    * </pre>
    *
-   * Primitive:
-   *
-   * <pre>
-   * Class.createForPrimitive(&quot;&quot;, &quot;int&quot;, &quot; I&quot;)
-   * </pre>
-   *
-   * Array:
-   *
-   * <pre>
-   * Class.createForArray("", "[I", /JRuntimeTypeReference/"com.google.gwt.lang.Array", int.class)
-   * Class.createForArray("[Lcom.example.", "Foo;", /JRuntimeTypeReference/"com.google.gwt.lang.Array", Foo.class)
-   * </pre>
+   * Primitives and arrays are lazily created.
    *
    * Enum:
    *
@@ -164,6 +169,8 @@ public class ImplementClassLiteralsAsFields {
    * </pre>
    */
   private JMethodCall computeClassObjectAllocation(SourceInfo info, JType type) {
+    assert !(type instanceof JArrayType);
+
     String typeName = getTypeName(type);
 
     JMethod method = program.getIndexedMethod(type.getClassLiteralFactoryMethod());
@@ -188,7 +195,7 @@ public class ImplementClassLiteralsAsFields {
     JStringLiteral className = program.getStringLiteral(info, getClassName(typeName));
     call.addArgs(packageName, className);
 
-    if (type instanceof JArrayType || type instanceof JClassType) {
+    if (type instanceof JClassType) {
       // Add a runtime type reference.
       call.addArg(new JRuntimeTypeReference(info, program.getTypeJavaLangObject(),
           (JReferenceType) type));

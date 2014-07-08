@@ -40,18 +40,27 @@ public final class Class<T> implements Type {
    *
    * @skip
    */
-  static <T> Class<T> createForArray(String packageName, String className,
-      JavaScriptObject typeId, Class<?> componentType) {
-    // Initialize here to avoid method inliner
+  public static native <T> Class<T> getClassLiteralForArray(Class<?> clazz, int dimensions) /*-{
+    return arrayLiterals[dimensions] || (arrayLiterals[dimensions] =
+        clazz.@java.lang.Class::createClassLiteralForArray(*)(dimensions));
+  }-*/;
+
+  <T> Class<T> createClassLiteralForArray(int dimensions) {
     Class<T> clazz = new Class<T>();
     if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
+      clazz.simpleName = this.simpleName;
+      for (int i = 0; i < dimensions; i++) {
+        clazz.typeName = "[" + clazz.typeName;
+        clazz.simpleName += "[]";
+      }
+      clazz.typeName += this.typeName;
     } else {
-      synthesizeClassNamesFromTypeId(clazz, typeId);
+      // TODO(rluble): add a meaninfull id to arrays.
+      synthesizeClassNamesFromTypeId(clazz, null);
     }
     clazz.modifiers = ARRAY;
     clazz.superclass = Object.class;
-    clazz.componentType = componentType;
+    clazz.componentType = this;
     return clazz;
   }
 
@@ -243,7 +252,9 @@ public final class Class<T> implements Type {
 
   private String typeName;
 
-  private int typeId;
+  private JavaScriptObject typeId;
+
+  private JavaScriptObject arrayLiterals= JavaScriptObject.createArray();
 
   /**
    * Not publicly instantiable.

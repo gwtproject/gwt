@@ -132,7 +132,7 @@ public class ArrayNormalizer {
       // override the type of the called method with the array's type
       SourceInfo sourceInfo = x.getSourceInfo();
       JMethodCall call = new JMethodCall(sourceInfo, null, initDim, arrayType);
-      JLiteral classLit = x.getClassLiteral();
+      JLiteral classLit = x.getBaseClassLiteral();
       JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
       JRuntimeTypeReference arrayElementRuntimeTypeReference =
           getElementRuntimeTypeReference(sourceInfo, arrayType);
@@ -148,17 +148,14 @@ public class ArrayNormalizer {
       // override the type of the called method with the array's type
       SourceInfo sourceInfo = x.getSourceInfo();
       JMethodCall call = new JMethodCall(sourceInfo, null, initDims, arrayType);
-      JsonArray classLitList = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray castableTypeMaps = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray elementTypeReferences = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray dimList = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JType currentElementType = arrayType;
+      JLiteral classLit = x.getBaseClassLiteral();
       for (int i = 0; i < dims; ++i) {
         // Walk down each type from most dims to least.
         JArrayType curArrayType = (JArrayType) currentElementType;
-
-        JLiteral classLit = x.getClassLiterals().get(i);
-        classLitList.getExprs().add(classLit);
 
         JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, curArrayType);
         castableTypeMaps.getExprs().add(castableTypeMap);
@@ -172,7 +169,7 @@ public class ArrayNormalizer {
       }
       JType leafElementType = currentElementType;
       JIntLiteral leafElementTypeCategory = getTypeCategoryLiteral(leafElementType);
-      call.addArgs(classLitList, castableTypeMaps, elementTypeReferences, leafElementTypeCategory,
+      call.addArgs(classLit, castableTypeMaps, elementTypeReferences, leafElementTypeCategory,
           dimList, program.getLiteralInt(dims));
       ctx.replaceMe(call);
     }
@@ -181,7 +178,8 @@ public class ArrayNormalizer {
       // override the type of the called method with the array's type
       SourceInfo sourceInfo = x.getSourceInfo();
       JMethodCall call = new JMethodCall(sourceInfo, null, initValues, arrayType);
-      JLiteral classLit = x.getClassLiteral();
+      JExpression classLitExpression = program.getArrayClassLiteralExpression(x.getSourceInfo(),
+          arrayType.getLeafType(), arrayType.getDims());
       JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
       JRuntimeTypeReference elementTypeIds = getElementRuntimeTypeReference(sourceInfo, arrayType);
       JsonArray initList = new JsonArray(sourceInfo, program.getJavaScriptObject());
@@ -189,7 +187,8 @@ public class ArrayNormalizer {
       for (int i = 0; i < x.initializers.size(); ++i) {
         initList.getExprs().add(x.initializers.get(i));
       }
-      call.addArgs(classLit, castableTypeMap, elementTypeIds, leafElementTypeCategory, initList);
+      call.addArgs(classLitExpression, castableTypeMap, elementTypeIds, leafElementTypeCategory,
+          initList);
       ctx.replaceMe(call);
     }
 

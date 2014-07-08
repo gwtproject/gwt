@@ -342,6 +342,30 @@
       "revId": "6daf8442f814615e1154b166531da3ab02777251",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498e5f7_70c25819",
+        "filename": "user/src/com/google/gwt/user/client/DOM.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-07-08T08:38:52Z",
+      "side": 1,
+      "message": "Instead of duplicating that JSNI code, we might want to refactor PotentialElement to call those methods in DOM (marking them as deprecated here, or calling them using JSNI to bypass Java visibility checks)",
+      "parentUuid": "e4efa930_718b605a",
+      "range": {
+        "startLine": 1064,
+        "startChar": 0,
+        "endLine": 1074,
+        "endChar": 7
+      },
+      "revId": "6daf8442f814615e1154b166531da3ab02777251",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

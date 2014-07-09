@@ -123,7 +123,7 @@ public class Java7AstTest extends JJSTestBase {
 
   private JExpression getExpression(String type, String expression)
       throws UnableToCompleteException {
-    JProgram program = compileSnippet(type, "return " + expression + ";");
+    JProgram program = compileSnippet(type, "return " + expression + ";", true);
     JMethod mainMethod = findMainMethod(program);
     JMethodBody body = (JMethodBody) mainMethod.getBody();
     JReturnStatement returnStmt = (JReturnStatement) body.getStatements().get(0);
@@ -152,7 +152,7 @@ public class Java7AstTest extends JJSTestBase {
 
   private JBlock getStatement(String statement)
       throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", statement);
+    JProgram program = compileSnippet("void", statement, true);
     JMethod mainMethod = findMainMethod(program);
     JMethodBody body = (JMethodBody) mainMethod.getBody();
     return body.getBlock();

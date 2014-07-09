@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
@@ -117,13 +118,17 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Adds a method to this type.
    */
-  public final void addMethod(JMethod method) {
+  public final void addMethod(int index, JMethod method) {
     assert method.getEnclosingType() == this;
-    assert !method.getName().equals("$clinit") || getMethods().size() == 0 : "Attempted adding "
+    assert !method.getName().equals(GwtAstBuilder.CLINIT_NAME) || getMethods().size() == 0 : "Attempted adding "
         + "$clinit method with index != 0";
-    assert !method.getName().equals("$init") || getMethods().size() == 1 : "Attempted adding $init "
-        + "method with index != 1";
-    methods = Lists.add(methods, method);
+    assert !method.getName().equals(GwtAstBuilder.INIT_NAME) || method.getParams().size() != 0 ||
+        getMethods().size() == 1 : "Attempted adding $init method with index != 1";
+    methods = Lists.add(methods, index, method);
+  }
+
+  public void addMethod(JMethod newMethod) {
+    addMethod(methods.size(), newMethod);
   }
 
   /**
@@ -204,7 +209,7 @@ public abstract class JDeclaredType extends JReferenceType {
     JMethod clinit = this.getMethods().get(0);
 
     assert clinit != null;
-    assert clinit.getName().equals("$clinit");
+    assert clinit.getName().equals(GwtAstBuilder.CLINIT_NAME);
     return clinit;
   }
 
@@ -270,7 +275,7 @@ public abstract class JDeclaredType extends JReferenceType {
     JMethod init = this.getMethods().get(1);
 
     assert init != null;
-    assert init.getName().equals("$init");
+    assert init.getName().equals(GwtAstBuilder.INIT_NAME);
     return init;
   }
 
@@ -360,7 +365,7 @@ public abstract class JDeclaredType extends JReferenceType {
   public void resolve(List<JInterfaceType> resolvedInterfaces, String jsNamespace) {
     assert JType.replaces(resolvedInterfaces, superInterfaces);
     superInterfaces = Lists.normalize(resolvedInterfaces);
-    if (this.jsNamespace.isEmpty()) {
+    if (this.jsNamespace == null || this.jsNamespace.isEmpty()) {
       this.jsNamespace = jsNamespace;
     }
   }

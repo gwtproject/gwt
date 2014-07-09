@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -58,6 +59,47 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   public boolean isJsTypePrototype(JDeclaredType classType) {
     return typeOracle.isInteropEnabled() && classType instanceof JClassType
         && ((JClassType) classType).isJsPrototypeStub();
+  }
+
+  public JMethod getSingleAbstractMethod(JDeclaredType type) {
+    if (type instanceof JClassType) {
+      for (JInterfaceType intf : ((JClassType) type).getImplements()) {
+        JMethod samMethod = getSingleAbstractMethod(intf);
+        if (samMethod != null) {
+          // TODO add assertions preventing more than one SAM, and checking for implemented methods
+          return samMethod;
+        }
+      }
+
+      JClassType superType = type.getSuperClass();
+      JMethod samMethod = getSingleAbstractMethod(superType);
+      if (samMethod != null) {
+        return samMethod;
+      }
+    }
+
+    if (type instanceof JInterfaceType) {
+      JMethod samMethod = null;
+      boolean moreThanOne = false;
+      for (JMethod meth : type.getMethods()) {
+        if (meth.isAbstract()) {
+          if (samMethod == null) {
+            samMethod = meth;
+          } else {
+            moreThanOne = true;
+          }
+        }
+      }
+      if (!moreThanOne && samMethod != null) {
+        return samMethod;
+      }
+
+      for (JInterfaceType superIntf : ((JInterfaceType) type).getImplements()) {
+        return getSingleAbstractMethod(superIntf);
+      }
+    }
+
+    return null;
   }
 
   private static final class ArrayTypeComparator implements Comparator<JArrayType>, Serializable {
@@ -240,7 +282,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     public static boolean isClinit(JMethod method) {
     JDeclaredType enclosingType = method.getEnclosingType();
     if ((enclosingType != null) && (method == enclosingType.getClinitMethod())) {
-      assert (method.getName().equals("$clinit"));
+      assert (method.getName().equals(GwtAstBuilder.CLINIT_NAME));
       return true;
     } else {
       return false;

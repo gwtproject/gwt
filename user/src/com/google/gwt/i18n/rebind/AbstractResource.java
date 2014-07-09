@@ -120,7 +120,7 @@ public abstract class AbstractResource {
    * Encapsulates an ordered set of resources to search for translations.
    */
   public static class ResourceList extends AbstractList<AbstractResource>
-      implements Set<AbstractResource> {
+      implements List<AbstractResource> {
 
     private List<AbstractResource> list = new ArrayList<AbstractResource>();
 

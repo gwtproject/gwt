@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9015cf5_0f515547",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:43:43Z",
+      "side": 1,
+      "message": "It\u0027s usually better to allocate a unique function name for each JSONP callback. That way there\u0027s no possibility that the wrong callback will be called when there\u0027s more than one request.\n\nSee callJsonP in dev_mode_on.js for how I did it before:\nhttps://gwt.googlesource.com/gwt.git/+/master/dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js\n\nHowever, I wasn\u0027t thinking of avoiding caching issues before, so I just started the counter at 0. It might be better to initialize it to a random number.",
+      "range": {
+        "startLine": 159,
+        "startChar": 6,
+        "endLine": 159,
+        "endChar": 22
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9015cf5_4ff51d31",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:43:43Z",
+      "side": 1,
+      "message": "It seems like the compile() function will be a generally useful public (JavaScript) API.\n\nI\u0027m thinking that this function should be created inside __gwt_activeModules by Super Dev Mode\u0027s nocache.js file, so that it\u0027s always present in Super Dev Mode. \n\nThe API: it\u0027s a function called \"compile\" and takes no arguments. If this function doesn\u0027t exist, recompiling isn\u0027t supported.\n\nHowever, this patch has gone through a lot of review, so perhaps we should wait and do that separately.",
+      "range": {
+        "startLine": 163,
+        "startChar": 9,
+        "endLine": 163,
+        "endChar": 24
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9015cf5_ca359bef",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:43:43Z",
+      "side": 1,
+      "message": "We should ignore a request to start a second compile when a compile is already running. In dev_mode_on.js, I set the \"compiling\" flag to prevent this, and turn it off again if the compile fails.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9015cf5_cf5a4d63",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:43:43Z",
+      "side": 1,
+      "message": "If we make the callback function unique then we don\u0027t need this date anymore.",
+      "range": {
+        "startLine": 180,
+        "startChar": 15,
+        "endLine": 180,
+        "endChar": 16
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9015cf5_6a79e746",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:43:43Z",
+      "side": 1,
+      "message": "Could you wrap this line?\n(Also, 143-144.)",
+      "range": {
+        "startLine": 104,
+        "startChar": 11,
+        "endLine": 104,
+        "endChar": 17
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

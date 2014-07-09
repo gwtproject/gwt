@@ -472,6 +472,30 @@
     },
     {
       "key": {
+        "uuid": "b9015cf5_b58750ff",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T22:26:28Z",
+      "side": 1,
+      "message": "I think we should have both, but we can wait for another patch to implement the keyboard shortcut.",
+      "parentUuid": "2431c1d1_7b5ec7c8",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_cf745113",
         "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
         "patchSetId": 10

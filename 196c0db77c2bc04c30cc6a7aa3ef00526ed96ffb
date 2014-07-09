@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "c498e5f7_6b0a6d88",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c6c9d8_13282e0c",
+      "range": {
+        "startLine": 20,
+        "startChar": 40,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4c6c9d8_5383c6b4",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -59,6 +83,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "This isn\u0027t actually an array since it\u0027s not indexed by integer, so {} seems better.",
+      "range": {
+        "startLine": 31,
+        "startChar": 57,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498e5f7_8b07b97d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c6c9d8_5383c6b4",
       "range": {
         "startLine": 31,
         "startChar": 57,
@@ -88,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "c498e5f7_cb19c1de",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "We can copy that code because we cannot use it directly, but it is in a .java class, so we have to merge all sentences or copy it from a pretty .nocache file.\n\nThis code works well against all  UA listed at http://www.useragentstring.com/pages/Internet%20Explorer/  but if you prefer we can leave it as empty and compile all permutations in case of msie \u003c 11 \u0026\u0026 old opera.\n\nIt was empty in my last patch but I changed when testing with IE8,9,10,11 because first compilation is pretty faster.  We dont bother about IE7,6 and old browsers since they dont have sessionStorage, and UserAgent approach is pretty similar to this and return the same results.",
+      "parentUuid": "643739c4_eccbe32b",
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_cc9a9f60",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -99,6 +165,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "\"bookmarklets\"",
+      "range": {
+        "startLine": 57,
+        "startChar": 63,
+        "endLine": 57,
+        "endChar": 74
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "445eb5fe_d2016429",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_cc9a9f60",
       "range": {
         "startLine": 57,
         "startChar": 63,
@@ -157,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "445eb5fe_12fcbcd5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done. They seem a bit large names though",
+      "parentUuid": "643739c4_2c517b92",
+      "range": {
+        "startLine": 97,
+        "startChar": 5,
+        "endLine": 97,
+        "endChar": 13
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "246381c5_4c085bf7",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -168,6 +282,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "What if the page contains multiple modules? Perhaps there\u0027s a way to align the compile buttons so they don\u0027t overlap? Also, the buttons should be distinguishable.\n\nPerhaps whichever module runs first should create a dialog box in the corner, and then each module can add its own compile button.\n\n(I think we should support multiple modules, but I\u0027m fine deferring it to another patch if that makes it easier.)",
+      "range": {
+        "startLine": 99,
+        "startChar": 13,
+        "endLine": 99,
+        "endChar": 16
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_1d84df4b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Although the code supports multiple modules,  buttons were overlapped and callback was named the same. Changed in the next patch-set.",
+      "parentUuid": "246381c5_4c085bf7",
       "range": {
         "startLine": 99,
         "startChar": 13,
@@ -203,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_a21ba65d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "True, that is the first thing I tested",
+      "parentUuid": "643739c4_f2349e01",
+      "range": {
+        "startLine": 116,
+        "startChar": 22,
+        "endLine": 116,
+        "endChar": 28
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "246381c5_6cec3fde",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -226,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "445eb5fe_328620c6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Removed keybinding, but exported compile functions to the window so a the app could use it\u0027s own buttons or bindings to call them.",
+      "parentUuid": "246381c5_6cec3fde",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_cf745113",
         "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
         "patchSetId": 10
@@ -237,6 +423,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "Not sure why the javadoc was reformatted?",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 6
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_5dc0275f",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Because I run formatter in eclipse, it seems it\u0027s ok since checkstyle passed. but anyway rolling back",
+      "parentUuid": "643739c4_cf745113",
       "range": {
         "startLine": 59,
         "startChar": 3,
@@ -295,6 +505,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_9daa8fa7",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_92444232",
+      "range": {
+        "startLine": 352,
+        "startChar": 3,
+        "endLine": 352,
+        "endChar": 4
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_f243be24",
         "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
         "patchSetId": 10
@@ -306,6 +540,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "No need to reformat. (And below.)",
+      "range": {
+        "startLine": 373,
+        "startChar": 13,
+        "endLine": 373,
+        "endChar": 17
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_bdaf4bb6",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_f243be24",
       "range": {
         "startLine": 373,
         "startChar": 13,
@@ -341,6 +599,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_fd439324",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_f2981e61",
+      "range": {
+        "startLine": 221,
+        "startChar": 18,
+        "endLine": 221,
+        "endChar": 25
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_36837eb6",
         "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
         "patchSetId": 10
@@ -352,6 +634,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "perhaps rename to \"makeStartupUrl\"",
+      "range": {
+        "startLine": 1012,
+        "startChar": 25,
+        "endLine": 1012,
+        "endChar": 35
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498e5f7_7637b069",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_36837eb6",
       "range": {
         "startLine": 1012,
         "startChar": 25,
@@ -410,6 +716,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_1d593f12",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_d674fa12",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 11
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_560aca87",
         "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
         "patchSetId": 10
@@ -421,6 +751,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "If I understand this correctly, this code is needed if the user previously ran Super Dev Mode and then switches to Dev Mode? Maybe say something like:\n\n\"Update the timestamp for files that Super Dev Mode might previously have touched.\"",
+      "range": {
+        "startLine": 194,
+        "startChar": 67,
+        "endLine": 194,
+        "endChar": 71
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_3d56fbe2",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_560aca87",
       "range": {
         "startLine": 194,
         "startChar": 67,
@@ -456,6 +810,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_5d53c7f1",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_f2965ec3",
+      "range": {
+        "startLine": 196,
+        "startChar": 64,
+        "endLine": 196,
+        "endChar": 69
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_d6c79ad9",
         "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
         "patchSetId": 10
@@ -467,6 +845,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "makeStartupUrl?",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 16
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498e5f7_d696c4f5",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_d6c79ad9",
       "range": {
         "startLine": 41,
         "startChar": 6,
@@ -502,6 +904,30 @@
     },
     {
       "key": {
+        "uuid": "445eb5fe_92d28c8b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_c1d8b28b",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_9d58d333",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 10
@@ -513,6 +939,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "I think most of these can be final.",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 9
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_3ddfdb1e",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_9d58d333",
       "range": {
         "startLine": 43,
         "startChar": 2,
@@ -548,6 +998,30 @@
     },
     {
       "key": {
+        "uuid": "c498e5f7_368608c6",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_b2478683",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_3699bef1",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 10
@@ -559,6 +1033,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "\"codeServerArgs\"",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 32
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "445eb5fe_5299d4ef",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_3699bef1",
       "range": {
         "startLine": 92,
         "startChar": 19,
@@ -594,6 +1092,30 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_dd109723",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643739c4_7d96bf69",
+      "range": {
+        "startLine": 102,
+        "startChar": 6,
+        "endLine": 102,
+        "endChar": 18
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_f66f360b",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 10
@@ -605,6 +1127,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "\"Unable to find main() method for Super Dev Mode code server. Hint: verify that gwt-codeserver.jar is in your classpath.\"",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 33
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498e5f7_769090f5",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_f66f360b",
       "range": {
         "startLine": 115,
         "startChar": 25,
@@ -640,6 +1186,30 @@
     },
     {
       "key": {
+        "uuid": "445eb5fe_72a6d838",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "I tried to do it at the beginning, but It implied a large chain of changes to throw the exception in callers functions and constructors. I don\u0027t thing is a big problem here, anyway it could be done in another patch.",
+      "parentUuid": "e43969b5_f66816ff",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 15
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43969b5_36345e15",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 10
@@ -651,6 +1221,30 @@
       "writtenOn": "2014-07-07T22:10:58Z",
       "side": 1,
       "message": "It looks like this null check is unnecessary; if the constructor succeeds, there will be a thread.",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 20
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "043d9d9e_7d0243d8",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T14:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43969b5_36345e15",
       "range": {
         "startLine": 177,
         "startChar": 8,

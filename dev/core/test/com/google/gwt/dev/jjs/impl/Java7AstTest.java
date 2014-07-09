@@ -123,7 +123,7 @@ public class Java7AstTest extends JJSTestBase {
 
   private JExpression getExpression(String type, String expression)
       throws UnableToCompleteException {
-    JProgram program = compileSnippet(type, "return " + expression + ";");
+    JProgram program = compileSnippet(type, "return " + expression + ";", true);
     JMethod mainMethod = findMainMethod(program);
     JMethodBody body = (JMethodBody) mainMethod.getBody();
     JReturnStatement returnStmt = (JReturnStatement) body.getStatements().get(0);
@@ -135,26 +135,5 @@ public class Java7AstTest extends JJSTestBase {
     JBlock testExpression = getStatement(input);
     assertEquals(formatSource("{ " + expected + "}"),
         formatSource(testExpression.toSource()));
-  }
-
-  /**
-   * Removes most whitespace while still leaving one space separating words.
-   *
-   * Used to make the assertEquals ignore whitespace (mostly) while still retaining meaningful
-   * output when the test fails.
-   */
-  private String formatSource(String source) {
-    return source.replaceAll("\\s+", " ") // substitutes multiple whitespaces into one.
-      .replaceAll("\\s([\\p{Punct}&&[^$]])", "$1")  // removes whitespace preceding symbols
-                                                    // (except $ which can be part of an identifier)
-      .replaceAll("([\\p{Punct}&&[^$]])\\s", "$1"); // removes whitespace succeeding symbols.
-  }
-
-  private JBlock getStatement(String statement)
-      throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", statement);
-    JMethod mainMethod = findMainMethod(program);
-    JMethodBody body = (JMethodBody) mainMethod.getBody();
-    return body.getBlock();
   }
 }

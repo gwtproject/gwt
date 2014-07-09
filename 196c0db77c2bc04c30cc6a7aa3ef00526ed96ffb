@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "2431c1d1_fb98f760",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-09T20:56:12Z",
+      "side": 1,
+      "message": "Yes, this looks like will work the same as the current.\n\nIdeally we should call the UserAgentPropertyGenerator.writeUserAgentPropertyJavaScript to get the same selector script but this will introduce a dependency from \u0027dev\u0027 to \u0027user\u0027 which is not OK.\nWe talked about this with Brian and the best option looks like to have a testcase that tests both though it might not be trivial to write it now.\n\nAnyway I think it is ok to start with your suggestion then iterate on it. Probably we are going to need to improve error messaging (e.g. IE8-9 on IE7 compat mode) or have the tests case.",
+      "parentUuid": "043d9d9e_fda0f34f",
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_cc9a9f60",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10
@@ -418,6 +436,30 @@
       "side": 1,
       "message": "Removed keybinding, but exported compile functions to the window so a the app could use it\u0027s own buttons or bindings to call them.",
       "parentUuid": "246381c5_6cec3fde",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2431c1d1_7b5ec7c8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-09T20:56:12Z",
+      "side": 1,
+      "message": "We have two options:\n\n 1- No keyboard shortcut but export some functions for apps.\n 2- Have the shortcut by default and make it configurable.\n\nWith the first option nobody will have any issues. Most developers will not know about the feature and a few people who learns that it is possible to add the shortcut, they will need to go and add a script into their apps, make sure it works after this code executed etc. Also we need to maintain the API so that they will not be broken.\n\nWith the second option, everything will work out of the box for most users and also we can make it is easy to discover the shortcut. For a few people who has trouble with it, they will search or ask about the issue and find the solution and will change the shortcut or disable it by probably simply adding a meta tag (e.g. \u003cmeta name\u003d\"gwt:DevModeShortcut\" content\u003d\"U\" /\u003e).\n\nI personally think the second option is a better trade-off as it targets the best for the most common case and have a quite simple way out for the edge cases.",
+      "parentUuid": "445eb5fe_328620c6",
       "range": {
         "startLine": 182,
         "startChar": 20,

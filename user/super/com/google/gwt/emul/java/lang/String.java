@@ -390,11 +390,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   private static native int compareTo(String thisStr, String otherStr) /*-{
     // Coerce to a primitive string to force string comparison
-    thisStr = String(thisStr);
-    if (thisStr == otherStr) {
-      return 0;
-    }
-    return thisStr < otherStr ? -1 : 1;
+    return String(thisStr) == otherStr ? 0 : (thisStr < otherStr ? -1 : 1);
   }-*/;
 
   /**
@@ -683,17 +679,21 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof String)) {
-      return false;
-    }
-    return __equals(this, other);
+    return (other instanceof String) && __equals(this, other);
   }
 
-  public native boolean equalsIgnoreCase(String other) /*-{
-    if (other == null)
+  public boolean equalsIgnoreCase(String other) {
+    if (other == null) {
       return false;
-    return (this == other) || (this.toLowerCase() == other.toLowerCase());
-  }-*/;
+    }
+    if (__equals(this, other)) {
+      return true;
+    }
+    if (this.length() != other.length()) {
+      return false;
+    }
+    return __equals(this.toLowerCase(), other.toLowerCase());
+  }
 
   public byte[] getBytes() {
     // default character set for GWT is UTF-8

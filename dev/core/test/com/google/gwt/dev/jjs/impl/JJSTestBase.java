@@ -209,7 +209,7 @@ public abstract class JJSTestBase extends TestCase {
   /**
    * Adds a snippet of code, for example a field declaration, to the class that
    * encloses the snippet subsequently passed to
-   * {@link #compileSnippet(String, String)}.
+   * {@link #compileSnippet(String, String, boolean)}.
    */
   protected void addSnippetClassDecl(String...decl) {
     snippetClassDecls.add(Joiner.on("\n").join(decl));
@@ -217,7 +217,7 @@ public abstract class JJSTestBase extends TestCase {
 
   /**
    * Adds an import statement for any code subsequently passed to
-   * {@link #compileSnippet(String, String)}.
+   * {@link #compileSnippet(String, String, boolean)}.
    */
   protected void addSnippetImport(String typeName) {
     snippetImports.add(typeName);
@@ -226,28 +226,41 @@ public abstract class JJSTestBase extends TestCase {
   /**
    * Returns the program that results from compiling the specified code snippet
    * as the body of an entry point method.
-   *
-   * @param returnType the return type of the method to compile; use "void" if
+   *  @param returnType the return type of the method to compile; use "void" if
    *          the code snippet has no return statement
    * @param codeSnippet the body of the entry method
    */
   protected JProgram compileSnippet(final String returnType,
       final String codeSnippet) throws UnableToCompleteException {
-    return compileSnippet(returnType, "", codeSnippet, true);
+    return compileSnippet(returnType, "", codeSnippet, true, false);
   }
 
   /**
    * Returns the program that results from compiling the specified code snippet
    * as the body of an entry point method.
-   *
+   *  @param returnType the return type of the method to compile; use "void" if
+   *          the code snippet has no return statement
+   * @param codeSnippet the body of the entry method
+   * @param staticMethod whether to make the method static
+   */
+  protected JProgram compileSnippet(final String returnType,
+      final String codeSnippet, boolean staticMethod) throws UnableToCompleteException {
+    return compileSnippet(returnType, "", codeSnippet, true, staticMethod);
+  }
+
+  /**
+   * Returns the program that results from compiling the specified code snippet
+   * as the body of an entry point method.
    * @param returnType the return type of the method to compile; use "void" if
    *          the code snippet has no return statement
    * @param params the parameter list of the method to compile
    * @param codeSnippet the body of the entry method
    * @param compileMonolithic whether the compile is monolithic
+   * @param staticMethod whether the entryPoint should be static
    */
   protected JProgram compileSnippet(final String returnType,
-      final String params, final String codeSnippet, boolean compileMonolithic)
+      final String params, final String codeSnippet, boolean compileMonolithic,
+      final boolean staticMethod)
       throws UnableToCompleteException {
     sourceOracle.addOrReplace(new MockJavaResource("test.EntryPoint") {
       @Override
@@ -261,8 +274,8 @@ public abstract class JJSTestBase extends TestCase {
         for (String snippetClassDecl : snippetClassDecls) {
           code.append(snippetClassDecl + ";\n");
         }
-        code.append("  public static " + returnType + " onModuleLoad(" + params
-            + ") {\n");
+        code.append("  public " + (staticMethod ? "static " : "") + returnType + " onModuleLoad(" +
+            params + ") {\n");
         code.append(codeSnippet);
         code.append("  }\n");
         code.append("}\n");
@@ -302,7 +315,7 @@ public abstract class JJSTestBase extends TestCase {
 
   public Result assertTransform(String codeSnippet, JVisitor visitor)
       throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", codeSnippet);
+    JProgram program = compileSnippet("void", codeSnippet, true);
     JMethod mainMethod = findMainMethod(program);
     visitor.accept(mainMethod);
     return new Result("void", codeSnippet, mainMethod.getBody().toSource());
@@ -323,7 +336,7 @@ public abstract class JJSTestBase extends TestCase {
     }
 
     public void into(String expected) throws UnableToCompleteException {
-      JProgram program = compileSnippet(returnType, expected);
+      JProgram program = compileSnippet(returnType, expected, true);
       expected = getMainMethodSource(program);
       assertEquals(userCode, expected, optimized);
     }

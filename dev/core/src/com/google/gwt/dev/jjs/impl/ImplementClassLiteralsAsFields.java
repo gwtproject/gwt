@@ -291,13 +291,13 @@ public class ImplementClassLiteralsAsFields {
     if (type instanceof JArrayType) {
       typeName = type.getJsniSignatureName().replace('/', '.');
       // Mangle the class name to match hosted mode.
-      if (program.isJavaScriptObject(((JArrayType) type).getLeafType())) {
+      if (program.typeOracle.isJavaScriptObject(((JArrayType) type).getLeafType())) {
         typeName = typeName.replace(";", "$;");
       }
     } else {
       typeName = type.getName();
       // Mangle the class name to match hosted mode.
-      if (program.isJavaScriptObject(type)) {
+      if (program.typeOracle.isJavaScriptObject(type)) {
         typeName += '$';
       }
     }
@@ -305,13 +305,13 @@ public class ImplementClassLiteralsAsFields {
   }
 
   private JType normalizeJsoType(JType type) {
-    if (program.isJavaScriptObject(type)) {
+    if (program.typeOracle.isJavaScriptObject(type)) {
       return program.getJavaScriptObject();
     }
 
     if (type instanceof JArrayType) {
       JArrayType aType = (JArrayType) type;
-      if (program.isJavaScriptObject(aType.getLeafType())) {
+      if (program.typeOracle.isJavaScriptObject(aType.getLeafType())) {
         return program.getTypeArray(program.getJavaScriptObject(), aType.getDims());
       }
     }

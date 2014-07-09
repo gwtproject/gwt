@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "445eb5fe_f22f48ac",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-09T00:53:22Z",
+      "side": 1,
+      "message": "string coercing is only needed here in \u0027\u003d\u003d\u0027 comparison",
+      "revId": "db7cf94c95e7cf12413bc3fcba7be1124ae5831c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -57,6 +57,11 @@ public class JTypeOracle implements Serializable {
     }
   };
 
+  public Set<JReferenceType> getImplementors(JInterfaceType type) {
+    return Sets.newHashSet(
+        getTypes(immediateTypeRelations.immediateImplementedInterfacesByClass.get(type.getName())));
+  }
+
   /**
    * All authorative information about the current program.
    */

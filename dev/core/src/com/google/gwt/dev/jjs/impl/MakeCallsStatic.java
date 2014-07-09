@@ -143,7 +143,7 @@ public class MakeCallsStatic {
     @Override
     public boolean visit(JMethod x, Context ctx) {
       // Let's do it!
-      JClassType enclosingType = (JClassType) x.getEnclosingType();
+      JDeclaredType enclosingType = (JDeclaredType) x.getEnclosingType();
       JType returnType = x.getType();
       SourceInfo sourceInfo = x.getSourceInfo().makeChild();
       int myIndexInClass = enclosingType.getMethods().indexOf(x);
@@ -223,7 +223,7 @@ public class MakeCallsStatic {
 
       // Add the new method as a static impl of the old method
       program.putStaticImpl(x, newMethod);
-      enclosingType.getMethods().add(myIndexInClass + 1, newMethod);
+      enclosingType.addMethod(myIndexInClass + 1, newMethod);
       return false;
     }
   }

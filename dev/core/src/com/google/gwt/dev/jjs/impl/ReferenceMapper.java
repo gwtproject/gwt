@@ -120,6 +120,7 @@ public class ReferenceMapper {
     binding = binding.erasure();
     String key = signature(binding);
     JReferenceType sourceType = sourceTypes.get(key);
+
     if (sourceType != null) {
       assert !sourceType.isExternal();
       return sourceType;
@@ -171,7 +172,7 @@ public class ReferenceMapper {
       }
       // Emulate clinit method for super clinit calls.
       JMethod clinit =
-          new JMethod(SourceOrigin.UNKNOWN, "$clinit", declType, JPrimitiveType.VOID, false, true,
+          new JMethod(SourceOrigin.UNKNOWN, GwtAstBuilder.CLINIT_NAME, declType, JPrimitiveType.VOID, false, true,
               true, AccessModifier.PRIVATE);
       clinit.freezeParamTypes();
       clinit.setSynthetic();

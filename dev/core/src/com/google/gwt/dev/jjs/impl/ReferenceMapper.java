@@ -120,6 +120,7 @@ public class ReferenceMapper {
     binding = binding.erasure();
     String key = signature(binding);
     JReferenceType sourceType = sourceTypes.get(key);
+
     if (sourceType != null) {
       assert !sourceType.isExternal();
       return sourceType;
@@ -184,17 +185,23 @@ public class ReferenceMapper {
 
   public void setField(FieldBinding binding, JField field) {
     String key = signature(binding);
-    sourceFields.put(key, field);
+    if (!sourceFields.containsKey(key)) {
+      sourceFields.put(key, field);
+    }
   }
 
   public void setMethod(MethodBinding binding, JMethod method) {
     String key = signature(binding);
-    sourceMethods.put(key, method);
+    if (!sourceMethods.containsKey(key)) {
+      sourceMethods.put(key, method);
+    }
   }
 
   public void setSourceType(SourceTypeBinding binding, JDeclaredType type) {
     String key = signature(binding);
-    sourceTypes.put(key, type);
+    if (!sourceTypes.containsKey(key)) {
+        sourceTypes.put(key, type);
+    }
   }
 
   JMethod createConstructor(SourceInfo info, MethodBinding b) {

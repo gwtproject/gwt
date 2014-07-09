@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "390f2c26_372b589f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-09T16:24:50Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.jjs.ast.JTypeOracle.RequiredTypes\u0027 import.",
+      "revId": "5628d77cb5ec17a662147b9a37b6dbbf351a497f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "390f2c26_17305407",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-09T16:24:50Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "5628d77cb5ec17a662147b9a37b6dbbf351a497f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

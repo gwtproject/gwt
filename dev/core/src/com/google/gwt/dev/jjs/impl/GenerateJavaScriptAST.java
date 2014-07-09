@@ -939,7 +939,7 @@ public class GenerateJavaScriptAST {
         }
       }
 
-      if (typeOracle.isInstantiatedType(x) && !program.isJavaScriptObject(x) &&
+      if (typeOracle.isInstantiatedType(x) && !program.typeOracle.isJavaScriptObject(x) &&
           x !=  program.getTypeJavaLangString()) {
         generateClassSetup(x, globalStmts);
       }
@@ -963,7 +963,7 @@ public class GenerateJavaScriptAST {
       }
 
       if (program.typeOracle.isInteropEnabled() &&
-          typeOracle.isInstantiatedType(x) && !program.isJavaScriptObject(x) &&
+          typeOracle.isInstantiatedType(x) && !program.typeOracle.isJavaScriptObject(x) &&
         x !=  program.getTypeJavaLangString()) {
         // done after class setup because exports may rely on static vars
         generateExports(x, exportStmts);
@@ -2882,7 +2882,8 @@ public class GenerateJavaScriptAST {
         return null;
       }
       JDeclaredType enclosingType = x.getEnclosingType();
-      if (x.canBePolymorphic() || (program.isStaticImpl(x) && !program.isJavaScriptObject(enclosingType))) {
+      if (x.canBePolymorphic() || (program.isStaticImpl(x) &&
+          !program.typeOracle.isJavaScriptObject(enclosingType))) {
         return null;
       }
       if (enclosingType == null || !enclosingType.hasClinit()) {

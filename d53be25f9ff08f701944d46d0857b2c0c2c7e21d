@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2431c1d1_70d8a6fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T16:27:59Z",
+      "side": 1,
+      "message": "\"Super Dev Mode\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "d53be25f9ff08f701944d46d0857b2c0c2c7e21d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2431c1d1_50dba2f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T16:27:59Z",
+      "side": 1,
+      "message": "change to \"bookmarklets\".",
+      "range": {
+        "startLine": 16,
+        "startChar": 29,
+        "endLine": 16,
+        "endChar": 40
+      },
+      "revId": "d53be25f9ff08f701944d46d0857b2c0c2c7e21d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

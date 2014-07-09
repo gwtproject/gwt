@@ -359,7 +359,7 @@ public class ControlFlowAnalyzer {
     @Override
     public boolean visit(final JMethod x, Context ctx) {
       JReferenceType enclosingType = x.getEnclosingType();
-      if (program.isJavaScriptObject(enclosingType)) {
+      if (program.typeOracle.isJavaScriptObject(enclosingType)) {
         // Calls to JavaScriptObject types rescue those types.
         boolean instance = !x.isStatic() || program.isStaticImpl(x);
         rescue(enclosingType, true, instance);
@@ -410,7 +410,7 @@ public class ControlFlowAnalyzer {
          */
         return true;
       }
-      if (method.isStatic() || program.isJavaScriptObject(method.getEnclosingType())
+      if (method.isStatic() || program.typeOracle.isJavaScriptObject(method.getEnclosingType())
           || instantiatedTypes.contains(method.getEnclosingType())) {
         rescue(method);
       } else {

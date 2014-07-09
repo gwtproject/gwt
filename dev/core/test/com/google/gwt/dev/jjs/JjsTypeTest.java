@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
+import com.google.gwt.dev.jjs.ast.JTypeOracle.RequiredTypes;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
@@ -365,7 +366,7 @@ public class JjsTypeTest extends TestCase {
     arrayOfArrayOfInt = program.getTypeArray(program.getTypePrimitiveInt(), 2);
     arrayOfArrayOfB = program.getTypeArray(classB, 2);
 
-    program.typeOracle.computeBeforeAST();
+    program.typeOracle.computeBeforeAST(RequiredTypes.build(program), program.getDeclaredTypes());
 
     // Save off some miscellaneous types to test against
     typeNull = program.getTypeNull();

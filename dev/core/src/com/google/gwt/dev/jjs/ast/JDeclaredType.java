@@ -116,13 +116,18 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Adds a method to this type.
    */
-  public final void addMethod(JMethod method) {
+  public final void addMethod(int index, JMethod method) {
     assert method.getEnclosingType() == this;
     assert !method.getName().equals("$clinit") || getMethods().size() == 0 : "Attempted adding "
         + "$clinit method with index != 0";
     assert !method.getName().equals("$init") || getMethods().size() == 1 : "Attempted adding $init "
         + "method with index != 1";
-    methods = Lists.add(methods, method);
+    methods = Lists.add(methods, index, method);
+  }
+
+
+  public void addMethod(JMethod newMethod) {
+    addMethod(methods.size(), newMethod);
   }
 
   /**

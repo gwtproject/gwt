@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "043d9d9e_fda0f34f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-09T16:13:14Z",
+      "side": 1,
+      "message": "@Goktug: After spending a little more with UserAgent, the difference is that it tries to figureout the IE document mode to setup the correct permutation, I have been testing and this check returns exactly the same result with ie8, ie9, ie10. I have not added it to my last patch unless you agree:\n\n      ua \u003d /webkit/.test(ua)? \u0027safari\u0027 : /gecko/.test(ua)? \u0027gecko1_8\u0027 :\n        (n \u003d /msie/.test(ua) \u0026\u0026 $doc.documentMode) ? \u0027ie\u0027 + n : \u0027\u0027;",
+      "parentUuid": "643739c4_eccbe32b",
+      "revId": "196c0db77c2bc04c30cc6a7aa3ef00526ed96ffb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643739c4_cc9a9f60",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 10

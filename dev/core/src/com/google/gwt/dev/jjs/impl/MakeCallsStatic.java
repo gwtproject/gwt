@@ -19,7 +19,6 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
-import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
@@ -143,14 +142,14 @@ public class MakeCallsStatic {
     @Override
     public boolean visit(JMethod x, Context ctx) {
       // Let's do it!
-      JClassType enclosingType = (JClassType) x.getEnclosingType();
+      JDeclaredType enclosingType = (JDeclaredType) x.getEnclosingType();
       JType returnType = x.getType();
       SourceInfo sourceInfo = x.getSourceInfo().makeChild();
       int myIndexInClass = enclosingType.getMethods().indexOf(x);
       assert (myIndexInClass > 0);
 
       // Create the new static method
-      String newName = "$" + x.getName();
+      String newName = getStaticMethodName(x);
 
       /*
        * Don't use the JProgram helper because it auto-adds the new method to
@@ -223,9 +222,13 @@ public class MakeCallsStatic {
 
       // Add the new method as a static impl of the old method
       program.putStaticImpl(x, newMethod);
-      enclosingType.getMethods().add(myIndexInClass + 1, newMethod);
+      enclosingType.addMethod(myIndexInClass + 1, newMethod);
       return false;
     }
+  }
+
+  private static String getStaticMethodName(JMethod x) {
+    return "$" + x.getName();
   }
 
   /**

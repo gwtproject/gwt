@@ -174,11 +174,12 @@ public class ComputeCastabilityInformation {
       if (type instanceof JArrayType && qType instanceof JArrayType) {
         JArrayType aType = (JArrayType) type;
         JArrayType aqType = (JArrayType) qType;
-        return (program.isJavaScriptObject(aType.getLeafType()) && program
-                .isJavaScriptObject(aqType.getLeafType()));
+        return (program.typeOracle.isJavaScriptObject(aType.getLeafType()) &&
+            program.typeOracle.isJavaScriptObject(aqType.getLeafType()));
       }
 
-      return (program.isJavaScriptObject(type) && program.isJavaScriptObject(qType));
+      return (program.typeOracle.isJavaScriptObject(type) &&
+          program.typeOracle.isJavaScriptObject(qType));
     }
 
     /**
@@ -197,7 +198,8 @@ public class ComputeCastabilityInformation {
         computeCastMap(((JClassType) type).getSuperClass());
       }
 
-      if (!program.typeOracle.isInstantiatedType(type) || program.isJavaScriptObject(type)) {
+      if (!program.typeOracle.isInstantiatedType(type) ||
+          program.typeOracle.isJavaScriptObject(type)) {
         return;
       }
 
@@ -222,7 +224,7 @@ public class ComputeCastabilityInformation {
          */
         for (JReferenceType castSourceType : castSourceTypes) {
           if (canTriviallyCastJsoSemantics(type, castSourceType) ||
-              program.isJavaScriptObject(castTargetType)) {
+              program.typeOracle.isJavaScriptObject(castTargetType)) {
             if (castTargetType != program.getTypeJavaLangObject() &&
                 castTargetType != program.getJavaScriptObject()) {
               // ignore java.lang.Object.
@@ -261,7 +263,7 @@ public class ComputeCastabilityInformation {
         return;
       }
 
-      if (program.isJavaScriptObject(targetType)) {
+      if (program.typeOracle.isJavaScriptObject(targetType)) {
         // If the target type is a JavaScriptObject, don't record an id.
         return;
       }

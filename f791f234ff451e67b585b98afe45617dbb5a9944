@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "390f2c26_b7f088fe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-09T16:13:43Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields.",
+      "revId": "f791f234ff451e67b585b98afe45617dbb5a9944",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

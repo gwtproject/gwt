@@ -245,7 +245,7 @@ public class HostedModeClassRewriter {
 
     v = new RewriteJsniMethods(v, anonymousClassMap);
 
-    if (Double.parseDouble(System.getProperty("java.class.version")) < Opcodes.V1_6) {
+    if (Double.parseDouble(System.getProperty("java.class.version")) < Opcodes.V1_8) {
       v = new ForceClassVersion15(v);
     }
 

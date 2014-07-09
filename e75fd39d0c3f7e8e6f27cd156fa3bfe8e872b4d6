@@ -87,6 +87,24 @@
       "revId": "e75fd39d0c3f7e8e6f27cd156fa3bfe8e872b4d6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a41cd152_a9f0f946",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T02:09:14Z",
+      "side": 1,
+      "message": "One reason would be to follow the JDK specification a little better. The specification of getLogger() says that it will return the same Logger again if given the same name. Some code could be confused if it adds a handler to a logger and doesn\u0027t find it there later when it looks up the same logger again.\n\nBut this isn\u0027t urgent since it didn\u0027t work right before and isn\u0027t common.",
+      "parentUuid": "043d9d9e_e2cbee84",
+      "revId": "e75fd39d0c3f7e8e6f27cd156fa3bfe8e872b4d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

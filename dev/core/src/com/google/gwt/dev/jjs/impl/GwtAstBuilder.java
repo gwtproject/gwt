@@ -155,11 +155,13 @@ import org.eclipse.jdt.internal.compiler.ast.FieldReference;
 import org.eclipse.jdt.internal.compiler.ast.FloatLiteral;
 import org.eclipse.jdt.internal.compiler.ast.ForStatement;
 import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
+import org.eclipse.jdt.internal.compiler.ast.FunctionalExpression;
 import org.eclipse.jdt.internal.compiler.ast.IfStatement;
 import org.eclipse.jdt.internal.compiler.ast.Initializer;
 import org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression;
 import org.eclipse.jdt.internal.compiler.ast.IntLiteral;
 import org.eclipse.jdt.internal.compiler.ast.LabeledStatement;
+import org.eclipse.jdt.internal.compiler.ast.LambdaExpression;
 import org.eclipse.jdt.internal.compiler.ast.LocalDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.LongLiteral;
 import org.eclipse.jdt.internal.compiler.ast.MarkerAnnotation;
@@ -176,6 +178,7 @@ import org.eclipse.jdt.internal.compiler.ast.QualifiedAllocationExpression;
 import org.eclipse.jdt.internal.compiler.ast.QualifiedNameReference;
 import org.eclipse.jdt.internal.compiler.ast.QualifiedSuperReference;
 import org.eclipse.jdt.internal.compiler.ast.QualifiedThisReference;
+import org.eclipse.jdt.internal.compiler.ast.ReferenceExpression;
 import org.eclipse.jdt.internal.compiler.ast.ReturnStatement;
 import org.eclipse.jdt.internal.compiler.ast.SingleMemberAnnotation;
 import org.eclipse.jdt.internal.compiler.ast.SingleNameReference;
@@ -233,6 +236,10 @@ import java.util.Set;
  * contain unresolved references.
  */
 public class GwtAstBuilder {
+
+  public static final String CLINIT_NAME = "$clinit";
+  public static final String INIT_NAME = "$init";
+  public static final String STATIC_INIT_NAME =  "$" + INIT_NAME;
 
   /**
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
@@ -1077,6 +1084,273 @@ public class GwtAstBuilder {
     }
 
     @Override
+    public boolean visit(LambdaExpression x, BlockScope blockScope) {
+      // Fetch the variables 'captured' by this lambda
+      SyntheticArgumentBinding[] synthArgs = x.outerLocalVariables;
+      // Get the parameter names, captured locals + lambda arguments
+      String paramNames[] = computeCombinedParamNames(x, synthArgs);
+      SourceInfo info = makeSourceInfo(x);
+      // JDT synthesizes a method lambda$n(capture1, capture2, ..., lambda_arg1, lambda_arg2, ...)
+      // Here we create a JMethod from this
+      JMethod lambdaMethod = createSyntheticMethodFromBinding(info, x.binding,
+          paramNames);
+      JMethodBody methodBody = new JMethodBody(info);
+      lambdaMethod.setBody(methodBody);
+      // We need to push this method  on the stack as it introduces a scope, and
+      // expressions in the body need to lookup variable refs like parameters from it
+      pushMethodInfo(new MethodInfo(lambdaMethod, methodBody, x.scope));
+      pushLambdaExpressionLocalsIntoMethodScope(x, synthArgs, lambdaMethod);
+      // now the body of the lambda is processed
+      return true;
+    }
+
+    private void pushLambdaExpressionLocalsIntoMethodScope(LambdaExpression x, SyntheticArgumentBinding[] synthArgs,
+        JMethod lambdaMethod) {
+      Iterator<JParameter> it = lambdaMethod.getParams().iterator();
+      if (synthArgs != null) {
+        for (SyntheticArgumentBinding sa : synthArgs) {
+          curMethod.locals.put(sa.actualOuterLocalVariable, it.next());
+        }
+        for (Argument a : x.arguments) {
+          curMethod.locals.put(a.binding, it.next());
+        }
+      }
+    }
+
+    /**
+     * Calculate the names of all the parameters a lambda method will need, that is, the combination of all
+     * captured locals plus all arguments to the lambda expression.
+     */
+    private String[] computeCombinedParamNames(LambdaExpression x, SyntheticArgumentBinding[] synthArgs) {
+      String[] paramNames;
+      paramNames = new String[x.binding.parameters.length];
+      int numSynthArgs = synthArgs != null ? synthArgs.length : 0;
+      for (int i = 0; i < paramNames.length; i++) {
+        if (i < numSynthArgs) {
+          paramNames[i] = nameForSyntheticArgument(synthArgs[i]);
+        } else {
+          paramNames[i] = nameForArgument(x.arguments, i - numSynthArgs, i);
+        }
+      }
+      return paramNames;
+    }
+
+    private String nameForArgument(Argument[] arguments, int argIndex, int argPosition) {
+      return new String(arguments[argIndex].name) + "_" + argPosition;
+    }
+
+    private String nameForSyntheticArgument(SyntheticArgumentBinding synthArg) {
+      return new String(synthArg.actualOuterLocalVariable.name) + "_" + synthArg.resolvedPosition;
+    }
+
+    @Override
+    public void endVisit(LambdaExpression x, BlockScope blockScope) {
+
+      /**
+       * Our output of a (args) -> expression_using_locals(locals) looks like this.
+       *
+       * class Enclosing {
+       *
+       *   T lambda$0(locals, args) {...lambda expr }
+       *
+       *   class lambda$0$type implements I {
+       *       ctor([outer], locals) { ... }
+       *       R <SAM lambdaMethod>(args) { return [outer].lambda$0(locals, args); }
+       *   }
+       * }
+       *
+       * And replaces the lambda with new lambda$0$Type([outer this], captured locals...).
+       */
+
+      // The target accepting this lambda is looking for which type? (e.g. ClickHandler, Runnable, etc)
+      TypeBinding binding = x.expectedType();
+      // Find the single abstract method of this interface
+      MethodBinding samBinding = binding.getSingleAbstractMethod(blockScope, false);
+
+      // Lookup the JMethod version
+      JMethod interfaceMethod = typeMap.get(samBinding);
+      // And its JInterface container we must implement
+      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+      SourceInfo info = makeSourceInfo(x);
+
+      // Create an inner class to implement the interface and SAM method.
+      // class lambda$0$Type implements T {}
+      JClassType innerLambdaClass = createInnerClass(JdtUtil.asDottedString(x.binding.declaringClass.compoundName) +
+          "$" + new String(x.binding.selector), x, funcType, info);
+
+      // Create a constructor to accept all "captured" locals
+      // CTor([OuterClassRef ref], capture1, capture2) { }
+      JConstructor ctor = new JConstructor(info, innerLambdaClass);
+      JMethodBody ctorBody = new JMethodBody(info);
+      JField outerField = null;
+      // if this lambda refers to fields on the enclosing instance
+      if (x.shouldCaptureInstance) {
+        // ctor($$outer) { this.$$outer = $$outer; }
+        outerField = createAndBindCapturedLambdaParameter(info, "$$outer_0", innerLambdaClass.getEnclosingType(),
+            ctor, ctorBody);
+      }
+
+      // Now we add parameters to the ctor
+      // this is the outer instance (if needed), plus any method local variables captured
+      List<JField> locals = new ArrayList<JField>();
+      SyntheticArgumentBinding[] synthArgs = x.outerLocalVariables;
+      String paramNames[] = computeCombinedParamNames(x, synthArgs);
+      paramNames = new String[x.binding.parameters.length];
+      int numSynthArgs = synthArgs != null ? synthArgs.length : 0;
+
+      for (int i = 0; i < paramNames.length; i++) {
+        // Setup params, fields, and ctor assignments for the outer captured vars
+        if (i < numSynthArgs) {
+          paramNames[i] = nameForSyntheticArgument(synthArgs[i]);
+          JType captureType = typeMap.get(synthArgs[i].type);
+          // adds ctor(..., param, ...) { ...this.param = param }
+          JField captureField = createAndBindCapturedLambdaParameter(info, paramNames[i], captureType, ctor, ctorBody);
+          locals.add(captureField);
+        } else {
+          // Record the names of the actual closure arguments, e.g. (ClickEvent x) -> expr will be 'x'
+          paramNames[i] = nameForArgument(x.arguments, i - numSynthArgs, i);
+        }
+      }
+
+      ctor.setBody(ctorBody);
+      innerLambdaClass.addMethod(ctor);
+
+      // First let's get that synthetic method we created in the visit() call on the containing class?
+      JMethod lambdaMethod = curMethod.method;
+
+      // And pop off the body nodes of the LambdaExpression that was processed as children
+      // Deal with any boxing/unboxing needed
+      JNode node = pop();
+      if (node instanceof JExpression) {
+        node = simplify((JExpression) node, (Expression) x.body);
+      }
+
+      JMethodBody body = (JMethodBody) curMethod.method.getBody();
+      // and copy those nodes into the body of our synthetic method
+      JStatement lambdaStatement = node instanceof JExpression ?
+          (((JExpression) node).getType() == JPrimitiveType.VOID ? ((JExpression) node).makeStatement() :
+              new JReturnStatement(node.getSourceInfo(), (JExpression) node)) : (JStatement) node;
+      body.getBlock().addStmt(lambdaStatement);
+      lambdaMethod.setBody(body);
+
+      // Now that we've added an implementation method for the lambda, we must create the inner class that
+      // implements the target interface type that delegates to this method
+      JMethod samMethod = new JMethod(info, interfaceMethod.getName(),
+          innerLambdaClass, interfaceMethod.getType(),
+          false, false, true, interfaceMethod.getAccess());
+
+      // The parameters to this method will be the same as the Java interface that must be implemented
+      for (JParameter origParam : interfaceMethod.getParams()) {
+        JType origType = origParam.getType();
+        samMethod.addParam(new JParameter(origParam.getSourceInfo(),
+            origParam.getName(), origType,
+            origParam.isFinal(), origParam.isThis(),
+            samMethod));
+      }
+      // Create a body like void onClick(ClickEvent e) { OuterClass.lambdaMethod(locals, e); }
+      JMethodBody samMethodBody = new JMethodBody(info);
+      // First we create the method call to the outer lambda method
+      JMethodCall samCall = new JMethodCall(info, x.shouldCaptureInstance ?
+          new JFieldRef(info, new JThisRef(info, innerLambdaClass), outerField, innerLambdaClass) :
+          null, lambdaMethod);
+
+      // and add any locals that were storing captured outer variables as arguments to the call first
+      for (JField localField : locals) {
+        samCall.addArg(new JFieldRef(info, new JThisRef(info, innerLambdaClass),
+            localField, innerLambdaClass));
+      }
+
+      // and now we propagate the rest of the actual interface method parameters on the end (e.g. ClickEvent e)
+      for (JParameter param : samMethod.getParams()) {
+        samCall.addArg(new JParameterRef(info, param));
+      }
+
+      // we either add a return statement, or don't, depending on what the interface wants
+      if (samMethod.getType() != JPrimitiveType.VOID) {
+        samMethodBody.getBlock().addStmt(new JReturnStatement(info, samCall));
+      } else {
+        samMethodBody.getBlock().addStmt(samCall.makeStatement());
+      }
+      samMethod.setBody(samMethodBody);
+      innerLambdaClass.addMethod(samMethod);
+
+      // Finally, we replace the LambdaExpression with new InnerLambdaClass(this, local1, local2, ...);
+      JNewInstance allocLambda = new JNewInstance(info, ctor, innerLambdaClass);
+      // only pass 'this' if lambda refers to fields on outer class
+      if (x.shouldCaptureInstance) {
+        allocLambda.addArg(new JThisRef(info, (JClassType) innerLambdaClass.getEnclosingType()));
+      }
+      for (SyntheticArgumentBinding sa : synthArgs) {
+        allocLambda.addArg(makeLocalRef(info, sa.actualOuterLocalVariable, methodStack.peek()));
+      }
+      ctor.freezeParamTypes();
+      samMethod.freezeParamTypes();
+
+      // put the result on the stack, and pop out synthetic method from the scope
+      push(allocLambda);
+      popMethodInfo();
+      // Add the newly generated type
+      newTypes.add(innerLambdaClass);
+    }
+
+    private JField createAndBindCapturedLambdaParameter(SourceInfo info,
+        String paramName, JType captureType,
+        JConstructor ctor, JMethodBody ctorBody) {
+      JField paramField;
+      JParameter param = createLambdaParameter(info, paramName, captureType, ctor);
+
+      // Plus a field to store it
+      paramField = createLambdaField(info, paramName, captureType, ctor.getEnclosingType());
+
+      // Now add the initializers to bind the param to field
+      // this.paramField = param
+      JThisRef thisRef = new JThisRef(info, ctor.getEnclosingType());
+      JFieldRef paramFieldRef = new JFieldRef(info, thisRef, paramField, ctor.getEnclosingType());
+      JParameterRef paramRef = new JParameterRef(info, param);
+      ctorBody.getBlock().addStmt(
+          new JBinaryOperation(info, paramFieldRef.getType(),
+              JBinaryOperator.ASG,
+              paramFieldRef, paramRef).makeStatement());
+      return paramField;
+    }
+
+    private JField createLambdaField(SourceInfo info, String fieldName, JType fieldType,
+        JClassType enclosingType) {
+      JField outerField;
+      outerField = new JField(info, fieldName, enclosingType, fieldType, false, Disposition.NONE);
+      enclosingType.addField(outerField);
+      return outerField;
+    }
+
+    private JParameter createLambdaParameter(SourceInfo info, String paramName,
+        JType paramType,
+        JConstructor ctor) {
+      JParameter outerParam = new JParameter(info, paramName, paramType,
+          true, false, ctor);
+      ctor.addParam(outerParam);
+      return outerParam;
+    }
+
+    private JClassType createInnerClass(String name, FunctionalExpression x, JInterfaceType funcType, SourceInfo info) {
+      JClassType innerLambdaClass = new JClassType(info, name + "$Type", false, true);
+      innerLambdaClass.setEnclosingType((JDeclaredType) typeMap.get(x.binding.declaringClass));
+      innerLambdaClass.addImplements(funcType);
+      innerLambdaClass.setSuperClass(javaLangObject);
+
+      createSyntheticMethod(info, CLINIT_NAME, innerLambdaClass, JPrimitiveType.VOID, false, true, true,
+          AccessModifier.PRIVATE);
+
+      createSyntheticMethod(info, INIT_NAME, innerLambdaClass, JPrimitiveType.VOID, false, false, true,
+          AccessModifier.PRIVATE);
+
+      // Add a getClass() implementation for all non-Object classes.
+      createSyntheticMethod(info, "getClass", innerLambdaClass, javaLangClass, false, false, false,
+          AccessModifier.PUBLIC, new JReturnStatement(info, new JClassLiteral(info, innerLambdaClass)));
+
+      return innerLambdaClass;
+    }
+
+      @Override
     public void endVisit(LocalDeclaration x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
@@ -1301,6 +1575,192 @@ public class GwtAstBuilder {
       }
     }
 
+    private Map<String, JClassType> lambdaNameToInnerLambdaType = Maps.newHashMap();
+
+    @Override
+    public void endVisit(ReferenceExpression x, BlockScope blockScope) {
+      /**
+       * Converts an expression like foo(qualifier::someMethod) into
+       *
+       * class Enclosing {
+       *
+       *   [static] T someMethod(locals, args) {...lambda expr }
+       *
+       *   class lambda$someMethodType implements I {
+       *       ctor([qualifier]) { ... }
+       *       R <SAM lambdaMethod>(args) { return [outer]someMethod(args); }
+       *   }
+       * }
+       *
+       * and replaces qualifier::someMethod with new lambda$someMethodType([outer this])
+       *
+       * [x] denotes optional, depending on context of whether outer this scope is needed.
+       */
+
+      // Calculate what type this reference is going to bind to, and what single abstract method
+      TypeBinding binding = x.expectedType();
+      MethodBinding samBinding = binding.getSingleAbstractMethod(blockScope, false);
+
+      // Get the interface method is binds to
+      JMethod interfaceMethod = typeMap.get(samBinding);
+      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+      SourceInfo info = makeSourceInfo(x);
+
+      // Get the method that the Type::method is actually referring to
+      JMethod referredMethod = typeMap.get(x.binding);
+
+      boolean haveReceiver = false;
+      try {
+        haveReceiver = (Boolean) haveReceiverField.get(x);
+      } catch (IllegalAccessException e) {
+        throw translateException(x, e);
+      }
+
+      // Constructors and overloading mean we need generate unique names
+      String lambdaName = GenerateJavaScriptAST.classNameForMethodReference(funcType,
+          referredMethod,
+          haveReceiver);
+
+      // Create an inner class to hold the implementation of the interface
+      JClassType innerLambdaClass = lambdaNameToInnerLambdaType.get(lambdaName);
+      List<JExpression> enclosingThisRefs = new ArrayList<JExpression>();
+
+      if (innerLambdaClass == null) {
+        innerLambdaClass = createInnerClass(lambdaName, x, funcType, info);
+        lambdaNameToInnerLambdaType.put(lambdaName, innerLambdaClass);
+
+        JConstructor ctor = new JConstructor(info, innerLambdaClass);
+
+        JParameter outerParam;
+        JMethodBody ctorBody = new JMethodBody(info);
+        JThisRef thisRef = new JThisRef(info, innerLambdaClass);
+        JExpression instance = null;
+
+        List<JField> enclosingInstanceFields = new ArrayList<JField>();
+        // If we have a qualifier instance, we have to stash it in the constructor
+        if (haveReceiver) {
+          // this.$$outer = $$outer
+          JField outerField = createAndBindCapturedLambdaParameter(info, "$$outer_0",
+              innerLambdaClass.getEnclosingType(), ctor, ctorBody);
+          instance = new JFieldRef(info,
+              new JThisRef(info, innerLambdaClass), outerField, innerLambdaClass);
+        } else if (referredMethod instanceof JConstructor) {
+          // the method we are invoking is a constructor and may need enclosing instances passed to it
+          // For example, an class Foo { class Inner { Inner(int x) { } } } needs
+          // it's constructor invoked with an enclosing instance, Inner::new
+          // Java8 doesn't allow the qualifified case, e.g. x.new Foo() -> x.Foo::new
+          ReferenceBinding targetBinding = x.binding.declaringClass;
+          if (JdtUtil.isInnerClass(targetBinding)) {
+            for (ReferenceBinding argType : targetBinding.syntheticEnclosingInstanceTypes()) {
+              argType = (ReferenceBinding) argType.erasure();
+              JExpression enclosingThisRef = makeThisReference(info, argType, false, blockScope);
+              JField enclosingInstance = createAndBindCapturedLambdaParameter(info,
+                  new String(argType.readableName()), enclosingThisRef.getType(), ctor, ctorBody);
+              enclosingInstanceFields.add(enclosingInstance);
+              enclosingThisRefs.add(enclosingThisRef);
+            }
+          }
+        }
+        ctor.setBody(ctorBody);
+        innerLambdaClass.addMethod(ctor);
+
+        // Create an implementation of the target interface that invokes the method referred to
+        // void onClick(ClickEvent e) { outer.referredMethod(e); }
+        JMethod samMethod = new JMethod(info, interfaceMethod.getName(),
+            innerLambdaClass, interfaceMethod.getType(),
+            false, false, true, interfaceMethod.getAccess());
+        for (JParameter origParam : interfaceMethod.getParams()) {
+          JType origType = origParam.getType();
+          samMethod.addParam(new JParameter(origParam.getSourceInfo(),
+              origParam.getName(), origType,
+              origParam.isFinal(), origParam.isThis(),
+              samMethod));
+        }
+        JMethodBody samMethodBody = new JMethodBody(info);
+
+        Iterator<JParameter> paramIt = samMethod.getParams().iterator();
+        // here's where it gets tricky. A method can have an implicit qualifier, e.g.
+        // String::compareToIgnoreCase, it's non-static, it only has one argument, but it binds to Comparator<T>
+        // The first argument serves as the qualifier, so for example, the method dispatch looks like this
+        // int compare(T a, T b) { a.compareTo(b); }
+        if (!haveReceiver && !referredMethod.isStatic() && instance == null &&
+            samMethod.getParams().size() == referredMethod.getParams().size() + 1) {
+          // the instance qualifier is the first parameter in this case.
+          instance = new JParameterRef(info, paramIt.next());
+        }
+        JMethodCall samCall = null;
+
+        if (referredMethod.isConstructor()) {
+          // Constructors must be invoked with JNewInstance
+          samCall = new JNewInstance(info, (JConstructor) referredMethod,
+              referredMethod.getEnclosingType());
+          for (JField enclosingInstance : enclosingInstanceFields) {
+            samCall.addArg(new JFieldRef(enclosingInstance.getSourceInfo(), thisRef,
+                enclosingInstance, innerLambdaClass));
+          }
+        } else {
+          // For static methods, instance will be null
+          samCall = new JMethodCall(info, instance, referredMethod);
+        }
+
+        // Add the rest of the parameters from the interface method to methodcall
+        while (paramIt.hasNext()) {
+          samCall.addArg(new JParameterRef(info, paramIt.next()));
+        }
+        int implicitConversionBefore = x.implicitConversion;
+        if (samMethod.getType() != JPrimitiveType.VOID) {
+
+          if (x.binding.returnType.isBaseType() && x.binding.returnType != TypeBinding.VOID &&
+              !(samMethod.getType() instanceof JPrimitiveType)) {
+            x.implicitConversion =
+                (x.binding.returnType.id & TypeIds.IMPLICIT_CONVERSION_MASK) << 4;
+            x.implicitConversion = x.implicitConversion | TypeIds.BOXING;
+          }
+          if (!x.binding.returnType.isBaseType() && x.binding.returnType != TypeBinding.VOID
+              && samMethod.getType() instanceof JPrimitiveType) {
+            x.implicitConversion = x.binding.returnType.id & TypeIds.COMPILE_TYPE_MASK;
+            x.implicitConversion = x.implicitConversion | TypeIds.UNBOXING;
+          }
+          samMethodBody.getBlock().addStmt(new JReturnStatement(info, simplify(samCall, x)));
+        } else {
+          samMethodBody.getBlock().addStmt(samCall.makeStatement());
+        }
+        samMethod.setBody(samMethodBody);
+        innerLambdaClass.addMethod(samMethod);
+        ctor.freezeParamTypes();
+        samMethod.freezeParamTypes();
+
+        x.implicitConversion = implicitConversionBefore;
+      }
+
+      JConstructor lambdaCtor = null;
+      for (JMethod method : innerLambdaClass.getMethods()) {
+        if (method instanceof JConstructor) {
+          lambdaCtor = (JConstructor) method;
+          break;
+        }
+      }
+
+      assert lambdaCtor != null;
+
+      // Replace the ReferenceExpression qualifier::method with new lambdaType(qualifier)
+      JNewInstance allocLambda = new JNewInstance(info, lambdaCtor, innerLambdaClass);
+      JExpression qualifier = (JExpression) pop();
+      if (haveReceiver) {
+        // pop qualifier from stack
+        allocLambda.addArg(qualifier);
+      } else {
+        // you can't simultaneously have a qualifier, and have enclosing inner class refs
+        // because Java8 won't allow a qualified constructor method reference, e.g. x.Foo::new
+        for (JExpression enclosingRef : enclosingThisRefs) {
+          allocLambda.addArg(enclosingRef);
+        }
+      }
+
+      push(allocLambda);
+      newTypes.add(innerLambdaClass);
+    }
+
     @Override
     public void endVisit(ReturnStatement x, BlockScope scope) {
       try {
@@ -1353,7 +1813,7 @@ public class GwtAstBuilder {
     @Override
     public void endVisit(SuperReference x, BlockScope scope) {
       try {
-        assert (typeMap.get(x.resolvedType) == curClass.classType.getSuperClass());
+        assert (typeMap.get(x.resolvedType) == curClass.getClassOrInterface().getSuperClass());
         // Super refs can be modeled as a this ref.
         push(makeThisRef(makeSourceInfo(x)));
       } catch (Throwable e) {
@@ -1394,7 +1854,7 @@ public class GwtAstBuilder {
     @Override
     public void endVisit(ThisReference x, BlockScope scope) {
       try {
-        assert (typeMap.get(x.resolvedType) == curClass.classType);
+        assert typeMap.get(x.resolvedType) == curClass.getClassOrInterface();
         push(makeThisRef(makeSourceInfo(x)));
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -2285,8 +2745,8 @@ public class GwtAstBuilder {
       return new JFieldRef(info, makeThisRef(info), field, curClass.classType);
     }
 
-    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b) {
-      JVariable variable = curMethod.locals.get(b);
+    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b, MethodInfo cur) {
+      JVariable variable = cur.locals.get(b);
       assert variable != null;
       if (variable instanceof JLocal) {
         return new JLocalRef(info, (JLocal) variable);
@@ -2295,8 +2755,12 @@ public class GwtAstBuilder {
       }
     }
 
+    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b) {
+      return makeLocalRef(info, b, curMethod);
+    }
+
     private JThisRef makeThisRef(SourceInfo info) {
-      return new JThisRef(info, curClass.classType);
+      return new JThisRef(info, curClass.getClassOrInterface());
     }
 
     private JExpression makeThisReference(SourceInfo info, ReferenceBinding targetType,
@@ -2846,6 +3310,10 @@ public class GwtAstBuilder {
       this.typeDecl = x;
       this.scope = x.scope;
     }
+
+    public JDeclaredType getClassOrInterface() {
+      return classType == null ? type : classType;
+    }
   }
 
   static class CudInfo {
@@ -2887,6 +3355,7 @@ public class GwtAstBuilder {
    * Reflective access to {@link ForeachStatement#collectionElementType}.
    */
   private static final Field collectionElementTypeField;
+  private static final Field haveReceiverField;
 
   private static final char[] CREATE_VALUE_OF_MAP = "createValueOfMap".toCharArray();
   private static final char[] HAS_NEXT = "hasNext".toCharArray();
@@ -2907,6 +3376,14 @@ public class GwtAstBuilder {
     } catch (Exception e) {
       throw new RuntimeException(
           "Unexpectedly unable to access ForeachStatement.collectionElementType via reflection", e);
+    }
+
+    try {
+      haveReceiverField = ReferenceExpression.class.getDeclaredField("haveReceiver");
+      haveReceiverField.setAccessible(true);
+    } catch (Exception e) {
+      throw new RuntimeException(
+          "Unexpectedly unable to access ReferenceExpression.haveReceiver via reflection", e);
     }
   }
 
@@ -3010,7 +3487,6 @@ public class GwtAstBuilder {
    */
   static JMethod SAFE_CLOSE_METHOD = JMethod.getExternalizedMethod("com.google.gwt.lang.Exceptions",
       "safeClose(Ljava/lang/AutoCloseable;Ljava/lang/Throwable;)Ljava/lang/Throwable;", true);
-
 
   /**
    * Builds all the GWT AST nodes that correspond to one Java source file.
@@ -3141,12 +3617,12 @@ public class GwtAstBuilder {
        * is always in slot 1.
        */
       assert type.getMethods().size() == 0;
-      createSyntheticMethod(info, "$clinit", type, JPrimitiveType.VOID, false, true, true,
+      createSyntheticMethod(info, CLINIT_NAME, type, JPrimitiveType.VOID, false, true, true,
           AccessModifier.PRIVATE);
 
       if (type instanceof JClassType) {
         assert type.getMethods().size() == 1;
-        createSyntheticMethod(info, "$init", type, JPrimitiveType.VOID, false, false, true,
+        createSyntheticMethod(info, INIT_NAME, type, JPrimitiveType.VOID, false, false, true,
             AccessModifier.PRIVATE);
 
         // Add a getClass() implementation for all non-Object, non-String classes.
@@ -3349,12 +3825,16 @@ public class GwtAstBuilder {
   }
 
   private JMethod createSyntheticMethod(SourceInfo info, String name, JDeclaredType enclosingType,
-      JType returnType, boolean isAbstract, boolean isStatic, boolean isFinal, AccessModifier access) {
+      JType returnType, boolean isAbstract, boolean isStatic, boolean isFinal, AccessModifier access, JStatement ... statements) {
     JMethod method =
         new JMethod(info, name, enclosingType, returnType, isAbstract, isStatic, isFinal, access);
     method.freezeParamTypes();
     method.setSynthetic();
-    method.setBody(new JMethodBody(info));
+    JMethodBody body = new JMethodBody(info);
+    for (JStatement statement : statements) {
+      body.getBlock().addStmt(statement);
+    }
+    method.setBody(body);
     enclosingType.addMethod(method);
     return method;
   }

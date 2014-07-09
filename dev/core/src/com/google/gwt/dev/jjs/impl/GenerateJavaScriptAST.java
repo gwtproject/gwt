@@ -1158,6 +1158,17 @@ public class GenerateJavaScriptAST {
         JsFunction clinitFunc = jsFuncs.get(0);
         handleClinit(clinitFunc, null);
         globalStmts.add(clinitFunc.makeStmt());
+      } else {
+        jsFuncs.set(0, null);
+      }
+
+      // declare all static methods (Java8) into the global scope
+      for (int i = 0; i < jsFuncs.size(); ++i) {
+        JsFunction func = jsFuncs.get(i);
+        // don't add polymorphic JsFuncs, inline decl into vtable assignment
+        if (func != null && !polymorphicJsFunctions.contains(func)) {
+          globalStmts.add(func.makeStmt());
+        }
       }
 
       // setup fields
@@ -3452,7 +3463,7 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  String getNameString(HasName hasName) {
+  static String getNameString(HasName hasName) {
     String s = hasName.getName().replaceAll("_", "_1").replace('.', '_');
     return s;
   }
@@ -3504,7 +3515,7 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  String mangleNameForPrivatePoly(JMethod x) {
+  static String mangleNameForPrivatePoly(JMethod x) {
     assert x.isPrivate() && !x.isStatic();
     StringBuilder sb = new StringBuilder();
     /*
@@ -3520,7 +3531,7 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  private void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
+  private static void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
     partialSignature.append("__");
     for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
       JType type = x.getOriginalParamTypes().get(i);

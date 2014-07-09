@@ -609,10 +609,13 @@ public class JdtCompiler {
     };
 
     long jdtSourceLevel = jdtLevelByGwtLevel.get(SourceLevel.DEFAULT_SOURCE_LEVEL);
+    options.ignoreMethodBodies = false;
+//    options.produceMethodParameters = true;
 
-    options.originalSourceLevel = jdtSourceLevel;
-    options.complianceLevel = jdtSourceLevel;
-    options.sourceLevel = jdtSourceLevel;
+    long java8sourceLevel = jdtLevelByGwtLevel.get(SourceLevel.JAVA8);
+    options.originalSourceLevel = java8sourceLevel;
+    options.complianceLevel = java8sourceLevel;
+    options.sourceLevel = java8sourceLevel;
     options.targetJDK = jdtSourceLevel;
 
     // Generate debug info for debugging the output.
@@ -635,9 +638,10 @@ public class JdtCompiler {
     CompilerOptions options = getStandardCompilerOptions();
     long jdtSourceLevel = jdtLevelByGwtLevel.get(sourceLevel);
 
-    options.originalSourceLevel = jdtSourceLevel;
-    options.complianceLevel = jdtSourceLevel;
-    options.sourceLevel = jdtSourceLevel;
+    long java8SourceLevel = jdtLevelByGwtLevel.get(SourceLevel.JAVA8);
+    options.originalSourceLevel = java8SourceLevel;
+    options.complianceLevel = java8SourceLevel;
+    options.sourceLevel = java8SourceLevel;
     options.targetJDK = jdtSourceLevel;
     return options;
   }
@@ -760,7 +764,8 @@ public class JdtCompiler {
   private static final Map<SourceLevel, Long> jdtLevelByGwtLevel =
       ImmutableMap.<SourceLevel, Long>of(
           SourceLevel.JAVA6, ClassFileConstants.JDK1_6,
-          SourceLevel.JAVA7, ClassFileConstants.JDK1_7);
+          SourceLevel.JAVA7, ClassFileConstants.JDK1_7,
+          SourceLevel.JAVA8, ClassFileConstants.JDK1_8);
 
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;

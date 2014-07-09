@@ -403,6 +403,7 @@ public class Pruner {
         // all other interface methods are instance and abstract
         if (!isInstantiated || !referencedNonTypes.contains(method)) {
           type.removeMethod(i);
+          program.removeStaticImplMapping(method);
           assert program.instanceMethodForStaticImpl(method) == null;
           madeChanges();
           --i;

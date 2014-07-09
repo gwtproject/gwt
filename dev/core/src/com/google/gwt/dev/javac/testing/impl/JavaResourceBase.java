@@ -176,6 +176,12 @@ public class JavaResourceBase {
           "  public String value() { return \"Foo\"; }",
           "}");
 
+  public static final MockJavaResource FUNCTIONALINTERFACE =
+      createMockJavaResource("java.lang.FunctionalInterface",
+          "package java.lang;",
+          "public @interface FunctionalInterface {",
+          "}");
+
   public static final MockJavaResource INTEGER =
       createMockJavaResource("java.lang.Integer",
           "package java.lang;",

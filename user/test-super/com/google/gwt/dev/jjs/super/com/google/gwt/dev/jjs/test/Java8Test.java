@@ -1,0 +1,177 @@
+/*
+ * Copyright 2013 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.gwt.dev.jjs.test;
+
+import com.google.gwt.junit.client.GWTTestCase;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * Tests Java 7 features. It is super sourced so that gwt can be compiles under Java 6.
+ *
+ * IMPORTANT: For each test here there must exist the corresponding method in the non super sourced
+ * version.
+ *
+ * Eventually this test will graduate and not be super sourced.
+ */
+public class Java8Test extends GWTTestCase {
+  int local = 42;
+
+  static abstract class AbClass {
+    public int method1() { return 10; }
+    public abstract int method2();
+  }
+
+  public interface Lambda<T> {
+    T run(int a, int b);
+  }
+
+  public interface Lambda2<String> {
+    boolean run(String a, String b);
+  }
+
+  public class AcceptsLambda<T> {
+    public T accept(Lambda<T> foo) {
+      return foo.run(10, 20);
+    }
+    public boolean accept2(Lambda2<String> foo) {
+      return foo.run("a", "b");
+    }
+  }
+
+  public class Pojo {
+    private final int x;
+    private final int y;
+
+    public Pojo(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    public int fooInstance(int a, int b) {
+      return a + b + x + y;
+    }
+  }
+
+  public interface DefaultInterface {
+    void method1();
+    // CHECKSTYLE_OFF
+    default int method2() { return 42; }
+    // CHECKSTYLE_ON
+  }
+
+  public interface DefaultInterface2 {
+    void method3();
+    // CHECKSTYLE_OFF
+    default int method4() { return 23; }
+    // CHECKSTYLE_ON
+  }
+
+  static class DualImplementorSuper implements DefaultInterface {
+    public void method1() {}
+  }
+
+  static class DualImplementor extends DualImplementorSuper implements DefaultInterface2 {
+    public void method3() {}
+  }
+
+  // this doesn't implement DefaultInterface, but will provide implementation in subclasses
+  static class VirtualUpRef {
+    public int method2() { return 99; }
+  }
+
+  class Inner {
+    int local = 22;
+    public void run() {
+      assertEquals(94, new AcceptsLambda<Integer>().accept((a,b) -> Java8Test.this.local +  local + a + b).intValue());
+    }
+  }
+
+  interface Static {
+    static int staticMethod() { return 99; }
+  }
+
+  public class DefaultInterfaceImpl implements DefaultInterface {
+    public void method1() {}
+  }
+
+  public class DefaultInterfaceImplVirtualUpRef extends VirtualUpRef implements DefaultInterface {
+    public void method1() {}
+  }
+
+  @Override
+  public String getModuleName() {
+    return "com.google.gwt.dev.jjs.Java8Test";
+  }
+
+  public void testLambdaNoCapture() {
+    assertEquals(30, new AcceptsLambda<Integer>().accept((a, b) -> a + b).intValue());
+  }
+
+  public void testLambdaCaptureLocal() {
+    int x = 10;
+    assertEquals(40, new AcceptsLambda<Integer>().accept((a,b) -> x + a + b).intValue());
+  }
+
+  public void testLambdaCaptureLocalAndField() {
+    int x = 10;
+    assertEquals(82, new AcceptsLambda<Integer>().accept((a,b) -> x + local + a + b).intValue());
+  }
+
+  public void testCompileLambdaCaptureOuterInnerField() throws Exception {
+    new Inner().run();
+  }
+
+  public static Integer foo(int x, int y) { return x + y; }
+
+  public void testStaticReferenceBinding() throws Exception {
+    assertEquals(30, new AcceptsLambda<Integer>().accept(Java8Test::foo).intValue());
+  }
+
+  public void testInstanceReferenceBinding() throws Exception {
+    Pojo instance1 = new Pojo(1, 2);
+    Pojo instance2 = new Pojo(3, 4);
+    assertEquals(33, new AcceptsLambda<Integer>().accept(instance1::fooInstance).intValue());
+    assertEquals(37, new AcceptsLambda<Integer>().accept(instance2::fooInstance).intValue());
+  }
+
+  public void testImplicitQualifierReferenceBinding() throws Exception {
+    assertFalse(new AcceptsLambda<String>().accept2(String::equalsIgnoreCase));
+  }
+
+  public void testConstructorReferenceBinding() {
+    assertEquals(30, new AcceptsLambda<Pojo>().accept(Pojo::new).fooInstance(0, 0));
+  }
+
+  public void testDefaultInterfaceMethod() {
+    assertEquals(42, new DefaultInterfaceImpl().method2());
+  }
+
+  public void testStaticInterfaceMethod() {
+    assertEquals(99, Static.staticMethod());
+  }
+
+  public void testDefaultInterfaceMethodVirtualUpRef() {
+    assertEquals(99, new DefaultInterfaceImplVirtualUpRef().method2());
+  }
+
+  public void testDefaultInterfaceMethodMultiple() {
+    assertEquals(42, new DualImplementor().method2());
+    assertEquals(23, new DualImplementor().method4());
+  }
+}

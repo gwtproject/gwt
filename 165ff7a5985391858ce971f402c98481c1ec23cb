@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a41cd152_e94e71f4",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T02:18:16Z",
+      "side": 1,
+      "message": "This was ALL before. I\u0027m guessing that anyone who had a log handler at root and was logging at a higher level than INFO will have logging unexpectedly stop. So this doesn\u0027t seem like a backward-compatible change.\n\nIf there\u0027s a reason to keep it then it should at least be mentioned in the commit message.",
+      "range": {
+        "startLine": 39,
+        "startChar": 32,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "165ff7a5985391858ce971f402c98481c1ec23cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a41cd152_69344164",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-09T02:18:16Z",
+      "side": 1,
+      "message": "loggerMap?",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 46,
+        "endChar": 44
+      },
+      "revId": "165ff7a5985391858ce971f402c98481c1ec23cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

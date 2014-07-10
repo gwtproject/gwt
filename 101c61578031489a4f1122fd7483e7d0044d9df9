@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2490e198_584eb1a5",
+        "filename": "user/src/com/google/web/bindery/requestfactory/RequestFactory.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-10T20:55:44Z",
+      "side": 1,
+      "message": "skip requestloghandler",
+      "revId": "101c61578031489a4f1122fd7483e7d0044d9df9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2490e198_784b7594",
+        "filename": "user/src/com/google/web/bindery/requestfactory/RequestFactory.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-10T20:55:44Z",
+      "side": 1,
+      "message": "What about renaming this to RequestFactoryBase or similar and keep RequestFactory as a forwarding rule to maintain backward compatibility?",
+      "revId": "101c61578031489a4f1122fd7483e7d0044d9df9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

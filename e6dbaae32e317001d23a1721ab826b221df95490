@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "993578d4_15f976e5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-10T15:20:56Z",
+      "side": 1,
+      "message": "Using the timestamp with milliseconds.\nDone",
+      "parentUuid": "b9015cf5_0f515547",
+      "range": {
+        "startLine": 159,
+        "startChar": 6,
+        "endLine": 159,
+        "endChar": 22
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9015cf5_4ff51d31",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 17
@@ -36,6 +60,30 @@
       "writtenOn": "2014-07-09T22:43:43Z",
       "side": 1,
       "message": "It seems like the compile() function will be a generally useful public (JavaScript) API.\n\nI\u0027m thinking that this function should be created inside __gwt_activeModules by Super Dev Mode\u0027s nocache.js file, so that it\u0027s always present in Super Dev Mode. \n\nThe API: it\u0027s a function called \"compile\" and takes no arguments. If this function doesn\u0027t exist, recompiling isn\u0027t supported.\n\nHowever, this patch has gone through a lot of review, so perhaps we should wait and do that separately.",
+      "range": {
+        "startLine": 163,
+        "startChar": 9,
+        "endLine": 163,
+        "endChar": 24
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19298885_31812a40",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-10T15:20:56Z",
+      "side": 1,
+      "message": "Super Dev Mode\u0027s nocache.js overrides the __gwt_activeModules object created in this nocache script, so this should be done in a separated patch. Added a TODO",
+      "parentUuid": "b9015cf5_4ff51d31",
       "range": {
         "startLine": 163,
         "startChar": 9,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "593f80b5_b3c2c266",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-10T15:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9015cf5_ca359bef",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9015cf5_cf5a4d63",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 17
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "19298885_91bfbee6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-10T15:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9015cf5_cf5a4d63",
+      "range": {
+        "startLine": 180,
+        "startChar": 15,
+        "endLine": 180,
+        "endChar": 16
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9015cf5_6a79e746",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 17
@@ -105,6 +201,30 @@
       "writtenOn": "2014-07-09T22:43:43Z",
       "side": 1,
       "message": "Could you wrap this line?\n(Also, 143-144.)",
+      "range": {
+        "startLine": 104,
+        "startChar": 11,
+        "endLine": 104,
+        "endChar": 17
+      },
+      "revId": "e6dbaae32e317001d23a1721ab826b221df95490",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "593f80b5_b31e427e",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-10T15:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9015cf5_6a79e746",
       "range": {
         "startLine": 104,
         "startChar": 11,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7971a4c6_d9e6b34a",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-10T21:06:01Z",
+      "side": 1,
+      "message": "API compatibility check fails on added finals.\n\nShould I add api changes to gwt26_27userApi.conf?",
+      "revId": "7e85123e156ec2ed5698145ab5a731430589868d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

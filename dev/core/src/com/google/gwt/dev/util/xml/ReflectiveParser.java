@@ -18,6 +18,7 @@ package com.google.gwt.dev.util.xml;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.util.tools.Utility;
 
 import org.xml.sax.Attributes;
@@ -30,7 +31,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;

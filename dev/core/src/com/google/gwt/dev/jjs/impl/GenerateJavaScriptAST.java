@@ -162,10 +162,9 @@ import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.arg.JsInteropMode;
+import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
-import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
-import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -183,7 +182,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
@@ -391,7 +389,7 @@ public class GenerateJavaScriptAST {
      */
     private final Map<String, String> fileNameToUriString = Maps.newHashMap();
 
-    private final Stack<JsScope> scopeStack = new Stack<JsScope>();
+    private final ArrayList<JsScope> scopeStack = Lists.newArrayList();
 
     @Override
     public boolean visit(JProgram x, Context ctx) {
@@ -686,15 +684,15 @@ public class GenerateJavaScriptAST {
     }
 
     private JsScope peek() {
-      return scopeStack.peek();
+      return scopeStack.get(scopeStack.size() - 1);
     }
 
     private void pop() {
-      scopeStack.pop();
+      scopeStack.remove(scopeStack.size() - 1);
     }
 
     private void push(JsScope scope) {
-      scopeStack.push(scope);
+      scopeStack.add(scope);
     }
 
     private void recordSymbol(JReferenceType x, JsName jsName) {
@@ -2915,19 +2913,15 @@ public class GenerateJavaScriptAST {
     }
 
     // Keep track of a translation stack.
-    private final ArrayList<JsVisitable> nodeStack = Lists.newArrayList();
+    private final Stack<JsVisitable> nodeStack = new Stack<JsVisitable>();
 
     @SuppressWarnings("unchecked")
     private <T extends JsVisitable> T pop() {
-      return (T) nodeStack.remove(nodeStack.size() - 1);
+      return (T) nodeStack.pop();
     }
 
     private <T extends JsVisitable> List<T> popList(int count) {
-      int size = nodeStack.size();
-      List<T> nodesToPop = (List<T>) nodeStack.subList(size - count, size);
-      List<T> result = Lists.newArrayList(Iterables.filter(nodesToPop, Predicates.notNull()));
-      nodesToPop.clear();
-      return result;
+      return (List<T>) nodeStack.pop(count, true);
     }
 
     @SuppressWarnings("unchecked")
@@ -2936,7 +2930,7 @@ public class GenerateJavaScriptAST {
     }
 
     private <T extends JsVisitable> void push(T node) {
-      nodeStack.add(node);
+      nodeStack.push(node);
     }
   }
 

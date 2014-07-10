@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f993d415_5d5e1b27",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-07-10T23:41:55Z",
+      "side": 1,
+      "message": "Why is this ArrayList? Should probably be your new Stack or a Deque as well? The changed methods below also seem to indicate that.",
+      "range": {
+        "startLine": 392,
+        "startChar": 18,
+        "endLine": 392,
+        "endChar": 27
+      },
+      "revId": "04454bc6f73535dbd3d7f8246b5e93be1f53526e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "993578d4_757c42f9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_8779aa49",
+      "range": {
+        "startLine": 67,
+        "startChar": 32,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7988c4e2_47fac223",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2014-07-10T18:59:29Z",
       "side": 1,
       "message": "i\u0027ve been letting it slide but really if these variables aren\u0027t containing a Type instance then the variable name shouldn\u0027t sound like it.\n\nthese need to be named \"fooTypeName\"",
+      "range": {
+        "startLine": 82,
+        "startChar": 19,
+        "endLine": 82,
+        "endChar": 32
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "993578d4_759562ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "I dod not want to rename them for now since I think we should also make some changes to the way they are used in JTypeOracle.\n\nI\u0027ll send a follow up CL.",
+      "parentUuid": "7988c4e2_47fac223",
       "range": {
         "startLine": 82,
         "startChar": 19,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "993578d4_958fa6d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_a7b62e71",
+      "range": {
+        "startLine": 641,
+        "startChar": 43,
+        "endLine": 641,
+        "endChar": 71
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7988c4e2_a705cea1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2014-07-10T18:59:29Z",
       "side": 1,
       "message": "this comment doesn\u0027t make sense after replacing JProgram with an interface, maybe move the comment into JProgram?",
+      "range": {
+        "startLine": 814,
+        "startChar": 10,
+        "endLine": 815,
+        "endChar": 77
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "993578d4_f58832d4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_a705cea1",
       "range": {
         "startLine": 814,
         "startChar": 10,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "993578d4_559a5e21",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "changed to always compare the underlying type.",
+      "parentUuid": "7988c4e2_6776e6ea",
+      "range": {
+        "startLine": 897,
+        "startChar": 8,
+        "endLine": 897,
+        "endChar": 23
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7988c4e2_479e42e4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 5
@@ -151,6 +271,30 @@
       "writtenOn": "2014-07-10T18:59:29Z",
       "side": 1,
       "message": "extract:\nString typeName \u003d referenceType.getUnderlyingType().getName();",
+      "range": {
+        "startLine": 900,
+        "startChar": 24,
+        "endLine": 900,
+        "endChar": 77
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "993578d4_359fda11",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_479e42e4",
       "range": {
         "startLine": 900,
         "startChar": 24,
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "f993d415_dd146b62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/TypeHolder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "If we can find an easy way to track instantiated arrays in the compiler we can remove the trickery in JTypeOracle and this interface can go away.\n\nI\u0027ll leave it in for now.",
+      "parentUuid": "7988c4e2_6afa2bdf",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 41
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7988c4e2_c72ed2c0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/TypeHolder.java",
         "patchSetId": 5
@@ -197,6 +365,30 @@
       "writtenOn": "2014-07-10T18:59:29Z",
       "side": 1,
       "message": "s/TypeHolder/ArrayTypeCreator",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f993d415_1d2bb39e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/TypeHolder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_c72ed2c0",
       "range": {
         "startLine": 21,
         "startChar": 17,
@@ -232,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "f993d415_3d30ef07",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/TypeHolder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_4743a277",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7988c4e2_ca049735",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
         "patchSetId": 5
@@ -243,6 +459,30 @@
       "writtenOn": "2014-07-10T18:59:29Z",
       "side": 1,
       "message": "how about save a reference to the typeOracle when the ComputeCastabilityInformation visitor is constructed, and change all these program.typeOracle references to just typeOracle\n\nthat being said, i do think this is an improvement. you\u0027re right that answering these questions is really a job for the JTypeOracle, not JProgram",
+      "range": {
+        "startLine": 177,
+        "startChar": 16,
+        "endLine": 177,
+        "endChar": 34
+      },
+      "revId": "497173a1d0703c68d983e48e53d93a689997c79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f993d415_5d485b76",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-10T21:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7988c4e2_ca049735",
       "range": {
         "startLine": 177,
         "startChar": 16,

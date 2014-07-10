@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d1f8e4_3247d065",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-10T21:33:47Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "b6ac1e7612b847842e3c736e92a3fbb8ad35d827",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

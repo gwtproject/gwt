@@ -67,13 +67,12 @@ class ConstantsMapMethodCreator extends AbstractLocalizableMethodCreator {
     // make sure cache exists
     enableCache();
     // check cache for array
-    String constantMapClassName = ConstantMap.class.getCanonicalName();
     println(GENERIC_STRING_MAP_TYPE + " args = (" + GENERIC_STRING_MAP_TYPE
         + ") cache.get(" + wrap(methodName) + ");");
     // if not found create Map
     println("if (args == null) {");
     indent();
-    println("args = new " + constantMapClassName + "(new String[] {");
+    println("args = " + ConstantMap.class.getCanonicalName() + ".of(new String[] {");
     String keyString;
     try {
       keyString = resourceList.getRequiredString(mapName);

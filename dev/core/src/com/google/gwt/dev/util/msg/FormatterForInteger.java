@@ -22,6 +22,6 @@ public final class FormatterForInteger extends Formatter {
 
   @Override
   public String format(Object toFormat) {
-    return ((Integer) toFormat).toString();
+    return toFormat.toString();
   }
 }

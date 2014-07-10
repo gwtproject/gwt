@@ -22,6 +22,6 @@ public final class FormatterForLong extends Formatter {
 
   @Override
   public String format(Object toFormat) {
-    return ((Long) toFormat).toString();
+    return toFormat.toString();
   }
 }

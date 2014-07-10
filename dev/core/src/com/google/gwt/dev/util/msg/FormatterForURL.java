@@ -24,6 +24,6 @@ public class FormatterForURL extends Formatter {
 
   @Override
   public String format(Object toFormat) {
-    return ((URL) toFormat).toString();
+    return toFormat.toString();
   }
 }

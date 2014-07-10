@@ -182,7 +182,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
@@ -390,7 +389,7 @@ public class GenerateJavaScriptAST {
      */
     private final Map<String, String> fileNameToUriString = Maps.newHashMap();
 
-    private final Stack<JsScope> scopeStack = new Stack<JsScope>();
+    private final ArrayList<JsScope> scopeStack = Lists.newArrayList();
 
     @Override
     public boolean visit(JProgram x, Context ctx) {
@@ -685,15 +684,15 @@ public class GenerateJavaScriptAST {
     }
 
     private JsScope peek() {
-      return scopeStack.peek();
+      return scopeStack.get(scopeStack.size() - 1);
     }
 
     private void pop() {
-      scopeStack.pop();
+      scopeStack.remove(scopeStack.size() - 1);
     }
 
     private void push(JsScope scope) {
-      scopeStack.push(scope);
+      scopeStack.add(scope);
     }
 
     private void recordSymbol(JReferenceType x, JsName jsName) {

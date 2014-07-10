@@ -22,26 +22,27 @@ import java.util.logging.Level;
  * Implementation for the Level class when logging is enabled.
  */
 public class LevelImplRegular implements LevelImpl {
+  @Override
   public Level parse(String name) {
-    if (name.equalsIgnoreCase("ALL")) {
+    if (name.equalsIgnoreCase(Level.ALL.getName())) {
       return Level.ALL;
-    } else if (name.equalsIgnoreCase("CONFIG")) {
+    } else if (name.equalsIgnoreCase(Level.CONFIG.getName())) {
       return Level.CONFIG;
-    } else if (name.equalsIgnoreCase("FINE")) {
+    } else if (name.equalsIgnoreCase(Level.FINE.getName())) {
       return Level.FINE;
-    } else if (name.equalsIgnoreCase("FINER")) {
+    } else if (name.equalsIgnoreCase(Level.FINER.getName())) {
       return Level.FINER;
-    } else if (name.equalsIgnoreCase("FINEST")) {
+    } else if (name.equalsIgnoreCase(Level.FINEST.getName())) {
       return Level.FINEST;
-    } else if (name.equalsIgnoreCase("INFO")) {
+    } else if (name.equalsIgnoreCase(Level.INFO.getName())) {
       return Level.INFO;
-    } else if (name.equalsIgnoreCase("OFF")) {
+    } else if (name.equalsIgnoreCase(Level.OFF.getName())) {
       return Level.OFF;
-    } else if (name.equalsIgnoreCase("SEVERE")) {
+    } else if (name.equalsIgnoreCase(Level.SEVERE.getName())) {
       return Level.SEVERE;
-    } else if (name.equalsIgnoreCase("WARNING")) {
+    } else if (name.equalsIgnoreCase(Level.WARNING.getName())) {
       return Level.WARNING;
     }
-    return null;
+    throw new IllegalArgumentException("Invalid level \"" + name + "\"");
   }
 }

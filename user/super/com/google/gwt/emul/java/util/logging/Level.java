@@ -28,79 +28,45 @@ import java.io.Serializable;
  *  The Java API doc for details</a>
  */
 public class Level implements Serializable {
-  private static LevelImpl staticImpl = GWT.create(LevelImplNull.class);
-  public static Level ALL = new LevelAll();
-  public static Level CONFIG = new LevelConfig();
-  public static Level FINE = new LevelFine();
-  public static Level FINER = new LevelFiner();
-  public static Level FINEST = new LevelFinest();
-  public static Level INFO = new LevelInfo();
-  public static Level OFF = new LevelOff();
-  public static Level SEVERE = new LevelSevere();
-  public static Level WARNING = new LevelWarning();
-  
-  private static class LevelAll extends Level {
-    @Override public String getName() { return "ALL"; }
-    @Override public int intValue() { return Integer.MIN_VALUE; }
-  }
+  private static final LevelImpl IMPL = GWT.create(LevelImplNull.class);
 
-  private static class LevelConfig extends Level {
-    @Override public String getName() { return "CONFIG"; }
-    @Override public int intValue() { return 700; }
-  }
-  
-  private static class LevelFine extends Level {
-    @Override public String getName() { return "FINE"; }
-    @Override public int intValue() { return 500; }
-  }
-
-  private static class LevelFiner extends Level {
-    @Override public String getName() { return "FINER"; }
-    @Override public int intValue() { return 400; }
-  }
-
-  private static class LevelFinest extends Level {
-    @Override public String getName() { return "FINEST"; }
-    @Override public int intValue() { return 300; }
-  }  
-  
-  private static class LevelInfo extends Level {
-    @Override public String getName() { return "INFO"; }
-    @Override public int intValue() { return 800; }
-  }
-  
-  private static class LevelOff extends Level {
-    @Override public String getName() { return "OFF"; }
-    @Override public int intValue() { return Integer.MAX_VALUE; }
-  }
-
-  private static class LevelSevere extends Level {
-    @Override public String getName() { return "SEVERE"; }
-    @Override public int intValue() { return 1000; }
-  }
-
-  private static class LevelWarning extends Level {
-    @Override public String getName() { return "WARNING"; }
-    @Override public int intValue() { return 900; }
-  }
+  public static final Level ALL = new Level("ALL", Integer.MIN_VALUE);
+  public static final Level CONFIG = new Level("CONFIG", 700);
+  public static final Level FINE = new Level("FINE", 500);
+  public static final Level FINER = new Level("FINER", 400);
+  public static final Level FINEST = new Level("FINEST", 300);
+  public static final Level INFO = new Level("INFO", 800);
+  public static final Level OFF = new Level("OFF", Integer.MAX_VALUE);
+  public static final Level SEVERE = new Level("SEVERE", 1000);
+  public static final Level WARNING = new Level("WARNING", 900);
 
   public static Level parse(String name) {
-    return staticImpl.parse(name);
+    return IMPL.parse(name);
   } 
 
-  protected Level() { }
+  private final String name;
+  private final int value;
+
+  protected Level(String name, int value) {
+    if (name == null) {
+      throw new NullPointerException();
+    }
+
+    this.name = name;
+    this.value = value;
+  }
   
   public String getName() {
-    return "DUMMY";
+    return name;
   }
   
   public int intValue() {
-    return -1;
+    return value;
   }
     
   @Override
   public String toString() {
-    return getName();
+    return name;
   }
   
   /* Not Implemented */

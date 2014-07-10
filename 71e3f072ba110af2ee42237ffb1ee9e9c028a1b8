@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "995e582a_d352def2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-10T01:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995e582a_70b9e867",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "71e3f072ba110af2ee42237ffb1ee9e9c028a1b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "995e582a_b0088091",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 3

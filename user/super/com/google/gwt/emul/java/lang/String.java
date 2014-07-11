@@ -268,12 +268,12 @@ public final class String implements Comparable<String>, CharSequence,
   static String __translateReplaceString(String replaceStr) {
     int pos = 0;
     while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      String s = replaceStr;
+      replaceStr = s.substring(0, pos);
+      if (s.charAt(++pos) == '$') {
+        replaceStr += "$";
       }
+      replaceStr += s.substring(pos);
     }
     return replaceStr;
   }
@@ -501,26 +501,24 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(chars);
   }
 
-  private static native boolean regionMatches(String thisStr,
-      boolean ignoreCase, int toffset, String other, int ooffset, int len) /*-{
+  private static boolean regionMatches(String thisStr,
+      boolean ignoreCase, int toffset, String other, int ooffset, int len) {
+    if (other == null) {
+      throw new NullPointerException();
+    }
     if (toffset < 0 || ooffset < 0 || len <= 0) {
       return false;
     }
-
-    if (toffset + len > thisStr.length || ooffset + len > other.length) {
+    int endIndex1 = toffset + len;
+    int endIndex2 = ooffset + len;
+    if (endIndex1 > thisStr.length() || endIndex2 > other.length()) {
       return false;
     }
 
-    var left = thisStr.substr(toffset, len);
-    var right = other.substr(ooffset, len);
-
-    if (ignoreCase) {
-      left = left.toLowerCase();
-      right = right.toLowerCase();
-    }
-
-    return left == right;
-  }-*/;
+    String left = thisStr.substring(toffset, endIndex1);
+    String right = other.substring(ooffset, endIndex2);
+    return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
+  }
 
   private static String utf8ToString(byte[] bytes, int ofs, int len) {
     // TODO(jat): consider using decodeURIComponent(escape(bytes)) instead
@@ -806,34 +804,16 @@ public final class String implements Comparable<String>, CharSequence,
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, ignoreCase, toffset, other, ooffset, len);
   }
 
   public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, false, toffset, other, ooffset, len);
   }
 
   public native String replace(char from, char to) /*-{
-
-    // We previously used \\uXXXX, but Safari 2 doesn't match them properly
-// in RegExp
-    // See http://bugs.webkit.org/show_bug.cgi?id=8043
-    //     http://bugs.webkit.org/show_bug.cgi?id=6257
-    //     http://bugs.webkit.org/show_bug.cgi?id=7253
-    var regex;
-    if (from < 256) {
-      regex = @java.lang.Integer::toHexString(I)(from);
-      regex = '\\x' + "00".substring(regex.length) + regex;
-    } else {
-      // this works because characters above 255 can't be regex special chars
-      regex = String.fromCharCode(from);
-    }
+    var code = @java.lang.Integer::toHexString(I)(from);
+    var regex = '\\x' + "00".substring(code.length) + code;
     return this.replace(RegExp(regex, "g"), String.fromCharCode(to));
   }-*/;
 
@@ -964,11 +944,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
+    return this.substring(beginIndex);
   }-*/;
 
   public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
+    return this.substring(beginIndex, endIndex);
   }-*/;
 
   public char[] toCharArray() {

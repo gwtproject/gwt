@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f993d415_dd9f8b84",
+        "filename": "user/src/com/google/gwt/i18n/rebind/ConstantsMapMethodCreator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-11T07:59:52Z",
+      "side": 1,
+      "message": "Currently this generator is producing an output like [1],  I\u0027d rather modify it to produce the output [2], so as:\n\n* the generated Js code is a bit shorter\n* it will perform better because we don\u0027t have to execute the loop in ConstantMap\n* generator method will be simpler\n* we will get rid of the ConstantMap and ConstantMapTest classes\n\n  // [1]\n  public java.util.Map\u003cjava.lang.String, java.lang.String\u003e mymap() {\n    java.util.Map\u003cjava.lang.String, java.lang.String\u003e args \u003d (java.util.Map\u003cjava.lang.String, java.lang.String\u003e) cache.get(\"mymap\");\n    if (args \u003d\u003d null) {\n      args \u003d com.google.gwt.i18n.client.impl.ConstantMap.of(new String[] {\n          \"key1\", \n          \"key2\", \n        },\n          new String[] {\n          \"value1\", \n          \"value2\", \n        });\n      cache.put(\"mymap\", args);\n    };\n    return args;\n  }\n\n  // [2]\n  public java.util.Map\u003cjava.lang.String, java.lang.String\u003e mymap() {\n    java.util.Map\u003cjava.lang.String, java.lang.String\u003e args \u003d (java.util.Map\u003cjava.lang.String, java.lang.String\u003e) cache.get(\"mymap\");\n    if (args \u003d\u003d null) {\n      args \u003d new java.util.HashMap\u003cString, String\u003e();\n      args.put(\"key1\", \"value1\");\n      args.put(\"key2\", \"value2\");\n      args \u003d java.util.Collections.unmodifiableMap(args);\n      cache.put(\"mymap\", args);\n    }\n    return args;\n  }",
+      "revId": "8cf399650966c8c70e15fa3d50ac75363dce865c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

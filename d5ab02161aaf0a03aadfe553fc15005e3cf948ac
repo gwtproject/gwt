@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7971a4c6_dc6f8136",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-11T19:59:05Z",
+      "side": 1,
+      "message": "We can remove it,  it does not stop the process though, so large project developers know that they have to wait, maybe we can change the message and say like: getting too long",
+      "parentUuid": "79bfe48c_ac5e0bcd",
+      "range": {
+        "startLine": 208,
+        "startChar": 4,
+        "endLine": 208,
+        "endChar": 14
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79bfe48c_acfa8b84",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 21
@@ -36,6 +60,30 @@
       "writtenOn": "2014-07-11T18:34:27Z",
       "side": 1,
       "message": "Well, sometimes it\u0027s a different user agent, so I think there\u0027s a TODO here.\n\nIdeally the code server would figure out the user agent automatically. Perhaps if there is no callback argument on the recompile URL and no user agent, it should serve a web page that sniffs the user agent and shows a compile button?",
+      "range": {
+        "startLine": 166,
+        "startChar": 48,
+        "endLine": 166,
+        "endChar": 54
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7971a4c6_3c7b1d00",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-11T19:59:05Z",
+      "side": 1,
+      "message": "This is run in the startup process of the codeserver, there is no browser iteration with browser yet, maybe we can, this is an informational message, maybe we can replace safari by user.agent or safary/gecko1_8/ie10",
+      "parentUuid": "79bfe48c_acfa8b84",
       "range": {
         "startLine": 166,
         "startChar": 48,

@@ -268,12 +268,12 @@ public final class String implements Comparable<String>, CharSequence,
   static String __translateReplaceString(String replaceStr) {
     int pos = 0;
     while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      String s = replaceStr;
+      replaceStr = s.substring(0, pos);
+      if (s.charAt(++pos) == '$') {
+        replaceStr += "$";
       }
+      replaceStr += s.substring(pos);
     }
     return replaceStr;
   }
@@ -501,25 +501,33 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(chars);
   }
 
-  private static native boolean regionMatches(String thisStr,
-      boolean ignoreCase, int toffset, String other, int ooffset, int len) /*-{
+  private static boolean regionMatches(String thisStr,
+      boolean ignoreCase, int toffset, String other, int ooffset, int len) {
+    if (other == null) {
+      throw new NullPointerException();
+    }
     if (toffset < 0 || ooffset < 0 || len <= 0) {
       return false;
     }
-
-    if (toffset + len > thisStr.length || ooffset + len > other.length) {
+    if (toffset + len > thisStr.length() || ooffset + len > other.length()) {
       return false;
     }
 
-    var left = thisStr.substr(toffset, len);
-    var right = other.substr(ooffset, len);
+    String left = substr(thisStr, toffset, len);
+    String right = substr(other, ooffset, len);
+    return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
+  }
 
-    if (ignoreCase) {
-      left = left.toLowerCase();
-      right = right.toLowerCase();
-    }
+  private static native String replace(String s, String regex, String flags, String replace) /*-{
+    return s.replace(RegExp(regex, flags), replace);
+  }-*/;
 
-    return left == right;
+  private static native String substr(String s, int offset) /*-{
+    return s.substr(offset);
+  }-*/;
+
+  private static native String substr(String s, int offset, int len) /*-{
+    return s.substr(offset, len);
   }-*/;
 
   private static String utf8ToString(byte[] bytes, int ofs, int len) {
@@ -806,36 +814,19 @@ public final class String implements Comparable<String>, CharSequence,
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, ignoreCase, toffset, other, ooffset, len);
   }
 
   public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, false, toffset, other, ooffset, len);
   }
 
-  public native String replace(char from, char to) /*-{
-
-    // We previously used \\uXXXX, but Safari 2 doesn't match them properly
-// in RegExp
-    // See http://bugs.webkit.org/show_bug.cgi?id=8043
-    //     http://bugs.webkit.org/show_bug.cgi?id=6257
-    //     http://bugs.webkit.org/show_bug.cgi?id=7253
-    var regex;
-    if (from < 256) {
-      regex = @java.lang.Integer::toHexString(I)(from);
-      regex = '\\x' + "00".substring(regex.length) + regex;
-    } else {
-      // this works because characters above 255 can't be regex special chars
-      regex = String.fromCharCode(from);
-    }
-    return this.replace(RegExp(regex, "g"), String.fromCharCode(to));
-  }-*/;
+  public String replace(char from, char to) {
+    String code = Integer.toHexString(from);
+    String regex = "\\u" + "0000".substring(code.length()) + code;
+    String replace = fromCharCode(to);
+    return replace(this, regex, "g", replace);
+  }
 
   public String replace(CharSequence from, CharSequence to) {
     // Implementation note: This uses a regex replacement instead of
@@ -861,10 +852,10 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
-  public native String replaceAll(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
-    return this.replace(RegExp(regex, "g"), replace);
-  }-*/;
+  public String replaceAll(String regex, String replace) {
+    replace = __translateReplaceString(replace);
+    return replace(this, regex, "g", replace);
+  }
 
   /**
    * Regular expressions vary from the standard implementation. The
@@ -874,10 +865,10 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
-  public native String replaceFirst(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
-    return this.replace(RegExp(regex), replace);
-  }-*/;
+  public String replaceFirst(String regex, String replace) {
+    replace = __translateReplaceString(replace);
+    return replace(this, regex, "", replace);
+  }
 
   /**
    * Regular expressions vary from the standard implementation. The
@@ -964,11 +955,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
+    return this.substring(beginIndex);
   }-*/;
 
   public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
+    return this.substring(beginIndex, endIndex);
   }-*/;
 
   public char[] toCharArray() {

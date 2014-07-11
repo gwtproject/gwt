@@ -340,6 +340,17 @@ public class JavaAstConstructor {
     }
   };
 
+  public static final MockJavaResource UTIL = new MockJavaResource("com.google.gwt.lang.Util") {
+    @Override
+    public CharSequence getContent() {
+      return Joiner.on("\n").join(
+          "package com.google.gwt.lang;",
+          "public class Util {",
+          "}"
+      );
+    }
+  };
+
   public static JProgram construct(TreeLogger logger, CompilationState state,
       PrecompileTaskOptions options, ConfigProps config,
       String... entryPoints) throws UnableToCompleteException {

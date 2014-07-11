@@ -742,7 +742,7 @@ public class GenerateJavaScriptAST {
 
   private class GenerateJavaScriptVisitor extends JVisitor {
 
-    private final Set<JClassType> alreadyRan = Sets.newHashSet();
+    private final Set<JClassType> alreadyRan = Sets.newLinkedHashSet();
 
     private final List<JsStatement> exportStmts = new ArrayList<JsStatement>();
     private final JsName arrayLength = objectScope.declareName("length");
@@ -902,16 +902,8 @@ public class GenerateJavaScriptAST {
       if (alreadyRan.contains(x)) {
         return;
       }
-
-      if (program.getTypeClassLiteralHolder() == x) {
-        // Handled in generateClassLiterals.
-        return;
-      }
-
-      if (program.immortalCodeGenTypes.contains(x)) {
-        // Handled in generateImmortalTypes
-        return;
-      }
+      assert program.getTypeClassLiteralHolder() != x;
+      assert !program.immortalCodeGenTypes.contains(x);
 
       alreadyRan.add(x);
 
@@ -1706,48 +1698,6 @@ public class GenerateJavaScriptAST {
       push(op);
     }
 
-    @Override
-    public void endVisit(JProgram x, Context ctx) {
-      List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
-
-      // Add a few things onto the beginning.
-
-      // Reserve the "_" identifier.
-      JsVars vars = new JsVars(jsProgram.getSourceInfo());
-      vars.add(new JsVar(jsProgram.getSourceInfo(), globalTemp));
-      globalStmts.add(0, vars);
-
-      generateImmortalTypes(vars);
-
-      // Class objects, but only if there are any.
-      if (x.getDeclaredTypes().contains(x.getTypeClassLiteralHolder())) {
-        // TODO: perhaps they could be constant field initializers also?
-        vars = new JsVars(jsProgram.getSourceInfo());
-        generateClassLiterals(vars);
-        if (!vars.isEmpty()) {
-          globalStmts.add(vars);
-        }
-      }
-
-      // add all @JsExport assignments
-      globalStmts.addAll(exportStmts);
-
-      // Generate entry methods. Needs to be after class literal insertion since class literal will
-      // be referenced by runtime rebind and property provider bootstrapping.
-      setupGwtOnLoad(entryFunctions, globalStmts);
-
-      embedBindingProperties();
-
-      if (program.getRunAsyncs().size() > 0) {
-        // Prevent onLoad from being pruned.
-        JMethod onLoadMethod = program.getIndexedMethod("AsyncFragmentLoader.onLoad");
-        JsName name = names.get(onLoadMethod);
-        assert name != null;
-        JsFunction func = (JsFunction) name.getStaticRef();
-        func.setArtificiallyRescued(true);
-      }
-    }
-
     /**
      * Embeds properties into permProps for easy access from JavaScript.
      */
@@ -1870,15 +1820,8 @@ public class GenerateJavaScriptAST {
         return false;
       }
 
-      if (program.getTypeClassLiteralHolder() == x) {
-        // Handled in generateClassLiterals.
-        return false;
-      }
-
-      if (program.immortalCodeGenTypes.contains(x)) {
-        // Handled in generateImmortalTypes
-        return false;
-      }
+      assert program.getTypeClassLiteralHolder() != x;
+      assert !program.immortalCodeGenTypes.contains(x);
 
       // force super type to generate code first, this is required for prototype
       // chaining to work properly
@@ -1905,20 +1848,121 @@ public class GenerateJavaScriptAST {
       return true;
     }
 
+    private void insertInTopologicalOrder(JDeclaredType type, Set<JDeclaredType> set) {
+      if (type == null || set.contains(type) || program.isReferenceOnly(type)) {
+        return;
+      }
+      insertInTopologicalOrder(type.getSuperClass(), set);
+      set.add(type);
+    }
+
     @Override
     public boolean visit(JProgram x, Context ctx) {
-      /*
-       * Arrange for entryFunctions to be filled in as functions are visited.
-       * See their Javadoc comments for more details.
-       */
-      List<JMethod> entryMethods = x.getEntryMethods();
+      // Handle the visiting here as we need to slightly change the order.
+
+      List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
+
+      Set<JDeclaredType> preambleTypes = preamble(x, globalStmts);
+
+      // Sort normal types according to superclass relationship.
+      Set<JDeclaredType> normalClassesTopologicallyOrdered = Sets.newLinkedHashSet();
+      for (JDeclaredType type : x.getModuleDeclaredTypes()) {
+        if (preambleTypes.contains(type)) {
+          continue;
+        }
+        insertInTopologicalOrder(type, normalClassesTopologicallyOrdered);
+      }
+      normalClassesTopologicallyOrdered.removeAll(preambleTypes);
+
+      // Iterate over each type in the right order.
+      for (JDeclaredType type : normalClassesTopologicallyOrdered) {
+        accept(type);
+        JsVars classLiteralVars = new JsVars(jsProgram.getSourceInfo());
+        maybeGenerateClassLiteral(type, classLiteralVars);
+        if (!classLiteralVars.isEmpty()) {
+          globalStmts.add(classLiteralVars);
+        }
+      }
+
+      postamble(globalStmts);
+
+      // All done, do not visit children.
+      return false;
+    }
+
+    private Set<JDeclaredType> preamble(JProgram program, List<JsStatement> globalStmts) {
+  /*
+   * Arrange for entryFunctions to be filled in as functions are visited.
+   * See their Javadoc comments for more details.
+   */
+      List<JMethod> entryMethods = program.getEntryMethods();
       entryFunctions = new JsFunction[entryMethods.size()];
       entryMethodToIndex = Maps.newIdentityHashMap();
       for (int i = 0; i < entryMethods.size(); i++) {
         entryMethodToIndex.put(entryMethods.get(i), i);
       }
+      // Reserve the "_" identifier.
+      JsVars vars = new JsVars(jsProgram.getSourceInfo());
+      vars.add(new JsVar(jsProgram.getSourceInfo(), globalTemp));
+      globalStmts.add(vars);
 
-      return true;
+      generateImmortalTypes(vars);
+
+      Set<JDeclaredType> specialClassesTopologicallyOrdered = Sets.newLinkedHashSet();
+      // Include all classes that are necessary for the creation of literals.
+      // TODO(rluble): This is quite fragile as it depends on the implementation of these classes.
+      // would need a CFA analysis for Class.
+      insertInTopologicalOrder(program.getIndexedType("Class"), specialClassesTopologicallyOrdered);
+      insertInTopologicalOrder(program.getIndexedType("Cast"), specialClassesTopologicallyOrdered);
+      insertInTopologicalOrder(program.getIndexedType("Util"), specialClassesTopologicallyOrdered);
+
+      for (JDeclaredType type : specialClassesTopologicallyOrdered) {
+        accept(type);
+      }
+
+      generateClassLiterals(globalStmts, (Set) specialClassesTopologicallyOrdered);
+
+      Set<JDeclaredType> specialTypes =
+          Sets.<JDeclaredType>newHashSet(program.immortalCodeGenTypes);
+      specialTypes.add(program.getTypeClassLiteralHolder());
+      specialTypes.addAll(specialClassesTopologicallyOrdered);
+      return specialTypes;
+    }
+
+    private void postamble(List<JsStatement> globalStmts) {
+      // Emit all the class literals for classes that where pruned.
+      // NOTE: this should not happen in fully unoptimized compiles.
+      generateClassLiterals(globalStmts, Iterables.filter(classLiteralDeclarationsByType.keySet(),
+          Predicates.not(Predicates.<JType>in(alreadyRan))));
+
+      // add all @JsExport assignments
+      globalStmts.addAll(exportStmts);
+
+      // Generate entry methods. Needs to be after class literal insertion since class literal will
+      // be referenced by runtime rebind and property provider bootstrapping.
+      setupGwtOnLoad(entryFunctions, globalStmts);
+
+      embedBindingProperties();
+
+      if (program.getRunAsyncs().size() > 0) {
+        // Prevent onLoad from being pruned.
+        JMethod onLoadMethod = program.getIndexedMethod("AsyncFragmentLoader.onLoad");
+        JsName name = names.get(onLoadMethod);
+        assert name != null;
+        JsFunction func = (JsFunction) name.getStaticRef();
+        func.setArtificiallyRescued(true);
+      }
+    }
+
+    private void generateClassLiterals(List<JsStatement> globalStmts,
+        Iterable<JType> orderedClasses) {
+      JsVars vars = new JsVars(jsProgram.getSourceInfo());
+      for (JType type : orderedClasses) {
+        maybeGenerateClassLiteral(type, vars);
+      }
+      if (!vars.isEmpty()) {
+        globalStmts.add(vars);
+      }
     }
 
     @Override
@@ -2157,11 +2201,15 @@ public class GenerateJavaScriptAST {
       return new JsObjectLiteral(SourceOrigin.UNKNOWN);
     }
 
-    private void generateClassLiteral(JDeclarationStatement decl, JsVars vars) {
+    private void maybeGenerateClassLiteral(JType type, JsVars vars) {
+      JDeclarationStatement decl = classLiteralDeclarationsByType.get(type);
+      if (decl == null) {
+        return;
+      }
+
       JField field = (JField) decl.getVariableRef().getTarget();
 
       // TODO(rluble): refactor so that all output related to a class is decided together.
-      JType type = program.getTypeByClassLiteralField(field);
       if (type != null && type instanceof JDeclaredType
           && program.isReferenceOnly((JDeclaredType) type)) {
         // Only generate class literals for classes in the current module.
@@ -2178,20 +2226,6 @@ public class GenerateJavaScriptAST {
       JsVar var = new JsVar(decl.getSourceInfo(), jsName);
       var.setInitExpr(classObjectAlloc);
       vars.add(var);
-    }
-
-    private void generateClassLiterals(JsVars vars) {
-      /*
-       * Must execute in clinit statement order, NOT field order, so that back
-       * refs to super classes are preserved.
-       */
-      JMethodBody clinitBody =
-          (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
-      for (JStatement stmt : clinitBody.getStatements()) {
-        if (stmt instanceof JDeclarationStatement) {
-          generateClassLiteral((JDeclarationStatement) stmt, vars);
-        }
-      }
     }
 
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
@@ -3461,6 +3495,31 @@ public class GenerateJavaScriptAST {
     throw new InternalCompilerException("Unknown output mode");
   }
 
+  private final Map<JType, JDeclarationStatement> classLiteralDeclarationsByType =
+      Maps.newHashMap();
+
+  private void contructTypeToClassLiteralDeclarationMap() {
+      /*
+       * Must execute in clinit statement order, NOT field order, so that back
+       * refs to super classes are preserved.
+       */
+    JMethodBody clinitBody =
+        (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
+    for (JStatement stmt : clinitBody.getStatements()) {
+      if (!(stmt instanceof JDeclarationStatement)) {
+        continue;
+      }
+      JDeclarationStatement classLiteralDeclaration = (JDeclarationStatement) stmt;
+
+      JType type = program.getTypeByClassLiteralField(
+          (JField) ((JDeclarationStatement) stmt).getVariableRef().getTarget());
+
+      assert !classLiteralDeclarationsByType.containsKey(type);
+      classLiteralDeclarationsByType.put(type, classLiteralDeclaration);
+    }
+  }
+
+
   private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {
     new FixNameClashesVisitor().accept(program);
     new CanObserveSubclassUninitializedFieldsVisitor().accept(program);
@@ -3471,6 +3530,9 @@ public class GenerateJavaScriptAST {
       new RecordCrossClassCallsAndConstructorLiveness().accept(program);
       new RecordJSInlinableMethods().accept(program);
     }
+
+    // Map class literals to their respective types.
+    contructTypeToClassLiteralDeclarationMap();
 
     CreateNamesAndScopesVisitor creator = new CreateNamesAndScopesVisitor();
     creator.accept(program);

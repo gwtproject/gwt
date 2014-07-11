@@ -29,7 +29,7 @@ import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsLiteral;
-import com.google.gwt.dev.js.ast.JsNameRef;
+import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNullLiteral;
 import com.google.gwt.dev.js.ast.JsNumberLiteral;
 import com.google.gwt.dev.js.ast.JsObjectLiteral;
@@ -100,15 +100,17 @@ public class JjsUtils {
         int[] intArray = LongLib.getAsIntArray(((JLongLiteral) literal).getValue());
         JsObjectLiteral objectLit = new JsObjectLiteral(sourceInfo);
         List<JsPropertyInitializer> inits = objectLit.getPropertyInitializers();
-        JsExpression label0 = new JsNameRef(sourceInfo, "l");
-        JsExpression label1 = new JsNameRef(sourceInfo, "m");
-        JsExpression label2 = new JsNameRef(sourceInfo, "h");
+
+        JsExpression label0 = lName.makeRef(sourceInfo);
+        JsExpression label1 = mName.makeRef(sourceInfo);
+        JsExpression label2 = hName.makeRef(sourceInfo);
         JsExpression value0 = new JsNumberLiteral(sourceInfo, intArray[0]);
         JsExpression value1 = new JsNumberLiteral(sourceInfo, intArray[1]);
         JsExpression value2 = new JsNumberLiteral(sourceInfo, intArray[2]);
         inits.add(new JsPropertyInitializer(sourceInfo, label0, value0));
         inits.add(new JsPropertyInitializer(sourceInfo, label1, value1));
         inits.add(new JsPropertyInitializer(sourceInfo, label2, value2));
+        objectLit.setInternable();
         return objectLit;
       }
     },
@@ -124,6 +126,20 @@ public class JjsUtils {
         return JsNullLiteral.INSTANCE;
       }
     };
+
+    private static final JsName lName;
+    private static final JsName hName;
+    private static final JsName mName;
+
+
+    static {
+      lName = new JsName(null, "l", "l");
+      lName.setObfuscatable(false);
+      hName = new JsName(null, "h", "h");
+      hName.setObfuscatable(false);
+      mName = new JsName(null, "m", "m");
+      mName.setObfuscatable(false);
+    }
 
     abstract JsLiteral translate(JExpression literal);
   }

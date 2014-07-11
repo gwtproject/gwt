@@ -1753,7 +1753,7 @@ public class JsInliner {
       } else if (callerName != null && callerName.equals(calleeName)) {
         // The names are known to us and are the same
 
-      } else if (calleeName.getEnclosing().equals(calleeScope)) {
+      } else if (calleeName != null && calleeName.getEnclosing().equals(calleeScope)) {
         // It's a local variable in the callee
 
       } else {

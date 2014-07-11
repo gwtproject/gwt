@@ -22,6 +22,30 @@
       "revId": "04454bc6f73535dbd3d7f8246b5e93be1f53526e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79bfe48c_69bec552",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-11T18:05:45Z",
+      "side": 1,
+      "message": "Yes. Missed this one, at first I though that I could use ArrayDeque for most and the few I could not I was planning to use ArrayList...",
+      "parentUuid": "f993d415_5d5e1b27",
+      "range": {
+        "startLine": 392,
+        "startChar": 18,
+        "endLine": 392,
+        "endChar": 27
+      },
+      "revId": "04454bc6f73535dbd3d7f8246b5e93be1f53526e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,29 @@
       "revId": "183f6b0049f3d0e10bc3f5f67db4d8cf60e3c554",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79bfe48c_4ca66fb0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-11T18:21:46Z",
+      "side": 1,
+      "message": "should document here why it\u0027s important to prevent renaming\n\nthis CL is making me notice how hacky the LongLibBase implementation is. all of those JSNI functions accessing hard coded property names are forcing the compiler to synthesize AST in arbitrarily detailed ways.\n\nhopefully we can replace this eventually",
+      "range": {
+        "startLine": 125,
+        "startChar": 7,
+        "endLine": 125,
+        "endChar": 94
+      },
+      "revId": "183f6b0049f3d0e10bc3f5f67db4d8cf60e3c554",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

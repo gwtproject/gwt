@@ -16,6 +16,24 @@
       "revId": "8cf399650966c8c70e15fa3d50ac75363dce865c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f993d415_00aa6806",
+        "filename": "user/src/com/google/gwt/i18n/rebind/ConstantsMapMethodCreator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-11T19:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f993d415_dd9f8b84",
+      "revId": "8cf399650966c8c70e15fa3d50ac75363dce865c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

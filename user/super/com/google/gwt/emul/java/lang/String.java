@@ -268,12 +268,12 @@ public final class String implements Comparable<String>, CharSequence,
   static String __translateReplaceString(String replaceStr) {
     int pos = 0;
     while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      String s = replaceStr;
+      replaceStr = substr(s, 0, pos);
+      if (s.charAt(++pos) == '$') {
+        replaceStr += "$";
       }
+      replaceStr += substr(s, pos);
     }
     return replaceStr;
   }
@@ -501,25 +501,29 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(chars);
   }
 
-  private static native boolean regionMatches(String thisStr,
-      boolean ignoreCase, int toffset, String other, int ooffset, int len) /*-{
+  private static boolean regionMatches(String thisStr,
+      boolean ignoreCase, int toffset, String other, int ooffset, int len) {
+    if (other == null) {
+      throw new NullPointerException();
+    }
     if (toffset < 0 || ooffset < 0 || len <= 0) {
       return false;
     }
-
-    if (toffset + len > thisStr.length || ooffset + len > other.length) {
+    if (toffset + len > thisStr.length() || ooffset + len > other.length()) {
       return false;
     }
 
-    var left = thisStr.substr(toffset, len);
-    var right = other.substr(ooffset, len);
+    String left = substr(thisStr, toffset, len);
+    String right = substr(other, ooffset, len);
+    return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
+  }
 
-    if (ignoreCase) {
-      left = left.toLowerCase();
-      right = right.toLowerCase();
-    }
+  private static native String substr(String s, int offset) /*-{
+    return s.substr(offset);
+  }-*/;
 
-    return left == right;
+  private static native String substr(String s, int offset, int len) /*-{
+    return s.substr(offset, len);
   }-*/;
 
   private static String utf8ToString(byte[] bytes, int ofs, int len) {
@@ -806,16 +810,10 @@ public final class String implements Comparable<String>, CharSequence,
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, ignoreCase, toffset, other, ooffset, len);
   }
 
   public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
     return regionMatches(this, false, toffset, other, ooffset, len);
   }
 
@@ -964,11 +962,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
+    return this.substring(beginIndex);
   }-*/;
 
   public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
+    return this.substring(beginIndex, endIndex);
   }-*/;
 
   public char[] toCharArray() {

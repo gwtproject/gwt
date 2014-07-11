@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79bfe48c_0f3e29f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-11T22:07:25Z",
+      "side": 1,
+      "message": "Why is this not a stack?",
+      "revId": "2a425c2f291574d68f27ea2a84232a409357c9a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79bfe48c_b28746ff",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/Stack.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-11T22:07:25Z",
+      "side": 1,
+      "message": "A Stack based on ArrayList. Unlike {@link java.util.ArrayDeque}, this one allows {@code null} values.",
+      "revId": "2a425c2f291574d68f27ea2a84232a409357c9a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79bfe48c_b25e66cd",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/Stack.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-11T22:07:25Z",
+      "side": 1,
+      "message": "Semantics of this method is complex and easy to misuse (e.g. counts null or not?).",
+      "revId": "2a425c2f291574d68f27ea2a84232a409357c9a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

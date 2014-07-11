@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f97cb4a5_a9e605f7",
+        "filename": "user/src/com/google/gwt/logging/impl/LevelImplRegular.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-11T01:07:46Z",
+      "side": 1,
+      "message": "Please use StringCase.toUpper instead.",
+      "revId": "07f3c57aab1ddadef33e5ce314defc64496de17a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f97cb4a5_8979c949",
+        "filename": "user/src/com/google/gwt/logging/impl/LevelImplRegular.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-11T01:07:46Z",
+      "side": 1,
+      "message": "Fingers crossed...",
+      "revId": "07f3c57aab1ddadef33e5ce314defc64496de17a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

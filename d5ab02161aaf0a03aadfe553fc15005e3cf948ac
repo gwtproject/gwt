@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79bfe48c_ac5e0bcd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-11T18:34:27Z",
+      "side": 1,
+      "message": "Sad to say, this is too low; our largest app takes over 4 minutes in Super Dev Mode on a cold start.\n\nI don\u0027t think there\u0027s a way to pick the right number for everyone, so maybe we shouldn\u0027t have a timeout. The user will reload the page if they get impatient. If they want to be patient, we should probably let them.\n\nShowing some progress in the dialog and having a cancel button would help the user know whether they should still wait. But it would complicate the protocol. I\u0027m hoping incremental compiles will fix this by making things faster.",
+      "range": {
+        "startLine": 208,
+        "startChar": 4,
+        "endLine": 208,
+        "endChar": 14
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79bfe48c_acfa8b84",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-11T18:34:27Z",
+      "side": 1,
+      "message": "Well, sometimes it\u0027s a different user agent, so I think there\u0027s a TODO here.\n\nIdeally the code server would figure out the user agent automatically. Perhaps if there is no callback argument on the recompile URL and no user agent, it should serve a web page that sniffs the user agent and shows a compile button?",
+      "range": {
+        "startLine": 166,
+        "startChar": 48,
+        "endLine": 166,
+        "endChar": 54
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "79bfe48c_1df423ed",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-11T21:08:26Z",
+      "side": 1,
+      "message": "I think they know already that it\u0027s taking a long time. :-) We should tell them something they don\u0027t already know.\n\nMaybe the simplest approach would be a URL to poll periodically to find out the compiler\u0027s progress. It could return JSON like {\"status\": \"compiling something\", \"finished\": 2, \"total\": 5} to indicate that it\u0027s finished 2 steps out of 5, or {\"status\": \"idle\"} if it isn\u0027t doing anything. Of course if the web page polls the server and gets no answer, that\u0027s useful to know too.\n\nBut in any case I think we shouldn\u0027t do this yet, and fix it in another patch.",
+      "parentUuid": "7971a4c6_dc6f8136",
+      "range": {
+        "startLine": 208,
+        "startChar": 4,
+        "endLine": 208,
+        "endChar": 14
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79bfe48c_acfa8b84",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 21

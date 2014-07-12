@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "7971a4c6_9ccd89f3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-12T09:13:22Z",
+      "side": 1,
+      "message": "Yep, the problem right now is that we dont get any response until the compilation finishes, so a status\u003d\u0027idle\u0027 could be enough to know whether the server is reachable before asking for compiling. Let leave this for a new patch since we have to modify codeserver, I\u0027ll remove this from this patch right now and write a TODO",
+      "parentUuid": "79bfe48c_1df423ed",
+      "range": {
+        "startLine": 208,
+        "startChar": 4,
+        "endLine": 208,
+        "endChar": 14
+      },
+      "revId": "d5ab02161aaf0a03aadfe553fc15005e3cf948ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79bfe48c_acfa8b84",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 21

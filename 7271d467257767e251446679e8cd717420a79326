@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "f993d415_a3f05efe",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-07-12T13:37:36Z",
+      "side": 1,
+      "message": "I would be fine with deprecating it as setMultipleSelect(true) is a lot more readable than new ListBox(true), but we don\u0027t have to. In general I don\u0027t like boolean parameters in public constructors.",
+      "parentUuid": "de65092b_15e19cb2",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de65092b_5502f499",
         "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
         "patchSetId": 5

@@ -16,6 +16,23 @@
       "revId": "1bda2ed36d32b3e46a8c877dca5ed25de9af3d8c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7971a4c6_bccacdd6",
+        "filename": "user/src/com/google/gwt/i18n/rebind/ConstantsMapMethodCreator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-12T09:17:45Z",
+      "side": 1,
+      "message": "you can remove \u0027;\u0027",
+      "revId": "1bda2ed36d32b3e46a8c877dca5ed25de9af3d8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

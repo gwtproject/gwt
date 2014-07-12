@@ -22,6 +22,30 @@
       "revId": "527892e70dd773c9bd0d76a078dc88386a6239ac",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f993d415_a31e1e7e",
+        "filename": "user/src/com/google/gwt/core/client/impl/CrossSiteLoadingStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-12T15:12:13Z",
+      "side": 1,
+      "message": "Good point but I\u0027m not sure.\n\nI\u0027d like to raise this question in separate pull request because this technique is used here and in ScriptInjector and XMLHttpRequest.",
+      "parentUuid": "f993d415_43307a08",
+      "range": {
+        "startLine": 65,
+        "startChar": 65,
+        "endLine": 65,
+        "endChar": 73
+      },
+      "revId": "527892e70dd773c9bd0d76a078dc88386a6239ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

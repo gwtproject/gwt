@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79bfe48c_b2b3c1e9",
+        "filename": "user/test/com/google/gwt/dom/client/DocumentTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-12T01:03:27Z",
+      "side": 1,
+      "message": "In TestGal, this wouldn\u0027t be a good idea because it would remove the UI. (Probably it should run the test in an iframe, but currently it doesn\u0027t.)\n\nIt\u0027s good practice for tests to clean up after themselves and for the test framework to clean up after a test (in case they don\u0027t do it), but I don\u0027t think a test should have to clean up after the previous test. So maybe GWTTestCase should clean up the body instead, since it knows what the original html page looked like and it would be better test isolation for everyone?",
+      "range": {
+        "startLine": 150,
+        "startChar": 18,
+        "endLine": 150,
+        "endChar": 35
+      },
+      "revId": "0030d3b1472e3109e1ab279b9661a5b1d63b73da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

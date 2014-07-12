@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "996c98f2_5deb6f57",
+        "filename": "user/src/com/google/gwt/i18n/rebind/ConstantsMapMethodCreator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-12T09:05:14Z",
+      "side": 1,
+      "message": "you have to assign args to unmodifiableMap before returning it below, otherwise, the first time the method is run you return a modifiable object.",
+      "revId": "1bda2ed36d32b3e46a8c877dca5ed25de9af3d8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

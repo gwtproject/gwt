@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "996c98f2_ddfe9f15",
+        "filename": "user/test/com/google/gwt/i18n/ConstantMapTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-12T10:06:42Z",
+      "side": 0,
+      "message": "I think MapTestBase is not used by any other test so we can remove this class as well.",
+      "range": {
+        "startLine": 28,
+        "startChar": 37,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "47c9cc34670219fb92b1609594943206b2338fae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

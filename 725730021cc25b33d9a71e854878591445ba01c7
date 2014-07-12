@@ -34,6 +34,24 @@
       "revId": "725730021cc25b33d9a71e854878591445ba01c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f993d415_23420e55",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-12T18:15:56Z",
+      "side": 1,
+      "message": "Hi, Roberto. I\u0027m very interested in this kind of optimization (string comparison) and would love to do work on it.\n\nCan you advice me where I should start investigate code to do that?\nThanks!",
+      "parentUuid": "79bfe48c_b5cdebf2",
+      "revId": "725730021cc25b33d9a71e854878591445ba01c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

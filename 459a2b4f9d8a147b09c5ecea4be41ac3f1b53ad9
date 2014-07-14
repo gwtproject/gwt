@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f993d415_c3eb2a7f",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-14T10:21:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we use Object.keys here as well, or are you hoping to reduce work for copying keys in the first place?\n\nNormally we would have the Check Object.hasOwnProperty(hashCode), but I think it is fine since we do not have a prototype chain.",
+      "revId": "459a2b4f9d8a147b09c5ecea4be41ac3f1b53ad9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -313,7 +313,7 @@
    * Displays the "Compiling..." dialog.
    * @param {string} text A line of text to display.
    * @return {Object} An object representing the dialog. It
-   *     has one method, showError.
+   *     has two methods, updateProgress and showError.
    */
   function showCompilingDialog(text) {
     // Grey out everything under the dialog.
@@ -328,6 +328,14 @@
     body.appendChild(dialog);
 
     var result = {};
+
+    /**
+     * Updates the progress while compiling.
+     */
+    result.updateProgress = function(json) {
+      // Just append a dot for now.
+      message.appendChild($doc.createTextNode(" ."));
+    };
 
     /**
      * Updates the dialog with an error message.
@@ -450,6 +458,28 @@
   function compile(module_name, codeserver_url, get_prop_map) {
     var dialog = showCompilingDialog('Compiling ' + module_name + '...');
 
+    var polling = false;
+    var lastPollStart;
+
+    function onPollFinished(json) {
+        if (polling && json.status == "compiling") {
+            dialog.updateProgress(json);
+            var waitTime = 1000 - (Date.now() - lastPollStart);
+            if (waitTime > 0) {
+                setTimeout(poll, waitTime);
+            } else {
+                poll();
+            }
+        }
+    }
+
+    function poll() {
+      if (polling) {
+          lastPollStart = Date.now();
+          callJsonp(codeserver_url + 'progress?', onPollFinished);
+      }
+    }
+
     function onClickTryAgain() {
       // Just start over from the beginning.
       compile(module_name, codeserver_url, get_prop_map);
@@ -457,6 +487,7 @@
 
     function onCompileFinished(json) {
       globals.compiling = false;
+      polling = false;
       if (json.status != 'ok') {
         var log_url = codeserver_url + 'log/' + module_name;
         dialog.showError(json.status, log_url, onClickTryAgain);
@@ -468,6 +499,8 @@
     var url_prefix = codeserver_url + 'recompile/' + module_name + '?' +
     getBindingParameters(module_name, get_prop_map);
     globals.compiling = true;
+    polling = true;
+    setTimeout(poll, 1000);
     callJsonp(url_prefix, onCompileFinished);
   }
 

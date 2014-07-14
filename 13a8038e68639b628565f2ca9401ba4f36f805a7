@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d94c50b5_dc4c8d56",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/Stack.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-07-14T18:07:47Z",
+      "side": 1,
+      "message": "broken link",
+      "range": {
+        "startLine": 25,
+        "startChar": 20,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "13a8038e68639b628565f2ca9401ba4f36f805a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

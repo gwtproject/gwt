@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d965302b_6ef933e5",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CompilingClassLoader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-14T22:52:19Z",
+      "side": 1,
+      "message": "trailing space",
+      "range": {
+        "startLine": 788,
+        "startChar": 0,
+        "endLine": 788,
+        "endChar": 4
+      },
+      "revId": "8f575b9b8543968ae853dbf769aec0fa39f25b22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,30 @@
       "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "592060de_6e978b37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-15T16:42:49Z",
+      "side": 1,
+      "message": "We talked about it before but there\u0027s apparently not a bug for it. I think it should be a separate patch.",
+      "parentUuid": "390c8c77_0f924547",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

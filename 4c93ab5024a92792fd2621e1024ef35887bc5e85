@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79d0c40f_0105ca2e",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-15T00:07:56Z",
+      "side": 1,
+      "message": "Another issue is that compiling with more than one user agent results in sourcemaps not working. So, I\u0027m not sure we should use the comma-separated format.\n\nLet\u0027s put this back to \"safari\" for now and just make it a TODO.",
+      "range": {
+        "startLine": 168,
+        "startChar": 50,
+        "endLine": 168,
+        "endChar": 54
+      },
+      "revId": "4c93ab5024a92792fd2621e1024ef35887bc5e85",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

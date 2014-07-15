@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "19f188a2_0e624b19",
+        "filename": "user/src/com/google/gwt/core/client/impl/CrossSiteLoadingStrategy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-15T12:32:27Z",
+      "side": 1,
+      "message": "Right, thanks. I dont know why i forgot that.",
+      "parentUuid": "390c8c77_af8859d3",
+      "revId": "8af1fed985f144c5fc2f788d8e3b55653dcd6498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "390c8c77_ef926101",
         "filename": "user/src/com/google/gwt/core/client/impl/CrossSiteLoadingStrategy.java",
         "patchSetId": 2

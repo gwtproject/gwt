@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79d0c40f_1b39b359",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1844,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "s/set/topologicallyOrderedTypes",
+      "range": {
+        "startLine": 1844,
+        "startChar": 81,
+        "endLine": 1844,
+        "endChar": 84
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0c40f_3b7cb7f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1854,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "too vague",
+      "range": {
+        "startLine": 1854,
+        "startChar": 9,
+        "endLine": 1854,
+        "endChar": 74
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0c40f_1baa93f4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "topoOrderedBodyTypes",
+      "range": {
+        "startLine": 1861,
+        "startChar": 25,
+        "endLine": 1861,
+        "endChar": 58
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9c1b053_943be4e4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "i\u0027m not super happy with preamble/postamble but i don\u0027t have a great alternative. here are some ideas\n\npreBootstrap/postBootstrap\npreamble/epilogue\nheader/footer",
+      "range": {
+        "startLine": 1880,
+        "startChar": 6,
+        "endLine": 1880,
+        "endChar": 15
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0c40f_9bdf839e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1886,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "s/preamble/generatePreamble",
+      "range": {
+        "startLine": 1886,
+        "startChar": 31,
+        "endLine": 1886,
+        "endChar": 39
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0c40f_3bb91769",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "seems like specialTypes is really preambleClasses?",
+      "range": {
+        "startLine": 1914,
+        "startChar": 13,
+        "endLine": 1914,
+        "endChar": 25
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0c40f_1b88d30e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-15T22:00:37Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 268,
+        "startChar": 40,
+        "endLine": 268,
+        "endChar": 42
+      },
+      "revId": "9c92a294600986348d7054af0e9b6471a6a2141e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

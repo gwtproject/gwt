@@ -27,35 +27,28 @@ public class ScriptInjectorTest extends GWTTestCase {
   private static boolean browserChecked = false;
   private static final int CHECK_DELAY = 100;
 
-  private static boolean isIE = false;
+  private static boolean isIE8Or9 = false;
   private static final int TEST_DELAY = 10000;
 
   /**
-   * Check if the browser is IE6,7,8,9.
-   * 
-   * @return <code>true</code> if the browser is IE6, IE7, IE8, IE9
+   * Check if the browser is IE8,9.
+   *
+   * @return <code>true</code> if the browser is IE8, IE9
    *         <code>false</code> any other browser
    */
-  static boolean isIE() {
+  static boolean isIE8Or9() {
     if (!browserChecked) {
-      isIE = isIEImpl();
+      isIE8Or9 = isIE8Or9Impl();
       browserChecked = true;
     }
-    return isIE;
+    return isIE8Or9;
   }
 
-  private static native boolean isIEImpl() /*-{
+  private static native boolean isIE8Or9Impl() /*-{
     var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf("msie") != -1) {
-      return true;
-    }
-    return false;
+    return ua.indexOf("msie") != -1 && $doc.documentMode <= 9;
   }-*/;
 
-  private native boolean isSafari3OrBefore() /*-{
-    return @com.google.gwt.dom.client.DOMImplWebkit::isWebkit525OrBefore()();
-  }-*/;
-  
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.Core";
@@ -71,7 +64,7 @@ public class ScriptInjectorTest extends GWTTestCase {
     new FromString(scriptBody).inject();
     boolean worked = nativeTest1Worked();
     JavaScriptObject scriptElement = findScriptTextInThisWindow(scriptBody);
-    if (!isIE()) {
+    if (!isIE8Or9()) {
       cleanupThisWindow("__ti1_var__", scriptElement);
       assertFalse("cleanup failed", nativeTest1Worked());
     }
@@ -89,7 +82,7 @@ public class ScriptInjectorTest extends GWTTestCase {
     ScriptInjector.fromString(scriptBody).setWindow(ScriptInjector.TOP_WINDOW).inject();
     boolean worked = nativeTest2Worked();
     JavaScriptObject scriptElement = findScriptTextInTopWindow(scriptBody);
-    if (!isIE()) {
+    if (!isIE8Or9()) {
       cleanupTopWindow("__ti2_var__", scriptElement);
       assertTrue("__ti2_var not set in top window", worked);
     }
@@ -105,7 +98,7 @@ public class ScriptInjectorTest extends GWTTestCase {
     new FromString(scriptBody).setRemoveTag(false).inject();
     boolean worked = nativeTest3Worked();
     JavaScriptObject scriptElement = findScriptTextInThisWindow(scriptBody);
-    if (!isIE()) {
+    if (!isIE8Or9()) {
       cleanupThisWindow("__ti3_var__", scriptElement);
       assertFalse("cleanup failed", nativeTest3Worked());
     }
@@ -174,7 +167,7 @@ public class ScriptInjectorTest extends GWTTestCase {
    * 
    */
   public void testInjectUrlFail() {
-    if (isIE() || isSafari3OrBefore()) {
+    if (isIE8Or9()) {
       return;
     }
     
@@ -220,7 +213,7 @@ public class ScriptInjectorTest extends GWTTestCase {
           return true;
         }
         JavaScriptObject scriptElement = findScriptUrlInThisWindow(scriptUrl);
-        if (!isIE()) {
+        if (!isIE8Or9()) {
           cleanupThisWindow("__ti4_var__", scriptElement);
           assertFalse("cleanup failed", nativeTest4Worked());
         }
@@ -255,7 +248,7 @@ public class ScriptInjectorTest extends GWTTestCase {
           public void onSuccess(Void result) {
             boolean worked = nativeTest5Worked();
             JavaScriptObject scriptElement = findScriptUrlInThisWindow(scriptUrl);
-            if (!isIE()) {
+            if (!isIE8Or9()) {
               cleanupThisWindow("__ti5_var__", scriptElement);
               assertFalse("cleanup failed", nativeTest5Worked());
             }
@@ -289,7 +282,7 @@ public class ScriptInjectorTest extends GWTTestCase {
           return true;
         }
         JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
-        if (!isIE()) {
+        if (!isIE8Or9()) {
           cleanupTopWindow("__ti6_var__", scriptElement);
           assertFalse("cleanup failed", nativeTest6Worked());
         }
@@ -324,7 +317,7 @@ public class ScriptInjectorTest extends GWTTestCase {
               public void onSuccess(Void result) {
                 boolean worked = nativeTest7Worked();
                 JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
-                if (!isIE()) {
+                if (!isIE8Or9()) {
                   cleanupTopWindow("__ti7_var__", scriptElement);
                   assertFalse("cleanup failed", nativeTest7Worked());
                 }
@@ -357,7 +350,7 @@ public class ScriptInjectorTest extends GWTTestCase {
               public void onSuccess(Void result) {
                 String testVar = nativeGetTestUtf8Var();
                 JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
-                if (!isIE()) {
+                if (!isIE8Or9()) {
                   cleanupTopWindow("__ti_utf8_var__", scriptElement);
                   assertEquals("cleanup failed", "", nativeGetTestUtf8Var());
                 }

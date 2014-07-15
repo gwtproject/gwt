@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9c1b053_9ab94dcf",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-15T23:02:13Z",
+      "side": 1,
+      "message": "Daniel, can you avoid removing white spaces in functional patches? It makes it much harder to review and it is cleaner to have it\u0027s own patch.",
+      "revId": "e393c2b6c666e12413a5f66d197463d1b1f315c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9c1b053_1ae9bdce",
+        "filename": "user/test/com/google/gwt/dom/client/DocumentTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-15T23:02:13Z",
+      "side": 1,
+      "message": "revert?",
+      "revId": "e393c2b6c666e12413a5f66d197463d1b1f315c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

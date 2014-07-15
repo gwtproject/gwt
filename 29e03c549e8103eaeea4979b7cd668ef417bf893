@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "390c8c77_0f924547",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-15T09:38:18Z",
+      "side": 1,
+      "message": "Did we ever consider using CORS for this (http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

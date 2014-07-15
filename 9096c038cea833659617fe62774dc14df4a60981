@@ -16,6 +16,24 @@
       "revId": "9096c038cea833659617fe62774dc14df4a60981",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9c1b053_34c4d048",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-15T21:05:56Z",
+      "side": 1,
+      "message": "This is to cover the case where an app only depends on LogImpl.gwt.xml. When that happens, GWT.create was failing because there was no deferred binding for the interface.",
+      "parentUuid": "191a68b4_acace723",
+      "revId": "9096c038cea833659617fe62774dc14df4a60981",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

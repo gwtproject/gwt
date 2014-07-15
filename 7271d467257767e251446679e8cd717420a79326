@@ -230,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "d9c1b053_7a0f1105",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-15T23:01:44Z",
+      "side": 1,
+      "message": "It is just gonna be another warning for developers and I don\u0027t think it would for them to cleanup but if you really like to deprecate, that is fine.",
+      "parentUuid": "a4f851d3_fbfaca54",
+      "revId": "7271d467257767e251446679e8cd717420a79326",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de65092b_5502f499",
         "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
         "patchSetId": 5

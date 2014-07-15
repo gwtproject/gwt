@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "191a68b4_acace723",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-15T21:02:07Z",
+      "side": 1,
+      "message": "Should you not remove it in LoggingDisabled.gwt if it inherits LogImpl.gwt.xml?",
+      "revId": "9096c038cea833659617fe62774dc14df4a60981",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

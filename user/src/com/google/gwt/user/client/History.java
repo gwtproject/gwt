@@ -85,20 +85,39 @@ public class History {
     }
   }
 
-  private interface HistoryImpl {
-    void attachListener(JavaScriptObject handler);
+  /**
+   * HistoryImpl is used for rebinding for different browers.
+   */
+  private static abstract class HistoryImpl {
+    public abstract void attachListener(JavaScriptObject handler);
 
-    void detachListener(JavaScriptObject handler);
+    // Only kept in deferred binding to allow mocking frameworks to intercept calls
+    public native String decodeHistoryToken(String historyToken) /*-{
+      return $wnd.decodeURI(historyToken.replace("%23", "#"));
+    }-*/;
 
-    void newToken(String historyToken);
+    public abstract void detachListener(JavaScriptObject handler);
 
-    void replaceToken(String historyToken);
+    // Only kept in deferred binding to allow mocking frameworks to intercept calls
+    public native String encodeHistoryToken(String historyToken) /*-{
+      // encodeURI() does *not* encode the '#' character.
+      return $wnd.encodeURI(historyToken).replace("#", "%23");
+    }-*/;
+
+    // Only kept in deferred binding to allow mocking frameworks to intercept calls
+    public native JavaScriptObject getHistoryChangeHandler() /*-{
+      return $entry(@com.google.gwt.user.client.History::onHashChanged());
+    }-*/;
+
+    public abstract void newToken(String historyToken);
+
+    public abstract void replaceToken(String historyToken);
   }
 
   /**
    * This is the standard implementation for HistoryImpl using HTML pushstate.
    */
-  private static class HistoryImplPushState implements HistoryImpl {
+  private static class HistoryImplPushState extends HistoryImpl {
     // List of browsers that do not support pushstate:
     // IE8-9, Android 3.x, Android 4.0, Android 4.1
     static native boolean isSupported() /*-{
@@ -108,11 +127,21 @@ public class History {
     @Override
     public native void attachListener(JavaScriptObject handler) /*-{
       $wnd.addEventListener('popstate', handler);
+      // IE needs special treatment since it does not fire popstate event for hashchanges.
+      // Since we do not have a permutation for IE11 we need to include this here.
+      if ($wnd.navigator.userAgent.indexOf('Trident') != -1) {
+        $wnd.addEventListener('hashchange', handler, false);
+      }
     }-*/;
 
     @Override
     public native void detachListener(JavaScriptObject handler) /*-{
       $wnd.removeEventListener('popstate', handler);
+      // IE needs special treatment since it does not fire popstate event for hashchanges.
+      // Since we do not have a permutation for IE11 we need to include this here.
+      if ($wnd.navigator.userAgent.indexOf('Trident') != -1) {
+        $wnd.removeEventListener('hashchange', handler, false);
+      }
     }-*/;
 
     @Override
@@ -131,16 +160,16 @@ public class History {
    * <p>This is the fallback implementation for browsers that do not support HTML5
    * pushstate.
    */
-  private static class HistoryImplHashToken implements HistoryImpl {
+  private static class HistoryImplHashToken extends HistoryImpl {
 
     @Override
     public native void attachListener(JavaScriptObject handler) /*-{
-      $wnd.addEventListener('hashchange', handler);
+      $wnd.addEventListener('hashchange', handler, false);
     }-*/;
 
     @Override
     public native void detachListener(JavaScriptObject handler) /*-{
-      $wnd.removeEventListener('hashchange', handler);
+      $wnd.removeEventListener('hashchange', handler, false);
     }-*/;
 
     @Override
@@ -226,7 +255,7 @@ public class History {
     impl = createHistoryImpl();
     historyEventSource = new HistoryEventSource();
     token = getDecodedHash();
-    final JavaScriptObject handler = getHistoryChangeHandler();
+    final JavaScriptObject handler = impl.getHistoryChangeHandler();
     impl.attachListener(handler);
     Impl.scheduleDispose(new Disposable() {
       @Override
@@ -281,10 +310,9 @@ public class History {
    * @param historyToken the token to encode
    * @return the encoded token, suitable for use as part of a URI
    */
-  public static native String encodeHistoryToken(String historyToken) /*-{
-    // encodeURI() does *not* encode the '#' character.
-    return $wnd.encodeURI(historyToken).replace("#", "%23");
-  }-*/;
+  public static String encodeHistoryToken(String historyToken) {
+    return impl.encodeHistoryToken(historyToken);
+  }
 
   /**
    * Fire
@@ -422,18 +450,13 @@ public class History {
     }
   }
 
-  private static native String decodeURI(String s) /*-{
-    return $wnd.decodeURI(s.replace("%23", "#"));
-  }-*/;
-
   private static String getDecodedHash() {
     String hashToken = Window.Location.getHash();
-    return hashToken.isEmpty() ? "" : decodeURI(hashToken.substring(1));
+    if (hashToken == null || hashToken.isEmpty()) {
+      return "";
+    }
+    return  impl.decodeHistoryToken(hashToken.substring(1));
   }
-
-  private static native JavaScriptObject getHistoryChangeHandler() /*-{
-    return $entry(@com.google.gwt.user.client.History::onHashChanged());
-  }-*/;
 
   // this is called from JS when the native onhashchange occurs
   private static void onHashChanged() {

@@ -110,6 +110,8 @@ import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsBreak;
 import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatch;
+import com.google.gwt.dev.js.ast.JsClassEnd;
+import com.google.gwt.dev.js.ast.JsClassStart;
 import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsContinue;
@@ -964,6 +966,8 @@ public class GenerateJavaScriptAST {
         generateExports(x, exportStmts);
       }
 
+      globalStmts.add(new JsClassEnd(SourceOrigin.UNKNOWN));
+
       // TODO(zundel): Check that each unique method has a unique
       // name / poly name.
     }
@@ -1184,7 +1188,12 @@ public class GenerateJavaScriptAST {
       List<JsVar> jsFields = popList(x.getFields().size()); // fields
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
 
+      boolean hasOutput = false;
       if (x.getClinitTarget() == x) {
+        if (!hasOutput) {
+          hasOutput = true;
+          globalStmts.add(new JsClassStart(SourceOrigin.UNKNOWN, x.getName()));
+        }
         JsFunction clinitFunc = jsFuncs.get(0);
         handleClinit(clinitFunc, null);
         globalStmts.add(clinitFunc.makeStmt());
@@ -1197,11 +1206,18 @@ public class GenerateJavaScriptAST {
       }
 
       if (!vars.isEmpty()) {
+        if (!hasOutput) {
+          hasOutput = true;
+          globalStmts.add(new JsClassStart(SourceOrigin.UNKNOWN, x.getName()));
+        }
         globalStmts.add(vars);
       }
 
       if (program.typeOracle.isInteropEnabled()) {
         generateExports(x, exportStmts);
+      }
+      if (hasOutput) {
+        globalStmts.add(new JsClassEnd(SourceOrigin.UNKNOWN));
       }
     }
 
@@ -1935,6 +1951,9 @@ public class GenerateJavaScriptAST {
           "Class.createForEnum"}) {
         cfa.traverseFrom(program.getIndexedMethod(classLiteralMethodName));
       }
+
+      jsProgram.getGlobalBlock().getStatements().add(
+          new JsClassStart(SourceOrigin.UNKNOWN, x.getName()));
 
       Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
       for (JType type : cfa.getReferencedTypes()) {

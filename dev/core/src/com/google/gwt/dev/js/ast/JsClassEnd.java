@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -16,25 +16,27 @@ package com.google.gwt.dev.js.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * Abstract base class for JavaScript statement objects.
+ * Represents the ending boundary for statements that make up one class.
  */
-public abstract class JsStatement extends JsNode {
+public class JsClassEnd extends JsStatement {
 
-  protected JsStatement(SourceInfo sourceInfo) {
+  public JsClassEnd(SourceInfo sourceInfo) {
     super(sourceInfo);
   }
 
-  /**
-   * Whether statement ranges should be recorded for this statement type.
-   */
-  public boolean shouldRecordPosition() {
-    return true;
+  @Override
+  public NodeKind getKind() {
+    return NodeKind.CLASS_END;
   }
 
-  /**
-   * Returns true if this statement definitely causes an abrupt change in flow control.
-   */
-  public boolean unconditionalControlBreak() {
+  @Override
+  public boolean shouldRecordPosition() {
     return false;
+  }
+
+  @Override
+  public void traverse(JsVisitor v, JsContext ctx) {
+    v.visit(this, ctx);
+    v.endVisit(this, ctx);
   }
 }

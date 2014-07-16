@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.core.ext.linker.StatementRanges;
+import com.google.gwt.core.ext.linker.impl.NamedRange;
 import com.google.gwt.core.ext.linker.impl.StandardStatementRanges;
 import com.google.gwt.dev.js.ast.HasName;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
@@ -27,6 +28,8 @@ import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsBreak;
 import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatch;
+import com.google.gwt.dev.js.ast.JsClassEnd;
+import com.google.gwt.dev.js.ast.JsClassStart;
 import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsContinue;
@@ -123,6 +126,10 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z_$][\\w$]*");
 
   protected boolean needSemi = true;
+  private List<NamedRange> classRanges = new ArrayList<NamedRange>();
+  private NamedRange currentClassRange;
+  private Integer firstClassStart;
+
   /**
    * "Global" blocks are either the global block of a fragment, or a block
    * nested directly within some other global block. This definition matters
@@ -130,12 +137,11 @@ public class JsToStringGenerationVisitor extends JsVisitor {
    * those that appear directly within these global blocks.
    */
   private Set<JsBlock> globalBlocks = new HashSet<JsBlock>();
+  private int lastClassEnd;
   private final TextOutput p;
-  private final boolean useLongIdents;
-
   private ArrayList<Integer> statementEnds = new ArrayList<Integer>();
-
   private ArrayList<Integer> statementStarts = new ArrayList<Integer>();
+  private final boolean useLongIdents;
 
   /**
    * Generate the output string using short identifiers.
@@ -152,6 +158,22 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   JsToStringGenerationVisitor(TextOutput out, boolean useLongIdents) {
     this.p = out;
     this.useLongIdents = useLongIdents;
+  }
+
+  public List<NamedRange> getClassRanges() {
+    return classRanges;
+  }
+
+  /**
+   * Returns a NamedRange pointing at the starting position of the first class in the program and
+   * the ending position of the last class in the program. Any bytes before or after this range are
+   * considered preamble and epilogue respectively.
+   */
+  public NamedRange getProgramClassRange() {
+    NamedRange programClassRange = new NamedRange("Program");
+    programClassRange.setStartPosition(firstClassStart);
+    programClassRange.setEndPosition(lastClassEnd);
+    return programClassRange;
   }
 
   public StatementRanges getStatementRanges() {
@@ -285,6 +307,33 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     accept(x.getBody());
 
     return false;
+  }
+
+  @Override
+  public boolean visit(JsClassEnd x, JsContext ctx) {
+    needSemi = false;
+
+    lastClassEnd = p.getPosition();
+    currentClassRange.setEndPosition(p.getPosition());
+    classRanges.add(currentClassRange);
+    currentClassRange = null;
+    return super.visit(x, ctx);
+  }
+
+  @Override
+  public boolean visit(JsClassStart x, JsContext ctx) {
+    assert currentClassRange == null : "Individual class output should not be nested but seems "
+        + "two consecutive class start boundaries were seen.";
+    needSemi = false;
+
+    // If this is the first class seen.
+    if (firstClassStart == null) {
+      // Record it's starting position.
+      firstClassStart = p.getPosition();
+    }
+    currentClassRange = new NamedRange(x.getName());
+    currentClassRange.setStartPosition(p.getPosition());
+    return super.visit(x, ctx);
   }
 
   @Override
@@ -856,13 +905,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     return false;
   }
 
-  /**
-   * Adds any unbilled JavaScript to the most recently finished child node (if any).
-   */
-  protected void billChildToHere() {
-  }
-
-// CHECKSTYLE_NAMING_OFF
+//CHECKSTYLE_NAMING_OFF
 
   protected void _newline() {
     p.newline();
@@ -870,6 +913,12 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   protected void _newlineOpt() {
     p.newlineOpt();
+  }
+
+  /**
+   * Adds any unbilled JavaScript to the most recently finished child node (if any).
+   */
+  protected void billChildToHere() {
   }
 
   protected void printJsBlock(JsBlock x, boolean truncate, boolean finalNewline) {
@@ -892,7 +941,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
       }
       JsStatement stmt = iter.next();
       needSemi = true;
-      boolean shouldRecordPositions = isGlobal && !(stmt instanceof JsBlock);
+      boolean shouldRecordPositions = isGlobal && stmt.shouldRecordPosition();
       boolean stmtIsGlobalBlock = false;
       if (isGlobal) {
         if (stmt instanceof JsBlock) {

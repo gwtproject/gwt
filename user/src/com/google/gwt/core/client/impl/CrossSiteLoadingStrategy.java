@@ -55,9 +55,6 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
     }-*/;
   }
 
-  private static RuntimeException LoadTerminated = new RuntimeException(
-      "Code download terminated");
-
   /**
    * Clear callbacks on script objects.
    */
@@ -115,7 +112,7 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
 
   private static native void setOnFailure(JavaScriptObject script,
       JavaScriptObject callback) /*-{
-    var exception = @com.google.gwt.core.client.impl.CrossSiteLoadingStrategy::LoadTerminated;
+    var exception = @java.lang.RuntimeException::new(Ljava/lang/String;)("Code download terminated");
     script.onerror = function() {
       callback(exception);
     };

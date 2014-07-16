@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "59ba20ef_8156e0e6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Modules.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-16T19:32:02Z",
+      "side": 1,
+      "message": "no, not recommended in javadoc.",
+      "parentUuid": "39a80c90_63286a09",
+      "range": {
+        "startLine": 92,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 7
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39a80c90_03395e59",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Progress.java",
         "patchSetId": 1

@@ -85,10 +85,17 @@ public class History {
     }
   }
 
+  /**
+   * HistoryImpl is used for rebinding for different browers.
+   */
   private interface HistoryImpl {
     void attachListener(JavaScriptObject handler);
 
+    JavaScriptObject getHistoryChangeHandler();
+
     void detachListener(JavaScriptObject handler);
+
+    String encodeHistoryToken(String historyToken);
 
     void newToken(String historyToken);
 
@@ -108,11 +115,32 @@ public class History {
     @Override
     public native void attachListener(JavaScriptObject handler) /*-{
       $wnd.addEventListener('popstate', handler);
+      // IE needs special treatment since it does not fire popstate event for hashchanges.
+      // Since we do not have a permutation for IE11 we need to include this here.
+      if ($wnd.navigator.userAgent.indexOf('Trident') != -1) {
+        $wnd.addEventListener('hashchange', handler, false);
+      }
+    }-*/;
+
+    @Override
+    public native JavaScriptObject getHistoryChangeHandler() /*-{
+      return $entry(@com.google.gwt.user.client.History::onHashChanged());
+    }-*/;
+
+    @Override
+    public native String encodeHistoryToken(String historyToken) /*-{
+      // encodeURI() does *not* encode the '#' character.
+      return $wnd.encodeURI(historyToken).replace("#", "%23");
     }-*/;
 
     @Override
     public native void detachListener(JavaScriptObject handler) /*-{
       $wnd.removeEventListener('popstate', handler);
+      // IE needs special treatment since it does not fire popstate event for hashchanges.
+      // Since we do not have a permutation for IE11 we need to include this here.
+      if ($wnd.navigator.userAgent.indexOf('Trident') != -1) {
+        $wnd.removeEventListener('hashchange', handler, false);
+      }
     }-*/;
 
     @Override
@@ -135,12 +163,23 @@ public class History {
 
     @Override
     public native void attachListener(JavaScriptObject handler) /*-{
-      $wnd.addEventListener('hashchange', handler);
+      $wnd.addEventListener('hashchange', handler, false);
+    }-*/;
+
+    @Override
+    public native JavaScriptObject getHistoryChangeHandler() /*-{
+      return $entry(@com.google.gwt.user.client.History::onHashChanged());
     }-*/;
 
     @Override
     public native void detachListener(JavaScriptObject handler) /*-{
-      $wnd.removeEventListener('hashchange', handler);
+      $wnd.removeEventListener('hashchange', handler, false);
+    }-*/;
+
+    @Override
+    public native String encodeHistoryToken(String historyToken) /*-{
+      // encodeURI() does *not* encode the '#' character.
+      return $wnd.encodeURI(historyToken).replace("#", "%23");
     }-*/;
 
     @Override
@@ -226,7 +265,7 @@ public class History {
     impl = createHistoryImpl();
     historyEventSource = new HistoryEventSource();
     token = getDecodedHash();
-    final JavaScriptObject handler = getHistoryChangeHandler();
+    final JavaScriptObject handler = impl.getHistoryChangeHandler();
     impl.attachListener(handler);
     Impl.scheduleDispose(new Disposable() {
       @Override
@@ -281,10 +320,9 @@ public class History {
    * @param historyToken the token to encode
    * @return the encoded token, suitable for use as part of a URI
    */
-  public static native String encodeHistoryToken(String historyToken) /*-{
-    // encodeURI() does *not* encode the '#' character.
-    return $wnd.encodeURI(historyToken).replace("#", "%23");
-  }-*/;
+  public static String encodeHistoryToken(String historyToken) {
+    return impl.encodeHistoryToken(historyToken);
+  }
 
   /**
    * Fire
@@ -394,7 +432,7 @@ public class History {
    * @param historyToken history token to replace current top entry
    */
   public static void replaceItem(String historyToken) {
-    replaceItem(historyToken, true);
+    replaceItem(historyToken, false);
   }
 
   /**
@@ -428,12 +466,11 @@ public class History {
 
   private static String getDecodedHash() {
     String hashToken = Window.Location.getHash();
-    return hashToken.isEmpty() ? "" : decodeURI(hashToken.substring(1));
+    if (hashToken == null || hashToken.isEmpty()) {
+      return "";
+    }
+    return decodeURI(hashToken.substring(1));
   }
-
-  private static native JavaScriptObject getHistoryChangeHandler() /*-{
-    return $entry(@com.google.gwt.user.client.History::onHashChanged());
-  }-*/;
 
   // this is called from JS when the native onhashchange occurs
   private static void onHashChanged() {

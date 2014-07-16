@@ -108,6 +108,8 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     }
   }
 
+  transient Set<Entry<K, V>> entrySet;
+
   /**
    * A map of integral hashCodes onto entries.
    */
@@ -166,7 +168,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   @Override
   public Set<Map.Entry<K, V>> entrySet() {
-    return new EntrySet();
+    if (entrySet == null) {
+      entrySet = new EntrySet();
+    }
+    return entrySet;
   }
 
   @SpecializeMethod(params = {String.class}, target = "getStringValue")

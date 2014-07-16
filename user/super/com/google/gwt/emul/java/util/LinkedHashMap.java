@@ -222,7 +222,10 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
   @Override
   public Set<Map.Entry<K, V>> entrySet() {
-    return new EntrySet();
+    if (entrySet == null) {
+      entrySet = new EntrySet();
+    }
+    return entrySet;
   }
 
   @Override

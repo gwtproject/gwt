@@ -524,6 +524,8 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
     return node;
   }
 
+  transient Set<Entry<K, V>> entrySet;
+
   // The comparator to use.
   private Comparator<? super K> cmp;
 
@@ -587,7 +589,10 @@ public class TreeMap<K, V> extends AbstractMap<K, V> implements
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    return new EntrySet();
+    if (entrySet == null) {
+      entrySet = new EntrySet();
+    }
+    return entrySet;
   }
 
   public K firstKey() {

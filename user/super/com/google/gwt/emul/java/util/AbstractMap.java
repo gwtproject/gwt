@@ -91,6 +91,9 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
   }
 
+  transient Set<K> keySet;
+  transient Collection<V> values;
+
   protected AbstractMap() {
   }
 
@@ -161,37 +164,43 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   public Set<K> keySet() {
-    final Set<Entry<K, V>> entrySet = entrySet();
-    return new AbstractSet<K>() {
-      @Override
-      public boolean contains(Object key) {
-        return containsKey(key);
-      }
+    if (keySet == null) {
+      final Set<Entry<K, V>> entrySet = entrySet();
+      keySet = new AbstractSet<K>() {
+        @Override
+        public boolean contains(Object key) {
+          return containsKey(key);
+        }
 
-      @Override
-      public Iterator<K> iterator() {
-        final Iterator<Entry<K, V>> outerIter = entrySet.iterator();
-        return new Iterator<K>() {
-          public boolean hasNext() {
-            return outerIter.hasNext();
-          }
+        @Override
+        public Iterator<K> iterator() {
+          final Iterator<Entry<K, V>> outerIter = entrySet.iterator();
+          return new Iterator<K>() {
+            @Override
+            public boolean hasNext() {
+              return outerIter.hasNext();
+            }
 
-          public K next() {
-            Map.Entry<K, V> entry = outerIter.next();
-            return entry.getKey();
-          }
+            @Override
+            public K next() {
+              Map.Entry<K, V> entry = outerIter.next();
+              return entry.getKey();
+            }
 
-          public void remove() {
-            outerIter.remove();
-          }
-        };
-      }
+            @Override
+            public void remove() {
+              outerIter.remove();
+            }
+          };
+        }
 
-      @Override
-      public int size() {
-        return entrySet.size();
-      }
-    };
+        @Override
+        public int size() {
+          return entrySet.size();
+        }
+      };
+    }
+    return keySet;
   }
 
   public V put(K key, V value) {
@@ -234,37 +243,42 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   public Collection<V> values() {
-    final Set<Entry<K, V>> entrySet = entrySet();
-    return new AbstractCollection<V>() {
-      @Override
-      public boolean contains(Object value) {
-        return containsValue(value);
-      }
+    if (values == null) {
+      final Set<Entry<K, V>> entrySet = entrySet();
+      values = new AbstractCollection<V>() {
+        @Override
+        public boolean contains(Object value) {
+          return containsValue(value);
+        }
 
-      @Override
-      public Iterator<V> iterator() {
-        final Iterator<Entry<K, V>> outerIter = entrySet.iterator();
-        return new Iterator<V>() {
-          public boolean hasNext() {
-            return outerIter.hasNext();
-          }
+        @Override
+        public Iterator<V> iterator() {
+          final Iterator<Entry<K, V>> outerIter = entrySet.iterator();
+          return new Iterator<V>() {
+            @Override
+            public boolean hasNext() {
+              return outerIter.hasNext();
+            }
 
-          public V next() {
-            V value = outerIter.next().getValue();
-            return value;
-          }
+            @Override
+            public V next() {
+              return outerIter.next().getValue();
+            }
 
-          public void remove() {
-            outerIter.remove();
-          }
-        };
-      }
+            @Override
+            public void remove() {
+              outerIter.remove();
+            }
+          };
+        }
 
-      @Override
-      public int size() {
-        return entrySet.size();
-      }
-    };
+        @Override
+        public int size() {
+          return entrySet.size();
+        }
+      };
+    }
+    return values;
   }
 
   private Entry<K, V> implFindEntry(Object key, boolean remove) {

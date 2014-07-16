@@ -1332,6 +1332,14 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     assertNotInstantiableOrFieldSerializable(sto, b);
   }
 
+  public void testManualSerializationWithFinalField() throws Exception {
+    TypeOracle oracle = getTestTypeOracle();
+    JClassType thing = oracle.getType(ManualSerialization.Thing.class.getCanonicalName());
+    JClassType holder = oracle.getType(ManualSerialization.Holder.class.getCanonicalName());
+
+    checkSerializable(thing, holder);
+  }
+
   /**
    * Tests that a raw List (missing gwt.typeArgs) will not result in a failure.
    * The set of types is not currently being checked.

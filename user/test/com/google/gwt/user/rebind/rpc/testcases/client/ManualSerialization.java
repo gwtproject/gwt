@@ -17,8 +17,11 @@ package com.google.gwt.user.rebind.rpc.testcases.client;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
+
+import java.io.Serializable;
 
 /**
  * Used to test that the
@@ -54,4 +57,45 @@ public interface ManualSerialization extends RemoteService {
   }
   
   A getA();
+
+  /**
+   * Just a serializable thing.
+   */
+  class Thing implements Serializable {
+    String name;
+    public Thing() {
+    }
+  }
+
+  /**
+   * Custom with a final field.
+   */
+  class Holder implements Serializable {
+    final Thing thing;
+
+    public Holder(Thing thing) {
+      this.thing = thing;
+    }
+  }
+
+  /**
+   * Serializes an object with a final field.
+   */
+  class Holder_CustomFieldSerializer {
+
+    public static Holder instantiate(SerializationStreamReader streamReader)
+        throws SerializationException {
+      return new Holder((Thing) streamReader.readObject());
+    }
+
+    public static void deserialize(SerializationStreamReader streamReader, Holder instance)
+        throws SerializationException {
+      // already done
+    }
+
+    public static void serialize(SerializationStreamWriter streamWriter, Holder instance)
+        throws SerializationException {
+      streamWriter.writeObject(instance.thing);
+    }
+  }
 }

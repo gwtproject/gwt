@@ -579,16 +579,31 @@ public class SerializableTypeOracleBuilder {
     }
 
     if (field.isFinal()) {
-      TreeLogger.Type logLevel;
-      if (isManuallySerializable(field.getEnclosingType())) {
+      TreeLogger.Type logLevel = TreeLogger.WARN;
+
+      JClassType type = field.getEnclosingType();
+      JClassType custom = findCustomFieldSerializer(type.getOracle(), type);
+      if (custom != null) {
+        if (CustomFieldSerializerValidator.hasInstantiationMethod(custom, type)) {
+          /**
+           * A custom serializer may serialize a final field and pass it to the
+           * constructor on deserialization, so we need to be prepared for a
+           * writeObject() call.
+           * (This is best effort; we may drop the type if it's not serializable
+           * for other reasons. Presumably the custom serializer won't call
+           * writeObject() in that case.)
+           * See issue 8728.
+           */
+          return true;
+        }
+
         /*
          * If the type has a custom serializer, assume the programmer knows
          * best.
          */
         logLevel = TreeLogger.DEBUG;
-      } else {
-        logLevel = TreeLogger.WARN;
       }
+
       logger.branch(suppressNonStaticFinalFieldWarnings ? TreeLogger.DEBUG : logLevel, "Field '"
           + field.toString() + "' will not be serialized because it is final", null);
       return false;

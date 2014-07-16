@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "990e58b4_aaf40f36",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-16T23:55:58Z",
+      "side": 1,
+      "message": "JClassEnd need to be moved to visit(JProgram) so that class literals are included in the range.\n\nTo be consistent I think all JClassStart/JClassEnd should move there as well.",
+      "revId": "338fe983a48c401186fe43c2192d299bf041ccf9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

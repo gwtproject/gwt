@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "39a80c90_b200ded1",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-16T10:48:39Z",
+      "side": 1,
+      "message": "I am so sorry, this is again my eclipse formatter going crazy on me. For some reasons it randomly does this from time to time.",
+      "parentUuid": "d9c1b053_9ab94dcf",
+      "revId": "e393c2b6c666e12413a5f66d197463d1b1f315c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9c1b053_1ae9bdce",
         "filename": "user/test/com/google/gwt/dom/client/DocumentTest.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-15T23:02:13Z",
       "side": 1,
       "message": "revert?",
+      "revId": "e393c2b6c666e12413a5f66d197463d1b1f315c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "597ce0f0_c84f6f48",
+        "filename": "user/test/com/google/gwt/dom/client/DocumentTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-16T10:48:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9c1b053_1ae9bdce",
       "revId": "e393c2b6c666e12413a5f66d197463d1b1f315c6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

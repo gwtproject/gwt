@@ -35,16 +35,27 @@ public final class Class<T> implements Type {
   /**
    * Create a Class object for an array.<p>
    *
-   * Arrays are not registered in the prototype table and get the class literal explicitely at
+   * Arrays are not registered in the prototype table and get the class literal explicitly at
    * construction.<p>
-   *
-   * @skip
    */
-  public static native <T> Class<T> getClassLiteralForArray(Class<?> leafClass, int dimensions) /*-{
-    leafClass.@java.lang.Class::arrayLiterals = leafClass.@java.lang.Class::arrayLiterals || [];
-    return leafClass.@java.lang.Class::arrayLiterals[dimensions] ||
-        (leafClass.@java.lang.Class::arrayLiterals[dimensions] =
-            leafClass.@java.lang.Class::createClassLiteralForArray(I)(dimensions));
+  public static <T> Class<T> getClassLiteralForArray(Class<?> leafClass, int dimensions) {
+    if (leafClass.arrayLiterals == null) {
+      leafClass.arrayLiterals = JavaScriptObject.createArray();
+    }
+    Class<T> arrayLiteral = getAt(leafClass.arrayLiterals, dimensions);
+    if (arrayLiteral == null) {
+      arrayLiteral = leafClass.createClassLiteralForArray(dimensions);
+      putAt(leafClass.arrayLiterals, dimensions, arrayLiteral);
+    }
+    return arrayLiteral;
+  }
+
+  private static native <T> Class<T> getAt(JavaScriptObject array, int index) /*-{
+    return array[index];
+  }-*/;
+
+  private static native void putAt(JavaScriptObject array, int index, Class<?> clazz) /*-{
+    array[index] = clazz;
   }-*/;
 
   private <T> Class<T> createClassLiteralForArray(int dimensions) {

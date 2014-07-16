@@ -46,6 +46,139 @@
       "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "198d0845_b7228a03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "CORS does not work in IE8 IE9, hence I would continue with JSONP since the implementation is pretty simple,  although is it difficult to figure out if the call failed.",
+      "parentUuid": "390c8c77_0f924547",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_63286a09",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Modules.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "should\u0027t the tag be closed",
+      "range": {
+        "startLine": 92,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 7
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_03395e59",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Progress.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "I think it should be stepMessage",
+      "range": {
+        "startLine": 85,
+        "startChar": 25,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_837b8efd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "Why not have these messages in static vars or enum, probably in Progress. Something like Progress.COMPILING Progress.LOADING",
+      "range": {
+        "startLine": 111,
+        "startChar": 83,
+        "endLine": 111,
+        "endChar": 92
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_e3837a7a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "Why not simply the code and use a setInterval(poll, 1000),  the only nit is that maybe sometimes the polling could be true, and we have to wait to the next beat, but that is not a problem IMO.",
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_235d8261",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-16T19:28:13Z",
+      "side": 1,
+      "message": "I think server side could return other messages like \u0027loading modules\u0027, maybe you can use status !\u003d \u0027idle\u0027",
+      "range": {
+        "startLine": 465,
+        "startChar": 39,
+        "endLine": 465,
+        "endChar": 48
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

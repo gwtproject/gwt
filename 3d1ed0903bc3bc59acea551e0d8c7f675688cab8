@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9dbd436_f1eef090",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-16T00:56:49Z",
+      "side": 0,
+      "message": "Why can\u0027t we completely avoid prunning here? (and remove this method). Let\u0027s do that in a separate test.",
+      "revId": "3d1ed0903bc3bc59acea551e0d8c7f675688cab8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

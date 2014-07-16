@@ -16,6 +16,24 @@
       "revId": "679cf63492660a3b07f7d16199a3dea18f40e04c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "597ce0f0_d199d69f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-16T21:59:27Z",
+      "side": 1,
+      "message": "The format is one short 1 line message then the description in the next paragraph.\nEach line should be \u003c72,",
+      "parentUuid": "597ce0f0_51588636",
+      "revId": "679cf63492660a3b07f7d16199a3dea18f40e04c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

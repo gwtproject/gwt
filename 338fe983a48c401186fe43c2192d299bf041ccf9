@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "990e58b4_cd251dca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-17T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "990e58b4_aaf40f36",
+      "revId": "338fe983a48c401186fe43c2192d299bf041ccf9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "990e58b4_4ad1138e",
         "filename": "dev/core/test/com/google/gwt/dev/js/JsToStringGenerationVisitorTest.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2014-07-17T00:01:15Z",
       "side": 1,
       "message": "rename test function",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 34
+      },
+      "revId": "338fe983a48c401186fe43c2192d299bf041ccf9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "990e58b4_ad2ae997",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsToStringGenerationVisitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-17T00:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "990e58b4_4ad1138e",
       "range": {
         "startLine": 45,
         "startChar": 14,

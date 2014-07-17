@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7938c45c_24f13c02",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-07-17T12:24:31Z",
+      "side": 1,
+      "message": "Just out of curiosity, what is the purpose for html commenting in script here?",
+      "revId": "bfef6df5e7cd13d6b26c15088e43ad429b379e34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

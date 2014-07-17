@@ -110,6 +110,8 @@ import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsBreak;
 import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatch;
+import com.google.gwt.dev.js.ast.JsClassEnd;
+import com.google.gwt.dev.js.ast.JsClassStart;
 import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsContinue;
@@ -1876,12 +1878,14 @@ public class GenerateJavaScriptAST {
 
       // Iterate over each type in the right order.
       for (JDeclaredType type : topologicallySortedBodyTypes) {
+        globalStmts.add(new JsClassStart(SourceOrigin.UNKNOWN, x.getName()));
         accept(type);
         JsVars classLiteralVars = new JsVars(jsProgram.getSourceInfo());
         maybeGenerateClassLiteral(type, classLiteralVars);
         if (!classLiteralVars.isEmpty()) {
           globalStmts.add(classLiteralVars);
         }
+        globalStmts.add(new JsClassEnd(SourceOrigin.UNKNOWN));
       }
 
       generateEpilogue(globalStmts);

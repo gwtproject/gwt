@@ -149,6 +149,12 @@ public class JsVisitor {
   public void endVisit(JsCatch x, JsContext ctx) {
   }
 
+  public void endVisit(JsClassEnd x, JsContext ctx) {
+  }
+
+  public void endVisit(JsClassStart x, JsContext ctx) {
+  }
+
   public void endVisit(JsConditional x, JsContext ctx) {
   }
 
@@ -286,6 +292,14 @@ public class JsVisitor {
   }
 
   public boolean visit(JsCatch x, JsContext ctx) {
+    return true;
+  }
+
+  public boolean visit(JsClassEnd x, JsContext ctx) {
+    return true;
+  }
+
+  public boolean visit(JsClassStart x, JsContext ctx) {
     return true;
   }
 

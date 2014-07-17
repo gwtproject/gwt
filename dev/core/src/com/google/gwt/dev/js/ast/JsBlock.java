@@ -43,6 +43,11 @@ public class JsBlock extends JsStatement {
   }
 
   @Override
+  public boolean shouldRecordPosition() {
+    return false;
+  }
+
+  @Override
   public void traverse(JsVisitor v, JsContext ctx) {
     if (v.visit(this, ctx)) {
       v.acceptWithInsertRemove(stmts);

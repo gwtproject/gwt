@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "39a80c90_1ea37187",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T00:35:48Z",
+      "side": 1,
+      "message": "It should be easy enough to add server support for CORS and let the caller choose what they want to use. (In a separate patch.)",
+      "parentUuid": "198d0845_b7228a03",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39a80c90_63286a09",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Modules.java",
         "patchSetId": 1
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "39a80c90_de0569a1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Progress.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T00:35:48Z",
+      "side": 1,
+      "message": "I forgot to add stepMessage (fixed).\nMy idea with the status is just to distinguish between \"compiling\" and \"idle\".",
+      "parentUuid": "39a80c90_03395e59",
+      "range": {
+        "startLine": 85,
+        "startChar": 25,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39a80c90_837b8efd",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -154,6 +202,30 @@
       "writtenOn": "2014-07-16T19:28:13Z",
       "side": 1,
       "message": "Why not have these messages in static vars or enum, probably in Progress. Something like Progress.COMPILING Progress.LOADING",
+      "range": {
+        "startLine": 111,
+        "startChar": 83,
+        "endLine": 111,
+        "endChar": 92
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a80c90_be8505bb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T00:35:48Z",
+      "side": 1,
+      "message": "I think the compile steps should be defined in the compiler (perhaps by reusing the Speedtracer enums) rather than in the code server. However, the compiler is changing so this isn\u0027t a good time to do that. So this is temporary until we get around to that.",
+      "parentUuid": "39a80c90_837b8efd",
       "range": {
         "startLine": 111,
         "startChar": 83,
@@ -183,6 +255,24 @@
     },
     {
       "key": {
+        "uuid": "59ef80ff_10622464",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T00:35:48Z",
+      "side": 1,
+      "message": "I tried setInterval and it seems more complicated, due to the need to keep track of whether a jsonp request is already in progress.\n\nWith the code as it is, if the server fails to respond, the jsonp request will never return and no more callbacks run. The dialog will automatically freeze (stop printing dots), which tells the user that something might be wrong. This seems good enough to start. A later patch could recover better and display something fancier than just dots.",
+      "parentUuid": "39a80c90_e3837a7a",
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39a80c90_235d8261",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
         "patchSetId": 1
@@ -194,6 +284,30 @@
       "writtenOn": "2014-07-16T19:28:13Z",
       "side": 1,
       "message": "I think server side could return other messages like \u0027loading modules\u0027, maybe you can use status !\u003d \u0027idle\u0027",
+      "range": {
+        "startLine": 465,
+        "startChar": 39,
+        "endLine": 465,
+        "endChar": 48
+      },
+      "revId": "29e03c549e8103eaeea4979b7cd668ef417bf893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19d4282d_b696c838",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T00:35:48Z",
+      "side": 1,
+      "message": "My idea is that this is like the \"type\" field on an HTML event. There are two subclasses for \"idle\" and \"compiling\". If we added a third subclass (unlikely) then it would have different fields, so we wouldn\u0027t want to pass it to updateProgress.\n\nI renamed it to \"type\" to make this clearer.",
+      "parentUuid": "39a80c90_235d8261",
       "range": {
         "startLine": 465,
         "startChar": 39,

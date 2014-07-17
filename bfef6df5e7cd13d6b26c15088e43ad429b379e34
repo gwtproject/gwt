@@ -34,6 +34,24 @@
       "revId": "bfef6df5e7cd13d6b26c15088e43ad429b379e34",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39ee4c35_ff41ff50",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-17T21:35:19Z",
+      "side": 1,
+      "message": "In long-ago days, this was how people wrote web pages that supported backward compatibility with browsers that didn\u0027t understand the \"script\" tag. I don\u0027t think it ever made sense here.",
+      "parentUuid": "d97e1025_f2fea0cf",
+      "revId": "bfef6df5e7cd13d6b26c15088e43ad429b379e34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

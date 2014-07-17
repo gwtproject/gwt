@@ -223,6 +223,8 @@ public abstract class JavaToJavaScriptCompiler {
 
       long permStartMs = System.currentTimeMillis();
       try {
+        Event javaEvent = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_JAVA);
+
         // (1) Initialize local state.
         long startTimeMs = System.currentTimeMillis();
         PermProps props = permutation.getProps();
@@ -265,6 +267,10 @@ public abstract class JavaToJavaScriptCompiler {
         // TODO(stalcup): this stage shouldn't exist, move into optimize.
         postNormalizationOptimizeJava();
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
+
+        javaEvent.end();
+
+        Event javaScriptEvent = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_JAVASCRIPT);
 
         // (5) Construct the Js AST
         Pair<? extends JavaToJavaScriptMap, Set<JsNode>> jjsMapAndInlineableFunctions =
@@ -317,6 +323,8 @@ public abstract class JavaToJavaScriptCompiler {
             || options.isCompilerMetricsEnabled() ? new SizeBreakdown[jsFragments.length] : null;
         generateJavaScriptCode(jjsmap, jsFragments, ranges, sizeBreakdowns, sourceInfoMaps,
             isSourceMapsEnabled || options.isJsonSoycEnabled());
+
+        javaScriptEvent.end();
 
         // (9) Construct and return a value
         PermutationResult permutationResult =
@@ -436,6 +444,9 @@ public abstract class JavaToJavaScriptCompiler {
         String[] jsFragments, SizeBreakdown[] sizeBreakdowns,
         List<JsSourceMap> sourceInfoMaps, PermutationResult permutationResult)
         throws IOException, UnableToCompleteException {
+
+      Event event = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_ARTIFACTS);
+
       CompilationMetricsArtifact compilationMetrics = addCompilerMetricsArtifact(
           unifiedAst, permutation, startTimeMs, sizeBreakdowns, permutationResult);
       addSoycArtifacts(unifiedAst, permutationId, jjsmap, dependenciesAndRecorder,
@@ -443,6 +454,8 @@ public abstract class JavaToJavaScriptCompiler {
           permutationResult, compilationMetrics);
       addSourceMapArtifacts(permutationId, jjsmap, dependenciesAndRecorder, isSourceMapsEnabled,
           sizeBreakdowns, sourceInfoMaps, permutationResult);
+
+      event.end();
     }
 
     /**
@@ -452,10 +465,14 @@ public abstract class JavaToJavaScriptCompiler {
         StatementRanges[] ranges, SizeBreakdown[] sizeBreakdowns,
         List<JsSourceMap> sourceInfoMaps, boolean sourceMapsEnabled) {
 
+      Event generateJavascriptEvent =
+          SpeedTracerLogger.start(CompilerEventType.GENERATE_JAVASCRIPT);
+
       boolean useClosureCompiler = options.isClosureCompilerEnabled();
       if (useClosureCompiler) {
         ClosureJsRunner runner = new ClosureJsRunner();
         runner.compile(jprogram, jsProgram, jsFragments, options.getOutput());
+        generateJavascriptEvent.end();
         return;
       }
 
@@ -503,6 +520,8 @@ public abstract class JavaToJavaScriptCompiler {
           sourceInfoMaps.add(transformer.getSourceInfoMap());
         }
       }
+
+      generateJavascriptEvent.end();
     }
 
     private Collection<? extends Artifact<?>> makeSoycArtifacts(int permutationId, String[] js,
@@ -1128,6 +1147,9 @@ public abstract class JavaToJavaScriptCompiler {
 
     private void unifyJavaAst(Set<String> allRootTypes, String entryMethodHolderTypeName)
         throws UnableToCompleteException {
+
+      Event event = SpeedTracerLogger.start(CompilerEventType.UNIFY_AST);
+
       UnifyAst unifyAst;
       try {
         unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
@@ -1151,6 +1173,8 @@ public abstract class JavaToJavaScriptCompiler {
             SourceName.getShortClassName(entryMethodHolderTypeName) + ".init"));
       }
       unifyAst.exec();
+
+      event.end();
     }
   }
 

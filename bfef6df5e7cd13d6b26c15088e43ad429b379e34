@@ -16,6 +16,24 @@
       "revId": "bfef6df5e7cd13d6b26c15088e43ad429b379e34",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e1025_f2fea0cf",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-17T20:09:23Z",
+      "side": 1,
+      "message": "Probably has no purpose anymore...",
+      "parentUuid": "7938c45c_24f13c02",
+      "revId": "bfef6df5e7cd13d6b26c15088e43ad429b379e34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

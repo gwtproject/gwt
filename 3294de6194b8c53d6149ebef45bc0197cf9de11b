@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1947c8ed_7e23510a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1881,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-17T16:47:26Z",
+      "side": 1,
+      "message": "Should be type.getName()",
+      "range": {
+        "startLine": 1881,
+        "startChar": 63,
+        "endLine": 1881,
+        "endChar": 64
+      },
+      "revId": "3294de6194b8c53d6149ebef45bc0197cf9de11b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1947c8ed_fe1681b2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsToStringGenerationVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-17T16:47:26Z",
+      "side": 1,
+      "message": "If possible use the same type in firstClassStart and lastClassEnd (either int or Integer).",
+      "range": {
+        "startLine": 131,
+        "startChar": 28,
+        "endLine": 131,
+        "endChar": 34
+      },
+      "revId": "3294de6194b8c53d6149ebef45bc0197cf9de11b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

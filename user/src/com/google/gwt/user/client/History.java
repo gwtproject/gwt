@@ -86,23 +86,44 @@ public class History {
   }
 
   /**
+   * HistoryTokenEncoder is responsible for encoding and decoding history token, so that they can
+   * be used in an URL.
+   */
+  private static class HistoryTokenEncoder {
+    public native String encode(String toEncode) /*-{
+      // encodeURI() does *not* encode the '#' character.
+      return $wnd.encodeURI(toEncode).replace("#", "%23");
+    }-*/;
+
+    public native String decode(String toDecode) /*-{
+      return $wnd.decodeURI(toDecode.replace("%23", "#"));
+    }-*/;
+  }
+
+  /**
+   * NoDoubleEncodingHistoryTokenEncoder does not perform any encoding.
+   */
+  // Used from rebinding
+  @SuppressWarnings("unused")
+  private static class NoDoubleEncodingHistoryTokenEncoder extends HistoryTokenEncoder {
+    @Override
+    public String encode(String toEncode) {
+      return toEncode;
+    }
+
+    @Override
+    public String decode(String toDecode) {
+      return toDecode;
+    }
+  }
+
+  /**
    * HistoryImpl is used for rebinding for different browers.
    */
-  private static abstract class HistoryImpl {
+  private abstract static class HistoryImpl {
     public abstract void attachListener(JavaScriptObject handler);
 
-    // Only kept in deferred binding to allow mocking frameworks to intercept calls
-    public native String decodeHistoryToken(String historyToken) /*-{
-      return $wnd.decodeURI(historyToken.replace("%23", "#"));
-    }-*/;
-
     public abstract void detachListener(JavaScriptObject handler);
-
-    // Only kept in deferred binding to allow mocking frameworks to intercept calls
-    public native String encodeHistoryToken(String historyToken) /*-{
-      // encodeURI() does *not* encode the '#' character.
-      return $wnd.encodeURI(historyToken).replace("#", "%23");
-    }-*/;
 
     // Only kept in deferred binding to allow mocking frameworks to intercept calls
     public native JavaScriptObject getHistoryChangeHandler() /*-{
@@ -247,11 +268,13 @@ public class History {
     }
   }
 
+  private static HistoryTokenEncoder tokenEncoder;
   private static HistoryEventSource historyEventSource;
   private static String token;
   private static HistoryImpl impl;
 
   static {
+    tokenEncoder = GWT.create(HistoryTokenEncoder.class);
     impl = createHistoryImpl();
     historyEventSource = new HistoryEventSource();
     token = getDecodedHash();
@@ -311,7 +334,7 @@ public class History {
    * @return the encoded token, suitable for use as part of a URI
    */
   public static String encodeHistoryToken(String historyToken) {
-    return impl.encodeHistoryToken(historyToken);
+    return tokenEncoder.encode(historyToken);
   }
 
   /**
@@ -455,7 +478,7 @@ public class History {
     if (hashToken == null || hashToken.isEmpty()) {
       return "";
     }
-    return  impl.decodeHistoryToken(hashToken.substring(1));
+    return tokenEncoder.decode(hashToken.substring(1));
   }
 
   // this is called from JS when the native onhashchange occurs

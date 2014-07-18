@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "790d24e9_1c5319f9",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-18T19:40:43Z",
+      "side": 1,
+      "message": "Can we provide a configuration property \"gwt.history.noDoubleEncoding\" and bind an implementation that doesn\u0027t encode?",
+      "revId": "ad57db50fc9893e6681f17079e183193278f75b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

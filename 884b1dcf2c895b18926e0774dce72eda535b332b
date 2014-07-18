@@ -16,6 +16,41 @@
       "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "195ee8cf_467252b2",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-18T06:23:58Z",
+      "side": 1,
+      "message": "It seems it does:\nhttps://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Obsolete_things_to_avoid",
+      "parentUuid": "d97e1025_a9098a02",
+      "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f95af4db_059a1294",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-18T06:23:58Z",
+      "side": 1,
+      "message": "Is this necessary in this context?, I mean, do we run tests in browsers without js?, and if so, is there a way to check that this div was shown?. I think this is useless, but maybe I\u0027m wrong.",
+      "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

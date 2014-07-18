@@ -19,6 +19,13 @@
 <module type="fileset">
   <inherits name="com.google.gwt.core.Core"/>
   <inherits name="com.google.gwt.user.UserAgent"/>
+  <define-property name="gwt.history.noDoubleEncoding" values="true,false" />
+  <set-property name="gwt.history.noDoubleEncoding" value="false" />
+
+  <replace-with class="com.google.gwt.user.client.History.NoopHistoryTokenEncoder">
+    <when-type-is class="com.google.gwt.user.client.History.HistoryTokenEncoder" />
+    <when-property-is name="gwt.history.noDoubleEncoding" value="true" />
+  </replace-with>
 
   <!-- IE8 does not work with the standard implementation -->
   <replace-with class="com.google.gwt.user.client.History.HistoryImplIE8">

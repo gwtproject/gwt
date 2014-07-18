@@ -184,6 +184,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
+import javax.annotation.Nullable;
+
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
  */
@@ -1916,23 +1918,52 @@ public class GenerateJavaScriptAST {
       // Include in the preamble all classes that are reachable for Class.createForClass and
       // Class.createForEnum that are not JSOs nor interfaces.
       ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(program);
-      cfa.setForPruning();
       for (String classLiteralMethodName : new String[]{"Class.createForClass",
-          "Class.createForEnum"}) {
+          "Class.createForEnum", "Class.createForInterface"}) {
         cfa.traverseFrom(program.getIndexedMethod(classLiteralMethodName));
       }
+      // Get the list of enclosing classes that were not specialtypes.
+      List<JClassType> reachableClasses = Lists.newArrayList((Iterable) Iterables.filter(
+          Iterables.transform(cfa.getLiveFieldsAndMethods(),
+              new Function<JNode, JDeclaredType>() {
+                @Nullable
+                @Override
+                public JDeclaredType apply(@Nullable JNode member) {
+                  if (member instanceof JMethod) {
+                    return ((JMethod) member).getEnclosingType();
+                  } else if (member instanceof JField) {
+                    return ((JField) member).getEnclosingType();
+                  } else {
+                    assert member instanceof JParameter || member instanceof JLocal;
+                    // Dicard locals and parameters, only need the enclosing instances of reachable
+                    // fields and methods.
+                    return null;
+                  }
+                }
+              }), Predicates.and(
+          Predicates.instanceOf(JClassType.class),
+          Predicates.not(Predicates.in(specialTypes)))));
+      // Sort the list to guarantee deterministic behaviour.
+      Collections.sort(reachableClasses, new Comparator<JDeclaredType>() {
+        @Override
+        public int compare(JDeclaredType thisType, JDeclaredType thatType) {
+          return thisType.getName().compareTo(thatType.getName());
+        }
+      });
 
       Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
-      for (JType type : cfa.getReferencedTypes()) {
-        if (type instanceof JClassType && !specialTypes.contains(type) &&
-            !program.typeOracle.isJavaScriptObject(type)) {
-          insertInTopologicalOrder((JDeclaredType) type, orderedPreambleClasses);
+      for (JDeclaredType type : reachableClasses) {
+        if (!specialTypes.contains(type)) {
+          insertInTopologicalOrder(type, orderedPreambleClasses);
         }
       }
 
       for (JDeclaredType type : orderedPreambleClasses) {
         accept(type);
       }
+
+      // TODO(rluble): The set of preamble types might be overly large, in particular will include
+      // all JSOs that need clinit.
       return orderedPreambleClasses;
     }
 

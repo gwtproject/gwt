@@ -51,6 +51,24 @@
       "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e1025_8c65bc96",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-18T07:18:17Z",
+      "side": 1,
+      "message": "Theoretically you can run the test in any browser via -Manual and see the error message but probably could be removed as not necessary in practice.",
+      "parentUuid": "f95af4db_059a1294",
+      "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

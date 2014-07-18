@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 public class HistoryTest extends GWTTestCase {
 
-  private static String getCurrentLocationHash() {
+  protected static String getCurrentLocationHash() {
     // Firefox automatically decodes location.hash so parse it from Window.Location.getHref
     String href = Window.Location.getHref();
     String[] split = href.split("#");
@@ -169,15 +169,16 @@ public class HistoryTest extends GWTTestCase {
    */
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testHistory() {
+    runHistoryTest("token 1", "token 2");
+  }
+
+  protected void runHistoryTest(final String historyToken1, final String historyToken2) {
     /*
      * Sentinel token which should only be seen if tokens are lost during the
      * rest of the test. Without this, History.back() might send the browser too
      * far back, i.e. back to before the web app containing our test module.
      */
     History.newItem("if-you-see-this-then-history-went-back-too-far");
-
-    final String historyToken1 = "token 1";
-    final String historyToken2 = "token 2";
     delayTestFinish(10000);
 
     addHistoryListenerImpl(new ValueChangeHandler<String>() {
@@ -261,16 +262,16 @@ public class HistoryTest extends GWTTestCase {
 
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testReplaceItem() {
+    runReplaceItem("token 1", "token 2", "token 3");
+  }
+
+  protected void runReplaceItem(final String historyToken1, final String historyToken2, final String historyToken3) {
     /*
      * Sentinel token which should only be seen if tokens are lost during the rest of the test.
      * Without this, History.back() might send the browser too far back, i.e. back to before the web
      * app containing our test module.
      */
     History.newItem("if-you-see-this-then-history-went-back-too-far");
-
-    final String historyToken1 = "token 1";
-    final String historyToken2 = "token 2";
-    final String historyToken3 = "token 3";
 
     delayTestFinish(10000);
 
@@ -331,15 +332,16 @@ public class HistoryTest extends GWTTestCase {
    */
   @DoNotRunWith(Platform.HtmlUnitBug)
   public void testReplaceItemNoEvent() {
+    runReplaceItemNoEvent("token 1", "token 2", "token%202");
+  }
+
+  protected void runReplaceItemNoEvent(final String historyToken1, final String historyToken2, final String historyToken2_encoded) {
     /*
      * Sentinel token which should only be seen if tokens are lost during the rest of the test.
      * Without this, History.back() might send the browser too far back, i.e. back to before the web
      * app containing our test module.
      */
     History.newItem("if-you-see-this-then-history-went-back-too-far");
-    final String historyToken1 = "token 1";
-    final String historyToken2 = "token 2";
-    final String historyToken2_encoded = "token%202";
 
     History.newItem(historyToken1);
 
@@ -360,7 +362,7 @@ public class HistoryTest extends GWTTestCase {
       @Override
       public void run() {
         // Make sure that we have updated the URL properly.
-        assertEquals(historyToken2_encoded, getCurrentLocationHash());
+        assertLocationHash(historyToken2_encoded, historyToken2);
         finishTest();
       }
     };
@@ -377,7 +379,7 @@ public class HistoryTest extends GWTTestCase {
 
       @Override
       public void onValueChange(ValueChangeEvent<String> event) {
-        assertEquals(shouldBeEncodedAs, getCurrentLocationHash());
+        assertLocationHash(shouldBeEncodedAs, shouldBeEncoded);
         assertEquals(shouldBeEncoded, event.getValue());
         finishTest();
       }
@@ -501,8 +503,12 @@ public class HistoryTest extends GWTTestCase {
     }
   }
 
-  private void addHistoryListenerImpl(ValueChangeHandler<String> handler) {
+  protected void addHistoryListenerImpl(ValueChangeHandler<String> handler) {
     this.handlerRegistration = History.addValueChangeHandler(handler);
+  }
+
+  protected void assertLocationHash(String expectedToken, String originalToken) {
+    assertEquals(expectedToken, getCurrentLocationHash());
   }
 
   private native void click(Element el) /*-{

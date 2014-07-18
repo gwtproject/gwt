@@ -40,4 +40,8 @@ final class Util {
   static native void setCastableTypeMap(Object o, JavaScriptObject castableTypeMap) /*-{
     o.@java.lang.Object::castableTypeMap = castableTypeMap;
   }-*/;
+
+  static native void getsetCastableTypeMap(Object o, JavaScriptObject castableTypeMap) /*-{
+    o.@java.lang.Object::castableTypeMap = castableTypeMap;
+  }-*/;
 }

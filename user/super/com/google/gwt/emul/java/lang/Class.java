@@ -41,30 +41,14 @@ public final class Class<T> implements Type {
    * Arrays are not registered in the prototype table and get the class literal explicitly at
    * construction.<p>
    *
+   * NOTE: this method is accessed through JSNI (Violator pattern) to avoid changing the public API.
    */
-  public static <T> Class<T> getClassLiteralForArray(Class<?> leafClass, int dimensions) {
-    if (leafClass.arrayLiterals == null) {
-      leafClass.arrayLiterals = emptyArray();
-    }
-    Class<T> arrayLiteral = getAt(leafClass.arrayLiterals, dimensions);
-    if (arrayLiteral == null) {
-      arrayLiteral = leafClass.createClassLiteralForArray(dimensions);
-      putAt(leafClass.arrayLiterals, dimensions, arrayLiteral);
-    }
-    return arrayLiteral;
-  }
-
-  private static native <T> Class<T> getAt(JavaScriptObject array, int index) /*-{
-    return array[index];
-  }-*/;
-
-  private static native void putAt(JavaScriptObject array, int index, Class<?> clazz) /*-{
-    array[index] = clazz;
-  }-*/;
-
-  private static native JavaScriptObject emptyArray() /*-{
-    return [];
-  }-*/;
+   private static native <T> Class<T> getClassLiteralForArray(Class<?> leafClass, int dimensions) /*-{
+    leafClass.@java.lang.Class::arrayLiterals = leafClass.@java.lang.Class::arrayLiterals || [];
+    return leafClass.@java.lang.Class::arrayLiterals[dimensions] ||
+        (leafClass.@java.lang.Class::arrayLiterals[dimensions] =
+            leafClass.@java.lang.Class::createClassLiteralForArray(I)(dimensions));
+   }-*/;
 
   private <T> Class<T> createClassLiteralForArray(int dimensions) {
     Class<T> clazz = new Class<T>();
@@ -235,7 +219,7 @@ public final class Class<T> implements Type {
    * <p>
    * Only called if metadata is NOT disabled.
    */
-  static void initializeNames(Class<?> clazz, String packageName,
+  private static void initializeNames(Class<?> clazz, String packageName,
       String className) {
     clazz.typeName = packageName + className;
     clazz.simpleName = className;
@@ -248,12 +232,12 @@ public final class Class<T> implements Type {
    */
   static void synthesizeClassNamesFromTypeId(Class<?> clazz, JavaScriptObject typeId) {
     /*
-     * The initial "" + in the below code is to prevent clazz.hashCode() from
+     * The initial "" + in the below code is to prevent clazz.getAnonymousId from
      * being autoboxed. The class literal creation code is run very early
      * during application start up, before class Integer has been initialized.
      */
     clazz.typeName = "Class$"
-        + (isInstantiable(typeId) ? "S" + typeId : "" + clazz.hashCode());
+        + (isInstantiable(typeId) ? "S" + typeId : "" + clazz.sequentialId);
     clazz.simpleName = clazz.typeName;
   }
 
@@ -285,6 +269,10 @@ public final class Class<T> implements Type {
   private JavaScriptObject typeId;
 
   private JavaScriptObject arrayLiterals;
+
+  private int sequentialId = nextSequentialId++;
+
+  private static int nextSequentialId = 1;
 
   /**
    * Not publicly instantiable.

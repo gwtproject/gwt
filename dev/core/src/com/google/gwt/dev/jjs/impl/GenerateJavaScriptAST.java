@@ -1925,7 +1925,7 @@ public class GenerateJavaScriptAST {
       Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
       for (JType type : cfa.getReferencedTypes()) {
         if (type instanceof JClassType && !specialTypes.contains(type) &&
-            !program.typeOracle.isJavaScriptObject(type)) {
+            !program.typeOracle.isJavaScriptObject(type) || type == program.getJavaScriptObject()) {
           insertInTopologicalOrder((JDeclaredType) type, orderedPreambleClasses);
         }
       }

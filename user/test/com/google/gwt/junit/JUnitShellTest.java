@@ -37,9 +37,9 @@ public class JUnitShellTest extends TestCase {
   }
 
   public void testDefaultModuleUrl() throws Exception {
-    parseGoodArgs();
-    assertEquals("http://localhost:1234/example/junit.html?gwt.codesvr=localhost:456",
-        shell.getModuleUrl("localhost", 1234, "example", 456));
+    parseGoodArgs("-nodevMode", "-port",  "5436");
+    assertEquals("http://localhost:5436/example/junit.html",
+        shell.getModuleUrl("example"));
   }
 
   public void testArgOptimize() throws Exception {

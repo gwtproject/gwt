@@ -28,6 +28,7 @@ import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.CompilerOptions;
 import com.google.gwt.dev.DevMode;
+import com.google.gwt.dev.DevModeBase;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.Properties;
@@ -910,11 +911,17 @@ public class JUnitShell extends DevMode {
   }
 
   public String getModuleUrl(String moduleName) {
-    // TODO(manolo): consider using DevModeBase.normalizeURL
-    // and DevModeBase.makeStartupUrl instead.
-    String localhost = runStyle.getLocalHostName();
-    int codeServerPort = developmentMode ? listener.getSocketPort() : 0;
-    return getModuleUrl(localhost, getPort(), moduleName, codeServerPort);
+    String url = moduleName + "/junit.html";
+    url = DevModeBase.normalizeURL(url, isHttps, getPort(), getHost());
+    if (developmentMode) {
+      try {
+        url = makeStartupUrl(url).toString();
+      } catch (UnableToCompleteException e) {
+        // Not adding throws clause in order not to modify the API
+        throw new RuntimeException(e);
+      }
+    }
+    return url;
   }
 
   public CompilerContext getCompilerContext() {
@@ -1088,14 +1095,6 @@ public class JUnitShell extends DevMode {
       throw new UnableToCompleteException();
     }
     // TODO(scottb): prepopulate currentCompilationState somehow?
-  }
-
-  String getModuleUrl(String hostName, int port, String moduleName, int codeServerPort) {
-    String url = "http://" + hostName + ":" + port + "/" + moduleName + "/junit.html";
-    if (developmentMode) {
-      url += "?gwt.codesvr=" + hostName + ":" + codeServerPort;
-    }
-    return url;
   }
 
   void maybeCompileForWebMode(ModuleDef module, Set<String> userAgents)

@@ -729,7 +729,8 @@ public abstract class DevModeBase implements DoneCallback {
       portString = "";
     }
 
-    return protocol + "://" + host + portString + "/" + unknownUrlText;
+    return protocol + "://" + (host != null ? host : "localhost") + portString +
+        "/" + unknownUrlText;
   }
 
   /**

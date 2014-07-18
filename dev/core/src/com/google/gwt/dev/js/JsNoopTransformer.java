@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.impl;
+package com.google.gwt.dev.js;
 
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.dev.jjs.JsSourceMap;

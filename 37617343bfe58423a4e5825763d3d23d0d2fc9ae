@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39ee4c35_ce73ab67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-18T23:56:41Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.jjs.impl.MakeCallsStatic\u0027 import.",
+      "revId": "37617343bfe58423a4e5825763d3d23d0d2fc9ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39ee4c35_ae78e744",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/HasName.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-18T23:56:41Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "37617343bfe58423a4e5825763d3d23d0d2fc9ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

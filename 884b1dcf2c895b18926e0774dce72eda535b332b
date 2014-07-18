@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97e1025_a9098a02",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-18T04:52:48Z",
+      "side": 1,
+      "message": "Does this work with IE8?",
+      "revId": "884b1dcf2c895b18926e0774dce72eda535b332b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

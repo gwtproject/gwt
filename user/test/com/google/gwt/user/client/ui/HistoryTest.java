@@ -48,6 +48,7 @@ public class HistoryTest extends GWTTestCase {
     return split[1];
   }
 
+  protected boolean doubleEncodingDisabled;
   private HandlerRegistration handlerRegistration;
   private Timer timer;
 
@@ -354,7 +355,12 @@ public class HistoryTest extends GWTTestCase {
       @Override
       public void run() {
         // Make sure that we have updated the URL properly.
-        assertEquals(historyToken2_encoded, getCurrentLocationHash());
+        if (doubleEncodingDisabled) {
+          assertEquals(historyToken2, getCurrentLocationHash());
+        } else {
+          assertEquals(historyToken2_encoded, getCurrentLocationHash());
+        }
+
         finishTest();
       }
     };
@@ -371,7 +377,11 @@ public class HistoryTest extends GWTTestCase {
 
       @Override
       public void onValueChange(ValueChangeEvent<String> event) {
-        assertEquals(shouldBeEncodedAs, getCurrentLocationHash());
+        if (doubleEncodingDisabled) {
+          assertEquals(shouldBeEncoded, getCurrentLocationHash());
+        } else {
+          assertEquals(shouldBeEncodedAs, getCurrentLocationHash());
+        }
         assertEquals(shouldBeEncoded, event.getValue());
         finishTest();
       }

@@ -354,7 +354,12 @@ public class HistoryTest extends GWTTestCase {
       @Override
       public void run() {
         // Make sure that we have updated the URL properly.
-        assertEquals(historyToken2_encoded, getCurrentLocationHash());
+        if (isDoubleEncodingEnabled()) {
+          assertEquals(historyToken2_encoded, getCurrentLocationHash());
+        } else {
+          assertEquals(historyToken2, getCurrentLocationHash());
+        }
+
         finishTest();
       }
     };
@@ -371,7 +376,11 @@ public class HistoryTest extends GWTTestCase {
 
       @Override
       public void onValueChange(ValueChangeEvent<String> event) {
-        assertEquals(shouldBeEncodedAs, getCurrentLocationHash());
+        if (isDoubleEncodingEnabled()) {
+          assertEquals(shouldBeEncodedAs, getCurrentLocationHash());
+        } else {
+          assertEquals(shouldBeEncoded, getCurrentLocationHash());
+        }
         assertEquals(shouldBeEncoded, event.getValue());
         finishTest();
       }
@@ -507,4 +516,8 @@ public class HistoryTest extends GWTTestCase {
     return $wnd.navigator.userAgent.toLowerCase().indexOf('msie') != -1 &&
         ($doc.documentMode == 8 || $doc.documentMode == 9);
   }-*/;
+
+  protected boolean isDoubleEncodingEnabled() {
+    return true;
+  }
 }

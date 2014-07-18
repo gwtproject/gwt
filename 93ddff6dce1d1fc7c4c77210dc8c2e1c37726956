@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39ee4c35_eed30f40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1926,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-18T23:13:37Z",
+      "side": 1,
+      "message": "we talked offline about a couple of changes here: interfaces can have clinit()s and may need to be collected here, also please organize this code a tad (maybe extract a method and add a nice description of the nature of the set it is calculating)",
+      "revId": "93ddff6dce1d1fc7c4c77210dc8c2e1c37726956",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39ee4c35_0e42b354",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-18T23:13:37Z",
+      "side": 1,
+      "message": "\"Discard\"",
+      "range": {
+        "startLine": 1938,
+        "startChar": 23,
+        "endLine": 1938,
+        "endChar": 29
+      },
+      "revId": "93ddff6dce1d1fc7c4c77210dc8c2e1c37726956",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39ee4c35_aeb0e713",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1966,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-18T23:13:37Z",
+      "side": 1,
+      "message": "please document why JSOs with a clinit should be included, since it was something i didn\u0027t understand and you had to explain to me",
+      "range": {
+        "startLine": 1965,
+        "startChar": 23,
+        "endLine": 1966,
+        "endChar": 34
+      },
+      "revId": "93ddff6dce1d1fc7c4c77210dc8c2e1c37726956",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

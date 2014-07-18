@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97e1025_8c393cee",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-18T06:10:43Z",
+      "side": 1,
+      "message": "nit: Can you put more explanation into the comment here? I didn\u0027t understand it as a reader?",
+      "revId": "5436a5a95c48074c95feca72370a267447b76098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

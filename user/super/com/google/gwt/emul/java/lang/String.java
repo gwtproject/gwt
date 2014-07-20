@@ -252,13 +252,6 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   /**
-   * @skip
-   */
-  static String[] __createArray(int numElements) {
-    return new String[numElements];
-  }
-
-  /**
    * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
    * dollar signs "$$", and removes all other lone backslashes, which serve as
    * escapes in Java but are passed through literally in JavaScript.
@@ -918,19 +911,18 @@ public final class String implements Comparable<String>, CharSequence,
       if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
         out[count] = trail;
         break;
-      } else {
-        out[count] = trail.substring(0, matchObj.index);
-        trail = trail.substring(matchObj.index + matchObj[0].length, trail.length);
-        // Force the compiled pattern to reset internal state
-        compiled.lastIndex = 0;
-        // Only one zero length match per character to ensure termination
-        if (lastTrail == trail) {
-          out[count] = trail.substring(0, 1);
-          trail = trail.substring(1);
-        }
-        lastTrail = trail;
-        count++;
       }
+      out[count] = trail.substring(0, matchObj.index);
+      trail = trail.substring(matchObj.index + matchObj[0].length, trail.length);
+      // Force the compiled pattern to reset internal state
+      compiled.lastIndex = 0;
+      // Only one zero length match per character to ensure termination
+      if (lastTrail == trail) {
+        out[count] = trail.substring(0, 1);
+        trail = trail.substring(1);
+      }
+      lastTrail = trail;
+      count++;
     }
     // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
     // however, if the input string is empty, the output should consist of a
@@ -944,11 +936,7 @@ public final class String implements Comparable<String>, CharSequence,
         out.splice(lastNonEmpty, out.length - lastNonEmpty);
       }
     }
-    var jr = @java.lang.String::__createArray(I)(out.length);
-    for ( var i = 0; i < out.length; ++i) {
-      jr[i] = out[i];
-    }
-    return jr;
+    return out;
   }-*/;
 
   public boolean startsWith(String prefix) {

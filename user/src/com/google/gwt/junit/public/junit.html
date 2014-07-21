@@ -19,8 +19,6 @@ the License.
 <meta charset="utf-8">
 <meta name='gwt:onLoadErrorFn' content='junitOnLoadErrorFn'>
 <meta name='gwt:onPropertyErrorFn' content='junitOnPropertyErrorFn'>
-</head>
-<body>
 <script>
 function junitOnLoadErrorFn(moduleName, e) {
   junitLaunchError('Failed to load module ' + moduleName + ': ' + e);
@@ -59,9 +57,12 @@ function loadSelectionScript() {
   moduleName = moduleName.substr(pos + 1);
   var script = document.createElement('script');
   script.src = encodeURIComponent(moduleName) + '.nocache.js';
-  document.body.appendChild(script);
+  // IE8 does not have document.head
+  (document.head || document.getElementsByTagName("head")[0]).appendChild(script);
 }
 loadSelectionScript();
 </script>
+</head>
+<body>
 </body>
 </html>

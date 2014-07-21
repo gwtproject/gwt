@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 import java.io.Serializable;
 
 /**
@@ -1160,6 +1162,15 @@ public class Collections {
   public static <T> SortedSet<T> unmodifiableSortedSet(
       SortedSet<? extends T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  static <T> int hashCode(Collection<T> collection, int k) {
+    int hashCode = 0;
+    for (T e : collection) {
+      hashCode = k * hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
+    }
+    return hashCode;
   }
 
   /**

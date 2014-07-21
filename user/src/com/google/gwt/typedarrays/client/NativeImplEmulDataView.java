@@ -21,11 +21,10 @@ package com.google.gwt.typedarrays.client;
  * {@link com.google.gwt.typedarrays.shared.Uint8ClampedArray} but not
  * {@link com.google.gwt.typedarrays.shared.DataView}.
  * <p>
- * Current versions of FireFox are such browsers.
  */
+@Deprecated
 public class NativeImplEmulDataView extends NativeImpl {
   // TODO: can we override runtimeSupportCheck to return true?
-  // FF4+ supports typed arrays (except DataView).
 
   @Override
   protected boolean checkDataViewSupport() {

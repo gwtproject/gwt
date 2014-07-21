@@ -26,22 +26,21 @@
   <replace-with class="com.google.gwt.typedarrays.client.NoSupportImpl">
     <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
     <any>
-      <when-property-is name="user.agent" value="ie6"/>
       <when-property-is name="user.agent" value="ie8"/>
       <when-property-is name="user.agent" value="ie9"/>
-      <when-property-is name="user.agent" value="ie10"/>
     </any>
   </replace-with>
 
-  <!-- WebKit support DataView but not Uint8ClampedArray -->
+  <!-- Older versions of WebKit, IE 10 support DataView but not Uint8ClampedArray -->
   <replace-with class="com.google.gwt.typedarrays.client.NativeImplEmulClamped">
     <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
     <any>
       <when-property-is name="user.agent" value="safari"/>
+      <when-property-is name="user.agent" value="ie10"/>
     </any>
   </replace-with>
 
-  <!-- FireFox supports Uint8ClampedArray but not DataView -->
+  <!-- Older versions of FireFox support Uint8ClampedArray but not DataView -->
   <replace-with class="com.google.gwt.typedarrays.client.NativeImplEmulDataView">
     <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
     <any>
@@ -49,11 +48,9 @@
     </any>
   </replace-with>
 
-  <!-- IE10 or future FF/WebKit may go here -->
+  <!-- IE11 and current FF/WebKit are already here -->
   <replace-with class="com.google.gwt.typedarrays.client.NativeImplFull">
     <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
-    <any>
-    </any>
   </replace-with>
 
   <!-- TODO: other optimized versions? -->

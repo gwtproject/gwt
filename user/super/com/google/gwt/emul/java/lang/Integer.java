@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import com.google.gwt.core.client.impl.Coercions;
+
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
@@ -198,15 +200,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static String toBinaryString(int value) {
-    return toRadixString(toUnsignedInt32(value), 2);
+    return toRadixString(Coercions.toUnsignedInt32(value), 2);
   }
 
   public static String toHexString(int value) {
-    return toRadixString(toUnsignedInt32(value), 16);
+    return toRadixString(Coercions.toUnsignedInt32(value), 16);
   }
 
   public static String toOctalString(int value) {
-    return toRadixString(toUnsignedInt32(value), 8);
+    return toRadixString(Coercions.toUnsignedInt32(value), 8);
   }
 
   public static String toString(int value) {
@@ -243,10 +245,6 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   private static native String toRadixString(int value, int radix) /*-{
     return value.toString(radix);
-  }-*/;
-
-  private static native int toUnsignedInt32(int value) /*-{
-    return value >>> 0;
   }-*/;
 
   private final transient int value;

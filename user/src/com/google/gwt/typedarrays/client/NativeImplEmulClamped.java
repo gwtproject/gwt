@@ -20,7 +20,7 @@ package com.google.gwt.typedarrays.client;
  * implementations of {@link com.google.gwt.typedarrays.shared.DataView} but not
  * {@link com.google.gwt.typedarrays.shared.Uint8ClampedArray}.
  * <p>
- * Current versions of WebKit and Opera are such browsers.
+ * Older versions of WebKit, Opera and IE 10 are such browsers.
  */
 public class NativeImplEmulClamped extends NativeImpl {
   // TODO: can we override runtimeSupportCheck to return true?
@@ -30,10 +30,5 @@ public class NativeImplEmulClamped extends NativeImpl {
   @Override
   protected boolean checkDataViewSupport() {
     return true;
-  }
-
-  @Override
-  protected boolean checkUint8ClampedArraySupport() {
-    return false;
   }
 }

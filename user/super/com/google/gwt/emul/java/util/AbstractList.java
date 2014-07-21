@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import com.google.gwt.core.client.impl.Coercions;
+
 /**
  * Skeletal implementation of the List interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractList.html">[Sun
@@ -257,12 +259,10 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
   @Override
   public int hashCode() {
     int k = 1;
-    final int coeff = 31;
     Iterator<E> iter = iterator();
     while (iter.hasNext()) {
       E obj = iter.next();
-      k = coeff * k + (obj == null ? 0 : obj.hashCode());
-      k = ~~k;
+      k = Coercions.toInt(31 * k + Objects.hashCode(obj));
     }
     return k;
   }

@@ -260,6 +260,14 @@ public final class Integer extends Number implements Comparable<Integer> {
     return Integer.valueOf(Integer.parseInt(s, radix));
   }
 
+  /**
+   * Coerce to 32 bits.
+   * Trick related to JS and lack of integer rollover.
+   */
+  public static native int __coerce(int value) /*-{
+    return value | 0;
+  }-*/;
+
   private static String toPowerOfTwoString(int value, int shift) {
     final int bufSize = 32 / shift;
     int bitMask = (1 << shift) - 1;

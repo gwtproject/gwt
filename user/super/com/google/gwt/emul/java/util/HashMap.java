@@ -17,6 +17,8 @@ package java.util;
 
 import java.io.Serializable;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 /**
  * Implementation of Map interface based on a hash table. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/HashMap.html">[Sun
@@ -69,6 +71,6 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
   @Override
   int getHashCode(Object key) {
     // Coerce to int -- our classes all do this, but a user-written class might not.
-    return ~~key.hashCode();
+    return ensureInt(key.hashCode());
   }
 }

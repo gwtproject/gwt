@@ -16,12 +16,13 @@ the License.
 -->
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
 <meta name='gwt:onLoadErrorFn' content='junitOnLoadErrorFn'>
 <meta name='gwt:onPropertyErrorFn' content='junitOnPropertyErrorFn'>
 </head>
 <body>
-<script>
+<script language='javascript'>
+<!--
 function junitOnLoadErrorFn(moduleName, e) {
   junitLaunchError('Failed to load module ' + moduleName + ': ' + e);
 }
@@ -42,7 +43,7 @@ function junitLaunchError(msg) {
 }
 
 function junitError(type, msg) {
-  var xmlHttpRequest = new XMLHttpRequest();
+  var xmlHttpRequest = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
   xmlHttpRequest.open('POST', 'junithost/error' + type, true);
   xmlHttpRequest.setRequestHeader('Content-Type', 'text/x-gwt-rpc; charset=utf-8');
   xmlHttpRequest.send(msg);
@@ -57,11 +58,16 @@ function loadSelectionScript() {
   moduleName = moduleName.substr(0, pos);
   pos = moduleName.lastIndexOf('/');
   moduleName = moduleName.substr(pos + 1);
-  var script = document.createElement('script');
-  script.src = encodeURIComponent(moduleName) + '.nocache.js';
-  document.body.appendChild(script);
+  document.write('<script language="javascript" src="' + encodeURIComponent(moduleName) + '.nocache.js"><\/script>');
 }
 loadSelectionScript();
+-->
 </script>
+<noscript>
+  <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+    Your web browser must have JavaScript enabled
+    in order for this application to display correctly.
+  </div>
+</noscript>
 </body>
 </html>

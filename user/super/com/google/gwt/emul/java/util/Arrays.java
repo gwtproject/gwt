@@ -16,6 +16,8 @@
 
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.UnsafeNativeLong;
 import com.google.gwt.lang.Array;
@@ -553,14 +555,12 @@ public class Arrays {
         hash = hashCode((float[]) obj);
       } else if (obj instanceof double[]) {
         hash = hashCode((double[]) obj);
-      } else if (obj != null) {
-        hash = obj.hashCode();
       } else {
-        hash = 0;
+        hash = Objects.hashCode(obj);
       }
 
-      // nasty trick related to JS and lack of integer rollover
-      hashCode = (31 * hashCode + hash) | 0;
+      hashCode = 31 * hashCode + hash;
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -866,7 +866,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + (Boolean.valueOf(a[i]).hashCode())) | 0;
+      hashCode = 31 * hashCode + (Boolean.valueOf(a[i]).hashCode());
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -878,7 +879,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Byte.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Byte.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -890,7 +892,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Character.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Character.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -902,7 +905,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Double.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Double.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -914,7 +918,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Float.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Float.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -926,7 +931,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Integer.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Integer.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -938,7 +944,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Long.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Long.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -950,7 +957,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (Object e : a) {
-      hashCode = (31 * hashCode + (e == null ? 0 : e.hashCode())) | 0;
+      hashCode = 31 * hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -962,7 +970,8 @@ public class Arrays {
     }
     int hashCode = 1;
     for (int i = 0, n = a.length; i < n; ++i) {
-      hashCode = (31 * hashCode + Short.hashCode(a[i])) | 0;
+      hashCode = 31 * hashCode + Short.hashCode(a[i]);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;

@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 /**
  * Skeletal implementation of the Set interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractSet.html">[Sun
@@ -46,13 +48,9 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements
   public int hashCode() {
     int hashCode = 0;
     for (Iterator<E> iter = iterator(); iter.hasNext();) {
-      // Sets can have null members
-      E next = iter.next();
-      if (next != null) {
-        hashCode += next.hashCode();
-        // handle int overflow by coercing to int
-        hashCode = ~~hashCode;
-      }
+      E e = iter.next();
+      hashCode = hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }

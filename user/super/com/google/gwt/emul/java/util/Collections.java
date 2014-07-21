@@ -17,6 +17,8 @@ package java.util;
 
 import java.io.Serializable;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 /**
  * Utility methods that operate on collections. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collections.html">[Sun
@@ -1160,6 +1162,15 @@ public class Collections {
   public static <T> SortedSet<T> unmodifiableSortedSet(
       SortedSet<? extends T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  static <T> int hashCode(Collection<T> collection, int k) {
+    int hashCode = 0;
+    for (T e : collection) {
+      hashCode = k * hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
+    }
+    return hashCode;
   }
 
   /**

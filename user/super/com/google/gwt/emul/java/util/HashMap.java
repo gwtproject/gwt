@@ -28,6 +28,10 @@ import java.io.Serializable;
 public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
     Serializable {
 
+  private static native int coerce(int hash) /*-{
+    return hash | 0;
+  }-*/;
+
   /**
    * Ensures that RPC will consider type parameter K to be exposed. It will be
    * pruned by dead code elimination.
@@ -69,6 +73,6 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
   @Override
   int getHashCode(Object key) {
     // Coerce to int -- our classes all do this, but a user-written class might not.
-    return ~~key.hashCode();
+    return coerce(key.hashCode());
   }
 }

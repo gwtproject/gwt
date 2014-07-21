@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 /**
  * Skeletal implementation of the Map interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractMap.html">[Sun
@@ -162,8 +164,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   public int hashCode() {
     int hashCode = 0;
     for (Entry<K, V> entry : entrySet()) {
-      hashCode += entry.hashCode();
-      hashCode = ~~hashCode;
+      hashCode = ensureInt(hashCode + entry.hashCode());
     }
     return hashCode;
   }

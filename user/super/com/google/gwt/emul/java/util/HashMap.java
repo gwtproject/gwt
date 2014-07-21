@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import com.google.gwt.core.client.impl.Coercion;
+
 import java.io.Serializable;
 
 /**
@@ -69,6 +71,6 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
   @Override
   int getHashCode(Object key) {
     // Coerce to int -- our classes all do this, but a user-written class might not.
-    return ~~key.hashCode();
+    return Coercion.coerce(key.hashCode());
   }
 }

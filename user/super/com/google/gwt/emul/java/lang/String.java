@@ -23,6 +23,7 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.Coercion;
 import com.google.gwt.core.client.impl.DoNotInline;
 
 import java.io.Serializable;
@@ -138,16 +139,13 @@ public final class String implements Comparable<String>, CharSequence,
       int nBatch = n - 4;
       int i = 0;
 
-      // Process batches of 4 characters at a time
+      // Process batches of 4 characters at a time and add them to the hash coercing to 32 bits
       while (i < nBatch) {
-        // Add the next 4 characters to the hash.
-        // After every 4 characters, we force the result to fit into 32 bits
-        // by doing a bitwise operation on it.
-        hashCode = (str.charAt(i + 3)
+        hashCode = Coercion.coerce(str.charAt(i + 3)
             + 31 * (str.charAt(i + 2)
             + 31 * (str.charAt(i + 1)
             + 31 * (str.charAt(i)
-            + 31 * hashCode)))) | 0;
+            + 31 * hashCode))));
 
         i += 4;
       }
@@ -157,9 +155,8 @@ public final class String implements Comparable<String>, CharSequence,
         hashCode = hashCode * 31 + str.charAt(i++);
       }
 
-      // TODO: make a JSNI call in case JDT gets smart about removing this
       // Do a final fitting to 32 bits
-      return hashCode | 0;
+      return Coercion.coerce(hashCode);
     }
 
     static void increment() {

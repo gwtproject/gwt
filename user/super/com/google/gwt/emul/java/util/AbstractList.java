@@ -256,15 +256,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public int hashCode() {
-    int k = 1;
-    final int coeff = 31;
-    Iterator<E> iter = iterator();
-    while (iter.hasNext()) {
-      E obj = iter.next();
-      k = coeff * k + (obj == null ? 0 : obj.hashCode());
-      k = ~~k;
-    }
-    return k;
+    return Collections.hashCode(this, 31);
   }
 
   public int indexOf(Object toFind) {

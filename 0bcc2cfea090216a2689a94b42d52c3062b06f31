@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d91530f5_d475f1dc",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerNoopDeprecatedFlag.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-22T02:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91530f5_74da1d24",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 45
+      },
+      "revId": "0bcc2cfea090216a2689a94b42d52c3062b06f31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d91530f5_f49bcd60",
         "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerNoopDeprecatedFlag.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-07-22T01:28:30Z",
       "side": 1,
       "message": "why is this called \"otherTags\"",
+      "range": {
+        "startLine": 26,
+        "startChar": 79,
+        "endLine": 26,
+        "endChar": 88
+      },
+      "revId": "0bcc2cfea090216a2689a94b42d52c3062b06f31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91530f5_147009e9",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerNoopDeprecatedFlag.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-22T02:20:26Z",
+      "side": 1,
+      "message": "Done. Left-over from an earlier version.",
+      "parentUuid": "d91530f5_f49bcd60",
       "range": {
         "startLine": 26,
         "startChar": 79,

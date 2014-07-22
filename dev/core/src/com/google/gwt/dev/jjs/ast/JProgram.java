@@ -390,6 +390,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   public void addEntryMethod(JMethod entryPoint) {
     assert !entryMethods.contains(entryPoint);
     entryMethods.add(entryPoint);
+    indexedMethods.put(entryPoint.getEnclosingType().getShortName() + '.' + entryPoint.getName(),
+        entryPoint);
   }
 
   /**

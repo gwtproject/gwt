@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "39bc8c31_be1125be",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-22T21:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39bc8c31_9e2541cb",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39bc8c31_1e0b1148",
         "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2014-07-22T20:55:17Z",
       "side": 1,
       "message": "End with punctuation. We should put the warning that this is for only internal SDK usages and can disappear/change anytime in the future.",
+      "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39bc8c31_beb80566",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-22T21:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39bc8c31_1e0b1148",
       "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "39bc8c31_dec7c9d9",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-22T21:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39bc8c31_bed2c56e",
+      "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39bc8c31_2335220f",
         "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
         "patchSetId": 2
@@ -70,6 +130,24 @@
       "writtenOn": "2014-07-22T20:55:17Z",
       "side": 1,
       "message": "What about having a mandatory attribute for documenting the reason this shouldn\u0027t be inlined?\n\ne.g. @DoNotInline(\"Shouldn\u0027t be inlined so that it always appears in the stack trace\")",
+      "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39bc8c31_be8e45b1",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-22T21:31:06Z",
+      "side": 1,
+      "message": "I personally don\u0027t like making the documentation a mandatory part of the annotation. But I leave it up to you.",
+      "parentUuid": "39bc8c31_2335220f",
       "revId": "06e4c266a86e61c1d1c647d8c7182eb5917d6055",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

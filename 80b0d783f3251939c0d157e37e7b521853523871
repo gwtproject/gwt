@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39bc8c31_58393159",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-22T19:49:12Z",
+      "side": 1,
+      "message": "This has the potential for clashes. Maybe we should extend the concept of indexed types to use fullnames and signatures.",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 393,
+        "endChar": 4
+      },
+      "revId": "80b0d783f3251939c0d157e37e7b521853523871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

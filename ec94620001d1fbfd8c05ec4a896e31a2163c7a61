@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59d06088_8b2511cb",
+        "filename": "dev/core/src/com/google/gwt/dev/js/DuplicateExecuteOnceRemover.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-22T23:38:43Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ec94620001d1fbfd8c05ec4a896e31a2163c7a61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

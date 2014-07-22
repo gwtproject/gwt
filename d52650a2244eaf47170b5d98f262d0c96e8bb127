@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f99d94d4_8d7a41cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-22T19:40:18Z",
+      "side": 1,
+      "message": "this change was surprising to me. we talked about it and i now understand why this makes sense. i\u0027m just commenting as a reminder to you to do the change you suggested (that will make this more obviously correct) to do as a result of our conversation.",
+      "range": {
+        "startLine": 370,
+        "startChar": 43,
+        "endLine": 370,
+        "endChar": 73
+      },
+      "revId": "d52650a2244eaf47170b5d98f262d0c96e8bb127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f99d94d4_2dad0d1f",
+        "filename": "dev/core/super/com/google/gwt/core/client/impl/DoNotInline.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-22T19:40:18Z",
+      "side": 1,
+      "message": "might as well be consistent about whitespace",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "d52650a2244eaf47170b5d98f262d0c96e8bb127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f99d94d4_6dcef5ee",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-22T19:40:18Z",
+      "side": 1,
+      "message": "with the addition of this annotation it is now maybe more proper to just say here \"Inlining is prevented on this very hot method to avoid a subtantial increase in {@link JsInliner} execution time.",
+      "range": {
+        "startLine": 336,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 20
+      },
+      "revId": "d52650a2244eaf47170b5d98f262d0c96e8bb127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

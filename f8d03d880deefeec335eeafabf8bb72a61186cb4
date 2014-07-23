@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39bc8c31_8ceeb61e",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-23T03:20:52Z",
+      "side": 1,
+      "message": "what about having the signature as \n\n  private greater(K a, K b, boolean orEqual)\n  private smaller(K a, K b, boolean orEqual)\n\nAlso I think it is good keep these two function together.",
+      "revId": "f8d03d880deefeec335eeafabf8bb72a61186cb4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

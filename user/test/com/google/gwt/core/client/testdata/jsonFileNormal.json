@@ -1,0 +1,14 @@
+{
+  "something": {
+      "title": "some title",
+      "data": [{
+      "name": "some name",
+      "with-quoted-string": "There is a double quote \" here",
+      "some array": [
+        "element0",
+        "element1"
+      ]
+    }]
+  },
+  "some-number": 1
+}

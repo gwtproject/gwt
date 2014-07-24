@@ -77,26 +77,115 @@ public class JsonUtils {
       return @JsonUtils::throwIllegalArgumentException(*)("Error parsing JSON: " + e, json);
     }
   }-*/;
-  
+
   /**
    * Returns true if the given JSON string may be safely evaluated by {@code
-   * eval()} without undersired side effects or security risks. Note that a true
+   * eval()} without undesired side effects or security risks. Note that a true
    * result from this method does not guarantee that the input string is valid
    * JSON.  This method does not consider the contents of quoted strings; it
    * may still be necessary to perform escaping prior to evaluation for correct
    * results.
-   * 
-   * <p> The technique used is taken from <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>.
+   *
+   * <p> The technique used is taken from <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>,
+   * but instead of using a regular expression to remove all the quoted string, we use a custom
+   * finite state machine that does the same without running into stack overflow for very large json
+   * inputs.
    */
-  public static native boolean safeToEval(String text) /*-{
-    // Remove quoted strings and disallow anything except:
-    //
-    // 1) symbols and brackets ,:{}[]
-    // 2) numbers: digits 0-9, ., -, +, e, and E
-    // 3) literal values: 'null', 'true' and 'false' = [aeflnr-u]
-    // 4) whitespace: ' ', '\n', '\r', and '\t'
-    return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(text.replace(/"(\\.|[^"\\])*"/g, '')));
+  public static boolean safeToEval(String text) {
+    return internalSafeToEval(removeAllQuotedText(text));
+  }
+  
+  /**
+   * Assumes that the input had all its quoted text removed and disallow anything except
+   * for what is mentioned below.
+   * <ul>
+   * <li>symbols and brackets ,:{}[]
+   * <li>numbers: digits 0-9, ., -, +, e, and E
+   * <li>literal values: 'null', 'true' and 'false' = [aeflnr-u]
+   * <li>whitespace: ' ', '\n', '\r', and '\t'
+   * </ul>
+   */
+  private static native boolean internalSafeToEval(String inputWithoutQuotedText) /*-{
+    return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(inputWithoutQuotedText));
   }-*/;
+
+  /**
+   * Enum for handling the states inside {@link JsonUtils#removeAllQuotedText(String)} method.
+   */
+  private enum State {
+    OUT_OF_STRING, IN_STRING, IN_STRING_ESCAPED_CHAR;
+  }
+
+  /**
+   * This is equivalent to {@code input.replace(/"(\\.|[^"\\])*"/g, '')} but without throwing the
+   * "JavaScriptException: (RangeError) : Maximum call stack size exceeded" with very large json
+   * input.
+   * <p>
+   * This method should be private, but it is package private so it can be visible from tests.
+   */
+  static String removeAllQuotedText(String input) {
+    State state = State.OUT_OF_STRING;
+    StringBuilder sb = new StringBuilder();
+    int lastUnmatchedOpenStringIndex = -1;
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      switch (c) {
+        case '"': {
+          switch (state) {
+            case OUT_OF_STRING:
+              state = State.IN_STRING;
+              lastUnmatchedOpenStringIndex = i;
+              break;
+            case IN_STRING:
+              state = State.OUT_OF_STRING;
+              lastUnmatchedOpenStringIndex = -1;
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+        case '\\': {
+          switch (state) {
+            case OUT_OF_STRING:
+              sb.append(c);
+              break;
+            case IN_STRING:
+              state = State.IN_STRING_ESCAPED_CHAR;
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+        default: {
+          switch (state) {
+            case OUT_OF_STRING:
+              sb.append(c);
+              break;
+            case IN_STRING:
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+      }
+    }
+    if (state != State.OUT_OF_STRING) {
+      if (lastUnmatchedOpenStringIndex == -1) {
+        throw new IllegalStateException(
+            "lastUnmatchedOpenStringIndex should have been != -1: " + lastUnmatchedOpenStringIndex);
+      }
+      for (int j = lastUnmatchedOpenStringIndex; j < input.length(); j++) {
+        sb.append(input.charAt(j));
+      }
+    }
+    return sb.toString();
+  }
   
   /**
    * Evaluates a JSON expression using {@code eval()}. This method does not

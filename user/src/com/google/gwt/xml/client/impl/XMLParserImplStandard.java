@@ -35,25 +35,10 @@ class XMLParserImplStandard extends XMLParserImpl {
   }-*/;
 
   @Override
-  protected native JavaScriptObject getElementByIdImpl(
-      JavaScriptObject document, String id) /*-{
-    return document.getElementById(id);
-  }-*/;
-
-  @Override
   protected native JavaScriptObject getElementsByTagNameImpl(
       JavaScriptObject o, String tagName) /*-{
     return o.getElementsByTagNameNS("*",tagName);
   }-*/;
-
-  @Override
-  protected String getPrefixImpl(JavaScriptObject jsObject) {
-    String fullName = XMLParserImpl.getNodeName(jsObject);
-    if (fullName != null && fullName.indexOf(":") != -1) {
-      return fullName.split(":", 2)[0];
-    }
-    return null;
-  }
 
   @Override
   protected native JavaScriptObject importNodeImpl(JavaScriptObject jsObject,
@@ -74,11 +59,6 @@ class XMLParserImplStandard extends XMLParserImpl {
     return result;
   }-*/;
  
-  @Override
-  protected String toStringImpl(ProcessingInstructionImpl node) {
-    return toStringImpl((NodeImpl) node);
-  }
-  
   @Override
   protected native String toStringImpl(NodeImpl node) /*-{
     var jsNode = node.@com.google.gwt.xml.client.impl.DOMItem::getJsObject()();

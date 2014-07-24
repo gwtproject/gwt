@@ -18,9 +18,9 @@ package com.google.gwt.xml.client.impl;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * This class is the IE6 implementation of the XMLParser interface.
+ * This class is the IE8 implementation of the XMLParser interface.
  */
-class XMLParserImplIE6 extends XMLParserImpl {
+class XMLParserImplIE8 extends XMLParserImpl {
 
   /**
    * Called from JSNI to select a DOM document; this is necessary due to
@@ -34,12 +34,12 @@ class XMLParserImplIE6 extends XMLParserImpl {
     try { return new ActiveXObject("Microsoft.XmlDom"); } catch (e) { }
     try { return new ActiveXObject("Microsoft.DOMDocument"); } catch (e) { }
   
-    throw new Error("XMLParserImplIE6.createDocumentImpl: Could not find appropriate version of DOMDocument.");
+    throw new Error("XMLParserImplIE8.createDocumentImpl: Could not find appropriate version of DOMDocument.");
   }-*/;
 
   @Override
   protected native JavaScriptObject createDocumentImpl() /*-{
-    var doc = @com.google.gwt.xml.client.impl.XMLParserImplIE6::selectDOMDocumentVersion()();
+    var doc = @com.google.gwt.xml.client.impl.XMLParserImplIE8::selectDOMDocumentVersion()();
     // preserveWhiteSpace is set to true here to prevent IE from throwing away
     // text nodes that consist of only whitespace characters. This makes it
     // act more like other browsers.
@@ -50,34 +50,23 @@ class XMLParserImplIE6 extends XMLParserImpl {
   }-*/;
 
   @Override
-  protected native JavaScriptObject getElementByIdImpl(JavaScriptObject o,
-      String elementId) /*-{
-    return o.nodeFromID(elementId);
-  }-*/;
-
-  @Override
   protected native JavaScriptObject getElementsByTagNameImpl(JavaScriptObject o,
       String tagName) /*-{
     return o.selectNodes(".//*[local-name()='" + tagName + "']");
   }-*/;
 
   @Override
-  protected native String getPrefixImpl(JavaScriptObject jsObject) /*-{
-    return jsObject.prefix;
-  }-*/;
-
-  @Override
   protected native JavaScriptObject importNodeImpl(JavaScriptObject o,
-      JavaScriptObject importedNode, boolean deep) /*-{
-    // IE6 does not seem to need or want nodes to be imported
+  JavaScriptObject importedNode, boolean deep) /*-{
+    // IE8/9 don't seem to need or want nodes to be imported
     // as appends from different docs work perfectly
     // and this method is not supplied until MSXML5.0
     return importedNode;
   }-*/;
-  
+
   @Override
   protected native JavaScriptObject parseImpl(String contents) /*-{
-    var doc = this.@com.google.gwt.xml.client.impl.XMLParserImplIE6::createDocumentImpl()();
+    var doc = this.@com.google.gwt.xml.client.impl.XMLParserImplIE8::createDocumentImpl()();
     if(!doc.loadXML(contents)) {
       var err = doc.parseError;
       throw new Error("line " + err.line + ", char " + err.linepos + ":" + err.reason);
@@ -86,11 +75,6 @@ class XMLParserImplIE6 extends XMLParserImpl {
     }
   }-*/;
 
-  @Override
-  protected String toStringImpl(ProcessingInstructionImpl node) {
-    return toStringImpl((NodeImpl) node);
-  }
-  
   @Override
   protected native String toStringImpl(NodeImpl node) /*-{
     var jsNode = node.@com.google.gwt.xml.client.impl.DOMItem::getJsObject()();

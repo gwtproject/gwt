@@ -105,9 +105,9 @@ public abstract class XMLParserImpl {
     return o.documentElement;
   }-*/;
 
-  static JavaScriptObject getElementById(JavaScriptObject document, String id) {
-     return impl.getElementByIdImpl(document, id);
-   }
+  static native JavaScriptObject getElementById(JavaScriptObject document, String id) /*-{
+    return document.nodeFromID(id);
+   }-*/;
 
   static JavaScriptObject getElementsByTagName(JavaScriptObject o,
       String tagName) {
@@ -156,7 +156,11 @@ public abstract class XMLParserImpl {
   }-*/;
 
   static String getPrefix(JavaScriptObject jsObject) {
-    return impl.getPrefixImpl(jsObject);
+    String fullName = XMLParserImpl.getNodeName(jsObject);
+    if (fullName != null && fullName.indexOf(":") != -1) {
+      return fullName.split(":", 2)[0];
+    }
+    return null;
   }
 
   static native JavaScriptObject getPreviousSibling(JavaScriptObject o) /*-{
@@ -283,20 +287,17 @@ public abstract class XMLParserImpl {
 
   protected abstract JavaScriptObject createDocumentImpl();
 
-  protected abstract JavaScriptObject getElementByIdImpl(
-      JavaScriptObject document, String id);
-
   protected abstract JavaScriptObject getElementsByTagNameImpl(
       JavaScriptObject o, String tagName);
-
-  protected abstract String getPrefixImpl(JavaScriptObject jsObject);
 
   protected abstract JavaScriptObject importNodeImpl(JavaScriptObject jsObject,
       JavaScriptObject importedNode, boolean deep);
 
   protected abstract JavaScriptObject parseImpl(String contents);
   
-  abstract String toStringImpl(ProcessingInstructionImpl node);
+  String toStringImpl(ProcessingInstructionImpl node) {
+    return toStringImpl((NodeImpl) node);
+  }
   
   abstract String toStringImpl(NodeImpl node);
 }

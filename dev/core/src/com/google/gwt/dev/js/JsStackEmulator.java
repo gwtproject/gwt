@@ -813,7 +813,7 @@ public class JsStackEmulator {
       }
 
       SourceInfo locationToRecord = x.getSourceInfo();
-      if (sameAsLastLocation(locationToRecord)) {
+      if (sameAsLastLocation(locationToRecord) || isInlinedCode(locationToRecord)) {
         return; // no change
       }
 
@@ -848,9 +848,7 @@ public class JsStackEmulator {
      */
     private void setLastLocation(SourceInfo recordedLocation) {
       lastLine = recordedLocation.getStartLine();
-      if (recordFileNames) {
-        lastFile = recordedLocation.getFileName();
-      }
+      lastFile = recordedLocation.getFileName();
     }
 
     /**
@@ -864,6 +862,10 @@ public class JsStackEmulator {
     private boolean sameAsLastLocation(SourceInfo info) {
       return info.getStartLine() == lastLine
           && (!recordFileNames || info.getFileName().equals(lastFile));
+    }
+
+    private boolean isInlinedCode(SourceInfo info) {
+      return !lastFile.equals("") && !info.getFileName().equals(lastFile);
     }
 
     /**

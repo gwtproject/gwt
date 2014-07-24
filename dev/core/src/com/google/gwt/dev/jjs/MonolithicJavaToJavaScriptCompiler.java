@@ -94,9 +94,12 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
         LongCastNormalizer.exec(jprogram);
         LongEmulationNormalizer.exec(jprogram);
         TypeCoercionNormalizer.exec(jprogram);
-        ComputeCastabilityInformation.exec(jprogram, options.isCastCheckingDisabled());
+        // If trivial casts are pruned then one can use smaller runtime castmaps.
+        ComputeCastabilityInformation.exec(jprogram, options.isCastCheckingDisabled(),
+            !shouldOptimize()  /* recordTrivialCasts */);
         ComputeInstantiatedJsoInterfaces.exec(jprogram);
-        ImplementCastsAndTypeChecks.exec(jprogram, options.isCastCheckingDisabled());
+        ImplementCastsAndTypeChecks.exec(jprogram, options.isCastCheckingDisabled(),
+            shouldOptimize() /* pruneTrivialCasts */);
         ArrayNormalizer.exec(jprogram, options.isCastCheckingDisabled());
         EqualityNormalizer.exec(jprogram);
         return ResolveRuntimeTypeReferences.IntoIntLiterals.exec(jprogram);
@@ -107,7 +110,7 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
 
     @Override
     protected void optimizeJava() throws InterruptedException {
-      if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+      if (shouldOptimize()) {
         optimizeJavaToFixedPoint();
       }
       RemoveEmptySuperCalls.exec(jprogram);
@@ -115,7 +118,7 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
 
     @Override
     protected void optimizeJs(Set<JsNode> inlinableJsFunctions) throws InterruptedException {
-      if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+      if (shouldOptimize()) {
         optimizeJsLoop(inlinableJsFunctions);
         JsDuplicateCaseFolder.exec(jsProgram);
       }
@@ -125,7 +128,7 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
     protected void postNormalizationOptimizeJava() {
       Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_POST_NORMALIZER_OPTIMIZERS);
       try {
-        if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+        if (shouldOptimize()) {
           RemoveSpecializations.exec(jprogram);
           Pruner.exec(jprogram, false);
         }
@@ -278,5 +281,9 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
       PrecompilationMetricsArtifact precompilationMetrics) throws UnableToCompleteException {
     return new MonolithicPrecompiler(rpo, entryPointTypeNames).precompile(additionalRootTypes,
         singlePermutation, precompilationMetrics);
+  }
+
+  private boolean shouldOptimize() {
+    return options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT;
   }
 }

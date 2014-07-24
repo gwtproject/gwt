@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "d9461042_36b7f5c1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2014-07-24T05:56:08Z",
+      "side": 1,
+      "message": "What I meat is that the only reason that is guarded by recordFileNames is that when recordFilenames is false it is not used.... (only lastLine is used in that case). I does not harm to keep track of lastFile even if not used.\n\nso it is safe to remove the guard.",
+      "parentUuid": "d9461042_f36d7f81",
+      "range": {
+        "startLine": 851,
+        "startChar": 6,
+        "endLine": 851,
+        "endChar": 14
+      },
+      "revId": "50c3f92a8fe8b57d57d1e95fa6408f6767272443",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9461042_81e4e8ef",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
         "patchSetId": 1

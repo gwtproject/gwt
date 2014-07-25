@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9949f84f_192a2c69",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-07-25T20:24:26Z",
+      "side": 1,
+      "message": "I had to add jetty-webapp as well to get this to work, otherwise the org.eclipse WebAppContext was not found.\n\nKind of curious how it worked for you, because DevMode blew up right away for me, before adding jetty-webapp.\n\nEither way, if you add the jetty-webapp, and Thomas doesn\u0027t -1/have further comments, this worked locally for me so I\u0027ll +2.",
+      "revId": "935dcbf651a4bb93f529ca5fc4602b1fc7d1496d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

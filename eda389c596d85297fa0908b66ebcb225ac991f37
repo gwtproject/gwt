@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9949f84f_dc6252e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-07-25T22:45:08Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "eda389c596d85297fa0908b66ebcb225ac991f37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

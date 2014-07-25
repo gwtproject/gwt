@@ -1910,7 +1910,7 @@ public class GenerateJavaScriptAST {
       // Include in the preamble all classes that are reachable for Class.createForClass and
       // Class.createForEnum that are not JSOs nor interfaces.
       SortedSet<JDeclaredType> reachableClasses = computeReachableTypes(
-          "Class.createForClass", "Class.createForEnum", "Class.createForInterface");
+              program.getTypeClassLiteralHolder().getClinitMethod());
 
       Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
       for (JDeclaredType type : reachableClasses) {
@@ -1927,13 +1927,13 @@ public class GenerateJavaScriptAST {
     }
 
     /**
-     * Computes the set of types whose methods or fields are reachable from any of the indexed
-     * method names {@code indexedMethodNames}.
+     * Computes the set of types whose methods or fields are reachable from any of the
+     * {@code methods}.
      */
-    private SortedSet<JDeclaredType> computeReachableTypes(String... indexedMethodNames) {
+    private SortedSet<JDeclaredType> computeReachableTypes(JMethod... methods) {
       ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(program);
-      for (String classLiteralMethodName : indexedMethodNames) {
-        cfa.traverseFrom(program.getIndexedMethod(classLiteralMethodName));
+      for (JMethod method : methods) {
+        cfa.traverseFrom(method);
       }
 
       // Get the list of enclosing classes that were not excluded.

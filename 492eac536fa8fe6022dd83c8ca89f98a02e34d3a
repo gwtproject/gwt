@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96e70794_38dc562f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-25T23:11:19Z",
+      "side": 1,
+      "message": "this function is only called once and that once usage only ever passes one method now. no need for a varargs",
+      "range": {
+        "startLine": 1937,
+        "startChar": 59,
+        "endLine": 1937,
+        "endChar": 77
+      },
+      "revId": "492eac536fa8fe6022dd83c8ca89f98a02e34d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

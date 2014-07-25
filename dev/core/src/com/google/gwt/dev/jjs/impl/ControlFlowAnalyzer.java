@@ -534,17 +534,15 @@ public class ControlFlowAnalyzer {
         return true;
       }
 
-      if (!(type instanceof JArrayType)) {
-        return false;
-      }
-
       /*
        * Hackish: in our own JRE we sometimes create "not quite baked" arrays
        * in JavaScript for expediency.
        */
-      JArrayType arrayType = (JArrayType) type;
-      JType elementType = arrayType.getElementType();
-      return elementType instanceof JPrimitiveType || canBeInstantiatedInJavaScript(elementType);
+      if (type instanceof JArrayType) {
+        return true;
+      }
+
+      return false;
     }
 
     private JMethod getStringValueOfCharMethod() {
@@ -655,8 +653,9 @@ public class ControlFlowAnalyzer {
              * consistent between optimized Java and JS.
              */
             rescue(param);
-            // Strings, JSOs, and JsTypes can all be instantiatd in Javascript
+            // Strings, Arrays, JSOs, and JsTypes can all be instantiatd in Javascript
             if (param.getType() == program.getTypeJavaLangString() ||
+                param.getType() instanceof JArrayType ||
                 program.typeOracle.canBeInstantiatedInJavascript(param.getType())) {
               // Param can be read from external JS if this method is implemented in JS
               // this should really be done in rescueArgumentsIfParametersCanBeRead, but
@@ -719,7 +718,6 @@ public class ControlFlowAnalyzer {
            * We may be able to tighten this to check for @JsExport as well,
            * since if there is no @JsExport, the only way for JS code to get a
            * reference to the interface is by it being constructed in Java
-           * and passed via JSNI into JS, and in that mechanism, the
            * rescue would happen automatically.
            */
         JDeclaredType dtype = (JDeclaredType) type;

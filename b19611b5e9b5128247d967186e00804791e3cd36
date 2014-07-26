@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9949f84f_efce7698",
+        "filename": "user/test/com/google/gwt/core/RunAsyncCoreSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-26T01:29:11Z",
+      "side": 1,
+      "message": "formatting",
+      "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9949f84f_0fd49a27",
+        "filename": "user/test/com/google/gwt/dev/jjs/RunAsyncCompilerSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-26T01:29:11Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9949f84f_cfc9b293",
+        "filename": "user/test/com/google/gwt/dev/jjs/RunAsyncCompilerSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-07-26T01:29:11Z",
+      "side": 1,
+      "message": "nit: you can probably remove this one or add it to the other one.",
+      "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,8 @@
 package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -429,23 +431,21 @@ public class JsoTest extends GWTTestCase {
     } catch (ClassCastException expected) {
     }
   }
-
+  // Array casting semantics differ in dev and webmode. In devmode any array whose leaf type
+  // is a JSO can be cast to any other array whose leaf type is a JSO; not so in web mode.
+  @DoNotRunWith(Platform.Devel)
   @SuppressWarnings("cast")
   public void testCastsArray() {
     JavaScriptObject[][] jso = new JavaScriptObject[0][0];
     assertTrue(jso instanceof JavaScriptObject[][]);
-    assertTrue(jso instanceof Foo[][]);
-    assertTrue(jso instanceof Bar[][]);
+    assertFalse(jso instanceof Foo[][]);
+    assertFalse(jso instanceof Bar[][]);
 
-    Foo[][] foo = (Foo[][]) jso;
-    foo = new Foo[0][0];
-    assertTrue((JavaScriptObject[][]) foo instanceof Bar[][]);
-    Bar[][] bar = (Bar[][]) (JavaScriptObject[][]) new Foo[0][0];
+    Foo[][] foo = new Foo[0][0];
+    assertFalse((JavaScriptObject[][]) foo instanceof Bar[][]);
+    Bar[][] bar = new Bar[0][0];
 
-    bar = (Bar[][]) jso;
-    bar = new Bar[0][0];
-    assertTrue((JavaScriptObject[][]) bar instanceof Foo[][]);
-    foo = (Foo[][]) (JavaScriptObject[][]) new Bar[0][0];
+    assertFalse((JavaScriptObject[][]) bar instanceof Foo[][]);
 
     Object[][] o = new Object[0][0];
     assertFalse(o instanceof JavaScriptObject[][]);

@@ -171,13 +171,6 @@ public class ComputeCastabilityInformation {
         return true;
       }
 
-      if (type instanceof JArrayType && qType instanceof JArrayType) {
-        JArrayType aType = (JArrayType) type;
-        JArrayType aqType = (JArrayType) qType;
-        return (typeOracle.isJavaScriptObject(aType.getLeafType()) &&
-            typeOracle.isJavaScriptObject(aqType.getLeafType()));
-      }
-
       return (typeOracle.isJavaScriptObject(type) &&
           typeOracle.isJavaScriptObject(qType));
     }

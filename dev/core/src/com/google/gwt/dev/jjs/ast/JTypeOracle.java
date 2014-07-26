@@ -803,10 +803,29 @@ public class JTypeOracle implements Serializable {
     if (type instanceof JArrayType) {
       JArrayType arrayType = (JArrayType) type;
       Set<JReferenceType> superHierarchyTypes = Sets.newHashSet();
+
+      // All arrays to cast to Object, Serializable and Cloneable.
       JReferenceType javaLangObjectType = referenceTypesByName.get(standardTypes.javaLangObject);
       // Make sure that the type is really available
       assert javaLangObjectType != null;
       superHierarchyTypes.add(javaLangObjectType);
+      JReferenceType javaIoSerializableType =
+          referenceTypesByName.get(standardTypes.javaIoSerializable);
+      // Make sure that the type is really available
+      assert javaIoSerializableType != null;
+      superHierarchyTypes.add(javaIoSerializableType);
+      JReferenceType javaLangCloneableType =
+          referenceTypesByName.get(standardTypes.javaLangCloneable);
+      // Make sure that the type is really available
+      assert javaLangCloneableType != null;
+      superHierarchyTypes.add(javaLangCloneableType);
+
+      // Foo[][][] can cast to Object[][].
+      for (int lowerDimension = 1; lowerDimension < arrayType.getDims(); lowerDimension++) {
+        superHierarchyTypes.add(
+            arrayTypeCreator.getOrCreateArrayType(javaLangObjectType, lowerDimension));
+      }
+
       if (arrayType.getLeafType() instanceof JPrimitiveType) {
         superHierarchyTypes.add(arrayType);
       } else {
@@ -832,6 +851,13 @@ public class JTypeOracle implements Serializable {
       superHierarchyTypes.addAll(getTypes(implementsMap, type));
     }
     superHierarchyTypes.add(type);
+
+    // Even though the AST representation of interfaces do not claim to inherit from Object, they
+    // can cast to Object.
+    JReferenceType javaLangObjectType = referenceTypesByName.get(standardTypes.javaLangObject);
+    // Make sure that the type is really available
+    assert javaLangObjectType != null;
+    superHierarchyTypes.add(javaLangObjectType);
 
     return superHierarchyTypes;
   }

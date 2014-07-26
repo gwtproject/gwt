@@ -104,6 +104,11 @@ public class JavaResourceBase {
           "  public Throwable getException() { return null; }",
           "}");
 
+  public static final MockJavaResource CLONEABLE =
+      createMockJavaResource("java.lang.Cloneable",
+          "package java.lang;",
+          "public interface Cloneable {}");
+
   public static final MockJavaResource COLLECTION =
       createMockJavaResource("java.util.Collection",
           "package java.util;",

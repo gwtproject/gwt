@@ -98,16 +98,12 @@ class ModuleState {
    * @throws RuntimeException if unable
    */
   File findSourceMap() {
-    String moduleName = recompiler.getModuleName();
-    File symbolMapsDir = current.get().findSymbolMapDir(moduleName);
-    if (symbolMapsDir == null) {
-      throw new RuntimeException("Can't find symbolMaps dir for " + moduleName);
-    }
+    File symbolMapsDir = findSymbolMapDir();
 
     File[] sourceMapFiles = symbolMapsDir.listFiles(new FilenameFilter() {
       @Override
       public boolean accept(File dir, String name) {
-        return name.matches(".*_sourceMap0.json");
+        return name.matches(".*" + SourceHandler.SOURCEMAP_SUFFIX);
       }
     });
 
@@ -124,6 +120,19 @@ class ModuleState {
     }
 
     return new File(symbolMapsDir, sourceMapFiles[0].getName());
+  }
+
+  /**
+   * Returns the symbols map folder for this modulename.
+   * @throws RuntimeException if unable
+   */
+  File findSymbolMapDir() {
+    String moduleName = recompiler.getModuleName();
+    File symbolMapsDir = current.get().findSymbolMapDir(moduleName);
+    if (symbolMapsDir == null) {
+      throw new RuntimeException("Can't find symbolMaps dir for " + moduleName);
+    }
+    return symbolMapsDir;
   }
 
   /**

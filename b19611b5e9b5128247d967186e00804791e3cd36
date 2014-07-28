@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "d6041f04_621fd250",
+        "filename": "user/test/com/google/gwt/dev/jjs/RunAsyncCompilerSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-28T19:05:27Z",
+      "side": 1,
+      "message": "our official GWT formatter is 100 character lines (for both code and comments) and i\u0027ve been formatting copyright header comments like this for quite a while.\n\nit\u0027s a little late to mention that you think it\u0027s wrong.\n\nbut since you\u0027re not around and i don\u0027t want to wait to have a discussion i\u0027m changing this one to 80 character wrapping.",
+      "parentUuid": "9949f84f_0fd49a27",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9949f84f_cfc9b293",
         "filename": "user/test/com/google/gwt/dev/jjs/RunAsyncCompilerSuite.java",
         "patchSetId": 2
@@ -53,6 +77,24 @@
       "writtenOn": "2014-07-26T01:29:11Z",
       "side": 1,
       "message": "nit: you can probably remove this one or add it to the other one.",
+      "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6041f04_42505696",
+        "filename": "user/test/com/google/gwt/dev/jjs/RunAsyncCompilerSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-07-28T19:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9949f84f_cfc9b293",
       "revId": "b19611b5e9b5128247d967186e00804791e3cd36",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

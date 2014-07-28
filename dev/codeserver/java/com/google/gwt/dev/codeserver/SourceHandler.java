@@ -114,7 +114,8 @@ class SourceHandler {
     long startTime = System.currentTimeMillis();
 
     ModuleState moduleState = modules.get(moduleName);
-    File sourceMap = moduleState.findSourceMap();
+    String strongName = request.getParameter("strongName");
+    File sourceMap = moduleState.findSourceMap(strongName);
 
     // Stream the file, substituting the sourceroot variable with the filename.
     // (This is more efficient than parsing the file as JSON.)

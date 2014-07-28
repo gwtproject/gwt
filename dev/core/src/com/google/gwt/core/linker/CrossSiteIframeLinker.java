@@ -710,7 +710,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       // loading the JavaScript.
       // (Note: even if you're using the HTTP header, you still have to set this to an arbitrary
       // value, or Chrome won't enable sourcemaps.)
-      out.print("\n//# sourceMappingURL=" + sourceMapUrl + " ");
+      out.print("\n//# sourceMappingURL=" + sourceMapUrl + "?strongName=" + strongName + " ");
     }
 
     // This magic comment determines the name of the JavaScript fragment in a browser debugger.

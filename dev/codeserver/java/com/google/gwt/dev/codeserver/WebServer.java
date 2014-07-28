@@ -297,7 +297,8 @@ public class WebServer {
     }
 
     if (target.endsWith(".cache.js")) {
-      response.setHeader("X-SourceMap", sourceMapLocationForModule(moduleName));
+      response.setHeader("X-SourceMap", sourceMapLocationForModule(moduleName) + "?strongName="
+          + target.replaceFirst("^.*/(.+).cache.js$", "$1"));
     }
     response.setHeader("Access-Control-Allow-Origin", "*");
     String mimeType = guessMimeType(target);

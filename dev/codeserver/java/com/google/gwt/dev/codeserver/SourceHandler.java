@@ -47,6 +47,8 @@ class SourceHandler {
    */
   static final String SOURCEMAP_PATH = "/sourcemaps/";
 
+  static final String SOURCEMAP_SUFFIX = "_sourceMap0.json";
+
   static final String SOURCEROOT_TEMPLATE_VARIABLE = "$sourceroot_goes_here$";
 
   private Modules modules;
@@ -84,7 +86,7 @@ class SourceHandler {
     } else if (rest.endsWith("/")) {
       sendFileListPage(moduleName, rest, response);
 
-    } else if (rest.equals("gwtSourceMap.json")) {
+    } else if (rest.endsWith(SOURCEMAP_SUFFIX)) {
       sendSourceMap(moduleName, request, response);
 
     } else if (rest.endsWith(".java")) {
@@ -114,7 +116,9 @@ class SourceHandler {
     long startTime = System.currentTimeMillis();
 
     ModuleState moduleState = modules.get(moduleName);
-    File sourceMap = moduleState.findSourceMap();
+
+    String sourceMapFileName = request.getPathInfo().replaceFirst("^.*/", "");
+    File sourceMap = moduleState.findSourceMap(sourceMapFileName);
 
     // Stream the file, substituting the sourceroot variable with the filename.
     // (This is more efficient than parsing the file as JSON.)

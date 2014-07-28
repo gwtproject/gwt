@@ -98,6 +98,18 @@ class ModuleState {
    * @throws RuntimeException if unable
    */
   File findSourceMap() {
+    return findSourceMap(".*" + SourceHandler.SOURCEMAP_SUFFIX);
+  }
+
+  /**
+   * Returns the source map file from the most recent recompile
+   * for the given strongName permutation. If strongName is null
+   * it returns the source map only in the case there is only one
+   * permutation in last recompile.
+   * 
+   * @throws RuntimeException if unable
+   */
+  File findSourceMap(final String sourceMapRegexp) {
     String moduleName = recompiler.getModuleName();
     File symbolMapsDir = current.get().findSymbolMapDir(moduleName);
     if (symbolMapsDir == null) {
@@ -107,7 +119,7 @@ class ModuleState {
     File[] sourceMapFiles = symbolMapsDir.listFiles(new FilenameFilter() {
       @Override
       public boolean accept(File dir, String name) {
-        return name.matches(".*_sourceMap0.json");
+        return name.matches(sourceMapRegexp);
       }
     });
 

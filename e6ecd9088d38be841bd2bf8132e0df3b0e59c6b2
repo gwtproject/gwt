@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6041f04_d091ccff",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-07-28T22:58:28Z",
+      "side": 1,
+      "message": "I think you also need to add CLONEABLE to this list.",
+      "range": {
+        "startLine": 368,
+        "startChar": 33,
+        "endLine": 368,
+        "endChar": 34
+      },
+      "revId": "e6ecd9088d38be841bd2bf8132e0df3b0e59c6b2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

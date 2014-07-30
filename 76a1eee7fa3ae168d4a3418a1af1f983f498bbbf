@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9932d8d1_51d00303",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T10:07:59Z",
+      "side": 1,
+      "message": "Why did you change them back to substr instead of substring?",
+      "revId": "76a1eee7fa3ae168d4a3418a1af1f983f498bbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_31d38f12",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T10:07:59Z",
+      "side": 1,
+      "message": "Why did you change them back to substr instead of substring?",
+      "revId": "76a1eee7fa3ae168d4a3418a1af1f983f498bbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

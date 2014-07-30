@@ -141,8 +141,18 @@
       // IE8 fails when setting content here
       "opacity:0.1;" +
     "}" +
+    ".gwt-DevModeCompiling.tick-1 div:before{" +
+      "color:#446FF0;" +
+    "}" +
     ".gwt-DevModeCompile div:before{" +
       "content:'GWT';" +
+      "transition: all .5s;" +
+    "}" +
+      ".gwt-DevModeTimeout div:before{" +
+        "content:'NOT RESPONDING';" +
+    "}" +
+      ".gwt-DevModeBusy div:before{" +
+        "content:'BUSY';" +
     "}" +
     ".gwt-DevModeError div:before{" +
       "content:'FAILED';" +
@@ -151,8 +161,7 @@
   css = (moduleIdx == 1 ? css : '') +
     ".gwt-DevModeModule-" + moduleIdx + ".gwt-DevModeCompiling div:before{" +
       "content:'COMPILING __MODULE_NAME__';" +
-      "font-size:24px;" +
-      "color:#d2d9ee;" +
+      "font-size:18px;" +
     "}";
   if ('styleSheet' in compileStyle) {
     // IE8
@@ -174,6 +183,36 @@
     $doc.body.appendChild($wnd.__gwt_compileElem);
   }, 1);
 
+  // Use JSONP because IE8/9 do not support CORS
+  function executeJsonp(url, callback, timeout) {
+    // Timeout to detect whether the callback is never executed
+    var timeoutId, expired;
+    if (timeout) {
+      timeoutId = setTimeout(function() {
+        compileButton.className = buttonClassName + ' gwt-DevModeTimeout';
+        expired = true;
+        callback();
+      }, timeout);
+    }
+
+    // Compute an unique name for each callback to avoid cache issues
+    // in IE, and to avoid the same function being called twice.
+    var callbackName = '__gwt_compile_callback_' + moduleIdx + '_' + new Date().getTime();
+    $wnd[callbackName] = function(r) {
+      delete $wnd[callbackName];
+      // Avoid running callback if response came after timeout
+      if (!expired) {
+        clearTimeout(timeoutId);
+        callback(r);
+      }
+    };
+
+    // Insert an script tag.
+    var compileScript = $doc.createElement('script');
+    compileScript.src = url + '&_callback=' + callbackName;
+    $head.appendChild(compileScript);
+  }
+
   // Flag to avoid compiling in parallel.
   var compiling = false;
   // Compile function available in window so as it can be run from jsni.
@@ -182,29 +221,42 @@
     if (compiling) {
       return;
     }
-    compiling = true;
-
-    // Compute an unique name for each callback to avoid cache issues
-    // in IE, and to avoid the same function being called twice.
-    var callback = '__gwt_compile_callback_' + moduleIdx + '_' + new Date().getTime();
-    $wnd[callback] = function(r) {
-      if (r && r.status && r.status == 'ok') {
-        $wnd.location.reload();
+    compileButton.className = buttonClassName;
+    // Check that server is idle
+    executeJsonp(serverUrl + '/progress?', function(r) {
+      // Compile the app.
+      if (!compiling && r && r.status == 'idle') {
+        compiling = true;
+        compileButton.className = buttonClassName  + ' gwt-DevModeCompiling';
+        // Poll the server to get the status so as the user can see that server is working
+        var pollCounter = 0;
+        var pollInterval = setInterval(function() {
+          executeJsonp(serverUrl + '/progress?', function(r) {
+            // No progress info right now, just compiling status
+            if (r && r.status == 'compiling') {
+              // Change the class each tick
+              compileButton.className = buttonClassName +
+                 ' gwt-DevModeCompiling tick-' + ++pollCounter % 2;
+            } else {
+              clearInterval(pollInterval);
+              compiling = false;
+            }
+          }, 1000);
+        }, 1000);
+        // Perform the compilation process
+        executeJsonp(serverUrl + '/recompile/__MODULE_NAME__?user.agent=' + ua, function(r) {
+          if (r && r.status == 'ok') {
+            $wnd.location.reload();
+          } else {
+            compileButton.className = buttonClassName + ' gwt-DevModeError';
+            compiling = false;
+          }
+        });
+      } else {
+        compileButton.className = buttonClassName + ' gwt-DevModeBusy';
       }
-      compileButton.className = buttonClassName + ' gwt-DevModeError';
-      delete $wnd[callback];
-      compiling = false;
-    };
-
-    // Insert the jsonp script to compile the current module
-    // TODO(manolo): we don't have a way to detect when the server is unreachable,
-    // maybe a request returning status='idle'
-    var compileScript = $doc.createElement('script');
-    compileScript.src = serverUrl +
-      '/recompile/__MODULE_NAME__?user.agent=' + ua + '&_callback=' + callback;
-    $head.appendChild(compileScript);
-    compileButton.className = buttonClassName  + ' gwt-DevModeCompiling';
-  }
+    }, 1000);
+  };
 
   // Run this block after the app has been loaded.
   setTimeout(function(){

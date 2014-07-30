@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9932d8d1_f1c8175f",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T10:00:50Z",
+      "side": 1,
+      "message": "Can we get the exact versions of relevant webkits that does not support this?",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_91fb5b8a",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T10:00:50Z",
+      "side": 1,
+      "message": "Can we document from which version on FF supports DataView so we can update this easier in the future?",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_d1c31340",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T10:00:50Z",
+      "side": 1,
+      "message": "Comment does not match binding.",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

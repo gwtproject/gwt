@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9932d8d1_3170ef17",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T11:42:04Z",
+      "side": 1,
+      "message": "rename to expected",
+      "range": {
+        "startLine": 630,
+        "startChar": 45,
+        "endLine": 630,
+        "endChar": 46
+      },
+      "revId": "f843b7de20a11a6c29e2e80d31b75defd5217424",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_516d633c",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T11:42:04Z",
+      "side": 1,
+      "message": "rename to expected",
+      "revId": "f843b7de20a11a6c29e2e80d31b75defd5217424",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_716a6727",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T11:42:04Z",
+      "side": 1,
+      "message": "rename to expected",
+      "revId": "f843b7de20a11a6c29e2e80d31b75defd5217424",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9932d8d1_9167db5a",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-07-30T11:42:04Z",
+      "side": 1,
+      "message": "rename to expected",
+      "revId": "f843b7de20a11a6c29e2e80d31b75defd5217424",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

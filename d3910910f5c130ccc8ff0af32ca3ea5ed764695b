@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d6325ff0_8c90c78a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-31T20:34:33Z",
+      "side": 1,
+      "message": "I think what makes sense is to always pass the strongName. But there are a couple of parts in the code calling findSourceMaps(). I think we could do that in a separated patch.\n\nIn fact a better option would be to leave the original method and create a new one returning the File since we know the basename of the file, instead of filtering the list of files, something like `File getSourceMapFile(String baseName or strongName)`",
+      "parentUuid": "1624f7a2_81b1abcf",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 33
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1624f7a2_a1770713",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 5
@@ -59,6 +83,30 @@
       "writtenOn": "2014-07-31T19:39:32Z",
       "side": 1,
       "message": "I think we should check the \"rest\" variable more carefully here. If we ignore the directory part of the path info, then the client can send garbage there. We shouldn\u0027t allow that or will be harder to safely modify this code later without breaking a client.\n\nIt should be okay to be fairly strict here because we determine the correct path to use in Recompiler.",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 28
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6016bf5_30c7cede",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-07-31T20:34:33Z",
+      "side": 1,
+      "message": "Does a parameter with the strong name works better for you? patch set 2 in this commit was done with parameters, but I thought it would be better to use the real file name like it is used by the xiframe linker.\nOtherwise we have to use a regular expression testing valid md5 characters.",
+      "parentUuid": "1624f7a2_a1770713",
       "range": {
         "startLine": 89,
         "startChar": 20,

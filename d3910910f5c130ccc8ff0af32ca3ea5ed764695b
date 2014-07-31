@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1624f7a2_640fbd53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "What does this change allow from the end user\u0027s perspective?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1624f7a2_81b1abcf",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "How about passing in the FilenameFilter instead of a regexp? I think it would make the calling code a bit clearer. (I\u0027m not sure we even need to use a regexp in SourceHandler.)",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 33
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1624f7a2_a1770713",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "I think we should check the \"rest\" variable more carefully here. If we ignore the directory part of the path info, then the client can send garbage there. We shouldn\u0027t allow that or will be harder to safely modify this code later without breaking a client.\n\nIt should be okay to be fairly strict here because we determine the correct path to use in Recompiler.",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 28
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1624f7a2_0168fb28",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "Instead of reading the pathInfo again, about passing \"rest\" into this method as a parameter?",
+      "range": {
+        "startLine": 120,
+        "startChar": 39,
+        "endLine": 120,
+        "endChar": 50
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1624f7a2_0157db3b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "I think Ray made this public by accident and this method should actually be package-private. I don\u0027t see any usages, so it seems okay to fix it now.",
+      "range": {
+        "startLine": 500,
+        "startChar": 2,
+        "endLine": 500,
+        "endChar": 8
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1624f7a2_e4fbcdde",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-07-31T19:39:32Z",
+      "side": 1,
+      "message": "I think this should actually be two methods:\n\n// Returns the URL of the sourcemap for a module.\nsourceMapLocationForModule(String moduleName, String strongName);\n\n// Returns a pattern suitable to send to the GWT compiler\n// in includeSourceMapUrl config property.\n// (The result may include __HASH__ for the strong name.)\nsourceMapPatternForModule(String moduleName);",
+      "range": {
+        "startLine": 500,
+        "startChar": 23,
+        "endLine": 500,
+        "endChar": 49
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

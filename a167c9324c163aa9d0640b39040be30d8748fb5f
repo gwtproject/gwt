@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b6016bf5_8ae8b3ca",
+        "filename": "user/src/com/google/gwt/core/client/JsonUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7360
+      },
+      "writtenOn": "2014-07-31T10:27:19Z",
+      "side": 1,
+      "message": "That sounds like a good idea. I did it like this because it seemed less risky.\n\nI will give it a try next week (tomorrow we have a holiday here and today I am too busy with other things).",
+      "parentUuid": "1624f7a2_8a80ad3d",
+      "revId": "a167c9324c163aa9d0640b39040be30d8748fb5f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_74933507",
         "filename": "user/src/com/google/gwt/core/client/JsonUtils.java",
         "patchSetId": 3

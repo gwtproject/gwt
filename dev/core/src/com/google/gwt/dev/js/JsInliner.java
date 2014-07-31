@@ -60,14 +60,12 @@ import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -378,11 +376,11 @@ public class JsInliner {
     private boolean maintainsOrder = true;
     private final List<JsName> toEvaluate;
     private final List<JsName> unevaluated;
-    private final Set<JsName> paramsOrLocals = new HashSet<JsName>();
+    private final Set<JsName> paramsOrLocals = Sets.newHashSet();
 
     public EvaluationOrderVisitor(List<JsName> toEvaluate, JsFunction callee) {
       this.toEvaluate = toEvaluate;
-      this.unevaluated = new ArrayList<JsName>(toEvaluate);
+      this.unevaluated = Lists.newArrayList(toEvaluate);
       // collect params and locals from callee function
       new JsVisitor() {
         @Override
@@ -542,7 +540,7 @@ public class JsInliner {
     public HoistedNameVisitor(JsScope toScope, JsScope fromScope) {
       this.toScope = toScope;
       this.fromScope = fromScope;
-      this.hoistedNames = new ArrayList<JsName>();
+      this.hoistedNames = Lists.newArrayList();
     }
 
     public List<JsName> getHoistedNames() {
@@ -576,7 +574,7 @@ public class JsInliner {
    */
   private static class IdentCollector extends JsVisitor {
     private final boolean collectQualified;
-    private final Set<String> idents = new HashSet<String>();
+    private final Set<String> idents = Sets.newHashSet();
 
     public IdentCollector(boolean collectQualified) {
       this.collectQualified = collectQualified;
@@ -608,25 +606,26 @@ public class JsInliner {
    * statements if the context of the invocation would allow this.
    */
   private static class InliningVisitor extends JsModVisitor {
-    private final Set<JsFunction> blacklist = new HashSet<JsFunction>();
+    private final Set<JsFunction> blacklist = Sets.newHashSet();
     private final Set<JsNode> whitelist;
     /**
      * This reflects the functions that are currently being inlined to prevent
      * infinite expansion.
      */
-    private final Stack<JsFunction> inlining = new Stack<JsFunction>();
+    private final Stack<JsFunction> inlining = Stack.create();
     /**
      * This reflects which function the visitor is currently visiting.
      */
     private final Stack<JsFunction> functionStack = new Stack<JsFunction>();
-    private final InvocationCountingVisitor invocationCountingVisitor = new InvocationCountingVisitor();
-    private final Stack<List<JsName>> newLocalVariableStack = new Stack<List<JsName>>();
+    private final InvocationCountingVisitor invocationCountingVisitor =
+        new InvocationCountingVisitor();
+    private final Stack<List<JsName>> newLocalVariableStack = Stack.create();
 
     /**
      * A map containing the next integer to try as an identifier suffix for a
      * given JsScope.
      */
-    private IdentityHashMap<JsScope, HashMap<String, Integer>> startIdentForScope = new IdentityHashMap<JsScope, HashMap<String, Integer>>();
+    private Map<JsScope, Map<String, Integer>> startIdentForScope = Maps.newIdentityHashMap();
 
     /**
      * Not a stack because program fragments aren't nested.
@@ -663,7 +662,7 @@ public class JsInliner {
         return;
       }
 
-      List<JsExprStmt> statements = new ArrayList<JsExprStmt>();
+      List<JsExprStmt> statements = Lists.newArrayList();
 
       /*
        * Assemble the expressions back into a list of JsExprStmts. We will
@@ -828,7 +827,8 @@ public class JsInliner {
         throw new InternalCompilerException("Unexpected function popped");
       }
 
-      assert programFunction.getBody().getStatements().size() == 0 : "Should not have moved statements into program";
+      assert programFunction.getBody().getStatements().size() == 0
+          : "Should not have moved statements into program";
 
       List<JsName> newLocalVariables = newLocalVariableStack.pop();
       assert newLocalVariables.size() == 0 : "Should not have tried to create variables in program";
@@ -848,7 +848,7 @@ public class JsInliner {
     @Override
     public boolean visit(JsFunction x, JsContext ctx) {
       functionStack.push(x);
-      newLocalVariableStack.push(new ArrayList<JsName>());
+      newLocalVariableStack.push(Lists.<JsName>newArrayList());
       return true;
     }
 
@@ -861,7 +861,7 @@ public class JsInliner {
       programFunction = new JsFunction(x.getSourceInfo(), x.getScope());
       programFunction.setBody(new JsBlock(x.getSourceInfo()));
       functionStack.push(programFunction);
-      newLocalVariableStack.push(new ArrayList<JsName>());
+      newLocalVariableStack.push(Lists.<JsName>newArrayList());
       return true;
     }
 
@@ -908,8 +908,7 @@ public class JsInliner {
         JsFunction invokedFunction) {
       List<JsStatement> statements;
       if (invokedFunction.getBody() != null) {
-        statements = new ArrayList<JsStatement>(
-            invokedFunction.getBody().getStatements());
+        statements = Lists.newArrayList(invokedFunction.getBody().getStatements());
       } else {
         /*
          * Will see this with certain classes whose clinits are folded into the
@@ -918,7 +917,7 @@ public class JsInliner {
         statements = Collections.emptyList();
       }
 
-      List<JsExpression> hoisted = new ArrayList<JsExpression>(statements.size());
+      List<JsExpression> hoisted = Lists.newArrayListWithCapacity(statements.size());
       JsExpression thisExpr = ((JsNameRef) x.getQualifier()).getQualifier();
       HoistedNameVisitor hoistedNameVisitor =
           new HoistedNameVisitor(callerFunction.getScope(), invokedFunction.getScope());
@@ -1023,9 +1022,9 @@ public class JsInliner {
         String ident;
         String base = invokedFunction.getName() + "_" + name.getIdent();
         JsScope scope = callerFunction.getScope();
-        HashMap<String, Integer> startIdent = startIdentForScope.get(scope);
+        Map<String, Integer> startIdent = startIdentForScope.get(scope);
         if (startIdent == null) {
-          startIdent = new HashMap<String, Integer>();
+          startIdent = Maps.newHashMap();
           startIdentForScope.put(scope, startIdent);
         }
 
@@ -1079,7 +1078,7 @@ public class JsInliner {
    */
   private static class InvocationCountingVisitor extends JsVisitor {
     private boolean removingCounts = false;
-    private final Map<JsFunction, Integer> invocationCount = new IdentityHashMap<JsFunction, Integer>();
+    private final Map<JsFunction, Integer> invocationCount = Maps.newIdentityHashMap();
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
@@ -1132,8 +1131,7 @@ public class JsInliner {
     // Invariant: singleInvokations(fn) = null => calls to fn have not been seen
     //            singleInvokations(fn) = MULTIPLE =>  mutiple callsites to fn have been seen.
     //            singleInvokations(fn) = caller =>  one callsite has been seen an occurs in caller.
-    private final Map<JsFunction, JsFunction> singleInvocations =
-        new IdentityHashMap<JsFunction, JsFunction>();
+    private final Map<JsFunction, JsFunction> singleInvocations = Maps.newIdentityHashMap();
 
     // Indicates multiple invocations were found (only identity is used).
     private static final JsFunction MULTIPLE = JsFunction.createSentinel();
@@ -1148,7 +1146,7 @@ public class JsInliner {
     }
 
     public Collection<JsNode> inliningCandidates() {
-      Collection<JsNode> set = new LinkedHashSet<JsNode>();
+      Collection<JsNode> set = Sets.newLinkedHashSet();
       for (Map.Entry<JsFunction, JsFunction> entry : singleInvocations.entrySet()) {
         if (entry.getValue() != MULTIPLE) {
           set.add(entry.getValue());
@@ -1196,13 +1194,13 @@ public class JsInliner {
     /**
      * Set up a map to record name replacements to perform.
      */
-    final Map<JsName, JsName> nameReplacements = new IdentityHashMap<JsName, JsName>();
+    final Map<JsName, JsName> nameReplacements = Maps.newIdentityHashMap();
 
     /**
      * Set up a map of parameter names back to the expressions that will be
      * passed in from the outer call site.
      */
-    final Map<JsName, JsExpression> paramsToArgsMap = new IdentityHashMap<JsName, JsExpression>();
+    final Map<JsName, JsExpression> paramsToArgsMap = Maps.newIdentityHashMap();;
 
     /**
      * A replacement expression for this references.
@@ -1358,7 +1356,7 @@ public class JsInliner {
    */
   private static class RecursionCollector extends JsVisitor {
     private final Stack<JsFunction> functionStack = new Stack<JsFunction>();
-    private final Set<JsFunction> recursive = new HashSet<JsFunction>();
+    private final Set<JsFunction> recursive = Sets.newHashSet();
 
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
@@ -1401,8 +1399,8 @@ public class JsInliner {
    * the lifetime of the program.
    */
   private static class RedefinedFunctionCollector extends JsVisitor {
-    private final Map<JsName, JsFunction> nameMap = new IdentityHashMap<JsName, JsFunction>();
-    private final Set<JsFunction> redefined = new HashSet<JsFunction>();
+    private final Map<JsName, JsFunction> nameMap = Maps.newIdentityHashMap();
+    private final Set<JsFunction> redefined = Sets.newHashSet();
 
     /**
      * Look for assignments to JsNames whose static references are JsFunctions.
@@ -1616,7 +1614,7 @@ public class JsInliner {
     // site as well as those produced by native methods and their callers.
     SingleInvocationVisitor s = new SingleInvocationVisitor();
     s.accept(program);
-    Set<JsNode> candidates = new LinkedHashSet<JsNode>(toInline);
+    Set<JsNode> candidates = Sets.newLinkedHashSet(toInline);
     candidates.addAll(s.inliningCandidates());
 
     RedefinedFunctionCollector d = new RedefinedFunctionCollector();
@@ -1767,8 +1765,8 @@ public class JsInliner {
     }
 
     // Build up a list of all parameter names
-    Set<JsName> parameterNames = new HashSet<JsName>();
-    Set<String> parameterIdents = new HashSet<String>();
+    Set<JsName> parameterNames = Sets.newHashSet();
+    Set<String> parameterIdents = Sets.newHashSet();
     for (JsParameter param : callee.getParameters()) {
       parameterNames.add(param.getName());
       parameterIdents.add(param.getName().getIdent());
@@ -1801,7 +1799,7 @@ public class JsInliner {
     if (thisExpr == null) {
       evalArgs = arguments;
     } else {
-      evalArgs = new ArrayList<JsExpression>(1 + arguments.size());
+      evalArgs = Lists.newArrayListWithCapacity(1 + arguments.size());
       evalArgs.add(thisExpr);
       evalArgs.addAll(arguments);
     }
@@ -1817,7 +1815,7 @@ public class JsInliner {
        * will vary between call sites, based on whether or not the invocation's
        * arguments can be repeated without ill effect.
        */
-      List<JsName> requiredOrder = new ArrayList<JsName>();
+      List<JsName> requiredOrder = Lists.newArrayList();
       if (thisExpr != null && isVolatile(thisExpr, callee)) {
         requiredOrder.add(EvaluationOrderVisitor.THIS_NAME);
       }

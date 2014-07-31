@@ -84,7 +84,17 @@ public final class Stack<T> implements Iterable<T> {
     return result;
   }
 
+  /**
+   * Pushes a new value into the top of the stack.
+   */
   public void push(T value) {
     elements.add(value);
+  }
+
+  /**
+   * Creates a new stack.
+   */
+  public static <T> Stack<T> create() {
+    return new Stack<T>();
   }
 }

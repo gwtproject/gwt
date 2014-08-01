@@ -25,6 +25,7 @@ import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.IdentitySets;
 import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
@@ -62,6 +63,11 @@ public class JTypeOracle implements Serializable {
      * A mapping from a class name to its directly implemented interfaces' names.
      */
     private Map<String, Set<String>> implementedIntfsByClass = new HashMap<String, Set<String>>();
+
+    public boolean isEmpty() {
+      return superClassesByClass.isEmpty() && superIntfsByIntf.isEmpty()
+          && implementedIntfsByClass.isEmpty();
+    }
   }
 
   /**
@@ -450,6 +456,12 @@ public class JTypeOracle implements Serializable {
   private final Map<String, Set<String>> subClassMap = new HashMap<String, Set<String>>();
 
   /**
+   * A map of all interfaces to the set of interfaces that extend them, directly
+   * or indirectly.
+   */
+  private final Map<String, Set<String>> subInterfaceMap = new HashMap<String, Set<String>>();
+
+  /**
    * A map of all classes to the set of classes they extend, directly or
    * indirectly.
    */
@@ -491,6 +503,9 @@ public class JTypeOracle implements Serializable {
     this.immediateTypeRelations = minimalRebuildCache.getImmediateTypeRelations();
     this.arrayTypeCreator = arrayTypeCreator;
     this.hasWholeWorldKnowledge = hasWholeWorldKnowledge;
+
+    // Be ready to answer type hierarchy questions even before Unification.
+    computeExtendedTypeRelations();
   }
 
   /**
@@ -694,18 +709,19 @@ public class JTypeOracle implements Serializable {
     return false;
   }
 
-  public void updateImmediateTypeRelations(Set<JDeclaredType> changedTypes,
-      Set<JDeclaredType> deletedTypes) {
-    deleteImmediateTypeRelations(deletedTypes);
-    deleteImmediateTypeRelations(changedTypes);
-    recordImmediateTypeRelations(changedTypes);
-    computeExtendedTypeRelations();
+  public void computeBeforeAST(StandardTypes standardTypes, Collection<JDeclaredType> declaredTypes,
+      List<JDeclaredType> moduleDeclaredTypes) {
+    computeBeforeAST(standardTypes, declaredTypes, moduleDeclaredTypes,
+        Lists.<String> newArrayList());
   }
 
-  public void computeBeforeAST(StandardTypes standardTypes,
-      Collection<JDeclaredType> declaredTypes) {
+  public void computeBeforeAST(StandardTypes standardTypes, Collection<JDeclaredType> declaredTypes,
+      Collection<JDeclaredType> moduleDeclaredTypes, Collection<String> deletedTypeNames) {
     this.standardTypes = standardTypes;
-    recordImmediateTypeRelations(declaredTypes);
+    recordReferenceTypeByName(declaredTypes);
+    deleteImmediateTypeRelations(deletedTypeNames);
+    deleteImmediateTypeRelations(getNamesOf(moduleDeclaredTypes));
+    recordImmediateTypeRelations(moduleDeclaredTypes);
     computeExtendedTypeRelations();
 
     jsInterfaces.clear();
@@ -734,6 +750,21 @@ public class JTypeOracle implements Serializable {
       if (type instanceof JClassType) {
         computeVirtualUpRefs((JClassType) type);
       }
+    }
+  }
+
+  private static Collection<String> getNamesOf(Collection<JDeclaredType> types) {
+    List<String> typeNames = Lists.newArrayList();
+    for (JDeclaredType type : types) {
+      typeNames.add(type.getName());
+    }
+    return typeNames;
+  }
+
+  private void recordReferenceTypeByName(Collection<JDeclaredType> types) {
+    referenceTypesByName.clear();
+    for (JReferenceType type : types) {
+      referenceTypesByName.put(type.getName(), type);
     }
   }
 
@@ -807,6 +838,10 @@ public class JTypeOracle implements Serializable {
     return (JClassType) referenceTypesByName.get(className);
   }
 
+  public String getSuperTypeName(String className) {
+    return immediateTypeRelations.superClassesByClass.get(className);
+  }
+
   public Set<JReferenceType> getSuperHierarchyTypes(JReferenceType type) {
 
     // For arrays we build up their type hierarchy on the fly
@@ -814,7 +849,7 @@ public class JTypeOracle implements Serializable {
       JArrayType arrayType = (JArrayType) type;
       Set<JReferenceType> superHierarchyTypes = Sets.newHashSet();
 
-      // All arrays to cast to Object, Serializable and Cloneable.
+      // All arrays cast to Object, Serializable and Cloneable.
       JReferenceType javaLangObjectType =
           ensureTypeExistsAndAppend(standardTypes.javaLangObject, superHierarchyTypes);
       ensureTypeExistsAndAppend(standardTypes.javaIoSerializable, superHierarchyTypes);
@@ -1047,6 +1082,19 @@ public class JTypeOracle implements Serializable {
     return get(subClassMap, type.getName()).contains(possibleSubType.getName());
   }
 
+  public Set<String> getSubTypeNames(String typeName) {
+    Set<String> subTypeNames = Sets.newHashSet();
+    Set<String> subClasses = subClassMap.get(typeName);
+    if (subClasses != null) {
+      subTypeNames.addAll(subClasses);
+    }
+    Set<String> subInterfaces = subInterfaceMap.get(typeName);
+    if (subInterfaces != null) {
+      subTypeNames.addAll(subInterfaces);
+    }
+    return subClassMap.get(typeName);
+  }
+
   /**
    * Returns true if possibleSuperClass is a superclass of type, directly or indirectly.
    */
@@ -1110,22 +1158,16 @@ public class JTypeOracle implements Serializable {
     getOrCreate(map, key).add(value);
   }
 
-  private void deleteImmediateTypeRelations(Set<JDeclaredType> types) {
-    for (JDeclaredType type : types) {
-      if (type instanceof JClassType) {
-        immediateTypeRelations.superClassesByClass.remove(type.getName());
-        immediateTypeRelations.implementedIntfsByClass.remove(type.getName());
-      } else if (type instanceof JInterfaceType) {
-        immediateTypeRelations.superIntfsByIntf.remove(type.getName());
-      }
+  private void deleteImmediateTypeRelations(Collection<String> typeNames) {
+    for (String typeName : typeNames) {
+      immediateTypeRelations.superClassesByClass.remove(typeName);
+      immediateTypeRelations.implementedIntfsByClass.remove(typeName);
+      immediateTypeRelations.superIntfsByIntf.remove(typeName);
     }
   }
 
   private void recordImmediateTypeRelations(Iterable<JDeclaredType> types) {
-    referenceTypesByName.clear();
     for (JReferenceType type : types) {
-      referenceTypesByName.put(type.getName(), type);
-
       if (type instanceof JClassType) {
         JClassType jClassType = (JClassType) type;
         // Record immediate super class
@@ -1166,6 +1208,7 @@ public class JTypeOracle implements Serializable {
     computeSuperClassMap();
     computeSuperInterfaceMap();
     computeSubClassMap();
+    computeSubInterfaceMap();
     computeImplements();
     computeIsImplemented();
     computeCouldImplement();
@@ -1281,6 +1324,29 @@ public class JTypeOracle implements Serializable {
           }
         }
       }
+    }
+  }
+
+  private void computeSubInterfaceMap() {
+    subInterfaceMap.clear();
+
+    // Calculate reverse mapping Parent -> Set<Child>
+    Set<String> interfaces = Sets.newHashSet();
+    Map<String, Set<String>> immediateChildInterfaces = new HashMap<String, Set<String>>();
+    for (Entry<String, Set<String>> entry : immediateTypeRelations.superIntfsByIntf.entrySet()) {
+      String child = entry.getKey();
+      interfaces.add(child);
+      Set<String> parents = entry.getValue();
+      interfaces.addAll(parents);
+      for (String parent : parents) {
+        add(immediateChildInterfaces, parent, child);
+      }
+    }
+
+    for (String parent : interfaces) {
+      Set<String> allSubInterfaces = new HashSet<String>();
+      computeTransitiveSubClasses(immediateChildInterfaces, allSubInterfaces, parent);
+      subInterfaceMap.put(parent, allSubInterfaces);
     }
   }
 

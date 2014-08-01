@@ -53,12 +53,14 @@ public class StandardStatementRanges implements StatementRanges, Serializable {
     return new StandardStatementRanges(combinedStarts, combinedEnds);
   }
 
-  private static int[] toArray(List<Integer> list) {
-    int[] ary = new int[list.size()];
-    for (int i = 0; i < list.size(); i++) {
-      ary[i] = list.get(i);
+  private static int[] toArray(List<Integer> valueList) {
+    int[] valueArray = new int[valueList.size()];
+    int index = 0;
+    // Traverse the list with an iterator so that it is fast for both ArrayLists and LinkedLists.
+    for (Integer value : valueList) {
+      valueArray[index++] = value;
     }
-    return ary;
+    return valueArray;
   }
 
   @VisibleForTesting

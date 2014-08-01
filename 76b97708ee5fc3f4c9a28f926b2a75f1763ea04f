@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6325ff0_cf2a4165",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-01T10:16:04Z",
+      "side": 1,
+      "message": "Can you move the issue thing above the Change-Id line to keep it consistent with other GWT commits? Should be:\n\n  \n  Reduce SchedulerImpl.TIME_SLICE from 100ms to 8ms\n  \n  Bug: issue 8838\n  Change-Id: I4ab643b4d1ddeec5360c459a0605e449efdac34c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "76b97708ee5fc3f4c9a28f926b2a75f1763ea04f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

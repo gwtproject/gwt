@@ -16,6 +16,24 @@
       "revId": "7bfa686708df5ece0effa460183651aea5188cd0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96d1c7e4_95930697",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/StandardStatementRanges.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-02T01:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f693e315_20ce8499",
+      "revId": "7bfa686708df5ece0effa460183651aea5188cd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

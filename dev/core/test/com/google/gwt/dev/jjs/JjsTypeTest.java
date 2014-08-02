@@ -27,6 +27,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.StandardTypes;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
@@ -84,6 +85,8 @@ public class JjsTypeTest extends TestCase {
   private JArrayType arrayOfArrayOfObject;
   private JArrayType arrayOfArrayOfIntfI;
   private JArrayType arrayOfArrayOfIntfIBase;
+
+  private static final Collection<String> EMPTY_LIST = Collections.<String>emptySet();
 
   public void testCanTheoreticallyCast() {
     assertFalse(typeOracle.canTheoreticallyCast(classBnn, typeNull));
@@ -252,9 +255,10 @@ public class JjsTypeTest extends TestCase {
     assertSuperHierarchy(arrayOfInt, arrayOfInt, classObject, intfCloneable, intfSerializable);
 
     intfCollection = createInterface("java.util.Collection");
-    program.typeOracle.updateImmediateTypeRelations(
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
         Sets.<JDeclaredType> newHashSet(classArrayList, intfList, intfCollection, classObject),
-        Sets.<JDeclaredType> newHashSet(intfIterable));
+        Lists.newArrayList(intfIterable.getName()));
 
     assertSuperHierarchy(intfCollection, intfCollection, classObject);
     assertSuperHierarchy(intfList, intfList, intfCollection, classObject);
@@ -262,15 +266,17 @@ public class JjsTypeTest extends TestCase {
         intfCollection);
 
     classA = createClass("A", classObject, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
         Sets.<JDeclaredType> newHashSet(classA, classObject),
-        Sets.<JDeclaredType> newHashSet(classBase));
+        Lists.newArrayList(classBase.getName()));
     assertSuperHierarchy(classA, classA, classObject);
 
     JClassType classASub = createClass("ASub", classA, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
         Sets.<JDeclaredType> newHashSet(classASub, classA, classObject),
-        Sets.<JDeclaredType> newHashSet());
+        EMPTY_LIST);
     assertSuperHierarchy(classASub, classASub, classA, classObject);
   }
 
@@ -301,62 +307,58 @@ public class JjsTypeTest extends TestCase {
   }
 
   public void testUpdateTypeInformation_isJavaScriptObject() {
+    List<String> emptyList = Lists.<String> newArrayList();
     program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
-        program.getDeclaredTypes());
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), emptyList);
 
     JClassType jso = createClass("SomeJSO", classJso, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType> newHashSet(jso),
-        Collections.<JDeclaredType> emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso), emptyList);
     Assert.assertTrue(program.typeOracle.isJavaScriptObject(jso));
-    program.typeOracle.updateImmediateTypeRelations(
-        Collections.<JDeclaredType> emptySet(),
-        Sets.<JDeclaredType> newHashSet(jso));
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Collections.<JDeclaredType> emptySet(),
+        Lists.newArrayList(jso.getName()));
     Assert.assertFalse(program.typeOracle.isJavaScriptObject(jso));
 
     jso = createClass("SomeJSO", classJso, false, false);
     JClassType jsoChild = createClass("SomeJSOChild", jso, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType> newHashSet(jso, jsoChild),
-        Collections.<JDeclaredType> emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso, jsoChild), emptyList);
     Assert.assertTrue(program.typeOracle.isJavaScriptObject(jsoChild));
     jsoChild = createClass("SomeJSOChild", classObject, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType> newHashSet(jsoChild),
-        Collections.<JDeclaredType> emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jsoChild), emptyList);
     Assert.assertFalse(program.typeOracle.isJavaScriptObject(jsoChild));
 
     jso = createClass("SomeJSO", classJso, false, false);
     jsoChild = createClass("SomeJSOChild", jso, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType> newHashSet(jsoChild),
-        Collections.<JDeclaredType> emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jsoChild), emptyList);
     Assert.assertTrue(program.typeOracle.isJavaScriptObject(jsoChild));
     Assert.assertTrue(program.typeOracle.isJavaScriptObject(jso));
     jso = createClass("SomeJSO", classObject, false, false);
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType> newHashSet(jso),
-        Collections.<JDeclaredType> emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso), emptyList);
     Assert.assertFalse(program.typeOracle.isJavaScriptObject(jsoChild));
     Assert.assertFalse(program.typeOracle.isJavaScriptObject(jso));
   }
 
   public void testUpdateTypeInformation_JSODualImpl() {
     program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
-        program.getDeclaredTypes());
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), EMPTY_LIST);
 
     Assert.assertFalse(program.typeOracle.isDualJsoInterface(intfJ));
 
     JClassType javaIntfImplementor = createClass("JavaImplementor", classObject, false, false);
     javaIntfImplementor.addImplements(intfJ);
 
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType>newHashSet(javaIntfImplementor),
-        Collections.<JDeclaredType>emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(javaIntfImplementor),
+        EMPTY_LIST);
     Assert.assertTrue(program.typeOracle.isDualJsoInterface(intfJ));
-    program.typeOracle.updateImmediateTypeRelations(
-        Collections.<JDeclaredType>emptySet(),
-        Sets.<JDeclaredType>newHashSet(javaIntfImplementor));
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Collections.<JDeclaredType> emptySet(),
+        Lists.newArrayList(javaIntfImplementor.getName()));
     Assert.assertFalse(program.typeOracle.isDualJsoInterface(intfJ));
   }
 
@@ -368,9 +370,9 @@ public class JjsTypeTest extends TestCase {
 
     Assert.assertFalse(program.typeOracle.isSubClass(baseAll, sub1));
 
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType>newHashSet(baseAll, sub1, sub2, sub1_2),
-        Collections.<JDeclaredType>emptySet());
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(baseAll, sub1, sub2, sub1_2),
+        EMPTY_LIST);
 
     Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub1));
     Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub2));
@@ -379,9 +381,9 @@ public class JjsTypeTest extends TestCase {
 
     sub1_2 = createClass("IncrementalSub1_2", baseAll, false, false);
 
-    program.typeOracle.updateImmediateTypeRelations(
-        Sets.<JDeclaredType>newHashSet(baseAll, sub2, sub1_2),
-        Sets.<JDeclaredType>newHashSet(sub1));
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(baseAll, sub2, sub1_2),
+        Lists.newArrayList(sub1.getName()));
 
     Assert.assertFalse(program.typeOracle.isSubClass(baseAll, sub1));
     Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub2));
@@ -396,9 +398,10 @@ public class JjsTypeTest extends TestCase {
 
     Assert.assertFalse(program.typeOracle.isSuperClass(sub1, baseAll));
 
-    program.typeOracle.updateImmediateTypeRelations(
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
         Sets.<JDeclaredType>newHashSet(baseAll, sub1, sub2, sub1_2),
-        Collections.<JDeclaredType>emptySet());
+        EMPTY_LIST);
 
     Assert.assertTrue(program.typeOracle.isSuperClass(sub1, baseAll));
     Assert.assertTrue(program.typeOracle.isSuperClass(sub2, baseAll));
@@ -407,9 +410,10 @@ public class JjsTypeTest extends TestCase {
 
     sub1_2 = createClass("IncrementalSub1_2", baseAll, false, false);
 
-    program.typeOracle.updateImmediateTypeRelations(
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
         Sets.<JDeclaredType>newHashSet(baseAll, sub2, sub1_2),
-        Sets.<JDeclaredType>newHashSet(sub1));
+        Lists.newArrayList(sub1.getName()));
 
     Assert.assertFalse(program.typeOracle.isSuperClass(sub1, baseAll));
     Assert.assertTrue(program.typeOracle.isSuperClass(sub2, baseAll));
@@ -512,7 +516,7 @@ public class JjsTypeTest extends TestCase {
     arrayOfArrayOfB = program.getOrCreateArrayType(classB, 2);
 
     program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
-        program.getDeclaredTypes());
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), EMPTY_LIST);
 
     // Save off some miscellaneous types to test against
     typeNull = program.getTypeNull();

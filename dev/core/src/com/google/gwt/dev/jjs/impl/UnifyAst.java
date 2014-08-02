@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
@@ -85,6 +86,8 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -435,7 +438,7 @@ public class UnifyAst {
         try {
           return createStaticRebindExpression(gwtCreateCall, classLiteral);
         } finally {
-            event.end();
+          event.end();
         }
       } else {
         return createRuntimeRebindExpression(gwtCreateCall, classLiteral);
@@ -621,11 +624,24 @@ public class UnifyAst {
    */
   private final Set<JNode> liveFieldsAndMethods = new IdentityHashSet<JNode>();
 
+  /**
+   * Types which have had all of their fields and methods resolved (as opposed to the default
+   * behavior of only resolving the reachable ones). Currently only used when performing per-file
+   * compilation/recompilation.
+   */
+  private final Set<String> fullFlowTypes = Sets.newHashSet();
+
   private final TreeLogger logger;
   private final CompilerContext compilerContext;
   private final Map<String, JMethod> methodMap = new HashMap<String, JMethod>();
   private final JProgram program;
   private final RebindPermutationOracle rpo;
+
+  /**
+   * The names of types whose per-file compilation cached Js and StatementRanges are known to no
+   * longer be valid.
+   */
+  private Set<String> staleTypeNames;
 
   /**
    * A work queue of methods whose bodies we need to traverse. Prevents
@@ -641,8 +657,15 @@ public class UnifyAst {
   private NameBasedTypeLocator binaryNameBasedTypeLocator;
   private NameBasedTypeLocator internalNameBasedTypeLocator;
 
+  private MinimalRebuildCache minimalRebuildCache;
+  private boolean compilePerFile;
+  private boolean isLibraryCompile;
+
   public UnifyAst(TreeLogger logger, CompilerContext compilerContext, JProgram program,
       JsProgram jsProgram, RebindPermutationOracle rpo) {
+    this.compilePerFile = compilerContext.getOptions().shouldCompilePerFile();
+    this.isLibraryCompile = !compilerContext.shouldCompileMonolithic();
+
     this.logger = logger;
     this.compilerContext = compilerContext;
     this.program = program;
@@ -652,6 +675,11 @@ public class UnifyAst {
     this.compiledClassesByInternalName = compilationState.getClassFileMap();
     this.compiledClassesBySourceName = compilationState.getClassFileMapBySource();
     initializeNameBasedLocators();
+    this.minimalRebuildCache = compilerContext.getMinimalRebuildCache();
+    this.staleTypeNames =
+        minimalRebuildCache.clearStaleTypeJsAndStatements(logger, program.typeOracle);
+
+    checkPreambleTypesStillFresh(logger);
   }
 
   public void addRootTypes(Collection<String> sourceTypeNames) throws UnableToCompleteException {
@@ -715,10 +743,16 @@ public class UnifyAst {
       for (JMethod method : type.getMethods()) {
         flowInto(method);
       }
+      for (JField field : type.getFields()) {
+        flowInto(field);
+      }
     }
 
-    boolean isLibraryCompile = !compilerContext.shouldCompileMonolithic();
-    if (isLibraryCompile) {
+    if (compilePerFile) {
+      for (String staleTypeName : staleTypeNames) {
+        fullFlowIntoType(internalFindType(staleTypeName, binaryNameBasedTypeLocator, false));
+      }
+    } else if (isLibraryCompile) {
       // Trace execution from all types supplied as source and resolve references.
       Set<String> internalNames = ImmutableSet.copyOf(compiledClassesByInternalName.keySet());
       for (String internalName : internalNames) {
@@ -796,6 +830,12 @@ public class UnifyAst {
 
     mainLoop();
 
+    logger.log(TreeLogger.INFO, "Unification traversed " + liveFieldsAndMethods.size()
+        + " fields and methods and " + program.getDeclaredTypes().size() + " types. "
+        + program.getModuleDeclaredTypes().size()
+        + " are considered part of the current module and " + fullFlowTypes.size()
+        + " had all of their fields and methods traversed.");
+
     // Post-stitching clean-ups.
     if (compilerContext.shouldCompileMonolithic()) {
       pruneDeadFieldsAndMethods();
@@ -870,14 +910,32 @@ public class UnifyAst {
       }
       return;
     }
+    compilerContext.getMinimalRebuildCache().recordNestedTypeNamesPerType(unit);
     // TODO(zundel): ask for a recompile if deserialization fails?
     List<JDeclaredType> types = unit.getTypes();
     assert containsAllTypes(unit, types);
     for (JDeclaredType t : types) {
       program.addType(t);
+      // If we're compiling per file and we already have currently valid output for this type.
+      if (compilePerFile && !needsNewJs(t)) {
+        // Then make sure we don't output new Js for this type.
+        program.addReferenceOnlyType(t);
+      }
     }
     for (JDeclaredType t : types) {
       resolveType(t);
+    }
+    // When compiling per file.
+    if (compilePerFile) {
+      // It's possible that a users' edits have made a type referenceable that was not previously
+      // referenceable.
+      for (JDeclaredType type : types) {
+        // Such a type won't have any cached JS and will need a full traversal to ensure it is
+        // output (the full type with all fields and methods) as new JS.
+        if (needsNewJs(type)) {
+          fullFlowIntoType(type);
+        }
+      }
     }
     /*
      * Eagerly instantiate any JavaScriptObject subtypes. That way we don't have
@@ -924,6 +982,25 @@ public class UnifyAst {
       return typePackage.equals(methodPackage);
     }
     return true;
+  }
+
+  /**
+   * Ensure that if any preamble types have become stale then adequate steps are taken to ensure the
+   * recreation of the entire preamble chunk.
+   */
+  private void checkPreambleTypesStillFresh(TreeLogger logger) {
+    SetView<String> stalePreambleTypes =
+        Sets.intersection(staleTypeNames, minimalRebuildCache.getPreambleTypeNames());
+    if (!stalePreambleTypes.isEmpty()) {
+      // Stale preamble types can't be gracefully replaced. We need to clear all per-file compile
+      // related caches to force a full build.
+      logger.log(TreeLogger.WARN,
+          "Some preamble types became stale. Recreating them is forcing a full "
+          + "recompile. Stale preamble types: " + stalePreambleTypes + ".");
+      minimalRebuildCache.clearPerTypeJsCache();
+      staleTypeNames.clear();
+      // TODO: might be able to preserve the cache of all non-stale and non-preamble types.
+    }
   }
 
   private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
@@ -1000,6 +1077,25 @@ public class UnifyAst {
     }
     msgBuf.append(errorMessage);
     branch.log(TreeLogger.ERROR, msgBuf.toString());
+  }
+
+  /**
+   * Resolves all fields and methods in the given type and marks it instantiable.
+   * <p>
+   * The net effect is to ensure the entire type is kept and inserted into the unified AST.
+   */
+  private void fullFlowIntoType(JDeclaredType type) {
+    String typeName = type.getName();
+    if (!fullFlowTypes.contains(typeName) && !typeName.endsWith("package-info")) {
+      fullFlowTypes.add(type.getName());
+      instantiate(type);
+      for (JField field : type.getFields()) {
+        flowInto(field);
+      }
+      for (JMethod method : type.getMethods()) {
+        flowInto(method);
+      }
+    }
   }
 
   private void flowInto(JField field) {
@@ -1337,6 +1433,16 @@ public class UnifyAst {
         }
       }
     }
+  }
+
+  /**
+   * During per file compilation, returns whether the given type has cached JS that can be reused.
+   */
+  private boolean needsNewJs(JDeclaredType type) {
+    String typeName = type.getName();
+    boolean hasOwnJs = minimalRebuildCache.hasJs(typeName);
+    boolean isPartOfPreamble = minimalRebuildCache.getPreambleTypeNames().contains(typeName);
+    return !hasOwnJs && !isPartOfPreamble;
   }
 
   private void resolveType(JDeclaredType type) {

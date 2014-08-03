@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "56dbcf05_339b5263",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-03T20:53:29Z",
+      "side": 1,
+      "message": "I decided to move it to a separate patch\n\nhttps://gwt-review.googlesource.com/#/c/8414/",
+      "parentUuid": "9932d8d1_51d00303",
+      "revId": "76a1eee7fa3ae168d4a3418a1af1f983f498bbbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_31d38f12",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 8

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "96d1c7e4_b503aa9b",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-03T21:20:04Z",
+      "side": 1,
+      "message": "According to http://caniuse.com/\n\nChrome 27 and Safari 5.1 have full support of typed arrays\nbut Safari 5.1 does not support Float64Array\n\n\nCould not get any proven information but it seems it was implemented in Chrome v20, few months later after this gwt module was created.",
+      "parentUuid": "9932d8d1_f1c8175f",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_91fb5b8a",
         "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "56dbcf05_d37f662f",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-03T21:20:04Z",
+      "side": 1,
+      "message": "According to http://caniuse.com/\n\nFirefox 30 has full support of typed arrays\n\nAccording to MDN https://developer.mozilla.org/en-US/docs/Web/API/DataView\n\nFirefox 15 has DataView (was released in 2012)",
+      "parentUuid": "9932d8d1_91fb5b8a",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_d1c31340",
         "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-30T10:00:50Z",
       "side": 1,
       "message": "Comment does not match binding.",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76d613dd_b1818075",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-03T21:20:04Z",
+      "side": 1,
+      "message": "Yes. I guess safari, ie11+ and firefox should default to this permutation.\n\nWhat do you think?",
+      "parentUuid": "9932d8d1_d1c31340",
       "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

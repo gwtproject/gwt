@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "76d613dd_91ab1cf8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-03T17:01:41Z",
+      "side": 1,
+      "message": "Finally I have leave this method unchanged so as it works in other places, and the filename is computed in the handler since we know the exact name.",
+      "parentUuid": "1624f7a2_81b1abcf",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 33
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1624f7a2_a1770713",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 5
@@ -106,6 +130,30 @@
       "writtenOn": "2014-07-31T20:34:33Z",
       "side": 1,
       "message": "Does a parameter with the strong name works better for you? patch set 2 in this commit was done with parameters, but I thought it would be better to use the real file name like it is used by the xiframe linker.\nOtherwise we have to use a regular expression testing valid md5 characters.",
+      "parentUuid": "1624f7a2_a1770713",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 28
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56dbcf05_f3014ad6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-03T17:01:41Z",
+      "side": 1,
+      "message": "Introduced a safer way to check that URL is correct.",
       "parentUuid": "1624f7a2_a1770713",
       "range": {
         "startLine": 89,
@@ -181,6 +229,54 @@
         "startChar": 23,
         "endLine": 500,
         "endChar": 49
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96d1c7e4_95b466d4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-03T17:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1624f7a2_e4fbcdde",
+      "range": {
+        "startLine": 500,
+        "startChar": 23,
+        "endLine": 500,
+        "endChar": 49
+      },
+      "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96d1c7e4_f5b7f2d6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-03T17:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1624f7a2_0157db3b",
+      "range": {
+        "startLine": 500,
+        "startChar": 2,
+        "endLine": 500,
+        "endChar": 8
       },
       "revId": "d3910910f5c130ccc8ff0af32ca3ea5ed764695b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

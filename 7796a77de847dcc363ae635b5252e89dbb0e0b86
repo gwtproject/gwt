@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3692db12_5effe441",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-04T16:46:23Z",
+      "side": 1,
+      "message": "Add a TODO here to enable it in the future. IIRC you can not debug CampaignManagement without this (even with sourcemaps); chrome chokes when there are too many globals.",
+      "revId": "7796a77de847dcc363ae635b5252e89dbb0e0b86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_5e2e0415",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-04T16:46:23Z",
+      "side": 1,
+      "message": "ImmutableList.of()?",
+      "range": {
+        "startLine": 724,
+        "startChar": 8,
+        "endLine": 724,
+        "endChar": 39
+      },
+      "revId": "7796a77de847dcc363ae635b5252e89dbb0e0b86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

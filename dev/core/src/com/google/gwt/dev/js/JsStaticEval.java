@@ -178,9 +178,9 @@ public class JsStaticEval {
         shortCircuitOr(arg1, arg2, ctx);
       } else if (op == JsBinaryOperator.COMMA) {
         trySimplifyComma(arg1, arg2, ctx);
-      } else if (op == JsBinaryOperator.EQ) {
+      } else if (op == JsBinaryOperator.EQ || op == JsBinaryOperator.REF_EQ) {
         trySimplifyEq(x, arg1, arg2, ctx);
-      } else if (op == JsBinaryOperator.NEQ) {
+      } else if (op == JsBinaryOperator.NEQ|| op == JsBinaryOperator.REF_NEQ) {
         trySimplifyNe(x, arg1, arg2, ctx);
       } else if (op == JsBinaryOperator.ADD) {
         trySimplifyAdd(x, arg1, arg2, ctx);
@@ -612,6 +612,11 @@ public class JsStaticEval {
           return JsBooleanLiteral.get(((JsNumberLiteral) arg1).getValue()
            == ((JsNumberLiteral) arg2).getValue());
       }
+
+      if (arg1 instanceof JsStringLiteral && arg2 instanceof JsStringLiteral) {
+        return JsBooleanLiteral.get(
+            ((JsStringLiteral) arg1).getValue().equals(((JsStringLiteral) arg2).getValue()));
+      }
       // no simplification made
       return original;
     }
@@ -620,20 +625,14 @@ public class JsStaticEval {
         JsExpression arg2) {
       assert (original != null);
 
-      if (arg1 instanceof JsNullLiteral) {
-        return simplifyNullNe(original, arg2);
+      JsExpression simplifiedEq = simplifyEq(original, arg1, arg2);
+      if (simplifiedEq == original) {
+        return original;
       }
 
-      if (arg2 instanceof JsNullLiteral) {
-        return simplifyNullNe(original, arg1);
-      }
+      assert simplifiedEq instanceof JsBooleanLiteral;
 
-      if (arg1 instanceof JsNumberLiteral && arg2 instanceof JsNumberLiteral) {
-        return JsBooleanLiteral.get(((JsNumberLiteral) arg1).getValue()
-            != ((JsNumberLiteral) arg2).getValue());
-      }
-      // no simplification made
-      return original;
+      return JsBooleanLiteral.get(!((JsBooleanLiteral) simplifiedEq).getValue());
     }
 
     /**
@@ -646,23 +645,6 @@ public class JsStaticEval {
         // "undefined" is not a JsValueLiteral, so the only way
         // the result can be true is if exp is itself a JsNullLiteral
         boolean result = exp instanceof JsNullLiteral;
-        return JsBooleanLiteral.get(result);
-      }
-
-      // no simplification made
-      return original;
-    }
-
-    /**
-     * Simplify exp != null.
-     */
-    private JsExpression simplifyNullNe(JsExpression original, JsExpression exp) {
-      assert (original != null);
-
-      if (exp instanceof JsValueLiteral) {
-        // "undefined" is not a JsValueLiteral, so the only way
-        // the result can be false is if exp is itself a JsNullLiteral
-        boolean result = !(exp instanceof JsNullLiteral);
         return JsBooleanLiteral.get(result);
       }
 

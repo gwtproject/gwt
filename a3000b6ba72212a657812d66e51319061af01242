@@ -34,6 +34,24 @@
       "revId": "a3000b6ba72212a657812d66e51319061af01242",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f67cc3a5_dbe54b40",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 7371
+      },
+      "writtenOn": "2014-08-04T13:47:41Z",
+      "side": 1,
+      "message": "Replaced function with implementation from XMLParserImplStandard. testDocument() in XMLTest.java is green.",
+      "parentUuid": "3931ecd1_10704a17",
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

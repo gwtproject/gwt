@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f693e315_170aacb1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-04T23:06:09Z",
+      "side": 1,
+      "message": "[error] \u0027||\u0027 is not preceded with whitespace.",
+      "revId": "860896c73d26423bc9c139dd5177005bc9fddc07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_b70658ac",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-04T23:06:09Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "860896c73d26423bc9c139dd5177005bc9fddc07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

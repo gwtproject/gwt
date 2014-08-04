@@ -149,7 +149,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
   public void testIfStatementToBoolean_ThenElseOptimization() throws Exception {
     optimize("void", "if (b) i = 1; else i = 2;").intoString(
         "EntryPoint.b ? (EntryPoint.i = 1) : (EntryPoint.i = 2);");
-    optimize("void", "if (b) {i = 1;} else {i = 2;}").intoString(
+    optimize("void", "if (b) {i = 1;} else {i = 2;}").intoString(                                                            J
         "EntryPoint.b ? (EntryPoint.i = 1) : (EntryPoint.i = 2);");
   }
 

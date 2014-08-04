@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f693e315_517604e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_f18ab091",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_c13799ce",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "needs a comment explaining the concept of a \"base array castmap\"",
+      "range": {
+        "startLine": 706,
+        "startChar": 18,
+        "endLine": 706,
+        "endChar": 41
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_215445df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "\"ImplementArrayOperationsVisitor\" or \"ArrayOperationsImplementor\"",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 40
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_b1ce68eb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "if one of these three types wasn\u0027t available, wouldn\u0027t that be an error?\n\nmaybe have an assertion instead",
+      "range": {
+        "startLine": 111,
+        "startChar": 22,
+        "endLine": 113,
+        "endChar": 57
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_51e04457",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "this needs explanation, unless i\u0027m misunderstanding this i think it should say something:\n\n// If there is a cast from Foo[X] to Bar[X], ensure that a cast from Foo[1] to Bar[1] is recorded so that a one dimensional castmap is sure to exist when Array.initDim() calls are synthesized.",
+      "range": {
+        "startLine": 290,
+        "startChar": 6,
+        "endLine": 290,
+        "endChar": 78
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_d1a8d4fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "should probably mention this same detail at the implementation of the other side as well (the runtime implementation)",
+      "range": {
+        "startLine": 198,
+        "startChar": 9,
+        "endLine": 199,
+        "endChar": 50
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_61a32d55",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "s/baseMap/baseTypeId\n\nalso the function needs a description",
+      "range": {
+        "startLine": 56,
+        "startChar": 44,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_812f5112",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "s/result/dimensionedTypeId",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 14
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_014341c8",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "random blank line",
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_817d11f6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "needs description",
+      "range": {
+        "startLine": 65,
+        "startChar": 33,
+        "endLine": 65,
+        "endChar": 51
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_e1397d59",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "missing space before {}",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_8111912e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 34
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_a17a9539",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 125,
+        "startChar": 33,
+        "endLine": 125,
+        "endChar": 55
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f693e315_717780e6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T18:39:27Z",
+      "side": 1,
+      "message": "needs description",
+      "range": {
+        "startLine": 40,
+        "startChar": 26,
+        "endLine": 40,
+        "endChar": 42
+      },
+      "revId": "7b396eda6a08ac117e7425751ff0b57ac8b7f3ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.core.client.impl.DoNotInline;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -49,6 +50,25 @@ public class ClassCastTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
   }
+
+  public static interface I1 {}
+  public static interface I2 {}
+
+  public static class O1 implements I1 {}
+  public static class O2 implements I2 {}
+
+  @DoNotInline
+  public static void insert(Object[] arr, Object o) {
+    arr[0] = o;
+  }
+
+  public void testArrayCast() {
+    insert(new O1[2], new O1());
+    insert(new O2[2], new O2());
+    insert(new I1[2], new O1());
+    insert(new I2[2], new O2());
+  }
+
 
   public void testArrayInterfaces() {
     assertTrue(arrayOfInt instanceof Serializable);

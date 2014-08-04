@@ -45,7 +45,7 @@ import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
-import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntoMostlyIntLiterals;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitters;
@@ -102,7 +102,7 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
             shouldOptimize() /* pruneTrivialCasts */);
         ArrayNormalizer.exec(jprogram, options.isCastCheckingDisabled());
         EqualityNormalizer.exec(jprogram);
-        return ResolveRuntimeTypeReferences.IntoIntLiterals.exec(jprogram);
+        return IntoMostlyIntLiterals.exec(jprogram);
       } finally {
         event.end();
       }

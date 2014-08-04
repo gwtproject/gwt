@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96d1c7e4_e12df07e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T23:58:43Z",
+      "side": 1,
+      "message": "i do see that you\u0027re pulling the removed condition from above, down to here.\n\nbut i think maybe it\u0027s more direct to here perform a \"isLong\" check much like the immediately previous \"isDouble\" check\n\n\nditto down on line 971, 1005 and 1063",
+      "range": {
+        "startLine": 898,
+        "startChar": 17,
+        "endLine": 899,
+        "endChar": 53
+      },
+      "revId": "0c8b25a209b91e6eaa9b2c1070f8e9fe56eb52f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6c1231a_d389ac66",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-04T23:58:43Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 193,
+        "startChar": 43,
+        "endLine": 193,
+        "endChar": 53
+      },
+      "revId": "0c8b25a209b91e6eaa9b2c1070f8e9fe56eb52f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

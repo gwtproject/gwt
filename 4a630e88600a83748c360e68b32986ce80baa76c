@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3692db12_9cad74bc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "Maybe just \"dir\" since there are no other directories in this method.",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 22
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_3c9ea888",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "\"symbol map directory\"",
+      "range": {
+        "startLine": 111,
+        "startChar": 57,
+        "endLine": 111,
+        "endChar": 71
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_1ca164c2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ModuleState.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "\"symbol map directory\"",
+      "range": {
+        "startLine": 133,
+        "startChar": 45,
+        "endLine": 133,
+        "endChar": 59
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_7c9bd061",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "If you put getModuleNameFromRequest back the way it was, this pattern can be tightened to only match sourecemap files. \n\nAlso, you could match it against \"rest\" since the module name is already taken care of at the top of the handle() method.",
+      "range": {
+        "startLine": 65,
+        "startChar": 31,
+        "endLine": 65,
+        "endChar": 48
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_1c5724e7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "If you remove \"else\", the remaining code will be indented less.",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 10
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3692db12_fcd8402a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-04T18:44:24Z",
+      "side": 1,
+      "message": "I think the old version of this method was better. It\u0027s good to avoid regular expressions when we don\u0027t need them.",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

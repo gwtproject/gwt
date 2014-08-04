@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56dbcf05_c4331e09",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-04T23:43:28Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.",
+      "revId": "6899513a5442ad217851920a9ec6015f5672703f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

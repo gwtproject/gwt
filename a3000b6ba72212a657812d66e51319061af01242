@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "96d1c7e4_46ff3242",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-04T20:57:04Z",
+      "side": 1,
+      "message": "Used by IE9 as well?",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96d1c7e4_662fd613",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-04T20:57:04Z",
+      "side": 1,
+      "message": "I guess this and probably some other methods in this class are no longer needed. Can you check them as well?",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_505004ea",
         "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
         "patchSetId": 1
@@ -49,6 +95,24 @@
       "side": 1,
       "message": "Replaced function with implementation from XMLParserImplStandard. testDocument() in XMLTest.java is green.",
       "parentUuid": "3931ecd1_10704a17",
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96d1c7e4_c6d562cb",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-04T20:57:04Z",
+      "side": 1,
+      "message": "Then you can probably remove importNodeImpl put the code into importNode?",
+      "parentUuid": "f67cc3a5_dbe54b40",
       "revId": "a3000b6ba72212a657812d66e51319061af01242",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -77,27 +77,127 @@ public class JsonUtils {
       return @JsonUtils::throwIllegalArgumentException(*)("Error parsing JSON: " + e, json);
     }
   }-*/;
-  
+
+  /**
+   * Only characters allowed as part of a safe Json. Used by {@link #safeToEval(String)}
+   */
+  private static final String ALLOWED_CHARS_STR = ",:{}[]0123456789.-+Eaeflnrstu \n\r\t";
+
+  /**
+   * Contains the chars from {@link #ALLOWED_CHARS_STR} but stored in a fast-to-access way
+   */
+  private static final boolean[] ALLOWED_CHARS;
+
+  static {
+    int maxChar = 0;
+    for (int i = 0; i < ALLOWED_CHARS_STR.length(); i++) {
+      char c = ALLOWED_CHARS_STR.charAt(i);
+      maxChar = Math.max(maxChar, c);
+    }
+    ALLOWED_CHARS = new boolean[maxChar + 1];
+    for (int i = 0; i < ALLOWED_CHARS_STR.length(); i++) {
+      char c = ALLOWED_CHARS_STR.charAt(i);
+      ALLOWED_CHARS[c] = true;
+    }
+  }
+
+  /**
+   * @return true if the character c is allowed as part of a safe json, according to
+   *         {@link #safeToEval(String)}.
+   */
+  private static boolean isAllowedChar(char c) {
+    return c < ALLOWED_CHARS.length && ALLOWED_CHARS[c];
+  }
+
+  /**
+   * Enum for handling the states inside {@link JsonUtils#safeToEval(String)} method.
+   */
+  private enum State {
+    OUT_OF_STRING, IN_STRING, IN_STRING_ESCAPED_CHAR;
+  }
+
   /**
    * Returns true if the given JSON string may be safely evaluated by {@code
-   * eval()} without undersired side effects or security risks. Note that a true
+   * eval()} without undesired side effects or security risks. Note that a true
    * result from this method does not guarantee that the input string is valid
    * JSON.  This method does not consider the contents of quoted strings; it
    * may still be necessary to perform escaping prior to evaluation for correct
    * results.
-   * 
-   * <p> The technique used is taken from <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>.
+   *
+   * <p> The technique used is taken from <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>,
+   * but instead of using a regular expression to remove all the quoted string, we use a custom
+   * finite state machine that does the same without running into stack overflow for very large json
+   * inputs.
+   *
+   * <p> It basically allows anything in text (between double quotes) and disallow everything except
+   * these for non-text:
+   * <ul>
+   * <li>symbols and brackets ,:{}[]
+   * <li>numbers: digits 0-9, ., -, +, e, and E
+   * <li>literal values: 'null', 'true' and 'false' = [aeflnr-u]
+   * <li>whitespace: ' ', '\n', '\r', and '\t'
+   * </ul>
+   *
+   * <p> It is equivalent to this, but done more efficiently and without throwing the
+   * "JavaScriptException: (RangeError) : Maximum call stack size exceeded" with very large json
+   * input:
+   * {@code return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(input.replace(/"(\\.|[^"\\])*"/g, '')));}
    */
-  public static native boolean safeToEval(String text) /*-{
-    // Remove quoted strings and disallow anything except:
-    //
-    // 1) symbols and brackets ,:{}[]
-    // 2) numbers: digits 0-9, ., -, +, e, and E
-    // 3) literal values: 'null', 'true' and 'false' = [aeflnr-u]
-    // 4) whitespace: ' ', '\n', '\r', and '\t'
-    return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(text.replace(/"(\\.|[^"\\])*"/g, '')));
-  }-*/;
-  
+  public static boolean safeToEval(String input) {
+    State state = State.OUT_OF_STRING;
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
+      switch (c) {
+        case '"': {
+          switch (state) {
+            case OUT_OF_STRING:
+              state = State.IN_STRING;
+              break;
+            case IN_STRING:
+              state = State.OUT_OF_STRING;
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+        case '\\': {
+          switch (state) {
+            case OUT_OF_STRING:
+              // Escape slash is completely disallowed outside strings.
+              return false;
+            case IN_STRING:
+              state = State.IN_STRING_ESCAPED_CHAR;
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+        default: {
+          switch (state) {
+            case OUT_OF_STRING:
+              if (!isAllowedChar(c)) {
+                return false;
+              }
+              break;
+            case IN_STRING:
+              // We don't care
+              break;
+            case IN_STRING_ESCAPED_CHAR:
+              // Back to normal string, but we don't care
+              state = State.IN_STRING;
+              break;
+          }
+          break;
+        }
+      }
+    }
+    return state == State.OUT_OF_STRING;
+  }
+
   /**
    * Evaluates a JSON expression using {@code eval()}. This method does not
    * validate the JSON text and should only be used on JSON from trusted

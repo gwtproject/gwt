@@ -26,6 +26,8 @@ import com.google.gwt.dev.util.collect.IdentitySets;
 import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
@@ -70,6 +72,11 @@ public class JTypeOracle implements Serializable {
     @VisibleForTesting
     public Map<String, String> getSuperClassesByClass() {
       return superClassesByClass;
+    }
+
+    public boolean isEmpty() {
+      return superClassesByClass.isEmpty() && superIntfsByIntf.isEmpty()
+          && implementedIntfsByClass.isEmpty();
     }
   }
 
@@ -506,6 +513,9 @@ public class JTypeOracle implements Serializable {
     this.immediateTypeRelations = minimalRebuildCache.getImmediateTypeRelations();
     this.arrayTypeCreator = arrayTypeCreator;
     this.hasWholeWorldKnowledge = hasWholeWorldKnowledge;
+
+    // Be ready to answer simple questions (type hierarchy) even before recompute...().
+    computeExtendedTypeRelations();
   }
 
   /**
@@ -709,18 +719,19 @@ public class JTypeOracle implements Serializable {
     return false;
   }
 
-  public void updateImmediateTypeRelations(Set<JDeclaredType> changedTypes,
-      Set<JDeclaredType> deletedTypes) {
-    deleteImmediateTypeRelations(deletedTypes);
-    deleteImmediateTypeRelations(changedTypes);
-    recordImmediateTypeRelations(changedTypes);
-    computeExtendedTypeRelations();
+  public void computeBeforeAST(StandardTypes standardTypes, Collection<JDeclaredType> declaredTypes,
+      List<JDeclaredType> moduleDeclaredTypes) {
+    computeBeforeAST(standardTypes, declaredTypes, moduleDeclaredTypes,
+        ImmutableList.<String> of());
   }
 
-  public void computeBeforeAST(StandardTypes standardTypes,
-      Collection<JDeclaredType> declaredTypes) {
+  public void computeBeforeAST(StandardTypes standardTypes, Collection<JDeclaredType> declaredTypes,
+      Collection<JDeclaredType> moduleDeclaredTypes, Collection<String> deletedTypeNames) {
     this.standardTypes = standardTypes;
-    recordImmediateTypeRelations(declaredTypes);
+    recordReferenceTypeByName(declaredTypes);
+    deleteImmediateTypeRelations(deletedTypeNames);
+    deleteImmediateTypeRelations(getNamesOf(moduleDeclaredTypes));
+    recordImmediateTypeRelations(moduleDeclaredTypes);
     computeExtendedTypeRelations();
 
     jsInterfaces.clear();
@@ -749,6 +760,21 @@ public class JTypeOracle implements Serializable {
       if (type instanceof JClassType) {
         computeVirtualUpRefs((JClassType) type);
       }
+    }
+  }
+
+  private static Collection<String> getNamesOf(Collection<JDeclaredType> types) {
+    List<String> typeNames = Lists.newArrayList();
+    for (JDeclaredType type : types) {
+      typeNames.add(type.getName());
+    }
+    return typeNames;
+  }
+
+  private void recordReferenceTypeByName(Collection<JDeclaredType> types) {
+    referenceTypesByName.clear();
+    for (JReferenceType type : types) {
+      referenceTypesByName.put(type.getName(), type);
     }
   }
 
@@ -1142,22 +1168,16 @@ public class JTypeOracle implements Serializable {
     getOrCreate(map, key).add(value);
   }
 
-  private void deleteImmediateTypeRelations(Set<JDeclaredType> types) {
-    for (JDeclaredType type : types) {
-      if (type instanceof JClassType) {
-        immediateTypeRelations.superClassesByClass.remove(type.getName());
-        immediateTypeRelations.implementedIntfsByClass.remove(type.getName());
-      } else if (type instanceof JInterfaceType) {
-        immediateTypeRelations.superIntfsByIntf.remove(type.getName());
-      }
+  private void deleteImmediateTypeRelations(Collection<String> typeNames) {
+    for (String typeName : typeNames) {
+      immediateTypeRelations.superClassesByClass.remove(typeName);
+      immediateTypeRelations.implementedIntfsByClass.remove(typeName);
+      immediateTypeRelations.superIntfsByIntf.remove(typeName);
     }
   }
 
   private void recordImmediateTypeRelations(Iterable<JDeclaredType> types) {
-    referenceTypesByName.clear();
     for (JReferenceType type : types) {
-      referenceTypesByName.put(type.getName(), type);
-
       if (type instanceof JClassType) {
         JClassType jClassType = (JClassType) type;
         // Record immediate super class

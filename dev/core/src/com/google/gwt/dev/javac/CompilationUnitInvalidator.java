@@ -105,6 +105,8 @@ public class CompilationUnitInvalidator {
       for (Map.Entry<String, CompilationUnit> brokenEntry : missing.entries()) {
         CompilationUnit brokenUnit = brokenEntry.getValue();
 
+        System.out.println("adding broken unit " + brokenUnit.getTypeName());
+
         // Modify depsProvided for newly discovered broken units
         // (side-effect add in 'if' condition)
         if (allBrokenUnits.add(brokenUnit)) {

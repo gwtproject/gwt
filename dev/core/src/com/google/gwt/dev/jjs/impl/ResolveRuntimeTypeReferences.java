@@ -44,7 +44,7 @@ public abstract class ResolveRuntimeTypeReferences {
   /**
    * Sequentially creates int type ids for types.
    */
-  private static class IntTypeIdGenerator {
+  public static class IntTypeIdGenerator {
 
     private final Map<String, Integer> typeIdByTypeName = Maps.newHashMap();
     private int nextAvailableId =  0;
@@ -75,6 +75,12 @@ public abstract class ResolveRuntimeTypeReferences {
       assert (id != 2 || type == program.getTypeJavaLangString());
 
       typeIdLiteralsByType.put(type, JIntLiteral.get(id));
+    }
+
+    public static Map<JType, JLiteral> exec(JProgram program,
+        IntTypeIdGenerator intTypeIdGenerator) {
+      return new ResolveRuntimeTypeReferences.IntoIntLiterals(program, intTypeIdGenerator)
+          .execImpl();
     }
 
     public static Map<JType, JLiteral> exec(JProgram program) {

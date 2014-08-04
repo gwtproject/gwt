@@ -37,6 +37,8 @@ final class Cast {
    */
   private static JavaScriptObject stringCastMap;
 
+  static JavaScriptObject baseArrayCastMap;
+
   static native boolean canCast(Object src, JavaScriptObject dstId) /*-{
     return @com.google.gwt.lang.Cast::isJavaString(*)(src) &&
         !!@com.google.gwt.lang.Cast::stringCastMap[dstId] ||

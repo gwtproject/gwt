@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6a7bf88_8aabeff7",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-05T23:16:21Z",
+      "side": 1,
+      "message": "[error] Name \u0027__coerce\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "80027fe04ee41b4a4c379889d219eb0340b21e2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

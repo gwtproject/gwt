@@ -16,6 +16,24 @@
       "revId": "beb348b70cec6974b6195bfbf465c1cb8b71c8db",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6684304_2fd73562",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitInvalidator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-05T23:59:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3692db12_add7e45f",
+      "revId": "beb348b70cec6974b6195bfbf465c1cb8b71c8db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

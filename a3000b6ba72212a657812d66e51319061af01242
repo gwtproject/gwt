@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b6a40b88_43e886c9",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 7371
+      },
+      "writtenOn": "2014-08-05T02:16:50Z",
+      "side": 1,
+      "message": "Yes. Just \"upgraded\" the comment as it was.",
+      "parentUuid": "96d1c7e4_46ff3242",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96d1c7e4_662fd613",
         "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-04T20:57:04Z",
       "side": 1,
       "message": "I guess this and probably some other methods in this class are no longer needed. Can you check them as well?",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6a40b88_23422a25",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7371
+      },
+      "writtenOn": "2014-08-05T02:16:50Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll do.",
+      "parentUuid": "96d1c7e4_662fd613",
       "range": {
         "startLine": 55,
         "startChar": 13,
@@ -149,6 +197,24 @@
       "side": 1,
       "message": "That implementation is same as XMLParserImplStandard except it special cases for Safari2. As we don\u0027t support Safari2 anymore it should be fine to remove it. So just change importNode to \"jsObject.importNode(importedNode, deep)\", we will be fine (I think).",
       "parentUuid": "b6a40b88_e3865256",
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6a40b88_03f28ebb",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 7371
+      },
+      "writtenOn": "2014-08-05T02:16:50Z",
+      "side": 1,
+      "message": "Good. I make the change. Wonder how to check...",
+      "parentUuid": "b6496ba6_5b74034e",
       "revId": "a3000b6ba72212a657812d66e51319061af01242",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

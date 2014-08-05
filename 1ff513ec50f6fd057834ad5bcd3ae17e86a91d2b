@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6496ba6_9bce8b64",
+        "filename": "user/super/com/google/gwt/emul/java/util/HashMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-05T01:07:50Z",
+      "side": 1,
+      "message": "nit: Please don\u0027t put helper methods to the top of the class if you don\u0027t have a good reason to do so.\n\n\nAlso if this is used in many places, you might want to introduce a method in some common place so that we could reuse.",
+      "revId": "1ff513ec50f6fd057834ad5bcd3ae17e86a91d2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

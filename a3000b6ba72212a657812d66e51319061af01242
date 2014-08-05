@@ -134,6 +134,24 @@
       "revId": "a3000b6ba72212a657812d66e51319061af01242",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6496ba6_5b74034e",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-05T01:19:33Z",
+      "side": 1,
+      "message": "That implementation is same as XMLParserImplStandard except it special cases for Safari2. As we don\u0027t support Safari2 anymore it should be fine to remove it. So just change importNode to \"jsObject.importNode(importedNode, deep)\", we will be fine (I think).",
+      "parentUuid": "b6a40b88_e3865256",
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

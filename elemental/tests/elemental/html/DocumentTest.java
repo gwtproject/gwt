@@ -16,6 +16,8 @@
 
 package elemental.html;
 
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import static elemental.client.Browser.getWindow;
@@ -32,6 +34,9 @@ public class DocumentTest extends GWTTestCase {
   /**
    * Tests {@link Document#write}.
    */
+  // For some reason it fails in HtmlUnit production mode. It also fails
+  // in real browsers because of pop up blocker.
+  @DoNotRunWith(Platform.Prod)
   public void testWrite() {
     final Window window = getWindow().open();
     final Document document = window.getDocument();

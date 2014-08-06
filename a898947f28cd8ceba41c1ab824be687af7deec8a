@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "96fd4775_bbfd3b1a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-06T23:52:06Z",
+      "side": 1,
+      "message": "that\u0027s a good point. this addition doesn\u0027t fit the name of the function.\n\nlooking closer, this function is only ever called from ComputeExhaustiveCastabilityInformation and only for the purpose of getting the list of legal cast destination types.\n\nso i think it\u0027s the name of the function, not it\u0027s behavior, that needs to change.",
+      "parentUuid": "f6684304_77e10333",
+      "revId": "a898947f28cd8ceba41c1ab824be687af7deec8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6684304_d77297b0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 5
@@ -30,6 +48,30 @@
       "writtenOn": "2014-08-06T17:07:35Z",
       "side": 1,
       "message": "Looking at the implementation of CanObserveSubclassUninitializedFieldsVisitor it does not use global knowledge. The problem seems to stem from the fact that it needs to compute this for the superclasses of the one in the current compile (GenerateJSAST.initializeAtTopScope).\n\nBut it is an optimization (of sorts) so it is fine to set it off.",
+      "range": {
+        "startLine": 3563,
+        "startChar": 0,
+        "endLine": 3567,
+        "endChar": 69
+      },
+      "revId": "a898947f28cd8ceba41c1ab824be687af7deec8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96fd4775_4619d212",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3567,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-06T23:52:06Z",
+      "side": 1,
+      "message": "changed it to an \"optimize\" guard",
+      "parentUuid": "f6684304_d77297b0",
       "range": {
         "startLine": 3563,
         "startChar": 0,

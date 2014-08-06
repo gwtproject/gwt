@@ -15,9 +15,6 @@
  */
 package elemental.json.impl;
 
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -314,29 +311,5 @@ public class JsonUtil {
         || (c >= '\u2028' && c <= '\u202f')
         || (c >= '\u2060' && c <= '\u206f')
         || (c >= '\ufff0' && c <= '\uffff');
-  }
-
-  /**
-   * Execute a regular expression and invoke a callback for each match
-   * occurance. The return value of the callback is substituted for the match.
-   *
-   * @param expression a compiled regular expression
-   * @param text       a String on which to perform replacement
-   * @param replacer   a callback that maps matched strings into new values
-   */
-  private static String replace(RegExp expression, String text,
-      RegExpReplacer replacer) {
-    expression.setLastIndex(0);
-    MatchResult mresult = expression.exec(text);
-    StringBuilder toReturn = new StringBuilder();
-    int lastIndex = 0;
-    while (mresult != null) {
-      toReturn.append(text.substring(lastIndex, mresult.getIndex()));
-      toReturn.append(replacer.replace(mresult.getGroup(0)));
-      lastIndex = mresult.getIndex() + 1;
-      mresult = expression.exec(text);
-    }
-    toReturn.append(text.substring(lastIndex));
-    return toReturn.toString();
   }
 }

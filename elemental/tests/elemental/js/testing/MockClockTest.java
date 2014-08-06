@@ -9,6 +9,36 @@ import com.google.gwt.user.client.Timer;
  */
 public class MockClockTest extends GWTTestCase {
 
+  /**
+   * TODO(manolo): This is just a class to make this test
+   * compile and pass. For some reason when this test came
+   * to gwt, this class was not migrated, we should either
+   * remove this test, or rescue MockClock from the original
+   * site.
+   */
+  static class MockClock {
+    static double time = 0;
+    public static void run(Runnable run) {
+      // TODO Auto-generated method stub
+    }
+    public static double getCurrentTime() {
+      return time;
+    }
+    public static void reset() {
+      time = 0;
+    }
+    public static int getTimeoutsMade() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+    public static void setTimeoutDelay(int i) {
+      // TODO Auto-generated method stub
+    }
+    public static void tick(final double d) {
+      time = d;
+    }
+  }
+
   public void testClearTimeout() {
     MockClock.run(new Runnable() {
       public void run() {

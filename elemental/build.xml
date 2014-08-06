@@ -24,6 +24,19 @@
     </gwt.javac>
   </target>
 
+  <target name="compile.tests" description="Compile java source">
+    <echo message="${javac.junit.out}" />
+    <mkdir dir="${javac.junit.out}" />
+    <javac srcdir="src:idl/generated/src:tests" destdir="${javac.junit.out}" excludes="**/super/**">
+      <classpath>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.user.jar}" />
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
+      </classpath>
+    </javac>
+  </target>
+
   <target name="build" depends="generate, compile"
       description="Creates gwt-elemental.jar">
     <mkdir dir="${gwt.build.lib}" />
@@ -32,6 +45,24 @@
       <fileset dir="idl/generated/src"/>
       <fileset dir="${javac.out}" />
     </gwt.jar>
+  </target>
+
+  <target name="test" depends="compile.tests" description="Run tests">
+    <mkdir dir="${junit.out}/elemental" />
+    <fileset id="tests" dir="${javac.junit.out}" includes="**/AllTests.class" />
+    <gwt.junit test.name="test"
+        test.args="${test.args}"
+        test.jvmargs="${test.jvmargs}"
+        test.out="${junit.out}/codeserver"
+        test.cases="tests">
+      <extraclasspaths>
+        <pathelement location="${gwt.root}/elemental/src" />
+        <pathelement location="${gwt.root}/elemental/idl/generated/src" />
+        <pathelement location="${gwt.root}/elemental/tests" />
+        <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.user.jar}" />
+      </extraclasspaths>
+    </gwt.junit>
   </target>
 
     <macrodef name="compileModule">

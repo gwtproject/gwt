@@ -104,6 +104,24 @@
       "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f63f63e6_71292072",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-06T09:29:27Z",
+      "side": 1,
+      "message": "Personally I think ever-green browsers that have full typed array support should get the full native version. I don\u0027t think we should hurt performance of ever-green browsers because some old version did not implement everything. \n\nFireFox may have a special role here because of ESR releases, but since FF 15 there are ESR 17, 24 and 31 so I guess it is fine to switch gecko to the full native version.\n\nHowever there is no clearly communicated guideline on supported versions for such ever-green browsers :( We definitely need one. Makes code review easier. \n\nAlternatively we could do a feature check. IE8/9 would map to NoSupportImpl and IE10 to NativeImplEmulClamped via deferred binding. All other would map to NativeImplFull but still do a feature check and maybe fall back on any emulation that is needed at runtime.",
+      "parentUuid": "76d613dd_b1818075",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

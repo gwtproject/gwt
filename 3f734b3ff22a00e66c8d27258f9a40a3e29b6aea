@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6684304_2f61f515",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-06T00:24:41Z",
+      "side": 1,
+      "message": "Nice tests.",
+      "revId": "3f734b3ff22a00e66c8d27258f9a40a3e29b6aea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -103,6 +103,24 @@
       "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76345307_8d5e4420",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-06T20:57:16Z",
+      "side": 1,
+      "message": "Having this JsMapFromStringTo.create() is the same than running this test with the -prod flag, so as compiler will pick up the super Collections implementation. \n\nI\u0027d rather not to have this method here, since it would prevent the possibility to have a JRE version of this test extending this and returning null in getModuleName.",
+      "parentUuid": "N-vMjuro",
+      "revId": "96bc12bbc6d5780686e76fe45eaeaaeefc76493d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

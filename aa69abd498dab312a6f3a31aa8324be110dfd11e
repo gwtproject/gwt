@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6eda3ca_cd4de950",
+        "filename": "elemental/src/elemental/json/impl/JsonUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-07T00:11:48Z",
+      "side": 1,
+      "message": "Don\u0027t we have any corresponding inherits in gwt.xml?",
+      "revId": "aa69abd498dab312a6f3a31aa8324be110dfd11e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6eda3ca_4d429925",
+        "filename": "elemental/src/elemental/json/impl/JsonUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-07T00:11:48Z",
+      "side": 1,
+      "message": "pls remove the class as well.",
+      "revId": "aa69abd498dab312a6f3a31aa8324be110dfd11e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -140,6 +140,24 @@
       "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f63f63e6_466423ee",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-07T09:14:59Z",
+      "side": 1,
+      "message": "Ok then I would prefer to move gecko1_8 to use NativeImplFull so IE11 and FF can use it.\n\nMaybe I find time to update gwt-site to mention the \"last 2 versions\" in the GWT FAQ. Currently there is no word about versions for ever-green browsers.",
+      "parentUuid": "f6eda3ca_53acfcba",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

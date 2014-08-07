@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56390f00_a0806f3d",
+        "filename": "elemental/src/elemental/Json.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-07T14:32:35Z",
+      "side": 1,
+      "message": "I think you can get rid of this, since it is not being currently included and regexp is not needed (used in a unused private method) see I290b01d399a1bba22ef0807045cd87e19444b0e5",
+      "revId": "46a23ea0298fcc268c7463f5b92222be55b6f093",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

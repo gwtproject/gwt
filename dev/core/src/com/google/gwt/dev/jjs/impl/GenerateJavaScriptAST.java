@@ -2274,6 +2274,7 @@ public class GenerateJavaScriptAST {
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
       generateClassDefinition(x, globalStmts);
       generateVTables(x, globalStmts);
+      maybeGenerateUniqueIdAssignment(x, globalStmts);
 
       if (x == program.getTypeJavaLangObject()) {
         // special: setup a "toString" alias for java.lang.Object.toString()
@@ -2590,6 +2591,29 @@ public class GenerateJavaScriptAST {
       JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
       globalStmts.add(polyAssignment);
       vtableInitForMethodMap.put(polyAssignment, method);
+    }
+
+    /**
+     * Creates a unique field for each class (for Chrome optimization purposes).
+     */
+    private void maybeGenerateUniqueIdAssignment(JClassType type, List<JsStatement> globalStmts) {
+      for (JField field : type.getFields()) {
+        // If the class has at least one field that gets initiliazed to a non null value at
+        // construction, there is no need to create an uniqueId.
+        if (!field.isStatic() &&
+            field.getLiteralInitializer() != JNullLiteral.INSTANCE &&
+            field.getInitializer() != null) {
+          return;
+        }
+      }
+      JsScope classScope = classScopes.get(type);
+      SourceInfo sourceInfo = type.getSourceInfo();
+      JsNameRef lhs = classScope.declareName(
+              "_$GWT$_" + getRuntimeTypeReference(type).toString()).makeRef(sourceInfo);
+      lhs.setQualifier(globalTemp.makeRef(sourceInfo));
+      JsExprStmt uniqueIdAssignment = 
+          createAssignment(lhs, new JsNumberLiteral(sourceInfo,1)).makeStmt();
+      globalStmts.add(uniqueIdAssignment);
     }
 
     /**

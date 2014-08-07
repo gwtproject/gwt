@@ -122,6 +122,24 @@
       "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6eda3ca_53acfcba",
+        "filename": "user/src/com/google/gwt/typedarrays/TypedArrays.gwt.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-07T02:01:47Z",
+      "side": 1,
+      "message": "About the policy:\n\nIn general, we support latest 2 versions (In firefox it means last 2 ESR\u0027s) unless one of the customers doesn\u0027t need to support something older (e.g. in the case of IE8/9). As Google\u0027s browser support policy was ok for other people as well, this hasn\u0027t been a problem.",
+      "parentUuid": "f63f63e6_71292072",
+      "revId": "9ff24cc1a091aee6f172e941101c559b0470dc06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

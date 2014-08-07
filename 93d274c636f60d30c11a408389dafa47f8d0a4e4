@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56202fde_5d2fd7a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-08-07T22:31:06Z",
+      "side": 1,
+      "message": "Is this only needed for classes which are subtypes of another class and override something?\n\nWasn\u0027t this a performance hit on IE10/11 and had to be rolled back? Do we need to special case this for non-IE?",
+      "revId": "93d274c636f60d30c11a408389dafa47f8d0a4e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56202fde_fd368bfa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-08-07T22:31:06Z",
+      "side": 1,
+      "message": "Since we\u0027re not obfuscating it, maybe we can get away with something shorter, like _$G, or perhaps align it with the way Class.getName() is represented in -XdisableClassMetaData\n\nIf there are 3000 classes, shaving off 4 characters is 12k which a reasonable savings.",
+      "revId": "93d274c636f60d30c11a408389dafa47f8d0a4e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

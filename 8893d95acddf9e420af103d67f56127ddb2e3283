@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96b467df_3d991b2b",
+        "filename": "eclipse/elemental/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-07T23:54:36Z",
+      "side": 1,
+      "message": "please use two spaces instead of tabs",
+      "revId": "8893d95acddf9e420af103d67f56127ddb2e3283",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

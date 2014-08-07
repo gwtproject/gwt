@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "56390f00_c03933ec",
+        "filename": "elemental/src/elemental/json/impl/JsonUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-07T14:30:04Z",
+      "side": 1,
+      "message": "No, we don\u0027t have it so far, elemental is just inheriting Core \u0026 Resources, there is a patch from @Thomas (Ieff596be8c932b864fe86357dcba6c4d6ebd1406) introducing that inherits though, I\u0027ll warn him about this.",
+      "parentUuid": "f6eda3ca_cd4de950",
+      "revId": "aa69abd498dab312a6f3a31aa8324be110dfd11e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6eda3ca_4d429925",
         "filename": "elemental/src/elemental/json/impl/JsonUtil.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-07T00:11:48Z",
       "side": 1,
       "message": "pls remove the class as well.",
+      "revId": "aa69abd498dab312a6f3a31aa8324be110dfd11e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "962627f7_6a0bf7f8",
+        "filename": "elemental/src/elemental/json/impl/JsonUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-07T14:30:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6eda3ca_4d429925",
       "revId": "aa69abd498dab312a6f3a31aa8324be110dfd11e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

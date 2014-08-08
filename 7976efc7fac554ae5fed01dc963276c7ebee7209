@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6133f9f_6ddb0db3",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStackEmulatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-08T18:34:00Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "7976efc7fac554ae5fed01dc963276c7ebee7209",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d6e89fcd_42b2761d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T00:29:43Z",
+      "side": 1,
+      "message": "My guess is that in IE10/11 the dynamic property access was causing the problem. (we were doing _[¨_$GWT$_\"+ typeid] in defineClass) \n\nI made this patch to test if that was the case.",
+      "parentUuid": "56202fde_5d2fd7a7",
+      "revId": "93d274c636f60d30c11a408389dafa47f8d0a4e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56202fde_fd368bfa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2014-08-08T00:25:21Z",
       "side": 1,
       "message": "Wouldn\u0027t Gzip handle this kind of recurring patterns pretty well?",
+      "parentUuid": "56202fde_fd368bfa",
+      "revId": "93d274c636f60d30c11a408389dafa47f8d0a4e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e89fcd_221aca60",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T00:29:43Z",
+      "side": 1,
+      "message": "There are many further optimizations, but first I want to see if this patch behaves well.\n\nWe can optimize this field away if there is already a \"distinguishing field\" (any non static field that has a non null initializer) or, as you noted, if there are no overrides.\n\nAs for making it shorter, I don\u0027t think it will make much of a difference in the compressed size.",
       "parentUuid": "56202fde_fd368bfa",
       "revId": "93d274c636f60d30c11a408389dafa47f8d0a4e4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

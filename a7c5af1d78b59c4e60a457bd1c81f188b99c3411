@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16c87774_4bac458d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JJSOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T22:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c87774_b072a8af",
+      "range": {
+        "startLine": 354,
+        "startChar": 3,
+        "endLine": 355,
+        "endChar": 2
+      },
+      "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6133f9f_1899f52a",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionUseDetailedTypeIds.java",
         "patchSetId": 2
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "16c87774_d039e4eb",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionUseDetailedTypeIds.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T22:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6133f9f_1899f52a",
+      "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6133f9f_789e2914",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -71,6 +113,24 @@
       "writtenOn": "2014-08-08T21:38:41Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16c87774_307698b2",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T22:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6133f9f_789e2914",
       "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -100,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "16c87774_8bcd7d6d",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T22:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c87774_3043f82c",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 62
+      },
+      "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16c87774_50c31442",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -111,6 +195,30 @@
       "writtenOn": "2014-08-08T21:48:13Z",
       "side": 1,
       "message": "nice nice",
+      "range": {
+        "startLine": 326,
+        "startChar": 2,
+        "endLine": 326,
+        "endChar": 99
+      },
+      "revId": "a7c5af1d78b59c4e60a457bd1c81f188b99c3411",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16c87774_ebdb5124",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T22:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c87774_50c31442",
       "range": {
         "startLine": 326,
         "startChar": 2,

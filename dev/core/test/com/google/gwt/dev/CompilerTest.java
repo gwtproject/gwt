@@ -48,6 +48,59 @@ public class CompilerTest extends ArgProcessorTestBase {
   private final Compiler.ArgProcessor argProcessor;
   private final CompilerOptionsImpl options = new CompilerOptionsImpl();
 
+  private MockJavaResource jsoOne =
+      JavaResourceBase.createMockJavaResource("com.foo.JsoOne",
+          "package com.foo;",
+          "import com.google.gwt.core.client.JavaScriptObject;",
+          "public class JsoOne extends JavaScriptObject {",
+          "  protected JsoOne() {",
+          "  }",
+          "}");
+
+  private MockJavaResource jsoTwo_before =
+      JavaResourceBase.createMockJavaResource("com.foo.JsoTwo",
+          "package com.foo;",
+          "import com.google.gwt.core.client.JavaScriptObject;",
+          "public class JsoTwo {",
+          "  protected JsoTwo() {",
+          "  }",
+          "}");
+
+  private MockJavaResource jsoTwo_after =
+      JavaResourceBase.createMockJavaResource("com.foo.JsoTwo",
+          "package com.foo;",
+          "import com.google.gwt.core.client.JavaScriptObject;",
+          "public class JsoTwo extends JavaScriptObject {",
+          "  protected JsoTwo() {",
+          "  }",
+          "}");
+
+  private MockJavaResource someClassReferringToJsoOneArrays =
+      JavaResourceBase.createMockJavaResource("com.foo.SomeClassReferringToJsoOneArrays",
+          "package com.foo;",
+          "public class SomeClassReferringToJsoOneArrays {",
+          "  public static Object createJsoOneArray() { return new JsoOne[30]; }",
+          "}");
+
+  private MockJavaResource someClassReferringToJsoTwoArrays =
+      JavaResourceBase.createMockJavaResource("com.foo.SomeClassReferringToJsoTwoArrays",
+          "package com.foo;",
+          "public class SomeClassReferringToJsoTwoArrays {",
+          "  public static Object createJsoTwoArray() { return new JsoTwo[30]; }",
+          "}");
+
+  private MockJavaResource jsoArrayTestEntryPointResource =
+      JavaResourceBase.createMockJavaResource("com.foo.TestEntryPoint",
+          "package com.foo;",
+          "import com.google.gwt.core.client.EntryPoint;",
+          "public class TestEntryPoint implements EntryPoint {",
+          "  @Override",
+          "  public void onModuleLoad() {",
+          "    Object o1 = SomeClassReferringToJsoOneArrays.createJsoOneArray();",
+          "    Object o2 = SomeClassReferringToJsoTwoArrays.createJsoTwoArray();",
+          "  }",
+          "}");
+
   private MockJavaResource simpleModelEntryPointResource =
       JavaResourceBase.createMockJavaResource("com.foo.TestEntryPoint",
           "package com.foo;",
@@ -269,6 +322,17 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertTrue(originalJs.equals(relinkedJs));
   }
 
+  public void testPerFileRecompile_regularClassMadeIntoJsoClass() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+
+    checkRecompiledModifiedApp(compilerOptions, "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, jsoArrayTestEntryPointResource,
+            someClassReferringToJsoOneArrays, someClassReferringToJsoTwoArrays, jsoOne),
+        jsoTwo_before, jsoTwo_after);
+  }
+
   public void testPerFileRecompile_functionSignatureChange() throws UnableToCompleteException,
       IOException, InterruptedException {
     checkRecompiledModifiedApp("com.foo.SimpleModule",
@@ -325,6 +389,14 @@ public class CompilerTest extends ArgProcessorTestBase {
   private void checkRecompiledModifiedApp(String moduleName, List<MockResource> sharedResources,
       MockJavaResource originalResource, MockJavaResource modifiedResource) throws IOException,
       UnableToCompleteException, InterruptedException {
+    checkRecompiledModifiedApp(new CompilerOptionsImpl(), moduleName, sharedResources,
+        originalResource, modifiedResource);
+  }
+
+  private void checkRecompiledModifiedApp(CompilerOptions compilerOptions, String moduleName,
+      List<MockResource> sharedResources, MockJavaResource originalResource,
+      MockJavaResource modifiedResource) throws IOException,
+      UnableToCompleteException, InterruptedException {
     List<MockResource> originalResources = Lists.newArrayList(sharedResources);
     originalResources.add(originalResource);
 
@@ -335,15 +407,16 @@ public class CompilerTest extends ArgProcessorTestBase {
     MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
     File relinkApplicationDir = Files.createTempDir();
     String originalAppFromScratchJs =
-        compileToJs(relinkApplicationDir, moduleName, originalResources, relinkMinimalRebuildCache);
-    String modifiedAppRelinkedJs = compileToJs(relinkApplicationDir, moduleName,
+        compileToJs(compilerOptions, relinkApplicationDir, moduleName, originalResources,
+            relinkMinimalRebuildCache);
+    String modifiedAppRelinkedJs = compileToJs(compilerOptions, relinkApplicationDir, moduleName,
         Lists.<MockResource> newArrayList(modifiedResource), relinkMinimalRebuildCache);
 
     // Compile the app from scratch with the modified file.
     MinimalRebuildCache fromScratchMinimalRebuildCache = new MinimalRebuildCache();
     File fromScratchApplicationDir = Files.createTempDir();
-    String modifiedAppFromScratchJs = compileToJs(fromScratchApplicationDir, moduleName,
-        modifiedResources, fromScratchMinimalRebuildCache);
+    String modifiedAppFromScratchJs = compileToJs(compilerOptions, fromScratchApplicationDir,
+        moduleName, modifiedResources, fromScratchMinimalRebuildCache);
 
     // A resource was changed between the original compile and the relink compile. If the compile is
     // correct then the output JS will have changed.
@@ -358,6 +431,14 @@ public class CompilerTest extends ArgProcessorTestBase {
   private String compileToJs(File applicationDir, String moduleName,
       List<MockResource> applicationResources, MinimalRebuildCache minimalRebuildCache)
       throws IOException, UnableToCompleteException, InterruptedException {
+    return compileToJs(new CompilerOptionsImpl(), applicationDir, moduleName,  applicationResources,
+        minimalRebuildCache);
+  }
+
+  private String compileToJs(CompilerOptions compilerOptions, File applicationDir,
+      String moduleName, List<MockResource> applicationResources,
+      MinimalRebuildCache minimalRebuildCache)
+      throws IOException, UnableToCompleteException, InterruptedException {
     // Make sure we're using a MemoryUnitCache.
     System.setProperty(GWT_PERSISTENTUNITCACHE, "false");
     // Wait 1 second so that any new file modification times are actually different.
@@ -369,7 +450,6 @@ public class CompilerTest extends ArgProcessorTestBase {
     File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
     if (outputDir.exists()) {
       Util.recursiveDelete(outputDir, true);
-      outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
     }
 
     // Fake out the resource loader to read resources both from the normal classpath as well as this
@@ -380,7 +460,6 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     // Setup options to perform a per-file compile, output to this new application directory and
     // compile the given module.
-    CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setCompilePerFile(true);
     compilerOptions.setWarDir(applicationDir);
     compilerOptions.setModuleNames(ImmutableList.of(moduleName));

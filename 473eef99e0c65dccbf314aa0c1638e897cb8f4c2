@@ -22,6 +22,30 @@
       "revId": "473eef99e0c65dccbf314aa0c1638e897cb8f4c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d696df57_cc9a2f92",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-08T23:21:53Z",
+      "side": 1,
+      "message": "I know but I think this way the meaning is obvious.",
+      "parentUuid": "d6133f9f_f8085949",
+      "range": {
+        "startLine": 847,
+        "startChar": 51,
+        "endLine": 847,
+        "endChar": 61
+      },
+      "revId": "473eef99e0c65dccbf314aa0c1638e897cb8f4c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

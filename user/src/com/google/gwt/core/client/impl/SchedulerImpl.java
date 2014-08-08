@@ -122,7 +122,7 @@ public class SchedulerImpl extends Scheduler {
    * The amount of time that we're willing to spend executing
    * IncrementalCommands.
    */
-  private static final double TIME_SLICE = 8;
+  private static final double TIME_SLICE = 16;
 
   /**
    * Extract boilerplate code.

@@ -872,6 +872,11 @@ public class JTypeOracle implements Serializable {
 
       if (arrayType.getLeafType() instanceof JPrimitiveType) {
         castableDestinationTypes.add(arrayType);
+      } else if (isArrayOfJso(arrayType)) {
+        JReferenceType javaScriptObjectType = referenceTypesByName.get(JProgram.JAVASCRIPTOBJECT);
+        assert type != null;
+        castableDestinationTypes.add(
+            arrayTypeCreator.getOrCreateArrayType(javaScriptObjectType, arrayType.getDims()));
       } else {
         // Class arrays reuse their leaf type castable destination types.
         JDeclaredType leafType = (JDeclaredType) arrayType.getLeafType();
@@ -910,6 +915,19 @@ public class JTypeOracle implements Serializable {
 
     Collections.sort(castableDestinationTypes, HasName.BY_NAME_COMPARATOR);
     return Sets.newLinkedHashSet(castableDestinationTypes);
+  }
+
+  public boolean isArrayOfJso(JType type) {
+    if (!(type instanceof JReferenceType)) {
+      return false;
+    }
+
+    JReferenceType referenceType = ((JReferenceType) type).getUnderlyingType();
+    if (!(referenceType instanceof JArrayType)) {
+      return false;
+    }
+
+    return isJavaScriptObject(((JArrayType) referenceType).getLeafType());
   }
 
   public boolean isDualJsoInterface(JReferenceType maybeDualImpl) {

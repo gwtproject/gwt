@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6133f9f_58488d72",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-08T19:42:55Z",
+      "side": 1,
+      "message": "It might be little bit perfectionist but let\u0027s make this 15 to give little bit more room and also let\u0027s document the reasoning in the comment (i.e. number is chosen to keep the page refreshable at 60 fps).",
+      "range": {
+        "startLine": 125,
+        "startChar": 43,
+        "endLine": 125,
+        "endChar": 45
+      },
+      "revId": "a1edb38dd725c4a22ff36b999bc4d99b3e1dfb96",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

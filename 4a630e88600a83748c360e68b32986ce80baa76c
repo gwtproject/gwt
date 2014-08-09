@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "9699c785_d8ef451b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-09T21:54:03Z",
+      "side": 1,
+      "message": "But in this case, I have to put a return after each send...() line in every block, otherwise lines out of else will be executed. Anyway the code does the same and does not add anything but esthetic.",
+      "parentUuid": "3692db12_1c5724e7",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 10
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3692db12_fcd8402a",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 9
@@ -128,6 +152,30 @@
       "writtenOn": "2014-08-04T18:44:24Z",
       "side": 1,
       "message": "I think the old version of this method was better. It\u0027s good to avoid regular expressions when we don\u0027t need them.",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56a3cfb2_13f0ce73",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-09T21:54:03Z",
+      "side": 1,
+      "message": "I think regexp is not evil, sometimes it is clearer than code searching for separators, and splitting strings and regexp performance is very good. We need the regexp to assure that the md5 hash is correct so reusing it seems more reasonable than having different methods to do almost the same. \n\nI changed the old method because it was buggy, it was returning a valid module even if the module part didn\u0027t finish with \u0027/\u0027 what is wrong since last slash is needed in line 73 (rootDir)",
+      "parentUuid": "3692db12_fcd8402a",
       "range": {
         "startLine": 110,
         "startChar": 9,

@@ -17,6 +17,7 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.linker.CrossSiteIframeLinker;
 import com.google.gwt.core.linker.IFrameLinker;
@@ -34,15 +35,22 @@ import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -63,6 +71,16 @@ class Recompiler {
   private AtomicReference<String> moduleName = new AtomicReference<String>(null);
 
   private final AtomicReference<CompileDir> lastBuild = new AtomicReference<CompileDir>();
+
+  // The highest timestamp of the modules + resource files before the last compile started.
+  private long lastBuildTimestamp;
+
+  // A hash of the module and resource filenames that existed before the last recompile.
+  private long lastBuildFilenameHash;
+
+  // the binding properties used for the last recompile
+  private Map<String, String> lastBuildBindingProperties;
+
   private CompileDir publishedCompileDir;
   private final AtomicReference<ResourceLoader> resourceLoader =
       new AtomicReference<ResourceLoader>();
@@ -239,6 +257,16 @@ class Recompiler {
     String newModuleName = module.getName();
     moduleName.set(newModuleName);
 
+    // Check if we can skip the compile altogether.
+    long timestamp = Math.max(module.lastModified(), module.getResourceLastModified());
+    int filenameHash = getInputFilenameHash(module);
+
+    if (timestamp == lastBuildTimestamp && filenameHash == lastBuildFilenameHash &&
+        bindingProperties.equals(lastBuildBindingProperties)) {
+      compileLogger.log(Type.INFO, "Skipped compile because no input files have changed");
+      return true;
+    }
+
     progress.set(new Progress.Compiling(newModuleName, compilesDone, 1, 2, "Compiling"));
     // TODO: use speed tracer to get more compiler events?
 
@@ -248,6 +276,14 @@ class Recompiler {
     boolean success = new Compiler(runOptions, rebuildCache).run(compileLogger, module);
     if (success) {
       publishedCompileDir = compileDir;
+      lastBuildTimestamp = timestamp;
+      lastBuildFilenameHash = filenameHash;
+      lastBuildBindingProperties = bindingProperties;
+    } else {
+      // always recompile after an error
+      lastBuildTimestamp = 0;
+      lastBuildFilenameHash = 0;
+      lastBuildBindingProperties = null;
     }
     lastBuild.set(compileDir); // makes compile log available over HTTP
 
@@ -442,5 +478,39 @@ class Recompiler {
   private CompileDir makeCompileDir(int compileId)
       throws UnableToCompleteException {
     return CompileDir.create(appSpace.getCompileDir(compileId), logger);
+  }
+
+  /**
+   * Calculates a hash of the filenames of all the input files for a GWT compile.
+   *
+   * <p> This is needed because the list of files could change without affecting the timestamp.
+   * For example, consider a glob that matches fewer files than before because a file was
+   * deleted.
+   */
+  private static int getInputFilenameHash(ModuleDef module) {
+    List<String> filenames = new ArrayList<String>();
+
+    filenames.addAll(module.getGwtXmlFilePaths());
+
+    for (Resource resource : module.getResourcesNewerThan(Integer.MIN_VALUE)) {
+      filenames.add(resource.getLocation());
+    }
+
+    // Take the first four bytes of the SHA-1 hash.
+
+    Collections.sort(filenames);
+
+    MessageDigest digest;
+    try {
+      digest = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException e) {
+      throw new RuntimeException("SHA-1 unavailable", e);
+    }
+    for (String filename : filenames) {
+      digest.update(filename.getBytes(Charsets.UTF_8));
+    }
+    byte[] bytes = digest.digest();
+
+    return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
   }
 }

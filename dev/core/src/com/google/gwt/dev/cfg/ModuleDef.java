@@ -700,6 +700,10 @@ public class ModuleDef implements DepsInfoProvider {
     return gwtXmlPathByModuleName.get(moduleName);
   }
 
+  public Collection<String> getGwtXmlFilePaths() {
+    return Collections.unmodifiableCollection(gwtXmlPathByModuleName.values());
+  }
+
   public Class<? extends Linker> getLinker(String name) {
     return linkerTypesByName.get(name);
   }

@@ -260,6 +260,7 @@ public class IntegerTest extends GWTTestCase {
 
   public void testToHexString() {
     assertEquals("12345", Integer.toHexString(0x12345));
+    assertEquals("-12345", Integer.toHexString(-0x12345));
     assertEquals("fff12345", Integer.toHexString(0xFFF12345));
   }
 
